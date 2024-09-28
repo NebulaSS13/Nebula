@@ -38,13 +38,13 @@
 			. = ability.get_default_metadata()
 			known_abilities[ability.type] = .
 	else if(ispath(ability, /decl/ability))
-		. = known_abilities[ability.type]
-		if(!islist(. && create_if_missing))
+		. = known_abilities[ability]
+		if(!islist(.) && create_if_missing)
 			ability = GET_DECL(ability)
 			if(!istype(ability))
 				return list()
 			. = ability.get_default_metadata()
-			known_abilities[ability.type] = .
+			known_abilities[ability] = .
 	else if(create_if_missing)
 		PRINT_STACK_TRACE("ability metadata retrieval passed invalid ability type: '[ability]'")
 		. = list()
