@@ -1,21 +1,34 @@
-#define WHITELISTFILE "data/whitelist.txt"
+var/global/list/server_whitelist
 
-var/global/list/whitelist = list()
+/proc/check_server_whitelist(ckey)
+	if(get_config_value(/decl/config/enum/server_whitelist) == CONFIG_SERVER_NO_WHITELIST)
+		return TRUE
+	if(ismob(ckey))
+		var/mob/checking = ckey
+		ckey = checking.ckey
+	if(!istext(ckey))
+		return FALSE
+	if(!global.server_whitelist)
+		global.server_whitelist = file2list(CONFIG_SERVER_WHITELIST_FILE) || list()
+	return (ckey in global.server_whitelist)
 
-/hook/startup/proc/loadWhitelist()
-	if(get_config_value(/decl/config/toggle/usewhitelist))
-		load_whitelist()
-	return 1
+/proc/save_server_whitelist()
+	// Ensure we have the server whitelist loaded regardless of config or prior call.
+	if(!global.server_whitelist)
+		global.server_whitelist = file2list(CONFIG_SERVER_WHITELIST_FILE) || list()
 
-/proc/load_whitelist()
-	whitelist = file2list(WHITELISTFILE)
-	if(!length(whitelist))
-		whitelist = null
+	// Clear blank rows.
+	while(null in global.server_whitelist)
+		global.server_whitelist -= null
+	while("" in global.server_whitelist)
+		global.server_whitelist -= ""
 
-/proc/check_whitelist(mob/M /*, var/rank*/)
-	if(!whitelist)
-		return 0
-	return ("[M.ckey]" in whitelist)
+	// Remove old list rather than append.
+	if(fexists(CONFIG_SERVER_WHITELIST_FILE))
+		fdel(CONFIG_SERVER_WHITELIST_FILE)
+	// Write our list out.
+	var/write_file = file(CONFIG_SERVER_WHITELIST_FILE)
+	to_file(write_file, jointext(global.server_whitelist, "\n"))
 
 var/global/list/alien_whitelist = list()
 /hook/startup/proc/loadAlienWhitelist()
@@ -106,5 +119,3 @@ var/global/list/alien_whitelist = list()
 			if(findtext(s,"[ckey] - All"))
 				return TRUE
 	return FALSE
-
-#undef WHITELISTFILE

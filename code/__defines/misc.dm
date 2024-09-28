@@ -131,10 +131,19 @@
 #define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
 #define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
 
-//objectives
+// Objective config enum values.
 #define CONFIG_OBJECTIVE_NONE 2
 #define CONFIG_OBJECTIVE_VERB 1
 #define CONFIG_OBJECTIVE_ALL  0
+
+// Server whitelist config enums.
+#define CONFIG_SERVER_NO_WHITELIST      1
+#define CONFIG_SERVER_JOBS_WHITELIST    2
+#define CONFIG_SERVER_JOIN_WHITELIST    3
+#define CONFIG_SERVER_CONNECT_WHITELIST 4
+
+// Location for server whitelist file to load from.
+#define CONFIG_SERVER_WHITELIST_FILE "config/server_whitelist.txt"
 
 // How many times an AI tries to connect to APC before switching to low power mode.
 #define AI_POWER_RESTORE_MAX_ATTEMPTS 3

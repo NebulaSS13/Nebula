@@ -15,7 +15,9 @@
 // Check for bans, proper atom types, etc.
 /decl/ghosttrap/proc/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target, var/feedback = TRUE)
 	. = TRUE
-	if(!candidate.MayRespawn(feedback, minutes_since_death))
+	if(get_config_value(/decl/config/enum/server_whitelist) == CONFIG_SERVER_JOIN_WHITELIST && !check_server_whitelist(candidate))
+		. = FALSE
+	else if(!candidate.MayRespawn(feedback, minutes_since_death))
 		. = FALSE
 	else if(islist(ban_checks))
 		for(var/bantype in ban_checks)
