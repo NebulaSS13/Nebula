@@ -41,7 +41,7 @@ var/global/list/station_bookcases = list()
 	if(place_x < 0 || place_x >= book_slots_x || place_y < 0 || place_y >= book_slots_y)
 		return
 
-	var/place_key = GET_BOOK_POS(src, place_y, place_x)
+	var/place_key = GET_BOOK_POS(src, place_x, place_y)
 
 	if(isnull(book_positions[place_key]))
 		book_positions[place_key] = inserted
