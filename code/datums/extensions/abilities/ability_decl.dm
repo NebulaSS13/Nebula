@@ -267,7 +267,7 @@
 
 	admin_attacker_log(user, "attempted to use ability [src] on [hit_target]")
 
-	var/list/targets = target_selector.get_effected(user, hit_target, metadata, projectile)
+	var/list/targets = target_selector.get_affected(user, hit_target, metadata, projectile)
 	show_ability_cast_msg(user, targets, metadata)
 	while(length(targets))
 		var/target = targets[1]

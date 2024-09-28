@@ -17,13 +17,25 @@
 	/// If set along target turf type, will include space turfs.
 	var/ignore_space_turfs    = FALSE
 
-/decl/ability_targeting/proc/get_effected(mob/user, atom/hit_target, list/metadata, obj/item/projectile/ability/projectile)
+/decl/ability_targeting/proc/get_effect_radius(mob/user, atom/hit_target, list/metadata)
+	return effect_radius
+
+/// This proc exists so that subtypes can override it and take advantage of the speed benefits of `for(var/mob in range())` and similar optimizations.
+/// It should ONLY ever be called in get_affected().
+/decl/ability_targeting/proc/get_affected_atoms(atom/center, new_effect_radius)
+	PROTECTED_PROC(TRUE)
+	. = list()
+	for(var/atom/target in range(center, new_effect_radius))
+		. += target
+
+/decl/ability_targeting/proc/get_affected(mob/user, atom/hit_target, list/metadata, obj/item/projectile/ability/projectile)
 	if(effect_radius <= 0)
 		return validate_target(user, hit_target, metadata) ? list(hit_target) : null
-	var/list/except_atoms = effect_inner_radius >= 0 ? range(effect_inner_radius, projectile) : null
-	for(var/mob/living/target in range(projectile, effect_radius))
-		if(target in except_atoms)
-			continue
+	var/atom/center = projectile || hit_target
+	var/new_effect_radius = get_effect_radius(user, hit_target, metadata)
+	var/list/except_atoms = effect_inner_radius >= 0 ? range(effect_inner_radius, center) : null
+	var/list/target_candidates = get_affected_atoms(center, new_effect_radius)
+	for(var/atom/target in except_atoms ? target_candidates - except_atoms : target_candidates) // sloooooow...
 		if(validate_target(user, target, metadata))
 			LAZYADD(., target)
 
