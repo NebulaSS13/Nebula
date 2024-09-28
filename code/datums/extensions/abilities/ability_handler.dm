@@ -82,7 +82,7 @@
 		var/existing = screen_elements[ability]
 		if(existing)
 			remove_screen_element(existing, ability, FALSE)
-		var/obj/screen/ability/button/button = new ability.ui_element_type(null, null, null, null, null, null, null)
+		var/obj/screen/ability/button/button = new ability.ui_element_type(null, owner, null, null, null, null, null)
 		button.set_ability(ability)
 		add_screen_element(button, ability, TRUE)
 

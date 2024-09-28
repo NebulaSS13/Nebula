@@ -25,6 +25,7 @@
 	to_chat(user, "Click!")
 
 /obj/screen/ability/button
+	requires_owner = TRUE
 	var/decl/ability/ability
 
 /obj/screen/ability/button/remove_from_handler()
