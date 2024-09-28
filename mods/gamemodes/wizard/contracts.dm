@@ -134,7 +134,7 @@
 	desc = "This contract has a dedication to mimes everywhere at the top."
 
 /obj/item/paper/contract/boon/wizard/knock
-	//path = /spell/aoe_turf/knock
+	path = /decl/ability/wizard/knock
 	desc = "This contract is hard to hold still."
 
 /obj/item/paper/contract/boon/wizard/horsemask

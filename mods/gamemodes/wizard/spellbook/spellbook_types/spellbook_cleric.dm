@@ -18,6 +18,9 @@
 		/spell/targeted/shapeshift/baleful_polymorph = 1,
 		/spell/targeted/projectile/dumbfire/stuncuff = 1,
 		/spell/targeted/ethereal_jaunt               = 2,
+*/
+		/decl/ability/wizard/knock                   = 1,
+/*
 		/spell/aoe_turf/knock                        = 1,
 		/spell/radiant_aura                          = 1,
 		/spell/targeted/equip_item/holy_relic        = 1,

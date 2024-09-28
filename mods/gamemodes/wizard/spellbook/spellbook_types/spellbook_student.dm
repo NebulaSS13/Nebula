@@ -9,8 +9,8 @@
 	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
 	max_uses   = 5
 	spells = list(
+		/decl/ability/wizard/knock               = 1,
 /*
-		/spell/aoe_turf/knock                    = 1,
 		/spell/targeted/ethereal_jaunt           = 1,
 		/spell/targeted/projectile/magic_missile = 1,
 */

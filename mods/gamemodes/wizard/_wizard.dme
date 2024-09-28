@@ -27,5 +27,6 @@
 #include "spellbook\spellbook_types\spellbook_student.dm"
 #include "spells\_spell_handler.dm"
 #include "spells\_spell.dm"
+#include "spells\knock.dm"
 // END_INCLUDE
 #endif

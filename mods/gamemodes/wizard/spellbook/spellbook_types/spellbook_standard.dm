@@ -21,7 +21,9 @@
 		/spell/area_teleport                         = 1,
 		/spell/targeted/ethereal_jaunt               = 1,
 		/spell/targeted/heal_target                  = 1,
-		/spell/aoe_turf/knock                        = 1,
+*/
+		/decl/ability/wizard/knock                   = 1,
+/*
 		/spell/noclothes                             = 2,
 */
 		/obj/item/gun/energy/staff/focus             = 1,

@@ -72,7 +72,7 @@
 					/obj/item/clothing/shoes/dress/caretakershoes = slot_shoes_str)
 	spells = list(/spell/toggle_armor/caretaker,
 				/spell/targeted/heal_target/touch,
-				/spell/aoe_turf/knock/slow,
+				/decl/ability/wizard/knock/slow,
 				/spell/targeted/heal_target/area/slow,
 				/spell/targeted/analyze,
 				/spell/targeted/heal_target/trance

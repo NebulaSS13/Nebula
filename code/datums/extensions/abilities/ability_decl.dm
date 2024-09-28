@@ -310,6 +310,7 @@
 
 /decl/ability/proc/apply_effect_to(mob/user, atom/target, list/metadata)
 	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_SLEEP(TRUE)
 	apply_visuals(user, target, metadata)
 
 /decl/ability/proc/get_default_metadata()
