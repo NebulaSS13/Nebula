@@ -1,6 +1,21 @@
 /obj/screen/ability/button/spell
-	icon = 'mods/gamemodes/wizard/icons/spell_icons.dmi'
+	// icon = 'mods/gamemodes/wizard/icons/spell_icons.dmi'
+	icon = 'icons/mob/screen/spells.dmi' // tmp
+	icon_state = "wiz_spell_base"
 	ability_category_tag = "wizard_spells"
+
+/obj/screen/ability/button/spell/on_update_icon()
+	. = ..()
+	var/mob/user = owner_ref?.resolve()
+	// this can run before it's set up for some reason
+	if(!user.has_ability(ability.type))
+		return
+	var/list/metadata = ability.get_metadata_for_user(user)
+	var/on_cooldown = metadata["next_cast"] - world.time
+	if(on_cooldown > 0)
+		icon_state = "wiz_spell_base"
+	else
+		icon_state = "wiz_spell_ready"
 
 /decl/ability_targeting/spell
 	effect_radius            = 1
@@ -12,6 +27,7 @@
 	target_selector          = /decl/ability_targeting/spell
 	overlay_icon             = 'mods/gamemodes/wizard/icons/spell_icons.dmi'
 	overlay_icon_state       = "spell"
+	ability_icon             = 'icons/mob/screen/spells.dmi' // tmp
 	max_charge               = 0
 	ui_element_type          = /obj/screen/ability/button/spell
 

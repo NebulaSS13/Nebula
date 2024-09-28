@@ -189,6 +189,16 @@
 /decl/ability/proc/check_equipment(mob/user, list/metadata, silent = FALSE)
 	return TRUE
 
+/decl/ability/proc/get_metadata_for_user(mob/user)
+	if(!user.has_ability(type))
+		return null
+
+	var/datum/ability_handler/handler = user.get_ability_handler(associated_handler_type, create_if_missing = FALSE)
+	if(!istype(handler))
+		CRASH("get_metadata_for_user() called by mob with no handler of associated type!")
+
+	return handler.get_metadata(src)
+
 /decl/ability/proc/can_use_ability(mob/user, list/metadata, silent = FALSE)
 
 	if(!user.has_ability(type))

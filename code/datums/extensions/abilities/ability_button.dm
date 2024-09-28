@@ -32,6 +32,11 @@
 	owning_handler?.remove_screen_element(src, ability)
 	return ..()
 
+/obj/screen/ability/button/handle_click(mob/user, params)
+	ability.use_ability(user, get_turf(user)) // tmp, needs better/multi-step target selection
+	update_icon()
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_icon)), ability.get_cooldown_time(ability.get_metadata_for_user(user)) + 1)
+
 /obj/screen/ability/button/proc/set_ability(decl/ability/_ability)
 	if(ability == _ability)
 		return
