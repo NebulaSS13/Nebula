@@ -89,12 +89,13 @@
 		if(current?.mind == src)
 			current.mind = null
 		SSnano.user_transferred(current, new_character) // transfer active NanoUI instances to new user
+		if(istype(current)) // exclude new_players and observers
+			current.copy_abilities_to(new_character)
 	if(new_character.mind)		//remove any mind currently in our new body's mind variable
 		new_character.mind.current = null
 
 	new_character.skillset.obtain_from_mob(current)	//handles moving skills over.
 
-	current.copy_abilities_to(new_character)
 	current = new_character		//link ourself to our new body
 	new_character.mind = src	//and link our new body to ourself
 
