@@ -107,8 +107,7 @@
 	if(can_improve(Sp_POWER, metadata))
 		var/list/current_levels = metadata["current_upgrade_levels"]
 		current_levels[Sp_POWER]++
-		return TRUE
-	return FALSE
+		return "You empower [name]." // placeholder text
 
 /decl/ability/wizard/get_cooldown_time(list/metadata)
 
@@ -138,16 +137,17 @@
 	current_levels[Sp_SPEED]++
 
 	var/list/max_levels = metadata["max_upgrade_levels"]
+	var/use_name = metadata["ability_name"] || name
 	switch(max_levels[Sp_SPEED]-current_levels[Sp_SPEED])
 		if(3)
-			to_chat(user, SPAN_NOTICE("You have improved [name] into Efficient [name]."))
+			. = "You have improved [use_name] into Efficient [name]."
 			metadata["ability_name"] = "Efficient [name]"
 		if(2)
-			to_chat(user, SPAN_NOTICE("You have improved [name] into Swift [name]."))
-			metadata["ability_name"] = "Quickened [name]"
+			. = "You have improved [use_name] into Swift [name]."
+			metadata["ability_name"] = "Swift [name]"
 		if(1)
-			to_chat(user, SPAN_NOTICE("You have improved [name] into Quickened [name]."))
-			metadata["ability_name"] = "Free [name]"
+			. = "You have improved [use_name] into Quickened [name]."
+			metadata["ability_name"] = "Quickened [name]"
 		if(0)
-			to_chat(user, SPAN_NOTICE("You have improved [name] into Instant [name]."))
+			. = "You have improved [use_name] into Instant [name]."
 			metadata["ability_name"] = "Instant [name]"
