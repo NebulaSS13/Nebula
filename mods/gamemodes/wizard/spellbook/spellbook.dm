@@ -219,7 +219,7 @@ var/global/list/artefact_feedback = list(
 				shown_message = "You have purchased \the [new /obj/item/paper/contract/boon(get_turf(user),path)]."
 			else
 				if(ispath(path, /decl/ability))
-					shown_message = user.add_ability(path)
+					shown_message = memorize_spell(user, path)
 					if(shown_message)
 						uses -= spellbook.spells[path]
 				else
@@ -288,18 +288,18 @@ var/global/list/artefact_feedback = list(
 		return
 
 	if(!user.has_ability(spell_path))
-		user.add_ability(spell)
-		return "You learn the spell [spell]"
+		user.add_ability(spell_path)
+		return "You learn the spell [spell]."
 
 	var/list/metadata = user.get_ability_metadata(spell_path)
 	var/improve_speed = spell.can_improve(Sp_SPEED, metadata)
 	var/improve_power = spell.can_improve(Sp_POWER, metadata)
-	if(improve_speed && improve_power)
+	if(improve_speed && improve_power) // there can only be one...
 		switch(alert(user, "Do you want to upgrade this spell's speed or power?", "Spell upgrade", "Speed", "Power", "Cancel"))
 			if("Speed")
-				return spell.quicken_spell(user, metadata)
+				improve_power = FALSE // we don't need to check can_improve again because empower/quicken does it for us
 			if("Power")
-				return spell.empower_spell(user, metadata)
+				improve_speed = FALSE
 			else
 				return
 	if(improve_power)
