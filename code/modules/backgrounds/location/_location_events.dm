@@ -4,27 +4,27 @@
 /decl/location_event/big_game_hunters/announce(var/decl/background_detail/location)
 	. = "Game hunters on [location.name] "
 	if(prob(33))
-		. += "were surprised when an unusual species experts have since identified as \
+		. += "were surprised when an unusual species that experts have since identified as \
 			[pick("a subclass of mammal","a divergent abhuman species","an intelligent species of lemur","organic/cyborg hybrids")] turned up. Believed to have been brought in by \
 			[pick("alien smugglers","early colonists","mercenary raiders","unwitting tourists")], this is the first such specimen discovered in the wild."
 	else if(prob(50))
-		. += "were attacked by a vicious [pick("nas'r","diyaab","samak","predator which has not yet been identified")]\
-			. Officials urge caution, and locals are advised to stock up on armaments."
+		. += "were attacked by a vicious [pick("nas'r","diyaab","samak","predator which has not yet been identified")]. \
+			Officials urge caution, and locals are advised to stock up on armaments."
 	else
 		. += "brought in an unusually [pick("valuable","rare","large","vicious","intelligent")] specimen for inspection \
 			[pick("today","yesterday","last week")]. Speculators suggest they may be tipped to break several records."
 
 /decl/location_event/riots/announce(var/decl/background_detail/location)
-	. = "[pick("Riots have","Unrest has")] broken out on planet [location.name]. Authorities call for calm, as [pick("various parties","rebellious elements","peacekeeping forces","\'REDACTED\'")] begin stockpiling weaponry and armour. Meanwhile, food and mineral prices are dropping as local industries attempt empty their stocks in expectation of looting."
+	. = "[pick("Riots have","Unrest has")] broken out on planet [location.name]. Authorities call for calm, as [pick("various parties","rebellious elements","peacekeeping forces","\'REDACTED\'")] begin stockpiling weaponry and armour. Meanwhile, food and mineral prices are dropping as local industries attempt to empty their stocks in expectation of looting."
 
 /decl/location_event/wild_animal_attack/announce(var/decl/background_detail/location)
-	. = "Local [pick("wildlife","animal life","fauna")] on planet [location.name] has been increasing in agression and raiding outlying settlements for food. Big game hunters have been called in to help alleviate the problem, but numerous injuries have already occurred."
+	. = "Local [pick("wildlife","animal life","fauna")] on planet [location.name] has been increasing in aggression and raiding outlying settlements for food. Big game hunters have been called in to help alleviate the problem, but numerous injuries have already occurred."
 
 /decl/location_event/industrial_accident/announce(var/decl/background_detail/location)
 	. = "[pick("An industrial accident","A smelting accident","A malfunction","A malfunctioning piece of machinery","Negligent maintenance","A cooleant leak","A ruptured conduit")] at a [pick("factory","installation","power plant","dockyards")] on [location.name] resulted in severe structural damage and numerous injuries. Repairs are ongoing."
 
 /decl/location_event/biohazard_outbreak/announce(var/decl/background_detail/location)
-	. = "[pick("A \'REDACTED\'","A biohazard","An outbreak","A virus")] on [location.name] has resulted in quarantine, stopping much shipping in the area. Although the quarantine is now lifted, authorities are calling for deliveries of medical supplies to treat the infected, and gas to replace contaminated stocks."
+	. = "[pick("A \'REDACTED\'","A biohazard","An outbreak","A virus")] on [location.name] has resulted in quarantine, stopping most shipping in the area. Although the quarantine is now lifted, authorities are calling for deliveries of medical supplies to treat the infected, and gas to replace contaminated stocks."
 
 /decl/location_event/pirates/announce(var/decl/background_detail/location)
 	. = "[pick("Pirates","Criminal elements","A [pick("mercenary","Donk Co.","Waffle Co.","\'REDACTED\'")] strike force")] have [pick("raided","blockaded","attempted to blackmail","attacked")] [location.name] today. Security has been tightened, but many valuable minerals were taken."
@@ -34,12 +34,12 @@
 
 /decl/location_event/alien_raiders/announce(var/decl/background_detail/location)
 	if(prob(20))
-		. = "The Tiger Co-operative have raided [location.name] today, no doubt on orders from their enigmatic masters. Stealing wildlife, farm animals, medical research materials and kidnapping civilians. [global.using_map.company_name] authorities are standing by to counter attempts at bio-terrorism."
+		. = "The Tiger Co-operative have raided [location.name] today, no doubt on orders from their enigmatic masters, stealing wildlife, farm animals, medical research materials and kidnapping civilians. [global.using_map.company_name] authorities are standing by to counter attempts at bio-terrorism."
 	else
-		. = "[pick("The alien species designated \'United Exolitics\'","The alien species designated \'REDACTED\'","An unknown alien species")] have raided [location.name] today, stealing wildlife, farm animals, medical research materials and kidnapping civilians. It seems they desire to learn more about us, so the Navy will be standing by to accomodate them next time they try."
+		. = "[pick("The alien species designated \'United Exolitics\'","The alien species designated \'REDACTED\'","An unknown alien species")] have raided [location.name] today, stealing wildlife, farm animals, medical research materials and kidnapping civilians. It seems they desire to learn more about us, so the Navy will be standing by to accomodate them the next time they try."
 
 /decl/location_event/ai_liberation/announce(var/decl/background_detail/location)
-	. = "A [pick("\'REDACTED\' was detected on","S.E.L.F operative infiltrated","malignant computer virus was detected on","rogue [pick("slicer","hacker")] was apprehended on")] [location.name] today, and managed to infect [pick("\'REDACTED\'","a sentient sub-system","a class one AI","a sentient defence installation")] before it could be stopped. Many lives were lost as it systematically begin murdering civilians, and considerable work must be done to repair the affected areas."
+	. = "A [pick("\'REDACTED\' was detected on","S.E.L.F operative infiltrated","malignant computer virus was detected on","rogue [pick("slicer","hacker")] was apprehended on")] [location.name] today, and managed to infect [pick("\'REDACTED\'","a sentient sub-system","a class one AI","a sentient defence installation")] before it could be stopped. Many lives were lost as it began systematically murdering civilians, and considerable work must be done to repair the affected areas."
 
 /decl/location_event/mourning/announce(var/decl/background_detail/location)
 	. = "[pick("The popular","The well-liked","The eminent","The well-known")] [pick("professor","entertainer","singer","researcher","public servant","administrator","ship captain","\'REDACTED\'")], [pick( random_name(pick(MALE,FEMALE)), 40; "\'REDACTED\'" )] has [pick("passed away","committed suicide","been murdered","died in a freakish accident")] on [location.name] today. The entire planet is in mourning, and prices have dropped for industrial goods as worker morale drops."
@@ -146,4 +146,3 @@
 	. = "Tourists are flocking to [location.name] after the surprise announcement of [pick("major shopping bargains by a wily retailer",\
 		"a huge new ARG by a popular entertainment company","a secret tour by popular artiste [random_name(pick(MALE,FEMALE))]")]. \
 		Nyx Daily is offering discount tickets for two to see [random_name(pick(MALE,FEMALE))] live in return for eyewitness reports and up to the minute coverage."
-
