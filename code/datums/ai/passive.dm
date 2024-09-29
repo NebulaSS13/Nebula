@@ -62,6 +62,8 @@
 	var/scooping_skill_req = SKILL_ADEPT
 
 /datum/mob_controller/passive/scooped_by(mob/living/initiator)
+	if(body.stat != CONSCIOUS)
+		return TRUE
 	if(is_friend(initiator))
 		return TRUE
 	if(is_enemy(initiator) || (scooping_skill && initiator.skill_fail_prob(scooping_skill, 50, scooping_skill_req))) // scary, try to wriggle away
