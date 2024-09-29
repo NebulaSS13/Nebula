@@ -65,10 +65,10 @@
 				item.forceMove(get_turf(target))
 
 		return TRUE
-	else if(!try_unequip(item))
+	else if(!try_unequip(item, play_dropsound = place_item))
 		return FALSE
 
-	if(!istype(item) || QDELETED(item) || !try_unequip(item, get_turf(target), play_dropsound = place_item) || !isturf(item.loc))
+	if(!istype(item) || QDELETED(item) || !isturf(item.loc))
 		return FALSE
 
 	if(place_item)
