@@ -2,7 +2,7 @@ var/global/list/surgeries_in_progress = list()
 
 // A list of types that will continue to call use_on_mob() if they fail to find an appropriate surgical procedure.
 var/global/list/surgery_tool_exceptions = list(
-// Organic repair:
+	// Organic repair:
 	/obj/item/auto_cpr,
 	/obj/item/scanner/health,
 	/obj/item/scanner/breath,
@@ -11,11 +11,11 @@ var/global/list/surgery_tool_exceptions = list(
 	/obj/item/chems/inhaler,
 	/obj/item/chems/syringe,
 	/obj/item/chems/borghypo,
-// Cyborg repair:
+	// Cyborg repair:
 	/obj/item/robotanalyzer,
 	/obj/item/weldingtool,
 	/obj/item/stack/cable_coil,
-// Modular computer functions like scanners:
+	// Modular computer functions like scanners:
 	/obj/item/modular_computer,
 )
 var/global/list/surgery_tool_exception_cache = list()
