@@ -3608,7 +3608,6 @@
 #include "code\modules\reagents\reagent_containers\drinks\cans.dm"
 #include "code\modules\reagents\reagent_containers\drinks\champagne.dm"
 #include "code\modules\reagents\reagent_containers\drinks\cocktailshaker.dm"
-#include "code\modules\reagents\reagent_containers\drinks\jar.dm"
 #include "code\modules\reagents\reagent_containers\drinks\juicebox.dm"
 #include "code\modules\reagents\reagent_containers\food\baked_goods.dm"
 #include "code\modules\reagents\reagent_containers\food\bread.dm"
