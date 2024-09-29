@@ -356,7 +356,7 @@
 			return TRUE
 		if(S.robo_repair(15, BRUTE, "some dents", src, user))
 			weld(1, user)
-			return TRUE
+		return TRUE
 	return ..()
 
 /obj/item/weldingtool/get_autopsy_descriptors()
