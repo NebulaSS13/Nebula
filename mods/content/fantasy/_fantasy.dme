@@ -25,6 +25,7 @@
 #include "datum\kobaloi\markings.dm"
 #include "datum\kobaloi\organs.dm"
 #include "datum\kobaloi\species.dm"
+#include "items\material_overrides.dm"
 #include "items\clothing\_loadout.dm"
 #include "items\clothing\_recipes.dm"
 #include "items\clothing\armor.dm"

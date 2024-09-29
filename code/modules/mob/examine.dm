@@ -53,8 +53,8 @@
 
 	// Show our equipment, held items, desc, etc.
 	var/decl/pronouns/pronouns = get_visible_pronouns(hideflags)
-	to_chat(user, "<quote>")
+	// to_chat(user, "<blockquote>") // these don't work in BYOND's native output panel. If we switch to browser output instead, you can readd this
 	show_examined_short_description(user, distance, infix, suffix, hideflags, pronouns)
 	show_examined_worn_held_items(user, distance, infix, suffix, hideflags, pronouns)
 	show_other_examine_strings(user, distance, infix, suffix, hideflags, pronouns)
-	to_chat(user, "</quote>")
+	// to_chat(user, "</blockquote>") // see above
