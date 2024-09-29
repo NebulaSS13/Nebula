@@ -1,10 +1,12 @@
 var/global/list/surgeries_in_progress = list()
 
-// A list of types that will not attempt to perform surgery if the user is on help intent.
+// A list of types that will continue to call use_on_mob() if they fail to find an appropriate surgical procedure.
 var/global/list/surgery_tool_exceptions = list(
 	/obj/item/auto_cpr,
 	/obj/item/scanner/health,
 	/obj/item/scanner/breath,
+	/obj/item/robotanalyzer,
+	/obj/item/weldingtool,
 	/obj/item/shockpaddles,
 	/obj/item/chems/hypospray,
 	/obj/item/chems/inhaler,
@@ -260,6 +262,7 @@ var/global/list/surgery_tool_exception_cache = list()
 			LAZYSET(possible_surgeries, S, radial_button)
 
 	// Which surgery, if any, do we actually want to do?
+	var/cancelled_surgery = FALSE
 	var/decl/surgery_step/S
 	if(LAZYLEN(possible_surgeries) == 1)
 		S = possible_surgeries[1]
@@ -268,11 +271,18 @@ var/global/list/surgery_tool_exception_cache = list()
 			S = possible_surgeries[1]
 		else
 			S = show_radial_menu(user, M, possible_surgeries, radius = 42, use_labels = TRUE, require_near = TRUE, check_locs = list(src))
+			if(isnull(S))
+				cancelled_surgery = TRUE
 		if(S && !user.skill_check_multiple(S.get_skill_reqs(user, M, src, zone)))
 			S = pick(possible_surgeries)
 
 	// We didn't find a surgery, or decided not to perform one.
 	if(!istype(S))
+
+		// If they cancelled, do not continue at all!
+		if(cancelled_surgery)
+			return TRUE
+
 		// If we're on an optable, we are protected from some surgery fails. Bypass this for some items (like health analyzers).
 		if((locate(/obj/machinery/optable) in get_turf(M)) && user.a_intent == I_HELP)
 			// Keep track of which tools we know aren't appropriate for surgery on help intent.
