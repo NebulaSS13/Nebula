@@ -189,6 +189,7 @@
 	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_SECONDARY, /decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
 	max_health = ITEM_HEALTH_NO_DAMAGE
 	_base_attack_force = 2
+	can_be_twohanded = TRUE
 
 	var/safety = 1 //if you can zap people with the paddles on harm mode
 	var/combat = 0 //If it can be used to revive people wearing thick clothing (e.g. spacesuits)
