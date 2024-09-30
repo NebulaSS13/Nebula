@@ -56,6 +56,9 @@
 		)
 	)
 
+	var/vox_hair_icon = 'mods/species/vox/icons/body/soldier/hair.dmi'
+	var/vox_marking_icon = 'mods/species/vox/icons/body/soldier/markings.dmi'
+
 /decl/bodytype/vox/Initialize()
 	if(!length(equip_adjust))
 		equip_adjust = list(
@@ -85,23 +88,12 @@
 	blood_overlays      = 'mods/species/vox/icons/body/blood_overlays.dmi'
 	eye_icon            = 'mods/species/vox/icons/body/servitor/eyes.dmi'
 	uid                 = "bodytype_vox_servitor"
-
-	default_sprite_accessories = list(
-		SAC_HAIR = list(
-			/decl/sprite_accessory/hair/vox/short/servitor     = list(SAM_COLOR = "#160900")
-		),
-		SAC_MARKINGS = list(
-			/decl/sprite_accessory/marking/vox/beak/servitor   = list(SAM_COLOR = "#bc7d3e"),
-			/decl/sprite_accessory/marking/vox/scutes/servitor = list(SAM_COLOR = "#bc7d3e"),
-			/decl/sprite_accessory/marking/vox/crest/servitor  = list(SAM_COLOR = "#bc7d3e"),
-			/decl/sprite_accessory/marking/vox/claws/servitor  = list(SAM_COLOR = "#a0a654")
-		)
-	)
-
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox,
 		BP_TAIL = /obj/item/organ/external/tail/vox/servitor
 	)
+	vox_hair_icon = 'mods/species/vox/icons/body/servitor/hair.dmi'
+	vox_marking_icon = 'mods/species/vox/icons/body/servitor/markings.dmi'
 
 /decl/bodytype/vox/stanchion
 	name                = "stanchion voxform"
@@ -112,24 +104,13 @@
 	eye_icon            = 'mods/species/vox/icons/body/stanchion/eyes.dmi'
 	icon_template       = 'mods/species/vox/icons/body/stanchion/template.dmi'
 	uid                 = "bodytype_vox_stanchion"
-
-	default_sprite_accessories = list(
-		SAC_HAIR = list(
-			/decl/sprite_accessory/hair/vox/short/stanchion     = list(SAM_COLOR = "#160900")
-		),
-		SAC_MARKINGS = list(
-			/decl/sprite_accessory/marking/vox/beak/stanchion   = list(SAM_COLOR = "#bc7d3e"),
-			/decl/sprite_accessory/marking/vox/scutes/stanchion = list(SAM_COLOR = "#bc7d3e"),
-			/decl/sprite_accessory/marking/vox/crest/stanchion  = list(SAM_COLOR = "#bc7d3e"),
-			/decl/sprite_accessory/marking/vox/claws/stanchion  = list(SAM_COLOR = "#a0a654")
-		)
-	)
-
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox,
 		// Commenting this out so that tail validation doesn't try to find a species using this bodytype.
 		//BP_TAIL = /obj/item/organ/external/tail/vox/stanchion
 	)
+	vox_hair_icon = 'mods/species/vox/icons/body/stanchion/hair.dmi'
+	vox_marking_icon = 'mods/species/vox/icons/body/stanchion/markings.dmi'
 
 /decl/bodytype/vox/servitor/alchemist
 	name       = "alchemist voxform"
