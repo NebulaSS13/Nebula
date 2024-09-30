@@ -30,3 +30,4 @@
 
 /obj/item/organ/external/tail/monkey
 	tail_icon = 'icons/mob/human_races/species/monkey/monkey_body.dmi'
+	tail_blend = null // The monkey tail is already colored.
