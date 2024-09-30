@@ -68,7 +68,7 @@
 	. = ..()
 	if(reagents?.total_volume > 0 && autolabel && !label_text) // don't override preset labels
 		label_text = reagents.get_primary_reagent_name()
-		update_container_name()
+		update_name()
 
 /obj/item/chems/glass/bottle/stabilizer
 	desc = "A small bottle. Contains stabilizer - used to stabilize patients."

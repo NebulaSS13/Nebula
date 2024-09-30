@@ -25,10 +25,6 @@
 	if(!possible_transfer_amounts)
 		src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
-/obj/item/chems/set_custom_name(var/new_name)
-	base_name = new_name
-	update_container_name()
-
 /obj/item/chems/set_custom_desc(var/new_desc)
 	base_desc = new_desc
 	update_container_desc()
@@ -42,24 +38,18 @@
 		return TRUE
 	return FALSE
 
-/obj/item/chems/proc/get_base_name()
-	if(!base_name)
-		base_name = initial(name)
-	. = base_name
-
 /obj/item/chems/on_update_icon()
 	. = ..()
 	if(detail_state)
 		add_overlay(overlay_image(icon, "[initial(icon_state)][detail_state]", detail_color || COLOR_WHITE, RESET_COLOR))
 
-/obj/item/chems/proc/update_container_name()
-	var/newname = get_base_name()
-	if(material_alteration & MAT_FLAG_ALTERATION_NAME)
-		newname = "[material.solid_name] [newname]"
+/obj/item/chems/update_name()
+	. = ..() // handles material, etc
+	var/newname = name
 	if(presentation_flags & PRESENTATION_FLAG_NAME)
-		var/decl/material/R = reagents?.get_primary_reagent_decl()
-		if(R)
-			newname += " of [R.get_presentation_name(src)]"
+		var/decl/material/primary = reagents?.get_primary_reagent_decl()
+		if(primary)
+			newname += " of [primary.get_presentation_name(src)]"
 	if(length(label_text))
 		newname += " ([label_text])"
 	if(newname != name)
@@ -80,7 +70,7 @@
 
 /obj/item/chems/on_reagent_change()
 	if((. = ..()))
-		update_container_name()
+		update_name()
 		update_container_desc()
 		update_icon()
 
@@ -106,7 +96,7 @@
 			else
 				to_chat(user, SPAN_NOTICE("You set the label to \"[tmp_label]\"."))
 				label_text = tmp_label
-				update_container_name()
+				update_name()
 			return TRUE
 	return ..()
 

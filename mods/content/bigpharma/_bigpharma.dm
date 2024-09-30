@@ -51,7 +51,7 @@ var/global/list/reagent_names_to_icon_state
 		if(istype(thing, /obj/item/chems))
 			var/obj/item/chems/chems = thing
 			chems.label_text = new_name
-			chems.update_container_name()
+			chems.update_name()
 		else
 			if(has_extension(thing, /datum/extension/labels))
 				var/datum/extension/labels/L = get_extension(thing, /datum/extension/labels)

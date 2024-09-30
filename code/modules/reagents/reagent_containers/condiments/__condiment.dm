@@ -10,6 +10,7 @@
 	volume = 50
 	var/condiment_key
 	var/morphic_container = TRUE
+	var/use_condiment_name = TRUE
 	var/initial_condiment_type
 
 /obj/item/chems/condiment/populate_reagents()
@@ -32,7 +33,7 @@
 			else
 				to_chat(user, SPAN_NOTICE("You remove the label."))
 				label_text = null
-			update_container_name()
+			update_name()
 			update_container_desc()
 			update_icon()
 		return
@@ -65,15 +66,18 @@
 	var/decl/condiment_appearance/condiment = get_current_condiment_appearance()
 	center_of_mass = condiment?.condiment_center_of_mass || initial(center_of_mass)
 
-/obj/item/chems/condiment/update_container_name()
+/obj/item/chems/condiment/update_name()
 	var/decl/condiment_appearance/condiment = get_current_condiment_appearance()
-	name = condiment?.condiment_name || initial(name)
+	if(use_condiment_name && condiment?.condiment_name)
+		SetName(condiment.condiment_name)
+	else
+		..()
 	if(label_text)
-		name = addtext(name," ([label_text])")
+		SetName(addtext(name," ([label_text])"))
 
 /obj/item/chems/condiment/update_container_desc()
 	var/decl/condiment_appearance/condiment = get_current_condiment_appearance()
-	desc = condiment?.condiment_desc || initial(desc)
+	desc = condiment?.condiment_desc || get_base_desc()
 
 /obj/item/chems/condiment/on_update_icon()
 	. = ..()

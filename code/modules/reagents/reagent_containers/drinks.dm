@@ -84,9 +84,6 @@
 		if(percent <= k)
 			return k
 
-/obj/item/chems/drinks/get_base_name()
-	. = base_name
-
 /obj/item/chems/drinks/on_update_icon()
 	. = ..()
 	if(LAZYLEN(reagents?.reagent_volumes) && filling_states)

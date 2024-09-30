@@ -20,7 +20,7 @@
 // Pill subtype that does not use a reagent name.
 /obj/item/chems/pill/dispensed
 	autolabel = FALSE
-/obj/item/chems/pill/dispensed/update_container_name()
+/obj/item/chems/pill/dispensed/update_name()
 	return
 /obj/item/chems/pill/dispensed/update_container_desc()
 	return
@@ -31,7 +31,7 @@
 		icon_state = pick(colorizable_icon_states) //preset pills only use colour changing or unique icons
 	update_icon()
 	if(label_text)
-		update_container_name()
+		update_name()
 
 /obj/item/chems/pill/populate_reagents()
 	SHOULD_CALL_PARENT(TRUE)
@@ -254,7 +254,7 @@
 	autolabel = FALSE
 
 // Don't overwrite the custom name.
-/obj/item/chems/pill/detergent/update_container_name()
+/obj/item/chems/pill/detergent/update_name()
 	return
 
 /obj/item/chems/pill/detergent/populate_reagents()
@@ -268,7 +268,7 @@
 	autolabel = FALSE
 
 // Don't overwrite the custom names.
-/obj/item/chems/pill/pod/update_container_name()
+/obj/item/chems/pill/pod/update_name()
 	return
 
 /obj/item/chems/pill/pod/cream

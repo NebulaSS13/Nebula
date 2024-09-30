@@ -235,7 +235,7 @@
 	if(!name)
 		name = reagents.get_primary_reagent_name()
 	P.label_text = name
-	P.update_container_name()
+	P.update_name()
 	P.lid_color = bottle_lid_color
 	P.label_color = bottle_label_color
 	reagents.trans_to_obj(P,60)
