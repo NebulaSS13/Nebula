@@ -7,7 +7,6 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 /obj/item/chems/drinks/glass2
 
 	name = "glass" // Name when empty
-	base_name = "glass"
 	desc = "A generic drinking glass." // Description when empty
 	icon = 'icons/obj/drink_glasses/square.dmi'
 	icon_state = null
@@ -101,9 +100,6 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		icon_state = base_icon
 	if(!overlay_base_icon)
 		overlay_base_icon = base_icon
-
-/obj/item/chems/drinks/glass2/get_base_name()
-	. = base_name
 
 /obj/item/chems/drinks/glass2/get_base_desc()
 	. = custom_desc || ..()

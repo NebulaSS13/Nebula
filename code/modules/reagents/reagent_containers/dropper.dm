@@ -78,7 +78,7 @@
 
 		to_chat(user, SPAN_NOTICE("You fill the dropper with [trans] unit\s of the solution."))
 
-/obj/item/chems/dropper/update_container_name()
+/obj/item/chems/dropper/update_name()
 	return
 
 /obj/item/chems/dropper/update_container_desc()

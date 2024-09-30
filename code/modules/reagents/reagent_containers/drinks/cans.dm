@@ -4,9 +4,6 @@
 	atom_flags = 0 //starts closed
 	material = /decl/material/solid/metal/aluminium
 
-/obj/item/chems/drinks/cans/update_container_name()
-	return
-
 /obj/item/chems/drinks/cans/update_container_desc()
 	return
 

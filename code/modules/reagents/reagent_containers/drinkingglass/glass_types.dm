@@ -1,6 +1,5 @@
 /obj/item/chems/drinks/glass2/square
 	name = "half-pint glass"
-	base_name = "glass"
 	base_icon = "square"
 	icon_state = "square"
 	icon = 'icons/obj/drink_glasses/square.dmi'
@@ -13,7 +12,6 @@
 /obj/item/chems/drinks/glass2/rocks
 	name = "rocks glass"
 	desc = "A robust tumbler with a thick, weighted bottom."
-	base_name = "glass"
 	base_icon = "rocks"
 	icon_state = "rocks"
 	icon = 'icons/obj/drink_glasses/rocks.dmi'
@@ -25,7 +23,6 @@
 /obj/item/chems/drinks/glass2/shake
 	name = "sherry glass"
 	desc = "Stemware with an untapered conical bowl."
-	base_name = "glass"
 	base_icon = "shake"
 	icon_state = "shake"
 	icon = 'icons/obj/drink_glasses/shake.dmi'
@@ -37,7 +34,6 @@
 /obj/item/chems/drinks/glass2/cocktail
 	name = "cocktail glass"
 	desc = "Fragile stemware with a stout conical bowl. Don't spill."
-	base_name = "glass"
 	base_icon = "cocktail"
 	icon_state = "cocktail"
 	icon = 'icons/obj/drink_glasses/cocktail.dmi'
@@ -49,7 +45,6 @@
 /obj/item/chems/drinks/glass2/shot
 	name = "shot glass"
 	desc = "A small glass, designed so that its contents can be consumed in one gulp."
-	base_name = "shot"
 	base_icon = "shot"
 	icon_state = "shot"
 	icon = 'icons/obj/drink_glasses/shot.dmi'
@@ -61,7 +56,6 @@
 
 /obj/item/chems/drinks/glass2/pint
 	name = "pint glass"
-	base_name = "pint"
 	base_icon = "pint"
 	icon_state = "pint"
 	icon = 'icons/obj/drink_glasses/pint.dmi'
@@ -74,7 +68,6 @@
 /obj/item/chems/drinks/glass2/mug
 	name = "glass mug"
 	desc = "A heavy mug with thick walls."
-	base_name = "mug"
 	base_icon = "mug"
 	icon_state = "mug"
 	icon = 'icons/obj/drink_glasses/mug.dmi'
@@ -86,7 +79,6 @@
 /obj/item/chems/drinks/glass2/wine
 	name = "wine glass"
 	desc = "A piece of elegant stemware."
-	base_name = "glass"
 	base_icon = "wine"
 	icon_state = "wine"
 	icon = 'icons/obj/drink_glasses/wine.dmi'
@@ -98,7 +90,6 @@
 /obj/item/chems/drinks/glass2/flute
 	name = "flute glass"
 	desc = "A piece of very elegant stemware."
-	base_name = "glass"
 	base_icon = "flute"
 	icon_state = "flute"
 	icon = 'icons/obj/drink_glasses/flute.dmi'
@@ -110,7 +101,6 @@
 /obj/item/chems/drinks/glass2/carafe
 	name = "pitcher"
 	desc = "A handled glass pitcher."
-	base_name = "pitcher"
 	base_icon = "carafe"
 	icon_state = "carafe"
 	icon = 'icons/obj/drink_glasses/carafe.dmi'

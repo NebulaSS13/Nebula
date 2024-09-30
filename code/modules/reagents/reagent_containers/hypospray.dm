@@ -184,7 +184,7 @@
 /obj/item/chems/hypospray/autoinjector/Initialize()
 	. = ..()
 	if(label_text)
-		update_container_name()
+		update_name()
 
 /obj/item/chems/hypospray/autoinjector/populate_reagents()
 	SHOULD_CALL_PARENT(TRUE)
