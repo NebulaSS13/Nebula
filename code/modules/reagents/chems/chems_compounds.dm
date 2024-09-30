@@ -249,7 +249,7 @@
 	if(!M.has_genetic_information())
 		return
 	if(prob(removed * 0.1)) // Approx. one mutation per 10 injected/20 ingested/30 touching units
-		H.set_unique_enzymes(num2text(random_id(/mob, 1000000, 9999999)))
+		M.set_unique_enzymes(num2text(random_id(/mob, 1000000, 9999999)))
 		if(prob(98))
 			M.add_genetic_condition(pick(decls_repository.get_decls_of_type(/decl/genetic_condition/disability)))
 		else

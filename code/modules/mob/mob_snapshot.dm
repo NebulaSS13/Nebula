@@ -15,7 +15,7 @@
 	var/list/sprite_accessories
 	var/list/genetic_conditions
 
-/datum/mob_snapshot/New(mob/living/donor, force)
+/datum/mob_snapshot/New(mob/living/donor, genetic_info_only = FALSE)
 
 	real_name      = donor?.real_name        || "unknown"
 	eye_color      = donor?.get_eye_colour() || COLOR_BLACK
@@ -29,7 +29,7 @@
 	for(var/obj/item/organ/external/limb in donor?.get_external_organs())
 		// Discard anything not relating to our core/original bodytype and species.
 		// Does this need to be reviewed for Outreach serde?
-		if(limb.bodytype == root_bodytype && limb.species == root_species && (force || !BP_IS_PROSTHETIC(limb)))
+		if(limb.bodytype == root_bodytype && limb.species == root_species && (!genetic_info_only || !BP_IS_PROSTHETIC(limb)))
 			var/list/limb_sprite_acc = limb.get_sprite_accessories(copy = TRUE)
 			if(length(limb_sprite_acc))
 				LAZYSET(sprite_accessories, limb.organ_tag, limb_sprite_acc)
@@ -85,5 +85,5 @@
 	target.update_eyes()
 	return TRUE
 
-/mob/proc/get_mob_snapshot(force = FALSE)
-	return (force || has_genetic_information()) ? new /datum/mob_snapshot(src, force) : null
+/mob/proc/get_mob_snapshot(check_dna = FALSE)
+	return (!check_dna || has_genetic_information()) ? new /datum/mob_snapshot(src, genetic_info_only = check_dna) : null
