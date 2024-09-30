@@ -23,7 +23,7 @@
 	filter_water = TRUE
 	icon = 'mods/species/ascent/icons/clothing/mask.dmi'
 	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/mask_gyne.dmi')
-	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
+	bodytype_equip_flags = BODY_EQUIP_FLAG_GYNE | BODY_EQUIP_FLAG_ALATE
 	filtered_gases = list(
 		/decl/material/gas/nitrous_oxide,
 		/decl/material/gas/chlorine,
@@ -37,7 +37,7 @@
 	name = "mantid mag-claws"
 	desc = "A set of powerful gripping claws."
 	icon = 'mods/species/ascent/icons/magboots/boots.dmi'
-	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
+	bodytype_equip_flags = BODY_EQUIP_FLAG_GYNE | BODY_EQUIP_FLAG_ALATE
 	sprite_sheets = list(
 		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/magboots/boots_gyne.dmi'
 	)
@@ -45,7 +45,7 @@
 /obj/item/clothing/jumpsuit/ascent
 	name = "mantid undersuit"
 	desc = "A ribbed, spongy undersuit of some sort. It has a big sleeve for a tail, so it probably isn't for humans."
-	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
+	bodytype_equip_flags = BODY_EQUIP_FLAG_GYNE | BODY_EQUIP_FLAG_ALATE
 	icon = 'mods/species/ascent/icons/clothing/under.dmi'
 	color = COLOR_DARK_GUNMETAL
 	sprite_sheets = list(
@@ -55,7 +55,7 @@
 /obj/item/clothing/suit/ascent
 	name = "mantid gear harness"
 	desc = "A complex tangle of articulated cables and straps."
-	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
+	bodytype_equip_flags = BODY_EQUIP_FLAG_GYNE | BODY_EQUIP_FLAG_ALATE
 	icon_state = ICON_STATE_WORLD
 	icon = 'mods/species/ascent/icons/clothing/under_harness.dmi'
 	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/under_harness_gyne.dmi')

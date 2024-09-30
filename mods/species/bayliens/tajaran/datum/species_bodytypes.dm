@@ -9,7 +9,7 @@
 	skeletal_icon        = 'mods/species/bayliens/tajaran/icons/skeleton.dmi'
 	cosmetics_icon       = 'mods/species/bayliens/tajaran/icons/cosmetics.dmi'
 	health_hud_intensity = 1.75
-	bodytype_flag        = BODY_FLAG_FELINE
+	bodytype_flag        = BODY_EQUIP_FLAG_FELINE
 	movement_slowdown    = -0.5
 	appearance_flags     = HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	base_color           = "#ae7d32"

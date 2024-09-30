@@ -73,7 +73,7 @@
 		// We don't currently validate clothes specifically for nonhumans.
 		// TODO: make this a loop over all relevant bodytype categories instead.
 		var/check_flags = initial(clothes.bodytype_equip_flags)
-		if((check_flags && !(check_flags & BODY_FLAG_HUMANOID)) || ((check_flags & BODY_FLAG_EXCLUDE) && (check_flags & BODY_FLAG_HUMANOID)))
+		if((check_flags && !(check_flags & BODY_EQUIP_FLAG_HUMANOID)) || ((check_flags & BODY_EQUIP_FLAG_EXCLUDE) && (check_flags & BODY_EQUIP_FLAG_HUMANOID)))
 			if(length(clothing_fails))
 				failures += "[clothing_type]:\n- [jointext(clothing_fails, "\n- ")]"
 			continue

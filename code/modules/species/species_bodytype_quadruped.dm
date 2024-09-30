@@ -2,7 +2,7 @@
 	abstract_type     = /decl/bodytype/quadruped
 	rotate_on_prone   = FALSE
 	bodytype_category = BODYTYPE_QUADRUPED
-	bodytype_flag     = BODY_FLAG_QUADRUPED
+	bodytype_flag     = BODY_EQUIP_FLAG_QUADRUPED
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin),

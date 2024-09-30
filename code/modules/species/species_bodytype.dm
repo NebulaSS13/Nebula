@@ -13,7 +13,7 @@ var/global/list/bodytypes_by_category = list()
 	var/icon_deformed
 	var/cosmetics_icon
 	var/bandages_icon
-	var/bodytype_flag = BODY_FLAG_HUMANOID
+	var/bodytype_flag = BODY_EQUIP_FLAG_HUMANOID
 	var/bodytype_category = BODYTYPE_OTHER
 	var/limb_icon_intensity = 1.5
 	var/blood_overlays

@@ -22,7 +22,7 @@
 	. = ..()
 	if(. && isliving(AM))
 		var/mob/living/L = AM
-		if(L.get_bodytype()?.bodytype_flag & BODY_FLAG_VOX)
+		if(L.get_bodytype()?.bodytype_flag & BODY_EQUIP_FLAG_VOX)
 			return FALSE
 		if(L.faction == SPECIES_VOX)
 			return FALSE

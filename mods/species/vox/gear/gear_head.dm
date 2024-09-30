@@ -1,7 +1,7 @@
 /obj/item/clothing/head/helmet/space/void/setup_equip_flags()
 	. = ..()
-	if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
-		bodytype_equip_flags |= BODY_FLAG_VOX
+	if(bodytype_equip_flags & BODY_EQUIP_FLAG_EXCLUDE)
+		bodytype_equip_flags |= BODY_EQUIP_FLAG_VOX
 
 /obj/item/clothing/head/helmet/space/vox
 	name = "alien helmet"
@@ -19,7 +19,7 @@
 	siemens_coefficient = 0.6
 	item_flags = 0
 	flags_inv = 0
-	bodytype_equip_flags = BODY_FLAG_VOX
+	bodytype_equip_flags = BODY_EQUIP_FLAG_VOX
 
 /obj/item/clothing/head/helmet/space/vox/carapace
 	name = "alien visor"
