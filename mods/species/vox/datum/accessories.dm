@@ -3,7 +3,7 @@
 	icon = 'mods/species/vox/icons/body/soldier/hair.dmi'
 	icon_state = "vox_longquills"
 	species_allowed = list(SPECIES_VOX)
-	body_flags_allowed = BODY_FLAG_VOX
+	body_flags_allowed = BODY_EQUIP_FLAG_VOX
 	bodytype_categories_allowed = list(BODYTYPE_VOX)
 	uid = "acc_hair_vox_longquills"
 
@@ -67,7 +67,7 @@
 	icon_state = "neck_markings"
 	body_parts = list(BP_HEAD)
 	species_allowed = list(SPECIES_VOX)
-	body_flags_allowed = BODY_FLAG_VOX
+	body_flags_allowed = BODY_EQUIP_FLAG_VOX
 	bodytype_categories_allowed = list(BODYTYPE_VOX)
 	icon = 'mods/species/vox/icons/body/soldier/markings.dmi'
 	color_blend = ICON_MULTIPLY

@@ -6,7 +6,7 @@
 	limb_blend =        ICON_MULTIPLY
 	bodytype_category = BODYTYPE_SNAKE
 	antaghud_offset_y = 8
-	bodytype_flag =     BODY_FLAG_SNAKE
+	bodytype_flag =     BODY_EQUIP_FLAG_SNAKE
 	movement_slowdown = -0.5
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_SKIN_TONE_NORMAL
 	base_color =      "#336600"

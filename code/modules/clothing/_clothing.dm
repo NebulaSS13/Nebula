@@ -83,10 +83,10 @@
 
 /obj/item/clothing/proc/setup_equip_flags()
 	if(!isnull(bodytype_equip_flags))
-		if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
-			bodytype_equip_flags |= BODY_FLAG_QUADRUPED
+		if(bodytype_equip_flags & BODY_EQUIP_FLAG_EXCLUDE)
+			bodytype_equip_flags |= BODY_EQUIP_FLAG_QUADRUPED
 		else
-			bodytype_equip_flags &= ~BODY_FLAG_QUADRUPED
+			bodytype_equip_flags &= ~BODY_EQUIP_FLAG_QUADRUPED
 
 /obj/item/clothing/can_contaminate()
 	return TRUE
@@ -258,7 +258,7 @@
 	var/decl/bodytype/root_bodytype = user?.get_bodytype()
 	if(!root_bodytype || isnull(bodytype_equip_flags) || (slot in user.get_held_item_slots()))
 		return
-	if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
+	if(bodytype_equip_flags & BODY_EQUIP_FLAG_EXCLUDE)
 		. = !(bodytype_equip_flags & root_bodytype.bodytype_flag)
 	else
 		. = (bodytype_equip_flags & root_bodytype.bodytype_flag)

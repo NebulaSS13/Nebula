@@ -5,7 +5,7 @@
 	flags_inv = 0
 	body_parts_covered = 0
 	filtered_gases = list(/decl/material/gas/oxygen)
-	bodytype_equip_flags = BODY_FLAG_VOX
+	bodytype_equip_flags = BODY_EQUIP_FLAG_VOX
 
 /obj/item/clothing/mask/gas/swat/vox
 	name = "alien mask"
@@ -21,4 +21,4 @@
 		/decl/material/gas/methyl_bromide,
 		/decl/material/gas/methane
 	)
-	bodytype_equip_flags = BODY_FLAG_VOX
+	bodytype_equip_flags = BODY_EQUIP_FLAG_VOX

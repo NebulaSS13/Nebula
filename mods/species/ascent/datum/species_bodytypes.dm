@@ -52,7 +52,7 @@
 	icon_base =         'mods/species/ascent/icons/species/body/alate/body.dmi'
 	blood_overlays =    'mods/species/ascent/icons/species/body/alate/blood_overlays.dmi'
 	associated_gender = MALE
-	bodytype_flag =     BODY_FLAG_ALATE
+	bodytype_flag =     BODY_EQUIP_FLAG_ALATE
 	movement_slowdown = -1
 	uid = "bodytype_crystalline_alate"
 
@@ -67,7 +67,7 @@
 	antaghud_offset_y = 18
 	antaghud_offset_x = 4
 	associated_gender = FEMALE
-	bodytype_flag =     BODY_FLAG_GYNE
+	bodytype_flag =     BODY_EQUIP_FLAG_GYNE
 	eye_flash_mod =     2 // Highly photosensitive.
 	movement_slowdown = 2
 	override_limb_types = list(

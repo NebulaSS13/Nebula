@@ -13,7 +13,7 @@
 	slot_flags = SLOT_HANDS
 	attack_verb = list("challenged")
 	blood_overlay_type = "bloodyhands"
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
+	bodytype_equip_flags = BODY_EQUIP_FLAG_HUMANOID
 	fallback_slot = slot_gloves_str
 	var/obj/item/clothing/gloves/ring/covering_ring
 

@@ -12,7 +12,7 @@
 	item_flags = ITEM_FLAG_AIRTIGHT
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	min_pressure_protection = 0
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
+	bodytype_equip_flags = BODY_EQUIP_FLAG_HUMANOID
 	flags_inv = HIDEEARS | BLOCK_HEAD_HAIR
 
 /obj/item/clothing/suit/straight_jacket/overseercloak

@@ -9,7 +9,7 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
 		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
+	bodytype_equip_flags = BODY_EQUIP_FLAG_HUMANOID
 	flags_inv = HIDEEARS | BLOCK_HEAD_HAIR
 
 /obj/item/clothing/suit/fiendcowl
@@ -29,7 +29,7 @@
 	name = "black suit"
 	desc = "A snappy black suit with red trim. The undershirt's stained with something, though..."
 	icon = 'icons/clothing/suits/suit_fiend.dmi'
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
+	bodytype_equip_flags = BODY_EQUIP_FLAG_HUMANOID
 
 /obj/item/clothing/shoes/dress/devilshoes
 	desc = "Off-colour leather dress shoes. Their footsteps are silent."

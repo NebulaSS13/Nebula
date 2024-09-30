@@ -4,7 +4,7 @@
 	icon_base =         'icons/mob/human_races/species/monkey/monkey_body.dmi'
 	blood_overlays =    'icons/mob/human_races/species/monkey/blood_overlays.dmi'
 	health_hud_intensity = 1.75
-	bodytype_flag = BODY_FLAG_MONKEY
+	bodytype_flag = BODY_EQUIP_FLAG_MONKEY
 	eye_icon = null
 	override_limb_types = list(
 		BP_TAIL = /obj/item/organ/external/tail/monkey

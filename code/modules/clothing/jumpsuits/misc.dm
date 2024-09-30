@@ -38,4 +38,4 @@
 	name = "caretaker's jumpsuit"
 	desc = "A holy jumpsuit. Treat it well."
 	icon = 'icons/clothing/jumpsuits/caretaker.dmi'
-	bodytype_equip_flags = BODY_FLAG_HUMANOID
+	bodytype_equip_flags = BODY_EQUIP_FLAG_HUMANOID
