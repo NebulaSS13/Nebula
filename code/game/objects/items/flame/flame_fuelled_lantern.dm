@@ -17,6 +17,7 @@
 	color               = /decl/material/solid/metal/copper::color
 	can_manually_light  = FALSE
 	sconce_can_hold     = TRUE
+	can_store_lit       = TRUE
 
 /obj/item/flame/fuelled/lantern/get_sconce_overlay()
 	. = list(overlay_image(icon, "[icon_state]-sconce", color = color, flags = RESET_COLOR))
