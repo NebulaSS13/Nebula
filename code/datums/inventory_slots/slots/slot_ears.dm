@@ -36,7 +36,7 @@
 				inv_slot.clear_slot()
 
 /datum/inventory_slot/ear/prop_can_fit_in_slot(var/obj/item/prop)
-	return ..() || prop.w_class <= ITEM_SIZE_TINY
+	return ..() || (prop.w_class <= ITEM_SIZE_TINY && !(prop.obj_flags & OBJ_FLAG_NO_STORAGE))
 
 /datum/inventory_slot/ear/right
 	slot_name = "Right Ear"
