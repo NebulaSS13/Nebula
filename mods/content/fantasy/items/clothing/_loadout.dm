@@ -203,14 +203,15 @@
 		/decl/material/solid/metal/copper,
 		/decl/material/solid/metal/bronze
 	)
+	loadout_flags = null
 
-/decl/loadout_option/fantasy/utility/quill
+/decl/loadout_option/fantasy/utility/scroll
 	name = "paper scroll"
 	path = /obj/item/paper/scroll
 	available_materials = null
 	uid = "gear_fantasy_scroll"
 
-/decl/loadout_option/fantasy/utility/scroll
+/decl/loadout_option/fantasy/utility/quill
 	name = "quill pen"
 	path = /obj/item/pen/fancy/quill
 	available_materials = null
@@ -266,7 +267,6 @@
 	name = "waterskin selection"
 	path = /obj/item/chems/waterskin
 	available_materials = null
-	loadout_flags = null
 	apply_to_existing_if_possible = TRUE // overwrite beggar knight's wineskin
 	uid = "gear_fantasy_waterskin"
 
@@ -303,6 +303,7 @@
 /decl/loadout_option/fantasy/eyes/eyepatch
 	name = "eyepatch"
 	path = /obj/item/clothing/glasses/eyepatch
+	loadout_flags = null
 	uid = "gear_fantasy_eyes_eyepatch"
 
 /decl/loadout_option/fantasy/eyes/eyepatch_colourable
