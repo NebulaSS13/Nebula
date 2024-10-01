@@ -788,6 +788,10 @@
 /obj/structure/wall_sconce/lantern,
 /turf/floor/wood/walnut,
 /area/shaded_hills/farmhouse/porch)
+"Cj" = (
+/obj/structure/coatrack/ebony,
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/inn)
 "CR" = (
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
@@ -11282,7 +11286,7 @@ Ly
 Wl
 BG
 ZY
-lF
+Cj
 iZ
 qG
 dK

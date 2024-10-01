@@ -4,11 +4,16 @@
 	icon = 'icons/obj/structures/coatrack.dmi'
 	icon_state = "coatrack0"
 	material = /decl/material/solid/organic/wood/mahogany
+	color = /decl/material/solid/organic/wood/mahogany::color
 	material_alteration =    (MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR)
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	var/max_items = 3
 	var/tmp/list/slots_allowed
 	var/tmp/list/blacklisted_types = list(/obj/item/clothing/suit/space)
+
+/obj/structure/coatrack/ebony
+	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color
 
 /obj/structure/coatrack/dismantle_structure(mob/user)
 	for(var/obj/item/thing in contents)
