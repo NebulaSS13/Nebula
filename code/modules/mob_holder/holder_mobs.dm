@@ -28,12 +28,12 @@
 		to_chat(target, SPAN_NOTICE("\The [src] clambers onto you!"))
 		to_chat(initiator, SPAN_NOTICE("You climb up onto \the [target]!"))
 	else
+		if(!ai?.scooped_by(initiator))
+			return FALSE // The AI canceled the scooping.
+
 		if(!target.put_in_hands(H))
 			to_chat(initiator, SPAN_WARNING("Your hands are full!"))
 			return FALSE
-
-		if(!ai?.scooped_by(initiator))
-			return FALSE // The AI canceled the scooping.
 
 		to_chat(initiator, SPAN_NOTICE("You scoop up \the [src]!"))
 		to_chat(src, SPAN_NOTICE("\The [initiator] scoops you up!"))
