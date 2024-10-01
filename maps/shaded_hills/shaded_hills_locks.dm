@@ -15,7 +15,7 @@
 
 /obj/abstract/landmark/lock_preset/shaded_hills/inn_backroom
 	name = "Shaded Hills locked door - inn back room"
-	lock_preset_id  = "inn interior"
+	lock_preset_id  = "inn back room"
 	lock_material   = /decl/material/solid/metal/silver
 
 /obj/abstract/landmark/lock_preset/shaded_hills/shrine
