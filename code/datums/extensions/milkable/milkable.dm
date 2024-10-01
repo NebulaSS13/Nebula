@@ -86,7 +86,7 @@
 		SPAN_NOTICE("\The [user] starts milking \the [critter] into \the [container]."),
 		SPAN_NOTICE("You start milking \the [critter] into \the [container].")
 	)
-	if(!user.do_skilled(4 SECONDS, milking_skill))
+	if(!user.do_skilled(4 SECONDS, milking_skill, target = critter, check_holding = TRUE))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] stops milking \the [critter]."),
 			SPAN_NOTICE("You stop milking \the [critter].")
