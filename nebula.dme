@@ -1620,6 +1620,7 @@
 #include "code\modules\abstract\_abstract.dm"
 #include "code\modules\abstract\abstract_exterior_marker.dm"
 #include "code\modules\abstract\abstract_ramp_sculptor.dm"
+#include "code\modules\abstract\airlock_helper.dm"
 #include "code\modules\acting\acting_items.dm"
 #include "code\modules\admin\admin.dm"
 #include "code\modules\admin\admin_attack_log.dm"
