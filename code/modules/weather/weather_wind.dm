@@ -17,7 +17,10 @@
 		mob_shown_wind.Cut()
 	if(prob(10))
 		var/old_strength = wind_strength
-		wind_strength = clamp(wind_strength + rand(-1, 1), 5, -5)
+		wind_strength = clamp(wind_strength + rand(-1, 1), -1, 5)
+		if(wind_strength < 0)
+			wind_strength = abs(wind_strength)
+			wind_direction = turn(wind_direction, 180)
 		if(old_strength != wind_strength)
 			mob_shown_wind.Cut()
 
