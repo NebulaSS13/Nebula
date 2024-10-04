@@ -138,6 +138,7 @@
 		force_close()
 
 /obj/machinery/door/blast/get_material()
+	RETURN_TYPE(/decl/material)
 	return implicit_material
 
 // Proc: attackby()

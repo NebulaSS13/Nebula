@@ -32,6 +32,7 @@
 		insert_tank(new tank, null, TRUE, TRUE)
 	set_extension(src, /datum/extension/tool, list(TOOL_WELDER = TOOL_QUALITY_DEFAULT))
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
+	set_extension(src, /datum/extension/demolisher/welder)
 	. = ..()
 	update_icon()
 

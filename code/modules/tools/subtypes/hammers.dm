@@ -12,6 +12,12 @@
 		"bashes",
 		"hammers"
 	)
+	var/demolisher_type = /datum/extension/demolisher/delicate
+
+/obj/item/tool/hammer/Initialize(ml, material_key, _handle_material, _binding_material, override_tool_qualities, override_tool_properties)
+	. = ..()
+	if(demolisher_type)
+		set_extension(src, demolisher_type, null, "demolishing", 'sound/effects/bang.ogg')
 
 /obj/item/tool/hammer/get_initial_tool_properties()
 	var/static/list/tool_properties = list(
@@ -41,6 +47,7 @@
 		"bashes",
 		"hammers"
 	)
+	demolisher_type = /datum/extension/demolisher
 
 /obj/item/tool/hammer/sledge/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(

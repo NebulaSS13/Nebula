@@ -152,66 +152,8 @@
 
 	// Basic dismantling.
 	if(isnull(construction_stage) || !reinf_material)
-
-		var/cut_delay = (6 SECONDS) - material.cut_delay
-		var/dismantle_verb
-		var/dismantle_sound
-
-		if(IS_WELDER(W))
-
-			if(material && !material.removed_by_welder)
-				to_chat(user, SPAN_WARNING("\The [src] is too delicate to be dismantled with \the [W]; try a crowbar."))
-				return TRUE
-
-			var/obj/item/weldingtool/WT = W
-			if(!WT.weld(0,user))
-				return
-			dismantle_verb = "cutting through"
-			dismantle_sound = 'sound/items/Welder.ogg'
-			cut_delay *= 0.7
-
-		else if(IS_CROWBAR(W))
-
-			if(material && material.removed_by_welder)
-				to_chat(user, SPAN_WARNING("\The [src] is too robust to be dismantled with \the [W]; try a welding tool."))
-				return TRUE
-
-			dismantle_verb = "dismantling"
-			dismantle_sound = 'sound/items/Crowbar.ogg'
-			cut_delay *= 1.2
-
-		else if(W.is_special_cutting_tool())
-			if(istype(W, /obj/item/gun/energy/plasmacutter))
-				var/obj/item/gun/energy/plasmacutter/cutter = W
-				if(!cutter.slice(user))
-					return TRUE
-			dismantle_sound = "sparks"
-			dismantle_verb = "slicing through"
-			cut_delay *= 0.5
-
-		else if(IS_PICK(W))
-
-			if(W.material?.hardness < material.hardness)
-				to_chat(user, SPAN_WARNING("\The [W] is not hard enough to cut through [material.solid_name]."))
-				return TRUE
-
-			dismantle_verb  = W.get_tool_message(TOOL_PICK)
-			dismantle_sound = W.get_tool_sound(TOOL_PICK)
-			cut_delay       = W.get_expected_tool_use_delay(TOOL_PICK, cut_delay)
-
-		if(dismantle_verb)
-
-			to_chat(user, "<span class='notice'>You begin [dismantle_verb] \the [src].</span>")
-			if(dismantle_sound)
-				playsound(src, dismantle_sound, 100, 1)
-
-			if(cut_delay<0)
-				cut_delay = 0
-
-			if(do_after(user,cut_delay,src))
-				to_chat(user, "<span class='notice'>You remove the outer plating.</span>")
-				user.visible_message("<span class='warning'>\The [user] finishes [dismantle_verb] \the [src]!</span>")
-				dismantle_turf()
+		var/datum/extension/demolisher/demolition = get_extension(W, /datum/extension/demolisher)
+		if(istype(demolition) && demolition.try_demolish(user, src))
 			return TRUE
 
 	//Reinforced dismantling.

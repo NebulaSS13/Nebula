@@ -134,6 +134,7 @@
 /obj/item/gun/energy/plasmacutter/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(TOOL_SAW = TOOL_QUALITY_BAD))
+	set_extension(src, /datum/extension/demolisher/energy)
 
 /obj/item/gun/energy/plasmacutter/get_heat()
 	. = max(..(), 3800)
