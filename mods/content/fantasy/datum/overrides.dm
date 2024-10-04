@@ -56,3 +56,7 @@
 // Rename wooden prostheses
 /decl/bodytype/prosthetic/wooden
 	name = "carved wooden" // weird to call it 'crude' when it's cutting-edge for the setting
+
+// Rustic wood textures
+/decl/material/solid/organic/wood
+	table_icon_base = "rusticwood"
