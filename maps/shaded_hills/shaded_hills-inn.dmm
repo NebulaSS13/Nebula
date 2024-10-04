@@ -927,10 +927,10 @@
 "GZ" = (
 /obj/item/food/butchery/meat/chicken,
 /obj/item/food/butchery/meat/chicken,
-/obj/item/food/butchery/haunch/side,
-/obj/item/food/butchery/haunch/shoulder,
-/obj/item/food/butchery/cutlet/raw,
-/obj/item/food/butchery/cutlet/raw,
+/obj/item/food/butchery/haunch/side/beef,
+/obj/item/food/butchery/haunch/shoulder/beef,
+/obj/item/food/butchery/cutlet/raw/beef,
+/obj/item/food/butchery/cutlet/raw/beef,
 /obj/structure/reagent_dispensers/barrel/ebony,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
@@ -1171,9 +1171,9 @@
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
 "PQ" = (
-/obj/item/food/butchery/meat,
-/obj/item/food/butchery/meat,
-/obj/item/food/butchery/meat,
+/obj/item/food/butchery/meat/beef,
+/obj/item/food/butchery/meat/beef,
+/obj/item/food/butchery/meat/beef,
 /obj/item/food/butchery/meat/chicken,
 /obj/structure/closet/crate/chest/ebony,
 /turf/floor/natural/path/basalt,
