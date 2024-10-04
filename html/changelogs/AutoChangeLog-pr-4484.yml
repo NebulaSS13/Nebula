@@ -1,0 +1,4 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Sledgehammers can demolish non-reinforced walls.}
+delete-after: true
