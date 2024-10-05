@@ -36,11 +36,6 @@
 	if(connect_neighbors)
 		update_neighbors(oldloc)
 
-/obj/structure/bed/chair/bench/update_materials()
-	. = ..()
-	if(material)
-		icon = material.pew_icon
-
 /obj/structure/bed/chair/bench/set_dir()
 	var/olddir = dir
 	. = ..()
@@ -112,6 +107,11 @@
 	icon = 'icons/obj/structures/pews.dmi'
 	icon_state = "pew_standing"
 	base_icon = "pew"
+
+/obj/structure/bed/chair/bench/pew/update_materials()
+	. = ..()
+	if(material)
+		icon = material.pew_icon
 
 /obj/structure/bed/chair/bench/pew/single
 	name = "backed chair"
