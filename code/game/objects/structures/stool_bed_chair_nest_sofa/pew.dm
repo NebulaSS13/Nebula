@@ -93,6 +93,15 @@
 
 	update_icon()
 
+/obj/structure/bed/chair/bench/proc/get_material_icon()
+	return material?.bench_icon
+
+/obj/structure/bed/chair/bench/update_materials()
+	. = ..()
+	var/icon/material_icon = get_material_icon()
+	if(material_icon)
+		icon = material_icon
+
 /obj/structure/bed/chair/bench/mahogany
 	color = WOOD_COLOR_RICH
 	material = /decl/material/solid/organic/wood/mahogany
@@ -108,10 +117,8 @@
 	icon_state = "pew_standing"
 	base_icon = "pew"
 
-/obj/structure/bed/chair/bench/pew/update_materials()
-	. = ..()
-	if(material)
-		icon = material.pew_icon
+/obj/structure/bed/chair/bench/pew/get_material_icon()
+	return material?.pew_icon
 
 /obj/structure/bed/chair/bench/pew/single
 	name = "backed chair"
