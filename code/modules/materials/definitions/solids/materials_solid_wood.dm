@@ -1,9 +1,10 @@
 /decl/material/solid/organic/wood
-	name = "wood"
+	name = "oak"
 	uid = "solid_wood"
 	liquid_name = "wood pulp"
-	lore_text = "A fibrous structural material harvested from an indeterminable plant. Don't get a splinter."
-	adjective_name = "wooden"
+	adjective_name = "oaken"
+	lore_text = "Oak timber is strong yet simple to carve, making it a fine choice for wooden handicrafts."
+	adjective_name = "oaken"
 	color = WOOD_COLOR_GENERIC
 	integrity = 75
 	icon_base = 'icons/turf/walls/wood.dmi'
@@ -15,7 +16,6 @@
 		'icons/turf/walls/log.dmi' = TRUE,
 		'icons/turf/walls/metal.dmi' = TRUE
 	)
-	table_icon_base = "wood"
 	bench_icon = 'icons/obj/structures/wood_benches.dmi'
 	pew_icon = 'icons/obj/structures/wood_pews.dmi'
 	explosion_resistance = 2
@@ -53,6 +53,7 @@
 
 /decl/material/solid/organic/wood/fungal
 	name = "towercap"
+	adjective_name = "towercap"
 	uid = "solid_wood_fungal"
 	color = "#e6d8dd"
 	hardness = MAT_VALUE_FLEXIBLE + 10
@@ -61,6 +62,7 @@
 	name = "holographic wood"
 	uid = "solid_holographic_wood"
 	color = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
+	adjective_name = "holowood"
 	holographic = TRUE
 
 /decl/material/solid/organic/wood/mahogany
