@@ -79,6 +79,10 @@
 	sound_env = ROOM
 	turf_initializer = /decl/turf_initializer/spiderwebs
 
+/area/shaded_hills/shrine/kitchen
+	name = "\improper Shrine Kitchen"
+	turf_initializer = /decl/turf_initializer/combo/kitchen_webs
+
 /area/shaded_hills/outside/shrine
 	name = "\improper Shrine Grounds"
 

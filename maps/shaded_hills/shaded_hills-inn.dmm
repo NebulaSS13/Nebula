@@ -1,4 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ah" = (
+/turf/wall/brick/basalt,
+/area/shaded_hills/shrine/kitchen)
 "aP" = (
 /obj/structure/flora/tree/dead/ebony,
 /turf/floor/natural/dirt,
@@ -30,7 +33,7 @@
 /obj/item/chems/glass/handmade/cup/wood,
 /obj/item/chems/glass/handmade/cup/wood,
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "cl" = (
 /obj/structure/table/woodentable/ebony,
 /turf/floor/wood/walnut,
@@ -46,7 +49,7 @@
 "cy" = (
 /obj/structure/reagent_dispensers/barrel/ebony/water,
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "cT" = (
 /obj/structure/railing/mapped/wooden/walnut{
 	dir = 1
@@ -64,7 +67,7 @@
 "dx" = (
 /obj/structure/fire_source/kiln/oven,
 /turf/floor/natural/path/herringbone/basalt,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "dC" = (
 /obj/structure/door/walnut{
 	dir = 4
@@ -158,6 +161,9 @@
 	},
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/slaughterhouse)
+"ge" = (
+/turf/floor/wood/walnut,
+/area/shaded_hills/shrine/kitchen)
 "gg" = (
 /obj/structure/wall_sconce/lantern{
 	dir = 4
@@ -466,6 +472,9 @@
 	},
 /turf/floor/natural/path/basalt,
 /area/shaded_hills/stable)
+"oN" = (
+/turf/wall/log/walnut,
+/area/shaded_hills/shrine/kitchen)
 "oO" = (
 /obj/structure/railing/mapped/wooden/walnut{
 	dir = 8
@@ -487,6 +496,11 @@
 /obj/item/stack/medical/bandage/crafted/five,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
+"px" = (
+/turf/wall/log/walnut/shutter{
+	shutter_state = 1
+	},
+/area/shaded_hills/shrine/kitchen)
 "qe" = (
 /obj/structure/bed/simple/ebony,
 /obj/abstract/landmark/start/shaded_hills/shrine_attendant,
@@ -670,13 +684,13 @@
 	pixel_y = 10
 	},
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "vz" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/cooking_vessel/baking_dish/earthenware,
 /obj/item/chems/cooking_vessel/baking_dish/earthenware,
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "vA" = (
 /obj/structure/table/marble,
 /obj/item/food/meatpie,
@@ -724,7 +738,7 @@
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/sugar,
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "xk" = (
 /obj/structure/flora/tree/dead/mahogany,
 /turf/floor/natural/dirt,
@@ -833,7 +847,7 @@
 "Aq" = (
 /obj/structure/working/loom/ebony,
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "Aw" = (
 /obj/structure/railing/mapped/wooden/walnut{
 	dir = 4
@@ -898,7 +912,7 @@
 "BD" = (
 /obj/structure/reagent_dispensers/barrel/ebony/wine,
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "BG" = (
 /obj/structure/bed/chair/bench/ebony,
 /turf/floor/wood/walnut,
@@ -920,6 +934,11 @@
 /obj/item/stack/material/log/mapped/walnut/twenty,
 /turf/floor/natural/path/herringbone/basalt,
 /area/shaded_hills/inn)
+"CP" = (
+/obj/structure/door/walnut,
+/obj/abstract/landmark/lock_preset/shaded_hills/shrine,
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/shrine/kitchen)
 "CR" = (
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine)
@@ -1119,7 +1138,7 @@
 /obj/item/chems/glass/handmade/jar,
 /obj/item/chems/glass/handmade/jar,
 /turf/floor/natural/path/herringbone/basalt,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "Ic" = (
 /turf/floor/natural/path/running_bond/basalt,
 /area/shaded_hills/outside/downlands)
@@ -1340,7 +1359,7 @@
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/cooking_vessel/pot/iron,
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "ON" = (
 /obj/structure/table/marble,
 /obj/item/rock/flint/striker{
@@ -1412,6 +1431,9 @@
 	},
 /turf/floor/wood/walnut,
 /area/shaded_hills/general_store/porch)
+"QW" = (
+/turf/floor/natural/path/herringbone/basalt,
+/area/shaded_hills/shrine/kitchen)
 "Rg" = (
 /obj/effect/floor_decal/spline/fancy/wood/walnut{
 	dir = 4
@@ -1439,7 +1461,7 @@
 /turf/wall/brick/basalt/shutter{
 	shutter_state = 1
 	},
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "RO" = (
 /obj/structure/wall_sconce/lantern{
 	dir = 8
@@ -1468,7 +1490,7 @@
 "Sy" = (
 /obj/structure/working/spinning_wheel/ebony,
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "SB" = (
 /obj/structure/door/walnut{
 	dir = 4
@@ -1534,7 +1556,7 @@
 /obj/item/food/grown/carrot,
 /obj/item/food/grown/cabbage,
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "TR" = (
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/downlands)
@@ -1569,7 +1591,7 @@
 "VE" = (
 /obj/structure/reagent_dispensers/barrel/ebony/beer,
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "VM" = (
 /obj/structure/railing/mapped/wooden/walnut{
 	dir = 4
@@ -1600,7 +1622,7 @@
 /obj/item/chems/glass/mortar,
 /obj/item/rock/basalt,
 /turf/floor/wood/walnut,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "Wk" = (
 /obj/structure/railing/mapped/wooden/walnut{
 	dir = 8
@@ -1674,7 +1696,7 @@
 /obj/structure/fire_source/stove,
 /obj/item/stack/material/log/mapped/walnut/twenty,
 /turf/floor/natural/path/herringbone/basalt,
-/area/shaded_hills/shrine)
+/area/shaded_hills/shrine/kitchen)
 "XJ" = (
 /obj/structure/wall_sconce/lantern{
 	dir = 1;
@@ -19540,10 +19562,10 @@ kv
 kv
 RG
 dx
-Vj
-CR
-CR
-CR
+QW
+ge
+ge
+ge
 QB
 CR
 XM
@@ -19690,12 +19712,12 @@ kv
 kv
 kv
 kv
-Yc
+ah
 XH
-Vj
+QW
 xh
 vz
-CR
+ge
 IB
 CR
 CR
@@ -19842,12 +19864,12 @@ kv
 iK
 kv
 kv
-Yc
+ah
 HL
-Vj
+QW
 TM
 Wh
-CR
+ge
 QB
 QB
 Kh
@@ -19994,12 +20016,12 @@ kv
 iK
 kv
 kv
-TZ
-CR
-CR
+CP
+ge
+ge
 Ot
 bW
-CR
+ge
 IB
 ft
 ft
@@ -20146,12 +20168,12 @@ iK
 iK
 kv
 kv
-QB
+oN
 uP
-CR
-CR
-CR
-CR
+ge
+ge
+ge
+ge
 Kh
 ft
 Zx
@@ -20298,7 +20320,7 @@ iK
 iK
 kv
 By
-Kh
+px
 cy
 VE
 BD
