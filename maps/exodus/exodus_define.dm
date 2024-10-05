@@ -23,6 +23,7 @@
 	)
 
 	evac_controller_type = /datum/evacuation_controller/shuttle
+	game_year = 552
 
 //  For /datum/evacuation_controller/shuttle
 
