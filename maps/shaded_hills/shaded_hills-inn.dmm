@@ -379,7 +379,7 @@
 /obj/item/seeds/extracted/cabbage,
 /obj/item/seeds/extracted/cabbage,
 /obj/item/seeds/extracted/cabbage,
-/obj/item/tool/hoe/wood,
+/obj/item/tool/hoe/wood/walnut,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/downlands)
 "ml" = (
@@ -724,7 +724,7 @@
 /obj/item/seeds/extracted/valerian,
 /obj/item/seeds/extracted/yarrow,
 /obj/item/seeds/extracted/yarrow,
-/obj/item/tool/hoe/wood,
+/obj/item/tool/hoe/wood/walnut,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/shrine)
 "Ay" = (
@@ -856,7 +856,7 @@
 /obj/item/seeds/extracted/wheat,
 /obj/item/seeds/extracted/wheat,
 /obj/item/seeds/extracted/wheat,
-/obj/item/tool/shovel/wood,
+/obj/item/tool/shovel/wood/walnut,
 /turf/floor/natural/dirt,
 /area/shaded_hills/outside/downlands)
 "FE" = (
@@ -1413,7 +1413,7 @@
 /obj/structure/railing/mapped/wooden/walnut{
 	dir = 4
 	},
-/obj/item/tool/shovel/wood,
+/obj/item/tool/shovel/wood/walnut,
 /turf/floor/natural/mud,
 /area/shaded_hills/outside/shrine)
 "WI" = (
