@@ -115,5 +115,9 @@
 	connect_neighbors = FALSE
 
 /obj/structure/bed/chair/bench/pew/mahogany
-	color = WOOD_COLOR_RICH
+	color    = /decl/material/solid/organic/wood/mahogany::color
 	material = /decl/material/solid/organic/wood/mahogany
+
+/obj/structure/bed/chair/bench/pew/ebony
+	color    = /decl/material/solid/organic/wood/ebony::color
+	material = /decl/material/solid/organic/wood/ebony
