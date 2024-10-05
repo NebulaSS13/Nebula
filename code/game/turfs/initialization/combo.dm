@@ -1,5 +1,6 @@
 /// Runs multiple turf initialisers in sequence.
 /decl/turf_initializer/combo
+	abstract_type = /decl/turf_initializer/combo
 	/// A list of initialisers to run, in sequence.
 	var/list/initialisers
 
