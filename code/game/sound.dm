@@ -161,6 +161,7 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 			if ("chop") soundin = pick(global.chop_sound)
 			if ("glasscrack") soundin = pick(global.glasscrack_sound)
 			if ("tray_hit") soundin = pick(global.tray_hit_sound)
+			if ("sweeping") soundin = pick(global.sweeping_sound)
 	return soundin
 
 
