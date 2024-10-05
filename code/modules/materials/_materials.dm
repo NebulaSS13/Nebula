@@ -134,6 +134,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/table_icon_base = "metal"
 	var/table_icon_reinforced = "reinf_metal"
 
+	var/pew_icon = 'icons/obj/structures/pews.dmi'
+
 	var/list/stack_origin_tech = @'{"materials":1}' // Research level for stacks.
 
 	// Attributes

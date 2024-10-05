@@ -36,6 +36,11 @@
 	if(connect_neighbors)
 		update_neighbors(oldloc)
 
+/obj/structure/bed/chair/bench/update_materials()
+	. = ..()
+	if(material)
+		icon = material.pew_icon
+
 /obj/structure/bed/chair/bench/set_dir()
 	var/olddir = dir
 	. = ..()

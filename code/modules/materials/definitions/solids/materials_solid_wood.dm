@@ -16,6 +16,7 @@
 		'icons/turf/walls/metal.dmi' = TRUE
 	)
 	table_icon_base = "wood"
+	pew_icon = 'icons/obj/structures/wood_pews.dmi'
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER
 	shard_can_repair = 0 // you can't weld splinters back into planks
