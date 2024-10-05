@@ -11,3 +11,7 @@
 
 /obj/item/utensil/chopsticks/aluminium
 	material = /decl/material/solid/metal/aluminium
+
+/obj/item/utensil/chopsticks/bamboo
+	material = /decl/material/solid/organic/wood/bamboo
+	color = /decl/material/solid/organic/wood/bamboo::color
