@@ -914,7 +914,9 @@
 /turf/floor/wood/walnut,
 /area/shaded_hills/shrine/kitchen)
 "BG" = (
-/obj/structure/bed/chair/bench/ebony,
+/obj/structure/bed/chair/bench/ebony{
+	dir = 1
+	},
 /turf/floor/wood/walnut,
 /area/shaded_hills/inn)
 "BI" = (
