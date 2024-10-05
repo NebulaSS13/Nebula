@@ -856,6 +856,19 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/spline/fancy/wood/three_quarters
 	icon_state = "spline_fancy_full"
 
+/obj/effect/floor_decal/spline/fancy/wood/walnut
+	name = "spline - walnut"
+	color = WOOD_COLOR_CHOCOLATE
+
+/obj/effect/floor_decal/spline/fancy/wood/corner/walnut
+	color = WOOD_COLOR_CHOCOLATE
+
+/obj/effect/floor_decal/spline/fancy/wood/cee/walnut
+	color = WOOD_COLOR_CHOCOLATE
+
+/obj/effect/floor_decal/spline/fancy/wood/three_quarters/walnut
+	color = WOOD_COLOR_CHOCOLATE
+
 /obj/effect/floor_decal/industrial
 	abstract_type = /obj/effect/floor_decal/industrial
 
