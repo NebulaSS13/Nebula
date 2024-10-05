@@ -60,3 +60,10 @@
 // Rustic wood textures
 /decl/material/solid/organic/wood
 	table_icon_base = "rusticwood"
+
+// Renaming generic 'wood' to oak
+/decl/material/solid/organic/wood
+	name = "oak"
+	uid = "solid_wood"
+	adjective_name = "oaken"
+	lore_text = "Oak timber is strong yet simple to carve, making it a fine choice for wooden handicrafts."
