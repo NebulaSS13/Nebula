@@ -23,6 +23,7 @@
 	START_PROCESSING(SSprocessing, src)
 
 /datum/extension/milkable/Destroy()
+	STOP_PROCESSING(SSprocessing, src)
 	QDEL_NULL(udder)
 	return ..()
 
