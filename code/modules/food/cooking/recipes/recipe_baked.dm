@@ -153,10 +153,11 @@
 /decl/recipe/baked/fortunecookie/produce_result(obj/container)
 	var/obj/item/paper/paper = locate() in container
 	paper.forceMove(null) //prevent deletion
-	var/obj/item/food/fortunecookie/being_cooked = ..(container)
-	paper.forceMove(being_cooked)
-	being_cooked.trash = paper //so the paper is left behind as trash without special-snowflake(TM Nodrak) code ~carn
-	return being_cooked
+	var/list/obj/item/food/fortunecookie/results = ..(container)
+	for(var/obj/item/food/fortunecookie/being_cooked in results)
+		paper.forceMove(being_cooked)
+		being_cooked.trash = paper //so the paper is left behind as trash without special-snowflake(TM Nodrak) code ~carn
+	return results
 
 /decl/recipe/baked/fortunecookie/check_items(var/obj/container)
 	. = ..()
