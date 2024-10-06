@@ -550,7 +550,7 @@
 
 //Helper proc used by various tools for repairing robot limbs
 /obj/item/organ/external/proc/robo_repair(var/repair_amount, var/damage_type, var/damage_desc, obj/item/tool, mob/living/user)
-	if((!BP_IS_PROSTHETIC(src)))
+	if(!BP_IS_PROSTHETIC(src))
 		return 0
 
 	var/damage_amount
