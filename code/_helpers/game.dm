@@ -172,7 +172,6 @@
 	return L
 
 // Returns a list of mobs and/or objects in range of R from source. Used in radio and say code.
-
 /proc/get_mobs_or_objects_in_view(var/R, var/atom/source, var/include_mobs = 1, var/include_objects = 1)
 
 	var/turf/T = get_turf(source)
@@ -195,28 +194,24 @@
 				hear += I
 	return hear
 
-/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/list/mobs, var/list/objs, var/check_ghosts = null)
-	var/list/hear = list()
-	DVIEW(hear, range, T, INVISIBILITY_MAXIMUM)
+// Alternative to get_mobs_or_objects_in_view which only considers mobs and "listening" objects.
+/proc/get_listeners_in_range(turf/center, range, list/mobs, list/objs, check_ghosts=FALSE)
 	var/list/hearturfs = list()
-
-	for(var/atom/movable/AM in hear)
-		if(ismob(AM))
-			mobs += AM
-			hearturfs += get_turf(AM)
-		else if(isobj(AM))
-			objs += AM
-			hearturfs += get_turf(AM)
+	FOR_DVIEW(var/turf/T, range, center, INVISIBILITY_MAXIMUM)
+		hearturfs[T] = TRUE
+		for(var/mob/M in T)
+			mobs += M
+	END_FOR_DVIEW
 
 	for(var/mob/M in global.player_list)
 		if(check_ghosts && M.stat == DEAD && M.get_preference_value(check_ghosts) != PREF_NEARBY)
 			mobs |= M
-		else if(get_turf(M) in hearturfs)
+		else if(hearturfs[get_turf(M)])
 			mobs |= M
 
 	for(var/obj/O in global.listening_objects)
-		if(get_turf(O) in hearturfs)
-			objs |= O
+		if(hearturfs[get_turf(O)])
+			objs += O
 
 
 

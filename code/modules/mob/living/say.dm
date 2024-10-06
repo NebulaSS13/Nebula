@@ -243,7 +243,7 @@
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
-		get_mobs_and_objs_in_view_fast(T, message_range, listening, listening_obj, /datum/client_preference/ghost_ears)
+		get_listeners_in_range(T, message_range, listening, listening_obj, /datum/client_preference/ghost_ears)
 
 	var/speech_bubble_state = check_speech_punctuation_state(message)
 	var/speech_state_modifier = get_speech_bubble_state_modifier()
@@ -273,7 +273,7 @@
 		var/eavesdroping_range = 5
 		var/list/eavesdroping = list()
 		var/list/eavesdroping_obj = list()
-		get_mobs_and_objs_in_view_fast(T, eavesdroping_range, eavesdroping, eavesdroping_obj)
+		get_listeners_in_range(T, eavesdroping_range, eavesdroping, eavesdroping_obj)
 		eavesdroping -= listening
 		eavesdroping_obj -= listening_obj
 		for(var/mob/M in eavesdroping)

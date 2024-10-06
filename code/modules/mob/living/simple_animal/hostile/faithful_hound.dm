@@ -29,7 +29,7 @@
 	var/aggressiveness = 0 //The closer somebody is to us, the more aggressive we are
 	var/list/mobs = list()
 	var/list/objs = list()
-	get_mobs_and_objs_in_view_fast(get_turf(body), 5, mobs, objs, 0)
+	get_listeners_in_range(get_turf(body), 5, mobs, objs, 0)
 	for(var/mob/living/mailman in mobs)
 		if((mailman == body) || is_friend(mailman) || mailman.faction == body.faction)
 			continue

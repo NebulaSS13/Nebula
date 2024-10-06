@@ -63,8 +63,9 @@ var/global/list/holopads = list()
 /obj/machinery/hologram/holopad/Initialize()
 	. = ..()
 
-	// Null ID means we want to use our area name.
 	global.holopads += src
+	global.listening_objects += src
+	// Null ID means we want to use our area name.
 	if(isnull(holopad_id))
 		var/area/A = get_area(src)
 		holopad_id = A?.proper_name || "Unknown"
@@ -76,6 +77,10 @@ var/global/list/holopads = list()
 
 	// Update our desc.
 	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[holopad_id]'"
+
+/obj/machinery/hologram/holopad/Destroy()
+	global.listening_objects -= src
+	return ..()
 
 /obj/machinery/hologram/holopad/interface_interact(var/mob/living/human/user) //Carn: Hologram requests.
 	if(!CanInteract(user, DefaultTopicState()))
