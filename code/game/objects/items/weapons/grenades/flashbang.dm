@@ -10,13 +10,14 @@
 	var/list/victims = list()
 	var/list/objs = list()
 	var/turf/T = get_turf(src)
-	get_mobs_and_objs_in_view_fast(T, 7, victims, objs)
+	get_listeners_in_range(T, 7, victims, objs)
 	for(var/mob/living/M in victims)
 		bang(T, M)
 
-	for(var/obj/effect/blob/B in objs) //Blob damage here
+	FOR_DVIEW(var/obj/effect/blob/B, 7, T, INVISIBILITY_MAXIMUM) //Blob damage here
 		var/damage = round(30/(get_dist(B,T)+1))
 		B.take_damage(damage, BURN)
+	END_FOR_DVIEW
 
 	new /obj/effect/sparks(loc)
 	new /obj/effect/effect/smoke/illumination(loc, 5, 30, 1, "#ffffff")

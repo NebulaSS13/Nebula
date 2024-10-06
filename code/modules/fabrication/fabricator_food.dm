@@ -7,6 +7,14 @@
 	base_icon_state = "replicator"
 	base_storage_capacity_mult = 5
 
+/obj/machinery/fabricator/replicator/Initialize()
+	. = ..()
+	global.listening_objects += src
+
+/obj/machinery/fabricator/replicator/Destroy()
+	global.listening_objects -= src
+	return ..()
+
 /obj/machinery/fabricator/replicator/hear_talk(var/mob/M, var/text, var/verb, var/decl/language/speaking)
 	if(speaking && !speaking.machine_understands)
 		return ..()
