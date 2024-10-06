@@ -20,6 +20,10 @@
 		fleece_material = GET_DECL(fleece_material)
 	START_PROCESSING(SSprocessing, src)
 
+/datum/extension/shearable/Destroy()
+	STOP_PROCESSING(SSprocessing, src)
+	return ..()
+
 /datum/extension/shearable/Process()
 	if(has_fleece)
 		return PROCESS_KILL
