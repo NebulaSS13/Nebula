@@ -312,6 +312,9 @@ SUBSYSTEM_DEF(garbage)
 		if(isnull(D))
 			return
 
+		if(D.is_processing)
+			get_stack_trace("[D] ([D.type]) was qdeleted while still processing on [D.is_processing]!")
+
 		switch(hint)
 			if (QDEL_HINT_QUEUE)		//qdel should queue the object for deletion.
 				GC_CHECK_AM_NULLSPACE(D, "QDEL_HINT_QUEUE")
