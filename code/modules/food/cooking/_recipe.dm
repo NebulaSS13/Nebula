@@ -189,7 +189,8 @@ var/global/list/_cooking_recipe_cache = list()
 		if(contained_atoms)
 			contained_atoms -= produced
 			for(var/obj/O in contained_atoms)
-				O.reagents.trans_to_obj(produced, O.reagents.total_volume)
+				if(O.reagents)
+					O.reagents.trans_to_obj(produced, O.reagents.total_volume)
 				qdel(O)
 		return produced
 
