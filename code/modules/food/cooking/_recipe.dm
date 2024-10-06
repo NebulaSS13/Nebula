@@ -230,7 +230,7 @@ var/global/list/_cooking_recipe_cache = list()
 	// the result proc needs to check the list for procedural products.
 	var/list/used_ingredients = list(
 		"items"    = list(),
-		"fruit"    = list(),
+		"fruits"    = list(),
 		"reagents" = list()
 	)
 
