@@ -181,6 +181,8 @@
 
 	initialize_level_id()
 	SSmapping.register_level_data(src)
+	setup_ambient()
+	setup_exterior_atmosphere()
 	if(SSmapping.initialized && !defer_level_setup)
 		setup_level_data()
 
@@ -227,8 +229,6 @@
 		return //Since we can defer setup, make sure we only setup once
 
 	setup_level_bounds()
-	setup_ambient()
-	setup_exterior_atmosphere()
 	setup_strata()
 	if(!skip_gen)
 		generate_level()
@@ -556,7 +556,8 @@
 // Accessors
 //
 /datum/level_data/proc/get_exterior_atmosphere()
-	if(!exterior_atmosphere)
+	if(exterior_atmosphere && !istype(exterior_atmosphere))
+		PRINT_STACK_TRACE("Attempting to retrieve exterior atmosphere before it is set up!")
 		return
 	var/datum/gas_mixture/gas = new
 	gas.copy_from(exterior_atmosphere)
