@@ -95,7 +95,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 			devour(used_item)
 		return TRUE
 
-
 // Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.
 // Click parameters is the params string from byond Click() code, see that documentation.
 /obj/item/proc/afterattack(atom/target, mob/user, proximity_flag, click_parameters)

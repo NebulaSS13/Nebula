@@ -101,4 +101,4 @@
 	desc = "A G40E carbine, designed to kill with concentrated energy blasts. Uses removable energy cells."
 
 /obj/item/gun/energy/laser/reloadable/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
-	return ..(/obj/item/cell/gun, /obj/item/cell/gun, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/gun, /obj/item/cell/gun, /datum/extension/loaded_cell, charge_value)

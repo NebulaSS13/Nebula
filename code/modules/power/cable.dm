@@ -552,17 +552,15 @@ By design, d1 is the smallest direction and d2 is the highest
 
 //you can use wires to heal robotics
 /obj/item/stack/cable_coil/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if(ishuman(target) && user.a_intent == I_HELP)
-		var/mob/living/human/H = target
-		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, user.get_target_zone())
-		if(!S || !BP_IS_PROSTHETIC(S) || user.a_intent != I_HELP)
-			return ..()
-		if(BP_IS_BRITTLE(S))
-			to_chat(user, SPAN_WARNING("\The [H]'s [S.name] is hard and brittle - \the [src] cannot repair it."))
-			return TRUE
-		var/use_amt = min(src.amount, ceil(S.burn_dam/3), 5)
-		if(can_use(use_amt))
-			if(S.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))
+	var/obj/item/organ/external/affecting = istype(target) && GET_EXTERNAL_ORGAN(target, user?.get_target_zone())
+	if(affecting && user.a_intent == I_HELP)
+		if(!affecting.is_robotic())
+			to_chat(user, SPAN_WARNING("\The [target]'s [affecting.name] is not robotic. \The [src] cannot repair it."))
+		else if(BP_IS_BRITTLE(affecting))
+			to_chat(user, SPAN_WARNING("\The [target]'s [affecting.name] is hard and brittle. \The [src] cannot repair it."))
+		else
+			var/use_amt = min(src.amount, ceil(affecting.burn_dam/3), 5)
+			if(can_use(use_amt) && affecting.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))
 				use(use_amt)
 		return TRUE
 	return ..()
@@ -648,10 +646,10 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/item/stack/cable_coil/cyborg/can_merge_stacks(var/obj/item/stack/other)
 	return TRUE
 
-/obj/item/stack/cable_coil/transfer_to(obj/item/stack/cable_coil/S)
-	if(!istype(S))
+/obj/item/stack/cable_coil/transfer_to(obj/item/stack/cable_coil/coil)
+	if(!istype(coil))
 		return 0
-	if(!(can_merge_stacks(S) || S.can_merge_stacks(src)))
+	if(!(can_merge_stacks(coil) || coil.can_merge_stacks(src)))
 		return 0
 
 	return ..()
