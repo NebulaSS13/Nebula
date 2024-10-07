@@ -17,8 +17,6 @@
 		QDEL_NULL(hud_used)
 	if(active_storage)
 		active_storage.close(src)
-	if(istype(ability_master))
-		QDEL_NULL(ability_master)
 	if(istype(skillset))
 		QDEL_NULL(skillset)
 	QDEL_NULL_LIST(grabbed_by)
@@ -57,7 +55,6 @@
 	QDEL_NULL_SCREEN(radio_use_icon)
 	QDEL_NULL_SCREEN(gun_move_icon)
 	QDEL_NULL_SCREEN(gun_setting_icon)
-	QDEL_NULL_SCREEN(ability_master)
 	QDEL_NULL_SCREEN(zone_sel)
 
 /mob/Initialize()
@@ -68,7 +65,6 @@
 	if(!istype(move_intent))
 		move_intent = GET_DECL(move_intent)
 	. = ..()
-	ability_master = new(null, src)
 	refresh_ai_handler()
 	START_PROCESSING(SSmobs, src)
 
@@ -242,8 +238,6 @@
 	SHOULD_NOT_SLEEP(TRUE)
 	if(QDELETED(src))
 		return PROCESS_KILL
-	if(ability_master)
-		ability_master.update_spells(0)
 
 #define UNBUCKLED 0
 #define PARTIALLY_BUCKLED 1

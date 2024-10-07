@@ -32,6 +32,7 @@ to a list of globs matching files to forbid inclusion of.
 If a file matches any of the globs, validation fails.
 """
 FORBID_INCLUDE = {
+    r'mods/gamemodes/wizard': [r'mods/gamemodes/wizard/spells_archive/*.dm']
     # Example:
     # r'mods/content/whatever/_whatever.dme' : [r'mods/content/whatever/README.md', r'mods/content/whatever/something/something_docs.md']
 }
@@ -109,7 +110,6 @@ def validate_modpack(dme_path):
                 continue
 
             forbid_include = True
-
             if included:
                 print(f"{os.path.join(modpack_path,dm_path)} should not be included")
                 print(f"::error file={full_file},line=1,title=DME Validator::File should not be included")

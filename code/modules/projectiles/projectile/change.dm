@@ -55,12 +55,9 @@
 	var/mob/living/new_mob = apply_transformation(M, choice)
 	if(new_mob)
 		new_mob.a_intent = "hurt"
-		if(M.mind)
-			for (var/spell/S in M.mind.learned_spells)
-				new_mob.add_spell(new S.type)
-			new_mob.a_intent = "hurt"
-			transfer_key_from_mob_to_mob(M, new_mob)
-			to_chat(new_mob, "<span class='warning'>Your form morphs into that of \a [choice].</span>")
+		new_mob.copy_abilities_from(M)
+		transfer_key_from_mob_to_mob(M, new_mob)
+		to_chat(new_mob, "<span class='warning'>Your form morphs into that of \a [choice].</span>")
 	else
 		new_mob = M
 	if(new_mob)
@@ -68,4 +65,3 @@
 
 	if(new_mob != M && !QDELETED(M))
 		qdel(M)
-

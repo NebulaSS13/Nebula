@@ -4,9 +4,11 @@
 
 	adjust_source(3, L)
 	minions += L.mind
+/*
 	var/spell/construction/C = new()
-	L.add_spell(C)
-	C.set_connected_god(src)
+	L.add_ability(C)
+	C.set_connected_god(L, src)
+*/
 	if(form)
 		L.faction = form.faction
 	update_followers()
@@ -22,7 +24,7 @@
 		for(var/s in M.learned_spells)
 			var/spell/S = s
 			if(S.connected_god == src)
-				M.current.remove_spell(S)
+				M.current.remove_ability(S)
 				qdel(S)
 
 /mob/living/deity/proc/remove_follower(var/mob/living/L)

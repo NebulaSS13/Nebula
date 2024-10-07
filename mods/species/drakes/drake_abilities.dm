@@ -1,4 +1,5 @@
 /datum/ability_handler/predator/grafadreka
+	ability_category_tag = "drake_abilities"
 	var/spit_projectile_type = /obj/item/projectile/drake_spit
 	var/next_spit = 0
 

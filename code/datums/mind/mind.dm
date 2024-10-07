@@ -78,9 +78,7 @@
 
 /datum/mind/proc/handle_mob_deletion(mob/living/deleted_mob)
 	if (current == deleted_mob)
-		current.spellremove()
 		current = null
-
 	if (original == deleted_mob)
 		original = null
 
@@ -91,6 +89,8 @@
 		if(current?.mind == src)
 			current.mind = null
 		SSnano.user_transferred(current, new_character) // transfer active NanoUI instances to new user
+		if(istype(current)) // exclude new_players and observers
+			current.copy_abilities_to(new_character)
 	if(new_character.mind)		//remove any mind currently in our new body's mind variable
 		new_character.mind.current = null
 
@@ -98,9 +98,6 @@
 
 	current = new_character		//link ourself to our new body
 	new_character.mind = src	//and link our new body to ourself
-
-	if(learned_spells && learned_spells.len)
-		restore_spells(new_character)
 
 	if(active)
 		new_character.key = key		//now transfer the key to link the client to our new body

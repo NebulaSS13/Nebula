@@ -5,6 +5,7 @@
 	#endif
 
 	#include "../../mods/gamemodes/cult/_cult.dme"
+	#include "../../mods/gamemodes/wizard/_wizard.dme"
 	#include "../../mods/gamemodes/heist/_heist.dme"
 	#include "../../mods/gamemodes/ninja/_ninja.dme"
 	#include "../../mods/gamemodes/revolution/_revolution.dme"

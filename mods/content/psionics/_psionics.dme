@@ -9,7 +9,6 @@
 #include "datum\jobs.dm"
 #include "datum\mind.dm"
 #include "datum\security_state.dm"
-#include "datum\spells.dm"
 #include "datum\surgery.dm"
 #include "datum\uplink.dm"
 #include "datum\antagonists\foundation.dm"

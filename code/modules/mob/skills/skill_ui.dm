@@ -122,13 +122,20 @@ The generic antag version.
 	. = ..()
 	.["can_choose"] = can_choose()
 	var/list/selection_data = list()
-	var/decl/skill/skill = GET_DECL(/decl/skill)
+	var/decl/skill/sample_skill // just used to get the skill level names
+	for(var/candidate_skill_type in skillset.skill_list)
+		var/decl/skill/candidate = GET_DECL(candidate_skill_type)
+		if(length(candidate.levels) == SKILL_MAX) // find a skill with all the levels, so avoid perks/traits
+			sample_skill = candidate
+			break
+	if(!sample_skill)
+		sample_skill = GET_DECL(/decl/skill/general/hauling)
 	for(var/i in 1 to length(max_choices))
 		var/choices = max_choices[i]
 		if(!choices)
 			continue
 		var/list/level_data = list()
-		level_data["name"] = skill.levels[i]
+		level_data["name"] = sample_skill.levels[i]
 		level_data["level"] = i
 		var/selected = LAZYACCESS(currently_selected, i)
 		level_data["selected"] = list()

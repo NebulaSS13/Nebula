@@ -42,8 +42,8 @@
 		if(istype(S, spell.type))
 			to_chat(src, SPAN_WARNING("They already know that spell!"))
 			return 0
-	target.add_spell(spell)
-	spell.set_connected_god(src)
+	target.add_ability(spell)
+	spell.set_connected_god(target, src)
 	to_chat(target, SPAN_NOTICE("You feel a surge of power as you learn the art of [current_boon]."))
 	return 1
 

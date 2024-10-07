@@ -1,4 +1,3 @@
-
 /client/proc/view_var_Topic(href, href_list, hsrc)
 	//This should all be moved over to datum/admins/Topic() or something ~Carn
 	if( (usr.client != src) || !src.holder )
@@ -96,17 +95,6 @@
 
 		src.holder.show_player_panel(victim)
 		href_list["datumrefresh"] = href_list["mob_player_panel"]
-
-	else if(href_list["give_spell"])
-		if(!check_rights(R_ADMIN|R_FUN))	return
-
-		var/mob/victim = locate(href_list["give_spell"])
-		if(!istype(victim))
-			to_chat(usr, "This can only be used on instances of type /mob")
-			return
-
-		src.give_spell(victim)
-		href_list["datumrefresh"] = href_list["give_spell"]
 
 	else if(href_list["godmode"])
 		if(!check_rights(R_REJUVENATE))	return

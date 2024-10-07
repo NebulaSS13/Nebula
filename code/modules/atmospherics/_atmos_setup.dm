@@ -16,10 +16,10 @@ var/global/list/pipe_colors = list(
 	"orange" = PIPE_COLOR_ORANGE,
 	"white" = PIPE_COLOR_WHITE)
 
-/proc/pipe_color_check(var/color)
+/obj/machinery/atmospherics/proc/pipe_color_check(var/color)
 	if(!color)
-		return 1
+		return TRUE
 	for(var/C in pipe_colors)
 		if(color == pipe_colors[C])
-			return 1
-	return 0
+			return TRUE
+	return FALSE

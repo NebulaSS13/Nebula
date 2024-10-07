@@ -27,6 +27,11 @@
 	. = ..()
 	add_filter("glow",1, list(type = "drop_shadow", x = 0, y = 0, offset = 0, size = 4))
 
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/pipe_color_check(var/color)
+	if (color == initial(pipe_color))
+		return TRUE
+	return FALSE
+
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
 	. = ..()
 	initialize_directions_he = get_initialize_directions()	// all directions are HE

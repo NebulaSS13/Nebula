@@ -26,7 +26,7 @@
 	category = DEITY_TREE_DARK_MINION
 	requirements = list(DEITY_TREE_DARK_MINION = 1)
 	base_cost = 100
-	boon_path = /spell/tear_veil
+	boon_path = /decl/ability/deity/tear_veil
 
 /datum/deity_item/phenomena/hellscape
 	name = "Phenomena: Reveal Hellscape"

@@ -1,4 +1,4 @@
-/spell/aoe_turf/disable_tech/starlight
+/decl/ability/deity/aoe_turf/disable_tech/starlight
 	hidden_from_codex = TRUE
-	charge_max = 600
-	spell_flags = 0
+	cooldown_time = 60 SECONDS
+	requires_wizard_garb = FALSE

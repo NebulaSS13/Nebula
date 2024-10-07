@@ -35,9 +35,9 @@ They sell generic supplies and ask for generic supplies.
 		/obj/item/modular_computer/pda             = TRADER_BLACKLIST_SUB,
 		/obj/item/uplink                           = TRADER_BLACKLIST
 	)
+
 	possible_trading_items = list(
 		/obj/item/bag                              = TRADER_SUBTYPES_ONLY,
-		/obj/item/bag/cash/infinite                = TRADER_BLACKLIST,
 		/obj/item/backpack                         = TRADER_ALL,
 		/obj/item/backpack/cultpack                = TRADER_BLACKLIST,
 		/obj/item/backpack/holding                 = TRADER_BLACKLIST,
@@ -59,9 +59,9 @@ They sell generic supplies and ask for generic supplies.
 		/obj/item/clothing/glasses                 = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/glasses/hud             = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/glasses/blindfold/tape  = TRADER_BLACKLIST,
-		/obj/item/clothing/glasses/chameleon       = TRADER_BLACKLIST
+		/obj/item/clothing/glasses/chameleon       = TRADER_BLACKLIST,
+		/obj/item/bag/cash/infinite                = TRADER_BLACKLIST
 	)
-
 	insult_drop = 0
 	compliment_increase = 0
 

@@ -53,7 +53,7 @@
 		qdel(dirt)
 	return TRUE
 
-/turf/proc/get_dirt(amount)
+/turf/proc/get_dirt()
 	if(!simulated)
 		return 0
 	var/obj/effect/decal/cleanable/dirt/dirt = locate() in src

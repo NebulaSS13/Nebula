@@ -103,10 +103,7 @@
 		"Beyond the Veil",
 		"Deadverse"
 	)
-
 	possible_wanted_items = list(
-		/mob/living/simple_animal/familiar               = TRADER_SUBTYPES_ONLY,
-		/mob/living/simple_animal/familiar/pet           = TRADER_BLACKLIST,
 		/mob/living/simple_animal/hostile/mimic          = TRADER_ALL
 	)
 	possible_trading_items = list(

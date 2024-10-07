@@ -1,6 +1,8 @@
 /decl/material/liquid/crystal_agent/do_material_check(var/mob/living/M)
+#ifdef GAMEMODE_PACK_WIZARD
 	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 	. = (M.get_ability_handler(/datum/ability_handler/psionics) || (M.mind && wizards.is_antagonist(M.mind))) ? MAT_NULLGLASS : ..()
+#endif
 
 /decl/material/liquid/glowsap/gleam/affect_overdose(mob/living/M, total_dose)
 	..()
@@ -13,9 +15,7 @@
 	required_reagents = list(/decl/material/liquid/blood = 15, /decl/material/liquid/crystal_agent = 1)
 	result_amount = 1
 
-// TODO: #if defined(GAMEMODE_PACK_CULT) && defined(GAMEMODE_PACK_WIZARD)
-// once wizard is modpacked
-#ifdef GAMEMODE_PACK_CULT
+#if defined(GAMEMODE_PACK_CULT) && defined(GAMEMODE_PACK_WIZARD)
 /decl/chemical_reaction/synthesis/nullglass/get_alternate_reaction_indicator(var/datum/reagents/holder)
 	var/list/blood_data = REAGENT_DATA(holder, /decl/material/liquid/blood)
 	var/weakref/donor_ref = LAZYACCESS(blood_data, "donor")
