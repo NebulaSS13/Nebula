@@ -9,7 +9,6 @@
 	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
 	max_uses   = 11
 
-	spells = list(
 /*
 		/spell/targeted/ethereal_jaunt              = 1,
 		/spell/aoe_turf/blink                       = 1,
@@ -25,12 +24,13 @@
 		/spell/aoe_turf/smoke                       = 1,
 		/spell/aoe_turf/conjure/summon/bats         = 3,
 		/spell/noclothes                            = 1,
+//		/obj/item/summoning_stone                   = 3,
 */
+	spells = list(
 		/obj/item/dice/d20/cursed                   = 1,
 		/obj/structure/closet/wizard/scrying        = 2,
 		/obj/item/paper/scroll/teleportation        = 1,
 		/obj/item/magic_rock                        = 1,
-//		/obj/item/summoning_stone                   = 3,
 		/obj/item/paper/contract/wizard/telepathy   = 1,
 		/obj/item/paper/contract/apprentice         = 1
 	)

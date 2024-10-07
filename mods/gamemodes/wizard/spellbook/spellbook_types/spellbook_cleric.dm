@@ -9,7 +9,6 @@
 	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
 	max_uses   = 7
 
-	spells = list(
 /*
 		/spell/targeted/heal_target/major            = 1,
 		/spell/targeted/heal_target/area             = 1,
@@ -18,9 +17,6 @@
 		/spell/targeted/shapeshift/baleful_polymorph = 1,
 		/spell/targeted/projectile/dumbfire/stuncuff = 1,
 		/spell/targeted/ethereal_jaunt               = 2,
-*/
-		/decl/ability/wizard/knock                   = 1,
-/*
 		/spell/aoe_turf/knock                        = 1,
 		/spell/radiant_aura                          = 1,
 		/spell/targeted/equip_item/holy_relic        = 1,
@@ -30,10 +26,12 @@
 		/spell/portal_teleport                       = 2,
 		/spell/aoe_turf/conjure/forcewall            = 1,
 		/spell/noclothes                             = 1,
+//		/obj/item/summoning_stone                    = 2,
 */
+	spells = list(
+		/decl/ability/wizard/knock                   = 1,
 		/obj/item/magic_rock                         = 1,
 		/obj/structure/closet/wizard/scrying         = 2,
-//		/obj/item/summoning_stone                    = 2,
 		/obj/item/paper/contract/wizard/telepathy    = 1,
 		/obj/item/paper/contract/apprentice          = 1
 	)

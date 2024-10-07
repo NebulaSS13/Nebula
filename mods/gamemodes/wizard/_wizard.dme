@@ -16,8 +16,8 @@
 #include "wizard_base.dm"
 #include "wizard_clothes.dm"
 #include "wizard_props.dm"
-#include "spellbook\spellbook_subtypes.dm"
 #include "spellbook\spellbook.dm"
+#include "spellbook\spellbook_subtypes.dm"
 #include "spellbook\spellbook_types\_spellbook_type.dm"
 #include "spellbook\spellbook_types\spellbook_battlemage.dm"
 #include "spellbook\spellbook_types\spellbook_cleric.dm"
@@ -25,8 +25,15 @@
 #include "spellbook\spellbook_types\spellbook_spatial.dm"
 #include "spellbook\spellbook_types\spellbook_standard.dm"
 #include "spellbook\spellbook_types\spellbook_student.dm"
-#include "spells\_spell_handler.dm"
 #include "spells\_spell.dm"
+#include "spells\_spell_handler.dm"
 #include "spells\knock.dm"
 // END_INCLUDE
 #endif
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES

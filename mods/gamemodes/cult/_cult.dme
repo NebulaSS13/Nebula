@@ -26,11 +26,11 @@
 #include "structures.dm"
 #include "talisman.dm"
 #include "wizard.dm"
-#include "cultify\de-cultify.dm"
 #include "abilities\_handler.dm"
 #include "abilities\construct.dm"
 #include "abilities\harvest.dm"
 #include "abilities\shade.dm"
+#include "cultify\de-cultify.dm"
 #include "cultify\defile.dm"
 #include "cultify\mob.dm"
 #include "cultify\turf.dm"
@@ -40,3 +40,10 @@
 #include "mobs\constructs\soulstone.dm"
 // END_INCLUDE
 #endif
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES

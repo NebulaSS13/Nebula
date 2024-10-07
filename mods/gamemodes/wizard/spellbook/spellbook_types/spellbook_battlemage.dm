@@ -10,7 +10,6 @@
 	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
 	max_uses   = 6
 
-	spells = list(
 	/*
 		/spell/targeted/projectile/dumbfire/passage  = 1,
 		/spell/targeted/equip_item/dyrnwyn           = 1,
@@ -20,14 +19,15 @@
 		/spell/targeted/heal_target                  = 2,
 		/spell/aoe_turf/conjure/mirage               = 1,
 		/spell/targeted/shapeshift/corrupt_form      = 1,
-		/decl/ability/wizard/radiant_aura             = 1,
+		/decl/ability/wizard/radiant_aura            = 1,
 		/spell/noclothes                             = 1,
+//		/obj/item/summoning_stone                    = 2,
 	*/
+	spells = list(
 		/obj/structure/closet/wizard/armor           = 1,
 		/obj/item/gun/energy/staff/focus             = 1,
 		/obj/item/gun/energy/staff/fire              = 1,
 		/obj/item/dice/d20/cursed                    = 1,
-//		/obj/item/summoning_stone                    = 2,
 		/obj/item/magic_rock                         = 1,
 		/obj/item/paper/contract/wizard/xray         = 1,
 		/obj/item/paper/contract/wizard/telepathy    = 1,

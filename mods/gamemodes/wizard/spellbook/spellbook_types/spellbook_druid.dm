@@ -9,7 +9,6 @@
 	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
 	max_uses   = 6
 
-	spells = list(
 /*
 		/spell/targeted/heal_target               = 1,
 		/spell/targeted/heal_target/sacrifice     = 1,
@@ -26,10 +25,11 @@
 		/spell/area_teleport                      = 2,
 		/spell/portal_teleport                    = 2,
 		/spell/noclothes                          = 1,
+//		/obj/item/summoning_stone                 = 2,
 */
+	spells = list(
 		/decl/ability/wizard/knock                = 1,
 		/obj/item/magic_rock                      = 1,
-//		/obj/item/summoning_stone                 = 2,
 		/obj/item/paper/contract/wizard/telepathy = 1,
 		/obj/item/paper/contract/apprentice       = 1
 	)
