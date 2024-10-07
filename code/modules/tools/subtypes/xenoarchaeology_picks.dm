@@ -46,7 +46,7 @@
 	material          = /decl/material/solid/organic/wood
 	matter            = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	excavation_amount = 1
-	excavation_sound  = 'sound/weapons/thudswoosh.ogg'
+	excavation_sound  = "sweeping"
 	excavation_verb   = "brushing"
 
 /obj/item/tool/xeno/one_pick

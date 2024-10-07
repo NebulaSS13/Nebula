@@ -16,3 +16,7 @@
 
 /obj/item/utensil/spoon/plastic
 	material = /decl/material/solid/organic/plastic
+
+/obj/item/utensil/spoon/wood
+	material = /decl/material/solid/organic/wood
+	color = /decl/material/solid/organic/wood::color

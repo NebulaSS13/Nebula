@@ -2,3 +2,11 @@
 foley/meat1.ogg - Obtained from https://freesound.org/people/MWLANDI/sounds/85846
 foley/meat2.ogg - Obtained from https://freesound.org/people/MWLANDI/sounds/85845
 foley/metal1.ogg - Obtained from https://freesound.org/people/Debsound/sounds/168822
+// CC BY 3.0
+foley/sweeping1.ogg - Remixed from Sweeping noises.wav by BruceFenn_190335 -- https://freesound.org/s/541329/ -- License: Attribution 3.0
+foley/sweeping2.ogg - Remixed from Sweeping noises.wav by BruceFenn_190335 -- https://freesound.org/s/541329/ -- License: Attribution 3.0
+foley/sweeping3.ogg - Remixed from Sweeping noises.wav by BruceFenn_190335 -- https://freesound.org/s/541329/ -- License: Attribution 3.0
+foley/sweeping4.ogg - Remixed from Sweeping noises.wav by BruceFenn_190335 -- https://freesound.org/s/541329/ -- License: Attribution 3.0
+foley/sweeping5.ogg - Remixed from Sweeping noises.wav by BruceFenn_190335 -- https://freesound.org/s/541329/ -- License: Attribution 3.0
+foley/sweeping6.ogg - Remixed from Sweeping noises.wav by BruceFenn_190335 -- https://freesound.org/s/541329/ -- License: Attribution 3.0
+foley/sweeping7.ogg - Remixed from Sweeping noises.wav by BruceFenn_190335 -- https://freesound.org/s/541329/ -- License: Attribution 3.0

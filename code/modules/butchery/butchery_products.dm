@@ -164,6 +164,12 @@
 	slice_path          = null
 	slice_num           = null
 
+/obj/item/food/butchery/offal/beef
+	meat_name           = "beef"
+
+/obj/item/food/butchery/offal/small/beef
+	meat_name           = "beef"
+
 /obj/item/food/butchery/haunch
 	name                = "haunch"
 	desc                = "A severed leg of some unfortunate beast, cleaned and ready for cooking."
@@ -192,8 +198,14 @@
 		var/decl/material/fat = GET_DECL(fat_material)
 		add_overlay(overlay_image(icon, "[icon_state]-fat", fat.color, RESET_COLOR))
 
+/obj/item/food/butchery/haunch/beef
+	meat_name           = "beef"
+
 /obj/item/food/butchery/haunch/shoulder
 	name                = "shoulder"
+
+/obj/item/food/butchery/haunch/shoulder/beef
+	meat_name           = "beef"
 
 /obj/item/food/butchery/haunch/side
 	name                = "side of meat"
@@ -209,6 +221,9 @@
 /obj/item/food/butchery/haunch/side/set_meat_name(new_meat_name)
 	meat_name = new_meat_name
 	SetName("side of [new_meat_name]")
+
+/obj/item/food/butchery/haunch/side/beef
+	meat_name           = "beef"
 
 // TODO: unify with organ/internal/stomach?
 /obj/item/food/butchery/stomach

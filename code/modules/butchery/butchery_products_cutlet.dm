@@ -22,3 +22,7 @@
 	dried_type                     = /obj/item/food/jerky/cutlet
 	nutriment_amt                  = 2
 	material_alteration            = MAT_FLAG_ALTERATION_COLOR
+
+/obj/item/food/butchery/cutlet/raw/beef
+	meat_name                      = "beef"
+	desc                           = "A thin piece of raw beef."

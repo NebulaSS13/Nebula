@@ -143,13 +143,17 @@
 	color = /decl/material/solid/organic/wood/ebony::color
 
 /obj/structure/banner_frame/wall/ebony/red
+	banner = /obj/item/banner/red
 	color = /obj/item/banner/red::color // Mapping preview colour.
 
 /obj/structure/banner_frame/wall/ebony/blue
+	banner = /obj/item/banner/blue
 	color = /obj/item/banner/blue::color
 
 /obj/structure/banner_frame/wall/ebony/green
+	banner = /obj/item/banner/green
 	color = /obj/item/banner/green::color
 
 /obj/structure/banner_frame/wall/ebony/woven
+	banner = /obj/item/banner/woven
 	color = /obj/item/banner/woven::color

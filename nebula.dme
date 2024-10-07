@@ -1596,6 +1596,8 @@
 #include "code\game\turfs\floors\subtypes\floor_static.dm"
 #include "code\game\turfs\floors\subtypes\floor_tiled.dm"
 #include "code\game\turfs\floors\subtypes\floor_wood.dm"
+#include "code\game\turfs\initialization\combo.dm"
+#include "code\game\turfs\initialization\indoors.dm"
 #include "code\game\turfs\initialization\init.dm"
 #include "code\game\turfs\initialization\maintenance.dm"
 #include "code\game\turfs\open\_open.dm"

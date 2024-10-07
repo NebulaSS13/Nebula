@@ -487,7 +487,7 @@
 
 /obj/structure/fire_source/CanPass(atom/movable/mover, turf/target, height, air_group)
 	. = ..()
-	if(lit && ismob(mover))
+	if(. && lit && ismob(mover))
 		var/mob/M = mover
 		if(!MOVING_QUICKLY(M))
 			to_chat(M, SPAN_WARNING("You refrain from stepping into \the [src]."))

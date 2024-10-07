@@ -93,6 +93,15 @@
 
 	update_icon()
 
+/obj/structure/bed/chair/bench/proc/get_material_icon()
+	return material?.bench_icon
+
+/obj/structure/bed/chair/bench/update_materials()
+	. = ..()
+	var/icon/material_icon = get_material_icon()
+	if(material_icon)
+		icon = material_icon
+
 /obj/structure/bed/chair/bench/mahogany
 	color = WOOD_COLOR_RICH
 	material = /decl/material/solid/organic/wood/mahogany
@@ -108,6 +117,9 @@
 	icon_state = "pew_standing"
 	base_icon = "pew"
 
+/obj/structure/bed/chair/bench/pew/get_material_icon()
+	return material?.pew_icon
+
 /obj/structure/bed/chair/bench/pew/single
 	name = "backed chair"
 	desc = "A tall chair with a sturdy back. Not very comfortable."
@@ -115,5 +127,9 @@
 	connect_neighbors = FALSE
 
 /obj/structure/bed/chair/bench/pew/mahogany
-	color = WOOD_COLOR_RICH
+	color    = /decl/material/solid/organic/wood/mahogany::color
 	material = /decl/material/solid/organic/wood/mahogany
+
+/obj/structure/bed/chair/bench/pew/ebony
+	color    = /decl/material/solid/organic/wood/ebony::color
+	material = /decl/material/solid/organic/wood/ebony

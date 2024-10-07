@@ -2,7 +2,7 @@
 	name               = "shovel"
 	desc               = "A large tool for digging and moving dirt."
 	icon               = 'icons/obj/items/tool/shovels/shovel.dmi'
-	icon_state         = ICON_STATE_WORLD
+	icon_state         = "preview" // mapping preview icon
 	slot_flags         = SLOT_LOWER_BODY
 	w_class            = ITEM_SIZE_HUGE
 	edge               = TRUE
@@ -19,7 +19,13 @@
 	return tool_qualities
 
 /obj/item/tool/shovel/wood
+	color    = /decl/material/solid/organic/wood::color
 	material = /decl/material/solid/organic/wood
+
+/obj/item/tool/shovel/wood/walnut
+	color    = /decl/material/solid/organic/wood/walnut::color
+	handle_material = /decl/material/solid/organic/wood/walnut
+	material = /decl/material/solid/organic/wood/walnut
 
 /obj/item/tool/shovel/one_material/Initialize(ml, material_key, _handle_material, _binding_material, override_tool_qualities, override_tool_properties)
 	return ..(ml, material_key, material_key, _binding_material, override_tool_qualities, override_tool_properties)
@@ -28,7 +34,7 @@
 	name                = "spade"
 	desc                = "A small tool for digging and moving dirt."
 	icon                = 'icons/obj/items/tool/shovels/spade.dmi'
-	icon_state          = ICON_STATE_WORLD
+	icon_state          = "preview" // mapping preview icon
 	w_class             = ITEM_SIZE_SMALL
 	edge                = FALSE
 	sharp               = FALSE
