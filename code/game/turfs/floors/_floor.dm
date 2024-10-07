@@ -60,8 +60,15 @@
 						target_turf.update_icon()
 			update_icon()
 
+/turf/floor/ChangeTurf(turf/N, tell_universe, force_lighting_update, keep_air, update_open_turfs_above, keep_height)
+	if(is_processing)
+		STOP_PROCESSING(SSobj, src)
+	. = ..()
+
 /turf/floor/Destroy()
 	set_flooring(null)
+	if(is_processing)
+		STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /turf/floor/can_climb_from_below(var/mob/climber)
@@ -145,9 +152,14 @@
 		set_floor_broken(skip_update = TRUE)
 		set_floor_burned()
 
+	else if(is_processing)
+
+		STOP_PROCESSING(SSobj, src)
+
 	_flooring = newflooring
 	floor_icon_state_override = null
 	update_from_flooring(skip_update)
+
 	return TRUE
 
 /turf/floor/proc/update_from_flooring(skip_update)
