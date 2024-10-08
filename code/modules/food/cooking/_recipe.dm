@@ -189,7 +189,8 @@ var/global/list/_cooking_recipe_cache = list()
 		if(contained_atoms)
 			contained_atoms -= produced
 			for(var/obj/O in contained_atoms)
-				O.reagents.trans_to_obj(produced, O.reagents.total_volume)
+				if(O.reagents)
+					O.reagents.trans_to_obj(produced, O.reagents.total_volume)
 				qdel(O)
 		return produced
 
@@ -211,11 +212,11 @@ var/global/list/_cooking_recipe_cache = list()
 	return new result(container)
 
 /// Return a data list to pass to a reagent creation proc. Allows for overriding/mutation based on ingredients.
-/// Actually place or create the result of the recipe. Returns the produced item, or the container for reagents.
 /decl/recipe/proc/get_result_data(atom/container, list/used_ingredients)
 	return result_data
 
 // food-related
+/// Actually place or create the result of the recipe. Returns the produced item(s), or null if only reagents were produced.
 /decl/recipe/proc/produce_result(obj/container)
 
 	/*
@@ -229,7 +230,7 @@ var/global/list/_cooking_recipe_cache = list()
 	// the result proc needs to check the list for procedural products.
 	var/list/used_ingredients = list(
 		"items"    = list(),
-		"fruit"    = list(),
+		"fruits"    = list(),
 		"reagents" = list()
 	)
 
@@ -256,8 +257,9 @@ var/global/list/_cooking_recipe_cache = list()
 				continue
 			for(var/item_count in 1 to max(1, items[item_type]))
 				var/obj/item/item = locate(item_type) in container_contents
-				container_contents -= item
-				used_ingredients["items"] += item
+				if(item)
+					container_contents -= item
+					used_ingredients["items"] += item
 
 	// Find fruits that we need.
 	if(LAZYLEN(fruit))

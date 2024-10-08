@@ -6,10 +6,10 @@
 	result = /obj/item/food/tossedsalad
 
 /decl/recipe/tossed/aesirsalad
-	fruit = list("goldapple" = 1, "biteleafdeus" = 1)
+	fruit = list("goldapple" = 1, "ambrosiadeus" = 1)
 	result = /obj/item/food/aesirsalad
 
 /decl/recipe/tossed/validsalad
-	fruit = list("potato" = 1, "biteleaf" = 3)
+	fruit = list("potato" = 1, "ambrosiavulgaris" = 3)
 	items = list(/obj/item/food/meatball)
 	result = /obj/item/food/validsalad
