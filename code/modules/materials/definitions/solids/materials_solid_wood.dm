@@ -16,6 +16,7 @@
 		'icons/turf/walls/log.dmi' = TRUE,
 		'icons/turf/walls/metal.dmi' = TRUE
 	)
+	table_icon_base = "wood"
 	bench_icon = 'icons/obj/structures/wood_benches.dmi'
 	pew_icon = 'icons/obj/structures/wood_pews.dmi'
 	explosion_resistance = 2
