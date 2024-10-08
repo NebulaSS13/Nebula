@@ -16,7 +16,7 @@
 	return _genetic_conditions
 
 /mob/living/can_have_genetic_conditions()
-	return !(get_bodytype()?.body_flags & BODY_FLAG_NO_DNA)
+	return has_genetic_information()
 
 /mob/living/has_genetic_condition(condition_type)
 	if(!LAZYLEN(_genetic_conditions))

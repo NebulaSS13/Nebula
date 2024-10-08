@@ -595,7 +595,7 @@ var/global/list/bodytypes_by_category = list()
 				qdel(O)
 
 	//Create missing limbs
-	var/datum/mob_snapshot/supplied_data = H.get_mob_snapshot(force = TRUE)
+	var/datum/mob_snapshot/supplied_data = H.get_mob_snapshot()
 	supplied_data.root_bodytype = src // This may not have been set on the target mob torso yet.
 
 	for(var/limb_type in has_limbs)
@@ -722,7 +722,7 @@ var/global/list/bodytypes_by_category = list()
 			qdel(innard)
 
 	// Install any necessary new organs.
-	var/datum/mob_snapshot/supplied_data = limb.owner.get_mob_snapshot(force = TRUE)
+	var/datum/mob_snapshot/supplied_data = limb.owner.get_mob_snapshot()
 	supplied_data.root_bodytype = src
 	for(var/organ_tag in replacing_organs)
 		var/organ_type = replacing_organs[organ_tag]

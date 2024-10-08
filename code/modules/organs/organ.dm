@@ -93,11 +93,10 @@
 		// this can be fine if appearance data with species is passed
 		log_debug("obj/item/organ/setup(): [src] had null bodytype, with an owner with null bodytype!")
 	bodytype = new_bodytype // used in later setup procs
-	if((bodytype?.body_flags & BODY_FLAG_NO_DNA) || !supplied_appearance)
-		// set_bodytype will unset invalid appearance data anyway, so set_dna(null) is unnecessary
-		set_species(owner?.get_species() || global.using_map.default_species)
-	else
+	if(supplied_appearance)
 		copy_from_mob_snapshot(supplied_appearance)
+	else
+		set_species(owner?.get_species() || global.using_map.default_species)
 
 //Called on initialization to add the neccessary reagents
 
@@ -116,9 +115,6 @@
 		add_to_reagents(reagent_to_add, reagents.maximum_volume)
 
 /obj/item/organ/proc/copy_from_mob_snapshot(var/datum/mob_snapshot/supplied_appearance)
-	if(istype(bodytype) && (bodytype.body_flags & BODY_FLAG_NO_DNA))
-		QDEL_NULL(organ_appearance)
-		return
 	if(supplied_appearance != organ_appearance) // Hacky. Is this ever used? Do any organs ever have DNA set before setup_as_organic?
 		QDEL_NULL(organ_appearance)
 		organ_appearance = supplied_appearance.Clone()
@@ -152,8 +148,6 @@
 	if(reagents)
 		reagents.clear_reagents()
 		populate_reagents()
-	if(bodytype.body_flags & BODY_FLAG_NO_DNA)
-		QDEL_NULL(organ_appearance)
 	reset_status()
 	return TRUE
 

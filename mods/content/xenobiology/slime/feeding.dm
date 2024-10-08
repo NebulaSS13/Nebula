@@ -21,12 +21,15 @@
 		if(!silent)
 			to_chat(src, SPAN_WARNING("\The [M] is protected from your feeding."))
 		return FEED_RESULT_INVALID
-	if(ishuman(M))
-		var/mob/living/human/H = M
-		if((H.species.species_flags & SPECIES_FLAG_NO_POISON) || (H.get_bodytype()?.body_flags & BODY_FLAG_NO_DNA))
-			if(!silent)
-				to_chat(src, SPAN_WARNING("You cannot feed on \the [M]."))
-			return FEED_RESULT_INVALID
+	if(!M.has_genetic_information())
+		if(!silent)
+			to_chat(src, SPAN_WARNING("You cannot feed on \the [M]."))
+		return FEED_RESULT_INVALID
+	var/decl/species/prey_species = M.get_species()
+	if(istype(prey_species) && (prey_species.species_flags & SPECIES_FLAG_NO_POISON))
+		if(!silent)
+			to_chat(src, SPAN_WARNING("You cannot feed on \the [M]."))
+		return FEED_RESULT_INVALID
 	if(M.stat == DEAD)
 		if(!silent)
 			to_chat(src, SPAN_WARNING("\The [src] is dead."))
