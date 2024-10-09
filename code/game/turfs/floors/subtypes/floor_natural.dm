@@ -11,7 +11,7 @@
 	color = "#41311b"
 	_base_flooring = /decl/flooring/dirt
 
-/turf/floor/dirt/walnut
+/turf/floor/wood/walnut
 	name = "wooden floor"
 	icon = 'icons/turf/flooring/wood.dmi'
 	icon_state = "wood"

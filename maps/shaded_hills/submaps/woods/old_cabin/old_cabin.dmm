@@ -2,7 +2,7 @@
 "a" = (
 /obj/structure/door/walnut,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "h" = (
 /turf/template_noop,
@@ -13,17 +13,17 @@
 "k" = (
 /obj/structure/closet/crate/chest/ebony,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "o" = (
 /obj/structure/drying_rack/ebony,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "u" = (
 /obj/structure/reagent_dispensers/barrel/ebony/beer,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "x" = (
 /obj/structure/table/woodentable/ebony,
@@ -32,7 +32,7 @@
 /obj/item/rock/flint,
 /obj/item/rock/hematite,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "z" = (
 /obj/effect/spider/spiderling/mundane,
@@ -42,19 +42,19 @@
 	pixel_y = 24
 	},
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "B" = (
 /obj/effect/decal/cleanable/blood,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "D" = (
 /obj/effect/spider/spiderling/mundane,
 /obj/structure/table/woodentable/ebony,
 /obj/item/food/grown/carrot,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "G" = (
 /obj/abstract/exterior_marker/inside,
@@ -67,16 +67,16 @@
 /obj/item/food/grown/potato,
 /obj/item/food/grown/carrot,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "I" = (
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "L" = (
 /obj/effect/spider/spiderling/mundane,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "M" = (
 /obj/abstract/exterior_marker/inside,
@@ -85,7 +85,7 @@
 "N" = (
 /obj/structure/coatrack,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 "W" = (
 /obj/structure/wall_sconce/torch{
@@ -101,7 +101,7 @@
 /obj/effect/decal/cleanable/blood,
 /obj/random/jewelry,
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/old_cabin)
 
 (1,1,1) = {"

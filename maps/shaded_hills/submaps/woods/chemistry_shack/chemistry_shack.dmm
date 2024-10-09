@@ -4,7 +4,7 @@
 /obj/structure/door/walnut{
 	dir = 4
 	},
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "h" = (
 /obj/abstract/exterior_marker/inside,
@@ -40,12 +40,12 @@
 /obj/item/chems/cooking_vessel/pot/iron,
 /obj/item/chems/glass/handmade/teapot,
 /obj/abstract/landmark/organize/vertical,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "m" = (
 /obj/abstract/exterior_marker/inside,
 /obj/structure/reagent_dispensers/barrel/ebony/oil,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "n" = (
 /obj/structure/wall_sconce/lantern{
@@ -59,7 +59,7 @@
 /obj/structure/table/woodentable/ebony,
 /obj/item/chems/glass/mortar,
 /obj/item/rock/basalt,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "q" = (
 /obj/structure/drying_rack/ebony,
@@ -80,7 +80,7 @@
 "C" = (
 /obj/abstract/exterior_marker/inside,
 /obj/structure/door/walnut,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "F" = (
 /obj/abstract/exterior_marker/inside,
@@ -93,17 +93,17 @@
 "I" = (
 /obj/abstract/exterior_marker/inside,
 /obj/structure/reagent_dispensers/barrel/ebony/water,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "J" = (
 /obj/abstract/exterior_marker/inside,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "K" = (
 /obj/abstract/exterior_marker/inside,
 /obj/structure/bed/simple/ebony/cloth,
 /obj/item/bedsheet/furs,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "L" = (
 /obj/abstract/exterior_marker/inside,
@@ -114,12 +114,12 @@
 /obj/item/food/grown/carrot,
 /obj/item/food/grown/carrot,
 /obj/item/kitchen/rollingpin,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "M" = (
 /obj/abstract/exterior_marker/inside,
 /obj/structure/reagent_dispensers/barrel/ebony/wine,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "N" = (
 /obj/abstract/exterior_marker/inside,
@@ -129,7 +129,7 @@
 /obj/abstract/exterior_marker/inside,
 /obj/structure/closet/crate/chest/ebony,
 /obj/random/jewelry,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 "U" = (
 /obj/abstract/exterior_marker/inside,
@@ -159,7 +159,7 @@
 "Y" = (
 /obj/abstract/exterior_marker/inside,
 /obj/structure/fire_source/stove,
-/turf/floor/dirt/walnut,
+/turf/floor/wood/walnut,
 /area/shaded_hills/outside/point_of_interest/chemistry_shack)
 
 (1,1,1) = {"
