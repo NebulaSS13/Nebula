@@ -4,7 +4,7 @@
 	icon                      = 'icons/obj/structures/barrel.dmi'
 	icon_state                = ICON_STATE_WORLD
 	anchored                  = TRUE
-	atom_flags                = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
+	atom_flags                = ATOM_FLAG_CLIMBABLE
 	matter                    = null
 	material                  = /decl/material/solid/organic/wood
 	color                     = /decl/material/solid/organic/wood::color
