@@ -45,6 +45,18 @@
 		update_material_name("[initial(name)] of [primary_mat]")
 	else
 		update_material_name()
+	update_icon()
+
+/obj/structure/reagent_dispensers/barrel/on_update_icon()
+	. = ..()
+	if(ATOM_IS_OPEN_CONTAINER(src))
+		if(reagents)
+			var/overlay_amount = NONUNIT_CEILING(reagents.total_liquid_volume / reagents.maximum_volume * 100, 10)
+			var/image/filling_overlay = overlay_image(icon, "[icon_state]-[overlay_amount]", reagents.get_color(), RESET_COLOR | RESET_ALPHA)
+			add_overlay(filling_overlay)
+		add_overlay(overlay_image(icon, "[icon_state]-lidopen", material.color, RESET_COLOR))
+	else
+		add_overlay(overlay_image(icon, "[icon_state]-lidclosed", material.color, RESET_COLOR))
 
 /obj/structure/reagent_dispensers/barrel/ebony
 	material = /decl/material/solid/organic/wood/ebony
