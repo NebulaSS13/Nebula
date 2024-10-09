@@ -209,39 +209,37 @@
 	if(!istype(origin) || !istype(opponent))
 		return FALSE
 
-	. = FALSE
-	//is_wall is true for wall turfs and for floors containing a low wall
-	if(opponent.is_wall())
-		if(wall_smooth == SMOOTH_ALL)
-			. = TRUE
-	//If is_hole is true, then it's space or openspace
-	else if(opponent.is_open())
-		if(space_smooth == SMOOTH_ALL)
-			. = TRUE
-
-	//If we get here then its a normal floor
-	else if (istype(opponent, /turf/floor))
+	// Just a normal floor
+	if (istype(opponent, /turf/floor))
 		var/turf/floor/floor_opponent = opponent
 		var/decl/flooring/opponent_flooring = floor_opponent.get_topmost_flooring()
 		if (floor_smooth == SMOOTH_ALL)
-			. = TRUE
+			return TRUE
 		//If the floor is the same as us,then we're linked,
 		else if (istype(opponent_flooring, neighbour_type))
-			. = TRUE
+			return TRUE
 		//If we get here it must be using a whitelist or blacklist
 		else if (floor_smooth == SMOOTH_WHITELIST)
 			if (flooring_whitelist[opponent_flooring.type])
 				//Found a match on the typecache
-				. = TRUE
+				return TRUE
 		else if(floor_smooth == SMOOTH_BLACKLIST)
-			. = TRUE //Default to true for the blacklist, then make it false if a match comes up
-			if (flooring_blacklist[opponent_flooring.type])
-				//Found a match on the typecache
-				. = FALSE
+			if (flooring_blacklist[opponent_flooring.type]) {EMPTY_BLOCK_GUARD} else
+				//No match on the typecache
+				return TRUE
 		//Check for window frames.
-		if (!. && wall_smooth == SMOOTH_ALL)
+		if (wall_smooth == SMOOTH_ALL)
 			if(locate(/obj/structure/wall_frame) in opponent)
-				. = TRUE
+				return TRUE
+	// Wall turf
+	else if(opponent.is_wall())
+		if(wall_smooth == SMOOTH_ALL)
+			return TRUE
+	//If is_open is true, then it's space or openspace
+	else if(opponent.is_open())
+		if(space_smooth == SMOOTH_ALL)
+			return TRUE
+	return FALSE
 
 /decl/flooring/proc/symmetric_test_link(var/turf/A, var/turf/B)
 	return test_link(A, B) && test_link(B,A)
