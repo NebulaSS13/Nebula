@@ -3,6 +3,7 @@
 	desc               = "Comfy and fancy carpeting."
 	icon               = 'icons/turf/flooring/carpet.dmi'
 	icon_base          = "brown"
+	icon_edge_layer    = FLOOR_EDGE_CARPET
 	build_type         = /obj/item/stack/tile/carpet
 	damage_temperature = T0C+200
 	flooring_flags     = TURF_REMOVE_CROWBAR | TURF_CAN_BURN
