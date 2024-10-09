@@ -1720,7 +1720,8 @@
 	id_tag = "Armoury";
 	name = "Armoury Access";
 	pixel_x = -1;
-	pixel_y = -28
+	pixel_y = -28;
+	req_access = list("ACCESS_ARMORY")
 	},
 /turf/floor/tiled/dark,
 /area/exodus/security/armoury)
@@ -1944,7 +1945,8 @@
 	id_tag = "Armoury";
 	name = "Emergency Access";
 	pixel_x = -28;
-	pixel_y = 4
+	pixel_y = 4;
+	req_access = list("ACCESS_ARMORY")
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
@@ -7232,7 +7234,6 @@
 /area/exodus/solar/auxport)
 "apl" = (
 /obj/structure/cable,
-/obj/effect/engine_setup/smes,
 /obj/machinery/power/smes/buildable{
 	RCon_tag = "Engine - Main";
 	charge = 2.5e+005;
@@ -7242,6 +7243,7 @@
 	output_level = 1e+006;
 	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil/super_capacity = 4)
 	},
+/obj/effect/engine_setup/smes/main,
 /turf/floor/plating,
 /area/exodus/engineering/engine_smes)
 "apm" = (
@@ -10330,8 +10332,8 @@
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
-/obj/machinery/hologram/holopad,
 /obj/abstract/landmark/paperwork_finish_exodus,
+/obj/machinery/hologram/holopad/longrange,
 /turf/floor/tiled/steel_grid,
 /area/exodus/bridge)
 "avT" = (
@@ -10454,7 +10456,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/effect/engine_setup/smes,
+/obj/effect/engine_setup/smes/main,
 /turf/floor/plating,
 /area/exodus/engineering/engine_room)
 "awb" = (
@@ -35207,6 +35209,7 @@
 /area/exodus/maintenance/engineering)
 "bwJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
+/obj/machinery/hologram/holopad/longrange,
 /turf/floor/tiled/white,
 /area/ship/exodus_pod_research)
 "bwK" = (
@@ -38097,6 +38100,8 @@
 	c_tag = "Cargo Mining Dock";
 	dir = 1
 	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/ore_box,
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
 "bCy" = (
@@ -38687,8 +38692,8 @@
 /turf/floor/plating,
 /area/exodus/maintenance/research_port)
 "bDH" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/ore_box,
+/obj/machinery/mining/brace,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
 "bDI" = (
@@ -41482,6 +41487,7 @@
 /obj/effect/floor_decal/corner/brown/three_quarters{
 	dir = 8
 	},
+/obj/structure/ore_box,
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
 "bJa" = (
@@ -62763,6 +62769,7 @@
 /obj/structure/chair{
 	dir = 4
 	},
+/obj/machinery/hologram/holopad/longrange,
 /turf/floor/tiled/dark,
 /area/ship/exodus_pod_engineering)
 "cLm" = (
@@ -63123,9 +63130,7 @@
 /turf/floor/plating,
 /area/ship/exodus_pod_research)
 "cUO" = (
-/obj/machinery/light,
-/turf/floor/tiled/steel_grid,
-/area/exodus/quartermaster/miningdock)
+)
 "cYR" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
@@ -63779,6 +63784,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	dir = 4
 	},
+/obj/machinery/hologram/holopad/longrange,
 /turf/floor/tiled/steel_grid,
 /area/ship/exodus_pod_mining)
 "idY" = (
@@ -64096,6 +64102,12 @@
 	},
 /turf/floor/tiled/white,
 /area/ship/exodus_pod_research)
+"lHF" = (
+/obj/machinery/light,
+/obj/machinery/mining/drill,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/floor/tiled/steel_grid,
+/area/exodus/quartermaster/miningdock)
 "miB" = (
 /obj/structure/cable/green,
 /obj/machinery/ion_thruster{
@@ -83144,6 +83156,8 @@ cLU
 cLU
 cLU
 cLU
+cUO
+cUO
 "}
 (70,1,1) = {"
 cLU
@@ -86635,8 +86649,8 @@ bWo
 gdx
 jfD
 bPc
+bKK
 bCx
-bGt
 bGt
 cLU
 cLU
@@ -87406,8 +87420,8 @@ bGt
 bMj
 bJb
 buo
-cUO
-bGt
+bKK
+lHF
 bGt
 aaf
 cLU
