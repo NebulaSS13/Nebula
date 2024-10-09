@@ -861,7 +861,7 @@
 /obj/item/seeds/extracted/valerian,
 /obj/item/seeds/extracted/yarrow,
 /obj/item/seeds/extracted/yarrow,
-/obj/item/tool/shovel/wood/walnut,
+/obj/item/tool/hoe/wood/walnut,
 /turf/floor/dirt,
 /area/shaded_hills/outside/shrine)
 "Ay" = (
