@@ -110,11 +110,19 @@
 
 /turf/floor/proc/get_base_flooring()
 	RETURN_TYPE(/decl/flooring)
-	return istype(_base_flooring) ? _base_flooring : null
+	if(ispath(_base_flooring))
+		return GET_DECL(_base_flooring)
+	else if(istype(_base_flooring))
+		return _base_flooring
+	return null
 
 /turf/floor/proc/get_topmost_flooring()
 	RETURN_TYPE(/decl/flooring)
-	return istype(_flooring) ? _flooring : get_base_flooring()
+	if(ispath(_flooring))
+		return GET_DECL(_flooring)
+	else if(istype(_flooring))
+		return _flooring
+	return get_base_flooring()
 
 /turf/floor/proc/set_flooring(var/decl/flooring/newflooring, skip_update, place_product)
 
