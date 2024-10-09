@@ -42,9 +42,9 @@
 		return
 	var/primary_mat = reagents?.get_primary_reagent_name()
 	if(primary_mat)
-		SetName("[material.solid_name] [initial(name)] of [primary_mat]")
+		update_material_name("[initial(name)] of [primary_mat]")
 	else
-		SetName("[material.solid_name] [initial(name)]")
+		update_material_name()
 
 /obj/structure/reagent_dispensers/barrel/ebony
 	material = /decl/material/solid/organic/wood/ebony
