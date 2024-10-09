@@ -45,7 +45,7 @@
 		set_flooring(GET_DECL(floortype), skip_update = TRUE)
 
 	if(fill_reagent_type && get_physical_height() < 0)
-		add_to_reagents(fill_reagent_type, abs(height))
+		add_to_reagents(fill_reagent_type, abs(height), phase = MAT_PHASE_LIQUID)
 
 	if(floor_material || get_topmost_flooring())
 		if(ml)
@@ -112,17 +112,15 @@
 	RETURN_TYPE(/decl/flooring)
 	if(ispath(_base_flooring))
 		return GET_DECL(_base_flooring)
-	else if(istype(_base_flooring))
-		return _base_flooring
-	return null
+	return _base_flooring
 
 /turf/floor/proc/get_topmost_flooring()
 	RETURN_TYPE(/decl/flooring)
+	if(isnull(_flooring))
+		return get_base_flooring()
 	if(ispath(_flooring))
 		return GET_DECL(_flooring)
-	else if(istype(_flooring))
-		return _flooring
-	return get_base_flooring()
+	return _flooring
 
 /turf/floor/proc/set_flooring(var/decl/flooring/newflooring, skip_update, place_product)
 
