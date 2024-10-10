@@ -36,7 +36,7 @@
 /obj/structure/proc/update_material_name(var/override_name)
 	var/base_name = override_name || initial(name)
 	if(istype(material))
-		SetName("[material.solid_name] [base_name]")
+		SetName("[material.adjective_name] [base_name]")
 	else
 		SetName(base_name)
 
