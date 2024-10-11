@@ -4,6 +4,8 @@
 	nutriment_factor     = 4
 	hydration_factor     = 5 // Per removed amount each tick
 	glass_name           = "soup"
+	melting_point        = T0C // We assume soup is water-based by default and so it freezes at 0C.
+	boiling_point        = null // It kind of sucks for your soup to boil away honestly
 	var/mask_name_suffix = "soup"
 
 /decl/material/liquid/nutriment/soup/get_presentation_name(var/obj/item/prop)
