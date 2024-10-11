@@ -28,19 +28,21 @@
 
 	var/allergen_flags = ALLERGEN_NONE
 	var/list/ingredients = list()
+	var/new_fraction = newamount / REAGENT_VOLUME(reagents, type) // the fraction of the total reagent volume that the new data is associated with
+	var/old_fraction = 1 - new_fraction
 
 	. = ..()
 	if(islist(.) && length(.))
 		allergen_flags |= .["allergen_flags"]
 		var/list/old_ingredients = .["soup_ingredients"]
 		for(var/ingredient in old_ingredients)
-			ingredients[ingredient] += old_ingredients[ingredient]
+			ingredients[ingredient] += old_ingredients[ingredient] * old_fraction
 
 	if(islist(newdata) && length(newdata))
 		allergen_flags |= newdata["allergen_flags"]
 		var/list/new_ingredients = newdata["soup_ingredients"]
 		for(var/ingredient in new_ingredients)
-			ingredients[ingredient] += new_ingredients[ingredient]
+			ingredients[ingredient] += new_ingredients[ingredient] * new_fraction
 
 	if(length(ingredients))
 		ingredients = sortTim(ingredients, /proc/cmp_numeric_dsc, associative = TRUE)
