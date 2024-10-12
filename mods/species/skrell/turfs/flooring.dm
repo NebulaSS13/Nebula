@@ -1,27 +1,27 @@
 /turf/floor/tiled/skrell
 	icon = 'mods/species/skrell/icons/turf/skrellturf.dmi'
 	icon_state = "skrellblack"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell
+	_flooring = /decl/flooring/reinforced/shuttle/skrell
 
 /turf/floor/tiled/skrell/white
 	icon_state = "skrellwhite"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell/white
+	_flooring = /decl/flooring/reinforced/shuttle/skrell/white
 
 /turf/floor/tiled/skrell/red
 	icon_state = "skrellred"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell/red
+	_flooring = /decl/flooring/reinforced/shuttle/skrell/red
 
 /turf/floor/tiled/skrell/blue
 	icon_state = "skrellblue"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell/blue
+	_flooring = /decl/flooring/reinforced/shuttle/skrell/blue
 
 /turf/floor/tiled/skrell/orange
 	icon_state = "skrellorange"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell/orange
+	_flooring = /decl/flooring/reinforced/shuttle/skrell/orange
 
 /turf/floor/tiled/skrell/green
 	icon_state = "skrellgreen"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell/green
+	_flooring = /decl/flooring/reinforced/shuttle/skrell/green
 
 /////////////////////////////////////////////////////////////////////////
 
