@@ -1,13 +1,14 @@
 /obj/item/tool/hoe
-	name = "hoe"
-	desc = "It's used for removing weeds or scratching your back."
-	icon = 'icons/obj/items/tool/hoes/hoe.dmi'
-	icon_state = "preview"
-	sharp = TRUE
-	edge = TRUE
-	attack_verb = list("slashed", "sliced", "cut", "clawed")
-	material = /decl/material/solid/metal/steel
+	name                = "hoe"
+	desc                = "It's used for removing weeds or scratching your back."
+	icon                = 'icons/obj/items/tool/hoes/hoe.dmi'
+	icon_state          = "preview"
+	sharp               = TRUE
+	edge                = TRUE
+	attack_verb         = list("slashed", "sliced", "cut", "clawed")
+	material            = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	w_class             = ITEM_SIZE_LARGE
 
 /obj/item/tool/hoe/wood
 	color    = /decl/material/solid/organic/wood::color

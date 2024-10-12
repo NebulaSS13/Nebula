@@ -5,6 +5,7 @@
 	icon               = 'icons/obj/items/tool/pickaxe.dmi'
 	sharp              = TRUE
 	edge               = TRUE
+	w_class            = ITEM_SIZE_HUGE
 	handle_material    = /decl/material/solid/organic/wood
 	_base_attack_force = 15
 
