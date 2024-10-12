@@ -117,56 +117,64 @@
 	return
 
 /datum/random_map/noise/forage/get_additional_spawns(value, turf/T)
+	if(!istype(T, /turf/floor))
+		return
+	var/turf/floor/floor = T
+	var/decl/flooring/flooring = floor.get_topmost_flooring()
 	var/parse_value = noise2value(value)
 	var/place_prob
 	var/place_type
 
-	if(T.is_outside())
-		if(istype(T, /turf/floor/rock))
+	if(floor.is_outside())
+		if(istype(flooring, /decl/flooring/rock))
 			if(prob(15)) // Static as current map has limited amount of rock turfs
 				var/rock_type = SAFEPICK(forage["rocks"])
-				new rock_type(T)
+				new rock_type(floor)
 				return
-		else if(istype(T, /turf/floor/grass))
+		if(istype(flooring, /decl/flooring/grass))
 			if(prob(parse_value * tree_weight))
 				if(length(trees))
 					var/tree_type = pickweight(trees)
-					new tree_type(T)
+					new tree_type(floor)
 				return
 			place_prob = parse_value * forage_weight
 			place_type = SAFEPICK(forage["grass"])
-		else if(istype(T, /turf/floor/mud/water/deep))
-			place_prob = parse_value * forage_weight
-			place_type = SAFEPICK(forage["riverbed"])
-		else if(istype(T, /turf/floor/mud/water))
-			place_prob = parse_value * forage_weight
-			place_type = SAFEPICK(forage["shallows"])
-		else if(istype(T, /turf/floor/mud))
-			place_prob = parse_value * forage_weight
-			place_type = SAFEPICK(forage["riverbank"]) // no entries by default, expanded on subtypes
+		if(istype(flooring, /decl/flooring/mud))
+			switch(floor.get_fluid_depth())
+				if(FLUID_OVER_MOB_HEAD to FLUID_MAX_DEPTH)
+					place_prob = parse_value * forage_weight
+					place_type = SAFEPICK(forage["riverbed"])
+				if(FLUID_SLURRY to FLUID_OVER_MOB_HEAD)
+					place_prob = parse_value * forage_weight
+					place_type = SAFEPICK(forage["shallows"])
+				else
+					place_prob = parse_value * forage_weight
+					place_type = SAFEPICK(forage["riverbank"]) // no entries by default, expanded on subtypes
 	else
-		if(istype(T, /turf/floor/mud) && !istype(T, /turf/floor/mud/water/deep))
-			if(prob(parse_value * cave_tree_weight))
-				if(length(cave_trees))
-					var/tree_type = pick(cave_trees)
-					new tree_type(T)
-				return
-			place_prob = parse_value * cave_forage_weight * 2
-			place_type = SAFEPICK(forage["caves"])
-		else if(istype(T, /turf/floor/dirt))
+		if(istype(flooring, /decl/flooring/mud))
+			switch(floor.get_fluid_depth())
+				if(FLUID_SLURRY to FLUID_OVER_MOB_HEAD)
+					place_prob = parse_value * cave_forage_weight
+					place_type = SAFEPICK(forage["cave_shallows"])
+				if(0 to FLUID_SLURRY)
+					if(prob(parse_value * cave_tree_weight))
+						if(length(cave_trees))
+							var/tree_type = pick(cave_trees)
+							new tree_type(floor)
+						return
+					place_prob = parse_value * cave_forage_weight * 2
+					place_type = SAFEPICK(forage["caves"])
+		else if(istype(flooring, /decl/flooring/dirt))
 			place_prob = parse_value * cave_forage_weight
 			place_type = SAFEPICK(forage["caves"])
-		else if(istype(T, /turf/floor/mud/water))
-			place_prob = parse_value * cave_forage_weight
-			place_type = SAFEPICK(forage["cave_shallows"])
 
 	if(place_type && prob(place_prob))
 		if(istype(place_type, /datum/seed))
-			new /obj/structure/flora/plant(T, null, null, place_type)
+			new /obj/structure/flora/plant(floor, null, null, place_type)
 			for(var/stepdir in global.alldirs)
 				if(prob(15))
-					var/turf/neighbor = get_step(T, stepdir)
-					if(istype(neighbor, T.type) && !(locate(/obj/structure/flora/plant) in neighbor))
+					var/turf/neighbor = get_step(floor, stepdir)
+					if(istype(neighbor, floor.type) && !(locate(/obj/structure/flora/plant) in neighbor))
 						new /obj/structure/flora/plant(neighbor, null, null, place_type)
 		else if(ispath(place_type, /atom))
-			new place_type(T)
+			new place_type(floor)

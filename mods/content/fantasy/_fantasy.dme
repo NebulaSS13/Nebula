@@ -2,6 +2,7 @@
 #define MODPACK_FANTASY_SPECIES
 // BEGIN_INCLUDE
 #include "_fantasy.dm"
+#include "turfs.dm"
 #include "datum\cultures.dm"
 #include "datum\currencies.dm"
 #include "datum\factions.dm"
