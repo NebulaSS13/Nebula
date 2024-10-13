@@ -27,6 +27,7 @@
 	)
 	bypass_chilling_products_for_root_type = /decl/material/liquid/ethanol
 	affect_blood_on_ingest = FALSE // prevents automatic toxins/inebriation as though injected
+	can_boil_to_gas = TRUE
 
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
 	var/alcohol_toxicity = 1
