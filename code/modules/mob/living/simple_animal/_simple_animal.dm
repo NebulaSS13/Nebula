@@ -85,7 +85,7 @@
 
 	// By default, simple mobs should attack slightly slower than players, allowing a suitably attentive
 	// player to dodge/kite if they're paying attention, and not letting themselves get cornered/incapacitated.
-	var/attack_delay = DEFAULT_ATTACK_COOLDOWN * 1.5 // strong but slower than other spiders.
+	var/attack_delay = DEFAULT_ATTACK_COOLDOWN * 1.3
 
 	// Base percentage chance to hit in melee against another mob, if controlled by an AI.
 	var/telegraphed_melee_accuracy = 85
