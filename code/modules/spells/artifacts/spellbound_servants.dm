@@ -235,7 +235,7 @@
 	icon_state = "stone"
 	throw_speed = 5
 	throw_range = 10
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/stone/basalt
 
 /obj/item/summoning_stone/attack_self(var/mob/user)

@@ -175,7 +175,7 @@
 	volume = 5
 	origin_tech = @'{"materials":2,"biotech":2}'
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	detail_state = "_band"
 	detail_color = COLOR_CYAN
 	abstract_type = /obj/item/chems/hypospray/autoinjector

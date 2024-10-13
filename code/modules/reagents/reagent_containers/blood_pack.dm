@@ -11,7 +11,7 @@
 	desc = "Flexible bag for IV injectors."
 	icon = 'icons/obj/bloodpack.dmi'
 	icon_state = "empty"
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	volume = 120
 	possible_transfer_amounts = @"[0.2,1,2]"
 	amount_per_transfer_from_this = REM
@@ -28,9 +28,9 @@
 	if(!(. = ..()))
 		return
 	if(reagents?.total_volume > volume/2)
-		w_class = ITEM_SIZE_SMALL
+		w_class = ITEM_SIZE_NORMAL
 	else
-		w_class = ITEM_SIZE_TINY
+		w_class = ITEM_SIZE_SMALL
 
 /obj/item/chems/ivbag/on_update_icon()
 	. = ..()

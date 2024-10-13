@@ -3,7 +3,7 @@
 	desc = "Goo extracted from a slime. Legends claim these to have \"magical powers\"."
 	icon = 'mods/content/xenobiology/icons/slimes/slime_extract.dmi'
 	icon_state = ICON_STATE_WORLD
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 3
 	throw_range = 6
 	origin_tech = @'{"biotech":4}'

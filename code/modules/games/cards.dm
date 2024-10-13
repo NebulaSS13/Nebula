@@ -273,7 +273,7 @@ var/global/list/card_decks = list()
 	desc = "For those with disposible income."
 	icon_state = "card_pack"
 	icon = 'icons/obj/items/playing_cards.dmi'
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/organic/cardboard
 	var/list/cards = list()
 

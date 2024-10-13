@@ -8,7 +8,6 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	base_type = /obj/item/stock_parts/scanning_module
-	w_class = ITEM_SIZE_TINY
 
 /obj/item/stock_parts/manipulator
 	name = "micro-manipulator"
@@ -17,7 +16,6 @@
 	origin_tech = @'{"materials":1,"programming":1}'
 	material = /decl/material/solid/metal/steel
 	base_type = /obj/item/stock_parts/manipulator
-	w_class = ITEM_SIZE_TINY
 
 /obj/item/stock_parts/micro_laser
 	name = "micro-laser"
@@ -27,7 +25,6 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	base_type = /obj/item/stock_parts/micro_laser
-	w_class = ITEM_SIZE_TINY
 
 /obj/item/stock_parts/matter_bin
 	name = "matter bin"
@@ -44,10 +41,9 @@
 	origin_tech = @'{"powerstorage":1}'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
+	base_type = /obj/item/stock_parts/capacitor
 	var/charge = 0
 	var/max_charge = 1000
-	base_type = /obj/item/stock_parts/capacitor
-	w_class = ITEM_SIZE_TINY
 
 /obj/item/stock_parts/capacitor/Initialize()
 	. = ..()

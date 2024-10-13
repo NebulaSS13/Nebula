@@ -26,7 +26,7 @@
 	material = /decl/material/solid/organic/plastic
 	base_type = /obj/item/stock_parts/keyboard
 	part_flags = PART_FLAG_HAND_REMOVE
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	ignore_damage_types = list(ELECTROCUTE) // emp damage is annoying enough without destroying purely physical or mechanical components
 
 /obj/item/stock_parts/keyboard/on_refresh(obj/machinery/machine)

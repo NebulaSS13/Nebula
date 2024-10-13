@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/keyring.dmi'
 	icon_state = ICON_STATE_WORLD
 	storage = /datum/storage/keyring
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY | SLOT_POCKET
 	material = /decl/material/solid/metal/brass
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC

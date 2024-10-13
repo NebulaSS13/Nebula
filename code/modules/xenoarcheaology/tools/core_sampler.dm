@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/geologic_sampler.dmi'
 	icon_state = "sampler0"
 	item_state = "screwdriver_brown"
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	var/obj/item/sample
