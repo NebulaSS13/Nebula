@@ -19,23 +19,41 @@
 		to_chat(user, "You flatten the dough.")
 		qdel(src)
 
+/obj/item/food/unleaveneddough
+	name = "flat unleavened dough"
+	desc = "A flattened lump of dough, made without yeast."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "flat dough"
+	center_of_mass = @'{"x":16,"y":16}'
+	backyard_grilling_product = /obj/item/food/flatbread
+	backyard_grilling_announcement = "is baked into a simple flatbread."
+	nutriment_amt = 4
+	nutriment_desc = "raw dough"
+
+/obj/item/food/piecrust
+	name = "pie crust"
+	desc = "A dense, buttery pie crust, ready for filling."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "flat dough"
+	center_of_mass = @'{"x":16,"y":16}'
+	nutriment_amt = 4
+	nutriment_desc = "raw pie crust"
+
 // slicable into 3x doughslices
 /obj/item/food/sliceable/flatdough
-	name = "flat dough"
-	desc = "A flattened dough."
+	name = "flat leavened dough"
+	desc = "A flattened lump of dough, made with yeast."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flat dough"
 	slice_path = /obj/item/food/doughslice
 	slice_num = 3
 	center_of_mass = @'{"x":16,"y":16}'
 	utensil_flags = UTENSIL_FLAG_COLLECT | UTENSIL_FLAG_SLICE
+	nutriment_amt = 4
+	nutriment_desc = "raw dough"
+	// TODO: pizza base with no toppings? Some other round leavened bread product?
 	backyard_grilling_product = /obj/item/food/flatbread
 	backyard_grilling_announcement = "is baked into a simple flatbread."
-
-/obj/item/food/sliceable/flatdough/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/solid/organic/meat, 1)
-	add_to_reagents(/decl/material/liquid/nutriment,         3)
 
 /obj/item/food/doughslice
 	name = "dough slice"

@@ -211,14 +211,14 @@
 	)
 	return combined_food_products
 
-/obj/item/food/sliceable/flatdough/get_combined_food_products()
+/obj/item/food/sliceable/piecrust/get_combined_food_products()
 	var/static/list/combined_food_products = list(
 		/obj/item/food/butchery/cutlet   = /obj/item/food/meatpie/raw,
-		/obj/item/food/tofu     = /obj/item/food/tofupie/raw,
-		/obj/item/food/xenomeat = /obj/item/food/xemeatpie/raw,
-		"apple"                       = /obj/item/food/applepie/raw,
-		"berries"                     = /obj/item/food/berryclafoutis/raw,
-		"plumphelmet"                 = /obj/item/food/plump_pie/raw
+		/obj/item/food/tofu              = /obj/item/food/tofupie/raw,
+		/obj/item/food/xenomeat          = /obj/item/food/xemeatpie/raw,
+		"apple"                          = /obj/item/food/applepie/raw,
+		"berries"                        = /obj/item/food/berryclafoutis/raw,
+		"plumphelmet"                    = /obj/item/food/plump_pie/raw
 	)
 	return combined_food_products
 
