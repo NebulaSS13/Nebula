@@ -95,7 +95,7 @@
 	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION
 
 /decl/interaction_handler/drink/is_possible(atom/target, mob/user, obj/item/prop)
-	return ..() && ATOM_IS_OPEN_CONTIANER(target) && target?.reagents?.total_volume && user.check_has_mouth() && !istype(target, /obj/item)
+	return ..() && ATOM_IS_OPEN_CONTAINER(target) && target?.reagents?.total_volume && user.check_has_mouth() && !istype(target, /obj/item)
 
 /decl/interaction_handler/drink/invoked(atom/target, mob/user, obj/item/prop)
 
