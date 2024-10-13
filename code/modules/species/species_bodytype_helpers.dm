@@ -85,3 +85,15 @@
 
 /decl/bodytype/proc/adjust_status(mob/living/target, condition, amount)
 	return amount
+
+// Called in /mob/living/human/set_bodytype() before logic runs.
+/decl/bodytype/proc/handle_pre_set_bodytype(mob/living/owner)
+	return
+
+// Called in /mob/living/human/set_bodytype() after logic runs.
+/decl/bodytype/proc/handle_post_set_bodytype(mob/living/owner)
+	return
+
+// Overrides species-level default name if non-null return.
+/decl/bodytype/proc/get_root_species_name(var/mob/living/human/H)
+	return
