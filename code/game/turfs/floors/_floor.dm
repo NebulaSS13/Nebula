@@ -223,12 +223,10 @@
 		physically_destroyed()
 
 /turf/floor/get_footstep_sound(var/mob/caller)
-	. = ..()
-	if(!.)
-		var/decl/flooring/use_flooring = get_topmost_flooring()
-		if(istype(use_flooring))
-			return get_footstep_for_mob(use_flooring.footstep_type)
-		return get_footstep_for_mob(/decl/footsteps/blank)
+	var/decl/flooring/use_flooring = get_topmost_flooring()
+	if(istype(use_flooring))
+		return get_footstep_for_mob(use_flooring.footstep_type, caller)
+	return ..()
 
 /turf/floor/get_movable_alpha_mask_state(atom/movable/mover)
 	. = ..()
