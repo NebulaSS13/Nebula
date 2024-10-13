@@ -1,6 +1,6 @@
 /datum/storage/firstaid
 	max_w_class = ITEM_SIZE_SMALL
-	max_storage_space = DEFAULT_BOX_STORAGE
+	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	use_sound = 'sound/effects/storage/box.ogg'
 
 /datum/storage/firstaid/surgery
