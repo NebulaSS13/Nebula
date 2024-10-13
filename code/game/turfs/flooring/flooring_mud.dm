@@ -1,6 +1,6 @@
 /decl/flooring/mud
 	name            = "mud"
-	desc            = "Thick, waterlogged mud."
+	desc            = "A stretch of thick, waterlogged mud."
 	icon            = 'icons/turf/flooring/mud.dmi'
 	icon_base       = "mud"
 	icon_edge_layer = FLOOR_EDGE_MUD
@@ -20,7 +20,7 @@
 
 /decl/flooring/dry_mud
 	name            = "dry mud"
-	desc            = "Should have stayed hydrated."
+	desc            = "This was once mud, but forgot to keep hydrated."
 	icon            = 'icons/turf/flooring/seafloor.dmi'
 	icon_base       = "seafloor"
 	icon_edge_layer = FLOOR_EDGE_MUD

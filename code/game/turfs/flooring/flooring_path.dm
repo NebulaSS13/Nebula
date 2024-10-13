@@ -21,7 +21,7 @@
 	target.desc = "[jointext_no_nulls(list("A", paving_adjective, "path made of", paver_adjective, material.adjective_name, paver_noun), " ")]."
 
 /decl/flooring/path/cobblestone
-	name            = "cobblestone path"
+	name            = "cobblestones"
 	desc            = "A rustic cobblestone path."
 	icon_base       = "cobble"
 	icon_edge_layer = FLOOR_EDGE_PATH
@@ -31,8 +31,10 @@
 	name           = "stone path"
 	desc           = "A rustic stone path, laid out in a running bond pattern."
 	icon_base      = "runningbond"
+	gender         = NEUTER
 
 /decl/flooring/path/herringbone
 	name           = "stone path"
 	desc           = "A rustic stone path, laid out in a herringbone pattern."
 	icon_base      = "herringbone"
+	gender         = NEUTER

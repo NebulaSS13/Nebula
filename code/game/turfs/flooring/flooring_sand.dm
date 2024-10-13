@@ -46,10 +46,11 @@
 	icon_base       = "space"
 	has_base_range  = 25
 	holographic     = TRUE
+	gender          = NEUTER
 
 /decl/flooring/melted_sand
 	name            = "molten silica"
-	desc            = "A glassed patch of sand."
+	desc            = "A patch of sand that has been fused into glass by extreme temperature."
 	icon            = 'icons/turf/flooring/sand.dmi'
 	icon_base       = "glass"
 	has_base_range  = null

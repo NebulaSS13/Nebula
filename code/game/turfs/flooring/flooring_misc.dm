@@ -1,6 +1,6 @@
 /decl/flooring/linoleum
 	name               = "linoleum"
-	desc               = "It's like the 2090's all over again."
+	desc               = "A stretch of inlaid sections of flexible linoleum."
 	icon               = 'icons/turf/flooring/linoleum.dmi'
 	icon_base          = "lino"
 	can_paint          = 1
@@ -11,7 +11,8 @@
 	constructed        = TRUE
 
 /decl/flooring/crystal
-	name               = "crystal floor"
+	name               = "crystal flooring"
+	desc               = "A hard, reflective section of flooring made from crystal."
 	icon               = 'icons/turf/flooring/crystal.dmi'
 	icon_base          = "crystal"
 	build_type         = null
@@ -56,6 +57,7 @@
 	render_trenches    = FALSE
 	force_material     = /decl/material/solid/stone/ceramic
 	constructed        = TRUE
+	gender             = NEUTER
 
 /decl/flooring/woven
 	name               = "woven floor"
@@ -69,6 +71,7 @@
 	color              = COLOR_BEIGE
 	force_material     = /decl/material/solid/organic/plantmatter/grass/dry
 	constructed        = TRUE
+	gender             = NEUTER
 
 /decl/flooring/straw
 	name               = "straw floor"
@@ -83,3 +86,4 @@
 	color              = COLOR_WHEAT
 	force_material     = /decl/material/solid/organic/plantmatter/grass/dry
 	constructed        = TRUE
+	gender             = NEUTER

@@ -2,6 +2,7 @@
 	name               = "grass"
 	icon               = 'icons/turf/flooring/grass.dmi'
 	icon_base          = "grass"
+	desc               = "A patch of thriving meadowgrass."
 	has_base_range     = 3
 	footstep_type      = /decl/footsteps/grass
 	icon_edge_layer    = FLOOR_EDGE_GRASS
@@ -24,6 +25,7 @@
 	name               = "wild grass"
 	icon               = 'icons/turf/flooring/wildgrass.dmi'
 	icon_base          = "wildgrass"
+	desc               = "A lush, overgrown patch of wild meadowgrass. Watch out for snakes."
 	has_base_range     = null
 	icon_edge_layer    = FLOOR_EDGE_GRASS_WILD
 	harvestable        = TRUE

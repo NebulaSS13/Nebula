@@ -6,6 +6,7 @@
 	has_base_range  = null
 	color           = null
 	icon_edge_layer = FLOOR_EDGE_VOLCANIC
+	gender          = NEUTER
 
 /decl/flooring/rock/update_turf_strings(turf/floor/target)
 	var/decl/material/material = target?.get_material()

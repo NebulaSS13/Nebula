@@ -13,6 +13,7 @@ var/global/list/flooring_cache = list()
 	var/name
 	var/desc
 	var/icon
+	var/gender = PLURAL /// "that's some grass"
 	var/icon_base
 	var/color = COLOR_WHITE
 	var/footstep_type = /decl/footsteps/blank
@@ -119,6 +120,12 @@ var/global/list/flooring_cache = list()
 
 /decl/flooring/validate()
 	. = ..()
+
+	if(!istext(name))
+		. += "null or invalid name string"
+
+	if(!istext(desc))
+		. += "null or invalid desc string"
 
 	if(!icon)
 		. += "null icon"

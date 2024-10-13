@@ -171,6 +171,7 @@
 
 	update_floor_strings()
 
+	gender     = copy_from.gender
 	layer      = copy_from.floor_layer
 	turf_flags = copy_from.turf_flags
 	z_flags    = copy_from.z_flags

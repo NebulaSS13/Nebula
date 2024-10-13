@@ -3,6 +3,7 @@
 	name                 = "lava"
 	icon_base            = "lava"
 	icon                 = 'icons/turf/flooring/lava.dmi'
+	desc                 = "A pool of incredibly hot molten rock. You can feel the heat radiating even from a distance. Watch your step."
 	movement_delay       = 4
 	footstep_type        = /decl/footsteps/lava
 	has_environment_proc = TRUE
