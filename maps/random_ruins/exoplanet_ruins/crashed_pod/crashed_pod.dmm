@@ -958,6 +958,7 @@
 /obj/item/chems/condiment/enzyme,
 /obj/item/chems/drinks/milk,
 /obj/item/chems/drinks/milk,
+/obj/item/food/dairy/butter/stick,
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
 /obj/item/beartrap,

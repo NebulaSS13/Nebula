@@ -136,6 +136,7 @@
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":4}'
 	whole_path = /obj/item/food/sliceable/bread
+	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/food/slice/bread/filled
 	filled = TRUE

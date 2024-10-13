@@ -2612,6 +2612,7 @@
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
 /obj/item/chems/condiment/flour,
+/obj/item/chems/condiment/yeast,
 /obj/item/box/fancy/egg_box,
 /turf/floor/tiled/white,
 /area/lar_maria/mess_hall)

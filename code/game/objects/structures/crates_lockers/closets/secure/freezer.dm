@@ -6,6 +6,7 @@
 	return list(
 		/obj/item/chems/condiment/large/salt = 1,
 		/obj/item/chems/condiment/flour = 7,
+		/obj/item/chems/condiment/yeast = 1,
 		/obj/item/chems/condiment/sugar = 2
 	)
 
@@ -32,6 +33,8 @@
 	return list(
 		/obj/item/chems/drinks/milk = 6,
 		/obj/item/chems/drinks/soymilk = 4,
+		/obj/item/food/dairy/butter/stick = 2,
+		/obj/item/food/dairy/butter/stick/margarine = 2,
 		/obj/item/box/fancy/egg_box = 4
 	)
 
