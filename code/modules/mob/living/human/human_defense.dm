@@ -169,7 +169,7 @@ meteor_act
 		forcesay(global.hit_appends)	//forcesay checks stat already
 		radio_interrupt_cooldown = world.time + (RADIO_INTERRUPT_DEFAULT * 0.8) //getting beat on can briefly prevent radio use
 
-	if((I.atom_damage_type == BRUTE || I.atom_damage_type == PAIN) && prob(25 + (effective_force * 2)))
+	if(!stat && I.weapon_can_knock_prone && (I.atom_damage_type == BRUTE || I.atom_damage_type == PAIN) && prob(25 + (effective_force * 2)))
 		if(!stat)
 			if(headcheck(hit_zone))
 				//Harder to score a stun but if you do it lasts a bit longer
@@ -184,11 +184,9 @@ meteor_act
 					if(current_posture.prone)
 						visible_message("<span class='danger'>[src] has been knocked down!</span>")
 
-		//Apply blood
-		attack_bloody(I, user, effective_force, hit_zone)
-
-		animate_receive_damage(src)
-
+	//Apply blood
+	attack_bloody(I, user, effective_force, hit_zone)
+	animate_receive_damage(src)
 	return 1
 
 /mob/living/human/proc/attack_bloody(obj/item/W, mob/attacker, var/effective_force, var/hit_zone)
