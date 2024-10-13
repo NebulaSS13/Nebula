@@ -45,6 +45,16 @@
 	if(!M.has_trait(/decl/trait/metabolically_inert))
 		M.immunity = min(M.immunity + 0.25, M.immunity_norm*1.5)
 
+/decl/material/liquid/drink/juice/nettle
+	name = "nettle juice"
+	lore_text = "A liquid extracted from nettles. Reputedly useful for treating allergies and sneezing."
+	taste_description = "stinging"
+	color = "#7a9b79"
+	uid = "chem_drink_nettle"
+
+	glass_name = "nettle juice"
+	glass_desc = "A tall glass of pureed stinging nettles."
+
 /decl/material/liquid/drink/juice/banana
 	name = "banana juice"
 	lore_text = "The raw essence of a banana."
