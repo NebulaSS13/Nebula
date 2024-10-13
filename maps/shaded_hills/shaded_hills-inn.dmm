@@ -1608,7 +1608,7 @@
 /area/shaded_hills/farmhouse/porch)
 "VW" = (
 /obj/structure/table/marble,
-/obj/item/chems/glass/beaker/bowl{
+/obj/item/chems/glass/beaker/bowl/pottery{
 	pixel_y = 4
 	},
 /turf/floor/path/herringbone/basalt,
