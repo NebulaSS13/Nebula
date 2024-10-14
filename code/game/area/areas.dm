@@ -434,6 +434,8 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 /area/proc/throw_unbuckled_occupant(var/mob/M, var/maxrange, var/speed, var/direction)
 	if(isliving(M))
+		if(M.anchored) // So mechs don't get tossed around.
+			return
 		if(M.buckled)
 			to_chat(M, SPAN_WARNING("Sudden acceleration presses you into your chair!"))
 			shake_camera(M, 3, 1)
