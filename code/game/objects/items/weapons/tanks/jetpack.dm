@@ -112,5 +112,6 @@
 /obj/item/tank/jetpack/rig
 	name = "integrated manuvering module thrusterpack"
 	desc = "The 'manuvering' part of a manuvering jet module for a hardsuit. You could... probably use this standalone?"
+	starting_pressure = list(/decl/material/gas/oxygen = 6 ATM)
 	var/obj/item/rig/holder
 
