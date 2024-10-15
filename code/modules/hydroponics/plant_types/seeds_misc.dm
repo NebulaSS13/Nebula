@@ -178,7 +178,11 @@
 	product_name = "nettle"
 	display_name = "nettle patch"
 	mutants = list("deathnettle")
-	chems = list(/decl/material/liquid/nutriment = list(1,50), /decl/material/liquid/acid = list(0,1))
+	chems = list(
+		/decl/material/liquid/nutriment          = list(1,50),
+		/decl/material/liquid/drink/juice/nettle = list(1,10),
+		/decl/material/liquid/nettle_histamine   = list(1, 5)
+	)
 	grown_tag = "nettle"
 	slice_product = /obj/item/food/processed_grown/chopped
 	slice_amount = 3
@@ -200,7 +204,10 @@
 	product_name = "death nettle"
 	display_name = "death nettle patch"
 	mutants = null
-	chems = list(/decl/material/liquid/nutriment = list(1,50), /decl/material/liquid/acid/polyacid = list(0,1))
+	chems = list(
+		/decl/material/liquid/nutriment = list(1,50),
+		/decl/material/liquid/acid/polyacid = list(0,1)
+	)
 	grown_tag = "deathnettle"
 
 /datum/seed/nettle/death/New()

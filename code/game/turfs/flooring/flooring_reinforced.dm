@@ -12,9 +12,11 @@
 	footstep_type  = /decl/footsteps/plating
 	force_material = /decl/material/solid/metal/steel
 	constructed    = TRUE
+	gender         = NEUTER
 
 /decl/flooring/reinforced/circuit
 	name           = "processing strata"
+	desc           = "A complex network of circuits beneath reinforced glass."
 	icon           = 'icons/turf/flooring/circuit.dmi'
 	icon_base      = "bcircuit"
 	build_type     = null
@@ -32,11 +34,13 @@
 
 /decl/flooring/reinforced/shuttle
 	name           = "floor"
+	desc           = "A stretch of plastic shuttle flooring."
 	icon           = 'icons/turf/flooring/shuttle.dmi'
 	build_type     = null
 	flooring_flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_CROWBAR
 	can_paint      = 1
 	can_engrave    = FALSE
+	gender         = NEUTER
 
 /decl/flooring/reinforced/shuttle/blue
 	icon_base      = "floor"

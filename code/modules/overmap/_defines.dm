@@ -26,6 +26,8 @@
 	dynamic_lighting = FALSE
 	opacity = TRUE
 	density = TRUE
+	plane = ABOVE_LIGHTING_PLANE
+	layer = OBFUSCATION_LAYER // Cover all non-hud material.
 
 ///Turf with its map coordinate written on. Handy for debugging.
 /turf/unsimulated/debug_grid

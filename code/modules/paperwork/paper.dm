@@ -591,10 +591,11 @@ var/global/datum/topic_state/default/paper_state/paper_topic_state = new
 
 // Stub type for moving teleportation scrolls into a modpack.
 /obj/item/paper/scroll
-	name  = "scroll"
-	desc  = "A length of writing material curled into a scroll."
-	icon  = 'icons/obj/items/paperwork/scroll.dmi'
-	color = "#feeebc"
+	name    = "scroll"
+	desc    = "A length of writing material curled into a scroll."
+	icon    = 'icons/obj/items/paperwork/scroll.dmi'
+	color   = "#feeebc"
+	w_class = ITEM_SIZE_SMALL
 	var/furled = FALSE
 
 /obj/item/paper/scroll/can_bundle()

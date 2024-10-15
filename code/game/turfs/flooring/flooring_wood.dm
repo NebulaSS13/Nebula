@@ -1,6 +1,6 @@
 /decl/flooring/wood
 	name               = "wooden floor"
-	desc               = "Polished wood planks."
+	desc               = "A stretch of closely-fitted wooden planks."
 	icon               = 'icons/turf/flooring/wood.dmi'
 	icon_base          = "wood"
 	damage_temperature = T0C+200
@@ -11,6 +11,7 @@
 	color              = /decl/material/solid/organic/wood::color
 	force_material     = /decl/material/solid/organic/wood
 	constructed        = TRUE
+	gender             = NEUTER
 
 /decl/flooring/wood/mahogany
 	color              = /decl/material/solid/organic/wood/mahogany::color

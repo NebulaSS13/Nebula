@@ -2,7 +2,7 @@
 	name = "organ"
 	icon = 'icons/obj/surgery.dmi'
 	germ_level = 0
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	default_action_type = /datum/action/item_action/organ
 	origin_tech = @'{"materials":1,"biotech":1}'
 	abstract_type = /obj/item/organ

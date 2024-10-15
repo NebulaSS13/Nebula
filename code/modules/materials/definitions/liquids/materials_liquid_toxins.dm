@@ -223,7 +223,7 @@
 		/decl/material/liquid/ethanol = 0.2
 	)
 	heating_point = 145 CELSIUS
-	heating_message = "separates"
+	heating_message = "separates."
 	taste_mult = 1.2
 	metabolism = REM * 0.25
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE

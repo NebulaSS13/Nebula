@@ -44,7 +44,7 @@
 /decl/interaction_handler/wash_hands
 	name = "Wash Hands"
 	expected_target_type = /atom
-	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION
+	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEVER_AUTOMATIC
 
 /decl/interaction_handler/wash_hands/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..() && target?.reagents?.has_reagent(/decl/material/liquid/water, 150)
@@ -92,10 +92,10 @@
 /decl/interaction_handler/drink
 	name = "Drink"
 	expected_target_type = /atom
-	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION
+	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEVER_AUTOMATIC
 
 /decl/interaction_handler/drink/is_possible(atom/target, mob/user, obj/item/prop)
-	return ..() && target?.reagents?.total_volume && user.check_has_mouth() && !istype(target, /obj/item)
+	return ..() && ATOM_IS_OPEN_CONTAINER(target) && target?.reagents?.total_volume && user.check_has_mouth() && !istype(target, /obj/item)
 
 /decl/interaction_handler/drink/invoked(atom/target, mob/user, obj/item/prop)
 

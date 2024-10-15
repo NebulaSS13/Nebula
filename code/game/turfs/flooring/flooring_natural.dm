@@ -6,10 +6,11 @@
 	icon_edge_layer = FLOOR_EDGE_SEAFLOOR
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	force_material  = /decl/material/solid/sand
+	gender          = NEUTER
 
 /decl/flooring/shrouded
 	name            = "packed sand"
-	desc            = "Sand that has been packed in to solid earth."
+	desc            = "Packed-down sand forming a solid layer."
 	icon            = 'icons/turf/flooring/shrouded.dmi'
 	icon_base       = "shrouded"
 	dirt_color      = "#3e3960"
@@ -29,7 +30,7 @@
 
 /decl/flooring/barren
 	name            = "ground"
-	desc            = "Bare, barren sand."
+	desc            = "A stretch of bare, barren sand."
 	icon            = 'icons/turf/flooring/barren.dmi'
 	icon_base       = "barren"
 	color           = COLOR_WHITE
@@ -41,7 +42,7 @@
 
 /decl/flooring/clay
 	name            = "clay"
-	desc            = "Thick, claggy clay."
+	desc            = "A stretch of thick, claggy clay."
 	icon            = 'icons/turf/flooring/clay.dmi'
 	icon_base       = "clay"
 	icon_edge_layer = FLOOR_EDGE_CLAY
@@ -52,6 +53,7 @@
 
 /decl/flooring/ice
 	name            = "ice"
+	desc            = "A hard, slippery layer of frozen water."
 	icon            = 'icons/turf/flooring/ice.dmi'
 	icon_base       = "ice"
 	footstep_type   = /decl/footsteps/plating

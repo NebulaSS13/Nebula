@@ -70,6 +70,7 @@
 	name = "crew survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and white stripe indicate this one contains oxygen."
 	icon_state = "survival"
+	storage = /datum/storage/box/large
 
 /obj/item/box/survival/WillContain()
 	return list(
@@ -87,6 +88,7 @@
 	name = "engineer survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and orange stripe indicate this one as the engineering variant."
 	icon_state = "survivaleng"
+	storage = /datum/storage/box/large
 
 /obj/item/box/engineer/WillContain()
 	return list(
@@ -602,6 +604,8 @@
 /obj/item/box/tapes
 	name = "box of spare tapes"
 	desc = "A box full of blank tapes."
+	storage = /datum/storage/box/tapes
+
 /obj/item/box/tapes/WillContain()
 	return list(/obj/item/magnetic_tape/random = 14)
 

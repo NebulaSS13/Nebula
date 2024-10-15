@@ -76,7 +76,7 @@
 	icon_state = "plasticbag"
 	item_state = "plasticbag"
 	storage = /datum/storage/bag/plastic
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 
 	material = /decl/material/solid/organic/plastic
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC

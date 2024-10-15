@@ -3,7 +3,7 @@
 	icon_state          = ICON_STATE_WORLD
 	obj_flags           = OBJ_FLAG_CONDUCTIBLE
 	slot_flags          = SLOT_LOWER_BODY
-	w_class             = ITEM_SIZE_HUGE
+	w_class             = ITEM_SIZE_NORMAL
 	origin_tech         = @'{"materials":1,"engineering":1}'
 	attack_verb         = list("hit", "pierced", "sliced", "attacked")
 	sharp               = 0

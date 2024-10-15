@@ -30,7 +30,7 @@
 
 /decl/flooring/permafrost
 	name            = "permafrost"
-	desc            = "Let it snow, let it snow, let it snow..."
+	desc            = "A stretch of frozen soil that hasn't seen a thaw for many seasons."
 	icon            = 'icons/turf/flooring/snow.dmi'
 	icon_base       = "permafrost"
 	force_material  = /decl/material/solid/ice

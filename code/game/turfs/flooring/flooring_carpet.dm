@@ -1,6 +1,6 @@
 /decl/flooring/carpet
 	name               = "brown carpet"
-	desc               = "Comfy and fancy carpeting."
+	desc               = "A stretch of cut pile carpet. Comfy and fancy."
 	icon               = 'icons/turf/flooring/carpet.dmi'
 	icon_base          = "brown"
 	icon_edge_layer    = FLOOR_EDGE_CARPET

@@ -83,6 +83,29 @@
 		M.emote(/decl/emote/visible/shiver)
 	holder.remove_reagent(/decl/material/liquid/capsaicin, 5)
 
+/decl/material/liquid/nettle_histamine
+	name = "nettle histamine"
+	lore_text = "A combination of substances injected by contact with the stinging hairs of the common nettle. Itchy and painful, but not dangerous."
+	heating_products = null
+	uid = "chem_nettle_histamine"
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
+	color = "#9bbe90"
+	heating_point = 60 CELSIUS
+	heating_message = "thins as it separates."
+	heating_products = list(
+		/decl/material/liquid/drink/juice/nettle = 0.5,
+		/decl/material/liquid/water = 0.5
+	)
+
+// This should really be contact only but fruit injects it (do_sting()).
+/decl/material/liquid/nettle_histamine/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	. = ..()
+	if(M.has_trait(/decl/trait/metabolically_inert) || !M.can_feel_pain())
+		return
+	M.apply_effect(6, PAIN, 0)
+	if(prob(5))
+		to_chat(M, SPAN_DANGER("Your skin [pick("itches", "burns", "stings")]!"))
+
 /decl/material/liquid/capsaicin
 	name = "capsaicin oil"
 	lore_text = "This is what makes chilis hot."
@@ -94,7 +117,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 	heating_point = T100C
-	heating_message = "darkens and thickens as it seperates from its water content"
+	heating_message = "darkens and thickens as it seperates from its water content."
 	heating_products = list(
 		/decl/material/liquid/capsaicin/condensed = 0.5,
 		/decl/material/liquid/water = 0.5
@@ -113,13 +136,8 @@
 	. = ..()
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
-	if(M.has_trait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert) || !M.can_feel_pain())
 		return
-
-	if(ishuman(M))
-		var/mob/living/human/H = M
-		if(!H.can_feel_pain())
-			return
 
 	var/dose = LAZYACCESS(M.chem_doses, type)
 	if(dose < agony_dose)
@@ -205,14 +223,8 @@
 /decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
-
-	if(M.has_trait(/decl/trait/metabolically_inert))
+	if(M.has_trait(/decl/trait/metabolically_inert) || !M.can_feel_pain())
 		return
-
-	if(ishuman(M))
-		var/mob/living/human/H = M
-		if(!H.can_feel_pain())
-			return
 	if(LAZYACCESS(M.chem_doses, type) == metabolism)
 		to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	else

@@ -7,7 +7,7 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	var/icon_flight = "syringe-cartridge-flight" //so it doesn't look so weird when shot
 	var/obj/item/chems/syringe/syringe
 

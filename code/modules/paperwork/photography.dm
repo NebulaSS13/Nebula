@@ -15,7 +15,7 @@
 	desc             = "A camera film cartridge. Insert it into a camera to reload it."
 	icon_state       = "film"
 	item_state       = "electropack"
-	w_class          = ITEM_SIZE_TINY
+	w_class          = ITEM_SIZE_SMALL
 	throw_range      = 10
 	material         = /decl/material/solid/organic/plastic
 	var/tmp/max_uses = 10

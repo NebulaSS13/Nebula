@@ -307,3 +307,10 @@
 
 /datum/mob_controller/proc/is_friend(mob/friend)
 	. = istype(friend) && LAZYLEN(_friends) && (weakref(friend) in _friends)
+
+// By default, randomize the target area a bit to make armor/combat
+// a bit more dynamic (and avoid constant organ damage to the chest)
+/datum/mob_controller/proc/update_target_zone()
+	if(body)
+		return body.set_target_zone(ran_zone())
+	return FALSE

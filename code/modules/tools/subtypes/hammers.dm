@@ -48,6 +48,7 @@
 		"hammers"
 	)
 	demolisher_type = /datum/extension/demolisher
+	w_class             = ITEM_SIZE_HUGE
 
 /obj/item/tool/hammer/sledge/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(
@@ -65,6 +66,7 @@
 	material_alteration = 0
 	can_be_twohanded    = TRUE
 	_base_attack_force  = 15
+	w_class             = ITEM_SIZE_HUGE
 
 /obj/item/tool/hammer/jack/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(

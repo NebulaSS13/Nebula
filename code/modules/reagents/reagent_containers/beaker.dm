@@ -89,6 +89,9 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material = /decl/material/solid/metal/steel
 
+/obj/item/chems/glass/beaker/bowl/pottery
+	material = /decl/material/solid/stone/pottery
+
 /obj/item/chems/glass/beaker/kettle
 	name = "kettle"
 	desc = "A heavy kettle for heating water."

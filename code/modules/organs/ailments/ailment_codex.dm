@@ -48,8 +48,13 @@
 		for(var/obj/item/thing as anything in treated_by_types) // if you put a non-item in here you deserve to have your face eaten by runtime errors
 			ailment_cures += "[ailment.treated_by_item_cost] x [initial(thing.name)]"
 		if(ailment.treated_by_reagent_type)
-			var/decl/material/mat = GET_DECL(ailment.treated_by_reagent_type)
-			ailment_cures += "[ailment.treated_by_reagent_dosage]u [mat.name]"
+			if(islist(ailment.treated_by_reagent_type))
+				for(var/mat_type in ailment.treated_by_reagent_type)
+					var/decl/material/mat = GET_DECL(mat_type)
+					ailment_cures += "[ailment.treated_by_reagent_dosage]u [mat.name]"
+			else
+				var/decl/material/mat = GET_DECL(ailment.treated_by_reagent_type)
+				ailment_cures += "[ailment.treated_by_reagent_dosage]u [mat.name]"
 		if(ailment.treated_by_chem_effect)
 			ailment_cures += get_chem_effect_display_name(ailment.treated_by_chem_effect)
 		if(!length(ailment_cures))

@@ -14,6 +14,7 @@
 	wall_smooth        = SMOOTH_ALL
 	space_smooth       = SMOOTH_ALL
 	constructed        = TRUE
+	gender             = NEUTER
 
 /decl/flooring/tiling/mono
 	icon_base          = "monotile"

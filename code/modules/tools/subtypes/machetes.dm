@@ -2,7 +2,6 @@
 	name                       = "machete"
 	desc                       = "A long, sturdy blade with a rugged handle. Leading the way to cursed treasures since before space travel."
 	icon                       = 'icons/obj/items/weapon/machetes/machete.dmi'
-	w_class                    = ITEM_SIZE_NORMAL
 	slot_flags                 = SLOT_LOWER_BODY
 	material                   = /decl/material/solid/metal/titanium
 	base_parry_chance          = 50

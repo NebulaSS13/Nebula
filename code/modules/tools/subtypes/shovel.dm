@@ -4,7 +4,7 @@
 	icon               = 'icons/obj/items/tool/shovels/shovel.dmi'
 	icon_state         = "preview" // mapping preview icon
 	slot_flags         = SLOT_LOWER_BODY
-	w_class            = ITEM_SIZE_HUGE
+	w_class            = ITEM_SIZE_LARGE
 	edge               = TRUE
 	sharp              = TRUE
 	attack_verb        = list("bashed", "bludgeoned", "thrashed", "whacked")

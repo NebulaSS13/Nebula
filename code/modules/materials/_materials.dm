@@ -354,6 +354,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	/// Set to a type to indicate that a type with a matching milestone type should be used as a reference point for burn temperatures.
 	var/temperature_burn_milestone_material
 
+	/// Semi-temporary fix to issues with soup/tea boil-off - only set to TRUE on water and ethanol at time of commit.
+	var/can_boil_to_gas = FALSE
+	/// How much of this boils away per evaporation run?
+	var/boil_evaporation_per_run = 1
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
 	if(!used_stack.can_use(use_sheets))
@@ -401,6 +406,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	// Null/clear a bunch of physical vars as this material is fake.
 	if(holographic)
 		temperature_burn_milestone_material = null
+		can_boil_to_gas              = FALSE
 		shard_type                   = SHARD_NONE
 		conductive                   = 0
 		hidden_from_codex            = TRUE

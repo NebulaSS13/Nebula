@@ -1263,6 +1263,11 @@
 /mob/proc/toggle_internals(var/mob/living/user)
 	return
 
+/mob/proc/set_target_zone(new_zone)
+	if(zone_sel)
+		return zone_sel?.set_selected_zone(new_zone)
+	return FALSE
+
 /mob/proc/get_target_zone()
 	return zone_sel?.selecting || BP_CHEST
 

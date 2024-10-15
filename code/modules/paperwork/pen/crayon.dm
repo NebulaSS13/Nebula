@@ -1,8 +1,6 @@
 /obj/item/pen/crayon
 	name                 = "crayon"
 	icon                 = 'icons/obj/items/crayon.dmi'
-	icon_state           = ICON_STATE_WORLD
-	w_class              = ITEM_SIZE_TINY
 	attack_verb          = list("attacked", "coloured", "crayon'd")
 	stroke_color         = COLOR_RED
 	color                = COLOR_RED

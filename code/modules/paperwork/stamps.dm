@@ -3,7 +3,7 @@
 	desc        = "A rubber stamp for stamping important documents."
 	icon        = 'icons/obj/items/stamps/stamp_deckchief.dmi'
 	icon_state  = ICON_STATE_WORLD
-	w_class     = ITEM_SIZE_TINY
+	w_class     = ITEM_SIZE_SMALL
 	throw_speed = 7
 	throw_range = 15
 	material    = /decl/material/solid/metal/steel

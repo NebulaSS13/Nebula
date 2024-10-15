@@ -234,7 +234,7 @@
 	return 0
 
 /obj/fall_damage()
-	if(w_class == ITEM_SIZE_TINY)
+	if(w_class <= ITEM_SIZE_TINY)
 		return 0
 	if(w_class >= ITEM_SIZE_GARGANTUAN)
 		return 100

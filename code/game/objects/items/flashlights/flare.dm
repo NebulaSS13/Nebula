@@ -3,7 +3,7 @@
 /obj/item/flashlight/flare
 	name = "flare"
 	desc = "A red standard-issue flare. There are instructions on the side reading 'pull cord, make light'."
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	light_color = "#e58775"
 	icon = 'icons/obj/lighting/flare.dmi'
 	action_button_name = null //just pull it manually, neckbeard.

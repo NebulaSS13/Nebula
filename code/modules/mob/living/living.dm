@@ -1836,6 +1836,7 @@ default behaviour is:
 			reset_offsets(anim_time = 2)
 			return FALSE
 
+	ai?.update_target_zone()
 	reset_offsets(anim_time = 2)
 	return TRUE
 

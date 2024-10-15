@@ -177,6 +177,7 @@
 
 	update_floor_strings()
 
+	gender     = copy_from.gender
 	layer      = copy_from.floor_layer
 	turf_flags = copy_from.turf_flags
 	z_flags    = copy_from.z_flags
@@ -228,12 +229,10 @@
 		physically_destroyed()
 
 /turf/floor/get_footstep_sound(var/mob/caller)
-	. = ..()
-	if(!.)
-		var/decl/flooring/use_flooring = get_topmost_flooring()
-		if(istype(use_flooring))
-			return get_footstep_for_mob(use_flooring.footstep_type)
-		return get_footstep_for_mob(/decl/footsteps/blank)
+	var/decl/flooring/use_flooring = get_topmost_flooring()
+	if(istype(use_flooring))
+		return get_footstep_for_mob(use_flooring.footstep_type, caller)
+	return ..()
 
 /turf/floor/get_movable_alpha_mask_state(atom/movable/mover)
 	. = ..()

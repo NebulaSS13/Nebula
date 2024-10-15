@@ -3,7 +3,7 @@
 	gender = PLURAL
 	desc = "A glowing ball of what appears to be amber."
 	icon = 'icons/obj/lighting/slime.dmi'
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	flashlight_flags = FLASHLIGHT_ALWAYS_ON
 	flashlight_range = 5
 	light_wedge = LIGHT_OMNI

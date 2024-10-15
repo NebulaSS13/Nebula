@@ -30,6 +30,7 @@
 		/decl/material/solid/ice = 1
 	)
 	temperature_burn_milestone_material = /decl/material/liquid/water
+	can_boil_to_gas = TRUE
 
 /decl/material/liquid/water/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()

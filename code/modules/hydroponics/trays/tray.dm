@@ -121,14 +121,30 @@
 		/decl/material/liquid/mutagenics =  15
 	)
 
-/obj/machinery/portable_atmospherics/hydroponics/proc/set_seed(var/new_seed)
+/obj/machinery/portable_atmospherics/hydroponics/proc/set_seed(new_seed, reset_values)
+
 	if(seed == new_seed)
 		return
+
 	seed = new_seed
+
 	if(seed?.scannable_result)
 		set_extension(src, /datum/extension/scannable, seed.scannable_result)
 	else if(has_extension(src, /datum/extension/scannable))
 		remove_extension(src, /datum/extension/scannable)
+
+	dead = 0
+	age = 0
+	sampled = 0
+	harvest = 0
+
+	if(reset_values)
+		yield_mod = 0
+		mutation_mod = 0
+		lastproduce = 0
+		weedlevel = 0
+
+	check_plant_health()
 	update_icon()
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/observer/ghost/user)
@@ -176,7 +192,7 @@
 		if(istype(Proj, /obj/item/projectile/energy/floramut/gene))
 			var/obj/item/projectile/energy/floramut/gene/G = Proj
 			if(seed)
-				set_seed(seed.diverge_mutate_gene(G.gene, get_turf(loc)))	//get_turf just in case it's not in a turf.
+				set_seed(seed.diverge_mutate_gene(G.gene, get_turf(loc)), reset_values = FALSE)	//get_turf just in case it's not in a turf.
 		else
 			mutate(1)
 			return
@@ -282,10 +298,6 @@
 	if(!seed.get_trait(TRAIT_HARVEST_REPEAT))
 		yield_mod = 0
 		set_seed(null)
-		dead = 0
-		age = 0
-		sampled = 0
-		mutation_mod = 0
 
 	check_plant_health()
 
@@ -304,24 +316,16 @@
 
 	set_seed(null)
 
-	dead = 0
-	sampled = 0
-	age = 0
-	yield_mod = 0
-	mutation_mod = 0
-	lastproduce = 0
-	check_plant_health()
 	return TRUE
 
 // If a weed growth is sufficient, this proc is called.
 /obj/machinery/portable_atmospherics/hydroponics/proc/weed_invasion()
 
-	set_seed(SSplants.seeds[pick(list("reishi", "nettles", "amanita", "mushrooms", "plumphelmet", "towercap", "harebells", "weeds"))])
+	set_seed(SSplants.seeds[pick(list("reishi", "nettles", "amanita", "mushrooms", "plumphelmet", "towercap", "harebells", "weeds"))], reset_values = FALSE)
 
 	if(!seed)
 		return //Weed does not exist, someone fucked up.
 
-	dead = 0
 	age = 0
 	plant_health = seed.get_trait(TRAIT_ENDURANCE)
 	lastcycle = world.time
@@ -349,7 +353,7 @@
 	// If it's not in the global list, then no products of the line have been
 	// harvested yet and it's safe to assume it's restricted to this tray.
 	if(!isnull(SSplants.seeds[seed.name]))
-		set_seed(seed.diverge())
+		set_seed(seed.diverge(), reset_values = FALSE)
 	seed.mutate(severity,get_turf(src))
 
 	return
@@ -385,20 +389,15 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/mutate_species()
 
-	var/previous_plant = seed.display_name
-	var/newseed = seed.get_mutant_variant()
-	if(newseed in SSplants.seeds)
-		set_seed(SSplants.seeds[newseed])
-	else
+	var/newseed = seed?.get_mutant_variant()
+	if(!newseed || !(newseed in SSplants.seeds))
 		return
 
-	dead = 0
+	var/previous_plant = seed.display_name
+	set_seed(SSplants.seeds[newseed])
 	mutate(1)
-	age = 0
 	plant_health = seed.get_trait(TRAIT_ENDURANCE)
 	lastcycle = world.time
-	harvest = 0
-	weedlevel = 0
 
 	update_icon()
 	visible_message("<span class='danger'>The </span><span class='notice'>[previous_plant]</span><span class='danger'> has suddenly mutated into </span><span class='notice'>[seed.display_name]!</span>")
@@ -449,6 +448,15 @@
 					check_plant_health()
 		else
 			to_chat(user, SPAN_WARNING("This plot is completely devoid of weeds. It doesn't need uprooting."))
+		return TRUE
+
+	if(IS_SHOVEL(O))
+		if(seed)
+			var/removing_seed = seed
+			if(O.do_tool_interaction(TOOL_SHOVEL, user, src, 3 SECONDS, start_message = "removing \the [seed.display_name] from", success_message = "removing \the [seed.display_name] from") && seed == removing_seed)
+				set_seed(null)
+		else
+			to_chat(user, SPAN_WARNING("There is no plant in \the [src] to remove."))
 		return TRUE
 
 	if (istype(O, /obj/item/plants))
@@ -536,7 +544,6 @@
 	to_chat(user, SPAN_NOTICE("You plant the [plant_noun]."))
 	lastproduce = 0
 	set_seed(planting_seed) //Grab the seed datum.
-	dead = 0
 	age = 1
 
 	//Snowflakey, maybe move this to the seed datum
@@ -635,8 +642,6 @@
 	var/obj/item/seeds/S = locate() in get_turf(src)
 	if(S.seed)
 		set_seed(S.seed)
-		lastproduce = 0
-		dead = 0
 		age = 1
 		plant_health = (istype(S, /obj/item/seeds/extracted/cutting) ? round(seed.get_trait(TRAIT_ENDURANCE)/rand(2,5)) : seed.get_trait(TRAIT_ENDURANCE))
 		lastcycle = world.time

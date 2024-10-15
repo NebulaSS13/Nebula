@@ -70,7 +70,7 @@
 	max_storage_space = 5
 
 /datum/storage/box/parts_pack
-	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_SMALL)
+	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_NORMAL)
 
 /datum/storage/box/donut
 	max_storage_space = ITEM_SIZE_SMALL * 6
@@ -108,12 +108,14 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 
+/datum/storage/box/tapes
+	max_storage_space = 28
+
 /datum/storage/box/candles
-	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 7
+	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 
 /datum/storage/box/candles/scented
-	max_storage_space = 5
+	max_storage_space = 10
 
 /datum/storage/box/candles/incense
-	max_storage_space = 9
+	max_storage_space = 18

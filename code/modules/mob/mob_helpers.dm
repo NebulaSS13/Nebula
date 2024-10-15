@@ -117,23 +117,9 @@ var/global/list/global/organ_rel_size = list(
 		zone = check_zone(zone, target)
 		if(prob(probability))
 			return zone
-
 	var/ran_zone = zone
 	while (ran_zone == zone)
-		ran_zone = pick (
-			organ_rel_size[BP_HEAD];   BP_HEAD,
-			organ_rel_size[BP_CHEST];  BP_CHEST,
-			organ_rel_size[BP_GROIN];  BP_GROIN,
-			organ_rel_size[BP_L_ARM];  BP_L_ARM,
-			organ_rel_size[BP_R_ARM];  BP_R_ARM,
-			organ_rel_size[BP_L_LEG];  BP_L_LEG,
-			organ_rel_size[BP_R_LEG];  BP_R_LEG,
-			organ_rel_size[BP_L_HAND]; BP_L_HAND,
-			organ_rel_size[BP_R_HAND]; BP_R_HAND,
-			organ_rel_size[BP_L_FOOT]; BP_L_FOOT,
-			organ_rel_size[BP_R_FOOT]; BP_R_FOOT
-		)
-
+		ran_zone = pickweight(organ_rel_size)
 	return ran_zone
 
 // Emulates targetting a specific body part, and miss chances

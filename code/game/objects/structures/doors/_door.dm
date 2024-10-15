@@ -46,22 +46,43 @@
 	)
 	return blend_objects
 
+// Preference is: constructed walls, other doors, other walls.
+/obj/structure/door/proc/get_turf_blend_priority(turf/neighbor)
+	if(istype(neighbor, /turf/wall))
+		return istype(neighbor, /turf/wall/natural) ? 1 : 3
+	if(locate(/obj/structure/door) in neighbor)
+		return 2
+	return 0
+
 /obj/structure/door/update_connections(var/propagate = FALSE)
+
 	. = ..()
-	if(isturf(loc))
 
-		if(propagate)
-			for(var/turf/wall/W in RANGE_TURFS(loc, 1))
-				W.wall_connections = null
-				W.other_connections = null
-				W.queue_icon_update()
+	if(!isturf(loc))
+		return
 
-		for(var/turf/wall/W in RANGE_TURFS(loc, 1))
-			var/turf_dir = get_dir(loc, W)
-			if(turf_dir & (turf_dir - 1)) // if diagonal
-				continue // skip diagonals
-			set_dir(turn(get_dir(loc, W), 90))
-			break
+	var/highest_priority
+	var/highest_dir
+
+	for(var/turf/neighbor as anything in RANGE_TURFS(loc, 1))
+
+		if(propagate && istype(neighbor, /turf/wall))
+			var/turf/wall/wall = neighbor
+			wall.wall_connections = null
+			wall.other_connections = null
+			wall.queue_icon_update()
+
+		var/turf_dir = get_dir(loc, neighbor)
+		if(turf_dir & (turf_dir - 1)) // if diagonal
+			continue // skip diagonals
+
+		var/turf_priority = get_turf_blend_priority(neighbor)
+		if(turf_priority > highest_priority)
+			highest_dir      = turf_dir
+			highest_priority = turf_priority
+
+	if(highest_priority > 0 && highest_dir)
+		set_dir(turn(highest_dir, 90))
 
 /obj/structure/door/get_material_health_modifier()
 	. = 10

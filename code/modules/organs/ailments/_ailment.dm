@@ -17,10 +17,10 @@
 	// Treatment types
 	var/treated_by_item_type                // What item type can be used in physical interaction to cure the ailment?
 	var/treated_by_item_cost = 1            // If treated_by_item_type is a stack, how many should be used?
-	var/treated_by_reagent_type             // What reagent type cures this ailment when metabolized?
-	var/treated_by_reagent_dosage = 1       // What is the minimum dosage for a reagent to cure this ailment?
-	var/treated_by_chem_effect              // What chemical effect cures this ailment?
-	var/treated_by_chem_effect_strength = 1 // How strong must the chemical effect be to cure this ailment?
+	var/list/treated_by_reagent_type        // What reagent type(s) cures this ailment when metabolized? Can be a single type or a list of types.
+	var/treated_by_reagent_dosage = 1       // What is the minimum dosage for a reagent to cure this ailment? TODO: merge with list above
+	var/list/treated_by_chem_effect         // What chemical effect cures this ailment? Can be a single effect or a list of effects.
+	var/treated_by_chem_effect_strength = 1 // How strong must the chemical effect be to cure this ailment? TODO: merge with list above
 
 	// Fluff strings
 	var/initial_ailment_message = "Your $ORGAN$ $ORGAN_DOES$n't feel quite right..."        // Shown in New()
@@ -117,7 +117,14 @@
 	qdel(src)
 
 /datum/ailment/proc/treated_by_medication(var/reagent_type, var/dosage)
-	return treated_by_reagent_type && ispath(reagent_type, treated_by_reagent_type) && dosage >= treated_by_reagent_dosage
+	if(!treated_by_reagent_type || dosage < treated_by_reagent_dosage)
+		return FALSE
+	if(islist(treated_by_reagent_type))
+		for(var/treatment_type in treated_by_reagent_type)
+			if(ispath(reagent_type, treatment_type))
+				return TRUE
+		return FALSE
+	return ispath(reagent_type, treated_by_reagent_type)
 
 /datum/ailment/proc/was_treated_by_medication(var/datum/reagents/source, var/reagent_type)
 	source.remove_reagent(reagent_type, treated_by_reagent_dosage)

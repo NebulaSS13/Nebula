@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/storage/matchbox.dmi'
 	icon_state = "matchbox"
 	item_state = "zippo"
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
 	storage = /datum/storage/box/matches
 
