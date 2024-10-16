@@ -6,6 +6,7 @@ var/global/list/wrapped_bodytypes_by_ref = list()
 /decl/bodytype/shapeshifter
 	abstract_type = /decl/bodytype/shapeshifter
 	bodytype_category = BODYTYPE_HUMANOID
+	limb_blend = ICON_MULTIPLY // everything is reindexed to be shades of white
 	uid = "bodytype_shapeshifter"
 
 	var/decl/bodytype/default_form
