@@ -65,7 +65,7 @@
 	name = "spider venom"
 	uid = "liquid_spider_venom"
 	lore_text = "A deadly necrotic toxin produced by giant spiders to disable their prey."
-	taste_description = "absolutely vile"
+	taste_description = "vile poison"
 	color = "#91d895"
 	toxicity_targets_organ = BP_LIVER
 	toxicity = 5

@@ -5727,9 +5727,9 @@
 /obj/item/tool/hoe/mini,
 /obj/item/tool/spade,
 /obj/item/tool/spade,
-/obj/item/honey_frame,
-/obj/item/honey_frame,
-/obj/item/honey_frame,
+/obj/item/hive_frame/crafted,
+/obj/item/hive_frame/crafted,
+/obj/item/hive_frame/crafted,
 /turf/floor/tiled,
 /area/ministation/hydro)
 "yg" = (
@@ -6051,7 +6051,7 @@
 "zj" = (
 /obj/effect/floor_decal/corner/beige/half,
 /obj/structure/table/glass,
-/obj/machinery/honey_extractor,
+/obj/machinery/centrifuge/mapped,
 /turf/floor/tiled,
 /area/ministation/hydro)
 "zl" = (
@@ -8759,7 +8759,7 @@
 /turf/floor/tiled,
 /area/ministation/hall/e2)
 "Oo" = (
-/obj/machinery/beehive,
+/obj/structure/apiary/mapped,
 /turf/floor/fake_grass,
 /area/ministation/hydro)
 "Op" = (

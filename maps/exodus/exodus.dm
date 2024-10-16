@@ -10,6 +10,7 @@
 	#include "../../mods/gamemodes/spyvspy/_spyvspy.dme"
 	#include "../../mods/gamemodes/mixed/_mixed.dme"
 
+	#include "../../mods/content/insects/_insects.dme"
 	#include "../../mods/content/mundane.dm"
 	#include "../../mods/content/bigpharma/_bigpharma.dme"
 	#include "../../mods/content/corporate/_corporate.dme"

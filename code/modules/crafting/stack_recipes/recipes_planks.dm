@@ -10,13 +10,6 @@
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
 	category               = "weapons"
 
-/decl/stack_recipe/planks/beehive_assembly
-	result_type            = /obj/item/beehive_assembly
-	category               = "furniture"
-
-/decl/stack_recipe/planks/beehive_frame
-	result_type            = /obj/item/honey_frame
-
 /decl/stack_recipe/planks/zipgunframe
 	result_type            = /obj/item/zipgunframe
 	difficulty             = MAT_VALUE_VERY_HARD_DIY

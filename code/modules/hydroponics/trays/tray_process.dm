@@ -73,6 +73,9 @@
 			mutate((rand(100) < 15) ? 2 : 1)
 			mutation_level = 0
 
+	if(pollen < 10)
+		pollen += seed?.produces_pollen
+
 	// Maintain tray nutrient and water levels.
 	if(seed.get_trait(TRAIT_REQUIRES_NUTRIENTS) && seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) > 0 && nutrilevel > 0 && prob(25))
 		nutrilevel -= max(0,seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) * growth_rate)

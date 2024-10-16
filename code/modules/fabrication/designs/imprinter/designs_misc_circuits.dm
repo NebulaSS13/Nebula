@@ -350,11 +350,8 @@
 /datum/fabricator_recipe/imprinter/circuit/cooker
 	path = /obj/item/stock_parts/circuitboard/cooker
 
-/datum/fabricator_recipe/imprinter/circuit/honey_extractor
-	path = /obj/item/stock_parts/circuitboard/honey
-
 /datum/fabricator_recipe/imprinter/circuit/seed_extractor
-	path = /obj/item/stock_parts/circuitboard/honey/seed
+	path = /obj/item/stock_parts/circuitboard/seed_extractor
 
 /datum/fabricator_recipe/imprinter/circuit/vending
 	path = /obj/item/stock_parts/circuitboard/vending
@@ -499,3 +496,6 @@
 
 /datum/fabricator_recipe/imprinter/circuit/central_atmos
 	path = /obj/item/stock_parts/circuitboard/central_atmos
+
+/datum/fabricator_recipe/imprinter/circuit/centrifuge
+	path = /obj/item/stock_parts/circuitboard/centrifuge

@@ -26489,7 +26489,7 @@
 	pixel_x = -21;
 	pixel_y = -10
 	},
-/obj/machinery/honey_extractor,
+/obj/machinery/centrifuge/mapped,
 /turf/floor/tiled/steel_grid,
 /area/exodus/hydroponics/garden)
 "bev" = (

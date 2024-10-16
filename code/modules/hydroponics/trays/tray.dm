@@ -42,6 +42,9 @@
 	var/force_update           // Set this to bypass the cycle time check.
 	var/obj/temp_chem_holder   // Something to hold reagents during process_reagents()
 
+	// Counter used by bees.
+	var/pollen = 0
+
 	// Seed details/line data.
 	var/datum/seed/seed = null // The currently planted seed
 
