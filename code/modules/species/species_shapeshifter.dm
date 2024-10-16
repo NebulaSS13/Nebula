@@ -67,7 +67,12 @@
 
 	set_special_ability_cooldown(5 SECONDS)
 
-	var/decl/bodytype/new_bodytype = input("Please select a bodytype to emulate.", "Shapeshifter Body") as null|anything in shifter.get_available_shifter_bodytypes(src)
+	var/list/shifter_bodytypes = shifter.get_available_shifter_bodytypes(src)
+
+	var/decl/bodytype/new_bodytype = input("Please select a bodytype to emulate.", "Shapeshifter Body") as null|anything in shifter_bodytypes
+	if(!new_bodytype)
+		return
+	new_bodytype = shifter_bodytypes[new_bodytype]
 	if(!istype(new_bodytype) || global.wrapped_bodytypes_by_ref["\ref[src]"] == new_bodytype)
 		return
 

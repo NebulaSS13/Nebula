@@ -23,16 +23,19 @@ var/global/list/wrapped_bodytypes_by_ref = list()
 				continue
 			valid_transform_bodytypes -= bodytype
 			if(ispath(bodytype, /decl/bodytype))
-				valid_transform_bodytypes |= GET_DECL(bodytype)
+				var/decl/bodytype/the_bodytype = GET_DECL(bodytype)
+				valid_transform_bodytypes["[the_bodytype.associated_root_species_name] - [the_bodytype.pref_name]"] = the_bodytype
 			else if(istext(bodytype))
 				var/decl/species/species = get_species_by_key(bodytype)
-				if(length(species.available_bodytypes))
-					valid_transform_bodytypes |= species.available_bodytypes
+				for(var/decl/bodytype/some_bodytype in species.available_bodytypes)
+					if(some_bodytype.is_robotic) // skip FBPs
+						continue
+					valid_transform_bodytypes["[some_bodytype.associated_root_species_name] - [some_bodytype.pref_name]"] = some_bodytype
 
 		// A warning to the future, this might break if the default species has a shapeshifter bodytype.
 		var/decl/species/species = get_species_by_key(global.using_map.default_species)
 		default_form = species.default_bodytype
-		valid_transform_bodytypes |= default_form
+		valid_transform_bodytypes["[species.name] - [default_form.pref_name]"] = default_form
 
 		retrieved_bodytypes = TRUE
 
