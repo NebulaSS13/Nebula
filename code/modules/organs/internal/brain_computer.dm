@@ -11,6 +11,7 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
+	bodytype = /decl/bodytype/prosthetic/basic_human
 	can_use_brain_interface = FALSE
 	var/searching = FALSE
 	var/brain_name
@@ -23,7 +24,6 @@
 
 /obj/item/organ/internal/brain/robotic/Initialize()
 	. = ..()
-	set_bodytype(/decl/bodytype/prosthetic/basic_human)
 	update_icon()
 	brain_name = "[pick(list("ADA","DOS","GNU","MAC","WIN"))]-[random_id(type,1000,9999)]"
 	SetName("[name] ([brain_name])")

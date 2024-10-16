@@ -36,7 +36,7 @@
 	add_language(/decl/language/machine, 1)
 	default_language = controlling_ai.default_language
 
-	stat = CONSCIOUS
+	set_stat(CONSCIOUS)
 	if(user.mind)
 		user.mind.transfer_to(src)
 	else
