@@ -113,3 +113,10 @@
 		else //this tank doesn't have enough to launch shuttle by itself, so remove all its fuel, then continue loop
 			fuel_to_consume -= fuel_available
 			FT.remove_air_by_flag(XGM_GAS_FUEL, fuel_available)
+
+// When we rotate, rotate our overmap landmark's fore_dir too, so meteors come from the right direction.
+/datum/shuttle/autodock/overmap/shuttle_moved(obj/effect/shuttle_landmark/destination, list/turf_translation, angle = 0)
+	..()
+	var/obj/effect/overmap/visitable/ship/landable/our_ship = SSshuttle.ship_by_shuttle(name)
+	if(our_ship && angle != 0)
+		our_ship.fore_dir = turn(our_ship.fore_dir, angle)

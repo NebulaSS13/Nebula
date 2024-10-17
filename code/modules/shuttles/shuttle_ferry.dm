@@ -40,7 +40,7 @@
 	direction = !location
 	..()
 
-/datum/shuttle/autodock/ferry/shuttle_moved()
+/datum/shuttle/autodock/ferry/shuttle_moved(obj/effect/shuttle_landmark/destination, list/turf_translation, angle = 0)
 	..()
 
 	if (next_location == waypoint_station) location = 0

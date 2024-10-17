@@ -15,6 +15,7 @@
 		"nav_casino_3",
 		"nav_casino_4",
 		"nav_casino_antag",
+		"nav_casino_dock",
 	)
 	initial_restricted_waypoints = list(
 		/datum/shuttle/autodock/overmap/casino_cutter = list("nav_casino_hangar"),
@@ -58,6 +59,11 @@
 /obj/effect/shuttle_landmark/nav_casino/nav5
 	name = "Casino Ship Navpoint #5"
 	landmark_tag = "nav_casino_antag"
+
+
+/obj/effect/shuttle_landmark/nav_casino/dock
+	name = "Casino Ship Docking Port"
+	landmark_tag = "nav_casino_dock"
 
 /datum/shuttle/autodock/overmap/casino_cutter
 	name = "Casino Cutter"
