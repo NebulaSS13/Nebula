@@ -60,7 +60,7 @@
 		/obj/item/chems/condiment/capsaicin      = TRADER_THIS_TYPE,
 		/obj/item/food/chazuke                   = TRADER_THIS_TYPE,
 		/obj/item/food/katsucurry                = TRADER_THIS_TYPE,
-		/obj/item/food/meatkabob                 = TRADER_THIS_TYPE,
+		/obj/item/food/skewer/meat                = TRADER_THIS_TYPE,
 		/obj/item/food/boiledegg                 = TRADER_THIS_TYPE,
 		/obj/item/food/boiledrice                = TRADER_THIS_TYPE,
 		/obj/item/food/ricepudding               = TRADER_THIS_TYPE,
@@ -126,7 +126,6 @@
 		/obj/item/food/processed_grown      = TRADER_BLACKLIST_ALL,
 		/obj/item/food/slice                = TRADER_BLACKLIST_ALL,
 		/obj/item/food/grown                = TRADER_BLACKLIST_ALL,
-		/obj/item/food/human                = TRADER_BLACKLIST_ALL,
 		/obj/item/food/sliceable/braincake  = TRADER_BLACKLIST,
 		/obj/item/food/butchery/meat/human  = TRADER_BLACKLIST,
 		/obj/item/food/variable             = TRADER_BLACKLIST_ALL
@@ -188,10 +187,10 @@
 		/obj/item/food/sliceable/pizza            = TRADER_BLACKLIST_ALL,
 		/obj/item/food/sliceable/xenomeatbread    = TRADER_BLACKLIST,
 		/obj/item/food/piecrust                   = TRADER_BLACKLIST,
-		/obj/item/food/unleaveneddough            = TRADER_BLACKLIST,
+		/obj/item/food/sliceable/unleaveneddough  = TRADER_BLACKLIST,
 		/obj/item/food/dough                      = TRADER_BLACKLIST,
 		/obj/item/food/sliceable/flatdough        = TRADER_BLACKLIST,
 		/obj/item/food/sliceable/braincake        = TRADER_BLACKLIST,
-		/obj/item/food/pie                        = TRADER_THIS_TYPE,
+		/obj/item/food/bananapie                  = TRADER_THIS_TYPE,
 		/obj/item/food/applepie                   = TRADER_THIS_TYPE
 	)

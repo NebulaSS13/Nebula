@@ -47,7 +47,7 @@
 /obj/item/food/slimesoup
 	name = "slime soup"
 	desc = "If no water is available, you may substitute tears."
-	icon_state = "slimesoup"//nonexistant?
+	icon = 'mods/content/xenobiology/icons/soup.dmi'
 	filling_color = "#c4dba0"
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'

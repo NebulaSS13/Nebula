@@ -9,10 +9,11 @@
 //	it. Try to stick to existing reagents when possible (so if you want a stronger healing effect, just use regenerative serum).
 
 /obj/item/food
+	abstract_type = /obj/item/food
 	name = "snack"
 	desc = "Yummy!"
-	icon = 'icons/obj/food.dmi'
-	icon_state = null
+	icon = 'icons/obj/food/error.dmi'
+	icon_state = ICON_STATE_WORLD
 	randpixel = 6
 	item_flags = null
 	material = /decl/material/liquid/nutriment

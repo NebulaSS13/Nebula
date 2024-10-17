@@ -1,7 +1,7 @@
 /obj/item/food/butchery/chopped
 	name          = "chopped meat"
 	desc          = "A handful of chopped meat."
-	icon          = 'icons/obj/items/butchery/chopped.dmi'
+	icon          = 'icons/obj/food/butchery/chopped.dmi'
 	bitesize      = 2
 	nutriment_amt = 1
 	w_class       = ITEM_SIZE_TINY

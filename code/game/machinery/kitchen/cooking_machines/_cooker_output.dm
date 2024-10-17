@@ -1,7 +1,7 @@
 // Wrapper obj for cooked food. Appearance is set in the cooking code, not on spawn.
 /obj/item/food/variable
 	name = "cooked food"
-	icon = 'icons/obj/food_custom.dmi'
+	icon = 'icons/obj/food/custom/custom.dmi'
 	desc = "If you can see this description then something is wrong. Please report the bug on the tracker."
 	nutriment_amt = 5
 	bitesize = 2
