@@ -99,7 +99,7 @@ MRE Stuff
 /obj/item/mre/menu10/WillContain()
 	. = list(
 		main_meal,
-		/obj/item/food/candy/proteinbar,
+		/obj/item/food/junk/candy/proteinbar,
 		/obj/item/chems/packet/protein,
 		/obj/random/mre/sauce/sugarfree,
 		/obj/item/utensil/spoon/plastic
@@ -171,13 +171,13 @@ MRE Stuff
 	return list(/obj/item/food/tossedsalad)
 
 /obj/item/mrebag/menu8/WillContain()
-	return list(/obj/item/food/hotchili)
+	return list(/obj/item/chems/glass/bowl/mapped/chili/hot)
 
 /obj/item/mrebag/menu9/WillContain()
 	return list(/obj/item/food/boiledrice)
 
 /obj/item/mrebag/menu10/WillContain()
-	return list(/obj/item/food/meatcube)
+	return list(/obj/item/food/junk/meatcube)
 
 /obj/item/mrebag/dessert
 	name = "dessert"

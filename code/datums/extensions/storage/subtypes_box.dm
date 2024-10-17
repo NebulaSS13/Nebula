@@ -15,8 +15,8 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 
-/datum/storage/box/monkey
-	can_hold = list(/obj/item/food/monkeycube)
+/datum/storage/box/animal_cube
+	can_hold = list(/obj/item/food/animal_cube)
 
 /datum/storage/box/snappop
 	can_hold = list(/obj/item/toy/snappop)

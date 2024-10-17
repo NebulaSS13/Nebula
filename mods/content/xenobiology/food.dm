@@ -27,11 +27,6 @@
 	)
 	result = /obj/item/food/jellysandwich/slime
 
-/decl/recipe/slimesoup
-	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/slimejelly = 5)
-	items = list()
-	result = /obj/item/food/slimesoup
-
 /obj/item/food/jellysandwich/slime/populate_reagents()
 	add_to_reagents(/decl/material/liquid/slimejelly, 5)
 	. = ..()
@@ -44,19 +39,8 @@
 	add_to_reagents(/decl/material/liquid/slimejelly, 5)
 	. = ..()
 
-/obj/item/food/slimesoup
-	name = "slime soup"
-	desc = "If no water is available, you may substitute tears."
-	icon_state = "slimesoup"//nonexistant?
-	filling_color = "#c4dba0"
-	bitesize = 5
-	eat_sound = 'sound/items/drink.ogg'
-	utensil_flags = UTENSIL_FLAG_SCOOP
-
-/obj/item/food/slimesoup/populate_reagents()
-	add_to_reagents(/decl/material/liquid/slimejelly, 5)
-	add_to_reagents(/decl/material/liquid/water, 10)
-	. = ..()
+/obj/item/chems/glass/bowl/mapped/slime
+	initial_reagent_type = /decl/material/liquid/slimejelly
 
 /obj/item/food/donut/jelly/slime
 	name = "jelly donut"
@@ -67,7 +51,7 @@
 	bitesize = 5
 	jelly_type = /decl/material/liquid/slimejelly
 
-/obj/item/food/mysterysoup/get_random_fillings()
+/obj/item/chems/glass/bowl/mystery/get_random_fillings()
 	. = ..() + list(list(
 		/decl/material/liquid/slimejelly = 10,
 		/decl/material/liquid/water =      10

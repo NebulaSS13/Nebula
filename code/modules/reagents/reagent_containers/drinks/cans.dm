@@ -3,6 +3,7 @@
 	amount_per_transfer_from_this = 5
 	atom_flags = 0 //starts closed
 	material = /decl/material/solid/metal/aluminium
+	abstract_type = /obj/item/chems/drinks/cans
 
 /obj/item/chems/drinks/cans/update_container_desc()
 	return

@@ -23,11 +23,11 @@
 /decl/chemical_reaction/recipe/food/dairy
 	abstract_type = /decl/chemical_reaction/recipe/food/dairy
 	var/static/list/milk_data_keys = list(
-		"milk_donor",
-		"milk_color",
-		"milk_name",
-		"cheese_name",
-		"cheese_color"
+		DATA_MILK_DONOR,
+		DATA_MILK_NAME,
+		DATA_MILK_COLOR,
+		DATA_CHEESE_NAME,
+		DATA_CHEESE_COLOR
 	)
 
 /decl/chemical_reaction/recipe/food/dairy/send_data(var/datum/reagents/holder, var/reaction_limit)
@@ -93,21 +93,51 @@
 	mix_message = "The flour thickens the processed meat until it clumps."
 	obj_result = /obj/item/food/meatball/raw
 
-/decl/chemical_reaction/recipe/food/dough
-	name = "Plain dough"
+/decl/chemical_reaction/recipe/food/piecrust
+	name = "Butter Pie Crust"
 	required_reagents = list(
-		/decl/material/solid/organic/meat/egg = 3,
+		/decl/material/liquid/nutriment/sugar  = 1,
+		/decl/material/solid/sodiumchloride    = 1,
+		/decl/material/liquid/nutriment/flour  = 10,
+		/decl/material/liquid/water            = 5,
+		/decl/material/liquid/nutriment/butter = 1
+	)
+	mix_message = "The solution smooths out into a pie crust."
+	obj_result = /obj/item/food/piecrust
+	// Trying to get the chemical recipe overlaps with dough sorted out.
+	maximum_temperature = 60 CELSIUS
+
+/decl/chemical_reaction/recipe/food/piecrust/margarine
+	name = "Shortening Pie Crust"
+	required_reagents = list(
+		/decl/material/liquid/nutriment/sugar     = 1,
+		/decl/material/solid/sodiumchloride       = 1,
+		/decl/material/liquid/nutriment/flour     = 10,
+		/decl/material/liquid/water               = 5,
+		/decl/material/liquid/nutriment/margarine = 1
+	)
+
+/decl/chemical_reaction/recipe/food/dough
+	name = "Dough (Leavened)"
+	required_reagents = list(
+		/decl/material/liquid/nutriment/yeast = 1,
 		/decl/material/liquid/nutriment/flour = 10,
 		/decl/material/liquid/water           = 10
 	)
-	mix_message = "The solution folds and thickens into a large ball of dough."
+	mix_message = "The solution rises into a large ball of leavened dough."
 	obj_result = /obj/item/food/dough
+	minimum_temperature = 60 CELSIUS
 
-/decl/chemical_reaction/recipe/food/soydough
-	name = "Soy dough"
-	required_reagents = list(/decl/material/liquid/nutriment/plant_protein = 3, /decl/material/liquid/nutriment/flour = 10, /decl/material/liquid/water = 10)
-	mix_message = "The solution folds and thickens into a large ball of dough."
-	obj_result = /obj/item/food/dough
+/decl/chemical_reaction/recipe/food/dough/unleavened
+	name = "Dough (Unleavened)"
+	required_reagents = list(
+		/decl/material/solid/sodiumchloride   = 1,
+		/decl/material/liquid/nutriment/flour = 10,
+		/decl/material/liquid/water           = 10
+	)
+	mix_message = "The solution swells into a round of unleavened dough."
+	obj_result = /obj/item/food/sliceable/unleaveneddough
+	inhibitors = list(/decl/material/liquid/nutriment/yeast)
 
 /decl/chemical_reaction/recipe/food/syntiflesh
 	name = "Synthetic Meat"

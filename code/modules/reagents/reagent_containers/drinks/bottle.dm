@@ -453,14 +453,43 @@
 /obj/item/chems/drinks/bottle/sake/populate_reagents()
 	add_to_reagents(/decl/material/liquid/ethanol/sake, reagents.maximum_volume)
 
+
 /obj/item/chems/drinks/bottle/champagne
-	name = "Murcelano Vinyard's Premium Champagne"
-	desc = "The regal drink of celebrities and royalty."
+	name = "champagne bottle"
+	desc = "Sparkling wine made from exquisite grape varieties by the method of secondary fermentation in a bottle. Bubbling."
 	icon_state = "champagne"
-	center_of_mass = @'{"x":16,"y":4}'
+	center_of_mass = @'{"x":12,"y":5}'
+	atom_flags = 0 //starts closed
+	var/opening
 
 /obj/item/chems/drinks/bottle/champagne/populate_reagents()
 	add_to_reagents(/decl/material/liquid/ethanol/champagne, reagents.maximum_volume)
+
+/obj/item/chems/drinks/bottle/champagne/open(mob/user)
+	if(ATOM_IS_OPEN_CONTAINER(src))
+		to_chat(user, SPAN_NOTICE("\The [src] is already open."))
+		return
+	if(!opening)
+		user.visible_message(SPAN_NOTICE("\The [user] tries to open \the [src]!"))
+		opening = TRUE
+	else
+		to_chat(user, SPAN_WARNING("You are already trying to open \the [src]."))
+		return
+	if(!do_after(user, 3 SECONDS, src))
+		if(QDELETED(user) || QDELETED(src))
+			return
+		user.visible_message(SPAN_NOTICE("\The [user] fails to open \the [src]."))
+		opening = FALSE
+		return
+	playsound(src,'sound/effects/champagne_open.ogg', 100, 1)
+	if(!user.skill_check(SKILL_COOKING, SKILL_BASIC))
+		sleep(4)
+		playsound(src,'sound/effects/champagne_psh.ogg', 100)
+		user.visible_message(SPAN_WARNING("\The [user] clumsily pops the cork out of \the [src], wasting fizz and getting foam everywhere."))
+		new /obj/effect/decal/cleanable/champagne(get_turf(user))
+	else
+		user.visible_message(SPAN_NOTICE("\The [user] pops the cork out of \the [src] with a professional flourish."))
+	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/chems/drinks/bottle/jagermeister
 	name = "Kaisermeister Deluxe"
@@ -529,7 +558,7 @@
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
 /obj/item/chems/drinks/bottle/cream/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/milk/cream, reagents.maximum_volume, data = list("milk_donor" = "cow"))
+	add_to_reagents(/decl/material/liquid/drink/milk/cream, reagents.maximum_volume, data = list(DATA_MILK_DONOR = "cow"))
 
 /obj/item/chems/drinks/bottle/tomatojuice
 	name = "Tomato Juice"
@@ -569,6 +598,7 @@
 	smash_duration = 1
 	atom_flags = 0 //starts closed
 	rag_underlay = "rag_small"
+	abstract_type = /obj/item/chems/drinks/bottle/small
 
 /obj/item/chems/drinks/bottle/small/beer
 	name = "space beer"

@@ -3,8 +3,8 @@
 	nutriment_type = /decl/material/liquid/drink/milk
 	bitesize = 2
 	icon_state = ICON_STATE_WORLD
-	var/data_name_field  = "milk_name"
-	var/data_color_field = "milk_color"
+	var/data_name_field  = DATA_MILK_NAME
+	var/data_color_field = DATA_MILK_COLOR
 
 /obj/item/food/dairy/proc/get_default_dairy_color()
 	return COLOR_WHITE

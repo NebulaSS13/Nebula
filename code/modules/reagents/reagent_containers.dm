@@ -25,6 +25,12 @@
 	if(!possible_transfer_amounts)
 		src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
+/obj/item/chems/on_update_icon()
+	. = ..()
+	var/image/contents_overlay = get_reagents_overlay()
+	if(contents_overlay)
+		add_overlay(contents_overlay)
+
 /obj/item/chems/set_custom_desc(var/new_desc)
 	base_desc = new_desc
 	update_container_desc()
@@ -140,35 +146,6 @@
 		update_icon()
 		return TRUE
 	return FALSE
-
-// TODO: merge beakers etc down into this proc.
-/obj/item/chems/proc/get_reagents_overlay()
-
-	if(reagents?.total_volume <= 0)
-		return
-
-	var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
-	if(!primary_reagent)
-		return
-
-	var/reagents_state
-	if(primary_reagent.reagent_overlay_base)
-		reagents_state = primary_reagent.reagent_overlay_base
-	else
-		reagents_state = "reagent_base"
-
-	if(!reagents_state || !check_state_in_icon(reagents_state, icon))
-		return
-
-	var/image/reagent_overlay = overlay_image(icon, reagents_state, reagents.get_color(), RESET_COLOR | RESET_ALPHA)
-	if(primary_reagent.reagent_overlay)
-		reagent_overlay.overlays += overlay_image(icon, primary_reagent.reagent_overlay, primary_reagent.color, RESET_COLOR | RESET_ALPHA)
-	else
-		for(var/reagent_type in reagents.reagent_volumes)
-			var/decl/material/reagent = GET_DECL(reagent_type)
-			if(reagent != primary_reagent && reagent.reagent_overlay && check_state_in_icon(reagent.reagent_overlay, icon))
-				reagent_overlay.overlays += overlay_image(icon, reagent.reagent_overlay, reagent.color, RESET_COLOR | RESET_ALPHA)
-	return reagent_overlay
 
 /obj/item/chems/ProcessAtomTemperature()
 

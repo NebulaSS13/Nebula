@@ -227,6 +227,30 @@
 // One 'unit' of taste sensitivity probability, used in mob/living/proc/ingest
 #define TASTE_DEGREE_PROB 15
 
+// General food data flags
+#define DATA_TASTE            /decl/reagent_data_field/taste
+#define DATA_INGREDIENT_LIST  /decl/reagent_data_field/ingredient_list
+#define DATA_INGREDIENT_FLAGS /decl/reagent_data_field/ingredient_flags
+#define DATA_MASK_COLOR       /decl/reagent_data_field/mask_color
+#define DATA_MASK_NAME        /decl/reagent_data_field/mask_name
+
+// Milk and chees data flags
+#define DATA_MILK_DONOR       /decl/reagent_data_field/milk_donor
+#define DATA_MILK_NAME        /decl/reagent_data_field/milk_name
+#define DATA_MILK_COLOR       /decl/reagent_data_field/milk_color
+#define DATA_CHEESE_NAME      /decl/reagent_data_field/cheese_name
+#define DATA_CHEESE_COLOR     /decl/reagent_data_field/cheese_color
+
+// Blood data flags
+#define DATA_BLOOD_DNA        /decl/reagent_data_field/blood_dna
+#define DATA_BLOOD_DONOR      /decl/reagent_data_field/blood_donor
+#define DATA_BLOOD_SPECIES    /decl/reagent_data_field/blood_species
+#define DATA_BLOOD_COLOR      /decl/reagent_data_field/blood_color
+#define DATA_BLOOD_TYPE       /decl/reagent_data_field/blood_type
+#define DATA_BLOOD_TRACE_CHEM /decl/reagent_data_field/blood_trace_chem
+#define DATA_BLOOD_DOSE_CHEM  /decl/reagent_data_field/blood_dose_chem
+#define DATA_BLOOD_HAS_OXY    /decl/reagent_data_field/blood_has_oxy
+
 //Used by show_message() and emotes
 #define VISIBLE_MESSAGE 1
 #define AUDIBLE_MESSAGE 2

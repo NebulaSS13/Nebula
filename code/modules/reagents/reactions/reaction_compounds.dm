@@ -146,3 +146,15 @@
 	name = "Sulfuric Acid"
 	required_reagents = list(/decl/material/solid/sulfur = 1, /decl/material/solid/sodium = 2)
 	result_amount = 3
+
+/decl/chemical_reaction/compound/condensed_capsaicin
+	name = "Condensed Capsaicin"
+	minimum_temperature = 100 CELSIUS
+	maximum_temperature = 200 CELSIUS // To avoid cooking chili creating condensed capsaicin.
+	mix_message = "darkens and thickens as it seperates from its water content"
+	required_reagents = list(/decl/material/liquid/capsaicin = 2)
+	result = list(/decl/material/liquid/capsaicin/condensed = 1)
+
+/decl/chemical_reaction/compound/condensed_capsaicin/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
+	. = ..()
+	holder?.add_reagent(/decl/material/liquid/water, created_volume)

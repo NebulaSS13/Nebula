@@ -545,3 +545,14 @@
 
 	glass_name = "kvass"
 	glass_desc = "An alcoholic drink commonly made from bread."
+
+/decl/material/liquid/ethanol/champagne
+	name = "champagne"
+	lore_text = "Sparkling wine made from exquisite grape."
+	taste_description = "bitter taste"
+	color = "#a89410"
+	strength = 18
+
+	glass_name = "champagne"
+	glass_desc = "Wow, it's bubbling!"
+	glass_special = list(DRINK_FIZZ)

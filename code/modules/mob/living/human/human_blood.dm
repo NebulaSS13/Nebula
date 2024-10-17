@@ -42,12 +42,12 @@
 		vessel.maximum_volume = species.blood_volume
 
 	LAZYSET(vessel.reagent_data, species.blood_reagent, list(
-		"donor"       = weakref(src),
-		"species"     = get_species_name(),
-		"blood_DNA"   = get_unique_enzymes(),
-		"blood_color" = species.get_species_blood_color(src),
-		"blood_type"  = get_blood_type(),
-		"trace_chem"  = null
+		DATA_BLOOD_DONOR      = weakref(src),
+		DATA_BLOOD_SPECIES    = get_species_name(),
+		DATA_BLOOD_DNA        = get_unique_enzymes(),
+		DATA_BLOOD_COLOR      = species.get_species_blood_color(src),
+		DATA_BLOOD_TYPE       = get_blood_type(),
+		DATA_BLOOD_TRACE_CHEM = null
 	))
 
 //Makes a blood drop, leaking amt units of blood from the mob
@@ -136,7 +136,7 @@
 		add_to_reagents(species.blood_reagent, amount, REAGENT_DATA(donor, species.blood_reagent))
 		return
 	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
-	var/injected_b_type = LAZYACCESS(injected_data, "blood_type")
+	var/injected_b_type = LAZYACCESS(injected_data, DATA_BLOOD_TYPE)
 	if(is_blood_incompatible(injected_b_type))
 		var/decl/blood_type/blood_decl = injected_b_type && get_blood_type_by_name(injected_b_type)
 		if(istype(blood_decl))

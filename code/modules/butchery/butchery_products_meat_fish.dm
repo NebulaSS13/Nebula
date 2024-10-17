@@ -1,7 +1,7 @@
 /obj/item/food/butchery/meat/fish
 	name                           = "fillet"
 	desc                           = "A fillet of fish."
-	icon                           = 'icons/obj/items/butchery/fish.dmi'
+	icon                           = 'icons/obj/food/butchery/fish.dmi'
 	filling_color                  = "#ffdefe"
 	center_of_mass                 = @'{"x":17,"y":13}'
 	bitesize                       = 6
@@ -19,7 +19,7 @@
 
 /obj/item/food/butchery/meat/fish/get_meat_icons()
 	var/static/list/meat_icons = list(
-		'icons/obj/items/butchery/fish.dmi'
+		'icons/obj/food/butchery/fish.dmi'
 	)
 	return meat_icons
 
@@ -37,7 +37,7 @@
 	icon_state                     = "grilledfish"
 	nutriment_amt                  = 8
 	bitesize                       = 2
-	icon                           = 'icons/obj/items/butchery/fish_grilled.dmi'
+	icon                           = 'icons/obj/food/butchery/fish_grilled.dmi'
 	nutriment_desc                 = list("flaky grilled fish" = 5)
 	drying_wetness                 = 0
 	dried_type                     = null
@@ -54,7 +54,7 @@
 
 /obj/item/food/butchery/meat/fish/get_meat_icons()
 	var/static/list/meat_icons = list(
-		'icons/obj/items/butchery/fish_grilled.dmi'
+		'icons/obj/food/butchery/fish_grilled.dmi'
 	)
 	return meat_icons
 

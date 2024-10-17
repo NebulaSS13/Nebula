@@ -9,12 +9,6 @@
 	if((. = ..()))
 		update_icon()
 
-/obj/item/chems/glass/pottery/on_update_icon()
-	. = ..()
-	var/image/contents_overlay = get_reagents_overlay()
-	if(contents_overlay)
-		add_overlay(contents_overlay)
-
 /obj/item/chems/glass/handmade/teapot
 	name = "teapot"
 	desc = "A handmade, slightly lumpy teapot."

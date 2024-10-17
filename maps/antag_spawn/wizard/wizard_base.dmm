@@ -425,7 +425,7 @@
 /area/map_template/wizard_station)
 "bg" = (
 /obj/structure/table/woodentable,
-/obj/item/food/milosoup,
+/obj/item/chems/glass/bowl/mapped/meatball,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"

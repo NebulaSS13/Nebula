@@ -31,7 +31,7 @@
 
 /decl/butchery_data/animal/space_bear
 	meat_name         = "bear"
-	meat_type         = /obj/item/food/bearmeat
+	meat_type         = /obj/item/food/butchery/meat/bear
 	meat_amount       = 10
 	bone_amount       = 20
 	skin_amount       = 20
@@ -99,7 +99,7 @@
 
 /decl/butchery_data/animal/antlion
 	meat_name         = "insect"
-	meat_type         = /obj/item/food/xenomeat
+	meat_type         = /obj/item/food/butchery/meat/xeno
 	meat_amount       = 5
 	skin_material     = /decl/material/solid/organic/skin/insect
 	skin_amount       = 15
