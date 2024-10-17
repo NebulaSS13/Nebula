@@ -1,0 +1,7 @@
+#ifndef MODPACK_PROMETHEAN
+#define MODPACK_PROMETHEAN
+// BEGIN_INCLUDE
+#include "promethean.dm"
+#include "datum/species.dm"
+// END_INCLUDE
+#endif // MODPACK_PROMETHEAN

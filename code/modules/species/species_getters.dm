@@ -1,6 +1,3 @@
-/decl/species/proc/get_valid_shapeshifter_forms(var/mob/living/human/H)
-	return list()
-
 /decl/species/proc/get_additional_examine_text(var/mob/living/human/H)
 	return
 
@@ -35,7 +32,7 @@
 	. = (H && H.isSynthetic() ? 0.5 : radiation_mod)
 
 /decl/species/proc/get_root_species_name(var/mob/living/human/H)
-	return name
+	return H?.get_bodytype()?.get_root_species_name(H) || name
 
 /decl/species/proc/get_bodytype_by_name(var/bodytype_name)
 	bodytype_name = trim(lowertext(bodytype_name))

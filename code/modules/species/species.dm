@@ -301,9 +301,12 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		blood_types -= blood_type
 		blood_types[blood_decl.name] = blood_decl.random_weighting
 
+	var/general_root_species_name = get_root_species_name()
 	for(var/bodytype in available_bodytypes)
 		available_bodytypes -= bodytype
-		available_bodytypes += GET_DECL(bodytype)
+		var/decl/bodytype/bodytype_decl = GET_DECL(bodytype)
+		available_bodytypes += bodytype_decl
+		bodytype_decl.associated_root_species_name = general_root_species_name
 
 	// Update sprite accessory lists for these species.
 	for(var/accessory_type in allow_specific_sprite_accessories)
@@ -445,12 +448,18 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			H.verbs |= verb_path
 	return
 
-/decl/species/proc/handle_post_spawn(var/mob/living/human/H) //Handles anything not already covered by basic species assignment.
+/decl/species/proc/handle_pre_set_species(var/mob/living/human/H)
+	return
+
+/decl/species/proc/handle_post_set_species(var/mob/living/human/H)
+	return
+
+/decl/species/proc/handle_post_change_species(var/mob/living/human/H) //Handles anything not already covered by basic species assignment.
 	add_inherent_verbs(H)
 	add_base_auras(H)
 	handle_movement_flags_setup(H)
 
-/decl/species/proc/handle_pre_spawn(var/mob/living/human/H)
+/decl/species/proc/handle_pre_change_species(var/mob/living/human/H)
 	return
 
 /decl/species/proc/handle_death(var/mob/living/human/H) //Handles any species-specific death events.
