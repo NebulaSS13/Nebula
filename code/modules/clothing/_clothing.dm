@@ -16,8 +16,10 @@
 
 	var/list/accessories
 
+	/// Clothing items with an accessory_slot in this list can be equipped to this item.
 	var/list/valid_accessory_slots
 
+	/// accessory_slot entries in this list will be limited to only one item at a time.
 	var/list/restricted_accessory_slots = list(
 		ACCESSORY_SLOT_UTILITY,
 		ACCESSORY_SLOT_HOLSTER,

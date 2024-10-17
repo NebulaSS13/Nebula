@@ -45,6 +45,30 @@
 	else if(sound_token)
 		QDEL_NULL(sound_token)
 
+/obj/machinery/computer/ship/sensors/proc/get_potential_contacts(include_self = FALSE)
+	var/list/potential_contacts = get_known_contacts(include_self = include_self)
+	// Broken or disabled sensors can't pick up nearby objects.
+	var/obj/machinery/shipsensors/sensors = get_sensors()
+	if(!sensors || sensors.inoperable() || !sensors.use_power || !sensors.range)
+		return potential_contacts
+	for(var/obj/effect/overmap/nearby in view(sensors.range,linked))
+		if(nearby.requires_contact)
+			continue
+		potential_contacts |= nearby
+	if(!include_self && linked)
+		potential_contacts -= linked
+	return potential_contacts
+
+/obj/machinery/computer/ship/sensors/proc/get_known_contacts(include_self = FALSE)
+	var/list/known_contacts = list()
+	// Effects that require contact are only added to the contacts if they have been identified.
+	// Allows for coord tracking out of range of the player's view.
+	for(var/obj/effect/overmap/visitable/identified_contact in contact_datums)
+		known_contacts |= identified_contact
+	if(!include_self && linked)
+		known_contacts -= linked
+	return known_contacts
+
 /obj/machinery/computer/ship/sensors/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
 		display_reconnect_dialog(user, "sensors")
@@ -70,27 +94,27 @@
 			data["status"] = "OK"
 		var/list/contacts = list()
 
-		var/list/potential_contacts = list()
-
-		for(var/obj/effect/overmap/nearby in view(7,linked))
-			if(nearby.requires_contact) // Some ships require.
-				continue
-			potential_contacts |= nearby
-
-		// Effects that require contact are only added to the contacts if they have been identified.
-		// Allows for coord tracking out of range of the player's view.
-		for(var/obj/effect/overmap/visitable/identified_contact in contact_datums)
-			potential_contacts |= identified_contact
-
-		for(var/obj/effect/overmap/O in potential_contacts)
-			if(linked == O)
-				continue
+		for(var/obj/effect/overmap/O in get_potential_contacts())
 			if(!O.scannable)
 				continue
 			var/bearing = round(90 - Atan2(O.x - linked.x, O.y - linked.y),5)
 			if(bearing < 0)
 				bearing += 360
-			contacts.Add(list(list("name"=O.name, "color"= O.color, "ref"="\ref[O]", "bearing"=bearing)))
+			contacts.Add(list(list("name"=O.name, "color"= O.color, "ref"="\ref[O]", "bearing"=bearing, "scannable"=TRUE)))
+		for(var/obj/effect/overmap/UFO in objects_in_view)
+			var/progress = objects_in_view[UFO]
+			if((progress >= 100) || !isnull(contact_datums[UFO])) // Not a UFO if it's identified!
+				continue
+			if(!UFO.scannable)
+				continue
+			var/bearing = round(90 - Atan2(UFO.x - linked.x, UFO.y - linked.y),5)
+			if(bearing < 0)
+				bearing += 360
+			var/bearing_variability = round(30/sensors.sensor_strength, 5)
+			var/bearing_estimate = round(rand(bearing-bearing_variability, bearing+bearing_variability), 5)
+			if(bearing_estimate < 0)
+				bearing_estimate += 360
+			contacts.Add(list(list("name"=UFO.unknown_id, "color"= UFO.color, "variability" = bearing_variability, "progress"=progress, "bearing"=bearing_estimate, "scannable"=FALSE)))
 		if(contacts.len)
 			data["contacts"] = contacts
 		data["last_scan"] = last_scan
@@ -142,7 +166,7 @@
 	if (href_list["scan"])
 		var/obj/effect/overmap/O = locate(href_list["scan"])
 		if(istype(O) && !QDELETED(O))
-			if((O in view(7,linked))|| (O in contact_datums))
+			if((O in view(sensors.range, linked)) || !isnull(contact_datums[O]))
 				playsound(loc, "sound/effects/ping.ogg", 50, 1)
 				LAZYSET(last_scan, "data", O.get_scan_data(user))
 				LAZYSET(last_scan, "location", "[O.x],[O.y]")

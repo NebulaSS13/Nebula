@@ -51,6 +51,8 @@
 	var/skill_points = 16                     //The number of unassigned skill points the job comes with (on top of the minimum skills).
 	var/no_skill_buffs = FALSE                //Whether skills can be buffed by age/species modifiers.
 	var/available_by_default = TRUE
+	/// If TRUE, 'Not available at roundstart.' won't be shown for this job if available_by_default is FALSE.
+	var/suppress_no_roundstart_warning = FALSE
 
 	var/list/possible_goals
 	var/min_goals = 1

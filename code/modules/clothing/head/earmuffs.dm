@@ -7,3 +7,4 @@
 	body_parts_covered = SLOT_HEAD|SLOT_EARS
 	gender = PLURAL
 	flags_inv = 0
+	accessory_slot = null // cannot be equipped on top of helmets, but like. that'd look pretty funny

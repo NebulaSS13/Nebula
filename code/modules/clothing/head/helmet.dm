@@ -2,8 +2,9 @@
 	name = "helmet"
 	desc = "Reinforced headgear. Protects the head from impacts."
 	icon = 'icons/clothing/head/armor/helmet.dmi'
-	valid_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
-	restricted_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
+	accessory_slot = null // you can't equip helmets over other helmets
+	valid_accessory_slots = list(ACCESSORY_SLOT_HELM_C, ACCESSORY_SLOT_OVER_HELMET)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_HELM_C, ACCESSORY_SLOT_OVER_HELMET)
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = SLOT_HEAD
 	armor = list(

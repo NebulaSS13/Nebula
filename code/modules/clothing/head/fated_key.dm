@@ -5,6 +5,7 @@
 	body_parts_covered = 0
 	armor = list(ARMOR_MELEE = 55, ARMOR_BULLET = 55, ARMOR_LASER = 55, ARMOR_ENERGY = 55, ARMOR_BOMB = 55, ARMOR_BIO = 100, ARMOR_RAD = 100)
 	flags_inv = 0
+	accessory_slot = null // cannot be equipped on top of helmets because this isn't really even an actual clothing item
 
 /obj/item/clothing/head/fated/equipped(mob/living/user, slot)
 	. = ..()
