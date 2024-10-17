@@ -99,7 +99,7 @@
 /obj/item/food/butchery/offal
 	name                = "offal"
 	desc                = "An assortmant of organs and lumps of unidentified gristle. Packed with nutrients and bile."
-	icon                = 'icons/obj/items/butchery/offal.dmi'
+	icon                = 'icons/obj/food/butchery/offal.dmi'
 	material            = /decl/material/solid/organic/meat/gut
 	nutriment_amt       = 15
 	slice_path          = /obj/item/food/butchery/offal/small
@@ -158,7 +158,7 @@
 	return ..()
 
 /obj/item/food/butchery/offal/small
-	icon                = 'icons/obj/items/butchery/offal_small.dmi'
+	icon                = 'icons/obj/food/butchery/offal_small.dmi'
 	nutriment_amt       = 5
 	w_class             = ITEM_SIZE_SMALL
 	slice_path          = null
@@ -173,7 +173,7 @@
 /obj/item/food/butchery/haunch
 	name                = "haunch"
 	desc                = "A severed leg of some unfortunate beast, cleaned and ready for cooking."
-	icon                = 'icons/obj/items/butchery/haunch.dmi'
+	icon                = 'icons/obj/food/butchery/haunch.dmi'
 	slice_num           = 2
 	slice_path          = /obj/item/food/butchery/meat
 	w_class             = ITEM_SIZE_LARGE
@@ -210,7 +210,7 @@
 /obj/item/food/butchery/haunch/side
 	name                = "side of meat"
 	desc                = "Approximately half the torso and body of an unfortunate animal, split lengthways, cleaned, and ready for cooking."
-	icon                = 'icons/obj/items/butchery/side.dmi'
+	icon                = 'icons/obj/food/butchery/side.dmi'
 	w_class             = ITEM_SIZE_HUGE
 
 /obj/item/food/butchery/haunch/side/Initialize(mapload, material_key, skip_plate = FALSE, mob/living/donor)
@@ -229,7 +229,7 @@
 /obj/item/food/butchery/stomach
 	name                = "stomach"
 	desc                = "The stomach of a large animal. It would probably make a decent waterskin if properly treated."
-	icon                = 'icons/obj/items/butchery/ruminant_stomach.dmi'
+	icon                = 'icons/obj/food/butchery/ruminant_stomach.dmi'
 	material            = /decl/material/solid/organic/meat/gut
 	nutriment_amt       = 8
 	dried_type          = /obj/item/chems/waterskin

@@ -31,7 +31,6 @@
 	origin = "SGS Severance"
 
 	possible_wanted_items = list(
-		/obj/item/food/human               = TRADER_SUBTYPES_ONLY,
 		/obj/item/food/butchery/meat/human = TRADER_THIS_TYPE,
 		/mob/living/human                  = TRADER_ALL
 	)

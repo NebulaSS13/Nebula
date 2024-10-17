@@ -136,7 +136,7 @@
 		/decl/material/liquid/water           = 10
 	)
 	mix_message = "The solution swells into a round of unleavened dough."
-	obj_result = /obj/item/food/unleaveneddough
+	obj_result = /obj/item/food/sliceable/unleaveneddough
 	inhibitors = list(/decl/material/liquid/nutriment/yeast)
 
 /decl/chemical_reaction/recipe/food/syntiflesh

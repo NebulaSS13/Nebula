@@ -19131,7 +19131,7 @@
 /area/exodus/library)
 "aOg" = (
 /obj/structure/table/woodentable,
-/obj/item/food/chips,
+/obj/item/food/junk/chips,
 /obj/random/single{
 	name = "randomly spawned cola";
 	spawn_object = /obj/item/chems/drinks/cans/cola
@@ -50249,7 +50249,7 @@
 /area/exodus/engineering/break_room)
 "cak" = (
 /obj/structure/table/woodentable,
-/obj/item/food/chips,
+/obj/item/food/junk/chips,
 /turf/floor/carpet,
 /area/exodus/engineering/break_room)
 "cal" = (

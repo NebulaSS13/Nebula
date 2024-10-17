@@ -2034,7 +2034,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/food/tofukabob,
+/obj/item/food/skewer/tofu,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},

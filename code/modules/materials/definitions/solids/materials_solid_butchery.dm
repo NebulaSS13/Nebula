@@ -49,6 +49,12 @@
 	uid = "solid_meat_chicken"
 	color = "#e98a8a"
 
+/decl/material/solid/organic/meat/xeno
+	name = "alien meat"
+	codex_name = "xenoprotein"
+	uid = "solid_meat_xeno"
+	color = COLOR_LIME
+
 /decl/material/solid/organic/meat/gut
 	name = "gut"
 	codex_name = null

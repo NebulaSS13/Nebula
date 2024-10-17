@@ -5,6 +5,7 @@
 /obj/item/food/meatballsoup
 	name = "meatball soup"
 	desc = "You've got balls kid, BALLS!"
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "meatballsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#785210"
@@ -20,6 +21,7 @@
 /obj/item/food/bloodsoup
 	name = "tomato soup"
 	desc = "Smells like copper."
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "tomatosoup"
 	filling_color = "#ff0000"
 	center_of_mass = @'{"x":16,"y":7}'
@@ -36,6 +38,7 @@
 /obj/item/food/clownstears
 	name = "clown's tears"
 	desc = "Not very funny."
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "clownstears"
 	filling_color = "#c4fbff"
 	center_of_mass = @'{"x":16,"y":7}'
@@ -52,6 +55,7 @@
 /obj/item/food/vegetablesoup
 	name = "veggie soup"
 	desc = "A highly nutritious blend of vegetative goodness. Guaranteed to leave you with a, er, \"souped-up\" sense of wellbeing."
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "vegetablesoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#afc4b5"
@@ -69,6 +73,7 @@
 /obj/item/food/nettlesoup
 	name = "nettle soup"
 	desc = "A mean, green, calorically lean dish derived from a poisonous plant. It has a rather acidic bite to its taste."
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "nettlesoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#afc4b5"
@@ -87,6 +92,7 @@
 /obj/item/food/mysterysoup
 	name = "mystery soup"
 	desc = "The mystery is, why aren't you eating it?"
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "mysterysoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#f082ff"
@@ -150,6 +156,7 @@
 /obj/item/food/wishsoup
 	name = "wish soup"
 	desc = "I wish this was soup."
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "wishsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#d1f4ff"
@@ -168,6 +175,7 @@
 /obj/item/food/hotchili
 	name = "hot chili"
 	desc = "Sound the fire alarm!"
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "hotchili"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#ff3c00"
@@ -185,6 +193,7 @@
 /obj/item/food/coldchili
 	name = "cold chili"
 	desc = "This slush is barely a liquid!"
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "coldchili"
 	filling_color = "#2b00ff"
 	center_of_mass = @'{"x":15,"y":9}'
@@ -202,6 +211,7 @@
 /obj/item/food/tomatosoup
 	name = "tomato soup"
 	desc = "Drinking this feels like being a vampire! A tomato vampire..."
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "tomatosoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#d92929"
@@ -219,6 +229,7 @@
 /obj/item/food/stew
 	name = "stewpot"
 	desc = "A nice and warm stew. Healthy and strong."
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "stew"
 	filling_color = "#9e673a"
 	center_of_mass = @'{"x":16,"y":5}'
@@ -236,6 +247,7 @@
 /obj/item/food/milosoup
 	name = "milosoup"
 	desc = "The universes best soup! Yum!!!"
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "milosoup"
 	trash = /obj/item/trash/snack_bowl
 	center_of_mass = @'{"x":16,"y":7}'
@@ -252,6 +264,7 @@
 /obj/item/food/mushroomsoup
 	name = "chantrelle soup"
 	desc = "A delicious and hearty mushroom soup."
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "mushroomsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#e386bf"
@@ -265,6 +278,7 @@
 /obj/item/food/beetsoup
 	name = "beet soup"
 	desc = "Wait, how do you spell it again...?"
+	icon = 'icons/obj/food/soups/soup.dmi'
 	icon_state = "beetsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#fac9ff"

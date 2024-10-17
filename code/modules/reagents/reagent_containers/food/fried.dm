@@ -7,7 +7,7 @@
 /obj/item/food/onionrings
 	name = "onion rings"
 	desc = "Like circular fries but better."
-	icon_state = "onionrings"
+	icon = 'icons/obj/food/fried/onionrings.dmi'
 	plate = /obj/item/plate
 	filling_color = "#eddd00"
 	center_of_mass = @'{"x":16,"y":11}'
@@ -18,7 +18,7 @@
 /obj/item/food/fries
 	name = "chips"
 	desc = "Frenched potato, fried."
-	icon_state = "fries"
+	icon = 'icons/obj/food/fried/fries.dmi'
 	plate = /obj/item/plate
 	filling_color = "#eddd00"
 	center_of_mass = @'{"x":16,"y":11}'
@@ -29,7 +29,7 @@
 /obj/item/food/cheesyfries
 	name = "cheesy fries"
 	desc = "Fries. Covered in cheese. Duh."
-	icon_state = "cheesyfries"
+	icon = 'icons/obj/food/fried/cheesyfries.dmi'
 	plate = /obj/item/plate
 	filling_color = "#eddd00"
 	center_of_mass = @'{"x":16,"y":11}'
@@ -39,4 +39,4 @@
 
 /obj/item/food/cheesyfries/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/solid/organic/meat, 2)
+	add_to_reagents(/decl/material/liquid/nutriment/cheese, 2)

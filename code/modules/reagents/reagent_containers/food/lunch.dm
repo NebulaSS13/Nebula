@@ -7,8 +7,8 @@ var/global/list/lunchables_lunches_ = list(
 									/obj/item/food/slice/pizza/meat/filled,
 									/obj/item/food/slice/pizza/mushroom/filled,
 									/obj/item/food/slice/pizza/vegetable/filled,
-									/obj/item/food/tastybread,
-									/obj/item/food/liquidfood,
+									/obj/item/food/junk/tastybread,
+									/obj/item/food/junk/liquidfood,
 									/obj/item/food/jellysandwich/cherry,
 									/obj/item/food/tossedsalad
 								  )
@@ -17,10 +17,10 @@ var/global/list/lunchables_snacks_ = list(
 									/obj/item/food/donut/jelly,
 									/obj/item/food/muffin,
 									/obj/item/food/popcorn,
-									/obj/item/food/sosjerky,
-									/obj/item/food/no_raisin,
-									/obj/item/food/spacetwinkie,
-									/obj/item/food/cheesiehonkers,
+									/obj/item/food/junk/sosjerky,
+									/obj/item/food/junk/no_raisin,
+									/obj/item/food/junk/spacetwinkie,
+									/obj/item/food/junk/cheesiehonkers,
 									/obj/item/food/poppypretzel,
 									/obj/item/food/processed_grown/sticks/carrot,
 									/obj/item/food/candiedapple,
@@ -36,7 +36,6 @@ var/global/list/lunchables_snacks_ = list(
 									/obj/item/food/slice/lemoncake/filled,
 									/obj/item/food/slice/chocolatecake/filled,
 									/obj/item/food/slice/birthdaycake/filled,
-									/obj/item/food/watermelonslice,
 									/obj/item/food/slice/applecake/filled,
 									/obj/item/food/slice/pumpkinpie/filled
 								   )

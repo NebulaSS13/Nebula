@@ -1,7 +1,7 @@
 /obj/item/food/butchery/meat
 	name                           = "slab"
 	desc                           = "A slab of meat."
-	icon                           = 'icons/obj/items/butchery/meat1.dmi'
+	icon                           = 'icons/obj/food/butchery/meat1.dmi'
 	icon_state                     = ICON_STATE_WORLD
 	slice_path                     = /obj/item/food/butchery/cutlet/raw
 	slice_num                      = 3
@@ -19,9 +19,9 @@
 
 /obj/item/food/butchery/meat/proc/get_meat_icons()
 	var/static/list/meat_icons = list(
-		'icons/obj/items/butchery/meat1.dmi',
-		'icons/obj/items/butchery/meat2.dmi',
-		'icons/obj/items/butchery/meat3.dmi'
+		'icons/obj/food/butchery/meat1.dmi',
+		'icons/obj/food/butchery/meat2.dmi',
+		'icons/obj/food/butchery/meat3.dmi'
 	)
 	return meat_icons
 
@@ -62,3 +62,26 @@
 /obj/item/food/butchery/meat/corgi
 	desc = "Tastes like... well you know..."
 	meat_name = "dog"
+
+
+/obj/item/food/butchery/meat/xeno
+	desc = "A slab of green meat. Smells like acid."
+	icon_state = "xenomeat"
+	meat_name = "xeno"
+	color = "#43de18"
+	center_of_mass = @'{"x":16,"y":10}'
+	bitesize = 6
+
+/obj/item/food/butchery/meat/xeno/populate_reagents()
+	. = ..()
+	add_to_reagents(/decl/material/liquid/acid/polyacid, 6)
+
+
+/obj/item/food/butchery/meat/bear
+	meat_name = "bear"
+	desc = "A very manly slab of meat."
+	icon_state = "bearmeat"
+
+/obj/item/food/butchery/meat/bear/populate_reagents()
+	. = ..()
+	add_to_reagents(/decl/material/liquid/amphetamines, 5)
