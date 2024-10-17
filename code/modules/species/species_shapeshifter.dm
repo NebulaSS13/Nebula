@@ -28,16 +28,24 @@
 	set_special_ability_cooldown(1 SECOND)
 
 	visible_message("<span class='notice'>\The [src]'s form contorts subtly.</span>")
-	var/decl/bodytype/root_bodytype = get_bodytype()
-	var/list/hairstyles = species.get_available_accessory_types(root_bodytype, SAC_HAIR)
+	var/decl/bodytype/shapeshifter/root_bodytype = get_bodytype()
+	if(!istype(root_bodytype))
+		return
+	var/decl/bodytype/shifted_bodytype = global.wrapped_bodytypes_by_ref["\ref[src]"]
+	if(!shifted_bodytype)
+		return
+	var/decl/species/bodytype_species = get_bodytype_species_pairs()[shifted_bodytype]
+	var/list/hairstyles = bodytype_species.get_available_accessories(shifted_bodytype, SAC_HAIR)
 	if(length(hairstyles))
 		var/decl/sprite_accessory/new_hair = input("Select a hairstyle.", "Shapeshifter Hair") as null|anything in hairstyles
-		SET_HAIR_STYLE(src, (new_hair ? new_hair.type : /decl/sprite_accessory/hair/bald), FALSE)
+		if(new_hair)
+			set_organ_sprite_accessory_by_category(new_hair || /decl/sprite_accessory/hair/bald, SAC_HAIR, root_bodytype.monochromatic ? list(SAM_COLOR = get_skin_colour()) : null, preserve_type = FALSE, organ_tag = BP_HEAD)
 
-	var/list/beardstyles = species.get_available_accessory_types(root_bodytype, SAC_FACIAL_HAIR)
+	var/list/beardstyles = bodytype_species.get_available_accessories(shifted_bodytype, SAC_FACIAL_HAIR)
 	if(length(beardstyles))
 		var/decl/sprite_accessory/new_hair = input("Select a facial hair style.", "Shapeshifter Hair") as null|anything in beardstyles
-		SET_FACIAL_HAIR_STYLE(src, (new_hair ? new_hair.type : /decl/sprite_accessory/facial_hair/shaved), FALSE)
+		if(new_hair)
+			set_organ_sprite_accessory_by_category(new_hair || /decl/sprite_accessory/facial_hair/shaved, SAC_FACIAL_HAIR, root_bodytype.monochromatic ? list(SAM_COLOR = get_skin_colour()) : null, preserve_type = FALSE, organ_tag = BP_HEAD)
 
 /mob/living/human/proc/shapeshifter_select_gender()
 
