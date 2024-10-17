@@ -1,7 +1,7 @@
 /obj/item/food/sliceable/carrotcake
 	name = "carrot cake"
 	desc = "A favorite desert of sophisticated rabbits."
-	icon_state = "carrotcake"
+	icon = 'icons/obj/food/baked/cakes/carrot.dmi'
 	slice_path = /obj/item/food/slice/carrotcake
 	slice_num = 5
 	filling_color = "#ffd675"
@@ -18,7 +18,7 @@
 /obj/item/food/slice/carrotcake
 	name = "carrot cake slice"
 	desc = "Carrotty slice of carrot cake, carrots are good for your eyes! It's true! Probably!"
-	icon_state = "carrotcake_slice"
+	icon = 'icons/obj/food/baked/cakes/slices/carrot.dmi'
 	plate = /obj/item/plate
 	filling_color = "#ffd675"
 	bitesize = 2
@@ -31,7 +31,7 @@
 /obj/item/food/sliceable/braincake
 	name = "brain cake"
 	desc = "A squishy cake-thing."
-	icon_state = "braincake"
+	icon = 'icons/obj/food/baked/cakes/brain.dmi'
 	slice_path = /obj/item/food/slice/braincake
 	slice_num = 5
 	filling_color = "#e6aedb"
@@ -49,7 +49,7 @@
 /obj/item/food/slice/braincake
 	name = "brain cake slice"
 	desc = "Lemme tell you something about prions. THEY'RE DELICIOUS."
-	icon_state = "braincakeslice"
+	icon = 'icons/obj/food/baked/cakes/slices/brain.dmi'
 	plate = /obj/item/plate
 	filling_color = "#e6aedb"
 	bitesize = 2
@@ -62,7 +62,7 @@
 /obj/item/food/sliceable/cheesecake
 	name = "cheese cake"
 	desc = "DANGEROUSLY cheesy."
-	icon_state = "cheesecake"
+	icon = 'icons/obj/food/baked/cakes/cheese.dmi'
 	slice_path = /obj/item/food/slice/cheesecake
 	slice_num = 5
 	filling_color = "#faf7af"
@@ -73,12 +73,12 @@
 
 /obj/item/food/sliceable/cheesecake/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/solid/organic/meat, 15)
+	add_to_reagents(/decl/material/liquid/nutriment/cheese, 15)
 
 /obj/item/food/slice/cheesecake
 	name = "cheese cake slice"
 	desc = "Slice of pure cheestisfaction."
-	icon_state = "cheesecake_slice"
+	icon = 'icons/obj/food/baked/cakes/slices/cheese.dmi'
 	plate = /obj/item/plate
 	filling_color = "#faf7af"
 	bitesize = 2
@@ -91,7 +91,7 @@
 /obj/item/food/sliceable/plaincake
 	name = "vanilla cake"
 	desc = "A plain cake, but a good cake."
-	icon_state = "plaincake"
+	icon = 'icons/obj/food/baked/cakes/plain.dmi'
 	slice_path = /obj/item/food/slice/plaincake
 	slice_num = 5
 	filling_color = "#f7edd5"
@@ -103,7 +103,7 @@
 /obj/item/food/slice/plaincake
 	name = "vanilla cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
-	icon_state = "plaincake_slice"
+	icon = 'icons/obj/food/baked/cakes/slices/plain.dmi'
 	plate = /obj/item/plate
 	filling_color = "#f7edd5"
 	bitesize = 2
@@ -116,7 +116,7 @@
 /obj/item/food/sliceable/orangecake
 	name = "orange cake"
 	desc = "A cake with added orange."
-	icon_state = "orangecake"
+	icon = 'icons/obj/food/baked/cakes/orange.dmi'
 	slice_path = /obj/item/food/slice/orangecake
 	slice_num = 5
 	filling_color = "#fada8e"
@@ -128,7 +128,7 @@
 /obj/item/food/slice/orangecake
 	name = "orange cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
-	icon_state = "orangecake_slice"
+	icon = 'icons/obj/food/baked/cakes/slices/orange.dmi'
 	plate = /obj/item/plate
 	filling_color = "#fada8e"
 	bitesize = 2
@@ -141,7 +141,7 @@
 /obj/item/food/sliceable/limecake
 	name = "lime cake"
 	desc = "A cake with added lime."
-	icon_state = "limecake"
+	icon = 'icons/obj/food/baked/cakes/lime.dmi'
 	slice_path = /obj/item/food/slice/limecake
 	slice_num = 5
 	filling_color = "#cbfa8e"
@@ -153,7 +153,7 @@
 /obj/item/food/slice/limecake
 	name = "lime cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
-	icon_state = "limecake_slice"
+	icon = 'icons/obj/food/baked/cakes/slices/lime.dmi'
 	plate = /obj/item/plate
 	filling_color = "#cbfa8e"
 	bitesize = 2
@@ -166,7 +166,7 @@
 /obj/item/food/sliceable/lemoncake
 	name = "lemon cake"
 	desc = "A cake with added lemon."
-	icon_state = "lemoncake"
+	icon = 'icons/obj/food/baked/cakes/lemon.dmi'
 	slice_path = /obj/item/food/slice/lemoncake
 	slice_num = 5
 	filling_color = "#fafa8e"
@@ -178,7 +178,7 @@
 /obj/item/food/slice/lemoncake
 	name = "lemon cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
-	icon_state = "lemoncake_slice"
+	icon = 'icons/obj/food/baked/cakes/slices/lemon.dmi'
 	plate = /obj/item/plate
 	filling_color = "#fafa8e"
 	bitesize = 2
@@ -191,7 +191,7 @@
 /obj/item/food/sliceable/chocolatecake
 	name = "chocolate cake"
 	desc = "A cake with added chocolate."
-	icon_state = "chocolatecake"
+	icon = 'icons/obj/food/baked/cakes/chocolate.dmi'
 	slice_path = /obj/item/food/slice/chocolatecake
 	slice_num = 5
 	filling_color = "#805930"
@@ -203,7 +203,7 @@
 /obj/item/food/slice/chocolatecake
 	name = "chocolate cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
-	icon_state = "chocolatecake_slice"
+	icon = 'icons/obj/food/baked/cakes/slices/chocolate.dmi'
 	plate = /obj/item/plate
 	filling_color = "#805930"
 	bitesize = 2
@@ -216,7 +216,7 @@
 /obj/item/food/sliceable/birthdaycake
 	name = "birthday cake"
 	desc = "Happy birthday!"
-	icon_state = "birthdaycake"
+	icon = 'icons/obj/food/baked/cakes/birthday.dmi'
 	slice_path = /obj/item/food/slice/birthdaycake
 	slice_num = 5
 	filling_color = "#ffd6d6"
@@ -233,7 +233,7 @@
 /obj/item/food/slice/birthdaycake
 	name = "birthday cake slice"
 	desc = "A slice of your birthday."
-	icon_state = "birthdaycakeslice"
+	icon = 'icons/obj/food/baked/cakes/slices/birthday.dmi'
 	plate = /obj/item/plate
 	filling_color = "#ffd6d6"
 	bitesize = 2
@@ -246,7 +246,7 @@
 /obj/item/food/sliceable/applecake
 	name = "apple cake"
 	desc = "A cake centred with apples."
-	icon_state = "applecake"
+	icon = 'icons/obj/food/baked/cakes/apple.dmi'
 	slice_path = /obj/item/food/slice/applecake
 	slice_num = 5
 	filling_color = "#ebf5b8"
@@ -258,7 +258,7 @@
 /obj/item/food/slice/applecake
 	name = "apple cake slice"
 	desc = "A slice of heavenly cake."
-	icon_state = "applecakeslice"
+	icon = 'icons/obj/food/baked/cakes/slices/apple.dmi'
 	plate = /obj/item/plate
 	filling_color = "#ebf5b8"
 	bitesize = 2
@@ -271,7 +271,7 @@
 /obj/item/food/sliceable/pumpkinpie
 	name = "pumpkin pie"
 	desc = "A delicious treat for the autumn months."
-	icon_state = "pumpkinpie"
+	icon = 'icons/obj/food/baked/cakes/pumpkin.dmi'
 	slice_path = /obj/item/food/slice/pumpkinpie
 	slice_num = 5
 	filling_color = "#f5b951"
@@ -282,7 +282,7 @@
 /obj/item/food/slice/pumpkinpie
 	name = "pumpkin pie slice"
 	desc = "A slice of pumpkin pie, with whipped cream on top. Perfection."
-	icon_state = "pumpkinpieslice"
+	icon = 'icons/obj/food/baked/cakes/slices/pumpkin.dmi'
 	plate = /obj/item/plate
 	filling_color = "#f5b951"
 	bitesize = 2

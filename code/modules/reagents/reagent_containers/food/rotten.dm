@@ -23,29 +23,29 @@
 /obj/item/food/old/pizza
 	name = "pizza"
 	desc = "It's so stale you could probably cut something with the cheese."
-	icon_state = "ancient_pizza"
+	icon = 'icons/obj/food/old/pizza.dmi'
 
 /obj/item/food/old/burger
 	name = "\improper Giga Burger!"
 	desc = "At some point in time this probably looked delicious."
-	icon_state = "ancient_burger"
+	icon = 'icons/obj/food/old/burger.dmi'
 
 /obj/item/food/old/hamburger
 	name = "\improper Horse Burger!"
 	desc = "Even if you were hungry enough to eat a horse, it'd be a bad idea to eat this."
-	icon_state = "ancient_hburger"
+	icon = 'icons/obj/food/old/hamburger.dmi'
 
 /obj/item/food/old/fries
 	name = "chips"
 	desc = "The salt appears to have preserved these, still stale and gross."
-	icon_state = "ancient_fries"
+	icon = 'icons/obj/food/old/fries.dmi'
 
 /obj/item/food/old/hotdog
 	name = "hotdog"
 	desc = "This is probably only marginally less safe to eat than when it was first created."
-	icon_state = "ancient_hotdog"
+	icon = 'icons/obj/food/old/hotdog.dmi'
 
 /obj/item/food/old/taco
 	name = "taco"
 	desc = "Interestingly, the shell has gone soft and the contents have gone stale."
-	icon_state = "ancient_taco"
+	icon = 'icons/obj/food/old/taco.dmi'

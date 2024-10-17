@@ -1,4 +1,8 @@
-/obj/item/food/sosjerky
+/obj/item/food/junk
+	icon = 'icons/obj/food/junk/junkfood.dmi'
+	abstract_type = /obj/item/food/junk
+
+/obj/item/food/junk/sosjerky
 	name = "emergency meat jerky"
 	icon_state = "sosjerky"
 	desc = "For when you desperately want meat and you don't care what kind. Has the same texture as old leather boots."
@@ -8,11 +12,11 @@
 	bitesize = 2
 	material = /decl/material/solid/organic/meat
 
-/obj/item/food/sosjerky/populate_reagents()
+/obj/item/food/junk/sosjerky/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 4)
 
-/obj/item/food/no_raisin
+/obj/item/food/junk/no_raisin
 	name = "raisins"
 	icon_state = "4no_raisins"
 	desc = "Pouring water on these will not turn them back into grapes, unfortunately."
@@ -22,7 +26,7 @@
 	nutriment_desc = list("raisins" = 6)
 	nutriment_amt = 6
 
-/obj/item/food/spacetwinkie
+/obj/item/food/junk/spacetwinkie
 	name = "eclair"
 	icon_state = "space_twinkie"
 	desc = "So full of preservatives, it's guaranteed to survive longer then you will."
@@ -30,11 +34,11 @@
 	center_of_mass = @'{"x":15,"y":11}'
 	bitesize = 2
 
-/obj/item/food/spacetwinkie/populate_reagents()
+/obj/item/food/junk/spacetwinkie/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/sugar, 4)
 
-/obj/item/food/cheesiehonkers
+/obj/item/food/junk/cheesiehonkers
 	name = "cheese puffs"
 	icon_state = "cheesie_honkers"
 	desc = "Bite sized cheese flavoured snacks that will leave your fingers coated in cheese dust."
@@ -45,7 +49,7 @@
 	nutriment_amt = 4
 	bitesize = 2
 
-/obj/item/food/syndicake
+/obj/item/food/junk/syndicake
 	name = "subversive cakes"
 	icon_state = "syndi_cakes"
 	desc = "Made using extremely unethical labour, ingredients and marketing methods."
@@ -56,13 +60,13 @@
 	trash = /obj/item/trash/syndi_cakes
 	bitesize = 3
 
-/obj/item/food/syndicake/populate_reagents()
+/obj/item/food/junk/syndicake/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/regenerator, 5)
 
 //terran delights
 
-/obj/item/food/pistachios
+/obj/item/food/junk/pistachios
 	name = "pistachios"
 	icon_state = "pistachios"
 	desc = "Pistachios. There is absolutely nothing remarkable about these."
@@ -73,7 +77,7 @@
 	nutriment_amt = 3
 	bitesize = 0.5
 
-/obj/item/food/semki
+/obj/item/food/junk/semki
 	name = "sunflower seeds"
 	icon_state = "semki"
 	desc = "A favorite among birds."
@@ -84,7 +88,7 @@
 	nutriment_amt = 6
 	bitesize = 0.5
 
-/obj/item/food/squid
+/obj/item/food/junk/squid
 	name = "\improper Calamari Crisps"
 	icon_state = "squid"
 	desc = "Space cepholapod tentacles, carefully removed from the squid then dried into strips of delicious rubbery goodness!"
@@ -95,11 +99,11 @@
 	nutriment_amt = 2
 	bitesize = 1
 
-/obj/item/food/squid/populate_reagents()
+/obj/item/food/junk/squid/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/solid/organic/meat, 4)
+	add_to_reagents(/decl/material/solid/organic/meat/fish, 4)
 
-/obj/item/food/croutons
+/obj/item/food/junk/croutons
 	name = "croutons"
 	icon_state = "croutons"
 	desc = "Fried bread cubes. Good in salad but I guess you can just eat them as is."
@@ -111,7 +115,7 @@
 	bitesize = 1
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/food/salo
+/obj/item/food/junk/salo
 	name = "salo"
 	icon_state = "salo"
 	desc = "Pig fat. Salted. Just as good as it sounds."
@@ -122,11 +126,11 @@
 	nutriment_amt = 2
 	bitesize = 2
 
-/obj/item/food/salo/populate_reagents()
+/obj/item/food/junk/salo/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 8)
 
-/obj/item/food/driedfish
+/obj/item/food/junk/driedfish
 	name = "vobla"
 	icon_state = "driedfish"
 	desc = "Dried salted beer snack fish."
@@ -137,11 +141,11 @@
 	nutriment_amt = 2
 	bitesize = 1
 
-/obj/item/food/driedfish/populate_reagents()
+/obj/item/food/junk/driedfish/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/solid/organic/meat, 4)
+	add_to_reagents(/decl/material/solid/organic/meat/fish, 4)
 
-/obj/item/food/liquidfood
+/obj/item/food/junk/liquidfood
 	name = "\improper LiquidFood MRE"
 	desc = "A prepackaged grey slurry for all of the essential nutrients a soldier requires to survive. No expiration date is visible..."
 	icon_state = "liquidfood"
@@ -152,11 +156,11 @@
 	nutriment_amt = 20
 	bitesize = 4
 
-/obj/item/food/liquidfood/populate_reagents()
+/obj/item/food/junk/liquidfood/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/metal/iron, 3)
 
-/obj/item/food/meatcube
+/obj/item/food/junk/meatcube
 	name = "cubed meat"
 	desc = "Fried, salted lean meat compressed into a cube. Not very appetizing."
 	icon_state = "meatcube"
@@ -165,11 +169,11 @@
 	bitesize = 3
 	material = /decl/material/solid/organic/meat
 
-/obj/item/food/meatcube/populate_reagents()
+/obj/item/food/junk/meatcube/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 15)
 
-/obj/item/food/tastybread
+/obj/item/food/junk/tastybread
 	name = "bread tube"
 	desc = "Bread in a tube. Chewy... and surprisingly tasty."
 	icon_state = "tastybread"
@@ -181,7 +185,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	bitesize = 2
 
-/obj/item/food/candy
+/obj/item/food/junk/candy
 	name = "candy"
 	desc = "Nougat, love it or hate it."
 	icon_state = "candy"
@@ -192,36 +196,36 @@
 	nutriment_desc = list("candy" = 1)
 	bitesize = 2
 
-/obj/item/food/candy/populate_reagents()
+/obj/item/food/junk/candy/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/sugar, 3)
 
-/obj/item/food/candy/proteinbar
+/obj/item/food/junk/candy/proteinbar
 	name = "protein bar"
 	desc = "MuscleLopin brand protein bars, guaranteed to get you soSO strong!"
 	icon_state = "proteinbar"
 	trash = /obj/item/trash/candy/proteinbar
 	bitesize = 6
 
-/obj/item/food/candy/proteinbar/populate_reagents()
+/obj/item/food/junk/candy/proteinbar/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment,         9)
 	add_to_reagents(/decl/material/solid/organic/meat, 4)
 	add_to_reagents(/decl/material/liquid/nutriment/sugar,   4)
 
-/obj/item/food/candy/donor
+/obj/item/food/junk/candy/donor
 	name = "donor candy"
 	desc = "A little treat for blood donors."
 	trash = /obj/item/trash/candy
 	nutriment_desc = list("candy" = 10)
 	bitesize = 5
 
-/obj/item/food/candy/donor/populate_reagents()
+/obj/item/food/junk/candy/donor/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment,      10)
 	add_to_reagents(/decl/material/liquid/nutriment/sugar, 3)
 
-/obj/item/food/candy_corn
+/obj/item/food/junk/candy_corn
 	name = "candy corn"
 	desc = "It's a handful of candy corn. Not actually candied corn."
 	icon_state = "candy_corn"
@@ -231,12 +235,12 @@
 	nutriment_desc = list("candy corn" = 4)
 	bitesize = 2
 
-/obj/item/food/candy_corn/populate_reagents()
+/obj/item/food/junk/candy_corn/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment,       4)
 	add_to_reagents(/decl/material/liquid/nutriment/sugar, 2)
 
-/obj/item/food/chips
+/obj/item/food/junk/chips
 	name = "chips"
 	desc = "It is impossible to open the packet without rustling it loudly."
 	icon_state = "chips"
@@ -248,111 +252,8 @@
 	bitesize = 1
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/food/cookie
-	name = "cookie"
-	desc = "COOKIE!!!"
-	icon_state = "cookie"
-	filling_color = "#dbc94f"
-	center_of_mass = @'{"x":17,"y":18}'
-	nutriment_amt = 5
-	nutriment_desc = list("sweetness" = 3, "cookie" = 2)
-	w_class = ITEM_SIZE_TINY
-	bitesize = 1
-	nutriment_type = /decl/material/liquid/nutriment/bread
-
-/obj/item/food/chocolatebar
-	name = "chocolate bar"
-	desc = "Such sweet, fattening food."
-	icon_state = "chocolatebar"
-	filling_color = "#7d5f46"
-	center_of_mass = @'{"x":15,"y":15}'
-	nutriment_amt = 2
-	nutriment_desc = list("chocolate" = 5)
-	bitesize = 2
-
-/obj/item/food/chocolatebar/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/coco,  2)
-	add_to_reagents(/decl/material/liquid/nutriment/sugar, 2)
-
-/obj/item/food/chocolateegg
-	name = "chocolate egg"
-	desc = "Such sweet, fattening food."
-	icon_state = "chocolateegg"
-	filling_color = "#7d5f46"
-	center_of_mass = @'{"x":16,"y":13}'
-	nutriment_amt = 3
-	nutriment_desc = list("chocolate" = 5)
-	bitesize = 2
-
-/obj/item/food/chocolateegg/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/coco,  2)
-	add_to_reagents(/decl/material/liquid/nutriment/sugar, 2)
-
-/obj/item/food/donut
-	name = "donut"
-	desc = "Goes great with Robust Coffee."
-	icon = 'icons/obj/food/donuts/donut.dmi'
-	icon_state = ICON_STATE_WORLD
-	filling_color = "#d9c386"
-	center_of_mass = @'{"x":19,"y":16}'
-	nutriment_desc = list("sweetness", "donut")
-	nutriment_amt = 3
-	bitesize = 3
-	nutriment_type = /decl/material/liquid/nutriment/bread
-	var/iced_icon = 'icons/obj/food/donuts/donut_iced.dmi'
-
-/obj/item/food/donut/populate_reagents()
-	. = ..()
-	if(iced_icon && prob(30) && icon != iced_icon)
-		icon = iced_icon
-		SetName("frosted [name]")
-		add_to_reagents(/decl/material/liquid/nutriment/sprinkles, 2)
-
-/obj/item/food/donut/chaos
-	name = "chaos donut"
-	desc = "Like life, it never quite tastes the same."
-	filling_color = "#ed11e6"
-	nutriment_amt = 2
-	bitesize = 10
-
-/obj/item/food/donut/chaos/proc/get_random_fillings()
-	. = list(
-		/decl/material/liquid/nutriment,
-		/decl/material/liquid/capsaicin,
-		/decl/material/liquid/frostoil,
-		/decl/material/liquid/nutriment/sprinkles,
-		/decl/material/gas/chlorine,
-		/decl/material/liquid/nutriment/coco,
-		/decl/material/liquid/nutriment/banana_cream,
-		/decl/material/liquid/nutriment/cherryjelly,
-		/decl/material/liquid/fuel,
-		/decl/material/liquid/regenerator
-	)
-
-/obj/item/food/donut/chaos/populate_reagents()
-	. = ..()
-	add_to_reagents(pick(get_random_fillings()), 3)
-
-/obj/item/food/donut/jelly
-	name = "jelly donut"
-	desc = "You jelly?"
-	icon = 'icons/obj/food/donuts/donut_jelly.dmi'
-	iced_icon = 'icons/obj/food/donuts/donut_jelly_iced.dmi'
-	filling_color = "#ed1169"
-	center_of_mass = @'{"x":16,"y":11}'
-	nutriment_amt = 3
-	bitesize = 5
-	nutriment_type = /decl/material/liquid/nutriment/bread
-	var/jelly_type = /decl/material/liquid/nutriment/cherryjelly
-
-/obj/item/food/donut/jelly/populate_reagents()
-	. = ..()
-	add_to_reagents(jelly_type, 5)
-
 //Sol Vendor
-/obj/item/food/lunacake
+/obj/item/food/junk/lunacake
 	name = "moon cake"
 	icon_state = "lunacake_wrapped"
 	desc = "Now with 20% less lawsuit enabling regolith!"
@@ -364,14 +265,14 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
-/obj/item/food/lunacake/mochicake
+/obj/item/food/junk/lunacake/mochicake
 	name = "mochi"
 	icon_state = "mochicake_wrapped"
 	desc = "A type of rice cake with an extremely soft, glutinous texture."
 	trash = /obj/item/trash/mochicakewrap
 	nutriment_desc = list("sweet" = 4, "rice" = 1)
 
-/obj/item/food/lunacake/mooncake
+/obj/item/food/junk/lunacake/mooncake
 	name = "dark side moon cake"
 	icon_state = "mooncake_wrapped"
 	desc = "Explore the dark side! May contain trace amounts of reconstituted cocoa."
@@ -380,7 +281,7 @@
 	nutriment_desc = list("sweet" = 4, "chocolate" = 1)
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
-/obj/item/food/triton
+/obj/item/food/junk/triton
 	name = "\improper Tidal Gobs"
 	icon_state = "tidegobs"
 	desc = "Contains over 9000% of your daily recommended intake of salt."
@@ -391,7 +292,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/food/saturn
+/obj/item/food/junk/saturn
 	name = "snack rings"
 	icon_state = "saturno"
 	desc = "A day ration of salt, styrofoam and possibly sawdust."
@@ -402,7 +303,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/food/jupiter
+/obj/item/food/junk/jupiter
 	name = "probably gelatin"
 	icon_state = "jupiter"
 	desc = "Some kind of gel, maybe?"
@@ -413,7 +314,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/food/pluto
+/obj/item/food/junk/pluto
 	name = "nutrient rods"
 	icon_state = "pluto"
 	desc = "Baseless tasteless nutrient rods to get you through the day. Now even less rash inducing!"
@@ -424,7 +325,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/food/mars
+/obj/item/food/junk/mars
 	name = "instant potato and eggs"
 	icon_state = "mars"
 	desc = "A steaming self-heated bowl of sweet eggs and taters!"
@@ -435,7 +336,7 @@
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/food/venus
+/obj/item/food/junk/venus
 	name = "hot cakes"
 	icon_state = "venus"
 	desc = "Hot takes on hot cakes, a timeless classic now finally fit for human consumption!"
@@ -447,11 +348,11 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
-/obj/item/food/venus/populate_reagents()
+/obj/item/food/junk/venus/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/capsaicin, 5)
 
-/obj/item/food/oort
+/obj/item/food/junk/oort
 	name = "\improper Cloud Rocks"
 	icon_state = "oort"
 	desc = "Pop rocks. The new formula guarantees fewer shrapnel induced oral injuries."
@@ -462,13 +363,13 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/food/oort/populate_reagents()
+/obj/item/food/junk/oort/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/frostoil, 5)
 
 //weebo vend! So japanese it hurts
 
-/obj/item/food/ricecake
+/obj/item/food/junk/ricecake
 	name = "rice ball"
 	icon_state = "ricecake"
 	desc = "A snack food made from balled up rice."
@@ -476,7 +377,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/food/pokey
+/obj/item/food/junk/pokey
 	name = "chocolate coated biscuit sticks"
 	icon_state = "pokeys"
 	desc = "A bundle of chocolate coated biscuit sticks. Not as exciting as they seem."
@@ -484,7 +385,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/food/weebonuts
+/obj/item/food/junk/weebonuts
 	name = "spicy nuts"
 	icon_state = "weebonuts"
 	trash = /obj/item/trash/weebonuts
@@ -493,11 +394,11 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/food/weebonuts/populate_reagents()
+/obj/item/food/junk/weebonuts/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/capsaicin, 1)
 
-/obj/item/food/chocobanana
+/obj/item/food/junk/chocobanana
 	name = "choco banana"
 	icon_state = "chocobanana"
 	trash = /obj/item/trash/stick
@@ -506,11 +407,11 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/food/chocobanana/populate_reagents()
+/obj/item/food/junk/chocobanana/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/sprinkles, 10)
 
-/obj/item/food/dango
+/obj/item/food/junk/dango
 	name = "dango"
 	icon_state = "dango"
 	trash = /obj/item/trash/stick
@@ -518,81 +419,3 @@
 	nutriment_desc = list("rice" = 4, "topping?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
-
-/obj/item/food/donkpocket/sinpocket
-	name = "\improper Sin-pocket"
-	desc = "The food of choice for the veteran. Do <b>NOT</b> overconsume."
-	filling_color = "#6d6d00"
-	heated_reagents = list(
-		/decl/material/liquid/regenerator = 5,
-		/decl/material/liquid/amphetamines = 0.75,
-		/decl/material/liquid/stimulants = 0.25
-	)
-	var/has_been_heated = 0 // Unlike the warm var, this checks if the one-time self-heating operation has been used.
-
-/obj/item/food/donkpocket/sinpocket/attack_self(mob/user)
-	if(has_been_heated)
-		to_chat(user, "<span class='notice'>The heating chemicals have already been spent.</span>")
-		return
-	has_been_heated = 1
-	user.visible_message("<span class='notice'>[user] crushes \the [src] package.</span>", "You crush \the [src] package and feel a comfortable heat build up.")
-	addtimer(CALLBACK(src, PROC_REF(heat), weakref(user)), 20 SECONDS)
-
-/obj/item/food/donkpocket/sinpocket/heat(weakref/message_to)
-	..()
-	if(message_to)
-		var/mob/user = message_to.resolve()
-		if(user)
-			to_chat(user, "You think \the [src] is ready to eat about now.")
-
-/obj/item/food/donkpocket
-	name = "cold donk-pocket"
-	desc = "The food of choice for the seasoned traitor."
-	icon_state = "donkpocket"
-	filling_color = "#dedeab"
-	center_of_mass = @'{"x":16,"y":10}'
-	nutriment_desc = list("heartiness" = 1, "dough" = 2)
-	nutriment_amt = 2
-	var/warm = 0
-	var/list/heated_reagents = list(/decl/material/liquid/regenerator = 5)
-
-/obj/item/food/donkpocket/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/solid/organic/meat, 2)
-
-/obj/item/food/donkpocket/grill(var/atom/heat_source)
-
-	backyard_grilling_rawness--
-	if(backyard_grilling_rawness <= 0)
-		backyard_grilling_rawness = initial(backyard_grilling_rawness)
-
-		// We're already warm, so we burn.
-		if(warm)
-			var/obj/item/food/badrecipe/whoops = new
-			whoops.dropInto(loc)
-			visible_message(SPAN_DANGER("\The [src] chars and blackens!"))
-			qdel(src)
-			return whoops
-
-		// Otherwise we just warm up.
-		heat()
-		visible_message(SPAN_NOTICE("\The [src] steams gently!"))
-		return src
-
-/obj/item/food/donkpocket/proc/heat()
-	if(warm)
-		return
-	warm = 1
-	for(var/reagent in heated_reagents)
-		add_to_reagents(reagent, heated_reagents[reagent])
-	bitesize = 6
-	SetName("warm donk-pocket")
-	addtimer(CALLBACK(src, PROC_REF(cool)), 7 MINUTES)
-
-/obj/item/food/donkpocket/proc/cool()
-	if(!warm)
-		return
-	warm = 0
-	for(var/reagent in heated_reagents)
-		reagents.clear_reagent(reagent)
-	SetName(initial(name))

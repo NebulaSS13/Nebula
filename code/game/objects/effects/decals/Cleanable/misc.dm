@@ -128,3 +128,12 @@
 	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
 	persistent = TRUE
 	generic_filth = TRUE
+
+/obj/effect/decal/cleanable/champagne
+	name = "champagne"
+	desc = "Someone got a bit too excited."
+	gender = PLURAL
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "fchampagne1"
+	color = COLOR_BRASS
+	random_icon_states = list("fchampagne1", "fchampagne2", "fchampagne3", "fchampagne4")

@@ -53,8 +53,8 @@
 
 /obj/random/mre/dessert/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/food/candy,
-		/obj/item/food/candy/proteinbar,
+		/obj/item/food/junk/candy,
+		/obj/item/food/junk/candy/proteinbar,
 		/obj/item/food/donut,
 		/obj/item/food/donut/jelly,
 		/obj/item/food/chocolatebar,
@@ -70,7 +70,7 @@
 
 /obj/random/mre/dessert/vegan/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/food/candy,
+		/obj/item/food/junk/candy,
 		/obj/item/food/chocolatebar,
 		/obj/item/food/donut/jelly,
 		/obj/item/food/plumphelmetbiscuit
@@ -168,22 +168,22 @@
 /obj/random/snack
 	name = "random snack"
 	desc = "This is a random snack item."
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food/junk/junkfood.dmi'
 	icon_state = "sosjerky"
 
 /obj/random/snack/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/food/liquidfood,
-		/obj/item/food/candy,
+		/obj/item/food/junk/liquidfood,
+		/obj/item/food/junk/candy,
 		/obj/item/chems/drinks/dry_ramen,
-		/obj/item/food/chips,
-		/obj/item/food/sosjerky,
-		/obj/item/food/no_raisin,
-		/obj/item/food/spacetwinkie,
-		/obj/item/food/cheesiehonkers,
-		/obj/item/food/tastybread,
-		/obj/item/food/candy/proteinbar,
-		/obj/item/food/syndicake,
+		/obj/item/food/junk/chips,
+		/obj/item/food/junk/sosjerky,
+		/obj/item/food/junk/no_raisin,
+		/obj/item/food/junk/spacetwinkie,
+		/obj/item/food/junk/cheesiehonkers,
+		/obj/item/food/junk/tastybread,
+		/obj/item/food/junk/candy/proteinbar,
+		/obj/item/food/junk/syndicake,
 		/obj/item/food/donut,
 		/obj/item/food/donut/jelly,
 		/obj/item/pizzabox/meat,

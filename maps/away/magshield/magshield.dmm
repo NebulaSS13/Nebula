@@ -3615,7 +3615,7 @@
 /area/magshield/south)
 "kI" = (
 /obj/structure/table/marble,
-/obj/item/food/chips,
+/obj/item/food/junk/chips,
 /turf/floor/tiled/white,
 /area/magshield/south)
 "kJ" = (

@@ -12,7 +12,7 @@
 	product.SetName("box of [cooking_obj.name] cereal")
 
 /obj/machinery/cooker/cereal/change_product_appearance(var/obj/item/food/product)
-	product.icon = 'icons/obj/food.dmi'
+	product.icon = 'icons/obj/food/custom/custom.dmi'
 	product.icon_state = "cereal_box"
 	product.filling_color = cooking_obj.color
 

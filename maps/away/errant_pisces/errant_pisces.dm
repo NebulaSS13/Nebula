@@ -61,20 +61,18 @@
 			visible_message("<span class='danger'>\The [src] releases [L].</span>")
 
 /decl/butchery_data/animal/fish/space_carp/shark
-	meat_type = /obj/item/food/sharkmeat
+	meat_type = /obj/item/food/butchery/meat/fish/shark
 	must_use_hook = TRUE
 
-/obj/item/food/sharkmeat
-	name = "cosmoshark fillet"
+/obj/item/food/butchery/meat/fish/shark
 	desc = "A fillet of cosmoshark meat."
-	icon_state = "fishfillet"
-	filling_color = "#cecece"
+	meat_name = "cosmoshark"
+	color = "#cecece"
 	center_of_mass = @'{"x":17,"y":13}'
 	bitesize = 8
 
-/obj/item/food/sharkmeat/populate_reagents()
+/obj/item/food/butchery/meat/fish/shark/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/solid/organic/meat,   5)
 	add_to_reagents(/decl/material/liquid/psychoactives, 1)
 	add_to_reagents(/decl/material/gas/chlorine,         1)
 

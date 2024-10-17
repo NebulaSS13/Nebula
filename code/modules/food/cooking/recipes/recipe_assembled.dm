@@ -38,7 +38,7 @@
 
 /decl/recipe/taco
 	items = list(
-		/obj/item/food/doughslice,
+		/obj/item/food/unleaveneddoughslice,
 		/obj/item/food/butchery/cutlet,
 		/obj/item/food/dairy/cheese/wedge
 	)

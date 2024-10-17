@@ -2,6 +2,50 @@
 	name = "ICON STATE template"
 	template = /datum/unit_test/icon_test
 
+/datum/unit_test/icon_test/food_shall_have_icon_states
+	name = "ICON STATE - Food And Drink Subtypes Shall Have Icon States"
+	var/list/check_types = list(
+		/obj/item/chems/condiment,
+		/obj/item/chems/drinks,
+		/obj/item/food
+	)
+	var/list/skip_types = list()
+
+/datum/unit_test/icon_test/food_shall_have_icon_states/start_test()
+
+	skip_types |= typesof(/obj/item/food/grown)
+	skip_types |= typesof(/obj/item/food/processed_grown)
+
+	var/list/failures = list()
+	for(var/check_type in check_types)
+		for(var/check_subtype in typesof(check_type))
+			var/obj/item/thing = check_subtype
+			if(TYPE_IS_ABSTRACT(thing))
+				continue
+			var/skip = FALSE
+			for(var/skip_type in skip_types)
+				if(ispath(check_subtype, skip_type))
+					skip = TRUE
+					break
+			if(skip)
+				continue
+			thing = atom_info_repository.get_instance_of(thing)
+			if(!istype(thing) || QDELETED(thing))
+				failures += "invalid instance ([check_subtype])"
+			else
+				if(!thing.icon)
+					failures += "null icon ([check_subtype])"
+				if(!istext(thing.icon_state))
+					failures += "null or invalid icon_state ([check_subtype])"
+				else if(!check_state_in_icon(thing.icon_state, thing.icon))
+					failures += "missing icon state '[thing.icon_state]' in icon '[thing.icon]' ([check_subtype])"
+
+	if(length(failures))
+		fail("Food subtypes had missing icons or icon states:\n[jointext(failures, "\n")].")
+	else
+		pass("All food subtypes had valid icon states.")
+	return 1
+
 /datum/unit_test/icon_test/turfs_shall_have_icon_states
 	name = "ICON STATE - Turf Subtypes Shall Have Icon States"
 	var/list/except_types = list(

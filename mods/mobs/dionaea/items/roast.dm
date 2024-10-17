@@ -1,7 +1,7 @@
 /obj/item/food/dionaroast
 	name = "roast diona"
 	desc = "It's like an enormous, leathery carrot. With an eye."
-	icon_state = "dionaroast"
+	icon = 'mods/mobs/dionaea/icons/roast.dmi'
 	plate = /obj/item/plate
 	filling_color = "#75754b"
 	center_of_mass = @'{"x":16,"y":7}'
