@@ -39,7 +39,6 @@
 		/area/exodus/storage/emergency = NO_SCRUBBER|NO_VENT,
 		/area/exodus/storage/emergency2 = NO_SCRUBBER|NO_VENT,
 		/area/ship/exodus_pod_engineering = NO_SCRUBBER|NO_VENT,
-		/area/ship/exodus_pod_mining = NO_SCRUBBER,
 		/area/ship/exodus_pod_research = NO_SCRUBBER
 	)
 
