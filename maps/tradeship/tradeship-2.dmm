@@ -2676,7 +2676,7 @@
 /area/space)
 "gA" = (
 /obj/machinery/washing_machine,
-/obj/item/box/monkeycubes{
+/obj/item/box/animal_cubes/monkeys{
 	pixel_y = 13
 	},
 /turf/floor/tiled/freezer,
@@ -6535,7 +6535,7 @@
 /area/ship/trade/command/bridge)
 "Im" = (
 /obj/structure/table,
-/obj/item/food/monkeycube/wrapped,
+/obj/item/food/animal_cube/wrapped/monkey,
 /obj/structure/closet/secure_closet/medical_wall/pills{
 	pixel_y = -32;
 	req_access = null;
