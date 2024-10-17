@@ -1,7 +1,7 @@
 /obj/item/food/butchery/cutlet
 	name                = "cutlet"
 	desc                = "A tasty meat slice."
-	icon                = 'icons/obj/items/butchery/cutlet.dmi'
+	icon                = 'icons/obj/food/butchery/cutlet.dmi'
 	bitesize            = 2
 	nutriment_amt       = 1
 	center_of_mass      = @'{"x":17,"y":20}'

@@ -4950,7 +4950,7 @@
 	dir = 4
 	},
 /obj/structure/table,
-/obj/item/box/monkeycubes,
+/obj/item/box/animal_cubes/monkeys,
 /obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/structure/disposalpipe/segment{
 	dir = 4

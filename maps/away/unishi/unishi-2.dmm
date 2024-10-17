@@ -1561,7 +1561,7 @@
 "ev" = (
 /obj/structure/table/glass,
 /obj/item/scanner/xenobio,
-/obj/item/box/monkeycubes,
+/obj/item/box/animal_cubes/monkeys,
 /obj/random/smokes,
 /turf/floor/tiled/white,
 /area/unishi/xenobio)
@@ -1570,7 +1570,7 @@
 /obj/item/chems/spray/extinguisher,
 /obj/item/chems/spray/extinguisher,
 /obj/item/chems/spray/extinguisher,
-/obj/item/box/monkeycubes,
+/obj/item/box/animal_cubes/monkeys,
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";

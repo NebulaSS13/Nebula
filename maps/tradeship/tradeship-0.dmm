@@ -1353,7 +1353,7 @@
 /obj/item/box/beakers,
 /obj/item/box/syringes,
 /obj/item/scalpel,
-/obj/item/box/monkeycubes,
+/obj/item/box/animal_cubes/monkeys,
 /obj/item/circular_saw,
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 29

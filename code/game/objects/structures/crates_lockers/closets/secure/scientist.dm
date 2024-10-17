@@ -76,7 +76,7 @@
 		/obj/item/clothing/gloves/black,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/flashlight,
-		/obj/item/food/liquidfood,
+		/obj/item/food/junk/liquidfood,
 		/obj/item/chems/drinks/cans/waterbottle,
 		/obj/item/box/flares,
 		/obj/item/cell/device,

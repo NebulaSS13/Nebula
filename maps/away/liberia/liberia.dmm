@@ -3077,9 +3077,9 @@
 /obj/item/chems/ivbag/blood/oplus,
 /obj/item/chems/ivbag/blood/ominus,
 /obj/item/chems/ivbag/blood/ominus,
-/obj/item/food/candy/donor,
-/obj/item/food/candy/donor,
-/obj/item/food/candy/donor,
+/obj/item/food/junk/candy/donor,
+/obj/item/food/junk/candy/donor,
+/obj/item/food/junk/candy/donor,
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},

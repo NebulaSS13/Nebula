@@ -6,7 +6,7 @@
 
 /obj/item/food/sliceable/pizza/margherita/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/solid/organic/meat,  5)
+	add_to_reagents(/decl/material/liquid/nutriment/cheese,   5)
 	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 6)
 
 /obj/item/food/slice/pizza/margherita

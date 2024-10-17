@@ -932,7 +932,7 @@
 	dir = 1
 	},
 /obj/structure/table,
-/obj/item/box/monkeycubes,
+/obj/item/box/animal_cubes/monkeys,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "db" = (

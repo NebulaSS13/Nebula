@@ -1,49 +1,71 @@
 //cubed animals!
-
-/obj/item/food/monkeycube
-	name = "monkey cube"
+/obj/item/food/animal_cube
+	abstract_type = /obj/item/food/animal_cube
 	desc = "Just add water!"
-	icon_state = "monkeycube"
+	icon = 'icons/obj/items/animal_cube.dmi'
+	icon_state = ICON_STATE_WORLD
 	bitesize = 12
 	filling_color = "#adac7f"
 	center_of_mass = @'{"x":16,"y":14}'
-
 	var/growing = FALSE
-	var/monkey_type = /mob/living/human/monkey
+	var/spawn_type
 	var/wrapper_type
 
-/obj/item/food/monkeycube/populate_reagents()
+/obj/item/food/animal_cube/wrapped
+	desc = "Still wrapped in some paper."
+	item_flags = 0
+	obj_flags = 0
+	wrapper_type = /obj/item/trash/cubewrapper
+	abstract_type = /obj/item/food/animal_cube/wrapped
+
+/obj/item/food/animal_cube/Initialize(ml, material_key, skip_plate)
+	. = ..()
+	if(!spawn_type)
+		return INITIALIZE_HINT_QDEL
+	if(wrapper_type)
+		update_icon()
+
+/obj/item/food/animal_cube/on_update_icon()
+	. = ..()
+	icon_state = initial(icon_state)
+	if(wrapper_type)
+		icon_state = "[icon_state]_wrapped"
+
+/obj/item/food/animal_cube/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
-/obj/item/food/monkeycube/get_single_monetary_worth()
-	. = (monkey_type ? round(atom_info_repository.get_combined_worth_for(monkey_type) * 1.25) : 5)
+/obj/item/food/animal_cube/get_single_monetary_worth()
+	. = (spawn_type ? round(atom_info_repository.get_combined_worth_for(spawn_type) * 1.25) : 5)
 	if(wrapper_type)
 		. += atom_info_repository.get_combined_worth_for(wrapper_type)
 
-/obj/item/food/monkeycube/attack_self(var/mob/user)
+/obj/item/food/animal_cube/attack_self(var/mob/user)
 	if(wrapper_type)
-		Unwrap(user)
+		unwrap_cube(user)
+		return TRUE
+	return ..()
 
-/obj/item/food/monkeycube/proc/Expand(force_loc)
-	if(!growing)
-		growing = TRUE
-		visible_message(SPAN_NOTICE("\The [src] expands!"))
-		var/mob/monkey = new monkey_type
-		monkey.dropInto(force_loc || loc)
-		qdel(src)
+/obj/item/food/animal_cube/proc/spawn_creature(force_loc)
+	if(growing)
+		return
+	growing = TRUE
+	visible_message(SPAN_NOTICE("\The [src] expands!"))
+	var/mob/critter = new spawn_type
+	critter.dropInto(force_loc || loc)
+	qdel(src)
 
-/obj/item/food/monkeycube/proc/Unwrap(var/mob/user)
-	icon_state = "monkeycube"
+/obj/item/food/animal_cube/proc/unwrap_cube(var/mob/user)
 	desc = "Just add water!"
 	to_chat(user, SPAN_NOTICE("You unwrap \the [src]."))
 	user.put_in_hands(new wrapper_type(get_turf(user)))
 	wrapper_type = null
+	update_icon()
 
-/obj/item/food/monkeycube/can_be_poured_into(atom/source)
+/obj/item/food/animal_cube/can_be_poured_into(atom/source)
 	return ..() && !wrapper_type
 
-/obj/item/food/monkeycube/handle_eaten_by_mob(mob/user, mob/target)
+/obj/item/food/animal_cube/handle_eaten_by_mob(mob/user, mob/target)
 	. = ..()
 	if(. == EATEN_SUCCESS)
 		target = target || user
@@ -52,24 +74,25 @@
 			var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(target, BP_CHEST)
 			if(organ)
 				organ.take_external_damage(50, 0, 0, "Animal escaping the ribcage")
-		Expand(get_turf(target))
+		spawn_creature(get_turf(target))
 
-/obj/item/food/monkeycube/on_reagent_change()
+/obj/item/food/animal_cube/on_reagent_change()
 	if((. = ..()) && !QDELETED(src) && reagents?.has_reagent(/decl/material/liquid/water))
-		Expand()
-
-/obj/item/food/monkeycube/wrapped
-	desc = "Still wrapped in some paper."
-	icon_state = "monkeycubewrap"
-	item_flags = 0
-	obj_flags = 0
-	wrapper_type = /obj/item/trash/cubewrapper
+		spawn_creature()
 
 //Spider cubes, all that's left of the cube PR
-/obj/item/food/monkeycube/spidercube
+/obj/item/food/animal_cube/spider
 	name = "spider cube"
-	monkey_type = /obj/effect/spider/spiderling
+	spawn_type = /obj/effect/spider/spiderling
 
-/obj/item/food/monkeycube/wrapped/spidercube
+/obj/item/food/animal_cube/wrapped/spider
 	name = "spider cube"
-	monkey_type = /obj/effect/spider/spiderling
+	spawn_type = /obj/effect/spider/spiderling
+
+/obj/item/food/animal_cube/monkey
+	name = "monkey cube"
+	spawn_type = /mob/living/human/monkey
+
+/obj/item/food/animal_cube/wrapped/monkey
+	name = "monkey cube"
+	spawn_type = /mob/living/human/monkey
