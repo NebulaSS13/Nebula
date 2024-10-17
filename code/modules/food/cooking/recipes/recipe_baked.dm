@@ -193,7 +193,7 @@
 	fruit = list("banana" = 1)
 	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1, /decl/material/liquid/nutriment/flour = 10)
 	items = list(
-		/obj/item/food/monkeycube
+		/obj/item/food/animal_cube/monkey
 	)
 	result = /obj/item/food/monkeysdelight
 

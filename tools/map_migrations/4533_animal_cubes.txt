@@ -1,0 +1,6 @@
+/obj/item/box/monkeycubes/spidercubes/@SUBTYPES : /obj/item/box/animal_cubes/spiders/@SUBTYPES{@OLD}
+/obj/item/box/monkeycubes/@SUBTYPES : /obj/item/box/animal_cubes/monkey/@SUBTYPES{@OLD}
+/obj/item/food/monkeycube/wrapped/spidercube/@SUBTYPES : /obj/item/food/animal_cube/wrapped/spider/@SUBTYPES{@OLD}
+/obj/item/food/monkeycube/spidercube/@SUBTYPES : /obj/item/food/animal_cube/spider/@SUBTYPES{@OLD}
+/obj/item/food/monkeycube/wrapped/@SUBTYPES : /obj/item/food/animal_cube/wrapped/monkey/@SUBTYPES{@OLD}
+/obj/item/food/monkeycube/@SUBTYPES : /obj/item/food/animal_cube/monkey/@SUBTYPES{@OLD}
