@@ -4910,7 +4910,7 @@
 	dir = 4;
 	icon_state = "bulb1"
 	},
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/simulated/floor/plating,
 /area/ship/trade/shuttle/outgoing/engineering)
 "qv" = (

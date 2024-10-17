@@ -75,6 +75,16 @@
 	desc = "A rectangular plastic crate."
 	closet_appearance = /decl/closet_appearance/crate/plastic
 
+/obj/structure/closet/crate/plastic/rations //For use in the escape shuttle
+	name = "emergency rations"
+	desc = "A crate of emergency rations."
+
+/obj/structure/closet/crate/plastic/rations/WillContain()
+	return list(
+		/obj/random/mre = 6,
+		/obj/item/chems/drinks/cans/waterbottle = 12
+	)
+
 /obj/structure/closet/crate/internals
 	name = "internals crate"
 	desc = "A internals crate."
@@ -148,13 +158,6 @@
 
 /obj/structure/closet/crate/freezer/ProcessAtomTemperature()
 	return PROCESS_KILL
-
-/obj/structure/closet/crate/freezer/rations //For use in the escape shuttle
-	name = "emergency rations"
-	desc = "A crate of emergency rations."
-
-/obj/structure/closet/crate/freezer/rations/WillContain()
-	return list(/obj/random/mre = 6, /obj/item/chems/drinks/cans/waterbottle = 12)
 
 /obj/structure/closet/crate/freezer/meat
 	name = "meat crate"
