@@ -329,7 +329,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/icarus/vessel)
 "bs" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/simulated/floor/tiled/freezer,
 /area/icarus/vessel)
 "bt" = (
@@ -1885,7 +1885,7 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "gc" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "gd" = (

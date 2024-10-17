@@ -108,7 +108,7 @@
 		/obj/item/chems/drinks/bottle/premiumvodka = 3,
 		/obj/item/chems/drinks/bottle/whiskey =      3
 	)
-	containertype = /obj/structure/closet/crate/freezer
+	containertype = /obj/structure/closet/crate/plastic
 	containername = "premium drinks crate"
 
 /decl/hierarchy/supply_pack/galley/barsupplies

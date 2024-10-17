@@ -996,7 +996,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "dg" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
 /area/yacht/engine)

@@ -83,7 +83,7 @@
 /turf/template_noop,
 /area/template_noop)
 "as" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
