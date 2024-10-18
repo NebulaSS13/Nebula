@@ -26,7 +26,7 @@
 /datum/mob_controller/aggressive/megahivebot
 	can_escape_buckles = TRUE
 
-/datum/mob_controller/aggressive/megahivebot/open_fire()
+/datum/mob_controller/aggressive/megahivebot/handle_ranged_target(atom/ranged_target)
 	var/mob/living/simple_animal/hostile/hivebot/mega/megabot = body
 	if(!istype(megabot))
 		return ..()

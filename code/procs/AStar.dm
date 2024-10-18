@@ -61,6 +61,9 @@ length to avoid portals or something i guess?? Not that they're counted right no
 	return a.estimated_cost - b.estimated_cost
 
 /proc/AStar(var/start, var/end, adjacent, dist, var/max_nodes, var/max_node_depth = 30, var/min_target_dist = 0, var/min_node_dist, var/id, var/datum/exclude)
+
+	set waitfor = FALSE
+
 	var/datum/priority_queue/open = new /datum/priority_queue(/proc/PathWeightCompare)
 	var/list/closed = list()
 	var/list/path
@@ -85,13 +88,11 @@ length to avoid portals or something i guess?? Not that they're counted right no
 				path[index--] = current.position
 			break
 
-		if(min_node_dist && max_node_depth)
-			if(call(current.position, min_node_dist)(end) + current.nodes_traversed >= max_node_depth)
-				continue
+		if(min_node_dist && max_node_depth && (call(current.position, min_node_dist)(end) + current.nodes_traversed >= max_node_depth))
+			continue
 
-		if(max_node_depth)
-			if(current.nodes_traversed >= max_node_depth)
-				continue
+		if(max_node_depth && current.nodes_traversed >= max_node_depth)
+			continue
 
 		for(var/datum/datum in call(current.position, adjacent)(id))
 			if(datum == exclude)
@@ -114,5 +115,8 @@ length to avoid portals or something i guess?? Not that they're counted right no
 
 			if(max_nodes && open.Length() > max_nodes)
 				open.Remove(open.Length())
+
+			CHECK_TICK
+		CHECK_TICK
 
 	return path

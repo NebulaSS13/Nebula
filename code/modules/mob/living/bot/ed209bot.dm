@@ -14,6 +14,7 @@
 	mob_bump_flag = HEAVY
 	mob_swap_flags = ~HEAVY
 	mob_push_flags = HEAVY
+	ai = /datum/mob_controller/bot/security/ed209
 
 	var/shot_delay = 4
 	var/last_shot = 0
@@ -38,9 +39,6 @@
 				new /obj/item/clothing/head/helmet(my_turf)
 			else
 				new /obj/item/clothing/suit/armor/vest(my_turf)
-
-/mob/living/bot/secbot/ed209/handleRangedTarget()
-	RangedAttack(target)
 
 /mob/living/bot/secbot/ed209/RangedAttack(var/atom/A, var/params)
 	if(last_shot + shot_delay > world.time)

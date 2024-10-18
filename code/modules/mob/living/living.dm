@@ -1359,11 +1359,6 @@ default behaviour is:
 			return FALSE
 	return TRUE
 
-//gets name from ID or PDA itself, ID inside PDA doesn't matter
-//Useful when player is being seen by other mobs
-/mob/living/proc/get_id_name(if_no_id = "Unknown")
-	return GetIdCard(exceptions = list(/obj/item/holder))?.registered_name || if_no_id
-
 /mob/living/get_default_temperature_threshold(threshold)
 	if(isSynthetic())
 		switch(threshold)

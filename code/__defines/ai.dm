@@ -6,6 +6,8 @@
 #define STANCE_ATTACKING         /decl/mob_controller_stance/attacking
 #define STANCE_TIRED             /decl/mob_controller_stance/tired
 #define STANCE_CONTAINED         /decl/mob_controller_stance/contained
+#define STANCE_BUSY              /decl/mob_controller_stance/busy
+
  //basically 'do nothing'
 #define STANCE_COMMANDED_STOP    /decl/mob_controller_stance/commanded/stop
 //follows a target
