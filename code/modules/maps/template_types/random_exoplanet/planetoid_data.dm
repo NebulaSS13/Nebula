@@ -243,6 +243,7 @@
 
 ///Registers to neccessary processors and begin running all processing needed by the planet
 /datum/planetoid_data/proc/begin_processing()
+	set waitfor = FALSE
 	if(daycycle_id)
 		SSdaycycle.register_level(get_linked_level_zs(), daycycle_id, daycycle_type)
 

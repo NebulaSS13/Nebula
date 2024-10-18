@@ -112,7 +112,7 @@
 	ai = /datum/mob_controller/aggressive/beast/shantak/alt
 
 /datum/mob_controller/aggressive/beast/shantak/alt
-	emote_see = list("scratches the ground","shakes out it's mane","rustles softly")
+	emote_see = list("scratches the ground","shakes out its mane","rustles softly")
 
 /mob/living/simple_animal/yithian
 	name = "yithian"

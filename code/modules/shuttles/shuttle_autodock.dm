@@ -54,7 +54,7 @@
 	if(shuttle_docking_controller)
 		shuttle_docking_controller.docking_codes = code
 
-/datum/shuttle/autodock/shuttle_moved()
+/datum/shuttle/autodock/shuttle_moved(obj/effect/shuttle_landmark/destination, list/turf_translation, angle = 0)
 	force_undock() //bye!
 	..()
 
