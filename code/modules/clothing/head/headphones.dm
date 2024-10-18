@@ -7,6 +7,7 @@
 	body_parts_covered = SLOT_HEAD|SLOT_EARS
 	gender = PLURAL
 	flags_inv = 0
+	accessory_slot = null // cannot be equipped on top of helmets. but like, that'd look hilariou
 	var/headphones_on = 0
 	var/sound_channel
 	var/current_track

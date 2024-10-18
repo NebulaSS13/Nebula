@@ -32,6 +32,7 @@
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY
 	replaced_in_loadout = FALSE
+	accessory_slot = null // cannot be equipped on top of helmets
 	var/up = 0
 	var/base_state
 
@@ -145,6 +146,9 @@
 	brightness_on = 2
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/organic/plantmatter
+	valid_accessory_slots = list(ACCESSORY_SLOT_OVER_HELMET)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_OVER_HELMET)
+	accessory_slot = null // cannot be equipped on top of helmets
 	var/plant_type = "pumpkin"
 
 // Duplicated from growns for now. TODO: move sliceability down to other objects like clay.
