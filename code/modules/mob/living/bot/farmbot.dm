@@ -10,6 +10,7 @@
 	icon_state = "farmbot0"
 	max_health = 50
 	req_access = list(list(access_hydroponics, access_robotics))
+	ai = /datum/mob_controller/bot/farm
 
 	var/action = "" // Used to update icon
 	var/waters_trays = 1
@@ -79,18 +80,15 @@
 			if("removedead")
 				removes_dead = !removes_dead
 
-	if(CanAccessMaintenance(user))
-		switch(command)
-			if("emag")
-				if(emagged < 2)
-					emagged = !emagged
+	if(CanAccessMaintenance(user) && command == "emag" && emagged < 2)
+		emagged = !emagged
 
 /mob/living/bot/farmbot/emag_act(var/remaining_charges, var/mob/user)
 	. = ..()
 	if(!emagged)
 		if(user)
 			to_chat(user, "<span class='notice'>You short out [src]'s plant identifier circuits.</span>")
-			ignore_list |= user
+			ai?.add_friend(user)
 		emagged = 2
 		return 1
 
@@ -101,57 +99,17 @@
 	else
 		icon_state = "farmbot[on]"
 
-/mob/living/bot/farmbot/handleRegular()
-	if(emagged && prob(1))
-		flick("farmbot_broke", src)
-
-/mob/living/bot/farmbot/handleAdjacentTarget()
-	UnarmedAttack(target)
-
-/mob/living/bot/farmbot/lookForTargets()
-	if(emagged)
-		for(var/mob/living/human/H in view(7, src))
-			target = H
-			return
-	else
-		for(var/obj/machinery/portable_atmospherics/hydroponics/tray in view(7, src))
-			if(confirmTarget(tray))
-				target = tray
-				return
-		if(!target && refills_water && tank && tank.reagents.total_volume < tank.reagents.maximum_volume)
-			for(var/obj/structure/hygiene/sink/source in view(7, src))
-				target = source
-				return
-
-/mob/living/bot/farmbot/calcTargetPath() // We need to land NEXT to the tray, because the tray itself is impassable
-	for(var/trayDir in list(NORTH, SOUTH, EAST, WEST))
-		target_path = AStar(get_turf(loc), get_step(get_turf(target), trayDir), TYPE_PROC_REF(/turf, CardinalTurfsWithAccess), TYPE_PROC_REF(/turf, Distance), 0, max_target_dist, id = botcard)
-		if(target_path)
-			break
-	if(!target_path)
-		ignore_list |= target
-		target = null
-		target_path = list()
-	return
-
-/mob/living/bot/farmbot/stepToTarget() // Same reason
-	var/turf/T = get_turf(target)
-	if(!target_path.len || !T.Adjacent(target_path[target_path.len]))
-		calcTargetPath()
-	makeStep(target_path)
-	return
-
 /mob/living/bot/farmbot/UnarmedAttack(var/atom/A, var/proximity)
 	. = ..()
 	if(.)
 		return
 
-	if(busy)
+	if(ai?.get_stance() == STANCE_BUSY)
 		return TRUE
 
 	if(istype(A, /obj/machinery/portable_atmospherics/hydroponics))
 		var/obj/machinery/portable_atmospherics/hydroponics/T = A
-		var/t = confirmTarget(T)
+		var/t = ai?.valid_target(T)
 		switch(t)
 			if(0)
 				return TRUE
@@ -159,7 +117,7 @@
 				action = "water" // Needs a better one
 				update_icon()
 				visible_message("<span class='notice'>[src] starts [T.dead? "removing the plant from" : "harvesting"] \the [A].</span>")
-				busy = 1
+				ai?.set_stance(STANCE_BUSY)
 				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] [T.dead? "removes the plant from" : "harvests"] \the [A].</span>")
 					T.physical_attack_hand(src)
@@ -167,7 +125,7 @@
 				action = "water"
 				update_icon()
 				visible_message("<span class='notice'>[src] starts watering \the [A].</span>")
-				busy = 1
+				ai?.set_stance(STANCE_BUSY)
 				if(do_after(src, 30, A))
 					playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 					visible_message("<span class='notice'>[src] waters \the [A].</span>")
@@ -176,7 +134,7 @@
 				action = "hoe"
 				update_icon()
 				visible_message("<span class='notice'>[src] starts uprooting the weeds in \the [A].</span>")
-				busy = 1
+				ai?.set_stance(STANCE_BUSY)
 				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] uproots the weeds in \the [A].</span>")
 					T.weedlevel = 0
@@ -184,11 +142,11 @@
 				action = "fertile"
 				update_icon()
 				visible_message("<span class='notice'>[src] starts fertilizing \the [A].</span>")
-				busy = 1
+				ai?.set_stance(STANCE_BUSY)
 				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] fertilizes \the [A].</span>")
 					T.add_to_reagents(/decl/material/gas/ammonia, 10)
-		busy = 0
+		ai?.set_stance(STANCE_IDLE)
 		action = ""
 		update_icon()
 		T.update_icon()
@@ -198,20 +156,20 @@
 		action = "water"
 		update_icon()
 		visible_message("<span class='notice'>[src] starts refilling its tank from \the [A].</span>")
-		busy = 1
+		ai?.set_stance(STANCE_BUSY)
 		while(do_after(src, 10) && tank.reagents.total_volume < tank.reagents.maximum_volume)
 			tank.add_to_reagents(/decl/material/liquid/water, 100)
 			if(prob(5))
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
-		busy = 0
+		ai?.set_stance(STANCE_IDLE)
 		action = ""
 		update_icon()
 		visible_message("<span class='notice'>[src] finishes refilling its tank.</span>")
 	else if(emagged && ishuman(A))
 		var/action = pick("weed", "water")
-		busy = 1
+		ai?.set_stance(STANCE_BUSY)
 		spawn(50) // Some delay
-			busy = 0
+			ai?.set_stance(STANCE_IDLE)
 		switch(action)
 			if("weed")
 				flick("farmbot_hoe", src)
@@ -239,38 +197,3 @@
 			tank.forceMove(my_turf)
 		if(prob(50))
 			new /obj/item/robot_parts/l_arm(my_turf)
-
-/mob/living/bot/farmbot/confirmTarget(var/atom/targ)
-	if(!..())
-		return 0
-
-	if(emagged && ishuman(targ))
-		if(targ in view(world.view, src))
-			return 1
-		return 0
-
-	if(istype(targ, /obj/structure/hygiene/sink))
-		if(!tank || tank.reagents.total_volume >= tank.reagents.maximum_volume)
-			return 0
-		return 1
-
-	var/obj/machinery/portable_atmospherics/hydroponics/tray = targ
-	if(!istype(tray))
-		return 0
-
-	if(tray.closed_system || !tray.seed)
-		return 0
-
-	if(tray.dead && removes_dead || tray.harvest && collects_produce)
-		return FARMBOT_COLLECT
-
-	else if(refills_water && tray.waterlevel < 40 && !tray.reagents.has_reagent(/decl/material/liquid/water) && (tank?.reagents.total_volume > 0))
-		return FARMBOT_WATER
-
-	else if(uproots_weeds && tray.weedlevel > 3)
-		return FARMBOT_UPROOT
-
-	else if(replaces_nutriment && tray.nutrilevel < 1 && tray.reagents.total_volume < 1)
-		return FARMBOT_NUTRIMENT
-
-	return 0

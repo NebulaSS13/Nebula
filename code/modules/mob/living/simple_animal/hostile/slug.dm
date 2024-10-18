@@ -23,13 +23,14 @@
 	try_destroy_surroundings = FALSE
 	can_escape_buckles = TRUE
 
-/datum/mob_controller/aggressive/slug/list_targets(var/dist = 7)
+/datum/mob_controller/aggressive/slug/valid_target(atom/A)
 	. = ..()
-	var/mob/living/simple_animal/hostile/slug/slug = body
-	if(istype(slug))
-		for(var/mob/living/M in .)
-			if(slug.check_friendly_species(M))
-				. -= M
+	if(.)
+		if(!ismob(A))
+			return FALSE
+		var/mob/living/simple_animal/hostile/slug/slug = body
+		if(slug.check_friendly_species(A))
+			return FALSE
 
 /mob/living/simple_animal/hostile/slug/proc/check_friendly_species(var/mob/living/M)
 	return istype(M) && M.faction == faction

@@ -23,7 +23,7 @@
 		paired_nurse = null
 
 /datum/mob_controller/aggressive/giant_spider/guard/proc/find_nurse()
-	for(var/mob/living/simple_animal/hostile/giant_spider/nurse/nurse in list_targets(10))
+	for(var/mob/living/simple_animal/hostile/giant_spider/nurse/nurse in get_raw_target_list())
 		if(nurse.stat || !istype(nurse.ai, /datum/mob_controller/aggressive/giant_spider/nurse))
 			continue
 		var/datum/mob_controller/aggressive/giant_spider/nurse/nurse_ai = nurse.ai
