@@ -977,7 +977,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base/common)
 "cO" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cP" = (

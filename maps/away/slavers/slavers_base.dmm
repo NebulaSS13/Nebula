@@ -442,7 +442,7 @@
 /turf/simulated/floor/airless,
 /area/slavers_base/cells)
 "bv" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/simulated/floor/airless,
 /area/slavers_base/cells)
 "bw" = (
@@ -465,7 +465,7 @@
 /turf/simulated/floor/airless,
 /area/slavers_base/powatm)
 "bz" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -1306,12 +1306,12 @@
 /turf/simulated/floor/airless,
 /area/slavers_base/med)
 "dE" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/item/chems/food/liquidfood,
 /turf/simulated/floor/airless,
 /area/slavers_base/med)
 "dF" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/simulated/floor/airless,
 /area/slavers_base/med)
 "dG" = (
