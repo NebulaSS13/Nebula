@@ -25,6 +25,7 @@
 	)
 	bypass_chilling_products_for_root_type = /decl/material/liquid/ethanol
 	affect_blood_on_ingest = FALSE // prevents automatic toxins/inebriation as though injected
+	affect_blood_on_inhale = FALSE
 
 	var/nutriment_factor = 0
 	var/hydration_factor = 0
@@ -42,6 +43,12 @@
 	..()
 	M.adjustToxLoss(removed * 2 * alcohol_toxicity)
 	M.add_chemical_effect(CE_ALCOHOL_TOXIC, alcohol_toxicity)
+
+/decl/material/liquid/ethanol/affect_inhale(mob/living/M, removed, datum/reagents/holder)
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+	..()
+	affect_ingest(M, removed, holder) // a bit of a hack, but it avoids code duplication
 
 /decl/material/liquid/ethanol/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()

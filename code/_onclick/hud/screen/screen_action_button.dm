@@ -16,7 +16,7 @@
 /obj/screen/action_button/on_update_icon()
 	if(!action)
 		return
-	icon = action.button_icon
+	icon = action.background_icon
 	icon_state = action.background_icon_state
 
 	cut_overlays()

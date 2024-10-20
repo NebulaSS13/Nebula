@@ -22,11 +22,14 @@
 	var/obj/screen/action_button/button = null
 	var/button_icon = 'icons/obj/action_buttons/actions.dmi'
 	var/button_icon_state = "default"
+	/// The icon to use for the background icon state. Defaults to button_icon if unset.
+	var/background_icon = 'icons/obj/action_buttons/actions.dmi'
 	var/background_icon_state = "bg_default"
 	var/mob/living/owner
 
 /datum/action/New(var/Target)
 	target = Target
+	background_icon ||= button_icon
 
 /datum/action/Destroy()
 	if(owner)
