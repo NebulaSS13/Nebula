@@ -70,6 +70,10 @@
 		holder.remove_reagent(type, volume)
 	. = ..()
 
+/decl/material/liquid/blood/get_reagent_color(datum/reagents/holder)
+	var/list/blood_data = REAGENT_DATA(holder, type)
+	return blood_data?["blood_color"] || ..()
+
 /decl/material/liquid/coagulated_blood
 	name = "coagulated blood"
 	color = "#aa0000"

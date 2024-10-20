@@ -12,6 +12,7 @@
 #include "datum\heist_compatibility.dm"
 #include "datum\language.dm"
 #include "datum\locations_vox.dm"
+#include "datum\outfits.dm"
 #include "datum\religions_vox.dm"
 #include "datum\robolimbs.dm"
 #include "datum\species.dm"

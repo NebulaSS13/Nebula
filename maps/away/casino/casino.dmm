@@ -111,8 +111,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "casino_bridge";
-	name = "Casino Bridge Blast Doors";
-	
+	name = "Casino Bridge Blast Doors"
 	},
 /turf/floor/plating,
 /area/casino/casino_bridge)
@@ -137,8 +136,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "casino_bridge";
-	name = "Casino Bridge Blast Doors";
-	
+	name = "Casino Bridge Blast Doors"
 	},
 /turf/floor/plating,
 /area/casino/casino_bridge)
@@ -1800,8 +1798,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "casino_checkpoint";
-	name = "Casino Checkpoint Blast Doors";
-	
+	name = "Casino Checkpoint Blast Doors"
 	},
 /turf/floor/tiled,
 /area/casino/casino_security)
@@ -1891,8 +1888,7 @@
 /obj/machinery/door/blast/regular{
 	dir = 4;
 	id_tag = "casino_checkpoint";
-	name = "Casino Checkpoint Blast Doors";
-	
+	name = "Casino Checkpoint Blast Doors"
 	},
 /turf/floor/tiled,
 /area/casino/casino_security)
@@ -2134,8 +2130,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "casino_checkpoint";
-	name = "Casino Checkpoint Blast Doors";
-	
+	name = "Casino Checkpoint Blast Doors"
 	},
 /turf/floor/plating,
 /area/casino/casino_security)
@@ -5257,6 +5252,10 @@
 	},
 /turf/floor/plating,
 /area/casino/casino_bow)
+"QL" = (
+/obj/effect/shuttle_landmark/nav_casino/dock,
+/turf/space,
+/area/space)
 "Rb" = (
 /obj/machinery/light/small{
 	dir = 4
@@ -10588,7 +10587,7 @@ aa
 aa
 aa
 aa
-aa
+QL
 aD
 aI
 aO

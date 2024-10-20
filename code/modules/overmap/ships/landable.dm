@@ -294,6 +294,7 @@
 	var/turf/match_turf = get_step(docking_landmark, docking_landmark.dir)
 	if(match_turf)
 		var/obj/abstract/local_dock/our_dock = new /obj/abstract/local_dock(match_turf, port_name)
+		our_dock.dir = turn(dir, 180)
 		our_dock.name = port_name
 		our_shuttle.add_port(our_dock)
 	qdel(src)
