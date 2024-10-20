@@ -30,11 +30,11 @@
 	set_species(new_species, new_bodytype)
 
 	//Handle spawning stuff
-	species.handle_pre_spawn(src)
+	species.handle_pre_change_species(src)
 	apply_species_appearance()
 	apply_bodytype_appearance()
 	apply_species_background_info()
-	species.handle_post_spawn(src)
+	species.handle_post_change_species(src)
 	reset_blood()
 	full_prosthetic = null
 	apply_species_inventory_restrictions()

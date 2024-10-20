@@ -41,7 +41,7 @@
 
 	traits = list(/decl/trait/metabolically_inert = TRAIT_LEVEL_EXISTS)
 
-/decl/species/golem/handle_post_spawn(var/mob/living/human/H)
+/decl/species/golem/handle_post_set_species(var/mob/living/human/H)
 	if(H.mind)
 		H.mind.reset()
 		H.mind.assigned_role = "Golem"

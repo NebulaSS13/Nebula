@@ -90,7 +90,7 @@ var/global/list/bodytype_species_pairs = list() // A list of bodytypes -> specie
 		if(species.name)
 			global.all_species[species.name] = species
 			for(var/decl/bodytype/bodytype in species.available_bodytypes)
-				global.bodytype_species_pairs[GET_DECL(bodytype)] = species
+				global.bodytype_species_pairs[bodytype] = species
 			if(!(species.spawn_flags & SPECIES_IS_RESTRICTED))
 				global.playable_species += species.name
 	if(global.using_map.default_species)
