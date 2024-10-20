@@ -79,10 +79,10 @@
 
 /decl/material/liquid/water/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	..()
-	if(istype(O, /obj/item/food/monkeycube))
-		var/obj/item/food/monkeycube/cube = O
+	if(istype(O, /obj/item/food/animal_cube))
+		var/obj/item/food/animal_cube/cube = O
 		if(!cube.wrapper_type)
-			cube.Expand()
+			cube.spawn_creature()
 
 /decl/material/liquid/water/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	..()
