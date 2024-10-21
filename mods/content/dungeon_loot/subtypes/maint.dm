@@ -31,7 +31,7 @@
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/clothing/mask/breath,
 		/obj/item/chems/glass/rag,
-		/obj/item/food/liquidfood,
+		/obj/item/food/junk/liquidfood,
 		/obj/item/secure_storage/briefcase,
 		/obj/item/briefcase,
 		/obj/item/backpack,

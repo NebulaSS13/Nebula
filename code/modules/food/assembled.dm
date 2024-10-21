@@ -131,7 +131,7 @@
 		/obj/item/holder/corgi                = /obj/item/food/classichotdog,
 		/obj/item/food/butchery/cutlet           = /obj/item/food/burger,
 		/obj/item/organ/internal/brain        = /obj/item/food/brainburger,
-		/obj/item/food/xenomeat         = /obj/item/food/xenoburger,
+		/obj/item/food/butchery/meat/xeno         = /obj/item/food/xenoburger,
 		/obj/item/food/butchery/meat/fish             = /obj/item/food/fishburger,
 		/obj/item/food/tofu             = /obj/item/food/tofuburger,
 		/obj/item/ectoplasm                   = /obj/item/food/ghostburger,
@@ -148,7 +148,7 @@
 	)
 	return combined_food_products
 
-/obj/item/food/doughslice/get_combined_food_products()
+/obj/item/food/unleaveneddoughslice/get_combined_food_products()
 	var/static/list/combined_food_products = list(
 		/obj/item/food/meatball    = /obj/item/food/donkpocket,
 		/obj/item/food/meatball/raw = list(
@@ -166,12 +166,6 @@
 	return combined_food_products
 
 /obj/item/food/hamburger/get_combined_food_products()
-	var/static/list/combined_food_products = list(
-		/obj/item/food/dairy/cheese/wedge = /obj/item/food/cheeseburger
-	)
-	return combined_food_products
-
-/obj/item/food/human/burger/get_combined_food_products()
 	var/static/list/combined_food_products = list(
 		/obj/item/food/dairy/cheese/wedge = /obj/item/food/cheeseburger
 	)
@@ -211,14 +205,14 @@
 	)
 	return combined_food_products
 
-/obj/item/food/sliceable/flatdough/get_combined_food_products()
+/obj/item/food/piecrust/get_combined_food_products()
 	var/static/list/combined_food_products = list(
 		/obj/item/food/butchery/cutlet   = /obj/item/food/meatpie/raw,
-		/obj/item/food/tofu     = /obj/item/food/tofupie/raw,
-		/obj/item/food/xenomeat = /obj/item/food/xemeatpie/raw,
-		"apple"                       = /obj/item/food/applepie/raw,
-		"berries"                     = /obj/item/food/berryclafoutis/raw,
-		"plumphelmet"                 = /obj/item/food/plump_pie/raw
+		/obj/item/food/tofu              = /obj/item/food/tofupie/raw,
+		/obj/item/food/butchery/meat/xeno          = /obj/item/food/xemeatpie/raw,
+		"apple"                          = /obj/item/food/applepie/raw,
+		"berries"                        = /obj/item/food/berryclafoutis/raw,
+		"plumphelmet"                    = /obj/item/food/plump_pie/raw
 	)
 	return combined_food_products
 

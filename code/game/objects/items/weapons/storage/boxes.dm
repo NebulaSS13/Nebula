@@ -79,7 +79,7 @@
 				/obj/item/chems/hypospray/autoinjector/stabilizer,
 				/obj/item/stack/medical/bandage,
 				/obj/item/flashlight/flare/glowstick,
-				/obj/item/food/candy/proteinbar,
+				/obj/item/food/junk/candy/proteinbar,
 				/obj/item/oxycandle,
 				/obj/item/crowbar/cheap
 			)
@@ -98,7 +98,7 @@
 				/obj/item/chems/hypospray/autoinjector/antirad,
 				/obj/item/stack/medical/bandage,
 				/obj/item/flashlight/flare/glowstick,
-				/obj/item/food/candy/proteinbar,
+				/obj/item/food/junk/candy/proteinbar,
 				/obj/item/oxycandle
 			)
 
@@ -672,22 +672,22 @@
 	desc = "A box full of snack foods."
 
 /obj/item/box/snack/WillContain()
-	return list(/obj/item/food/sosjerky = 7)
+	return list(/obj/item/food/junk/sosjerky = 7)
 
 /obj/item/box/snack/noraisin/WillContain()
-	return list(/obj/item/food/no_raisin = 7)
+	return list(/obj/item/food/junk/no_raisin = 7)
 
 /obj/item/box/snack/cheesehonks/WillContain()
-	return list(/obj/item/food/cheesiehonkers = 7)
+	return list(/obj/item/food/junk/cheesiehonkers = 7)
 
 /obj/item/box/snack/tastybread/WillContain()
-	return list(/obj/item/food/tastybread = 7)
+	return list(/obj/item/food/junk/tastybread = 7)
 
 /obj/item/box/snack/candy/WillContain()
-	return list(/obj/item/food/candy = 7)
+	return list(/obj/item/food/junk/candy = 7)
 
 /obj/item/box/snack/chips/WillContain()
-	return list(/obj/item/food/chips = 7)
+	return list(/obj/item/food/junk/chips = 7)
 
 /obj/item/box/snack/buns/WillContain()
 	return list(/obj/item/food/bun = 7)

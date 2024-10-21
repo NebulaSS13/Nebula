@@ -294,7 +294,7 @@
 /obj/item/bedsheet/orange,
 /obj/item/stock_parts/matter_bin/adv,
 /obj/item/stock_parts/micro_laser/ultra,
-/obj/item/food/liquidfood,
+/obj/item/food/junk/liquidfood,
 /obj/item/stack/material/brick/mapped/sandstone/fifty,
 /turf/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
@@ -958,6 +958,7 @@
 /obj/item/chems/condiment/enzyme,
 /obj/item/chems/drinks/milk,
 /obj/item/chems/drinks/milk,
+/obj/item/food/dairy/butter/stick,
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
 /obj/item/beartrap,

@@ -640,6 +640,7 @@
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/flour,
+/obj/item/chems/condiment/yeast,
 /turf/floor/tiled,
 /area/ship/trade/crew/kitchen)
 "bm" = (

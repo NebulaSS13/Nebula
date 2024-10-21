@@ -70,12 +70,12 @@
 		/obj/item/stack/material/rods,
 		/obj/item/food/butchery/cutlet = 2
 	)
-	result = /obj/item/food/meatkabob
+	result = /obj/item/food/skewer/meat
 
 /decl/recipe/grilled/tofukabob
 	items = list(
 		/obj/item/stack/material/rods,
 		/obj/item/food/tofu = 2,
 	)
-	result = /obj/item/food/tofukabob
+	result = /obj/item/food/skewer/tofu
 	completion_message = "The tofu sizzles and browns as it is cooked through."
