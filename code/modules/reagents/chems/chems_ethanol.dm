@@ -509,16 +509,17 @@
 
 /decl/material/liquid/ethanol/champagne
 	name = "champagne"
-	lore_text = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
-	taste_description = "a superior taste of sparkling wine"
-	color = "#e8dfc1"
-	strength = 25
+	lore_text = "Smooth sparkling wine, produced in the same region of France as it has been for centuries."
+	taste_description = "bitterness and fizz"
+	color = "#a89410"
+	strength = 18
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_champagne"
 
 	glass_name = "champagne"
-	glass_desc = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
+	glass_desc = "Sparkling white wine, produced in the same region of France as it has been for centuries."
+	glass_special = list(DRINK_FIZZ)
 
 /decl/material/liquid/ethanol/jagermeister
 	name = "Jagermeister"
@@ -545,14 +546,3 @@
 
 	glass_name = "kvass"
 	glass_desc = "An alcoholic drink commonly made from bread."
-
-/decl/material/liquid/ethanol/champagne
-	name = "champagne"
-	lore_text = "Sparkling wine made from exquisite grape."
-	taste_description = "bitter taste"
-	color = "#a89410"
-	strength = 18
-
-	glass_name = "champagne"
-	glass_desc = "Wow, it's bubbling!"
-	glass_special = list(DRINK_FIZZ)
