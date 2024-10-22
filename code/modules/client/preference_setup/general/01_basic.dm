@@ -38,7 +38,8 @@
 	W.write("real_name",             pref.real_name)
 	W.write("name_is_always_random", pref.be_random_name)
 	var/decl/spawnpoint/spawnpoint = GET_DECL(pref.spawnpoint)
-	W.write("spawnpoint", spawnpoint.uid)
+	if(spawnpoint)
+		W.write("spawnpoint", spawnpoint.uid)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
 

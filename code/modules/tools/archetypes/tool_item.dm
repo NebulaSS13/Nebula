@@ -67,16 +67,26 @@
 	return FALSE
 
 /obj/item/examine(mob/user, distance, infix, suffix)
+
 	. = ..()
+
 	if(!user || user.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_OFF)
 		return
+
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
+	if(!istype(tool))
+		return
+
 	var/list/tool_strings
 	for(var/tool_type in tool?.tool_values)
+		var/tool_quality = get_tool_quality(tool_type)
+		if(tool_quality < TOOL_QUALITY_WORST)
+			continue
 		var/decl/tool_archetype/tool_archetype = GET_DECL(tool_type)
-		var/tool_string = tool_archetype.get_tool_quality_descriptor(tool.tool_values[tool_type])
+		var/tool_string = tool_archetype.get_tool_quality_descriptor(tool_quality)
 		if(tool_archetype.codex_key)
 			tool_string = "<a href='byond://?src=\ref[SScodex];show_examined_info=[tool_archetype.codex_key];show_to=\ref[user]'>[tool_string]</a>"
 		LAZYADD(tool_strings, tool_string)
+
 	if(length(tool_strings))
 		to_chat(user, "[gender == PLURAL ? "They look" : "It looks"] like [english_list(tool_strings)].")

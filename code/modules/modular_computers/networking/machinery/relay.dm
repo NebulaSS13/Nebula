@@ -36,4 +36,5 @@
 	name = "long-ranged network relay"
 	icon = 'icons/obj/machines/tcomms/relay.dmi'
 	icon_state = "relay"
-	network_device_type =  /datum/extension/network_device/broadcaster/relay/long_range
+	network_device_type = /datum/extension/network_device/broadcaster/relay/long_range
+	base_type = /obj/machinery/network/relay/long_range

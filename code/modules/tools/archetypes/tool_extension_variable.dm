@@ -27,10 +27,10 @@
 		return
 	current_tool = tool_values[1]
 
-/datum/extension/tool/variable/get_tool_quality(var/archetype)
+/datum/extension/tool/variable/get_tool_quality(archetype)
 	return (current_tool == archetype) ? ..() : 0
 
-/datum/extension/tool/variable/get_tool_speed(var/archetype)
+/datum/extension/tool/variable/get_tool_speed(archetype)
 	return (current_tool == archetype) ? ..() : INFINITY
 
 /datum/extension/tool/variable/handle_physical_manipulation(var/mob/user)

@@ -4040,7 +4040,7 @@
 /turf/floor/tiled,
 /area/errant_pisces/cryo)
 "kO" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/floor/plating,
 /area/errant_pisces/general_storage)
 "kP" = (
@@ -4140,7 +4140,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/floor/plating,
 /area/errant_pisces/general_storage)
 "li" = (
