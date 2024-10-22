@@ -321,7 +321,7 @@
 /turf/floor/shuttle/yellow,
 /area/shuttle/escape_shuttle)
 "aX" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/floor/shuttle/yellow,
 /area/shuttle/escape_shuttle)
 "aY" = (

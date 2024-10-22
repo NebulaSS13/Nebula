@@ -18,12 +18,12 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 	var/active_tool = SWISSKNF_CLOSED
-	var/can_use_tools = FALSE
 	var/list/tools = list(SWISSKNF_LBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER)
 	var/static/list/sharp_tools = list(SWISSKNF_LBLADE, SWISSKNF_SBLADE, SWISSKNF_GBLADE, SWISSKNF_WBLADE)
 
 /obj/item/knife/folding/swiss/Initialize(ml, material_key)
-	set_extension(src, /datum/extension/tool/variable/simple, list(
+	// Variable tool qualities are handled by proc below.
+	set_extension(src, /datum/extension/tool, list(
 		TOOL_CROWBAR =     TOOL_QUALITY_MEDIOCRE,
 		TOOL_SCREWDRIVER = TOOL_QUALITY_MEDIOCRE,
 		TOOL_WIRECUTTERS = TOOL_QUALITY_MEDIOCRE,
@@ -32,15 +32,17 @@
 	. = ..()
 
 /obj/item/knife/folding/swiss/proc/get_tool_archetype()
-	if(can_use_tools)
-		if(active_tool == SWISSKNF_CROWBAR)
-			return TOOL_CROWBAR
-		if(active_tool == SWISSKNF_CLIFTER || active_tool == SWISSKNF_COPENER)
-			return TOOL_SCREWDRIVER
-		if(active_tool == SWISSKNF_WCUTTER)
-			return TOOL_WIRECUTTERS
+	if(active_tool == SWISSKNF_CROWBAR)
+		return TOOL_CROWBAR
+	if(active_tool == SWISSKNF_CLIFTER || active_tool == SWISSKNF_COPENER)
+		return TOOL_SCREWDRIVER
+	if(active_tool == SWISSKNF_WCUTTER)
+		return TOOL_WIRECUTTERS
 	if(active_tool == SWISSKNF_WBLADE)
 		return TOOL_HATCHET
+
+/obj/item/knife/folding/swiss/get_tool_property(archetype, property)
+	. = (archetype == get_tool_archetype()) ? ..() : null
 
 /obj/item/knife/folding/swiss/get_tool_speed(archetype)
 	. = (archetype == get_tool_archetype()) ? ..() : 0
@@ -49,6 +51,7 @@
 	. = (archetype == get_tool_archetype()) ? ..() : 0
 
 /obj/item/knife/folding/swiss/attack_self(mob/user)
+
 	var/choice
 	if(user.a_intent != I_HELP && ((SWISSKNF_LBLADE in tools) || (SWISSKNF_SBLADE in tools)) && active_tool == SWISSKNF_CLOSED)
 		open = TRUE
@@ -64,7 +67,8 @@
 			open = FALSE
 
 	if(!choice || !CanPhysicallyInteract(user))
-		return
+		return TRUE
+
 	if(choice == SWISSKNF_CLOSED)
 		open = FALSE
 		user.visible_message("<span class='notice'>\The [user] closes \the [src].</span>")
@@ -80,6 +84,7 @@
 	update_attack_force()
 	update_icon()
 	add_fingerprint(user)
+	return TRUE
 
 /obj/item/knife/folding/swiss/examine(mob/user)
 	. = ..()
@@ -111,19 +116,13 @@
 	. = (active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE) ? ..() : new /image
 
 /obj/item/knife/folding/swiss/resolve_attackby(obj/target, mob/user)
+	var/force = get_base_attack_force()
 	if((istype(target, /obj/structure/window) || istype(target, /obj/structure/grille)) && active_tool == SWISSKNF_GBLADE)
-		var/force = get_base_attack_force()
 		set_base_attack_force(force * 8)
-		. = ..()
+	else
 		set_base_attack_force(force)
-		return
-	if(istype(target, /obj/item))
-		if(target.w_class <= ITEM_SIZE_NORMAL)
-			can_use_tools = TRUE
-			. = ..()
-			can_use_tools = FALSE
-			return
-	return ..()
+	. = ..()
+	set_base_attack_force(force)
 
 /obj/item/knife/folding/swiss/officer
 	name = "officer's combi-knife"

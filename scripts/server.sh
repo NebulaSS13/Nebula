@@ -12,6 +12,7 @@
 cd $SERVERDIR
 
 cleanup() { # $1: server pid
+	cd $SERVERDIR
 	rm server_running
 	[[ $1 != "" ]] && kill -s SIGTERM $1
 }
@@ -62,6 +63,7 @@ while [[ ! -e stopserver ]]; do
 		cp "$GITDIR/$DME.rsc" .
 		cp -r "$GITDIR/nano" . # Necessary for NanoUI
 		cp -r "$GITDIR/maps" . # Necessary for runtime submap loading
+		cp -r "$GITDIR/mods" . # Also necessary for runtime submap loading. TODO: a better solution
 		[[ ! -e btime.so && -e "$GITDIR/btime.so" ]] && cp "$GITDIR/btime.so" .
 		[[ ! -e .git/logs ]] && mkdir -p .git/logs
 		cp "$GITDIR/.git/HEAD" ./.git/HEAD

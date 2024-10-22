@@ -422,7 +422,7 @@
 /turf/wall/r_wall,
 /area/map_template/colony/airlock)
 "bi" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/effect/floor_decal/techfloor{
 	dir = 9
 	},
@@ -6654,7 +6654,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/effect/floor_decal/techfloor{
 	dir = 10
 	},
@@ -6666,7 +6666,7 @@
 /turf/floor/tiled/techfloor,
 /area/map_template/colony)
 "mN" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/effect/floor_decal/techfloor,
 /obj/item/mre/menu10,
 /obj/item/mre/menu9,

@@ -14,7 +14,8 @@ var/global/list/pipe_colors = list(
 	"yellow" = PIPE_COLOR_YELLOW,
 	"black" = PIPE_COLOR_BLACK,
 	"orange" = PIPE_COLOR_ORANGE,
-	"white" = PIPE_COLOR_WHITE)
+	"white" = PIPE_COLOR_WHITE,
+	"dark gray" = COLOR_DARK_GRAY)
 
 /proc/pipe_color_check(var/color)
 	if(!color)

@@ -2982,7 +2982,7 @@
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "gs" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/floor/plating,
 /area/map_template/rescue_base/start)
 "gt" = (

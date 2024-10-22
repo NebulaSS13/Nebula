@@ -603,7 +603,7 @@
 /turf/floor/tiled,
 /area/lar_maria/cells)
 "bU" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/floor/tiled,
 /area/lar_maria/cells)
 "bV" = (
@@ -975,7 +975,7 @@
 /turf/floor/tiled,
 /area/lar_maria/cells)
 "cR" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/machinery/alarm{
 	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
@@ -1510,7 +1510,7 @@
 /turf/floor/tiled,
 /area/lar_maria/cells)
 "es" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /turf/floor/plating,
 /area/lar_maria/cells)
 "et" = (
@@ -1907,7 +1907,7 @@
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fu" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/machinery/power/apc{
 	dir = 4;
 	name = "east bump";

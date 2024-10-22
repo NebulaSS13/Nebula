@@ -1488,7 +1488,7 @@
 /turf/floor/plating,
 /area/map_template/skipjack_station/start)
 "dK" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/item/clothing/mask/gas/cyborg,
 /obj/item/box/donkpockets{
 	pixel_x = 3;

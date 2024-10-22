@@ -65,7 +65,7 @@
 /obj/item/flame/proc/get_sconce_overlay()
 	return null
 
-/obj/item/flame/get_tool_quality(archetype, property)
+/obj/item/flame/get_tool_quality(archetype)
 	return (!lit && archetype == TOOL_CAUTERY) ? TOOL_QUALITY_NONE : ..()
 
 /obj/item/flame/proc/has_fuel(amount)

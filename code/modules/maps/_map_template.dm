@@ -241,6 +241,7 @@
 		if(!QDELETED(mark))
 			qdel(mark)
 	subtemplates_to_spawn = null
+	generate_multi_spawn_items()
 
 /datum/map_template/proc/extend_bounds_if_needed(var/list/existing_bounds, var/list/new_bounds)
 	var/list/bounds_to_combine = existing_bounds

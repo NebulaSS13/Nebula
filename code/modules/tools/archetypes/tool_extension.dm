@@ -29,14 +29,14 @@
 			var/decl/tool_archetype/tool_archetype = GET_DECL(tool)
 			tool_use_sounds[tool] = tool_archetype.tool_sound
 
-/datum/extension/tool/proc/get_tool_speed(var/archetype)
+/datum/extension/tool/proc/get_tool_speed(archetype)
 	. = clamp((TOOL_QUALITY_BEST - get_tool_quality(archetype)), TOOL_SPEED_BEST, TOOL_SPEED_WORST)
 
-/datum/extension/tool/proc/get_tool_quality(var/archetype)
+/datum/extension/tool/proc/get_tool_quality(archetype)
 	return LAZYACCESS(tool_values, archetype)
 
 /**Return the value of the property specified for the given tool archetype. */
-/datum/extension/tool/proc/get_tool_property(var/archetype, var/property)
+/datum/extension/tool/proc/get_tool_property(archetype, property)
 	var/list/props = LAZYACCESS(tool_properties, archetype)
 	//If we don't override, check the datum's default values
 	if(!LAZYLEN(props))
@@ -45,14 +45,14 @@
 	return LAZYACCESS(props, property)
 
 /**Set the given tool property for the given tool archetype */
-/datum/extension/tool/proc/set_tool_property(var/archetype, var/property, var/value)
+/datum/extension/tool/proc/set_tool_property(archetype, property, value)
 	var/list/props = LAZYACCESS(tool_properties, archetype)
 	if(!props)
 		LAZYSET(tool_properties, archetype, list()) //Init the properties override list
 		props = tool_properties[archetype]
 	LAZYSET(props, property, value)
 
-/datum/extension/tool/proc/handle_physical_manipulation(var/mob/user)
+/datum/extension/tool/proc/handle_physical_manipulation(mob/user)
 	return FALSE
 
 /datum/extension/tool/proc/get_tool_message(archetype)
@@ -70,7 +70,7 @@
 	. = max(round(.), 5)
 
 // Returns a failure message as a string if the interaction fails.
-/proc/handle_tool_interaction(var/archetype, var/mob/user, var/obj/item/tool, var/atom/target, var/delay = (1 SECOND), var/start_message, var/success_message, var/failure_message, var/fuel_expenditure = 0, var/check_skill = SKILL_CONSTRUCTION, var/prefix_message, var/suffix_message, var/check_skill_threshold, var/check_skill_prob = 50, var/set_cooldown = FALSE)
+/proc/handle_tool_interaction(archetype, mob/user, obj/item/tool, atom/target, delay = (1 SECOND), start_message, success_message, failure_message, fuel_expenditure = 0, check_skill = SKILL_CONSTRUCTION, prefix_message, suffix_message, check_skill_threshold, check_skill_prob = 50, set_cooldown = FALSE)
 
 	if(!istype(user) || !istype(target))
 		return TOOL_USE_FAILURE_NOMESSAGE

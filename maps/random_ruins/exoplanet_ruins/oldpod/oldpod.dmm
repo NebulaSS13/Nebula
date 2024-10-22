@@ -365,7 +365,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/gun/projectile/zipgun,
 /obj/item/gun/projectile/zipgun,

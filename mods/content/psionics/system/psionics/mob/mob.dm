@@ -7,9 +7,6 @@
 	return
 
 /mob/living/set_psi_rank(var/faculty, var/rank, var/take_larger, var/defer_update, var/temporary)
-	if(!get_target_zone()) // Can't target a zone, so you can't really invoke psionics.
-		to_chat(src, SPAN_NOTICE("You feel something strange brush against your mind... but your brain is not able to grasp it."))
-		return
 	var/datum/ability_handler/psionics/psi = get_ability_handler(/datum/ability_handler/psionics)
 	var/current_rank = psi?.get_rank(faculty)
 	if(!current_rank && !rank)

@@ -8,7 +8,7 @@
 		var/mob/living/user_living = user
 		user_living.prepare_maneuver()
 
-/obj/screen/maneuver/examine(mob/user)
+/obj/screen/maneuver/examine(mob/user, distance)
 	. = ..()
 	if(!isliving(user))
 		return

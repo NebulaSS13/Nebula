@@ -6,6 +6,7 @@
 	icon_state = "replicator"
 	base_icon_state = "replicator"
 	base_storage_capacity_mult = 5
+	base_type = /obj/machinery/fabricator/replicator
 
 /obj/machinery/fabricator/replicator/Initialize()
 	. = ..()
