@@ -10,6 +10,10 @@
 	var/id     // Group id
 	var/weight // Probability weight for this spawn point
 
+/obj/random_multi/modify_mapped_vars(map_hash)
+	. = ..()
+	ADJUST_TAG_VAR(id, map_hash)
+
 /obj/random_multi/Initialize()
 	. = ..()
 	weight = max(1, round(weight))

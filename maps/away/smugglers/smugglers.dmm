@@ -819,7 +819,7 @@
 /turf/floor/tiled,
 /area/smugglers/dorms)
 "ci" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/effect/decal/cleanable/cobweb2,
 /obj/effect/decal/cleanable/dirt,
 /turf/floor/tiled,

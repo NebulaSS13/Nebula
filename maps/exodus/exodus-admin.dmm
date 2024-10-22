@@ -1011,7 +1011,7 @@
 /obj/structure/emergency_dispenser{
 	pixel_x = -28
 	},
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/floor/tiled/dark/monotile,
 /area/shuttle/escape_shuttle)
@@ -2235,7 +2235,7 @@
 	},
 /area/centcom/holding)
 "cGo" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/machinery/camera/network/crescent{
 	c_tag = "Shuttle West Storage";
 	dir = 4

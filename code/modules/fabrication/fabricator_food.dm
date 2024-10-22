@@ -6,6 +6,7 @@
 	icon_state = "replicator"
 	base_icon_state = "replicator"
 	base_storage_capacity_mult = 5
+	base_type = /obj/machinery/fabricator/replicator
 
 /obj/machinery/fabricator/replicator/hear_talk(var/mob/M, var/text, var/verb, var/decl/language/speaking)
 	if(speaking && !speaking.machine_understands)
