@@ -133,6 +133,9 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 	. = ..()
 	if(!prob(probability))
 		return // Do nothing.
+	var/turf/our_turf = get_turf(src)
+	if(ispath(type_to_find, /turf) && istype(our_turf, type_to_find) && try_set_variable(our_turf))
+		return INITIALIZE_HINT_QDEL
 	for(var/atom/candidate_atom in get_turf(src))
 		if(!istype(candidate_atom, type_to_find))
 			continue
@@ -167,6 +170,10 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 	. = ..()
 	if(!prob(probability))
 		return // Do nothing.
+	// turf is not in turf contents, oops
+	var/turf/our_turf = get_turf(src)
+	if(ispath(type_to_find, /turf) && istype(our_turf, type_to_find) && try_call_proc(our_turf))
+		return INITIALIZE_HINT_QDEL
 	// we don't use locate in case try_call_proc returns false on our first attempt
 	for(var/atom/candidate_atom in get_turf(src))
 		if(!istype(candidate_atom, type_to_find))
@@ -187,7 +194,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 
 /obj/abstract/landmark/proc_caller/floor_burner
 	type_to_find = /turf/floor
-	proc_to_call = /turf/floor/proc/burn_tile
+	proc_to_call = TYPE_PROC_REF(/turf/floor, burn_tile)
 	arguments_to_pass = null
 
 /// Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.

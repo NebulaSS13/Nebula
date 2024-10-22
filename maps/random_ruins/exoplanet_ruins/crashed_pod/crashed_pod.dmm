@@ -947,7 +947,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "bY" = (
-/obj/structure/closet/crate/freezer/rations,
+/obj/structure/closet/crate/plastic/rations,
 /obj/item/bag/trash,
 /obj/item/bag/trash,
 /obj/item/box/donkpockets,

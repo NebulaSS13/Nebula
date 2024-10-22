@@ -24,13 +24,13 @@
 			fuel_ports += fuel_port_in_area
 
 /datum/shuttle/autodock/overmap/fuel_check()
-	if(!src.try_consume_fuel()) //insufficient fuel
-		for(var/area/A in shuttle_area)
-			for(var/mob/living/M in A)
-				M.show_message(SPAN_WARNING("You hear the shuttle engines sputter... perhaps it doesn't have enough fuel?"), AUDIBLE_MESSAGE,
+	if(!try_consume_fuel()) //insufficient fuel
+		for(var/mob/hearer in global.living_mob_list_ + global.ghost_mob_list)
+			if(is_type_in_list(get_area(hearer), shuttle_area))
+				hearer.show_message(SPAN_WARNING("You hear the shuttle engines sputter... perhaps it doesn't have enough fuel?"), AUDIBLE_MESSAGE,
 				SPAN_WARNING("The shuttle shakes but fails to take off."), VISIBLE_MESSAGE)
-				return 0 //failure!
-	return 1 //sucess, continue with launch
+		return FALSE //failure
+	return TRUE //sucess, continue with launch
 
 /datum/shuttle/autodock/overmap/proc/can_go()
 	if(!next_location)

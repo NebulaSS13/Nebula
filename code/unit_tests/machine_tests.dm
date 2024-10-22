@@ -66,3 +66,23 @@
 	else
 		pass("All machines had valid construction states.")
 	return  1
+
+/datum/unit_test/machine_circuit_matches_basetype
+	name = "MACHINE: All mapped machines with a circuit for their exact type will have a matching basetype."
+
+/datum/unit_test/machine_circuit_matches_basetype/start_test()
+	var/failed = list()
+	for(var/obj/machinery/machine in SSmachines.machinery)
+		if(failed[machine.type])
+			continue
+		var/exact_circuit = get_circuit_by_build_path(machine.type)
+		var/base_circuit = machine.base_type && get_circuit_by_build_path(machine.base_type)
+		if(exact_circuit && base_circuit && (exact_circuit != base_circuit) && (machine.base_type != machine.type))
+			failed[machine.type] = TRUE
+			log_bad("[machine.type] exactly matches [exact_circuit] but its base type is [machine.base_type], which has [base_circuit].")
+
+	if(length(failed))
+		fail("One or more machines had an invaild basetype.")
+	else
+		pass("All machines had valid basetypes.")
+	return  1
