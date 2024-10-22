@@ -223,7 +223,7 @@
 	. += "<BR><BR>Description:<BR>"
 	if(detailed_blood && istype(reagent, /decl/material/liquid/blood))
 		var/blood_data = REAGENT_DATA(beaker?.reagents, /decl/material/liquid/blood)
-		. += "Blood Type: [LAZYACCESS(blood_data, "blood_type")]<br>DNA: [LAZYACCESS(blood_data, "blood.DNA")]"
+		. += "Blood Type: [LAZYACCESS(blood_data, DATA_BLOOD_TYPE)]<br>DNA: [LAZYACCESS(blood_data, "blood.DNA")]"
 	else
 		. += "[reagent.lore_text]"
 	. += "<BR><BR><BR><A href='byond://?src=\ref[src];main=1'>(Back)</A>"

@@ -558,7 +558,7 @@
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
 /obj/item/chems/drinks/bottle/cream/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/milk/cream, reagents.maximum_volume, data = list("milk_donor" = "cow"))
+	add_to_reagents(/decl/material/liquid/drink/milk/cream, reagents.maximum_volume, data = list(DATA_MILK_DONOR = "cow"))
 
 /obj/item/chems/drinks/bottle/tomatojuice
 	name = "Tomato Juice"

@@ -789,7 +789,7 @@
 	if(!blood_data && ishuman(M))
 		var/mob/living/human/H = M
 		blood_data = REAGENT_DATA(H.vessel, /decl/material/liquid/blood)
-	var/sample_dna = LAZYACCESS(blood_data, "blood_DNA")
+	var/sample_dna = LAZYACCESS(blood_data, DATA_BLOOD_DNA)
 	if(sample_dna)
 		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
 		forensics.add_data(/datum/forensics/blood_dna, sample_dna)
@@ -1192,3 +1192,23 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /obj/item/is_watertight()
 	return watertight || ..()
 
+// TODO: merge beakers etc down into this proc.
+/obj/item/proc/get_reagents_overlay()
+	if(reagents?.total_volume <= 0)
+		return
+	var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
+	if(!primary_reagent)
+		return
+	var/reagents_state
+	if(primary_reagent.reagent_overlay_base)
+		reagents_state = primary_reagent.reagent_overlay_base
+	else
+		reagents_state = "reagent_base"
+	if(!reagents_state || !check_state_in_icon(reagents_state, icon))
+		return
+	var/image/reagent_overlay = overlay_image(icon, reagents_state, reagents.get_color(), RESET_COLOR | RESET_ALPHA)
+	for(var/reagent_type in reagents.reagent_volumes)
+		var/decl/material/reagent = GET_DECL(reagent_type)
+		if(reagent.reagent_overlay && check_state_in_icon(reagent.reagent_overlay, icon))
+			reagent_overlay.overlays += overlay_image(icon, reagent.reagent_overlay, reagent.get_reagent_color(), RESET_COLOR | RESET_ALPHA)
+	return reagent_overlay

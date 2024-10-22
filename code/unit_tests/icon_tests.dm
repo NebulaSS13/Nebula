@@ -9,7 +9,8 @@
 		/obj/item/chems/drinks,
 		/obj/item/food
 	)
-	var/list/skip_types = list()
+	// We skip lumps because they are invisible, they are only ever inside utensils.
+	var/list/skip_types = list(/obj/item/food/lump)
 
 /datum/unit_test/icon_test/food_shall_have_icon_states/start_test()
 

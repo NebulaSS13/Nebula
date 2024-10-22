@@ -30,3 +30,21 @@
 		if(!being_cooked.warm)
 			return TRUE
 	return FALSE
+
+/decl/recipe/mysterysoup
+	display_name = "Mystery Soup"
+	items = list(
+		/obj/item/chems/glass/bowl,
+		/obj/item/food/badrecipe,
+		/obj/item/food/tofu,
+		/obj/item/food/egg,
+		/obj/item/food/dairy/cheese/wedge
+	)
+	result = /obj/item/chems/glass/bowl/mystery
+	reagents = list(
+		/decl/material/liquid/water = 10
+	)
+	container_categories = list(
+		RECIPE_CATEGORY_MICROWAVE
+	)
+	reagent_mix = REAGENT_REPLACE // no raw egg or water

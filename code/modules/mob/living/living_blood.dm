@@ -4,31 +4,31 @@
 	if(!my_species?.blood_volume)
 		return //Don't divide by 0
 	var/injected_data = REAGENT_DATA(donor, my_species.blood_reagent)
-	var/chems = LAZYACCESS(injected_data, "trace_chem")
+	var/chems = LAZYACCESS(injected_data, DATA_BLOOD_TRACE_CHEM)
 	for(var/C in chems)
 		add_to_reagents(C, (text2num(chems[C]) / my_species.blood_volume) * amount)//adds trace chemicals to owner's blood
 
 /mob/living/get_blood_data()
 
 	var/data = ..()
-	data["blood_DNA"]  = get_unique_enzymes()
-	data["blood_type"] = get_blood_type()
+	data[DATA_BLOOD_DNA]  = get_unique_enzymes()
+	data[DATA_BLOOD_TYPE] = get_blood_type()
 	var/species_name = get_species_name()
 	if(species_name)
-		data["species"] = species_name
+		data[DATA_BLOOD_SPECIES] = species_name
 
 	var/list/temp_chem = list()
 	for(var/R in reagents?.reagent_volumes)
 		temp_chem[R] = REAGENT_VOLUME(reagents, R)
-	data["trace_chem"]  = temp_chem
-	data["dose_chem"]   = chem_doses?.Copy() || list()
+	data[DATA_BLOOD_TRACE_CHEM]  = temp_chem
+	data[DATA_BLOOD_DOSE_CHEM]   = chem_doses?.Copy() || list()
 
 	if(isSynthetic())
-		data["has_oxy"]     = FALSE
-		data["blood_color"] = SYNTH_BLOOD_COLOR
+		data[DATA_BLOOD_HAS_OXY] = FALSE
+		data[DATA_BLOOD_COLOR]   = SYNTH_BLOOD_COLOR
 	else
-		data["has_oxy"]     = get_blood_oxy()
-		data["blood_color"] = get_blood_color()
+		data[DATA_BLOOD_HAS_OXY] = get_blood_oxy()
+		data[DATA_BLOOD_COLOR]   = get_blood_color()
 	return data
 
 /mob/living/proc/is_blood_incompatible(their_blood_type)

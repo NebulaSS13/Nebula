@@ -47,18 +47,18 @@
 		splatter.set_dir(spray_dir)
 
 	// Update blood information.
-	if(LAZYACCESS(blood_data, "blood_DNA"))
-		LAZYSET(splatter.blood_data, blood_data["blood_DNA"], blood_data)
+	if(LAZYACCESS(blood_data, DATA_BLOOD_DNA))
+		LAZYSET(splatter.blood_data, blood_data[DATA_BLOOD_DNA], blood_data)
 		splatter.blood_DNA = list()
-		if(LAZYACCESS(blood_data, "blood_type"))
-			splatter.blood_DNA[blood_data["blood_DNA"]] = blood_data["blood_type"]
+		if(LAZYACCESS(blood_data, DATA_BLOOD_TYPE))
+			splatter.blood_DNA[blood_data[DATA_BLOOD_DNA]] = blood_data[DATA_BLOOD_TYPE]
 		else
-			splatter.blood_DNA[blood_data["blood_DNA"]] = "O+"
+			splatter.blood_DNA[blood_data[DATA_BLOOD_DNA]] = "O+"
 		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(splatter, /datum/extension/forensic_evidence)
-		forensics.add_data(/datum/forensics/blood_dna, blood_data["blood_DNA"])
+		forensics.add_data(/datum/forensics/blood_dna, blood_data[DATA_BLOOD_DNA])
 
-	if(!blood_type && LAZYACCESS(blood_data, "blood_type"))
-		blood_type = LAZYACCESS(blood_data, "blood_type")
+	if(!blood_type && LAZYACCESS(blood_data, DATA_BLOOD_TYPE))
+		blood_type = LAZYACCESS(blood_data, DATA_BLOOD_TYPE)
 
 	// Update appearance.
 	if(blood_type)
@@ -67,8 +67,8 @@
 		splatter.desc =      blood_type_decl.splatter_desc
 		splatter.basecolor = blood_type_decl.splatter_colour
 
-	if(LAZYACCESS(blood_data, "blood_color"))
-		splatter.basecolor = blood_data["blood_color"]
+	if(LAZYACCESS(blood_data, DATA_BLOOD_COLOR))
+		splatter.basecolor = blood_data[DATA_BLOOD_COLOR]
 
 	splatter.update_icon()
 	splatter.fluorescent = FALSE

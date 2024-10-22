@@ -1101,7 +1101,7 @@
 	var/bloodcolor
 	var/list/blood_data = REAGENT_DATA(source.coating, /decl/material/liquid/blood)
 	if(blood_data)
-		bloodDNA = list(blood_data["blood_DNA"] = blood_data["blood_type"])
+		bloodDNA = list(blood_data[DATA_BLOOD_DNA] = blood_data[DATA_BLOOD_TYPE])
 	else
 		bloodDNA = list()
 	bloodcolor = source.coating.get_color()

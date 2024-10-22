@@ -42,7 +42,7 @@
 	var/trash
 	var/obj/item/plate/plate
 	/// A type used when cloning this food item for utensils.
-	var/utensil_food_type
+	var/_utensil_food_type
 	/// A set of utensil flags determining which utensil interactions are valid with this food.
 	var/utensil_flags = UTENSIL_FLAG_SCOOP | UTENSIL_FLAG_COLLECT
 
@@ -59,8 +59,8 @@
 		plate = null
 
 	initialize_reagents()
-	if(isnull(utensil_food_type))
-		utensil_food_type = type
+	if(isnull(_utensil_food_type))
+		_utensil_food_type = type
 	if(slice_path && slice_num)
 		utensil_flags |= UTENSIL_FLAG_SLICE
 
@@ -71,7 +71,21 @@
 		reagents.maximum_volume = max(reagents.maximum_volume, volume)
 	return ..()
 
-/obj/item/chems/on_reagent_change()
+// Dummy type used solely for soup bowls/soup spoons.
+/obj/item/food/lump
+	name = "lump"
+
+/obj/item/food/lump/on_reagent_change()
+	. = ..()
+	if(reagents?.total_volume)
+		SetName(reagents.get_primary_reagent_name())
+		filling_color = reagents.get_color()
+	else
+		SetName(initial(name))
+		filling_color = COLOR_WHITE
+	color = filling_color
+
+/obj/item/food/on_reagent_change()
 	if((. = ..()))
 		update_icon()
 
@@ -183,19 +197,30 @@
 
 /obj/item/food/proc/get_nutriment_data()
 	if(nutriment_desc)
-		LAZYSET(., "taste", nutriment_desc)
+		LAZYSET(., DATA_TASTE, nutriment_desc)
 	if(allergen_flags)
 		LAZYINITLIST(.)
-		.["allergen_flags"] |= allergen_flags
+		.[DATA_INGREDIENT_FLAGS] |= allergen_flags
 
 /obj/item/food/proc/set_nutriment_data(list/newdata)
 	if(reagents?.total_volume && reagents.has_reagent(nutriment_type, 1))
 		LAZYINITLIST(reagents.reagent_data)
 		reagents.reagent_data[nutriment_type] = newdata
 
+/obj/item/food/get_utensil_food_type()
+	return _utensil_food_type
+
+/obj/item/food/get_food_filling_color()
+	return filling_color || ..()
+
+/obj/item/food/handle_chunk_separated()
+	bitecount++
+
+
 /obj/item/food/proc/add_allergen_flags(new_flags)
 	for(var/reagent in reagents.reagent_volumes)
 		var/decl/material/mat = GET_DECL(reagent)
-		var/list/newdata = mat.mix_data(reagents, list("allergen_flags" = new_flags))
+		var/list/newdata = mat.mix_data(reagents, list(DATA_INGREDIENT_FLAGS = new_flags))
 		if(newdata)
 			LAZYSET(reagents.reagent_data, reagent, newdata)
+

@@ -116,13 +116,6 @@
 	uid = "chem_capsaicin"
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
-	heating_point = T100C
-	heating_message = "darkens and thickens as it seperates from its water content."
-	heating_products = list(
-		/decl/material/liquid/capsaicin/condensed = 0.5,
-		/decl/material/liquid/water = 0.5
-	)
-
 	var/agony_dose = 5
 	var/agony_amount = 2
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"

@@ -40,3 +40,7 @@
 	items = list(/obj/item/food/pelmen = 5)
 	result = /obj/item/food/pelmeni_boiled
 	completion_message = "The pelmeni firm up as they are cooked through."
+
+/decl/recipe/boiled/stewedsoymeat
+	fruit = list("carrot" = 1, "tomato" = 1, "soybeans chopped" = 2)
+	result = /obj/item/food/stewedsoymeat

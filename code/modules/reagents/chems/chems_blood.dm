@@ -31,18 +31,18 @@
 
 /decl/material/liquid/blood/initialize_data(list/newdata)
 	. = ..() || list()
-	.["species"] = .["species"] || global.using_map.default_species
+	.[DATA_BLOOD_SPECIES] ||= global.using_map.default_species
 
 /decl/material/liquid/blood/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
 	. = ..()
-	if(LAZYACCESS(newdata, "trace_chem"))
-		var/list/other_chems = LAZYACCESS(newdata, "trace_chem")
+	if(LAZYACCESS(newdata, DATA_BLOOD_TRACE_CHEM))
+		var/list/other_chems = LAZYACCESS(newdata, DATA_BLOOD_TRACE_CHEM)
 		if(!.)
 			. = newdata.Copy()
-		else if(!.["trace_chem"])
-			.["trace_chem"] = other_chems.Copy()
+		else if(!.[DATA_BLOOD_TRACE_CHEM])
+			.[DATA_BLOOD_TRACE_CHEM] = other_chems.Copy()
 		else
-			var/list/my_chems = .["trace_chem"]
+			var/list/my_chems = .[DATA_BLOOD_TRACE_CHEM]
 			for(var/chem in other_chems)
 				my_chems[chem] = my_chems[chem] + other_chems[chem]
 
@@ -50,7 +50,7 @@
 	var/data = REAGENT_DATA(holder, type)
 	if(!istype(T) || REAGENT_VOLUME(holder, type) < 3)
 		return
-	var/weakref/W = LAZYACCESS(data, "donor")
+	var/weakref/W = LAZYACCESS(data, DATA_BLOOD_DONOR)
 	blood_splatter(T, W?.resolve() || holder.my_atom, 1)
 
 /decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)

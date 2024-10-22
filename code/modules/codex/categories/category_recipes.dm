@@ -94,8 +94,13 @@
 		for(var/thing in recipe.fruit)
 			ingredients += "[recipe.fruit[thing]] [thing]\s"
 		mechanics_text += "<ul><li>[jointext(ingredients, "</li><li>")]</li></ul>"
+
+		var/list/cooking_methods = list()
+		for(var/cooking_method in recipe.container_categories)
+			cooking_methods += "\a [cooking_method]"
+
 		var/atom/recipe_product = recipe.result
-		mechanics_text += "<br>This recipe takes [ceil(recipe.cooking_time/10)] second\s to cook and creates \a [initial(recipe_product.name)]."
+		mechanics_text += "<br>This recipe takes [ceil(recipe.cooking_time/10)] second\s to cook in [english_list(cooking_methods, and_text = " or ")] and creates \a [initial(recipe_product.name)]."
 		var/lore_text = recipe.lore_text
 		if(!lore_text)
 			lore_text = initial(recipe_product.desc)

@@ -379,7 +379,7 @@
 	lore_text = "Aged, fermented, curdled milk."
 	uid = "chem_nutriment_cheese"
 	color = "#ffd000"
-	allergen_flags = ALLERGEN_DAIRY
+	allergen_flags = ALLERGEN_DAIRY | ALLERGEN_CHEESE
 
 /decl/material/liquid/nutriment/butter
 	name = "butter"

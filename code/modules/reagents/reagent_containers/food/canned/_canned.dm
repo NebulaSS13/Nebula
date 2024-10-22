@@ -99,7 +99,11 @@
 
 /obj/item/food/can/tomato/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 12)
+	add_to_reagents(/decl/material/liquid/nutriment/soup, 12, list(
+		DATA_TASTE            = list("tomato" = 1),
+		DATA_INGREDIENT_LIST  = list("tomato" = 1),
+		DATA_INGREDIENT_FLAGS = ALLERGEN_VEGETABLE
+	))
 
 /obj/item/food/can/spinach
 	name = "spinach"

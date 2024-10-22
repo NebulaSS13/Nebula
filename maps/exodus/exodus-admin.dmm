@@ -1742,7 +1742,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/food/stew,
+/obj/item/chems/glass/bowl/mapped/stew,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1831,7 +1831,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/food/beetsoup,
+/obj/item/chems/glass/bowl/mapped/beet,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2025,7 +2025,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/food/bloodsoup,
+/obj/item/chems/glass/bowl/mapped/blood,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2184,7 +2184,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/food/mushroomsoup,
+/obj/item/chems/glass/bowl/mapped/mushroom,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},

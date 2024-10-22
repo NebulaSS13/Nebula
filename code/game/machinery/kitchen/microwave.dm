@@ -104,7 +104,7 @@
 		else //Otherwise bad luck!!
 			to_chat(user, SPAN_WARNING("It's dirty!"))
 			return 1
-	else if(istype(O,/obj/item/chems/glass) || istype(O,/obj/item/chems/drinks) || istype(O,/obj/item/chems/condiment) )
+	else if(!istype(O, /obj/item/chems/glass/bowl) && (istype(O,/obj/item/chems/glass) || istype(O,/obj/item/chems/drinks) || istype(O,/obj/item/chems/condiment) ))
 		if (!O.reagents)
 			return 1
 		return // transfer is handled in afterattack

@@ -54,18 +54,18 @@
 	)
 	possible_wanted_items = list()
 	possible_trading_items = list(
-		/obj/item/utensil/chopsticks             = TRADER_THIS_TYPE,
-		/obj/item/utensil/chopsticks/plastic     = TRADER_THIS_TYPE,
-		/obj/item/chems/condiment/small/soysauce = TRADER_THIS_TYPE,
-		/obj/item/chems/condiment/capsaicin      = TRADER_THIS_TYPE,
-		/obj/item/food/chazuke                   = TRADER_THIS_TYPE,
-		/obj/item/food/katsucurry                = TRADER_THIS_TYPE,
-		/obj/item/food/skewer/meat                = TRADER_THIS_TYPE,
-		/obj/item/food/boiledegg                 = TRADER_THIS_TYPE,
-		/obj/item/food/boiledrice                = TRADER_THIS_TYPE,
-		/obj/item/food/ricepudding               = TRADER_THIS_TYPE,
-		/obj/item/food/stewedsoymeat             = TRADER_THIS_TYPE,
-		/obj/item/chems/drinks/dry_ramen         = TRADER_THIS_TYPE
+		/obj/item/utensil/chopsticks                  = TRADER_THIS_TYPE,
+		/obj/item/utensil/chopsticks/plastic          = TRADER_THIS_TYPE,
+		/obj/item/chems/condiment/small/soysauce      = TRADER_THIS_TYPE,
+		/obj/item/chems/condiment/capsaicin           = TRADER_THIS_TYPE,
+		/obj/item/food/chazuke                        = TRADER_THIS_TYPE,
+		/obj/item/chems/glass/bowl/mapped/curry/katsu = TRADER_THIS_TYPE,
+		/obj/item/food/skewer/meat                    = TRADER_THIS_TYPE,
+		/obj/item/food/boiledegg                      = TRADER_THIS_TYPE,
+		/obj/item/food/boiledrice                     = TRADER_THIS_TYPE,
+		/obj/item/food/ricepudding                    = TRADER_THIS_TYPE,
+		/obj/item/food/stewedsoymeat                  = TRADER_THIS_TYPE,
+		/obj/item/chems/drinks/dry_ramen              = TRADER_THIS_TYPE
 	)
 
 	var/static/list/fortunes = list(
