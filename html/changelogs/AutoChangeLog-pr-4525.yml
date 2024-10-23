@@ -1,6 +1,0 @@
-author: MistakeNot4892
-changes:
-  - {tweak: Dough now requires a 60C temperature and does not use egg.}
-  - {tweak: 'Flatbread now uses unleavened dough, made without yeast, while pies use
-      pie crust. Check the codex for updated recipes.'}
-delete-after: true
