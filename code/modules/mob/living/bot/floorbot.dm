@@ -5,7 +5,7 @@
 	icon_state = "floorbot0"
 	req_access = list(list(access_construction, access_robotics))
 	wait_if_pulled = 1
-	min_target_dist = 0
+	ai = /datum/mob_controller/bot/floor
 
 	var/amount = 10 // 1 for tile, 2 for lattice
 	var/maxAmount = 60
@@ -26,10 +26,20 @@
 	var/image/B = image(src, boxtype)
 	src.underlays += B
 
+/mob/living/bot/floorbot/handle_living_non_stasis_processes()
+	. = ..()
+	if(stat == DEAD)
+		return
+	tilemake++
+	if(tilemake >= 100)
+		tilemake = 0
+		addTiles(1)
+	if(prob(1))
+		custom_emote(AUDIBLE_MESSAGE, "makes an excited booping beeping sound!")
 
 /mob/living/bot/floorbot/on_update_icon()
 	..()
-	if(busy)
+	if(ai?.get_stance() == STANCE_BUSY)
 		icon_state = "floorbot-c"
 	else if(amount > 0)
 		icon_state = "floorbot[on]"
@@ -84,61 +94,13 @@
 			to_chat(user, "<span class='notice'>\The [src] buzzes and beeps.</span>")
 		return 1
 
-/mob/living/bot/floorbot/handleRegular()
-	++tilemake
-	if(tilemake >= 100)
-		tilemake = 0
-		addTiles(1)
-
-	if(prob(1))
-		custom_emote(2, "makes an excited booping beeping sound!")
-
-/mob/living/bot/floorbot/handleAdjacentTarget()
-	if(get_turf(target) == src.loc)
-		UnarmedAttack(target)
-
-/mob/living/bot/floorbot/lookForTargets()
-	for(var/turf/floor/T in view(src))
-		if(confirmTarget(T))
-			target = T
-			return
-
-	if(amount < maxAmount && (eattiles || maketiles))
-		for(var/obj/item/stack/S in view(src))
-			if(confirmTarget(S))
-				target = S
-				return
-
-/mob/living/bot/floorbot/confirmTarget(var/atom/A) // The fact that we do some checks twice may seem confusing but remember that the bot's settings may be toggled while it's moving and we want them to stop in that case
-	anchored = FALSE
-	if(!..())
-		return 0
-
-	if(istype(A, /obj/item/stack/tile/floor))
-		return (amount < maxAmount && eattiles)
-
-	if(istype(A, /obj/item/stack/material))
-		var/obj/item/stack/material/S = A
-		if(S.material?.type == /decl/material/solid/metal/steel)
-			return (amount < maxAmount && maketiles)
-
-	if(A.loc.name == "Space")
-		return 0
-
-	var/turf/floor/T = A
-	if(istype(T))
-		if(emagged)
-			return 1
-		else
-			return (amount && (T.is_floor_damaged() || (improvefloors && !T.has_flooring())))
-
 /mob/living/bot/floorbot/UnarmedAttack(var/atom/A, var/proximity)
 
 	. = ..()
 	if(.)
 		return
 
-	if(busy)
+	if(ai?.get_stance() == STANCE_BUSY)
 		return TRUE
 
 	if(get_turf(A) != loc)
@@ -146,7 +108,7 @@
 
 	if(emagged && istype(A, /turf/floor))
 		var/turf/floor/F = A
-		busy = 1
+		ai?.set_stance(STANCE_BUSY)
 		update_icon()
 		if(F.has_flooring())
 			visible_message("<span class='warning'>[src] begins to tear up \the [F].</span>")
@@ -158,12 +120,12 @@
 			if(do_after(src, 150, F)) // Extra time because this can and will kill.
 				F.physically_destroyed()
 				addTiles(1)
-		target = null
+		ai?.set_target(null)
 		update_icon()
 	else if(istype(A, /turf/floor))
 		var/turf/floor/F = A
 		if(F.is_floor_damaged())
-			busy = 1
+			ai?.set_stance(STANCE_BUSY)
 			update_icon()
 			visible_message("<span class='notice'>[src] begins to remove the broken floor.</span>")
 			anchored = TRUE
@@ -171,11 +133,11 @@
 				if(F.is_floor_damaged())
 					F.set_flooring(null)
 			anchored = FALSE
-			target = null
-			busy = 0
+			ai?.set_target(null)
+			ai?.set_stance(STANCE_IDLE)
 			update_icon()
 		else if(!F.has_flooring() && amount)
-			busy = 1
+			ai?.set_stance(STANCE_BUSY)
 			update_icon()
 			visible_message("<span class='notice'>[src] begins to improve the floor.</span>")
 			anchored = TRUE
@@ -184,12 +146,12 @@
 					F.set_flooring(GET_DECL(floor_build_type))
 					addTiles(-1)
 			anchored = FALSE
-			target = null
+			ai?.set_target(null)
 			update_icon()
 	else if(istype(A, /obj/item/stack/tile/floor) && amount < maxAmount)
 		var/obj/item/stack/tile/floor/T = A
 		visible_message("<span class='notice'>\The [src] begins to collect tiles.</span>")
-		busy = 1
+		ai?.set_stance(STANCE_BUSY)
 		update_icon()
 		anchored = TRUE
 		if(do_after(src, 20))
@@ -198,13 +160,13 @@
 				T.use(eaten)
 				addTiles(eaten)
 		anchored = FALSE
-		target = null
+		ai?.set_target(null)
 		update_icon()
 	else if(istype(A, /obj/item/stack/material) && amount + 4 <= maxAmount)
 		var/obj/item/stack/material/M = A
 		if(M.get_material_type() == /decl/material/solid/metal/steel)
 			visible_message("<span class='notice'>\The [src] begins to make tiles.</span>")
-			busy = 1
+			ai?.set_stance(STANCE_BUSY)
 			anchored = TRUE
 			update_icon()
 			if(do_after(src, 50))
@@ -238,4 +200,4 @@
 		amount = 0
 	else if(amount > maxAmount)
 		amount = maxAmount
-	busy = FALSE
+	ai?.set_stance(STANCE_IDLE)

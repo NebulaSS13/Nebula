@@ -12,11 +12,11 @@
 	icon = 'icons/mob/bot/medibot.dmi'
 	icon_state = "medibot0"
 	req_access = list(list(access_medical, access_robotics))
-	botcard_access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology)
+	ai = /datum/mob_controller/bot/medical
+
 	var/skin = null //Set to "tox", "ointment" or "o2" for the other two firstaid kits.
 
 	//AI vars
-	var/last_newpatient_speak = 0
 	var/vocal = 1
 
 	//Healing vars
@@ -32,13 +32,22 @@
 	var/declare_treatment = 0 //When attempting to treat a patient, should it notify everyone wearing medhuds?
 
 	// Are we tipped over?
-	var/is_tipped = FALSE
 	//How panicked we are about being tipped over (why would you do this?)
 	var/tipped_status = MEDBOT_PANIC_NONE
 	//The name we got when we were tipped
 	var/tipper_name
 	//The last time we were tipped/righted and said a voice line, to avoid spam
 	var/last_tipping_action_voice = 0
+
+/mob/living/bot/medbot/get_initial_bot_access()
+	var/static/list/bot_access = list(
+		access_medical,
+		access_morgue,
+		access_surgery,
+		access_chemistry,
+		access_virology
+	)
+	return bot_access.Copy()
 
 /mob/living/bot/medbot/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
@@ -57,44 +66,6 @@
 		if(MEDBOT_PANIC_FUCK to INFINITY)
 			to_chat(user, SPAN_DANGER("They are freaking out from being tipped over!"))
 
-/mob/living/bot/medbot/handleIdle()
-	if(vocal && prob(1))
-		var/static/message_options = list(
-			"Radar, put a mask on!" = 'sound/voice/medbot/mradar.ogg',
-			"There's always a catch, and it's the best there is." = 'sound/voice/medbot/mcatch.ogg',
-			"I knew it, I should've been a plastic surgeon." = 'sound/voice/medbot/msurgeon.ogg',
-			"What kind of medbay is this? Everyone's dropping like flies." = 'sound/voice/medbot/mflies.ogg',
-			"Delicious!" = 'sound/voice/medbot/mdelicious.ogg'
-			)
-		var/message = pick(message_options)
-		say(message)
-		playsound(src, message_options[message], 50, 0)
-
-/mob/living/bot/medbot/handleAdjacentTarget()
-	if(is_tipped) // Don't handle targets if we're incapacitated!
-		return
-	UnarmedAttack(target)
-
-/mob/living/bot/medbot/lookForTargets()
-	if(is_tipped) // Don't look for targets if we're incapacitated!
-		return
-	for(var/mob/living/human/H in view(7, src)) // Time to find a patient!
-		if(confirmTarget(H))
-			target = H
-			if(last_newpatient_speak + 300 < world.time && vocal)
-				if(vocal)
-					var/message_options = list(
-						"Hey, [H.name]! Hold on, I'm coming." = 'sound/voice/medbot/mcoming.ogg',
-						"Wait [H.name]! I want to help!" = 'sound/voice/medbot/mhelp.ogg',
-						"[H.name], you appear to be injured!" = 'sound/voice/medbot/minjured.ogg'
-						)
-					var/message = pick(message_options)
-					say(message)
-					playsound(src, message_options[message], 50, 0)
-				custom_emote(1, "points at [H.name].")
-				last_newpatient_speak = world.time
-			break
-
 /mob/living/bot/medbot/UnarmedAttack(var/mob/living/human/H, var/proximity)
 	. = ..()
 	if(.)
@@ -103,7 +74,7 @@
 	if(!on || !istype(H))
 		return FALSE
 
-	if(busy)
+	if(ai?.get_stance() == STANCE_BUSY)
 		return TRUE
 
 	if(H.stat == DEAD)
@@ -117,7 +88,7 @@
 			say(message)
 			playsound(src, death_messages[message], 50, 0)
 
-	var/t = confirmTarget(H)
+	var/t = ai?.valid_target(H)
 	if(!t)
 		if(vocal)
 			var/static/possible_messages = list(
@@ -134,7 +105,7 @@
 	if(declare_treatment)
 		var/area/location = get_area(src)
 		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location.proper_name]</b>", src)
-	busy = 1
+	ai?.set_stance(STANCE_BUSY)
 	update_icon()
 	if(do_mob(src, H, 30))
 		if(t == 1)
@@ -142,7 +113,7 @@
 		else
 			H.add_to_reagents(t, injection_amount)
 		visible_message("<span class='warning'>[src] injects [H] with the syringe!</span>")
-	busy = 0
+	ai?.set_stance(STANCE_IDLE)
 	update_icon()
 	return TRUE
 
@@ -150,7 +121,7 @@
 	..()
 	if(skin)
 		add_overlay(image('icons/mob/bot/medibot_skins.dmi', "medskin_[skin]"))
-	if(busy)
+	if(ai?.get_stance() == STANCE_BUSY)
 		icon_state = "medibots"
 	else
 		icon_state = "medibot[on]"
@@ -173,7 +144,7 @@
 		..()
 
 /mob/living/bot/medbot/default_disarm_interaction(mob/user)
-	if(!is_tipped)
+	if(!current_posture?.prone)
 		user.visible_message(SPAN_DANGER("\The [user] begins tipping over [src]."), SPAN_WARNING("You begin tipping over [src]..."))
 
 		if(world.time > last_tipping_action_voice + 15 SECONDS && vocal)
@@ -188,7 +159,7 @@
 	. = ..()
 
 /mob/living/bot/medbot/default_help_interaction(mob/user)
-	if(is_tipped)
+	if(current_posture?.prone)
 		user.visible_message(SPAN_NOTICE("\The [user] begins righting [src]."), SPAN_NOTICE("You begin righting [src]..."))
 		if(do_after(user, 3 SECONDS, target=src))
 			set_right(user)
@@ -274,11 +245,12 @@
 	if(!emagged)
 		if(user)
 			to_chat(user, "<span class='warning'>You short out [src]'s reagent synthesis circuits.</span>")
-			ignore_list |= user
+			ai?.add_friend(user)
 		visible_message("<span class='warning'>[src] buzzes oddly!</span>")
 		flick("medibot_spark", src)
-		target = null
-		busy = 0
+		if(ai)
+			ai.set_target(null)
+			ai.set_stance(STANCE_IDLE)
 		emagged = 1
 		on = 1
 		update_icon()
@@ -297,39 +269,10 @@
 			reagent_glass.forceMove(my_turf)
 			reagent_glass = null
 
-/mob/living/bot/medbot/confirmTarget(var/mob/living/human/H)
-	if(!..())
-		return 0
-
-	if(H.stat == DEAD) // He's dead, Jim
-		return 0
-
-	if(emagged)
-		return treatment_emag
-
-	// If they're injured, we're using a beaker, and they don't have on of the chems in the beaker
-	if(reagent_glass && use_beaker && ((H.get_damage(BRUTE) >= heal_threshold) || (H.get_damage(TOX) >= heal_threshold) || (H.get_damage(TOX) >= heal_threshold) || (H.get_damage(OXY) >= (heal_threshold + 15))))
-		for(var/R in reagent_glass.reagents.reagent_volumes)
-			if(!H.reagents.has_reagent(R))
-				return 1
-			continue
-
-	if((H.get_damage(BRUTE) >= heal_threshold) && (!H.reagents.has_reagent(treatment_brute)))
-		return treatment_brute //If they're already medicated don't bother!
-
-	if((H.get_damage(OXY) >= (15 + heal_threshold)) && (!H.reagents.has_reagent(treatment_oxy)))
-		return treatment_oxy
-
-	if((H.get_damage(BURN) >= heal_threshold) && (!H.reagents.has_reagent(treatment_fire)))
-		return treatment_fire
-
-	if((H.get_damage(TOX) >= heal_threshold) && (!H.reagents.has_reagent(treatment_tox)))
-		return treatment_tox
-
 /mob/living/bot/medbot/proc/tip_over(mob/user)
 	playsound(src, 'sound/machines/warning-buzzer.ogg', 50)
 	user.visible_message(SPAN_DANGER("[user] tips over [src]!"), SPAN_DANGER("You tip [src] over!"))
-	is_tipped = TRUE
+	set_posture(/decl/posture/lying/deliberate)
 	tipper_name = user.name
 	var/matrix/mat = transform
 	transform = mat.Turn(180)
@@ -353,16 +296,8 @@
 		say(message)
 		playsound(src, messagevoice[message], 70)
 	tipped_status = MEDBOT_PANIC_NONE
-	is_tipped = FALSE
+	set_posture(/decl/posture/standing)
 	transform = matrix()
-
-
-/mob/living/bot/medbot/handleRegular()
-	. = ..()
-
-	if(is_tipped)
-		handle_panic()
-		return
 
 /mob/living/bot/medbot/proc/handle_panic()
 	tipped_status++

@@ -2,30 +2,11 @@
 	stance = STANCE_IDLE
 	stop_wander_when_pulled = FALSE
 	try_destroy_surroundings = TRUE
+	target_scan_distance = 10
+
 	var/attack_same_faction = FALSE
 	var/only_attack_enemies = FALSE
 	var/break_stuff_probability = 10
-	var/weakref/target_ref
-
-/datum/mob_controller/aggressive/set_target(atom/new_target)
-	var/weakref/new_target_ref = weakref(new_target)
-	if(target_ref != new_target_ref)
-		target_ref = new_target_ref
-		return TRUE
-	return FALSE
-
-/datum/mob_controller/aggressive/get_target()
-	if(isnull(target_ref))
-		return null
-	var/atom/target = target_ref?.resolve()
-	if(!istype(target) || QDELETED(target))
-		set_target(null)
-		return null
-	return target
-
-/datum/mob_controller/aggressive/Destroy()
-	set_target(null)
-	return ..()
 
 /datum/mob_controller/aggressive/do_process()
 
@@ -41,20 +22,29 @@
 		switch(stance)
 
 			if(STANCE_IDLE)
-				set_target(find_target())
-				set_stance(STANCE_ATTACK)
+				if(do_target_scan())
+					set_target(find_target())
+					if(get_target())
+						set_stance(STANCE_ATTACK)
 
 			if(STANCE_ATTACK)
-				body.face_atom(get_target())
-				if(try_destroy_surroundings)
-					destroy_surroundings()
-				move_to_target()
+
+				if(get_target())
+					body.face_atom(get_target())
+					if(try_destroy_surroundings)
+						destroy_surroundings()
+					move_to_target()
+				else
+					set_stance(STANCE_IDLE)
 
 			if(STANCE_ATTACKING)
-				body.face_atom(get_target())
-				if(try_destroy_surroundings)
-					destroy_surroundings()
-				handle_attacking_target()
+				if(get_target())
+					body.face_atom(get_target())
+					if(try_destroy_surroundings)
+						destroy_surroundings()
+					handle_attacking_target()
+				else
+					set_stance(STANCE_IDLE)
 
 			if(STANCE_CONTAINED) //we aren't inside something so just switch
 				set_stance(STANCE_IDLE)
@@ -74,7 +64,7 @@
 /datum/mob_controller/aggressive/proc/handle_attacking_target()
 	stop_wandering()
 	var/atom/target = get_target()
-	if(!istype(target) || !attackable(target) || !(target in list_targets(10))) // consider replacing this list_targets() call with a distance or LOS check
+	if(!istype(target) || !attackable(target) || !(target in get_raw_target_list()))
 		lose_target()
 		return FALSE
 	if (ishuman(target))
@@ -204,44 +194,35 @@
 		return
 	stop_wandering()
 	var/atom/target = get_target()
-	if(!istype(target) || !attackable(target) || !(target in list_targets(10)))
+	if(!istype(target) || !attackable(target) || !(target in get_raw_target_list()))
 		lose_target()
 		return
 	if(body.has_ranged_attack() && get_dist(body, target) <= body.get_ranged_attack_distance() && !move_only)
 		body.stop_automove()
-		open_fire()
+		handle_ranged_target(target)
 		return
 	set_stance(STANCE_ATTACKING)
 	body.start_automove(target)
 
-/datum/mob_controller/aggressive/list_targets(var/dist = 7)
+/datum/mob_controller/aggressive/list_targets()
 	// Base hostile mobs will just destroy everything in view.
 	// Mobs with an enemy list will filter the view by their enemies.
 	if(!only_attack_enemies)
-		return hearers(body, dist)-body
-	var/list/enemies = get_enemies()
-	if(!LAZYLEN(enemies))
-		return
-	var/list/possible_targets = hearers(body, dist)-body
-	if(!length(possible_targets))
-		return
-	for(var/weakref/enemy in enemies) // Remove all entries that aren't in enemies
-		var/M = enemy.resolve()
-		if(M in possible_targets)
-			LAZYDISTINCTADD(., M)
+		return get_raw_target_list()
+	return ..()
 
 /datum/mob_controller/aggressive/find_target()
+	. = ..()
 	if(!body.can_act() || !body.faction)
 		return null
 	resume_wandering()
-	for(var/atom/A in list_targets(10))
-		if(valid_target(A))
-			set_stance(STANCE_ATTACK)
-			body.face_atom(A)
-			return A
+	for(var/atom/A in get_valid_targets())
+		set_stance(STANCE_ATTACK)
+		body.face_atom(A)
+		return A
 
 /datum/mob_controller/aggressive/valid_target(var/atom/A)
-	if(A == body)
+	if(!..())
 		return FALSE
 	if(ismob(A))
 		var/mob/M = A
@@ -257,19 +238,11 @@
 				return FALSE
 	return TRUE
 
-/datum/mob_controller/aggressive/open_fire()
-	if(!body.can_act())
+/datum/mob_controller/aggressive/handle_ranged_target(atom/ranged_target)
+	if(!body.can_act() || !ranged_target)
 		return FALSE
-	body.handle_ranged_attack(get_target())
+	body.handle_ranged_attack(ranged_target)
 	return TRUE
-
-/datum/mob_controller/aggressive/lose_target()
-	set_target(null)
-	lost_target()
-
-/datum/mob_controller/aggressive/lost_target()
-	set_stance(STANCE_IDLE)
-	body.stop_automove()
 
 /datum/mob_controller/aggressive/pacify(mob/user)
 	..()

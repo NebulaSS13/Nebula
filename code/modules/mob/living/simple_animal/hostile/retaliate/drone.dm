@@ -55,8 +55,15 @@
 /mob/living/simple_animal/hostile/malf_drone/has_ranged_attack()
 	return TRUE
 
-/datum/mob_controller/aggressive/malf_drone/list_targets(var/dist = 7)
-	. = ..(hostile_drone ? hostile_range : dist)
+/datum/mob_controller/aggressive/malf_drone/get_raw_target_list()
+	if(hostile_drone)
+		target_scan_distance = hostile_range
+	else
+		target_scan_distance = initial(target_scan_distance)
+	. = ..()
+
+/datum/mob_controller/aggressive/malf_drone/get_valid_targets()
+	. = ..()
 	for(var/mob/M in .)
 		if(istype(M, body.type))
 			. -= M

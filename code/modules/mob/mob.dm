@@ -1395,5 +1395,10 @@
 /mob/proc/handle_footsteps()
 	return
 
+//gets name from ID or PDA itself, ID inside PDA doesn't matter
+//Useful when player is being seen by other mobs
+/mob/proc/get_id_name(if_no_id = "Unknown")
+	return GetIdCard(exceptions = list(/obj/item/holder))?.registered_name || if_no_id
+
 /mob/proc/can_twohand_item(obj/item/item)
 	return FALSE

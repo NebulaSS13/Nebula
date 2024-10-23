@@ -64,7 +64,7 @@
 			stop_wandering()
 			stance_step++
 			if(stance_step >= 20)
-				if(target && (target in list_targets(10)))
+				if(target && (target in get_raw_target_list()))
 					set_stance(STANCE_ATTACK) //If the mob he was chasing is still nearby, resume the attack, otherwise go idle.
 				else
 					set_stance(STANCE_IDLE)
@@ -72,7 +72,7 @@
 		if(STANCE_ALERT)
 			stop_wandering()
 			var/found_mob = 0
-			if(target && (target in list_targets(10)))
+			if(target && (target in get_raw_target_list()))
 				if(!attackable(target))
 					stance_step = max(0, stance_step) //If we have not seen a mob in a while, the stance_step will be negative, we need to reset it to 0 as soon as we see a mob again.
 					stance_step++
