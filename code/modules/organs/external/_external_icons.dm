@@ -210,10 +210,8 @@ var/global/list/organ_icon_cache = list()
 
 	if(!skip_update)
 		if(owner && length(refresh_accessories))
-			for(var/refresh_accessory_type in refresh_accessories)
-				var/decl/sprite_accessory/refresh_accessory = GET_DECL(refresh_accessory_type)
-				if(refresh_accessory)
-					refresh_accessory.refresh_mob(owner)
+			for(var/decl/sprite_accessory/refresh_accessory in refresh_accessories)
+				refresh_accessory.refresh_mob(owner)
 		update_icon()
 	return TRUE
 

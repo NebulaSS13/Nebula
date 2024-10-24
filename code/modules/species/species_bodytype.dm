@@ -3,6 +3,7 @@ var/global/list/bodytypes_by_category = list()
 /decl/bodytype
 	decl_flags = DECL_FLAG_MANDATORY_UID
 	abstract_type = /decl/bodytype
+
 	/// Name used in general.
 	var/name = "default"
 	/// Name used in preference bodytype selection. Defaults to name.
@@ -26,6 +27,8 @@ var/global/list/bodytypes_by_category = list()
 	var/ignited_icon =    'icons/mob/OnFire.dmi'
 	var/associated_gender
 	var/appearance_flags = 0 // Appearance/display related features.
+
+	var/associated_root_species_name
 
 	/// Used when filing your nails.
 	var/nail_noun
@@ -410,6 +413,10 @@ var/global/list/bodytypes_by_category = list()
 /decl/bodytype/validate()
 	. = ..()
 
+	// TODO: revisit if we ever want to share bodytypes between species.
+	if(!get_species_by_key(associated_root_species_name))
+		. += "null or invalid associated root species name"
+
 	// TODO: Maybe make age descriptors optional, in case someone wants a 'timeless entity' species?
 	if(isnull(age_descriptor))
 		. += "age descriptor was unset"
@@ -576,6 +583,7 @@ var/global/list/bodytypes_by_category = list()
 
 //fully_replace: If true, all existing organs will be discarded. Useful when doing mob transformations, and not caring about the existing organs
 /decl/bodytype/proc/create_missing_organs(mob/living/human/H, fully_replace = FALSE)
+
 	if(fully_replace)
 		H.delete_organs()
 
@@ -793,3 +801,7 @@ var/global/list/limbs_with_nails = list(
 
 /decl/bodytype/proc/get_movement_slowdown(var/mob/living/human/H)
 	return movement_slowdown
+
+// Called when bodytype is changing on an organ.
+/decl/bodytype/proc/handle_pre_organ_bodytype_set(mob/living/owner)
+	return

@@ -93,6 +93,7 @@
 		// this can be fine if appearance data with species is passed
 		log_debug("obj/item/organ/setup(): [src] had null bodytype, with an owner with null bodytype!")
 	bodytype = new_bodytype // used in later setup procs
+	bodytype.handle_pre_organ_bodytype_set(owner)
 	if(supplied_appearance)
 		copy_from_mob_snapshot(supplied_appearance)
 	else
@@ -134,6 +135,7 @@
 		PRINT_STACK_TRACE("Invalid bodytype [new_bodytype]")
 		return FALSE
 	bodytype = new_bodytype
+	bodytype.handle_pre_organ_bodytype_set(owner)
 	if(bodytype.modifier_string)
 		name = "[bodytype.modifier_string] [initial(name)]"
 	desc = bodytype.desc

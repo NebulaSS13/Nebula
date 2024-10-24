@@ -474,6 +474,7 @@
 	if(!istype(new_bodytype))
 		return FALSE
 
+	new_bodytype.handle_pre_set_bodytype(src)
 	mob_size = new_bodytype.mob_size
 	new_bodytype.create_missing_organs(src, TRUE) // actually rebuild the body
 	if(istype(old_bodytype))
@@ -483,13 +484,14 @@
 	force_update_limbs()
 	update_hair()
 	update_eyes()
+	new_bodytype.handle_post_set_bodytype(src)
 	return TRUE
 
 /mob/proc/set_species(var/new_species_name, var/new_bodytype = null)
 	return
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
-//It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
+//It focuses on setting up species-related data, without force applying them upon organs and the mob's appearance.
 // For transforming an existing mob, look at change_species()
 /mob/living/human/set_species(var/new_species_name, var/new_bodytype = null)
 	if(!new_species_name)
@@ -507,6 +509,7 @@
 
 	//Update our species
 	species = new_species
+	species.handle_pre_set_species(src)
 	holder_type = null
 	if(species.holder_type)
 		holder_type = species.holder_type
@@ -548,6 +551,7 @@
 		scannable.scan_delay = 5 SECONDS
 	else if(has_extension(src, /datum/extension/scannable))
 		remove_extension(src, /datum/extension/scannable)
+	species.handle_post_set_species(src)
 
 	return TRUE
 
@@ -1008,9 +1012,9 @@
 	else
 		try_generate_default_name()
 
-	species.handle_pre_spawn(src)
+	species.handle_pre_change_species(src)
 	apply_species_background_info()
-	species.handle_post_spawn(src)
+	species.handle_post_change_species(src)
 
 	supplied_appearance?.apply_appearance_to(src)
 
