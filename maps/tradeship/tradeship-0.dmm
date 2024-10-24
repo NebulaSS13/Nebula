@@ -1558,7 +1558,7 @@
 /turf/floor/tiled/steel_grid,
 /area/ship/trade/loading_bay)
 "yT" = (
-/obj/machinery/honey_extractor,
+/obj/machinery/centrifuge/mapped,
 /obj/item/seeds/tomatoseed,
 /turf/floor,
 /area/ship/trade/aft_port_underside_maint)

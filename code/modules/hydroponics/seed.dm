@@ -32,6 +32,7 @@
 	var/scannable_result
 	var/grown_is_seed = FALSE
 	var/product_w_class = ITEM_SIZE_SMALL
+	var/produces_pollen = 0
 
 	// Dissection values.
 	var/min_seed_extracted = 1
