@@ -38,8 +38,7 @@
 		/area/exodus/solar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/exodus/storage/emergency = NO_SCRUBBER|NO_VENT,
 		/area/exodus/storage/emergency2 = NO_SCRUBBER|NO_VENT,
-		/area/ship/exodus_pod_engineering = NO_SCRUBBER|NO_VENT,
-		/area/ship/exodus_pod_research = NO_SCRUBBER
+		/area/ship/exodus_pod_engineering = NO_SCRUBBER|NO_VENT
 	)
 
 	area_coherency_test_exempt_areas = list(
