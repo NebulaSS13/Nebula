@@ -327,7 +327,7 @@
 /area/shuttle/supply_shuttle)
 "aBz" = (
 /obj/structure/shuttle/engine/propulsion,
-/turf/floor/airless,
+/turf/floor/plating/airless,
 /area/shuttle/supply_shuttle)
 "aBA" = (
 /obj/structure/chair,
@@ -395,13 +395,13 @@
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "burst_l"
 	},
-/turf/floor/airless,
+/turf/floor/plating/airless,
 /area/shuttle/supply_shuttle)
 "aCt" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "burst_r"
 	},
-/turf/floor/airless,
+/turf/floor/plating/airless,
 /area/shuttle/supply_shuttle)
 "aCu" = (
 /obj/structure/table/reinforced,
@@ -1113,7 +1113,7 @@
 /area/shuttle/escape_shuttle)
 "aLE" = (
 /obj/structure/shuttle/engine/propulsion,
-/turf/floor/airless,
+/turf/floor/plating/airless,
 /area/shuttle/escape_shuttle)
 "aLF" = (
 /obj/machinery/door/blast/regular/open{
