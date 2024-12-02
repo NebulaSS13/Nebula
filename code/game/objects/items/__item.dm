@@ -967,10 +967,11 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/on_active_hand()
 	return
 
-/obj/item/proc/has_embedded(mob/living/victim)
+/obj/item/proc/has_embedded(mob/living/victim, def_zone)
 	if(istype(victim))
 		LAZYDISTINCTADD(victim.embedded, src)
 		victim.verbs |= /mob/proc/yank_out_object
+		apply_coating_on_hit(null, victim, def_zone, embedded = TRUE)
 		return TRUE
 	return FALSE
 
@@ -1044,9 +1045,40 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/attack_message_name()
 	return "\a [src]"
 
+/// Returns the fraction of coating applied on a successful hit.
+/obj/item/proc/get_coating_apply_fraction()
+	return is_sharp(src) ? 0.7 ** (w_class - 1) : 0
+
+/// Returns the fraction of applied coating that enters the bloodstream on a successful hit.
+/// This is applied to the result of get_coating_apply_fraction().
+/obj/item/proc/get_coating_inject_fraction()
+	// I put no thought into this implementation.
+	return is_sharp(src) ? 0.8 : 0.2
+
+/obj/item/proc/get_coating_volume()
+	return round(10 * sqrt(w_class))
+
+/// Returns the number of units applied.
+/// User is allowed to be null, target must not be.
+/obj/item/proc/apply_coating_on_hit(mob/user, mob/target, def_zone, embedded = FALSE)
+	if(coating?.total_liquid_volume <= 0)
+		return 0
+	var/transferred_coating_amount = min(get_coating_apply_fraction(), coating.total_liquid_volume)
+	if(embedded)
+		transferred_coating_amount = coating.total_liquid_volume
+	else // user is allowed to be null
+		transferred_coating_amount *= (1 - target.get_blocked_ratio(def_zone, BRUTE, damage_flags(), armor_penetration, get_attack_force(user)))
+	if(transferred_coating_amount <= 0)
+		return 0
+	// first apply the injected reagents
+	. = coating.trans_to_mob(target, transferred_coating_amount * get_coating_inject_fraction(), CHEM_INJECT, transferred_phases = MAT_PHASE_LIQUID)
+	transferred_coating_amount -= .
+	if(transferred_coating_amount > 0)
+		. += coating.trans_to_mob(target, transferred_coating_amount, CHEM_TOUCH, transferred_phases = MAT_PHASE_LIQUID)
+
 /obj/item/proc/add_coating(reagent_type, amount, data)
 	if(!coating)
-		coating = new /datum/reagents(10, src)
+		coating = new /datum/reagents(get_coating_volume(), src)
 	if(ispath(reagent_type))
 		coating.add_reagent(reagent_type, amount, data)
 	else if(istype(reagent_type, /datum/reagents))

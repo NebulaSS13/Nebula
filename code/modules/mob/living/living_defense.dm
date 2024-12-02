@@ -252,8 +252,8 @@
 		//Sharp objects will always embed if they do enough damage.
 		//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
 		if((sharp && prob(sharp_embed_chance)) || (embed_damage > embed_threshold && prob(embed_chance)))
-			affecting.embed_in_organ(I, supplied_wound = (istype(supplied_wound) ? supplied_wound : null))
-			I.has_embedded(src)
+			affecting.embed_in_organ(I, supplied_wound = supplied_wound)
+			I.has_embedded(src, def_zone)
 			. = TRUE
 
 	// Simple embed for mobs with no limbs.
@@ -261,8 +261,15 @@
 		O.forceMove(src)
 		if(isitem(O))
 			var/obj/item/I = O
-			I.has_embedded(src)
+			I.has_embedded(src, def_zone)
 		. = TRUE
+
+	// we want coated items to inject their coating if sharp and not embedded
+	// if it's embedded it's transferred separately in has_embedded
+	// todo: maybe check if the created wound is bleeding instead of checking if it's sharp
+	if(isitem(O) && !. && O.is_sharp())
+		var/obj/item/poisoned_weapon = O
+		poisoned_weapon.apply_coating_on_hit(user, src, def_zone)
 
 	// Allow a tick for throwing/striking to resolve.
 	if(. && direction)
