@@ -13,7 +13,8 @@
 	return oxyloss
 
 /mob/living/silicon/ai/adjustFireLoss(var/amount, var/do_update_health = TRUE)
-	if(status_flags & GODMODE) return
+	if(status_flags & GODMODE)
+		return
 	fireloss = max(0, fireloss + min(amount, current_health))
 	if(do_update_health)
 		update_health()

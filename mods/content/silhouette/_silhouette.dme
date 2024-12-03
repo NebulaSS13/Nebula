@@ -1,0 +1,8 @@
+#ifndef MOD_SILHOUETTE
+#define MOD_SILHOUETTE
+// BEGIN_INCLUDE
+#include "_silhouette.dm"
+#include "effect.dm"
+#include "mob_damage.dm"
+// END_INCLUDE
+#endif

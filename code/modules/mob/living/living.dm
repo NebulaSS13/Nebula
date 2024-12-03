@@ -1,5 +1,7 @@
 /mob/living/Initialize()
 
+	render_target = "render_\ref[src]"
+
 	current_health            = get_max_health()
 	original_fingerprint_seed = sequential_id(/mob)
 	fingerprint               = md5(num2text(original_fingerprint_seed))

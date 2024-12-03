@@ -89,20 +89,20 @@
 	SHOULD_CALL_PARENT(FALSE) // take/heal overall call update_health regardless of arg
 	if(amount > 0)
 		take_overall_damage(amount, 0)
+		if(istype(ai))
+			ai.retaliate()
 	else
 		heal_overall_damage(-amount, 0)
 	BITSET(hud_updateflag, HEALTH_HUD)
-	if(amount > 0 && istype(ai))
-		ai.retaliate()
 
 /mob/living/human/adjustFireLoss(var/amount, var/do_update_health = TRUE)
 	if(amount > 0)
 		take_overall_damage(0, amount)
+		if(istype(ai))
+			ai.retaliate()
 	else
 		heal_overall_damage(0, -amount)
 	BITSET(hud_updateflag, HEALTH_HUD)
-	if(amount > 0 && istype(ai))
-		ai.retaliate()
 
 /mob/living/human/getCloneLoss()
 	var/amount = 0

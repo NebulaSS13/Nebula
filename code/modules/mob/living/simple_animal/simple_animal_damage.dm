@@ -37,6 +37,8 @@
 /mob/living/simple_animal/adjustBruteLoss(var/amount, var/do_update_health = TRUE)
 	brute_damage = clamp(brute_damage + amount, 0, get_max_health())
 	. = ..()
+	if(amount > 0 && istype(ai))
+		ai.retaliate()
 
 /mob/living/simple_animal/adjustFireLoss(var/amount, var/do_update_health = TRUE)
 	burn_damage = clamp(burn_damage + amount, 0, get_max_health())

@@ -96,6 +96,7 @@
 	// Reset plane and layer so that it doesn't inherit the UI settings from equipped items.
 	var/image/I = new(loc = A)
 	I.appearance = weapon
+	I.appearance_flags |= KEEP_APART
 	I.plane = DEFAULT_PLANE
 	I.layer = A.layer + 0.1
 	I.pixel_x = -(A.pixel_x)
