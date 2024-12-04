@@ -23,6 +23,9 @@
 	if (!possible_transfer_amounts)
 		verbs -= /obj/structure/reagent_dispensers/verb/set_amount_dispensed
 
+/obj/structure/reagent_dispensers/get_reagent_amount_dispensed()
+	return amount_dispensed
+
 /obj/structure/reagent_dispensers/receive_mouse_drop(atom/dropping, mob/user, params)
 	if(!(. = ..()) && user?.get_active_held_item() == dropping && isitem(dropping))
 		// Awful. Sorry.
@@ -97,11 +100,11 @@
 	set category = "Object"
 	set src in view(1)
 	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
+		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!"))
 		return
 	var/N = input("Amount dispensed:","[src]") as null|anything in cached_json_decode(possible_transfer_amounts)
 	if(!CanPhysicallyInteract(usr))  // because input takes time and the situation can change
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
+		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!"))
 		return
 	if (N)
 		amount_dispensed = N

@@ -2239,6 +2239,7 @@
 #include "code\modules\crafting\stack_recipes\recipes_turfs.dm"
 #include "code\modules\crafting\working\_working.dm"
 #include "code\modules\crafting\working\butter_churn.dm"
+#include "code\modules\crafting\working\quern.dm"
 #include "code\modules\crafting\working\textiles\loom.dm"
 #include "code\modules\crafting\working\textiles\spinning_wheel.dm"
 #include "code\modules\crafting\working\textiles\twisting_bench.dm"

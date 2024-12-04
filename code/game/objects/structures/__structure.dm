@@ -345,3 +345,6 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 		visible_message(SPAN_DANGER("\The [src] was hit by \the [AM]."))
 		playsound(src.loc, hitsound, 100, 1)
 		take_damage(AM.get_thrown_attack_force() * (TT.speed/THROWFORCE_SPEED_DIVISOR), AM.atom_damage_type)
+
+/obj/structure/proc/get_reagent_amount_dispensed()
+	return null
