@@ -8,13 +8,16 @@ SUBSYSTEM_DEF(lighting)
 	var/total_lighting_overlays = 0
 	var/total_lighting_sources = 0
 	var/total_ambient_turfs = 0
-	var/list/lighting_corners = list()	// List of all lighting corners in the world.
+	var/total_lighting_corners = 0
 
-	var/list/light_queue   = list() // lighting sources  queued for update.
+	/// lighting sources  queued for update.
+	var/list/light_queue   = list()
 	var/lq_idex = 1
-	var/list/corner_queue  = list() // lighting corners  queued for update.
+	/// lighting corners  queued for update.
+	var/list/corner_queue  = list()
 	var/cq_idex = 1
-	var/list/overlay_queue = list() // lighting overlays queued for update.
+	/// lighting overlays queued for update.
+	var/list/overlay_queue = list()
 	var/oq_idex = 1
 
 	var/tmp/processed_lights = 0
@@ -25,18 +28,20 @@ SUBSYSTEM_DEF(lighting)
 	var/total_instant_updates = 0
 
 #ifdef USE_INTELLIGENT_LIGHTING_UPDATES
+	var/instant_ctr = 0
 	var/force_queued = TRUE
-	var/force_override = FALSE	// For admins.
+	/// For admins.
+	var/force_override = FALSE
 #endif
 
 /datum/controller/subsystem/lighting/stat_entry()
 	var/list/out = list(
 #ifdef USE_INTELLIGENT_LIGHTING_UPDATES
-		"IUR: [total_ss_updates ? round(total_instant_updates/(total_instant_updates+total_ss_updates)*100, 0.1) : "NaN"]%\n",
+		"IUR: [total_ss_updates ? round(total_instant_updates/(total_instant_updates+total_ss_updates)*100, 0.1) : "NaN"]% Instant: [force_queued ? "Disabled" : "Allowed"]\n",
 #endif
-		"\tT:{L:[total_lighting_sources] C:[lighting_corners.len] O:[total_lighting_overlays] A:[total_ambient_turfs]}\n",
-		"\tP:{L:[light_queue.len - (lq_idex - 1)]|C:[corner_queue.len - (cq_idex - 1)]|O:[overlay_queue.len - (oq_idex - 1)]}\n",
-		"\tL:{L:[processed_lights]|C:[processed_corners]|O:[processed_overlays]}\n"
+		"\tT: { L: [total_lighting_sources] C: [total_lighting_corners] O:[total_lighting_overlays] A: [total_ambient_turfs] }\n",
+		"\tP: { L: [light_queue.len - (lq_idex - 1)] C: [corner_queue.len - (cq_idex - 1)] O: [overlay_queue.len - (oq_idex - 1)] }\n",
+		"\tL: { L: [processed_lights] C: [processed_corners] O: [processed_overlays]}\n"
 	)
 	..(out.Join())
 
@@ -46,6 +51,32 @@ SUBSYSTEM_DEF(lighting)
 	force_queued = FALSE
 	total_ss_updates = 0
 	total_instant_updates = 0
+
+/// Disable instant updates, relying entirely on the (slower, but less laggy) queued pathway. Use if changing a *lot* of lights.
+/datum/controller/subsystem/lighting/proc/pause_instant()
+	if (force_override)
+		return
+
+	instant_ctr += 1
+	if (instant_ctr == 1)
+		force_queued = TRUE
+
+/// Resume instant updates.
+/datum/controller/subsystem/lighting/proc/resume_instant()
+	if (force_override)
+		return
+
+	instant_ctr = max(instant_ctr - 1, 0)
+
+	if (!instant_ctr)
+		force_queued = FALSE
+
+#else
+
+/datum/controller/subsystem/lighting/proc/pause_instant()
+
+/datum/controller/subsystem/lighting/proc/resume_instant()
+
 #endif
 
 /datum/controller/subsystem/lighting/Initialize(timeofday)
@@ -157,7 +188,7 @@ SUBSYSTEM_DEF(lighting)
 		oq_idex = 1
 
 /datum/controller/subsystem/lighting/Recover()
-	lighting_corners = SSlighting.lighting_corners
+	total_lighting_corners = SSlighting.total_lighting_corners
 	total_lighting_overlays = SSlighting.total_lighting_overlays
 	total_lighting_sources = SSlighting.total_lighting_sources
 

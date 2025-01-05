@@ -4,7 +4,7 @@
 	var/ambient_light
 	/// The power of the above is multiplied by this. Setting too high may drown out normal lights on the same turf.
 	var/ambient_light_multiplier = 0.3
-	luminosity           = 1
+	luminosity = 1
 
 	var/tmp/lighting_corners_initialised = FALSE
 
@@ -19,7 +19,7 @@
 	var/tmp/ambient_has_indirect = FALSE
 
 	// Record-keeping, do not touch -- that means you, admins.
-	var/tmp/ambient_light_old
+	var/tmp/ambient_active = FALSE	//! Do we have non-zero ambient light? Use [TURF_IS_AMBIENT_LIT] instead of reading this directly.
 	var/tmp/ambient_light_old_r = 0
 	var/tmp/ambient_light_old_g = 0
 	var/tmp/ambient_light_old_b = 0
@@ -32,6 +32,76 @@
 	ambient_light_multiplier = isnull(multiplier) ? ambient_light_multiplier : multiplier
 
 	update_ambient_light()
+
+/turf/proc/replace_ambient_light(old_color, new_color, old_multiplier, new_multiplier = 0)
+	if (!TURF_IS_AMBIENT_LIT_UNSAFE(src))
+		add_ambient_light(new_color, new_multiplier)
+		return
+
+	ASSERT(!isnull(old_multiplier))	// omitting new_multiplier is allowed for removing light nondestructively
+
+	old_color ||= COLOR_WHITE
+	new_color ||= COLOR_WHITE
+
+	var/list/old_parts = rgb2num(old_color)
+	var/list/new_parts = rgb2num(new_color)
+
+	var/dr = (new_parts[1] / 255) * new_multiplier - (old_parts[1] / 255) * old_multiplier
+	var/dg = (new_parts[2] / 255) * new_multiplier - (old_parts[2] / 255) * old_multiplier
+	var/db = (new_parts[3] / 255) * new_multiplier - (old_parts[3] / 255) * old_multiplier
+
+	if (!dr && !dg && !db)
+		return
+
+	add_ambient_light_raw(dr, dg, db)
+
+/turf/proc/add_ambient_light(color, multiplier, update = TRUE)
+	if (!color)
+		return
+
+	multiplier ||= ambient_light_multiplier
+
+	var/list/ambient_parts = rgb2num(color)
+
+	var/ambient_r = (ambient_parts[1] / 255) * multiplier
+	var/ambient_g = (ambient_parts[2] / 255) * multiplier
+	var/ambient_b = (ambient_parts[3] / 255) * multiplier
+
+	add_ambient_light_raw(ambient_r, ambient_g, ambient_b, update)
+
+/turf/proc/add_ambient_light_raw(lr, lg, lb, update = TRUE)
+	if (!lr && !lg && !lb)
+		if (!ambient_light_old_r || !ambient_light_old_g || !ambient_light_old_b)
+			ambient_active = FALSE
+			SSlighting.total_ambient_turfs -= 1
+		return
+
+	if (!ambient_active)
+		SSlighting.total_ambient_turfs += 1
+		ambient_active = TRUE
+
+	// There are four corners per (lit) turf, we don't want to apply our light 4 times -- compensate by dividing by 4.
+	lr /= 4
+	lg /= 4
+	lb /= 4
+
+	lr = round(lr, LIGHTING_ROUND_VALUE)
+	lg = round(lg, LIGHTING_ROUND_VALUE)
+	lb = round(lb, LIGHTING_ROUND_VALUE)
+
+	ambient_light_old_r += lr
+	ambient_light_old_g += lg
+	ambient_light_old_b += lb
+
+	if (!corners || !lighting_corners_initialised)
+		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
+			generate_missing_corners()
+		else
+			return
+
+	// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.
+	for (var/datum/lighting_corner/C in corners)
+		C.update_ambient_lumcount(lr, lg, lb, !update)
 
 /turf/proc/clear_ambient_light()
 	if (ambient_light == null)
@@ -46,47 +116,26 @@
 	var/ambient_g = 0
 	var/ambient_b = 0
 
-	if (ambient_light && ambient_light_multiplier) // If either of these are false-y we can use the simplier path and avoid calculations
-		ambient_r = round(((HEX_RED(ambient_light)   / 255) * ambient_light_multiplier)/4 - ambient_light_old_r, LIGHTING_ROUND_VALUE)
-		ambient_g = round(((HEX_GREEN(ambient_light) / 255) * ambient_light_multiplier)/4 - ambient_light_old_g, LIGHTING_ROUND_VALUE)
-		ambient_b = round(((HEX_BLUE(ambient_light)  / 255) * ambient_light_multiplier)/4 - ambient_light_old_b, LIGHTING_ROUND_VALUE)
+	if (ambient_light)
+		var/list/parts = rgb2num(ambient_light)
+		ambient_r = ((parts[1] / 255) * ambient_light_multiplier) - ambient_light_old_r
+		ambient_g = ((parts[2] / 255) * ambient_light_multiplier) - ambient_light_old_g
+		ambient_b = ((parts[3] / 255) * ambient_light_multiplier) - ambient_light_old_b
 	else
 		ambient_r = -ambient_light_old_r
 		ambient_g = -ambient_light_old_g
 		ambient_b = -ambient_light_old_b
 
-	ambient_light_old_r += ambient_r
-	ambient_light_old_g += ambient_g
-	ambient_light_old_b += ambient_b
+	add_ambient_light_raw(ambient_r, ambient_g, ambient_b, !no_corner_update)
 
-	if (abs(ambient_r + ambient_g + ambient_b) == 0)
-		return
-
-	if (!corners || !lighting_corners_initialised)
-		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
-			generate_missing_corners()
-		else
-			return
-
-	// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.
-	for (var/datum/lighting_corner/C in corners)
-		C.update_ambient_lumcount(ambient_r, ambient_g, ambient_b, no_corner_update)
-
-	if (ambient_light_old == null && ambient_light != ambient_light_old)
-		SSlighting.total_ambient_turfs += 1
-	else if (ambient_light_old != null && ambient_light == null)
-		SSlighting.total_ambient_turfs -= 1
-
-	ambient_light_old = ambient_light
-
-/// Causes any affecting light sources to be queued for a visibility update, for example a door got opened.
+// Causes any affecting light sources to be queued for a visibility update, for example a door got opened.
 /turf/proc/reconsider_lights()
 	var/datum/light_source/L
 	for (var/thing in affecting_lights)
 		L = thing
 		L.vis_update()
 
-/// Forces a lighting update. Reconsider lights is preferred when possible.
+// Forces a lighting update. Reconsider lights is preferred when possible.
 /turf/proc/force_update_lights()
 	var/datum/light_source/L
 	for (var/thing in affecting_lights)
@@ -137,15 +186,15 @@
 		lum_g += L.apparent_g
 		lum_b += L.apparent_b
 
-	lum_r = CLAMP01(lum_r / length(corners)) * 255
-	lum_g = CLAMP01(lum_g / length(corners)) * 255
-	lum_b = CLAMP01(lum_b / length(corners)) * 255
+	lum_r = CLAMP01(lum_r / 4) * 255
+	lum_g = CLAMP01(lum_g / 4) * 255
+	lum_b = CLAMP01(lum_b / 4) * 255
 
 	return rgb(lum_r, lum_g, lum_b)
 
 #define SCALE(targ,min,max) (targ - min) / (max - min)
 
-/// Returns a lumcount (average intensity of color channels) scaled between minlum and maxlum.
+// Used to get a scaled lumcount.
 /turf/proc/get_lumcount(minlum = 0, maxlum = 1)
 	if (!lighting_overlay)
 		return 0.5
@@ -162,7 +211,7 @@
 
 #undef SCALE
 
-/// Can't think of a good name, this proc will recalculate the has_opaque_atom variable.
+// Can't think of a good name, this proc will recalculate the has_opaque_atom variable.
 /turf/proc/recalc_atom_opacity()
 #ifdef AO_USE_LIGHTING_OPACITY
 	var/old = has_opaque_atom
