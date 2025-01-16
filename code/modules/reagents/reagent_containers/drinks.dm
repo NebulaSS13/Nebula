@@ -148,7 +148,7 @@
 	add_to_reagents(/decl/material/liquid/drink/milk/chocolate, reagents.maximum_volume)
 
 /obj/item/chems/drinks/coffee
-	name = "\improper Robust Coffee"
+	name = "cup of coffee"
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
 	center_of_mass = @'{"x":15,"y":10}'
@@ -269,16 +269,14 @@
 
 //tea and tea accessories
 /obj/item/chems/drinks/tea
-	name = "cup of tea master item"
+	name = "cup of tea"
 	desc = "A tall plastic cup full of the concept and ideal of tea."
 	icon_state = "coffee"
 	item_state = "coffee"
 	center_of_mass = @'{"x":16,"y":14}'
 	filling_states = @"[100]"
-	base_name = "cup"
 	base_icon = "cup"
 	volume = 30
-	presentation_flags = PRESENTATION_FLAG_NAME
 
 /obj/item/chems/drinks/tea/black
 	name = "cup of black tea"
