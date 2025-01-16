@@ -7,7 +7,14 @@
 	amount_per_transfer_from_this = 1
 	volume = 10
 
-/obj/item/chems/packet/afterattack(var/obj/target, var/mob/user, var/proximity)
+/obj/item/chems/packet/attack_self(mob/user)
+	if(!ATOM_IS_OPEN_CONTAINER(src))
+		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+		to_chat(user, SPAN_NOTICE("You tear \the [src] open."))
+		return TRUE
+	return ..()
+
+/obj/item/chems/packet/afterattack(obj/target, mob/user, proximity)
 	if(!proximity)
 		return ..()
 	if(standard_dispenser_refill(user, target))
@@ -54,6 +61,14 @@
 	icon = 'icons/obj/food/condiments/packets/packet_medium.dmi'
 
 /obj/item/chems/packet/honey/populate_reagents()
+	add_to_reagents(/decl/material/liquid/nutriment/honey, reagents.maximum_volume)
+
+/obj/item/chems/packet/honey_fake
+	name = "'honey' packet"
+	desc = "Contains 10u of allergen-free non-GMO 'honey'."
+	icon = 'icons/obj/food/condiments/packets/packet_medium.dmi'
+
+/obj/item/chems/packet/honey_fake/populate_reagents()
 	add_to_reagents(/decl/material/liquid/nutriment/sugar, reagents.maximum_volume)
 
 /obj/item/chems/packet/capsaicin

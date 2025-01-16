@@ -12,6 +12,7 @@ MRE Stuff
 	obj_flags = OBJ_FLAG_HOLLOW
 	var/main_meal = /obj/item/mrebag
 	var/meal_desc = "This one is menu 1, meat pizza."
+	var/has_been_opened = FALSE
 
 /obj/item/mre/WillContain()
 	. = list(
@@ -36,11 +37,14 @@ MRE Stuff
 /obj/item/mre/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
-	if(storage?.opened)
+	if(has_been_opened)
 		icon_state = "[icon_state]-open"
 
 /obj/item/mre/attack_self(mob/user)
 	if(storage && !storage.opened)
+		if(!has_been_opened)
+			has_been_opened = TRUE
+			to_chat(user, SPAN_NOTICE("You tear \the [src] open!"))
 		storage.open(user)
 		return TRUE
 	return ..()

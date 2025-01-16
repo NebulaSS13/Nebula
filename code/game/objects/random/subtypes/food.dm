@@ -102,7 +102,8 @@
 /obj/random/mre/spread/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/item/chems/packet/jelly,
-		/obj/item/chems/packet/honey
+		/obj/item/chems/packet/honey,
+		/obj/item/chems/packet/honey_fake
 	)
 	return spawnable_choices
 
