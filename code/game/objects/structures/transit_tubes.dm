@@ -45,7 +45,12 @@
 	var/moving = 0
 	var/datum/gas_mixture/air_contents = new()
 
-
+/obj/structure/transit_tube_pod/attack_hand(mob/user)
+	if(!moving && length(contents) && isturf(user.loc))
+		user.visible_message(SPAN_NOTICE("\The [user] empties out \the [src]!"))
+		dump_contents()
+		return TRUE
+	return ..()
 
 /obj/structure/transit_tube_pod/Destroy()
 	dump_contents()
