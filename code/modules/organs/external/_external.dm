@@ -62,7 +62,7 @@
 	var/artery_name = "artery"         // Flavour text for cartoid artery, aorta, etc.
 	var/arterial_bleed_severity = 1    // Multiplier for bleeding in a limb.
 	var/tendon_name = "tendon"         // Flavour text for Achilles tendon, etc.
-	var/cavity_name = "cavity"
+	var/cavity_name = "intramuscular cavity"
 
 	// Surgery vars.
 	var/cavity_max_w_class = ITEM_SIZE_TINY //this is increased if bigger organs spawn by default inside

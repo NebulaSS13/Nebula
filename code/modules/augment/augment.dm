@@ -7,6 +7,7 @@
 	default_action_type = /datum/action/item_action/organ/augment
 	material = /decl/material/solid/metal/steel
 	origin_tech = @'{"materials":1,"magnets":2,"engineering":2,"biotech":1}'
+	w_class = ITEM_SIZE_TINY
 
 	var/descriptor = ""
 	var/known = TRUE

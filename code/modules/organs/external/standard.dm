@@ -17,7 +17,7 @@
 	parent_organ = null
 	encased = "ribcage"
 	artery_name = "aorta"
-	cavity_name = "thoracic"
+	cavity_name = "thoracic cavity"
 	limb_flags = ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/chest/proc/get_current_skin()
@@ -47,7 +47,7 @@
 	amputation_point = "lumbar"
 	joint = "hip"
 	artery_name = "iliac artery"
-	cavity_name = "abdominal"
+	cavity_name = "abdominal cavity"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/groin/die()

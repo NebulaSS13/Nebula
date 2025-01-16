@@ -262,7 +262,7 @@
 		return FALSE
 
 	if(O.w_class > affected.cavity_max_w_class)
-		to_chat(user, SPAN_WARNING("\The [O.name] [pronouns.is] too big for [affected.cavity_name] cavity!"))
+		to_chat(user, SPAN_WARNING("\The [O.name] [pronouns.is] too big for \the [affected.cavity_name]!"))
 		return FALSE
 
 	var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(target, O.organ_tag)

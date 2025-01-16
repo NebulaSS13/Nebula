@@ -21,6 +21,12 @@
 	affected.take_external_damage(20, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	..()
 
+/decl/surgery_step/cavity/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
+	if(!affected || !BP_IS_PROSTHETIC(affected) || BP_IS_CRYSTAL(affected))
+		return ..()
+	return SURGERY_SKILLS_ROBOTIC
+
 //////////////////////////////////////////////////////////////////
 //	 create implant space surgery step
 //////////////////////////////////////////////////////////////////
@@ -38,16 +44,16 @@
 
 /decl/surgery_step/cavity/make_space/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts making some space inside [target]'s [affected.cavity_name] cavity with \the [tool].", \
-	"You start making some space inside [target]'s [affected.cavity_name] cavity with \the [tool]." )
+	user.visible_message("[user] starts making some space inside [target]'s [affected.cavity_name] with \the [tool].", \
+	"You start making some space inside [target]'s [affected.cavity_name] with \the [tool]." )
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
 	affected.cavity = TRUE
 	..()
 
 /decl/surgery_step/cavity/make_space/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='notice'>[user] makes some space inside [target]'s [affected.cavity_name] cavity with \the [tool].</span>", \
-	"<span class='notice'>You make some space inside [target]'s [affected.cavity_name] cavity with \the [tool].</span>" )
+	user.visible_message("<span class='notice'>[user] makes some space inside [target]'s \the [affected.cavity_name] with \the [tool].</span>", \
+	"<span class='notice'>You make some space inside [target]'s \the [affected.cavity_name] with \the [tool].</span>" )
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -70,15 +76,15 @@
 
 /decl/surgery_step/cavity/close_space/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts mending [target]'s [affected.cavity_name] cavity wall with \the [tool].", \
-	"You start mending [target]'s [affected.cavity_name] cavity wall with \the [tool]." )
+	user.visible_message("[user] starts mending [target]'s \the [affected.cavity_name] wall with \the [tool].", \
+	"You start mending [target]'s \the [affected.cavity_name] wall with \the [tool]." )
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
 	..()
 
 /decl/surgery_step/cavity/close_space/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='notice'>[user] mends [target]'s [affected.cavity_name] cavity walls with \the [tool].</span>", \
-	"<span class='notice'>You mend [target]'s [affected.cavity_name] cavity walls with \the [tool].</span>" )
+	user.visible_message("<span class='notice'>[user] mends [target]'s \the [affected.cavity_name] walls with \the [tool].</span>", \
+	"<span class='notice'>You mend [target]'s \the [affected.cavity_name] walls with \the [tool].</span>" )
 	affected.cavity = FALSE
 	..()
 
@@ -109,7 +115,7 @@
 	if(affected && affected.cavity)
 		var/max_volume = BASE_STORAGE_CAPACITY(affected.cavity_max_w_class) + affected.internal_organs_size
 		if(tool.w_class > affected.cavity_max_w_class)
-			to_chat(user, SPAN_WARNING("\The [tool] is too big for [affected.cavity_name] cavity."))
+			to_chat(user, SPAN_WARNING("\The [tool] is too big for \the [affected.cavity_name]."))
 			return FALSE
 		var/total_volume = tool.get_storage_cost()
 		for(var/obj/item/I in affected.implants)
@@ -119,14 +125,14 @@
 			for(var/obj/item/organ/internal/org in affected.internal_organs)
 				max_volume -= org.get_storage_cost()
 		if(total_volume > max_volume)
-			to_chat(user, SPAN_WARNING("There isn't enough space left in [affected.cavity_name] cavity for [tool]."))
+			to_chat(user, SPAN_WARNING("There isn't enough space left in \the [affected.cavity_name] for [tool]."))
 			return FALSE
 		return TRUE
 
 /decl/surgery_step/cavity/place_item/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts putting \the [tool] inside [target]'s [affected.cavity_name] cavity.", \
-	"You start putting \the [tool] inside [target]'s [affected.cavity_name] cavity." )
+	user.visible_message("[user] starts putting \the [tool] inside [target]'s \the [affected.cavity_name].", \
+	"You start putting \the [tool] inside [target]'s \the [affected.cavity_name]." )
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
 	..()
 
@@ -134,8 +140,8 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(!user.try_unequip(tool, affected))
 		return
-	user.visible_message("<span class='notice'>[user] puts \the [tool] inside [target]'s [affected.cavity_name] cavity.</span>", \
-	"<span class='notice'>You put \the [tool] inside [target]'s [affected.cavity_name] cavity.</span>" )
+	user.visible_message("<span class='notice'>[user] puts \the [tool] inside [target]'s \the [affected.cavity_name].</span>", \
+	"<span class='notice'>You put \the [tool] inside [target]'s \the [affected.cavity_name].</span>" )
 	if (tool.w_class > affected.cavity_max_w_class/2 && prob(50) && !BP_IS_PROSTHETIC(affected) && affected.sever_artery())
 		to_chat(user, "<span class='warning'>You tear some blood vessels trying to fit such a big object in this cavity.</span>")
 		affected.owner.custom_pain("You feel something rip in your [affected.name]!", 1,affecting = affected)
