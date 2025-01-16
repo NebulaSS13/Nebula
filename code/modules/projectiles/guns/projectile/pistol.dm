@@ -17,7 +17,7 @@
 
 /obj/item/gun/projectile/pistol/update_base_icon_state()
 	. = ..()
-	if(!length(ammo_magazine?.stored_ammo))
+	if(!length(ammo_magazine?.get_stored_ammo_count()))
 		var/empty_state = "[icon_state]-e"
 		if(check_state_in_icon(empty_state, icon))
 			icon_state = empty_state

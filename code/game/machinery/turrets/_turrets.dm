@@ -188,7 +188,7 @@
 				playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 				reloading_progress = 0
 
-			else if(stored_magazine && length(stored_magazine.stored_ammo) < stored_magazine.max_ammo)
+			else if(stored_magazine && length(stored_magazine.get_stored_ammo_count()) < stored_magazine.max_ammo)
 				var/obj/item/stock_parts/ammo_box/ammo_box = get_component_of_type(/obj/item/stock_parts/ammo_box)
 				if(ammo_box?.is_functional() && ammo_box.stored_caliber == proj_gun.caliber)
 					var/obj/item/ammo_casing/casing = ammo_box.remove_ammo(stored_magazine)
@@ -366,7 +366,7 @@
 				// Only reload the magazine if we're completely out of ammo or we don't have a target.
 				if(ammo_remaining == 0)
 					return TRUE
-				if(!is_valid_target(target?.resolve()) && length(proj_gun.ammo_magazine.stored_ammo) != proj_gun.ammo_magazine.max_ammo)
+				if(!is_valid_target(target?.resolve()) && length(proj_gun.ammo_magazine.get_stored_ammo_count()) != proj_gun.ammo_magazine.max_ammo)
 					return TRUE
 		else
 			return FALSE
