@@ -37,13 +37,13 @@
 /obj/item/gun/projectile/dartgun/on_update_icon()
 	..()
 	if(ammo_magazine)
-		icon_state = "[get_world_inventory_state()]-[clamp(length(ammo_magazine.get_stored_ammo_count()), 0, 5)]"
+		icon_state = "[get_world_inventory_state()]-[clamp(ammo_magazine.get_stored_ammo_count(), 0, 5)]"
 	else
 		icon_state = get_world_inventory_state()
 
 /obj/item/gun/projectile/dartgun/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && (slot in user_mob?.get_held_item_slots()) && ammo_magazine)
-		overlay.icon_state += "-[clamp(length(ammo_magazine.get_stored_ammo_count()), 0, 5)]"
+		overlay.icon_state += "-[clamp(ammo_magazine.get_stored_ammo_count(), 0, 5)]"
 	. = ..()
 
 /obj/item/gun/projectile/dartgun/consume_next_projectile()

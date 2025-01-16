@@ -50,7 +50,7 @@
 		if(stored_caliber && magazine.caliber != stored_caliber)
 			to_chat(user, SPAN_WARNING("The caliber of \the [magazine] does not match the caliber stored in \the [src]!"))
 			return TRUE
-		if(!length(magazine.get_stored_ammo_count()))
+		if(!magazine.get_stored_ammo_count())
 			to_chat(user, SPAN_WARNING("\The [magazine] is empty!"))
 			return TRUE
 		if(length(stored_ammo) >= max_ammo)
