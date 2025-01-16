@@ -34,6 +34,9 @@ MRE Stuff
 	. = ..()
 	to_chat(user, meal_desc)
 
+/obj/item/mre/attack_self(mob/user)
+	. = ..()
+
 /obj/item/mre/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
@@ -42,9 +45,6 @@ MRE Stuff
 
 /obj/item/mre/attack_self(mob/user)
 	if(storage && !storage.opened)
-		if(!has_been_opened)
-			has_been_opened = TRUE
-			to_chat(user, SPAN_NOTICE("You tear \the [src] open!"))
 		storage.open(user)
 		return TRUE
 	return ..()
