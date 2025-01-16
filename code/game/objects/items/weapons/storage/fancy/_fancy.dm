@@ -14,7 +14,11 @@
 
 /obj/item/box/fancy/proc/update_icon_state()
 	icon_state = initial(icon_state)
-	if(key_type && storage?.opened)
+	if(!length(contents))
+		var/empty_state = "[icon_state]0"
+		if(check_state_in_icon(empty_state, icon))
+			icon_state = empty_state
+	else if(key_type && storage?.opened)
 		icon_state = "[icon_state][count_by_type(contents, key_type)]"
 
 /obj/item/box/fancy/proc/add_contents_overlays()
