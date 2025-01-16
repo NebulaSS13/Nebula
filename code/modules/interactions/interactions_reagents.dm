@@ -3,7 +3,7 @@
 	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEVER_AUTOMATIC
 
 /decl/interaction_handler/dip_item/is_possible(atom/target, mob/user, obj/item/prop)
-	return ..() && target.reagents?.total_volume >= FLUID_MINIMUM_TRANSFER && istype(prop) && target.can_be_poured_from(user, prop)
+	return ..() && target != prop && target.reagents?.total_volume >= FLUID_MINIMUM_TRANSFER && istype(prop) && target.can_be_poured_from(user, prop)
 
 /decl/interaction_handler/dip_item/invoked(atom/target, mob/user, obj/item/prop)
 	user.visible_message(SPAN_NOTICE("\The [user] dips \the [prop] into \the [target.reagents.get_primary_reagent_name()]."))
@@ -23,7 +23,7 @@
 /decl/interaction_handler/fill_from/is_possible(atom/target, mob/user, obj/item/prop)
 	if(!(. = ..()))
 		return
-	if(target.reagents?.total_volume < FLUID_PUDDLE)
+	if(target == prop || target.reagents?.total_volume < FLUID_PUDDLE)
 		return FALSE
 	if(!istype(prop) || (!isitem(target) && !istype(target, /obj/structure/reagent_dispensers)))
 		return FALSE
@@ -45,7 +45,7 @@
 /decl/interaction_handler/empty_into/is_possible(atom/target, mob/user, obj/item/prop)
 	if(!(. = ..()))
 		return
-	if(!istype(prop) || prop.reagents?.total_volume <= 0)
+	if(target == prop || !istype(prop) || prop.reagents?.total_volume <= 0)
 		return FALSE
 	return target.can_be_poured_into(user, prop) && prop.can_be_poured_from(user, target)
 

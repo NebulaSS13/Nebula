@@ -183,9 +183,17 @@
 //
 // Interactions
 //
+/obj/item/chems/get_quick_interaction_handler(mob/user)
+	var/static/interaction = GET_DECL(/decl/interaction_handler/set_transfer/chems)
+	return interaction
+
 /obj/item/chems/get_alt_interactions(var/mob/user)
 	. = ..()
-	LAZYADD(., /decl/interaction_handler/set_transfer/chems)
+	var/static/list/chem_interactions = list(
+		/decl/interaction_handler/set_transfer/chems,
+		/decl/interaction_handler/empty/chems
+	)
+	LAZYADD(., chem_interactions)
 
 /decl/interaction_handler/set_transfer/chems
 	expected_target_type = /obj/item/chems
