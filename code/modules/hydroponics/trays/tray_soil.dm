@@ -63,7 +63,7 @@
 		return
 	if(prob(25))
 		return
-	to_chat(walker, SPAN_DANGER("You trample \the [seed]!"))
+	to_chat(walker, SPAN_DANGER("You trample \the [seed.display_name]!"))
 	plant_health = max(0, plant_health - rand(3,5))
 	check_plant_health()
 
