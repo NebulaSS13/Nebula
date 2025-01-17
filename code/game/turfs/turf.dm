@@ -517,7 +517,7 @@
 		if(below)
 			below.update_weather(new_weather)
 
-// Updates turf participation in ZAS according to outside status. Must be called whenever the outside status of a turf may change.
+/// Updates turf participation in ZAS according to outside status and atmosphere participation bools. Must be called whenever any of those values may change.
 /turf/proc/update_external_atmos_participation()
 	var/old_outside = last_outside_check
 	last_outside_check = OUTSIDE_UNCERTAIN

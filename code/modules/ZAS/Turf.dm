@@ -35,9 +35,9 @@
 
 	var/list/postponed
 	#ifdef MULTIZAS
-	for(var/d = 1, d < 64, d *= 2)
+	for(var/d in global.cardinalz)
 	#else
-	for(var/d = 1, d < 16, d *= 2)
+	for(var/d in global.cardinal)
 	#endif
 
 		var/turf/unsim = get_step(src, d)

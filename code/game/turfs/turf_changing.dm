@@ -148,24 +148,24 @@
 
 	// end of lighting stuff
 
-	// In case the turf isn't marked for update in Initialize (e.g. space), we call this to create any unsimulated edges necessary.
-	if(W.zone_membership_candidate != old_zone_membership_candidate)
-		SSair.mark_for_update(src)
-
 	// we check the var rather than the proc, because area outside values usually shouldn't be set on turfs
 	W.last_outside_check = OUTSIDE_UNCERTAIN
 	if(W.is_outside != old_outside)
 		// This will check the exterior atmos participation of this turf and all turfs connected by open space below.
 		W.set_outside(old_outside, skip_weather_update = TRUE)
-	else if(HasBelow(z) && (W.is_open() != old_is_open)) // Otherwise, we do it here if the open status of the turf has changed.
-		var/turf/checking = src
-		while(HasBelow(checking.z))
-			checking = GetBelow(checking)
-			if(!isturf(checking))
-				break
-			checking.update_external_atmos_participation()
-			if(!checking.is_open())
-				break
+	else // We didn't already update our external atmos participation in set_outside.
+		if(HasBelow(z) && (W.is_open() != old_is_open)) // Otherwise, we do it here if the open status of the turf has changed.
+			var/turf/checking = src
+			while(HasBelow(checking.z))
+				checking = GetBelow(checking)
+				if(!isturf(checking))
+					break
+				checking.update_external_atmos_participation()
+				if(!checking.is_open())
+					break
+		// In case the turf isn't marked for update in Initialize (e.g. space), we call this to create any unsimulated edges necessary.
+		if(W.zone_membership_candidate != old_zone_membership_candidate)
+			update_external_atmos_participation()
 
 	W.update_weather(force_update_below = W.is_open() != old_is_open)
 
