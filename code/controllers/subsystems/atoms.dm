@@ -11,8 +11,10 @@ SUBSYSTEM_DEF(atoms)
 	var/atom_init_stage = INITIALIZATION_INSSATOMS
 	var/old_init_stage
 
-	var/list/late_loaders
+	/// A non-associative list of lists, with the format list(list(atom, list(Initialize arguments))).
 	var/list/created_atoms = list()
+	/// A non-associative list of lists, with the format list(list(atom, list(LateInitialize arguments))).
+	var/list/late_loaders = list()
 
 	var/list/BadInitializeCalls = list()
 
@@ -22,21 +24,25 @@ SUBSYSTEM_DEF(atoms)
 	return ..()
 
 /datum/controller/subsystem/atoms/proc/InitializeAtoms()
-	if(atom_init_stage <= INITIALIZATION_INSSATOMS_LATE)
+	if(atom_init_stage <= INITIALIZATION_INSSATOMS)
 		return
 
 	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
 
-	LAZYINITLIST(late_loaders)
-
 	var/list/mapload_arg = list(TRUE)
 
-	var/count = created_atoms.len
-	while(created_atoms.len)
-		var/atom/A = created_atoms[created_atoms.len]
-		var/list/atom_args = created_atoms[A]
-		created_atoms.len--
-		if(!QDELETED(A) && !(A.atom_flags & ATOM_FLAG_INITIALIZED))
+	var/index = 1
+	// Things can add to the end of this list while we iterate, so we can't use a for loop.
+	while(index <= length(created_atoms))
+		// Don't remove from this list while we run, that's expensive.
+		// That would also make it harder to handle things added while we iterate.
+		var/list/creation_packet = created_atoms[index++]
+		var/atom/A = creation_packet[1]
+		var/list/atom_args = creation_packet[2]
+		// I sure hope nothing in this list is ever hard-deleted, or else QDELING will runtime.
+		// If you get a null reference runtime error, just change it back to QDELETED.
+		// The ATOM_FLAG_INITIALIZED check is because of INITIALIZE_IMMEDIATE().
+		if(!QDELING(A) && !(A.atom_flags & ATOM_FLAG_INITIALIZED))
 			if(atom_args)
 				atom_args.Insert(1, TRUE)
 				InitAtom(A, atom_args)
@@ -44,26 +50,19 @@ SUBSYSTEM_DEF(atoms)
 				InitAtom(A, mapload_arg)
 			CHECK_TICK
 
-	// If wondering why not just store all atoms in created_atoms and use the block above: that turns out unbearably expensive.
-	// Instead, atoms without extra arguments in New created on server start are fished out of world directly.
-	// We do this exactly once.
-	if(!initialized)
-		for(var/atom/A in world)
-			if(!QDELETED(A) && !(A.atom_flags & ATOM_FLAG_INITIALIZED))
-				InitAtom(A, mapload_arg)
-				++count
-				CHECK_TICK
-
-	report_progress("Initialized [count] atom\s")
+	report_progress("Initialized [index] atom\s")
+	created_atoms.Cut()
 
 	atom_init_stage = INITIALIZATION_INNEW_REGULAR
 
-	if(late_loaders.len)
-		for(var/I in late_loaders)
-			var/atom/A = I
-			A.LateInitialize(arglist(late_loaders[A]))
+	if(length(late_loaders))
+		index = 1
+		while(index <= length(late_loaders))
+			var/list/creation_packet = late_loaders[index++]
+			var/atom/A = creation_packet[1]
+			A.LateInitialize(arglist(creation_packet[2]))
 			CHECK_TICK
-		report_progress("Late initialized [late_loaders.len] atom\s")
+		report_progress("Late initialized [index] atom\s")
 		late_loaders.Cut()
 
 /datum/controller/subsystem/atoms/proc/InitAtom(atom/A, list/arguments)
@@ -91,7 +90,7 @@ SUBSYSTEM_DEF(atoms)
 			EMPTY_BLOCK_GUARD
 		if(INITIALIZE_HINT_LATELOAD)
 			if(arguments[1])	//mapload
-				late_loaders[A] = arguments
+				late_loaders[++late_loaders.len] = list(A, arguments)
 			else
 				A.LateInitialize(arglist(arguments))
 		if(INITIALIZE_HINT_QDEL)
@@ -113,7 +112,7 @@ SUBSYSTEM_DEF(atoms)
 
 /datum/controller/subsystem/atoms/proc/map_loader_begin()
 	old_init_stage = atom_init_stage
-	atom_init_stage = INITIALIZATION_INSSATOMS_LATE
+	atom_init_stage = INITIALIZATION_INSSATOMS
 
 /datum/controller/subsystem/atoms/proc/map_loader_stop()
 	atom_init_stage = old_init_stage
