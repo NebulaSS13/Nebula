@@ -109,6 +109,8 @@ SUBSYSTEM_DEF(mapping)
 	// Load any queued map template markers.
 	for(var/obj/abstract/landmark/map_load_mark/queued_mark in queued_markers)
 		queued_mark.load_subtemplate()
+		if(!QDELETED(queued_mark)) // for if the tile that lands on the landmark is a no-op tile
+			qdel(queued_mark)
 	queued_markers.Cut()
 
 	// Populate overmap.

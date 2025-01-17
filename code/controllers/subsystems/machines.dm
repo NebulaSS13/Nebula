@@ -82,6 +82,12 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 
 #undef INTERNAL_PROCESS_STEP
 
+/datum/controller/subsystem/machines/StartLoadingMap()
+	suspend()
+
+/datum/controller/subsystem/machines/StopLoadingMap()
+	wake()
+
 // rebuild all power networks from scratch - only called at world creation or by the admin verb
 // The above is a lie. Turbolifts also call this proc.
 /datum/controller/subsystem/machines/proc/makepowernets()
