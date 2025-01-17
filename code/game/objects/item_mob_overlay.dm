@@ -45,13 +45,15 @@ var/global/list/icon_state_cache = list()
 /proc/_fetch_icon_state_cache_entry(checkicon)
 	if(isnull(checkicon) || !(isfile(checkicon) || isicon(checkicon)))
 		return null
-	var/checkkey = "\ref[checkicon]"
-	var/list/check = global.icon_state_cache[checkkey]
+	// if we want to let people del icons (WHY???) then we can use weakreF()
+	// but right now it's cheaper to just use checkicon directly
+	// ref doesn't even do any deduplication
+	var/list/check = global.icon_state_cache[checkicon]
 	if(!check)
 		check = list()
 		for(var/istate in icon_states(checkicon))
 			check[istate] = TRUE
-		global.icon_state_cache[checkkey] = check
+		global.icon_state_cache[checkicon] = check
 	return check
 
 /obj/item/proc/update_world_inventory_state()
