@@ -25,3 +25,6 @@
 
 /turf/unsimulated/get_lumcount(var/minlum = 0, var/maxlum = 1)
 	return 0.8
+
+/turf/unsimulated/get_movable_alpha_mask_state(atom/movable/mover)
+	return null
