@@ -329,3 +329,7 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 
 /obj/structure/proc/is_z_passable()
 	return TRUE
+
+/obj/structure/on_turf_height_change(new_height)
+	 // We may be a fixed point.
+	return !is_platform() && ..()

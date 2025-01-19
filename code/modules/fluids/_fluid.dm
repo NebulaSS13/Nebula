@@ -16,6 +16,7 @@
 
 /atom/movable/fluid_overlay/on_turf_height_change(new_height)
 	update_icon()
+	return TRUE
 
 /atom/movable/fluid_overlay/on_update_icon()
 

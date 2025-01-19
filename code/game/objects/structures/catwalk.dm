@@ -46,9 +46,6 @@
 	connections = null
 	other_connections = null
 
-/obj/structure/catwalk/on_turf_height_change(new_height)
-	return null // We are a fixed point.
-
 /obj/structure/catwalk/is_platform()
 	return TRUE
 

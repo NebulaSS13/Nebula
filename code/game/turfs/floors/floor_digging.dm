@@ -1,6 +1,6 @@
 /turf/floor/proc/is_fundament()
 	var/decl/flooring/flooring = get_topmost_flooring()
-	return flooring ? !flooring.constructed : TRUE
+	return flooring ? (!flooring.constructed && flooring != get_base_flooring()) : TRUE
 
 /turf/floor/can_be_dug(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
 	// This should be removed before digging trenches.
