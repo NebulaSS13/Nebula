@@ -29,7 +29,9 @@
 		regenerate_ao()
 #endif
 
-	if(isturf(old_loc) && has_gravity() && A.can_fall() && !(weakref(A) in skip_height_fall_for))
+	var/obj/structure/platform = get_supporting_platform()
+	if(isturf(old_loc) && has_gravity() && A.can_fall() && !isnull(platform) && !(weakref(A) in skip_height_fall_for))
+
 		var/turf/old_turf  = old_loc
 		var/old_height     = old_turf.get_physical_height() + old_turf.reagents?.total_volume
 		var/current_height = get_physical_height() + reagents?.total_volume
@@ -69,7 +71,7 @@
 			// Delay to allow transition to the new turf and avoid layering issues.
 			var/mob/M = A
 			M.reset_offsets()
-			if(get_physical_height() > T.get_physical_height())
+			if(platform || (get_physical_height() > T.get_physical_height()))
 				M.reset_layer()
 			else
 				// arbitrary timing value that feels good in practice. it sucks and is inconsistent:(

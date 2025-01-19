@@ -791,6 +791,12 @@
 /turf/can_be_poured_into(atom/source)
 	return !density
 
+/turf/proc/get_supporting_platform()
+	for(var/obj/structure/platform in get_contained_external_atoms())
+		if(platform.is_platform())
+			return platform
+	return null
+
 /turf/get_alt_interactions(mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/show_turf_contents)

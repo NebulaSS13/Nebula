@@ -97,8 +97,15 @@
 
 		// Update offsets from loc.
 		var/turf/floor/ext = loc
-		if(istype(ext) && ext.height < 0)
-			new_pixel_z += ext.pixel_z
+		if(istype(ext))
+			var/modify_pixel_z
+			var/obj/structure/catwalk = ext.get_supporting_platform()
+			if(catwalk)
+				modify_pixel_z = catwalk.pixel_z
+			else if(ext.height < 0)
+				modify_pixel_z = ext.pixel_z
+
+		// Check for catwalks/supporting platforms.
 
 		// Update offsets from our buckled atom.
 		if(buckled && buckled.buckle_pixel_shift)

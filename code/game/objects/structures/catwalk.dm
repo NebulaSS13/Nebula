@@ -19,14 +19,6 @@
 	var/list/connections
 	var/list/other_connections
 
-/obj/structure/catwalk/clear_connections()
-	connections = null
-	other_connections = null
-
-/obj/structure/catwalk/set_connections(dirs, other_dirs)
-	connections = dirs_to_corner_states(dirs)
-	other_connections = dirs_to_corner_states(other_dirs)
-
 /obj/structure/catwalk/Initialize()
 	. = ..()
 	DELETE_IF_DUPLICATE_OF(/obj/structure/catwalk)
@@ -41,9 +33,6 @@
 	update_connections(1)
 	update_icon()
 
-/obj/structure/catwalk/can_climb_from_below(var/mob/climber)
-	return TRUE
-
 /obj/structure/catwalk/Destroy()
 	var/turf/oldloc = loc
 	redraw_nearby_catwalks()
@@ -51,6 +40,24 @@
 	if(istype(oldloc))
 		for(var/atom/movable/AM in oldloc)
 			AM.fall(oldloc)
+
+/obj/structure/catwalk/clear_connections()
+	connections = null
+	other_connections = null
+
+/obj/structure/catwalk/on_turf_height_change(new_height)
+	return null // We are a fixed point.
+
+/obj/structure/catwalk/is_platform()
+	return TRUE
+
+/obj/structure/catwalk/set_connections(dirs, other_dirs)
+	connections = dirs_to_corner_states(dirs)
+	other_connections = dirs_to_corner_states(other_dirs)
+
+/obj/structure/catwalk/can_climb_from_below(var/mob/climber)
+	return TRUE
+
 
 /obj/structure/catwalk/proc/redraw_nearby_catwalks()
 	for(var/direction in global.alldirs)
