@@ -81,7 +81,7 @@ SUBSYSTEM_DEF(minimap)
 			continue
 		if((tile.turf_flags & TURF_IS_HOLOMAP_OBSTACLE) || (locate(/obj/structure/grille) in tile))
 			canvas.DrawBox(COLOR_HOLOMAP_OBSTACLE, tile.x + offset_x, tile.y + offset_y)
-		else if((tile.turf_flags & TURF_IS_HOLOMAP_PATH) || (locate(/obj/structure/catwalk) in tile))
+		else if((tile.turf_flags & TURF_IS_HOLOMAP_PATH) || tile.get_supporting_platform())
 			canvas.DrawBox(COLOR_HOLOMAP_PATH, tile.x + offset_x, tile.y + offset_y)
 		CHECK_TICK
 	return canvas

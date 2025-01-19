@@ -86,6 +86,9 @@
 
 	var/paint_color
 
+	/// Floorlike structures like catwalks. Updated/retrieved by get_supporting_platform()
+	var/obj/structure/supporting_platform
+
 /turf/Initialize(mapload, ...)
 	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
 
@@ -139,6 +142,8 @@
 		weather.examine(user)
 
 /turf/Destroy()
+
+	supporting_platform = null
 
 	if(zone)
 		if(can_safely_remove_from_zone())
@@ -792,10 +797,12 @@
 	return !density
 
 /turf/proc/get_supporting_platform()
-	for(var/obj/structure/platform in get_contained_external_atoms())
-		if(platform.is_platform())
-			return platform
-	return null
+	if(isnull(supporting_platform))
+		for(var/obj/structure/platform in get_contained_external_atoms())
+			if(platform.is_platform())
+				supporting_platform = platform
+				break
+	return supporting_platform
 
 /turf/get_alt_interactions(mob/user)
 	. = ..()

@@ -36,6 +36,7 @@
 				above.ChangeTurf(open_turf_type, keep_air = TRUE, update_open_turfs_above = FALSE)
 
 /turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/update_open_turfs_above = TRUE, var/keep_height = FALSE)
+
 	if (!N)
 		return
 
@@ -48,6 +49,9 @@
 
 	if (!(atom_flags & ATOM_FLAG_INITIALIZED))
 		return new N(src)
+
+	// Rebuilt on next call.
+	supporting_platform = null
 
 	// Track a number of old values for the purposes of raising
 	// state change events after changing the turf to the new type.

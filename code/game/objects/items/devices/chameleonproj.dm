@@ -147,7 +147,10 @@
 // As it is, the effect can freely levitate over any open space.
 /obj/effect/dummy/chameleon/Move()
 	. = ..()
-	if(. && isturf(loc) && loc.has_gravity() && !(locate(/obj/structure/catwalk) in loc) && !(locate(/obj/structure/lattice) in loc))
+	if(!. || !isturf(loc) || !loc.has_gravity())
+		return
+	var/turf/my_turf = loc
+	if(!my_turf.get_supporting_platform() && !(locate(/obj/structure/lattice) in loc))
 		disrupted()
 
 /datum/movement_handler/delay/chameleon_projector

@@ -13,7 +13,7 @@
 
 /decl/flooring/lava/handle_environment_proc(turf/floor/target)
 	. = PROCESS_KILL
-	if(locate(/obj/structure/catwalk) in target)
+	if(target.get_supporting_platform())
 		return
 	var/datum/gas_mixture/environment = target.return_air()
 	var/pressure = environment?.return_pressure()

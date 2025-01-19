@@ -9,7 +9,7 @@
 				return FALSE
 
 	else if(direction == DOWN)
-		if(!is_open() || !HasBelow(z) || (locate(/obj/structure/catwalk) in src))
+		if(!is_open() || !HasBelow(z) || get_supporting_platform())
 			return FALSE
 		if(check_neighbor_canzpass)
 			var/turf/T = GetBelow(src)

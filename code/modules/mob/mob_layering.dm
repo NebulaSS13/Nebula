@@ -98,12 +98,11 @@
 		// Update offsets from loc.
 		var/turf/floor/ext = loc
 		if(istype(ext))
-			var/modify_pixel_z
-			var/obj/structure/catwalk = ext.get_supporting_platform()
-			if(catwalk)
-				modify_pixel_z = catwalk.pixel_z
+			var/obj/structure/platform = ext.get_supporting_platform()
+			if(platform)
+				new_pixel_z += platform.pixel_z
 			else if(ext.height < 0)
-				modify_pixel_z = ext.pixel_z
+				new_pixel_z += ext.pixel_z
 
 		// Check for catwalks/supporting platforms.
 

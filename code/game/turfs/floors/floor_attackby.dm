@@ -24,7 +24,7 @@
 	return ..()
 
 /turf/floor/proc/try_build_catwalk(var/obj/item/used_item, var/mob/user)
-	if(!(locate(/obj/structure/catwalk) in src) && istype(used_item, /obj/item/stack/material/rods))
+	if(istype(used_item, /obj/item/stack/material/rods) && !get_supporting_platform())
 		var/obj/item/stack/material/rods/R = used_item
 		if (R.use(2))
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)

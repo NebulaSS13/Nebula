@@ -88,12 +88,13 @@
 			return TRUE
 
 		var/obj/item/stack/material/rods/R = C
-		if(locate(/obj/structure/catwalk) in get_turf(src))
-			to_chat(user, SPAN_WARNING("There is already a catwalk here."))
+		var/turf/my_turf = get_turf(src)
+		if(my_turf?.get_supporting_platform())
+			to_chat(user, SPAN_WARNING("There is already a platform here."))
 			return TRUE
 		else if(R.use(2))
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			new /obj/structure/catwalk(src.loc, R.material.type)
+			new /obj/structure/catwalk(my_turf, R.material.type)
 			return TRUE
 		else
 			to_chat(user, SPAN_WARNING("You require at least two rods to complete the catwalk."))

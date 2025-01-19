@@ -40,6 +40,7 @@
 	if(istype(oldloc))
 		for(var/atom/movable/AM in oldloc)
 			AM.fall(oldloc)
+		oldloc.supporting_platform = null
 
 /obj/structure/catwalk/clear_connections()
 	connections = null
@@ -176,6 +177,9 @@
 
 /obj/structure/catwalk/refresh_neighbors()
 	return
+
+/obj/structure/catwalk/is_z_passable()
+	return !plated_tile
 
 /obj/effect/catwalk_plated
 	name = "plated catwalk spawner"

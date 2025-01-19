@@ -326,3 +326,6 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 // Does this structure override turf depth for the purposes of mob offsets?
 /obj/structure/proc/is_platform()
 	return FALSE
+
+/obj/structure/proc/is_z_passable()
+	return TRUE
