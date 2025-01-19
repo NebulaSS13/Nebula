@@ -68,6 +68,7 @@
 	* @param bloodcolor Color of the blood when wet.
 	*/
 /obj/effect/decal/cleanable/blood/tracks/proc/AddTracks(var/list/DNA, var/comingdir, var/goingdir, var/bloodcolor=COLOR_BLOOD_HUMAN)
+
 	var/updated=0
 	// Shift our goingdir 4 spaces to the left so it's in the GOING bitblock.
 	var/realgoing=BITSHIFT_LEFT(goingdir,4)

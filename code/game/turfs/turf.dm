@@ -717,7 +717,7 @@
 /// typepath is a type, not an instance
 /// new_chemical is optional argument for things like muddy footprints, where typepath isn't enough
 /turf/proc/AddTracks(obj/effect/decal/cleanable/blood/tracks/typepath, bloodDNA, comingdir, goingdir, bloodcolor = COLOR_BLOOD_HUMAN, new_chemical = null)
-	if(!simulated)
+	if(!simulated || check_fluid_depth(FLUID_QDEL_POINT))
 		return
 	// Populate defaults from the given typepath, where possible.
 	if(isnull(new_chemical))
