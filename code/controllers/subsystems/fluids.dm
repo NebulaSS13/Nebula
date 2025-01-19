@@ -231,13 +231,21 @@ SUBSYSTEM_DEF(fluids)
 		if(!istype(current_fluid_holder) || QDELETED(current_fluid_holder))
 			continue
 		var/pushed_something = FALSE
-		if(current_fluid_holder.reagents?.total_volume > FLUID_SHALLOW && current_fluid_holder.last_flow_strength >= 10)
-			for(var/atom/movable/AM as anything in current_fluid_holder.get_contained_external_atoms())
-				if(AM.is_fluid_pushable(current_fluid_holder.last_flow_strength))
-					AM.pushed(current_fluid_holder.last_flow_dir)
-					pushed_something = TRUE
-		if(pushed_something && prob(1))
-			playsound(current_fluid_holder, 'sound/effects/slosh.ogg', 25, 1)
+
+		if(current_fluid_holder.last_flow_strength >= 10)
+			// Catwalks mean items will be above the turf; subtract the turf height from our volume.
+			// TODO: somehow handle stuff that is on a catwalk or on the turf within the same turf.
+			var/effective_volume = current_fluid_holder.reagents?.total_volume
+			if(current_fluid_holder.get_supporting_platform())
+				// Depth is negative height, hence +=. TODO: positive heights? No idea how to handle that.
+				effective_volume += current_fluid_holder.get_physical_height()
+			if(effective_volume > FLUID_SHALLOW)
+				for(var/atom/movable/AM as anything in current_fluid_holder.get_contained_external_atoms())
+					if(AM.try_fluid_push(effective_volume, current_fluid_holder.last_flow_strength))
+						AM.pushed(current_fluid_holder.last_flow_dir)
+						pushed_something = TRUE
+			if(pushed_something && prob(1))
+				playsound(current_fluid_holder, 'sound/effects/slosh.ogg', 25, 1)
 		if(MC_TICK_CHECK)
 			processing_flows.Cut(1, i+1)
 			return

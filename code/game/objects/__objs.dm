@@ -157,8 +157,8 @@
 		add_fingerprint(user)
 	return ..()
 
-/obj/is_fluid_pushable(var/amt)
-	return ..() && w_class <= round(amt/20)
+/obj/try_fluid_push(volume, strength)
+	return ..() && w_class <= round(strength/20)
 
 /obj/proc/can_embed()
 	return FALSE

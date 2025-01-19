@@ -988,12 +988,12 @@
 /mob/proc/get_gender()
 	return gender
 
-/mob/is_fluid_pushable(var/amt)
-	if(..() && !buckled && (current_posture.prone || !Check_Shoegrip()) && (amt >= mob_size * (current_posture.prone ? 5 : 10)))
+/mob/try_fluid_push(volume, strength)
+	if(..() && !buckled && (current_posture.prone || !Check_Shoegrip()) && (strength >= mob_size * (current_posture.prone ? 5 : 10)))
 		if(!current_posture.prone)
 			SET_STATUS_MAX(src, STAT_WEAK, 1)
 			if(current_posture.prone && prob(10))
-				to_chat(src, "<span class='danger'>You are pushed down by the flood!</span>")
+				to_chat(src, SPAN_DANGER("You are pushed down by the flood!"))
 		return TRUE
 	return FALSE
 

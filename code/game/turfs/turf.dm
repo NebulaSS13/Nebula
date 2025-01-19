@@ -209,7 +209,7 @@
 	if(weather)
 		. += weather.get_movement_delay(return_air(), travel_dir)
 	// TODO: check user species webbed feet, wearing swimming gear
-	if(reagents?.total_volume > FLUID_PUDDLE)
+	if(!get_supporting_platform() && reagents?.total_volume > FLUID_PUDDLE)
 		. += (reagents.total_volume > FLUID_SHALLOW) ? 6 : 3
 
 /turf/attack_hand(mob/user)
@@ -248,6 +248,12 @@
 
 		if(IS_SHOVEL(W))
 
+			// TODO: move these checks into the interaction handlers.
+			var/atom/platform = get_supporting_platform()
+			if(platform)
+				to_chat(user, SPAN_WARNING("\The [platform] [platform.get_pronouns().is] in the way!"))
+				return TRUE
+
 			if(!can_be_dug(W.material?.hardness))
 				to_chat(user, SPAN_WARNING("\The [src] is too hard to be dug with \the [W]."))
 				return TRUE
@@ -262,6 +268,12 @@
 
 		var/decl/material/material = get_material()
 		if(IS_PICK(W) && material)
+
+			// TODO: move these checks into the interaction handlers.
+			var/atom/platform = get_supporting_platform()
+			if(platform)
+				to_chat(user, SPAN_WARNING("\The [platform] [platform.get_pronouns().is] in the way!"))
+				return TRUE
 
 			if(material?.hardness <= MAT_VALUE_FLEXIBLE)
 				to_chat(user, SPAN_WARNING("\The [src] is too soft to be excavated with \the [W]. Use a shovel."))
@@ -332,7 +344,7 @@
 				return 0
 
 	// Check if they need to climb out of a hole.
-	if(has_gravity())
+	if(has_gravity() && !get_supporting_platform())
 		var/mob/mover_mob = mover
 		if(!istype(mover_mob) || (!mover_mob.throwing && !mover_mob.can_overcome_gravity()))
 			var/turf/old_turf  = mover.loc
@@ -726,12 +738,13 @@
 		var/mob/moving_mob = mover
 		if(moving_mob.can_overcome_gravity())
 			return null
-	var/fluid_depth = get_fluid_depth()
-	if(fluid_depth > FLUID_PUDDLE)
-		if(fluid_depth <= FLUID_SHALLOW)
-			return "mask_shallow"
-		if(fluid_depth <= FLUID_DEEP)
-			return "mask_deep"
+	if(!get_supporting_platform())
+		var/fluid_depth = get_fluid_depth()
+		if(fluid_depth > FLUID_PUDDLE)
+			if(fluid_depth <= FLUID_SHALLOW)
+				return "mask_shallow"
+			if(fluid_depth <= FLUID_DEEP)
+				return "mask_deep"
 
 /turf/spark_act(obj/effect/sparks/sparks)
 	if(simulated)

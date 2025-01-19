@@ -42,6 +42,10 @@
 			AM.fall(oldloc)
 		oldloc.supporting_platform = null
 
+// Catwalks need to layer over grass and water.
+/obj/structure/catwalk/update_turf_alpha_mask()
+	return FALSE
+
 /obj/structure/catwalk/clear_connections()
 	connections = null
 	other_connections = null

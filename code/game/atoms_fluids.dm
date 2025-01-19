@@ -16,7 +16,7 @@
 /atom/proc/CanFluidPass(var/coming_from)
 	return TRUE
 
-/atom/movable/proc/is_fluid_pushable(var/amt)
+/atom/movable/proc/try_fluid_push(volume, strength)
 	return simulated && !anchored
 
 /atom/movable/is_flooded(var/lying_mob, var/absolute)

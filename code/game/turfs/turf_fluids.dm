@@ -62,7 +62,14 @@
 		fluid_update() // We are now floodable, so wake up our neighbors.
 
 /turf/is_flooded(var/lying_mob, var/absolute)
-	return (flooded || (!absolute && check_fluid_depth(lying_mob ? FLUID_OVER_MOB_HEAD : FLUID_DEEP)))
+	if(flooded)
+		return TRUE
+	if(absolute)
+		return FALSE
+	var/required_depth = lying_mob ? FLUID_OVER_MOB_HEAD : FLUID_DEEP
+	if(get_supporting_platform()) // Increase required depth if we are over the water.
+		required_depth -= get_physical_height() // depth is negative, -= to increase required depth.
+	return check_fluid_depth(required_depth)
 
 /turf/check_fluid_depth(var/min = 1)
 	. = (get_fluid_depth() >= min)
@@ -117,8 +124,14 @@
 	..()
 	if(!QDELETED(src) && fluids?.total_volume)
 		fluids.touch_turf(src, touch_atoms = FALSE) // Handled in fluid_act() below.
-		for(var/atom/movable/AM as anything in get_contained_external_atoms())
-			AM.fluid_act(fluids)
+		// Wet items that are not supported on a platform or such.
+		var/effective_volume = fluids?.total_volume
+		if(get_supporting_platform())
+			// Depth is negative height, hence +=. TODO: positive heights? No idea how to handle that.
+			effective_volume += get_physical_height()
+		if(effective_volume > FLUID_PUDDLE)
+			for(var/atom/movable/AM as anything in get_contained_external_atoms())
+				AM.fluid_act(fluids)
 
 /turf/proc/remove_fluids(var/amount, var/defer_update)
 	if(!reagents?.total_liquid_volume)
