@@ -1,7 +1,7 @@
 /obj/screen/inventory/hand
 	icon_state = "hand_base"
 
-/obj/screen/inventory/hand/on_update_icon()
+/obj/screen/inventory/hand/rebuild_screen_overlays()
 
 	..()
 
