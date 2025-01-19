@@ -588,3 +588,8 @@
 
 /atom/movable/immune_to_floor_hazards()
 	return ..() || throwing
+
+/atom/movable/proc/on_turf_height_change(new_height)
+	// re-runs stuff like Entered(), updates pixel offsets, triggers fluids, etc.
+	if(simulated)
+		dropInto(loc)

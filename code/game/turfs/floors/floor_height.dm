@@ -10,7 +10,7 @@
 		for(var/turf/neighbor as anything in RANGE_TURFS(src, 1))
 			neighbor.update_icon()
 		fluid_update()
-		if(fluid_overlay)
-			fluid_overlay.update_icon()
+		for(var/atom/movable/thing in contents)
+			thing.on_turf_height_change(new_height)
 		return TRUE
 	return FALSE
