@@ -841,6 +841,12 @@
 /decl/interaction_handler/dig/trench
 	name = "Dig Trench"
 
+/decl/interaction_handler/dig/trench/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(. && istype(target, /turf/floor))
+		var/turf/floor/target_turf = target
+		return target_turf.flooring_is_diggable()
+
 /decl/interaction_handler/dig/trench/invoked(atom/target, mob/user, obj/item/prop)
 	prop ||= user.get_usable_hand_slot_organ() // Allows drakes to dig.
 	var/turf/T = get_turf(target)

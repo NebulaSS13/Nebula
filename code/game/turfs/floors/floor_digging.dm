@@ -1,10 +1,12 @@
-/turf/floor/proc/is_fundament()
+/turf/floor/proc/flooring_is_diggable()
 	var/decl/flooring/flooring = get_topmost_flooring()
-	return flooring ? (!flooring.constructed && flooring != get_base_flooring()) : TRUE
+	if(!flooring || flooring.constructed)
+		return FALSE
+	return TRUE
 
 /turf/floor/can_be_dug(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
 	// This should be removed before digging trenches.
-	if(!is_fundament())
+	if(!flooring_is_diggable())
 		return FALSE
 	var/decl/flooring/flooring = get_base_flooring()
 	if(istype(flooring) && flooring.constructed)
@@ -24,7 +26,7 @@
 	return can_be_dug(tool_hardness, using_tool) && get_physical_height() > -(FLUID_DEEP)
 
 /turf/floor/dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
-	if(!is_fundament())
+	if(!flooring_is_diggable())
 		return
 	var/new_height = max(get_physical_height()-TRENCH_DEPTH_PER_ACTION, -(FLUID_DEEP))
 	var/height_diff = abs(get_physical_height()-new_height)
@@ -38,6 +40,6 @@
 
 /turf/floor/get_diggable_resources()
 	var/decl/material/my_material = get_material()
-	if(is_fundament() && istype(my_material) && my_material.dug_drop_type && (get_physical_height() > -(FLUID_DEEP)))
+	if(flooring_is_diggable() && istype(my_material) && my_material.dug_drop_type && (get_physical_height() > -(FLUID_DEEP)))
 		return list(my_material.dug_drop_type = list(3, 2))
 	return null
