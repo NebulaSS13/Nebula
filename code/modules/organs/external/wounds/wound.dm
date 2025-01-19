@@ -79,7 +79,7 @@
 		return 0
 	return (wound_damage() <= autoheal_cutoff) ? 1 : is_treated()
 
-// checks whether the wound has been appropriately treated
+/// checks whether the wound has been appropriately treated
 /datum/wound/proc/is_treated()
 	if(!LAZYLEN(embedded_objects))
 		switch(damage_type)
@@ -88,7 +88,7 @@
 			if(BURN)
 				return salved
 
-	// Checks whether other other can be merged into src.
+/// Checks whether other can be merged into src.
 /datum/wound/proc/can_merge_wounds(var/datum/wound/other)
 	if (other.type != src.type) return 0
 	if (other.current_stage != src.current_stage) return 0

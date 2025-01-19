@@ -127,7 +127,7 @@ var/global/list/telecomms_hubs = list()
 	if(overloaded_for > 0)
 		overloaded_for--
 
-/// Accepts either a raw frequency (numeric), or or a frequency/key string, and returns the associated channel data.
+/// Accepts either a raw frequency (numeric), or a frequency/key string, and returns the associated channel data.
 /obj/machinery/network/telecomms_hub/proc/get_channel_from_freq_or_key(var/cid)
 	cid = "[cid]"
 	. = LAZYACCESS(channels_by_frequency, cid) || LAZYACCESS(channels_by_key, cid)

@@ -682,7 +682,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 		load_subtemplate(T, template)
 		return template
 
-///Actually handles loading a template template at the given turf.
+///Actually handles loading a template at the given turf.
 /datum/level_data/proc/load_subtemplate(turf/central_turf, datum/map_template/template)
 	if(!template)
 		return FALSE

@@ -246,7 +246,7 @@
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "airlock_control_off"
 	name = "airlock controller frame"
-	desc = "Used to build airlock controllers. Use a multitool on the circuit to determine which type you want, and then hit this with the the circuit."
+	desc = "Used to build airlock controllers. Use a multitool on the circuit to determine which type you want, and then hit this with the circuit."
 	build_machine_type = null
 	///Used when configuring a dummy controller
 	var/master_controller_id_tag

@@ -183,7 +183,7 @@
 /obj/item/clothing/mask/smokable/attack(var/mob/living/M, var/mob/living/user, def_zone)
 	if(istype(M) && M.on_fire)
 		user.do_attack_animation(M)
-		light(SPAN_NOTICE("\The [user] coldly lights the \the [src] with the burning body of \the [M]."))
+		light(SPAN_NOTICE("\The [user] coldly lights \the [src] with the burning body of \the [M]."))
 		return 1
 	else
 		return ..()

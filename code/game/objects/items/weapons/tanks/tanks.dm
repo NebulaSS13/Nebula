@@ -193,7 +193,7 @@ var/global/list/global/tank_gauge_cache = list()
 		var/obj/item/weldingtool/WT = W
 		if(WT.weld(1,user))
 			if(!valve_welded)
-				to_chat(user, "<span class='notice'>You begin welding the \the [src] emergency pressure relief valve.</span>")
+				to_chat(user, "<span class='notice'>You begin welding \the [src] emergency pressure relief valve.</span>")
 				if(do_after(user, 40,src))
 					to_chat(user, "<span class='notice'>You carefully weld \the [src] emergency pressure relief valve shut.</span><span class='warning'> \The [src] may now rupture under pressure!</span>")
 					valve_welded = 1

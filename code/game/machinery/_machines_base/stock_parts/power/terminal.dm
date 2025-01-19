@@ -135,7 +135,7 @@
 		if(!C.can_use(10))
 			to_chat(user, "<span class='warning'>You need ten lengths of cable for \the [machine].</span>")
 			return TRUE
-		user.visible_message("<span class='warning'>\The [user] adds cables to the \the [machine].</span>", \
+		user.visible_message("<span class='warning'>\The [user] adds cables to \the [machine].</span>", \
 							"You start adding cables to \the [machine] frame...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 20, machine))
@@ -147,8 +147,8 @@
 						return TRUE
 				C.use(10)
 				user.visible_message(\
-					"<span class='warning'>\The [user] has added cables to the \the [machine]!</span>",\
-					"You add cables to the \the [machine].")
+					"<span class='warning'>\The [user] has added cables to \the [machine]!</span>",\
+					"You add cables to \the [machine].")
 				make_terminal(machine)
 		return TRUE
 

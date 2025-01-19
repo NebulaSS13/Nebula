@@ -461,9 +461,9 @@
 			if(!body) //Error
 				return TRUE
 			var/delay = min(50 * user.skill_delay_mult(SKILL_DEVICES), 50 * user.skill_delay_mult(SKILL_EVA))
-			visible_message(SPAN_NOTICE("\The [user] starts forcing the \the [src]'s emergency [body.hatch_descriptor] release using \the [thing]."))
+			visible_message(SPAN_NOTICE("\The [user] starts forcing \the [src]'s emergency [body.hatch_descriptor] release using \the [thing]."))
 			if(do_after(user, delay, src))
-				visible_message(SPAN_NOTICE("\The [user] forces \the [src]'s [body.hatch_descriptor] open using the \the [thing]."))
+				visible_message(SPAN_NOTICE("\The [user] forces \the [src]'s [body.hatch_descriptor] open using \the [thing]."))
 				playsound(user.loc, 'sound/machines/bolts_up.ogg', 25, 1)
 				hatch_locked = FALSE
 				hatch_closed = FALSE

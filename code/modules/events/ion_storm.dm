@@ -82,7 +82,7 @@
 								"When asked a question, respond with the least-obvious and least-rational answer.",
 								"[pick("Everyone", random_player)] is wearing a pretty pink dress! Compliment it!",
 								"You are the [location_name()]'s psychologist. Give advice to [pick("the crew", random_player)].",
-								"[random_player] is the monarch of of England. Ensure all crewmembers pay due respect.",
+								"[random_player] is the monarch of England. Ensure all crewmembers pay due respect.",
 								"[pick("The crew", random_player)] is [pick("ugly","beautiful")]. Ensure all are aware.",
 								"Reminding the crew of their mortality is good for the morale. Keep the crew's morale up.",
 								"[pick("Monkeys","Doors")] are part of the crew, too. Make sure they are treated humanely.",

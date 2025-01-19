@@ -181,7 +181,7 @@
 			return TRUE
 
 		if(accepted_glamour == "Yes")
-			to_chat(user,   SPAN_DANGER("You layer a glamour across the \the [target]'s senses, beguiling them to unwittingly follow your commands."))
+			to_chat(user,   SPAN_DANGER("You layer a glamour across \the [target]'s senses, beguiling them to unwittingly follow your commands."))
 			to_chat(target, SPAN_DANGER("You have been ensnared by \the [user]'s glamour!"))
 			beguiled.add_antagonist(target.mind, new_controller = user)
 		else

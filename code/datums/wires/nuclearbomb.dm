@@ -20,7 +20,7 @@ var/global/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 	var/obj/machinery/nuclearbomb/N = holder
 	. += ..()
 	. += "<BR>The device is [N.timing ? "shaking!" : "still."]<BR>"
-	. += "The device is is [N.safety ? "quiet" : "whirring"].<BR>"
+	. += "The device is [N.safety ? "quiet" : "whirring"].<BR>"
 	. += "The lights are [N.lighthack ? "static" : "functional"].<BR>"
 
 /datum/wires/nuclearbomb/proc/toggle_hacked()

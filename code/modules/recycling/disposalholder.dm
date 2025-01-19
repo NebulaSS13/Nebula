@@ -82,11 +82,11 @@
 		if(!curr)
 			last.expel(src, loc, dir)
 
-	// find the turf which should contain the next pipe
+/// find the turf which should contain the next pipe
 /obj/structure/disposalholder/proc/nextloc()
 	return get_step(loc,dir)
 
-// find a matching pipe on a turf
+/// find a matching pipe on a turf
 /obj/structure/disposalholder/proc/findpipe(var/turf/T)
 	if(!T)
 		return null
@@ -98,8 +98,8 @@
 	// if no matching pipe, return null
 	return null
 
-// merge two holder objects
-// used when a a holder meets a stuck holder
+/// merge two holder objects
+/// used when a holder meets a stuck holder
 /obj/structure/disposalholder/proc/merge(var/obj/structure/disposalholder/other)
 	for(var/atom/movable/AM in other)
 		AM.forceMove(src)		// move everything in other holder to this one
@@ -119,7 +119,7 @@
 	else
 		partialTag = new_tag
 
-// called when player tries to move while in a pipe
+/// called when player tries to move while in a pipe
 /obj/structure/disposalholder/relaymove(mob/user)
 	if(!isliving(user))
 		return

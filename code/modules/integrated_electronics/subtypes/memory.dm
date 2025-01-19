@@ -63,7 +63,7 @@
 
 /obj/item/integrated_circuit/memory/huge
 	name = "large memory stick"
-	desc = "This stick of memory can store up up to sixteen pieces of data."
+	desc = "This stick of memory can store up to sixteen pieces of data."
 	icon_state = "memory16"
 	w_class = ITEM_SIZE_SMALL
 	spawn_flags = IC_SPAWN_RESEARCH
