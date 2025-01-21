@@ -718,8 +718,11 @@
 	var/mob/living/human/H = M
 	var/unique_enzymes = H.get_unique_enzymes()
 	var/blood_type     = H.get_blood_type()
+	var/blood_reagent  = H.species.blood_reagent
 	if(unique_enzymes && blood_type)
 		for(var/obj/effect/decal/cleanable/blood/B in contents)
+			if(B.chemical != blood_reagent)
+				continue
 			if(!LAZYACCESS(B.blood_DNA, unique_enzymes))
 				LAZYSET(B.blood_DNA, unique_enzymes, blood_type)
 				LAZYSET(B.blood_data, unique_enzymes, REAGENT_DATA(H.vessel, H.species.blood_reagent))
