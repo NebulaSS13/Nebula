@@ -303,12 +303,12 @@
 		update_clothing_icon()
 
 /obj/item/clothing/get_examine_name()
-	var/list/ensemble = list(name)
+	var/list/ensemble = list(..())
 	for(var/obj/item/clothing/accessory in accessories)
 		if(accessory.accessory_visibility == ACCESSORY_VISIBILITY_ENSEMBLE)
-			LAZYADD(ensemble, accessory.get_examine_name())
-	if(length(ensemble) <= 1)
-		return ..()
+			ensemble += accessory.get_examine_name()
+	if(length(ensemble) == 1) // don't worry about it being empty, we always have a minimum of one
+		return ensemble[1]
 	return english_list(ensemble, summarize = TRUE)
 
 /obj/item/clothing/get_examine_line()
