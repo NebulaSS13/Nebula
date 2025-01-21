@@ -110,7 +110,7 @@
 		create_reagents(FLUID_MAX_DEPTH)
 	return ..()
 
-/turf/add_to_reagents(reagent_type, amount, data, safety = FALSE, defer_update = FALSE, phase)
+/turf/add_to_reagents(reagent_type, amount, data, safety = FALSE, defer_update = FALSE, phase = null)
 	if(!reagents)
 		create_reagents(FLUID_MAX_DEPTH)
 	return ..()
