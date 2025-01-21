@@ -11,7 +11,7 @@
 	zone_membership_candidate = TRUE
 	open_turf_type = /turf/open/airless
 
-	// Reagent to use to fill the turf.
+	/// Reagent to use to refill trenches to capacity automatically.
 	var/fill_reagent_type
 	var/can_engrave = TRUE
 
@@ -69,7 +69,12 @@
 	var/my_height = get_physical_height()
 	if(fill_reagent_type && my_height < 0 && (!reagents || !QDELING(reagents)) && REAGENT_TOTAL_VOLUME(reagents) < abs(my_height))
 		var/reagents_to_add = abs(my_height) - REAGENT_TOTAL_VOLUME(reagents)
-		add_to_reagents(fill_reagent_type, reagents_to_add, phase = MAT_PHASE_LIQUID)
+		var/contaminant_to_add = 0
+		if(contaminant_reagent_type)
+			contaminant_to_add = CHEMS_QUANTIZE(reagents_to_add * contaminant_proportion)
+		add_to_reagents(fill_reagent_type, reagents_to_add - contaminant_to_add, phase = MAT_PHASE_LIQUID, defer_update = !!contaminant_to_add)
+		if(contaminant_to_add)
+			add_to_reagents(contaminant_reagent_type, contaminant_to_add, phase = MAT_PHASE_LIQUID)
 
 /turf/floor/can_climb_from_below(var/mob/climber)
 	return TRUE
