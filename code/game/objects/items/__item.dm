@@ -829,21 +829,19 @@
 		LAZYSET(blood_DNA, unique_enzymes, blood_type)
 	return TRUE
 
-var/global/list/_coating_overlay_cache = list()
+var/global/list/icon/_coating_overlay_cache = list()
 var/global/icon/_item_coating_mask = icon('icons/effects/blood.dmi', "itemblood")
 /obj/item/proc/generate_coating_overlay(force = FALSE)
 	if(coating_overlay && !force)
 		return
-	var/cache_key = "[icon]-[icon_state]"
-	if(global._coating_overlay_cache[cache_key])
-		coating_overlay = global._coating_overlay_cache[cache_key]
-		return
-	var/icon/I = new /icon(icon, icon_state)
-	I.MapColors(0,0,0, 0,0,0, 0,0,0, 1,1,1)         // Sets the icon RGB channel to pure white.
-	I.Blend(global._item_coating_mask, ICON_MULTIPLY) // Masks the coating overlay against the generated mask.
-	coating_overlay = image(I)
+	var/cache_key = "\ref[icon]-[icon_state]" // this needs to use ref because of stringification
+	if(!global._coating_overlay_cache[cache_key])
+		var/icon/I = new /icon(icon, icon_state)
+		I.MapColors(0,0,0, 0,0,0, 0,0,0, 1,1,1)         // Sets the icon RGB channel to pure white.
+		I.Blend(global._item_coating_mask, ICON_MULTIPLY) // Masks the coating overlay against the generated mask.
+		global._coating_overlay_cache[cache_key] = I
+	coating_overlay = image(global._coating_overlay_cache[cache_key])
 	coating_overlay.appearance_flags |= NO_CLIENT_COLOR|RESET_COLOR
-	global._coating_overlay_cache[cache_key] = coating_overlay
 
 /obj/item/proc/showoff(mob/user)
 	for(var/mob/M in view(user))
