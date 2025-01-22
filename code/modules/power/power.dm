@@ -183,7 +183,10 @@
 //power_source is a source of electricity, can be powercell, area, apc, cable, powernet or null
 //source is an object caused electrocuting (airlock, grille, etc)
 //No animations will be performed by this proc.
-/proc/electrocute_mob(mob/living/carbon/M, var/power_source, var/obj/source, var/siemens_coeff = 1.0)
+/proc/electrocute_mob(mob/living/carbon/M, power_source, obj/source, siemens_coeff = 1.0, coverage_flags = SLOT_HANDS)
+
+	coverage_flags = M?.get_active_hand_bodypart_flags() || coverage_flags
+
 	var/area/source_area
 	if(istype(power_source,/area))
 		source_area = power_source
@@ -214,13 +217,9 @@
 	//If following checks determine user is protected we won't alarm for long.
 	if(PN)
 		PN.trigger_warning(5)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.species.siemens_coefficient <= 0)
-			return
-		var/obj/item/clothing/gloves/G = H.get_equipped_item(slot_gloves_str)
-		if(istype(G) && G.siemens_coefficient == 0)
-			return 0 //to avoid spamming with insulated glvoes on
+
+	if(M.get_siemens_coefficient_for_coverage(coverage_flags) <= 0)
+		return
 
 	//Checks again. If we are still here subject will be shocked, trigger standard 20 tick warning
 	//Since this one is longer it will override the original one.

@@ -405,3 +405,9 @@
 		var/org = GET_EXTERNAL_ORGAN(src, hand_slot)
 		if(org)
 			LAZYDISTINCTADD(., org)
+
+/mob/proc/get_active_hand_bodypart_flags()
+	var/datum/inventory_slot/gripper/inv_slot = get_inventory_slot_datum(get_active_held_item_slot())
+	if(istype(inv_slot))
+		. = inv_slot.covering_slot_flags
+	. ||= SLOT_HANDS

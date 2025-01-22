@@ -97,7 +97,15 @@
 		apply_effect(agony_amount/10, EYE_BLUR)
 
 /mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, def_zone = null)
-	  return 0 //only carbon liveforms have this proc
+	SHOULD_CALL_PARENT(TRUE)
+	if(status_flags & GODMODE)
+		return 0
+	var/decl/species/my_species = get_species()
+	if(my_species?.species_flags & SPECIES_FLAG_ABSORB_ELECTRICITY)
+		spark_at(loc, amount=5, cardinal_only = TRUE)
+		LAZYADD(global.stored_shock_by_ref["\ref[src]"], shock_damage)
+		return 0
+	return shock_damage
 
 /mob/living/emp_act(severity)
 	var/list/L = src.get_contents()

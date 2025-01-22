@@ -85,7 +85,8 @@
 				add_overlay(I)
 
 /obj/structure/grille/Bumped(atom/user)
-	if(ismob(user)) shock(user, 70)
+	if(ismob(user))
+		shock(user, 70)
 
 /obj/structure/grille/attack_hand(mob/user)
 
@@ -226,25 +227,23 @@
 // returns 1 if shocked, 0 otherwise
 /obj/structure/grille/proc/shock(mob/user, prb)
 	if(!anchored || destroyed)		// anchored/destroyed grilles are never connected
-		return 0
+		return FALSE
 	if(!(material.conductive))
-		return 0
+		return FALSE
 	if(!prob(prb))
-		return 0
+		return FALSE
 	if(!in_range(src, user))//To prevent TK and exosuit users from getting shocked
-		return 0
-	var/turf/T = get_turf(src)
-	var/obj/structure/cable/C = T.get_cable_node()
-	if(C)
-		if(electrocute_mob(user, C, src))
-			if(C.powernet)
-				C.powernet.trigger_warning()
-			spark_at(src, cardinal_only = TRUE)
-			if(HAS_STATUS(user, STAT_STUN))
-				return 1
-		else
-			return 0
-	return 0
+		return FALSE
+	var/turf/my_turf = get_turf(src)
+	var/obj/structure/cable/cable = my_turf.get_cable_node()
+	if(!cable)
+		return FALSE
+	if(!electrocute_mob(user, cable, src))
+		return FALSE
+	if(cable.powernet)
+		cable.powernet.trigger_warning()
+	spark_at(src, cardinal_only = TRUE)
+	return !!HAS_STATUS(user, STAT_STUN)
 
 /obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!destroyed)

@@ -8,6 +8,7 @@
 #define SPECIES_FLAG_NO_BLOCK           BITFLAG(6) // Unable to block or defend itself from attackers.
 #define SPECIES_FLAG_NEED_DIRECT_ABSORB BITFLAG(7) // This species can only have their DNA taken by direct absorption.
 #define SPECIES_FLAG_LOW_GRAV_ADAPTED   BITFLAG(8) // This species is used to lower than standard gravity, affecting stamina in high-grav
+#define SPECIES_FLAG_ABSORB_ELECTRICITY BITFLAG(9) // This species can absorb electricity; snowflake flag for old slime people.
 
 // Species spawn flags
 #define SPECIES_IS_WHITELISTED             BITFLAG(0) // Must be whitelisted to play.

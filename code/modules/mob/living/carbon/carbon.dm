@@ -66,29 +66,26 @@
 		gib()
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
-	if(status_flags & GODMODE)	return 0	//godmode
 
-	shock_damage = apply_shock(shock_damage, def_zone, siemens_coeff)
-
-	if(!shock_damage)
+	shock_damage = ..()
+	if(shock_damage <= 0)
 		return 0
 
+	shock_damage = apply_shock(shock_damage, def_zone, siemens_coeff)
 	stun_effect_act(agony_amount=shock_damage, def_zone=def_zone)
-
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
-		src.visible_message(
-			"<span class='warning'>[src] was electrocuted[source ? " by the [source]" : ""]!</span>", \
-			"<span class='danger'>You feel a powerful shock course through your body!</span>", \
-			"<span class='warning'>You hear a heavy electrical crack.</span>" \
+		visible_message(
+			SPAN_DANGER("\The [src] was electrocuted[source ? " by the [source]" : ""]!"),
+			SPAN_DANGER("You feel a powerful shock course through your body!"),
+			SPAN_DANGER("You hear a heavy electrical crack.")
 		)
 	else
-		src.visible_message(
-			"<span class='warning'>[src] was shocked[source ? " by the [source]" : ""].</span>", \
-			"<span class='warning'>You feel a shock course through your body.</span>", \
-			"<span class='warning'>You hear a zapping sound.</span>" \
+		visible_message(
+			SPAN_DANGER("\The [src] was shocked[source ? " by the [source]" : ""]."),
+			SPAN_DANGER("You feel a shock course through your body."),
+			SPAN_DANGER("You hear a zapping sound.")
 		)
-
 	switch(shock_damage)
 		if(11 to 15)
 			SET_STATUS_MAX(src, STAT_STUN, 1)
@@ -100,11 +97,8 @@
 			SET_STATUS_MAX(src, STAT_WEAK, 5)
 		if(31 to INFINITY)
 			SET_STATUS_MAX(src, STAT_WEAK, 10) //This should work for now, more is really silly and makes you lay there forever
-
 	set_status(STAT_JITTER, min(shock_damage*5, 200))
-
 	spark_at(loc, amount=5, cardinal_only = TRUE)
-
 	return shock_damage
 
 /mob/living/carbon/proc/apply_shock(var/shock_damage, var/def_zone, var/siemens_coeff = 1.0)

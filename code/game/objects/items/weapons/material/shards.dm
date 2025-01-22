@@ -104,7 +104,7 @@
 	playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1) // not sure how to handle metal shards with sounds
 
 	var/decl/species/walker_species = M.get_species()
-	if(walker_species && (walker_species.siemens_coefficient<0.5 || (walker_species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))) //Thick skin.
+	if(walker_species?.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)) //Thick skin.
 		return
 
 	var/obj/item/shoes = M.get_equipped_item(slot_shoes_str)

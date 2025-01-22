@@ -124,17 +124,21 @@
 
 /mob/living/silicon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, def_zone = null)
 
-	if (istype(source, /obj/effect/containment_field))
-		spark_at(loc, amount=5, cardinal_only = TRUE)
+	shock_damage = ..()
+	if(shock_damage <= 0 || !istype(source, /obj/effect/containment_field))
+		return 0
 
-		shock_damage *= 0.75	//take reduced damage
-		take_overall_damage(0, shock_damage)
-		visible_message("<span class='warning'>\The [src] was shocked by \the [source]!</span>", \
-			"<span class='danger'>Energy pulse detected, system damaged!</span>", \
-			"<span class='warning'>You hear an electrical crack</span>")
-		if(prob(20))
-			SET_STATUS_MAX(src, STAT_STUN, 2)
-		return
+	spark_at(loc, amount=5, cardinal_only = TRUE)
+	shock_damage *= 0.75	//take reduced damage
+	take_overall_damage(0, shock_damage)
+	visible_message(
+		SPAN_DANGER("\The [src] was shocked by \the [source]!"),
+		SPAN_DANGER("Energy pulse detected, system damaged!"),
+		SPAN_DANGER("You hear an electrical crack.")
+	)
+	if(prob(20))
+		SET_STATUS_MAX(src, STAT_STUN, 2)
+	return shock_damage
 
 /mob/living/silicon/proc/damage_mob(var/brute = 0, var/fire = 0, var/tox = 0)
 	return
