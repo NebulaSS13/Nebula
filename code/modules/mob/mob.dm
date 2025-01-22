@@ -1401,8 +1401,8 @@
 
 /// THIS DOES NOT RELATE TO HELD ITEM SLOTS. It is very specifically a functional BP_L_HAND or BP_R_HAND organ, not necessarily a gripper.
 /mob/proc/get_usable_hand_slot_organ()
-	var/obj/item/organ/external/paw = GET_EXTERNAL_ORGAN(src, BP_L_HAND)
-	if(!istype(paw) && !paw.is_usable())
-		paw = GET_EXTERNAL_ORGAN(src, BP_R_HAND)
-	if(istype(paw) && paw.is_usable())
-		return paw
+	var/static/list/hand_slots = list(BP_L_HAND, BP_R_HAND)
+	for(var/slot in shuffle(hand_slots))
+		var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(src, slot)
+		if(istype(hand) && hand.is_usable())
+			return hand
