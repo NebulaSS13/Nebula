@@ -44,8 +44,7 @@
 	if(floortype)
 		set_flooring(GET_DECL(floortype), skip_update = TRUE)
 
-	if(fill_reagent_type && get_physical_height() < 0)
-		add_to_reagents(fill_reagent_type, abs(height), phase = MAT_PHASE_LIQUID)
+	fill_to_zero_height() // try to refill turfs that act as fluid sources
 
 	if(floor_material || get_topmost_flooring())
 		if(ml)
@@ -71,6 +70,12 @@
 		STOP_PROCESSING(SSobj, src)
 	return ..()
 
+/turf/floor/proc/fill_to_zero_height()
+	var/my_height = get_physical_height()
+	if(fill_reagent_type && my_height < 0 && (!reagents || !QDELING(reagents)) && reagents?.total_volume < abs(my_height))
+		var/reagents_to_add = abs(my_height) - reagents?.total_volume
+		add_to_reagents(fill_reagent_type, reagents_to_add, phase = MAT_PHASE_LIQUID)
+
 /turf/floor/can_climb_from_below(var/mob/climber)
 	return TRUE
 
@@ -92,9 +97,9 @@
 
 /turf/floor/on_reagent_change()
 	. = ..()
-	var/my_height = get_physical_height()
-	if(!QDELETED(src) && fill_reagent_type && my_height < 0 && !QDELETED(reagents) && reagents.total_volume < abs(my_height))
-		add_to_reagents(fill_reagent_type, abs(my_height) - reagents.total_volume)
+	if(!QDELETED(src))
+		fill_to_zero_height()
+		update_floor_strings()
 
 /turf/floor/proc/set_base_flooring(new_base_flooring, skip_update)
 	if(ispath(new_base_flooring, /decl/flooring))
