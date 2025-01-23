@@ -218,11 +218,11 @@
 	difficulty             = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/planks/furniture/barrel
-	result_type            = /obj/structure/reagent_dispensers/barrel
+	result_type            = /obj/structure/reagent_dispensers/barrel/crafted
 	difficulty             = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/planks/furniture/barrel/cask
-	result_type            = /obj/structure/reagent_dispensers/barrel/cask
+	result_type            = /obj/structure/reagent_dispensers/barrel/cask/crafted
 
 /decl/stack_recipe/planks/furniture/barrel/cask_rack
 	result_type            = /obj/structure/cask_rack

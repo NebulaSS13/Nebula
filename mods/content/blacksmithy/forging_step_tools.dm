@@ -58,3 +58,7 @@
 /decl/forging_step/product/nails
 	billet_name = "nails"
 	product_type = /obj/item/stack/material/nail/twelve
+
+/decl/forging_step/product/barrel_rim
+	billet_name = "barrel rim"
+	product_type = /obj/item/barrel_rim
