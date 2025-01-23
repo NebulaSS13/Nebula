@@ -54,3 +54,7 @@
 /decl/forging_step/product/forging_hammer_head
 	billet_name = "forging hammer head"
 	product_type = /obj/item/tool_component/head/forging_hammer
+
+/decl/forging_step/product/nails
+	billet_name = "nails"
+	product_type = /obj/item/stack/material/nail/twelve

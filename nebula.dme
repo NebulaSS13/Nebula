@@ -2686,6 +2686,7 @@
 #include "code\modules\materials\material_stack_logs.dm"
 #include "code\modules\materials\material_stack_lump.dm"
 #include "code\modules\materials\material_stack_misc.dm"
+#include "code\modules\materials\material_stack_nail.dm"
 #include "code\modules\materials\material_synth.dm"
 #include "code\modules\materials\materials_ore.dm"
 #include "code\modules\materials\definitions\gasses\_mat_gas.dm"
