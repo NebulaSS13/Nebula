@@ -190,14 +190,7 @@
 	return 0
 
 /mob/living/silicon/robot/Destroy()
-	if(central_processor)
-		central_processor.dropInto(loc)
-		var/mob/living/brainmob = central_processor.get_brainmob()
-		if(mind && brainmob)
-			mind.transfer_to(brainmob)
-		else
-			ghostize()
-		central_processor = null
+	QDEL_NULL(central_processor)
 	if(connected_ai)
 		connected_ai.connected_robots -= src
 	connected_ai = null
@@ -518,8 +511,8 @@
 					SPAN_NOTICE("\The [user] begins ripping \the [central_processor] out of \the [src]."),
 					SPAN_NOTICE("You jam the crowbar into the robot and begin levering out \the [central_processor]."))
 
-				if(do_after(user, 50, src))
-					dismantle(user)
+				if(do_after(user, 5 SECONDS, src))
+					dismantle_robot(user)
 			else
 				// Okay we're not removing the cell or a CPU, but maybe something else?
 				var/list/removable_components = list()
@@ -1042,10 +1035,29 @@
 		return 1
 	return ..()
 
-/mob/living/silicon/robot/proc/dismantle(var/mob/user)
-	to_chat(user, SPAN_NOTICE("You damage some parts of the chassis, but eventually manage to rip out the central processor."))
-	var/obj/item/robot_parts/robot_suit/C = new dismantle_type(loc)
-	C.dismantled_from(src)
+/mob/living/silicon/robot/gib(do_gibs)
+	SHOULD_CALL_PARENT(FALSE)
+	var/lastloc = loc
+	dismantle_robot()
+	if(lastloc && do_gibs)
+		spawn_gibber(lastloc)
+
+/mob/living/silicon/robot/proc/dismantle_robot(var/mob/user)
+
+	if(central_processor)
+		if(user)
+			to_chat(user, SPAN_NOTICE("You damage some parts of the chassis, but eventually manage to rip out \the [central_processor]."))
+		central_processor.dropInto(loc)
+		var/mob/living/brainmob = central_processor.get_brainmob(create_if_missing = TRUE)
+		if(mind && brainmob)
+			mind.transfer_to(brainmob)
+		else
+			ghostize()
+		central_processor.update_icon()
+		central_processor = null
+
+	var/obj/item/robot_parts/robot_suit/chassis = new dismantle_type(loc)
+	chassis.dismantled_from(src)
 	qdel(src)
 
 /mob/living/silicon/robot/try_stock_parts_install(obj/item/stock_parts/W, mob/user)

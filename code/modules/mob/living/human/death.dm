@@ -33,11 +33,8 @@
 	if(!gibbed)
 		set_tail_animation_state(null, TRUE)
 		handle_organs()
-		if(species.death_sound)
-			playsound(loc, species.death_sound, 80, 1, 1)
 	if(SSticker.mode)
 		SSticker.mode.check_win()
-	species.handle_death(src)
 
 /mob/living/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
 	for(var/obj/item/organ/external/limb in get_external_organs())

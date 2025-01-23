@@ -11,3 +11,9 @@
 		stop_aiming(no_message=1)
 		if(istype(ai))
 			ai.handle_death(gibbed)
+
+		var/decl/species/my_species = get_species()
+		if(my_species)
+			if(!gibbed && my_species.death_sound)
+				playsound(loc, my_species.death_sound, 80, 1, 1)
+			my_species.handle_death(src)

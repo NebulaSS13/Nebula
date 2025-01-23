@@ -44,7 +44,7 @@
 		container.queue_icon_update()
 
 /mob/living/brain/proc/get_container()
-	. = loc?.loc
+	return get_recursive_loc_of_type(/obj/item/organ/internal)
 
 /mob/living/brain/Login()
 	. = ..()
