@@ -111,7 +111,7 @@
 		moving = FALSE
 
 //For children to override
-/atom/movable/proc/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
+/atom/movable/proc/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	if(immune_to_floor_hazards())
 		return FALSE
 
@@ -137,16 +137,16 @@
 
 	return TRUE
 
-/obj/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
-	return ..(anchor_fall)
+/obj/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
+	return ..(anchor_fall, location_override)
 
-/obj/effect/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
+/obj/effect/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return FALSE
 
-/obj/effect/decal/cleanable/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
+/obj/effect/decal/cleanable/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return TRUE
 
-/obj/item/pipe/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
+/obj/item/pipe/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	var/turf/open/below = loc
 	below = below.below
 
@@ -158,18 +158,21 @@
 	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up) in below)
 		return FALSE
 
-/mob/living/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
+/mob/living/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	if((. = ..()))
 		var/decl/species/my_species = get_species()
 		if(my_species)
 			return my_species.can_fall(src)
 
 /atom/movable/proc/protected_from_fall_damage(var/turf/landing)
-	if(!!(locate(/obj/structure/stairs) in landing))
-		return TRUE
-	var/turf/wall/natural/ramp = landing
-	if(istype(ramp) && ramp.ramp_slope_direction) // walking down a ramp
-		return TRUE
+	// Stairs and ramps will not save you from a high drop.
+	if(get_fall_height() <= 1)
+		if(!!(locate(/obj/structure/stairs) in landing))
+			return TRUE
+		var/turf/wall/natural/ramp = landing
+		if(istype(ramp) && ramp.ramp_slope_direction) // walking down a ramp
+			return TRUE
+	return FALSE
 
 /mob/protected_from_fall_damage(var/turf/landing)
 	. = ..()
@@ -213,10 +216,16 @@
 
 /atom/movable/proc/handle_fall_effect(var/turf/landing)
 	SHOULD_CALL_PARENT(TRUE)
-	if(istype(landing) && landing.is_open())
-		visible_message("\The [src] falls through \the [landing]!", "You hear a whoosh of displaced air.")
+	if(istype(landing) && can_fall() && landing.CanZPass(src, DOWN))
+		visible_message(
+			SPAN_NOTICE("\The [src] falls through \the [landing]!"),
+			"You hear a whoosh of displaced air."
+		)
 	else
-		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the [global.using_map.ground_noun].")
+		visible_message(
+			SPAN_DANGER("\The [src] slams into [landing.is_open() ? "\the [landing]" : "an obstacle"]!"),
+			"You hear something slam into the [global.using_map.ground_noun]."
+		)
 		var/fall_damage = fall_damage() * get_fall_height()
 		if(fall_damage > 0)
 			for(var/mob/living/M in landing.contents)
@@ -421,7 +430,7 @@
 	owner = null
 	. = ..()
 
-/atom/movable/z_observer/can_fall()
+/atom/movable/z_observer/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return FALSE
 
 /atom/movable/z_observer/explosion_act()

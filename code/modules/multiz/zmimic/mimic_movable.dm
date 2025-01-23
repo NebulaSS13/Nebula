@@ -49,7 +49,7 @@
 	mouse_opacity = FALSE
 	abstract_type = /atom/movable/openspace // unsure if this is valid, check with Lohi -- Yes, it's valid.
 
-/atom/movable/openspace/can_fall()
+/atom/movable/openspace/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return FALSE
 
 // No blowing up abstract objects.

@@ -25,9 +25,9 @@
 		return ..(dir)
 	return ..(ndir)
 
-/mob/living/exosuit/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = src.loc)
+/mob/living/exosuit/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	//mechs are always anchored, so falling should always ignore it
-	if(..(TRUE, location_override))
+	if((. = ..(TRUE, location_override)))
 		return !(can_overcome_gravity())
 
 //For swimming

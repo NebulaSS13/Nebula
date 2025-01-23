@@ -46,7 +46,7 @@
 /mob/living/silicon/robot/flying/Process_Spacemove()
 	return (pass_flags & PASS_FLAG_TABLE) || ..()
 
-/mob/living/silicon/robot/flying/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
+/mob/living/silicon/robot/flying/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return !Process_Spacemove()
 
 /mob/living/silicon/robot/flying/can_overcome_gravity()

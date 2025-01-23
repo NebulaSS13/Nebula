@@ -146,7 +146,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return
 
-/atom/movable/lighting_overlay/can_fall()
+/atom/movable/lighting_overlay/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return FALSE
 
 // Override here to prevent things accidentally moving around overlays.
