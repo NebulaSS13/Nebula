@@ -24,7 +24,7 @@
 	to_chat(user, SPAN_NOTICE("You begin working \the [src], stoking \the [stoking] to a hotter flame."))
 	start_working()
 	while(user.do_skilled(3 SECONDS, work_skill, src))
-		if(QDELETED(src) || QDELETED(user) || user.get_stamina() <= 0)
+		if(QDELETED(src) || QDELETED(user) || user.get_stamina() < 25 || !user.get_empty_hand_slot())
 			break
 		stoking = locate() in get_step(loc, EAST)
 		if(!istype(stoking) || !stoking.lit)

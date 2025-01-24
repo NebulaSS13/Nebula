@@ -193,6 +193,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/max_fluid_opacity = FLUID_MAX_ALPHA
 	/// Point at which the fluid will proc turf interaction logic. Workaround for mops being ruined forever by 1u of anything else being added.
 	var/turf_touch_threshold = FLUID_QDEL_POINT
+	/// Whether or not billets of this material will glow with heat.
+	var/glows_with_heat = FALSE
 
 	// Damage values.
 	var/hardness = MAT_VALUE_HARD       // Used for edge damage in weapons.
@@ -371,6 +373,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	/// Assoc weighted list of gemstone material types to weighting.
 	var/list/gemstone_types
 
+	var/forgable = FALSE // Can this material be forged in bar/billet form?
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
 	if(!used_stack.can_use(use_sheets))
@@ -444,6 +448,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		burn_product                 = null
 		vapor_products               = null
 		compost_value                = 0
+		forgable                     = FALSE
 	else if(isnull(temperature_damage_threshold))
 		var/new_temperature_damage_threshold = max(melting_point, boiling_point, heating_point)
 		// Don't let the threshold be lower than the ignition point.

@@ -502,7 +502,7 @@
 		return 0
 	return max(ITEM_SIZE_MIN, get_object_size()) * THERMAL_MASS_CONSTANT
 
-/atom/movable/get_thermal_mass_coefficient()
+/atom/movable/get_thermal_mass_coefficient(delta)
 	if(!simulated)
 		return 0
 	return (max(ITEM_SIZE_MIN, MOB_SIZE_MIN) * THERMAL_MASS_CONSTANT) / get_thermal_mass()

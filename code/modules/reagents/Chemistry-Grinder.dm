@@ -242,9 +242,9 @@
 	else
 		user.take_blood(beaker, dam)
 	SET_STATUS_MAX(user, STAT_STUN, 2)
-	shake(user, 40)
+	shake_target(user, 4 SECONDS)
 
-/obj/machinery/reagentgrinder/proc/shake(mob/living/user, duration)
+/obj/machinery/reagentgrinder/proc/shake_target(mob/living/user, duration)
 	if(!user)
 		return
 	for(var/i = 1 to duration)

@@ -244,5 +244,5 @@
 /datum/fabricator_recipe/chipboard/yew/get_resources()
 	resources = list(
 		/decl/material/solid/organic/wood/yew = ceil((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2),
-		/decl/material/solid/organic/plastic    = ceil((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2)
+		/decl/material/solid/organic/plastic  = ceil((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2)
 	)

@@ -107,12 +107,16 @@ steam.start() -- spawns the effect
 /obj/effect/sparks/struck
 	spark_sound = "light_bic"
 
+/obj/effect/sparks/silent
+	spark_sound = null
+
 /obj/effect/sparks/Initialize()
 	. = ..()
 	// this is 2 seconds so that it doesn't appear to freeze after its last move, which ends up making it look like timers are broken
 	// if you change the number of or delay between moves in spread(), this may need to be changed
 	QDEL_IN(src, 2 SECONDS)
-	playsound(loc, spark_sound, 100, 1)
+	if(spark_sound)
+		playsound(loc, spark_sound, 100, 1)
 	set_light(lit_light_range, lit_light_power, lit_light_color)
 	if(isturf(loc))
 		var/turf/T = loc
@@ -139,6 +143,9 @@ steam.start() -- spawns the effect
 
 /datum/effect/effect/system/spark_spread
 	var/spark_type = /obj/effect/sparks
+
+/datum/effect/effect/system/spark_spread/silent
+	spark_type = /obj/effect/sparks/silent
 
 /datum/effect/effect/system/spark_spread/non_electrical
 	spark_type = /obj/effect/sparks/struck

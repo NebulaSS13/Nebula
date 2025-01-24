@@ -33,7 +33,8 @@
 
 	user.visible_message(
 		SPAN_DANGER("\The [user] shakes \the [src]!"),
-		SPAN_DANGER("You shake \the [src]!"))
+		SPAN_DANGER("You shake \the [src]!")
+	)
 
 	object_shaken()
 	return TRUE

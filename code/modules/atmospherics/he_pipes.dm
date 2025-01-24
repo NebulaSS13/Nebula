@@ -107,6 +107,13 @@
 	else
 		set_light(0, 0)
 
+		//fancy radiation glowing
+		if(pipe_air.temperature && (icon_temperature > 500 || pipe_air.temperature > 500)) //start glowing at 500K
+			if(abs(pipe_air.temperature - icon_temperature) > 10)
+				animate_heat_glow(pipe_air.temperature)
+		else
+			set_light(0, 0)
+
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	icon = 'icons/atmos/junction.dmi'
 	icon_state = "11"

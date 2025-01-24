@@ -202,6 +202,9 @@
 		else
 			to_chat(user, "\The [src] is empty.")
 
+	if(check_rights(R_DEBUG, 0, user))
+		to_chat(user, "\The [src] has a temperature of [temperature]K, an effective burn temperature of [get_effective_burn_temperature()]K and a fuel value of [fuel].")
+
 /obj/structure/fire_source/attack_hand(var/mob/user)
 
 	var/list/removable_atoms = get_removable_atoms()

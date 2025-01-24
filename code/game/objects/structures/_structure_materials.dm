@@ -3,6 +3,7 @@
 	var/decl/material/reinf_material
 	var/material_alteration
 	var/dismantled
+	var/name_prefix
 
 /obj/structure/get_material()
 	RETURN_TYPE(/decl/material)
@@ -37,10 +38,14 @@
 
 /obj/structure/proc/update_material_name(var/override_name)
 	var/base_name = override_name || initial(name)
+	var/new_name
 	if(istype(material) && (material_alteration & MAT_FLAG_ALTERATION_NAME))
-		SetName("[material.adjective_name] [base_name]")
+		new_name = "[material.adjective_name] [base_name]"
 	else
-		SetName(base_name)
+		new_name = base_name
+	if(name_prefix)
+		new_name = "[name_prefix] [new_name]"
+	SetName(new_name)
 
 /obj/structure/proc/update_material_desc(var/override_desc)
 	var/base_desc = override_desc || initial(desc)

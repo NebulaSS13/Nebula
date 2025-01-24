@@ -20,9 +20,6 @@
 	var/protects_against_weather = TRUE
 	/// What kind of tree stump we leaving behind.
 	var/stump_type
-	/// How much to shake the tree when struck.
-	/// Larger trees should have smaller numbers or it looks weird.
-	var/shake_animation_degrees = 4
 	/// Marker for repeating the cut sound effect and animation.
 	var/someone_is_cutting = FALSE
 
@@ -55,31 +52,20 @@
 /obj/structure/flora/tree/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	. = ..()
 	if(!QDELETED(src) && damage >= 5)
-		shake()
+		shake_animation()
 
 // We chop several times to cut down a tree.
 /obj/structure/flora/tree/play_cut_sound(mob/user)
-	shake()
+	shake_animation()
 	while(someone_is_cutting)
 		sleep(1 SECOND)
 		if(QDELETED(src))
 			return
-		shake()
+		shake_animation()
 		playsound(src, 'sound/items/axe_wood.ogg', 40, TRUE)
 	if(QDELETED(src) || QDELETED(user) || !user.Adjacent(src))
 		return
 	return ..()
-
-// Tree shake animation stolen from Polaris.
-/obj/structure/flora/tree/proc/shake()
-	set waitfor = FALSE
-	var/init_px = pixel_x
-	var/shake_dir = pick(-1, 1)
-	var/matrix/M = matrix()
-	M.Scale(icon_scale_x, icon_scale_y)
-	M.Translate(0, 16*(icon_scale_y-1))
-	animate(src, transform=turn(M, shake_animation_degrees * shake_dir), pixel_x=init_px + 2*shake_dir, time=1)
-	animate(transform=M, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
 
 /obj/structure/flora/tree/create_dismantled_products(turf/T)
 	if(log_type)

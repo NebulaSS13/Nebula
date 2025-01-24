@@ -84,6 +84,10 @@
 	icon        = 'icons/obj/items/tool/hammers/forge.dmi'
 	w_class     = ITEM_SIZE_NORMAL
 
+/obj/item/tool/hammer/forge/iron
+	material        = /decl/material/solid/metal/iron
+	handle_material = /decl/material/solid/organic/wood/mahogany
+
 // Forging hammers are not great at general hammer tasks (too heavy I guess),
 // and also don't work as crowbars due to missing the nail ripper/flange,
 // but will be more effective at forging when blacksmithy is merged.

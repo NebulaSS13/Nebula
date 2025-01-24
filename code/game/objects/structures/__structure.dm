@@ -137,7 +137,9 @@
 		else
 			damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
 
-	playsound(loc, hitsound, 60, 1)
+	if(!silent)
+		playsound(loc, hitsound, 60, 1)
+
 	var/current_max_health = get_max_health()
 	current_health = clamp(current_health - damage, 0, current_max_health)
 	show_damage_message(current_health/current_max_health)
@@ -340,4 +342,3 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 		visible_message(SPAN_DANGER("\The [src] was hit by \the [AM]."))
 		playsound(src.loc, hitsound, 100, 1)
 		take_damage(AM.get_thrown_attack_force() * (TT.speed/THROWFORCE_SPEED_DIVISOR), AM.atom_damage_type)
-

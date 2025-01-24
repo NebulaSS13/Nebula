@@ -391,6 +391,9 @@
 	if(drying_wetness > 0 && drying_wetness != initial(drying_wetness))
 		desc_comp += "\The [src] is [get_dryness_text()]."
 
+	if(check_rights(R_DEBUG, 0, user))
+		to_chat(user, "\The [src] has a temperature of [temperature]K.")
+
 	return ..(user, distance, "", jointext(desc_comp, "<br/>"))
 
 /obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)

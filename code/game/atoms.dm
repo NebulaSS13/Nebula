@@ -966,7 +966,7 @@
 /atom/proc/get_thermal_mass()
 	return 0
 
-/atom/proc/get_thermal_mass_coefficient()
+/atom/proc/get_thermal_mass_coefficient(delta)
 	return 1
 
 /atom/proc/spark_act(obj/effect/sparks/sparks)

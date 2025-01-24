@@ -101,7 +101,7 @@
 
 //random stuff
 /obj/item/knife/hook
-	name = "meat hook"
+	name = "hook"
 	desc = "A sharp, metal hook what sticks into things."
 	icon = 'icons/obj/items/weapon/knives/hook.dmi'
 	sharp = FALSE

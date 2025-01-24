@@ -26,7 +26,7 @@
 /area/shaded_hills/caves/dungeon/poi)
 "cp" = (
 /obj/structure/table/wood/ebony,
-/obj/item/bladed/knife,
+/obj/item/bladed/knife/iron,
 /turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "cM" = (
@@ -213,7 +213,7 @@
 /area/shaded_hills/caves/dungeon/poi)
 "ob" = (
 /obj/structure/table/wood/ebony,
-/obj/item/bladed/knife,
+/obj/item/bladed/knife/iron,
 /turf/floor/path/herringbone/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "ok" = (
@@ -406,7 +406,7 @@
 "BG" = (
 /obj/structure/table/wood/ebony,
 /obj/item/stack/material/thread/mapped/cotton/thirty,
-/obj/item/bladed/knife,
+/obj/item/bladed/knife/iron,
 /turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
 "Cu" = (
