@@ -103,7 +103,7 @@
 
 /decl/loadout_option/suit/nanotrasen_poncho
 	name = "poncho, NanoTrasen"
-	path = /obj/item/clothing/suit/poncho/roles/science/nanotrasen
+	path = /obj/item/clothing/suit/poncho/science/nanotrasen
 	uid = "gear_suit_corpponcho"
 
 /decl/loadout_option/suit/corp_jacket
@@ -121,7 +121,7 @@
 
 /decl/loadout_option/suit/science_poncho
 	name = "poncho, science"
-	path = /obj/item/clothing/suit/poncho/roles/science
+	path = /obj/item/clothing/suit/poncho/science
 	uid = "gear_suit_corpponcho_science"
 
 /decl/loadout_option/suit/hoodie_nt

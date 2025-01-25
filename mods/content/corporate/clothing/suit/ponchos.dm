@@ -1,10 +1,10 @@
-/obj/item/clothing/suit/poncho/roles/science
+/obj/item/clothing/suit/poncho/science
 	name = "science poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is white with a few bottle green stripes, corporate colors."
 	bodytype_equip_flags = null
 	icon = 'mods/content/corporate/icons/clothing/suit/sci_poncho.dmi'
 
-/obj/item/clothing/suit/poncho/roles/science/nanotrasen
+/obj/item/clothing/suit/poncho/science/nanotrasen
 	name = "\improper NanoTrasen poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is white with a few red stripes, colors of NanoTrasen. Go NanoTrasen!"
 	icon = 'mods/content/corporate/icons/clothing/suit/nt_poncho.dmi'
