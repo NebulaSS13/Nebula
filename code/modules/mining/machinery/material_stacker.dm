@@ -44,9 +44,11 @@
 			qdel(S)
 
 		if(emagged)
-			for(var/mob/living/M in input_turf)
-				visible_message(SPAN_DANGER("\The [src] squashes \the [src] with its stacking mechanism!"))
-				M.take_overall_damage(rand(10, 20), 0)
+			for(var/mob/living/victim in input_turf)
+				if(!victim.simulated)
+					continue
+				visible_message(SPAN_DANGER("\The [src] squashes \the [victim] with its stacking mechanism!"))
+				victim.take_overall_damage(rand(10, 20), 0)
 				break
 
 	if(output_turf)
