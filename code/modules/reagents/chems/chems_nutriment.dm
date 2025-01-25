@@ -32,7 +32,6 @@
 	lore_text = "Mollusc meat, or slug meat - something slimy, anyway."
 	scannable = 1
 	taste_description = "cold, bitter slime"
-	overdose = 10
 	hydration_factor = 6
 	uid = "chem_nutriment_slime"
 	allergen_flags = ALLERGEN_MEAT | ALLERGEN_FISH
