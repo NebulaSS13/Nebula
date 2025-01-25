@@ -30,7 +30,7 @@
 	name = "University Ship"
 	description = "CTI research ship."
 	suffixes = list("unishi/unishi-1.dmm", "unishi/unishi-2.dmm", "unishi/unishi-3.dmm")
-	cost = 2
+	cost = 1
 	area_usage_test_exempted_root_areas = list(/area/unishi)
 
 

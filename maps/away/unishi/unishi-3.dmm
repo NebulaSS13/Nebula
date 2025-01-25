@@ -248,8 +248,7 @@
 /obj/item/clothing/suit/armor/pcarrier/tan,
 /obj/item/clothing/suit/armor/pcarrier/tan,
 /obj/machinery/recharger/wallcharger{
-	pixel_y = -30;
-	dir = 1
+	pixel_y = -30
 	},
 /turf/floor,
 /area/unishi/bridge)
@@ -1744,6 +1743,9 @@
 	dir = 10
 	},
 /obj/structure/closet/crate/bin,
+/obj/item/clothing/suit/space/void/indie,
+/obj/item/clothing/head/helmet/space/void/indie,
+/obj/item/tank/oxygen,
 /turf/floor/tiled,
 /area/unishi/living)
 "eM" = (
@@ -2000,6 +2002,20 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/turf/floor/tiled,
+/area/unishi/living)
+"Dj" = (
+/obj/structure/closet/emcloset,
+/obj/item/clothing/suit/space/void/indie,
+/obj/item/clothing/head/helmet/space/void/indie,
+/obj/item/tank/oxygen,
+/turf/floor/tiled,
+/area/unishi/living)
+"Ew" = (
+/obj/structure/closet/emcloset,
+/obj/item/clothing/head/helmet/space/void/indie,
+/obj/item/clothing/suit/space/void/indie,
+/obj/item/tank/oxygen,
 /turf/floor/tiled,
 /area/unishi/living)
 "Um" = (
@@ -6863,7 +6879,7 @@ bf
 bf
 bf
 eq
-dF
+Ew
 bf
 bf
 eD
@@ -7160,7 +7176,7 @@ bf
 dm
 du
 bf
-dF
+Dj
 dM
 bf
 dV
