@@ -21,7 +21,7 @@
 /obj/item/clothing/suit/apron/colourable
 	desc = "A basic apron, good for protecting your clothes."
 	icon = 'icons/clothing/suits/apron_colourable.dmi'
-	color = null
+	paint_color = null
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
 //Captain
