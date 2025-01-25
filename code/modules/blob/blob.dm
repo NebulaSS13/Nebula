@@ -12,19 +12,19 @@
 
 	layer = BLOB_SHIELD_LAYER
 
-	max_health = 30
+	max_health = 15
 
-	var/regen_rate = 5
-	var/brute_resist = 4.3
-	var/fire_resist = 0.8
-	var/laser_resist = 2	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_resist.
+	var/regen_rate = 2.5
+	var/brute_damage_divisor = 4.3
+	var/fire_damage_divisor = 1.1
+	var/laser_damage_divisor = 2	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_damage_divisor.
 	var/expandType = /obj/effect/blob
-	var/secondary_core_growth_chance = 5 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
+	var/secondary_core_growth_chance = 2.5 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
 	var/damage_min = 15
 	var/damage_max = 30
 	var/pruned = FALSE
 	var/product = /obj/item/blob_tendril
-	var/attack_freq = 5 //see proc/attempt_attack; lower is more often, min 1
+	var/attack_freq = 7.5 //see proc/attempt_attack; lower is more often, min 1
 
 /obj/effect/blob/Initialize()
 	. = ..()
@@ -42,7 +42,7 @@
 
 /obj/effect/blob/explosion_act(var/severity)
 	SHOULD_CALL_PARENT(FALSE)
-	take_damage(rand(140 - (severity * 40), 140 - (severity * 20)) / brute_resist)
+	take_damage(rand(140 - (severity * 40), 140 - (severity * 20)) / brute_damage_divisor)
 
 /obj/effect/blob/on_update_icon()
 	if(current_health > get_max_health() / 2)
@@ -123,7 +123,7 @@
 
 /obj/effect/blob/proc/do_pulse(var/forceLeft, var/list/dirs)
 	set waitfor = FALSE
-	sleep(4)
+	sleep(8)
 	var/pushDir = pick(dirs)
 	var/turf/T = get_step(src, pushDir)
 	var/obj/effect/blob/B = (locate() in T)
@@ -156,9 +156,9 @@
 
 	switch(Proj.atom_damage_type)
 		if(BRUTE)
-			take_damage(Proj.damage / brute_resist, Proj.atom_damage_type)
+			take_damage(Proj.damage / brute_damage_divisor, Proj.atom_damage_type)
 		if(BURN)
-			take_damage((Proj.damage / laser_resist) / fire_resist, Proj.atom_damage_type)
+			take_damage((Proj.damage / laser_damage_divisor) / fire_damage_divisor, Proj.atom_damage_type)
 	return 0
 
 /obj/effect/blob/attackby(var/obj/item/W, var/mob/user)
@@ -182,11 +182,11 @@
 	var/damage = 0
 	switch(W.atom_damage_type)
 		if(BURN)
-			damage = (W.expend_attack_force(user) / fire_resist)
+			damage = (W.expend_attack_force(user) / fire_damage_divisor)
 			if(IS_WELDER(W))
 				playsound(loc, 'sound/items/Welder.ogg', 100, 1)
 		if(BRUTE)
-			damage = (W.expend_attack_force(user) / brute_resist)
+			damage = (W.expend_attack_force(user) / brute_damage_divisor)
 
 	take_damage(damage, W.atom_damage_type)
 	return TRUE
@@ -195,7 +195,7 @@
 	name = "master nucleus"
 	desc = "A massive, fragile nucleus guarded by a shield of thick tendrils."
 	icon_state = "blob_core"
-	max_health = 450
+	max_health = 225
 	damage_min = 30
 	damage_max = 40
 	expandType = /obj/effect/blob/shield
@@ -216,28 +216,28 @@ regen() will cover update_icon() for this proc
 /obj/effect/blob/core/proc/process_core_health()
 	switch(get_health_percent())
 		if(75 to INFINITY)
-			brute_resist = 3.5
-			fire_resist = 2
+			brute_damage_divisor = 3.5
+			fire_damage_divisor = 2.5
 			attack_freq = 5
 			regen_rate = 2
 			times_to_pulse = 4
 			if(reported_low_damage)
 				report_shield_status("high")
 		if(50 to 74)
-			brute_resist = 2.5
-			fire_resist = 1.5
+			brute_damage_divisor = 2.5
+			fire_damage_divisor = 2
 			attack_freq = 4
 			regen_rate = 3
 			times_to_pulse = 3
 		if(34 to 49)
-			brute_resist = 1
-			fire_resist = 0.8
+			brute_damage_divisor = 1
+			fire_damage_divisor = 1.1
 			attack_freq = 3
 			regen_rate = 4
 			times_to_pulse = 2
 		if(-INFINITY to 33)
-			brute_resist = 0.5
-			fire_resist = 0.3
+			brute_damage_divisor = 0.5
+			fire_damage_divisor = 0.35
 			regen_rate = 5
 			times_to_pulse = 1
 			if(!reported_low_damage)
@@ -278,7 +278,7 @@ regen() will cover update_icon() for this proc
 	name = "auxiliary nucleus"
 	desc = "An interwoven mass of tendrils. A glowing nucleus pulses at its center."
 	icon_state = "blob_node"
-	max_health = 125
+	max_health = 65
 	regen_rate = 1
 	damage_min = 15
 	damage_max = 20
@@ -296,10 +296,10 @@ regen() will cover update_icon() for this proc
 	name = "shielding mass"
 	desc = "A pulsating mass of interwoven tendrils. These seem particularly robust, but not quite as active."
 	icon_state = "blob_idle"
-	max_health = 120
+	max_health = 60
 	damage_min = 13
 	damage_max = 25
-	attack_freq = 7
+	attack_freq = 8
 	regen_rate = 4
 	expandType = /obj/effect/blob/ravaging
 	light_color = BLOB_COLOR_SHIELD
@@ -328,7 +328,7 @@ regen() will cover update_icon() for this proc
 /obj/effect/blob/ravaging
 	name = "ravaging mass"
 	desc = "A mass of interwoven tendrils. They thrash around haphazardly at anything in reach."
-	max_health = 20
+	max_health = 10
 	damage_min = 27
 	damage_max = 36
 	attack_freq = 3
