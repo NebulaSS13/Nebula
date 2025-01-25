@@ -168,7 +168,7 @@
 
 /datum/pipeline/proc/mingle_with_turf(turf/target, mingle_volume)
 
-	if(!isturf(target))
+	if(!isturf(target) || !istype(air))
 		return
 
 	var/datum/gas_mixture/air_sample = air.remove_volume(mingle_volume)
