@@ -115,3 +115,19 @@
 
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn/empty
 	starts_loaded = FALSE
+
+/obj/item/gun/projectile/shotgun/doublebarrel/quad
+	name = "quad-barreled shotgun"
+	desc = "A true classic - but doubled. Firing it has a heck of a kick - knocks the air right out of you."
+	icon = 'icons/obj/guns/shotgun/quadbarrel.dmi'
+	max_shells = 4
+	w_class = ITEM_SIZE_HUGE
+	origin_tech = @'{"combat":6,"materials":3,"esoteric":9}'
+	firemodes = list(
+		list(mode_name="fire one barrel at a time", burst=1),
+		list(mode_name="fire two barrels at once", burst=2),
+		list(mode_name="fire all barrels at once", burst=4)
+	)
+
+/obj/item/gun/projectile/shotgun/doublebarrel/quad/empty
+	starts_loaded = FALSE
