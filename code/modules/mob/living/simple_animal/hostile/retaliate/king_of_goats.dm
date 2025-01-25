@@ -148,7 +148,7 @@
 	boss_theme = play_looping_sound(src, sound_id, 'sound/music/Visager-Battle.ogg', volume = 10, range = 7, falloff = 4, prefer_mute = TRUE)
 	update_icon()
 
-/mob/living/simple_animal/hostile/retaliate/goat/guard
+/mob/living/simple_animal/hostile/goat/guard
 	name = "honour guard"
 	desc = "A very handsome and noble beast."
 	icon = 'icons/mob/simple_animal/goat_guard.dmi'
@@ -161,7 +161,7 @@
 	_base_attack_force = 15
 	sharp = TRUE
 
-/mob/living/simple_animal/hostile/retaliate/goat/guard/master
+/mob/living/simple_animal/hostile/goat/guard/master
 	name = "master of the guard"
 	desc = "A very handsome and noble beast - the most trusted of all the king's men."
 	icon = 'icons/mob/simple_animal/goat_master.dmi'
