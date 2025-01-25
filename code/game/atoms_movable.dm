@@ -566,7 +566,7 @@
 		appearance_flags &= ~remove_flags
 	return old_appearance != appearance_flags
 
-/atom/movable/proc/end_throw()
+/atom/movable/proc/end_throw(datum/thrownthing/TT)
 	throwing = null
 
 /atom/movable/proc/reset_movement_delay()

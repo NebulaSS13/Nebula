@@ -46,7 +46,8 @@
 	icon = initial(icon)
 
 /obj/item/holder/Exited(atom/movable/am, atom/new_loc)
-	am.vis_flags = initial(am.vis_flags)
+	if(!(locate(/mob) in contents))
+		am.vis_flags = initial(am.vis_flags)
 	. = ..()
 
 /obj/item/holder/proc/destroy_all()
@@ -72,15 +73,15 @@
 	update_state()
 
 /obj/item/holder/dropped()
-	..()
+	. = ..()
 	update_state(1)
 
 /obj/item/holder/throw_impact(atom/hit_atom, datum/thrownthing/TT)
-	..()
+	. = ..()
 	update_state(1)
 
 /obj/item/holder/proc/update_state(var/delay)
-	set waitfor = 0
+	set waitfor = FALSE
 
 	for(var/mob/M in contents)
 		unregister_all_movement(last_holder, M)
@@ -97,11 +98,13 @@
 			mob_container.dropInto(loc)
 			M.reset_view()
 		qdel(src)
-	else if(last_holder != loc)
+		return
+
+	if(last_holder != loc)
 		for(var/mob/M in contents)
 			register_all_movement(loc, M)
 		update_icon()
-	last_holder = loc
+		last_holder = loc
 
 /obj/item/holder/onDropInto(var/atom/movable/AM)
 	if(ismob(loc))   // Bypass our holding mob and drop directly to its loc
