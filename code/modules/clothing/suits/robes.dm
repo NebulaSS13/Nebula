@@ -6,6 +6,7 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	slot_flags = SLOT_UPPER_BODY | SLOT_OVER_BODY
+	valid_accessory_slots = UNIFORM_DEFAULT_ACCESSORIES
 	accessory_slot = ACCESSORY_SLOT_DECOR
 
 /obj/item/clothing/suit/robe/thawb
