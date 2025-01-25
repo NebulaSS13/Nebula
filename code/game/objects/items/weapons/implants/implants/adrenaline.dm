@@ -31,8 +31,8 @@
 	imp_in.set_status(STAT_PARA, 0)
 
 /obj/item/implant/adrenalin/implanted(mob/source)
-	source.StoreMemory("A implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", /decl/memory_options/system)
-	to_chat(source, "The implanted freedom implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.")
+	source.StoreMemory("\A [src] can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", /decl/memory_options/system)
+	to_chat(source, "\The [src] can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.")
 	return TRUE
 
 /obj/item/implanter/adrenalin
