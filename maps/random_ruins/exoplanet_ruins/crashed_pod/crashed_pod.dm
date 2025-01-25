@@ -59,5 +59,5 @@
 	. = ..()
 
 /obj/structure/sign/plaque/ai_dev/pod
-	desc = "A plaque with information regarding this particular lifepod. It reads: 'Armalev Industries Skyfin-E, Exoplanetary Suvival Pod' there's a registry number, and an assigned mothership, but they've both been scratched to illegiblity."
+	desc = "A plaque with information regarding this particular lifepod. It reads: 'Yoyodyne Propulsion Systems Exoplanetary Suvival Pod MK 7' there's a registry number, and an assigned mothership, but they've both been scratched to illegiblity."
 	name = "\improper Lifepod Plaque"
