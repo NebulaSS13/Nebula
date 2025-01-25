@@ -77,7 +77,7 @@ var/global/default_mobloc = null
 		test_result["msg"] = "Unable to find a location to create test mob"
 		return test_result
 
-	var/mob/living/human/H = new mobtype(mobloc)
+	var/mob/living/human/H = new mobtype(mobloc, SPECIES_HUMAN) // force human for testing
 
 	H.mind_initialize("TestKey[rand(0,10000)]")
 
