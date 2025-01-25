@@ -1112,14 +1112,14 @@
 /obj/item/clothing/jumpsuit/blackjumpshorts,
 /obj/item/clothing/jumpsuit/black,
 /obj/item/clothing/jumpsuit/black,
-\/obj/item/clothing/shoes/sandal,
+/obj/item/clothing/shoes/sandal,
 /obj/item/clothing/shoes/sandal,
 /obj/item/clothing/jumpsuit/hazard,
 /obj/item/clothing/jumpsuit/hazard,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/clothing/suit/jacket/winter,
 /obj/item/clothing/suit/jacket/winter,
-/obj/item/clothing/head/winterhood/,
+/obj/item/clothing/head/winterhood,
 /obj/item/clothing/head/winterhood,
 /turf/floor/tiled/dark,
 /area/map_template/crashed_pod)
@@ -1209,7 +1209,7 @@
 	dir = 1;
 	icon_state = "warning"
 	},
-/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/vomit/mapped,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt{
 	dir = 9
@@ -1325,7 +1325,7 @@
 	dir = 8;
 	pixel_x = -13
 	},
-/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/vomit/mapped,
 /turf/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
 "Ut" = (
