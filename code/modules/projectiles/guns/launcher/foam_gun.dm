@@ -80,6 +80,20 @@
 	if(distance <= 1)
 		to_chat(user, "The hammer is a lot more resistant than you'd expect.")
 
+/obj/item/gun/launcher/foam/machine_gun
+	name = "foam machine gun"
+	desc = "The Jorf machine gun, hose the competition down and hate yourself while you spend forever reloading! It holds 30 darts."
+	icon =  'icons/obj/guns/foam/machine_gun.dmi'
+	w_class = ITEM_SIZE_NORMAL
+	fire_delay = 0
+	autofire_enabled = 1
+	one_hand_penalty = 3
+	max_darts = 30
+	burst_delay = 1
+	burst = 3
+	burst_accuracy = list(0,-1,-1)
+	dispersion = list(0.0, 0.6, 1.0)
+
 //the projectile
 /obj/item/foam_dart
 	name = "foam dart"
