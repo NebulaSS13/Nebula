@@ -5442,7 +5442,11 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 5
 	},
-/obj/structure/closet/secure_closet/hydroponics,
+/obj/structure/closet/secure_closet/hydroponics{
+	anchored = 1;
+	locked = 0;
+	req_access = null
+	},
 /obj/item/chems/glass/bucket,
 /turf/floor/tiled/techfloor/grid,
 /area/map_template/colony/hydroponics)
@@ -6037,7 +6041,9 @@
 	tag_exterior_door = "playablecolonymain_exterior_door";
 	tag_exterior_sensor = "playablecolonymain_sensor_external";
 	tag_interior_door = "playablecolonymain_interior_door";
-	tag_interior_sensor = "playablecolonymain_sensor_interior"
+	tag_interior_sensor = "playablecolonymain_sensor_interior";
+	tag_pump_out_internal = "playablecolonymain_pump_out_internal";
+	tag_pump_out_external = "playablecolonymain_pump_out_external"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "playablecolonymain_pump";
@@ -6223,7 +6229,7 @@
 /area/map_template/colony)
 "lZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5
+	dir = 4
 	},
 /obj/structure/catwalk,
 /obj/structure/cable{
@@ -6247,7 +6253,9 @@
 	pixel_x = 19;
 	pixel_y = 5
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
 /obj/structure/catwalk,
 /obj/structure/cable{
 	desc = "A flexible superconducting cable for heavy-duty power transfer. It's been labeled 'chaos reigns'.";
@@ -6258,9 +6266,6 @@
 	},
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
 /obj/structure/closet/emcloset,
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/suit/space/emergency,
@@ -6270,7 +6275,7 @@
 "mb" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/obj/machinery/atmospherics/pipe/manifold/hidden,
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
 "mc" = (
@@ -6315,7 +6320,7 @@
 /turf/floor/tiled/dark/monotile,
 /area/map_template/colony/jail)
 "mg" = (
-/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/obj/machinery/atmospherics/pipe/manifold/hidden,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
@@ -6978,9 +6983,7 @@
 /turf/floor/fake_grass,
 /area/map_template/colony/hydroponics)
 "nt" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
+/obj/machinery/atmospherics/pipe/manifold/hidden,
 /turf/wall/r_wall,
 /area/map_template/colony/airlock)
 "nu" = (
@@ -7211,14 +7214,13 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 8;
-	id_tag = "playablecolonymain_pump_out_internal";
-	power_rating = 25000
-	},
 /obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "playablecolonymain_pump";
+	power_rating = 25000
 	},
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
@@ -7265,8 +7267,7 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 1;
-	id_tag = "playablecolonymain_pump";
+	id_tag = "playablecolonymain_pump_out_internal";
 	power_rating = 25000
 	},
 /turf/floor/tiled/techfloor,
@@ -7285,8 +7286,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 1;
-	id_tag = "playablecolonymain_pump";
+	id_tag = "playablecolonymain_pump_out_internal";
 	power_rating = 25000
 	},
 /turf/floor/tiled/techfloor,
@@ -7461,16 +7461,6 @@
 	desc = "A large, unwieldy bolt-action rifle in shoddy condition. Chambered in small caliber, looks far scarier than it is. Vamoos ya varmint!";
 	name = "anti-varmint rifle"
 	},
-/obj/item/ammo_magazine/pistol/small,
-/obj/item/ammo_magazine/pistol/small,
-/obj/item/ammo_magazine/pistol/small,
-/obj/item/ammo_magazine/pistol/small,
-/obj/item/ammo_magazine/pistol/small,
-/obj/item/ammo_magazine/pistol/small,
-/obj/item/ammo_magazine/pistol/small,
-/obj/item/ammo_magazine/pistol/small,
-/obj/item/ammo_magazine/pistol/small,
-/obj/item/ammo_magazine/pistol/small,
 /obj/machinery/door/window/northright,
 /obj/structure/window/reinforced{
 	dir = 4
@@ -7478,6 +7468,107 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/projectile/bullet/rifle,
+/obj/item/stock_parts/ammo_box,
 /turf/floor/concrete,
 /area/map_template/colony/mineralprocessing)
 "ok" = (
@@ -7605,9 +7696,7 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
+/obj/machinery/atmospherics/pipe/manifold/hidden,
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
 "ov" = (
@@ -7635,7 +7724,7 @@
 /obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
+	dir = 10
 	},
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
@@ -7650,7 +7739,6 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 8;
 	id_tag = "playablecolonymain_pump_out_internal";
 	power_rating = 25000
 	},
@@ -7678,7 +7766,9 @@
 "oA" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
 /obj/structure/catwalk,
 /turf/floor/concrete,
 /area/map_template/colony/mineralprocessing)
@@ -7904,6 +7994,12 @@
 	},
 /turf/floor/fake_grass,
 /area/map_template/colony/hydroponics)
+"Hu" = (
+/obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/turf/floor/plating,
+/area/map_template/colony/airlock)
 "Hy" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/power/apc{
@@ -8016,6 +8112,12 @@
 "Ot" = (
 /turf/floor/tiled/white,
 /area/map_template/colony/bathroom)
+"Rf" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/turf/wall/r_wall,
+/area/map_template/colony/airlock)
 "RR" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 5
@@ -8033,6 +8135,14 @@
 /obj/item/stack/cable_coil,
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/hydroponics)
+"VV" = (
+/obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/turf/floor/plating,
+/area/map_template/colony/airlock)
 "Xh" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 4
@@ -8862,10 +8972,10 @@ kI
 kq
 ky
 nV
-nt
+bh
 lh
 ow
-bh
+Rf
 bh
 or
 "}
@@ -8906,7 +9016,7 @@ mw
 nO
 ou
 ox
-mw
+Hu
 mZ
 os
 "}
@@ -8947,7 +9057,7 @@ bd
 lJ
 mb
 nS
-bh
+nt
 nm
 os
 "}
@@ -8988,7 +9098,7 @@ aJ
 lM
 mg
 nU
-mw
+VV
 nq
 os
 "}
