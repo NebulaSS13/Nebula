@@ -1134,13 +1134,15 @@ default behaviour is:
 		if(A.CheckRemoval(src))
 			A.Remove(src)
 	for(var/obj/item/I in src)
-		if(I.action_button_name)
-			if(!I.action)
-				I.action = new I.default_action_type
-			I.action.name = I.action_button_name
-			I.action.desc = I.action_button_desc
-			I.action.SetTarget(I)
-			I.action.Grant(src)
+		if(QDELETED(I))
+			continue
+		if(!I.action_button_name)
+			continue
+		I.action ||= new I.default_action_type
+		I.action.name = I.action_button_name
+		I.action.desc = I.action_button_desc
+		I.action.SetTarget(I)
+		I.action.Grant(src)
 	return
 
 /mob/living/update_action_buttons()

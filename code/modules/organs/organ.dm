@@ -57,7 +57,8 @@
 	return
 
 /obj/item/organ/proc/refresh_action_button()
-	return action
+	if(!QDELETED(src) && istype(action))
+		return action
 
 /obj/item/organ/attack_self(var/mob/user)
 	return (owner && loc == owner && owner == user)

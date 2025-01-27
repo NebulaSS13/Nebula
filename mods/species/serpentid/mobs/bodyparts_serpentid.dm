@@ -20,7 +20,7 @@
 
 /obj/item/organ/internal/eyes/insectoid/serpentid/refresh_action_button()
 	. = ..()
-	if(.)
+	if(. && istype(action))
 		action.button_icon_state = "shield-[eyes_shielded ? 1 : 0]"
 		action.button?.update_icon()
 
@@ -129,7 +129,7 @@
 
 /obj/item/organ/external/chest/insectoid/serpentid/refresh_action_button()
 	. = ..()
-	if(.)
+	if(. && istype(action))
 		action.button_icon_state = "threat"
 		action.button?.update_icon()
 
@@ -184,7 +184,7 @@
 
 /obj/item/organ/external/groin/insectoid/serpentid/refresh_action_button()
 	. = ..()
-	if(.)
+	if(. && istype(action))
 		action.button_icon_state = "cloak-[owner && owner.is_cloaked_by(species) ? 1 : 0]"
 		action.button?.update_icon()
 

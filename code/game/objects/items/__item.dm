@@ -38,7 +38,7 @@
 	var/max_pressure_protection // Set this variable if the item protects its wearer against high pressures below an upper bound. Keep at null to disable protection.
 	var/min_pressure_protection // Set this variable if the item protects its wearer against low pressures above a lower bound. Keep at null to disable protection. 0 represents protection against hard vacuum.
 
-	var/datum/action/item_action/action = null
+	var/datum/action/item_action/action
 	var/action_button_name //It is also the text which gets displayed on the action button. If not set it defaults to 'Use [name]'. If it's not set, there'll be no button.
 	var/action_button_desc //A description for action button which will be displayed as tooltip.
 	var/default_action_type = /datum/action/item_action // Specify the default type and behavior of the action button for this atom.
@@ -241,6 +241,14 @@
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(hidden_uplink)
 	QDEL_NULL(coating)
+
+	if(istype(action))
+		if(action.target == src)
+			action.target = null
+		if(!QDELETED(action))
+			QDEL_NULL(action)
+		else
+			action = null
 
 	if(ismob(loc))
 		var/mob/M = loc

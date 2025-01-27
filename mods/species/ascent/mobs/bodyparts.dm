@@ -19,7 +19,7 @@
 
 /obj/item/organ/external/groin/insectoid/mantid/refresh_action_button()
 	. = ..()
-	if(.)
+	if(. && istype(action))
 		action.button_icon_state = "weave-web-[organ_cooldown ? "off" : "on"]"
 		action.button?.update_icon()
 
@@ -64,7 +64,7 @@
 
 /obj/item/organ/external/head/insectoid/mantid/refresh_action_button()
 	. = ..()
-	if(.)
+	if(. && istype(action))
 		action.button_icon_state = "shot-web-[organ_cooldown ? "off" : "on"]"
 		action.button?.update_icon()
 

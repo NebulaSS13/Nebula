@@ -3,6 +3,14 @@
 	requires_ui_style = FALSE
 	var/datum/action/action
 
+/obj/screen/action_button/Destroy()
+	if(!QDELETED(action))
+		if(action.button == src)
+			action.button = null
+		QDEL_NULL(action)
+	action = null
+	return ..()
+
 /obj/screen/action_button/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat, _action)
 	action = _action
 	return ..()

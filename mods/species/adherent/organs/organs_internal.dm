@@ -16,7 +16,7 @@
 
 /obj/item/organ/internal/brain/adherent/refresh_action_button()
 	. = ..()
-	if(.)
+	if(. && istype(action))
 		action.button_icon_state = "adherent-brain"
 		action.button?.update_icon()
 
@@ -66,7 +66,7 @@
 
 /obj/item/organ/internal/powered/refresh_action_button()
 	. = ..()
-	if(.)
+	if(. && istype(action))
 		action.button_icon_state = "[base_action_state]-[active ? "on" : "off"]"
 		action.button?.update_icon()
 

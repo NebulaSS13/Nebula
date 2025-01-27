@@ -10,7 +10,7 @@
 
 /obj/item/organ/internal/egg_sac/insectoid/refresh_action_button()
 	. = ..()
-	if(.)
+	if(. && istype(action))
 		action.button_icon_state = "egg-on"
 		action.button?.update_icon()
 

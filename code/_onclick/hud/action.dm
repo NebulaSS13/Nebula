@@ -34,6 +34,12 @@
 /datum/action/Destroy()
 	if(owner)
 		Remove(owner)
+	QDEL_NULL(button)
+	if(target)
+		var/obj/item/target_item = target
+		if(istype(target_item) && target_item.action == src)
+			target_item.action = null
+		target = null
 	return ..()
 
 /datum/action/proc/SetTarget(var/atom/Target)
