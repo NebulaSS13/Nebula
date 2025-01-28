@@ -35,7 +35,6 @@ var/global/list/global/tank_gauge_cache = list()
 
 	var/gauge_icon = "indicator_tank"
 	var/gauge_cap = 6
-	var/previous_gauge_pressure = null
 
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
@@ -63,7 +62,7 @@ var/global/list/global/tank_gauge_cache = list()
 	air_contents.update_values()
 
 	START_PROCESSING(SSobj, src)
-	update_icon(TRUE)
+	update_icon()
 
 /obj/item/tank/Destroy()
 	QDEL_NULL(air_contents)
@@ -134,7 +133,7 @@ var/global/list/global/tank_gauge_cache = list()
 		if(C.use(1))
 			wired = 1
 			to_chat(user, "<span class='notice'>You attach the wires to the tank.</span>")
-			update_icon(TRUE)
+			update_icon()
 		return TRUE
 
 	if(IS_WIRECUTTER(W))
@@ -157,7 +156,7 @@ var/global/list/global/tank_gauge_cache = list()
 						assy.a_right = null
 						proxyassembly.assembly = null
 						qdel(assy)
-				update_icon(TRUE)
+				update_icon()
 
 			else
 				to_chat(user, "<span class='danger'>You slip and bump the igniter!</span>")
@@ -169,7 +168,7 @@ var/global/list/global/tank_gauge_cache = list()
 			if(do_after(user, 10, src))
 				to_chat(user, "<span class='notice'>You quickly clip the wire from the tank.</span>")
 				wired = 0
-				update_icon(TRUE)
+				update_icon()
 
 		else
 			to_chat(user, "<span class='notice'>There are no wires to cut!</span>")
@@ -378,17 +377,17 @@ var/global/list/global/tank_gauge_cache = list()
 	air_contents.react()
 	check_status()
 
-/obj/item/tank/on_update_icon(var/override)
+// TODO: Check if this works without the override argument. Everything in tank code seems to call it, so...
+/obj/item/tank/on_update_icon()
 	. = ..()
-	var/list/overlays_to_add
-	if(override && (proxyassembly.assembly || wired))
-		LAZYADD(overlays_to_add, overlay_image('icons/obj/items/tanks/tank_components.dmi', "bomb_assembly"))
+	if(proxyassembly?.assembly || wired)
+		add_overlay(overlay_image('icons/obj/items/tanks/tank_components.dmi', "bomb_assembly"))
 		if(proxyassembly.assembly)
 			var/mutable_appearance/bombthing = new(proxyassembly.assembly)
 			bombthing.appearance_flags = RESET_COLOR
 			bombthing.pixel_y = -1
 			bombthing.pixel_x = -3
-			LAZYADD(overlays_to_add, bombthing)
+			add_overlay(bombthing)
 
 	if(gauge_icon)
 		var/gauge_pressure = 0
@@ -398,13 +397,10 @@ var/global/list/global/tank_gauge_cache = list()
 				gauge_pressure = -1
 			else
 				gauge_pressure = round((gauge_pressure/TANK_IDEAL_PRESSURE)*gauge_cap)
-		if(override || (previous_gauge_pressure != gauge_pressure))
-			var/indicator = "[gauge_icon][(gauge_pressure == -1) ? "overload" : gauge_pressure]"
-			if(!tank_gauge_cache[indicator])
-				tank_gauge_cache[indicator] = image('icons/obj/items/tanks/tank_indicators.dmi', indicator)
-			LAZYADD(overlays_to_add, tank_gauge_cache[indicator])
-		previous_gauge_pressure = gauge_pressure
-	add_overlay(overlays_to_add)
+		var/indicator = "[gauge_icon][(gauge_pressure == -1) ? "overload" : gauge_pressure]"
+		if(!tank_gauge_cache[indicator])
+			tank_gauge_cache[indicator] = image('icons/obj/items/tanks/tank_indicators.dmi', indicator)
+		add_overlay(tank_gauge_cache[indicator])
 
 //Handle exploding, leaking, and rupturing of the tank
 /obj/item/tank/proc/check_status()
@@ -534,7 +530,7 @@ var/global/list/global/tank_gauge_cache = list()
 	proxyassembly.assembly = new /obj/item/assembly_holder(src)
 	proxyassembly.assembly.master = proxyassembly
 	proxyassembly.assembly.update_icon()
-	update_icon(TRUE)
+	update_icon()
 
 /////////////////////////////////
 ///Pulled from rewritten bomb.dm
@@ -571,7 +567,7 @@ var/global/list/global/tank_gauge_cache = list()
 	S.master = proxyassembly	//Tell the assembly about its new owner
 	S.forceMove(src)			//Move the assembly
 
-	update_icon(TRUE)
+	update_icon()
 
 /obj/item/tank/proc/cause_explosion()	//This happens when a bomb is told to explode
 	var/obj/item/assembly_holder/assy = proxyassembly.assembly
@@ -588,7 +584,7 @@ var/global/list/global/tank_gauge_cache = list()
 	assy.master = null
 	proxyassembly.assembly = null
 	qdel(assy)
-	update_icon(TRUE)
+	update_icon()
 
 	air_contents.add_thermal_energy(15000)
 

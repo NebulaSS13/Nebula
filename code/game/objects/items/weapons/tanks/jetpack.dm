@@ -36,7 +36,7 @@
 	src.stabilization_on = !( src.stabilization_on )
 	to_chat(usr, "You toggle the stabilization [stabilization_on? "on":"off"].")
 
-/obj/item/tank/jetpack/on_update_icon(override)
+/obj/item/tank/jetpack/on_update_icon()
 	. = ..()
 	if(on)
 		add_overlay("[icon_state]-on")
