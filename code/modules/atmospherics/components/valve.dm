@@ -33,12 +33,12 @@
 	open = 1
 	icon_state = "map_valve1"
 
-/obj/machinery/atmospherics/valve/on_update_icon(animation)
-	if(animation)
-		flick("valve[src.open][!src.open]",src)
-	else
-		icon_state = "valve[open]"
+/obj/machinery/atmospherics/valve/proc/do_turn_animation()
+	update_icon()
+	flick("valve[src.open][!src.open]",src)
 
+/obj/machinery/atmospherics/valve/on_update_icon()
+	icon_state = "valve[open]"
 	build_device_underlays(FALSE)
 
 /obj/machinery/atmospherics/valve/hide(var/i)
@@ -94,8 +94,8 @@
 	return TRUE
 
 /obj/machinery/atmospherics/valve/proc/user_toggle()
-	update_icon(1)
-	sleep(10)
+	do_turn_animation()
+	sleep(1 SECOND)
 	toggle()
 
 /obj/machinery/atmospherics/valve/Process()

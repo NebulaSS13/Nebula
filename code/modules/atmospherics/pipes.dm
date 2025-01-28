@@ -265,7 +265,7 @@
 	smoke.start()
 	qdel(src)
 
-/obj/machinery/atmospherics/pipe/simple/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/simple/on_update_icon()
 	if(!atmos_initalized)
 		return
 
@@ -391,7 +391,7 @@
 	pipe_class = PIPE_CLASS_TRINARY
 	connect_dir_type = NORTH | EAST | WEST
 
-/obj/machinery/atmospherics/pipe/manifold/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/manifold/on_update_icon()
 	if(!atmos_initalized)
 		return
 
@@ -521,7 +521,7 @@
 	rotate_class = PIPE_ROTATE_ONEDIR
 	connect_dir_type = NORTH | SOUTH | EAST | WEST
 
-/obj/machinery/atmospherics/pipe/manifold4w/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/manifold4w/on_update_icon()
 	if(!atmos_initalized)
 		return
 
@@ -641,7 +641,7 @@
 	initialize_directions = SOUTH
 	build_icon_state = "cap"
 
-/obj/machinery/atmospherics/pipe/cap/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/cap/on_update_icon()
 	icon_state = "cap[icon_connect_type]"
 	color = get_color()
 
@@ -705,7 +705,7 @@
 	icon_state = "map_universal"
 	build_icon_state = "universal"
 
-/obj/machinery/atmospherics/pipe/simple/visible/universal/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/simple/visible/universal/on_update_icon()
 	if(!atmos_initalized)
 		return
 
@@ -723,7 +723,7 @@
 	icon_state = "map_universal"
 	build_icon_state = "universal"
 
-/obj/machinery/atmospherics/pipe/simple/hidden/universal/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/simple/hidden/universal/on_update_icon()
 	if(!atmos_initalized)
 		return
 
