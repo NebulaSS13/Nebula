@@ -1272,10 +1272,6 @@
 /obj/random/voidsuit,
 /obj/random/voidsuit,
 /obj/random/voidsuit,
-/obj/item/clothing/head/helmet/space/void/security,
-/obj/item/clothing/suit/space/void/security,
-/obj/item/clothing/head/helmet/space/void/security,
-/obj/item/clothing/suit/space/void/security,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/saloon)
 "cM" = (
