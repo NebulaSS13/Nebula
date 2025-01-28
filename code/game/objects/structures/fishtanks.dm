@@ -37,11 +37,13 @@ var/global/list/fishtank_cache = list()
 	fill_type = /decl/material/liquid/water
 	fill_amt = 300
 
-/obj/structure/glass_tank/Initialize()
+/obj/structure/glass_tank/Initialize(mapload)
 	tank_overlay = new(loc, src)
 	initialize_reagents()
 	. = ..()
-	update_icon(TRUE)
+	update_icon()
+	if(!mapload)
+		update_nearby_tiles()
 
 /obj/structure/glass_tank/Destroy()
 	if(!QDELETED(tank_overlay))
@@ -107,11 +109,19 @@ var/global/list/global/aquarium_states_and_layers = list(
 	"z" = FLY_LAYER + 0.01
 )
 
-/obj/structure/glass_tank/on_update_icon(propagate = 0)
+/obj/structure/glass_tank/update_nearby_tiles(need_rebuild)
+	. = ..()
+	for(var/obj/structure/glass_tank/tank in orange(1, src))
+		if(tank.type != type)
+			continue
+		tank.update_icon()
+
+/obj/structure/glass_tank/on_update_icon()
 	var/list/connect_dirs = list()
-	for(var/obj/structure/glass_tank/A in orange(1, src))
-		if(A.type == type)
-			connect_dirs |= get_dir(src, A)
+	for(var/obj/structure/glass_tank/tank in orange(1, src))
+		if(tank.type != type)
+			continue
+		connect_dirs |= get_dir(src, tank)
 	var/list/c_states = dirs_to_unified_corner_states(connect_dirs)
 
 	if(tank_overlay)
@@ -129,16 +139,13 @@ var/global/list/global/aquarium_states_and_layers = list(
 				tank_overlay.add_overlay(global.fishtank_cache[cache_key])
 
 	// Update overlays with contents.
+	// TODO: Can this just use vis_contents...?
+	// Or add its contents to vis_contents on some sort of helper atom,
+	// which has the VIS_UNDERLAY flag so it shows up under the transparent part?
 	icon_state = "base"
 	..()
-	for(var/atom/movable/AM in contents)
-		if(AM.simulated)
-			add_overlay(AM)
-
-	if(propagate)
-		for(var/obj/structure/glass_tank/A in orange(1, src))
-			if(A.type == type)
-				A.update_icon()
+	for(var/atom/movable/AM in get_contained_external_atoms())
+		add_overlay(AM)
 
 /obj/structure/glass_tank/can_climb(var/mob/living/user, post_climb_check=0)
 	if (!user.can_touch(src) || !(atom_flags & ATOM_FLAG_CLIMBABLE) || (!post_climb_check && (user in climbers)))
