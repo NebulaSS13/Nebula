@@ -23,7 +23,8 @@
 	var/active = 0
 	var/heating_power = 40 KILOWATTS
 
-/obj/machinery/space_heater/on_update_icon(var/rebuild_overlay = 0)
+/obj/machinery/space_heater/on_update_icon()
+	. = ..()
 	if(!on)
 		icon_state = "sheater-off"
 		set_light(0)
@@ -36,11 +37,8 @@
 	else
 		icon_state = "sheater-standby"
 		set_light(0)
-
-	if(rebuild_overlay)
-		overlays.Cut()
-		if(panel_open)
-			overlays  += "sheater-open"
+	if(panel_open)
+		add_overlay("sheater-open")
 
 /obj/machinery/space_heater/examine(mob/user)
 	. = ..()
