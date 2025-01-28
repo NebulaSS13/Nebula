@@ -292,7 +292,10 @@ var/global/list/card_decks = list()
 	icon_state = "empty"
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/organic/cardboard
+	dir = NORTH // our default dir is expected to be north, e.g. we've been placed by someone facing north
 	var/concealed = 0
+	/// Whether or not we should shift our icons according to our dir or not.
+	var/is_on_table = FALSE
 	var/list/datum/playingcard/cards = list()
 
 /obj/item/hand/attack_self(var/mob/user)
@@ -337,43 +340,42 @@ var/global/list/card_decks = list()
 		for(var/datum/playingcard/P in cards)
 			to_chat(user, "\The [APPEND_FULLSTOP_IF_NEEDED(P.name)]")
 
-/obj/item/hand/on_update_icon(var/direction = 0)
+/obj/item/hand/on_update_icon()
 	. = ..()
-	if(!cards.len)
-		qdel(src)
-		return
-	else if(cards.len > 1)
-		name = "hand of cards"
-		desc = "Some playing cards."
-	else if(concealed)
-		name = "single playing card"
-		desc = "An unknown playing card, concealed."
-	else
-		var/datum/playingcard/P = cards[1]
-		name = "[P.name]"
-		desc = "[P.desc]"
+	var/card_count = length(cards)
+	switch(card_count)
+		if(0)
+			qdel(src)
+			return
+		if(1)
+			var/datum/playingcard/top_card = cards[1]
+			if(concealed)
+				name = "single playing card"
+				desc = "An unknown playing card, concealed."
+			else
+				name = top_card.name
+				desc = top_card.desc
+			var/image/I = top_card.card_image(concealed, src.icon)
+			I.pixel_x += (-5+rand(10))
+			I.pixel_y += (-5+rand(10))
+			add_overlay(I)
+			compile_overlays()
+			return
+		else
+			name = "hand of cards"
+			desc = "Some playing cards."
 
-	overlays.Cut()
-
-	if(cards.len == 1)
-		var/datum/playingcard/P = cards[1]
-		var/image/I = P.card_image(concealed, src.icon)
-		I.pixel_x += (-5+rand(10))
-		I.pixel_y += (-5+rand(10))
-		overlays += I
-		return
-
-	var/offset = floor(20/cards.len)
+	var/offset = floor(20/card_count)
 
 	var/matrix/M = matrix()
-	if(direction)
-		switch(direction)
+	if(is_on_table)
+		switch(dir)
 			if(NORTH)
-				M.Translate( 0,  0)
+				M.Translate( 0,  0) // Technically redundant but it makes the logic clearer.
 			if(SOUTH)
 				M.Translate( 0,  4)
 			if(WEST)
-				M.Turn(90)
+				M.Turn(-90)
 				M.Translate( 3,  0)
 			if(EAST)
 				M.Turn(90)
@@ -381,29 +383,36 @@ var/global/list/card_decks = list()
 	var/i = 0
 	for(var/datum/playingcard/P in cards)
 		var/image/I = P.card_image(concealed, src.icon)
-		//I.pixel_x = origin+(offset*i)
-		switch(direction)
+		switch(dir)
 			if(SOUTH)
 				I.pixel_x = 8-(offset*i)
 			if(WEST)
 				I.pixel_y = -6+(offset*i)
 			if(EAST)
 				I.pixel_y = 8-(offset*i)
-			else
+			if(NORTH)
 				I.pixel_x = -7+(offset*i)
+			// other dirs are explicitly unsupported!
 		I.transform = M
-		overlays += I
+		add_overlay(I)
 		i++
+	compile_overlays() // these should be as responsive as possible
 
 /obj/item/hand/dropped(mob/user)
 	..()
-	if(locate(/obj/structure/table, loc))
-		src.update_icon(user.dir)
+	if(locate(/obj/structure/table) in loc)
+		is_on_table = TRUE
+		set_dir(user.dir)
 	else
-		update_icon()
+		is_on_table = FALSE
+		set_dir(initial(dir))
+	update_icon()
 
 /obj/item/hand/on_picked_up(mob/user)
-	src.update_icon()
+	..()
+	is_on_table = FALSE
+	set_dir(initial(dir))
+	update_icon()
 
 /*** A special thing that steals a card from a deck, probably lost in maint somewhere. ***/
 /obj/item/hand/missing_card
