@@ -49,6 +49,8 @@
 	normalspeed = 1
 	var/hasShocked = 0 //Prevents multiple shocks from happening
 	var/secured_wires = FALSE
+	/// This state overrides the density-based state while we're doing animations and such.
+	var/animating_state = 0
 
 	var/open_sound_powered = 'sound/machines/airlock_open.ogg'
 	var/open_sound_unpowered = 'sound/machines/airlock_open_force.ogg'
@@ -290,29 +292,22 @@ About the new airlock wires panel:
 	else
 		return 0
 
-/obj/machinery/door/airlock/on_update_icon(state=0, override=0)
-
+/obj/machinery/door/airlock/on_update_icon()
 	if(set_dir_on_update)
 		if((connections & (NORTH|SOUTH)) == (NORTH|SOUTH))
 			set_dir(EAST)
 		else if ((connections & (EAST|WEST)) == (EAST|WEST))
 			set_dir(SOUTH)
 
+	var/state = animating_state || (density ? AIRLOCK_CLOSED : AIRLOCK_OPEN)
 	switch(state)
-		if(0)
-			if(density)
-				icon_state = icon_state_closed
-				state = AIRLOCK_CLOSED
-			else
-				icon_state = icon_state_open
-				state = AIRLOCK_OPEN
-		if(AIRLOCK_OPEN)
-			icon_state = icon_state_open
 		if(AIRLOCK_CLOSED)
 			icon_state = icon_state_closed
-		if(AIRLOCK_OPENING, AIRLOCK_CLOSING, AIRLOCK_EMAG, AIRLOCK_DENY)
-			icon_state = ""
-
+		if(AIRLOCK_OPEN)
+			icon_state = icon_state_open
+		else
+			icon_state = "" // this should never happen, this is just what the old code did in this case
+	animating_state = null
 	set_airlock_overlays(state)
 
 /obj/machinery/door/airlock/proc/set_airlock_overlays(state)
@@ -432,18 +427,21 @@ About the new airlock wires panel:
 		if("opening")
 			set_airlock_overlays(AIRLOCK_OPENING)
 			flick("opening", src)//[stat ? "_stat":]
-			update_icon(AIRLOCK_OPEN)
+			animating_state = AIRLOCK_OPEN
+			update_icon()
 		if("closing")
 			set_airlock_overlays(AIRLOCK_CLOSING)
 			flick("closing", src)
-			update_icon(AIRLOCK_CLOSED)
+			animating_state = AIRLOCK_CLOSED
+			update_icon()
 		if("deny")
 			set_airlock_overlays(AIRLOCK_DENY)
 			if(density && arePowerSystemsOn())
 				flick("deny", src)
 				if(speaker)
 					playsound(loc, open_failure_access_denied, 50, 0)
-			update_icon(AIRLOCK_CLOSED)
+			animating_state = AIRLOCK_CLOSED
+			update_icon()
 		if("emag")
 			set_airlock_overlays(AIRLOCK_EMAG)
 			if(density && arePowerSystemsOn())
