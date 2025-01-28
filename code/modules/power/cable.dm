@@ -82,8 +82,20 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_SILVER
 	paint_color = COLOR_SILVER
 
+/obj/structure/cable/proc/canonize_cable_dirs()
+	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
+	var/dir_components = splittext(icon_state, "-")
+	if(length(dir_components) < 2)
+		CRASH("Cable segment updating dirs with invalid icon_state: [d1], [d2]")
+	d1 = text2num(dir_components[1])
+	d2 = text2num(dir_components[2])
+	if(!(d1 in global.cabledirs) || !(d2 in global.cabledirs))
+		CRASH("Cable segment updating dirs with invalid values: [d1], [d2]")
+
 /obj/structure/cable/Initialize(var/ml)
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
+	if(isnull(d1) || isnull(d2))
+		canonize_cable_dirs()
 	. = ..(ml)
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level == LEVEL_BELOW_PLATING && T)
@@ -129,18 +141,10 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/structure/cable/on_update_icon()
 	..()
-	// It is really gross to do this here but the order of icon updates to init seems
-	// unreliable and I have now had to spend hours across two PRs chasing down
-	// cable node weirdness due to the way this was handled previously. NO MORE.
+	// this should be less necessary now but it might still be just in case a subtype calls update_icon() in Initialize prior to its parent call
+	// which... don't do that, but better safe than sorry.
 	if(isnull(d1) || isnull(d2))
-		var/dir_components = splittext(icon_state, "-")
-		if(length(dir_components) < 2)
-			CRASH("Cable segment updating dirs with invalid icon_state: [d1], [d2]")
-		d1 = text2num(dir_components[1])
-		d2 = text2num(dir_components[2])
-		if(!(d1 in global.cabledirs) || !(d2 in global.cabledirs))
-			CRASH("Cable segment updating dirs with invalid values: [d1], [d2]")
-
+		canonize_cable_dirs()
 	icon_state = "[d1]-[d2]"
 	alpha = invisibility ? 127 : 255
 
