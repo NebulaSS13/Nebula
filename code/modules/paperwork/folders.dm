@@ -11,6 +11,8 @@
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 	material     = /decl/material/solid/organic/cardboard
 	item_flags   = ITEM_FLAG_CAN_TAPE
+	/// If true, add a cosmetic overlay when we have contents.
+	var/has_paper_overlay = TRUE
 
 /obj/item/folder/blue
 	desc       = "A blue folder."
@@ -28,9 +30,9 @@
 	desc       = "A cyan folder."
 	icon_state = "folder_cyan"
 
-/obj/item/folder/on_update_icon(var/paper_overlay = TRUE)
+/obj/item/folder/on_update_icon()
 	. = ..()
-	if(paper_overlay && length(contents))
+	if(has_paper_overlay && length(contents))
 		add_overlay("folder_paper")
 
 /obj/item/folder/attackby(obj/item/W, mob/user)
@@ -88,10 +90,11 @@
 	name = "envelope"
 	desc = "A thick envelope. You can't see what's inside."
 	icon_state = "envelope_sealed"
+	has_paper_overlay = FALSE
 	var/sealed = 1
 
 /obj/item/folder/envelope/on_update_icon()
-	. = ..(paper_overlay = FALSE)
+	. = ..()
 	if(sealed)
 		icon_state = "envelope_sealed"
 	else
