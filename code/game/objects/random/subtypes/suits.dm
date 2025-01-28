@@ -8,6 +8,17 @@
 	var/static/list/spawnable_choices = list(
 		/obj/item/rig/industrial,
 		/obj/item/rig/eva,
+		/obj/item/rig/light
+	)
+	return spawnable_choices
+
+/obj/random/hardsuit/heist
+	name = "Random Heist Hardsuit"
+
+/obj/random/hardsuit/heist/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/rig/industrial,
+		/obj/item/rig/eva,
 		/obj/item/rig/light/hacker,
 		/obj/item/rig/light/stealth,
 		/obj/item/rig/light

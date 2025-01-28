@@ -903,7 +903,7 @@
 /area/map_template/skipjack_station/start)
 "cT" = (
 /obj/structure/rack,
-/obj/random/hardsuit,
+/obj/random/hardsuit/heist,
 /obj/item/clothing/glasses/thermal/plain/monocle,
 /turf/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
@@ -920,7 +920,7 @@
 /area/map_template/skipjack_station/start)
 "cX" = (
 /obj/structure/rack,
-/obj/random/hardsuit,
+/obj/random/hardsuit/heist,
 /obj/item/clothing/head/pirate,
 /obj/item/gun/launcher/money,
 /turf/floor/shuttle/red,
