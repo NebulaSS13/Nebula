@@ -82,7 +82,7 @@
 		to_chat(user, "You lower the visor on \the [src].")
 	update_icon()
 
-/obj/item/clothing/head/helmet/riot/on_update_icon(mob/user)
+/obj/item/clothing/head/helmet/riot/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
 	if(up && check_state_in_icon("[icon_state]_up", icon))

@@ -214,7 +214,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/clothing/head/cakehat/on_update_icon(mob/user)
+/obj/item/clothing/head/cakehat/on_update_icon()
 	. = ..()
 	z_flags &= ~ZMM_MANGLE_PLANES
 	if(is_on_fire() && check_state_in_icon("[icon_state]-flame", icon))

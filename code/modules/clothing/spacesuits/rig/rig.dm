@@ -183,7 +183,7 @@
 			set_extension(piece, armor_type, armor, armor_degradation_speed)
 
 	set_slowdown_and_vision(!offline)
-	update_icon(1)
+	update_icon()
 
 /obj/item/rig/Destroy()
 	QDEL_NULL(gloves)
@@ -232,7 +232,7 @@
 			piece.max_pressure_protection = initial(piece.max_pressure_protection)
 			piece.min_pressure_protection = initial(piece.min_pressure_protection)
 			piece.item_flags &= ~ITEM_FLAG_AIRTIGHT
-	update_icon(1)
+	update_icon()
 
 /obj/item/rig/proc/toggle_seals(var/mob/initiator,var/instant)
 
@@ -346,7 +346,7 @@
 		canremove = !seal_target
 		if(airtight)
 			update_component_sealed()
-		update_icon(1)
+		update_icon()
 		return 0
 
 	// Success!
@@ -363,7 +363,7 @@
 			module.deactivate()
 	if(airtight)
 		update_component_sealed()
-	update_icon(1)
+	update_icon()
 
 
 /obj/item/rig/proc/update_component_sealed()
@@ -386,7 +386,7 @@
 			helmet.flags_inv &= ~(HIDEMASK)
 		else
 			helmet.flags_inv |= HIDEMASK
-	update_icon(1)
+	update_icon()
 
 /obj/item/rig/Process()
 

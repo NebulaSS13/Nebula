@@ -103,7 +103,7 @@
 		overlay.icon_state = "[overlay.icon_state]_dark"
 	. = ..()
 
-/obj/item/clothing/head/helmet/space/on_update_icon(mob/user)
+/obj/item/clothing/head/helmet/space/on_update_icon()
 	. = ..()
 	var/base_icon_state = get_world_inventory_state()
 	if(!base_icon_state)
