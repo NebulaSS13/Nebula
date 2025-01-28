@@ -70,7 +70,8 @@ WOOD_RAILING_SUBTYPE(yew)
 	else
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 
-	update_icon(FALSE)
+	update_connections()
+	update_icon()
 
 /obj/structure/railing/get_material_health_modifier()
 	. = 0.2
@@ -98,7 +99,8 @@ WOOD_RAILING_SUBTYPE(yew)
 		return !density
 	return TRUE
 
-/obj/structure/railing/proc/NeighborsCheck(var/UpdateNeighbors = 1)
+// TODO: Make railings use the normal structure smoothing system! This sucks!
+/obj/structure/railing/update_connections(propagate = FALSE)
 	neighbor_status = 0
 	var/Rturn = turn(dir, -90)
 	var/Lturn = turn(dir, 90)
@@ -106,35 +108,40 @@ WOOD_RAILING_SUBTYPE(yew)
 	for(var/obj/structure/railing/R in loc)
 		if ((R.dir == Lturn) && R.anchored)
 			neighbor_status |= 32
-			if (UpdateNeighbors)
-				R.update_icon(0)
+			if (propagate)
+				R.update_connections()
+				R.update_icon()
 		if ((R.dir == Rturn) && R.anchored)
 			neighbor_status |= 2
-			if (UpdateNeighbors)
-				R.update_icon(0)
+			if (propagate)
+				R.update_connections()
+				R.update_icon()
 	for (var/obj/structure/railing/R in get_step(src, Lturn))
 		if ((R.dir == dir) && R.anchored)
 			neighbor_status |= 16
-			if (UpdateNeighbors)
-				R.update_icon(0)
+			if (propagate)
+				R.update_connections()
+				R.update_icon()
 	for (var/obj/structure/railing/R in get_step(src, Rturn))
 		if ((R.dir == dir) && R.anchored)
 			neighbor_status |= 1
-			if (UpdateNeighbors)
-				R.update_icon(0)
+			if (propagate)
+				R.update_connections()
+				R.update_icon()
 	for (var/obj/structure/railing/R in get_step(src, (Lturn + dir)))
 		if ((R.dir == Rturn) && R.anchored)
 			neighbor_status |= 64
-			if (UpdateNeighbors)
-				R.update_icon(0)
+			if (propagate)
+				R.update_connections()
+				R.update_icon()
 	for (var/obj/structure/railing/R in get_step(src, (Rturn + dir)))
 		if ((R.dir == Lturn) && R.anchored)
 			neighbor_status |= 4
-			if (UpdateNeighbors)
-				R.update_icon(0)
+			if (propagate)
+				R.update_connections()
+				R.update_icon()
 
-/obj/structure/railing/on_update_icon(var/update_neighbors = TRUE)
-	NeighborsCheck(update_neighbors)
+/obj/structure/railing/on_update_icon()
 	..()
 	if (!neighbor_status || !anchored)
 		icon_state = "railing0-[density]"
@@ -188,6 +195,7 @@ WOOD_RAILING_SUBTYPE(yew)
 
 	forceMove(get_step(src, dir))
 	set_dir(turn(dir, 180))
+	update_connections(TRUE)
 	update_icon()
 
 /obj/structure/railing/CheckExit(var/atom/movable/O, var/turf/target)
@@ -260,6 +268,7 @@ WOOD_RAILING_SUBTYPE(yew)
 			else
 				user.visible_message("<span class='notice'>\The [user] wrenches \the [src] closed.</span>", "<span class='notice'>You wrench \the [src] closed.</span>")
 				density = TRUE
+			update_connections(TRUE)
 			update_icon()
 			return TRUE
 	// Repair
@@ -288,6 +297,7 @@ WOOD_RAILING_SUBTYPE(yew)
 		if(do_after(user, 10, src) && density)
 			to_chat(user, (anchored ? "<span class='notice'>You have unfastened \the [src] from the floor.</span>" : "<span class='notice'>You have fastened \the [src] to the floor.</span>"))
 			anchored = !anchored
+			update_connections(TRUE)
 			update_icon()
 		return TRUE
 
