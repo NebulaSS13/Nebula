@@ -102,24 +102,19 @@
 			add_overlay(I)
 	pixel_z = default_pixel_z
 
-/turf/floor/on_update_icon(var/update_neighbors)
+/turf/floor/on_update_icon()
 	. = ..()
 
 	color = get_color()
 
 	cut_overlays()
 	update_height_appearance() // Also refreshes out base layer.
-	update_floor_icon(update_neighbors)
+	update_floor_icon()
 
 	for(var/image/I in decals)
 		if(I.layer < layer)
 			continue
 		add_overlay(I)
-
-	if(update_neighbors)
-		for(var/turf/floor/F in orange(src, 1))
-			F.queue_ao()
-			F.queue_icon_update()
 
 	compile_overlays()
 
@@ -132,7 +127,7 @@
 		SetName(initial(name))
 		desc = initial(desc)
 
-/turf/floor/proc/update_floor_icon(update_neighbors)
+/turf/floor/proc/update_floor_icon()
 	var/decl/flooring/use_flooring = get_topmost_flooring()
 	if(istype(use_flooring))
 		use_flooring.update_turf_icon(src)
