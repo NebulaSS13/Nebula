@@ -43,7 +43,7 @@ var/global/list/icon_state_cache = list()
 	return out.Copy()
 
 /proc/_fetch_icon_state_cache_entry(checkicon)
-	if(isnull(checkicon) || !(isfile(checkicon) || isicon(checkicon)))
+	if(!checkicon)
 		return null
 	// if we want to let people del icons (WHY???) then we can use weakreF()
 	// but right now it's cheaper to just use checkicon directly
