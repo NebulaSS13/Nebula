@@ -43,7 +43,7 @@ var/global/list/limb_icon_cache = list()
 	if(eyes) eyes.update_colour()
 
 /obj/item/organ/external/head/on_remove_effects(mob/living/last_owner)
-	update_icon(1)
+	update_icon()
 	if(last_owner)
 		SetName("[last_owner.real_name]'s head")
 		addtimer(CALLBACK(last_owner, TYPE_PROC_REF(/mob, update_hair)), 1, TIMER_UNIQUE)
