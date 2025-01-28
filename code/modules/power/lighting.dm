@@ -123,12 +123,11 @@
 		on = FALSE
 	if(on)
 		update_use_power(POWER_USE_ACTIVE)
-		var/changed = FALSE
 		if(current_mode && (current_mode in lightbulb.lighting_modes))
-			changed = set_light(arglist(lightbulb.lighting_modes[current_mode]))
+			set_light(arglist(lightbulb.lighting_modes[current_mode]))
 		else
-			changed = set_light(lightbulb.b_range, lightbulb.b_power, lightbulb.b_color)
-		if(trigger && changed && get_status() == LIGHT_OK)
+			set_light(lightbulb.b_range, lightbulb.b_power, lightbulb.b_color)
+		if(trigger && get_status() == LIGHT_OK)
 			switch_check()
 	else
 		update_use_power(POWER_USE_OFF)
