@@ -380,13 +380,13 @@
 	var/list/timestamp = new/list()
 	var/ruined = 0
 	var/doctored = 0
+	/// Whether we draw the ruined ribbon overlay when ruined.
+	var/draw_ribbon_if_ruined = TRUE
 
-//draw_ribbon: Whether we draw the ruined ribbon overlay. Only used by quantum tape.
-//#FIXME: Probably should be handled better.
-/obj/item/magnetic_tape/on_update_icon(var/draw_ribbon = TRUE)
+/obj/item/magnetic_tape/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
-	if(draw_ribbon && ruined && max_capacity)
+	if(draw_ribbon_if_ruined && ruined && max_capacity)
 		add_overlay(overlay_image(icon, "[icon_state]_ribbonoverlay", flags = RESET_COLOR))
 
 /obj/item/magnetic_tape/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -524,12 +524,10 @@
 	desc = "Quantum-enriched self-repairing nanotape, used for magnetic storage of information."
 	icon = 'icons/obj/items/device/tape_recorder/tape_casette_loose.dmi'
 	ruined = TRUE
+	draw_ribbon_if_ruined = FALSE
 
 /obj/item/magnetic_tape/loose/fix()
 	return
-
-/obj/item/magnetic_tape/loose/on_update_icon()
-	. = ..(FALSE)
 
 /obj/item/magnetic_tape/loose/get_loose_tape()
 	return
