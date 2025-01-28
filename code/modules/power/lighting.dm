@@ -43,6 +43,8 @@
 	var/flickering = 0
 	var/light_type = /obj/item/light/tube		// the type of light item
 	var/accepts_light_type = /obj/item/light/tube
+	/// A debounce var to prevent lights from causing infinite loops due to machinery power updates.
+	var/currently_updating = FALSE
 
 	var/obj/item/light/lightbulb
 
@@ -54,7 +56,8 @@
 /obj/machinery/light/set_color(color)
 	. = lightbulb?.set_color(color)
 	if(.)
-		queue_icon_update()
+		update_light_status(TRUE)
+		update_icon()
 
 // the smaller bulb light fixture
 /obj/machinery/light/small
@@ -100,15 +103,44 @@
 			broken(1)
 
 	on = expected_to_be_on()
-	queue_icon_update(0)
+	update_light_status(FALSE)
+	update_icon()
 
 /obj/machinery/light/Destroy()
 	QDEL_NULL(lightbulb)
 	. = ..()
 
-/obj/machinery/light/on_update_icon(var/trigger = 1)
-	atom_flags = atom_flags & ~ATOM_FLAG_CAN_BE_PAINTED
+/// Handles light updates that were formerly done in update_icon.
+/// * trigger (BOOL): if TRUE, this can trigger effects like burning out, rigged light explosions, etc.
+/obj/machinery/light/proc/update_light_status(trigger = TRUE)
+	if(currently_updating) // avoid infinite loops during power usage updates
+		return
+	currently_updating = TRUE
+	if(get_status() == LIGHT_OK) // we can't reuse this value later because update_use_power might change our status
+		atom_flags |= ATOM_FLAG_CAN_BE_PAINTED
+	else
+		atom_flags &= ~ATOM_FLAG_CAN_BE_PAINTED
+		on = FALSE
+	if(on)
+		update_use_power(POWER_USE_ACTIVE)
+		var/changed = FALSE
+		if(current_mode && (current_mode in lightbulb.lighting_modes))
+			changed = set_light(arglist(lightbulb.lighting_modes[current_mode]))
+		else
+			changed = set_light(lightbulb.b_range, lightbulb.b_power, lightbulb.b_color)
+		if(trigger && changed && get_status() == LIGHT_OK)
+			switch_check()
+	else
+		update_use_power(POWER_USE_OFF)
+		set_light(0)
+	change_power_consumption((light_range * light_power) * LIGHTING_POWER_FACTOR, POWER_USE_ACTIVE)
+	currently_updating = FALSE
 
+/obj/machinery/light/update_use_power(new_use_power)
+	. = ..()
+	update_light_status(TRUE)
+
+/obj/machinery/light/on_update_icon()
 	// Update icon state
 	cut_overlays()
 	if(istype(construct_state))
@@ -127,15 +159,10 @@
 	switch(get_status())		// set icon_states
 		if(LIGHT_OK)
 			_state = "[base_state][on]"
-			atom_flags |= ATOM_FLAG_CAN_BE_PAINTED
-		if(LIGHT_EMPTY)
-			on = 0
 		if(LIGHT_BURNED)
 			_state = "[base_state]_burned"
-			on = 0
 		if(LIGHT_BROKEN)
 			_state = "[base_state]_broken"
-			on = 0
 
 	if(istype(lightbulb, /obj/item/light))
 		var/image/I = image(icon, _state)
@@ -144,21 +171,6 @@
 
 	if(on)
 		compile_overlays() // force a compile so that we update prior to the light being set
-
-		update_use_power(POWER_USE_ACTIVE)
-
-		var/changed = 0
-		if(current_mode && (current_mode in lightbulb.lighting_modes))
-			changed = set_light(arglist(lightbulb.lighting_modes[current_mode]))
-		else
-			changed = set_light(lightbulb.b_range, lightbulb.b_power, lightbulb.b_color)
-
-		if(trigger && changed && get_status() == LIGHT_OK)
-			switch_check()
-	else
-		update_use_power(POWER_USE_OFF)
-		set_light(0)
-	change_power_consumption((light_range * light_power) * LIGHTING_POWER_FACTOR, POWER_USE_ACTIVE)
 
 /obj/machinery/light/proc/get_status()
 	if(!lightbulb)
@@ -174,7 +186,8 @@
 /obj/machinery/light/proc/set_mode(var/new_mode)
 	if(current_mode != new_mode)
 		current_mode = new_mode
-		update_icon(0)
+		update_light_status(FALSE)
+		update_icon()
 
 /obj/machinery/light/proc/get_mode_color()
 	if (current_mode && (current_mode in lightbulb.lighting_modes))
@@ -199,7 +212,8 @@
 // will not switch on if broken/burned/empty
 /obj/machinery/light/proc/seton(var/state)
 	on = (state && get_status() == LIGHT_OK)
-	queue_icon_update()
+	update_light_status(TRUE)
+	update_icon()
 
 // examine verb
 /obj/machinery/light/examine(mob/user)
@@ -226,6 +240,7 @@
 	lightbulb = L
 
 	on = expected_to_be_on()
+	update_light_status(TRUE)
 	update_icon()
 
 /obj/machinery/light/proc/remove_bulb()
@@ -233,6 +248,7 @@
 	lightbulb.dropInto(loc)
 	lightbulb.update_icon()
 	lightbulb = null
+	update_light_status(TRUE)
 	update_icon()
 
 /obj/machinery/light/cannot_transition_to(state_path, mob/user)
@@ -298,10 +314,11 @@
 			for(var/i = 0; i < amount; i++)
 				if(get_status() != LIGHT_OK) break
 				on = !on
-				update_icon(0)
+				update_light_status(FALSE)
 				sleep(rand(5, 15))
 			on = (get_status() == LIGHT_OK)
-			update_icon(0)
+			update_light_status(FALSE)
+			update_icon()
 		flickering = 0
 
 // ai attack - make lights flicker, because why not
@@ -367,13 +384,15 @@
 		if(on)
 			spark_at(src, cardinal_only = TRUE)
 	lightbulb.status = LIGHT_BROKEN
+	update_light_status(TRUE)
 	update_icon()
 
 /obj/machinery/light/proc/fix()
 	if(get_status() == LIGHT_OK || !lightbulb)
 		return
 	lightbulb.status = LIGHT_OK
-	on = 1
+	on = TRUE
+	update_light_status(TRUE)
 	update_icon()
 
 // explosion effect
