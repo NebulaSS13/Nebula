@@ -380,7 +380,7 @@
 */
 /atom/proc/update_icon()
 	SHOULD_CALL_PARENT(TRUE)
-	on_update_icon(arglist(args))
+	on_update_icon()
 	RAISE_EVENT(/decl/observ/updated_icon, src)
 
 /**
