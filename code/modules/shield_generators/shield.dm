@@ -13,12 +13,12 @@
 	var/disabled_for = 0
 	var/diffused_for = 0
 
-/obj/effect/shield/on_update_icon(update_neighbors = FALSE)
+/obj/effect/shield/on_update_icon()
 
 	if(gen && gen.check_flag(MODEFLAG_PHOTONIC) && !disabled_for && !diffused_for)
-		set_opacity(1)
+		set_opacity(TRUE)
 	else
-		set_opacity(0)
+		set_opacity(FALSE)
 
 	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
 		color = COLOR_VIOLET
@@ -29,24 +29,32 @@
 
 	cut_overlays()
 	for(var/direction in global.cardinal)
-		var/turf/T = get_step(src, direction)
-		if(!T)
+		var/turf/resolved_turf = get_step_resolving_mimic(src, direction)
+		if(!resolved_turf)
 			continue
-		var/found = locate(/obj/effect/shield) in T
+		var/found = locate(/obj/effect/shield) in resolved_turf
 		if(found)
-			if(update_neighbors)
-				for(var/obj/effect/shield/shield in T)
-					shield.update_icon(FALSE)
 			add_overlay(image(icon = icon, icon_state = "[icon_state]edge", dir = direction))
+
+/obj/effect/shield/update_nearby_tiles(need_rebuild)
+	. = ..()
+	for(var/direction in global.cardinal)
+		var/turf/resolved_turf = get_step_resolving_mimic(src, direction)
+		if(!resolved_turf)
+			continue
+		for(var/obj/effect/shield/shield in resolved_turf)
+			if(!(shield.atom_flags & ATOM_FLAG_INITIALIZED)) // they'll update themselves later
+				continue
+			shield.update_icon()
 
 // Prevents shuttles, singularities and pretty much everything else from moving the field segments away.
 // The only thing that is allowed to move us is the Destroy() proc.
 /obj/effect/shield/forceMove()
 	. = QDELING(src) && ..()
 
-/obj/effect/shield/Initialize()
+/obj/effect/shield/Initialize(mapload)
 	. = ..()
-	update_icon(TRUE)
+	update_icon()
 	update_nearby_tiles()
 
 /obj/effect/shield/Destroy()
@@ -96,7 +104,7 @@
 		set_density(1)
 		set_invisibility(INVISIBILITY_NONE)
 		update_nearby_tiles()
-		update_icon(TRUE)
+		update_icon()
 		update_explosion_resistance()
 		gen.damaged_segments -= src
 
@@ -112,7 +120,7 @@
 	set_density(0)
 	set_invisibility(INVISIBILITY_MAXIMUM)
 	update_nearby_tiles()
-	update_icon(TRUE)
+	update_icon()
 	update_explosion_resistance()
 
 // Fails shield segments in specific range. Range of 1 affects the shielded turf only.
@@ -255,7 +263,7 @@
 
 	// Update airflow
 	update_nearby_tiles()
-	update_icon(TRUE)
+	update_icon()
 	update_explosion_resistance()
 
 /obj/effect/shield/proc/update_explosion_resistance()
