@@ -21,26 +21,24 @@ SUBSYSTEM_DEF(vis_contents_update)
 
 // Largely copied from SSicon_update.
 /datum/controller/subsystem/vis_contents_update/fire(resumed = FALSE, no_mc_tick = FALSE)
-	if(!queue_refs.len)
+	var/list/cached_refs = queue_refs // cache the instance var for more speed
+	if(!length(cached_refs))
 		suspend()
 		return
 	var/i = 0
-	while (i < queue_refs.len)
-		i++
-		var/atom/A = queue_refs[i]
+	while (i < length(cached_refs))
+		if(Master.map_loading)
+			break
+		var/atom/A = cached_refs[++i]
 		if(QDELETED(A))
 			continue
-		if(Master.map_loading)
-			queue_refs.Cut(1, i+1)
-			return
 		A.vis_update_queued = FALSE
-		A.update_vis_contents(force_no_queue = TRUE)
+		A.update_vis_contents()
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			queue_refs.Cut(1, i+1)
-			return
-	queue_refs.Cut()
+			break
+	cached_refs.Cut(1, i+1)
 
 /atom
 	var/vis_update_queued = FALSE
@@ -49,8 +47,8 @@ SUBSYSTEM_DEF(vis_contents_update)
 	if(vis_update_queued)
 		return
 	vis_update_queued = TRUE
-	SSvis_contents_update.queue_refs.Add(src)
-	if(!Master.map_loading) // Don't wake early if we're loading a map, it'll get woken up when the map loads.
+	SSvis_contents_update.queue_refs[++SSvis_contents_update.queue_refs.len] = src
+	if(SSvis_contents_update.suspended && !Master.map_loading) // Don't wake early if we're loading a map, it'll get woken up when the map loads.
 		SSvis_contents_update.wake()
 
 // Horrible colon syntax below is because vis_contents
@@ -70,8 +68,8 @@ SUBSYSTEM_DEF(vis_contents_update)
 /atom/proc/get_vis_contents_to_add()
 	return
 
-/atom/proc/update_vis_contents(force_no_queue = FALSE)
-	if(!force_no_queue && (!SSvis_contents_update.initialized || TICK_CHECK))
+/atom/proc/update_vis_contents()
+	if(Master.map_loading || SSvis_contents_update.init_state == SS_INITSTATE_NONE || TICK_CHECK)
 		queue_vis_contents_update()
 		return
 	vis_update_queued = FALSE
