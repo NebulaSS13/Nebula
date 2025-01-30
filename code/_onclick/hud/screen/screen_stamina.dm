@@ -5,3 +5,4 @@
 	invisibility = INVISIBILITY_MAXIMUM
 	screen_loc = ui_stamina
 	requires_ui_style = FALSE
+	layer = HUD_BASE_LAYER + 0.1 // needs to layer over the movement intent element
