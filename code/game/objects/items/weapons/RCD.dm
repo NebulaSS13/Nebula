@@ -305,7 +305,7 @@
 	cost = 9
 	delay = 2 SECONDS
 	handles_type = /turf/wall
-	work_type = /turf/floor
+	work_type = /turf/floor/plating
 
 /decl/hierarchy/rcd_mode/deconstruction/wall/can_handle_work(var/obj/item/rcd/rcd, var/turf/wall/target)
 	return ..() && (rcd.canRwall || !target.reinf_material)

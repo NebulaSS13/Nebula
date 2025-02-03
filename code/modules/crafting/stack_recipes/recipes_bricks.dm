@@ -116,6 +116,7 @@
 /decl/stack_recipe/turfs/floor/brick
 	name                       = "cobblestone path"
 	result_type                = /turf/floor/path
+	expected_product_type      = /turf/floor/path
 	craft_stack_types          = /obj/item/stack/material/brick
 
 /decl/stack_recipe/turfs/floor/brick/herringbone

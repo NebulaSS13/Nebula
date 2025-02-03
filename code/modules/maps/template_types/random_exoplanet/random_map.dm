@@ -10,7 +10,7 @@
 	var/water_level
 	var/water_level_min = 0
 	var/water_level_max = 5
-	var/land_type = /turf/floor
+	var/land_type = /turf/floor/barren
 	var/water_type
 	var/coast_type
 

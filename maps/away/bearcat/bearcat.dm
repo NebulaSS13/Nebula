@@ -79,7 +79,7 @@
 	name = "Lower Deck"
 	landmark_tag = "nav_bearcat_lift_bottom"
 	base_area = /area/ship/scrap/cargo/lower
-	base_turf = /turf/floor
+	base_turf = /turf/floor/plating
 
 /obj/machinery/door/airlock/autoname/command
 	door_color = COLOR_COMMAND_BLUE

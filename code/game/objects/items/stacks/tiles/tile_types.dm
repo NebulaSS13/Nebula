@@ -21,7 +21,7 @@
 	item_flags = 0
 	obj_flags = 0
 	_base_attack_force = 1
-	var/replacement_turf_type = /turf/floor
+	var/replacement_turf_type = /turf/floor/plating
 
 /obj/item/stack/tile/proc/try_build_turf(var/mob/user, var/turf/target)
 

@@ -314,7 +314,7 @@
 
 /area/turbolift/tradeship_enclave
 	name = "Disused Sublevel"
-	base_turf = /turf/floor
+	base_turf = /turf/floor/plating
 
 /area/turbolift/tradeship_cargo
 	name = "Lower Cargo Bay"

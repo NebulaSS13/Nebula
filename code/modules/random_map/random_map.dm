@@ -22,7 +22,7 @@ var/global/list/map_count = list()
 
 	// Turf paths.
 	var/wall_type =  /turf/wall
-	var/floor_type = /turf/floor
+	var/floor_type = /turf/floor/plating
 	// Turf type to act on when applying this map. Set to TRUE to use world.turf, or a path to use a specific turf subtype.
 	var/target_turf_type
 
