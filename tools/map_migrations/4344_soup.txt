@@ -1,0 +1,14 @@
+/obj/item/food/beetsoup : /obj/item/chems/glass/bowl/mapped/beet{@OLD}
+/obj/item/food/bloodsoup : /obj/item/chems/glass/bowl/mapped/blood{@OLD}
+/obj/item/food/meatballsoup : /obj/item/chems/glass/bowl/mapped/meatball{@OLD}
+/obj/item/food/milosoup : /obj/item/chems/glass/bowl/mapped/meatball{@OLD}
+/obj/item/food/mushroomsoup : /obj/item/chems/glass/bowl/mapped/mushroom{@OLD}
+/obj/item/food/vegetablesoup : /obj/item/chems/glass/bowl/mapped/vegetable{@OLD}
+/obj/item/food/tomatosoup : /obj/item/chems/glass/bowl/mapped/tomato{@OLD}
+/obj/item/food/nettlesoup : /obj/item/chems/glass/bowl/mapped/nettle{@OLD}
+/obj/item/food/stew : /obj/item/chems/glass/bowl/mapped/stew{@OLD}
+/obj/item/food/hotchili : /obj/item/chems/glass/bowl/mapped/chili/hot{@OLD}
+/obj/item/food/coldchili : /obj/item/chems/glass/bowl/mapped/chili/cold{@OLD}
+/obj/item/food/katsucurry : /obj/item/chems/glass/bowl/mapped/curry/katsu{@OLD}
+
+/obj/item/food/mysterysoup : /obj/item/chems/glass/bowl/mystery{@OLD}

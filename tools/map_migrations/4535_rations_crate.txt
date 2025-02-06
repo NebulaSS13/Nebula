@@ -1,0 +1,1 @@
+/obj/structure/closet/crate/freezer/rations : /obj/structure/closet/crate/plastic/rations{@OLD}

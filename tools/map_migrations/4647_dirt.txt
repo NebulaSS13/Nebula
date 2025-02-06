@@ -1,2 +1,2 @@
-/obj/effect/decal/cleanable/dirt/@SUBTYPES : /obj/effect/decal/cleanable/dirt/visible/@SUBTYPES{@OLD}
+/obj/effect/decal/cleanable/dirt : /obj/effect/decal/cleanable/dirt/visible{@OLD}
 

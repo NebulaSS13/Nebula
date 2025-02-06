@@ -1,0 +1,1 @@
+/obj/item/chems/glass/beaker/sulphuric/@SUBTYPES : /obj/item/chems/glass/beaker/sulfuric/@SUBTYPES{@OLD}
