@@ -685,6 +685,7 @@
 	chems = list(/decl/material/liquid/nutriment = list(1,20))
 	slice_product = /obj/item/food/processed_grown/crushed
 	slice_amount = 3
+	produces_pollen = 1
 
 /datum/seed/flower/New()
 	..()

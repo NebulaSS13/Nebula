@@ -162,7 +162,9 @@
 	for(var/obj/machinery/portable_atmospherics/hydroponics/H in view(7, src))
 		if(H.seed && !H.dead)
 			H.plant_health += 0.05 * coef
-			++trays
+			if(H.pollen >= 1)
+				H.pollen--
+				trays++
 	honeycombs = min(honeycombs + 0.1 * coef * min(trays, 5), frames * 100)
 
 /obj/machinery/honey_extractor

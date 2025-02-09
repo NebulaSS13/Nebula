@@ -4,6 +4,7 @@
 // Defining these to point to the relevant decl types just to avoid a massive changeset.
 // TODO: rename to PLANT_TRAIT or bare decls to avoid mixing up with GetTrait etc.
 #define TRAIT_CHEMS                /decl/plant_trait/chems
+#define TRAIT_POLLEN               /decl/plant_trait/pollen
 #define TRAIT_EXUDE_GASSES         /decl/plant_trait/exude_gasses
 #define TRAIT_ALTER_TEMP           /decl/plant_trait/alter_temp
 #define TRAIT_POTENCY              /decl/plant_trait/potency
