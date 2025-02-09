@@ -582,8 +582,8 @@
 
 /decl/material/liquid/drink/cola/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
 	if(prop.reagents.has_reagent(/decl/material/liquid/drink/milk))
-		. = "pilk"
-	. = ..(prop, .)
+		supplied = "pilk"
+	. = ..()
 
 /decl/material/liquid/drink/citrussoda
 	name = "citrus soda"

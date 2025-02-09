@@ -32,6 +32,12 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	var/custom_name
 	var/custom_desc
 
+/obj/item/chems/drinks/glass2/update_name()
+	if(custom_name)
+		SetName(custom_name)
+		return
+	return ..()
+
 // Reverse the matter effect of the hollow flag, keep the force effect.
 // Glasses are so tiny that their effective matter is ten times lower than forks/knives due to OBJ_FLAG_HOLLOW.
 /obj/item/chems/drinks/glass2/get_matter_amount_modifier()
