@@ -32,3 +32,16 @@
 
 /datum/inventory_slot/gripper/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
 	return ..() && user.check_dexterity(DEXTERITY_EQUIP_ITEM, silent = disable_warning)
+
+// Stub definitions for future work and to pass CI.
+/datum/inventory_slot/gripper/robot
+	abstract_type = /datum/inventory_slot/gripper/robot
+
+/datum/inventory_slot/gripper/robot/one
+	ui_label = "1"
+
+/datum/inventory_slot/gripper/robot/two
+	ui_label = "2"
+
+/datum/inventory_slot/gripper/robot/three
+	ui_label = "3"

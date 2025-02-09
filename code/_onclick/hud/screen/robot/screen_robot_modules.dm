@@ -5,7 +5,7 @@
 
 /obj/screen/robot/module
 	dir               = SOUTHWEST
-	icon              = 'icons/mob/screen/styles/robot/inventory.dmi'
+	icon              = 'icons/mob/screen/styles/robot/modules_inventory.dmi'
 	var/module_index
 
 /obj/screen/robot/module/handle_click(mob/user, params)

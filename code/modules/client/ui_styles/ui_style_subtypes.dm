@@ -95,7 +95,6 @@
 /decl/ui_style/underworld
 	name = "Underworld"
 	uid  = "ui_style_underworld"
-	restricted = FALSE
 	override_icons = list(
 		(HUD_ATTACK)      = 'icons/mob/screen/styles/underworld/attack_selector.dmi',
 		(HUD_FIRE_INTENT) = 'icons/mob/screen/styles/underworld/fire_intent.dmi',
@@ -111,3 +110,20 @@
 	)
 	use_overlay_color = TRUE
 	use_ui_color = TRUE
+
+/decl/ui_style/robot
+	name = "Stationbound"
+	uid = "ui_style_robot"
+	override_icons = list(
+		(HUD_ATTACK)      = 'icons/mob/screen/styles/robot/attack_selector.dmi',
+		(HUD_FIRE_INTENT) = 'icons/mob/screen/styles/robot/fire_intent.dmi',
+		(HUD_HANDS)       = 'icons/mob/screen/styles/robot/hands.dmi',
+		(HUD_DROP)        = 'icons/mob/screen/styles/robot/interaction_drop.dmi',
+		(HUD_THROW)       = 'icons/mob/screen/styles/robot/interaction_throw.dmi',
+		(HUD_RESIST)      = 'icons/mob/screen/styles/robot/interaction_resist.dmi',
+		(HUD_MANEUVER)    = 'icons/mob/screen/styles/robot/interaction_maneuver.dmi',
+		(HUD_INVENTORY)   = 'icons/mob/screen/styles/robot/inventory.dmi',
+		(HUD_MOVEMENT)    = 'icons/mob/screen/styles/robot/movement.dmi',
+		(HUD_UP_HINT)     = 'icons/mob/screen/styles/robot/uphint.dmi',
+		(HUD_ZONE_SELECT) = 'icons/mob/screen/styles/robot/zone_selector.dmi'
+	)

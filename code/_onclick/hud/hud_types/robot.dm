@@ -1,18 +1,6 @@
 /mob/living/silicon/robot
 	hud_used = /datum/hud/robot
 
-/decl/ui_style/robot
-	name = "Stationbound"
-	restricted = TRUE
-	uid = "ui_style_robot"
-	override_icons = list(
-		(HUD_HEALTH)      = 'icons/mob/screen/styles/robot/health.dmi',
-		(HUD_FIRE)        = 'icons/mob/screen/styles/robot/status_fire.dmi',
-		(HUD_OXY)         = 'icons/mob/screen/styles/robot/status_oxy.dmi',
-		(HUD_UP_HINT)     = 'icons/mob/screen/styles/robot/uphint.dmi',
-		(HUD_ZONE_SELECT) = 'icons/mob/screen/styles/robot/zone_selector.dmi'
-	)
-
 /datum/hud/robot/get_ui_style_data()
 	return GET_DECL(/decl/ui_style/robot)
 
@@ -39,12 +27,9 @@
 /datum/hud/proc/toggle_show_robot_modules()
 	if(!isrobot(mymob))
 		return
-
 	var/mob/living/silicon/robot/r = mymob
-
 	r.shown_robot_modules = !r.shown_robot_modules
 	update_robot_modules_display()
-
 
 /datum/hud/proc/update_robot_modules_display()
 	if(!isrobot(mymob) || !mymob.client)
