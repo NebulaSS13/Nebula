@@ -1,3 +1,6 @@
+/obj/machinery/chemical_dispenser/unanchored
+	anchored = FALSE
+
 /obj/machinery/chemical_dispenser/full
 	spawn_cartridges = list(
 			/obj/item/chems/chem_disp_cartridge/hydrazine,
@@ -60,6 +63,9 @@
 	beaker_offset = -2
 	beaker_positions = list(-1,3,7,11,15)
 
+/obj/machinery/chemical_dispenser/bar_soft/unanchored
+	anchored = FALSE
+
 /obj/machinery/chemical_dispenser/bar_soft/full
 	spawn_cartridges = list(
 			/obj/item/chems/chem_disp_cartridge/water,
@@ -98,6 +104,8 @@
 	beaker_offset = -2
 	beaker_positions = list(-3,2,7,12,17)
 
+/obj/machinery/chemical_dispenser/bar_alc/unanchored
+	anchored = FALSE
 
 /obj/machinery/chemical_dispenser/bar_alc/full
 	spawn_cartridges = list(

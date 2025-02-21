@@ -4,7 +4,7 @@
 /decl/hierarchy/supply_pack/science/chemistry_dispenser
 	name = "Equipment - Chemical Reagent dispenser"
 	contains = list(
-			/obj/machinery/chemical_dispenser{anchored = FALSE}
+			/obj/machinery/chemical_dispenser/unanchored
 		)
 	containertype = /obj/structure/largecrate
 	containername = "reagent dispenser crate"
