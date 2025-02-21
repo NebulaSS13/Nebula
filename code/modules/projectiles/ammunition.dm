@@ -177,6 +177,16 @@
 		stored_ammo += new ammo_type(src)
 	contents_initialized = TRUE
 
+/obj/item/ammo_magazine/get_contained_matter()
+	. = ..()
+	if(!lazyload_contents || contents_initialized || !ammo_type || !initial_ammo)
+		return
+	// Add our expected matter from lazyloaded stuff.
+	var/list/ammo_matter = atom_info_repository.get_matter_for(ammo_type).Copy()
+	for(var/matter_entry in ammo_matter)
+		ammo_matter[matter_entry] *= initial_ammo
+	. = MERGE_ASSOCS_WITH_NUM_VALUES(., ammo_matter)
+
 /obj/item/ammo_magazine/proc/get_stored_ammo_count()
 	. = length(stored_ammo)
 	if(!contents_initialized)
