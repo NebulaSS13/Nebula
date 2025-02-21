@@ -10,9 +10,9 @@ var/global/repository/atom_info/atom_info_repository = new()
 
 /repository/atom_info/proc/create_key_for(var/path, var/material, var/amount)
 	. = "[path]"
-	if(material)
+	if(ispath(path, /obj) && material) // only objects take material as an arg
 		. = "[.]-[material]"
-	if(!isnull(amount))
+	if(ispath(path, /obj/item/stack) && !isnull(amount)) // similarly for stacks and amount
 		. = "[.]-[amount]"
 
 /repository/atom_info/proc/get_instance_of(var/path, var/material, var/amount)
