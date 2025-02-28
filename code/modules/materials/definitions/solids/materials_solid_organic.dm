@@ -3,6 +3,8 @@
 	ignition_point = T0C+500 // Based on loose ignition temperature of plastic
 	accelerant_value = 0.1
 	burn_product = /decl/material/gas/carbon_monoxide
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 /* TODO: burn products for solids
 	bakes_into_at_temperature = T0C+500
 	bakes_into_material = /decl/material/solid/carbon
@@ -53,6 +55,7 @@
 	melting_point = 363
 	ignition_point = 473
 	boiling_point = 643
+	exoplanet_rarity_plant = MAT_RARITY_MUNDANE
 
 /decl/material/solid/organic/plastic/holographic
 	name = "holographic plastic"
@@ -83,8 +86,7 @@
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/cardstock
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
@@ -114,8 +116,7 @@
 	value                   = 0.25
 	default_solid_form      = /obj/item/stack/material/bolt
 	shard_type              = /obj/item/shreddedp
-	exoplanet_rarity_plant  = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas    = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant  = MAT_RARITY_EXOTIC
 	sound_manipulate        = 'sound/foley/paperpickup2.ogg'
 	sound_dropped           = 'sound/foley/paperpickup1.ogg'
 
@@ -138,8 +139,6 @@
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/bolt
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
@@ -224,7 +223,6 @@
 	hidden_from_codex = TRUE
 	default_solid_form = /obj/item/stack/material/bolt
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
@@ -248,6 +246,7 @@
 	default_solid_form = /obj/item/stack/material/slab
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	exoplanet_rarity_plant = MAT_RARITY_MUNDANE
 
 /decl/material/solid/organic/meat
 	name = "meat"
@@ -292,7 +291,6 @@
 	sound_manipulate = 'sound/foley/meat1.ogg'
 	sound_dropped = 'sound/foley/meat2.ogg'
 	hitsound = "punch"
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	var/tans_to = /decl/material/solid/organic/leather
 
 /decl/material/solid/organic/skin/lizard
@@ -302,8 +300,6 @@
 	tans_to = /decl/material/solid/organic/leather/lizard
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/solid/organic/skin/insect
 	name = "chitin"
@@ -416,6 +412,7 @@
 	default_solid_form = /obj/item/stack/material/bone
 	sound_manipulate = 'sound/foley/stickspickup1.ogg'
 	sound_dropped = 'sound/foley/sticksdrop1.ogg'
+	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
 
 // Stub for earrings. TODO: put it in clams
 /decl/material/solid/organic/bone/pearl
@@ -425,24 +422,18 @@
 	default_solid_form     = /obj/item/stack/material/lump
 	hardness               = MAT_VALUE_FLEXIBLE
 	weight                 = MAT_VALUE_VERY_LIGHT
-	exoplanet_rarity_gas   = MAT_RARITY_NOWHERE
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 
 /decl/material/solid/organic/bone/fish
 	name = "fishbone"
 	uid = "solid_fishbone"
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/solid/organic/bone/cartilage
 	name = "cartilage"
 	uid = "solid_cartilage"
 	hardness = 0
 	weight = MAT_VALUE_EXTREMELY_LIGHT
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/solid/organic/leather
 	name = "leather"
@@ -461,8 +452,6 @@
 	reflectiveness = MAT_VALUE_MATTE
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/skin
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
@@ -472,6 +461,7 @@
 	color = "#1f1f20"
 	ignition_point = T0C+150
 	melting_point = T0C+100
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 
 /decl/material/solid/organic/leather/lizard
 	name = "scaled hide"
