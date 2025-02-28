@@ -135,7 +135,7 @@
 	if(beaker?.reagents)
 		for(var/rtype in beaker.reagents.reagent_volumes)
 			var/decl/material/R = GET_DECL(rtype)
-			data["beakercontents"] += "<b>[capitalize(R.name)]</b> ([REAGENT_VOLUME(beaker.reagents, rtype)]u)"
+			data["beakercontents"] += "<b>[capitalize(R.get_reagent_name(beaker.reagents))]</b> ([REAGENT_VOLUME(beaker.reagents, rtype)]u)"
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
