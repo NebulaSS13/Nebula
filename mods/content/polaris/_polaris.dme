@@ -4,7 +4,12 @@
 #include "datum\citizenship.dm"
 #include "datum\cultures.dm"
 #include "datum\factions.dm"
+#include "datum\loadout.dm"
 #include "datum\locations.dm"
 #include "datum\overrides.dm"
 #include "datum\languages\human.dm"
+#include "items\head.dm"
+#include "items\overrides.dm"
+#include "items\suit.dm"
+#include "items\under.dm"
 #endif // MODPACK_POLARIS

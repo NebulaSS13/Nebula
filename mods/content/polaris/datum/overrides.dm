@@ -1,3 +1,5 @@
+//Species
+
 /decl/species
 	available_background_info = list(
 		/decl/background_category/citizenship = list(
@@ -54,3 +56,48 @@
 
 /decl/bodytype
 	age_descriptor = /datum/appearance_descriptor/age/polaris_human
+
+
+//Loadout
+
+/decl/loadout_option/uniform/dress_selection
+	name = "dress selection (short)"
+	description = "A selection of dresses above knee length."
+	path = /obj/item/clothing/dress/blackcorset
+
+/decl/loadout_option/uniform/dress_selection/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/dress/blackcorset,
+		/obj/item/clothing/dress/cropdress,
+		/obj/item/clothing/dress/cropsweater,
+		/obj/item/clothing/dress,
+		/obj/item/clothing/dress/blue,
+		/obj/item/clothing/dress/green,
+		/obj/item/clothing/dress/orange,
+		/obj/item/clothing/dress/pink,
+		/obj/item/clothing/dress/purple,
+		/obj/item/clothing/dress/gold,
+		/obj/item/clothing/dress/littleblack,
+		/obj/item/clothing/dress/pentagram,
+		/obj/item/clothing/dress/polkadot,
+		/obj/item/clothing/dress/sailor,
+		/obj/item/clothing/dress/striped,
+		/obj/item/clothing/dress/sun,
+		/obj/item/clothing/dress/sun/white,
+		/obj/item/clothing/dress/tango,
+		/obj/item/clothing/dress/twistfront,
+		/obj/item/clothing/dress/tutu,
+		/obj/item/clothing/dress/twopiece,
+		/obj/item/clothing/dress/vneck
+	)
+
+/decl/loadout_option/uniform/suit
+	name = "suit selection"
+	description = "A selection of non-modular suits."
+
+/decl/loadout_option/uniform/dress_simple
+	name = "dress selection (colour select)"
+	path = /obj/item/clothing/dress/colourable
+	loadout_flags = (GEAR_HAS_COLOR_SELECTION | GEAR_HAS_TYPE_SELECTION)
