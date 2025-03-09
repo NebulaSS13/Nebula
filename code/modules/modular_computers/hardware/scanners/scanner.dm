@@ -54,12 +54,12 @@
 
 /obj/item/stock_parts/computer/scanner/proc/do_on_afterattack(mob/user, atom/target, proximity)
 
-// TODO: Revisit to see if we can make do_on_attackby return a bool so that normal afterattack can run.
 /obj/item/stock_parts/computer/scanner/attackby(obj/W, mob/user)
-	do_on_attackby(user, W)
-	return TRUE
+	return do_on_attackby(user, W)
 
+/// Returns TRUE if the attackby chain should be stopped.
 /obj/item/stock_parts/computer/scanner/proc/do_on_attackby(mob/user, atom/target)
+	return FALSE
 
 /obj/item/stock_parts/computer/scanner/proc/can_use_scanner(mob/user, atom/target, proximity = TRUE)
 	if(!check_functionality())
