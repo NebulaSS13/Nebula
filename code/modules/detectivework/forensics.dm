@@ -54,6 +54,7 @@
 	for(var/T in forensics.evidence)
 		var/datum/forensics/F = forensics.evidence[T]
 		other_forensics.add_data(T, F.data)
+		forensics.remove_data(T)
 
 /obj/item/proc/add_trace_DNA(mob/living/M)
 	if(istype(M) && M.has_genetic_information())
