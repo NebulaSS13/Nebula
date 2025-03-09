@@ -8,7 +8,8 @@
 		return FALSE
 	if(istype(ammo, /obj/item/stack))
 		var/obj/item/stack/stack = ammo
-		ammo = stack.split(1)
+		if(stack.get_amount() > 1)
+			ammo = stack.split(1)
 		if(QDELETED(ammo))
 			return FALSE
 		ammo.forceMove(src)
