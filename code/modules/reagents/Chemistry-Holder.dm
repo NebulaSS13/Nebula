@@ -651,8 +651,12 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 		return trans_to_turf(target, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
 	if(isobj(target))
 		touch_obj(target)
-		if(!QDELETED(target) && target.can_be_poured_into(my_atom))
-			return trans_to_obj(target, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
+		if(!QDELETED(target))
+			if(target.can_be_poured_into(my_atom))
+				return trans_to_obj(target, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
+			else if(isitem(target)) // even if you can't pour into it, you can still coat it
+				var/obj/item/target_item = target
+				return target_item.add_coating(src, amount)
 		return 0
 	return 0
 
