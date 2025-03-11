@@ -31,9 +31,6 @@
 		if(caliber && istype(BB, /obj/item/projectile/bullet))
 			var/obj/item/projectile/bullet/B = BB
 			B.caliber = caliber
-	if(randpixel)
-		pixel_x = rand(-randpixel, randpixel)
-		pixel_y = rand(-randpixel, randpixel)
 	. = ..()
 
 //removes the projectile from the ammo casing

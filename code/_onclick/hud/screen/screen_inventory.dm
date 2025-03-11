@@ -61,10 +61,12 @@
 		MA.plane   = HUD_PLANE
 		MA.alpha   = 80
 		MA.color   = mouse_over_atom.mob_can_equip(owner, slot_id, TRUE) ? COLOR_GREEN : COLOR_RED
-		MA.pixel_x = mouse_over_atom.default_pixel_x
-		MA.pixel_y = mouse_over_atom.default_pixel_y
-		MA.pixel_w = mouse_over_atom.default_pixel_w
-		MA.pixel_z = mouse_over_atom.default_pixel_z
+		MA.appearance_flags |= (KEEP_TOGETHER | RESET_COLOR)
+		// We need to color the entire thing, overlays and underlays included.
+		for(var/image/overlay in MA.overlays)
+			overlay.appearance_flags &= ~(KEEP_TOGETHER | RESET_COLOR)
+		for(var/image/underlay in MA.underlays)
+			underlay.appearance_flags &= ~(KEEP_TOGETHER | RESET_COLOR)
 		add_overlay(MA)
 	else
 		mouse_over_atom_ref = null
