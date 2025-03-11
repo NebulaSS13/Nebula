@@ -42,7 +42,7 @@
 	if((. = ..()))
 		update_icon()
 
-/obj/item/chems/syringe/on_picked_up(mob/user)
+/obj/item/chems/syringe/on_picked_up(mob/user, atom/old_loc)
 	. = ..()
 	update_icon()
 

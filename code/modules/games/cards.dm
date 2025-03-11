@@ -406,7 +406,7 @@ var/global/list/card_decks = list()
 	else
 		update_icon()
 
-/obj/item/hand/on_picked_up(mob/user)
+/obj/item/hand/on_picked_up(mob/user, atom/old_loc)
 	src.update_icon()
 
 /*** A special thing that steals a card from a deck, probably lost in maint somewhere. ***/

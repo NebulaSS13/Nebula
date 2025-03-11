@@ -38,7 +38,7 @@
 	. = ..()
 	check_loc()
 
-/obj/item/energy_blade/projected/on_picked_up(mob/user)
+/obj/item/energy_blade/projected/on_picked_up(mob/user, atom/old_loc)
 	. = ..()
 	check_loc()
 

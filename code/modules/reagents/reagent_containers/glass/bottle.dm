@@ -25,7 +25,7 @@
 /obj/item/chems/glass/bottle/get_lid_color()
 	return lid_color
 
-/obj/item/chems/glass/bottle/on_picked_up(mob/user)
+/obj/item/chems/glass/bottle/on_picked_up(mob/user, atom/old_loc)
 	. = ..()
 	update_icon()
 

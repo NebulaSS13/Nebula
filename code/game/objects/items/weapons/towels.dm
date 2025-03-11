@@ -132,7 +132,7 @@
 		pixel_y = 0
 		pixel_z = 0
 
-/obj/item/towel/on_picked_up(mob/user)
+/obj/item/towel/on_picked_up(mob/user, atom/old_loc)
 	..()
 	if(icon != initial(icon))
 		icon = initial(icon)

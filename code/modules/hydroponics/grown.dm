@@ -323,7 +323,7 @@ var/global/list/_wood_materials = list(
 
 	return ..()
 
-/obj/item/food/grown/on_picked_up(mob/user)
+/obj/item/food/grown/on_picked_up(mob/user, atom/old_loc)
 	..()
 	if(!seed)
 		return

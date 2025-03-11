@@ -527,7 +527,7 @@
 		if (isturf(old_loc))
 			var/obj/effect/temporary/item_pickup_ghost/ghost = new(old_loc, src)
 			ghost.animate_towards(user)
-		on_picked_up(user)
+		on_picked_up(user, old_loc)
 		return TRUE
 
 	return FALSE
@@ -604,7 +604,10 @@
 	RAISE_EVENT_REPEAT(/decl/observ/item_unequipped, src, user)
 
 // called just after an item is picked up, after it has been equipped to the mob.
-/obj/item/proc/on_picked_up(mob/user)
+/obj/item/proc/on_picked_up(mob/user, atom/old_loc)
+	if(old_loc == loc || old_loc == user)
+		// not being picked up, just transferring between slots, don't adjust the offset
+		return
 	if(randpixel)
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel/2, randpixel/2)

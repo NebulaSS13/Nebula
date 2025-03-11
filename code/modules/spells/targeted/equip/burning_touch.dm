@@ -25,7 +25,7 @@
 	var/burn_power = 0
 	var/burn_timer
 
-/obj/item/burning_hands/on_picked_up(var/mob/user)
+/obj/item/burning_hands/on_picked_up(var/mob/user, atom/old_loc)
 	burn_power = 0
 	burn_timer = world.time + 10 SECONDS
 	START_PROCESSING(SSobj,src)

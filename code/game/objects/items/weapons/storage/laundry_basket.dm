@@ -33,7 +33,7 @@
 	to_chat(user, "<span class='notice'>You dump \the [src]'s contents onto \the [T].</span>")
 	return ..()
 
-/obj/item/laundry_basket/on_picked_up(mob/user)
+/obj/item/laundry_basket/on_picked_up(mob/user, atom/old_loc)
 	var/obj/item/laundry_basket/offhand/O = new(user)
 	O.SetName("[name] - second hand")
 	O.desc = "Your second grip on \the [src]."
