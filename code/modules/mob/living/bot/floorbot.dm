@@ -133,11 +133,6 @@
 			return (amount && (T.broken || T.burnt || (improvefloors && !T.flooring)))
 
 /mob/living/bot/floorbot/UnarmedAttack(var/atom/A, var/proximity)
-
-	. = ..()
-	if(.)
-		return
-
 	if(busy)
 		return TRUE
 

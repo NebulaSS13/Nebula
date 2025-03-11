@@ -190,11 +190,6 @@
 	resetTarget() //we're done, failed or not. Don't want to get stuck if C is not
 
 /mob/living/bot/secbot/UnarmedAttack(var/mob/M, var/proximity)
-
-	. = ..()
-	if(.)
-		return
-
 	if(!istype(M))
 		return FALSE
 
