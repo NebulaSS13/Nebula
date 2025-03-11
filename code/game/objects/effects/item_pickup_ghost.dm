@@ -3,10 +3,8 @@
 	var/lifetime = 0.2 SECONDS
 
 /obj/effect/temporary/item_pickup_ghost/Initialize(var/mapload, var/obj/item/picked_up)
-	. = ..(mapload, lifetime, picked_up.icon, picked_up.icon_state)
-	pixel_x = picked_up.pixel_x
-	pixel_y = picked_up.pixel_y
-	color = picked_up.color
+	. = ..(mapload, lifetime, null, null)
+	appearance = picked_up.appearance
 
 /obj/effect/temporary/item_pickup_ghost/proc/animate_towards(var/atom/target)
 	var/new_pixel_x = pixel_x + (target.x - src.x) * 32
