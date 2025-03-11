@@ -92,10 +92,7 @@
 		updateVisibility(src)
 	if(atom_codex_ref && atom_codex_ref != TRUE) // may be null, TRUE or a datum instance
 		QDEL_NULL(atom_codex_ref)
-	var/atom/oldloc = loc
 	. = ..()
-	if(isatom(oldloc) && oldloc.storage)
-		oldloc.storage.on_item_post_deletion(src) // must be done after deletion
 	// This might need to be moved onto a Del() override at some point.
 	QDEL_NULL(storage)
 
@@ -138,6 +135,7 @@
 
 	. = ..()
 
+	var/atom/oldloc = loc
 	forceMove(null)
 
 	if(LAZYLEN(movement_handlers) && !ispath(movement_handlers[1]))
@@ -153,6 +151,10 @@
 		var/atom/movable/mask = global._alpha_masks[src]
 		if(!QDELETED(mask))
 			qdel(mask)
+
+	// This has to be done for movables because atoms can't be in storage.
+	if(isatom(oldloc) && !QDELETED(oldloc?.storage))
+		oldloc.storage.on_item_post_deletion(src) // must be done after deletion
 
 /atom/GetCloneArgs()
 	return list(loc)

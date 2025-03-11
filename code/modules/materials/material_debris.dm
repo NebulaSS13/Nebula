@@ -105,6 +105,9 @@
 			if(!QDELETED(other))
 				user.put_in_hands(other)
 
+		if(isatom(loc) && !QDELETED(loc?.storage))
+			loc.storage.update_ui_after_item_insertion()
+
 		UNSETEMPTY(matter)
 
 		return TRUE
