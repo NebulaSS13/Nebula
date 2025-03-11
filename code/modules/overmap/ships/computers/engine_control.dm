@@ -70,7 +70,8 @@
 		return TOPIC_REFRESH
 
 	if(href_list["global_limit"])
-		linked.set_thrust_limit(text2num(href_list["global_limit"]))
+		var/current_thrust_limit = linked.get_thrust_limit()
+		linked.set_thrust_limit(current_thrust_limit + text2num(href_list["global_limit"]))
 		return TOPIC_REFRESH
 
 	if(href_list["engine"])
