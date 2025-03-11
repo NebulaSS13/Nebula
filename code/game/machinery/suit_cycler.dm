@@ -520,3 +520,9 @@
 	if(boots)
 		boots.refit_for_bodytype(target_bodytype)
 		boots.SetName("refitted [initial(boots.name)]")
+
+// Update icon on rotate so that overlays rotate as well
+/obj/machinery/suit_cycler/shuttle_rotate(angle)
+	. = ..()
+	if(.)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, queue_icon_update)), 1)
