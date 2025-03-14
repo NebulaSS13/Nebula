@@ -61,6 +61,11 @@
 		MA.plane   = HUD_PLANE
 		MA.alpha   = 80
 		MA.color   = mouse_over_atom.mob_can_equip(owner, slot_id, TRUE) ? COLOR_GREEN : COLOR_RED
+		// We don't respect default_pixel_x or similar here because items should always be centered in their slots; defaults are for world-space.
+		MA.pixel_x = 0
+		MA.pixel_y = 0
+		MA.pixel_w = 0
+		MA.pixel_z = 0
 		MA.appearance_flags |= (KEEP_TOGETHER | RESET_COLOR)
 		// We need to color the entire thing, overlays and underlays included.
 		for(var/image/overlay in MA.overlays)
