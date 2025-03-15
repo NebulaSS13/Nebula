@@ -28,6 +28,7 @@
 			/decl/sprite_accessory/marking/frame/plating/head = "#8888cc"
 		)
 	)
+	can_be_shackled = TRUE
 
 /decl/bodytype/prosthetic/utility_frame/Initialize()
 	equip_adjust = list(
