@@ -21,7 +21,7 @@
 		to_chat(usr, SPAN_WARNING("You can't give someone a grab."))
 		return
 	usr.visible_message(SPAN_NOTICE("\The [usr] holds out \the [I] to \the [target]."), SPAN_NOTICE("You hold out \the [I] to \the [target], waiting for them to accept it."))
-	if(alert(target,"[src] wants to give you \a [I]. Will you accept it?",,"No","Yes") == "No")
+	if(alert(target,"[src] wants to give you \a [I]. Will you accept it?",,"Yes","No") == "No")
 		target.visible_message(SPAN_NOTICE("\The [src] tried to hand \the [I] to \the [target], \
 		but \the [target] didn't want it."))
 		return
