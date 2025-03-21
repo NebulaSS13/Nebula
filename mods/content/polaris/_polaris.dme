@@ -2,6 +2,7 @@
 #define MODPACK_POLARIS
 // BEGIN_INCLUDE
 #include "code\background.dm"
+#include "code\vent_pump.dm"
 #include "datum\citizenship.dm"
 #include "datum\cultures.dm"
 #include "datum\factions.dm"
