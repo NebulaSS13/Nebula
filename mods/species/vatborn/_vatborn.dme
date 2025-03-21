@@ -1,0 +1,9 @@
+#ifndef MODPACK_VATBORN
+#define MODPACK_VATBORN
+// BEGIN_INCLUDE
+#include "vatborn.dm"
+#include "datum\species.dm"
+#include "datum\species_bodytype.dm"
+
+// END_INCLUDE
+#endif // MODPACK_VATBORN

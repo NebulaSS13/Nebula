@@ -38,6 +38,7 @@
 	#include "../../mods/species/tritonian/_tritonian.dme"
 	#include "../../mods/species/serpentid/_serpentid.dme"
 	#include "../../mods/species/utility_frames/_utility_frames.dme"
+	#include "../../mods/species/vatborn/_vatborn.dme"
 
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 	#include "../random_ruins/exoplanet_ruins/crashed_pod/crashed_pod.dm"
