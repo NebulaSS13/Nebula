@@ -52,10 +52,11 @@
 		else if(lungs.breath_fail_ratio < 1)
 			breathing = "shallow"
 
+	var/has_breath = TRUE
 	switch(breathing)
 		if("none")
 			. += "<span class='scan_danger'>Alert: No breathing detected.</span>"
-			return
+			has_breath = FALSE
 		if("shallow")
 			. += "<span class='scan_warning'>Subject's breathing is abnormally shallow.</span>"
 		if("normal")
@@ -86,30 +87,33 @@
 	// Reagent data.
 	. += "[b]Reagent scan:[endb]"
 
-	var/print_reagent_default_message = TRUE
-	if (C.has_chemical_effect(CE_ALCOHOL, 1))
-		. += "<span class='scan_orange'>Alcohol detected in subject's breath.</span>"
-		print_reagent_default_message = FALSE
-	if (C.has_chemical_effect(CE_ALCOHOL_TOXIC, 1))
-		. += "<span class='scan_red'>Subject is suffering from alcohol poisoning.</span>"
-		print_reagent_default_message = FALSE
-
-	var/datum/reagents/inhaled = C.get_inhaled_reagents()
-	if(inhaled && inhaled.total_volume)
-		var/unknown = 0
-		for(var/rtype in inhaled.reagent_volumes)
-			var/decl/material/R = GET_DECL(rtype)
-			if(R.scannable)
-				print_reagent_default_message = FALSE
-				. += "<span class='scan_notice'>[capitalize(R.gas_name)] found in subject's breath.</span>"
-			else
-				++unknown
-		if(unknown)
+	if(has_breath)
+		var/print_reagent_default_message = TRUE
+		if (C.has_chemical_effect(CE_ALCOHOL, 1))
+			. += "<span class='scan_orange'>Alcohol detected in subject's breath.</span>"
 			print_reagent_default_message = FALSE
-			. += "<span class='scan_warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's breath.</span>"
+		if (C.has_chemical_effect(CE_ALCOHOL_TOXIC, 1))
+			. += "<span class='scan_red'>Subject is suffering from alcohol poisoning.</span>"
+			print_reagent_default_message = FALSE
 
-	if(print_reagent_default_message)
-		. += "No results."
+		var/datum/reagents/inhaled = C.get_inhaled_reagents()
+		if(inhaled && inhaled.total_volume)
+			var/unknown = 0
+			for(var/rtype in inhaled.reagent_volumes)
+				var/decl/material/R = GET_DECL(rtype)
+				if(R.scannable)
+					print_reagent_default_message = FALSE
+					. += "<span class='scan_notice'>[capitalize(R.gas_name)] found in subject's breath.</span>"
+				else
+					++unknown
+			if(unknown)
+				print_reagent_default_message = FALSE
+				. += "<span class='scan_warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's breath.</span>"
+
+		if(print_reagent_default_message)
+			. += "No results."
+	else
+		. += "<span class='scan_warning'>Unable to obtain breath sample!</span>"
 
 	header = jointext(header, null)
 	. = jointext(.,"<br>")
