@@ -81,8 +81,8 @@
 	else if(dosage >= 0.25)
 		warning_message = pick("a little dizzy","short of breath")
 		warning_prob = 10
-	if(istype(H) && dosage > 1 && H.ticks_since_last_successful_breath < 15)
-		H.ticks_since_last_successful_breath++
+	if(istype(H) && dosage > 1 && H.suffocation_counter < 15)
+		H.suffocation_counter++
 	if(warning_message && prob(warning_prob))
 		to_chat(M, SPAN_WARNING("You feel [warning_message]."))
 

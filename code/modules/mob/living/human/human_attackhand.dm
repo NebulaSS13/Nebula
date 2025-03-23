@@ -340,7 +340,7 @@
 
 		if(!lungs.handle_owner_breath(H.get_breath_from_environment(), 1))
 			if(!lungs.is_bruised())
-				ticks_since_last_successful_breath = 0
+				suffocation_counter = 0
 			to_chat(src, SPAN_NOTICE("You feel a breath of fresh air enter your lungs. It feels good."))
 
 	// Again.

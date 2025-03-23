@@ -11,7 +11,7 @@
 	max_damage = 70
 	relative_size = 60
 
-	var/active_breathing = 1
+	var/active_breathing = TRUE
 	var/has_gills = FALSE
 	var/breath_type
 	var/exhale_type
@@ -86,14 +86,13 @@
 		poison_types =        list(/decl/material/gas/chlorine = TRUE)
 		exhale_type =         /decl/material/gas/carbon_dioxide
 
-
 /obj/item/organ/internal/lungs/Process()
 	..()
 	if(!owner)
 		return
 
 	if(owner.vital_organ_missing_time)
-		owner.ticks_since_last_successful_breath = max(10, owner.ticks_since_last_successful_breath)
+		owner.suffocation_counter = max(10, owner.suffocation_counter)
 		return
 
 	if (germ_level > INFECTION_LEVEL_ONE && active_breathing)
@@ -125,7 +124,7 @@
 			else
 				to_chat(owner, "<span class='danger'>You're having trouble getting enough [breath_type]!</span>")
 
-			owner.ticks_since_last_successful_breath = max(3, owner.ticks_since_last_successful_breath)
+			owner.suffocation_counter = max(3, owner.suffocation_counter)
 
 /obj/item/organ/internal/lungs/proc/rupture()
 	var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)

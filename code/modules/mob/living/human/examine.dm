@@ -60,9 +60,9 @@
 		if(limb && limb.splinted && limb.splinted.loc == limb)
 			. += "<span class='warning'>[use_He] [use_has] \a [limb.splinted] on [use_his] [limb.name]!</span>"
 
-	if (src.stat)
+	if (stat)
 		. += "<span class='warning'>[use_He] [use_is]n't responding to anything around [use_him] and seems to be unconscious.</span>"
-		if((stat == DEAD || is_asystole() || src.ticks_since_last_successful_breath) && distance <= 3)
+		if((stat == DEAD || is_asystole() || suffocation_counter) && distance <= 3)
 			. += "<span class='warning'>[use_He] [use_does] not appear to be breathing.</span>"
 
 	var/datum/reagents/touching_reagents = get_contact_reagents()

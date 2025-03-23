@@ -15,39 +15,49 @@
 /mob/living/proc/should_breathe()
 	return ((life_tick % 2) == 0 || failed_last_breath || is_asystole())
 
-/mob/living/proc/try_breathe()
+// These procs all have a lung organ as an argument to avoid having to do repeated get_bodytype and get_organ calls.
+// It's a small optimization but it adds up if you have a lot of mobs breathing.
 
+/// This proc contains all of the logic for returning a gasmix datum to be used in other breath-related code.
+/// Does not necessarily involve inhaling at all; that's obtain_new_breath()'s job.
+/mob/living/proc/get_breath(obj/item/organ/internal/lungs/lungs)
+	// Handle optional pre-breath logic. If it returns TRUE, skip the breath entirely.
+	if(handle_pre_breath(lungs))
+		return null
+	return obtain_new_breath(lungs)
+
+/// Return a gasmix representing newly-inhaled air.
+/mob/living/proc/obtain_new_breath(obj/item/organ/internal/lungs/lungs)
+	var/static/datum/gas_mixture/vacuum = new //avoid having to create a new gas mixture for each breath in space
+	//Okay, we can breathe, now check if we can get air
+	var/volume_needed = get_breath_volume()
+	//First check for air from internals, then the local environment, then use vacuum
+	return get_breath_from_internal(volume_needed) || get_breath_from_environment(volume_needed) || vacuum
+
+/// Handles pre-breath checks. If this proc returns TRUE, breathing is skipped that tick.
+/mob/living/proc/handle_pre_breath(obj/item/organ/internal/lungs/lungs)
+	//Check if we can breathe at all
+	if(handle_drowning() || (is_asystole() && !GET_CHEMICAL_EFFECT(src, CE_STABLE) && lungs.active_breathing)) //crit aka circulatory shock
+		. = TRUE
+	else if(suffocation_counter > 0)
+		// We aren't drowning or in asystole, but something else is suffocating us, so lower the counter and don't take a breath
+		suffocation_counter--
+		. = TRUE
+	if(.)
+		// Gasp on average every 10 ticks
+		if (prob(10) && !is_asystole() && lungs.active_breathing)
+			INVOKE_ASYNC(src, PROC_REF(emote), /decl/emote/audible/gasp)
+		return TRUE
+	return FALSE // not handled, proceed with breathing
+
+/mob/living/proc/try_breathe()
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	if(!root_bodytype?.breathing_organ)
 		return
-
-	var/active_breathe = FALSE
 	var/obj/item/organ/internal/lungs/lungs = get_organ(root_bodytype.breathing_organ, /obj/item/organ/internal/lungs)
-	if(lungs)
-		active_breathe = lungs.active_breathing
-
-	var/datum/gas_mixture/breath = null
-	//First, check if we can breathe at all
-	if(handle_drowning() || (is_asystole() && !GET_CHEMICAL_EFFECT(src, CE_STABLE) && active_breathe)) //crit aka circulatory shock
-		ticks_since_last_successful_breath = max(2, ticks_since_last_successful_breath + 1)
-
-	if(ticks_since_last_successful_breath>0) //Suffocating so do not take a breath
-		ticks_since_last_successful_breath--
-		if (prob(10) && !is_asystole() && active_breathe) //Gasp per 10 ticks? Sounds about right.
-			INVOKE_ASYNC(src, PROC_REF(emote), "gasp")
-	else
-		//Okay, we can breathe, now check if we can get air
-		var/volume_needed = get_breath_volume()
-		breath = get_breath_from_internal(volume_needed) //First, check for air from internals
-		if(!breath)
-			breath = get_breath_from_environment(volume_needed) //No breath from internals so let's try to get air from our location
-		if(!breath)
-			var/static/datum/gas_mixture/vacuum //avoid having to create a new gas mixture for each breath in space
-			if(!vacuum) vacuum = new
-			breath = vacuum //still nothing? must be vacuum
-
+	var/datum/gas_mixture/breath = get_breath(lungs)
 	//if breath is null or vacuum, the lungs will handle it for us
-	failed_last_breath = (!lungs || nervous_system_failure()) ? 1 : lungs.handle_owner_breath(breath)
+	failed_last_breath = (!lungs || nervous_system_failure()) ? TRUE : lungs.handle_owner_breath(breath)
 	handle_post_breath(breath)
 
 /mob/living/proc/get_breath_from_environment(var/volume_needed=STD_BREATH_VOLUME, var/atom/location = src.loc)
@@ -135,7 +145,6 @@
 		. *= (!BP_IS_PROSTHETIC(heart)) ? get_pulse()/PULSE_NORM : 1.5
 
 /mob/living/proc/handle_post_breath(datum/gas_mixture/breath)
-
 	if(!breath)
 		return
 

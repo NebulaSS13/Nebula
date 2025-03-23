@@ -389,7 +389,7 @@
 				brain.mind.transfer_to(src)
 				qdel(brain.loc)
 				break
-	ticks_since_last_successful_breath = 0
+	suffocation_counter = 0
 	..()
 
 /mob/living/add_blood(mob/living/M, amount = 2, list/blood_data)

@@ -33,9 +33,12 @@
 	VAR_PRIVATE/_on_fire = FALSE
 	VAR_PRIVATE/_fire_intensity
 
-	var/ticks_since_last_successful_breath = 0 //if we failed to breathe last tick
-	var/failed_last_breath = FALSE //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
-	var/possession_candidate = FALSE // Can be possessed by ghosts if unplayed.
+	/// A suffocation counter representing the number of ticks we should fail to breathe.
+	var/suffocation_counter = 0
+	/// This is used to determine if the mob failed a breath. If they did fail a breath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
+	var/failed_last_breath = FALSE
+	/// Can be possessed by ghosts if unplayed.
+	var/possession_candidate = FALSE
 
 	var/job = null//Living
 
