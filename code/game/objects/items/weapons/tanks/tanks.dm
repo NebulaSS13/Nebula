@@ -121,7 +121,7 @@ var/global/list/global/tank_gauge_cache = list()
 		icon = loc
 
 	if (istype(W, /obj/item/scanner/gas))
-		return TRUE
+		return FALSE // allow afterattack to proceed
 
 	if (istype(W,/obj/item/latexballon))
 		var/obj/item/latexballon/LB = W
