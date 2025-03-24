@@ -124,7 +124,7 @@
 	// Now spend it.
 	for(var/obj/item/integrated_circuit/component as anything in assembly_components)
 		if(component.power_draw_idle)
-			if(power_failure || !draw_power(component.power_draw_idle))
+			if(power_failure || !component.draw_idle_power())
 				component.power_fail()
 
 /obj/item/electronic_assembly/receive_mouse_drop(atom/dropping, mob/user, params)
