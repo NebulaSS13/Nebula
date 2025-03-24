@@ -21,6 +21,8 @@
 	eye_color      = donor?.get_eye_colour() || COLOR_BLACK
 	blood_type     = donor?.get_blood_type()
 	unique_enzymes = donor?.get_unique_enzymes()
+	skin_color     = donor?.get_skin_colour()
+	skin_tone      = donor?.get_skin_tone()
 	fingerprint    = donor?.get_full_print(ignore_blockers = TRUE)
 
 	root_species   = donor?.get_species()  || get_species_by_key(global.using_map.default_species)

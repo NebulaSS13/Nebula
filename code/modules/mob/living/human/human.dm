@@ -1122,8 +1122,10 @@
 		return //no feet no footsteps
 	return TRUE
 
-/mob/living/human/get_skin_tone(value)
-	return skin_tone
+/mob/living/human/get_skin_tone()
+	if(get_bodytype()?.appearance_flags & HAS_A_SKIN_TONE)
+		return skin_tone
+	return null
 
 /mob/living/human/set_skin_tone(value)
 	skin_tone = value

@@ -1359,7 +1359,7 @@
 /mob/proc/set_skin_tone(value)
 	return
 
-/mob/proc/get_skin_tone(value)
+/mob/proc/get_skin_tone()
 	return
 
 /mob/proc/force_update_limbs()

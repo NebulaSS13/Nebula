@@ -7,7 +7,9 @@
 	AC.ui_interact(user, state = state)
 
 /mob/living/human/get_skin_colour()
-	return _skin_colour
+	if(get_bodytype()?.appearance_flags & HAS_SKIN_COLOR)
+		return _skin_colour
+	return null
 
 /mob/living/human/set_skin_colour(var/new_color, var/skip_update = FALSE)
 	if((. = ..()))
