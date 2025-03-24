@@ -66,4 +66,4 @@
 /obj/abstract/landmark/exoplanet_spawn/large_plant/do_spawn(var/datum/planetoid_data/planet)
 	if(!istype(planet) || !planet.flora)
 		return
-	planet.flora.spawn_random_big_flora(get_turf(src))
+	planet.spawn_random_big_flora(get_turf(src))
