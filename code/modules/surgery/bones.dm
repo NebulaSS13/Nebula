@@ -140,7 +140,7 @@
 	var/bone = affected.encased ? "\the [target]'s damaged [affected.encased]" : "damaged bones in [target]'s [affected.name]"
 	user.visible_message("<span class='notice'>[user] has mended [bone] with \the [tool].</span>"  , \
 		"<span class='notice'>You have mended [bone] with \the [tool].</span>" )
-	affected.status &= ~ORGAN_BROKEN
+	affected.mend_fracture()
 	affected.stage = 0
 	affected.update_wounds()
 	..()
