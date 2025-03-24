@@ -433,6 +433,9 @@
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(used_item, user, user.get_intent())
 			return ..()
+		if(!istype(used_item, cell_type))
+			to_chat(user, SPAN_WARNING("\The [src] doesn't accept that type of cell."))
+			return TRUE
 		var/obj/item/cell/cell = used_item
 		if(user.try_unequip(used_item,loc))
 			user.drop_from_inventory(used_item, loc)
