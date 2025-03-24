@@ -144,4 +144,4 @@
 		// 0 is south, but if our velocity is pure south we get -90, so add 90
 		// and then invert it, because byond uses counter-clockwise and we want clockwise
 		weather_particles.rotation = generator("num", 90 - arctan(x_wind_vel * 0.50, weather_particles.base_velocity[1][2]), 90 - arctan(x_wind_vel, weather_particles.base_velocity[2][2]), NORMAL_RAND)
-		weather_particles.velocity += generator("vector", list(0, 0, 0), list(x_wind_vel, 0, z_wind_vel), NORMAL_RAND)
+		weather_particles.velocity += generator("vector", list(0, 0, 0), list(x_wind_vel * weather_particles.wind_intensity, 0, z_wind_vel), NORMAL_RAND)
