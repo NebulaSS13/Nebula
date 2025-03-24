@@ -196,9 +196,7 @@
 				for(var/metadata_type in acc_data)
 					var/decl/sprite_accessory_metadata/metadata = GET_DECL(metadata_type)
 					if(istype(metadata))
-						var/value = acc_data[metadata_type]
-						if(!metadata.validate_data(value))
-							acc_data[metadata_type] = metadata.default_value
+						acc_data[metadata_type] = metadata.sanitize_data(acc_data[metadata_type])
 					else
 						acc_data -= metadata_type
 
