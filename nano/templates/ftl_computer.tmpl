@@ -16,49 +16,49 @@
             {{/if}}
         </div>
 	</div>
-	
+
     <h2>CAPACITOR STATUS</h2>
-		
+
 	<div class="item">
 		<div class="itemLabel">
 				Charge Precentage:
 		</div>
-		
+
 		<div class="itemContent">
 			{{:helper.displayBar(data.chargepercent, 0, 100)}}
 		</div>
 	</div>
-	
+
 	<div class="item">
 		<div class="itemLabel">
 			Maximum Capacitor Charge:
 		</div>
-		
+
 		<div class="itemContent">
 			{{:data.max_charge}} MJ
 		</div>
 	</div>
-	
+
 	<div class="item">
 		<div class="itemLabel">
 			Target Charge Level:
 		</div>
-		
+
 		<div class="itemContent">
 			{{:helper.link(data.target_charge, null, { 'adjust_target' : 1})}}  MJ
 		</div>
 	</div>
-		
+
 	<div class="item">
 		<div class="itemLabel">
 			Estimated Charge Time:
 		</div>
-		
+
 		<div class="itemContent">
 			{{:data.chargetime}}
 		</div>
 	</div>
-		
+
 	<div class="item">
 		<div class="itemLabel">
 			Maximum Power Input:
@@ -67,7 +67,7 @@
 			{{:data.max_power}} Kw
 		</div>
 	</div>
-	
+
 	<div class="item">
         <div class="itemLabel">
             Current Power Input:
@@ -76,12 +76,12 @@
             {{:helper.link(data.power_input, null, { 'adjust_power' : 1})}}  Kw
         </div>
     </div>
-	
+
 	<div class="item">
         <div class="itemLabel">
             Charging Status:
         </div>
-		
+
 	    <div class="itemContent">
             {{if data.charging == 1}}
                 Charging
@@ -90,22 +90,22 @@
             {{/if}}
         </div>
     </div>
-	
+
     <div class="item">
 		{{:helper.link("Toggle Capacitor Charging", null, { 'toggle_charge' : 1})}}
     </div>
-	
+
 	<h2>FUEL SYSTEM STATUS</h2>
-	
+
     <div class="item">
         <div class="itemLabel">
             Remaining Fuel:
         </div>
         <div class="itemContent">
-            {{:data.fuel_joules}} MJ
+            {{:data.fuel_joules}} MJ / {{:data.maxfuel}} MJ
         </div>
     </div>
-	
+
     <div class="item">
         <div class="itemLabel">
             Average Conversion Rate:
@@ -114,9 +114,9 @@
             {{:data.fuel_conversion}} MJ/cm3
         </div>
     </div>
-	
+
 	<h2>JUMP SOLUTION ESTIMATES</h2>
-	
+
 	<div class="item">
         <div class="itemLabel">
             Jump Solution Status:
@@ -142,7 +142,7 @@
             {{:data.jumpcost}} MJ/cm
         </div>
     </div>
-	
+
     <div class="item">
         <div class="itemLabel">
             Estimated Power Requirement:
@@ -169,7 +169,7 @@
             {{:helper.link(data.to_plot_y, null, { 'set_shunt_y' : 1})}}
         </div>
     </div>
-	
+
     <div class="item">
         <div class="itemLabel">
             Plotted Shunt X/Y Coordinates:
@@ -181,27 +181,27 @@
             Y {{:data.shunt_y}}
         </div>
     </div>
-	
+
 	<h2>JUMP CONTROLS</h2>
 
-	<div class="item"> 
+	<div class="item">
 		<div class="itemContent">
 			{{:helper.link("Cancel Jump Plotting", null, { 'cancel_plot' : 1})}}
 		</div>
 	</div>
-	
-	<div class="item"> 
+
+	<div class="item">
 		<div class="itemContent">
 			{{:helper.link("Engage Jump Plotting", null, { 'plot_jump' : 1})}}
 		</div>
 	</div>
-        
-    <div class="item">    
+
+    <div class="item">
         <div class="itemContent">
             {{:helper.link("Engage Shunt Drive", null, { 'start_shunt' : 1 })}}
         </div>
     </div>
-	
+
     <div class="item">
         <div class="itemContent">
             {{:helper.link("Disengage Shunt Drive", null, { 'cancel_shunt' : 1 })}}
