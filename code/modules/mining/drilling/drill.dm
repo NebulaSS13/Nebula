@@ -166,12 +166,11 @@
 			resources.resources -= material_typepath
 
 /obj/machinery/mining_drill/proc/deplete_turf(turf/T)
-	if(!turf_has_ore(T))
-		if(istype(T))
-			turfs_to_mine -= T
-			if(has_extension(T, /datum/extension/buried_resources))
-				remove_extension(T, /datum/extension/buried_resources)
-	// TODO: suppress the message if no screen is installed?
+	if(!turf_has_ore(T) && istype(T))
+		turfs_to_mine -= T
+		if(has_extension(T, /datum/extension/buried_resources))
+			remove_extension(T, /datum/extension/buried_resources)
+
 /obj/machinery/mining_drill/proc/choose_turf_to_mine()
 	current_turf = turfs_to_mine[1]
 
