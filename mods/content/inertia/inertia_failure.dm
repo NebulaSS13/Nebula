@@ -17,8 +17,8 @@
 	endWhen = rand(45, 120)
 
 /proc/inertial_dampener_event_can_fire() // Check if we have any ships that require dampers for this event to affect
-	for(var/obj/effect/overmap/visitable/ship/S in SSshuttle.ships)
-		if(S.needs_dampers)
+	for(var/obj/effect/overmap/visitable/ship/ship in SSshuttle.ships)
+		if(ship.needs_dampers)
 			return TRUE
 	return FALSE
 
@@ -26,15 +26,15 @@
 	command_announcement.Announce("Inertial damper calibration error. Please restrict thruster use. Recalibration cycle initiated...", "[location_name()] Inertial Damper Subsystem", zlevels = affecting_z)
 
 /datum/event/inertial_damper/start()
-	for(var/obj/machinery/inertial_damper/I in SSmachines.machinery)
-		I.damping_modifier += -5 //Gm/h
-		I.was_reset = FALSE
+	for(var/obj/machinery/inertial_damper/damper_machine in SSmachines.machinery)
+		damper_machine.damping_modifier += -5 //Gm/h
+		damper_machine.was_reset = FALSE
 
 /datum/event/inertial_damper/end()
 	var/display_announcement = FALSE
-	for(var/obj/machinery/inertial_damper/I in SSmachines.machinery)
-		I.damping_modifier = initial(I.damping_modifier)
-		if(!I.was_reset)
+	for(var/obj/machinery/inertial_damper/damper_machine in SSmachines.machinery)
+		damper_machine.damping_modifier = initial(damper_machine.damping_modifier)
+		if(!damper_machine.was_reset)
 			display_announcement = TRUE
 			break
 

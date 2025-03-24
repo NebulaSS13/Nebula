@@ -54,9 +54,9 @@
 	update_nearby_tiles(locs)
 	controller = new(src)
 
-	var/obj/effect/overmap/visitable/ship/S = get_owning_overmap_object()
-	if(istype(S))
-		S.inertial_dampers |= controller
+	var/obj/effect/overmap/visitable/ship/ship = get_owning_overmap_object()
+	if(istype(ship))
+		ship.inertial_dampers |= controller
 
 	src.overlays += "activated"
 
