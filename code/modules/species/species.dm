@@ -742,3 +742,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/decl/background_category/background_cat = GET_DECL(cat_type)
 		if(background_cat.background_flags & background_flag)
 			return GET_DECL(default_background_info[cat_type])
+
+/decl/species/proc/get_safe_pressure()
+	return (warning_high_pressure + warning_low_pressure)/2
