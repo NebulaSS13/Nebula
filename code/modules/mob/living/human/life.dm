@@ -90,13 +90,8 @@
 	var/pressure_difference
 	var/species_safe_pressure = species.get_safe_pressure(src)
 
-	pressure_difference = abs(pressure - species_safe_pressure)
 	// First get the absolute pressure difference.
-	/*if(pressure < species_safe_pressure) // We are in an underpressure.
-		pressure_difference = species_safe_pressure - pressure
-
-	else //We are in an overpressure or standard atmosphere.
-		pressure_difference = pressure - species_safe_pressure*/
+	pressure_difference = abs(pressure - species_safe_pressure)
 
 	if(pressure_difference < 5) // If the difference is small, don't bother calculating the fraction.
 		pressure_difference = 0
