@@ -4,3 +4,7 @@
 	if(H.mind.role_alt_title == "Mentalist")
 		psi_faculties = list("[PSI_COERCION]" = PSI_RANK_OPERANT)
 	return ..()
+
+// Counselors can be psions without a control implant
+/datum/job/standard/counselor
+	give_psionic_implant_on_join = FALSE
