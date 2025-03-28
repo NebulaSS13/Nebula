@@ -1429,8 +1429,9 @@
 	for(var/turf/neighbor in RANGE_TURFS(my_turf, 1))
 		if(neighbor == my_turf)
 			continue
-		if(neighbor.contains_dense_objects(exceptions = src))
-			return neighbor
+		var/dense_object = neighbor.get_first_dense_object(exceptions = src)
+		if(dense_object)
+			return dense_object
 		platform = neighbor.get_supporting_platform() || (locate(/obj/structure/lattice) in neighbor)
 		if(platform)
 			return platform
