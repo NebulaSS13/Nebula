@@ -27,6 +27,7 @@
 	icon_base       = "cobble"
 	icon_edge_layer = FLOOR_EDGE_PATH
 	flooring_flags  = TURF_REMOVE_CROWBAR
+	has_base_range = 1
 
 /decl/flooring/path/running_bond
 	name           = "stone path"
