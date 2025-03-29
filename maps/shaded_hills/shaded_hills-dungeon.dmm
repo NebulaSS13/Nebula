@@ -512,14 +512,6 @@
 	},
 /turf/floor/path/running_bond/basalt,
 /area/shaded_hills/caves/dungeon/poi)
-"JA" = (
-/obj/structure/door/ebony,
-/obj/abstract/landmark/lock_preset{
-	lock_preset_id = "sunken keep";
-	name = "sunken keep locked door"
-	},
-/turf/floor/path/herringbone/basalt,
-/area/shaded_hills/caves/dungeon/poi)
 "Kq" = (
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/cash/imperial/regalis,
@@ -9713,7 +9705,7 @@ Vk
 bD
 bD
 bD
-JA
+GA
 oF
 Fx
 Fx
@@ -9865,7 +9857,7 @@ gy
 bD
 bD
 bD
-JA
+GA
 oF
 oF
 Fx
@@ -10018,7 +10010,7 @@ bD
 bD
 bD
 it
-JA
+GA
 oF
 it
 it
@@ -10459,8 +10451,8 @@ it
 it
 it
 it
-JA
-JA
+GA
+GA
 it
 it
 it
@@ -11388,7 +11380,7 @@ oF
 it
 bD
 bD
-JA
+GA
 jh
 bD
 bD
@@ -11540,7 +11532,7 @@ oF
 it
 bD
 bD
-JA
+GA
 jh
 bD
 bD
@@ -12148,7 +12140,7 @@ oF
 it
 bD
 bD
-JA
+GA
 jh
 bD
 bD
@@ -12300,7 +12292,7 @@ oF
 it
 bD
 bD
-JA
+GA
 jh
 bD
 bD
@@ -14738,7 +14730,7 @@ lo
 jh
 bD
 jh
-JA
+GA
 bD
 bD
 zA
@@ -14890,7 +14882,7 @@ lo
 jh
 bD
 jh
-JA
+GA
 bD
 bD
 zA
@@ -16556,15 +16548,15 @@ bD
 it
 it
 it
-JA
-JA
+GA
+GA
 it
 it
 it
 it
 it
-JA
-JA
+GA
+GA
 it
 it
 it
@@ -16572,8 +16564,8 @@ it
 it
 it
 it
-JA
-JA
+GA
+GA
 it
 it
 bD
@@ -18211,7 +18203,7 @@ bD
 ok
 bD
 bD
-JA
+GA
 bD
 bD
 bD
@@ -18363,7 +18355,7 @@ bD
 bD
 bD
 bD
-JA
+GA
 bD
 bD
 bD

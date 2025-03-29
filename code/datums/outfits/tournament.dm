@@ -36,7 +36,7 @@
 	suit = /obj/item/clothing/suit/chef
 	hands = list(
 		/obj/item/knife/combat,
-		/obj/item/kitchen/rollingpin
+		/obj/item/rollingpin
 	)
 	l_pocket = /obj/item/knife/combat
 	r_pocket = /obj/item/knife/combat

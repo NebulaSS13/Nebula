@@ -889,8 +889,7 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	id_tag = "ninjadoor";
-	name = "Blast Door";
-	
+	name = "Blast Door"
 	},
 /turf/unsimulated/floor/dark,
 /area/map_template/ninja_dojo/start)

@@ -18,7 +18,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /obj/machinery/door/firedoor,
 /obj/abstract/landmark/scorcher,
@@ -222,7 +222,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /obj/machinery/door/firedoor,
 /turf/floor,
@@ -1406,7 +1406,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /obj/machinery/door/firedoor,
 /turf/floor,
@@ -1707,7 +1707,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable{

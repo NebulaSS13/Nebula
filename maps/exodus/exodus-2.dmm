@@ -21558,7 +21558,7 @@
 	dir = 8
 	},
 /obj/structure/table/marble,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /obj/item/knife,
 /turf/floor/tiled/white,
 /area/exodus/crew_quarters/kitchen)

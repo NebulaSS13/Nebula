@@ -228,7 +228,7 @@
 /area/example/third)
 "MO" = (
 /obj/abstract/level_data_spawner/admin_level{
-	name = "Example Third Deck";
+	name = "Example Third Deck"
 	},
 /turf/space,
 /area/space)

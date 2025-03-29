@@ -660,7 +660,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cu" = (
@@ -754,10 +754,6 @@
 /obj/structure/closet,
 /obj/random/smokes,
 /obj/item/key,
-/turf/floor/tiled,
-/area/icarus/vessel)
-"cJ" = (
-/obj/structure/closet,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cK" = (
@@ -1046,11 +1042,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/floor/tiled,
 /area/icarus/open)
-"dE" = (
-/obj/structure/closet,
-/obj/random/shoes,
-/turf/floor/tiled,
-/area/icarus/vessel)
 "dF" = (
 /obj/structure/closet,
 /obj/random/action_figure,
@@ -22735,7 +22726,7 @@ do
 aP
 dx
 bf
-dE
+dx
 as
 dU
 dU
@@ -24547,13 +24538,13 @@ bX
 as
 cI
 aP
-cJ
-aP
-cJ
+bm
 aP
 bm
 aP
-cJ
+bm
+aP
+bm
 as
 cf
 ej
@@ -25151,13 +25142,13 @@ bI
 bI
 cq
 as
-cJ
+bm
 bg
 de
 df
 cD
 aP
-cJ
+bm
 bg
 dH
 as

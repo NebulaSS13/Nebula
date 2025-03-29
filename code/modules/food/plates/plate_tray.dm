@@ -51,7 +51,7 @@
 		scatter_contents()
 
 /obj/item/plate/tray/attackby(obj/item/used_item, mob/user, click_params)
-	if(istype(used_item, /obj/item/kitchen/rollingpin))
+	if(istype(used_item, /obj/item/rollingpin))
 		if(cooldown < world.time - 25)
 			user.visible_message(SPAN_WARNING("\The [user] bashes \the [src] with \the [used_item]!"))
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)

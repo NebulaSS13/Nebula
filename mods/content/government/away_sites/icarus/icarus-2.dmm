@@ -341,12 +341,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/floor/bluegrid,
 /area/icarus/vessel)
-"bl" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/floor/bluegrid,
-/area/icarus/vessel)
 "bm" = (
 /obj/machinery/light{
 	dir = 4;
@@ -1377,11 +1371,6 @@
 	unique_merge_identifier = "icarus"
 	},
 /area/icarus/vessel)
-"es" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
-/area/icarus/vessel)
 "et" = (
 /obj/structure/shuttle/window,
 /turf/floor/shuttle/white,
@@ -1422,11 +1411,6 @@
 	dir = 4
 	},
 /turf/floor/shuttle/white,
-/area/icarus/vessel)
-"eA" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
 /area/icarus/vessel)
 "eB" = (
 /obj/structure/chair,
@@ -1526,11 +1510,6 @@
 	},
 /turf/floor/shuttle/white,
 /area/icarus/vessel)
-"eT" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
-/area/icarus/vessel)
 "eU" = (
 /obj/structure/chair{
 	dir = 1
@@ -1541,27 +1520,12 @@
 /obj/machinery/light/small,
 /turf/floor/shuttle/white,
 /area/icarus/vessel)
-"eW" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
-/area/icarus/vessel)
 "eX" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
 /turf/floor/shuttle/white,
 /area/icarus/vessel)
-"eY" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
-/area/icarus/open)
-"eZ" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
-/area/icarus/open)
 "fa" = (
 /obj/structure/cable{
 	icon_state = "1-4"
@@ -20356,7 +20320,7 @@ er
 ey
 eJ
 ey
-eY
+eq
 fd
 fi
 fo
@@ -20469,7 +20433,7 @@ ao
 ao
 ap
 aZ
-bl
+aZ
 bt
 ap
 bU
@@ -20558,7 +20522,7 @@ er
 ez
 eK
 eC
-eY
+eq
 fd
 fi
 fo
@@ -20756,11 +20720,11 @@ ee
 bX
 bX
 ap
-es
-eA
+er
+er
 eL
-eT
-eZ
+er
+eq
 fd
 fi
 fo
@@ -21568,7 +21532,7 @@ er
 eC
 eC
 eV
-eY
+eq
 fd
 fi
 fo
@@ -21770,7 +21734,7 @@ er
 eD
 eC
 eC
-eY
+eq
 fd
 fi
 fo
@@ -21972,7 +21936,7 @@ er
 eD
 eC
 eH
-eY
+eq
 fd
 fi
 fo
@@ -22174,7 +22138,7 @@ er
 eE
 eC
 eG
-eY
+eq
 fd
 fi
 fo
@@ -22373,9 +22337,9 @@ av
 ak
 ap
 eu
-eA
+er
 eM
-eW
+er
 eu
 ep
 fj
@@ -23989,9 +23953,9 @@ ag
 ag
 ap
 ew
-eA
+er
 eM
-eT
+er
 fc
 ep
 fl
@@ -24194,7 +24158,7 @@ er
 eG
 eC
 eD
-eY
+eq
 fd
 fm
 fo
@@ -24396,7 +24360,7 @@ er
 eH
 eC
 eD
-eY
+eq
 fd
 fm
 fo
@@ -24598,7 +24562,7 @@ er
 eC
 eC
 eE
-eY
+eq
 fd
 fm
 fo
@@ -24800,7 +24764,7 @@ er
 eI
 eC
 eC
-eY
+eq
 fd
 fm
 fo
@@ -25604,11 +25568,11 @@ cL
 ag
 ag
 ap
-es
-eA
+er
+er
 eL
-eT
-eZ
+er
+eq
 fd
 fm
 fo
@@ -25810,7 +25774,7 @@ er
 eC
 eS
 eX
-eY
+eq
 fd
 fm
 fo
@@ -26012,7 +25976,7 @@ er
 ey
 kT
 ey
-eY
+eq
 fd
 fm
 fo

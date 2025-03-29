@@ -149,8 +149,7 @@
 	department = "Captain";
 	pixel_x = 32;
 	initial_network_id = "freightnet_0451";
-	dir = 4;
-	
+	dir = 4
 	},
 /obj/structure/chair{
 	dir = 1
@@ -2008,7 +2007,7 @@
 	},
 /obj/item/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /obj/item/chems/condiment/small/saltshaker{
 	pixel_x = -3
 	},

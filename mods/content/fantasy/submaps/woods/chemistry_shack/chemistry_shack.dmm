@@ -113,7 +113,7 @@
 /obj/item/food/grown/potato,
 /obj/item/food/grown/carrot,
 /obj/item/food/grown/carrot,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /turf/floor/wood/rough/walnut,
 /area/fantasy/outside/point_of_interest/chemistry_shack)
 "M" = (

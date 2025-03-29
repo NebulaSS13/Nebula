@@ -1995,7 +1995,7 @@
 	},
 /obj/item/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /obj/item/chems/condiment/small/saltshaker{
 	pixel_x = -3
 	},

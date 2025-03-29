@@ -884,7 +884,7 @@
 /area/shaded_hills/outside/downlands/poi)
 "zj" = (
 /obj/structure/table/marble,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /obj/item/knife/kitchen/cleaver/bronze,
 /turf/floor/path/herringbone/basalt,
 /area/shaded_hills/inn/kitchen)

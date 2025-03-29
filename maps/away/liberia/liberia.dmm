@@ -4213,7 +4213,7 @@
 	},
 /obj/structure/table/reinforced,
 /obj/item/clothing/suit/chef/classic,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /obj/item/knife/kitchen,
 /turf/floor/tiled/freezer,
 /area/liberia/bar)

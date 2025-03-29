@@ -28,9 +28,6 @@
 	},
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growX)
-"ag" = (
-/turf/floor/tiled/dark,
-/area/map_template/hydrobase/station/growX)
 "ah" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /obj/structure/catwalk,
@@ -174,9 +171,6 @@
 /mob/living/simple_animal/hostile/malf_drone/hydro,
 /turf/floor/bluegrid,
 /area/map_template/hydrobase/station/growD)
-"aE" = (
-/turf/floor/tiled/white,
-/area/map_template/hydrobase/station/growA)
 "aF" = (
 /obj/machinery/firealarm{
 	dir = 8;
@@ -393,9 +387,6 @@
 /obj/item/seeds/wheatseed,
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
-"bi" = (
-/turf/floor/tiled/white,
-/area/map_template/hydrobase/station/growD)
 "bj" = (
 /obj/machinery/light{
 	dir = 4;
@@ -1136,9 +1127,6 @@
 /obj/item/seeds/grassseed,
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growC)
-"dj" = (
-/turf/floor/tiled/white,
-/area/map_template/hydrobase/station/growC)
 "dk" = (
 /obj/structure/catwalk,
 /obj/machinery/portable_atmospherics/hydroponics,
@@ -1517,7 +1505,7 @@
 /area/map_template/hydrobase/station/growA)
 "eh" = (
 /obj/structure/catwalk,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /obj/item/knife/kitchen,
 /obj/structure/table/glass/pglass,
 /obj/item/ashtray,
@@ -2278,9 +2266,6 @@
 /obj/item/seeds/towercap,
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growB)
-"fT" = (
-/turf/floor/tiled/white,
-/area/map_template/hydrobase/station/growB)
 "fU" = (
 /obj/machinery/light{
 	dir = 4;
@@ -2874,7 +2859,7 @@ aD
 cm
 cw
 cP
-dj
+cR
 cP
 dX
 cm
@@ -2989,7 +2974,7 @@ au
 aC
 aQ
 aC
-bi
+aQ
 aQ
 aP
 aQ
@@ -3005,7 +2990,7 @@ eQ
 fi
 fj
 fi
-fT
+fi
 fx
 fi
 fj
@@ -3274,26 +3259,26 @@ al
 al
 ap
 aq
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 aq
 bR
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 dt
 cU
-aE
-aE
+av
+av
 cX
 bR
 aq
-aE
-aE
-aE
+av
+av
+av
 aT
 aq
 ef
@@ -3314,12 +3299,12 @@ al
 al
 ap
 aq
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 bt
-aE
+av
 bS
 bG
 bG
@@ -3331,12 +3316,12 @@ bG
 bG
 bG
 fo
-aE
+av
 bt
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 aq
 ef
 al
@@ -3355,7 +3340,7 @@ al
 ao
 aq
 av
-aE
+av
 aS
 aS
 bk
@@ -3377,7 +3362,7 @@ bu
 fV
 ef
 ef
-aE
+av
 av
 aq
 gI
@@ -3396,9 +3381,9 @@ al
 al
 ap
 aq
-aE
-aE
-aE
+av
+av
+av
 bl
 bv
 bG
@@ -3416,9 +3401,9 @@ bT
 bG
 bv
 cW
-aE
-aE
-aE
+av
+av
+av
 aq
 ef
 al
@@ -3439,26 +3424,26 @@ al
 ap
 aq
 aT
-aE
-aE
-aE
+av
+av
+av
 aq
 aq
-aE
-aE
-aE
+av
+av
+av
 cX
 dw
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 aq
 aq
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 aq
 ef
 al
@@ -3493,8 +3478,8 @@ dx
 dI
 eg
 cU
-aE
-aE
+av
+av
 aq
 fL
 ef
@@ -3881,7 +3866,7 @@ ab
 ac
 ad
 ad
-ag
+ad
 ai
 ak
 ak

@@ -1690,7 +1690,7 @@
 	icon_state = "req_comp_rewired";
 	pixel_y = -32;
 	stat = 1;
-	dir = 2;
+	dir = 2
 	},
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)

@@ -910,7 +910,7 @@
 /area/constructionsite/hallway/fore)
 "dc" = (
 /obj/structure/table/marble,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /turf/floor/plating/airless,
 /area/constructionsite/hallway/fore)
 "de" = (

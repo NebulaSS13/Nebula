@@ -13,7 +13,7 @@
 
 // Dough + rolling pin = flat dough
 /obj/item/food/dough/attackby(obj/item/used_item, mob/user)
-	if(!istype(used_item,/obj/item/kitchen/rollingpin))
+	if(!istype(used_item,/obj/item/rollingpin))
 		return ..()
 	var/obj/item/food/sliceable/flatdough/result = new()
 	result.dropInto(loc)

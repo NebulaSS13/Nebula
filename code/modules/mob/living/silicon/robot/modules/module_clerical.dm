@@ -33,7 +33,7 @@
 		/obj/item/scanner/plant,
 		/obj/item/plants,
 		/obj/item/robot_harvester,
-		/obj/item/kitchen/rollingpin,
+		/obj/item/rollingpin,
 		/obj/item/knife/kitchen,
 		/obj/item/crowbar,
 		/obj/item/rsf,
