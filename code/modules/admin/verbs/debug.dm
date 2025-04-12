@@ -519,7 +519,7 @@
 
 	#if DM_VERSION >= 516
 
-	var/list/browser_options = winget(src, null, "browser-options")
+	var/browser_options = winget(src, null, "browser-options")
 
 	if(findtext(browser_options, "devtools") == TRUE)
 		// Disable the dev tools.
