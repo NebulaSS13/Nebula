@@ -218,6 +218,7 @@ var/global/list/admin_verbs_debug = list(
 	/datum/admins/proc/force_weather_state,
 	/datum/admins/proc/force_kill_weather,
 	/client/proc/force_reload_theme_css,
+	/client/proc/toggle_browser_inspect,
 	)
 
 var/global/list/admin_verbs_paranoid_debug = list(

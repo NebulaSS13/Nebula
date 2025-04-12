@@ -512,3 +512,26 @@
 	. += "</ol>"
 
 	show_browser(usr, JOINTEXT(.), "window=dellog")
+
+/client/proc/toggle_browser_inspect()
+	set category = "Debug"
+	set name = "Toggle Browser Inspect"
+
+	#if DM_VERSION >= 516
+
+	var/list/browser_options = winget(src, null, "browser-options")
+
+	if(findtext(browser_options, "devtools") == TRUE)
+		// Disable the dev tools.
+		winset(src, null, list("browser-options" = "-devtools"))
+		message_admins("[key_name_admin(usr)] has disabled Browser Inspection.")
+	else
+		// Enable the dev tools.
+		winset(src, null, list("browser-options" = "+devtools"))
+		message_admins("[key_name_admin(usr)] has enabled Browser Inspection.")
+
+	#else
+
+	alert("Browser Inspection is not supported in this version of BYOND, please update to 516 or later.")
+
+	#endif
