@@ -638,8 +638,8 @@
 
 		if (ST.use(required_amount))
 			var/obj/structure/window/WD = new(loc, ST.material.type, ST.reinf_material?.type, dir_to_set, FALSE)
-			to_chat(user, SPAN_NOTICE("You place [WD]."))
-			WD.set_anchored(FALSE) // handles setting construction state for us
+			to_chat(user, SPAN_NOTICE("You place [WD].")) 
+			WD.set_anchored(TRUE) // handles setting construction state for us  // was orinigally FALSE but it caused bugs wth reinforced window which cannot then be pried out of frame
 		else
 			to_chat(user, SPAN_NOTICE("You do not have enough sheets."))
 			return
