@@ -6,8 +6,7 @@
 	. = ..()
 	if(AM && can_roll_up_atom(AM) && AM.Adjacent(src))
 		var/turf/stepping = AM.loc
-		roll_up_atom(AM)
-		if(stepping)
+		if(roll_up_atom(AM) && stepping)
 			step_towards(src, stepping)
 
 

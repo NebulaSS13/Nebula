@@ -11,13 +11,14 @@
 
 /obj/structure/diona_gestalt/proc/roll_up_atom(var/mob/living/simple_animal/alien/diona/chirp, var/silent)
 	if(!istype(chirp))
-		return
+		return FALSE
 	if(!silent)
 		visible_message("<span class='notice'>\The [chirp] is engulfed by \the [src].</span>")
 	if(isdiona(chirp))
 		nymphs[chirp] = TRUE
 		queue_icon_update()
 	chirp.forceMove(src)
+	return TRUE
 
 /obj/structure/diona_gestalt/proc/shed_atom(var/atom/movable/shedding, var/silent, var/forcefully)
 
