@@ -17,6 +17,7 @@
 	handle_generic_blending = TRUE
 	hitsound = 'sound/effects/Glasshit.ogg'
 	max_health = 100
+	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/const/CONSTRUCTION_STATE_NO_FRAME = 0
