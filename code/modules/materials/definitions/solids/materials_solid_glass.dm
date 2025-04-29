@@ -39,7 +39,7 @@
 	codex_name = null
 	uid = "solid_borosilicate_glass"
 	lore_text = "An extremely heat-resistant form of glass."
-	flags = MAT_FLAG_BRITTLE | MAT_FLAG_ALTERATION_ALL
+	flags = MAT_FLAG_BRITTLE
 	hardness = MAT_VALUE_HARD
 	weight = MAT_VALUE_LIGHT
 	integrity = 70
@@ -60,7 +60,6 @@
 		/decl/material/solid/organic/plastic = 0.3
 	)
 	color = COLOR_OFF_WHITE
-	flags = MAT_FLAG_ALTERATION_COLOR
 	opacity = 0.6
 	melting_point = 1674
 	hardness = MAT_VALUE_HARD
