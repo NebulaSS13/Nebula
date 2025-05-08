@@ -2680,6 +2680,7 @@
 #include "code\modules\keybindings\movement.dm"
 #include "code\modules\keybindings\setup.dm"
 #include "code\modules\lighting\_lighting_defs.dm"
+#include "code\modules\lighting\ambient_turf.dm"
 #include "code\modules\lighting\lighting_area.dm"
 #include "code\modules\lighting\lighting_atom.dm"
 #include "code\modules\lighting\lighting_corner.dm"
