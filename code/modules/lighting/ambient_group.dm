@@ -1,8 +1,8 @@
 #define BITWISE_MAX_BITS 24
 
 /// A bitmap of free ambience group indexes.
-var/ambience_group_free_bitmap = ~0
-var/ambience_group_map[BITWISE_MAX_BITS]
+var/global/ambience_group_free_bitmap = ~0
+var/global/ambience_group_map[BITWISE_MAX_BITS]
 
 /datum/ambience_group
 	var/global_index
@@ -19,24 +19,24 @@ var/ambience_group_map[BITWISE_MAX_BITS]
 		invalid = TRUE
 		return
 
-	ambience_group_map[global_index] = src
+	global.ambience_group_map[global_index] = src
 
 /datum/ambience_group/Destroy()
 	if (!invalid)
-		ambience_group_map[global_index] = null
-		ambience_group_free_bitmap |= (1 << global_index)
+		global.ambience_group_map[global_index] = null
+		global.ambience_group_free_bitmap |= (1 << global_index)
 	return ..()
 
 /datum/ambience_group/proc/allocate_index()
-	if (ambience_group_free_bitmap == 0)
+	if (global.ambience_group_free_bitmap == 0)
 		CRASH("Failed to allocate ambience_group: index bitmap is exhausted")
 
 	// Find the first free index in the bitmap.
 	var/index = 1
-	while (!(ambience_group_free_bitmap & (1 << index)) && index < BITWISE_MAX_BITS)
+	while (!(global.ambience_group_free_bitmap & (1 << index)) && index < BITWISE_MAX_BITS)
 		index += 1
 
-	ambience_group_free_bitmap &= ~(1 << index)
+	global.ambience_group_free_bitmap &= ~(1 << index)
 
 	return index
 
@@ -97,7 +97,7 @@ var/ambience_group_map[BITWISE_MAX_BITS]
 		var/remaining_groups = ambience_active_groups
 		for (var/i in 1 to BITWISE_MAX_BITS)
 			if (ambience_affecting_bitmap & (1 << i))
-				var/datum/ambience_group/group = ambience_group_map[i]
+				var/datum/ambience_group/group = global.ambience_group_map[i]
 				add_ambient_light_raw(-group.apparent_r, -group.apparent_g, -group.apparent_b)
 
 				remaining_groups -= 1
@@ -113,7 +113,7 @@ var/ambience_group_map[BITWISE_MAX_BITS]
 		var/remaining_groups = ambience_active_groups
 		for (var/i in 1 to BITWISE_MAX_BITS)
 			if (ambience_affecting_bitmap & (1 << i))
-				var/datum/ambience_group/group = ambience_group_map[i]
+				var/datum/ambience_group/group = global.ambience_group_map[i]
 				add_ambient_light_raw(group.apparent_r, group.apparent_g, group.apparent_b)
 				remaining_groups -= 1
 
