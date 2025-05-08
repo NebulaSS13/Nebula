@@ -12,14 +12,14 @@
 	/// Not to be confused with opacity, this will be TRUE if there's any opaque atom on the tile.
 	var/tmp/has_opaque_atom = FALSE
 
-// Causes any affecting light sources to be queued for a visibility update, for example a door got opened.
+/// Causes any affecting light sources to be queued for a visibility update, for example a door got opened.
 /turf/proc/reconsider_lights()
 	var/datum/light_source/L
 	for (var/thing in affecting_lights)
 		L = thing
 		L.vis_update()
 
-// Forces a lighting update. Reconsider lights is preferred when possible.
+/// Forces a lighting update. Reconsider lights is preferred when possible.
 /turf/proc/force_update_lights()
 	var/datum/light_source/L
 	for (var/thing in affecting_lights)
@@ -78,7 +78,7 @@
 
 #define SCALE(targ,min,max) (targ - min) / (max - min)
 
-// Used to get a scaled lumcount.
+/// Returns a lumcount (average intensity of color channels) scaled between minlum and maxlum.
 /turf/proc/get_lumcount(minlum = 0, maxlum = 1)
 	if (!lighting_overlay)
 		return 0.5
@@ -95,7 +95,7 @@
 
 #undef SCALE
 
-// Can't think of a good name, this proc will recalculate the has_opaque_atom variable.
+/// Can't think of a good name, this proc will recalculate the has_opaque_atom variable.
 /turf/proc/recalc_atom_opacity()
 #ifdef AO_USE_LIGHTING_OPACITY
 	var/old = has_opaque_atom
