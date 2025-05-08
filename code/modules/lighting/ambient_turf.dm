@@ -13,6 +13,7 @@
 	var/tmp/ambient_light_old_g = 0
 	var/tmp/ambient_light_old_b = 0
 
+/// Set the turf's self-ambience channel. This can only contain one value at a time, so it should generally only be used by the turf itself.
 /turf/proc/set_ambient_light(color, multiplier)
 	if (color == ambient_light && multiplier == ambient_light_multiplier)
 		return
@@ -22,6 +23,7 @@
 
 	update_ambient_light()
 
+/// Replace one ambient light with another. This is effectively a delta update, but it can be used to pretend that our one channel is doing color blending.
 /turf/proc/replace_ambient_light(old_color, new_color, old_multiplier, new_multiplier = 0)
 	if (!TURF_IS_AMBIENT_LIT_UNSAFE(src))
 		add_ambient_light(new_color, new_multiplier)
@@ -44,6 +46,7 @@
 
 	add_ambient_light_raw(dr, dg, db)
 
+/// Add an ambient light to the turf's self-channel. This is a delta update, retain your applied color if you want to be able to remove it later.
 /turf/proc/add_ambient_light(color, multiplier, update = TRUE)
 	if (!color)
 		return
@@ -58,6 +61,7 @@
 
 	add_ambient_light_raw(ambient_r, ambient_g, ambient_b, update)
 
+/// Directly manipulate the state of the self-ambience channel. Don't use unless you know what you're doing and how ambience works internally.
 /turf/proc/add_ambient_light_raw(lr, lg, lb, update = TRUE)
 	if (!lr && !lg && !lb)
 		if (!ambient_light_old_r || !ambient_light_old_g || !ambient_light_old_b)
@@ -92,12 +96,14 @@
 	for (var/datum/lighting_corner/C in corners)
 		C.update_ambient_lumcount(lr, lg, lb, !update)
 
+/// Wipe the entire self-ambience channel. This will preserve ambience from ambience groups.
 /turf/proc/clear_ambient_light()
 	if (ambient_light == null)
 		return
 
+	replace_ambient_light(ambient_light, COLOR_WHITE, ambient_light_multiplier, 0)
 	ambient_light = null
-	update_ambient_light()
+	ambient_light_multiplier = initial(ambient_light_multiplier)
 
 /turf/proc/update_ambient_light(no_corner_update = FALSE)
 	// These are deltas.
