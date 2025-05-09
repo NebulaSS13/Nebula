@@ -44,7 +44,13 @@
 	var/light_disabled = 0
 	var/alarm_on = 0
 
-	var/affected_by_emp_until = 0
+	var/emp_timer_id = null
+
+	/// The threshold that installed scanning modules need to met or exceed in order for the camera to see through walls.
+	var/const/XRAY_THRESHOLD = 2
+
+	/// The threshold that installed capacitors need to met or exceed in order for the camera to be immunie to EMP.
+	var/const/EMP_PROOF_THRESHOLD = 2
 
 /obj/machinery/camera/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
@@ -84,23 +90,14 @@
 
 		invalidateCameraCache()
 	set_extension(src, /datum/extension/network_device/camera, null, null, null, TRUE, preset_channels, c_tag, cameranet_enabled, requires_connection)
+	RefreshParts()
 
 /obj/machinery/camera/Destroy()
 	set_camera_status(0) //kick anyone viewing out
+	deltimer(emp_timer_id)
 	return ..()
 
 /obj/machinery/camera/Process()
-	if((stat & EMPED) && world.time >= affected_by_emp_until)
-		stat &= ~EMPED
-		cancelCameraAlarm()
-		update_icon()
-		update_coverage()
-
-		if (detectTime > 0)
-			var/elapsed = world.time - detectTime
-			if (elapsed > alarm_delay)
-				triggerAlarm()
-
 	if (stat & (EMPED))
 		return
 	if(!motion_sensor)
@@ -156,16 +153,30 @@
 		newTarget(AM)
 
 /obj/machinery/camera/emp_act(severity)
-	if(!(stat_immune & EMPED) && prob(100/severity))
-		if(!affected_by_emp_until || (world.time < affected_by_emp_until))
-			affected_by_emp_until = max(affected_by_emp_until, world.time + (90 SECONDS / severity))
-		else
-			stat |= EMPED
-			set_light(0)
-			triggerCameraAlarm()
-			update_icon()
-			update_coverage()
-			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+	if(stat_immune & EMPED)
+		return
+	if(prob(100 / severity))
+		stat |= EMPED
+		set_light(0)
+		triggerCameraAlarm()
+		update_icon()
+		update_coverage()
+
+		var/emp_length = 90 SECONDS / severity
+		emp_timer_id = addtimer(CALLBACK(src, PROC_REF(emp_expired)), emp_length, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE)
+	..()
+
+/obj/machinery/camera/proc/emp_expired()
+	stat &= ~EMPED
+	cancelCameraAlarm()
+	update_icon()
+	update_coverage()
+
+	if (detectTime > 0)
+		var/elapsed = world.time - detectTime
+		if (elapsed > alarm_delay)
+			triggerAlarm()
+
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.get_structure_damage(), P.atom_damage_type)
@@ -254,25 +265,28 @@
 		update_coverage()
 
 /obj/machinery/camera/on_update_icon()
+	var/base_state = initial(icon_state)
+	if(total_component_rating_of_type(/obj/item/stock_parts/scanning_module) >= XRAY_THRESHOLD)
+		base_state = "xraycam"
 	if (!status || (stat & BROKEN))
-		icon_state = "[initial(icon_state)]1"
+		icon_state = "[base_state]1"
 	else if (stat & EMPED)
-		icon_state = "[initial(icon_state)]emp"
+		icon_state = "[base_state]emp"
 	else
-		icon_state = initial(icon_state)
+		icon_state = base_state
 
 /obj/machinery/camera/RefreshParts()
 	. = ..()
 	var/power_mult = 1
 	var/emp_protection = total_component_rating_of_type(/obj/item/stock_parts/capacitor)
-	if(emp_protection > 2)
-		stat_immune &= EMPED
+	if(emp_protection >= EMP_PROOF_THRESHOLD)
+		stat_immune |= EMPED
 	else
 		stat_immune &= ~EMPED
 	var/xray_rating = total_component_rating_of_type(/obj/item/stock_parts/scanning_module)
 	var/datum/extension/network_device/camera/camera_device = get_extension(src, /datum/extension/network_device/)
 	if(camera_device)
-		if(xray_rating > 2)
+		if(xray_rating >= XRAY_THRESHOLD)
 			camera_device.xray_enabled = TRUE
 			power_mult++
 		else

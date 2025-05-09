@@ -33,33 +33,24 @@
 	requires_connection = FALSE
 
 // EMP
-
-/obj/machinery/camera/emp_proof/populate_parts(full_populate)
-	. = ..()
-	install_component(/obj/item/stock_parts/capacitor/adv, TRUE)
+/obj/machinery/camera/emp_proof
+	uncreated_component_parts = list(/obj/item/stock_parts/capacitor/adv = 1)
 
 // X-RAY
-
 /obj/machinery/camera/xray
-	icon_state = "xraycam" // Thanks to Krutchen for the icons.
-
-/obj/machinery/camera/xray/populate_parts(full_populate)
-	. = ..()
-	install_component(/obj/item/stock_parts/scanning_module/adv, TRUE)
+	uncreated_component_parts = list(/obj/item/stock_parts/scanning_module/adv = 1)
 
 // MOTION
-
-/obj/machinery/camera/motion/populate_parts(full_populate)
-	. = ..()
-	install_component(/obj/item/stock_parts/micro_laser, TRUE)
+/obj/machinery/camera/motion
+	uncreated_component_parts = list(/obj/item/stock_parts/micro_laser = 1)
 
 // ALL UPGRADES
-
-/obj/machinery/camera/all/populate_parts(full_populate)
-	. = ..()
-	install_component(/obj/item/stock_parts/capacitor/adv, TRUE)
-	install_component(/obj/item/stock_parts/scanning_module/adv, TRUE)
-	install_component(/obj/item/stock_parts/micro_laser, TRUE)
+/obj/machinery/camera/all
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/capacitor/adv = 1,
+		/obj/item/stock_parts/scanning_module/adv = 1,
+		/obj/item/stock_parts/micro_laser = 1
+	)
 
 // AUTONAME left as a map stub
 /obj/machinery/camera/autoname
