@@ -17,7 +17,6 @@
 	handle_generic_blending = TRUE
 	hitsound = 'sound/effects/Glasshit.ogg'
 	max_health = 100
-	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/const/CONSTRUCTION_STATE_NO_FRAME = 0
@@ -640,7 +639,7 @@
 		if (ST.use(required_amount))
 			var/obj/structure/window/WD = new(loc, ST.material.type, ST.reinf_material?.type, dir_to_set, FALSE)
 			to_chat(user, SPAN_NOTICE("You place [WD]."))
-			WD.set_anchored(TRUE) // handles setting construction state for us
+			WD.set_anchored(FALSE) // handles setting construction state for us
 		else
 			to_chat(user, SPAN_NOTICE("You do not have enough sheets."))
 			return
