@@ -59,7 +59,6 @@
 
 /obj/item/ammo_magazine/shotholder/on_update_icon()
 	..()
-	create_initial_contents()
 	overlays.Cut()
 	if(marking_color)
 		var/image/I = image(icon, "shotholder-marking")
