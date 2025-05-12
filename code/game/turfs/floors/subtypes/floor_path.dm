@@ -28,7 +28,7 @@
 		LAZYADD(decals, moss)
 
 /turf/floor/path/running_bond
-	icon_state      = "runningbond"
+	icon_state      = "runningbond0"
 	_flooring       = /decl/flooring/path/running_bond
 
 /turf/floor/path/herringbone
