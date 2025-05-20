@@ -11,9 +11,23 @@
 	color                         = /decl/material/solid/metal/stainlesssteel::color
 	amount_per_transfer_from_this = 15
 
+	// Used for work sounds.
+	var/datum/sound_token/work_sound_token
+	var/sound_id
+	var/work_sound
+
 	var/cooking_category
 	var/started_cooking
 	var/decl/recipe/last_recipe
+
+/obj/item/chems/cooking_vessel/Initialize(ml, material_key)
+	. = ..()
+	if(work_sound)
+		sound_id = "[work_sound]"
+
+/obj/item/chems/cooking_vessel/Destroy()
+	QDEL_NULL(work_sound_token)
+	return ..()
 
 // TODO: ladle
 /obj/item/chems/cooking_vessel/attackby(obj/item/used_item, mob/user)
@@ -101,6 +115,7 @@
 		//TODO fail last recipe
 		started_cooking = null
 		last_recipe = null
+		QDEL_NULL(work_sound_token)
 		return PROCESS_KILL
 	if(isnull(started_cooking) || recipe != last_recipe)
 		started_cooking = world.time
@@ -116,6 +131,8 @@
 			last_recipe = null
 		return
 	last_recipe = recipe
+	if(!work_sound_token)
+		work_sound_token = play_looping_sound(src, sound_id, work_sound, volume = 30)
 	update_icon()
 
 /obj/item/chems/cooking_vessel/on_update_icon()

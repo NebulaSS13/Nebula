@@ -6,6 +6,7 @@
 	cooking_category   = RECIPE_CATEGORY_POT
 	presentation_flags = PRESENTATION_FLAG_NAME
 	obj_flags          = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE
+	work_sound = 'sound/effects/boiling-water.ogg'
 	var/last_boil_status
 	var/last_boil_temp
 
