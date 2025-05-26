@@ -41,8 +41,6 @@
 	var/list/bodytype_categories_allowed
 	/// Restricts some styles to specific bodytype categories
 	var/list/bodytype_categories_denied
-	/// Slot to check equipment for when hiding this accessory.
-	var/hidden_by_gear_slot
 	/// Flag to check equipment for when hiding this accessory.
 	var/hidden_by_gear_flag
 	/// Various flags controlling some checks and behavior.
@@ -119,11 +117,8 @@
 /decl/sprite_accessory/proc/is_hidden(var/obj/item/organ/external/organ)
 	if(!organ?.owner)
 		return FALSE
-	if(hidden_by_gear_slot)
-		var/obj/item/hiding = organ.owner.get_equipped_item(hidden_by_gear_slot)
-		if(!hiding)
-			return FALSE
-		return (hiding.flags_inv & hidden_by_gear_flag)
+	if(hidden_by_gear_flag && organ.owner.has_equipment_with_all_inventory_flags(hidden_by_gear_flag))
+		return TRUE
 	return FALSE
 
 /decl/sprite_accessory/proc/get_accessory_icon(var/obj/item/organ/external/organ)

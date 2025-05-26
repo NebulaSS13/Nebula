@@ -411,3 +411,22 @@
 	if(istype(inv_slot))
 		. = inv_slot.covering_slot_flags
 	. ||= SLOT_HANDS
+
+
+/// Returns TRUE if the mob has any of the specified flags_inv flags covered.
+/mob/proc/has_equipment_with_any_inventory_flags(flags)
+	// remove flags until we have none left
+	for(var/obj/item/thing in get_equipped_items(include_carried = FALSE))
+		if(flags & thing.flags_inv)
+			return TRUE
+	return FALSE
+
+/// Returns TRUE if the mob has all the specified flags_inv flags covered.
+/// They do not need to all be covered by the same item.
+/mob/proc/has_equipment_with_all_inventory_flags(flags)
+	// remove flags until we have none left
+	for(var/obj/item/thing in get_equipped_items(include_carried = FALSE))
+		flags &= ~thing.flags_inv // unset all the flags this item has
+		if(!flags)
+			return TRUE
+	return !flags // if we have any flags left at the end, something we wanted wasn't covered
