@@ -1,0 +1,25 @@
+#ifndef CONTENT_PACK_MERCHANTS
+#define CONTENT_PACK_MERCHANTS
+// BEGIN_INCLUDE
+#include "_merchants.dm"
+#include "admin_merchant_verbs.dm"
+#include "datums\merchant_program.dm"
+#include "datums\unit_tests.dm"
+#include "datums\merchants\_merchants.dm"
+#include "datums\merchants\inventory_strategies.dm"
+#include "datums\merchants\potential_commodities.dm"
+#include "datums\merchants\price_modifiers.dm"
+#include "datums\merchants\speech.dm"
+#include "datums\merchants\commodities\commodities.dm"
+#include "datums\merchants\commodities\quantity_methods.dm"
+#include "datums\merchants\commodities\requirements.dm"
+#include "datums\observation\merchant_movement.dm"
+#include "datums\trade_hubs\_trade_hub.dm"
+#include "datums\trade_hubs\map_stub.dm"
+#include "datums\trade_hubs\overmap_hub.dm"
+#include "datums\trade_hubs\singleton_hub.dm"
+#include "machinery\merchant_console.dm"
+#include "machinery\merchant_pad.dm"
+#include "system\subsystem_trade.dm"
+// END_INCLUDE
+#endif

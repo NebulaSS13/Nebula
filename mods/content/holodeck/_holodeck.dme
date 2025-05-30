@@ -13,6 +13,5 @@
 #include "holodeck_designs.dm"
 #include "holodeck_programs.dm"
 #include "maps_holodeck.dm"
-#include "trader_overrides.dm"
 // END_INCLUDE
 #endif
