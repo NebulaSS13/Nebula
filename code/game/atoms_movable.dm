@@ -58,7 +58,8 @@
 	SSspacedrift.processing[src] = src
 	return 1
 
-//return SPACE_MOVE_FORBIDDEN to space drift, SPACE_MOVE_PERMITTED to stop, SPACE_MOVE_SUPPORTED for mobs to handle space slips
+// return SPACE_MOVE_FORBIDDEN to space drift, SPACE_MOVE_PERMITTED to stop, SPACE_MOVE_SUPPORTED for mobs to handle space slips
+// Note that it may also return an instance of /atom/movable, which acts as SPACE_MOVE_SUPPORTED and results in pushing the movable backwards.
 /atom/movable/proc/is_space_movement_permitted(allow_movement = FALSE)
 	if(!simulated)
 		return SPACE_MOVE_PERMITTED

@@ -382,6 +382,7 @@
 #define CRAYON_DRAW_ARROW    "arrow"
 
 // Enum for results of is_space_movement_permitted()
-#define SPACE_MOVE_SUPPORTED (-1)
-#define SPACE_MOVE_FORBIDDEN   0
-#define SPACE_MOVE_PERMITTED   1
+// Note that it may also return an instance of /atom/movable, which acts as SPACE_MOVE_SUPPORTED.
+#define SPACE_MOVE_SUPPORTED (-1) //! Mob should run space-slipping checks.
+#define SPACE_MOVE_FORBIDDEN   0  //! Mob should begin spacedrift.
+#define SPACE_MOVE_PERMITTED   1  //! Mob should stop/prevent spacedrift.
