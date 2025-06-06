@@ -1429,6 +1429,8 @@
 	for(var/turf/neighbor in RANGE_TURFS(my_turf, 1))
 		if(neighbor == my_turf)
 			continue
+		if(neighbor.is_wall() || neighbor.is_floor())
+			return neighbor
 		var/dense_object = neighbor.get_first_dense_object(exceptions = src)
 		if(dense_object)
 			return dense_object
