@@ -32,7 +32,7 @@
 /datum/storage_ui/proc/after_close(mob/user)
 	return
 
-/datum/storage_ui/proc/on_insertion()
+/datum/storage_ui/proc/on_insertion(obj/item/inserted)
 	return
 
 /datum/storage_ui/proc/on_pre_remove(obj/item/W)
@@ -42,6 +42,9 @@
 	return
 
 /datum/storage_ui/proc/on_hand_attack(mob/user)
+	return
+
+/datum/storage_ui/proc/get_displayed_contents()
 	return
 
 // Default subtype
@@ -96,23 +99,32 @@
 /datum/storage_ui/default/on_post_remove(obj/item/W)
 	refresh_viewers()
 
-/datum/storage_ui/default/on_pre_remove(obj/item/W)
+/datum/storage_ui/default/on_pre_remove(obj/item/removing)
 	for(var/mob/user in is_seeing)
-		user.client?.screen -= W
+		user.client?.screen -= removing
+	// if being moved to an inventory slot or other storage item, this will be re-set after the transfer is done
+	removing.screen_loc = null
 
 /datum/storage_ui/default/on_hand_attack(mob/user)
 	for(var/mob/other_user in is_seeing)
 		if (other_user.active_storage == _storage)
 			_storage.close(other_user)
 
+/datum/storage_ui/default/get_displayed_contents()
+	return _storage?.get_contents()
+
 /datum/storage_ui/default/show_to(mob/user)
 	if(!istype(user))
 		return
+	// TODO: move this to the interaction that opens the storage object rather than handling it on the UI
+	// because i really hate calling get_contents followed by get_displayed_contents
+	// the issue is that some things call atom.storage.show_to() directly rather than using open()
 	var/list/contents = _storage?.get_contents()
 	if(user.active_storage != _storage)
 		for(var/obj/item/I in contents)
 			if(I.on_found(user))
 				return
+	var/list/displayed_contents = get_displayed_contents()
 	if(user.active_storage)
 		user.active_storage.hide_from(user)
 	if(user.client)
@@ -123,8 +135,8 @@
 		user.client.screen -= closer
 		user.client.screen -= contents
 		user.client.screen += closer
-		if(length(contents))
-			user.client.screen += contents
+		if(length(displayed_contents))
+			user.client.screen += displayed_contents
 		if(_storage.storage_slots)
 			user.client.screen += boxes
 		else
@@ -305,6 +317,17 @@
 		row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
 	arrange_item_slots(row_num, clamp(adjusted_contents - 1, 0, 6))
 
+// Only display one item for each key.
+/datum/storage_ui/default/produce_bin/get_displayed_contents()
+	. = list()
+	var/list/displayed = list()
+	for(var/obj/item/food/grown/produce in _storage.get_contents())
+		var/produce_key = get_key_for_object(produce)
+		if(displayed[produce_key])
+			continue
+		displayed[produce_key] = TRUE
+		. += produce
+
 //This proc draws out the inventory and places the items on it. It uses the standard position.
 /datum/storage_ui/default/produce_bin/arrange_item_slots(rows, cols)
 	var/cx = SCREEN_LOC_MOD_FIRST
@@ -312,12 +335,9 @@
 	boxes.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED] to LEFT+[SCREEN_LOC_MOD_FIRST + cols]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND + rows]:[SCREEN_LOC_MOD_DIVIDED]"
 
 	var/list/counts = get_seed_counts()
-	var/list/displayed = list()
-	for(var/obj/item/food/grown/produce in _storage.get_contents())
+	// get_displayed_contents already handles deduplication
+	for(var/obj/item/food/grown/produce in get_displayed_contents())
 		var/produce_key = get_key_for_object(produce)
-		if(displayed[produce_key])
-			continue
-		displayed[produce_key] = TRUE
 		produce.screen_loc = "LEFT+[cx]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[cy]:[SCREEN_LOC_MOD_DIVIDED]"
 		produce.maptext_x = 2
 		produce.maptext_y = 2
