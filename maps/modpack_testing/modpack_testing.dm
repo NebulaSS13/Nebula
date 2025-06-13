@@ -18,6 +18,7 @@
 	#include "../../mods/content/generic_shuttles/_generic_shuttles.dme"
 	#include "../../mods/content/government/_government.dme"
 	#include "../../mods/content/inertia/_inertia.dme"
+	#include "../../mods/content/integrated_electronics/_integrated_electronics.dme"
 	#include "../../mods/content/item_sharpening/_item_sharpening.dme"
 	#include "../../mods/content/matchmaking/_matchmaking.dme"
 	#include "../../mods/content/modern_earth/_modern_earth.dme"

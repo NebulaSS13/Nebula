@@ -1340,7 +1340,7 @@
 /area/map_template/rescue_base/base)
 "dE" = (
 /obj/structure/table/reinforced,
-/obj/prefab/hand_teleporter,
+/obj/abstract/modpack_compat/hand_tele,
 /turf/unsimulated/floor/vault,
 /area/map_template/rescue_base/base)
 "dF" = (

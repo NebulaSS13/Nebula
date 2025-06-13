@@ -94,21 +94,6 @@
 	)
 	return spawnable_choices
 
-/obj/random/assembly
-	name = "random assembly"
-	desc = "This is a random circuit assembly."
-	icon = 'icons/obj/items/gift_wrapped.dmi'
-	icon_state = "gift_1"
-
-/obj/random/assembly/spawn_choices()
-	var/static/list/spawnable_choices = list(
-		/obj/item/electronic_assembly,
-		/obj/item/electronic_assembly/medium,
-		/obj/item/electronic_assembly/large,
-		/obj/item/electronic_assembly/drone
-	)
-	return spawnable_choices
-
 /obj/random/advdevice
 	name = "random advanced device"
 	desc = "This is a random advanced device."

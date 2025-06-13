@@ -114,6 +114,11 @@
 		else
 			change_color(new_color, user)
 
+	else if(istype(A, /obj/item/card/data)) // TODO: un-hardcode this please. better yet redo how this entire proc is done
+		var/obj/item/card/data/data_card = A
+		data_card.detail_color = spray_color
+		. = TRUE
+
 	else if (istype(A, /turf/wall))
 		. = paint_wall(A, user)
 

@@ -141,7 +141,7 @@
 	desc = "The rate at which the machine pumps (a number)."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_NUMBER
+	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/volume_rate/access_var(obj/machinery/atmospherics/unary/outlet_injector/machine)
 	return machine.volume_rate
