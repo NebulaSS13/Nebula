@@ -181,7 +181,7 @@ var/global/list/possible_say_verbs = list(
 		return
 	set_special_ability_cooldown(10 SECONDS)
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
-	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai/))
+	if(isitem(card.loc) && !card.loc.storage) // this used to be a more specific check for ai holder parts but this should cover them still
 		to_chat(src, "There is no room to unfold inside \the [card.loc]. You're good and stuck.")
 		return 0
 	else if(ismob(card.loc))
@@ -192,7 +192,7 @@ var/global/list/possible_say_verbs = list(
 				if(card in affecting.implants)
 					affecting.take_damage(rand(30,50))
 					LAZYREMOVE(affecting.implants, card)
-					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!</span>")
+					H.visible_message(SPAN_DANGER("\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!"))
 					break
 		holder.drop_from_inventory(card)
 

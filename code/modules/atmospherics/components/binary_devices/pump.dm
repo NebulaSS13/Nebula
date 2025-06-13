@@ -173,7 +173,7 @@ Thus, the two variables affect pump operation are set in New():
 	desc = "The output pressure of the pump."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_NUMBER
+	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/pump_target_output/access_var(obj/machinery/atmospherics/binary/pump/machine)
 	return machine.target_pressure

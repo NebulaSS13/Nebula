@@ -196,7 +196,7 @@
 	desc = "Whether or not the valve is open, allowing gas to pass in one direction."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_BOOLEAN
+	var_type = VAR_FORMAT_BOOLEAN
 
 /decl/public_access/public_variable/passive_gate_unlocked/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
 	return machine.unlocked
@@ -213,7 +213,7 @@
 	desc = "A cap on the volume flow rate of the gate."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_NUMBER
+	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/passive_gate_flow_rate/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
 	return machine.set_flow_rate
@@ -230,7 +230,7 @@
 	desc = "A number describing the form of regulation the gate is attempting. The possible values are 0 (no air passed), 1 (regulates input pressure), or 2 (regulates output pressure)."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_NUMBER
+	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/passive_gate_mode/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
 	return machine.regulate_mode
@@ -247,7 +247,7 @@
 	desc = "The input or output pressure the gate aims to stay below."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_NUMBER
+	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/passive_gate_target_pressure/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
 	return machine.target_pressure

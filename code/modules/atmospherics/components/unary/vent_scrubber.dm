@@ -266,7 +266,7 @@
 	desc = "The scrubbing mode code, which identifies what the scrubber is doing."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_STRING
+	var_type = VAR_FORMAT_STRING
 
 /decl/public_access/public_variable/scrubbing/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
 	return machine.scrubbing
@@ -286,7 +286,7 @@
 	desc = "Whether or not the scrubber is in panic mode."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_BOOLEAN
+	var_type = VAR_FORMAT_BOOLEAN
 
 /decl/public_access/public_variable/panic/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
 	return machine.panic
@@ -308,7 +308,7 @@
 	desc = "A list of gases that this scrubber is scrubbing."
 	can_write = FALSE
 	has_updates = FALSE
-	var_type = IC_FORMAT_LIST
+	var_type = VAR_FORMAT_LIST
 
 /decl/public_access/public_variable/scrubbing_gas/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
 	return machine.scrubbing_gas.Copy()

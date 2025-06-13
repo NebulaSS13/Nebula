@@ -120,7 +120,7 @@
 	desc = "Whether the button is currently in the on state."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_BOOLEAN
+	var_type = VAR_FORMAT_BOOLEAN
 
 /decl/public_access/public_variable/button_state/access_var(obj/machinery/button/button)
 	return button.state

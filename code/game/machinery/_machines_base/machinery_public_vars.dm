@@ -5,7 +5,7 @@
 /decl/public_access/public_variable
 	var/expected_type
 	var/can_write = FALSE
-	var/var_type = IC_FORMAT_BOOLEAN // Reuses IC defines for better compatibility.
+	var/var_type = VAR_FORMAT_BOOLEAN // Reuses IC defines for better compatibility.
 
 	var/has_updates = FALSE          // Can register listeners for updates on change.
 	var/list/listeners = list()
@@ -40,27 +40,27 @@ Must be implemented by subtypes.
 /decl/public_access/public_variable/proc/check_input_type(new_value)
 	. = FALSE
 	switch(var_type)
-		if(IC_FORMAT_ANY)
+		if(VAR_FORMAT_ANY)
 			return TRUE
-		if(IC_FORMAT_STRING)
+		if(VAR_FORMAT_STRING)
 			return istext(new_value)
-		if(IC_FORMAT_CHAR)
+		if(VAR_FORMAT_CHAR)
 			return istext(new_value) && length(new_value) == 1
-		if(IC_FORMAT_COLOR)
+		if(VAR_FORMAT_COLOR)
 			return sanitize_hexcolor(new_value, null) == new_value
-		if(IC_FORMAT_NUMBER)
+		if(VAR_FORMAT_NUMBER)
 			return isnum(new_value)
-		if(IC_FORMAT_DIR)
+		if(VAR_FORMAT_DIR)
 			return new_value in global.alldirs
-		if(IC_FORMAT_BOOLEAN)
+		if(VAR_FORMAT_BOOLEAN)
 			return new_value == !!new_value
-		if(IC_FORMAT_REF)
+		if(VAR_FORMAT_REF)
 			return isweakref(new_value)
 
 		// Public variables of these types need to against the contents of the list and the index for validity themselves.
-		if(IC_FORMAT_LIST)
+		if(VAR_FORMAT_LIST)
 			return islist(new_value)
-		if(IC_FORMAT_INDEX)
+		if(VAR_FORMAT_INDEX)
 			return isnum(new_value)
 
 /*

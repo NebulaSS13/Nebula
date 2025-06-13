@@ -8,6 +8,7 @@
 	#include "../../mods/content/blob/_blob.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/government/_government.dme"
+	#include "../../mods/content/integrated_electronics/_integrated_electronics.dme"
 	#include "../../mods/content/matchmaking/_matchmaking.dme"
 	#include "../../mods/content/modern_earth/_modern_earth.dme"
 	#include "../../mods/content/mouse_highlights/_mouse_highlight.dme"

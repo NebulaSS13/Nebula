@@ -23,3 +23,5 @@
 
 /// This spawner is used to optionally spawn the aliumizer if the random aliens modpack is included.
 OPTIONAL_SPAWNER(aliumizer, null)
+/// This spawner is used to optionally spawn the hand teleporter if the integrated electronics modpack is included.
+OPTIONAL_SPAWNER(hand_tele, null) // todo: add a non-prefab hand tele variant for use without the modpack?

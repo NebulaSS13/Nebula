@@ -312,7 +312,6 @@
 		/obj/item/aiModule/reset,
 		/obj/item/stock_parts/smes_coil/super_capacity,
 		/obj/item/stock_parts/smes_coil/super_io,
-		/obj/item/disk/integrated_circuit/upgrade/advanced,
 		/obj/item/camera/tvcamera,
 		/obj/item/aicard,
 		/obj/item/borg/upgrade/jetpack,

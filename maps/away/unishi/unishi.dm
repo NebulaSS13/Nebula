@@ -1,5 +1,6 @@
 #include "unishi_areas.dm"
 #include "unishi_jobs.dm"
+#include "../../../mods/content/integrated_electronics/_integrated_electronics.dme" // this is used for just one prop, todo: remove?
 #include "../../../mods/content/xenobiology/_xenobiology.dme"
 #include "../../../mods/content/supermatter/_supermatter.dme"
 #include "../../../mods/content/beekeeping/_beekeeping.dme"

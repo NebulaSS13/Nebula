@@ -74,7 +74,7 @@
 	desc = "Whether the door is closed (\"closed\") or not (\"open\")."
 	can_write = FALSE
 	has_updates = FALSE
-	var_type = IC_FORMAT_STRING
+	var_type = VAR_FORMAT_STRING
 
 /decl/public_access/public_variable/airlock_door_state/access_var(obj/machinery/door/airlock/door)
 	return door.density ? "closed" : "open"
@@ -85,7 +85,7 @@
 	desc = "Whether the door is bolted (\"locked\") or not (\"unlocked\")."
 	can_write = FALSE
 	has_updates = FALSE
-	var_type = IC_FORMAT_STRING
+	var_type = VAR_FORMAT_STRING
 
 /decl/public_access/public_variable/airlock_bolt_state/access_var(obj/machinery/door/airlock/door)
 	return door.locked ? "locked" : "unlocked"
@@ -190,7 +190,7 @@
 	desc = "The pressure of the location where the sensor is placed."
 	can_write = FALSE
 	has_updates = TRUE
-	var_type = IC_FORMAT_NUMBER
+	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/airlock_pressure/access_var(obj/machinery/airlock_sensor/sensor)
 	return sensor.pressure
@@ -209,7 +209,7 @@
 /decl/public_access/public_variable/set_airlock_cycling/airlock_sensor
 	expected_type = /obj/machinery/airlock_sensor
 	can_write     = TRUE
-	var_type      = IC_FORMAT_BOOLEAN
+	var_type      = VAR_FORMAT_BOOLEAN
 
 /decl/public_access/public_variable/set_airlock_cycling/airlock_sensor/access_var(obj/machinery/airlock_sensor/owner)
 	return owner.master_cycling
@@ -359,7 +359,7 @@
 /decl/public_access/public_variable/set_airlock_cycling/access_button
 	expected_type = /obj/machinery/button/access
 	can_write     = TRUE
-	var_type      = IC_FORMAT_BOOLEAN
+	var_type      = VAR_FORMAT_BOOLEAN
 
 /decl/public_access/public_variable/set_airlock_cycling/access_button/access_var(obj/machinery/button/access/owner)
 	return owner.master_cycling
@@ -376,7 +376,7 @@
 	desc = "The command this access button sends when pressed."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_STRING
+	var_type = VAR_FORMAT_STRING
 
 /decl/public_access/public_variable/button_command/access_var(obj/machinery/button/access/button)
 	return button.command

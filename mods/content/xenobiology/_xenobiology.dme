@@ -3,7 +3,6 @@
 // BEGIN_INCLUDE
 #include "_xenobiology.dm"
 #include "achievement.dm"
-#include "circuit.dm"
 #include "emotes.dm"
 #include "food.dm"
 #include "overrides.dm"

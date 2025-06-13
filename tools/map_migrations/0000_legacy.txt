@@ -151,7 +151,7 @@
 /obj/effect/decal/remains/@SUBTYPES : /obj/item/remains/@SUBTYPES{@OLD}
 
 # Circuit prefabs
-/obj/item/hand_tele : /obj/prefab/hand_teleporter{@OLD}
+/obj/item/hand_tele : /obj/abstract/prefab/hand_teleporter{@OLD}
 
 # Filing cabinets
 /obj/structure/filingcabinet : /obj/structure/filing_cabinet{@OLD}
