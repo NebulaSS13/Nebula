@@ -4,6 +4,7 @@
 
 /area/shaded_hills/outside/river/lake
 	name = "Woodland Lake"
+	forced_ambience = list('sound/ambience/shore.ogg')
 
 /area/shaded_hills/outside/river/lake/get_additional_fishing_results()
 	var/static/list/additional_fishing_results = list(
