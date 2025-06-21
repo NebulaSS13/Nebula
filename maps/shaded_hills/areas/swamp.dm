@@ -10,9 +10,11 @@
 /area/shaded_hills/outside/swamp
 	name = "Swamp"
 	description = "The reek of stagnant water and the chirp of insects filter through the humid air."
+	forced_ambience = list('sound/ambience/marshy.ogg')
 
 /area/shaded_hills/outside/swamp/poi
 	name = "Deep Swamp"
+	forced_ambience = list('sound/ambience/marshy.ogg')
 
 /area/shaded_hills/outside/river/swamp
 	name = "Swampy River"
@@ -20,6 +22,7 @@
 
 /area/shaded_hills/caves/swamp
 	name = "Southern Deep Tunnels"
+	forced_ambience = list('sound/ambience/marshy.ogg')
 
 /area/shaded_hills/caves/unexplored/swamp
 	name = "Trackless Deeps - Far South"
