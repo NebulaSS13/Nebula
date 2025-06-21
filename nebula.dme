@@ -1477,6 +1477,7 @@
 #include "code\game\objects\structures\transit_tubes.dm"
 #include "code\game\objects\structures\travois.dm"
 #include "code\game\objects\structures\under_wardrobe.dm"
+#include "code\game\objects\structures\wall_cabinet.dm"
 #include "code\game\objects\structures\wall_frame.dm"
 #include "code\game\objects\structures\wall_sconce.dm"
 #include "code\game\objects\structures\wallframe_spawner.dm"

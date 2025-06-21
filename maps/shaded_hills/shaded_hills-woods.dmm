@@ -69,6 +69,13 @@
 "nl" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/river/woods)
+"oA" = (
+/obj/structure/wall_cabinet/ebony{
+	pixel_y = 35;
+	pixel_x = 5
+	},
+/turf/floor/wood/rough/walnut,
+/area/shaded_hills/forester_hut)
 "pu" = (
 /turf/unsimulated/dark_filler,
 /area/shaded_hills/outside/river/lake)
@@ -19964,7 +19971,7 @@ ES
 ES
 SI
 SI
-Md
+oA
 Md
 Fz
 IA
