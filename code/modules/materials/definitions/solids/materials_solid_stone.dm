@@ -25,6 +25,15 @@
 	ore_result_amount = 4
 	sound_manipulate = 'sound/foley/rockscrape.ogg'
 	sound_dropped    = 'sound/foley/rockscrape.ogg'
+	var/image/texture
+
+/decl/material/solid/stone/Initialize()
+	. = ..()
+	texture = image('icons/turf/wall_texture.dmi', "concrete")
+	texture.blend_mode = BLEND_MULTIPLY
+
+/decl/material/solid/stone/get_wall_texture()
+	return texture
 
 /decl/material/solid/stone/sandstone
 	name = "sandstone"
@@ -114,12 +123,3 @@
 	melting_point  = T0C + 1200
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
-	var/image/texture
-
-/decl/material/solid/stone/concrete/Initialize()
-	. = ..()
-	texture = image('icons/turf/wall_texture.dmi', "concrete")
-	texture.blend_mode = BLEND_MULTIPLY
-
-/decl/material/solid/stone/concrete/get_wall_texture()
-	return texture
