@@ -374,20 +374,16 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		if(!check_species_allowed(chosen_species))
 			spawning = 0 //abort
 			return null
-		new_character = new(spawn_turf, chosen_species.uid)
-
-	if(!new_character)
-		new_character = new(spawn_turf)
-
-	new_character.lastarea = get_area(spawn_turf)
-
-	if(global.random_players)
+	if(global.random_players) // apply randomness prior to creating the character
 		var/decl/species/current_species = client.prefs.get_species_decl()
 		var/decl/pronouns/pronouns = pick(current_species.available_pronouns)
 		client.prefs.gender = pronouns.name
 		client.prefs.real_name = client.prefs.get_random_name()
 		client.prefs.randomize_appearance_and_body_for(new_character)
-	client.prefs.copy_to(new_character)
+	new_character = client.prefs.create_character(spawn_turf)
+	new_character.lastarea = get_area(spawn_turf)
+
+	// client.prefs.copy_to(new_character) // not anymore lol
 
 	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = sound_channels.lobby_channel))// MAD JAMS cant last forever yo
 
