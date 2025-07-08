@@ -14,4 +14,5 @@
 #include "items\overrides.dm"
 #include "items\suit.dm"
 #include "items\under.dm"
+#include "items\guns\overrides.dm"
 #endif // MODPACK_POLARIS
