@@ -7,7 +7,7 @@
 	var/list/allowed_languages
 	var/list/free_languages
 
-/datum/category_item/player_setup_item/background/languages/copy_to_nonphysical(mob/living/human/character, is_preview_copy = FALSE)
+/datum/category_item/player_setup_item/background/languages/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
 	if(is_preview_copy)
 		return
 	for(var/lang in pref.alternate_languages)

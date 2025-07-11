@@ -14,26 +14,6 @@
 	name = "Body"
 	sort_order = 2
 
-// apply sprite accessories to an existing mob
-// actually this might not be necessary because we apply the snapshot
-/* /datum/category_item/player_setup_item/physical/body/copy_to_physical(mob/living/human/character, is_preview_copy = FALSE)
-	for(var/obj/item/organ/external/O in character.get_external_organs())
-		for(var/decl/sprite_accessory_category/sprite_category in O.get_sprite_accessory_categories())
-			if(!sprite_category.clear_in_pref_apply)
-				continue
-			O.clear_sprite_accessories_by_category(sprite_category.type, skip_update = TRUE)
-	for(var/accessory_category in pref.sprite_accessories)
-		var/decl/sprite_accessory_category/acc_cat = GET_DECL(accessory_category)
-		var/list/accessories = pref.sprite_accessories[accessory_category]
-		acc_cat.prepare_character(character, accessories)
-		for(var/accessory in accessories)
-			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-			var/accessory_metadata = accessories[accessory]
-			for(var/bodypart in accessory_decl.body_parts)
-				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, bodypart)
-				if(O)
-					O.set_sprite_accessory(accessory, accessory_category, accessory_metadata, skip_update = TRUE) */
-
 /datum/category_item/player_setup_item/physical/body/populate_mob_snapshot(datum/mob_snapshot/snapshot, is_preview_copy = FALSE)
 	snapshot.blood_type = pref.blood_type
 	// we don't check appearance_flags here, apply_appearance_to does that
@@ -60,8 +40,7 @@
 	if(length(new_sprite_accessories))
 		snapshot.sprite_accessories = new_sprite_accessories
 
-// this should probably be named copy_to_after_physical, lol
-/datum/category_item/player_setup_item/physical/body/copy_to_nonphysical(mob/living/human/character, is_preview_copy = FALSE)
+/datum/category_item/player_setup_item/physical/body/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
 	if(LAZYLEN(pref.appearance_descriptors))
 		character.appearance_descriptors = pref.appearance_descriptors.Copy()
 

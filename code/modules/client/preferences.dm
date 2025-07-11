@@ -346,28 +346,28 @@ var/global/list/time_prefs_fixed = list()
 	update_setup_window(usr)
 	return 1
 
-/datum/category_item/player_setup_item/records/character_info/copy_to_nonphysical(mob/living/human/character, is_preview_copy = FALSE)
+/datum/category_item/player_setup_item/records/character_info/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
 	if(is_preview_copy)
 		return
 	pref.validate_comments_record() // Make sure a record has been generated for this character.
 	character.comments_record_id = pref.comments_record_id
 
-/datum/preferences/proc/create_character(spawn_turf)
+/datum/preferences/proc/create_character_from_snapshot(spawn_turf)
 	// Sanitizing rather than saving as someone might still be editing.
 	player_setup.sanitize_setup()
 	// first, handle basic appearance stuff via mob_snapshot
 	var/datum/mob_snapshot/new_character_snapshot = new /datum/mob_snapshot
 	player_setup.populate_mob_snapshot(new_character_snapshot, FALSE)
 	var/mob/living/human/character = new(spawn_turf, null, new_character_snapshot)
-	copy_to_nonphysical(character, FALSE)
+	apply_post_snapshot_preferences(character, FALSE)
 	return character
 
 
 /datum/preferences/proc/copy_to(mob/living/human/character, is_preview_copy = FALSE)
-	copy_to_physical(character, is_preview_copy) // this is effectively what create_character does, but on an existing mob
-	copy_to_nonphysical(character, is_preview_copy) // this is the stuff we need to share
+	apply_snapshot_to_mob(character, is_preview_copy) // this is effectively what create_character_from_snapshot does, but on an existing mob
+	apply_post_snapshot_preferences(character, is_preview_copy) // this is the stuff we need to share
 
-/datum/preferences/proc/copy_to_physical(mob/living/human/character, is_preview_copy = FALSE)
+/datum/preferences/proc/apply_snapshot_to_mob(mob/living/human/character, is_preview_copy = FALSE)
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 	// todo: move this part into some sort of pre-copy sanitizing? move it into the trait stuff? check if it's even necessary?
@@ -380,14 +380,13 @@ var/global/list/time_prefs_fixed = list()
 	// not sure why we have real_name on snapshot; it's only used in one spot in setup_human
 	character.set_real_name(new_character_snapshot.real_name)
 	// now actually load everything else
-	player_setup.copy_to_physical(character, is_preview_copy)
+	player_setup.apply_snapshot_to_mob(character, is_preview_copy)
 	return character
 
-// this should honestly maybe be copy_to_after_physical
-/datum/preferences/proc/copy_to_nonphysical(mob/living/human/character, is_preview_copy = FALSE)
-	player_setup.copy_to_nonphysical(character, is_preview_copy)
+/datum/preferences/proc/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	player_setup.apply_post_snapshot_preferences(character, is_preview_copy)
 
-	// this happens here because i didn't want to duplicate it between copy_to_physical and create_character
+	// this happens here because i didn't want to duplicate it between apply_snapshot_to_mob and create_character_from_snapshot
 	character.force_update_limbs() // contains update_body(0)
 	character.update_genetic_conditions(0)
 	character.update_underwear(0)

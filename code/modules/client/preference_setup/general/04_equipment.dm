@@ -22,7 +22,7 @@
 			var/decl/backpack_outfit/backpack_outfit = bos[backpack_option]
 			backpacks_by_name[backpack_outfit.name] = backpack_outfit
 
-/datum/category_item/player_setup_item/physical/equipment/copy_to_nonphysical(mob/living/human/character, is_preview_copy = FALSE)
+/datum/category_item/player_setup_item/physical/equipment/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
 	QDEL_NULL_LIST(character.worn_underwear)
 	character.worn_underwear = list()
 	for(var/underwear_category_name in pref.all_underwear)

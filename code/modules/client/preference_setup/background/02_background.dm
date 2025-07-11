@@ -25,7 +25,7 @@
 		hidden[cat_type] = TRUE
 	..()
 
-/datum/category_item/player_setup_item/background/details/copy_to_nonphysical(mob/living/human/character, is_preview_copy = FALSE)
+/datum/category_item/player_setup_item/background/details/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
 	if(is_preview_copy)
 		return
 	for(var/token in pref.background_info)

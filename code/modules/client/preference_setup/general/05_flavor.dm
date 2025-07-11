@@ -6,7 +6,7 @@
 	name = "Flavor"
 	sort_order = 5
 
-/datum/category_item/player_setup_item/physical/flavor/copy_to_nonphysical(mob/living/human/character, is_preview_copy = FALSE)
+/datum/category_item/player_setup_item/physical/flavor/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
 	if(is_preview_copy)
 		return
 	character.flavor_texts = pref.flavor_texts.Copy()

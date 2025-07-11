@@ -380,7 +380,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		client.prefs.gender = pronouns.name
 		client.prefs.real_name = client.prefs.get_random_name()
 		client.prefs.randomize_appearance_and_body_for(new_character)
-	new_character = client.prefs.create_character(spawn_turf)
+	new_character = client.prefs.create_character_from_snapshot(spawn_turf)
 	new_character.lastarea = get_area(spawn_turf)
 
 	// client.prefs.copy_to(new_character) // not anymore lol

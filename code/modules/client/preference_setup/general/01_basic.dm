@@ -18,7 +18,7 @@
 	name = "Basic"
 	sort_order = 1
 
-/datum/category_item/player_setup_item/physical/basic/copy_to_nonphysical(mob/living/human/character, is_preview_copy = FALSE)
+/datum/category_item/player_setup_item/physical/basic/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
 	character.set_gender(pref.gender)
 
 /datum/category_item/player_setup_item/physical/basic/preload_character(datum/pref_record_reader/R)

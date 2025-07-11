@@ -39,7 +39,7 @@
 	else
 		pref.prune_invalid_traits()
 
-/datum/category_item/player_setup_item/traits/copy_to_nonphysical(mob/living/human/character, is_preview_copy = FALSE)
+/datum/category_item/player_setup_item/traits/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
 	character.clear_extrinsic_traits()
 	for(var/trait_type in pref.traits)
 		character.set_trait(trait_type, (pref.traits[trait_type] || TRAIT_LEVEL_EXISTS))

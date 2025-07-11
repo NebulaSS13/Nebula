@@ -25,13 +25,6 @@
 		. += "Only available for living mobs, sorry."
 	. = jointext(., null)
 
-// this probably shouldn't be necessary anymore now that we have refresh_login()?
-/* /datum/preferences/copy_to_nonphysical(mob/living/human/character, is_preview_copy = FALSE)
-	character = ..()
-	var/datum/ability_handler/psionics/psi = !is_preview_copy && istype(character) && character.get_ability_handler(/datum/ability_handler/psionics)
-	if(psi)
-		psi.update() */
-
 /decl/ability/can_use_ability(mob/user, list/metadata, silent = FALSE)
 	. = ..()
 	if(. && is_supernatural)
