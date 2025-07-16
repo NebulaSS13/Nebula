@@ -36,6 +36,11 @@
 			if(!(initial_state in reported_failures[initial_icon]))
 				LAZYADD(reported_failures[initial_icon], initial_state)
 				clothing_fails += "missing initial state '[initial_state]' in initial icon '[initial_icon]'"
+		// World but no inventory is fine; inventory but no world is disallowed.
+		else if(initial_icon == ICON_STATE_INV && !check_state_in_icon(ICON_STATE_WORLD, initial_icon))
+			if(!(initial_state in reported_failures[ICON_STATE_WORLD]))
+				LAZYADD(reported_failures[ICON_STATE_WORLD], initial_state)
+				clothing_fails += "has 'inventory' initial state but no 'world' state in initial icon '[initial_icon]'"
 		if(initial_item_state)
 			clothing_fails += "legacy item state set '[initial_item_state]'"
 
