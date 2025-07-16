@@ -1007,8 +1007,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/clothing/inherit_custom_item_data(var/datum/custom_item/citem)
 	. = ..()
-	base_clothing_icon  = icon
-	base_clothing_state = icon_state
+	reconsider_single_icon()
 
 /obj/item/proc/is_special_cutting_tool(var/high_power)
 	return FALSE
