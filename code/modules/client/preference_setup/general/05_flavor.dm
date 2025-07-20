@@ -6,6 +6,11 @@
 	name = "Flavor"
 	sort_order = 5
 
+/datum/category_item/player_setup_item/physical/flavor/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	if(is_preview_copy)
+		return
+	character.flavor_texts = pref.flavor_texts.Copy()
+
 /datum/category_item/player_setup_item/physical/flavor/load_character(datum/pref_record_reader/R)
 	pref.flavor_texts["general"] = R.read("flavor_texts_general")
 	pref.flavor_texts["head"] =    R.read("flavor_texts_head")

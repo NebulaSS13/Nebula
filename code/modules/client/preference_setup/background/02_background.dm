@@ -25,6 +25,13 @@
 		hidden[cat_type] = TRUE
 	..()
 
+/datum/category_item/player_setup_item/background/details/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	if(is_preview_copy)
+		return
+	for(var/token in pref.background_info)
+		character.set_background_value(token, pref.background_info[token], defer_language_update = TRUE)
+	character.update_languages()
+
 /datum/category_item/player_setup_item/background/details/sanitize_character()
 
 	if(!islist(pref.background_info))

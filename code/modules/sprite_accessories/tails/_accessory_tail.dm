@@ -13,6 +13,14 @@
 		var/obj/item/organ/external/tail/new_tail = new(null, null, character.get_mob_snapshot())
 		character.add_organ(new_tail, null, TRUE, FALSE, FALSE, TRUE)
 
+/decl/sprite_accessory_category/tail/prepare_mob_snapshot(datum/mob_snapshot/snapshot, list/accessories)
+	if(!length(accessories))
+		return
+	// Give us a tail if we need one.
+	var/decl/sprite_accessory/tail_data = GET_DECL(accessories[1])
+	if(tail_data?.draw_accessory && !snapshot.root_bodytype.has_limbs[BP_TAIL])
+		LAZYSET(snapshot.extra_limbs, BP_TAIL, list("path" = /obj/item/organ/external/tail))
+
 /decl/sprite_accessory/tail
 	abstract_type = /decl/sprite_accessory/tail
 	hidden_by_gear_slot  = list(slot_w_uniform_str, slot_wear_suit_str)

@@ -6,6 +6,9 @@
 	sort_order = 1
 	var/hide_species = TRUE
 
+/datum/category_item/player_setup_item/background/species/populate_mob_snapshot(datum/mob_snapshot/snapshot, is_preview_copy = FALSE)
+	snapshot.root_species = pref.get_species_decl()
+
 // This must always return a decl, NEVER null.
 /datum/preferences/proc/get_species_decl()
 	RETURN_TYPE(/decl/species)

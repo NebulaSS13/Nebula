@@ -14,6 +14,36 @@
 	name = "Body"
 	sort_order = 2
 
+/datum/category_item/player_setup_item/physical/body/populate_mob_snapshot(datum/mob_snapshot/snapshot, is_preview_copy = FALSE)
+	snapshot.blood_type = pref.blood_type
+	// we don't check appearance_flags here, apply_appearance_to does that
+	snapshot.skin_color = pref.skin_colour
+	snapshot.skin_tone = pref.skin_tone
+	snapshot.eye_color = pref.eye_colour
+	// so this is the hellish part.
+	// pref.sprite_accessories is sprite_accessories[accessory_category.type][loaded_accessory.type] = metadata
+	// snapshot.sprite_accessories is sprite_accessories[organ_tag][accessory_category.type][loaded_accessory.type] = metadata
+	// we have to convert it here
+	var/list/new_sprite_accessories = list()
+	for(var/accessory_category in pref.sprite_accessories)
+		var/decl/sprite_accessory_category/acc_cat = GET_DECL(accessory_category)
+		var/list/accessories = pref.sprite_accessories[accessory_category]
+		acc_cat.prepare_mob_snapshot(snapshot, accessories)
+		// todo: copy this elsewhere
+		// ^ i have no clue if i ever did this or not. presumably bc i don't know what i meant needed copying
+		for(var/accessory in accessories)
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			var/accessory_metadata = accessories[accessory]
+			for(var/bodypart in accessory_decl.body_parts)
+				LAZYINITLIST(new_sprite_accessories[bodypart])
+				LAZYSET(new_sprite_accessories[bodypart][accessory_category], accessory, accessory_metadata)
+	if(length(new_sprite_accessories))
+		snapshot.sprite_accessories = new_sprite_accessories
+
+/datum/category_item/player_setup_item/physical/body/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	if(LAZYLEN(pref.appearance_descriptors))
+		character.appearance_descriptors = pref.appearance_descriptors.Copy()
+
 /datum/category_item/player_setup_item/physical/body/load_character(datum/pref_record_reader/R)
 
 	pref.skin_colour =            R.read("skin_colour")

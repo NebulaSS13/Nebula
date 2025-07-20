@@ -94,6 +94,19 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	for(var/datum/category_group/player_setup_category/PS in categories)
 		PS.save_preferences(writer)
 
+/datum/category_collection/player_setup_collection/proc/apply_snapshot_to_mob(mob/living/human/character, is_preview_copy = FALSE)
+	// Assumes a character has already been loaded.
+	for(var/datum/category_group/player_setup_category/PS in categories)
+		PS.apply_snapshot_to_mob(character, is_preview_copy)
+
+/datum/category_collection/player_setup_collection/proc/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	for(var/datum/category_group/player_setup_category/PS in categories)
+		PS.apply_post_snapshot_preferences(character, is_preview_copy)
+
+/datum/category_collection/player_setup_collection/proc/populate_mob_snapshot(datum/mob_snapshot/snapshot, is_preview_copy = FALSE)
+	for(var/datum/category_group/player_setup_category/PG in categories)
+		PG.populate_mob_snapshot(snapshot, is_preview_copy)
+
 /datum/category_collection/player_setup_collection/proc/header()
 	var/dat = ""
 	for(var/datum/category_group/player_setup_category/PS in categories)
@@ -165,6 +178,19 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.save_preferences(writer)
 
+/datum/category_group/player_setup_category/proc/apply_snapshot_to_mob(mob/living/human/character, is_preview_copy = FALSE)
+	// Assumes a character has already been loaded.
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.apply_snapshot_to_mob(character, is_preview_copy)
+
+/datum/category_group/player_setup_category/proc/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.apply_post_snapshot_preferences(character, is_preview_copy)
+
+/datum/category_group/player_setup_category/proc/populate_mob_snapshot(datum/mob_snapshot/snapshot, is_preview_copy = FALSE)
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.populate_mob_snapshot(snapshot, is_preview_copy)
+
 /datum/category_group/player_setup_category/proc/content(var/mob/user)
 	. = "<table style='width:100%'><tr style='vertical-align:top'><td style='width:50%'>"
 	var/current = 0
@@ -228,6 +254,28 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 * Called when the item is asked to save user/global settings
 */
 /datum/category_item/player_setup_item/proc/save_preferences(datum/pref_record_writer/writer)
+	return
+
+/*
+* Called when actually populating a character based on character creation preferences
+*/
+/datum/category_item/player_setup_item/proc/apply_snapshot_to_mob(mob/living/human/character, is_preview_copy = FALSE)
+	return // Note that the prefs-level call will apply anything already done in populate_mob_snapshot
+
+/datum/category_item/player_setup_item/proc/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	return
+
+/* need overrides for:
+- name (done)
+- eye colour (done)
+- blood type (done)
+- skin colour/tone (done)
+- species (done)
+- bodytype (done)
+- sprite accessories (done)
+- maybe genetic conditions from traits?
+*/
+/datum/category_item/player_setup_item/proc/populate_mob_snapshot(datum/mob_snapshot/snapshot, is_preview_copy = FALSE)
 	return
 
 /datum/category_item/player_setup_item/proc/content()

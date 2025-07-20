@@ -263,3 +263,6 @@
 /decl/sprite_accessory_category/proc/prepare_character(mob/living/character, list/accessories)
 	return
 
+/decl/sprite_accessory_category/proc/prepare_mob_snapshot(datum/mob_snapshot/snapshot, list/accessories)
+	return
+

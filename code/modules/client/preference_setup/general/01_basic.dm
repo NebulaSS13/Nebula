@@ -18,6 +18,9 @@
 	name = "Basic"
 	sort_order = 1
 
+/datum/category_item/player_setup_item/physical/basic/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	character.set_gender(pref.gender)
+
 /datum/category_item/player_setup_item/physical/basic/preload_character(datum/pref_record_reader/R)
 	pref.gender =         R.read("gender")
 	pref.bodytype =       R.read("bodytype")
@@ -66,6 +69,22 @@
 	if(!istype(bodytype) || !(bodytype in S.available_bodytypes))
 		bodytype = S.get_bodytype_by_pronouns(pronouns)
 		pref.set_bodytype(bodytype.name)
+
+/datum/category_item/player_setup_item/physical/basic/populate_mob_snapshot(datum/mob_snapshot/snapshot, is_preview_copy = FALSE)
+	snapshot.root_bodytype = pref.get_bodytype_decl()
+	var/new_real_name = pref.real_name
+	if(pref.be_random_name)
+		var/decl/background_detail/background = pref.get_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
+		if(background)
+			new_real_name = background.get_random_name(pref.gender)
+	if(get_config_value(/decl/config/toggle/humans_need_surnames))
+		var/firstspace = findtext(new_real_name, " ")
+		var/name_length = length(new_real_name)
+		if(!firstspace)	//we need a surname
+			new_real_name += " [pick(global.using_map.last_names)]"
+		else if(firstspace == name_length) // someone tried to cheese it by putting a space at the end
+			new_real_name += "[pick(global.using_map.last_names)]"
+	snapshot.real_name = new_real_name
 
 /datum/category_item/player_setup_item/physical/basic/content()
 

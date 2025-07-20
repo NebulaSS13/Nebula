@@ -346,92 +346,49 @@ var/global/list/time_prefs_fixed = list()
 	update_setup_window(usr)
 	return 1
 
+/datum/category_item/player_setup_item/records/character_info/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	if(is_preview_copy)
+		return
+	pref.validate_comments_record() // Make sure a record has been generated for this character.
+	character.comments_record_id = pref.comments_record_id
+
+/datum/preferences/proc/create_character_from_snapshot(spawn_turf)
+	// Sanitizing rather than saving as someone might still be editing.
+	player_setup.sanitize_setup()
+	// first, handle basic appearance stuff via mob_snapshot
+	var/datum/mob_snapshot/new_character_snapshot = new /datum/mob_snapshot
+	player_setup.populate_mob_snapshot(new_character_snapshot, FALSE)
+	var/mob/living/human/character = new(spawn_turf, null, new_character_snapshot)
+	apply_post_snapshot_preferences(character, FALSE)
+	return character
+
+
 /datum/preferences/proc/copy_to(mob/living/human/character, is_preview_copy = FALSE)
+	apply_snapshot_to_mob(character, is_preview_copy) // this is effectively what create_character_from_snapshot does, but on an existing mob
+	apply_post_snapshot_preferences(character, is_preview_copy) // this is the stuff we need to share
 
-	if(!player_setup)
-		return // WHY IS THIS EVEN HAPPENING.
-
+/datum/preferences/proc/apply_snapshot_to_mob(mob/living/human/character, is_preview_copy = FALSE)
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
-	validate_comments_record() // Make sure a record has been generated for this character.
-	character.comments_record_id = comments_record_id
+	// todo: move this part into some sort of pre-copy sanitizing? move it into the trait stuff? check if it's even necessary?
+	// i guess this is for if we're using it to refresh an existing character from prefs via admin tools
 	character.clear_extrinsic_traits()
+	// first, handle basic appearance stuff via mob_snapshot
+	var/datum/mob_snapshot/new_character_snapshot = new /datum/mob_snapshot // we assume we want a full repopulation, so don't persist anything from the donor
+	player_setup.populate_mob_snapshot(new_character_snapshot, is_preview_copy)
+	new_character_snapshot.apply_appearance_to(character, do_update = FALSE)
+	// not sure why we have real_name on snapshot; it's only used in one spot in setup_human
+	character.set_real_name(new_character_snapshot.real_name)
+	// now actually load everything else
+	player_setup.apply_snapshot_to_mob(character, is_preview_copy)
+	return character
 
-	var/decl/bodytype/new_bodytype = get_bodytype_decl()
-	var/decl/species/character_species = character.get_species()
-	if(species == character_species.uid)
-		character.set_bodytype(new_bodytype)
-	else
-		character.change_species(species, new_bodytype)
+/datum/preferences/proc/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	player_setup.apply_post_snapshot_preferences(character, is_preview_copy)
 
-	if(be_random_name)
-		var/decl/background_detail/background = get_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
-		if(background)
-			real_name = background.get_random_name(gender)
-
-	if(get_config_value(/decl/config/toggle/humans_need_surnames))
-		var/firstspace = findtext(real_name, " ")
-		var/name_length = length(real_name)
-		if(!firstspace)	//we need a surname
-			real_name += " [pick(global.using_map.last_names)]"
-		else if(firstspace == name_length)
-			real_name += "[pick(global.using_map.last_names)]"
-
-	character.fully_replace_character_name(real_name)
-
-	character.set_gender(gender)
-	character.blood_type = blood_type
-
-	character.set_skin_colour(skin_colour, skip_update = TRUE)
-	character.skin_tone = skin_tone
-
-	QDEL_NULL_LIST(character.worn_underwear)
-	character.worn_underwear = list()
-
-	for(var/underwear_category_name in all_underwear)
-		var/datum/category_group/underwear/underwear_category = global.underwear.categories_by_name[underwear_category_name]
-		if(underwear_category)
-			var/underwear_item_name = all_underwear[underwear_category_name]
-			var/datum/category_item/underwear/UWD = underwear_category.items_by_name[underwear_item_name]
-			var/metadata = all_underwear_metadata[underwear_category_name]
-			var/obj/item/underwear/UW = UWD.create_underwear(character, metadata)
-			if(UW)
-				UW.ForceEquipUnderwear(character, FALSE)
-		else
-			all_underwear -= underwear_category_name
-
-	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
-
-	if(length(traits))
-		for(var/trait_type in traits)
-			character.set_trait(trait_type, (traits[trait_type] || TRAIT_LEVEL_EXISTS))
-
-	character.set_eye_colour(eye_colour, skip_update = TRUE)
-
-	for(var/obj/item/organ/external/O in character.get_external_organs())
-		for(var/decl/sprite_accessory_category/sprite_category in O.get_sprite_accessory_categories())
-			if(!sprite_category.clear_in_pref_apply)
-				continue
-			O.clear_sprite_accessories_by_category(sprite_category.type, skip_update = TRUE)
-
-	for(var/accessory_category in sprite_accessories)
-		var/decl/sprite_accessory_category/acc_cat = GET_DECL(accessory_category)
-		var/list/accessories = sprite_accessories[accessory_category]
-		acc_cat.prepare_character(character, accessories)
-		for(var/accessory in accessories)
-			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-			var/accessory_metadata = accessories[accessory]
-			for(var/bodypart in accessory_decl.body_parts)
-				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, bodypart)
-				if(O)
-					O.set_sprite_accessory(accessory, accessory_category, accessory_metadata, skip_update = TRUE)
-
-	if(LAZYLEN(appearance_descriptors))
-		character.appearance_descriptors = appearance_descriptors.Copy()
-
-	character.force_update_limbs()
+	// this happens here because i didn't want to duplicate it between apply_snapshot_to_mob and create_character_from_snapshot
+	character.force_update_limbs() // contains update_body(0)
 	character.update_genetic_conditions(0)
-	character.update_body(0)
 	character.update_underwear(0)
 	character.update_hair(0)
 	character.update_icon()
@@ -440,22 +397,7 @@ var/global/list/time_prefs_fixed = list()
 	if(is_preview_copy)
 		return
 
-	for(var/token in background_info)
-		character.set_background_value(token, background_info[token], defer_language_update = TRUE)
-	character.update_languages()
-	for(var/lang in alternate_languages)
-		character.add_language(lang)
-
-	character.flavor_texts["general"] = flavor_texts["general"]
-	character.flavor_texts["head"] = flavor_texts["head"]
-	character.flavor_texts["face"] = flavor_texts["face"]
-	character.flavor_texts["eyes"] = flavor_texts["eyes"]
-	character.flavor_texts["torso"] = flavor_texts["torso"]
-	character.flavor_texts["arms"] = flavor_texts["arms"]
-	character.flavor_texts["hands"] = flavor_texts["hands"]
-	character.flavor_texts["legs"] = flavor_texts["legs"]
-	character.flavor_texts["feet"] = flavor_texts["feet"]
-
+	// why is this in copy_to? jfc
 	if(!character.isSynthetic())
 		character.set_nutrition(rand(140,360))
 		character.set_hydration(rand(140,360))

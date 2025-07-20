@@ -39,6 +39,11 @@
 	else
 		pref.prune_invalid_traits()
 
+/datum/category_item/player_setup_item/traits/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	character.clear_extrinsic_traits()
+	for(var/trait_type in pref.traits)
+		character.set_trait(trait_type, (pref.traits[trait_type] || TRAIT_LEVEL_EXISTS))
+
 /datum/category_item/player_setup_item/traits/save_character(datum/pref_record_writer/writer)
 	var/list/trait_ids = list()
 	for(var/trait_type in pref.traits)
