@@ -509,8 +509,8 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 		//Release reaction gasses
 		var/heat_capacity = removed.heat_capacity()
-		removed.adjust_multi(/decl/material/solid/exotic_matter, max(device_energy / product_release_modifier, 0), \
-		                     /decl/material/gas/oxygen, max((device_energy + removed.temperature - T0C) / oxygen_release_modifier, 0))
+		removed.adjust_gas(/decl/material/solid/exotic_matter, max(device_energy / product_release_modifier, 0), FALSE)
+		removed.adjust_gas(/decl/material/gas/oxygen, max((device_energy + removed.temperature - T0C) / oxygen_release_modifier, 0))
 
 		var/thermal_power = thermal_release_modifier * device_energy
 		if (debug)

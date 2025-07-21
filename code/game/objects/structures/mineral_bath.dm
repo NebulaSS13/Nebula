@@ -14,7 +14,9 @@
 
 /obj/structure/mineral_bath/return_air()
 	var/datum/gas_mixture/venus = new(CELL_VOLUME, SYNTH_HEAT_LEVEL_1 - 10)
-	venus.adjust_multi(/decl/material/gas/chlorine, MOLES_N2STANDARD, /decl/material/gas/hydrogen, MOLES_O2STANDARD)
+
+	venus.adjust_gas(/decl/material/gas/chlorine, MOLES_N2STANDARD, FALSE)
+	venus.adjust_gas(/decl/material/gas/hydrogen, MOLES_O2STANDARD, TRUE)
 	return venus
 
 /obj/structure/mineral_bath/grab_attack(obj/item/grab/grab, mob/user)
