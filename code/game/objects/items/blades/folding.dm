@@ -52,7 +52,7 @@
 		icon_state = "[icon_state]-closed"
 
 /obj/item/bladed/folding/update_attack_force()
-	..()
+	. = ..()
 	// TODO: check sharp/edge.
 	edge  = open
 	sharp = open

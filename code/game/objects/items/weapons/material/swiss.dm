@@ -91,7 +91,7 @@
 	to_chat(user, active_tool == SWISSKNF_CLOSED ? "It is closed." : "Its [lowertext(active_tool)] is folded out.")
 
 /obj/item/knife/folding/swiss/update_attack_force()
-	..()
+	. = ..()
 	if(active_tool == SWISSKNF_CLOSED)
 		w_class = initial(w_class)
 	else
