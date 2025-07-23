@@ -42,7 +42,7 @@
 			continue
 		valid_areas[candidate_area] = TRUE
 	if(!length(valid_areas)) // no turfs at all have that flag
-		return FALSE
+		return null
 	// Each area contents loop is an in-world loop, so we just do one here.
 	for(var/turf/turf_candidate in world)
 		var/area/candidate_area = get_area(turf_candidate)
@@ -50,8 +50,7 @@
 			continue
 		if(!predicates || all_predicates_true(list(turf_candidate), predicates))
 			LAZYADD(turfs, turf_candidate)
-	if(LAZYLEN(turfs))
-		return pick(turfs)
+	return SAFEPICK(turfs)
 
 /proc/pick_area_turf(var/areatype, var/list/predicates)
 	var/list/turfs = get_area_turfs(areatype, predicates)
