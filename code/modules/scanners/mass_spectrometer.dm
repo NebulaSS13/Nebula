@@ -52,10 +52,9 @@
 	var/list/blood_traces = list()
 	var/list/blood_doses = list()
 
-	if(length(reagents.reagent_volumes) == 1)
-		var/decl/material/liquid/random/random = GET_DECL(reagents.reagent_volumes[1])
-		if(istype(random))
-			return random.get_scan_data(user)
+	if(length(reagents.reagent_volumes) == 1 && istype(reagents.primary_reagent, /decl/material/liquid/random))
+		var/decl/material/liquid/random/random = reagents.primary_reagent
+		return random.get_scan_data(user)
 
 	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
 		if(!istype(reagent, /decl/material/liquid/blood))
