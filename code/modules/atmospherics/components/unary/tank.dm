@@ -29,11 +29,9 @@
 	air_contents.temperature = T20C
 
 	if(filling)
-		var/list/gases = list()
 		for(var/gas in filling)
-			gases += gas
-			gases += start_pressure * filling[gas] * (air_contents.volume)/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-		air_contents.adjust_multi(arglist(gases))
+			air_contents.adjust_gas(gas, start_pressure * filling[gas] * (air_contents.volume)/(R_IDEAL_GAS_EQUATION*air_contents.temperature), FALSE)
+		air_contents.update_values()
 		update_icon()
 
 /obj/machinery/atmospherics/unary/tank/set_initial_level()

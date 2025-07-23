@@ -14,11 +14,9 @@
 
 		var/list/initial_gas = mix_data["initial_gas"]
 		if(initial_gas.len)
-			var/list/gas_args = list()
 			for(var/gasid in initial_gas)
-				gas_args += gasid
-				gas_args += initial_gas[gasid]
-			gas_mix.adjust_multi(arglist(gas_args))
+				gas_mix.adjust_gas(gasid, initial_gas[gasid], FALSE)
+			gas_mix.update_values()
 
 		gas_mixes[mix_name] = gas_mix
 	return gas_mixes

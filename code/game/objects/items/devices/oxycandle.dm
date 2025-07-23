@@ -1,3 +1,4 @@
+// TODO: Make this an actual candle that burns something that produces oxygen as a waste product? That'd be doable now...
 /obj/item/oxycandle
 	name = "oxygen candle"
 	desc = "A steel tube with the words 'OXYGEN - PULL CORD TO IGNITE' stamped on the side.\nA small label reads <span class='warning'>'WARNING: NOT FOR LIGHTING USE. WILL IGNITE FLAMMABLE GASSES'</span>"
@@ -34,8 +35,8 @@
 		air_contents = new /datum/gas_mixture()
 		air_contents.volume = 200 //liters
 		air_contents.temperature = T20C
-		var/list/air_mix = list(/decl/material/gas/oxygen = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
-		air_contents.adjust_multi(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen])
+		var/const/OXYGEN_FRACTION = 1 // separating out the constant so it's clearer why it exists and how to modify it later
+		air_contents.adjust_gas(/decl/material/gas/oxygen, OXYGEN_FRACTION * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
 		START_PROCESSING(SSprocessing, src)
 
 // Process of Oxygen candles releasing air. Makes 200 volume of oxygen
@@ -63,8 +64,8 @@
 		return
 	environment.merge(removed)
 	volume -= 200
-	var/list/air_mix = list(/decl/material/gas/oxygen = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
-	air_contents.adjust_multi(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen])
+	var/const/OXYGEN_FRACTION = 1 // separating out the constant so it's clearer why it exists and how to modify it later
+	air_contents.adjust_gas(/decl/material/gas/oxygen, OXYGEN_FRACTION * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
 
 /obj/item/oxycandle/on_update_icon()
 	. = ..()

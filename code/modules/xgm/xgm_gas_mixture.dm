@@ -72,17 +72,6 @@
 	if(update)
 		update_values()
 
-
-//Variadic version of adjust_gas().  Takes any number of gas and mole pairs and applies them.
-/datum/gas_mixture/proc/adjust_multi()
-	ASSERT(!(args.len % 2))
-
-	for(var/i = 1; i < args.len; i += 2)
-		adjust_gas(args[i], args[i+1], update = 0)
-
-	update_values()
-
-
 /// Merges all the gas from another mixture into this one.  Respects group_multipliers and adjusts temperature correctly.
 /// Does not modify giver in any way.
 /datum/gas_mixture/proc/merge(const/datum/gas_mixture/giver)
