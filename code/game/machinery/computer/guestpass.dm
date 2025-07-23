@@ -58,13 +58,14 @@
 	var/reason = "NOT SPECIFIED"
 	var/duration_max = 60
 	var/duration = 5
+	var/terminal_serial
 
 	var/list/internal_log = list()
 	var/mode = 0  // 0 - making pass, 1 - viewing logs
 
 /obj/machinery/computer/guestpass/Initialize()
 	. = ..()
-	uid = "[random_id("guestpass_serial_number",100,999)]-G[rand(10,99)]"
+	terminal_serial = "[random_id("guestpass_serial_number",100,999)]-G[rand(10,99)]"
 
 /obj/machinery/computer/guestpass/attackby(obj/used_item, mob/user)
 	if(istype(used_item, /obj/item/card/id))
@@ -158,7 +159,7 @@
 		. = TOPIC_REFRESH
 
 	else if (href_list["print"])
-		var/dat = "<h3>Activity log of guest pass terminal #[uid]</h3><br>"
+		var/dat = "<h3>Activity log of guest pass terminal #[terminal_serial]</h3><br>"
 		for (var/entry in internal_log)
 			dat += "[entry]<br><hr>"
 		var/obj/item/paper/paper = new/obj/item/paper( loc )
