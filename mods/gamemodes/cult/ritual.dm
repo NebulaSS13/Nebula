@@ -29,7 +29,7 @@
 		return
 	if(A.reagents && A.reagents.has_reagent(/decl/material/liquid/water))
 		to_chat(user, SPAN_NOTICE("You desecrate \the [A]."))
-		LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list("holy" = FALSE))
+		LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list(DATA_WATER_HOLINESS = FALSE))
 
 /mob/proc/make_rune(var/rune, var/cost = 5, var/tome_required = 0)
 	var/has_robes = 0
