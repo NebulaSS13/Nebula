@@ -24,7 +24,24 @@
 	// pref.sprite_accessories is sprite_accessories[accessory_category.type][loaded_accessory.type] = metadata
 	// snapshot.sprite_accessories is sprite_accessories[organ_tag][accessory_category.type][loaded_accessory.type] = metadata
 	// we have to convert it here
+	// on the bright side bodytype.default_sprite_accessories uses the same format
 	var/list/new_sprite_accessories = list()
+	// THIS IS HACKY. PLEASE FIND A BETTER WAY TO DO THIS
+	// Adds default bodytype accessories to the snapshot.
+	var/decl/bodytype/the_bodytype = pref.get_bodytype_decl()
+	for(var/accessory_category in the_bodytype.default_sprite_accessories)
+		var/decl/sprite_accessory_category/acc_cat = GET_DECL(accessory_category)
+		if(!acc_cat.always_apply_defaults)
+			continue
+		var/list/accessories = the_bodytype.default_sprite_accessories[accessory_category]
+		acc_cat.prepare_mob_snapshot(snapshot, accessories)
+		for(var/accessory in accessories)
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			var/accessory_metadata = accessories[accessory]
+			for(var/bodypart in accessory_decl.body_parts)
+				LAZYINITLIST(new_sprite_accessories[bodypart])
+				LAZYSET(new_sprite_accessories[bodypart][accessory_category], accessory, accessory_metadata)
+	// jank shit end
 	for(var/accessory_category in pref.sprite_accessories)
 		var/decl/sprite_accessory_category/acc_cat = GET_DECL(accessory_category)
 		var/list/accessories = pref.sprite_accessories[accessory_category]
