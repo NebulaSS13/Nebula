@@ -509,7 +509,7 @@
 /turf/floor/plating,
 /area/lar_maria/solar_control)
 "br" = (
-/obj/machinery/suit_cycler,
+/obj/machinery/suit_cycler/engineering/prepared/atmospheric,
 /turf/floor/plating,
 /area/lar_maria/solar_control)
 "bs" = (
@@ -617,6 +617,9 @@
 /obj/structure/bookcase,
 /obj/machinery/light{
 	dir = 1
+	},
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
 	},
 /turf/floor/tiled,
 /area/lar_maria/library)
@@ -808,31 +811,49 @@
 "cr" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/engineering_guide,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cs" = (
 /obj/structure/bookcase,
 /obj/item/book/fluff/stasis,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cu" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/medical_diagnostics_manual,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cv" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/detective,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cx" = (
 /obj/structure/bookcase,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cy" = (
 /obj/structure/bookcase,
 /obj/item/book/fluff/anomaly_spectroscopy,
 /obj/item/book/fluff/anomaly_testing,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cz" = (
@@ -959,7 +980,7 @@
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "cR" = (
-/obj/machinery/atmospherics/binary/pump{
+/obj/machinery/atmospherics/binary/pump/on{
 	dir = 4
 	},
 /turf/floor/plating,
@@ -1094,7 +1115,11 @@
 /area/lar_maria/atmos)
 "dn" = (
 /obj/machinery/atmospherics/omni/mixer{
-	dir = 4
+	dir = 4;
+	tag_west = 1;
+	tag_north = 1;
+	tag_north_con = 0.79;
+	tag_west_con = 0.21
 	},
 /turf/floor/plating,
 /area/lar_maria/atmos)
@@ -1106,14 +1131,16 @@
 /area/lar_maria/atmos)
 "dp" = (
 /obj/machinery/atmospherics/omni/filter{
-	dir = 4
+	dir = 4;
+	tag_south = 8;
+	tag_filter_gas_south = "gas_carbon_dioxide";
+	tag_east = 2;
+	tag_west = 1
 	},
-/obj/abstract/landmark/allowed_leak,
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "dr" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan,
-/obj/abstract/landmark/allowed_leak,
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "ds" = (
@@ -1179,12 +1206,10 @@
 /area/lar_maria/atmos)
 "dD" = (
 /obj/machinery/atmospherics/binary/oxyregenerator,
-/obj/abstract/landmark/allowed_leak,
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "dE" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
-/obj/abstract/landmark/allowed_leak,
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "dF" = (
@@ -1853,6 +1878,7 @@
 "fM" = (
 /obj/structure/table,
 /obj/random/gloves,
+/obj/random/medical/lite,
 /turf/floor/tiled,
 /area/lar_maria/office)
 "fN" = (
@@ -1866,6 +1892,7 @@
 "fP" = (
 /obj/structure/table/steel,
 /obj/random/firstaid,
+/obj/random/medical/lite,
 /turf/floor/tiled,
 /area/lar_maria/office)
 "fQ" = (
@@ -2099,6 +2126,7 @@
 "gC" = (
 /obj/structure/table,
 /obj/random/trash,
+/obj/random/medical/pillbottle,
 /turf/floor/plating,
 /area/lar_maria/hallway)
 "gD" = (
@@ -2248,6 +2276,15 @@
 /area/lar_maria/mess_hall)
 "hb" = (
 /obj/structure/closet/crate/trashcart,
+/obj/random/trash,
+/obj/random/trash,
+/obj/random/trash,
+/obj/random/useful{
+	spawn_nothing_percentage = 70
+	},
+/obj/item/book/union_charter{
+	dat = "<em>The contents of the book are heavily defaced and nearly illegible.</em>"
+	},
 /turf/floor/plating,
 /area/lar_maria/hallway)
 "hc" = (
@@ -2367,21 +2404,17 @@
 "hu" = (
 /turf/floor/plating,
 /area/lar_maria/hallway)
-"hv" = (
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
-/obj/random/trash,
-/turf/floor/plating,
-/area/lar_maria/hallway)
 "hw" = (
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
+	},
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
 	},
 /turf/floor/tiled,
 /area/lar_maria/hallway)
@@ -2993,7 +3026,8 @@
 /obj/machinery/button/access/interior{
 	id_tag = "ZHPDock_airlock";
 	pixel_x = 25;
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 8
 	},
 /turf/floor/plating,
 /area/lar_maria/hallway)
@@ -3026,7 +3060,8 @@
 "jn" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "ZHPDock_airlock_sensor";
-	pixel_x = 25
+	pixel_x = 22;
+	dir = 8
 	},
 /turf/floor/plating,
 /area/lar_maria/hallway)
@@ -3089,6 +3124,14 @@
 	},
 /turf/floor/plating,
 /area/lar_maria/solar_control)
+"nm" = (
+/obj/structure/bookcase,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
+/obj/item/book/manual/evaguide,
+/turf/floor/tiled,
+/area/lar_maria/library)
 "ob" = (
 /obj/structure/ladder,
 /obj/machinery/light/small{
@@ -3097,13 +3140,6 @@
 	},
 /turf/floor/plating,
 /area/lar_maria/solar_control)
-"ok" = (
-/obj/machinery/atmospherics/binary/pump{
-	dir = 4
-	},
-/obj/abstract/landmark/allowed_leak,
-/turf/floor/plating,
-/area/lar_maria/atmos)
 "pb" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
@@ -3161,17 +3197,28 @@
 /obj/machinery/light/small,
 /turf/floor/plating,
 /area/lar_maria/atmos)
+"uf" = (
+/obj/machinery/atmospherics/omni/filter{
+	dir = 4;
+	tag_south = 8;
+	tag_filter_gas_south = "gas_oxygen";
+	tag_east = 2;
+	tag_west = 1
+	},
+/turf/floor/plating,
+/area/lar_maria/atmos)
 "vb" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/structure/mirror{
-	pixel_x = 30
-	},
 /obj/machinery/alarm{
 	pixel_y = 23;
 	req_access = newlist()
+	},
+/obj/structure/mirror{
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/floor/tiled/white,
 /area/lar_maria/head_m)
@@ -3181,11 +3228,21 @@
 	pixel_x = 11
 	},
 /obj/structure/mirror{
-	pixel_x = 30
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/random/trash,
 /turf/floor/tiled/white,
 /area/lar_maria/head_m)
+"wW" = (
+/obj/machinery/atmospherics/omni/filter{
+	dir = 4;
+	tag_north = 8;
+	tag_east = 2;
+	tag_west = 1
+	},
+/turf/floor/plating,
+/area/lar_maria/atmos)
 "xb" = (
 /obj/structure/hygiene/sink{
 	dir = 8;
@@ -3193,35 +3250,51 @@
 	pixel_y = 2
 	},
 /obj/structure/mirror{
-	pixel_x = -30
+	pixel_x = -29;
+	dir = 4
 	},
 /turf/floor/tiled/white,
 /area/lar_maria/head_f)
-"Ag" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 8
-	},
-/obj/abstract/landmark/allowed_leak,
+"xx" = (
+/obj/machinery/atmospherics/pipe/simple/visible/universal,
 /turf/floor/plating,
 /area/lar_maria/atmos)
+"Ag" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/red{
+	dir = 8
+	},
+/turf/floor/plating,
+/area/lar_maria/atmos)
+"Am" = (
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	id_tag = "ZHPDock";
+	tag_airpump = "ZHPEastSolar_pump";
+	tag_chamber_sensor = "ZHPEastSolar_sensor";
+	tag_exterior_door = "ZHPEastSolar_outer";
+	tag_interior_door = "ZHPEastSolar_inner";
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/floor/plating,
+/area/lar_maria/hallway)
 "DG" = (
 /obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/floor/tiled,
 /area/lar_maria/office)
-"FZ" = (
-/obj/machinery/atmospherics/pipe/simple/visible/red,
-/obj/abstract/landmark/allowed_leak,
+"Kg" = (
+/obj/machinery/suit_cycler/medical/prepared,
 /turf/floor/plating,
-/area/lar_maria/atmos)
-"YS" = (
-/obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 10
+/area/lar_maria/solar_control)
+"NR" = (
+/obj/structure/bookcase,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
 	},
-/obj/abstract/landmark/allowed_leak,
-/turf/floor/plating,
-/area/lar_maria/atmos)
+/obj/item/book/union_charter,
+/turf/floor/tiled,
+/area/lar_maria/library)
 
 (1,1,1) = {"
 aa
@@ -20885,7 +20958,7 @@ bw
 bw
 bI
 cd
-cx
+NR
 cM
 di
 cd
@@ -21489,7 +21562,7 @@ aA
 ad
 bw
 bw
-cx
+nm
 cf
 cx
 cO
@@ -22503,7 +22576,7 @@ pb
 ci
 cA
 cR
-ok
+cR
 dB
 tb
 bx
@@ -22517,7 +22590,7 @@ ex
 eu
 gC
 hd
-hv
+hc
 hS
 iq
 iN
@@ -22704,7 +22777,7 @@ bx
 bM
 ci
 cn
-YS
+cl
 dn
 dB
 bM
@@ -22901,13 +22974,13 @@ aY
 bg
 nb
 br
-br
+Kg
 bx
 bN
 ci
 cn
 cn
-ok
+cR
 dC
 dO
 bx
@@ -23333,7 +23406,7 @@ je
 jg
 ji
 jm
-hu
+Am
 jo
 jq
 aa
@@ -23511,10 +23584,10 @@ bA
 bG
 bQ
 ck
-bQ
 cU
+xx
 Ag
-bQ
+xx
 dR
 bG
 eA
@@ -23713,8 +23786,8 @@ bB
 bx
 bR
 ci
-cn
 cV
+cn
 dp
 dD
 dS
@@ -23917,7 +23990,7 @@ bS
 ci
 cA
 cn
-dp
+uf
 dE
 dT
 bx
@@ -24118,8 +24191,8 @@ bx
 qb
 cl
 cB
-FZ
-dp
+cB
+wW
 dF
 ub
 bx
