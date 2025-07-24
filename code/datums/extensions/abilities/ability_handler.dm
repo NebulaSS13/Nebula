@@ -21,7 +21,7 @@
 	if(!istype(owner))
 		CRASH("Ability handler received invalid owner!")
 	..()
-	refresh_login()
+	refresh_login(being_created = TRUE)
 
 /datum/ability_handler/Process()
 
@@ -211,7 +211,7 @@
 			stat(stat_strings[1], stat_strings[2])
 
 /// Individual ability methods/disciplines (psioncs, etc.) so that mobs can have multiple.
-/datum/ability_handler/proc/refresh_login()
+/datum/ability_handler/proc/refresh_login(being_created = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(LAZYLEN(screen_elements))
 		var/list/add_elements = list()

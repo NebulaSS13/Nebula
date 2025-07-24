@@ -1,4 +1,4 @@
-/datum/ability_handler/psionics/proc/update(var/force)
+/datum/ability_handler/psionics/proc/update(var/force, can_delete = TRUE)
 
 	set waitfor = FALSE
 
@@ -23,7 +23,7 @@
 	var/rank_count = max(1, LAZYLEN(ranks))
 	if(force || last_rating != ceil(combined_rank/rank_count))
 		if(highest_rank <= 1)
-			if(highest_rank == 0)
+			if(highest_rank == 0 && can_delete) // hack to prevent deletion on update(TRUE) in New
 				qdel(src)
 			return
 		else
