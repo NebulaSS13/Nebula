@@ -67,7 +67,7 @@
 		return
 
 	if(target.stat == DEAD || (target.status_flags & FAKEDEATH) || !target.client)
-		to_chat(user, SPAN_WARNING("\The [target] is in no state for a mind-ream."))
+		to_chat(user, SPAN_WARNING("\The [target] is in no state for a mind-read."))
 		return TRUE
 
 	user.visible_message(SPAN_WARNING("\The [user] touches \the [target]'s temple..."))
