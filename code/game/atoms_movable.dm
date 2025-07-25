@@ -22,7 +22,9 @@
 	// var/elevation = 2    - not used anywhere
 	var/move_speed = 10
 	var/l_move_time = 1
-	var/m_flag = 1
+	var/const/FIRST_DIAGONAL_STEP = 1
+	var/const/SECOND_DIAGONAL_STEP = 2
+	var/moving_diagonally = FALSE // Used so we don't break grabs mid-diagonal-move.
 	var/datum/thrownthing/throwing
 	var/throw_speed = 2
 	var/throw_range = 7

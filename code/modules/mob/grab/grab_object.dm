@@ -175,7 +175,7 @@
 	current_grab.let_go(src)
 
 /obj/item/grab/proc/on_affecting_move()
-	if(!affecting || !isturf(affecting.loc) || get_dist(affecting, assailant) > 1)
+	if(!affecting || !isturf(affecting.loc) || (get_dist(affecting, assailant) > 1 && affecting.moving_diagonally != /atom/movable::FIRST_DIAGONAL_STEP))
 		force_drop()
 
 /obj/item/grab/proc/force_drop()

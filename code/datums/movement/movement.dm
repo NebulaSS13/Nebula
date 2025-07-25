@@ -90,10 +90,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 		var/oldloc = loc
 		var/turf/T = get_step(loc, direction)
 		if(istype(T))
-			if(direction in global.cornerdirs) // Diagonal movement with step() currently breaks
-				forceMove(T)                 // grabs, remove these lines when that is fixed.
-			else
-				step(src, direction)
+			step(src, direction)
 		return loc != oldloc
 
 	for(var/datum/movement_handler/movement_handler as anything in movement_handlers)
