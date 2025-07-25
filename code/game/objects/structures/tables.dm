@@ -325,11 +325,10 @@
 		var/flip_mod = ""
 		if(left_neighbor_blend && right_neighbor_blend)
 			flip_type = 2
-			icon_state = "flip[flip_type]"
 		else if(left_neighbor_blend || right_neighbor_blend)
 			flip_type = 1
 			flip_mod = (left_neighbor_blend ? "+" : "-")
-			icon_state = "flip[flip_type][flip_mod]"
+		icon_state = "flip[flip_type][flip_mod]"
 
 		color = material.color
 		alpha = 255 * material.opacity
