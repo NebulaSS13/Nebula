@@ -314,7 +314,7 @@
 	center_of_mass = @'{"x":17,"y":10}'
 
 /obj/item/chems/drinks/bottle/holywater/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume, list("holy" = TRUE))
+	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume, list(DATA_WATER_HOLINESS = TRUE))
 
 /obj/item/chems/drinks/bottle/vermouth
 	name = "Goldeneye Vermouth"

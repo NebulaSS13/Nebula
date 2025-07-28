@@ -442,7 +442,7 @@
 		to_chat(user, SPAN_WARNING("There's no suitable occupant in \the [src]."))
 		return
 	if(!emagged && canister.reagents?.primary_reagent)
-		var/decl/material/chem = GET_DECL(canister.reagents.primary_reagent)
+		var/decl/material/chem = canister.reagents.primary_reagent
 		if(chem.overdose && REAGENT_VOLUME(occupant.reagents, canister.reagents.primary_reagent) + amount >= chem.overdose)
 			to_chat(user, SPAN_WARNING("Injecting more [chem.name] presents an overdose risk to the subject."))
 			return

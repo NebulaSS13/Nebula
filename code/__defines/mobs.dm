@@ -248,6 +248,7 @@
 
 // Misc general data.
 #define DATA_COOLDOWN_TIME    /decl/reagent_data_field/cooldown_time
+#define DATA_WATER_HOLINESS   /decl/reagent_data_field/holy
 
 //Used by show_message() and emotes
 #define VISIBLE_MESSAGE 1
