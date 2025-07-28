@@ -1,4 +1,6 @@
 /datum/ability_handler/psionics
+	category_toggle_type = null       // we don't use this at the moment, but maybe should eventually.
+
 	var/announced = FALSE             // Whether or not we have been announced to our holder yet.
 	var/suppressed = TRUE             // Whether or not we are suppressing our psi powers.
 	var/use_psi_armour = TRUE         // Whether or not we should automatically deflect/block incoming damage.
