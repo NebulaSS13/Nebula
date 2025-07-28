@@ -64,7 +64,7 @@
 			var/inaccuracy = rand(8,12)/10
 			. += "Atmosphere pressure [atmosphere.return_pressure()*inaccuracy] kPa, temperature [atmosphere.temperature*inaccuracy] K<br>"
 		else if(user.skill_check(SKILL_SCIENCE, SKILL_BASIC) || user.skill_check(SKILL_ATMOS, SKILL_BASIC))
-			. += "Atmosphere present<br>"
+			. += "Atmosphere present. Sensor suite calibration required for detailed scan. Contact a qualified technician for calibration assistance.<br>"
 		. += "<br>"
 
 	var/datum/planetoid_data/E = get_planetoid_data()
