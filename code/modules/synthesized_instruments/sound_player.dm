@@ -21,7 +21,7 @@
 	var/list/datum/sound_token/instrument/tokens = list()
 	var/list/seen_turfs
 
-/datum/sound_player/New(datum/real_instrument/where, datum/instrument/what)
+/datum/sound_player/New(obj/where, datum/instrument/what)
 	src.song = new (src, what)
 	src.actual_instrument = where
 	src.echo = global.musical_config.echo_default.Copy()
