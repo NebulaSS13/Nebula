@@ -125,7 +125,7 @@
 		if(recipe && recipe == last_recipe && recipe.can_bulk_cook)
 			// Bulk cooking has benefits like reduced cook time
 			// we don't just do it instantly because there's messages each time
-			started_cooking = world.time + (recipe.cooking_time / 2)
+			started_cooking = world.time + (recipe.cooking_time / 5)
 		else
 			started_cooking = null
 			last_recipe = null
