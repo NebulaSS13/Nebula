@@ -1,0 +1,5 @@
+author: Sutures
+changes:
+  - {soundadd: added ambience to Shaded Hills river and swamp areas}
+  - {tweak: ambience should be louder and more frequent overall}
+delete-after: true
