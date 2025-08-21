@@ -18,4 +18,4 @@
 		if(uses > 0)
 			to_chat(user, SPAN_NOTICE("\The [item] has been honed to a keen edge."))
 		else
-			to_chat(user, SPAN_NOTICE("\The [item] in need of sharpening."))
+			to_chat(user, SPAN_NOTICE("\The [item] is in need of sharpening."))
