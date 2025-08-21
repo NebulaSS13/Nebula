@@ -32,6 +32,10 @@
 	pixel_x = -8
 	},
 /obj/structure/table/desk/ebony,
+/obj/structure/wall_cabinet/ebony{
+	pixel_y = 35;
+	pixel_x = -5
+	},
 /turf/floor/path/herringbone/basalt,
 /area/fantasy/outside/point_of_interest/chemistry_shack)
 "k" = (
@@ -147,6 +151,14 @@
 /obj/item/chems/glass/handmade/bottle/tall/wine{
 	pixel_x = -10;
 	pixel_y = 9
+	},
+/obj/structure/wall_cabinet/ebony{
+	pixel_y = 35;
+	pixel_x = -16
+	},
+/obj/structure/wall_cabinet/ebony{
+	pixel_y = 35;
+	pixel_x = 5
 	},
 /turf/floor/path/herringbone/basalt,
 /area/fantasy/outside/point_of_interest/chemistry_shack)

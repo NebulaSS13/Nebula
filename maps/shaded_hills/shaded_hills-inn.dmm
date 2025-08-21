@@ -49,6 +49,10 @@
 /area/shaded_hills/shrine/kitchen)
 "cl" = (
 /obj/structure/table/wood/ebony,
+/obj/structure/wall_cabinet/ebony{
+	pixel_y = 35;
+	pixel_x = -4
+	},
 /turf/floor/wood/rough/walnut,
 /area/shaded_hills/farmhouse)
 "cq" = (
@@ -481,6 +485,10 @@
 "ml" = (
 /obj/structure/table/wood/ebony,
 /obj/item/shears,
+/obj/structure/wall_cabinet/ebony{
+	pixel_y = 35;
+	pixel_x = -5
+	},
 /turf/floor/wood/rough/walnut,
 /area/shaded_hills/farmhouse)
 "mD" = (
@@ -1025,6 +1033,14 @@
 "AG" = (
 /obj/structure/table/wood/ebony,
 /obj/item/bag/sack,
+/obj/structure/wall_cabinet/ebony{
+	pixel_y = 35;
+	pixel_x = 5
+	},
+/obj/structure/wall_cabinet/ebony{
+	pixel_y = 35;
+	pixel_x = -16
+	},
 /turf/floor/wood/rough/walnut,
 /area/shaded_hills/farmhouse)
 "AS" = (
@@ -1476,6 +1492,14 @@
 "LH" = (
 /obj/structure/table/wood/ebony,
 /obj/item/chems/glass/bucket/wood,
+/obj/structure/wall_cabinet/ebony{
+	pixel_y = 35;
+	pixel_x = 6
+	},
+/obj/structure/wall_cabinet/ebony{
+	pixel_y = 35;
+	pixel_x = -15
+	},
 /turf/floor/wood/rough/walnut,
 /area/shaded_hills/farmhouse)
 "LK" = (
