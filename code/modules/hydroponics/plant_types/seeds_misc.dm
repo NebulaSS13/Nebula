@@ -560,6 +560,7 @@
 	set_trait(TRAIT_POTENCY,10)
 	set_trait(TRAIT_PRODUCT_ICON,"mushroom")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#ff4545")
+	set_trait(TRAIT_LEAVES_COLOUR,"#ff4545") // to make it so they aren't pale while immature
 	set_trait(TRAIT_PLANT_COLOUR,"#e0ddba")
 	set_trait(TRAIT_PLANT_ICON,"mushroom4")
 
@@ -579,6 +580,7 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#ede8ea")
 	set_trait(TRAIT_PLANT_COLOUR,"#e6d8dd")
 	set_trait(TRAIT_PLANT_ICON,"mushroom5")
+	set_trait(TRAIT_LEAVES_COLOUR,null)
 
 /datum/seed/mushroom/towercap
 	name = "towercap"
@@ -1528,8 +1530,8 @@
 	set_trait(TRAIT_YIELD,5)
 	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#a80000")
-	set_trait(TRAIT_PLANT_COLOUR,"#749733")
-	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_PLANT_COLOUR,"#7acf3c")
+	set_trait(TRAIT_PLANT_ICON,"tree2")
 	set_trait(TRAIT_IDEAL_HEAT, 299)
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
