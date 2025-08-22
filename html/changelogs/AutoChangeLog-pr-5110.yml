@@ -1,5 +1,0 @@
-author: Sutures
-changes:
-  - {imageadd: added new amanita mushroom plant growth states}
-  - {tweak: changed coffee plant growth states}
-delete-after: true

@@ -1,4 +1,0 @@
-author: Sutures
-changes:
-  - {tweak: stone walls now have a slight noise effect on their sprite}
-delete-after: true
