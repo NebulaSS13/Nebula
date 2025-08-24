@@ -32,6 +32,7 @@
 			. += /obj/item/food/nugget
 
 /obj/item/box/nuggets/on_update_icon()
+	. = ..()
 	var/datum/storage/box/nuggets/nugget_box = storage
 	if(length(contents) == 0 || !istype(nugget_box))
 		icon_state = "[initial(icon_state)]_empty"
