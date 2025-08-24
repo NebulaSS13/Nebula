@@ -1,21 +1,29 @@
 var/global/list/chat_blockers_in_use
 var/global/list/chat_modifiers_in_use
 
-/proc/build_filter_lists()
+/proc/_get_chat_filters_in_use()
 	global.chat_blockers_in_use = list()
 	global.chat_modifiers_in_use = list()
-	var/list/all_filters = decls_repository.get_decls_of_type(/decl/chat_filter)
-	for(var/filtertype in all_filters)
-		var/decl/chat_filter/chat_filter = all_filters[filtertype]
-		if(!chat_filter.disabled)
-			if(chat_filter.can_deny_message)
-				global.chat_blockers_in_use += chat_filter
-			if(chat_filter.can_modify_message)
-				global.chat_modifiers_in_use += chat_filter
-	return TRUE
+	for(var/decl/chat_filter/chat_filter in decls_repository.get_decls_of_type_unassociated(/decl/chat_filter))
+		if(chat_filter.disabled)
+			continue
+		if(chat_filter.can_deny_message)
+			global.chat_blockers_in_use += chat_filter
+		if(chat_filter.can_modify_message)
+			global.chat_modifiers_in_use += chat_filter
+
+/proc/get_chat_blockers_in_use()
+	if(!global.chat_blockers_in_use)
+		_get_chat_filters_in_use()
+	return global.chat_blockers_in_use
+
+/proc/get_chat_modifiers_in_use()
+	if(!global.chat_modifiers_in_use)
+		_get_chat_filters_in_use()
+	return global.chat_modifiers_in_use
 
 /proc/filter_block_message(var/mob/speaker, var/msg)
-	for(var/decl/chat_filter/chat_filter in global.chat_blockers_in_use)
+	for(var/decl/chat_filter/chat_filter in get_chat_blockers_in_use())
 		var/match = chat_filter.match(msg)
 		if(match)
 			var/deny_msg = chat_filter.deny(speaker, match)
@@ -25,7 +33,7 @@ var/global/list/chat_modifiers_in_use
 
 /proc/filter_modify_message(var/msg)
 	. = msg
-	for(var/decl/chat_filter/chat_filter in global.chat_modifiers_in_use)
+	for(var/decl/chat_filter/chat_filter in get_chat_modifiers_in_use())
 		var/match = chat_filter.match(.)
 		if(match)
 			. = chat_filter.replace(., match)
@@ -50,9 +58,10 @@ var/global/list/chat_modifiers_in_use
 /client/verb/check_message_filters()
 	set name = "Check Message Filters"
 	set category = "OOC"
-	if(length(global.chat_blockers_in_use))
+	var/list/blockers_in_use = get_chat_blockers_in_use()
+	if(length(blockers_in_use))
 		to_chat(usr, "<b>The following filters are being used to block messages:</b><hr>")
-		for(var/decl/chat_filter/chat_filter in global.chat_blockers_in_use)
+		for(var/decl/chat_filter/chat_filter in blockers_in_use)
 			to_chat(usr, "<b>[chat_filter.name]</b><br>[chat_filter.summary]<hr>")
 	else
 		to_chat(usr, "<b>There are no filters being used to block messages currently.</b>")
@@ -60,9 +69,10 @@ var/global/list/chat_modifiers_in_use
 /client/verb/check_message_modifiers()
 	set name = "Check Message Modifiers"
 	set category = "OOC"
-	if(length(global.chat_modifiers_in_use))
+	var/list/modifiers_in_use = get_chat_modifiers_in_use()
+	if(length(modifiers_in_use))
 		to_chat(usr, "<b>The following filters can be used to modify messages:</b><hr>")
-		for(var/decl/chat_filter/chat_filter in global.chat_modifiers_in_use)
+		for(var/decl/chat_filter/chat_filter in modifiers_in_use)
 			to_chat(usr, "<b>[chat_filter.name]</b><br>[chat_filter.summary]<hr>")
 	else
-		to_chat(usr, "<b>There are no avaiable filters for modifying messages currently.</b>")
+		to_chat(usr, "<b>There are no available filters for modifying messages currently.</b>")
