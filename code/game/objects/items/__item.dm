@@ -109,8 +109,8 @@
 	var/tmp/use_single_icon
 	var/center_of_mass = @'{"x":16,"y":16}' //can be null for no exact placement behaviour
 
-	/// Used when this item is replaced by a loadout item. If TRUE, loadout places src in wearer's storage. If FALSE, src is deleted.
-	var/replaced_in_loadout = TRUE
+	/// Controls what method is used to resolve conflicts between equipped items and mob loadout.
+	var/replaced_in_loadout = LOADOUT_CONFLICT_DELETE
 
 	var/paint_color
 	var/paint_verb
@@ -1170,9 +1170,12 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/handle_loadout_equip_replacement(obj/item/old_item)
 	return
 
-/// Used to handle equipped icons overwritten by custom loadout. If TRUE, loadout places src in wearer's storage. If FALSE, src is deleted by loadout.
+/// Used to handle equipped items overwritten by custom loadout.
+/// Returns one of LOADOUT_CONFLICT_DELETE, LOADOUT_CONFLICT_STORAGE, or LOADOUT_CONFLICT_KEEP.
 /obj/item/proc/loadout_should_keep(obj/item/new_item, mob/wearer)
-	return type != new_item.type && !replaced_in_loadout
+	if(type == new_item.type) // for exact type collisions, just delete by default
+		return LOADOUT_CONFLICT_DELETE
+	return replaced_in_loadout
 
 /obj/item/dropped(mob/user, slot)
 	. = ..()

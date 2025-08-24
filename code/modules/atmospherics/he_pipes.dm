@@ -124,5 +124,5 @@
 
 // Doubling up on initialize_directions is necessary to allow HE pipes to connect
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/set_dir(new_dir)
-	..()
+	. = ..()
 	initialize_directions_he = dir

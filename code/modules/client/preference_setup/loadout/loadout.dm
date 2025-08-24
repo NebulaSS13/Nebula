@@ -536,22 +536,23 @@
 	item.loadout_setup(wearer, metadata)
 
 	var/obj/item/old_item = wearer.get_equipped_item(slot)
-	var/attached_as_accessory = FALSE
 	if(istype(old_item, /obj/item/clothing) && istype(item, /obj/item/clothing))
 		var/obj/item/clothing/worn = old_item
 		if(worn.can_attach_accessory(item, wearer))
 			worn.attach_accessory(wearer, item)
-			attached_as_accessory = TRUE
 			return TRUE
 
-	if(!attached_as_accessory && wearer.equip_to_slot_if_possible(item, slot, del_on_fail = TRUE, force = TRUE, delete_old_item = FALSE, ignore_equipped = replace_equipped))
+	var/resolution_strategy = old_item?.loadout_should_keep(item, wearer)
+	if(resolution_strategy == LOADOUT_CONFLICT_KEEP)
+		place_in_storage_or_drop(wearer, item)
+	else if(wearer.equip_to_slot_if_possible(item, slot, del_on_fail = TRUE, force = TRUE, delete_old_item = FALSE, ignore_equipped = replace_equipped))
 		if(old_item && wearer.get_equipped_item(slot) != old_item)
 			item.handle_loadout_equip_replacement(old_item)
-			if(old_item.loadout_should_keep(item, wearer))
+			if(resolution_strategy == LOADOUT_CONFLICT_STORAGE)
 				place_in_storage_or_drop(wearer, old_item)
 			else
 				qdel(old_item)
-		return item
+	return item
 
 /decl/loadout_option/proc/spawn_in_storage_or_drop(mob/living/human/wearer, metadata)
 	var/obj/item/item = spawn_and_validate_item(wearer, metadata)

@@ -266,3 +266,10 @@ var/global/list/all_hand_slots = list(
 	BP_R_HAND_UPPER,
 	BP_MOUTH
 )
+
+/// If this item conflicts with a loadout item, simply delete it.
+#define LOADOUT_CONFLICT_DELETE 0
+/// If this item conflicts with a loadout item, place this item in storage.
+#define LOADOUT_CONFLICT_STORAGE 1
+/// If this item conflicts with a loadout item, place THE LOADOUT ITEM in storage.
+#define LOADOUT_CONFLICT_KEEP 2

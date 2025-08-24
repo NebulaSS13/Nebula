@@ -431,6 +431,7 @@
 	return list(/obj/item/chems/hypospray/autoinjector/stabilizer = 7)
 
 /obj/item/box/lights
+	abstract_type = /obj/item/box/lights
 	name = "box of replacement bulbs"
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."

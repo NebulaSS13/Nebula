@@ -26,7 +26,7 @@
 	brightness_on = 4
 	light_wedge = LIGHT_WIDE
 	on = 0
-	replaced_in_loadout = FALSE
+	replaced_in_loadout = LOADOUT_CONFLICT_KEEP
 
 	var/obj/machinery/camera/camera
 	var/tinted = null	//Set to non-null for toggleable tint helmets
@@ -144,7 +144,7 @@
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT
 	)
 	protects_against_weather = TRUE
-	replaced_in_loadout = FALSE
+	replaced_in_loadout = LOADOUT_CONFLICT_KEEP
 
 /obj/item/clothing/suit/space/Initialize()
 	. = ..()

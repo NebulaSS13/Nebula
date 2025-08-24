@@ -1099,7 +1099,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material/proc/get_presentation_name(var/obj/item/prop)
 	if(islist(prop?.reagents?.reagent_data))
 		. = LAZYACCESS(prop.reagents.reagent_data[src], DATA_MASK_NAME)
-	. ||= glass_name || liquid_name
+	. ||= glass_name || get_reagent_name(prop?.reagents)
 	if(prop?.reagents?.total_volume)
 		. = build_presentation_name_from_reagents(prop, .)
 

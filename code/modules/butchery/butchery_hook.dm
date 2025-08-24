@@ -177,7 +177,7 @@
 		clear_occupant()
 	else if(occupant_state == CARCASS_EMPTY)
 		for(var/obj/item/embedded in occupant.embedded)
-			occupant.remove_implant(occupant.embedded, TRUE) // surgical removal to prevent pointless damage pre-deletion
+			occupant.remove_implant(embedded, TRUE) // surgical removal to prevent pointless damage pre-deletion
 		for(var/obj/item/thing in occupant)
 			occupant.drop_from_inventory(thing)
 		qdel(occupant)

@@ -19,7 +19,7 @@
 		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
 		ARMOR_BIO = ARMOR_BIO_MINOR)
 	material = /decl/material/solid/organic/leather
-	replaced_in_loadout = FALSE
+	replaced_in_loadout = LOADOUT_CONFLICT_STORAGE
 
 /obj/item/clothing/gloves/thick/swat
 	desc = "These tactical gloves are somewhat fire and impact-resistant."

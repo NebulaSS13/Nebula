@@ -4,7 +4,7 @@
 	origin_tech = @'{"materials":1,"engineering":1}'
 	material = /decl/material/solid/organic/cloth
 	paint_verb = "dyed"
-	replaced_in_loadout = TRUE
+	replaced_in_loadout = LOADOUT_CONFLICT_DELETE
 	w_class = ITEM_SIZE_SMALL
 	icon_state = ICON_STATE_WORLD
 	_base_attack_force = 3

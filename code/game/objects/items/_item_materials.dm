@@ -1,6 +1,6 @@
 /obj/item/on_update_icon()
-	. = ..()
 	SHOULD_CALL_PARENT(TRUE)
+	. = ..()
 	cut_overlays()
 	if((material_alteration & MAT_FLAG_ALTERATION_COLOR) && material)
 		alpha = 100 + material.opacity * 255
@@ -91,6 +91,7 @@
 			obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 		if(isnull(initial(paint_verb)))
 			paint_verb = material.paint_verb
+		refresh_color() // apply material color
 		update_attack_force()
 		update_name()
 		if(material_armor_multiplier)

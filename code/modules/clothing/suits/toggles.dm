@@ -2,7 +2,7 @@
 /obj/item/clothing/suit/toggle
 	abstract_type = /obj/item/clothing/suit/toggle
 	storage = /datum/storage/pockets/suit
-	replaced_in_loadout = FALSE
+	replaced_in_loadout = LOADOUT_CONFLICT_STORAGE
 
 /obj/item/clothing/suit/toggle/get_assumed_clothing_state_modifiers()
 	var/static/list/expected_state_modifiers = list(

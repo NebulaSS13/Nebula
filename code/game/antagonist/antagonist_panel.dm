@@ -17,7 +17,7 @@
 /decl/special_role/proc/get_extra_panel_options()
 	return
 
-/decl/special_role/proc/get_check_antag_output(var/datum/admins/caller_admin)
+/decl/special_role/proc/get_check_antag_output(var/datum/admins/calling_admin)
 
 	if(!current_antagonists || !current_antagonists.len)
 		return ""
@@ -33,7 +33,7 @@
 			if(M.stat == DEAD)
 				dat += " <b><font color='red'>(DEAD)</font></b>"
 			dat += "</td>"
-			dat += "<td>\[<A href='byond://?src=\ref[caller_admin];priv_msg=\ref[M]'>PM</A>\]\[<A href='byond://?src=\ref[caller_admin];show_special_roles=\ref[M]'>SR</A>\]</td>"
+			dat += "<td>\[<A href='byond://?src=\ref[calling_admin];priv_msg=\ref[M]'>PM</A>\]\[<A href='byond://?src=\ref[calling_admin];show_special_roles=\ref[M]'>SR</A>\]</td>"
 		else
 			dat += "<td><i>Mob not found/([player.key])!</i></td>"
 		dat += "</tr>"
@@ -47,17 +47,17 @@
 			while(!isturf(disk_loc))
 				if(ismob(disk_loc))
 					var/mob/M = disk_loc
-					dat += "carried by <a href='byond://?src=\ref[caller_admin];adminplayeropts=\ref[M]'>[M.real_name]</a> "
+					dat += "carried by <a href='byond://?src=\ref[calling_admin];adminplayeropts=\ref[M]'>[M.real_name]</a> "
 				if(istype(disk_loc, /obj))
 					var/obj/O = disk_loc
 					dat += "in \a [O.name] "
 				disk_loc = disk_loc.loc
 			dat += "in [disk_loc.loc] at ([disk_loc.x], [disk_loc.y], [disk_loc.z])</td></tr>"
 		dat += "</table>"
-	dat += get_additional_check_antag_output(caller_admin)
+	dat += get_additional_check_antag_output(calling_admin)
 	dat += "<hr>"
 	return dat
 
 //Overridden elsewhere.
-/decl/special_role/proc/get_additional_check_antag_output(var/datum/admins/caller_admin)
+/decl/special_role/proc/get_additional_check_antag_output(var/datum/admins/calling_admin)
 	return ""

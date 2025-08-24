@@ -258,31 +258,34 @@
 			. += "</td></tr>"
 		. += "</table>"
 
+	// Items in this list are only added if there are entries in accessory_strings.
+	var/list/accessory_header = list()
+	var/list/accessory_strings = list()
 	if((mob_bodytype.appearance_flags & (HAS_EYE_COLOR|HAS_SKIN_COLOR|HAS_A_SKIN_TONE)) || length(mob_species.available_accessory_categories))
 
-		. += "<h3>Colouration and accessories</h3>"
-		. += "<table width = '500px'>"
+		accessory_header += "<h3>Colouration and accessories</h3>"
+		accessory_header += "<table width = '500px'>"
 
 		if(mob_bodytype.appearance_flags & HAS_A_SKIN_TONE)
-			. += "<tr>"
-			. += "<td width = '100px'><b>Skin tone</b></td>"
-			. += "<td width = '100px'><a href='byond://?src=\ref[src];skin_tone=1'>[-pref.skin_tone + 35]/[mob_bodytype.max_skin_tone()]</a></td>"
-			. += "<td colspan = 3 width = '300px'><td>"
-			. += "</tr>"
+			accessory_strings += "<tr>"
+			accessory_strings += "<td width = '100px'><b>Skin tone</b></td>"
+			accessory_strings += "<td width = '100px'><a href='byond://?src=\ref[src];skin_tone=1'>[-pref.skin_tone + 35]/[mob_bodytype.max_skin_tone()]</a></td>"
+			accessory_strings += "<td colspan = 3 width = '300px'><td>"
+			accessory_strings += "</tr>"
 
 		if(mob_bodytype.appearance_flags & HAS_SKIN_COLOR)
-			. += "<tr>"
-			. += "<td width = '100px'><b>Skin color</b></td>"
-			. += "<td width = '100px'>[COLORED_SQUARE(pref.skin_colour)] <a href='byond://?src=\ref[src];skin_color=1'>Change</a></td>"
-			. += "<td colspan = 3 width = '300px'><td>"
-			. += "</tr>"
+			accessory_strings += "<tr>"
+			accessory_strings += "<td width = '100px'><b>Skin color</b></td>"
+			accessory_strings += "<td width = '100px'>[COLORED_SQUARE(pref.skin_colour)] <a href='byond://?src=\ref[src];skin_color=1'>Change</a></td>"
+			accessory_strings += "<td colspan = 3 width = '300px'><td>"
+			accessory_strings += "</tr>"
 
 		if(mob_bodytype.appearance_flags & HAS_EYE_COLOR)
-			. += "<tr>"
-			. += "<td width = '100px'><b>Eyes</b></td>"
-			. += "<td width = '100px'>[COLORED_SQUARE(pref.eye_colour)] <a href='byond://?src=\ref[src];eye_color=1'>Change</a></td>"
-			. += "<td colspan = 3 width = '300px'><td>"
-			. += "</tr>"
+			accessory_strings += "<tr>"
+			accessory_strings += "<td width = '100px'><b>Eyes</b></td>"
+			accessory_strings += "<td width = '100px'>[COLORED_SQUARE(pref.eye_colour)] <a href='byond://?src=\ref[src];eye_color=1'>Change</a></td>"
+			accessory_strings += "<td colspan = 3 width = '300px'><td>"
+			accessory_strings += "</tr>"
 
 		var/const/up_arrow    = "&#8679;"
 		var/const/down_arrow  = "&#8681;"
@@ -311,19 +314,19 @@
 					var/decl/sprite_accessory_metadata/metadata = GET_DECL(metadata_type)
 					metadata_strings += metadata.get_metadata_options_string(src, accessory_cat_decl, accessory_decl, LAZYACCESS(accessory_metadata, metadata_type))
 				var/acc_decl_ref = "\ref[accessory_decl]"
-				. += "<tr>"
-				. += "<td width = '100px'><b>[accessory_cat_decl.name]</b></td>"
-				. += "<td width = '100px'>[jointext(metadata_strings, "<br>")]</td>"
-				. += "<td width = '20px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_prev=1'>[left_arrow]</a></td>"
-				. += "<td width = '260px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_style=1'>[accessory_decl.name]</a></td>"
-				. += "<td width = '20px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_next=1'>[right_arrow]</a></td>"
-				. += "</tr>"
+				accessory_strings += "<tr>"
+				accessory_strings += "<td width = '100px'><b>[accessory_cat_decl.name]</b></td>"
+				accessory_strings += "<td width = '100px'>[jointext(metadata_strings, "<br>")]</td>"
+				accessory_strings += "<td width = '20px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_prev=1'>[left_arrow]</a></td>"
+				accessory_strings += "<td width = '260px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_style=1'>[accessory_decl.name]</a></td>"
+				accessory_strings += "<td width = '20px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_next=1'>[right_arrow]</a></td>"
+				accessory_strings += "</tr>"
 				continue
 
-			. += "<tr>"
-			. += "<td width = '100px'><b>[accessory_cat_decl.name]</b></td>"
-			. += "<td width = '400px' colspan = 4></td>"
-			. += "</tr>"
+			accessory_strings += "<tr>"
+			accessory_strings += "<td width = '100px'><b>[accessory_cat_decl.name]</b></td>"
+			accessory_strings += "<td width = '400px' colspan = 4></td>"
+			accessory_strings += "</tr>"
 			var/i = 0
 			for(var/accessory in current_accessories)
 				i++
@@ -334,15 +337,19 @@
 					var/decl/sprite_accessory_metadata/metadata = GET_DECL(metadata_type)
 					metadata_strings += metadata.get_metadata_options_string(src, accessory_cat_decl, accessory_decl, LAZYACCESS(accessory_metadata, metadata_type))
 				var/acc_decl_ref = "\ref[accessory_decl]"
-				. += "<tr>"
-				. += "<td width = '100px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_remove=1'>Remove</a></td>"
-				. += "<td width = '100px'>[jointext(metadata_strings, "<br>")]</td>"
-				. += "<td width = '20px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_move_up=1'>[up_arrow]</a></td>"
-				. += "<td width = '260px'>[accessory_decl.name]</td>"
-				. += "<td width = '20px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_move_down=1'>[down_arrow]</a></td>"
-				. += "</tr>"
+				accessory_strings += "<tr>"
+				accessory_strings += "<td width = '100px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_remove=1'>Remove</a></td>"
+				accessory_strings += "<td width = '100px'>[jointext(metadata_strings, "<br>")]</td>"
+				accessory_strings += "<td width = '20px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_move_up=1'>[up_arrow]</a></td>"
+				accessory_strings += "<td width = '260px'>[accessory_decl.name]</td>"
+				accessory_strings += "<td width = '20px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_move_down=1'>[down_arrow]</a></td>"
+				accessory_strings += "</tr>"
 			if(isnull(accessory_cat_decl.max_selections) || i < accessory_cat_decl.max_selections)
-				. += "<tr><td colspan = 5 width = '500px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_style=1'>Add marking</a></td></tr>"
+				accessory_strings += "<tr><td colspan = 5 width = '500px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_style=1'>Add marking</a></td></tr>"
+
+	if(length(accessory_strings))
+		. += accessory_header
+		. += accessory_strings
 
 	. += "</table>"
 

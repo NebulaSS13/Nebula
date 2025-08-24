@@ -234,7 +234,7 @@
 	return angle_between_two_angles(leftmost_traverse, angle, rightmost_traverse)
 
 /obj/machinery/turret/set_dir(ndir)
-	..()
+	. = ..()
 	calculate_traverse()
 
 // Instantly turns the turret to a specific absolute angle.

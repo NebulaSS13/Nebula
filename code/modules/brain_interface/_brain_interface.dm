@@ -41,6 +41,7 @@
 	return holding_brain?.get_brainmob(create_if_missing)
 
 /obj/item/organ/internal/brain_interface/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(holding_brain)
 		var/mob/living/brainmob = get_brainmob()

@@ -75,9 +75,9 @@
 			return capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
 	var/possible_syllables = allow_repeated_syllables ? syllables : syllables.Copy()
-	for(var/i = 0;i<name_count;i++)
+	for(var/i in 1 to name_count)
 		var/new_name = ""
-		for(var/x = rand(floor(syllable_count/syllable_divisor),syllable_count);x>0;x--)
+		for(var/x in rand(floor(syllable_count/syllable_divisor), syllable_count) to 1 step -1)
 			if(!length(possible_syllables))
 				break
 			new_name += allow_repeated_syllables ? pick(possible_syllables) : pick_n_take(possible_syllables)

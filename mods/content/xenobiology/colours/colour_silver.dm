@@ -19,11 +19,11 @@
 		for(var/mob/living/human/M in viewers(location, null))
 			if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
 				M.flash_eyes()
-		for(var/i = 1, i <= 4 + rand(1,2), i++)
+		for(var/i in 1 to (4 + rand(1, 2)))
 			var/chosen = pick(borks)
 			var/obj/B = new chosen(location)
 			if(B)
 				if(prob(50))
-					for(var/j = 1, j <= rand(1, 3), j++)
+					for(var/j in 1 to rand(1, 3))
 						step(B, pick(NORTH, SOUTH, EAST, WEST))
 	return TRUE

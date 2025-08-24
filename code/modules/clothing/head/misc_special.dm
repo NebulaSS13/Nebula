@@ -31,7 +31,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY
-	replaced_in_loadout = FALSE
+	replaced_in_loadout = LOADOUT_CONFLICT_STORAGE
 	accessory_slot = null // cannot be equipped on top of helmets
 	var/up = 0
 	var/base_state

@@ -30,7 +30,7 @@
 		var/obj/item/cash/bling = new(T)
 		bling.adjust_worth(nv)
 		if(projectile_vomit)
-			for(var/j = 1, j <= rand(2, 4), j++)
+			for(var/j in 1 to rand(2, 4))
 				step(bling, pick(global.cardinal))
 
 	if(projectile_vomit)

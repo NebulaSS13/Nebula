@@ -94,7 +94,7 @@
 		. += "Its [lowertext(active_tool)] is folded out."
 
 /obj/item/knife/folding/swiss/update_attack_force()
-	..()
+	. = ..()
 	if(active_tool == SWISSKNF_CLOSED)
 		w_class = initial(w_class)
 	else

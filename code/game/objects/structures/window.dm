@@ -10,7 +10,8 @@
 	anchored = FALSE // Base, non-premapped type should start unanchored.
 	atom_flags = ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CAN_BE_PAINTED
 	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_MOVES_UNSUPPORTED
-	alpha = 180
+	base_alpha = 100 // at 0.3 opacity for glass, this will result in a total alpha of around 176
+	alpha = 180 // preview value
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	material = /decl/material/solid/glass
 	rad_resistance_modifier = 0.5

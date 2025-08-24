@@ -35,6 +35,7 @@
 		_brainmob.add_language(/decl/language/machine)
 
 /obj/item/organ/internal/brain/robotic/on_update_icon()
+	. = ..()
 	var/mob/living/brainmob = get_brainmob()
 	icon_state = get_world_inventory_state()
 	if(!searching)

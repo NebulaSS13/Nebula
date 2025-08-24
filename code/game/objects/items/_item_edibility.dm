@@ -4,7 +4,7 @@
 		add_trace_DNA(target)
 
 // Used to get a piece of food from an item.
-/obj/item/proc/seperate_food_chunk(obj/item/utensil/utensil, mob/user)
+/obj/item/proc/separate_food_chunk(obj/item/utensil/utensil, mob/user)
 	var/utensil_food_type = get_utensil_food_type()
 	if(!istype(utensil) || !utensil_food_type)
 		return
@@ -14,8 +14,12 @@
 		// Create a dummy copy of the target food item.
 		// This ensures we keep all food behavior, strings, sounds, etc.
 		utensil.loaded_food = new utensil_food_type(utensil, material?.type, TRUE)
-		QDEL_NULL(utensil.loaded_food.trash)
-		QDEL_NULL(utensil.loaded_food.plate)
+		if(ismovable(utensil.loaded_food.trash))
+			qdel(utensil.loaded_food.trash)
+		utensil.loaded_food.trash = null // Unset it even if it didn't need deleting (e.g. it was a path)
+		if(ismovable(utensil.loaded_food.plate))
+			qdel(utensil.loaded_food.plate)
+		utensil.loaded_food.plate = null
 		utensil.loaded_food.color = color
 		utensil.loaded_food.filling_color = get_food_filling_color()
 		utensil.loaded_food.SetName("\proper some [utensil.loaded_food.name]")
@@ -25,12 +29,12 @@
 		reagents.trans_to(utensil.loaded_food, remove_amt)
 		handle_chunk_separated()
 		if(!reagents.total_volume)
-			handle_consumed()
+			handle_consumed(user) // it's not actually being consumed, so i'm not sure this is correct
 		utensil.update_icon()
 
 	else // This shouldn't happen, but who knows.
 		to_chat(user, SPAN_WARNING("None of \the [src] is left!"))
-		handle_consumed()
+		handle_consumed(user)
 	return TRUE
 
 /obj/item/proc/get_food_filling_color()

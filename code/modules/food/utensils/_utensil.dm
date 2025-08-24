@@ -59,14 +59,14 @@
 			add_overlay(overlay_image(icon, loaded_state, loaded_food.reagents?.get_color() || loaded_food.filling_color || get_color(), RESET_COLOR))
 
 /obj/item/food/proc/handle_utensil_collection(obj/item/utensil/utensil, mob/user)
-	seperate_food_chunk(utensil, user)
+	separate_food_chunk(utensil, user)
 	if(utensil.loaded_food)
 		to_chat(user, SPAN_NOTICE("You collect [utensil.loaded_food] with \the [utensil]."))
 		return TRUE
 	return FALSE
 
 /obj/item/food/proc/handle_utensil_scooping(obj/item/utensil/utensil, mob/user)
-	seperate_food_chunk(utensil, user)
+	separate_food_chunk(utensil, user)
 	if(utensil.loaded_food)
 		to_chat(user, SPAN_NOTICE("You scoop up [utensil.loaded_food] with \the [utensil]."))
 		return TRUE

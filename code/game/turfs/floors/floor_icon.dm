@@ -71,15 +71,17 @@
 
 		// Draw a cliff wall if we have a northern neighbor that isn't part of our trench.
 		var/turf/floor/neighbor = get_step_resolving_mimic(src, NORTH)
-		if(isturf(neighbor) && neighbor.is_open())
+		// skip null and unsim edges, because we don't want trench edges along the edges of a map for no reason
+		if(!neighbor?.simulated || (isturf(neighbor) && neighbor.is_open()))
 			return
 
-		if(!istype(neighbor) || (neighbor.get_physical_height() > my_height))
+		if(!istype(neighbor, /turf/floor) || (neighbor.get_physical_height() > my_height))
 
-			var/trench_icon = (istype(neighbor) && neighbor.get_trench_icon()) || get_trench_icon()
+			var/trench_icon = (istype(neighbor, /turf/floor) && neighbor.get_trench_icon()) || get_trench_icon()
 			if(trench_icon)
 				// cache the trench image, keyed by icon and color
-				var/trench_color = isatom(neighbor) ? neighbor.get_color() : get_color()
+				// formerly an isatom check but it should never be a non-atom true value
+				var/trench_color = neighbor ? neighbor.get_color() : get_color()
 				var/trench_icon_key = "[ref(trench_icon)][trench_color]"
 				I = _trench_image_cache[trench_icon_key]
 				if(!I)

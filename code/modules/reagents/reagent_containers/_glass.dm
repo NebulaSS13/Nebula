@@ -160,7 +160,7 @@ var/global/list/lid_check_glass_types = list()
 		if(!reagents?.total_volume)
 			to_chat(user, SPAN_WARNING("\The [src] is empty."))
 			return TRUE
-		seperate_food_chunk(utensil, user)
+		separate_food_chunk(utensil, user)
 		if(utensil.loaded_food?.reagents?.total_volume)
 			to_chat(user, SPAN_NOTICE("You scoop up some of \the [utensil.loaded_food.reagents.get_primary_reagent_name()] with \the [utensil]."))
 		return TRUE
