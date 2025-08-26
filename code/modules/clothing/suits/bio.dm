@@ -17,7 +17,7 @@
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
 	)
-	replaced_in_loadout = FALSE
+	replaced_in_loadout = LOADOUT_CONFLICT_KEEP
 
 /obj/item/clothing/suit/bio_suit
 	name = "bio suit"
@@ -40,7 +40,7 @@
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
 	)
-	replaced_in_loadout = FALSE
+	replaced_in_loadout = LOADOUT_CONFLICT_KEEP
 
 /obj/item/clothing/suit/bio_suit/Initialize()
 	. = ..()

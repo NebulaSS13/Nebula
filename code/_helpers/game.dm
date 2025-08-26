@@ -99,6 +99,11 @@
 	//turfs += centerturf
 	return atoms
 
+/// Despite what the ref says, get_dist does not factor in the Z axis.
+/// This is just get_dist() but Z-aware.
+/proc/get_dist_3d(atom/Loc1, atom/Loc2)
+	return max(abs(Loc1.x-Loc2.x), abs(Loc1.y-Loc2.y), abs(Loc1.z-Loc2.z))
+
 /proc/get_dist_euclidian(atom/Loc1, atom/Loc2)
 	var/dx = Loc1.x - Loc2.x
 	var/dy = Loc1.y - Loc2.y

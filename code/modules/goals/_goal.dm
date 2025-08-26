@@ -23,13 +23,13 @@
 		owner = null
 	. = ..()
 
-/datum/goal/proc/summarize(var/show_success = FALSE, var/allow_modification = FALSE, var/mob/caller_mob ,var/position = 1)
+/datum/goal/proc/summarize(var/show_success = FALSE, var/allow_modification = FALSE, var/mob/user ,var/position = 1)
 	. = "[description][get_summary_value()]"
 	if(show_success)
 		. += get_success_string()
 	if(allow_modification)
-		if(can_abandon) . += " (<a href='byond://?src=\ref[owner];abandon_goal=[position];abandon_goal_caller=\ref[caller_mob]'>Abandon</a>)"
-		if(can_reroll)  . += " (<a href='byond://?src=\ref[owner];reroll_goal=[position];reroll_goal_caller=\ref[caller_mob]'>Reroll</a>)"
+		if(can_abandon) . += " (<a href='byond://?src=\ref[owner];abandon_goal=[position];abandon_goal_user=\ref[user]'>Abandon</a>)"
+		if(can_reroll)  . += " (<a href='byond://?src=\ref[owner];reroll_goal=[position];reroll_goal_user=\ref[user]'>Reroll</a>)"
 
 /datum/goal/proc/get_success_string()
 	return check_success() ? " <b><font color='green'>Success!</font></b>" : " <b><font color='red'>Failure.</font></b>"

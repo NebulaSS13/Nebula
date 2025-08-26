@@ -144,7 +144,7 @@
 
 /decl/persistence_handler/proc/GetAdminDataStringFor(var/thing, var/can_modify, var/mob/user)
 	if(can_modify)
-		. = "<td colspan = 3>[thing]</td><td><a href='byond://?src=\ref[src];caller=\ref[user];remove_entry=\ref[thing]'>Destroy</a></td>"
+		. = "<td colspan = 3>[thing]</td><td><a href='byond://?src=\ref[src];user=\ref[user];remove_entry=\ref[thing]'>Destroy</a></td>"
 	else
 		. = "<td colspan = 4>[thing]</td>"
 
@@ -157,6 +157,6 @@
 				RemoveValue(value)
 				. = TRUE
 		if(.)
-			var/mob/user = locate(href_list["caller"])
+			var/mob/user = locate(href_list["user"])
 			if(user)
 				SSpersistence.show_info(user)

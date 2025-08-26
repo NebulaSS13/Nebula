@@ -29,5 +29,5 @@
 	siemens_coefficient = 0.6
 	blood_overlay_type = "armor"
 	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
-	replaced_in_loadout = FALSE
+	replaced_in_loadout = LOADOUT_CONFLICT_STORAGE
 	_base_attack_force = 5

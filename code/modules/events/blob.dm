@@ -15,7 +15,7 @@
 
 	log_and_message_admins("Blob spawned in \the [get_area_name(T)]", location = T)
 	Blob = new /obj/effect/blob/core(T)
-	for(var/i = 1; i < rand(3, 4), i++)
+	for(var/i in 1 to rand(2, 3))
 		Blob.Process()
 
 /datum/event/blob/tick()

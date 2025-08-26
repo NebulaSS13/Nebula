@@ -1743,7 +1743,7 @@
 /area/magshield/north)
 "eS" = (
 /obj/structure/table/steel,
-/obj/item/box/lights,
+/obj/item/box/lights/mixed,
 /turf/floor/plating/airless,
 /area/magshield/north)
 "eT" = (

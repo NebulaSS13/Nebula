@@ -255,9 +255,9 @@
 /obj/effect/decal/cleanable/blood/gibs/proc/streak(var/list/directions)
 	spawn (0)
 		var/direction = pick(directions)
-		for (var/i = 0, i < pick(1, 200; 2, 150; 3, 50; 4), i++)
+		for (var/i in 1 to pick(1, 200; 2, 150; 3, 50; 4))
 			sleep(3)
-			if (i > 0)
+			if (i > 1)
 				var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(loc, null, chemical)
 				b.basecolor = src.basecolor
 				b.update_icon()

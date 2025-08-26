@@ -16,8 +16,8 @@
 	return
 
 /obj/item/radio/headset/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
-	cut_overlays()
 	if(on)
 		if(analog)
 			add_overlay("[icon_state]-local")

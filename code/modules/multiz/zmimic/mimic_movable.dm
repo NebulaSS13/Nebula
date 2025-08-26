@@ -146,6 +146,10 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return associated_atom.examined_by(user, distance, infix, suffix)
 
+// Trying to grab a mimic tries to grab the copied atom instead.
+/atom/movable/openspace/mimic/try_make_grab(mob/living/user, defer_hand)
+	return associated_atom.try_make_grab(user, defer_hand)
+
 /atom/movable/openspace/mimic/forceMove(turf/dest)
 	var/atom/old_loc = loc
 	. = ..()

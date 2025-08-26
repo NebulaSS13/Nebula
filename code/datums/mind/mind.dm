@@ -142,8 +142,8 @@
 
 	if(href_list["add_goal"])
 
-		var/mob/goal_caller = locate(href_list["add_goal_caller"])
-		if(goal_caller && goal_caller == current) can_modify = TRUE
+		var/mob/goal_user = locate(href_list["add_goal_user"])
+		if(goal_user && goal_user == current) can_modify = TRUE
 
 		if(can_modify)
 			if(is_admin)
@@ -161,8 +161,8 @@
 	if(href_list["abandon_goal"])
 		var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
 
-		var/mob/goal_caller = locate(href_list["abandon_goal_caller"])
-		if(goal_caller && goal_caller == current) can_modify = TRUE
+		var/mob/goal_user = locate(href_list["abandon_goal_user"])
+		if(goal_user && goal_user == current) can_modify = TRUE
 
 		if(goal && can_modify)
 			if(usr == current)
@@ -176,8 +176,8 @@
 	if(href_list["reroll_goal"])
 		var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
 
-		var/mob/goal_caller = locate(href_list["reroll_goal_caller"])
-		if(goal_caller && goal_caller == current) can_modify = TRUE
+		var/mob/goal_user = locate(href_list["reroll_goal_user"])
+		if(goal_user && goal_user == current) can_modify = TRUE
 
 		if(goal && (goal in goals) && can_modify)
 			qdel(goal)

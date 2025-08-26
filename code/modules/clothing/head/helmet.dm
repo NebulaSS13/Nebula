@@ -25,7 +25,7 @@
 	matter = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_TRACE)
 	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
 	protects_against_weather = TRUE
-	replaced_in_loadout = FALSE
+	replaced_in_loadout = LOADOUT_CONFLICT_STORAGE
 	_base_attack_force = 8
 
 /obj/item/clothing/head/helmet/tactical

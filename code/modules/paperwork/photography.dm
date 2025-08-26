@@ -27,6 +27,7 @@
 	update_icon()
 
 /obj/item/camera_film/on_update_icon()
+	. = ..()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 	if(uses_left > 1)
 		icon_state = "[bis.base_icon_state]"
