@@ -27,15 +27,18 @@
 	icon_base       = "cobble"
 	icon_edge_layer = FLOOR_EDGE_PATH
 	flooring_flags  = TURF_REMOVE_CROWBAR
+	has_base_range = 1
 
 /decl/flooring/path/running_bond
 	name           = "stone path"
 	desc           = "A rustic stone path, laid out in a running bond pattern."
 	icon_base      = "runningbond"
+	has_base_range = 3
 	gender         = NEUTER
 
 /decl/flooring/path/herringbone
 	name           = "stone path"
 	desc           = "A rustic stone path, laid out in a herringbone pattern."
 	icon_base      = "herringbone"
+	has_base_range = null
 	gender         = NEUTER

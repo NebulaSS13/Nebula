@@ -5,7 +5,7 @@
 	desc            = "A cobbled path made of loose stones."
 	color           = COLOR_GRAY
 	icon            = 'icons/turf/flooring/path.dmi'
-	icon_state      = "cobble"
+	icon_state      = "cobble0"
 	_flooring       = /decl/flooring/path/cobblestone
 	floor_material  = /decl/material/solid/stone/sandstone
 	_base_flooring  = /decl/flooring/dirt
@@ -28,7 +28,7 @@
 		LAZYADD(decals, moss)
 
 /turf/floor/path/running_bond
-	icon_state      = "runningbond"
+	icon_state      = "runningbond0"
 	_flooring       = /decl/flooring/path/running_bond
 
 /turf/floor/path/herringbone
