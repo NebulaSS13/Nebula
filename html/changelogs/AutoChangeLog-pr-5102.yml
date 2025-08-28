@@ -1,0 +1,4 @@
+author: Elizabeth
+changes:
+  - {imageadd: added some variant sprites for cobblestone and running bond paths}
+delete-after: true
