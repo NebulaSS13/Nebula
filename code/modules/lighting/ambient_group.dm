@@ -44,7 +44,7 @@ var/global/ambience_group_map[BITWISE_MAX_BITS]
 	set waitfor = FALSE
 
 	UNTIL(!busy)
-	if (T.z > member_turfs_by_z)
+	if (T.z > member_turfs_by_z.len)
 		member_turfs_by_z.len = T.z
 
 	LAZYADD(member_turfs_by_z[T.z], T)
