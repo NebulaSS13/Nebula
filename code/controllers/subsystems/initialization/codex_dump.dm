@@ -127,7 +127,7 @@ TODO: work out how to implement an external search function.
 		address_to_body[address] = convert.convert_body(codex_entry.name, codex_entry.get_codex_body(include_header = FALSE, include_footer = FALSE))
 
 	// Copied from del_the_world UT exceptions list.
-	var/static/list/skip_types = list(
+	var/static/list/skip_types = typesof(
 		/obj/item/organ/external/chest,
 		/obj/machinery/power/apc,
 		/obj/machinery/alarm,
