@@ -1831,6 +1831,7 @@
 #include "code\modules\barricade_tape\barricade_tape_subtypes.dm"
 #include "code\modules\barricade_tape\barricade_tape_template.dm"
 #include "code\modules\blob\blob.dm"
+#include "code\modules\blob\blob_act.dm"
 #include "code\modules\blob\blob_event.dm"
 #include "code\modules\blob\blob_follow.dm"
 #include "code\modules\blob\blob_grenade_damage.dm"
