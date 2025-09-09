@@ -24,7 +24,7 @@
 	var/damage_max = 30
 	var/pruned = FALSE
 	var/product = /obj/item/blob_tendril
-	var/attack_freq = 7.5 //see proc/attempt_attack; lower is more often, min 1
+	var/attack_freq = 8 //see proc/attempt_attack; lower is more often, min 1. must be an integet
 
 /obj/effect/blob/Initialize()
 	. = ..()
