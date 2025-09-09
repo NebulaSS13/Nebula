@@ -82,12 +82,17 @@
 /obj/effect/blob/proc/do_pulse(var/forceLeft, var/list/dirs)
 	set waitfor = FALSE
 	sleep(8)
-	var/pushDir = pick(dirs)
-	var/turf/T = get_step(src, pushDir)
-	var/obj/effect/blob/other_blob = (locate() in T)
+	var/turf/target_turf
+	var/list/remaining_dirs = dirs.Copy()
+	while(!target_turf && length(remaining_dirs))
+		var/pushDir = pick_n_take(remaining_dirs)
+		target_turf = get_step_resolving_mimic(src, pushDir)
+	if(!target_turf) // We're not next to ANYWHERE?!
+		return
+	var/obj/effect/blob/other_blob = (locate() in target_turf)
 	if(!other_blob)
 		if(prob(current_health))
-			expand(T)
+			expand(target_turf)
 		return
 	if(forceLeft)
 		other_blob.do_pulse(forceLeft - 1, dirs)
@@ -101,8 +106,13 @@
 	victim.apply_damage(rand(damage_min, damage_max), blob_damage, used_weapon = "blob tendril")
 
 /obj/effect/blob/proc/attempt_attack(var/list/dirs)
-	var/attackDir = pick(dirs)
-	var/turf/target_turf = get_step(src, attackDir)
+	var/turf/target_turf
+	var/list/remaining_dirs = dirs.Copy()
+	while(!target_turf && length(remaining_dirs))
+		var/attackDir = pick_n_take(remaining_dirs)
+		target_turf = get_step_resolving_mimic(src, attackDir)
+	if(!target_turf)
+		return
 	target_turf.blob_act()
 
 /obj/effect/blob/bullet_act(var/obj/item/projectile/Proj)
