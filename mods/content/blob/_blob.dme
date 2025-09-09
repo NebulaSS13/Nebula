@@ -7,6 +7,7 @@
 #include "blob_event.dm"
 #include "blob_follow.dm"
 #include "blob_grenade_damage.dm"
+#include "blob_samples.dm"
 #include "blob_subsystem.dm"
 // END_INCLUDE
 #endif
