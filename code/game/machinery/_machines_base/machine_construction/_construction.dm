@@ -76,6 +76,10 @@
 			return MCS_CHANGE
 		if(istext(fail))
 			to_chat(user, fail)
+			// This logging exists so that random CI fails due to state change failures will be caught.
+			#ifdef UNIT_TEST
+			log_unit_test("[log_info_line(machine)]: [fail]")
+			#endif
 			return MCS_BLOCK
 		return fail
 	return MCS_CONTINUE
