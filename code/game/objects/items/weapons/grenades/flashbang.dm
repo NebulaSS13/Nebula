@@ -7,25 +7,22 @@
 
 /obj/item/grenade/flashbang/detonate()
 	..()
+	var/turf/our_turf = get_turf(src)
+	on_detonate(our_turf)
+	new /obj/effect/sparks(our_turf)
+	new /obj/effect/effect/smoke/illumination(our_turf, 5, 30, 1, "#ffffff")
+	qdel(src)
+
+/obj/item/grenade/flashbang/proc/on_detonate(turf/our_turf)
 	var/list/victims = list()
 	var/list/objs = list()
-	var/turf/T = get_turf(src)
-	get_listeners_in_range(T, 7, victims, objs)
-	for(var/mob/living/M in victims)
-		bang(T, M)
-
-	FOR_DVIEW(var/obj/effect/blob/B, 7, T, INVISIBILITY_MAXIMUM) //Blob damage here
-		var/damage = round(30/(get_dist(B,T)+1))
-		B.take_damage(damage, BURN)
-	END_FOR_DVIEW
-
-	new /obj/effect/sparks(loc)
-	new /obj/effect/effect/smoke/illumination(loc, 5, 30, 1, "#ffffff")
-	qdel(src)
+	get_listeners_in_range(our_turf, 7, victims, objs)
+	for(var/mob/living/victim in victims)
+		bang(our_turf, victim)
 
 // Added a new proc called 'bang' that takes a location and a person to be banged.
 // Called during the loop that bangs people in lockers/containers and when banging
-// people in normal view.  Could theroetically be called during other explosions.
+// people in normal view.  Could theoretically be called during other explosions.
 // -- Polymorph
 /obj/item/grenade/flashbang/proc/bang(var/turf/T , var/mob/living/M)
 	to_chat(M, SPAN_DANGER("BANG"))

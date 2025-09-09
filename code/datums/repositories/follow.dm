@@ -211,11 +211,6 @@ var/global/repository/follow/follow_repository = new()
 	followed_type = /mob/living // List all other (living) mobs we haven't given a special suffix
 	suffix = "Mob"
 
-/datum/follow_holder/blob
-	sort_order = 9
-	followed_type = /obj/effect/blob/core
-	suffix = "Blob"
-
 /datum/follow_holder/singularity
 	sort_order = 10
 	followed_type = /obj/effect/singularity
