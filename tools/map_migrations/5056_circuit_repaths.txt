@@ -1,0 +1,4 @@
+# PR #5056 removed `/obj/item/integrated_electronics` type
+/obj/item/integrated_electronics/@SUBTYPES : /obj/item/@SUBTYPES{@OLD}
+# PR #5056 repathed `/obj/prefab` to `/obj/abstract/prefab`
+/obj/prefab/@SUBTYPES : /obj/abstract/prefab/@SUBTYPES{@OLD}
