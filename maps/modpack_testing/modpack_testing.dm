@@ -9,6 +9,7 @@
 	#include "../../mods/content/tabloids/_tabloids.dme"
 
 	#include "../../mods/content/bigpharma/_bigpharma.dme"
+	#include "../../mods/content/blob/_blob.dme"
 	#include "../../mods/content/byond_membership/_byond_membership.dm"
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/dungeon_loot/_dungeon_loot.dme"
