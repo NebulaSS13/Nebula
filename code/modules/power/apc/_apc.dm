@@ -7,82 +7,8 @@ var/global/list/all_apcs = list()
 // Generates a terminal based on the direction of the APC on spawn
 
 // There are three different power channels, lighting, equipment, and environment
-// Each may have one of the following states
-
 // Power channels set to Auto change when power levels rise or drop below a threshold
-// Power channel defines have been shifted to power.dm in __defines. 2/25/2021
 
-#define AUTO_THRESHOLD_LIGHTING  50
-#define AUTO_THRESHOLD_EQUIPMENT 25
-// The ENVIRON channel stays on as long as possible, and doesn't have a threshold
-
-#define CRITICAL_APC_EMP_PROTECTION 10	// EMP effect duration is divided by this number if the APC has "critical" flag
-#define APC_UPDATE_ICON_COOLDOWN 100	// Time between automatically updating the icon (10 seconds)
-
-// Used to check whether or not to update the icon_state
-#define UPDATE_CELL_IN 1
-#define UPDATE_OPENED1 2
-#define UPDATE_OPENED2 4
-#define UPDATE_MAINT 8
-#define UPDATE_BROKE 16
-#define UPDATE_BLUESCREEN 32
-#define UPDATE_WIREEXP 64
-#define UPDATE_ALLGOOD 128
-
-// Used to check whether or not to update the overlay
-#define APC_UPOVERLAY_CHARGEING0 1
-#define APC_UPOVERLAY_CHARGEING1 2
-#define APC_UPOVERLAY_CHARGEING2 4
-#define APC_UPOVERLAY_LOCKED 8
-#define APC_UPOVERLAY_OPERATING 16
-
-// Various APC types
-/obj/machinery/power/apc/inactive
-	lighting = 0
-	equipment = 0
-	environ = 0
-	locked = FALSE
-
-/obj/machinery/power/apc/critical
-	is_critical = 1
-
-/obj/machinery/power/apc/high
-	uncreated_component_parts = list(
-		/obj/item/cell/high
-	)
-
-/obj/machinery/power/apc/high/inactive
-	lighting = 0
-	equipment = 0
-	environ = 0
-	locked = FALSE
-
-/obj/machinery/power/apc/super
-	uncreated_component_parts = list(
-		/obj/item/cell/super
-	)
-
-/obj/machinery/power/apc/super/critical
-	is_critical = 1
-
-/obj/machinery/power/apc/hyper
-	uncreated_component_parts = list(
-		/obj/item/cell/hyper
-	)
-
-/obj/machinery/power/apc/derelict
-	lighting = 0
-	equipment = 0
-	environ = 0
-	locked = 0
-	uncreated_component_parts = list(
-		/obj/item/cell/crap/empty
-	)
-
-/obj/machinery/power/apc/derelict/full
-	uncreated_component_parts = list(
-		/obj/item/cell/crap
-	)
 
 // Main APC code
 /obj/machinery/power/apc
@@ -112,7 +38,7 @@ var/global/list/all_apcs = list()
 	var/operating = 1       // Bool for main toggle.
 	var/charging = 0        // Whether or not it's charging. 0 - not charging but not full, 1 - charging, 2 - full
 	var/chargemode = 1      // Whether charging is toggled on or off.
-	var/aidisabled = 0
+	var/aidisabled = FALSE
 	var/lastused_light = 0    // Internal stuff for UI and bookkeeping; can read off values but don't modify.
 	var/lastused_equip = 0
 	var/lastused_environ = 0
@@ -125,7 +51,22 @@ var/global/list/all_apcs = list()
 	var/beenhit = 0 // used for counting how many times it has been hit, used for Aliens at the moment
 	var/longtermpower = 10  // Counter to smooth out power state changes; do not modify.
 	wires = /datum/wires/apc
+	// Values used for update_state.
+	var/const/UPDATE_CELL_IN    = BITFLAG(0)
+	var/const/UPDATE_OPENED1    = BITFLAG(1)
+	var/const/UPDATE_OPENED2    = BITFLAG(2)
+	var/const/UPDATE_MAINT      = BITFLAG(3)
+	var/const/UPDATE_BROKE      = BITFLAG(4)
+	var/const/UPDATE_BLUESCREEN = BITFLAG(5)
+	var/const/UPDATE_WIREEXP    = BITFLAG(6)
+	var/const/UPDATE_ALLGOOD    = BITFLAG(7)
 	var/update_state = -1
+	// Used to check whether or not to update the overlay
+	var/const/UPOVERLAY_CHARGEING0 = BITFLAG(0)
+	var/const/UPOVERLAY_CHARGEING1 = BITFLAG(1)
+	var/const/UPOVERLAY_CHARGEING2 = BITFLAG(2)
+	var/const/UPOVERLAY_LOCKED     = BITFLAG(3)
+	var/const/UPOVERLAY_OPERATING  = BITFLAG(4)
 	var/update_overlay = -1
 	var/list/update_overlay_chan		// Used to determine if there is a change in channels
 	var/is_critical = 0
@@ -142,6 +83,12 @@ var/global/list/all_apcs = list()
 	var/autoname = 1
 	var/cover_removed = FALSE           // Cover is gone; can't close it anymore.
 	var/locked = TRUE                   // This is the interface, not the hardware.
+	/// EMP effect duration is divided by this number if the APC has "critical" flag
+	var/const/CRITICAL_EMP_PROTECTION = 10
+	// Thresholds for lights/equipment turning off based on cell charge level
+	var/const/AUTO_THRESHOLD_LIGHTING  = 50
+	var/const/AUTO_THRESHOLD_EQUIPMENT = 25
+	// The ENVIRON channel stays on as long as possible, and doesn't have a threshold
 
 	base_type = /obj/machinery/power/apc/buildable
 	stat_immune = 0
@@ -382,18 +329,18 @@ var/global/list/all_apcs = list()
 		update_state |= UPDATE_ALLGOOD
 
 	if(operating)
-		update_overlay |= APC_UPOVERLAY_OPERATING
+		update_overlay |= UPOVERLAY_OPERATING
 
 	if(update_state & UPDATE_ALLGOOD)
 		if(locked)
-			update_overlay |= APC_UPOVERLAY_LOCKED
+			update_overlay |= UPOVERLAY_LOCKED
 
 		if(!charging)
-			update_overlay |= APC_UPOVERLAY_CHARGEING0
+			update_overlay |= UPOVERLAY_CHARGEING0
 		else if(charging == 1)
-			update_overlay |= APC_UPOVERLAY_CHARGEING1
+			update_overlay |= UPOVERLAY_CHARGEING1
 		else if(charging == 2)
-			update_overlay |= APC_UPOVERLAY_CHARGEING2
+			update_overlay |= UPOVERLAY_CHARGEING2
 
 
 		update_overlay_chan["Equipment"] = equipment
@@ -862,7 +809,7 @@ var/global/list/all_apcs = list()
 	if(is_critical)
 		// Critical APCs are considered EMP shielded and will be offline only for about half minute. Prevents AIs being one-shot disabled by EMP strike.
 		// Critical APCs are also more resilient to cell corruption/power drain.
-		energy_fail(rand(240, 360) / severity / CRITICAL_APC_EMP_PROTECTION)
+		energy_fail(rand(240, 360) / severity / CRITICAL_EMP_PROTECTION)
 	else
 		// Regular APCs fail for normal time.
 		energy_fail(rand(240, 360) / severity)
@@ -935,4 +882,3 @@ var/global/list/all_apcs = list()
 	if(area && !(processing_flags & MACHINERY_PROCESS_SELF))
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
-#undef APC_UPDATE_ICON_COOLDOWN
