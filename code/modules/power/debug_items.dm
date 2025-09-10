@@ -1,4 +1,5 @@
-/obj/machinery/power/debug_items/
+/obj/machinery/power/debug_items
+	abstract_type = /obj/machinery/power/debug_items
 	icon = 'icons/obj/power.dmi'
 	icon_state = "tracker"
 	anchored = TRUE
