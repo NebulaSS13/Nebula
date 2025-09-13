@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
 	center_of_mass = @'{"x":16,"y":7}'
-	attack_verb = list("stabbed")
+	attack_verb = "stabbed"
 	lock_picking_level = 5
 	sharp = TRUE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR

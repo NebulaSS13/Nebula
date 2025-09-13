@@ -80,7 +80,7 @@
 
 /obj/item/natural_weapon/goatking
 	name = "giant horns"
-	attack_verb = list("brutalized")
+	attack_verb = "brutalized"
 	_base_attack_force = 40
 	sharp = TRUE
 

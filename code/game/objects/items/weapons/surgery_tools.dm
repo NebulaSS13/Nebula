@@ -63,7 +63,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = @'{"materials":1,"biotech":1}'
-	attack_verb = list("burnt")
+	attack_verb = "burnt"
 
 /obj/item/cautery/Initialize()
 	. = ..()
@@ -84,7 +84,7 @@
 	_base_attack_force = 15
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"materials":1,"biotech":1}'
-	attack_verb = list("drilled")
+	attack_verb = "drilled"
 
 /obj/item/surgicaldrill/Initialize()
 	. = ..()

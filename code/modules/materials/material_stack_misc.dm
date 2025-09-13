@@ -113,7 +113,7 @@
 	plural_icon_state = "cube-mult"
 	max_icon_state = "cube-max"
 	max_amount = 100
-	attack_verb = list("cubed")
+	attack_verb = "cubed"
 	stack_merge_type = /obj/item/stack/material/cubes
 	crafting_stack_type = /obj/item/stack/material // cubes can be used for any crafting
 	can_be_pulverized = TRUE

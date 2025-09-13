@@ -7,7 +7,7 @@
 	slot_flags = SLOT_HEAD | SLOT_LOWER_BODY | SLOT_OVER_BODY
 	_base_attack_force = 1
 	w_class = ITEM_SIZE_NORMAL
-	attack_verb = list("whipped")
+	attack_verb = "whipped"
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	material = /decl/material/solid/organic/cloth
 	material_alteration = MAT_FLAG_ALTERATION_ALL
@@ -188,7 +188,7 @@
 	name = "fleece" // sets its name to 'golden fleece' due to material
 	desc = "The legendary Golden Fleece of Jason made real."
 	_base_attack_force = 1
-	attack_verb = list("smote")
+	attack_verb = "smote"
 	material = /decl/material/solid/metal/gold
 
 /obj/item/towel/fleece/update_material_description()

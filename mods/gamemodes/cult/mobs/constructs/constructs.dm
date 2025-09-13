@@ -208,7 +208,7 @@
 
 /obj/item/natural_weapon/cult_builder
 	name = "heavy arms"
-	attack_verb = list("rammed")
+	attack_verb = "rammed"
 
 
 /mob/living/simple_animal/construct/builder/mind_initialize()

@@ -7,7 +7,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"combat":2}'
-	attack_verb = list("beaten")
+	attack_verb = "beaten"
 	base_parry_chance = 30
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
@@ -207,7 +207,7 @@
 	stunforce = 0
 	agonyforce = 60	//same force as a stunbaton, but uses way more charge.
 	hitcost = 25
-	attack_verb = list("poked")
+	attack_verb = "poked"
 	slot_flags = null
 	matter = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE,

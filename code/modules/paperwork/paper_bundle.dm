@@ -14,7 +14,7 @@
 	throw_range       = 2
 	throw_speed       = 1
 	w_class           = ITEM_SIZE_SMALL
-	attack_verb       = list("bapped")
+	attack_verb       = "bapped"
 	drop_sound        = 'sound/foley/paperpickup1.ogg'
 	pickup_sound      = 'sound/foley/paperpickup2.ogg'
 	item_flags        = ITEM_FLAG_CAN_TAPE
