@@ -226,7 +226,7 @@
 		user.visible_message("<span class='danger'>\The [user] tries to attack \the [src] with \the [weapon], but it passes through!</span>")
 		return TRUE
 	var/force = weapon.expend_attack_force(user)
-	user.visible_message("<span class='danger'>\The [user] [pick(weapon.attack_verb)] \the [src] with \the [weapon]!</span>")
+	user.visible_message("<span class='danger'>\The [user] [weapon.pick_attack_verb()] \the [src] with \the [weapon]!</span>")
 	switch(weapon.atom_damage_type)
 		if(BURN)
 			take_damage(force, SHIELD_DAMTYPE_HEAT)

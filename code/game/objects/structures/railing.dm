@@ -304,7 +304,7 @@ WOOD_RAILING_SUBTYPE(yew)
 	var/force = used_item.expend_attack_force(user)
 	if(force && (used_item.atom_damage_type == BURN || used_item.atom_damage_type == BRUTE))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		visible_message("<span class='danger'>\The [src] has been [LAZYLEN(used_item.attack_verb) ? pick(used_item.attack_verb) : "attacked"] with \the [used_item] by \the [user]!</span>")
+		visible_message("<span class='danger'>\The [src] has been [used_item.pick_attack_verb()] with \the [used_item] by \the [user]!</span>")
 		take_damage(force, used_item.atom_damage_type)
 		return TRUE
 	. = ..()

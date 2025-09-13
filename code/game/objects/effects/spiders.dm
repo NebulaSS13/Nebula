@@ -36,10 +36,7 @@
 /obj/effect/spider/attackby(var/obj/item/used_item, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
-	if(used_item.attack_verb.len)
-		visible_message("<span class='warning'>\The [src] has been [pick(used_item.attack_verb)] with \the [used_item][(user ? " by [user]." : ".")]</span>")
-	else
-		visible_message("<span class='warning'>\The [src] has been attacked with \the [used_item][(user ? " by [user]." : ".")]</span>")
+	visible_message("<span class='warning'>\The [src] has been [used_item.pick_attack_verb()] with \the [used_item][(user ? " by [user]." : ".")]</span>")
 
 	var/damage = used_item.expend_attack_force(user) / 4
 

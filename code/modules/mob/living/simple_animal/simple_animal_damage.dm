@@ -49,9 +49,9 @@
 
 	var/attack_name = O?.attack_message_name()
 	if(attack_name)
-		visible_message(SPAN_DANGER("\The [src] has been [DEFAULTPICK(O.attack_verb, "attacked")] with [attack_name] by \the [user]!"))
+		visible_message(SPAN_DANGER("\The [src] has been [O.pick_attack_verb()] with [attack_name] by \the [user]!"))
 	else
-		visible_message(SPAN_DANGER("\The [src] has been [DEFAULTPICK(O.attack_verb, "attacked")] by \the [user]!"))
+		visible_message(SPAN_DANGER("\The [src] has been [O.pick_attack_verb()] by \the [user]!"))
 
 	if(istype(ai))
 		ai.retaliate(user)

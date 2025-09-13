@@ -124,9 +124,9 @@ meteor_act
 	if(I.attack_message_name())
 		weapon_mention = " with [I.attack_message_name()]"
 	if(effective_force)
-		visible_message("<span class='danger'>[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] in the [affecting.name][weapon_mention] by [user]!</span>")
+		visible_message("<span class='danger'>[src] has been [I.pick_attack_verb()] in the [affecting.name][weapon_mention] by [user]!</span>")
 	else
-		visible_message("<span class='warning'>[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] in the [affecting.name][weapon_mention] by [user]!</span>")
+		visible_message("<span class='warning'>[src] has been [I.pick_attack_verb()] in the [affecting.name][weapon_mention] by [user]!</span>")
 		return // If it has no force then no need to do anything else.
 
 	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)

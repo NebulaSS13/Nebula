@@ -23,7 +23,7 @@
 	var/no_attack_log = FALSE
 	var/obj/item/master = null
 	var/origin_tech                    //Used by R&D to determine what research bonuses it grants.
-	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	VAR_PROTECTED/list/attack_verb = "hit" //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/attack_cooldown = DEFAULT_WEAPON_COOLDOWN
 	var/melee_accuracy_bonus = 0
@@ -1354,3 +1354,6 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 	material = null
 	if(!skip_qdel)
 		qdel(src)
+
+/obj/item/proc/pick_attack_verb()
+	return DEFAULTPICK(attack_verb, attack_verb) || "attacked" // if it's not a list, return itself or just "attacked"

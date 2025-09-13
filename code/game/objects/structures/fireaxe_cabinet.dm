@@ -86,7 +86,7 @@
 		user.setClickCooldown(10)
 		attack_animation(user)
 		playsound(user, 'sound/effects/Glasshit.ogg', 50, 1)
-		visible_message("<span class='danger'>[user] [pick(used_item.attack_verb)] \the [src]!</span>")
+		visible_message("<span class='danger'>[user] [used_item.pick_attack_verb()] \the [src]!</span>")
 		if(damage_threshold > force)
 			to_chat(user, "<span class='danger'>Your strike is deflected by the reinforced glass!</span>")
 			return TRUE
