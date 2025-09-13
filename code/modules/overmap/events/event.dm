@@ -19,17 +19,14 @@
 	for(var/i = 1 to overmap.event_areas)
 		if(!candidate_turfs.len)
 			break
-		var/overmap_event_type = pick(overmap.valid_event_types)
-		var/datum/overmap_event/datum_spawn = new overmap_event_type
+		var/decl/overmap_event/datum_spawn = GET_DECL(pick(overmap.valid_event_types))
 
 		var/list/event_turfs = acquire_event_turfs(datum_spawn.count, datum_spawn.radius, candidate_turfs, datum_spawn.continuous)
 		candidate_turfs -= event_turfs
 
 		for(var/event_turf in event_turfs)
-			var/type = pick(datum_spawn.hazards)
-			new type(event_turf)
-
-		qdel(datum_spawn)//idk help how do I do this better?
+			var/hazard_type = pick(datum_spawn.hazards)
+			new hazard_type(event_turf)
 
 /decl/overmap_event_handler/proc/acquire_event_turfs(var/number_of_turfs, var/distance_from_origin, var/list/candidate_turfs, var/continuous = TRUE)
 	number_of_turfs = min(number_of_turfs, candidate_turfs.len)
@@ -168,7 +165,6 @@
 	name = "event"
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "blank"
-	opacity = TRUE
 	color = "#880000"
 
 	// Events must be detected by sensors, but are otherwise instantly visible.
@@ -179,7 +175,6 @@
 	var/list/event_icon_states
 	var/difficulty = EVENT_LEVEL_MODERATE
 	var/weaknesses //if the BSA can destroy them and with what
-	var/list/victims //basically cached events on which Z level
 	var/list/colors = list() //Pick a color from this list on init
 
 /obj/effect/overmap/event/Initialize()
@@ -257,51 +252,47 @@
 	colors = list("#a709db", "#c228c7", "#c444e4")
 
 //These now are basically only used to spawn hazards. Will be useful when we need to spawn group of moving hazards
-/datum/overmap_event
+/decl/overmap_event
 	var/name = "map event"
 	var/radius = 2
 	var/count = 6
 	var/hazards
-	var/opacity = TRUE
 	var/continuous = TRUE //if it should form continous blob, or can have gaps
 	var/overmap_id = OVERMAP_ID_SPACE
 
-/datum/overmap_event/meteor
+/decl/overmap_event/meteor
 	name = "asteroid field"
 	count = 15
 	radius = 4
 	continuous = FALSE
 	hazards = /obj/effect/overmap/event/meteor
 
-/datum/overmap_event/electric
+/decl/overmap_event/electric
 	name = "electrical storm"
 	count = 11
 	radius = 3
-	opacity = FALSE
 	hazards = /obj/effect/overmap/event/electric
 
-/datum/overmap_event/dust
+/decl/overmap_event/dust
 	name = "dust cloud"
 	count = 16
 	radius = 4
 	hazards = /obj/effect/overmap/event/dust
 
-/datum/overmap_event/ion
+/decl/overmap_event/ion
 	name = "ion cloud"
 	count = 8
 	radius = 3
-	opacity = FALSE
 	hazards = /obj/effect/overmap/event/ion
 
-/datum/overmap_event/carp
+/decl/overmap_event/carp
 	name = "carp shoal"
 	count = 8
 	radius = 3
-	opacity = FALSE
 	continuous = FALSE
 	hazards = /obj/effect/overmap/event/carp
 
-/datum/overmap_event/carp/major
+/decl/overmap_event/carp/major
 	name = "carp school"
 	count = 5
 	radius = 4
