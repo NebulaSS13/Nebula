@@ -115,7 +115,7 @@
 
 	var/flavor_text = ""
 
-	var/datum/skillset/skillset = /datum/skillset
+	var/datum/skillset/skillset
 
 	var/list/additional_vision_handlers // A lazylist of atoms from which additional vision data is retrieved
 
