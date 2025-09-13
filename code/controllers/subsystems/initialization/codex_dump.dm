@@ -127,7 +127,7 @@ TODO: work out how to implement an external search function.
 		address_to_body[address] = convert.convert_body(codex_entry.name, codex_entry.get_codex_body(include_header = FALSE, include_footer = FALSE))
 
 	// Copied from del_the_world UT exceptions list.
-	var/static/list/skip_types = list(
+	var/static/list/skip_types = typesof(
 		/obj/item/organ/external/chest,
 		/obj/machinery/power/apc,
 		/obj/machinery/alarm,
@@ -144,7 +144,7 @@ TODO: work out how to implement an external search function.
 		if(!TYPE_IS_SPAWNABLE(atom) || !initial(atom.simulated))
 			continue
 		try
-			atom = atom_info_repository.get_instance_of(atom)
+			atom = new atom_type
 			if(!istype(atom)) // Something went wrong, possibly a runtime in the atom info repo.
 				continue
 			var/datum/codex_entry/codex_entry = atom.get_specific_codex_entry()
@@ -161,6 +161,8 @@ TODO: work out how to implement an external search function.
 				address_to_entry[address] = codex_entry
 				entry_to_address[codex_entry] = address
 				address_to_body[address] = convert.convert_body(codex_entry.name, codex_entry.get_codex_body(include_header = FALSE, include_footer = FALSE))
+			if(!QDELETED(atom))
+				qdel(atom, force = TRUE) // clean up after yourself, goddang
 		catch(var/exception/E)
 			PRINT_STACK_TRACE("Exception when performing codex dump for [atom_type]: [E]")
 
