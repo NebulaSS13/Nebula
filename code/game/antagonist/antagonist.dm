@@ -140,9 +140,6 @@
 /decl/special_role/proc/get_leader_welcome_text(mob/recipient)
 	return leader_welcome_text
 
-/decl/special_role/proc/tick()
-	return 1
-
 // Get the raw list of potential players.
 /decl/special_role/proc/build_candidate_list(decl/game_mode/mode, ghosts_only)
 	candidates = list() // Clear.
