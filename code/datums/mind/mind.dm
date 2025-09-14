@@ -449,20 +449,6 @@
 	if(H)
 		qdel(H)
 
-
-// check whether this mind's mob has been brigged for the given duration
-// have to call this periodically for the duration to work properly
-/datum/mind/proc/is_brigged(duration)
-	var/area/A = get_area(current)
-	if(!isturf(current.loc) || !istype(A) || !(A.area_flags & AREA_FLAG_PRISON) || current.GetIdCard())
-		brigged_since = -1
-		return 0
-
-	if(brigged_since == -1)
-		brigged_since = world.time
-
-	return (duration <= world.time - brigged_since)
-
 /datum/mind/proc/reset()
 	assigned_role =         null
 	assigned_special_role = null
