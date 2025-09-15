@@ -37,7 +37,7 @@
 /obj/item/natural_weapon/crow_claws
 	name = "claws"
 	gender = PLURAL
-	attack_verb = list("clawed")
+	attack_verb = "clawed"
 	sharp = TRUE
 	_base_attack_force = 7
 

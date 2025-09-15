@@ -4,7 +4,7 @@
 	icon_state = "tableflag"
 	_base_attack_force = 1
 	w_class = ITEM_SIZE_SMALL
-	attack_verb = list("whipped")
+	attack_verb = "whipped"
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "The iconic flag of the Sol Central Government, a symbol with many different meanings."
 	material = /decl/material/solid/organic/plastic

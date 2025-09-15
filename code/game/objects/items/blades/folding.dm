@@ -55,12 +55,10 @@
 	. = ..()
 	set_edge(open)
 	set_sharp(open)
-	if(open)
-		w_class     = open_item_size
-		attack_verb = open_attack_verbs
-	else
-		w_class     = closed_item_size
-		attack_verb = closed_attack_verbs
+	w_class = open ? open_item_size : closed_item_size
+
+/obj/item/bladed/folding/pick_attack_verb()
+	return DEFAULTPICK(open ? open_attack_verbs : closed_attack_verbs, ..())
 
 // Only show the inhand sprite when open.
 /obj/item/bladed/folding/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_adjustment = FALSE)

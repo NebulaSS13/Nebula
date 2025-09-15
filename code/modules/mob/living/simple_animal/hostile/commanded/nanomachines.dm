@@ -20,7 +20,7 @@
 
 /obj/item/natural_weapon/nanomachine
 	name = "decompilers"
-	attack_verb = list("swarmed")
+	attack_verb = "swarmed"
 	_base_attack_force = 2
 	sharp = TRUE
 

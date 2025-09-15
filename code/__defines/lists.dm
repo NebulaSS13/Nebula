@@ -4,7 +4,7 @@
 // All of these are null-safe, you can use them without knowing if the list var is initialized yet
 
 //Picks from the list, with some safeties, and returns the "default" arg if it fails
-#define DEFAULTPICK(L, default) ((istype(L, /list) && L:len) ? pick(L) : default)
+#define DEFAULTPICK(L, default) ((islist(L) && length(L)) ? pick(L) : default)
 //Supplies null as the default to DEFAULTPICK
 #define SAFEPICK(L) DEFAULTPICK(L, null)
 // Ensures L is initailized after this point

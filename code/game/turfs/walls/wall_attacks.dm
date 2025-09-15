@@ -308,13 +308,13 @@
 		material_divisor = max(material.burn_armor, reinf_material?.burn_armor)
 	var/effective_force = round(force / material_divisor)
 	if(effective_force < 2)
-		visible_message(SPAN_DANGER("\The [user] [pick(used_item.attack_verb)] \the [src] with \the [used_item], but it had no effect!"))
+		visible_message(SPAN_DANGER("\The [user] [used_item.pick_attack_verb()] \the [src] with \the [used_item], but it had no effect!"))
 		playsound(src, hitsound, 25, 1)
 		return TRUE
 	// Check for a glancing blow.
 	var/dam_prob = max(0, 100 - material.hardness + effective_force + used_item.armor_penetration)
 	if(!prob(dam_prob))
-		visible_message(SPAN_DANGER("\The [user] [pick(used_item.attack_verb)] \the [src] with \the [used_item], but it bounced off!"))
+		visible_message(SPAN_DANGER("\The [user] [used_item.pick_attack_verb()] \the [src] with \the [used_item], but it bounced off!"))
 		playsound(src, hitsound, 25, 1)
 		if(user.skill_fail_prob(SKILL_HAULING, 40, SKILL_ADEPT))
 			SET_STATUS_MAX(user, STAT_WEAK, 2)
@@ -322,6 +322,6 @@
 		return TRUE
 
 	playsound(src, get_hit_sound(), 50, 1)
-	visible_message(SPAN_DANGER("\The [user] [pick(used_item.attack_verb)] \the [src] with \the [used_item]!"))
+	visible_message(SPAN_DANGER("\The [user] [used_item.pick_attack_verb()] \the [src] with \the [used_item]!"))
 	take_damage(effective_force)
 	return TRUE

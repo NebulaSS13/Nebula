@@ -1,7 +1,7 @@
 /obj/item/natural_weapon
 	name = "natural weapons"
 	gender = PLURAL
-	attack_verb = list("attacked")
+	attack_verb = "attacked"
 	atom_damage_type =  BRUTE
 	canremove = FALSE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE //for intent of shocking checks, they're right inside the animal
@@ -28,7 +28,7 @@
 
 /obj/item/natural_weapon/bite
 	name = "teeth"
-	attack_verb = list("bitten")
+	attack_verb = "bitten"
 	hitsound = 'sound/weapons/bite.ogg'
 	_base_attack_force = 10
 	sharp = TRUE
@@ -39,7 +39,7 @@
 
 /obj/item/natural_weapon/bite/mouse
 	_base_attack_force = 1
-	attack_verb = list("nibbled")
+	attack_verb = "nibbled"
 	hitsound = null
 
 /obj/item/natural_weapon/bite/strong
@@ -61,11 +61,11 @@
 
 /obj/item/natural_weapon/hooves
 	name = "hooves"
-	attack_verb = list("kicked")
+	attack_verb = "kicked"
 
 /obj/item/natural_weapon/punch
 	name = "fists"
-	attack_verb = list("punched")
+	attack_verb = "punched"
 	_base_attack_force = 10
 
 /obj/item/natural_weapon/pincers
@@ -75,7 +75,7 @@
 /obj/item/natural_weapon/drone_slicer
 	name = "sharpened leg"
 	gender = NEUTER
-	attack_verb = list("sliced")
+	attack_verb = "sliced"
 	atom_damage_type =  BRUTE
 	edge = TRUE
 	show_in_message = TRUE

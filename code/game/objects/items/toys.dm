@@ -145,11 +145,11 @@
 	desc = "A cheap, plastic replica of an energy sword. Realistic sounds! Ages 8 and up."
 	sharp = FALSE
 	edge = FALSE
-	attack_verb = list("hit")
+	attack_verb = "hit"
 	material = /decl/material/solid/organic/plastic
 	active_hitsound = 'sound/weapons/genhit.ogg'
 	active_descriptor = "extended"
-	active_attack_verb = list("hit")
+	active_attack_verb = "hit"
 	active_edge = FALSE
 	active_sharp = FALSE
 	_active_base_attack_force = 1
