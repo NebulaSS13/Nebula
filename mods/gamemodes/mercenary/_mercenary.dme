@@ -1,0 +1,13 @@
+#ifndef GAMEMODE_PACK_MERCENARY
+#define GAMEMODE_PACK_MERCENARY
+// BEGIN_INCLUDE
+#include "_merc.dm"
+#include "mercenary_antagonist.dm"
+#include "mercenary_mode.dm"
+#include "mercenary_pinpointer.dm"
+#include "mercenary_props.dm"
+#include "mercenary_uplink.dm"
+#include "nuke_overrides.dm"
+#include "maps\mercenary_base.dm"
+// END_INCLUDE
+#endif

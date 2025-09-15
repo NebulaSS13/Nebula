@@ -67,33 +67,3 @@
 /datum/uplink_item/item/badassery/random_many/purchase_log(obj/item/uplink/U)
 	SSstatistics.add_field_details("traitor_uplink_items_bought", "[src]")
 	log_and_message_admins("used \the [U.loc] to buy \a [src]")
-
-/****************
-* Surplus Crate *
-****************/
-/datum/uplink_item/item/badassery/surplus
-	name = "\improper Surplus Crate"
-	item_cost = DEFAULT_TELECRYSTAL_AMOUNT * 4
-	var/item_worth = DEFAULT_TELECRYSTAL_AMOUNT * 6
-	var/icon
-
-/datum/uplink_item/item/badassery/surplus/New()
-	..()
-	antag_roles = list(/decl/special_role/mercenary)
-	desc = "A crate containing [item_worth] telecrystal\s worth of surplus leftovers. If you can find some help to pay for it, you might strike gold."
-
-/datum/uplink_item/item/badassery/surplus/get_goods(var/obj/item/uplink/U, var/loc)
-	var/obj/structure/largecrate/C = new(loc)
-	var/random_items = get_random_uplink_items(U, item_worth, C)
-	for(var/datum/uplink_item/I in random_items)
-		I.purchase_log(U)
-		I.get_goods(U, C)
-
-	return C
-
-/datum/uplink_item/item/badassery/surplus/log_icon()
-	if(!icon)
-		var/obj/structure/largecrate/C = /obj/structure/largecrate
-		icon = image(initial(C.icon), initial(C.icon_state))
-
-	return html_icon(icon)

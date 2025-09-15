@@ -61,68 +61,17 @@
 	item_cost = 56
 	path = /obj/item/backpack/satchel/syndie_kit/revolver
 
-/datum/uplink_item/item/visible_weapons/grenade_launcher
-	name = "Grenade Launcher"
-	desc = "A pump action grenade launcher loaded with a random assortment of grenades"
-	item_cost = 60
-	antag_roles = list(/decl/special_role/mercenary)
-	path = /obj/item/gun/launcher/grenade/loaded
-
-//These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
-/datum/uplink_item/item/visible_weapons/smg
-	name = "Standard Submachine Gun"
-	desc = "A quick-firing weapon with three toggleable fire modes."
-	item_cost = 52
-	path = /obj/item/gun/projectile/automatic/smg
-	antag_roles = list(/decl/special_role/mercenary)
-
-/datum/uplink_item/item/visible_weapons/assaultrifle
-	name = "Assault Rifle"
-	desc = "A common rifle with three toggleable fire modes."
-	item_cost = 60
-	path = /obj/item/gun/projectile/automatic/assault_rifle
-	antag_roles = list(/decl/special_role/mercenary)
-
 /datum/uplink_item/item/visible_weapons/advanced_energy_gun
 	name = "Advanced Energy Gun"
 	desc = "A highly experimental heavy energy weapon, with three different lethality settings."
 	item_cost = 60
 	path = /obj/item/gun/energy/gun/nuclear
 
-/datum/uplink_item/item/visible_weapons/heavysniper
-	name = "Anti-materiel Sniper Rifle"
-	desc = "A secure briefcase that contains an immensely powerful penetrating rifle, as well as seven extra sniper rounds."
-	item_cost = 68
-	path = /obj/item/secure_storage/briefcase/heavysniper
-	antag_roles = list(/decl/special_role/mercenary)
-
-/datum/uplink_item/item/visible_weapons/combat_shotgun
-	name = "Pump Shotgun"
-	desc = "A high capacity, pump-action shotgun regularly used for repelling boarding parties in close range scenarios."
-	item_cost = 52
-	path = /obj/item/gun/projectile/shotgun/pump
-	antag_roles = list(/decl/special_role/mercenary)
-
 /datum/uplink_item/item/visible_weapons/sawnoff
 	name = "Sawnoff Shotgun"
 	desc = "A shortened double-barrel shotgun, able to fire either one, or both, barrels at once."
 	item_cost = 45
 	path = /obj/item/gun/projectile/shotgun/doublebarrel/sawn
-
-/datum/uplink_item/item/visible_weapons/flechetterifle
-	name = "Flechette Rifle"
-	desc = "A railgun with two toggleable fire modes, able to launch flechette ammunition at incredible speeds."
-	item_cost = 60
-	path = /obj/item/gun/magnetic/railgun/flechette
-	antag_roles = list(/decl/special_role/mercenary)
-
-/datum/uplink_item/item/visible_weapons/railgun // Like a semi-auto AMR
-	name = "Railgun"
-	desc = "An anti-armour magnetic launching system fed by a high-capacity matter cartridge, \
-			capable of firing slugs at intense speeds."
-	item_cost = DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT % 6)) / 6
-	antag_roles = list(/decl/special_role/mercenary)
-	path = /obj/item/gun/magnetic/railgun
 
 /datum/uplink_item/item/visible_weapons/harpoonbomb
 	name = "Explosive Harpoon"

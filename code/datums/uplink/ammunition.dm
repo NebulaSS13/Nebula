@@ -34,20 +34,6 @@
 	item_cost = 8
 	path = /obj/item/ammo_magazine/rifle
 
-/datum/uplink_item/item/ammo/sniperammo
-	name = "Ammobox of Sniper Rounds"
-	desc = "A container of rounds for the anti-materiel rifle. Contains 7 rounds."
-	item_cost = 8
-	path = /obj/item/box/ammo/sniperammo
-	antag_roles = list(/decl/special_role/mercenary)
-
-/datum/uplink_item/item/ammo/sniperammo/apds
-	name = "Ammobox of APDS Sniper Rounds"
-	desc = "A container of armor piercing rounds for the anti-materiel rifle. Contains 3 rounds."
-	item_cost = 12
-	path = /obj/item/box/ammo/sniperammo/apds
-	antag_roles = list(/decl/special_role/mercenary)
-
 /datum/uplink_item/item/ammo/shotgun_shells
 	name = "Ammobox of Shotgun Shells"
 	desc = "An ammo box with 2 sets of shell holders. Contains 8 buckshot shells total."
@@ -60,25 +46,11 @@
 	item_cost = 8
 	path = /obj/item/box/ammo/shotgunammo
 
-/datum/uplink_item/item/ammo/smg
-	name = "Standard Box Magazine"
-	desc = "A magazine for standard SMGs. Contains 20 rounds."
-	item_cost = 8
-	path = /obj/item/ammo_magazine/smg
-	antag_roles = list(/decl/special_role/mercenary)
-
 /datum/uplink_item/item/ammo/speedloader_magnum
 	name = "Magnum Speedloader"
 	desc = "A speedloader for magnum revolvers. Contains 6 rounds."
 	item_cost = 8
 	path = /obj/item/ammo_magazine/speedloader
-
-/datum/uplink_item/item/ammo/flechette
-	name = "Flechette Rifle Magazine"
-	desc = "A rifle magazine loaded with flechette rounds. Contains 9 rounds."
-	item_cost = 8
-	path = /obj/item/magnetic_ammo
-	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/ammo/pistol_emp
 	name = "Standard EMP Ammo Box"

@@ -4,7 +4,7 @@
 	var/reselect_probability	// Probability that we'll decide to keep this item if previously selected.
 								// Is done together with the keep_probability check. Being selected more than once does not affect this probability.
 
-/datum/uplink_random_item/New(var/uplink_item, var/keep_probability = 100, var/reselect_propbability = 33)
+/datum/uplink_random_item/New(var/uplink_item, var/keep_probability = 100, var/reselect_probability = 33)
 	..()
 	src.uplink_item = uplink_item
 	src.keep_probability = keep_probability
@@ -48,7 +48,6 @@ var/global/list/uplink_random_selections_
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/silenced)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/revolver)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/heavysniper, 15, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/grenades/emp, 50)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/crossbow, 33)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/energy_sword, 75)
@@ -64,7 +63,7 @@ var/global/list/uplink_random_selections_
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/chameleon_projector)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/voice)
 
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/toolbox, reselect_propbability = 10)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/toolbox, reselect_probability = 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/plastique)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/encryptionkey_radio)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/encryptionkey_binary)
@@ -75,27 +74,25 @@ var/global/list/uplink_random_selections_
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/heavy_armor)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/powersink, 10, 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/ai_module, 25, 0)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/teleporter, 10, 0)
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/implants/imp_freedom)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/implants/imp_compress)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/implants/imp_explosive)
 
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/medical/sinpockets, reselect_propbability = 20)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/medical/surgery, reselect_propbability = 10)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/medical/combat, reselect_propbability = 10)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/medical/sinpockets, reselect_probability = 20)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/medical/surgery, reselect_probability = 10)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/medical/combat, reselect_probability = 10)
 
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_propbability = 15)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/energy_net, reselect_propbability = 15)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/ewar_voice, reselect_propbability = 15)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/maneuvering_jets, reselect_propbability = 15)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/egun, reselect_propbability = 15)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/power_sink, reselect_propbability = 15)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/laser_canon, reselect_propbability = 5)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_probability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/energy_net, reselect_probability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/ewar_voice, reselect_probability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/maneuvering_jets, reselect_probability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/egun, reselect_probability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/power_sink, reselect_probability = 15)
 
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_propbability = 15)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_propbability = 15)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_propbability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_probability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_probability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_probability = 15)
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/suit_sensor_mobile)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/services/suit_sensor_shutdown, 75, 0)
@@ -106,7 +103,6 @@ var/global/list/uplink_random_selections_
 			/datum/uplink_item/item/ammo,
 			/datum/uplink_item/item/badassery,
 			/datum/uplink_item/item/telecrystal,
-			/datum/uplink_item/item/tools/teleporter,
 			/datum/uplink_item/item/tools/supply_beacon,
 			/datum/uplink_item/item/implants/imp_uplink,
 		)
