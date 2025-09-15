@@ -1,7 +1,18 @@
 /datum/event/blob
 	announceWhen	= 12
-
 	var/obj/effect/blob/core/Blob
+
+// Actually add the blob event to the major events container.
+/datum/event_container/major/New()
+	. = ..()
+	available_events += new /datum/event_meta(
+		EVENT_LEVEL_MAJOR,
+		"Blob",
+		/datum/event/blob,
+		0,
+		list(ASSIGNMENT_ENGINEER = 40),
+		1
+	)
 
 /datum/event/blob/announce()
 	level_seven_announcement()
