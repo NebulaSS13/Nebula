@@ -1,15 +1,15 @@
-/mob
+/mob/living
 	var/obj/screen/fullscreen/pain/pain
 
-/mob/Initialize()
+/mob/living/Initialize()
 	pain = new(null, src)
 	. = ..()
 
-/mob/Destroy()
+/mob/living/Destroy()
 	QDEL_NULL(pain)
 	. = ..()
 
-/mob/proc/flash_pain(var/target)
+/mob/living/proc/flash_pain(var/target)
 	if(pain)
 		var/matrix/M
 		if(client && max(client.last_view_x_dim, client.last_view_y_dim) > 7)

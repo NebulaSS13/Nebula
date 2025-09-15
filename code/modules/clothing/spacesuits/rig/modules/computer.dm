@@ -56,11 +56,11 @@
 	)
 	origin_tech = @'{"programming":6,"materials":5,"engineering":6}'
 
-	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
+	var/mob/living/integrated_ai // Direct reference to the actual mob held in the suit.
 	var/obj/item/ai_card  // Reference to the object previously holding the AI.
 	var/obj/item/ai_verbs/verb_holder
 
-/mob
+/mob/living
 	var/get_rig_stats = 0
 
 /obj/item/rig_module/ai_container/Process()
