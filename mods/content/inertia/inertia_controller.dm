@@ -3,12 +3,12 @@ var/global/list/ship_inertial_dampers = list()
 
 /datum/ship_inertial_damper
 	var/name = "ship inertial damper"
-	var/obj/machinery/holder
+	var/obj/machinery/inertial_damper/holder
 
 /datum/ship_inertial_damper/proc/get_damping_strength(var/reliable)
-	return 0
+	return holder.get_damping_strength(reliable)
 
-/datum/ship_inertial_damper/New(var/obj/machinery/_holder)
+/datum/ship_inertial_damper/New(var/obj/machinery/inertial_damper/_holder)
 	..()
 	holder = _holder
 	global.ship_inertial_dampers += src

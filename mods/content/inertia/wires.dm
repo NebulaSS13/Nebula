@@ -13,26 +13,26 @@
 	var/const/DAMPER_WIRE_AICONTROL = 8 // Cut to disable AI control. Mend to restore.
 
 /datum/wires/inertial_damper/CanUse()
-	var/obj/machinery/inertial_damper/I = holder
-	if(I.panel_open)
+	var/obj/machinery/inertial_damper/damper_machine = holder
+	if(damper_machine.panel_open)
 		return TRUE
 	return FALSE
 
 /datum/wires/inertial_damper/UpdateCut(index, mended)
-	var/obj/machinery/inertial_damper/I = holder
+	var/obj/machinery/inertial_damper/damper_machine = holder
 	switch(index)
 		if(DAMPER_WIRE_POWER)
-			I.input_cut = !mended
+			damper_machine.input_cut = !mended
 		if(DAMPER_WIRE_HACK)
 			if(!mended)
-				I.hacked = FALSE
+				damper_machine.hacked = FALSE
 		if(DAMPER_WIRE_CONTROL)
-			I.locked = !mended
+			damper_machine.locked = !mended
 		if(DAMPER_WIRE_AICONTROL)
-			I.ai_control_disabled = !mended
+			damper_machine.ai_control_disabled = !mended
 
 /datum/wires/inertial_damper/UpdatePulsed(var/index)
-	var/obj/machinery/inertial_damper/I = holder
+	var/obj/machinery/inertial_damper/damper_machine = holder
 	switch(index)
 		if(DAMPER_WIRE_HACK)
-			I.hacked = TRUE
+			damper_machine.hacked = TRUE
