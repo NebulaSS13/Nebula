@@ -263,7 +263,6 @@
 		info["turf"] = MT ? "[MT] @ [MT.x], [MT.y], [MT.z]" : "null"
 		info["area"] = MT ? "[MT.loc]" : "null"
 		info["antag"] = M.mind ? (M.mind.get_special_role_name("Not antag")) : "No mind"
-		info["hasbeenrev"] = M.mind ? M.mind.has_been_rev : "No mind"
 		info["stat"] = M.stat
 		info["type"] = M.type
 		if(isliving(M))
