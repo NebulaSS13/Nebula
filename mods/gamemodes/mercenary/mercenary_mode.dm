@@ -1,10 +1,7 @@
 /*
 	MERCENARY ROUNDTYPE
 */
-
-var/global/list/nuke_disks = list()
-
-/decl/game_mode/nuclear
+/decl/game_mode/mercenary
 	name = "Mercenary"
 	round_description = "A mercenary strike force is approaching!"
 	extended_round_description = "A heavily armed merc team is approaching in their warship; whatever their goal is, it can't be good for the crew."
@@ -22,7 +19,7 @@ var/global/list/nuke_disks = list()
 	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
 	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
 
-/decl/game_mode/nuclear/declare_completion()
+/decl/game_mode/mercenary/declare_completion()
 	var/decl/special_role/merc = GET_DECL(/decl/special_role/mercenary)
 	if(get_config_value(/decl/config/enum/objectives_disabled) == CONFIG_OBJECTIVE_NONE || (merc && !merc.global_objectives.len))
 		..()

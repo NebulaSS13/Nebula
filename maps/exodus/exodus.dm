@@ -21,6 +21,7 @@
 	#include "../../mods/gamemodes/cult/_cult.dme"
 	#include "../../mods/gamemodes/heist/_heist.dme"
 	#include "../../mods/gamemodes/meteor/_meteor.dme"
+	#include "../../mods/gamemodes/mercenary/_mercenary.dme"
 	#include "../../mods/gamemodes/ninja/_ninja.dme"
 	#include "../../mods/gamemodes/revolution/_revolution.dme"
 	#include "../../mods/gamemodes/spyvspy/_spyvspy.dme"

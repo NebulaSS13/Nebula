@@ -116,17 +116,6 @@
 	item_cost = 40
 	path = /obj/item/powersink
 
-/datum/uplink_item/item/tools/teleporter
-	name = "Teleporter Circuit Board"
-	desc = "A circuit board that can be used to create a teleporter console, able to lock onto detected \
-	teleportation beacons. Requires a projector and teleporter hub nearby to work."
-	item_cost = 40
-	path = /obj/item/stock_parts/circuitboard/teleporter
-
-/datum/uplink_item/item/tools/teleporter/New()
-	..()
-	antag_roles = list(/decl/special_role/mercenary)
-
 /datum/uplink_item/item/tools/ai_module
 	name = "Hacked AI Upload Module"
 	desc = "A module that can be used anonymously add a singular, top level law to an active AI. \
@@ -146,7 +135,6 @@
 	name = "Camera MIU"
 	desc = "Wearing this mask allows you to remotely view any cameras you currently have access to. Take the mask off to stop viewing."
 	item_cost = 60
-	antag_costs = list(/decl/special_role/mercenary = 30)
 	path = /obj/item/clothing/mask/ai
 
 /datum/uplink_item/item/tools/interceptor
