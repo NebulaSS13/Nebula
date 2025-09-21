@@ -10,7 +10,7 @@
 	category = PROG_UTIL
 	nanomodule_path = /datum/nano_module/program/scanner
 
-	var/using_scanner = 0	//Whether or not the program is synched with the scanner module.
+	var/using_scanner = 0	//Whether or not the program is synced with the scanner module.
 	var/data_buffer = ""	//Buffers scan output for saving/viewing.
 	var/scan_file_type = /datum/computer_file/data/text		//The type of file the data will be saved to.
 	var/list/metadata_buffer = list()
