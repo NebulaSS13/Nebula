@@ -129,7 +129,7 @@
 	if(floor.is_outside())
 
 		if(istype(flooring, /decl/flooring/rock))
-			if(prob(15)) // Static as current map has limited amount of rock turfs
+			if(prob(15) && !floor.contains_dense_objects()) // Static as current map has limited amount of rock turfs
 				var/rock_type = SAFEPICK(forage["rocks"])
 				new rock_type(floor)
 				return
