@@ -46,12 +46,8 @@
 
 	var/list/datum/objective/objectives = list()
 
-	var/has_been_rev = 0//Tracks if this mind has been a rev or not
-
-	var/rev_cooldown = 0
-
-	// the world.time since the mob has been brigged, or -1 if not at all
-	var/brigged_since = -1
+	/// The world.time value after which another conversion can be attempted.
+	var/conversion_cooldown = 0
 
 	//put this here for easier tracking ingame
 	var/datum/money_account/initial_account
@@ -449,20 +445,6 @@
 	if(H)
 		qdel(H)
 
-
-// check whether this mind's mob has been brigged for the given duration
-// have to call this periodically for the duration to work properly
-/datum/mind/proc/is_brigged(duration)
-	var/area/A = get_area(current)
-	if(!isturf(current.loc) || !istype(A) || !(A.area_flags & AREA_FLAG_PRISON) || current.GetIdCard())
-		brigged_since = -1
-		return 0
-
-	if(brigged_since == -1)
-		brigged_since = world.time
-
-	return (duration <= world.time - brigged_since)
-
 /datum/mind/proc/reset()
 	assigned_role =         null
 	assigned_special_role = null
@@ -470,9 +452,7 @@
 	assigned_job =          null
 	initial_account =       null
 	objectives =            list()
-	has_been_rev =          0
-	rev_cooldown =          0
-	brigged_since =         -1
+	conversion_cooldown =   0
 
 //Initialisation procs
 /mob/living/proc/mind_initialize()

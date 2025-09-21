@@ -140,9 +140,6 @@
 /decl/special_role/proc/get_leader_welcome_text(mob/recipient)
 	return leader_welcome_text
 
-/decl/special_role/proc/tick()
-	return 1
-
 // Get the raw list of potential players.
 /decl/special_role/proc/build_candidate_list(decl/game_mode/mode, ghosts_only)
 	candidates = list() // Clear.
@@ -193,7 +190,7 @@
 
 /decl/special_role/proc/attempt_random_spawn()
 	update_current_antag_max(SSticker.mode)
-	build_candidate_list(SSticker.mode, flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	build_candidate_list(SSticker.mode, is_latejoin_template())
 	attempt_spawn()
 	finalize_spawn()
 
@@ -209,7 +206,7 @@
 		message_admins("Could not auto-spawn a [name], active antag limit reached.")
 		return 0
 
-	build_candidate_list(SSticker.mode, flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	build_candidate_list(SSticker.mode, is_latejoin_template())
 	if(!candidates.len)
 		message_admins("Could not auto-spawn a [name], no candidates found.")
 		return 0
