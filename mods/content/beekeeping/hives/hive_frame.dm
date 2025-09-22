@@ -1,7 +1,7 @@
 /obj/item/hive_frame
-	abstract_type = /obj/item/hive_frame
-	icon_state = ICON_STATE_WORLD
-	w_class = ITEM_SIZE_SMALL
+	abstract_type       = /obj/item/hive_frame
+	icon_state          = ICON_STATE_WORLD
+	w_class             = ITEM_SIZE_SMALL
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	chem_volume = 20
 	var/destroy_on_centrifuge = FALSE
@@ -36,20 +36,45 @@
 		for(var/atom/movable/thing in convert_matter_to_lumps())
 			thing.dropInto(centrifuge.loc)
 
+/obj/item/hive_frame/honey/populate_reagents()
+	. = ..()
+	var/decl/insect_species/bees = GET_DECL(/decl/insect_species/honeybees)
+	bees.fill_hive_frame(src)
+
+/obj/item/hive_frame/Move()
+	var/datum/extension/insect_hive/hive = get_extension(loc, /datum/extension/insect_hive)
+	. = ..()
+	if(. && istype(hive) && loc != hive.holder)
+		hive.frame_removed(src)
+
 // Crafted frame used in apiaries.
 /obj/item/hive_frame/crafted
 	name = "hive frame"
 	desc = "A wooden frame for insect hives that the workers will fill with products like honey."
 	icon = 'mods/content/beekeeping/icons/frame.dmi'
 	material = /decl/material/solid/organic/wood/oak
-	material_alteration = MAT_FLAG_ALTERATION_ALL
 
-// TEMP until beewrite redoes hives.
-/obj/item/hive_frame/crafted/filled/Initialize()
-	. = ..()
-	new /obj/item/stack/material/bar/wax(src)
-	update_icon()
+// Raw version of honeycomb for wild hives.
+/obj/item/hive_frame/comb
+	name = "comb"
+	icon = 'mods/content/beekeeping/icons/comb.dmi'
+	material = /decl/material/solid/organic/wax
+	destroy_on_centrifuge = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
+	is_spawnable_type = FALSE
+	w_class = ITEM_SIZE_NORMAL // Larger than crafted frames, because you should use crafted frames in your hive.
 
-/obj/item/hive_frame/crafted/filled/populate_reagents()
+/obj/item/hive_frame/comb/Initialize(ml, material_key, decl/insect_species/spawning_hive)
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/honey, REAGENT_MAXIMUM_VOLUME(reagents))
+	if(istype(spawning_hive))
+		SetName(spawning_hive.native_frame_name)
+		desc = spawning_hive.native_frame_desc
+		spawning_hive.fill_hive_frame(src)
+
+// Comb subtype for mapping and debugging.
+/obj/item/hive_frame/comb/honey
+	is_spawnable_type = TRUE
+	color = COLOR_GOLD
+
+/obj/item/hive_frame/comb/honey/Initialize(ml, material_key)
+	return ..(ml, material_key, GET_DECL(/decl/insect_species/honeybees))
