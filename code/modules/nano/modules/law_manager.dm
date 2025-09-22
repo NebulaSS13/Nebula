@@ -216,4 +216,4 @@
 		return
 	for(var/mob/living/silicon/robot/robot in AI.connected_robots)
 		robot.sync()
-	log_and_message_admins("has syncronized [AI]'s laws with its borgs.")
+	log_and_message_admins("has synchronized [AI]'s laws with its borgs.")
