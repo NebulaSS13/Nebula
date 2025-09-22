@@ -11,8 +11,8 @@
 	var/raw_reserves = 0
 	/// Tracker for the last world.time that a frame was removed.
 	var/frame_last_removed = 0
-	/// Tracker for ticks remaning since we were last smoked.
-	var/smoked_out = 0
+	/// Tracker for time that smoke will wear off.
+	var/smoked_until = 0
 
 /datum/extension/insect_hive/New(datum/holder, _species_decl)
 	..()
@@ -33,8 +33,7 @@
 	return ..()
 
 /datum/extension/insect_hive/Process()
-	if(smoked_out > 0)
-		smoked_out--
+	if(world.time < smoked_until)
 		return
 	holding_species.process_hive(src)
 	create_hive_products()
@@ -69,7 +68,7 @@
 
 /datum/extension/insect_hive/proc/frame_removed(obj/item/frame)
 	frame_last_removed = world.time
-	if(!smoked_out)
+	if(world.time >= smoked_until)
 		for(var/obj/effect/insect_swarm/swarm in swarms)
 			swarm.swarm_agitation = min(100, swarm.swarm_agitation + 5)
 
@@ -193,3 +192,10 @@
 	. = 0
 	for(var/obj/effect/insect_swarm/swarm as anything in swarms)
 		. += swarm.swarm_intensity
+
+/datum/extension/insect_hive/proc/smoked_by(mob/user, atom/source, smoke_time = 10 SECONDS)
+	smoked_until = max(smoked_until, world.time + smoke_time)
+	// this is a little weird due to telekinetic bee smoking but so it goes
+	for(var/obj/effect/insect_swarm/swarm as anything in swarms)
+		swarm.was_smoked(max(0, smoked_until-world.time))
+	return TRUE

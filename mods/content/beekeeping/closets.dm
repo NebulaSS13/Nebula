@@ -5,7 +5,7 @@
 /obj/structure/closet/crate/hydroponics/beekeeping/Initialize()
 	. = ..()
 	new /obj/item/stack/material/plank/mapped/wood/ten
-	new /obj/item/bee_smoker(src)
+	new /obj/item/smoker(src)
 	new /obj/item/hive_frame/crafted(src)
 	new /obj/item/hive_frame/crafted(src)
 	new /obj/item/hive_frame/crafted(src)

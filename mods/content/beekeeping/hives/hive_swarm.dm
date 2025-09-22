@@ -22,6 +22,8 @@
 	var/const/MAX_SWARM_STATE = 6
 	/// Cooldown timer for next tick.
 	VAR_PRIVATE/next_work = 0
+	/// Time that smoke will wear off.
+	var/smoked_until = 0
 
 /datum/movement_handler/delay/insect_swarm
 	delay = 1 SECOND
@@ -76,7 +78,7 @@
 		swarm_transform.Turn(pick(90, 180, 270))
 
 /obj/effect/insect_swarm/proc/is_agitated()
-	return QDELETED(owner) || swarm_agitation > 0
+	return QDELETED(owner) || (swarm_agitation > 0 && world.time > smoked_until)
 
 /obj/effect/insect_swarm/proc/find_sting_target()
 	for(var/mob/living/victim in view(7, src))
@@ -320,3 +322,8 @@
 		start_automove(closest_target)
 	else
 		start_automove(owner.holder)
+
+// TODO: update icon (twitching on ground?)
+// TODO: lower agitation
+/obj/effect/insect_swarm/proc/was_smoked(smoke_time = 10 SECONDS)
+	smoked_until = max(smoked_until, world.time + smoke_time)
