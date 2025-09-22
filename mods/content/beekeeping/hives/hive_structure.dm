@@ -8,7 +8,7 @@
 /obj/structure/attack_hand(mob/user)
 	if(has_extension(src, /datum/extension/insect_hive))
 		var/datum/extension/insect_hive/hive = get_extension(src, /datum/extension/insect_hive)
-		if(hive.try_hand_harvest(user))
+		if(hive.try_hand_harvest(user, src))
 			return TRUE
 	return ..()
 

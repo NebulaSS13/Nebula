@@ -14,6 +14,7 @@
 	produce_reagents      = list(/decl/material/liquid/nutriment/honey = 1)
 	produce_material      = /decl/material/solid/organic/wax
 
+/*
 /decl/insect_species/wasps
 	name_singular         = "wasp"
 	name_plural           = "wasps"
@@ -24,3 +25,4 @@
 	sting_amount          = 5
 	swarm_color           = COLOR_BRONZE
 	swarm_type            = /obj/effect/insect_swarm/pollinator // tarantula hunter...
+*/

@@ -80,7 +80,14 @@
 		for(var/obj/effect/insect_swarm/swarm as anything in swarms)
 			swarm.swarm_agitation = min(100, swarm.swarm_agitation + SWARM_AGITATION_PER_FRAME)
 
-/datum/extension/insect_hive/proc/try_hand_harvest(mob/user)
+/datum/extension/insect_hive/proc/try_hand_harvest(mob/user, obj/item/structure)
+	if(istype(structure) && !structure.storage)
+		var/obj/item/hive_frame/frame = locate() in structure
+		if(frame)
+			frame.dropInto(get_turf(structure))
+			if(istype(user))
+				user.put_in_hands(frame)
+			return TRUE
 	return FALSE
 
 /datum/extension/insect_hive/proc/try_tool_harvest(mob/user, obj/item/tool)
