@@ -4,6 +4,7 @@
 /obj/structure/flora/stump
 	name         = "stump"
 	hitsound     = 'sound/effects/hit_wood.ogg'
+	storage      = /datum/storage/dead_tree
 	var/log_type = /obj/item/stack/material/log
 
 /obj/structure/flora/stump/get_material_health_modifier()

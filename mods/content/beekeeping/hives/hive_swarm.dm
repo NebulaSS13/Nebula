@@ -211,7 +211,7 @@
 			return
 
 	// If we are the first (or only) of our owner swarms in the loc, and we aren't needed, we don't move. Hive needs workers.
-	if(owner?.raw_reserves >= 15)
+	if(owner?.raw_reserves >= DEFAULT_FRAME_COST)
 		if(is_first_swarm_at_hive())
 			stop_automove()
 			return
@@ -307,15 +307,34 @@
 		stop_automove()
 		return
 
-	// Find a flower.
-	var/closest_dist
-	var/atom/closest_target
-	for(var/obj/machinery/portable_atmospherics/hydroponics/flower in view(src, 7))
+	// Same logic for flora. TODO unify these when seeds are rewritten to be less bespoke.
+	for(var/obj/structure/flora/plant/flower in loc)
 		if(!flower.pollen)
 			continue
-		var/next_dist = get_dist(src, closest_target)
-		if(isnull(closest_dist) || next_dist < closest_dist)
-			closest_target = flower
+		pollen += flower.pollen
+		flower.pollen = 0
+		next_work = world.time + 5 SECONDS
+		stop_automove()
+		return
+
+	// Find a flower.
+	var/list/all_potential_targets = list()
+	for(var/thing in view(src, 7))
+		if(istype(thing, /obj/machinery/portable_atmospherics/hydroponics))
+			var/obj/machinery/portable_atmospherics/hydroponics/flower = thing
+			if(flower.pollen)
+				all_potential_targets += flower
+		else if(istype(thing, /obj/structure/flora/plant))
+			var/obj/structure/flora/plant/flower = thing
+			if(flower.pollen)
+				all_potential_targets += flower
+
+	var/closest_dist
+	var/atom/closest_target
+	for(var/atom/thing as anything in shuffle(all_potential_targets))
+		var/next_dist = get_dist(src, thing)
+		if(isnull(closest_target) || next_dist < closest_dist)
+			closest_target = thing
 			closest_dist = next_dist
 
 	if(closest_target)

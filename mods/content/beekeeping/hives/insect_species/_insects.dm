@@ -126,6 +126,11 @@
 		if(flower.seed?.produces_pollen)
 			return TRUE
 
+	for(var/obj/structure/flora/plant/flower in view(flora, 7))
+		if(flower.plant?.produces_pollen)
+			return TRUE
+
+
 	return FALSE
 
 /decl/insect_species/proc/process_hive(datum/extension/insect_hive/hive_metadata)

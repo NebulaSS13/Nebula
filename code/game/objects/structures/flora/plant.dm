@@ -7,14 +7,20 @@
 	var/dead = FALSE
 	var/sampled = FALSE
 	var/datum/seed/plant
-	var/harvestable
+	var/harvestable = 0
+	var/pollen = 0
 
 /obj/structure/flora/plant/large
 	opacity = TRUE
 	density = TRUE
 
-/* Notes for future work moving logic off hydrotrays onto plants themselves:
 /obj/structure/flora/plant/Process()
+	if(plant?.produces_pollen <= 0)
+		return PROCESS_KILL
+	if(pollen < 10)
+		pollen += plant.produces_pollen
+
+/* Notes for future work moving logic off hydrotrays onto plants themselves:
 	// check our immediate environment
 	// ask our environment for available reagents
 	//    process the reagents
@@ -61,9 +67,13 @@
 			var/potency = plant.get_trait(TRAIT_POTENCY)
 			set_light(l_range = max(1, round(potency/10)), l_power = clamp(round(potency/30), 0, 1), l_color = plant.get_trait(TRAIT_BIOLUM_COLOUR))
 	update_icon()
-	return ..()
+	. = ..()
+	if(plant?.produces_pollen && !is_processing)
+		START_PROCESSING(SSprocessing, src)
 
 /obj/structure/flora/plant/Destroy()
+	if(is_processing)
+		STOP_PROCESSING(SSprocessing, src)
 	plant = null
 	. = ..()
 
@@ -146,4 +156,24 @@
 
 /obj/structure/flora/plant/random_mushroom/Initialize()
 	plant = pick(get_mushroom_variants())
+	return ..()
+
+/obj/structure/flora/plant/random_flower
+	name = "flower"
+	color = COLOR_PINK
+	icon_state = "flower5"
+	is_spawnable_type = TRUE
+
+/obj/structure/flora/plant/random_flower/proc/get_flower_variants()
+	var/static/list/flower_variants
+	if(isnull(flower_variants))
+		flower_variants = list()
+		for(var/plant in SSplants.seeds)
+			var/datum/seed/seed = SSplants.seeds[plant]
+			if(!isnull(seed?.name) && seed.produces_pollen)
+				flower_variants |= seed.name
+	return flower_variants
+
+/obj/structure/flora/plant/random_flower/Initialize()
+	plant = pick(get_flower_variants())
 	return ..()

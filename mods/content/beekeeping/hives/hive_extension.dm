@@ -1,3 +1,5 @@
+#define DEFAULT_FRAME_COST 20
+
 /datum/extension/insect_hive
 	base_type = /datum/extension/insect_hive
 	expected_type = /obj/structure
@@ -42,7 +44,12 @@
 	return FALSE
 
 /datum/extension/insect_hive/proc/drop_nest(atom/drop_loc)
-	return
+	if(!isatom(drop_loc))
+		return
+	// handle some kind of physical hive dropping here
+	remove_extension(holder, /datum/extension/insect_hive)
+	if(!QDELETED(src))
+		qdel(src)
 
 /datum/extension/insect_hive/proc/get_nest_condition()
 	switch(current_health)
@@ -161,7 +168,7 @@
 			adjust_health(rand(3,5))
 		return TRUE
 
-	if(!has_reserves(20))
+	if(!has_reserves(DEFAULT_FRAME_COST))
 		return TRUE
 
 	var/list/holder_contents = hive.get_contained_external_atoms()

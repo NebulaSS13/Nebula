@@ -25,11 +25,14 @@
 	if(istype(hive))
 		hive.examined(user, (distance <= 1))
 
+/atom/physically_destroyed(var/skip_qdel)
+	var/datum/extension/insect_hive/hive = get_extension(src, /datum/extension/insect_hive)
+	hive?.drop_nest(loc)
+	return ..()
+
 /obj/structure/dismantle_structure(mob/user)
-	if(isatom(loc))
-		var/datum/extension/insect_hive/hive = get_extension(src, /datum/extension/insect_hive)
-		if(istype(hive))
-			hive.drop_nest(loc)
+	var/datum/extension/insect_hive/hive = get_extension(src, /datum/extension/insect_hive)
+	hive?.drop_nest(loc)
 	return ..()
 
 // 'proper' nest structure for building and mapping
