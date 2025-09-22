@@ -97,7 +97,8 @@
 	// If we're agitated, always sting. Otherwise, % chance equal to a quarter of our overall swarm intensity.
 	if(!swarm.is_agitated() && !prob(max(1, round(swarm.swarm_intensity/4))))
 		return FALSE
-	var/sting_mult = sting_amount * clamp(round(swarm.swarm_intensity/10), 1, 10)
+	var/base_sting_chance = (sting_amount * clamp(round(swarm.swarm_intensity/10), 1, 10))
+	var/sting_mult = swarm.is_agitated() ? max(base_sting_chance, 65) : base_sting_chance
 	for(var/mob/living/victim in loc)
 		if(!victim.simulated || victim.stat || victim.current_posture?.prone)
 			continue
@@ -106,12 +107,9 @@
 		if(!affecting || BP_IS_PROSTHETIC(affecting) || BP_IS_CRYSTAL(affecting))
 			continue
 		if(injected_reagents && victim.can_inject(victim, affecting.organ_tag))
+			to_chat(victim, SPAN_DANGER("\A [swarm] stings you [sting_mult <= sting_amount * 2 ? "" : "multiple times"] on your [affecting.name]!"))
 			injected_reagents.add_reagent(sting_reagent, sting_mult)
 			affecting.add_pain(sting_mult)
-			if(sting_mult <= sting_amount * 2)
-				to_chat(victim, SPAN_DANGER("You are stung on your [affecting.name] by \a [swarm]!"))
-			else
-				to_chat(victim, SPAN_DANGER("You are stung multiple times on your [affecting.name] by \a [swarm]!"))
 			. = TRUE
 
 /decl/insect_species/proc/can_spawn_in_flora(var/obj/structure/flora)
@@ -152,14 +150,14 @@
 		return
 
 	// Try to grow an existing swarm until we're at our max.
-	if(hive_metadata.has_reserves(5) && length(hive_metadata.swarms))
+	if(hive_metadata.has_reserves(SWARM_GROWTH_COST) && length(hive_metadata.swarms))
 		for(var/obj/effect/insect_swarm/swarm as anything in hive_metadata.swarms)
-			if(swarm.can_grow() && hive_metadata.consume_reserves(5))
+			if(swarm.can_grow() && hive_metadata.consume_reserves(SWARM_GROWTH_COST))
 				swarm.adjust_swarm_intensity(min(max_swarm_growth_intensity-swarm_intensity, rand(3,5)))
 				return
 
 	// If we have sufficient filled combs, create a new swarm. Otherwise, expand a swarm.
-	if(hive.loc && hive_metadata.has_reserves(5))
+	if(hive.loc && hive_metadata.has_reserves(SWARM_GROWTH_COST))
 
 		var/obj/effect/insect_swarm/swarm
 		for(var/obj/effect/insect_swarm/check_swarm as anything in hive_metadata.swarms)
@@ -175,5 +173,5 @@
 			if(length(hive_metadata.swarms) < comb_count)
 				swarm = new swarm_type(hive.loc, src, hive_metadata)
 
-		if(!QDELETED(swarm) && istype(swarm) && hive_metadata.consume_reserves(5))
+		if(!QDELETED(swarm) && istype(swarm) && hive_metadata.consume_reserves(SWARM_GROWTH_COST))
 			swarm.adjust_swarm_intensity(min((max_swarm_growth_intensity-swarm_intensity), rand(3,5)))

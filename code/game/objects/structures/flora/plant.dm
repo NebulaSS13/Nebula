@@ -18,7 +18,7 @@
 	if(plant?.produces_pollen <= 0)
 		return PROCESS_KILL
 	if(pollen < 10)
-		pollen += plant.produces_pollen
+		pollen += plant.produces_pollen * POLLEN_PRODUCTION_MULT
 
 /* Notes for future work moving logic off hydrotrays onto plants themselves:
 	// check our immediate environment
@@ -69,11 +69,11 @@
 	update_icon()
 	. = ..()
 	if(plant?.produces_pollen && !is_processing)
-		START_PROCESSING(SSprocessing, src)
+		START_PROCESSING(SSplants, src)
 
 /obj/structure/flora/plant/Destroy()
 	if(is_processing)
-		STOP_PROCESSING(SSprocessing, src)
+		STOP_PROCESSING(SSplants, src)
 	plant = null
 	. = ..()
 

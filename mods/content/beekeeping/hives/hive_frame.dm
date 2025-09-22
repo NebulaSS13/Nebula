@@ -41,10 +41,21 @@
 	var/decl/insect_species/bees = GET_DECL(/decl/insect_species/honeybees)
 	bees.fill_hive_frame(src)
 
-/obj/item/hive_frame/Move()
-	var/datum/extension/insect_hive/hive = get_extension(loc, /datum/extension/insect_hive)
+/obj/item/hive_frame/forceMove(atom/dest)
+	var/atom/old_loc = loc
 	. = ..()
-	if(. && istype(hive) && loc != hive.holder)
+	if(. && istype(old_loc))
+		check_hive_loc(old_loc)
+
+/obj/item/hive_frame/Move()
+	var/atom/old_loc = loc
+	. = ..()
+	if(. && istype(old_loc))
+		check_hive_loc(old_loc)
+
+/obj/item/hive_frame/proc/check_hive_loc(atom/check_loc)
+	var/datum/extension/insect_hive/hive = get_extension(check_loc, /datum/extension/insect_hive)
+	if(istype(hive) && loc != hive.holder)
 		hive.frame_removed(src)
 
 // Crafted frame used in apiaries.

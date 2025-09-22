@@ -66,7 +66,7 @@
 			mutation_level = 0
 
 	if(pollen < 10)
-		pollen += seed?.produces_pollen
+		pollen += seed?.produces_pollen * POLLEN_PRODUCTION_MULT
 
 	// Maintain tray nutrient and water levels.
 	if(seed.get_trait(TRAIT_REQUIRES_NUTRIENTS) && seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) > 0 && nutrilevel > 0 && prob(25))

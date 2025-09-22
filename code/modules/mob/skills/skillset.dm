@@ -47,7 +47,8 @@ var/global/list/all_skill_verbs
 	QDEL_NULL(NM) //Clean all nano_modules for simplicity.
 	QDEL_NULL(mob.skillset.NM)
 	QDEL_NULL_LIST(nm_viewing)
-	QDEL_NULL_LIST(mob.skillset.nm_viewing)
+	if(mob.skillset)
+		QDEL_NULL_LIST(mob.skillset.nm_viewing)
 	on_levels_change()
 
 //Called when a player is added as an antag and the antag datum processes the skillset.

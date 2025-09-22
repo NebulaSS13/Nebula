@@ -28,13 +28,13 @@
 /obj/structure/flora/tree/get_supported_insects()
 	var/static/list/_insects = list(
 		/decl/insect_species/honeybees = 10,
-		/decl/insect_species/wasps     = 1
+		///decl/insect_species/wasps     = 1
 	)
 	return _insects
 
 /obj/structure/flora/stump/get_supported_insects()
 	var/static/list/_insects = list(
 		/decl/insect_species/honeybees = 10,
-		/decl/insect_species/wasps     = 1
+		///decl/insect_species/wasps     = 1
 	)
 	return _insects

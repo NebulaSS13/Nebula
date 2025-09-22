@@ -1,5 +1,3 @@
-#define DEFAULT_FRAME_COST 20
-
 /datum/extension/insect_hive
 	base_type = /datum/extension/insect_hive
 	expected_type = /obj/structure
@@ -75,9 +73,12 @@
 
 /datum/extension/insect_hive/proc/frame_removed(obj/item/frame)
 	frame_last_removed = world.time
-	if(world.time >= smoked_until)
-		for(var/obj/effect/insect_swarm/swarm in swarms)
-			swarm.swarm_agitation = min(100, swarm.swarm_agitation + 5)
+	if(world.time >= smoked_until && length(swarms) > 0)
+		if(isatom(holder))
+			var/atom/hive = holder
+			hive.visible_message(SPAN_DANGER("The buzzing from \the [holder] intensifies."))
+		for(var/obj/effect/insect_swarm/swarm as anything in swarms)
+			swarm.swarm_agitation = min(100, swarm.swarm_agitation + SWARM_AGITATION_PER_FRAME)
 
 /datum/extension/insect_hive/proc/try_hand_harvest(mob/user)
 	return FALSE
@@ -159,16 +160,16 @@
 		return TRUE
 
 	// Naturally build up enough material for a new frame (or repairs).
-	if(!has_material(20))
+	if(!has_material(FRAME_MATERIAL_COST))
 		add_material(1)
 
 	// Damaged hives cannot produce combs or honey.
 	if(current_health < 100)
-		if(consume_material(5))
+		if(consume_material(HIVE_REPAIR_MATERIAL_COST))
 			adjust_health(rand(3,5))
 		return TRUE
 
-	if(!has_reserves(DEFAULT_FRAME_COST))
+	if(!has_reserves(FRAME_RESERVE_COST))
 		return TRUE
 
 	var/list/holder_contents = hive.get_contained_external_atoms()
@@ -176,7 +177,9 @@
 		if(!frame.reagents || (frame.reagents.total_volume >= frame.reagents.maximum_volume))
 			continue
 		var/fill_cost = REAGENTS_FREE_SPACE(frame.reagents)
-		if(consume_material(5) && consume_reserves(fill_cost))
+		if(has_material(FRAME_FILL_MATERIAL_COST) && has_reserves(fill_cost))
+			consume_material(FRAME_FILL_MATERIAL_COST)
+			consume_reserves(fill_cost)
 			holding_species.fill_hive_frame(frame)
 			return TRUE
 
@@ -189,7 +192,7 @@
 			return
 
 	// Put a timer check on this to avoid a hive filling up with combs the moment you take 2 frames out.
-	if(world.time > (frame_last_removed + 2 MINUTES) && space_left >= native_frame_size && consume_material(20))
+	if(world.time > (frame_last_removed + 2 MINUTES) && space_left >= native_frame_size && consume_material(FRAME_MATERIAL_COST))
 		// Frames start empty, and will be filled next run.
 		// Native 'frames' (combs) are bigger than crafted ones and aren't reusable.
 		new native_frame(holder, holding_species.produce_material)

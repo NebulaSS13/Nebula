@@ -78,7 +78,7 @@
 		swarm_transform.Turn(pick(90, 180, 270))
 
 /obj/effect/insect_swarm/proc/is_agitated()
-	return QDELETED(owner) || (swarm_agitation > 0 && world.time > smoked_until)
+	return QDELETED(owner) || (swarm_agitation > 0 && !is_smoked())
 
 /obj/effect/insect_swarm/proc/find_sting_target()
 	for(var/mob/living/victim in view(7, src))
@@ -129,14 +129,21 @@
 	if(!move_target || !(move_target in view(5, src)))
 		stop_automove()
 
+	if(is_smoked())
+		return
+
 	// Angry swarms move with purpose.
 	if(is_agitated())
 		swarm_agitation = max(0, swarm_agitation-1)
-		if(!move_target)
-			move_target = find_sting_target()
+		if(!ismob(move_target))
+			var/mob/new_move_target = find_sting_target()
+			if(istype(new_move_target))
+				move_target = new_move_target
 		if(move_target)
 			start_automove(move_target)
-			return
+		if(insect_type.sting_amount || insect_type.sting_reagent)
+			insect_type.try_sting(src, loc)
+		return
 
 	// Large swarms split if they aren't agitated.
 	if(swarm_can_split() && isturf(loc))
@@ -211,7 +218,7 @@
 			return
 
 	// If we are the first (or only) of our owner swarms in the loc, and we aren't needed, we don't move. Hive needs workers.
-	if(owner?.raw_reserves >= DEFAULT_FRAME_COST)
+	if(owner?.has_reserves(FRAME_RESERVE_COST))
 		if(is_first_swarm_at_hive())
 			stop_automove()
 			return
@@ -346,3 +353,6 @@
 // TODO: lower agitation
 /obj/effect/insect_swarm/proc/was_smoked(smoke_time = 10 SECONDS)
 	smoked_until = max(smoked_until, world.time + smoke_time)
+
+/obj/effect/insect_swarm/proc/is_smoked()
+	return world.time < smoked_until

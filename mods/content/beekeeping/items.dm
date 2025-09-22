@@ -24,7 +24,7 @@
 			smoked = TRUE
 
 	if(smoked)
-		var/turf/smoked_turf = get_turf(user)
+		var/turf/smoked_turf = get_turf(A)
 		if(smoked_turf)
 			playsound(smoked_turf, 'sound/effects/refill.ogg', 25, 1)
 			user.visible_message(SPAN_NOTICE("\The [user] douses \the [A] in smoke from \the [src]."))
