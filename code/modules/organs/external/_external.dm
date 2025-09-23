@@ -527,19 +527,21 @@
 		if(!in_place)
 			parent.update_wounds()
 
+/// Drops all clothing covered by this body part.
 /obj/item/organ/external/proc/drop_equipped_clothing()
 	if(!owner)
 		return
+	// TODO: Determine if this is even necessary; slots that require organ tags will vanish when the organ is lost
 	if((body_part & SLOT_FOOT_LEFT) || (body_part & SLOT_FOOT_RIGHT))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_shoes_str))
+		owner.drop_from_slot(slot_shoes_str)
 	if((body_part & SLOT_HAND_LEFT) || (body_part & SLOT_HAND_RIGHT))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_gloves_str))
+		owner.drop_from_slot(slot_gloves_str)
 	if(body_part & SLOT_HEAD)
-		owner.drop_from_inventory(owner.get_equipped_item(slot_head_str))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_glasses_str))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_l_ear_str))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_r_ear_str))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_wear_mask_str))
+		owner.drop_from_slot(slot_head_str)
+		owner.drop_from_slot(slot_glasses_str)
+		owner.drop_from_slot(slot_l_ear_str)
+		owner.drop_from_slot(slot_r_ear_str)
+		owner.drop_from_slot(slot_wear_mask_str)
 
 //Helper proc used by various tools for repairing robot limbs
 /obj/item/organ/external/proc/robo_repair(var/repair_amount, var/damage_type, var/damage_desc, obj/item/tool, mob/living/user)

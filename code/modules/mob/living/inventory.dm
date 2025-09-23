@@ -153,8 +153,8 @@
 
 	// For any old slots which had no equivalent, drop the item into the world
 	for(var/old_slot_id in old_slots)
+		drop_from_slot(old_slot_id)
 		var/datum/inventory_slot/old_slot = old_slots[old_slot_id]
-		drop_from_inventory(old_slot.get_equipped_item())
 		old_slot.clear_slot() // Call this manually since it is no longer in _inventory_slots
 		qdel(old_slot)
 
