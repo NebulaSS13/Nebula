@@ -101,6 +101,7 @@ GLOBAL_PROTECTED_UNTYPED(game_id, null)
 	update_holiday() //Uncommenting ALLOW_HOLIDAYS in configuration will enable this.
 	try_load_alien_whitelist()
 	investigate_reset()
+	global.using_map.populate_branches()
 	// Precache/build trait trees.
 	for(var/decl/trait/trait in decls_repository.get_decls_of_type_unassociated(/decl/trait))
 		trait.build_references()
