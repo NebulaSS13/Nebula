@@ -37,7 +37,7 @@ var/global/list/all_skill_verbs
 	for(var/datum/skill_buff/SB in skill_buffs)
 		. += SB.buffs[skill_path]
 
-/datum/skillset/proc/obtain_from_mob(mob/mob)
+/datum/skillset/proc/obtain_from_mob(mob/living/mob)
 	if(!istype(mob) || !skills_transferable || !mob.skillset.skills_transferable)
 		return
 	skill_list = mob.skillset.skill_list
