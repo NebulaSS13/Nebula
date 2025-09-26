@@ -8,8 +8,6 @@
 	base_type = /obj/item/stock_parts/network_receiver/network_lock
 
 	var/auto_deny_all								// Set this to TRUE to deny all access attempts if network connection is lost.
-	var/initial_network_id							// The address to the network
-	var/initial_network_key							// network KEY
 	var/selected_parent_group						// Current selected parent_group for access assignment.
 
 	var/list/groups									// List of lists of groups. In order to access the device, users must have membership in at least one
@@ -22,10 +20,6 @@
 	var/interact_sounds = list("keyboard", "keystroke")
 	var/interact_sound_volume = 40
 	var/static/legacy_compatibility_mode = TRUE     // Makes legacy access on ids play well with mapped devices with network locks. Override if your server is fully using network-enabled ids or has no mapped access.
-
-/obj/item/stock_parts/network_receiver/network_lock/modify_mapped_vars(map_hash)
-	..()
-	ADJUST_TAG_VAR(initial_network_id, map_hash)
 
 /obj/item/stock_parts/network_receiver/network_lock/emag_act(remaining_charges, mob/user, emag_source)
 	. = ..()

@@ -5,10 +5,17 @@
 	desc = "A network receiver designed for use with machinery otherwise disconnected from a network."
 	icon_state = "net_lock"
 	part_flags = PART_FLAG_QDEL
+	var/initial_network_id  // The address to the network
+	var/initial_network_key // network KEY
+
+/obj/item/stock_parts/network_receiver/network_lock/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_network_id, map_hash)
+	ADJUST_TAG_VAR(initial_network_key, map_hash)
 
 /obj/item/stock_parts/network_receiver/Initialize(ml, material_key)
 	. = ..()
-	set_extension(src, /datum/extension/network_device/stock_part)
+	set_extension(src, /datum/extension/network_device/stock_part, initial_network_id, initial_network_key)
 
 /obj/item/stock_parts/network_receiver/on_install(obj/machinery/machine)
 	. = ..()
