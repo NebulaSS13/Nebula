@@ -61,8 +61,6 @@
 	var/tmp/screen_state    = "screen_standby"
 	///Bitflag to indicate which indicator lights are on so dummy controllers can match the same state
 	var/tmp/indicator_state = 0
-	///If set, this controller will route its commands to the master controller with the same id_tag.
-	var/obj/machinery/embedded_controller/radio/master
 	///Radio connection to use for emiting commands
 	var/datum/radio_frequency/radio_connection
 

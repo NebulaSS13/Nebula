@@ -26,7 +26,6 @@
 	var/can_flip = TRUE
 	var/is_flipped = FALSE
 	var/decl/material/additional_reinf_material
-	var/base_type = /obj/structure/table
 
 	var/top_surface_noun = "tabletop"
 

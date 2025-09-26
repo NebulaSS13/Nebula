@@ -61,9 +61,6 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/cache_b  = 0
 	var/cache_mx = 0
 
-	/// Used for planet lighting. Probably needs a better system to prevent over-updating when not needed at some point.
-	var/update_gen = 0
-
 /datum/lighting_corner/New(turf/new_turf, diagonal, oi)
 	SSlighting.total_lighting_corners += 1
 

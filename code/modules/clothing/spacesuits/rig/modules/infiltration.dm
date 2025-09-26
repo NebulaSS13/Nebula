@@ -185,7 +185,6 @@
 	interface_name = "dead man's switch"
 	interface_desc = "An integrated automatic self-destruct module. When the wearer dies, so does the surrounding area. Can be triggered manually."
 	var/list/explosion_values = list(1,2,4,5)
-	var/blinking = 0
 	var/blink_mode = 0
 	var/blink_delay = 10
 	var/blink_time = 40

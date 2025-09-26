@@ -20,7 +20,6 @@
 	var/lethal = 0
 	var/locked = 1
 	var/area/control_area //can be area name, path or nothing.
-	var/mob/living/silicon/ai/master_ai
 
 	var/check_arrest = 1	//checks if the perp is set to arrest
 	var/check_records = 1	//checks if a security record exists at all

@@ -81,7 +81,6 @@
 	var/return_damage_min
 	var/return_damage_max
 
-	var/performing_delayed_life_action = FALSE
 	var/glowing_eyes = FALSE
 	var/mob_icon_state_flags = 0
 
