@@ -8,11 +8,11 @@
 	custom_setup_proc = /obj/item/proc/AttemptAugmentation
 	custom_setup_proc_arguments = list(BP_CHEST)
 
-/obj/item/proc/AttemptAugmentation(mob/user, target_zone)
+/obj/item/proc/AttemptAugmentation(mob/living/user, target_zone)
 	to_chat(user, SPAN_DANGER("Was unable to augment you with \the [src]."))
 	qdel(src)
 
-/obj/item/implant/AttemptAugmentation(mob/user, target_zone)
+/obj/item/implant/AttemptAugmentation(mob/living/user, target_zone)
 	if(can_implant(user, user, target_zone) && implant_in_mob(user, user, target_zone))
 		var/obj/item/organ/organ = GET_EXTERNAL_ORGAN(user, target_zone)
 		to_chat(user, SPAN_NOTICE("You have \a [src] implanted in your [organ.name]."))

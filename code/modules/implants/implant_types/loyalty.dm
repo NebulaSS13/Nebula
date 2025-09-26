@@ -1,8 +1,8 @@
 /obj/item/implant/loyalty
 	name = "loyalty implant"
-	desc = "Makes you loyal or such."
+	desc = "Contains a small pod of nanobots that manipulate the host's mental functions. Personnel injected with this device tend to be much more loyal to the company."
 	origin_tech = @'{"materials":1,"biotech":2,"esoteric":3}'
-	known = 1
+	known = TRUE // identifiable by scanners
 
 /obj/item/implant/loyalty/get_data()
 	return {"
@@ -16,19 +16,20 @@
 	<b>Special Features:</b> Will prevent and cure most forms of brainwashing.<BR>
 	<b>Integrity:</b> Implant will last so long as the nanobots are inside the bloodstream."}
 
-/obj/item/implant/loyalty/implanted(mob/M)
-	if(!ishuman(M))
+/obj/item/implant/loyalty/implanted(mob/living/victim)
+	if(!ishuman(victim))
 		return FALSE
-	var/decl/special_role/antag_data = GET_DECL(M.mind?.assigned_special_role)
+	var/decl/special_role/antag_data = GET_DECL(victim.mind?.assigned_special_role)
 	if(istype(antag_data) && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))
-		M.visible_message(
-			"\The [M] seems to resist the implant!",
-			"You feel the corporate tendrils of [global.using_map.company_name] try to invade your mind!"
+		victim.visible_message(
+			"\The [victim] seems to resist the implant!",
+			SPAN_WARNING("You feel the corporate tendrils of [global.using_map.company_name] try to invade your mind!")
 		)
 		return FALSE
 	else
-		clear_antag_roles(M.mind, 1)
-		to_chat(M, SPAN_NOTICE("You feel a surge of loyalty towards [global.using_map.company_name]."))
+		clear_antag_roles(victim.mind, implanted = TRUE)
+		to_chat(victim, SPAN_NOTICE("You feel a surge of loyalty towards [global.using_map.company_name]."))
+	BITSET(victim.hud_updateflag, IMPLOYAL_HUD)
 	return TRUE
 
 /obj/item/implanter/loyalty

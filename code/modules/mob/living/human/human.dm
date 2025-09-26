@@ -100,24 +100,25 @@
 				cell_status = "[rig.cell.charge]/[rig.cell.maxcharge]"
 			stat(null, "Hardsuit charge: [cell_status]")
 
-/mob/living/human/proc/implant_loyalty(mob/living/human/M, override = FALSE) // Won't override by default.
-	if(!get_config_value(/decl/config/toggle/use_loyalty_implants) && !override) return // Nuh-uh.
+/mob/living/human/proc/implant_loyalty(mob/living/human/victim, override = FALSE) // Won't override by default.
+	if(!get_config_value(/decl/config/toggle/use_loyalty_implants) && !override)
+		return // Nuh-uh.
 
-	var/obj/item/implant/loyalty/L = new/obj/item/implant/loyalty(M)
-	L.imp_in = M
-	L.implanted = 1
-	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(M, BP_HEAD)
-	LAZYDISTINCTADD(affected.implants, L)
-	L.part = affected
-	L.implanted(src)
+	var/obj/item/implant/loyalty/loyalty_implant = new/obj/item/implant/loyalty(victim)
+	loyalty_implant.imp_in = victim
+	loyalty_implant.implanted = TRUE
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(victim, BP_HEAD)
+	LAZYDISTINCTADD(affected.implants, loyalty_implant)
+	loyalty_implant.part = affected
+	loyalty_implant.implanted(src)
 
-/mob/living/human/proc/is_loyalty_implanted(mob/living/human/M)
-	for(var/L in M.contents)
-		if(istype(L, /obj/item/implant/loyalty))
-			for(var/obj/item/organ/external/O in M.get_external_organs())
-				if(L in O.implants)
-					return 1
-	return 0
+/mob/living/human/proc/is_loyalty_implanted(mob/living/human/victim)
+	for(var/obj/item/implant/loyalty/loyalty_implant in victim.contents)
+		// Make sure the implant is actually implanted in the expected part,
+		// and that the part is in the victim (should always be, but just in case)
+		if(victim.get_organ(loyalty_implant.part?.organ_tag) == loyalty_implant.part)
+			return TRUE
+	return FALSE
 
 /mob/living/human/get_additional_stripping_options()
 	. = ..()

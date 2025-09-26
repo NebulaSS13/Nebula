@@ -99,9 +99,10 @@
 	next_emote = world.time + use_emote.emote_delay
 	use_emote.do_emote(src, message)
 
-	for (var/obj/item/implant/I in src)
-		if (I.implanted)
-			I.trigger(act, src)
+	for (var/obj/item/implant/implant in src)
+		if(!implant.implanted)
+			continue
+		implant.trigger(act, src)
 
 #undef EMOTE_REFRESH_SPAM_COOLDOWN
 

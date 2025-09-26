@@ -68,21 +68,16 @@ var/global/list/default_uplink_source_priority = list(
 	name = "Implant"
 	desc = "Teleports an uplink implant into your head. Costs 20% of the initial TC amount."
 
-/decl/uplink_source/implant/setup_uplink_source(var/mob/living/human/H, var/amount)
-	if(!istype(H))
+/decl/uplink_source/implant/setup_uplink_source(var/mob/living/human/recipient, var/amount)
+	if(!istype(recipient))
 		return SETUP_FAILED
 
-	var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(H, BP_HEAD)
+	var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(recipient, BP_HEAD)
 	if(!head)
 		return SETUP_FAILED
 
-	var/obj/item/implant/uplink/U = new(H, round(amount * 0.8))
-	U.imp_in = H
-	U.implanted = TRUE
-	U.part = head
-	LAZYADD(head.implants, U)
-
-	U.implanted(H) // This proc handles the installation feedback
+	var/obj/item/implant/uplink/uplink_implant = new(recipient, round(amount * 0.8))
+	uplink_implant.implant_in_mob(recipient, recipient, head)
 
 /decl/uplink_source/unit
 	name = "Uplink Unit"

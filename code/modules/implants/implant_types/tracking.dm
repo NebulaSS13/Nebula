@@ -4,7 +4,7 @@ var/global/list/tracking_implants = list()
 	name = "tracking implant"
 	desc = "Track with this."
 	origin_tech = @'{"materials":1,"biotech":2,"wormholes":2}'
-	known = 1
+	known = TRUE
 	var/id = 1
 
 /obj/item/implant/tracking/Initialize(ml, material_key)
@@ -36,11 +36,11 @@ var/global/list/tracking_implants = list()
 		<A href='byond://?src=\ref[src];tracking_id=1'>+</A>
 		<A href='byond://?src=\ref[src];tracking_id=10'>+</A><BR>"}
 
-/obj/item/implant/tracking/Topic(href, href_list)
-	..()
+/obj/item/implant/tracking/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if (href_list["tracking_id"])
 		id = clamp(id+text2num(href_list["tracking_id"]), 1, 100)
-		interact(usr)
+		return TOPIC_REFRESH
+	return TOPIC_NOACTION
 
 /obj/item/implant/tracking/islegal()
 	return TRUE
@@ -50,7 +50,7 @@ var/global/list/tracking_implants = list()
 	if(prob(power * 15))
 		meltdown()
 	else if(prob(power * 40))
-		disable(rand(power*500,power*5000))//adds in extra time because this is the only other way to sabotage it
+		disable(rand(power*50 SECONDS,power*500 SECONDS))//adds in extra time because this is the only other way to sabotage it
 
 /obj/item/implantcase/tracking
 	name = "glass case - 'tracking'"

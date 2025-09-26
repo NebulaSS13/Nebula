@@ -2,8 +2,8 @@
 	name = "adrenalin implant"
 	desc = "Removes all stuns and knockdowns."
 	origin_tech = @'{"materials":1,"biotech":2,"esoteric":2}'
-	hidden = 1
-	var/uses
+	hidden = TRUE
+	var/uses = 3
 
 /obj/item/implant/adrenalin/get_data()
 	return {"
@@ -22,17 +22,19 @@
 		activate()
 
 /obj/item/implant/adrenalin/activate()//this implant is unused but I'm changing it for the sake of consistency
-	if (uses < 1 || malfunction || !imp_in)	return 0
+	if (uses < 1 || malfunction || !imp_in)
+		return 0
 	uses--
-	to_chat(imp_in, "<span class='notice'>You feel a sudden surge of energy!</span>")
+	to_chat(imp_in, SPAN_NOTICE("You feel a sudden surge of energy!"))
 
 	imp_in.set_status_condition(STAT_STUN, 0)
 	imp_in.set_status_condition(STAT_WEAK, 0)
 	imp_in.set_status_condition(STAT_PARA, 0)
 
 /obj/item/implant/adrenalin/implanted(mob/source)
-	source.StoreMemory("\A [src] can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", /decl/memory_options/system)
-	to_chat(source, "\The [src] can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.")
+	var/activation_string = "can be activated by using the pale emote, <B>say *pale</B> to attempt to activate."
+	source.StoreMemory("\A [src] [activation_string]", /decl/memory_options/system)
+	to_chat(source, "\The [src] [activation_string]")
 	return TRUE
 
 /obj/item/implanter/adrenalin

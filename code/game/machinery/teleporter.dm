@@ -86,12 +86,13 @@
 	for(var/obj/item/radio/beacon/radio in global.radio_beacons)
 		if(!radio.functioning)
 			continue
-		var/turf/T = get_turf(radio)
-		if (!T)
+		var/turf/radio_turf = get_turf(radio)
+		if (!radio_turf)
 			continue
-		if(!isPlayerLevel(T.z))
+		if(!isPlayerLevel(radio_turf.z))
 			continue
-		var/tmpname = T.loc.name
+		var/area/radio_area = get_area(radio)
+		var/tmpname = radio_area.proper_name
 		if(areaindex[tmpname])
 			tmpname = "[tmpname] ([++areaindex[tmpname]])"
 		else
@@ -101,22 +102,21 @@
 	for (var/obj/item/implant/tracking/used_item in global.tracking_implants)
 		if (!used_item.implanted || !ismob(used_item.loc))
 			continue
+		var/mob/victim = used_item.loc
+		// Can only track dead people up to 10 minutes after death
+		if (victim.stat == DEAD && world.time > victim.timeofdeath + 10 MINUTES)
+			continue
+		var/turf/victim_turf = get_turf(victim)
+		if(!victim_turf)
+			continue
+		if(!isPlayerLevel(victim_turf.z))
+			continue
+		var/tmpname = victim.real_name
+		if(areaindex[tmpname])
+			tmpname = "[tmpname] ([++areaindex[tmpname]])"
 		else
-			var/mob/M = used_item.loc
-			if (M.stat == DEAD)
-				if (M.timeofdeath + 6000 < world.time)
-					continue
-			var/turf/T = get_turf(M)
-			if(!T)
-				continue
-			if(!isPlayerLevel(T.z))
-				continue
-			var/tmpname = M.real_name
-			if(areaindex[tmpname])
-				tmpname = "[tmpname] ([++areaindex[tmpname]])"
-			else
-				areaindex[tmpname] = 1
-			L[tmpname] = used_item
+			areaindex[tmpname] = 1
+		L[tmpname] = used_item
 
 	var/desc = input("Please select a location to lock in.", "Locking Computer") in L|null
 	if(!desc)
@@ -127,7 +127,7 @@
 	audible_message(SPAN_NOTICE("Locked in."))
 	return
 
-/obj/machinery/computer/teleporter/verb/set_id(t as text)
+/obj/machinery/computer/teleporter/verb/set_id(new_tag as text)
 	set category = "Object"
 	set name = "Set teleporter ID"
 	set src in oview(1)
@@ -135,8 +135,8 @@
 
 	if(stat & (NOPOWER|BROKEN) || !isliving(usr))
 		return
-	if (t)
-		src.id = t
+	if (new_tag)
+		src.id = new_tag
 	return
 
 /obj/machinery/computer/teleporter/proc/target_lost()

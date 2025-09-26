@@ -440,7 +440,7 @@
 /mob/living/silicon/get_dexterity(var/silent)
 	return dexterity
 
-/mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE, obj/item/organ/external/affected)
+/mob/living/silicon/robot/remove_implant(obj/item/implant, surgical_removal = FALSE, obj/item/organ/external/affected)
 	. = ..()
 	if(.)
 		adjustBruteLoss(5, do_update_health = FALSE)

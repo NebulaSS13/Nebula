@@ -5,7 +5,7 @@
 	desc = "Use this to escape from those evil Red Shirts."
 	origin_tech = @'{"materials":1,"biotech":2,"esoteric":2}'
 	implant_color = "r"
-	hidden = 1
+	hidden = TRUE
 	var/activation_emote
 	var/uses
 
@@ -34,7 +34,8 @@
 		activate()
 
 /obj/item/implant/freedom/activate()
-	if(uses < 1 || malfunction)	return 0
+	if(uses < 1 || malfunction)
+		return FALSE
 	if(remove_cuffs_and_unbuckle(imp_in))
 		uses--
 		to_chat(imp_in, "You feel a faint click.")
@@ -42,16 +43,18 @@
 /obj/item/implant/freedom/proc/remove_cuffs_and_unbuckle(mob/living/user)
 	var/obj/cuffs = user.get_equipped_item(slot_handcuffed_str)
 	if(!cuffs)
-		return 0
-	. = user.try_unequip(cuffs)
-	if(. && user.buckled && user.buckled.buckle_require_restraints)
+		return FALSE
+	if(!user.try_unequip(cuffs))
+		return FALSE
+	if(user.buckled && user.buckled.buckle_require_restraints)
 		user.buckled.unbuckle_mob()
-	return
+	return TRUE
 
 /obj/item/implant/freedom/implanted(mob/living/source)
 	src.activation_emote = input("Choose activation emote:") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch_v", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
-	source.StoreMemory("\A [src] can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", /decl/memory_options/system)
-	to_chat(source, "\The [src] can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.")
+	var/activation_string = "can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate."
+	source.StoreMemory("\A [src] [activation_string]", /decl/memory_options/system)
+	to_chat(source, "\The [src] [activation_string]")
 	return TRUE
 
 /obj/item/implanter/freedom

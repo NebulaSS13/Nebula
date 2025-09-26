@@ -13,7 +13,7 @@
 		add_overlay("[icon_state]-imp")
 
 /obj/item/implantpad/attack_hand(mob/user)
-	if(!imp || (src in user.get_held_items()) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
+	if(!imp || !(src in user.get_held_items()) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	user.put_in_active_hand(imp)
 	imp.add_fingerprint(user)
@@ -24,28 +24,28 @@
 
 /obj/item/implantpad/attackby(obj/item/used_item, mob/user)
 	if(istype(used_item, /obj/item/implantcase))
-		var/obj/item/implantcase/C = used_item
-		if(!imp && C.imp)
-			C.imp.forceMove(src)
-			imp = C.imp
-			C.imp = null
-		else if (imp && !C.imp)
-			imp.forceMove(C)
-			C.imp = imp
+		var/obj/item/implantcase/case = used_item
+		if(!imp && case.imp)
+			case.imp.forceMove(src)
+			imp = case.imp
+			case.imp = null
+		else if (imp && !case.imp)
+			imp.forceMove(case)
+			case.imp = imp
 			imp = null
-		C.update_icon()
+		case.update_icon()
 		. = TRUE
 	else if(istype(used_item, /obj/item/implanter))
-		var/obj/item/implanter/C = used_item
-		if(!imp && C.imp)
-			C.imp.forceMove(src)
-			imp = C.imp
-			C.imp = null
-		else if (imp && !C.imp)
-			imp.forceMove(C)
-			C.imp = imp
+		var/obj/item/implanter/implanter = used_item
+		if(!imp && implanter.imp)
+			implanter.imp.forceMove(src)
+			imp = implanter.imp
+			implanter.imp = null
+		else if (imp && !implanter.imp)
+			imp.forceMove(implanter)
+			implanter.imp = imp
 			imp = null
-		C.update_icon()
+		implanter.update_icon()
 		. = TRUE
 	else if(istype(used_item, /obj/item/implant) && user.try_unequip(used_item, src))
 		imp = used_item
@@ -59,4 +59,4 @@
 	if (imp)
 		imp.interact(user)
 	else
-		to_chat(user,"<span class='warning'>There's no implant loaded in \the [src].</span>")
+		to_chat(user,SPAN_WARNING("There's no implant loaded in \the [src]."))

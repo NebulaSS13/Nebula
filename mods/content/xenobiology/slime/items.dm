@@ -20,10 +20,10 @@
 /obj/item/slime_extract/attackby(obj/item/used_item, mob/user)
 	if(istype(used_item, /obj/item/slime_extract_enhancer))
 		if(enhanced == 1)
-			to_chat(user, "<span class='warning'> This extract has already been enhanced!</span>")
+			to_chat(user, SPAN_WARNING("This extract has already been enhanced!"))
 			return ..()
 		if(Uses == 0)
-			to_chat(user, "<span class='warning'> You can't enhance a used extract!</span>")
+			to_chat(user, SPAN_WARNING("You can't enhance a used extract!"))
 			return ..()
 		to_chat(user, "You apply the enhancer. It now has triple the amount of uses.")
 		Uses = 3
@@ -103,7 +103,7 @@
 	G.key = ghost.key
 
 	var/obj/item/implant/translator/natural/I = new()
-	I.implant_in_mob(G, BP_HEAD)
+	I.implant_in_mob(G, user, BP_HEAD)
 	if (user.languages.len)
 		var/decl/language/lang = user.languages[1]
 		G.add_language(lang.type)
