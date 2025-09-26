@@ -74,6 +74,10 @@
 		LAZYINITLIST(organs_by_category)
 		LAZYDISTINCTADD(organs_by_category[O.organ_category], O)
 
+	// Update stat organs as well
+	if(O.has_stat_info)
+		LAZYDISTINCTADD(stat_organs, O)
+
 	. = ..()
 	if(!.)
 		return
@@ -112,6 +116,10 @@
 		organs_by_category[O.organ_category] -= O
 		if(LAZYLEN(organs_by_category[O.organ_category]) <= 0)
 			LAZYREMOVE(organs_by_category, O.organ_category)
+
+	// Update stat organs as well
+	if(O.has_stat_info && stat_organs)
+		LAZYREMOVE(stat_organs, O)
 
 	if(!O.is_internal())
 		refresh_modular_limb_verbs()

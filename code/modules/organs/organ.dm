@@ -55,8 +55,8 @@
 	/// Whether or not we should scale the damage values of this organ to the owner species.
 	var/scale_max_damage_to_species_health
 
-	/// Set to true if this organ should return info to Stat(). See get_stat_info().
-	var/has_stat_info
+	/// Set to TRUE if this organ should return info to Stat(). See get_stat_info().
+	var/has_stat_info = FALSE
 
 /obj/item/organ/proc/reset_matter()
 	matter = null
@@ -687,7 +687,7 @@ var/global/list/ailment_reference_cache = list()
 		place_butcher_product(GET_DECL(species.butchery_data))
 	return ..()
 
-/// Returns a list with two entries, first being the stat panel title, the second being the value. See has_stat_value bool above.
+/// Returns a list with two entries, first being the stat panel title, the second being the value. See has_stat_info bool above.
 /obj/item/organ/proc/get_stat_info()
 	return null
 
