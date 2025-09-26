@@ -75,8 +75,8 @@
 	. = (get_fluid_depth() >= min)
 
 /turf/proc/get_fluid_name()
-	var/decl/material/mat = reagents?.get_primary_reagent_decl()
-	return mat.get_reagent_name(reagents, MAT_PHASE_LIQUID) || "liquid"
+	var/decl/material/mat = reagents?.get_primary_reagent_decl() || RESOLVE_TO_DECL(flooded)
+	return mat?.get_reagent_name(reagents, MAT_PHASE_LIQUID) || "liquid"
 
 /turf/get_fluid_depth()
 	if(is_flooded(absolute=1))
