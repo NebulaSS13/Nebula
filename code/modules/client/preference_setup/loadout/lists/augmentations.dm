@@ -33,3 +33,17 @@
 
 	user.add_organ(src, organ_to_implant_into)
 	to_chat(user, SPAN_NOTICE("Your [organ_to_implant_into.name] has been replaced with \the [src]."))
+
+// Codex implant, only available if the codex is set to require it in config
+/decl/loadout_option/augmentation/codex_implant
+	name = "Codex Implant"
+	uid = "gear_augmentation_codex"
+	description = "A neural implant that provides access to the codex."
+	path = /obj/item/implant/codex
+	custom_setup_proc_arguments = list(BP_HEAD)
+	cost = 0
+
+/decl/loadout_option/augmentation/codex_implant/can_be_taken_by(mob/living/user)
+	if(!get_config_value(/decl/config/toggle/codex_requires_implant))
+		return FALSE
+	return ..()
