@@ -95,6 +95,11 @@
 	if(analog && frequency)
 		analog_radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
+/obj/item/radio/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_network_id, map_hash)
+	ADJUST_TAG_VAR(initial_network_key, map_hash)
+
 /obj/item/radio/Initialize()
 	. = ..()
 	wires = new(src)

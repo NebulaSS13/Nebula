@@ -8,7 +8,7 @@
 	var/initial_network_id  // The address to the network
 	var/initial_network_key // network KEY
 
-/obj/item/stock_parts/network_receiver/network_lock/modify_mapped_vars(map_hash)
+/obj/item/stock_parts/network_receiver/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
 	ADJUST_TAG_VAR(initial_network_key, map_hash)
