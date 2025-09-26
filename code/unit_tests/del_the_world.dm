@@ -13,7 +13,9 @@
 		// throw assert failures around non-null alarm area on spawn
 		/obj/machinery/alarm,
 		// Needs a level above.
-		/obj/structure/stairs
+		/obj/structure/stairs,
+		// Needs to have the right evac controller
+		/obj/machinery/computer/shuttle,
 	)
 
 	// Suspend to avoid fluid flows shoving stuff off the testing turf.

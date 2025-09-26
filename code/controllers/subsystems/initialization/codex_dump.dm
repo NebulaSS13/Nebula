@@ -131,7 +131,8 @@ TODO: work out how to implement an external search function.
 		/obj/item/organ/external/chest,
 		/obj/machinery/power/apc,
 		/obj/machinery/alarm,
-		/obj/structure/stairs
+		/obj/structure/stairs,
+		/obj/machinery/computer/shuttle,
 	)
 
 	// Suspend to avoid fluid flows shoving stuff off the testing turf.
