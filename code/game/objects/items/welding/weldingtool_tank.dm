@@ -11,7 +11,7 @@
 	atom_flags         = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags          = OBJ_FLAG_HOLLOW
 	volume             = 20
-	show_reagent_name  = TRUE
+	presentation_flags = PRESENTATION_FLAG_NAME
 	current_health     = 40
 	max_health         = 40
 	material           = /decl/material/solid/metal/steel
@@ -123,7 +123,7 @@
 	size_in_use        = ITEM_SIZE_LARGE
 	unlit_force        = 9
 	lit_force          = 15
-	show_reagent_name  = FALSE
+	presentation_flags = 0
 	_base_attack_force = 8
 	var/tmp/last_gen   = 0
 
