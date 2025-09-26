@@ -26,6 +26,7 @@
 /obj/machinery/computer/design_console/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
+	ADJUST_TAG_VAR(initial_network_key, map_hash)
 
 /obj/machinery/computer/design_console/RefreshParts()
 	. = ..()

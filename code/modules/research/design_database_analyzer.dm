@@ -23,6 +23,7 @@
 /obj/machinery/destructive_analyzer/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
+	ADJUST_TAG_VAR(initial_network_key, map_hash)
 
 /obj/machinery/destructive_analyzer/RefreshParts()
 	var/T = 0
