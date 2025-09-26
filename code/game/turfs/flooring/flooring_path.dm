@@ -16,7 +16,7 @@
 	var/paver_noun = "stones"
 
 /decl/flooring/path/update_turf_strings(turf/floor/target)
-	var/decl/material/floor_material = target?.get_material()
+	var/decl/material/floor_material = RESOLVE_TO_DECL(target?.get_material())
 	ASSERT(floor_material?.adjective_name)
 	ASSERT(paver_noun)
 	target.SetName("[floor_material.adjective_name] [name]")
