@@ -385,31 +385,30 @@ steam.start() -- spawns the effect
 
 
 /datum/effect/effect/system/trail/start()
-	if(!src.on)
-		src.on = 1
-		src.processing = 1
-	if(src.processing)
-		src.processing = 0
-		spawn(0)
-			var/turf/T = get_turf(src.holder)
-			if(T != src.oldposition)
-				if(is_type_in_list(T, specific_turfs) && (!max_number || number < max_number))
-					var/obj/effect/effect/trail = new trail_type(oldposition)
-					src.oldposition = T
-					effect(trail)
-					number++
-					spawn( duration_of_effect )
-						number--
-						qdel(trail)
-				spawn(2)
-					if(src.on)
-						src.processing = 1
-						src.start()
-			else
-				spawn(2)
-					if(src.on)
-						src.processing = 1
-						src.start()
+	set waitfor = FALSE
+	if(!on)
+		on = TRUE
+		processing = TRUE
+	if(processing)
+		processing = FALSE
+		var/turf/our_turf = get_turf(holder)
+		if(our_turf != oldposition)
+			if(is_type_in_list(our_turf, specific_turfs) && (!max_number || number < max_number))
+				var/obj/effect/effect/trail = new trail_type(oldposition)
+				oldposition = our_turf
+				effect(trail)
+				number++
+				addtimer(CALLBACK(src, PROC_REF(end_trail_effect), trail), duration_of_effect)
+		addtimer(CALLBACK(src, PROC_REF(try_start)), 0.2 SECONDS)
+
+/datum/effect/effect/system/trail/proc/try_start()
+	if(on)
+		processing = TRUE
+		start()
+
+/datum/effect/effect/system/trail/proc/end_trail_effect(obj/effect/effect/trail)
+	number--
+	qdel(trail)
 
 /datum/effect/effect/system/trail/proc/stop()
 	src.processing = 0
