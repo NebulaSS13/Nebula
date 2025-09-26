@@ -123,8 +123,7 @@
 /turf/floor/proc/update_floor_strings()
 	var/decl/flooring/flooring = get_topmost_flooring()
 	if(istype(flooring))
-		SetName(flooring.name)
-		desc = flooring.desc
+		flooring.update_turf_strings(src)
 	else
 		SetName(initial(name))
 		desc = initial(desc)
