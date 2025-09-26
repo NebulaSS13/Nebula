@@ -83,35 +83,40 @@
 		body.visible_message(SPAN_NOTICE("\The [body] begins to secrete a sticky substance around \the [cocoon_target]."))
 		stop_wandering()
 		body.stop_automove()
-		spawn(5 SECONDS)
-			if(get_activity() == AI_ACTIVITY_BUILDING)
-				if(cocoon_target && isturf(cocoon_target.loc) && get_dist(body, cocoon_target) <= 1)
-					var/obj/effect/spider/cocoon/C = new(cocoon_target.loc)
-					var/large_cocoon = 0
-					C.pixel_x = cocoon_target.pixel_x
-					C.pixel_y = cocoon_target.pixel_y
-					for(var/mob/living/M in C.loc)
-						large_cocoon = 1
-						spooder.fed++
-						spooder.max_eggs++
-						body.visible_message(SPAN_WARNING("\The [body] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out."))
-						M.forceMove(C)
-						C.pixel_x = M.pixel_x
-						C.pixel_y = M.pixel_y
-						break
-					for(var/obj/item/I in C.loc)
-						I.forceMove(C)
-					for(var/obj/structure/S in C.loc)
-						if(!S.anchored)
-							S.forceMove(C)
-					for(var/obj/machinery/M in C.loc)
-						if(!M.anchored)
-							M.forceMove(C)
-					if(large_cocoon)
-						C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
-					cocoon_target = null
-				set_activity(AI_ACTIVITY_IDLE)
-				resume_wandering()
+		addtimer(CALLBACK(src, PROC_REF(build_cocoon)), 5 SECONDS)
+
+/datum/mob_controller/aggressive/giant_spider/nurse/proc/build_cocoon()
+	if(get_activity() != AI_ACTIVITY_BUILDING)
+		return FALSE
+	var/mob/living/simple_animal/hostile/giant_spider/nurse/spooder = body
+	if(cocoon_target && isturf(cocoon_target.loc) && get_dist(body, cocoon_target) <= 1)
+		var/obj/effect/spider/cocoon/C = new(cocoon_target.loc)
+		var/large_cocoon = 0
+		C.pixel_x = cocoon_target.pixel_x
+		C.pixel_y = cocoon_target.pixel_y
+		for(var/mob/living/M in C.loc)
+			large_cocoon = 1
+			spooder.fed++
+			spooder.max_eggs++
+			body.visible_message(SPAN_WARNING("\The [body] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out."))
+			M.forceMove(C)
+			C.pixel_x = M.pixel_x
+			C.pixel_y = M.pixel_y
+			break
+		for(var/obj/item/I in C.loc)
+			I.forceMove(C)
+		for(var/obj/structure/S in C.loc)
+			if(!S.anchored)
+				S.forceMove(C)
+		for(var/obj/machinery/M in C.loc)
+			if(!M.anchored)
+				M.forceMove(C)
+		if(large_cocoon)
+			C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
+		cocoon_target = null
+	set_activity(AI_ACTIVITY_IDLE)
+	resume_wandering()
+	return TRUE
 
 /datum/mob_controller/aggressive/giant_spider/nurse/handle_death(gibbed)
 	. = ..()
