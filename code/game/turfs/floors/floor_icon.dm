@@ -128,6 +128,9 @@
 	else
 		SetName(initial(name))
 		desc = initial(desc)
+	// do this once name and desc have been updated
+	if(check_fluid_depth(FLUID_SHALLOW))
+		SetName(get_fluid_name()) // just entirely overwrite name, but keep desc
 
 /turf/floor/proc/update_floor_icon()
 	var/decl/flooring/use_flooring = get_topmost_flooring()

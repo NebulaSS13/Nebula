@@ -76,6 +76,11 @@
 		if(contaminant_to_add)
 			add_to_reagents(contaminant_reagent_type, contaminant_to_add, phase = MAT_PHASE_LIQUID)
 
+/turf/floor/get_examine_strings(mob/user, distance, infix, suffix)
+	. = ..()
+	if(check_fluid_depth(FLUID_SHALLOW))
+		. += SPAN_NOTICE("It has a pool of [get_fluid_name()].")
+
 /turf/floor/can_climb_from_below(var/mob/climber)
 	return TRUE
 
