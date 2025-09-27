@@ -53,8 +53,6 @@ var/global/list/bodytypes_by_category = list()
 	var/nail_noun
 	/// What tech levels should limbs of this type use/need?
 	var/limb_tech            = @'{"biotech":2}'
-	/// Determines if eyes should render on heads using this bodytype.
-	var/has_eyes             = TRUE
 	/// Prefixed to the initial name of the limb, if non-null.
 	var/modifier_string
 	/// Modifies min and max broken damage for the limb.
@@ -231,7 +229,7 @@ var/global/list/bodytypes_by_category = list()
 	var/eye_contaminant_guard       = 0
 	/// Are the eyes of this bodytype resistant to flashes?
 	var/eye_innate_flash_protection = FLASH_PROTECTION_NONE
-	/// Icon to draw eye overlays from.
+	/// Icon to draw eye overlays from. If null, eyes will not be drawn.
 	var/eye_icon                    = 'icons/mob/human_races/species/default_eyes.dmi'
 	/// Do the eyes of this mob apply a pref colour like hair?
 	var/apply_eye_colour            = TRUE
