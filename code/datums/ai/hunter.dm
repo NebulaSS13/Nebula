@@ -36,51 +36,55 @@
 /datum/mob_controller/passive/hunter/get_target(atom/new_target)
 	if(isnull(hunt_target))
 		return null
-	var/mob/living/prey = hunt_target.resolve()
+	var/atom/prey = hunt_target.resolve()
 	if(!istype(prey) || QDELETED(prey))
 		set_target(null)
 		return null
 	return prey
 
 /datum/mob_controller/passive/hunter/set_target(atom/new_target)
-	if(isnull(new_target) || isliving(new_target))
-		hunt_target = new_target ? weakref(new_target) : null
-		return TRUE
-	return FALSE
+	hunt_target = new_target ? weakref(new_target) : null
+	return TRUE
 
 /datum/mob_controller/passive/hunter/do_process(time_elapsed)
-
 	if(!(. = ..()))
 		return
-
 	if(body.incapacitated() || body.current_posture?.prone || body.buckled || flee_target || !get_target())
 		return
+	process_hunting(get_target())
 
-	var/mob/living/target = get_target()
+/datum/mob_controller/passive/hunter/proc/process_hunting(atom/target)
+
 	if(!istype(target) || QDELETED(target) || !(target in view(body)))
 		set_target(null)
 		resume_wandering()
-		return
+		return FALSE
 
 	// Find or pursue the target.
 	if(!body.Adjacent(target))
 		stop_wandering()
 		body.start_automove(target)
-		return
+		return FALSE
+
+	if(!ismob(target))
+		return TRUE // Indicates a valid target that this base proc does not handle.
 
 	// Hunt/consume the target.
-	if(target.stat != DEAD)
-		try_attack_prey(target)
-
-	if(QDELETED(target))
+	. = FALSE // we handle mobs already
+	var/mob/prey = target
+	if(prey.stat != DEAD && (!is_friend(prey) || !handle_friend_hunting(prey)))
+		try_attack_prey(prey)
+	if(QDELETED(prey))
 		set_target(null)
 		resume_wandering()
 		return
-
-	if(target.stat != DEAD)
+	if(prey.stat != DEAD)
 		return
-
 	// Eat the mob.
 	set_target(null)
 	resume_wandering()
-	consume_prey(target)
+	consume_prey(prey)
+
+// Stub for hawks to return to their handler and dock with the mothership.
+/datum/mob_controller/passive/hunter/proc/handle_friend_hunting(mob/friend)
+	return FALSE
