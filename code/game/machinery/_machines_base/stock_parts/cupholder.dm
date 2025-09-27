@@ -7,7 +7,6 @@
 	part_flags = PART_FLAG_HAND_REMOVE
 	place_verb = "place"
 	eject_handler = /decl/interaction_handler/remove_held_item/cup
-	var/image/cupholder_overlay
 	var/obj/item/cup
 
 /obj/item/stock_parts/item_holder/cupholder/Destroy()

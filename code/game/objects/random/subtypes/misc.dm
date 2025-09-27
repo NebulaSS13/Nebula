@@ -117,7 +117,6 @@
 	desc = "This is some random junk."
 	icon = 'icons/obj/items/storage/trashbag.dmi'
 	icon_state = "trashbag3"
-	var/spawn_choice
 
 /obj/random/junk/spawn_choices()
 	var/static/list/spawnable_choices

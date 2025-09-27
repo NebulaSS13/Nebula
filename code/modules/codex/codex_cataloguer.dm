@@ -22,8 +22,6 @@
 	var/scan_speed_modifier = 1
 	/// How many tiles away it can scan. Changing this also changes the box size.
 	var/scan_range = 3
-	/// If another person is within this radius, they will also be credited with a successful scan.
-	var/credit_sharing_range = 14
 	/// How much to make the next scan shorter.
 	var/tmp/partial_scan_time = 0
 	/// Weakref of the thing that was last scanned if inturrupted. Used to allow for partial scans to be resumed.

@@ -845,7 +845,6 @@ FIRE ALARM
 	var/time =         1 SECOND
 	var/timing =       FALSE
 	var/last_process = 0
-	var/static/list/overlays_cache
 
 	var/sound_id
 	var/datum/sound_token/sound_token

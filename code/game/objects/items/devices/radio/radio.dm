@@ -56,7 +56,6 @@
 	var/broadcasting = FALSE
 	var/listening = TRUE
 	var/list/channels
-	var/default_color = "#6d3f40"
 	var/decrypt_all_messages = FALSE
 	var/can_use_analog = TRUE
 	var/datum/extension/network_device/radio/radio_device_type = /datum/extension/network_device/radio

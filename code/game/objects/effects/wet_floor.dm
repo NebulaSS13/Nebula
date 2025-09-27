@@ -5,7 +5,6 @@
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	simulated = FALSE
 	var/wetness = 0
-	var/image/wet_overlay = null
 	var/wet_timer_id
 
 /atom/movable/wet_floor/Initialize()

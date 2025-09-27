@@ -1,7 +1,6 @@
 /decl/background_detail/citizenship
 	abstract_type = /decl/background_detail/citizenship
 	category = /decl/background_category/citizenship
-	var/ruling_body = "Other Faction"
 	var/capital
 	var/size_heading = "Systems"
 	var/size_value

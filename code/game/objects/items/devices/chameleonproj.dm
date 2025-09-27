@@ -103,7 +103,6 @@
 	anchored = TRUE
 	is_spawnable_type = FALSE
 	movement_handlers = list(/datum/movement_handler/delay/chameleon_projector)
-	var/can_move = TRUE
 	var/obj/item/chameleon/master = null
 
 /obj/effect/dummy/chameleon/Initialize(mapload, var/obj/item/chameleon/projector)

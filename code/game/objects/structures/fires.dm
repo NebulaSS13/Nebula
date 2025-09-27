@@ -57,7 +57,6 @@
 	var/light_color_low =  "#ff0000"
 
 	var/list/affected_exterior_turfs
-	var/next_fuel_consumption = 0
 	var/last_fuel_burn_temperature = T20C
 	// TODO: Replace this and the fuel var with just tracking currently-burning matter?
 	// Or use atom fires when those are implemented?
