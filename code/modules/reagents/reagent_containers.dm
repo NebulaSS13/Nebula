@@ -14,7 +14,6 @@
 	var/volume = 30
 	var/label_text
 	var/presentation_flags = 0
-	var/show_reagent_name = FALSE
 	var/detail_color
 	var/detail_state
 
