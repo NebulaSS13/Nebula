@@ -1177,6 +1177,8 @@
 #include "code\game\objects\items\devices\cable_painter.dm"
 #include "code\game\objects\items\devices\chameleonproj.dm"
 #include "code\game\objects\items\devices\dociler.dm"
+#include "code\game\objects\items\devices\fadein.dm"
+#include "code\game\objects\items\devices\fadeout.dm"
 #include "code\game\objects\items\devices\flash.dm"
 #include "code\game\objects\items\devices\geiger.dm"
 #include "code\game\objects\items\devices\gps.dm"

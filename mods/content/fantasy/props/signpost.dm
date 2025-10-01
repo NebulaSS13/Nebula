@@ -35,21 +35,7 @@
 	var/choice = alert(user, "Are you sure you wish to depart? This will permanently remove your character from the round.", "Venture Forth?", "No", "Yes")
 	if(choice != "Yes" || QDELETED(user) || user.incapacitated() || QDELETED(src) || !user.Adjacent(src))
 		return TRUE
-	var/obj/effect/dummy/fadeout = new(get_turf(user))
-	fadeout.set_dir(dir)
-	fadeout.appearance = user // grab appearance before ghostizing in case they fall over etc
-	switch(dir)
-		if(NORTH)
-			animate(fadeout, pixel_z =  32, alpha = 0, time = 1 SECOND)
-		if(SOUTH)
-			animate(fadeout, pixel_z = -32, alpha = 0, time = 1 SECOND)
-		if(EAST)
-			animate(fadeout, pixel_w =  32, alpha = 0, time = 1 SECOND)
-		if(WEST)
-			animate(fadeout, pixel_w = -32, alpha = 0, time = 1 SECOND)
-		else
-			animate(fadeout, alpha = 0, time = 1 SECOND)
-	QDEL_IN(fadeout, 1 SECOND)
+	new /obj/effect/dummy/fadeout(get_turf(user), dir, user)
 	despawn_character(user)
 	return TRUE
 
