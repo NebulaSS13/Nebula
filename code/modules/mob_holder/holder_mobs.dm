@@ -22,7 +22,7 @@
 	var/obj/item/holder/H = new holder_type(get_turf(src))
 	H.w_class = get_object_size()
 	if(initiator == src)
-		if(!target.equip_to_slot_if_possible(H, slot_back_str, del_on_fail=0, disable_warning=1))
+		if(!target.equip_to_slot_if_possible(H, slot_back_str, del_on_fail=0, disable_warning=1) && !target.put_in_hands(H))
 			if(!silent)
 				to_chat(initiator, SPAN_WARNING("You can't climb onto [target]!"))
 			return FALSE
