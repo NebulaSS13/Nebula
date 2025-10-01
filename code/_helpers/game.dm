@@ -176,30 +176,7 @@
 
 	return L
 
-// Returns a list of mobs and/or objects in range of get_range from source. Used in radio and say code.
-/proc/get_mobs_or_objects_in_view(var/get_range, var/atom/source, var/include_mobs = 1, var/include_objects = 1)
-
-	var/turf/T = get_turf(source)
-	var/list/hear = list()
-
-	if(!T)
-		return hear
-
-	var/list/range = hear(get_range, T)
-	for(var/I in range)
-		if(ismob(I))
-			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
-			if(include_mobs)
-				var/mob/M = I
-				if(M.client)
-					hear += M
-		else if(istype(I,/obj/))
-			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
-			if(include_objects)
-				hear += I
-	return hear
-
-// Alternative to get_mobs_or_objects_in_view which only considers mobs and "listening" objects.
+// Returns a list of mobs and/or objects in range of get_range from source. Used in radio and say code. Only considers mobs and "listening" objects.
 /proc/get_listeners_in_range(turf/center, range, list/mobs, list/objs, check_ghosts=FALSE)
 	var/list/hearturfs = list()
 	FOR_DVIEW(var/turf/T, range, center, INVISIBILITY_MAXIMUM)

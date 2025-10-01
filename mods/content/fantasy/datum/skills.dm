@@ -221,8 +221,11 @@
 		"Master"      = "You're a specialized animal caretaker. You can care for even the most exotic, fragile, or dangerous animals."
 	)
 
-/obj/item/food/egg/examine_skill = SKILL_HUSBANDRY
-/mob/living/simple_animal/chick/examine_skill = SKILL_HUSBANDRY
+/obj/item/food/egg
+	examine_skill = SKILL_HUSBANDRY
+
+/mob/living/simple_animal/chick
+	examine_skill = SKILL_HUSBANDRY
 
 /datum/extension/milkable
 	milking_skill = SKILL_HUSBANDRY

@@ -7,6 +7,7 @@
 	storage = /datum/storage/backpack/crow
 	material = /decl/material/solid/organic/cloth
 
+// TODO: Merge with /mob/living/simple_animal/passive/bird/crow
 /mob/living/simple_animal/crow
 	name = "crow"
 	desc = "A large crow. Caw caw."
@@ -15,7 +16,7 @@
 	mob_size = MOB_SIZE_SMALL
 	speak_emote  = list("caws")
 	ai = /datum/mob_controller/crow
-	natural_weapon = /obj/item/natural_weapon/crow_claws
+	natural_weapon = /obj/item/natural_weapon/bird_claws
 	universal_speak = TRUE
 
 /datum/mob_controller/crow
@@ -34,7 +35,7 @@
 /mob/living/simple_animal/crow/get_bodytype()
 	return GET_DECL(/decl/bodytype/animal/crow)
 
-/obj/item/natural_weapon/crow_claws
+/obj/item/natural_weapon/bird_claws
 	name = "claws"
 	gender = PLURAL
 	attack_verb = "clawed"

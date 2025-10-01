@@ -11,6 +11,7 @@
 	#include "../../mods/content/beekeeping/_beekeeping.dme"
 	#include "../../mods/content/bigpharma/_bigpharma.dme"
 	#include "../../mods/content/biomods/_biomods.dme"
+	#include "../../mods/content/birds/_birds.dme"
 	#include "../../mods/content/blacksmithy/_blacksmithy.dme"
 	#include "../../mods/content/blob/_blob.dme"
 	#include "../../mods/content/brain_interface/_brain_interface.dme"
