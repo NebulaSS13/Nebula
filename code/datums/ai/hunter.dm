@@ -21,6 +21,8 @@
 	body.ClickOn(prey)
 
 /datum/mob_controller/passive/hunter/proc/consume_prey(mob/living/prey)
+	if(prey.stat != DEAD)
+		return
 	body.visible_message(SPAN_DANGER("\The [body] consumes the body of \the [prey]!"))
 	var/remains_type = prey.get_remains_type()
 	if(remains_type)
@@ -32,6 +34,8 @@
 		prey.gib()
 	else
 		qdel(prey)
+	set_target(null)
+	resume_wandering()
 
 /datum/mob_controller/passive/hunter/get_target(atom/new_target)
 	if(isnull(hunt_target))
@@ -78,13 +82,9 @@
 		set_target(null)
 		resume_wandering()
 		return
-	if(prey.stat != DEAD)
-		return
 	// Eat the mob.
-	set_target(null)
-	resume_wandering()
 	consume_prey(prey)
 
 // Stub for hawks to return to their handler and dock with the mothership.
-/datum/mob_controller/passive/hunter/proc/handle_friend_hunting(mob/friend)
+/datum/mob_controller/passive/hunter/proc/handle_friend_hunting(mob/user)
 	return FALSE
