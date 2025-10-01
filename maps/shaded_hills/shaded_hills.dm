@@ -9,6 +9,7 @@
 	#include "../../mods/content/fantasy/_fantasy.dme"
 	#include "../../mods/content/fishing/_fishing.dme"
 	#include "../../mods/content/blacksmithy/_blacksmithy.dme"
+	#include "../../mods/content/birds/_birds.dme"
 
 	#include "../../mods/mobs/spiders/_spiders.dme"
 
