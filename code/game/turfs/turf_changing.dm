@@ -64,6 +64,7 @@
 	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
 	var/old_dynamic_lighting = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
+	var/old_z_opacity        = z_flags & ZM_ALLOW_LIGHTING
 	var/old_flooded =          flooded
 	var/old_outside =          is_outside
 	var/old_is_open =          is_open()
@@ -144,6 +145,11 @@
 
 	if (old_ambience != ambient_light || old_ambience_mult != ambient_light_multiplier)
 		update_ambient_light(FALSE)
+
+	var/new_z_opacity = z_flags & ZM_ALLOW_LIGHTING
+	if (new_z_opacity != old_z_opacity)
+		for (var/datum/lighting_corner/corn in corners)
+			corn.rebuild_ztraversal(!new_z_opacity)
 
 	var/tidlu = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
 	if ((old_opacity != opacity) || (tidlu != old_dynamic_lighting) || force_lighting_update)
