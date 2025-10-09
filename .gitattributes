@@ -14,3 +14,4 @@ html/changelog.html merge=union
 *.dmm text eol=crlf
 *.txt text eol=crlf
 *.md text eol=crlf
+*.yml text eol=crlf
