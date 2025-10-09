@@ -254,6 +254,8 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 
 /datum/map/proc/setup_map()
 
+	populate_branches()
+
 	if(!length(loadout_categories))
 		loadout_categories = list()
 		for(var/decl_type in decls_repository.get_decls_of_type(/decl/loadout_category))
