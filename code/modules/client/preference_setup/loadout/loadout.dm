@@ -243,7 +243,7 @@
 				var/good_branch = 0
 				entry += "<br><i>"
 				for(var/branch in branches)
-					var/datum/mil_branch/player_branch = mil_branches.get_branch(branch)
+					var/datum/mil_branch/player_branch = global.using_map.get_branch(branch)
 					if(player_branch.type in gear.allowed_branches)
 						branch_checks += "<font color=55cc55>[player_branch.name]</font>"
 						good_branch = 1

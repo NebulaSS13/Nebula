@@ -68,7 +68,7 @@ var/global/list/end_titles
 		var/used_name = H.real_name
 		var/datum/computer_file/report/crew_record/record = get_crewmember_record(H.real_name)
 		if(record && record.get_rank())
-			var/datum/mil_rank/rank = mil_branches.get_rank(record.get_branch(), record.get_rank())
+			var/datum/mil_rank/rank = global.using_map.get_rank(record.get_branch(), record.get_rank())
 			if(rank.name_short)
 				used_name = "[rank.name_short] [used_name]"
 		var/showckey = 0

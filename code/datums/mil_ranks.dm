@@ -2,94 +2,13 @@
  *  Datums for military branches and ranks
  *
  *  Map datums can optionally specify a list of /datum/mil_branch paths. These paths
- *  are used to initialize the global mil_branches object, which contains a list of
- *  branch objects the map uses. Each branch definition specifies a list of
+ *  are used to initialize ranks for the map, which contains a list of
+ *  branch objects used on the map. Each branch definition specifies a list of
  *  /datum/mil_rank paths, which are ranks available to that branch.
  *
  *  Which branches and ranks can be selected for spawning is specifed in global.using_map
  *  and each branch datum definition, respectively.
  */
-
-var/global/datum/mil_branches/mil_branches = new()
-
-/**
- *  Global object for handling branches
- */
-/datum/mil_branches
-	/// All branches that exist
-	var/list/branches = list()
-	/// Branches that a player can choose for spawning, not including species restrictions.
-	var/list/spawn_branches_ = list()
-	/// Branches that a player can choose for spawning, with species restrictions. Populated on a needed basis
-	var/list/spawn_branches_by_species_ = list()
-
-/**
- *  Retrieve branch object by branch name
- */
-/datum/mil_branches/proc/get_branch(var/branch_name)
-	if(ispath(branch_name, /datum/mil_branch))
-		var/datum/mil_branch/branch = branch_name
-		branch_name = initial(branch.name)
-	if(branch_name && branch_name != "None")
-		return branches[branch_name]
-
-/**
- *  Retrieve branch object by branch type
- */
-/datum/mil_branches/proc/get_branch_by_type(var/branch_type)
-	for(var/name in branches)
-		if (istype(branches[name], branch_type))
-			return branches[name]
-
-/**
- *  Retrieve a rank object from given branch by name
- */
-/datum/mil_branches/proc/get_rank(var/branch_name, var/rank_name)
-	if(ispath(rank_name))
-		var/datum/mil_rank/rank = rank_name
-		rank_name = initial(rank.name)
-	if(rank_name && rank_name != "None")
-		var/datum/mil_branch/branch = get_branch(branch_name)
-		if(branch)
-			return branch.ranks[rank_name]
-
-/**
- *  Return all spawn branches for the given input
- */
-/datum/mil_branches/proc/spawn_branches(var/decl/species/S)
-	if(!S)
-		return spawn_branches_.Copy()
-	. = LAZYACCESS(spawn_branches_by_species_, S)
-	if(!.)
-		. = list()
-		LAZYSET(spawn_branches_by_species_, S, .)
-		for(var/spawn_branch in spawn_branches_)
-			if(!global.using_map.is_species_branch_restricted(S, spawn_branches_[spawn_branch]))
-				. += spawn_branch
-
-/**
- *  Return all spawn ranks for the given input
- */
-/datum/mil_branches/proc/spawn_ranks(var/branch_name, var/decl/species/S)
-	var/datum/mil_branch/branch = get_branch(branch_name)
-	return branch && branch.spawn_ranks(S)
-
-/**
- *  Return a true value if branch_name is a valid spawn branch key
- */
-/datum/mil_branches/proc/is_spawn_branch(var/branch_name, var/decl/species/S)
-	return (branch_name in spawn_branches(S))
-
-
-/**
- *  Return a true value if rank_name is a valid spawn rank in branch under branch_name
- */
-/datum/mil_branches/proc/is_spawn_rank(var/branch_name, var/rank_name, var/decl/species/S)
-	var/datum/mil_branch/branch = get_branch(branch_name)
-	if(branch && (rank_name in branch.spawn_ranks(S)))
-		return TRUE
-	else
-		return FALSE
 
 /**
  *  A single military branch, such as Fleet or Marines
@@ -141,34 +60,6 @@ var/global/datum/mil_branches/mil_branches = new()
 		for(var/spawn_rank in spawn_ranks_)
 			if(!global.using_map.is_species_rank_restricted(S, src, spawn_ranks_[spawn_rank]))
 				. += spawn_rank
-
-
-// todo: should this be on /datum/map? this will need heavy reworking if we promote submaps from second to first class map status anyway
-/**
- *  Populate the global branches list from global.using_map
- */
-/proc/populate_branches()
-	if(!(global.using_map.flags & MAP_HAS_BRANCH) && !(global.using_map.flags & MAP_HAS_RANK))
-		mil_branches.branches  = null
-		mil_branches.spawn_branches_ = null
-		mil_branches.spawn_branches_by_species_ = null
-		return 1
-
-	mil_branches.branches  = list()
-	mil_branches.spawn_branches_ = list()
-	mil_branches.spawn_branches_by_species_ = list()
-	for(var/branch_path in global.using_map.branch_types)
-		if(!ispath(branch_path, /datum/mil_branch))
-			PRINT_STACK_TRACE("populate_branches() attempted to instantiate object with path [branch_path], which is not a subtype of /datum/mil_branch.")
-			continue
-
-		var/datum/mil_branch/branch = new branch_path ()
-		mil_branches.branches[branch.name] = branch
-
-		if(branch_path in global.using_map.spawn_branch_types)
-			mil_branches.spawn_branches_[branch.name] = branch
-
-	return 1
 
 /**
  *  A military rank

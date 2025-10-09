@@ -266,7 +266,7 @@ FIELD_LONG("Exploitable Information", antag_record, access_hacked, access_hacked
 //Options builderes
 /datum/report_field/options/crew_record/rank/proc/record_ranks()
 	var/datum/computer_file/report/crew_record/record = owner
-	var/datum/mil_branch/branch = mil_branches.get_branch(record.get_branch())
+	var/datum/mil_branch/branch = global.using_map.get_branch(record.get_branch())
 	if(!branch)
 		return
 	. = list()
@@ -287,8 +287,8 @@ FIELD_LONG("Exploitable Information", antag_record, access_hacked, access_hacked
 /datum/report_field/options/crew_record/branch/proc/record_branches()
 	. = list()
 	. |= "Unset"
-	for(var/branch in mil_branches.branches)
-		var/datum/mil_branch/branch_datum = mil_branches.branches[branch]
+	for(var/branch in global.using_map.branches)
+		var/datum/mil_branch/branch_datum = global.using_map.branches[branch]
 		. |= branch_datum.name
 
 #undef GETTER_SETTER

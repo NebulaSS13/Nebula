@@ -387,7 +387,7 @@ SUBSYSTEM_DEF(jobs)
 		if(player.client.prefs.alternate_option == BE_ASSISTANT)
 			var/datum/job/ass = global.using_map.default_job_type
 			if((global.using_map.flags & MAP_HAS_BRANCH) && player.client.prefs.branches[initial(ass.title)])
-				var/datum/mil_branch/branch = mil_branches.get_branch(player.client.prefs.branches[initial(ass.title)])
+				var/datum/mil_branch/branch = global.using_map.get_branch(player.client.prefs.branches[initial(ass.title)])
 				ass = branch.assistant_job
 			assign_role(player, initial(ass.title), mode = mode)
 	//For ones returning to lobby
@@ -475,9 +475,9 @@ SUBSYSTEM_DEF(jobs)
 	if(job)
 		if(H.client)
 			if(global.using_map.flags & MAP_HAS_BRANCH)
-				H.char_branch = mil_branches.get_branch(H.client.prefs.branches[job_title])
+				H.char_branch = global.using_map.get_branch(H.client.prefs.branches[job_title])
 			if(global.using_map.flags & MAP_HAS_RANK)
-				H.char_rank = mil_branches.get_rank(H.client.prefs.branches[job_title], H.client.prefs.ranks[job_title])
+				H.char_rank = global.using_map.get_rank(H.client.prefs.branches[job_title], H.client.prefs.ranks[job_title])
 
 		// Transfers the skill settings for the job to the mob
 		H.skillset.obtain_from_client(job, H.client)
