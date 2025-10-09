@@ -185,7 +185,7 @@
 					skill_link = "<a href='byond://?src=\ref[src];set_skills=[title]'>View Skills</a>"
 				skill_link = "<td>[skill_link]</td>"
 
-				if(!user.skillset.skills_transferable)
+				if(!user.skillset?.skills_transferable)
 					skill_link = ""
 
 				// Begin assembling the actual HTML.
