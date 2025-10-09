@@ -1,4 +1,5 @@
 /datum/map
+	var/datum/mil_branches/mil_branches = new()
 	var/list/branch_types                         // list of branch datum paths for military branches available on this map
 	var/list/spawn_branch_types                   // subset of above for branches a player can spawn in with
 

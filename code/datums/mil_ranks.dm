@@ -10,8 +10,6 @@
  *  and each branch datum definition, respectively.
  */
 
-var/global/datum/mil_branches/mil_branches = new()
-
 /**
  *  Global object for handling branches
  */
@@ -147,7 +145,7 @@ var/global/datum/mil_branches/mil_branches = new()
 /**
  *  Populate the global branches list from global.using_map
  */
-/proc/populate_branches()
+/datum/map/proc/populate_branches()
 	if(!(global.using_map.flags & MAP_HAS_BRANCH) && !(global.using_map.flags & MAP_HAS_RANK))
 		mil_branches.branches  = null
 		mil_branches.spawn_branches_ = null
