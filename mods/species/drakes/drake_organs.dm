@@ -11,6 +11,7 @@
 	relative_size = 60
 	min_regeneration_cutoff_threshold = 2
 	max_regeneration_cutoff_threshold = 5
+	has_stat_info = TRUE
 	var/datum/reagents/sap_crop
 
 /obj/item/organ/internal/drake_gizzard/Initialize()
@@ -22,14 +23,7 @@
 	if(owner && owner.stat != DEAD && !is_broken() && sap_crop && sap_crop.total_volume < 10)
 		sap_crop.add_reagent(/decl/material/liquid/sifsap, 0.5)
 
-/obj/item/organ/internal/drake_gizzard/do_install(var/mob/living/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
-	. = ..()
-	if(owner)
-		LAZYDISTINCTADD(owner.stat_organs, src)
-
 /obj/item/organ/internal/drake_gizzard/do_uninstall(in_place, detach, ignore_children, update_icon)
-	if(owner)
-		LAZYREMOVE(owner.stat_organs, src)
 	. = ..()
 	if(sap_crop?.total_volume)
 		if(reagents)
