@@ -415,13 +415,29 @@ var/global/list/mob/living/forced_ambiance_list = new
 		sound_to(L, sound(null, channel = sound_channels.lobby_channel))
 		forced_ambiance_list -= L
 
-/area/proc/gravitychange(var/gravitystate = 0)
+/area/proc/gravitychange(gravitystate = 0, skip_thunk = FALSE)
 	has_gravity = gravitystate
-
+	if(skip_thunk)
+		// For mass-area-gravity-modification where it might be more efficient to loop over mobs manually after.
+		return
 	for(var/mob/M in src)
 		if(has_gravity)
 			thunk(M)
 		M.update_floating()
+
+/proc/mass_gravitychange(list/areas_to_change, gravitystate = 0)
+	var/list/lookup_list = new /list(length(areas_to_change))
+	for(var/area/changing_area in areas_to_change)
+		changing_area.gravitychange(gravitystate = gravitystate, skip_thunk = TRUE)
+		lookup_list[changing_area] = TRUE // for faster membership checks
+	// thunks do literally nothing for non-human mobs, but we'll be future-proof and do all living mobs
+	for(var/mob/living/victim in global.living_mob_list_)
+		var/area/victim_area = get_area(victim)
+		if(!lookup_list[victim_area])
+			continue
+		if(victim_area.has_gravity)
+			victim_area.thunk(victim)
+		victim.update_floating()
 
 /area/proc/thunk(mob/mob)
 	if(isspaceturf(get_turf(mob))) // Can't fall onto nothing.

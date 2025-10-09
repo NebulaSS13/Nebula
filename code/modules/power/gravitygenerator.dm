@@ -1,16 +1,15 @@
-// It... uses a lot of power.  Everything under power is engineering stuff, at least.
-
 /obj/machinery/computer/gravity_control_computer
-	name = "Gravity Generator Control"
-	desc = "A computer to control a local gravity generator.  Qualified personnel only."
+	name = "gravity generator control computer"
+	desc = "A computer to control a local gravity generator. Qualified personnel only."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "airtunnel0e"
 	anchored = TRUE
 	density = TRUE
 	var/obj/machinery/gravity_generator/gravity_generator
 
-/obj/machinery/gravity_generator/
-	name = "Gravitational Generator"
+// Wait. This isn't even used anywhere?
+/obj/machinery/gravity_generator
+	name = "gravitational generator"
 	desc = "A device which produces a graviton field when set up."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "TheSingGen"
@@ -18,7 +17,7 @@
 	density = TRUE
 	idle_power_usage = 200
 	active_power_usage = 1000
-	var/on = 1
+	var/on = TRUE
 	var/list/localareas = list()
 	var/effectiverange = 25
 
@@ -32,9 +31,9 @@
 	locatelocalareas()
 
 /obj/machinery/computer/gravity_control_computer/proc/updatemodules()
-	for(dir in list(NORTH,EAST,SOUTH,WEST))
-		gravity_generator = locate(/obj/machinery/gravity_generator/, get_step(src, dir))
-		if (gravity_generator)
+	for(var/check_dir in global.cardinal)
+		gravity_generator = locate(/obj/machinery/gravity_generator, get_step(src, check_dir))
+		if(gravity_generator)
 			return
 
 /obj/machinery/gravity_generator/proc/locatelocalareas()
@@ -85,25 +84,23 @@
 	onclose(user, "gravgen")
 
 
+/obj/machinery/gravity_generator/proc/toggle_gravity()
+	on = !on
+	update_use_power(on ? POWER_USE_ACTIVE : POWER_USE_IDLE)
+	if(on)
+		mass_gravitychange(localareas, TRUE)
+	else
+		var/list/still_covered_areas = list()
+		// We do it this way to avoid nested loops, and also because gravity generators are relatively rare.
+		for(var/obj/machinery/gravity_generator/other_generator in SSmachines.machinery)
+			if(other_generator.on)
+				still_covered_areas |= localareas & other_generator.localareas
+		mass_gravitychange(localareas - still_covered_areas, FALSE)
+
 /obj/machinery/computer/gravity_control_computer/OnTopic(user, href_list)
 	if((. = ..()))
 		return
 
 	if(href_list["gentoggle"])
 		. = TOPIC_REFRESH
-		if(gravity_generator.on)
-			gravity_generator.on = 0
-
-			for(var/area/A in gravity_generator.localareas)
-				var/obj/machinery/gravity_generator/G
-				for(G in SSmachines.machinery)
-					if((A in G.localareas) && (G.on))
-						break
-				if(!G)
-					A.gravitychange(0)
-				CHECK_TICK
-		else
-			for(var/area/A in gravity_generator.localareas)
-				gravity_generator.on = 1
-				A.gravitychange(1)
-				CHECK_TICK
+		gravity_generator.toggle_gravity()
