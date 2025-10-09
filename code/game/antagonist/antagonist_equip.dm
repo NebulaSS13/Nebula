@@ -21,10 +21,13 @@
 		var/decl/outfit/outfit = GET_DECL(default_outfit)
 		outfit.equip_outfit(player)
 
-	if(default_access)
-		var/obj/item/card/id/id = player.get_equipped_item(slot_wear_id_str)
-		if(id)
+	var/obj/item/card/id/id = player.get_equipped_item(slot_wear_id_str)
+	if(id)
+		if(default_access)
 			LAZYDISTINCTADD(id.access, default_access)
+		if(id_title)
+			id.assignment = id_title
+			id.position = id_title
 
 	if(rig_type)
 		equip_rig(rig_type, player)
