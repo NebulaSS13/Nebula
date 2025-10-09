@@ -17,7 +17,7 @@
 	var/mask_type = /obj/item/clothing/mask/breath/emergency
 	var/icon_state_open = "emerg_open"
 	var/icon_state_closed = "emerg"
-	var/icon_state_active // TODO implement
+	var/icon_state_active
 
 	power_channel = ENVIRON
 	idle_power_usage = 10
@@ -136,16 +136,24 @@
 		return
 	return 1
 
+/obj/machinery/oxygen_pump/on_update_icon()
+	if(stat & MAINT)
+		icon_state = icon_state_open
+	else if(icon_state_active && use_power == POWER_USE_ACTIVE) // the base type doesn't have an active state
+		icon_state = icon_state_active
+	else
+		icon_state = icon_state_closed
+
 /obj/machinery/oxygen_pump/attackby(obj/item/used_item, mob/user)
 	if(IS_SCREWDRIVER(used_item))
 		stat ^= MAINT
 		user.visible_message(SPAN_NOTICE("\The [user] [stat & MAINT ? "opens" : "closes"] \the [src]."), SPAN_NOTICE("You [stat & MAINT ? "open" : "close"] \the [src]."))
-		if(stat & MAINT)
-			icon_state = icon_state_open
-		if(!stat)
-			icon_state = icon_state_closed
+		queue_icon_update()
 		return TRUE
-	if(istype(used_item, /obj/item/tank) && (stat & MAINT))
+	if(istype(used_item, /obj/item/tank))
+		if(!(stat & MAINT))
+			to_chat(user, SPAN_WARNING("Please open the maintenance hatch first."))
+			return TRUE
 		if(tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has a tank installed!"))
 			return TRUE
@@ -154,9 +162,6 @@
 		tank = used_item
 		user.visible_message(SPAN_NOTICE("\The [user] installs \the [tank] into \the [src]."), SPAN_NOTICE("You install \the [tank] into \the [src]."))
 		src.add_fingerprint(user)
-		return TRUE
-	if(istype(used_item, /obj/item/tank) && !stat)
-		to_chat(user, SPAN_WARNING("Please open the maintenance hatch first."))
 		return TRUE
 	return FALSE // TODO: should this be a parent call? do we want this to be (de)constructable?
 
