@@ -103,7 +103,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	var/rads = 500
 	SSradiation.radiate(source, rads)
 
-/obj/machinery/power/supermatter
+/obj/structure/supermatter
 	name = "supermatter crystal"
 	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
 	icon = 'icons/obj/supermatter_48.dmi'
@@ -189,6 +189,9 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	var/datum/composite_sound/supermatter/soundloop
 
+	// A uniquely-identifying number assigned to this supermatter crystal. Mostly used by the supermatter monitoring console.
+	var/uid = 0
+
 	var/damage_animation = FALSE //are we doing our damage animation?
 
 	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minminum red and amber and maximum amber and red, in that order
@@ -198,26 +201,28 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		list("name" = SUPERMATTER_DATA_EPR,         "min_h" = -1, "min_l" = 1.0, "max_l" = 2.5,  "max_h" = 4.0)
 	)
 
-/obj/machinery/power/supermatter/Initialize()
+/obj/structure/supermatter/Initialize()
 	. = ..()
-	uid = gl_uid++
+	uid = sequential_id(/obj/structure/supermatter)
 	soundloop = new(list(src), TRUE)
 	update_icon()
 	add_filter("outline", 1, list(type = "drop_shadow", size = 0, color = COLOR_WHITE, x = 0, y = 0))
+	START_PROCESSING(SSsupermatter, src)
 
-/obj/machinery/power/supermatter/Destroy()
-	. = ..()
+/obj/structure/supermatter/Destroy()
 	QDEL_NULL(soundloop)
+	STOP_PROCESSING(SSsupermatter, src)
+	. = ..()
 
-/obj/machinery/power/supermatter/on_update_icon()
+/obj/structure/supermatter/on_update_icon()
 	. = ..()
 	underlays.Cut()
 	underlays += mutable_appearance(icon, "[icon_state]_underplate", flags = RESET_COLOR, plane = plane, layer = OBJ_LAYER)
 
-/obj/machinery/power/supermatter/get_matter_amount_modifier()
+/obj/structure/supermatter/get_matter_amount_modifier()
 	. = ..() * (1/HOLLOW_OBJECT_MATTER_MULTIPLIER) * 10 // Big solid chunk of matter.
 
-/obj/machinery/power/supermatter/proc/handle_admin_warnings()
+/obj/structure/supermatter/proc/handle_admin_warnings()
 	if(disable_adminwarn)
 		return
 
@@ -238,7 +243,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	else
 		aw_EPR = FALSE
 
-/obj/machinery/power/supermatter/proc/status_adminwarn_check(var/min_status, var/current_state, var/message, var/send_webhook = FALSE)
+/obj/structure/supermatter/proc/status_adminwarn_check(var/min_status, var/current_state, var/message, var/send_webhook = FALSE)
 	var/status = get_status()
 	if(status >= min_status)
 		if(!current_state)
@@ -249,7 +254,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	else
 		return FALSE
 
-/obj/machinery/power/supermatter/proc/get_epr()
+/obj/structure/supermatter/proc/get_epr()
 	var/turf/T = get_turf(src)
 	if(!istype(T))
 		return
@@ -258,7 +263,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		return 0
 	return round((air.total_moles / air.group_multiplier) / 23.1, 0.01)
 
-/obj/machinery/power/supermatter/proc/get_status()
+/obj/structure/supermatter/proc/get_status()
 	var/turf/T = get_turf(src)
 	if(!T)
 		return SUPERMATTER_ERROR
@@ -286,7 +291,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	return SUPERMATTER_INACTIVE
 
 
-/obj/machinery/power/supermatter/proc/explode()
+/obj/structure/supermatter/proc/explode()
 	set waitfor = 0
 
 	if(exploded)
@@ -354,7 +359,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		explosion(TS, explosion_power/2, explosion_power, explosion_power * 2, explosion_power * 4, 1)
 		qdel(src)
 
-/obj/machinery/power/supermatter/get_examine_strings(mob/user, distance, infix, suffix)
+/obj/structure/supermatter/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(user.skill_check(SKILL_ENGINES, SKILL_EXPERT))
 		var/integrity_message
@@ -373,19 +378,19 @@ var/global/list/supermatter_delam_accent_sounds = list(
 			. += "Eyeballing it, you place the relative EER at around [display_power] MeV/cm3."
 
 //Changes color and luminosity of the light to these values if they were not already set
-/obj/machinery/power/supermatter/proc/shift_light(var/lum, var/clr)
+/obj/structure/supermatter/proc/shift_light(var/lum, var/clr)
 	if(lum != light_range || abs(power - last_power) > 10 || clr != light_color)
 		set_light(lum, LIGHT_POWER_CALC, clr)
 		last_power = power
 
-/obj/machinery/power/supermatter/proc/get_integrity()
+/obj/structure/supermatter/proc/get_integrity()
 	var/integrity = damage / explosion_point
 	integrity = round(100 - integrity * 100)
 	integrity = integrity < 0 ? 0 : integrity
 	return integrity
 
 
-/obj/machinery/power/supermatter/proc/announce_warning()
+/obj/structure/supermatter/proc/announce_warning()
 	var/integrity = get_integrity()
 	var/alert_msg = " Integrity at [integrity]%"
 
@@ -418,7 +423,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 			public_alert = 0
 
 
-/obj/machinery/power/supermatter/Process()
+/obj/structure/supermatter/Process()
 	var/turf/L = loc
 
 	if(isnull(L))		// We have a null turf...something is wrong, stop processing this entity.
@@ -553,7 +558,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	return 1
 
-/obj/machinery/power/supermatter/proc/start_damage_animation()
+/obj/structure/supermatter/proc/start_damage_animation()
 	if(damage_animation)
 		return
 	if(!get_filter("rays"))
@@ -565,10 +570,10 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	animate(time = 2 SECONDS, size = 10, loop=-1, flags = ANIMATION_PARALLEL)
 	addtimer(CALLBACK(src, PROC_REF(finish_damage_animation)), 12 SECONDS)
 
-/obj/machinery/power/supermatter/proc/finish_damage_animation()
+/obj/structure/supermatter/proc/finish_damage_animation()
 	damage_animation = FALSE
 
-/obj/machinery/power/supermatter/bullet_act(var/obj/item/projectile/Proj)
+/obj/structure/supermatter/bullet_act(var/obj/item/projectile/Proj)
 	var/turf/L = loc
 	if(!istype(L))		// We don't run process() when we are in space
 		return 0	// This stops people from being able to really power up the supermatter
@@ -582,23 +587,23 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		damage += proj_damage * config_bullet_energy
 	return 0
 
-/obj/machinery/power/supermatter/attack_robot(mob/user)
+/obj/structure/supermatter/attack_robot(mob/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/supermatter/attack_ai(mob/living/silicon/ai/user)
+/obj/structure/supermatter/attack_ai(mob/living/silicon/ai/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/supermatter/attack_ghost(mob/user)
+/obj/structure/supermatter/attack_ghost(mob/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/supermatter/attack_hand(mob/user)
+/obj/structure/supermatter/attack_hand(mob/user)
 	return Consume(null, user, TRUE) || ..()
 
 // This is purely informational UI that may be accessed by AIs or robots
-/obj/machinery/power/supermatter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/structure/supermatter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 
 	data["integrity_percentage"] = round(get_integrity())
@@ -624,7 +629,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/power/supermatter/attackby(obj/item/used_item, mob/user)
+/obj/structure/supermatter/attackby(obj/item/used_item, mob/user)
 
 	if(istype(used_item, /obj/item/stack/tape_roll/duct_tape))
 		var/obj/item/stack/tape_roll/duct_tape/T = used_item
@@ -648,11 +653,11 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
 	return TRUE
 
-/obj/machinery/power/supermatter/Bumped(atom/AM)
+/obj/structure/supermatter/Bumped(atom/AM)
 	if(!Consume(null, AM))
 		return ..()
 
-/obj/machinery/power/supermatter/proc/Consume(var/mob/living/user, var/obj/item/thing, var/touched)
+/obj/structure/supermatter/proc/Consume(var/mob/living/user, var/obj/item/thing, var/touched)
 	. = try_supermatter_consume(user, thing, src, touched)
 	if(. <= 0)
 		return
@@ -663,19 +668,19 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	for(var/atom/A in range(pull_range, target))
 		A.singularity_pull(target, pull_power)
 
-/obj/machinery/power/supermatter/GotoAirflowDest(n) //Supermatter not pushed around by airflow
+/obj/structure/supermatter/GotoAirflowDest(n) //Supermatter not pushed around by airflow
 	return
 
-/obj/machinery/power/supermatter/RepelAirflowDest(n)
+/obj/structure/supermatter/RepelAirflowDest(n)
 	return
 
-/obj/machinery/power/supermatter/explosion_act(var/severity)
+/obj/structure/supermatter/explosion_act(var/severity)
 	. = ..()
 	if(.)
 		power *= max(1, 5 - severity)
 		log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
 
-/obj/machinery/power/supermatter/singularity_act()
+/obj/structure/supermatter/singularity_act()
 	if(!src.loc)
 		return
 
@@ -689,10 +694,10 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	qdel(src)
 	return 50000
 
-/obj/machinery/power/supermatter/get_artifact_scan_data()
+/obj/structure/supermatter/get_artifact_scan_data()
 	return "Superdense crystalline structure - appears to have been shaped or hewn, lattice is approximately 20 times denser than should be possible."
 
-/obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
+/obj/structure/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
 	name = "supermatter shard"
 	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. <span class='danger'>You get headaches just from looking at it.</span>"
 	icon = 'icons/obj/supermatter_32.dmi'
@@ -708,14 +713,14 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	pull_time = 150
 	explosion_power = 3
 
-/obj/machinery/power/supermatter/medium
+/obj/structure/supermatter/medium
 	icon = 'icons/obj/supermatter_32.dmi'
 	w_class = (ITEM_SIZE_STRUCTURE + ITEM_SIZE_LARGE_STRUCTURE) / 2 // halfway between a shard and a normal SM
 
-/obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
+/obj/structure/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
 
-/obj/machinery/power/supermatter/shard/singularity_act()
+/obj/structure/supermatter/shard/singularity_act()
 	src.forceMove(null)
 	qdel(src)
 	return 5000

@@ -101,7 +101,7 @@
 	if(!last)
 		return ENGINE_SETUP_DELAYED
 	..()
-	var/obj/machinery/power/supermatter/SM = locate() in get_turf(src)
+	var/obj/structure/supermatter/SM = locate() in get_turf(src)
 	if(!SM)
 		log_and_message_admins("## ERROR: Unable to locate supermatter core at [x] [y] [z]!")
 		return ENGINE_SETUP_ERROR
