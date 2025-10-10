@@ -1,0 +1,141 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/table/wood/ebony,
+/obj/item/bladed/folding,
+/obj/item/rock/flint/striker,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"h" = (
+/obj/structure/drying_rack/ebony,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"k" = (
+/turf/floor/path/basalt,
+/area/template_noop)
+"o" = (
+/obj/structure/reagent_dispensers/barrel/ebony,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"r" = (
+/obj/structure/wall_sconce{
+	dir = 8
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"t" = (
+/obj/structure/working/spinning_wheel/twisting_bench/ebony,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"y" = (
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"C" = (
+/obj/structure/table/wood/ebony,
+/obj/item/chems/glass/mortar,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"D" = (
+/obj/structure/wall_sconce{
+	dir = 4
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"G" = (
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"S" = (
+/obj/structure/closet/crate/chest/ebony,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"U" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+"V" = (
+/obj/structure/door/ebony,
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"X" = (
+/obj/random/hostile/dungeon,
+/turf/floor/path/basalt,
+/area/template_noop)
+
+(1,1,1) = {"
+U
+U
+U
+U
+U
+U
+U
+U
+"}
+(2,1,1) = {"
+U
+h
+r
+C
+a
+r
+S
+U
+"}
+(3,1,1) = {"
+U
+h
+y
+y
+y
+y
+S
+U
+"}
+(4,1,1) = {"
+U
+t
+y
+k
+k
+y
+o
+U
+"}
+(5,1,1) = {"
+U
+S
+y
+k
+X
+y
+o
+U
+"}
+(6,1,1) = {"
+U
+h
+y
+y
+y
+y
+S
+U
+"}
+(7,1,1) = {"
+U
+h
+G
+D
+G
+G
+S
+U
+"}
+(8,1,1) = {"
+U
+U
+U
+U
+U
+V
+U
+U
+"}

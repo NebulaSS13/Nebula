@@ -5,8 +5,8 @@
 
 	if (!check_rights(R_FUN)) return
 
-	var/datum/map_template/template = input(usr, "Choose a Map Template to place at your CURRENT LOCATION","Place Map Template") as null|anything in SSmapping.spawnable_map_templates
-	if(!istype(template))
+	var/datum/map_template/map = input(usr, "Choose a Map Template to place at your CURRENT LOCATION","Place Map Template") as null|anything in SSmapping.spawnable_map_templates
+	if(!istype(map))
 		return
 
 	var/turf/T = get_turf(usr)

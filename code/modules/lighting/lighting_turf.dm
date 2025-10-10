@@ -40,7 +40,8 @@
 // Builds a lighting overlay for us, but only if our area is dynamic.
 /turf/proc/lighting_build_overlay(now = FALSE)
 	if (lighting_overlay)
-		CRASH("Attempted to create lighting_overlay on tile that already had one.")
+		//error("Attempted to create lighting_overlay on tile that already had one ([x],[y],[z]).")
+		return
 
 	if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
 		if (!lighting_corners_initialised || !corners)

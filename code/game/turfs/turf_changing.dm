@@ -75,7 +75,7 @@
 	var/old_alpha_mask_state = get_movable_alpha_mask_state(null)
 	var/old_event_listeners =  event_listeners
 	var/old_listening_to =     _listening_to
-
+	var/old_maptext =          maptext
 	var/old_ambience =         ambient_light
 	var/old_ambience_mult =    ambient_light_multiplier
 	var/old_ambient_light_old_r = ambient_light_old_r
@@ -185,6 +185,7 @@
 		if(changed_turf.zone_membership_candidate != old_zone_membership_candidate)
 			update_external_atmos_participation()
 
+	changed_turf.maptext = old_maptext
 	changed_turf.update_weather(force_update_below = changed_turf.is_open() != old_is_open)
 
 	if(keep_height)

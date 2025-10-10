@@ -66,6 +66,11 @@
 	color = "#41311b"
 	floor_type = /turf/floor/dirt
 
+/turf/wall/natural/clay
+	material = /decl/material/solid/clay
+	color = "#807f7a"
+	floor_type = /turf/floor/clay
+
 #define MATERIAL_NATURAL_TURFS(ID, MAT)                          \
 /turf/floor/rock/##ID {                                          \
 	color    = /decl/material/##MAT::color;                      \
@@ -103,4 +108,5 @@ MATERIAL_NATURAL_TURFS(sandstone, solid/stone/sandstone)
 MATERIAL_NATURAL_TURFS(basalt,    solid/stone/basalt)
 MATERIAL_NATURAL_TURFS(granite,   solid/stone/granite)
 MATERIAL_NATURAL_TURFS(marble,    solid/stone/marble)
+MATERIAL_NATURAL_TURFS(marble,    solid/clay)
 #undef MATERIAL_NATURAL_TURFS

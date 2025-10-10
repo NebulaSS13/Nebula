@@ -131,7 +131,9 @@ var/global/list/admin_verbs_spawn = list(
 	/client/proc/respawn_character,
 	/client/proc/respawn_as_self,
 	/client/proc/spawn_chemdisp_cartridge,
-	/datum/admins/proc/mass_debug_closet_icons
+	/datum/admins/proc/mass_debug_closet_icons,
+	/client/proc/place_modular_map_new_z,
+	/client/proc/place_modular_map_current_z
 	)
 var/global/list/admin_verbs_server = list(
 	/datum/admins/proc/capture_map_part,
