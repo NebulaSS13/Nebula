@@ -6993,7 +6993,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Station Power";
 	name = "Powernet Sensor - Station Power"
 	},
@@ -7583,7 +7583,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Engine Power";
 	name = "Powernet Sensor - Engine Power"
 	},

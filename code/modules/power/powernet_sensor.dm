@@ -7,7 +7,7 @@
 // may be used in PDAs or similar applications. Second proc, return_reading_data will return list containing needed data.
 // This is used in NanoUI, for example.
 
-/obj/machinery/power/sensor
+/obj/machinery/power_sensor
 	name = "powernet sensor"
 	desc = "A sensor that records and transmits data about its connected power network."
 	anchored = TRUE
@@ -24,14 +24,14 @@
 // Proc: New()
 // Parameters: None
 // Description: Automatically assigns name according to ID tag.
-/obj/machinery/power/sensor/Initialize()
+/obj/machinery/power_sensor/Initialize()
 	. = ..()
 	auto_set_name()
 
 // Proc: auto_set_name()
 // Parameters: None
 // Description: Sets name of this sensor according to the ID tag.
-/obj/machinery/power/sensor/proc/auto_set_name()
+/obj/machinery/power_sensor/proc/auto_set_name()
 	if(!id_tag)
 		var/area/A = get_area(src)
 		if(!A)
@@ -42,20 +42,17 @@
 		id_tag = "[A.proper_name][suffix ? " #[suffix]" : null]"
 	name = "[id_tag] - powernet sensor"
 
-// Proc: check_grid_warning()
+// Proc: has_grid_warning()
 // Parameters: None
-// Description: Checks connected powernet for warnings. If warning is found returns 1
-/obj/machinery/power/sensor/proc/check_grid_warning()
-	connect_to_network()
-	if(powernet)
-		if(powernet.problem)
-			return 1
-	return 0
+// Description: Checks connected powernet for warnings. If warning is found returns TRUE
+/obj/machinery/power_sensor/proc/has_grid_warning()
+	var/datum/powernet/net_to_check = get_powernet()
+	return net_to_check?.problem ? TRUE : FALSE
 
 // Proc: reading_to_text()
 // Parameters: 1 (amount - Power in Watts to be converted to W, kW or MW)
 // Description: Helper proc that converts reading in Watts to kW or MW (returns string version of amount parameter)
-/obj/machinery/power/sensor/proc/reading_to_text(var/amount = 0)
+/obj/machinery/power_sensor/proc/reading_to_text(var/amount = 0)
 	var/units = ""
 	// 10kW and less - Watts
 	if(amount < 10000)
@@ -76,12 +73,13 @@
 // Proc: find_apcs()
 // Parameters: None
 // Description: Searches powernet for APCs and returns them in a list.
-/obj/machinery/power/sensor/proc/find_apcs()
-	if(!powernet)
+/obj/machinery/power_sensor/proc/find_apcs()
+	var/datum/powernet/net_to_check = get_powernet()
+	if(!net_to_check)
 		return
 
 	var/list/L = list()
-	for(var/obj/machinery/power/terminal/term in powernet.nodes)
+	for(var/obj/machinery/power/terminal/term in net_to_check.nodes)
 		var/obj/machinery/apc/A = term.master_machine()
 		if(istype(A))
 			L += A
@@ -91,13 +89,11 @@
 // Proc: return_reading_data()
 // Parameters: None
 // Description: Generates list containing all powernet data. Optimised for usage with NanoUI
-/obj/machinery/power/sensor/proc/return_reading_data()
-	// No powernet. Try to connect to one first.
-	if(!powernet)
-		connect_to_network()
+/obj/machinery/power_sensor/proc/return_reading_data()
+	var/datum/powernet/net_to_check = get_powernet()
 	var/list/data = list()
 	data["name"] = id_tag
-	if(!powernet)
+	if(!net_to_check)
 		data["error"] = "# SYSTEM ERROR - NO POWERNET #"
 		data["alarm"] = 0 // Runtime Prevention
 		return data
@@ -137,16 +133,16 @@
 			// Add load of this APC to total APC load calculation
 			total_apc_load += A.lastused_total
 	data["apc_data"] = APC_data
-	data["total_avail"] = reading_to_text(max(powernet.avail, 0))
+	data["total_avail"] = reading_to_text(max(net_to_check.avail, 0))
 	data["total_used_apc"] = reading_to_text(max(total_apc_load, 0))
-	data["total_used_other"] = reading_to_text(max(powernet.viewload - total_apc_load, 0))
-	data["total_used_all"] = reading_to_text(max(powernet.viewload, 0))
+	data["total_used_other"] = reading_to_text(max(net_to_check.viewload - total_apc_load, 0))
+	data["total_used_all"] = reading_to_text(max(net_to_check.viewload, 0))
 	// Prevents runtimes when avail is 0 (division by zero)
-	if(powernet.avail)
-		data["load_percentage"] = round((powernet.viewload / powernet.avail) * 100)
+	if(net_to_check.avail)
+		data["load_percentage"] = round((net_to_check.viewload / net_to_check.avail) * 100)
 	else
 		data["load_percentage"] = 100
-	data["alarm"] = powernet.problem ? 1 : 0
+	data["alarm"] = net_to_check.problem ? 1 : 0
 	return data
 
 
