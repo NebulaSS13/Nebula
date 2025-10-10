@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="dmdoc.css"><title>mods/README.md - Space Station 13 - Nebula13</title></head><body><header><a href="index.html">Space Station 13 - Nebula13</a> - <a href="index.html#modules">Modules</a> - <a href="index.html#types">Types</a></header><main><h1>Modpacks <aside>mods/README.md</aside> <a href="https://github.com/NebulaSS13/Nebula/blob/fd6cd9766e8b7f9db8d565734247f2a1423745df/mods/README.md0"><img src="git.png" width="16" height="16" title="mods/README.md0"></a></h1><table class="summary" cellspacing="0"><tr><td colspan="2"><h2 id="what-exactly-are-modpacks">What exactly are modpacks?</h2>
+<p>Modpacks are, effectively, self-contained (modular) feature bundles. They can contain new objects, new species, new UIs, overrides for existing code, and even more. If you want a feature to be optional on a per-map or per-server basis, while ensuring it's always checked for correctness in unit tests, it should be placed in a modpack.</p>
+<h2 id="are-modpacks-the-same-as-module-folders-in-other-codebases">Are modpacks the same as 'module' folders in other codebases?</h2>
+<p>No. Those were more or less just subdirectories that organized features into conceptual 'modules', but lacked any sort of defined structure or handling, and generally couldn't be selectively enabled or disabled. Nebula's modpacks are more rigorous, with scripts and tests for validation. Each modpack is tested as a unit (along with the base game) as well as in integration with other modpacks on the various included maps.</p>
+<h2 id="making-a-new-modpack">Making a new modpack</h2>
+<p>All of Nebula's modpacks are kept inside of the <code>/mods</code> subdirectory.</p>
+<p>Code inside of a modpack must depend on only itself and stock Nebula code, and not from other modpacks. Cross-modpack code goes elsewhere and is discussed further below.</p>
+<p>Do NOT tick files inside of your modpack, as that'll add it to the base Nebula .dme file. Instead, you must add them to your modpack's .dme file.</p>
+<h3 id="modpack-dme">Modpack .dme</h3>
+<p>Each modpack contains its own .dme file, as the modpack is more or less a mini codebase contained within the larger stock Nebula codebase. The .dme needs to be at the base of your modpack directory.
+By convention, the .dme should share the same name as the modpack itself, with a leading underscore in front.
+The first line of the .dme should be an <code>#ifndef</code>, and then a define for your modpack, e.g. <code>#ifndef MODPACK_YOUR_MODPACK_NAME_HERE</code>. This needs to be unique across the codebase.
+The second line should be a <code>#define</code>, and then the same thing as before, e.g. <code>#define MODPACK_YOUR_MODPACK_NAME_HERE</code>.
+Below that, you should <code>#include</code> all of the paths of the files which are inside. The paths are relative to where the .dme is.
+At the bottom, after all of the <code>#define</code>s, you must add <code>#endif</code>. Make sure to add <code>// BEGIN_INCLUDE</code> and <code>// END_INCLUDE</code> after the <code>#define</code> and before the <code>#endif</code>.</p>
+<h3 id="modpack-decl">Modpack Decl</h3>
+<p>Every modpack has a <code>/decl/modpack</code> subtype.</p>
+<p>By convention, the decl is defined at the base of the modpack directory, with the .dm file sharing the same name as the modpack, with a leading underscore, the same as the .dme file.</p>
+<p>The decl also lets players to see which modpacks a server is currently running, and holds some miscellaneous information to use for things such as dreams and the round-end credits screen.</p>
+<p>You can have code run during server initialization, or the round starting, by overriding <code>pre_initialize()</code>, <code>initialize()</code>, <code>post_initialize()</code>, and <code>on_roundstart()</code> on your modpack's decl.</p>
+<p>If your modpack has NanoUI templates, you must set the <code>nanoui_directory</code> variable to point to the path of the folder where the templates are, or NanoUI won't be able to find them in-game.</p>
+<h3 id="load-order">Load Order</h3>
+<p>Modpacks have a defined, user-controlled load order, and cross-modpack compatibility is always handled after all modpacks are loaded.</p>
+<h3 id="enabling-your-modpack">Enabling Your Modpack</h3>
+<p>Modpacks are enabled on a per-map basis. To activate a modpack, you <code>#include</code> the modpack's .dme in a map's .dme file.</p>
+<h3 id="overriding-stock-code">Overriding Stock Code</h3>
+<p>TODO: Actually write this section. It's distinct from the &quot;How do I write upstream/core code with extension via modpacks in mind?&quot; part because it's the <em>opposite,</em> this section is about overriding core code while the other section is about writing core code to be extended. Maybe do a basic explanation of side-overrides and associated footguns here.</p>
+<h3 id="cross-modpack-interactions">Cross-modpack interactions</h3>
+<p>Sometimes, a modpack that's enabled might need to do something in response to another modpack also being enabled. Compatibility patches allow for this to happen without the modpacks in question requiring a hard dependency on each other.</p>
+<p>An example of such an interaction is that the Supermatter content modpack can give the SM monitoring program to engineering jobs that exist inside the Standard Jobs modpack. Another example is allowing content in the Psionics content modpack to interact with content in the Cult gamemode modpack.</p>
+<p>Cross-modpack code is kept inside of <code>/mods/~compatibility</code>. There is another README inside which has more information.</p>
+<p>Some modpacks extend other modpacks and make no sense to include on their own, in which case it's generally okay to make the extension modpack have a hard dependency on the original one by <code>#include</code>ing the original modpack's DME in the new one.</p>
+<h3 id="how-do-i-modpack">How do I modpack...</h3>
+<ul>
+<li>A subsystem?
+<ul>
+<li>Check the psionics modpack for an example.</li>
+</ul>
+</li>
+<li>Something small?
+<ul>
+<li>Check the mundane or scaling descriptor modpacks as examples.</li>
+</ul>
+</li>
+<li>NanoUI templates?
+<ul>
+<li>Check the inertial dampener or supermatter modpacks as examples. (Don't forget to set the nanoui_directory variable on the modpack decl!)</li>
+</ul>
+</li>
+</ul>
+<h2 id="using-modpacks-as-a-downstream-server">Using modpacks as a downstream server</h2>
+<p>Modular code on a downstream with an upstream that does frequent refactors and rewrites is inevitably going to break when the upstream codebase does anything. Names change, so do assumptions, and even design directions might diverge so far that reconciling them will be hard or even impossible. There's not really getting around that, but we can at least mitigate it by designing stable interfaces and documenting changes. When upstream code is written with modularity in mind, downstreams have a much easier time adding content.</p>
+<h2 id="how-do-i-write-upstream-core-code-with-extension-via-modpacks-in-mind">How do I write upstream/core code with extension via modpacks in mind?</h2>
+<p>TODO: Actually write this section. Give examples like <code>/decl/atmos_grief_fix_step</code>, <code>/decl/human_examination</code>, the cocktails system, etc. Iterating over subtypes of a base type makes it easy for modpacks to add new code. Also maybe address some footguns like trying to make something modular before trying to make it actually work? Could also discuss the open-closed principle I guess, e.g. write code that gets <em>extended</em> rather than <em>modified</em> (so avoiding side-overrides where possible, etc.).</p>
+<h1 id="contribution">Contribution</h1>
+<p>Please contribute to this README/guide. It's currently unfinished and doesn't cover a lot of important things. Thanks.</p></td></tr></table></main><footer>nebula.dme <a href="https://github.com/NebulaSS13/Nebula/tree/fd6cd9766e8b7f9db8d565734247f2a1423745df">fd6cd97</a> (dev) — <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.9.0</a></footer></body></html>
