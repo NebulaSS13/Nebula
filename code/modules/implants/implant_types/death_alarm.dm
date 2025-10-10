@@ -2,8 +2,11 @@
 	name = "death alarm implant"
 	desc = "An alarm which monitors host vital signs and transmits a radio message upon death."
 	origin_tech = @'{"materials":1,"biotech":2,"programming":3}'
-	known = 1
+	known = TRUE
 	var/mobname = "John Doe"
+	var/const/DEATH_ALARM_CAUSE_EMP = "emp"
+	var/const/DEATH_ALARM_CAUSE_GIB = "gib"
+	var/const/DEATH_ALARM_CAUSE_DEATH = "death"
 
 /obj/item/implant/death_alarm/get_data()
 	return {"
@@ -21,22 +24,21 @@
 	return TRUE
 
 /obj/item/implant/death_alarm/Process()
-	if (!implanted) return
-	var/mob/M = imp_in
+	if (!implanted)
+		return
+	if(isnull(imp_in)) // If the mob got gibbed
+		activate(DEATH_ALARM_CAUSE_GIB)
+	else if(imp_in.stat == DEAD)
+		activate(DEATH_ALARM_CAUSE_DEATH)
 
-	if(isnull(M)) // If the mob got gibbed
-		activate(null)
-	else if(M.stat == DEAD)
-		activate("death")
-
-/obj/item/implant/death_alarm/activate(var/cause = "emp")
-	if(malfunction) return
-	var/mob/M = imp_in
-	var/area/location = get_area(M)
-	if (cause == "emp" && prob(50))
+/obj/item/implant/death_alarm/activate(var/cause = DEATH_ALARM_CAUSE_EMP)
+	if(malfunction)
+		return
+	var/area/location = get_area(imp_in)
+	if (cause == DEATH_ALARM_CAUSE_EMP && prob(50))
 		location = pick(teleportlocs)
 	var/death_message = "[mobname] has died in [location.proper_name]!"
-	if(!cause)
+	if(cause == DEATH_ALARM_CAUSE_GIB)
 		death_message = "[mobname] has died-zzzzt in-in-in..."
 	STOP_PROCESSING(SSobj, src)
 	do_telecomms_announcement(src, death_message, "[mobname]'s Death Alarm", list("Security", "Medical", "Command"))

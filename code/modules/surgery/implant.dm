@@ -16,8 +16,8 @@
 
 /decl/surgery_step/cavity/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='warning'>[user]'s hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!</span>", \
-	"<span class='warning'>Your hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!</span>")
+	user.visible_message(SPAN_WARNING("[user]'s hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!"), \
+	SPAN_WARNING("Your hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!"))
 	affected.take_damage(20, damage_flags = (DAM_SHARP|DAM_EDGE), inflicter = tool)
 	..()
 
@@ -52,8 +52,8 @@
 
 /decl/surgery_step/cavity/make_space/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='notice'>[user] makes some space inside [target]'s \the [affected.cavity_name] with \the [tool].</span>", \
-	"<span class='notice'>You make some space inside [target]'s \the [affected.cavity_name] with \the [tool].</span>" )
+	user.visible_message(SPAN_NOTICE("[user] makes some space inside [target]'s \the [affected.cavity_name] with \the [tool]."), \
+	SPAN_NOTICE("You make some space inside [target]'s \the [affected.cavity_name] with \the [tool].") )
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -83,8 +83,8 @@
 
 /decl/surgery_step/cavity/close_space/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='notice'>[user] mends [target]'s \the [affected.cavity_name] walls with \the [tool].</span>", \
-	"<span class='notice'>You mend [target]'s \the [affected.cavity_name] walls with \the [tool].</span>" )
+	user.visible_message(SPAN_NOTICE("[user] mends [target]'s \the [affected.cavity_name] walls with \the [tool]."), \
+	SPAN_NOTICE("You mend [target]'s \the [affected.cavity_name] walls with \the [tool].") )
 	affected.cavity = FALSE
 	..()
 
@@ -140,10 +140,10 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(!user.try_unequip(tool, affected))
 		return
-	user.visible_message("<span class='notice'>[user] puts \the [tool] inside [target]'s \the [affected.cavity_name].</span>", \
-	"<span class='notice'>You put \the [tool] inside [target]'s \the [affected.cavity_name].</span>" )
+	user.visible_message(SPAN_NOTICE("[user] puts \the [tool] inside [target]'s \the [affected.cavity_name]."), \
+	SPAN_NOTICE("You put \the [tool] inside [target]'s \the [affected.cavity_name].") )
 	if (tool.w_class > affected.cavity_max_w_class/2 && prob(50) && !BP_IS_PROSTHETIC(affected) && affected.sever_artery())
-		to_chat(user, "<span class='warning'>You tear some blood vessels trying to fit such a big object in this cavity.</span>")
+		to_chat(user, SPAN_WARNING("You tear some blood vessels trying to fit such a big object in this cavity."))
 		affected.owner.custom_pain("You feel something rip in your [affected.name]!", 1,affecting = affected)
 	LAZYDISTINCTADD(affected.implants, tool)
 	affected.cavity = 0
@@ -180,11 +180,12 @@
 
 /decl/surgery_step/cavity/implant_removal/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	var/exposed = 0
+	// Whether or not we can access implants/items inside the organ, or just ones embedded in wounds.
+	var/exposed = FALSE
 	if(affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
-		exposed = 1
-	if(BP_IS_PROSTHETIC(affected) && affected.hatch_state == HATCH_OPENED)
-		exposed = 1
+		exposed = TRUE
+	else if(BP_IS_PROSTHETIC(affected) && affected.hatch_state == HATCH_OPENED)
+		exposed = TRUE
 
 	var/find_prob = 0
 	var/list/loot = list()
@@ -203,26 +204,26 @@
 		if(istype(obj,/obj/item/implant))
 			var/obj/item/implant/imp = obj
 			if (imp.islegal())
-				find_prob +=60
+				find_prob += 60
 			else
-				find_prob +=40
+				find_prob += 40
 		else
-			find_prob +=50
+			find_prob += 50
 
 		if (prob(find_prob))
-			user.visible_message("<span class='notice'>[user] takes something out of incision on [target]'s [affected.name] with \the [tool].</span>", \
-			"<span class='notice'>You take \the [obj] out of incision on \the [target]'s [affected.name] with \the [tool].</span>" )
+			user.visible_message(SPAN_NOTICE("[user] takes something out of the incision on [target]'s [affected.name] with \the [tool]."), \
+			SPAN_NOTICE("You take \the [obj] out of the incision on \the [target]'s [affected.name] with \the [tool].") )
 			target.remove_implant(obj, TRUE, affected)
 			BITSET(target.hud_updateflag, IMPLOYAL_HUD)
 			..()
 		else
-			user.visible_message("<span class='notice'>[user] removes \the [tool] from [target]'s [affected.name].</span>", \
-			"<span class='notice'>There's something inside [target]'s [affected.name], but you just missed it this time.</span>" )
-			playsound(target.loc, "rustle", 15, 1)
+			user.visible_message(SPAN_NOTICE("[user] removes \the [tool] from [target]'s [affected.name]."), \
+			SPAN_NOTICE("There's something inside [target]'s [affected.name], but you just missed it this time.") )
+			playsound(target.loc, "rustle", 15, TRUE)
 	else
-		user.visible_message("<span class='notice'>[user] could not find anything inside [target]'s [affected.name], and pulls \the [tool] out.</span>", \
-		"<span class='notice'>You could not find anything inside [target]'s [affected.name].</span>" )
-		playsound(target.loc, "rustle", 15, 1)
+		user.visible_message(SPAN_NOTICE("[user] could not find anything inside [target]'s [affected.name], and pulls \the [tool] out."), \
+		SPAN_NOTICE("You could not find anything inside [target]'s [affected.name].") )
+		playsound(target.loc, "rustle", 15, TRUE)
 
 
 /decl/surgery_step/cavity/implant_removal/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -232,8 +233,7 @@
 		var/fail_prob = 10
 		fail_prob += 100 - tool_quality(tool)
 		if (prob(fail_prob))
-			user.visible_message("<span class='warning'>Something beeps inside [target]'s [affected.name]!</span>")
-			playsound(imp.loc, 'sound/items/countdown.ogg', 75, 1, -3)
-			spawn(25)
-				imp.activate()
+			user.visible_message(SPAN_WARNING("Something beeps inside [target]'s [affected.name]!"))
+			playsound(imp.loc, 'sound/items/countdown.ogg', 75, TRUE, -3)
+			addtimer(CALLBACK(imp, TYPE_PROC_REF(/obj/item/implant, activate)), 2.5 SECONDS)
 

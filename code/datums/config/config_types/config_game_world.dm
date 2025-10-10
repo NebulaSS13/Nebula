@@ -23,7 +23,8 @@
 		/decl/config/toggle/roundstart_level_generation,
 		/decl/config/toggle/lights_start_on,
 		/decl/config/toggle/on/cisnormativity,
-		/decl/config/enum/colored_coating_names
+		/decl/config/enum/colored_coating_names,
+		/decl/config/toggle/codex_requires_implant
 	)
 
 /decl/config/num/exterior_ambient_light
@@ -146,3 +147,7 @@
 		"mixture"    = CONFIG_COATING_COLOR_MIXTURE,
 		"components" = CONFIG_COATING_COLOR_COMPONENTS
 	)
+
+/decl/config/toggle/codex_requires_implant
+	uid = "codex_requires_implant"
+	desc = "If true, humans require a codex implant to access the codex."

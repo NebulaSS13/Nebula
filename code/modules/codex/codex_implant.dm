@@ -5,6 +5,7 @@
 /obj/item/implant/codex
 	name = "codex implant"
 	desc = "It has 'DON'T PANIC' embossed on the casing in friendly letters."
+	known = TRUE
 
 /obj/item/implant/codex/implanted(var/mob/source)
 	. = ..(source)

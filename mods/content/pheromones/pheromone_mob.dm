@@ -15,7 +15,7 @@
 	if(istype(gland) && !gland.is_broken())
 		return TRUE
 	var/obj/item/implant/pheromone/imp = locate() in get_organ(BP_HEAD)
-	if(imp && imp.implanted && !imp.malfunction)
+	if(imp?.implanted && !imp.malfunction)
 		return TRUE
 	return FALSE
 

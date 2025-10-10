@@ -7,76 +7,86 @@
 	icon_screen = "explosive"
 	light_color = "#a91515"
 	initial_access = list(access_armory)
-	var/screen = 0 // 0 - No Access Denied, 1 - Access allowed
+	var/locked = FALSE
 
 /obj/machinery/computer/prisoner/interface_interact(user)
 	interact(user)
 	return TRUE
 
 /obj/machinery/computer/prisoner/interact(var/mob/user)
-	var/dat
+	var/dat = list()
 	dat += "<B>Prisoner Implant Manager System</B><BR>"
-	if(screen == 0)
+	if(locked)
 		dat += "<HR><A href='byond://?src=\ref[src];lock=1'>Unlock Console</A>"
-	else if(screen == 1)
+	else
 		dat += "<HR>Chemical Implants<BR>"
-		var/turf/Tr = null
-		for(var/obj/item/implant/chem/C in global.chem_implants)
-			Tr = get_turf(C)
-			if((Tr) && !LEVELS_ARE_Z_CONNECTED(Tr.z, src.z))	continue // Out of range
-			if(!C.implanted) continue
-			dat += "[C.imp_in.name] | Remaining Units: [C.reagents.total_volume] | Inject: "
-			dat += "<A href='byond://?src=\ref[src];inject1=\ref[C]'>(<font color=red>(1)</font>)</A>"
-			dat += "<A href='byond://?src=\ref[src];inject5=\ref[C]'>(<font color=red>(5)</font>)</A>"
-			dat += "<A href='byond://?src=\ref[src];inject10=\ref[C]'>(<font color=red>(10)</font>)</A><BR>"
+		for(var/obj/item/implant/chem/chem_implant in global.chem_implants)
+			var/turf/implant_turf = get_turf(chem_implant)
+			if(implant_turf && !LEVELS_ARE_Z_CONNECTED(implant_turf.z, src.z))
+				continue // Out of range
+			if(!chem_implant.implanted)
+				continue
+			dat += "[chem_implant.imp_in.name] | Remaining Units: [chem_implant.reagents.total_volume] | Inject: "
+			dat += "<A href='byond://?src=\ref[src];inject=\ref[chem_implant];amount=1'>(<font color=red>(1)</font>)</A>"
+			dat += "<A href='byond://?src=\ref[src];inject=\ref[chem_implant];amount=5'>(<font color=red>(5)</font>)</A>"
+			dat += "<A href='byond://?src=\ref[src];inject=\ref[chem_implant];amount=10'>(<font color=red>(10)</font>)</A><BR>"
 			dat += "********************************<BR>"
 		dat += "<HR>Tracking Implants<BR>"
-		for(var/obj/item/implant/tracking/T in global.tracking_implants)
-			Tr = get_turf(T)
-			if((Tr) && !LEVELS_ARE_Z_CONNECTED(Tr.z, src.z))	continue // Out of range
-			if(!T.implanted) continue
-			var/loc_display = "Space"
-			var/mob/living/M = T.imp_in
-			if(!isspaceturf(M.loc))
-				var/turf/mob_loc = get_turf(M)
-				loc_display = mob_loc.loc
-			if(T.malfunction)
+		for(var/obj/item/implant/tracking/tracking_implant in global.tracking_implants)
+			var/turf/implant_turf = get_turf(tracking_implant)
+			if(implant_turf && !LEVELS_ARE_Z_CONNECTED(implant_turf.z, src.z))
+				continue // Out of range
+			if(!tracking_implant.implanted)
+				continue
+			var/area/tracked_area = get_area(tracking_implant)
+			var/loc_display = tracked_area.proper_name
+			if(tracking_implant.malfunction)
 				loc_display = pick(teleportlocs)
-			dat += "ID: [T.id] | Location: [loc_display]<BR>"
-			dat += "<A href='byond://?src=\ref[src];warn=\ref[T]'>(<font color=red><i>Message Holder</i></font>)</A> |<BR>"
+			dat += "ID: [tracking_implant.id] | Location: [loc_display]<BR>"
+			dat += "<A href='byond://?src=\ref[src];warn=\ref[tracking_implant]'>(<font color=red><i>Message Holder</i></font>)</A> |<BR>"
 			dat += "********************************<BR>"
 		dat += "<HR><A href='byond://?src=\ref[src];lock=1'>Lock Console</A>"
 
-	show_browser(user, dat, "window=computer;size=400x500")
+	show_browser(user, JOINTEXT(dat), "window=computer;size=400x500")
 	onclose(user, "computer")
 
 /obj/machinery/computer/prisoner/OnTopic(mob/user, href_list)
 	if((. = ..()))
 		return
-	. = TOPIC_REFRESH
 
-	if(href_list["inject1"])
-		var/obj/item/implant/I = locate(href_list["inject1"])
-		if(I)	I.activate(1)
-
-	else if(href_list["inject5"])
-		var/obj/item/implant/I = locate(href_list["inject5"])
-		if(I)	I.activate(5)
-
-	else if(href_list["inject10"])
-		var/obj/item/implant/I = locate(href_list["inject10"])
-		if(I)	I.activate(10)
+	if(href_list["inject"])
+		var/obj/item/implant/chem/chem_implant = locate(href_list["inject"])
+		if(!chem_implant)
+			return TOPIC_REFRESH // evidently their copy of the UI is out of date
+		if(!istype(chem_implant)) // exists but is not a chem implant
+			// warn that this is likely an href hacking attempt
+			PRINT_STACK_TRACE("Possible HREF hacking attempt, chem implant inject called on non-chem-implant!")
+			message_admins("Possible HREF hacking attempt, chem implant inject called on [href_list["inject"]] by [user] (ckey [(user.ckey)])!")
+			return TOPIC_HANDLED
+		var/amount_to_inject = clamp(text2num(href_list["amount"]), 1, 10) // don't let href hacking give more than 10 units at once
+		chem_implant.activate(amount_to_inject)
+		return TOPIC_HANDLED
 
 	else if(href_list["lock"])
 		if(allowed(user))
-			screen = !screen
+			locked = !locked
+			return TOPIC_REFRESH
 		else
 			to_chat(user, "Unauthorized Access.")
+			return TOPIC_HANDLED
 
 	else if(href_list["warn"])
 		var/warning = sanitize(input(user,"Message:","Enter your message here!",""))
-		if(!warning) return TOPIC_HANDLED
-		var/obj/item/implant/I = locate(href_list["warn"])
-		if(I?.imp_in)
-			var/mob/living/victim = I.imp_in
-			to_chat(victim, "<span class='notice'>You hear a voice in your head saying: '[warning]'</span>")
+		if(!warning)
+			return TOPIC_HANDLED
+		var/obj/item/implant/tracking/tracker = locate(href_list["warn"])
+		if(!tracker)
+			return TOPIC_REFRESH // evidently their copy of the UI is out of date
+		if(!istype(tracker)) // exists but is not a tracking implant
+			// warn that this is likely an href hacking attempt
+			PRINT_STACK_TRACE("Possible HREF hacking attempt, tracking implant warn called on non-tracking-implant!")
+			message_admins("Possible HREF hacking attempt, tracking implant warn called on [href_list["warn"]] by [user] (ckey [(user.ckey)])!")
+			return TOPIC_HANDLED
+		to_chat(tracker.imp_in, SPAN_NOTICE("You hear a voice in your head saying: '[warning]'"))
+		return TOPIC_HANDLED
+	return TOPIC_NOACTION

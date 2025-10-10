@@ -42,15 +42,16 @@
 // TODO: the name stuff here probably doesn't work, this needs an update_name override
 /obj/item/implantcase/attackby(obj/item/used_item, mob/user)
 	if (IS_PEN(used_item))
-		var/t = input(user, "What would you like the label to be?", src.name, null)
+		var/label = input(user, "What would you like the label to be?", src.name, null)
+		// As input() blocks, we need to do some sanity checks
 		if (user.get_active_held_item() != used_item)
 			return TRUE
-		if((!in_range(src, usr) && loc != user))
+		if(!CanPhysicallyInteract(user))
 			return TRUE
-		t = sanitize_safe(t, MAX_NAME_LEN)
-		if(t)
-			SetName("glass case - '[t]'")
-			desc = "A case containing \a [t] implant."
+		label = sanitize_safe(label, MAX_NAME_LEN)
+		if(label)
+			SetName("glass case - '[label]'")
+			desc = "A case containing \a [label] implant."
 		else
 			SetName(initial(name))
 			desc = "A case containing an implant."
@@ -72,7 +73,7 @@
 		M.update_icon()
 		return TRUE
 	else if (istype(used_item, /obj/item/implant) && user.try_unequip(used_item, src))
-		to_chat(usr, "<span class='notice'>You slide \the [used_item] into \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You slide \the [used_item] into \the [src]."))
 		imp = used_item
 		update_description()
 		update_icon()

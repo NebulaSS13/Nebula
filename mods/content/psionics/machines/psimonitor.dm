@@ -25,7 +25,7 @@
 		emagged = TRUE
 		remaining_charges--
 		req_access.Cut()
-		to_chat(user, "<span class='notice'>You short out the access protocols.</span>")
+		to_chat(user, SPAN_NOTICE("You short out the access protocols."))
 		return TRUE
 	return FALSE
 
@@ -37,7 +37,7 @@
 	if(href_list["login"])
 		var/obj/item/card/id/ID = user.GetIdCard()
 		if(!ID || !allowed(user))
-			to_chat(user, "<span class='warning'>Access denied.</span>")
+			to_chat(user, SPAN_WARNING("Access denied."))
 			return TOPIC_HANDLED
 		else
 			authorized = "[ID.registered_name] ([ID.assignment])"

@@ -34,79 +34,68 @@ Frequency:
 	onclose(user, "radio")
 	return
 
-/obj/item/locator/Topic(href, href_list)
-	..()
-	if (usr.stat || usr.restrained())
+/obj/item/locator/OnTopic(mob/user, href_list, datum/topic_state/state)
+	var/turf/current_location = get_turf(user) //What turf is the user on?
+	if(!current_location || isAdminLevel(current_location.z)) //If turf was not found or they're on an admin Z-level
+		to_chat(user, "\The [src] is malfunctioning.")
 		return
-	var/turf/current_location = get_turf(usr)//What turf is the user on?
-	if(!current_location||current_location.z==2)//If turf was not found or they're on z level 2.
-		to_chat(usr, "\The [src] is malfunctioning.")
+	if(!CanPhysicallyInteract(user))
 		return
-	if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))))
-		usr.set_machine(src)
-		if (href_list["refresh"])
-			src.temp = "<B>Persistent Signal Locator</B><HR>"
-			var/turf/sr = get_turf(src)
+	user.set_machine(src)
+	if (href_list["refresh"])
+		src.temp = "<B>Persistent Signal Locator</B><HR>"
+		var/turf/source_turf = get_turf(src)
+		if (!source_turf)
+			src.temp += "<B><FONT color='red'>Processing Error:</FONT></B> Unable to locate orbital position.<BR>"
+			return TOPIC_REFRESH
+		src.temp += "<B>Located Beacons:</B><BR>"
+		for(var/obj/item/radio/beacon/radio in global.radio_beacons)
+			if(!radio.functioning)
+				continue
+			if (radio.frequency != frequency)
+				continue
+			var/turf/radio_turf = get_turf(radio)
+			if (radio_turf.z != source_turf.z || !radio_turf)
+				continue
+			var/distance
+			switch(get_dist(radio_turf, source_turf))
+				if(0 to 5)
+					distance = "very strong"
+				if(6 to 10)
+					distance = "strong"
+				if(11 to 20)
+					distance = "weak"
+				else
+					continue
+			if(distance)
+				src.temp += "[radio.code]-[dir2text(get_dir(source_turf, radio_turf))]-[distance]<BR>"
 
-			if (sr)
-				src.temp += "<B>Located Beacons:</B><BR>"
+		src.temp += "<B>Extraneous Signals:</B><BR>"
+		for (var/obj/item/implant/tracking/implant in global.tracking_implants)
+			if (!implant.implanted || !(istype(implant.loc,/obj/item/organ/external) || ismob(implant.loc)))
+				continue
+			var/mob/victim = implant.loc
+			// Don't show dead people that have been dead for a while
+			if (victim.stat == DEAD && world.time > victim.timeofdeath + 10 MINUTES)
+				continue
+			var/turf/implant_turf = get_turf(implant)
+			if (implant_turf?.z != source_turf.z)
+				continue
+			var/distance
+			switch(get_dist(implant_turf, source_turf))
+				if(0 to 5)
+					distance = "very strong"
+				if(6 to 10)
+					distance = "strong"
+				if(11 to 20)
+					distance = "weak"
+			if(distance)
+				src.temp += "[implant.id]-[dir2text(get_dir(source_turf, implant_turf))]-[distance]<BR>"
 
-				for(var/obj/item/radio/beacon/radio in global.radio_beacons)
-					if(!radio.functioning)
-						continue
-					if (radio.frequency == src.frequency)
-						var/turf/tr = get_turf(radio)
-						if (tr.z == sr.z && tr)
-							var/direct = max(abs(tr.x - sr.x), abs(tr.y - sr.y))
-							if (direct < 5)
-								direct = "very strong"
-							else
-								if (direct < 10)
-									direct = "strong"
-								else
-									if (direct < 20)
-										direct = "weak"
-									else
-										direct = "very weak"
-							src.temp += "[radio.code]-[dir2text(get_dir(sr, tr))]-[direct]<BR>"
-
-				src.temp += "<B>Extranneous Signals:</B><BR>"
-				for (var/obj/item/implant/tracking/implant in global.tracking_implants)
-					if (!implant.implanted || !(istype(implant.loc,/obj/item/organ/external) || ismob(implant.loc)))
-						continue
-					else
-						var/mob/M = implant.loc
-						if (M.stat == DEAD)
-							if (M.timeofdeath + 6000 < world.time)
-								continue
-
-					var/turf/tr = get_turf(implant)
-					if (tr.z == sr.z && tr)
-						var/direct = max(abs(tr.x - sr.x), abs(tr.y - sr.y))
-						if (direct < 20)
-							if (direct < 5)
-								direct = "very strong"
-							else
-								if (direct < 10)
-									direct = "strong"
-								else
-									direct = "weak"
-							src.temp += "[implant.id]-[dir2text(get_dir(sr, tr))]-[direct]<BR>"
-
-				src.temp += "<B>You are at \[[sr.x],[sr.y],[sr.z]\]</B> in orbital coordinates.<BR><BR><A href='byond://?src=\ref[src];refresh=1'>Refresh</A><BR>"
-			else
-				src.temp += "<B><FONT color='red'>Processing Error:</FONT></B> Unable to locate orbital position.<BR>"
-		else
-			if (href_list["freq"])
-				src.frequency += text2num(href_list["freq"])
-				src.frequency = sanitize_frequency(src.frequency)
-			else
-				if (href_list["temp"])
-					src.temp = null
-		if (ismob(src.loc))
-			attack_self(src.loc)
-		else
-			for(var/mob/M in viewers(1, src))
-				if (M.client)
-					src.attack_self(M)
-	return
+		src.temp += "<B>You are at \[[source_turf.x],[source_turf.y],[source_turf.z]\]</B> in orbital coordinates.<BR><BR><A href='byond://?src=\ref[src];refresh=1'>Refresh</A><BR>"
+	else if (href_list["freq"])
+		src.frequency += text2num(href_list["freq"])
+		src.frequency = sanitize_frequency(src.frequency)
+	else if (href_list["temp"])
+		src.temp = null
+	return TOPIC_REFRESH

@@ -2,7 +2,7 @@
 	name = "uplink implant"
 	desc = "Summon things."
 	origin_tech = @'{"materials":1,"biotech":2,"esoteric":3}'
-	hidden = 1
+	hidden = TRUE
 	var/activation_emote
 
 /obj/item/implant/uplink/Initialize(mapload, var/amount)
@@ -13,8 +13,9 @@
 /obj/item/implant/uplink/implanted(mob/source)
 	var/emote_options = list("blink", "blink_r", "eyebrow", "chuckle", "twitch_v", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
 	activation_emote = source.client ? (input(source, "Choose activation emote:", "Uplink Implant Setup") in emote_options) : emote_options[1]
-	source.StoreMemory("\A [src] can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", /decl/memory_options/system)
-	to_chat(source, "\The [src] can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.")
+	var/activation_string = "can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate."
+	source.StoreMemory("\A [src] [activation_string]", /decl/memory_options/system)
+	to_chat(source, "\The [src] [activation_string]")
 	hidden_uplink.uplink_owner = source.mind
 	return TRUE
 

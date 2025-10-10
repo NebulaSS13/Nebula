@@ -75,8 +75,8 @@
 		user.do_attack_animation(target)
 		var/target_zone = user.get_target_zone()
 		if(imp.can_implant(target, user, target_zone))
-			var/imp_name = imp.name
-			if(do_after(user, 50, target) && imp.implant_in_mob(target, target_zone))
+			var/imp_name = imp.name // cache this in case implanting it changes its name
+			if(do_after(user, 5 SECONDS, target) && imp.implant_in_mob(target, user, target_zone))
 				user.visible_message(SPAN_NOTICE("\The [target] has been implanted by \the [user]."))
 				admin_attack_log(user, target, "Implanted using \the [src] ([imp_name])", "Implanted with \the [src] ([imp_name])", "used an implanter, \the [src] ([imp_name]), on")
 				imp = null
