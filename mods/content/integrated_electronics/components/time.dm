@@ -82,11 +82,6 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 4
 
-/obj/item/integrated_circuit/time/ticker/Destroy()
-	if(is_running)
-		STOP_PROCESSING(SSfastprocess, src)
-	return ..()
-
 /obj/item/integrated_circuit/time/ticker/on_data_written()
 	var/do_tick = get_pin_data(IC_INPUT, 1)
 	if(do_tick && !is_running)
@@ -95,14 +90,12 @@
 	else if(!do_tick && is_running)
 		is_running = FALSE
 
-
 /obj/item/integrated_circuit/time/ticker/proc/tick()
 	if(is_running)
 		addtimer(CALLBACK(src, PROC_REF(tick)), delay)
 		if(world.time > next_fire)
 			next_fire = world.time + delay
 			activate_pin(1)
-
 
 /obj/item/integrated_circuit/time/ticker/custom
 	name = "custom ticker"

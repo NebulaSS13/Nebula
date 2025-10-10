@@ -19,6 +19,10 @@
 
 	var/static/list/overlay_cache = list() //cache recent overlays
 
+/obj/item/t_scanner/Initialize(ml, material_key)
+	. = ..()
+	global.events_repository.register(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/item/t_scanner, update_tile_overlays))
+
 /obj/item/t_scanner/Destroy()
 	. = ..()
 	if(on)
@@ -44,16 +48,18 @@
 /obj/item/t_scanner/proc/set_active(var/active)
 	on = active
 	if(on)
-		START_PROCESSING(SSfastprocess, src)
+		START_PROCESSING(SSobj, src)
 	else
-		STOP_PROCESSING(SSfastprocess, src)
+		STOP_PROCESSING(SSobj, src)
 		set_user_client(null)
 	update_icon()
 
-//If reset is set, then assume the client has none of our overlays, otherwise we only send new overlays.
 /obj/item/t_scanner/Process()
-	if(!on) return
+	update_tile_overlays()
 
+//If reset is set, then assume the client has none of our overlays, otherwise we only send new overlays.
+/obj/item/t_scanner/proc/update_tile_overlays()
+	if(!on) return
 	//handle clients changing
 	var/client/loc_client = null
 	if(ismob(src.loc))

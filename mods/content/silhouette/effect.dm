@@ -36,7 +36,7 @@
 	update_transforms_from_mob(owner)
 
 /obj/effect/silhouette/proc/update_transforms_from_mob(mob/donor)
-	if(!QDELETED(donor))
+	if(QDELETED(donor))
 		alpha = 0
 		return
 	transform = donor.transform
