@@ -1,4 +1,5 @@
 /obj/item/clothing/shirt
+	name = "shirt"
 	abstract_type = /obj/item/clothing/shirt
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 	permeability_coefficient = 0.90

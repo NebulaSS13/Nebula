@@ -2,7 +2,7 @@
  *
  * 1. AI should not implement any bespoke mob logic within the proc it uses
  *    to trigger or respond to game events. It should share entrypoints with
- *    action performed by players and should respect the same intents, etc.
+ *    actions performed by players and should respect the same intents, etc.
  *    that players have to manage, through the same procs players use. This
  *    should mean that players can be slotted into the pilot seat of any mob,
  *    suspending AI behavior, and should then be able to freely use any of the
@@ -78,6 +78,9 @@
 	var/next_target_scan_time
 	/// How long minimum between scans.
 	var/target_scan_delay = 1 SECOND
+
+	/// Last mob to attempt to handle this mob.
+	var/weakref/last_handler
 
 /datum/mob_controller/New(var/mob/living/target_body)
 	body = target_body
@@ -216,3 +219,20 @@
 		return
 	if(spooked_by_grab && !is_friend(scary_grabber))
 		retaliate(scary_grabber)
+
+// General stubs for when another mob has directed this mob to attack.
+/datum/mob_controller/proc/check_handler_can_order(mob/handler, atom/target, intent_flags)
+	return is_friend(handler)
+
+/datum/mob_controller/proc/process_handler_target(mob/handler, atom/target, intent_flags)
+	if(!check_handler_can_order(handler, target, intent_flags))
+		return process_handler_failure(handler, target)
+	last_handler = weakref(handler)
+	return TRUE
+
+/datum/mob_controller/proc/process_handler_failure(mob/handler, atom/target)
+	return FALSE
+
+/datum/mob_controller/proc/process_holder_interaction(mob/handler)
+	last_handler = weakref(handler)
+	return body?.attack_hand_with_interaction_checks(handler)

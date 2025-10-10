@@ -13,7 +13,11 @@
 	return ..()
 
 /datum/mob_controller/passive/hunter/cat/consume_prey(mob/living/prey)
+	if(prey.stat != DEAD)
+		return
 	next_hunt = world.time + rand(1 SECONDS, 10 SECONDS)
+	set_target(null)
+	resume_wandering()
 
 /datum/mob_controller/passive/hunter/cat/can_hunt(mob/living/victim)
 	return istype(victim, /mob/living/simple_animal/passive/mouse) && !victim.stat

@@ -24,6 +24,11 @@
 		AM.vis_flags |= (VIS_INHERIT_ID|VIS_INHERIT_LAYER|VIS_INHERIT_PLANE)
 		add_vis_contents(AM)
 
+/obj/item/holder/examined_by(mob/user, distance, infix, suffix)
+	for(var/atom/thing in get_contained_external_atoms())
+		thing.examined_by(user, distance, infix, suffix)
+	return TRUE
+
 // No scooping mobs and handing them to people who can't scoop them.
 /obj/item/holder/equipped(mob/user, slot)
 	. = ..()
