@@ -225,7 +225,7 @@
 			assigned_job = job
 			assigned_role = job.title
 			role_alt_title = new_role
-			if(current)
+			if(current?.skillset)
 				current.skillset.obtain_from_client(job, current.client)
 
 	else if (href_list["amb_edit"])
