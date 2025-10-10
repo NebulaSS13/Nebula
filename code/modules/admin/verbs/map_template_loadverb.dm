@@ -5,7 +5,7 @@
 
 	if (!check_rights(R_FUN)) return
 
-	var/map = input(usr, "Choose a Map Template to place at your CURRENT LOCATION","Place Map Template") as null|anything in SSmapping.map_templates
+	var/map = input(usr, "Choose a Map Template to place at your CURRENT LOCATION","Place Map Template") as null|anything in SSmapping.spawnable_map_templates
 	if(!map)
 		return
 
@@ -37,7 +37,7 @@
 		to_chat(usr, "Please wait for the master controller to initialize before loading maps!")
 		return
 
-	var/map = input(usr, "Choose a Map Template to place on a new zlevel","Place Map Template") as null|anything in SSmapping.map_templates
+	var/map = input(usr, "Choose a Map Template to place on a new zlevel","Place Map Template") as null|anything in SSmapping.spawnable_map_templates
 	if(!map)
 		return
 

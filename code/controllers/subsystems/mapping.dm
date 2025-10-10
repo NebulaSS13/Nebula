@@ -10,6 +10,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/submaps =                   list()
 	var/list/map_templates_by_category = list()
 	var/list/map_templates_by_type =     list()
+	var/list/spawnable_map_templates =   list()
 	var/list/banned_maps =               list()
 	var/list/banned_template_names =     list()
 
@@ -169,11 +170,15 @@ SUBSYSTEM_DEF(mapping)
 	map_templates =             SSmapping.map_templates
 	map_templates_by_category = SSmapping.map_templates_by_category
 	map_templates_by_type =     SSmapping.map_templates_by_type
+	spawnable_map_templates =   SSmapping.spawnable_map_templates
 
 /datum/controller/subsystem/mapping/proc/register_map_template(var/datum/map_template/map_template)
 	if(!validate_map_template(map_template) || !map_template.preload())
 		return FALSE
-	map_templates[map_template.name] = map_template
+	map_templates[map_template.name]         = map_template
+	map_templates_by_type[map_template.type] = map_template
+	if(map_template.is_spawnable)
+		spawnable_map_templates += map_template
 	for(var/temple_cat in map_template.template_categories) // :3
 		LAZYINITLIST(map_templates_by_category[temple_cat])
 		LAZYSET(map_templates_by_category[temple_cat], map_template.name, map_template)
