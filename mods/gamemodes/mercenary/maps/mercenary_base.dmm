@@ -378,7 +378,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/obj/machinery/power/apc/hyper{
+/obj/machinery/apc/hyper{
 	dir = 8;
 	pixel_x = -21;
 	req_access = list("ACCESS_MERCENARY")
@@ -1143,7 +1143,7 @@
 /turf/wall/titanium,
 /area/map_template/merc_shuttle/rear)
 "ch" = (
-/obj/machinery/power/apc/hyper{
+/obj/machinery/apc/hyper{
 	dir = 8;
 	pixel_x = -21;
 	req_access = list("ACCESS_MERCENARY")
@@ -2360,7 +2360,7 @@
 /turf/floor/plating,
 /area/map_template/merc_spawn)
 "HV" = (
-/obj/machinery/power/apc/high{
+/obj/machinery/apc/high{
 	pixel_y = -26
 	},
 /obj/structure/cable,

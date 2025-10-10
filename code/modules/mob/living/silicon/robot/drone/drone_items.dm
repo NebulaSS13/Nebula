@@ -223,8 +223,8 @@
 		else
 			to_chat(user, "<span class='danger'>Your gripper cannot hold \the [target].</span>")
 
-	else if(istype(target,/obj/machinery/power/apc))
-		var/obj/machinery/power/apc/A = target
+	else if(istype(target,/obj/machinery/apc))
+		var/obj/machinery/apc/A = target
 		if(A.components_are_accessible(/obj/item/stock_parts/power/battery))
 			var/obj/item/stock_parts/power/battery/bat = A.get_component_of_type(/obj/item/stock_parts/power/battery)
 			var/obj/item/cell/cell = bat.extract_cell(src)

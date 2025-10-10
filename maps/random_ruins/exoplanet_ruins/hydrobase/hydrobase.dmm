@@ -102,7 +102,7 @@
 /area/map_template/hydrobase/station/growX)
 "as" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -342,7 +342,7 @@
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growD)
 "bc" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -718,7 +718,7 @@
 /area/map_template/hydrobase/station/growD)
 "cc" = (
 /obj/structure/cable/yellow,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 25
 	},
@@ -1006,7 +1006,7 @@
 /turf/floor/tiled/white,
 /area/map_template/hydrobase/station/growC)
 "cS" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 25
 	},
@@ -1082,7 +1082,7 @@
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
 "dc" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	pixel_y = -25
 	},
 /obj/structure/cable/yellow{
@@ -1560,7 +1560,7 @@
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "eq" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1706,7 +1706,7 @@
 	tag_interior_door = "solars_inner";
 	dir = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 25
 	},
@@ -1822,7 +1822,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 25
 	},
@@ -1831,7 +1831,7 @@
 /turf/floor/bluegrid,
 /area/map_template/hydrobase/station/growB)
 "eS" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -25
 	},
@@ -2204,7 +2204,7 @@
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growA)
 "fM" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -2233,7 +2233,7 @@
 /area/map_template/hydrobase/station/shipaccess)
 "fP" = (
 /obj/machinery/washing_machine,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 25
 	},
@@ -2494,7 +2494,7 @@
 	id_tag = "hydrodock_sensor";
 	pixel_y = 25
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24

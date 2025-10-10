@@ -118,7 +118,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "Yacht bridge";
 	pixel_y = -24
 	},
@@ -640,7 +640,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Yacht engine";
 	pixel_y = 24
@@ -851,7 +851,7 @@
 /area/yacht/engine)
 "cC" = (
 /obj/structure/cable,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "Yacht living";
 	pixel_x = -24

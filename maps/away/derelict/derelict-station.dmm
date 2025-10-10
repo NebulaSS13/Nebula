@@ -607,7 +607,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc/high/inactive{
+/obj/machinery/apc/high/inactive{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -1633,7 +1633,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/obj/machinery/power/apc/high/inactive{
+/obj/machinery/apc/high/inactive{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1870,7 +1870,7 @@
 /obj/structure/cable/blue{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc/high/inactive{
+/obj/machinery/apc/high/inactive{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -2661,7 +2661,7 @@
 /area/constructionsite/medical)
 "jp" = (
 /obj/structure/cable/blue,
-/obj/machinery/power/apc/high/inactive{
+/obj/machinery/apc/high/inactive{
 	name = "south bump";
 	pixel_y = -24
 	},

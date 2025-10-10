@@ -23,6 +23,6 @@
 		return
 
 	for(var/obj/abstract/landmark/epicentre in epicentreList)
-		for(var/obj/machinery/power/apc/apc in range(epicentre,lightsoutRange))
+		for(var/obj/machinery/apc/apc in range(epicentre,lightsoutRange))
 			apc.overload_lighting()
 			CHECK_TICK

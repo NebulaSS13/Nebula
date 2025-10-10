@@ -121,7 +121,7 @@
 		. = 1
 
 	if(href_list["toggle_breaker"])
-		var/obj/machinery/power/apc/A = locate(href_list["toggle_breaker"])
+		var/obj/machinery/apc/A = locate(href_list["toggle_breaker"])
 
 		if(!CanInteract(user, state) || QDELETED(A))
 			return 0
@@ -129,7 +129,7 @@
 		A.toggle_breaker()
 
 	if(href_list["toggle_powerchannel_equip"] || href_list["toggle_powerchannel_light"] || href_list["toggle_powerchannel_enviro"]) //I'm sure there's a better way to do this.
-		var/obj/machinery/power/apc/A
+		var/obj/machinery/apc/A
 		var/powerchannel = 0
 		var/power_setting
 

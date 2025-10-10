@@ -638,7 +638,7 @@
 /turf/floor/plating,
 /area/lar_maria/morgue)
 "bZ" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -851,7 +851,7 @@
 /turf/floor/plating,
 /area/lar_maria/morgue)
 "cA" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1711,7 +1711,7 @@
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eO" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -1742,7 +1742,7 @@
 /turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "eR" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1933,7 +1933,7 @@
 /turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "fq" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -1969,7 +1969,7 @@
 /area/lar_maria/vir_aux)
 "fu" = (
 /obj/structure/closet/crate/plastic/rations,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2515,7 +2515,7 @@
 /turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gv" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -2862,7 +2862,7 @@
 /turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hu" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24

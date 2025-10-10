@@ -46,7 +46,7 @@ var/global/list/areas = list()
 	var/has_gravity =         TRUE
 	var/air_doors_activated = FALSE
 
-	var/obj/machinery/power/apc/apc
+	var/obj/machinery/apc/apc
 	var/list/all_doors		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
 	var/list/ambience = list(
 		'sound/ambience/ambigen1.ogg',
@@ -459,9 +459,9 @@ var/global/list/mob/living/forced_ambiance_list = new
 				M.throw_at(T, maxrange, speed)
 
 /area/proc/prison_break()
-	var/obj/machinery/power/apc/theAPC = get_apc()
+	var/obj/machinery/apc/theAPC = get_apc()
 	if(theAPC && theAPC.operating)
-		for(var/obj/machinery/power/apc/temp_apc in src)
+		for(var/obj/machinery/apc/temp_apc in src)
 			temp_apc.overload_lighting(70)
 		for(var/obj/machinery/door/airlock/temp_airlock in src)
 			temp_airlock.prison_open()

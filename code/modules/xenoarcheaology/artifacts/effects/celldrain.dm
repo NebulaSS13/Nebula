@@ -26,7 +26,7 @@
 
 /datum/artifact_effect/celldrain/proc/drain_cells_in_range(amount)
 	var/turf/T = get_turf(holder)
-	for (var/obj/machinery/power/apc/A in range(effect_range, T))
+	for (var/obj/machinery/apc/A in range(effect_range, T))
 		var/obj/item/cell/cell = A.get_cell()
 		if(cell)
 			cell.use(amount)

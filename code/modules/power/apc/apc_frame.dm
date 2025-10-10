@@ -6,7 +6,7 @@
 	icon = 'icons/obj/apc_repair.dmi'
 	icon_state = "apc_frame"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	build_machine_type = /obj/machinery/power/apc/buildable
+	build_machine_type = /obj/machinery/apc/buildable
 	reverse = TRUE
 
 /obj/item/frame/apc/try_build(turf/on_wall)
@@ -27,4 +27,4 @@
 	fully_construct = TRUE
 	name = "APC kit"
 	desc = "An all-in-one APC kit, comes preassembled."
-	build_machine_type = /obj/machinery/power/apc
+	build_machine_type = /obj/machinery/apc

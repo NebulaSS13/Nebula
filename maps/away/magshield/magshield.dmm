@@ -915,7 +915,7 @@
 /turf/floor/plating/airless,
 /area/magshield/smes_storage)
 "cH" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1108,7 +1108,7 @@
 	dir = 8;
 	level = 2
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1300,7 +1300,7 @@
 /turf/floor/plating/airless,
 /area/magshield/north)
 "dN" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2340,7 +2340,7 @@
 /turf/wall,
 /area/magshield/west)
 "gQ" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -2582,7 +2582,7 @@
 /turf/floor/tiled,
 /area/magshield/west)
 "hG" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -3257,7 +3257,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24

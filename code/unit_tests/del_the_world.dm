@@ -9,7 +9,7 @@
 
 	var/list/ignore = typesof(
 		// will error if the area already has one
-		/obj/machinery/power/apc,
+		/obj/machinery/apc,
 		// throw assert failures around non-null alarm area on spawn
 		/obj/machinery/alarm,
 		// Needs a level above.

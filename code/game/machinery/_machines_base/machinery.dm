@@ -379,7 +379,7 @@ Class Procs:
 	if(electrocute_mob(user, get_area(src), src, 0.7))
 		var/area/temp_area = get_area(src)
 		if(temp_area)
-			var/obj/machinery/power/apc/temp_apc = temp_area.get_apc()
+			var/obj/machinery/apc/temp_apc = temp_area.get_apc()
 			var/obj/machinery/power/terminal/terminal = temp_apc && temp_apc.terminal()
 
 			if(terminal && terminal.powernet)

@@ -426,7 +426,7 @@
 	dir = 4;
 	pixel_x = -24
 	},
-/obj/machinery/power/apc/derelict,
+/obj/machinery/apc/derelict,
 /turf/floor/tiled/airless,
 /area/map_template/ecship/cryo)
 "bh" = (
@@ -627,7 +627,7 @@
 /obj/effect/floor_decal/corner/paleblue/diagonal{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4
 	},
 /obj/structure/cable{
@@ -1095,7 +1095,7 @@
 	},
 /obj/structure/closet/l3closet,
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4
 	},
 /turf/floor/tiled/white/lowpressure,
@@ -1256,7 +1256,7 @@
 	dir = 1;
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /turf/floor,

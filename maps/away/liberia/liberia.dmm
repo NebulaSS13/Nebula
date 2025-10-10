@@ -146,7 +146,7 @@
 	},
 /obj/effect/floor_decal/corner_techfloor_grid,
 /obj/effect/floor_decal/techfloor/corner,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -703,7 +703,7 @@
 /area/liberia/mule)
 "bt" = (
 /obj/effect/floor_decal/corner/brown/half,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 1;
 	name = "merchant north bump";
 	pixel_y = 24
@@ -1448,7 +1448,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -1921,7 +1921,7 @@
 	icon_state = "0-2"
 	},
 /obj/random/powercell,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 1;
 	name = "merchant north bump";
 	pixel_y = 24
@@ -2788,7 +2788,7 @@
 /area/liberia/medbay)
 "eS" = (
 /obj/machinery/body_scanconsole,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -3123,7 +3123,7 @@
 "fx" = (
 /obj/effect/floor_decal/techfloor,
 /obj/structure/table,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -3348,7 +3348,7 @@
 /obj/structure/chair/wood/walnut{
 	dir = 8
 	},
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -3567,7 +3567,7 @@
 /obj/effect/floor_decal/borderfloor/corner2{
 	dir = 8
 	},
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -3762,7 +3762,7 @@
 "gE" = (
 /obj/structure/table,
 /obj/item/towel/random,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -3891,7 +3891,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -4186,7 +4186,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -5204,7 +5204,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -5218,7 +5218,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -5538,7 +5538,7 @@
 "ky" = (
 /obj/structure/table/laminate,
 /obj/effect/floor_decal/spline/fancy/wood,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -6062,7 +6062,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -6627,7 +6627,7 @@
 /turf/floor/plating,
 /area/liberia/hallway)
 "rx" = (
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -6736,7 +6736,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 4
 	},
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -7399,7 +7399,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -7533,7 +7533,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/effect/catwalk_plated,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -7561,7 +7561,7 @@
 /obj/structure/janitorialcart,
 /obj/item/mop,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -7589,7 +7589,7 @@
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -7784,7 +7784,7 @@
 /turf/floor/tiled,
 /area/liberia/hallway)
 "JS" = (
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -8121,7 +8121,7 @@
 /area/liberia/engineeringstorage)
 "QA" = (
 /obj/effect/floor_decal/techfloor,
-/obj/machinery/power/apc/liberia{
+/obj/machinery/apc/liberia{
 	name = "south bump";
 	pixel_y = -24
 	},

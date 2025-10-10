@@ -356,7 +356,7 @@
 				if(prob(35))
 					L.flicker()
 
-	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
+	for(var/obj/machinery/apc/A in SSmachines.machinery)
 		if(!(A.z in ftl_computer.linked.map_z))
 			continue
 		switch(shunt_sev)
@@ -402,7 +402,7 @@
 
 			explosion(get_turf(src),-1,-1,8,10) //Effect Two: blow the windows out.
 
-			for(var/obj/machinery/power/apc/A in SSmachines.machinery) //Effect Three: shut down power across the ship.
+			for(var/obj/machinery/apc/A in SSmachines.machinery) //Effect Three: shut down power across the ship.
 				if(!(A.z in ftl_computer.linked.map_z))
 					continue
 				A.energy_fail(rand(60,80))
@@ -410,7 +410,7 @@
 		if(SHUNT_SABOTAGE_CRITICAL)
 			announcetxt = shunt_sabotage_text_critical
 
-			for(var/obj/machinery/power/apc/A in SSmachines.machinery) //Effect One: shut down power across the ship.
+			for(var/obj/machinery/apc/A in SSmachines.machinery) //Effect One: shut down power across the ship.
 				if(!(A.z in ftl_computer.linked.map_z))
 					continue
 				A.energy_fail(rand(100,120))

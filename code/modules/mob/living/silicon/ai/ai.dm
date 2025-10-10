@@ -82,7 +82,7 @@ var/global/list/ai_verbs_default = list(
 
 	//NEWMALF VARIABLES
 	var/malfunctioning = 0						// Master var that determines if AI is malfunctioning.
-	var/obj/machinery/power/apc/hack = null		// APC that is currently being hacked.
+	var/obj/machinery/apc/hack = null		// APC that is currently being hacked.
 	var/list/hacked_apcs = null					// List of all hacked APCs
 	var/uncardable = 0							// Whether the AI can be carded when malfunctioning.
 	var/hacked_apcs_hidden = 0					// Whether the hacked APCs belonging to this AI are hidden, reduces CPU generation from APCs.

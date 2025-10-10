@@ -375,8 +375,8 @@ var/global/list/obj/structure/cable/all_cables = list()
 				else
 					powernet.add_cable(C) //the cable was powernetless, let's just add it to our powernet
 
-		else if(istype(AM,/obj/machinery/power/apc))
-			var/obj/machinery/power/apc/N = AM
+		else if(istype(AM,/obj/machinery/apc))
+			var/obj/machinery/apc/N = AM
 			var/obj/machinery/power/terminal/terminal = N.terminal()
 			if(!terminal)	continue // APC are connected through their terminal
 

@@ -158,7 +158,7 @@
 		Topic(src, list("command"="bolts", "activate" = "1"))
 	return TRUE
 
-/obj/machinery/power/apc/AICtrlClick(mob/living/silicon/user) // turns off/on APCs.
+/obj/machinery/apc/AICtrlClick(mob/living/silicon/user) // turns off/on APCs.
 	if(user.incapacitated())
 		return FALSE
 	Topic(src, list("breaker"="1"))

@@ -82,7 +82,7 @@
 
 	var/list/L = list()
 	for(var/obj/machinery/power/terminal/term in powernet.nodes)
-		var/obj/machinery/power/apc/A = term.master_machine()
+		var/obj/machinery/apc/A = term.master_machine()
 		if(istype(A))
 			L += A
 
@@ -110,7 +110,7 @@
 		var/list/S = list("M-OFF", "DC-OFF","A-OFF","M-ON", "A-ON")
 		var/list/chg = list("N","C","F")
 
-		for(var/obj/machinery/power/apc/A in L)
+		for(var/obj/machinery/apc/A in L)
 			var/list/APC_entry = list()
 			APC_entry["breaker"] = A.operating
 			APC_entry["failure"] = A.failure_timer

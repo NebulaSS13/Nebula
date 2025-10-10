@@ -44,7 +44,7 @@
 /turf/wall,
 /area/unishi/library)
 "al" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24;
@@ -153,7 +153,7 @@
 /turf/floor/tiled/white,
 /area/unishi/chem)
 "aC" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -434,7 +434,7 @@
 /turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bu" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -848,7 +848,7 @@
 /turf/floor/tiled,
 /area/unishi/meeting)
 "cB" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -908,7 +908,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -1225,7 +1225,7 @@
 /turf/floor/tiled,
 /area/unishi/rnd)
 "dB" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -1370,7 +1370,7 @@
 "dS" = (
 /obj/machinery/atmospherics/valve,
 /obj/machinery/vending/hydroseeds,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -1571,7 +1571,7 @@
 /obj/item/chems/spray/extinguisher,
 /obj/item/chems/spray/extinguisher,
 /obj/item/box/animal_cubes/monkeys,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -1888,7 +1888,7 @@
 /turf/floor/tiled/dark,
 /area/unishi/common)
 "fl" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -2108,7 +2108,7 @@
 /turf/floor/tiled/dark,
 /area/unishi/smresearch)
 "fR" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;

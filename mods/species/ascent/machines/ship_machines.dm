@@ -1,4 +1,4 @@
-MANTIDIFY(/obj/machinery/power/apc/hyper, "mantid power node", "power controller")
+MANTIDIFY(/obj/machinery/apc/hyper, "mantid power node", "power controller")
 MANTIDIFY(/obj/machinery/atmospherics/unary/vent_pump/on, "mantid atmosphere outlet", "vent")
 MANTIDIFY(/obj/machinery/atmospherics/unary/vent_scrubber/on, "mantid atmosphere intake", "scrubber")
 MANTIDIFY(/obj/machinery/hologram/holopad/longrange, "mantid holopad", "holopad")

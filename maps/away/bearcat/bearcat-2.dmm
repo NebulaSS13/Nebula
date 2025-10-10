@@ -129,7 +129,7 @@
 /obj/structure/chair{
 	dir = 1
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 8
 	},
 /obj/structure/cable{
@@ -242,7 +242,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1;
 	name = "Communications APC"
 	},
@@ -261,7 +261,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Bridge APC"
 	},
@@ -484,7 +484,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc/derelict/full{
+/obj/machinery/apc/derelict/full{
 	dir = 4;
 	name = "Captain's Quarters APC"
 	},
@@ -562,7 +562,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1;
 	name = "Docking Area APC"
 	},
@@ -1082,7 +1082,7 @@
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/saloon)
 "cm" = (
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1;
 	name = "Crew Areas APC"
 	},
@@ -1535,7 +1535,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Bathrooms APC"
 	},
@@ -1637,7 +1637,7 @@
 /area/ship/scrap/crew/hallway/starboard)
 "dt" = (
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	name = "Dorms APC"
 	},
 /obj/machinery/light_switch{
@@ -1741,7 +1741,7 @@
 /area/ship/scrap/crew/kitchen)
 "dH" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Crew Deck APC"
 	},
@@ -1874,7 +1874,7 @@
 	icon_state = "0-2";
 	pixel_y = 1
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Galley APC"
 	},
@@ -2248,7 +2248,7 @@
 /area/ship/scrap/crew/medbay)
 "eA" = (
 /obj/item/pill_bottle/happy,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/structure/cable{
@@ -2382,7 +2382,7 @@
 "eM" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Cargo Hold APC"
 	},
@@ -2393,7 +2393,7 @@
 /turf/floor/tiled/usedup,
 /area/ship/scrap/cargo)
 "eN" = (
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Crew Deck APC"
 	},
@@ -2407,7 +2407,7 @@
 "eO" = (
 /obj/structure/table,
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict/full{
+/obj/machinery/apc/derelict/full{
 	name = "Medical Bay APC"
 	},
 /obj/machinery/light_switch{
@@ -2480,7 +2480,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/engine/starboard)
 "eU" = (
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/structure/cable{
@@ -2676,7 +2676,7 @@
 	dir = 4;
 	icon_state = "conpipe-c"
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1;
 	name = "Washroom APC"
 	},
@@ -3067,7 +3067,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/unused)
 "gc" = (
-/obj/machinery/power/apc/derelict/full{
+/obj/machinery/apc/derelict/full{
 	name = "Medical Bay APC"
 	},
 /obj/structure/cable,
@@ -3396,7 +3396,7 @@
 /area/ship/scrap/fire)
 "gL" = (
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -3510,7 +3510,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/structure/cable{
@@ -3666,7 +3666,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /mob/living/simple_animal/hostile/carp,
@@ -3691,7 +3691,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/structure/sign/warning/compressed_gas{
@@ -4437,7 +4437,7 @@
 /area/ship/scrap/maintenance/atmos)
 "iF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 8
 	},
 /obj/structure/cable,
@@ -5125,7 +5125,7 @@
 /obj/structure/closet/secure_closet/engineering_electrical/bearcat,
 /obj/item/cell/device/standard,
 /obj/item/cell/device/standard,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 8
 	},
 /obj/structure/cable{
@@ -5262,7 +5262,7 @@
 /turf/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "PP" = (
-/obj/machinery/power/apc/derelict/full{
+/obj/machinery/apc/derelict/full{
 	name = "Medical Bay APC"
 	},
 /obj/structure/cable{
