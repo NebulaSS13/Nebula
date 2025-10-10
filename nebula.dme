@@ -1459,6 +1459,7 @@
 #include "code\game\objects\structures\snowman.dm"
 #include "code\game\objects\structures\sofa.dm"
 #include "code\game\objects\structures\stasis_cage.dm"
+#include "code\game\objects\structures\structure_reagents.dm"
 #include "code\game\objects\structures\tables.dm"
 #include "code\game\objects\structures\tank_dispenser.dm"
 #include "code\game\objects\structures\target_stake.dm"

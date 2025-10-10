@@ -58,17 +58,6 @@
 	QDEL_NULL(grinding)
 	return TRUE
 
-// Reagent handling code copied from reagent dispensers. TODO: make reagent handling an extension or something.
-/obj/structure/working/quern/attackby(obj/item/used_item, mob/user)
-	// We do this here to avoid putting the vessel straight into storage.
-	// This is usually handled by afterattack on /chems.
-	if(storage && ATOM_IS_OPEN_CONTAINER(used_item) && user.check_intent(I_FLAG_HELP))
-		if(used_item.standard_dispenser_refill(user, src))
-			return TRUE
-		if(used_item.standard_pour_into(user, src))
-			return TRUE
-	return ..()
-
 /obj/structure/working/quern/initialize_reagents(populate = TRUE)
 	if(!reagents)
 		create_reagents(volume)
@@ -76,47 +65,11 @@
 		reagents.maximum_volume = max(reagents.maximum_volume, volume)
 	. = ..()
 
-/obj/structure/working/quern/verb/set_amount_dispensed()
-	set name = "Set amount dispensed"
-	set category = "Object"
-	set src in view(1)
-	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!"))
-		return
-	var/new_amount = input("Amount dispensed:","[src]") as null|anything in cached_json_decode(possible_transfer_amounts)
-	if(!CanPhysicallyInteract(usr))  // because input takes time and the situation can change
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
-		return
-	if (new_amount)
-		amount_dispensed = new_amount
-
-/obj/structure/working/quern/get_examine_strings(mob/user, distance, infix, suffix)
-	. = ..()
-	if(distance <= 2)
-		. += SPAN_NOTICE("It contains:")
-		if(LAZYLEN(reagents?.reagent_volumes))
-			for(var/decl/material/reagent as anything in reagents.liquid_volumes)
-				. += SPAN_NOTICE("[LIQUID_VOLUME(reagents, reagent)] unit\s of [reagent.get_reagent_name(reagents, MAT_PHASE_LIQUID)].")
-			for(var/decl/material/reagent as anything in reagents.solid_volumes)
-				. += SPAN_NOTICE("[SOLID_VOLUME(reagents, reagent)] unit\s of [reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)].")
+/obj/structure/working/quern/set_reagent_amount_dispensed(new_amount)
+	amount_dispensed = new_amount
 
 /obj/structure/working/quern/get_reagent_amount_dispensed()
 	return amount_dispensed
 
-/obj/structure/working/quern/get_alt_interactions(var/mob/user)
-	. = ..()
-	LAZYADD(., /decl/interaction_handler/set_transfer/quern)
-
-//Set amount dispensed
-/decl/interaction_handler/set_transfer/quern
-	expected_target_type = /obj/structure/working/quern
-
-/decl/interaction_handler/set_transfer/quern/is_possible(var/atom/target, var/mob/user)
-	. = ..()
-	if(.)
-		var/obj/structure/working/quern/quern = target
-		return !!quern.possible_transfer_amounts
-
-/decl/interaction_handler/set_transfer/quern/invoked(atom/target, mob/user, obj/item/prop)
-	var/obj/structure/working/quern/quern = target
-	quern.set_amount_dispensed()
+/obj/structure/working/quern/get_possible_reagent_transfer_amounts()
+	return cached_json_decode(possible_transfer_amounts)

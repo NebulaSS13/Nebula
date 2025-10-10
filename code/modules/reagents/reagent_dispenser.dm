@@ -18,23 +18,14 @@
 	var/can_toggle_open               = TRUE
 	var/tmp/possible_transfer_amounts = @"[10,25,50,100,500]"
 
-/obj/structure/reagent_dispensers/Initialize(ml, _mat, _reinf_mat)
-	. = ..()
-	if (!possible_transfer_amounts)
-		verbs -= /obj/structure/reagent_dispensers/verb/set_amount_dispensed
-
 /obj/structure/reagent_dispensers/get_reagent_amount_dispensed()
 	return amount_dispensed
 
-/obj/structure/reagent_dispensers/receive_mouse_drop(atom/dropping, mob/user, params)
-	if(!(. = ..()) && user?.get_active_held_item() == dropping && isitem(dropping))
-		// Awful. Sorry.
-		var/obj/item/item = dropping
-		var/old_atom_flags = atom_flags
-		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-		if(item.standard_pour_into(user, src))
-			. = TRUE
-		atom_flags = old_atom_flags
+/obj/structure/reagent_dispensers/set_reagent_amount_dispensed(new_amount)
+	amount_dispensed = new_amount
+
+/obj/structure/reagent_dispensers/get_possible_reagent_transfer_amounts()
+	return cached_json_decode(possible_transfer_amounts)
 
 /obj/structure/reagent_dispensers/on_reagent_change()
 	if(!(. = ..()))
@@ -64,26 +55,8 @@
 				. += "Its refilling cap is open."
 			else
 				. += "Its refilling cap is closed."
-		. += SPAN_NOTICE("It contains:")
-		if(LAZYLEN(reagents?.reagent_volumes))
-			for(var/decl/material/reagent as anything in reagents.liquid_volumes)
-				. += SPAN_NOTICE("[LIQUID_VOLUME(reagents, reagent)] unit\s of [reagent.get_reagent_name(reagents, MAT_PHASE_LIQUID)].")
-			for(var/decl/material/reagent as anything in reagents.solid_volumes)
-				. += SPAN_NOTICE("[SOLID_VOLUME(reagents, reagent)] unit\s of [reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)].")
-		else
-			. += SPAN_NOTICE("Nothing.")
-		if(reagents?.maximum_volume)
-			. += "It may contain up to [reagents.maximum_volume] unit\s of fluid."
 
 /obj/structure/reagent_dispensers/attackby(obj/item/used_item, mob/user)
-
-	// We do this here to avoid putting the vessel straight into storage.
-	// This is usually handled by afterattack on /chems.
-	if(storage && ATOM_IS_OPEN_CONTAINER(used_item) && user.check_intent(I_FLAG_HELP))
-		if(used_item.standard_dispenser_refill(user, src))
-			return TRUE
-		if(used_item.standard_pour_into(user, src))
-			return TRUE
 
 	if(wrenchable && IS_WRENCH(used_item))
 		unwrenched = !unwrenched
@@ -94,20 +67,6 @@
 		return TRUE
 
 	. = ..()
-
-/obj/structure/reagent_dispensers/verb/set_amount_dispensed()
-	set name = "Set amount dispensed"
-	set category = "Object"
-	set src in view(1)
-	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!"))
-		return
-	var/N = input("Amount dispensed:","[src]") as null|anything in cached_json_decode(possible_transfer_amounts)
-	if(!CanPhysicallyInteract(usr))  // because input takes time and the situation can change
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!"))
-		return
-	if (N)
-		amount_dispensed = N
 
 /obj/structure/reagent_dispensers/explosion_act(severity)
 	. = ..()
@@ -323,23 +282,8 @@
 //Interactions
 /obj/structure/reagent_dispensers/get_alt_interactions(var/mob/user)
 	. = ..()
-	LAZYADD(., /decl/interaction_handler/set_transfer/reagent_dispenser)
 	if(can_toggle_open)
 		LAZYADD(., /decl/interaction_handler/toggle_open/reagent_dispenser)
-
-//Set amount dispensed
-/decl/interaction_handler/set_transfer/reagent_dispenser
-	expected_target_type = /obj/structure/reagent_dispensers
-
-/decl/interaction_handler/set_transfer/reagent_dispenser/is_possible(var/atom/target, var/mob/user)
-	. = ..()
-	if(.)
-		var/obj/structure/reagent_dispensers/R = target
-		return !!R.possible_transfer_amounts
-
-/decl/interaction_handler/set_transfer/reagent_dispenser/invoked(atom/target, mob/user, obj/item/prop)
-	var/obj/structure/reagent_dispensers/R = target
-	R.set_amount_dispensed()
 
 //Allows normal refilling, or toggle back to normal reagent dispenser operation
 /decl/interaction_handler/toggle_open/reagent_dispenser
