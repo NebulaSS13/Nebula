@@ -26,6 +26,8 @@
 	var/list/template_categories
 	///The initial type of level_data to instantiate new z-level with initially. (Is replaced by whatever is in the map file.) If null, will use default.
 	var/level_data_type
+	/// Whether or not this should show up for admin map spawning.
+	var/is_spawnable = TRUE
 	/// Various tags used for selecting templates for placement on a map.
 	var/template_tags = 0
 
