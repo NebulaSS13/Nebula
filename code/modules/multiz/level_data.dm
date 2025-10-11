@@ -504,12 +504,9 @@
 					mob_count--
 					CHECK_TICK
 
-///Changes anything named we may need to rename accordingly to the parent location name. For instance, exoplanets levels.
-/datum/level_data/proc/adapt_location_name(var/location_name)
-	SHOULD_CALL_PARENT(TRUE)
-	if(!base_area || ispath(base_area, /area/space))
-		return FALSE
-	return TRUE
+///Changes anything named we may need to rename based on the parent location name. For instance, exoplanet surface areas.
+/datum/level_data/proc/adapt_to_location_name(var/location_name)
+	return
 
 //#TODO: this could probably be done in a more elegant way. Since most map templates will never call this.
 ///Called before a runtime generated template is generated on our z-level. Only applies to templates generated onto new z-levels.
