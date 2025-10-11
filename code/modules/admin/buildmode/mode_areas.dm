@@ -39,7 +39,7 @@
 /datum/build_mode/areas/Configurate()
 	var/mode = alert("Pick or Create an area.", "Build Mode: Areas", "Pick", "Create", "Cancel")
 	if (mode == "Pick")
-		var/area/path = select_subpath((selected_area?.type || /area/space), /area)
+		var/area/path = select_subpath((selected_area?.type || world.area), /area)
 		if (path)
 			for (var/area/build_area in global.areas)
 				if (build_area.type == path)
@@ -55,7 +55,7 @@
 		new_area.power_equip = 0
 		new_area.power_light = 0
 		new_area.power_environ = 0
-		new_area.always_unpowered = 0
+		new_area.always_unpowered = FALSE
 		SelectArea(new_area)
 		user.client.debug_variables(selected_area)
 		to_chat(user, "Created area [new_area.proper_name]")
