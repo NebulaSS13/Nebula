@@ -86,8 +86,8 @@
 	req_access = list(access_engine)
 
 /area/exodus/solar
-	requires_power = 1
-	always_unpowered = 1
+	requires_power = TRUE
+	always_unpowered = TRUE
 	has_gravity = FALSE
 	base_turf = /turf/space
 
