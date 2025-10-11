@@ -109,11 +109,6 @@ STACK_SUBTYPES(beige,          "beige cloth",                   solid/organic/cl
 STACK_SUBTYPES(lime,           "lime cloth",                    solid/organic/cloth,         bolt/lime,        null)
 STACK_SUBTYPES(red,            "red cloth",                     solid/organic/cloth,         bolt/red,         null)
 
-STACK_SUBTYPES(steel,          "steel",                         solid/metal/steel,           strut,            null)
-STACK_SUBTYPES(plastic,        "plastic",                       solid/organic/plastic,       strut,            null)
-STACK_SUBTYPES(aluminium,      "aluminium",                     solid/metal/aluminium,       strut,            null)
-STACK_SUBTYPES(titanium,       "titanium",                      solid/metal/titanium,        strut,            null)
-
 STACK_SUBTYPES(steel,          "steel",                         solid/metal/steel,           rods,             null)
 STACK_SUBTYPES(plastic,        "plastic",                       solid/organic/plastic,       rods,             null)
 STACK_SUBTYPES(aluminium,      "aluminium",                     solid/metal/aluminium,       rods,             null)
