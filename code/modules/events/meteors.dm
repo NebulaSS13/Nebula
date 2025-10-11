@@ -422,7 +422,7 @@ var/global/list/meteors_major = list(
 /obj/effect/meteor/destroyer/meteor_effect()
 	..()
 	explosion(src.loc, 1, 2, 3, 4, 0)
-	for(var/obj/machinery/power/apc/A in range(rand(12, 20), src))
+	for(var/obj/machinery/apc/A in range(rand(12, 20), src))
 		A.energy_fail(round(10 * rand(8, 12)))
 
 /obj/effect/meteor/destroyer/get_shield_damage()

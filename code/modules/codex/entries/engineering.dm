@@ -1,5 +1,5 @@
 /datum/codex_entry/apc
-	associated_paths = list(/obj/machinery/power/apc)
+	associated_paths = list(/obj/machinery/apc)
 	mechanics_text = "An APC (Area Power Controller) regulates and supplies backup power for the area they are in. Their power channels are divided \
 	out into 'environmental' (items that manipulate airflow and temperature), 'lighting' (the lights), and 'equipment' (everything else that consumes power).  \
 	Power consumption and backup power cell charge can be seen from the interface, further controls (turning a specific channel on, off or automatic, \

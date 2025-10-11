@@ -54,8 +54,8 @@
 /datum/unit_test/areas_apc_uniqueness/start_test()
 	var/failure = ""
 	for(var/area/A in global.areas)
-		var/obj/machinery/power/apc/found_apc = null
-		for(var/obj/machinery/power/apc/APC in A)
+		var/obj/machinery/apc/found_apc = null
+		for(var/obj/machinery/apc/APC in A)
 			if(!found_apc)
 				found_apc = APC
 				continue

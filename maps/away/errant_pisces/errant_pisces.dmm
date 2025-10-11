@@ -218,7 +218,7 @@
 /turf/floor/plating,
 /area/errant_pisces/bow_starboard)
 "aF" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -321,7 +321,7 @@
 /turf/floor/plating,
 /area/errant_pisces/bow_port)
 "aR" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -960,7 +960,7 @@
 /turf/floor/plating,
 /area/errant_pisces/storage_port)
 "cV" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -1032,7 +1032,7 @@
 /turf/floor/plating,
 /area/errant_pisces/atmos)
 "dd" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1070,7 +1070,7 @@
 /turf/floor/plating,
 /area/errant_pisces/enginering)
 "dg" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1113,7 +1113,7 @@
 /turf/floor/plating,
 /area/errant_pisces/storage_port)
 "dm" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1365,7 +1365,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -2115,7 +2115,7 @@
 /turf/floor/plating,
 /area/errant_pisces/bow_maint)
 "ft" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2247,7 +2247,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -2289,7 +2289,7 @@
 /turf/floor/plating,
 /area/errant_pisces/smes_room)
 "fM" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -2327,7 +2327,7 @@
 	dir = 4;
 	pixel_x = -32
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -2505,7 +2505,7 @@
 /turf/floor/tiled,
 /area/errant_pisces/hallway)
 "gm" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2716,7 +2716,7 @@
 /turf/floor/tiled,
 /area/errant_pisces/dorms)
 "gV" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2937,7 +2937,7 @@
 /turf/floor/laminate,
 /area/errant_pisces/rooms)
 "hA" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -3643,7 +3643,7 @@
 /turf/floor/tiled,
 /area/errant_pisces/infirmary)
 "jJ" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -3864,7 +3864,7 @@
 /turf/floor/tiled,
 /area/errant_pisces/cryo)
 "kq" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -4623,7 +4623,7 @@
 /turf/floor/tiled,
 /area/errant_pisces/science_wing)
 "mD" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -4685,7 +4685,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -4719,7 +4719,7 @@
 /turf/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "mQ" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -4767,7 +4767,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -5297,7 +5297,7 @@
 /turf/floor/tiled,
 /area/errant_pisces/aft_hallway)
 "nU" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -5356,7 +5356,7 @@
 "oe" = (
 /obj/structure/closet/crate/radiation,
 /obj/item/stack/material/aerogel/mapped/tritium/ten,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -5610,7 +5610,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -5812,7 +5812,7 @@
 /area/errant_pisces/fishing_wing)
 "ps" = (
 /obj/structure/cable/green,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -6431,7 +6431,7 @@
 /obj/structure/mirror{
 	pixel_x = 30
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},

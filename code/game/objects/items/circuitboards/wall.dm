@@ -29,7 +29,7 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	build_path = /obj/machinery/power/apc/buildable
+	build_path = /obj/machinery/apc/buildable
 	board_type = "wall"
 	origin_tech = @'{"programming":1,"engineering":1}'
 	req_components = list()

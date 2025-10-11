@@ -135,7 +135,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/segment,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "Crew Deck APC";
 	pixel_x = -22
@@ -1194,7 +1194,7 @@
 /turf/wall,
 /area/ship/trade/crew/saloon)
 "cO" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Crew Areas APC";
 	pixel_y = 22
@@ -1387,7 +1387,7 @@
 "ds" = (
 /obj/structure/table,
 /obj/machinery/reagent_temperature,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -1666,7 +1666,7 @@
 /obj/structure/window/reinforced/tinted,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "Bathrooms APC";
 	pixel_x = 22
@@ -1806,7 +1806,7 @@
 /area/space)
 "el" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "Crew Deck APC";
 	pixel_x = 22
@@ -1886,7 +1886,7 @@
 	icon_state = "0-2";
 	pixel_y = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "Galley APC";
 	pixel_x = 22
@@ -2177,7 +2177,7 @@
 /area/ship/trade/crew/medbay)
 "fg" = (
 /obj/item/pill_bottle/happy,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -2322,7 +2322,7 @@
 /turf/floor/plating/airless,
 /area/ship/trade/maintenance/engine/starboard)
 "fA" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -2981,7 +2981,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -3055,7 +3055,7 @@
 /turf/floor/plating,
 /area/ship/trade/maintenance/hallway)
 "hA" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "Medical Bay APC";
 	pixel_y = -22
 	},
@@ -3131,7 +3131,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc/high{
+/obj/machinery/apc/high{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -4463,7 +4463,7 @@
 /area/ship/trade/shuttle/outgoing/general)
 "ld" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
-/obj/machinery/power/apc/high{
+/obj/machinery/apc/high{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -4658,7 +4658,7 @@
 /turf/wall/r_wall,
 /area/ship/trade/crew/medbay/chemistry)
 "nm" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 22
 	},
@@ -5057,7 +5057,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 22
 	},
@@ -5248,7 +5248,7 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/obj/machinery/power/apc/high{
+/obj/machinery/apc/high{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -5261,7 +5261,7 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -6061,7 +6061,7 @@
 /turf/floor/tiled,
 /area/ship/trade/shuttle/rescue)
 "Dl" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "Medical Bay APC";
 	pixel_y = -22
 	},
@@ -6163,7 +6163,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Communications APC";
 	pixel_y = 22
@@ -6202,7 +6202,7 @@
 /obj/random/hat,
 /obj/random/hat,
 /obj/random/masks,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -6682,7 +6682,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Docking Area APC";
 	pixel_y = 22
@@ -6995,7 +6995,7 @@
 	dir = 4;
 	icon_state = "conpipe-c"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Washroom APC";
 	pixel_y = 22
@@ -7187,7 +7187,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -7329,7 +7329,7 @@
 "QH" = (
 /obj/structure/table,
 /obj/structure/cable,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "Medical Bay APC";
 	pixel_y = -22
 	},
@@ -7374,7 +7374,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "Captain's Quarters APC";
 	pixel_x = 22
@@ -7557,7 +7557,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Docking Area APC";
 	pixel_y = 22
@@ -7739,7 +7739,7 @@
 /area/ship/trade/shuttle/outgoing/general)
 "Vc" = (
 /obj/structure/cable,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -22
 	},
@@ -7968,7 +7968,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -8086,7 +8086,7 @@
 /obj/structure/closet/secure_closet/engineering_electrical,
 /obj/item/cell/device/standard,
 /obj/item/cell/device/standard,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -22
 	},

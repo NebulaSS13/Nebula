@@ -573,7 +573,7 @@
 /turf/floor/plating,
 /area/lar_maria/solar_control)
 "bB" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1314,7 +1314,7 @@
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "dS" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1399,7 +1399,7 @@
 /turf/floor/tiled,
 /area/lar_maria/library)
 "eh" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1688,7 +1688,7 @@
 /turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fl" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1906,7 +1906,7 @@
 /turf/floor/tiled,
 /area/lar_maria/office)
 "fR" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2042,7 +2042,7 @@
 /turf/floor/laminate,
 /area/lar_maria/dorms)
 "gn" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2328,7 +2328,7 @@
 /turf/open,
 /area/lar_maria/hallway)
 "hi" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -2411,7 +2411,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -2687,7 +2687,7 @@
 /turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "in" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24

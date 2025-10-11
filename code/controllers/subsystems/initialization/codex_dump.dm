@@ -129,7 +129,7 @@ TODO: work out how to implement an external search function.
 	// Copied from del_the_world UT exceptions list.
 	var/static/list/skip_types = typesof(
 		/obj/item/organ/external/chest,
-		/obj/machinery/power/apc,
+		/obj/machinery/apc,
 		/obj/machinery/alarm,
 		/obj/structure/stairs
 	)

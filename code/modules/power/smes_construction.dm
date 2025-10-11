@@ -257,9 +257,9 @@
 /obj/machinery/power/smes/buildable/proc/apcs_overload(var/failure_chance, var/overload_chance, var/reboot_chance)
 	if (!src.powernet)
 		return
-	var/list/obj/machinery/power/apc/apcs = list()
+	var/list/obj/machinery/apc/apcs = list()
 	for(var/obj/machinery/power/terminal/T in powernet.nodes)
-		var/obj/machinery/power/apc/A = T.master_machine()
+		var/obj/machinery/apc/A = T.master_machine()
 		if(istype(A))
 			if (prob(overload_chance))
 				A.overload_lighting()
@@ -270,7 +270,7 @@
 
 	if (apcs.len)
 		var/overload_damage = charge/100/apcs.len
-		for (var/obj/machinery/power/apc/A in apcs)
+		for (var/obj/machinery/apc/A in apcs)
 			A.take_damage(overload_damage, ELECTROCUTE)
 
 // Proc: update_icon()

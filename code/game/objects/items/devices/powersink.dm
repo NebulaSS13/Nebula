@@ -139,7 +139,7 @@
 				// Enough power drained this tick, no need to torture more APCs
 				if(drained >= drain_rate)
 					break
-				var/obj/machinery/power/apc/A = T.master_machine()
+				var/obj/machinery/apc/A = T.master_machine()
 				if(istype(A))
 					drained += A.drain_power(amount = drain_rate)
 		power_drained += drained

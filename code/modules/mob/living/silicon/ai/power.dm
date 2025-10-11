@@ -8,7 +8,7 @@
 		return
 
 	to_chat(src, "<span class='danger'>Main power lost. System switched to internal capacitor. Beginning diagnostics.</span>")
-	var/obj/machinery/power/apc/theAPC = null
+	var/obj/machinery/apc/theAPC = null
 	var/connection_failures = 0
 	while(aiRestorePowerRoutine)
 		// If the routine is running, proceed to another step.
@@ -98,7 +98,7 @@
 	return 0
 
 // Resets passed APC so the AI may function again.
-/mob/living/silicon/ai/proc/reset_apc(var/obj/machinery/power/apc/A)
+/mob/living/silicon/ai/proc/reset_apc(var/obj/machinery/apc/A)
 	if(!istype(A))
 		return
 

@@ -296,7 +296,7 @@
 /turf/wall/r_wall,
 /area/ministation/telecomms)
 "bn" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Vault APC";
 	pixel_y = 25
@@ -719,7 +719,7 @@
 /turf/floor/tiled,
 /area/ministation/bridge)
 "cu" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -1934,7 +1934,7 @@
 /area/ministation/science)
 "iq" = (
 /obj/effect/decal/cleanable/filth,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -2085,7 +2085,7 @@
 /turf/floor/tiled,
 /area/ministation/hall/n3)
 "jd" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -2219,7 +2219,7 @@
 /turf/floor/tiled/white,
 /area/ministation/science)
 "jy" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -3046,7 +3046,7 @@
 /turf/wall/titanium,
 /area/ministation/shuttle/outgoing)
 "nI" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "_East APC";
 	pixel_x = 27;
@@ -3303,7 +3303,7 @@
 /turf/floor/laminate/walnut,
 /area/ministation/library)
 "pz" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -4003,7 +4003,7 @@
 /area/ministation/science)
 "vJ" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -4584,7 +4584,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "_West APC";
 	pixel_x = -25
@@ -5781,7 +5781,7 @@
 /turf/floor/tiled/steel_grid,
 /area/ministation/science)
 "Il" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -6913,7 +6913,7 @@
 /turf/floor/laminate/yew,
 /area/ministation/court)
 "Qk" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -6927,7 +6927,7 @@
 /turf/floor/plating,
 /area/ministation/maint/l3se)
 "Qq" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -7031,7 +7031,7 @@
 /turf/floor/laminate/mahogany,
 /area/ministation/library)
 "Re" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -7858,7 +7858,7 @@
 	pixel_y = 30;
 	pixel_x = -33
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -8362,7 +8362,7 @@
 	icon_state = "0-2";
 	pixel_y = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -27
 	},

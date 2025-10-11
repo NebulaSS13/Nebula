@@ -652,7 +652,7 @@
 /turf/floor/plating/airless,
 /area/unishi/living)
 "cg" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -28;
 	req_access = newlist()
@@ -743,7 +743,7 @@
 /turf/floor/tiled/white,
 /area/unishi/med)
 "cq" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 20;
 	req_access = newlist()
@@ -821,7 +821,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -28;
 	req_access = newlist()
@@ -1096,7 +1096,7 @@
 /turf/floor/tiled,
 /area/unishi/living)
 "dh" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 20;
 	req_access = newlist()
@@ -1897,7 +1897,7 @@
 /area/unishi/living)
 "fg" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = -30;
 	req_access = newlist()

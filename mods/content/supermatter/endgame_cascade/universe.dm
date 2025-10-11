@@ -89,7 +89,7 @@
 			alm.explosion_act(2)
 
 /datum/universal_state/supermatter_cascade/proc/APCSet()
-	for (var/obj/machinery/power/apc/APC in SSmachines.machinery)
+	for (var/obj/machinery/apc/APC in SSmachines.machinery)
 		if (!(APC.stat & BROKEN) && !APC.is_critical)
 			APC.chargemode = 0
 			var/obj/item/cell/cell = APC.get_cell()

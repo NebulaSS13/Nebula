@@ -210,7 +210,7 @@
 /obj/effect/floor_decal/industrial/loading{
 	dir = 1
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4
 	},
 /obj/structure/cable{
@@ -272,7 +272,7 @@
 /obj/effect/floor_decal/industrial/loading{
 	dir = 1
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 8
 	},
 /obj/structure/cable{
@@ -395,7 +395,7 @@
 	pixel_x = 24;
 	dir = 8
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /turf/floor/usedup,
@@ -414,7 +414,7 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 9
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -472,7 +472,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/lower)
 "bf" = (
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/structure/cable{
@@ -906,7 +906,7 @@
 	pixel_x = 24;
 	dir = 8
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/structure/closet/crate/uranium,
@@ -1012,7 +1012,7 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/effect/decal/cleanable/cobweb,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /turf/floor/tiled/dark/airless,
@@ -1353,7 +1353,7 @@
 	pixel_x = 24;
 	dir = 8
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/item/radio/intercom{
@@ -1463,7 +1463,7 @@
 /obj/random/gloves,
 /obj/random/clothing,
 /obj/random/clothing,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /turf/floor/tiled/dark/airless,
@@ -1752,7 +1752,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc/derelict,
+/obj/machinery/apc/derelict,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -1998,7 +1998,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/eva)
 "el" = (
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/yellow{
@@ -2255,7 +2255,7 @@
 /obj/item/stock_parts/micro_laser,
 /obj/item/stock_parts/micro_laser/ultra,
 /obj/structure/rack,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -2364,7 +2364,7 @@
 /obj/item/box/lights/bulbs,
 /obj/item/box/lights/mixed,
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	name = "Tools Storage APC"
 	},
 /obj/effect/floor_decal/corner/yellow{

@@ -662,7 +662,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -686,7 +686,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -1862,7 +1862,7 @@
 /area/map_template/colony/engineering)
 "ej" = (
 /obj/structure/table/steel_reinforced,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -2183,7 +2183,7 @@
 /turf/floor/lino,
 /area/map_template/colony/messhall)
 "eO" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -2220,7 +2220,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -3034,7 +3034,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 10
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -3478,7 +3478,7 @@
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/atmospherics)
 "gY" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -3700,7 +3700,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 6
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -3940,7 +3940,7 @@
 /turf/floor/laminate/walnut,
 /area/map_template/colony/commons)
 "hT" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -4176,7 +4176,7 @@
 /area/map_template/colony/bathroom)
 "ip" = (
 /obj/effect/floor_decal/borderfloorwhite,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -4423,7 +4423,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/techfloor,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -4676,7 +4676,7 @@
 /area/map_template/colony/jail)
 "ji" = (
 /obj/effect/floor_decal/techfloor,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -5362,7 +5362,7 @@
 	dir = 10;
 	icon_state = "warning"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -5871,7 +5871,7 @@
 /turf/floor/plating,
 /area/map_template/colony/jail)
 "lt" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -6868,7 +6868,7 @@
 /turf/floor/plating,
 /area/map_template/colony/hydroponics)
 "nh" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28
@@ -8002,7 +8002,7 @@
 /area/map_template/colony/airlock)
 "Hy" = (
 /obj/machinery/portable_atmospherics/hydroponics,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	locked = 0;
 	name = "south bump";
 	pixel_y = -28

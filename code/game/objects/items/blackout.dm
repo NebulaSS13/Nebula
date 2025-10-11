@@ -74,8 +74,8 @@
 
 	var/datum/powernet/powernet = terminal_in.powernet
 	for(var/obj/machinery/power/terminal/terminal_out in powernet.nodes)
-		if(istype(terminal_out.master, /obj/machinery/power/apc))
-			var/obj/machinery/power/apc/A = terminal_out.master
+		if(istype(terminal_out.master, /obj/machinery/apc))
+			var/obj/machinery/apc/A = terminal_out.master
 			A.energy_fail(rand(30 * severity, 60 * severity))
 		if(istype(terminal_out.master, /obj/machinery/power/smes/buildable))
 			var/obj/machinery/power/smes/buildable/S = terminal_out.master

@@ -196,7 +196,7 @@
 /turf/floor/tiled,
 /area/ministation/hall/w2)
 "aU" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -453,7 +453,7 @@
 /obj/effect/floor_decal/floordetail/edgedrain{
 	dir = 8
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "_West APC";
 	pixel_x = -25
@@ -1945,7 +1945,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "_South APC";
 	pixel_y = -24
 	},
@@ -2300,7 +2300,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "_West APC";
 	pixel_x = -25
@@ -2901,7 +2901,7 @@
 /turf/floor/plating,
 /area/ministation/maint/secmaint)
 "oD" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -4392,7 +4392,7 @@
 /turf/floor/lino,
 /area/ministation/cafe)
 "tT" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "_East APC";
 	pixel_x = 27;
@@ -4438,7 +4438,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -4652,7 +4652,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "_South APC";
 	pixel_y = -24
 	},
@@ -4839,7 +4839,7 @@
 /turf/floor/plating,
 /area/ministation/maint/l2centrals)
 "vn" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -6805,7 +6805,7 @@
 /turf/floor/carpet/blue3,
 /area/ministation/security)
 "CP" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -7853,7 +7853,7 @@
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "Jm" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "_East APC";
 	pixel_x = 27;
@@ -8786,7 +8786,7 @@
 /turf/floor/carpet/blue3,
 /area/ministation/security)
 "OF" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "_North APC";
 	pixel_y = 24
@@ -9911,7 +9911,7 @@
 /turf/floor/tiled,
 /area/ministation/hall/e2)
 "UY" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "_East APC";
 	pixel_x = 27;
