@@ -39,7 +39,7 @@
 
 /obj/machinery/gravity_generator/proc/locatelocalareas()
 	for(var/area/A in range(src,effectiverange))
-		if(istype(A,/area/space))
+		if(!A.can_have_gravity)
 			continue // No (de)gravitizing space.
 		localareas |= A
 
