@@ -14,6 +14,3 @@
 	. = ..()
 	. += "a supermatter engine"
 	return .
-
-/decl/material/solid/exotic_matter
-	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in all kinds of fringe physics-defying technology."
