@@ -125,7 +125,7 @@
 		return FALSE
 	var/reserve = 0
 	for(var/obj/item/frame in holder)
-		reserve += frame.reagents?.total_volume
+		reserve += REAGENT_TOTAL_VOLUME(frame.reagents)
 		if(reserve >= amt)
 			return TRUE
 	return FALSE
@@ -141,9 +141,9 @@
 	amt -= raw_reserves
 	raw_reserves = 0
 	for(var/obj/item/frame in holder)
-		if(!frame.reagents?.total_volume)
+		if(!REAGENT_TOTAL_VOLUME(frame.reagents))
 			continue
-		var/consume = min(amt, frame.reagents.total_volume)
+		var/consume = min(amt, REAGENT_TOTAL_VOLUME(frame.reagents))
 		frame.reagents.remove_any(consume)
 		amt -= consume
 		if(amt <= 0)
@@ -181,7 +181,7 @@
 
 	var/list/holder_contents = hive.get_contained_external_atoms()
 	for(var/obj/item/hive_frame/frame in holder_contents)
-		if(!frame.reagents || (frame.reagents.total_volume >= frame.reagents.maximum_volume))
+		if(!frame.reagents || (REAGENT_TOTAL_VOLUME(frame.reagents) >= REAGENT_MAXIMUM_VOLUME(frame.reagents)))
 			continue
 		var/fill_cost = REAGENTS_FREE_SPACE(frame.reagents)
 		if(has_material(FRAME_FILL_MATERIAL_COST) && has_reserves(fill_cost))

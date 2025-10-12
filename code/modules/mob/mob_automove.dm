@@ -25,7 +25,6 @@
 /mob/failed_automove()
 	..()
 	stop_automove()
-	_automove_target = null
 	return FALSE
 
 /mob/start_automove(target, movement_type, datum/automove_metadata/metadata)

@@ -2020,3 +2020,6 @@ default behaviour is:
 //Pixel projectiles need a client, so we need a way to pass who the last user was for view calcs
 /mob/living/proc/get_effective_gunner()
 	return src
+
+/mob/living/proc/is_playing_dead()
+	return stat || current_posture?.prone || (status_flags & FAKEDEATH)

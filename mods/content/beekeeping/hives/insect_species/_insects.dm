@@ -22,6 +22,7 @@
 	var/swarm_type  = /obj/effect/insect_swarm
 	var/max_swarm_growth_intensity = 50
 	var/max_swarm_intensity = 100
+	var/max_swarm_state = 6
 
 	// Venom delivered by swarms whens stinging a victim.
 	var/sting_reagent
@@ -72,6 +73,17 @@
 		if(!istype(produce_material, /decl/material))
 			. += "non-material product material type: '[produce_material]'"
 
+	if(!swarm_icon)
+		. += "null swarm icon"
+	else
+		for(var/i = 0 to max_swarm_state)
+			var/check_state = num2text(i)
+			if(!check_state_in_icon(check_state, swarm_icon))
+				. += "missing active icon_state '[check_state]'"
+			check_state = "[check_state]_smoked"
+			if(!check_state_in_icon(check_state, swarm_icon))
+				. += "missing smoked icon_state '[check_state]'"
+
 /decl/insect_species/proc/fill_hive_frame(obj/item/frame)
 
 	if(!istype(frame) || QDELETED(frame))
@@ -81,7 +93,7 @@
 	if(frame_space <= 0)
 		return FALSE
 
-	if(frame.reagents?.maximum_volume && length(produce_reagents))
+	if(REAGENT_MAXIMUM_VOLUME(frame.reagents) && length(produce_reagents))
 		var/reagent_split = max(1, floor(min(REAGENTS_FREE_SPACE(frame.reagents), 20) / length(produce_reagents)))
 		for(var/reagent in produce_reagents)
 			frame.reagents.add_reagent(reagent, max(1, (reagent_split * produce_reagents[reagent])), defer_update = TRUE)
@@ -168,7 +180,7 @@
 		if(!swarm)
 			var/comb_count = 0
 			for(var/obj/item/hive_frame/frame in hive)
-				if(frame.reagents && frame.reagents.total_volume >= frame.reagents.maximum_volume)
+				if(REAGENT_TOTAL_VOLUME(frame.reagents) >= REAGENT_MAXIMUM_VOLUME(frame.reagents))
 					comb_count++
 			if(length(hive_metadata.swarms) < comb_count)
 				swarm = new swarm_type(hive.loc, src, hive_metadata)

@@ -7,7 +7,7 @@
 	var/dead = FALSE
 	var/sampled = FALSE
 	var/datum/seed/plant
-	var/harvestable = 0
+	var/harvestable = 0 // Note that this is a counter, not a bool.
 	var/pollen = 0
 
 /obj/structure/flora/plant/large
@@ -17,7 +17,7 @@
 /obj/structure/flora/plant/Process()
 	if(plant?.produces_pollen <= 0)
 		return PROCESS_KILL
-	if(pollen < 10)
+	if(pollen < MAX_POLLEN_PER_FLOWER)
 		pollen += plant.produces_pollen * POLLEN_PRODUCTION_MULT
 
 /* Notes for future work moving logic off hydrotrays onto plants themselves:
@@ -164,6 +164,7 @@
 	icon_state = "flower5"
 	is_spawnable_type = TRUE
 
+// Only contains roundstart plants, this is meant to be a mapping helper.
 /obj/structure/flora/plant/random_flower/proc/get_flower_variants()
 	var/static/list/flower_variants
 	if(isnull(flower_variants))

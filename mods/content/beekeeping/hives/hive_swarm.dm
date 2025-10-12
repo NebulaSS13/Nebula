@@ -6,7 +6,7 @@
 	default_pixel_z   = 8
 	layer             = ABOVE_HUMAN_LAYER
 	pass_flags        = PASS_FLAG_TABLE
-	movement_handlers = list(/datum/movement_handler/delay/insect_swarm)
+	movement_handlers = list(/datum/movement_handler/delay/insect_swarm = list(1 SECOND))
 
 	/// Current movement target for automove (ie. hive, flowers or victim)
 	VAR_PRIVATE/atom/move_target
@@ -18,15 +18,10 @@
 	var/swarm_agitation = 0
 	/// Percentage value; if it drops to 0, the swarm will be destroyed.
 	var/swarm_intensity = 1
-	/// if more states are added to swarm.dmi, increase this
-	var/const/MAX_SWARM_STATE = 6
 	/// Cooldown timer for next tick.
 	VAR_PRIVATE/next_work = 0
 	/// Time that smoke will wear off.
 	var/smoked_until = 0
-
-/datum/movement_handler/delay/insect_swarm
-	delay = 1 SECOND
 
 /datum/movement_handler/delay/insect_swarm/DoMove(direction, mob/mover, is_external)
 	..()
@@ -46,8 +41,7 @@
 	if(!istype(owner))
 		PRINT_STACK_TRACE("Insect swarm created with invalid hive: '[owner]'")
 		return INITIALIZE_HINT_QDEL
-	color = insect_type.swarm_color
-	icon  = insect_type.swarm_icon
+	update_transform()
 	update_swarm()
 	LAZYDISTINCTADD(owner.swarms, src)
 	START_PROCESSING(SSobj, src)
@@ -61,9 +55,29 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
+// Resolves the current swarm amount to a coarser value used for icon state selection.
+/obj/effect/insect_swarm/proc/get_swarm_state()
+	return ceil((swarm_intensity / insect_type.max_swarm_intensity) * insect_type.max_swarm_state)
+
+/obj/effect/insect_swarm/on_update_icon()
+	. = ..()
+	color = insect_type.swarm_color
+	icon  = insect_type.swarm_icon
+	icon_state = num2text(get_swarm_state())
+	if(is_smoked())
+		icon_state = "[icon_state]_smoked"
+
+/obj/effect/insect_swarm/update_transform()
+	. = ..()
+	// Some icon variation via transform.
+	if(prob(75))
+		var/matrix/swarm_transform = transform || matrix()
+		swarm_transform.Turn(pick(90, 180, 270))
+		transform = swarm_transform
+
 /obj/effect/insect_swarm/proc/update_swarm()
-	icon_state = num2text(ceil((swarm_intensity / insect_type.max_swarm_intensity) * MAX_SWARM_STATE))
-	if(icon_state == "1")
+	update_icon()
+	if(get_swarm_state() == 1)
 		SetName(insect_type.name_singular)
 		desc = insect_type.insect_desc
 		gender = NEUTER
@@ -72,21 +86,13 @@
 		desc = insect_type.swarm_desc
 		gender = PLURAL
 
-	// Some icon variation via transform.
-	if(prob(75))
-		var/matrix/swarm_transform = matrix()
-		swarm_transform.Turn(pick(90, 180, 270))
-
 /obj/effect/insect_swarm/proc/is_agitated()
 	return QDELETED(owner) || (swarm_agitation > 0 && !is_smoked())
 
 /obj/effect/insect_swarm/proc/find_sting_target()
 	for(var/mob/living/victim in view(7, src))
-		if(!victim.simulated || victim.stat || victim.current_posture?.prone)
-			continue
-		if(victim.isSynthetic())
-			continue
-		return victim
+		if(victim.simulated && !victim.is_playing_dead())
+			return victim
 
 /obj/effect/insect_swarm/proc/merge(obj/effect/insect_swarm/other_swarm)
 
@@ -189,23 +195,24 @@
 			break
 	return FALSE
 
+/obj/effect/insect_swarm/failed_automove()
+	..()
+	stop_automove()
+	return FALSE
+
 /obj/effect/insect_swarm/get_automove_target(datum/automove_metadata/metadata)
 	return move_target
 
 /obj/effect/insect_swarm/stop_automove()
-	SHOULD_CALL_PARENT(FALSE)
 	move_target = null
-	//. = ..() // TODO work out why they're not automoving
-	walk(src, 0)
+	. = ..()
+
+/obj/effect/insect_swarm/can_do_automated_move(variant_move_delay)
+	return !is_smoked()
 
 /obj/effect/insect_swarm/start_automove(target, movement_type, datum/automove_metadata/metadata)
-	SHOULD_CALL_PARENT(FALSE)
 	move_target = target
-	//. = ..() // TODO work out why they're not automoving
-	if(move_target)
-		walk_to(src, move_target, 0, 7)
-	else
-		walk(src, 0)
+	. = ..()
 
 /obj/effect/insect_swarm/proc/handle_hive_behavior()
 
@@ -271,6 +278,10 @@
 			continue
 		merge(other_swarm)
 		return
+
+/obj/effect/insect_swarm/DoMove(direction, mob/mover, is_external)
+	. = ..()
+	to_world("swarm tried to move: [.]")
 
 /obj/effect/insect_swarm/pollinator
 	var/pollen = 0
@@ -349,10 +360,10 @@
 	else
 		start_automove(owner.holder)
 
-// TODO: update icon (twitching on ground?)
-// TODO: lower agitation
 /obj/effect/insect_swarm/proc/was_smoked(smoke_time = 10 SECONDS)
 	smoked_until = max(smoked_until, world.time + smoke_time)
+	swarm_agitation = round(swarm_agitation * 0.75)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_icon), TRUE), smoke_time, (TIMER_UNIQUE|TIMER_OVERRIDE))
 
 /obj/effect/insect_swarm/proc/is_smoked()
 	return world.time < smoked_until
