@@ -440,7 +440,6 @@ var/global/list/obj/structure/cable/all_cables = list()
 	. = list()	// this will be a list of all connected power objects
 	if(d1 == 0)
 		for(var/obj/machinery/power/P in loc)
-			if(P.powernet == 0) continue // exclude APCs with powernet=0
 			if(!skip_assigned_powernets || !P.powernet)
 				. += P
 
