@@ -116,43 +116,23 @@
 		/decl/material/solid/organic/plastic = ceil((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2)
 	)
 
-/datum/fabricator_recipe/struts
-	name = "strut, steel"
+/datum/fabricator_recipe/rods
+	name = "rod, steel"
 	path = /obj/item/stack/material/rods/mapped/steel
 
-/datum/fabricator_recipe/struts/get_resources()
-	resources = list(
-		/decl/material/solid/metal/steel =   ceil((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
-	)
-
-/datum/fabricator_recipe/struts/plastic
-	name = "strut, plastic"
+/datum/fabricator_recipe/rods/plastic
+	name = "rod, plastic"
 	path = /obj/item/stack/material/rods/mapped/plastic
 
-/datum/fabricator_recipe/struts/plastic/get_resources()
-	resources = list(
-		/decl/material/solid/organic/plastic =   ceil((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
-	)
-
-/datum/fabricator_recipe/struts/aluminium
-	name = "strut, aluminium"
+/datum/fabricator_recipe/rods/aluminium
+	name = "rod, aluminium"
 	path = /obj/item/stack/material/rods/mapped/aluminium
 	fabricator_types = list(FABRICATOR_CLASS_INDUSTRIAL)
 
-/datum/fabricator_recipe/struts/aluminium/get_resources()
-	resources = list(
-		/decl/material/solid/metal/aluminium =   ceil((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
-	)
-
-/datum/fabricator_recipe/struts/titanium
-	name = "strut, titanium"
+/datum/fabricator_recipe/rods/titanium
+	name = "rod, titanium"
 	path = /obj/item/stack/material/rods/mapped/titanium
 	fabricator_types = list(FABRICATOR_CLASS_INDUSTRIAL)
-
-/datum/fabricator_recipe/struts/titanium/get_resources()
-	resources = list(
-		/decl/material/solid/metal/titanium =   ceil((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
-	)
 
 /datum/fabricator_recipe/umbrella
 	path = /obj/item/umbrella

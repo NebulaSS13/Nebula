@@ -2,7 +2,6 @@
 	abstract_type               = /decl/stack_recipe/rods
 	craft_stack_types           = list(
 		/obj/item/stack/material/rods,
-		/obj/item/stack/material/strut,
 		/obj/item/stack/material/bone
 	)
 	one_per_turf                = TRUE

@@ -154,13 +154,3 @@
 	material = /decl/material/solid/organic/plantmatter/grass/dry
 	drying_wetness = null
 	dried_type = null
-
-/obj/item/stack/material/strut
-	name = "struts"
-	singular_name = "strut"
-	plural_name = "struts"
-	icon_state = "sheet-strut"
-	plural_icon_state = "sheet-strut-mult"
-	max_icon_state = "sheet-strut-max"
-	stack_merge_type = /obj/item/stack/material/strut
-	crafting_stack_type = /obj/item/stack/material/strut
