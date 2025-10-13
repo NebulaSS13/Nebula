@@ -138,10 +138,14 @@
 /decl/surgery_step/bone/finish/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	var/bone = affected.encased ? "\the [target]'s damaged [affected.encased]" : "damaged bones in [target]'s [affected.name]"
-	user.visible_message("<span class='notice'>[user] has mended [bone] with \the [tool].</span>"  , \
-		"<span class='notice'>You have mended [bone] with \the [tool].</span>" )
-	affected.status &= ~ORGAN_BROKEN
-	affected.stage = 0
+	// if it's too damaged to mend/will just re-break, warn them and don't lower our stage
+	if(affected.mend_fracture())
+		user.visible_message(SPAN_NOTICE("[user] has mended [bone] with \the [tool].")  , \
+			SPAN_NOTICE("You have mended [bone] with \the [tool]."))
+		affected.stage = 0
+	else
+		user.visible_message(SPAN_WARNING("[user] attempted to mend [bone] with \the [tool], but it was too damaged!"),
+			SPAN_WARNING("You failed to mend [bone] with \the [tool], as it is too damaged."))
 	affected.update_wounds()
 	..()
 

@@ -91,7 +91,7 @@
 				return TRUE
 			if(E.status & ORGAN_BROKEN)
 				to_chat(user, SPAN_NOTICE("You coax shattered bones to come together and fuse, mending the break."))
-				E.status &= ~ORGAN_BROKEN
+				E.mend_fracture()
 				E.stage = 0
 				return TRUE
 			if(E.is_dislocated() && !E.is_parent_dislocated())
