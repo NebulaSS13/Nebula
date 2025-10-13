@@ -58,7 +58,7 @@
 	b_range = 6
 	b_power = 1
 	lighting_modes = list(
-		LIGHTMODE_EMERGENCY = list(l_range = 6, l_power = 0.45, l_color = LIGHT_COLOR_EMERGENCY),
+		MODE_EMERGENCY = list(l_range = 6, l_power = 0.45, l_color = LIGHT_COLOR_EMERGENCY),
 	)
 
 /obj/item/light/bulb/large/Initialize(mapload, obj/machinery/light/fixture)
@@ -77,21 +77,3 @@
 	material = /decl/material/solid/organic/cloth
 	obj_flags = OBJ_FLAG_HOLLOW
 	w_class = ITEM_SIZE_NORMAL
-
-// Subtype used for creation via crafting.
-/obj/machinery/light/flamp/noshade/deconstruct
-	light_type = null
-	panel_open = TRUE
-	construct_state = /decl/machine_construction/wall_frame/no_wires/simple
-
-/obj/item/machine_chassis/flamp
-	name = "lamp fixture frame"
-	desc = "A bare frame for a standing lamp fixture. Must be secured to the floor with a wrench."
-	icon = 'icons/obj/floorlamp.dmi'
-	icon_state = "flamp-construct-item"
-	w_class = ITEM_SIZE_STRUCTURE
-	material = /decl/material/solid/metal/steel
-	build_type = /obj/machinery/light/flamp/noshade/deconstruct
-
-/datum/fabricator_recipe/engineering/floorlamp
-	path = /obj/item/machine_chassis/flamp

@@ -32,12 +32,6 @@
 //
 // The explosion cannot insta-kill anyone with 30% or more health.
 
-#define LIGHT_OK 0
-#define LIGHT_EMPTY 1
-#define LIGHT_BROKEN 2
-#define LIGHT_BURNED 3
-
-
 /obj/item/lightreplacer
 	name = "light replacer"
 	desc = "A lightweight automated device, capable of interfacing with and rapidly replacing standard light installations."
@@ -95,12 +89,12 @@
 	if(istype(used_item, /obj/item/stack/material) && used_item.get_material_type() == /decl/material/solid/glass)
 		var/obj/item/stack/G = used_item
 		if(uses >= max_uses)
-			to_chat(user, "<span class='warning'>\The [src] is full.</span>")
+			to_chat(user, SPAN_WARNING("\The [src] is full."))
 		else if(G.use(1))
 			AddUses(16) //Autolathe converts 1 sheet into 16 lights. // TODO: Make this use matter instead
-			to_chat(user, "<span class='notice'>You insert a piece of glass into \the [src]. You have [uses] light\s remaining.</span>")
+			to_chat(user, SPAN_NOTICE("You insert a piece of glass into \the [src]. You have [uses] light\s remaining."))
 		else
-			to_chat(user, "<span class='warning'>You need one sheet of glass to replace lights.</span>")
+			to_chat(user, SPAN_WARNING("You need one sheet of glass to replace lights."))
 		return TRUE
 
 	if(istype(used_item, /obj/item/light))
@@ -145,12 +139,12 @@
 
 /obj/item/lightreplacer/proc/ReplaceLight(var/obj/machinery/light/target, var/mob/living/U)
 
-	if(target.get_status() == LIGHT_OK)
+	if(target.get_bulb_status() == /obj/item/light::STATUS_OK)
 		to_chat(U, "There is a working [target.get_fitting_name()] already inserted.")
 	else if(!CanUse(U))
 		to_chat(U, "\The [src]'s refill light blinks red.")
 	else if(Use(U))
-		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with \the [src].</span>")
+		to_chat(U, SPAN_NOTICE("You replace the [target.get_fitting_name()] with \the [src]."))
 
 		if(target.lightbulb)
 			target.remove_bulb()
@@ -171,12 +165,4 @@
 /obj/item/lightreplacer/proc/CanUse(var/mob/living/user)
 	src.add_fingerprint(user)
 	//Not sure what else to check for. Maybe if clumsy?
-	if(uses > 0)
-		return 1
-	else
-		return 0
-
-#undef LIGHT_OK
-#undef LIGHT_EMPTY
-#undef LIGHT_BROKEN
-#undef LIGHT_BURNED
+	return uses > 0

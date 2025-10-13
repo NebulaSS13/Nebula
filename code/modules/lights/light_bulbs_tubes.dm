@@ -8,7 +8,15 @@
 	material = /decl/material/solid/metal/steel
 	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 	obj_flags = OBJ_FLAG_HOLLOW
-	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
+	var/const/MODE_EMERGENCY = "emergency_lighting"
+	var/const/MODE_READY = "ready"
+
+	var/const/STATUS_OK = 0
+	var/const/STATUS_EMPTY = 1
+	var/const/STATUS_BROKEN = 2
+	var/const/STATUS_BURNED = 3
+
+	var/status = STATUS_OK // STATUS_OK, STATUS_BURNED or STATUS_BROKEN
 	var/base_state
 	var/switchcount = 0	// number of times switched
 	var/rigged = 0		// true if rigged to explode
@@ -40,7 +48,7 @@
 	b_power = 0.8
 	b_color = LIGHT_COLOR_HALOGEN
 	lighting_modes = list(
-		LIGHTMODE_EMERGENCY = list(l_range = 4, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),
+		MODE_EMERGENCY = list(l_range = 4, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),
 	)
 	sound_on = 'sound/machines/lightson.ogg'
 
@@ -68,7 +76,7 @@
 	material = /decl/material/solid/glass
 	b_color = LIGHT_COLOR_TUNGSTEN
 	lighting_modes = list(
-		LIGHTMODE_EMERGENCY = list(l_range = 3, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),
+		MODE_EMERGENCY = list(l_range = 3, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),
 	)
 
 /obj/item/light/bulb/red
@@ -77,7 +85,7 @@
 
 /obj/item/light/bulb/red/readylight
 	lighting_modes = list(
-		LIGHTMODE_READY = list(l_range = 5, l_power = 1, l_color = LIGHT_COLOR_GREEN),
+		MODE_READY = list(l_range = 5, l_power = 1, l_color = LIGHT_COLOR_GREEN),
 	)
 
 /obj/item/light/throw_impact(atom/hit_atom)
@@ -97,13 +105,13 @@
 	. = ..()
 	var/broken
 	switch(status)
-		if(LIGHT_OK)
+		if(STATUS_OK)
 			icon_state = base_state
 			desc = "A replacement [name]."
-		if(LIGHT_BURNED)
+		if(STATUS_BURNED)
 			icon_state = "[base_state]_burned"
 			desc = "A burnt-out [name]."
-		if(LIGHT_BROKEN)
+		if(STATUS_BROKEN)
 			icon_state = "[base_state]_broken"
 			desc = "A broken [name]."
 			broken = TRUE
@@ -143,9 +151,9 @@
 	shatter()
 
 /obj/item/light/shatter()
-	if(status == LIGHT_OK || status == LIGHT_BURNED)
-		src.visible_message("<span class='warning'>[name] shatters.</span>","<span class='warning'>You hear a small glass object shatter.</span>")
-		status = LIGHT_BROKEN
+	if(status == STATUS_OK || status == STATUS_BURNED)
+		src.visible_message(SPAN_WARNING("[name] shatters."), SPAN_WARNING("You hear a small glass object shatter."))
+		status = STATUS_BROKEN
 		set_sharp(TRUE)
 		set_base_attack_force(5)
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
@@ -155,9 +163,9 @@
 	switchcount++
 	if(rigged)
 		addtimer(CALLBACK(src, PROC_REF(do_rigged_explosion)), 0.2 SECONDS)
-		status = LIGHT_BROKEN
+		status = STATUS_BROKEN
 	else if(prob(min(60, switchcount*switchcount*0.01)))
-		status = LIGHT_BURNED
+		status = STATUS_BURNED
 	else if(sound_on)
 		playsound(src, sound_on, 75)
 	return status

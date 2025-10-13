@@ -46,15 +46,6 @@
 /datum/fabricator_recipe/taperecorder_tape
 	path = /obj/item/magnetic_tape
 
-/datum/fabricator_recipe/tube/large
-	path = /obj/item/light/tube/large
-
-/datum/fabricator_recipe/tube
-	path = /obj/item/light/tube
-
-/datum/fabricator_recipe/bulb
-	path = /obj/item/light/bulb
-
 /datum/fabricator_recipe/ashtray_glass
 	path = /obj/item/ashtray/glass
 
