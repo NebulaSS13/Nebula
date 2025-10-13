@@ -11507,7 +11507,7 @@
 /turf/floor/tiled,
 /area/ministation/hall/n)
 "Qv" = (
-/obj/machinery/power/supermatter,
+/obj/structure/supermatter,
 /obj/machinery/mass_driver{
 	id_tag = "eject"
 	},

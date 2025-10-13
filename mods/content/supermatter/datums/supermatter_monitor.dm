@@ -32,7 +32,7 @@
 /datum/nano_module/program/supermatter_monitor
 	name = "Supermatter monitor"
 	var/list/supermatters
-	var/obj/machinery/power/supermatter/active = null		// Currently selected supermatter crystal.
+	var/obj/structure/supermatter/active = null		// Currently selected supermatter crystal.
 	var/screen = SM_MONITOR_SCREEN_MAIN // Which screen the monitor is currently on
 
 /datum/nano_module/program/supermatter_monitor/Destroy()
@@ -44,7 +44,7 @@
 	..()
 	refresh()
 
-/datum/nano_module/program/supermatter_monitor/proc/can_read(obj/machinery/power/supermatter/S)
+/datum/nano_module/program/supermatter_monitor/proc/can_read(obj/structure/supermatter/S)
 	if(!istype(S.loc, /turf/))
 		return FALSE
 	if(S.exploded || S.grav_pulling)
@@ -57,7 +57,7 @@
 // Refreshes list of active supermatter crystals
 /datum/nano_module/program/supermatter_monitor/proc/refresh()
 	supermatters = list()
-	for(var/obj/machinery/power/supermatter/S in SSmachines.machinery)
+	for(var/obj/structure/supermatter/S in SSsupermatter.processing)
 		// Delaminating, not within coverage, not on a tile.
 		if(!can_read(S))
 			continue
@@ -70,7 +70,7 @@
 /datum/nano_module/program/supermatter_monitor/proc/get_status()
 	. = SUPERMATTER_INACTIVE
 	var/needs_refresh
-	for(var/obj/machinery/power/supermatter/S in supermatters)
+	for(var/obj/structure/supermatter/S in supermatters)
 		if(!can_read(S))
 			needs_refresh = TRUE
 			continue
@@ -161,7 +161,7 @@
 	else
 		var/list/SMS = list()
 		var/needs_refresh //need to refresh because some of crystals are not readable. For finding new crystals user can just refresh manually like a scrub
-		for(var/obj/machinery/power/supermatter/S in supermatters)
+		for(var/obj/structure/supermatter/S in supermatters)
 			var/area/A = get_area(S)
 			if(!A)
 				continue
@@ -211,7 +211,7 @@
 		return 1
 	if( href_list["set"] )
 		var/newuid = text2num(href_list["set"])
-		for(var/obj/machinery/power/supermatter/S in supermatters)
+		for(var/obj/structure/supermatter/S in supermatters)
 			if(S.uid == newuid)
 				active = S
 		return 1

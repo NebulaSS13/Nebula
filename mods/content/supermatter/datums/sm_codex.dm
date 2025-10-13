@@ -4,7 +4,7 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/supermatter
-	associated_paths = list(/obj/machinery/power/supermatter)
+	associated_paths = list(/obj/structure/supermatter)
 	mechanics_text = "When energized by a laser (or something hitting it), it emits radiation and heat.  If the heat reaches above 7000 kelvin, it will send an alert and start taking damage. \
 	After integrity falls to zero percent, it will delaminate, causing a massive explosion, station-wide radiation spikes, and hallucinations. \
 	Supermatter reacts badly to oxygen in the atmosphere.  It'll also heat up really quick if it is in vacuum.<br>\

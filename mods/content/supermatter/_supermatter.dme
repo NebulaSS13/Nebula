@@ -7,6 +7,8 @@
 #include "datums\sm_follow.dm"
 #include "datums\sm_grief_fix.dm"
 #include "datums\sm_looping_sound.dm"
+#include "datums\sm_material.dm"
+#include "datums\sm_subsystem.dm"
 #include "datums\sm_supply_drop.dm"
 #include "datums\sm_supply_pack.dm"
 #include "datums\supermatter_monitor.dm"
@@ -16,7 +18,6 @@
 #include "items\sm_book.dm"
 #include "items\sm_grenade.dm"
 #include "machinery\sm_supply_beacon.dm"
-#include "machinery\supermatter.dm"
 #include "machinery\supermatter_core_console.dm"
 #include "overrides\sm_fuel_compressor.dm"
 #include "overrides\sm_meteor.dm"
@@ -26,5 +27,6 @@
 #include "overrides\sm_unit_tests.dm"
 #include "overrides\sm_xenoarchaeology.dm"
 #include "structures\sm_closets.dm"
+#include "structures\supermatter_crystal.dm"
 // END_INCLUDE
 #endif

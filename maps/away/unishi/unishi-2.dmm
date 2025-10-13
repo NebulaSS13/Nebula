@@ -2727,7 +2727,7 @@
 /area/unishi/smresearch)
 "ho" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/obj/machinery/power/supermatter/inert{
+/obj/structure/supermatter/inert{
 	color = ""
 	},
 /obj/machinery/mass_driver{

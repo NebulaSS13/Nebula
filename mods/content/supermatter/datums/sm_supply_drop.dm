@@ -2,4 +2,4 @@
 	name = "Supermatter"
 /datum/supply_drop_loot/supermatter/New()
 	..()
-	contents = list(/obj/machinery/power/supermatter)
+	contents = list(/obj/structure/supermatter)

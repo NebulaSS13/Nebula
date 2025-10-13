@@ -1,3 +1,3 @@
 /datum/follow_holder/supermatter
 	sort_order = 10
-	followed_type = /obj/machinery/power/supermatter
+	followed_type = /obj/structure/supermatter

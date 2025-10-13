@@ -2,7 +2,7 @@
 	. = ..()
 	if(.)
 		return TRUE
-	if(istype(thing, /obj/machinery/power/supermatter/shard))
+	if(istype(thing, /obj/structure/supermatter/shard))
 		var/exotic_matter_amount = thing?.matter?[/decl/material/solid/exotic_matter]
 		if(exotic_matter_amount <= 0)
 			return FALSE
