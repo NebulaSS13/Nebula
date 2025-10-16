@@ -5981,7 +5981,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Security Subgrid";
 	name = "Powernet Sensor - Security Subgrid"
 	},
@@ -14969,7 +14969,7 @@
 /obj/structure/cable/green{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Civilian East Subgrid";
 	name = "Powernet Sensor - Civilian East Subgrid"
 	},
@@ -16978,7 +16978,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Civilian West Subgrid";
 	name = "Powernet Sensor - Civilian West"
 	},
@@ -27810,7 +27810,7 @@
 /turf/floor/plating,
 /area/exodus/engineering/engine_room)
 "bhS" = (
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "AI Subgrid";
 	name = "Powernet Sensor - AI Subgrid"
 	},
@@ -31646,7 +31646,7 @@
 	icon_state = "0-4"
 	},
 /obj/structure/cable/green,
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Command Subgrid";
 	name = "Powernet Sensor - Command Subgrid"
 	},
@@ -37164,7 +37164,7 @@
 	icon_state = "0-4"
 	},
 /obj/structure/cable/green,
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Medbay Subgrid";
 	name = "Powernet Sensor - Medbay Subgrid"
 	},
@@ -50870,7 +50870,7 @@
 	icon_state = "0-2"
 	},
 /obj/structure/cable/green,
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Research Subgrid";
 	name = "Powernet Sensor - Research Subgrid"
 	},
@@ -54796,7 +54796,7 @@
 /obj/structure/cable/green{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Engineering Subgrid";
 	name = "Powernet Sensor - Engineering Subgrid"
 	},
@@ -61661,7 +61661,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Master";
 	name = "Powernet Sensor - Master Grid"
 	},
@@ -61872,7 +61872,7 @@
 	dir = 4
 	},
 /obj/structure/cable/yellow,
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Engine Output";
 	name = "Powernet Sensor - Engine Output"
 	},
@@ -62721,7 +62721,7 @@
 /obj/structure/cable/cyan{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Engine Power";
 	name = "Powernet Sensor - Engine Power"
 	},

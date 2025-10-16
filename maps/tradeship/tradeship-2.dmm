@@ -3434,7 +3434,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/power)
 "ip" = (
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Main Grid"
 	},
 /obj/structure/cable{

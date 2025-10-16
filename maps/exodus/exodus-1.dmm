@@ -1570,7 +1570,7 @@
 	name = "north bump";
 	pixel_y = 24
 	},
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Command Sublevel Subgrid";
 	name = "Powernet Sensor - Command Sublevel Subgrid"
 	},
@@ -3588,7 +3588,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/atmos)
 "jx" = (
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Atmospherics Subgrid";
 	name = "Powernet Sensor - Atmospherics Subgrid"
 	},

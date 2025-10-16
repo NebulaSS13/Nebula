@@ -168,4 +168,4 @@ Buildable meters
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_beacon" // If anyone wants to make better sprite, feel free to do so without asking me.
 	w_class = ITEM_SIZE_NORMAL
-	build_type = /obj/machinery/power/sensor
+	build_type = /obj/machinery/power_sensor
