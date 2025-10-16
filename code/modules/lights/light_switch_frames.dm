@@ -1,5 +1,3 @@
-// Lightswitch Hull
-
 /obj/item/frame/button/light_switch
 	name = "light switch frame"
 	desc = "Used for building a light switch."

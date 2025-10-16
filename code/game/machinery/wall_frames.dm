@@ -104,32 +104,6 @@
 	name = "wall-mounted relay kit"
 	desc = "An all-in-one wall-mounted relay kit, comes preassembled."
 
-/obj/item/frame/light
-	name = "light fixture frame"
-	desc = "Used for building lights."
-	icon = 'icons/obj/lighting.dmi'
-	icon_state = "tube-construct-item"
-	build_machine_type = /obj/machinery/light
-	reverse = 1
-
-/obj/item/frame/light/small
-	name = "small light fixture frame"
-	icon_state = "bulb-construct-item"
-	material = /decl/material/solid/metal/steel
-	build_machine_type = /obj/machinery/light/small
-
-/obj/item/frame/light/spot
-	name = "spotlight fixture frame"
-	icon_state = "tube-construct-item"
-	material = /decl/material/solid/metal/steel
-	build_machine_type = /obj/machinery/light/spot
-
-/obj/item/frame/light/nav
-	name = "navigation light fixture frame"
-	icon_state = "tube-construct-item"
-	material = /decl/material/solid/metal/steel
-	build_machine_type = /obj/machinery/light/navigation
-
 /obj/item/frame/button
 	name = "button frame"
 	icon = 'icons/obj/objects.dmi'

@@ -1,21 +1,3 @@
-// The lighting system
-//
-// consists of light fixtures (/obj/machinery/light) and light tube/bulb items (/obj/item/light)
-
-
-// status values shared between lighting fixtures and items
-#define LIGHT_OK 0
-#define LIGHT_EMPTY 1
-#define LIGHT_BROKEN 2
-#define LIGHT_BURNED 3
-
-#define LIGHT_BULB_TEMPERATURE 400 //K - used value for a 60W bulb
-#define LIGHTING_POWER_FACTOR 5		//5W per luminosity * range
-
-
-#define LIGHTMODE_EMERGENCY "emergency_lighting"
-#define LIGHTMODE_READY "ready"
-
 // the standard tube light fixture
 /obj/machinery/light
 	name = "light fixture"
@@ -39,6 +21,10 @@
 	frame_type = /obj/item/frame/light
 	directional_offset = @'{"NORTH":{"y":21}, "EAST":{"x":10}, "WEST":{"x":-10}}'
 
+	var/const/LIGHT_BULB_TEMPERATURE = 400 //K - used value for a 60W bulb
+
+	var/const/WATTS_PER_LUM_RANGE = 5 // watts per luminosity-range
+
 	var/on = 0					// 1 if on, 0 if off
 	var/flickering = 0
 	var/light_type = /obj/item/light/tube		// the type of light item
@@ -58,30 +44,6 @@
 	if(.)
 		update_light_status(TRUE)
 		update_icon()
-
-// the smaller bulb light fixture
-/obj/machinery/light/small
-	icon_state = "bulb_map"
-	base_state = "bulb"
-	desc = "A small lighting fixture."
-	light_type = /obj/item/light/bulb
-	accepts_light_type = /obj/item/light/bulb
-	base_type = /obj/machinery/light/small
-	frame_type = /obj/item/frame/light/small
-
-/obj/machinery/light/small/emergency
-	light_type = /obj/item/light/bulb/red
-
-/obj/machinery/light/small/red
-	light_type = /obj/item/light/bulb/red
-
-/obj/machinery/light/spot
-	name = "spotlight"
-	desc = "A more robust socket for light tubes that demand more power."
-	light_type = /obj/item/light/tube/large
-	accepts_light_type = /obj/item/light/tube/large
-	base_type = /obj/machinery/light/spot
-	frame_type = /obj/item/frame/light/spot
 
 // create a new lighting fixture
 /obj/machinery/light/Initialize(mapload, d=0, populate_parts = TRUE)
@@ -116,7 +78,7 @@
 	if(currently_updating) // avoid infinite loops during power usage updates
 		return
 	currently_updating = TRUE
-	if(get_status() == LIGHT_OK) // we can't reuse this value later because update_use_power might change our status
+	if(get_bulb_status() == lightbulb::STATUS_OK) // we can't reuse this value later because update_use_power might change our status
 		atom_flags |= ATOM_FLAG_CAN_BE_PAINTED
 	else
 		atom_flags &= ~ATOM_FLAG_CAN_BE_PAINTED
@@ -127,12 +89,12 @@
 			set_light(arglist(lightbulb.lighting_modes[current_mode]))
 		else
 			set_light(lightbulb.b_range, lightbulb.b_power, lightbulb.b_color)
-		if(trigger && get_status() == LIGHT_OK)
+		if(trigger && get_bulb_status() == lightbulb::STATUS_OK)
 			switch_check()
 	else
 		update_use_power(POWER_USE_OFF)
 		set_light(0)
-	change_power_consumption((light_range * light_power) * LIGHTING_POWER_FACTOR, POWER_USE_ACTIVE)
+	change_power_consumption((light_range * light_power) * WATTS_PER_LUM_RANGE, POWER_USE_ACTIVE)
 	currently_updating = FALSE
 
 /obj/machinery/light/update_use_power(new_use_power)
@@ -155,12 +117,12 @@
 
 	// Extra overlays if we're active
 	var/_state
-	switch(get_status())		// set icon_states
-		if(LIGHT_OK)
+	switch(get_bulb_status())		// set icon_states
+		if(lightbulb::STATUS_OK)
 			_state = "[base_state][on]"
-		if(LIGHT_BURNED)
+		if(lightbulb::STATUS_BURNED)
 			_state = "[base_state]_burned"
-		if(LIGHT_BROKEN)
+		if(lightbulb::STATUS_BROKEN)
 			_state = "[base_state]_broken"
 
 	if(istype(lightbulb, /obj/item/light))
@@ -171,15 +133,12 @@
 	if(on)
 		compile_overlays() // force a compile so that we update prior to the light being set
 
-/obj/machinery/light/proc/get_status()
-	if(!lightbulb)
-		return LIGHT_EMPTY
-	else
-		return lightbulb.status
+/obj/machinery/light/proc/get_bulb_status()
+	return lightbulb ? lightbulb.status : lightbulb::STATUS_EMPTY
 
 /obj/machinery/light/proc/switch_check()
 	lightbulb.switch_on()
-	if(get_status() != LIGHT_OK)
+	if(get_bulb_status() != lightbulb::STATUS_OK)
 		set_light(0)
 
 /obj/machinery/light/proc/set_mode(var/new_mode)
@@ -199,18 +158,18 @@
 		return
 
 	if(enable)
-		if(LIGHTMODE_EMERGENCY in lightbulb.lighting_modes)
-			set_mode(LIGHTMODE_EMERGENCY)
+		if(lightbulb::MODE_EMERGENCY in lightbulb.lighting_modes)
+			set_mode(lightbulb::MODE_EMERGENCY)
 			update_power_channel(ENVIRON)
 	else
-		if(current_mode == LIGHTMODE_EMERGENCY)
+		if(current_mode == lightbulb::MODE_EMERGENCY)
 			set_mode(null)
 			update_power_channel(initial(power_channel))
 
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty
 /obj/machinery/light/proc/seton(var/state)
-	on = (state && get_status() == LIGHT_OK)
+	on = (state && get_bulb_status() == lightbulb::STATUS_OK)
 	update_light_status(TRUE)
 	update_icon()
 
@@ -218,19 +177,20 @@
 /obj/machinery/light/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	var/fitting = get_fitting_name()
-	switch(get_status())
-		if(LIGHT_OK)
+	switch(get_bulb_status())
+		if(lightbulb::STATUS_OK)
 			. += "It is turned [on? "on" : "off"]."
-		if(LIGHT_EMPTY)
+		if(lightbulb::STATUS_EMPTY)
 			. += "The [fitting] has been removed."
-		if(LIGHT_BURNED)
+		if(lightbulb::STATUS_BURNED)
 			. += "The [fitting] is burnt out."
-		if(LIGHT_BROKEN)
+		if(lightbulb::STATUS_BROKEN)
 			. += "The [fitting] has been smashed."
 
 /obj/machinery/light/proc/get_fitting_name()
-	var/obj/item/light/L = light_type
-	return initial(L.name)
+	// use accepts_light_type so stuff that begins blank is fine
+	var/obj/item/light/type_used = accepts_light_type
+	return type_used::name
 
 // attack with item - insert light (if right type), otherwise try to break the light
 
@@ -281,7 +241,7 @@
 		// attempt to break the light
 		//If xenos decide they want to smash a light bulb with a toolbox, who am I to stop them? /N
 
-	else if(lightbulb && (lightbulb.status != LIGHT_BROKEN) && !user.check_intent(I_FLAG_HELP))
+	else if(lightbulb && (lightbulb.status != lightbulb::STATUS_BROKEN) && !user.check_intent(I_FLAG_HELP))
 
 		if(prob(1 + used_item.expend_attack_force(user) * 5))
 
@@ -313,13 +273,13 @@
 	if(flickering) return
 	flickering = 1
 	spawn(0)
-		if(on && get_status() == LIGHT_OK)
+		if(on && get_bulb_status() == lightbulb::STATUS_OK)
 			for(var/i = 0; i < amount; i++)
-				if(get_status() != LIGHT_OK) break
+				if(get_bulb_status() != lightbulb::STATUS_OK) break
 				on = !on
 				update_light_status(FALSE)
 				sleep(rand(5, 15))
-			on = (get_status() == LIGHT_OK)
+			on = (get_bulb_status() == lightbulb::STATUS_OK)
 			update_light_status(FALSE)
 			update_icon()
 		flickering = 0
@@ -382,18 +342,18 @@
 		return
 
 	if(!skip_sound_and_sparks)
-		if(lightbulb && !(lightbulb.status == LIGHT_BROKEN))
+		if(lightbulb && !(lightbulb.status == lightbulb::STATUS_BROKEN))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		if(on)
 			spark_at(src, cardinal_only = TRUE)
-	lightbulb.status = LIGHT_BROKEN
+	lightbulb.status = lightbulb::STATUS_BROKEN
 	update_light_status(TRUE)
 	update_icon()
 
 /obj/machinery/light/proc/fix()
-	if(get_status() == LIGHT_OK || !lightbulb)
+	if(get_bulb_status() == lightbulb::STATUS_OK || !lightbulb)
 		return
-	lightbulb.status = LIGHT_OK
+	lightbulb.status = lightbulb::STATUS_OK
 	on = TRUE
 	update_light_status(TRUE)
 	update_icon()
@@ -430,243 +390,7 @@
 		broken()
 	return ..()
 
-/obj/machinery/light/small/readylight
-	light_type = /obj/item/light/bulb/red/readylight
-	var/state = 0
-
-/obj/machinery/light/small/readylight/proc/set_state(var/new_state)
-	state = new_state
-	if(state)
-		set_mode(LIGHTMODE_READY)
-	else
-		set_mode(null)
-
-/obj/machinery/light/navigation
-	name = "navigation light"
-	desc = "A periodically flashing light."
-	icon = 'icons/obj/lighting_nav.dmi'
-	icon_state = "nav10"
-	base_state = "nav1"
-	light_type = /obj/item/light/tube/large
-	accepts_light_type = /obj/item/light/tube/large
-	on = TRUE
-	var/delay = 1
-	base_type = /obj/machinery/light/navigation
-	frame_type = /obj/item/frame/light/nav
-	stat_immune = NOPOWER | NOINPUT | NOSCREEN
-
-/obj/machinery/light/navigation/on_update_icon()
-	. = ..() // this will handle pixel offsets
-	icon_state = "nav[delay][!!(lightbulb && on)]"
-
-/obj/machinery/light/navigation/attackby(obj/item/used_item, mob/user)
-	. = ..()
-	if(!. && IS_MULTITOOL(used_item))
-		delay = 5 + ((delay + 1) % 5)
-		to_chat(user, SPAN_NOTICE("You adjust the delay on \the [src]."))
-		return TRUE
-
-/obj/machinery/light/navigation/delay2
-	delay = 2
-
-/obj/machinery/light/navigation/delay3
-	delay = 3
-
-/obj/machinery/light/navigation/delay4
-	delay = 4
-
-/obj/machinery/light/navigation/delay5
-	delay = 5
-
-// the light item
-// can be tube or bulb subtypes
-// will fit into empty /obj/machinery/light of the corresponding type
-
-/obj/item/light
-	icon = 'icons/obj/lighting.dmi'
-	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/metal/steel
-	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
-	obj_flags = OBJ_FLAG_HOLLOW
-	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
-	var/base_state
-	var/switchcount = 0	// number of times switched
-	var/rigged = 0		// true if rigged to explode
-	var/broken_chance = 2
-
-	var/b_power = 0.7
-	var/b_range = 5
-	var/b_color = LIGHT_COLOR_HALOGEN
-	var/list/lighting_modes = list()
-	var/sound_on
-
-/obj/item/light/get_color()
-	return b_color
-
-/obj/item/light/set_color(color)
-	b_color = isnull(color) ? COLOR_WHITE : color
-	queue_icon_update() // avoid running update_icon before Initialize
-
-/obj/item/light/tube
-	name = "light tube"
-	desc = "A replacement light tube."
-	icon_state = "ltube"
-	base_state = "ltube"
-	item_state = "c_tube"
-	material = /decl/material/solid/glass
-	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
-
-	b_range = 8
-	b_power = 0.8
-	b_color = LIGHT_COLOR_HALOGEN
-	lighting_modes = list(
-		LIGHTMODE_EMERGENCY = list(l_range = 4, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),
-	)
-	sound_on = 'sound/machines/lightson.ogg'
-
-/obj/item/light/tube/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
-	. = ..()
-	b_color = rgb(pick(0,255), pick(0,255), pick(0,255))
-
-/obj/item/light/tube/large
-	w_class = ITEM_SIZE_SMALL
-	name = "large light tube"
-	b_power = 4
-	b_range = 12
-
-/obj/item/light/tube/large/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
-	. = ..()
-	b_color = rgb(pick(0,255), pick(0,255), pick(0,255))
-
-/obj/item/light/bulb
-	name = "light bulb"
-	desc = "A replacement light bulb."
-	icon_state = "lbulb"
-	base_state = "lbulb"
-	item_state = "contvapour"
-	broken_chance = 3
-	material = /decl/material/solid/glass
-	b_color = LIGHT_COLOR_TUNGSTEN
-	lighting_modes = list(
-		LIGHTMODE_EMERGENCY = list(l_range = 3, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),
-	)
-
-/obj/item/light/bulb/red
-	color = LIGHT_COLOR_RED
-	b_color = LIGHT_COLOR_RED
-
-/obj/item/light/bulb/red/readylight
-	lighting_modes = list(
-		LIGHTMODE_READY = list(l_range = 5, l_power = 1, l_color = LIGHT_COLOR_GREEN),
-	)
-
-/obj/item/light/throw_impact(atom/hit_atom)
-	..()
-	shatter()
-
-/obj/item/light/bulb/fire
-	name = "fire bulb"
-	desc = "A replacement fire bulb."
-	icon_state = "fbulb"
-	base_state = "fbulb"
-	item_state = "egg4"
-	material = /decl/material/solid/glass
-
-// update the icon state and description of the light
-/obj/item/light/on_update_icon()
-	. = ..()
-	var/broken
-	switch(status)
-		if(LIGHT_OK)
-			icon_state = base_state
-			desc = "A replacement [name]."
-		if(LIGHT_BURNED)
-			icon_state = "[base_state]_burned"
-			desc = "A burnt-out [name]."
-		if(LIGHT_BROKEN)
-			icon_state = "[base_state]_broken"
-			desc = "A broken [name]."
-			broken = TRUE
-	add_overlay(overlay_image(icon, "[base_state]_attachment[broken ? "_broken" : ""]", flags = RESET_COLOR|RESET_ALPHA))
-
-/obj/item/light/Initialize(mapload)
-	. = ..()
-	update_icon()
-
-// attack bulb/tube with object
-// if a syringe, can inject flammable liquids to make it explode
-/obj/item/light/attackby(var/obj/item/used_item, var/mob/user)
-	..()
-	if(istype(used_item, /obj/item/chems/syringe) && used_item.reagents?.total_volume)
-		var/obj/item/chems/syringe/S = used_item
-		to_chat(user, "You inject the solution into \the [src].")
-		for(var/decl/material/reagent as anything in S.reagents?.reagent_volumes)
-			if(reagent.accelerant_value > FUEL_VALUE_ACCELERANT)
-				rigged = TRUE
-				log_and_message_admins("injected a light with flammable reagents, rigging it to explode.", user)
-				break
-		S.reagents.clear_reagents()
-		return TRUE
-	. = ..()
-
-// called after an attack with a light item
-// shatter light, unless it was an attempt to put it in a light socket
-// now only shatter if the intent was harm
-
-/obj/item/light/afterattack(atom/target, mob/user, proximity)
-	if(!proximity) return
-	if(istype(target, /obj/machinery/light))
-		return
-	if(!user.check_intent(I_FLAG_HARM))
-		return
-
-	shatter()
-
-/obj/item/light/shatter()
-	if(status == LIGHT_OK || status == LIGHT_BURNED)
-		src.visible_message("<span class='warning'>[name] shatters.</span>","<span class='warning'>You hear a small glass object shatter.</span>")
-		status = LIGHT_BROKEN
-		set_sharp(TRUE)
-		set_base_attack_force(5)
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		update_icon()
-
-/obj/item/light/proc/switch_on()
-	switchcount++
-	if(rigged)
-		addtimer(CALLBACK(src, PROC_REF(do_rigged_explosion)), 0.2 SECONDS)
-		status = LIGHT_BROKEN
-	else if(prob(min(60, switchcount*switchcount*0.01)))
-		status = LIGHT_BURNED
-	else if(sound_on)
-		playsound(src, sound_on, 75)
-	return status
-
-/obj/item/light/proc/do_rigged_explosion()
-	if(!rigged)
-		return
-	log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]")
-	var/turf/T = get_turf(src)
-	explosion(T, 0, 0, 3, 5)
-	if(!QDELETED(src))
-		QDEL_IN(src, 1)
-
 /obj/machinery/light/do_simple_ranged_interaction(var/mob/user)
 	if(lightbulb)
 		remove_bulb()
 	return TRUE
-
-// Partially-constructed presets for mapping
-/obj/machinery/light/fixture
-	icon_state = "tube-construct-stage1"
-
-/obj/machinery/light/fixture/Initialize(mapload, d, populate_parts)
-	. = ..(mapload, d, populate_parts = FALSE)
-	construct_state.post_construct(src)
-
-/obj/machinery/light/small/fixture
-	icon_state = "bulb-construct-stage1"
-
-/obj/machinery/light/small/fixture/Initialize(mapload, d, populate_parts)
-	. = ..(mapload, d, populate_parts = FALSE)
-	construct_state.post_construct(src)
