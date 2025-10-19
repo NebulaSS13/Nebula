@@ -78,9 +78,26 @@
 	target.set_skin_tone(skin_tone)
 
 	for(var/limb_data in extra_limbs)
+
+		// Grab our limb type for checking.
 		var/limb_path = extra_limbs[limb_data]["path"]
-		var/obj/item/organ/external/new_limb = new limb_path(null, null, src)
-		target.add_organ(new_limb, null, TRUE, FALSE, FALSE, TRUE)
+
+		// For whatever reason, we already have a limb in this slot.
+		// Creating a new one without removing the old one would cause limb overwrite runtimes.
+		var/obj/item/organ/external/limb = target.get_organ(limb_data)
+		if(istype(limb))
+			// TODO: some way to cleanly remove and restitch an organ up the limb chain.
+			if(length(limb.children))
+				continue
+			// If it's already the appropriate type, we're probably safe to leave it.
+			if(limb.type == limb_path)
+				continue
+			// Snip off the limb so we can replace it without issues.
+			target.remove_organ(limb, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE)
+
+		// Create and install the new limb.
+		target.add_organ(new limb_path(null, null, src), null, TRUE, FALSE, FALSE, TRUE)
+
 	extra_limbs = null // can't reuse it!
 
 	for(var/obj/item/organ/organ in target.get_organs())
