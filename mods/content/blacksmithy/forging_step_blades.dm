@@ -3,8 +3,8 @@
 	billet_icon_state  = "blade"
 	billet_desc        = "A roughly shaped, dull blade. It will need further refinement before it can be finished."
 	steps              = list(
-	/decl/forging_step/long_blade_blank,
-	/decl/forging_step/short_sword_blank
+		/decl/forging_step/long_blade_blank,
+		/decl/forging_step/short_sword_blank
 	)
 
 /decl/forging_step/long_blade_blank
@@ -13,9 +13,9 @@
 	billet_desc        = "A long, dull and unrefined blade, only a step from being a finished product."
 
 	steps = list(
-	/decl/forging_step/product/longsword_blade,
-	/decl/forging_step/product/broadsword_blade,
-	/decl/forging_step/product/rapier_blade
+		/decl/forging_step/product/longsword_blade,
+		/decl/forging_step/product/broadsword_blade,
+		/decl/forging_step/product/rapier_blade
 	)
 
 /decl/forging_step/short_sword_blank
@@ -23,10 +23,10 @@
 	billet_name_prefix = "short"
 	billet_desc        = "A short, dull and unrefined blade, only a step from being a finished product."
 	steps              = list(
-	/decl/forging_step/product/poignard_blade,
-	/decl/forging_step/product/knife_blade,
-	/decl/forging_step/product/shortsword_blade,
-	/decl/forging_step/product/spear_head
+		/decl/forging_step/product/poignard_blade,
+		/decl/forging_step/product/knife_blade,
+		/decl/forging_step/product/shortsword_blade,
+		/decl/forging_step/product/spear_head
 	)
 
 // TODO: make these blades, add weapon crafting.

@@ -3,6 +3,7 @@
 // BEGIN_INCLUDE
 #include "_blacksmithy.dm"
 #include "anvil.dm"
+#include "barrel_rim.dm"
 #include "billet.dm"
 #include "boulder.dm"
 #include "forge_fire.dm"

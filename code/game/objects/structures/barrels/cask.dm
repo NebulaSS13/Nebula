@@ -6,6 +6,9 @@
 	show_liquid_contents  = FALSE
 	storage               = null // Intended for storing liquids.
 
+// Stub type for crafting (forging modpack modifies metal_material)
+/obj/structure/reagent_dispensers/barrel/cask/crafted
+
 // Horrible workaround for physical interaction checks.
 /obj/structure/reagent_dispensers/barrel/cask/nano_host()
 	return istype(loc, /obj/structure/cask_rack) ? loc : src

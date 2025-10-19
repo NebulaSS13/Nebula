@@ -4,9 +4,9 @@
 	billet_icon_state  = "ornate"
 	billet_desc        = "An ornate piece of worked metal. It still needs some last touches to be made into something useful."
 	steps              = list(
-	/decl/forging_step/product/candelabra,
-	/decl/forging_step/product/decanter,
-	/decl/forging_step/product/goblet
+		/decl/forging_step/product/candelabra,
+		/decl/forging_step/product/decanter,
+		/decl/forging_step/product/goblet
 	)
 
 /decl/forging_step/product/candelabra
