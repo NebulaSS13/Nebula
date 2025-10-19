@@ -1,0 +1,5 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Crafted barrels will need barrel rims forged if the forging modpack 
+      is in use.}
+delete-after: true
