@@ -120,13 +120,45 @@
 /obj/item/stack/material/proc/get_stack_conversion_dictionary()
 	return
 
+/obj/item/stack/material/proc/reinforce_with(var/mob/user, var/obj/item/stack/material/used_stack, var/use_sheets = 1)
+	if(reinf_material) // already reinforced
+		return FALSE
+	var/decl/material/our_material = get_material()
+	if(!used_stack.can_use(use_sheets))
+		to_chat(user, SPAN_WARNING("You need at least one [used_stack.singular_name] to reinforce [src]."))
+		return FALSE
+
+	var/decl/material/reinf_mat = used_stack.get_material()
+	if(reinf_mat.integrity <= our_material.integrity || reinf_mat.is_brittle())
+		to_chat(user, SPAN_WARNING("The [reinf_mat.solid_name] is too structurally weak to reinforce \the [src]."))
+		return FALSE
+
+	if(!can_use(use_sheets))
+		to_chat(user, SPAN_WARNING("You need at least [use_sheets] [use_sheets == 1 ? singular_name : plural_name] for reinforcement with \the [used_stack]."))
+		return FALSE
+
+	to_chat(user, SPAN_NOTICE("You reinforce \the [src] with [reinf_mat.solid_name]."))
+	used_stack.use(use_sheets)
+	var/obj/item/stack/material/new_stack = split(1)
+	new_stack.reinf_material = reinf_mat
+	new_stack.update_strings()
+	new_stack.update_icon()
+	if(!QDELETED(src))
+		new_stack.dropInto(get_turf(src))
+	else if(user)
+		new_stack.dropInto(get_turf(user))
+	else
+		new_stack.dropInto(get_turf(used_stack))
+	new_stack.add_to_stacks(user, TRUE)
+	return TRUE
+
 /obj/item/stack/material/attackby(var/obj/item/used_item, var/mob/user)
 
 	if(can_be_reinforced && istype(used_item, /obj/item/stack/material))
 		if(is_same(used_item))
 			return ..()
 		if(!reinf_material)
-			material.reinforce(user, used_item, src)
+			reinforce_with(user, used_item)
 		return TRUE
 
 	// TODO: convert to converts_into entry.
