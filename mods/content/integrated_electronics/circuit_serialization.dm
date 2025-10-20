@@ -52,7 +52,7 @@
 	var/init_name = initial(name)
 	// Validate name
 	if(component_params["name"])
-		sanitize_name(component_params["name"],allow_numbers=TRUE)
+		sanitize_name(component_params["name"],allow_numbers=TRUE,force_first_letter_uppercase = FALSE)
 	// Validate input values
 	if(component_params["inputs"])
 		var/list/loaded_inputs = component_params["inputs"]
@@ -138,7 +138,7 @@
 /obj/item/electronic_assembly/proc/verify_save(list/assembly_params)
 	// Validate name and color
 	if(assembly_params["name"])
-		if(sanitize_name(assembly_params["name"], allow_numbers = TRUE) != assembly_params["name"])
+		if(sanitize_name(assembly_params["name"], allow_numbers = TRUE, force_first_letter_uppercase = FALSE) != assembly_params["name"])
 			return "Bad assembly name."
 	if(assembly_params["desc"])
 		if(sanitize(assembly_params["desc"]) != assembly_params["desc"])
