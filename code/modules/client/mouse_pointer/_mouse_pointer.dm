@@ -36,7 +36,7 @@
 		return FALSE
 
 	// Update our list entry. If we have multiple pointers, sort by priority.
-	var/need_update = !(pointer_type in _mouse_pointers)
+	var/need_update = !(pointer_type in _mouse_pointers) || (_mouse_pointers[pointer_type] != pointer_icon)
 	LAZYSET(_mouse_pointers, pointer_type, list("icon" = pointer_icon, "priority" = pointer_priority))
 	if(LAZYLEN(_mouse_pointers) > 1)
 		_mouse_pointers = sortTim(_mouse_pointers, /proc/cmp_priority_list, TRUE)

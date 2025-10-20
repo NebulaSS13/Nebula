@@ -3,6 +3,9 @@
 	var/autofire_delay = 0.1 SECOND
 	var/next_autofire
 
+/obj/item/gun/is_charging_attack()
+	return ATTACK_NOT_CHARGING
+
 /obj/item/gun/proc/gun_can_autofire()
 	return (autofire_enabled && world.time >= next_fire_time)
 

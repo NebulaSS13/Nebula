@@ -1,6 +1,6 @@
 /obj/abstract
 	name             = ""
-	icon             = 'icons/effects/landmarks.dmi'
+	icon             = 'icons/effects/markers.dmi'
 	icon_state       = "x2"
 	simulated        = FALSE
 	density          = FALSE

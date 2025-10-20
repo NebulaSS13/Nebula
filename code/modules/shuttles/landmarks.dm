@@ -3,7 +3,7 @@ var/global/list/shuttle_landmarks = list()
 //making this separate from /obj/abstract/landmark until that mess can be dealt with
 /obj/effect/shuttle_landmark
 	name = "Nav Point"
-	icon = 'icons/effects/landmarks.dmi'
+	icon = 'icons/effects/markers.dmi'
 	icon_state = "shuttle_landmark"
 	anchored = TRUE
 	simulated = FALSE
