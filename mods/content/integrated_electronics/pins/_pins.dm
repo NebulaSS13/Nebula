@@ -144,12 +144,6 @@ D [1]/  ||
 		var/datum/integrated_io/io = linked[k]
 		write_data_to_pin(io.data)
 
-/datum/integrated_io/proc/get_linked_to_desc()
-	if(linked.len)
-		return "the [english_list(linked)]"
-	return "nothing"
-
-
 /datum/integrated_io/proc/connect_pin(datum/integrated_io/pin)
 	pin.linked |= src
 	linked |= pin
