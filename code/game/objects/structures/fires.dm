@@ -250,7 +250,9 @@
 
 /obj/structure/fire_source/proc/burn_material(var/decl/material/mat, var/amount)
 	var/effective_burn_temperature = get_effective_burn_temperature()
-	. = mat.get_burn_products(amount, effective_burn_temperature)
+	var/datum/gas_mixture/environment = return_air() // todo: separate local and burn chamber gas mixes?
+	var/ambient_pressure = environment ? environment.return_pressure() : ONE_ATMOSPHERE
+	. = mat.get_burn_products(amount, effective_burn_temperature, ambient_pressure)
 	if(.)
 		if(mat.ignition_point && effective_burn_temperature >= mat.ignition_point)
 			if(mat.accelerant_value > FUEL_VALUE_NONE)
@@ -264,7 +266,7 @@
 			// This means that 100u (under two soup bowls full of water), will suppress a fire with 20 fuel.
 			fuel -= amount * (mat.accelerant_value / FUEL_VALUE_SUPPRESSANT) * 2
 		fuel = max(fuel, 0)
-		loc.take_waste_burn_products(., effective_burn_temperature)
+		loc.take_waste_burn_products(., effective_burn_temperature, ambient_pressure)
 
 // Dump waste gas from burned fuel.
 /obj/structure/fire_source/proc/dump_waste_products(var/atom/target, var/list/waste)
@@ -363,11 +365,13 @@
 		return
 	if(reagents?.total_volume)
 		var/do_steam = FALSE
+		var/datum/gas_mixture/our_air = return_air()
+		var/ambient_pressure = our_air ? our_air.return_pressure() : ONE_ATMOSPHERE
 		var/list/waste = list()
 
 		for(var/decl/material/reagent as anything in reagents?.reagent_volumes)
 
-			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT && !isnull(reagent.boiling_point) && reagent.boiling_point < get_effective_burn_temperature())
+			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT && reagent.phase_at_temperature(get_effective_burn_temperature(), ambient_pressure) == MAT_PHASE_GAS)
 				do_steam = TRUE
 
 			var/volume = NONUNIT_CEILING(REAGENT_VOLUME(reagents, reagent) / REAGENT_UNITS_PER_GAS_MOLE, 0.1)

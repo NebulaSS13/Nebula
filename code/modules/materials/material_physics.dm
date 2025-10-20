@@ -51,7 +51,7 @@
 // Returns null for no burn, empty list for burn with no products, assoc
 // matter to value list for waste products.
 // We assume a normalized mole amount for 'amount'.
-/decl/material/proc/get_burn_products(var/amount, var/burn_temperature)
+/decl/material/proc/get_burn_products(var/amount, var/burn_temperature, var/ambient_pressure)
 
 	// No chance of burning.
 	if(isnull(ignition_point) && isnull(boiling_point) && !length(vapor_products))
@@ -72,5 +72,5 @@
 		return
 
 	// If it's not ignitable but can be boiled, consider vaporizing it.
-	if(!isnull(boiling_point) && burn_temperature >= boiling_point)
+	if(!isnull(boiling_point) && phase_at_temperature(burn_temperature, ambient_pressure) == MAT_PHASE_GAS)
 		LAZYSET(., src, amount)

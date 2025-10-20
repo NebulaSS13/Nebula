@@ -174,8 +174,10 @@
 
 	// Vaporize anything over its boiling point.
 	var/update_reagents = FALSE
+	var/datum/gas_mixture/environment = loc?.return_air()
+	var/ambient_pressure = environment ? environment.return_pressure() : ONE_ATMOSPHERE
 	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
-		if(reagent.can_boil_to_gas && !isnull(reagent.boiling_point) && temperature >= reagent.boiling_point)
+		if(reagent.can_boil_to_gas && reagent.phase_at_temperature(temperature, ambient_pressure) == MAT_PHASE_GAS)
 			// TODO: reduce atom temperature?
 			var/removing = min(reagent.boil_evaporation_per_run, reagents.reagent_volumes[reagent])
 			reagents.remove_reagent(reagent, removing, defer_update = TRUE, removed_phases = MAT_PHASE_LIQUID)
