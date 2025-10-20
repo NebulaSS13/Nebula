@@ -554,9 +554,7 @@
 /turf/floor/plating,
 /area/ship/trade/bridge_unused)
 "dm" = (
-/obj/abstract/level_data_spawner/main_level{
-	name = "Tradeship Upper Deck"
-	},
+/obj/abstract/level_data_spawner/tradeship_upper,
 /turf/space,
 /area/space)
 "dq" = (

@@ -2046,9 +2046,7 @@
 /turf/floor/reinforced,
 /area/ship/trade/artifact_storage)
 "iS" = (
-/obj/abstract/level_data_spawner/main_level{
-	name = "Tradeship Cargo Deck"
-	},
+/obj/abstract/level_data_spawner/tradeship_cargo,
 /turf/space,
 /area/space)
 "iW" = (

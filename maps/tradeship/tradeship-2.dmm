@@ -5532,9 +5532,7 @@
 /turf/floor/tiled,
 /area/ship/trade/crew/saloon)
 "xh" = (
-/obj/abstract/level_data_spawner/main_level{
-	name = "Tradeship Habitation Deck"
-	},
+/obj/abstract/level_data_spawner/tradeship_habitation,
 /turf/space,
 /area/space)
 "xn" = (

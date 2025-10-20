@@ -72,6 +72,7 @@
 	#include "tradeship_areas.dm"
 	#include "tradeship_documents.dm"
 	#include "tradeship_jobs.dm"
+	#include "tradeship_levels.dm"
 	#include "tradeship_loadouts.dm"
 	#include "tradeship_overmap.dm"
 	#include "tradeship_overrides.dm"
