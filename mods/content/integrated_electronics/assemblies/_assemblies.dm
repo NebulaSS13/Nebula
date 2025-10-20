@@ -360,6 +360,7 @@
 	component.forceMove(get_object())
 	component.assembly = src
 	assembly_components |= component
+	component.added_to_assembly(src)
 
 
 /obj/item/electronic_assembly/proc/try_remove_component(obj/item/integrated_circuit/component, mob/user, silent)
@@ -391,6 +392,7 @@
 	component.dropInto(loc)
 	component.assembly = null
 	assembly_components.Remove(component)
+	component.removed_from_assembly(src)
 
 
 /obj/item/electronic_assembly/afterattack(atom/target, mob/user, proximity)
