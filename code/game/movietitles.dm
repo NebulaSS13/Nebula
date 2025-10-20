@@ -80,12 +80,12 @@ var/global/list/end_titles
 			background = GET_DECL(/decl/background_detail/heritage/human)
 		if(!showckey)
 			if(prob(90))
-				chunk += "[background.get_random_name(H, H.gender)]\t \t \t \t[uppertext(used_name)][job]"
+				chunk += "[background.get_random_cultural_name(H, H.gender, H.get_species())]\t \t \t \t[uppertext(used_name)][job]"
 			else
 				var/decl/pronouns/pronouns = H.get_pronouns()
 				chunk += "[used_name]\t \t \t \t[uppertext(pronouns.him)]SELF"
 		else
-			chunk += "[uppertext(background.get_random_name(H, H.gender))] a.k.a. '[uppertext(H.ckey)]'\t \t \t \t[uppertext(used_name)][job]"
+			chunk += "[uppertext(background.get_random_cultural_name(H, H.gender, H.get_species()))] a.k.a. '[uppertext(H.ckey)]'\t \t \t \t[uppertext(used_name)][job]"
 		chunksize++
 		if(chunksize > 2)
 			cast += "<center>[jointext(chunk,"<br>")]</center>"
@@ -119,7 +119,7 @@ var/global/list/end_titles
 		if(C.holder.rights & (R_DEBUG|R_ADMIN))
 			var/list/all_backgrounds = decls_repository.get_decls_of_subtype(/decl/background_detail/heritage)
 			var/decl/background_detail/cult = all_backgrounds[pick(all_backgrounds)]
-			staff += "[uppertext(pick(staffjobs))] - [cult.get_random_name(C.gender)] a.k.a. '[C.key]'"
+			staff += "[uppertext(pick(staffjobs))] - [cult.get_random_cultural_name(C.mob, C.mob.gender, C.mob.get_species())] a.k.a. '[C.key]'"
 		else if(C.holder.rights & R_MOD)
 			goodboys += "[C.key]"
 

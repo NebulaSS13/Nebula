@@ -12,7 +12,7 @@
 	)
 	uid = "heritage_adherent"
 
-/decl/background_detail/heritage/adherent/get_random_name(gender)
+/decl/background_detail/heritage/adherent/get_random_cultural_name(mob/recipient, gender, species)
 	return "[uppertext("[pick(global.alphabet)][pick(global.alphabet)]-[pick(global.alphabet)] [rand(1000,9999)]")]"
 
 /decl/background_detail/heritage/adherent/sanitize_background_name(name)

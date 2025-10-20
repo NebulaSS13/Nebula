@@ -90,7 +90,7 @@
 
 	var/decl/background_detail/background = M.get_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
 	if(background && CORPSE_SPAWNER_RANDOM_NAME & spawn_flags)
-		M.SetName(background.get_random_name(M.gender))
+		M.SetName(background.get_random_cultural_name(M, M.gender, M.get_species()))
 	else
 		M.SetName(name)
 	M.real_name = M.name

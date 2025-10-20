@@ -67,12 +67,11 @@
 /decl/language/proc/muddle(var/message)
 	return message
 
-/decl/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
+/decl/language/proc/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!length(syllables))
 		if(gender==FEMALE)
 			return capitalize(pick(global.using_map.first_names_female)) + " " + capitalize(pick(global.using_map.last_names))
-		else
-			return capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
+		return capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
 	var/possible_syllables = allow_repeated_syllables ? syllables : syllables.Copy()
 	for(var/i in 1 to name_count)

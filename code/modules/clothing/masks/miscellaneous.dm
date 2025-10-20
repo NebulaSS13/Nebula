@@ -157,7 +157,7 @@
 	if(istype(S))
 		var/decl/background_detail/C = GET_DECL(S.default_background_info[/decl/background_category/heritage])
 		if(istype(C))
-			visible_name = C.get_random_name(pick(MALE,FEMALE))
+			visible_name = C.get_random_cultural_name(gender = pick(MALE,FEMALE), species = species)
 
 /obj/item/clothing/mask/rubber/species/cat
 	name = "cat mask"

@@ -48,7 +48,7 @@
 	. = ..()
 	speech_verb = pick("hisses","growls","whistles","blubbers","chirps","skreeches","rumbles","clicks")
 
-/decl/language/alium/get_random_name()
+/decl/language/alium/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	var/new_name = ""
 	var/name_length = rand(1,3)
 	for(var/i=0 to name_length)

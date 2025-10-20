@@ -35,7 +35,7 @@
 	var/newname = sanitize_safe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 	if(!newname || newname == "")
 		var/decl/background_detail/background = GET_DECL(/decl/background_detail/heritage/vox/raider)
-		newname = background.get_random_name()
+		newname = background.get_random_cultural_name()
 	vox.real_name = newname
 	vox.SetName(vox.real_name)
 	var/decl/special_role/raider/raiders = GET_DECL(/decl/special_role/raider)

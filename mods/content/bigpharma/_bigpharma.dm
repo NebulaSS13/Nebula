@@ -6,7 +6,7 @@ var/global/list/reagent_names_to_medication_names
 	. = LAZYACCESS(global.reagent_names_to_medication_names, reagent_name)
 	if(!.)
 		var/decl/language/bigpharma/pharma = GET_DECL(/decl/language/bigpharma)
-		LAZYSET(global.reagent_names_to_medication_names, reagent_name, pharma.get_random_name())
+		LAZYSET(global.reagent_names_to_medication_names, reagent_name, pharma.get_random_language_name())
 		. = global.reagent_names_to_medication_names[reagent_name]
 
 var/global/list/reagent_names_to_colours

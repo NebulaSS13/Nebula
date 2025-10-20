@@ -54,6 +54,9 @@
 /turf/floor/plating
 	_base_flooring = /decl/flooring/plating // Setting here so overrides on /turf/floor do not impact explicitly typed plating turfs.
 
+/turf/floor/plating/flooded
+	flooded = /decl/material/liquid/water
+
 // Dirt plating for Tradeship farms.
 /turf/floor/plating/dirt
 	name = "dirt"

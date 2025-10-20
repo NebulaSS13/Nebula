@@ -27,7 +27,7 @@
 	new /obj/item/implanter/translator(get_turf(src))
 	H.change_species(/decl/species/alium::uid)
 	var/decl/background_detail/background = H.get_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
-	H.fully_replace_character_name(background.get_random_name(H, H.gender))
+	H.fully_replace_character_name(background.get_random_cultural_name(H, H.gender, /decl/species/alium::uid))
 	H.rename_self("Humanoid Alien", 1)
 	return TRUE
 
