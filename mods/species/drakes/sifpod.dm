@@ -10,10 +10,6 @@
 	grown_tag = "sifpod"
 	backyard_grilling_product = /obj/item/food/roast_sifpod
 	backyard_grilling_announcement = "crackles and pops as the roast hull splits open."
-	chems = list(
-		/decl/material/liquid/nutriment = list(1,5),
-		/decl/material/liquid/sifsap    = list(10,20)
-	)
 
 /datum/seed/sifpod/New()
 	..()
@@ -27,6 +23,8 @@
 	set_trait(TRAIT_PLANT_ICON,"tree5")
 	set_trait(TRAIT_FLESH_COLOUR,"#05157d")
 	set_trait(TRAIT_IDEAL_LIGHT, 1)
+	set_chemical_amount(/decl/material/liquid/nutriment, list(1,5))
+	set_chemical_amount(/decl/material/liquid/sifsap,    list(10,20))
 
 /obj/item/food/roast_sifpod
 	name = "roast sifpod"

@@ -2570,6 +2570,7 @@
 #include "code\modules\hydroponics\processed_grown.dm"
 #include "code\modules\hydroponics\seed.dm"
 #include "code\modules\hydroponics\seed_appearance.dm"
+#include "code\modules\hydroponics\seed_composition.dm"
 #include "code\modules\hydroponics\seed_datums_aquaculture.dm"
 #include "code\modules\hydroponics\seed_gene_mut.dm"
 #include "code\modules\hydroponics\seed_machines.dm"

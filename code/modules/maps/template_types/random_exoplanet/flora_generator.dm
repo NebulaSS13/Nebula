@@ -79,10 +79,10 @@
 	if(prob(50))
 		var/chem_type = SSmaterials.get_random_chem(TRUE, atmos.temperature || T0C)
 		if(chem_type)
-			var/nutriment = S.chems[/decl/material/liquid/nutriment]
-			S.chems.Cut()
-			S.chems[/decl/material/liquid/nutriment] = nutriment
-			S.chems[chem_type] = list(rand(1,10),rand(10,20))
+			var/nutriment = S.get_chemical_amount(_chem = /decl/material/liquid/nutriment)
+			S.clear_chemical_composition()
+			S.set_chemical_amount(/decl/material/liquid/nutriment, nutriment)
+			S.set_chemical_amount(chem_type,                       list(rand(1,10),rand(10,20)))
 
 	return S
 
@@ -162,6 +162,6 @@
 		S.set_trait(TRAIT_HARVEST_REPEAT, 1)
 		S.set_trait(TRAIT_LARGE,          1)
 		S.set_trait(TRAIT_LEAVES_COLOUR,  color)
-		S.chems[/decl/material/solid/organic/wood] = list(1,0)  //#TODO: Maybe look at Why the seed creates injectable wood?
+		S.set_chemical_amount(/decl/material/solid/organic/wood, list(1,0))  //#TODO: Maybe look at Why the seed creates injectable wood?
 		adapt_seed(S, atmos)
 		LAZYADD(big_flora_types, S)

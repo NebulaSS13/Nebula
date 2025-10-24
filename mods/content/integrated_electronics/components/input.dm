@@ -298,7 +298,7 @@
 	for(var/i=1, i<=outputs.len, i++)
 		set_pin_data(IC_OUTPUT, i, null)
 	if(plant.seed && (plant in view(get_turf(src)))) // Like the medbot's analyzer it can be used at range.
-		for(var/chem_path in plant.seed.chems)
+		for(var/chem_path in plant.seed.get_chemical_composition())
 			var/decl/material/seed_chem = GET_DECL(chem_path)
 			greagents.Add(seed_chem.use_name)
 
