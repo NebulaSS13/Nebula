@@ -25,6 +25,7 @@
 	#include "../../mods/content/modern_earth/_modern_earth.dme"
 	#include "../../mods/content/mouse_highlights/_mouse_highlight.dme"
 	#include "../../mods/content/pheromones/_pheromones.dme"
+	#include "../../mods/content/plant_dissection/_plant_dissection.dme"
 	#include "../../mods/content/psionics/_psionics.dme"
 	#include "../../mods/content/shackles/_shackles.dme"
 	#include "../../mods/content/standard_jobs/_standard_jobs.dme"
