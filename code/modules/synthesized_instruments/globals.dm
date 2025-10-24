@@ -212,20 +212,15 @@ Bit flags that modify the behavior of above properties
 
 
 /datum/musical_config/proc/environment_to_id(environment)
-	if (environment in src.all_environments)
-		return src.all_environments.Find(environment) - 2
-	return -1
-
+	return index_to_id(src.all_environments.Find(environment))
 
 /datum/musical_config/proc/id_to_environment(id)
 	if (id >= -1 && id <= 26)
 		return src.all_environments[id+2]
 	return "None"
 
-
 /datum/musical_config/proc/index_to_id(index)
 	return max(min(index-2, 26), -1)
-
 
 /datum/musical_config/proc/is_custom_env(id)
 	return id_to_environment(id) == src.all_environments[28]

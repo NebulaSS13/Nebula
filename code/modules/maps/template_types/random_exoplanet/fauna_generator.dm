@@ -150,12 +150,12 @@
 /datum/fauna_generator/proc/try_respawn_from_queue()
 	. = LAZYACCESS(respawn_queue, 1)
 	if(.)
-		respawn_queue = respawn_queue.Copy(2) //Clear first entry
+		respawn_queue.Cut(1,2) //Clear first entry
 
 /datum/fauna_generator/proc/pick_fauna_to_respawn()
 	. = LAZYACCESS(respawn_queue & fauna_types, 1)
 	if(.)
-		respawn_queue = respawn_queue.Copy(2) //Clear first entry
+		respawn_queue.Cut(1,2) //Clear first entry
 	else
 		//Grab from our fauna list if we don't have anything set to respawn
 		. = pickweight(fauna_types)
@@ -163,7 +163,7 @@
 /datum/fauna_generator/proc/pick_megafauna_to_respawn()
 	. = LAZYACCESS(respawn_queue & megafauna_types, 1)
 	if(.)
-		respawn_queue = respawn_queue.Copy(2) //Clear first entry
+		respawn_queue.Cut(1,2) //Clear first entry
 	else
 		//Grab from our fauna list if we don't have anything set to respawn
 		. = pickweight(megafauna_types)
