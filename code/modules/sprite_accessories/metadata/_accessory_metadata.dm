@@ -11,7 +11,9 @@
 	return FALSE
 
 /decl/sprite_accessory_metadata/proc/sanitize_data(value)
-	return value || default_value
+	if(validate_data(value))
+		return value
+	return default_value
 
 /decl/sprite_accessory_metadata/proc/get_metadata_options_string(datum/preferences/pref, decl/sprite_accessory_category/accessory_category_decl, decl/sprite_accessory/accessory_decl, value)
 	return

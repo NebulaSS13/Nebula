@@ -166,8 +166,7 @@
 	LAZYINITLIST(metadata)
 	for(var/metadata_type in accessory_metadata_types)
 		var/decl/sprite_accessory_metadata/metadata_decl = GET_DECL(metadata_type)
-		if(!(metadata_type in metadata) || !metadata_decl.validate_data(metadata[metadata_type]))
-			metadata[metadata_type] = metadata_decl.default_value
+		metadata[metadata_type] = metadata_decl.sanitize_data(metadata[metadata_type])
 	return metadata
 
 /decl/sprite_accessory/proc/get_cached_accessory_icon_key(var/obj/item/organ/external/organ, var/list/metadata)
