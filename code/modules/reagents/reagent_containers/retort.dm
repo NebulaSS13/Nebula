@@ -19,8 +19,10 @@
 
 /obj/item/chems/glass/retort/update_overlays()
 	if(reagents?.total_volume && (!material || material.opacity < 1))
+		var/datum/gas_mixture/environment = loc?.return_air()
+		var/ambient_pressure = environment ? environment.return_pressure() : ONE_ATMOSPHERE
 		for(var/decl/material/reagent as anything in reagents.reagent_volumes)
-			if(!isnull(reagent.boiling_point) && temperature >= reagent.boiling_point)
+			if(reagent.phase_at_temperature(temperature, ambient_pressure) == MAT_PHASE_GAS)
 				add_overlay(overlay_image(icon, "[icon_state]-fill-boil", reagents.get_color(), (RESET_ALPHA|RESET_COLOR)))
 				return
 		add_overlay(overlay_image(icon, "[icon_state]-fill", reagents.get_color(), (RESET_ALPHA|RESET_COLOR)))

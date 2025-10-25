@@ -31,6 +31,8 @@
 	// to avoid issues with it cooling down in ..() and reheating the same tick, we use the highest of the two
 	// todo: just prevent the cooling instead, for a less-hacky solution
 	var/use_temperature = max(temperature, prior_temperature)
+	var/datum/gas_mixture/environment = loc?.return_air()
+	var/ambient_pressure = environment ? environment.return_pressure() : ONE_ATMOSPHERE
 
 	// Largely ignore return value so we don't skip this update on the final time we temperature process.
 	if(use_temperature != last_boil_temp)
@@ -38,7 +40,7 @@
 		last_boil_temp = use_temperature
 		var/next_boil_status = FALSE
 		for(var/decl/material/reagent as anything in reagents?.reagent_volumes)
-			if(!isnull(reagent.boiling_point) && use_temperature >= reagent.boiling_point)
+			if(reagent.phase_at_temperature(use_temperature, ambient_pressure) == MAT_PHASE_GAS)
 				next_boil_status = TRUE
 				break
 

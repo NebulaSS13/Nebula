@@ -18,12 +18,12 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 /atom/proc/get_reagents()
 	return reagents
 
-/atom/proc/take_waste_burn_products(list/materials, exposed_temperature)
+/atom/proc/take_waste_burn_products(list/materials, exposed_temperature, ambient_pressure)
 
 	// This might not be needed. Leaving it in for safety.
 	var/turf/T = get_turf(src)
 	if(T != src)
-		return T?.take_waste_burn_products(materials, exposed_temperature)
+		return T?.take_waste_burn_products(materials, exposed_temperature, ambient_pressure)
 
 	var/datum/reagents/liquids
 	var/datum/gas_mixture/vapor
@@ -31,7 +31,7 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	for(var/mat in materials)
 		var/amount = materials[mat]
 		var/decl/material/material_data = GET_DECL(mat)
-		switch(material_data.phase_at_temperature(exposed_temperature))
+		switch(material_data.phase_at_temperature(exposed_temperature, ambient_pressure))
 
 			if(MAT_PHASE_SOLID)
 				if(!scraps)

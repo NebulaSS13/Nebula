@@ -55,7 +55,7 @@
 		material_info += "<br>This substance has the following properties in standard temperature and pressure:<ul>"
 		material_info += "<ul>"
 		material_info += "<li>Its melting point is [mat.melting_point] K.</li>"
-		material_info += "<li>Its boiling point is [mat.boiling_point] K.</li>"
+		material_info += "<li>Its boiling point is [mat.boiling_point] K (at 1ATM).</li>"
 		if(mat.solvent_power > MAT_SOLVENT_NONE)
 			if(mat.solvent_power <= MAT_SOLVENT_MILD)
 				material_info += "<li>It is a mild solvent.</li>"
