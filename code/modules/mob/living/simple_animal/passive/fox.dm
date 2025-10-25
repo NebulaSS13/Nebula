@@ -9,12 +9,15 @@
 	pass_flags         = PASS_FLAG_TABLE
 	butchery_data      = /decl/butchery_data/animal/fox
 	eye_color          = "#1d628a"
-	draw_visible_overlays = list(
+	ability_handlers = list(/datum/ability_handler/predator)
+
+/mob/living/simple_animal/passive/fox/get_default_animal_colours()
+	var/static/list/default_colors = list(
 		"base"     = "#ed5a20",
 		"markings" = "#efe9e6",
 		"socks"    = "#36221b"
 	)
-	ability_handlers = list(/datum/ability_handler/predator)
+	return default_colors
 
 /mob/living/simple_animal/passive/fox/get_available_postures()
 	var/static/list/available_postures = list(
@@ -51,31 +54,38 @@
 	name           = "arctic fox"
 	desc           = "A cunning and graceful predatory mammal, known for leaping headfirst into snowbanks while hunting burrowing rodents."
 	eye_color      = "#7a6f3b"
-	draw_visible_overlays = list(
+
+/mob/living/simple_animal/passive/fox/arctic/get_default_animal_colours()
+	var/static/list/default_colors = list(
 		"base"     = "#ccc496",
 		"markings" = "#efe9e6",
 		"socks"    = "#cab9b1"
 	)
+	return default_colors
 
 /mob/living/simple_animal/passive/fox/silver
 	name           = "silver fox"
 	desc           = "A cunning and graceful predatory mammal, known for the rarity and high value of their pelts."
 	eye_color      = "#2db1c9"
-	draw_visible_overlays = list(
+
+/mob/living/simple_animal/passive/fox/silver/get_default_animal_colours()
+	var/static/list/default_colors = list(
 		"base"     = "#2c2c2a",
 		"markings" = "#3d3b39",
 		"socks"    = "#746d66"
 	)
+	return default_colors
 
 /mob/living/simple_animal/passive/fox/sparkle
 	name = "sparklefox"
 	desc = "A cunning and graceful predatory mammal, known for being really into hardstyle."
 
 /mob/living/simple_animal/passive/fox/sparkle/Initialize()
-	eye_color      = get_random_colour(TRUE)
 	draw_visible_overlays = list(
 		"base"     = get_random_colour(),
 		"markings" = get_random_colour(TRUE),
 		"socks"    = get_random_colour()
 	)
+	eye_color      = get_random_colour(TRUE)
 	. = ..()
+
