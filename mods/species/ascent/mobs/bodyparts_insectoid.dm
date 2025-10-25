@@ -28,7 +28,7 @@
 			living_user.adjust_nutrition(-1 * egg_metabolic_cost)
 			living_user.visible_message(SPAN_NOTICE("\icon[living_user] [living_user] carelessly deposits an egg on \the [get_turf(src)]."))
 			var/obj/structure/insectoid_egg/egg = new(get_turf(living_user)) // splorp
-			egg.lineage = living_user.get_gyne_lineage()
+			egg.lineage = get_gyne_lineage(living_user)
 
 /obj/item/organ/external/foot/insectoid/mantid
 	name = "left tail tip"

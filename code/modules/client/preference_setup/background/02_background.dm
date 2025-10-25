@@ -67,7 +67,7 @@
 	if(istype(check))
 		pref.real_name = check.sanitize_background_name(pref.real_name, pref.species)
 		if(!pref.real_name)
-			pref.real_name = check.get_random_name(get_mannequin(pref.client?.ckey), pref.gender)
+			pref.real_name = check.get_random_cultural_name(get_mannequin(pref.client?.ckey), pref.gender, pref.species)
 
 // Load an associative list of background category type to a background type.
 /datum/category_item/player_setup_item/background/details/load_character(datum/pref_record_reader/R)

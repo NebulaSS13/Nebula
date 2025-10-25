@@ -31,5 +31,5 @@ var/global/list/last_name_skrell =   file2list("mods/species/skrell/names/last_n
 		/decl/language/skrell = 90
 	)
 
-/decl/language/skrell/get_random_name(var/gender)
+/decl/language/skrell/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	return capitalize(pick(global.first_name_skrell)) + capitalize(pick(global.last_name_skrell))

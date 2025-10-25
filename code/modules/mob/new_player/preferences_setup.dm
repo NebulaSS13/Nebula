@@ -119,7 +119,7 @@
 /datum/preferences/proc/get_random_name()
 	var/decl/background_detail/background = get_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
 	if(istype(background))
-		return background.get_random_name(client?.mob, gender)
+		return background.get_random_cultural_name(client?.mob, gender, species)
 	return random_name(gender, species)
 
 /datum/preferences/proc/get_background_datum_by_flag(background_flag)

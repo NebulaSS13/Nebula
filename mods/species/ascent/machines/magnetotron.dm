@@ -39,7 +39,7 @@
 	if(do_after(target, 10 SECONDS, src, TRUE))
 		// Convert to gyne successfully.
 		var/lineage = create_gyne_name()
-		target.set_gyne_lineage(lineage)
+		set_gyne_lineage(target, lineage)
 		target.real_name = "[rand(1, 99)] [lineage]"
 		target.SetName(target.real_name)
 

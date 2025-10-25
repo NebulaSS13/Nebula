@@ -20,7 +20,7 @@
 	var/lineage = create_gyne_name()
 	if(ishuman(player.current))
 		var/mob/living/human/H = player.current
-		H.set_gyne_lineage(lineage) // This makes all antag ascent have the same lineage on get_random_name.
+		set_gyne_lineage(H, lineage) // This makes all antag ascent have the same lineage on get_random_cultural_name().
 		var/species_uid = H.get_species()?.uid
 		if(!leader && is_species_whitelisted(player.current, /decl/species/mantid/gyne::uid))
 			leader = player
@@ -32,7 +32,7 @@
 				H.set_species(/decl/species/mantid::uid)
 			H.set_gender(MALE)
 		var/decl/background_detail/heritage/ascent/background = GET_DECL(/decl/background_detail/heritage/ascent)
-		H.real_name = background.get_random_name(H, H.gender)
+		H.real_name = background.get_random_cultural_name(H, H.gender, H.get_species())
 		H.name = H.real_name
 
 /decl/special_role/hunter/equip_role(var/mob/living/human/player)

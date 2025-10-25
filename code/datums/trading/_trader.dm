@@ -41,7 +41,7 @@
 	if(ispath(name_language, /decl/language))
 		var/decl/language/L = GET_DECL(name_language)
 		if(istype(L))
-			name = L.get_random_name(pick(MALE,FEMALE))
+			name = L.get_random_language_name(pick(MALE,FEMALE))
 	if(!name)
 		name = capitalize(pick(global.using_map.first_names_female + global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 

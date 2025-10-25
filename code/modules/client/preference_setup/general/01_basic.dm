@@ -76,7 +76,7 @@
 	if(pref.be_random_name)
 		var/decl/background_detail/background = pref.get_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
 		if(background)
-			new_real_name = background.get_random_name(pref.gender)
+			new_real_name = background.get_random_cultural_name(gender = pref.gender, species = pref.species)
 	if(get_config_value(/decl/config/toggle/humans_need_surnames))
 		var/firstspace = findtext(new_real_name, " ")
 		var/name_length = length(new_real_name)

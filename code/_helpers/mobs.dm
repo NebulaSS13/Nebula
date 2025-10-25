@@ -13,7 +13,8 @@
 		if(current_species)
 			var/decl/background_detail/background = current_species.get_default_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
 			if(background)
-				return background.get_random_name(null, gender)
+				return background.get_random_cultural_name(gender = gender, species = species)
+
 	return capitalize(pick(gender == FEMALE ? global.using_map.first_names_female : global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
 /proc/random_skin_tone(var/decl/bodytype/current_bodytype)
