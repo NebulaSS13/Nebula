@@ -5,7 +5,6 @@
 	return TRUE
 
 /decl/prefab/ic_assembly
-	var/assembly_name
 	var/data
 	var/power_cell_type
 

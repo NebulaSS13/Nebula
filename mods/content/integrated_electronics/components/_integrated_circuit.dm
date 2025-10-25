@@ -113,7 +113,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	if(!check_interactivity(M))
 		return
 
-	var/input = sanitize_name(input(M, "What do you want to name this?", "Rename", name) as null|text, allow_numbers = TRUE)
+	var/input = sanitize_name(input(M, "What do you want to name this?", "Rename", name) as null|text, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
 	if(check_interactivity(M))
 		if(!input)
 			input = name

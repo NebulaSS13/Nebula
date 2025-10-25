@@ -124,7 +124,7 @@
 	// Now spend it.
 	for(var/obj/item/integrated_circuit/component as anything in assembly_components)
 		if(component.power_draw_idle)
-			if(power_failure || !draw_power(component.power_draw_idle))
+			if(power_failure || !component.draw_idle_power())
 				component.power_fail()
 
 /obj/item/electronic_assembly/receive_mouse_drop(atom/dropping, mob/user, params)
@@ -279,7 +279,7 @@
 	if(!check_interactivity(M))
 		return
 	var/input = input("What do you want to name this?", "Rename", src.name) as null|text
-	input = sanitize_name(input,allow_numbers = 1)
+	input = sanitize_name(input, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
 	if(!check_interactivity(M))
 		return
 	if(!QDELETED(src) && input)
@@ -360,6 +360,7 @@
 	component.forceMove(get_object())
 	component.assembly = src
 	assembly_components |= component
+	component.added_to_assembly(src)
 
 
 /obj/item/electronic_assembly/proc/try_remove_component(obj/item/integrated_circuit/component, mob/user, silent)
@@ -391,6 +392,7 @@
 	component.dropInto(loc)
 	component.assembly = null
 	assembly_components.Remove(component)
+	component.removed_from_assembly(src)
 
 
 /obj/item/electronic_assembly/afterattack(atom/target, mob/user, proximity)
@@ -433,6 +435,9 @@
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(used_item, user, user.get_intent())
 			return ..()
+		if(!istype(used_item, cell_type))
+			to_chat(user, SPAN_WARNING("\The [src] doesn't accept that type of cell."))
+			return TRUE
 		var/obj/item/cell/cell = used_item
 		if(user.try_unequip(used_item,loc))
 			user.drop_from_inventory(used_item, loc)
