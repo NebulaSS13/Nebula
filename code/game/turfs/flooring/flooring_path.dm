@@ -7,6 +7,7 @@
 	neighbour_type = /decl/flooring/path
 	color          = null
 	constructed    = TRUE
+	uid            = "floor_path"
 
 	// If null, this is just skipped.
 	var/paving_adjective = "cobbled"
@@ -28,6 +29,7 @@
 	icon_edge_layer = FLOOR_EDGE_PATH
 	flooring_flags  = TURF_REMOVE_CROWBAR
 	has_base_range = 1
+	uid            = "floor_path_cobble"
 
 /decl/flooring/path/running_bond
 	name           = "stone path"
@@ -35,6 +37,7 @@
 	icon_base      = "runningbond"
 	has_base_range = 3
 	gender         = NEUTER
+	uid            = "floor_path_bond"
 
 /decl/flooring/path/herringbone
 	name           = "stone path"
@@ -42,3 +45,4 @@
 	icon_base      = "herringbone"
 	has_base_range = null
 	gender         = NEUTER
+	uid            = "floor_path_herring"

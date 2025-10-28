@@ -13,6 +13,7 @@
 	flooring_flags     = TURF_REMOVE_SHOVEL
 	force_material     = /decl/material/solid/organic/plantmatter/grass
 	growth_value       = 1.2 // Shouldn't really matter since you can't plant on grass, it turns to dirt first.
+	uid                = "floor_grass"
 	var/harvestable    = FALSE
 
 /decl/flooring/grass/fire_act(turf/floor/target, datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -33,6 +34,7 @@
 	has_base_range     = null
 	icon_edge_layer    = FLOOR_EDGE_GRASS_WILD
 	harvestable        = TRUE
+	uid                = "floor_grass_wild"
 
 /decl/flooring/grass/wild/get_movable_alpha_mask_state(atom/movable/mover)
 	. = ..() || "mask_grass"
@@ -53,3 +55,4 @@
 	color           = "#5e7a3b"
 	build_type      = /obj/item/stack/tile/grass
 	force_material  = /decl/material/solid/organic/plastic
+	uid                = "floor_grass_fake"

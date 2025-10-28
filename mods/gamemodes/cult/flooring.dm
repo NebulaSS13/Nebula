@@ -6,6 +6,7 @@
 	build_type = null
 	turf_flags = TURF_ACID_IMMUNE | TURF_REMOVE_WRENCH
 	can_paint  = FALSE
+	uid        = "floor_cult"
 
 /decl/flooring/reinforced/cult/on_flooring_remove(turf/removing_from)
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)

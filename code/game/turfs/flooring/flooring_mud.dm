@@ -11,6 +11,7 @@
 	growth_value    = 1.1
 	can_collect     = TRUE
 	print_type      = /obj/effect/footprints
+	uid             = "floor_mud"
 
 /decl/flooring/mud/fire_act(turf/floor/target, datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!target.reagents?.total_volume)
@@ -43,6 +44,7 @@
 	color           = "#ae9e66"
 	dirt_color      = "#ae9e66"
 	force_material  = /decl/material/solid/soil
+	uid             = "floor_dry_mud"
 
 /decl/flooring/dry_mud/fluid_act(turf/floor/target, datum/reagents/fluids)
 	if(target.get_topmost_flooring() == src)
@@ -64,6 +66,7 @@
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	force_material  = /decl/material/solid/soil
 	growth_value    = 1
+	uid             = "floor_dirt"
 
 /decl/flooring/dirt/fluid_act(turf/floor/target, datum/reagents/fluids)
 	if(target.get_topmost_flooring() == src)
