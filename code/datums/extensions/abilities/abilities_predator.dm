@@ -56,6 +56,11 @@
 		to_chat(user, SPAN_WARNING("\The [victim] is too big for you to dismember."))
 		return TRUE
 
+	var/obj/item/organ/external/limb = victim.get_organ(user.get_target_zone())
+	if(!limb)
+		to_chat(user, SPAN_WARNING("\The [victim] is missing that limb!"))
+		return TRUE
+
 	to_chat(user, SPAN_NOTICE("You dig into \the [victim], hunting for something edible."))
 	if(!do_after(user, max(2 SECONDS, victim.get_object_size() * 5), victim) || QDELETED(victim) || !victim.butchery_data || victim.stat != DEAD)
 		return TRUE
@@ -66,13 +71,24 @@
 		victim.gib()
 		return TRUE
 
-	var/obj/item/organ/external/limb = victim.get_organ(user.get_target_zone())
+	limb = victim.get_organ(user.get_target_zone()) // In case we changed zone or such in the meantime.
 	if(!limb)
 		to_chat(user, SPAN_WARNING("\The [victim] is missing that limb!"))
 		return TRUE
 
-	user.visible_message(SPAN_DANGER("\The [user] tears \the [limb] from \the [victim]!"))
-	limb.dismember(FALSE, DISMEMBER_METHOD_EDGE, silent = TRUE)
-	if(!QDELETED(limb))
-		user.put_in_hands(limb)
+	if(length(limb.internal_organs))
+		var/obj/item/organ/internal/stolen = pick(limb.internal_organs)
+		user.visible_message(SPAN_DANGER("\The [user] tears \the [stolen] out of \the [victim]'s [limb.name]!"))
+		victim.remove_organ(stolen, TRUE, TRUE)
+		if(!QDELETED(stolen))
+			user.put_in_hands(stolen)
+		return TRUE
+
+	if(!(limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+		to_chat(user, SPAN_WARNING("You gnaw on \the [victim]'s [limb.name], but can't pull it loose."))
+	else
+		user.visible_message(SPAN_DANGER("\The [user] tears \the [limb] from \the [victim]!"))
+		limb.dismember(FALSE, DISMEMBER_METHOD_EDGE, silent = TRUE)
+		if(!QDELETED(limb))
+			user.put_in_hands(limb)
 	return TRUE
