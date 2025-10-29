@@ -66,8 +66,6 @@
 		else if(has_right_neighbor)
 			state = "ramp-blend-right"
 		var/image/I = image(material_icon_base, state, dir = ramp_slope_direction)
-		I.color = base_color
-		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 		if(shine)
 			I = image(material_icon_base, "[state]-shine", dir = ramp_slope_direction)
