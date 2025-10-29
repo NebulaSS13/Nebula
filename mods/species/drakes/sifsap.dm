@@ -2,7 +2,7 @@
 	var/obj/item/organ/internal/drake_gizzard/gizzard = user.get_organ(BP_DRAKE_GIZZARD)
 	if(!gizzard?.sap_crop?.total_volume)
 		return FALSE
-	if(LAZYACCESS(gizzard.sap_crop.reagent_volumes, /decl/material/liquid/sifsap) < amount)
+	if(!gizzard.sap_crop.has_reagent(/decl/material/liquid/sifsap, amount))
 		return FALSE
 	gizzard.sap_crop.remove_reagent(/decl/material/liquid/sifsap, amount)
 	return TRUE
