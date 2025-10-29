@@ -50,9 +50,18 @@
 		update_neighboring_ramps(destroying_self = TRUE)
 	. = ..()
 
+/turf/wall/natural/attack_hand(mob/user)
+
+	// Allow species with digging limbs to dig (drakes)
+	var/obj/item/prop = user.get_usable_hand_slot_organ()
+	if(istype(prop))
+		return attackby(prop, user)
+
+	. = ..()
+
 /turf/wall/natural/attackby(obj/item/used_item, mob/user, click_params)
 
-	if(user.check_dexterity(DEXTERITY_COMPLEX_TOOLS) && !ramp_slope_direction)
+	if(!ramp_slope_direction && user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, silent = TRUE))
 
 		if(istype(used_item, /obj/item/depth_scanner))
 			var/obj/item/depth_scanner/C = used_item

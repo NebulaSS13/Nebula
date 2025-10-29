@@ -9,7 +9,7 @@
 		if(islist(_flooring))
 			for(var/floor in _flooring)
 				. += RESOLVE_TO_DECL(floor)
-		else if(ispath(_flooring))
+		else if(!isnull(_flooring))
 			. += RESOLVE_TO_DECL(_flooring)
 	if(_base_flooring)
 		. += get_base_flooring()

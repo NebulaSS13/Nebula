@@ -25,22 +25,27 @@
 		return FALSE
 	return TRUE
 
-/turf/floor/can_dig_trench(tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
-	return can_be_dug(tool_hardness, using_tool) && get_physical_height() > -(FLUID_DEEP)
-
 /turf/floor/dig_trench(mob/user, tool_hardness = MAT_VALUE_MALLEABLE, using_tool = TOOL_SHOVEL)
-	if(flooring_is_diggable())
-		handle_trench_digging(user)
+	if(!flooring_is_diggable())
+		return
 
-/turf/floor/proc/handle_trench_digging(mob/user)
 	var/decl/flooring/flooring = get_topmost_flooring()
 	if(!flooring.handle_turf_digging(src))
 		return
-	// Only drop mats if we actually changed the turf height sufficiently.
+
 	var/old_height  = get_physical_height()
 	var/new_height  = max(old_height-TRENCH_DEPTH_PER_ACTION, -(FLUID_DEEP))
-	var/height_diff = abs(old_height-new_height)
-	if(height_diff >= TRENCH_DEPTH_PER_ACTION)
+	var/height_diff = round(abs(old_height-new_height))
+	if(new_height <= -(FLUID_DEEP))
+		var/open_turf_path = get_open_turf_type_by_area(src)
+		if(!open_turf_path)
+			to_chat(user, SPAN_WARNING("You cannot dig any lower!"))
+			return
+		to_chat(user, SPAN_DANGER("You break through \the [src]!"))
+		drop_diggable_resources(user)
+		ChangeTurf(open_turf_path)
+	// Only drop mats if we actually changed the turf height sufficiently.
+	else if(height_diff >= TRENCH_DEPTH_PER_ACTION)
 		drop_diggable_resources(user)
 	set_physical_height(new_height)
 

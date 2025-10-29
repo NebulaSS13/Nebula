@@ -26,6 +26,12 @@
 		return A.base_turf
 	return get_base_turf(T.z)
 
+/proc/get_open_turf_type_by_area(var/turf/T)
+	if(!HasBelow(T.z))
+		return
+	var/area/area = get_area(T)
+	return area?.open_turf || T.open_turf_type
+
 // Returns the open turf of a Z-stack by finding the nearest non-open turf below.
 /proc/get_open_turf_type(var/turf/T)
 	if(!HasBelow(T.z))

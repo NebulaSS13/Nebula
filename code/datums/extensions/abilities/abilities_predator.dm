@@ -56,7 +56,8 @@
 		to_chat(user, SPAN_WARNING("\The [victim] is too big for you to dismember."))
 		return TRUE
 
-	var/obj/item/organ/external/limb = victim.get_organ(user.get_target_zone())
+	var/target_zone = user.get_target_zone()
+	var/obj/item/organ/external/limb = victim.get_organ(target_zone)
 	if(!limb)
 		to_chat(user, SPAN_WARNING("\The [victim] is missing that limb!"))
 		return TRUE
@@ -65,13 +66,17 @@
 	if(!do_after(user, max(2 SECONDS, victim.get_object_size() * 5), victim) || QDELETED(victim) || !victim.butchery_data || victim.stat != DEAD)
 		return TRUE
 
+	// Changing zone means we cancel.
+	if(target_zone != user.get_target_zone())
+		return
+
 	var/list/external_organs = victim.get_external_organs()
 	if(length(external_organs) <= 1)
 		user.visible_message(SPAN_DANGER("\The [user] tears \the [victim] apart!"))
 		victim.gib()
 		return TRUE
 
-	limb = victim.get_organ(user.get_target_zone()) // In case we changed zone or such in the meantime.
+	limb = victim.get_organ(target_zone) // In case it was removed in the interim.
 	if(!limb)
 		to_chat(user, SPAN_WARNING("\The [victim] is missing that limb!"))
 		return TRUE

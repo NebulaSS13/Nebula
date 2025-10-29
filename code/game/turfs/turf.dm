@@ -250,10 +250,6 @@
 			T.try_build_turf(user, src)
 			return TRUE
 
-		if(IS_HOE(used_item) && can_dig_farm(used_item.material?.hardness))
-			try_dig_farm(user, used_item)
-			return TRUE
-
 		if(IS_SHOVEL(used_item))
 
 			// TODO: move these checks into the interaction handlers.
@@ -272,6 +268,10 @@
 				try_dig_trench(user, used_item)
 			else
 				to_chat(user, SPAN_WARNING("You cannot dig anything out of \the [src] with \the [used_item]."))
+			return TRUE
+
+		if(IS_HOE(used_item) && can_dig_farm(used_item.material?.hardness))
+			try_dig_farm(user, used_item)
 			return TRUE
 
 		var/decl/material/material = get_material()
@@ -856,20 +856,27 @@
 	var/obj/item/held = user ? (user.get_active_held_item() || user.get_usable_hand_slot_organ()) : null
 	if(!istype(held))
 		return
-	if(IS_SHOVEL(held))
-		if(can_dig_pit(held.material?.hardness))
-			LAZYADD(., /decl/interaction_handler/dig/pit)
-		if(can_dig_trench(held.material?.hardness))
+	if(is_open())
+		if(HasBelow(z))
+			LAZYADD(., /decl/interaction_handler/dig_ramp_from_above)
+	else
+		if(IS_SHOVEL(held))
+			if(can_dig_pit(held.material?.hardness))
+				LAZYADD(., /decl/interaction_handler/dig/pit)
+			if(can_dig_trench(held.material?.hardness))
+				LAZYADD(., /decl/interaction_handler/dig/trench)
+		if(IS_PICK(held) && can_dig_trench(held.material?.hardness, using_tool = TOOL_PICK))
 			LAZYADD(., /decl/interaction_handler/dig/trench)
-	if(IS_PICK(held) && can_dig_trench(held.material?.hardness, using_tool = TOOL_PICK))
-		LAZYADD(., /decl/interaction_handler/dig/trench)
-	if(IS_HOE(held) && can_dig_farm(held.material?.hardness))
-		LAZYADD(., /decl/interaction_handler/dig/farm)
+		if(IS_HOE(held) && can_dig_farm(held.material?.hardness))
+			LAZYADD(., /decl/interaction_handler/dig/farm)
 
 /// Contaminant may be the chemical decl of the footprint being provided,
 /// or null if we just want to know if we support footprints, at all, ever.
 /turf/proc/can_show_coating_footprints(decl/material/contaminant)
 	return simulated
+
+/turf/proc/is_purged()
+	return
 
 /decl/interaction_handler/show_turf_contents
 	name = "Show Turf Contents"
@@ -929,5 +936,3 @@
 
 /turf/take_vaporized_reagent(reagent, amount)
 	return assume_gas(reagent, round(amount / REAGENT_UNITS_PER_GAS_MOLE))
-
-/turf/proc/is_purged()

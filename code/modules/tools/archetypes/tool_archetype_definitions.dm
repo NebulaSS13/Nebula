@@ -37,7 +37,7 @@
 /decl/tool_archetype/shovel
 	name         = "shovel"
 	tool_sound   = 'sound/items/shovel_dirt.ogg'
-	tool_message = "digging"
+	tool_message = "digging into"
 
 /decl/tool_archetype/pick
 	name         = "pick"
