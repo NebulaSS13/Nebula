@@ -11,7 +11,7 @@
 #include "patches/mixed_gamemodes.dm"
 #endif
 
-#ifdef MODPACK_FANTASY_SPECIES
+#ifdef MODPACK_FANTASY
 #include "patches/fantasy.dm"
 #endif
 

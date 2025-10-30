@@ -1607,6 +1607,7 @@
 #include "code\game\turfs\walls\_wall_icon_cache.dm"
 #include "code\game\turfs\walls\wall_attacks.dm"
 #include "code\game\turfs\walls\wall_brick.dm"
+#include "code\game\turfs\walls\wall_engraving.dm"
 #include "code\game\turfs\walls\wall_icon.dm"
 #include "code\game\turfs\walls\wall_log.dm"
 #include "code\game\turfs\walls\wall_material.dm"

@@ -4,6 +4,6 @@
 #endif
 
 // Override drake lore and names for the fantasy modpack.
-#ifdef MODPACK_FANTASY_SPECIES
+#ifdef MODPACK_FANTASY
 #include "drakes/fantasy_drakes.dm"
 #endif

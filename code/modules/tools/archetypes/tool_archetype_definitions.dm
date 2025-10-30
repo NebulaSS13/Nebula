@@ -63,6 +63,11 @@
 	tool_sound   = 'sound/weapons/bladeslice.ogg'
 	tool_message = "shearing"
 
+/decl/tool_archetype/chisel
+	name         = "chisel"
+	tool_sound   = 'sound/items/shovel_dirt.ogg'
+	tool_message = "chiseling"
+
 /decl/tool_archetype/knife
 	name         = "knife"
 	tool_sound   = 'sound/weapons/bladeslice.ogg'

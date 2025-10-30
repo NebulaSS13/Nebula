@@ -1,6 +1,7 @@
 /turf/wall/natural/proc/make_ramp(var/mob/user, var/new_slope, var/skip_icon_update = FALSE)
 
 	ramp_slope_direction = new_slope
+	QDEL_NULL_LIST(engravings)
 
 	var/old_ao = permit_ao
 	if(ramp_slope_direction)
