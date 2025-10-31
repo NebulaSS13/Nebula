@@ -15,7 +15,7 @@
 
 /obj/item/chems/glass/beaker/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	. += "It can hold up to [volume] units."
+	. += "It can hold up to [reagents?.maximum_volume] units."
 
 /obj/item/chems/glass/beaker/on_picked_up(mob/user, atom/old_loc)
 	. = ..()
@@ -33,7 +33,7 @@
 
 	if(reagents?.total_volume)
 		var/image/filling = mutable_appearance(icon, "[icon_state]1", reagents.get_color())
-		var/percent = round((reagents.total_volume / volume) * 100)
+		var/percent = round((reagents.total_volume / reagents.maximum_volume) * 100)
 		switch(percent)
 			if(0 to 9)			filling.icon_state = "[icon_state]1"
 			if(10 to 24) 		filling.icon_state = "[icon_state]10"
@@ -69,7 +69,7 @@
 	desc = "A large beaker."
 	icon = 'icons/obj/items/chem/beakers/large.dmi'
 	center_of_mass = @'{"x":16,"y":10}'
-	volume = 120
+	chem_volume = 120
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120]"
 	w_class = ITEM_SIZE_LARGE
@@ -79,7 +79,7 @@
 	desc = "A large mixing bowl."
 	icon = 'icons/obj/items/chem/mixingbowl.dmi'
 	center_of_mass = @'{"x":16,"y":10}'
-	volume = 180
+	chem_volume = 180
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,180]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
@@ -96,7 +96,7 @@
 	desc = "A heavy kettle for heating water."
 	icon = 'icons/obj/items/chem/kettle.dmi'
 	icon_state = ICON_STATE_WORLD
-	volume = 180
+	chem_volume = 180
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,180]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
@@ -112,7 +112,7 @@
 	desc = "A cryostasis beaker that allows for chemical storage without reactions."
 	icon = 'icons/obj/items/chem/beakers/stasis.dmi'
 	center_of_mass = @'{"x":16,"y":8}'
-	volume = 60
+	chem_volume = 60
 	amount_per_transfer_from_this = 10
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_CHEM_CHANGE
 	presentation_flags = PRESENTATION_FLAG_NAME
@@ -126,7 +126,7 @@
 	desc = "An advanced beaker, powered by experimental technology."
 	icon = 'icons/obj/items/chem/beakers/advanced.dmi'
 	center_of_mass = @'{"x":16,"y":10}'
-	volume = 300
+	chem_volume = 300
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120,150,200,250,300]"
 	material_alteration = MAT_FLAG_ALTERATION_NONE
@@ -143,7 +143,7 @@
 	desc = "A small glass vial."
 	icon = 'icons/obj/items/chem/vial.dmi'
 	center_of_mass = @'{"x":15,"y":8}'
-	volume = 30
+	chem_volume = 30
 	w_class = ITEM_SIZE_TINY //half the volume of a bottle, half the size
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,30]"
@@ -178,7 +178,7 @@
 	icon = 'icons/obj/items/chem/beakers/insulated_large.dmi'
 	center_of_mass = @'{"x":16,"y":10}'
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
-	volume = 120
+	chem_volume = 120
 
 /obj/item/chems/glass/beaker/sulfuric/populate_reagents()
 	add_to_reagents(/decl/material/liquid/acid, reagents.maximum_volume)

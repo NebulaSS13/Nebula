@@ -108,7 +108,7 @@
 	desc = "This massive patty looks like poison. Beep."
 	icon = 'icons/obj/food/burgers/roburger.dmi'
 	filling_color = COLOR_GRAY80
-	volume = 100
+	chem_volume = 100
 	center_of_mass = @'{"x":16,"y":11}'
 	bitesize = 0.1
 

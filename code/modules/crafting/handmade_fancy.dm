@@ -10,7 +10,7 @@
 	desc = "A masterfully made decanter with a fluted neck and graceful handle."
 	icon = 'icons/obj/items/handmade/decanter.dmi'
 	amount_per_transfer_from_this = 10
-	volume = 120
+	chem_volume = 120
 	obj_flags = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE
 
 /obj/item/chems/glass/handmade/fancy/goblet
@@ -18,21 +18,21 @@
 	desc = "An elegant goblet with a flared base, likely handmade by some master artisan."
 	icon = 'icons/obj/items/handmade/cup_fancy.dmi'
 	amount_per_transfer_from_this = 10
-	volume = 60
+	chem_volume = 60
 
 /obj/item/chems/glass/handmade/fancy/bowl
 	name = "bowl"
 	desc = "A sleek, polished bowl, likely handmade by some master artisan."
 	icon = 'icons/obj/items/handmade/bowl_fancy.dmi'
 	amount_per_transfer_from_this = 10
-	volume = 60
+	chem_volume = 60
 
 /obj/item/chems/glass/handmade/fancy/vase
 	name = "vase"
 	desc = "An elegant masterwork vase."
 	icon = 'icons/obj/items/handmade/vase_fancy.dmi'
 	amount_per_transfer_from_this = 20
-	volume = 240
+	chem_volume = 240
 	material = /decl/material/solid/stone/ceramic
 
 /obj/item/chems/glass/handmade/fancy/vase/fluted

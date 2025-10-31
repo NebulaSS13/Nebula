@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = @"[10,20,30,60,120,150,180]"
-	volume = 180
+	chem_volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
 	material = /decl/material/solid/organic/plastic
@@ -44,14 +44,14 @@
 /obj/item/chems/glass/bucket/get_reagents_overlay(state_prefix)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		return null // no overlay while closed!
-	if(!reagents || (reagents.total_volume / volume) < 0.8)
+	if(!reagents || (reagents.total_volume / reagents.maximum_volume) < 0.8)
 		return null // must be at least 80% full to show
 	return ..()
 
 /obj/item/chems/glass/bucket/wood
 	desc = "It's a wooden bucket. How rustic."
 	icon = 'icons/obj/items/wooden_bucket.dmi'
-	volume = 200
+	chem_volume = 200
 	material = /decl/material/solid/organic/wood/oak
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR //  name is already modified
 	/// The material used for the chain, belts, and rivets holding the wood together, typically iron or steel.

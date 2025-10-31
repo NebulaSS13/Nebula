@@ -3,7 +3,7 @@
 	icon_state = "juicebox_base"
 	name = "juicebox"
 	desc = "A small cardboard juicebox. Cheap and flimsy."
-	volume = 30
+	chem_volume = 30
 	amount_per_transfer_from_this = 5
 	atom_flags = 0
 	material = /decl/material/solid/organic/cardboard

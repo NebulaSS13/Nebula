@@ -7,21 +7,13 @@
 	life_span = 15 //shorter range
 	muzzle_type = null
 	material = /decl/material/solid/glass
-	var/reagent_amount = 15
-
-/obj/item/projectile/bullet/chemdart/Initialize()
-	. = ..()
-	initialize_reagents()
-
-/obj/item/projectile/bullet/chemdart/initialize_reagents(populate = TRUE)
-	create_reagents(reagent_amount)
-	. = ..()
+	chem_volume = 15
 
 /obj/item/projectile/bullet/chemdart/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
 	if(reagents?.total_volume && blocked < 100 && isliving(target))
 		var/mob/living/L = target
 		if(L.can_inject(null, def_zone) == CAN_INJECT)
-			reagents.trans_to_mob(L, reagent_amount, CHEM_INJECT)
+			reagents.trans_to_mob(L, reagents.total_volume, CHEM_INJECT)
 
 /obj/item/ammo_casing/chemdart
 	name = "chemical dart"

@@ -5,7 +5,7 @@
 //#TODO: Maybe merge this with /obj/item/glass/bottle?
 /obj/item/chems/drinks/bottle
 	amount_per_transfer_from_this = 10
-	volume = 100
+	chem_volume = 100
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
 	material = /decl/material/solid/glass
 	drop_sound = 'sound/foley/bottledrop1.ogg'
@@ -600,7 +600,7 @@
 
 //Small bottles
 /obj/item/chems/drinks/bottle/small
-	volume = 50
+	chem_volume = 50
 	smash_duration = 1
 	atom_flags = 0 //starts closed
 	rag_underlay = "rag_small"

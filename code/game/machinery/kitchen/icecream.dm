@@ -18,6 +18,7 @@
 	anchored = FALSE
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 	idle_power_usage = 100
+	chem_volume = 100
 
 	var/list/product_types = list()
 	var/dispense_flavour = ICECREAM_VANILLA
@@ -66,13 +67,8 @@
 
 /obj/machinery/icecream_vat/Initialize(mapload, d, populate_parts)
 	. = ..()
-	initialize_reagents()
 	while(product_types.len < 8)
 		product_types.Add(5)
-
-/obj/machinery/icecream_vat/initialize_reagents(populate = TRUE)
-	create_reagents(100)
-	. = ..()
 
 /obj/machinery/icecream_vat/populate_reagents()
 	add_to_reagents(/decl/material/liquid/drink/milk, 5)
@@ -201,7 +197,7 @@
 	icon_state = "icecream_cone_waffle" //default for admin-spawned cones, href_list["cone"] should overwrite this all the time
 	layer = ABOVE_OBJ_LAYER
 	bitesize = 3
-	volume = 20
+	chem_volume = 20
 	nutriment_amt = 5
 	nutriment_type = /decl/material/liquid/nutriment
 	nutriment_desc = list("crunchy waffle cone" = 1)

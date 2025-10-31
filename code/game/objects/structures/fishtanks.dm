@@ -25,21 +25,19 @@ var/global/list/fishtank_cache = list()
 	atom_flags = ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
 	mob_offset = TRUE
 	max_health = 50
+	chem_volume = 300
 
 	var/deleting
 	var/fill_type
-	var/fill_amt
 	var/obj/effect/glass_tank_overlay/tank_overlay // I don't like this, but there's no other way to get a mouse-transparent overlay :(
 
 /obj/structure/glass_tank/aquarium
 	name = "aquarium"
 	desc = "A clear glass box for keeping specimens in. This one is full of water."
 	fill_type = /decl/material/liquid/water
-	fill_amt = 300
 
 /obj/structure/glass_tank/Initialize(mapload)
 	tank_overlay = new(loc, src)
-	initialize_reagents()
 	. = ..()
 	update_icon()
 	if(!mapload)
@@ -53,16 +51,9 @@ var/global/list/fishtank_cache = list()
 	for(var/obj/structure/glass_tank/A in orange(1, oldloc))
 		A.update_icon()
 
-/obj/structure/glass_tank/initialize_reagents(populate = TRUE)
-	if(!fill_amt)
-		return
-	create_reagents(fill_amt)
-	if(!fill_type)
-		return
-	. = ..()
-
 /obj/structure/glass_tank/populate_reagents()
-	add_to_reagents(fill_type, reagents.maximum_volume)
+	if(fill_type)
+		add_to_reagents(fill_type, reagents.maximum_volume)
 
 /obj/structure/glass_tank/attack_hand(var/mob/user)
 	if(user.check_intent(I_FLAG_HARM))

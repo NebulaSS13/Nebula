@@ -7,7 +7,7 @@
 	possible_transfer_amounts = @"[1,5,10]"
 	center_of_mass = @'{"x":16,"y":6}'
 	randpixel = 6
-	volume = 50
+	chem_volume = 50
 	var/condiment_key
 	var/morphic_container = TRUE
 	var/use_condiment_name = TRUE

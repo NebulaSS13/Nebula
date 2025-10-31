@@ -3,14 +3,7 @@
 	origin_tech = @'{"materials":2,"esoteric":5}'
 	sharp       = TRUE
 	pen_quality = TOOL_QUALITY_MEDIOCRE
-
-/obj/item/pen/reagent/Initialize()
-	. = ..()
-	initialize_reagents()
-
-/obj/item/pen/reagent/initialize_reagents(populate = TRUE)
-	create_reagents(30)
-	. = ..()
+	chem_volume = 30
 
 /obj/item/pen/reagent/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 

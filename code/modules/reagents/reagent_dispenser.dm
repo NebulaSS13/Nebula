@@ -10,17 +10,16 @@
 	matter                            = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
 	max_health                        = 100
 	tool_interaction_flags            = TOOL_INTERACTION_DECONSTRUCT
+	chem_volume                       = 1000
 
 	var/wrenchable                    = TRUE
 	var/unwrenched                    = FALSE
-	var/tmp/volume                    = 1000
 	var/amount_dispensed              = 10
 	var/can_toggle_open               = TRUE
 	var/tmp/possible_transfer_amounts = @"[10,25,50,100,500]"
 
 /obj/structure/reagent_dispensers/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
-	initialize_reagents()
 	if (!possible_transfer_amounts)
 		verbs -= /obj/structure/reagent_dispensers/verb/set_amount_dispensed
 
@@ -41,13 +40,6 @@
 		tool_interaction_flags &= ~TOOL_INTERACTION_DECONSTRUCT
 	else
 		tool_interaction_flags |= TOOL_INTERACTION_DECONSTRUCT
-
-/obj/structure/reagent_dispensers/initialize_reagents(populate = TRUE)
-	if(!reagents)
-		create_reagents(volume)
-	else
-		reagents.maximum_volume = max(reagents.maximum_volume, volume)
-	. = ..()
 
 /obj/structure/reagent_dispensers/proc/leak()
 	var/turf/T = get_turf(src)
@@ -126,7 +118,7 @@
 	icon_state                = "watertank"
 	amount_dispensed          = 10
 	possible_transfer_amounts = @"[10,25,50,100]"
-	volume                    = 7500
+	chem_volume               = 7500
 	atom_flags                = ATOM_FLAG_CLIMBABLE
 	movable_flags             = MOVABLE_FLAG_WHEELED
 
@@ -140,8 +132,8 @@
 	icon_state = ICON_STATE_WORLD
 
 /obj/structure/reagent_dispensers/watertank/firefighter
-	name   = "firefighting water reserve"
-	volume = 50000
+	name        = "firefighting water reserve"
+	chem_volume = 50000
 
 /obj/structure/reagent_dispensers/watertank/attackby(obj/item/used_item, mob/user)
 	//FIXME: Maybe this should be handled differently? Since it can essentially make the tank unusable.
@@ -254,7 +246,7 @@
 	possible_transfer_amounts = null
 	amount_dispensed          = 5
 	anchored                  = TRUE
-	volume                    = 500
+	chem_volume               = 500
 	tool_interaction_flags    = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	var/cups                  = 12
 	var/tmp/max_cups          = 12

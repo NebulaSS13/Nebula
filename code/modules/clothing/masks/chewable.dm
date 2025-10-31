@@ -8,17 +8,11 @@
 	matter = null // no plastic/fiberglass
 
 	var/type_butt = null
-	var/chem_volume = 0
 	var/chewtime = 0
 	var/brand
 
 /obj/item/clothing/mask/chewable/Initialize()
-	. = ..()
 	atom_flags |= ATOM_FLAG_NO_CHEM_CHANGE // so it doesn't react until you light it
-	initialize_reagents()
-
-/obj/item/clothing/mask/chewable/initialize_reagents(populate = TRUE)
-	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 	. = ..()
 
 /obj/item/clothing/mask/chewable/equipped(var/mob/living/user, var/slot)
@@ -107,9 +101,9 @@
 	icon = 'icons/clothing/mask/chewables/gum_nicotine.dmi'
 	type_butt = /obj/item/trash/cigbutt/spitgum
 
-/obj/item/clothing/mask/chewable/tobacco/nico/initialize_reagents(populate = TRUE)
+/obj/item/clothing/mask/chewable/tobacco/nico/Initialize()
 	. = ..()
-	color = reagents.get_color()
+	color = reagents?.get_color()
 
 /obj/item/clothing/mask/chewable/tobacco/nico/populate_reagents()
 	add_to_reagents(/decl/material/liquid/nicotine, 2)
@@ -137,7 +131,7 @@
 /obj/item/clothing/mask/chewable/candy/proc/get_possible_initial_reagents()
 	return
 
-/obj/item/clothing/mask/chewable/candy/initialize_reagents()
+/obj/item/clothing/mask/chewable/candy/Initialize()
 	. = ..()
 	if(reagents?.total_volume)
 		set_color(reagents.get_color())

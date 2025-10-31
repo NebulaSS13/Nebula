@@ -6,7 +6,7 @@
 	icon_state                    = ICON_STATE_WORLD
 	material_alteration           = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	presentation_flags            = PRESENTATION_FLAG_NAME
-	volume                        = 30
+	chem_volume                   = 30
 	amount_per_transfer_from_this = 5
 
 /obj/item/chems/glass/bowl/can_lid()

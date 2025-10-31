@@ -10,7 +10,7 @@
 	throw_speed                   = 4
 	w_class                       = ITEM_SIZE_NORMAL
 	material                      = /decl/material/solid/organic/plastic
-	volume                        = 60
+	chem_volume                   = 60
 	amount_per_transfer_from_this = 30
 	possible_transfer_amounts     = @"[30,60]"
 	atom_flags                    = ATOM_FLAG_OPEN_CONTAINER

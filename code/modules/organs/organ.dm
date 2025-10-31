@@ -88,11 +88,11 @@
 
 //Third argument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance)
+	chem_volume = 5 * (w_class-1)**2
 	. = ..(mapload, material_key)
 	if(. == INITIALIZE_HINT_QDEL)
 		return .
 	setup_organ(supplied_appearance)
-	initialize_reagents()
 
 /obj/item/organ/proc/setup_organ(datum/mob_snapshot/supplied_appearance)
 	//Null DNA setup
@@ -122,14 +122,6 @@
 		copy_from_mob_snapshot(supplied_appearance)
 	else
 		set_species(owner?.get_species() || global.using_map.default_species)
-
-//Called on initialization to add the neccessary reagents
-
-/obj/item/organ/initialize_reagents(populate = TRUE)
-	if(reagents)
-		return
-	create_reagents(5 * (w_class-1)**2)
-	. = ..()
 
 // todo: make this redundant with matter shenanigans
 /obj/item/organ/populate_reagents()

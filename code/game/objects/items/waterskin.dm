@@ -6,7 +6,7 @@
 	material = /decl/material/solid/organic/leather/gut
 	color = /decl/material/solid/organic/leather/gut::color
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	volume = 120
+	chem_volume = 120
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/decl/material/stopper_material = /decl/material/solid/organic/cloth/hemp
 

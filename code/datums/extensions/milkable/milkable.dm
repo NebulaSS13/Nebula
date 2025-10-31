@@ -85,7 +85,7 @@
 			to_chat(user, SPAN_WARNING("Wait for \the [critter] to stop moving before you try milking it."))
 			return TRUE
 
-	if(container.reagents.total_volume >= container.volume)
+	if(container.reagents.total_volume >= container.reagents.maximum_volume)
 		to_chat(user, SPAN_WARNING("\The [container] is full."))
 		return TRUE
 
@@ -112,7 +112,7 @@
 		to_chat(user, SPAN_WARNING("\The [critter]'s udder is dry. Wait a little longer."))
 		return TRUE
 
-	if(container.reagents.total_volume >= container.volume)
+	if(container.reagents.total_volume >= container.reagents.maximum_volume)
 		to_chat(user, SPAN_NOTICE("\The [container] is full."))
 		return TRUE
 

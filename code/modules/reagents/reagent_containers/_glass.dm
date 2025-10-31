@@ -9,7 +9,7 @@
 	item_state = "null"
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60]"
-	volume = 60
+	chem_volume = 60
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags = OBJ_FLAG_HOLLOW

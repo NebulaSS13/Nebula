@@ -62,14 +62,14 @@
 //Welder Pack
 ////////////////////////////////////////////////////////////
 /obj/item/chems/weldpack
-	name       = "welding kit"
-	desc       = "An unwieldy, heavy backpack with two massive fuel tanks. Comes with an attached welder gun."
-	icon       = 'icons/obj/items/welderpack.dmi'
-	icon_state = ICON_STATE_WORLD
-	slot_flags = SLOT_BACK
-	w_class    = ITEM_SIZE_HUGE
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	volume     = 350
+	name        = "welding kit"
+	desc        = "An unwieldy, heavy backpack with two massive fuel tanks. Comes with an attached welder gun."
+	icon        = 'icons/obj/items/welderpack.dmi'
+	icon_state  = ICON_STATE_WORLD
+	slot_flags  = SLOT_BACK
+	w_class     = ITEM_SIZE_HUGE
+	atom_flags  = ATOM_FLAG_OPEN_CONTAINER
+	chem_volume = 350
 	var/obj/item/weldingtool/weldpack/welder = /obj/item/weldingtool/weldpack
 
 // Duplicated from welder tanks.

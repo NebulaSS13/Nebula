@@ -95,25 +95,18 @@
 
 	. = ..(mapload, material_key, skip_plate) //Init reagents
 
-/obj/item/food/grown/initialize_reagents(populate)
-	if(reagents)
-		reagents.clear_reagents()
-	if(!length(seed?.get_chemical_composition(_segment = plant_segment_type)))
-		return
-
-	. = ..() //create_reagent and populate_reagents
-
 	update_desc()
 	if(reagents.total_volume > 0)
 		bitesize = 1 + round(reagents.total_volume / 2, 1)
-
 	update_icon()
 
 /obj/item/food/grown/populate_reagents()
 	. = ..()
+	if(!length(seed?.get_chemical_composition(_segment = plant_segment_type)))
+		return
+
 	// Fill the object up with the appropriate reagents.
 	var/list/chems_to_fill
-
 	if(backyard_grilling_count > 0)
 		chems_to_fill ||= seed?.get_chemical_composition(_segment = plant_segment_type, _state = PLANT_STATE_ROASTED)
 	if(dry)

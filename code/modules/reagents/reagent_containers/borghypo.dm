@@ -3,7 +3,7 @@
 	desc = "An advanced chemical synthesizer and injection system, designed for heavy-duty medical equipment."
 	icon = 'icons/obj/hypospray_borg.dmi'
 	amount_per_transfer_from_this = 5
-	volume = 30
+	chem_volume = 30
 	possible_transfer_amounts = null
 	max_health = ITEM_HEALTH_NO_DAMAGE
 
@@ -137,7 +137,7 @@
 	icon_state = "shaker"
 	charge_cost = 5
 	recharge_time = 3
-	volume = 60
+	chem_volume = 60
 	possible_transfer_amounts = @"[5,10,20,30]"
 
 /obj/item/chems/borghypo/service/get_generated_reagents()

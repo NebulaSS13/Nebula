@@ -1,11 +1,11 @@
 /obj/item/chems/glass/retort
-	name       = "retort"
-	base_name  = "retort"
-	desc       = "A strangely-shaped vessel for separating chemicals when heated."
-	icon       = 'icons/obj/items/retort.dmi'
-	icon_state = ICON_STATE_WORLD
-	volume     = 120
-	material   = /decl/material/solid/glass
+	name        = "retort"
+	base_name   = "retort"
+	desc        = "A strangely-shaped vessel for separating chemicals when heated."
+	icon        = 'icons/obj/items/retort.dmi'
+	icon_state  = ICON_STATE_WORLD
+	chem_volume = 120
+	material    = /decl/material/solid/glass
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 /obj/item/chems/glass/retort/can_lid()

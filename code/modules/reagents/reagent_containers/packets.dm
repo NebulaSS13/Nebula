@@ -5,7 +5,7 @@
 	w_class = ITEM_SIZE_TINY
 	possible_transfer_amounts = @"[1,2,5,10]"
 	amount_per_transfer_from_this = 1
-	volume = 10
+	chem_volume = 10
 
 /obj/item/chems/packet/attack_self(mob/user)
 	if(!ATOM_IS_OPEN_CONTAINER(src))

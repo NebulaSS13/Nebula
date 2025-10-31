@@ -12,7 +12,7 @@
 	possible_transfer_amounts = null
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	volume = 30
+	chem_volume = 30
 	material = /decl/material/solid/organic/plantmatter
 	var/autolabel = TRUE  		// if set, will add label with the name of the first initial reagent
 	var/static/list/colorizable_icon_states = list("pill1", "pill2", "pill3", "pill4", "pill5") // if using an icon state from here, color will be derived from reagents
@@ -74,7 +74,7 @@
 /obj/item/chems/pill/bromide
 	desc = "Highly toxic."
 	icon_state = "pill4"
-	volume = 50
+	chem_volume = 50
 
 /obj/item/chems/pill/bromide/populate_reagents()
 	add_to_reagents(/decl/material/liquid/bromide, reagents.maximum_volume)
@@ -84,7 +84,7 @@
 	name = "strange pill"
 	desc = "It's marked 'KCN'. Smells vaguely of almonds."
 	icon_state = "pillC"
-	volume = 50
+	chem_volume = 50
 	autolabel = FALSE
 
 /obj/item/chems/pill/cyanide/populate_reagents()
