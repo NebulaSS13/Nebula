@@ -41,20 +41,13 @@
 	name              = "snow"
 	icon              = 'icons/turf/flooring/snow.dmi'
 	icon_state        = "snow0"
-	_flooring         = list(
-		/decl/flooring/grass,
-		/decl/flooring/snow
-	)
+	_flooring         = @'["' + /decl/flooring/grass::uid + @'","' + /decl/flooring/snow::uid + @'"]'
 
 /turf/floor/grass/wild
 	name              = "wild grass"
 	icon              = 'icons/turf/flooring/wildgrass.dmi'
 	icon_state        = "wildgrass"
-	_flooring         = list(
-		/decl/flooring/grass,
-		/decl/flooring/grass/wild
-	)
-	_base_flooring    = /decl/flooring/dirt
+	_flooring         = @'["' + /decl/flooring/grass::uid + @'","' + /decl/flooring/grass/wild::uid + @'"]'
 
 /turf/floor/ice
 	name              = "ice"
