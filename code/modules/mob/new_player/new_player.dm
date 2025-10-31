@@ -10,6 +10,7 @@
 	anchored = TRUE	//  don't get pushed around
 	virtual_mob = null // Hear no evil, speak no evil
 	is_spawnable_type = FALSE
+	skillset = /datum/skillset // moved here from /mob to avoid giving dview a skillset
 
 	var/ready = 0
 	/// Referenced when you want to delete the new_player later on in the code.
