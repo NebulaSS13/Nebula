@@ -84,7 +84,6 @@
 	door_color = COLOR_NT_RED
 
 /obj/machinery/door/airlock/double/engineering
-	name = "Maintenance Hatch"
 	door_color = COLOR_AMBER
 
 /obj/machinery/door/airlock/double/medical
@@ -96,7 +95,6 @@
 	stripe_color = COLOR_GREEN
 
 /obj/machinery/door/airlock/double/mining
-	name = "Mining Airlock"
 	door_color = COLOR_PALE_ORANGE
 	stripe_color = COLOR_BEASTY_BROWN
 
@@ -116,18 +114,15 @@
 	door_color = COLOR_BLUE_GRAY
 
 /obj/machinery/door/airlock/double/maintenance
-	name = "Maintenance Access"
 	stripe_color = COLOR_AMBER
 
 /obj/machinery/door/airlock/double/civilian
 	stripe_color = COLOR_CIVIE_GREEN
 
 /obj/machinery/door/airlock/double/freezer
-	name = "Freezer Airlock"
 	door_color = COLOR_WHITE
 
 /obj/machinery/door/airlock/double/glass
-	name = "Glass Airlock"
 	opacity = FALSE
 	glass = TRUE
 
@@ -175,7 +170,6 @@
 	door_color = COLOR_WHITE
 
 /obj/machinery/door/airlock/double/glass/maintenance
-	name = "Maintenance Access"
 	stripe_color = COLOR_AMBER
 
 /obj/machinery/door/airlock/double/glass/civilian
