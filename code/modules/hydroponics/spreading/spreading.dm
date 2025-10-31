@@ -45,9 +45,7 @@
 	icon_state = ""
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = MOUSE_OPACITY_NORMAL
-
-	current_health = 10
-	max_health = 100
+	max_health = 10
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
@@ -82,7 +80,7 @@
 	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(start_matured)
 		mature_time = 0
-		current_health = max_health
+		current_health = get_max_health()
 
 	if(seed.get_trait(TRAIT_SPREAD) == 2)
 		mouse_opacity = MOUSE_OPACITY_PRIORITY

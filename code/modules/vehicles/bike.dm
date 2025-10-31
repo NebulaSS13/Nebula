@@ -4,12 +4,9 @@
 	icon = 'icons/obj/bike.dmi'
 	icon_state = "bike_off"
 	dir = SOUTH
-
 	load_item_visible = 1
 	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
-	current_health = 100
 	max_health = 100
-
 	locked = 0
 	fire_dam_coeff = 0.6
 	brute_dam_coeff = 0.5

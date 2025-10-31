@@ -124,7 +124,7 @@
 	return FALSE
 
 /obj/structure/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
-	if(current_health == -1) // This object does not take damage.
+	if(current_health == ITEM_HEALTH_NO_DAMAGE) // This object does not take damage.
 		return
 
 	if(material && material.is_brittle())

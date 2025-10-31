@@ -224,7 +224,6 @@
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "working"
 	material = /decl/material/solid/metal/steel
-	current_health = 30
 	max_health = 30
 	var/burn_damage = 0
 	var/brute_damage = 0

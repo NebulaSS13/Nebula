@@ -12,7 +12,6 @@
 	obj_flags          = OBJ_FLAG_HOLLOW
 	volume             = 20
 	presentation_flags = PRESENTATION_FLAG_NAME
-	current_health     = 40
 	max_health         = 40
 	material           = /decl/material/solid/metal/steel
 	var/can_refuel     = TRUE

@@ -18,7 +18,6 @@ var/global/default_gyne
 /obj/structure/insectoid_egg
 	name = "alien egg"
 	desc = "A semi-translucent alien egg."
-	current_health = 100
 	max_health = 100
 	icon = 'mods/species/ascent/icons/egg.dmi'
 	icon_state = "egg"

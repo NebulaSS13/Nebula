@@ -620,9 +620,9 @@ var/global/list/ailment_reference_cache = list()
 
 	max_health = max_damage
 	if(current_health == ITEM_HEALTH_NO_DAMAGE)
-		current_health = max_health
+		current_health = get_max_health()
 	else
-		current_health = min(current_health, max_health)
+		current_health = min(current_health, get_max_health())
 
 	action_button_name = null
 	screen_loc = null

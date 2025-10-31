@@ -222,7 +222,7 @@
 	phase3 = TRUE
 	spellscast = 0
 	max_health = 750
-	current_health = max_health
+	current_health = get_max_health()
 	new /obj/item/grenade/flashbang/instant(src.loc)
 	QDEL_NULL(boss_theme)
 	boss_theme = play_looping_sound(src, sound_id, 'sound/music/Visager-Miniboss_Fight.ogg', volume = 10, range = 8, falloff = 4, prefer_mute = TRUE)
