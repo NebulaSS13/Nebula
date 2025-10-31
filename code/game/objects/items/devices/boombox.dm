@@ -14,7 +14,7 @@
 	)
 	var/playing = 0
 	var/track_num = 1
-	var/volume = 20
+	var/music_volume = 20
 	var/max_volume = 40
 	var/frequency = 1
 	var/datum/sound_token/sound_token
@@ -84,10 +84,10 @@
 		start()
 		return TOPIC_HANDLED
 	if(href_list["volup"])
-		change_volume(volume + 10)
+		change_volume(music_volume + 10)
 		return TOPIC_HANDLED
 	if(href_list["voldown"])
-		change_volume(volume - 10)
+		change_volume(music_volume - 10)
 		return TOPIC_HANDLED
 
 /obj/item/boombox/attackby(var/obj/item/used_item, var/mob/user)
@@ -180,7 +180,7 @@
 /obj/item/boombox/proc/start()
 	QDEL_NULL(sound_token)
 	var/datum/track/T = tracks[track_num]
-	sound_token = play_looping_sound(src, sound_id, T.GetTrack(), volume = volume, frequency = frequency, range = 7, falloff = 4, prefer_mute = TRUE, preference = /datum/client_preference/play_game_music, streaming = TRUE)
+	sound_token = play_looping_sound(src, sound_id, T.GetTrack(), volume = music_volume, frequency = frequency, range = 7, falloff = 4, prefer_mute = TRUE, preference = /datum/client_preference/play_game_music, streaming = TRUE)
 	playing = 1
 	update_icon()
 	if(prob(break_chance))
@@ -193,9 +193,9 @@
 	stop()
 
 /obj/item/boombox/proc/change_volume(var/new_volume)
-	volume = clamp(new_volume, 0, max_volume)
+	music_volume = clamp(new_volume, 0, max_volume)
 	if(sound_token)
-		sound_token.SetVolume(volume)
+		sound_token.SetVolume(music_volume)
 
 /obj/random_multi/single_item/boombox
 	name = "boombox spawnpoint"

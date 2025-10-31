@@ -17,7 +17,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/playing = 0
-	var/volume = 20
+	var/music_volume = 20
 
 	var/sound_id
 	var/datum/sound_token/sound_token
@@ -84,7 +84,7 @@
 		"current_track" = current_track != null ? current_track.title : "No track selected",
 		"playing" = playing,
 		"tracks" = juke_tracks,
-		"volume" = volume
+		"volume" = music_volume
 	)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -180,12 +180,12 @@
 		return
 
 	// Jukeboxes cheat massively and actually don't share id. This is only done because it's music rather than ambient noise.
-	sound_token = play_looping_sound(src, sound_id, current_track.GetTrack(), volume = volume, range = 7, falloff = 3, prefer_mute = TRUE, preference = /datum/client_preference/play_game_music, streaming = TRUE)
+	sound_token = play_looping_sound(src, sound_id, current_track.GetTrack(), volume = music_volume, range = 7, falloff = 3, prefer_mute = TRUE, preference = /datum/client_preference/play_game_music, streaming = TRUE)
 
 	playing = 1
 	update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/media/jukebox/proc/AdjustVolume(var/new_volume)
-	volume = clamp(new_volume, 0, 50)
+	music_volume = clamp(new_volume, 0, 50)
 	if(sound_token)
-		sound_token.SetVolume(volume)
+		sound_token.SetVolume(music_volume)
