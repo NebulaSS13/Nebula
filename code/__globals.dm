@@ -1,7 +1,8 @@
 // Defined here due to being used immediately below.
 #define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)
 #define IMPLIED_DECL GET_DECL(__IMPLIED_TYPE__)
-#define RESOLVE_TO_DECL(D) (istype(D, /decl) ? D : GET_DECL(D))
+#define RESOLVE_TO_DECL(D) (istype(D, /decl) ? D : (istext(D) ? decls_repository.get_decl_by_id(D, validate_decl_type = FALSE) : GET_DECL(D)))
+#define DECLS_ARE_EQUIVALENT(F, S) ((RESOLVE_TO_DECL(F) == RESOLVE_TO_DECL(S)))
 
 // Defined here due to compile order; overrides in macros make the compiler complain.
 /decl/global_vars
