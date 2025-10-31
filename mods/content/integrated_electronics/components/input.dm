@@ -1109,7 +1109,7 @@
 	set_pin_data(IC_OUTPUT, 3, round(air_contents.get_total_moles(), 0.001))
 	set_pin_data(IC_OUTPUT, 4, round(air_contents.return_pressure(), 0.001))
 	set_pin_data(IC_OUTPUT, 5, round(air_contents.temperature, 0.001))
-	set_pin_data(IC_OUTPUT, 6, round(air_contents.volume, 0.001))
+	set_pin_data(IC_OUTPUT, 6, round(air_contents.air_volume, 0.001))
 	push_data()
 	activate_pin(2)
 
