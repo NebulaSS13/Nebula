@@ -9,11 +9,14 @@
 	material = /decl/material/solid/stone/ceramic
 	// Large, but inaccurate. Use a chem dispenser or beaker for accuracy.
 	possible_transfer_amounts = @"[50,100]"
+	var/_reagent_label
 
 /obj/item/chems/chem_disp_cartridge/Initialize()
 	. = ..()
-	if(reagents?.primary_reagent)
-		setLabel(reagents.get_primary_reagent_name())
+	if(reagents?.primary_reagent && !_reagent_label)
+		_reagent_label = reagents.get_primary_reagent_name()
+	if(_reagent_label)
+		setLabel(_reagent_label)
 
 /obj/item/chems/chem_disp_cartridge/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()

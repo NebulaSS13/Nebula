@@ -63,8 +63,7 @@
 		seeds_by_tag[seed.grown_tag] = seed_name
 
 	var/failures = list()
-	var/obj/container = new // dummy container for holding ingredients
-	container.create_reagents(1000)
+	var/obj/effect/chem_holder/container = new(null, 1000) // dummy container for holding ingredients
 	var/static/list/all_recipe_categories = list(
 		RECIPE_CATEGORY_MICROWAVE,
 		RECIPE_CATEGORY_POT,

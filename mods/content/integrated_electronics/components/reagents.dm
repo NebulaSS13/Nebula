@@ -115,7 +115,7 @@
 	else
 		direction_mode = IC_REAGENTS_INJECT
 	if(isnum(new_amount))
-		new_amount = clamp(new_amount, 0, chem_volume)
+		new_amount = clamp(new_amount, 0, reagents.maximum_volume)
 		transfer_amount = new_amount
 
 

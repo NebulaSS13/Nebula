@@ -4,6 +4,7 @@
 	icon_state = "extinguish"
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
+	chem_volume = 10
 
 /obj/effect/effect/water/Initialize()
 	. = ..()
@@ -62,3 +63,4 @@
 	name = "chemicals"
 	icon = 'icons/obj/chempuff.dmi'
 	icon_state = ""
+	chem_volume = 10

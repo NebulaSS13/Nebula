@@ -115,8 +115,8 @@
 		V.update_icon()
 
 	loaded_vial = V
-	reagents.maximum_volume = loaded_vial.reagents.maximum_volume
-	loaded_vial.reagents.trans_to_holder(reagents, chem_volume)
+	create_or_update_reagents(loaded_vial.reagents.maximum_volume, override_volume = TRUE)
+	loaded_vial.reagents.trans_to_holder(reagents, reagents.maximum_volume)
 
 	if(user)
 		user.visible_message(SPAN_NOTICE("[user] has loaded [V] into \the [src]."), SPAN_NOTICE("[usermessage]"))
@@ -128,7 +128,7 @@
 /obj/item/chems/hypospray/vial/proc/remove_vial(var/mob/user, var/swap_mode, var/should_update_icon = TRUE)
 	if(!loaded_vial)
 		return
-	reagents.trans_to_holder(loaded_vial.reagents,chem_volume)
+	reagents.trans_to_holder(loaded_vial.reagents, reagents.maximum_volume)
 	reagents.maximum_volume = 0
 	loaded_vial.update_icon()
 	if(user)

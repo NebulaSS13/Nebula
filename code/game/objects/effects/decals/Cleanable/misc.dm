@@ -81,12 +81,12 @@
 	icon_state         = "vomit_1"
 	persistent         = TRUE
 	generic_filth      = TRUE
+	chem_volume        = 30
 
 /obj/effect/decal/cleanable/vomit/Initialize(ml, _age)
 	random_icon_states = icon_states(icon)
-	. = ..()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-	create_reagents(30, src)
+	. = ..()
 	if(prob(75))
 		set_rotation(pick(90, 180, 270))
 

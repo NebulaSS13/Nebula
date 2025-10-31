@@ -9,8 +9,8 @@
 	///The current health of the obj. Leave to null, unless you want the object to start at a different health than max_health.
 	current_health = null
 
-	// If >0 will create a reagent holder on Initialize()
-	var/chem_volume = 0
+	// If non-null and positive, will create a reagent holder on Initialize()
+	var/chem_volume
 
 	var/obj_flags
 	var/datum/talking_atom/talking_atom
@@ -37,7 +37,7 @@
 		current_health = get_max_health()
 	else
 		current_health = min(current_health, get_max_health())
-	if(chem_volume > 0)
+	if(!isnull(chem_volume) && chem_volume >= 0) // 0-volume holders perserved for legacy code reasons. Ideally shouldn't exist if <= 0
 		initialize_reagents()
 
 /obj/object_shaken()
@@ -271,8 +271,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(reagents?.total_volume > 0)
 		log_warning("\The [src] possibly is initializing its reagents more than once!")
-	if(chem_volume > 0)
-		create_reagents(chem_volume)
+	create_or_update_reagents(chem_volume)
 	if(populate)
 		populate_reagents()
 

@@ -5,6 +5,8 @@
 	icon_state = "furnace"
 	use_ui_template = "material_processing_smeltery.tmpl"
 	atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
+	chem_volume = INFINITY
+
 	var/show_all_materials = FALSE
 	var/list/casting
 	var/static/list/always_show_materials = list(
@@ -21,7 +23,6 @@
 /obj/machinery/material_processing/smeltery/Initialize()
 	show_materials = always_show_materials.Copy()
 	. = ..()
-	create_reagents(INFINITY)
 	queue_temperature_atoms(src)
 
 // Update displayed materials

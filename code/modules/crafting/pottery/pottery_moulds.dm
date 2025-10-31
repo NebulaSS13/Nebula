@@ -44,11 +44,8 @@
 		required_volume += matter_for_product[mat]
 	required_volume = ceil(required_volume * REAGENT_UNITS_PER_MATERIAL_UNIT)
 	if(required_volume > 0)
-		if(reagents)
-			reagents.maximum_volume = required_volume
-			reagents.update_total()
-		else if(atom_flags & ATOM_FLAG_INITIALIZED)
-			create_reagents(required_volume)
+		if(atom_flags & ATOM_FLAG_INITIALIZED)
+			create_or_update_reagents(required_volume)
 		else
 			chem_volume = required_volume
 	else

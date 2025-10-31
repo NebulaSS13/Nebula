@@ -73,7 +73,6 @@
 	set waitfor = FALSE
 
 	var/obj/effect/effect/water/chempuff/D = new(get_turf(src))
-	D.create_reagents(amount_per_transfer_from_this)
 	if(QDELETED(src))
 		return
 	reagents.trans_to_obj(D, amount_per_transfer_from_this)

@@ -27,6 +27,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	abstract_type = /obj/structure/fire_source
 	throwpass = TRUE
+	chem_volume = 100
 
 	// Counter for world.time, used to reduce lighting spam.
 	var/next_light_spam_guard = 0
@@ -75,7 +76,6 @@
 /obj/structure/fire_source/Initialize()
 	. = ..()
 	update_icon()
-	create_reagents(100)
 	steam = new(name)
 	steam.attach(get_turf(src))
 	steam.set_up(3, 0, get_turf(src))

@@ -457,10 +457,7 @@
 	rad_power = 12
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	anchored = TRUE
-
-/obj/machinery/port_gen/pacman/super/potato/Initialize()
-	create_reagents(120)
-	. = ..()
+	chem_volume = 120
 
 /obj/machinery/port_gen/pacman/super/potato/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()

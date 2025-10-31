@@ -6,7 +6,7 @@
 	start_length	(num)					How long to wait before starting the main loop after playing start_sound
 	end_sound		(soundfile)				The sound played after the main loop has concluded
 	chance			(num)					Chance per loop to play a mid_sound
-	volume			(num)					Sound output volume
+	play_volume		(num)					Sound output volume
 	max_loops		(num)					The max amount of loops to run for.
 	direct			(bool)					If true plays directly to provided atoms instead of from them
 */

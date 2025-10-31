@@ -17,15 +17,15 @@
 	var/dispense_amount = 50
 
 	// Since reactions and heating products may overfill the reagent tank, the reagent tank has 1.25x this volume.
-	var/static/max_liquid = 3000
+	var/const/MAX_LIQUID = 3000
 
 /obj/machinery/material_processing/extractor/Initialize()
+	chem_volume = round(MAX_LIQUID * 1.25)
 	. = ..()
 	if(!gas_contents)
 		gas_contents = new(800)
 	set_extension(src, /datum/extension/atmospherics_connection, FALSE, gas_contents)
 
-	create_reagents(round(1.25*max_liquid))
 	queue_temperature_atoms(src)
 
 	return INITIALIZE_HINT_LATELOAD
@@ -70,7 +70,7 @@
 	if(!use_power || (stat & (BROKEN|NOPOWER)))
 		return
 
-	if(reagents?.total_volume >= max_liquid)
+	if(reagents?.total_volume >= MAX_LIQUID)
 		return
 
 	if(input_turf)
@@ -245,7 +245,7 @@
 		var/is_liquid = reagent.phase_at_temperature(temperature, ONE_ATMOSPHERE) == MAT_PHASE_LIQUID
 		data["reagents"] += list(list("label" = "[reagent.liquid_name] ([reagents.reagent_volumes[reagent]] U)", "index" = index, "liquid" = is_liquid))
 
-	data["full"] = reagents.total_volume >= max_liquid
+	data["full"] = reagents.total_volume >= MAX_LIQUID
 	data["gas_pressure"] = gas_contents?.return_pressure()
 	return data
 

@@ -95,7 +95,8 @@
 	outputs = list("volume used" = IC_PINTYPE_NUMBER, "self reference" = IC_PINTYPE_REF)
 	activators = list("push ref" = IC_PINTYPE_PULSE_IN)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
-	var/volume = 60
+	chem_volume = 60
+
 	var/list/fuel = list(
 		/decl/material/gas/hydrogen           = 50000,
 		/decl/material/gas/hydrogen/deuterium = 50000,
@@ -109,7 +110,6 @@
 
 /obj/item/integrated_circuit/passive/power/chemical_cell/Initialize()
 	. = ..()
-	create_reagents(volume)
 	extended_desc +="But no fuel can be compared with blood of living human."
 
 

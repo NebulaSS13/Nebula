@@ -11,7 +11,7 @@
 	var/turf/test_loc = get_safe_turf()
 
 	var/atom/from = new donor_type(test_loc)
-	from.create_reagents(container_volume)
+	from.create_or_update_reagents(container_volume)
 	from.add_to_reagents(/decl/material/liquid/water, container_volume)
 
 	var/atom/target
@@ -22,7 +22,7 @@
 	else
 		target = new recipient_type(test_loc)
 	if(!target.reagents)
-		target.create_reagents(container_volume)
+		target.create_or_update_reagents(container_volume)
 	if(ismob(target))
 		var/mob/victim = target
 		victim.death() // to prevent reagent processing

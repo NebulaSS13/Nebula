@@ -7,11 +7,8 @@
 	window_width = 550
 	window_height = 300
 	scan_sound = 'sound/effects/scanbeep.ogg'
+	chem_volume = 5
 	var/details = 0
-
-/obj/item/scanner/spectrometer/Initialize()
-	. = ..()
-	create_reagents(5)
 
 /obj/item/scanner/spectrometer/on_reagent_change()
 	if((. = ..()))
