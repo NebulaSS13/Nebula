@@ -18,6 +18,7 @@
 	LAZYINITLIST(tanks)
 	for(var/i = 1 to rand(1,max_tanks))
 		tanks += new /obj/item/sealant_tank(src)
+	update_icon()
 
 /obj/structure/sealant_rack/on_update_icon()
 	..()
