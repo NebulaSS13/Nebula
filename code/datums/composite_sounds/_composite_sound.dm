@@ -19,7 +19,7 @@
 	var/start_length
 	var/end_sound
 	var/chance
-	var/volume = 100
+	var/play_volume = 100
 	var/max_loops
 	var/direct
 	var/timerid
@@ -71,7 +71,7 @@
 /datum/composite_sound/proc/play(soundfile)
 	var/sound/S = sound(soundfile)
 	for(var/atom/thing as anything in output_atoms)
-		playsound(thing, S, volume)
+		playsound(thing, S, play_volume)
 
 /datum/composite_sound/proc/get_sound(starttime, _mid_sounds)
 	. = _mid_sounds || mid_sounds
