@@ -21,8 +21,8 @@
 		var/mat_amt = matter[mat]
 		if(!highest_mat || matter[highest_mat] < mat_amt)
 			highest_mat = mat
-		var/decl/material/material_decl = GET_DECL(mat)
-		mat_names += material_decl.solid_name
+		var/decl/material/scrap_material = GET_DECL(mat)
+		mat_names += scrap_material.solid_name
 		total_matter += mat_amt
 
 	// Safety check, although this should be prevented for player side interactions

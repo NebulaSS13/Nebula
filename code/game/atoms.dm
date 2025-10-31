@@ -67,6 +67,12 @@
 	/// (STRING) A color applied over the top of any material color. Implemented on /obj/item, /obj/structure and /turf.
 	var/paint_color
 
+	/// (DATUM) Reference to material decl. If set to a /decl/material path, will init the item with that material.
+	/// Implemented on /mob/living/exosuit, /turf/wall, /obj/item and /obj/structure
+	var/decl/material/material
+	/// (DATUM) Similar to above, but largely used by /turf/wall, /obj/structure and /obj/item/stack/material
+	var/decl/material/reinf_material
+
 /atom/proc/get_max_health()
 	return max_health
 

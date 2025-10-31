@@ -17,7 +17,7 @@
 
 // Populate name and resources from the product type.
 /datum/fabricator_recipe/proc/get_product_name()
-	. = atom_info_repository.get_name_for(path, amount = 1)
+	. = atom_info_repository.get_name_for(path, _amount = 1)
 
 /datum/fabricator_recipe/New()
 	..()
@@ -29,7 +29,7 @@
 		name = get_product_name()
 	if(required_technology == TRUE)
 		if(ispath(path, /obj/item))
-			required_technology = atom_info_repository.get_origin_tech_for(path, amount = 1)
+			required_technology = atom_info_repository.get_origin_tech_for(path, _amount = 1)
 		if(!islist(required_technology))
 			required_technology = list()
 	if(!resources)

@@ -57,8 +57,8 @@
 	return get_plant_growth_rate() > 0 && can_be_dug(tool_hardness, using_tool) && !(locate(/obj/machinery/portable_atmospherics/hydroponics/soil) in src)
 
 /turf/proc/try_dig_farm(mob/user, obj/item/tool, using_tool = TOOL_HOE)
-	var/decl/material/material = get_material()
-	if(!material?.tillable)
+	var/decl/material/turf_material = get_material()
+	if(!turf_material?.tillable)
 		return
 	if((!user && !tool) || tool.do_tool_interaction(using_tool, user, src, 5 SECONDS, set_cooldown = TRUE, check_skill = SKILL_BOTANY))
 		return dig_farm(user, tool?.material?.hardness, using_tool)

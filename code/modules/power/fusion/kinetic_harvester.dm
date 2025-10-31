@@ -65,9 +65,9 @@
 	data["status"] = (use_power >= POWER_USE_ACTIVE)
 	data["materials"] = list()
 	for(var/mat in stored)
-		var/decl/material/material = GET_DECL(mat)
+		var/decl/material/stored_material = GET_DECL(mat)
 		var/sheets = floor(stored[mat]/(SHEET_MATERIAL_AMOUNT * 1.5))
-		data["materials"] += list(list("name" = material.solid_name, "amount" = sheets, "harvest" = harvesting[mat], "mat_ref" = "\ref[material]"))
+		data["materials"] += list(list("name" = stored_material.solid_name, "amount" = sheets, "harvest" = harvesting[mat], "mat_ref" = "\ref[stored_material]"))
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -109,15 +109,15 @@
 /obj/machinery/kinetic_harvester/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 
 	if(href_list["remove_mat"])
-		var/decl/material/material = locate(href_list["remove_mat"])
-		if(istype(material))
+		var/decl/material/remove_material = locate(href_list["remove_mat"])
+		if(istype(remove_material))
 			var/sheet_cost = (SHEET_MATERIAL_AMOUNT * 1.5)
-			var/sheets = floor(stored[material.type]/sheet_cost)
+			var/sheets = floor(stored[remove_material.type]/sheet_cost)
 			if(sheets > 0)
-				material.create_object(loc, sheets)
-				stored[material.type] -= (sheets * sheet_cost)
-				if(stored[material.type] <= 0)
-					stored -= material.type
+				remove_material.create_object(loc, sheets)
+				stored[remove_material.type] -= (sheets * sheet_cost)
+				if(stored[remove_material.type] <= 0)
+					stored -= remove_material.type
 				return TOPIC_REFRESH
 
 	if(href_list["toggle_power"])
@@ -126,12 +126,12 @@
 		return TOPIC_REFRESH
 
 	if(href_list["toggle_harvest"])
-		var/decl/material/material = locate(href_list["toggle_harvest"])
-		if(istype(material))
-			if(harvesting[material.type])
-				harvesting -= material.type
+		var/decl/material/harvest_material = locate(href_list["toggle_harvest"])
+		if(istype(harvest_material))
+			if(harvesting[harvest_material.type])
+				harvesting -= harvest_material.type
 			else
-				harvesting[material.type] = TRUE
-				if(!(material.type in stored))
-					stored[material.type] = 0
+				harvesting[harvest_material.type] = TRUE
+				if(!(harvest_material.type in stored))
+					stored[harvest_material.type] = 0
 		return TOPIC_REFRESH

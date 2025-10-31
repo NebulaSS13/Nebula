@@ -491,10 +491,10 @@
 	var/location
 	var/material
 
-/datum/gear_data/New(var/path, var/location, var/material)
-	src.path = path
-	src.location = location
-	src.material = material
+/datum/gear_data/New(var/_path, var/_location, var/_mat)
+	src.path = _path
+	src.location = _location
+	src.material = _mat
 
 /datum/gear_data/proc/can_replace_existing(obj/item/candidate)
 	return istype(candidate, path)

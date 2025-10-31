@@ -36,8 +36,6 @@ var/global/list/wall_fullblend_objects = list(
 	var/unique_merge_identifier
 	var/damage = 0
 	var/can_open = 0
-	var/decl/material/material
-	var/decl/material/reinf_material
 	var/decl/material/girder_material = /decl/material/solid/metal/steel
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'

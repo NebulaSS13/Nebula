@@ -60,11 +60,11 @@
 	// This is obscene, but completeness requires it.
 	for(var/stack_type in stack_types)
 		for(var/tool_type in tool_types)
-			for(var/decl/material/material in test_materials)
+			for(var/decl/material/test_material in test_materials)
 				for(var/decl/material/reinforced as anything in (test_materials + null))
 
 					// Get a linear list of all recipes available to this combination.
-					var/list/recipes = get_stack_recipes(material, reinforced, stack_type, tool_type, flat = TRUE)
+					var/list/recipes = get_stack_recipes(test_material, reinforced, stack_type, tool_type, flat = TRUE)
 					if(!length(recipes))
 						continue
 
@@ -72,7 +72,7 @@
 					for(var/decl/stack_recipe/recipe as anything in recipes)
 						if(!recipe.result_type || ispath(recipe.result_type, /turf)) // Cannot exist without a loc and doesn't have matter, cannot assess here.
 							continue
-						var/list/results = recipe.spawn_result(null, null, 1, material, reinforced, null)
+						var/list/results = recipe.spawn_result(null, null, 1, test_material, reinforced, null)
 						var/atom/product = LAZYACCESS(results, 1)
 						var/list/failed = list()
 						if(!product)
@@ -83,21 +83,21 @@
 							var/list/product_matter = list()
 							for(var/obj/product_obj in results)
 								product_matter = MERGE_ASSOCS_WITH_NUM_VALUES(product_matter, product_obj.get_contained_matter(include_reagents = FALSE))
-							if(!material && !reinforced)
+							if(!test_material && !reinforced)
 								if(length(product_matter))
 									failed += "unsupplied material types"
-							else if(material && (product_matter[material.type]) > recipe.req_amount)
-								failed += "excessive base material ([recipe.req_amount]/[ceil(product_matter[material.type])])"
+							else if(test_material && (product_matter[test_material.type]) > recipe.req_amount)
+								failed += "excessive base material ([recipe.req_amount]/[ceil(product_matter[test_material.type])])"
 							else if(reinforced && (product_matter[reinforced.type]) > recipe.req_amount)
 								failed += "excessive reinf material ([recipe.req_amount]/[ceil(product_matter[reinforced.type])])"
 							else
 								for(var/mat in product_matter)
-									if(mat != material?.type && mat != reinforced?.type)
+									if(mat != test_material?.type && mat != reinforced?.type)
 										failed += "extra material type ([mat])"
 
 						if(length(failed)) // Try to prune out some duplicate error spam, we have too many materials now
 							if(!(recipe.type in seen_design_types))
-								failed_designs += "[material?.type || "null mat"] - [reinforced?.type || "null reinf"] - [tool_type] - [stack_type] - [recipe.type] - [english_list(failed)]"
+								failed_designs += "[test_material?.type || "null mat"] - [reinforced?.type || "null reinf"] - [tool_type] - [stack_type] - [recipe.type] - [english_list(failed)]"
 								seen_design_types += recipe.type
 								failed_count++
 						else

@@ -18,7 +18,6 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	var/can_be_pulverized = FALSE
 	var/can_be_reinforced = FALSE
-	var/decl/material/reinf_material
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
 
