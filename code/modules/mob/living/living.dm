@@ -1672,23 +1672,23 @@ default behaviour is:
 		return
 
 	var/range = world.view - 2
-	var/volume = 70
+	var/step_volume = 70
 	if(MOVING_DELIBERATELY(src))
-		volume -= 45
+		step_volume -= 45
 		range -= 0.333
 
 	var/obj/item/clothing/shoes/shoes = get_equipped_item(slot_shoes_str)
-	volume = round(modify_footstep_volume(volume, shoes))
+	step_volume = round(modify_footstep_volume(step_volume, shoes))
 	range  = round(modify_footstep_range(range, shoes))
-	if(volume > 0 && range > 0)
-		playsound(T, footsound, volume, 1, range)
+	if(step_volume > 0 && range > 0)
+		playsound(T, footsound, step_volume, 1, range)
 
-/mob/living/proc/modify_footstep_volume(volume, obj/item/clothing/shoes/shoes)
+/mob/living/proc/modify_footstep_volume(step_volume, obj/item/clothing/shoes/shoes)
 	if(istype(shoes))
-		return volume * shoes.footstep_volume_mod
+		return step_volume * shoes.footstep_volume_mod
 	if(!shoes)
-		return volume - 60
-	return volume
+		return step_volume - 60
+	return step_volume
 
 /mob/living/proc/modify_footstep_range(range, obj/item/clothing/shoes/shoes)
 	if(istype(shoes))

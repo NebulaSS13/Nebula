@@ -65,10 +65,10 @@
 
 /decl/material/liquid/blood/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
-		var/volume = REAGENT_VOLUME(holder, src)
+		var/affect_volume = REAGENT_VOLUME(holder, src)
 		var/mob/living/human/H = M
-		H.inject_blood(volume, holder)
-		holder.remove_reagent(type, volume)
+		H.inject_blood(affect_volume, holder)
+		holder.remove_reagent(type, affect_volume)
 	. = ..()
 
 /decl/material/liquid/blood/get_reagent_color(datum/reagents/holder)

@@ -109,8 +109,8 @@
 
 /decl/material/solid/potassium/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
-	var/volume = REAGENT_VOLUME(holder, src)
-	if(volume > 3)
+	var/affect_volume = REAGENT_VOLUME(holder, src)
+	if(affect_volume > 3)
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume > 10)
+	if(affect_volume > 10)
 		M.add_chemical_effect(CE_PULSE, 1)

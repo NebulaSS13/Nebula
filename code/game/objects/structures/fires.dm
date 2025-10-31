@@ -374,12 +374,12 @@
 			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT && reagent.phase_at_temperature(get_effective_burn_temperature(), ambient_pressure) == MAT_PHASE_GAS)
 				do_steam = TRUE
 
-			var/volume = NONUNIT_CEILING(REAGENT_VOLUME(reagents, reagent) / REAGENT_UNITS_PER_GAS_MOLE, 0.1)
-			var/list/waste_products = burn_material(reagent, volume)
+			var/result_volume = NONUNIT_CEILING(REAGENT_VOLUME(reagents, reagent) / REAGENT_UNITS_PER_GAS_MOLE, 0.1)
+			var/list/waste_products = burn_material(reagent, result_volume)
 			if(!isnull(waste_products))
 				for(var/product in waste_products)
 					waste[product] += waste_products[product]
-				reagents.remove_reagent(reagent.type, volume)
+				reagents.remove_reagent(reagent.type, result_volume)
 
 		dump_waste_products(loc, waste)
 

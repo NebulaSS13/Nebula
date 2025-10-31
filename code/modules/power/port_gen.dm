@@ -37,11 +37,10 @@
 	if(!sound_id)
 		sound_id = "[type]_[sequential_id(/obj/machinery/port_gen)]"
 	if(active && HasFuel() && !IsBroken())
-		var/volume = 10 + 15*power_output
+		var/work_volume = 10 + 15*power_output
 		if(!sound_token)
-
-			sound_token = play_looping_sound(src, sound_id, working_sound, volume = volume)
-		sound_token.SetVolume(volume)
+			sound_token = play_looping_sound(src, sound_id, working_sound, volume = work_volume)
+		sound_token.SetVolume(work_volume)
 	else if(sound_token)
 		QDEL_NULL(sound_token)
 

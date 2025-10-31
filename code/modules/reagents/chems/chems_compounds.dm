@@ -283,14 +283,14 @@
 
 /decl/material/liquid/lactate/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
-	var/volume = REAGENT_VOLUME(holder, src)
+	var/affect_volume = REAGENT_VOLUME(holder, src)
 	M.add_chemical_effect(CE_PULSE, 1)
-	if(volume >= 10)
+	if(affect_volume >= 10)
 		M.add_chemical_effect(CE_PULSE, 1)
-		M.add_chemical_effect(CE_SLOWDOWN, (volume/15) ** 2)
+		M.add_chemical_effect(CE_SLOWDOWN, (affect_volume/15) ** 2)
 	else if(CHEM_DOSE(M, src) > 30) //after prolonged exertion
 		ADJ_STATUS(M, STAT_JITTER, 5)
-		M.add_chemical_effect(CE_BREATHLOSS, 0.02 * volume)
+		M.add_chemical_effect(CE_BREATHLOSS, 0.02 * affect_volume)
 
 /decl/material/liquid/nanoblood
 	name = "nanoblood"

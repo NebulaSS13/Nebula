@@ -56,11 +56,11 @@
 				touching_turf.wet_floor(slipperiness)
 
 	if(length(vapor_products))
-		var/volume = REAGENT_VOLUME(holder, src)
+		var/result_volume = REAGENT_VOLUME(holder, src)
 		var/temperature = holder?.my_atom?.temperature || T20C
 		for(var/vapor in vapor_products)
-			touching_turf.assume_gas(vapor, (volume * vapor_products[vapor]), temperature)
-		holder.remove_reagent(src, volume)
+			touching_turf.assume_gas(vapor, (result_volume * vapor_products[vapor]), temperature)
+		holder.remove_reagent(src, result_volume)
 
 /decl/material/proc/on_mob_life(var/mob/living/M, var/metabolism_class, var/datum/reagents/holder, var/list/life_dose_tracker)
 

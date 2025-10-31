@@ -89,9 +89,9 @@
 		touching_turf.assume_air(lowertemp)
 		qdel(hotspot)
 
-	var/volume = REAGENT_VOLUME(holder, src)
+	var/affect_volume = REAGENT_VOLUME(holder, src)
 	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
-		var/removed_heat = clamp(volume * WATER_LATENT_HEAT, 0, -environment.get_thermal_energy_change(min_temperature))
+		var/removed_heat = clamp(affect_volume * WATER_LATENT_HEAT, 0, -environment.get_thermal_energy_change(min_temperature))
 		environment.add_thermal_energy(-removed_heat)
 		if (prob(5) && environment && environment.temperature > T100C)
 			touching_turf.visible_message(SPAN_NOTICE("The water sizzles as it lands on \the [touching_turf]!"))

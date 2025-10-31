@@ -226,18 +226,18 @@
 	uid = "chem_adrenaline"
 
 /decl/material/liquid/adrenaline/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	var/volume = REAGENT_VOLUME(holder, src)
+	var/affect_volume = REAGENT_VOLUME(holder, src)
 	var/dose = CHEM_DOSE(M, src)
 	. = ..()
 	if(dose < 0.2)	//not that effective after initial rush
-		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
+		M.add_chemical_effect(CE_PAINKILLER, min(30*affect_volume, 80))
 		M.add_chemical_effect(CE_PULSE, 1)
 	else if(dose < 1)
-		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
+		M.add_chemical_effect(CE_PAINKILLER, min(10*affect_volume, 20))
 	M.add_chemical_effect(CE_PULSE, 2)
 	if(dose > 10)
 		ADJ_STATUS(M, STAT_JITTER, 5)
-	if(volume >= 5 && M.is_asystole())
+	if(affect_volume >= 5 && M.is_asystole())
 		holder.remove_reagent(type, 5)
 		if(ishuman(M))
 			var/mob/living/human/H = M
