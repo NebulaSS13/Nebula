@@ -25,7 +25,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 	pass_flags       = PASS_FLAG_TABLE                //About the height of table
 	anchored         = TRUE
 	material         = /decl/material/solid/organic/plastic
-	current_health   = 5
+	max_health       = 5
 	var/neighbors    = 0                              //Contains all the direction flags of all the neighboring tape_barricades
 	var/is_lifted    = 0                              //Whether the tape is lifted and we're allowing everyone passage.
 	var/is_crumpled  = 0                              //Whether the tape was damaged

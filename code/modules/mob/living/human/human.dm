@@ -9,7 +9,7 @@
 
 /mob/living/human/Initialize(mapload, species_uid, datum/mob_snapshot/supplied_appearance)
 
-	current_health = max_health
+	current_health = get_max_health()
 	reset_hud_overlays()
 	var/list/newargs = args.Copy(2)
 	setup_human(arglist(newargs))
