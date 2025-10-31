@@ -327,14 +327,14 @@
 	var/decl/material/overlay_material = /decl/material/solid/metal/iron
 
 /obj/structure/closet/crate/chest/Initialize()
-	. = ..()
 	if(ispath(overlay_material))
 		overlay_material = GET_DECL(overlay_material)
+	. = ..()
 	// icon update is already queued in parent because of closet appearance
 
 /obj/structure/closet/crate/chest/update_material_desc(override_desc)
 	..()
-	if(overlay_material)
+	if(istype(overlay_material))
 		desc = "[desc] It has a trim made of [overlay_material.solid_name]."
 
 /obj/structure/closet/crate/chest/on_update_icon()
