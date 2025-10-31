@@ -32,7 +32,7 @@
 
 	. = ..(ml)
 
-	set_turf_materials(floor_material, skip_update = TRUE)
+	set_turf_materials(material, skip_update = TRUE)
 
 	if(!floortype && (ispath(_flooring) || islist(_flooring)))
 		floortype = _flooring
@@ -44,7 +44,7 @@
 
 	fill_to_zero_height() // try to refill turfs that act as fluid sources
 
-	if(floor_material || get_topmost_flooring())
+	if(material || get_topmost_flooring())
 		update_from_flooring(skip_update = ml)
 		if(ml) // We skipped the update above to avoid updating our neighbors, but we need to update ourselves.
 			lazy_update_icon()

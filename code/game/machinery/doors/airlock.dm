@@ -42,7 +42,7 @@
 	var/aiDisabledIdScanner = 0
 	var/aiHacking = 0
 	autoclose = 1
-	var/mineral = null
+	var/mineral = null // TODO: replace with material and get_material()
 	var/justzap = 0
 	var/safe = 1
 	var/speaker = 1

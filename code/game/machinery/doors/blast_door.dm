@@ -36,7 +36,7 @@
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
-	var/decl/material/implicit_material
+	var/decl/material/implicit_material // TODO: replace with material and get_material()
 	autoset_access = FALSE // Uses different system with buttons.
 	pry_mod = 1.35
 

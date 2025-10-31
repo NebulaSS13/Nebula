@@ -121,10 +121,6 @@ var/global/list/wall_fullblend_objects = list(
 	if(!radiate())
 		return PROCESS_KILL
 
-/turf/wall/get_material()
-	RETURN_TYPE(/decl/material)
-	return material
-
 /turf/wall/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj,/obj/item/projectile/beam))
 		burn(2500)
