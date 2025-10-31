@@ -157,7 +157,8 @@ var/global/list/admin_verbs_server = list(
 	/datum/admins/proc/removeserverwhitelist,
 	/datum/admins/proc/panicbunker,
 	/datum/admins/proc/addbunkerbypass,
-	/datum/admins/proc/revokebunkerbypass
+	/datum/admins/proc/revokebunkerbypass,
+	/datum/admins/proc/force_persistence_save_verb
 	)
 var/global/list/admin_verbs_debug = list(
 	/datum/admins/proc/jump_to_fluid_source,

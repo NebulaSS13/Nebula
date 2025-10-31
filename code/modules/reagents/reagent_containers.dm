@@ -54,7 +54,7 @@
 /obj/item/chems/update_name()
 	. = ..() // handles material, etc
 	var/newname = name
-	if(presentation_flags & PRESENTATION_FLAG_NAME)
+	if(istype(reagents) && (presentation_flags & PRESENTATION_FLAG_NAME))
 		var/decl/material/primary = reagents?.get_primary_reagent_decl()
 		if(primary)
 			newname += " of [primary.get_presentation_name(src)]"

@@ -19,12 +19,13 @@
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.
 
-#define SS_INIT_INPUT            22
-#define SS_INIT_EARLY            21
-#define SS_INIT_WEBHOOKS         20
-#define SS_INIT_MODPACKS         19
-#define SS_INIT_SECRETS          18
-#define SS_INIT_GARBAGE          17
+#define SS_INIT_INPUT            23
+#define SS_INIT_EARLY            22
+#define SS_INIT_WEBHOOKS         21
+#define SS_INIT_MODPACKS         20
+#define SS_INIT_SECRETS          19
+#define SS_INIT_GARBAGE          18
+#define SS_INIT_SERDE            17
 #define SS_INIT_MATERIALS        16
 #define SS_INIT_PLANTS           15
 #define SS_INIT_LORE             14

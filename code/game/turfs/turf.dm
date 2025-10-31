@@ -101,6 +101,7 @@
 /turf/Initialize(mapload, ...)
 	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
 
+	_earliest_type ||= type
 	color = null
 
 	// atom/Initialize has been copied here for performance (or at least the bits of it that turfs use has been)
@@ -115,6 +116,10 @@
 		luminosity = 0
 	else
 		luminosity = 1
+
+	// Reagents got deserialized, set them up. Do not return as we want to finish turf init.
+	// we don't care about volume because turfs always create a maximum volume holder on reagent add.
+	FINALIZE_REAGENTS_SERDE(reagents)
 
 	AMBIENCE_QUEUE_TURF(src)
 
@@ -139,6 +144,7 @@
 
 	if(flooded)
 		set_flooded(flooded, TRUE, skip_vis_contents_update = TRUE, mapload = mapload)
+
 	update_vis_contents()
 
 	if(simulated)
@@ -627,6 +633,7 @@
 	if(is_outside == new_outside)
 		return FALSE
 
+	state_was_modified()
 	is_outside = new_outside
 	update_external_atmos_participation()
 	AMBIENCE_QUEUE_TURF(src)

@@ -15,8 +15,8 @@
 	var/tmp/possible_transfer_amounts = @"[10,25,50,100,500]"
 
 /obj/structure/working/quern/Initialize()
-	. = ..()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	. = ..()
 
 /obj/structure/working/quern/try_start_working(mob/user)
 

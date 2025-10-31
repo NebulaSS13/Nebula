@@ -9,6 +9,8 @@
 	var/list/active_timers
 	/// Used to avoid unnecessary refstring creation in Destroy().
 	var/tmp/has_state_machine = FALSE
+	/// Var for holding a unique-to-this-run identifier for a serialized datum.
+	VAR_PRIVATE/tmp/__run_uid
 
 #ifdef REFTRACKING_ENABLED
 	var/tmp/running_find_references

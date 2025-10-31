@@ -27,7 +27,6 @@
 ////////////////////////////////
 // Simulated Mimic Edges
 ////////////////////////////////
-
 ///Simulated turf meant to replicate the appearence of another.
 /turf/mimic_edge
 	name             = MIMIC_EDGE_NAME
@@ -60,6 +59,13 @@
 /turf/mimic_edge/Destroy()
 	QDEL_NULL(click_eater) //Make sure we get rid of it if the turf is somehow replaced by map gen to prevent them accumulating.
 	return ..()
+
+/turf/mimic_edge/ShouldSerialize(_age)
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
+
+/turf/mimic_edge/GetPossiblySerializableInstances()
+	return null
 
 /turf/mimic_edge/Crossed(atom/movable/O)
 	. = ..()

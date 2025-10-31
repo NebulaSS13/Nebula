@@ -35,10 +35,10 @@
 	desc = "A predatory canine commonly known to watch speedruns and take party drugs."
 
 /mob/living/simple_animal/passive/wolf/sparkle/Initialize()
-	draw_visible_overlays = list(
+	draw_visible_overlays ||= list(
 		"base"     = get_random_colour(),
 		"markings" = get_random_colour(TRUE),
 		"socks"    = get_random_colour()
 	)
-	eye_color = get_random_colour(TRUE)
+	eye_color ||= get_random_colour(TRUE)
 	. = ..()

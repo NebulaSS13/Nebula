@@ -1,5 +1,9 @@
 /turf/wall/natural/proc/make_ramp(var/mob/user, var/new_slope, var/skip_icon_update = FALSE)
 
+	if(ramp_slope_direction == new_slope)
+		return
+
+	state_was_modified()
 	ramp_slope_direction = new_slope
 	QDEL_NULL_LIST(engravings)
 

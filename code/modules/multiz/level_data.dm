@@ -170,9 +170,6 @@
 	/// Note that this is more or less unnecessary if you are using a mapped area that doesn't stretch to the edge of the level.
 	var/template_edge_padding = 15
 
-	// Whether or not this level permits things like graffiti and filth to persist across rounds.
-	var/permit_persistence = FALSE
-
 	// Submap loading values, passed back via getters like get_subtemplate_budget().
 	/// A point budget to spend on subtemplates (see template costs)
 	var/subtemplate_budget = 0
@@ -180,6 +177,9 @@
 	var/subtemplate_category = null
 	/// A specific area to use when determining where to place subtemplates.
 	var/subtemplate_area = null
+
+	/// Set to TRUE if this level persistence data, FALSE if not. Check is only done if _has_serde_data is null.
+	VAR_PRIVATE/_has_serde_data = null
 
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
@@ -232,6 +232,7 @@
 
 ///Prepare level for being used. Setup borders, lateral z connections, ambient lighting, atmosphere, etc..
 /datum/level_data/proc/setup_level_data(var/skip_gen = FALSE)
+
 	if(_level_setup_completed)
 		log_debug("level_data for [src], on z [level_z], had setup_level_data called more than once!")
 		return //Since we can defer setup, make sure we only setup once
@@ -444,24 +445,35 @@
 	if(base_area)
 		return list(base_area)
 
+// If we do serde, that implies we don't want to apply another layer of procgen over what's already saved.
+// Specific levels should override this proc as needed for generation independent of serde.
+/datum/level_data/proc/should_generate_level()
+	if(!is_persistent())
+		return TRUE
+	if(!get_config_value(/decl/config/toggle/roundstart_level_generation) || !(get_subtemplate_budget() || length(level_generators)))
+		return FALSE
+	if(isnull(_has_serde_data))
+		var/decl/serialization_handler/handler = RESOLVE_TO_DECL(persistence_handler)
+		_has_serde_data = fexists(handler.get_data_path(persistent_data_location, global.using_map.path, ckey(level_id)))
+	return !_has_serde_data
+
 ///Called when setting up the level. Apply generators and anything that modifies the turfs of the level.
 /datum/level_data/proc/generate_level()
-
-	if(!get_config_value(/decl/config/toggle/roundstart_level_generation))
+	if(!should_generate_level())
+		report_progress("Skipping [_has_serde_data ? "post-serde " : ""]level generation for [level_id].")
 		return
-
 	var/origx = level_inner_min_x
 	var/origy = level_inner_min_y
 	var/endx  = level_inner_min_x + level_inner_width
 	var/endy  = level_inner_min_y + level_inner_height
-
 	// Run level generators.
 	for(var/gen_type in level_generators)
+		report_progress("Placing [gen_type] on [level_id]...")
 		new gen_type(origx, origy, level_z, endx, endy, FALSE, TRUE, get_base_area_instance())
-
 	// Place points of interest.
 	var/budget = get_subtemplate_budget()
 	if(budget)
+		report_progress("Placing subtemplates on [level_id]...")
 		spawn_subtemplates(budget, get_subtemplate_category(), get_subtemplate_blacklist(), get_subtemplate_whitelist())
 
 ///Apply the parent entity's map generators. (Planets generally)
@@ -741,14 +753,14 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 
 /datum/level_data/main_level
 	level_flags = (ZLEVEL_STATION|ZLEVEL_CONTACT|ZLEVEL_PLAYER)
-	permit_persistence = TRUE
+	permit_legacy_persistence = TRUE
 
 /datum/level_data/admin_level
 	level_flags = (ZLEVEL_ADMIN|ZLEVEL_SEALED)
 
 /datum/level_data/player_level
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER)
-	permit_persistence = TRUE
+	permit_legacy_persistence = TRUE
 
 /datum/level_data/unit_test
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER|ZLEVEL_SEALED)

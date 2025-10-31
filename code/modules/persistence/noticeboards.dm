@@ -19,10 +19,15 @@
 
 	// Grab any mapped notices.
 	if(ml)
-		for(var/obj/item/paper/note in get_turf(src))
+		for(var/obj/item/paper/note in contents)
 			add_paper(note, skip_icon_update = TRUE)
 			if(LAZYLEN(notices) >= max_notices)
 				break
+		if(LAZYLEN(notices) < max_notices)
+			for(var/obj/item/paper/note in get_turf(src))
+				add_paper(note, skip_icon_update = TRUE)
+				if(LAZYLEN(notices) >= max_notices)
+					break
 
 	// Automatically place noticeboards that aren't mapped to specific positions.
 	if(default_pixel_x == 0 && default_pixel_y == 0)

@@ -60,10 +60,10 @@
 	desc = "A hopping mammal with long ears and a love for raves."
 
 /mob/living/simple_animal/passive/rabbit/sparkle/Initialize()
-	draw_visible_overlays = list(
+	draw_visible_overlays ||= list(
 		"base"     = get_random_colour(),
 		"markings" = get_random_colour(TRUE),
 		"socks"    = get_random_colour()
 	)
-	eye_color     = get_random_colour(TRUE)
+	eye_color ||= get_random_colour(TRUE)
 	. = ..()

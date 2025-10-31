@@ -8,6 +8,16 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/obj/item/drying
 
+/obj/structure/drying_rack/Initialize(ml, _mat, _reinf_mat)
+	. = ..()
+	// This is mostly for serde.
+	for(var/obj/item/thing in get_contained_external_atoms())
+		if(!drying && thing.is_dryable())
+			drying = thing
+			update_icon()
+		else
+			thing.dropInto(loc)
+
 /obj/structure/drying_rack/ebony
 	material = /decl/material/solid/organic/wood/ebony
 	color = /decl/material/solid/organic/wood/ebony::color

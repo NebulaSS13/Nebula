@@ -10,6 +10,7 @@ var/global/dmm_suite/preloader/_preloader = new
 /datum/map_load_metadata
 	var/bounds
 	var/list/atoms_to_initialise
+	var/list/turfs_to_mark_modified
 
 /dmm_suite
 	// /"([a-zA-Z]+)" = \(((?:.|\n)*?)\)\n(?!\t)|\((\d+),(\d+),(\d+)\) = \{"\n*([a-zA-Z\n]*)\n?"\}/g
@@ -64,12 +65,19 @@ var/global/dmm_suite/preloader/_preloader = new
 	initialized_areas_by_type = initialized_areas_by_type || list()
 	if(!(world.area in initialized_areas_by_type))
 		initialized_areas_by_type[world.area] = locate(world.area)
-	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type, level_data_type)
+
+	var/datum/map_load_metadata/M = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type, level_data_type)
+
+	if(length(M.turfs_to_mark_modified))
+		for(var/turf/turf in M.turfs_to_mark_modified)
+			turf.state_was_modified()
+
 	#ifdef TESTING
 	if(turfsSkipped)
 		testing("Skipped loading [turfsSkipped] default turfs")
 	#endif
 	Master.StopLoadingMap()
+	return M
 
 /dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type, level_data_type = /datum/level_data/space)
 	var/tfile = dmm_file//the map file we're creating
@@ -91,6 +99,7 @@ var/global/dmm_suite/preloader/_preloader = new
 
 	var/list/atoms_to_initialise = list()
 	var/list/atoms_to_delete = list()
+	var/list/turfs_to_mark_modified = list()
 
 	while(dmmRegex.Find(tfile, stored_index))
 		stored_index = dmmRegex.next
@@ -180,7 +189,11 @@ var/global/dmm_suite/preloader/_preloader = new
 										throw EXCEPTION("Undefined model key in DMM.")
 									var/datum/grid_load_metadata/M = parse_grid(grid_models[model_key], model_key, xcrd, ycrd, zcrd, no_changeturf || zexpansion, clear_contents, initialized_areas_by_type)
 									if (M)
-										atoms_to_initialise += M.atoms_to_initialise
+										if(length(M.atoms_to_initialise))
+											atoms_to_initialise += M.atoms_to_initialise
+										if(length(M.turfs_to_mark_modified))
+											turfs_to_mark_modified += M.turfs_to_mark_modified
+
 										atoms_to_delete += M.atoms_to_delete
 								#ifdef TESTING
 								else
@@ -205,6 +218,7 @@ var/global/dmm_suite/preloader/_preloader = new
 	var/datum/map_load_metadata/M = new
 	M.bounds = bounds
 	M.atoms_to_initialise = atoms_to_initialise
+	M.turfs_to_mark_modified = turfs_to_mark_modified
 	return M
 
 /**
@@ -228,6 +242,7 @@ var/global/dmm_suite/preloader/_preloader = new
 /datum/grid_load_metadata
 	var/list/atoms_to_initialise
 	var/list/atoms_to_delete
+	var/list/turfs_to_mark_modified
 
 /dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, clear_contents as num, initialized_areas_by_type)
 	/*Method parse_grid()
@@ -345,23 +360,28 @@ var/global/dmm_suite/preloader/_preloader = new
 	SSatoms.map_loader_begin()
 	//since we've switched off autoinitialisation, record atoms to initialise later
 	var/list/atoms_to_initialise = list()
+	var/list/turfs_to_mark_modified = list()
 
 	//instanciate the first /turf
 	var/turf/T
 	if(members[first_turf_index] != /turf/template_noop)
 		is_not_noop = TRUE
-		T = instance_atom(members[first_turf_index],members_attributes[first_turf_index],crds,no_changeturf)
+		T = instance_atom(members[first_turf_index], members_attributes[first_turf_index], crds, no_changeturf)
 		atoms_to_initialise += T
+		if(isturf(T))
+			turfs_to_mark_modified += T
 
 	if(T)
 		//if others /turf are presents, simulates the underlays piling effect
 		index = first_turf_index + 1
 		while(index < length(members)) // Last item is an /area
 			var/underlay = T.appearance
-			T = instance_atom(members[index],members_attributes[index],crds,no_changeturf)//instance new turf
+			T = instance_atom(members[index], members_attributes[index], crds, no_changeturf)//instance new turf
 			T.underlays += underlay
 			index++
 			atoms_to_initialise += T
+			if(isturf(T))
+				turfs_to_mark_modified += T
 
 	if (clear_contents && is_not_noop && length(crds.contents))
 		for (var/atom/movable/pre_existing as anything in crds)
@@ -373,13 +393,18 @@ var/global/dmm_suite/preloader/_preloader = new
 
 	//finally instance all remainings objects/mobs
 	for(index in 1 to first_turf_index-1)
-		atoms_to_initialise += instance_atom(members[index],members_attributes[index],crds,no_changeturf)
+		var/atom/thing = instance_atom(members[index], members_attributes[index], crds, no_changeturf)
+		atoms_to_initialise += thing
+		if(isturf(thing))
+			turfs_to_mark_modified += thing
+
 	//Restore initialization to the previous valsue
 	SSatoms.map_loader_stop()
 
 	var/datum/grid_load_metadata/M = new
 	M.atoms_to_initialise = atoms_to_initialise
 	M.atoms_to_delete = atoms_to_delete
+	M.turfs_to_mark_modified = turfs_to_mark_modified
 	return M
 
 ////////////////
@@ -387,12 +412,15 @@ var/global/dmm_suite/preloader/_preloader = new
 ////////////////
 
 //Instance an atom at (x,y,z) and gives it the variables in attributes
-/dmm_suite/proc/instance_atom(path,list/attributes, turf/crds, no_changeturf)
+/dmm_suite/proc/instance_atom(path, list/attributes, turf/crds, no_changeturf)
 	global._preloader.setup(attributes, path)
 
 	if(crds)
-		if(!no_changeturf && ispath(path, /turf))
-			. = crds.ChangeTurf(path, FALSE, TRUE)
+		if(ispath(path, /turf))
+			if(no_changeturf)
+				. = new path(crds)
+			else
+				. = crds.ChangeTurf(path, FALSE, TRUE)
 		else
 			. = new path(crds)// preloader called from atom/New
 
