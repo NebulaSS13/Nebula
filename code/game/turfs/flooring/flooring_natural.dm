@@ -8,6 +8,7 @@
 	force_material  = /decl/material/solid/sand
 	gender          = NEUTER
 	footstep_type   = /decl/footsteps/sand
+	uid             = "floor_seafloor"
 
 /decl/flooring/shrouded
 	name            = "packed sand"
@@ -19,6 +20,7 @@
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	force_material  = /decl/material/solid/sand
 	footstep_type   = /decl/footsteps/asteroid
+	uid             = "floor_shrouded"
 
 /decl/flooring/meat
 	name            = "fleshy ground"
@@ -30,6 +32,7 @@
 	footstep_type   = /decl/footsteps/mud
 	force_material  = /decl/material/solid/organic/meat
 	print_type      = /obj/effect/footprints
+	uid             = "floor_meat"
 
 /decl/flooring/barren
 	name            = "ground"
@@ -42,6 +45,7 @@
 	icon_edge_layer = FLOOR_EDGE_BARREN
 	force_material  = /decl/material/solid/soil
 	growth_value    = 0.1
+	uid             = "floor_barren"
 
 /decl/flooring/clay
 	name            = "clay"
@@ -55,6 +59,7 @@
 	growth_value    = 1.2
 	can_collect     = TRUE
 	print_type      = /obj/effect/footprints
+	uid             = "floor_clay"
 
 /decl/flooring/ice
 	name            = "ice"
@@ -63,6 +68,7 @@
 	icon_base       = "ice"
 	color           = COLOR_LIQUID_WATER
 	force_material  = /decl/material/solid/ice
+	uid             = "floor_ice"
 
 /decl/flooring/ice/update_turf_icon(turf/floor/target)
 	. = ..()

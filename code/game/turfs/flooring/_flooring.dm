@@ -9,6 +9,7 @@ var/global/list/flooring_cache = list()
 
 /decl/flooring
 	abstract_type = /decl/flooring
+	decl_flags = DECL_FLAG_MANDATORY_UID
 
 	var/name
 	var/desc

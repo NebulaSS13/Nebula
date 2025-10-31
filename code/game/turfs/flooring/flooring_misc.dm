@@ -9,6 +9,7 @@
 	footstep_type      = /decl/footsteps/tiles
 	force_material     = /decl/material/solid/organic/plastic
 	constructed        = TRUE
+	uid                = "floor_lino"
 
 /decl/flooring/crystal
 	name               = "crystal flooring"
@@ -20,6 +21,7 @@
 	color              = "#00ffe1"
 	force_material     = /decl/material/solid/gemstone/crystal
 	constructed        = TRUE
+	uid                = "floor_crystal"
 
 /decl/flooring/glass
 	name               = "glass flooring"
@@ -37,6 +39,7 @@
 	z_flags            = ZM_MIMIC_DEFAULTS
 	force_material     = /decl/material/solid/glass
 	constructed        = TRUE
+	uid                = "floor_glass"
 
 /decl/flooring/glass/boro
 	name               = "borosilicate glass flooring"
@@ -44,6 +47,7 @@
 	color              = GLASS_COLOR_SILICATE
 	damage_temperature = T0C + 4000
 	force_material     = /decl/material/solid/glass/borosilicate
+	uid                = "floor_glass_boro"
 
 /decl/flooring/pool
 	name               = "pool floor"
@@ -57,6 +61,7 @@
 	force_material     = /decl/material/solid/stone/ceramic
 	constructed        = TRUE
 	gender             = NEUTER
+	uid                = "floor_pool"
 
 /decl/flooring/woven
 	name               = "woven floor"
@@ -71,6 +76,7 @@
 	force_material     = /decl/material/solid/organic/plantmatter/grass/dry
 	constructed        = TRUE
 	gender             = NEUTER
+	uid                = "floor_woven"
 
 /decl/flooring/straw
 	name               = "straw floor"
@@ -86,3 +92,4 @@
 	force_material     = /decl/material/solid/organic/plantmatter/grass/dry
 	constructed        = TRUE
 	gender             = NEUTER
+	uid                = "floor_straw"

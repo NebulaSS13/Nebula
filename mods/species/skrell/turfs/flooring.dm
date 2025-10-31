@@ -28,18 +28,24 @@
 /decl/flooring/reinforced/shuttle/skrell
 	icon       = 'mods/species/skrell/icons/turf/skrellturf.dmi'
 	icon_base  = "skrellblack"
+	uid        = "floor_skrell"
 
 /decl/flooring/reinforced/shuttle/skrell/white
 	icon_base = "skrellwhite"
+	uid       = "floor_skrell_white"
 
 /decl/flooring/reinforced/shuttle/skrell/red
 	icon_base = "skrellred"
+	uid       = "floor_skrell_red"
 
 /decl/flooring/reinforced/shuttle/skrell/blue
 	icon_base = "skrellblue"
+	uid       = "floor_skrell_blue"
 
 /decl/flooring/reinforced/shuttle/skrell/orange
 	icon_base = "skrellorange"
+	uid       = "floor_skrell_orange"
 
 /decl/flooring/reinforced/shuttle/skrell/green
 	icon_base = "skrellgreen"
+	uid       = "floor_skrell_green"

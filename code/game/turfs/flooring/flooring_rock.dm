@@ -7,6 +7,7 @@
 	color           = null
 	icon_edge_layer = FLOOR_EDGE_VOLCANIC
 	gender          = NEUTER
+	uid             = "floor_reinf_shuttle_rock"
 
 /decl/flooring/rock/update_turf_strings(turf/floor/target)
 	var/decl/material/material = target?.get_material()

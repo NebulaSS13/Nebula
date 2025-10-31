@@ -3,6 +3,7 @@
 	icon           = 'icons/turf/flooring/alium.dmi'
 	burned_states  = null
 	broken_states  = null
+	uid            = "floor_ascent_plating"
 
 /decl/flooring/tiling_ascent
 	name           = "floor"
@@ -15,6 +16,7 @@
 	constructed    = TRUE
 	burned_states  = null
 	broken_states  = null
+	uid            = "floor_ascent_tiled"
 
 /turf/wall/ascent
 	color          = COLOR_PURPLE
