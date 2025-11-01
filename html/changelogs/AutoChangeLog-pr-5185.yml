@@ -1,0 +1,4 @@
+author: MistakeNot4892
+changes:
+  - {tweak: 'Drakes can no longer farm, but they can mine (in dirt).'}
+delete-after: true
