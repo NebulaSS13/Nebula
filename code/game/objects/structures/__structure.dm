@@ -17,7 +17,6 @@
 	var/footstep_type
 	var/mob_offset
 
-	var/paint_color
 	var/paint_verb
 
 /obj/structure/get_color()
