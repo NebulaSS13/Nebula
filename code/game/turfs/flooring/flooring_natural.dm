@@ -43,7 +43,7 @@
 	footstep_type   = /decl/footsteps/asteroid
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
 	icon_edge_layer = FLOOR_EDGE_BARREN
-	force_material  = /decl/material/solid/soil
+	force_material  = /decl/material/solid/sand
 	growth_value    = 0.1
 	uid             = "floor_barren"
 

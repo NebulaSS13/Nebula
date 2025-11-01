@@ -74,6 +74,10 @@
 		pain_emotes_with_pain_level = adult_pain_emotes_with_pain_level
 	return ..()
 
+/decl/species/grafadreka/handle_post_spawn(var/mob/living/human/H)
+	. = ..()
+	H.default_attack = GET_DECL(/decl/natural_attack/claws/strong/drake)
+
 // Stub for muscle memory of the Sit verb on Polaris.
 /mob/living/human/proc/drake_sit()
 	set name = "Sit"

@@ -321,8 +321,8 @@
 	. = ..()
 	item_flags |= ITEM_FLAG_NO_BLUDGEON
 	set_extension(src, /datum/extension/tool, list(
-		TOOL_SHOVEL = TOOL_QUALITY_GOOD,
-		TOOL_HOE    = TOOL_QUALITY_GOOD
+		TOOL_PICK   = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_GOOD
 	))
 
 /obj/item/organ/external/hand/quadruped/grafadreka/set_bodytype(decl/bodytype/new_bodytype, override_material, apply_to_internal_organs)
@@ -341,8 +341,8 @@
 	. = ..()
 	item_flags |= ITEM_FLAG_NO_BLUDGEON
 	set_extension(src, /datum/extension/tool, list(
-		TOOL_SHOVEL = TOOL_QUALITY_GOOD,
-		TOOL_HOE    = TOOL_QUALITY_GOOD
+		TOOL_PICK   = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_GOOD
 	))
 
 /obj/item/organ/external/hand/right/quadruped/grafadreka/set_bodytype(decl/bodytype/new_bodytype, override_material, apply_to_internal_organs)

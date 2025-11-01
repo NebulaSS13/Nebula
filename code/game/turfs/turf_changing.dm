@@ -188,6 +188,11 @@
 		for(var/atom/movable/AM as anything in changed_turf)
 			AM.update_turf_alpha_mask()
 
+	// Anything on our turf needs to fall down.
+	if(HasBelow(z) && changed_turf.is_open() && !old_is_open)
+		for(var/atom/movable/thing in changed_turf.get_contained_external_atoms())
+			thing.fall()
+
 /turf/proc/transport_properties_from(turf/other, transport_air)
 	if(transport_air && can_inherit_air && (other.zone || other.air))
 		if(!air)
