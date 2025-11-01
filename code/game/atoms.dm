@@ -64,6 +64,9 @@
 	/// (FLOAT) world.time of last on_reagent_update call, used to prevent recursion due to reagents updating reagents
 	VAR_PRIVATE/_reagent_update_started = 0
 
+	/// (STRING) A color applied over the top of any material color. Implemented on /obj/item, /obj/structure and /turf.
+	var/paint_color
+
 /atom/proc/get_max_health()
 	return max_health
 

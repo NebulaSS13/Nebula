@@ -84,8 +84,6 @@
 	// Temporary list of weakrefs of atoms who should be excepted from falling into us
 	var/list/skip_height_fall_for
 
-	var/paint_color
-
 	/// Floorlike structures like catwalks. Updated/retrieved by get_supporting_platform()
 	var/obj/structure/supporting_platform
 

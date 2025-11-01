@@ -112,7 +112,6 @@
 	/// Controls what method is used to resolve conflicts between equipped items and mob loadout.
 	var/replaced_in_loadout = LOADOUT_CONFLICT_DELETE
 
-	var/paint_color
 	var/paint_verb
 
 	/// What dexterity is required to attack with this item?
