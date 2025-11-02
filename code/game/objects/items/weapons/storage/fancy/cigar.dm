@@ -15,7 +15,8 @@
 	storage = /datum/storage/box/cigar
 
 /obj/item/box/fancy/cigar/Initialize(ml, material_key)
-	chem_volume = 10 * max(1, /datum/storage/box/cigar::storage_slots)
+	if(istype(storage))
+		chem_volume = 10 * max(1, storage.storage_slots)
 	. = ..()
 
 /obj/item/box/fancy/cigar/WillContain()
