@@ -14,13 +14,13 @@ on:
   workflow_dispatch:
 
 env:
-  BYOND_MAJOR: "515"
-  BYOND_MINOR: "1647"
-  SPACEMAN_DMM_VERSION: suite-1.9
+  BYOND_MAJOR: "516"
+  BYOND_MINOR: "1663"
+  SPACEMAN_DMM_VERSION: suite-1.11
 
 jobs:
   DreamChecker:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Setup Cache
@@ -52,7 +52,7 @@ jobs:
           chmod +x send.sh
           ./send.sh failure $WEBHOOK_URL
   OpenDream:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Python setup
@@ -69,7 +69,7 @@ jobs:
       - name: Run OpenDream
         run: ./DMCompiler_linux-x64/DMCompiler nebula.dme --define=UNIT_TEST --suppress-unimplemented --skip-anything-typecheck --version=${BYOND_MAJOR}.${BYOND_MINOR} | bash test/annotate_od.sh
   Code:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Setup Cache
@@ -95,7 +95,7 @@ jobs:
           chmod +x send.sh
           ./send.sh failure $WEBHOOK_URL
   Maps:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         map_path: [example, tradeship, exodus, ministation, shaded_hills, away_sites_testing, modpack_testing, planets_testing]
