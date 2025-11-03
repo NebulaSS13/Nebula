@@ -66,10 +66,10 @@
 		if(mat.dissolves_in != MAT_SOLVENT_IMMUNE && LAZYLEN(mat.dissolves_into))
 			var/chems = list()
 			for(var/chemical in mat.dissolves_into)
-				var/decl/material/material = GET_DECL(chemical)
-				var/material_link = "<span codexlink='[material.codex_name || material.name] (substance)'>[material.name]</span>"
-				if(material.hidden_from_codex)
-					material_link = material.name
+				var/decl/material/chemical_decl = GET_DECL(chemical)
+				var/material_link = "<span codexlink='[chemical_decl.codex_name || chemical_decl.name] (substance)'>[chemical_decl.name]</span>"
+				if(chemical_decl.hidden_from_codex)
+					material_link = chemical_decl.name
 				chems += "[material_link] ([mat.dissolves_into[chemical]*100]%)"
 			var/solvent_needed
 			if(mat.dissolves_in <= MAT_SOLVENT_NONE)

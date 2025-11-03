@@ -272,8 +272,8 @@
 			try_dig_farm(user, used_item)
 			return TRUE
 
-		var/decl/material/material = get_material()
-		if(IS_PICK(used_item) && material)
+		var/decl/material/digging_material = get_material()
+		if(IS_PICK(used_item) && digging_material)
 
 			// TODO: move these checks into the interaction handlers.
 			var/atom/platform = get_supporting_platform()
@@ -281,7 +281,7 @@
 				to_chat(user, SPAN_WARNING("\The [platform] [platform.get_pronouns().is] in the way!"))
 				return TRUE
 
-			if(material?.hardness <= MAT_VALUE_FLEXIBLE)
+			if(digging_material?.hardness <= MAT_VALUE_FLEXIBLE)
 				to_chat(user, SPAN_WARNING("\The [src] is too soft to be excavated with \the [used_item]. Use a shovel."))
 				return TRUE
 
@@ -823,12 +823,7 @@
 	return null
 
 /turf/get_color()
-	if(paint_color)
-		return paint_color
-	var/decl/material/material = get_material()
-	if(material)
-		return material.color
-	return color
+	return paint_color || get_material()?.color || color
 
 /turf/proc/get_fishing_result(obj/item/food/bait)
 	var/area/A = get_area(src)
@@ -908,8 +903,8 @@
 		if(T.can_dig_trench(prop?.material?.hardness))
 			T.try_dig_trench(user, prop)
 	else if(IS_PICK(prop))
-		var/decl/material/material = T.get_material()
-		if(material?.hardness > MAT_VALUE_FLEXIBLE && T.can_dig_trench(prop?.material?.hardness, using_tool = TOOL_PICK))
+		var/decl/material/digging_material = T.get_material()
+		if(digging_material?.hardness > MAT_VALUE_FLEXIBLE && T.can_dig_trench(prop?.material?.hardness, using_tool = TOOL_PICK))
 			T.try_dig_trench(user, prop, using_tool = TOOL_PICK)
 
 /decl/interaction_handler/dig/pit

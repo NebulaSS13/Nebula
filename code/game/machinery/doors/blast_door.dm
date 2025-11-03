@@ -36,7 +36,6 @@
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
-	var/decl/material/implicit_material
 	autoset_access = FALSE // Uses different system with buttons.
 	pry_mod = 1.35
 
@@ -54,7 +53,7 @@
 	base_type = /obj/machinery/door/blast
 
 /obj/machinery/door/blast/Initialize()
-	implicit_material = GET_DECL(/decl/material/solid/metal/plasteel)
+	material = GET_DECL(/decl/material/solid/metal/plasteel)
 	. = ..()
 
 /obj/machinery/door/blast/get_examine_strings(mob/user, distance, infix, suffix)
@@ -136,10 +135,6 @@
 		force_open()
 	else
 		force_close()
-
-/obj/machinery/door/blast/get_material()
-	RETURN_TYPE(/decl/material)
-	return implicit_material
 
 // Proc: attackby()
 // Parameters: 2 (used_item - Item this object was clicked with, user - Mob which clicked this object)

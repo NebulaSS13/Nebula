@@ -6,7 +6,6 @@
 	layer = FIRE_LAYER
 	appearance_flags = RESET_COLOR
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-	var/decl/material/material
 
 INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 

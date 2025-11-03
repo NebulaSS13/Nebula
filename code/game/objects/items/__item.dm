@@ -90,8 +90,6 @@
 	/// Assoc list of bodytype category to icon for producing onmob overlays when this item is held or worn.
 	var/list/sprite_sheets
 
-	// Material handling for material weapons (not used by default, unless material is supplied or set)
-	var/decl/material/material                      // Reference to material decl. If set to a string corresponding to a material ID, will init the item with that material.
 	///Will apply the flagged modifications to the object
 	var/material_alteration = MAT_FLAG_ALTERATION_NONE
 	var/anomaly_shielding					   // 0..1 value of how well it shields against xenoarch anomalies

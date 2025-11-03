@@ -293,8 +293,8 @@
 		// Update estimated assembly complexity, taken space and material cost
 		blocks["complexity"] += component.complexity
 		blocks["used_space"] += component.size
-		for(var/material in component.matter)
-			blocks["cost"][material] += component.matter[material]
+		for(var/mat in component.matter)
+			blocks["cost"][mat] += component.matter[mat]
 
 		// Check if the assembly requires printer upgrades
 		if(!(component.spawn_flags & IC_SPAWN_DEFAULT))

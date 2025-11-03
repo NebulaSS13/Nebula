@@ -83,8 +83,8 @@
 		visible_message("[capitalize(english_list(fell_out))] fall out of \the overflowing [src]!")
 
 	for(var/mat in munched_matter)
-		var/decl/material/material = GET_DECL(mat)
-		switch(material.phase_at_temperature())
+		var/decl/material/munched_material = GET_DECL(mat)
+		switch(munched_material.phase_at_temperature())
 			if(MAT_PHASE_SOLID)
 
 				// Dump the material out as a stack.

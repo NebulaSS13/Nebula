@@ -545,25 +545,25 @@ var/global/list/_descriptive_temperature_strings
 	if(!_descriptive_temperature_strings)
 		_descriptive_temperature_strings = list()
 
-		for(var/decl/material/material as anything in decls_repository.get_decls_of_subtype_unassociated(/decl/material))
+		for(var/decl/material/desc_material as anything in decls_repository.get_decls_of_subtype_unassociated(/decl/material))
 
-			if(material.type != material.temperature_burn_milestone_material)
+			if(desc_material.type != desc_material.temperature_burn_milestone_material)
 				continue
 
-			if(!isnull(material.bakes_into_at_temperature) && material.bakes_into_material)
-				var/decl/material/cook = GET_DECL(material.bakes_into_material)
-				global._descriptive_temperature_strings["bake [material.name] into [cook.name]"] = material.bakes_into_at_temperature
+			if(!isnull(desc_material.bakes_into_at_temperature) && desc_material.bakes_into_material)
+				var/decl/material/cook = GET_DECL(desc_material.bakes_into_material)
+				global._descriptive_temperature_strings["bake [desc_material.name] into [cook.name]"] = desc_material.bakes_into_at_temperature
 				continue
 
-			switch(material.phase_at_temperature())
+			switch(desc_material.phase_at_temperature())
 				if(MAT_PHASE_SOLID)
-					if(!isnull(material.ignition_point))
-						global._descriptive_temperature_strings["ignite [material.name]"] = material.ignition_point
-					else if(!isnull(material.melting_point))
-						global._descriptive_temperature_strings["melt [material.name]"] = material.melting_point
+					if(!isnull(desc_material.ignition_point))
+						global._descriptive_temperature_strings["ignite [desc_material.name]"] = desc_material.ignition_point
+					else if(!isnull(desc_material.melting_point))
+						global._descriptive_temperature_strings["melt [desc_material.name]"] = desc_material.melting_point
 				if(MAT_PHASE_LIQUID)
-					if(!isnull(material.boiling_point))
-						global._descriptive_temperature_strings["boil [material.name]"] = material.boiling_point
+					if(!isnull(desc_material.boiling_point))
+						global._descriptive_temperature_strings["boil [desc_material.name]"] = desc_material.boiling_point
 
 	for(var/burn_string in global._descriptive_temperature_strings)
 		if(temperature >= global._descriptive_temperature_strings[burn_string])

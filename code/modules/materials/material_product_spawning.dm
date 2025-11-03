@@ -27,8 +27,8 @@
 			placed.dropInto(target)
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
-/decl/material/proc/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)
-	return create_object(target, 1, /obj/structure/girder, ispath(reinf_material) ? reinf_material : reinf_material?.type)
+/decl/material/proc/place_dismantled_girder(var/turf/target, var/decl/material/r_mat)
+	return create_object(target, 1, /obj/structure/girder, ispath(r_mat) ? r_mat : r_mat?.type)
 
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.

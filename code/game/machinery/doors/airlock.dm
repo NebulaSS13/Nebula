@@ -15,14 +15,12 @@
 	icon_state = "preview"
 	power_channel = ENVIRON
 	interact_offline = FALSE
-
 	explosion_resistance = 10
-
 	base_type = /obj/machinery/door/airlock
 	frame_type = /obj/structure/door_assembly
-
 	icon_state_open   = "open"
 	icon_state_closed = "closed"
+	material = /decl/material/solid/metal/steel
 
 	var/aiControlDisabled = 0 //If 1, AI control is disabled until the AI hacks back in and disables the lock. If 2, the AI has bypassed the lock. If -1, the control is enabled but the AI had bypassed it earlier, so if it is disabled again the AI would have no trouble getting back in.
 	var/hackProof = 0 // if 1, this door can't be hacked by the AI
@@ -42,7 +40,7 @@
 	var/aiDisabledIdScanner = 0
 	var/aiHacking = 0
 	autoclose = 1
-	var/mineral = null
+
 	var/justzap = 0
 	var/safe = 1
 	var/speaker = 1
@@ -75,29 +73,21 @@
 	var/stripe_color = null
 	var/symbol_color = null
 	var/window_color = null
-	var/window_material = /decl/material/solid/glass
 
-	var/fill_file = 'icons/obj/doors/station/fill_steel.dmi'
-	var/color_file = 'icons/obj/doors/station/color.dmi'
-	var/color_fill_file = 'icons/obj/doors/station/fill_color.dmi'
-	var/stripe_file = 'icons/obj/doors/station/stripe.dmi'
-	var/stripe_fill_file = 'icons/obj/doors/station/fill_stripe.dmi'
-	var/glass_file = 'icons/obj/doors/station/fill_glass.dmi'
-	var/bolts_file = 'icons/obj/doors/station/lights_bolts.dmi'
-	var/deny_file = 'icons/obj/doors/station/lights_deny.dmi'
-	var/lights_file = 'icons/obj/doors/station/lights_green.dmi'
-	var/panel_file = 'icons/obj/doors/station/panel.dmi'
+	var/fill_file           = 'icons/obj/doors/station/fill_steel.dmi'
+	var/color_file          = 'icons/obj/doors/station/color.dmi'
+	var/color_fill_file     = 'icons/obj/doors/station/fill_color.dmi'
+	var/stripe_file         = 'icons/obj/doors/station/stripe.dmi'
+	var/stripe_fill_file    = 'icons/obj/doors/station/fill_stripe.dmi'
+	var/glass_file          = 'icons/obj/doors/station/fill_glass.dmi'
+	var/bolts_file          = 'icons/obj/doors/station/lights_bolts.dmi'
+	var/deny_file           = 'icons/obj/doors/station/lights_deny.dmi'
+	var/lights_file         = 'icons/obj/doors/station/lights_green.dmi'
+	var/panel_file          = 'icons/obj/doors/station/panel.dmi'
 	var/sparks_damaged_file = 'icons/obj/doors/station/sparks_damaged.dmi'
-	var/sparks_broken_file = 'icons/obj/doors/station/sparks_broken.dmi'
-	var/welded_file = 'icons/obj/doors/station/welded.dmi'
-	var/emag_file = 'icons/obj/doors/station/emag.dmi'
-
-/obj/machinery/door/airlock/get_material()
-	RETURN_TYPE(/decl/material)
-	return GET_DECL(mineral ? mineral : /decl/material/solid/metal/steel)
-
-/obj/machinery/door/airlock/proc/get_window_material()
-	return GET_DECL(window_material)
+	var/sparks_broken_file  = 'icons/obj/doors/station/sparks_broken.dmi'
+	var/welded_file         = 'icons/obj/doors/station/welded.dmi'
+	var/emag_file           = 'icons/obj/doors/station/emag.dmi'
 
 /obj/machinery/door/airlock/Process()
 	if(main_power_lost_until > 0 && world.time >= main_power_lost_until)
@@ -324,15 +314,15 @@ About the new airlock wires panel:
 
 	set_light(0)
 
-	if(door_color && !(door_color == "none"))
+	if(door_color)
 		var/ikey = "[airlock_type]-[door_color]-color"
 		color_overlay = airlock_icon_cache["[ikey]"]
 		if(!color_overlay)
 			color_overlay = new(color_file)
 			color_overlay.Blend(door_color, ICON_MULTIPLY)
 			airlock_icon_cache["[ikey]"] = color_overlay
-	if(glass)
-		if (window_color && window_color != "none")
+	if(reinf_material)
+		if (window_color)
 			var/ikey = "[airlock_type]-[window_color]-windowcolor"
 			filling_overlay = airlock_icon_cache["[ikey]"]
 			if (!filling_overlay)
@@ -342,7 +332,7 @@ About the new airlock wires panel:
 		else
 			filling_overlay = glass_file
 	else
-		if(door_color && !(door_color == "none"))
+		if(door_color)
 			var/ikey = "[airlock_type]-[door_color]-fillcolor"
 			filling_overlay = airlock_icon_cache["[ikey]"]
 			if(!filling_overlay)
@@ -866,9 +856,8 @@ About the new airlock wires panel:
 	var/obj/structure/door_assembly/da = ..() // Note that we're deleted here already. Don't do unsafe stuff.
 	. = da
 
-	if(mineral)
-		da.glass_material = mineral
-		da.glass = 1
+	if(da.can_install_glass)
+		da.reinf_material = reinf_material
 
 	da.paintable = paintable
 	da.door_color = door_color
@@ -1026,6 +1015,10 @@ About the new airlock wires panel:
 	return ..(M)
 
 /obj/machinery/door/airlock/Initialize(var/mapload, var/d, var/populate_parts = TRUE, obj/structure/door_assembly/assembly = null)
+
+	material = RESOLVE_TO_DECL(material)
+	reinf_material = RESOLVE_TO_DECL(reinf_material)
+
 	. = ..()
 
 	//wires
@@ -1048,27 +1041,22 @@ About the new airlock wires panel:
 	else if(!begins_closed)
 		queue_icon_update()
 
-	if (glass)
+	if(reinf_material)
 		paintable |= PAINT_WINDOW_PAINTABLE
-		if (!window_color)
-			var/decl/material/window = get_window_material()
-			window_color = window.color
+		paint_window(reinf_material.color)
 
 /obj/machinery/door/airlock/inherit_from_assembly(obj/structure/door_assembly/assembly)
 	//if assembly is given, create the new door from the assembly
 	if (..(assembly))
-		var/decl/material/mat = GET_DECL(assembly.glass_material)
-
-		if(assembly.glass == 1) // supposed to use material in this case
-			mineral = assembly.glass_material
-			if(mat.opacity <= 0.7)
-				glass = TRUE
+		if(assembly.reinf_material && assembly.can_install_glass)
+			material = assembly.reinf_material
+			if(assembly.reinf_material.opacity <= 0.7)
 				set_opacity(0)
 				hitsound = 'sound/effects/Glasshit.ogg'
 				max_health = 300
 				explosion_resistance = 5
 			else
-				door_color = mat.color
+				door_color = assembly.reinf_material.color
 		else
 			door_color = assembly.door_color
 
@@ -1076,7 +1064,7 @@ About the new airlock wires panel:
 		if(assembly.created_name)
 			SetName(assembly.created_name)
 		else
-			SetName("[mineral ? "[mat.solid_name || mat.name] airlock" : assembly.base_name]")
+			SetName("[material ? "[material.solid_name || material.name] airlock" : assembly.base_name]")
 
 		paintable = assembly.paintable
 		stripe_color = assembly.stripe_color
@@ -1149,9 +1137,8 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/proc/paint_window(new_color)
 	if (new_color)
 		window_color = new_color
-	else if (window_material)
-		var/decl/material/window = get_window_material()
-		window_color = window.color
+	else if (reinf_material)
+		window_color = reinf_material.color
 	else
 		window_color = GLASS_COLOR
 	queue_icon_update()

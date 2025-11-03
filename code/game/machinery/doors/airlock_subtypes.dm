@@ -11,7 +11,6 @@
 	stripe_color = COLOR_NT_RED
 
 /obj/machinery/door/airlock/engineering
-	name = "Maintenance Hatch"
 	door_color = COLOR_AMBER
 
 /obj/machinery/door/airlock/medical
@@ -27,7 +26,6 @@
 	stripe_color = COLOR_GREEN
 
 /obj/machinery/door/airlock/mining
-	name = "Mining Airlock"
 	door_color = COLOR_PALE_ORANGE
 	stripe_color = COLOR_BEASTY_BROWN
 
@@ -53,24 +51,20 @@
 	stripe_color = COLOR_GRAY20
 
 /obj/machinery/door/airlock/freezer
-	name = "Freezer Airlock"
 	door_color = COLOR_WHITE
 
 /obj/machinery/door/airlock/maintenance
-	name = "Maintenance Access"
 	stripe_color = COLOR_AMBER
 
 
 // Glass airlock presets
-
 /obj/machinery/door/airlock/glass
-	name = "Glass Airlock"
 	icon_state = "preview_glass"
 	hitsound = 'sound/effects/Glasshit.ogg'
 	max_health = 300
 	explosion_resistance = 5
 	opacity = FALSE
-	glass = TRUE
+	reinf_material = /decl/material/solid/glass
 
 /obj/machinery/door/airlock/glass/command
 	door_color = COLOR_COMMAND_BLUE
@@ -120,7 +114,6 @@
 	door_color = COLOR_WHITE
 
 /obj/machinery/door/airlock/glass/maintenance
-	name = "Maintenance Access"
 	stripe_color = COLOR_AMBER
 
 /obj/machinery/door/airlock/glass/civilian
@@ -130,8 +123,7 @@
 // External airlock presets
 
 /obj/machinery/door/airlock/external
-	airlock_type = "External"
-	name = "External Airlock"
+	airlock_type = "external"
 	icon = 'icons/obj/doors/external/door.dmi'
 	fill_file = 'icons/obj/doors/external/fill_steel.dmi'
 	color_file = 'icons/obj/doors/external/color.dmi'
@@ -160,7 +152,6 @@
 		LAZYADD(., access_external_airlocks)
 
 /obj/machinery/door/airlock/external/escapepod
-	name = "Escape Pod"
 	locked = TRUE
 
 /obj/machinery/door/airlock/external/escapepod/attackby(obj/item/used_item, mob/user)
@@ -210,14 +201,12 @@
 
 /obj/machinery/door/airlock/centcom
 	airlock_type = "centcomm"
-	name = "\improper Airlock"
 	icon = 'icons/obj/doors/centcomm/door.dmi'
 	fill_file = 'icons/obj/doors/centcomm/fill_steel.dmi'
 	paintable = PAINT_PAINTABLE|PAINT_STRIPABLE
 
 /obj/machinery/door/airlock/highsecurity
 	airlock_type = "secure"
-	name = "Secure Airlock"
 	icon = 'icons/obj/doors/secure/door.dmi'
 	fill_file = 'icons/obj/doors/secure/fill_steel.dmi'
 	explosion_resistance = 20
@@ -232,7 +221,6 @@
 
 /obj/machinery/door/airlock/hatch
 	airlock_type = "hatch"
-	name = "\improper Airtight Hatch"
 	icon = 'icons/obj/doors/hatch/door.dmi'
 	fill_file = 'icons/obj/doors/hatch/fill_steel.dmi'
 	stripe_file = 'icons/obj/doors/hatch/stripe.dmi'
@@ -249,7 +237,6 @@
 	paintable = PAINT_STRIPABLE
 
 /obj/machinery/door/airlock/hatch/maintenance
-	name = "Maintenance Hatch"
 	stripe_color = COLOR_AMBER
 
 /obj/machinery/door/airlock/hatch/maintenance/bolted
@@ -257,7 +244,6 @@
 
 /obj/machinery/door/airlock/vault
 	airlock_type = "vault"
-	name = "Vault"
 	icon = 'icons/obj/doors/vault/door.dmi'
 	fill_file = 'icons/obj/doors/vault/fill_steel.dmi'
 	explosion_resistance = 20

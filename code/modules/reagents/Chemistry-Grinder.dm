@@ -100,9 +100,9 @@
 		return
 
 	if(istype(used_item,/obj/item/stack/material))
-		var/decl/material/material = used_item.get_material()
-		if(!material)
-			to_chat(user, SPAN_NOTICE("\The [material.solid_name] cannot be ground down to any usable reagents."))
+		var/decl/material/grind_material = used_item.get_material()
+		if(!grind_material)
+			to_chat(user, SPAN_NOTICE("\The [grind_material.solid_name] cannot be ground down to any usable reagents."))
 			return TRUE
 
 	else if(!used_item.reagents?.total_volume)
@@ -203,8 +203,8 @@
 
 		var/obj/item/stack/material/stack = thing
 		if(istype(stack))
-			var/decl/material/material = stack.get_material()
-			if(!material)
+			var/decl/material/grind_material = stack.get_material()
+			if(!grind_material)
 				break
 
 			var/amount_to_take = max(0,min(stack.amount, floor(remaining_volume / REAGENT_UNITS_PER_MATERIAL_SHEET)))
@@ -212,7 +212,7 @@
 				stack.use(amount_to_take)
 				if(QDELETED(stack))
 					holdingitems -= stack
-				beaker.add_to_reagents(material.type, (amount_to_take * REAGENT_UNITS_PER_MATERIAL_SHEET * skill_factor))
+				beaker.add_to_reagents(grind_material.type, (amount_to_take * REAGENT_UNITS_PER_MATERIAL_SHEET * skill_factor))
 				continue
 
 		else if(thing.reagents)

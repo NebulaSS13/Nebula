@@ -30,8 +30,8 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	var/obj/item/debris/scraps/scraps
 	for(var/mat in materials)
 		var/amount = materials[mat]
-		var/decl/material/material_data = GET_DECL(mat)
-		switch(material_data.phase_at_temperature(exposed_temperature, ambient_pressure))
+		var/decl/material/burn_material = GET_DECL(mat)
+		switch(burn_material.phase_at_temperature(exposed_temperature, ambient_pressure))
 
 			if(MAT_PHASE_SOLID)
 				if(!scraps)

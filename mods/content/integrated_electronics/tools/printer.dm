@@ -49,14 +49,14 @@
 /obj/item/integrated_circuit_printer/proc/recycle(obj/item/used_item, mob/user, obj/item/electronic_assembly/assembly)
 	if(!used_item.canremove) //in case we have an augment circuit
 		return
-	for(var/material in used_item.matter)
-		if(materials[material] + used_item.matter[material] > metal_max)
-			var/decl/material/material_datum = GET_DECL(material)
-			if(material_datum)
-				to_chat(user, "<span class='notice'>[src] can't hold any more [material_datum.name]!</span>")
+	for(var/mat in used_item.matter)
+		if(materials[mat] + used_item.matter[mat] > metal_max)
+			var/decl/material/recycle_material = GET_DECL(mat)
+			if(recycle_material)
+				to_chat(user, "<span class='notice'>[src] can't hold any more [recycle_material.name]!</span>")
 			return
-	for(var/material in used_item.matter)
-		materials[material] += used_item.matter[material]
+	for(var/mat in used_item.matter)
+		materials[mat] += used_item.matter[mat]
 	if(assembly)
 		assembly.remove_component(used_item)
 	if(user)
@@ -152,9 +152,9 @@
 	else
 		HTML += "Materials: "
 		var/list/dat = list()
-		for(var/material in materials)
-			var/decl/material/material_datum = GET_DECL(material)
-			dat += "[materials[material]]/[metal_max] [material_datum.name]"
+		for(var/mat in materials)
+			var/decl/material/print_material = GET_DECL(mat)
+			dat += "[materials[mat]]/[metal_max] [print_material.name]"
 		HTML += jointext(dat, "; ")
 		HTML += ".<br><br>"
 
@@ -296,8 +296,8 @@
 					if(!subtract_material_costs(cost, usr))
 						return
 					var/cloning_time = 0
-					for(var/material in cost)
-						cloning_time += cost[material]
+					for(var/mat in cost)
+						cloning_time += cost[mat]
 					cloning_time = round(cloning_time/15)
 					cloning_time = min(cloning_time, MAX_CIRCUIT_CLONE_TIME)
 					cloning = TRUE
@@ -313,19 +313,19 @@
 				to_chat(usr, "<span class='notice'>Cloning has been canceled. Cost has been refunded.</span>")
 				cloning = FALSE
 				var/cost = program["cost"]
-				for(var/material in cost)
-					materials[material] = min(metal_max, materials[material] + cost[material])
+				for(var/mat in cost)
+					materials[mat] = min(metal_max, materials[mat] + cost[mat])
 
 	interact(usr)
 
 /obj/item/integrated_circuit_printer/proc/subtract_material_costs(var/list/cost, var/mob/user)
-	for(var/material in cost)
-		if(materials[material] < cost[material])
-			var/decl/material/material_datum = GET_DECL(material)
-			to_chat(user, "<span class='warning'>You need [cost[material]] [material_datum.name] to build that!</span>")
+	for(var/mat in cost)
+		if(materials[mat] < cost[mat])
+			var/decl/material/print_material = GET_DECL(mat)
+			to_chat(user, "<span class='warning'>You need [cost[mat]] [print_material.name] to build that!</span>")
 			return FALSE
-	for(var/material in cost) //Iterate twice to make sure it's going to work before deducting
-		materials[material] -= cost[material]
+	for(var/mat in cost) //Iterate twice to make sure it's going to work before deducting
+		materials[mat] -= cost[mat]
 	return TRUE
 
 // FUKKEN UPGRADE DISKS

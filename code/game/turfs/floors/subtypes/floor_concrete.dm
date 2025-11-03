@@ -4,7 +4,7 @@
 	icon_state     = "inset"
 	_flooring      = /decl/flooring/concrete
 	_base_flooring = /decl/flooring/dirt
-	floor_material = /decl/material/solid/stone/concrete
+	material       = /decl/material/solid/stone/concrete
 
 /turf/floor/concrete/smooth
 	icon_state     = "concrete"

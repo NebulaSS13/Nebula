@@ -1,15 +1,9 @@
 /obj/structure
-	var/decl/material/material
-	var/decl/material/reinf_material
 	var/material_alteration
 	var/dismantled
 	var/name_prefix
 	/// The base alpha used to calculate material-based alpha in update_material_color().
 	var/base_alpha = 50
-
-/obj/structure/get_material()
-	RETURN_TYPE(/decl/material)
-	return material
 
 /obj/structure/proc/get_material_health_modifier()
 	. = 1
