@@ -5,7 +5,7 @@
 	icon_state = "hydrotray3"
 	density = TRUE
 	anchored = TRUE
-	air_volume = 100
+	gas_volume = 100
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0

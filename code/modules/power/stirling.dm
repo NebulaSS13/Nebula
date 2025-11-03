@@ -225,7 +225,7 @@
 	slot_flags = null
 	starting_pressure = list(/decl/material/gas/hydrogen = 2 ATM)
 
-	air_volume = 30
+	gas_volume = 30
 	failure_temp = 1000
 
 /obj/item/tank/stirling/Initialize()

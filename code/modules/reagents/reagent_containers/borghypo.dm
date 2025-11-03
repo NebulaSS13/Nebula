@@ -13,7 +13,7 @@
 	var/recharge_time = 5 //Time it takes for shots to recharge (in seconds)
 
 /obj/item/chems/borghypo/Initialize()
-	volume *= length(get_generated_reagents())
+	chem_volume *= length(get_generated_reagents())
 	. = ..()
 
 /obj/item/chems/borghypo/proc/get_generated_reagents()

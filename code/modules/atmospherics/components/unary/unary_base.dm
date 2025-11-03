@@ -19,7 +19,7 @@
 
 /obj/machinery/atmospherics/unary/Initialize()
 	air_contents = new
-	air_contents.air_volume = 200
+	air_contents.total_volume = 200
 	if(controlled)
 		reset_area(null, get_area(src))
 	. = ..()
