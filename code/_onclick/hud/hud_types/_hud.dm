@@ -99,8 +99,6 @@
 	VAR_PRIVATE/obj/screen/gun/item/gun_item_use_toggle
 	VAR_PRIVATE/obj/screen/gun/radio/gun_radio_use_toggle
 
-	var/offset_hands_vertically = TRUE
-
 /datum/hud/New(mob/_owner)
 	if(istype(_owner))
 		owner = weakref(_owner)
@@ -353,30 +351,18 @@
 			qdel(inv_box)
 
 	// Rebuild offsets for the hand elements.
+	var/const/elems_per_row = 4
 	var/hand_y_offset = 21
 	var/list/elements = hud_elements_hands?.Copy()
-	if(length(elements))
-		if(offset_hands_vertically)
-			while(length(elements))
-				var/copy_index = min(length(elements), 2)+1
-				var/list/sublist = elements.Copy(1, copy_index)
-				elements.Cut(1, copy_index)
-				var/obj/screen/inventory/inv_box
-				if(length(sublist) == 1)
-					inv_box = sublist[1]
-					inv_box.screen_loc = "CENTER,BOTTOM:[hand_y_offset]"
-				else
-					inv_box = sublist[1]
-					inv_box.screen_loc = "CENTER:-[world.icon_size/2],BOTTOM:[hand_y_offset]"
-					inv_box = sublist[2]
-					inv_box.screen_loc = "CENTER:[world.icon_size/2],BOTTOM:[hand_y_offset]"
-				hand_y_offset += world.icon_size
-		else
-			var/hand_x_offset = -((length(elements) * world.icon_size) / 2) + (world.icon_size/2)
-			for(var/obj/screen/inventory/inv_box in elements)
-				inv_box.screen_loc = "CENTER:[hand_x_offset],BOTTOM:[hand_y_offset]"
-				hand_x_offset += world.icon_size
-			hand_y_offset += world.icon_size
+	while(length(elements))
+		var/copy_index = min(length(elements), elems_per_row)+1
+		var/list/sublist = elements.Copy(1, copy_index)
+		elements.Cut(1, copy_index)
+		var/hand_x_offset = (world.icon_size/2) * (1 - length(sublist))
+		for(var/obj/screen/inventory/inv_box in sublist)
+			inv_box.screen_loc = "CENTER:[hand_x_offset],BOTTOM:[hand_y_offset]"
+			hand_x_offset += world.icon_size
+		hand_y_offset += world.icon_size
 
 	if(mymob.client && islist(hud_elements_hands) && length(hud_elements_hands))
 		mymob.client.screen |= hud_elements_hands
