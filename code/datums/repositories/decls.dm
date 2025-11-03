@@ -20,6 +20,12 @@
 
 var/global/repository/decls/decls_repository = new
 
+/proc/resolve_decl_uid_list(list/decl_uids)
+	for(var/uid in decl_uids)
+		var/decl/decl = decls_repository.get_decl_by_id(uid)
+		if(istype(decl))
+			LAZYADD(., decl)
+
 /repository/decls
 	var/list/fetched_decls =                 list()
 	var/list/fetched_decl_ids =              list()

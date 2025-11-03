@@ -34,6 +34,11 @@
 
 	set_turf_materials(floor_material, skip_update = TRUE)
 
+	if(istext(_flooring))
+		_flooring = resolve_decl_uid_list(cached_json_decode(_flooring))
+		if(!length(_flooring))
+			_flooring = null
+
 	if(!floortype && (ispath(_flooring) || islist(_flooring)))
 		floortype = _flooring
 	else
@@ -48,7 +53,6 @@
 		update_from_flooring(skip_update = ml)
 		if(ml) // We skipped the update above to avoid updating our neighbors, but we need to update ourselves.
 			lazy_update_icon()
-
 
 /turf/floor/ChangeTurf(turf/N, tell_universe, force_lighting_update, keep_air, update_open_turfs_above, keep_height)
 	if(is_processing)
