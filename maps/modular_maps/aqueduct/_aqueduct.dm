@@ -46,9 +46,9 @@
 		/datum/map_template/modular/aqueduct/bridge/horizontal_n,
 		/datum/map_template/modular/aqueduct/bridge/horizontal_s
 	)
-	post_run_generators = list(
-		/datum/random_map/noise/aqueducts
-	)
+//	post_run_generators = list(
+//		/datum/random_map/noise/aqueducts
+//	)
 
 /datum/random_map/noise/aqueducts
 	descriptor = "aqueducts (modular map)"
@@ -78,10 +78,10 @@
 
 /datum/map_template/modular/aqueduct/junction/New()
 	cell_connections = list(
-		new /datum/mm_connection("NORTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
-		new /datum/mm_connection("SOUTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
-		new /datum/mm_connection("EAST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
-		new /datum/mm_connection("WEST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
+		new /datum/mm_connection("NORTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
+		new /datum/mm_connection("SOUTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
+		new /datum/mm_connection("EAST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
+		new /datum/mm_connection("WEST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
 	)
 	..()
 
@@ -92,8 +92,8 @@
 
 /datum/map_template/modular/aqueduct/ne/New()
 	cell_connections = list(
-		new /datum/mm_connection("NORTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
-		new /datum/mm_connection("EAST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
+		new /datum/mm_connection("NORTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
+		new /datum/mm_connection("EAST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
 	)
 	..()
 
@@ -104,8 +104,8 @@
 
 /datum/map_template/modular/aqueduct/nw/New()
 	cell_connections = list(
-		new /datum/mm_connection("NORTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
-		new /datum/mm_connection("WEST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
+		new /datum/mm_connection("NORTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
+		new /datum/mm_connection("WEST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
 	)
 	..()
 
@@ -116,8 +116,8 @@
 
 /datum/map_template/modular/aqueduct/se/New()
 	cell_connections = list(
-		new /datum/mm_connection("SOUTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
-		new /datum/mm_connection("EAST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
+		new /datum/mm_connection("SOUTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
+		new /datum/mm_connection("EAST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
 	)
 	..()
 
@@ -128,8 +128,8 @@
 
 /datum/map_template/modular/aqueduct/sw/New()
 	cell_connections = list(
-		new /datum/mm_connection("SOUTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
-		new /datum/mm_connection("WEST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
+		new /datum/mm_connection("SOUTH", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
+		new /datum/mm_connection("WEST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM | MCF_HALL_BEND)),
 	)
 	..()
 

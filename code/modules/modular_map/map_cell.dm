@@ -2,6 +2,8 @@
 /datum/mm_cell
 	var/cell_x
 	var/cell_y
+	var/offset_x
+	var/offset_y
 	var/datum/mm_cell/owner
 	var/datum/map_template/modular/template
 	var/generation
@@ -9,6 +11,7 @@
 	var/marked_for_refresh
 
 	VAR_PRIVATE/list/_open_connections
+	VAR_PRIVATE/list/_all_connections
 
 /datum/mm_cell/Destroy()
 	LAZYCLEARLIST(_open_connections)
@@ -18,27 +21,16 @@
 /datum/mm_cell/New(datum/mm_run/_run, _x, _y, _template, datum/mm_cell/_owner, _generation, _ox, _oy)
 	cell_x      = _x
 	cell_y      = _y
+	offset_x    = _ox
+	offset_y    = _oy
 	template    = _template
 	generation  = _generation
 	owner       = _owner
 	// Initially assume all non-internal connections are freed; cell placement logic will close connections that are blocked by our placement.
-	// Note for future self that dummy connections do need to be considered open/closed in order to avoid unterminated rooms being
-	// placed such that they 'connect' to blank walls.
-	// Realising after writing this that it might be totally unnecessary as templates already don't generate internal connections. Ough.
-	var/ox = _x - _ox
-	var/oy = _y - _oy
-	var/mx = ox + (template.cell_width-1)
-	var/my = oy + (template.cell_height-1)
 	for(var/datum/mm_connection/connection in template.cell_connections)
-		if(connection.offset_x != _ox || connection.offset_y != _oy)
-			continue
-		var/tx = _x + connection.target_x
-		var/ty = _y + connection.target_y
-		if(tx < 0 || tx > _run.g_mx || ty < 0 || ty > _run.g_my)
-			continue
-		if((tx >= ox && tx < mx && ty >= oy && ty < my))
-			continue
-		open_connection(connection)
+		if(connection.offset_x == _ox && connection.offset_y == _oy)
+			LAZYDISTINCTADD(_all_connections, connection)
+			open_connection(connection)
 
 /datum/mm_cell/proc/get_open_connections(exclude_flags)
 	if(isnull(exclude_flags))
@@ -52,4 +44,5 @@
 	LAZYREMOVE(_open_connections, connection)
 
 /datum/mm_cell/proc/open_connection(connection)
-	LAZYDISTINCTADD(_open_connections, connection)
+	if(connection in _all_connections)
+		LAZYDISTINCTADD(_open_connections, connection)

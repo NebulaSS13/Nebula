@@ -93,12 +93,12 @@
 			if(!islist(templates))
 				continue
 			// Randomise template order to avoid always placing a northeast corner or whatever.
-			templates = templates.Copy()
+			templates = shuffle(templates)
 			for(var/datum/map_template/modular/template in templates)
 				if(template.is_terminator)
 					terminators += template
 					templates -= terminators
-			connection = attempt_place_templates(shuffle(templates), connection, cell, node, permit_dangling_connections, permit_cycles)
+			connection = attempt_place_templates(templates, connection, cell, node, permit_dangling_connections, permit_cycles)
 			if(!connection)
 				break
 			CHECK_TICK
@@ -113,6 +113,10 @@
 		CHECK_TICK
 
 /datum/mm_run/proc/attempt_place_templates(list/templates, datum/mm_connection/connection, datum/mm_cell/cell, datum/mm_node/node, permit_dangling_connections, permit_cycles)
+
+	// The cell is the origin point of the cell, so don't add offset.
+	var/connection_x = (cell.cell_x + connection.target_x)
+	var/connection_y = (cell.cell_y + connection.target_y)
 
 	var/sanity = LOOP_SANITY
 	while(length(templates) && sanity)
@@ -136,27 +140,19 @@
 			continue
 
 		possible_connections = shuffle(possible_connections)
-		var/connection_x = (cell.cell_x + connection.target_x)
-		var/connection_y = (cell.cell_y + connection.target_y)
 		for(var/datum/mm_connection/possible_connection in possible_connections)
 			// Get base template origin coords, then adjust for template size.
 			var/place_x = connection_x
 			var/place_y = connection_y
 			// Note to future self: cell width/height are absolute, not an offset, hence -1.
 			switch(connection.direction_string)
-				if("NORTH")
-					place_x -= possible_connection.offset_x
 				if("SOUTH")
-					place_x -= possible_connection.offset_x
 					place_y -= (template.cell_height-1)
-				if("EAST")
-					place_y -= possible_connection.offset_y
 				if("WEST")
 					place_x -= (template.cell_width-1)
-					place_y -= possible_connection.offset_y
 
 			// Immediately out of bounds, no thank you.
-			if(place_x < 1 || place_y < 1)
+			if(place_x < 0 || place_y < 0)
 				continue
 
 			CHECK_TICK

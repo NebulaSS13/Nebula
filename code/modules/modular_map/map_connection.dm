@@ -60,3 +60,5 @@
 			target_x = -1
 
 	connection_flags = _connect
+
+/datum/mm_connection/closed // just making a stub type for ease of debugging

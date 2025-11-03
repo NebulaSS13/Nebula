@@ -59,6 +59,6 @@
 			for(var/connection_dir in connection_dirs)
 				if(connection_dir in existing_coords[coord])
 					continue
-				var/datum/mm_connection/new_conn = new(connection_dir, x, y, (MCF_BLOCKER))
+				var/datum/mm_connection/closed/new_conn = new(connection_dir, x, y, (MCF_BLOCKER))
 				new_conn.template = src
 				cell_connections += new_conn
