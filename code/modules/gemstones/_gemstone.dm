@@ -38,7 +38,7 @@ var/global/list/_available_gemstone_cuts
 	. = ..() * cut.worth_multiplier
 
 /obj/item/gemstone/attackby(obj/item/used_item, mob/user)
-	if(IS_HAMMER(used_item) && !user.check_intent(I_FLAG_HARM)) // TOOL_CHISEL when?
+	if(IS_CHISEL(used_item) && !user.check_intent(I_FLAG_HARM))
 		if(!cut.can_attempt_cut)
 			to_chat(user, SPAN_WARNING("\The [src] has already been cut."))
 			return TRUE

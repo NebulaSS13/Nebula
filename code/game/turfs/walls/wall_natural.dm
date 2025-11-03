@@ -1,3 +1,5 @@
+var/global/_wall_chisel_skill = SKILL_CONSTRUCTION
+
 /turf/wall/natural
 	icon_state         = "natural"
 	desc               = "A rough natural wall."
@@ -11,6 +13,8 @@
 	var/static/list/exterior_wall_shine_cache = list()
 	var/being_mined = FALSE
 	var/gem_dropped = FALSE
+	var/smoothed
+	var/list/engravings
 
 /turf/wall/natural/flooded
 	flooded = /decl/material/liquid/water
@@ -20,7 +24,7 @@
 	return SPAN_NOTICE("It has been <font color = '[paint_color]'>noticeably discoloured</font> by the elements.")
 
 /turf/wall/natural/get_wall_icon()
-	return 'icons/turf/walls/natural.dmi'
+	return (smoothed && !ramp_slope_direction) ? 'icons/turf/walls/stone.dmi' : 'icons/turf/walls/natural.dmi'
 
 /turf/wall/natural/Initialize(var/ml, var/materialtype, var/rmaterialtype)
 	. = ..()
@@ -49,6 +53,11 @@
 	if(!ramp_slope_direction)
 		update_neighboring_ramps(destroying_self = TRUE)
 	. = ..()
+
+/turf/wall/natural/proc/get_engraving_for_dir(facing_dir)
+	for(var/datum/engraving/engraving in engravings)
+		if(engraving.dir == facing_dir)
+			return engraving
 
 /turf/wall/natural/attack_hand(mob/user)
 
@@ -102,12 +111,39 @@
 	return FALSE
 
 /turf/wall/natural/update_strings()
+	var/modifier
+	if(length(engravings))
+		modifier = "engraved"
+	else if(smoothed)
+		if(reinf_material)
+			modifier = "polished"
+		else
+			modifier = "smooth"
+	else if(!reinf_material)
+		modifier = "natural"
+
 	if(reinf_material)
-		SetName("[reinf_material.ore_name] deposit")
-		desc = "A natural cliff face composed of bare [material.solid_name] and a deposit of [reinf_material.ore_name]."
+		if(modifier)
+			SetName("[modifier] [reinf_material.ore_name] deposit")
+		else
+			SetName("[reinf_material.ore_name] deposit")
+		desc = "A natural wall composed of bare [material.solid_name] and a deposit of [reinf_material.ore_name]."
 	else
-		SetName("natural [material.solid_name] wall")
-		desc = "A natural cliff face composed of bare [material.solid_name]."
+		SetName("[modifier] [material.solid_name] wall")
+		desc = "A natural wall composed of bare [material.solid_name]."
+
+/turf/wall/natural/get_examine_strings(mob/user, distance, infix, suffix)
+	. = ..()
+	if(length(engravings))
+		for(var/datum/engraving/engraving in engravings)
+			var/engraving_line
+			if(engraving.name)
+				engraving_line = "It has been engraved with \a [engraving.name]."
+			else
+				engraving_line = "It has been engraved."
+			if(engraving.desc)
+				engraving_line = "[engraving_line] [engraving.desc]"
+			. += engraving_line
 
 /turf/wall/natural/update_material(var/update_neighbors)
 	if(reinf_material?.ore_icon_overlay)

@@ -880,7 +880,7 @@
 	name = "Show Turf Contents"
 	expected_user_type = /mob
 	interaction_flags = 0
-	examine_desc = "list everything on $TARGET_THEM$"
+	examine_desc = "list everything on the turf"
 
 /decl/interaction_handler/show_turf_contents/invoked(atom/target, mob/user, obj/item/prop)
 	target.show_atom_list_for_turf(user, get_turf(target))

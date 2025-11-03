@@ -17,6 +17,7 @@
 #define TOOL_PEN            /decl/tool_archetype/pen
 #define TOOL_STAMP          /decl/tool_archetype/stamp
 #define TOOL_SHEARS         /decl/tool_archetype/shears
+#define TOOL_CHISEL         /decl/tool_archetype/chisel
 
 // Surgical tools.
 #define TOOL_SCALPEL        /decl/tool_archetype/scalpel
@@ -63,7 +64,7 @@
 #define IS_HAMMER(A)      IS_TOOL(A, TOOL_HAMMER)
 #define IS_HOE(A)         IS_TOOL(A, TOOL_HOE)
 #define IS_SHEARS(A)      IS_TOOL(A, TOOL_SHEARS)
-
+#define IS_CHISEL(A)      IS_TOOL(A, TOOL_CHISEL)
 #define IS_HEMOSTAT(A)    IS_TOOL(A, TOOL_HEMOSTAT)
 #define IS_RETRACTOR(A)   IS_TOOL(A, TOOL_RETRACTOR)
 

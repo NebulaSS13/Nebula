@@ -1,5 +1,5 @@
-#ifndef MODPACK_FANTASY_SPECIES
-#define MODPACK_FANTASY_SPECIES
+#ifndef MODPACK_FANTASY
+#define MODPACK_FANTASY
 // BEGIN_INCLUDE
 #include "_fantasy.dm"
 #include "turfs.dm"

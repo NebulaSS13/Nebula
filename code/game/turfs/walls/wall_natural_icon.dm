@@ -92,3 +92,24 @@
 		add_overlay(excav_overlay)
 	if(archaeo_overlay)
 		add_overlay(archaeo_overlay)
+
+	// Might be worth having a dedicated wall engraving icon set in the future instead of using the banner/sign symbols.
+	// That would let us avoid this offsetting stuff and make the icons look less wonky on foreshortened faces.
+	for(var/datum/engraving/engraving in engravings)
+		// Not aware of a nice way to handle this. Would like to use BLEND_INSET_OVERLAY but we need BLEND_MULTIPLY.
+		if(engraving.dir == NORTH || !engraving.icon || !engraving.icon_state)
+			continue
+
+		var/y_offset = 9
+		var/x_offset = 0
+		if(engraving.dir == SOUTH)
+			y_offset = 0
+		else if(engraving.dir == EAST)
+			x_offset = -1
+		else if(engraving.dir == WEST)
+			x_offset = 1
+
+		var/image/eng = image(icon = engraving.icon, icon_state = engraving.icon_state, dir = engraving.dir, pixel_x = x_offset, pixel_y = y_offset)
+		eng.blend_mode = BLEND_MULTIPLY
+		add_overlay(eng)
+
