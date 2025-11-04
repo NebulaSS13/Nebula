@@ -62,3 +62,9 @@
 #define GROWTH_VINES      		  "vines"
 #define GROWTH_BIOMASS         	  "mass"
 #define GROWTH_MOLD          	  "mold"
+
+#define PLANT_SEG_BODY "body" // Non-dissectable plants
+
+#define PLANT_STATE_FRESH   "fresh"
+#define PLANT_STATE_ROASTED "roasted"
+#define PLANT_STATE_DRIED   "dried"

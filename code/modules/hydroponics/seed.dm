@@ -15,9 +15,6 @@
 	var/growth_stages = 0          // Number of stages the plant passes through before it is mature.
 	var/list/_traits               // Initialized in New()
 	var/list/mutants               // Possible predefined mutant varieties, if any.
-	var/list/chems                 // Chemicals that plant produces in products/injects into victim.
-	var/list/dried_chems           // Chemicals that a dried plant product will have.
-	var/list/roasted_chems         // Chemicals that a roasted/grilled plant product will have.
 	var/list/consume_gasses        // The plant will absorb these gasses during its life.
 	var/list/exude_gasses          // The plant will exude these gasses during its life.
 	var/grown_tag                  // Used by the reagent grinder.
@@ -100,8 +97,9 @@
 		return
 
 	var/datum/reagents/R = new/datum/reagents(100, global.temp_reagents_holder)
-	if(chems.len)
-		for(var/rid in chems)
+	var/list/seed_chems = get_chemical_composition()
+	if(length(seed_chems))
+		for(var/rid in seed_chems)
 			var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/3))
 			R.add_reagent(rid,injecting)
 
@@ -157,7 +155,8 @@
 		return
 
 	var/list/external_organs = target.get_external_organs()
-	if(chems && chems.len && target.reagents && LAZYLEN(external_organs))
+	var/list/seed_chems = get_chemical_composition()
+	if(length(seed_chems) && target.reagents && LAZYLEN(external_organs))
 
 		var/obj/item/organ/external/affecting = pick(external_organs)
 		for(var/slot in global.standard_clothing_slots)
@@ -170,7 +169,7 @@
 
 		if(affecting)
 			to_chat(target, "<span class='danger'>You are stung by \the [fruit] in your [affecting.name]!</span>")
-			for(var/rid in chems)
+			for(var/rid in seed_chems)
 				var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/5))
 				target.add_to_reagents(rid,injecting)
 		else
@@ -213,16 +212,18 @@
 	if(!splat_reagents?.maximum_volume) // if thrown doesn't exist or has no reagents, use the seed's default reagents.
 		splat_reagents = new /datum/reagents(INFINITY, global.temp_reagents_holder)
 		var/potency = get_trait(TRAIT_POTENCY)
-		for(var/rid in chems)
-			var/list/reagent_amounts = chems[rid]
-			if(LAZYLEN(reagent_amounts))
-				var/rtotal = reagent_amounts[1]
-				var/list/data = null
-				if(reagent_amounts?[2] && potency > 0)
-					rtotal += round(potency/reagent_amounts[2])
-				if(rid == /decl/material/liquid/nutriment)
-					LAZYSET(data, product_name, max(1,rtotal))
-				splat_reagents.add_reagent(rid,max(1,rtotal),data)
+		var/list/seed_chems = get_chemical_composition()
+		if(length(seed_chems))
+			for(var/rid in seed_chems)
+				var/list/reagent_amounts = seed_chems[rid]
+				if(LAZYLEN(reagent_amounts))
+					var/rtotal = reagent_amounts[1]
+					var/list/data = null
+					if(reagent_amounts?[2] && potency > 0)
+						rtotal += round(potency/reagent_amounts[2])
+					if(rid == /decl/material/liquid/nutriment)
+						LAZYSET(data, product_name, max(1,rtotal))
+					splat_reagents.add_reagent(rid,max(1,rtotal),data)
 	if(splat_reagents)
 		var/splat_range = min(10,max(1,get_trait(TRAIT_POTENCY)/15))
 		splat_reagents.splash_area(T, range = splat_range)
@@ -442,14 +443,14 @@
 			gasses -= gas
 			LAZYSET(exude_gasses, gas, rand(3,9))
 
-	chems = list()
+	clear_chemical_composition()
 	if(prob(80))
-		chems[/decl/material/liquid/nutriment] = list(rand(1,10),rand(10,20))
+		set_chemical_amount(/decl/material/liquid/nutriment, list(rand(1,10),rand(10,20)))
 	if(length(liquids))
 		for(var/x = 1 to rand(0, 5))
 			var/new_chem = pickweight(liquids)
 			liquids -= new_chem
-			chems[new_chem] = list(rand(1,10), rand(10,20))
+			set_chemical_amount(new_chem, list(rand(1,10),rand(10,20)))
 
 	if(prob(90))
 		set_trait(TRAIT_REQUIRES_NUTRIENTS,1)
@@ -680,8 +681,8 @@
 	new_seed.product_type     = product_type
 
 	//Copy over everything else.
+	new_seed.copy_chemical_composition(src)
 	if(mutants)        new_seed.mutants = mutants.Copy()
-	if(chems)          new_seed.chems = chems.Copy()
 	if(consume_gasses) new_seed.consume_gasses = consume_gasses.Copy()
 	if(exude_gasses)   new_seed.exude_gasses = exude_gasses.Copy()
 
@@ -750,9 +751,9 @@
 	//Seed traits
 	clone._traits          = deepCopyList(_traits)
 	clone.mutants          = mutants?.Copy()
-	clone.chems            = chems?.Copy()
 	clone.consume_gasses   = consume_gasses?.Copy()
 	clone.exude_gasses     = exude_gasses?.Copy()
+	clone.copy_chemical_composition(src)
 
 	//Appearence
 	clone.growth_stages    = growth_stages
