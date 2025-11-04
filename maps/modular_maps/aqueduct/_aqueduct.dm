@@ -1,6 +1,7 @@
 /decl/modular_map_generator/aqueduct
 	name = "Aqueducts"
 	grid_cell_size = 9
+	maximum_paths = 2
 	cell_templates = list(
 		/datum/map_template/modular/aqueduct/chamber/large,
 		/datum/map_template/modular/aqueduct/chamber/small_n,

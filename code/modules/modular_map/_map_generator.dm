@@ -31,16 +31,17 @@
 	/// Vertical gutter for placement on the actual map.
 	var/border_y = 8
 	// Whether or not the final grid can have trailing connections.
-	var/do_trim_trailing_connections = FALSE
+	var/do_trim_trailing_connections = TRUE
 	// Number of cells with trailing connections after which to apply the trim multiplier.
 	var/trailing_connection_trim_threshold = 1 // 50
 	// Amount of cells with trailing connections to prune each run.
 	var/trailing_connection_trim_multiplier = 1 // 0.65
-
 	/// Maps without at least one path of this length or more will fail to validate.
 	var/min_path_length = 0 //50
 	/// Assoc list of template type to cell coordinate to place instead of a random initial template
 	var/list/mandatory_templates
+	/// How many isolated paths can the final map have?
+	var/maximum_paths = 1
 
 /decl/modular_map_generator/proc/validate_template(template_type, datum/map_template/modular/template)
 	if(!istype(template))

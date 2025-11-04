@@ -41,7 +41,7 @@
 	log_debug("Starting with [length(_nodes)] node\s and bounds [g_mx],[g_my] on z[g_pz].")
 	// Main meat of the generator is in this proc.
 	try
-		build_from_nodes(permit_cycles = TRUE) // TODO: FALSE
+		build_from_nodes(permit_cycles = FALSE)
 		log_debug("Initial run finished with [length(_nodes)] pending node\s, [get_dangling_connection_count(ignore_origin_cells = FALSE)] dangling connection\s, and [get_grid_count()] occupied cells.")
 	catch(var/exception/E)
 		log_error("Exception during modular map run: [EXCEPTION_TEXT(E)]")
@@ -56,7 +56,7 @@
 			trim_dangling_connections(++sanity)
 		if(sanity > MAX_TRAILING_PASS)
 			log_debug("Failed to generate [generator.name] in [(world.time - gen_started)/10] second\s: exceeded trailing connection pruning max pass.")
-			return FALSE
+			//return FALSE
 
 	var/list/paths = resolve_isolated_paths()
 	var/failure_reason = validate_run(paths)
@@ -70,47 +70,60 @@
 /datum/mm_run/proc/build_from_nodes(permit_dangling_connections = TRUE, permit_cycles = TRUE)
 
 	var/sanity = LOOP_SANITY
-	while(length(_nodes) && sanity)
+	while(length(_nodes))
 
-		// TODO: consider iterating all nodes of the highest gen as a group before moving on to the next highest.
-		// Pick one of our remaining connections.
-		var/datum/mm_node/node             = _nodes[1]
-		var/datum/mm_connection/connection = node.connection
-		var/datum/mm_cell/cell             = node.cell
-		_nodes.Cut(1, 2)
+		var/list/nodes_to_iterate = list()
+		var/node_gen = null
+		var/node_index = 1
 
-
-		// We do not apply terminators on the first run.
-		var/list/terminators = list()
-
-		// Try to find a template that we can connect to this spot.
-		for(var/connection_flag in shuffle(global._mcf_flags))
-			// Flag not present in this connection's flags.
-			if(!(connection.connection_flags & connection_flag))
-				continue
-			// Determine the bottom-left corner of the space needed to fit this template from this connection.
-			var/list/templates = generator.templates_by_category[num2text(connection_flag)]
-			if(!islist(templates))
-				continue
-			// Randomise template order to avoid always placing a northeast corner or whatever.
-			templates = shuffle(templates)
-			for(var/datum/map_template/modular/template in templates)
-				if(template.is_terminator)
-					terminators += template
-					templates -= terminators
-			connection = attempt_place_templates(templates, connection, cell, node, permit_dangling_connections, permit_cycles)
-			if(!connection)
+		while(node_index <= length(_nodes))
+			var/datum/mm_node/node = _nodes[node_index++]
+			if(isnull(node_gen) || node.generation == node_gen)
+				nodes_to_iterate += node
+				_nodes -= node
+			else
 				break
+
+		while(length(nodes_to_iterate) && sanity)
+
+			// Pick one of our remaining connections.
+			var/datum/mm_node/node             = nodes_to_iterate[1]
+			var/datum/mm_connection/connection = node.connection
+			var/datum/mm_cell/cell             = node.cell
+			nodes_to_iterate.Cut(1, 2)
+
+
+			// We do not apply terminators on the first run.
+			var/list/terminators = list()
+
+			// Try to find a template that we can connect to this spot.
+			for(var/connection_flag in shuffle(global._mcf_flags))
+				// Flag not present in this connection's flags.
+				if(!(connection.connection_flags & connection_flag))
+					continue
+				// Determine the bottom-left corner of the space needed to fit this template from this connection.
+				var/list/templates = generator.templates_by_category[num2text(connection_flag)]
+				if(!islist(templates))
+					continue
+				// Randomise template order to avoid always placing a northeast corner or whatever.
+				templates = shuffle(templates)
+				for(var/datum/map_template/modular/template in templates)
+					if(template.is_terminator)
+						terminators += template
+						templates -= terminators
+				connection = attempt_place_templates(templates, connection, cell, node, permit_dangling_connections, permit_cycles)
+				if(!connection)
+					break
+				CHECK_TICK
+
+			// Connection is not null and we have terminators, so try to place one of those.
+			if(connection && length(terminators))
+				connection = attempt_place_templates(shuffle(terminators), connection, cell, node, permit_dangling_connections, permit_cycles)
+			sanity--
+
+			if(!QDELETED(node))
+				qdel(node)
 			CHECK_TICK
-
-		// Connection is not null and we have terminators, so try to place one of those.
-		if(connection && length(terminators))
-			connection = attempt_place_templates(shuffle(terminators), connection, cell, node, permit_dangling_connections, permit_cycles)
-		sanity--
-
-		if(!QDELETED(node))
-			qdel(node)
-		CHECK_TICK
 
 /datum/mm_run/proc/attempt_place_templates(list/templates, datum/mm_connection/connection, datum/mm_cell/cell, datum/mm_node/node, permit_dangling_connections, permit_cycles)
 
@@ -206,16 +219,16 @@
 
 		var/dummy_connection = !!(connection.connection_flags & MCF_BLOCKER)
 		// Can't leave a dangling connection facing the void.
-		if(!dummy_connection && (target_x < 0 || target_y < 0 || target_x >= g_mx || target_y >= g_my))
+		if(!dummy_connection && (target_x < 0 || target_y < 0 || target_x > g_mx || target_y > g_my))
 			return null
 
 		// Connection target is outside of map bounds - this room cannot be placed here if we want our map to be complete.
-		var/target_coord = TRANSLATE_MODMAP_COORD(target_x, target_y, g_mx)
-		if(target_coord <= 0 || target_coord > length(_grid))
+		var/target_index = TRANSLATE_MODMAP_COORD(target_x, target_y, g_mx)
+		if(target_index <= 0 || target_index > length(_grid))
 			return null
 
 		// What is in the cell we're targeting?
-		var/datum/mm_cell/target_cell = _grid[target_coord]
+		var/datum/mm_cell/target_cell = _grid[target_index]
 
 		// DEBUG: banning cells that cause cycles.
 		if(!permit_cycles && !dummy_connection && !isnull(target_cell) && target_cell != origin)
@@ -360,9 +373,12 @@
 		return
 
 	log_debug("Rebuilding [length(_nodes)] node\s...")
-	build_from_nodes(permit_dangling_connections = TRUE)
+	build_from_nodes(permit_dangling_connections = FALSE)
 
 /datum/mm_run/proc/clear_cell(datum/mm_cell/cell)
+
+	if(!istype(cell) || QDELETED(cell))
+		return
 
 	// If this is a filler cell, remove the entire chunk.
 	if(cell.owner)
@@ -435,6 +451,9 @@
 	for(var/datum/mm_cell/cell in _grid)
 		ungrouped_cells += cell
 
+	var/last_longest_path = 0
+	var/datum/mm_path/longest_path
+
 	// Identify connected paths.
 	var/list/grouped_cells = list()
 	while(length(ungrouped_cells))
@@ -475,20 +494,34 @@
 					if(istype(neighbor) && !(neighbor in grouped_cells))
 						potential_cells |= neighbor
 
-		LAZYADD(., new /datum/mm_path(connected_cells))
+		var/datum/mm_path/path = new(connected_cells, generator.mandatory_templates)
+		LAZYADD(., path)
+		if(length(connected_cells) > last_longest_path)
+			longest_path = path
+			last_longest_path = length(connected_cells)
+
+	for(var/datum/mm_path/path in .)
+		if(path.has_origin || path == longest_path)
+			continue
+		for(var/datum/mm_cell/cell in path.cells)
+			clear_cell(cell)
+		LAZYREMOVE(., path)
+		qdel(path)
 
 // Returns a string indicating the reason for failing validation.
-/datum/mm_run/proc/validate_run(list/paths)
-	if(generator.do_trim_trailing_connections && get_dangling_connection_count(TRUE))
+/datum/mm_run/proc/validate_run(list/_paths)
+	if(generator.do_trim_trailing_connections && get_dangling_connection_count())
 		return "Map has dangling connections after cleanup passes."
 	if(generator.min_path_length > 0)
 		var/has_long_path = FALSE
-		for(var/datum/mm_path/path in paths)
+		for(var/datum/mm_path/path in _paths)
 			if(length(path.cells) >= generator.min_path_length)
 				has_long_path = TRUE
 				break
 		if(!has_long_path)
 			return "Map has no path of sufficient length ([generator.min_path_length] cell\s)"
+	if(length(_paths) > generator.maximum_paths)
+		return "Map has [length(_paths)]/[generator.maximum_paths] path\s.)"
 	return null
 
 /datum/mm_run/proc/finalize_run()
@@ -518,33 +551,53 @@
 	load_operations = list()
 	var/g_cs = generator.grid_cell_size
 	var/list/debug_targets = list()
-	for(var/datum/mm_cell/cell in _grid)
-		if(!cell.template)
-			continue
 
-		var/turf/cell_origin  = locate(
-			generator.border_x + (cell.cell_x * g_cs),
-			generator.border_y + (cell.cell_y * g_cs),
-			g_pz
-		)
+	for(var/gx = 0 to g_mx)
+		for(var/gy = 0 to g_my)
 
-		if(istype(cell_origin))
-			if(!cell.owner) // Don't try to load filler cells.
-				load_operations[cell_origin] = cell.template
-			if(generator.place_debug_markers)
-				var/turf/debug_turf = locate(
-					cell_origin.x + (g_cs / 2),
-					cell_origin.y + (g_cs / 2),
-					g_pz
-				)
-				if(istype(debug_turf) && !(debug_turf in debug_targets))
-					var/obj/map_debug_holder/marker = new(null, cell)
-					marker.maptext = "<center>[cell.cell_x],[cell.cell_y] - #[cell.generation]</center>"
-					if(cell.marked_for_refresh)
-						marker.icon_state = "x2"
-					else if(cell.marked_for_cleanup)
-						marker.icon_state = "x3"
-					debug_targets[debug_turf] = marker
+			var/index = TRANSLATE_MODMAP_COORD(gx, gy, g_mx)
+			if(index < 1 || index > length(_grid) || !istype(_grid[index], /datum/mm_cell))
+
+				if(generator.place_debug_markers)
+					var/turf/debug_turf = locate(
+						generator.border_x + (gx * g_cs) + (g_cs / 2),
+						generator.border_y + (gy * g_cs) + (g_cs / 2),
+						g_pz
+					)
+					if(istype(debug_turf) && !(debug_turf in debug_targets))
+						var/obj/map_debug_holder/marker = new
+						marker.maptext = "<center>[gx],[gy] - no cell</center>"
+						marker.color = COLOR_PURPLE
+
+				continue
+
+			var/datum/mm_cell/cell = _grid[index]
+			if(!istype(cell) || !cell.template)
+				continue
+
+			var/turf/cell_origin  = locate(
+				generator.border_x + (cell.cell_x * g_cs),
+				generator.border_y + (cell.cell_y * g_cs),
+				g_pz
+			)
+
+			if(istype(cell_origin))
+				if(!cell.owner) // Don't try to load filler cells.
+					load_operations[cell_origin] = cell.template
+				if(generator.place_debug_markers)
+					var/turf/debug_turf = locate(
+						cell_origin.x + (g_cs / 2),
+						cell_origin.y + (g_cs / 2),
+						g_pz
+					)
+					if(istype(debug_turf) && !(debug_turf in debug_targets))
+						var/obj/map_debug_holder/marker = new(null, cell)
+						marker.maptext = "<center>[cell.cell_x],[cell.cell_y] - #[cell.generation]</center>"
+						if(cell.marked_for_refresh)
+							marker.icon_state = "x2"
+						else if(cell.marked_for_cleanup)
+							marker.icon_state = "x3"
+						debug_targets[debug_turf] = marker
 
 		CHECK_TICK
 

@@ -4,6 +4,7 @@
 	var/cell_y
 	var/offset_x
 	var/offset_y
+	var/datum/mm_path/path
 	var/datum/mm_cell/owner
 	var/datum/map_template/modular/template
 	var/generation
@@ -16,6 +17,7 @@
 /datum/mm_cell/Destroy()
 	LAZYCLEARLIST(_open_connections)
 	template = null
+	path = null
 	return ..()
 
 /datum/mm_cell/New(datum/mm_run/_run, _x, _y, _template, datum/mm_cell/_owner, _generation, _ox, _oy)

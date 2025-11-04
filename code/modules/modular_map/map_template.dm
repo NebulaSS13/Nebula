@@ -18,11 +18,7 @@
 
 	..()
 
-	var/conn_count = 0
-	for(var/datum/mm_connection/connection in cell_connections)
-		if(!(connection.connection_flags & (MCF_BLOCKER)))
-			conn_count++
-	is_terminator = conn_count <= 1
+	is_terminator = length(cell_connections) <= 1
 
 	var/list/existing_coords = list()
 	for(var/datum/mm_connection/connection in cell_connections)
@@ -37,12 +33,9 @@
 	var/z = cell_height-1
 	for(var/x = 0 to w)
 
-		if(x != 0 && x != w)
-			continue
-
 		for(var/y = 0 to z)
 
-			if(y != 0 && y != z)
+			if(y != 0 && y != z && x != 0 && x != w)
 				continue
 
 			var/list/connection_dirs = list()
@@ -59,6 +52,7 @@
 			for(var/connection_dir in connection_dirs)
 				if(connection_dir in existing_coords[coord])
 					continue
+				LAZYDISTINCTADD(existing_coords[coord], connection_dir)
 				var/datum/mm_connection/closed/new_conn = new(connection_dir, x, y, (MCF_BLOCKER))
 				new_conn.template = src
 				cell_connections += new_conn
