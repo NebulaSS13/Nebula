@@ -482,7 +482,7 @@
 							potential_cells |= block_cell
 
 			// Check our non-dummy connections for accessible cells.
-			for(var/datum/mm_connection/connection in check_cell.template.cell_connections)
+			for(var/datum/mm_connection/connection in check_cell.all_connections)
 				// Ignore dummy connections.
 				if(connection.connection_flags & MCF_BLOCKER)
 					continue
@@ -491,8 +491,11 @@
 				var/ni = TRANSLATE_MODMAP_COORD(nx, ny, g_mx)
 				if(nx >= 0 && ny >= 0 && nx <= g_mx && ny <= g_my && ni > 0 && ni <= length(_grid))
 					var/datum/mm_cell/neighbor = _grid[ni]
-					if(istype(neighbor) && !(neighbor in grouped_cells))
-						potential_cells |= neighbor
+					if(istype(neighbor))
+						LAZYSET(check_cell.finalized_connections, connection.direction_string, neighbor)
+						LAZYSET(neighbor.finalized_connections, connection.reverse_direction_string, check_cell)
+						if(!(neighbor in grouped_cells))
+							potential_cells |= neighbor
 
 		var/datum/mm_path/path = new(connected_cells, generator.mandatory_templates)
 		LAZYADD(., path)

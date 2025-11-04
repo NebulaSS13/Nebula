@@ -13,6 +13,12 @@
 	var/cell_height = 1
 	/// Whether or not this template caps off a path (has one or less non-dummy connections)
 	var/is_terminator = FALSE
+	/// An associative list of subtemplates applied to weld paths together.
+	var/list/cell_joiners
+
+/datum/map_template/mm_path_joiner
+	abstract_type = /datum/map_template/mm_path_joiner
+	is_spawnable = FALSE // Do not bloat out the map placement list.
 
 /datum/map_template/modular/New()
 

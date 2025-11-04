@@ -47,9 +47,9 @@
 		/datum/map_template/modular/aqueduct/bridge/horizontal_n,
 		/datum/map_template/modular/aqueduct/bridge/horizontal_s
 	)
-//	post_run_generators = list(
-//		/datum/random_map/noise/aqueducts
-//	)
+	post_run_generators = list(
+		/datum/random_map/noise/aqueducts
+	)
 
 /datum/random_map/noise/aqueducts
 	descriptor = "aqueducts (modular map)"
@@ -71,6 +71,12 @@
 	connection_flag = MCF_HALL
 	cell_width = 1
 	cell_height = 1
+	cell_joiners = list(
+		"NORTH" = /datum/map_template/mm_path_joiner/aqueduct/north,
+		"SOUTH" = /datum/map_template/mm_path_joiner/aqueduct/south,
+		"EAST"  = /datum/map_template/mm_path_joiner/aqueduct/east,
+		"WEST"  = /datum/map_template/mm_path_joiner/aqueduct/west
+	)
 
 /datum/map_template/modular/aqueduct/junction
 	name = "Aqueduct - Passage Junction"
@@ -585,3 +591,22 @@
 		new /datum/mm_connection("EAST", 0, 0, (MCF_AQUEDUCT | MCF_BRIDGE)),
 	)
 	..()
+
+/datum/map_template/mm_path_joiner/aqueduct
+	abstract_type = /datum/map_template/mm_path_joiner/aqueduct
+
+/datum/map_template/mm_path_joiner/aqueduct/north
+	name = "Aqueduct - Joiner North"
+	mappaths = list("maps/modular_maps/aqueduct/joiner_n.dmm")
+
+/datum/map_template/mm_path_joiner/aqueduct/south
+	name = "Aqueduct - Joiner South"
+	mappaths = list("maps/modular_maps/aqueduct/joiner_s.dmm")
+
+/datum/map_template/mm_path_joiner/aqueduct/east
+	name = "Aqueduct - Joiner East"
+	mappaths = list("maps/modular_maps/aqueduct/joiner_e.dmm")
+
+/datum/map_template/mm_path_joiner/aqueduct/west
+	name = "Aqueduct - Joiner West"
+	mappaths = list("maps/modular_maps/aqueduct/joiner_w.dmm")

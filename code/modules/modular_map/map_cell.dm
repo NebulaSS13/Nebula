@@ -10,9 +10,9 @@
 	var/generation
 	var/marked_for_cleanup
 	var/marked_for_refresh
-
+	var/list/finalized_connections
+	var/list/all_connections
 	VAR_PRIVATE/list/_open_connections
-	VAR_PRIVATE/list/_all_connections
 
 /datum/mm_cell/Destroy()
 	LAZYCLEARLIST(_open_connections)
@@ -31,7 +31,7 @@
 	// Initially assume all non-internal connections are freed; cell placement logic will close connections that are blocked by our placement.
 	for(var/datum/mm_connection/connection in template.cell_connections)
 		if(connection.offset_x == _ox && connection.offset_y == _oy)
-			LAZYDISTINCTADD(_all_connections, connection)
+			LAZYDISTINCTADD(all_connections, connection)
 			open_connection(connection)
 
 /datum/mm_cell/proc/get_open_connections(exclude_flags)
@@ -46,5 +46,5 @@
 	LAZYREMOVE(_open_connections, connection)
 
 /datum/mm_cell/proc/open_connection(connection)
-	if(connection in _all_connections)
+	if(connection in all_connections)
 		LAZYDISTINCTADD(_open_connections, connection)
