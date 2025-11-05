@@ -37,10 +37,9 @@
 	base.icon_state = "[beaker ? "beaker" : "nothing"][attached ? "_hooked" : ""]"
 	add_overlay(base)
 
-	if(beaker)
-		var/datum/reagents/reagents = beaker.reagents
-		var/percent = round((reagents.total_volume / beaker.volume) * 100)
-		if(reagents.total_volume)
+	if(beaker?.reagents)
+		var/percent = round((beaker.reagents.total_volume / beaker.reagents.maximum_volume) * 100)
+		if(beaker.reagents.total_volume)
 			var/mutable_appearance/filling = mutable_appearance(icon, "reagent")
 			switch(percent)
 				if(0)
@@ -59,7 +58,7 @@
 					filling.icon_state = "reagent80"
 				if(91 to INFINITY)
 					filling.icon_state = "reagent100"
-			filling.color = reagents.get_color()
+			filling.color = beaker.reagents.get_color()
 			add_overlay(filling)
 
 		if(istype(beaker, /obj/item/chems/ivbag))
@@ -120,7 +119,7 @@
 		return
 
 	if(mode) // Give blood
-		if(beaker.volume > 0)
+		if(beaker.reagents?.total_volume > 0)
 			beaker.reagents.trans_to_mob(attached, transfer_amount, CHEM_INJECT)
 			queue_icon_update()
 	else // Take blood
@@ -193,7 +192,7 @@
 	. += "The IV drip is [mode ? "injecting" : "taking blood"]."
 	. += "It is set to transfer [transfer_amount]u of chemicals per cycle."
 	if(beaker)
-		if(beaker.reagents && beaker.reagents.total_volume)
+		if(beaker.reagents?.total_volume)
 			. += SPAN_NOTICE("Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid.")
 		else
 			. += SPAN_NOTICE("Attached is an empty [beaker].")

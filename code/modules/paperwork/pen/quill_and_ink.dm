@@ -56,7 +56,7 @@
 	icon = 'icons/obj/items/inkwell.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "An inkwell used to hold ink. Dip a quill pen into this to re-ink it."
-	volume = 30
+	chem_volume = 30
 	/// The minimum amount of ink in the inkwell when populating reagents.
 	var/starting_volume_low = 20
 	/// The maximum amount of ink in the inkwell when populating reagents.

@@ -11,6 +11,8 @@
 	matter = list(
 		/decl/material/solid/organic/cloth = MATTER_AMOUNT_SECONDARY,
 	)
+	chem_volume = 30
+
 	var/mopspeed = 40
 	var/static/list/moppable_types
 
@@ -23,13 +25,8 @@
 
 /obj/item/mop/Initialize()
 	. = ..()
-	initialize_reagents()
 	if(!moppable_types)
 		populate_moppable_types()
-
-/obj/item/mop/initialize_reagents(populate = TRUE)
-	create_reagents(30)
-	. = ..()
 
 /obj/item/mop/afterattack(atom/A, mob/user, proximity)
 	if(!proximity)

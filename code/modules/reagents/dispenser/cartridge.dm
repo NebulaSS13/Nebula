@@ -4,24 +4,27 @@
 	icon = 'icons/obj/items/chem/chem_cartridge.dmi'
 	icon_state = "cartridge"
 	w_class = ITEM_SIZE_NORMAL
-	volume = CARTRIDGE_VOLUME_LARGE
+	chem_volume = CARTRIDGE_VOLUME_LARGE
 	amount_per_transfer_from_this = 50
 	material = /decl/material/solid/stone/ceramic
 	// Large, but inaccurate. Use a chem dispenser or beaker for accuracy.
 	possible_transfer_amounts = @"[50,100]"
+	var/_reagent_label
 
-/obj/item/chems/chem_disp_cartridge/initialize_reagents(populate = TRUE)
+/obj/item/chems/chem_disp_cartridge/Initialize()
 	. = ..()
-	if(populate && reagents.primary_reagent)
-		setLabel(reagents.get_primary_reagent_name())
+	if(reagents?.primary_reagent && !_reagent_label)
+		_reagent_label = reagents.get_primary_reagent_name()
+	if(_reagent_label)
+		setLabel(_reagent_label)
 
 /obj/item/chems/chem_disp_cartridge/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	. += "It has a capacity of [volume] units."
-	if(reagents.total_volume <= 0)
+	. += "It has a capacity of [reagents?.maximum_volume || 0] unit\s."
+	if(reagents?.total_volume <= 0)
 		. += "It is empty."
 	else
-		. += "It contains [reagents.total_volume] units of reagents."
+		. += "It contains [reagents?.total_volume || 0] unit\s of reagents."
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		. += "The cap is sealed."
 

@@ -9,6 +9,9 @@
 	///The current health of the obj. Leave to null, unless you want the object to start at a different health than max_health.
 	current_health = null
 
+	// If non-null and positive, will create a reagent holder on Initialize()
+	var/chem_volume
+
 	var/obj_flags
 	var/datum/talking_atom/talking_atom
 	var/list/req_access
@@ -34,6 +37,8 @@
 		current_health = get_max_health()
 	else
 		current_health = min(current_health, get_max_health())
+	if(!isnull(chem_volume) && chem_volume >= 0) // 0-volume holders perserved for legacy code reasons. Ideally shouldn't exist if <= 0
+		initialize_reagents()
 
 /obj/object_shaken()
 	shake_animation()
@@ -259,13 +264,14 @@
 	return TRUE
 
 /**
- * Init starting reagents and/or reagent var. Not called at the /obj level.
+ * Init starting reagents and/or reagent var. Called if chem_volume > 0 in /obj/Initialize()
  * populate: If set to true, we expect map load/admin spawned reagents to be set.
  */
 /obj/proc/initialize_reagents(var/populate = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(reagents?.total_volume > 0)
 		log_warning("\The [src] possibly is initializing its reagents more than once!")
+	create_or_update_reagents(chem_volume)
 	if(populate)
 		populate_reagents()
 

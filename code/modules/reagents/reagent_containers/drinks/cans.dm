@@ -1,5 +1,5 @@
 /obj/item/chems/drinks/cans
-	volume = 40 //just over one and a half cups
+	chem_volume = 40 //just over one and a half cups
 	amount_per_transfer_from_this = 5
 	atom_flags = 0 //starts closed
 	material = /decl/material/solid/metal/aluminium

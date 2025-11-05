@@ -8,17 +8,10 @@
 	material = /decl/material/solid/organic/wood/oak
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	chem_volume = 200
 
 	var/obj/item/chems/filter/filter
 	var/obj/item/chems/glass/loaded
-
-/obj/structure/filter_stand/Initialize(ml, _mat, _reinf_mat)
-	. = ..()
-	initialize_reagents()
-
-/obj/structure/filter_stand/initialize_reagents(populate)
-	create_reagents(200)
-	. = ..()
 
 /obj/structure/filter_stand/mapped/Initialize(ml, _mat, _reinf_mat)
 	filter = new(src)
@@ -111,7 +104,7 @@
 	w_class = ITEM_SIZE_TINY
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	material = /decl/material/solid/organic/cloth
-	volume = 100
+	chem_volume = 100
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/chems/filter/on_reagent_change()

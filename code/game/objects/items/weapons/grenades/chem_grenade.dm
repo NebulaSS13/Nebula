@@ -5,15 +5,13 @@
 	w_class = ITEM_SIZE_SMALL
 	_base_attack_force = 2.0
 	det_time = null
+	chem_volume = 1000
+
 	var/stage = 0
 	var/path = 0
 	var/obj/item/assembly_holder/detonator = null
 	var/list/beakers = new/list()
 	var/list/allowed_containers = list(/obj/item/chems/glass/beaker, /obj/item/chems/glass/bottle)
-
-/obj/item/grenade/chem_grenade/Initialize()
-	. = ..()
-	create_reagents(1000)
 
 /obj/item/grenade/chem_grenade/Destroy()
 	QDEL_NULL(detonator)

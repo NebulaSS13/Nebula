@@ -14,7 +14,7 @@
 	wrenchable                = FALSE
 	amount_dispensed          = 10
 	possible_transfer_amounts = @"[10,25,50,100]"
-	volume                    = 10000
+	chem_volume               = 10000
 	can_toggle_open           = FALSE
 	var/auto_refill
 

@@ -14,13 +14,13 @@
 	var/effect_cooldown = 5 MINUTES
 
 /decl/material/liquid/accumulated/affect_blood(mob/living/victim, removed, datum/reagents/holder)
-	var/volume = REAGENT_VOLUME(holder, src)
+	var/affect_volume = REAGENT_VOLUME(holder, src)
 	. = ..()
 
 	var/update_data = FALSE
 	var/list/data = REAGENT_DATA(holder, src)
 	var/is_off_cooldown = world.time > LAZYACCESS(data, DATA_COOLDOWN_TIME) + effect_cooldown
-	if(volume <= required_volume && CHEM_DOSE(victim, src) >= required_dose)
+	if(affect_volume <= required_volume && CHEM_DOSE(victim, src) >= required_dose)
 		update_data = discontinuation_effect(victim, removed, holder, is_off_cooldown)
 	else
 		update_data = positive_effect(victim, removed, holder, is_off_cooldown)

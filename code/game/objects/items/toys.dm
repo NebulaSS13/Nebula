@@ -47,7 +47,7 @@
 	throw_range                   = 20
 	possible_transfer_amounts     = null
 	amount_per_transfer_from_this = 10
-	volume                        = 10
+	chem_volume                   = 10
 	material                      = /decl/material/solid/organic/plastic
 	_base_attack_force            = 0
 

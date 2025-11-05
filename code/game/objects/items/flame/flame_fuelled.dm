@@ -5,8 +5,8 @@
 	can_manually_light    = TRUE
 	extinguish_on_dropped = FALSE
 	watertight            = TRUE
+	chem_volume           = 5
 
-	var/tmp/max_fuel      = 5
 	var/tmp/start_fuelled = FALSE
 
 	/// TODO: make this calculate a fuel amount via accelerant value or some other check.
@@ -14,10 +14,9 @@
 	var/fuel_type
 
 /obj/item/flame/fuelled/Initialize()
-	. = ..()
 	if(isnull(fuel_type))
 		fuel_type = global.using_map.default_liquid_fuel_type
-	initialize_reagents()
+	. = ..()
 
 // Boilerplate from /obj/item/chems/glass. TODO generalize to a lower level.
 /obj/item/flame/fuelled/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
@@ -84,14 +83,9 @@
 		return TRUE
 	return FALSE
 
-/obj/item/flame/fuelled/initialize_reagents(populate = TRUE)
-	if(!reagents)
-		create_reagents(max_fuel)
-	. = ..()
-
 /obj/item/flame/fuelled/populate_reagents()
-	if(start_fuelled && fuel_type && max_fuel)
-		add_to_reagents(fuel_type, max_fuel)
+	if(start_fuelled && fuel_type && reagents?.maximum_volume)
+		add_to_reagents(fuel_type, reagents.maximum_volume)
 
 /obj/item/flame/fuelled/Process()
 	. = ..()

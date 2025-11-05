@@ -369,10 +369,10 @@
 	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
-	var/volume = REAGENT_VOLUME(holder, src)
-	if(volume > 15)
+	var/affect_volume = REAGENT_VOLUME(holder, src)
+	if(affect_volume > 15)
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume > 45)
+	if(affect_volume > 45)
 		M.add_chemical_effect(CE_PULSE, 1)
 
 /decl/material/liquid/drink/coffee/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)

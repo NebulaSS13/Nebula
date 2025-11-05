@@ -8,10 +8,10 @@
 	obj_flags = OBJ_FLAG_HOLLOW
 	abstract_type = /obj/item/chems
 	watertight = TRUE
+	chem_volume = 30
 
 	var/amount_per_transfer_from_this = 5
 	var/possible_transfer_amounts = @"[5,10,15,25,30]"
-	var/volume = 30
 	var/label_text
 	var/presentation_flags = 0
 	var/detail_color
@@ -19,7 +19,6 @@
 
 /obj/item/chems/Initialize(ml, material_key)
 	. = ..()
-	initialize_reagents()
 	if(!possible_transfer_amounts)
 		src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
@@ -149,13 +148,6 @@
 	//Skip splashing if we are in nullspace, since splash isn't null guarded
 	if(loc)
 		reagents.splash(get_turf(src), reagents.total_volume)
-	. = ..()
-
-/obj/item/chems/initialize_reagents(populate = TRUE)
-	if(!reagents)
-		create_reagents(volume)
-	else
-		reagents.maximum_volume = max(reagents.maximum_volume, volume)
 	. = ..()
 
 /obj/item/chems/proc/set_detail_color(var/new_color)

@@ -3,7 +3,7 @@
 	desc = "A hard, sturdy bowl used to hold organic matter for crushing."
 	icon = 'icons/obj/items/chem/mortar.dmi'
 	icon_state = ICON_STATE_WORLD
-	volume = 40
+	chem_volume = 40
 	material = /decl/material/solid/stone/basalt
 	color = /decl/material/solid/stone/basalt::color
 	material_alteration = MAT_FLAG_ALTERATION_ALL

@@ -5,6 +5,7 @@ var/global/list/chem_implants = list()
 	desc = "Injects things."
 	origin_tech = @'{"materials":1,"biotech":2}'
 	known = TRUE
+	chem_volume = 50
 
 /obj/item/implant/chem/get_data()
 	return {"
@@ -26,7 +27,6 @@ var/global/list/chem_implants = list()
 /obj/item/implant/chem/Initialize()
 	. = ..()
 	global.chem_implants += src
-	create_reagents(50)
 
 /obj/item/implant/chem/Destroy()
 	. = ..()

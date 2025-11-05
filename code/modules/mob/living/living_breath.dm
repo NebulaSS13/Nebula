@@ -81,7 +81,7 @@
 		if(!can_breathe_air_above)
 			breath = new
 			if(!can_drown())
-				breath.volume = volume_needed
+				breath.total_volume = volume_needed
 				breath.temperature = my_turf.temperature
 				// TODO: species-breathable gas instead of oxygen default. Maybe base it on the reagents being breathed
 				breath.adjust_gas(/decl/material/gas/oxygen, ONE_ATMOSPHERE*volume_needed/(R_IDEAL_GAS_EQUATION*T20C))

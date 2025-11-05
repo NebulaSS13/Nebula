@@ -21,9 +21,9 @@
 
 /obj/machinery/atmospherics/pipeturbine/Initialize()
 	. = ..()
-	air_in.volume = 200
-	air_out.volume = 800
-	volume_ratio = air_in.volume / (air_in.volume + air_out.volume)
+	air_in.total_volume = 200
+	air_out.total_volume = 800
+	volume_ratio = air_in.total_volume / (air_in.total_volume + air_out.total_volume)
 
 /obj/machinery/atmospherics/pipeturbine/get_initialize_directions()
 	switch(dir)
@@ -48,11 +48,11 @@
 		kin_energy *= 1 - kin_loss
 		dP = max(air_in.return_pressure() - air_out.return_pressure(), 0)
 		if(dP > 10)
-			kin_energy += 1/ADIABATIC_EXPONENT * dP * air_in.volume * (1 - volume_ratio**ADIABATIC_EXPONENT) * efficiency
+			kin_energy += 1/ADIABATIC_EXPONENT * dP * air_in.total_volume * (1 - volume_ratio**ADIABATIC_EXPONENT) * efficiency
 			air_in.temperature *= volume_ratio**ADIABATIC_EXPONENT
 
 			var/datum/gas_mixture/air_all = new
-			air_all.volume = air_in.volume + air_out.volume
+			air_all.total_volume = air_in.total_volume + air_out.total_volume
 			air_all.merge(air_in.remove_ratio(1))
 			air_all.merge(air_out.remove_ratio(1))
 

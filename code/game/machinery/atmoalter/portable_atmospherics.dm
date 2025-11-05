@@ -6,7 +6,7 @@
 
 	var/datum/gas_mixture/air_contents = new
 	var/obj/item/tank/holding
-	var/volume = 0
+	var/gas_volume = 0
 	var/destroyed = 0
 	var/start_pressure = ONE_ATMOSPHERE
 
@@ -19,7 +19,7 @@
 
 /obj/machinery/portable_atmospherics/Initialize()
 	..()
-	air_contents.volume = volume
+	air_contents.total_volume = gas_volume
 	air_contents.temperature = T20C
 
 
@@ -52,7 +52,7 @@
 		/decl/material/gas/nitrogen = N2STANDARD *  MolesForPressure())
 
 /obj/machinery/portable_atmospherics/proc/MolesForPressure(var/target_pressure = start_pressure)
-	return (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature)
+	return (target_pressure * air_contents.total_volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature)
 
 /obj/machinery/portable_atmospherics/on_update_icon()
 	return null

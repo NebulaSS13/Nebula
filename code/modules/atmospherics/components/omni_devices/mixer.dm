@@ -54,7 +54,7 @@
 						con += max(0, tag_west_con)
 
 	for(var/datum/omni_port/P in ports)
-		P.air.volume = ATMOS_DEFAULT_VOLUME_MIXER
+		P.air.total_volume = ATMOS_DEFAULT_VOLUME_MIXER
 
 /obj/machinery/atmospherics/omni/mixer/Destroy()
 	inputs.Cut()
@@ -80,7 +80,7 @@
 			P.concentration = 1 / max(1, inputs.len)
 
 	if(output)
-		output.air.volume = ATMOS_DEFAULT_VOLUME_MIXER * 0.75 * inputs.len
+		output.air.total_volume = ATMOS_DEFAULT_VOLUME_MIXER * 0.75 * inputs.len
 		output.concentration = 1
 
 	rebuild_mixing_inputs()
@@ -117,8 +117,8 @@
 	for (var/datum/omni_port/P in inputs)
 		if(!P.concentration)
 			continue
-		transfer_moles += (set_flow_rate*P.concentration/P.air.volume)*P.air.total_moles
-		transfer_moles_max = min(transfer_moles_max, calculate_transfer_moles(P.air, output.air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0))
+		transfer_moles += (set_flow_rate*P.concentration/P.air.total_volume)*P.air.total_moles
+		transfer_moles_max = min(transfer_moles_max, calculate_transfer_moles(P.air, output.air, delta, (output && output.network && output.network.total_volume) ? output.network.total_volume : 0))
 	transfer_moles = clamp(0, transfer_moles, transfer_moles_max)
 
 	var/power_draw = -1

@@ -6,11 +6,7 @@
 	density = TRUE
 	w_class = ITEM_SIZE_NORMAL
 	atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
-
-
-/obj/structure/mopbucket/Initialize()
-	. = ..()
-	create_reagents(180)
+	chem_volume = 180
 
 /obj/structure/mopbucket/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()

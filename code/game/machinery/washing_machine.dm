@@ -19,6 +19,7 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	clicksound = "button"
 	clickvol = 40
+	chem_volume = 100
 
 	// Power
 	idle_power_usage = 10
@@ -56,10 +57,6 @@
 		/obj/item/clothing/head/helmet
 	)
 	return wash_blacklist
-
-/obj/machinery/washing_machine/Initialize(mapload, d, populate_parts)
-	create_reagents(100)
-	. = ..()
 
 /obj/machinery/washing_machine/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()

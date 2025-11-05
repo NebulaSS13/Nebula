@@ -11,6 +11,7 @@
 	layer = ABOVE_OBJ_LAYER
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	animate_movement = 0
+	chem_volume = 10
 	var/amount = 3
 	var/metal = 0
 
@@ -56,11 +57,9 @@
 
 		F = new(T, metal)
 		F.amount = amount
-		if(!metal)
-			F.create_reagents(10)
-			if(reagents)
-				for(var/decl/material/reagent as anything in reagents.reagent_volumes)
-					F.add_to_reagents(reagent, 1, safety = 1) //added safety check since reagents in the foam have already had a chance to react
+		if(!metal && reagents?.total_volume)
+			for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+				F.add_to_reagents(reagent, 1, safety = 1) //added safety check since reagents in the foam have already had a chance to react
 
 /obj/effect/effect/foam/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume) // foam disolves when heated, except metal foams
 	if(!metal && prob(max(0, exposed_temperature - 475)))
@@ -107,8 +106,6 @@
 		F.amount = amount
 
 		if(!metal) // don't carry other chemicals if a metal foam
-			F.create_reagents(10)
-
 			if(carried_reagents)
 				for(var/id in carried_reagents)
 					F.add_to_reagents(id, 1, safety = 1) //makes a safety call because all reagents should have already reacted anyway

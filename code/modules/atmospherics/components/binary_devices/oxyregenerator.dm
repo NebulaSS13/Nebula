@@ -90,7 +90,7 @@
 		var/pressure_delta = target_pressure - air2.return_pressure()
 		if (pressure_delta > 0.01 && inner_tank.temperature > 0)
 			var/datum/pipe_network/output = network_in_dir(dir)
-			var/transfer_moles = calculate_transfer_moles(inner_tank, air2, pressure_delta, output?.volume)
+			var/transfer_moles = calculate_transfer_moles(inner_tank, air2, pressure_delta, output?.total_volume)
 			power_draw = pump_gas(src, inner_tank, air2, transfer_moles, power_rating*power_setting)
 			if (power_draw >= 0)
 				last_power_draw = power_draw

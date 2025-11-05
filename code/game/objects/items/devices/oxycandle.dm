@@ -14,7 +14,7 @@
 
 	var/target_pressure = ONE_ATMOSPHERE
 	var/datum/gas_mixture/air_contents = null
-	var/volume = 4600
+	var/candle_volume = 4600
 	var/on = 0
 	var/activation_sound = 'sound/effects/flare.ogg'
 	var/brightness_on = 1 // Moderate-low bright.
@@ -33,10 +33,10 @@
 		update_icon()
 		playsound(src.loc, activation_sound, 75, 1)
 		air_contents = new /datum/gas_mixture()
-		air_contents.volume = 200 //liters
+		air_contents.total_volume = 200 //liters
 		air_contents.temperature = T20C
 		var/const/OXYGEN_FRACTION = 1 // separating out the constant so it's clearer why it exists and how to modify it later
-		air_contents.adjust_gas(/decl/material/gas/oxygen, OXYGEN_FRACTION * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
+		air_contents.adjust_gas(/decl/material/gas/oxygen, OXYGEN_FRACTION * (target_pressure * air_contents.total_volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
 		START_PROCESSING(SSprocessing, src)
 
 // Process of Oxygen candles releasing air. Makes 200 volume of oxygen
@@ -44,7 +44,7 @@
 	if(!loc)
 		return
 	var/turf/pos = get_turf(src)
-	if(volume <= 0 || !pos || (pos.turf_flags & TURF_IS_WET)) //Now uses turf flags instead of whatever aurora did
+	if(candle_volume <= 0 || !pos || (pos.turf_flags & TURF_IS_WET)) //Now uses turf flags instead of whatever aurora did
 		STOP_PROCESSING(SSprocessing, src)
 		on = 2
 		update_icon()
@@ -56,16 +56,16 @@
 		pos.hotspot_expose(1500, 5)
 	var/datum/gas_mixture/environment = loc.return_air()
 	var/pressure_delta = target_pressure - environment.return_pressure()
-	var/output_volume = environment.volume * environment.group_multiplier
+	var/output_volume = environment.total_volume * environment.group_multiplier
 	var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
 	var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 	var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 	if (!removed) //Just in case
 		return
 	environment.merge(removed)
-	volume -= 200
+	candle_volume -= 200
 	var/const/OXYGEN_FRACTION = 1 // separating out the constant so it's clearer why it exists and how to modify it later
-	air_contents.adjust_gas(/decl/material/gas/oxygen, OXYGEN_FRACTION * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
+	air_contents.adjust_gas(/decl/material/gas/oxygen, OXYGEN_FRACTION * (target_pressure * air_contents.total_volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
 
 /obj/item/oxycandle/on_update_icon()
 	. = ..()

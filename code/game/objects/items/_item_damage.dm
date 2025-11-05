@@ -77,14 +77,14 @@
 /obj/item/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	. = ..()
 	if(isliving(hit_atom)) //Living mobs handle hit sounds differently.
-		var/volume = get_volume_by_throwforce_and_or_w_class()
+		var/impact_volume = get_volume_by_throwforce_and_or_w_class()
 		if (get_thrown_attack_force() > 0)
 			if(hitsound)
-				playsound(hit_atom, hitsound, volume, TRUE, -1)
+				playsound(hit_atom, hitsound, impact_volume, TRUE, -1)
 			else
-				playsound(hit_atom, 'sound/weapons/genhit.ogg', volume, TRUE, -1)
+				playsound(hit_atom, 'sound/weapons/genhit.ogg', impact_volume, TRUE, -1)
 		else
-			playsound(hit_atom, 'sound/weapons/throwtap.ogg', volume, TRUE, -1)
+			playsound(hit_atom, 'sound/weapons/throwtap.ogg', impact_volume, TRUE, -1)
 
 /obj/item/proc/eyestab(mob/living/M, mob/living/user)
 	var/mob/living/human/H = M

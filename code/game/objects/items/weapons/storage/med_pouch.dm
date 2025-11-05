@@ -189,22 +189,22 @@ Single Use Emergency Pouches
 // Pills
 
 /obj/item/chems/pill/pouch_pill
-	name       = "emergency pill"
-	desc       = "An emergency pill from an emergency medical pouch."
-	icon_state = "pill2"
-	volume     = 15
+	name          = "emergency pill"
+	desc          = "An emergency pill from an emergency medical pouch."
+	icon_state    = "pill2"
+	chem_volume   = 15
 	abstract_type = /obj/item/chems/pill/pouch_pill
+	var/_reagent_name
 
 /obj/item/chems/pill/pouch_pill/Initialize(ml, material_key)
 	. = ..()
 	if(!reagents?.total_volume)
 		log_warning("[log_info_line(src)] was deleted for containing no reagents during init!")
 		return INITIALIZE_HINT_QDEL
-
-/obj/item/chems/pill/pouch_pill/initialize_reagents(populate = TRUE)
-	. = ..()
-	if(populate && reagents?.get_primary_reagent_name())
-		SetName("emergency [reagents.get_primary_reagent_name()] pill ([reagents.total_volume]u)")
+	if(reagents?.get_primary_reagent_name() && !_reagent_name)
+		_reagent_name = "emergency [reagents.get_primary_reagent_name()] pill ([reagents.total_volume]u)"
+	if(_reagent_name)
+		SetName(_reagent_name)
 
 /obj/item/chems/pill/pouch_pill/stabilizer/populate_reagents()
 	add_to_reagents(/decl/material/liquid/stabilizer, reagents.maximum_volume)

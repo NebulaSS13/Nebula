@@ -12,7 +12,7 @@
 	throw_range                       = 10
 	attack_cooldown                   = DEFAULT_QUICK_COOLDOWN
 	material                          = /decl/material/solid/organic/plastic
-	volume                            = 250
+	chem_volume                       = 250
 	amount_per_transfer_from_this     = 10
 	possible_transfer_amounts         = @"[5,10]"
 	var/tmp/possible_particle_amounts = @"[1,3]"                    ///Possible chempuff particles amount for each transfer amount setting
@@ -73,7 +73,6 @@
 	set waitfor = FALSE
 
 	var/obj/effect/effect/water/chempuff/D = new(get_turf(src))
-	D.create_reagents(amount_per_transfer_from_this)
 	if(QDELETED(src))
 		return
 	reagents.trans_to_obj(D, amount_per_transfer_from_this)
@@ -160,7 +159,7 @@
 	icon = 'icons/obj/items/weapon/pepperspray.dmi'
 	icon_state = ICON_STATE_WORLD
 	possible_transfer_amounts = null
-	volume = 60
+	chem_volume = 60
 	particle_move_delay = 1
 	safety = TRUE
 
@@ -178,7 +177,7 @@
 	item_state = "sunflower"
 	amount_per_transfer_from_this = 1
 	possible_transfer_amounts = null
-	volume = 10
+	chem_volume = 10
 
 /obj/item/chems/spray/waterflower/populate_reagents()
 	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
@@ -191,7 +190,7 @@
 	item_state = "chemsprayer"
 	w_class = ITEM_SIZE_LARGE
 	possible_transfer_amounts = null
-	volume = 600
+	chem_volume = 600
 	origin_tech = @'{"combat":3,"materials":3,"engineering":3}'
 	particle_move_delay = 2 //Was hardcoded to 2 before, and 8 was slower than most mob's move speed
 	material = /decl/material/solid/metal/steel
@@ -216,7 +215,7 @@
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
 	icon_state = "plantbgone"
 	item_state = "plantbgone"
-	volume = 100
+	chem_volume = 100
 
 /obj/item/chems/spray/plantbgone/populate_reagents()
 	add_to_reagents(/decl/material/liquid/weedkiller, reagents.maximum_volume)
@@ -225,7 +224,7 @@
 	name = "deodorant"
 	desc = "A can of Gold Standard spray deodorant - for when you're too lazy to shower."
 	gender = PLURAL
-	volume = 35
+	chem_volume = 35
 	icon = 'icons/obj/items/deodorant.dmi'
 	icon_state = "deodorant"
 	item_state = "deodorant"

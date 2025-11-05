@@ -95,25 +95,18 @@
 
 	. = ..(mapload, material_key, skip_plate) //Init reagents
 
-/obj/item/food/grown/initialize_reagents(populate)
-	if(reagents)
-		reagents.clear_reagents()
-	if(!length(seed?.get_chemical_composition(_segment = plant_segment_type)))
-		return
-
-	. = ..() //create_reagent and populate_reagents
-
 	update_desc()
 	if(reagents.total_volume > 0)
 		bitesize = 1 + round(reagents.total_volume / 2, 1)
-
 	update_icon()
 
 /obj/item/food/grown/populate_reagents()
 	. = ..()
+	if(!length(seed?.get_chemical_composition(_segment = plant_segment_type)))
+		return
+
 	// Fill the object up with the appropriate reagents.
 	var/list/chems_to_fill
-
 	if(backyard_grilling_count > 0)
 		chems_to_fill ||= seed?.get_chemical_composition(_segment = plant_segment_type, _state = PLANT_STATE_ROASTED)
 	if(dry)
@@ -292,15 +285,9 @@ var/global/list/_wood_materials = list(
 			return TRUE
 
 		var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
-		R.chem_volume = max(R.reagents?.maximum_volume, reagents?.total_volume)
-		if(R.reagents)
-			R.reagents.maximum_volume = R.chem_volume
-			R.reagents.update_total()
-		else
-			R.create_reagents(R.chem_volume)
-
+		R.create_or_update_reagents(max(R.reagents?.maximum_volume, reagents?.total_volume))
 		R.brand = "[src] handrolled in \the [used_item]."
-		reagents.trans_to_holder(R.reagents, R.chem_volume)
+		reagents.trans_to_holder(R.reagents, R.reagents.total_volume)
 		to_chat(user, SPAN_NOTICE("You roll \the [src] into \the [used_item]."))
 		user.put_in_active_hand(R)
 		qdel(used_item)

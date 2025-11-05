@@ -1,9 +1,9 @@
 /obj/item/flame/fuelled/lighter/zippo
-	name     = "zippo lighter"
-	desc     = "It's a zippo-styled lighter, using a replaceable flint in a fetching steel case. It makes a clicking sound that everyone loves."
-	icon     = 'icons/obj/items/flame/zippo.dmi'
-	max_fuel = 10
-	material = /decl/material/solid/metal/stainlesssteel
+	name        = "zippo lighter"
+	desc        = "It's a zippo-styled lighter, using a replaceable flint in a fetching steel case. It makes a clicking sound that everyone loves."
+	icon        = 'icons/obj/items/flame/zippo.dmi'
+	chem_volume = 10
+	material    = /decl/material/solid/metal/stainlesssteel
 
 /obj/item/flame/fuelled/lighter/zippo/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && lit && (slot in global.all_hand_slots))

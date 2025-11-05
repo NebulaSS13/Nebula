@@ -14,7 +14,7 @@
 	w_class = ITEM_SIZE_SMALL
 	item_flags = 0
 	obj_flags = 0
-	volume = 60
+	chem_volume = 60
 	material = /decl/material/solid/glass
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
@@ -39,7 +39,7 @@
 
 /obj/item/chems/glass/bottle/update_overlays()
 	if(reagents?.total_volume)
-		var/percent = round(reagents.total_volume / volume * 100, 25)
+		var/percent = round(reagents.total_volume / reagents.maximum_volume * 100, 25)
 		add_overlay(mutable_appearance(icon, "[icon_state]_filling_[percent]", reagents.get_color()))
 	var/image/overglass = mutable_appearance(icon, "[icon_state]_over", color)
 	overglass.alpha = alpha * ((alpha/255) ** 3)

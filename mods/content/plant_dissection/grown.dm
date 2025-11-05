@@ -27,7 +27,7 @@
 	for(var/datum/plant_segment/segment as anything in segments)
 		if(segment.contributes_to_reagents)
 			segment_amount += LAZYACCESS(segment.total_reagent_volume_by_state, (PLANT_STATE_FRESH))
-	volume = max(volume, segment_amount)
+	chem_volume = max(chem_volume, segment_amount)
 	return ..()
 
 /obj/item/food/grown/Destroy()

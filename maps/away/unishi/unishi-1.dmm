@@ -251,7 +251,7 @@
 /area/unishi/engineering)
 "aO" = (
 /obj/machinery/atmospherics/unary/tank/oxygen{
-	volume = 3200
+	gas_volume = 3200
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor,

@@ -10,7 +10,7 @@
 	abstract_type = /obj/item/chems/hypospray
 	origin_tech = @'{"materials":4,"biotech":5}'
 	amount_per_transfer_from_this = 5
-	volume = 30
+	chem_volume = 30
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_LOWER_BODY
@@ -86,7 +86,7 @@
 	desc = "A sterile, air-needle autoinjector for rapid administration of drugs to patients. Uses a replaceable 30u vial."
 	possible_transfer_amounts = @"[1,2,5,10,15,20,30]"
 	amount_per_transfer_from_this = 5
-	volume = 0
+	chem_volume = 0
 	time = 0 // hyposprays are instant for conscious people
 	single_use = FALSE
 	material = /decl/material/solid/metal/steel
@@ -115,8 +115,8 @@
 		V.update_icon()
 
 	loaded_vial = V
-	reagents.maximum_volume = loaded_vial.reagents.maximum_volume
-	loaded_vial.reagents.trans_to_holder(reagents, volume)
+	create_or_update_reagents(loaded_vial.reagents.maximum_volume, override_volume = TRUE)
+	loaded_vial.reagents.trans_to_holder(reagents, reagents.maximum_volume)
 
 	if(user)
 		user.visible_message(SPAN_NOTICE("[user] has loaded [V] into \the [src]."), SPAN_NOTICE("[usermessage]"))
@@ -128,7 +128,7 @@
 /obj/item/chems/hypospray/vial/proc/remove_vial(var/mob/user, var/swap_mode, var/should_update_icon = TRUE)
 	if(!loaded_vial)
 		return
-	reagents.trans_to_holder(loaded_vial.reagents,volume)
+	reagents.trans_to_holder(loaded_vial.reagents, reagents.maximum_volume)
 	reagents.maximum_volume = 0
 	loaded_vial.update_icon()
 	if(user)
@@ -172,7 +172,7 @@
 	desc = "A rapid and safe way to administer small amounts of drugs by untrained or trained personnel."
 	icon = 'icons/obj/autoinjector.dmi'
 	amount_per_transfer_from_this = 5
-	volume = 5
+	chem_volume = 5
 	origin_tech = @'{"materials":2,"biotech":2}'
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	w_class = ITEM_SIZE_SMALL

@@ -272,7 +272,7 @@
 			environment.merge(gas)
 
 /obj/machinery/alarm/proc/overall_danger_level(var/datum/gas_mixture/environment)
-	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
+	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.total_volume
 	var/environment_pressure = environment.return_pressure()
 
 	var/other_moles = 0

@@ -12,8 +12,8 @@
 	air1 = new
 	air2 = new
 
-	air1.volume = 200
-	air2.volume = 200
+	air1.total_volume = 200
+	air2.total_volume = 200
 	. = ..()
 
 /obj/machinery/atmospherics/binary/air_in_dir(direction)

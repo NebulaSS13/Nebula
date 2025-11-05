@@ -175,7 +175,7 @@
 /obj/item/transfer_valve/proc/merge_gases()
 	if(valve_open)
 		return
-	tank_two.air_contents.volume += tank_one.air_contents.volume
+	tank_two.air_contents.total_volume += tank_one.air_contents.total_volume
 	var/datum/gas_mixture/temp = tank_one.remove_air_ratio(1)
 	tank_two.assume_air(temp)
 	valve_open = 1
@@ -189,9 +189,9 @@
 	if(QDELETED(tank_one) || QDELETED(tank_two))
 		return
 
-	var/ratio1 = tank_one.air_contents.volume/tank_two.air_contents.volume
+	var/ratio1 = tank_one.air_contents.total_volume/tank_two.air_contents.total_volume
 	var/datum/gas_mixture/temp = tank_two.remove_air_ratio(ratio1)
-	tank_two.air_contents.volume -=  tank_one.air_contents.volume
+	tank_two.air_contents.total_volume -=  tank_one.air_contents.total_volume
 	tank_one.assume_air(temp)
 
 	/*

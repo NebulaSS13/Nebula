@@ -3,18 +3,7 @@
 /obj/item/clothing/gloves/ring/reagent
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	origin_tech = @'{"materials":2,"esoteric":4}'
-	var/tmp/volume = 15
-
-/obj/item/clothing/gloves/ring/reagent/Initialize(ml, material_key)
-	. = ..()
-	initialize_reagents()
-
-/obj/item/clothing/gloves/ring/reagent/initialize_reagents(populate = TRUE)
-	if(!reagents)
-		create_reagents(volume)
-	else
-		reagents.maximum_volume = max(volume, reagents.maximum_volume)
-	. = ..()
+	chem_volume = 15
 
 /obj/item/clothing/gloves/ring/reagent/equipped(var/mob/living/human/H)
 	..()

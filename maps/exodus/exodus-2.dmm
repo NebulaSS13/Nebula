@@ -48513,7 +48513,7 @@
 /area/exodus/engineering/storage)
 "bXs" = (
 /obj/machinery/atmospherics/unary/tank/oxygen{
-	volume = 3200
+	gas_volume = 3200
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/floor/tiled/steel_grid,
@@ -48544,7 +48544,7 @@
 /area/exodus/engineering/break_room)
 "bXv" = (
 /obj/machinery/atmospherics/unary/tank/hydrogen{
-	volume = 3200
+	gas_volume = 3200
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/floor/tiled/steel_grid,

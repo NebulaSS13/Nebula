@@ -1,8 +1,8 @@
 /obj/item/chems/chem_disp_cartridge/small
-	volume = CARTRIDGE_VOLUME_SMALL
+	chem_volume = CARTRIDGE_VOLUME_SMALL
 
 /obj/item/chems/chem_disp_cartridge/medium
-	volume = CARTRIDGE_VOLUME_MEDIUM
+	chem_volume = CARTRIDGE_VOLUME_MEDIUM
 
 /**
  * Helper macro to define a new cartridge type for a given reagent.

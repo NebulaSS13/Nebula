@@ -12,13 +12,14 @@
 
 /obj/item/utensil
 
-	abstract_type                    = /obj/item/utensil
-	icon_state                       = ICON_STATE_WORLD
-	w_class                          = ITEM_SIZE_SMALL
-	origin_tech                      = @'{"materials":1}'
-	attack_verb                      = list("attacked", "stabbed", "poked")
-	material                         = /decl/material/solid/metal/aluminium
-	material_alteration              = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	abstract_type       = /obj/item/utensil
+	icon_state          = ICON_STATE_WORLD
+	w_class             = ITEM_SIZE_SMALL
+	origin_tech         = @'{"materials":1}'
+	attack_verb         = list("attacked", "stabbed", "poked")
+	material            = /decl/material/solid/metal/aluminium
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	chem_volume         = 5
 
 	var/obj/item/food/loaded_food
 	var/utensil_flags
@@ -32,7 +33,6 @@
 	if (prob(60))
 		default_pixel_y = rand(0, 4)
 		reset_offsets(0)
-	create_reagents(5)
 	set_extension(src, /datum/extension/tool/variable/simple, list(
 		TOOL_RETRACTOR = TOOL_QUALITY_BAD,
 		TOOL_HEMOSTAT =  TOOL_QUALITY_MEDIOCRE

@@ -73,7 +73,7 @@
 			var/datum/gas_mixture/environment = turf.return_air()
 			environment_temperature = environment?.temperature || 0
 		if(abs(environment_temperature-pipe_air.temperature) > minimum_temperature_difference)
-			parent.temperature_interact(turf, volume, thermal_conductivity)
+			parent.temperature_interact(turf, gas_volume, thermal_conductivity)
 
 	// Burn mobs buckled to this pipe.
 	if(buckled_mob)

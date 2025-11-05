@@ -1426,7 +1426,7 @@
 /area/lost_supply_base/common)
 "eD" = (
 /obj/machinery/atmospherics/unary/tank/hydrogen{
-	volume = 3200
+	gas_volume = 3200
 	},
 /turf/floor/plating/airless,
 /area/lost_supply_base)

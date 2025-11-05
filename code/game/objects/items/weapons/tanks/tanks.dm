@@ -42,7 +42,7 @@ var/global/list/global/tank_gauge_cache = list()
 	var/maxintegrity = 20
 	var/valve_welded = 0
 	var/obj/item/tankassemblyproxy/proxyassembly
-	var/volume = 70
+	var/gas_volume = 70
 	//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.
 	//If they have and we haven't scanned it with the PDA or gas analyzer then we might just breath whatever they put in it.
 	var/manipulated_by = null
@@ -56,9 +56,9 @@ var/global/list/global/tank_gauge_cache = list()
 	proxyassembly = new /obj/item/tankassemblyproxy(src)
 	proxyassembly.tank = src
 
-	air_contents = new /datum/gas_mixture(volume, T20C)
+	air_contents = new /datum/gas_mixture(gas_volume, T20C)
 	for(var/gas in starting_pressure)
-		air_contents.adjust_gas(gas, starting_pressure[gas]*volume/(R_IDEAL_GAS_EQUATION*T20C), 0)
+		air_contents.adjust_gas(gas, starting_pressure[gas]*gas_volume/(R_IDEAL_GAS_EQUATION*T20C), 0)
 	air_contents.update_values()
 
 	START_PROCESSING(SSobj, src)
@@ -366,7 +366,7 @@ var/global/list/global/tank_gauge_cache = list()
 
 	var/datum/gas_mixture/removed = remove_air(distribute_pressure*volume_to_return/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
 	if(removed)
-		removed.volume = volume_to_return
+		removed.total_volume = volume_to_return
 	return removed
 
 /obj/item/tank/Process()
@@ -418,7 +418,7 @@ var/global/list/global/tank_gauge_cache = list()
 			pressure = air_contents.return_pressure()
 			var/strength = ((pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE)
 
-			var/mult = ((air_contents.volume/140)**(1/2)) * (air_contents.total_moles**2/3)/((29*0.64) **2/3) //tanks appear to be experiencing a reduction on scale of about 0.64 total moles
+			var/mult = ((air_contents.total_volume/140)**(1/2)) * (air_contents.total_moles**2/3)/((29*0.64) **2/3) //tanks appear to be experiencing a reduction on scale of about 0.64 total moles
 			//tanks appear to be experiencing a reduction on scale of about 0.64 total moles
 
 			var/turf/T = get_turf(src)
@@ -514,7 +514,7 @@ var/global/list/global/tank_gauge_cache = list()
 	desc = initial(tank_copy.desc)
 	icon = initial(tank_copy.icon)
 	icon_state = initial(tank_copy.icon_state)
-	volume = initial(tank_copy.volume)
+	gas_volume = initial(tank_copy.gas_volume)
 
 	// Set up explosive mix.
 	air_contents.gas[DEFAULT_GAS_ACCELERANT] = 4 + rand(4)

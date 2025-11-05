@@ -106,18 +106,15 @@
 		ADD_ACTIVE_FLUID(src)
 
 /turf/get_reagents()
-	if(!reagents)
-		create_reagents(FLUID_MAX_DEPTH)
+	create_or_update_reagents(FLUID_MAX_DEPTH)
 	return ..()
 
 /turf/add_to_reagents(reagent_type, amount, data, safety = FALSE, defer_update = FALSE, phase = null)
-	if(!reagents)
-		create_reagents(FLUID_MAX_DEPTH)
+	create_or_update_reagents(FLUID_MAX_DEPTH)
 	return ..()
 
 /turf/get_reagent_space()
-	if(!reagents)
-		create_reagents(FLUID_MAX_DEPTH)
+	create_or_update_reagents(FLUID_MAX_DEPTH)
 	return ..()
 
 /turf/fluid_act(var/datum/reagents/fluids)
@@ -146,8 +143,7 @@
 	// No flowing of reagents without liquids, but this proc should not be called if liquids are not present regardless.
 	if(!reagents?.total_liquid_volume)
 		return
-	if(!target.reagents)
-		target.create_reagents(FLUID_MAX_DEPTH)
+	target.create_or_update_reagents(FLUID_MAX_DEPTH)
 
 	// We reference total_volume instead of total_liquid_volume here because the maximum volume limits of the turfs still respect solid volumes, and depth is still determined by total volume.
 	reagents.trans_to_turf(target, min(reagents.total_volume, min(target.reagents.maximum_volume - target.reagents.total_volume, amount)), defer_update = defer_update)

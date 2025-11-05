@@ -182,7 +182,7 @@
 	log_debug("iexpl: Beginning SFX phase.")
 	time = REALTIMEOFDAY
 
-	var/volume = 10 + (power * 20)
+	var/explosion_volume = 10 + (power * 20)
 
 	var/frequency = get_rand_frequency()
 	var/close_dist = round(power + world.view - 2, 1)
@@ -217,12 +217,12 @@
 		var/dist = get_dist(M, epicenter) || 1
 		if ((reception & EXPLFX_SOUND) && !HAS_STATUS(M, STAT_DEAF))
 			if (dist <= close_dist)
-				M.playsound_local(epicenter, explosion_sound, min(100, volume), 1, frequency, falloff = 5)
+				M.playsound_local(epicenter, explosion_sound, min(100, explosion_volume), 1, frequency, falloff = 5)
 				//You hear a far explosion if you're outside the blast radius. Small bombs shouldn't be heard all over the station.
 			else
-				volume = M.playsound_local(epicenter, 'sound/effects/explosionfar.ogg', volume, 1, frequency, falloff = 1000)
+				explosion_volume = M.playsound_local(epicenter, 'sound/effects/explosionfar.ogg', explosion_volume, 1, frequency, falloff = 1000)
 
-		if ((reception & EXPLFX_SHAKE) && volume > 0)
+		if ((reception & EXPLFX_SHAKE) && explosion_volume > 0)
 			shake_camera(M, min(30, max(2,(power*2) / dist)), min(3.5, ((power/3) / dist)),0.05)
 			//Maximum duration is 3 seconds, and max strength is 3.5
 			//Becuse values higher than those just get really silly

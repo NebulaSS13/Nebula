@@ -14,8 +14,9 @@
 	material = /decl/material/liquid/cleaner/soap
 	max_health = 5
 	_base_attack_force = 0
-	var/key_data
+	chem_volume = SOAP_MAX_VOLUME
 
+	var/key_data
 	var/list/valid_colors = list(COLOR_GREEN_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_BROWN, COLOR_PALE_PINK, COLOR_PALE_BTL_GREEN, COLOR_OFF_WHITE, COLOR_GRAY40, COLOR_GOLD)
 	var/list/valid_scents = list("fresh air", "cinnamon", "mint", "cocoa", "lavender", "an ocean breeze", "a summer garden", "vanilla", "cheap perfume")
 	var/list/scent_intensity = list("faintly", "strongly", "overbearingly")
@@ -31,16 +32,11 @@
 /obj/item/soap/crafted/generate_icon()
 	return
 
-/obj/item/soap/initialize_reagents(populate = TRUE)
-	create_reagents(SOAP_MAX_VOLUME)
-	. = ..()
-
 /obj/item/soap/populate_reagents()
 	wet()
 
 /obj/item/soap/Initialize()
 	. = ..()
-	initialize_reagents()
 	generate_icon()
 
 /obj/item/soap/proc/generate_icon()

@@ -8,7 +8,7 @@
 	//Sum of all the gas moles in this mix.  Updated by update_values()
 	var/total_moles = 0
 	//Volume of this mix.
-	var/volume = CELL_VOLUME
+	var/total_volume = CELL_VOLUME
 	//Size of the group this gas_mixture is representing.  1 for singletons.
 	var/group_multiplier = 1
 
@@ -21,14 +21,14 @@
 
 /datum/gas_mixture/New(_volume, _temperature, _group_multiplier)
 	if(!isnull(_volume))
-		volume = _volume
+		total_volume = _volume
 	if(!isnull(_temperature))
 		temperature = _temperature
 	if(!isnull(_group_multiplier))
 		group_multiplier = _group_multiplier
 
 	//Since we may have values defined on creation, update everything.
-	if(volume && length(gas))
+	if(total_volume && length(gas))
 		update_values()
 
 /datum/gas_mixture/proc/get_gas(gasid)
@@ -107,9 +107,9 @@
 
 	for(var/g in gas|sharer.gas)
 		var/comb = gas[g] + sharer.gas[g]
-		comb /= volume + sharer.volume
-		gas[g] = comb * volume
-		sharer.gas[g] = comb * sharer.volume
+		comb /= total_volume + sharer.total_volume
+		gas[g] = comb * total_volume
+		sharer.gas[g] = comb * sharer.total_volume
 
 	if(our_heatcap + share_heatcap)
 		temperature = ((temperature * our_heatcap) + (sharer.temperature * share_heatcap)) / (our_heatcap + share_heatcap)
@@ -188,7 +188,7 @@
 	var/molar_mass = mat.molar_mass
 	var/specific_heat = mat.gas_specific_heat
 	var/safe_temp = max(temperature, TCMB) // We're about to divide by this.
-	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*volume/(gas[gasid] * safe_temp)) * (molar_mass*specific_heat*safe_temp)**(2/3) + 1 ) +  15 )
+	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*total_volume/(gas[gasid] * safe_temp)) * (molar_mass*specific_heat*safe_temp)**(2/3) + 1 ) +  15 )
 
 	//alternative, simpler equation
 	//var/partial_pressure = gas[gasid] * R_IDEAL_GAS_EQUATION * temperature / volume
@@ -209,8 +209,8 @@
 
 //Returns the pressure of the gas mix.  Only accurate if there have been no gas modifications since update_values() has been called.
 /datum/gas_mixture/proc/return_pressure()
-	if(volume)
-		return total_moles * R_IDEAL_GAS_EQUATION * temperature / volume
+	if(total_volume)
+		return total_moles * R_IDEAL_GAS_EQUATION * temperature / total_volume
 	return 0
 
 
@@ -249,7 +249,7 @@
 		gas[g] = gas[g] * (1 - ratio)
 
 	removed.temperature = temperature
-	removed.volume = volume * group_multiplier / out_group_multiplier
+	removed.total_volume = total_volume * group_multiplier / out_group_multiplier
 	update_values()
 	removed.update_values()
 
@@ -257,8 +257,8 @@
 
 //Removes a volume of gas from the mixture and returns a gas_mixture containing the removed air with the given volume
 /datum/gas_mixture/proc/remove_volume(removed_volume)
-	var/datum/gas_mixture/removed = remove_ratio(removed_volume/(volume*group_multiplier), 1)
-	removed.volume = removed_volume
+	var/datum/gas_mixture/removed = remove_ratio(removed_volume/(total_volume*group_multiplier), 1)
+	removed.total_volume = removed_volume
 	return removed
 
 //Removes moles from the gas mixture, limited by a given flag.  Returns a gax_mixture containing the removed air.
@@ -305,7 +305,7 @@
 	return 1
 
 /datum/gas_mixture/GetCloneArgs()
-	return list(volume, temperature, group_multiplier)
+	return list(total_volume, temperature, group_multiplier)
 
 /datum/gas_mixture/PopulateClone(datum/gas_mixture/clone)
 	clone.gas         = gas.Copy()
@@ -461,7 +461,7 @@
 
 	var/list/total_gas = list()
 	for(var/datum/gas_mixture/gasmix in gases)
-		total_volume += gasmix.volume
+		total_volume += gasmix.total_volume
 		var/temp_heatcap = gasmix.heat_capacity()
 		total_thermal_energy += gasmix.temperature * temp_heatcap
 		total_heat_capacity += temp_heatcap
@@ -488,7 +488,7 @@
 		for(var/datum/gas_mixture/gasmix in gases)
 			gasmix.gas = combined.gas.Copy()
 			gasmix.temperature = combined.temperature
-			gasmix.multiply(gasmix.volume)
+			gasmix.multiply(gasmix.total_volume)
 
 	return 1
 

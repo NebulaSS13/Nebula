@@ -184,7 +184,7 @@
 	icon_state = "ecartridge"
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
-	volume = 20
+	chem_volume = 20
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/chems/ecig_cartridge/get_examine_strings(mob/user, distance, infix, suffix)

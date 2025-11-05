@@ -14,7 +14,7 @@
 	material = /decl/material/solid/glass
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[1,2,5]"
-	volume = 15
+	chem_volume = 15
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	sharp = TRUE
@@ -100,7 +100,7 @@
 		return
 	var/rounded_vol = 0
 	if (reagents?.total_volume > 0)
-		rounded_vol = clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
+		rounded_vol = clamp(round((reagents.total_volume / max(1, reagents.maximum_volume * 15)),5), 5, 15)
 	if(ismob(loc))
 		add_overlay((mode == SYRINGE_DRAW)? "[icon_state]_draw" : "[icon_state]_inject")
 	icon_state = "[icon_state]_[rounded_vol]"
@@ -317,7 +317,7 @@
 	name = "lethal injection syringe"
 	desc = "A syringe used for lethal injections."
 	amount_per_transfer_from_this = 60
-	volume = 60
+	chem_volume = 60
 	visible_name = "a giant syringe"
 	time = 30 SECONDS
 	mode = SYRINGE_INJECT
@@ -389,7 +389,7 @@
 	name = "advanced syringe"
 	desc = "An advanced syringe that can hold 60 units of chemicals."
 	amount_per_transfer_from_this = 20
-	volume = 60
+	chem_volume = 60
 	icon = 'icons/obj/syringe_advanced.dmi'
 	material = /decl/material/solid/glass
 	matter = list(
@@ -401,7 +401,7 @@
 /obj/item/chems/syringe/noreact
 	name = "cryostasis syringe"
 	desc = "An advanced syringe that stops reagents inside from reacting. It can hold up to 20 units."
-	volume = 20
+	chem_volume = 20
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE
 	icon = 'icons/obj/syringe_cryo.dmi'
 	material = /decl/material/solid/glass

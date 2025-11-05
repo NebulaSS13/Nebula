@@ -315,7 +315,7 @@
 /obj/item/chems/spray/cleaner/drone
 	name = "space cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
-	volume = 150
+	chem_volume = 150
 
 /obj/item/robot_rack
 	name = "a generic robot rack"

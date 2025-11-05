@@ -17,8 +17,8 @@
 	var/additional_description
 
 /obj/item/towel/Initialize()
+	chem_volume = round(50 * (w_class / ITEM_SIZE_NORMAL)) // larger towels have more room, smaller ones have less
 	. = ..()
-	initialize_reagents()
 
 /obj/item/towel/Destroy()
 	if(is_processing)
@@ -65,10 +65,6 @@
 		reagents.remove_any(max(MINIMUM_CHEMICAL_VOLUME, CHEMS_QUANTIZE(reagents.total_volume * 0.05)))
 	if(!reagents?.total_volume)
 		return PROCESS_KILL
-
-/obj/item/towel/initialize_reagents()
-	create_reagents(round(50 * (w_class / ITEM_SIZE_NORMAL))) // larger towels have more room, smaller ones have less
-	. = ..()
 
 /obj/item/towel/update_name()
 	if(reagents?.total_volume)

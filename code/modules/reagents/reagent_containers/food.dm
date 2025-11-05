@@ -21,9 +21,8 @@
 	w_class = ITEM_SIZE_SMALL
 	abstract_type = /obj/item/food
 	needs_attack_dexterity = DEXTERITY_NONE
+	chem_volume = 50
 
-	/// The maximum reagent volume of this food. Used in initialize_reagents.
-	var/volume = 50
 	/// Indicates the food should give a stress effect on eating.
 	// This is set to 1 if the food is created by a recipe, -1 if the food is raw.
 	var/cooked_food = FOOD_PREPARED
@@ -59,18 +58,10 @@
 	else if(!istype(plate))
 		plate = null
 
-	initialize_reagents()
 	if(isnull(_utensil_food_type))
 		_utensil_food_type = type
 	if(slice_path && slice_num)
 		utensil_flags |= UTENSIL_FLAG_SLICE
-
-/obj/item/food/initialize_reagents(populate = TRUE)
-	if(!reagents)
-		create_reagents(volume)
-	else
-		reagents.maximum_volume = max(reagents.maximum_volume, volume)
-	return ..()
 
 // Dummy type used solely for soup bowls/soup spoons.
 /obj/item/food/lump

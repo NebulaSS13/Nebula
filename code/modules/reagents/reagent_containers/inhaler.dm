@@ -7,7 +7,7 @@
 	icon_state = ICON_STATE_WORLD
 	center_of_mass = @'{"x":16,"y":11}'
 	amount_per_transfer_from_this = 5
-	volume = 5
+	chem_volume = 5
 	w_class = ITEM_SIZE_SMALL
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER

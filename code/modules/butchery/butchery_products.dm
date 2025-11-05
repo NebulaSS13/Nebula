@@ -5,7 +5,7 @@
 	material            = /decl/material/solid/organic/meat
 	color               = /decl/material/solid/organic/meat::color
 	w_class             = ITEM_SIZE_NORMAL
-	volume              = 20
+	chem_volume         = 20
 	nutriment_type      = /decl/material/solid/organic/meat
 	nutriment_desc      = list("umami" = 10)
 	nutriment_amt       = 20

@@ -28,7 +28,7 @@
 	return null
 
 /obj/item/chems/spray/extinguisher/mech
-	volume = 4000 //Good is gooder
+	chem_volume = 4000 //Good is gooder
 	icon_state = "mech_exting"
 
 /obj/item/chems/spray/extinguisher/mech/get_hardpoint_maptext()

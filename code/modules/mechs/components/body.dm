@@ -52,13 +52,13 @@
 		)
 	if(pilot_coverage >= 100) //Open cockpits dont get to have air
 		cockpit = new
-		cockpit.volume = 200
+		cockpit.total_volume = 200
 		if(loc)
 			var/datum/gas_mixture/air = loc.return_air()
 			if(air)
 				//Essentially at this point its like we created a vacuum, but realistically making a bottle doesnt actually increase volume of a room and neither should a mech
 				for(var/g in air.gas)
-					cockpit.gas[g] = (air.gas[g] / air.volume) * cockpit.volume
+					cockpit.gas[g] = (air.gas[g] / air.total_volume) * cockpit.total_volume
 
 				cockpit.temperature = air.temperature
 				cockpit.update_values()
@@ -107,7 +107,7 @@
 		if(pressure_delta > 0)
 			if(air_supply.air_contents.temperature > 0)
 				var/transfer_moles = calculate_transfer_moles(air_supply.air_contents, cockpit, pressure_delta)
-				transfer_moles = min(transfer_moles, (air_supply.release_flow_rate/air_supply.air_contents.volume)*air_supply.air_contents.total_moles)
+				transfer_moles = min(transfer_moles, (air_supply.release_flow_rate/air_supply.air_contents.total_volume)*air_supply.air_contents.total_moles)
 				pump_gas_passive(air_supply, air_supply.air_contents, cockpit, transfer_moles)
 				changed = TRUE
 		else if(pressure_delta < 0) //Release overpressure.

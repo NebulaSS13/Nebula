@@ -68,7 +68,7 @@
 			if(g != /decl/material/gas/oxygen && g != /decl/material/gas/nitrogen)
 				scrubbing_gas += g
 	. = ..()
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
+	air_contents.total_volume = ATMOS_DEFAULT_VOLUME_FILTER
 
 /obj/machinery/atmospherics/unary/vent_scrubber/reset_area(area/old_area, area/new_area)
 	if(!controlled)
@@ -151,17 +151,17 @@
 	var/transfer_moles = 0
 	if(scrubbing == SCRUBBER_SIPHON) //Just siphon all air
 		//limit flow rate from turfs
-		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.total_volume)	//group_multiplier gets divided out here
 		power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
 	else //limit flow rate from turfs
-		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.total_volume)	//group_multiplier gets divided out here
 		power_draw = scrub_gas(src, scrubbing_gas, environment, air_contents, transfer_moles, power_rating)
 
 	if(scrubbing != SCRUBBER_SIPHON && power_draw <= 0)	//99% of all scrubbers
 		//Fucking hibernate because you ain't doing shit.
 		hibernate = world.time + (rand(100,200))
 	else if(scrubbing == SCRUBBER_EXCHANGE) // after sleep check so it only does an exchange if there are bad gasses that have been scrubbed
-		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.volume)
+		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.total_volume)
 		power_draw += pump_gas(src, environment, air_contents, transfer_moles / 4, power_rating)
 
 	if (power_draw >= 0)

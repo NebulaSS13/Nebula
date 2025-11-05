@@ -7,15 +7,13 @@
 /obj/item/integrated_circuit/reagent
 	category_text = "Reagent"
 	cooldown_per_use = 10
-	var/volume = 0
 
 /obj/item/integrated_circuit/reagent/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
 	return FALSE
 
 /obj/item/integrated_circuit/reagent/Initialize()
 	. = ..()
-	if(volume)
-		create_reagents(volume)
+	if(reagents?.maximum_volume)
 		push_vol()
 
 /obj/item/integrated_circuit/reagent/proc/push_vol()
@@ -30,7 +28,7 @@
 	into the smoke clouds when activated. The reagents are consumed when the smoke is made."
 	ext_cooldown = 1
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	volume = 100
+	chem_volume = 100
 
 	complexity = 20
 	cooldown_per_use = 1 SECONDS
@@ -81,7 +79,7 @@
 	must be adjacent to the machine, and if it is a person, they cannot be wearing thick clothing. Negative given amounts makes the injector suck out reagents instead."
 
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	volume = 30
+	chem_volume = 30
 
 	complexity = 20
 	cooldown_per_use = 6 SECONDS
@@ -117,7 +115,7 @@
 	else
 		direction_mode = IC_REAGENTS_INJECT
 	if(isnum(new_amount))
-		new_amount = clamp(new_amount, 0, volume)
+		new_amount = clamp(new_amount, 0, reagents.maximum_volume)
 		transfer_amount = new_amount
 
 
@@ -304,7 +302,7 @@
 	extended_desc = "This is effectively an internal beaker."
 
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	volume = 60
+	chem_volume = 60
 
 	complexity = 4
 	inputs = list()
@@ -326,7 +324,7 @@
 	icon_state = "reagent_storage_big"
 	desc = "Stores liquid inside the device away from electrical components. Can store up to 180u."
 
-	volume = 180
+	chem_volume = 180
 
 	complexity = 16
 	spawn_flags = IC_SPAWN_RESEARCH
@@ -359,7 +357,7 @@
 		"on fail" = IC_PINTYPE_PULSE_OUT,
 		"push ref" = IC_PINTYPE_PULSE_IN
 		)
-	volume = 100
+	chem_volume = 100
 	power_draw_per_use = 150
 	complexity = 16
 	spawn_flags = IC_SPAWN_RESEARCH
@@ -552,7 +550,7 @@
 	complexity = 12
 	cooldown_per_use = 1
 	power_draw_per_use = 50
-	volume = 30
+	chem_volume = 30
 
 	var/active = 0
 	var/min_temp = 40 CELSIUS

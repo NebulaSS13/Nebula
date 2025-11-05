@@ -12,6 +12,7 @@
 	uncreated_component_parts = null
 	maximum_component_parts   = list(/obj/item/stock_parts = 15)
 	stat_immune               = 0
+	chem_volume               = 500
 
 	//var/obj/item/chems/glass/coolant_container
 	var/scanning = 0
@@ -51,10 +52,6 @@
 		/decl/material/liquid/amphetamines = 0.8,
 		/decl/material/liquid/adminordrazine = 2
 	)
-
-/obj/machinery/radiocarbon_spectrometer/Initialize()
-	. = ..()
-	create_reagents(500)
 
 /obj/machinery/radiocarbon_spectrometer/interface_interact(var/mob/user)
 	ui_interact(user)

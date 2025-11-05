@@ -9,7 +9,6 @@
 	var/lit = FALSE
 	var/waterproof = FALSE
 	var/type_butt = null
-	var/chem_volume = 0
 	var/smoketime = 0
 	var/genericmes = "<span class='notice'>USER lights their NAME with the FLAME.</span>"
 	var/matchmes = "USER lights NAME with FLAME"
@@ -38,7 +37,6 @@
 /obj/item/clothing/mask/smokable/Initialize()
 	. = ..()
 	atom_flags |= ATOM_FLAG_NO_CHEM_CHANGE // so it doesn't react until you light it
-	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 
 /obj/item/clothing/mask/smokable/Destroy()
 	. = ..()
@@ -223,7 +221,6 @@
 
 /obj/item/clothing/mask/smokable/cigarette/Initialize()
 	. = ..()
-	initialize_reagents()
 	set_extension(src, /datum/extension/tool, list(TOOL_CAUTERY = TOOL_QUALITY_MEDIOCRE))
 
 /obj/item/clothing/mask/smokable/cigarette/populate_reagents()
@@ -395,7 +392,7 @@
 		if(!ATOM_IS_OPEN_CONTAINER(glass))
 			to_chat(user, SPAN_NOTICE("You need to take the lid off first."))
 			return TRUE
-		var/transfered = glass.reagents.trans_to_obj(src, chem_volume)
+		var/transfered = glass.reagents.trans_to_obj(src, glass.reagents.total_volume)
 		if(transfered)	//if reagents were transfered, show the message
 			to_chat(user, SPAN_NOTICE("You dip \the [src] into \the [glass]."))
 		else			//if not, either the beaker was empty, or the cigarette was full

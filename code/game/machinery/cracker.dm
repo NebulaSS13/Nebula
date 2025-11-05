@@ -6,7 +6,7 @@
 	density = TRUE
 	anchored = TRUE
 	waterproof = TRUE
-	volume = 5000
+	gas_volume = 5000
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 100
 	active_power_usage = 10000

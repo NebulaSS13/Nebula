@@ -12,7 +12,7 @@
 	wrenchable                = FALSE
 	storage                   = /datum/storage/barrel
 	amount_dispensed          = 10
-	volume                    = 7500
+	chem_volume               = 7500
 	movable_flags             = MOVABLE_FLAG_WHEELED
 	throwpass                 = TRUE
 	tool_interaction_flags    = TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT

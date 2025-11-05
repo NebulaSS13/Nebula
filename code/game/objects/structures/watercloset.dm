@@ -248,6 +248,7 @@ var/global/list/hygiene_props = list()
 	clogged = -1
 	can_drain = 1
 	drainage = 0.2 			//showers are tiny, drain a little slower
+	chem_volume = 5
 
 	var/on = 0
 	var/next_mist = 0
@@ -259,11 +260,6 @@ var/global/list/hygiene_props = list()
 	var/datum/sound_token/sound_token
 
 //add heat controls? when emagged, you can freeze to death in it?
-
-/obj/structure/hygiene/shower/Initialize()
-	. = ..()
-	create_reagents(5)
-
 /obj/structure/hygiene/shower/Destroy()
 	QDEL_NULL(sound_token)
 	. = ..()

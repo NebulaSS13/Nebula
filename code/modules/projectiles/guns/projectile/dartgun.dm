@@ -22,7 +22,7 @@
 	var/list/starting_chems = null
 
 /obj/item/gun/projectile/dartgun/Initialize()
-	initialize_reagents()
+	chem_volume = length(starting_chems) * 60
 	. = ..()
 	update_icon()
 
@@ -89,8 +89,8 @@
 
 //fills the given dart with reagents
 /obj/item/gun/projectile/dartgun/proc/fill_dart(var/obj/item/projectile/bullet/chemdart/dart)
-	if(mixing.len)
-		var/mix_amount = dart.reagent_amount/mixing.len
+	if(length(mixing))
+		var/mix_amount = dart.reagents?.total_volume/length(mixing)
 		for(var/obj/item/chems/glass/beaker/B in mixing)
 			B.reagents.trans_to_obj(dart, mix_amount)
 

@@ -79,6 +79,7 @@
 	icon_state = "engine_fuel"
 	trail_type = /datum/effect/effect/system/trail/thermal
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	chem_volume = 500
 	var/datum/reagents/combustion_chamber
 	var/fuel_points = 0
 	//fuel points are determined by differing reagents
@@ -88,7 +89,6 @@
 
 /obj/item/engine/thermal/Initialize()
 	. = ..()
-	create_reagents(500)
 	combustion_chamber = new(15, global.temp_reagents_holder)
 
 /obj/item/engine/thermal/attackby(var/obj/item/used_item, var/mob/user)

@@ -39,7 +39,7 @@
 
 	rebuild_filtering_list()
 	for(var/datum/omni_port/P in ports)
-		P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
+		P.air.total_volume = ATMOS_DEFAULT_VOLUME_FILTER
 
 /obj/machinery/atmospherics/omni/filter/Destroy()
 	input = null
@@ -57,7 +57,7 @@
 			if(P in gas_filters)
 				gas_filters -= P
 
-			P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
+			P.air.total_volume = ATMOS_DEFAULT_VOLUME_FILTER
 			switch(P.mode)
 				if(ATM_INPUT)
 					input = P
@@ -82,13 +82,13 @@
 	var/datum/gas_mixture/input_air = input.air		// it's completely happy with them if they're in a loop though i.e. "P.air.return_pressure()"... *shrug*
 
 	var/delta = clamp(0, (output_air ? (max_output_pressure - output_air.return_pressure()) : 0), max_output_pressure)
-	var/transfer_moles_max = calculate_transfer_moles(input_air, output_air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0)
+	var/transfer_moles_max = calculate_transfer_moles(input_air, output_air, delta, (output && output.network && output.network.total_volume) ? output.network.total_volume : 0)
 	for(var/datum/omni_port/filter_output in gas_filters)
 		delta = clamp(0, (filter_output.air ? (max_output_pressure - filter_output.air.return_pressure()) : 0), max_output_pressure)
-		transfer_moles_max = min(transfer_moles_max, (calculate_transfer_moles(input_air, filter_output.air, delta, (filter_output && filter_output.network && filter_output.network.volume) ? filter_output.network.volume : 0)))
+		transfer_moles_max = min(transfer_moles_max, (calculate_transfer_moles(input_air, filter_output.air, delta, (filter_output && filter_output.network && filter_output.network.total_volume) ? filter_output.network.total_volume : 0)))
 
 	//Figure out the amount of moles to transfer
-	var/transfer_moles = clamp(0, ((set_flow_rate/input_air.volume)*input_air.total_moles), transfer_moles_max)
+	var/transfer_moles = clamp(0, ((set_flow_rate/input_air.total_volume)*input_air.total_moles), transfer_moles_max)
 
 	var/power_draw = -1
 	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)

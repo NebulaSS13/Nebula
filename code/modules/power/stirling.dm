@@ -196,10 +196,10 @@
 	if(!sound_id)
 		sound_id = "[type]_[sequential_id(/obj/machinery/atmospherics/binary/stirling)]"
 	if(active)
-		var/volume = 10 + 15*genlev
+		var/work_volume = 10 + 15*genlev
 		if(!sound_token)
-			sound_token = play_looping_sound(src, sound_id, 'sound/machines/engine.ogg', volume = volume)
-		sound_token.SetVolume(volume)
+			sound_token = play_looping_sound(src, sound_id, 'sound/machines/engine.ogg', volume = work_volume)
+		sound_token.SetVolume(work_volume)
 	else if(sound_token)
 		QDEL_NULL(sound_token)
 
@@ -225,7 +225,7 @@
 	slot_flags = null
 	starting_pressure = list(/decl/material/gas/hydrogen = 2 ATM)
 
-	volume = 30
+	gas_volume = 30
 	failure_temp = 1000
 
 /obj/item/tank/stirling/Initialize()

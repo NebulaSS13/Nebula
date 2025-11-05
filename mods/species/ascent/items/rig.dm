@@ -135,7 +135,7 @@
 	name = "mantid gas tank"
 	icon = 'mods/species/ascent/icons/tank.dmi'
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	volume = 180
+	gas_volume = 180
 
 /obj/item/tank/mantid/methyl_bromide
 	starting_pressure = list(/decl/material/gas/methyl_bromide = 6 ATM)

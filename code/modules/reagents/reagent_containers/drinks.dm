@@ -11,7 +11,7 @@
 	possible_transfer_amounts = null
 	amount_per_transfer_from_this = 5
 	randpixel = 6
-	volume = 50
+	chem_volume = 50
 	abstract_type = /obj/item/chems/drinks
 	watertight = FALSE // /drinks uses the open container flag for this
 
@@ -69,17 +69,17 @@
 		return
 	if(!reagents || reagents.total_volume == 0)
 		. += SPAN_NOTICE("\The [src] is empty!")
-	else if (reagents.total_volume <= volume * 0.25)
+	else if (reagents.total_volume <= reagents.maximum_volume * 0.25)
 		. += SPAN_NOTICE("\The [src] is almost empty!")
-	else if (reagents.total_volume <= volume * 0.66)
+	else if (reagents.total_volume <= reagents.maximum_volume * 0.66)
 		. += SPAN_NOTICE("\The [src] is half full!")
-	else if (reagents.total_volume <= volume * 0.90)
+	else if (reagents.total_volume <= reagents.maximum_volume * 0.90)
 		. += SPAN_NOTICE("\The [src] is almost full!")
 	else
 		. += SPAN_NOTICE("\The [src] is full!")
 
 /obj/item/chems/drinks/proc/get_filling_state()
-	var/percent = round((reagents.total_volume / volume) * 100)
+	var/percent = round((reagents.total_volume / reagents.maximum_volume) * 100)
 	for(var/k in cached_json_decode(filling_states))
 		if(percent <= k)
 			return k
@@ -102,7 +102,7 @@
 	w_class = ITEM_SIZE_HUGE
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = null
-	volume = 150
+	chem_volume = 150
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	_base_attack_force = 14
@@ -134,7 +134,7 @@
 
 /obj/item/chems/drinks/milk/smallcarton
 	name = "small milk carton"
-	volume = 30
+	chem_volume = 30
 	icon_state = "mini-milk"
 
 /obj/item/chems/drinks/milk/smallcarton/populate_reagents()
@@ -190,7 +190,7 @@
 	desc = "A paper water cup."
 	icon_state = "water_cup_e"
 	possible_transfer_amounts = null
-	volume = 10
+	chem_volume = 10
 	center_of_mass = @'{"x":16,"y":12}'
 
 /obj/item/chems/drinks/sillycup/on_update_icon()
@@ -212,7 +212,7 @@
 	icon_state = "teapot"
 	item_state = "teapot"
 	amount_per_transfer_from_this = 10
-	volume = 120
+	chem_volume = 120
 	center_of_mass = @'{"x":17,"y":7}'
 	material = /decl/material/solid/stone/ceramic
 	obj_flags = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE
@@ -221,7 +221,7 @@
 	name = "insulated pitcher"
 	desc = "A stainless steel insulated pitcher. Everyone's best friend in the morning."
 	icon_state = "pitcher"
-	volume = 120
+	chem_volume = 120
 	amount_per_transfer_from_this = 10
 	center_of_mass = @'{"x":16,"y":9}'
 	filling_states = @"[15,30,50,70,85,100]"
@@ -233,7 +233,7 @@
 	name = "\improper Captain's flask"
 	desc = "A metal flask belonging to the captain."
 	icon_state = "flask"
-	volume = 60
+	chem_volume = 60
 	center_of_mass = @'{"x":17,"y":7}'
 
 /obj/item/chems/drinks/flask/shiny
@@ -250,21 +250,21 @@
 	name = "\improper Detective's flask"
 	desc = "A metal flask with a leather band and golden badge belonging to the detective."
 	icon_state = "detflask"
-	volume = 60
+	chem_volume = 60
 	center_of_mass = @'{"x":17,"y":8}'
 
 /obj/item/chems/drinks/flask/barflask
 	name = "flask"
 	desc = "For those who can't be bothered to hang out at the bar to drink."
 	icon_state = "barflask"
-	volume = 60
+	chem_volume = 60
 	center_of_mass = @'{"x":17,"y":7}'
 
 /obj/item/chems/drinks/flask/vacuumflask
 	name = "vacuum flask"
 	desc = "Keeping your drinks at the perfect temperature since 1892."
 	icon_state = "vacuumflask"
-	volume = 60
+	chem_volume = 60
 	center_of_mass = @'{"x":15,"y":4}'
 
 //tea and tea accessories
@@ -276,7 +276,7 @@
 	center_of_mass = @'{"x":16,"y":14}'
 	filling_states = @"[100]"
 	base_icon = "cup"
-	volume = 30
+	chem_volume = 30
 
 /obj/item/chems/drinks/tea/black
 	name = "cup of black tea"

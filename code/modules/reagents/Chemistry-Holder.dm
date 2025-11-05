@@ -460,19 +460,19 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	for(var/decl/material/reagent as anything in liquid_volumes)
 		if(scannable_only && !reagent.scannable)
 			continue
-		var/volume = REAGENT_VOLUME(src, reagent)
+		var/scan_volume = REAGENT_VOLUME(src, reagent)
 		if(precision)
-			volume = round(volume, precision)
-		if(volume)
-			. += "[reagent.get_reagent_name(src, MAT_PHASE_LIQUID)] ([volume])"
+			scan_volume = round(scan_volume, precision)
+		if(scan_volume)
+			. += "[reagent.get_reagent_name(src, MAT_PHASE_LIQUID)] ([scan_volume])"
 	for(var/decl/material/reagent as anything in solid_volumes)
 		if(scannable_only && !reagent.scannable)
 			continue
-		var/volume = REAGENT_VOLUME(src, reagent)
+		var/scan_volume = REAGENT_VOLUME(src, reagent)
 		if(precision)
-			volume = round(volume, precision)
-		if(volume)
-			. += "[reagent.get_reagent_name(src, MAT_PHASE_SOLID)] ([volume])"
+			scan_volume = round(scan_volume, precision)
+		if(scan_volume)
+			. += "[reagent.get_reagent_name(src, MAT_PHASE_SOLID)] ([scan_volume])"
 	return english_list(., "EMPTY", "", ", ", ", ")
 
 /datum/reagents/proc/get_dirtiness()
@@ -905,8 +905,7 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 		qdel(reagent)
 		return
 
-	if(!target.reagents)
-		target.create_reagents(FLUID_MAX_DEPTH)
+	target.create_or_update_reagents(FLUID_MAX_DEPTH)
 
 	. = trans_to_holder(target.reagents, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
 	// Deferred updates are presumably being done by SSfluids.
@@ -986,6 +985,16 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	else
 		reagents = new/datum/reagents(max_vol, src)
 	return reagents
+
+/atom/proc/create_or_update_reagents(_vol, override_volume)
+	if(reagents)
+		if(override_volume)
+			reagents.maximum_volume = _vol // should we remove excess reagents here?
+		else
+			reagents.maximum_volume = max(reagents.maximum_volume, _vol)
+		reagents.update_total()
+		return reagents
+	return create_reagents(_vol)
 
 /// Infinite reagent sink: nothing is ever actually added to it, useful for complex, filtered deletion of reagents without holder churn.
 /datum/reagents/sink

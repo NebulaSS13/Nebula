@@ -3,15 +3,8 @@
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	material_alteration = MAT_FLAG_ALTERATION_ALL
+	chem_volume = 20
 	var/destroy_on_centrifuge = FALSE
-
-/obj/item/hive_frame/Initialize(ml, material_key)
-	. = ..()
-	initialize_reagents()
-
-/obj/item/hive_frame/initialize_reagents(populate = TRUE)
-	create_reagents(20)
-	. = ..()
 
 /obj/item/hive_frame/on_reagent_change()
 	. = ..()

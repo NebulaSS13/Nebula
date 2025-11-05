@@ -16,6 +16,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	chem_volume = 1000
+
 	var/processing = 0
 	var/obj/item/chems/glass/beaker = null
 	var/points = 0
@@ -54,7 +56,6 @@
 			/obj/item/stack/material/skin/mapped/synthleather =30))
 
 /obj/machinery/biogenerator/Initialize()
-	create_reagents(1000)
 	beaker = new /obj/item/chems/glass/bottle(src)
 	. = ..()
 

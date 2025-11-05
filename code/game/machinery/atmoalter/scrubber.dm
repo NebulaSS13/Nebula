@@ -10,7 +10,7 @@
 	movable_flags = MOVABLE_FLAG_WHEELED
 	var/volume_rate = 800
 
-	volume = 750
+	gas_volume = 750
 
 	power_rating = 7500 //7500 W ~ 10 HP
 	power_losses = 150
@@ -67,7 +67,7 @@
 		else
 			environment = loc.return_air()
 
-		var/transfer_moles = min(1, volume_rate/environment.volume)*environment.total_moles
+		var/transfer_moles = min(1, volume_rate/environment.total_volume)*environment.total_moles
 
 		power_draw = scrub_gas(src, scrubbing_gas, environment, air_contents, transfer_moles, power_rating)
 
@@ -151,7 +151,7 @@
 	name = "huge air scrubber"
 	icon_state = "scrubber:0"
 	anchored = TRUE
-	volume = 50000
+	gas_volume = 50000
 	volume_rate = 5000
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge
 

@@ -17,6 +17,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	storage = /datum/storage/crucible
 	obj_flags = OBJ_FLAG_NO_STORAGE
+	chem_volume = 300 * REAGENT_UNITS_PER_MATERIAL_SHEET
 
 /obj/item/chems/crucible/attackby(obj/item/used_item, mob/user)
 
@@ -66,7 +67,3 @@
 		I.alpha = 255 * primary_reagent.opacity
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
-
-/obj/item/chems/crucible/initialize_reagents()
-	create_reagents(300 * REAGENT_UNITS_PER_MATERIAL_SHEET) // holds a single full stack of 200 ore
-	return ..()

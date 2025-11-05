@@ -5,9 +5,9 @@ node1, air1, network1 correspond to input
 node2, air2, network2 correspond to output
 
 Thus, the two variables affect pump operation are set in New():
-	air1.volume
+	air1.total_volume
 		This is the volume of gas available to the pump that may be transfered to the output
-	air2.volume
+	air2.total_volume
 		Higher quantities of this cause more air to be perfected later
 			but overall network volume is also increased as this increases...
 */
@@ -61,8 +61,8 @@ Thus, the two variables affect pump operation are set in New():
 
 /obj/machinery/atmospherics/binary/pump/Initialize()
 	. = ..()
-	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
-	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
+	air1.total_volume = ATMOS_DEFAULT_VOLUME_PUMP
+	air2.total_volume = ATMOS_DEFAULT_VOLUME_PUMP
 
 /obj/machinery/atmospherics/binary/pump/on
 	icon_state = "map_on"
@@ -93,7 +93,7 @@ Thus, the two variables affect pump operation are set in New():
 	if(pressure_delta > 0.01 && air1.temperature > 0)
 		//Figure out how much gas to transfer to meet the target pressure.
 		var/datum/pipe_network/output = network_in_dir(dir)
-		var/transfer_moles = calculate_transfer_moles(air1, air2, pressure_delta, output?.volume)
+		var/transfer_moles = calculate_transfer_moles(air1, air2, pressure_delta, output?.total_volume)
 		power_draw = pump_gas(src, air1, air2, transfer_moles, power_rating)
 
 		if(transfer_moles > 0)

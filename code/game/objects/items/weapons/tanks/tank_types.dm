@@ -16,7 +16,7 @@
 	icon = 'icons/obj/items/tanks/tank_blue.dmi'
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	starting_pressure = list(/decl/material/gas/oxygen = 6 ATM)
-	volume = 180
+	gas_volume = 180
 
 /obj/item/tank/oxygen/yellow
 	desc = "A tank of oxygen. This one is yellow."
@@ -37,7 +37,7 @@
 	desc = "Mixed anyone?"
 	icon = 'icons/obj/items/tanks/tank_blue.dmi'
 	starting_pressure = list(/decl/material/gas/oxygen = (6 ATM) * O2STANDARD, /decl/material/gas/nitrogen = (6 ATM) * N2STANDARD)
-	volume = 180
+	gas_volume = 180
 
 /*
  * Hydrogen
@@ -69,7 +69,7 @@
 	attack_cooldown = DEFAULT_WEAPON_COOLDOWN
 	melee_accuracy_bonus = -10
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	volume = 40 //Tiny. Real life equivalents only have 21 breaths of oxygen in them. They're EMERGENCY tanks anyway -errorage (dangercon 2011)
+	gas_volume = 40 //Tiny. Real life equivalents only have 21 breaths of oxygen in them. They're EMERGENCY tanks anyway -errorage (dangercon 2011)
 
 /obj/item/tank/emergency/oxygen
 	name = "emergency oxygen tank"
@@ -81,13 +81,13 @@
 /obj/item/tank/emergency/oxygen/engi
 	name = "extended-capacity emergency oxygen tank"
 	icon = 'icons/obj/items/tanks/tank_emergency_engineer.dmi'
-	volume = 60
+	gas_volume = 60
 
 /obj/item/tank/emergency/oxygen/double
 	name = "double emergency oxygen tank"
 	icon = 'icons/obj/items/tanks/tank_emergency_double.dmi'
 	gauge_icon = "indicator_emergency_double"
-	volume = 90
+	gas_volume = 90
 	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/tank/emergency/oxygen/double/red	//firefighting tank, fits on belt, back or suitslot
@@ -105,4 +105,4 @@
 	icon = 'icons/obj/items/tanks/tank_red.dmi'
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	starting_pressure = list(/decl/material/gas/nitrogen = 10 ATM)
-	volume = 180
+	gas_volume = 180

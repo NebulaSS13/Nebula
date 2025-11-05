@@ -17,8 +17,8 @@
 		. += SPAN_NOTICE("\The [src] has about [foam_charges] liter\s of sealant left.")
 
 /obj/item/sealant_tank/Initialize(ml, material_key)
+	chem_volume = max_foam_charges
 	. = ..()
-	create_reagents(max_foam_charges)
 
 /obj/item/sealant_tank/mapped/Initialize()
 	. = ..()

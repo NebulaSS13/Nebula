@@ -57,7 +57,7 @@ Class Procs:
 	SSair.add_zone(src)
 	air.temperature = TCMB
 	air.group_multiplier = 1
-	air.volume = CELL_VOLUME
+	air.total_volume = CELL_VOLUME
 
 /zone/proc/add(turf/T)
 #ifdef ZASDBG
@@ -136,7 +136,7 @@ Class Procs:
 		CHECK_TICK
 
 /zone/proc/add_tile_air(datum/gas_mixture/tile_air)
-	//air.volume += CELL_VOLUME
+	//air.total_volume += CELL_VOLUME
 	air.group_multiplier = 1
 	air.multiply(contents.len)
 	air.merge(tile_air)
@@ -200,7 +200,7 @@ Class Procs:
 	for(var/g in air.gas)
 		var/decl/material/mat = GET_DECL(g)
 		to_chat(M, "[capitalize(mat.gas_name)]: [air.gas[g]]")
-	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
+	to_chat(M, "P: [air.return_pressure()] kPa V: [air.total_volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
 	to_chat(M, "O2 per N2: [(air.gas[/decl/material/gas/nitrogen] ? air.gas[/decl/material/gas/oxygen]/air.gas[/decl/material/gas/nitrogen] : "N/A")] Moles: [air.total_moles]")
 	to_chat(M, "Simulated: [contents.len] ([air.group_multiplier])")
 	to_chat(M, "Edges: [length(edges)]")

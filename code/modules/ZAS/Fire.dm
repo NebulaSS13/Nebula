@@ -112,15 +112,15 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	for(var/mob/living/L in loc)
 		L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
 
-	loc.fire_act(air_contents, air_contents.temperature, air_contents.volume)
+	loc.fire_act(air_contents, air_contents.temperature, air_contents.total_volume)
 	for(var/atom/A in loc)
-		A.fire_act(air_contents, air_contents.temperature, air_contents.volume)
+		A.fire_act(air_contents, air_contents.temperature, air_contents.total_volume)
 
 	// prioritize nearby fuel overlays first
 	for(var/direction in global.cardinal)
 		var/turf/enemy_tile = get_step(my_tile, direction)
 		if(istype(enemy_tile) && enemy_tile.reagents)
-			enemy_tile.hotspot_expose(air_contents.temperature, air_contents.volume)
+			enemy_tile.hotspot_expose(air_contents.temperature, air_contents.total_volume)
 
 	//spread
 	for(var/direction in global.cardinal)
@@ -141,7 +141,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 					enemy_tile.create_fire(firelevel)
 
 			else
-				enemy_tile.adjacent_fire_act(loc, air_contents, air_contents.temperature, air_contents.volume)
+				enemy_tile.adjacent_fire_act(loc, air_contents, air_contents.temperature, air_contents.total_volume)
 
 	animate(src, color = fire_color(air_contents.temperature), 5)
 	set_light(l_color = color)
@@ -209,8 +209,8 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		var/reaction_limit = min(total_oxidizers*(FIRE_REACTION_FUEL_AMOUNT/FIRE_REACTION_OXIDIZER_AMOUNT), total_fuel) //stoichiometric limit
 
 		//vapour fuels are extremely volatile! The reaction progress is a percentage of the total fuel (similar to old zburn).)
-		var/firelevel = calculate_firelevel(total_fuel, total_oxidizers, reaction_limit, volume*group_multiplier) / vsc.fire_firelevel_multiplier
-		var/min_burn = 0.30*volume*group_multiplier/CELL_VOLUME //in moles - so that fires with very small gas concentrations burn out fast
+		var/firelevel = calculate_firelevel(total_fuel, total_oxidizers, reaction_limit, total_volume*group_multiplier) / vsc.fire_firelevel_multiplier
+		var/min_burn = 0.30*total_volume*group_multiplier/CELL_VOLUME //in moles - so that fires with very small gas concentrations burn out fast
 		var/total_reaction_progress = min(max(min_burn, firelevel*total_fuel)*FIRE_GAS_BURNRATE_MULT, total_fuel)
 		var/used_fuel = min(total_reaction_progress, reaction_limit)
 		var/used_oxidizers = used_fuel*(FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT)

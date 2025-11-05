@@ -62,7 +62,7 @@
 /obj/item/robot_module/clerical/butler/finalize_emag()
 	. = ..()
 	if(emag)
-		var/datum/reagents/reagent = emag.create_reagents(50)
+		var/datum/reagents/reagent = emag.create_or_update_reagents(50)
 		reagent.add_reagent(/decl/material/liquid/paralytics, 10)
 		reagent.add_reagent(/decl/material/liquid/sedatives, 15)
 		reagent.add_reagent(/decl/material/liquid/alcohol/beer, 20)

@@ -79,7 +79,7 @@
 				src.usage_info = new (owner, src.player)
 			src.usage_info.ui_interact(user)
 		if ("volume")
-			src.player.volume = min(max(min(player.volume+text2num(value), 100), 0), player.max_volume)
+			src.player.play_volume = min(max(min(player.play_volume+text2num(value), 100), 0), player.max_volume)
 		if ("transposition")
 			src.player.song.transposition = max(min(player.song.transposition+value, global.musical_config.highest_transposition), global.musical_config.lowest_transposition)
 		if ("min_octave")
@@ -151,7 +151,7 @@
 		),
 		"basic_options" = list(
 			"cur_instrument" = src.player.song.instrument_data.name,
-			"volume" = src.player.volume,
+			"volume" = src.player.play_volume,
 			"BPM" = round(600 / src.player.song.tempo),
 			"transposition" = src.player.song.transposition,
 			"octave_range" = list(

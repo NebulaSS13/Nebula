@@ -12,7 +12,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	icon_state = null
 	base_icon = "square" // Base icon name
 	filling_states = @"[20,40,60,80,100]"
-	volume = 30
+	chem_volume = 30
 	material = /decl/material/solid/glass
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
@@ -77,7 +77,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 			for(var/decl/material/reagent as anything in reagents.reagent_volumes)
 				if("vapor" in reagent.glass_special)
 					totalvape += REAGENT_VOLUME(reagents, reagent)
-			if(totalvape >= volume * 0.6) // 60% vapor by container volume
+			if(totalvape >= reagents.maximum_volume * 0.6) // 60% vapor by container volume
 				return 1
 	return 0
 

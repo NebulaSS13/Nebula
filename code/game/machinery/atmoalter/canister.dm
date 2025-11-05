@@ -9,7 +9,7 @@
 	construct_state  = /decl/machine_construction/pipe/welder
 	stat_immune      = NOSCREEN | NOINPUT | NOPOWER
 	start_pressure   = 45 ATM
-	volume           = 1000
+	gas_volume       = 1000
 	interact_offline = TRUE
 	matter           = list(
 		/decl/material/solid/metal/steel = 10 * SHEET_MATERIAL_AMOUNT
@@ -195,7 +195,7 @@ EMPTY_CANISTER(hydrogen, /obj/machinery/portable_atmospherics/canister/hydrogen)
 
 		if((air_contents.temperature > 0) && (pressure_delta > 0))
 			var/transfer_moles = calculate_transfer_moles(air_contents, environment, pressure_delta)
-			transfer_moles = min(transfer_moles, (release_flow_rate/air_contents.volume)*air_contents.total_moles) //flow rate limit
+			transfer_moles = min(transfer_moles, (release_flow_rate/air_contents.total_volume)*air_contents.total_moles) //flow rate limit
 			pump_gas_passive(src, air_contents, environment, transfer_moles)
 
 	can_label = (air_contents?.return_pressure() < 1)
@@ -207,13 +207,13 @@ EMPTY_CANISTER(hydrogen, /obj/machinery/portable_atmospherics/canister/hydrogen)
 
 /obj/machinery/portable_atmospherics/canister/proc/return_temperature()
 	var/datum/gas_mixture/GM = return_air()
-	if(GM && GM.volume>0)
+	if(GM?.total_volume>0)
 		return GM.temperature
 	return 0
 
 /obj/machinery/portable_atmospherics/canister/proc/return_pressure()
 	var/datum/gas_mixture/GM = return_air()
-	if(GM && GM.volume>0)
+	if(GM?.total_volume>0)
 		return GM.return_pressure()
 	return 0
 
@@ -241,7 +241,7 @@ EMPTY_CANISTER(hydrogen, /obj/machinery/portable_atmospherics/canister/hydrogen)
 			//Can not have a pressure delta that would cause environment pressure > tank pressure
 			var/transfer_moles = 0
 			if((air_contents.temperature > 0) && (pressure_delta > 0))
-				transfer_moles = pressure_delta*thejetpack.volume/(air_contents.temperature * R_IDEAL_GAS_EQUATION)//Actually transfer the gas
+				transfer_moles = pressure_delta*thejetpack.total_volume/(air_contents.temperature * R_IDEAL_GAS_EQUATION)//Actually transfer the gas
 				var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 				thejetpack.merge(removed)
 				to_chat(user, "You pulse-pressurize your jetpack from the tank.")

@@ -17,6 +17,7 @@
 	base_type = /obj/machinery/chem_master
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	core_skill = SKILL_CHEMISTRY
+	chem_volume = 120
 
 	var/obj/item/chems/beaker = null
 	var/obj/item/pill_bottle/loaded_pill_bottle = null
@@ -27,16 +28,11 @@
 	var/list/client/has_sprites = list()
 	var/max_pill_count = 20
 	var/sloppy = 1 //Whether reagents will not be fully purified (sloppy = 1) or there will be reagent loss (sloppy = 0) on reagent add.
-	var/reagent_limit = 120
 	var/bottle_label_color = COLOR_WHITE
 	var/bottle_lid_color = COLOR_OFF_WHITE
 
-/obj/machinery/chem_master/Initialize()
-	. = ..()
-	create_reagents(reagent_limit)
-
 /obj/machinery/chem_master/proc/get_remaining_volume()
-	return clamp(reagent_limit - reagents.total_volume, 0, reagent_limit)
+	return reagents ? clamp(reagents.maximum_volume - reagents.total_volume, 0, reagents.maximum_volume) : 0
 
 /obj/machinery/chem_master/attackby(var/obj/item/used_item, var/mob/user)
 

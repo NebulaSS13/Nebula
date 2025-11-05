@@ -79,7 +79,7 @@
 				. += "[capitalize(mat.gas_name)]: [percentage]%[perGas_add_string]"
 			var/totalGas_add_string = ""
 			if(mode == MV_MODE)
-				totalGas_add_string = ", Total moles: [round(mixture.total_moles, 0.01)], Volume: [mixture.volume]L"
+				totalGas_add_string = ", Total moles: [round(mixture.total_moles, 0.01)], Volume: [mixture.total_volume]L"
 			. += "Temperature: [round(mixture.temperature-T0C)]&deg;C / [round(mixture.temperature)]K[totalGas_add_string]"
 
 			return

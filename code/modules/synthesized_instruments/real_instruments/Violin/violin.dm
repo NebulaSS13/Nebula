@@ -1,5 +1,5 @@
 /datum/sound_player/violin
-	volume = 25
+	play_volume = 25
 	range = 10 //Kinda don't want this horrible thing to be heard from far away
 
 /obj/item/synthesized_instrument/violin

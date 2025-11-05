@@ -70,7 +70,7 @@
 /obj/structure/closet/body_bag/rescue/Initialize()
 	. = ..()
 	atmo = new()
-	atmo.volume = 0.1*CELL_VOLUME
+	atmo.total_volume = 0.1*CELL_VOLUME
 	START_PROCESSING(SSobj, src)
 
 /obj/structure/closet/body_bag/rescue/Destroy()

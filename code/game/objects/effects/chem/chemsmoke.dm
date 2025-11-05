@@ -7,13 +7,14 @@
 	layer = ABOVE_PROJECTILE_LAYER
 	time_to_live = 300
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE | PASS_FLAG_GLASS //PASS_FLAG_GLASS is fine here, it's just so the visual effect can "flow" around glass
+	chem_volume = 500
+
 	var/splash_amount = 10 //atoms moving through a smoke cloud get splashed with up to 10 units of reagent
 	var/turf/destination
 
 /obj/effect/effect/smoke/chem/Initialize(mapload, smoke_duration, turf/dest_turf = null, icon/cached_icon = null)
 	. = ..()
 
-	create_reagents(500)
 
 	if(cached_icon)
 		icon = cached_icon
@@ -76,7 +77,7 @@
 /////////////////////////////////////////////
 /datum/effect/effect/system/smoke_spread/chem
 	smoke_type = /obj/effect/effect/smoke/chem
-	var/obj/chemholder
+	var/obj/effect/chem_holder/chemholder
 	var/range
 	var/list/targetTurfs
 	var/list/wallList
@@ -96,8 +97,7 @@
 
 /datum/effect/effect/system/smoke_spread/chem/New()
 	..()
-	chemholder = new/obj()
-	chemholder.create_reagents(500)
+	chemholder = new(null, 500)
 
 //Sets up the chem smoke effect
 // Calculates the max range smoke can travel, then gets all turfs in that view range.
