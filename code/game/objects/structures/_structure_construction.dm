@@ -61,6 +61,14 @@
 
 /obj/structure/attackby(obj/item/used_item, mob/user)
 
+	// We do this here to avoid putting the vessel straight into storage.
+	// This is usually handled by afterattack on /chems.
+	if(storage && !isnull(get_possible_reagent_transfer_amounts()) && ATOM_IS_OPEN_CONTAINER(used_item) && user.check_intent(I_FLAG_HELP))
+		if(used_item.standard_dispenser_refill(user, src))
+			return TRUE
+		if(used_item.standard_pour_into(user, src))
+			return TRUE
+
 	if(used_item.user_can_attack_with(user, silent = TRUE))
 		var/force = used_item.expend_attack_force(user)
 		if(force && user.check_intent(I_FLAG_HARM))

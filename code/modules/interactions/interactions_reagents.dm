@@ -27,15 +27,19 @@
 		return
 	if(target == prop || target.reagents?.total_volume < FLUID_PUDDLE)
 		return FALSE
-	if(!istype(prop) || (!isitem(target) && !istype(target, /obj/structure/reagent_dispensers)))
+	if(!istype(prop) || (!isitem(target) && !istype(target, /obj/structure)))
 		return FALSE
+	if(istype(target, /obj/structure))
+		var/obj/structure/struct = target
+		if(isnull(struct.get_possible_reagent_transfer_amounts()))
+			return FALSE // Not a dispenser
 	return target.can_be_poured_from(user, prop) && prop.can_be_poured_into(user, target)
 
 /decl/interaction_handler/fill_from/invoked(atom/target, mob/user, obj/item/prop)
 	if(isitem(target))
 		var/obj/item/vessel = target
 		return vessel.standard_pour_into(user, prop)
-	if(istype(target, /obj/structure/reagent_dispensers))
+	if(istype(target, /obj/structure))
 		// Reagent dispensers have some wonky assumptions due to old UX around filling/emptying so we skip the atom flags check.
 		return prop.standard_dispenser_refill(user, target, skip_container_check = TRUE)
 	return FALSE

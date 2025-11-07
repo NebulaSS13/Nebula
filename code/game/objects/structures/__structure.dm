@@ -69,18 +69,32 @@
 		lock = new /datum/lock(src, lock)
 	if(!CanFluidPass())
 		fluid_update(TRUE)
+	if (!isnull(get_possible_reagent_transfer_amounts()))
+		verbs |= /obj/structure/proc/set_reagent_amount_dispensed_verb
 
 /obj/structure/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(distance <= 3)
-		if(distance <= 1 && lock)
-			. += SPAN_NOTICE("\The [src] appears to have a lock, opened by '[lock.lock_data]'.")
-		var/damage_desc = get_examined_damage_string()
-		if(length(damage_desc))
-			. += damage_desc
-		if(paint_color)
-			var/decl/pronouns/structure_pronouns = get_pronouns() // so we can do 'have' for plural objects like sheets
-			. += "\The [src] [structure_pronouns.has] been <font color='[paint_color]'>[paint_verb]</font>."
+	if(distance > 3)
+		return
+	if(distance <= 1 && lock)
+		. += SPAN_NOTICE("\The [src] appears to have a lock, opened by '[lock.lock_data]'.")
+	var/damage_desc = get_examined_damage_string()
+	if(length(damage_desc))
+		. += damage_desc
+	if(paint_color)
+		var/decl/pronouns/structure_pronouns = get_pronouns() // so we can do 'have' for plural objects like sheets
+		. += "\The [src] [structure_pronouns.has] been <font color='[paint_color]'>[paint_verb]</font>."
+	if(distance <= 2 && !isnull(get_possible_reagent_transfer_amounts()) && reagents)
+		. += SPAN_NOTICE("It contains:")
+		if(LAZYLEN(reagents.reagent_volumes))
+			for(var/decl/material/reagent as anything in reagents.liquid_volumes)
+				. += SPAN_NOTICE("[LIQUID_VOLUME(reagents, reagent)] unit\s of [reagent.get_reagent_name(reagents, MAT_PHASE_LIQUID)].")
+			for(var/decl/material/reagent as anything in reagents.solid_volumes)
+				. += SPAN_NOTICE("[SOLID_VOLUME(reagents, reagent)] unit\s of [reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)].")
+		else
+			. += SPAN_NOTICE("Nothing.")
+		if(reagents.maximum_volume)
+			. += "It may contain up to [reagents.maximum_volume] unit\s."
 
 /obj/structure/get_examine_hints(mob/user, distance, infix, suffix)
 	. = ..()
@@ -345,3 +359,8 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 		visible_message(SPAN_DANGER("\The [src] was hit by \the [AM]."))
 		playsound(src.loc, hitsound, 100, 1)
 		take_damage(AM.get_thrown_attack_force() * (TT.speed/THROWFORCE_SPEED_DIVISOR), AM.atom_damage_type)
+
+/obj/structure/get_alt_interactions(var/mob/user)
+	. = ..()
+	if(!isnull(get_possible_reagent_transfer_amounts()))
+		LAZYADD(., /decl/interaction_handler/set_transfer/structure)

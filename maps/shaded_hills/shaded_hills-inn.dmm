@@ -1195,6 +1195,10 @@
 	},
 /turf/floor/wood/rough/walnut,
 /area/shaded_hills/shrine/kitchen)
+"Fz" = (
+/obj/structure/working/quern,
+/turf/floor/wood/rough/walnut,
+/area/shaded_hills/storehouse)
 "FD" = (
 /obj/structure/reagent_dispensers/barrel/ebony,
 /obj/item/seeds/extracted/rice,
@@ -1293,6 +1297,11 @@
 /obj/structure/wall_sconce/lantern,
 /turf/floor/path/herringbone/basalt,
 /area/shaded_hills/inn/kitchen)
+"Hp" = (
+/obj/structure/table/wood/reinforced/ebony,
+/obj/item/chems/glass/bucket/wood,
+/turf/floor/wood/rough/walnut,
+/area/shaded_hills/storehouse)
 "Hv" = (
 /obj/structure/railing/mapped/wooden/walnut,
 /obj/structure/flora/bush/sparsegrass,
@@ -9547,7 +9556,7 @@ uJ
 dH
 HI
 QQ
-fR
+Hp
 fR
 fR
 fR
@@ -9699,7 +9708,7 @@ uJ
 Wg
 HI
 QQ
-fR
+Fz
 fR
 fR
 fR
@@ -10003,7 +10012,7 @@ yz
 Wg
 HI
 UY
-fR
+Hp
 fR
 fR
 fR
@@ -10155,7 +10164,7 @@ BL
 dH
 HI
 QQ
-fR
+Fz
 fR
 fR
 fR

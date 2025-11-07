@@ -1,5 +1,5 @@
-/obj/item/proc/standard_dispenser_refill(mob/user, obj/structure/reagent_dispensers/target, skip_container_check = FALSE) // This goes into afterattack
-	if(!istype(target) || (!skip_container_check && (target.atom_flags & ATOM_FLAG_OPEN_CONTAINER)))
+/obj/item/proc/standard_dispenser_refill(mob/user, obj/structure/target, skip_container_check = FALSE) // This goes into afterattack
+	if(!istype(target) || isnull(target.get_reagent_amount_dispensed()) || (!skip_container_check && (target.atom_flags & ATOM_FLAG_OPEN_CONTAINER)))
 		return FALSE
 
 	if(!target.reagents || !target.reagents.total_volume)
@@ -10,7 +10,7 @@
 		to_chat(user, SPAN_NOTICE("[src] is full of reagents."))
 		return TRUE
 
-	var/trans = target.reagents.trans_to_obj(src, target.amount_dispensed)
+	var/trans = target.reagents.trans_to_obj(src, target.get_reagent_amount_dispensed())
 	to_chat(user, SPAN_NOTICE("You fill [src] with [trans] units of the contents of [target]."))
 	return TRUE
 
