@@ -1,5 +1,4 @@
 /datum/hud/robot
-	offset_hands_vertically = FALSE
 	gun_mode_toggle_type    = /obj/screen/gun/mode
 	omit_hud_elements       = list(
 		/decl/hud_element/health,
