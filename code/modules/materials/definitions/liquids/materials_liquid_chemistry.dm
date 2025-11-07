@@ -16,6 +16,14 @@
 	value = 0.1
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
+/decl/material/liquid/foam
+	name = "foam"
+	uid = "liquid_foam"
+	lore_text = "A frothy, sticky, well-aerated fluid."
+	taste_description = "chemical blandness"
+	color = "#a59da4"
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
+
 /decl/material/liquid/lube
 	name = "lubricant"
 	uid = "liquid_lubricant"

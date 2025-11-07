@@ -34,8 +34,8 @@
 	loaded_tank = /obj/item/sealant_tank/mapped
 
 /obj/item/gun/launcher/sealant/consume_next_projectile()
-	if(loaded_tank?.foam_charges >= foam_charges_per_shot)
-		loaded_tank.foam_charges -= foam_charges_per_shot
+	if(loaded_tank?.reagents?.has_reagent(/decl/material/liquid/foam, foam_charges_per_shot))
+		loaded_tank.reagents.remove_reagent(/decl/material/liquid/foam, foam_charges_per_shot)
 		. = new /obj/item/sealant(src)
 
 /obj/item/gun/launcher/sealant/Initialize()
@@ -58,7 +58,7 @@
 	. = ..()
 	if(loc == user)
 		if(loaded_tank)
-			. += SPAN_NOTICE("The loaded tank has about [loaded_tank.foam_charges] liter\s of sealant left.")
+			. += SPAN_NOTICE("The loaded tank has about [REAGENT_VOLUME(loaded_tank.reagents, /decl/material/liquid/foam) || 0] charge\s of sealant left.")
 		else
 			. += SPAN_WARNING("\The [src] has no sealant loaded.")
 
