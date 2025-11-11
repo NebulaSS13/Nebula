@@ -838,14 +838,6 @@ default behaviour is:
 		if(saturation > 0)
 			fluids.trans_to_holder(touching_reagents, saturation)
 
-/mob/living/proc/needs_wheelchair()
-	var/tmp_stance_damage = 0
-	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, limb_tag)
-		if(!E || !E.is_usable())
-			tmp_stance_damage += 2
-	return tmp_stance_damage >= 4
-
 /mob/living/proc/seizure()
 	set waitfor = 0
 	sleep(rand(5,10))

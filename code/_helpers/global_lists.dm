@@ -37,12 +37,15 @@ var/global/list/string_slot_flags = list(
 )
 
 // Used to avoid constantly generating new lists during movement.
+var/global/list/all_maniple_limbs   = list(
+	(ORGAN_CATEGORY_MANIPLE)
+)
 var/global/list/all_stance_limbs   = list(
-	ORGAN_CATEGORY_STANCE,
-	ORGAN_CATEGORY_STANCE_ROOT
+	(ORGAN_CATEGORY_STANCE),
+	(ORGAN_CATEGORY_STANCE_ROOT)
 )
 var/global/list/child_stance_limbs = list(
-	ORGAN_CATEGORY_STANCE
+	(ORGAN_CATEGORY_STANCE)
 )
 
 // TODO: Replace keybinding datums with keybinding decls to make this unnecessary.

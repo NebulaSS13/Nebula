@@ -25,20 +25,25 @@
 	if(can_feel_pain() && get_shock() >= 10)
 		tally += (get_shock() / 10) //pain shouldn't slow you down if you can't even feel it
 
+	var/list/limbs_to_check
 	if(istype(buckled, /obj/structure/chair/wheelchair))
-		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
-			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
-			tally += E ? E.get_movement_delay(4) : 4
-	else
 		for(var/obj/item/I in get_equipped_items(include_carried = TRUE))
 			var/slot = get_equipped_slot_for_item(I)
 			tally += LAZYACCESS(I.slowdown_per_slot, slot)
 			tally += I.slowdown_general
 			tally += I.slowdown_accessory
+		limbs_to_check = global.all_maniple_limbs
+	else
+		limbs_to_check = global.all_stance_limbs
 
-		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_name)
-			tally += E ? E.get_movement_delay(4) : 4
+	var/missing_limbs = H ? H.bodytype.get_expected_organ_count_for_categories(limbs_to_check) : 4
+	if(missing_limbs > 0)
+		var/max_delay_per_limb = ceil(16/missing_limbs)
+		for(var/obj/item/organ/external/limb in get_organs_by_categories(limbs_to_check))
+			tally += limb.get_movement_delay(max_delay_per_limb)
+			missing_limbs--
+		if(missing_limbs > 0)
+			tally += missing_limbs * max_delay_per_limb
 
 	if(shock_stage >= 10 || get_stamina() <= 0)
 		tally += 3
@@ -95,6 +100,11 @@
 
 		handle_leg_damage()
 		species.handle_post_move(src)
+
+/mob/living/human/forceMove()
+	. = ..()
+	if(.)
+		species.handle_post_move(src, exertion = FALSE)
 
 /mob/living/human/proc/handle_leg_damage()
 	if(!can_feel_pain())

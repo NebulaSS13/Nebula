@@ -556,7 +556,7 @@ SUBSYSTEM_DEF(jobs)
 	if(job.req_admin_notify)
 		to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
 
-	if(H.needs_wheelchair())
+	if(H.cannot_stand())
 		equip_wheelchair(H)
 
 	BITSET(H.hud_updateflag, ID_HUD)
