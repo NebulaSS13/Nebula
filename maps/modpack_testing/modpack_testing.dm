@@ -51,6 +51,7 @@
 	#include "../../mods/species/ascent/_ascent.dme"
 	#include "../../mods/species/drakes/_drakes.dme"
 	#include "../../mods/species/neoavians/_neoavians.dme"
+	#include "../../mods/species/octopus/_octopus.dme"
 	#include "../../mods/species/random_species/_random_species.dme"
 	#include "../../mods/species/serpentid/_serpentid.dme"
 	#include "../../mods/species/skrell/_skrell.dme"

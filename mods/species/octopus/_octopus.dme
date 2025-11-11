@@ -1,0 +1,11 @@
+#ifndef MODPACK_OCTOPUS
+#define MODPACK_OCTOPUS
+// BEGIN_INCLUDE
+#include "_octopus.dm"
+#include "bodytype.dm"
+#include "gripper.dm"
+#include "language.dm"
+#include "organs.dm"
+#include "species.dm"
+// END_INCLUDE
+#endif
