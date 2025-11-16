@@ -41,6 +41,8 @@
 	equip_slots |= slot_handcuffed_str
 	if(slot_back_str in equip_slots)
 		equip_slots |= slot_in_backpack_str
+	if(slot_wear_id_str in equip_slots)
+		equip_slots |= slot_in_wallet_str
 
 /datum/hud_data/monkey
 	inventory_slots = list(

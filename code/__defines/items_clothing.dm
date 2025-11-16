@@ -82,6 +82,7 @@
 #define slot_r_store_str     "slot_r_store"
 #define slot_s_store_str     "slot_s_store"
 #define slot_in_backpack_str "slot_in_backpack"
+#define slot_in_wallet_str   "slot_in_wallet"
 
 // Defined here for consistency, not actually used for slots, just for species clothing offsets.
 #define slot_undershirt_str  "slot_undershirt"
