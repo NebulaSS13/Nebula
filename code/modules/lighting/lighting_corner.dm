@@ -189,13 +189,14 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/turf/T
 	var/Ti
 	// Grab the first master that's a Z-turf, if one exists.
-	if (t1 && (T = GET_ABOVE(t1)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	// The above var cannot be relied on due to init ordering, but we can use it if it is set.
+	if (t1 && (T = t1.above || GET_ABOVE(t1)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		Ti = t1i
-	else if (t2 && (T = GET_ABOVE(t2)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	else if (t2 && (T = t2.above || GET_ABOVE(t2)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		Ti = t2i
-	else if (t3 && (T = GET_ABOVE(t3)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	else if (t3 && (T = t3.above || GET_ABOVE(t3)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		Ti = t3i
-	else if (t4 && (T = GET_ABOVE(t4)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	else if (t4 && (T = t4.above || GET_ABOVE(t4)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		Ti = t4i
 	else	// Nothing above us that cares about below light.
 		T = null
@@ -251,26 +252,21 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/turf/T
 	var/Ti
 
-	if (t1 && (t1.below || HasBelow(t1.z)) && (t1.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t1))
+	if (t1)
 		T = t1
 		Ti = t1i
-	else if (t2 && (t2.below || HasBelow(t2.z)) && (t2.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t2))
+	else if (t2)
 		T = t2
 		Ti = t2i
-	else if (t3 && (t3.below || HasBelow(t3.z)) && (t3.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t3))
+	else if (t3)
 		T = t3
 		Ti = t3i
-	else if (t4 && (t4.below || HasBelow(t4.z)) && (t4.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t4))
+	else if (t4)
 		T = t4
 		Ti = t4i
-	// No MZ candidates below, just update.
-	else if (needs_update || skip_update)
-		return
 	else
-		// Always queue for this, not important enough to hit the synchronous path.
-		needs_update = TRUE
-		SSlighting.corner_queue += src
-		return
+		// This should be impossible to reach -- how do we exist without at least one master turf?
+		CRASH("Corner has no masters!")
 
 	var/datum/lighting_corner/below = src
 
