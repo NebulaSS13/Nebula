@@ -415,20 +415,19 @@ var/global/list/bodytypes_by_category = list()
 		var/list/organ_data = has_limbs[organ_tag]
 		var/obj/item/organ/organ = organ_data["path"]
 		organ_data["descriptor"] = initial(organ.name)
-		var/organ_cat = initial(organ.organ_category)
-		if(organ_cat)
+		for(var/organ_cat in cached_json_decode(initial(organ.organ_categories)))
 			LAZYINITLIST(_organs_by_category)
 			LAZYADD(_organs_by_category[organ_cat], organ)
 			LAZYINITLIST(_organ_tags_by_category)
 			LAZYADD(_organ_tags_by_category[organ_cat], organ_tag)
+
 		var/list/parent_organ_data = has_limbs[organ::parent_organ]
 		if(parent_organ_data)
 			parent_organ_data["has_children"]++
 
 	for(var/organ_tag in has_organ)
 		var/obj/item/organ/organ = has_organ[organ_tag]
-		var/organ_cat = initial(organ.organ_category)
-		if(organ_cat)
+		for(var/organ_cat in cached_json_decode(initial(organ.organ_categories)))
 			LAZYINITLIST(_organs_by_category)
 			LAZYADD(_organs_by_category[organ_cat], organ)
 			LAZYINITLIST(_organ_tags_by_category)

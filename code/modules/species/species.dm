@@ -664,8 +664,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			// This assumes that if a pain-level has been defined it also has a list of emotes to go with it
 			return pick(pain_emotes)
 
-/decl/species/proc/handle_post_move(var/mob/living/human/H)
-	handle_exertion(H)
+/decl/species/proc/handle_post_move(var/mob/living/human/H, exertion = TRUE)
+	if(exertion)
+		handle_exertion(H)
 
 /decl/species/proc/handle_exertion(mob/living/human/H)
 	if (!exertion_effect_chance)

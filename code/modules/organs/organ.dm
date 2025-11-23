@@ -13,15 +13,15 @@
 	// Strings.
 	/// Unique identifier.
 	var/organ_tag = "organ"
-	/// Identifier for use in organ collections, unused if unset. Would be nice to make this a list, but bodytypes rely on initial() with it.
-	var/organ_category
+	/// Identifiers for use in organ collections, unused if unset. Must be formatted as a JSON list string.
+	var/organ_categories
 	/// Organ holding this object.
 	var/parent_organ = BP_CHEST
 
 	// Status tracking.
 	/// Various status flags (such as robotic)
 	var/status = 0
-	/// A flag for telling what capabilities this organ has. ORGAN_PROP_PROSTHETIC, ORGAN_PROP_CRYSTAL, etc..
+	/// A flag for telling what capabilities this organ has. ORGAN_PROP_PROSTHETIC, ORGAN_PROP_CRYSTAL, etc.
 	var/organ_properties = 0
 	/// Cache var for vitality to current owner.
 	var/vital_to_owner
