@@ -126,6 +126,11 @@
 		recalc_atom_opacity() // Make sure to do this before reconsider_lights(), incase we're on instant updates.
 		reconsider_lights()
 
+// The normal opacity logic doesn't work for entities not located inside turfs, such as turfs.
+/turf/set_opacity(new_opacity)
+	. = ..()
+	reconsider_lights()
+
 // This block isn't needed now, but it's here if supporting area dyn lighting changes is needed later.
 
 // /turf/change_area(area/old_area, area/new_area)

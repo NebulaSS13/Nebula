@@ -17,7 +17,6 @@
 	for(var/turf/turf in loc)
 		if(turf.simulated)
 			SSair.mark_for_update(turf)
-	set_light(density)
 	update_icon()
 	update_air()
 	refresh_opacity()
