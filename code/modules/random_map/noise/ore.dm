@@ -75,7 +75,6 @@
 	var/tx = ((origin_x-1)+x)*chunk_size
 	var/ty = ((origin_y-1)+y)*chunk_size
 
-	for(var/T in range(locate(tx, ty, origin_z)))
 	for(var/i=0,i<chunk_size,i++)
 		for(var/j=0,j<chunk_size,j++)
 			var/turf/T = locate(tx+j, ty+i, origin_z)

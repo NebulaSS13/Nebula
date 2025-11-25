@@ -765,15 +765,17 @@ var/global/list/WALLITEMS = list(
 
 /**Returns a number string with its ordinal suffix th, st, nd, rd */
 /proc/get_ordinal_string(var/num)
-	if(num < 10 && num > 20) //11, 12, 13 are exceptions in english, and just get 'th' like everything else
+	. = num
+	num %= 100
+	if(num < 10 || num > 20) //11, 12, 13 are exceptions in english, and just get 'th' like everything else
 		switch(num % 10)
 			if(1)
-				return "[num]st"
+				return "[.]st"
 			if(2)
-				return "[num]nd"
+				return "[.]nd"
 			if(3)
-				return "[num]rd"
-	return "[num]th"
+				return "[.]rd"
+	return "[.]th"
 
 ///A do nothing proc used to prevent empty block warnings
 ///In hot code (like atmos checks), use EMPTY_BLOCK_GUARD instead.
