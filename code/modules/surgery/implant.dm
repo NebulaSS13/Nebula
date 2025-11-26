@@ -44,16 +44,14 @@
 
 /decl/surgery_step/cavity/make_space/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts making some space inside [target]'s [affected.cavity_name] with \the [tool].", \
-	"You start making some space inside [target]'s [affected.cavity_name] with \the [tool]." )
+	user.targeted_visible_action_message(target, "start", "making some space inside $TARGET'S$ [affected.cavity_name] with \the [tool].")
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
 	affected.cavity = TRUE
 	..()
 
 /decl/surgery_step/cavity/make_space/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message(SPAN_NOTICE("[user] makes some space inside [target]'s \the [affected.cavity_name] with \the [tool]."), \
-	SPAN_NOTICE("You make some space inside [target]'s \the [affected.cavity_name] with \the [tool].") )
+	user.targeted_visible_action_message(target, "make", "some space inside $TARGET'S$ \the [affected.cavity_name] with \the [tool].")
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -76,15 +74,13 @@
 
 /decl/surgery_step/cavity/close_space/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts mending [target]'s \the [affected.cavity_name] wall with \the [tool].", \
-	"You start mending [target]'s \the [affected.cavity_name] wall with \the [tool]." )
+	user.targeted_visible_action_message(target, "start", "mending $TARGET'S$ [affected.cavity_name] wall with \the [tool].")
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
 	..()
 
 /decl/surgery_step/cavity/close_space/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message(SPAN_NOTICE("[user] mends [target]'s \the [affected.cavity_name] walls with \the [tool]."), \
-	SPAN_NOTICE("You mend [target]'s \the [affected.cavity_name] walls with \the [tool].") )
+	user.targeted_visible_action_message(target, "mend", "$TARGET'S$ [affected.cavity_name] walls with \the [tool].")
 	affected.cavity = FALSE
 	..()
 
@@ -131,8 +127,7 @@
 
 /decl/surgery_step/cavity/place_item/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts putting \the [tool] inside [target]'s \the [affected.cavity_name].", \
-	"You start putting \the [tool] inside [target]'s \the [affected.cavity_name]." )
+	user.targeted_visible_action_message(target, "start", "putting \the [tool] inside $TARGET'S$ [affected.cavity_name].")
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
 	..()
 
@@ -140,8 +135,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(!user.try_unequip(tool, affected))
 		return
-	user.visible_message(SPAN_NOTICE("[user] puts \the [tool] inside [target]'s \the [affected.cavity_name]."), \
-	SPAN_NOTICE("You put \the [tool] inside [target]'s \the [affected.cavity_name].") )
+	user.visible_action_message("put", "\the [tool] inside [target]'s \the [affected.cavity_name].")
 	if (tool.w_class > affected.cavity_max_w_class/2 && prob(50) && !BP_IS_PROSTHETIC(affected) && affected.sever_artery())
 		to_chat(user, SPAN_WARNING("You tear some blood vessels trying to fit such a big object in this cavity."))
 		affected.owner.custom_pain("You feel something rip in your [affected.name]!", 1,affecting = affected)
@@ -173,8 +167,7 @@
 
 /decl/surgery_step/cavity/implant_removal/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts poking around inside [target]'s [affected.name] with \the [tool].", \
-	"You start poking around inside [target]'s [affected.name] with \the [tool]." )
+	user.targeted_visible_action_message(target, "start", "poking around inside $TARGET'S$ [affected.name] with \the [tool].")
 	target.custom_pain("The pain in your [affected.name] is living hell!",1,affecting = affected)
 	..()
 
@@ -211,8 +204,7 @@
 			find_prob += 50
 
 		if (prob(find_prob))
-			user.visible_message(SPAN_NOTICE("[user] takes something out of the incision on [target]'s [affected.name] with \the [tool]."), \
-			SPAN_NOTICE("You take \the [obj] out of the incision on \the [target]'s [affected.name] with \the [tool].") )
+			user.targeted_visible_action_message(target, "take", "out of the incision on $TARGET'S$ [affected.name] with \the [tool].", self_infix = "\the [obj]", other_infix = "something")
 			target.remove_implant(obj, TRUE, affected)
 			BITSET(target.hud_updateflag, IMPLOYAL_HUD)
 			..()

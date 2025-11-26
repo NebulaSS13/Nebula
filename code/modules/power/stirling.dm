@@ -180,7 +180,7 @@
 		return TRUE
 	to_chat(user, "You start trying to manually rev up \the [src].")
 	if(do_after(user, 2 SECONDS, src) && !active && inserted_cylinder && !(stat & BROKEN))
-		visible_message("[user] pulls on the starting cord of \the [src], revving it up!", "You pull on the starting cord of \the [src], revving it up!")
+		user.visible_action_message("pull", "on the starting cord of \the [src], revving it up!")
 		playsound(src.loc, 'sound/machines/engine.ogg', 35, 1)
 		active = TRUE
 	return TRUE

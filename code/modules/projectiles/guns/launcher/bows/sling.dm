@@ -24,31 +24,19 @@
 
 /obj/item/gun/launcher/bow/sling/show_load_message(mob/user)
 	if(user)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] drops \the [_loaded] into \the cup of \the [src]."),
-			SPAN_NOTICE("You drop \the [_loaded] into \the cup of \the [src].")
-		)
+		user.visible_action_message("drop", "\the [_loaded] into \the cup of \the [src].")
 
 /obj/item/gun/launcher/bow/sling/show_string_relax_message(mob/user)
 	if(user)
-		user.visible_message(
-			"\The [user] ceases swinging \the [src].",
-			"You cease swinging \the [src]."
-		)
+		user.visible_action_message("cease", "swinging \the [src].")
 
 /obj/item/gun/launcher/bow/sling/show_cancel_draw_message(mob/user)
 	if(user)
-		user.visible_message(
-			"\The [user] ceases swinging \the [src].",
-			"You cease swinging \the [src]."
-		)
+		user.visible_action_message("cease", "swinging \the [src].")
 
 /obj/item/gun/launcher/bow/sling/show_draw_message(mob/user)
 	if(user)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] starts swinging \the [src]"),
-			SPAN_NOTICE("You start swinging \the [src].")
-		)
+		user.visible_action_message("start", "swinging \the [src].")
 
 /obj/item/gun/launcher/bow/sling/show_max_draw_message(mob/user)
 	return

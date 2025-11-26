@@ -14,7 +14,7 @@
 		if(contents.len)
 			to_chat(user, "<span class='warning'>\The [src] is already full!</span>")
 			return
-		user.visible_message("\The [user] scoops \the [A] into \the [src], securing the lid.", "You scoop \the [A] into \the [src], securing the lid.")
+		user.visible_action_message("scoop", "\the [A] into \the [src], securing the lid.")
 		A.forceMove(src)
 
 /obj/item/urn/attack_self(mob/user)
@@ -24,7 +24,7 @@
 	else
 		for(var/obj/effect/decal/cleanable/ash/A in contents)
 			A.dropInto(loc)
-			user.visible_message("\The [user] pours \the [A] out from \the [src].", "You pour \the [A] out from \the [src].")
+			user.visible_action_message("pour", "\the [A] out from \the [src].")
 
 /obj/item/urn/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()

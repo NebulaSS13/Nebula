@@ -215,7 +215,7 @@
 		TRANSFER_STATE(diconnected_state)
 		user.try_unequip(board, machine)
 		machine.install_component(board)
-		user.visible_message(SPAN_NOTICE("\The [user] inserts \the [board] into \the [machine]!"), SPAN_NOTICE("You insert \the [board] into \the [machine]!"))
+		user.visible_action_message("insert", "\the [board] into \the [machine]!")
 		machine.queue_icon_update()
 		return TRUE
 

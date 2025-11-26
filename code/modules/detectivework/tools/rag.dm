@@ -35,7 +35,7 @@
 
 /obj/item/chems/rag/attack_self(mob/user)
 	if(is_on_fire() && user.try_unequip(src))
-		user.visible_message(SPAN_NOTICE("\The [user] stamps out [src]."), SPAN_NOTICE("You stamp out [src]."))
+		user.visible_action_message("stamp", "out [src].")
 		extinguish_fire()
 		return TRUE
 
@@ -81,20 +81,14 @@
 	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		return
 	var/target_text = trans_dest? "\the [trans_dest]" : "\the [user.loc]"
-	user.visible_message(
-		SPAN_NOTICE("\The [user] begins to wring out [src] over [target_text]."),
-		SPAN_NOTICE("You begin to wring out \the [src] over [target_text].")
-	)
+	user.visible_action_message("begin", "to wring out \the [src] over [target_text].")
 	if(!do_after(user, REAGENT_TOTAL_VOLUME(reagents)*5, progress = 0) || !REAGENT_TOTAL_VOLUME(reagents)) //50 for a fully soaked rag
 		return
 	if(trans_dest)
 		reagents.trans_to(trans_dest, REAGENT_TOTAL_VOLUME(reagents))
 	else
 		reagents.splash(user.loc, REAGENT_TOTAL_VOLUME(reagents))
-	user.visible_message(
-		SPAN_NOTICE("\The [user] wrings out \the [src] over [target_text]."),
-		SPAN_NOTICE("You finish to wringing out \the [src].")
-	)
+	user.visible_action_message("wring", "out \the [src] over [target_text].")
 	update_name()
 
 /obj/item/chems/rag/proc/wipe_down(atom/target, mob/user)
@@ -111,10 +105,7 @@
 /obj/item/chems/rag/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
 	if(is_on_fire())
-		user.visible_message(
-			SPAN_DANGER("\The [user] hits \the [target] with \the [src]!"),
-			SPAN_DANGER("You hit \the [target] with \the [src]!")
-		)
+		user.visible_action_message("hit", "\the [target] with \the [src]!", dangerous = ACTION_DANGER_ALL)
 		user.do_attack_animation(target)
 		admin_attack_log(user, target, "used \the [src] (ignited) to attack", "was attacked using \the [src] (ignited)", "attacked with \the [src] (ignited)")
 		target.ignite_fire()
@@ -130,21 +121,14 @@
 			return TRUE
 
 		user.do_attack_animation(src)
-		user.visible_message(
-			SPAN_DANGER("\The [user] brings \the [src] up to \the [target]'s mouth!"),
-			SPAN_DANGER("You bring \the [src] up to \the [target]'s mouth!"),
-			SPAN_WARNING("You hear some struggling and muffled cries of surprise.")
-		)
+		user.targeted_visible_action_message(target, "bring", "\the [src] up to $TARGET'S$ mouth!", dangerous = ACTION_DANGER_ALL, blind_message = SPAN_WARNING("You hear some struggling and muffled cries of surprise."))
 
 		var/grab_time = 6 SECONDS
 		if (user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
 			grab_time = 3 SECONDS
 
 		if (do_after(user, grab_time, target))
-			user.visible_message(
-				SPAN_DANGER("\The [user] smothers \the [target] with \the [src]!"),
-				SPAN_DANGER("You smother \the [target] with \the [src]!")
-			)
+			user.targeted_visible_action_message("smother", "$TARGET$ with \the [src]!", dangerous = ACTION_DANGER_ALL)
 			var/trans_amt = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INHALE)
 			var/contained_reagents = reagents.get_reagents()
 			admin_inject_log(user, target, src, contained_reagents, trans_amt)

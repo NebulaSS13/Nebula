@@ -228,7 +228,7 @@
 		if(!user.try_unequip(I, src))
 			return
 		scanner_item = I
-		to_chat(user, SPAN_NOTICE("You insert \the [I] into \the [src]."))
+		user.self_action_message("insert", "\the [I] into \the [src].")
 		SSnano.update_uis(src)
 		update_icon()
 		return TRUE
@@ -239,7 +239,7 @@
 	if(!scanner_item)
 		return
 	user.put_in_hands(scanner_item)
-	to_chat(user, SPAN_NOTICE("You take \the [scanner_item] out of \the [src]."))
+	user.self_action_message("take", "\the [scanner_item] out of \the [src].")
 	scanner_item = null
 	SSnano.update_uis(src)
 	update_icon()

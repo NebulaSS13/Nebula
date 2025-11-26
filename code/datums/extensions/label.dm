@@ -43,8 +43,8 @@
 		return
 
 	if(user)
-		user.visible_message(SPAN_NOTICE("\The [user] removes a label from \the [atom_holder]."), \
-							 SPAN_NOTICE("You remove a label, '[label]', from \the [atom_holder]."))
+		// The infix usage here is a little clunky but I'm not sure how else to make it work
+		user.visible_action_message("remove", "from \the [atom_holder]", ACTION_DANGER_NONE, self_infix = "a label, '[label]'", other_infix = "a label")
 
 	var/old_name = atom_holder.name
 	// We find and replace the first instance, since that's the one we removed from the list

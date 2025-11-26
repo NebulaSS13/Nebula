@@ -20,10 +20,7 @@
 
 	var/obj/structure/hoist/hoist = new (get_turf(user), user.dir)
 	transfer_fingerprints_to(hoist)
-	user.visible_message(
-		SPAN_NOTICE("[user] deploys the hoist kit!"),
-		SPAN_NOTICE("You deploy the hoist kit!"),
-		"You hear the sound of parts snapping into place.")
+	user.visible_action_message("deploy", "\the [src]!", blind_message = SPAN_NOTICE("You hear the sound of parts snapping into place."))
 	qdel(src)
 
 /obj/effect/hoist_hook
@@ -200,19 +197,13 @@
 		return TRUE
 
 	if (!hoistee)
-		user.visible_message(
-			SPAN_NOTICE("[user] begins to [movtext] the clamp."),
-			SPAN_NOTICE("You begin to [movtext] the clamp."),
-			SPAN_NOTICE("You hear the sound of a crank."))
+		user.visible_action_message("begin", "to [movtext] the clamp.", blind_message = SPAN_NOTICE("You hear the sound of a crank."))
 		move_dir(movedir, 0)
 		return TRUE
 
 	check_consistency()
 
-	user.visible_message(
-		SPAN_NOTICE("[user] begins to [movtext] \the [hoistee]!"),
-		SPAN_NOTICE("You begin to [movtext] \the [hoistee]!"),
-		SPAN_NOTICE("You hear the sound of a crank."))
+	user.visible_action_message("begin", "to [movtext] \the [hoistee]!", blind_message = SPAN_NOTICE("You hear the sound of a crank."))
 	if (do_after(user, (1 SECONDS) * get_object_size(hoistee) / 4, src))
 		move_dir(movedir, 1)
 	return TRUE

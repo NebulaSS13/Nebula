@@ -8,7 +8,7 @@
 /obj/item/beehive_assembly/attack_self(var/mob/user)
 	to_chat(user, "<span class='notice'>You start assembling \the [src]...</span>")
 	if(do_after(user, 30, src))
-		user.visible_message("<span class='notice'>\The [user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")
+		user.visible_action_message("construct", "a beehive.")
 		new /obj/machinery/beehive(get_turf(user))
 		qdel(src)
 

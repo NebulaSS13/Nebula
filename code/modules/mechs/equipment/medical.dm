@@ -84,8 +84,8 @@
 			return TRUE
 		if(beaker)
 			user.put_in_hands(beaker)
-			user.visible_message("<span class='notice'>\The [user] removes \the [beaker] from \the [src].</span>", "<span class='notice'>You remove \the [beaker] from \the [src].</span>")
+			user.visible_action_message("remove", "\the [beaker] from \the [src].")
 		beaker = used_item
-		user.visible_message("<span class='notice'>\The [user] adds \a [used_item] to \the [src].</span>", "<span class='notice'>You add \a [used_item] to \the [src].</span>")
+		user.visible_action_message("add", "\a [used_item] to \the [src].")
 		return TRUE
 	return FALSE

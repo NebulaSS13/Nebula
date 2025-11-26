@@ -135,11 +135,8 @@
 /mob/living/proc/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	var/weapon_mention
 	if(I.attack_message_name())
-		weapon_mention = " with [I.attack_message_name()]"
-	if(effective_force)
-		visible_message(SPAN_DANGER("\The [src] has been [I.pick_attack_verb()][weapon_mention] by \the [user]!"))
-	else
-		visible_message(SPAN_WARNING("\The [src] has been [I.pick_attack_verb()][weapon_mention] by \the [user]!"))
+		weapon_mention = "with [I.attack_message_name()]"
+	user.targeted_visible_action_message(src, I.pick_attack_verb(), "[weapon_mention] by $USER$!", dangerous = effective_force ? ACTION_DANGER_ALL : ACTION_DANGER_OTHERS)
 	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 	if(I.atom_damage_type == BRUTE && prob(33))
 		blood_splatter(get_turf(loc), src)
@@ -168,7 +165,8 @@
 				SET_STATUS_MAX(src, STAT_WEAK, rand(3,5))
 			if(M.skill_fail_prob(SKILL_HAULING, 100))
 				SET_STATUS_MAX(M, STAT_WEAK, rand(4,8))
-			M.visible_message(SPAN_DANGER("\The [M] collides with \the [src]!"))
+			// todo: i would love an 'exclude mob' parameter to visible_message to let us give the target their own self-message too
+			M.targeted_visible_action_message(src, "collide", "with \the [src]!", dangerous = ACTION_DANGER_ALL)
 
 		if(mob_modifiers_block_attack(MM_ATTACK_TYPE_THROWN, AM, TT.speed))
 			return FALSE

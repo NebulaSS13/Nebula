@@ -85,9 +85,9 @@
 			return TRUE
 		if(operable() && check_access(user))
 			locked = FALSE
-			user.visible_message(
-				"\The [user] unlocks \the [src].",
-				"You unlock \the [src]."
+			user.visible_action_message(
+				"unlock",
+				"\the [src]."
 			)
 			update_icon()
 			return TRUE
@@ -117,15 +117,9 @@
 			to_chat(user, SPAN_WARNING("\The [src] is currently in maintenance mode!"))
 			return TRUE
 
-		user.visible_message(
-			"\The [user] begins inserting \the [used_item] into storage.",
-			"You begin inserting \the [used_item] into storage."
-		)
+		user.visible_action_message("begin", "inserting \the [used_item] into storage.")
 		if(do_after(user, interact_time, src) && open && (length(cylinders) < max_cylinders) && user.try_unequip(used_item, src))
-			user.visible_message(
-				"\The [user] places \the [used_item] into storage.",
-				"You place \the [used_item] into storage."
-			)
+			user.visible_action_message("place", "\the [used_item] into storage.")
 			cylinders.Add(used_item)
 			update_icon()
 		return TRUE
@@ -135,15 +129,9 @@
 /obj/machinery/nuclear_cylinder_storage/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && open && !panel_open && length(cylinders))
 		var/cylinder = cylinders[1]
-		user.visible_message(
-			"\The [user] begins to extract \the [cylinder].",
-			"You begin to extract \the [cylinder]."
-		)
+		user.visible_action_message("begin", "to extract \the [cylinder].")
 		if(do_after(user, interact_time, src) && open && cylinders.Find(cylinder))
-			user.visible_message(
-				"\The [user] picks up \the [cylinder].",
-				"You pick up \the [cylinder]."
-			)
+			user.visible_action_message("pick", "up \the [cylinder].")
 			user.put_in_hands(cylinder)
 			cylinders.Remove(cylinder)
 			update_icon()

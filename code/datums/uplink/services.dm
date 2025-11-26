@@ -94,7 +94,7 @@
 		return
 	state = CURRENTLY_ACTIVE
 	update_icon()
-	user.visible_message("<span class='notice'>\The [user] activates \the [src].</span>", "<span class='notice'>You activate \the [src].</span>")
+	user.visible_action_message("activate", "\the [src].")
 	log_and_message_admins("has activated the service '[service_label]'", user)
 
 	if(service_duration)

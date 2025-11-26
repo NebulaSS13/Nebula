@@ -156,44 +156,40 @@
 		return
 
 	//must place on a wall and user must not be inside a closet/exosuit/whatever
-	var/turf/used_item = get_turf(A)
-	if(!istype(used_item) || !used_item.is_wall() || !isturf(user.loc))
+	var/turf/target_turf = get_turf(A)
+	if(!istype(target_turf) || !target_turf.is_wall() || !isturf(user.loc))
 		to_chat(user, SPAN_WARNING("You can't place this here!"))
 		return
 
-	var/placement_dir = get_dir(user, used_item)
+	var/placement_dir = get_dir(user, target_turf)
 	if (!(placement_dir in global.cardinal))
 		to_chat(user, SPAN_WARNING("You must stand directly in front of the wall you wish to place that on."))
 		return
 
-	if (ArePostersOnWall(used_item))
+	if (ArePostersOnWall(target_turf))
 		to_chat(user, SPAN_WARNING("There is already a poster there!"))
 		return
 
-	user.visible_message(
-		SPAN_NOTICE("\The [user] starts placing a poster on \the [used_item]."),
-		SPAN_NOTICE("You start placing the poster on \the [used_item]."))
+	user.visible_action_message("start", "placing \the [src] on \the [target_turf].")
 
 	var/obj/structure/sign/poster/P = new (user.loc, null, null, placement_dir, poster_design)
 	qdel(src)
 	flick("poster_being_set", P)
 	// Time to place is equal to the time needed to play the flick animation
-	if(do_after(user, 28, used_item) && used_item.is_wall() && !ArePostersOnWall(used_item, P))
-		user.visible_message(
-			SPAN_NOTICE("\The [user] has placed a poster on \the [used_item]."),
-			SPAN_NOTICE("You have placed the poster on \the [used_item]."))
+	if(do_after(user, 28, target_turf) && target_turf.is_wall() && !ArePostersOnWall(target_turf, P))
+		user.visible_action_message("place", "\the [src] on \the [target_turf].")
 	else
 		// We cannot rely on user being on the appropriate turf when placement fails
 		P.dismantle_structure(user)
 
-/obj/item/poster/proc/ArePostersOnWall(var/turf/used_item, var/placed_poster)
+/obj/item/poster/proc/ArePostersOnWall(var/turf/target_turf, var/placed_poster)
 	//just check if there is a poster on or adjacent to the wall
-	if (locate(/obj/structure/sign/poster) in used_item)
+	if (locate(/obj/structure/sign/poster) in target_turf)
 		return TRUE
 
 	//crude, but will cover most cases. We could do stuff like check pixel_x/y but it's not really worth it.
 	for (var/dir in global.cardinal)
-		var/turf/T = get_step(used_item, dir)
+		var/turf/T = get_step(target_turf, dir)
 		var/poster = locate(/obj/structure/sign/poster) in T
 		if (poster && placed_poster != poster)
 			return TRUE

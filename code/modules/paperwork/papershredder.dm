@@ -246,9 +246,7 @@
 	if(!do_after(user,20, src))
 		to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))
 		return
-	user.visible_message( \
-		SPAN_DANGER("\The [user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap."), \
-		SPAN_DANGER("You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap."))
+	user.visible_action_message("burn", "right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.", dangerous = ACTION_DANGER_ALL)
 	fire_act(return_air(), P.get_heat(), 500)
 
 /obj/item/shreddedp/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)

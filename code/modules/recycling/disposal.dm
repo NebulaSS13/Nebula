@@ -106,7 +106,7 @@ var/global/list/diversion_junctions = list()
 	if(!user.try_unequip(used_item, src) || QDELETED(used_item))
 		return
 
-	user.visible_message("\The [user] places \the [used_item] into \the [src].", "You place \the [used_item] into \the [src].")
+	user.visible_action_message("place", "\the [used_item] into \the [src].")
 
 	update_icon()
 
@@ -168,12 +168,10 @@ var/global/list/diversion_junctions = list()
 
 		// Messages and logging
 		if(AM == user)
-			user.visible_message("<span class='danger'>[user] climbs into [src].</span>", \
-								"<span class='notice'>You climb into [src].</span>")
+			user.visible_action_message("climb", "into \the [src].", dangerous = ACTION_DANGER_OTHERS)
 			admin_attack_log(user, null, "Stuffed themselves into \the [src].", null, "stuffed themselves into \the [src].")
 		else
-			user.visible_message("<span class='[is_dangerous ? "danger" : "notice"]'>[user] stuffs [AM] into [src][is_dangerous ? "!" : "."]</span>", \
-								"<span class='notice'>You stuff [AM] into [src].</span>")
+			user.visible_action_message("stuff", "\the [AM] into \the [src][is_dangerous ? "!" : "."]", dangerous = is_dangerous ? ACTION_DANGER_OTHERS : ACTION_DANGER_NONE)
 			if(ismob(M))
 				admin_attack_log(user, M, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
 				if (M.client)

@@ -100,29 +100,26 @@
 		return
 
 	var/self = (usr == src)
-	var/decl/pronouns/pronouns = usr.get_pronouns()
 	if(!self)
-		var/decl/pronouns/target_gender = src.get_pronouns()
 		usr.visible_message( \
-			SPAN_NOTICE("\The [usr] kneels down, puts [pronouns.his] hand on \the [src]'s wrist, and begins counting [target_gender.his] pulse."), \
-			SPAN_NOTICE("You begin counting \the [src]'s pulse."))
+			SPAN_NOTICE(usr.get_targeted_action_string(src, FALSE, "kneel", "down, put$USER_S$ $USER_THEIR$ hand on $TARGET'S$ wrist, and begin$USER_S$ counting $TARGET_THEIR$ pulse.")), \
+			SPAN_NOTICE(usr.get_targeted_action_string(src, TRUE, "begin", "counting $TARGET'S$ pulse.")))
 	else
-		usr.visible_message(
-			SPAN_NOTICE("\The [usr] begins counting [pronouns.his] pulse."), \
-			SPAN_NOTICE("You begin counting your pulse."))
+		usr.targeted_visible_action_message(src, "begin", "counting $TARGET_THEIR$ pulse.")
 
 	if(get_pulse())
-		to_chat(usr, "<span class='notice'>[self ? "You have a" : "[src] has a"] pulse! Counting...</span>")
+		to_chat(usr, SPAN_NOTICE(src.get_action_string(self, "has", "a pulse! Counting...")))
 	else
-		to_chat(usr, "<span class='danger'>[src] has no pulse!</span>")//it is REALLY UNLIKELY that a dead person would check his own pulse
+		// someone with a robot heart could be checking their pulse
+		to_chat(usr, SPAN_DANGER(src.get_action_string(self, "has", "no pulse!")))
 		return
 
 	to_chat(usr, "You must[self ? "" : " both"] remain still until counting is finished.")
-	if(do_mob(usr, src, 60))
-		var/message = "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is [src.get_pulse_as_string(GETPULSE_HAND)].</span>"
+	if(do_mob(usr, src, 6 SECONDS))
+		var/message = SPAN_NOTICE("[self ? "Your" : "[src]'s"] pulse is [src.get_pulse_as_string(GETPULSE_HAND)].")
 		to_chat(usr, message)
 	else
-		to_chat(usr, "<span class='warning'>You failed to check the pulse. Try again.</span>")
+		to_chat(usr, SPAN_WARNING("You failed to check the pulse. Try again."))
 
 /mob/living/human/proc/bloody_doodle()
 	set category = "IC"
@@ -204,12 +201,7 @@
 		to_chat(usr, "You are restrained and cannot do that!")
 		return
 
-	var/mob/S = src
-	var/mob/U = usr
-	var/self = null
-	if(S == U)
-		self = 1 // Removing object from yourself.
-
+	var/self = src == usr
 	var/list/limbs = list()
 	for(var/obj/item/organ/external/current_limb in get_external_organs())
 		if(current_limb && current_limb.is_dislocated() && !current_limb.is_parent_dislocated()) //if the parent is also dislocated you will have to relocate that first
@@ -219,30 +211,20 @@
 	if(!current_limb)
 		return
 
-	if(self)
-		to_chat(src, "<span class='warning'>You brace yourself to relocate your [current_limb.joint]...</span>")
-	else
-		to_chat(U, "<span class='warning'>You begin to relocate [S]'s [current_limb.joint]...</span>")
-	if(!do_after(U, 30, src))
+	usr.targeted_visible_action_message(src, "begin", "to relocate $TARGET'S$ [current_limb.joint].", dangerous = ACTION_DANGER_ALL)
+	if(!do_mob(usr, src, 3 SECONDS))
 		return
-	if(!current_limb || !S || !U)
+	if(!current_limb || QDELETED(src) || QDELETED(usr))
 		return
 
-	var/fail_prob = U.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_ADEPT, 3)
+	var/fail_prob = usr.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_ADEPT, 3)
 	if(self)
-		fail_prob += U.skill_fail_chance(SKILL_MEDICAL, 20, SKILL_EXPERT, 1)
-	var/decl/pronouns/pronouns = get_pronouns()
+		fail_prob += usr.skill_fail_chance(SKILL_MEDICAL, 20, SKILL_EXPERT, 1)
 	if(prob(fail_prob))
-		visible_message( \
-		"<span class='danger'>[U] pops [self ? "[pronouns.his]" : "[S]'s"] [current_limb.joint] in the WRONG place!</span>", \
-		"<span class='danger'>[self ? "You pop" : "[U] pops"] your [current_limb.joint] in the WRONG place!</span>" \
-		)
+		usr.targeted_visible_action_message(src, "pop", "$TARGET'S$ [current_limb.joint] in the WRONG place!", dangerous = ACTION_DANGER_ALL)
 		current_limb.add_pain(30)
 		current_limb.take_damage(5)
 		shock_stage += 20
 	else
-		visible_message( \
-		"<span class='danger'>[U] pops [self ? "[pronouns.his]" : "[S]'s"] [current_limb.joint] back in!</span>", \
-		"<span class='danger'>[self ? "You pop" : "[U] pops"] your [current_limb.joint] back in!</span>" \
-		)
+		usr.targeted_visible_action_message(src, "pop", "$TARGET'S$ [current_limb.joint] back in!", dangerous = ACTION_DANGER_ALL)
 		current_limb.undislocate()

@@ -117,20 +117,11 @@
 		return
 	if(wearer)
 		if(sensor_mode == 0)
-			user.visible_message(
-				SPAN_DANGER("\The [user] disables \the [wearer]'s vitals sensor."),
-				SPAN_DANGER("You disable \the [wearer]'s vitals sensor.")
-			)
+			user.visible_action_message("disable", "\the [wearer]'s vitals sensor.", dangerous = ACTION_DANGER_ALL)
 		else
-			user.visible_message(
-				SPAN_NOTICE("\The [user] adjusts \the [wearer]'s vitals sensor."),
-				SPAN_NOTICE("You adjust \the [wearer]'s vitals sensor.")
-			)
+			user.visible_action_message("adjust", "\the [wearer]'s vitals sensor.")
 		return
-	user.visible_message(
-		SPAN_NOTICE("\The [user] adjusts \the [src]"),
-		SPAN_NOTICE("You adjust \the [src].")
-	)
+	user.visible_action_message("adjust", "\the [src].")
 
 /obj/item/clothing/sensor/vitals/emp_act(var/severity)
 	..()

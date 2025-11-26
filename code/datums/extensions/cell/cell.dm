@@ -136,10 +136,7 @@
 		return TRUE // technically a valid interaction.
 
 	// Unload the cell.
-	user.visible_message(
-		SPAN_NOTICE("\The [user] removes \the [existing_cell] from \the [holder]."),
-		SPAN_NOTICE("You remove \the [existing_cell] from \the [holder].")
-	)
+	user.visible_action_message("remove", "\the [existing_cell] from \the [holder].")
 	existing_cell.dropInto(get_turf(holder))
 	user.put_in_active_hand(existing_cell)
 	holder_item.update_icon()

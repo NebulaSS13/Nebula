@@ -79,8 +79,7 @@
 
 /obj/item/evidencebag/attack_self(mob/user)
 	if(stored_item)
-		user.visible_message("[user] takes [stored_item] out of [src]", "You take [stored_item] out of [src].",\
-		"You hear someone rustle around in a plastic bag, and remove something.")
+		user.visible_action_message("take", "\the [stored_item] out of [src].", blind_message = "You hear someone rustle around in a plastic bag and remove something.")
 		user.put_in_hands(stored_item)
 		empty()
 	else

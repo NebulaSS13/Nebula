@@ -64,7 +64,7 @@
 	if(!user.try_unequip(G, src))
 		return
 	grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
-	user.visible_message("\The [user] inserts \a [G] into \the [src].", "<span class='notice'>You insert \a [G] into \the [src].</span>")
+	user.visible_action_message("insert", "\a [G] into \the [src].")
 
 /obj/item/gun/launcher/grenade/proc/unload(mob/user)
 	if(grenades.len)

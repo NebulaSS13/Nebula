@@ -527,8 +527,7 @@
 /obj/item/marshalling_wand/attack_self(mob/user)
 	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
 	if (user.check_intent(I_FLAG_HELP))
-		user.visible_message("<span class='notice'>[user] beckons with \the [src], signalling forward motion.</span>",
-							"<span class='notice'>You beckon with \the [src], signalling forward motion.</span>")
+		user.visible_action_message("beckon", "with \the [src], signalling forward motion.")
 	else if (user.check_intent(I_FLAG_DISARM))
 		user.visible_message("<span class='notice'>[user] holds \the [src] above their head, signalling a stop.</span>",
 							"<span class='notice'>You hold \the [src] above your head, signalling a stop.</span>")
@@ -540,8 +539,7 @@
 			wand_dir = "right"
 		else
 			wand_dir = pick("left", "right")
-		user.visible_message("<span class='notice'>[user] waves \the [src] to the [wand_dir], signalling a turn.</span>",
-							"<span class='notice'>You wave \the [src] to the [wand_dir], signalling a turn.</span>")
+		user.visible_action_message("wave", "\the [src] to the [wand_dir], signalling a turn.")
 	else if (user.check_intent(I_FLAG_HARM))
 		user.visible_message("<span class='warning'>[user] frantically waves \the [src] above their head!</span>",
 							"<span class='warning'>You frantically wave \the [src] above your head!</span>")

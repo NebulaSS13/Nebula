@@ -185,9 +185,9 @@
 	if(IS_WRENCH(used_item) && state == 0)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		if(anchored)
-			user.visible_message("[user] begins unsecuring the airlock assembly from the floor.", "You begin unsecuring the airlock assembly from the floor.")
+			user.visible_action_message("begin", "unsecuring the airlock assembly from the floor.")
 		else
-			user.visible_message("[user] begins securing the airlock assembly to the floor.", "You begin securing the airlock assembly to the floor.")
+			user.visible_action_message("begin", "securing the airlock assembly to the floor.")
 
 		if(do_after(user, 4 SECONDS, src))
 			if(QDELETED(src)) return TRUE
@@ -249,7 +249,7 @@
 			return TRUE
 
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
-		user.visible_message("\The [user] starts removing the electronics from the airlock assembly.", "You start removing the electronics from the airlock assembly.")
+		user.visible_action_message("start", "removing the electronics from the airlock assembly.")
 
 		if(do_after(user, 4 SECONDS, src))
 			if(QDELETED(src)) return TRUE

@@ -28,10 +28,7 @@
 	if((affecting.brute_dam + affecting.burn_dam) <= 0)
 		to_chat(user, SPAN_WARNING("\The [target]'s [affecting.name] is undamaged."))
 		return 0
-	user.visible_message(
-		SPAN_NOTICE("\The [user] starts patching fractures on \the [target]'s [affecting.name]."),
-		SPAN_NOTICE("You start patching fractures on \the [target]'s [affecting.name].")
-	)
+	user.visible_action_message("start", "patching fractures on \the [target]'s [affecting.name].")
 	play_apply_sound()
 	if(!do_mob(user, target, 1 SECOND))
 		to_chat(user, SPAN_WARNING("You must stand still to patch fractures."))

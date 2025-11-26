@@ -129,7 +129,7 @@
 	if(!user.try_unequip(used_item, src))
 		return FALSE
 	stored_materials.Add(used_item)
-	user.visible_message(SPAN_NOTICE("\The [user] inserts \the [used_item] into \the [src]."), SPAN_NOTICE("You insert \the [used_item] into \the [src]."))
+	user.visible_action_message("insert", "\the [used_item] into \the [src].")
 	return TRUE
 
 /obj/machinery/replicator/OnTopic(user, href_list)

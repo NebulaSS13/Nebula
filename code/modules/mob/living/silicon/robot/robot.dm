@@ -419,6 +419,7 @@
 	if(istype(used_item, /obj/item/inducer) || istype(used_item, /obj/item/handcuffs))
 		return TRUE
 
+	var/decl/pronouns/self_pronouns = user.get_self_pronouns()
 	if(opened) // Are they trying to insert something?
 		for(var/V in components)
 			var/datum/robot_component/C = components[V]
@@ -472,13 +473,11 @@
 	else if(IS_CROWBAR(used_item) && !user.check_intent(I_FLAG_HARM))	// crowbar means open or close the cover - we all know what a crowbar is by now
 		if(opened)
 			if(cell)
-				user.visible_message(
-					SPAN_NOTICE("\The [user] begins clasping shut \the [src]'s maintenance hatch."),
-					SPAN_NOTICE("You begin closing up \the [src]."))
+				user.visible_action_message("begin", "clasping shut \the [src]'s maintenance hatch.")
 
-				if(do_after(user, 50, src))
-					to_chat(user, SPAN_NOTICE("You close \the [src]'s maintenance hatch."))
-					opened = 0
+				if(do_after(user, 5 SECONDS, src))
+					to_chat(user, SPAN_NOTICE("[self_pronouns.He] [verb_agree_with_pronouns("close", self_pronouns)] \the [src]'s maintenance hatch."))
+					opened = FALSE
 					update_icon()
 
 			else if(wiresexposed && wires.IsAllCut())
@@ -487,10 +486,7 @@
 					to_chat(user, "\The [src] has no central processor to remove.")
 					return TRUE
 
-				user.visible_message(
-					SPAN_NOTICE("\The [user] begins ripping \the [central_processor] out of \the [src]."),
-					SPAN_NOTICE("You jam the crowbar into the robot and begin levering out \the [central_processor]."))
-
+				user.visible_action_message("jam", "\the [used_item] into \the [src] and begin$USER_S$ levering out \the [central_processor].", dangerous = ACTION_DANGER_OTHERS)
 				if(do_after(user, 5 SECONDS, src))
 					dismantle_robot(user)
 			else
@@ -502,7 +498,7 @@
 					if(C.installed == 1 || C.installed == -1)
 						removable_components += V
 				removable_components |= stock_parts
-				var/remove = input(user, "Which component do you want to pry out?", "Remove Component") as null|anything in removable_components
+				var/remove = input(user, "Which component [self_pronouns.does] [self_pronouns.he] want to pry out?", "Remove Component") as null|anything in removable_components
 				if(!remove || !opened || !(remove in (stock_parts|components)) || !Adjacent(user))
 					return TRUE
 				var/obj/item/removed_item
@@ -521,16 +517,16 @@
 					stock_parts -= remove
 					removed_item = remove
 				if(removed_item)
-					to_chat(user, SPAN_NOTICE("You remove \the [removed_item]."))
+					to_chat(user, SPAN_NOTICE(user.get_action_string(TRUE, "remove", "\the [removed_item].")))
 					removed_item.forceMove(loc)
 		else
 			if(locked)
 				to_chat(user, "The cover is locked and cannot be opened.")
 			else
-				user.visible_message("<span class='notice'>\The [user] begins prying open \the [src]'s maintenance hatch.</span>", "<span class='notice'>You start opening \the [src]'s maintenance hatch.</span>")
-				if(do_after(user, 50, src))
-					to_chat(user, "<span class='notice'>You open \the [src]'s maintenance hatch.</span>")
-					opened = 1
+				user.visible_action_message("begin", "prying open \the [src]'s maintenance hatch.")
+				if(do_after(user, 5 SECONDS, src))
+					to_chat(user, SPAN_NOTICE(user.get_action_string("open", "\the [src]'s maintenance hatch.")))
+					opened = TRUE
 					update_icon()
 		return TRUE
 	else if (istype(used_item, /obj/item/cell) && opened)	// trying to put a cell inside
@@ -544,8 +540,8 @@
 		else if(user.try_unequip(used_item, src))
 			cell = used_item
 			handle_selfinsert(used_item, user) //Just in case.
-			to_chat(user, "You insert the power cell.")
-			C.installed = 1
+			to_chat(user, SPAN_NOTICE(user.get_action_string(TRUE, "insert", "\the [used_item].")))
+			C.installed = TRUE
 			C.wrapped = used_item
 			C.install()
 			// This means that removing and replacing a power cell will repair the mount.
@@ -556,52 +552,52 @@
 		if (wiresexposed)
 			wires.Interact(user)
 		else
-			to_chat(user, "You can't reach the wiring.")
+			to_chat(user, SPAN_WARNING(user.get_action_string(TRUE, "can't", "reach the wiring.")))
 		return TRUE
 	else if(IS_SCREWDRIVER(used_item) && opened && !cell)	// haxing
 		wiresexposed = !wiresexposed
-		to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"].")
+		to_chat(user, SPAN_NOTICE("The wires have been [wiresexposed ? "exposed" : "unexposed"]."))
 		update_icon()
 		return TRUE
 	else if(IS_SCREWDRIVER(used_item) && opened && cell)	// radio
 		if(silicon_radio)
 			silicon_radio.attackby(used_item,user)//Push it to the radio to let it handle everything
 		else
-			to_chat(user, "Unable to locate a radio.")
+			to_chat(user, SPAN_WARNING("Unable to locate a radio."))
 		update_icon()
 		return TRUE
-	else if(istype(used_item, /obj/item/encryptionkey/) && opened)
+	else if(istype(used_item, /obj/item/encryptionkey) && opened)
 		if(silicon_radio)//sanityyyyyy
 			silicon_radio.attackby(used_item,user)//GTFO, you have your own procs
 		else
-			to_chat(user, "Unable to locate a radio.")
+			to_chat(user, SPAN_WARNING("Unable to locate a radio."))
 		return TRUE
 	else if (istype(used_item, /obj/item/card/id)||istype(used_item, /obj/item/modular_computer)||istype(used_item, /obj/item/card/robot))			// trying to unlock the interface with an ID card
 		if(emagged)//still allow them to open the cover
-			to_chat(user, "The interface seems slightly damaged.")
+			to_chat(user, SPAN_WARNING("The interface seems slightly damaged."))
 		if(opened)
-			to_chat(user, "You must close the cover to swipe an ID card.")
+			to_chat(user, SPAN_WARNING("You must close the cover to swipe an ID card."))
 		else
 			if(allowed(user))
 				locked = !locked
-				to_chat(user, "You [ locked ? "lock" : "unlock"] [src]'s interface.")
+				user.self_action_message(locked ? "lock" : "unlock", "\the [src]'s interface.")
 				update_icon()
 			else
-				to_chat(user, "<span class='warning'>Access denied.</span>")
+				to_chat(user, SPAN_WARNING("Access denied."))
 		return TRUE
 	else if(istype(used_item, /obj/item/borg/upgrade))
 		var/obj/item/borg/upgrade/U = used_item
 		if(!opened)
-			to_chat(user, "You must access [src]'s internals!")
+			user.self_action_message("must", "access \the [src]'s internals!", dangerous = ACTION_DANGER_OTHERS)
 		else if(!src.module && U.require_module)
-			to_chat(user, "[src] must choose a module before they can be upgraded!")
+			to_chat(user, SPAN_WARNING(get_action_string(FALSE, "must", "choose a module before $USER_THEY$ can be upgraded!")))
 		else if(U.locked)
 			to_chat(user, "The upgrade is locked and cannot be used yet!")
 		else
 			if(U.action(src))
 				if(!user.try_unequip(U, src))
 					return TRUE
-				to_chat(user, "You apply the upgrade to [src]!")
+				user.self_action_message("apply", "\the [U] to \the [src]!")
 				handle_selfinsert(used_item, user)
 			else
 				to_chat(user, "Upgrade error!")
@@ -635,7 +631,7 @@
 			cell.update_icon()
 			cell.add_fingerprint(user)
 			user.put_in_active_hand(cell)
-			to_chat(user, "You remove \the [cell].")
+			user.self_action_message("remove", "\the [cell].")
 			cell = null
 			cell_component.wrapped = null
 			cell_component.installed = 0
@@ -643,7 +639,7 @@
 		else if(cell_component.installed == -1)
 			cell_component.installed = 0
 			var/obj/item/broken_device = cell_component.wrapped
-			to_chat(user, "You remove \the [broken_device].")
+			user.self_action_message("remove", "\the [broken_device].")
 			user.put_in_active_hand(broken_device)
 		return TRUE
 	. = ..()
@@ -781,7 +777,8 @@
 	icon = module_sprites[selected_icon]
 	icon_selected = TRUE
 	update_icon()
-	to_chat(src, "Your icon has been set. You now require a module reset to change it.")
+	var/decl/pronouns/self_pronouns = get_self_pronouns()
+	to_chat(src, "[self_pronouns.His] icon has been set. [self_pronouns.He] now require[self_pronouns.s] a module reset to change it.")
 
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
 	set name = "Set Sensor Augmentation"
@@ -846,10 +843,10 @@
 	if(!opened)//Cover is closed
 		if(locked)
 			if(prob(90))
-				to_chat(user, "You emag the cover lock.")
+				user.self_action_message("emag", "the cover lock.")
 				locked = 0
 			else
-				to_chat(user, "You fail to emag the cover lock.")
+				user.self_action_message("fail", "to emag the cover lock.")
 				to_chat(src, "Hack attempt detected.")
 			return 1
 		else
@@ -860,7 +857,7 @@
 		if(emagged)
 			return //Prevents the X has hit Y with Z message also you cant emag them twice
 		if(wiresexposed)
-			to_chat(user, "You must close the panel first.")
+			user.self_action_message("must", "close the panel first.")
 			return
 		else
 			sleep(6)
@@ -868,7 +865,7 @@
 				emagged = 1
 				lawupdate = 0
 				disconnect_from_ai()
-				to_chat(user, "You emag [src]'s interface.")
+				user.self_action_message("emag", "\the [src]'s interface.")
 				log_and_message_admins("emagged cyborg [key_name_admin(src)].  Laws overridden.", src)
 				clear_supplied_laws()
 				clear_inherent_laws()
@@ -900,7 +897,7 @@
 						module.handle_emagged()
 					update_icon()
 			else
-				to_chat(user, "You fail to hack [src]'s interface.")
+				user.self_action_message("fail", "to hack \the [src]'s interface.", dangerous = ACTION_DANGER_OTHERS)
 				to_chat(src, "Hack attempt detected.")
 			return 1
 
@@ -922,7 +919,7 @@
 
 	if(central_processor)
 		if(user)
-			to_chat(user, SPAN_NOTICE("You damage some parts of the chassis, but eventually manage to rip out \the [central_processor]."))
+			user.self_action_message("damage", "some parts of the chassis, but eventually manage to rip out \the [central_processor].", dangerous = ACTION_DANGER_OTHERS)
 		central_processor.dropInto(loc)
 		var/mob/living/brainmob = central_processor.get_brainmob(create_if_missing = TRUE)
 		if(mind && brainmob)
@@ -1010,7 +1007,7 @@
 
 /mob/living/silicon/robot/check_grab_hand()
 	if(locate(/obj/item/grab) in contents)
-		to_chat(src, SPAN_WARNING("You have already grabbed something!"))
+		self_action_message("have", "already grabbed something!", dangerous = ACTION_DANGER_OTHERS)
 		return FALSE
 	return TRUE
 

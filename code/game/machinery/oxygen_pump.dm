@@ -54,7 +54,7 @@
 
 /obj/machinery/oxygen_pump/physical_attack_hand(mob/user)
 	if((stat & MAINT) && tank)
-		user.visible_message(SPAN_NOTICE("\The [user] removes \the [tank] from \the [src]."), SPAN_NOTICE("You remove \the [tank] from \the [src]."))
+		user.visible_action_message("remove", "\the [tank] from \the [src].")
 		user.put_in_hands(tank)
 		src.add_fingerprint(user)
 		tank.add_fingerprint(user)
@@ -160,7 +160,7 @@
 		if(!user.try_unequip(used_item, src))
 			return TRUE
 		tank = used_item
-		user.visible_message(SPAN_NOTICE("\The [user] installs \the [tank] into \the [src]."), SPAN_NOTICE("You install \the [tank] into \the [src]."))
+		user.visible_action_message("install", "\the [tank] into \the [src].")
 		src.add_fingerprint(user)
 		return TRUE
 	return FALSE // TODO: should this be a parent call? do we want this to be (de)constructable?

@@ -44,12 +44,10 @@
 	else if (istype(tool, /obj/item/stack/medical/bandage))
 		tool_name = "the bandaid"
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts treating damage within \the [target]'s [affected.name] with [tool_name].", \
-	"You start treating damage within \the [target]'s [affected.name] with [tool_name]." )
+	user.targeted_visible_action_message(target, "start", "treating damage within $TARGET'S$ [affected.name] with [tool_name].")
 	for(var/obj/item/organ/internal/organ in affected.internal_organs)
 		if(organ && organ.get_organ_damage() > 0 && !BP_IS_PROSTHETIC(organ) && !(organ.status & ORGAN_DEAD) && (organ.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
-			user.visible_message("[user] starts treating damage to [target]'s [organ] with [tool_name].", \
-			"You start treating damage to [target]'s [organ] with [tool_name]." )
+			user.targeted_visible_action_message(target, "start", "treating damage to $TARGET'S$ [organ] with [tool_name].")
 	target.custom_pain("The pain in your [affected.name] is living hell!",100,affecting = affected)
 	..()
 
@@ -65,17 +63,21 @@
 			if(organ.status & ORGAN_DEAD)
 				to_chat(user, SPAN_NOTICE("You were unable to treat \the [organ] due to its necrotic state."))
 			else
-				user.visible_message("<span class='notice'>[user] treats damage to [target]'s [organ] with [tool_name].</span>", \
-				"<span class='notice'>You treat damage to [target]'s [organ] with [tool_name].</span>" )
+				user.targeted_visible_action_message(target, "treat", "damage to $TARGET'S$ [organ] with [tool_name].")
 				organ.surgical_fix(user)
-	user.visible_message("\The [user] finishes treating damage within \the [target]'s [affected.name] with [tool_name].", \
-	"You finish treating damage within \the [target]'s [affected.name] with [tool_name]." )
+	user.targeted_visible_action_message(target, "finish", "treating damage within $TARGET'S$ [affected.name] with [tool_name].")
 	..()
 
 /decl/surgery_step/internal/fix_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='warning'>[user]'s hand slips, getting mess and tearing the inside of [target]'s [affected.name] with \the [tool]!</span>", \
-	"<span class='warning'>Your hand slips, getting mess and tearing the inside of [target]'s [affected.name] with \the [tool]!</span>")
+	var/decl/pronouns/target_pronouns = target.get_visible_pronouns()
+	var/target_their = (user == target) ? target_pronouns.his : "\the [target]'s"
+	var/decl/pronouns/self_pronouns = user.get_self_pronouns()
+	var/target_their_self = (user == target) ? self_pronouns.his : "\the [target]'s"
+	user.visible_message(
+		SPAN_WARNING("\The [user]'s hand slips, getting mess all over the torn insides of [target_their] [affected.name] with \the [tool]!"),
+		SPAN_WARNING("[self_pronouns.His] hand slips, getting mess all over the torn insides of [target_their_self] [affected.name] with \the [tool]!")
+	)
 	var/dam_amt = 2
 	if(istype(tool, /obj/item/stack/medical/bandage/advanced))
 		target.take_damage(5, TOX)

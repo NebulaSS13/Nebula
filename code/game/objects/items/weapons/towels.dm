@@ -201,9 +201,7 @@
 		return FALSE
 	if(!user.drop_from_inventory(src))
 		return FALSE
-	user.visible_message(
-		SPAN_NOTICE("[user] lays out \the [src] on the ground."),
-		SPAN_NOTICE("You lay out \the [src] on the ground."))
+	user.visible_action_message("lay", "out \the [src] on the ground.")
 	laid_out = TRUE
 	set_dir(user.dir)
 	reset_offsets()

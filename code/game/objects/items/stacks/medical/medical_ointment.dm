@@ -18,10 +18,7 @@
 	if(affecting.is_salved())
 		to_chat(user, SPAN_WARNING("The wounds on [target]'s [affecting.name] have already been salved."))
 		return 0
-	user.visible_message(
-		SPAN_NOTICE("\The [user] starts salving wounds on [target]'s [affecting.name]."),
-		SPAN_NOTICE("You start salving the wounds on [target]'s [affecting.name].")
-	)
+	show_limb_salve_start_message(user, target, affecting)
 	play_apply_sound()
 	if(!do_mob(user, target, 1 SECOND))
 		to_chat(user, SPAN_WARNING("You must stand still to salve wounds."))
@@ -31,11 +28,11 @@
 	affecting.disinfect()
 	return 1 // consume 1 stack
 
+/obj/item/stack/medical/ointment/proc/show_limb_salve_start_message(mob/living/user, mob/living/target, obj/item/organ/external/affecting)
+	user.visible_action_message("start", "salving the wounds on \the [target]'s [affecting.name].")
+
 /obj/item/stack/medical/ointment/proc/show_limb_salve_message(mob/living/user, mob/living/target, obj/item/organ/external/affecting)
-	user.visible_message(
-		SPAN_NOTICE("\The [user] salves the wounds on \the [target]'s [affecting.name]."),
-	    SPAN_NOTICE("You salve the wounds on \the [target]'s [affecting.name].")
-	)
+	user.visible_action_message("salve", "the wounds on \the [target]'s [affecting.name].")
 
 /obj/item/stack/medical/ointment/crafted
 	name = "poultice"
@@ -65,8 +62,8 @@
 	var/static/list/apply_sounds = list('sound/effects/ointment.ogg')
 	return apply_sounds
 
+/obj/item/stack/medical/ointment/advanced/show_limb_salve_start_message(mob/living/user, mob/living/target, obj/item/organ/external/affecting)
+	user.visible_action_message("start", "covering the wounds on \the [target]'s [affecting.name] with regenerative membrane.")
+
 /obj/item/stack/medical/ointment/advanced/show_limb_salve_message(mob/living/user, mob/living/target, obj/item/organ/external/affecting)
-	user.visible_message(
-		SPAN_NOTICE("[user] covers wounds on [target]'s [affecting.name] with regenerative membrane."),
-		SPAN_NOTICE("You cover wounds on [target]'s [affecting.name] with regenerative membrane.")
-	)
+	user.visible_action_message("cover", "wounds on [target]'s [affecting.name] with regenerative membrane.")

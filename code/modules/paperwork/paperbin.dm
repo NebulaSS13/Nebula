@@ -66,7 +66,7 @@
 			P.set_content("<font face=\"[P.crayonfont]\" color=\"red\"><b>HONK HONK HONK HONK HONK HONK HONK<br>HOOOOOOOOOOOOOOOOOOOOOONK<br>APRIL FOOLS</b></font>")
 
 	user.put_in_hands(P)
-	to_chat(user, SPAN_NOTICE("You take \the [P] out of \the [src]."))
+	user.self_action_message("take", "\the [P] out of \the [src].")
 	amount--
 	update_icon()
 	add_fingerprint(user)
@@ -80,7 +80,7 @@
 		if(!user.try_unequip(used_item, src))
 			return TRUE
 		add_paper(used_item)
-		to_chat(user, SPAN_NOTICE("You put [used_item] in [src]."))
+		user.self_action_message("put", "\the [used_item] in \the [src].")
 		return TRUE
 	else if(istype(used_item, /obj/item/paper_bundle))
 		if(amount >= max_amount)
@@ -96,7 +96,7 @@
 				was_there_a_photo = TRUE
 				bundleitem.dropInto(user.loc)
 				bundleitem.reset_plane_and_layer()
-		to_chat(user, SPAN_NOTICE("You loosen \the [used_item] and add its papers into \the [src]."))
+		user.self_action_message("loosen", "\the [used_item] and add its papers into \the [src].")
 		B.reevaluate_existence()
 		if(was_there_a_photo)
 			to_chat(user, SPAN_NOTICE("The photo cannot go into \the [src]."))
@@ -162,7 +162,7 @@
 
 /decl/interaction_handler/paper_bin_dump_contents/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/paper_bin/bin = target
-	to_chat(user, SPAN_NOTICE("You start emptying \the [bin]..."))
+	user.self_action_message("start", "emptying \the [bin]...")
 	if(do_after(user, 2 SECONDS) && !QDELETED(bin))
 		bin.dump_contents()
-		to_chat(user, SPAN_NOTICE("You emptied \the [bin]."))
+	user.self_action_message("empty", "\the [bin].")

@@ -134,16 +134,13 @@ var/global/list/hygiene_props = list()
 		return ..()
 
 	if(swirlie)
-		usr.visible_message(
-			SPAN_DANGER("\The [user] slams the toilet seat onto \the [swirlie]'s head!"),
-			SPAN_NOTICE("You slam the toilet seat onto \the [swirlie]'s head!"),
-			"You hear reverberating porcelain.")
+		user.visible_action_message("slam", "the toilet seat onto \the [swirlie]'s head!", dangerous = ACTION_DANGER_OTHERS, blind_message = "You hear reverberating porcelain.")
 		swirlie.take_damage(8)
 		return TRUE
 
 	// TODO: storage datum
 	if(cistern && !open)
-		if(!contents.len)
+		if(!length(contents))
 			to_chat(user, SPAN_NOTICE("The cistern is empty."))
 		else
 			var/obj/item/thing = pick(contents)
@@ -181,9 +178,7 @@ var/global/list/hygiene_props = list()
 				victim.take_damage(5, OXY)
 			swirlie = null
 		else
-			user.visible_message(
-			SPAN_DANGER("\The [user] slams \the [victim] into \the [src]!"),
-			SPAN_NOTICE("You slam \the [victim] into \the [src]!"))
+			user.visible_action_message("slam", "\the [victim] into \the [src]!", dangerous = ACTION_DANGER_OTHERS)
 			victim.take_damage(8)
 			playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 		return TRUE
@@ -412,9 +407,7 @@ var/global/list/hygiene_props = list()
 
 	var/obj/item/chems/chem_container = used_item
 	if (istype(chem_container) && ATOM_IS_OPEN_CONTAINER(chem_container) && chem_container.reagents)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] fills \the [chem_container] using \the [src]."),
-			SPAN_NOTICE("You fill \the [chem_container] using \the [src]."))
+		user.visible_action_message("fill", "\the [chem_container] using \the [src].")
 		playsound(loc, 'sound/effects/sink.ogg', 75, 1)
 		chem_container.add_to_reagents(/decl/material/liquid/water, min(REAGENTS_FREE_SPACE(chem_container.reagents), chem_container.amount_per_transfer_from_this))
 		return TRUE
@@ -518,7 +511,7 @@ var/global/list/hygiene_props = list()
 		return
 
 	if(can_use(1))
-		usr.visible_message(SPAN_NOTICE("\The [usr] tears a sheet from \the [src]."), SPAN_NOTICE("You tear a sheet from \the [src]."))
+		usr.visible_action_message("tear", "a sheet from \the [src].")
 		var/obj/item/paper/crumpled/bog/C =  new(loc)
 		usr.put_in_hands(C)
 

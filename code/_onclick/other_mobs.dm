@@ -31,10 +31,7 @@
 	if(!LAZYLEN(climbers) || (user in climbers) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
 		return FALSE
 
-	user.visible_message(
-		SPAN_DANGER("\The [user] shakes \the [src]!"),
-		SPAN_DANGER("You shake \the [src]!")
-	)
+	user.visible_action_message("shake", "\the [src]!", dangerous = ACTION_DANGER_ALL)
 
 	object_shaken()
 	return TRUE

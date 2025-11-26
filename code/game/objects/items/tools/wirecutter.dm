@@ -45,12 +45,8 @@
 
 	var/obj/item/handcuffs/cable/cuffs = target.get_equipped_item(slot_handcuffed_str)
 	if(user.check_intent(I_FLAG_HELP) && istype(cuffs) && target.try_unequip(cuffs))
-		user.visible_message(
-			"\The [user] cuts \the [target]'s restraints with \the [src]!",
-			"You cut \the [target]'s restraints with \the [src]!",
-			"You hear cable being cut."
-		)
-		qdel(cuffs)
+		user.visible_action_message("cut", "\the [target]'s restraints with \the [src]!", dangerous = ACTION_DANGER_OTHERS, blind_message = "You hear cable being cut.")
+		cuffs.physically_destroyed()
 		if(target.buckled?.buckle_require_restraints)
 			target.buckled.unbuckle_mob()
 		return TRUE

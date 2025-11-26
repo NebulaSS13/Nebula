@@ -147,7 +147,7 @@
 		used_item.storage.finish_bulk_removal()
 
 		if(plants_loaded)
-			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [used_item].</span>", "<span class='notice'>You load \the [src] with the contents of \the [used_item].</span>")
+			user.visible_action_message("load", "\the [src] with the contents of \the [used_item].")
 			if(length(used_item.storage.get_contents()) > 0)
 				to_chat(user, "<span class='notice'>Some items were refused.</span>")
 		return TRUE

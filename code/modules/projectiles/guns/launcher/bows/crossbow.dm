@@ -16,7 +16,4 @@
 
 /obj/item/gun/launcher/bow/crossbow/show_load_message(mob/user)
 	if(user)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] slides \the [_loaded] into \the [src]."),
-			SPAN_NOTICE("You slide \the [_loaded] into \the [src].")
-		)
+		user.visible_action_message("slide", "\the [_loaded] into \the [src].")

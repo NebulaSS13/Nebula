@@ -184,7 +184,7 @@
 				if(!parrot.parrot_perch || parrot.parrot_interest.loc != parrot.parrot_perch.loc)
 					parrot.held_item = parrot.parrot_interest
 					parrot.parrot_interest.forceMove(parrot)
-					parrot.visible_message("[parrot] grabs the [parrot.held_item]!", "<span class='notice'>You grab the [parrot.held_item]!</span>", "You hear the sounds of wings flapping furiously.")
+					parrot.visible_action_message("grab", "\the [parrot.held_item]!", blind_message = "You hear the sounds of wings flapping furiously.")
 
 			parrot.parrot_interest = null
 			parrot.parrot_state = PARROT_SWOOP | PARROT_RETURN
@@ -432,7 +432,7 @@
 
 			held_item = I
 			I.forceMove(src)
-			visible_message("[src] grabs the [held_item]!", "<span class='notice'>You grab the [held_item]!</span>", "You hear the sounds of wings flapping furiously.")
+			visible_action_message("grab", "\the [held_item]!", blind_message = "You hear the sounds of wings flapping furiously.")
 			return held_item
 
 	to_chat(src, "<span class='warning'>There is nothing of interest to take.</span>")

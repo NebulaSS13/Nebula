@@ -154,10 +154,10 @@
 	return TRUE
 
 /obj/item/parcel/proc/unwrap(var/mob/user)
-	visible_message(SPAN_NOTICE("\The [user] starts tearing the wrapping off \the [src]."), SPAN_NOTICE("You start tearing the wrapping off \the [src]."))
+	user.visible_action_message("start", "tearing the wrapping off \the [src].")
 	//I guess cargo techs would definitely be faster at opening packages.
 	if(user.do_skilled(3 SECONDS, SKILL_HAULING, src))
-		visible_message(SPAN_NOTICE("\The [user] unwrapped \the [src]!"), SPAN_NOTICE("You unwrapped \the [src]!"))
+		user.visible_action_message("unwrap", "\the [src]!")
 		if(!length(contents))
 			to_chat(user, SPAN_WARNING("\The [src] was empty!"))
 		playsound(src, 'sound/items/poster_ripped.ogg', 50, TRUE)

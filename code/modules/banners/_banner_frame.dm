@@ -51,11 +51,7 @@
 		user.put_in_hands(banner)
 		var/old_banner = banner
 		set_banner(null)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] removes \the [old_banner] from \the [src]."),
-			SPAN_NOTICE("You remove \the [old_banner] from \the [src]."),
-			SPAN_NOTICE("You hear the rustling of fabric.")
-		)
+		user.visible_action_message("remove", "\the [old_banner] from \the [src].", blind_message = SPAN_NOTICE("You hear the rustling of fabric."))
 		return TRUE
 	return ..()
 
@@ -71,7 +67,7 @@
 			return TRUE
 
 		if(user.try_unequip(used_item, src))
-			user.visible_message(SPAN_NOTICE("\The [user] hangs \the [used_item] from \the [src]."), SPAN_NOTICE("You hang \the [used_item] from \the [src]."), SPAN_NOTICE("You hear the rustling of fabric."))
+			user.visible_action_message("hang", "\the [used_item] from \the [src].", blind_message = SPAN_NOTICE("You hear the rustling of fabric."))
 			set_banner(used_item)
 		return TRUE
 	return ..()

@@ -122,10 +122,7 @@
 	var/obj/item/syringe_cartridge/C = darts[1]
 	darts -= C
 	user.put_in_hands(C)
-	user.visible_message(
-		SPAN_NOTICE("\The [user] removes \a [C] from \the [src]."),
-		SPAN_NOTICE("You remove \a [C] from \the [src].")
-	)
+	user.visible_action_message("remove", "\a [C] from \the [src].")
 	return TRUE
 
 /obj/item/gun/launcher/syringe/attackby(var/obj/item/used_item, mob/user)
@@ -137,7 +134,7 @@
 		if(!user.try_unequip(C, src))
 			return TRUE
 		darts += C //add to the end
-		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
+		user.visible_action_message("insert", "\a [C] into [src].")
 		return TRUE
 	else
 		return ..()

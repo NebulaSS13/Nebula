@@ -10,17 +10,17 @@
 
 /obj/item/chems/drinks/shaker/attack_self(mob/user)
 	if(user.skill_check(SKILL_COOKING, SKILL_PROF))
-		user.visible_message("<span class='rose'>\The [user] shakes \the [src] briskly in one hand, with supreme confidence and competence.</span>", "<span class='rose'>You shake \the [src] briskly with one hand.</span>")
+		user.visible_action_message("shake", "\the [src] briskly in one hand", dangerous = "rose", self_postfix = ".", other_postfix = ", with supreme confidence and competence.")
 		mix()
 		return
 	if(user.skill_check(SKILL_COOKING, SKILL_ADEPT))
-		user.visible_message(SPAN_NOTICE("\The [user] shakes \the [src] briskly, with some skill."), SPAN_NOTICE("You shake \the [src] briskly, with some skill."))
+		user.visible_action_message("shake", "\the [src] briskly, with some skill.")
 		mix()
 		return
 	else
-		user.visible_message(SPAN_NOTICE("\The [user] shakes \the [src] gingerly."), SPAN_NOTICE("You shake \the [src] gingerly."))
+		user.visible_action_message("shake", "\the [src] gingerly.")
 		if(prob(15) && (reagents && REAGENT_TOTAL_VOLUME(reagents)))
-			user.visible_message(SPAN_WARNING("\The [user] spills the contents of \the [src] over themselves!"), SPAN_WARNING("You spill the contents of \the [src] over yourself!"))
+			user.visible_action_message("spill", "the contents of \the [src] over $USER_SELF$!", dangerous = ACTION_DANGER_WARNING)
 			reagents.splash(user, REAGENT_TOTAL_VOLUME(reagents))
 		else
 			mix()

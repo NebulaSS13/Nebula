@@ -112,7 +112,7 @@ Contains helper procs for airflow, called by /connection_group.
 	airborne_acceleration = 0
 
 /mob/airflow_hit(atom/A)
-	visible_message(SPAN_DANGER("\The [src] slams into \the [A]!"), SPAN_DANGER("You slam into \the [A]!"), SPAN_DANGER("You hear a loud slam!"))
+	visible_action_message("slam", "into \the [A]!", ACTION_DANGER_ALL, SPAN_DANGER("You hear a loud slam!"))
 	playsound(src.loc, "smash.ogg", 25, 1, -1)
 	var/weak_amt = istype(A,/obj/item) ? A:w_class : rand(1,5) //Heheheh
 	SET_STATUS_MAX(src, STAT_WEAK, weak_amt)

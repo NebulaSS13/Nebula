@@ -312,7 +312,7 @@ Standard helpers for users interacting with machinery parts.
 	else
 		user.try_unequip(part, src)
 		install_component(part)
-	user.visible_message(SPAN_NOTICE("\The [user] installs \the [part] in \the [src]!"), SPAN_NOTICE("You install \the [part] in \the [src]!"))
+	user.visible_action_message("install", "\the [part] in \the [src]!")
 	return TRUE
 
 /obj/machinery/proc/part_removal(mob/user)
@@ -341,7 +341,7 @@ Standard helpers for users interacting with machinery parts.
 	var/obj/item/stock_parts/part = uninstall_component(get_component_of_type(path, TRUE))
 	if(part)
 		user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
-		user.visible_message(SPAN_NOTICE("\The [user] removes \the [part] from \the [src]."), SPAN_NOTICE("You remove \the [part] from \the [src]."))
+		user.visible_action_message("remove", "\the [part] from \the [src].")
 
 /obj/machinery/proc/missing_parts(var/only_functional)
 	if(!construct_state)

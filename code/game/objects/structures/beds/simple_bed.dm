@@ -12,32 +12,15 @@
 
 /obj/structure/bed/simple/show_buckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
-		visible_message(
-			SPAN_NOTICE("\The [buckled] lies down on \the [src]."),
-			SPAN_NOTICE("You lie down on \the [src]."),
-			SPAN_NOTICE("You hear a rustling sound.")
-		)
+		buckling.visible_action_message("lie", "down on \the [src].", blind_message = SPAN_NOTICE("You hear a rustling sound."))
 	else
-		var/decl/pronouns/pronouns = buckled.get_pronouns()
-		visible_message(
-			SPAN_NOTICE("\The [buckled] [pronouns.is] laid down on \the [src] by \the [buckling]."),
-			SPAN_NOTICE("You are laid down on \the [src] by \the [buckling]."),
-			SPAN_NOTICE("You hear a rustling sound.")
-		)
+		buckling.targeted_visible_action_message(buckled, "lay", "\the [buckled] down on \the [src].", blind_message = SPAN_NOTICE("You hear a rustling sound."))
 
 /obj/structure/bed/simple/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
-		visible_message(
-			SPAN_NOTICE("\The [buckled] rises from \the [src]."),
-			SPAN_NOTICE("You rise from \the [src]."),
-			SPAN_NOTICE("You hear a rustling sound.")
-		)
+		buckling.visible_action_message("rise", "from \the [src].", blind_message = SPAN_NOTICE("You hear a rustling sound."))
 	else
-		visible_message(
-			SPAN_NOTICE("\The [buckled] was pulled off \the [src] by \the [buckling]."),
-			SPAN_NOTICE("You were pulled off \the [src] by \the [buckling]."),
-			SPAN_NOTICE("You hear a rustling sound.")
-		)
+		buckling.targeted_visible_action_message(buckled, "pull", "\the [buckling] off \the [src].", blind_message = SPAN_NOTICE("You hear a rustling sound."))
 
 /obj/structure/bed/simple/ebony
 	material = /decl/material/solid/organic/wood/ebony

@@ -48,8 +48,7 @@
 
 /decl/surgery_step/robotics/unscrew_hatch/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts to unscrew the maintenance hatch on [target]'s [affected.name] with \the [tool].", \
-	"You start to unscrew the maintenance hatch on [target]'s [affected.name] with \the [tool].")
+	user.visible_action_message("start", "to unscrew the maintenance hatch on [target]'s [affected.name] with \the [tool].")
 	..()
 
 /decl/surgery_step/robotics/unscrew_hatch/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -82,8 +81,7 @@
 
 /decl/surgery_step/robotics/screw_hatch/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts to screw down the maintenance hatch on [target]'s [affected.name] with \the [tool].", \
-	"You start to screw down the maintenance hatch on [target]'s [affected.name] with \the [tool].")
+	user.visible_action_message("start", "to screw down the maintenance hatch on [target]'s [affected.name] with \the [tool].")
 	..()
 
 /decl/surgery_step/robotics/screw_hatch/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -119,14 +117,12 @@
 
 /decl/surgery_step/robotics/open_hatch/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts to pry open the maintenance hatch on [target]'s [affected.name] with \the [tool].",
-	"You start to pry open the maintenance hatch on [target]'s [affected.name] with \the [tool].")
+	user.visible_action_message("start", "to pry open the maintenance hatch on [target]'s [affected.name] with \the [tool].")
 	..()
 
 /decl/surgery_step/robotics/open_hatch/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='notice'>[user] opens the maintenance hatch on [target]'s [affected.name] with \the [tool].</span>", \
-	 "<span class='notice'>You open the maintenance hatch on [target]'s [affected.name] with \the [tool].</span>")
+	user.visible_action_message("open", "the maintenance hatch on [target]'s [affected.name] with \the [tool].")
 	affected.hatch_state = HATCH_OPENED
 	..()
 
@@ -163,8 +159,7 @@
 
 /decl/surgery_step/robotics/close_hatch/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='notice'>[user] closes the hatch on [target]'s [affected.name] with \the [tool].</span>", \
-	"<span class='notice'>You close the hatch on [target]'s [affected.name] with \the [tool].</span>")
+	user.visible_action_message("close", "the hatch on [target]'s [affected.name] with \the [tool].")
 	affected.hatch_state = HATCH_UNSCREWED
 	affected.germ_level = 0
 	..()
@@ -372,8 +367,7 @@
 	for(var/obj/item/organ/internal/organ in affected.internal_organs)
 		if(organ.get_organ_damage() > 0)
 			if(BP_IS_PROSTHETIC(organ))
-				user.visible_message("[user] starts mending the damage to [target]'s [organ.name]'s mechanisms.", \
-				"You start mending the damage to [target]'s [organ.name]'s mechanisms." )
+				user.targeted_visible_action_message(target, "start", "mending the damage to $TARGET'S$ [organ.name]'s mechanisms.")
 	..()
 
 /decl/surgery_step/robotics/fix_organ_robotic/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -381,15 +375,14 @@
 	for(var/obj/item/organ/internal/organ in affected.internal_organs)
 		if(organ.get_organ_damage() > 0)
 			if(BP_IS_PROSTHETIC(organ))
-				user.visible_message("<span class='notice'>[user] repairs [target]'s [organ.name] with [tool].</span>", \
-				"<span class='notice'>You repair [target]'s [organ.name] with [tool].</span>" )
+				user.targeted_visible_action_message(target, "repair", "$TARGET'S$ [organ.name] with [tool].")
 				organ.set_organ_damage(0)
 	..()
 
 /decl/surgery_step/robotics/fix_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='warning'>[user]'s hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!</span>", \
-	"<span class='warning'>Your hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!</span>")
+	user.visible_message(SPAN_WARNING("[user]'s hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!"), \
+	SPAN_WARNING("Your hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!"))
 	target.take_damage(5, TOX)
 	affected.createwound(CUT, 5)
 	for(var/internal in affected.internal_organs)
@@ -473,8 +466,7 @@
 	return organ_to_replace
 
 /decl/surgery_step/robotics/attach_organ_robotic/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
-	user.visible_message("[user] begins reattaching [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].", \
-	"You start reattaching [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].")
+	user.targeted_visible_action_message(target, "begin", "reattaching $TARGET'S$ [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].")
 	..()
 
 /decl/surgery_step/robotics/attach_organ_robotic/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)

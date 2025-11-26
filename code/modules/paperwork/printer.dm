@@ -140,17 +140,17 @@
 	QDEL_NULL_LIST(print_queue)
 
 /**Allow inserting a toner cartridge into the printer */
-/obj/item/stock_parts/printer/proc/insert_toner(var/obj/item/chems/toner_cartridge/T, var/mob/user)
+/obj/item/stock_parts/printer/proc/insert_toner(var/obj/item/chems/toner_cartridge/new_toner, var/mob/user)
 	if(toner)
 		if(user)
 			to_chat(user, SPAN_WARNING("There's already a cartridge in \the [src]."))
 		return TRUE
 
-	if(!user.try_unequip(T, src))
+	if(!user.try_unequip(new_toner, src))
 		return TRUE
-	toner = T
+	toner = new_toner
 	if(user)
-		to_chat(user, SPAN_NOTICE("You install \a [T] in \the [src]."))
+		user.self_action_message("install", "\a [new_toner] in \the [src].")
 	if(call_on_status_changed)
 		call_on_status_changed.InvokeAsync()
 	return TRUE
@@ -164,7 +164,7 @@
 
 	if(user)
 		user.put_in_hands(toner)
-		to_chat(user, SPAN_NOTICE("You remove \the [toner] from \the [src]."))
+		user.self_action_message("remove", "\the [toner] from \the [src].")
 	else
 		toner.dropInto(get_turf(loc))
 	toner = null
@@ -188,7 +188,7 @@
 		if(!user?.try_unequip(paper_refill))
 			return TRUE
 		if(user)
-			to_chat(user, SPAN_NOTICE("You insert \a [paper_refill] in \the [src]."))
+			user.self_action_message("insert", "\a [paper_refill] in \the [src].")
 		qdel(paper_refill)
 		paper_left++
 
@@ -205,7 +205,7 @@
 			if(!user.try_unequip(B))
 				return TRUE
 			if(user)
-				to_chat(user, SPAN_NOTICE("You insert \a [paper_refill] in \the [src]."))
+				user.self_action_message("insert", "\a [paper_refill] in \the [src].")
 			qdel(B)
 		else
 			B.remove_sheets(to_insert, user)
@@ -228,7 +228,7 @@
 
 	if(user)
 		user.put_in_hands(B)
-		to_chat(user, SPAN_NOTICE("You grab all the paper sheets from \the [src]."))
+		user.self_action_message("grab", "all the paper sheets in \the [src].")
 	else
 		B.dropInto(get_turf(loc))
 	if(call_on_status_changed)

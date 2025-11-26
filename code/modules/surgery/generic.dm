@@ -41,8 +41,7 @@
 
 /decl/surgery_step/generic/cut_open/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts [access_string] on [target]'s [affected.name] with \the [tool].", \
-	"You start [access_string] on [target]'s [affected.name] with \the [tool].")
+	user.visible_action_message("start", "[access_string] on [target]'s [affected.name] with \the [tool].")
 	target.custom_pain("You feel a horrible pain as if from a sharp knife in your [affected.name]!",40, affecting = affected)
 	..()
 
@@ -94,15 +93,13 @@
 
 /decl/surgery_step/generic/clamp_bleeders/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts clamping bleeders in [target]'s [affected.name] with \the [tool].", \
-	"You start clamping bleeders in [target]'s [affected.name] with \the [tool].")
+	user.visible_action_message("start", "clamping bleeders in [target]'s [affected.name] with \the [tool].")
 	target.custom_pain("The pain in your [affected.name] is maddening!",40, affecting = affected)
 	..()
 
 /decl/surgery_step/generic/clamp_bleeders/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='notice'>[user] clamps bleeders in [target]'s [affected.name] with \the [tool].</span>",	\
-	"<span class='notice'>You clamp bleeders in [target]'s [affected.name] with \the [tool].</span>")
+	user.visible_action_message("clamp", "bleeders in [target]'s [affected.name] with \the [tool].")
 	affected.clamp_organ()
 	spread_germs_to_organ(affected, user)
 	..()
@@ -141,15 +138,13 @@
 
 /decl/surgery_step/generic/retract_skin/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts to pry open the incision on [target]'s [affected.name] with \the [tool].",	\
-	"You start to pry open the incision on [target]'s [affected.name] with \the [tool].")
+	user.visible_action_message("start", "to pry open the incision on [target]'s [affected.name] with \the [tool].")
 	target.custom_pain("It feels like the skin on your [affected.name] is on fire!",40,affecting = affected)
 	..()
 
 /decl/surgery_step/generic/retract_skin/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='notice'>[user] keeps the incision open on [target]'s [affected.name] with \the [tool].</span>",	\
-	"<span class='notice'>You keep the incision open on [target]'s [affected.name] with \the [tool].</span>")
+	user.visible_action_message("keep", "the incision open on [target]'s [affected.name] with \the [tool].")
 	affected.open_incision()
 	..()
 
@@ -282,9 +277,7 @@
 /decl/surgery_step/generic/amputate/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(user.try_unequip(tool, affected))
-		user.visible_message(
-			SPAN_DANGER("\The [user] manages to get \the [tool] stuck in \the [target]'s [affected.name]!"), \
-			SPAN_DANGER("You manage to get \the [tool] stuck in \the [target]'s [affected.name]!"))
+		user.visible_action_message("manage", "to get \the [tool] stuck in \the [target]'s [affected.name]!", dangerous = ACTION_DANGER_ALL)
 		affected.embed_in_organ(tool, affected.take_damage(30, damage_flags = (DAM_SHARP|DAM_EDGE), inflicter = tool))
 	else
 		user.visible_message(

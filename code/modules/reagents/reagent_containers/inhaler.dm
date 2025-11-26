@@ -46,7 +46,7 @@
 		return ..()
 
 	if(ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, SPAN_NOTICE("You must secure the reagents inside \the [src] before using it!"))
+		to_chat(user, SPAN_NOTICE(user.get_action_string(TRUE, "must", "secure the reagents inside \the [src] before using it!")))
 		return FALSE
 
 	if(!REAGENT_TOTAL_VOLUME(reagents))
@@ -61,21 +61,19 @@
 
 	if(user == target)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] inhales from \the [src]."),
-			SPAN_NOTICE("You stick \the [src] in your mouth and press the injection button.")
+			SPAN_NOTICE(user.get_targeted_action_string(target, FALSE, "inhale", "from \the [src].")),
+			SPAN_NOTICE(user.get_targeted_action_string(target, TRUE, "stick", "\the [src] in $TARGET'S$ mouth and press$USER_ES$ the dispenser button."))
 		)
 	else
-		user.visible_message(
-			SPAN_WARNING("\The [user] attempts to administer \the [src] to \the [target]..."),
-			SPAN_NOTICE("You attempt to administer \the [src] to \the [target]...")
-		)
+		user.targeted_visible_action_message(target, "attempt", "to administer \the [src] to $TARGET$...")
 		if (!do_after(user, 1 SECONDS, target))
-			to_chat(user, SPAN_NOTICE("You and the target need to be standing still in order to inject \the [src]."))
+			var/decl/pronouns/self_pronouns = user.get_self_pronouns()
+			to_chat(user, SPAN_NOTICE("[self_pronouns.He] and the target need to be standing still in order to administer \the [src]."))
 			return TRUE
 
 		user.visible_message(
-			SPAN_NOTICE("\The [user] administers \the [src] to \the [target]."),
-			SPAN_NOTICE("You stick \the [src] in \the [target]'s mouth and press the injection button.")
+			SPAN_NOTICE(user.get_targeted_action_string(target, FALSE, "administer", "\the [src] to $TARGET$.")),
+			SPAN_NOTICE(user.get_targeted_action_string(target, TRUE, "stick", "\the [src] in $TARGET'S$ mouth and press$USER_ES$ the dispenser button."))
 		)
 
 	var/contained = REAGENT_LIST(reagents)
@@ -90,20 +88,22 @@
 	return TRUE
 
 /obj/item/chems/inhaler/attack_self(mob/user)
+	var/decl/pronouns/self_pronouns = user.get_self_pronouns()
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		if(REAGENT_TOTAL_VOLUME(reagents) > 0)
-			to_chat(user, SPAN_NOTICE("With a quick twist of \the [src]'s lid, you secure the reagents inside."))
+			to_chat(user, SPAN_NOTICE("With a quick twist of \the [src]'s lid, [self_pronouns.he] [verb_agree_with_pronouns("secure", self_pronouns)] the reagents inside."))
 			atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 			update_icon()
 		else
-			to_chat(user, SPAN_NOTICE("You can't secure \the [src] without putting reagents in!"))
+			to_chat(user, SPAN_NOTICE("[self_pronouns.He] can't secure \the [src] without putting reagents in!"))
 	else
 		to_chat(user, SPAN_NOTICE("The reagents inside \the [src] are already secured."))
 	return TRUE
 
 /obj/item/chems/inhaler/attackby(obj/item/used_item, mob/user)
 	if(IS_SCREWDRIVER(used_item) && !ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, SPAN_NOTICE("Using \the [used_item], you unsecure the inhaler's lid.")) // it locks shut after being secured
+		var/decl/pronouns/self_pronouns = user.get_self_pronouns()
+		to_chat(user, SPAN_NOTICE("Using \the [used_item], [self_pronouns.he] [verb_agree_with_pronouns("unsecure", self_pronouns)] the inhaler's lid.")) // it locks shut after being secured
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 		update_icon()
 		return TRUE

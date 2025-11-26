@@ -15,7 +15,7 @@
 /obj/machinery/disperser/attackby(obj/item/used_item, mob/user)
 	if(IS_WRENCH(used_item))
 		if(panel_open)
-			user.visible_message("<span class='notice'>\The [user] rotates \the [src] with \the [used_item].</span>", "<span class='notice'>You rotate \the [src] with \the [used_item].</span>")
+			user.visible_action_message("rotate", "\the [src] with \the [used_item].")
 			set_dir(turn(dir, 90))
 			playsound(src, 'sound/items/jaws_pry.ogg', 50, 1)
 		else

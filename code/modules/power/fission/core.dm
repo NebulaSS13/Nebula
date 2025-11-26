@@ -216,7 +216,7 @@
 		if(!user.try_unequip(used_item, src))
 			return TRUE
 		fuel_rods[used_item] = FALSE // Rod is not exposed to begin with.
-		user.visible_message(SPAN_NOTICE("\The [user] inserts \a [used_item] into \the [src]."), SPAN_NOTICE("You insert \a [used_item] into \the [src]."))
+		user.visible_action_message("insert", "\a [used_item] into \the [src].")
 		return TRUE
 	. = ..()
 

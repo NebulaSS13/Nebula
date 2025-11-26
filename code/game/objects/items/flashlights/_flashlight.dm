@@ -123,10 +123,7 @@
 			to_chat(user, SPAN_WARNING("\The [target] is missing [pronouns.his] [initial(vision.name)]!"))
 			return TRUE
 
-		user.visible_message(
-			SPAN_NOTICE("\The [user] directs [src] into [target]'s [vision.name]."),
-			SPAN_NOTICE("You direct [src] into [target]'s [vision.name].")
-		)
+		user.visible_action_message("direct", "\the [src] into [target]'s [vision.name].")
 		inspect_vision(vision, user)
 
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //can be used offensively

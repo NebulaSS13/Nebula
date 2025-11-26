@@ -36,9 +36,7 @@
 			to_chat(user, SPAN_DANGER("You cannot install \the [src] in space."))
 			return TRUE
 
-		user.visible_message(
-			SPAN_NOTICE("\The [user] begins installing \the [src]."),
-			SPAN_NOTICE("You begin installing \the [src]."))
+		user.visible_action_message("begin", "installing \the [src].")
 		playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
 
 		if(!do_after(user, 4 SECONDS, src))
@@ -112,9 +110,7 @@
 
 /obj/structure/curtain/attackby(obj/item/used_item, mob/user)
 	if(IS_SCREWDRIVER(used_item) && curtain_kind_path)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] begins uninstalling \the [src]."),
-			SPAN_NOTICE("You begin uninstalling \the [src]."))
+		user.visible_action_message("begin", "uninstalling \the [src].")
 		playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
 
 		if(!do_after(user, 4 SECONDS, src))

@@ -93,7 +93,7 @@
 /obj/item/boombox/attackby(var/obj/item/used_item, var/mob/user)
 	if(IS_SCREWDRIVER(used_item))
 		if(!panel)
-			user.visible_message(SPAN_NOTICE("\The [user] re-attaches \the [src]'s front panel with \the [used_item]."), SPAN_NOTICE("You re-attach \the [src]'s front panel."))
+			user.visible_message(SPAN_NOTICE("\The [user] re-attaches \the [src]'s front panel with \the [used_item]."), SPAN_NOTICE("You re-attach \the [src]'s front panel with \the [used_item]."))
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			panel = TRUE
 			return TRUE
@@ -101,14 +101,14 @@
 			AdjustFrequency(used_item, user)
 			return TRUE
 		else if(panel)
-			user.visible_message(SPAN_NOTICE("\The [user] unhinges \the [src]'s front panel with \the [used_item]."), SPAN_NOTICE("You unhinge \the [src]'s front panel."))
+			user.visible_action_message("unhinge", "\the [src]'s front panel with \the [used_item].")
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			panel = FALSE
 	if(istype(used_item,/obj/item/stack/nanopaste))
 		var/obj/item/stack/S = used_item
 		if(broken && !panel)
 			if(S.use(1))
-				user.visible_message(SPAN_NOTICE("\The [user] pours some of \the [S] onto \the [src]."), SPAN_NOTICE("You pour some of \the [S] over \the [src]'s internals and watch as it retraces and resolders paths."))
+				user.visible_action_message("pour", "some of \the [S] onto \the [src]", self_postfix = "'s internals and watch as it retraces and resolders paths.", other_postfix = ".")
 				broken = FALSE
 			else
 				to_chat(user, SPAN_NOTICE("\The [S] is empty."))
@@ -148,7 +148,7 @@
 		frequency -= 0.1
 	frequency = clamp(frequency, MIN_FREQUENCY, MAX_FREQUENCY)
 
-	user.visible_message(SPAN_NOTICE("\The [user] adjusts \the [src]'s player head."), SPAN_NOTICE("You adjust \the [src]'s player head."))
+	user.visible_action_message("adjust", "\the [src]'s player head.")
 	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
 	if(frequency > 1.0)

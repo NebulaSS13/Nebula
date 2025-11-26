@@ -41,15 +41,9 @@
 		return FALSE
 
 	if(above)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] begins deploying \the [src] on \the [A]."),
-			SPAN_NOTICE("You begin to deploy \the [src] on \the [A].")
-		)
+		user.visible_action_message("begin", "deploying \the [src] on \the [A].")
 	else
-		user.visible_message(
-			SPAN_NOTICE("\The [user] begins to lower \the [src] into \the [A]."),
-			SPAN_WARNING("You begin to lower \the [src] into \the [A].")
-		)
+		user.visible_action_message("begin", "lowering \the [src] into \the [A].")
 
 	if (!handle_action(A, user))
 		return
@@ -100,9 +94,7 @@
 		if(!user.check_dexterity(DEXTERITY_HOLD_ITEM))
 			return
 
-		user.visible_message(
-			SPAN_NOTICE("[user] starts folding up \the [src]."),
-			SPAN_NOTICE("You start folding up \the [src]."))
+		user.visible_action_message("start", "folding up \the [src].")
 
 		if(!do_after(user, 30, src))
 			return
@@ -112,9 +104,7 @@
 		user.put_in_hands(R)
 		transfer_fingerprints_to(R)
 
-		user.visible_message(
-			SPAN_NOTICE("[user] folds \the [src]."),
-			SPAN_NOTICE("You fold \the [src]."))
+		user.visible_action_message("fold", "\the [src].")
 
 	if(target_down && istype(target_down, /obj/structure/ladder/mobile))
 		QDEL_NULL(target_down)

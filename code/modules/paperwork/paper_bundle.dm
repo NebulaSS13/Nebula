@@ -90,7 +90,7 @@
 	cur_page = clamp((index <= cur_page)? (cur_page + 1) : cur_page, 1, length(pages))
 
 	if(user)
-		to_chat(user, SPAN_NOTICE("You add \the [sheet] as the [get_ordinal_string(index)] page in \the [name]."))
+		user.self_action_message("add", "\the [sheet] as the [index]\th page in \the [src].")
 	updateUsrDialog()
 	update_icon()
 	return TRUE
@@ -133,7 +133,7 @@
 	LAZYREMOVE(pages, I)
 	if(user)
 		user.put_in_hands(I)
-		to_chat(user, SPAN_NOTICE("You remove the [I.name] from the bundle."))
+		user.self_action_message("remove", "\the [I] from \the [src].")
 	else
 		I.dropInto(loc)
 
@@ -168,11 +168,9 @@
 	if(QDELETED(P) || QDELETED(user))
 		return
 	if(!Adjacent(user) || user.get_active_held_item() != P || !P.lit)
-		to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))
+		user.self_action_message("must", "hold \the [P] steady to burn \the [src].", dangerous = ACTION_DANGER_OTHERS)
 		return
-	user.visible_message( \
-		"<span class='[span_class]'>\The [user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
-		"<span class='[span_class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
+	user.visible_action_message("burn", "right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.", dangerous = span_class)
 	new /obj/effect/decal/cleanable/ash(loc)
 	qdel(src)
 
@@ -181,6 +179,7 @@
 		return
 	var/span_class = istype(P, /obj/item/flame/fuelled/lighter/zippo) ? "rose" : "warning"
 	var/decl/pronouns/pronouns = user.get_pronouns()
+	user.visible_action_message("hold", "\the [P] up to \the [src]", dangerous = span_class, self_postfix = "and burns it slowly.", other_postfix = "It looks like [pronouns.he] [pronouns.is] trying to burn it!")
 	user.visible_message( \
 		"<span class='[span_class]'>\The [user] holds \the [P] up to \the [src]. It looks like [pronouns.he] [pronouns.is] trying to burn it!</span>", \
 		"<span class='[span_class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")

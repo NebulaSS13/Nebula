@@ -35,8 +35,7 @@
 				user.visible_message(SPAN_NOTICE("\The [user] partially closes a wound on [target]'s [affected.name] with \the [tool]."), \
 				SPAN_NOTICE("You partially close a wound on [target]'s [affected.name] with \the [tool]."))
 			else
-				user.visible_message(SPAN_NOTICE("\The [user] closes a wound on [target]'s [affected.name] with \the [tool]."), \
-				SPAN_NOTICE("You close a wound on [target]'s [affected.name] with \the [tool]."))
+				user.visible_action_message("close", "a wound on [target]'s [affected.name] with \the [tool].")
 				if(!wound.damage)
 					affected.wounds -= wound
 					qdel(wound)

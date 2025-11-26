@@ -285,9 +285,9 @@
 		if(loc.has_gravity() && !can_overcome_gravity())
 			return FALSE
 
-		visible_message("<span class='notice'>[src] starts climbing onto \the [A]!</span>", "<span class='notice'>You start climbing onto \the [A]!</span>")
+		visible_action_message("start", "climbing onto \the [A]!")
 		if(do_after(src, 50, A))
-			visible_message("<span class='notice'>[src] climbs onto \the [A]!</span>", "<span class='notice'>You climb onto \the [A]!</span>")
+			visible_action_message("climb", "onto \the [A]!")
 			src.Move(T)
 		else
 			visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!</span>", "<span class='warning'>You give up on trying to climb onto \the [A]!</span>")

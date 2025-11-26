@@ -165,10 +165,7 @@
 			)
 			slice_amount = rand(1, max(1, round(slice_amount*0.5)))
 		else
-			user.visible_message(
-				SPAN_NOTICE("\The [user] slices \the [src]!"),
-				SPAN_NOTICE("You slice \the [src]!")
-			)
+			user.visible_action_message("slice", "\the [src]!")
 		for(var/i = 1 to slice_amount)
 			new /obj/item/food/processed_grown/chopped(loc, null, TRUE, plant)
 		qdel(src)

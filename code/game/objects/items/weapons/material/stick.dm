@@ -66,10 +66,7 @@
 /obj/item/stick/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(user != target && user.check_intent(I_FLAG_HELP))
 		//Playful poking is its own thing
-		user.visible_message(
-			SPAN_NOTICE("\The [user] pokes \the [target] with \the [src]."),
-			SPAN_NOTICE("You poke \the [target] with \the [src].")
-		)
+		user.visible_action_message("poke", "\the [target] with \the [src].")
 		//Consider adding a check to see if target is dead
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(target)

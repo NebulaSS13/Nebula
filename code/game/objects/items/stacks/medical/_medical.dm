@@ -94,10 +94,7 @@
 		return TRUE
 
 	target.heal_organ_damage((src.heal_brute/2), (src.heal_burn/2))
-	user.visible_message(
-		SPAN_NOTICE("\The [user] treats \the [target] with \the [src]."),
-		SPAN_NOTICE("You treat \the [target] with \the [src].")
-	)
+	user.visible_action_message("treat", "\the [target] with \the [src].")
 	play_apply_sound()
 	use(1)
 	return TRUE

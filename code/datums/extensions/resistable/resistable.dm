@@ -22,11 +22,7 @@
 	breakouttime = max(5, breakouttime * user.get_restraint_breakout_mod())
 	user.setClickCooldown(breakouttime)
 
-	user.visible_message(
-		SPAN_DANGER("\The [user] attempts to remove \the [restraint]!"),
-		SPAN_DANGER("You attempt to remove \the [restraint] (This will take around [ceil(breakouttime / (1 SECOND))] second\s and you need to stand still)."),
-		range = 2
-	)
+	user.visible_action_message("attempt", "to remove \the [restraint]!", ACTION_DANGER_ALL, range = 2, self_postfix = "(This will take around [ceil(breakouttime / (1 SECOND))] second\s and you need to stand still).")
 
 	var/static/resist_stages = 4
 	for(var/i = 1 to resist_stages)

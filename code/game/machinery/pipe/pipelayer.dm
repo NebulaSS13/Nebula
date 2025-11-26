@@ -73,7 +73,7 @@
 			if(m)
 				use_metal(m)
 				SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), m)
-				user.visible_message(SPAN_NOTICE("[user] removes [m] sheet\s of metal from \the [src]."), SPAN_NOTICE("You remove [m] sheet\s of metal from \the [src]"))
+				user.visible_action_message("remove", "[m] sheet\s of metal from \the [src].")
 		else
 			to_chat(user, "\The [src] is empty.")
 		return TRUE

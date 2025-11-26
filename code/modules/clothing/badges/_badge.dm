@@ -59,10 +59,7 @@
 
 /obj/item/clothing/badge/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(isliving(user) && user.check_intent(I_FLAG_HARM))
-		user.visible_message(
-			SPAN_DANGER("\The [user] invades \the [target]'s personal space, thrusting \the [src] into their face insistently."),
-			SPAN_DANGER("You invade \the [target]'s personal space, thrusting \the [src] into their face insistently.")
-		)
+		user.targeted_visible_action_message(target, "invade", "$TARGET'S$ personal space, thrusting \the [src] into $TARGET_THEIR$ face insistently.", dangerous = ACTION_DANGER_ALL)
 		if(stored_name)
 			to_chat(target, SPAN_NOTICE("It reads: [stored_name], [badge_string]."))
 		return TRUE

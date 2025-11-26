@@ -62,15 +62,9 @@
 		handle_shearing_failure(user, critter)
 		return TRUE
 
-	user.visible_message(
-		SPAN_NOTICE("\The [user] starts shearing \the [critter]."),
-		SPAN_NOTICE("You start shearing \the [critter].")
-	)
+	user.visible_action_message("start", "shearing \the [critter].")
 	if(!user.do_skilled(4 SECONDS, shearing_skill))
-		user.visible_message(
-			SPAN_NOTICE("\The [user] stops shearing \the [critter]."),
-			SPAN_NOTICE("You stop shearing \the [critter].")
-		)
+		user.visible_action_message("stop", "shearing \the [critter].")
 		return TRUE
 
 	if(QDELETED(user) || QDELETED(critter) || QDELETED(shears) || user.get_active_held_item() != shears)

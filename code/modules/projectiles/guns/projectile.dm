@@ -158,7 +158,7 @@
 				if(!user.try_unequip(AM, src))
 					return
 				ammo_magazine = AM
-				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src].</span>")
+				user.visible_action_message("insert", "\the [AM] into [src].")
 				playsound(loc, mag_insert_sound, 50, 1)
 			if(SPEEDLOADER)
 				if(loaded.len >= max_shells)
@@ -188,7 +188,7 @@
 		if(!user.try_unequip(C, src))
 			return
 		loaded.Insert(1, C) //add to the head of the list
-		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
+		user.visible_action_message("insert", "\a [C] into [src].")
 		playsound(loc, load_sound, 50, 1)
 
 	update_icon()
@@ -206,7 +206,7 @@
 
 	if(ammo_magazine)
 		user.put_in_hands(ammo_magazine)
-		user.visible_message("[user] removes [ammo_magazine] from [src].", "<span class='notice'>You remove [ammo_magazine] from [src].</span>")
+		user.visible_action_message("remove", "\the [ammo_magazine] from [src].")
 		playsound(loc, mag_remove_sound, 50, 1)
 		ammo_magazine.update_icon()
 		ammo_magazine = null
@@ -231,7 +231,7 @@
 			var/obj/item/ammo_casing/C = loaded[loaded.len]
 			loaded.len--
 			user.put_in_hands(C)
-			user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
+			user.visible_action_message("remove", "\a [C] from [src].")
 			. = TRUE
 	if(.)
 		update_icon()

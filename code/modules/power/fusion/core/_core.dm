@@ -84,7 +84,7 @@
 		owned_field.ChangeFieldStrength(value)
 
 /obj/machinery/fusion_core/physical_attack_hand(var/mob/user)
-	visible_message(SPAN_NOTICE("\The [user] hugs \the [src] to make it feel better!"))
+	user.visible_action_message("hug", "\the [src] to make it feel better!")
 	Shutdown()
 	return TRUE
 
@@ -103,15 +103,7 @@
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		if(anchored)
-			user.visible_message("\The [user] secures \the [src] to the floor.", 
-				"You secure \the [src] to the floor.", 
-				"You hear a ratchet."
-			)
-		else
-			user.visible_message("\The [user] unsecures \the [src] from the floor.", 
-				"You unsecure \the [src] from the floor.", 
-				"You hear a ratchet."
-			)
+			user.visible_action_message(anchored ? "secure" : "unsecure", "\the [src] to the floor.", blind_message = "You hear a ratchet.")
 		return TRUE
 
 	return ..()

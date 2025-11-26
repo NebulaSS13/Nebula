@@ -79,7 +79,7 @@ var/global/_wall_chisel_skill = SKILL_CONSTRUCTION
 
 		if (istype(used_item, /obj/item/measuring_tape))
 			var/obj/item/measuring_tape/P = used_item
-			user.visible_message(SPAN_NOTICE("\The [user] extends [P] towards [src]."),SPAN_NOTICE("You extend [P] towards [src]."))
+			user.visible_action_message("extend", "\the [P] towards [src].")
 			if(do_after(user,10, src))
 				to_chat(user, SPAN_NOTICE("\The [src] has been excavated to a depth of [excavation_level]cm."))
 			return TRUE
