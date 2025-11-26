@@ -1,4 +1,4 @@
-/decl/pronouns/self
+/decl/pronouns/second_person_singular
 	name = SECOND_PERSON_SINGULAR
 	He   = "You"
 	he   = "you"

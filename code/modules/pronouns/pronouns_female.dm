@@ -15,3 +15,4 @@
 	self = "herself"
 	s    = "s"
 	es   = "es"
+	pluralize_verb = TRUE

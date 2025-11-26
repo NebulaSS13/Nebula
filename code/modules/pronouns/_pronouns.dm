@@ -14,6 +14,7 @@
 	var/is   = "are"
 	var/does = "do"
 	var/self = "themselves"
+	var/pluralize_verb = FALSE
 	var/s    = ""
 	var/es   = ""
 

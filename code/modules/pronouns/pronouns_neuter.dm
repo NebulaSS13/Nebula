@@ -11,6 +11,7 @@
 	self = "itself"
 	s    = "s"
 	es   = "es"
+	pluralize_verb = TRUE
 
 // Alternative to plural neuter.
 // With thanks to https://tib.cjcs.com/genderless-pronouns-ey-em-and-eir-2/

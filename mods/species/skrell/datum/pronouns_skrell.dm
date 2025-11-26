@@ -14,3 +14,4 @@
 	self = "vilself"
 	s    = "s"
 	es   = "es"
+	pluralize_verb = TRUE
