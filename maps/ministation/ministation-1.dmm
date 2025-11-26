@@ -877,7 +877,7 @@
 /turf/floor/plating,
 /area/ministation/maint/l2centraln)
 "et" = (
-/obj/effect/floor_decal/snow,
+/obj/effect/floor_decal/snow_floor,
 /turf/floor/tiled/freezer/kitchen,
 /area/ministation/cafe)
 "ew" = (
@@ -1108,7 +1108,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/blood,
-/obj/structure/sign/department/redcross{
+/obj/structure/sign/department/cross{
 	pixel_y = 32
 	},
 /obj/structure/disposalpipe/segment{
@@ -1118,7 +1118,7 @@
 /area/ministation/hall/e2)
 "fD" = (
 /obj/structure/meat_hook,
-/obj/effect/floor_decal/snow,
+/obj/effect/floor_decal/snow_floor,
 /turf/floor/tiled/freezer/kitchen,
 /area/ministation/cafe)
 "fF" = (
@@ -2583,7 +2583,7 @@
 /area/ministation/security)
 "mw" = (
 /obj/machinery/light/small,
-/obj/effect/floor_decal/snow,
+/obj/effect/floor_decal/snow_floor,
 /obj/structure/meat_hook,
 /turf/floor/tiled/freezer/kitchen,
 /area/ministation/cafe)
@@ -5166,7 +5166,7 @@
 /turf/floor/tiled,
 /area/ministation/hydro)
 "wt" = (
-/obj/effect/floor_decal/snow,
+/obj/effect/floor_decal/snow_floor,
 /obj/machinery/gibber,
 /turf/floor/tiled/freezer/kitchen,
 /area/ministation/cafe)

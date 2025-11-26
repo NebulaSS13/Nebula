@@ -85,42 +85,59 @@
 	return 1
 
 /datum/unit_test/icon_test/signs_shall_have_existing_icon_states
-	name = "ICON STATE: Signs shall have existing icon states"
-	var/list/skip_types = list(
+	name = "ICON STATE: Sign Subtypes Shall Have Existing Icon States"
+
+/datum/unit_test/icon_test/signs_shall_have_existing_icon_states/start_test()
+	var/list/failures = list()
+
+	var/static/list/skip_icon_state_checks = list(
 		// Posters use a decl to set their icon and handle their own validation.
 		/obj/structure/sign/poster
 	)
 
-/datum/unit_test/icon_test/signs_shall_have_existing_icon_states/start_test()
-	var/list/failures = list()
-	for(var/sign_type in typesof(/obj/structure/sign))
-
-		var/obj/structure/sign/sign = sign_type
-		if(TYPE_IS_ABSTRACT(sign))
-			continue
+	var/list/icon_states_to_find = list()
+	for(var/obj/structure/sign/sign as anything in typesof(/obj/structure/sign))
 
 		var/skip = FALSE
-		for(var/skip_type in skip_types)
-			if(ispath(sign_type, skip_type))
+		for(var/skip_type in skip_icon_state_checks)
+			if(ispath(sign, skip_type))
 				skip = TRUE
 				break
 		if(skip)
 			continue
 
-		var/check_state = initial(sign.icon_state)
-		if(!check_state)
-			failures += "[sign] - null icon_state"
+		var/sign_state = sign::icon_state
+		var/sign_icon  = sign::icon
+
+		if(!(sign_icon in icon_states_to_find))
+			icon_states_to_find[sign_icon] = icon_states(sign_icon) || list()
+		icon_states_to_find[sign_icon] -= sign_state
+
+		if(TYPE_IS_ABSTRACT(sign))
 			continue
-		var/check_icon = initial(sign.icon)
-		if(!check_icon)
-			failures += "[sign] - null icon_state"
-			continue
-		if(!check_state_in_icon(check_state, check_icon))
-			failures += "[sign] - missing icon_state '[check_state]' in icon '[check_icon]"
-	if(failures.len)
-		fail("Signs with missing icon states:\n\t-[jointext(failures, "\n\t-")]")
+
+		if(!sign_icon)
+			failures += "[sign] - missing icon"
+		else if(!istext(sign_state))
+			failures += "[sign] - missing or invalid icon_state"
+		else if(!check_state_in_icon(sign_state, sign_icon))
+			failures += "[sign] - missing icon_state '[sign_state]' from icon '[sign_icon]'"
+
+	var/static/list/skip_extraneous_state_checks = list(
+		// Barsign icon_state is set by user, skip testing it here.
+		'icons/obj/barsigns.dmi'
+	)
+
+	for(var/sign_icon in icon_states_to_find)
+		var/list/remaining = icon_states_to_find[sign_icon]
+		if(!(sign_icon in skip_extraneous_state_checks) && length(remaining))
+			failures += "[sign_icon] - unused icon_states: [jointext(remaining, ", ")]"
+
+	if(length(failures))
+		fail("[length(failures)] issue\s with sign icons or icon states:\n[jointext(failures, "\n")]")
 	else
-		pass("All signs have valid icon states.")
+		pass("All signs have valid icon states and no extraneous icon states.")
+
 	return 1
 
 /datum/unit_test/icon_test/random_spawners_shall_have_existing_icon_states

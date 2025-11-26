@@ -8,14 +8,14 @@
 /obj/item/borg/overdrive
 	name = "overdrive"
 	icon = 'icons/obj/signs/warnings.dmi'
-	icon_state = "shock"
+	icon_state = "shock-large"
 
 /**********************************************************************
 						HUD/SIGHT things
 ***********************************************************************/
 /obj/item/borg/sight
 	icon = 'icons/obj/signs/warnings.dmi'
-	icon_state = "secureareaold"
+	icon_state = "securearea-large"
 	var/sight_mode = null
 	var/glasses_hud_type
 
