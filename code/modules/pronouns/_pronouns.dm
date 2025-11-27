@@ -1,4 +1,5 @@
 /decl/pronouns
+	uid = "pronouns_plural"
 	var/name = PLURAL
 	var/bureaucratic_term  = "other"
 	var/informal_term = "hoopy frood"
@@ -14,9 +15,16 @@
 	var/is   = "are"
 	var/does = "do"
 	var/self = "themselves"
-	var/pluralize_verb = FALSE
 	var/s    = ""
 	var/es   = ""
+	/// Never inflect verbs with this pronoun set, for both nouns ("The bats spin around.") and pronouns ("They spin around.")
+	var/const/PLURALIZE_NONE = 0
+	/// Inflect only verbs after nouns ("Unknown (as David Hasselhoff) spins around.") but not after pronouns ("They spin around.")
+	var/const/PLURALIZE_PSEUDO = 1
+	/// Inflect verbs after both nouns and pronouns, e.g. "David Hasselhoff spins around." and "He spins around."
+	var/const/PLURALIZE_ALL = 2
+	/// When should we give verbs plural inflections? Valid values: PLURALIZE_NONE, PLURALIZE_PSEUDO, PLURALIZE_ALL.
+	var/pluralize_verb = PLURALIZE_NONE
 
 /decl/pronouns/Initialize()
 	pronoun_string = "[He]/[him]/[his]"
@@ -85,7 +93,7 @@ var/global/list/byond_genders = list(MALE, FEMALE, NEUTER, PLURAL)
 		var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
 		var/obj/item/head = get_equipped_item(slot_head_str)
 		if(suit && (suit.flags_inv & HIDEJUMPSUIT) && ((head && head.flags_inv & HIDEMASK) || get_equipped_item(slot_wear_mask_str)))
-			return GET_DECL(/decl/pronouns)
+			return GET_DECL(/decl/pronouns/pseudoplural)
 	if(!pronouns)
 		pronouns = get_pronouns_by_gender(get_gender())
-	return pronouns || GET_DECL(/decl/pronouns)
+	return pronouns || GET_DECL(/decl/pronouns/pseudoplural)

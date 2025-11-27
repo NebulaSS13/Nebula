@@ -124,10 +124,7 @@
 		bound_overlay.visible_message(message, self_message, blind_message)
 
 /mob/proc/get_action_string(is_self, var/using_verb, var/object_phrase, var/infix, var/postfix)
-	// use mob gender value because otherwise subject verb agreement gets messed up by disguised mobs
-	// todo: pseudoplural pronouns? we need "Unknown (as David Hasselhoff) spins around." and "You spin around." to both work
-	// without breaking "The bats spin around."
-	var/decl/pronouns/using_pronouns = is_self ? get_self_pronouns() : get_pronouns_by_gender(gender)
+	var/decl/pronouns/using_pronouns = is_self ? get_self_pronouns() : get_visible_pronouns()
 	// A little kludgy/special-cased: we don't use the name for self messages.
 	var/actor_string = is_self ? using_pronouns.He : "\The [src]"
 	// this will hopefully handle is/does/has agreement properly
@@ -146,8 +143,7 @@
 /mob/proc/get_targeted_action_string(mob/target, is_self, var/using_verb, var/object_phrase, var/infix, var/postfix)
 	. = get_action_string(is_self, using_verb, object_phrase, infix, postfix)
 	var/target_is_self = target == src
-	// use mob gender value because otherwise subject verb agreement gets messed up by disguised mobs
-	var/decl/pronouns/target_pronouns = target_is_self ? target.get_self_pronouns() : get_pronouns_by_gender(target.gender)
+	var/decl/pronouns/target_pronouns = target_is_self ? target.get_self_pronouns() : target.get_visible_pronouns()
 	// A little kludgy/special-cased: we don't use the name if it's self-targeted, regardless of who's viewing
 	. = replacetext(., "$TARGET$",  target_is_self ? target_pronouns.self : "\the [target]")
 	. = replacetext(., "$TARGET_THEY$",  target_is_self ? target_pronouns.he : "\the [target]")

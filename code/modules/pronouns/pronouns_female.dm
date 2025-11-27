@@ -1,4 +1,5 @@
 /decl/pronouns/female
+	uid = "pronouns_female"
 	name = FEMALE
 	bureaucratic_term  = "female"
 	informal_term = "lady"
@@ -15,4 +16,4 @@
 	self = "herself"
 	s    = "s"
 	es   = "es"
-	pluralize_verb = TRUE
+	pluralize_verb = PLURALIZE_ALL

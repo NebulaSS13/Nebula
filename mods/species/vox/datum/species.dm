@@ -79,7 +79,7 @@
 	available_pronouns = list(
 		/decl/pronouns/neuter,
 		/decl/pronouns/neuter/person,
-		/decl/pronouns,
+		/decl/pronouns/pseudoplural,
 		/decl/pronouns/male,
 		/decl/pronouns/female
 	)

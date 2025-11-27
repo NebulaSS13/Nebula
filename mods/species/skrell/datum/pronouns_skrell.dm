@@ -14,4 +14,4 @@
 	self = "vilself"
 	s    = "s"
 	es   = "es"
-	pluralize_verb = TRUE
+	pluralize_verb = PLURALIZE_ALL

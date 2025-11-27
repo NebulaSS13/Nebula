@@ -1,7 +1,7 @@
 /mob/proc/get_visible_pronouns(hideflags)
 	//suits/masks/helmets make it hard to tell their gender
 	if((hideflags & HIDEJUMPSUIT) && (hideflags & HIDEFACE))
-		return GET_DECL(/decl/pronouns)
+		return GET_DECL(/decl/pronouns/pseudoplural)
 	return get_pronouns()
 
 // At some point this could have a client pref or server config option that switches second-person to first-person.

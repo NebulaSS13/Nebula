@@ -351,6 +351,7 @@ var/global/list/dexterity_levels = list(
 // Additional pronoun sets.
 #define NEUTER_ANIMATE "animate singular neutral"
 #define SECOND_PERSON_SINGULAR "second person singular"
+#define PSEUDOPLURAL "pseudoplural"
 
 // Equipment Overlays Indices //
 #define HO_CONDITION_LAYER  1

@@ -802,7 +802,9 @@ var/global/list/agreement_exception_verbs = list("can" = TRUE, "cannot" = TRUE, 
 				last_adverb = max(word_index, last_adverb)
 		use_verb = words[last_adverb]
 		// This overengineered nonsense ensures that we shouldn't end up with any doubled or missing spaces.
-		return jointext_no_nulls(list(jointext(words.Copy(1, last_adverb), " "), verb_agree_with_pronouns(use_verb, use_pronouns, is_after_pronoun = TRUE), jointext(words.Copy(last_adverb + 1, length(words) + 1), " ")), " ")
+		return jointext_no_nulls(list(jointext(words.Copy(1, last_adverb), " "), verb_agree_with_pronouns(use_verb, use_pronouns, is_after_pronoun = is_after_pronoun), jointext(words.Copy(last_adverb + 1, length(words) + 1), " ")), " ")
+	if(!is_after_pronoun && use_pronouns.pluralize_verb == /decl/pronouns::PLURALIZE_PSEUDO)
+		return use_verb // do not inflect pseudoplural unless after a pronoun
 	if(global.copula_verbs[use_verb])
 		return use_pronouns.is
 	else if(global.has_verbs[use_verb])
@@ -812,7 +814,17 @@ var/global/list/agreement_exception_verbs = list("can" = TRUE, "cannot" = TRUE, 
 	else if(global.agreement_exception_verbs[use_verb])
 		return use_verb
 	// text_make_plural is intended for nouns, but should hopefully work for "fly" -> "flies" and similar.
-	return use_pronouns.pluralize_verb ? text_make_plural(use_verb) : use_verb
+	switch(use_pronouns.pluralize_verb)
+		if(/decl/pronouns::PLURALIZE_NONE)
+			return use_verb
+		if(/decl/pronouns::PLURALIZE_PSEUDO)
+			// technically only the plural side can get hit here
+			// but better safe than sorry
+			return is_after_pronoun ? text_make_plural(use_verb) : use_verb
+		if(/decl/pronouns::PLURALIZE_ALL)
+			return text_make_plural(use_verb)
+		else
+			CRASH("Invalid value [use_pronouns.pluralize_verb] for [use_pronouns]!")
 
 // Surely we have this defined somewhere already??
 /proc/repeatstring(str, num)

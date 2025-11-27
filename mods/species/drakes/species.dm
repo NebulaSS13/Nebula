@@ -16,7 +16,7 @@
 	snow_slowdown_mod = -0.5
 	gluttonous = GLUT_TINY
 	available_pronouns = list(
-		/decl/pronouns,
+		/decl/pronouns/pseudoplural,
 		/decl/pronouns/neuter,
 		/decl/pronouns/male,
 		/decl/pronouns/female
