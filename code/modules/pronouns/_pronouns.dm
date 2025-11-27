@@ -1,5 +1,6 @@
 /decl/pronouns
 	uid = "pronouns_plural"
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	var/name = PLURAL
 	var/bureaucratic_term  = "others"
 	var/informal_term = "hoopy froods"

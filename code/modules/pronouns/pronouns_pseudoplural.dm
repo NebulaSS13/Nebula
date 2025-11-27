@@ -1,4 +1,5 @@
 /decl/pronouns/pseudoplural
+	uid = "pronouns_pseudoplural"
 	name = PSEUDOPLURAL
 	bureaucratic_term  = "other"
 	informal_term = "hoopy frood"

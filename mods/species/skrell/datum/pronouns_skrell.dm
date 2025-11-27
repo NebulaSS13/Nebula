@@ -1,4 +1,5 @@
 /decl/pronouns/skrell
+	uid = "pronouns_skrell"
 	name = "Skrell"
 	bureaucratic_term  = "Skrell"
 	informal_term = "Skrell"
