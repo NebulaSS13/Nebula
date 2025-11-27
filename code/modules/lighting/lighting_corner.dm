@@ -34,7 +34,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/self_g = 0
 	var/self_b = 0
 
-	// The intensity we're inheriting from the turf below us, if we're a Z-turf.
+	// The intensity we're inheriting from the turf below us, if we're a Z-turf. This is a sum of all below turfs in the Z-stack.
 	var/below_r = 0
 	var/below_g = 0
 	var/below_b = 0
@@ -189,22 +189,26 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/turf/T
 	var/Ti
 	// Grab the first master that's a Z-turf, if one exists.
-	if (t1 && (T = GET_ABOVE(t1)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	// The above var cannot be relied on due to init ordering, but we can use it if it is set.
+	if (t1 && (T = t1.above || GET_ABOVE(t1)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		Ti = t1i
-	else if (t2 && (T = GET_ABOVE(t2)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	else if (t2 && (T = t2.above || GET_ABOVE(t2)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		Ti = t2i
-	else if (t3 && (T = GET_ABOVE(t3)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	else if (t3 && (T = t3.above || GET_ABOVE(t3)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		Ti = t3i
-	else if (t4 && (T = GET_ABOVE(t4)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	else if (t4 && (T = t4.above || GET_ABOVE(t4)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		Ti = t4i
 	else	// Nothing above us that cares about below light.
 		T = null
 
 	if (TURF_IS_DYNAMICALLY_LIT(T))
-		if (!T.corners || !T.corners[Ti])
-			T.generate_missing_corners()
-		var/datum/lighting_corner/above = T.corners[Ti]
-		above.update_below_lumcount(delta_r, delta_g, delta_b, now)
+		do
+			if (!T.corners || !T.corners[Ti])
+				T.generate_missing_corners()
+
+			// Above corners never get instant updates; they're less important, so better to avoid risk of lag.
+			T.corners[Ti].update_below_lumcount(delta_r, delta_g, delta_b)
+		while ((T = T.above) && (T.z_flags & ZM_ALLOW_LIGHTING))
 
 	// This needs to be down here instead of the above if so the lum values are properly updated.
 	if (needs_update)
@@ -216,7 +220,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		needs_update = TRUE
 		SSlighting.corner_queue += src
 
-/datum/lighting_corner/proc/update_below_lumcount(delta_r, delta_g, delta_b, now = FALSE)
+/datum/lighting_corner/proc/update_below_lumcount(delta_r, delta_g, delta_b)
 	if (!(delta_r + delta_g + delta_b))
 		return
 
@@ -232,11 +236,8 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	if (needs_update)
 		return
 
-	if (!now)
-		needs_update = TRUE
-		SSlighting.corner_queue += src
-	else
-		update_overlays(TRUE)
+	needs_update = TRUE
+	SSlighting.corner_queue += src
 
 /datum/lighting_corner/proc/update_ambient_lumcount(delta_r, delta_g, delta_b, skip_update = FALSE)
 
@@ -251,26 +252,21 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/turf/T
 	var/Ti
 
-	if (t1 && (t1.below || HasBelow(t1.z)) && (t1.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t1))
+	if (t1)
 		T = t1
 		Ti = t1i
-	else if (t2 && (t2.below || HasBelow(t2.z)) && (t2.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t2))
+	else if (t2)
 		T = t2
 		Ti = t2i
-	else if (t3 && (t3.below || HasBelow(t3.z)) && (t3.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t3))
+	else if (t3)
 		T = t3
 		Ti = t3i
-	else if (t4 && (t4.below || HasBelow(t4.z)) && (t4.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t4))
+	else if (t4)
 		T = t4
 		Ti = t4i
-	// No MZ candidates below, just update.
-	else if (needs_update || skip_update)
-		return
 	else
-		// Always queue for this, not important enough to hit the synchronous path.
-		needs_update = TRUE
-		SSlighting.corner_queue += src
-		return
+		// This should be impossible to reach -- how do we exist without at least one master turf?
+		CRASH("Corner has no masters!")
 
 	var/datum/lighting_corner/below = src
 
@@ -302,8 +298,6 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	// Always queue for this, not important enough to hit the synchronous path.
 	needs_update = TRUE
 	SSlighting.corner_queue += src
-
-#undef UPDATE_APPARENT
 
 /datum/lighting_corner/proc/update_overlays(now = FALSE)
 	var/lr = apparent_r
@@ -339,6 +333,75 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 				Ov.needs_update = TRUE
 				SSlighting.overlay_queue += Ov
 
+// This is called when our turf's downward Z-opacity changes.
+/datum/lighting_corner/proc/rebuild_ztraversal(new_opacity)
+	/*
+		If opacity transitions to off:
+		- Look down stack, removing below lights contributing to us
+		- Look up stack, updating turfs with our new below lighting value
+		If opacity transitions to on:
+		- Look down stack, add below contributors
+		- Look up stack, updating turfs with our new below lighting value
+	*/
+	below_r = below_g = below_b = 0
+	var/turf/T = null
+	var/datum/lighting_corner/Tcorn = src
+	var/Ti
+
+	if (!new_opacity)
+		for (;;)
+			if (Tcorn.t1 && (T = Tcorn.t1.below || GET_BELOW(Tcorn.t1)) && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
+				Ti = Tcorn.t1i
+			else if (Tcorn.t2 && (T = Tcorn.t2.below || GET_BELOW(Tcorn.t2)) && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
+				Ti = Tcorn.t2i
+			else if (Tcorn.t3 && (T = Tcorn.t3.below || GET_BELOW(Tcorn.t3)) && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
+				Ti = Tcorn.t3i
+			else if (Tcorn.t4 && (T = Tcorn.t4.below || GET_BELOW(Tcorn.t4)) && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
+				Ti = Tcorn.t4i
+			else	// Nothing above us that cares about below light.
+				break
+
+			Tcorn = T.corners[Ti]
+			below_r += Tcorn.apparent_r
+			below_g += Tcorn.apparent_g
+			below_b += Tcorn.apparent_b
+
+	UPDATE_APPARENT(src, r)
+	UPDATE_APPARENT(src, g)
+	UPDATE_APPARENT(src, b)
+
+	if (!needs_update)
+		needs_update = TRUE
+		SSlighting.corner_queue += src
+
+	T = null
+	Tcorn = src
+
+	for (;;)
+		if (Tcorn.t1 && (T = Tcorn.t1.above || GET_ABOVE(Tcorn.t1)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+			Ti = Tcorn.t1i
+		else if (Tcorn.t2 && (T = Tcorn.t2.above || GET_ABOVE(Tcorn.t2)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+			Ti = Tcorn.t2i
+		else if (Tcorn.t3 && (T = Tcorn.t3.above || GET_ABOVE(Tcorn.t3)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+			Ti = Tcorn.t3i
+		else if (Tcorn.t4 && (T = Tcorn.t4.above || GET_ABOVE(Tcorn.t4)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+			Ti = Tcorn.t4i
+		else	// Nothing above us that cares about below light.
+			break
+
+		Tcorn = T.corners[Ti]
+		Tcorn.below_r += apparent_r
+		Tcorn.below_g += apparent_g
+		Tcorn.below_b += apparent_b
+
+		UPDATE_APPARENT(Tcorn, r)
+		UPDATE_APPARENT(Tcorn, g)
+		UPDATE_APPARENT(Tcorn, b)
+
+		if (!Tcorn.needs_update)
+			Tcorn.needs_update = TRUE
+			SSlighting.corner_queue += Tcorn
+
 /datum/lighting_corner/Destroy(force = FALSE)
 	PRINT_STACK_TRACE("Someone [force ? "force-" : ""]deleted a lighting corner.")
 	if (!force)
@@ -349,3 +412,5 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 
 /datum/lighting_corner/dummy/New()
 	return
+
+#undef UPDATE_APPARENT

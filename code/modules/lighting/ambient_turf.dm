@@ -69,10 +69,6 @@
 			SSlighting.total_ambient_turfs -= 1
 		return
 
-	if (!ambient_active)
-		SSlighting.total_ambient_turfs += 1
-		ambient_active = TRUE
-
 	// There are four corners per (lit) turf, we don't want to apply our light 4 times -- compensate by dividing by 4.
 	lr /= 4
 	lg /= 4
@@ -86,15 +82,17 @@
 	ambient_light_old_g += lg
 	ambient_light_old_b += lb
 
-	if (!corners || !lighting_corners_initialised)
-		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
+	if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
+		if (!corners || !lighting_corners_initialised)
 			generate_missing_corners()
-		else
-			return
 
-	// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.
-	for (var/datum/lighting_corner/C in corners)
-		C.update_ambient_lumcount(lr, lg, lb, !update)
+		// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.
+		for (var/datum/lighting_corner/C in corners)
+			C.update_ambient_lumcount(lr, lg, lb, !update)
+
+	if (!ambient_active)
+		SSlighting.total_ambient_turfs += 1
+		ambient_active = TRUE
 
 /// Wipe the entire self-ambience channel. This will preserve ambience from ambience groups.
 /turf/proc/clear_ambient_light()
