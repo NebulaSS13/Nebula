@@ -1,9 +1,9 @@
 /decl/pronouns
 	uid = "pronouns_plural"
 	var/name = PLURAL
-	var/bureaucratic_term  = "other"
-	var/informal_term = "hoopy frood"
-	var/honorific = "Mx."
+	var/bureaucratic_term  = "others"
+	var/informal_term = "hoopy froods"
+	var/honorific = "Mxes."
 	var/pronoun_string
 
 	var/He   = "They"
