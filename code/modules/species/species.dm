@@ -596,9 +596,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		target.apply_effect(push_mod, WEAKEN, armor_check)
 		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		if(armor_check < 100)
-			target.visible_message("<span class='danger'>[attacker] has pushed [target]!</span>")
+			attacker.targeted_visible_action_message(target, "push", "$TARGET$!", ACTION_DANGER_ALL)
 		else
-			target.visible_message("<span class='warning'>[attacker] attempted to push [target]!</span>")
+			attacker.targeted_visible_action_message(target, "attempt", "to push $TARGET$!", ACTION_DANGER_ALL)
 		return
 
 	if(randn <= 60)
@@ -610,12 +610,12 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		//Actually disarm them
 		for(var/obj/item/I in holding)
 			if(I && target.try_unequip(I))
-				target.visible_message("<span class='danger'>[attacker] has disarmed [target]!</span>")
+				attacker.targeted_visible_action_message(target, "disarm", "$TARGET$!", ACTION_DANGER_ALL)
 				playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				return
 
 	playsound(target.loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-	target.visible_message("<span class='danger'>[attacker] attempted to disarm \the [target]!</span>")
+	attacker.targeted_visible_action_message(target, "attempt", "to disarm $TARGET$!", ACTION_DANGER_ALL)
 
 /decl/species/proc/disfigure_msg(var/mob/living/human/H) //Used for determining the message a disfigured face has on examine. To add a unique message, just add this onto a specific species and change the "return" message.
 	var/decl/pronouns/pronouns = H.get_pronouns()
