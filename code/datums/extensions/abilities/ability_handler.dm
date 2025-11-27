@@ -226,7 +226,7 @@
 	if(!prepared_ability)
 		return FALSE
 	if(prepared_ability.cancel_ability_1p_str)
-		to_chat(owner, capitalize(emote_replace_user_tokens(prepared_ability.cancel_ability_1p_str), owner))
+		to_chat(owner, capitalize_proper_html(emote_replace_user_tokens(prepared_ability.cancel_ability_1p_str), owner))
 	var/obj/screen/ability/button/button = LAZYACCESS(screen_elements, prepared_ability)
 	prepared_ability = null
 	if(istype(button))
@@ -238,7 +238,7 @@
 		return FALSE
 	prepared_ability = ability
 	if(ability.ready_ability_1p_str)
-		to_chat(owner, capitalize(emote_replace_user_tokens(ability.ready_ability_1p_str), owner))
+		to_chat(owner, capitalize_proper_html(emote_replace_user_tokens(ability.ready_ability_1p_str), owner))
 	var/obj/screen/ability/button/button = LAZYACCESS(screen_elements, ability)
 	if(istype(button))
 		button.update_icon()

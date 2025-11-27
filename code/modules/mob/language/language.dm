@@ -100,7 +100,7 @@
 		if(!prob(understand_chance))
 			nword = scramble_word(w)
 			if(new_sentence)
-				nword = capitalize(nword)
+				nword = capitalize_proper_html(nword)
 				new_sentence = FALSE
 			if(ends_sentence)
 				nword = trim(nword)
@@ -112,7 +112,7 @@
 		scrambled_text += nword
 
 	. = jointext(scrambled_text, null)
-	. = capitalize(.)
+	. = capitalize_proper_html(.)
 	. = trim(.)
 
 /decl/language/proc/get_next_scramble_token()

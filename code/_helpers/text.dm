@@ -366,10 +366,21 @@ var/global/regex/starts_lowercase_regex = regex(@"^[a-z]")
 	return trim_left(trim_right(text))
 
 //Returns a string with the first element of the string capitalized.
+// NOTE: This will not work if there are any HTML tags.
 /proc/capitalize(text)
 	if(text)
 		text = uppertext(text[1]) + copytext(text, 1 + length(text[1]))
 	return text
+
+// Returns a string with the first alphabetical element of the string capitalized, skipping HTML tags.
+/proc/capitalize_proper_html(text)
+	var/static/regex/split_html_regex = regex(@"(^<[^>]*>)([A-Za-z])(.+)$")
+	if(!text)
+		return text
+	if(!split_html_regex.Find(text))
+		return capitalize(text)
+	split_html_regex.group[2] = uppertext(split_html_regex.group[2])
+	return JOINTEXT(split_html_regex.group)
 
 //Returns a string with the first element of the every word of the string capitalized.
 /proc/capitalize_words(text)
