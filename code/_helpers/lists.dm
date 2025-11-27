@@ -27,13 +27,17 @@
 			input -= thing
 			var/thing_string = isatom(thing) ? thing.name : "\proper [thing]"
 			thing_count[thing_string] += 1
-			thing_gender[thing_string] = isatom(thing) ? thing.gender : NEUTER
+			if(ismob(thing))
+				var/mob/mob_thing = thing
+				thing_gender[thing_string] = mob_thing.get_gender()
+			else
+				thing_gender[thing_string] = isatom(thing) ? thing.gender : NEUTER
 		input = list()
 		for(var/thing_string in thing_count)
 			if(thing_count[thing_string] == 1)
 				input += "\the [thing_string]"
 			else
-				input += "[thing_count[thing_string]] [thing_string][thing_gender[thing_string] == PLURAL ? "" : "s"]"
+				input += "[thing_count[thing_string]] [thing_gender[thing_string] == PLURAL ? text_make_plural(thing_string) : thing_string]"
 
 	switch(length(input))
 		if(1)

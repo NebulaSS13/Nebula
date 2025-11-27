@@ -61,7 +61,8 @@
 		var/obj/item/organ/internal/cell/cell = owner.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(active && !(cell && cell.use(maintenance_cost)))
 			active = FALSE
-			to_chat(owner, SPAN_DANGER("Your [name] [gender == PLURAL ? "are" : "is"] out of power!"))
+			var/decl/pronouns/pronouns = get_pronouns()
+			to_chat(owner, SPAN_DANGER("Your [name] [pronouns.is] out of power!"))
 			refresh_action_button()
 
 /obj/item/organ/internal/powered/refresh_action_button()
@@ -75,7 +76,8 @@
 	if(.)
 		sound_to(user, sound('mods/species/adherent/sound/ding.ogg'))
 		if(is_broken())
-			to_chat(owner, "<span class='warning'>\The [src] [gender == PLURAL ? "are" : "is"] too damaged to function.</span>")
+			var/decl/pronouns/pronouns = get_pronouns()
+			to_chat(owner, SPAN_WARNING("\The [src] [pronouns.is] too damaged to function."))
 			active = FALSE
 		else
 			active = !active

@@ -89,4 +89,5 @@
 		LAZYADD(tool_strings, tool_string)
 
 	if(length(tool_strings))
-		. += "[gender == PLURAL ? "They look" : "It looks"] like [english_list(tool_strings)]."
+		var/decl/pronouns/tool_pronouns = get_pronouns()
+		. += "[tool_pronouns.He] [verb_agree_with_pronouns("look", tool_pronouns)] like [english_list(tool_strings)]."

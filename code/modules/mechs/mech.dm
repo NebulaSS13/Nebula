@@ -192,7 +192,8 @@
 	for(var/obj/item/mech_component/thing in list(arms, legs, head, body))
 		if(!thing)
 			continue
-		. += "Its [thing.name] [thing.gender == PLURAL ? "are" : "is"] [thing.get_damage_string()]."
+		var/decl/pronouns/component_pronouns = thing.get_pronouns()
+		. += "Its [thing.name] [component_pronouns.is] [thing.get_damage_string()]."
 	. += "It menaces with reinforcements of [material]."
 
 /mob/living/exosuit/return_air()

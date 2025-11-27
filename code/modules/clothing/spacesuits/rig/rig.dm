@@ -119,7 +119,8 @@
 		for(var/obj/item/piece in list(helmet,gloves,chest,boots))
 			if(!piece || piece.loc != wearer)
 				continue
-			. += "[html_icon(piece)] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed."
+			var/decl/pronouns/piece_pronouns = piece.get_pronouns()
+			. += "[html_icon(piece)] \The [piece] [piece_pronouns.is] deployed."
 	if(src.loc == user)
 		. += "The access panel is [locked? "locked" : "unlocked"]."
 		. += "The maintenance panel is [open ? "open" : "closed"]."
@@ -731,7 +732,7 @@
 				holder = use_obj.loc
 				if(istype(holder))
 					if(use_obj && check_slot == use_obj)
-						to_chat(wearer, SPAN_HARDSUIT("<b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b>"))
+						to_chat(wearer, SPAN_HARDSUIT("<b>Your [use_obj.name] [verb_agree_with_pronouns("retract", use_obj.get_pronouns(), is_after_pronoun = FALSE)] swiftly.</b>"))
 						use_obj.canremove = 1
 						holder.drop_from_inventory(use_obj, src)
 						use_obj.canremove = 0
@@ -743,10 +744,11 @@
 			if(!wearer.equip_to_slot_if_possible(use_obj, equip_to, 0, 1))
 				use_obj.forceMove(src)
 				if(check_slot)
-					to_chat(initiator, "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>")
+					var/decl/pronouns/check_slot_pronouns = check_slot.get_pronouns()
+					to_chat(initiator, SPAN_DANGER("You are unable to deploy \the [piece] as \the [check_slot] [check_slot_pronouns.is] in the way."))
 					return
 			else
-				to_chat(wearer, "<span class='notice'>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</span>")
+				to_chat(wearer, SPAN_HARDSUIT("Your [use_obj.name] [verb_agree_with_pronouns("deploy", use_obj.get_pronouns(), is_after_pronoun = FALSE)] swiftly."))
 			use_obj.icon_state = initial(use_obj.icon_state)
 
 	if(piece == "helmet" && helmet)
