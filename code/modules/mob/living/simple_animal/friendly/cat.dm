@@ -223,7 +223,7 @@
 
 /mob/living/simple_animal/passive/cat/kitten/Initialize()
 	. = ..()
-	gender = pick(MALE, FEMALE)
+	set_gender(pick(MALE, FEMALE))
 
 /mob/living/simple_animal/passive/cat/fluff/ran
 	name = "Runtime"

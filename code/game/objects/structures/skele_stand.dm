@@ -9,7 +9,7 @@
 
 /obj/structure/skele_stand/Initialize()
 	. = ..()
-	gender = pick(MALE, FEMALE, PLURAL)
+	set_gender(pick(MALE, FEMALE, PLURAL))
 
 /obj/structure/skele_stand/proc/rattle_bones(mob/user, atom/thingy)
 	if((world.time - cooldown) <= 1 SECOND)

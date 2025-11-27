@@ -73,6 +73,6 @@
 
 /mob/living/human/monkey/Initialize(mapload, species_uid, datum/mob_snapshot/supplied_appearance)
 	if(gender == PLURAL)
-		gender = pick(MALE, FEMALE)
+		set_gender(pick(MALE, FEMALE))
 	species_uid = /decl/species/monkey::uid
 	. = ..()
