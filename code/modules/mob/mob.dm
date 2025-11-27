@@ -130,30 +130,33 @@
 	// this will hopefully handle is/does/has agreement properly
 	. = "[actor_string] [verb_agree_with_pronouns(using_verb, using_pronouns, is_after_pronoun = is_self)] [infix ? infix + " " : null][object_phrase][postfix ? " " + postfix : null]"
 	// uh oh, time to handle tokens.
+	. = replacetext(., "$USER$",      "\the [src]")
+	. = replacetext(., "$USER'S$",    "\the [src]'s")
 	. = replacetext(., "$USER_THEY$",  using_pronouns.he)
 	. = replacetext(., "$USER_THEM$",  using_pronouns.him)
 	. = replacetext(., "$USER_THEIR$", using_pronouns.his)
 	. = replacetext(., "$USER_SELF$",  using_pronouns.self)
 	. = replacetext(., "$USER_DOES$",  using_pronouns.does)
-	. = replacetext(., "$USER_HAS$",  using_pronouns.has)
-	. = replacetext(., "$USER_IS$",  using_pronouns.is)
-	. = replacetext(., "$USER_S$",  using_pronouns.s)
-	. = replacetext(., "$USER_ES$",  using_pronouns.es)
+	. = replacetext(., "$USER_HAS$",   using_pronouns.has)
+	. = replacetext(., "$USER_IS$",    using_pronouns.is)
+	. = replacetext(., "$USER_S$",     using_pronouns.s)
+	. = replacetext(., "$USER_ES$",    using_pronouns.es)
 
 /mob/proc/get_targeted_action_string(mob/target, is_self, var/using_verb, var/object_phrase, var/infix, var/postfix)
 	. = get_action_string(is_self, using_verb, object_phrase, infix, postfix)
 	var/target_is_self = target == src
 	var/decl/pronouns/target_pronouns = target_is_self ? target.get_self_pronouns() : target.get_visible_pronouns()
 	// A little kludgy/special-cased: we don't use the name if it's self-targeted, regardless of who's viewing
-	. = replacetext(., "$TARGET$",  target_is_self ? target_pronouns.self : "\the [target]")
-	. = replacetext(., "$TARGET_THEY$",  target_is_self ? target_pronouns.he : "\the [target]")
-	. = replacetext(., "$TARGET_THEM$",  target_is_self ? target_pronouns.self : "\the [target]") // reflexive, so use self instead of them
-	. = replacetext(., "$TARGET_THEIR$", target_is_self ? target_pronouns.his : "\the [target]'s")
-	. = replacetext(., "$TARGET_DOES$", target_pronouns.does)
-	. = replacetext(., "$TARGET_HAS$", target_pronouns.has)
-	. = replacetext(., "$TARGET_IS$", target_pronouns.is)
-	. = replacetext(., "$TARGET_S$", target_pronouns.s)
-	. = replacetext(., "$TARGET_ES$", target_pronouns.es)
+	. = replacetext(., "$TARGET$",       target_is_self ? target_pronouns.self : "\the [target]")
+	. = replacetext(., "$TARGET'S$",     target_is_self ? target_pronouns.his : "\the [target]'s")
+	. = replacetext(., "$TARGET_THEM$",  target_is_self ? target_pronouns.self : target_pronouns.him) // reflexive if self, so use self instead of them
+	. = replacetext(., "$TARGET_THEIR$", target_pronouns.his)
+	. = replacetext(., "$TARGET_THEY$",  target_pronouns.he)
+	. = replacetext(., "$TARGET_DOES$",  target_pronouns.does)
+	. = replacetext(., "$TARGET_HAS$",   target_pronouns.has)
+	. = replacetext(., "$TARGET_IS$",    target_pronouns.is)
+	. = replacetext(., "$TARGET_S$",     target_pronouns.s)
+	. = replacetext(., "$TARGET_ES$",    target_pronouns.es)
 
 // Determines span styling used for visible_action_message.
 /// Uses SPAN_NOTICE for both self and other messages.
