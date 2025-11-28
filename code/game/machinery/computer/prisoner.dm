@@ -26,7 +26,7 @@
 				continue // Out of range
 			if(!chem_implant.implanted)
 				continue
-			dat += "[chem_implant.imp_in.name] | Remaining Units: [chem_implant.reagents.total_volume] | Inject: "
+			dat += "[chem_implant.imp_in.name] | Remaining Units: [REAGENT_TOTAL_VOLUME(chem_implant.reagents)] | Inject: "
 			dat += "<A href='byond://?src=\ref[src];inject=\ref[chem_implant];amount=1'>(<font color=red>(1)</font>)</A>"
 			dat += "<A href='byond://?src=\ref[src];inject=\ref[chem_implant];amount=5'>(<font color=red>(5)</font>)</A>"
 			dat += "<A href='byond://?src=\ref[src];inject=\ref[chem_implant];amount=10'>(<font color=red>(10)</font>)</A><BR>"

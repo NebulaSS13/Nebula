@@ -22,9 +22,9 @@
 /obj/item/flame/fuelled/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(get_attack_force() && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.check_intent(I_FLAG_HARM))
 		. = ..()
-		if(reagents?.total_volume && !QDELETED(target))
+		if(REAGENT_TOTAL_VOLUME(reagents) && !QDELETED(target))
 			target.visible_message(SPAN_DANGER("Some of the contents of \the [src] splash onto \the [target]."))
-			reagents.splash(target, reagents.total_volume)
+			reagents.splash(target, REAGENT_TOTAL_VOLUME(reagents))
 		return TRUE
 	return FALSE
 
@@ -40,9 +40,9 @@
 		return TRUE
 	if(handle_eaten_by_mob(user, target) != EATEN_INVALID)
 		return TRUE
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		to_chat(user, SPAN_NOTICE("You splash a small amount of the contents of \the [src] onto \the [target]."))
-		reagents.splash(target, min(reagents.total_volume, 5))
+		reagents.splash(target, min(REAGENT_TOTAL_VOLUME(reagents), 5))
 		return TRUE
 	. = ..()
 
@@ -56,8 +56,9 @@
 		if(fuel_reagent)
 			. += SPAN_NOTICE("\The [src] is designed to burn [fuel_reagent.liquid_name].")
 
-		if(reagents?.maximum_volume)
-			switch(reagents.total_volume / reagents.maximum_volume)
+		var/max_vol = REAGENT_MAXIMUM_VOLUME(reagents)
+		if(max_vol)
+			switch(REAGENT_TOTAL_VOLUME(reagents) / max_vol)
 				if(0 to 0.1)
 					. += SPAN_WARNING("\The [src] is nearly empty.")
 				if(0.1 to 0.25)
@@ -84,8 +85,10 @@
 	return FALSE
 
 /obj/item/flame/fuelled/populate_reagents()
-	if(start_fuelled && fuel_type && reagents?.maximum_volume)
-		add_to_reagents(fuel_type, reagents.maximum_volume)
+	if(start_fuelled && fuel_type)
+		var/max_vol = REAGENT_MAXIMUM_VOLUME(reagents)
+		if(max_vol)
+			add_to_reagents(fuel_type, max_vol)
 
 /obj/item/flame/fuelled/Process()
 	. = ..()

@@ -125,10 +125,10 @@
 // if a syringe, can inject flammable liquids to make it explode
 /obj/item/light/attackby(var/obj/item/used_item, var/mob/user)
 	..()
-	if(istype(used_item, /obj/item/chems/syringe) && used_item.reagents?.total_volume)
+	if(istype(used_item, /obj/item/chems/syringe) && REAGENT_TOTAL_VOLUME(used_item.reagents))
 		var/obj/item/chems/syringe/S = used_item
 		to_chat(user, "You inject the solution into \the [src].")
-		for(var/decl/material/reagent as anything in S.reagents?.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(S.reagents))
 			if(reagent.accelerant_value > FUEL_VALUE_ACCELERANT)
 				rigged = TRUE
 				log_and_message_admins("injected a light with flammable reagents, rigging it to explode.", user)

@@ -170,7 +170,7 @@
 	C.reagents.trans_to_holder(temp_reagents, amount)
 	var/usable_amount = temp_reagents.has_reagent(/decl/material/liquid/regenerator)
 	temp_reagents.clear_reagent(/decl/material/liquid/regenerator) //We'll manually calculate how much it should heal
-	temp_reagents.trans_to_mob(target, temp_reagents.total_volume, CHEM_INJECT) //And if there was something else, toss it in
+	temp_reagents.trans_to_mob(target, REAGENT_TOTAL_VOLUME(temp_reagents), CHEM_INJECT) //And if there was something else, toss it in
 
 	if (usable_amount > 1)
 		var/obj/item/organ/O = target.get_organ(target_organ)

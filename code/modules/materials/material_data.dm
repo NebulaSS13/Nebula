@@ -5,7 +5,12 @@
 		.[DATA_INGREDIENT_FLAGS] |= allergen_flags
 
 /decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
-	reagents.cached_color = null // colour masking may change
+
+	if(!istype(reagents))
+		return
+
+	UNLINT(reagents.cached_color = null) // colour masking may change
+
 	. = REAGENT_DATA(reagents, src)
 	if(!length(newdata) || !islist(newdata))
 		return

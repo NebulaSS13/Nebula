@@ -151,12 +151,12 @@
 		show_feed_message_start(user, target, consumption_method)
 		if(!do_mob(user, target))
 			return EATEN_UNABLE
-		var/contained = json_encode(REAGENT_LIST(src))
+		var/contained = json_encode(REAGENT_LIST(reagents))
 		admin_attack_log(user, target, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
 
 	show_feed_message_end(user, target, consumption_method)
 	if(consumption_method == EATING_METHOD_DRINK && target?.has_personal_goal(/datum/goal/achievement/specific_object/drink))
-		for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 			target.update_personal_goal(/datum/goal/achievement/specific_object/drink, reagent)
 	handle_consumed(user, target, consumption_method)
 

@@ -158,19 +158,19 @@
 /obj/item/flame/fluid_act(var/datum/reagents/fluids)
 	..()
 
-	if(QDELETED(src) || !fluids?.total_volume || !lit)
+	if(QDELETED(src) || !REAGENT_TOTAL_VOLUME(fluids) || !lit)
 		return
 
 	var/turf/location = get_turf(src)
 	if(location)
 		location.hotspot_expose(700, 5) // Potentially set fire to fuel etc.
-		if(QDELETED(src) || !fluids?.total_volume)
+		if(QDELETED(src) || !REAGENT_TOTAL_VOLUME(fluids))
 			return
 
 	if(waterproof)
 		return
 
-	if(fluids.total_volume >= FLUID_PUDDLE)
+	if(REAGENT_TOTAL_VOLUME(fluids) >= FLUID_PUDDLE)
 		snuff_out(no_message = TRUE)
 
 /obj/item/flame/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)

@@ -57,7 +57,8 @@
 
 	if(length(vapor_products))
 		var/result_volume = REAGENT_VOLUME(holder, src)
-		var/temperature = holder?.my_atom?.temperature || T20C
+		var/atom/reagent_atom = REAGENT_GET_ATOM(holder)
+		var/temperature = reagent_atom?.temperature || T20C
 		for(var/vapor in vapor_products)
 			touching_turf.assume_gas(vapor, (result_volume * vapor_products[vapor]), temperature)
 		holder.remove_reagent(src, result_volume)

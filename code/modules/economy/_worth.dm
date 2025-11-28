@@ -10,7 +10,7 @@
 /atom/proc/get_single_monetary_worth()
 	. = get_base_value() * get_value_multiplier()
 	if(reagents)
-		for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 			. += reagent.get_value() * REAGENT_VOLUME(reagents, reagent) * REAGENT_WORTH_MULTIPLIER
 	. = max(0, round(.))
 

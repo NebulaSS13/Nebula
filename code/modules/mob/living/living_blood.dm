@@ -18,7 +18,7 @@
 		data[DATA_BLOOD_SPECIES] = species_name
 
 	var/list/temp_chem = list()
-	for(var/decl/material/reagent as anything in reagents?.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		temp_chem[reagent.type] = REAGENT_VOLUME(reagents, reagent)
 	data[DATA_BLOOD_TRACE_CHEM]  = temp_chem
 	data[DATA_BLOOD_DOSE_CHEM]   = _chem_doses?.Copy() || list()

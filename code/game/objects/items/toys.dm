@@ -52,42 +52,43 @@
 	_base_attack_force            = 0
 
 /obj/item/chems/water_balloon/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay && reagents?.total_volume <= 0)
+	if(overlay && REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		overlay.icon_state = "[overlay.icon_state]_empty"
 	. = ..()
 
 /obj/item/chems/water_balloon/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
-		. += "It's [reagents?.total_volume > 0? "filled with liquid sloshing around" : "empty"]."
+		. += "It's [REAGENT_TOTAL_VOLUME(reagents) > 0? "filled with liquid sloshing around" : "empty"]."
 
 /obj/item/chems/water_balloon/on_reagent_change()
 	if(!(. = ..()))
 		return
-	w_class = (reagents?.total_volume > 0)? ITEM_SIZE_SMALL : ITEM_SIZE_TINY
+	w_class = (REAGENT_TOTAL_VOLUME(reagents) > 0)? ITEM_SIZE_SMALL : ITEM_SIZE_TINY
 	//#TODO: Maybe acids should handle eating their own containers themselves?
-	for(var/decl/material/reagent as anything in reagents?.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		if(reagent.solvent_power >= MAT_SOLVENT_STRONG)
 			visible_message(SPAN_DANGER("\The [reagent] chews through \the [src]!"))
 			physically_destroyed()
 
 /obj/item/chems/water_balloon/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	..()
-	if(reagents?.total_volume > 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) > 0)
 		visible_message(SPAN_WARNING("\The [src] bursts!"))
 		physically_destroyed()
 
 /obj/item/chems/water_balloon/physically_destroyed(skip_qdel)
-	if(reagents?.total_volume > 0)
+	var/reagent_volume = REAGENT_TOTAL_VOLUME(reagents)
+	if(reagent_volume > 0)
 		new /obj/effect/temporary(src, 5, icon, "[get_world_inventory_state()]_burst")
-		reagents.splash_turf(get_turf(src), reagents.total_volume)
+		reagents.splash_turf(get_turf(src), reagent_volume)
 		playsound(src, 'sound/effects/balloon-pop.ogg', 75, TRUE, 3)
 	. = ..()
 
 /obj/item/chems/water_balloon/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
-	if(reagents?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		icon_state = "[icon_state]_empty"
 
 /obj/item/chems/water_balloon/afterattack(obj/target, mob/user, proximity)

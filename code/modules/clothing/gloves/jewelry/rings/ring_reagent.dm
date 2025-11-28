@@ -10,10 +10,10 @@
 	if(istype(H) && H.get_equipped_item(slot_gloves_str) == src)
 		to_chat(H, SPAN_DANGER("You feel a prick as you slip on the ring."))
 
-		if(reagents.total_volume)
+		if(REAGENT_TOTAL_VOLUME(reagents))
 			if(H.reagents)
 				var/contained_reagents = reagents.get_reagents()
-				var/trans = reagents.trans_to_mob(H, reagents.total_volume, CHEM_INJECT)
+				var/trans = reagents.trans_to_mob(H, REAGENT_TOTAL_VOLUME(reagents), CHEM_INJECT)
 				admin_inject_log(usr, H, src, contained_reagents, trans)
 	return
 

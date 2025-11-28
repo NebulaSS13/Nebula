@@ -39,7 +39,7 @@
 /obj/item/clothing/mask/smokable/ecig/simple/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(ec_cartridge)
-		. += SPAN_NOTICE("There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.")
+		. += SPAN_NOTICE("There are [round(REAGENT_TOTAL_VOLUME(ec_cartridge.reagents), 1)] units of liquid remaining.")
 	else
 		. += SPAN_NOTICE("There's no cartridge connected.")
 
@@ -58,7 +58,7 @@
 /obj/item/clothing/mask/smokable/ecig/util/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(ec_cartridge)
-		. += SPAN_NOTICE("There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.")
+		. += SPAN_NOTICE("There are [round(REAGENT_TOTAL_VOLUME(ec_cartridge.reagents), 1)] units of liquid remaining.")
 	else
 		. += SPAN_NOTICE("There's no cartridge connected.")
 
@@ -74,7 +74,7 @@
 /obj/item/clothing/mask/smokable/ecig/deluxe/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(ec_cartridge)
-		. += SPAN_NOTICE("There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.")
+		. += SPAN_NOTICE("There are [round(REAGENT_TOTAL_VOLUME(ec_cartridge.reagents), 1)] units of liquid remaining.")
 	else
 		. += SPAN_NOTICE("There's no cartridge connected.")
 
@@ -102,8 +102,9 @@
 	if(ishuman(loc))
 		var/mob/living/human/user = loc
 
-		if (!lit || !ec_cartridge || !ec_cartridge.reagents.total_volume)//no cartridge
-			if(!ec_cartridge.reagents.total_volume)
+		var/cart_vol = REAGENT_TOTAL_VOLUME(ec_cartridge.reagents)
+		if (!lit || !ec_cartridge || !cart_vol)//no cartridge
+			if(!cart_vol)
 				to_chat(user, SPAN_NOTICE("There's no liquid left in \the [src], so you shut it down."))
 			Deactivate()
 			return
@@ -152,7 +153,7 @@
 			if (!ec_cartridge)
 				to_chat(user, SPAN_NOTICE("You can't use \the [src] with no cartridge installed!"))
 				return
-			else if(!ec_cartridge.reagents.total_volume)
+			else if(!REAGENT_TOTAL_VOLUME(ec_cartridge.reagents))
 				to_chat(user, SPAN_NOTICE("You can't use \the [src] with no liquid left!"))
 				return
 			else if(!cell.check_charge(power_usage * CELLRATE))
@@ -189,7 +190,7 @@
 
 /obj/item/chems/ecig_cartridge/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	. += "The cartridge has [reagents.total_volume] units of liquid remaining."
+	. += "The cartridge has [REAGENT_TOTAL_VOLUME(reagents)] units of liquid remaining."
 
 //flavours
 /obj/item/chems/ecig_cartridge/blank

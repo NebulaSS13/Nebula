@@ -805,22 +805,22 @@ default behaviour is:
 		var/inhale_amount = 0
 		if(inhaled)
 			inhale_amount = rand(2,5)
-			T.reagents?.trans_to_holder(inhaled, min(T.reagents.total_volume, inhale_amount))
+			T.reagents?.trans_to_holder(inhaled, min(REAGENT_TOTAL_VOLUME(T.reagents), inhale_amount))
 		if(ingested)
 			var/ingest_amount = 5 - inhale_amount
-			reagents?.trans_to_holder(ingested, min(T.reagents.total_volume, ingest_amount))
+			reagents?.trans_to_holder(ingested, min(REAGENT_TOTAL_VOLUME(T.reagents), ingest_amount))
 
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
 
 /mob/living/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(QDELETED(src) || fluids?.total_volume < FLUID_PUDDLE)
+	if(QDELETED(src) || REAGENT_TOTAL_VOLUME(fluids) < FLUID_PUDDLE)
 		return
 	fluids.touch_mob(src)
-	if(QDELETED(src) || fluids?.total_volume < FLUID_PUDDLE)
+	if(QDELETED(src) || REAGENT_TOTAL_VOLUME(fluids) < FLUID_PUDDLE)
 		return
-	var/on_turf = fluids.my_atom == get_turf(src)
+	var/on_turf = REAGENT_GET_ATOM(fluids) == get_turf(src)
 	for(var/atom/movable/A as anything in get_equipped_items(TRUE))
 		if(!A.simulated)
 			continue
@@ -829,12 +829,12 @@ default behaviour is:
 		if(on_turf && !A.submerged())
 			continue
 		A.fluid_act(fluids)
-		if(QDELETED(src) || !fluids.total_volume)
+		if(QDELETED(src) || !REAGENT_TOTAL_VOLUME(fluids))
 			return
 	// TODO: review saturation logic so we can end up with more than like 15 water in our contact reagents.
 	var/datum/reagents/touching_reagents = get_contact_reagents()
 	if(touching_reagents)
-		var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching_reagents.total_volume)
+		var/saturation =  min(REAGENT_TOTAL_VOLUME(fluids), round(mob_size * 1.5 * reagent_permeability()) - REAGENT_TOTAL_VOLUME(touching_reagents))
 		if(saturation > 0)
 			fluids.trans_to_holder(touching_reagents, saturation)
 
@@ -985,7 +985,8 @@ default behaviour is:
 
 /mob/living/proc/get_food_satiation(consumption_method = EATING_METHOD_EAT)
 	. = (consumption_method == EATING_METHOD_EAT) ? get_nutrition() : get_hydration()
-	. += get_ingested_reagents()?.total_volume * 5
+	var/datum/reagents/ingested = get_ingested_reagents()
+	. += REAGENT_TOTAL_VOLUME(ingested) * 5
 
 /mob/living/proc/get_ingested_reagents()
 	RETURN_TYPE(/datum/reagents)
@@ -1370,7 +1371,7 @@ default behaviour is:
 	//flush away reagents on the skin
 	var/datum/reagents/touching_reagents = get_contact_reagents()
 	if(touching_reagents)
-		var/remove_amount = touching_reagents.maximum_volume * reagent_permeability() //take off your suit first
+		var/remove_amount = REAGENT_MAXIMUM_VOLUME(touching_reagents) * reagent_permeability() //take off your suit first
 		touching_reagents.remove_any(remove_amount)
 
 	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
@@ -1554,11 +1555,11 @@ default behaviour is:
 	var/obj/item/clothing/shoes/shoes = get_equipped_item(slot_shoes_str)
 	if(istype(shoes))
 		shoes.handle_movement(src, MOVING_QUICKLY(src))
-		if(shoes.coating && shoes.coating.total_volume > 1)
+		if(shoes.coating && REAGENT_TOTAL_VOLUME(shoes.coating) > 1)
 			source = shoes
 	else
 		for(var/obj/item/organ/external/stomper in get_organs_by_categories(global.child_stance_limbs))
-			if(stomper.coating?.total_volume > 1)
+			if(REAGENT_TOTAL_VOLUME(stomper.coating) > 1)
 				source = stomper
 				break
 
@@ -1571,7 +1572,10 @@ default behaviour is:
 	if(!use_move_trail)
 		return
 
-	var/decl/material/contaminant = source.coating.reagent_volumes[1] // take [1] instead of primary reagent to match what remove_any will probably remove
+	if(!istype(source.coating))
+		return
+
+	var/decl/material/contaminant = UNLINT(source.coating.reagent_volumes[1]) // take [1] instead of primary reagent to match what remove_any will probably remove
 	if(!T.can_show_coating_footprints(contaminant))
 		return
 	/// An associative list of DNA unique enzymes -> blood type. Used by forensics, mostly.
@@ -1946,7 +1950,7 @@ default behaviour is:
 			. += SPAN_WARNING("\The [src] will be ready to be sheared in [ceil((shearable.next_fleece-world.time) / 10)] second\s.")
 	if(has_extension(src, /datum/extension/milkable))
 		var/datum/extension/milkable/milkable = get_extension(src, /datum/extension/milkable)
-		if(milkable.udder.total_volume > 0)
+		if(REAGENT_TOTAL_VOLUME(milkable.udder) > 0)
 			. += SPAN_NOTICE("\The [src] can be milked into a bucket or other container.")
 		else
 			. += SPAN_WARNING("\The [src] cannot currently be milked.")

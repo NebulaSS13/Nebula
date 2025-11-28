@@ -25,12 +25,13 @@
 	if(!istype(core) || core.Uses <= 0)
 		return
 
-	for(var/decl/material/reagent as anything in holder.reagent_volumes)
-		if(holder.reagent_volumes[reagent] < 1)
+	var/holder_volumes = REAGENT_VOLUMES(holder)
+	for(var/decl/material/reagent as anything in holder_volumes)
+		if(holder_volumes[reagent] < 1)
 			continue
 		var/call_proc = reaction_procs[reagent]
 		if(call_proc && call(src, call_proc)(holder))
-			holder.remove_reagent(reagent, holder.reagent_volumes[reagent])
+			holder.remove_reagent(reagent, holder_volumes[reagent])
 			. = TRUE
 			break
 

@@ -80,14 +80,14 @@
 		return
 	if(closed_system || !reagents || waterlevel >= 100)
 		return
-	if((reagents.maximum_volume - reagents.total_volume) <= 0 || reagents.total_volume >= 10)
+	if((REAGENT_MAXIMUM_VOLUME(reagents) - REAGENT_TOTAL_VOLUME(reagents)) <= 0 || REAGENT_TOTAL_VOLUME(reagents) >= 10)
 		return
 	for(var/step_dir in global.alldirs)
 		var/turf/neighbor = get_step_resolving_mimic(src, step_dir)
-		if(neighbor == my_turf || !neighbor?.reagents?.total_volume || !Adjacent(neighbor))
+		if(neighbor == my_turf || !REAGENT_TOTAL_VOLUME(neighbor?.reagents) || !Adjacent(neighbor))
 			continue
 		neighbor.reagents.trans_to_obj(src, rand(2,3))
-		if((reagents.maximum_volume - reagents.total_volume) <= 0 || reagents.total_volume >= 10)
+		if((REAGENT_MAXIMUM_VOLUME(reagents) - REAGENT_TOTAL_VOLUME(reagents)) <= 0 || REAGENT_TOTAL_VOLUME(reagents) >= 10)
 			break
 	return ..()
 

@@ -47,8 +47,8 @@
 	. = ..()
 	if(distance > 2)
 		return
-	if(reagents?.total_volume)
-		. += SPAN_NOTICE("It contains [reagents.total_volume] units of reagents.")
+	if(REAGENT_TOTAL_VOLUME(reagents))
+		. += SPAN_NOTICE("It contains [REAGENT_TOTAL_VOLUME(reagents)] units of reagents.")
 	else
 		. += SPAN_NOTICE("It is empty.")
 	if(!ATOM_IS_OPEN_CONTAINER(src))
@@ -58,7 +58,7 @@
 	return TRUE
 
 /obj/item/chems/glass/proc/should_drink_from(mob/drinker)
-	. = reagents?.total_volume > 0
+	. = REAGENT_TOTAL_VOLUME(reagents) > 0
 	if(.)
 		var/decl/material/drinking = reagents.get_primary_reagent_decl()
 		return drinking ? !drinking.is_unsafe_to_drink(drinker) : FALSE
@@ -125,22 +125,23 @@ var/global/list/lid_check_glass_types = list()
 		return TRUE
 	if(handle_eaten_by_mob(user, target) != EATEN_INVALID)
 		return TRUE
+	var/total_vol = REAGENT_TOTAL_VOLUME(reagents)
 	if(user.check_intent(I_FLAG_HARM))
 		if(standard_splash_mob(user,target))
 			return TRUE
-		if(reagents && reagents.total_volume)
+		if(reagents && total_vol)
 			to_chat(user, SPAN_DANGER("You splash the contents of \the [src] onto \the [target]."))
-			reagents.splash(target, reagents.total_volume)
+			reagents.splash(target, total_vol)
 			return TRUE
-	else if(reagents && reagents.total_volume)
+	else if(reagents && total_vol)
 		to_chat(user, SPAN_NOTICE("You splash a small amount of the contents of \the [src] onto \the [target]."))
-		reagents.splash(target, min(reagents.total_volume, 5))
+		reagents.splash(target, min(total_vol, 5))
 		return TRUE
 	. = ..()
 
 // Drinking out of bowls.
 /obj/item/chems/glass/get_edible_material_amount(mob/eater)
-	return reagents?.total_volume
+	return REAGENT_TOTAL_VOLUME(reagents)
 
 /obj/item/chems/glass/get_utensil_food_type()
 	return /obj/item/food/lump
@@ -157,11 +158,11 @@ var/global/list/lid_check_glass_types = list()
 		if(utensil.loaded_food)
 			to_chat(user, SPAN_WARNING("You already have something on \the [utensil]."))
 			return TRUE
-		if(!reagents?.total_volume)
+		if(!REAGENT_TOTAL_VOLUME(reagents))
 			to_chat(user, SPAN_WARNING("\The [src] is empty."))
 			return TRUE
 		separate_food_chunk(utensil, user)
-		if(utensil.loaded_food?.reagents?.total_volume)
+		if(REAGENT_TOTAL_VOLUME(utensil.loaded_food?.reagents))
 			to_chat(user, SPAN_NOTICE("You scoop up some of \the [utensil.loaded_food.reagents.get_primary_reagent_name()] with \the [utensil]."))
 		return TRUE
 
@@ -169,7 +170,7 @@ var/global/list/lid_check_glass_types = list()
 
 /obj/item/chems/glass/get_alt_interactions(mob/user)
 	. = ..()
-	if(reagents?.total_volume >= FLUID_PUDDLE)
+	if(REAGENT_TOTAL_VOLUME(reagents) >= FLUID_PUDDLE)
 		LAZYADD(., /decl/interaction_handler/dip_item)
 		LAZYADD(., /decl/interaction_handler/fill_from)
 	if(user?.get_active_held_item())

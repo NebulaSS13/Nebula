@@ -1,8 +1,9 @@
 /decl/material/proc/get_presentation_name(var/obj/item/prop)
-	if(islist(prop?.reagents?.reagent_data))
-		. = LAZYACCESS(prop.reagents.reagent_data[src], DATA_MASK_NAME)
+	var/list/presentation_data = REAGENT_DATA(prop.reagents, src)
+	if(islist(presentation_data))
+		. = LAZYACCESS(presentation_data, DATA_MASK_NAME)
 	. ||= glass_name || get_reagent_name(prop?.reagents)
-	if(prop?.reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(prop?.reagents))
 		. = build_presentation_name_from_reagents(prop, .)
 
 /decl/material/proc/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
@@ -16,7 +17,7 @@
 
 /decl/material/proc/get_presentation_desc(var/obj/item/prop)
 	. = glass_desc
-	if(prop?.reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(prop?.reagents))
 		. = build_presentation_desc_from_reagents(prop, .)
 
 /decl/material/proc/build_presentation_desc_from_reagents(var/obj/item/prop, var/supplied)
@@ -29,8 +30,9 @@
 
 /decl/material/proc/get_reagent_name(datum/reagents/holder, phase = MAT_PHASE_LIQUID)
 
-	if(istype(holder) && holder.reagent_data)
-		var/list/rdata = holder.reagent_data[src]
+	var/reagent_data = REAGENT_DATA(holder, src)
+	if(istype(holder) && islist(reagent_data))
+		var/list/rdata = reagent_data[src]
 		if(rdata)
 			var/data_name = rdata[DATA_MASK_NAME]
 			if(data_name)
@@ -54,8 +56,9 @@
 	return "something"
 
 /decl/material/proc/get_reagent_color(datum/reagents/holder)
-	if(istype(holder) && holder.reagent_data)
-		var/list/rdata = holder.reagent_data[src]
+	var/list/reagent_data = REAGENT_DATA(holder, src)
+	if(istype(holder) && islist(reagent_data))
+		var/list/rdata = reagent_data[src]
 		if(rdata)
 			var/data_color = rdata[DATA_MASK_COLOR]
 			if(data_color)

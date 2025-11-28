@@ -20,7 +20,7 @@
 	return available_scents
 
 /obj/item/flame/torch/light(mob/user, no_message)
-	if(coating?.total_volume && coating.get_accelerant_value() < FUEL_VALUE_NONE)
+	if(REAGENT_TOTAL_VOLUME(coating) && coating.get_accelerant_value() < FUEL_VALUE_NONE)
 		to_chat(user, SPAN_WARNING("You cannot light \the [src] while it is wet!"))
 		return FALSE
 	if(burnt)

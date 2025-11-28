@@ -40,7 +40,7 @@
 		if(standard_dispenser_refill(user, A))
 			return
 
-	if(reagents.total_volume < amount_per_transfer_from_this)
+	if(REAGENT_TOTAL_VOLUME(reagents) < amount_per_transfer_from_this)
 		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		return
 
@@ -101,7 +101,7 @@
 /obj/item/chems/spray/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(loc == user)
-		. += "[round(reagents.total_volume)] unit\s left."
+		. += "[round(REAGENT_TOTAL_VOLUME(reagents))] unit\s left."
 	if(has_safety() && distance <= 1)
 		. += "The safety is [safety ? "on" : "off"]."
 
@@ -137,21 +137,21 @@
 	particle_move_delay = 6
 
 /obj/item/chems/spray/cleaner/populate_reagents()
-	add_to_reagents(/decl/material/liquid/cleaner, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/cleaner, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/antiseptic
 	name = "antiseptic spray"
 	desc = "Great for hiding incriminating bloodstains and sterilizing scalpels."
 
 /obj/item/chems/spray/antiseptic/populate_reagents()
-	add_to_reagents(/decl/material/liquid/antiseptic, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antiseptic, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/hair_remover
 	name = "hair remover"
 	desc = "Very effective at removing hair, feathers, spines and horns."
 
 /obj/item/chems/spray/hair_remover/populate_reagents()
-	add_to_reagents(/decl/material/liquid/hair_remover, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/hair_remover, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/pepper
 	name = "pepperspray"
@@ -164,7 +164,7 @@
 	safety = TRUE
 
 /obj/item/chems/spray/pepper/populate_reagents()
-	add_to_reagents(/decl/material/liquid/capsaicin/condensed, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/capsaicin/condensed, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/pepper/has_safety()
 	return TRUE
@@ -180,7 +180,7 @@
 	chem_volume = 10
 
 /obj/item/chems/spray/waterflower/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/chemsprayer
 	name = "chem sprayer"
@@ -204,7 +204,7 @@
 	var/list/the_targets = list(T, T1, T2)
 
 	for(var/a = 1 to 3)
-		if(reagents.total_volume < 1)
+		if(REAGENT_TOTAL_VOLUME(reagents) < 1)
 			break
 		create_chempuff(the_targets[a], rand(6, 8))
 	return
@@ -218,7 +218,7 @@
 	chem_volume = 100
 
 /obj/item/chems/spray/plantbgone/populate_reagents()
-	add_to_reagents(/decl/material/liquid/weedkiller, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/weedkiller, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/cleaner/deodorant
 	name = "deodorant"

@@ -30,16 +30,16 @@
 
 /obj/structure/reagent_dispensers/barrel/cask/ebony/water/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/barrel/cask/ebony/beer/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/alcohol/beer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/beer, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/barrel/cask/ebony/wine/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/alcohol/wine, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/wine, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/barrel/cask/ebony/oil/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/oil, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/oil, REAGENT_MAXIMUM_VOLUME(reagents))

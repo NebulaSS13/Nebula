@@ -6,15 +6,15 @@
 	var/growth_rate = get_growth_rate()
 	var/turf/my_turf = get_turf(src)
 	if(istype(my_turf) && !closed_system)
-		var/space_left = reagents ? (reagents.maximum_volume - reagents.total_volume) : 0
-		if(space_left > 0 && reagents.total_volume < 10)
+		var/space_left = reagents ? (REAGENT_MAXIMUM_VOLUME(reagents) - REAGENT_TOTAL_VOLUME(reagents)) : 0
+		if(space_left > 0 && REAGENT_TOTAL_VOLUME(reagents) < 10)
 			// Handle nearby smoke if any.
 			for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
-				if(smoke.reagents.total_volume)
+				if(REAGENT_TOTAL_VOLUME(smoke.reagents))
 					smoke.reagents.trans_to_obj(src, 5, copy = 1)
 			// Handle environmental effects like weather and flooding.
-			if(my_turf.reagents?.total_volume)
-				my_turf.reagents.trans_to_obj(src, min(space_left, min(my_turf.reagents.total_volume, rand(5,10))))
+			if(REAGENT_TOTAL_VOLUME(my_turf.reagents))
+				my_turf.reagents.trans_to_obj(src, min(space_left, min(REAGENT_TOTAL_VOLUME(my_turf.reagents), rand(5,10))))
 			if(istype(my_turf.weather?.weather_system?.current_state, /decl/state/weather/rain))
 				var/decl/state/weather/rain/rain = my_turf.weather.weather_system.current_state
 				if(rain.is_liquid)

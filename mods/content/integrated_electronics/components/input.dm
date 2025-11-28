@@ -351,8 +351,8 @@
 		var/mr = 0
 		var/tr = 0
 		if(H.reagents)
-			mr = H.reagents.maximum_volume
-			tr = H.reagents.total_volume
+			mr = REAGENT_MAXIMUM_VOLUME(H.reagents)
+			tr = REAGENT_TOTAL_VOLUME(H.reagents)
 		set_pin_data(IC_OUTPUT, 6, mr)
 		set_pin_data(IC_OUTPUT, 7, tr)
 		set_pin_data(IC_OUTPUT, 8, H.density)

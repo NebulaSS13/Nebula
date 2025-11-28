@@ -17,11 +17,11 @@
 /obj/item/scanner/spectrometer/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		icon_state += "_loaded"
 
 /obj/item/scanner/spectrometer/is_valid_scan_target(atom/O)
-	if(!O.reagents || !O.reagents.total_volume)
+	if(!O.reagents || !REAGENT_TOTAL_VOLUME(O.reagents))
 		return FALSE
 	return (O.atom_flags & ATOM_FLAG_OPEN_CONTAINER) || istype(O, /obj/item/chems/syringe)
 
@@ -38,22 +38,22 @@
 /obj/item/scanner/spectrometer/attack_self(mob/user)
 	if(!can_use(user))
 		return
-	if(reagents.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		scan(src, user)
 	else
 		..()
 
 /proc/mass_spectrometer_scan(var/datum/reagents/reagents, mob/user, var/details)
-	if(!reagents?.total_volume)
+	if(!REAGENT_TOTAL_VOLUME(reagents))
 		return SPAN_WARNING("No sample to scan.")
 	var/list/blood_traces = list()
 	var/list/blood_doses = list()
 
-	if(length(reagents.reagent_volumes) == 1 && istype(reagents.primary_reagent, /decl/material/liquid/random))
-		var/decl/material/liquid/random/random = reagents.primary_reagent
+	var/decl/material/liquid/random/random = reagents.get_primary_reagent_decl()
+	if(length(REAGENT_VOLUMES(reagents)) == 1 && istype(random))
 		return random.get_scan_data(user)
 
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		if(!istype(reagent, /decl/material/liquid/blood))
 			return SPAN_WARNING("The sample was contaminated! Please insert another sample.")
 		var/data = REAGENT_DATA(reagents, reagent)

@@ -169,7 +169,7 @@
 
 /obj/item/weldingtool/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(!QDELETED(src) && fluids?.total_volume && welding && !waterproof)
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids) && welding && !waterproof)
 		var/turf/location = get_turf(src)
 		if(location)
 			location.hotspot_expose(WELDING_TOOL_HOTSPOT_TEMP_ACTIVE, 50, 1)

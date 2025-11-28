@@ -180,8 +180,9 @@
 	for(var/obj/used_item in get_contained_external_atoms())
 		data["cooking_items"][used_item.name]++
 	data["cooking_reagents"] = list()
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
-		data["cooking_reagents"][reagent.name] = reagents.reagent_volumes[reagent]
+	var/reagent_volumes = REAGENT_VOLUMES(reagents)
+	for(var/decl/material/reagent as anything in reagent_volumes)
+		data["cooking_reagents"][reagent.name] = reagent_volumes[reagent]
 	data["on"] = !!operating
 	data["broken"] = broken > 0
 	data["dirty"] = dirty >= 100
@@ -209,12 +210,13 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 
-	if (!reagents.total_volume && !length(get_contained_external_atoms())) //dry run
+	var/reagent_volume = REAGENT_TOTAL_VOLUME(reagents)
+	if (!reagent_volume && !length(get_contained_external_atoms())) //dry run
 		start()
 		return
 
-	if (reagents.total_volume && prob(50)) // 50% chance a liquid recipe gets messy
-		dirty += ceil(reagents.total_volume / 10)
+	if (reagent_volume && prob(50)) // 50% chance a liquid recipe gets messy
+		dirty += ceil(reagent_volume / 10)
 
 	var/decl/recipe/recipe = select_recipe(RECIPE_CATEGORY_MICROWAVE, src, cooking_temperature)
 	if (!recipe)
@@ -253,7 +255,7 @@
 			break
 
 	//Any leftover reagents are divided amongst the foods
-	var/total = reagents.total_volume
+	var/total = REAGENT_TOTAL_VOLUME(reagents)
 	for (var/obj/item/I in cooked_items)
 		reagents.trans_to_holder(I.reagents, total/cooked_items.len)
 		I.dropInto(loc) // since eject only ejects ingredients!
@@ -347,11 +349,12 @@
 
 /obj/machinery/microwave/proc/dispose(var/mob/user, var/message = TRUE)
 	var/list/ingredients = get_contained_external_atoms()
-	if (!LAZYLEN(ingredients) && !reagents.total_volume)
+	var/reagent_volume = REAGENT_TOTAL_VOLUME(reagents)
+	if (!LAZYLEN(ingredients) && !reagent_volume)
 		return
 	for (var/obj/thing in ingredients)
 		thing.dropInto(loc)
-	if (reagents.total_volume)
+	if (reagent_volume)
 		dirty++
 	reagents.clear_reagents()
 	if(user && message)
@@ -367,7 +370,7 @@
 	SSnano.update_uis(src)
 
 /obj/machinery/microwave/proc/eject_reagent(var/mob/user, var/decl/material/reagent)
-	if(!reagents.reagent_volumes[reagent])
+	if(!REAGENT_VOLUME(reagents, reagent))
 		SSnano.update_uis(src)
 		return // should not happen, must be a UI glitch or href hacking
 	var/obj/item/chems/held_container = user.get_active_held_item()
@@ -404,8 +407,9 @@
 
 	for (var/obj/thing in ingredients)
 		amount++
-		if (thing.reagents && thing.reagents.primary_reagent)
-			amount += REAGENT_VOLUME(thing.reagents, thing.reagents.primary_reagent)
+		var/thing_reagent = istype(thing.reagents) && thing.reagents.get_primary_reagent_decl()
+		if (thing_reagent)
+			amount += REAGENT_VOLUME(thing.reagents, thing_reagent)
 		qdel(thing)
 	reagents.clear_reagents()
 	SSnano.update_uis(src)
@@ -432,7 +436,7 @@
 			return TOPIC_REFRESH
 
 		if ("ejectreagent")
-			for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 				if(reagent.name == href_list["target"])
 					eject_reagent(user, reagent)
 					break

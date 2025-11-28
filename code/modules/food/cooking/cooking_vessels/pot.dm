@@ -39,7 +39,7 @@
 
 		last_boil_temp = use_temperature
 		var/next_boil_status = FALSE
-		for(var/decl/material/reagent as anything in reagents?.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 			if(reagent.phase_at_temperature(use_temperature, ambient_pressure) == MAT_PHASE_GAS)
 				next_boil_status = TRUE
 				break

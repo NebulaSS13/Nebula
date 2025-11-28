@@ -17,11 +17,12 @@
 /proc/reagent_scan_results(obj/O, details = 0)
 	if(isnull(O.reagents))
 		return list("No significant chemical agents found in [O].")
-	if(!LAZYLEN(O.reagents.reagent_volumes))
+	var/chem_volumes = REAGENT_VOLUMES(O.reagents)
+	if(!LAZYLEN(chem_volumes))
 		return list("No active chemical agents found in [O].")
 	. = list("Chemicals found in [O]:")
-	var/one_percent = O.reagents.total_volume / 100
-	for (var/decl/material/reagent as anything in O.reagents.reagent_volumes)
+	var/one_percent = REAGENT_TOTAL_VOLUME(O.reagents) / 100
+	for (var/decl/material/reagent as anything in REAGENT_VOLUMES(O.reagents))
 		. += "[reagent.name][details ? ": [REAGENT_VOLUME(O.reagents, reagent) / one_percent]%" : ""]"
 
 /obj/item/scanner/reagent/adv

@@ -17,7 +17,7 @@
 	. = ..()
 	var/decl/condiment_appearance/condiment = GET_DECL(initial_condiment_type)
 	if(condiment?.condiment_type)
-		add_to_reagents(condiment.condiment_type, reagents.maximum_volume)
+		add_to_reagents(condiment.condiment_type, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/condiment/attackby(var/obj/item/used_item, var/mob/user)
 	if(IS_PEN(used_item))
@@ -51,7 +51,8 @@
 /obj/item/chems/condiment/proc/get_current_condiment_appearance()
 	if(!morphic_container)
 		return GET_DECL(initial_condiment_type)
-	switch(LAZYLEN(reagents?.reagent_volumes))
+	var/reagent_volumes = REAGENT_VOLUMES(reagents)
+	switch(LAZYLEN(reagent_volumes))
 		if(0)
 			return GET_DECL(/decl/condiment_appearance/empty)
 		if(1)

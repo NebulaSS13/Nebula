@@ -33,7 +33,7 @@
 /obj/item/chems/syringe/populate_reagents()
 	SHOULD_CALL_PARENT(TRUE)
 	. = ..()
-	if(reagents.total_volume > 0 && autolabel && !label_text) // don't override preset labels
+	if(REAGENT_TOTAL_VOLUME(reagents) > 0 && autolabel && !label_text) // don't override preset labels
 		label_text = reagents.get_primary_reagent_name()
 		update_name()
 
@@ -99,12 +99,12 @@
 		icon_state = "[icon_state]_broken"
 		return
 	var/rounded_vol = 0
-	if (reagents?.total_volume > 0)
-		rounded_vol = clamp(round((reagents.total_volume / max(1, reagents.maximum_volume * 15)),5), 5, 15)
+	if (REAGENT_TOTAL_VOLUME(reagents) > 0)
+		rounded_vol = clamp(round((REAGENT_TOTAL_VOLUME(reagents) / max(1, REAGENT_MAXIMUM_VOLUME(reagents) * 15)),5), 5, 15)
 	if(ismob(loc))
 		add_overlay((mode == SYRINGE_DRAW)? "[icon_state]_draw" : "[icon_state]_inject")
 	icon_state = "[icon_state]_[rounded_vol]"
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		var/image/filling = image(icon, "[icon_state]_underlay")
 		filling.color = reagents.get_color()
 		filling.appearance_flags |= RESET_COLOR
@@ -125,13 +125,13 @@
 		return
 
 	if(ismob(target))//Blood!
-		if(reagents.total_volume)
+		if(REAGENT_TOTAL_VOLUME(reagents))
 			to_chat(user, SPAN_NOTICE("There is already a blood sample in this syringe."))
 			return
 		if(ishuman(target))
 			var/amount = REAGENTS_FREE_SPACE(reagents)
 			var/mob/living/human/T = target
-			if(!T.vessel?.total_volume)
+			if(!REAGENT_TOTAL_VOLUME(T.vessel))
 				to_chat(user, SPAN_WARNING("You are unable to locate any blood."))
 				return
 
@@ -168,7 +168,7 @@
 			user.visible_message(SPAN_NOTICE("\The [user] takes a blood sample from \the [target]."))
 
 	else //if not mob
-		if(!target.reagents.total_volume)
+		if(!REAGENT_TOTAL_VOLUME(target.reagents))
 			to_chat(user, SPAN_NOTICE("[target] is empty."))
 			return
 
@@ -190,7 +190,7 @@
 		syringestab(target, user)
 		return
 
-	if(!reagents.total_volume)
+	if(!REAGENT_TOTAL_VOLUME(reagents))
 		to_chat(user, SPAN_NOTICE("The syringe is empty."))
 		mode = SYRINGE_DRAW
 		return
@@ -211,8 +211,8 @@
 		return
 
 	var/trans = reagents.trans_to(target, amount_per_transfer_from_this)
-	to_chat(user, SPAN_NOTICE("You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
-	if(reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
+	to_chat(user, SPAN_NOTICE("You inject \the [target] with [trans] units of the solution. \The [src] now contains [REAGENT_TOTAL_VOLUME(src.reagents)] units."))
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0 && mode == SYRINGE_INJECT)
 		mode = SYRINGE_DRAW
 		update_icon()
 
@@ -257,11 +257,11 @@
 	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INJECT)
 
 	if(target != user)
-		user.visible_message(SPAN_WARNING("\the [user] injects \the [target] with [visible_name]!"), SPAN_NOTICE("You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
+		user.visible_message(SPAN_WARNING("\the [user] injects \the [target] with [visible_name]!"), SPAN_NOTICE("You inject \the [target] with [trans] units of the solution. \The [src] now contains [REAGENT_TOTAL_VOLUME(src.reagents)] units."))
 	else
-		to_chat(user, SPAN_NOTICE("You inject yourself with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
+		to_chat(user, SPAN_NOTICE("You inject yourself with [trans] units of the solution. \The [src] now contains [REAGENT_TOTAL_VOLUME(src.reagents)] units."))
 
-	if(reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0 && mode == SYRINGE_INJECT)
 		mode = SYRINGE_DRAW
 		update_icon()
 
@@ -297,7 +297,7 @@
 		user.visible_message(SPAN_DANGER("[user] stabs [target] with [src.name]!"))
 		target.apply_damage(3, BRUTE)
 
-	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
+	var/syringestab_amount_transferred = rand(0, (REAGENT_TOTAL_VOLUME(reagents) - 5)) //nerfed by popular demand
 	var/contained_reagents = reagents.get_reagents()
 	var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_INJECT)
 	if(isnull(trans)) trans = 0
@@ -326,7 +326,7 @@
 
 /obj/item/chems/syringe/ld50_syringe/populate_reagents()
 	SHOULD_CALL_PARENT(FALSE)
-	add_to_reagents(/decl/material/liquid/heartstopper, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/heartstopper, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/syringe/ld50_syringe/drawReagents(var/target, var/mob/user)
 	if(ismob(target)) // No drawing 60 units of blood at once
@@ -343,7 +343,7 @@
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/stabilizer/populate_reagents()
-	add_to_reagents(/decl/material/liquid/stabilizer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/stabilizer, REAGENT_MAXIMUM_VOLUME(reagents))
 	return ..()
 
 /obj/item/chems/syringe/antitoxin
@@ -351,7 +351,7 @@
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/antitoxin/populate_reagents()
-	add_to_reagents(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antitoxins, REAGENT_MAXIMUM_VOLUME(reagents))
 	return ..()
 
 /obj/item/chems/syringe/antibiotic
@@ -359,7 +359,7 @@
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/antibiotic/populate_reagents()
-	add_to_reagents(/decl/material/liquid/antibiotics, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antibiotics, REAGENT_MAXIMUM_VOLUME(reagents))
 	return ..()
 
 /obj/item/chems/syringe/drugs
@@ -367,7 +367,7 @@
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/drugs/populate_reagents()
-	var/vol_each = round(reagents.maximum_volume / 3)
+	var/vol_each = round(REAGENT_MAXIMUM_VOLUME(reagents) / 3)
 	add_to_reagents(/decl/material/liquid/psychoactives,   vol_each)
 	add_to_reagents(/decl/material/liquid/hallucinogenics, vol_each)
 	add_to_reagents(/decl/material/liquid/presyncopics,    vol_each)
@@ -378,7 +378,7 @@
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/steroid/populate_reagents()
-	var/vol_third = round(reagents.maximum_volume/3)
+	var/vol_third = round(REAGENT_MAXIMUM_VOLUME(reagents)/3)
 	add_to_reagents(/decl/material/liquid/adrenaline,   vol_third)
 	add_to_reagents(/decl/material/liquid/amphetamines, 2 * vol_third)
 	return ..()

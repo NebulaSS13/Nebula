@@ -31,7 +31,7 @@
 	if(!(. = ..()) || !reagents)
 		return
 
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		show_materials |= reagent.type
 
 /obj/machinery/material_processing/smeltery/ProcessAtomTemperature()
@@ -70,8 +70,8 @@
 					eating.dropInto(output_turf)
 				continue
 			eaten++
-			if(eating.reagents?.total_volume)
-				eating.reagents.trans_to_obj(src, floor(eating.reagents.total_volume * 0.75)) // liquid reagents, lossy
+			if(REAGENT_TOTAL_VOLUME(eating.reagents))
+				eating.reagents.trans_to_obj(src, floor(REAGENT_TOTAL_VOLUME(eating.reagents) * 0.75)) // liquid reagents, lossy
 			for(var/mtype in eating.matter)
 				add_to_reagents(mtype, floor(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 			qdel(eating)

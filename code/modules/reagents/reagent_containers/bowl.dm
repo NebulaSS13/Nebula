@@ -155,18 +155,18 @@
 		add_to_reagents(filling, fillings[filling])
 
 /obj/item/chems/glass/bowl/mystery/update_name()
-	if(!drained && reagents?.total_volume)
+	if(!drained && REAGENT_TOTAL_VOLUME(reagents))
 		SetName("mystery soup")
 	else
 		..()
 
 /obj/item/chems/glass/bowl/mystery/on_reagent_change()
-	if(reagents?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		drained = TRUE
 	. = ..()
 
 /obj/item/chems/glass/bowl/mystery/update_container_desc()
-	if(!drained && reagents?.total_volume)
+	if(!drained && REAGENT_TOTAL_VOLUME(reagents))
 		desc = "The mystery is, why aren't you eating it?"
 	else
 		..()

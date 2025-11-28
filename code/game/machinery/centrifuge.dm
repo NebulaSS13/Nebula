@@ -5,7 +5,7 @@
 	expected_type = /obj/machinery/centrifuge
 
 /datum/storage/hopper/industrial/centrifuge/proc/should_ingest(mob/user, obj/item/thing)
-	if(thing.reagents?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(thing.reagents) <= 0)
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [thing] is empty."))
 		return FALSE

@@ -230,12 +230,12 @@
 
 	if(!reagents) return
 
-	if(reagents.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		return
 
-	reagents.trans_to_obj(temp_chem_holder, min(reagents.total_volume,rand(1,3)))
+	reagents.trans_to_obj(temp_chem_holder, min(REAGENT_TOTAL_VOLUME(reagents),rand(1,3)))
 
-	for(var/decl/material/reagent as anything in temp_chem_holder.reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(temp_chem_holder.reagents))
 
 		var/reagent_total = REAGENT_VOLUME(temp_chem_holder.reagents, reagent)
 

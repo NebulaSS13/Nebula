@@ -28,7 +28,7 @@
 	. = ..()
 	for(var/T in starts_with)
 		add_to_reagents(T, starts_with[T])
-	if(ATOM_IS_OPEN_CONTAINER(src) && reagents.total_volume > 0)
+	if(ATOM_IS_OPEN_CONTAINER(src) && REAGENT_TOTAL_VOLUME(reagents) > 0)
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
 
@@ -37,7 +37,7 @@
 	. = ..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		add_overlay("[icon_state]_loaded")
-	if(reagents?.total_volume > 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) > 0)
 		add_overlay("[icon_state]_reagents")
 
 /obj/item/chems/inhaler/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
@@ -49,7 +49,7 @@
 		to_chat(user, SPAN_NOTICE("You must secure the reagents inside \the [src] before using it!"))
 		return FALSE
 
-	if(!reagents.total_volume)
+	if(!REAGENT_TOTAL_VOLUME(reagents))
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
 		return TRUE
 
@@ -78,12 +78,12 @@
 			SPAN_NOTICE("You stick \the [src] in \the [target]'s mouth and press the injection button.")
 		)
 
-	var/contained = REAGENT_LIST(src)
+	var/contained = REAGENT_LIST(reagents)
 	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INHALE)
 	if(trans)
 		admin_inject_log(user, target, src, contained, trans)
 		playsound(src.loc, 'sound/effects/hypospray.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("[trans] units administered. [reagents.total_volume] units remaining in \the [src]."))
+		to_chat(user, SPAN_NOTICE("[trans] units administered. [REAGENT_TOTAL_VOLUME(reagents)] units remaining in \the [src]."))
 		used = TRUE
 
 	update_icon()
@@ -91,7 +91,7 @@
 
 /obj/item/chems/inhaler/attack_self(mob/user)
 	if(ATOM_IS_OPEN_CONTAINER(src))
-		if(reagents.total_volume > 0)
+		if(REAGENT_TOTAL_VOLUME(reagents) > 0)
 			to_chat(user, SPAN_NOTICE("With a quick twist of \the [src]'s lid, you secure the reagents inside."))
 			atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 			update_icon()
@@ -112,7 +112,7 @@
 /obj/item/chems/inhaler/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..(user)
 	if(distance <= 1)
-		if(reagents.total_volume > 0)
+		if(REAGENT_TOTAL_VOLUME(reagents) > 0)
 			. += SPAN_NOTICE("It is currently loaded.")
 		else
 			. += SPAN_WARNING("It is spent.")

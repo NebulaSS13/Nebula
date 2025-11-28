@@ -22,7 +22,7 @@
 	if(!(proximity && ATOM_IS_OPEN_CONTAINER(O))) // Must be adjacent and open.
 		return
 	to_chat(user, "You crack \the [src] into \the [O].")
-	reagents.trans_to(O, reagents.total_volume)
+	reagents.trans_to(O, REAGENT_TOTAL_VOLUME(reagents))
 	qdel(src)
 
 /obj/item/food/egg/throw_impact(atom/hit_atom)
@@ -30,7 +30,7 @@
 	if(QDELETED(src))
 		return // Could potentially happen with unscupulous atoms on hitby() throwing again, etc.
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
-	reagents.splash(hit_atom, reagents.total_volume)
+	reagents.splash(hit_atom, REAGENT_TOTAL_VOLUME(reagents))
 	visible_message("<span class='warning'>\The [src] has been squashed!</span>","<span class='warning'>You hear a smack.</span>")
 	qdel(src)
 

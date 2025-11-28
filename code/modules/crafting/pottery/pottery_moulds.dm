@@ -82,15 +82,15 @@
 	if(!product_type)
 		return FALSE
 
-	if(reagents?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		return TRUE
 
-	if(reagents.total_volume < reagents.maximum_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents) < REAGENT_MAXIMUM_VOLUME(reagents))
 		to_chat(user, SPAN_WARNING("\The [src] is not full yet!"))
 		return TRUE
 
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		if(reagent.melting_point && temperature >= reagent.melting_point)
 			to_chat(user, SPAN_WARNING("The contents of \the [src] are still molten! Wait for it to cool down."))
 			return TRUE
@@ -109,11 +109,11 @@
 	product.dropInto(loc)
 
 	reagents.remove_reagent(product_mat.type, REAGENT_VOLUME(reagents, product_mat.type))
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		if(reagent.type == product_mat.type)
 			continue
 		LAZYINITLIST(product.matter)
-		product.matter[reagent.type] += max(1, round(reagents.reagent_volumes[reagent] / REAGENT_UNITS_PER_MATERIAL_UNIT))
+		product.matter[reagent.type] += max(1, round(REAGENT_VOLUME(reagents, reagent) / REAGENT_UNITS_PER_MATERIAL_UNIT))
 	reagents.clear_reagents()
 	if(length(product_metadata))
 		product.take_mould_metadata(product_metadata)

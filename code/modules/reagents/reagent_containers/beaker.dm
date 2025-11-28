@@ -15,7 +15,7 @@
 
 /obj/item/chems/glass/beaker/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	. += "It can hold up to [reagents?.maximum_volume] units."
+	. += "It can hold up to [REAGENT_MAXIMUM_VOLUME(reagents)] units."
 
 /obj/item/chems/glass/beaker/on_picked_up(mob/user, atom/old_loc)
 	. = ..()
@@ -31,9 +31,9 @@
 
 /obj/item/chems/glass/beaker/update_overlays()
 
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		var/image/filling = mutable_appearance(icon, "[icon_state]1", reagents.get_color())
-		var/percent = round((reagents.total_volume / reagents.maximum_volume) * 100)
+		var/percent = round((REAGENT_TOTAL_VOLUME(reagents) / REAGENT_MAXIMUM_VOLUME(reagents)) * 100)
 		switch(percent)
 			if(0 to 9)			filling.icon_state = "[icon_state]1"
 			if(10 to 24) 		filling.icon_state = "[icon_state]10"
@@ -60,7 +60,7 @@
 /obj/item/chems/glass/beaker/throw_impact(atom/hit_atom)
 	. = ..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
-		reagents.splash(hit_atom, rand(reagents.total_volume*0.25,reagents.total_volume), min_spill = 60, max_spill = 100)
+		reagents.splash(hit_atom, rand(REAGENT_TOTAL_VOLUME(reagents)*0.25,REAGENT_TOTAL_VOLUME(reagents)), min_spill = 60, max_spill = 100)
 	take_damage(rand(4,8))
 
 /obj/item/chems/glass/beaker/large
@@ -181,4 +181,4 @@
 	chem_volume = 120
 
 /obj/item/chems/glass/beaker/sulfuric/populate_reagents()
-	add_to_reagents(/decl/material/liquid/acid, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/acid, REAGENT_MAXIMUM_VOLUME(reagents))

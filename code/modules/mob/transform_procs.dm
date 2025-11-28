@@ -253,7 +253,7 @@
 	log_admin("[key_name(src)] has transformed into a zombie!")
 	SET_STATUS_MAX(src, STAT_WEAK, 5)
 	if (should_have_organ(BP_HEART))
-		adjust_blood(species.blood_volume - vessel.total_volume)
+		adjust_blood(species.blood_volume - REAGENT_TOTAL_VOLUME(vessel))
 	for (var/o in get_external_organs())
 		var/obj/item/organ/organ = o
 		if (!BP_IS_PROSTHETIC(organ))

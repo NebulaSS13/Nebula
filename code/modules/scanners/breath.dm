@@ -100,9 +100,9 @@
 			print_reagent_default_message = FALSE
 
 		var/datum/reagents/inhaled = target.get_inhaled_reagents()
-		if(inhaled && inhaled.total_volume)
+		if(inhaled && REAGENT_TOTAL_VOLUME(inhaled))
 			var/unknown = 0
-			for(var/decl/material/reagent as anything in inhaled.reagent_volumes)
+			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(inhaled))
 				if(reagent.scannable)
 					print_reagent_default_message = FALSE
 					. += "<span class='scan_notice'>[capitalize(reagent.gas_name)] found in subject's breath.</span>"

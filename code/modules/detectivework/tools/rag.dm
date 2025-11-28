@@ -39,7 +39,7 @@
 		extinguish_fire()
 		return TRUE
 
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		remove_contents(user)
 		return TRUE
 
@@ -62,7 +62,7 @@
 /obj/item/chems/rag/update_name()
 	if(is_on_fire())
 		name_prefix = "burning"
-	else if(reagents && reagents.total_volume)
+	else if(reagents && REAGENT_TOTAL_VOLUME(reagents))
 		name_prefix = "damp"
 	else
 		name_prefix = "dry"
@@ -78,19 +78,19 @@
 /obj/item/chems/rag/proc/remove_contents(mob/user, atom/trans_dest = null)
 	if(!trans_dest && !user.loc)
 		return
-	if(reagents?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		return
 	var/target_text = trans_dest? "\the [trans_dest]" : "\the [user.loc]"
 	user.visible_message(
 		SPAN_NOTICE("\The [user] begins to wring out [src] over [target_text]."),
 		SPAN_NOTICE("You begin to wring out \the [src] over [target_text].")
 	)
-	if(!do_after(user, reagents.total_volume*5, progress = 0) || !reagents?.total_volume) //50 for a fully soaked rag
+	if(!do_after(user, REAGENT_TOTAL_VOLUME(reagents)*5, progress = 0) || !REAGENT_TOTAL_VOLUME(reagents)) //50 for a fully soaked rag
 		return
 	if(trans_dest)
-		reagents.trans_to(trans_dest, reagents.total_volume)
+		reagents.trans_to(trans_dest, REAGENT_TOTAL_VOLUME(reagents))
 	else
-		reagents.splash(user.loc, reagents.total_volume)
+		reagents.splash(user.loc, REAGENT_TOTAL_VOLUME(reagents))
 	user.visible_message(
 		SPAN_NOTICE("\The [user] wrings out \the [src] over [target_text]."),
 		SPAN_NOTICE("You finish to wringing out \the [src].")
@@ -99,7 +99,7 @@
 
 /obj/item/chems/rag/proc/wipe_down(atom/target, mob/user)
 
-	if(!reagents?.total_volume)
+	if(!REAGENT_TOTAL_VOLUME(reagents))
 		to_chat(user, SPAN_WARNING("The [initial(name)] is dry."))
 		return
 
@@ -120,7 +120,7 @@
 		target.ignite_fire()
 		return TRUE
 
-	if(reagents.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		if(user.get_target_zone() != BP_MOUTH)
 			wipe_down(target, user)
 			return TRUE
@@ -184,8 +184,8 @@
 	var/total_fuel = 0
 	var/total_volume = 0
 	if(reagents)
-		total_volume += reagents.total_volume
-		for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+		total_volume += REAGENT_TOTAL_VOLUME(reagents)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 			total_fuel += REAGENT_VOLUME(reagents, reagent) * reagent.accelerant_value
 	. = (total_fuel >= 2 && total_fuel >= total_volume*0.5)
 
@@ -233,7 +233,7 @@
 		qdel(src)
 		return
 
-	if(reagents?.total_volume)
-		remove_from_reagents(/decl/material/liquid/fuel, reagents.maximum_volume/25)
+	if(REAGENT_TOTAL_VOLUME(reagents))
+		remove_from_reagents(/decl/material/liquid/fuel, REAGENT_MAXIMUM_VOLUME(reagents)/25)
 	update_name()
 	burn_time--

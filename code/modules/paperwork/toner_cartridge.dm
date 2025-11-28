@@ -18,12 +18,12 @@
 
 /obj/item/chems/toner_cartridge/populate_reagents()
 	//Normally this would be toner powder, but probably not worth making a material for that.
-	add_to_reagents(/decl/material/liquid/paint,         reagents.maximum_volume/2)
-	add_to_reagents(/decl/material/liquid/pigment/black, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/paint,         REAGENT_MAXIMUM_VOLUME(reagents)/2)
+	add_to_reagents(/decl/material/liquid/pigment/black, REAGENT_MAXIMUM_VOLUME(reagents)/2)
 
 /obj/item/chems/toner_cartridge/dump_contents(atom/forced_loc = loc, mob/user)
 	. = ..()
-	reagents?.splash(get_turf(forced_loc), reagents.total_volume)
+	reagents?.splash(get_turf(forced_loc), REAGENT_TOTAL_VOLUME(reagents))
 
 /obj/item/chems/toner_cartridge/physically_destroyed(skip_qdel)
 	material.place_shards(get_turf(src), 2)
@@ -40,7 +40,7 @@
 
 /obj/item/chems/toner_cartridge/proc/get_amount_toner_max()
 	//Since ink is paint + pigment in a 1:1 ratio, only half the volume is actually usable
-	return round(reagents.maximum_volume / 2, 0.01)
+	return round(REAGENT_MAXIMUM_VOLUME(reagents) / 2, 0.01)
 
 /obj/item/chems/toner_cartridge/proc/use_toner(var/amount)
 	if(!reagents)

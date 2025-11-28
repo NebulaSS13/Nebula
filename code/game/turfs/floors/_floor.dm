@@ -67,8 +67,8 @@
 
 /turf/floor/proc/fill_to_zero_height()
 	var/my_height = get_physical_height()
-	if(fill_reagent_type && my_height < 0 && (!reagents || !QDELING(reagents)) && reagents?.total_volume < abs(my_height))
-		var/reagents_to_add = abs(my_height) - reagents?.total_volume
+	if(fill_reagent_type && my_height < 0 && (!reagents || !QDELING(reagents)) && REAGENT_TOTAL_VOLUME(reagents) < abs(my_height))
+		var/reagents_to_add = abs(my_height) - REAGENT_TOTAL_VOLUME(reagents)
 		add_to_reagents(fill_reagent_type, reagents_to_add, phase = MAT_PHASE_LIQUID)
 
 /turf/floor/can_climb_from_below(var/mob/climber)

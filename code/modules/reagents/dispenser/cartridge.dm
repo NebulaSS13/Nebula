@@ -13,18 +13,19 @@
 
 /obj/item/chems/chem_disp_cartridge/Initialize()
 	. = ..()
-	if(reagents?.primary_reagent && !_reagent_label)
-		_reagent_label = reagents.get_primary_reagent_name()
+	var/decl/material/primary_reagent = istype(reagents) && reagents.get_primary_reagent_decl()
+	if(primary_reagent && !_reagent_label)
+		_reagent_label = primary_reagent.name
 	if(_reagent_label)
 		setLabel(_reagent_label)
 
 /obj/item/chems/chem_disp_cartridge/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	. += "It has a capacity of [reagents?.maximum_volume || 0] unit\s."
-	if(reagents?.total_volume <= 0)
+	. += "It has a capacity of [REAGENT_MAXIMUM_VOLUME(reagents)] unit\s."
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		. += "It is empty."
 	else
-		. += "It contains [reagents?.total_volume || 0] unit\s of reagents."
+		. += "It contains [REAGENT_TOTAL_VOLUME(reagents)] unit\s of reagents."
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		. += "The cap is sealed."
 
@@ -72,8 +73,9 @@
 		if(user.check_intent(I_FLAG_HARM))
 			if(standard_splash_mob(user,target))
 				return TRUE
-			if(reagents && reagents.total_volume)
+			var/total_vol = REAGENT_TOTAL_VOLUME(reagents)
+			if(reagents && total_vol)
 				to_chat(user, SPAN_DANGER("You splash the contents of \the [src] onto \the [target]."))
-				reagents.splash(target, reagents.total_volume) //FIXME: probably shouldn't throw the whole 500 units at the mob, since the bottle neck is a bottle neck.
+				reagents.splash(target, total_vol) //FIXME: probably shouldn't throw the whole 500 units at the mob, since the bottle neck is a bottle neck.
 				return TRUE
 	return ..()

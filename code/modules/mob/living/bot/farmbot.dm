@@ -40,7 +40,7 @@
 	. = ..()
 	. += "<br>Water tank: "
 	if(tank)
-		. += "[tank.reagents.total_volume]/[tank.reagents.maximum_volume]"
+		. += "[REAGENT_TOTAL_VOLUME(tank.reagents)]/[REAGENT_MAXIMUM_VOLUME(tank.reagents)]"
 	else
 		. += "error: not found"
 
@@ -118,7 +118,7 @@
 			if(confirmTarget(tray))
 				target = tray
 				return
-		if(!target && refills_water && tank && tank.reagents.total_volume < tank.reagents.maximum_volume)
+		if(!target && refills_water && tank && REAGENT_TOTAL_VOLUME(tank.reagents) < REAGENT_MAXIMUM_VOLUME(tank.reagents))
 			for(var/obj/structure/hygiene/sink/source in view(7, src))
 				target = source
 				return
@@ -171,13 +171,13 @@
 		update_icon()
 		T.update_icon()
 	else if(istype(A, /obj/structure/hygiene/sink))
-		if(!tank || tank.reagents.total_volume >= tank.reagents.maximum_volume)
+		if(!tank || REAGENT_TOTAL_VOLUME(tank.reagents) >= REAGENT_MAXIMUM_VOLUME(tank.reagents))
 			return TRUE
 		action = "water"
 		update_icon()
 		visible_message("<span class='notice'>[src] starts refilling its tank from \the [A].</span>")
 		busy = 1
-		while(do_after(src, 10) && tank.reagents.total_volume < tank.reagents.maximum_volume)
+		while(do_after(src, 10) && REAGENT_TOTAL_VOLUME(tank.reagents) < REAGENT_MAXIMUM_VOLUME(tank.reagents))
 			tank.add_to_reagents(/decl/material/liquid/water, 100)
 			if(prob(5))
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
@@ -228,7 +228,7 @@
 		return 0
 
 	if(istype(target, /obj/structure/hygiene/sink))
-		if(!tank || tank.reagents.total_volume >= tank.reagents.maximum_volume)
+		if(!tank || REAGENT_TOTAL_VOLUME(tank.reagents) >= REAGENT_MAXIMUM_VOLUME(tank.reagents))
 			return 0
 		return 1
 
@@ -242,13 +242,13 @@
 	if(tray.dead && removes_dead || tray.harvest && collects_produce)
 		return FARMBOT_COLLECT
 
-	else if(refills_water && tray.waterlevel < 40 && !tray.reagents.has_reagent(/decl/material/liquid/water) && (tank?.reagents.total_volume > 0))
+	else if(refills_water && tray.waterlevel < 40 && !tray.reagents.has_reagent(/decl/material/liquid/water) && (REAGENT_TOTAL_VOLUME(tank?.reagents) > 0))
 		return FARMBOT_WATER
 
 	else if(uproots_weeds && tray.weedlevel > 3)
 		return FARMBOT_UPROOT
 
-	else if(replaces_nutriment && tray.nutrilevel < 1 && tray.reagents.total_volume < 1)
+	else if(replaces_nutriment && tray.nutrilevel < 1 && REAGENT_TOTAL_VOLUME(tray.reagents) < 1)
 		return FARMBOT_NUTRIMENT
 
 	return 0

@@ -30,8 +30,9 @@
 		H.update_eyes()
 
 /decl/material/liquid/glowsap/on_leaving_metabolism(datum/reagents/metabolism/holder)
-	if(ishuman(holder?.my_atom))
-		var/mob/living/human/H = holder.my_atom
+	var/my_atom = REAGENT_GET_ATOM(holder)
+	if(ishuman(my_atom))
+		var/mob/living/human/H = my_atom
 		addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/human, update_eyes)), 5 SECONDS)
 	. = ..()
 
@@ -382,7 +383,7 @@
 	var/list/data = REAGENT_DATA(holder, src)
 	if(world.time > LAZYACCESS(data, DATA_COOLDOWN_TIME) + 3 MINUTES)
 		LAZYSET(data, DATA_COOLDOWN_TIME, world.time)
-		LAZYSET(holder.reagent_data, type, data)
+		REAGENT_SET_DATA(holder, type, data)
 		to_chat(M, SPAN_NOTICE("You feel faintly sore in the throat."))
 
 /decl/material/liquid/nanitefluid

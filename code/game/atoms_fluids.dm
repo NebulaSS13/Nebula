@@ -3,9 +3,12 @@
 
 /atom/proc/fluid_act(var/datum/reagents/fluids)
 	SHOULD_CALL_PARENT(TRUE)
-	if(reagents && reagents != fluids && fluids?.total_volume >= FLUID_SHALLOW && !is_watertight())
-		reagents.trans_to_holder(fluids, reagents.total_volume)
-		fluids.trans_to_holder(reagents, min(fluids.total_volume, reagents.maximum_volume))
+	if(reagents && reagents != fluids && !is_watertight())
+		var/fluid_volume = REAGENT_TOTAL_VOLUME(fluids)
+		if(fluid_volume >= FLUID_SHALLOW)
+			var/reagent_volume = REAGENT_MAXIMUM_VOLUME(reagents)
+			reagents.trans_to_holder(fluids, reagent_volume)
+			fluids.trans_to_holder(reagents, fluid_volume, reagent_volume)
 
 /atom/proc/check_fluid_depth(var/min = 1)
 	return 0

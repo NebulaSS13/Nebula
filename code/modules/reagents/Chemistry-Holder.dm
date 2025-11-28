@@ -11,9 +11,9 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	return reagents?.remove_any(amount, defer_update, removed_phases, skip_reagents)
 
 /atom/proc/get_reagent_space()
-	if(!reagents?.maximum_volume)
+	if(!REAGENT_MAXIMUM_VOLUME(reagents))
 		return 0
-	return reagents.maximum_volume - reagents.total_volume
+	return REAGENT_MAXIMUM_VOLUME(reagents) - REAGENT_TOTAL_VOLUME(reagents)
 
 /atom/proc/get_reagents()
 	return reagents
@@ -55,23 +55,21 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	vapor?.update_values()
 	liquids?.update_total()
 
+// These vars are privated due to the potential for reagents to be either null, a list, or a datum.
+// Always use the REAGENT_FOO macros!
 /datum/reagents
-	var/primary_reagent
-	var/primary_solid
-	var/primary_liquid
-	var/list/reagent_volumes
-
-	var/list/liquid_volumes
-	var/list/solid_volumes		// This should be taken as powders/flakes, rather than large solid pieces of material.
-
-	var/list/reagent_data
-	var/total_volume = 0
-	var/maximum_volume = 120
-
-	var/total_liquid_volume // Used to determine when to create fluids in the world and the like.
-
-	var/atom/my_atom
-	var/cached_color
+	VAR_PRIVATE/list/reagent_volumes
+	VAR_PRIVATE/list/liquid_volumes
+	VAR_PRIVATE/list/solid_volumes // This should be taken as powders/flakes, rather than large solid pieces of material.
+	VAR_PRIVATE/list/reagent_data
+	VAR_PRIVATE/atom/my_atom
+	VAR_PRIVATE/cached_color
+	VAR_PRIVATE/primary_reagent
+	VAR_PRIVATE/primary_solid
+	VAR_PRIVATE/primary_liquid
+	VAR_PRIVATE/total_volume = 0
+	VAR_PRIVATE/total_liquid_volume // Used to determine when to create fluids in the world and the like.
+	VAR_PRIVATE/maximum_volume = 120
 
 /datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
 	src.maximum_volume = maximum_volume
@@ -910,7 +908,7 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	. = trans_to_holder(target.reagents, amount, multiplier, copy, defer_update = defer_update, transferred_phases = transferred_phases)
 	// Deferred updates are presumably being done by SSfluids.
 	// Do an immediate fluid_act call rather than waiting for SSfluids to proc.
-	if(!defer_update && target.reagents.total_volume >= FLUID_PUDDLE)
+	if(!defer_update && REAGENT_TOTAL_VOLUME(target.reagents) >= FLUID_PUDDLE)
 		target.fluid_act(target.reagents)
 
  // Objects may or may not have reagents; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
@@ -979,22 +977,25 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 
 /* Atom reagent creation - use it all the time */
 /atom/proc/create_reagents(var/max_vol)
-	if(reagents)
+	if(istype(reagents))
 		log_debug("Attempted to create a new reagents holder when already referencing one: [log_info_line(src)]")
-		reagents.maximum_volume = max(reagents.maximum_volume, max_vol)
-	else
+		REAGENT_SET_MAX_VOL(reagents, max(REAGENT_MAXIMUM_VOLUME(reagents), max_vol))
+	else if(!reagents)
 		reagents = new/datum/reagents(max_vol, src)
+	else
+		return
 	return reagents
 
 /atom/proc/create_or_update_reagents(_vol, override_volume)
-	if(reagents)
+	if(isnull(reagents))
+		return create_reagents(_vol)
+	if(istype(reagents))
 		if(override_volume)
-			reagents.maximum_volume = _vol // should we remove excess reagents here?
+			REAGENT_SET_MAX_VOL(reagents, _vol) // should we remove excess reagents here?
 		else
-			reagents.maximum_volume = max(reagents.maximum_volume, _vol)
+			REAGENT_SET_MAX_VOL(reagents, max(REAGENT_MAXIMUM_VOLUME(reagents), _vol))
 		reagents.update_total()
 		return reagents
-	return create_reagents(_vol)
 
 /// Infinite reagent sink: nothing is ever actually added to it, useful for complex, filtered deletion of reagents without holder churn.
 /datum/reagents/sink

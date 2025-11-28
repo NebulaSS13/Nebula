@@ -30,7 +30,7 @@
 
 /obj/item/chems/glass/bucket/attackby(var/obj/item/used_item, mob/user)
 	if(istype(used_item, /obj/item/mop))
-		if(reagents.total_volume < 1)
+		if(REAGENT_TOTAL_VOLUME(reagents) < 1)
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		else if(REAGENTS_FREE_SPACE(used_item.reagents) >= 5)
 			reagents.trans_to_obj(used_item, 5)
@@ -44,7 +44,7 @@
 /obj/item/chems/glass/bucket/get_reagents_overlay(state_prefix)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		return null // no overlay while closed!
-	if(!reagents || (reagents.total_volume / reagents.maximum_volume) < 0.8)
+	if(!reagents || (REAGENT_TOTAL_VOLUME(reagents) / REAGENT_MAXIMUM_VOLUME(reagents)) < 0.8)
 		return null // must be at least 80% full to show
 	return ..()
 

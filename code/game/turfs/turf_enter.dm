@@ -33,8 +33,8 @@
 	if(isturf(old_loc) && has_gravity() && A.can_fall() && !isnull(platform) && !(weakref(A) in skip_height_fall_for))
 
 		var/turf/old_turf  = old_loc
-		var/old_height     = old_turf.get_physical_height() + old_turf.reagents?.total_volume
-		var/current_height = get_physical_height() + reagents?.total_volume
+		var/old_height     = old_turf.get_physical_height() + REAGENT_TOTAL_VOLUME(old_turf.reagents)
+		var/current_height = get_physical_height() + REAGENT_TOTAL_VOLUME(reagents)
 		var/height_difference = abs(current_height - old_height)
 
 		if(current_height < old_height && height_difference > FLUID_SHALLOW)

@@ -32,7 +32,7 @@
 	var/bottle_lid_color = COLOR_OFF_WHITE
 
 /obj/machinery/chem_master/proc/get_remaining_volume()
-	return reagents ? clamp(reagents.maximum_volume - reagents.total_volume, 0, reagents.maximum_volume) : 0
+	return reagents ? clamp(REAGENT_MAXIMUM_VOLUME(reagents) - REAGENT_TOTAL_VOLUME(reagents), 0, REAGENT_MAXIMUM_VOLUME(reagents)) : 0
 
 /obj/machinery/chem_master/attackby(var/obj/item/used_item, var/mob/user)
 
@@ -167,7 +167,7 @@
 		else if (href_list["createpill"] || href_list["createpill_multiple"])
 			var/count = 1
 
-			if(reagents.total_volume/count < 1) //Sanity checking.
+			if(REAGENT_TOTAL_VOLUME(reagents)/count < 1) //Sanity checking.
 				return TOPIC_HANDLED
 
 			if (href_list["createpill_multiple"])
@@ -176,14 +176,14 @@
 					return TOPIC_HANDLED
 				count = clamp(count, 1, max_pill_count)
 
-			var/amount_per_pill = min(reagents.total_volume/count, 30)
+			var/amount_per_pill = min(REAGENT_TOTAL_VOLUME(reagents)/count, 30)
 			if(amount_per_pill < 1) // Sanity checking.
 				return TOPIC_HANDLED
 
 			var/name = sanitize_safe(input(usr,"Name:","Name your pill!","[reagents.get_primary_reagent_name()] ([amount_per_pill]u)"), MAX_NAME_LEN)
 			if(!CanInteract(user, state))
 				return TOPIC_HANDLED
-			if(reagents.total_volume/count < 1) //Sanity checking.
+			if(REAGENT_TOTAL_VOLUME(reagents)/count < 1) //Sanity checking.
 				return TOPIC_HANDLED
 			while (count-- && count >= 0)
 				var/obj/item/chems/pill/dispensed/P = new(loc)
@@ -219,7 +219,7 @@
 
 /obj/machinery/chem_master/proc/fetch_contaminants(mob/user, datum/reagents/reagents, decl/material/main_reagent)
 	. = list()
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		if(reagent != main_reagent && prob(user.skill_fail_chance(core_skill, 100)))
 			. += reagent
 
@@ -282,11 +282,11 @@
 			dat += "<A href='byond://?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[loaded_pill_bottle.storage.max_storage_space]\]</A><BR><BR>"
 		else
 			dat += "No pill bottle inserted.<BR><BR>"
-		if(!R.total_volume)
+		if(!REAGENT_TOTAL_VOLUME(R))
 			dat += "Beaker is empty."
 		else
 			dat += "Add to buffer:<BR>"
-			for(var/decl/material/reagent as anything in R.reagent_volumes)
+			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(R))
 				dat += "[reagent.use_name], [REAGENT_VOLUME(R, reagent)] Units - "
 				dat += "<A href='byond://?src=\ref[src];analyze=\ref[reagent]'>(Analyze)</A> "
 				dat += "<A href='byond://?src=\ref[src];add=\ref[reagent];amount=1'>(1)</A> "
@@ -296,8 +296,8 @@
 				dat += "<A href='byond://?src=\ref[src];addcustom=\ref[reagent]'>(Custom)</A><BR>"
 
 		dat += "<HR>Transfer to <A href='byond://?src=\ref[src];toggle=1'>[(!mode ? "disposal" : "beaker")]:</A><BR>"
-		if(reagents.total_volume)
-			for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+		if(REAGENT_TOTAL_VOLUME(reagents))
+			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 				dat += "[reagent.use_name], [REAGENT_VOLUME(reagents, reagent)] Units - "
 				dat += "<A href='byond://?src=\ref[src];analyze=\ref[reagent]'>(Analyze)</A> "
 				dat += "<A href='byond://?src=\ref[src];remove=\ref[reagent];amount=1'>(1)</A> "

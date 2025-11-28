@@ -198,36 +198,36 @@ Single Use Emergency Pouches
 
 /obj/item/chems/pill/pouch_pill/Initialize(ml, material_key)
 	. = ..()
-	if(!reagents?.total_volume)
+	if(!REAGENT_TOTAL_VOLUME(reagents))
 		log_warning("[log_info_line(src)] was deleted for containing no reagents during init!")
 		return INITIALIZE_HINT_QDEL
 	if(reagents?.get_primary_reagent_name() && !_reagent_name)
-		_reagent_name = "emergency [reagents.get_primary_reagent_name()] pill ([reagents.total_volume]u)"
+		_reagent_name = "emergency [reagents.get_primary_reagent_name()] pill ([REAGENT_TOTAL_VOLUME(reagents)]u)"
 	if(_reagent_name)
 		SetName(_reagent_name)
 
 /obj/item/chems/pill/pouch_pill/stabilizer/populate_reagents()
-	add_to_reagents(/decl/material/liquid/stabilizer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/stabilizer, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 /obj/item/chems/pill/pouch_pill/antitoxins/populate_reagents()
-	add_to_reagents(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antitoxins, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 /obj/item/chems/pill/pouch_pill/oxy_meds/populate_reagents()
-	add_to_reagents(/decl/material/liquid/oxy_meds, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/oxy_meds, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 /obj/item/chems/pill/pouch_pill/painkillers/populate_reagents()
-	add_to_reagents(/decl/material/liquid/painkillers, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/painkillers, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 /obj/item/chems/pill/pouch_pill/brute_meds/populate_reagents()
-	add_to_reagents(/decl/material/liquid/brute_meds, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/brute_meds, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 /obj/item/chems/pill/pouch_pill/burn_meds/populate_reagents()
-	add_to_reagents(/decl/material/liquid/burn_meds, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/burn_meds, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 // Injectors

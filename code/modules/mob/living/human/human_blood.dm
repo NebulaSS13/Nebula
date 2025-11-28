@@ -30,18 +30,20 @@
 		make_blood()
 
 	if(!should_have_organ(BP_HEART))
-		vessel.clear_reagents()
-		vessel.maximum_volume = 0
+		if(istype(vessel))
+			vessel.clear_reagents()
+			REAGENT_SET_MAX_VOL(vessel, 0)
 		return
 
-	if(vessel.total_volume < species.blood_volume)
-		vessel.maximum_volume = species.blood_volume
-		adjust_blood(species.blood_volume - vessel.total_volume)
-	else if(vessel.total_volume > species.blood_volume)
-		vessel.remove_any(vessel.total_volume - species.blood_volume)
-		vessel.maximum_volume = species.blood_volume
+	if(istype(vessel))
+		if(REAGENT_TOTAL_VOLUME(vessel) < species.blood_volume)
+			REAGENT_SET_MAX_VOL(vessel, species.blood_volume)
+			adjust_blood(species.blood_volume - REAGENT_TOTAL_VOLUME(vessel))
+		else if(REAGENT_TOTAL_VOLUME(vessel) > species.blood_volume)
+			vessel.remove_any(REAGENT_TOTAL_VOLUME(vessel) - species.blood_volume)
+			REAGENT_SET_MAX_VOL(vessel, species.blood_volume)
 
-	LAZYSET(vessel.reagent_data, species.blood_reagent, list(
+	REAGENT_SET_DATA(vessel, species.blood_reagent, list(
 		DATA_BLOOD_DONOR      = weakref(src),
 		DATA_BLOOD_SPECIES    = get_species_name(),
 		DATA_BLOOD_DNA        = get_unique_enzymes(),
@@ -54,9 +56,9 @@
 /mob/living/human/proc/drip(var/amt, var/tar = src, var/ddir)
 	var/datum/reagents/bloodstream = get_injected_reagents()
 	if(remove_blood(amt))
-		if(bloodstream.total_volume && vessel.total_volume)
-			var/chem_share = round(0.3 * amt * (bloodstream.total_volume/vessel.total_volume), 0.01)
-			bloodstream.remove_any(chem_share * bloodstream.total_volume)
+		if(REAGENT_TOTAL_VOLUME(bloodstream) && REAGENT_TOTAL_VOLUME(vessel))
+			var/chem_share = round(0.3 * amt * (REAGENT_TOTAL_VOLUME(bloodstream) / REAGENT_TOTAL_VOLUME(vessel)), 0.01)
+			bloodstream.remove_any(chem_share * REAGENT_TOTAL_VOLUME(bloodstream))
 		blood_splatter(tar, src, (ddir && ddir>0), spray_dir = ddir)
 		return amt
 	return 0
@@ -154,7 +156,7 @@
 	if(stress_modifier)
 		amount *= 1-(get_config_value(/decl/config/num/health_stress_blood_recovery_constant) * stress_modifier)
 
-	var/blood_volume_raw = vessel.total_volume
+	var/blood_volume_raw = REAGENT_TOTAL_VOLUME(vessel)
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
 	if(amount)
 		adjust_blood(amount, get_blood_data())
@@ -170,16 +172,16 @@
 		reagents.trans_to_obj(container, amount)
 		return 1
 
-	if(vessel.total_volume < amount)
+	if(REAGENT_TOTAL_VOLUME(vessel) < amount)
 		return null
 	if(vessel.has_reagent(species.blood_reagent))
-		LAZYSET(vessel.reagent_data, species.blood_reagent, get_blood_data())
+		REAGENT_SET_DATA(vessel, species.blood_reagent, get_blood_data())
 	vessel.trans_to_holder(container.reagents, amount)
 	return 1
 
 //Percentage of maximum blood volume.
 /mob/living/human/proc/get_blood_volume()
-	return species.blood_volume ? round((vessel.total_volume/species.blood_volume)*100) : 0
+	return species.blood_volume ? round((REAGENT_TOTAL_VOLUME(vessel)/species.blood_volume)*100) : 0
 
 //Percentage of maximum blood volume, affected by the condition of circulation organs
 /mob/living/human/proc/get_blood_circulation()

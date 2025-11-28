@@ -34,7 +34,8 @@
 	coated_adjective = "wet"
 
 /decl/material/liquid/water/build_coated_name(datum/reagents/coating, list/accumulator)
-	if(length(coating.reagent_volumes) > 1)
+	var/coating_volumes = REAGENT_VOLUMES(coating)
+	if(length(coating_volumes) > 1)
 		accumulator.Insert(1, "dilute") // dilute always comes first! also this is intentionally not colored in component color mode
 		return // don't insert 'wet'
 	..()
@@ -50,7 +51,7 @@
 /decl/material/liquid/water/get_reagent_name(datum/reagents/holder, phase = MAT_PHASE_LIQUID)
 	. = ..()
 	// length == 1 implies primary reagent, so checking both is redundant
-	if(phase == MAT_PHASE_LIQUID && length(holder?.reagent_volumes) == 1)
+	if(phase == MAT_PHASE_LIQUID && length(REAGENT_VOLUMES(holder)) == 1)
 		return "fresh [.]"
 	return
 

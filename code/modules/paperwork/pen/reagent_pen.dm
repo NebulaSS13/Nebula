@@ -16,7 +16,7 @@
 				to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
 			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, target))
 				return TRUE
-		if(reagents.total_volume)
+		if(REAGENT_TOTAL_VOLUME(reagents))
 			if(target.reagents)
 				var/contained_reagents = reagents.get_reagents()
 				var/trans = reagents.trans_to_mob(target, 30, CHEM_INJECT)
@@ -35,4 +35,4 @@
 	desc = "It's \a [stroke_color_name] [medium_name] pen with a sharp point and a carefully engraved \"Waffle Co.\"."
 
 /obj/item/pen/reagent/sleepy/populate_reagents()
-	add_to_reagents(/decl/material/liquid/paralytics, round(reagents.maximum_volume/2))
+	add_to_reagents(/decl/material/liquid/paralytics, round(REAGENT_MAXIMUM_VOLUME(reagents)/2))

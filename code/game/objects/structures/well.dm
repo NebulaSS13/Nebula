@@ -20,12 +20,12 @@
 
 // Override to skip open container check.
 /obj/structure/reagent_dispensers/well/can_drink_from(mob/user)
-	return reagents?.total_volume && user.check_has_mouth()
+	return REAGENT_TOTAL_VOLUME(reagents) && user.check_has_mouth()
 
 /obj/structure/reagent_dispensers/well/populate_reagents()
 	. = ..()
 	if(auto_refill)
-		add_to_reagents(auto_refill, reagents.maximum_volume)
+		add_to_reagents(auto_refill, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/well/Destroy()
 	if(is_processing)
@@ -34,7 +34,7 @@
 
 /obj/structure/reagent_dispensers/well/on_update_icon()
 	. = ..()
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		add_overlay(overlay_image(icon, "[icon_state]-fluid", reagents.get_color(), (RESET_COLOR | RESET_ALPHA)))
 	if(istype(reinf_material)) // reinf_material -> roof and posts, at this point in time
 		var/image/roof_image = overlay_image(icon, "[icon_state]-roof", reinf_material.color, RESET_COLOR | RESET_ALPHA | KEEP_APART)
@@ -50,25 +50,25 @@
 
 // Overrides due to wonky reagent_dispeners opencontainer flag handling.
 /obj/structure/reagent_dispensers/well/can_be_poured_from(mob/user, atom/target)
-	return (reagents?.maximum_volume > 0)
+	return (REAGENT_MAXIMUM_VOLUME(reagents) > 0)
 /obj/structure/reagent_dispensers/well/can_be_poured_into(mob/user, atom/target)
-	return (reagents?.maximum_volume > 0)
+	return (REAGENT_MAXIMUM_VOLUME(reagents) > 0)
 
 /obj/structure/reagent_dispensers/well/get_standard_interactions(var/mob/user)
 	. = ..()
-	if(reagents?.maximum_volume)
+	if(REAGENT_MAXIMUM_VOLUME(reagents))
 		LAZYADD(., global._reagent_interactions)
 
 /obj/structure/reagent_dispensers/well/Process()
 	if(!reagents || !auto_refill) // if we're full, we only stop at the end of the proc; we need to check for contaminants first
 		return PROCESS_KILL
 	var/amount_to_add = rand(5, 10)
-	if(length(reagents.reagent_volumes) > 1) // we have impurities!
+	if(length(REAGENT_VOLUMES(reagents)) > 1) // we have impurities!
 		reagents.remove_any(amount_to_add, defer_update = TRUE, skip_reagents = list(auto_refill)) // defer update until the add_reagent call below
-	if(reagents.total_volume < reagents.maximum_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents) < REAGENT_MAXIMUM_VOLUME(reagents))
 		reagents.add_reagent(auto_refill, amount_to_add)
 		return // don't stop processing
-	else if(length(reagents.reagent_volumes) == 1 && reagents.get_primary_reagent_type() == auto_refill)
+	else if(length(REAGENT_VOLUMES(reagents)) == 1 && reagents.get_primary_reagent_type() == auto_refill)
 		// only one reagent and it's our auto_refill, our work is done here
 		return PROCESS_KILL
 	// if we get here, it means we have a full well with contaminants, so we keep processing

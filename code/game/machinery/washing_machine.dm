@@ -65,7 +65,7 @@
 /obj/machinery/washing_machine/proc/wash()
 	if(operable())
 		var/list/washing_atoms = get_contained_external_atoms()
-		var/amount_per_atom = floor(reagents.total_volume / length(washing_atoms))
+		var/amount_per_atom = floor(REAGENT_TOTAL_VOLUME(reagents) / length(washing_atoms))
 
 		if(amount_per_atom > 0)
 			var/decl/material/smelliest = get_smelliest_reagent(reagents)
@@ -94,13 +94,13 @@
 		if(!(atom_flags & ATOM_FLAG_OPEN_CONTAINER))
 			to_chat(user, SPAN_WARNING("Open the detergent port first!"))
 			return TRUE
-		if(reagents.total_volume >= reagents.maximum_volume)
+		if(REAGENT_TOTAL_VOLUME(reagents) >= REAGENT_MAXIMUM_VOLUME(reagents))
 			to_chat(user, SPAN_WARNING("The detergent port is full!"))
 			return TRUE
 		if(!user.try_unequip(used_item))
 			return TRUE
 		// Directly transfer to the holder to avoid touch reactions.
-		used_item.reagents?.trans_to_holder(reagents, used_item.reagents.total_volume)
+		used_item.reagents?.trans_to_holder(reagents, REAGENT_TOTAL_VOLUME(used_item.reagents))
 		to_chat(user, SPAN_NOTICE("You dissolve \the [used_item] in the detergent port."))
 		qdel(used_item)
 		return TRUE
@@ -200,7 +200,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] isn't functioning!"))
 		return
 
-	if(!reagents.total_volume)
+	if(!REAGENT_TOTAL_VOLUME(reagents))
 		to_chat(user, SPAN_WARNING("There are no cleaning products loaded in \the [src]!"))
 		return
 

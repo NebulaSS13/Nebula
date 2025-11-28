@@ -62,13 +62,13 @@
 		var/datum/reagents/checking = get_first_reagent_holder(from)
 		if(!checking)
 			return "first holder is null."
-		if(checking?.total_volume != from_remaining_target)
-			return "first holder should have [from_remaining_target]u remaining but has [checking.total_volume]u."
+		if(REAGENT_TOTAL_VOLUME(checking) != from_remaining_target)
+			return "first holder should have [from_remaining_target]u remaining but has [REAGENT_TOTAL_VOLUME(checking)]u."
 		checking = get_second_reagent_holder(target)
 		if(!checking)
 			return "second holder is null."
-		if(checking?.total_volume != to_holding_target)
-			return "second holder should hold [to_holding_target]u but has [checking.total_volume]u."
+		if(REAGENT_TOTAL_VOLUME(checking) != to_holding_target)
+			return "second holder should hold [to_holding_target]u but has [REAGENT_TOTAL_VOLUME(checking)]u."
 
 /datum/unit_test/chemistry/proc/validate_holders(var/atom/from, var/atom/target)
 	if(QDELETED(from))
@@ -219,7 +219,7 @@
 
 	// Cleanup pt. 2
 	chem_refs.Cut()
-	if(spawn_spot.reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(spawn_spot.reagents))
 		spawn_spot.reagents.clear_reagents()
 		failures += "- spawn turf had fluids post-test"
 

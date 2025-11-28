@@ -37,10 +37,11 @@
 	) // Interferes with resin globules.
 
 /decl/chemical_reaction/synthesis/crystalization/can_happen(datum/reagents/holder)
-	. = ..() && length(holder.reagent_volumes) > 1
+	var/holder_volumes = REAGENT_VOLUMES(holder)
+	. = ..() && length(holder_volumes) > 1
 	if(.)
 		. = FALSE
-		for(var/decl/material/reagent as anything in holder.reagent_volumes)
+		for(var/decl/material/reagent as anything in holder_volumes)
 			if(reagent.type != /decl/material/liquid/crystal_agent && REAGENT_VOLUME(holder, reagent) >= REAGENT_UNITS_PER_MATERIAL_SHEET)
 				return TRUE
 
@@ -48,7 +49,7 @@
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		var/list/removing_reagents = list()
-		for(var/decl/material/reagent as anything in holder.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(holder))
 			if(reagent.type != /decl/material/liquid/crystal_agent)
 				var/solidifying = floor(REAGENT_VOLUME(holder, reagent) / REAGENT_UNITS_PER_MATERIAL_SHEET)
 				if(solidifying)
@@ -67,10 +68,11 @@
 	inhibitors = list(/decl/material/liquid/crystal_agent)
 
 /decl/chemical_reaction/synthesis/aerogel/can_happen(datum/reagents/holder)
-	. = ..() && length(holder.reagent_volumes) > 1
+	var/holder_volumes = REAGENT_VOLUMES(holder)
+	. = ..() && length(holder_volumes) > 1
 	if(.)
 		. = FALSE
-		for(var/decl/material/reagent as anything in holder.reagent_volumes)
+		for(var/decl/material/reagent as anything in holder_volumes)
 			if(REAGENT_VOLUME(holder, reagent) < REAGENT_UNITS_PER_MATERIAL_SHEET)
 				continue
 			if(reagent.default_solid_form != /obj/item/stack/material/aerogel)
@@ -81,7 +83,7 @@
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		var/list/removing_reagents = list()
-		for(var/decl/material/reagent as anything in holder.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(holder))
 			if(reagent.default_solid_form == /obj/item/stack/material/aerogel)
 				var/solidifying = floor(REAGENT_VOLUME(holder, reagent) / REAGENT_UNITS_PER_MATERIAL_SHEET)
 				if(solidifying)

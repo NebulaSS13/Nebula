@@ -241,10 +241,10 @@
 	. += "[b]Reagent scan:[endb]"
 
 	var/print_reagent_default_message = TRUE
-	if(H.reagents.total_volume)
+	if(REAGENT_TOTAL_VOLUME(H.reagents))
 		var/unknown = 0
 		var/reagentdata[0]
-		for(var/decl/material/reagent as anything in H.reagents.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(H.reagents))
 			if(reagent.scannable)
 				print_reagent_default_message = FALSE
 				reagentdata[reagent.type] = "<span class='scan_notice'>[round(REAGENT_VOLUME(H.reagents, reagent), 1)]u [reagent.use_name]</span>"
@@ -260,10 +260,10 @@
 			. += "<span class='scan_warning'>Warning: Unknown substance[(unknown>1)?"s":""] detected in subject's blood.</span>"
 
 	var/datum/reagents/touching_reagents = H.get_contact_reagents()
-	if(touching_reagents && touching_reagents.total_volume)
+	if(touching_reagents && REAGENT_TOTAL_VOLUME(touching_reagents))
 		var/unknown = 0
 		var/reagentdata[0]
-		for(var/decl/material/reagent as anything in touching_reagents.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(touching_reagents))
 			if(reagent.scannable)
 				print_reagent_default_message = FALSE
 				reagentdata[reagent.type] = "<span class='scan_notice'>[round(REAGENT_VOLUME(H.reagents, reagent), 1)]u [reagent.name]</span>"
@@ -279,9 +279,9 @@
 			. += "<span class='scan_warning'>Warning: Unknown substance[(unknown>1)?"s":""] detected on subject's body.</span>"
 
 	var/datum/reagents/ingested = H.get_ingested_reagents()
-	if(ingested && ingested.total_volume)
+	if(ingested && REAGENT_TOTAL_VOLUME(ingested))
 		var/unknown = 0
-		for(var/decl/material/reagent as anything in ingested.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(ingested))
 			if(reagent.scannable)
 				print_reagent_default_message = FALSE
 				. += "<span class='scan_notice'>[capitalize(reagent.use_name)] found in subject's stomach.</span>"
@@ -292,9 +292,9 @@
 			. += "<span class='scan_warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>"
 
 	var/datum/reagents/inhaled = H.get_inhaled_reagents()
-	if(inhaled && inhaled.total_volume)
+	if(inhaled && REAGENT_TOTAL_VOLUME(inhaled))
 		var/unknown = 0
-		for(var/decl/material/reagent as anything in inhaled.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(inhaled))
 			if(reagent.scannable)
 				print_reagent_default_message = FALSE
 				. += "<span class='scan_notice'>[capitalize(reagent.use_name)] found in subject's lungs.</span>"

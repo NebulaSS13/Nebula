@@ -84,8 +84,9 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 
 /obj/structure/reagent_dispensers/compost_bin/physically_destroyed()
 	dump_contents()
-	if(reagents)
-		reagents.trans_to(loc, reagents.total_volume)
+	var/reagent_volume = REAGENT_TOTAL_VOLUME(reagents)
+	if(reagent_volume)
+		reagents.trans_to(loc, reagent_volume)
 	return ..()
 
 /obj/structure/reagent_dispensers/compost_bin/attackby(obj/item/used_item, mob/user)
@@ -158,8 +159,8 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 				for(var/obj/item/thing in composting.get_contained_external_atoms())
 					thing.forceMove(src)
 
-				if(composting.reagents?.total_volume)
-					composting.reagents.trans_to_holder(reagents, composting.reagents.total_volume)
+				if(REAGENT_TOTAL_VOLUME(composting.reagents))
+					composting.reagents.trans_to_holder(reagents, REAGENT_TOTAL_VOLUME(composting.reagents))
 					composting.reagents.clear_reagents()
 
 				composting.clear_matter()
@@ -174,12 +175,12 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 				remains.update_primary_material()
 
 	// Digest reagents.
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		if(istype(reagent, /decl/material/liquid/fertilizer))
 			continue
 		if(!reagent.compost_value)
 			continue
-		var/clamped_worm_drink_amount = min(round(worm_eat_amount * REAGENT_UNITS_PER_MATERIAL_UNIT), reagents.reagent_volumes[reagent])
+		var/clamped_worm_drink_amount = min(round(worm_eat_amount * REAGENT_UNITS_PER_MATERIAL_UNIT), REAGENT_VOLUME(reagents, reagent))
 		reagents.add_reagent(/decl/material/liquid/fertilizer/compost, max(1, round(clamped_worm_drink_amount * reagent.compost_value)))
 		reagents.remove_reagent(reagent, clamped_worm_drink_amount)
 		break

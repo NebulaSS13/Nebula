@@ -70,8 +70,8 @@
 
 /obj/item/robot_module/flying/emergency/respawn_consumable(var/mob/living/silicon/robot/robot, var/amount)
 	var/obj/item/chems/spray/PS = emag
-	if(PS && PS.reagents.total_volume < PS.reagents.maximum_volume)
-		var/adding = min(PS.reagents.maximum_volume-PS.reagents.total_volume, 2*amount)
+	if(PS && REAGENT_TOTAL_VOLUME(PS.reagents) < REAGENT_MAXIMUM_VOLUME(PS.reagents))
+		var/adding = min(REAGENT_MAXIMUM_VOLUME(PS.reagents)-REAGENT_TOTAL_VOLUME(PS.reagents), 2*amount)
 		if(adding > 0)
 			PS.add_to_reagents(/decl/material/liquid/acid/polyacid, adding)
 	..()

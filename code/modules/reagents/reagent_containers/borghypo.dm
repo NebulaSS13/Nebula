@@ -44,7 +44,7 @@
 	. = ..()
 	var/list/reagent_ids = get_generated_reagents()
 	for(var/decl/material/reagent in decls_repository.get_decls_unassociated(reagent_ids))
-		reagents.add_reagent(reagent.type, round(reagents.maximum_volume / length(reagent_ids)))
+		reagents.add_reagent(reagent.type, round(REAGENT_MAXIMUM_VOLUME(reagents) / length(reagent_ids)))
 	START_PROCESSING(SSobj, src)
 
 /obj/item/chems/borghypo/Destroy()
@@ -61,7 +61,7 @@
 	if(!robot?.cell)
 		return
 	var/list/reagent_ids = get_generated_reagents()
-	var/max_per_reagent = round(reagents.maximum_volume / length(reagent_ids))
+	var/max_per_reagent = round(REAGENT_MAXIMUM_VOLUME(reagents) / length(reagent_ids))
 	for(var/reagent in reagent_ids)
 		var/has_reagent = REAGENT_VOLUME(reagents, GET_DECL(reagent))
 		if(has_reagent < max_per_reagent)
@@ -128,7 +128,7 @@
 		return
 	var/list/reagent_ids = get_generated_reagents()
 	var/decl/material/reagent = GET_DECL(reagent_ids[mode])
-	. += SPAN_NOTICE("It is currently producing [reagent.use_name] and has [REAGENT_VOLUME(reagents, reagent)] out of [round(reagents.maximum_volume / length(reagent_ids))] units left.")
+	. += SPAN_NOTICE("It is currently producing [reagent.use_name] and has [REAGENT_VOLUME(reagents, reagent)] out of [round(REAGENT_MAXIMUM_VOLUME(reagents) / length(reagent_ids))] units left.")
 
 /obj/item/chems/borghypo/service
 	name = "cyborg drink synthesizer"

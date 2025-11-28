@@ -86,15 +86,16 @@
 		. += "\The [src] [structure_pronouns.has] been <font color='[paint_color]'>[paint_verb]</font>."
 	if(distance <= 2 && !isnull(get_possible_reagent_transfer_amounts()) && reagents)
 		. += SPAN_NOTICE("It contains:")
-		if(LAZYLEN(reagents.reagent_volumes))
-			for(var/decl/material/reagent as anything in reagents.liquid_volumes)
+		var/reagent_volumes = REAGENT_VOLUMES(reagents)
+		if(LAZYLEN(reagent_volumes))
+			for(var/decl/material/reagent as anything in REAGENT_LIQUID_VOLUMES(reagents))
 				. += SPAN_NOTICE("[LIQUID_VOLUME(reagents, reagent)] unit\s of [reagent.get_reagent_name(reagents, MAT_PHASE_LIQUID)].")
-			for(var/decl/material/reagent as anything in reagents.solid_volumes)
+			for(var/decl/material/reagent as anything in REAGENT_SOLID_VOLUMES(reagents))
 				. += SPAN_NOTICE("[SOLID_VOLUME(reagents, reagent)] unit\s of [reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)].")
 		else
 			. += SPAN_NOTICE("Nothing.")
-		if(reagents.maximum_volume)
-			. += "It may contain up to [reagents.maximum_volume] unit\s."
+		if(REAGENT_MAXIMUM_VOLUME(reagents))
+			. += "It may contain up to [REAGENT_MAXIMUM_VOLUME(reagents)] unit\s."
 
 /obj/structure/get_examine_hints(mob/user, distance, infix, suffix)
 	. = ..()

@@ -40,5 +40,5 @@ var/global/list/_reagent_interactions = list(
 	RETURN_TYPE(/list)
 	if(storage)
 		LAZYADD(., /decl/interaction_handler/storage_open)
-	if(reagents?.maximum_volume)
+	if(REAGENT_MAXIMUM_VOLUME(reagents))
 		LAZYADD(., global._reagent_interactions)

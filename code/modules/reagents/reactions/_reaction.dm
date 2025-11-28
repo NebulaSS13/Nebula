@@ -52,7 +52,7 @@
 /decl/chemical_reaction/proc/process(var/datum/reagents/holder, var/limit)
 	var/data = send_data(holder)
 
-	var/reaction_volume = holder.maximum_volume
+	var/reaction_volume = REAGENT_GET_MAX_VOL(holder)
 	for(var/reactant in required_reagents)
 		var/A = CHEMS_QUANTIZE(REAGENT_VOLUME(holder, reactant) / required_reagents[reactant] / limit)  // How much of this reagent we are allowed to use
 		if(reaction_volume > A)

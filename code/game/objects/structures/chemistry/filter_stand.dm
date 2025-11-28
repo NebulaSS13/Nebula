@@ -84,17 +84,17 @@
 // Pouring directly into the filter via attackby() is not working, so we just dump our reagents into our filter or the turf.
 /obj/structure/filter_stand/on_reagent_change()
 	. = ..()
-	if(reagents?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		return
-	if(filter?.reagents?.maximum_volume)
-		var/taking = min(reagents?.total_volume, REAGENTS_FREE_SPACE(filter.reagents))
+	if(REAGENT_MAXIMUM_VOLUME(filter?.reagents))
+		var/taking = min(REAGENT_TOTAL_VOLUME(reagents), REAGENTS_FREE_SPACE(filter.reagents))
 		if(taking > 0)
 			reagents.trans_to_holder(filter.reagents, taking)
-			if(reagents?.total_volume <= 0)
+			if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 				return
 	var/turf/my_turf = get_turf(src)
 	if(istype(my_turf))
-		reagents.trans_to_turf(my_turf, reagents.total_volume)
+		reagents.trans_to_turf(my_turf, REAGENT_TOTAL_VOLUME(reagents))
 
 /obj/item/chems/filter
 	name = "filter"
@@ -109,7 +109,7 @@
 
 /obj/item/chems/filter/on_reagent_change()
 	. = ..()
-	if(reagents?.total_liquid_volume)
+	if(REAGENT_TOTAL_LIQUID_VOLUME(reagents))
 		if(!is_processing)
 			START_PROCESSING(SSobj, src)
 	else
@@ -117,11 +117,11 @@
 			STOP_PROCESSING(SSobj, src)
 
 /obj/item/chems/filter/Process()
-	if(!reagents?.total_liquid_volume)
+	if(!REAGENT_TOTAL_LIQUID_VOLUME(reagents))
 		return PROCESS_KILL
 
 	var/dumping = 0
-	var/dripping = min(reagents.total_liquid_volume, rand(3,5))
+	var/dripping = min(REAGENT_TOTAL_LIQUID_VOLUME(reagents), rand(3,5))
 	var/obj/structure/filter_stand/stand = loc
 	if(!istype(stand) || stand.filter != src || !stand.loaded?.reagents)
 		dumping = dripping

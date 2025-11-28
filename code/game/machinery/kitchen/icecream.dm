@@ -96,11 +96,11 @@
 	dat += "<b>Chocolate cones:</b> <a href='byond://?src=\ref[src];cone=[CONE_CHOC]'><b>Dispense</b></a> <a href='byond://?src=\ref[src];make=[CONE_CHOC];amount=1'><b>Make</b></a> <a href='byond://?src=\ref[src];make=[CONE_CHOC];amount=5'><b>x5</b></a> [product_types[CONE_CHOC]] cones left. (Ingredients: flour, sugar, coco powder)<br></div>"
 	dat += "<br>"
 	dat += "<b>VAT CONTENT</b><br>"
-	for(var/decl/material/reagent as anything in reagents?.liquid_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_LIQUID_VOLUMES(reagents))
 		dat += "[reagent.get_reagent_name(reagents, MAT_PHASE_LIQUID)]: [LIQUID_VOLUME(reagents, reagent)]"
 		dat += "<A href='byond://?src=\ref[src];disposeI=\ref[reagent]'>Purge</A><BR>"
 
-	for(var/decl/material/reagent as anything in reagents?.solid_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_SOLID_VOLUMES(reagents))
 		dat += "[reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)]: [SOLID_VOLUME(reagents, reagent)]"
 		dat += "<A href='byond://?src=\ref[src];disposeI=\ref[reagent]'>Purge</A><BR>"
 
@@ -120,8 +120,9 @@
 				icecream.add_ice_cream(flavour_name)
 			//	if(beaker)
 			//		beaker.reagents.trans_to(icecream, 10)
-				if(icecream.reagents.total_volume < 10)
-					icecream.add_to_reagents(/decl/material/liquid/nutriment/sugar, 10 - icecream.reagents.total_volume)
+				var/icecream_volume = REAGENT_TOTAL_VOLUME(icecream.reagents)
+				if(icecream_volume < 10)
+					icecream.add_to_reagents(/decl/material/liquid/nutriment/sugar, 10 - icecream_volume)
 			else
 				to_chat(user, "<span class='warning'>There is not enough icecream left!</span>")
 		else

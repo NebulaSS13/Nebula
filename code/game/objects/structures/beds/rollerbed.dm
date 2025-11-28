@@ -24,7 +24,7 @@
 		icon_state = "down"
 	if(beaker?.reagents)
 		var/image/iv = image(icon, "iv[iv_attached]")
-		var/percentage = round((beaker.reagents.total_volume / max(beaker.reagents.maximum_volume, 1)) * 100, 25)
+		var/percentage = round((REAGENT_TOTAL_VOLUME(beaker.reagents) / max(REAGENT_MAXIMUM_VOLUME(beaker.reagents), 1)) * 100, 25)
 		var/image/filling = image(icon, "iv_filling[percentage]")
 		filling.color = beaker.reagents.get_color()
 		iv.overlays += filling
@@ -74,7 +74,7 @@
 	if(SSobj.times_fired % 2)
 		return
 
-	if(beaker.reagents?.total_volume > 0)
+	if(REAGENT_TOTAL_VOLUME(beaker.reagents) > 0)
 		beaker.reagents.trans_to_mob(buckled_mob, beaker.amount_per_transfer_from_this, CHEM_INJECT)
 		queue_icon_update()
 

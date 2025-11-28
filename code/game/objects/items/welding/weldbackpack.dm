@@ -85,14 +85,15 @@
 	if(user.check_intent(I_FLAG_HARM))
 		if(standard_splash_mob(user, O))
 			return TRUE
-		if(reagents && reagents.total_volume)
+		var/total_vol = REAGENT_TOTAL_VOLUME(reagents)
+		if(reagents && total_vol)
 			to_chat(user, SPAN_DANGER("You splash the contents of \the [src] onto \the [O]."))
-			reagents.splash(O, reagents.total_volume)
+			reagents.splash(O, total_vol)
 			return TRUE
 	return ..()
 
 /obj/item/chems/weldpack/populate_reagents()
-	add_to_reagents(/decl/material/liquid/fuel, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/fuel, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/weldpack/Initialize(ml, material_key)
 	if(ispath(welder))
@@ -127,20 +128,20 @@
 		if(!tool.tank)
 			to_chat(user, SPAN_WARNING("\The [tool] has no tank attached!"))
 			return TRUE
-		if(!reagents?.total_volume)
+		if(!REAGENT_TOTAL_VOLUME(reagents))
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 			return TRUE
-		reagents.trans_to_obj(tool.tank, tool.tank.reagents.maximum_volume)
+		reagents.trans_to_obj(tool.tank, REAGENT_MAXIMUM_VOLUME(tool.tank.reagents))
 		to_chat(user, SPAN_NOTICE("You refuel \the [used_item]."))
 		playsound(src, 'sound/effects/refill.ogg', 50, TRUE, -6)
 		return TRUE
 
 	else if(istype(used_item, /obj/item/chems/welder_tank))
-		if(!reagents?.total_volume)
+		if(!REAGENT_TOTAL_VOLUME(reagents))
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 			return TRUE
 		var/obj/item/chems/welder_tank/tank = used_item
-		reagents.trans_to_obj(tank, tank.reagents.maximum_volume)
+		reagents.trans_to_obj(tank, REAGENT_MAXIMUM_VOLUME(tank.reagents))
 		to_chat(user, SPAN_NOTICE("You refuel \the [used_item]."))
 		playsound(src, 'sound/effects/refill.ogg', 50, TRUE, -6)
 		return TRUE
@@ -180,7 +181,7 @@
 
 /obj/item/chems/weldpack/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	. += "[html_icon(src)] [reagents.total_volume] unit\s of fuel left!"
+	. += "[html_icon(src)] [REAGENT_TOTAL_VOLUME(reagents)] unit\s of fuel left!"
 
 /obj/item/chems/weldpack/dropped(mob/user)
 	. = ..()

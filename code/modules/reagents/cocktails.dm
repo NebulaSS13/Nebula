@@ -68,17 +68,17 @@
 	. = length(ratios)
 
 /decl/cocktail/proc/matches(var/obj/item/prop)
-	if(length(ratios) > length(prop.reagents.reagent_volumes))
+	if(length(ratios) > length(REAGENT_VOLUMES(prop.reagents)))
 		return FALSE
 	var/list/check_ratios
 	var/i = 0
 	for(var/rtype in ratios)
 		i++
-		if(!prop.reagents.has_reagent(rtype) || (order_specific && prop.reagents.reagent_volumes[i] != rtype))
+		if(!prop.reagents.has_reagent(rtype) || (order_specific && REAGENT_VOLUME(prop.reagents, i) != rtype))
 			return FALSE
 		if(isnum(ratios[rtype]))
 			LAZYSET(check_ratios, rtype, ratios[rtype])
-	var/effective_volume = prop.reagents.total_volume
+	var/effective_volume = REAGENT_TOTAL_VOLUME(prop.reagents)
 	if(!(/decl/material/solid/ice in ratios))
 		effective_volume -= REAGENT_VOLUME(prop.reagents, /decl/material/solid/ice)
 	for(var/rtype in check_ratios)

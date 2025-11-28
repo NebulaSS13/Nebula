@@ -211,8 +211,8 @@
 	if(weather)
 		. += weather.get_movement_delay(return_air(), travel_dir)
 	// TODO: check user species webbed feet, wearing swimming gear
-	if(!get_supporting_platform() && reagents?.total_volume > FLUID_PUDDLE)
-		. += (reagents.total_volume > FLUID_SHALLOW) ? 6 : 3
+	if(!get_supporting_platform() && REAGENT_TOTAL_VOLUME(reagents) > FLUID_PUDDLE)
+		. += (REAGENT_TOTAL_VOLUME(reagents) > FLUID_SHALLOW) ? 6 : 3
 
 /turf/attack_hand(mob/user)
 
@@ -354,8 +354,8 @@
 		var/mob/mover_mob = mover
 		if(!istype(mover_mob) || (!mover_mob.throwing && !mover_mob.can_overcome_gravity()))
 			var/turf/old_turf  = mover.loc
-			var/old_height     = old_turf.get_physical_height() + old_turf.reagents?.total_volume
-			var/current_height = get_physical_height() + reagents?.total_volume
+			var/old_height     = old_turf.get_physical_height() + REAGENT_TOTAL_VOLUME(old_turf.reagents)
+			var/current_height = get_physical_height() + REAGENT_TOTAL_VOLUME(reagents)
 			if(abs(current_height - old_height) > FLUID_SHALLOW)
 				if(current_height > old_height)
 					return 0

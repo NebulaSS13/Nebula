@@ -42,11 +42,11 @@ var/global/list/chem_implants = list()
 
 /obj/item/implant/chem/attackby(obj/item/used_item, mob/user)
 	if(istype(used_item, /obj/item/chems/syringe))
-		if(reagents.total_volume >= reagents.maximum_volume)
+		if(REAGENT_TOTAL_VOLUME(reagents) >= REAGENT_MAXIMUM_VOLUME(reagents))
 			to_chat(user, SPAN_WARNING("\The [src] is full."))
 		else if(do_after(user, 0.5 SECONDS, src))
 			used_item.reagents.trans_to_obj(src, 5)
-			to_chat(user, SPAN_NOTICE("You inject 5 units of the solution. The syringe now contains [used_item.reagents.total_volume] units."))
+			to_chat(user, SPAN_NOTICE("You inject 5 units of the solution. The syringe now contains [REAGENT_TOTAL_VOLUME(used_item.reagents)] units."))
 		return TRUE
 	return ..()
 
