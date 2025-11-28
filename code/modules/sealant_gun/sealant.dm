@@ -31,6 +31,9 @@
 		to_chat(user, SPAN_DANGER("Hardened globs of metal foam stick to you!"))
 		hardened = TRUE
 
+/obj/item/sealant/blocks_speech_in_mouth(mob/wearer)
+	return TRUE
+
 /obj/item/sealant/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	break_apart(user)
