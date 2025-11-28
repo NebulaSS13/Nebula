@@ -16,7 +16,6 @@
 	dusted_anim = "dust-m"
 	death_message = "lets out a faint chimper as it collapses and stops moving..."
 
-	inherent_verbs = list(/mob/living/proc/ventcrawl)
 	species_hud = /datum/hud_data/monkey
 	butchery_data = /decl/butchery_data/humanoid/monkey
 

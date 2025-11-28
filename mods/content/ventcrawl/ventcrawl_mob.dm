@@ -152,3 +152,10 @@ var/global/list/ventcrawl_machinery = list(
 			client.images -= current_image
 		client.eye = src
 	LAZYCLEARLIST(pipes_shown)
+
+/mob/living/Login()
+	. = ..()
+	//login during ventcrawl
+	if(is_ventcrawling && istype(loc, /obj/machinery/atmospherics)) //attach us back into the pipes
+		remove_ventcrawl()
+		add_ventcrawl(loc)
