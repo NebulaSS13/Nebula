@@ -27,6 +27,7 @@
 	#include "../../mods/content/pheromones/_pheromones.dme"
 	#include "../../mods/content/plant_dissection/_plant_dissection.dme"
 	#include "../../mods/content/psionics/_psionics.dme"
+	#include "../../mods/content/sealant_gun/_sealant_gun.dme"
 	#include "../../mods/content/shackles/_shackles.dme"
 	#include "../../mods/content/standard_jobs/_standard_jobs.dme"
 	#include "../../mods/content/supermatter/_supermatter.dme"

@@ -1,7 +1,7 @@
 /obj/item/sealant_tank
 	name        = "sealant tank"
 	desc        = "A sealed tank used to keep hull sealant foam contained under pressure."
-	icon        = 'icons/obj/sealant_tank.dmi'
+	icon        = 'mods/content/sealant_gun/icons/sealant_tank.dmi'
 	icon_state  = "tank"
 	material    = /decl/material/solid/metal/steel
 	chem_volume = 60

@@ -6,7 +6,7 @@
 
 /obj/structure/sealant_injector
 	name = "sealant tank injector"
-	icon = 'icons/obj/structures/sealant_props.dmi'
+	icon = 'mods/content/sealant_gun/icons/sealant_props.dmi'
 	icon_state = "injector"
 	density = TRUE
 	anchored = TRUE
