@@ -60,6 +60,8 @@
 	#include "../../mods/species/utility_frames/_utility_frames.dme"
 	#include "../../mods/species/vox/_vox.dme"
 
+	#include "../../mods/utility/prometheus_metrics/_prometheus_metrics.dme"
+
 	#define USING_MAP_DATUM /datum/map/modpack_testing
 
 #elif !defined(MAP_OVERRIDE)
