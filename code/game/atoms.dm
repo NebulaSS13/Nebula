@@ -1041,6 +1041,9 @@
 /atom/proc/is_watertight()
 	return !ATOM_IS_OPEN_CONTAINER(src)
 
+/atom/proc/reaction_can_overflow(decl/chemical_reaction/reaction)
+	return ATOM_IS_OPEN_CONTAINER(src)
+
 /atom/proc/can_drink_from(mob/user)
 	return ATOM_IS_OPEN_CONTAINER(src) && REAGENT_TOTAL_VOLUME(reagents) && user.check_has_mouth()
 

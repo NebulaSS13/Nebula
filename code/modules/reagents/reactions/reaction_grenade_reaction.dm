@@ -132,16 +132,15 @@
 /decl/chemical_reaction/grenade_reaction/metalfoam/on_reaction(datum/reagents/holder, created_volume, list/reaction_data)
 	..()
 	var/atom/location = holder.get_reaction_loc(chemical_reaction_flags)
-	if(location)
-		if(istype(location, /obj/item/sealant_tank) && REAGENT_MAXIMUM_VOLUME(location.reagents))
-			location.reagents.add_reagent(/decl/material/liquid/foam, created_volume)
-			return
-		location = get_turf(location)
-		if(location)
-			location.visible_message(SPAN_WARNING("The solution spews out a metallic foam!"), range = 5)
-			var/datum/effect/effect/system/foam_spread/s = new()
-			s.set_up(created_volume, location, holder, 1)
-			s.start()
+	// This will overflow the container if it's open and create it in the turf
+	if(isturf(location))
+		location.visible_message(SPAN_WARNING("The solution spews out a metallic foam!"), range = 5)
+		var/datum/effect/effect/system/foam_spread/s = new()
+		s.set_up(created_volume, location, holder, 1)
+		s.start()
+	// We failed to overflow the container, try to add it as a reagent
+	else if(location && REAGENT_MAXIMUM_VOLUME(location.reagents))
+		location.reagents.add_reagent(/decl/material/liquid/foam, created_volume)
 
 /decl/chemical_reaction/grenade_reaction/ironfoam
 	name = "Iron Foam"
@@ -152,9 +151,13 @@
 
 /decl/chemical_reaction/grenade_reaction/ironfoam/on_reaction(datum/reagents/holder, created_volume, list/reaction_data)
 	..()
-	var/turf/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
-	if(location)
+	var/atom/location = holder.get_reaction_loc(chemical_reaction_flags)
+	// This will overflow the container if it's open and create it in the turf
+	if(isturf(location))
 		location.visible_message(SPAN_WARNING("The solution spews out a metallic foam!"), range = 5)
 		var/datum/effect/effect/system/foam_spread/s = new()
 		s.set_up(created_volume, location, holder, 2)
 		s.start()
+	// We failed to overflow the container, try to add it as a reagent
+	else if(location && REAGENT_MAXIMUM_VOLUME(location.reagents))
+		location.reagents.add_reagent(/decl/material/liquid/foam, created_volume)

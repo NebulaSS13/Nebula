@@ -18,6 +18,9 @@
 	QDEL_NULL_LIST(beakers)
 	. = ..()
 
+/obj/item/grenade/chem_grenade/reaction_can_overflow(decl/chemical_reaction/reaction)
+	return TRUE // will always overflow despite not being open
+
 /obj/item/grenade/chem_grenade/attack_self(mob/user)
 	if(!stage || stage==1)
 		if(detonator)

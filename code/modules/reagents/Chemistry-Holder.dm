@@ -110,7 +110,7 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	return clone
 
 /datum/reagents/proc/get_reaction_loc(chemical_reaction_flags)
-	if((chemical_reaction_flags & CHEM_REACTION_FLAG_OVERFLOW_CONTAINER) && ATOM_IS_OPEN_CONTAINER(my_atom))
+	if((chemical_reaction_flags & CHEM_REACTION_FLAG_OVERFLOW_CONTAINER) && my_atom.reaction_can_overflow())
 		return get_turf(my_atom)
 	return my_atom
 
