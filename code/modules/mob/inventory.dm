@@ -389,6 +389,11 @@
 	for(var/thing in get_held_items())
 		try_unequip(thing, drop_loc)
 
+/mob/proc/drop_equipped_items(drop_loc = loc, include_carried = FALSE)
+	SHOULD_CALL_PARENT(TRUE)
+	for(var/thing in get_equipped_items(include_carried))
+		try_unequip(thing, drop_loc)
+
 //Returns the item equipped to the specified slot, if any.
 /mob/proc/get_equipped_item(var/slot)
 	SHOULD_CALL_PARENT(TRUE)

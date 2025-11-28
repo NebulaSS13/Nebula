@@ -15,8 +15,8 @@
 /mob/living/check_mob_can_emote(var/emote_type)
 	return ..() && !(HAS_STATUS(src, STAT_SILENCE) && emote_type == AUDIBLE_MESSAGE)
 
-/mob/living/brain/check_mob_can_emote(var/emote_type)
-	return ..() && istype(get_container(), /obj/item/organ/internal/brain_interface)
+/mob/living/brain/check_mob_can_emote(var/emote_type, allow_brain_emote = FALSE)
+	return ..() && allow_brain_emote
 
 #define EMOTE_REFRESH_SPAM_COOLDOWN (5 SECONDS)
 /mob/proc/emote(var/act, var/m_type, var/message)

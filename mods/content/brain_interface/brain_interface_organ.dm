@@ -5,7 +5,7 @@
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
 	origin_tech = @'{"biotech":3}'
-	icon = 'icons/obj/items/brain_interface_organic.dmi'
+	icon = 'mods/content/brain_interface/icons/brain_interface_organic.dmi'
 	icon_state = ICON_STATE_WORLD
 	req_access = list(access_robotics)
 	material = /decl/material/solid/metal/steel

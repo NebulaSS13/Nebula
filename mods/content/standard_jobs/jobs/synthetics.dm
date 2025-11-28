@@ -70,7 +70,7 @@
 
 /datum/job/standard/robot/handle_variant_join(var/mob/living/human/H, var/alt_title)
 	if(H)
-		return H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
+		return H.Robotize(alt_title || title)
 
 /datum/job/standard/robot/equip_job(var/mob/living/human/H)
 	return !!H

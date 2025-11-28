@@ -32,6 +32,9 @@
 	SSstatistics.add_field("cyborg_frames_built",1)
 	return TRUE
 
+/obj/item/robot_parts/robot_suit/proc/is_valid_processor(obj/item/used_item)
+	return istype(used_item, /obj/item/organ/internal/brain/robotic)
+
 /obj/item/robot_parts/robot_suit/attackby(obj/item/used_item, mob/user)
 
 	// Uninstall a robotic part.
@@ -61,28 +64,28 @@
 		return TRUE
 
 	// Install a brain.
-	else if(istype(used_item, /obj/item/organ/internal/brain_interface))
+	else if(istype(used_item, /obj/item/organ/internal) && is_valid_processor(used_item))
+		var/obj/item/organ/internal/processor = used_item
 
 		if(!isturf(loc))
-			to_chat(user, SPAN_WARNING("You can't put \the [used_item] in without the frame being on the ground."))
+			to_chat(user, SPAN_WARNING("You can't put \the [processor] in without the frame being on the ground."))
 			return TRUE
 
 		if(!check_completion())
 			to_chat(user, SPAN_WARNING("The frame is not ready for the central processor to be installed."))
 			return TRUE
 
-		var/obj/item/organ/internal/brain_interface/M = used_item
-		var/mob/living/brainmob = M?.get_brainmob()
+		var/mob/living/brainmob = processor.get_brainmob()
 		if(!brainmob)
-			to_chat(user, SPAN_WARNING("Sticking an empty [used_item.name] into the frame would sort of defeat the purpose."))
+			to_chat(user, SPAN_WARNING("Sticking an empty [processor.name] into the frame would sort of defeat the purpose."))
 			return TRUE
 
 		if(jobban_isbanned(brainmob, ASSIGNMENT_ROBOT))
-			to_chat(user, SPAN_WARNING("\The [used_item] does not seem to fit."))
+			to_chat(user, SPAN_WARNING("\The [processor] does not seem to fit."))
 			return TRUE
 
 		if(brainmob.stat == DEAD)
-			to_chat(user, SPAN_WARNING("Sticking a dead [used_item.name] into the frame would sort of defeat the purpose."))
+			to_chat(user, SPAN_WARNING("Sticking a dead [processor.name] into the frame would sort of defeat the purpose."))
 			return TRUE
 
 		var/ghost_can_reenter = 0
@@ -95,10 +98,10 @@
 			else
 				ghost_can_reenter = 1
 		if(!ghost_can_reenter)
-			to_chat(user, SPAN_WARNING("\The [used_item] is completely unresponsive; there's no point."))
+			to_chat(user, SPAN_WARNING("\The [processor] is completely unresponsive; there's no point."))
 			return TRUE
 
-		if(!user.try_unequip(used_item))
+		if(!user.try_unequip(processor))
 			return TRUE
 
 		SSstatistics.add_field("cyborg_frames_built",1)
@@ -106,7 +109,7 @@
 		if(!O)
 			return TRUE
 
-		O.central_processor = used_item
+		O.central_processor = processor
 		O.set_invisibility(INVISIBILITY_NONE)
 		O.custom_name = created_name
 		O.updatename("Default")
@@ -120,7 +123,7 @@
 
 		var/obj/item/robot_parts/chest/chest = parts[BP_CHEST]
 		chest.cell.forceMove(O)
-		used_item.forceMove(O) //Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
+		processor.forceMove(O) //Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
 
 		// Since we "magically" installed a cell, we also have to update the correct component.
 		if(O.cell)

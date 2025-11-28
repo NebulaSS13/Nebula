@@ -7,6 +7,7 @@
 	#include "../../mods/content/beekeeping/_beekeeping.dme"
 	#include "../../mods/content/bigpharma/_bigpharma.dme"
 	#include "../../mods/content/blob/_blob.dme"
+	#include "../../mods/content/brain_interface/_brain_interface.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/government/_government.dme"
 	#include "../../mods/content/integrated_electronics/_integrated_electronics.dme"

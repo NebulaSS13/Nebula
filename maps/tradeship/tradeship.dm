@@ -20,6 +20,7 @@
 	#include "../../mods/content/beekeeping/_beekeeping.dme"
 	#include "../../mods/content/bigpharma/_bigpharma.dme"
 	#include "../../mods/content/blob/_blob.dme"
+	#include "../../mods/content/brain_interface/_brain_interface.dme"
 	#include "../../mods/content/breath_holding/_breath_holding.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/dungeon_loot/_dungeon_loot.dme"
