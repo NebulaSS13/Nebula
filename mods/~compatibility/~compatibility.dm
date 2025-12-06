@@ -34,3 +34,7 @@
 #ifdef MODPACK_DRAKES
 #include "patches/drakes.dm"
 #endif
+
+#ifdef CONTENT_PACK_VENTCRAWL
+#include "patches/ventcrawl.dm"
+#endif

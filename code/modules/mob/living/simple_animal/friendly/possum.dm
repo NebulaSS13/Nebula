@@ -97,7 +97,6 @@
 
 /mob/living/simple_animal/opossum/Initialize()
 	. = ..()
-	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
 /mob/living/simple_animal/opossum/poppy

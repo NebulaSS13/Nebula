@@ -88,7 +88,6 @@
 	. = ..()
 
 	add_language(/decl/language/corticalborer)
-	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
 	generation = gen

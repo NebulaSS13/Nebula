@@ -67,7 +67,6 @@
 	reagents = new /datum/reagents/metabolism(240, src, CHEM_TOUCH)
 	render_target = "slime_\ref[src]"
 
-	verbs += /mob/living/proc/ventcrawl
 	slime_type = _stype
 
 	if(!ispath(slime_type, /decl/slime_colour))
@@ -321,12 +320,6 @@
 /mob/living/slime/mind_initialize()
 	..()
 	mind.assigned_role = "slime"
-
-/mob/living/slime/can_ventcrawl()
-	if(feeding_on)
-		to_chat(src, SPAN_WARNING("You cannot ventcrawl while feeding."))
-		return FALSE
-	. = ..()
 
 /mob/living/slime/handle_airflow(differential, list/connecting_turfs, repelled)
 	return FALSE
