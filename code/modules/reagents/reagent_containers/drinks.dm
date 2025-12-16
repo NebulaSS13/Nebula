@@ -67,28 +67,29 @@
 	. = ..()
 	if(distance > 1)
 		return
-	if(!reagents || reagents.total_volume == 0)
+	var/total_volume = REAGENT_TOTAL_VOLUME(reagents)
+	var/max_volume   = REAGENT_MAXIMUM_VOLUME(reagents)
+	if(total_volume <= 0)
 		. += SPAN_NOTICE("\The [src] is empty!")
-	else if (reagents.total_volume <= reagents.maximum_volume * 0.25)
+	else if (total_volume <= max_volume * 0.25)
 		. += SPAN_NOTICE("\The [src] is almost empty!")
-	else if (reagents.total_volume <= reagents.maximum_volume * 0.66)
+	else if (total_volume <= max_volume * 0.66)
 		. += SPAN_NOTICE("\The [src] is half full!")
-	else if (reagents.total_volume <= reagents.maximum_volume * 0.90)
+	else if (total_volume <= max_volume * 0.90)
 		. += SPAN_NOTICE("\The [src] is almost full!")
 	else
 		. += SPAN_NOTICE("\The [src] is full!")
 
 /obj/item/chems/drinks/proc/get_filling_state()
-	var/percent = round((reagents.total_volume / reagents.maximum_volume) * 100)
+	var/percent = round((REAGENT_TOTAL_VOLUME(reagents) / REAGENT_MAXIMUM_VOLUME(reagents)) * 100)
 	for(var/k in cached_json_decode(filling_states))
 		if(percent <= k)
 			return k
 
 /obj/item/chems/drinks/on_update_icon()
 	. = ..()
-	if(LAZYLEN(reagents?.reagent_volumes) && filling_states)
+	if(REAGENT_TOTAL_VOLUME(reagents) && filling_states)
 		add_overlay(overlay_image(icon, "[base_icon][get_filling_state()]", reagents.get_color()))
-
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Drinks. END
@@ -120,7 +121,7 @@
 	center_of_mass = @'{"x":16,"y":9}'
 
 /obj/item/chems/drinks/milk/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/milk, reagents.maximum_volume, data = list(DATA_MILK_DONOR = "cow"))
+	add_to_reagents(/decl/material/liquid/drink/milk, REAGENT_MAXIMUM_VOLUME(reagents), data = list(DATA_MILK_DONOR = "cow"))
 
 /obj/item/chems/drinks/soymilk
 	name = "soymilk carton"
@@ -130,7 +131,7 @@
 	center_of_mass = @'{"x":16,"y":9}'
 
 /obj/item/chems/drinks/soymilk/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/milk/soymilk, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/milk/soymilk, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/milk/smallcarton
 	name = "small milk carton"
@@ -138,14 +139,14 @@
 	icon_state = "mini-milk"
 
 /obj/item/chems/drinks/milk/smallcarton/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/milk, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/milk, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/milk/smallcarton/chocolate
 	name = "small chocolate milk carton"
 	desc = "It's milk! This one is in delicious chocolate flavour."
 
 /obj/item/chems/drinks/milk/smallcarton/chocolate/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/milk/chocolate, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/milk/chocolate, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/coffee
 	name = "cup of coffee"
@@ -154,7 +155,7 @@
 	center_of_mass = @'{"x":15,"y":10}'
 
 /obj/item/chems/drinks/coffee/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/coffee, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/coffee, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/ice
 	name = "cup of ice"
@@ -163,7 +164,7 @@
 	center_of_mass = @'{"x":15,"y":10}'
 
 /obj/item/chems/drinks/ice/populate_reagents()
-	add_to_reagents(/decl/material/solid/ice, reagents.maximum_volume)
+	add_to_reagents(/decl/material/solid/ice, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/h_chocolate
 	name = "cup of hot cocoa"
@@ -173,7 +174,7 @@
 	center_of_mass = @'{"x":15,"y":13}'
 
 /obj/item/chems/drinks/h_chocolate/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/hot_coco, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/hot_coco, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/dry_ramen
 	name = "cup ramen"
@@ -183,7 +184,7 @@
 	center_of_mass = @'{"x":16,"y":11}'
 
 /obj/item/chems/drinks/dry_ramen/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/dry_ramen, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/dry_ramen, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/sillycup
 	name = "paper cup"
@@ -195,7 +196,7 @@
 
 /obj/item/chems/drinks/sillycup/on_update_icon()
 	. = ..()
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		icon_state = "water_cup"
 	else
 		icon_state = "water_cup_e"
@@ -283,19 +284,19 @@
 	desc = "A tall plastic cup of hot black tea."
 
 /obj/item/chems/drinks/tea/black/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/tea/black, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/tea/black, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/tea/green
 	name = "cup of green tea"
 	desc = "A tall plastic cup of hot green tea."
 
 /obj/item/chems/drinks/tea/green/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/tea/green, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/tea/green, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/tea/chai
 	name = "cup of chai tea"
 	desc = "A tall plastic cup of hot chai tea."
 
 /obj/item/chems/drinks/tea/chai/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/tea/chai, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/tea/chai, REAGENT_MAXIMUM_VOLUME(reagents))
 

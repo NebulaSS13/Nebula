@@ -40,19 +40,21 @@
 	if(use_power == POWER_USE_IDLE)
 		return
 
-	// Produce materials.
 	var/turf/T = get_turf(src)
-	if(istype(T) && T.reagents?.total_volume)
+	if(!istype(T))
+		return
 
-		// Drink more water!
-		var/consuming = min(T.reagents.total_volume, fluid_consumption_per_tick)
-		T.remove_any_reagents(consuming)
-		T.show_bubbles()
+	var/local_fluid = REAGENT_VOLUME(T.reagents, /decl/material/liquid/water) // TODO: make this some list on the material?
+	if(local_fluid <= 0)
+		return
 
-		// Gas production.
-		var/datum/gas_mixture/produced = new
-		var/gen_amt = min(1, (gas_generated_per_tick * (consuming/fluid_consumption_per_tick)))
-		produced.adjust_gas(/decl/material/gas/oxygen,  gen_amt)
-		produced.adjust_gas(/decl/material/gas/hydrogen, gen_amt * 2)
-		produced.temperature = T20C //todo water temperature
-		air_contents.merge(produced)
+	var/consuming = min(REAGENT_TOTAL_VOLUME(T.reagents), fluid_consumption_per_tick)
+	T.remove_any_reagents(consuming)
+	T.show_bubbles()
+
+	var/datum/gas_mixture/produced = new
+	var/gen_amt = min(1, (gas_generated_per_tick * (consuming/fluid_consumption_per_tick)))
+	produced.adjust_gas(/decl/material/gas/oxygen,  gen_amt)
+	produced.adjust_gas(/decl/material/gas/hydrogen, gen_amt * 2)
+	produced.temperature = T20C //todo water temperature
+	air_contents.merge(produced)

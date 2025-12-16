@@ -366,8 +366,8 @@
 	data["fuel_type"] = capitalize(sheet_name)
 
 	data["uses_coolant"] = !!reagents
-	data["coolant_stored"] = reagents?.total_volume
-	data["coolant_capacity"] = reagents?.maximum_volume
+	data["coolant_stored"] = REAGENT_TOTAL_VOLUME(reagents)
+	data["coolant_capacity"] = REAGENT_MAXIMUM_VOLUME(reagents)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -461,7 +461,7 @@
 
 /obj/machinery/port_gen/pacman/super/potato/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	. += "Auxilary tank shows [reagents.total_volume]u of liquid in it."
+	. += "Auxilary tank shows [REAGENT_TOTAL_VOLUME(reagents)]u of liquid in it."
 
 /obj/machinery/port_gen/pacman/super/potato/UseFuel()
 	if(reagents.has_reagent(/decl/material/liquid/alcohol/vodka))

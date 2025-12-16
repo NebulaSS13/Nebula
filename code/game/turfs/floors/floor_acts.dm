@@ -27,7 +27,7 @@
 
 /turf/floor/fluid_act(var/datum/reagents/fluids)
 	. = ..()
-	if(!QDELETED(fluids) && fluids.total_volume)
+	if(!QDELETED(fluids) && REAGENT_TOTAL_VOLUME(fluids))
 		for(var/decl/flooring/flooring in get_all_flooring())
 			if(flooring.fluid_act(src, fluids))
 				return

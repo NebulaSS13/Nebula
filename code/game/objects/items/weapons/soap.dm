@@ -68,7 +68,7 @@
 		wet()
 		return TRUE
 
-	if(reagents?.total_volume < 1)
+	if(REAGENT_TOTAL_VOLUME(reagents) < 1)
 		to_chat(user, SPAN_WARNING("\The [src] is too dry to clean \the [target]."))
 		return TRUE
 
@@ -77,7 +77,7 @@
 		if(!isturf(target))
 			return ..()
 		user.visible_message(SPAN_NOTICE("\The [user] starts scrubbing \the [target]."))
-		if(!do_after(user, 8 SECONDS, target) && reagents?.total_volume)
+		if(!do_after(user, 8 SECONDS, target) && REAGENT_TOTAL_VOLUME(reagents))
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You scrub \the [target] clean."))
 	else if(istype(target,/obj/effect/decal/cleanable))
@@ -97,11 +97,11 @@
 		if(user.get_target_zone() == BP_MOUTH && victim.check_has_mouth())
 			user.visible_message(SPAN_DANGER("\The [user] washes \the [target]'s mouth out with soap!"))
 			if(reagents)
-				reagents.trans_to_mob(target, reagents.total_volume / 2, CHEM_INGEST)
+				reagents.trans_to_mob(target, REAGENT_TOTAL_VOLUME(reagents) / 2, CHEM_INGEST)
 		else
 			user.visible_message(SPAN_NOTICE("\The [user] cleans \the [target]."))
 			if(reagents)
-				reagents.trans_to(target, reagents.total_volume / 8)
+				reagents.trans_to(target, REAGENT_TOTAL_VOLUME(reagents) / 8)
 			target.clean()
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //prevent spam
 		return TRUE

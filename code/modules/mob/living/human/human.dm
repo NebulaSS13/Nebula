@@ -302,7 +302,7 @@
 	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH, /obj/item/organ/internal/stomach)
 	var/nothing_to_puke = FALSE
 	if(should_have_organ(BP_STOMACH))
-		if(!stomach || (stomach.ingested.total_volume <= 0 && stomach.contents.len == 0))
+		if(!stomach || (REAGENT_TOTAL_VOLUME(stomach.ingested) <= 0 && stomach.contents.len == 0))
 			nothing_to_puke = TRUE
 	else if(!(locate(/mob) in contents))
 		nothing_to_puke = TRUE
@@ -328,8 +328,8 @@
 	var/turf/location = loc
 	if(istype(location) && location.simulated)
 		var/obj/effect/decal/cleanable/vomit/splat = new /obj/effect/decal/cleanable/vomit(location)
-		if(stomach.ingested.total_volume)
-			stomach.ingested.trans_to_obj(splat, min(15, stomach.ingested.total_volume))
+		if(REAGENT_TOTAL_VOLUME(stomach.ingested))
+			stomach.ingested.trans_to_obj(splat, min(15, REAGENT_TOTAL_VOLUME(stomach.ingested)))
 		handle_additional_vomit_reagents(splat)
 		splat.update_icon()
 
@@ -880,7 +880,7 @@
 
 /mob/living/human/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(!QDELETED(src) && fluids?.total_volume)
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids))
 		species.fluid_act(src, fluids)
 
 /mob/living/human/proc/set_background_value(var/cat_type, var/decl/background_detail/_background, var/defer_language_update)

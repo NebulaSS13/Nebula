@@ -36,8 +36,8 @@
 /obj/item/chems/pill/populate_reagents()
 	SHOULD_CALL_PARENT(TRUE)
 	. = ..()
-	if(reagents?.total_volume > 0 && autolabel && !label_text) // don't override preset labels
-		label_text = "[reagents.get_primary_reagent_name()], [reagents.total_volume]u"
+	if(REAGENT_TOTAL_VOLUME(reagents) > 0 && autolabel && !label_text) // don't override preset labels
+		label_text = "[reagents.get_primary_reagent_name()], [REAGENT_TOTAL_VOLUME(reagents)]u"
 
 /obj/item/chems/pill/on_update_icon()
 	. = ..()
@@ -55,13 +55,13 @@
 
 /obj/item/chems/pill/afterattack(obj/target, mob/user, proximity)
 	if(proximity && ATOM_IS_OPEN_CONTAINER(target) && target.reagents)
-		if(!target.reagents.total_volume)
+		if(!REAGENT_TOTAL_VOLUME(target.reagents))
 			to_chat(user, SPAN_WARNING("\The [target] is empty. You can't dissolve \the [src] in it."))
 			return
 		to_chat(user, SPAN_NOTICE("You dissolve \the [src] in \the [target]."))
 		user.visible_message(SPAN_NOTICE("\The [user] puts something in \the [target]."), range = 2)
-		admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [REAGENT_LIST(src)]")
-		reagents.trans_to(target, reagents.total_volume)
+		admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [REAGENT_LIST(reagents)]")
+		reagents.trans_to(target, REAGENT_TOTAL_VOLUME(reagents))
 		qdel(src)
 		return
 	return ..()
@@ -77,7 +77,7 @@
 	chem_volume = 50
 
 /obj/item/chems/pill/bromide/populate_reagents()
-	add_to_reagents(/decl/material/liquid/bromide, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/bromide, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 /obj/item/chems/pill/cyanide
@@ -88,7 +88,7 @@
 	autolabel = FALSE
 
 /obj/item/chems/pill/cyanide/populate_reagents()
-	add_to_reagents(/decl/material/liquid/cyanide, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/cyanide, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 /obj/item/chems/pill/adminordrazine

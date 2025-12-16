@@ -193,7 +193,7 @@ var/global/list/_test_storage_items = list()
 		if(!M.try_unequip(inserting))
 			return FALSE
 
-	if(holder.reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(holder.reagents))
 		inserting.fluid_act(holder.reagents)
 		if(QDELETED(inserting))
 			return FALSE

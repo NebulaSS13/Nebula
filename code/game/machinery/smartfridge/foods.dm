@@ -11,4 +11,4 @@
 		/obj/item/chems/glass/bowl,
 		/obj/item/chems/glass/handmade/bowl
 	)
-	return istype(O) && O.reagents?.total_volume && is_type_in_list(O, _food_types)
+	return istype(O) && REAGENT_TOTAL_VOLUME(O.reagents) && is_type_in_list(O, _food_types)

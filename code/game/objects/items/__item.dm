@@ -414,7 +414,7 @@
 	if(drying_wetness > 0 && drying_wetness != initial(drying_wetness))
 		desc_comp += "\The [src] is [get_dryness_text()]."
 
-	if(coating?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(coating))
 		desc_comp += "It is covered in [coating.get_coated_name()]." // It is covered in dilute oily slimy bloody mud.
 
 	if(check_rights(R_DEBUG, 0, user))
@@ -1057,14 +1057,14 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 	if(!coating)
 		return
 	coating.remove_any(amount)
-	if(coating.total_volume <= MINIMUM_CHEMICAL_VOLUME)
+	if(REAGENT_TOTAL_VOLUME(coating) <= MINIMUM_CHEMICAL_VOLUME)
 		clean(FALSE)
 
 /obj/item/proc/transfer_coating_to(atom/target, amount = 1, multiplier = 1, copy = 0, defer_update = FALSE, transferred_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID))
 	if(!coating)
 		return
 	coating.trans_to(target, amount, multiplier)
-	if(coating.total_volume <= MINIMUM_CHEMICAL_VOLUME)
+	if(REAGENT_TOTAL_VOLUME(coating) <= MINIMUM_CHEMICAL_VOLUME)
 		clean(FALSE)
 
 /obj/item/clean(clean_forensics=TRUE)
@@ -1211,9 +1211,9 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 		var/decl/material/bait_mat = GET_DECL(mat)
 		if(bait_mat.fishing_bait_value)
 			. += MATERIAL_UNITS_TO_REAGENTS_UNITS(matter[mat]) * bait_mat.fishing_bait_value * BAIT_VALUE_CONSTANT
-	for(var/decl/material/reagent as anything in reagents?.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		if(reagent.fishing_bait_value)
-			. += reagents.reagent_volumes[reagent] * reagent.fishing_bait_value * BAIT_VALUE_CONSTANT
+			. += REAGENT_VOLUME(reagents, reagent) * reagent.fishing_bait_value * BAIT_VALUE_CONSTANT
 #undef BAIT_VALUE_CONSTANT
 
 /obj/item/proc/get_storage_cost()
@@ -1277,7 +1277,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /// @returns:
 /// - reagent_overlay as /image|null - the overlay image representing the reagents in this object
 /obj/item/proc/get_reagents_overlay(state_prefix)
-	if(reagents?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		return
 	var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
 	if(!primary_reagent)
@@ -1292,7 +1292,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 	if(!reagents_state || !check_state_in_icon(reagents_state, icon))
 		return
 	var/image/reagent_overlay = overlay_image(icon, reagents_state, reagents.get_color(), RESET_COLOR | RESET_ALPHA)
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		if(!reagent.reagent_overlay)
 			continue
 		var/modified_reagent_overlay = state_prefix ? "[state_prefix]_[reagent.reagent_overlay]" : reagent.reagent_overlay
@@ -1304,7 +1304,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /obj/item/on_reagent_change()
 	. = ..()
 	// You can't put liquids in clay/sand/dirt vessels, sorry.
-	if(reagents?.total_liquid_volume > 0 && material && material.hardness <= MAT_VALUE_MALLEABLE && !QDELETED(src))
+	if(REAGENT_TOTAL_LIQUID_VOLUME(reagents) > 0 && material && material.hardness <= MAT_VALUE_MALLEABLE && !QDELETED(src))
 		visible_message(SPAN_DANGER("\The [src] falls apart!"))
 		squash_item()
 		if(!QDELETED(src))
@@ -1314,7 +1314,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 	return null
 
 /obj/item/get_examine_prefix()
-	if(coating?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(coating))
 		var/coating_string = coating.get_coated_adjectives() // component coloring is handled in here
 		if(get_config_value(/decl/config/enum/colored_coating_names) == CONFIG_COATING_COLOR_MIXTURE)
 			coating_string = FONT_COLORED(coating.get_color(), coating_string)

@@ -34,15 +34,16 @@
 
 			//each step splash 1/5 of the reagents on non-mobs
 			//could determine the # of steps until target, but that would be complicated
+			// TODO: fix this logic so it isn't using an increasingly smaller amount each iteration.
 			for(var/atom/A in splash_others)
-				reagents.splash(A, (reagents.total_volume/step_count)/splash_others.len)
+				reagents.splash(A, (REAGENT_TOTAL_VOLUME(reagents)/step_count)/splash_others.len)
 			for(var/mob/living/M in splash_mobs)
-				reagents.splash(M, reagents.total_volume/splash_mobs.len)
-			if(reagents.total_volume < 1)
+				reagents.splash(M, REAGENT_TOTAL_VOLUME(reagents)/splash_mobs.len)
+			if(REAGENT_TOTAL_VOLUME(reagents) < 1)
 				break
 			if(T == get_turf(target))
 				for(var/atom/A in splash_others)
-					reagents.splash(A, reagents.total_volume/splash_others.len) //splash anything left
+					reagents.splash(A, REAGENT_TOTAL_VOLUME(reagents)/splash_others.len) //splash anything left
 				break
 
 		sleep(delay)

@@ -64,8 +64,8 @@
 
 /decl/human_examination/contact_reagents/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
 	var/datum/reagents/touching_reagents = source.get_contact_reagents()
-	if(touching_reagents?.total_volume >= 1)
-		var/saturation = touching_reagents.total_volume / touching_reagents.maximum_volume
+	if(REAGENT_TOTAL_VOLUME(touching_reagents) >= 1)
+		var/saturation = REAGENT_TOTAL_VOLUME(touching_reagents) / REAGENT_MAXIMUM_VOLUME(touching_reagents)
 		if(saturation > 0.9)
 			. += "[pronouns.He] [pronouns.is] completely saturated."
 		else if(saturation > 0.6)

@@ -14,7 +14,7 @@
 	uid             = "floor_mud"
 
 /decl/flooring/mud/fire_act(turf/floor/target, datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(!target.reagents?.total_volume)
+	if(!REAGENT_TOTAL_VOLUME(target.reagents))
 		if(target.get_topmost_flooring() == src)
 			target.set_flooring(/decl/flooring/dry_mud)
 		else if(target.get_base_flooring() == src)

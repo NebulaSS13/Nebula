@@ -519,7 +519,7 @@
 		victim = M
 	if(!victim)
 		return fizzle(user)
-	if(victim.vessel.total_volume < 20)
+	if(REAGENT_TOTAL_VOLUME(victim.vessel) < 20)
 		to_chat(user, SPAN_WARNING("This body has no blood in it."))
 		return fizzle(user)
 	victim.vessel.remove_any(20)
@@ -534,7 +534,7 @@
 	var/list/statuses = list()
 	var/charges = 20
 	var/use
-	use = min(charges, user.species.blood_volume - user.vessel.total_volume)
+	use = min(charges, user.species.blood_volume - REAGENT_TOTAL_VOLUME(user.vessel))
 	if(use > 0)
 		user.adjust_blood(use)
 		charges -= use

@@ -70,7 +70,7 @@
 	desc = "A small cardboard juicebox with a cartoon apple on it."
 
 /obj/item/chems/drinks/juicebox/apple/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/apple, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/apple, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/juicebox/apple/Initialize()
 	. = ..()
@@ -81,7 +81,7 @@
 	desc = "A small cardboard juicebox with a cartoon orange on it."
 
 /obj/item/chems/drinks/juicebox/orange/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/orange, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/orange, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/juicebox/orange/Initialize()
 	. = ..()
@@ -92,7 +92,7 @@
 	desc = "A small cardboard juicebox with some cartoon grapes on it."
 
 /obj/item/chems/drinks/juicebox/grape/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/grape, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/grape, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/juicebox/grape/Initialize()
 	. = ..()
@@ -114,7 +114,7 @@
 	var/decl/material/J = pick(drinktypes)
 	add_to_reagents(J, 20)
 	add_to_reagents(pick(drinktypes - J), 5)
-	return reagents.reagent_volumes
+	return REAGENT_VOLUMES(reagents)
 
 /obj/item/chems/drinks/juicebox/sensible_random/populate_reagents()
 	var/list/chosen_reagents = juice_it()

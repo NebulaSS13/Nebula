@@ -92,7 +92,7 @@ var/global/list/hygiene_props = list()
 				visible_message("\The [src] gurgles and overflows!")
 				next_gurgle = world.time + 80
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
-			var/adding = min(flood_amt-T?.reagents?.total_volume, rand(30,50)*clogged)
+			var/adding = min(flood_amt - REAGENT_TOTAL_VOLUME(T?.reagents), rand(30,50)*clogged)
 			if(adding > 0)
 				T.add_to_reagents(/decl/material/liquid/water, adding)
 
@@ -336,7 +336,7 @@ var/global/list/hygiene_props = list()
 		add_to_reagents(/decl/material/liquid/water, REAGENTS_FREE_SPACE(reagents))
 		if(world.time >= next_wash)
 			next_wash = world.time + (10 SECONDS)
-			reagents.splash(get_turf(src), reagents.total_volume, max_spill = 0)
+			reagents.splash(get_turf(src), REAGENT_TOTAL_VOLUME(reagents), max_spill = 0)
 
 /obj/structure/hygiene/shower/proc/process_heat(mob/living/M)
 	if(!on || !istype(M))
@@ -370,7 +370,7 @@ var/global/list/hygiene_props = list()
 	. = ..()
 	if(!. && isitem(dropping) && ATOM_IS_OPEN_CONTAINER(dropping))
 		var/obj/item/thing = dropping
-		if(thing.reagents?.total_volume <= 0)
+		if(REAGENT_TOTAL_VOLUME(thing.reagents) <= 0)
 			to_chat(usr, SPAN_WARNING("\The [thing] is empty."))
 		else
 			visible_message(SPAN_NOTICE("\The [user] tips the contents of \the [thing] into \the [src]."))

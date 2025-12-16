@@ -45,7 +45,7 @@
 	_base_attack_force            = 3
 
 /obj/item/chems/spray/extinguisher/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/extinguisher/has_safety()
 	return TRUE

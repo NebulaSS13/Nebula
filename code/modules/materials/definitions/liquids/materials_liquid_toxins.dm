@@ -168,7 +168,7 @@
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
 /decl/material/liquid/zombiepowder/on_leaving_metabolism(datum/reagents/metabolism/holder)
-	var/mob/M = holder?.my_atom
+	var/mob/M = REAGENT_GET_ATOM(holder)
 	if(istype(M))
 		M.status_flags &= ~FAKEDEATH
 	. = ..()

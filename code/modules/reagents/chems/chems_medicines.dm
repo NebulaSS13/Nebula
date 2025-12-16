@@ -133,12 +133,12 @@
 
 	var/removing = (4 * removed * antitoxin_strength)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
-	for(var/decl/material/reagent as anything in ingested?.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(ingested))
 		if((remove_generic && reagent.toxicity) || (reagent.type in remove_toxins))
 			ingested.remove_reagent(reagent, removing)
 			return
 
-	for(var/decl/material/reagent as anything in M.reagents?.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(M.reagents))
 		if((remove_generic && reagent.toxicity) || (reagent.type in remove_toxins))
 			M.remove_from_reagents(reagent, removing)
 			return
@@ -368,7 +368,7 @@
 	var/charges = removed * DETOXIFIER_EFFECTIVENESS
 	var/dosecharges = CHEM_DOSE(M, src) * DETOXIFIER_DOSE_EFFECTIVENESS
 	for(var/datum/reagents/container as anything in M.get_metabolizing_reagent_holders())
-		for(var/decl/material/reagent as anything in container.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(container))
 			var/decl/material/liquid/painkillers/painkiller = reagent
 			if(!istype(painkiller) || !painkiller.narcotic)
 				continue

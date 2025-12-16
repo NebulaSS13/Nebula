@@ -101,7 +101,7 @@
 
 /obj/effect/decal/cleanable/vomit/Crossed(atom/movable/AM)
 	. = ..()
-	if(!QDELETED(src) && reagents?.total_volume >= 1 && isliving(AM))
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(reagents) >= 1 && isliving(AM))
 		var/mob/living/walker = AM
 		walker.add_walking_contaminant(reagents, rand(2, 3))
 

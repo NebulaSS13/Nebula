@@ -104,7 +104,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	var_type = VAR_FORMAT_LIST
 
 /decl/public_access/public_variable/reagents/access_var(obj/machinery/machine)
-	return machine?.reagents?.reagent_data
+	return istype(machine?.reagents) ? UNLINT(machine.reagents.reagent_data) : null
 
 /decl/public_access/public_variable/reagents/volumes
 	name = "reagents volumes"
@@ -112,7 +112,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	var_type = VAR_FORMAT_LIST
 
 /decl/public_access/public_variable/reagents/volumes/access_var(obj/machinery/machine)
-	return machine?.reagents?.reagent_volumes
+	return istype(machine?.reagents) ? UNLINT(REAGENT_VOLUMES(machine.reagents)) : null
 
 /decl/public_access/public_variable/reagents/free_space
 	name = "reagents free space"
@@ -128,7 +128,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/reagents/total_volume/access_var(obj/machinery/machine)
-	return machine?.reagents?.total_volume
+	return REAGENT_TOTAL_VOLUME(machine?.reagents)
 
 /decl/public_access/public_variable/reagents/maximum_volume
 	name = "reagents maximum volume"
@@ -136,7 +136,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/reagents/maximum_volume/access_var(obj/machinery/machine)
-	return machine?.reagents?.maximum_volume
+	return REAGENT_MAXIMUM_VOLUME(machine?.reagents)
 
 /decl/public_access/public_method/toggle_power
 	name = "toggle power"

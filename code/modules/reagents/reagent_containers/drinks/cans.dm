@@ -17,7 +17,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/cola/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/cola, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/cola, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/waterbottle
 	name = "bottled water"
@@ -27,7 +27,7 @@
 	material = /decl/material/solid/organic/plastic
 
 /obj/item/chems/drinks/cans/waterbottle/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/waterbottle/open(mob/user)
 	playsound(loc,'sound/effects/bonebreak1.ogg', rand(10,50), 1)
@@ -41,7 +41,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/space_mountain_wind/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/citrussoda, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/citrussoda, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/thirteenloko
 	name = "\improper Thirteen Loko"
@@ -50,7 +50,7 @@
 	center_of_mass = @'{"x":16,"y":8}'
 
 /obj/item/chems/drinks/cans/thirteenloko/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/thirteenloko, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/thirteenloko, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/dr_gibb
 	name = "\improper Dr. Gibb"
@@ -59,7 +59,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/dr_gibb/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/cherrycola, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/cherrycola, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/starkist
 	name = "\improper Star-Kist"
@@ -68,7 +68,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/starkist/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/orangecola, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/orangecola, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/space_up
 	name = "\improper Space-Up"
@@ -77,7 +77,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/space_up/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/lemonade, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/lemonade, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/lemon_lime
 	name = "\improper Lemon-Lime"
@@ -86,7 +86,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/lemon_lime/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/lemon_lime, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/lemon_lime, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/iced_tea
 	name = "\improper Vrisk Serket Iced Tea"
@@ -95,7 +95,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/iced_tea/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/tea/black, reagents.maximum_volume - 5)
+	add_to_reagents(/decl/material/liquid/drink/tea/black, REAGENT_MAXIMUM_VOLUME(reagents) - 5)
 	add_to_reagents(/decl/material/solid/ice,              5)
 
 /obj/item/chems/drinks/cans/grape_juice
@@ -105,7 +105,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/grape_juice/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/grape, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/grape, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/tonic
 	name = "\improper T-Borg's Tonic Water"
@@ -114,7 +114,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/tonic/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/tonic, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/tonic, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/sodawater
 	name = "soda water"
@@ -123,7 +123,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/sodawater/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/sodawater, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/sodawater, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/beastenergy
 	name = "Beast Energy"
@@ -132,7 +132,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/cans/beastenergy/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/beastenergy, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/beastenergy, REAGENT_MAXIMUM_VOLUME(reagents))
 
 //Items exclusive to the BODA machine on deck 4 and wherever else it pops up. First two are a bit jokey. Second two are genuine article.
 
@@ -143,7 +143,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/syndicolax/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/potato, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/potato, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/artbru
 	name = "\improper Arstotzka Bru"
@@ -152,7 +152,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/artbru/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/turnip, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/turnip, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/syndicola
 	name = "\improper TerraCola"
@@ -161,7 +161,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/syndicola/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water,     reagents.maximum_volume - 5)
+	add_to_reagents(/decl/material/liquid/water,     REAGENT_MAXIMUM_VOLUME(reagents) - 5)
 	add_to_reagents(/decl/material/solid/metal/iron, 5)
 
 /obj/item/chems/drinks/glass2/square/boda
@@ -170,7 +170,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/glass2/square/boda/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/sodawater, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/sodawater, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/glass2/square/bodaplus
 	name = "tri kopeiki sirop boda"
@@ -189,8 +189,9 @@
 				/decl/material/liquid/drink/juice/banana,
 				/decl/material/liquid/drink/juice/berry,
 				/decl/material/liquid/drink/juice/watermelon))
-	add_to_reagents(/decl/material/liquid/drink/sodawater, reagents.maximum_volume / 2)
-	add_to_reagents(reag, reagents.maximum_volume / 2)
+	var/half_max_vol = REAGENT_MAXIMUM_VOLUME(reagents) / 2
+	add_to_reagents(/decl/material/liquid/drink/sodawater, half_max_vol)
+	add_to_reagents(reag, half_max_vol)
 
 
 //Canned alcohols.
@@ -202,7 +203,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/speer/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/beer/good, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/beer/good, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/ale
 	name = "\improper Magm-Ale"
@@ -211,4 +212,4 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/cans/ale/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/ale, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/ale, REAGENT_MAXIMUM_VOLUME(reagents))

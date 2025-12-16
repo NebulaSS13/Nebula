@@ -30,7 +30,7 @@
 	STOP_PROCESSING(SSprocessing, src)
 	QDEL_NULL(network)
 
-	if(air?.total_volume || liquid?.total_volume)
+	if(air?.total_volume || REAGENT_TOTAL_VOLUME(liquid))
 		temporarily_store_fluids()
 
 	QDEL_NULL(air)
@@ -61,7 +61,7 @@
 /datum/pipeline/proc/temporarily_store_fluids()
 	//Update individual gas_mixtures by volume ratio
 
-	var/liquid_transfer_per_pipe = min(REAGENT_UNITS_PER_PIPE, (liquid && length(members)) ? (liquid.total_volume / length(members)) : 0)
+	var/liquid_transfer_per_pipe = min(REAGENT_UNITS_PER_PIPE, (liquid && length(members)) ? (REAGENT_TOTAL_VOLUME(liquid) / length(members)) : 0)
 	if(!air?.total_volume && !liquid_transfer_per_pipe)
 		return
 
@@ -119,9 +119,9 @@
 							air.merge(item.air_temporary)
 							item.air_temporary = null
 
-						liquid.maximum_volume += REAGENT_UNITS_PER_PIPE
+						REAGENT_ADD_MAX_VOL(liquid, REAGENT_UNITS_PER_PIPE)
 						if(item.liquid_temporary)
-							item.liquid_temporary.trans_to_holder(liquid, item.liquid_temporary.total_volume)
+							item.liquid_temporary.trans_to_holder(liquid, REAGENT_TOTAL_VOLUME(item.liquid_temporary))
 							item.liquid_temporary = null
 
 						if(item.leaking)
@@ -135,7 +135,7 @@
 			possible_expansions -= borderline
 
 	air.total_volume = temp_volume
-	liquid.maximum_volume = length(members) * REAGENT_UNITS_PER_PIPE
+	REAGENT_SET_MAX_VOL(liquid, (length(members) * REAGENT_UNITS_PER_PIPE))
 
 /datum/pipeline/proc/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(new_network.line_members.Find(src))
@@ -186,7 +186,7 @@
 		air.merge(air_sample)
 		//turf_air already modified by equalize_gases()
 
-	if(liquid?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(liquid))
 		liquid.trans_to_turf(target, FLUID_PUDDLE)
 
 	if(network)

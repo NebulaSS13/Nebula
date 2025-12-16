@@ -36,7 +36,7 @@
 
 /obj/structure/reagent_dispensers/barrel/on_reagent_change()
 	. = ..()
-	if(!metal_material && reagents?.total_volume)
+	if(!metal_material && REAGENT_TOTAL_VOLUME(reagents))
 		physically_destroyed()
 
 // Adding a rim to a crafted barrel.

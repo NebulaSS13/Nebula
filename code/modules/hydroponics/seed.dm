@@ -209,7 +209,7 @@
 	make_splat(T, thrown)
 
 	var/datum/reagents/splat_reagents = thrown?.reagents
-	if(!splat_reagents?.maximum_volume) // if thrown doesn't exist or has no reagents, use the seed's default reagents.
+	if(!REAGENT_MAXIMUM_VOLUME(splat_reagents)) // if thrown doesn't exist or has no reagents, use the seed's default reagents.
 		splat_reagents = new /datum/reagents(INFINITY, global.temp_reagents_holder)
 		var/potency = get_trait(TRAIT_POTENCY)
 		var/list/seed_chems = get_chemical_composition()

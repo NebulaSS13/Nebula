@@ -41,8 +41,8 @@
 	if(!luminol)
 		luminol = new(src)
 		equipment += luminol
-	if(luminol.reagents.total_volume < luminol.reagents.maximum_volume)
-		var/adding = min(luminol.reagents.maximum_volume-luminol.reagents.total_volume, 2*amount)
+	if(REAGENT_TOTAL_VOLUME(luminol.reagents) < REAGENT_MAXIMUM_VOLUME(luminol.reagents))
+		var/adding = min(REAGENT_MAXIMUM_VOLUME(luminol.reagents)-REAGENT_TOTAL_VOLUME(luminol.reagents), 2*amount)
 		if(adding > 0)
 			luminol.add_to_reagents(/decl/material/liquid/luminol, adding)
 	..()

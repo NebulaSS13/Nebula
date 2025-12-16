@@ -37,20 +37,19 @@
 /obj/item/organ/internal/lungs/initialize_reagents(populate)
 	if(!inhaled)
 		inhaled = new/datum/reagents/metabolism(240, (owner || src), CHEM_INHALE)
-	if(!inhaled.my_atom)
-		inhaled.my_atom = src
+	REAGENT_SET_ATOM(inhaled, src)
 	. = ..()
 
 /obj/item/organ/internal/lungs/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place)
 	if(!(. = ..()))
 		return
-	inhaled.my_atom = owner
+	REAGENT_SET_ATOM(inhaled, owner)
 	inhaled.parent = owner
 
 /obj/item/organ/internal/lungs/do_uninstall(in_place, detach, ignore_children)
 	. = ..()
 	if(inhaled)
-		inhaled.my_atom = src
+		REAGENT_SET_ATOM(inhaled, src)
 		inhaled.parent = null
 
 /obj/item/organ/internal/lungs/proc/can_drown()
@@ -376,5 +375,5 @@
 	last_cough = world.time
 
 	// Coughing clears out 1-2 reagents from the lungs.
-	if(lung.inhaled.total_volume > 0 && loc)
+	if(REAGENT_TOTAL_VOLUME(lung.inhaled) > 0 && loc)
 		lung.inhaled.splash(loc, rand(1, 2))

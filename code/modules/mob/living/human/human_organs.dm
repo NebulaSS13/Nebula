@@ -219,8 +219,8 @@
 	if(!(. = ..()))
 		return
 	//Move some blood over to the organ
-	if(!BP_IS_PROSTHETIC(O) && O.species && O.reagents?.total_volume < 5)
-		vessel.trans_to(O, 5 - O.reagents.total_volume, 1, 1)
+	if(!BP_IS_PROSTHETIC(O) && O.species && REAGENT_TOTAL_VOLUME(O.reagents) < 5)
+		vessel.trans_to(O, 5 - REAGENT_TOTAL_VOLUME(O.reagents), 1, 1)
 
 
 /mob/living/human/is_asystole()

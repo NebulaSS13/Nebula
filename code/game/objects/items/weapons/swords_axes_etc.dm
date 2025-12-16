@@ -66,7 +66,7 @@
 	update_held_icon()
 
 /obj/item/telebaton/on_update_icon()
-	if(coating?.total_volume || blood_DNA)
+	if(REAGENT_TOTAL_VOLUME(coating) || blood_DNA)
 		generate_coating_overlay(TRUE) // Force recheck.
 	. = ..()
 	if(on)

@@ -101,7 +101,7 @@
 			to_chat(user, "<span class='warning'>The grenade can not hold more containers.</span>")
 			return TRUE
 		else
-			if(used_item.reagents.total_volume)
+			if(REAGENT_TOTAL_VOLUME(used_item.reagents))
 				if(!user.try_unequip(used_item, src))
 					return TRUE
 				to_chat(user, "<span class='notice'>You add \the [used_item] to the assembly.</span>")
@@ -138,7 +138,7 @@
 
 	var/has_reagents = 0
 	for(var/obj/item/chems/glass/G in beakers)
-		if(G.reagents.total_volume)
+		if(REAGENT_TOTAL_VOLUME(G.reagents))
 			has_reagents = TRUE
 			break
 
@@ -162,13 +162,13 @@
 		M.toggle_throw_mode(FALSE)
 
 	for(var/obj/item/chems/glass/G in beakers)
-		G.reagents.trans_to_obj(src, G.reagents.total_volume)
+		G.reagents.trans_to_obj(src, REAGENT_TOTAL_VOLUME(G.reagents))
 
 	anchored = TRUE
 	set_invisibility(INVISIBILITY_MAXIMUM)
 
 	// Visual effect to show the grenade going off.
-	if(reagents.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		var/datum/effect/effect/system/steam_spread/steam = new
 		steam.set_up(10, 0, get_turf(src))
 		steam.attach(src)
@@ -177,13 +177,14 @@
  	// Allow time for reactions to proc.
 	var/max_delays = 5
 	var/delays = 0
-	while(reagents.total_volume && delays <= max_delays)
+	while(REAGENT_TOTAL_VOLUME(reagents) && delays <= max_delays)
 		delays++
 		sleep(SSmaterials.wait)
 
 	// The reactions didn't use up all reagents, dump them as a fluid.
-	if(reagents.total_volume)
-		reagents.trans_to(loc, reagents.total_volume)
+	var/reagent_volume = REAGENT_TOTAL_VOLUME(reagents)
+	if(reagent_volume)
+		reagents.trans_to(loc, reagent_volume)
 
 	qdel(src)
 

@@ -133,7 +133,7 @@
 	..()
 	var/atom/location = holder.get_reaction_loc(chemical_reaction_flags)
 	if(location)
-		if(istype(location, /obj/item/sealant_tank) && location.reagents?.maximum_volume)
+		if(istype(location, /obj/item/sealant_tank) && REAGENT_MAXIMUM_VOLUME(location.reagents))
 			location.reagents.add_reagent(/decl/material/liquid/foam, created_volume)
 			return
 		location = get_turf(location)

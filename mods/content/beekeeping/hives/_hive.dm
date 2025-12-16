@@ -71,7 +71,7 @@
 			to_chat(user, "<span class='notice'>There is no place for an another frame.</span>")
 			return TRUE
 		var/obj/item/hive_frame/crafted/H = used_item
-		if(H.reagents?.total_volume)
+		if(REAGENT_TOTAL_VOLUME(H.reagents))
 			to_chat(user, "<span class='notice'>\The [used_item] is full with beeswax and honey, empty it in the extractor first.</span>")
 			return TRUE
 		++frames

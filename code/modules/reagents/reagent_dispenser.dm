@@ -30,7 +30,7 @@
 /obj/structure/reagent_dispensers/on_reagent_change()
 	if(!(. = ..()))
 		return
-	if(reagents?.total_volume > 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) > 0)
 		tool_interaction_flags &= ~TOOL_INTERACTION_DECONSTRUCT
 	else
 		tool_interaction_flags |= TOOL_INTERACTION_DECONSTRUCT
@@ -38,7 +38,7 @@
 /obj/structure/reagent_dispensers/proc/leak()
 	var/turf/T = get_turf(src)
 	if(reagents && T)
-		reagents.trans_to_turf(T, min(reagents.total_volume, FLUID_PUDDLE))
+		reagents.trans_to_turf(T, min(REAGENT_TOTAL_VOLUME(reagents), FLUID_PUDDLE))
 
 /obj/structure/reagent_dispensers/Move()
 	. = ..()
@@ -85,7 +85,7 @@
 	movable_flags             = MOVABLE_FLAG_WHEELED
 
 /obj/structure/reagent_dispensers/watertank/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/watertank/high
 	name = "high-capacity water tank"
@@ -116,7 +116,7 @@
 	var/obj/item/assembly_holder/rig
 
 /obj/structure/reagent_dispensers/fueltank/populate_reagents()
-	add_to_reagents(/decl/material/liquid/fuel, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/fuel, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/fueltank/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
@@ -198,7 +198,7 @@
 	amount_dispensed = 45
 
 /obj/structure/reagent_dispensers/peppertank/populate_reagents()
-	add_to_reagents(/decl/material/liquid/capsaicin/condensed, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/capsaicin/condensed, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/water_cooler
 	name                      = "water cooler"
@@ -215,7 +215,7 @@
 	var/tmp/cup_type          = /obj/item/chems/drinks/sillycup
 
 /obj/structure/reagent_dispensers/water_cooler/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/water_cooler/attack_hand(var/mob/user)
 	if(user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
@@ -251,7 +251,7 @@
 /obj/structure/reagent_dispensers/water_cooler/on_reagent_change()
 	. = ..()
 	// Bubbles in top of cooler.
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		var/vend_state = "[icon_state]-vend"
 		if(check_state_in_icon(vend_state, icon))
 			flick(vend_state, src)
@@ -266,7 +266,7 @@
 	matter           = list(/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_TRACE)
 
 /obj/structure/reagent_dispensers/beerkeg/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/beer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/beer, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/acid
 	name             = "sulfuric acid dispenser"
@@ -277,7 +277,7 @@
 	density          = FALSE
 
 /obj/structure/reagent_dispensers/acid/populate_reagents()
-	add_to_reagents(/decl/material/liquid/acid, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/acid, REAGENT_MAXIMUM_VOLUME(reagents))
 
 //Interactions
 /obj/structure/reagent_dispensers/get_alt_interactions(var/mob/user)

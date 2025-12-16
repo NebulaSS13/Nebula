@@ -135,7 +135,7 @@
 		return
 	if((REALTIMEOFDAY - time_created) < 5 SECONDS)
 		return
-	if(!QDELETED(src) && fluids?.total_liquid_volume >= FLUID_SLURRY)
+	if(!QDELETED(src) && REAGENT_TOTAL_LIQUID_VOLUME(fluids) >= FLUID_SLURRY)
 		var/free_space = REAGENTS_FREE_SPACE(fluids)
 		for(var/matter_type in matter)
 			if(free_space <= MINIMUM_CHEMICAL_VOLUME)

@@ -78,12 +78,13 @@
 			dat += "<tr><td><b>[uppertext(trait_name)]</b></td><td>[general_data[trait_name]]</td></tr>"
 	dat += "</table>"
 
-	if(LAZYLEN(grown_reagents?.reagent_volumes))
+	var/grown_volumes = REAGENT_VOLUMES(grown_reagents)
+	if(LAZYLEN(grown_volumes))
 		dat += "<h2>Reagent Data</h2>"
 		dat += "<br>This sample contains: "
-		for(var/decl/material/reagent as anything in grown_reagents.liquid_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_LIQUID_VOLUMES(grown_reagents))
 			dat += "<br>- [reagent.get_reagent_name(grown_reagents, MAT_PHASE_LIQUID)], [LIQUID_VOLUME(grown_reagents, reagent)] unit(s)"
-		for(var/decl/material/reagent as anything in grown_reagents.solid_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_SOLID_VOLUMES(grown_reagents))
 			dat += "<br>- [reagent.get_reagent_name(grown_reagents, MAT_PHASE_SOLID)], [SOLID_VOLUME(grown_reagents, reagent)] unit(s)"
 
 	dat += "<h2>Other Data</h2>"

@@ -472,7 +472,7 @@ Class Procs:
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(!QDELETED(src) && !(stat & (NOPOWER|BROKEN)) && !waterproof && (fluids?.total_volume > FLUID_DEEP))
+	if(!QDELETED(src) && !(stat & (NOPOWER|BROKEN)) && !waterproof && (REAGENT_TOTAL_VOLUME(fluids) > FLUID_DEEP))
 		explosion_act(3)
 
 /obj/machinery/Move()

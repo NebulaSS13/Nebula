@@ -59,7 +59,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] cannot accept any more chemical canisters."))
 		return FALSE
 	if(!emagged)
-		for(var/decl/material/reagent as anything in canister.reagents?.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(canister.reagents))
 			for(var/banned_type in banned_chem_types)
 				if(istype(reagent, banned_type))
 					to_chat(user, SPAN_WARNING("Automatic safety checking indicates the presence of a prohibited substance in this canister."))
@@ -125,7 +125,7 @@
 			. += SPAN_NOTICE("There are no chemical canisters loaded.")
 
 /obj/machinery/sleeper/proc/has_room_in_beaker()
-	return beaker && beaker.reagents.total_volume < beaker.reagents.maximum_volume
+	return beaker && REAGENT_TOTAL_VOLUME(beaker.reagents) < REAGENT_MAXIMUM_VOLUME(beaker.reagents)
 
 /obj/machinery/sleeper/Process()
 	if(stat & (NOPOWER|BROKEN))
@@ -142,7 +142,8 @@
 
 	if(filtering)
 		if(has_room_in_beaker())
-			var/trans_volume = LAZYLEN(occupant.reagents?.reagent_volumes)
+			var/trans_volumes = REAGENT_VOLUMES(occupant.reagents)
+			var/trans_volume = LAZYLEN(trans_volumes)
 			if(trans_volume)
 				occupant.reagents.trans_to_obj(beaker, pump_speed * trans_volume)
 				occupant.vessel.trans_to_obj(beaker, trans_volume + 1)
@@ -153,7 +154,8 @@
 		if(has_room_in_beaker())
 			var/datum/reagents/ingested = occupant.get_ingested_reagents()
 			if(ingested)
-				var/trans_volume = LAZYLEN(ingested.reagent_volumes)
+				var/trans_volumes = REAGENT_VOLUMES(ingested)
+				var/trans_volume = LAZYLEN(trans_volumes)
 				if(trans_volume)
 					ingested.trans_to_obj(beaker, pump_speed * trans_volume)
 		else
@@ -163,7 +165,8 @@
 		if(has_room_in_beaker())
 			var/datum/reagents/inhaled = occupant.get_inhaled_reagents()
 			if(inhaled)
-				var/trans_volume = LAZYLEN(inhaled?.reagent_volumes)
+				var/trans_volumes = REAGENT_VOLUMES(inhaled)
+				var/trans_volume = LAZYLEN(trans_volumes)
 				if(trans_volume)
 					inhaled.trans_to_obj(beaker, pump_speed * trans_volume)
 		else
@@ -208,7 +211,7 @@
 	var/empties = 0
 	var/list/loaded_reagents = list()
 	for(var/obj/item/chems/chem_disp_cartridge/canister in loaded_canisters)
-		if(!canister.reagents || !canister.reagents.total_volume)
+		if(!canister.reagents || !REAGENT_TOTAL_VOLUME(canister.reagents))
 			empties++
 			continue
 		var/list/reagent = list()
@@ -218,7 +221,7 @@
 		else
 			reagent	["name"] = "unlabeled"
 		reagent["id"] =     "\ref[canister]"
-		reagent["amount"] = canister.reagents.total_volume
+		reagent["amount"] = REAGENT_TOTAL_VOLUME(canister.reagents)
 		loaded_reagents += list(reagent)
 	data["reagents"] = loaded_reagents
 	data["empty_canisters"] = empties
@@ -258,7 +261,7 @@
 	if(href_list["eject_empties"])
 		. = TOPIC_NOACTION
 		for(var/obj/item/canister in loaded_canisters)
-			if(!canister.reagents || !canister.reagents.total_volume)
+			if(!canister.reagents || !REAGENT_TOTAL_VOLUME(canister.reagents))
 				eject_reagent_canister(null, canister)
 				. = TOPIC_REFRESH
 	if(href_list["eject"])
@@ -435,17 +438,16 @@
 	if(!istype(canister) || canister.loc != src)
 		to_chat(user, SPAN_WARNING("\The [src] cannot locate that canister."))
 		return
-	if(canister.reagents?.total_volume < amount)
+	if(REAGENT_TOTAL_VOLUME(canister.reagents) < amount)
 		to_chat(user, SPAN_WARNING("\The [canister] has less than [amount] unit\s left."))
 		return
 	if(!occupant || !occupant.reagents)
 		to_chat(user, SPAN_WARNING("There's no suitable occupant in \the [src]."))
 		return
-	if(!emagged && canister.reagents?.primary_reagent)
-		var/decl/material/chem = canister.reagents.primary_reagent
-		if(chem.overdose && REAGENT_VOLUME(occupant.reagents, canister.reagents.primary_reagent) + amount >= chem.overdose)
-			to_chat(user, SPAN_WARNING("Injecting more [chem.name] presents an overdose risk to the subject."))
-			return
+	var/decl/material/chem = canister.reagents?.get_primary_reagent_decl()
+	if(!emagged && chem?.overdose && REAGENT_VOLUME(occupant.reagents, chem) + amount >= chem.overdose)
+		to_chat(user, SPAN_WARNING("Injecting more [chem.name] presents an overdose risk to the subject."))
+		return
 	canister.reagents.trans_to_mob(occupant, amount, target_transfer_type)
 	to_chat(user, SPAN_NOTICE("You use \the [src] to [target_transfer_type == CHEM_INJECT ? "inject" : "infuse"] [amount] unit\s from \the [canister] into \the [occupant]."))
 

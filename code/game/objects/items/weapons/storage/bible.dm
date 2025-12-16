@@ -89,7 +89,7 @@
 	if(proximity && user?.mind?.assigned_job?.is_holy)
 		if(A.reagents && A.reagents.has_reagent(/decl/material/liquid/water)) //blesses all the water in the holder
 			to_chat(user, SPAN_NOTICE("You bless \the [A].")) // I wish it was this easy in nethack
-			LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list(DATA_WATER_HOLINESS = TRUE))
+			REAGENT_SET_DATA(A.reagents, /decl/material/liquid/water, list(DATA_WATER_HOLINESS = TRUE))
 
 /obj/item/bible/attackby(obj/item/used_item, mob/user)
 	if(storage?.use_sound)

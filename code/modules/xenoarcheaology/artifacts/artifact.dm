@@ -136,7 +136,7 @@
 
 /obj/structure/artifact/fluid_act(datum/reagents/fluids)
 	..()
-	if(!QDELETED(src) && fluids?.total_volume)
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids))
 		check_triggers(/datum/artifact_trigger/proc/on_fluid_act, fluids)
 
 // Premade subtypes for mapping or testing.

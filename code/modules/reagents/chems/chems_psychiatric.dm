@@ -27,7 +27,7 @@
 
 	if(update_data)
 		LAZYSET(data, DATA_COOLDOWN_TIME, world.time)
-		LAZYSET(holder.reagent_data, type, data)
+		REAGENT_SET_DATA(holder, type, data)
 
 /// Returns TRUE to signal that the effect should go on cooldown.
 /decl/material/liquid/accumulated/proc/positive_effect(mob/living/victim, removed, datum/reagents/holder, is_off_cooldown)

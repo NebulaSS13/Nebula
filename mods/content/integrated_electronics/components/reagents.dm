@@ -13,11 +13,11 @@
 
 /obj/item/integrated_circuit/reagent/Initialize()
 	. = ..()
-	if(reagents?.maximum_volume)
+	if(REAGENT_MAXIMUM_VOLUME(reagents))
 		push_vol()
 
 /obj/item/integrated_circuit/reagent/proc/push_vol()
-	set_pin_data(IC_OUTPUT, 1, reagents?.total_volume || 0)
+	set_pin_data(IC_OUTPUT, 1, REAGENT_TOTAL_VOLUME(reagents))
 	push_data()
 
 /obj/item/integrated_circuit/reagent/smoke
@@ -54,7 +54,7 @@
 /obj/item/integrated_circuit/reagent/smoke/do_work(ord)
 	switch(ord)
 		if(1)
-			if(!reagents || (reagents.total_volume < IC_SMOKE_REAGENTS_MINIMUM_UNITS))
+			if(!reagents || (REAGENT_TOTAL_VOLUME(reagents) < IC_SMOKE_REAGENTS_MINIMUM_UNITS))
 				return
 			var/location = get_turf(src)
 			var/datum/effect/effect/system/smoke_spread/chem/S = new
@@ -115,7 +115,7 @@
 	else
 		direction_mode = IC_REAGENTS_INJECT
 	if(isnum(new_amount))
-		new_amount = clamp(new_amount, 0, reagents.maximum_volume)
+		new_amount = clamp(new_amount, 0, REAGENT_MAXIMUM_VOLUME(reagents))
 		transfer_amount = new_amount
 
 
@@ -175,7 +175,7 @@
 		return
 
 	if(direction_mode == IC_REAGENTS_INJECT)
-		if(!reagents.total_volume || !AM.reagents || !REAGENTS_FREE_SPACE(AM.reagents))
+		if(!REAGENT_TOTAL_VOLUME(reagents) || !REAGENTS_FREE_SPACE(AM?.reagents))
 			activate_pin(3)
 			return
 
@@ -204,7 +204,7 @@
 			reagents.trans_to(AM, transfer_amount)
 
 	else if(direction_mode == IC_REAGENTS_DRAW)
-		if(reagents.total_volume >= reagents.maximum_volume)
+		if(REAGENT_TOTAL_VOLUME(reagents) >= REAGENT_MAXIMUM_VOLUME(reagents))
 			acting_object.visible_message("\The [acting_object] tries to draw from [AM], but the injector is full.")
 			activate_pin(3)
 			return
@@ -217,7 +217,7 @@
 			var/injection_delay = 3 SECONDS
 			if(injection_status == INJECTION_PORT)
 				injection_delay += INJECTION_PORT_DELAY
-			if(!H.vessel?.total_volume || !injection_status)
+			if(!REAGENT_TOTAL_VOLUME(H.vessel) || !injection_status)
 				activate_pin(3)
 				return
 			H.visible_message(
@@ -228,7 +228,7 @@
 			return
 
 		else
-			if(!AM.reagents.total_volume)
+			if(!REAGENT_TOTAL_VOLUME(AM.reagents))
 				acting_object.visible_message("<span class='notice'>\The [acting_object] tries to draw from [AM], but it is empty!</span>")
 				activate_pin(3)
 				return
@@ -236,7 +236,7 @@
 			if(!ATOM_IS_OPEN_CONTAINER(AM))
 				activate_pin(3)
 				return
-			tramount = min(tramount, AM.reagents.total_volume)
+			tramount = min(tramount, REAGENT_TOTAL_VOLUME(AM.reagents))
 			AM.reagents.trans_to(src, tramount)
 	activate_pin(2)
 
@@ -372,7 +372,7 @@
 			push_data()
 
 /obj/item/integrated_circuit/reagent/storage/grinder/proc/grind()
-	if(reagents.total_volume >= reagents.maximum_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents) >= REAGENT_MAXIMUM_VOLUME(reagents))
 		activate_pin(3)
 		return FALSE
 	var/obj/item/I = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
@@ -380,12 +380,12 @@
 	if(isnull(I))
 		return FALSE
 
-	if(!I.reagents || !I.reagents.total_volume)
+	if(!I.reagents || !REAGENT_TOTAL_VOLUME(I.reagents))
 		activate_pin(3)
 		return FALSE
 
-	I.reagents.trans_to(src,I.reagents.total_volume)
-	if(!I.reagents.total_volume)
+	I.reagents.trans_to(src,REAGENT_TOTAL_VOLUME(I.reagents))
+	if(!REAGENT_TOTAL_VOLUME(I.reagents))
 		qdel(I)
 
 	activate_pin(2)
@@ -415,7 +415,7 @@
 	switch(ord)
 		if(1)
 			var/cont[0]
-			for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 				cont += reagent.name
 			set_pin_data(IC_OUTPUT, 3, cont)
 			push_data()
@@ -478,10 +478,10 @@
 	if(!ATOM_IS_OPEN_CONTAINER(source) || ismob(source))
 		return
 
-	if(target.reagents.maximum_volume - target.reagents.total_volume <= 0)
+	if(REAGENT_MAXIMUM_VOLUME(target.reagents) - REAGENT_TOTAL_VOLUME(target.reagents) <= 0)
 		return
 
-	for(var/decl/material/reagent as anything in source.reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(source.reagents))
 		if(!direction_mode)
 			if(reagent.name in demand)
 				source.reagents.trans_type_to(target, reagent, transfer_amount)

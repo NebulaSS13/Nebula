@@ -93,7 +93,7 @@
 	if(!can_dissect || !(segment in segments))
 		return
 
-	if(reagents?.total_volume && segment.contributes_to_reagents)
+	if(REAGENT_TOTAL_VOLUME(reagents) && segment.contributes_to_reagents)
 		for(var/rid in segment.reagents)
 			reagents.remove_reagent(rid, segment.reagents[rid])
 

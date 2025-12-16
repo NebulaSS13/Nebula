@@ -53,7 +53,7 @@ var/global/list/fishtank_cache = list()
 
 /obj/structure/glass_tank/populate_reagents()
 	if(fill_type)
-		add_to_reagents(fill_type, reagents.maximum_volume)
+		add_to_reagents(fill_type, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/glass_tank/attack_hand(var/mob/user)
 	if(user.check_intent(I_FLAG_HARM))
@@ -77,7 +77,7 @@ var/global/list/fishtank_cache = list()
 	if(paint_color)
 		shard.set_color(paint_color)
 	if(!silent)
-		if(contents.len || reagents.total_volume)
+		if(contents.len || REAGENT_TOTAL_VOLUME(reagents))
 			visible_message(SPAN_DANGER("\The [src] shatters, spilling its contents everywhere!"))
 		else
 			visible_message(SPAN_DANGER("\The [src] shatters!"))
@@ -90,8 +90,8 @@ var/global/list/fishtank_cache = list()
 /obj/structure/glass_tank/dump_contents(atom/forced_loc = loc, mob/user)
 	. = ..()
 	var/turf/T = get_turf(forced_loc)
-	if(reagents?.total_volume && T)
-		reagents.trans_to_turf(T, reagents.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents) && T)
+		reagents.trans_to_turf(T, REAGENT_TOTAL_VOLUME(reagents))
 
 var/global/list/global/aquarium_states_and_layers = list(
 	"b" = FLY_LAYER - 0.02,
@@ -119,7 +119,7 @@ var/global/list/global/aquarium_states_and_layers = list(
 		tank_overlay.cut_overlays()
 		for(var/i = 1 to 4)
 			for(var/key_mod in global.aquarium_states_and_layers)
-				if(key_mod == "w" && (!reagents || !reagents.total_volume))
+				if(key_mod == "w" && (!reagents || !REAGENT_TOTAL_VOLUME(reagents)))
 					continue
 				var/cache_key = "[c_states[i]][key_mod]-[i]"
 				if(!global.fishtank_cache[cache_key])

@@ -128,7 +128,7 @@
 			loc.assume_air(air_temporary)
 			air_temporary = null
 		if(liquid_temporary)
-			liquid_temporary.trans_to(loc, liquid_temporary.total_volume)
+			liquid_temporary.trans_to(loc, REAGENT_TOTAL_VOLUME(liquid_temporary))
 			liquid_temporary = null
 	if(leaking)
 		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)

@@ -32,10 +32,10 @@
 	icon_state = "mech_exting"
 
 /obj/item/chems/spray/extinguisher/mech/get_hardpoint_maptext()
-	return "[reagents.total_volume]/[reagents.maximum_volume]"
+	return "[REAGENT_TOTAL_VOLUME(reagents)]/[REAGENT_MAXIMUM_VOLUME(reagents)]"
 
 /obj/item/chems/spray/extinguisher/mech/get_hardpoint_status_value()
-	return reagents.total_volume/reagents.maximum_volume
+	return REAGENT_TOTAL_VOLUME(reagents)/REAGENT_MAXIMUM_VOLUME(reagents)
 
 /obj/item/mech_equipment/mounted_system/extinguisher
 	icon_state = "mech_exting"

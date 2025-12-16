@@ -130,7 +130,7 @@
 		return
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	if(ingested)
-		var/list/pool = M.reagents.reagent_volumes | ingested.reagent_volumes
+		var/list/pool = REAGENT_VOLUMES(M.reagents) | REAGENT_VOLUMES(ingested)
 		for(var/reagent in pool)
 			var/decl/material/liquid/alcohol/booze = reagent
 			if(!istype(booze) ||CHEM_DOSE(M, reagent) < 2) //let them experience false security at first

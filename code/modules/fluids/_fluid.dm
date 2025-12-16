@@ -22,7 +22,7 @@
 /atom/movable/fluid_overlay/on_update_icon()
 
 	var/datum/reagents/loc_reagents = loc?.reagents
-	var/reagent_volume = loc_reagents?.total_volume
+	var/reagent_volume = REAGENT_TOTAL_VOLUME(loc_reagents)
 
 	// Update layer.
 	var/new_layer
@@ -108,7 +108,7 @@ var/global/list/_fluid_edge_mask_cache = list()
 	sleep(0)
 	updating_edge_mask = FALSE
 
-	if(loc?.reagents?.total_volume <= FLUID_PUDDLE)
+	if(REAGENT_TOTAL_VOLUME(loc?.reagents) <= FLUID_PUDDLE)
 		remove_filter("fluid_edge_mask")
 		return
 
@@ -117,7 +117,7 @@ var/global/list/_fluid_edge_mask_cache = list()
 	var/list/connections
 	for(var/checkdir in global.alldirs)
 		var/turf/neighbor = get_step_resolving_mimic(loc, checkdir)
-		if(!neighbor || neighbor.density || neighbor?.reagents?.total_volume > FLUID_PUDDLE)
+		if(!neighbor || neighbor.density || REAGENT_TOTAL_VOLUME(neighbor?.reagents) > FLUID_PUDDLE)
 			LAZYADD(connections, checkdir)
 		else
 			LAZYADD(ignored, checkdir)

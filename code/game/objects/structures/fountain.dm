@@ -117,7 +117,7 @@
 	light_power            = null
 
 /obj/structure/fountain/mundane/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume) //Don't give free water when building one
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents)) //Don't give free water when building one
 
 /obj/structure/fountain/mundane/attack_hand(mob/user)
 	if(user.check_intent(I_FLAG_HARM))

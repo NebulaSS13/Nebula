@@ -192,13 +192,13 @@
 	if(!ATOM_IS_OPEN_CONTAINER(input_item))
 		return 0
 
-	if(!input_item.reagents || !input_item.reagents.total_volume)
+	if(!input_item.reagents || !REAGENT_TOTAL_VOLUME(input_item.reagents))
 		to_chat(user, "\The [input_item] is empty.")
 		return 0
 
 	// Magical chemical filtration system, do not question it.
 	var/total_transferred = 0
-	for(var/decl/material/reagent as anything in input_item.reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(input_item.reagents))
 		for(var/chargetype in charges)
 			var/datum/rig_charge/charge = charges[chargetype]
 			if(charge.product_type == reagent.type)

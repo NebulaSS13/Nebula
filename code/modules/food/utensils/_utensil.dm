@@ -104,7 +104,7 @@
 	else
 		show_slice_message(user, tool, src)
 
-	var/reagents_per_slice = max(1, round(reagents.total_volume / slice_num))
+	var/reagents_per_slice = max(1, round(REAGENT_TOTAL_VOLUME(reagents) / slice_num))
 	for(var/i = 1 to slice_num)
 		var/atom/movable/slice = create_slice()
 		if(slice)

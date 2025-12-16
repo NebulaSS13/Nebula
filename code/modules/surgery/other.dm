@@ -207,7 +207,7 @@
 	var/temp_holder = new/obj()
 	var/datum/reagents/temp_reagents = new(amount, temp_holder)
 	container.reagents.trans_to_holder(temp_reagents, amount)
-	var/trans = temp_reagents.trans_to_mob(target, temp_reagents.total_volume, CHEM_INJECT) //technically it's contact, but the reagents are being applied to internal tissue
+	var/trans = temp_reagents.trans_to_mob(target, REAGENT_TOTAL_VOLUME(temp_reagents), CHEM_INJECT) //technically it's contact, but the reagents are being applied to internal tissue
 	if (trans > 0)
 		user.visible_message("<span class='notice'>[user] rubs [target]'s [affected.name] down with \the [tool]'s contents</span>.", \
 			"<span class='notice'>You rub [target]'s [affected.name] down with \the [tool]'s contents.</span>")
@@ -240,15 +240,15 @@
 	if(!valid_container)
 		return FALSE
 
-	if(!container.reagents?.total_volume)
+	if(!REAGENT_TOTAL_VOLUME(container.reagents))
 		return FALSE
 
 	// This check means it's impure.
-	if(length(container.reagents.reagent_volumes) > length(sterilizing_reagents))
+	if(length(REAGENT_VOLUMES(container.reagents)) > length(sterilizing_reagents))
 		return FALSE
 
 	// Check if we have sterilizing reagents and -only- sterilizing reagents.
-	for(var/decl/material/reagent as anything in container.reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(container.reagents))
 		if(!(reagent in sterilizing_reagents))
 			return FALSE
 		. = TRUE

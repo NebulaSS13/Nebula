@@ -8,7 +8,7 @@
 
 /obj/item/sealant_tank/on_update_icon()
 	. = ..()
-	add_overlay("fill_[floor((reagents.total_volume/reagents.maximum_volume) * 5)]")
+	add_overlay("fill_[floor((REAGENT_TOTAL_VOLUME(reagents)/REAGENT_MAXIMUM_VOLUME(reagents)) * 5)]")
 
 /obj/item/sealant_tank/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
@@ -16,7 +16,7 @@
 		. += SPAN_NOTICE("\The [src] has about [REAGENT_VOLUME(reagents, /decl/material/liquid/foam) || 0] charge\s of sealant left.")
 
 /obj/item/sealant_tank/mapped/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/foam, reagents.maximum_volume)
+	reagents.add_reagent(/decl/material/liquid/foam, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/sealant_tank/physically_destroyed(var/skip_qdel)
 	var/turf/my_turf = get_turf(src)

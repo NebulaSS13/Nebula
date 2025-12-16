@@ -78,14 +78,14 @@
 			//#TODO: The add coolant stuff could probably be handled by the default reagent handling code. And the emptying could be done with an alt interaction.
 			if(choice == "Add coolant")
 				var/obj/item/chems/glass/G = used_item
-				var/amount_transferred = min(src.reagents.maximum_volume - src.reagents.total_volume, G.reagents.total_volume)
+				var/amount_transferred = min(REAGENT_MAXIMUM_VOLUME(reagents) - REAGENT_TOTAL_VOLUME(src.reagents), REAGENT_TOTAL_VOLUME(G.reagents))
 				G.reagents.trans_to(src, amount_transferred)
 				to_chat(user, SPAN_INFO("You empty [amount_transferred]u of coolant into [src]."))
 				update_coolant()
 				return TRUE
 			else if(choice == "Empty coolant")
 				var/obj/item/chems/glass/G = used_item
-				var/amount_transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, src.reagents.total_volume)
+				var/amount_transferred = min(REAGENT_MAXIMUM_VOLUME(G.reagents) - REAGENT_TOTAL_VOLUME(G.reagents), REAGENT_TOTAL_VOLUME(src.reagents))
 				src.reagents.trans_to(G, amount_transferred)
 				to_chat(user, SPAN_INFO("You remove [amount_transferred]u of coolant from [src]."))
 				update_coolant()
@@ -112,7 +112,7 @@
 	fresh_coolant = 0
 	coolant_purity = 0
 	var/num_reagent_types = 0
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		var/cur_purity = coolant_reagents_purity[reagent.type]
 		if(!cur_purity)
 			cur_purity = 0.1
@@ -144,7 +144,7 @@
 	//
 	data["coolant_usage_rate"] = "[coolant_usage_rate]"
 	data["unused_coolant_abs"] = round(fresh_coolant)
-	data["unused_coolant_per"] = round(fresh_coolant / reagents.maximum_volume * 100)
+	data["unused_coolant_per"] = round(fresh_coolant / REAGENT_MAXIMUM_VOLUME(reagents) * 100)
 	data["coolant_purity"] = "[coolant_purity * 100]"
 	//
 	data["optimal_wavelength"] = round(optimal_wavelength)

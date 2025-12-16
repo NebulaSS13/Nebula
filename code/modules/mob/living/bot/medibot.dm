@@ -199,7 +199,7 @@
 	. = ..()
 	. += "<br>Beaker: "
 	if(reagent_glass)
-		. += "<A href='byond://?src=\ref[src];command=eject'>Loaded \[[reagent_glass.reagents.total_volume]/[reagent_glass.reagents.maximum_volume]\]</a>"
+		. += "<A href='byond://?src=\ref[src];command=eject'>Loaded \[[REAGENT_TOTAL_VOLUME(reagent_glass.reagents)]/[REAGENT_MAXIMUM_VOLUME(reagent_glass.reagents)]\]</a>"
 	else
 		. += "None loaded"
 
@@ -306,7 +306,7 @@
 
 	// If they're injured, we're using a beaker, and they don't have on of the chems in the beaker
 	if(reagent_glass && use_beaker && ((patient.get_damage(BRUTE) >= heal_threshold) || (patient.get_damage(TOX) >= heal_threshold) || (patient.get_damage(TOX) >= heal_threshold) || (patient.get_damage(OXY) >= (heal_threshold + 15))))
-		for(var/decl/material/reagent as anything in reagent_glass.reagents.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagent_glass.reagents))
 			if(!patient.reagents.has_reagent(reagent))
 				return 1
 			continue

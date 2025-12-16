@@ -63,7 +63,7 @@
 	return //Bypass searching through the whole icon file for a filling icon
 
 /obj/item/food/can/can_be_poured_into(atom/source)
-	return (reagents?.maximum_volume > 0) && ATOM_IS_OPEN_CONTAINER(src)
+	return (REAGENT_MAXIMUM_VOLUME(reagents) > 0) && ATOM_IS_OPEN_CONTAINER(src)
 
 //Just a short line of Canned Consumables, great for treasure in faraway abandoned outposts
 

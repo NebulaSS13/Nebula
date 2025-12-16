@@ -120,8 +120,8 @@
 	return add_material(used_item, user) || ..()
 
 /obj/machinery/fuel_compressor/proc/add_material(var/obj/item/thing, var/mob/user)
-	if(istype(thing) && thing.reagents && thing.reagents.total_volume && ATOM_IS_OPEN_CONTAINER(thing))
-		for(var/decl/material/reagent as anything in thing.reagents.reagent_volumes)
+	if(istype(thing) && thing.reagents && REAGENT_TOTAL_VOLUME(thing.reagents) && ATOM_IS_OPEN_CONTAINER(thing))
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(thing.reagents))
 			var/taking_reagent = REAGENT_VOLUME(thing.reagents, reagent)
 			thing.remove_from_reagents(reagent, taking_reagent)
 			stored_material[reagent.type] += taking_reagent

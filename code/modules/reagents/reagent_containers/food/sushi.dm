@@ -26,7 +26,7 @@
 			fish_type = "tofu"
 
 		if(topping.reagents)
-			topping.reagents.trans_to(src, topping.reagents.total_volume)
+			topping.reagents.trans_to(src, REAGENT_TOTAL_VOLUME(topping.reagents))
 
 		var/mob/M = topping.loc
 		if(istype(M)) M.drop_from_inventory(topping)
@@ -35,7 +35,7 @@
 	if(istype(rice))
 		if(rice.reagents)
 			rice.reagents.trans_to(src, 1)
-		if(!rice.reagents || !rice.reagents.total_volume)
+		if(!rice.reagents || !REAGENT_TOTAL_VOLUME(rice.reagents))
 			var/mob/M = rice.loc
 			if(istype(M)) M.drop_from_inventory(rice)
 			qdel(rice)
@@ -98,7 +98,7 @@
 		bitesize = slices
 		update_icon()
 		if(used_item.reagents)
-			used_item.reagents.trans_to(src, used_item.reagents.total_volume)
+			used_item.reagents.trans_to(src, REAGENT_TOTAL_VOLUME(used_item.reagents))
 		qdel(used_item)
 		return TRUE
 

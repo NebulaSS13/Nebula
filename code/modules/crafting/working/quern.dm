@@ -3,21 +3,20 @@
 	max_storage_space = DEFAULT_BOX_STORAGE
 
 /obj/structure/working/quern
-	name       = "quern-stone"
-	desc       = "A pair of heavy stones connected by an axle, used to grind plants and minerals into powder."
-	icon       = 'icons/obj/structures/quern.dmi'
-	material   = /decl/material/solid/stone/granite
-	color      = /decl/material/solid/stone/granite::color
-	storage    = /datum/storage/hopper/mortar/quern
-	work_skill = SKILL_COOKING // Maybe?
-	var/tmp/volume = 1000 // Same as reagent dispensers. Possibly too large?
+	name        = "quern-stone"
+	desc        = "A pair of heavy stones connected by an axle, used to grind plants and minerals into powder."
+	icon        = 'icons/obj/structures/quern.dmi'
+	material    = /decl/material/solid/stone/granite
+	color       = /decl/material/solid/stone/granite::color
+	storage     = /datum/storage/hopper/mortar/quern
+	work_skill  = SKILL_COOKING // Maybe?
+	chem_volume = 1000 // Same as reagent dispensers. Possibly too large?
 	var/amount_dispensed              = 10
 	var/tmp/possible_transfer_amounts = @"[10,25,50,100,500]"
 
 /obj/structure/working/quern/Initialize()
 	. = ..()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-	initialize_reagents()
 
 /obj/structure/working/quern/try_start_working(mob/user)
 
@@ -51,19 +50,12 @@
 	var/decl/material/crushing_material = grinding.get_material()
 	if(!attacking_material || !crushing_material || attacking_material.hardness <= crushing_material.hardness)
 		return FALSE
-	if(REAGENTS_FREE_SPACE(reagents) < grinding.reagents?.total_volume)
+	if(REAGENTS_FREE_SPACE(reagents) < REAGENT_TOTAL_VOLUME(grinding.reagents))
 		return FALSE
-	if(grinding.reagents?.total_volume) // if it has no reagents, skip all the fluff and destroy it instantly
-		grinding.reagents.trans_to(src, grinding.reagents.total_volume)
+	if(REAGENT_TOTAL_VOLUME(grinding.reagents)) // if it has no reagents, skip all the fluff and destroy it instantly
+		grinding.reagents.trans_to(src, REAGENT_TOTAL_VOLUME(grinding.reagents))
 	QDEL_NULL(grinding)
 	return TRUE
-
-/obj/structure/working/quern/initialize_reagents(populate = TRUE)
-	if(!reagents)
-		create_reagents(volume)
-	else
-		reagents.maximum_volume = max(reagents.maximum_volume, volume)
-	. = ..()
 
 /obj/structure/working/quern/set_reagent_amount_dispensed(new_amount)
 	amount_dispensed = new_amount

@@ -42,7 +42,7 @@
 
 		storage?.remove_from_storage(user, cig, null)
 		user.equip_to_slot(cig, slot_wear_mask_str)
-		reagents.maximum_volume = 5 * contents.len
+		create_or_update_reagents(5 * contents.len)
 		to_chat(user, SPAN_NOTICE("You take a cigarette out of the pack."))
 		update_icon()
 		return TRUE

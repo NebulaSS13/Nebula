@@ -73,7 +73,7 @@
 	if(critter.stat == DEAD)
 		return FALSE
 
-	if(udder?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(udder) <= 0)
 		to_chat(user, SPAN_WARNING("\The [critter]'s udder is dry. Wait a little longer."))
 		return TRUE
 
@@ -108,7 +108,7 @@
 	if(critter.stat == DEAD)
 		return FALSE
 
-	if(udder?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(udder) <= 0)
 		to_chat(user, SPAN_WARNING("\The [critter]'s udder is dry. Wait a little longer."))
 		return TRUE
 

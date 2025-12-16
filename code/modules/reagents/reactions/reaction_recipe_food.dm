@@ -33,7 +33,7 @@
 /decl/chemical_reaction/recipe/food/dairy/send_data(var/datum/reagents/holder, var/reaction_limit)
 	. = ..()
 	for(var/reagent in required_reagents)
-		var/list/data = LAZYACCESS(holder.reagent_data, reagent)
+		var/list/data = REAGENT_DATA(holder, reagent)
 		if(!islist(data))
 			continue
 		for(var/milk_key in milk_data_keys)

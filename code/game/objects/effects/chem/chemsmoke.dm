@@ -106,7 +106,7 @@
 /datum/effect/effect/system/smoke_spread/chem/set_up(var/datum/reagents/carry = null, n = 10, c = 0, loca, direct)
 	range = n * 0.3
 	cardinals = c
-	carry.trans_to_obj(chemholder, carry.total_volume, copy = 1)
+	carry.trans_to_obj(chemholder, REAGENT_TOTAL_VOLUME(carry), copy = 1)
 
 	if(istype(loca, /turf/))
 		location = loca
@@ -157,7 +157,8 @@
 	if(!location)
 		return
 
-	if(LAZYLEN(chemholder.reagents.reagent_volumes))
+	var/trans_volumes = REAGENT_VOLUMES(chemholder.reagents)
+	if(LAZYLEN(trans_volumes))
 		for(var/turf/T in (wallList|targetTurfs))
 			chemholder.reagents.touch_turf(T)
 
@@ -216,8 +217,9 @@
 	else
 		smoke = new /obj/effect/effect/smoke/chem(location, smoke_duration + rand(0, 20), T, I)
 
-	if(LAZYLEN(chemholder.reagents.reagent_volumes))
-		chemholder.reagents.trans_to_obj(smoke, chemholder.reagents.total_volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
+	var/trans_volumes = REAGENT_VOLUMES(chemholder.reagents)
+	if(LAZYLEN(trans_volumes))
+		chemholder.reagents.trans_to_obj(smoke, REAGENT_TOTAL_VOLUME(chemholder.reagents) / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
 
 	//Kinda ugly, but needed unless the system is reworked
 	if(splash_initial)

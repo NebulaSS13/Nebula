@@ -146,14 +146,15 @@
 	data["isBeakerLoaded"] = container ? 1 : 0
 	data["glass"] = accept_drinking
 	var beakerD[0]
-	if(LAZYLEN(container?.reagents?.reagent_volumes))
-		for(var/decl/material/reagent as anything in container.reagents.reagent_volumes)
+	var/beaker_volumes = REAGENT_VOLUMES(container?.reagents)
+	if(LAZYLEN(beaker_volumes))
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(container.reagents))
 			beakerD[++beakerD.len] = list("name" = reagent.use_name, "volume" = REAGENT_VOLUME(container.reagents, reagent))
 	data["beakerContents"] = beakerD
 
 	if(container) // Container has had null reagents in the past; may be due to qdel without clearing reference.
-		data["beakerCurrentVolume"] = container.reagents?.total_volume || 0
-		data["beakerMaxVolume"] = container.reagents?.maximum_volume || 0
+		data["beakerCurrentVolume"] = REAGENT_TOTAL_VOLUME(container.reagents)
+		data["beakerMaxVolume"] = REAGENT_MAXIMUM_VOLUME(container.reagents)
 	else
 		data["beakerCurrentVolume"] = null
 		data["beakerMaxVolume"] = null
@@ -161,7 +162,7 @@
 	var chemicals[0]
 	for(var/label in cartridges)
 		var/obj/item/chems/chem_disp_cartridge/C = cartridges[label]
-		chemicals[++chemicals.len] = list("label" = label, "amount" = C.reagents.total_volume)
+		chemicals[++chemicals.len] = list("label" = label, "amount" = REAGENT_TOTAL_VOLUME(C.reagents))
 	data["chemicals"] = chemicals
 
 	// update the ui if it exists, returns null if no ui is passed/found

@@ -22,8 +22,8 @@
 /obj/item/food/grown/handle_centrifuge_process(obj/machinery/centrifuge/centrifuge)
 	if(!(. = ..()))
 		return
-	if(reagents?.total_volume)
-		reagents.trans_to_holder(centrifuge.loaded_beaker.reagents, reagents.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
+		reagents.trans_to_holder(centrifuge.loaded_beaker.reagents, REAGENT_TOTAL_VOLUME(reagents))
 	for(var/obj/item/thing in contents)
 		thing.dropInto(centrifuge.loc)
 	for(var/atom/movable/thing in convert_matter_to_lumps())
@@ -96,8 +96,8 @@
 	. = ..(mapload, material_key, skip_plate) //Init reagents
 
 	update_desc()
-	if(reagents.total_volume > 0)
-		bitesize = 1 + round(reagents.total_volume / 2, 1)
+	if(REAGENT_TOTAL_VOLUME(reagents) > 0)
+		bitesize = 1 + round(REAGENT_TOTAL_VOLUME(reagents) / 2, 1)
 	update_icon()
 
 /obj/item/food/grown/populate_reagents()
@@ -143,7 +143,7 @@
 
 		var/list/descriptors = list()
 
-		for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 			if(reagent.fruit_descriptor)
 				descriptors |= reagent.fruit_descriptor
 			if(reagent.reflectiveness >= MAT_VALUE_SHINY)
@@ -285,9 +285,9 @@ var/global/list/_wood_materials = list(
 			return TRUE
 
 		var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
-		R.create_or_update_reagents(max(R.reagents?.maximum_volume, reagents?.total_volume))
+		R.create_or_update_reagents(max(REAGENT_MAXIMUM_VOLUME(R.reagents), REAGENT_TOTAL_VOLUME(reagents)))
 		R.brand = "[src] handrolled in \the [used_item]."
-		reagents.trans_to_holder(R.reagents, R.reagents.total_volume)
+		reagents.trans_to_holder(R.reagents, REAGENT_TOTAL_VOLUME(R.reagents))
 		to_chat(user, SPAN_NOTICE("You roll \the [src] into \the [used_item]."))
 		user.put_in_active_hand(R)
 		qdel(used_item)
@@ -308,7 +308,7 @@ var/global/list/_wood_materials = list(
 	. = ..()
 
 	if(seed && seed.get_trait(TRAIT_STINGS))
-		if(!reagents || reagents.total_volume <= 0)
+		if(!reagents || REAGENT_TOTAL_VOLUME(reagents) <= 0)
 			return
 		remove_any_reagents(rand(1,3))
 		seed.thrown_at(src, target)
@@ -347,7 +347,7 @@ var/global/list/_wood_materials = list(
 		var/mob/living/human/H = user
 		if(istype(H) && H.get_equipped_item(slot_gloves_str))
 			return
-		if(!reagents || reagents.total_volume <= 0)
+		if(!reagents || REAGENT_TOTAL_VOLUME(reagents) <= 0)
 			return
 		remove_any_reagents(rand(1,3)) //Todo, make it actually remove the reagents the seed uses.
 		var/affected = pick(BP_R_HAND,BP_L_HAND)

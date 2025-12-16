@@ -129,7 +129,7 @@
 	if(bodytype)
 		reagent_to_add = bodytype.edible_reagent // can set this to null and skip the next block
 	if(reagent_to_add)
-		add_to_reagents(reagent_to_add, reagents.maximum_volume)
+		add_to_reagents(reagent_to_add, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/organ/proc/copy_from_mob_snapshot(var/datum/mob_snapshot/supplied_appearance)
 	if(supplied_appearance != organ_appearance) // Hacky. Is this ever used? Do any organs ever have DNA set before setup_as_organic?
@@ -236,7 +236,7 @@
 		return
 
 	if(!owner && reagents)
-		if(prob(40) && reagents.total_volume >= 0.1)
+		if(prob(40) && REAGENT_TOTAL_VOLUME(reagents) >= 0.1)
 			if(reagents.has_reagent(/decl/material/liquid/blood))
 				blood_splatter(get_turf(src), src, 1)
 			remove_any_reagents(0.1)
@@ -261,8 +261,9 @@
 /obj/item/organ/proc/handle_ailment(var/datum/ailment/ailment)
 	if(ailment.treated_by_reagent_type)
 		for(var/datum/reagents/source as anything in owner.get_metabolizing_reagent_holders())
-			for(var/decl/material/reagent as anything in source.reagent_volumes)
-				if(ailment.treated_by_medication(reagent.type, source.reagent_volumes[reagent]))
+			var/source_volumes = REAGENT_VOLUMES(source)
+			for(var/decl/material/reagent as anything in source_volumes)
+				if(ailment.treated_by_medication(reagent.type, source_volumes[reagent]))
 					ailment.was_treated_by_medication(source, reagent.type)
 					return
 	if(ailment.treated_by_chem_effect && owner.has_chemical_effect(ailment.treated_by_chem_effect, ailment.treated_by_chem_effect_strength))
@@ -423,8 +424,8 @@
 	var/obj/item/food/organ/yum = new(get_turf(src))
 	yum.SetName(name)
 	yum.appearance = src
-	if(reagents && reagents.total_volume)
-		reagents.trans_to(yum, reagents.total_volume)
+	if(reagents && REAGENT_TOTAL_VOLUME(reagents))
+		reagents.trans_to(yum, REAGENT_TOTAL_VOLUME(reagents))
 	transfer_fingerprints_to(yum)
 	if(user)
 		user.put_in_active_hand(yum)

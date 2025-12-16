@@ -38,7 +38,7 @@
 
 /obj/item/chems/hypospray/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(!reagents?.total_volume)
+	if(!REAGENT_TOTAL_VOLUME(reagents))
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
 		return TRUE
 
@@ -62,7 +62,7 @@
 		if(!user.do_skilled(time, SKILL_MEDICAL, target))
 			return TRUE
 
-	if(single_use && reagents.total_volume <= 0) // currently only applies to autoinjectors
+	if(single_use && REAGENT_TOTAL_VOLUME(reagents) <= 0) // currently only applies to autoinjectors
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER // Prevents autoinjectors to be refilled.
 
 	to_chat(user, SPAN_NOTICE("You inject [target] with [src]."))
@@ -71,10 +71,10 @@
 	user.visible_message(SPAN_WARNING("[user] injects [target] with [src]."))
 
 	if(target.reagents)
-		var/contained = REAGENT_LIST(src)
+		var/contained = REAGENT_LIST(reagents)
 		var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INJECT)
 		admin_inject_log(user, target, src, contained, trans)
-		to_chat(user, SPAN_NOTICE("[trans] unit\s injected. [reagents.total_volume] unit\s remaining in \the [src]."))
+		to_chat(user, SPAN_NOTICE("[trans] unit\s injected. [REAGENT_TOTAL_VOLUME(reagents)] unit\s remaining in \the [src]."))
 
 	return TRUE
 
@@ -115,8 +115,8 @@
 		V.update_icon()
 
 	loaded_vial = V
-	create_or_update_reagents(loaded_vial.reagents.maximum_volume, override_volume = TRUE)
-	loaded_vial.reagents.trans_to_holder(reagents, reagents.maximum_volume)
+	create_or_update_reagents(REAGENT_MAXIMUM_VOLUME(loaded_vial.reagents), override_volume = TRUE)
+	loaded_vial.reagents.trans_to_holder(reagents, REAGENT_MAXIMUM_VOLUME(reagents))
 
 	if(user)
 		user.visible_message(SPAN_NOTICE("[user] has loaded [V] into \the [src]."), SPAN_NOTICE("[usermessage]"))
@@ -126,10 +126,10 @@
 	return TRUE
 
 /obj/item/chems/hypospray/vial/proc/remove_vial(var/mob/user, var/swap_mode, var/should_update_icon = TRUE)
-	if(!loaded_vial)
+	if(!loaded_vial || !istype(reagents))
 		return
-	reagents.trans_to_holder(loaded_vial.reagents, reagents.maximum_volume)
-	reagents.maximum_volume = 0
+	reagents.trans_to_holder(loaded_vial.reagents, REAGENT_MAXIMUM_VOLUME(reagents))
+	REAGENT_SET_MAX_VOL(reagents, 0)
 	loaded_vial.update_icon()
 	if(user)
 		user.put_in_hands(loaded_vial)
@@ -190,8 +190,8 @@
 /obj/item/chems/hypospray/autoinjector/populate_reagents()
 	SHOULD_CALL_PARENT(TRUE)
 	. = ..()
-	if(reagents?.total_volume > 0 && autolabel && !label_text) // don't override preset labels
-		label_text = "[reagents.get_primary_reagent_name()], [reagents.total_volume]u"
+	if(REAGENT_TOTAL_VOLUME(reagents) > 0 && autolabel && !label_text) // don't override preset labels
+		label_text = "[reagents.get_primary_reagent_name()], [REAGENT_TOTAL_VOLUME(reagents)]u"
 
 /obj/item/chems/hypospray/autoinjector/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	. = ..()
@@ -200,12 +200,12 @@
 
 /obj/item/chems/hypospray/autoinjector/on_update_icon()
 	. = ..()
-	if(reagents?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		icon_state = "[icon_state]_used"
 
 /obj/item/chems/hypospray/autoinjector/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..(user)
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		. += SPAN_NOTICE("It is currently loaded.")
 	else
 		. += SPAN_NOTICE("It is spent.")
@@ -214,14 +214,14 @@
 // Autoinjector - Stabilizer
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/stabilizer/populate_reagents()
-	add_to_reagents(/decl/material/liquid/stabilizer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/stabilizer, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Adrenaline
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/adrenaline/populate_reagents()
-	add_to_reagents(/decl/material/liquid/adrenaline, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/adrenaline, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -231,7 +231,7 @@
 	detail_color = COLOR_GREEN
 
 /obj/item/chems/hypospray/autoinjector/detox/populate_reagents()
-	add_to_reagents(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antitoxins, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -241,7 +241,7 @@
 	detail_color = COLOR_PURPLE
 
 /obj/item/chems/hypospray/autoinjector/pain/populate_reagents()
-	add_to_reagents(/decl/material/liquid/painkillers, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/painkillers, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -251,7 +251,7 @@
 	detail_color = COLOR_AMBER
 
 /obj/item/chems/hypospray/autoinjector/antirad/populate_reagents()
-	add_to_reagents(/decl/material/liquid/antirads, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antirads, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -261,7 +261,7 @@
 	detail_color = COLOR_DARK_GRAY
 
 /obj/item/chems/hypospray/autoinjector/hallucinogenics/populate_reagents()
-	add_to_reagents(/decl/material/liquid/hallucinogenics, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/hallucinogenics, REAGENT_MAXIMUM_VOLUME(reagents))
 	. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -274,9 +274,9 @@
 
 /obj/item/chems/hypospray/autoinjector/clotting/populate_reagents()
 	. = ..()
-	var/amt = round(reagents.maximum_volume*0.5)
+	var/amt = round(REAGENT_MAXIMUM_VOLUME(reagents)*0.5)
 	add_to_reagents(/decl/material/liquid/stabilizer, amt)
-	add_to_reagents(/decl/material/liquid/clotting_agent, (reagents.maximum_volume - amt))
+	add_to_reagents(/decl/material/liquid/clotting_agent, (REAGENT_MAXIMUM_VOLUME(reagents) - amt))
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Empty

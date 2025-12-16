@@ -42,15 +42,14 @@
 	.["immune_system"] =    get_immunity()
 	.["reagents"] = list()
 
-	if(reagents?.total_volume)
-		for(var/decl/material/reagent as anything in reagents.liquid_volumes)
+	if(REAGENT_TOTAL_VOLUME(reagents))
+		for(var/decl/material/reagent as anything in REAGENT_LIQUID_VOLUMES(reagents))
 			var/list/reagent_data = list()
 			reagent_data["name"]      = reagent.get_reagent_name(reagents, MAT_PHASE_LIQUID)
 			reagent_data["quantity"]  = round(REAGENT_VOLUME(reagents, reagent),1)
 			reagent_data["scannable"] = reagent.scannable
 			.["reagents"] += list(reagent_data)
-
-		for(var/decl/material/reagent as anything in reagents.solid_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_SOLID_VOLUMES(reagents))
 			var/list/reagent_data = list()
 			reagent_data["name"]      = reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)
 			reagent_data["quantity"]  = round(REAGENT_VOLUME(reagents, reagent),1)
@@ -98,8 +97,8 @@
 	.["blood_pressure"] =   get_blood_pressure()
 	.["blood_o2"] =         get_blood_oxygenation()
 	if(vessel)
-		.["blood_volume"] =     vessel.total_volume
-		.["blood_volume_max"] = vessel.maximum_volume
+		.["blood_volume"] =     REAGENT_TOTAL_VOLUME(vessel)
+		.["blood_volume_max"] = REAGENT_MAXIMUM_VOLUME(vessel)
 
 /proc/display_medical_data_header(var/list/scan, skill_level = SKILL_DEFAULT)
 	//In case of problems, abort.

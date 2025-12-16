@@ -37,7 +37,7 @@
 
 	// Fill or take from the vessel.
 	if(used_item.reagents && ATOM_IS_OPEN_CONTAINER(used_item))
-		if(used_item.reagents.total_volume)
+		if(REAGENT_TOTAL_VOLUME(used_item.reagents))
 			if(istype(used_item, /obj/item/chems))
 				var/obj/item/chems/vessel = used_item
 				if(vessel.standard_pour_into(user, src))
@@ -66,16 +66,18 @@
 		return TRUE
 	if(handle_eaten_by_mob(user, target) != EATEN_INVALID)
 		return TRUE
+
+	var/total_vol = REAGENT_TOTAL_VOLUME(reagents)
 	if(user.check_intent(I_FLAG_HARM))
 		if(standard_splash_mob(user,target))
 			return TRUE
-		if(reagents && reagents.total_volume)
+		if(reagents && total_vol)
 			to_chat(user, SPAN_DANGER("You splash the contents of \the [src] onto \the [target]."))
-			reagents.splash(target, reagents.total_volume)
+			reagents.splash(target, total_vol)
 			return TRUE
-	else if(reagents && reagents.total_volume)
+	else if(reagents && total_vol)
 		to_chat(user, SPAN_NOTICE("You splash a small amount of the contents of \the [src] onto \the [target]."))
-		reagents.splash(target, min(reagents.total_volume, 5))
+		reagents.splash(target, min(total_vol, 5))
 		return TRUE
 	. = ..()
 // End boilerplate.
@@ -87,18 +89,18 @@
 	for(var/obj/item/thing in get_stored_inventory())
 		. += "\the [thing]"
 
-	if(reagents?.total_volume)
-		for(var/decl/material/reagent as anything in reagents.solid_volumes)
-			. += "[reagents.solid_volumes[reagent]]u of [reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)]"
+	if(REAGENT_TOTAL_VOLUME(reagents))
+		for(var/decl/material/reagent as anything in REAGENT_SOLID_VOLUMES(reagents))
+			. += "[SOLID_VOLUME(reagents, reagent)]u of [reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)]"
 
 		var/datum/gas_mixture/environment = loc?.return_air()
 		var/ambient_pressure = environment ? environment.return_pressure() : ONE_ATMOSPHERE
-		for(var/decl/material/reagent as anything in reagents.liquid_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_LIQUID_VOLUMES(reagents))
 			var/reagent_name = reagent.get_reagent_name(reagents, MAT_PHASE_LIQUID)
 			if(reagent.phase_at_temperature(temperature, ambient_pressure) == MAT_PHASE_GAS && reagent.soup_hot_desc)
-				. += "[reagents.liquid_volumes[reagent]]u of [reagent.soup_hot_desc] [reagent_name]"
+				. += "[LIQUID_VOLUME(reagents, reagent)]u of [reagent.soup_hot_desc] [reagent_name]"
 			else
-				. += "[reagents.liquid_volumes[reagent]]u of [reagent_name]"
+				. += "[LIQUID_VOLUME(reagents, reagent)]u of [reagent_name]"
 
 /obj/item/chems/cooking_vessel/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()

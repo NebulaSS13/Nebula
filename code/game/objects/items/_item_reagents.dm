@@ -2,7 +2,7 @@
 	if(!istype(target) || isnull(target.get_reagent_amount_dispensed()) || (!skip_container_check && (target.atom_flags & ATOM_FLAG_OPEN_CONTAINER)))
 		return FALSE
 
-	if(!target.reagents || !target.reagents.total_volume)
+	if(!target.reagents || !REAGENT_TOTAL_VOLUME(target.reagents))
 		to_chat(user, SPAN_NOTICE("[target] is empty of reagents."))
 		return TRUE
 
@@ -22,7 +22,7 @@
 		to_chat(user, SPAN_NOTICE("You can't splash people on help intent."))
 		return TRUE
 
-	if(!reagents || !reagents.total_volume)
+	if(!reagents || !REAGENT_TOTAL_VOLUME(reagents))
 		to_chat(user, SPAN_NOTICE("[src] is empty of reagents."))
 		return TRUE
 
@@ -30,14 +30,14 @@
 		to_chat(user, SPAN_NOTICE("[target] is full of reagents."))
 		return TRUE
 
-	var/contained = REAGENT_LIST(src)
+	var/contained = REAGENT_LIST(reagents)
 
 	admin_attack_log(user, target, "Used \the [name] containing [contained] to splash the victim.", "Was splashed by \the [name] containing [contained].", "used \the [name] containing [contained] to splash")
 	user.visible_message( \
 		SPAN_DANGER("\The [target] has been splashed with the contents of \the [src] by \the [user]!"), \
 		SPAN_DANGER("You splash \the [target] with the contents of \the [src]."))
 
-	reagents.splash(target, reagents.total_volume)
+	reagents.splash(target, REAGENT_TOTAL_VOLUME(reagents))
 	return TRUE
 
 /obj/item/proc/standard_pour_into(mob/user, atom/target, amount = 5) // This goes into afterattack and yes, it's atom-level
@@ -55,7 +55,7 @@
 	if(!can_be_poured_from(user, target))
 		return TRUE // don't splash if we can't pour
 
-	if(!reagents || !reagents.total_volume)
+	if(!reagents || !REAGENT_TOTAL_VOLUME(reagents))
 		to_chat(user, SPAN_NOTICE("[src] is empty of reagents."))
 		return TRUE
 
@@ -63,7 +63,8 @@
 		to_chat(user, SPAN_NOTICE("[target] is full of reagents."))
 		return TRUE
 
-	var/had_liquids = length(reagents.liquid_volumes)
+	var/liquid_volumes = REAGENT_LIQUID_VOLUMES(reagents)
+	var/had_liquids = length(liquid_volumes)
 	var/transferred_amount = reagents.trans_to(target, amount)
 
 	if(had_liquids)
@@ -71,5 +72,5 @@
 	else
 		// Sounds more like pouring small pellets or dust.
 		playsound(src, 'sound/effects/refill.ogg', 25, 1)
-	to_chat(user, SPAN_NOTICE("You transfer [transferred_amount] unit\s of the solution to \the [target]. \The [src] now contains [reagents.total_volume] unit\s."))
+	to_chat(user, SPAN_NOTICE("You transfer [transferred_amount] unit\s of the solution to \the [target]. \The [src] now contains [REAGENT_TOTAL_VOLUME(reagents)] unit\s."))
 	return TRUE

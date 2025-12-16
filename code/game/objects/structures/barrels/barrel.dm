@@ -26,13 +26,13 @@
 
 // Overrides due to wonky reagent_dispeners opencontainer flag handling.
 /obj/structure/reagent_dispensers/barrel/can_be_poured_from(mob/user, atom/target)
-	return (reagents?.maximum_volume > 0)
+	return (REAGENT_MAXIMUM_VOLUME(reagents) > 0)
 /obj/structure/reagent_dispensers/barrel/can_be_poured_into(mob/user, atom/target)
-	return (reagents?.maximum_volume > 0)
+	return (REAGENT_MAXIMUM_VOLUME(reagents) > 0)
 
 // Override to skip open container check.
 /obj/structure/reagent_dispensers/barrel/can_drink_from(mob/user)
-	return reagents?.total_volume && user.check_has_mouth()
+	return REAGENT_TOTAL_VOLUME(reagents) && user.check_has_mouth()
 
 /obj/structure/reagent_dispensers/barrel/Initialize()
 	if(ispath(metal_material))
@@ -73,7 +73,7 @@
 	// Add lid/reagents overlay/lid metal.
 	if(show_liquid_contents && ATOM_IS_OPEN_CONTAINER(src))
 		if(reagents)
-			var/overlay_amount = NONUNIT_CEILING(reagents.total_liquid_volume / reagents.maximum_volume * 100, 10)
+			var/overlay_amount = NONUNIT_CEILING(REAGENT_TOTAL_LIQUID_VOLUME(reagents) / REAGENT_MAXIMUM_VOLUME(reagents) * 100, 10)
 			var/image/filling_overlay = overlay_image(icon, "[icon_state]-[overlay_amount]", reagents.get_color(), RESET_COLOR | RESET_ALPHA)
 			add_overlay(filling_overlay)
 		add_overlay(overlay_image(icon, "[icon_state]-lidopen", material?.color, RESET_COLOR))
@@ -89,7 +89,7 @@
 
 /obj/structure/reagent_dispensers/barrel/get_standard_interactions(var/mob/user)
 	. = ..()
-	if(reagents?.maximum_volume)
+	if(REAGENT_MAXIMUM_VOLUME(reagents))
 		LAZYADD(., global._reagent_interactions)
 
 	// Disambiguation actions, since barrels can have several different potential interactions for
@@ -120,16 +120,16 @@
 
 /obj/structure/reagent_dispensers/barrel/ebony/water/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/barrel/ebony/beer/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/alcohol/beer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/beer, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/barrel/ebony/wine/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/alcohol/wine, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/wine, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/reagent_dispensers/barrel/ebony/oil/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/oil, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/oil, REAGENT_MAXIMUM_VOLUME(reagents))

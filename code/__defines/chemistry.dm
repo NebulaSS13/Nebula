@@ -78,13 +78,30 @@
 #define HANDLE_REACTIONS(_reagents)  if(!QDELETED(_reagents)) { SSmaterials.active_holders[_reagents] = TRUE; }
 #define UNQUEUE_REACTIONS(_reagents) SSmaterials.active_holders -= _reagents
 
-#define REAGENT_LIST(R) (R.reagents?.get_reagents() || "No reagent holder")
+#define REAGENT_LIST(R) ((istype(R, /datum/reagents) && R:get_reagents()) || "No reagent holder")
 
-#define REAGENTS_FREE_SPACE(R) (R?.maximum_volume - R?.total_volume)
-#define REAGENT_VOLUME(REAGENT_HOLDER, REAGENT_TYPE) (REAGENT_HOLDER?.reagent_volumes && REAGENT_HOLDER.reagent_volumes[RESOLVE_TO_DECL(REAGENT_TYPE)])
-#define LIQUID_VOLUME(REAGENT_HOLDER,  REAGENT_TYPE) (REAGENT_HOLDER?.liquid_volumes  && REAGENT_HOLDER.liquid_volumes[RESOLVE_TO_DECL(REAGENT_TYPE)])
-#define SOLID_VOLUME(REAGENT_HOLDER,   REAGENT_TYPE) (REAGENT_HOLDER?.solid_volumes   && REAGENT_HOLDER.solid_volumes[RESOLVE_TO_DECL(REAGENT_TYPE)])
-#define REAGENT_DATA(REAGENT_HOLDER,   REAGENT_TYPE) (REAGENT_HOLDER?.reagent_data    && REAGENT_HOLDER.reagent_data[RESOLVE_TO_DECL(REAGENT_TYPE)])
+#define REAGENT_TOTAL_VOLUME(R) (UNLINT((istype(R, /datum/reagents) && R:total_volume) || 0))
+#define REAGENT_TOTAL_LIQUID_VOLUME(R) (UNLINT((istype(R, /datum/reagents) && R:total_liquid_volume) || 0))
+
+#define REAGENT_MAXIMUM_VOLUME(R) (UNLINT((istype(R, /datum/reagents) && R:maximum_volume) || 0))
+#define REAGENTS_FREE_SPACE(R) (UNLINT(istype(R, /datum/reagents) ? (R.maximum_volume - R.total_volume) : 0))
+
+#define REAGENT_VOLUMES(R)        ( (istype(R, /datum/reagents) && UNLINT(R:reagent_volumes)) || null )
+#define REAGENT_SOLID_VOLUMES(R)  ( (istype(R, /datum/reagents) && UNLINT(R:solid_volumes))   || null )
+#define REAGENT_LIQUID_VOLUMES(R) ( (istype(R, /datum/reagents) && UNLINT(R:liquid_volumes))  || null )
+#define REAGENT_GET_MAX_VOL(R)    ( (istype(R, /datum/reagents) && UNLINT(R:maximum_volume))  || 0 )
+#define REAGENT_GET_ATOM(R)       ( (istype(R, /datum/reagents) && UNLINT(R:my_atom))         || null )
+
+#define REAGENT_VOLUME(R, M)      ( istype(R, /datum/reagents) && UNLINT(R:reagent_volumes && R:reagent_volumes[RESOLVE_TO_DECL(M)]) )
+#define LIQUID_VOLUME(R, M)       ( istype(R, /datum/reagents) && UNLINT(R:liquid_volumes  && R:liquid_volumes[RESOLVE_TO_DECL(M)]) )
+#define SOLID_VOLUME(R, M)        ( istype(R, /datum/reagents) && UNLINT(R:solid_volumes   && R:solid_volumes[RESOLVE_TO_DECL(M)]) )
+#define REAGENT_DATA(R, M)        ( istype(R, /datum/reagents) && UNLINT(R:reagent_data    && R:reagent_data[RESOLVE_TO_DECL(M)]) )
+
+#define REAGENT_SET_MAX_VOL(R, V) if(istype(R, /datum/reagents)) { UNLINT(R:maximum_volume = V) }
+#define REAGENT_ADD_MAX_VOL(R, V) if(istype(R, /datum/reagents)) { UNLINT(R:maximum_volume += V) }
+#define REAGENT_SET_ATOM(R, A)    if(istype(R, /datum/reagents)) { UNLINT(R:my_atom = A) }
+#define REAGENT_SET_DATA(R, M, D) if(istype(R, /datum/reagents)) { LAZYSET(UNLINT(R:reagent_data), M, D) }
+
 
 #define CHEM_DOSE(M, R) LAZYACCESS(M._chem_doses, RESOLVE_TO_DECL(R))
 

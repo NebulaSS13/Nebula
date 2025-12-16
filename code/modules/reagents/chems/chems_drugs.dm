@@ -66,7 +66,7 @@
 
 	if(update_data)
 		LAZYSET(data, DATA_COOLDOWN_TIME, world.time)
-		LAZYSET(holder.reagent_data, type, data)
+		REAGENT_SET_DATA(holder, type, data)
 
 /decl/material/liquid/nicotine/affect_overdose(mob/living/victim, total_dose)
 	..()
@@ -256,7 +256,7 @@
 
 /decl/material/liquid/glowsap/gleam/on_leaving_metabolism(datum/reagents/metabolism/holder)
 	. = ..()
-	var/mob/M = holder?.my_atom
+	var/mob/M = REAGENT_GET_ATOM(holder)
 	if(istype(M))
 		M.remove_client_color(/datum/client_color/noir/thirdeye)
 

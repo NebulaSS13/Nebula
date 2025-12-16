@@ -55,9 +55,9 @@
 
 	// Dump reagents onto the turf.
 	var/turf/T = against ? get_turf(against) : get_turf(newloc)
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		visible_message(SPAN_DANGER("The contents of \the [src] splash all over \the [against || T]!"))
-		reagents.splash(against || T, reagents.total_volume)
+		reagents.splash(against || T, REAGENT_TOTAL_VOLUME(reagents))
 	if(!T)
 		qdel(src)
 		return
@@ -124,9 +124,9 @@
 		// bottle contents will be tainted by having the rag dipped
 		// in it.
 		if(rag && rag.reagents)
-			rag.reagents.trans_to(src, rag.reagents.total_volume)
+			rag.reagents.trans_to(src, REAGENT_TOTAL_VOLUME(rag.reagents))
 			if(reagents)
-				reagents.trans_to(rag, min(reagents.total_volume, rag.reagents.maximum_volume))
+				reagents.trans_to(rag, min(REAGENT_TOTAL_VOLUME(reagents), REAGENT_MAXIMUM_VOLUME(rag.reagents)))
 			rag.update_name()
 
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
@@ -177,7 +177,7 @@
 	//The reagents in the bottle splash all over the target, thanks for the idea Nodrak
 	if(reagents)
 		user.visible_message(SPAN_NOTICE("The contents of \the [src] splash all over [target]!"))
-		reagents.splash(target, reagents.total_volume)
+		reagents.splash(target, REAGENT_TOTAL_VOLUME(reagents))
 		if(rag?.is_on_fire() && istype(target))
 			target.ignite_fire()
 
@@ -250,7 +250,7 @@
 	center_of_mass = @'{"x":16,"y":4}'
 
 /obj/item/chems/drinks/bottle/gin/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/gin, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/gin, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/whiskey
 	name = "Uncle Git's Special Reserve"
@@ -259,7 +259,7 @@
 	center_of_mass = @'{"x":16,"y":3}'
 
 /obj/item/chems/drinks/bottle/whiskey/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/whiskey, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/whiskey, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/agedwhiskey
 	name = "aged whiskey"
@@ -268,7 +268,7 @@
 	center_of_mass = @'{"x":16,"y":3}'
 
 /obj/item/chems/drinks/bottle/agedwhiskey/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/aged_whiskey, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/aged_whiskey, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/vodka
 	name = "Tunguska Triple Distilled"
@@ -277,7 +277,7 @@
 	center_of_mass = @'{"x":17,"y":3}'
 
 /obj/item/chems/drinks/bottle/vodka/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/vodka, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/vodka, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/tequila
 	name = "Caccavo Guaranteed Quality tequila"
@@ -286,7 +286,7 @@
 	center_of_mass = @'{"x":16,"y":3}'
 
 /obj/item/chems/drinks/bottle/tequila/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/tequila, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/tequila, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/patron
 	name = "Wrapp Artiste Patron"
@@ -295,7 +295,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/bottle/patron/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/tequila, reagents.maximum_volume - 5)
+	add_to_reagents(/decl/material/liquid/alcohol/tequila, REAGENT_MAXIMUM_VOLUME(reagents) - 5)
 	add_to_reagents(/decl/material/solid/metal/silver,     5)
 
 /obj/item/chems/drinks/bottle/rum
@@ -305,7 +305,7 @@
 	center_of_mass = @'{"x":16,"y":8}'
 
 /obj/item/chems/drinks/bottle/rum/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/rum, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/rum, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/holywater
 	name = "Flask of Holy Water"
@@ -314,7 +314,7 @@
 	center_of_mass = @'{"x":17,"y":10}'
 
 /obj/item/chems/drinks/bottle/holywater/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume, list(DATA_WATER_HOLINESS = TRUE))
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents), list(DATA_WATER_HOLINESS = TRUE))
 
 /obj/item/chems/drinks/bottle/vermouth
 	name = "Goldeneye Vermouth"
@@ -323,7 +323,7 @@
 	center_of_mass = @'{"x":17,"y":3}'
 
 /obj/item/chems/drinks/bottle/vermouth/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/vermouth, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/vermouth, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/kahlua
 	name = "Robert Robust's Coffee Liqueur"
@@ -332,7 +332,7 @@
 	center_of_mass = @'{"x":17,"y":3}'
 
 /obj/item/chems/drinks/bottle/kahlua/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/coffee, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/coffee, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/goldschlager
 	name = "College Girl Goldschlager"
@@ -341,7 +341,7 @@
 	center_of_mass = @'{"x":15,"y":3}'
 
 /obj/item/chems/drinks/bottle/goldschlager/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/vodka, reagents.maximum_volume - 5)
+	add_to_reagents(/decl/material/liquid/alcohol/vodka, REAGENT_MAXIMUM_VOLUME(reagents) - 5)
 	add_to_reagents(/decl/material/solid/metal/gold,     5)
 
 /obj/item/chems/drinks/bottle/cognac
@@ -351,7 +351,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/bottle/cognac/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/cognac, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/cognac, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/wine
 	name = "Doublebeard Bearded Special Wine"
@@ -360,7 +360,7 @@
 	center_of_mass = @'{"x":16,"y":4}'
 
 /obj/item/chems/drinks/bottle/wine/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/wine, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/wine, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/absinthe
 	name = "Jailbreaker Verte"
@@ -369,7 +369,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/bottle/absinthe/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/absinthe, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/absinthe, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/melonliquor
 	name = "Emeraldine Melon Liquor"
@@ -378,7 +378,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/bottle/melonliquor/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/melonliquor, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/melonliquor, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/bluecuracao
 	name = "Miss Blue Curacao"
@@ -387,7 +387,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/bottle/bluecuracao/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/bluecuracao, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/bluecuracao, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/herbal
 	name = "Liqueur d'Herbe"
@@ -396,7 +396,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/bottle/herbal/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/herbal, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/herbal, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/grenadine
 	name = "Briar Rose Grenadine Syrup"
@@ -405,7 +405,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/bottle/grenadine/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/grenadine, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/grenadine, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/cola
 	name = "\improper Space Cola"
@@ -414,7 +414,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/bottle/cola/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/cola, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/cola, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/space_up
 	name = "\improper Space-Up"
@@ -423,7 +423,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/bottle/space_up/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/lemonade, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/lemonade, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/space_mountain_wind
 	name = "\improper Space Mountain Wind"
@@ -432,7 +432,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/bottle/space_mountain_wind/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/citrussoda, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/citrussoda, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/pwine
 	name = "Warlock's Velvet"
@@ -441,7 +441,7 @@
 	center_of_mass = @'{"x":16,"y":4}'
 
 /obj/item/chems/drinks/bottle/pwine/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/pwine, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/pwine, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/sake
 	name = "Takeo Sadow's Combined Sake"
@@ -450,7 +450,7 @@
 	center_of_mass = @'{"x":16,"y":4}'
 
 /obj/item/chems/drinks/bottle/sake/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/sake, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/sake, REAGENT_MAXIMUM_VOLUME(reagents))
 
 
 /obj/item/chems/drinks/bottle/champagne
@@ -462,7 +462,7 @@
 	var/opening
 
 /obj/item/chems/drinks/bottle/champagne/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/champagne, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/champagne, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/champagne/open(mob/user)
 	if(ATOM_IS_OPEN_CONTAINER(src))
@@ -497,7 +497,7 @@
 	center_of_mass = @'{"x":16,"y":6}'
 
 /obj/item/chems/drinks/bottle/jagermeister/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/jagermeister, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/jagermeister, REAGENT_MAXIMUM_VOLUME(reagents))
 
 //////////////////////////PREMIUM ALCOHOL ///////////////////////
 /obj/item/chems/drinks/bottle/premiumvodka
@@ -512,7 +512,7 @@
 
 /obj/item/chems/drinks/bottle/premiumvodka/populate_reagents()
 	make_random_name()
-	add_to_reagents(/decl/material/liquid/alcohol/vodka/premium, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/vodka/premium, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/premiumwine
 	name = "Uve De Blanc"
@@ -530,7 +530,7 @@
 	var/agedyear = rand(global.using_map.game_year - aged_max, global.using_map.game_year - aged_min)
 	set_custom_name(make_random_name())
 	desc += " This bottle is marked as [agedyear] Vintage."
-	add_to_reagents(/decl/material/liquid/alcohol/wine/premium, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/wine/premium, REAGENT_MAXIMUM_VOLUME(reagents))
 
 //////////////////////////JUICES AND STUFF ///////////////////////
 
@@ -548,7 +548,7 @@
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
 /obj/item/chems/drinks/bottle/orangejuice/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/orange, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/orange, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/cream
 	name = "Milk Cream"
@@ -564,7 +564,7 @@
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
 /obj/item/chems/drinks/bottle/cream/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/milk/cream, reagents.maximum_volume, data = list(DATA_MILK_DONOR = "cow"))
+	add_to_reagents(/decl/material/liquid/drink/milk/cream, REAGENT_MAXIMUM_VOLUME(reagents), data = list(DATA_MILK_DONOR = "cow"))
 
 /obj/item/chems/drinks/bottle/tomatojuice
 	name = "Tomato Juice"
@@ -580,7 +580,7 @@
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
 /obj/item/chems/drinks/bottle/tomatojuice/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/tomato, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/tomato, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/limejuice
 	name = "Lime Juice"
@@ -596,7 +596,7 @@
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
 /obj/item/chems/drinks/bottle/limejuice/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/lime, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/lime, REAGENT_MAXIMUM_VOLUME(reagents))
 
 //Small bottles
 /obj/item/chems/drinks/bottle/small
@@ -613,7 +613,7 @@
 	center_of_mass = @'{"x":16,"y":12}'
 
 /obj/item/chems/drinks/bottle/small/beer/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/beer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/beer, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/small/ale
 	name = "\improper Magm-Ale"
@@ -623,7 +623,7 @@
 	center_of_mass = @'{"x":16,"y":10}'
 
 /obj/item/chems/drinks/bottle/small/ale/populate_reagents()
-	add_to_reagents(/decl/material/liquid/alcohol/ale, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/ale, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/bottle/small/gingerbeer
 	name = "Ginger Beer"
@@ -632,4 +632,4 @@
 	center_of_mass = @'{"x":16,"y":12}'
 
 /obj/item/chems/drinks/bottle/small/gingerbeer/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/gingerbeer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/gingerbeer, REAGENT_MAXIMUM_VOLUME(reagents))

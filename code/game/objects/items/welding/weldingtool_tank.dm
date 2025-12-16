@@ -20,17 +20,18 @@
 	var/lit_force      = 11
 
 /obj/item/chems/welder_tank/populate_reagents()
-	add_to_reagents(/decl/material/liquid/fuel, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/fuel, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/welder_tank/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance > 1)
 		return
-	if(reagents.total_volume <= 0)
+	var/total_vol = REAGENT_TOTAL_VOLUME(reagents)
+	if(total_vol <= 0)
 		. += SPAN_WARNING("It is empty.")
 	else
-		. += "It contains [reagents.total_volume] units of liquid."
-	. += "It can hold up to [reagents.maximum_volume] units."
+		. += "It contains [total_vol] units of liquid."
+	. += "It can hold up to [REAGENT_MAXIMUM_VOLUME(reagents)] units."
 
 /obj/item/chems/welder_tank/afterattack(obj/O, mob/user, proximity, click_parameters)
 	if (!ATOM_IS_OPEN_CONTAINER(src) || !proximity)
@@ -44,9 +45,10 @@
 	if(user.check_intent(I_FLAG_HARM))
 		if(standard_splash_mob(user, O))
 			return TRUE
-		if(reagents && reagents.total_volume)
+		var/total_vol = REAGENT_TOTAL_VOLUME(reagents)
+		if(reagents && total_vol)
 			to_chat(user, SPAN_DANGER("You splash the contents of \the [src] onto \the [O]."))
-			reagents.splash(O, reagents.total_volume)
+			reagents.splash(O, total_vol)
 			return TRUE
 	return ..()
 
@@ -136,7 +138,7 @@
 	return ..()
 
 /obj/item/chems/welder_tank/experimental/Process()
-	if(REAGENT_VOLUME(reagents, /decl/material/liquid/fuel) < reagents.maximum_volume)
+	if(REAGENT_VOLUME(reagents, /decl/material/liquid/fuel) < REAGENT_MAXIMUM_VOLUME(reagents))
 		var/gen_amount = ((world.time-last_gen)/25)
 		add_to_reagents(/decl/material/liquid/fuel, gen_amount)
 		last_gen = world.time

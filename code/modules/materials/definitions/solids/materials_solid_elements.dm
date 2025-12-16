@@ -43,9 +43,10 @@
 /decl/material/solid/carbon/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
 	var/datum/reagents/ingested = M.get_ingested_reagents()
-	if(ingested && LAZYLEN(ingested.reagent_volumes) > 1)
-		var/effect = 1 / (LAZYLEN(ingested.reagent_volumes) - 1)
-		for(var/decl/material/reagent as anything in ingested.reagent_volumes)
+	var/ingested_volumes = REAGENT_VOLUMES(ingested)
+	if(ingested && LAZYLEN(ingested_volumes) > 1)
+		var/effect = 1 / (LAZYLEN(ingested_volumes) - 1)
+		for(var/decl/material/reagent as anything in ingested_volumes)
 			if(reagent.type != type)
 				ingested.remove_reagent(reagent, removed * effect)
 

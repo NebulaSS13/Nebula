@@ -10,7 +10,7 @@
 	var/pigment
 
 /obj/item/chems/glass/bucket/paint/populate_reagents()
-	var/amt = reagents.maximum_volume
+	var/amt = REAGENT_MAXIMUM_VOLUME(reagents)
 	if(pigment)
 		amt = round(amt/2)
 		add_to_reagents(pigment, amt)

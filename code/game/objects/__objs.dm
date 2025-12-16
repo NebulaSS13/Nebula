@@ -269,7 +269,7 @@
  */
 /obj/proc/initialize_reagents(var/populate = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
-	if(reagents?.total_volume > 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) > 0)
 		log_warning("\The [src] possibly is initializing its reagents more than once!")
 	create_or_update_reagents(chem_volume)
 	if(populate)
@@ -331,7 +331,7 @@
 
 /obj/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(!QDELETED(src) && fluids?.total_volume)
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids))
 		fluids.touch_obj(src)
 
 // TODO: maybe iterate the entire matter list or do some partial damage handling
@@ -345,8 +345,9 @@
 	. = ..()
 	if(QDELETED(src))
 		return
-	if(reagents?.total_volume)
-		reagents.trans_to(loc, reagents.total_volume)
+	var/reagent_volume = REAGENT_TOTAL_VOLUME(reagents)
+	if(reagent_volume)
+		reagents.trans_to(loc, reagent_volume)
 	dump_contents()
 	return place_melted_product(meltable_materials)
 
@@ -424,12 +425,12 @@
 /obj/physically_destroyed(skip_qdel)
 	var/dumped_reagents = FALSE
 	var/atom/last_loc = loc
-	if(last_loc && reagents?.total_volume)
-		reagents.trans_to(loc, reagents.total_volume, defer_update = TRUE)
+	if(last_loc && REAGENT_TOTAL_VOLUME(reagents))
+		reagents.trans_to(loc, REAGENT_TOTAL_VOLUME(reagents), defer_update = TRUE)
 		dumped_reagents = TRUE
 		reagents.clear_reagents() // We are qdeling, don't bother with a more nuanced update.
 	. = ..()
-	if(dumped_reagents && last_loc && !QDELETED(last_loc) && last_loc.reagents?.total_volume)
+	if(dumped_reagents && last_loc && !QDELETED(last_loc) && REAGENT_TOTAL_VOLUME(last_loc.reagents))
 		last_loc.reagents.handle_update()
 		HANDLE_REACTIONS(last_loc.reagents)
 

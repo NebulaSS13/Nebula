@@ -97,8 +97,8 @@
 	if(is_usable())
 
 		// Handle some post-metabolism reagent processing for generally inedible foods.
-		if(ingested.total_volume > 0)
-			for(var/decl/material/reagent as anything in ingested.reagent_volumes)
+		if(REAGENT_TOTAL_VOLUME(ingested) > 0)
+			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(ingested))
 				var/inedible_nutriment_amount = gains_nutriment_from_inedible_reagents[reagent.type]
 				if(inedible_nutriment_amount > 0)
 					owner.adjust_nutrition(inedible_nutriment_amount)

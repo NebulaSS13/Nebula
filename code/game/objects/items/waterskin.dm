@@ -65,4 +65,4 @@
 
 /obj/item/chems/glass/waterskin/crafted/wine/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/alcohol/wine, reagents?.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/wine, REAGENT_MAXIMUM_VOLUME(reagents))

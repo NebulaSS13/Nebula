@@ -33,7 +33,7 @@
 
 /obj/item/clothing/mask/chewable/proc/chew(amount)
 	chewtime -= amount
-	if(reagents && reagents.total_volume)
+	if(reagents && REAGENT_TOTAL_VOLUME(reagents))
 		if(ishuman(loc))
 			var/mob/living/human/user = loc
 			if (src == user.get_equipped_item(slot_wear_mask_str) && user.check_has_mouth())
@@ -133,7 +133,7 @@
 
 /obj/item/clothing/mask/chewable/candy/Initialize()
 	. = ..()
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		set_color(reagents.get_color())
 		desc += " This one is labeled '[reagents.get_primary_reagent_name()]'."
 

@@ -27,14 +27,14 @@
 /obj/item/chems/ivbag/on_reagent_change()
 	if(!(. = ..()))
 		return
-	if(reagents?.total_volume > reagents?.maximum_volume / 2)
+	if(REAGENT_TOTAL_VOLUME(reagents) > REAGENT_MAXIMUM_VOLUME(reagents) / 2)
 		w_class = ITEM_SIZE_NORMAL
 	else
 		w_class = ITEM_SIZE_SMALL
 
 /obj/item/chems/ivbag/on_update_icon()
 	. = ..()
-	var/percent = round(reagents?.total_volume / reagents?.maximum_volume * 100)
+	var/percent = round(REAGENT_TOTAL_VOLUME(reagents) / REAGENT_MAXIMUM_VOLUME(reagents) * 100)
 	if(percent)
 		add_overlay(overlay_image(icon, "[round(percent,25)]", reagents.get_color()))
 	add_overlay(attached? "dongle" : "top")
@@ -68,7 +68,7 @@
 	if(!(src in M.get_held_items()))
 		return
 
-	if(!reagents.total_volume)
+	if(!REAGENT_TOTAL_VOLUME(reagents))
 		return
 
 	reagents.trans_to_mob(attached, amount_per_transfer_from_this, CHEM_INJECT)
@@ -88,7 +88,7 @@
 
 /obj/item/chems/ivbag/blood/populate_reagents()
 	if(blood_fill_type)
-		add_to_reagents(blood_fill_type, reagents.maximum_volume, get_initial_blood_data())
+		add_to_reagents(blood_fill_type, REAGENT_MAXIMUM_VOLUME(reagents), get_initial_blood_data())
 
 /obj/item/chems/ivbag/blood/nanoblood
 	label_text = "synthetic"

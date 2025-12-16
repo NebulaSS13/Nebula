@@ -18,7 +18,7 @@
 	if(!target.reagents || !proximity)
 		return
 
-	if(reagents.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 
 		if(!REAGENTS_FREE_SPACE(target.reagents))
 			to_chat(user, SPAN_WARNING("\The [target] is full."))
@@ -52,12 +52,12 @@
 						return
 
 			var/mob/living/M = target
-			var/contained = REAGENT_LIST(src)
+			var/contained = REAGENT_LIST(reagents)
 			admin_attack_log(user, M, "Squirted their victim with \a [src] (Reagents: [contained])", "Were squirted with \a [src] (Reagents: [contained])", "used \a [src] (Reagents: [contained]) to squirt at")
 
 			var/spill_amt = M.incapacitated()? 0 : 30
-			trans += reagents.splash(M, reagents.total_volume/2, max_spill = spill_amt)
-			trans += reagents.trans_to_mob(M, reagents.total_volume/2, CHEM_INJECT) //I guess it gets into the bloodstream through the eyes or something
+			trans += reagents.splash(M, REAGENT_TOTAL_VOLUME(reagents)/2, max_spill = spill_amt)
+			trans += reagents.trans_to_mob(M, REAGENT_TOTAL_VOLUME(reagents)/2, CHEM_INJECT) //I guess it gets into the bloodstream through the eyes or something
 			user.visible_message(SPAN_DANGER("[user] squirts something into \the [target]'s eyes!"), SPAN_DANGER("You squirt [trans] unit\s into \the [target]'s eyes!"))
 			return
 		else
@@ -70,7 +70,7 @@
 			to_chat(user, SPAN_NOTICE("You cannot directly remove reagents from [target]."))
 			return
 
-		if(!target.reagents || !target.reagents.total_volume)
+		if(!target.reagents || !REAGENT_TOTAL_VOLUME(target.reagents))
 			to_chat(user, SPAN_NOTICE("[target] is empty."))
 			return
 
@@ -86,7 +86,7 @@
 
 /obj/item/chems/dropper/on_update_icon()
 	. = ..()
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		icon_state = "dropper1"
 	else
 		icon_state = "dropper0"

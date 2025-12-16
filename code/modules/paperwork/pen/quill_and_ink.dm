@@ -88,7 +88,7 @@
 		if(current_uses >= quill.max_uses)
 			to_chat(user, SPAN_WARNING("\The [quill] doesn't need any more ink!"))
 			return TRUE
-		if(reagents?.total_liquid_volume <= 0)
+		if(REAGENT_TOTAL_LIQUID_VOLUME(reagents) <= 0)
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You dip \the [quill] into \the [src]."))

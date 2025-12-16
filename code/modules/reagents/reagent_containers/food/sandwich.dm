@@ -40,7 +40,7 @@
 			return TRUE
 		to_chat(user, "<span class='warning'>You layer [used_item] over \the [src].</span>")
 		var/obj/item/chems/F = used_item
-		F.reagents.trans_to_obj(src, F.reagents.total_volume)
+		F.reagents.trans_to_obj(src, REAGENT_TOTAL_VOLUME(F.reagents))
 		ingredients += used_item
 		update_icon()
 		return TRUE

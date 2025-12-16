@@ -51,7 +51,7 @@
 
 /mob/living/slime/fluid_act(datum/reagents/fluids)
 	. = ..()
-	if(!QDELETED(src) && fluids?.total_volume >= FLUID_SHALLOW && stat == DEAD)
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids) >= FLUID_SHALLOW && stat == DEAD)
 		var/turf/T = get_turf(src)
 		if(T)
 			T.add_to_reagents(/decl/material/liquid/slimejelly, (is_adult ? rand(30, 40) : rand(10, 30)))
@@ -66,7 +66,7 @@
 
 /mob/living/slime/fluid_act(datum/reagents/fluids)
 	. = ..()
-	if(stat == DEAD && fluids?.total_volume && REAGENT_VOLUME(fluids, /decl/material/liquid/water) >= FLUID_SHALLOW)
+	if(stat == DEAD && REAGENT_TOTAL_VOLUME(fluids) && REAGENT_VOLUME(fluids, /decl/material/liquid/water) >= FLUID_SHALLOW)
 		fluids.add_reagent(/decl/material/liquid/slimejelly, (is_adult ? rand(30, 40) : rand(10, 30)))
 		visible_message(SPAN_DANGER("\The [src] melts away...")) // Slimes are water soluble.
 		qdel(src)

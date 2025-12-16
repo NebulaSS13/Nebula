@@ -30,7 +30,7 @@
 			continue
 		LAZYDISTINCTADD(spread_into_neighbors, neighbor)
 	if(length(spread_into_neighbors))
-		var/spreading = round(reagents.total_volume / length(spread_into_neighbors))
+		var/spreading = round(REAGENT_TOTAL_VOLUME(reagents) / length(spread_into_neighbors))
 		if(spreading > 0)
 			for(var/turf/spread_into_turf as anything in spread_into_neighbors)
 				reagents.trans_to_turf(spread_into_turf, spreading)
@@ -83,8 +83,8 @@
 		return FLUID_MAX_DEPTH
 	var/obj/structure/glass_tank/aquarium = locate() in contents
 	if(aquarium)
-		return aquarium.reagents?.total_volume * TANK_WATER_MULTIPLIER
-	return reagents?.total_volume || 0
+		return REAGENT_TOTAL_VOLUME(aquarium.reagents) * TANK_WATER_MULTIPLIER
+	return REAGENT_TOTAL_VOLUME(reagents)
 
 /turf/proc/show_bubbles()
 	set waitfor = FALSE
@@ -102,7 +102,7 @@
 				T.fluid_update(TRUE)
 	if(flooded)
 		ADD_ACTIVE_FLUID_SOURCE(src)
-	else if(reagents?.total_volume > FLUID_QDEL_POINT)
+	else if(REAGENT_TOTAL_VOLUME(reagents) > FLUID_QDEL_POINT)
 		ADD_ACTIVE_FLUID(src)
 
 /turf/get_reagents()
@@ -119,10 +119,10 @@
 
 /turf/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(!QDELETED(src) && fluids?.total_volume)
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids))
 		fluids.touch_turf(src, touch_atoms = FALSE) // Handled in fluid_act() below.
 		// Wet items that are not supported on a platform or such.
-		var/effective_volume = fluids?.total_volume
+		var/effective_volume = REAGENT_TOTAL_VOLUME(fluids)
 		if(get_supporting_platform())
 			// Depth is negative height, hence +=. TODO: positive heights? No idea how to handle that.
 			effective_volume += get_physical_height()
@@ -133,7 +133,7 @@
 				AM.fluid_act(fluids)
 
 /turf/proc/remove_fluids(var/amount, var/defer_update)
-	if(!reagents?.total_liquid_volume)
+	if(!REAGENT_TOTAL_LIQUID_VOLUME(reagents))
 		return
 	remove_any_reagents(amount, defer_update = defer_update, removed_phases = MAT_PHASE_LIQUID)
 	if(defer_update && !QDELETED(reagents))
@@ -141,12 +141,12 @@
 
 /turf/proc/transfer_fluids_to(var/turf/target, var/amount, var/defer_update = TRUE)
 	// No flowing of reagents without liquids, but this proc should not be called if liquids are not present regardless.
-	if(!reagents?.total_liquid_volume)
+	if(!REAGENT_TOTAL_LIQUID_VOLUME(reagents))
 		return
 	target.create_or_update_reagents(FLUID_MAX_DEPTH)
 
 	// We reference total_volume instead of total_liquid_volume here because the maximum volume limits of the turfs still respect solid volumes, and depth is still determined by total volume.
-	reagents.trans_to_turf(target, min(reagents.total_volume, min(target.reagents.maximum_volume - target.reagents.total_volume, amount)), defer_update = defer_update)
+	reagents.trans_to_turf(target, min(REAGENT_TOTAL_VOLUME(reagents), min(REAGENT_MAXIMUM_VOLUME(target.reagents) - REAGENT_TOTAL_VOLUME(target.reagents), amount)), defer_update = defer_update)
 	if(defer_update)
 		if(!QDELETED(reagents))
 			SSfluids.holders_to_update[reagents] = TRUE
@@ -159,12 +159,12 @@
 		vaporize_fuel(air)
 
 /turf/proc/vaporize_fuel(datum/gas_mixture/air)
-	if(!length(reagents?.reagent_volumes) || !istype(air))
+	if(!length(REAGENT_VOLUMES(reagents)) || !istype(air))
 		return
 	var/update_air = FALSE
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		if(reagent.gas_flags & XGM_GAS_FUEL)
-			var/moles = round(reagents.reagent_volumes[reagent] / REAGENT_UNITS_PER_GAS_MOLE)
+			var/moles = round(REAGENT_VOLUME(reagents, reagent) / REAGENT_UNITS_PER_GAS_MOLE)
 			if(moles > 0)
 				air.adjust_gas(reagent.type, moles, FALSE)
 				remove_from_reagents(reagent, round(moles * REAGENT_UNITS_PER_GAS_MOLE))
@@ -179,10 +179,10 @@
 	if(!(. = ..()))
 		return
 
-	if(reagents?.total_liquid_volume < FLUID_SLURRY)
+	if(REAGENT_TOTAL_LIQUID_VOLUME(reagents) < FLUID_SLURRY)
 		dump_solid_reagents()
 
-	if(reagents?.total_volume > FLUID_QDEL_POINT)
+	if(REAGENT_TOTAL_VOLUME(reagents) > FLUID_QDEL_POINT)
 		ADD_ACTIVE_FLUID(src)
 		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
 		if(primary_reagent && (REAGENT_VOLUME(reagents, primary_reagent) >= primary_reagent.slippery_amount))
@@ -204,16 +204,17 @@
 
 	for(var/checkdir in global.cardinal)
 		var/turf/neighbor = get_step_resolving_mimic(src, checkdir)
-		if(neighbor?.reagents?.total_volume > FLUID_QDEL_POINT)
+		if(REAGENT_TOTAL_VOLUME(neighbor?.reagents) > FLUID_QDEL_POINT)
 			ADD_ACTIVE_FLUID(neighbor)
 
 /turf/proc/dump_solid_reagents(datum/reagents/solids)
 	if(!istype(solids))
 		solids = reagents
-	if(LAZYLEN(solids?.solid_volumes))
+	var/solid_volumes = REAGENT_SOLID_VOLUMES(solids)
+	if(LAZYLEN(solid_volumes))
 		var/list/matter_list = list()
-		for(var/decl/material/reagent as anything in solids.solid_volumes)
-			var/reagent_amount = solids.solid_volumes[reagent]
+		for(var/decl/material/reagent as anything in REAGENT_SOLID_VOLUMES(solid_volumes))
+			var/reagent_amount = SOLID_VOLUME(solids, reagent)
 			matter_list[reagent.type] = round(reagent_amount/REAGENT_UNITS_PER_MATERIAL_UNIT)
 			solids.remove_reagent(reagent, reagent_amount, defer_update = TRUE, removed_phases = MAT_PHASE_SOLID)
 

@@ -70,7 +70,7 @@
 	if(!use_power || (stat & (BROKEN|NOPOWER)))
 		return
 
-	if(reagents?.total_volume >= MAX_LIQUID)
+	if(REAGENT_TOTAL_VOLUME(reagents) >= MAX_LIQUID)
 		return
 
 	if(input_turf)
@@ -83,8 +83,8 @@
 					eating.dropInto(output_turf)
 				continue
 			eaten++
-			if(eating.reagents?.total_volume)
-				eating.reagents.trans_to_obj(src, eating.reagents.total_volume)
+			if(REAGENT_TOTAL_VOLUME(eating.reagents))
+				eating.reagents.trans_to_obj(src, REAGENT_TOTAL_VOLUME(eating.reagents))
 			for(var/mtype in eating.matter)
 				add_to_reagents(mtype, floor(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 			qdel(eating)
@@ -97,7 +97,7 @@
 		return
 
 	var/adjusted_reagents = FALSE
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		adjusted_reagents = max(adjusted_reagents, process_non_liquid(reagent))
 
 	if(adjusted_reagents)
@@ -199,10 +199,10 @@
 
 	if(href_list["dispense"])
 		var/reagent_index = text2num(href_list["dispense"])
-		if(!reagent_index || length(reagents.reagent_volumes) < reagent_index)
+		if(!reagent_index || length(REAGENT_VOLUMES(reagents)) < reagent_index)
 			return TOPIC_HANDLED
 
-		var/mtype = reagents.reagent_volumes[reagent_index]
+		var/mtype = REAGENT_VOLUME(reagents, reagent_index)
 
 		// Only liquids are allowed to dispense. Otherwise, try to process the reagent.
 		if(process_non_liquid(mtype))
@@ -232,20 +232,20 @@
 
 	data["dispense_amount"] = dispense_amount
 	if(output_container)
-		var/curr_volume = output_container.reagents?.total_volume || 0
-		var/max_volume  = output_container.reagents?.maximum_volume || 0
+		var/curr_volume = REAGENT_TOTAL_VOLUME(output_container.reagents)
+		var/max_volume  = REAGENT_MAXIMUM_VOLUME(output_container.reagents)
 
 		data["container"] = "[output_container.name] ([curr_volume] / [max_volume] U)"
 
 	data["reagents"] = list()
 	var/index = 0
-	for(var/decl/material/reagent as anything in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		index += 1
 		// TODO: Must be revised once state changes are in. Reagent names might be a litle odd in the meantime.
 		var/is_liquid = reagent.phase_at_temperature(temperature, ONE_ATMOSPHERE) == MAT_PHASE_LIQUID
-		data["reagents"] += list(list("label" = "[reagent.liquid_name] ([reagents.reagent_volumes[reagent]] U)", "index" = index, "liquid" = is_liquid))
+		data["reagents"] += list(list("label" = "[reagent.liquid_name] ([REAGENT_VOLUME(reagents, reagent)] U)", "index" = index, "liquid" = is_liquid))
 
-	data["full"] = reagents.total_volume >= MAX_LIQUID
+	data["full"] = REAGENT_TOTAL_VOLUME(reagents) >= MAX_LIQUID
 	data["gas_pressure"] = gas_contents?.return_pressure()
 	return data
 

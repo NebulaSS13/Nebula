@@ -29,7 +29,7 @@
 		return
 	if(A.reagents && A.reagents.has_reagent(/decl/material/liquid/water))
 		to_chat(user, SPAN_NOTICE("You desecrate \the [A]."))
-		LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list(DATA_WATER_HOLINESS = FALSE))
+		REAGENT_SET_DATA(A.reagents, /decl/material/liquid/water, list(DATA_WATER_HOLINESS = FALSE))
 
 /mob/proc/make_rune(var/rune, var/cost = 5, var/tome_required = 0)
 	var/has_robes = 0
@@ -100,7 +100,7 @@
 	return 0
 
 /mob/living/human/make_rune(var/rune, var/cost, var/tome_required)
-	if(should_have_organ(BP_HEART) && vessel && vessel.total_volume < species.blood_volume * 0.7)
+	if(should_have_organ(BP_HEART) && REAGENT_TOTAL_VOLUME(vessel) < species.blood_volume * 0.7)
 		to_chat(src, "<span class='danger'>You are too weak to draw runes.</span>")
 		return
 	..()

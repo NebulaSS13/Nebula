@@ -114,7 +114,7 @@
 
 /obj/item/food/roburgerbig/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nanitefluid, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nanitefluid, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/food/xenoburger
 	name = "xenoburger"

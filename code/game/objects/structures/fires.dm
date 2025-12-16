@@ -126,8 +126,8 @@
 
 /obj/structure/fire_source/fluid_act(datum/reagents/fluids)
 	. = ..()
-	if(!QDELETED(src) && fluids?.total_volume && reagents)
-		var/transfer = min(reagents.maximum_volume - reagents.total_volume, max(max(1, round(fluids.total_volume * 0.25))))
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids) && reagents)
+		var/transfer = min(REAGENT_MAXIMUM_VOLUME(reagents) - REAGENT_TOTAL_VOLUME(reagents), max(max(1, round(REAGENT_TOTAL_VOLUME(fluids) * 0.25))))
 		if(transfer > 0)
 			fluids.trans_to_obj(src, transfer)
 
@@ -363,13 +363,13 @@
 /obj/structure/fire_source/on_reagent_change()
 	if(!(. = ..()))
 		return
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		var/do_steam = FALSE
 		var/datum/gas_mixture/our_air = return_air()
 		var/ambient_pressure = our_air ? our_air.return_pressure() : ONE_ATMOSPHERE
 		var/list/waste = list()
 
-		for(var/decl/material/reagent as anything in reagents?.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 
 			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT && reagent.phase_at_temperature(get_effective_burn_temperature(), ambient_pressure) == MAT_PHASE_GAS)
 				do_steam = TRUE

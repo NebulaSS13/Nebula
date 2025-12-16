@@ -52,7 +52,7 @@
 	if(!istype(touching_turf) || REAGENT_VOLUME(holder, src) < 3)
 		return
 	var/weakref/donor = LAZYACCESS(data, DATA_BLOOD_DONOR)
-	blood_splatter(touching_turf, donor?.resolve() || holder.my_atom, 1)
+	blood_splatter(touching_turf, donor?.resolve() || REAGENT_GET_ATOM(holder), 1)
 
 /decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()

@@ -100,7 +100,7 @@ SUBSYSTEM_DEF(fluids)
 		i++
 		current_fluid_holder = processing_fluids[i]
 
-		if(QDELETED(current_fluid_holder) || !current_fluid_holder.reagents?.total_volume)
+		if(QDELETED(current_fluid_holder) || !REAGENT_TOTAL_VOLUME(current_fluid_holder.reagents))
 			REMOVE_ACTIVE_FLUID(current_fluid_holder)
 			continue
 
@@ -110,7 +110,7 @@ SUBSYSTEM_DEF(fluids)
 
 		reagent_holder = current_fluid_holder.reagents
 		UPDATE_FLUID_BLOCKED_DIRS(current_fluid_holder)
-		current_depth = reagent_holder?.total_volume || 0
+		current_depth = REAGENT_TOTAL_VOLUME(reagent_holder)
 
 		// How is this happening
 		if(QDELETED(reagent_holder) || current_depth == -1.#IND || current_depth == 1.#IND)
@@ -123,7 +123,7 @@ SUBSYSTEM_DEF(fluids)
 			current_depth = current_fluid_holder.get_fluid_depth()
 
 		// Mimimum liquid depth for creation of slurries. Do this after evaporation since it may change the total depth.
-		if(reagent_holder?.total_liquid_volume < FLUID_SLURRY)
+		if(REAGENT_TOTAL_LIQUID_VOLUME(reagent_holder) < FLUID_SLURRY)
 			current_fluid_holder.dump_solid_reagents()
 			current_depth = current_fluid_holder.get_fluid_depth()
 
@@ -135,7 +135,7 @@ SUBSYSTEM_DEF(fluids)
 		// Wash our turf.
 		current_fluid_holder.fluid_act(reagent_holder)
 
-		if(isspaceturf(current_fluid_holder) || (istype(current_fluid_holder, /turf/floor) && (current_fluid_holder.turf_flags & TURF_FLAG_ABSORB_LIQUID) && (current_fluid_holder.reagents?.total_volume + current_fluid_holder.get_physical_height()) > 0))
+		if(isspaceturf(current_fluid_holder) || (istype(current_fluid_holder, /turf/floor) && (current_fluid_holder.turf_flags & TURF_FLAG_ABSORB_LIQUID) && (REAGENT_TOTAL_VOLUME(current_fluid_holder.reagents) + current_fluid_holder.get_physical_height()) > 0))
 			removing = round(current_depth * 0.5)
 			if(removing > 0)
 				current_fluid_holder.remove_fluids(removing, defer_update = TRUE)
@@ -154,8 +154,9 @@ SUBSYSTEM_DEF(fluids)
 			if(other_fluid_holder)
 				UPDATE_FLUID_BLOCKED_DIRS(other_fluid_holder)
 				if(!(other_fluid_holder.fluid_blocked_dirs & UP) && other_fluid_holder.CanFluidPass(UP))
-					if(!QDELETED(other_fluid_holder) && other_fluid_holder.reagents?.total_volume < FLUID_MAX_DEPTH)
-						current_fluid_holder.transfer_fluids_to(other_fluid_holder, min(floor(current_depth*0.5), FLUID_MAX_DEPTH - other_fluid_holder.reagents?.total_volume))
+					var/other_volume = REAGENT_TOTAL_VOLUME(other_fluid_holder.reagents)
+					if(!QDELETED(other_fluid_holder) && other_volume < FLUID_MAX_DEPTH)
+						current_fluid_holder.transfer_fluids_to(other_fluid_holder, min(floor(current_depth*0.5), FLUID_MAX_DEPTH - other_volume))
 						current_depth = current_fluid_holder.get_fluid_depth()
 
 		// Flow into the lowest level neighbor.
@@ -173,7 +174,7 @@ SUBSYSTEM_DEF(fluids)
 			if((neighbor.fluid_blocked_dirs & coming_from) || !neighbor.CanFluidPass(coming_from) || neighbor.is_flooded(absolute = TRUE) || !neighbor.CanFluidPass(global.reverse_dir[spread_dir]))
 				continue
 			other_fluid_holder = neighbor
-			neighbor_depth = (other_fluid_holder?.reagents?.total_volume || 0) + neighbor.get_physical_height()
+			neighbor_depth = (REAGENT_TOTAL_VOLUME(other_fluid_holder.reagents)) + neighbor.get_physical_height()
 			flow_amount = round((current_turf_depth - neighbor_depth)*0.5)
 			// TODO: multiply flow amount or minimum transfer amount by some
 			// viscosity calculation to allow for piles of jelly vs piles of water.
@@ -235,7 +236,7 @@ SUBSYSTEM_DEF(fluids)
 		if(current_fluid_holder.last_flow_strength >= 10)
 			// Catwalks mean items will be above the turf; subtract the turf height from our volume.
 			// TODO: somehow handle stuff that is on a catwalk or on the turf within the same turf.
-			var/effective_volume = current_fluid_holder.reagents?.total_volume
+			var/effective_volume = REAGENT_TOTAL_VOLUME(current_fluid_holder.reagents)
 			if(current_fluid_holder.get_supporting_platform())
 				// Depth is negative height, hence +=. TODO: positive heights? No idea how to handle that.
 				effective_volume += current_fluid_holder.get_physical_height()

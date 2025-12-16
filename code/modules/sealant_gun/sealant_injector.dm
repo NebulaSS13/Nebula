@@ -1,8 +1,8 @@
 /obj/item/chems/chem_disp_cartridge/foaming_agent/populate_reagents()
-	add_to_reagents(/decl/material/liquid/foaming_agent, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/foaming_agent, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/chem_disp_cartridge/polyacid/populate_reagents()
-	add_to_reagents(/decl/material/liquid/acid/polyacid, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/acid/polyacid, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/structure/sealant_injector
 	name = "sealant tank injector"
@@ -63,18 +63,18 @@
 		to_chat(user, SPAN_WARNING("There is no tank loaded."))
 		return TRUE
 
-	var/fill_space = floor(loaded_tank.reagents?.maximum_volume - loaded_tank.reagents?.total_volume) / 5
+	var/fill_space = floor(REAGENT_MAXIMUM_VOLUME(loaded_tank.reagents) - REAGENT_TOTAL_VOLUME(loaded_tank.reagents)) / 5
 	if(fill_space <= 0)
 		to_chat(user, SPAN_WARNING("\The [loaded_tank] is full."))
 		return TRUE
 
 	var/injected = FALSE
 	for(var/obj/item/chems/chem_disp_cartridge/cart in cartridges)
-		if(cart.reagents?.total_volume <= cartridges[cart])
+		if(REAGENT_TOTAL_VOLUME(cart.reagents) <= cartridges[cart])
 			visible_message("\The [src] flashes a red 'empty' light above \the [cart].")
 			continue
 		injected = TRUE
-		cart.reagents.trans_to_holder(loaded_tank.reagents, min(cart.reagents.total_volume, cartridges[cart] * fill_space))
+		cart.reagents.trans_to_holder(loaded_tank.reagents, min(REAGENT_TOTAL_VOLUME(cart.reagents), cartridges[cart] * fill_space))
 	if(injected)
 		playsound(loc, 'sound/effects/refill.ogg', 50, 1)
 
