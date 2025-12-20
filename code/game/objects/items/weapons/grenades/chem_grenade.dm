@@ -216,7 +216,7 @@
 	var/obj/item/chems/glass/beaker/B2 = new(src)
 	B1.add_to_reagents(/decl/material/solid/metal/aluminium, 30)
 	B2.add_to_reagents(/decl/material/liquid/foaming_agent, 10)
-	B2.add_to_reagents(/decl/material/liquid/acid/polyacid, 10)
+	B2.add_to_reagents(/decl/material/liquid/acid, 10)
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)
 	beakers += B1
 	beakers += B2
