@@ -75,7 +75,6 @@
 // Tracker Electronic
 
 /obj/item/tracker_electronics
-
 	name = "solar tracker electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
