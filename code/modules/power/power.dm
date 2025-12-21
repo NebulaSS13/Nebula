@@ -102,15 +102,24 @@
 
 /// Returns all cables in target_turf matching target_direction, excluding excluded_cable.
 /// If only_no_powernet is TRUE, only cables with no powernet will be returned.
-/proc/cable_list(var/turf/target_turf, var/obj/structure/cable/excluded_cable = null, var/target_direction, only_no_powernet = FALSE)
+/// Unused, because get_maching_cable or get_connected_cables is usually preferable, but kept just in case.
+/proc/cable_list(var/turf/target_turf, var/obj/structure/cable/excluded_cable = null, var/target_direction)
 	. = list()
 	var/reverse_direction = target_direction ? global.reverse_dir[target_direction] : 0
 	for(var/obj/structure/cable/other_cable in target_turf)
 		if(other_cable == excluded_cable)
 			continue
-		if(!only_no_powernet || !other_cable.powernet)
-			if(other_cable.d1 == target_direction || other_cable.d2 == target_direction || other_cable.d1 == reverse_direction || other_cable.d2 == reverse_direction)
-				. += other_cable
+		if(other_cable.d1 == target_direction || other_cable.d2 == target_direction || other_cable.d1 == reverse_direction || other_cable.d2 == reverse_direction)
+			. += other_cable
+
+/// Like cable_list, but only returns the first cable, since that's all most uses of it check.
+/proc/get_matching_cable(var/turf/target_turf, var/obj/structure/cable/excluded_cable = null, var/target_direction)
+	var/reverse_direction = target_direction ? global.reverse_dir[target_direction] : 0
+	for(var/obj/structure/cable/other_cable in target_turf)
+		if(other_cable == excluded_cable)
+			continue
+		if(other_cable.d1 == target_direction || other_cable.d2 == target_direction || other_cable.d1 == reverse_direction || other_cable.d2 == reverse_direction)
+			return other_cable
 
 //remove the old powernet and replace it with a new one throughout the network.
 /proc/propagate_network(var/obj/structure/cable/cable, var/datum/powernet/PN)
