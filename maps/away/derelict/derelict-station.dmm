@@ -2916,7 +2916,7 @@
 /turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "kt" = (
-/obj/machinery/power/breakerbox,
+/obj/machinery/breakerbox,
 /turf/floor/plating/airless,
 /area/constructionsite)
 "ku" = (
