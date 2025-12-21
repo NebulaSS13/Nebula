@@ -418,9 +418,9 @@ var/global/list/obj/structure/cable/all_cables = list()
 					. += C
 		if(cable_dir & (cable_dir - 1)) // Diagonal, check for /\/\/\ style cables along cardinal directions
 			for(var/pair in list(NORTH|SOUTH, EAST|WEST))
-				T = get_step_resolving_mimic(src, cable_dir & pair)
+				T = get_step_resolving_mimic(src, cable_dir & pair) // move either vertically or horizontally
 				if(T)
-					var/req_dir = cable_dir ^ pair
+					var/req_dir = cable_dir ^ pair // flip along the direction we moved, so if we're NORTHEAST we want a cable to our east that's NORTHWEST
 					for(var/obj/structure/cable/C in T)
 						if(C.d1 == req_dir || C.d2 == req_dir)
 							. += C
@@ -452,10 +452,10 @@ var/global/list/obj/structure/cable/all_cables = list()
 	var/turf/T1 = loc
 	if(!T1) return
 
-	var/list/powerlist = power_list(T1,src,0,0) //find the other cables that ended in the centre of the turf, with or without a powernet
-	if(powerlist.len>0)
+	var/list/cablelist = cable_list(T1, src, 0) //find the other cables that ended in the centre of the turf, with or without a powernet
+	if(length(cablelist))
 		var/datum/powernet/PN = new()
-		propagate_network(powerlist[1],PN) //propagates the new powernet beginning at the source cable
+		propagate_network(cablelist[1],PN) //propagates the new powernet beginning at the source cable
 
 		if(PN.is_empty()) //can happen with machines made nodeless when smoothing cables
 			qdel(PN)
@@ -467,12 +467,12 @@ var/global/list/obj/structure/cable/all_cables = list()
 	if(!T1)	return
 	if(d1)
 		T1 = get_zstep_resolving_mimic(T1, d1)
-		P_list = power_list(T1, src, turn(d1,180),0,cable_only = 1)	// what adjacently joins on to cut cable...
+		P_list = cable_list(T1, src, d1) // what adjacently joins on to cut cable...
 
-	P_list += power_list(loc, src, d1, 0, cable_only = 1)//... and on turf
+	P_list += cable_list(loc, src, d1)//... and on turf
 
 
-	if(P_list.len == 0)//if nothing in both list, then the cable was a lone cable, just delete it and its powernet
+	if(!length(P_list))//if nothing in both list, then the cable was a lone cable, just delete it and its powernet
 		powernet.remove_cable(src)
 
 		for(var/obj/machinery/power/P in T1)//check if it was powering a machine
