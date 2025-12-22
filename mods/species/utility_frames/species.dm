@@ -32,7 +32,7 @@
 	preview_outfit = null
 
 	available_pronouns = list(
-		/decl/pronouns,
+		/decl/pronouns/pseudoplural,
 		/decl/pronouns/neuter
 	)
 	available_background_info = list(

@@ -3551,6 +3551,7 @@
 #include "code\modules\pronouns\pronouns_female.dm"
 #include "code\modules\pronouns\pronouns_male.dm"
 #include "code\modules\pronouns\pronouns_neuter.dm"
+#include "code\modules\pronouns\pronouns_pseudoplural.dm"
 #include "code\modules\pronouns\pronouns_second_person.dm"
 #include "code\modules\radiation\radiation.dm"
 #include "code\modules\random_map\_random_map_setup.dm"

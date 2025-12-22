@@ -67,7 +67,7 @@ var/global/datum/category_collection/underwear/underwear = new()
 
 	var/obj/item/underwear/UW = new underwear_type()
 	UW.SetName(underwear_name)
-	UW.gender = underwear_gender
+	UW.set_gender(underwear_gender)
 	UW.icon = icon
 	UW.icon_state = icon_state
 

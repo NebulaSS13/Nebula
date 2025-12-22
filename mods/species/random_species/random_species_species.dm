@@ -67,7 +67,8 @@
 
 	//Misc traits
 	if(prob(40))
-		available_pronouns = list(/decl/pronouns)
+		// 50% chance of pseudoplural or actually plural
+		available_pronouns = list(pick(/decl/pronouns/pseudoplural, /decl/pronouns))
 	if(prob(10))
 		species_flags |= SPECIES_FLAG_NO_SLIP
 	if(prob(10))

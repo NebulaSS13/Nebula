@@ -9,7 +9,7 @@
 
 /obj/structure/skele_stand/Initialize()
 	. = ..()
-	gender = pick(MALE, FEMALE, PLURAL)
+	set_gender(pick(MALE, FEMALE, PLURAL))
 
 /obj/structure/skele_stand/proc/rattle_bones(mob/user, atom/thingy)
 	if((world.time - cooldown) <= 1 SECOND)
@@ -54,7 +54,8 @@
 		for(var/slot in swag)
 			var/obj/item/clothing/C = swag[slot]
 			swagnames += C.get_examine_line()
-		. += "[gender == MALE ? "He" : "She"] is wearing [english_list(swagnames)]."
+		var/decl/pronouns/stand_pronouns = get_pronouns()
+		. += "[stand_pronouns.He] [stand_pronouns.is] wearing [english_list(swagnames)]."
 
 /obj/structure/skele_stand/attackby(obj/item/used_item, mob/user)
 	if(IS_PEN(used_item))

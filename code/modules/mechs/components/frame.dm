@@ -295,9 +295,10 @@
 	return TRUE
 
 /obj/structure/heavy_vehicle_frame/proc/install_component(var/obj/item/thing, var/mob/user)
-	var/obj/item/mech_component/MC = thing
-	if(istype(MC) && !MC.ready_to_install())
-		to_chat(user, SPAN_WARNING("\The [MC] [MC.gender == PLURAL ? "are" : "is"] not ready to install."))
+	var/obj/item/mech_component/component = thing
+	if(istype(component) && !component.ready_to_install())
+		var/decl/pronouns/component_pronouns = component.get_pronouns()
+		to_chat(user, SPAN_WARNING("\The [component] [component_pronouns.is] not ready to install."))
 		return 0
 	if(user)
 		visible_message(SPAN_NOTICE("\The [user] begins installing \the [thing] into \the [src]."))

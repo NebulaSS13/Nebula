@@ -123,6 +123,122 @@
 	if(bound_overlay)
 		bound_overlay.visible_message(message, self_message, blind_message)
 
+/mob/proc/get_action_string(is_self, var/using_verb, var/object_phrase, var/infix, var/postfix)
+	var/decl/pronouns/using_pronouns = is_self ? get_self_pronouns() : get_visible_pronouns()
+	// A little kludgy/special-cased: we don't use the name for self messages.
+	var/actor_string = is_self ? using_pronouns.He : "\The [src]"
+	// this will hopefully handle is/does/has agreement properly
+	. = "[actor_string] [verb_agree_with_pronouns(using_verb, using_pronouns, is_after_pronoun = is_self)] [infix ? infix + " " : null][object_phrase][postfix ? " " + postfix : null]"
+	// uh oh, time to handle tokens.
+	. = replacetext(., "$USER$",      "\the [src]")
+	. = replacetext(., "$USER'S$",    "\the [src]'s")
+	. = replacetext(., "$USER_THEY$",  using_pronouns.he)
+	. = replacetext(., "$USER_THEM$",  using_pronouns.him)
+	. = replacetext(., "$USER_THEIR$", using_pronouns.his)
+	. = replacetext(., "$USER_SELF$",  using_pronouns.self)
+	. = replacetext(., "$USER_DOES$",  using_pronouns.does)
+	. = replacetext(., "$USER_HAS$",   using_pronouns.has)
+	. = replacetext(., "$USER_IS$",    using_pronouns.is)
+	. = replacetext(., "$USER_S$",     using_pronouns.s)
+	. = replacetext(., "$USER_ES$",    using_pronouns.es)
+
+/mob/proc/get_targeted_action_string(mob/target, is_self, var/using_verb, var/object_phrase, var/infix, var/postfix)
+	. = get_action_string(is_self, using_verb, object_phrase, infix, postfix)
+	var/target_is_self = target == src
+	var/decl/pronouns/target_pronouns = target_is_self ? target.get_self_pronouns() : target.get_visible_pronouns()
+	// A little kludgy/special-cased: we don't use the name if it's self-targeted, regardless of who's viewing
+	. = replacetext(., "$TARGET$",       target_is_self ? target_pronouns.self : "\the [target]")
+	. = replacetext(., "$TARGET'S$",     target_is_self ? target_pronouns.his : "\the [target]'s")
+	. = replacetext(., "$TARGET_THEM$",  target_is_self ? target_pronouns.self : target_pronouns.him) // reflexive if self, so use self instead of them
+	. = replacetext(., "$TARGET_THEIR$", target_pronouns.his)
+	. = replacetext(., "$TARGET_THEY$",  target_pronouns.he)
+	. = replacetext(., "$TARGET_DOES$",  target_pronouns.does)
+	. = replacetext(., "$TARGET_HAS$",   target_pronouns.has)
+	. = replacetext(., "$TARGET_IS$",    target_pronouns.is)
+	. = replacetext(., "$TARGET_S$",     target_pronouns.s)
+	. = replacetext(., "$TARGET_ES$",    target_pronouns.es)
+
+// Determines span styling used for visible_action_message.
+/// Uses SPAN_NOTICE for both self and other messages.
+var/global/const/ACTION_DANGER_NONE = 0
+/// Uses SPAN_DANGER for others and SPAN_WARNING for self.
+var/global/const/ACTION_DANGER_OTHERS = 1
+/// Uses SPAN_DANGER for both self and others.
+var/global/const/ACTION_DANGER_ALL = 2
+/**
+	Show an action message to all mobs and objects in sight of this mob.
+
+	Used for atoms performing visible actions. Handles basic self-messages automatically.
+
+	- `using_verb`: The verb to use in the message, e.g. "open", "is", "attack". Should be in the base form (no "s" at the end).
+	- `object_phrase`: The phrase to use after the verb, e.g. "\the [used_item]". Could be a phrase including a gerund or infinitive, like "repairing \the [machine]."
+	- `dangerous?`: One of the ACTION_DANGER_* constants, determining the styling of the message, OR a string style class. Default: ACTION_DANGER_NONE
+	- `blind_message?`: The string blind mobs will see. Example: "You hear something!" Default: null
+	- `range?`: The number of tiles away the message will be visible from. Default: world.view
+	- `self_infix?`: An optional infix to insert between the verb and object phrase in the self message. Default: null
+	- `self_postfix?`: An optional postfix to insert after the object phrase in the self message. Default: null
+	- `other_infix?`: An optional infix to insert between the verb and object phrase in the other message. Default: null
+	- `other_postfix?`: An optional postfix to insert after the object phrase in the other message. Default: null
+*/
+/mob/proc/visible_action_message(var/using_verb, var/object_phrase, var/dangerous = ACTION_DANGER_NONE, var/blind_message = null, var/range = world.view, var/self_infix = null, var/self_postfix = null, var/other_infix = null, var/other_postfix = null)
+	var/self_message = get_action_string(TRUE, using_verb, object_phrase, self_infix, self_postfix)
+	var/other_message = get_action_string(FALSE, using_verb, object_phrase, other_infix, other_postfix)
+	switch(dangerous)
+		if(ACTION_DANGER_NONE)
+			other_message = SPAN_NOTICE(other_message)
+			self_message = SPAN_NOTICE(self_message)
+		if(ACTION_DANGER_OTHERS)
+			other_message = SPAN_DANGER(other_message)
+			self_message = SPAN_WARNING(self_message)
+		if(ACTION_DANGER_ALL)
+			other_message = SPAN_DANGER(other_message)
+			self_message = SPAN_DANGER(self_message)
+		else // fallback for stuff like lighter styling
+			other_message = SPAN_CLASS(dangerous, other_message)
+			self_message = SPAN_CLASS(dangerous, self_message)
+	visible_message(
+		other_message,
+		self_message,
+		blind_message,
+		range
+	)
+
+/mob/proc/targeted_visible_action_message(var/mob/target, var/using_verb, var/object_phrase, var/dangerous = ACTION_DANGER_NONE, var/blind_message = null, var/range = world.view, var/self_infix = null, var/self_postfix = null, var/other_infix = null, var/other_postfix = null)
+	var/self_message = get_targeted_action_string(target, TRUE, using_verb, object_phrase, self_infix, self_postfix)
+	var/other_message = get_targeted_action_string(target, FALSE, using_verb, object_phrase, other_infix, other_postfix)
+	switch(dangerous)
+		if(ACTION_DANGER_NONE)
+			other_message = SPAN_NOTICE(other_message)
+			self_message = SPAN_NOTICE(self_message)
+		if(ACTION_DANGER_OTHERS)
+			other_message = SPAN_DANGER(other_message)
+			self_message = SPAN_WARNING(self_message)
+		if(ACTION_DANGER_ALL)
+			other_message = SPAN_DANGER(other_message)
+			self_message = SPAN_DANGER(self_message)
+		else // fallback for stuff like lighter styling
+			other_message = SPAN_CLASS(dangerous, other_message)
+			self_message = SPAN_CLASS(dangerous, self_message)
+	visible_message(
+		other_message,
+		self_message,
+		blind_message,
+		range
+	)
+
+/mob/proc/self_action_message(var/using_verb, var/object_phrase, var/dangerous = ACTION_DANGER_NONE, var/infix, var/postfix)
+	var/the_message = get_targeted_action_string(src, TRUE, using_verb, object_phrase, infix, postfix)
+	switch(dangerous)
+		if(ACTION_DANGER_NONE)
+			the_message = SPAN_NOTICE(the_message)
+		if(ACTION_DANGER_OTHERS)
+			the_message = SPAN_WARNING(the_message)
+		if(ACTION_DANGER_ALL)
+			the_message = SPAN_DANGER(the_message)
+		else // fallback for stuff like lighter styling
+			the_message = SPAN_CLASS(dangerous, the_message)
+	to_chat(src, the_message)
+
 // Show a message to all mobs and objects in earshot of this one
 // This would be for audible actions by the src mob
 // message is the message output to anyone who can hear.

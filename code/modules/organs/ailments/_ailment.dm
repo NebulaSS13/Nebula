@@ -94,7 +94,7 @@
 		. = replacetext(., "$TARGET$", "\the [target]")
 	if(organ)
 		. = replacetext(., "$ORGAN$", organ.name)
-		var/decl/pronouns/organ_pronouns = get_pronouns_by_gender(organ.gender)
+		var/decl/pronouns/organ_pronouns = organ.get_pronouns()
 		. = replacetext(., "$ORGAN_DOES$", organ_pronouns.does)
 		. = replacetext(., "$ORGAN_IS$", organ_pronouns.is)
 	. = capitalize(trim(.))

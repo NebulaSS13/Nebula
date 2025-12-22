@@ -173,7 +173,7 @@
 
 	if(!prepare_to_cast(user, target, metadata, handler))
 		if(fail_cast_1p_str)
-			to_chat(user, SPAN_WARNING(capitalize(emote_replace_user_tokens(fail_cast_1p_str, user))))
+			to_chat(user, SPAN_WARNING(capitalize_proper_html(emote_replace_user_tokens(fail_cast_1p_str, user))))
 		return
 
 	if(projectile_type)
@@ -209,25 +209,25 @@
 /decl/ability/proc/show_cast_channel_msg(mob/user, atom/target, list/metadata)
 	if(prepare_message_3p_str && prepare_message_1p_str)
 		user.visible_message(
-			SPAN_NOTICE(capitalize(emote_replace_target_tokens(emote_replace_user_tokens(prepare_message_3p_str, user), target))),
-			SPAN_NOTICE(capitalize(emote_replace_target_tokens(prepare_message_1p_str, target)))
+			SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(emote_replace_user_tokens(prepare_message_3p_str, user), target))),
+			SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(prepare_message_1p_str, target)))
 		)
 	else if(prepare_message_1p_str)
-		user.visible_message(SPAN_NOTICE(capitalize(emote_replace_target_tokens(prepare_message_1p_str, target))))
+		user.visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(prepare_message_1p_str, target))))
 	else if(prepare_message_3p_str)
-		user.visible_message(SPAN_NOTICE(capitalize(emote_replace_target_tokens(emote_replace_user_tokens(prepare_message_3p_str, user), target))))
+		user.visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(emote_replace_user_tokens(prepare_message_3p_str, user), target))))
 
 /decl/ability/proc/show_ability_cast_msg(mob/user, list/targets, list/metadata)
 	var/atom/target = targets[1]
 	if(cast_message_3p_str && cast_message_1p_str)
 		user.visible_message(
-			SPAN_NOTICE(capitalize(emote_replace_target_tokens(emote_replace_user_tokens(cast_message_3p_str, user), target))),
-			SPAN_NOTICE(capitalize(emote_replace_target_tokens(cast_message_1p_str, target)))
+			SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(emote_replace_user_tokens(cast_message_3p_str, user), target))),
+			SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(cast_message_1p_str, target)))
 		)
 	else if(cast_message_1p_str)
-		user.visible_message(SPAN_NOTICE(capitalize(emote_replace_target_tokens(cast_message_1p_str, target))))
+		user.visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(cast_message_1p_str, target))))
 	else if(cast_message_3p_str)
-		user.visible_message(SPAN_NOTICE(capitalize(emote_replace_target_tokens(emote_replace_user_tokens(cast_message_3p_str, user), target))))
+		user.visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(emote_replace_user_tokens(cast_message_3p_str, user), target))))
 
 /decl/ability/proc/prepare_to_cast(mob/user, atom/target, list/metadata, datum/ability_handler/handler)
 	var/use_cooldown_time = get_cooldown_time(metadata)

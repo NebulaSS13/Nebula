@@ -38,7 +38,8 @@
 	if(color && dried_product_takes_color)
 		thing.color = color
 	if(isturf(loc) && !silent)
-		visible_message(SPAN_NOTICE("\The [src] [gender == PLURAL ? "are" : "is"] dry!"))
+		var/decl/pronouns/pronouns = get_pronouns()
+		visible_message(SPAN_NOTICE("\The [src] [pronouns.is] dry!"))
 	if(thing != src)
 		qdel(src)
 	return thing

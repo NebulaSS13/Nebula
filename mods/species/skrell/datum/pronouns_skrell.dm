@@ -1,4 +1,5 @@
 /decl/pronouns/skrell
+	uid = "pronouns_skrell"
 	name = "Skrell"
 	bureaucratic_term  = "Skrell"
 	informal_term = "Skrell"
@@ -14,3 +15,4 @@
 	self = "vilself"
 	s    = "s"
 	es   = "es"
+	pluralize_verb = PLURALIZE_ALL

@@ -7,7 +7,7 @@
 		. = replacetext(., "$TARGET_THEM$",  target_gender.him)
 		. = replacetext(., "$TARGET_THEIR$", target_gender.his)
 		. = replacetext(., "$TARGET_SELF$",  target_gender.self)
-		. = replacetext(., "$TARGET$",       "<b>[target]</b>")
+		. = replacetext(., "$TARGET$",       "<b>\the [target]</b>")
 
 /proc/emote_replace_user_tokens(var/msg, var/atom/user)
 	. = msg
@@ -18,7 +18,7 @@
 		. = replacetext(., "$USER_THEM$",  user_gender.him)
 		. = replacetext(., "$USER_THEIR$", user_gender.his)
 		. = replacetext(., "$USER_SELF$",  user_gender.self)
-		. = replacetext(., "$USER$",       "<b>[user]</b>")
+		. = replacetext(., "$USER$",       "<b>\the [user]</b>")
 
 // Note about emote messages:
 // - $USER$ / $TARGET$ will be replaced with the relevant name, in bold.
@@ -242,7 +242,7 @@ var/global/list/_emotes_by_key
 	if(use_1p)
 		if(target)
 			use_1p = emote_replace_target_tokens(use_1p, target)
-		use_1p = "<span class='emote'>[capitalize(emote_replace_user_tokens(use_1p, user))]</span>"
+		use_1p = "<span class='emote'>[capitalize_proper_html(emote_replace_user_tokens(use_1p, user))]</span>"
 
 	var/use_3p = get_emote_message_3p(user, target, extra_params)
 	if(use_3p)

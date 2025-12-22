@@ -386,7 +386,7 @@
 		control_computer._admin_logs += "[key_name(occupant)] ([role_alt_title]) at [stationtime2text()]"
 	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
 
-	visible_message(SPAN_NOTICE(emote_replace_user_tokens(emote_replace_target_tokens(on_store_visible_message, src), occupant)))
+	visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_user_tokens(emote_replace_target_tokens(on_store_visible_message, src), occupant))))
 	do_telecomms_announcement(src, "[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
 	despawn_character(occupant)
 	set_occupant(null)
@@ -398,7 +398,7 @@
 				return
 	if(!user.incapacitated() && !user.anchored && user.Adjacent(src) && user.Adjacent(target))
 		if(target == user)
-			visible_message(SPAN_NOTICE(emote_replace_user_tokens(emote_replace_target_tokens(on_enter_visible_message, src), usr)), range = 3)
+			visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_user_tokens(emote_replace_target_tokens(on_enter_visible_message, src), usr))), range = 3)
 		else
 			visible_message("[user] starts putting [target] into \the [src].", range = 3)
 		if(!do_after(user, 20, src)|| QDELETED(target))

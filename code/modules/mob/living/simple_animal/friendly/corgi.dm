@@ -163,7 +163,7 @@
 
 /mob/living/simple_animal/corgi/puppy/Initialize()
 	. = ..()
-	gender = pick(MALE, FEMALE)
+	set_gender(pick(MALE, FEMALE))
 
 //pupplies cannot wear anything.
 /mob/living/simple_animal/corgi/puppy/OnTopic(mob/user, href_list)

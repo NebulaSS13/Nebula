@@ -102,8 +102,8 @@
 			to_chat(user, SPAN_WARNING("You should remove the accessories attached to \the [src] first."))
 			return TRUE
 		if(!isturf(loc) && !(src in user.get_held_items()))
-			var/it = gender == PLURAL ? "them" : "it"
-			to_chat(user, SPAN_WARNING("You must either be holding \the [src], or [it] must be on the ground, before you can shred [it]."))
+			var/decl/pronouns/pronouns = get_pronouns()
+			to_chat(user, SPAN_WARNING("You must either be holding \the [src], or [pronouns.he] must be on the ground, before you can shred [pronouns.him]."))
 			return TRUE
 		playsound(loc, 'sound/weapons/cablecuff.ogg', 30, 1)
 		user.visible_message(SPAN_DANGER("\The [user] begins ripping apart \the [src] with \the [used_item]."))
@@ -268,7 +268,8 @@
 	else
 		. = (bodytype_equip_flags & root_bodytype.bodytype_flag)
 	if(!. && !disable_warning)
-		to_chat(user, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
+		var/decl/pronouns/pronouns = get_pronouns()
+		to_chat(user, SPAN_WARNING("\The [src] [pronouns.does] not fit you."))
 
 /obj/item/clothing/equipped(var/mob/user)
 	update_icon()

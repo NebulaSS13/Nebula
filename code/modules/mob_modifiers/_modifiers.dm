@@ -56,7 +56,7 @@
 		. += "mob_overlay_state set but mob_overlay_icon not set"
 
 /decl/mob_modifier/proc/replace_tokens(message, mob/user)
-	return capitalize(emote_replace_user_tokens(message, user))
+	return capitalize_proper_html(emote_replace_user_tokens(message, user))
 
 /decl/mob_modifier/proc/on_modifier_datum_added(mob/living/_owner, datum/mob_modifier/modifier)
 	if(on_add_message_3p)

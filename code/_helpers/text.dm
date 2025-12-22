@@ -366,10 +366,21 @@ var/global/regex/starts_lowercase_regex = regex(@"^[a-z]")
 	return trim_left(trim_right(text))
 
 //Returns a string with the first element of the string capitalized.
+// NOTE: This will not work if there are any HTML tags.
 /proc/capitalize(text)
 	if(text)
 		text = uppertext(text[1]) + copytext(text, 1 + length(text[1]))
 	return text
+
+// Returns a string with the first alphabetical element of the string capitalized, skipping HTML tags.
+/proc/capitalize_proper_html(text)
+	var/static/regex/split_html_regex = regex(@"(^<[^>]*>)([A-Za-z])(.+)$")
+	if(!text)
+		return text
+	if(!split_html_regex.Find(text))
+		return capitalize(text)
+	split_html_regex.group[2] = uppertext(split_html_regex.group[2])
+	return JOINTEXT(split_html_regex.group)
 
 //Returns a string with the first element of the every word of the string capitalized.
 /proc/capitalize_words(text)
@@ -783,6 +794,48 @@ var/global/list/plural_words_unchanged = list(
 	if(splited)
 		word = "[jointext(splited, " ", 1, length(splited))] [word]"
 	return word
+
+var/global/list/copula_verbs = list("is" = TRUE, "am" = TRUE, "are" = TRUE)
+var/global/list/has_verbs = list("has" = TRUE, "have" = TRUE)
+var/global/list/does_verbs = list("does" = TRUE, "do" = TRUE)
+var/global/list/agreement_exception_verbs = list("can" = TRUE, "cannot" = TRUE, "can't" = TRUE, "will" = TRUE, "won't" = TRUE, "shall" = TRUE, "shan't" = TRUE, "may" = TRUE, "must" = TRUE, "ought" = TRUE, "could" = TRUE, "would" = TRUE, "should" = TRUE)
+/proc/verb_agree_with_pronouns(var/use_verb, var/decl/pronouns/use_pronouns, is_after_pronoun = TRUE)
+	// deal with compound verb phrases here!
+	// basically, skip all our adverbs, inflect only the first non-adverb word we find (which is hopefully a verb) and then keep everything after unchanged
+	// this will properly handle "successfully finish doing" and "properly manage to do"
+	// but not "somehow finish doing" which will get turned into "somehows finish doing" :(
+	// todo: fix that
+	var/list/words = splittext(use_verb, " ")
+	if(length(words) > 1)
+		var/last_adverb = 1
+		for(var/word_index in 1 to length(words))
+			if(text_ends_with(words[word_index], "ly"))
+				last_adverb = max(word_index, last_adverb)
+		use_verb = words[last_adverb]
+		// This overengineered nonsense ensures that we shouldn't end up with any doubled or missing spaces.
+		return jointext_no_nulls(list(jointext(words.Copy(1, last_adverb), " "), verb_agree_with_pronouns(use_verb, use_pronouns, is_after_pronoun = is_after_pronoun), jointext(words.Copy(last_adverb + 1, length(words) + 1), " ")), " ")
+	if(!is_after_pronoun && use_pronouns.pluralize_verb == /decl/pronouns::PLURALIZE_PSEUDO)
+		return use_verb // do not inflect pseudoplural unless after a pronoun
+	if(global.copula_verbs[use_verb])
+		return use_pronouns.is
+	else if(global.has_verbs[use_verb])
+		return use_pronouns.has
+	else if(global.does_verbs[use_verb])
+		return use_pronouns.does
+	else if(global.agreement_exception_verbs[use_verb])
+		return use_verb
+	// text_make_plural is intended for nouns, but should hopefully work for "fly" -> "flies" and similar.
+	switch(use_pronouns.pluralize_verb)
+		if(/decl/pronouns::PLURALIZE_NONE)
+			return use_verb
+		if(/decl/pronouns::PLURALIZE_PSEUDO)
+			// technically only the plural side can get hit here
+			// but better safe than sorry
+			return is_after_pronoun ? text_make_plural(use_verb) : use_verb
+		if(/decl/pronouns::PLURALIZE_ALL)
+			return text_make_plural(use_verb)
+		else
+			CRASH("Invalid value [use_pronouns.pluralize_verb] for [use_pronouns]!")
 
 // Surely we have this defined somewhere already??
 /proc/repeatstring(str, num)

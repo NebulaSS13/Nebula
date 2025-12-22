@@ -25,7 +25,7 @@
 
 	blood_types = list(/decl/blood_type/coolant)
 
-	available_pronouns = list(/decl/pronouns)
+	available_pronouns = list(/decl/pronouns/pseudoplural)
 	available_bodytypes = list(
 		/decl/bodytype/crystalline/adherent,
 		/decl/bodytype/crystalline/adherent/emerald,
