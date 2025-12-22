@@ -284,7 +284,7 @@
 			continue
 		if(last_divider) // insert the divider from the last entry
 			. += last_divider
-		else if(length(.)) // we already have prior entries, insert our prefix
+		else if(length(.) && examiner.section_prefix) // we already have prior entries, insert our prefix
 			. += examiner.section_prefix
 		. += adding_text
 		last_divider = examiner.section_postfix
