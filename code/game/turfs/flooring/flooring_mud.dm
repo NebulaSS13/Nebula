@@ -33,6 +33,9 @@
 		return FALSE
 	return ..()
 
+/decl/flooring/mud/get_vehicle_transit_delay(obj/vehicle/vehicle)
+	return vehicle.vehicle_transit_type == vehicle::VEHICLE_SNOWMOBILE ? 1.4 : 1.5
+
 /decl/flooring/dry_mud
 	name            = "dry mud"
 	desc            = "This was once mud, but forgot to keep hydrated."
@@ -45,6 +48,9 @@
 	dirt_color      = "#ae9e66"
 	force_material  = /decl/material/solid/soil
 	uid             = "floor_dry_mud"
+
+/decl/flooring/dry_mud/get_vehicle_transit_delay(obj/vehicle/vehicle)
+	return 1
 
 /decl/flooring/dry_mud/fluid_act(turf/floor/target, datum/reagents/fluids)
 	if(target.get_topmost_flooring() == src)
@@ -76,3 +82,6 @@
 		target.set_base_flooring(/decl/flooring/mud)
 		. = TRUE
 	return . || ..()
+
+/decl/flooring/dirt/get_vehicle_transit_delay(obj/vehicle/vehicle)
+	return 1

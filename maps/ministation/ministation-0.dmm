@@ -3645,7 +3645,7 @@
 /area/ministation/atmospherics)
 "pS" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/vehicle/train/cargo/trolley,
+/obj/vehicle/train/trolley,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "pT" = (
@@ -13140,7 +13140,7 @@
 /area/ministation/engine)
 "Ws" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/vehicle/train/cargo/engine,
+/obj/vehicle/train/engine,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "Wt" = (

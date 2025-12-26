@@ -34922,7 +34922,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/storage)
 "bwe" = (
-/obj/vehicle/train/cargo/trolley,
+/obj/vehicle/train/trolley,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/storage)
@@ -34933,7 +34933,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/storage)
 "bwg" = (
-/obj/vehicle/train/cargo/engine,
+/obj/vehicle/train/engine,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/cable/green{
 	icon_state = "1-2"

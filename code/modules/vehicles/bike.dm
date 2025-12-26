@@ -32,7 +32,7 @@
 	update_icon()
 
 /obj/vehicle/bike/user_buckle_mob(mob/living/M, mob/user)
-	return load(M)
+	return load_onto_vehicle(M)
 
 /obj/vehicle/bike/verb/toggle()
 	set name = "Toggle Engine"
@@ -89,11 +89,12 @@
 		qdel(trail)
 	trail = null
 
-/obj/vehicle/bike/load(var/atom/movable/loading)
+/obj/vehicle/bike/load_onto_vehicle(var/atom/movable/loading)
+	if(!isliving(loading))
+		return FALSE
 	var/mob/living/M = loading
-	if(!istype(M)) return 0
 	if(M.buckled || M.anchored || M.restrained() || !Adjacent(M) || !M.Adjacent(src))
-		return 0
+		return FALSE
 	return ..(M)
 
 /obj/vehicle/bike/emp_act(var/severity)
@@ -124,14 +125,14 @@
 /obj/vehicle/bike/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && istype(dropping, /atom/movable))
-		if(!load(dropping))
+		if(!load_onto_vehicle(dropping))
 			to_chat(user, SPAN_WARNING("You were unable to load \the [dropping] onto \the [src]."))
 		return TRUE
 
 /obj/vehicle/bike/attack_hand(var/mob/user)
 	if(user != load)
 		return ..()
-	unload(load)
+	unload_from_vehicle(load)
 	to_chat(user, "You unbuckle yourself from \the [src].")
 	return TRUE
 
@@ -139,7 +140,7 @@
 	if(user != load || !on)
 		return
 	if(user.incapacitated())
-		unload(user)
+		unload_from_vehicle(user)
 		visible_message("<span class='warning'>\The [user] falls off \the [src]!</span>")
 		return
 	return Move(get_step(src, direction))

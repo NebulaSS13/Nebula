@@ -14,3 +14,6 @@
 	ASSERT(turf_material?.adjective_name)
 	target.SetName("[turf_material.adjective_name] [name]")
 	target.desc = "An expanse of bare [turf_material.solid_name]."
+
+/decl/flooring/rock/get_vehicle_transit_delay(obj/vehicle/vehicle)
+	return vehicle.vehicle_transit_type == vehicle::VEHICLE_SNOWMOBILE ? 1.5 : ..()

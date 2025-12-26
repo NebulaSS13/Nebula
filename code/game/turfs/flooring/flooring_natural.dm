@@ -70,6 +70,9 @@
 	force_material  = /decl/material/solid/ice
 	uid             = "floor_ice"
 
+/decl/flooring/ice/get_vehicle_transit_delay(obj/vehicle/vehicle)
+	return vehicle.vehicle_transit_type == vehicle::VEHICLE_SNOWMOBILE ? 0.8 : ..()
+
 /decl/flooring/ice/update_turf_icon(turf/floor/target)
 	. = ..()
 	if(istype(target))
