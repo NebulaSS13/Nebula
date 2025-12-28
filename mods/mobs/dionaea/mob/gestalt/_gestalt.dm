@@ -26,7 +26,7 @@
 /obj/structure/diona_gestalt/on_update_icon()
 	..()
 	add_overlay(eyes_overlay)
-	if(nymphs && nymphs.len)
+	if(LAZYLEN(nymphs))
 		var/matrix/M = matrix()
 		M.Scale(clamp(nymphs.len * 0.1, 1, 2))
 		transform = M

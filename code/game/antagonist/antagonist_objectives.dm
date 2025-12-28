@@ -1,7 +1,7 @@
 /decl/special_role/proc/create_global_objectives(var/override=0)
 	if(get_config_value(/decl/config/enum/objectives_disabled) != CONFIG_OBJECTIVE_ALL && !override)
 		return 0
-	if(global_objectives && global_objectives.len)
+	if(LAZYLEN(global_objectives))
 		return 0
 	return 1
 

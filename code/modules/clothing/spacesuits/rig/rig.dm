@@ -139,7 +139,7 @@
 
 	START_PROCESSING(SSobj, src)
 
-	if(initial_modules && initial_modules.len)
+	if(LAZYLEN(initial_modules))
 		for(var/path in initial_modules)
 			var/obj/item/rig_module/module = new path(src)
 			installed_modules += module

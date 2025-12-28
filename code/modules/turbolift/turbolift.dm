@@ -81,7 +81,7 @@
 	var/current_floor_index = floors.Find(current_floor)
 
 	if(!target_floor)
-		if(!queued_floors || !queued_floors.len)
+		if(!LAZYLEN(queued_floors))
 			return 0
 		target_floor = queued_floors[1]
 		queued_floors -= target_floor

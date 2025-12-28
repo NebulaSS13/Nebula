@@ -48,7 +48,7 @@
 			return 1
 
 /obj/item/organ/internal/augment/boost/proc/buff()
-	if(!buffs || !buffs.len)
+	if(!LAZYLEN(buffs))
 		return 0
 	var/list/B = owner.fetch_buffs_of_type(buffpath, 0)
 	for(var/datum/skill_buff/augment/D in B)

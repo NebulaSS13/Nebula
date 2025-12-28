@@ -134,7 +134,7 @@ var/global/list/additional_antag_types = list()
 	to_world("<B>The current game mode is [capitalize(name)]!</B>")
 	if(round_description) to_world("[round_description]")
 	if(round_autoantag) to_world("Antagonists will be added to the round automagically as needed.")
-	if(antag_templates && antag_templates.len)
+	if(LAZYLEN(antag_templates))
 		var/antag_summary = "<b>Possible antagonist types:</b> "
 		var/i = 1
 		for(var/decl/special_role/antag in antag_templates)
@@ -170,7 +170,7 @@ var/global/list/additional_antag_types = list()
 			if(!antag)
 				continue
 			var/list/potential = list()
-			if(antag_templates && antag_templates.len)
+			if(LAZYLEN(antag_templates))
 				if(antag.flags & ANTAG_OVERRIDE_JOB)
 					potential = antag.pending_antagonists
 				else
@@ -327,7 +327,7 @@ var/global/list/additional_antag_types = list()
 /decl/game_mode/proc/check_finished()
 	if(SSevac.evacuation_controller?.round_over() || station_was_nuked)
 		return 1
-	if(end_on_antag_death && antag_templates && antag_templates.len)
+	if(end_on_antag_death && LAZYLEN(antag_templates))
 		var/has_antags = 0
 		for(var/decl/special_role/antag in antag_templates)
 			if(!antag.antags_are_dead())

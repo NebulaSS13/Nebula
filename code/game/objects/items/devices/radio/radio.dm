@@ -76,7 +76,7 @@
 /obj/item/radio/proc/can_decrypt(var/list/secured)
 	if(decrypt_all_messages)
 		return TRUE
-	if(!secured || !length(secured))
+	if(!LAZYLEN(secured))
 		return TRUE
 	if(!islist(secured))
 		secured = list(secured)

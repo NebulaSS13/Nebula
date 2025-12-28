@@ -415,13 +415,13 @@
 				if(playercid)
 					cidsearch  = "AND `computerid` = '[playercid]' "
 			else
-				if(adminckey && length(adminckey) >= 3)
+				if(length(adminckey) >= 3)
 					adminsearch = "AND `a_ckey` LIKE '[adminckey]%' "
-				if(playerckey && length(playerckey) >= 3)
+				if(length(playerckey) >= 3)
 					playersearch = "AND `ckey` LIKE '[playerckey]%' "
-				if(playerip && length(playerip) >= 3)
+				if(length(playerip) >= 3)
 					ipsearch  = "AND `ip` LIKE '[playerip]%' "
-				if(playercid && length(playercid) >= 7)
+				if(length(playercid) >= 7)
 					cidsearch  = "AND `computerid` LIKE '[playercid]%' "
 
 			if(dbbantype)

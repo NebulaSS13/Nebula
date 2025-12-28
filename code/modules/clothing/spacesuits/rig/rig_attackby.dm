@@ -125,7 +125,7 @@
 			var/list/current_mounts = list()
 			if(cell) current_mounts   += "cell"
 			if(air_supply) current_mounts += "tank"
-			if(installed_modules && installed_modules.len) current_mounts += "system module"
+			if(LAZYLEN(installed_modules)) current_mounts += "system module"
 
 			var/to_remove = input("Which would you like to modify?") as null|anything in current_mounts
 			if(!to_remove)

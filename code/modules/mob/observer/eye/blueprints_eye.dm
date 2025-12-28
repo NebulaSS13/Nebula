@@ -53,7 +53,7 @@
 
 /mob/observer/eye/blueprints/proc/create_area()
 	var/area_name = sanitize_safe(input("New area name:","Area Creation", ""), MAX_NAME_LEN)
-	if(!area_name || !length(area_name))
+	if(!length(area_name))
 		return
 	if(length(area_name) > MAX_NAME_LEN)
 		to_chat(owner, SPAN_WARNING("That name is too long!"))

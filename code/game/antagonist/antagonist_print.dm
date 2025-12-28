@@ -19,7 +19,7 @@
 			text += "<br>Their goals for today were..."
 			text += "<br><span class='notice'>[ambitions.summarize()]</span>"
 
-	if(global_objectives && global_objectives.len)
+	if(LAZYLEN(global_objectives))
 		text += "<BR><FONT size = 2>Their objectives were:</FONT>"
 		var/num = 1
 		for(var/datum/objective/O in global_objectives)
@@ -38,7 +38,7 @@
 	var/role
 	if(ply.assigned_role)
 		role = ply.assigned_role
-	else 
+	else
 		role = ply.get_special_role_name("unknown role")
 	role = "\improper [role]"
 

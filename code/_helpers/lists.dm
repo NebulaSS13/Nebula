@@ -176,7 +176,7 @@
 
 //Checks for specific types in specifically structured (Assoc "type" = TRUE) lists ('typecaches')
 /proc/is_type_in_typecache(atom/A, list/cache)
-	if(!cache || !cache.len || !A)
+	if(!LAZYLEN(cache) || !A)
 		return 0
 	return cache[A.type]
 

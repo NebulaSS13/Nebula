@@ -78,12 +78,12 @@
 	var/excav_level = P.get_tool_property(TOOL_PICK, TOOL_PROP_EXCAVATION_DEPTH)
 	excavation_level += excav_level
 	//archaeo overlays
-	if(!archaeo_overlay && finds && finds.len)
+	if(!archaeo_overlay && LAZYLEN(finds))
 		var/datum/find/F = finds[1]
 		if(F.excavation_required <= excavation_level + F.view_range)
 			archaeo_overlay = image('icons/turf/excavation_overlays.dmi',"overlay_archaeo[rand(1,3)]")
 			queue_icon_update()
-	else if(archaeo_overlay && (!finds || !finds.len))
+	else if(archaeo_overlay && !LAZYLEN(finds))
 		archaeo_overlay = null
 		queue_icon_update()
 

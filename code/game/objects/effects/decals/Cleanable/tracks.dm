@@ -27,7 +27,7 @@
 /obj/effect/decal/cleanable/blood/tracks/reveal_blood()
 	// don't reveal non-blood tracks
 	if(ispath(chemical, /decl/material/liquid/blood) && !fluorescent)
-		if(stack && stack.len)
+		if(LAZYLEN(stack))
 			for(var/datum/fluidtrack/track in stack)
 				track.basecolor = COLOR_LUMINOL
 		..()

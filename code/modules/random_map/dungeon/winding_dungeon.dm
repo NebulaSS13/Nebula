@@ -73,10 +73,10 @@
 /datum/random_map/winding_dungeon/proc/get_appropriate_list(var/list/common, var/list/uncommon, var/list/rare, var/x, var/y)
 	var/distance = sqrt((x - round(first_room_x+first_room_width/2)) ** 2 + (y - round(first_room_y+first_room_height/2)) ** 2)
 	if(prob(distance))
-		if(prob(distance/100) && rare && rare.len)
+		if(prob(distance/100) && LAZYLEN(rare))
 			logging("Returning rare list.")
 			return rare
-		else if(uncommon && uncommon.len)
+		else if(LAZYLEN(uncommon))
 			logging("Returning uncommon list.")
 			return uncommon
 	logging("Returning common list.")
@@ -92,12 +92,12 @@
 	var/num_of_loot = round(limit_x * limit_y * loot_multiplier)
 	logging("Attempting to add [num_of_loot] # of loot")
 	var/sanity = 0
-	if((loot_common && loot_common.len) || (loot_uncommon && loot_uncommon.len) || (loot_rare && loot_rare.len)) //no monsters no problem
+	if((LAZYLEN(loot_common)) || (LAZYLEN(loot_uncommon)) || (LAZYLEN(loot_rare))) //no monsters no problem
 		while(rooms.len && num_of_loot > 0)
 			CHECK_TICK
 			var/datum/room/R = pick(rooms)
 			var/list/loot_list = get_appropriate_list(loot_common, loot_uncommon, loot_rare, round(R.x+R.width/2), round(R.y+R.height/2))
-			if(!loot_list || !loot_list.len || R.add_loot(origin_x,origin_y,origin_z,pickweight(loot_list)))
+			if(!LAZYLEN(loot_list) || R.add_loot(origin_x,origin_y,origin_z,pickweight(loot_list)))
 				num_of_loot--
 				sanity -= 10 //we hahve success so more tries
 				continue
@@ -110,7 +110,7 @@
 		rooms -= R
 		qdel(R)
 
-	if((!monsters_common || !monsters_common.len) && (!monsters_uncommon || !monsters_uncommon.len) && (!monsters_rare || !monsters_rare.len)) //no monsters no problem
+	if(!LAZYLEN(monsters_common) && !LAZYLEN(monsters_uncommon) && !LAZYLEN(monsters_rare)) //no monsters no problem
 		logging("No monster lists detected. Not spawning monsters.")
 		return
 
@@ -119,14 +119,14 @@
 
 	while(num_of_monsters > 0)
 		CHECK_TICK
-		if(!monster_available || !monster_available.len)
+		if(!LAZYLEN(monster_available))
 			logging("There are no available turfs left.")
 			num_of_monsters = 0
 			continue
 		var/turf/T = pick(monster_available)
 		monster_available -= T
 		var/list/monster_list = get_appropriate_list(monsters_common, monsters_uncommon, monsters_rare, T.x, T.y)
-		if(monster_list && monster_list.len)
+		if(LAZYLEN(monster_list))
 			var/type = pickweight(monster_list)
 			logging("Generating a monster of type [type] at position ([T.x],[T.y],[origin_z])")
 			var/mob/M = new type(T)

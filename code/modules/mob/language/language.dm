@@ -121,7 +121,7 @@
 	return "..."
 
 /decl/language/proc/scramble_word(var/input)
-	if(!syllables || !syllables.len)
+	if(!LAZYLEN(syllables))
 		return stars(input)
 
 	// If the input is cached already, move it to the end of the cache and return it

@@ -48,7 +48,7 @@
 //Repair a certain amount of brute or burn damage to the suit.
 /obj/item/clothing/suit/space/proc/repair_breaches(var/damtype, var/amount, var/mob/user)
 
-	if(!can_breach || !breaches || !breaches.len)
+	if(!can_breach || !LAZYLEN(breaches))
 		to_chat(user, "There are no breaches to repair on \the [src].")
 		return
 
@@ -146,7 +146,7 @@
 	burn_damage = 0
 	var/all_patched = TRUE
 
-	if(!can_breach || !breaches || !breaches.len)
+	if(!can_breach || !LAZYLEN(breaches))
 		SetName(initial(name))
 		return 0
 
@@ -260,7 +260,7 @@
 
 /obj/item/clothing/suit/space/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(can_breach && breaches && breaches.len)
+	if(can_breach && LAZYLEN(breaches))
 		for(var/datum/breach/B in breaches)
 			. += SPAN_DANGER("It has \a [B.descriptor].")
 
