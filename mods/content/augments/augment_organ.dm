@@ -1,7 +1,7 @@
 /obj/item/organ/internal/augment
 	name = "embedded augment"
 	desc = "An embedded augment."
-	icon = 'icons/obj/augment.dmi'
+	icon = 'mods/content/augments/icons/augment.dmi'
 	w_class = ITEM_SIZE_TINY // Need to be tiny to fit inside limbs.
 	//By default these fit on both flesh and robotic organs and are robotic
 	organ_properties = ORGAN_PROP_PROSTHETIC
@@ -12,6 +12,8 @@
 
 	var/descriptor = ""
 	var/known = TRUE
+	var/const/AUGMENTATION_MECHANIC = BITFLAG(0)
+	var/const/AUGMENTATION_ORGANIC = BITFLAG(1)
 	var/augment_flags = AUGMENTATION_MECHANIC | AUGMENTATION_ORGANIC
 	var/list/allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
 
@@ -35,6 +37,14 @@
 	. = ..()
 	parent_organ = affected.organ_tag
 	update_parent_organ()
+
+/obj/item/organ/internal/augment/get_attachment_failure_reason(obj/item/organ/external/affected, robotic = FALSE)
+	if(robotic)
+		if(!(augment_flags & AUGMENTATION_ORGANIC))
+			return SPAN_WARNING("\The [src] cannot function within a non-robotic limb.")
+	else if(!(augment_flags & AUGMENTATION_MECHANIC))
+		return SPAN_WARNING("\The [src] cannot function within a robotic limb.")
+	return ..()
 
 /obj/item/organ/internal/augment/proc/update_parent_organ()
 	//This tries to match a parent organ to an augment slot

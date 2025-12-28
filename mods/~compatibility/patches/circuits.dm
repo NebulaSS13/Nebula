@@ -6,3 +6,7 @@
 #ifdef MODPACK_DUNGEON_LOOT
 #include "circuits/loot_circuits.dm"
 #endif
+// Add augment assembly for circuits.
+#ifdef CONTENT_PACK_AUGMENTS
+#include "circuits/augment_circuits.dm"
+#endif

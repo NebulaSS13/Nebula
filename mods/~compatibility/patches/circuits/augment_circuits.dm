@@ -36,3 +36,7 @@
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 		return TRUE
 	return ..()
+
+// And add a fabricator design
+/datum/fabricator_recipe/robotics/augment/circuit
+	path = /obj/item/organ/internal/augment/active/simple/circuit

@@ -11,8 +11,11 @@
 	if(!owner)
 		return ..()
 
-	var/brute = damage_type == BRUTE ? round(damage * get_brute_mod(damage_flags), 0.1) : 0
-	var/burn  = damage_type == BURN  ? round(damage * get_burn_mod(damage_flags),  0.1) : 0
+	var/final_brute_mod = get_brute_mod(damage_flags) + (0.2 * burn_dam/max_damage) // extra brute taken if you have burn damage. why? ask whoever originally coded it.
+	var/final_burn_mod = get_burn_mod(damage_flags)
+
+	var/brute = damage_type == BRUTE ? round(damage * final_brute_mod, 0.1) : 0
+	var/burn  = damage_type == BURN  ? round(damage * final_burn_mod,  0.1) : 0
 
 	if((brute <= 0) && (burn <= 0))
 		return 0
@@ -318,29 +321,20 @@
 	return FALSE
 
 /obj/item/organ/external/proc/get_brute_mod(var/damage_flags)
-	var/obj/item/organ/internal/augment/armor/A = owner?.get_organ(BP_AUGMENT_CHEST_ARMOUR, /obj/item/organ/internal/augment/armor)
-	var/B = 1
-	if(A)
-		B = A.brute_mult
+	. = 1
 	if(!BP_IS_PROSTHETIC(src))
-		B *= species.get_brute_mod(owner)
-	var/blunt = !(damage_flags & DAM_EDGE|DAM_SHARP)
-	if(blunt && BP_IS_BRITTLE(src))
-		B *= 1.5
+		. *= species.get_brute_mod(owner)
+	if(!(damage_flags & DAM_EDGE|DAM_SHARP) && BP_IS_BRITTLE(src))
+		. *= 1.5
 	if(BP_IS_CRYSTAL(src))
-		B *= 0.8
-	return B + (0.2 * burn_dam/max_damage) //burns make you take more brute damage
+		. *= 0.8
 
 /obj/item/organ/external/proc/get_burn_mod(var/damage_flags)
-	var/obj/item/organ/internal/augment/armor/A = owner?.get_organ(BP_AUGMENT_CHEST_ARMOUR, /obj/item/organ/internal/augment/armor)
-	var/B = 1
-	if(A)
-		B = A.burn_mult
+	. = 1
 	if(!BP_IS_PROSTHETIC(src))
-		B *= species.get_burn_mod(owner)
+		. *= species.get_burn_mod(owner)
 	if(BP_IS_CRYSTAL(src))
-		B *= 0.1
-	return B
+		. *= 0.1
 
 //organs can come off in three cases
 //1. If the damage source is edge_eligible and the brute damage dealt exceeds the edge threshold, then the organ is cut off.
