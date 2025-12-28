@@ -222,11 +222,8 @@ var/global/list/_cooking_recipe_cache = list()
 
 	// We collected the used ingredients before removing them in case
 	// the result proc needs to check the list for procedural products.
-	var/list/used_ingredients = list(
-		RECIPE_COMPONENT_ITEMS = list(),
-		RECIPE_COMPONENT_FRUIT = list(),
-		RECIPE_COMPONENT_CHEMS = list()
-	)
+	// This mapping is indexed by RECIPE_COMPONENT_FOO defines.
+	var/list/used_ingredients = list(list(), list(), list())
 
 	// Find items we need.
 	var/list/container_contents = container.get_contained_external_atoms()

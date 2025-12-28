@@ -1,4 +1,5 @@
-var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT_LEVEL_MODERATE = "Moderate", EVENT_LEVEL_MAJOR = "Major")
+// Ordering of these values must confirm to EVENT_LEVEL_MUNDANE, EVENT_LEVEL_MODERATE, EVENT_LEVEL_MAJOR.
+var/global/list/severity_to_string = list("Mundane", "Moderate", "Major")
 
 /datum/event_container
 	var/severity = -1

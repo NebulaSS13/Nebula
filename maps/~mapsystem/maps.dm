@@ -157,14 +157,15 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 		/decl/background_category/religion    = /decl/background_detail/religion/other
 	)
 
+	// Order must conform to ACCESS_REGION_FOO defines.
 	var/access_modify_region = list(
-		ACCESS_REGION_SECURITY = list(access_hos, access_change_ids),
-		ACCESS_REGION_MEDBAY = list(access_cmo, access_change_ids),
-		ACCESS_REGION_RESEARCH = list(access_rd, access_change_ids),
-		ACCESS_REGION_ENGINEERING = list(access_ce, access_change_ids),
-		ACCESS_REGION_COMMAND = list(access_change_ids),
-		ACCESS_REGION_GENERAL = list(access_change_ids),
-		ACCESS_REGION_SUPPLY = list(access_change_ids)
+		list(access_hos, access_change_ids),
+		list(access_cmo, access_change_ids),
+		list(access_rd, access_change_ids),
+		list(access_ce, access_change_ids),
+		list(access_change_ids),
+		list(access_change_ids),
+		list(access_change_ids)
 	)
 	var/secrets_directory
 
