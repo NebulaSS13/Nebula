@@ -2,7 +2,7 @@ var/global/default_gyne
 
 /decl/ghosttrap/kharmaani_egg
 	name = "mantid nymph"
-	ban_checks = list(/decl/special_role/provocateur)
+	ban_checks = list(MANTID_NYMPH_BAN)
 	ghost_trap_message = "They are hatching from a kharmaan egg now."
 
 /decl/ghosttrap/kharmaani_egg/forced(var/mob/user)

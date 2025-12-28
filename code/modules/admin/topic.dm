@@ -1,4 +1,5 @@
 #define MAX_JOBBAN_CELLS 5
+var/global/list/misc_jobban_roles = list("Botany Roles", "Graffiti")
 
 /datum/admins/Topic(href, href_list)
 	..()
@@ -385,11 +386,10 @@
 		jobs += "</tr></table>"
 		#undef ANTAG_COLUMNS
 
-		var/list/misc_roles = list("Botany Roles", "Graffiti")
 		//Other roles  (BLUE, because I have no idea what other color to make this)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(misc_roles)]'>Other Roles</th></tr><tr align='center'>"
-		for(var/entry in misc_roles)
+		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(misc_jobban_roles)]'>Other Roles</th></tr><tr align='center'>"
+		for(var/entry in misc_jobban_roles)
 			if(jobban_isbanned(M, entry))
 				jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=[entry];jobban_mob_target=\ref[M]'><font color=red>[entry]</font></a></td>"
 			else

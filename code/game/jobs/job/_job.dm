@@ -23,7 +23,6 @@
 	var/minimum_character_age                 // List of species = age, if species is not here, it's auto-pass
 	var/ideal_character_age = 30              // Preferred character age when populate job at roundstart.
 	var/create_record = 1                     // Do we announce/make records for people who spawn on this job?
-	var/is_semi_antagonist = FALSE            // Whether or not this job is given semi-antagonist status.
 	var/account_allowed = 1                   // Does this job type come with a station account?
 	var/economic_power = 2                    // With how much does this job modify the initial account amount?
 	var/is_holy = FALSE                       // Can this role perform blessings?
@@ -401,8 +400,6 @@
 	var/list/reasons = list()
 	if(jobban_isbanned(calling_client, title))
 		reasons["You are jobbanned."] = TRUE
-	if(is_semi_antagonist && jobban_isbanned(calling_client, /decl/special_role/provocateur))
-		reasons["You are semi-antagonist banned."] = TRUE
 	if(!player_old_enough(calling_client))
 		reasons["Your player age is too low."] = TRUE
 	if(!is_position_available())
@@ -433,8 +430,6 @@
 	if(!is_position_available())
 		return FALSE
 	if(jobban_isbanned(calling_client, title))
-		return FALSE
-	if(is_semi_antagonist && jobban_isbanned(calling_client, /decl/special_role/provocateur))
 		return FALSE
 	if(!player_old_enough(calling_client))
 		return FALSE
@@ -482,10 +477,9 @@
 				break
 	return spawnpos
 
+/// Used for applying "finishing touches" to characters, like additional role text or applying a /decl/special_role.
 /datum/job/proc/post_equip_job_title(var/mob/person, var/alt_title, var/rank)
-	if(is_semi_antagonist && person.mind)
-		var/decl/special_role/provocateur/provocateurs = GET_DECL(/decl/special_role/provocateur)
-		provocateurs.add_antagonist(person.mind)
+	return
 
 /datum/job/proc/get_alt_title_for(var/client/C)
 	return C.prefs.GetPlayerAltTitle(src)
