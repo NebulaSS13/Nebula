@@ -5,6 +5,7 @@
 #define BODY_EQUIP_FLAG_GYNE  BITFLAG(5)
 
 #define BP_SYSTEM_CONTROLLER "system controller"
+#define BP_EGG               "egg sac"
 
 #define MANTIDIFY(_thing, _name, _desc) \
 ##_thing/ascent/name = _name; \
