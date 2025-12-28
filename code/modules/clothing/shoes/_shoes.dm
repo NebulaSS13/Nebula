@@ -17,6 +17,7 @@
 	fallback_slot = slot_shoes_str
 	_base_attack_force = 5
 
+	var/rock_climbing = FALSE
 	var/can_fit_under_magboots = TRUE
 	var/can_add_cuffs = TRUE
 	var/obj/item/handcuffs/attached_cuffs = null

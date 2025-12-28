@@ -7,6 +7,7 @@
 	force_material = /decl/material/solid/stone/concrete
 	constructed    = TRUE
 	uid            = "floor_concrete"
+	can_conceal_hazards = TRUE
 
 /decl/flooring/concrete/reinforced
 	name           = "reinforced concrete"
