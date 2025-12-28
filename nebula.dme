@@ -3748,6 +3748,7 @@
 #include "code\modules\security_levels\_security_level.dm"
 #include "code\modules\security_levels\alarm_appearance.dm"
 #include "code\modules\security_levels\keycard_authentication.dm"
+#include "code\modules\security_levels\keycard_authentication_events.dm"
 #include "code\modules\security_levels\security_levels.dm"
 #include "code\modules\security_levels\security_state.dm"
 #include "code\modules\shield_generators\floor_diffuser.dm"

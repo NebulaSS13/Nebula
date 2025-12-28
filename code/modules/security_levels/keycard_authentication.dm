@@ -65,6 +65,13 @@
 	interact(user)
 	return TRUE
 
+/obj/machinery/keycard_auth/proc/get_event_options(mob/user)
+	. = list()
+	for(var/decl/keycard_auth_event/event in global.decls_repository.get_decls_of_subtype_unassociated(/decl/keycard_auth_event))
+		if(!event.is_available(src, user))
+			continue
+		. += event.get_option(src, user)
+
 /obj/machinery/keycard_auth/interact(mob/user)
 	user.set_machine(src)
 
@@ -74,27 +81,12 @@
 	dat += "<br><hr><br>"
 
 	if(screen == 1)
-		dat += "Select an event to trigger:<ul>"
-
-		var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-		if(security_state.current_security_level == security_state.severe_security_level)
-			dat += "<li>Cannot modify the alert level at this time: [security_state.severe_security_level.name] engaged.</li>"
-		else
-			if(security_state.current_security_level == security_state.high_security_level)
-				dat += "<li><A href='byond://?src=\ref[src];triggerevent=Revert alert'>Disengage [security_state.high_security_level.name]</A></li>"
-			else
-				dat += "<li><A href='byond://?src=\ref[src];triggerevent=Red alert'>Engage [security_state.high_security_level.name]</A></li>"
-
-		if(!get_config_value(/decl/config/toggle/ert_admin_call_only))
-			dat += "<li><A href='byond://?src=\ref[src];triggerevent=Emergency Response Team'>Emergency Response Team</A></li>"
-
-		dat += "<li><A href='byond://?src=\ref[src];triggerevent=Grant Emergency Maintenance Access'>Grant Emergency Maintenance Access</A></li>"
-		dat += "<li><A href='byond://?src=\ref[src];triggerevent=Revoke Emergency Maintenance Access'>Revoke Emergency Maintenance Access</A></li>"
-		dat += "<li><A href='byond://?src=\ref[src];triggerevent=Grant Nuclear Authorization Code'>Grant Nuclear Authorization Code</A></li>"
-		dat += "</ul>"
+		var/list/options = get_event_options(user)
+		dat += "Select an event to trigger:<ul><li>[options.Join("</li><li>")]</li></ul>"
 		show_browser(user, dat, "window=keycard_auth;size=500x250")
 	if(screen == 2)
-		dat += "Please swipe your card to authorize the following event: <b>[event]</b>"
+		var/decl/keycard_auth_event/real_event = global.decls_repository.get_decl_by_id(event)
+		dat += "Please swipe your card to authorize the following event: <b>[real_event.get_link_text()]</b>"
 		dat += "<p><A href='byond://?src=\ref[src];reset=1'>Back</A>"
 		show_browser(user, dat, "window=keycard_auth;size=500x250")
 	return
@@ -144,8 +136,10 @@
 /obj/machinery/keycard_auth/proc/broadcast_check()
 	if(confirmed)
 		confirmed = 0
+		var/decl/keycard_auth_event/real_event = global.decls_repository.get_decl_by_id(event)
+		var/cached_name = real_event.get_link_text() // because triggering the event can change the name
 		trigger_event(event)
-		log_and_message_admins("triggered and [key_name(event_confirmed_by)] confirmed event [event]", event_triggered_by || usr)
+		log_and_message_admins("triggered and [key_name(event_confirmed_by)] confirmed event [cached_name]", event_triggered_by || usr)
 	reset()
 
 /obj/machinery/keycard_auth/proc/receive_request(var/obj/machinery/keycard_auth/source, obj/item/card/id/ID)
@@ -166,45 +160,11 @@
 	busy = 0
 
 /obj/machinery/keycard_auth/proc/trigger_event()
-	switch(event)
-		if("Red alert")
-			var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-			security_state.stored_security_level = security_state.current_security_level
-			security_state.set_security_level(security_state.high_security_level)
-			SSstatistics.add_field("alert_keycard_auth_red",1)
-		if("Revert alert")
-			var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-			security_state.set_security_level(security_state.stored_security_level)
-			SSstatistics.add_field("alert_keycard_revert_red",1)
-		if("Grant Emergency Maintenance Access")
-			global.using_map.make_maint_all_access()
-			SSstatistics.add_field("alert_keycard_auth_maintGrant",1)
-		if("Revoke Emergency Maintenance Access")
-			global.using_map.revoke_maint_all_access()
-			SSstatistics.add_field("alert_keycard_auth_maintRevoke",1)
-		if("Emergency Response Team")
-			if(is_ert_blocked())
-				visible_message(SPAN_WARNING("\The [src] blinks and displays a message: All emergency response teams are dispatched and can not be called at this time."), range=2)
-				return
-
-			trigger_armed_response_team(1)
-			SSstatistics.add_field("alert_keycard_auth_ert",1)
-		if("Grant Nuclear Authorization Code")
-			var/obj/machinery/nuclearbomb/nuke = locate(/obj/machinery/nuclearbomb/station) in SSmachines.machinery
-			if(nuke)
-				visible_message(SPAN_WARNING("\The [src] blinks and displays a message: The nuclear authorization code is [nuke.r_code]"), range=2)
-			else
-				visible_message(SPAN_WARNING("\The [src] blinks and displays a message: No self-destruct terminal found."), range=2)
-			SSstatistics.add_field("alert_keycard_auth_nukecode",1)
-
-/obj/machinery/keycard_auth/proc/is_ert_blocked()
-	if(get_config_value(/decl/config/toggle/ert_admin_call_only))
-		return TRUE
-	return SSticker.mode?.ert_disabled
+	var/decl/keycard_auth_event/the_event = decls_repository.get_decl_by_id(event)
+	if(the_event)
+		the_event.on_event(src)
 
 /obj/machinery/keycard_auth/update_directional_offset(force = FALSE)
 	if(!force && (!length(directional_offset) || !is_wall_mounted())) //Check if the thing is actually mapped onto a table or something
 		return
 	. = ..()
-
-var/global/maint_all_access = 0
