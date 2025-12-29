@@ -161,37 +161,33 @@
 			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 			if(reinf_material)
 				var/mat_name = reinf_material.solid_name
-				user.visible_message("[user] welds the [mat_name] plating off the airlock assembly.", "You start to weld the [mat_name] plating off the airlock assembly.")
+				user.visible_action_message("start", "slicing the [mat_name] plating off \the [src]...")
 				if(do_after(user, 4 SECONDS, src))
 					if(!welder.isOn())
 						return TRUE
-					to_chat(user, "<span class='notice'>You welded the [mat_name] plating off!</span>")
+					user.visible_action_message("slice", "the [mat_name] plating off \the [src]!")
 					reinf_material.create_object(get_turf(src), 2)
 					reinf_material = null
 					update_icon()
 				return TRUE
 			if(!anchored)
-				user.visible_message("[user] dissassembles the airlock assembly.", "You start to dissassemble the airlock assembly.")
+				user.visible_action_message("start", "disassembling \the [src].")
 				if(do_after(user, 4 SECONDS, src))
 					if(!welder.isOn())
 						return TRUE
-					to_chat(user, "<span class='notice'>You dissasembled the airlock assembly!</span>")
+					user.visible_action_message("disassemble", "\the [src]!")
 					dismantle_structure(user)
 				return TRUE
 		else
-			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
+			to_chat(user, SPAN_NOTICE("You need more welding fuel."))
 			return TRUE
 
 	if(IS_WRENCH(used_item) && state == 0)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		if(anchored)
-			user.visible_action_message("begin", "unsecuring the airlock assembly from the floor.")
-		else
-			user.visible_action_message("begin", "securing the airlock assembly to the floor.")
-
+		user.visible_action_message("start", "[anchored ? "unsecuring" : "securing"] the airlock assembly [anchored ? "from" : "to"] the floor...")
 		if(do_after(user, 4 SECONDS, src))
 			if(QDELETED(src)) return TRUE
-			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured the airlock assembly!</span>")
+			user.visible_action_message(anchored ? "unsecure" : "secure", "\the [src]!")
 			anchored = !anchored
 			update_icon()
 		return TRUE
@@ -200,23 +196,23 @@
 	else if(IS_COIL(used_item) && state == 0 && anchored)
 		var/obj/item/stack/cable_coil/C = used_item
 		if (C.get_amount() < 1)
-			to_chat(user, "<span class='warning'>You need one length of coil to wire the airlock assembly.</span>")
+			to_chat(user, SPAN_WARNING("You need one length of coil to wire the airlock assembly."))
 			return TRUE
-		user.visible_message("[user] wires the airlock assembly.", "You start to wire the airlock assembly.")
+		user.visible_action_message("start", "wiring \the [src]...")
 		if(do_after(user, 4 SECONDS, src) && state == 0 && anchored)
 			if (C.use(1))
 				src.state = 1
-				to_chat(user, "<span class='notice'>You wire the airlock.</span>")
+				user.visible_action_message("wire", "\the [src]!")
 				update_icon()
 		return TRUE
 
 	else if(IS_WIRECUTTER(used_item) && state == 1 )
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		user.visible_message("[user] cuts the wires from the airlock assembly.", "You start to cut the wires from airlock assembly.")
+		user.visible_action_message("start", "cutting the wires from \the [src]...")
 
-		if(do_after(user, 40,src))
+		if(do_after(user, 4 SECONDS, src))
 			if(QDELETED(src)) return TRUE
-			to_chat(user, "<span class='notice'>You cut the airlock wires!</span>")
+			user.visible_action_message("cut", "the wires from \the [src].")
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			src.state = 0
 			update_icon()
@@ -227,15 +223,15 @@
 		if(!ispath(airlock_type, E.build_path))
 			return FALSE
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		user.visible_message("[user] installs the electronics into the airlock assembly.", "You start to install electronics into the airlock assembly.")
+		user.visible_action_message("start", "installing \the [used_item] into \the [src]...")
 
-		if(do_after(user, 40,src))
+		if(do_after(user, 4 SECONDS, src))
 			if(QDELETED(src)) return TRUE
 			if(!user.try_unequip(used_item, src))
 				return TRUE
-			to_chat(user, "<span class='notice'>You installed the airlock electronics!</span>")
+			user.visible_action_message("install", "\the [used_item] into \the [src]!")
 			src.state = 2
-			src.SetName("Near finished Airlock Assembly")
+			update_material_name()
 			src.electronics = used_item
 			update_icon()
 		return TRUE
@@ -243,19 +239,19 @@
 	else if(IS_CROWBAR(used_item) && state == 2 )
 		//This should never happen, but just in case I guess
 		if (!electronics)
-			to_chat(user, "<span class='notice'>There was nothing to remove.</span>")
+			to_chat(user, SPAN_NOTICE("There was nothing to remove."))
 			src.state = 1
 			update_icon()
 			return TRUE
 
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
-		user.visible_action_message("start", "removing the electronics from the airlock assembly.")
+		user.visible_action_message("start", "removing the electronics from the airlock assembly...")
 
 		if(do_after(user, 4 SECONDS, src))
 			if(QDELETED(src)) return TRUE
-			to_chat(user, "<span class='notice'>You removed the airlock electronics!</span>")
+			user.visible_action_message("remove", "\the [electronics]!")
 			src.state = 1
-			src.SetName("Wired Airlock Assembly")
+			update_material_name()
 			electronics.dropInto(loc)
 			electronics = null
 			update_icon()
@@ -266,22 +262,23 @@
 		var/decl/material/sheet_material = S.get_material()
 		if (S.get_amount() >= 2)
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
-			user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
+			user.visible_action_message("start", "adding [S.get_string_for_amount(2)] to \the [src]...")
 			if(do_after(user, 4 SECONDS, src) && can_install_glass && !reinf_material)
 				if (S.use(2))
 					reinf_material = sheet_material
-					to_chat(user, "<span class='notice'>You installed [reinf_material.solid_name] windows into the airlock assembly.</span>")
+					update_material_name()
+					user.visible_action_message("install", "[reinf_material.solid_name] windows into \the [src]!")
 					update_icon()
 			return TRUE
 		return FALSE
 
 	else if(IS_SCREWDRIVER(used_item) && state == 2 )
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		to_chat(user, "<span class='notice'>Now finishing the airlock.</span>")
+		to_chat(user, SPAN_NOTICE("Now finishing the airlock."))
 
 		if(do_after(user, 4 SECONDS, src))
 			if(QDELETED(src)) return TRUE
-			to_chat(user, "<span class='notice'>You finish the airlock!</span>")
+			to_chat(user, SPAN_NOTICE("You finish the airlock!"))
 			var/obj/machinery/door/door = new airlock_type(get_turf(src), dir, FALSE, src)
 			door.construct_state.post_construct(door) // it eats the circuit inside Initialize
 			qdel(src)
