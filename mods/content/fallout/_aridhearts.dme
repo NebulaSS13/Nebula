@@ -1,0 +1,44 @@
+#ifndef MODPACK_ARIDHEARTS
+#define MODPACK_ARIDHEARTS
+#include "_aridhearts.dm"
+//Subsystems
+//#include "subsystem\_defines.dm"
+//#include "subsystem\daynight.dm"
+//Chemistry
+#include "chemistry\autoinjector.dm"
+#include "chemistry\reagents.dm"
+//Armor + Clothing
+#include "clothing\armor\bos.dm"
+#include "clothing\armor\ncr.dm"
+#include "clothing\armor\powered.dm"
+#include "clothing\armor\town.dm"
+#include "clothing\armor\legion.dm"
+
+#include "clothing\helmet\bos.dm"
+#include "clothing\helmet\ncr.dm"
+#include "clothing\helmet\powered.dm"
+#include "clothing\helmet\town.dm"
+#include "clothing\helmet\legion.dm"
+
+#include "clothing\uniform\bos.dm"
+#include "clothing\uniform\ncr.dm"
+#include "clothing\uniform\town.dm"
+#include "clothing\uniform\legion.dm"
+
+//Decor
+#include "flora\flora.dm"
+
+//Guns
+#include "guns\ammobox.dm"
+#include "guns\automatic.dm"
+#include "guns\laser.dm"
+#include "guns\leveractions.dm"
+#include "guns\revolver.dm"
+#include "guns\shotgun.dm"
+#include "guns\projectile\beam.dm"
+
+//Mobs
+#include "mobs\ghoul.dm"
+#include "mobs\animals.dm"
+#include "mobs\monster.dm"
+#endif

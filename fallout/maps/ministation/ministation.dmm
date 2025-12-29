@@ -1,0 +1,66 @@
+"a" = (/turf/floor/grass,/area/fallout/outdoors)
+"b" = (/obj/item/gun/energy/laser/aer14,/turf/floor/grass,/area/fallout/outdoors)
+"g" = (/turf/wall/brick/granite/shutter/open,/area/fallout/outdoors)
+"i" = (/obj/machinery/door/airlock/glass,/turf/floor/wood/bamboo,/area/fallout/outdoors)
+"p" = (/turf/floor/wood/bamboo,/area/fallout/outdoors)
+"t" = (/obj/item/box/ammo/fallout/slug,/turf/floor/grass,/area/fallout/outdoors)
+"u" = (/turf/wall/brick/granite,/area/fallout/outdoors)
+"D" = (/obj/item/gun/energy/laser/aer9,/turf/floor/grass,/area/fallout/outdoors)
+"G" = (/turf/floor/grass/wild,/area/fallout/outdoors)
+"J" = (/obj/item/gun/energy/laser/aer12,/turf/floor/grass,/area/fallout/outdoors)
+"K" = (/obj/item/gun/energy/laser/reloadable,/turf/floor/grass,/area/fallout/outdoors)
+"M" = (/turf/wall/r_titanium,/area/fallout/outdoors)
+"Q" = (/obj/item/gun/energy/laser,/turf/floor/grass,/area/fallout/outdoors)
+
+(1,1,1) = {"
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MaaaaaaaaaaaauuuuuuuuaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaauppppppuaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaauppppppuaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaauppppppuaaaaataaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaauuguiuuuaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaJKaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaQabaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaDaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaGGGGaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaGGGGaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaGGGGaaaaaaaaaaGGGGGaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaGGGGaaaGGGGGGaGGGGGaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaGGGGaaaGGGGGGaGGGGGaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaGGGGaaaGGGGGGaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaGGGGaaaGGGGGGaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaGGGGaaaGGGGGGaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaGGGGGGaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+"}
