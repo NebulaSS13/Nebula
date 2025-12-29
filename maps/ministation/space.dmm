@@ -47,7 +47,7 @@
 /turf/floor/shuttle/blue,
 /area/shuttle/escape_shuttle)
 "am" = (
-/obj/item/boombox,
+/obj/item/music_player/boombox,
 /obj/structure/table/steel_reinforced,
 /turf/floor/shuttle/blue,
 /area/shuttle/escape_shuttle)
