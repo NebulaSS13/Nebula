@@ -775,7 +775,6 @@
 #include "code\game\antagonist\antagonist_place.dm"
 #include "code\game\antagonist\antagonist_print.dm"
 #include "code\game\antagonist\antagonist_update.dm"
-#include "code\game\antagonist\outsider\actors.dm"
 #include "code\game\antagonist\outsider\ert.dm"
 #include "code\game\antagonist\station\provocateur.dm"
 #include "code\game\antagonist\station\thrall.dm"

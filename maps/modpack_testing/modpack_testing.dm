@@ -3,6 +3,7 @@
 	#include "modpack_testing_lobby.dm"
 	#include "blank.dmm"
 
+	#include "../../mods/content/actors.dm"
 	#include "../../mods/content/mundane.dm"
 	#include "../../mods/content/scaling_descriptors.dm"
 

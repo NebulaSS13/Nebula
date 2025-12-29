@@ -1,3 +1,10 @@
+#ifndef MODPACK_ACTORS
+#define MODPACK_ACTORS
+#endif
+
+/decl/modpack/actors
+	name = "Actor Special Role"
+
 /decl/special_role/actor
 	name = "Actor"
 	name_plural = "Actors"
@@ -8,11 +15,14 @@
 	hard_cap_round = 10
 	initial_spawn_req = 1
 	initial_spawn_target = 1
-	show_objectives_on_creation = 0 //actors are not antagonists and do not need the antagonist greet text
+	show_objectives_on_creation = FALSE //actors are not antagonists and do not need the antagonist greet text
 	required_language = /decl/language/human/common
 	default_outfit = /decl/outfit/actor
 	default_access = list()
 	id_title = "Actor"
+
+/obj/abstract/landmark/actor_spawn
+	name = "ActorSpawn"
 
 /decl/outfit/actor
 	name =    "Special Role - Actor"
@@ -35,6 +45,10 @@
 
 	var/decl/special_role/actors = GET_DECL(/decl/special_role/actor)
 	if(!MayRespawn(1) || !actors.can_become_antag(usr.mind, 1))
+		return
+
+	if(!LAZYLEN(actors.starting_locations))
+		to_chat(usr, "Actors do not have a spawn location on this map, and are unavailable.")
 		return
 
 	var/choice = alert("Are you sure you'd like to join as an actor?", "Confirmation","Yes", "No")
