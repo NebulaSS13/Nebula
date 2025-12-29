@@ -904,7 +904,7 @@
 /turf/unsimulated/floor/vault,
 /area/map_template/rescue_base/base)
 "cy" = (
-/obj/machinery/chemical_dispenser/ert,
+/obj/machinery/chemical_dispenser/medicine,
 /obj/item/chems/glass/beaker/large,
 /turf/unsimulated/floor/vault,
 /area/map_template/rescue_base/base)

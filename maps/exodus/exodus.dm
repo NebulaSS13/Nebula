@@ -14,6 +14,7 @@
 	#include "../../mods/content/mouse_highlights/_mouse_highlight.dme"
 	#include "../../mods/content/pheromones/_pheromones.dme"
 	#include "../../mods/content/psionics/_psionics.dme"
+	#include "../../mods/content/response_team/_response_team.dme"
 	#include "../../mods/content/sealant_gun/_sealant_gun.dme"
 	#include "../../mods/content/standard_jobs/_standard_jobs.dme"
 	#include "../../mods/content/supermatter/_supermatter.dme"

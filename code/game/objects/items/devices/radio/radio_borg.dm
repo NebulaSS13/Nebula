@@ -17,9 +17,6 @@
 		if(!robot.handle_radio_transmission())
 			return FALSE
 
-/obj/item/radio/borg/ert
-	encryption_keys = list(/obj/item/encryptionkey/ert)
-
 /obj/item/radio/borg/syndicate
 	encryption_keys = list(/obj/item/encryptionkey/hacked)
 
