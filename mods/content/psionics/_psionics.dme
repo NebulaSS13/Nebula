@@ -11,6 +11,7 @@
 #include "datum\security_state.dm"
 #include "datum\surgery.dm"
 #include "datum\uplink.dm"
+#include "datum\antagonists\beguiled.dm"
 #include "datum\antagonists\foundation.dm"
 #include "datum\antagonists\paramount.dm"
 #include "items\_items.dm"
