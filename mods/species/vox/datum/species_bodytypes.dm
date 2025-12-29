@@ -26,7 +26,7 @@
 	)
 
 	vital_organs = list(
-		BP_STACK,
+		BP_VOXSTACK,
 		BP_BRAIN
 	)
 	override_limb_types = list(
@@ -45,7 +45,7 @@
 		BP_KIDNEYS    = /obj/item/organ/internal/kidneys/vox,
 		BP_BRAIN      = /obj/item/organ/internal/brain,
 		BP_EYES       = /obj/item/organ/internal/eyes/vox,
-		BP_STACK      = /obj/item/organ/internal/voxstack,
+		BP_VOXSTACK   = /obj/item/organ/internal/voxstack,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 	)
 	default_sprite_accessories = list(
