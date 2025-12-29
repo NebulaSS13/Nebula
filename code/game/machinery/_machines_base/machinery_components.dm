@@ -33,7 +33,7 @@ var/global/list/machine_path_to_circuit_type
 				LAZYINITLIST(uncreated_component_parts)
 				for(var/type in req_components)
 					uncreated_component_parts[type] += (req_components[type] || 1)
-		if(initial_access && length(initial_access) > 0)
+		if(LAZYLEN(initial_access) > 0)
 			for(var/access_list in initial_access)
 				// Each part is an AND component.
 				var/obj/item/stock_parts/network_receiver/network_lock/lock = install_component(/obj/item/stock_parts/network_receiver/network_lock/buildable, refresh_parts = FALSE)

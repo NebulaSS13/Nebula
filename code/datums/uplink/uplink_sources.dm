@@ -122,7 +122,7 @@ var/global/list/default_uplink_source_priority = list(
 	if(M.client && M.client.prefs)
 		priority_order = M.client.prefs.uplink_sources
 
-	if(!priority_order || !priority_order.len)
+	if(!LAZYLEN(priority_order))
 		priority_order = list()
 		for(var/entry in global.default_uplink_source_priority)
 			priority_order |= GET_DECL(entry)

@@ -28,7 +28,7 @@
 
 /obj/structure/loot_pile/Initialize()
 	var/list/icon_states_to_use = get_icon_states_to_use()
-	if(icon_states_to_use && icon_states_to_use.len)
+	if(LAZYLEN(icon_states_to_use))
 		icon_state = pick(icon_states_to_use)
 	. = ..()
 

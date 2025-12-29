@@ -131,7 +131,7 @@
 		if(HAND_LABELER_MODE_ADD_NAME)
 			to_chat(user, SPAN_NOTICE("You switch to labeling mode."))
 			var/str = sanitize_safe(input(user,"Label text?", "Set label", label), MAX_LNAME_LEN)
-			if(!str || !length(str))
+			if(!length(str))
 				return
 			label = str
 			mode = HAND_LABELER_MODE_ADD

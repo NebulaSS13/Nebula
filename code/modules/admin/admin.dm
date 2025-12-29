@@ -277,7 +277,7 @@ var/global/BSACooldown = 0
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	from_file(info, infos)
-	if(!infos || !infos.len) return 0
+	if(!LAZYLEN(infos)) return 0
 	else return 1
 
 

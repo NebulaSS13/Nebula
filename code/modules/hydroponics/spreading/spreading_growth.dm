@@ -62,7 +62,7 @@
 		//Find a victim
 		if(!buckled_mob)
 			var/list/mob/living/targets = targets_in_range()
-			if(targets && targets.len && prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
+			if(LAZYLEN(targets) && prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
 				entangle(pick(targets))
 
 		//Handle the victim

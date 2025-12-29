@@ -67,7 +67,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		return FALSE
 
 	var/list/unreceived = asset_list - (client.cache + client.sending)
-	if(!unreceived || !unreceived.len)
+	if(!LAZYLEN(unreceived))
 		return 0
 	if (unreceived.len >= ASSET_CACHE_TELL_CLIENT_AMOUNT)
 		to_chat(client, "Sending resources...")

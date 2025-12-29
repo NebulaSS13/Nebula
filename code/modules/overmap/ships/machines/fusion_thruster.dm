@@ -31,7 +31,7 @@
 
 	if(lan)
 		var/list/fusion_cores = lan.get_devices(/obj/machinery/fusion_core)
-		if(fusion_cores && fusion_cores.len)
+		if(LAZYLEN(fusion_cores))
 			harvest_from = fusion_cores[1]
 	return harvest_from
 

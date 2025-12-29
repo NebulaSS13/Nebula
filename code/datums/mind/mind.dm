@@ -108,7 +108,7 @@
 	out += "</table><hr>"
 	out += "<b>Objectives</b></br>"
 
-	if(objectives && objectives.len)
+	if(LAZYLEN(objectives))
 		var/num = 1
 		for(var/datum/objective/O in objectives)
 			out += "<b>Objective #[num]:</b> [O.explanation_text] "

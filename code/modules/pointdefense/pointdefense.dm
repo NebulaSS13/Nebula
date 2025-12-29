@@ -93,7 +93,7 @@
 		var/datum/local_network/lan = pointdefense.get_local_network()
 		if(lan)
 			var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
-			if(pointdefense_controllers && pointdefense_controllers.len > 1)
+			if(LAZYLEN(pointdefense_controllers) > 1)
 				lan.remove_device(src)
 		return TRUE
 	return ..()

@@ -23,7 +23,7 @@
 	set src in usr
 
 	var/voice = sanitize(name, MAX_NAME_LEN)
-	if(!voice || !length(voice)) return
+	if(!length(voice)) return
 	changer.voice = voice
 	to_chat(usr, "<span class='notice'>You are now mimicking <B>[changer.voice]</B>.</span>")
 
