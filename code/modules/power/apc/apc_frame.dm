@@ -11,7 +11,7 @@
 
 /obj/item/frame/apc/try_build(turf/on_wall)
 	var/area/A = get_area(src)
-	if (A.requires_power == 0 || istype(A, /area/space))
+	if (A.requires_power == 0 || A.always_unpowered)
 		to_chat(usr, SPAN_WARNING("An APC cannot be placed in this area."))
 		return
 	if (A.get_apc())

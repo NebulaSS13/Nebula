@@ -80,7 +80,7 @@
 	//Try to adopt our parent planet's ambient lighting preferences
 	apply_planet_ambient_lighting(parent_planetoid)
 	//Rename the surface area if we have one yet
-	adapt_location_name(parent_planetoid.name)
+	adapt_to_location_name(parent_planetoid.name)
 
 ///If we're getting atmos from our parent planet, apply it.
 /datum/level_data/planetoid/proc/apply_planet_atmosphere(var/datum/planetoid_data/P)
@@ -96,13 +96,12 @@
 	if(!ambient_light_color)
 		ambient_light_level = P.surface_light_color
 
-/datum/level_data/planetoid/adapt_location_name(location_name)
-	if(!(. = ..()))
-		return
+/datum/level_data/planetoid/adapt_to_location_name(location_name)
 	if(!ispath(base_area) || ispath(base_area, world.area))
 		return
 	var/area/A = get_base_area_instance()
 	//Make sure we're not going to rename the world's base area
 	if(!istype(A, world.area))
+		// vvvv This feels bad, should we be doing this? vvvv
 		global.using_map.area_purity_test_exempt_areas |= A.type //Make sure we add any of those, so unit tests calm down when we rename
 		A.SetName("[location_name]")

@@ -31,7 +31,8 @@ var/global/list/areas = list()
 
 	var/lightswitch =         TRUE
 	var/requires_power =      TRUE
-	var/always_unpowered =    FALSE //this gets overriden to 1 for space in area/New()
+	/// Disables constructing or using APCs in this area.
+	var/always_unpowered =    FALSE
 
 	var/atmosalm =            0
 	var/power_equip =         1 // Status
@@ -44,6 +45,8 @@ var/global/list/areas = list()
 	var/oneoff_light   =      0
 	var/oneoff_environ =      0
 	var/has_gravity =         TRUE
+	/// If FALSE, this area is unable to have its gravity overridden by a gravity generator. Used on /area/space.
+	var/can_have_gravity =    TRUE
 	var/air_doors_activated = FALSE
 
 	var/obj/machinery/apc/apc
@@ -307,7 +310,7 @@ var/global/list/areas = list()
 #define DO_PARTY(COLOR) animate(color = COLOR, time = 0.5 SECONDS, easing = QUAD_EASING)
 
 /area/on_update_icon()
-	if((atmosalm || fire || eject || party) && (!requires_power||power_environ) && !istype(src, /area/space))//If it doesn't require power, can still activate this proc.
+	if((atmosalm || fire || eject || party) && (!requires_power||power_environ) && !always_unpowered)//If it doesn't require power, can still activate this proc.
 		if(fire && !atmosalm && !eject && !party) // FIRE
 			color = "#ff9292"
 			animate(src)	// stop any current animations.
