@@ -1,0 +1,11 @@
+#ifndef CONTENT_PACK_SEALANT
+#define CONTENT_PACK_SEALANT
+// BEGIN_INCLUDE
+#include "_sealant_gun.dm"
+#include "sealant_glob.dm"
+#include "sealant_gun.dm"
+#include "sealant_injector.dm"
+#include "sealant_rack.dm"
+#include "sealant_tank.dm"
+// END_INCLUDE
+#endif

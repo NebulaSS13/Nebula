@@ -1,7 +1,7 @@
 /obj/item/gun/launcher/sealant
 	name             = "sealant gun"
 	desc             = "A heavy, unwieldy device used to spray metal foam sealant onto hull breaches or damaged flooring."
-	icon             = 'icons/obj/guns/sealant_gun.dmi'
+	icon             = 'mods/content/sealant_gun/icons/sealant_gun.dmi'
 	icon_state       = ICON_STATE_WORLD
 	autofire_enabled = TRUE
 	has_safety       = FALSE

@@ -20,6 +20,9 @@
 	say_messages = list("Mmfph!", "Mmmf mrrfff!", "Mmmf mnnf!")
 	say_verbs = list("mumbles", "says")
 
+/obj/item/clothing/mask/muzzle/blocks_speech_in_mouth(mob/wearer)
+	return TRUE
+
 // Clumsy folks can't take the mask off themselves.
 /obj/item/clothing/mask/muzzle/attack_hand(mob/user)
 	if(user.get_equipped_item(slot_wear_mask_str) != src || user.check_dexterity(DEXTERITY_HOLD_ITEM))

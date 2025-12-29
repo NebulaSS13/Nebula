@@ -18,6 +18,9 @@
 	QDEL_NULL_LIST(beakers)
 	. = ..()
 
+/obj/item/grenade/chem_grenade/reaction_can_overflow(decl/chemical_reaction/reaction)
+	return TRUE // will always overflow despite not being open
+
 /obj/item/grenade/chem_grenade/attack_self(mob/user)
 	if(!stage || stage==1)
 		if(detonator)
@@ -213,7 +216,7 @@
 	var/obj/item/chems/glass/beaker/B2 = new(src)
 	B1.add_to_reagents(/decl/material/solid/metal/aluminium, 30)
 	B2.add_to_reagents(/decl/material/liquid/foaming_agent, 10)
-	B2.add_to_reagents(/decl/material/liquid/acid/polyacid, 10)
+	B2.add_to_reagents(/decl/material/liquid/acid, 10)
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)
 	beakers += B1
 	beakers += B2

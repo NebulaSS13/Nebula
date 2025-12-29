@@ -1,6 +1,6 @@
 /obj/structure/sealant_rack
 	name = "sealant tank rack"
-	icon = 'icons/obj/structures/sealant_props.dmi'
+	icon = 'mods/content/sealant_gun/icons/sealant_props.dmi'
 	icon_state = "rack"
 	density = TRUE
 	anchored = TRUE

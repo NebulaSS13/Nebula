@@ -1,7 +1,7 @@
 /obj/item/sealant
 	name = "glob of sealant"
 	desc = "A blob of metal foam sealant."
-	icon = 'icons/effects/sealant.dmi'
+	icon = 'mods/content/sealant_gun/icons/sealant_glob.dmi'
 	icon_state = ICON_STATE_WORLD
 	color = "#cccdcc"
 	slowdown_general = 3
@@ -30,6 +30,9 @@
 	else
 		to_chat(user, SPAN_DANGER("Hardened globs of metal foam stick to you!"))
 		hardened = TRUE
+
+/obj/item/sealant/blocks_speech_in_mouth(mob/wearer)
+	return TRUE
 
 /obj/item/sealant/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
@@ -83,7 +86,7 @@
 /obj/effect/sealant
 	name = "sealant glob"
 	desc = "A blob of metal foam sealant."
-	icon = 'icons/effects/sealant.dmi'
+	icon = 'mods/content/sealant_gun/icons/sealant_glob.dmi'
 	icon_state = "blank"
 	layer = PROJECTILE_LAYER
 	color = "#cccdcc"
