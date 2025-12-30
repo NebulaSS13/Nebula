@@ -1182,6 +1182,7 @@
 #include "code\game\objects\items\devices\megaphone.dm"
 #include "code\game\objects\items\devices\modkit.dm"
 #include "code\game\objects\items\devices\multitool.dm"
+#include "code\game\objects\items\devices\music_player.dm"
 #include "code\game\objects\items\devices\oxycandle.dm"
 #include "code\game\objects\items\devices\paicard.dm"
 #include "code\game\objects\items\devices\paint_sprayer.dm"

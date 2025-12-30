@@ -5429,7 +5429,7 @@
 /obj/item/backpack/dufflebag/syndie,
 /obj/item/box/ammo/shotgunshells,
 /obj/item/handcuffs,
-/obj/item/boombox,
+/obj/item/music_player/boombox,
 /obj/item/stack/tape_roll/barricade_tape/bureaucracy,
 /obj/machinery/keycard_auth,
 /turf/floor/laminate,
@@ -6623,7 +6623,7 @@
 	},
 /obj/random/powercell,
 /obj/random/powercell,
-/obj/item/boombox,
+/obj/item/music_player/boombox,
 /turf/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/power)
 "Jg" = (

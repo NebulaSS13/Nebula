@@ -7267,7 +7267,7 @@
 /turf/floor/laminate,
 /area/ministation/engine)
 "EM" = (
-/obj/item/boombox,
+/obj/item/music_player/boombox,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
