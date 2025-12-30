@@ -13,7 +13,7 @@
 	if(IS_WELDER(used_item))
 		if(!damaged)
 			return FALSE
-		user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
+		user.visible_action_message("begin", "repairing [src].")
 		if(do_after(user, 10 SECONDS, src))
 			var/obj/item/weldingtool/w = used_item
 			if(w.weld(10))

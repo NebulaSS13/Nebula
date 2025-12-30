@@ -39,12 +39,11 @@
 	return ..() && istype(target) && target.core_removal_stage == 0
 
 /decl/surgery_step/slime/cut_flesh/begin_step(mob/user, mob/living/slime/target, target_zone, obj/item/tool)
-	user.visible_action_message("start", "cutting through [target]'s flesh with \the [tool].")
+	user.targeted_visible_action_message(target, "start", "cutting through $TARGET'S$ flesh with \the [tool].")
 	..()
 
 /decl/surgery_step/slime/cut_flesh/end_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='notice'>[user] cuts through [target]'s flesh with \the [tool].</span>",	\
-	"<span class='notice'>You cut through [target]'s flesh with \the [tool], revealing its silky innards.</span>")
+	user.targeted_visible_action_message(target, "cut", "through $TARGET'S$ flesh", self_postfix = "with \the [tool], revealing its silky innards.", other_postfix = "with \the [tool].")
 	target.core_removal_stage = 1
 	..()
 
@@ -67,7 +66,7 @@
 	return ..() && istype(target) && target.core_removal_stage == 1
 
 /decl/surgery_step/slime/cut_innards/begin_step(mob/user, mob/living/slime/target, target_zone, obj/item/tool)
-	user.visible_action_message("start", "cutting [target]'s silky innards apart with \the [tool].")
+	user.targeted_visible_action_message(target, "start", "cutting $TARGET'S$ silky innards apart with \the [tool].")
 	..()
 
 /decl/surgery_step/slime/cut_innards/end_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)

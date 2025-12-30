@@ -213,8 +213,7 @@
 			SPAN_NOTICE("There's something inside [target]'s [affected.name], but you just missed it this time.") )
 			playsound(target.loc, "rustle", 15, TRUE)
 	else
-		user.visible_message(SPAN_NOTICE("[user] could not find anything inside [target]'s [affected.name], and pulls \the [tool] out."), \
-		SPAN_NOTICE("You could not find anything inside [target]'s [affected.name].") )
+		user.targeted_visible_action_message(target, "could not find", "anything inside", self_postfix = "$TARGET'S$ [affected.name].", other_postfix = "$TARGET'S$ [affected.name], and pulls \the [tool] out.")
 		playsound(target.loc, "rustle", 15, TRUE)
 
 

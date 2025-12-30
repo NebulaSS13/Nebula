@@ -19,7 +19,7 @@
 
 /obj/item/flashlight/flare/glowstick/activate(var/mob/user)
 	if(istype(user))
-		user.visible_message("<span class='notice'>[user] cracks and shakes \the [src].</span>", "<span class='notice'>You crack and shake \the [src], turning it on!</span>")
+		user.visible_action_message("crack", "and shake$USER_S$ \the [src], turning it on!")
 
 /obj/item/flashlight/flare/glowstick/red
 	name = "red glowstick"

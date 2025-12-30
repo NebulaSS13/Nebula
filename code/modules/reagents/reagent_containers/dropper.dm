@@ -33,7 +33,7 @@
 			if(user.check_intent(I_FLAG_HELP))
 				return
 
-			var/time = 20 //2/3rds the time of a syringe
+			var/time = 2 SECONDS //2/3rds the time of a syringe
 			user.visible_message(SPAN_DANGER("\The [user] is trying to squirt something into \the [target]'s eyes!"))
 
 			if(!do_mob(user, target, time))
@@ -45,10 +45,7 @@
 					var/obj/item/safe_thing = victim.get_equipped_item(slot)
 					if(safe_thing && (safe_thing.body_parts_covered & SLOT_EYES))
 						trans = reagents.splash(safe_thing, amount_per_transfer_from_this, max_spill=30)
-						user.visible_message(
-							SPAN_DANGER("\The [user] tries to squirt something into [target]'s eyes, but fails!"),
-							SPAN_DANGER("You squirt [trans] unit\s at \the [target]'s eyes, but fail!")
-						)
+						user.targeted_visible_action_message(target, "try to squirt", "into $TARGET'S$ eyes, but fail$USER_S$!", dangerous = ACTION_DANGER_ALL, self_infix = "[trans] unit\s", other_infix = "something")
 						return
 
 			var/mob/living/M = target
@@ -58,7 +55,7 @@
 			var/spill_amt = M.incapacitated()? 0 : 30
 			trans += reagents.splash(M, REAGENT_TOTAL_VOLUME(reagents)/2, max_spill = spill_amt)
 			trans += reagents.trans_to_mob(M, REAGENT_TOTAL_VOLUME(reagents)/2, CHEM_INJECT) //I guess it gets into the bloodstream through the eyes or something
-			user.visible_message(SPAN_DANGER("[user] squirts something into \the [target]'s eyes!"), SPAN_DANGER("You squirt [trans] unit\s into \the [target]'s eyes!"))
+			user.targeted_visible_action_message(target, "squirt", "into $TARGET'S$ eyes!", dangerous = ACTION_DANGER_ALL, self_infix = "[trans] unit\s", other_infix = "something")
 			return
 		else
 			trans = reagents.splash(target, amount_per_transfer_from_this, max_spill=0) //sprinkling reagents on generic non-mobs. Droppers are very precise

@@ -284,7 +284,7 @@
 
 	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	addtimer(CALLBACK(src, PROC_REF(half_time_process)), cook_time / 2)
-	visible_message(SPAN_NOTICE("[src] turns on."), SPAN_NOTICE("You hear a microwave."))
+	visible_message(SPAN_NOTICE("[src] turns on."), null, SPAN_NOTICE("You hear a microwave."))
 
 	if(cook_dirty)
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1) // Play a splat sound

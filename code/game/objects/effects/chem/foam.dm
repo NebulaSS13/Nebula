@@ -153,27 +153,25 @@
 /obj/structure/foamedmetal/attack_hand(var/mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	if (prob(75 - metal * 25))
-		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the metal foam wall.</span>")
+		user.visible_action_message("smash", "through \the [src].", dangerous = ACTION_DANGER_WARNING)
 		qdel(src)
 	else
-		to_chat(user, "<span class='notice'>You hit the metal foam but bounce off it.</span>")
+		user.visible_action_message("hit", "\the [src] but bounce$USER_S$ off of it.")
 	return TRUE
 
 
 /obj/structure/foamedmetal/grab_attack(obj/item/grab/grab, mob/user)
 	grab.affecting.forceMove(loc)
-	visible_message(SPAN_DANGER("\The [user] smashes \the [grab.affecting] through the foamed metal wall!"))
+	if(ismob(grab.affecting))
+		user.targeted_visible_action_message(grab.affecting, "smash", "$TARGET$ through \the [src]!", dangerous = ACTION_DANGER_ALL)
 	qdel(grab)
 	physically_destroyed()
 	return TRUE
 
 /obj/structure/foamedmetal/attackby(var/obj/item/used_item, var/mob/user)
 	if(prob(used_item.expend_attack_force(user) * 20 - metal * 25))
-		user.visible_message(
-			SPAN_WARNING("\The [user] smashes through the foamed metal."),
-			SPAN_NOTICE("You smash through the foamed metal with \the [used_item].")
-		)
+		user.visible_action_message("smash", "through \the [src] with \the [used_item].", dangerous = ACTION_DANGER_WARNING)
 		physically_destroyed()
 	else
-		to_chat(user, SPAN_WARNING("You hit \the [src] to no effect."))
+		user.visible_action_message("hit", "\the [src] with \the [used_item] to no effect.", dangerous = ACTION_DANGER_WARNING)
 	return TRUE

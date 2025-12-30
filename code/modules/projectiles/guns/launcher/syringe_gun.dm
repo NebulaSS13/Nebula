@@ -102,11 +102,11 @@
 
 /obj/item/gun/launcher/syringe/attack_self(mob/user)
 	if(next)
-		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", "<span class='warning'>You unlatch and carefully relax the bolt on [src], unloading the spring.</span>")
+		user.visible_action_message("unlatch", "and carefully relax$USER_ES$", dangerous = ACTION_DANGER_WARNING, self_postfix = "the bolt on \the [src], unloading the spring.", other_postfix = "the bolt on \the [src].")
 		next = null
 	else if(darts.len)
 		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", "<span class='warning'>You draw back the bolt on \the [src], loading the spring!</span>")
+		user.visible_action_message("draw", "back the bolt on \the [src],", dangerous = ACTION_DANGER_WARNING, self_postfix = "clicking it into place.", other_postfix = "loading the spring!")
 		next = darts[1]
 	add_fingerprint(user)
 

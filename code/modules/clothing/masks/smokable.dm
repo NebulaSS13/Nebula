@@ -527,7 +527,7 @@
 		extinguish_fire(user, no_message = TRUE)
 	else if (smoketime)
 		var/turf/location = get_turf(user)
-		user.visible_message(SPAN_NOTICE("[user] empties out [src]."), SPAN_NOTICE("You empty out [src]."))
+		user.visible_action_message("empty", "out \the [src].")
 		new /obj/effect/decal/cleanable/ash(location)
 		smoketime = 0
 		reagents.clear_reagents()

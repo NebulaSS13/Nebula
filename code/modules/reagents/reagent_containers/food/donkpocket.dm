@@ -66,7 +66,7 @@
 		to_chat(user, "<span class='notice'>The heating chemicals have already been spent.</span>")
 		return
 	has_been_heated = 1
-	user.visible_message("<span class='notice'>[user] crushes \the [src] package.</span>", "You crush \the [src] package and feel a comfortable heat build up.")
+	user.visible_action_message("crush", "\the [src]", self_postfix = "package and feel a comfortable heat build up.", other_postfix = "package.")
 	addtimer(CALLBACK(src, PROC_REF(heat), weakref(user)), 20 SECONDS)
 
 /obj/item/food/donkpocket/sinpocket/heat(weakref/message_to)

@@ -60,7 +60,7 @@
 
 /obj/item/flashlight/flare/proc/activate(var/mob/user)
 	if(istype(user))
-		user.visible_message("<span class='notice'>[user] pulls the cord on \the [src], activating it.</span>", "<span class='notice'>You pull the cord on \the [src], activating it!</span>")
+		user.visible_action_message("pull", "the cord on \the [src], activating it!")
 
 /obj/item/flashlight/flare/proc/update_damage()
 	if(on)

@@ -138,8 +138,8 @@
 	if(!smoked && bee_count)
 		to_chat(user, "<span class='notice'>The bees won't let you take the honeycombs out like this, smoke them first.</span>")
 		return
-	user.visible_message("<span class='notice'>\The [user] starts taking the honeycombs out of \the [src].</span>", "<span class='notice'>You start taking the honeycombs out of \the [src]...</span>")
-	while(honeycombs >= 100 && do_after(user, 30, src))
+	user.visible_action_message("start", "taking the honeycombs out of \the [src]...")
+	while(honeycombs >= 100 && do_after(user, 3 SECONDS, src))
 		new /obj/item/hive_frame/crafted/filled(loc)
 		honeycombs -= 100
 		--frames

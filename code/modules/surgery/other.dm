@@ -28,15 +28,13 @@
 
 /decl/surgery_step/fix_tendon/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts reattaching the damaged [affected.tendon_name] in [target]'s [affected.name] with \the [tool]." , \
-	"You start reattaching the damaged [affected.tendon_name] in [target]'s [affected.name] with \the [tool].")
+	user.visible_action_message("start", "reattaching the damaged [affected.tendon_name] in $TARGET'S$ [affected.name] with \the [tool].")
 	target.custom_pain("The pain in your [affected.name] is unbearable!",100,affecting = affected)
 	..()
 
 /decl/surgery_step/fix_tendon/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='notice'>[user] has reattached the [affected.tendon_name] in [target]'s [affected.name] with \the [tool].</span>", \
-		"<span class='notice'>You have reattached the [affected.tendon_name] in [target]'s [affected.name] with \the [tool].</span>")
+	user.targeted_visible_action_message(target, "reattach", "the [affected.tendon_name] in $TARGET'S$ [affected.name] with \the [tool].")
 	affected.status &= ~ORGAN_TENDON_CUT
 	affected.update_damages()
 	..()
@@ -74,15 +72,13 @@
 
 /decl/surgery_step/fix_vein/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts patching the damaged [affected.artery_name] in [target]'s [affected.name] with \the [tool]." , \
-	"You start patching the damaged [affected.artery_name] in [target]'s [affected.name] with \the [tool].")
+	user.visible_action_message("start", "patching the damaged [affected.artery_name] in $TARGET'S$ [affected.name] with \the [tool].")
 	target.custom_pain("The pain in your [affected.name] is unbearable!",100,affecting = affected)
 	..()
 
 /decl/surgery_step/fix_vein/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='notice'>[user] has patched the [affected.artery_name] in [target]'s [affected.name] with \the [tool].</span>", \
-		"<span class='notice'>You have patched the [affected.artery_name] in [target]'s [affected.name] with \the [tool].</span>")
+	user.targeted_visible_action_message(target, "patch", "the [affected.artery_name] in $TARGET'S$ [affected.name] with \the [tool].")
 	affected.status &= ~ORGAN_ARTERY_CUT
 	affected.update_damages()
 	..()
@@ -130,8 +126,7 @@
 
 /decl/surgery_step/hardsuit/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/rig/rig = target.get_rig()
-	user.visible_message("[user] starts cutting through the support systems of [target]'s [rig] with \the [tool]." , \
-	"You start cutting through the support systems of [target]'s [rig] with \the [tool].")
+	user.visible_action_message("start", "cutting through the support systems of [target]'s [rig] with \the [tool].")
 	..()
 
 /decl/surgery_step/hardsuit/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -139,13 +134,12 @@
 	var/obj/item/rig/rig = target.get_rig()
 	if(rig)
 		rig.reset()
-	user.visible_message("<span class='notice'>[user] has cut through the support systems of [target]'s [rig] with \the [tool].</span>", \
-		"<span class='notice'>You have cut through the support systems of [target]'s [rig] with \the [tool].</span>")
+	user.targeted_visible_action_message(target, "cut", "through the support systems of $TARGET'S$ [rig] with \the [tool].")
 	..()
 
 /decl/surgery_step/hardsuit/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='danger'>[user]'s [tool] can't quite seem to get through the metal...</span>", \
-	"<span class='danger'>Your [tool] can't quite seem to get through the metal. It's weakening, though - try again.</span>")
+	user.visible_message(SPAN_DANGER("[user]'s [tool] can't quite seem to get through the metal..."), \
+	SPAN_DANGER("Your [tool] can't quite seem to get through the metal. It's weakening, though - try again."))
 	..()
 
 
@@ -195,8 +189,7 @@
 
 /decl/surgery_step/sterilize/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts pouring [tool]'s contents on \the [target]'s [affected.name]." , \
-	"You start pouring [tool]'s contents on \the [target]'s [affected.name].")
+	user.targeted_visible_action_message(target, "start", "pouring [tool]'s contents on $TARGET'S$ [affected.name].")
 	target.custom_pain("Your [affected.name] is on fire!",50,affecting = affected)
 	..()
 
@@ -209,8 +202,7 @@
 	container.reagents.trans_to_holder(temp_reagents, amount)
 	var/trans = temp_reagents.trans_to_mob(target, REAGENT_TOTAL_VOLUME(temp_reagents), CHEM_INJECT) //technically it's contact, but the reagents are being applied to internal tissue
 	if (trans > 0)
-		user.visible_message("<span class='notice'>[user] rubs [target]'s [affected.name] down with \the [tool]'s contents</span>.", \
-			"<span class='notice'>You rub [target]'s [affected.name] down with \the [tool]'s contents.</span>")
+		user.targeted_visible_action_message(target, "rub", "$TARGET'S$ [affected.name] down with \the [tool]'s contents.")
 	affected.disinfect()
 	qdel(temp_reagents)
 	qdel(temp_holder)
@@ -220,8 +212,8 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	var/obj/item/chems/container = tool
 	container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_INJECT)
-	user.visible_message("<span class='warning'>[user]'s hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>" , \
-	"<span class='warning'>Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>")
+	user.visible_message(SPAN_WARNING("[user]'s hand slips, spilling \the [tool]'s contents over \the [target]'s [affected.name]!"), \
+	SPAN_WARNING("Your hand slips, spilling \the [tool]'s contents over \the [target]'s [affected.name]!"))
 	affected.disinfect()
 	..()
 

@@ -147,13 +147,11 @@ var/global/list/diversion_junctions = list()
 		src.add_fingerprint(user)
 		var/old_loc = AM.loc
 		if(AM == user)
-			user.visible_message("<span class='warning'>[user] starts climbing into [src].</span>", \
-								"<span class='notice'>You start climbing into [src].</span>")
+			user.visible_action_message("start", "climbing into \the [src].", dangerous = ACTION_DANGER_WARNING)
 		else
 			if(istype(M) && isliving(user))
 				M.last_handled_by_mob = weakref(user)
-			user.visible_message("<span class='[is_dangerous ? "warning" : "notice"]'>[user] starts stuffing [AM] into [src].</span>", \
-								"<span class='notice'>You start stuffing [AM] into [src].</span>")
+			user.visible_action_message("start", "stuffing \the [AM] into \the [src].", dangerous = is_dangerous ? ACTION_DANGER_WARNING : ACTION_DANGER_NONE)
 
 		if(!do_after(user, 2 SECONDS, src))
 			return FALSE

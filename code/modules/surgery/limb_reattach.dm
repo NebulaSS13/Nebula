@@ -103,8 +103,7 @@
 		return
 	var/obj/item/organ/external/P = GET_EXTERNAL_ORGAN(target, target_zone)
 	var/obj/item/organ/external/E = tool
-	user.visible_message("<span class='notice'>[user] has attached [target]'s [E.name] to the [E.amputation_point].</span>",	\
-	"<span class='notice'>You have attached [target]'s [E.name] to the [E.amputation_point].</span>")
+	user.targeted_visible_action_message(target, "attach", "[target]'s [E.name] to the [E.amputation_point].")
 
 	//Add the organ but in a detached state
 	target.add_organ(E, P, FALSE, TRUE, TRUE)
@@ -115,8 +114,8 @@
 
 /decl/surgery_step/limb/attach/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = tool
-	user.visible_message("<span class='warning'> [user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
-	"<span class='warning'> Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
+	user.visible_message("<span class='warning'>[user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
+	"<span class='warning'>Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
 	target.apply_damage(10, BRUTE, null, damage_flags=DAM_SHARP)
 	..()
 
@@ -144,15 +143,13 @@
 
 /decl/surgery_step/limb/connect/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts reattaching tendons and muscles in [target]'s [E.amputation_point] with [tool].", \
-	"You start reattaching tendons and muscle in [target]'s [E.amputation_point].")
+	user.targeted_visible_action_message(target, "start", "reattaching tendons and muscle in $TARGET'S$ [E.amputation_point] with \the [tool].")
 	..()
 
 /decl/surgery_step/limb/connect/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
 	var/obj/item/organ/external/P = GET_EXTERNAL_ORGAN(target, E.parent_organ)
-	user.visible_message("<span class='notice'>[user] has reattached tendons and muscles in [target]'s [E.amputation_point] with [tool].</span>",	\
-	"<span class='notice'>You have reattached tendons and muscles in [target]'s [E.amputation_point] with [tool].</span>")
+	user.targeted_visible_action_message(target, "reattach", "tendons and muscles in $TARGET'S$ [E.amputation_point] with [tool].")
 
 	//This time we call add_organ but we want it to install in a non detached state
 	target.add_organ(E, P, FALSE, TRUE, FALSE)
@@ -160,7 +157,7 @@
 
 /decl/surgery_step/limb/connect/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("<span class='warning'> [user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
-	"<span class='warning'> Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
+	user.visible_message("<span class='warning'>[user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
+	"<span class='warning'>Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
 	target.apply_damage(10, BRUTE, null, damage_flags=DAM_SHARP)
 	..()

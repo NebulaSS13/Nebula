@@ -290,7 +290,7 @@
 			visible_action_message("climb", "onto \the [A]!")
 			src.Move(T)
 		else
-			visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!</span>", "<span class='warning'>You give up on trying to climb onto \the [A]!</span>")
+			visible_action_message("give", "up on trying to climb onto \the [A]!", dangerous = ACTION_DANGER_WARNING)
 		return TRUE
 
 /mob/living/verb/lookup()

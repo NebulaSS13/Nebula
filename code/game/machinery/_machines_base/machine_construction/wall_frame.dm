@@ -92,7 +92,7 @@
 	if(IS_WIRECUTTER(used_item))
 		TRANSFER_STATE(diconnected_state)
 		playsound(get_turf(machine), 'sound/items/Wirecutter.ogg', 50, 1)
-		user.visible_message(SPAN_WARNING("\The [user] has cut the wires inside \the [machine]!"), "You have cut the wires inside \the [machine].")
+		user.visible_action_message("cut", "the wires inside \the [machine]!", dangerous = ACTION_DANGER_WARNING)
 		new /obj/item/stack/cable_coil(get_turf(machine), 5)
 		machine.set_broken(TRUE, MACHINE_BROKEN_CONSTRUCT)
 		machine.queue_icon_update()
