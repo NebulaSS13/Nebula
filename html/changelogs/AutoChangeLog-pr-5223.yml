@@ -1,0 +1,5 @@
+author: Penelope Haze
+changes:
+  - {admin: 'Kharmaan nymph jobbans now use the "Mantid Nymph" role in the jobban
+      menu, rather than the Semi-Antagonist role.'}
+delete-after: true
