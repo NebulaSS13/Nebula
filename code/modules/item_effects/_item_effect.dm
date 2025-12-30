@@ -1,13 +1,3 @@
-#define ITEM_EFFECT_STRIKE   "weff_strike"
-#define ITEM_EFFECT_PARRY    "weff_parry"
-#define ITEM_EFFECT_USED     "weff_used"
-#define ITEM_EFFECT_WIELDED  "weff_wield"
-#define ITEM_EFFECT_VISUAL   "weff_visual"
-#define ITEM_EFFECT_LISTENER "weff_listener"
-#define ITEM_EFFECT_VISIBLE  "weff_visible"
-#define ITEM_EFFECT_RANGED   "weff_ranged"
-#define ITEM_EFFECT_PROCESS  "weff_process"
-
 /decl/item_effect
 	abstract_type = /decl/item_effect
 
@@ -75,6 +65,12 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
 
-/decl/item_effect/proc/examined(obj/item/item, mob/user)
+/decl/item_effect/proc/on_examined(obj/item/item, mob/user, distance, list/parameters)
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
+
+/decl/item_effect/proc/modify_attack_damage(base_damage, obj/item/used_item, mob/user, dry_run, list/parameters)
+	return base_damage
+
+/decl/item_effect/proc/expend_attack_use(obj/item/used_item, mob/user, dry_run, list/parameters)
+	return

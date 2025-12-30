@@ -7,13 +7,14 @@
 	layer = ABOVE_PROJECTILE_LAYER
 	time_to_live = 300
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE | PASS_FLAG_GLASS //PASS_FLAG_GLASS is fine here, it's just so the visual effect can "flow" around glass
+	chem_volume = 500
+
 	var/splash_amount = 10 //atoms moving through a smoke cloud get splashed with up to 10 units of reagent
 	var/turf/destination
 
 /obj/effect/effect/smoke/chem/Initialize(mapload, smoke_duration, turf/dest_turf = null, icon/cached_icon = null)
 	. = ..()
 
-	create_reagents(500)
 
 	if(cached_icon)
 		icon = cached_icon
@@ -76,7 +77,7 @@
 /////////////////////////////////////////////
 /datum/effect/effect/system/smoke_spread/chem
 	smoke_type = /obj/effect/effect/smoke/chem
-	var/obj/chemholder
+	var/obj/effect/chem_holder/chemholder
 	var/range
 	var/list/targetTurfs
 	var/list/wallList
@@ -96,8 +97,7 @@
 
 /datum/effect/effect/system/smoke_spread/chem/New()
 	..()
-	chemholder = new/obj()
-	chemholder.create_reagents(500)
+	chemholder = new(null, 500)
 
 //Sets up the chem smoke effect
 // Calculates the max range smoke can travel, then gets all turfs in that view range.
@@ -106,7 +106,7 @@
 /datum/effect/effect/system/smoke_spread/chem/set_up(var/datum/reagents/carry = null, n = 10, c = 0, loca, direct)
 	range = n * 0.3
 	cardinals = c
-	carry.trans_to_obj(chemholder, carry.total_volume, copy = 1)
+	carry.trans_to_obj(chemholder, REAGENT_TOTAL_VOLUME(carry), copy = 1)
 
 	if(istype(loca, /turf/))
 		location = loca
@@ -157,7 +157,8 @@
 	if(!location)
 		return
 
-	if(LAZYLEN(chemholder.reagents.reagent_volumes))
+	var/trans_volumes = REAGENT_VOLUMES(chemholder.reagents)
+	if(LAZYLEN(trans_volumes))
 		for(var/turf/T in (wallList|targetTurfs))
 			chemholder.reagents.touch_turf(T)
 
@@ -216,8 +217,9 @@
 	else
 		smoke = new /obj/effect/effect/smoke/chem(location, smoke_duration + rand(0, 20), T, I)
 
-	if(LAZYLEN(chemholder.reagents.reagent_volumes))
-		chemholder.reagents.trans_to_obj(smoke, chemholder.reagents.total_volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
+	var/trans_volumes = REAGENT_VOLUMES(chemholder.reagents)
+	if(LAZYLEN(trans_volumes))
+		chemholder.reagents.trans_to_obj(smoke, REAGENT_TOTAL_VOLUME(chemholder.reagents) / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
 
 	//Kinda ugly, but needed unless the system is reworked
 	if(splash_initial)

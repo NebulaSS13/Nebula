@@ -68,8 +68,6 @@ var/global/list/diversion_junctions = list()
 	return FALSE
 
 /obj/machinery/disposal/cannot_transition_to(state_path, mob/user)
-	if(mode > 0)
-		return SPAN_NOTICE("Turn off the pump first.")
 	if(contents.len > LAZYLEN(component_parts))
 		return SPAN_NOTICE("Eject the items first!")
 	return ..()
@@ -90,31 +88,31 @@ var/global/list/diversion_junctions = list()
 	return ..()
 
 // attack by item places it in to disposal
-/obj/machinery/disposal/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/disposal/attackby(var/obj/item/used_item, var/mob/user)
 	if((. = ..()))
 		return
-	if(stat & BROKEN || !I || !user)
+	if(stat & BROKEN || !used_item || !user)
 		return
 
-	if(istype(I, /obj/item/bag/trash))
-		if(I.storage)
+	if(istype(used_item, /obj/item/bag/trash))
+		if(used_item.storage)
 			to_chat(user, "<span class='notice'>You empty the bag.</span>")
-			for(var/obj/item/O in I.storage.get_contents())
-				I.storage.remove_from_storage(user, O, src, TRUE)
-			I.storage.finish_bulk_removal()
+			for(var/obj/item/O in used_item.storage.get_contents())
+				used_item.storage.remove_from_storage(user, O, src, TRUE)
+			used_item.storage.finish_bulk_removal()
 			update_icon()
 			return
 
-	if(!user.try_unequip(I, src) || QDELETED(I))
+	if(!user.try_unequip(used_item, src) || QDELETED(used_item))
 		return
 
-	user.visible_message("\The [user] places \the [I] into \the [src].", "You place \the [I] into \the [src].")
+	user.visible_message("\The [user] places \the [used_item] into \the [src].", "You place \the [used_item] into \the [src].")
 
 	update_icon()
 
 /obj/machinery/disposal/receive_mouse_drop(atom/dropping, mob/user, params)
 
-	. = (user?.a_intent != I_HURT && ..())
+	. = (!user?.check_intent(I_FLAG_HARM) && ..())
 
 	if(!. && !(stat & BROKEN))
 
@@ -263,7 +261,7 @@ var/global/list/diversion_junctions = list()
 	if(isAI(user) && (href_list["handle"] || href_list["eject"]))
 		return min(STATUS_UPDATE, ..())
 	if(mode==-1 && !href_list["eject"]) // only allow ejecting if mode is -1
-		to_chat(user, "<span class='warning'>The disposal units power is disabled.</span>")
+		to_chat(user, "<span class='warning'>The disposal unit's power is disabled.</span>")
 		return min(STATUS_UPDATE, ..())
 	if(flushing)
 		return min(STATUS_UPDATE, ..())
@@ -366,7 +364,7 @@ var/global/list/diversion_junctions = list()
 
 	var/power_draw = -1
 	if(env && env.temperature > 0)
-		var/transfer_moles = (PUMP_MAX_FLOW_RATE/env.volume)*env.total_moles	//group_multiplier is divided out here
+		var/transfer_moles = (PUMP_MAX_FLOW_RATE/env.total_volume)*env.total_moles	//group_multiplier is divided out here
 		power_draw = pump_gas(src, env, air_contents, transfer_moles, active_power_usage)
 
 	if (power_draw > 0)
@@ -438,14 +436,14 @@ var/global/list/diversion_junctions = list()
 
 /obj/machinery/disposal/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if (istype(mover,/obj/item) && mover.throwing)
-		var/obj/item/I = mover
-		if(istype(I, /obj/item/projectile))
+		var/obj/item/thing = mover
+		if(istype(thing, /obj/item/projectile))
 			return
 		if(prob(75))
-			I.forceMove(src)
-			visible_message("\The [I] lands in \the [src].")
+			thing.forceMove(src)
+			visible_message("\The [thing] lands in \the [src].")
 		else
-			visible_message("\The [I] bounces off of \the [src]'s rim!")
+			visible_message("\The [thing] bounces off of \the [src]'s rim!")
 		return 0
 	else
 		return ..(mover, target, height, air_group)
@@ -472,8 +470,8 @@ var/global/list/diversion_junctions = list()
 	junctions.Cut()
 	return ..()
 
-/obj/machinery/disposal_switch/attackby(obj/item/I, mob/user, params)
-	if(IS_CROWBAR(I))
+/obj/machinery/disposal_switch/attackby(obj/item/used_item, mob/user, params)
+	if(IS_CROWBAR(used_item))
 		var/obj/item/disposal_switch_construct/C = new/obj/item/disposal_switch_construct(src.loc, id_tag)
 		transfer_fingerprints_to(C)
 		user.visible_message("<span class='notice'>\The [user] deattaches \the [src]</span>")
@@ -571,9 +569,9 @@ var/global/list/diversion_junctions = list()
 	sleep(20)	//wait until correct animation frame
 	playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 
-/obj/structure/disposaloutlet/attackby(var/obj/item/I, var/mob/user)
-	src.add_fingerprint(user, 0, I)
-	if(IS_SCREWDRIVER(I))
+/obj/structure/disposaloutlet/attackby(var/obj/item/used_item, var/mob/user)
+	src.add_fingerprint(user, 0, used_item)
+	if(IS_SCREWDRIVER(used_item))
 		switch(mode)
 			if(0)
 				mode=1
@@ -587,15 +585,15 @@ var/global/list/diversion_junctions = list()
 				return TRUE
 			else // This should be invalid?
 				return FALSE
-	else if(istype(I,/obj/item/weldingtool) && mode==1)
-		var/obj/item/weldingtool/W = I
-		if(W.weld(0,user))
+	else if(istype(used_item,/obj/item/weldingtool) && mode==1)
+		var/obj/item/weldingtool/welder = used_item
+		if(welder.weld(0,user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 			to_chat(user, "You start slicing the floorweld off the disposal outlet.")
 			if(!do_after(user, 2 SECONDS, src))
 				to_chat(user, "You must remain still to deconstruct \the [src].")
 				return TRUE
-			if(QDELETED(src) || !W.isOn())
+			if(QDELETED(src) || !welder.isOn())
 				return TRUE
 			to_chat(user, "You sliced the floorweld off the disposal outlet.")
 			var/obj/structure/disposalconstruct/machine/outlet/C = new (loc, src)

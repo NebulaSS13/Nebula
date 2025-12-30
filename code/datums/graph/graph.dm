@@ -35,6 +35,8 @@
 /datum/graph/proc/Connect(var/datum/node/node, var/list/neighbours, var/queue = TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	SHOULD_NOT_OVERRIDE(TRUE)
+	if(QDELETED(src))
+		CRASH("Attempted to connect node [node] to a qdeleted graph!")
 	if(!istype(neighbours))
 		neighbours = list(neighbours)
 	if(!length(neighbours))
@@ -90,8 +92,7 @@
 	if(neighbours_to_disconnect)
 		neighbours |= neighbours_to_disconnect
 
-	if(neighbours.len)
-		LAZYSET(pending_disconnections, node, neighbours)
+	LAZYSET(pending_disconnections, node, neighbours)
 
 	if(queue)
 		SSgraphs_update.Queue(src)
@@ -193,8 +194,6 @@
 			neighbour_edges |= N
 
 	LAZYCLEARLIST(pending_connections)
-	if(!LAZYLEN(pending_disconnections))
-		return
 
 	for(var/pending_node_disconnect in pending_disconnections)
 		var/pending_edge_disconnects = pending_disconnections[pending_node_disconnect]
@@ -211,7 +210,8 @@
 				if(!length(other_pending_edge_disconnects))
 					pending_disconnections -= connected_node
 
-		edges[pending_node_disconnect] -= pending_edge_disconnects
+		if(edges[pending_node_disconnect])
+			edges[pending_node_disconnect] -= pending_edge_disconnects
 		if(!length(edges[pending_node_disconnect]))
 			edges -= pending_node_disconnect
 
@@ -225,12 +225,15 @@
 		var/checked_nodes = list()
 		var/list/nodes_to_traverse = list(root_node)
 		while(length(nodes_to_traverse))
-			var/node_to_check = nodes_to_traverse[nodes_to_traverse.len]
+			var/datum/node/node_to_check = nodes_to_traverse[nodes_to_traverse.len]
 			nodes_to_traverse.len--
+			if(QDELETED(node_to_check))
+				continue
 			checked_nodes += node_to_check
 			nodes_to_traverse |= ((edges[node_to_check] || list()) - checked_nodes)
-		all_nodes -= checked_nodes
-		subgraphs[++subgraphs.len] = checked_nodes
+		if(length(checked_nodes))
+			all_nodes -= checked_nodes
+			subgraphs[++subgraphs.len] = checked_nodes
 
 	if(length(subgraphs) == 1)
 		if(!length(nodes))

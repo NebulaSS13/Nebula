@@ -32,87 +32,87 @@
 	uid = "bodytype_kobaloi"
 
 /decl/bodytype/kobaloi/Initialize()
-	if(!equip_adjust)
-		equip_adjust = list(
-			BP_R_HAND = list(
+	if(!_equip_adjust)
+		_equip_adjust = list(
+			(BP_R_HAND) = list(
 				"[NORTH]" = list( 1, -4),
 				"[EAST]"  = list( 0, -4),
 				"[SOUTH]" = list(-1, -4),
 				"[WEST]"  = list(-1, -4)
 			),
-			BP_L_HAND = list(
+			(BP_L_HAND) = list(
 				"[NORTH]" = list(-1, -4),
 				"[EAST]"  = list( 1, -4),
 				"[SOUTH]" = list( 1, -4),
 				"[WEST]"  = list( 0, -4)
 			),
-			slot_w_uniform_str = list(
+			(slot_w_uniform_str) = list(
 				"[NORTH]" = list( 0, -6),
 				"[EAST]"  = list( 1, -6),
 				"[SOUTH]" = list( 0, -6),
 				"[WEST]"  = list(-1, -6)
 			),
-			slot_belt_str = list(
+			(slot_belt_str) = list(
 				"[NORTH]" = list( 0, -6),
 				"[EAST]"  = list( 1, -6),
 				"[SOUTH]" = list( 0, -6),
 				"[WEST]"  = list(-1, -6)
 			),
-			slot_handcuffed_str = list(
+			(slot_handcuffed_str) = list(
 				"[NORTH]" = list(-1, -4),
 				"[EAST]"  = list( 1, -4),
 				"[SOUTH]" = list( 1, -4),
 				"[WEST]"  = list( 0, -4)
 			),
-			slot_wear_id_str = list(
+			(slot_wear_id_str) = list(
 				"[NORTH]" = list( 0, -6),
 				"[EAST]"  = list( 1, -6),
 				"[SOUTH]" = list( 0, -6),
 				"[WEST]"  = list(-1, -6)
 			),
-			slot_gloves_str = list(
+			(slot_gloves_str) = list(
 				"[NORTH]" = list(-1, -4),
 				"[EAST]"  = list( 1, -4),
 				"[SOUTH]" = list( 1, -4),
 				"[WEST]"  = list( 0, -4)
 			),
-			slot_wear_suit_str = list(
+			(slot_wear_suit_str) = list(
 				"[NORTH]" = list( 0, -6),
 				"[EAST]"  = list( 1, -6),
 				"[SOUTH]" = list( 0, -6),
 				"[WEST]"  = list(-1, -6)
 			),
-			slot_back_str = list(
+			(slot_back_str) = list(
 				"[NORTH]" = list( 0, -5),
 				"[EAST]"  = list( 1, -5),
 				"[SOUTH]" = list( 0, -5),
 				"[WEST]"  = list(-1, -5)
 			),
-			slot_glasses_str = list(
+			(slot_glasses_str) = list(
 				"[NORTH]" = list( 0, -6),
 				"[EAST]"  = list( 3, -6),
 				"[SOUTH]" = list( 0, -6),
 				"[WEST]"  = list(-3, -6)
 			),
-			slot_wear_mask_str = list(
+			(slot_wear_mask_str) = list(
 				"[NORTH]" = list( 0, -7),
 				"[EAST]"  = list( 5, -7),
 				"[SOUTH]" = list( 0, -7),
 				"[WEST]"  = list(-5, -7)
 			),
-			slot_head_str = list(
+			(slot_head_str) = list(
 				"[NORTH]" = list( 0, -5),
 				"[EAST]"  = list( 3, -5),
 				"[SOUTH]" = list( 0, -5),
 				"[WEST]"  = list(-3, -5)
 			),
-			slot_l_ear_str = list(
+			(slot_l_ear_str) = list(
 				"[NORTH]" = list( 0, -5),
 				"[EAST]"  = list( 3, -5),
 				"[SOUTH]" = list( 0, -5),
 				"[WEST]"  = list(-3, -5)
 			),
-			slot_r_ear_str = list(
+			(slot_r_ear_str) = list(
 				"[NORTH]" = list( 0, -5),
 				"[EAST]"  = list( 3, -5),
 				"[SOUTH]" = list( 0, -5),

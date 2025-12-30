@@ -36,7 +36,7 @@
 	desc = "A list of gas data from the sensor location; the list entries are two-entry lists with \"symbol\" and \"percent\" fields."
 	can_write = FALSE
 	has_updates = FALSE
-	var_type = IC_FORMAT_LIST
+	var_type = VAR_FORMAT_LIST
 
 /decl/public_access/public_variable/gas/access_var(obj/machinery/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()
@@ -58,7 +58,7 @@
 	desc = "The pressure of the gas at the sensor."
 	can_write = FALSE
 	has_updates = FALSE
-	var_type = IC_FORMAT_STRING
+	var_type = VAR_FORMAT_STRING
 
 /decl/public_access/public_variable/pressure/access_var(obj/machinery/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()
@@ -70,7 +70,7 @@
 	desc = "The temperature of the gas at the sensor."
 	can_write = FALSE
 	has_updates = FALSE
-	var_type = IC_FORMAT_NUMBER
+	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/temperature/access_var(obj/machinery/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()

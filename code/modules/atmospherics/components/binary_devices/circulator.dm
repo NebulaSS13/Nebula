@@ -31,7 +31,7 @@
 /obj/machinery/atmospherics/binary/circulator/Initialize()
 	. = ..()
 	desc = initial(desc) + " Its outlet port is to the [dir2text(dir)]."
-	air1.volume = 400
+	air1.total_volume = 400
 
 /obj/machinery/atmospherics/binary/circulator/proc/return_transfer_air()
 	var/datum/gas_mixture/removed
@@ -45,11 +45,11 @@
 		if(air1.temperature > 0 && last_pressure_delta > 5)
 
 			//Calculate necessary moles to transfer using PV = nRT
-			recent_moles_transferred = (last_pressure_delta*input.volume/(air1.temperature * R_IDEAL_GAS_EQUATION))/3 //uses the volume of the whole network, not just itself
-			volume_capacity_used = min( (last_pressure_delta*input.volume/3)/(input_starting_pressure*air1.volume) , 1) //how much of the gas in the input air volume is consumed
+			recent_moles_transferred = (last_pressure_delta*input.total_volume/(air1.temperature * R_IDEAL_GAS_EQUATION))/3 //uses the volume of the whole network, not just itself
+			volume_capacity_used = min( (last_pressure_delta*input.total_volume/3)/(input_starting_pressure*air1.total_volume) , 1) //how much of the gas in the input air volume is consumed
 
 			//Calculate energy generated from kinetic turbine
-			stored_energy += 1/ADIABATIC_EXPONENT * min(last_pressure_delta * input.volume , input_starting_pressure*air1.volume) * (1 - volume_ratio**ADIABATIC_EXPONENT) * kinetic_efficiency
+			stored_energy += 1/ADIABATIC_EXPONENT * min(last_pressure_delta * input.total_volume , input_starting_pressure*air1.total_volume) * (1 - volume_ratio**ADIABATIC_EXPONENT) * kinetic_efficiency
 
 			//Actually transfer the gas
 			removed = air1.remove(recent_moles_transferred)

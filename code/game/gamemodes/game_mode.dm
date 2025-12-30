@@ -283,11 +283,10 @@ var/global/list/additional_antag_types = list()
 	for(var/decl/special_role/antag in antag_templates)
 		antag.reset_antag_selection()
 
-/decl/game_mode/proc/announce_ert_disabled()
-	if(!ert_disabled)
-		return
-
-	var/list/reasons = list(
+/// Gets a list of default reasons for the ERT to be disabled.
+/decl/game_mode/proc/possible_ert_disabled_reasons()
+	// This uses a static var so that modpacks can add default reasons, e.g. "supermatter dust".
+	var/static/list/reasons = list(
 		"political instability",
 		"quantum fluctuations",
 		"hostile raiders",
@@ -300,7 +299,6 @@ var/global/list/additional_antag_types = list()
 		"wormholes to another dimension",
 		"a telescience mishap",
 		"radiation flares",
-		"supermatter dust",
 		"leaks into a negative reality",
 		"antiparticle clouds",
 		"residual exotic energy",
@@ -319,7 +317,12 @@ var/global/list/additional_antag_types = list()
 		"classified security operations",
 		"a gargantuan glowing goat"
 		)
-	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
+	return reasons
+
+/decl/game_mode/proc/announce_ert_disabled()
+	if(!ert_disabled)
+		return
+	command_announcement.Announce("The presence of [pick(possible_ert_disabled_reasons())] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
 
 /decl/game_mode/proc/check_finished()
 	if(SSevac.evacuation_controller?.round_over() || station_was_nuked)
@@ -410,7 +413,6 @@ var/global/list/additional_antag_types = list()
 	if(escaped_total > 0)
 		SSstatistics.set_field("escaped_total",escaped_total)
 
-	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
 	SSwebhooks.send(WEBHOOK_ROUNDEND, list("survivors" = surviving_total, "escaped" = escaped_total, "ghosts" = ghosts, "clients" = clients))
 
 	return 0
@@ -551,7 +553,7 @@ var/global/list/additional_antag_types = list()
 
 			continue //Happy connected client
 		for(var/mob/observer/ghost/D in SSmobs.mob_list)
-			if(D.mind && (D.mind.original == L || D.mind.current == L))
+			if(D.mind && D.mind.current == L)
 				if(L.stat == DEAD)
 					msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (Dead)\n"
 					continue //Dead mob, ghost abandoned

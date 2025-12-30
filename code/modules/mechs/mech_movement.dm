@@ -11,13 +11,8 @@
 	if(.)
 		if(!isspaceturf(loc))
 			playsound(src.loc, mech_step_sound, 40, 1)
-
-		var/turf/B = GetAbove(src)
-
-		for(var/thing in pilots)
-			var/mob/pilot = thing
-			if(pilot.up_hint)
-				pilot.up_hint.icon_state = "uphint[!!(B && TURF_IS_MIMICKING(B))]"
+		for(var/mob/pilot as anything in pilots)
+			pilot.refresh_hud_element(HUD_UP_HINT)
 
 //Inertia drift making us face direction makes exosuit flight a bit difficult, plus newtonian flight model yo
 /mob/living/exosuit/set_dir(ndir)
@@ -77,8 +72,8 @@
 		to_chat(mover, SPAN_WARNING("Maintenance protocols are in effect."))
 		exosuit.SetMoveCooldown(3)
 		return MOVEMENT_STOP
-	var/obj/item/cell/C = exosuit.get_cell()
-	if(!C || !C.check_charge(exosuit.legs.power_use * CELLRATE))
+	var/obj/item/cell/cell = exosuit.get_cell()
+	if(!cell || !cell.check_charge(exosuit.legs.power_use * CELLRATE))
 		to_chat(mover, SPAN_WARNING("The power indicator flashes briefly."))
 		exosuit.SetMoveCooldown(3) //On fast exosuits this got annoying fast
 		return MOVEMENT_STOP

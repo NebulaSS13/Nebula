@@ -22,6 +22,9 @@
 /obj/item/organ/internal/eyes/proc/get_flash_mod()
 	return bodytype.eye_flash_mod
 
+/obj/item/organ/internal/eyes/proc/get_flash_burn()
+	return bodytype.eye_flash_burn
+
 /obj/item/organ/internal/eyes/proc/get_darksight_range()
 	return bodytype.eye_darksight_range
 
@@ -36,19 +39,25 @@
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
+/obj/item/organ/external/eyes/set_organ_appearance_bodytype(decl/bodytype/new_bodytype, update_sprite_accessories = TRUE, skip_owner_update = FALSE)
+	. = ..()
+	if(. && owner && !skip_owner_update)
+		owner.update_eyes()
+
 /obj/item/organ/internal/eyes/proc/get_onhead_icon()
+	var/decl/bodytype/icon_bodytype = get_organ_appearance_bodytype()
 	var/modifier = owner?.get_overlay_state_modifier()
 	var/eye_state = modifier ? "eyes[modifier]" : "eyes"
 	last_cached_eye_colour = eye_colour
-	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]-[eye_state]"
-	if(!bodytype.eye_icon)
+	last_eye_cache_key = "[type]-[icon_bodytype.eye_icon]-[last_cached_eye_colour]-[icon_bodytype.eye_offset]-[eye_state]"
+	if(!icon_bodytype.eye_icon)
 		return
 	if(!global.eye_icon_cache[last_eye_cache_key])
-		var/icon/eyes_icon = icon(icon = bodytype.eye_icon, icon_state = eye_state)
-		if(bodytype.eye_offset)
-			eyes_icon.Shift(NORTH, bodytype.eye_offset)
-		if(bodytype.apply_eye_colour)
-			eyes_icon.Blend(last_cached_eye_colour, bodytype.eye_blend)
+		var/icon/eyes_icon = icon(icon = icon_bodytype.eye_icon, icon_state = eye_state)
+		if(icon_bodytype.eye_offset)
+			eyes_icon.Shift(NORTH, icon_bodytype.eye_offset)
+		if(icon_bodytype.apply_eye_colour)
+			eyes_icon.Blend(last_cached_eye_colour, icon_bodytype.eye_blend)
 		global.eye_icon_cache[last_eye_cache_key] = eyes_icon
 	return global.eye_icon_cache[last_eye_cache_key]
 
@@ -69,7 +78,7 @@
 		if(istype(head))
 			head._icon_cache_key = null
 
-/obj/item/organ/internal/eyes/take_internal_damage(amount, var/silent=0)
+/obj/item/organ/internal/eyes/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	var/oldbroken = is_broken()
 	. = ..()
 	if(is_broken() && !oldbroken && owner && !owner.stat)

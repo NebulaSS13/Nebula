@@ -1,6 +1,6 @@
 /datum/artifact_effect/forcefield
 	name = "force field"
-	origin_type = EFFECT_PARTICLE
+	origin_type = XA_EFFECT_PARTICLE
 
 	var/list/created_field
 	var/field_color

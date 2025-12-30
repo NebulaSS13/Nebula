@@ -238,19 +238,3 @@
 		/obj/item/clothing/suit/space/void/medical/alt
 	)
 	return spawnable_choices
-
-/obj/random/hardsuit
-	name = "Random Hardsuit"
-	desc = "This is a random hardsuit control module."
-	icon = 'icons/obj/rig_modules.dmi'
-	icon_state = "generic"
-
-/obj/random/hardsuit/spawn_choices()
-	var/static/list/spawnable_choices = list(
-		/obj/item/rig/industrial,
-		/obj/item/rig/eva,
-		/obj/item/rig/light/hacker,
-		/obj/item/rig/light/stealth,
-		/obj/item/rig/light
-	)
-	return spawnable_choices

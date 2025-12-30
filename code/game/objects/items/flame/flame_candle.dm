@@ -41,7 +41,7 @@
 /obj/item/flame/candle/get_sconce_overlay()
 	. = list(overlay_image(icon, "[icon_state]-sconce", color = color, flags = RESET_COLOR))
 	if(lit)
-		. += overlay_image(icon, "[icon_state]-sconce-lit", color = color, flags = RESET_COLOR)
+		. += overlay_image(icon, "[icon_state]-sconce-lit", color = COLOR_WHITE, flags = RESET_COLOR)
 
 /obj/item/flame/candle/on_update_icon()
 
@@ -63,6 +63,9 @@
 		// TODO: emissives
 		add_overlay(overlay_image(icon, "[icon_state]_lit", flags = RESET_COLOR))
 
+	if(istype(loc, /obj/item/candelabra))
+		loc.queue_icon_update()
+
 /obj/item/flame/candle/proc/get_available_colors()
 	return null
 
@@ -82,6 +85,11 @@
 
 /obj/item/flame/candle/get_available_scents()
 	return null
+
+/obj/item/flame/candle/set_dir(ndir)
+	if(istype(loc, /obj/item/candelabra))
+		ndir = SOUTH
+	. = ..()
 
 /obj/item/flame/candle/scented
 	name = "scented candle"

@@ -6,6 +6,7 @@
 	requires_slot_flags = SLOT_ID
 	mob_overlay_layer = HO_ID_LAYER
 	quick_equip_priority = 13
+	fluid_height = (FLUID_SHALLOW + FLUID_OVER_MOB_HEAD) / 2 // halfway between waist and top of head, so roughly chest level
 
 /datum/inventory_slot/id/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	var/obj/item/clothing/clothes = user.get_equipped_item(slot_w_uniform_str)

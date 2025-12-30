@@ -1,5 +1,6 @@
 /decl/submap_archetype
-	var/descriptor = "generic ship archetype"
+	// TODO: use UID instead of name for pref saving.
+	var/name = "generic ship archetype"
 	var/list/whitelisted_species = list()
 	var/list/blacklisted_species = list()
 	var/call_webhook
@@ -13,12 +14,18 @@
 
 /decl/submap_archetype/validate()
 	. = ..()
-	if(!descriptor)
-		. += "no descriptor set"
+	if(name)
+		var/static/list/submaps_by_name = list( (global.using_map.name) = global.using_map.type)
+		if(submaps_by_name[name])
+			. += "name '[name]' ([type]) collides with submap type '[submaps_by_name[name]]'"
+		else
+			submaps_by_name[name] = type
+	else
+		. += "no name set"
 
 // Generic ships to populate the list.
 /decl/submap_archetype/derelict
-	descriptor = "drifting wreck"
+	name = "drifting wreck"
 
 /decl/submap_archetype/abandoned_ship
-	descriptor = "abandoned ship"
+	name = "abandoned ship"

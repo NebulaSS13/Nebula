@@ -1,5 +1,5 @@
 /datum/shuttle/autodock/ferry/emergency
-	category = /datum/shuttle/autodock/ferry/emergency
+	abstract_type = /datum/shuttle/autodock/ferry/emergency
 	move_time = 10 MINUTES
 	flags = SHUTTLE_FLAGS_PROCESS | SHUTTLE_FLAGS_ZERO_G | SHUTTLE_FLAGS_NO_CODE
 	var/datum/evacuation_controller/shuttle/emergency_controller
@@ -174,8 +174,8 @@
 		emagged = 1
 		return 1
 
-/obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/W, mob/user)
-	if(read_authorization(W))
+/obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/used_item, mob/user)
+	if(read_authorization(used_item))
 		return TRUE
 	return ..()
 
@@ -201,7 +201,7 @@
 			else
 				shuttle_status = "Standing-by at [global.using_map.dock_name]."
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
-			shuttle_status = "Shuttle has recieved command and will depart shortly."
+			shuttle_status = "Shuttle has received command and will depart shortly."
 		if(WAIT_ARRIVE)
 			shuttle_status = "Proceeding to destination."
 		if(WAIT_FINISH)

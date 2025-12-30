@@ -14,6 +14,7 @@
 #include "datum\species_bodytypes.dm"
 #include "datum\traits.dm"
 #include "effects\razorweb.dm"
+#include "items\_overrides.dm"
 #include "items\cell.dm"
 #include "items\clothing.dm"
 #include "items\clustertool.dm"
@@ -39,7 +40,6 @@
 #include "mobs\nymph\nymph_inventory.dm"
 #include "mobs\nymph\nymph_life.dm"
 #include "mobs\nymph\nymph_ui.dm"
-#include "structures\furniture.dm"
 #include "structures\ship_furniture.dm"
 #include "turfs\ship.dm"
 // END_INCLUDE

@@ -33,7 +33,7 @@
 
 /obj/item/screwdriver/finger
 	name = "digital screwdriver"
-	desc = "A nifty powertool at your literal fingertips."
+	desc = "A nifty power tool at your literal fingertips."
 	icon_state = "screwdriver_finger"
 	icon = 'icons/obj/augment_tools.dmi'
 
@@ -43,7 +43,7 @@
 
 /obj/item/crowbar/finger
 	name = "digital prybar"
-	desc = "A somewhat awkward to use prybar. It doubles as bottle opener."
+	desc = "A somewhat awkward to use prybar. It doubles as a bottle opener."
 	icon_state = "prybar_finger"
 	icon = 'icons/obj/augment_tools.dmi'
 

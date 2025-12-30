@@ -14,34 +14,12 @@
 		else
 			playsound(src, 'sound/effects/ghost2.ogg', 10, 5)
 
-/datum/trader/ship/unique/wizard/New()
-	possible_wanted_items |= list(
-		/mob/living/simple_animal/construct       = TRADER_SUBTYPES_ONLY,
-		/obj/item/sword/cultblade                 = TRADER_THIS_TYPE,
-		/obj/item/clothing/head/culthood          = TRADER_ALL,
-		/obj/item/clothing/suit/space/cult        = TRADER_ALL,
-		/obj/item/clothing/suit/cultrobes         = TRADER_ALL,
-		/obj/item/clothing/head/helmet/space/cult = TRADER_ALL,
-		/obj/structure/cult                       = TRADER_SUBTYPES_ONLY,
-		/obj/structure/constructshell             = TRADER_ALL
-	)
-	..()
-
 /datum/trader/ship/clothingshop/hatglovesaccessories/New()
+	..()
 	possible_trading_items[/obj/item/clothing/head/culthood] = TRADER_BLACKLIST_ALL
 
 /mob/living/silicon/ai
 	shouldnt_see = list(/obj/effect/rune)
-
-// Vent crawling whitelisted items, whoo
-/mob/living/Initialize()
-	. = ..()
-	can_enter_vent_with += list(
-		/obj/item/clothing/head/culthood,
-		/obj/item/clothing/suit/cultrobes,
-		/obj/item/book/tome,
-		/obj/item/sword/cultblade
-	)
 
 /obj/item/vampiric
 	material = /decl/material/solid/stone/cult

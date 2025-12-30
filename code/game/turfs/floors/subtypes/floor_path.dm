@@ -5,14 +5,14 @@
 	desc           = "A cobbled path made of loose stones."
 	color          = COLOR_GRAY
 	icon           = 'icons/turf/flooring/path.dmi'
-	icon_state     = "cobble"
+	icon_state     = "cobble0"
 	_flooring      = /decl/flooring/path/cobblestone
-	floor_material = /decl/material/solid/stone/sandstone
+	material       = /decl/material/solid/stone/sandstone
 	_base_flooring = /decl/flooring/dirt
 
 /turf/floor/path/Initialize(mapload, no_update_icon)
 	. = ..()
-	set_turf_materials(floor_material || get_strata_material_type() || /decl/material/solid/stone/sandstone, skip_update = no_update_icon)
+	set_turf_materials(material || get_strata_material_type() || /decl/material/solid/stone/sandstone, skip_update = no_update_icon)
 	if(mapload && is_outside() && prob(20))
 		var/image/moss = image('icons/effects/decals/plant_remains.dmi', "leafy_bits", DECAL_LAYER)
 		moss.pixel_x = rand(-6, 6)
@@ -28,26 +28,26 @@
 		LAZYADD(decals, moss)
 
 /turf/floor/path/running_bond
-	icon_state = "runningbond"
-	_flooring = /decl/flooring/path/running_bond
+	icon_state      = "runningbond0"
+	_flooring       = /decl/flooring/path/running_bond
 
 /turf/floor/path/herringbone
-	icon_state = "herringbone"
-	_flooring = /decl/flooring/path/herringbone
+	icon_state      = "herringbone"
+	_flooring       = /decl/flooring/path/herringbone
 
 // Material subtypes.
 #define PATH_MATERIAL_SUBTYPES(material_name) \
 /turf/floor/path/##material_name { \
 	color             = /decl/material/solid/stone/##material_name::color; \
-	floor_material    = /decl/material/solid/stone/##material_name; \
+	material          = /decl/material/solid/stone/##material_name; \
 } \
 /turf/floor/path/herringbone/##material_name { \
 	color             = /decl/material/solid/stone/##material_name::color; \
-	floor_material    = /decl/material/solid/stone/##material_name; \
+	material          = /decl/material/solid/stone/##material_name; \
 } \
 /turf/floor/path/running_bond/##material_name { \
 	color             = /decl/material/solid/stone/##material_name::color; \
-	floor_material    = /decl/material/solid/stone/##material_name; \
+	material          = /decl/material/solid/stone/##material_name; \
 } \
 /turf/floor/path/##material_name/water { \
 	color             = COLOR_SKY_BLUE; \

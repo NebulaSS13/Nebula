@@ -2,7 +2,7 @@
 	name = "Long Vox Quills"
 	icon = 'mods/species/vox/icons/body/soldier/hair.dmi'
 	icon_state = "vox_longquills"
-	species_allowed = list(SPECIES_VOX)
+	species_allowed = list(/decl/species/vox::uid)
 	uid = "acc_hair_vox_longquills"
 
 /decl/sprite_accessory/hair/vox/get_accessory_icon(obj/item/organ/external/organ)
@@ -30,7 +30,7 @@
 	name = "Vox Neck Markings"
 	icon_state = "neck_markings"
 	body_parts = list(BP_HEAD)
-	species_allowed = list(SPECIES_VOX)
+	species_allowed = list(/decl/species/vox::uid)
 	icon = 'mods/species/vox/icons/body/soldier/markings.dmi'
 	color_blend = ICON_MULTIPLY
 	uid = "acc_markings_vox_neck"

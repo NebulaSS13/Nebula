@@ -7,26 +7,42 @@
 	var/obj/item/tank/tank_one
 	var/obj/item/tank/tank_two
 	var/obj/item/assembly/attached_device
-	var/mob/attacher = null
+	var/weakref/attacher_ref = null
 	var/valve_open = 0
 	var/toggle = 1
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 
-/obj/item/transfer_valve/attackby(obj/item/item, mob/user)
+/obj/item/transfer_valve/Destroy()
+	if(!QDELETED(tank_one))
+		QDEL_NULL(tank_one)
+	else
+		tank_one = null
+	if(!QDELETED(tank_two))
+		QDEL_NULL(tank_two)
+	else
+		tank_two = null
+	if(!QDELETED(attached_device))
+		QDEL_NULL(attached_device)
+	else
+		attached_device = null
+	attacher_ref = null
+	return ..()
+
+/obj/item/transfer_valve/attackby(obj/item/used_item, mob/user)
 	var/turf/location = get_turf(src) // For admin logs
-	if(istype(item, /obj/item/tank))
+	if(istype(used_item, /obj/item/tank))
 		var/T1_weight = 0
 		var/T2_weight = 0
 		if(tank_one && tank_two)
 			to_chat(user, "<span class='warning'>There are already two tanks attached, remove one first.</span>")
 			return TRUE
 
-		if(!user.try_unequip(item, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
 		if(!tank_one)
-			tank_one = item
+			tank_one = used_item
 		else
-			tank_two = item
+			tank_two = used_item
 			message_admins("[key_name_admin(user)] attached both tanks to a transfer valve. (<A HREF='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
 			log_game("[key_name_admin(user)] attached both tanks to a transfer valve.")
 		to_chat(user, "<span class='notice'>You attach the tank to the transfer valve.</span>")
@@ -38,25 +54,25 @@
 		src.w_class = max(initial(src.w_class),T1_weight,T2_weight) //gets w_class of biggest object, because you shouldn't be able to just shove tanks in and have them be tiny.
 		. = TRUE
 //TODO: Have this take an assemblyholder
-	else if(isassembly(item))
-		var/obj/item/assembly/A = item
+	else if(isassembly(used_item))
+		var/obj/item/assembly/A = used_item
 		if(A.secured)
 			to_chat(user, "<span class='notice'>The device is secured.</span>")
 			return TRUE
 		if(attached_device)
 			to_chat(user, "<span class='warning'>There is already an device attached to the valve, remove it first.</span>")
 			return TRUE
-		if(!user.try_unequip(item, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
 		attached_device = A
-		to_chat(user, "<span class='notice'>You attach \the [item] to the valve controls and secure it.</span>")
+		to_chat(user, "<span class='notice'>You attach \the [used_item] to the valve controls and secure it.</span>")
 		A.holder = src
 		A.toggle_secure()	//this calls update_icon(), which calls update_icon() on the holder (i.e. the bomb).
 
-		global.bombers += "[key_name(user)] attached a [item] to a transfer valve."
-		message_admins("[key_name_admin(user)] attached a [item] to a transfer valve. (<A HREF='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
-		log_game("[key_name_admin(user)] attached a [item] to a transfer valve.")
-		attacher = user
+		global.bombers += "[key_name(user)] attached a [used_item] to a transfer valve."
+		message_admins("[key_name_admin(user)] attached a [used_item] to a transfer valve. (<A HREF='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
+		log_game("[key_name_admin(user)] attached a [used_item] to a transfer valve.")
+		attacher_ref = weakref(user)
 		. = TRUE
 	if(.)
 		update_icon()
@@ -159,7 +175,7 @@
 /obj/item/transfer_valve/proc/merge_gases()
 	if(valve_open)
 		return
-	tank_two.air_contents.volume += tank_one.air_contents.volume
+	tank_two.air_contents.total_volume += tank_one.air_contents.total_volume
 	var/datum/gas_mixture/temp = tank_one.remove_air_ratio(1)
 	tank_two.assume_air(temp)
 	valve_open = 1
@@ -173,9 +189,9 @@
 	if(QDELETED(tank_one) || QDELETED(tank_two))
 		return
 
-	var/ratio1 = tank_one.air_contents.volume/tank_two.air_contents.volume
+	var/ratio1 = tank_one.air_contents.total_volume/tank_two.air_contents.total_volume
 	var/datum/gas_mixture/temp = tank_two.remove_air_ratio(ratio1)
-	tank_two.air_contents.volume -=  tank_one.air_contents.volume
+	tank_two.air_contents.total_volume -=  tank_one.air_contents.total_volume
 	tank_one.assume_air(temp)
 
 	/*
@@ -189,6 +205,7 @@
 		var/area/A = get_area(bombturf)
 
 		var/attacher_name = ""
+		var/mob/attacher = attacher_ref.resolve()
 		if(!attacher)
 			attacher_name = "Unknown"
 		else

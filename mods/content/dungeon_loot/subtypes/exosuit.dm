@@ -92,7 +92,7 @@
 
 /obj/structure/loot_pile/exosuit/explorer
 	name = "exploration exosuit wreckage"
-	desc = "The ruins of some unfortunate exploration exosuit. Perhaps something is salvagable."
+	desc = "The ruins of some unfortunate exploration exosuit. Perhaps something is salvageable."
 
 /obj/structure/loot_pile/exosuit/explorer/get_common_loot()
 	var/static/list/common_loot = list(
@@ -118,7 +118,7 @@
 
 /obj/structure/loot_pile/exosuit/heavy
 	name = "heavy exosuit wreckage"
-	desc = "The ruins of some unfortunate heavy exosuit. Perhaps something is salvagable."
+	desc = "The ruins of some unfortunate heavy exosuit. Perhaps something is salvageable."
 
 /obj/structure/loot_pile/exosuit/heavy/get_common_loot()
 	var/static/list/common_loot = list(
@@ -144,7 +144,7 @@
 
 /obj/structure/loot_pile/exosuit/light
 	name = "light exosuit wreckage"
-	desc = "The ruins of some unfortunate light exosuit. Perhaps something is salvagable."
+	desc = "The ruins of some unfortunate light exosuit. Perhaps something is salvageable."
 
 /obj/structure/loot_pile/exosuit/light/get_common_loot()
 	var/static/list/common_loot = list(

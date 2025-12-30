@@ -5,7 +5,7 @@
 	icon_state                  = ICON_STATE_WORLD
 	w_class                     = ITEM_SIZE_TINY
 	origin_tech                 = @'{"materials":1}'
-	material                    = /decl/material/solid/organic/wood
+	material                    = /decl/material/solid/organic/wood/oak
 
 	/// Parameters for lighting when lit.
 	var/lit_light_range         = 1
@@ -56,7 +56,7 @@
 		loc.update_icon()
 
 /obj/item/flame/Destroy()
-	extinguish(null, TRUE)
+	snuff_out(null, TRUE)
 	return ..()
 
 /obj/item/flame/proc/get_available_scents()
@@ -102,7 +102,7 @@
 
 /obj/item/flame/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(!istype(target) || user.a_intent == I_HURT || !lit || user.get_target_zone() != BP_MOUTH)
+	if(!istype(target) || user.check_intent(I_FLAG_HARM) || !lit || user.get_target_zone() != BP_MOUTH)
 		return ..()
 
 	var/obj/item/clothing/mask/smokable/cigarette/cig = target.get_equipped_item(slot_wear_mask_str)
@@ -115,7 +115,7 @@
 
 	return ..()
 
-/obj/item/flame/proc/extinguish(var/mob/user, var/no_message)
+/obj/item/flame/proc/snuff_out(mob/user, no_message = FALSE)
 	if(!lit)
 		return FALSE
 	lit = FALSE
@@ -150,7 +150,7 @@
 		return TRUE
 
 	if(lit && can_manually_extinguish)
-		extinguish(user)
+		snuff_out(user)
 		return TRUE
 
 	return ..()
@@ -158,27 +158,20 @@
 /obj/item/flame/fluid_act(var/datum/reagents/fluids)
 	..()
 
-	if(QDELETED(src) || !fluids?.total_volume || !lit)
+	if(QDELETED(src) || !REAGENT_TOTAL_VOLUME(fluids) || !lit)
 		return
 
 	var/turf/location = get_turf(src)
 	if(location)
 		location.hotspot_expose(700, 5) // Potentially set fire to fuel etc.
-		if(QDELETED(src) || !fluids?.total_volume)
+		if(QDELETED(src) || !REAGENT_TOTAL_VOLUME(fluids))
 			return
 
 	if(waterproof)
 		return
 
-	var/check_depth = FLUID_PUDDLE
-	if(ismob(loc))
-		var/mob/holder = loc
-		if(!holder.current_posture?.prone)
-			check_depth = FLUID_OVER_MOB_HEAD
-		else
-			check_depth = FLUID_SHALLOW
-	if(fluids.total_volume >= check_depth)
-		extinguish(no_message = TRUE)
+	if(REAGENT_TOTAL_VOLUME(fluids) >= FLUID_PUDDLE)
+		snuff_out(no_message = TRUE)
 
 /obj/item/flame/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
@@ -208,32 +201,22 @@
 		if(!other.can_manually_light)
 			other.light(user)
 
-/obj/item/flame/attackby(obj/item/W, mob/user)
-
-	if(user.a_intent != I_HURT && !can_manually_light && (W.isflamesource() || W.get_heat() > T100C))
+/obj/item/flame/attackby(obj/item/used_item, mob/user)
+	if(!user.check_intent(I_FLAG_HARM) && !can_manually_light && (used_item.isflamesource() || used_item.get_heat() > T100C))
 		light(user)
 		return TRUE
-
 	return ..()
 
 /obj/item/flame/Process()
-
 	if((!waterproof && submerged()) || !expend_fuel(_fuel_spend_amt))
-		extinguish()
+		snuff_out()
 		return PROCESS_KILL
-
 	update_icon()
-	if(istype(loc, /obj/structure/wall_sconce))
-		loc.update_icon()
-
-	// TODO: generalized ignition proc
-	if(isliving(loc))
-		var/mob/living/M = loc
-		M.IgniteMob()
-
-	var/turf/location = get_turf(src)
-	if(location)
-		location.hotspot_expose(get_heat(), w_class)
+	if(loc)
+		loc.ignite_fire()
+		var/turf/my_turf = get_turf(src)
+		if(my_turf)
+			my_turf.hotspot_expose(get_heat(), w_class)
 
 /obj/item/flame/dropped(var/mob/user)
 	//If dropped, put ourselves out
@@ -242,7 +225,7 @@
 		var/turf/location = loc
 		if(istype(location))
 			location.hotspot_expose(700, 5)
-		extinguish()
+		snuff_out()
 	return ..()
 
 /obj/item/flame/spark_act(obj/effect/sparks/sparks)

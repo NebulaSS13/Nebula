@@ -56,7 +56,6 @@
 	var/broadcasting = FALSE
 	var/listening = TRUE
 	var/list/channels
-	var/default_color = "#6d3f40"
 	var/decrypt_all_messages = FALSE
 	var/can_use_analog = TRUE
 	var/datum/extension/network_device/radio/radio_device_type = /datum/extension/network_device/radio
@@ -95,6 +94,11 @@
 	frequency = new_frequency
 	if(analog && frequency)
 		analog_radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
+
+/obj/item/radio/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_network_id, map_hash)
+	ADJUST_TAG_VAR(initial_network_key, map_hash)
 
 /obj/item/radio/Initialize()
 	. = ..()
@@ -227,11 +231,11 @@
 		return STATUS_CLOSE
 	return ..()
 
-/obj/item/radio/OnTopic(href, href_list)
+/obj/item/radio/OnTopic(mob/user, href_list)
 	if((. = ..()))
 		return
 
-	usr.set_machine(src)
+	user.set_machine(src)
 	if(href_list["analog"])
 		if(can_use_analog)
 			analog = text2num(href_list["analog"])
@@ -258,8 +262,8 @@
 		var/new_frequency = sanitize_frequency(frequency + text2num(href_list["freq"]))
 		set_frequency(new_frequency)
 		if(hidden_uplink)
-			if(hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
-				close_browser(usr, "window=radio")
+			if(hidden_uplink.check_trigger(user, frequency, traitor_frequency))
+				close_browser(user, "window=radio")
 		. = TOPIC_REFRESH
 	else if (href_list["talk"])
 		toggle_broadcast()
@@ -278,14 +282,14 @@
 		. = TOPIC_REFRESH
 	else if(href_list["spec_freq"])
 		var freq = href_list["spec_freq"]
-		if(has_channel_access(usr, freq))
+		if(has_channel_access(user, freq))
 			set_frequency(text2num(freq))
 		. = TOPIC_REFRESH
 	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
 		return TOPIC_HANDLED
 	if(href_list["network_settings"])
 		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
-		D.ui_interact(usr)
+		D.ui_interact(user)
 		. = TOPIC_HANDLED
 	if(. & TOPIC_REFRESH)
 		SSnano.update_uis(src)
@@ -445,33 +449,33 @@
 	if(can_transmit_binary())
 		LAZYADD(., "<b>- Robot talk:</b> [prefix]+")
 
-/obj/item/radio/examine(mob/user, distance)
+/obj/item/radio/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if (distance <= 1 || loc == user)
 		var/list/channel_descriptions = get_accessible_channel_descriptions(user)
 		if(length(channel_descriptions))
-			to_chat(user, "\The [src] has the following channel [length(channel_descriptions) == 1 ? "shortcut" : "shortcuts"] configured:")
+			. += "\The [src] has the following channel [length(channel_descriptions) == 1 ? "shortcut" : "shortcuts"] configured:"
 			for(var/line in channel_descriptions)
-				to_chat(user, line)
+				. += line
 		if(panel_open)
-			to_chat(user, SPAN_WARNING("A panel on the back of \the [src] is hanging open."))
+			. += SPAN_WARNING("A panel on the back of \the [src] is hanging open.")
 
-/obj/item/radio/attackby(obj/item/W, mob/user)
+/obj/item/radio/attackby(obj/item/used_item, mob/user)
 	user.set_machine(src)
 
-	if(istype(W, /obj/item/encryptionkey))
+	if(istype(used_item, /obj/item/encryptionkey))
 		if(!encryption_key_capacity)
 			to_chat(user, SPAN_WARNING("\The [src] cannot accept an encryption key."))
 			return TRUE
 		if(length(encryption_keys) >= encryption_key_capacity)
 			to_chat(user, SPAN_WARNING("\The [src] cannot fit any more encryption keys."))
 			return TRUE
-		if(user.try_unequip(W, src))
-			LAZYADD(encryption_keys, W)
+		if(user.try_unequip(used_item, src))
+			LAZYADD(encryption_keys, used_item)
 			channels = null
 			return TRUE
 
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		if(length(encryption_keys))
 			var/obj/item/encryptionkey/ekey = pick(encryption_keys)
 			ekey.dropInto(loc)

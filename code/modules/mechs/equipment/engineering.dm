@@ -14,28 +14,28 @@
 /obj/item/rcd/mounted/get_hardpoint_maptext()
 	var/obj/item/mech_equipment/mounted_system/MS = loc
 	if(istype(MS) && MS.owner)
-		var/obj/item/cell/C = MS.owner.get_cell()
-		if(istype(C))
-			return "[round(C.charge)]/[round(C.maxcharge)]"
+		var/obj/item/cell/cell = MS.owner.get_cell()
+		if(istype(cell))
+			return "[round(cell.charge)]/[round(cell.maxcharge)]"
 	return null
 
 /obj/item/rcd/mounted/get_hardpoint_status_value()
 	var/obj/item/mech_equipment/mounted_system/MS = loc
 	if(istype(MS) && MS.owner)
-		var/obj/item/cell/C = MS.owner.get_cell()
-		if(istype(C))
-			return C.charge/C.maxcharge
+		var/obj/item/cell/cell = MS.owner.get_cell()
+		if(istype(cell))
+			return cell.charge/cell.maxcharge
 	return null
 
 /obj/item/chems/spray/extinguisher/mech
-	volume = 4000 //Good is gooder
+	chem_volume = 4000 //Good is gooder
 	icon_state = "mech_exting"
 
 /obj/item/chems/spray/extinguisher/mech/get_hardpoint_maptext()
-	return "[reagents.total_volume]/[reagents.maximum_volume]"
+	return "[REAGENT_TOTAL_VOLUME(reagents)]/[REAGENT_MAXIMUM_VOLUME(reagents)]"
 
 /obj/item/chems/spray/extinguisher/mech/get_hardpoint_status_value()
-	return reagents.total_volume/reagents.maximum_volume
+	return REAGENT_TOTAL_VOLUME(reagents)/REAGENT_MAXIMUM_VOLUME(reagents)
 
 /obj/item/mech_equipment/mounted_system/extinguisher
 	icon_state = "mech_exting"
@@ -63,6 +63,7 @@
 /decl/interaction_handler/mech_equipment/adjust_atmos_shields
 	name = "Adjust Atmos Shields"
 	expected_target_type = /obj/item/mech_equipment/atmos_shields
+	examine_desc = "adjust the atmos shields"
 
 /decl/interaction_handler/mech_equipment/adjust_atmos_shields/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/mech_equipment/atmos_shields/shields = target

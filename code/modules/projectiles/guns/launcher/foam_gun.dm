@@ -18,14 +18,14 @@
 	var/max_darts = 1
 	var/list/darts = new/list()
 
-/obj/item/gun/launcher/foam/attackby(obj/item/I, mob/user)
-	if(!istype(I, /obj/item/foam_dart))
+/obj/item/gun/launcher/foam/attackby(obj/item/used_item, mob/user)
+	if(!istype(used_item, /obj/item/foam_dart))
 		return ..()
 	if(darts.len < max_darts)
-		if(!user.try_unequip(I, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		darts += I
-		to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [src]."))
+		darts += used_item
+		to_chat(user, SPAN_NOTICE("You slot \the [used_item] into \the [src]."))
 		return TRUE
 	else
 		to_chat(user, SPAN_WARNING("\The [src] can hold no more darts."))
@@ -33,9 +33,9 @@
 
 /obj/item/gun/launcher/foam/consume_next_projectile()
 	if(darts.len)
-		var/obj/item/I = darts[1]
-		darts -= I
-		return I
+		var/obj/item/thing = darts[1]
+		darts -= thing
+		return thing
 	return null
 
 /obj/item/gun/launcher/foam/CtrlAltClick(mob/user)
@@ -75,15 +75,29 @@
 	release_force = 3
 	throw_distance = 12
 
-/obj/item/gun/launcher/foam/revolver/tampered/examine(mob/user, distance)
+/obj/item/gun/launcher/foam/revolver/tampered/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, "The hammer is a lot more resistant than you'd expect.")
+		. += "The hammer is a lot more resistant than you'd expect."
+
+/obj/item/gun/launcher/foam/machine_gun
+	name = "foam machine gun"
+	desc = "The Jorf machine gun, hose the competition down and hate yourself while you spend forever reloading! It holds 30 darts."
+	icon =  'icons/obj/guns/foam/machine_gun.dmi'
+	w_class = ITEM_SIZE_NORMAL
+	fire_delay = 0
+	autofire_enabled = 1
+	one_hand_penalty = 3
+	max_darts = 30
+	burst_delay = 1
+	burst = 3
+	burst_accuracy = list(0,-1,-1)
+	dispersion = list(0.0, 0.6, 1.0)
 
 //the projectile
 /obj/item/foam_dart
 	name = "foam dart"
-	desc = "An offical Jorf brand foam dart, for use only with offical Jorf brand foam dart launching products."
+	desc = "An official Jorf brand foam dart, for use only with official Jorf brand foam dart launching products."
 	icon = 'icons/obj/guns/foam/dart.dmi'
 	icon_state = "dart"
 	w_class = ITEM_SIZE_TINY
@@ -106,15 +120,15 @@
 /obj/item/foam_dart/tampered
 	_base_attack_force = 1
 
-/obj/item/foam_dart/tampered/examine(mob/user, distance)
+/obj/item/foam_dart/tampered/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, SPAN_WARNING("Closer inspection reveals some weights in the rubber dome."))
+		. += SPAN_WARNING("Closer inspection reveals some weights in the rubber dome.")
 
 //boxes of the projectile
 /obj/item/box/foam_darts
 	name = "box of foam darts"
-	desc = "It's a box of offical Jorf brand foam darts, for use only with offical Jorf brand products."
+	desc = "It's a box of official Jorf brand foam darts, for use only with official Jorf brand products."
 	icon = 'icons/obj/guns/foam/boxes.dmi'
 	icon_state = "dart_box"
 

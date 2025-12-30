@@ -206,16 +206,16 @@ var/global/req_console_information = list()
 		set_department(choice)
 		return TOPIC_REFRESH
 
-/obj/machinery/network/requests_console/attackby(var/obj/item/O, var/mob/user)
-	if (istype(O, /obj/item/card/id))
+/obj/machinery/network/requests_console/attackby(var/obj/item/used_item, var/mob/user)
+	if (istype(used_item, /obj/item/card/id))
 		if(inoperable(MAINT)) return TRUE
 		switch(screen)
 			if(RCS_MESSAUTH)
-				var/obj/item/card/id/T = O
+				var/obj/item/card/id/T = used_item
 				msgVerified = text("<font color='green'><b>Verified by [T.registered_name] ([T.assignment])</b></font>")
 				SSnano.update_uis(src)
 			if(RCS_ANNOUNCE)
-				var/obj/item/card/id/ID = O
+				var/obj/item/card/id/ID = used_item
 				if (access_RC_announce in ID.GetAccess())
 					announceAuth = 1
 					announcement.announcer = ID.assignment ? "[ID.assignment] [ID.registered_name]" : ID.registered_name
@@ -224,10 +224,10 @@ var/global/req_console_information = list()
 					to_chat(user, "<span class='warning'>You are not authorized to send announcements.</span>")
 				SSnano.update_uis(src)
 		return TRUE
-	if (istype(O, /obj/item/stamp))
+	if (istype(used_item, /obj/item/stamp))
 		if(inoperable(MAINT)) return TRUE
 		if(screen == RCS_MESSAUTH)
-			var/obj/item/stamp/T = O
+			var/obj/item/stamp/T = used_item
 			msgStamped = "<font color='blue'><b>Stamped with the [T.name]</b></font>"
 			SSnano.update_uis(src)
 		return TRUE

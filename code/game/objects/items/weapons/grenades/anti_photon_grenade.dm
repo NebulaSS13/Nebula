@@ -18,5 +18,4 @@
 /obj/item/grenade/anti_photon/proc/finish()
 	set_light(10, 10, rgb(rand(64,255), rand(64,255), rand(64,255)))
 	playsound(loc, 'sound/effects/bang.ogg', 50, 1, 5)
-	sleep(1 SECOND)
-	qdel(src)
+	QDEL_IN(src, 1 SECOND)

@@ -1,0 +1,3 @@
+/obj/item/clothing/jumpsuit/vice/@SUBTYPES : @DELETE
+/obj/item/clothing/jumpsuit/johnny/@SUBTYPES : @DELETE
+/obj/item/clothing/jumpsuit/caretaker/@SUBTYPES : @DELETE

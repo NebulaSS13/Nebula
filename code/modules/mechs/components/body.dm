@@ -50,6 +50,21 @@
 				"[WEST]"  = list("x" = 8, "y" = 0)
 			)
 		)
+	if(pilot_coverage >= 100) //Open cockpits dont get to have air
+		cockpit = new
+		cockpit.total_volume = 200
+		if(loc)
+			var/datum/gas_mixture/air = loc.return_air()
+			if(air)
+				//Essentially at this point its like we created a vacuum, but realistically making a bottle doesnt actually increase volume of a room and neither should a mech
+				for(var/g in air.gas)
+					cockpit.gas[g] = (air.gas[g] / air.total_volume) * cockpit.total_volume
+
+				cockpit.temperature = air.temperature
+				cockpit.update_values()
+
+		air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
+	storage_compartment = new(src)
 
 /obj/item/mech_component/chassis/Destroy()
 	QDEL_NULL(cell)
@@ -67,30 +82,13 @@
 	storage_compartment = locate() in src
 
 /obj/item/mech_component/chassis/show_missing_parts(var/mob/user)
+	. = list()
 	if(!cell)
-		to_chat(user, SPAN_WARNING("It is missing a power cell."))
+		. += SPAN_WARNING("It is missing a power cell.")
 	if(!diagnostics)
-		to_chat(user, SPAN_WARNING("It is missing a diagnostics unit."))
+		. += SPAN_WARNING("It is missing a diagnostics unit.")
 	if(!m_armour)
-		to_chat(user, SPAN_WARNING("It is missing exosuit armour plating."))
-
-/obj/item/mech_component/chassis/Initialize()
-	. = ..()
-	if(pilot_coverage >= 100) //Open cockpits dont get to have air
-		cockpit = new
-		cockpit.volume = 200
-		if(loc)
-			var/datum/gas_mixture/air = loc.return_air()
-			if(air)
-				//Essentially at this point its like we created a vacuum, but realistically making a bottle doesnt actually increase volume of a room and neither should a mech
-				for(var/g in air.gas)
-					cockpit.gas[g] = (air.gas[g] / air.volume) * cockpit.volume
-
-				cockpit.temperature = air.temperature
-				cockpit.update_values()
-
-		air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
-	storage_compartment = new(src)
+		. += SPAN_WARNING("It is missing exosuit armour plating.")
 
 /obj/item/mech_component/chassis/proc/update_air(var/take_from_supply)
 
@@ -109,7 +107,7 @@
 		if(pressure_delta > 0)
 			if(air_supply.air_contents.temperature > 0)
 				var/transfer_moles = calculate_transfer_moles(air_supply.air_contents, cockpit, pressure_delta)
-				transfer_moles = min(transfer_moles, (air_supply.release_flow_rate/air_supply.air_contents.volume)*air_supply.air_contents.total_moles)
+				transfer_moles = min(transfer_moles, (air_supply.release_flow_rate/air_supply.air_contents.total_volume)*air_supply.air_contents.total_moles)
 				pump_gas_passive(air_supply, air_supply.air_contents, cockpit, transfer_moles)
 				changed = TRUE
 		else if(pressure_delta < 0) //Release overpressure.
@@ -140,29 +138,29 @@
 	cell = new /obj/item/cell/exosuit(src)
 	cell.charge = cell.maxcharge
 
-/obj/item/mech_component/chassis/attackby(var/obj/item/thing, var/mob/user)
-	if(istype(thing,/obj/item/robot_parts/robot_component/diagnosis_unit))
+/obj/item/mech_component/chassis/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item,/obj/item/robot_parts/robot_component/diagnosis_unit))
 		if(diagnostics)
 			to_chat(user, SPAN_WARNING("\The [src] already has a diagnostic system installed."))
 			return TRUE
-		if(install_component(thing, user))
-			diagnostics = thing
+		if(install_component(used_item, user))
+			diagnostics = used_item
 			return TRUE
 		return FALSE
-	else if(istype(thing, /obj/item/cell))
+	else if(istype(used_item, /obj/item/cell))
 		if(cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
 			return TRUE
-		if(install_component(thing,user))
-			cell = thing
+		if(install_component(used_item,user))
+			cell = used_item
 			return TRUE
 		return FALSE
-	else if(istype(thing, /obj/item/robot_parts/robot_component/armour/exosuit))
+	else if(istype(used_item, /obj/item/robot_parts/robot_component/armour/exosuit))
 		if(m_armour)
 			to_chat(user, SPAN_WARNING("\The [src] already has armour installed."))
 			return TRUE
-		if(install_component(thing, user))
-			m_armour = thing
+		if(install_component(used_item, user))
+			m_armour = used_item
 			return TRUE
 		return FALSE
 	else

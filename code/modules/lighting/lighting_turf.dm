@@ -1,105 +1,25 @@
 /turf
 	var/dynamic_lighting = TRUE
-	var/ambient_light	// If non-null, a hex RGB light color that should be applied to this turf.
-	var/ambient_light_multiplier = 0.3	// The power of the above is multiplied by this. Setting too high may drown out normal lights on the same turf.
-	luminosity           = 1
+	luminosity = 1
 
 	var/tmp/lighting_corners_initialised = FALSE
 
-	var/tmp/list/datum/light_source/affecting_lights       // List of light sources affecting this turf.
-	var/tmp/atom/movable/lighting_overlay/lighting_overlay // Our lighting overlay.
+	/// List of light sources affecting this turf.
+	var/tmp/list/datum/light_source/affecting_lights
+	/// Our lighting overlay, used to apply multiplicative lighting to the tile and its contents.
+	var/tmp/atom/movable/lighting_overlay/lighting_overlay
 	var/tmp/list/datum/lighting_corner/corners
-	var/tmp/has_opaque_atom = FALSE // Not to be confused with opacity, this will be TRUE if there's any opaque atom on the tile.
-	var/tmp/ambient_has_indirect = FALSE // If this is TRUE, an above turf's ambient light is affecting this turf.
+	/// Not to be confused with opacity, this will be TRUE if there's any opaque atom on the tile.
+	var/tmp/has_opaque_atom = FALSE
 
-	// Record-keeping, do not touch -- that means you, admins.
-	var/tmp/ambient_light_old
-	var/tmp/ambient_light_old_r = 0
-	var/tmp/ambient_light_old_g = 0
-	var/tmp/ambient_light_old_b = 0
-
-/turf/proc/set_ambient_light(color, multiplier)
-	if (color == ambient_light && multiplier == ambient_light_multiplier)
-		return
-
-	ambient_light = color || ambient_light
-	ambient_light_multiplier = multiplier || ambient_light_multiplier
-	if (!ambient_light_multiplier)
-		ambient_light_multiplier = initial(ambient_light_multiplier)
-
-	update_ambient_light()
-
-/turf/proc/clear_ambient_light()
-	if (ambient_light == null)
-		return
-
-	ambient_light = null
-	update_ambient_light()
-
-/turf/proc/update_ambient_light(no_corner_update = FALSE)
-	// These are deltas.
-	var/ambient_r = 0
-	var/ambient_g = 0
-	var/ambient_b = 0
-
-	if (ambient_light)
-		ambient_r = round(((HEX_RED(ambient_light)   / 255) * ambient_light_multiplier)/4 - ambient_light_old_r, LIGHTING_ROUND_VALUE)
-		ambient_g = round(((HEX_GREEN(ambient_light) / 255) * ambient_light_multiplier)/4 - ambient_light_old_g, LIGHTING_ROUND_VALUE)
-		ambient_b = round(((HEX_BLUE(ambient_light)  / 255) * ambient_light_multiplier)/4 - ambient_light_old_b, LIGHTING_ROUND_VALUE)
-	else
-		ambient_r = -ambient_light_old_r
-		ambient_g = -ambient_light_old_g
-		ambient_b = -ambient_light_old_b
-
-	ambient_light_old_r += ambient_r
-	ambient_light_old_g += ambient_g
-	ambient_light_old_b += ambient_b
-
-	if (abs(ambient_r + ambient_g + ambient_b) == 0)
-		return
-
-	// Unlit turfs will have corners if they have a lit neighbor -- don't generate corners for them, but do update them if they're there.
-	// if (!corners)
-	// 	var/force_build_corners = FALSE
-	// 	for (var/turf/T as anything in RANGE_TURFS(src, 1))
-	// 		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
-	// 			force_build_corners = TRUE
-	// 			break
-
-	// 	if (force_build_corners || TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
-	// 		generate_missing_corners()
-	// 	else
-	// 		return
-
-	// still inefficient :(
-	if(!corners || !lighting_corners_initialised)
-		/* Commented out pending working out why this doesn't work properly on Neb.
-		if(TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
-			generate_missing_corners()
-		else
-			return
-		*/
-		generate_missing_corners()
-
-	// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.
-	for (var/datum/lighting_corner/C in corners)
-		C.update_ambient_lumcount(ambient_r, ambient_g, ambient_b, no_corner_update)
-
-	if (ambient_light_old == null && ambient_light != ambient_light_old)
-		SSlighting.total_ambient_turfs += 1
-	else if (ambient_light_old != null && ambient_light == null)
-		SSlighting.total_ambient_turfs -= 1
-
-	ambient_light_old = ambient_light
-
-// Causes any affecting light sources to be queued for a visibility update, for example a door got opened.
+/// Causes any affecting light sources to be queued for a visibility update, for example a door got opened.
 /turf/proc/reconsider_lights()
 	var/datum/light_source/L
 	for (var/thing in affecting_lights)
 		L = thing
 		L.vis_update()
 
-// Forces a lighting update. Reconsider lights is preferred when possible.
+/// Forces a lighting update. Reconsider lights is preferred when possible.
 /turf/proc/force_update_lights()
 	var/datum/light_source/L
 	for (var/thing in affecting_lights)
@@ -120,8 +40,7 @@
 // Builds a lighting overlay for us, but only if our area is dynamic.
 /turf/proc/lighting_build_overlay(now = FALSE)
 	if (lighting_overlay)
-		return	// shrug
-		// CRASH("Attempted to create lighting_overlay on tile that already had one.")
+		CRASH("Attempted to create lighting_overlay on tile that already had one.")
 
 	if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
 		if (!lighting_corners_initialised || !corners)
@@ -137,7 +56,7 @@
 
 				C.active = TRUE
 
-// Returns the average color of this tile. Roughly corresponds to the color of a single old-style lighting overlay.
+/// Returns the average color of this tile. Roughly corresponds to the color of a single old-style lighting overlay.
 /turf/proc/get_avg_color()
 	if (!lighting_overlay)
 		return null
@@ -151,15 +70,15 @@
 		lum_g += L.apparent_g
 		lum_b += L.apparent_b
 
-	lum_r = CLAMP01(lum_r / length(corners)) * 255
-	lum_g = CLAMP01(lum_g / length(corners)) * 255
-	lum_b = CLAMP01(lum_b / length(corners)) * 255
+	lum_r = CLAMP01(lum_r / 4) * 255
+	lum_g = CLAMP01(lum_g / 4) * 255
+	lum_b = CLAMP01(lum_b / 4) * 255
 
 	return rgb(lum_r, lum_g, lum_b)
 
 #define SCALE(targ,min,max) (targ - min) / (max - min)
 
-// Used to get a scaled lumcount.
+/// Returns a lumcount (average intensity of color channels) scaled between minlum and maxlum.
 /turf/proc/get_lumcount(minlum = 0, maxlum = 1)
 	if (!lighting_overlay)
 		return 0.5
@@ -176,7 +95,7 @@
 
 #undef SCALE
 
-// Can't think of a good name, this proc will recalculate the has_opaque_atom variable.
+/// Can't think of a good name, this proc will recalculate the has_opaque_atom variable.
 /turf/proc/recalc_atom_opacity()
 #ifdef AO_USE_LIGHTING_OPACITY
 	var/old = has_opaque_atom
@@ -206,6 +125,11 @@
 	if (Obj.opacity)
 		recalc_atom_opacity() // Make sure to do this before reconsider_lights(), incase we're on instant updates.
 		reconsider_lights()
+
+// The normal opacity logic doesn't work for entities not located inside turfs, such as turfs.
+/turf/set_opacity(new_opacity)
+	. = ..()
+	reconsider_lights()
 
 // This block isn't needed now, but it's here if supporting area dyn lighting changes is needed later.
 

@@ -4,32 +4,29 @@
 
 /datum/unit_test/observation
 	name = "OBSERVATION template"
-	template = /datum/unit_test/observation
+	abstract_type = /datum/unit_test/observation
 	async = 0
 	var/list/received_moves
-	var/list/received_name_set_events
-
-	var/list/stored_global_listen_count
+	var/list/received_opacity_events
+	/// A list of datums to check for event sanity pre- and post-test.
+	var/list/datums_of_interest
+	var/list/stored_global_registrations
 
 /datum/unit_test/observation/start_test()
 	received_moves = received_moves || list()
-	received_name_set_events = received_name_set_events || list()
+	received_opacity_events = received_opacity_events || list()
 	received_moves.Cut()
-	received_name_set_events.Cut()
+	received_opacity_events.Cut()
 
-	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
-	for(var/global_listener in moved_event.global_listeners)
-		events_repository.unregister_global(/decl/observ/moved, global_listener)
-
-	stored_global_listen_count = global.global_listen_count.Copy()
+	stored_global_registrations = global._all_global_event_listeners.Copy()
 
 	sanity_check_events("Pre-Test")
 	. = conduct_test()
 	sanity_check_events("Post-Test")
+	LAZYCLEARLIST(datums_of_interest)
 
 /datum/unit_test/observation/proc/sanity_check_events(var/phase)
-	for(var/entry in global.all_observable_events)
-		var/decl/observ/event = entry
+	for(var/decl/observ/event as anything in decls_repository.get_decls_of_subtype_unassociated(/decl/observ))
 		var/null_count = 0
 		for(var/null_candidate in event.global_listeners)
 			if(isnull(event.global_listeners[null_candidate]))
@@ -37,27 +34,21 @@
 		if(null_count > 0)
 			fail("[phase]: [event] - The global listeners list contains a null entry.")
 
-		for(var/event_source in event.event_sources)
-			for(var/list/list_of_listeners in event.event_sources[event_source])
-				if(isnull(list_of_listeners))
-					fail("[phase]: [event] - The event source list contains a null entry.")
-				else if(!istype(list_of_listeners))
-					fail("[phase]: [event] - The list of listeners was not of the expected type. Was [list_of_listeners.type].")
-				else
-					for(var/listener in list_of_listeners)
-						if(isnull(listener))
-							fail("[phase]: [event] - The event source listener list contains a null entry.")
-						else
-							var/proc_calls = list_of_listeners[listener]
-							if(isnull(proc_calls))
-								fail("[phase]: [event] - [listener] - The proc call list was null.")
-							else
-								for(var/proc_call in proc_calls)
-									if(isnull(proc_call))
-										fail("[phase]: [event] - [listener]- The proc call list contains a null entry.")
+	for(var/datum/datum_of_interest in datums_of_interest)
+		for(var/registered_event_type in datum_of_interest.event_listeners)
+			if(datum_of_interest.event_listeners[registered_event_type] && (null in datum_of_interest.event_listeners[registered_event_type]))
+				fail("[phase]: [registered_event_type] - [datum_of_interest]'s event_listeners list contains a null key.")
+			for(var/datum/listener in datum_of_interest.event_listeners[registered_event_type])
+				var/proc_calls = datum_of_interest.event_listeners[registered_event_type][listener]
+				if(isnull(proc_calls))
+					fail("[phase]: [registered_event_type] - [listener] - The proc call list was null.")
+				else if(null in proc_calls)
+					fail("[phase]: [registered_event_type] - [listener]- The proc call list contains a null entry.")
+			if(datum_of_interest._listening_to?[registered_event_type] && (null in datum_of_interest._listening_to[registered_event_type]))
+				fail("[phase]: [registered_event_type] - [datum_of_interest]'s _listening_to list contains a null value.")
 
-	for(var/entry in (global.global_listen_count - stored_global_listen_count))
-		fail("[phase]: global_listen_count - Contained [log_info_line(entry)].")
+	for(var/entry in (global._all_global_event_listeners - stored_global_registrations))
+		fail("[phase]: _all_global_event_listeners - Contained [log_info_line(entry)].")
 
 /datum/unit_test/observation/proc/conduct_test()
 	return 0
@@ -70,40 +61,39 @@
 		var/list/l = entry
 		log_unit_test("[l[1]] - [l[2]] - [l[3]]")
 
-/datum/unit_test/observation/proc/receive_name_change(source, old_name, new_name)
-	received_name_set_events[++received_name_set_events.len] = list(source, old_name, new_name)
+/datum/unit_test/observation/proc/receive_opacity_change(source, old_opacity, new_opacity)
+	received_opacity_events[++received_opacity_events.len] = list(source, old_opacity, new_opacity)
 
-/datum/unit_test/observation/proc/dump_received_names()
-	for(var/entry in received_name_set_events)
+/datum/unit_test/observation/proc/dump_received_opacities()
+	for(var/entry in received_opacity_events)
 		var/list/l = entry
 		log_unit_test("[l[1]] - [l[2]] - [l[3]]")
 
 /datum/unit_test/observation/global_listeners_shall_receive_events
 	name = "OBSERVATION: Global listeners shall receive events"
-	var/old_name
-	var/new_name
+	var/old_opacity
+	var/new_opacity
 
 /datum/unit_test/observation/global_listeners_shall_receive_events/conduct_test()
 	var/turf/start = get_safe_turf()
 	var/obj/O = get_named_instance(/obj, start)
-	old_name = O.name
-	new_name = O.name + " (New)"
+	old_opacity = O.opacity
+	new_opacity = !old_opacity
 
-	events_repository.register_global(/decl/observ/name_set, src, TYPE_PROC_REF(/datum/unit_test/observation, receive_name_change))
-	O.SetName(new_name)
-
-	if(received_name_set_events.len != 1)
-		fail("Expected 1 raised name set event, were [received_name_set_events.len].")
-		dump_received_names()
+	events_repository.register_global(/decl/observ/opacity_set, src, TYPE_PROC_REF(/datum/unit_test/observation, receive_opacity_change))
+	O.set_opacity(new_opacity)
+	if(length(received_opacity_events) != 1)
+		fail("Expected 1 raised opacity set event, were [received_opacity_events].")
+		dump_received_opacities()
 		return 1
 
-	var/list/event = received_name_set_events[1]
-	if(event[1] != O || event[2] != old_name || event[3] != new_name)
-		fail("Unepected name set event received. Expected [O], was [event[1]]. Expected [old_name], was [event[2]]. Expected [new_name], was [event[3]]")
+	var/list/event = received_opacity_events[1]
+	if(event[1] != O || event[2] != old_opacity || event[3] != new_opacity)
+		fail("Unexpected opacity set event received. Expected [O], was [event[1]]. Expected [old_opacity], was [event[2]]. Expected [new_opacity], was [event[3]]")
 	else
-		pass("Received the expected name set event.")
+		pass("Received the expected opacity set event.")
 
-	events_repository.unregister_global(/decl/observ/name_set, src)
+	events_repository.unregister_global(/decl/observ/opacity_set, src)
 	qdel(O)
 	return 1
 
@@ -114,6 +104,8 @@
 	var/turf/T = get_safe_turf()
 	var/mob/living/human/H = get_named_instance(/mob/living/human, T, global.using_map.default_species)
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
+
+	datums_of_interest = list(T, H, O)
 
 	O.ManualFollow(H)
 	if(is_listening_to_movement(H, O))
@@ -132,6 +124,7 @@
 	var/turf/T = get_safe_turf()
 	var/mob/living/human/H = get_named_instance(/mob/living/human, T, global.using_map.default_species)
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
+	datums_of_interest = list(T, H, O)
 
 	O.ManualFollow(H)
 	O.stop_following()
@@ -150,6 +143,7 @@
 /datum/unit_test/observation/moved_shall_not_register_on_enter_without_listeners/conduct_test()
 	var/turf/T = get_safe_turf()
 	var/mob/living/human/H = get_named_instance(/mob/living/human, T, global.using_map.default_species)
+	datums_of_interest = list(T, H)
 	qdel(H.virtual_mob)
 	H.virtual_mob = null
 
@@ -173,6 +167,7 @@
 	var/mob/living/human/H = get_named_instance(/mob/living/human, T, global.using_map.default_species)
 	var/obj/structure/closet/C = get_named_instance(/obj/structure/closet, T, "Closet")
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
+	datums_of_interest = list(T, H, C, O)
 
 	H.forceMove(C)
 	O.ManualFollow(H)
@@ -196,6 +191,7 @@
 	var/mob/living/human/H = get_named_instance(/mob/living/human, T, global.using_map.default_species)
 	var/obj/structure/closet/C = get_named_instance(/obj/structure/closet, T, "Closet")
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
+	datums_of_interest = list(T, H, C, O)
 
 	O.ManualFollow(H)
 	H.forceMove(C)
@@ -220,6 +216,7 @@
 	var/mob/observer/ghost/one = get_named_instance(/mob/observer/ghost, T, "Ghost One")
 	var/mob/observer/ghost/two = get_named_instance(/mob/observer/ghost, T, "Ghost Two")
 	var/mob/observer/ghost/three = get_named_instance(/mob/observer/ghost, T, "Ghost Three")
+	datums_of_interest = list(T, one, two, three)
 
 	two.ManualFollow(one)
 	three.ManualFollow(two)
@@ -244,6 +241,7 @@
 	var/mob/observer/ghost/one = get_named_instance(/mob/observer/ghost, T, "Ghost One")
 	var/mob/observer/ghost/two = get_named_instance(/mob/observer/ghost, T, "Ghost Two")
 	var/mob/observer/ghost/three = get_named_instance(/mob/observer/ghost, T, "Ghost Three")
+	datums_of_interest = list(T, one, two, three)
 
 	two.ManualFollow(one)
 	three.ManualFollow(two)
@@ -266,20 +264,21 @@
 /datum/unit_test/observation/sanity_global_listeners_shall_not_leave_null_entries_when_destroyed/conduct_test()
 	var/turf/T = get_safe_turf()
 	var/obj/O = get_named_instance(/obj, T)
+	datums_of_interest = list(T, O)
 
-	events_repository.register_global(/decl/observ/name_set, O, TYPE_PROC_REF(/atom/movable, move_to_turf))
+	events_repository.register_global(/decl/observ/atom_examined, O, TYPE_PROC_REF(/atom/movable, move_to_turf))
 	qdel(O)
 
-	var/decl/observ/name_set/name_set_event = GET_DECL(/decl/observ/name_set)
+	var/decl/observ/atom_examined/examined_event = IMPLIED_DECL
 	var/null_count = 0
-	for(var/null_candidate in name_set_event.global_listeners)
-		if (isnull(name_set_event.event_sources[null_candidate]))
+	for(var/datum/null_candidate in examined_event.global_listeners) // skip null keys
+		if (isnull(examined_event.global_listeners[null_candidate]))
 			null_count++
-	if(null_count > 0)
+	if(null_count)
 		fail("The global listener list contains a null value.")
 	else
 		pass("The global listener list does not contain a null value.")
-	if(name_set_event.global_listeners && (null in name_set_event.global_listeners))
+	if(examined_event.global_listeners && (null in examined_event.global_listeners))
 		fail("The global listener list contains a null key.")
 	else
 		pass("The global listener list does not contain a null key.")
@@ -296,21 +295,7 @@
 
 	events_repository.register(/decl/observ/moved, event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
 	qdel(event_source)
-
-	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
-	var/null_count = 0
-	for(var/null_candidate in moved_event.event_sources)
-		if (isnull(moved_event.event_sources[null_candidate]))
-			null_count++
-	if(null_count > 0)
-		fail("The event source list contains a null value.")
-	else
-		pass("The event source list does not contain a null value.")
-	if(moved_event.event_sources && (null in moved_event.event_sources))
-		fail("The event source list contains a null key.")
-	else
-		pass("The event source list does not contain a null key.")
-
+	sanity_check_events("Post-Event Source Deletion")
 	qdel(listener)
 	return 1
 
@@ -321,24 +306,11 @@
 	var/turf/T = get_safe_turf()
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
+	datums_of_interest = list(T, event_source, listener)
 
 	events_repository.register(/decl/observ/moved, event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
 	qdel(listener)
-
-	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
-	var/listeners = moved_event.event_sources[event_source]
-	var/null_count = 0
-	for(var/null_candidate in listeners)
-		if (isnull(listeners[null_candidate]))
-			null_count++
-	if(null_count > 0)
-		fail("The event source listener list contains a null value.")
-	else
-		pass("The event source listener list does not contain a null value.")
-	if(listeners && (null in listeners))
-		fail("The event source listener list contains a null key.")
-	else
-		pass("The event source listener list does not contain a null key.")
+	sanity_check_events("Post-Listener Deletion")
 	qdel(event_source)
 	return 1
 
@@ -349,6 +321,7 @@
 	var/turf/T = get_safe_turf()
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
+	datums_of_interest = list(T, event_source, listener)
 
 	var/initial_event_source_count = event_source.event_source_count
 	var/initial_event_listen_count = listener.event_listen_count
@@ -373,6 +346,7 @@
 	var/turf/T = get_safe_turf()
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
+	datums_of_interest = list(T, event_source, listener)
 
 	var/initial_event_source_count = event_source.event_source_count
 	var/initial_event_listen_count = listener.event_listen_count
@@ -399,6 +373,7 @@
 	var/mob/event_source_A = get_named_instance(/mob, T, "Event Source A")
 	var/mob/event_source_B = get_named_instance(/mob, T, "Event Source B")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
+	datums_of_interest = list(T, event_source_A, event_source_B, listener)
 
 	var/initial_event_listen_count = listener.event_listen_count
 	events_repository.register(/decl/observ/moved, event_source_A, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
@@ -424,6 +399,7 @@
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener_A = get_named_instance(/mob, T, "Event Listener A")
 	var/mob/listener_B = get_named_instance(/mob, T, "Event Listener B")
+	datums_of_interest = list(T, event_source, listener_A, listener_B)
 
 	var/initial_event_source_count = event_source.event_source_count
 	var/initial_event_listen_count = listener_B.event_listen_count

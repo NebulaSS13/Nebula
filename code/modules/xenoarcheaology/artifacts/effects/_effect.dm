@@ -1,6 +1,6 @@
 /datum/artifact_effect
 	var/name = "unknown"
-	var/operation_type = EFFECT_TOUCH
+	var/operation_type = XA_EFFECT_TOUCH
 	var/effect_range = 4
 	var/atom/holder
 	var/activated = 0
@@ -14,7 +14,7 @@
 /datum/artifact_effect/New(var/atom/location)
 	..()
 	holder = location
-	operation_type = rand(0, MAX_EFFECT)
+	operation_type = rand(0, XA_MAX_EFFECT)
 	var/triggertype = pick(subtypesof(/datum/artifact_trigger))
 	trigger = new triggertype
 
@@ -39,7 +39,7 @@
 /datum/artifact_effect/Destroy()
 	QDEL_NULL(trigger)
 	. = ..()
-	
+
 /datum/artifact_effect/proc/ToggleActivate(var/reveal_toggle = 1)
 	if(activated)
 		activated = 0
@@ -64,9 +64,9 @@
 
 /datum/artifact_effect/proc/process()
 	if(activated)
-		if(operation_type == EFFECT_AURA)
+		if(operation_type == XA_EFFECT_AURA)
 			DoEffectAura()
-		if(operation_type == EFFECT_PULSE)
+		if(operation_type == XA_EFFECT_PULSE)
 			pulse_tick++
 			if(pulse_tick >= pulse_period)
 				pulse_tick = 0
@@ -75,17 +75,17 @@
 /datum/artifact_effect/proc/getDescription()
 	. = "<b>"
 	switch(origin_type)
-		if(EFFECT_ENERGY)
+		if(XA_EFFECT_ENERGY)
 			. += "Concentrated energy emissions"
-		if(EFFECT_PSIONIC)
+		if(XA_EFFECT_PSIONIC)
 			. += "Intermittent psionic wavefront"
-		if(EFFECT_ELECTRO)
+		if(XA_EFFECT_ELECTRO)
 			. += "Electromagnetic energy"
-		if(EFFECT_PARTICLE)
+		if(XA_EFFECT_PARTICLE)
 			. += "High frequency particles"
-		if(EFFECT_ORGANIC)
+		if(XA_EFFECT_ORGANIC)
 			. += "Organically reactive exotic particles"
-		if(EFFECT_SYNTH)
+		if(XA_EFFECT_SYNTH)
 			. += "Atomic synthesis"
 		else
 			. += "Low level energy emissions"
@@ -93,11 +93,11 @@
 	. += "</b> have been detected <b>"
 
 	switch(operation_type)
-		if(EFFECT_TOUCH)
+		if(XA_EFFECT_TOUCH)
 			. += "interspersed throughout substructure and shell."
-		if(EFFECT_AURA)
+		if(XA_EFFECT_AURA)
 			. += "emitting in an ambient energy field."
-		if(EFFECT_PULSE)
+		if(XA_EFFECT_PULSE)
 			. += "emitting in periodic bursts."
 		else
 			. += "emitting in an unknown way."

@@ -18,7 +18,7 @@
 	var/procname = null
 	var/atom/movable/target = null
 	var/check_flags = 0
-	var/active = 0
+	var/active = FALSE
 	var/obj/screen/action_button/button = null
 	var/button_icon = 'icons/obj/action_buttons/actions.dmi'
 	var/button_icon_state = "default"
@@ -34,6 +34,12 @@
 /datum/action/Destroy()
 	if(owner)
 		Remove(owner)
+	QDEL_NULL(button)
+	if(target)
+		var/obj/item/target_item = target
+		if(istype(target_item) && target_item.action == src)
+			target_item.action = null
+		target = null
 	return ..()
 
 /datum/action/proc/SetTarget(var/atom/Target)
@@ -78,7 +84,7 @@
 				Deactivate()
 		if(AB_GENERIC)
 			if(target && procname)
-				call(target,procname)(usr)
+				call(target,procname)(owner)
 	return
 
 /datum/action/proc/Activate()

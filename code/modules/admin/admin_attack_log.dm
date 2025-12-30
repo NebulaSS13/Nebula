@@ -43,7 +43,7 @@
 	var/intent = "(INTENT: N/A)"
 	var/target_zone = "(ZONE_SEL: N/A)"
 	if(attacker)
-		intent = "(INTENT: [uppertext(attacker.a_intent)])"
+		intent = "(INTENT: [uppertext(attacker.get_intent().name)])"
 		if (attacker.get_target_zone())
 			target_zone = "(ZONE_SEL: [uppertext(attacker.get_target_zone())])"
 		if(victim)

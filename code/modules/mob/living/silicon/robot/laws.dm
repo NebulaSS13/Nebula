@@ -42,8 +42,11 @@
 	var/datum/ai_laws/master = connected_ai && lawupdate ? connected_ai.laws : null
 	if (master)
 		master.sync(src)
-	..()
-	return
+	. = ..()
+	// if we aren't malfunctioning and we have a law 0, it's presumably shared
+	// if we are malfunctioning and we don't have a law 0, we don't need to worry about this
+	if(connected_ai && is_malfunctioning() && has_zeroth_law())
+		to_chat(src, SPAN_BOLD("Remember, your AI does NOT share or know about your law 0."))
 
 /mob/living/silicon/robot/proc/robot_checklaws()
 	set category = "Silicon Commands"

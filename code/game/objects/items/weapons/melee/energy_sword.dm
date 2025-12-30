@@ -20,9 +20,6 @@
 	if(!lighting_color)
 		lighting_color = blade_color
 	. = ..()
-
-/obj/item/energy_blade/sword/Initialize()
-	. = ..()
 	set_extension(src, /datum/extension/demolisher/energy)
 
 /obj/item/energy_blade/sword/is_special_cutting_tool(var/high_power)

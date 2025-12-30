@@ -1,13 +1,17 @@
 /obj/machinery/giga_drill
 	name = "alien drill"
 	desc = "A giant, alien drill mounted on long treads."
-	icon = 'icons/obj/mining.dmi'
+	icon = 'icons/obj/machines/gigadrill.dmi'
 	icon_state = "gigadrill"
+	density = TRUE
+	layer = ABOVE_OBJ_LAYER		//to go over ores
+	matter = list(
+		/decl/material/solid/metal/plasteel/ocp = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT
+	)
 	var/active = 0
 	var/drill_time = 10
 	var/turf/drilling_turf
-	density = TRUE
-	layer = ABOVE_OBJ_LAYER		//to go over ores
 
 /obj/machinery/giga_drill/physical_attack_hand(mob/user)
 	if(active)
@@ -35,4 +39,4 @@
 				anchored = FALSE
 
 /obj/machinery/giga_drill/get_artifact_scan_data()
-	return "Automated mining drill - structure composed of titanium-carbide alloy, with tip and drill lines edged in a complex lattice of diamond."
+	return "Automated mining drill - structure composed of osmium-carbide alloy, with tip and drill lines edged in a complex lattice of diamond."

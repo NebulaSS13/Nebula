@@ -250,8 +250,8 @@
 
 	return TRUE
 
-/obj/machinery/door/proc/handle_repair(obj/item/I, mob/user)
-	if(istype(I, /obj/item/stack/material) && I.get_material_type() == src.get_material_type())
+/obj/machinery/door/proc/handle_repair(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/stack/material) && used_item.get_material_type() == src.get_material_type())
 		if(reason_broken & MACHINE_BROKEN_GENERIC)
 			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
 			return TRUE
@@ -267,7 +267,7 @@
 		var/amount_needed = (current_max_health - current_health) / DOOR_REPAIR_AMOUNT
 		amount_needed = ceil(amount_needed)
 
-		var/obj/item/stack/stack = I
+		var/obj/item/stack/stack = used_item
 		var/transfer
 		if (repairing)
 			transfer = stack.transfer_to(repairing, amount_needed - repairing.amount)
@@ -285,12 +285,12 @@
 
 		return TRUE
 
-	if(repairing && IS_WELDER(I))
+	if(repairing && IS_WELDER(used_item))
 		if(!density)
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
 			return TRUE
 
-		var/obj/item/weldingtool/welder = I
+		var/obj/item/weldingtool/welder = used_item
 		if(welder.weld(0,user))
 			to_chat(user, "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
@@ -302,15 +302,15 @@
 				repairing = null
 		return TRUE
 
-	if(repairing && IS_CROWBAR(I))
+	if(repairing && IS_CROWBAR(used_item))
 		to_chat(user, "<span class='notice'>You remove \the [repairing].</span>")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		repairing.dropInto(user.loc)
 		repairing = null
 		return TRUE
 
-/obj/machinery/door/attackby(obj/item/I, mob/user)
-	. = handle_repair(I, user)
+/obj/machinery/door/attackby(obj/item/used_item, mob/user)
+	. = handle_repair(used_item, user)
 	if(.)
 		return
 	return ..()
@@ -324,7 +324,7 @@
 		return 1
 
 /obj/machinery/door/bash(obj/item/weapon, mob/user)
-	if(isliving(user) && user.a_intent != I_HURT)
+	if(isliving(user) && !user.check_intent(I_FLAG_HARM))
 		return FALSE
 	if(!weapon.user_can_attack_with(user))
 		return FALSE
@@ -334,7 +334,7 @@
 		return FALSE
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
-	var/force = weapon.get_attack_force(user)
+	var/force = weapon.expend_attack_force(user)
 	if(force < min_force)
 		user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [weapon] with no visible effect.</span>")
 	else
@@ -376,24 +376,24 @@
 		return 0
 	. = round((1 - current_health/current_max_health) * damage)
 
-/obj/machinery/door/examine(mob/user)
+/obj/machinery/door/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(current_health <= 0)
-		to_chat(user, "\The [src] is broken!")
+		. += SPAN_DANGER("\The [src] is broken!")
 	else
 		var/current_max_health = get_max_health()
 		if(current_health < current_max_health / 4)
-			to_chat(user, "\The [src] looks like it's about to break!")
+			. += SPAN_DANGER("\The [src] looks like it's about to break!")
 		else if(current_health < current_max_health / 2)
-			to_chat(user, "\The [src] looks seriously damaged!")
+			. += SPAN_DANGER("\The [src] looks seriously damaged!")
 		else if(current_health < current_max_health * 3/4)
-			to_chat(user, "\The [src] shows signs of damage!")
+			. += SPAN_WARNING("\The [src] shows signs of damage!")
 		else if(current_health < current_max_health && get_dist(src, user) <= 1)
-			to_chat(user, "\The [src] has some minor scuffing.")
+			. += SPAN_WARNING("\The [src] has some minor scuffing.")
 
 	var/mob/living/human/H = user
 	if (emagged && istype(H) && (H.skill_check(SKILL_COMPUTER, SKILL_ADEPT) || H.skill_check(SKILL_ELECTRICAL, SKILL_ADEPT)))
-		to_chat(user, SPAN_WARNING("\The [src]'s control panel looks fried."))
+		. += SPAN_WARNING("\The [src]'s control panel looks fried.")
 
 /obj/machinery/door/set_broken(new_state, cause)
 	. = ..()
@@ -536,17 +536,17 @@
 		if( istype(T, /turf/wall))
 			success = 1
 			if(propagate)
-				for(var/turf/wall/W in RANGE_TURFS(T, 1))
-					W.wall_connections = null
-					W.other_connections = null
-					W.queue_icon_update()
+				for(var/turf/wall/wall in RANGE_TURFS(T, 1))
+					wall.wall_connections = null
+					wall.other_connections = null
+					wall.queue_icon_update()
 
 		else if(istype(T, /turf/unsimulated/wall))
 			success = 1
 		else
-			for(var/obj/O in T)
+			for(var/obj/blend_obj in T)
 				for(var/blend_type in get_blend_objects())
-					if( istype(O, blend_type))
+					if( istype(blend_obj, blend_type))
 						success = 1
 
 					if(success)

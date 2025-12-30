@@ -2,7 +2,6 @@
 /datum/map_template/planetoid/random/exoplanet
 	name                  = "random exoplanet"
 	abstract_type         = /datum/map_template/planetoid/random/exoplanet
-	template_parent_type  = /datum/map_template/planetoid/random/exoplanet
 	template_categories   = list(MAP_TEMPLATE_CATEGORY_EXOPLANET)
 	template_category         = MAP_TEMPLATE_CATEGORY_EXOPLANET_SITE
 	tallness              = 1

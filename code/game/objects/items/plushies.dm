@@ -15,15 +15,15 @@
 	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
-	if(user.a_intent == I_HELP)
+	if(user.check_intent(I_FLAG_HELP))
 		user.visible_message(
 			SPAN_NOTICE("<b>\The [user]</b> hugs \the [src]!"),
 			SPAN_NOTICE("You hug \the [src]!"))
-	else if (user.a_intent == I_HURT)
+	else if (user.check_intent(I_FLAG_HARM))
 		user.visible_message(
 			SPAN_WARNING("<b>\The [user]</b> punches \the [src]!"),
 			SPAN_WARNING("You punch \the [src]!"))
-	else if (user.a_intent == I_GRAB)
+	else if (user.check_intent(I_FLAG_GRAB))
 		user.visible_message(
 			SPAN_WARNING("<b>\The [user]</b> attempts to strangle \the [src]!"),
 			SPAN_WARNING("You attempt to strangle \the [src]!"))
@@ -75,15 +75,15 @@
 	var/phrase_vary = TRUE
 
 /obj/item/toy/plushie/attack_self(mob/user)
-	if(user.a_intent == I_HELP)
+	if(user.check_intent(I_FLAG_HELP))
 		user.visible_message(
 			SPAN_NOTICE("<b>\The [user]</b> hugs \the [src]!"),
 			SPAN_NOTICE("You hug \the [src]!"))
-	else if (user.a_intent == I_HURT)
+	else if (user.check_intent(I_FLAG_HARM))
 		user.visible_message(
 			SPAN_WARNING("<b>\The [user]</b> punches \the [src]!"),
 			SPAN_WARNING("You punch \the [src]!"))
-	else if (user.a_intent == I_GRAB)
+	else if (user.check_intent(I_FLAG_GRAB))
 		user.visible_message(
 			SPAN_WARNING("<b>\The [user]</b> attempts to strangle \the [src]!"),
 			SPAN_WARNING("You attempt to strangle \the [src]!"))

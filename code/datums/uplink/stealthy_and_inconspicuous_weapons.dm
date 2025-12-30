@@ -17,7 +17,7 @@
 
 /datum/uplink_item/item/stealthy_weapons/concealed_cane
 	name = "Concealed Cane Sword"
-	desc = "A cane used by a true gentlemen, especially ones with sharp intentions."
+	desc = "A cane used by a true gentleman, especially ones with sharp intentions."
 	item_cost = 8
 	path = /obj/item/cane/fancy/sword
 

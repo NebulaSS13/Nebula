@@ -15,3 +15,11 @@
 	output_attempt = _output_on
 	if(_fully_charged)
 		charge = capacity
+
+// Pre-installed and pre-charged SMES hidden from the station, for use in submaps.
+/obj/machinery/power/smes/buildable/preset/hidden
+	_fully_charged = TRUE
+	_input_on = TRUE
+	_input_maxed = TRUE
+	_output_maxed = TRUE
+	RCon = FALSE

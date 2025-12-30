@@ -7,7 +7,7 @@
 	var/obj/effect/shuttle_landmark/waypoint_station  //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
 	var/obj/effect/shuttle_landmark/waypoint_offsite  //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
 
-	category = /datum/shuttle/autodock/ferry
+	abstract_type = /datum/shuttle/autodock/ferry
 
 /datum/shuttle/autodock/ferry/New(map_hash)
 	if(map_hash)
@@ -63,4 +63,4 @@
 		if(initial(waypoint_offsite))
 			return "The offsite waypoint landmark (tag: [initial(waypoint_offsite)]) was not found."
 		else
-			return "A offsite waypoint was not properly set."
+			return "An offsite waypoint was not properly set."

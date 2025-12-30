@@ -31,7 +31,15 @@
 	old_tag = "home_system"
 	uid = "heritage_cat_homeworld"
 	item_type = /decl/background_detail/location
+	// When citizenship decls are better implemented, remove BACKGROUND_FLAG_CITIZENSHIP from flags.
 	background_flags = BACKGROUND_FLAG_CITIZENSHIP | BACKGROUND_FLAG_LOCATION | BACKGROUND_FLAG_HOMEWORLD | BACKGROUND_FLAG_RESIDENCE
+
+/decl/background_category/citizenship
+	name = "Citizenship"
+	old_tag = "citizenship"
+	uid = "heritage_cat_citizenship"
+	item_type = /decl/background_detail/citizenship
+	background_flags = BACKGROUND_FLAG_CITIZENSHIP
 
 /decl/background_category/faction
 	name = "Faction"

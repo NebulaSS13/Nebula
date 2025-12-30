@@ -19,7 +19,7 @@
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	parts_amount = 2
-	parts_type = /obj/item/stack/material/strut
+	parts_type = /obj/item/stack/material/rods
 	structure_flags = STRUCTURE_FLAG_SURFACE
 	can_support_butchery = TRUE
 
@@ -37,11 +37,8 @@
 	/// Whether items can be placed on this table via clicking.
 	var/can_place_items = TRUE
 
-/obj/structure/table/clear_connections()
-	connections = null
-
-/obj/structure/table/set_connections(dirs, other_dirs)
-	connections = dirs_to_corner_states(dirs)
+/obj/structure/table/should_have_alpha_mask()
+	return simulated && isturf(loc) && !(locate(/obj/structure/table) in get_step(loc, SOUTH))
 
 /obj/structure/table/Initialize()
 	if(ispath(additional_reinf_material, /decl/material))
@@ -64,6 +61,29 @@
 	else
 		update_connections(TRUE)
 		update_icon()
+
+/obj/structure/table/Destroy()
+	var/turf/oldloc = loc
+	additional_reinf_material = null
+	. = ..()
+	if(istype(oldloc))
+		for(var/obj/structure/table/table in range(oldloc, 1))
+			if(QDELETED(table))
+				continue
+			table.update_connections(FALSE)
+			table.update_icon()
+
+/obj/structure/table/adjust_required_attack_dexterity(mob/user, required_dexterity)
+	// Let people put stuff on tables without necessarily being able to use a gun or such.
+	if(user?.check_intent(I_FLAG_HELP))
+		return DEXTERITY_HOLD_ITEM
+	return ..()
+
+/obj/structure/table/clear_connections()
+	connections = null
+
+/obj/structure/table/set_connections(dirs, other_dirs)
+	connections = dirs_to_corner_states(dirs)
 
 /obj/structure/table/get_material_health_modifier()
 	. = additional_reinf_material ? 0.75 : 0.5
@@ -101,17 +121,6 @@
 	..()
 	felted = FALSE
 	additional_reinf_material = null
-
-/obj/structure/table/Destroy()
-	var/turf/oldloc = loc
-	additional_reinf_material = null
-	. = ..()
-	if(istype(oldloc))
-		for(var/obj/structure/table/table in range(oldloc, 1))
-			if(QDELETED(table))
-				continue
-			table.update_connections(FALSE)
-			table.update_icon()
 
 /obj/structure/table/can_dismantle(mob/user)
 	. = ..()
@@ -169,9 +178,9 @@
 		update_materials()
 	return TRUE
 
-/obj/structure/table/attackby(obj/item/W, mob/user, click_params)
+/obj/structure/table/attackby(obj/item/used_item, mob/user, click_params)
 
-	if(user.a_intent == I_HURT && W.is_special_cutting_tool())
+	if(user.check_intent(I_FLAG_HARM) && used_item.is_special_cutting_tool())
 		spark_at(src.loc, amount=5)
 		playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		user.visible_message(SPAN_DANGER("\The [src] was sliced apart by \the [user]!"))
@@ -179,14 +188,14 @@
 		return TRUE
 
 	if(!reinf_material)
-		if(istype(W, /obj/item/stack/material/rods))
-			return reinforce_table(W, user)
-		if(istype(W, /obj/item/stack/material))
-			return finish_table(W, user)
+		if(istype(used_item, /obj/item/stack/material/rods))
+			return reinforce_table(used_item, user)
+		if(istype(used_item, /obj/item/stack/material))
+			return finish_table(used_item, user)
 		return ..()
 
-	if(!felted && istype(W, /obj/item/stack/tile/carpet))
-		var/obj/item/stack/tile/carpet/C = W
+	if(!felted && istype(used_item, /obj/item/stack/tile/carpet))
+		var/obj/item/stack/tile/carpet/C = used_item
 		if(C.use(1))
 			user.visible_message(
 				SPAN_NOTICE("\The [user] adds \the [C] to \the [src]."),
@@ -198,15 +207,15 @@
 		return TRUE
 
 	//playing cards
-	if(istype(W, /obj/item/hand))
-		var/obj/item/hand/H = W
+	if(istype(used_item, /obj/item/hand))
+		var/obj/item/hand/H = used_item
 		if(H.cards && length(H.cards) == 1)
 			user.visible_message("\The [user] plays \the [H.cards[1]].")
 			return TRUE
 
-	if(istype(W, /obj/item/deck)) //playing cards
-		if(user.a_intent == I_GRAB)
-			var/obj/item/deck/D = W
+	if(istype(used_item, /obj/item/deck)) //playing cards
+		if(user.check_intent(I_FLAG_GRAB))
+			var/obj/item/deck/D = used_item
 			if(!length(D.cards))
 				to_chat(user, "There are no cards in the deck.")
 			else
@@ -216,8 +225,8 @@
 	. = ..()
 
 	// Finally we can put the object onto the table.
-	if(!. && can_place_items && !isrobot(user) && W.loc == user && user.try_unequip(W, src.loc))
-		auto_align(W, click_params)
+	if(!. && can_place_items && !isrobot(user) && used_item.loc == user && user.try_unequip(used_item, src.loc))
+		auto_align(used_item, click_params)
 		return TRUE
 
 /obj/structure/table/proc/reinforce_table(obj/item/stack/material/S, mob/user)
@@ -266,10 +275,10 @@
 
 	return TRUE
 
-/obj/structure/table/examine(mob/user, distance)
+/obj/structure/table/get_examine_hints(mob/user, distance, infix, suffix)
 	. = ..()
 	if(felted || reinf_material || additional_reinf_material)
-		to_chat(user, SPAN_SUBTLE("The cladding must be removed with a screwdriver prior to deconstructing \the [src]."))
+		LAZYADD(., SPAN_SUBTLE("The cladding must be removed with a screwdriver prior to deconstructing \the [src]."))
 
 /obj/structure/table/update_material_name(override_name)
 	if(reinf_material)
@@ -382,26 +391,26 @@
 		return
 
 	var/list/blocked_dirs = list()
-	for(var/obj/structure/window/W in get_turf(src))
-		if(W.is_fulltile())
+	for(var/obj/structure/window/used_item in get_turf(src))
+		if(used_item.is_fulltile())
 			connections = list("0", "0", "0", "0")
 			return
-		blocked_dirs |= W.dir
+		blocked_dirs |= used_item.dir
 
 	for(var/D in list(NORTH, SOUTH, EAST, WEST) - blocked_dirs)
 		var/turf/T = get_step(src, D)
-		for(var/obj/structure/window/W in T)
-			if(W.is_fulltile() || W.dir == global.reverse_dir[D])
+		for(var/obj/structure/window/used_item in T)
+			if(used_item.is_fulltile() || used_item.dir == global.reverse_dir[D])
 				blocked_dirs |= D
 				break
 			else
-				if(W.dir != D) // it's off to the side
-					blocked_dirs |= W.dir|D // blocks the diagonal
+				if(used_item.dir != D) // it's off to the side
+					blocked_dirs |= used_item.dir|D // blocks the diagonal
 
 	for(var/D in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST) - blocked_dirs)
 		var/turf/T = get_step(src, D)
-		for(var/obj/structure/window/W in T)
-			if(W.is_fulltile() || (W.dir & global.reverse_dir[D]))
+		for(var/obj/structure/window/used_item in T)
+			if(used_item.is_fulltile() || (used_item.dir & global.reverse_dir[D]))
 				blocked_dirs |= D
 				break
 
@@ -718,66 +727,128 @@
 	reinf_material = /decl/material/solid/organic/wood/holographic
 
 //wood wood wood
-/obj/structure/table/woodentable
+/obj/structure/table/wood
 	icon_state = "solid_preview"
 	color = WOOD_COLOR_GENERIC
-	material = /decl/material/solid/organic/wood
-	reinf_material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
+	reinf_material = /decl/material/solid/organic/wood/oak
 	parts_type = /obj/item/stack/material/plank
 
-/obj/structure/table/woodentable/mahogany
+/obj/structure/table/wood/mahogany
 	color = WOOD_COLOR_RICH
 	material =       /decl/material/solid/organic/wood/mahogany
 	reinf_material = /decl/material/solid/organic/wood/mahogany
 
-/obj/structure/table/woodentable/maple
+/obj/structure/table/wood/maple
 	color = WOOD_COLOR_PALE
 	material =       /decl/material/solid/organic/wood/maple
 	reinf_material = /decl/material/solid/organic/wood/maple
 
-/obj/structure/table/woodentable/ebony
+/obj/structure/table/wood/ebony
 	color = WOOD_COLOR_BLACK
 	material =       /decl/material/solid/organic/wood/ebony
 	reinf_material = /decl/material/solid/organic/wood/ebony
 
-/obj/structure/table/woodentable/walnut
+/obj/structure/table/wood/walnut
 	color = WOOD_COLOR_CHOCOLATE
 	material =       /decl/material/solid/organic/wood/walnut
 	reinf_material = /decl/material/solid/organic/wood/walnut
 
-/obj/structure/table/woodentable_reinforced
+/obj/structure/table/wood/reinforced
 	icon_state = "reinf_preview"
 	color = WOOD_COLOR_GENERIC
-	material =                  /decl/material/solid/organic/wood
-	reinf_material =            /decl/material/solid/organic/wood
-	additional_reinf_material = /decl/material/solid/organic/wood
+	material =                  /decl/material/solid/organic/wood/oak
+	reinf_material =            /decl/material/solid/organic/wood/oak
+	additional_reinf_material = /decl/material/solid/organic/wood/oak
 
-/obj/structure/table/woodentable_reinforced/walnut
+/obj/structure/table/wood/reinforced/walnut
 	color = WOOD_COLOR_CHOCOLATE
 	material =                  /decl/material/solid/organic/wood/walnut
 	reinf_material =            /decl/material/solid/organic/wood/walnut
 	additional_reinf_material = /decl/material/solid/organic/wood/walnut
 
-/obj/structure/table/woodentable_reinforced/walnut/maple
+/obj/structure/table/wood/reinforced/walnut/maple
 	additional_reinf_material = /decl/material/solid/organic/wood/maple
 
-/obj/structure/table/woodentable_reinforced/mahogany
+/obj/structure/table/wood/reinforced/mahogany
 	color = WOOD_COLOR_RICH
 	material =                  /decl/material/solid/organic/wood/mahogany
 	reinf_material =            /decl/material/solid/organic/wood/mahogany
 	additional_reinf_material = /decl/material/solid/organic/wood/mahogany
 
-/obj/structure/table/woodentable_reinforced/mahogany/walnut
+/obj/structure/table/wood/reinforced/mahogany/walnut
 	additional_reinf_material = /decl/material/solid/organic/wood/walnut
 
-/obj/structure/table/woodentable_reinforced/ebony
+/obj/structure/table/wood/reinforced/ebony
 	color = WOOD_COLOR_BLACK
 	material =                  /decl/material/solid/organic/wood/ebony
 	reinf_material =            /decl/material/solid/organic/wood/ebony
 	additional_reinf_material = /decl/material/solid/organic/wood/ebony
 
-/obj/structure/table/woodentable_reinforced/ebony/walnut
+/obj/structure/table/wood/reinforced/ebony/walnut
 	additional_reinf_material = /decl/material/solid/organic/wood/walnut
+
+// Wood laminate tables; chipboard basically.
+// Smooth texture like plastic etc for a less rustic vibe on spacer maps.
+/obj/structure/table/laminate
+	icon_state = "solid_preview"
+	color = WOOD_COLOR_GENERIC
+	material = /decl/material/solid/organic/wood/chipboard
+	reinf_material = /decl/material/solid/organic/wood/chipboard
+
+/obj/structure/table/laminate/mahogany
+	color = WOOD_COLOR_RICH
+	material =       /decl/material/solid/organic/wood/chipboard/mahogany
+	reinf_material = /decl/material/solid/organic/wood/chipboard/mahogany
+
+/obj/structure/table/laminate/maple
+	color = WOOD_COLOR_PALE
+	material =       /decl/material/solid/organic/wood/chipboard/maple
+	reinf_material = /decl/material/solid/organic/wood/chipboard/maple
+
+/obj/structure/table/laminate/ebony
+	color = WOOD_COLOR_BLACK
+	material =       /decl/material/solid/organic/wood/chipboard/ebony
+	reinf_material = /decl/material/solid/organic/wood/chipboard/ebony
+
+/obj/structure/table/laminate/walnut
+	color = WOOD_COLOR_CHOCOLATE
+	material =       /decl/material/solid/organic/wood/chipboard/walnut
+	reinf_material = /decl/material/solid/organic/wood/chipboard/walnut
+
+/obj/structure/table/laminate/reinforced
+	icon_state = "reinf_preview"
+	color = WOOD_COLOR_GENERIC
+	material =                  /decl/material/solid/organic/wood/chipboard
+	reinf_material =            /decl/material/solid/organic/wood/chipboard
+	additional_reinf_material = /decl/material/solid/organic/wood/chipboard
+
+/obj/structure/table/laminate/reinforced/walnut
+	color = WOOD_COLOR_CHOCOLATE
+	material =                  /decl/material/solid/organic/wood/chipboard/walnut
+	reinf_material =            /decl/material/solid/organic/wood/chipboard/walnut
+	additional_reinf_material = /decl/material/solid/organic/wood/chipboard/walnut
+
+/obj/structure/table/laminate/reinforced/walnut/maple
+	additional_reinf_material = /decl/material/solid/organic/wood/chipboard/maple
+
+/obj/structure/table/laminate/reinforced/mahogany
+	color = WOOD_COLOR_RICH
+	material =                  /decl/material/solid/organic/wood/chipboard/mahogany
+	reinf_material =            /decl/material/solid/organic/wood/chipboard/mahogany
+	additional_reinf_material = /decl/material/solid/organic/wood/chipboard/mahogany
+
+/obj/structure/table/laminate/reinforced/mahogany/walnut
+	additional_reinf_material = /decl/material/solid/organic/wood/chipboard/walnut
+
+/obj/structure/table/laminate/reinforced/ebony
+	color = WOOD_COLOR_BLACK
+	material =                  /decl/material/solid/organic/wood/chipboard/ebony
+	reinf_material =            /decl/material/solid/organic/wood/chipboard/ebony
+	additional_reinf_material = /decl/material/solid/organic/wood/chipboard/ebony
+
+/obj/structure/table/laminate/reinforced/ebony/walnut
+	additional_reinf_material = /decl/material/solid/organic/wood/chipboard/walnut
 
 // A table that doesn't smooth, intended for bedside tables or otherwise standalone tables.
 // TODO: make table legs use material and tabletop use reinf_material
@@ -831,6 +902,7 @@
 	reinf_material = /decl/material/solid/organic/wood/walnut
 	storage = /datum/storage/structure/desk
 	bound_width = 64
+	appearance_flags = /obj/structure/table::appearance_flags & ~TILE_BOUND
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	can_flip = FALSE
 	top_surface_noun = "desktop"
@@ -906,6 +978,7 @@
 	icon = 'icons/obj/structures/dresser.dmi'
 	icon_state = "dresser"
 	bound_width = 32
+	appearance_flags = /obj/structure/table::appearance_flags
 	top_surface_noun = "surface"
 	tabletop_height = 15
 	mob_offset = 18

@@ -63,7 +63,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = @'{"materials":1,"biotech":1}'
-	attack_verb = list("burnt")
+	attack_verb = "burnt"
 
 /obj/item/cautery/Initialize()
 	. = ..()
@@ -84,7 +84,7 @@
 	_base_attack_force = 15
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"materials":1,"biotech":1}'
-	attack_verb = list("drilled")
+	attack_verb = "drilled"
 
 /obj/item/surgicaldrill/Initialize()
 	. = ..()
@@ -99,8 +99,8 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	throw_speed = 3
@@ -160,8 +160,8 @@
 /obj/item/incision_manager
 	name = "incision management system"
 	desc = "A true extension of the surgeon's body, this marvel combines several medical tools into one modular package."
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	atom_damage_type =  BURN
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel_manager_on"
@@ -202,8 +202,8 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	pickup_sound = 'sound/foley/pickup2.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
 	_base_attack_force = 15

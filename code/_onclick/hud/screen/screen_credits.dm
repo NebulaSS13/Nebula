@@ -18,14 +18,16 @@
 	animate(src, transform = M, time = CREDIT_ROLL_SPEED)
 	target = M
 	animate(src, alpha = 255, time = CREDIT_EASE_DURATION, flags = ANIMATION_PARALLEL)
-	spawn(CREDIT_ROLL_SPEED - CREDIT_EASE_DURATION)
-		if(!QDELETED(src))
-			animate(src, alpha = 0, transform = target, time = CREDIT_EASE_DURATION)
-			sleep(CREDIT_EASE_DURATION)
-			qdel(src)
+	addtimer(CALLBACK(src, PROC_REF(ease_out)), CREDIT_ROLL_SPEED - CREDIT_EASE_DURATION)
 	var/mob/owner = owner_ref?.resolve()
 	if(istype(owner) && owner.client)
 		owner.client.screen += src
+
+/obj/screen/credit/proc/ease_out()
+	if(QDELETED(src))
+		return
+	animate(src, alpha = 0, transform = target, time = CREDIT_EASE_DURATION)
+	QDEL_IN_CLIENT_TIME(src, CREDIT_EASE_DURATION)
 
 /obj/screen/credit/Destroy()
 	var/client/P = parent

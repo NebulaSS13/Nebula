@@ -6,8 +6,8 @@
 	..()
 	if(!spawned_gas)
 		spawned_gas = pick(decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
-	operation_type = pick(EFFECT_TOUCH, EFFECT_AURA)
-	origin_type = EFFECT_SYNTH
+	operation_type = pick((XA_EFFECT_TOUCH), (XA_EFFECT_AURA))
+	origin_type = XA_EFFECT_SYNTH
 
 /datum/artifact_effect/gas/DoEffectTouch(var/mob/user)
 	if(holder)

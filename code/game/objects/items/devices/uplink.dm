@@ -50,13 +50,11 @@
 	update_nano_data()
 
 	src.uplink_owner = owner
-	world_uplinks += src
 	uses = telecrystals
 	START_PROCESSING(SSobj, src)
 
 /obj/item/uplink/Destroy()
 	uplink_owner = null
-	world_uplinks -= src
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
@@ -152,6 +150,7 @@
 
 // The purchasing code.
 /obj/item/uplink/OnTopic(user, href_list)
+	var/decl/uplink/uplink = IMPLIED_DECL
 	if(href_list["buy_item"])
 		var/datum/uplink_item/UI = (locate(href_list["buy_item"]) in uplink.items)
 		UI.buy(src, usr)
@@ -175,6 +174,7 @@
 		update_nano_data()
 
 /obj/item/uplink/proc/update_nano_data()
+	var/decl/uplink/uplink = IMPLIED_DECL
 	if(nanoui_menu == 0)
 		var/categories[0]
 		for(var/datum/uplink_category/category in uplink.categories)

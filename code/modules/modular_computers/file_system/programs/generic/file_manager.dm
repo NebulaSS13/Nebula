@@ -375,7 +375,7 @@
 		if(!(F.get_file_perms(accesses, user) & OS_READ_ACCESS))
 			file_error = "You do not have read access to this file."
 			return
-		if(!computer.print_paper(digitalPencode2html(F.stored_data), F.filename))
+		if(!computer.print_paper(F.generate_file_data(), F.filename, F.papertype, F.metadata))
 			file_error = "Hardware error: Unable to print the file."
 			return TOPIC_REFRESH
 

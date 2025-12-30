@@ -5,15 +5,13 @@
 	w_class = ITEM_SIZE_SMALL
 	_base_attack_force = 2.0
 	det_time = null
+	chem_volume = 1000
+
 	var/stage = 0
 	var/path = 0
 	var/obj/item/assembly_holder/detonator = null
 	var/list/beakers = new/list()
 	var/list/allowed_containers = list(/obj/item/chems/glass/beaker, /obj/item/chems/glass/bottle)
-
-/obj/item/grenade/chem_grenade/Initialize()
-	. = ..()
-	create_reagents(1000)
 
 /obj/item/grenade/chem_grenade/Destroy()
 	QDEL_NULL(detonator)
@@ -48,9 +46,9 @@
 	if(path == 1)
 		add_overlay("[icon_state]-locked")
 
-/obj/item/grenade/chem_grenade/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/assembly_holder) && (!stage || stage==1) && path != 2)
-		var/obj/item/assembly_holder/det = W
+/obj/item/grenade/chem_grenade/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item,/obj/item/assembly_holder) && (!stage || stage==1) && path != 2)
+		var/obj/item/assembly_holder/det = used_item
 		if(istype(det.a_left,det.a_right.type) || (!isigniter(det.a_left) && !isigniter(det.a_right)))
 			to_chat(user, "<span class='warning'>Assembly must contain one igniter.</span>")
 			return TRUE
@@ -60,8 +58,8 @@
 		if(!user.try_unequip(det, src))
 			return TRUE
 		path = 1
-		log_and_message_admins("has attached \a [W] to \the [src].")
-		to_chat(user, "<span class='notice'>You add [W] to the metal casing.</span>")
+		log_and_message_admins("has attached \a [used_item] to \the [src].")
+		to_chat(user, "<span class='notice'>You add [used_item] to the metal casing.</span>")
 		playsound(src.loc, 'sound/items/Screwdriver2.ogg', 25, -3)
 		detonator = det
 		if(istimer(detonator.a_left))
@@ -73,7 +71,7 @@
 		SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
 		stage = 1
 		. = TRUE
-	else if(IS_SCREWDRIVER(W) && path != 2)
+	else if(IS_SCREWDRIVER(used_item) && path != 2)
 		if(stage == 1)
 			path = 1
 			if(beakers.len)
@@ -97,22 +95,22 @@
 				stage = 1
 				active = FALSE
 				. = TRUE
-	else if(is_type_in_list(W, allowed_containers) && (!stage || stage==1) && path != 2)
+	else if(is_type_in_list(used_item, allowed_containers) && (!stage || stage==1) && path != 2)
 		path = 1
 		if(beakers.len == 2)
 			to_chat(user, "<span class='warning'>The grenade can not hold more containers.</span>")
 			return TRUE
 		else
-			if(W.reagents.total_volume)
-				if(!user.try_unequip(W, src))
+			if(REAGENT_TOTAL_VOLUME(used_item.reagents))
+				if(!user.try_unequip(used_item, src))
 					return TRUE
-				to_chat(user, "<span class='notice'>You add \the [W] to the assembly.</span>")
-				beakers += W
+				to_chat(user, "<span class='notice'>You add \the [used_item] to the assembly.</span>")
+				beakers += used_item
 				stage = 1
 				SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
 				. = TRUE
 			else
-				to_chat(user, "<span class='warning'>\The [W] is empty.</span>")
+				to_chat(user, "<span class='warning'>\The [used_item] is empty.</span>")
 				return TRUE
 	if(.)
 		update_icon()
@@ -140,7 +138,7 @@
 
 	var/has_reagents = 0
 	for(var/obj/item/chems/glass/G in beakers)
-		if(G.reagents.total_volume)
+		if(REAGENT_TOTAL_VOLUME(G.reagents))
 			has_reagents = TRUE
 			break
 
@@ -164,13 +162,13 @@
 		M.toggle_throw_mode(FALSE)
 
 	for(var/obj/item/chems/glass/G in beakers)
-		G.reagents.trans_to_obj(src, G.reagents.total_volume)
+		G.reagents.trans_to_obj(src, REAGENT_TOTAL_VOLUME(G.reagents))
 
 	anchored = TRUE
 	set_invisibility(INVISIBILITY_MAXIMUM)
 
 	// Visual effect to show the grenade going off.
-	if(reagents.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		var/datum/effect/effect/system/steam_spread/steam = new
 		steam.set_up(10, 0, get_turf(src))
 		steam.attach(src)
@@ -179,20 +177,21 @@
  	// Allow time for reactions to proc.
 	var/max_delays = 5
 	var/delays = 0
-	while(reagents.total_volume && delays <= max_delays)
+	while(REAGENT_TOTAL_VOLUME(reagents) && delays <= max_delays)
 		delays++
 		sleep(SSmaterials.wait)
 
 	// The reactions didn't use up all reagents, dump them as a fluid.
-	if(reagents.total_volume)
-		reagents.trans_to(loc, reagents.total_volume)
+	var/reagent_volume = REAGENT_TOTAL_VOLUME(reagents)
+	if(reagent_volume)
+		reagents.trans_to(loc, reagent_volume)
 
 	qdel(src)
 
-/obj/item/grenade/chem_grenade/examine(mob/user)
+/obj/item/grenade/chem_grenade/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(detonator)
-		to_chat(user, "With attached [detonator.name]")
+		. += "It has \a [detonator] attached."
 
 /obj/item/grenade/chem_grenade/large
 	name = "large chem grenade"

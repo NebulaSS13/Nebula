@@ -185,7 +185,7 @@
 
 /obj/machinery/turbine/OnTopic(user, href_list)
 	if(href_list["close"])
-		close_browser(usr, "window=turbine")
+		close_browser(user, "window=turbine")
 		return TOPIC_HANDLED
 
 	if(href_list["str"])
@@ -244,9 +244,9 @@
 
 
 
-/obj/machinery/computer/turbine_computer/OnTopic(user, href_list)
+/obj/machinery/computer/turbine_computer/OnTopic(mob/user, href_list)
 	if( href_list["view"] )
-		usr.client.eye = src.compressor
+		user.client.eye = src.compressor
 		. = TOPIC_HANDLED
 	else if( href_list["str"] )
 		src.compressor.starter = !src.compressor.starter

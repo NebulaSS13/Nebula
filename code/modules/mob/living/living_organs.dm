@@ -1,15 +1,3 @@
-/mob/living/get_organs()
-	for(var/organ in get_external_organs())
-		LAZYADD(., organ)
-	for(var/organ in get_internal_organs())
-		LAZYADD(., organ)
-
-/mob/living/proc/get_external_organs()
-	return
-
-/mob/living/proc/get_internal_organs()
-	return
-
 /mob/living/proc/get_organs_by_categories(var/category)
 	return
 
@@ -23,10 +11,10 @@
 /mob/living/proc/has_internal_organs()
 	return LAZYLEN(get_internal_organs()) > 0
 
-/mob/living/get_contained_matter()
+/mob/living/get_contained_matter(include_reagents = TRUE)
 	. = ..()
 	for(var/obj/item/organ in get_organs())
-		. = MERGE_ASSOCS_WITH_NUM_VALUES(., organ.get_contained_matter())
+		. = MERGE_ASSOCS_WITH_NUM_VALUES(., organ.get_contained_matter(include_reagents))
 
 //Can be called when we want to add an organ in a detached state or an attached state.
 /mob/living/proc/add_organ(var/obj/item/organ/O, var/obj/item/organ/external/affected = null, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE, var/skip_health_update = FALSE)

@@ -13,8 +13,6 @@
 	_base_attack_force = 3 // bonk
 	throw_speed        = 1
 	throw_range        = 5
-	sharp              = 0
-	edge               = 0
 	armor_penetration  = 0
 
 	material = /decl/material/solid/metal/steel
@@ -41,9 +39,9 @@
 
 	var/inactive_sound =      'sound/weapons/saberoff.ogg'
 
-	attack_verb =                   list("hit")
+	attack_verb =                   "hit"
 	var/list/active_attack_verb	=   list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	var/list/inactive_attack_verb = list("hit")
+	var/list/inactive_attack_verb = "hit"
 
 /obj/item/energy_blade/get_max_weapon_force()
 	return _active_base_attack_force
@@ -84,18 +82,20 @@
 		return _active_base_attack_force
 	return _base_attack_force
 
+/obj/item/energy_blade/pick_attack_verb()
+	return DEFAULTPICK(active ? active_attack_verb : inactive_attack_verb, ..())
+
 /obj/item/energy_blade/proc/toggle_active(var/mob/user)
 
 	active = !active
 	if(active)
 
 		obj_flags |= OBJ_FLAG_NO_STORAGE
-		sharp =             active_sharp
-		edge =              active_edge
+		set_sharp(active_sharp)
+		set_edge(active_edge)
 		base_parry_chance = active_parry_chance
 		armor_penetration = active_armour_pen
 		hitsound =          active_hitsound
-		attack_verb =       active_attack_verb
 
 		w_class = max(w_class, ITEM_SIZE_NORMAL)
 		slot_flags &= ~SLOT_POCKET
@@ -105,12 +105,11 @@
 	else
 
 		obj_flags &= ~OBJ_FLAG_NO_STORAGE
-		sharp =             initial(sharp)
-		edge =              initial(edge)
+		set_sharp(initial(sharp))
+		set_edge(initial(edge))
 		base_parry_chance = initial(base_parry_chance)
 		armor_penetration = initial(armor_penetration)
 		hitsound =          initial(hitsound)
-		attack_verb =       inactive_attack_verb
 
 		w_class = initial(w_class)
 		slot_flags = initial(slot_flags)

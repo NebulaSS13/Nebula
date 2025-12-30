@@ -112,13 +112,13 @@
 	if(amount_rocks > 0)
 		pass_geodata_to(new /obj/item/stack/material/ore(src, amount_rocks, material?.type))
 
-/turf/wall/natural/proc/destroy_artifacts(var/obj/item/W, var/newDepth)
+/turf/wall/natural/proc/destroy_artifacts(var/obj/item/used_item, var/newDepth)
 	if(!length(finds))
 		return
 	var/datum/find/F = finds[1]
 	if(newDepth > F.excavation_required) // Digging too deep can break the item. At least you won't summon a Balrog (probably)
-		if(W)
-			. = ". <b>[pick("There is a crunching noise","[W] collides with some different rock","Part of the rock face crumbles away","Something breaks under [W]")]</b>"
+		if(used_item)
+			. = ". <b>[pick("There is a crunching noise","[used_item] collides with some different rock","Part of the rock face crumbles away","Something breaks under [used_item]")]</b>"
 		if(prob(10))
 			return
 		if(prob(25))

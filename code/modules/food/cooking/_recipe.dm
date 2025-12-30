@@ -121,11 +121,11 @@ var/global/list/_cooking_recipe_cache = list()
 	return TRUE
 
 /decl/recipe/proc/check_reagents(datum/reagents/avail_reagents)
-	SHOULD_BE_PURE(TRUE)
-	if(length(avail_reagents?.reagent_volumes) < length(reagents))
+	// SHOULD_BE_PURE(TRUE) Due to use of GET_DECL() in REAGENT_VOLUME, this cannot be pure.
+	if(length(REAGENT_VOLUMES(avail_reagents)) < length(reagents))
 		return FALSE
-	for(var/rtype in reagents)
-		if(REAGENT_VOLUME(avail_reagents, rtype) < reagents[rtype])
+	for(var/reagent in reagents)
+		if(REAGENT_VOLUME(avail_reagents, reagent) < reagents[reagent])
 			return FALSE
 	return TRUE
 
@@ -185,8 +185,8 @@ var/global/list/_cooking_recipe_cache = list()
 
 	if(!istype(container) || QDELETED(container) || !container.simulated)
 		CRASH("Recipe trying to create a result with null or invalid container: [container || "NULL"], [container?.simulated || "NULL"]")
-	if(!container.reagents?.maximum_volume)
-		CRASH("Recipe trying to create a result in a container with null or zero capacity reagent holder: [container.reagents?.maximum_volume || "NULL"]")
+	if(!REAGENT_MAXIMUM_VOLUME(container.reagents))
+		CRASH("Recipe trying to create a result in a container with null or zero capacity reagent holder: [istype(reagents) ? REAGENT_MAXIMUM_VOLUME(container.reagents) : "NULL"]")
 
 	if(ispath(result, /atom/movable))
 		return create_result_atom(container, used_ingredients)
@@ -194,7 +194,7 @@ var/global/list/_cooking_recipe_cache = list()
 	if(ispath(result, /decl/material))
 		var/created_volume = result_quantity
 		for(var/obj/item/ingredient in (used_ingredients[RECIPE_COMPONENT_ITEMS]|used_ingredients[RECIPE_COMPONENT_FRUIT]))
-			created_volume += ingredient.reagents?.total_volume
+			created_volume += REAGENT_TOTAL_VOLUME(ingredient.reagents)
 
 		container.reagents?.add_reagent(result, created_volume, get_result_data(container, used_ingredients))
 		return null
@@ -294,14 +294,14 @@ var/global/list/_cooking_recipe_cache = list()
 	for(var/atom/item as anything in used_ingredients[RECIPE_COMPONENT_ITEMS])
 		if(item.reagents)
 			if(buffer)
-				item.reagents.trans_to_holder(buffer, item.reagents.total_volume)
+				item.reagents.trans_to_holder(buffer, REAGENT_TOTAL_VOLUME(item.reagents))
 			else
 				item.reagents.clear_reagents()
 		item.physically_destroyed()
 	for(var/atom/fruit as anything in used_ingredients[RECIPE_COMPONENT_FRUIT])
 		if(fruit.reagents)
 			if(buffer)
-				fruit.reagents.trans_to_holder(buffer, fruit.reagents.total_volume)
+				fruit.reagents.trans_to_holder(buffer, REAGENT_TOTAL_VOLUME(fruit.reagents))
 			else
 				fruit.reagents.clear_reagents()
 		fruit.physically_destroyed()
@@ -337,43 +337,43 @@ var/global/list/_cooking_recipe_cache = list()
 		holder = temporary_holder
 		if(length(.) > 1)
 			for(var/atom/movable/result_obj in .)
-				result_obj.reagents.trans_to_holder(holder, result_obj.reagents.total_volume)
+				result_obj.reagents.trans_to_holder(holder, REAGENT_TOTAL_VOLUME(result_obj.reagents))
 
 	switch(reagent_mix)
 
 		if(REAGENT_SUM)
 			//Sum is easy, just shove the entire buffer into the result
-			buffer.trans_to_holder(holder, buffer.total_volume)
+			buffer.trans_to_holder(holder, REAGENT_TOTAL_VOLUME(buffer))
 
 		if(REAGENT_MAX)
 			//We want the highest of each.
 			//Iterate through everything in buffer. If the target has less than the buffer, then top it up
-			for (var/reagent_type in buffer.reagent_volumes)
-				var/rvol = REAGENT_VOLUME(holder, reagent_type)
-				var/bvol = REAGENT_VOLUME(buffer, reagent_type)
+			for (var/decl/material/reagent as anything in REAGENT_VOLUMES(buffer))
+				var/rvol = REAGENT_VOLUME(holder, reagent)
+				var/bvol = REAGENT_VOLUME(buffer, reagent)
 				if (rvol < bvol)
 					//Transfer the difference
-					buffer.trans_type_to_holder(holder, reagent_type, bvol-rvol)
+					buffer.trans_type_to_holder(holder, reagent, bvol-rvol)
 
 		if(REAGENT_MIN)
 			//Min is slightly more complex. We want the result to have the lowest from each side
 			//But zero will not count. Where a side has zero its ignored and the side with a nonzero value is used
-			for (var/reagent_type in buffer.reagent_volumes)
-				var/rvol = REAGENT_VOLUME(holder, reagent_type)
-				var/bvol = REAGENT_VOLUME(buffer, reagent_type)
+			for (var/decl/material/reagent as anything in REAGENT_VOLUMES(buffer))
+				var/rvol = REAGENT_VOLUME(holder, reagent)
+				var/bvol = REAGENT_VOLUME(buffer, reagent)
 				if (rvol == 0) //If the target has zero of this reagent
-					buffer.trans_type_to_holder(holder, reagent_type, bvol)
+					buffer.trans_type_to_holder(holder, reagent, bvol)
 					//Then transfer all of ours
 
 				else if (rvol > bvol)
 					//if the target has more than ours
 					//Remove the difference
-					holder.remove_reagent(reagent_type, rvol-bvol)
+					holder.remove_reagent(reagent, rvol-bvol)
 
 	if(length(.) > 1)
 		// If we're here, then holder is a buffer containing the total reagents
 		// for all the results. So now we redistribute it among them.
-		var/total = round(holder.total_volume / length(.))
+		var/total = round(REAGENT_TOTAL_VOLUME(holder) / length(.))
 		for(var/atom/result as anything in .)
 			holder.trans_to(result, total)
 

@@ -1,6 +1,6 @@
 /decl/recipe/boiled
 	abstract_type = /decl/recipe/boiled
-	//minimum_temperature = T100C
+	minimum_temperature = 80 CELSIUS // increase to /decl/material/liquid/water::boiling_point once microwaves are reworked
 	//cooking_heat_type = COOKING_HEAT_INDIRECT
 	//cooking_medium_type = /decl/material/liquid/water
 	//cooking_medium_amount = 20

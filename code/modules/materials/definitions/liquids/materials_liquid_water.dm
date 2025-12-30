@@ -31,12 +31,35 @@
 	)
 	temperature_burn_milestone_material = /decl/material/liquid/water
 	can_boil_to_gas = TRUE
+	coated_adjective = "wet"
+
+/decl/material/liquid/water/build_coated_name(datum/reagents/coating, list/accumulator)
+	var/coating_volumes = REAGENT_VOLUMES(coating)
+	if(length(coating_volumes) > 1)
+		accumulator.Insert(1, "dilute") // dilute always comes first! also this is intentionally not colored in component color mode
+		return // don't insert 'wet'
+	..()
+
+// make salty water named saltwater
+/decl/material/liquid/water/get_reagent_name(datum/reagents/holder, phase = MAT_PHASE_LIQUID)
+	if(phase == MAT_PHASE_LIQUID && holder?.get_primary_reagent_decl() == src)
+		if(REAGENT_VOLUME(holder, /decl/material/solid/sodiumchloride))
+			return "saltwater"
+	return ..() // just use the default handling
+
+// make pure water named fresh water
+/decl/material/liquid/water/get_reagent_name(datum/reagents/holder, phase = MAT_PHASE_LIQUID)
+	. = ..()
+	// length == 1 implies primary reagent, so checking both is redundant
+	if(phase == MAT_PHASE_LIQUID && length(REAGENT_VOLUMES(holder)) == 1)
+		return "fresh [.]"
+	return
 
 /decl/material/liquid/water/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(ishuman(M))
-		var/list/data = REAGENT_DATA(holder, type)
-		if(data?["holy"])
+		var/list/data = REAGENT_DATA(holder, src)
+		if(data?[DATA_WATER_HOLINESS])
 			affect_holy(M, removed, holder)
 
 /decl/material/liquid/water/proc/affect_holy(mob/living/M, removed, datum/reagents/holder)
@@ -67,15 +90,15 @@
 		touching_turf.assume_air(lowertemp)
 		qdel(hotspot)
 
-	var/volume = REAGENT_VOLUME(holder, type)
+	var/affect_volume = REAGENT_VOLUME(holder, src)
 	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
-		var/removed_heat = clamp(volume * WATER_LATENT_HEAT, 0, -environment.get_thermal_energy_change(min_temperature))
+		var/removed_heat = clamp(affect_volume * WATER_LATENT_HEAT, 0, -environment.get_thermal_energy_change(min_temperature))
 		environment.add_thermal_energy(-removed_heat)
 		if (prob(5) && environment && environment.temperature > T100C)
 			touching_turf.visible_message(SPAN_NOTICE("The water sizzles as it lands on \the [touching_turf]!"))
 
-	var/list/data = REAGENT_DATA(holder, type)
-	if(LAZYACCESS(data, "holy"))
+	var/list/data = REAGENT_DATA(holder, src)
+	if(LAZYACCESS(data, DATA_WATER_HOLINESS))
 		touching_turf.turf_flags |= TURF_FLAG_HOLY
 
 /decl/material/liquid/water/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
@@ -88,11 +111,11 @@
 /decl/material/liquid/water/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	..()
 	if(istype(M))
-		var/needed = M.fire_stacks * 10
+		var/needed = M.get_fire_intensity() * 10
 		if(amount > needed)
-			M.fire_stacks = 0
-			M.ExtinguishMob()
+			M.set_fire_intensity(0)
+			M.extinguish_fire()
 			holder.remove_reagent(type, needed)
 		else
-			M.adjust_fire_stacks(-(amount / 10))
+			M.adjust_fire_intensity(-(amount / 10))
 			holder.remove_reagent(type, amount)

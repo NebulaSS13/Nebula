@@ -19,6 +19,8 @@
 	var/requires_slot_flags
 	var/requires_organ_tag
 	var/quick_equip_priority = 0 // Higher priority means it will be checked first. If null, will not be considered for quick equip.
+	/// What depth of fluid is necessary for an item in this slot to be considered submerged?
+	var/fluid_height = FLUID_SHALLOW // we're treating FLUID_SHALLOW as waist level, basically
 
 	var/mob_overlay_layer
 	var/alt_mob_overlay_layer
@@ -169,6 +171,4 @@
 
 /datum/inventory_slot/proc/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
-		if(user == owner)
-			return "You are wearing [_holding.get_examine_line()]."
 		return "[pronouns.He] [pronouns.is] wearing [_holding.get_examine_line()]."

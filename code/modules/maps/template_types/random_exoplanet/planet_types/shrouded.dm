@@ -4,7 +4,7 @@
 
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded
 	name          = "shrouded exoplanet"
-	desc          = "An exoplanet shrouded in a perpetual storm of bizzare, light absorbing particles."
+	desc          = "An exoplanet shrouded in a perpetual storm of bizarre, light-absorbing particles."
 	color         = "#783ca4"
 
 /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded/get_atmosphere_color()
@@ -86,7 +86,6 @@
 	planetoid_data_type        = /datum/planetoid_data/random/shrouded
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/shrouded
 	template_tags_blacklist    = TEMPLATE_TAG_HABITAT
-	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/shrouded
 	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/shrouded,

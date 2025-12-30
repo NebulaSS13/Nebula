@@ -108,7 +108,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/paint/proc/apply_paint(var/atom/painting, var/datum/reagents/holder, var/threshold = 1)
-	if(istype(painting) && istype(holder) && REAGENT_VOLUME(holder, type) >= threshold)
+	if(istype(painting) && istype(holder) && REAGENT_VOLUME(holder, src) >= threshold)
 		var/keep_alpha = painting.alpha
 		painting.set_color(holder.get_color())
 		painting.set_alpha(keep_alpha)

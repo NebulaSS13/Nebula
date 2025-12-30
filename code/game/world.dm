@@ -1,6 +1,6 @@
 GLOBAL_PROTECTED_UNTYPED(game_id, null)
 
-/hook/global_init/proc/generate_game_id()
+/proc/generate_game_id()
 	if(!isnull(global.game_id))
 		return
 
@@ -70,6 +70,10 @@ GLOBAL_PROTECTED_UNTYPED(game_id, null)
 
 	return match
 
+// Get the URL used to connect to the server.
+/proc/get_world_url()
+	return "byond://[get_config_value(/decl/config/text/server) || get_config_value(/decl/config/text/serverurl) || "[world.address]:[world.port]"]"
+
 /world/New()
 	//set window title
 
@@ -83,10 +87,23 @@ GLOBAL_PROTECTED_UNTYPED(game_id, null)
 	if(byond_version < REQUIRED_DM_VERSION)
 		to_world_log("Your server's BYOND version does not meet the minimum DM version for this server. Please update BYOND.")
 
-	callHook("startup")
-	//Emergency Fix
-	load_mods()
-	//end-emergency fix
+	// Initialize the global vars decl, which marks vars as protected.
+	GET_DECL(/decl/global_vars)
+	// And the offset used for in-game time
+	global.roundstart_hour = rand(0, 23)
+	initialise_map_list()
+	world.load_mode()
+	world.load_motd()
+	load_admins()
+	world.connect_database()
+	jobban_loadbanfile()
+	LoadBans()
+	update_holiday() //Uncommenting ALLOW_HOLIDAYS in configuration will enable this.
+	try_load_alien_whitelist()
+	investigate_reset()
+	// Precache/build trait trees.
+	for(var/decl/trait/trait in decls_repository.get_decls_of_type_unassociated(/decl/trait))
+		trait.build_references()
 
 	. = ..()
 
@@ -109,7 +126,7 @@ var/global/world_topic_last = world.timeofday
 	throttle[2] = reason
 
 /world/Topic(T, addr, master, key)
-	direct_output(diary, "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]")
+	to_file(diary, "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]")
 
 	if (global.world_topic_last > world.timeofday)
 		global.world_topic_throttle = list() //probably passed midnight
@@ -152,18 +169,24 @@ var/global/_reboot_announced = FALSE
 
 	game_log("World rebooted at [time_stamp()]")
 
-	callHook("reboot")
+	on_reboot(reason)
 
 	..(reason)
 
+/// If you need to add modular functionality on-reboot, override this instead of /world/Reboot().
+/// It runs directly before the parent call in /world/Reboot().
+/world/proc/on_reboot(reason)
+	return
+
 /world/Del()
 	Master.Shutdown()
-	callHook("shutdown")
+	on_shutdown()
 	return ..()
 
-/hook/startup/proc/loadMode()
-	world.load_mode()
-	return 1
+/// If you need to add modular functionality on-shutdown, override this instead of /world/Del().
+/// It runs directly before the parent call in /world/Del().
+/world/proc/on_shutdown()
+	return
 
 /world/proc/load_mode()
 	if(!fexists("data/mode.txt"))
@@ -178,39 +201,10 @@ var/global/_reboot_announced = FALSE
 /world/proc/save_mode(var/the_mode)
 	var/F = file("data/mode.txt")
 	fdel(F)
-	direct_output(F, the_mode)
-
-/hook/startup/proc/loadMOTD()
-	world.load_motd()
-	return 1
+	to_file(F, the_mode)
 
 /world/proc/load_motd()
 	join_motd = safe_file2text("config/motd.txt", FALSE)
-
-/hook/startup/proc/loadMods()
-	world.load_mods()
-	return 1
-
-/world/proc/load_mods()
-	if(get_config_value(/decl/config/toggle/on/admin_legacy_system))
-		var/text = safe_file2text("config/moderators.txt", FALSE)
-		if (!text)
-			error("Failed to load config/mods.txt")
-		else
-			var/list/lines = splittext(text, "\n")
-			for(var/line in lines)
-				if (!line)
-					continue
-
-				if (copytext(line, 1, 2) == ";")
-					continue
-
-				var/title = "Moderator"
-				var/rights = admin_ranks[title]
-
-				var/ckey = copytext(line, 1, length(line)+1)
-				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(global.ckey_directory[ckey])
 
 /world/proc/update_status()
 	var/s = "<b>[station_name()]</b>"
@@ -284,12 +278,11 @@ var/global/_reboot_announced = FALSE
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/global/failed_db_connections = 0
-/hook/startup/proc/connectDB()
+/world/proc/connect_database()
 	if(!setup_database_connection())
 		to_world_log("Your server failed to establish a connection with the SQL database.")
 	else
 		to_world_log("SQL database connection established.")
-	return 1
 
 /proc/setup_database_connection()
 

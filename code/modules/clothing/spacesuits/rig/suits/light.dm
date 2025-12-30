@@ -47,7 +47,7 @@
 	icon = 'icons/clothing/rigs/rig_hacker.dmi'
 	req_access = list(access_hacked)
 	airtight = 0
-	seal_delay = 5 //not being vaccum-proof has an upside I guess
+	seal_delay = 5 //not being vacuum-proof has an upside I guess
 
 	helmet = /obj/item/clothing/head/lightrig/hacker
 	chest =  /obj/item/clothing/suit/lightrig/hacker

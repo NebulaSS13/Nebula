@@ -110,13 +110,13 @@
 		return TRUE
 	return FALSE
 
-/obj/item/gun/launcher/bow/attackby(obj/item/W, mob/user)
-	if(can_load_arrow(W))
+/obj/item/gun/launcher/bow/attackby(obj/item/used_item, mob/user)
+	if(can_load_arrow(used_item))
 		if(_loaded)
 			to_chat(user, SPAN_WARNING("\The [src] already has \the [_loaded] ready."))
 		else
-			load_arrow(user, W)
+			load_arrow(user, used_item)
 		return TRUE
-	if(istype(W, /obj/item/bowstring) && try_string(user, W))
+	if(istype(used_item, /obj/item/bowstring) && try_string(user, used_item))
 		return TRUE
 	return ..()

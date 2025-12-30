@@ -275,13 +275,6 @@
 /obj/item/box/anti_photons/WillContain()
 	return list(/obj/item/grenade/anti_photon = 5)
 
-/obj/item/box/supermatters
-	name = "box of supermatter grenades"
-	desc = "A box containing 5 highly experimental supermatter grenades."
-	icon_state = "radbox"
-/obj/item/box/supermatters/WillContain()
-	return list(/obj/item/grenade/supermatter = 5)
-
 /obj/item/box/decompilers
 	name = "box of decompiler grenades"
 	desc = "A box containing 5 experimental decompiler grenades."
@@ -291,7 +284,7 @@
 
 /obj/item/box/trackimp
 	name = "boxed tracking implant kit"
-	desc = "Box full of scum-bag tracking utensils."
+	desc = "Box full of scumbag-tracking utensils."
 	icon_state = "implant"
 /obj/item/box/trackimp/WillContain()
 	return list(/obj/item/implantcase/tracking = 4,
@@ -366,10 +359,17 @@
 
 /obj/item/box/animal_cubes/spiders
 	name = "spiderling cube box"
-	desc = "Drymate brand Instant spiders. WHY WOULD YOU ORDER THIS!?"
+	desc = "Drymate brand spider cubes. WHY WOULD YOU ORDER THIS!?"
 
 /obj/item/box/animal_cubes/spiders/WillContain()
 	return list(/obj/item/food/animal_cube/wrapped/spider = 5)
+
+/obj/item/box/animal_cubes/carp
+	name = "space carp cube box"
+	desc = "Drymate brand carp cubes. Allergen information: May contain traces of pike."
+
+/obj/item/box/animal_cubes/carp/WillContain()
+	return list(/obj/item/food/animal_cube/wrapped/carp = 5)
 
 /obj/item/box/ids
 	name = "box of spare IDs"
@@ -575,7 +575,7 @@
 
 /obj/item/box/armband/engine
 	name = "box of spare engineering armbands"
-	desc = "A box full of engineering armbands. For use in emergencies when provisional engineering peronnel are needed."
+	desc = "A box full of engineering armbands. For use in emergencies when provisional engineering personnel are needed."
 /obj/item/box/armband/engine/WillContain()
 	return list(/obj/item/clothing/armband/engine = 5)
 
@@ -725,7 +725,7 @@
 
 /obj/item/box/parts_pack
 	name = "parts pack"
-	desc = "A densely-stuffed box containing some small eletrical parts."
+	desc = "A densely-stuffed box containing some small electrical parts."
 	icon = 'icons/obj/items/storage/part_pack.dmi'
 	icon_state = "part"
 	w_class = ITEM_SIZE_SMALL

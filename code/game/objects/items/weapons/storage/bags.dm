@@ -58,10 +58,10 @@
 	origin_tech = @'{"exoticmatter":5,"materials":6}'
 	storage = /datum/storage/bag/trash/advanced
 
-/obj/item/bag/trash/advanced/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/backpack/holding) || istype(W, /obj/item/bag/trash/advanced))
+/obj/item/bag/trash/advanced/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/backpack/holding) || istype(used_item, /obj/item/bag/trash/advanced))
 		to_chat(user, "<span class='warning'>The spatial interfaces of the two devices conflict and malfunction.</span>")
-		qdel(W)
+		qdel(used_item)
 		return 1
 	return ..()
 

@@ -8,8 +8,6 @@
 	base_type = /obj/item/stock_parts/network_receiver/network_lock
 
 	var/auto_deny_all								// Set this to TRUE to deny all access attempts if network connection is lost.
-	var/initial_network_id							// The address to the network
-	var/initial_network_key							// network KEY
 	var/selected_parent_group						// Current selected parent_group for access assignment.
 
 	var/list/groups									// List of lists of groups. In order to access the device, users must have membership in at least one
@@ -21,11 +19,6 @@
 
 	var/interact_sounds = list("keyboard", "keystroke")
 	var/interact_sound_volume = 40
-	var/static/legacy_compatibility_mode = TRUE     // Makes legacy access on ids play well with mapped devices with network locks. Override if your server is fully using network-enabled ids or has no mapped access.
-
-/obj/item/stock_parts/network_receiver/network_lock/modify_mapped_vars(map_hash)
-	..()
-	ADJUST_TAG_VAR(initial_network_id, map_hash)
 
 /obj/item/stock_parts/network_receiver/network_lock/emag_act(remaining_charges, mob/user, emag_source)
 	. = ..()
@@ -70,15 +63,15 @@
 		return list("NO_PERMISSIONS_DENY_ALL")
 	return list()
 
-/obj/item/stock_parts/network_receiver/network_lock/examine(mob/user)
+/obj/item/stock_parts/network_receiver/network_lock/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(emagged && user.skill_check_multiple(list(SKILL_FORENSICS = SKILL_EXPERT, SKILL_COMPUTER = SKILL_EXPERT)))
-		to_chat(user, SPAN_WARNING("On close inspection, there is something odd about the interface. You suspect it may have been tampered with."))
+		. += SPAN_WARNING("On closer inspection, there is something odd about the interface. You suspect it may have been tampered with.")
 
-/obj/item/stock_parts/network_receiver/network_lock/attackby(obj/item/W, mob/user)
+/obj/item/stock_parts/network_receiver/network_lock/attackby(obj/item/used_item, mob/user)
 	. = ..()
-	if(istype(W, /obj/item/card/id))
-		if(check_access(W))
+	if(istype(used_item, /obj/item/card/id))
+		if(check_access(used_item))
 			playsound(src, 'sound/machines/ping.ogg', 20, 0)
 		else
 			playsound(src, 'sound/machines/buzz-two.ogg', 20, 0)
@@ -183,7 +176,7 @@
 
 	if(href_list["add_pattern"])
 		if(length(groups) >= MAX_PATTERNS)
-			to_chat(usr, SPAN_WARNING("You cannot add more than [MAX_PATTERNS] patterns to \the [src]!"))
+			to_chat(user, SPAN_WARNING("You cannot add more than [MAX_PATTERNS] patterns to \the [src]!"))
 			return TOPIC_HANDLED
 		LAZYADD(groups, list(list()))
 		return TOPIC_REFRESH

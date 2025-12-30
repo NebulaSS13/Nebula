@@ -45,9 +45,7 @@
 	icon_state = ""
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = MOUSE_OPACITY_NORMAL
-
-	current_health = 10
-	max_health = 100
+	max_health = 10
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
@@ -82,7 +80,7 @@
 	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(start_matured)
 		mature_time = 0
-		current_health = max_health
+		current_health = get_max_health()
 
 	if(seed.get_trait(TRAIT_SPREAD) == 2)
 		mouse_opacity = MOUSE_OPACITY_PRIORITY
@@ -131,7 +129,7 @@
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		if(growth_type in list(GROWTH_VINES,GROWTH_BIOMASS))
 			set_opacity(1)
-		if(islist(seed.chems) && !isnull(seed.chems[/decl/material/solid/organic/wood]))
+		if(seed.get_chemical_amount(/decl/material/solid/organic/wood))
 			set_density(1)
 			set_opacity(1)
 
@@ -197,10 +195,10 @@
 	floor = 1
 	return 1
 
-/obj/effect/vine/attackby(var/obj/item/W, var/mob/user)
+/obj/effect/vine/attackby(var/obj/item/used_item, var/mob/user)
 	START_PROCESSING(SSvines, src)
 
-	if(W.edge && W.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
+	if(used_item.has_edge() && used_item.w_class < ITEM_SIZE_NORMAL && !user.check_intent(I_FLAG_HARM))
 		if(!is_mature())
 			to_chat(user, SPAN_WARNING("\The [src] is not mature enough to yield a sample yet."))
 			return TRUE
@@ -216,11 +214,11 @@
 		return TRUE
 	else
 		. = ..()
-		var/damage = W.get_attack_force(user)
-		if(W.edge)
+		var/damage = used_item.expend_attack_force(user)
+		if(used_item.has_edge())
 			damage *= 2
 		adjust_health(-damage)
-		playsound(get_turf(src), W.hitsound, 100, 1)
+		playsound(get_turf(src), used_item.hitsound, 100, 1)
 
 //handles being overrun by vines - note that attacker_parent may be null in some cases
 /obj/effect/vine/proc/vine_overrun(datum/seed/attacker_seed, obj/effect/vine/attacker_parent)
@@ -275,16 +273,17 @@
 /decl/interaction_handler/vine_chop
 	name = "Chop Down"
 	expected_target_type = /obj/effect/vine
+	examine_desc = "chop $TARGET_THEM$ down"
 
 /decl/interaction_handler/vine_chop/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/effect/vine/vine = target
 	var/obj/item/holding = user.get_active_held_item()
-	if(!istype(holding) || !holding.edge || holding.w_class < ITEM_SIZE_NORMAL)
+	if(!istype(holding) || !holding.has_edge() || holding.w_class < ITEM_SIZE_NORMAL)
 		to_chat(user, SPAN_WARNING("You need a larger or sharper object for this task!"))
 		return
 	user.visible_message(SPAN_NOTICE("\The [user] starts chopping down \the [vine]."))
 	playsound(get_turf(vine), holding.hitsound, 100, 1)
-	var/chop_time = (vine.current_health/holding.get_attack_force(user)) * 0.5 SECONDS
+	var/chop_time = (vine.current_health/holding.expend_attack_force(user)) * 0.5 SECONDS
 	if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
 		chop_time *= 0.5
 	if(do_after(user, chop_time, vine, TRUE))

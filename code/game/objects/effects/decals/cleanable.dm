@@ -14,7 +14,7 @@
 	var/cleanable_scent
 	var/scent_type = /datum/extension/scent/custom
 	var/scent_intensity = /decl/scent_intensity/normal
-	var/scent_descriptor = SCENT_DESC_SMELL
+	var/scent_descriptor = "smell"
 	var/scent_range = 2
 
 /obj/effect/decal/cleanable/Initialize(var/ml, var/_age)
@@ -72,7 +72,7 @@
 
 /obj/effect/decal/cleanable/fluid_act(var/datum/reagents/fluid)
 	SHOULD_CALL_PARENT(FALSE)
-	if(fluid?.total_liquid_volume && !QDELETED(src))
-		if(reagents?.total_volume)
-			reagents.trans_to(fluid, reagents.total_volume)
+	if(REAGENT_TOTAL_LIQUID_VOLUME(fluid) && !QDELETED(src))
+		if(REAGENT_TOTAL_VOLUME(reagents))
+			reagents.trans_to(fluid, REAGENT_TOTAL_VOLUME(reagents))
 		qdel(src)

@@ -6,7 +6,7 @@
 	sharp              = TRUE
 	edge               = TRUE
 	w_class            = ITEM_SIZE_HUGE
-	handle_material    = /decl/material/solid/organic/wood
+	handle_material    = /decl/material/solid/organic/wood/oak
 	_base_attack_force = 15
 
 /obj/item/tool/pickaxe/Initialize(ml, material_key, _handle_material, _binding_material, override_tool_qualities, override_tool_properties)
@@ -31,7 +31,7 @@
 
 // Using these mainly for debugging.
 /obj/item/tool/pickaxe/wood
-	material           = /decl/material/solid/organic/wood
+	material           = /decl/material/solid/organic/wood/oak
 
 /obj/item/tool/pickaxe/stone
 	material           = /decl/material/solid/stone/flint
@@ -74,4 +74,8 @@
 
 /obj/item/tool/pickaxe/iron
 	material           = /decl/material/solid/metal/iron
+	handle_material    = /decl/material/solid/organic/wood/ebony
+
+/obj/item/tool/pickaxe/bronze
+	material           = /decl/material/solid/metal/bronze
 	handle_material    = /decl/material/solid/organic/wood/ebony

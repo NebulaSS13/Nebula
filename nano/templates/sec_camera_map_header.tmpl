@@ -18,7 +18,7 @@
 	</div>
 	<div class='itemContentWide'>
 	{{for config.mapZLevels :zValue:zIndex}}
-		{{:helper.link(zValue, 'close', {'mapZLevel' : zValue}, null, config.mapZLevel == zValue ? 'selected' : null)}}
+		{{:helper.link(zValue, 'close', {'switchMapZLevel' : zValue}, null, config.mapZLevel == zValue ? 'selected' : null)}}
 	{{/for}}
 	</div>
 </div>

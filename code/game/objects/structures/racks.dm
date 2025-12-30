@@ -10,7 +10,7 @@
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	throwpass = TRUE
 	parts_amount = 2
-	parts_type = /obj/item/stack/material/strut
+	parts_type = /obj/item/stack/material/rods
 	density = TRUE
 	anchored = TRUE
 	structure_flags = STRUCTURE_FLAG_SURFACE
@@ -29,10 +29,16 @@
 			I.pixel_y = max(3-i*3, -3) + 1
 			I.pixel_z = 0
 
-/obj/structure/rack/attackby(obj/item/O, mob/user, click_params)
+/obj/structure/rack/adjust_required_attack_dexterity(mob/user, required_dexterity)
+	// Let people put stuff on tables without necessarily being able to use a gun or such.
+	if(user?.check_intent(I_FLAG_HELP))
+		return DEXTERITY_HOLD_ITEM
+	return ..()
+
+/obj/structure/rack/attackby(obj/item/used_item, mob/user, click_params)
 	. = ..()
-	if(!. && !isrobot(user) && O.loc == user && user.try_unequip(O, loc))
-		auto_align(O, click_params)
+	if(!. && !isrobot(user) && used_item.loc == user && user.try_unequip(used_item, loc))
+		auto_align(used_item, click_params)
 		return TRUE
 
 /obj/structure/rack/holorack/dismantle_structure(mob/user)

@@ -6,7 +6,7 @@
 	abstract_type    = /decl/sprite_accessory/marking/kobaloi
 	icon             = 'mods/content/fantasy/icons/kobaloi/markings.dmi'
 	color_blend      = ICON_MULTIPLY
-	species_allowed  = list(SPECIES_KOBALOI)
+	species_allowed  = list(/decl/species/kobaloi::uid)
 	body_parts       = list(BP_HEAD)
 	mask_to_bodypart = FALSE
 

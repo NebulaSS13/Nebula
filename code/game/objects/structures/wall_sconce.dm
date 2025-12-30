@@ -58,6 +58,10 @@
 	QDEL_NULL(light_source)
 	return ..()
 
+/obj/structure/wall_sconce/ignite_fire()
+	. = ..()
+	update_icon()
+
 /obj/structure/wall_sconce/physically_destroyed()
 	if(light_source)
 		light_source.dropInto(loc)
@@ -82,22 +86,22 @@
 
 	return ..()
 
-/obj/structure/wall_sconce/attackby(obj/item/W, mob/user)
+/obj/structure/wall_sconce/attackby(obj/item/used_item, mob/user)
 
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		return ..()
 
-	if(IS_HAMMER(W) || IS_WRENCH(W))
+	if(IS_HAMMER(used_item) || IS_WRENCH(used_item))
 		dismantle_structure(user)
 		return TRUE
 
-	if(W.isflamesource() && light_source && !light_source.lit)
-		light_source.attackby(W, user)
+	if(used_item.isflamesource() && light_source && !light_source.lit)
+		light_source.attackby(used_item, user)
 		update_icon()
 		return TRUE
 
-	if(istype(W, /obj/item/flame))
-		var/obj/item/flame/flame = W
+	if(istype(used_item, /obj/item/flame))
+		var/obj/item/flame/flame = used_item
 		if(flame.sconce_can_hold)
 
 			if(light_source)
@@ -111,8 +115,8 @@
 			return TRUE
 
 	// Refilling
-	if(light_source && istype(W, /obj/item/chems))
-		var/obj/item/chems/chem_source = W
+	if(light_source && istype(used_item, /obj/item/chems))
+		var/obj/item/chems/chem_source = used_item
 		if(chem_source.standard_pour_into(user, light_source))
 			return TRUE
 

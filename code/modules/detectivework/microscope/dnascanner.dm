@@ -1,7 +1,7 @@
 //DNA machine
 /obj/machinery/forensic/dnascanner
 	name = "DNA analyzer"
-	desc = "A high tech machine that is designed to read DNA samples properly."
+	desc = "A high-tech machine that is designed to read DNA samples properly."
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "dna_open"
 	anchored = TRUE

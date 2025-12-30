@@ -35,7 +35,7 @@
 		AltClickOn(A)
 		return
 	if(modifiers["shift"])
-		examinate(A)
+		examine_verb(A)
 		return
 	A.attack_ghost(src)
 
@@ -44,7 +44,7 @@
 	if(!istype(user))
 		return
 	if(user.client && user.client.inquisitive_ghost)
-		user.examinate(src)
+		user.examine_verb(src)
 		return
 	if(user.client?.holder || user.antagHUD)
 		storage?.show_to(user)
@@ -61,15 +61,3 @@
 /obj/effect/portal/attack_ghost(mob/user)
 	if(target)
 		user.forceMove(get_turf(target))
-
-/obj/machinery/gateway/centerstation/attack_ghost(mob/user)
-	if(awaygate)
-		user.forceMove(awaygate.loc)
-	else
-		to_chat(user, "[src] has no destination.")
-
-/obj/machinery/gateway/centeraway/attack_ghost(mob/user)
-	if(stationgate)
-		user.forceMove(stationgate.loc)
-	else
-		to_chat(user, "[src] has no destination.")

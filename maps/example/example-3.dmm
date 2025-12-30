@@ -228,7 +228,7 @@
 /area/example/third)
 "MO" = (
 /obj/abstract/level_data_spawner/admin_level{
-	name = "Example Third Deck";
+	name = "Example Third Deck"
 	},
 /turf/space,
 /area/space)
@@ -260,7 +260,7 @@
 /turf/floor,
 /area/example/third)
 "QH" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 21
 	},

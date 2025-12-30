@@ -23,8 +23,9 @@
 
 		// This means critters can hoover up beakers as a kind of impromptu chem disposal
 		// technique, so long as they're okay with the reagents reacting inside them.
-		if(prop.reagents?.total_volume)
-			prop.reagents.trans_to_mob(src, prop.reagents.total_volume, CHEM_INGEST)
+		var/prop_reagents = REAGENT_TOTAL_VOLUME(prop.reagents)
+		if(prop_reagents)
+			prop.reagents.trans_to_mob(src, prop_reagents, CHEM_INGEST)
 
 		// It also means they can do the old school cartoon schtick of eating
 		// an entire sandwich and spitting up an empty plate. Ptooie.

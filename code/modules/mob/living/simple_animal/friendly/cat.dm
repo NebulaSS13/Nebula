@@ -13,7 +13,11 @@
 	return ..()
 
 /datum/mob_controller/passive/hunter/cat/consume_prey(mob/living/prey)
+	if(prey.stat != DEAD)
+		return
 	next_hunt = world.time + rand(1 SECONDS, 10 SECONDS)
+	set_target(null)
+	resume_wandering()
 
 /datum/mob_controller/passive/hunter/cat/can_hunt(mob/living/victim)
 	return istype(victim, /mob/living/simple_animal/passive/mouse) && !victim.stat
@@ -54,14 +58,11 @@
 	maxbodytemp = 323	//Above 50 Degrees Celsius
 	holder_type = /obj/item/holder
 	mob_size = MOB_SIZE_SMALL
-	possession_candidate = 1
+	possession_candidate = TRUE
 	pass_flags = PASS_FLAG_TABLE
 	butchery_data = /decl/butchery_data/animal/cat
 	base_animal_type = /mob/living/simple_animal/passive/cat
 	ai = /datum/mob_controller/passive/hunter/cat
-	var/turns_since_scan = 0
-	var/mob/living/simple_animal/passive/mouse/movement_target
-	var/mob/flee_target
 
 /mob/living/simple_animal/passive/cat/get_bodytype()
 	return GET_DECL(/decl/bodytype/quadruped/animal/cat)
@@ -70,12 +71,12 @@
 	uid = "bodytype_animal_cat"
 
 /decl/bodytype/quadruped/animal/cat/Initialize()
-	equip_adjust = list(
-		slot_head_str = list(
+	_equip_adjust = list(
+		(slot_head_str) = list(
 			"[NORTH]" = list( 1,  -9),
 			"[SOUTH]" = list( 1, -12),
-			"[EAST]" =  list( 7, -10),
-			"[WEST]" =  list(-7, -10)
+			"[EAST]"  = list( 7, -10),
+			"[WEST]"  = list(-7, -10)
 		)
 	)
 	. = ..()
@@ -210,19 +211,19 @@
 	uid = "bodytype_animal_kitten"
 
 /decl/bodytype/quadruped/animal/kitten/Initialize()
-	equip_adjust = list(
-		slot_head_str = list(
+	_equip_adjust = list(
+		(slot_head_str) = list(
 			"[NORTH]" = list( 1, -14),
 			"[SOUTH]" = list( 1, -14),
-			"[EAST]" =  list( 5, -14),
-			"[WEST]" =  list(-5, -14)
+			"[EAST]"  = list( 5, -14),
+			"[WEST]"  = list(-5, -14)
 		)
 	)
 	. = ..()
 
 /mob/living/simple_animal/passive/cat/kitten/Initialize()
 	. = ..()
-	gender = pick(MALE, FEMALE)
+	set_gender(pick(MALE, FEMALE))
 
 /mob/living/simple_animal/passive/cat/fluff/ran
 	name = "Runtime"

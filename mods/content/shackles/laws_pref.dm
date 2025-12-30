@@ -23,9 +23,9 @@
 	pref.laws = R.read("laws")
 	pref.is_shackled = R.read("is_shackled")
 
-/datum/category_item/player_setup_item/law_pref/save_character(datum/pref_record_writer/W)
-	W.write("laws", pref.laws)
-	W.write("is_shackled", pref.is_shackled)
+/datum/category_item/player_setup_item/law_pref/save_character(datum/pref_record_writer/writer)
+	writer.write("laws", pref.laws)
+	writer.write("is_shackled", pref.is_shackled)
 
 /datum/category_item/player_setup_item/law_pref/sanitize_character()
 	if(!istype(pref.laws))

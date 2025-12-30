@@ -1,7 +1,3 @@
-/hook/roundstart/proc/roundstart_multi_spawn()
-	generate_multi_spawn_items()
-	return TRUE
-
 /proc/generate_multi_spawn_items()
 	for(var/id in multi_point_spawns)
 		var/list/spawn_points = multi_point_spawns[id]
@@ -23,8 +19,3 @@
 	name = "Multi Point - Captain's Spare"
 	id = "Captain's spare id"
 	item_path = /obj/item/card/id/captains_spare
-
-/obj/random_multi/single_item/hand_tele
-	name = "Multi Point - Hand Teleporter"
-	id = "Hand teleporter"
-	item_path = /obj/prefab/hand_teleporter

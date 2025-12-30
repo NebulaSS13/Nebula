@@ -61,6 +61,3 @@
 
 /datum/fabricator_recipe/protolathe/rig/cooling_unit
 	path = /obj/item/rig_module/cooling_unit
-
-/datum/fabricator_recipe/protolathe/rig/integrated_printer
-	path = /obj/item/integrated_circuit_printer

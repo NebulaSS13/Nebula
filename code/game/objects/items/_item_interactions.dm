@@ -34,6 +34,7 @@
 	name = "Open Storage"
 	expected_target_type = /atom
 	incapacitation_flags = INCAPACITATION_DISRUPTED
+	examine_desc = "open $TARGET_THEIR$ storage"
 
 /decl/interaction_handler/storage_open/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..() && (ishuman(user) || isrobot(user) || issmall(user)) && target?.storage

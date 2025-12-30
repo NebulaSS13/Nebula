@@ -7,7 +7,7 @@
 	var/fuel_consumption = 0 //Amount of moles of gas consumed per trip; If zero, then shuttle is magic and does not need fuel
 	var/list/obj/structure/fuel_port/fuel_ports //the fuel ports of the shuttle (but usually just one)
 
-	category = /datum/shuttle/autodock/overmap
+	abstract_type = /datum/shuttle/autodock/overmap
 	var/skill_needed = SKILL_BASIC
 	var/landing_skill_needed = SKILL_EXPERT
 	var/operator_skill = SKILL_MIN

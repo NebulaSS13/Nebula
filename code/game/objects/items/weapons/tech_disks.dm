@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 /obj/item/disk
 	name                   = "data disk"
-	desc                   = "A standard 3.5 inch floppy disk for storing computer files... What's even an inch?"
+	desc                   = "A standard 3.5-inch floppy disk for storing computer files... What's even an inch?"
 	icon                   = 'icons/obj/items/device/diskette.dmi'
 	icon_state             = ICON_STATE_WORLD
 	w_class                = ITEM_SIZE_TINY
@@ -122,7 +122,7 @@
 	var/datum/fabricator_recipe/blueprint
 
 /obj/item/disk/design_disk/attack_hand(mob/user)
-	if(user.a_intent != I_HURT || !blueprint || !user.check_dexterity(DEXTERITY_KEYBOARDS))
+	if(!user.check_intent(I_FLAG_HARM) || !blueprint || !user.check_dexterity(DEXTERITY_KEYBOARDS))
 		return ..()
 	blueprint = null
 	SetName(initial(name))
@@ -137,9 +137,9 @@
 	color = COLOR_DARK_BROWN
 	var/data = 0
 
-/obj/item/disk/survey/examine(mob/user)
+/obj/item/disk/survey/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "A tiny indicator on \the [src] shows it holds [data] good explorer point\s.")
+	. += "A tiny indicator on \the [src] shows it holds [data] good explorer point\s."
 
 /obj/item/disk/survey/get_base_value()
 	. = holographic ? 0 : (sqrt(data) * 5)

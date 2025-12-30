@@ -95,7 +95,6 @@
 	name                       = "desert exoplanet"
 	planetoid_data_type        = /datum/planetoid_data/random/desert
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/desert
-	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/desert
 	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/desert,

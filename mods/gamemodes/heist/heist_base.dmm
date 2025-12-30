@@ -112,7 +112,7 @@
 /turf/unsimulated/floor/plating,
 /area/map_template/syndicate_mothership/raider_base)
 "aA" = (
-/obj/structure/aliumizer,
+/obj/abstract/modpack_compat/aliumizer,
 /turf/unsimulated/floor/asteroid,
 /area/map_template/syndicate_mothership/raider_base)
 "aB" = (
@@ -371,7 +371,7 @@
 /turf/unsimulated/floor/freezer,
 /area/map_template/syndicate_mothership/raider_base)
 "bo" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/effect/floor_decal/carpet{
 	dir = 8
 	},
@@ -380,7 +380,7 @@
 /turf/unsimulated/floor/carpet,
 /area/map_template/syndicate_mothership/raider_base)
 "bp" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/action_figure,
 /obj/random/contraband,
 /obj/random/junk,
@@ -505,28 +505,28 @@
 /turf/unsimulated/floor/carpet,
 /area/map_template/syndicate_mothership/raider_base)
 "bJ" = (
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/map_template/syndicate_mothership/raider_base)
 "bK" = (
-/turf/unsimulated/floor/wood/broken,
+/turf/unsimulated/floor/laminate/broken,
 /area/map_template/syndicate_mothership/raider_base)
 "bL" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/plate/tray{
 	pixel_y = 5
 	},
 /obj/item/backpack,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/map_template/syndicate_mothership/raider_base)
 "bM" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/box/glasses/rocks,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/map_template/syndicate_mothership/raider_base)
 "bN" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/machinery/chemical_dispenser/bar_soft/full,
-/turf/unsimulated/floor/wood/broken6,
+/turf/unsimulated/floor/laminate/broken6,
 /area/map_template/syndicate_mothership/raider_base)
 "bO" = (
 /obj/effect/decal/cleanable/dirt/visible,
@@ -580,33 +580,33 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bV" = (
 /obj/item/stool/padded,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/map_template/syndicate_mothership/raider_base)
 "bW" = (
 /obj/effect/decal/cleanable/generic,
 /obj/item/stool/padded,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/map_template/syndicate_mothership/raider_base)
 "bZ" = (
 /obj/machinery/acting/changer,
 /turf/unsimulated/floor/dark,
 /area/map_template/syndicate_mothership/raider_base)
 "ca" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/pizzabox/meat,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/map_template/syndicate_mothership/raider_base)
 "cb" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/ashtray,
 /obj/item/trash/cigbutt/cigarbutt,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/map_template/syndicate_mothership/raider_base)
 "cc" = (
-/obj/structure/table/woodentable,
-/obj/item/chems/glass/rag,
+/obj/structure/table/laminate,
+/obj/item/chems/rag,
 /obj/random/loot,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/map_template/syndicate_mothership/raider_base)
 "cd" = (
 /obj/machinery/vending/cigarette{
@@ -631,11 +631,11 @@
 /turf/unsimulated/floor/dark,
 /area/map_template/syndicate_mothership/raider_base)
 "ch" = (
-/turf/unsimulated/floor/wood/broken1,
+/turf/unsimulated/floor/laminate/broken1,
 /area/map_template/syndicate_mothership/raider_base)
 "ci" = (
 /obj/item/stool/padded,
-/turf/unsimulated/floor/wood/broken1,
+/turf/unsimulated/floor/laminate/broken1,
 /area/map_template/syndicate_mothership/raider_base)
 "cj" = (
 /mob/living/simple_animal/hostile/parrot/pirate,
@@ -664,11 +664,11 @@
 	icon_state = "plant-25";
 	name = "Jamie"
 	},
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/map_template/syndicate_mothership/raider_base)
 "cn" = (
 /obj/structure/reagent_dispensers/beerkeg,
-/turf/unsimulated/floor/wood/broken1,
+/turf/unsimulated/floor/laminate/broken1,
 /area/map_template/syndicate_mothership/raider_base)
 "co" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
@@ -736,8 +736,7 @@
 "cz" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "SkipjackShuttersNorth";
-	name = "Blast Doors";
-	
+	name = "Blast Doors"
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -830,7 +829,7 @@
 /turf/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "cL" = (
-/obj/structure/bed/chair/shuttle{
+/obj/structure/chair/shuttle{
 	dir = 8
 	},
 /turf/floor/shuttle/red,
@@ -856,7 +855,7 @@
 /turf/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "cN" = (
-/obj/structure/bed/chair/office/light{
+/obj/structure/chair/office/light{
 	dir = 4
 	},
 /turf/floor/shuttle/red,
@@ -903,7 +902,7 @@
 /area/map_template/skipjack_station/start)
 "cT" = (
 /obj/structure/rack,
-/obj/random/hardsuit,
+/obj/random/hardsuit/heist,
 /obj/item/clothing/glasses/thermal/plain/monocle,
 /turf/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
@@ -920,7 +919,7 @@
 /area/map_template/skipjack_station/start)
 "cX" = (
 /obj/structure/rack,
-/obj/random/hardsuit,
+/obj/random/hardsuit/heist,
 /obj/item/clothing/head/pirate,
 /obj/item/gun/launcher/money,
 /turf/floor/shuttle/red,
@@ -1103,8 +1102,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "SkipjackShuttersWest";
-	name = "Skipjack Shutters";
-	
+	name = "Skipjack Shutters"
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1130,8 +1128,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 8;
 	id_tag = "SkipjackShuttersEast";
-	name = "Skipjack Shutters";
-	
+	name = "Skipjack Shutters"
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1149,7 +1146,7 @@
 "dB" = (
 /obj/structure/rack,
 /obj/item/gun/launcher/bow/crossbow/powered,
-/obj/item/stack/material/rods/ten,
+/obj/item/stack/material/rods/mapped/steel/ten,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -1202,8 +1199,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "SkipjackShuttersWest";
-	name = "Skipjack Shutters";
-	
+	name = "Skipjack Shutters"
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/floor/plating,
@@ -1229,7 +1225,7 @@
 /turf/floor/plating,
 /area/map_template/skipjack_station/start)
 "dM" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/machinery/light/small{
@@ -1243,7 +1239,7 @@
 /turf/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dO" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/machinery/light/small{
@@ -1298,7 +1294,7 @@
 /turf/floor/plating,
 /area/map_template/skipjack_station/start)
 "dX" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/floor/shuttle/red,
@@ -1310,7 +1306,7 @@
 /turf/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dZ" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/shuttle/red,

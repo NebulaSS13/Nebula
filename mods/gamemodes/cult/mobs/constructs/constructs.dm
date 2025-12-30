@@ -5,13 +5,11 @@
 	speak_emote = list("hisses")
 	base_animal_type = /mob/living/simple_animal/construct
 	base_movement_delay = -1
-
 	response_help_1p = "You think better of touching $TARGET$."
 	response_help_3p = "$USER$ thinks better of touching $TARGET$."
 	response_disarm =  "flails at"
 	response_harm =    "punches"
 	icon = 'icons/mob/simple_animal/shade.dmi'
-	a_intent = I_HURT
 	status_flags = CANPUSH
 	universal_speak = FALSE
 	universal_understand = TRUE
@@ -28,11 +26,11 @@
 	bleed_colour = "#331111"
 	gene_damage = -1
 	butchery_data = /decl/butchery_data/occult
-	hud_used = /datum/hud/construct
+	hud_used = /datum/hud/animal/construct
 	z_flags = ZMM_MANGLE_PLANES
 	glowing_eyes = TRUE
 	ai = /datum/mob_controller/aggressive/construct
-	var/list/construct_spells = list()
+	var/list/construct_spells
 
 /datum/mob_controller/aggressive/construct
 	emote_speech = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
@@ -55,7 +53,7 @@
 	add_language(/decl/language/cultcommon)
 	add_language(/decl/language/cult)
 	for(var/spell in construct_spells)
-		src.add_spell(new spell, "const_spell_ready")
+		add_ability(spell)
 	set_light(1.5, -2, COLOR_WHITE)
 	update_icon()
 
@@ -81,14 +79,14 @@
 		return
 	return ..()
 
-/mob/living/simple_animal/construct/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
+/mob/living/simple_animal/construct/get_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..(user)
 	var/current_max_health = get_max_health()
 	if(current_health < current_max_health)
 		if(current_health >= current_max_health/2)
-			to_chat(user, SPAN_WARNING("It looks slightly dented."))
+			. += SPAN_WARNING("It looks slightly dented.")
 		else
-			to_chat(user, SPAN_DANGER("It looks severely dented!"))
+			. += SPAN_DANGER("It looks severely dented!")
 
 /////////////////Juggernaut///////////////
 
@@ -108,8 +106,10 @@
 	environment_smash = 2
 	status_flags = 0
 	resistance = 10
-	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
-	hud_used = /datum/hud/construct/juggernaut
+	construct_spells = list(
+		/decl/ability/cult/construct/forcewall/lesser
+	)
+	hud_used = /datum/hud/animal/construct/juggernaut
 	base_movement_delay = 2
 	ai = /datum/mob_controller/aggressive/construct_armoured
 
@@ -124,7 +124,7 @@
 	_base_attack_force = 30
 
 /mob/living/simple_animal/construct/armoured/handle_regular_status_updates()
-	set_status(STAT_WEAK, 0)
+	set_status_condition(STAT_WEAK, 0)
 	if ((. = ..()))
 		return
 
@@ -164,8 +164,10 @@
 	natural_weapon = /obj/item/natural_weapon/wraith
 	environment_smash = 1
 	see_in_dark = 7
-	construct_spells = list(/spell/targeted/ethereal_jaunt/shift)
-	hud_used = /datum/hud/construct/wraith
+	construct_spells = list(
+		/decl/ability/cult/construct/shift
+	)
+	hud_used = /datum/hud/animal/construct/wraith
 
 /obj/item/natural_weapon/wraith
 	name = "wicked blade"
@@ -195,18 +197,18 @@
 	natural_weapon = /obj/item/natural_weapon/cult_builder
 	environment_smash = 1
 	construct_spells = list(
-		/spell/aoe_turf/conjure/construct/lesser,
-		/spell/aoe_turf/conjure/wall,
-		/spell/aoe_turf/conjure/floor,
-		/spell/aoe_turf/conjure/soulstone,
-		/spell/aoe_turf/conjure/pylon
+		/decl/ability/cult/construct/lesser,
+		/decl/ability/cult/construct/wall,
+		/decl/ability/cult/construct/floor,
+		/decl/ability/cult/construct/soulstone,
+		/decl/ability/cult/construct/pylon
 	)
-	hud_used = /datum/hud/construct/artificer
+	hud_used = /datum/hud/animal/construct/artificer
 	base_movement_delay = 0
 
 /obj/item/natural_weapon/cult_builder
 	name = "heavy arms"
-	attack_verb = list("rammed")
+	attack_verb = "rammed"
 
 
 /mob/living/simple_animal/construct/builder/mind_initialize()
@@ -229,8 +231,10 @@
 	natural_weapon = /obj/item/natural_weapon/juggernaut/behemoth
 	environment_smash = 2
 	resistance = 10
-	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
-	hud_used = /datum/hud/construct/juggernaut
+	construct_spells = list(
+		/decl/ability/cult/construct/lesser
+	)
+	hud_used = /datum/hud/animal/construct/juggernaut
 	base_movement_delay = 2
 	ai = /datum/mob_controller/aggressive/construct_armoured
 
@@ -248,9 +252,9 @@
 	natural_weapon = /obj/item/natural_weapon/harvester
 	environment_smash = 1
 	see_in_dark = 7
-	hud_used = /datum/hud/construct/harvester
+	hud_used = /datum/hud/animal/construct/harvester
 	construct_spells = list(
-		/spell/targeted/harvest
+		/decl/ability/cult/construct/harvest
 	)
 
 /obj/item/natural_weapon/harvester
@@ -265,21 +269,9 @@
 /mob/living/simple_animal/construct/handle_regular_status_updates()
 	. = ..()
 	if(.)
-		silence_spells(purge)
+		disable_abilities(purge)
 
 /mob/living/simple_animal/construct/handle_regular_hud_updates()
 	. = ..()
 	if(.)
-		if(fire)
-			fire.icon_state = "fire[!!GET_HUD_ALERT(src, /decl/hud_element/condition/fire)]"
-		silence_spells(purge)
-		if(healths)
-			switch(current_health)
-				if(250 to INFINITY)		healths.icon_state = "health0"
-				if(208 to 249)			healths.icon_state = "health1"
-				if(167 to 207)			healths.icon_state = "health2"
-				if(125 to 166)			healths.icon_state = "health3"
-				if(84 to 124)			healths.icon_state = "health4"
-				if(42 to 83)			healths.icon_state = "health5"
-				if(1 to 41)				healths.icon_state = "health6"
-				else					healths.icon_state = "health7"
+		disable_abilities(purge)

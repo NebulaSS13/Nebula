@@ -1,165 +1,168 @@
-/mob/living/human/show_examined_short_description(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
-	var/msg = list("<span class='info'>*---------*\n[user == src ? "You are" : "This is"] <EM>[name]</EM>")
+/mob/living/human/get_examine_header(mob/user, distance, infix, suffix, hideflags)
+	SHOULD_CALL_PARENT(FALSE)
+	. = list(SPAN_INFO("*---------*"))
+	var/list/mob_intro = "[user == src ? "You are" : "This is"] <EM>[name]</EM>"
 	if(!(hideflags & HIDEJUMPSUIT) || !(hideflags & HIDEFACE))
 		var/species_name = "\improper "
 		if(isSynthetic() && species.cyborg_noun)
-			species_name += "[species.cyborg_noun] [species.get_root_species_name(src)]"
+			species_name += "[species.cyborg_noun] [species.name]"
 		else
 			species_name += "[species.name]"
-		msg += ", <b><font color='[species.get_species_flesh_color(src)]'>\a [species_name]!</font></b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value(user))) ?  SPAN_NOTICE(" \[<a href='byond://?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
+		mob_intro += ", <b><font color='[species.get_species_flesh_color(src)]'>\a [species_name]!</font></b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value(user))) ?  SPAN_NOTICE(" \[<a href='byond://?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
+	. += SPAN_INFO(JOINTEXT(mob_intro))
 	var/extra_species_text = species.get_additional_examine_text(src)
 	if(extra_species_text)
-		msg += "<br>[extra_species_text]"
+		. += "[extra_species_text]"
 	var/show_descs = show_descriptors_to(user)
 	if(show_descs)
-		msg += "<br><span class='info'>[jointext(show_descs, "<br>")]</span>"
+		. += SPAN_INFO(jointext(show_descs, "<br>"))
 	var/print_flavour = print_flavor_text()
 	if(print_flavour)
-		msg += "<br/>*---------*"
-		msg += "<br/>[print_flavour]"
-	msg += "<br/>*---------*"
-	to_chat(user, jointext(msg, null))
+		. += SPAN_INFO("*---------*")
+		. += SPAN_INFO("[print_flavour]")
+	. += SPAN_INFO("*---------*")
+	. = list(jointext(., "<br/>"))
 
-/mob/living/human/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
-
-	var/self_examine = (user == src)
-	var/use_He    = self_examine ? "You"  : pronouns.He
-	var/use_he    = self_examine ? "you"  : pronouns.he
-	var/use_His   = self_examine ? "Your" : pronouns.His
-	var/use_his   = self_examine ? "your" : pronouns.his
-	var/use_is    = self_examine ? "are"  : pronouns.is
-	var/use_does  = self_examine ? "do"   : pronouns.does
-	var/use_has   = self_examine ? "have" : pronouns.has
-	var/use_him   = self_examine ? "you"  : pronouns.him
-	var/use_looks = self_examine ? "look" : "looks"
-
-	var/list/msg = list()
-	//Jitters
-	var/jitteriness = GET_STATUS(src, STAT_JITTER)
-	if(jitteriness >= 300)
-		msg += "<span class='warning'><B>[use_He] [use_is] convulsing violently!</B></span>\n"
-	else if(jitteriness >= 200)
-		msg += "<span class='warning'>[use_He] [use_is] extremely jittery.</span>\n"
-	else if(jitteriness >= 100)
-		msg += "<span class='warning'>[use_He] [use_is] twitching ever so slightly.</span>\n"
-
-	//Disfigured face
-	if(!(hideflags & HIDEFACE)) //Disfigurement only matters for the head currently.
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, BP_HEAD)
-		if(E && (E.status & ORGAN_DISFIGURED)) //Check to see if we even have a head and if the head's disfigured.
-			if(E.species) //Check to make sure we have a species
-				msg += E.species.disfigure_msg(src)
-			else //Just in case they lack a species for whatever reason.
-				msg += "<span class='warning'>[use_His] face is horribly mangled!</span>\n"
-
-	//splints
-	for(var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
-		var/obj/item/organ/external/o = GET_EXTERNAL_ORGAN(src, organ)
-		if(o && o.splinted && o.splinted.loc == o)
-			msg += "<span class='warning'>[use_He] [use_has] \a [o.splinted] on [use_his] [o.name]!</span>\n"
-
-	if (src.stat)
-		msg += "<span class='warning'>[use_He] [use_is]n't responding to anything around [use_him] and seems to be unconscious.</span>\n"
-		if((stat == DEAD || is_asystole() || src.ticks_since_last_successful_breath) && distance <= 3)
-			msg += "<span class='warning'>[use_He] [use_does] not appear to be breathing.</span>\n"
-		if(ishuman(user) && !user.incapacitated() && Adjacent(user))
-			spawn(0)
-				user.visible_message("<b>\The [user]</b> checks \the [src]'s pulse.", "You check \the [src]'s pulse.")
-				if(do_after(user, 15, src))
-					if(get_pulse() == PULSE_NONE)
-						to_chat(user, "<span class='deadsay'>[use_He] [use_has] no pulse.</span>")
-					else
-						to_chat(user, "<span class='deadsay'>[use_He] [use_has] a pulse!</span>")
-
-	var/datum/reagents/touching_reagents = get_contact_reagents()
-	if(touching_reagents?.total_volume >= 1)
-		var/saturation = touching_reagents.total_volume / touching_reagents.maximum_volume
-		if(saturation > 0.9)
-			msg += "[use_He] [use_is] completely saturated.\n"
-		else if(saturation > 0.6)
-			msg += "[use_He] [use_is] looking half-drowned.\n"
-		else if(saturation > 0.3)
-			msg += "[use_He] [use_is] looking notably soggy.\n"
+/decl/human_examination/jitters/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	var/jitteriness = GET_STATUS(source, STAT_JITTER)
+	switch(jitteriness)
+		if(300 to INFINITY)
+			return SPAN_DANGER("[pronouns.He] [pronouns.is] convulsing violently!")
+		if(200 to 300)
+			return SPAN_WARNING("[pronouns.He] [pronouns.is] extremely jittery.")
+		if(100 to 200)
+			return SPAN_WARNING("[pronouns.He] [pronouns.is] twitching ever so slightly.")
 		else
-			msg += "[use_He] [use_is] looking a bit soggy.\n"
+			pass()
 
-	if(fire_stacks > 0)
-		msg += "[use_He] [use_is] looking highly flammable!\n"
-	else if(fire_stacks < 0)
-		msg += "[use_He] [use_is] looking rather incombustible.\n"
+/decl/human_examination/disfigured
+	priority = /decl/human_examination/jitters::priority + 1
 
-	if(on_fire)
-		msg += "<span class='warning'>[use_He] [use_is] on fire!</span>\n"
+/decl/human_examination/disfigured/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	//Disfigured face
+	if(hideflags & HIDEFACE) //Disfigurement only matters for the head currently.
+		return
+	var/obj/item/organ/external/limb = GET_EXTERNAL_ORGAN(source, BP_HEAD)
+	if(!limb || !(limb.status & ORGAN_DISFIGURED)) //Check to see if we even have a head and if the head's disfigured.
+		return
+	if(limb.species) //Check to make sure we have a species
+		return limb.species.disfigure_msg(source)
+	else //Just in case they lack a species for whatever reason.
+		return SPAN_WARNING("[pronouns.His] face is horribly mangled!")
 
-	var/ssd_msg = species.get_ssd(src)
-	if(ssd_msg && (!should_have_organ(BP_BRAIN) || has_brain()) && stat != DEAD)
-		if(!key)
-			msg += "<span class='deadsay'>[use_He] [use_is] [ssd_msg]. It doesn't look like [use_he] [use_is] waking up anytime soon.</span>\n"
-		else if(!client)
-			msg += "<span class='deadsay'>[use_He] [use_is] [ssd_msg].</span>\n"
+/decl/human_examination/stat
+	priority = /decl/human_examination/disfigured::priority + 1
 
-	var/obj/item/organ/external/head/H = get_organ(BP_HEAD, /obj/item/organ/external/head)
+/decl/human_examination/stat/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	if (source.stat)
+		. = list(SPAN_WARNING("[pronouns.He] [pronouns.is]n't responding to anything around [pronouns.him] and seems to be unconscious."))
+		if((source.stat == DEAD || source.is_asystole() || source.suffocation_counter) && distance <= 3)
+			. += SPAN_WARNING("[pronouns.He] [pronouns.does] not appear to be breathing.")
+
+/decl/human_examination/contact_reagents
+	priority = /decl/human_examination/stat::priority + 1
+
+/decl/human_examination/contact_reagents/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	var/datum/reagents/touching_reagents = source.get_contact_reagents()
+	if(REAGENT_TOTAL_VOLUME(touching_reagents) >= 1)
+		var/saturation = REAGENT_TOTAL_VOLUME(touching_reagents) / REAGENT_MAXIMUM_VOLUME(touching_reagents)
+		if(saturation > 0.9)
+			. += "[pronouns.He] [pronouns.is] completely saturated."
+		else if(saturation > 0.6)
+			. += "[pronouns.He] [pronouns.is] looking half-drowned."
+		else if(saturation > 0.3)
+			. += "[pronouns.He] [pronouns.is] looking notably soggy."
+		else
+			. += "[pronouns.He] [pronouns.is] looking a bit soggy."
+
+/decl/human_examination/fire
+	priority = /decl/human_examination/contact_reagents::priority + 1
+
+/decl/human_examination/fire/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	. = list()
+	var/fire_level = source.get_fire_intensity()
+	if(fire_level > 0)
+		. += "[pronouns.He] [pronouns.is] looking highly flammable!"
+	else if(fire_level < 0)
+		. += "[pronouns.He] [pronouns.is] looking rather incombustible."
+
+	if(source.is_on_fire())
+		. += SPAN_WARNING("[pronouns.He] [pronouns.is] on fire!")
+
+/decl/human_examination/ssd
+	priority = /decl/human_examination/fire::priority + 1
+
+/decl/human_examination/ssd/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	var/ssd_msg = source.species.get_ssd(source)
+	if(ssd_msg && (!source.should_have_organ(BP_BRAIN) || source.has_brain()) && source.stat != DEAD)
+		if(!source.key)
+			. += SPAN_DEADSAY("[pronouns.He] [pronouns.is] [ssd_msg]. It doesn't look like [pronouns.he] [pronouns.is] waking up anytime soon.")
+		else if(!source.client)
+			. += SPAN_DEADSAY("[pronouns.He] [pronouns.is] [ssd_msg].")
+
+// TODO: generalize and fold this into limb examine
+/decl/human_examination/graffiti
+	priority = /decl/human_examination/ssd::priority + 1
+
+/decl/human_examination/graffiti/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	var/obj/item/organ/external/head/H = source.get_organ(BP_HEAD, /obj/item/organ/external/head)
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
-		msg += "<span class='notice'>[use_He] [use_has] \"[H.forehead_graffiti]\" written on [use_his] [H.name] in [H.graffiti_style]!</span>\n"
+		. += SPAN_NOTICE("[pronouns.He] [pronouns.has] \"[H.forehead_graffiti]\" written on [pronouns.his] [H.name] in [H.graffiti_style]!")
 
-	if(became_younger)
-		msg += "[use_He] [use_looks] a lot younger than you remember.\n"
-	if(became_older)
-		msg += "[use_He] [use_looks] a lot older than you remember.\n"
+/decl/human_examination/limb_examine
+	priority = /decl/human_examination/graffiti::priority + 1
 
+// This is still kind of a mess. TODO: /decl/organ_examination? lol
+/decl/human_examination/limb_examine/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	. = list()
 	var/list/wound_flavor_text = list()
 	var/applying_pressure = ""
 	var/list/shown_objects = list()
 	var/list/hidden_bleeders = list()
 
-	var/decl/bodytype/root_bodytype = get_bodytype()
+	var/decl/bodytype/root_bodytype = source.get_bodytype()
 	for(var/organ_tag in root_bodytype.has_limbs)
-
 		var/list/organ_data = root_bodytype.has_limbs[organ_tag]
-		var/organ_descriptor = organ_data["descriptor"]
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_tag)
+		var/obj/item/organ/external/limb = GET_EXTERNAL_ORGAN(source, organ_tag)
 
-		if(!E)
-			wound_flavor_text[organ_descriptor] = "<b>[use_He] [use_is] missing [use_his] [organ_descriptor].</b>\n"
+		if(!limb)
+			wound_flavor_text[organ_tag] = list(SPAN_DANGER("[pronouns.He] [pronouns.is] missing [pronouns.his] [organ_data["descriptor"]]."))
 			continue
 
-		wound_flavor_text[E.name] = ""
+		wound_flavor_text[limb.organ_tag] = list()
 
-		if(E.applied_pressure == src)
-			applying_pressure = "<span class='info'>[use_He] [use_is] applying pressure to [use_his] [E.name].</span><br>"
+		if(limb.applied_pressure == source)
+			applying_pressure = SPAN_INFO("[pronouns.He] [pronouns.is] applying pressure to [pronouns.his] [limb.name].")
 
-		var/obj/item/clothing/hidden
-		for(var/slot in global.standard_clothing_slots)
-			var/obj/item/clothing/C = get_equipped_item(slot)
-			if(istype(C) && (C.body_parts_covered & E.body_part))
-				hidden = C
-				break
+		var/obj/item/clothing/hidden = source.get_covering_equipped_item(limb.body_part)
 
-		if(hidden && user != src)
-			if(E.status & ORGAN_BLEEDING && !(hidden.item_flags & ITEM_FLAG_THICKMATERIAL)) //not through a spacesuit
+		if(hidden && user != source)
+			if(limb.status & ORGAN_BLEEDING && !(hidden.item_flags & ITEM_FLAG_THICKMATERIAL)) //not through a spacesuit
 				if(!hidden_bleeders[hidden])
 					hidden_bleeders[hidden] = list()
-				hidden_bleeders[hidden] += E.name
+				hidden_bleeders[hidden] += limb.organ_tag
 		else
-			if(!isSynthetic() && BP_IS_PROSTHETIC(E) && (E.parent && !BP_IS_PROSTHETIC(E.parent)))
-				wound_flavor_text[E.name] = "[use_He] [use_has] a [E.name].\n"
-			var/wounddesc = E.get_wounds_desc()
+			// TODO: Make this just report if the bodytype is different than root and parent?
+			// That way a robotic right arm would show up but the hand attached to it wouldn't.
+			if(!source.isSynthetic() && BP_IS_PROSTHETIC(limb) && (limb.parent && !BP_IS_PROSTHETIC(limb.parent)))
+				wound_flavor_text[limb.organ_tag] += SPAN_WARNING("[pronouns.He] [pronouns.has] a [limb.name].")
+			var/wounddesc = limb.get_wounds_desc()
 			if(wounddesc != "nothing")
-				wound_flavor_text[E.name] += "[use_He] [use_has] [wounddesc] on [use_his] [E.name].<br>"
+				wound_flavor_text[limb.organ_tag] += SPAN_WARNING("[pronouns.He] [pronouns.has] [wounddesc] on [pronouns.his] [limb.name].")
 		if(!hidden || distance <=1)
-			if(E.is_dislocated())
-				wound_flavor_text[E.name] += "[use_His] [E.joint] is dislocated!<br>"
-			if(((E.status & ORGAN_BROKEN) && E.brute_dam > E.min_broken_damage) || (E.status & ORGAN_MUTATED))
-				wound_flavor_text[E.name] += "[use_His] [E.name] is dented and swollen!<br>"
-			if(E.status & ORGAN_DEAD)
-				if(BP_IS_PROSTHETIC(E) || BP_IS_CRYSTAL(E))
-					wound_flavor_text[E.name] += "[use_His] [E.name] is irrecoverably damaged!<br>"
+			if(limb.is_dislocated())
+				wound_flavor_text[limb.organ_tag] += SPAN_WARNING("[pronouns.His] [limb.joint] is dislocated!")
+			if(((limb.status & ORGAN_BROKEN) && limb.brute_dam > limb.min_broken_damage) || (limb.status & ORGAN_MUTATED))
+				wound_flavor_text[limb.organ_tag] += SPAN_WARNING("[pronouns.His] [limb.name] is dented and swollen!")
+			if(limb.status & ORGAN_DEAD)
+				if(BP_IS_PROSTHETIC(limb) || BP_IS_CRYSTAL(limb))
+					wound_flavor_text[limb.organ_tag] += SPAN_WARNING("[pronouns.His] [limb.name] is irrecoverably damaged!")
 				else
-					wound_flavor_text[E.name] += "[use_His] [E.name] is grey and necrotic!<br>"
-			else if(E.damage >= E.max_damage && E.germ_level >= INFECTION_LEVEL_TWO)
-				wound_flavor_text[E.name] += "[use_His] [E.name] is likely beyond saving, and has begun to decay!<br>"
+					wound_flavor_text[limb.organ_tag] += SPAN_WARNING("[pronouns.His] [limb.name] is grey and necrotic!")
+			else if((limb.brute_dam + limb.burn_dam) >= limb.max_damage && limb.germ_level >= INFECTION_LEVEL_TWO)
+				wound_flavor_text[limb.organ_tag] += SPAN_WARNING("[pronouns.His] [limb.name] is likely beyond saving, and has begun to decay!")
 
-		for(var/datum/wound/wound in E.wounds)
+		for(var/datum/wound/wound in limb.wounds)
 			var/list/embedlist = wound.embedded_objects
 			if(LAZYLEN(embedlist))
 				shown_objects += embedlist
@@ -170,97 +173,140 @@
 					else if(!parsedembed.Find("multiple [embedded.name]"))
 						parsedembed.Remove(embedded.name)
 						parsedembed.Add("multiple "+embedded.name)
-				wound_flavor_text["[E.name]"] += "The [wound.desc] on [use_his] [E.name] has \a [english_list(parsedembed, and_text = " and a ", comma_text = ", a ")] sticking out of it!<br>"
+				wound_flavor_text[limb.organ_tag] += SPAN_WARNING("The [wound.desc] on [pronouns.his] [limb.name] has \a [english_list(parsedembed, and_text = " and a ", comma_text = ", a ")] sticking out of it!")
+
+		if(limb.splinted && limb.splinted.loc == limb)
+			wound_flavor_text[limb.organ_tag] += SPAN_WARNING("[pronouns.He] [pronouns.has] \a [limb.splinted] on [pronouns.his] [limb.name]!")
+
 	for(var/hidden in hidden_bleeders)
-		wound_flavor_text[hidden] = "[use_He] [use_has] blood soaking through [hidden] around [use_his] [english_list(hidden_bleeders[hidden])]!<br>"
+		wound_flavor_text[hidden] = SPAN_WARNING("[pronouns.He] [pronouns.has] blood soaking through [hidden] around [pronouns.his] [english_list(hidden_bleeders[hidden])]!")
 
-	msg += "<span class='warning'>"
-	for(var/limb in wound_flavor_text)
-		msg += wound_flavor_text[limb]
-	msg += "</span>"
+	for(var/section in wound_flavor_text) // originally named limb, but can also include clothes
+		if(length(wound_flavor_text[section]))
+			. += jointext(wound_flavor_text[section], "<br>")
 
-	for(var/obj/implant in get_visible_implants(0))
+	if(applying_pressure)
+		. += applying_pressure
+
+	// TODO: move this into the limb for loop?
+	for(var/obj/implant in source.get_visible_implants(0))
 		if(implant in shown_objects)
 			continue
-		msg += "<span class='danger'>[src] [use_has] \a [implant.name] sticking out of [use_his] flesh!</span>\n"
-	if(digitalcamo)
-		msg += "[use_He] [use_is] repulsively uncanny!\n"
+		. += SPAN_DANGER("[source] [pronouns.has] \a [implant.name] sticking out of [pronouns.his] flesh!")
+
+/decl/human_examination/digicamo
+	priority = /decl/human_examination/limb_examine::priority + 1
+
+/decl/human_examination/digicamo/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	if(source.digitalcamo)
+		return SPAN_WARNING("[pronouns.He] [pronouns.is] repulsively uncanny!")
+
+/decl/human_examination/hud
+	priority = /decl/human_examination/digicamo::priority + 1
+
+/decl/human_examination/hud/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	var/perpname = source.get_authentification_name(source.get_face_name())
+	if(!perpname)
+		return
 
 	if(hasHUD(user, HUD_SECURITY))
-		var/perpname = "wot"
-		var/criminal = "None"
-
-		var/obj/item/card/id/check_id = GetIdCard()
-		if(istype(check_id))
-			perpname = check_id.registered_name
-		else
-			perpname = src.name
-
-		if(perpname)
-			var/datum/computer_network/network = user.getHUDnetwork(HUD_SECURITY)
-			if(network)
-				var/datum/computer_file/report/crew_record/R = network.get_crew_record_by_name(perpname)
-				if(R)
-					criminal = R.get_criminalStatus()
-
-				msg += "<span class = 'deptradio'>Criminal status:</span> <a href='byond://?src=\ref[src];criminal=1'>\[[criminal]\]</a>\n"
-				msg += "<span class = 'deptradio'>Security records:</span> <a href='byond://?src=\ref[src];secrecord=1'>\[View\]</a>\n"
+		var/datum/computer_network/network = user.getHUDnetwork(HUD_SECURITY)
+		if(network)
+			var/datum/computer_file/report/crew_record/R = network.get_crew_record_by_name(perpname)
+			LAZYINITLIST(.)
+			. += "<span class='deptradio'>Criminal status:</span> <a href='byond://?src=\ref[src];criminal=1'>\[[R?.get_criminalStatus() || "None"]\]</a>"
+			. += "<span class='deptradio'>Security records:</span> <a href='byond://?src=\ref[src];secrecord=1'>\[View\]</a>"
 
 	if(hasHUD(user, HUD_MEDICAL))
-		var/perpname = "wot"
-		var/medical = "None"
-
-		var/obj/item/card/id/check_id = GetIdCard()
-		if(istype(check_id))
-			perpname = check_id.registered_name
-		else
-			perpname = src.name
-
 		var/datum/computer_network/network = user.getHUDnetwork(HUD_MEDICAL)
 		if(network)
 			var/datum/computer_file/report/crew_record/R = network.get_crew_record_by_name(perpname)
-			if(R)
-				medical = R.get_status()
+			LAZYINITLIST(.)
+			. += "<span class='deptradio'>Physical status:</span> <a href='byond://?src=\ref[src];medical=1'>\[[R?.get_status() || "None"]\]</a>"
+			. += "<span class='deptradio'>Medical records:</span> <a href='byond://?src=\ref[src];medrecord=1'>\[View\]</a>"
 
-			msg += "<span class = 'deptradio'>Physical status:</span> <a href='byond://?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
-			msg += "<span class = 'deptradio'>Medical records:</span> <a href='byond://?src=\ref[src];medrecord=1'>\[View\]</a>\n"
+/decl/human_examination/pose
+	priority = /decl/human_examination/hud::priority + 1
+	section_prefix = "*---------*"
 
+/decl/human_examination/pose/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	if (!source.pose)
+		return
+	var/treated_pose = trim(source.handle_autopunctuation(source.pose))
+	// if the pose starts with is, are, do, does, or doesn't, apply basic verb correction
+	if(starts_with(treated_pose, "is ")) // if the pose starts with is
+		treated_pose = "[pronouns.is] [copytext(treated_pose, 1, 4)]"
+	if(starts_with(treated_pose, "are ")) // if the pose starts with are
+		treated_pose = "[pronouns.is] [copytext(treated_pose, 1, 5)]"
+	else if(starts_with(treated_pose, "does "))
+		treated_pose = "[pronouns.does] [copytext(treated_pose, 1, 6)]"
+	else if(starts_with(treated_pose, "do "))
+		treated_pose = "[pronouns.does] [copytext(treated_pose, 1, 4)]"
+	else if(starts_with(treated_pose, "doesn't "))
+		treated_pose = "[pronouns.does]n't [copytext(treated_pose, 1, 9)]"
+	else if(starts_with(treated_pose, "don't "))
+		treated_pose = "[pronouns.does]n't [copytext(treated_pose, 1, 7)]"
+	return "[pronouns.He] [source.handle_autopunctuation(source.pose)]"
+
+/decl/human_examination/comments
+	priority = /decl/human_examination/pose::priority + 99 // OOC info should show up pretty late.
+	section_prefix = "*---------*"
+	section_postfix = "*---------*" // this only applies if there is something after it
+
+/decl/human_examination/comments/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
 	// Show IC/OOC info if available.
-	if(comments_record_id)
-		var/datum/character_information/comments = SScharacter_info.get_record(comments_record_id)
-		if(comments?.show_info_on_examine && (comments.ic_info || comments.ooc_info))
-			msg += "*---------*<br>"
-			if(comments.ic_info)
-				if(length(comments.ic_info) <= 40)
-					msg += "<b>IC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[comments.ic_info]<br/>"
-				else
-					msg += "<b>IC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[copytext_preserve_html(comments.ic_info,1,37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a><br/>"
-			if(comments.ooc_info)
-				if(length(comments.ooc_info) <= 40)
-					msg += "<b>OOC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[comments.ooc_info]<br/>"
-				else
-					msg += "<b>OOC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[copytext_preserve_html(comments.ooc_info,1,37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a><br/>"
+	if(!source.comments_record_id)
+		return
+	var/datum/character_information/comments = SScharacter_info.get_record(source.comments_record_id)
+	if(comments?.show_info_on_examine && (comments.ic_info || comments.ooc_info))
+		if(comments.ic_info)
+			if(length(comments.ic_info) <= 40)
+				. += "<b>IC Info:</b>"
+				. += "&nbsp;&nbsp;&nbsp;&nbsp;[comments.ic_info]"
+			else
+				. += "<b>IC Info:</b>"
+				. += "&nbsp;&nbsp;&nbsp;&nbsp;[copytext_preserve_html(comments.ic_info,1,37)]... <a href='byond://?src=\ref[source];flavor_more=1'>More...</a>"
+		if(comments.ooc_info)
+			if(length(comments.ooc_info) <= 40)
+				. += "<b>OOC Info:</b>"
+				. += "&nbsp;&nbsp;&nbsp;&nbsp;[comments.ooc_info]"
+			else
+				. += "<b>OOC Info:</b>"
+				. += "&nbsp;&nbsp;&nbsp;&nbsp;[copytext_preserve_html(comments.ooc_info,1,37)]... <a href='byond://?src=\ref[source];flavor_more=1'>More...</a>"
 
-	msg += "*---------*</span><br>"
-	msg += applying_pressure
+/mob/living/human/get_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
+	. = ..()
+	var/static/list/priority_examine_decls = sortTim(decls_repository.get_decls_of_subtype_unassociated(/decl/human_examination), /proc/cmp_human_examine_priority)
+	var/last_divider = null
+	for(var/decl/human_examination/examiner in priority_examine_decls)
+		var/adding_text = examiner.do_examine(user, distance, src, hideflags, pronouns)
+		if(!LAZYLEN(adding_text))
+			continue
+		if(last_divider) // insert the divider from the last entry
+			. += last_divider
+		else if(length(.) && examiner.section_prefix) // we already have prior entries, insert our prefix
+			. += examiner.section_prefix
+		. += adding_text
+		last_divider = examiner.section_postfix
 
-	if (pose)
-		if( findtext(pose,".",length(pose)) == 0 && findtext(pose,"!",length(pose)) == 0 && findtext(pose,"?",length(pose)) == 0 )
-			pose = addtext(pose,".") //Makes sure all emotes end with a period.
-		msg += "[use_He] [pose]\n"
+/mob/living/human/examined_by(mob/user, distance, infix, suffix)
+	. = ..()
+	if(!stat || !ishuman(user) || user.incapacitated() || !Adjacent(user))
+		return
+	INVOKE_ASYNC(src, PROC_REF(check_heartbeat), user)
 
-	var/list/human_examines = decls_repository.get_decls_of_subtype(/decl/human_examination)
-	for(var/exam in human_examines)
-		var/decl/human_examination/HE = human_examines[exam]
-		var/adding_text = HE.do_examine(user, distance, src)
-		if(adding_text)
-			msg += adding_text
+/mob/living/human/proc/check_heartbeat(mob/living/human/user)
+	if(!stat || !ishuman(user) || user.incapacitated() || !Adjacent(user))
+		return
+	user.visible_message("<b>\The [user]</b> checks \the [src]'s pulse.", "You check \the [src]'s pulse.")
+	if(do_after(user, 1.5 SECONDS, src))
+		var/decl/pronouns/seen_pronouns = get_pronouns()
+		if(get_pulse() == PULSE_NONE)
+			to_chat(user, SPAN_DEADSAY("[seen_pronouns.He] [seen_pronouns.has] no pulse."))
+		else
+			to_chat(user, SPAN_DEADSAY("[seen_pronouns.He] [seen_pronouns.has] a pulse!"))
 
-	to_chat(user, jointext(msg, null))
-
-	..()
-
-//Helper procedure. Called by /mob/living/human/examine() and /mob/living/human/Topic() to determine HUD access to security and medical records.
+//Helper procedure. Called by /mob/living/human/examined_by() and /mob/living/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M, hudtype)
 	return !!M.getHUDsource(hudtype)
 
@@ -277,7 +323,7 @@
 		return glasses.hud
 
 /mob/living/silicon/robot/getHUDsource(hudtype)
-	for(var/obj/item/borg/sight/sight in list(module_state_1, module_state_2, module_state_3))
+	for(var/obj/item/borg/sight/sight in get_held_items())
 		if(istype(sight) && (sight.glasses_hud_type & hudtype))
 			return sight
 

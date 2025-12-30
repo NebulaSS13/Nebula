@@ -2,7 +2,7 @@
 /obj/item/bodybag/cryobag
 	name = "stasis bag"
 	desc = "A folded, reusable bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
-	a hostile enviroment."
+	a hostile environment."
 	icon = 'icons/obj/closets/cryobag.dmi'
 	icon_state = "bodybag_folded"
 	origin_tech = @'{"biotech":4}'
@@ -12,20 +12,22 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
+	bag_type = /obj/structure/closet/body_bag/cryobag
 	var/stasis_power
 
-/obj/item/bodybag/cryobag/attack_self(mob/user)
-	var/obj/structure/closet/body_bag/cryobag/R = new /obj/structure/closet/body_bag/cryobag(user.loc)
-	if(stasis_power)
-		R.stasis_power = stasis_power
-	R.update_icon()
-	R.add_fingerprint(user)
-	qdel(src)
+/obj/item/bodybag/cryobag/get_cryogenic_power()
+	return stasis_power
+
+/obj/item/bodybag/cryobag/create_bag_structure(mob/user)
+	var/obj/structure/closet/body_bag/cryobag/bag = ..()
+	if(istype(bag) && stasis_power)
+		bag.stasis_power = stasis_power
+	return bag
 
 /obj/structure/closet/body_bag/cryobag
 	name = "stasis bag"
 	desc = "A reusable plastic bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
-	a hostile enviroment."
+	a hostile environment."
 	icon = 'icons/obj/closets/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
 	material = /decl/material/solid/organic/plastic
@@ -92,22 +94,24 @@
 		stasis_power = round(0.75 * stasis_power)
 		animate(src, color = color_matrix_saturation(get_saturation()), time = 10)
 		update_icon()
-
-	if(LAZYACCESS(patient.stasis_sources, STASIS_CRYOBAG) != stasis_power)
-		patient.set_stasis(stasis_power, STASIS_CRYOBAG)
+	patient.add_mob_modifier(/decl/mob_modifier/stasis, 2 SECONDS, source = src)
 
 /obj/structure/closet/body_bag/cryobag/return_air() //Used to make stasis bags protect from vacuum.
 	if(airtank)
 		return airtank
 	..()
 
-/obj/structure/closet/body_bag/cryobag/examine(mob/user)
+/obj/structure/closet/body_bag/cryobag/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user,"The stasis meter shows '[stasis_power]x'.")
+	. += "The stasis meter shows '[stasis_power]x'."
+
+/obj/structure/closet/body_bag/cryobag/examined_by(mob/user, distance, infix, suffix)
+	. = ..()
 	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
-		to_chat(user, "<span class='info'>You peer into \the [src].</span>")
-		for(var/mob/living/L in contents)
-			L.examine(arglist(args))
+		to_chat(user, SPAN_INFO("You peer into \the [src]."))
+		for(var/mob/living/patient in contents)
+			patient.examined_by(user, distance, infix, suffix)
+	return TRUE
 
 /obj/item/usedcryobag
 	name = "used stasis bag"

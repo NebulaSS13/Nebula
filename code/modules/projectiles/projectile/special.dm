@@ -206,5 +206,5 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		to_chat(target, SPAN_WARNING("You feel a wave of heat wash over you!"))
-		L.adjust_fire_stacks(rand(5,8))
-		L.IgniteMob()
+		L.adjust_fire_intensity(rand(5,8))
+		L.ignite_fire()

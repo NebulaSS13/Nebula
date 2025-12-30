@@ -17,7 +17,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/playing = 0
-	var/volume = 20
+	var/music_volume = 20
 
 	var/sound_id
 	var/datum/sound_token/sound_token
@@ -84,7 +84,7 @@
 		"current_track" = current_track != null ? current_track.title : "No track selected",
 		"playing" = playing,
 		"tracks" = juke_tracks,
-		"volume" = volume
+		"volume" = music_volume
 	)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -110,7 +110,7 @@
 		if(emagged)
 			emag_play()
 		else if(!current_track)
-			to_chat(usr, "No track selected.")
+			to_chat(user, "No track selected.")
 		else
 			StartPlaying()
 		return TOPIC_REFRESH
@@ -126,7 +126,7 @@
 			var/mob/living/human/H = M
 			if(H.get_sound_volume_multiplier() < 0.2)
 				continue
-		M.set_status(STAT_ASLEEP,    0)
+		M.set_status_condition(STAT_ASLEEP,    0)
 		ADJ_STATUS(M, STAT_STUTTER,  20)
 		SET_STATUS_MAX(M, STAT_DEAF, 30)
 		SET_STATUS_MAX(M, STAT_WEAK,  3)
@@ -134,7 +134,7 @@
 			SET_STATUS_MAX(M, STAT_STUN, 10)
 			SET_STATUS_MAX(M, STAT_PARA,  4)
 		else
-			M.set_status(STAT_JITTER, 400)
+			M.set_status_condition(STAT_JITTER, 400)
 	spawn(15)
 		explode()
 
@@ -152,10 +152,10 @@
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
 	qdel(src)
 
-/obj/machinery/media/jukebox/attackby(obj/item/W, mob/user)
-	if((IS_WRENCH(W) || IS_HAMMER(W)) && !panel_open)
+/obj/machinery/media/jukebox/attackby(obj/item/used_item, mob/user)
+	if((IS_WRENCH(used_item) || IS_HAMMER(used_item)) && !panel_open)
 		add_fingerprint(user)
-		wrench_floor_bolts(user, 0, W)
+		wrench_floor_bolts(user, 0, used_item)
 		power_change()
 		return TRUE
 	return ..()
@@ -180,12 +180,12 @@
 		return
 
 	// Jukeboxes cheat massively and actually don't share id. This is only done because it's music rather than ambient noise.
-	sound_token = play_looping_sound(src, sound_id, current_track.GetTrack(), volume = volume, range = 7, falloff = 3, prefer_mute = TRUE, preference = /datum/client_preference/play_game_music, streaming = TRUE)
+	sound_token = play_looping_sound(src, sound_id, current_track.GetTrack(), volume = music_volume, range = 7, falloff = 3, prefer_mute = TRUE, preference = /datum/client_preference/play_game_music, streaming = TRUE)
 
 	playing = 1
 	update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/media/jukebox/proc/AdjustVolume(var/new_volume)
-	volume = clamp(new_volume, 0, 50)
+	music_volume = clamp(new_volume, 0, 50)
 	if(sound_token)
-		sound_token.SetVolume(volume)
+		sound_token.SetVolume(music_volume)

@@ -69,9 +69,9 @@
 			user.put_in_hands(shell)
 	qdel(src)
 
-/obj/item/mollusc/attackby(var/obj/item/thing, var/mob/user)
-	if(thing.sharp || thing.edge)
-		user.visible_message(SPAN_NOTICE("\The [user] cracks open \the [src] with \the [thing]."))
+/obj/item/mollusc/attackby(var/obj/item/used_item, var/mob/user)
+	if(used_item.is_sharp() || used_item.has_edge())
+		user.visible_message(SPAN_NOTICE("\The [user] cracks open \the [src] with \the [used_item]."))
 		crack_shell(user)
 		return TRUE
 	. = ..()

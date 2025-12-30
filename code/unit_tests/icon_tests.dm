@@ -1,6 +1,6 @@
 /datum/unit_test/icon_test
 	name = "ICON STATE template"
-	template = /datum/unit_test/icon_test
+	abstract_type = /datum/unit_test/icon_test
 
 /datum/unit_test/icon_test/food_shall_have_icon_states
 	name = "ICON STATE: Food And Drink Subtypes Shall Have Icon States"
@@ -12,10 +12,13 @@
 	// We skip lumps because they are invisible, they are only ever inside utensils.
 	var/list/skip_types = list(/obj/item/food/lump)
 
-/datum/unit_test/icon_test/food_shall_have_icon_states/start_test()
-
+/datum/unit_test/icon_test/food_shall_have_icon_states/proc/assemble_skipped_types()
 	skip_types |= typesof(/obj/item/food/grown)
 	skip_types |= typesof(/obj/item/food/processed_grown)
+
+/datum/unit_test/icon_test/food_shall_have_icon_states/start_test()
+
+	assemble_skipped_types()
 
 	var/list/failures = list()
 	for(var/check_type in check_types)
@@ -295,4 +298,65 @@
 		fail("Missing vendor icons or icon states:\n\t-[jointext(failures, "\n\t-")]")
 	else
 		pass("All vendors have all icons and icon states.")
+	return 1
+
+
+/datum/unit_test/HUDS_shall_have_icon_states
+	name = "ICON STATE: HUD overlays shall have appropriate icon_states"
+
+/datum/unit_test/HUDS_shall_have_icon_states/start_test()
+	var/failed_jobs = 0
+	var/failed_sanity_checks = 0
+
+	// Throwing implants and health HUDs in here.
+	// Antag HUDs are tested by special role validation.
+
+	var/static/list/implant_hud_states = list(
+		"hud_imp_blank"    = "Blank",
+		"hud_imp_loyal"    = "Loyalty",
+		"hud_imp_unknown"  = "Unknown",
+		"hud_imp_tracking" = "Tracking",
+		"hud_imp_chem"     = "Chemical",
+	)
+	for(var/implant_hud_state in implant_hud_states)
+		if(!check_state_in_icon(implant_hud_state, global.using_map.implant_hud_icons))
+			log_bad("Sanity Check - Missing map [implant_hud_states[implant_hud_state]] implant HUD icon_state '[implant_hud_state]' from icon [global.using_map.implant_hud_icons]")
+			failed_sanity_checks++
+
+	var/static/list/med_hud_states = list(
+		"blank"    = "Blank",
+		"flatline" = "Flatline",
+		"0"        = "Dead",
+		"1"        = "Healthy",
+		"2"        = "Lightly injured",
+		"3"        = "Moderately injured",
+		"4"        = "Severely injured",
+		"5"        = "Dying",
+	)
+	for(var/med_hud_state in med_hud_states)
+		if(!check_state_in_icon(med_hud_state, global.using_map.med_hud_icons))
+			log_bad("Sanity Check - Missing map [med_hud_states[med_hud_state]] medical HUD icon_state '[med_hud_state]' from icon [global.using_map.med_hud_icons]")
+			failed_sanity_checks++
+	var/static/list/global_states = list(
+		""           = "Default/unnamed",
+		"hudunknown" = "Unknown role",
+		"hudhealthy" = "Healthy mob",
+		"hudill"     = "Diseased mob",
+		"huddead"    = "Dead mob"
+	)
+	for(var/global_state in global_states)
+		if(!check_state_in_icon(global_state, global.using_map.hud_icons))
+			log_bad("Sanity Check - Missing map [global_states[global_state]] HUD icon_state '[global_state]' from icon [global.using_map.hud_icons]")
+			failed_sanity_checks++
+
+	for(var/job_name in SSjobs.titles_to_datums)
+		var/datum/job/job = SSjobs.titles_to_datums[job_name]
+		if(!check_state_in_icon(job.hud_icon_state, job.hud_icon))
+			log_bad("[job.title] - Missing HUD icon: [job.hud_icon_state] in icon [job.hud_icon]")
+			failed_jobs++
+
+	if(failed_sanity_checks || failed_jobs)
+		fail("[global.using_map.type] - [failed_sanity_checks] failed sanity check\s, [failed_jobs] job\s with missing HUD icon.")
+	else
+		pass("All jobs have a HUD icon.")
 	return 1

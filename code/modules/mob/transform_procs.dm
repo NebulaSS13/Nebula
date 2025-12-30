@@ -1,11 +1,11 @@
 /mob/living/human/proc/monkeyize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/obj/item/W in get_contained_external_atoms())
-		drop_from_inventory(W)
+	for(var/obj/item/thing in get_contained_external_atoms())
+		drop_from_inventory(thing)
 	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
-	set_status(STAT_STUN, 1)
+	set_status_condition(STAT_STUN, 1)
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
 	for(var/t in get_external_organs())
@@ -18,7 +18,7 @@
 	//animation = null
 
 	DEL_TRANSFORMATION_MOVEMENT_HANDLER(src)
-	set_status(STAT_STUN, 0)
+	set_status_condition(STAT_STUN, 0)
 	update_posture()
 	set_invisibility(initial(invisibility))
 
@@ -26,8 +26,8 @@
 		gib()
 		return
 
-	for(var/obj/item/W in src)
-		drop_from_inventory(W)
+	for(var/obj/item/thing in src)
+		drop_from_inventory(thing)
 	change_species(species.primitive_form)
 
 	to_chat(src, "<B>You are now [species.name]. </B>")
@@ -53,8 +53,8 @@
 		return
 	for(var/t in get_external_organs())
 		qdel(t)
-	for(var/obj/item/W in src)
-		drop_from_inventory(W)
+	for(var/obj/item/thing in src)
+		drop_from_inventory(thing)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
@@ -70,27 +70,26 @@
 	O.aiRestorePowerRoutine = 0
 	if(mind)
 		mind.transfer_to(O)
-		O.mind.original = O
 	else
 		O.key = key
 
 	if(move)
 		var/obj/loc_landmark
-		for(var/obj/abstract/landmark/start/sloc in global.landmarks_list)
+		for(var/obj/abstract/landmark/start/sloc in global.all_landmarks)
 			if (sloc.name != "AI")
 				continue
 			if (locate(/mob/living) in sloc.loc)
 				continue
 			loc_landmark = sloc
 		if (!loc_landmark)
-			for(var/obj/abstract/landmark/tripai in global.landmarks_list)
+			for(var/obj/abstract/landmark/tripai in global.all_landmarks)
 				if (tripai.name == "tripai")
 					if((locate(/mob/living) in tripai.loc) || (locate(/obj/structure/aicore) in tripai.loc))
 						continue
 					loc_landmark = tripai
 		if (!loc_landmark)
 			to_chat(O, "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone.")
-			for(var/obj/abstract/landmark/start/sloc in global.landmarks_list)
+			for(var/obj/abstract/landmark/start/sloc in global.all_landmarks)
 				if (sloc.name == "AI")
 					loc_landmark = sloc
 		O.forceMove(loc_landmark ? loc_landmark.loc : get_turf(src))
@@ -99,8 +98,7 @@
 	O.add_ai_verbs()
 
 	O.rename_self("ai",1)
-	spawn(0)	// Mobs still instantly del themselves, thus we need to spawn or O will never be returned
-		qdel(src)
+	qdel(src)
 	return O
 
 //human -> robot
@@ -108,8 +106,8 @@
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	QDEL_NULL_LIST(worn_underwear)
-	for(var/obj/item/W in src)
-		drop_from_inventory(W)
+	for(var/obj/item/thing in src)
+		drop_from_inventory(thing)
 	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
@@ -128,7 +126,6 @@
 	mind.active = TRUE
 	mind.transfer_to(O)
 	if(O.mind && O.mind.assigned_role == ASSIGNMENT_ROBOT)
-		O.mind.original = O
 		var/mmi_type = SSrobots.get_brain_type_by_title(O.mind.role_alt_title ? O.mind.role_alt_title : O.mind.assigned_role)
 		if(mmi_type)
 			O.central_processor = new mmi_type(O)
@@ -138,14 +135,14 @@
 	RAISE_EVENT(/decl/observ/cyborg_created, O)
 	O.Namepick()
 
-	qdel(src) // Queues us for a hard delete
+	qdel(src)
 	return O
 
 /mob/living/human/proc/corgize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/obj/item/W in src)
-		drop_from_inventory(W)
+	for(var/obj/item/thing in src)
+		drop_from_inventory(thing)
 	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
@@ -154,7 +151,7 @@
 		qdel(t)
 
 	var/mob/living/simple_animal/corgi/new_corgi = new /mob/living/simple_animal/corgi (loc)
-	new_corgi.a_intent = I_HURT
+	new_corgi.set_intent(get_intent())
 	new_corgi.key = key
 
 	to_chat(new_corgi, "<B>You are now a Corgi. Yap Yap!</B>")
@@ -172,8 +169,8 @@
 
 	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/obj/item/W in src)
-		drop_from_inventory(W)
+	for(var/obj/item/thing in src)
+		drop_from_inventory(thing)
 
 	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
@@ -186,12 +183,11 @@
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
-	new_mob.a_intent = I_HURT
+	new_mob.set_intent(get_intent())
 
 
 	to_chat(new_mob, "You suddenly feel more... animalistic.")
-	spawn()
-		qdel(src)
+	qdel(src)
 	return
 
 /mob/proc/Animalize()
@@ -206,7 +202,7 @@
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
-	new_mob.a_intent = I_HURT
+	new_mob.set_intent(get_intent())
 	to_chat(new_mob, "You feel more... animalistic.")
 
 	qdel(src)
@@ -257,7 +253,7 @@
 	log_admin("[key_name(src)] has transformed into a zombie!")
 	SET_STATUS_MAX(src, STAT_WEAK, 5)
 	if (should_have_organ(BP_HEART))
-		adjust_blood(species.blood_volume - vessel.total_volume)
+		adjust_blood(species.blood_volume - REAGENT_TOTAL_VOLUME(vessel))
 	for (var/o in get_external_organs())
 		var/obj/item/organ/organ = o
 		if (!BP_IS_PROSTHETIC(organ))

@@ -91,7 +91,7 @@
 /obj/item/food/junk/squid
 	name = "\improper Calamari Crisps"
 	icon_state = "squid"
-	desc = "Space cepholapod tentacles, carefully removed from the squid then dried into strips of delicious rubbery goodness!"
+	desc = "Space cephalopod tentacles, carefully removed from the squid then dried into strips of delicious rubbery goodness!"
 	trash = /obj/item/trash/squid
 	filling_color = "#c0a9d7"
 	center_of_mass = @'{"x":15,"y":9}'
@@ -355,7 +355,7 @@
 /obj/item/food/junk/oort
 	name = "\improper Cloud Rocks"
 	icon_state = "oort"
-	desc = "Pop rocks. The new formula guarantees fewer shrapnel induced oral injuries."
+	desc = "Pop rocks. The new formula guarantees fewer shrapnel-induced oral injuries."
 	trash = /obj/item/trash/oort
 	filling_color = "#3f7dd2"
 	center_of_mass = @'{"x":15,"y":9}'

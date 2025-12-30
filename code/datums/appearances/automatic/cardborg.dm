@@ -34,19 +34,19 @@
 	var/obj/item/back = H.get_equipped_item(slot_back_str)
 	if(!istype(back))
 		return
-	var/decl/cardborg_appearance/ca = appearances[back.type]
-	if(!ca) ca = appearances[/obj/item/backpack]
+	var/decl/cardborg_appearance/disguise = appearances[back.type]
+	if(!disguise) disguise = appearances[/obj/item/backpack]
 
-	var/image/I = image(icon = ca.icon, icon_state = ca.icon_state, loc = H)
+	var/image/I = image(icon = disguise.icon, icon_state = disguise.icon_state, loc = H)
 	I.override = 1
-	I.overlays += image(icon = ca.icon, icon_state = "[ca.icon_state]-eyes") //gotta look realistic
+	I.overlays += image(icon = disguise.icon, icon_state = "[disguise.icon_state]-eyes") //gotta look realistic
 	return I
 
 /decl/appearance_handler/cardborg/proc/init_appearances()
 	if(!appearances)
 		appearances = list()
-		for(var/decl/cardborg_appearance/ca in init_subtypes(/decl/cardborg_appearance))
-			appearances[ca.backpack_type] = ca
+		for(var/decl/cardborg_appearance/disguise in init_subtypes(/decl/cardborg_appearance))
+			appearances[disguise.backpack_type] = disguise
 
 /decl/cardborg_appearance
 	var/backpack_type

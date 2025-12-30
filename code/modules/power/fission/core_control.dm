@@ -18,8 +18,8 @@
 		var/datum/extension/local_network_member/fission = get_extension(src, /datum/extension/local_network_member)
 		fission.set_tag(null, initial_id_tag)
 
-/obj/machinery/computer/fission/attackby(var/obj/item/W, var/mob/user)
-	if(IS_MULTITOOL(W))
+/obj/machinery/computer/fission/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_MULTITOOL(used_item))
 		var/datum/extension/local_network_member/fission = get_extension(src, /datum/extension/local_network_member)
 		fission.get_new_tag(user)
 		return TRUE

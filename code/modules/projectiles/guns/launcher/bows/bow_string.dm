@@ -12,7 +12,7 @@
 	. = ..()
 	if(material)
 		max_health = max(1, round(initial(max_health) * material.tensile_strength))
-		current_health = max_health
+		current_health = get_max_health()
 
 /obj/item/bowstring/Destroy()
 	if(istype(loc, /obj/item/gun/launcher/bow))

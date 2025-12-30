@@ -6,9 +6,11 @@
 	spit_projectile_type = /obj/item/projectile/drake_spit/weak
 
 /datum/ability_handler/predator/grafadreka/can_do_ranged_invocation(mob/user, atom/target)
-	return istype(user) && user.a_intent == I_HURT && !user.incapacitated() && isatom(target)
+	return ..() || (istype(user) && user.check_intent(I_FLAG_HARM) && !user.incapacitated() && isatom(target))
 
 /datum/ability_handler/predator/grafadreka/do_ranged_invocation(mob/user, atom/target)
+	if((. = ..()))
+		return
 	if(world.time < next_spit)
 		to_chat(user, SPAN_WARNING("You cannot spit again so soon!"))
 		return TRUE
@@ -27,6 +29,6 @@
 	if((. = ..()))
 		return
 	// Healing
-	if(user.a_intent == I_HELP && isliving(target))
+	if(user.check_intent(I_FLAG_HELP) && isliving(target))
 		return handle_wound_cleaning(user, target)
 	return FALSE

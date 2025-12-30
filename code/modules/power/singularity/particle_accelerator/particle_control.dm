@@ -74,35 +74,35 @@
 	return
 
 /obj/machinery/particle_accelerator/control_box/Topic(href, href_list)
-	..()
-	//Ignore input if we are broken, !silicon guy cant touch us, or nonai controlling from super far away
-	if(stat & (BROKEN|NOPOWER) || (get_dist(src, usr) > 1 && !issilicon(usr)) || (get_dist(src, usr) > 8 && !isAI(usr)))
-		usr.unset_machine()
+	. = ..()
+	if(. == TOPIC_CLOSE)
 		close_browser(usr, "window=pacontrol")
-		return
 
-	if( href_list["close"] )
-		close_browser(usr, "window=pacontrol")
-		usr.unset_machine()
+/obj/machinery/particle_accelerator/control_box/OnTopic(href, href_list)
+	if((. = ..()))
 		return
-
+	if(inoperable())
+		return TOPIC_CLOSE
+	if(href_list["close"])
+		return TOPIC_CLOSE
 	if(href_list["togglep"])
-		if(!wires.IsIndexCut(PARTICLE_TOGGLE_WIRE))
-			src.toggle_power()
+		if(wires.IsIndexCut(PARTICLE_TOGGLE_WIRE))
+			return TOPIC_HANDLED
+		toggle_power()
+		return TOPIC_REFRESH
 	else if(href_list["scan"])
-		src.part_scan()
-
+		part_scan()
+		return TOPIC_REFRESH
 	else if(href_list["strengthup"])
-		if(!wires.IsIndexCut(PARTICLE_STRENGTH_WIRE))
-			add_strength()
-
+		if(wires.IsIndexCut(PARTICLE_STRENGTH_WIRE))
+			return TOPIC_HANDLED
+		add_strength()
+		return TOPIC_REFRESH
 	else if(href_list["strengthdown"])
-		if(!wires.IsIndexCut(PARTICLE_STRENGTH_WIRE))
-			remove_strength()
-
-	src.updateDialog()
-	src.update_icon()
-	return
+		if(wires.IsIndexCut(PARTICLE_STRENGTH_WIRE))
+			return TOPIC_HANDLED
+		remove_strength()
+		return TOPIC_REFRESH
 
 /obj/machinery/particle_accelerator/control_box/proc/strength_change()
 	for(var/obj/structure/particle_accelerator/part in connected_parts)

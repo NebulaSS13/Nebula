@@ -69,7 +69,7 @@
 /turf/wall/wood
 	color = COLOR_BROWN
 	icon_state = "wood"
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 
 /turf/wall/walnut
 	color = COLOR_BROWN_ORANGE

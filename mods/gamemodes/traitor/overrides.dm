@@ -3,17 +3,11 @@
 	return mind && traitors.is_antagonist(mind)
 
 /mob/living/silicon/robot/show_master(mob/who)
-	// TODO: Update to new antagonist system.
-	if (mind?.assigned_special_role == /decl/special_role/traitor && mind.original == src && connected_ai)
+	var/decl/special_role/traitor/traitor_role = IMPLIED_DECL
+	if(traitor_role.is_antagonist(mind) && connected_ai)
 		to_chat(who, "<b>Remember, [connected_ai.name] is technically your master, but your objective comes first.</b>")
 		return
 	return ..()
-
-/mob/living/silicon/robot/lawsync()
-	. = ..()
-	// TODO: Update to new antagonist system.
-	if(mind?.assigned_special_role == /decl/special_role/traitor && mind.original == src)
-		to_chat(src, SPAN_BOLD("Remember, your AI does NOT share or know about your law 0."))
 
 /mob/living/silicon/robot/handle_regular_hud_updates()
 	. = ..()

@@ -25,6 +25,8 @@
 		'sound/ambience/ominous2.ogg',
 		'sound/ambience/ominous3.ogg',
 	)
+	// hopefully the sound environment makes this sound nicer?
+	forced_ambience = list('sound/ambience/shore.ogg')
 
 /area/shaded_hills/outside/poi
 	name = "Deep Grassland"
@@ -34,12 +36,16 @@
 	color = COLOR_BLUE
 	description = "The soft susurration of running water mingles with the hum of insects and croak of frogs."
 	area_blurb_category = /area/shaded_hills/outside/river
-	additional_fishing_results = list(
+	forced_ambience = list('sound/ambience/shore.ogg')
+
+/area/shaded_hills/outside/river/get_additional_fishing_results()
+	var/static/list/additional_fishing_results = list(
 		/mob/living/simple_animal/aquatic/fish/large        = 5,
 		/mob/living/simple_animal/aquatic/fish/large/salmon = 5,
 		/mob/living/simple_animal/aquatic/fish/large/trout  = 5,
 		/mob/living/simple_animal/aquatic/fish/large/pike   = 3
 	)
+	return additional_fishing_results
 
 /area/shaded_hills/caves
 	name = "\improper Deep Tunnels"
@@ -53,6 +59,16 @@
 	area_blurb_category = /area/shaded_hills/caves
 	sound_env = CAVE
 	area_flags = AREA_FLAG_IS_BACKGROUND
+	fishing_results = list(
+		/mob/living/simple_animal/aquatic/fish/large/cave    = 13,
+		/mob/living/simple_animal/aquatic/fish/large/lantern = 7,
+		/obj/item/mollusc                              = 5,
+		/obj/item/mollusc/barnacle/fished              = 5,
+		/obj/item/mollusc/clam/fished/pearl            = 3,
+		/obj/item/trash/mollusc_shell/clam             = 1,
+		/obj/item/trash/mollusc_shell/barnacle         = 1,
+		/obj/item/trash/mollusc_shell                  = 1
+	)
 
 /area/shaded_hills/caves/deep
 	name = "\improper Deep Caverns"

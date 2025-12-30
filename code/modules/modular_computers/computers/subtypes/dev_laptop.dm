@@ -15,7 +15,7 @@
 		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
 	)
 	var/icon_state_closed = "laptop-closed"
-	
+
 /obj/item/modular_computer/laptop/on_update_icon()
 	if(anchored)
 		..()
@@ -35,6 +35,7 @@
 	name = "Open Laptop"
 	expected_target_type = /obj/item/modular_computer/laptop
 	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_TURF
+	examine_desc = "open or close $TARGET_THEM$"
 
 /decl/interaction_handler/laptop_open/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/modular_computer/laptop/L = target

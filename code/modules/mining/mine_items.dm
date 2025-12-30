@@ -29,7 +29,7 @@
 // Flags.
 /obj/item/stack/flag
 	name = "beacon"
-	desc = "Some deployable high-visibilty beacons."
+	desc = "Some deployable high-visibility beacons."
 	singular_name = "beacon"
 	icon_state = "folded"
 	amount = 10
@@ -58,7 +58,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/stack/flag/attackby(var/obj/item/W, var/mob/user)
+/obj/item/stack/flag/attackby(var/obj/item/used_item, var/mob/user)
 	if(upright)
 		return attack_hand_with_interaction_checks(user)
 	return ..()

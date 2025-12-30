@@ -105,7 +105,7 @@
 	return FALSE
 
 /decl/grab/normal/resolve_openhand_attack(var/obj/item/grab/grab)
-	if(grab.assailant.a_intent != I_HELP)
+	if(!grab.assailant.check_intent(I_FLAG_HELP))
 		if(grab.target_zone == BP_HEAD)
 			if(grab.assailant.get_target_zone() == BP_EYES)
 				if(attack_eye(grab))
@@ -154,7 +154,7 @@
 	var/obj/item/clothing/hat = attacker.get_equipped_item(slot_head_str)
 	var/damage_flags = 0
 	if(istype(hat))
-		damage += hat.get_attack_force(attacker) * 3
+		damage += hat.expend_attack_force(attacker) * 3
 		damage_flags = hat.damage_flags()
 
 	if(damage_flags & DAM_SHARP)
@@ -221,16 +221,16 @@
 		else
 			return attack_tendons(grab, I, user, grab.target_zone)
 
-/decl/grab/normal/proc/attack_throat(var/obj/item/grab/grab, var/obj/item/W, mob/user)
+/decl/grab/normal/proc/attack_throat(var/obj/item/grab/grab, var/obj/item/used_item, mob/user)
 	var/mob/living/affecting = grab.get_affecting_mob()
 	if(!affecting)
 		return
-	if(user.a_intent != I_HURT)
+	if(!user.check_intent(I_FLAG_HARM))
 		return 0 // Not trying to hurt them.
 
-	if(!W.edge || !W.get_attack_force(user) || W.atom_damage_type != BRUTE)
+	if(!used_item.has_edge() || !used_item.get_attack_force(user) || used_item.atom_damage_type != BRUTE)
 		return 0 //unsuitable weapon
-	user.visible_message("<span class='danger'>\The [user] begins to slit [affecting]'s throat with \the [W]!</span>")
+	user.visible_message("<span class='danger'>\The [user] begins to slit [affecting]'s throat with \the [used_item]!</span>")
 
 	user.next_move = world.time + 20 //also should prevent user from triggering this repeatedly
 	if(!do_after(user, 20*user.skill_delay_mult(SKILL_COMBAT) , progress = 0))
@@ -239,46 +239,46 @@
 		return 0
 
 	var/damage_mod = 1
-	var/damage_flags = W.damage_flags()
+	var/damage_flags = used_item.damage_flags()
 	//presumably, if they are wearing a helmet that stops pressure effects, then it probably covers the throat as well
-	var/force = W.get_attack_force(user)
+	var/force = used_item.expend_attack_force(user)
 	var/obj/item/clothing/head/helmet = affecting.get_equipped_item(slot_head_str)
 	if(istype(helmet) && (helmet.body_parts_covered & SLOT_HEAD) && (helmet.item_flags & ITEM_FLAG_AIRTIGHT) && !isnull(helmet.max_pressure_protection))
 		var/datum/extension/armor/armor_datum = get_extension(helmet, /datum/extension/armor)
 		if(armor_datum)
-			damage_mod -= armor_datum.get_blocked(BRUTE, damage_flags, W.armor_penetration, force*1.5)
+			damage_mod -= armor_datum.get_blocked(BRUTE, damage_flags, used_item.armor_penetration, force*1.5)
 
 	var/total_damage = 0
 	for(var/i in 1 to 3)
 		var/damage = min(force*1.5, 20)*damage_mod
-		affecting.apply_damage(damage, W.atom_damage_type, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=W)
+		affecting.apply_damage(damage, used_item.atom_damage_type, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=used_item)
 		total_damage += damage
 
 	if(total_damage)
-		user.visible_message("<span class='danger'>\The [user] slit [affecting]'s throat open with \the [W]!</span>")
+		user.visible_message("<span class='danger'>\The [user] slit [affecting]'s throat open with \the [used_item]!</span>")
 
-		if(W.hitsound)
-			playsound(affecting.loc, W.hitsound, 50, 1, -1)
+		if(used_item.hitsound)
+			playsound(affecting.loc, used_item.hitsound, 50, 1, -1)
 
 	grab.last_action = world.time
 
 	admin_attack_log(user, affecting, "Knifed their victim", "Was knifed", "knifed")
 	return 1
 
-/decl/grab/normal/proc/attack_tendons(var/obj/item/grab/grab, var/obj/item/W, mob/user, var/target_zone)
+/decl/grab/normal/proc/attack_tendons(var/obj/item/grab/grab, var/obj/item/used_item, mob/user, var/target_zone)
 	var/mob/living/affecting = grab.get_affecting_mob()
 	if(!affecting)
 		return
 	if(!user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
 		return
-	if(user.a_intent != I_HURT)
+	if(!user.check_intent(I_FLAG_HARM))
 		return 0 // Not trying to hurt them.
-	if(!W.edge || !W.get_attack_force(user) || W.atom_damage_type != BRUTE)
+	if(!used_item.has_edge() || !used_item.expend_attack_force(user) || used_item.atom_damage_type != BRUTE)
 		return 0 //unsuitable weapon
 	var/obj/item/organ/external/O = grab.get_targeted_organ()
 	if(!O || !(O.limb_flags & ORGAN_FLAG_HAS_TENDON) || (O.status & ORGAN_TENDON_CUT))
 		return FALSE
-	user.visible_message(SPAN_DANGER("\The [user] begins to cut \the [affecting]'s [O.tendon_name] with \the [W]!"))
+	user.visible_message(SPAN_DANGER("\The [user] begins to cut \the [affecting]'s [O.tendon_name] with \the [used_item]!"))
 	user.next_move = world.time + 20
 	if(!do_after(user, 20, progress=0))
 		return 0
@@ -286,8 +286,8 @@
 		return 0
 	if(!O || !O.sever_tendon())
 		return 0
-	user.visible_message(SPAN_DANGER("\The [user] cut \the [affecting]'s [O.tendon_name] with \the [W]!"))
-	if(W.hitsound) playsound(affecting.loc, W.hitsound, 50, 1, -1)
+	user.visible_message(SPAN_DANGER("\The [user] cut \the [affecting]'s [O.tendon_name] with \the [used_item]!"))
+	if(used_item.hitsound) playsound(affecting.loc, used_item.hitsound, 50, 1, -1)
 	grab.last_action = world.time
 	admin_attack_log(user, affecting, "hamstrung their victim", "was hamstrung", "hamstrung")
 	return 1

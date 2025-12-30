@@ -9,3 +9,6 @@
 
 /obj/effect/decal/lava_act()
 	. = !throwing ? ..() : FALSE
+
+/obj/effect/decal/get_examine_prefix()
+	return null

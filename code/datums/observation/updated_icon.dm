@@ -11,3 +11,4 @@
 /decl/observ/updated_icon
 	name = "Updated Icon"
 	expected_type = /atom
+	flags = OBSERVATION_NO_GLOBAL_REGISTRATIONS

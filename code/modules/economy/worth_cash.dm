@@ -59,21 +59,21 @@
 	var/decl/currency/cur = GET_DECL(currency)
 	. = floor(absolute_worth / cur.absolute_value)
 
-/obj/item/cash/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/cash))
-		var/obj/item/cash/cash = W
+/obj/item/cash/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/cash))
+		var/obj/item/cash/cash = used_item
 		if(cash.currency != currency)
 			to_chat(user, SPAN_WARNING("You can't mix two different currencies, it would be uncivilized."))
 			return TRUE
-		if(user.try_unequip(W))
+		if(user.try_unequip(used_item))
 			adjust_worth(cash.absolute_worth)
 			var/decl/currency/cur = GET_DECL(currency)
 			to_chat(user, SPAN_NOTICE("You add [cash.get_worth()] [cur.name] to the pile."))
 			to_chat(user, SPAN_NOTICE("It holds [get_worth()] [cur.name] now."))
-			qdel(W)
+			qdel(used_item)
 		return TRUE
-	else if(istype(W, /obj/item/gun/launcher/money))
-		var/obj/item/gun/launcher/money/L = W
+	else if(istype(used_item, /obj/item/gun/launcher/money))
+		var/obj/item/gun/launcher/money/L = used_item
 		L.absorb_cash(src, user)
 		return TRUE
 	return ..()
@@ -141,7 +141,7 @@
 	if(QDELETED(src) || get_worth() <= 1 || user.incapacitated() || loc != user)
 		return TRUE
 
-	var/amount = input(usr, "How many [cur.name] do you want to take? (0 to [get_worth() - 1])", "Take Money", 20) as num
+	var/amount = input(user, "How many [cur.name] do you want to take? (0 to [get_worth() - 1])", "Take Money", 20) as num
 	amount = round(clamp(amount, 0, floor(get_worth() - 1)))
 
 	if(!amount || QDELETED(src) || get_worth() <= 1 || user.incapacitated() || loc != user)
@@ -233,31 +233,31 @@
 		loaded_worth = 0
 	update_icon()
 
-/obj/item/charge_stick/examine(mob/user, distance)
+/obj/item/charge_stick/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..(user)
 	if(distance <= 2 || user == loc)
 		var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 		if(lock.locked)
-			to_chat(user, SPAN_WARNING("\The [src] is locked."))
+			. += SPAN_WARNING("\The [src] is locked.")
 		else
-			to_chat(user, SPAN_NOTICE("<b>Id:</b> [id]."))
 			var/decl/currency/cur = GET_DECL(currency)
-			to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [floor(loaded_worth / cur.absolute_value)]."))
+			. += SPAN_NOTICE("<b>Id:</b> [id].")
+			. += SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [floor(loaded_worth / cur.absolute_value)].")
 
 /obj/item/charge_stick/get_base_value()
 	. = holographic ? 0 : loaded_worth
 
-/obj/item/charge_stick/attackby(var/obj/item/W, var/mob/user)
+/obj/item/charge_stick/attackby(var/obj/item/used_item, var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 
-	if(istype(W, /obj/item/charge_stick))
-		var/obj/item/charge_stick/sender = W
-		var/datum/extension/lockable/W_lock = get_extension(W, /datum/extension/lockable)
+	if(istype(used_item, /obj/item/charge_stick))
+		var/obj/item/charge_stick/sender = used_item
+		var/datum/extension/lockable/W_lock = get_extension(used_item, /datum/extension/lockable)
 		if(lock.locked)
 			to_chat(user, SPAN_WARNING("Cannot transfer funds to a locked [src]."))
 			return TRUE
 		if(W_lock.locked)
-			to_chat(user, SPAN_WARNING("Cannot transfer funds from a locked [W]."))
+			to_chat(user, SPAN_WARNING("Cannot transfer funds from a locked [used_item]."))
 			return TRUE
 		if(sender.currency != currency)
 			to_chat(user, SPAN_WARNING("[html_icon(src)] [src] chirps, \"Mismatched currency detected. Unable to transfer.\""))
@@ -276,7 +276,7 @@
 		to_chat(user, SPAN_NOTICE("[html_icon(src)] [src] chirps, \"Completed transfer of [amount] [cur.name].\""))
 		return TRUE
 
-	if(lock.attackby(W, user))
+	if(lock.attackby(used_item, user))
 		return TRUE
 	return ..()
 

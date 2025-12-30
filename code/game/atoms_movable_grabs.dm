@@ -23,7 +23,7 @@
 
 	// Anchored check so we can operate switches etc on grab intent without getting grab failure msgs.
 	// NOTE: /mob/living overrides this to return FALSE in favour of using default_grab_interaction
-	if(isliving(user) && user.a_intent == I_GRAB && !user.current_posture.prone && !anchored)
+	if(isliving(user) && user.check_intent(I_FLAG_GRAB) && !user.current_posture.prone && !anchored)
 		return try_make_grab(user)
 	return ..()
 

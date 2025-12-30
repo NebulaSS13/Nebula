@@ -245,6 +245,12 @@
 /area/lar_maria/vir_main)
 "aL" = (
 /obj/structure/closet/secure_closet/personal/patient,
+/obj/random/contraband{
+	spawn_nothing_percentage = 80
+	},
+/obj/random/maintenance/medical{
+	spawn_nothing_percentage = 70
+	},
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aM" = (
@@ -560,7 +566,7 @@
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bL" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 8
 	},
 /turf/floor/tiled/white,
@@ -571,13 +577,15 @@
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bN" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 1
 	},
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bO" = (
 /obj/structure/table/glass,
+/obj/random/medical,
+/obj/random/medical,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bQ" = (
@@ -585,7 +593,7 @@
 /turf/floor/tiled,
 /area/lar_maria/cells)
 "bR" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/floor/tiled,
@@ -597,7 +605,7 @@
 /area/lar_maria/cells)
 "bT" = (
 /obj/machinery/light,
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/tiled,
@@ -630,7 +638,7 @@
 /turf/floor/plating,
 /area/lar_maria/morgue)
 "bZ" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -843,7 +851,7 @@
 /turf/floor/plating,
 /area/lar_maria/morgue)
 "cA" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -904,6 +912,7 @@
 /obj/structure/table/glass,
 /obj/item/firstaid/surgery,
 /obj/machinery/light,
+/obj/random/medical,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cG" = (
@@ -920,6 +929,7 @@
 "cI" = (
 /obj/structure/table/glass,
 /obj/item/scalpel,
+/obj/random/medical,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cJ" = (
@@ -969,7 +979,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/tiled,
@@ -1206,6 +1216,12 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/random/contraband{
+	spawn_nothing_percentage = 80
+	},
+/obj/random/maintenance/medical{
+	spawn_nothing_percentage = 70
+	},
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "du" = (
@@ -1214,6 +1230,12 @@
 /area/lar_maria/vir_aux)
 "dv" = (
 /obj/structure/closet/secure_closet/personal/patient,
+/obj/random/contraband{
+	spawn_nothing_percentage = 80
+	},
+/obj/random/maintenance/medical{
+	spawn_nothing_percentage = 70
+	},
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "dw" = (
@@ -1527,13 +1549,13 @@
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ev" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ew" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard,
@@ -1621,6 +1643,7 @@
 "eF" = (
 /obj/structure/table/glass,
 /obj/item/box/syringes,
+/obj/random/medical/lite,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eG" = (
@@ -1628,6 +1651,10 @@
 	dir = 4
 	},
 /obj/structure/table/glass,
+/obj/random/medical/lite,
+/obj/random/maintenance/medical{
+	spawn_nothing_percentage = 70
+	},
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eH" = (
@@ -1649,10 +1676,13 @@
 /obj/structure/table/steel_reinforced,
 /obj/random/smokes,
 /obj/item/gun/energy/taser,
+/obj/random/maintenance/security{
+	spawn_nothing_percentage = 50
+	},
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eK" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/tiled,
@@ -1669,11 +1699,19 @@
 "eN" = (
 /obj/structure/closet,
 /obj/item/clothing/jumpsuit/red,
-/obj/item/gun/projectile/shotgun/pump,
+/obj/random/maintenance/security{
+	spawn_nothing_percentage = 50
+	},
+/obj/random/projectile/sec{
+	spawn_nothing_percentage = 40
+	},
+/obj/random/projectile/sec{
+	spawn_nothing_percentage = 40
+	},
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eO" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -1694,6 +1732,9 @@
 	dir = 8;
 	pixel_x = 24
 	},
+/obj/random/maintenance/security{
+	spawn_nothing_percentage = 50
+	},
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "eQ" = (
@@ -1701,7 +1742,7 @@
 /turf/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "eR" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1762,7 +1803,7 @@
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eZ" = (
-/obj/structure/bed/chair/office/dark,
+/obj/structure/chair/office/dark,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fa" = (
@@ -1782,7 +1823,7 @@
 /area/lar_maria/cells)
 "fd" = (
 /obj/machinery/light,
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
@@ -1793,12 +1834,16 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/random/medical/lite,
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "ff" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/chems/spray/pepper,
 /obj/item/deck/cards,
+/obj/random/maintenance/security{
+	spawn_nothing_percentage = 50
+	},
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fg" = (
@@ -1806,6 +1851,9 @@
 /obj/item/baton,
 /obj/item/baton,
 /obj/item/baton,
+/obj/random/maintenance/security{
+	spawn_nothing_percentage = 50
+	},
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fh" = (
@@ -1856,11 +1904,18 @@
 "fm" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/clothing/head/soft/zhp_cap,
+/obj/random/smokes,
+/obj/random/maintenance/security{
+	spawn_nothing_percentage = 50
+	},
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fn" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/handcuffs,
+/obj/random/maintenance/security{
+	spawn_nothing_percentage = 50
+	},
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fo" = (
@@ -1878,7 +1933,7 @@
 /turf/floor/tiled,
 /area/lar_maria/vir_hallway)
 "fq" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -1887,7 +1942,9 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/computer/modular,
+/obj/machinery/computer/modular{
+	dir = 1
+	},
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fr" = (
@@ -1900,6 +1957,10 @@
 "fs" = (
 /obj/structure/table/glass,
 /obj/item/box/autoinjectors,
+/obj/random/medical/lite,
+/obj/random/maintenance/medical{
+	spawn_nothing_percentage = 70
+	},
 /turf/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "ft" = (
@@ -1908,7 +1969,7 @@
 /area/lar_maria/vir_aux)
 "fu" = (
 /obj/structure/closet/crate/plastic/rations,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2186,6 +2247,9 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "fT" = (
@@ -2376,7 +2440,7 @@
 /turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gj" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
@@ -2437,6 +2501,10 @@
 /obj/item/stack/material/aerogel/mapped/tritium/ten,
 /obj/item/wirecutters,
 /obj/item/wrench,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/random/tool/power,
 /turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gu" = (
@@ -2447,7 +2515,7 @@
 /turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gv" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -2538,6 +2606,7 @@
 /area/lar_maria/vir_access)
 "gH" = (
 /obj/machinery/power/smes/buildable,
+/obj/structure/cable,
 /turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gI" = (
@@ -2562,7 +2631,7 @@
 /turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gL" = (
-/obj/machinery/suit_cycler,
+/obj/machinery/suit_cycler/engineering/prepared/atmospheric,
 /turf/floor/plating,
 /area/lar_maria/sec_wing)
 "gM" = (
@@ -2680,7 +2749,7 @@
 /turf/floor/plating,
 /area/lar_maria/cells)
 "hb" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/machinery/alarm{
@@ -2789,11 +2858,11 @@
 /turf/floor/plating,
 /area/lar_maria/cells)
 "ht" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hu" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2861,7 +2930,7 @@
 /turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hF" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3050,7 +3119,7 @@
 /turf/floor/tiled,
 /area/lar_maria/vir_access)
 "hZ" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3309,6 +3378,9 @@
 	name = "Cells Dock Lockdown";
 	pixel_y = 7
 	},
+/obj/random/maintenance/security{
+	spawn_nothing_percentage = 50
+	},
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "iC" = (
@@ -3373,7 +3445,7 @@
 /turf/floor/tiled,
 /area/lar_maria/vir_access)
 "iK" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/item/gun/energy/taser,
@@ -3384,7 +3456,7 @@
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)
 "iM" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /mob/living/simple_animal/hostile/lar_maria/guard,
@@ -3446,6 +3518,43 @@
 	pixel_x = 25
 	},
 /turf/floor/tiled/white,
+/area/lar_maria/sec_wing)
+"ov" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/floor/plating,
+/area/lar_maria/sec_wing)
+"qL" = (
+/obj/structure/table/glass,
+/obj/item/box/freezer,
+/obj/random/medical/lite,
+/obj/random/maintenance/medical{
+	spawn_nothing_percentage = 70
+	},
+/turf/floor/tiled/white,
+/area/lar_maria/vir_aux)
+"vg" = (
+/obj/structure/table/steel_reinforced,
+/obj/random/maintenance/security{
+	spawn_nothing_percentage = 50
+	},
+/turf/floor/tiled,
+/area/lar_maria/sec_wing)
+"De" = (
+/obj/random/medical/lite,
+/turf/floor/tiled/white,
+/area/lar_maria/vir_aux)
+"Fl" = (
+/obj/machinery/suit_cycler/medical/prepared,
+/turf/floor/plating,
+/area/lar_maria/sec_wing)
+"Ux" = (
+/obj/machinery/door/airlock/security,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/floor/plating,
 /area/lar_maria/sec_wing)
 
 (1,1,1) = {"
@@ -22541,9 +22650,9 @@ cO
 cO
 cO
 cO
-hC
+vg
 eK
-hC
+vg
 cO
 iB
 iK
@@ -24555,8 +24664,8 @@ eO
 fj
 fy
 fS
-gi
-dC
+Ux
+ov
 gH
 cO
 he
@@ -25769,7 +25878,7 @@ cO
 fN
 cO
 dC
-gL
+Fl
 cO
 hk
 hx
@@ -27985,7 +28094,7 @@ du
 du
 em
 ds
-eY
+qL
 fq
 fD
 ds
@@ -28998,7 +29107,7 @@ eG
 fb
 ft
 ds
-ds
+De
 dr
 dr
 aa

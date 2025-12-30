@@ -31,23 +31,23 @@
 		sensors_locked = new_state
 		update_removable()
 
-/obj/item/clothing/sensor/vitals/examine(mob/user)
+/obj/item/clothing/sensor/vitals/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	switch(sensor_mode)
 		if(VITALS_SENSOR_OFF)
-			to_chat(user, "It appears to be disabled.")
+			. += "It appears to be disabled."
 		if(VITALS_SENSOR_BINARY)
-			to_chat(user, "Its binary life tracker appear to be enabled.")
+			. += "Its binary life tracker appear to be enabled."
 		if(VITALS_SENSOR_VITAL)
-			to_chat(user, "Its vital tracker appears to be enabled.")
+			. += "Its vital tracker appears to be enabled."
 		if(VITALS_SENSOR_TRACKING)
-			to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
+			. += "Its vital tracker and tracking beacon appear to be enabled."
 
 /obj/item/clothing/sensor/vitals/on_attached(var/obj/item/clothing/holder, var/mob/user)
 	. = ..()
 	update_removable()
 
-/obj/item/clothing/sensor/vitals/on_removed(mob/user)
+/obj/item/clothing/sensor/vitals/on_accessory_removed(mob/user)
 	. = ..()
 	update_removable()
 

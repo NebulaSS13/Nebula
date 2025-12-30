@@ -3,7 +3,6 @@
 // BEGIN_INCLUDE
 #include "_xenobiology.dm"
 #include "achievement.dm"
-#include "circuit.dm"
 #include "emotes.dm"
 #include "food.dm"
 #include "overrides.dm"
@@ -53,5 +52,7 @@
 #include "slime\slime_reagents.dm"
 #include "slime\slime_surgery.dm"
 #include "slime\slime_update_icon.dm"
+#include "species\golem.dm"
+#include "species\golem_organs.dm"
 // END_INCLUDE
 #endif

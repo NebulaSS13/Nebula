@@ -15,9 +15,9 @@
 	if(A)
 		contain(A)
 
-/obj/structure/stasis_cage/attackby(obj/item/O, mob/user)
-	if(contained && istype(O, /obj/item/scanner/xenobio))
-		return contained.attackby(O, user)
+/obj/structure/stasis_cage/attackby(obj/item/used_item, mob/user)
+	if(contained && istype(used_item, /obj/item/scanner/xenobio))
+		return contained.attackby(used_item, user)
 	. = ..()
 
 /obj/structure/stasis_cage/attack_hand(var/mob/user)
@@ -47,10 +47,10 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/structure/stasis_cage/examine(mob/user)
+/obj/structure/stasis_cage/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(contained)
-		to_chat(user, "\The [contained] is kept inside.")
+		. += "\The [contained] is kept inside."
 
 /obj/structure/stasis_cage/proc/contain(var/mob/living/simple_animal/animal)
 	if(contained || !istype(animal))

@@ -13,8 +13,8 @@
 /obj/item/radio/borg/can_receive_message(var/check_network_membership)
 	. = ..() && isrobot(loc)
 	if(.)
-		var/mob/living/silicon/robot/R = loc
-		if(!R.handle_radio_transmission())
+		var/mob/living/silicon/robot/robot = loc
+		if(!robot.handle_radio_transmission())
 			return FALSE
 
 /obj/item/radio/borg/ert
@@ -32,8 +32,8 @@
 /obj/item/radio/borg/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
 	. = ..()
 	if(isrobot(loc))
-		var/mob/living/silicon/robot/R = src.loc
-		R.handle_radio_transmission()
+		var/mob/living/silicon/robot/robot = src.loc
+		robot.handle_radio_transmission()
 
 /obj/item/radio/borg/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if((. = ..()))

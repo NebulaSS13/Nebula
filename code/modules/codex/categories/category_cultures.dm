@@ -1,5 +1,5 @@
 /decl/codex_category/cultures
-	name = "Factions and Culture"
+	name = "Places, Factions and Culture"
 	desc = "Prominent planets, cultures, factions and religions of known space."
 
 /decl/codex_category/cultures/Populate()

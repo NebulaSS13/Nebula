@@ -35,9 +35,8 @@
 			return
 
 		add_autopsy_data(S)
-		for(var/T in M.chem_doses)
-			var/decl/material/R = T
-			chemtraces |= initial(R.name)
+		for(var/decl/material/reagent as anything in M._chem_doses)
+			chemtraces |= reagent.use_name
 
 	else if(istype(A, /obj/item/organ/external))
 		set_target(A, user)
@@ -52,13 +51,13 @@
 		return
 
 	for(var/V in O.autopsy_data)
-		var/datum/autopsy_data/W = O.autopsy_data[V]
+		var/datum/autopsy_data/wound_data = O.autopsy_data[V]
 		if(weapon_data[V])
 			var/datum/autopsy_data/data = weapon_data[V]["data"]
-			data.merge_with(W)
+			data.merge_with(wound_data)
 			weapon_data[V]["organs"] |= O.name
 		else
-			weapon_data[V] = list("data" = W.copy(), "organs" = list(O.name))
+			weapon_data[V] = list("data" = wound_data.copy(), "organs" = list(O.name))
 
 /obj/item/scanner/autopsy/proc/get_formatted_data()
 	var/list/scan_data = list("Subject: [target_name]")
@@ -66,11 +65,11 @@
 	if(timeofdeath)
 		scan_data += "<b>Time of death:</b> [worldtime2stationtime(timeofdeath)]<br>"
 
-	var/n = 1
+	var/weapon_count = 1
 	for(var/weapon in weapon_data)
 		var/list/organs = weapon_data[weapon]["organs"]
 		var/datum/autopsy_data/data = weapon_data[weapon]["data"]
-		scan_data += "<b>Weapon #[n++]:</b> [data.weapon]"
+		scan_data += "<b>Weapon #[weapon_count++]:</b> [data.weapon]"
 		if(data.hits)
 			var/damage_desc
 			switch(data.damage)
@@ -111,12 +110,12 @@
 	var/time_inflicted = 0
 
 /datum/autopsy_data/proc/copy()
-	var/datum/autopsy_data/W = new()
-	W.weapon = weapon
-	W.damage = damage
-	W.hits = hits
-	W.time_inflicted = time_inflicted
-	return W
+	var/datum/autopsy_data/wound_data = new()
+	wound_data.weapon = weapon
+	wound_data.damage = damage
+	wound_data.hits = hits
+	wound_data.time_inflicted = time_inflicted
+	return wound_data
 
 /datum/autopsy_data/proc/merge_with(var/datum/autopsy_data/other)
 	damage += other.damage

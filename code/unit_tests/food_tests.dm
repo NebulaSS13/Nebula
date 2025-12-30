@@ -63,8 +63,7 @@
 		seeds_by_tag[seed.grown_tag] = seed_name
 
 	var/failures = list()
-	var/obj/container = new // dummy container for holding ingredients
-	container.create_reagents(1000)
+	var/obj/effect/chem_holder/container = new(null, 1000) // dummy container for holding ingredients
 	var/static/list/all_recipe_categories = list(
 		RECIPE_CATEGORY_MICROWAVE,
 		RECIPE_CATEGORY_POT,
@@ -127,8 +126,8 @@
 							grown = grown.dry_out(null, grown.get_max_drying_wetness() + 1)
 							grown.forceMove(container)
 
-			for(var/material_key in recipe.reagents)
-				container.add_to_reagents(material_key, recipe.reagents[material_key])
+			for(var/mat in recipe.reagents)
+				container.add_to_reagents(mat, recipe.reagents[mat])
 
 			if(!recipe_is_valid)
 				QDEL_LIST(container.contents) // clean up prematurely

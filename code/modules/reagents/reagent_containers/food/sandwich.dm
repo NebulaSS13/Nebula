@@ -1,9 +1,9 @@
-/obj/item/food/slice/bread/attackby(obj/item/W, mob/user)
+/obj/item/food/slice/bread/attackby(obj/item/used_item, mob/user)
 
-	if(istype(W,/obj/item/shard) || istype(W,/obj/item/food))
+	if(istype(used_item,/obj/item/shard) || istype(used_item,/obj/item/food))
 		var/obj/item/food/csandwich/S = new()
 		S.dropInto(loc)
-		S.attackby(W,user)
+		S.attackby(used_item,user)
 		qdel(src)
 		return TRUE
 	return ..()
@@ -17,8 +17,8 @@
 
 	var/list/ingredients = list()
 
-/obj/item/food/csandwich/attackby(obj/item/W, mob/user)
-	if(!istype(W, /obj/item/food) && !istype(W, /obj/item/shard))
+/obj/item/food/csandwich/attackby(obj/item/used_item, mob/user)
+	if(!istype(used_item, /obj/item/food) && !istype(used_item, /obj/item/shard))
 		return ..()
 
 	var/sandwich_limit = 4
@@ -29,19 +29,19 @@
 	if(src.contents.len > sandwich_limit)
 		to_chat(user, "<span class='warning'>If you put anything else on \the [src] it's going to collapse.</span>")
 		return TRUE
-	if(istype(W,/obj/item/shard))
-		if(!user.try_unequip(W, src))
+	if(istype(used_item,/obj/item/shard))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		to_chat(user, "<span class='warning'>You hide [W] in \the [src].</span>")
+		to_chat(user, "<span class='warning'>You hide [used_item] in \the [src].</span>")
 		update_icon()
 		return TRUE
-	else if(istype(W,/obj/item/food))
-		if(!user.try_unequip(W, src))
+	else if(istype(used_item,/obj/item/food))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		to_chat(user, "<span class='warning'>You layer [W] over \the [src].</span>")
-		var/obj/item/chems/F = W
-		F.reagents.trans_to_obj(src, F.reagents.total_volume)
-		ingredients += W
+		to_chat(user, "<span class='warning'>You layer [used_item] over \the [src].</span>")
+		var/obj/item/chems/F = used_item
+		F.reagents.trans_to_obj(src, REAGENT_TOTAL_VOLUME(F.reagents))
+		ingredients += used_item
 		update_icon()
 		return TRUE
 	return FALSE // This shouldn't ever happen but okay.
@@ -83,10 +83,10 @@
 		qdel(O)
 	return ..()
 
-/obj/item/food/csandwich/examine(mob/user)
+/obj/item/food/csandwich/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..(user)
 	var/obj/item/O = pick(contents)
-	to_chat(user, "<span class='warning'>You think you can see [O.name] in there.</span>")
+	. += SPAN_WARNING("You think you can see [O.name] in there.")
 
 /obj/item/food/csandwich/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	var/obj/item/shard = locate() in get_contained_external_atoms() // grab early in case of qdele

@@ -12,19 +12,19 @@ LINEN BINS
 	item_state = "bedsheet"
 	randpixel = 0
 	slot_flags = SLOT_BACK
-	layer = BASE_ABOVE_OBJ_LAYER
+	layer = ABOVE_STRUCTURE_LAYER // layer below other objects but above beds
 	throw_speed = 1
 	throw_range = 2
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/organic/cloth
 
-/obj/item/bedsheet/attackby(obj/item/I, mob/user)
-	if(is_sharp(I))
-		user.visible_message("<span class='notice'>\The [user] begins cutting up \the [src] with \a [I].</span>", "<span class='notice'>You begin cutting up \the [src] with \the [I].</span>")
-		if(do_after(user, 50, src))
+/obj/item/bedsheet/attackby(obj/item/used_item, mob/user)
+	if(used_item.is_sharp() || used_item.has_edge())
+		user.visible_message("<span class='notice'>\The [user] begins cutting up \the [src] with \a [used_item].</span>", "<span class='notice'>You begin cutting up \the [src] with \the [used_item].</span>")
+		if(do_after(user, 5 SECONDS, src))
 			to_chat(user, "<span class='notice'>You cut \the [src] into pieces!</span>")
 			for(var/i in 1 to rand(2,5))
-				new /obj/item/chems/glass/rag(get_turf(src))
+				new /obj/item/chems/rag(get_turf(src))
 			qdel(src)
 		return TRUE
 	return ..()
@@ -116,16 +116,16 @@ LINEN BINS
 /obj/structure/bedsheetbin/proc/get_amount()
 	return stored + LAZYLEN(sheets)
 
-/obj/structure/bedsheetbin/examine(mob/user)
+/obj/structure/bedsheetbin/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	var/curamount = get_amount()
 	if(curamount < 1)
-		to_chat(user, "There are no bed sheets in the bin.")
+		. += "There are no bed sheets in the bin."
 		return
 	if(curamount == 1)
-		to_chat(user, "There is one bed sheet in the bin.")
+		. += "There is one bed sheet in the bin."
 		return
-	to_chat(user, "There are [curamount] bed sheets in the bin.")
+	. += "There are [curamount] bed sheets in the bin."
 
 /obj/structure/bedsheetbin/on_update_icon()
 	..()
@@ -137,33 +137,33 @@ LINEN BINS
 	else
 		icon_state = "linenbin-full"
 
-/obj/structure/bedsheetbin/attackby(obj/item/I, mob/user)
+/obj/structure/bedsheetbin/attackby(obj/item/used_item, mob/user)
 	var/curamount = get_amount()
-	if(istype(I, /obj/item/bedsheet))
+	if(istype(used_item, /obj/item/bedsheet))
 		if(curamount >= max_stored)
 			to_chat(user, SPAN_WARNING("\The [src] is full!"))
 			return TRUE
-		if(!user.try_unequip(I, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		LAZYDISTINCTADD(sheets, I)
+		LAZYDISTINCTADD(sheets, used_item)
 		update_icon()
-		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
+		to_chat(user, SPAN_NOTICE("You put [used_item] in [src]."))
 		return TRUE
 
 	//Let the parent attackby run to handle tool interactions
 	. = ..()
 
 	if(!.)
-		if(curamount && !hidden && I.w_class < w_class)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
-			if(!user.try_unequip(I, src))
+		if(curamount && !hidden && used_item.w_class < w_class)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
+			if(!user.try_unequip(used_item, src))
 				return TRUE
-			hidden = I
-			to_chat(user, SPAN_NOTICE("You hide [I] among the sheets."))
+			hidden = used_item
+			to_chat(user, SPAN_NOTICE("You hide [used_item] among the sheets."))
 			return TRUE
 		else if(hidden)
-			to_chat(user, SPAN_WARNING("There's not enough space to hide \the [I]!"))
-		else if(I.w_class >= w_class)
-			to_chat(user, SPAN_WARNING("\The [I] is too big to hide in \the [src]!"))
+			to_chat(user, SPAN_WARNING("There's not enough space to hide \the [used_item]!"))
+		else if(used_item.w_class >= w_class)
+			to_chat(user, SPAN_WARNING("\The [used_item] is too big to hide in \the [src]!"))
 		else if(curamount < 1)
 			to_chat(user, SPAN_WARNING("You can't hide anything if there's no sheets to cover it!"))
 

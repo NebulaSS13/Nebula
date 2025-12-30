@@ -1,4 +1,4 @@
-/datum/job/tradeship_captain
+/datum/job/standard/captain/tradeship
 	title = "Captain"
 	supervisors = "your profit margin, your conscience, and the Trademaster"
 	outfit_type = /decl/outfit/job/tradeship/captain
@@ -8,35 +8,14 @@
 		SKILL_SCIENCE  = SKILL_ADEPT,
 		SKILL_PILOT    = SKILL_ADEPT
 	)
-	max_skill = list(
-		SKILL_PILOT   = SKILL_MAX,
-		SKILL_WEAPONS = SKILL_MAX
-	)
-	skill_points = 30
-	head_position = 1
-	department_types = list(/decl/department/command)
-	total_positions = 1
-	spawn_positions = 1
-	selection_color = "#1d1d4f"
-	req_admin_notify = 1
-	access = list()
-	minimal_access = list()
-	minimal_player_age = 14
-	economic_power = 20
 	ideal_character_age = 70
-	guestbanned = 1
-	must_fill = 1
-	not_random_selectable = 1
 	forced_spawnpoint = /decl/spawnpoint/cryo/captain
 
-/datum/job/tradeship_captain/equip_job(var/mob/living/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+/datum/job/standard/captain/tradeship/equip_job(var/mob/living/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	. = ..()
 	if(H)
 		H.verbs |= /mob/proc/tradehouse_rename_ship
 		H.verbs |= /mob/proc/tradehouse_rename_company
-
-/datum/job/tradeship_captain/get_access()
-	return get_all_station_access()
 
 /mob/proc/tradehouse_rename_ship()
 	set name = "Rename Tradeship"
@@ -76,6 +55,7 @@
 /datum/job/tradeship_first_mate
 	title = "First Mate"
 	supervisors = "the Captain"
+	hud_icon = 'maps/tradeship/hud.dmi'
 	outfit_type = /decl/outfit/job/tradeship/mate
 	head_position = 1
 	department_types = list(

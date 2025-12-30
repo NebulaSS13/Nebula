@@ -66,13 +66,13 @@
 	var/list/rest = ..()
 	var/list/best = list()
 	var/list/good = list()
-	for(var/datum/relation/R in rest)
-		if(!R.holder.assigned_job || !holder.assigned_job)
+	for(var/datum/relation/relation in rest)
+		if(!relation.holder.assigned_job || !holder.assigned_job)
 			continue
-		if(R.holder.assigned_job == holder.assigned_job)
-			best += R
-		if(LAZYLEN(R.holder.assigned_job.department_types & holder.assigned_job.department_types))
-			good += R
+		if(relation.holder.assigned_job == holder.assigned_job)
+			best += relation
+		if(LAZYLEN(relation.holder.assigned_job.department_types & holder.assigned_job.department_types))
+			good += relation
 	if(best.len)
 		return best
 	else if (good.len)

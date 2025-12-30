@@ -16,16 +16,16 @@
 	can_have_color = FALSE
 
 #define IS_TOOL_WITH_QUALITY(A, T, Q)     (isatom(A) && A.get_tool_quality(T) >= Q)
-/obj/structure/cable/heavyduty/attackby(obj/item/item, mob/user)
-	if(IS_WIRECUTTER(item))
+/obj/structure/cable/heavyduty/attackby(obj/item/used_item, mob/user)
+	if(IS_WIRECUTTER(used_item))
 		// Must be cut with power tools like the hydraulic clamp.
-		if(IS_TOOL_WITH_QUALITY(item, TOOL_WIRECUTTERS, TOOL_QUALITY_GOOD))
-			cut_wire(item, user)
+		if(IS_TOOL_WITH_QUALITY(used_item, TOOL_WIRECUTTERS, TOOL_QUALITY_GOOD))
+			cut_wire(used_item, user)
 		else
-			to_chat(user, SPAN_WARNING("\The [item] isn't strong enough to cut \the [src]."))
+			to_chat(user, SPAN_WARNING("\The [used_item] isn't strong enough to cut \the [src]."))
 		return TRUE
-	if(istype(item, /obj/item/stack/cable_coil) && !istype(item, /obj/item/stack/cable_coil/heavyduty))
-		to_chat(user, SPAN_WARNING("\The [item] isn't heavy enough to connect to \the [src]."))
+	if(istype(used_item, /obj/item/stack/cable_coil) && !istype(used_item, /obj/item/stack/cable_coil/heavyduty))
+		to_chat(user, SPAN_WARNING("\The [used_item] isn't heavy enough to connect to \the [src]."))
 		return TRUE
 	return ..()
 

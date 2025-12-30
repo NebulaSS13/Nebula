@@ -5,7 +5,9 @@
 	#include "../../mods/content/mouse_highlights/_mouse_highlight.dme"
 	#include "../../mods/content/scaling_descriptors.dm"
 	#include "../../mods/species/drakes/_drakes.dme" // include before _fantasy.dme so overrides work
+	#include "../../mods/content/item_sharpening/_item_sharpening.dme"
 	#include "../../mods/content/fantasy/_fantasy.dme"
+	#include "../../mods/content/blacksmithy/_blacksmithy.dme"
 
 	#include "areas/_areas.dm"
 	#include "areas/downlands.dm"
@@ -19,18 +21,6 @@
 	#include "jobs/shrine.dm"
 	#include "jobs/visitors.dm"
 	#include "jobs/wilderness.dm"
-
-	#include "submaps/_submaps.dm"
-	#include "submaps/downlands/_downlands.dm"
-	#include "submaps/grassland/_grassland.dm"
-	#include "submaps/swamp/_swamp.dm"
-	#include "submaps/woods/_woods.dm"
-	#include "submaps/woods/bear_den/bear_den.dm"
-	#include "submaps/woods/chemistry_shack/chemistry_shack.dm"
-	#include "submaps/woods/fairy_rings/fairy_rings.dm"
-	#include "submaps/woods/fox_den/fox_den.dm"
-	#include "submaps/woods/hunter_camp/hunter_camp.dm"
-	#include "submaps/woods/old_cabin/old_cabin.dm"
 
 	#include "levels/_levels.dm"
 	#include "levels/random_map.dm"

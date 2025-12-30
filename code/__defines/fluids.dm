@@ -40,11 +40,11 @@ if(!QDELETED(TURF) && TURF._fluid_turf_is_active) {                           \
 #define UPDATE_FLUID_BLOCKED_DIRS(TURF)                                       \
 if(isnull(TURF.fluid_blocked_dirs)) {                                         \
 	TURF.fluid_blocked_dirs = 0;                                              \
-	for(var/obj/structure/window/W in TURF) {                                 \
-		if(W.density) TURF.fluid_blocked_dirs |= W.dir;                       \
+	for(var/obj/structure/window/window in TURF) {                            \
+		if(window.density) TURF.fluid_blocked_dirs |= window.dir;             \
 	}                                                                         \
-	for(var/obj/machinery/door/window/D in TURF) {                            \
-		if(D.density) TURF.fluid_blocked_dirs |= D.dir;                       \
+	for(var/obj/machinery/door/window/windoor in TURF) {                      \
+		if(windoor.density) TURF.fluid_blocked_dirs |= windoor.dir;           \
 	}                                                                         \
 }
 

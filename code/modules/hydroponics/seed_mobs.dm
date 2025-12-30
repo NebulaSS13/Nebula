@@ -7,7 +7,7 @@
 
 	spawn(15 SECONDS)
 		if(!host.ckey && !host.client)
-			host.death()  // This seems redundant, but a lot of mobs don't
+			host.death()        // This seems redundant, but a lot of mobs don't
 			host.set_stat(DEAD) // handle death() properly. Better safe than etc.
 			host.visible_message("<span class='danger'>\The [host] is malformed and unable to survive. It expires pitifully, leaving behind some seeds.</span>")
 

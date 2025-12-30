@@ -12,7 +12,7 @@
 
 	var/secured = 1
 	var/list/attached_overlays = null
-	var/obj/item/assembly_holder/holder = null
+	var/obj/item/assembly_holder/holder = null // currently can be a TTV or assemblyholder, todo make ttv use assemblyholder
 	var/cooldown = 0//To prevent spam
 	var/wires = WIRE_RECEIVE | WIRE_PULSE
 
@@ -30,59 +30,56 @@
 			if(holder.a_right == src)
 				holder.a_right = null
 		if(istype(holder, /datum) && !QDELETED(holder))
+			// the holder has the responsibility to clear its associated vars on destroy
 			qdel(holder)
 		holder = null
 	return ..()
 
 /// What the device does when turned on
 /obj/item/assembly/proc/activate()
-	return
-
-/// Called when another assembly acts on this one, var/radio will determine where it came from for wire calcs
-/obj/item/assembly/proc/pulsed(var/radio = 0)
-	return
-
-/// Called when this device attempts to act on another device, var/radio determines if it was sent via radio or direct
-/obj/item/assembly/proc/pulse_device(var/radio = 0)
-	return
+	if(!secured || (cooldown > 0))	return 0
+	cooldown = 2
+	spawn(10)
+		process_cooldown()
+	return 1
 
 /// Code that has to happen when the assembly is un\secured goes here
 /obj/item/assembly/proc/toggle_secure()
-	return
+	secured = !secured
+	update_icon()
+	return secured
 
 /// Called when an assembly is attacked by another
-/obj/item/assembly/proc/attach_assembly(var/obj/A, var/mob/user)
-	return
-
-/// Called via spawn(10) to have it count down the cooldown var
-/obj/item/assembly/proc/process_cooldown()
-	return
+/obj/item/assembly/proc/attach_assembly(var/obj/item/A, var/mob/user)
+	holder = new/obj/item/assembly_holder(get_turf(src))
+	if(holder.attach(A,src,user))
+		to_chat(user, "<span class='notice'>You attach \the [A] to \the [src]!</span>")
+		return 1
+	return 0
 
 /// Called when the holder is moved
 /obj/item/assembly/proc/holder_movement()
 	return
 
-/// Called when attack_self is called
-/obj/item/assembly/interact(mob/user)
-	return
-
-/obj/item/assembly/process_cooldown()
+/// Called via spawn(10) to have it count down the cooldown var
+/// This is really bad. Please just make it process...
+/obj/item/assembly/proc/process_cooldown()
 	cooldown--
 	if(cooldown <= 0)	return 0
 	spawn(10)
 		process_cooldown()
 	return 1
 
-
-/obj/item/assembly/pulsed(var/radio = 0)
+/// Called when another assembly acts on this one, var/radio will determine where it came from for wire calcs
+/obj/item/assembly/proc/pulsed(var/radio = 0)
 	if(holder && (wires & WIRE_RECEIVE))
 		activate()
 	if(radio && (wires & WIRE_RADIO_RECEIVE))
 		activate()
 	return 1
 
-
-/obj/item/assembly/pulse_device(var/radio = 0)
+/// Called when this device attempts to act on another device, var/radio determines if it was sent via radio or direct
+/obj/item/assembly/proc/pulse_device(var/radio = 0)
 	if(holder && (wires & WIRE_PULSE))
 		holder.process_activation(src, 1, 0)
 	if(holder && (wires & WIRE_PULSE_SPECIAL))
@@ -91,38 +88,15 @@
 		//Not sure what goes here quite yet send signal?
 	return 1
 
-
-/obj/item/assembly/activate()
-	if(!secured || (cooldown > 0))	return 0
-	cooldown = 2
-	spawn(10)
-		process_cooldown()
-	return 1
-
-
-/obj/item/assembly/toggle_secure()
-	secured = !secured
-	update_icon()
-	return secured
-
-
-/obj/item/assembly/attach_assembly(var/obj/item/assembly/A, var/mob/user)
-	holder = new/obj/item/assembly_holder(get_turf(src))
-	if(holder.attach(A,src,user))
-		to_chat(user, "<span class='notice'>You attach \the [A] to \the [src]!</span>")
-		return 1
-	return 0
-
-
-/obj/item/assembly/attackby(obj/item/component, mob/user)
-	if(!user_can_attack_with(user) || !component.user_can_attack_with(user))
+/obj/item/assembly/attackby(obj/item/used_item, mob/user)
+	if(!user_can_attack_with(user) || !used_item.user_can_attack_with(user))
 		return TRUE
-	if(isassembly(component))
-		var/obj/item/assembly/assembly = component
+	if(isassembly(used_item))
+		var/obj/item/assembly/assembly = used_item
 		if(!assembly.secured && !secured)
 			attach_assembly(assembly, user)
 			return TRUE
-	if(IS_SCREWDRIVER(component))
+	if(IS_SCREWDRIVER(used_item))
 		if(toggle_secure())
 			to_chat(user, SPAN_NOTICE("\The [src] is ready!"))
 		else
@@ -135,13 +109,13 @@
 	return PROCESS_KILL
 
 
-/obj/item/assembly/examine(mob/user, distance)
+/obj/item/assembly/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1 || loc == user)
 		if(secured)
-			to_chat(user, "\The [src] is ready!")
+			. += "\The [src] is ready!"
 		else
-			to_chat(user, "\The [src] can be attached!")
+			. += "\The [src] can be attached!"
 
 
 /obj/item/assembly/attack_self(mob/user)
@@ -153,6 +127,7 @@
 	interact(user)
 	return TRUE
 
+/// Called when attack_self is called
 /obj/item/assembly/interact(mob/user)
 	return //HTML MENU FOR WIRES GOES HERE
 

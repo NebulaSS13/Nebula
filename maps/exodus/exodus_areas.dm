@@ -749,9 +749,6 @@
 /area/shuttle/arrival/station
 	icon_state = "shuttle"
 
-/area/shuttle/escape_shuttle
-	name = "\improper Emergency Shuttle"
-
 // SUBSTATIONS. (Subtype of maint, that should let them serve as shielded area during radstorm)
 
 /area/exodus/maintenance/substation
@@ -1050,10 +1047,6 @@
 	name = "\improper Teleporter"
 	icon_state = "teleporter"
 	req_access = list(access_teleporter)
-
-/area/exodus/gateway
-	name = "\improper Gateway"
-	icon_state = "teleporter"
 
 // Thunderdome
 

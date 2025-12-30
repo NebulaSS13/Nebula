@@ -4,10 +4,8 @@
 
 /decl/codex_category/species/Populate()
 
-	for(var/thing in get_all_species())
-		var/decl/species/species = get_species_by_key(thing)
+	for(var/decl/species/species as anything in decls_repository.get_decls_of_subtype_unassociated(/decl/species))
 		if(!species.hidden_from_codex)
-
 			var/entry_type = (species.secret_codex_info) ? /datum/codex_entry/scannable : /datum/codex_entry
 			var/datum/codex_entry/entry = new entry_type(
 				_display_name = "[species.name] (species)",

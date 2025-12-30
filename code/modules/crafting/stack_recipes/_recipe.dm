@@ -23,9 +23,6 @@
 	var/gender
 	/// Object path to the desired product.
 	var/result_type
-	/// Object path to use in unit testing; leave null to use result_type instead.
-	/// Useful for items that require a material to Initialize() correctly as testing tries to use a null material.
-	var/test_result_type
 	/// Amount of matter units needed for this recipe. If null, generates from result matter.
 	var/req_amount
 	/// Time it takes for this recipe to be crafted (not including skill and tool modifiers). If null, generates from product w_class and difficulty.
@@ -77,6 +74,10 @@
 	var/required_material                = MATERIAL_REQUIRED
 	/// Can this recipe use a reinforced material? Set to type for a specific material.
 	var/required_reinforce_material      = MATERIAL_FORBIDDEN
+
+	/// In cases where required_material is MATERIAL_REQUIRED and not a typepath,
+	/// this is the material type used for setup, validation, and tests.
+	var/validation_material
 
 	/// Minimum material wall support value.
 	var/required_wall_support_value
@@ -131,17 +132,29 @@
 	else if(!ispath(result_type, expected_product_type))
 		. += "result type [result_type || "NULL"] is not subtype of expected product type [expected_product_type || "NULL"]"
 
-	if(isnull(required_material) || required_material == MATERIAL_FORBIDDEN)
-		if(!isnull(required_wall_support_value))
-			. += "null required material but non-null wall support value"
-		if(!isnull(required_integrity))
-			. += "null required material but non-null integrity value"
-		if(!isnull(required_max_opacity))
-			. += "null required material but non-null max opacity value"
-		if(!isnull(required_min_hardness))
-			. += "null required material but non-null min hardness value"
-		if(!isnull(required_max_hardness))
-			. += "null required material but non-null max hardness value"
+	switch(required_material)
+		if(null)
+			. += "null required material value is deprecated, use MATERIAL_FORBIDDEN"
+		if(MATERIAL_FORBIDDEN)
+			if(!isnull(validation_material))
+				. += "material is forbidden but non-null validation material"
+			if(!isnull(required_wall_support_value))
+				. += "material is forbidden but non-null wall support value"
+			if(!isnull(required_integrity))
+				. += "material is forbidden but non-null integrity value"
+			if(!isnull(required_max_opacity))
+				. += "material is forbidden but non-null max opacity value"
+			if(!isnull(required_min_hardness))
+				. += "material is forbidden but non-null min hardness value"
+			if(!isnull(required_max_hardness))
+				. += "material is forbidden but non-null max hardness value"
+		if(MATERIAL_REQUIRED)
+			if(isnull(validation_material))
+				. += "material is required but validation material was null"
+			else
+				var/list/material_failures = get_missing_material_properties(RESOLVE_TO_DECL(validation_material))
+				if(LAZYLEN(material_failures))
+					. += "validation material is [english_list(material_failures)]" // 'material is too soft, too opaque, and unable to support enough weight'
 
 	if(recipe_skill && !isnull(difficulty))
 		var/decl/skill/used_skill = GET_DECL(recipe_skill)
@@ -235,6 +248,21 @@
 
 	. = JOINTEXT(.)
 
+/// Returns a list of descriptive error strings e.g. "too soft/hard/opaque" if material properties are not satisfied.
+/decl/stack_recipe/proc/get_missing_material_properties(decl/material/mat)
+	ASSERT(mat)
+	// Check if the material has the appropriate properties.
+	if(!isnull(required_wall_support_value) && mat.wall_support_value < required_wall_support_value)
+		LAZYADD(., "unable to support enough weight")
+	if(!isnull(required_integrity) && mat.integrity < required_integrity)
+		LAZYADD(., "too weak")
+	if(!isnull(required_min_hardness) && mat.hardness < required_min_hardness)
+		LAZYADD(., "too soft")
+	if(!isnull(required_max_hardness) && mat.hardness > required_max_hardness)
+		LAZYADD(., "too hard")
+	if(!isnull(required_max_opacity) && mat.opacity > required_max_opacity)
+		LAZYADD(., "too opaque")
+
 /decl/stack_recipe/proc/can_be_made_from(stack_type, tool_type, decl/material/mat, decl/material/reinf_mat)
 
 	// Early checks to avoid letting recipes make themselves.
@@ -259,17 +287,8 @@
 		return FALSE
 
 	// Check if the material has the appropriate properties.
-	if(mat)
-		if(!isnull(required_wall_support_value) && mat.wall_support_value < required_wall_support_value)
-			return FALSE
-		if(!isnull(required_integrity) && mat.integrity < required_integrity)
-			return FALSE
-		if(!isnull(required_min_hardness) && mat.hardness < required_min_hardness)
-			return FALSE
-		if(!isnull(required_max_hardness) && mat.hardness > required_max_hardness)
-			return FALSE
-		if(!isnull(required_max_opacity) && mat.opacity > required_max_opacity)
-			return FALSE
+	if(mat && length(get_missing_material_properties(mat)))
+		return FALSE
 
 	// Check if they're using the right tool.
 	if(required_tool)
@@ -325,7 +344,8 @@
 	if(result_type && isnull(req_amount))
 		req_amount = 0
 		var/list/materials
-		materials = atom_info_repository.get_matter_for((test_result_type || result_type), (ispath(required_material) ? required_material : null))
+		var/decl/material/validation_material_path = ispath(required_material) ? decls_repository.get_first_concrete_decl_path_of_type(required_material) : validation_material
+		materials = atom_info_repository.get_matter_for(result_type, validation_material_path)
 		for(var/mat in materials)
 			req_amount += round(materials[mat])
 		req_amount = ceil(req_amount*crafting_extra_cost_factor)
@@ -347,10 +367,7 @@
 	else
 		. = jointext(list() + material_strings + name, " ")
 		if(apply_article)
-			if(gender == PLURAL)
-				. = "some [.]"
-			else
-				. = ADD_ARTICLE(.)
+			. = ADD_ARTICLE_GENDER(., gender)
 
 /decl/stack_recipe/proc/req_mat_to_type(decl/material/mat, mat_req)
 	if(mat_req != MATERIAL_FORBIDDEN)

@@ -2,7 +2,7 @@
 
 /obj/effect/overmap/visitable/sector/magshield
 	name = "orbital station"
-	desc = "Sensors detect an orbital station above the exoplanet. Sporadic magentic impulses are registred inside it. Planet landing is impossible due to lower orbits being cluttered with chaotically moving metal chunks."
+	desc = "Sensors detect an orbital station above the exoplanet. Sporadic magentic impulses are registered inside it. Planet landing is impossible due to lower orbits being cluttered with chaotically moving metal chunks."
 	icon_state = "object"
 	initial_generic_waypoints = list(
 		"nav_magshield_1",
@@ -90,12 +90,12 @@
 	to_chat(user, SPAN_NOTICE("You don't see how you could turn off \the [src]. You could possibly jam something into the rotating spokes."))
 	return TRUE
 
-/obj/structure/magshield/maggen/attackby(obj/item/W, mob/user)
+/obj/structure/magshield/maggen/attackby(obj/item/used_item, mob/user)
 	if (being_stopped)
 		to_chat(user, SPAN_WARNING("Somebody is already interacting with \the [src]."))
 		return TRUE
-	if(istype(W, /obj/item/stack/material/rods))
-		var/obj/item/stack/material/rods/R = W
+	if(istype(used_item, /obj/item/stack/material/rods))
+		var/obj/item/stack/material/rods/R = used_item
 		to_chat(user, SPAN_NOTICE("You start to jam \a [R.singular_name] into the rotating spokes."))
 		being_stopped = 1
 		if (!do_after(user, 100, src))
@@ -112,9 +112,9 @@
 		explosion(T, 2, 3, 4, 10, 1)
 		if(!QDELETED(src))
 			qdel(src)
-	if(istype(W, /obj/item/mop))
-		to_chat(user, SPAN_NOTICE("You stick \the [W] into the rotating spokes, and it immediately breaks into tiny pieces."))
-		qdel(W)
+	if(istype(used_item, /obj/item/mop))
+		to_chat(user, SPAN_NOTICE("You stick \the [used_item] into the rotating spokes, and it immediately breaks into tiny pieces."))
+		qdel(used_item)
 		return TRUE
 	return ..()
 
@@ -172,4 +172,4 @@
 
 /obj/item/paper/magshield/log
 	name = "printed page"
-	info = "\[07:31\] Attention: solar flare detected! Automatic countermeasures activated.<br>\[07:33\] Warning: ERROR: NULL input at FARADAY_CAGE#12.TFI - line 2067: No command found. System will be rebooted.<br>\[07:39\] Warning: radiaton countermeasures inactive. Please initiate emergency protocol.<br>\[07:40\] Warning: radiaton countermeasures inactive. Please initiate emergency protocol.<br>\[07:41\] Warning: radiaton countermeasures inactive. Please initiate emergency protocol.<br>\[07:45\] Attention! Multiple systems failure. Please initiate emergency protocol<br>\[07:52\] Warning: LIDAR-ASTRA system detected multiple meteors approaching. Estimate impact time: 12.478 seconds. <br>\[07:52\] Warning! Miltiple hull breaches det~!!@#"
+	info = "\[07:31\] Attention: solar flare detected! Automatic countermeasures activated.<br>\[07:33\] Warning: ERROR: NULL input at FARADAY_CAGE#12.TFI - line 2067: No command found. System will be rebooted.<br>\[07:39\] Warning: radiation countermeasures inactive. Please initiate emergency protocol.<br>\[07:40\] Warning: radiation countermeasures inactive. Please initiate emergency protocol.<br>\[07:41\] Warning: radiation countermeasures inactive. Please initiate emergency protocol.<br>\[07:45\] Attention! Multiple systems failure. Please initiate emergency protocol<br>\[07:52\] Warning: LIDAR-ASTRA system detected multiple meteors approaching. Estimate impact time: 12.478 seconds. <br>\[07:52\] Warning! Miltiple hull breaches det~!!@#"

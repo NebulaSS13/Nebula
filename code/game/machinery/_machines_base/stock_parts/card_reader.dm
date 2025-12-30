@@ -14,6 +14,7 @@
 		/decl/material/solid/fiberglass   = MATTER_AMOUNT_TRACE,
 	)
 	max_health = ITEM_HEALTH_NO_DAMAGE
+	eject_handler = /decl/interaction_handler/remove_held_item/card
 	var/should_swipe = FALSE            //Whether the card should only be swiped instead of being inserted
 	var/obj/item/card/inserted_card     //Card currently in the slot
 
@@ -45,8 +46,8 @@
 		return swipe_card(O, user)
 	. = ..()
 
-/obj/item/stock_parts/item_holder/card_reader/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W) && !istype(loc, /obj/machinery)) //Only if not in the machine, to prevent hijacking tool interactions with the machine
+/obj/item/stock_parts/item_holder/card_reader/attackby(obj/item/used_item, mob/user)
+	if(IS_SCREWDRIVER(used_item) && !istype(loc, /obj/machinery)) //Only if not in the machine, to prevent hijacking tool interactions with the machine
 		should_swipe = !should_swipe
 		to_chat(user, SPAN_NOTICE("You toggle \the [src] into [should_swipe? "swipe" : "insert"] card mode."))
 		return TRUE
@@ -67,3 +68,10 @@
 
 /obj/item/stock_parts/item_holder/card_reader/proc/get_emag_card()
 	return istype(inserted_card, /obj/item/card/emag) ? inserted_card : null
+
+/decl/interaction_handler/remove_held_item/card
+	name = "Eject Card"
+	icon = 'icons/screen/radial.dmi'
+	icon_state = "radial_eject_id"
+	expected_component_type = /obj/item/stock_parts/item_holder/card_reader
+	examine_desc = "eject an inserted ID card"

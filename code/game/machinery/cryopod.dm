@@ -157,7 +157,9 @@
 	var/occupied_icon_state = "body_scanner_1"
 	var/on_store_message = "has entered long-term storage."
 	var/on_store_name = "Cryogenic Oversight"
+	var/on_store_visible_message = "$TARGET$ hums and hisses as it moves $USER$ into storage." //! A visible message to display when the user is despawned. $USER$ will be replaced with the user's name, $TARGET$ will be replaced with the pod's name.
 	var/on_enter_occupant_message = "You feel cool air surround you. You go numb as your senses turn inward."
+	var/on_enter_visible_message = "$USER$ starts climbing into $TARGET$." //! A visible message to display when the user enters the pod. $USER$ will be replaced with the user's name.
 	var/allow_occupant_types = list(/mob/living/human)
 	var/disallow_occupant_types = list()
 
@@ -187,6 +189,31 @@
 	allow_occupant_types = list(/mob/living/silicon/robot)
 	disallow_occupant_types = list(/mob/living/silicon/robot/drone)
 	applies_stasis = 0
+
+// Cryo
+/obj/machinery/cryopod/robot/door
+	//This inherits from the robot cryo, so synths can be properly cryo'd.  If a non-synth enters and is cryo'd, ..() is called and it'll still work.
+	abstract_type = /obj/machinery/cryopod/robot/door
+	name = "Airlock of Wonders"
+	desc = "An airlock that isn't an airlock, and shouldn't exist.  Yell at a coder/mapper."
+	icon = 'icons/obj/machines/tramdoors.dmi'
+	icon_state = "door_closed"
+	base_icon_state = "door_closed"
+	occupied_icon_state = "door_locked"
+	on_enter_visible_message = "$USER$ steps into $TARGET$."
+
+	time_till_despawn = 1 MINUTE //We want to be much faster then normal cryo, since waiting in an elevator for half an hour is a special kind of hell.
+
+	allow_occupant_types = list(/mob/living/silicon/robot,/mob/living/human)
+	disallow_occupant_types = list(/mob/living/silicon/robot/drone)
+
+/obj/machinery/cryopod/robot/door/dorms
+	name = "Residential District Elevator"
+	desc = "A small elevator that goes down to the deeper section of the colony."
+	on_store_message = "has departed for the residential district."
+	on_store_name = "Residential Oversight"
+	on_enter_occupant_message = "The elevator door closes slowly, ready to bring you down to the residential district."
+	on_store_visible_message = "$TARGET$ makes a ding as it moves $USER$ to the residential district."
 
 /obj/machinery/cryopod/lifepod
 	name = "life pod"
@@ -248,7 +275,7 @@
 /obj/machinery/cryopod/lifepod/Process()
 	if(SSevac.evacuation_controller && SSevac.evacuation_controller.state >= EVAC_LAUNCHING)
 		if(occupant && !launched)
-			launch()
+			INVOKE_ASYNC(src, PROC_REF(launch))
 	..()
 
 /obj/machinery/cryopod/Destroy()
@@ -294,16 +321,19 @@
 
 	return TRUE
 
-/obj/machinery/cryopod/examine(mob/user)
+/obj/machinery/cryopod/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if (occupant && user.Adjacent(src))
-		occupant.examine(arglist(args))
+		. += occupant.get_examine_strings(user, distance, infix, suffix)
+
+/obj/machinery/cryopod/get_cryogenic_power()
+	return applies_stasis ? 1 : 0
 
 //Lifted from Unity stasis.dm and refactored.
 /obj/machinery/cryopod/Process()
 	if(occupant)
 		if(applies_stasis && (world.time > time_entered + 20 SECONDS))
-			occupant.set_stasis(2)
+			occupant.add_mob_modifier(/decl/mob_modifier/stasis, 2 SECONDS, source = src)
 
 		//Allow a ten minute gap between entering the pod and actually despawning.
 		// Only provide the gap if the occupant hasn't ghosted
@@ -356,6 +386,7 @@
 		control_computer._admin_logs += "[key_name(occupant)] ([role_alt_title]) at [stationtime2text()]"
 	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
 
+	visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_user_tokens(emote_replace_target_tokens(on_store_visible_message, src), occupant))))
 	do_telecomms_announcement(src, "[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
 	despawn_character(occupant)
 	set_occupant(null)
@@ -366,7 +397,10 @@
 			if(alert(target,"Would you like to enter long-term storage?",,"Yes","No") != "Yes")
 				return
 	if(!user.incapacitated() && !user.anchored && user.Adjacent(src) && user.Adjacent(target))
-		visible_message("[user] starts putting [target] into \the [src].", range = 3)
+		if(target == user)
+			visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_user_tokens(emote_replace_target_tokens(on_enter_visible_message, src), usr))), range = 3)
+		else
+			visible_message("[user] starts putting [target] into \the [src].", range = 3)
 		if(!do_after(user, 20, src)|| QDELETED(target))
 			return
 		set_occupant(target)
@@ -417,8 +451,8 @@
 	var/list/items = get_contained_external_atoms()
 	if(occupant) items -= occupant
 
-	for(var/obj/item/W in items)
-		W.dropInto(loc)
+	for(var/obj/item/thing in items)
+		thing.dropInto(loc)
 
 	src.go_out()
 	add_fingerprint(usr)
@@ -441,7 +475,7 @@
 	if(!usr.can_enter_cryopod(usr))
 		return
 
-	visible_message("\The [usr] starts climbing into \the [src].", range = 3)
+	visible_message(emote_replace_user_tokens(emote_replace_target_tokens(on_enter_visible_message, src), usr), range = 3)
 
 	if(do_after(usr, 20, src))
 
@@ -484,7 +518,7 @@
 
 	if(occupant.client)
 		if(!silent)
-			to_chat(occupant, SPAN_NOTICE("[on_enter_occupant_message]"))
+			occupant.visible_message("\The [src] [emote_replace_target_tokens(on_enter_visible_message)]", SPAN_NOTICE(on_enter_occupant_message))
 			to_chat(occupant, SPAN_NOTICE("<b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"))
 		occupant.client.perspective = EYE_PERSPECTIVE
 		occupant.client.eye = src
@@ -520,14 +554,14 @@
 		to_chat(user, SPAN_NOTICE("The glass is already open."))
 	return TRUE
 
-/obj/structure/broken_cryo/attackby(obj/item/W, mob/user)
+/obj/structure/broken_cryo/attackby(obj/item/used_item, mob/user)
 	if (busy)
 		to_chat(user, SPAN_NOTICE("Someone else is attempting to open this."))
 		return TRUE
 	if (!closed)
 		to_chat(user, SPAN_NOTICE("The glass cover is already open."))
 		return TRUE
-	if (IS_CROWBAR(W))
+	if (IS_CROWBAR(used_item))
 		busy = 1
 		visible_message("[user] starts to pry the glass cover off of \the [src].")
 		if (!do_after(user, 50, src))

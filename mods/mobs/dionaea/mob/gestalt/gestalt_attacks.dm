@@ -1,6 +1,6 @@
-/obj/structure/diona_gestalt/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/diona_gestalt/attackby(var/obj/item/used_item, var/mob/user)
 	. = ..()
-	if(thing.get_attack_force(user))
+	if(used_item.get_attack_force(user))
 		shed_atom(forcefully = TRUE)
 
 /obj/structure/diona_gestalt/hitby()

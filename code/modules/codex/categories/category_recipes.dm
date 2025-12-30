@@ -33,13 +33,18 @@
 			if(!product)
 				continue
 			category_name = "mix recipe"
-			lore_text = initial(product.desc)
-			mechanics_text = "This recipe produces \a [initial(product.name)].<br>It should be performed in a mixing bowl or beaker, and requires the following ingredients:"
+			var/product_name = initial(product.name)
+			if(ispath(product, /atom/movable) && TYPE_IS_SPAWNABLE(product))
+				product_name = atom_info_repository.get_name_for(product)
+				lore_text = atom_info_repository.get_description_for(product)
+			else
+				lore_text = initial(product.desc)
+			mechanics_text = "This recipe produces \a [product_name].<br>It should be performed in a mixing bowl or beaker, and requires the following ingredients:"
 		else
 			var/decl/material/product = GET_DECL(food.result)
 			if(!product)
 				continue
-			lore_text = initial(product.lore_text)
+			lore_text = product.lore_text
 			if(ispath(food.result, /decl/material/liquid/drink) || ispath(food.result, /decl/material/liquid/alcohol))
 				category_name = "drink recipe"
 				mechanics_text = "This recipe produces [food.result_amount]u <span codexlink='[product.codex_name || product.name] (substance)'>[product.name]</span>.<br>It should be performed in a glass or shaker, and requires the following ingredients:"
@@ -84,13 +89,18 @@
 		for(var/thing in recipe.reagents)
 			var/decl/material/thing_reagent = GET_DECL(thing)
 			ingredients += "[recipe.reagents[thing]]u <span codexlink='[thing_reagent.codex_name || thing_reagent.name] (substance)'>[thing_reagent.name]</span>"
-		for(var/thing in recipe.items)
-			var/atom/thing_atom = thing
+		for(var/atom/thing as anything in recipe.items)
 			var/count = recipe.items[thing]
-			var/thing_name = initial(thing_atom.name)
+			var/thing_name = initial(thing.name)
+			if(ispath(thing, /atom/movable) && TYPE_IS_SPAWNABLE(thing))
+				thing_name = atom_info_repository.get_name_for(thing)
 			if(SScodex.get_entry_by_string(thing_name))
 				thing_name = "<l>[thing_name]</l>"
-			ingredients += (count > 1) ? "[count]x [thing_name]" : "\a [initial(thing_atom.name)]"
+			else
+				var/datum/codex_entry/result_entry = SScodex.get_codex_entry(thing)
+				if(result_entry)
+					thing_name = "<span codexlink='[result_entry.name]'>[thing_name]</span>"
+			ingredients += (count > 1) ? "[count]x [thing_name]" : "\a [thing_name]"
 		for(var/thing in recipe.fruit)
 			ingredients += "[recipe.fruit[thing]] [thing]\s"
 		mechanics_text += "<ul><li>[jointext(ingredients, "</li><li>")]</li></ul>"
@@ -100,13 +110,25 @@
 			cooking_methods += "\a [cooking_method]"
 
 		var/atom/recipe_product = recipe.result
-		mechanics_text += "<br>This recipe takes [ceil(recipe.cooking_time/10)] second\s to cook in [english_list(cooking_methods, and_text = " or ")] and creates \a [initial(recipe_product.name)]."
+		var/product_name
+		var/product_link
 		var/lore_text = recipe.lore_text
-		if(!lore_text)
-			lore_text = initial(recipe_product.desc)
+		if(ispath(recipe_product, /atom/movable) && TYPE_IS_SPAWNABLE(recipe_product))
+			product_name = atom_info_repository.get_name_for(recipe_product)
+			lore_text ||= atom_info_repository.get_description_for(recipe_product)
+		else if(ispath(recipe.result, /decl/material))
+			var/decl/material/result_reagent = GET_DECL(recipe.result)
+			product_name = result_reagent.use_name
+			product_link = "some <span codexlink='[result_reagent.codex_name || result_reagent.name] (substance)'>[product_name]</span>"
+			lore_text ||= result_reagent.lore_text
+		else // some things can't be spawned by the atom info repository because they need extra args we can't pass
+			product_name = initial(recipe_product.name)
+			lore_text ||= initial(recipe_product.desc)
+		product_link ||= "\a [product_name]"
+		mechanics_text += "<br>This recipe takes [ceil(recipe.cooking_time/(1 SECOND))] second\s to cook in [english_list(cooking_methods, and_text = " or ")] and creates [product_link]."
 
-		var/recipe_name = recipe.display_name || sanitize(initial(recipe_product.name))
-		guide_html += "<h3>[capitalize(recipe_name)]</h3>Cook [english_list(ingredients)] for [ceil(recipe.cooking_time/10)] second\s."
+		var/recipe_name = recipe.display_name || sanitize(product_name)
+		guide_html += "<h3>[capitalize(recipe_name)]</h3>Cook [english_list(ingredients)] for [ceil(recipe.cooking_time/(1 SECOND))] second\s."
 
 		entries_to_register += new /datum/codex_entry(           \
 		 _display_name =       "[recipe_name] (cooking recipe)", \

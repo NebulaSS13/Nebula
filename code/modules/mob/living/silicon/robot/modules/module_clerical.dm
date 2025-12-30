@@ -33,7 +33,7 @@
 		/obj/item/scanner/plant,
 		/obj/item/plants,
 		/obj/item/robot_harvester,
-		/obj/item/kitchen/rollingpin,
+		/obj/item/rollingpin,
 		/obj/item/knife/kitchen,
 		/obj/item/crowbar,
 		/obj/item/rsf,
@@ -62,14 +62,14 @@
 /obj/item/robot_module/clerical/butler/finalize_emag()
 	. = ..()
 	if(emag)
-		var/datum/reagents/R = emag.create_reagents(50)
-		R.add_reagent(/decl/material/liquid/paralytics, 10)
-		R.add_reagent(/decl/material/liquid/sedatives, 15)
-		R.add_reagent(/decl/material/liquid/alcohol/beer, 20)
-		R.add_reagent(/decl/material/solid/ice, 5)
+		var/datum/reagents/reagent = emag.create_or_update_reagents(50)
+		reagent.add_reagent(/decl/material/liquid/paralytics, 10)
+		reagent.add_reagent(/decl/material/liquid/sedatives, 15)
+		reagent.add_reagent(/decl/material/liquid/alcohol/beer, 20)
+		reagent.add_reagent(/decl/material/solid/ice, 5)
 		emag.SetName("Mickey Finn's Special Brew")
 
-/obj/item/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/robot, var/amount)
 	..()
 	var/obj/item/chems/condiment/enzyme/E = locate() in equipment
 	E.add_to_reagents(/decl/material/liquid/enzyme, 2 * amount)

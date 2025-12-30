@@ -12,7 +12,7 @@
 	throw_range                       = 10
 	attack_cooldown                   = DEFAULT_QUICK_COOLDOWN
 	material                          = /decl/material/solid/organic/plastic
-	volume                            = 250
+	chem_volume                       = 250
 	amount_per_transfer_from_this     = 10
 	possible_transfer_amounts         = @"[5,10]"
 	var/tmp/possible_particle_amounts = @"[1,3]"                    ///Possible chempuff particles amount for each transfer amount setting
@@ -36,14 +36,11 @@
 	if(A?.storage || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/chems) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
 		return
 
-	if(istype(A, /spell))
-		return
-
 	if(proximity)
 		if(standard_dispenser_refill(user, A))
 			return
 
-	if(reagents.total_volume < amount_per_transfer_from_this)
+	if(REAGENT_TOTAL_VOLUME(reagents) < amount_per_transfer_from_this)
 		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		return
 
@@ -76,7 +73,6 @@
 	set waitfor = FALSE
 
 	var/obj/effect/effect/water/chempuff/D = new(get_turf(src))
-	D.create_reagents(amount_per_transfer_from_this)
 	if(QDELETED(src))
 		return
 	reagents.trans_to_obj(D, amount_per_transfer_from_this)
@@ -85,29 +81,29 @@
 
 /obj/item/chems/spray/attack_self(var/mob/user)
 	if(has_safety())
-		toggle_safety()
+		toggle_safety(user)
 		return TRUE
 	else
 		//If no safety, we just toggle the nozzle
-		var/decl/interaction_handler/IH = GET_DECL(/decl/interaction_handler/next_spray_amount)
-		if(IH.is_possible(src, user))
-			IH.invoked(src, user, user.get_active_held_item())
+		var/decl/interaction_handler/handler = GET_DECL(/decl/interaction_handler/next_spray_amount)
+		if(handler.is_possible(src, user))
+			handler.invoked(src, user, user.get_active_held_item())
 			return TRUE
 
 ///Whether the spray has a safety toggle
 /obj/item/chems/spray/proc/has_safety()
 	return FALSE
 
-/obj/item/chems/spray/proc/toggle_safety()
+/obj/item/chems/spray/proc/toggle_safety(mob/user)
 	safety = !safety
-	to_chat(usr, SPAN_NOTICE("You switch the safety [safety ? "on" : "off"]."))
+	to_chat(user, SPAN_NOTICE("You switch the safety [safety ? "on" : "off"]."))
 
-/obj/item/chems/spray/examine(mob/user, distance)
+/obj/item/chems/spray/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(loc == user)
-		to_chat(user, "[round(reagents.total_volume)] unit\s left.")
+		. += "[round(REAGENT_TOTAL_VOLUME(reagents))] unit\s left."
 	if(has_safety() && distance <= 1)
-		to_chat(user, "The safety is [safety ? "on" : "off"].")
+		. += "The safety is [safety ? "on" : "off"]."
 
 /obj/item/chems/spray/get_alt_interactions(mob/user)
 	. = ..()
@@ -119,6 +115,7 @@
 	name                 = "Next Nozzle Setting"
 	expected_target_type = /obj/item/chems/spray
 	interaction_flags    = INTERACTION_NEEDS_INVENTORY | INTERACTION_NEEDS_PHYSICAL_INTERACTION
+	examine_desc         = "select the next nozzle spray amount"
 
 /decl/interaction_handler/next_spray_amount/is_possible(obj/item/chems/spray/target, mob/user, obj/item/prop)
 	. = ..()
@@ -140,21 +137,21 @@
 	particle_move_delay = 6
 
 /obj/item/chems/spray/cleaner/populate_reagents()
-	add_to_reagents(/decl/material/liquid/cleaner, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/cleaner, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/antiseptic
 	name = "antiseptic spray"
 	desc = "Great for hiding incriminating bloodstains and sterilizing scalpels."
 
 /obj/item/chems/spray/antiseptic/populate_reagents()
-	add_to_reagents(/decl/material/liquid/antiseptic, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antiseptic, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/hair_remover
 	name = "hair remover"
 	desc = "Very effective at removing hair, feathers, spines and horns."
 
 /obj/item/chems/spray/hair_remover/populate_reagents()
-	add_to_reagents(/decl/material/liquid/hair_remover, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/hair_remover, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/pepper
 	name = "pepperspray"
@@ -162,12 +159,12 @@
 	icon = 'icons/obj/items/weapon/pepperspray.dmi'
 	icon_state = ICON_STATE_WORLD
 	possible_transfer_amounts = null
-	volume = 60
+	chem_volume = 60
 	particle_move_delay = 1
 	safety = TRUE
 
 /obj/item/chems/spray/pepper/populate_reagents()
-	add_to_reagents(/decl/material/liquid/capsaicin/condensed, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/capsaicin/condensed, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/pepper/has_safety()
 	return TRUE
@@ -180,10 +177,10 @@
 	item_state = "sunflower"
 	amount_per_transfer_from_this = 1
 	possible_transfer_amounts = null
-	volume = 10
+	chem_volume = 10
 
 /obj/item/chems/spray/waterflower/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/chemsprayer
 	name = "chem sprayer"
@@ -193,7 +190,7 @@
 	item_state = "chemsprayer"
 	w_class = ITEM_SIZE_LARGE
 	possible_transfer_amounts = null
-	volume = 600
+	chem_volume = 600
 	origin_tech = @'{"combat":3,"materials":3,"engineering":3}'
 	particle_move_delay = 2 //Was hardcoded to 2 before, and 8 was slower than most mob's move speed
 	material = /decl/material/solid/metal/steel
@@ -207,7 +204,7 @@
 	var/list/the_targets = list(T, T1, T2)
 
 	for(var/a = 1 to 3)
-		if(reagents.total_volume < 1)
+		if(REAGENT_TOTAL_VOLUME(reagents) < 1)
 			break
 		create_chempuff(the_targets[a], rand(6, 8))
 	return
@@ -218,24 +215,16 @@
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
 	icon_state = "plantbgone"
 	item_state = "plantbgone"
-	volume = 100
+	chem_volume = 100
 
 /obj/item/chems/spray/plantbgone/populate_reagents()
-	add_to_reagents(/decl/material/liquid/weedkiller, reagents.maximum_volume)
-
-/obj/item/chems/spray/plantbgone/afterattack(atom/A, mob/user, proximity)
-	if(!proximity) return
-
-	if(istype(A, /obj/effect/blob)) // blob damage in blob code
-		return
-
-	..()
+	add_to_reagents(/decl/material/liquid/weedkiller, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/cleaner/deodorant
 	name = "deodorant"
 	desc = "A can of Gold Standard spray deodorant - for when you're too lazy to shower."
 	gender = PLURAL
-	volume = 35
+	chem_volume = 35
 	icon = 'icons/obj/items/deodorant.dmi'
 	icon_state = "deodorant"
 	item_state = "deodorant"

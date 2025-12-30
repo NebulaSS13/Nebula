@@ -12,7 +12,8 @@
 	icon_state = "crayonred"
 
 /obj/random/crayon/spawn_choices()
-	return subtypesof(/obj/item/pen/crayon)
+	var/static/list/spawnable_choices = subtypesof(/obj/item/pen/crayon)
+	return spawnable_choices
 
 /obj/random/clipboard
 	name = "random clipboard"

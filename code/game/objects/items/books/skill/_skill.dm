@@ -11,7 +11,7 @@ Skill books that increase your skills while you activate and hold them
 	w_class = ITEM_SIZE_LARGE            // Skill books are THICC with knowledge. Up one level from regular books to prevent library-in-a-bag silliness.
 	unique = TRUE
 	material = /decl/material/solid/organic/plastic
-	matter = list(/decl/material/solid/organic/wood = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/wood/oak = MATTER_AMOUNT_REINFORCEMENT)
 	abstract_type = /obj/item/book/skill
 
 	var/decl/skill/skill       // e.g. SKILL_LITERACY
@@ -213,17 +213,17 @@ Skill books that increase your skills while you activate and hold them
 /obj/item/book/skill/proc/check_buff()
 	if(!reading)
 		return
-	var/mob/R = reading.resolve()
-	if(!istype(R) || !CanPhysicallyInteract(R))
+	var/mob/reader = reading.resolve()
+	if(!istype(reader) || !CanPhysicallyInteract(reader))
 		remove_buff()
 
 /obj/item/book/skill/proc/remove_buff()
-	var/mob/R = reading?.resolve()
+	var/mob/reader = reading?.resolve()
 	reading = null
-	if(istype(R))
-		to_chat(R, SPAN_DANGER("You lose the page you were on! You can't cross-reference using [title] like this!"))
-		if(R.fetch_buffs_of_type(/datum/skill_buff/skill_book, 0))
-			unlearn(R)
+	if(istype(reader))
+		to_chat(reader, SPAN_DANGER("You lose the page you were on! You can't cross-reference using [title] like this!"))
+		if(reader.fetch_buffs_of_type(/datum/skill_buff/skill_book, 0))
+			unlearn(reader)
 	STOP_PROCESSING(SSprocessing, src)
 
 /obj/item/book/skill/Destroy()

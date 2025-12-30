@@ -44,9 +44,9 @@
 	if(add_contents_overlays())
 		compile_overlays()
 
-/obj/item/box/fancy/examine(mob/user, distance)
+/obj/item/box/fancy/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance > 1 || !key_type)
 		return
 	var/key_count = count_by_type(contents, key_type)
-	to_chat(user, "There [key_count == 1? "is" : "are"] [key_count] [initial(key_type.name)]\s in the box.")
+	. += "There [key_count == 1? "is" : "are"] [key_count] [atom_info_repository.get_name_for(key_type)]\s in the box."

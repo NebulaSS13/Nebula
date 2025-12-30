@@ -88,25 +88,25 @@
 	show_browser(user, "[dat]", "window=miningshuttle;size=400x400")
 	status = ""
 
-/obj/machinery/computer/area_atmos/Topic(href, href_list)
-	if(..())
+/obj/machinery/computer/area_atmos/OnTopic(mob/user, href_list)
+	if((. = ..()))
 		return
-	usr.set_machine(src)
-
 
 	if(href_list["scan"])
 		scanscrubbers()
+		return TOPIC_REFRESH
 	else if(href_list["toggle"])
 		var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber = locate(href_list["scrub"])
 
 		if(!validscrubber(scrubber))
-			spawn(20)
+			spawn(2 SECONDS)
 				status = "ERROR: Couldn't connect to scrubber! (timeout)"
 				connectedscrubbers -= scrubber
-				src.updateUsrDialog()
-			return
+				updateUsrDialog()
+			return TOPIC_REFRESH
 
 		scrubber.update_use_power(text2num(href_list["toggle"]) ? POWER_USE_ACTIVE : POWER_USE_IDLE)
+		return TOPIC_REFRESH
 
 /obj/machinery/computer/area_atmos/proc/validscrubber(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber)
 	if(!isobj(scrubber) || get_dist(scrubber.loc, src.loc) > src.range || scrubber.loc.z != src.loc.z)

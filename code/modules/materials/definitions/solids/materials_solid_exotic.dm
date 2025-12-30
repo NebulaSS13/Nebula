@@ -34,7 +34,7 @@
 /decl/material/solid/exotic_matter
 	name = "exotic matter"
 	uid = "solid_exotic_matter"
-	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in all kinds of fringe physics-defying technology."
+	lore_text = "Exotic matter is a non-baryonic form of matter, which features heavily in all kinds of fringe physics-defying technology."
 	color = "#ffff00"
 	radioactivity = 20
 	stack_origin_tech = @'{"wormholes":2,"materials":6,"exoticmatter":4}'
@@ -43,7 +43,7 @@
 	icon_base = 'icons/turf/walls/stone.dmi'
 	wall_flags = 0
 	table_icon_base = "stone"
-	shard_type = SHARD_SHARD
+	shard_name = SHARD_SHARD
 	hardness = MAT_VALUE_RIGID
 	flags = MAT_FLAG_FUSION_FUEL
 	construction_difficulty = MAT_VALUE_HARD_DIY

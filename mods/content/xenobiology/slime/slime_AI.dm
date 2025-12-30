@@ -2,8 +2,8 @@
 	expected_type = /mob/living/slime
 	var/mood
 	var/chase_target = 0
-	var/mob/living/leader
-	var/mob/living/current_target // Currently attacking this mob (separate from feeding)
+	var/weakref/leader
+	var/weakref/current_target // Currently attacking this mob (separate from feeding)
 	var/attacked = 0 // Determines if it's been attacked recently. Can be any number, is a cooloff-ish variable
 	var/rabid = 0 // If set to 1, the slime will attack and eat anything it comes in contact with
 	var/list/observed_friends // A list of refs to friends; they are not considered targets for feeding; passed down after splitting.
@@ -20,6 +20,7 @@
 /datum/mob_controller/slime/Destroy()
 	observed_friends = null
 	friendship_cooldown = null
+	leader = null
 	current_target = null
 	speech_buffer = null
 	slime = null
@@ -37,14 +38,14 @@
 /datum/mob_controller/slime/proc/update_mood()
 	if(!slime || !body)
 		return
-	body.a_intent_change(I_HELP)
+	body.set_intent(I_FLAG_HELP)
 	var/new_mood
 	if(HAS_STATUS(body, STAT_CONFUSE))
 		new_mood = "pout"
 	else if(rabid || attacked)
 		new_mood = "angry"
-		body.a_intent_change(I_HURT)
-	else if(current_target)
+		body.set_intent(I_FLAG_HARM)
+	else if(current_target?.resolve())
 		new_mood = "mischevous"
 
 	if(!new_mood)
@@ -97,22 +98,27 @@
 		current_target = null
 		return
 
-	if(current_target)
+	var/mob/actual_target = current_target?.resolve()
+	if(actual_target)
 		chase_target--
 		if(chase_target <= 0 || attacked || rabid) // Tired of chasing or attacking everything nearby
 			chase_target = 0
 			current_target = null
+	else
+		current_target = null
 
 	var/hunger = slime.get_hunger_state()
-	if(!current_target)
+	var/mob/leader_mob = leader?.resolve()
+	actual_target = current_target?.resolve()
+	if(!actual_target)
 		var/feral = (attacked || rabid || hunger >= 2)
-		if(feral || (!leader && !holding_still) || (hunger && prob(10)))
+		if(feral || (!leader_mob && !holding_still) || (hunger && prob(10)))
 			var/list/targets
 			for(var/mob/living/prey in view(7, body))
 				if(assess_target(prey))
 					LAZYADD(targets, prey)
 			if(length(targets))
-				current_target = get_best_target(targets)
+				current_target = weakref(get_best_target(targets))
 				chase_target = rand(5,7)
 				if(slime.is_adult)
 					chase_target += 3
@@ -120,8 +126,8 @@
 	if(holding_still)
 		holding_still = max(holding_still - 1 - hunger, 0)
 	else if(isturf(body?.loc))
-		if(leader)
-			step_to(body, get_dir(body, leader))
+		if(leader_mob)
+			step_to(body, get_dir(body, leader_mob))
 		else if(prob(hunger ? 50 : 33))
 			body.SelfMove(pick(global.cardinal))
 
@@ -131,42 +137,42 @@
 		return
 
 	var/added_delay = 0
-	if(slime.amount_grown >= SLIME_EVOLUTION_THRESHOLD && !current_target)
+	var/mob/actual_target = current_target?.resolve()
+	if(slime.amount_grown >= SLIME_EVOLUTION_THRESHOLD && !actual_target)
 		if(slime.is_adult)
 			slime.slime_split()
 		else
 			slime.slime_mature()
 		added_delay = 10
 	else
-
-		if(!assess_target(current_target) || current_target == slime.feeding_on || !(current_target in view(7, body)))
+		if(!assess_target(actual_target) || actual_target == slime.feeding_on || !(actual_target in view(7, body)))
 			current_target = null
 
-		if(!current_target)
+		if(!actual_target)
 			if(prob(1))
 				for(var/mob/living/slime/frenemy in range(1, body))
 					if(frenemy != body && body.Adjacent(frenemy))
-						body.a_intent_change((frenemy.slime_type == slime.slime_type) ? I_HELP : I_HURT)
+						body.set_intent((frenemy.slime_type == slime.slime_type) ? I_FLAG_HELP : I_FLAG_HARM)
 						body.UnarmedAttack(frenemy, TRUE)
 						added_delay = 10
-		else if(slime.Adjacent(current_target))
+		else if(slime.Adjacent(actual_target))
 			var/do_attack = FALSE
-			if(issilicon(current_target))
-				body.a_intent_change(I_HURT)
+			if(issilicon(actual_target))
+				body.set_intent(I_FLAG_HARM)
 				do_attack = TRUE
-			else if(current_target.client && !current_target.current_posture.prone && prob(60 + slime.powerlevel * 4))
-				body.a_intent_change(I_DISARM)
+			else if(actual_target.client && !actual_target.current_posture.prone && prob(60 + slime.powerlevel * 4))
+				body.set_intent(I_FLAG_DISARM)
 				do_attack = TRUE
-			else if(slime.check_valid_feed_target(current_target) == FEED_RESULT_VALID)
-				body.a_intent_change(I_GRAB)
+			else if(slime.check_valid_feed_target(actual_target) == FEED_RESULT_VALID)
+				body.set_intent(I_FLAG_GRAB)
 				do_attack = TRUE
 			if(do_attack)
-				body.UnarmedAttack(current_target, TRUE)
+				body.UnarmedAttack(actual_target, TRUE)
 				added_delay = 10
 			else
 				current_target = null
 		else
-			step_to(body, current_target)
+			step_to(body, actual_target)
 
 	next_core_logic_run = world.time + max(body?.get_movement_delay(), 5) + added_delay
 
@@ -208,13 +214,13 @@
 
 /datum/mob_controller/slime/proc/adjust_friendship(var/atom/user, var/amount)
 	if(ismob(user))
-		if(QDELETED(user))
+		if(QDELING(user))
 			return FALSE
 		user = weakref(user)
 	else if(istype(user, /weakref)) // verify the ref is still valid
 		var/weakref/user_ref = user
-		user = user_ref.resolve()
-		if(!ismob(user) || QDELETED(user))
+		var/mob/resolved_user = user_ref.resolve()
+		if(!ismob(resolved_user) || QDELING(resolved_user))
 			return FALSE
 	else
 		return FALSE

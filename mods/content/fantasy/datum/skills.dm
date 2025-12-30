@@ -1,12 +1,3 @@
-#define SKILL_CARPENTRY     /decl/skill/crafting/carpentry
-#define SKILL_METALWORK     /decl/skill/crafting/metalwork
-#define SKILL_TEXTILES      /decl/skill/crafting/textiles
-#define SKILL_STONEMASONRY  /decl/skill/crafting/stonemasonry
-#define SKILL_SCULPTING     /decl/skill/crafting/sculpting
-#define SKILL_ARTIFICE      /decl/skill/crafting/artifice
-
-#define SKILL_HUSBANDRY     /decl/skill/service/husbandry
-
 /decl/skill/Initialize()
 	. = ..()
 	// Rename the default skill levels.
@@ -73,7 +64,7 @@
 /decl/skill/crafting/artifice
 	name = "Artifice"
 	uid =  "skill_crafting_artifice"
-	desc = "Your ability to create, install, and comprehend complex devices and mechanisms, as well as your ability to create finely-detailed objects."
+	desc = "Your ability to create, install, and comprehend complex devices and mechanisms, as well as your ability to create finely-detailed objects like cut gems or jewellery."
 	levels = list(
 		"Unskilled"   = "You know that gears turn together when intermeshed and that axles are used to connect spinning things, but you've never done more work on a machine than hitting it if it's broken. You struggle with the precision needed to work on finely-detailed objects.",
 		"Basic"       = "You know some basic mechanical principles, like the construction of a basic pulley, or how to put a wheel on an axle. You could fix a broken or stuck well winch, but you'd struggle to deal with a malfunctioning windmill or granary. You have a steadier hand than most, able to place small gems on jewelry and connect small mechanisms.",
@@ -310,3 +301,6 @@
 
 /datum/lock
 	lockpicking_skill = SKILL_ARTIFICE
+
+/obj/item/gemstone
+	work_skill = SKILL_ARTIFICE

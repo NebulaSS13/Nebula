@@ -22,7 +22,7 @@
 		return ..()
 
 	var/mob/living/human/H = target
-	var/time_to_take = H.a_intent == I_HELP ? 1 SECOND : 3 SECONDS
+	var/time_to_take = H.check_intent(I_FLAG_HELP) ? 1 SECOND : 3 SECONDS
 	user.visible_message(SPAN_NOTICE("\The [user] starts swabbing a sample from \the [H]."))
 	if(!do_mob(user, H, time_to_take))
 		user.visible_message(SPAN_WARNING("\The [user] tried to take a swab sample from \the [H], but they moved away."))

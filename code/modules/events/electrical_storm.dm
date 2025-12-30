@@ -83,7 +83,7 @@
 			shielded = TRUE
 
 	valid_apcs = list()
-	for(var/obj/machinery/power/apc/A as anything in global.all_apcs)
+	for(var/obj/machinery/apc/A as anything in global.all_apcs)
 		if(!A.is_critical && (A.z in affecting_z))
 			valid_apcs.Add(A)
 
@@ -94,7 +94,7 @@
 		for(var/i=0, i< severity*2, i++) // up to 2/4/6 APCs per tick depending on severity
 			picked_apcs |= pick(valid_apcs)
 
-		for(var/obj/machinery/power/apc/T as anything in picked_apcs)
+		for(var/obj/machinery/apc/T as anything in picked_apcs)
 			// Main breaker is turned off. Consider this APC protected.
 			if(!T.operating || T.failure_timer)
 				continue

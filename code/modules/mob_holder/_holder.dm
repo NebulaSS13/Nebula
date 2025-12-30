@@ -24,6 +24,11 @@
 		AM.vis_flags |= (VIS_INHERIT_ID|VIS_INHERIT_LAYER|VIS_INHERIT_PLANE)
 		add_vis_contents(AM)
 
+/obj/item/holder/examined_by(mob/user, distance, infix, suffix)
+	for(var/atom/thing in get_contained_external_atoms())
+		thing.examined_by(user, distance, infix, suffix)
+	return TRUE
+
 // No scooping mobs and handing them to people who can't scoop them.
 /obj/item/holder/equipped(mob/user, slot)
 	. = ..()
@@ -46,7 +51,8 @@
 	icon = initial(icon)
 
 /obj/item/holder/Exited(atom/movable/am, atom/new_loc)
-	am.vis_flags = initial(am.vis_flags)
+	if(!(locate(/mob) in contents))
+		am.vis_flags = initial(am.vis_flags)
 	. = ..()
 
 /obj/item/holder/proc/destroy_all()
@@ -72,15 +78,15 @@
 	update_state()
 
 /obj/item/holder/dropped()
-	..()
+	. = ..()
 	update_state(1)
 
 /obj/item/holder/throw_impact(atom/hit_atom, datum/thrownthing/TT)
-	..()
+	. = ..()
 	update_state(1)
 
 /obj/item/holder/proc/update_state(var/delay)
-	set waitfor = 0
+	set waitfor = FALSE
 
 	for(var/mob/M in contents)
 		unregister_all_movement(last_holder, M)
@@ -97,11 +103,13 @@
 			mob_container.dropInto(loc)
 			M.reset_view()
 		qdel(src)
-	else if(last_holder != loc)
+		return
+
+	if(last_holder != loc)
 		for(var/mob/M in contents)
 			register_all_movement(loc, M)
 		update_icon()
-	last_holder = loc
+		last_holder = loc
 
 /obj/item/holder/onDropInto(var/atom/movable/AM)
 	if(ismob(loc))   // Bypass our holding mob and drop directly to its loc
@@ -115,9 +123,9 @@
 		if(length(cards))
 			LAZYDISTINCTADD(., cards)
 
-/obj/item/holder/attack_self()
+/obj/item/holder/attack_self(mob/user)
 	for(var/mob/M in contents)
-		M.show_stripping_window(usr)
+		M.show_stripping_window(user)
 
 /obj/item/holder/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
@@ -132,8 +140,15 @@
 	return ..()
 
 /obj/item/holder/proc/sync(var/mob/living/M)
+
 	SetName(M.name)
 	desc = M.desc
+
+	if(QDELETED(src) || QDELETED(M) || !istype(M))
+		set_light(0)
+	else
+		set_light(M.light_range, M.light_power, M.light_color)
+
 	var/mob/living/human/H = loc
 	if(istype(H))
 		last_holder = H
@@ -141,9 +156,9 @@
 	update_icon()
 	update_held_icon()
 
-/obj/item/holder/attackby(obj/item/W, mob/user)
+/obj/item/holder/attackby(obj/item/used_item, mob/user)
 	for(var/mob/M in src.contents)
-		. = M.attackby(W,user)
+		. = M.attackby(used_item,user)
 		if(.)
 			return
 	return FALSE

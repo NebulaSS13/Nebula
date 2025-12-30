@@ -78,6 +78,7 @@
 
 		var/datum/computer_file/data/scan_file = new scan_file_type()
 		scan_file.stored_data = data_buffer
+		scan_file.metadata = metadata_buffer
 
 		// This saves the file, so no additional handling on the program's end is required.
 		view_file_browser(usr, "saving_file", scan_file_type, OS_WRITE_ACCESS, "Save scan file", scan_file)

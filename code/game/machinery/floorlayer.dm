@@ -15,7 +15,7 @@
 	T = new /obj/item/stack/tile/floor(src)
 
 /obj/machinery/floorlayer/Move(new_turf,M_Dir)
-	..()
+	. = ..()
 
 	if(on)
 		if(mode["dismantle"])
@@ -35,23 +35,23 @@
 	user.visible_message("<span class='notice'>[user] has [!on?"de":""]activated \the [src].</span>", "<span class='notice'>You [!on?"de":""]activate \the [src].</span>")
 	return TRUE
 
-/obj/machinery/floorlayer/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/floorlayer/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(IS_WRENCH(W))
+	if(IS_WRENCH(used_item))
 		var/m = input("Choose work mode", "Mode") as null|anything in mode
 		mode[m] = !mode[m]
 		var/O = mode[m]
-		user.visible_message("<span class='notice'>[usr] has set \the [src] [m] mode [!O?"off":"on"].</span>", "<span class='notice'>You set \the [src] [m] mode [!O?"off":"on"].</span>")
+		user.visible_message("<span class='notice'>[user] has set \the [src] [m] mode [!O?"off":"on"].</span>", "<span class='notice'>You set \the [src] [m] mode [!O?"off":"on"].</span>")
 		return TRUE
 
-	if(istype(W, /obj/item/stack/tile))
-		if(!user.try_unequip(W, T))
+	if(istype(used_item, /obj/item/stack/tile))
+		if(!user.try_unequip(used_item, T))
 			return TRUE
-		to_chat(user, "<span class='notice'>\The [W] successfully loaded.</span>")
+		to_chat(user, "<span class='notice'>\The [used_item] successfully loaded.</span>")
 		TakeTile(T)
 		return TRUE
 
-	if(IS_CROWBAR(W))
+	if(IS_CROWBAR(used_item))
 		if(!length(contents))
 			to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
 		else
@@ -62,18 +62,17 @@
 				T = null
 		return TRUE
 
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		T = input("Choose tile type.", "Tiles") as null|anything in contents
 		return TRUE
 	return ..()
 
-/obj/machinery/floorlayer/examine(mob/user)
+/obj/machinery/floorlayer/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	var/dismantle = mode["dismantle"]
-	var/laying = mode["laying"]
-	var/collect = mode["collect"]
-	var/message = "<span class='notice'>\The [src] [!T?"don't ":""]has [!T?"":"[T.get_amount()] [T] "]tile\s, dismantle is [dismantle?"on":"off"], laying is [laying?"on":"off"], collect is [collect?"on":"off"].</span>"
-	to_chat(user, message)
+	var/laying    = mode["laying"]
+	var/collect   = mode["collect"]
+	. += SPAN_NOTICE("\The [src] [!T?"don't ":""]has [!T?"":"[T.get_amount()] [T] "]tile\s, dismantle is [dismantle?"on":"off"], laying is [laying?"on":"off"], collect is [collect?"on":"off"].")
 
 /obj/machinery/floorlayer/proc/reset()
 	on = 0
@@ -82,7 +81,7 @@
 	if(istype(new_turf, /turf/floor))
 		var/turf/floor/T = new_turf
 		if(!T.is_plating())
-			T.set_flooring(null, place_product = !T.is_floor_damaged())
+			T.clear_flooring(place_product = !T.is_floor_damaged())
 	return new_turf.is_plating()
 
 /obj/machinery/floorlayer/proc/TakeNewStack()

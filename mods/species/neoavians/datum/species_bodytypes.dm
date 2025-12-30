@@ -39,6 +39,13 @@
 	base_eye_color       = "#f5c842"
 	mob_size             = MOB_SIZE_SMALL
 	nail_noun            = "talons"
+	override_limb_types  = list(
+		BP_L_FOOT = /obj/item/organ/external/foot/avian,
+		BP_R_FOOT = /obj/item/organ/external/foot/right/avian,
+		BP_L_HAND = /obj/item/organ/external/hand/clawed,
+		BP_R_HAND = /obj/item/organ/external/hand/right/clawed,
+		BP_HEAD   = /obj/item/organ/external/head/sharp_bite
+	)
 	has_organ            = list(
 		BP_STOMACH = /obj/item/organ/internal/stomach,
 		BP_HEART   = /obj/item/organ/internal/heart,
@@ -94,21 +101,89 @@
 	uid                  = "bodytype_avian_additive_raptor"
 
 /decl/bodytype/avian/Initialize()
-	equip_adjust = list(
-		slot_l_ear_str     = list("[NORTH]" = list( 1, -5), "[EAST]" = list(-2, -5), "[SOUTH]" = list(-1, -5),  "[WEST]" = list( 0, -5)),
-		slot_r_ear_str     = list("[NORTH]" = list( 1, -5), "[EAST]" = list( 0, -5), "[SOUTH]" = list(-1, -5),  "[WEST]" = list( 2, -5)),
-		BP_L_HAND          = list("[NORTH]" = list( 3, -3), "[EAST]" = list( 1, -3), "[SOUTH]" = list(-3, -3),  "[WEST]" = list(-5, -3)),
-		BP_R_HAND          = list("[NORTH]" = list(-3, -3), "[EAST]" = list( 5, -3), "[SOUTH]" = list( 3, -3),  "[WEST]" = list(-1, -3)),
-		slot_head_str      = list("[NORTH]" = list( 0, -5), "[EAST]" = list( 1, -5), "[SOUTH]" = list( 0, -5),  "[WEST]" = list(-1, -5)),
-		slot_wear_mask_str = list("[NORTH]" = list( 0, -6), "[EAST]" = list( 2, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list(-2, -6)),
-		slot_glasses_str   = list("[NORTH]" = list( 0, -6), "[EAST]" = list( 1, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list(-1, -6)),
-		slot_back_str      = list("[NORTH]" = list( 0, -6), "[EAST]" = list( 3, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list(-3, -6)),
-		slot_w_uniform_str = list("[NORTH]" = list( 0, -6), "[EAST]" = list(-1, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list( 1, -6)),
-		slot_wear_id_str   = list("[NORTH]" = list( 0, -6), "[EAST]" = list(-1, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list( 1, -6)),
-		slot_wear_suit_str = list("[NORTH]" = list( 0, -6), "[EAST]" = list(-1, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list( 1, -6)),
-		slot_belt_str      = list("[NORTH]" = list( 0, -6), "[EAST]" = list(-1, -6), "[SOUTH]" = list( 0, -6),  "[WEST]" = list( 1, -6))
+	_equip_adjust = list(
+		(slot_l_ear_str) = list(
+			"[NORTH]" = list( 1, -5),
+			"[EAST]"  = list(-2, -5),
+			"[SOUTH]" = list(-1, -5),
+			"[WEST]"  = list( 0, -5)
+		),
+		(slot_r_ear_str) = list(
+			"[NORTH]" = list( 1, -5),
+			"[EAST]"  = list( 0, -5),
+			"[SOUTH]" = list(-1, -5),
+			"[WEST]"  = list( 2, -5)
+		),
+		(BP_L_HAND) = list(
+			"[NORTH]" = list( 3, -3),
+			"[EAST]"  = list( 1, -3),
+			"[SOUTH]" = list(-3, -3),
+			"[WEST]"  = list(-5, -3)
+		),
+		(BP_R_HAND) = list(
+			"[NORTH]" = list(-3, -3),
+			"[EAST]"  = list( 5, -3),
+			"[SOUTH]" = list( 3, -3),
+			"[WEST]"  = list(-1, -3)
+		),
+		(slot_head_str) = list(
+			"[NORTH]" = list( 0, -5),
+			"[EAST]"  = list( 1, -5),
+			"[SOUTH]" = list( 0, -5),
+			"[WEST]"  = list(-1, -5)
+		),
+		(slot_wear_mask_str) = list(
+			"[NORTH]" = list( 0, -6),
+			"[EAST]"  = list( 2, -6),
+			"[SOUTH]" = list( 0, -6),
+			"[WEST]"  = list(-2, -6)
+		),
+		(slot_glasses_str) = list(
+			"[NORTH]" = list( 0, -6),
+			"[EAST]"  = list( 1, -6),
+			"[SOUTH]" = list( 0, -6),
+			"[WEST]"  = list(-1, -6)
+		),
+		(slot_back_str) = list(
+			"[NORTH]" = list( 0, -6),
+			"[EAST]"  = list( 3, -6),
+			"[SOUTH]" = list( 0, -6),
+			"[WEST]"  = list(-3, -6)
+		),
+		(slot_w_uniform_str) = list(
+			"[NORTH]" = list( 0, -6),
+			"[EAST]"  = list(-1, -6),
+			"[SOUTH]" = list( 0, -6),
+			"[WEST]"  = list( 1, -6)
+		),
+		(slot_wear_id_str) = list(
+			"[NORTH]" = list( 0, -6),
+			"[EAST]"  = list(-1, -6),
+			"[SOUTH]" = list( 0, -6),
+			"[WEST]"  = list( 1, -6)
+		),
+		(slot_wear_suit_str) = list(
+			"[NORTH]" = list( 0, -6),
+			"[EAST]"  = list(-1, -6),
+			"[SOUTH]" = list( 0, -6),
+			"[WEST]"  = list( 1, -6)
+		),
+		(slot_belt_str) = list(
+			"[NORTH]" = list( 0, -6),
+			"[EAST]"  = list(-1, -6),
+			"[SOUTH]" = list( 0, -6),
+			"[WEST]"  = list( 1, -6)
+		)
 	)
 	. = ..()
+
+/obj/item/organ/external/foot/avian/get_natural_attacks()
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/stomp/weak)
+	return unarmed_attack
+
+/obj/item/organ/external/foot/right/avian/get_natural_attacks()
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/stomp/weak)
+	return unarmed_attack
 
 /obj/item/organ/external/tail/avian/get_tail()
 	if(istype(bodytype, /decl/bodytype/avian))

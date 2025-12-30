@@ -93,11 +93,15 @@
 	w_class = ITEM_SIZE_SMALL
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/mask/horsehead/Initialize()
-	. = ..()
-	// The horse mask doesn't cause voice changes by default, the wizard spell changes the flag as necessary
+/obj/item/clothing/mask/horsehead/cursed
+	voicechange = TRUE
 	say_messages = list("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
 	say_verbs = list("whinnies", "neighs", "says")
+
+/obj/item/clothing/mask/horsehead/cursed/equipped(mob/user, slot)
+	. = ..()
+	if(slot == slot_wear_mask_str)
+		canremove = FALSE
 
 /obj/item/clothing/mask/ai
 	name = "camera MIU"
@@ -140,38 +144,20 @@
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	material = /decl/material/solid/organic/cloth
 
-/obj/item/clothing/mask/rubber/barros
-	name = "Amaya Barros mask"
-	desc = "Current Secretary-General of Sol Cental Government. Not that the real thing would visit this pigsty."
-	icon = 'icons/clothing/mask/barros.dmi'
-	visible_name = "Amaya Barros"
-
-/obj/item/clothing/mask/rubber/admiral
-	name = "Admiral Diwali mask"
-	desc = "Admiral that led the infamous last stand at Helios against the Independent Navy in the Gaia conflict. For bridge officers who wish they'd achieve a fraction of that."
-	icon = 'icons/clothing/mask/admiral.dmi'
-	visible_name = "Admiral Diwali"
-
-/obj/item/clothing/mask/rubber/turner
-	name = "Charles Turner mask"
-	desc = "Premier of the Gilgamesh Colonial Confederation. Probably shouldn't wear this in front of your veteran uncle."
-	icon = 'icons/clothing/mask/turner.dmi'
-	visible_name = "Charles Turner"
-
 /obj/item/clothing/mask/rubber/species
 	name = "human mask"
 	desc = "A rubber human mask."
 	icon = 'icons/clothing/mask/human.dmi'
-	var/species = SPECIES_HUMAN
+	var/species = /decl/species/human::uid
 
 /obj/item/clothing/mask/rubber/species/Initialize()
 	. = ..()
 	visible_name = species
-	var/decl/species/S = get_species_by_key(species)
+	var/decl/species/S = decls_repository.get_decl_by_id(species)
 	if(istype(S))
 		var/decl/background_detail/C = GET_DECL(S.default_background_info[/decl/background_category/heritage])
 		if(istype(C))
-			visible_name = C.get_random_name(pick(MALE,FEMALE))
+			visible_name = C.get_random_cultural_name(gender = pick(MALE,FEMALE), species = species)
 
 /obj/item/clothing/mask/rubber/species/cat
 	name = "cat mask"

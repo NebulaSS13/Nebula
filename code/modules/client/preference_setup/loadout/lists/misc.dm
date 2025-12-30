@@ -9,7 +9,7 @@
 	var/list/available_materials = list(
 		/decl/material/solid/metal/aluminium,
 		/decl/material/solid/organic/plastic,
-		/decl/material/solid/organic/wood,
+		/decl/material/solid/organic/wood/oak,
 		/decl/material/solid/organic/wood/bamboo,
 		/decl/material/solid/organic/wood/ebony,
 		/decl/material/solid/organic/wood/mahogany,

@@ -15,9 +15,6 @@
 	var/growth_stages = 0          // Number of stages the plant passes through before it is mature.
 	var/list/_traits               // Initialized in New()
 	var/list/mutants               // Possible predefined mutant varieties, if any.
-	var/list/chems                 // Chemicals that plant produces in products/injects into victim.
-	var/list/dried_chems           // Chemicals that a dried plant product will have.
-	var/list/roasted_chems         // Chemicals that a roasted/grilled plant product will have.
 	var/list/consume_gasses        // The plant will absorb these gasses during its life.
 	var/list/exude_gasses          // The plant will exude these gasses during its life.
 	var/grown_tag                  // Used by the reagent grinder.
@@ -32,6 +29,7 @@
 	var/scannable_result
 	var/grown_is_seed = FALSE
 	var/product_w_class = ITEM_SIZE_SMALL
+	var/produces_pollen = 0
 
 	// Dissection values.
 	var/min_seed_extracted = 1
@@ -99,8 +97,9 @@
 		return
 
 	var/datum/reagents/R = new/datum/reagents(100, global.temp_reagents_holder)
-	if(chems.len)
-		for(var/rid in chems)
+	var/list/seed_chems = get_chemical_composition()
+	if(length(seed_chems))
+		for(var/rid in seed_chems)
 			var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/3))
 			R.add_reagent(rid,injecting)
 
@@ -131,23 +130,23 @@
 		return
 
 	var/damage = 0
-	var/has_edge = 0
+	var/edged = 0
 	if(get_trait(TRAIT_CARNIVOROUS) >= 2)
 		if(affecting)
 			to_chat(target, "<span class='danger'>\The [fruit]'s thorns pierce your [affecting.name] greedily!</span>")
 		else
 			to_chat(target, "<span class='danger'>\The [fruit]'s thorns pierce your flesh greedily!</span>")
 		damage = max(5, round(15*get_trait(TRAIT_POTENCY)/100, 1))
-		has_edge = prob(get_trait(TRAIT_POTENCY)/2)
+		edged = prob(get_trait(TRAIT_POTENCY)/2)
 	else
 		if(affecting)
 			to_chat(target, "<span class='danger'>\The [fruit]'s thorns dig deeply into your [affecting.name]!</span>")
 		else
 			to_chat(target, "<span class='danger'>\The [fruit]'s thorns dig deeply into your flesh!</span>")
 		damage = max(1, round(5*get_trait(TRAIT_POTENCY)/100, 1))
-		has_edge = prob(get_trait(TRAIT_POTENCY)/5)
+		edged = prob(get_trait(TRAIT_POTENCY)/5)
 
-	var/damage_flags = DAM_SHARP|(has_edge? DAM_EDGE : 0)
+	var/damage_flags = DAM_SHARP|(edged? DAM_EDGE : 0)
 	target.apply_damage(damage, BRUTE, target_limb, damage_flags, used_weapon = "Thorns")
 
 // Adds reagents to a target.
@@ -156,7 +155,8 @@
 		return
 
 	var/list/external_organs = target.get_external_organs()
-	if(chems && chems.len && target.reagents && LAZYLEN(external_organs))
+	var/list/seed_chems = get_chemical_composition()
+	if(length(seed_chems) && target.reagents && LAZYLEN(external_organs))
 
 		var/obj/item/organ/external/affecting = pick(external_organs)
 		for(var/slot in global.standard_clothing_slots)
@@ -169,7 +169,7 @@
 
 		if(affecting)
 			to_chat(target, "<span class='danger'>You are stung by \the [fruit] in your [affecting.name]!</span>")
-			for(var/rid in chems)
+			for(var/rid in seed_chems)
 				var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/5))
 				target.add_to_reagents(rid,injecting)
 		else
@@ -209,19 +209,21 @@
 	make_splat(T, thrown)
 
 	var/datum/reagents/splat_reagents = thrown?.reagents
-	if(!splat_reagents?.maximum_volume) // if thrown doesn't exist or has no reagents, use the seed's default reagents.
+	if(!REAGENT_MAXIMUM_VOLUME(splat_reagents)) // if thrown doesn't exist or has no reagents, use the seed's default reagents.
 		splat_reagents = new /datum/reagents(INFINITY, global.temp_reagents_holder)
 		var/potency = get_trait(TRAIT_POTENCY)
-		for(var/rid in chems)
-			var/list/reagent_amounts = chems[rid]
-			if(LAZYLEN(reagent_amounts))
-				var/rtotal = reagent_amounts[1]
-				var/list/data = null
-				if(reagent_amounts?[2] && potency > 0)
-					rtotal += round(potency/reagent_amounts[2])
-				if(rid == /decl/material/liquid/nutriment)
-					LAZYSET(data, product_name, max(1,rtotal))
-				splat_reagents.add_reagent(rid,max(1,rtotal),data)
+		var/list/seed_chems = get_chemical_composition()
+		if(length(seed_chems))
+			for(var/rid in seed_chems)
+				var/list/reagent_amounts = seed_chems[rid]
+				if(LAZYLEN(reagent_amounts))
+					var/rtotal = reagent_amounts[1]
+					var/list/data = null
+					if(reagent_amounts?[2] && potency > 0)
+						rtotal += round(potency/reagent_amounts[2])
+					if(rid == /decl/material/liquid/nutriment)
+						LAZYSET(data, product_name, max(1,rtotal))
+					splat_reagents.add_reagent(rid,max(1,rtotal),data)
 	if(splat_reagents)
 		var/splat_range = min(10,max(1,get_trait(TRAIT_POTENCY)/15))
 		splat_reagents.splash_area(T, range = splat_range)
@@ -441,14 +443,14 @@
 			gasses -= gas
 			LAZYSET(exude_gasses, gas, rand(3,9))
 
-	chems = list()
+	clear_chemical_composition()
 	if(prob(80))
-		chems[/decl/material/liquid/nutriment] = list(rand(1,10),rand(10,20))
+		set_chemical_amount(/decl/material/liquid/nutriment, list(rand(1,10),rand(10,20)))
 	if(length(liquids))
 		for(var/x = 1 to rand(0, 5))
 			var/new_chem = pickweight(liquids)
 			liquids -= new_chem
-			chems[new_chem] = list(rand(1,10), rand(10,20))
+			set_chemical_amount(new_chem, list(rand(1,10),rand(10,20)))
 
 	if(prob(90))
 		set_trait(TRAIT_REQUIRES_NUTRIENTS,1)
@@ -510,11 +512,11 @@
 	return pick(mutants)
 
 //Mutates the plant overall (randomly).
-/datum/seed/proc/mutate(var/degree,var/turf/source_turf)
+/datum/seed/proc/mutate(var/degree, var/atom/location)
 
 	if(!degree || get_trait(TRAIT_IMMUTABLE) > 0) return
 
-	source_turf.visible_message("<span class='notice'>\The [display_name] quivers!</span>")
+	location.visible_message("<span class='notice'>\The [display_name] quivers!</span>")
 
 	//This looks like shit, but it's a lot easier to read/change this way.
 	var/total_mutations = rand(1,1+degree)
@@ -522,7 +524,7 @@
 		switch(rand(0,11))
 			if(0) //Plant cancer!
 				set_trait(TRAIT_ENDURANCE,get_trait(TRAIT_ENDURANCE)-rand(10,20),null,0)
-				source_turf.visible_message("<span class='danger'>\The [display_name] withers rapidly!</span>")
+				location.visible_message("<span class='danger'>\The [display_name] withers rapidly!</span>")
 			if(1)
 				set_trait(TRAIT_NUTRIENT_CONSUMPTION,get_trait(TRAIT_NUTRIENT_CONSUMPTION)+rand(-(degree*0.1),(degree*0.1)),5,0)
 				set_trait(TRAIT_WATER_CONSUMPTION,   get_trait(TRAIT_WATER_CONSUMPTION)   +rand(-degree,degree),50,0)
@@ -544,7 +546,7 @@
 				if(prob(degree*5))
 					set_trait(TRAIT_CARNIVOROUS,     get_trait(TRAIT_CARNIVOROUS)+rand(-degree,degree),2, 0)
 					if(get_trait(TRAIT_CARNIVOROUS))
-						source_turf.visible_message("<span class='notice'>\The [display_name] shudders hungrily.</span>")
+						location.visible_message("<span class='notice'>\The [display_name] shudders hungrily.</span>")
 			if(6)
 				set_trait(TRAIT_WEED_TOLERANCE,      get_trait(TRAIT_WEED_TOLERANCE)+(rand(-2,2)*degree),10, 0)
 				if(prob(degree*5))
@@ -558,7 +560,7 @@
 				set_trait(TRAIT_POTENCY,             get_trait(TRAIT_POTENCY)+(rand(-20,20)*degree),200, 0)
 				if(prob(degree*5))
 					set_trait(TRAIT_SPREAD,          get_trait(TRAIT_SPREAD)+rand(-1,1),2, 0)
-					source_turf.visible_message("<span class='notice'>\The [display_name] spasms visibly, shifting in the tray.</span>")
+					location.visible_message("<span class='notice'>\The [display_name] spasms visibly, shifting in the tray.</span>")
 			if(9)
 				set_trait(TRAIT_MATURATION,          get_trait(TRAIT_MATURATION)+(rand(-1,1)*degree),30, 0)
 				if(prob(degree*5))
@@ -567,12 +569,12 @@
 				if(prob(degree*2))
 					set_trait(TRAIT_BIOLUM,         !get_trait(TRAIT_BIOLUM))
 					if(get_trait(TRAIT_BIOLUM))
-						source_turf.visible_message("<span class='notice'>\The [display_name] begins to glow!</span>")
+						location.visible_message("<span class='notice'>\The [display_name] begins to glow!</span>")
 						if(prob(degree*2))
 							set_trait(TRAIT_BIOLUM_COLOUR,get_random_colour(0,75,190))
-							source_turf.visible_message("<span class='notice'>\The [display_name]'s glow </span><font color='[get_trait(TRAIT_BIOLUM_COLOUR)]'>changes colour</font>!")
+							location.visible_message("<span class='notice'>\The [display_name]'s glow </span><font color='[get_trait(TRAIT_BIOLUM_COLOUR)]'>changes colour</font>!")
 					else
-						source_turf.visible_message("<span class='notice'>\The [display_name]'s glow dims...</span>")
+						location.visible_message("<span class='notice'>\The [display_name]'s glow dims...</span>")
 			if(11)
 				set_trait(TRAIT_TELEPORTING,1)
 
@@ -679,8 +681,8 @@
 	new_seed.product_type     = product_type
 
 	//Copy over everything else.
+	new_seed.copy_chemical_composition(src)
 	if(mutants)        new_seed.mutants = mutants.Copy()
-	if(chems)          new_seed.chems = chems.Copy()
 	if(consume_gasses) new_seed.consume_gasses = consume_gasses.Copy()
 	if(exude_gasses)   new_seed.exude_gasses = exude_gasses.Copy()
 
@@ -749,9 +751,9 @@
 	//Seed traits
 	clone._traits          = deepCopyList(_traits)
 	clone.mutants          = mutants?.Copy()
-	clone.chems            = chems?.Copy()
 	clone.consume_gasses   = consume_gasses?.Copy()
 	clone.exude_gasses     = exude_gasses?.Copy()
+	clone.copy_chemical_composition(src)
 
 	//Appearence
 	clone.growth_stages    = growth_stages

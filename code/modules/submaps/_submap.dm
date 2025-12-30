@@ -26,7 +26,7 @@
 
 	archetype = _archetype
 	if(!pref_name)
-		pref_name = archetype.descriptor
+		pref_name = archetype.name
 
 	testing("Starting submap setup - '[name]', [archetype], [associated_z]z.")
 
@@ -41,7 +41,7 @@
 		jobs[job.title] = job
 
 	if(!associated_z)
-		testing( "Submap error - [name]/[archetype ? archetype.descriptor : "NO ARCHETYPE"] could not find an associated z-level for spawnpoint registration.")
+		testing( "Submap error - [name]/[archetype ? archetype.name : "NO ARCHETYPE"] could not find an associated z-level for spawnpoint registration.")
 		qdel(src)
 		return
 
@@ -59,7 +59,7 @@
 				registered_spawnpoint = TRUE
 
 	if(!registered_spawnpoint)
-		testing( "Submap error - [name]/[archetype ? archetype.descriptor : "NO ARCHETYPE"] has no job spawn points.")
+		testing( "Submap error - [name]/[archetype ? archetype.name : "NO ARCHETYPE"] has no job spawn points.")
 		qdel(src)
 		return
 

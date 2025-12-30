@@ -19,11 +19,11 @@
 		return
 	playsound(loc, 'sound/items/zip.ogg', 75, 1)
 	user.visible_message(SPAN_NOTICE("[user] inflates \the [src]."), SPAN_NOTICE("You inflate \the [src]."))
-	var/obj/structure/inflatable/R = new deploy_path(user.loc)
-	transfer_fingerprints_to(R)
-	R.add_fingerprint(user)
+	var/obj/structure/inflatable/debris = new deploy_path(user.loc)
+	transfer_fingerprints_to(debris)
+	debris.add_fingerprint(user)
 	if(inflatable_health)
-		R.current_health = inflatable_health
+		debris.current_health = inflatable_health
 	qdel(src)
 
 /obj/item/inflatable/door
@@ -66,10 +66,10 @@
 	STOP_PROCESSING(SSobj,src)
 	return ..()
 
-/obj/structure/inflatable/examine(mob/user, distance)
+/obj/structure/inflatable/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(taped)
-		to_chat(user, SPAN_NOTICE("It's been duct taped in few places."))
+		. += SPAN_NOTICE("It's been duct taped in few places.")
 
 /obj/structure/inflatable/Process()
 	check_environment()
@@ -137,14 +137,14 @@
 	current_health = clamp(current_health + 3, 0, get_max_health())
 	taped = TRUE
 
-/obj/structure/inflatable/attackby(obj/item/W, mob/user)
+/obj/structure/inflatable/attackby(obj/item/used_item, mob/user)
 
-	if((W.atom_damage_type == BRUTE || W.atom_damage_type == BURN) && (W.can_puncture() || W.get_attack_force(user) > 10))
-		visible_message(SPAN_DANGER("\The [user] pierces \the [src] with \the [W]!"))
+	if((used_item.atom_damage_type == BRUTE || used_item.atom_damage_type == BURN) && (used_item.can_puncture() || used_item.expend_attack_force(user) > 10))
+		visible_message(SPAN_DANGER("\The [user] pierces \the [src] with \the [used_item]!"))
 		deflate(TRUE)
 		return TRUE
 
-	if(!istype(W, /obj/item/inflatable_dispenser))
+	if(!istype(used_item, /obj/item/inflatable_dispenser))
 		return ..()
 
 	return FALSE
@@ -160,17 +160,16 @@
 	playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
 	if(violent)
 		visible_message("[src] rapidly deflates!")
-		var/obj/item/inflatable/torn/R = new(loc)
-		src.transfer_fingerprints_to(R)
+		transfer_fingerprints_to(new /obj/item/inflatable/torn(loc))
 		qdel(src)
 	else
 		if(!undeploy_path)
 			return
 		visible_message("\The [src] slowly deflates.")
 		spawn(50)
-			var/obj/item/inflatable/R = new undeploy_path(src.loc)
-			src.transfer_fingerprints_to(R)
-			R.inflatable_health = current_health
+			var/obj/item/inflatable/door_item = new undeploy_path(src.loc)
+			src.transfer_fingerprints_to(door_item)
+			door_item.inflatable_health = current_health
 			qdel(src)
 
 /obj/structure/inflatable/verb/hand_deflate()
@@ -209,7 +208,7 @@
 			return TryToSwitchState(user)
 
 /obj/structure/inflatable/door/attack_hand(mob/user)
-	if(user.a_intent == I_HURT || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+	if(user.check_intent(I_FLAG_HARM) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
 		return ..()
 	return TryToSwitchState(user)
 
@@ -270,15 +269,15 @@
 	playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
 	if(violent)
 		visible_message("[src] rapidly deflates!")
-		var/obj/item/inflatable/door/torn/R = new /obj/item/inflatable/door/torn(loc)
-		src.transfer_fingerprints_to(R)
+		transfer_fingerprints_to(new /obj/item/inflatable/door/torn(loc))
 		qdel(src)
 	else
 		visible_message("[src] slowly deflates.")
 		spawn(50)
-			var/obj/item/inflatable/door/R = new /obj/item/inflatable/door(loc)
-			src.transfer_fingerprints_to(R)
-			qdel(src)
+			if(!QDELETED(src))
+				if(loc)
+					transfer_fingerprints_to(new /obj/item/inflatable/door(loc))
+				qdel(src)
 
 /obj/item/inflatable/torn
 	name = "torn inflatable wall"

@@ -109,7 +109,6 @@
 	req_access = list(access_tcomsat)
 	icon = 'icons/obj/machines/tcomms/comms.dmi'
 	var/effective_range = 1 // TODO: upgrade with components.
-	var/enabled = TRUE
 
 /obj/machinery/shipcomms/proc/toggle()
 	if((stat & BROKEN) || use_power != POWER_USE_OFF)

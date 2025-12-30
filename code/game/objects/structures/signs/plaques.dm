@@ -31,7 +31,7 @@
 
 /obj/structure/sign/plaque/golden/medical
 	name = "medical certificate"
-	desc = "A picture next to a long winded description of medical certifications and degrees."
+	desc = "A picture next to a long-winded description of medical certifications and degrees."
 
 /obj/structure/sign/plaque/ai_dev
 	name       = "\improper AI developers plaque"

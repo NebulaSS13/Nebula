@@ -274,7 +274,7 @@
 
 // ID
 /obj/item/card/id/quantum
-	desc = "An ID straight from the Department of Spaciotemporal Affairs. This one looks highly classified."
+	desc = "An ID straight from the Department of Spatiotemporal Affairs. This one looks highly classified."
 
 /obj/item/card/id/quantum/Initialize()
 	. = ..()

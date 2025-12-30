@@ -39,13 +39,18 @@
 	else
 		pref.prune_invalid_traits()
 
-/datum/category_item/player_setup_item/traits/save_character(datum/pref_record_writer/W)
+/datum/category_item/player_setup_item/traits/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	character.clear_extrinsic_traits()
+	for(var/trait_type in pref.traits)
+		character.set_trait(trait_type, (pref.traits[trait_type] || TRAIT_LEVEL_EXISTS))
+
+/datum/category_item/player_setup_item/traits/save_character(datum/pref_record_writer/writer)
 	var/list/trait_ids = list()
 	for(var/trait_type in pref.traits)
 		var/decl/trait/trait_decl = GET_DECL(trait_type)
 		if(istype(trait_decl))
 			trait_ids |= trait_decl.uid
-	W.write("traits", trait_ids)
+	writer.write("traits", trait_ids)
 
 /datum/category_item/player_setup_item/traits/proc/get_trait_total()
 	var/trait_cost = 0

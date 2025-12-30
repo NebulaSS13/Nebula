@@ -31,8 +31,14 @@
 	. += melee_accuracy_bonus * 2
 
 	var/total_coverage = get_percentage_body_cover(body_parts_covered)
-	var/cold_value = (5 * (-(min_cold_protection_temperature)/T20C) * get_percentage_body_cover(cold_protection))
-	var/heat_value = (5 *   (max_heat_protection_temperature/T20C)  * get_percentage_body_cover(heat_protection))
+	var/cold_value = 0
+	if(!isnull(min_cold_protection_temperature) && cold_protection)
+		// Adds 5cr for every 20 degrees of protection below 20C at full coverage
+		cold_value = (5 * (T20C - min_cold_protection_temperature)/20 * get_percentage_body_cover(cold_protection))
+	var/heat_value = 0
+	if(!isnull(max_heat_protection_temperature) && heat_protection)
+		// Adds 5cr for every 20 degrees of protection over 20C at full coverage
+		heat_value = (5 * (max_heat_protection_temperature - T20C)/20 * get_percentage_body_cover(heat_protection))
 	var/additional_value = cold_value + heat_value
 
 	if(total_coverage > 0)

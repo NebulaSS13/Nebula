@@ -1,6 +1,6 @@
 /turf/floor/proc/break_tile_to_plating()
 	if(has_flooring())
-		set_flooring(null)
+		clear_flooring()
 	break_tile()
 
 /turf/floor/proc/break_tile()

@@ -86,8 +86,8 @@ var/global/list/all_conveyor_switches = list()
 	return TRUE
 
 // attack with item, place item on conveyor
-/obj/machinery/conveyor/attackby(var/obj/item/I, mob/user)
-	if(IS_CROWBAR(I))
+/obj/machinery/conveyor/attackby(var/obj/item/used_item, mob/user)
+	if(IS_CROWBAR(used_item))
 		if(!(stat & BROKEN))
 			var/obj/item/conveyor_construct/C = new/obj/item/conveyor_construct(src.loc)
 			C.id_tag = id_tag
@@ -95,7 +95,7 @@ var/global/list/all_conveyor_switches = list()
 		to_chat(user, "<span class='notice'>You remove the conveyor belt.</span>")
 		qdel(src)
 	else
-		user.try_unequip(I, get_turf(src))
+		user.try_unequip(used_item, get_turf(src))
 	return TRUE
 
 // make the conveyor broken
@@ -207,8 +207,8 @@ var/global/list/all_conveyor_switches = list()
 		last_pos = position
 		position = 0
 
-/obj/machinery/conveyor_switch/attackby(obj/item/I, mob/user, params)
-	if(!IS_CROWBAR(I))
+/obj/machinery/conveyor_switch/attackby(obj/item/used_item, mob/user, params)
+	if(!IS_CROWBAR(used_item))
 		return ..()
 	var/obj/item/conveyor_switch_construct/C = new/obj/item/conveyor_switch_construct(src.loc)
 	C.id_tag = id_tag
@@ -241,11 +241,11 @@ var/global/list/all_conveyor_switches = list()
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	var/id_tag
 
-/obj/item/conveyor_construct/attackby(obj/item/I, mob/user, params)
-	if(!istype(I, /obj/item/conveyor_switch_construct))
+/obj/item/conveyor_construct/attackby(obj/item/used_item, mob/user, params)
+	if(!istype(used_item, /obj/item/conveyor_switch_construct))
 		return ..()
 	to_chat(user, "<span class='notice'>You link the switch to the conveyor belt assembly.</span>")
-	var/obj/item/conveyor_switch_construct/C = I
+	var/obj/item/conveyor_switch_construct/C = used_item
 	id_tag = C.id_tag
 	return TRUE
 
@@ -301,7 +301,7 @@ var/global/list/all_conveyor_switches = list()
 
 /obj/item/conveyor_switch_construct/oneway
 	name = "one-way conveyor switch assembly"
-	desc = "An one-way conveyor control switch assembly."
+	desc = "A one-way conveyor control switch assembly."
 
 /obj/item/conveyor_switch_construct/oneway/afterattack(atom/A, mob/user, proximity)
 	if(!proximity || !istype(A, /turf/floor) || user.incapacitated())

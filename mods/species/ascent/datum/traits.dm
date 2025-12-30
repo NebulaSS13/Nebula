@@ -1,9 +1,8 @@
 /decl/trait/build_references()
 	. = ..()
 	LAZYINITLIST(blocked_species)
-	blocked_species |= SPECIES_MANTID_ALATE
-	blocked_species |= SPECIES_MANTID_GYNE
-	blocked_species |= SPECIES_MANTID_NYMPH
+	blocked_species |= /decl/species/mantid::uid
+	blocked_species |= /decl/species/mantid/gyne::uid
 
 /decl/trait/ascent
 	abstract_type = /decl/trait/ascent
@@ -12,9 +11,8 @@
 	. = ..()
 	blocked_species = null
 	permitted_species = list(
-		SPECIES_MANTID_ALATE,
-		SPECIES_MANTID_GYNE,
-		SPECIES_MANTID_NYMPH
+		/decl/species/mantid::uid,
+		/decl/species/mantid/gyne::uid
 	)
 
 // Modifies the exosuit that you spawn with.

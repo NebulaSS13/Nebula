@@ -24,7 +24,7 @@
 	var/hidden_item_max_w_class = ITEM_SIZE_SMALL
 	var/obj/item/hidden_item = null
 	var/shine = -1 // if material should apply shine overlay. Set to -1 for it to not do that
-
+	var/footprint_icon = 'icons/mob/footprints/footprints.dmi'
 	/// A multiplier applied to footstep volume.
 	var/footstep_volume_mod = 1
 	/// A multiplier applied to footstep range.
@@ -39,15 +39,15 @@
 	if (attached_cuffs)
 		QDEL_NULL(attached_cuffs)
 
-/obj/item/clothing/shoes/examine(mob/user)
+/obj/item/clothing/shoes/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if (attached_cuffs)
-		to_chat(user, SPAN_WARNING("They are connected by \the [attached_cuffs]."))
+		. += SPAN_WARNING("They are connected by \the [attached_cuffs].")
 	if (hidden_item)
 		if (loc == user)
-			to_chat(user, SPAN_ITALIC("\An [hidden_item] is inside."))
+			. += SPAN_ITALIC("\An [hidden_item] is inside.")
 		else if (get_dist(src, user) == 1)
-			to_chat(user, SPAN_ITALIC("Something is hidden inside."))
+			. += SPAN_ITALIC("Something is hidden inside.")
 
 /obj/item/clothing/shoes/attack_hand(var/mob/user)
 	if(user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE) && remove_hidden(user))
@@ -58,11 +58,11 @@
 	try_remove_cuffs(user)
 	..()
 
-/obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if (istype(I, /obj/item/handcuffs))
-		add_cuffs(I, user)
+/obj/item/clothing/shoes/attackby(var/obj/item/used_item, var/mob/user)
+	if (istype(used_item, /obj/item/handcuffs))
+		add_cuffs(used_item, user)
 		return TRUE
-	. = add_hidden(I, user)
+	. = add_hidden(used_item, user)
 	if(!.)
 		. = ..()
 
@@ -78,7 +78,7 @@
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
 		verbs |= /obj/item/clothing/shoes/proc/try_remove_cuffs
-		LAZYINITLIST(slowdown_per_slot[slot_shoes_str])
+		LAZYINITLIST(slowdown_per_slot)
 		slowdown_per_slot[slot_shoes_str] += cuffs.elastic ? 10 : 15
 		attached_cuffs = cuffs
 
@@ -104,13 +104,13 @@
 		return
 	user.visible_message(SPAN_ITALIC("\The [user] removes \the [attached_cuffs] from \the [src]."), range = 2)
 	attached_cuffs.add_fingerprint(user)
-	LAZYINITLIST(slowdown_per_slot[slot_shoes_str])
+	LAZYINITLIST(slowdown_per_slot)
 	slowdown_per_slot[slot_shoes_str] -= attached_cuffs.elastic ? 10 : 15
 	verbs -= /obj/item/clothing/shoes/proc/try_remove_cuffs
 	attached_cuffs = null
 
-/obj/item/clothing/shoes/proc/add_hidden(var/obj/item/I, var/mob/user)
-	if (!(I.item_flags & ITEM_FLAG_CAN_HIDE_IN_SHOES)) // fail silently
+/obj/item/clothing/shoes/proc/add_hidden(var/obj/item/used_item, var/mob/user)
+	if (!(used_item.item_flags & ITEM_FLAG_CAN_HIDE_IN_SHOES)) // fail silently
 		return FALSE
 	if (!can_add_hidden_item)
 		to_chat(user, SPAN_WARNING("\The [src] can't hold anything."))
@@ -118,15 +118,15 @@
 	if (hidden_item)
 		to_chat(user, SPAN_WARNING("\The [src] already holds \an [hidden_item]."))
 		return TRUE
-	if (I.w_class > hidden_item_max_w_class)
-		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in \the [src]."))
+	if (used_item.w_class > hidden_item_max_w_class)
+		to_chat(user, SPAN_WARNING("\The [used_item] is too large to fit in \the [src]."))
 		return TRUE
 	if (do_after(user, 1 SECONDS))
-		if(!user.try_unequip(I, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
+		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [used_item] into \the [src]."), range = 1)
 		verbs |= /obj/item/clothing/shoes/proc/remove_hidden
-		hidden_item = I
+		hidden_item = used_item
 		return TRUE
 
 /obj/item/clothing/shoes/proc/remove_hidden(var/mob/user)

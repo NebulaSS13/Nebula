@@ -18,8 +18,8 @@
 	attack_verb = list("sliced", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	_base_attack_force = 15
-	edge = 1
-	sharp = 1
+	edge = TRUE
+	sharp = TRUE
 
 /mob/living/simple_animal/hostile/viscerator/check_has_mouth()
 	return FALSE

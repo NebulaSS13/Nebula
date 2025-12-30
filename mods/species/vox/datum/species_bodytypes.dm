@@ -30,9 +30,13 @@
 		BP_BRAIN
 	)
 	override_limb_types = list(
-		BP_GROIN = /obj/item/organ/external/groin/vox,
-		BP_TAIL = /obj/item/organ/external/tail/vox
+		BP_GROIN  = /obj/item/organ/external/groin/vox,
+		BP_TAIL   = /obj/item/organ/external/tail/vox,
+		BP_L_HAND = /obj/item/organ/external/hand/vox,
+		BP_R_HAND = /obj/item/organ/external/hand/right/vox,
+		BP_HEAD   = /obj/item/organ/external/head/strong_bite
 	)
+
 	has_organ = list(
 		BP_STOMACH    = /obj/item/organ/internal/stomach/vox,
 		BP_HEART      = /obj/item/organ/internal/heart/vox,
@@ -60,17 +64,62 @@
 	var/icon/vox_marking_icon = 'mods/species/vox/icons/body/soldier/markings.dmi'
 
 /decl/bodytype/vox/Initialize()
-	if(!length(equip_adjust))
-		equip_adjust = list(
-			BP_L_HAND           = list("[NORTH]" = list(0, -2), "[EAST]" = list(0, -2), "[SOUTH]" = list( 0, -2),  "[WEST]" = list( 0, -2)),
-			BP_R_HAND           = list("[NORTH]" = list(0, -2), "[EAST]" = list(0, -2), "[SOUTH]" = list( 0, -2),  "[WEST]" = list( 0, -2)),
-			slot_head_str       = list("[NORTH]" = list(0, -2), "[EAST]" = list(3, -2), "[SOUTH]" = list( 0, -2),  "[WEST]" = list(-3, -2)),
-			slot_wear_mask_str  = list("[NORTH]" = list(0,  0), "[EAST]" = list(4,  0), "[SOUTH]" = list( 0,  0),  "[WEST]" = list(-4,  0)),
-			slot_wear_suit_str  = list("[NORTH]" = list(0, -1), "[EAST]" = list(0, -1), "[SOUTH]" = list( 0, -1),  "[WEST]" = list( 0, -1)),
-			slot_w_uniform_str  = list("[NORTH]" = list(0, -1), "[EAST]" = list(0, -1), "[SOUTH]" = list( 0, -1),  "[WEST]" = list( 0, -1)),
-			slot_underpants_str = list("[NORTH]" = list(0, -1), "[EAST]" = list(0, -1), "[SOUTH]" = list( 0, -1),  "[WEST]" = list( 0, -1)),
-			slot_undershirt_str = list("[NORTH]" = list(0, -1), "[EAST]" = list(0, -1), "[SOUTH]" = list( 0, -1),  "[WEST]" = list( 0, -1)),
-			slot_back_str       = list("[NORTH]" = list(0,  0), "[EAST]" = list(3,  0), "[SOUTH]" = list( 0,  0),  "[WEST]" = list(-3,  0))
+	if(!length(_equip_adjust))
+		_equip_adjust = list(
+			(BP_L_HAND) = list(
+				"[NORTH]" = list(0, -2),
+				"[EAST]"  = list(0, -2),
+				"[SOUTH]" = list( 0, -2),
+				"[WEST]"  = list( 0, -2)
+			),
+			(BP_R_HAND) = list(
+				"[NORTH]" = list(0, -2),
+				"[EAST]"  = list(0, -2),
+				"[SOUTH]" = list( 0, -2),
+				"[WEST]"  = list( 0, -2)
+			),
+			(slot_head_str) = list(
+				"[NORTH]" = list(0, -2),
+				"[EAST]"  = list(3, -2),
+				"[SOUTH]" = list( 0, -2),
+				"[WEST]"  = list(-3, -2)
+			),
+			(slot_wear_mask_str) = list(
+				"[NORTH]" = list(0,  0),
+				"[EAST]"  = list(4,  0),
+				"[SOUTH]" = list( 0,  0),
+				"[WEST]"  = list(-4,  0)
+			),
+			(slot_wear_suit_str) = list(
+				"[NORTH]" = list(0, -1),
+				"[EAST]"  = list(0, -1),
+				"[SOUTH]" = list( 0, -1),
+				"[WEST]"  = list( 0, -1)
+			),
+			(slot_w_uniform_str) = list(
+				"[NORTH]" = list(0, -1),
+				"[EAST]"  = list(0, -1),
+				"[SOUTH]" = list( 0, -1),
+				"[WEST]"  = list( 0, -1)
+			),
+			(slot_underpants_str) = list(
+				"[NORTH]" = list(0, -1),
+				"[EAST]"  = list(0, -1),
+				"[SOUTH]" = list( 0, -1),
+				"[WEST]"  = list( 0, -1)
+			),
+			(slot_undershirt_str) = list(
+				"[NORTH]" = list(0, -1),
+				"[EAST]"  = list(0, -1),
+				"[SOUTH]" = list( 0, -1),
+				"[WEST]"  = list( 0, -1)
+			),
+			(slot_back_str) = list(
+				"[NORTH]" = list(0,  0),
+				"[EAST]"  = list(3,  0),
+				"[SOUTH]" = list( 0,  0),
+				"[WEST]"  = list(-3,  0)
+			)
 		)
 	return ..()
 
@@ -98,6 +147,7 @@
 /decl/bodytype/vox/stanchion
 	name                = "stanchion voxform"
 	bodytype_category   = BODYTYPE_VOX_LARGE
+	// TODO: should the extra big guys really have the same bodytype equip flags as the little guys?
 	blood_overlays      = 'mods/species/vox/icons/body/stanchion/blood_overlays.dmi'
 	damage_overlays     = 'mods/species/vox/icons/body/stanchion/damage_overlays.dmi'
 	icon_base           = 'mods/species/vox/icons/body/stanchion/body.dmi'
@@ -127,3 +177,11 @@
 
 /obj/item/organ/external/tail/vox/stanchion
 	tail_icon  = 'mods/species/vox/icons/body/stanchion/body.dmi'
+
+/obj/item/organ/external/hand/vox/get_natural_attacks()
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/claws/strong/gloves)
+	return unarmed_attack
+
+/obj/item/organ/external/hand/right/vox/get_natural_attacks()
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/claws/strong/gloves)
+	return unarmed_attack

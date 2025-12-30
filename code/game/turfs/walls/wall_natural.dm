@@ -1,3 +1,5 @@
+var/global/_wall_chisel_skill = SKILL_CONSTRUCTION
+
 /turf/wall/natural
 	icon_state         = "natural"
 	desc               = "A rough natural wall."
@@ -10,6 +12,9 @@
 	var/image/ore_overlay
 	var/static/list/exterior_wall_shine_cache = list()
 	var/being_mined = FALSE
+	var/gem_dropped = FALSE
+	var/smoothed
+	var/list/engravings
 
 /turf/wall/natural/flooded
 	flooded = /decl/material/liquid/water
@@ -19,7 +24,7 @@
 	return SPAN_NOTICE("It has been <font color = '[paint_color]'>noticeably discoloured</font> by the elements.")
 
 /turf/wall/natural/get_wall_icon()
-	return 'icons/turf/walls/natural.dmi'
+	return (smoothed && !ramp_slope_direction) ? 'icons/turf/walls/stone.dmi' : 'icons/turf/walls/natural.dmi'
 
 /turf/wall/natural/Initialize(var/ml, var/materialtype, var/rmaterialtype)
 	. = ..()
@@ -49,42 +54,56 @@
 		update_neighboring_ramps(destroying_self = TRUE)
 	. = ..()
 
-/turf/wall/natural/attackby(obj/item/W, mob/user, click_params)
+/turf/wall/natural/proc/get_engraving_for_dir(facing_dir)
+	for(var/datum/engraving/engraving in engravings)
+		if(engraving.dir == facing_dir)
+			return engraving
 
-	if(user.check_dexterity(DEXTERITY_COMPLEX_TOOLS) && !ramp_slope_direction)
+/turf/wall/natural/attack_hand(mob/user)
 
-		if(istype(W, /obj/item/depth_scanner))
-			var/obj/item/depth_scanner/C = W
+	// Allow species with digging limbs to dig (drakes)
+	var/obj/item/prop = user.get_usable_hand_slot_organ()
+	if(istype(prop))
+		return attackby(prop, user)
+
+	. = ..()
+
+/turf/wall/natural/attackby(obj/item/used_item, mob/user, click_params)
+
+	if(!ramp_slope_direction && user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, silent = TRUE))
+
+		if(istype(used_item, /obj/item/depth_scanner))
+			var/obj/item/depth_scanner/C = used_item
 			C.scan_atom(user, src)
 			return TRUE
 
-		if (istype(W, /obj/item/measuring_tape))
-			var/obj/item/measuring_tape/P = W
+		if (istype(used_item, /obj/item/measuring_tape))
+			var/obj/item/measuring_tape/P = used_item
 			user.visible_message(SPAN_NOTICE("\The [user] extends [P] towards [src]."),SPAN_NOTICE("You extend [P] towards [src]."))
 			if(do_after(user,10, src))
 				to_chat(user, SPAN_NOTICE("\The [src] has been excavated to a depth of [excavation_level]cm."))
 			return TRUE
 
-		if(istype(W, /obj/item/tool/xeno))
-			return handle_xenoarch_tool_interaction(W, user)
+		if(istype(used_item, /obj/item/tool/xeno))
+			return handle_xenoarch_tool_interaction(used_item, user)
 
 	. = ..()
 
 // Drill out natural walls.
-/turf/wall/natural/handle_wall_tool_interactions(obj/item/W, mob/user)
-	if(IS_PICK(W) && !being_mined)
+/turf/wall/natural/handle_wall_tool_interactions(obj/item/used_item, mob/user)
+	if(IS_PICK(used_item) && !being_mined)
 		var/check_material_hardness
 		if(material)
 			check_material_hardness = material.hardness
 		if(reinf_material && (isnull(check_material_hardness) || check_material_hardness > reinf_material.hardness))
 			check_material_hardness = reinf_material.hardness
-		if(isnull(check_material_hardness) || W.material?.hardness < check_material_hardness)
-			to_chat(user, SPAN_WARNING("\The [W] is not hard enough to dig through \the [src]."))
+		if(isnull(check_material_hardness) || used_item.material?.hardness < check_material_hardness)
+			to_chat(user, SPAN_WARNING("\The [used_item] is not hard enough to dig through \the [src]."))
 			return TRUE
 		if(being_mined)
 			return TRUE
 		being_mined = TRUE
-		if(W.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(W, INFINITY)))
+		if(used_item.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(used_item, INFINITY)))
 			dismantle_turf()
 		if(istype(src, /turf/wall/natural)) // dismantle_turf() can change our type
 			being_mined = FALSE
@@ -92,12 +111,39 @@
 	return FALSE
 
 /turf/wall/natural/update_strings()
+	var/modifier
+	if(length(engravings))
+		modifier = "engraved"
+	else if(smoothed)
+		if(reinf_material)
+			modifier = "polished"
+		else
+			modifier = "smooth"
+	else if(!reinf_material)
+		modifier = "natural"
+
 	if(reinf_material)
-		SetName("[reinf_material.ore_name] deposit")
-		desc = "A natural cliff face composed of bare [material.solid_name] and a deposit of [reinf_material.ore_name]."
+		if(modifier)
+			SetName("[modifier] [reinf_material.ore_name] deposit")
+		else
+			SetName("[reinf_material.ore_name] deposit")
+		desc = "A natural wall composed of bare [material.solid_name] and a deposit of [reinf_material.ore_name]."
 	else
-		SetName("natural [material.solid_name] wall")
-		desc = "A natural cliff face composed of bare [material.solid_name]."
+		SetName("[modifier] [material.solid_name] wall")
+		desc = "A natural wall composed of bare [material.solid_name]."
+
+/turf/wall/natural/get_examine_strings(mob/user, distance, infix, suffix)
+	. = ..()
+	if(length(engravings))
+		for(var/datum/engraving/engraving in engravings)
+			var/engraving_line
+			if(engraving.name)
+				engraving_line = "It has been engraved with \a [engraving.name]."
+			else
+				engraving_line = "It has been engraved."
+			if(engraving.desc)
+				engraving_line = "[engraving_line] [engraving.desc]"
+			. += engraving_line
 
 /turf/wall/natural/update_material(var/update_neighbors)
 	if(reinf_material?.ore_icon_overlay)
@@ -150,6 +196,10 @@
 	if(prob(30) && !ramp_slope_direction && material)
 		var/drop_type = material.ore_type || /obj/item/stack/material/ore
 		pass_geodata_to(new drop_type(src, material.ore_result_amount, material.type))
+	if(!gem_dropped && material && prob(material.gemstone_chance) && LAZYLEN(material.gemstone_types))
+		gem_dropped = TRUE
+		new /obj/item/gemstone(get_turf(src), pickweight(material.gemstone_types))
+		visible_message(SPAN_NOTICE("A glimmer of colour shines amongst the rubble..."))
 
 /turf/wall/natural/proc/pass_geodata_to(obj/O)
 	var/datum/extension/geological_data/ours = get_extension(src, /datum/extension/geological_data)

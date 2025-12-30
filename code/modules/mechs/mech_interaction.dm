@@ -99,7 +99,7 @@
 
 	var/modifiers = params2list(params)
 	if(modifiers["shift"])
-		user.examinate(A)
+		user.examine_verb(A)
 		return
 
 	if(modifiers["ctrl"] && selected_system == A)
@@ -133,11 +133,9 @@
 
 	// User is not necessarily the exosuit, or the same person, so update intent.
 	if(user != src)
-		a_intent = user.a_intent
-		if(user.zone_sel)
-			zone_sel.set_selected_zone(user.get_target_zone())
-		else
-			zone_sel.set_selected_zone(BP_CHEST)
+		set_intent(user.get_intent())
+		set_target_zone(user.get_target_zone())
+
 	// You may attack the target with your exosuit FIST if you're malfunctioning.
 	var/atom/movable/AM = A
 	var/fail_prob = (user != src && istype(AM) && AM.loc != src) ? (user.skill_check(SKILL_MECH, HAS_PERK) ? 0: 15 ) : 0
@@ -314,7 +312,7 @@
 			if(!silent)
 				to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
 			return
-		hud_open.toggled()
+		hud_open.toggled(user)
 		if(!silent)
 			to_chat(user, SPAN_NOTICE("You open the hatch and climb out of \the [src]."))
 	else
@@ -328,20 +326,20 @@
 		user.client.screen -= hud_elements
 		user.client.eye = user
 	if(user in pilots)
-		a_intent = I_HURT
+		set_intent(I_FLAG_HARM)
 		LAZYREMOVE(pilots, user)
 		UNSETEMPTY(pilots)
 		update_pilots()
 	return 1
 
-/mob/living/exosuit/attackby(var/obj/item/thing, var/mob/user)
+/mob/living/exosuit/attackby(var/obj/item/used_item, var/mob/user)
 
 	// Install equipment.
-	if(user.a_intent != I_HURT && istype(thing, /obj/item/mech_equipment))
+	if(!user.check_intent(I_FLAG_HARM) && istype(used_item, /obj/item/mech_equipment))
 		if(hardpoints_locked)
 			to_chat(user, SPAN_WARNING("Hardpoint system access is disabled."))
 			return TRUE
-		var/obj/item/mech_equipment/realThing = thing
+		var/obj/item/mech_equipment/realThing = used_item
 		if(realThing.owner)
 			return TRUE
 		var/free_hardpoints = list()
@@ -350,16 +348,16 @@
 				free_hardpoints += hardpoint
 		var/to_place = input("Where would you like to install it?") as null|anything in (realThing.restricted_hardpoints & free_hardpoints)
 		if(!to_place)
-			to_chat(user, SPAN_WARNING("There is no room to install \the [thing]."))
-		else if(!install_system(thing, to_place, user))
-			to_chat(user, SPAN_WARNING("\The [thing] could not be installed in that hardpoint."))
+			to_chat(user, SPAN_WARNING("There is no room to install \the [used_item]."))
+		else if(!install_system(used_item, to_place, user))
+			to_chat(user, SPAN_WARNING("\The [used_item] could not be installed in that hardpoint."))
 		return TRUE
 
 	// Apply customisation.
-	if(istype(thing, /obj/item/kit/paint))
-		user.visible_message(SPAN_NOTICE("\The [user] opens \the [thing] and spends some quality time customising \the [src]."))
+	if(istype(used_item, /obj/item/kit/paint))
+		user.visible_message(SPAN_NOTICE("\The [user] opens \the [used_item] and spends some quality time customising \the [src]."))
 
-		var/obj/item/kit/paint/P = thing
+		var/obj/item/kit/paint/P = used_item
 		SetName(P.new_name)
 		desc = P.new_desc
 
@@ -380,10 +378,10 @@
 		return TRUE
 
 	// Various tool and construction interactions.
-	if(user.a_intent != I_HURT)
+	if(!user.check_intent(I_FLAG_HARM))
 
 		// Removing systems from hardpoints.
-		if(IS_MULTITOOL(thing))
+		if(IS_MULTITOOL(used_item))
 			if(hardpoints_locked)
 				to_chat(user, SPAN_WARNING("Hardpoint system access is disabled."))
 				return TRUE
@@ -397,7 +395,7 @@
 			return TRUE
 
 		// Dismantling an exosuit entirely.
-		if(IS_WRENCH(thing))
+		if(IS_WRENCH(used_item))
 			if(!maintenance_protocols)
 				to_chat(user, SPAN_WARNING("The securing bolts are not visible while maintenance protocols are disabled."))
 				return TRUE
@@ -408,7 +406,7 @@
 			return TRUE
 
 		// Brute damage repair.
-		if(IS_WELDER(thing))
+		if(IS_WELDER(used_item))
 			if(!get_damage(BRUTE))
 				return TRUE
 			var/list/damaged_parts = list()
@@ -417,11 +415,11 @@
 					damaged_parts += MC
 			var/obj/item/mech_component/to_fix = input(user,"Which component would you like to fix") as null|anything in damaged_parts
 			if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.brute_damage)
-				to_fix.repair_brute_generic(thing, user)
+				to_fix.repair_brute_generic(used_item, user)
 			return TRUE
 
 		// Burn damage repair.
-		if(IS_COIL(thing))
+		if(IS_COIL(used_item))
 			if(!get_damage(BURN))
 				return TRUE
 			var/list/damaged_parts = list()
@@ -430,11 +428,11 @@
 					damaged_parts += MC
 			var/obj/item/mech_component/to_fix = input(user,"Which component would you like to fix") as null|anything in damaged_parts
 			if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.burn_damage)
-				to_fix.repair_burn_generic(thing, user)
+				to_fix.repair_burn_generic(used_item, user)
 			return TRUE
 
 		// Cell removal.
-		if(IS_SCREWDRIVER(thing))
+		if(IS_SCREWDRIVER(used_item))
 			if(!maintenance_protocols)
 				to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
 				return TRUE
@@ -446,23 +444,23 @@
 				user.put_in_hands(body.cell)
 				to_chat(user, SPAN_NOTICE("You remove \the [body.cell] from \the [src]."))
 				playsound(user.loc, 'sound/items/Crowbar.ogg', 50, 1)
-				visible_message(SPAN_NOTICE("\The [user] pries out \the [body.cell] using \the [thing]."))
+				visible_message(SPAN_NOTICE("\The [user] pries out \the [body.cell] using \the [used_item]."))
 				power = MECH_POWER_OFF
 				hud_power_control.queue_icon_update()
 				body.cell = null
 			return TRUE
 
 		// Force-opening the cockpit.
-		if(IS_CROWBAR(thing))
+		if(IS_CROWBAR(used_item))
 			if(!hatch_locked)
 				to_chat(user, SPAN_NOTICE("The cockpit isn't locked. There is no need for this."))
 				return TRUE
 			if(!body) //Error
 				return TRUE
 			var/delay = min(5 SECONDS * user.skill_delay_mult(SKILL_DEVICES), 5 SECONDS * user.skill_delay_mult(SKILL_EVA))
-			visible_message(SPAN_NOTICE("\The [user] starts forcing \the [src]'s emergency [body.hatch_descriptor] release using \the [thing]."))
+			visible_message(SPAN_NOTICE("\The [user] starts forcing \the [src]'s emergency [body.hatch_descriptor] release using \the [used_item]."))
 			if(do_after(user, delay, src))
-				visible_message(SPAN_NOTICE("\The [user] forces \the [src]'s [body.hatch_descriptor] open using \the [thing]."))
+				visible_message(SPAN_NOTICE("\The [user] forces \the [src]'s [body.hatch_descriptor] open using \the [used_item]."))
 				playsound(user.loc, 'sound/machines/bolts_up.ogg', 25, 1)
 				hatch_locked = FALSE
 				hatch_closed = FALSE
@@ -473,23 +471,23 @@
 			return TRUE
 
 		// Cell replacement.
-		if(istype(thing, /obj/item/cell))
+		if(istype(used_item, /obj/item/cell))
 			if(!maintenance_protocols)
 				to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
 				return TRUE
 			if(body?.cell)
 				to_chat(user, SPAN_WARNING("There is already a cell in there!"))
 				return TRUE
-			if(user.try_unequip(thing))
-				thing.forceMove(body)
-				body.cell = thing
+			if(user.try_unequip(used_item))
+				used_item.forceMove(body)
+				body.cell = used_item
 				to_chat(user, SPAN_NOTICE("You install \the [body.cell] into \the [src]."))
 				playsound(user.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				visible_message(SPAN_NOTICE("\The [user] installs \the [body.cell] into \the [src]."))
 			return TRUE
 
 		// Diagnostic scan.
-		if(istype(thing, /obj/item/robotanalyzer))
+		if(istype(used_item, /obj/item/robotanalyzer))
 			to_chat(user, SPAN_NOTICE("Diagnostic Report for \the [src]:"))
 			for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
 				if(MC)
@@ -506,7 +504,7 @@
 			to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
 			return TRUE
 		if(hud_open)
-			hud_open.toggled()
+			hud_open.toggled(user)
 			return TRUE
 
 /mob/living/exosuit/default_hurt_interaction(var/mob/user)

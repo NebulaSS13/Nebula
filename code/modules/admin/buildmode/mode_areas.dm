@@ -41,9 +41,9 @@
 	if (mode == "Pick")
 		var/area/path = select_subpath((selected_area?.type || /area/space), /area)
 		if (path)
-			for (var/area/R in global.areas)
-				if (R.type == path)
-					SelectArea(R)
+			for (var/area/build_area in global.areas)
+				if (build_area.type == path)
+					SelectArea(build_area)
 					to_chat(user, "Picked area [selected_area.proper_name]")
 					break
 	else if (mode == "Create")

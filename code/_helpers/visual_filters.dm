@@ -1,17 +1,17 @@
-// These involve BYOND's built in filters that do visual effects, and not stuff that distinguishes between things.
+// These involve BYOND's built-in filters that do visual effects, and not stuff that distinguishes between things.
 
 // All of this ported from TG.
 // And then ported to Nebula from Polaris.
 /atom/movable
-	var/list/filter_data // For handling persistent filters
-
-/proc/cmp_filter_data_priority(list/A, list/B)
-	return A["priority"] - B["priority"]
+	VAR_PRIVATE/list/filter_data // For handling persistent filters
 
 // Defining this for future proofing and ease of searching for erroneous usage.
 /image/proc/add_filter(filter_name, priority, list/params)
 	filters += filter(arglist(params))
 	return TRUE
+
+/atom/movable/proc/has_filter(filter_name)
+	return (name in filter_data)
 
 /atom/movable/proc/add_filter(filter_name, priority, list/params, force_update = FALSE)
 
@@ -35,7 +35,7 @@
 
 /atom/movable/proc/update_filters()
 	filters = null
-	filter_data = sortTim(filter_data, /proc/cmp_filter_data_priority, TRUE)
+	filter_data = sortTim(filter_data, /proc/cmp_priority_list, TRUE)
 	for(var/f in filter_data)
 		var/list/data = filter_data[f]
 		var/list/arguments = data.Copy()

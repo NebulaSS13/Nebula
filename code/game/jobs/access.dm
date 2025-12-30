@@ -58,19 +58,19 @@
 /atom/movable/proc/check_access(atom/movable/A)
 	return check_access_list(A ? A.GetAccess() : list())
 
-/atom/movable/proc/check_access_list(list/L)
-	var/list/R = get_req_access()
+/atom/movable/proc/check_access_list(list/supplied_access)
+	var/list/required_access = get_req_access()
 
-	if(!R)
-		R = list()
-	if(!istype(L, /list))
+	if(!required_access)
+		required_access = list()
+	if(!istype(supplied_access, /list))
 		return FALSE
 
 	if(maint_all_access)
-		L = L.Copy()
-		L |= access_maint_tunnels
+		supplied_access = supplied_access.Copy()
+		supplied_access |= access_maint_tunnels
 
-	return has_access(R, L)
+	return has_access(required_access, supplied_access)
 
 /proc/has_access(list/req_access, list/accesses)
 	for(var/req in req_access)
@@ -143,11 +143,10 @@ var/global/list/datum/access/priv_all_access_datums_region
 	return priv_all_access_datums_region.Copy()
 
 /proc/get_access_ids(var/access_types = ACCESS_TYPE_ALL)
-	var/list/L = new()
+	. = list()
 	for(var/datum/access/A in get_all_access_datums())
 		if(A.access_type & access_types)
-			L += A.id
-	return L
+			. += A.id
 
 var/global/list/priv_all_access
 /proc/get_all_accesses()

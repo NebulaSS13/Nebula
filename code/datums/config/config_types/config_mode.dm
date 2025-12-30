@@ -6,7 +6,6 @@
 		/decl/config/lists/mode_allowed,
 		/decl/config/lists/mode_votable,
 		/decl/config/lists/mode_probabilities,
-		/decl/config/toggle/feature_object_spell_system,
 		/decl/config/toggle/traitor_scaling,
 		/decl/config/toggle/protect_roles_from_antagonist,
 		/decl/config/toggle/continuous_rounds,
@@ -78,10 +77,6 @@
 		var/decl/game_mode/game_mode = all_modes[mode_type]
 		game_mode.probability = max(0, value[game_mode.uid])
 
-/decl/config/toggle/feature_object_spell_system
-	uid = "feature_object_spell_system"
-	desc = "Spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard."
-
 /decl/config/toggle/traitor_scaling
 	uid = "traitor_scaling"
 	desc = "If amount of traitors scales or not."
@@ -93,7 +88,7 @@
 /decl/config/toggle/continuous_rounds
 	uid = "continuous_rounds"
 	desc = list(
-		"Remove the # to make rounds which end instantly (Rev, Wizard, Malf) to continue until the shuttle is called or the station is nuked.",
+		"Remove the # to make rounds which end instantly continue until the shuttle is called or the station is nuked.",
 		"Malf and Rev will let the shuttle be called when the antags/protags are dead."
 	)
 

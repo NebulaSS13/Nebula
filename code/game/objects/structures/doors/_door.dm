@@ -1,18 +1,18 @@
 /obj/structure/door
-	name = "door"
-	icon = 'icons/obj/doors/material_doors.dmi'
-	icon_state = "metal"
-	hitsound = 'sound/weapons/genhit.ogg'
-	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
-	max_health = 50
-	density =  TRUE
-	anchored = TRUE
-	opacity =  TRUE
-
-	var/has_window = FALSE
-	var/changing_state = FALSE
-	var/icon_base
+	name                  = "door"
+	icon                  = 'icons/obj/doors/material_doors.dmi'
+	icon_state            = "metal"
+	hitsound              = 'sound/weapons/genhit.ogg'
+	material_alteration   = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
+	max_health            = 50
+	density               = TRUE
+	anchored              = TRUE
+	opacity               = TRUE
+	structure_flags       = STRUCTURE_FLAG_THROWN_DAMAGE
+	var/has_window        = FALSE
+	var/changing_state    = FALSE
 	var/door_sound_volume = 25
+	var/icon_base
 
 /obj/structure/door/Initialize()
 	..()
@@ -163,7 +163,7 @@
 /obj/structure/door/attackby(obj/item/used_item, mob/user)
 	add_fingerprint(user, 0, used_item)
 
-	if((user.a_intent == I_HURT && used_item.get_attack_force(user)) || istype(used_item, /obj/item/stack/material))
+	if((user.check_intent(I_FLAG_HARM) && used_item.get_attack_force(user)) || istype(used_item, /obj/item/stack/material))
 		return ..()
 
 	if(used_item.user_can_attack_with(user, silent = TRUE))
@@ -205,19 +205,20 @@
 /obj/structure/door/get_alt_interactions(var/mob/user)
 	. = ..()
 	if(density)
-		. += /decl/interaction_handler/knock_on_door
+		LAZYADD(., /decl/interaction_handler/knock_on_door)
 
 /decl/interaction_handler/knock_on_door
 	name = "Knock On Door"
 	expected_target_type = /obj/structure/door
 	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_TURF
+	examine_desc = "knock on $TARGET_THEM$"
 
 /decl/interaction_handler/knock_on_door/invoked(atom/target, mob/user, obj/item/prop)
 	if(!istype(target) || !target.density)
 		return FALSE
 	user.do_attack_animation(src)
 	playsound(target.loc, 'sound/effects/glassknock.ogg', 80, 1)
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		target.visible_message(
 			SPAN_DANGER("\The [user] bangs against \the [src]!"),
 			blind_message = "You hear a banging sound!"
@@ -255,8 +256,8 @@
 	material = /decl/material/solid/gemstone/diamond
 
 /obj/structure/door/wood
-	material = /decl/material/solid/organic/wood
-	color = /decl/material/solid/organic/wood::color
+	material = /decl/material/solid/organic/wood/oak
+	color = /decl/material/solid/organic/wood/oak::color
 
 /obj/structure/door/mahogany
 	material = /decl/material/solid/organic/wood/mahogany
@@ -275,7 +276,7 @@
 	color = /decl/material/solid/organic/wood/walnut::color
 
 /obj/structure/door/wood/saloon
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	opacity = FALSE
 
 /obj/structure/door/wood/saloon/ebony

@@ -11,7 +11,7 @@
 
 /obj/structure/lift/proc/pressed(var/mob/user)
 	if(!issilicon(user))
-		if(user.a_intent == I_HURT)
+		if(user.check_intent(I_FLAG_HARM))
 			user.visible_message("<span class='danger'>\The [user] hammers on the lift button!</span>")
 		else
 			user.visible_message("<span class='notice'>\The [user] presses the lift button.</span>")

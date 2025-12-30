@@ -39,8 +39,8 @@
 	if(!QDELETED(src))
 		qdel(src)
 
-/obj/machinery/singularity_generator/attackby(obj/item/W, mob/user)
-	if(!IS_WRENCH(W))
+/obj/machinery/singularity_generator/attackby(obj/item/used_item, mob/user)
+	if(!IS_WRENCH(used_item))
 		return ..()
 	anchored = !anchored
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)

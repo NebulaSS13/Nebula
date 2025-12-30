@@ -5,7 +5,8 @@
 /obj/item/fishing_rod
 	name = "fishing rod"
 	desc = "A simple fishing rod with eyelets for stringing a line."
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
+	color = /decl/material/solid/organic/wood/oak::color
 	matter = null
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	icon = 'icons/obj/fishing_rod.dmi'
@@ -144,13 +145,13 @@
 		line = null
 	return ..()
 
-/obj/item/fishing_rod/examine(mob/user, distance)
+/obj/item/fishing_rod/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(user && distance <= 1)
 		if(line)
-			to_chat(user, "\The [src] has been strung with some [get_line_damage()] [line.name].")
+			. += "\The [src] has been strung with some [get_line_damage()] [line.name]."
 		if(bait)
-			to_chat(user, "\The [src] has been baited with \a [bait].")
+			. += "\The [src] has been baited with \a [bait]."
 
 /obj/item/fishing_rod/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
@@ -161,7 +162,7 @@
 	. = ..()
 
 /obj/item/fishing_rod/use_on_mob(mob/living/target, mob/living/user)
-	return user.a_intent != I_HURT ? FALSE : ..()
+	return !user.check_intent(I_FLAG_HARM) ? FALSE : ..()
 
 /obj/item/fishing_rod/proc/can_fish_in(mob/user, atom/target)
 	if(!isturf(target))
@@ -177,7 +178,7 @@
 
 /obj/item/fishing_rod/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		return ..()
 
 	if(fishing_target)
@@ -231,12 +232,12 @@
 
 	return ..()
 
-/obj/item/fishing_rod/attackby(obj/item/W, mob/user)
+/obj/item/fishing_rod/attackby(obj/item/used_item, mob/user)
 
-	if(load_line(user, W))
+	if(load_line(user, used_item))
 		return TRUE
 
-	if(istype(W, /obj/item/food))
+	if(istype(used_item, /obj/item/food))
 
 		if(bait)
 			to_chat(user, SPAN_WARNING("\The [src] already has \a [bait] on the hook."))
@@ -246,9 +247,9 @@
 			to_chat(user, SPAN_WARNING("\The [src] needs a line before you can bait it."))
 			return TRUE
 
-		if(user.try_unequip(W, src))
-			bait = W
-			to_chat(user, SPAN_NOTICE("You thread \the [W] onto \the [src]'s hook."))
+		if(user.try_unequip(used_item, src))
+			bait = used_item
+			to_chat(user, SPAN_NOTICE("You thread \the [used_item] onto \the [src]'s hook."))
 			update_icon()
 
 		return TRUE
@@ -341,6 +342,7 @@
 	name = "advanced fishing rod"
 	desc = "It's a fishing rod, an enhanced fiberglass Telescope Ultralight 47; the latest model."
 	material = /decl/material/solid/fiberglass
+	color = /decl/material/solid/fiberglass::color
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)

@@ -10,7 +10,7 @@
 					/obj/item/lightreplacer,
 					/obj/item/chems/spray/cleaner,
 					/obj/item/box/lights/mixed,
-					/obj/item/chems/glass/rag,
+					/obj/item/chems/rag,
 					/obj/item/grenade/chem_grenade/cleaner = 3,
 					/obj/structure/mopbucket)
 	containertype = /obj/structure/closet/crate/large
@@ -33,7 +33,7 @@
 					/obj/item/grenade/chem_grenade/cleaner = 3,
 					/obj/item/box/detergent = 3,
 					/obj/item/chems/glass/bucket,
-					/obj/item/chems/glass/rag,
+					/obj/item/chems/rag,
 					/obj/item/chems/spray/cleaner = 2,
 					/obj/item/soap)
 	containertype = /obj/structure/closet/crate/large

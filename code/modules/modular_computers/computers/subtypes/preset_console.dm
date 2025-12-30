@@ -48,7 +48,6 @@
 /obj/machinery/computer/modular/preset/engineering
 	default_software = list(
 		/datum/computer_file/program/power_monitor,
-		/datum/computer_file/program/supermatter_monitor,
 		/datum/computer_file/program/alarm_monitor,
 		/datum/computer_file/program/atmos_control,
 		/datum/computer_file/program/rcon_console,

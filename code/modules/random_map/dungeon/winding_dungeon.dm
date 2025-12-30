@@ -313,10 +313,6 @@
 	rooms += R
 	return 1
 
-/datum/random_map/winding_dungeon/proc/add_loot(var/xorigin,var/yorigin,var/zorigin,var/type)
-	var/datum/room/room = pick(rooms)
-	return room.add_loot(type)
-
 /datum/random_map/winding_dungeon/get_appropriate_path(var/value)
 	switch(value)
 		if(WALL_CHAR)

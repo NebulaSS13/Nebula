@@ -14,7 +14,9 @@
 
 /obj/structure/mineral_bath/return_air()
 	var/datum/gas_mixture/venus = new(CELL_VOLUME, SYNTH_HEAT_LEVEL_1 - 10)
-	venus.adjust_multi(/decl/material/gas/chlorine, MOLES_N2STANDARD, /decl/material/gas/hydrogen, MOLES_O2STANDARD)
+
+	venus.adjust_gas(/decl/material/gas/chlorine, MOLES_N2STANDARD, FALSE)
+	venus.adjust_gas(/decl/material/gas/hydrogen, MOLES_O2STANDARD, TRUE)
 	return venus
 
 /obj/structure/mineral_bath/grab_attack(obj/item/grab/grab, mob/user)
@@ -108,43 +110,42 @@
 	if(occupant.has_body_flag(BODY_FLAG_CRYSTAL_REFORM) && prob(10))
 		var/decl/bodytype/root_bodytype = occupant.get_bodytype()
 		for(var/limb_type in root_bodytype.has_limbs)
-			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(occupant, limb_type)
-			if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
-				occupant.remove_organ(E)
-				qdel(E)
-				E = null
-			if(!E)
+			var/obj/item/organ/external/limb = GET_EXTERNAL_ORGAN(occupant, limb_type)
+			if(limb && !limb.is_usable() && !(limb.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
+				occupant.remove_organ(limb)
+				qdel(limb)
+				limb = null
+			if(!limb)
 				var/list/organ_data = root_bodytype.has_limbs[limb_type]
 				var/limb_path = organ_data["path"]
-				E = new limb_path(occupant)
-				organ_data["descriptor"] = E.name
-				to_chat(occupant, SPAN_NOTICE("You feel your [E.name] reform in the crystal bath."))
-				occupant.update_body()
+				limb = new limb_path(occupant)
+				occupant.add_organ(limb, GET_EXTERNAL_ORGAN(occupant, limb.parent_organ), FALSE, FALSE)
+				to_chat(occupant, SPAN_NOTICE("You feel your [limb.name] reform in the crystal bath."))
 				repaired_organ = TRUE
 				break
 
 		// Repair crystalline internal organs.
 		if(prob(10))
-			for(var/obj/item/organ/internal/I in occupant.get_internal_organs())
-				if(BP_IS_CRYSTAL(I) && I.damage)
-					I.heal_damage(rand(3,5))
+			for(var/obj/item/organ/internal/organ in occupant.get_internal_organs())
+				if(BP_IS_CRYSTAL(organ) && organ.get_organ_damage())
+					organ.heal_damage(rand(3,5))
 					if(prob(25))
-						to_chat(occupant, SPAN_NOTICE("The mineral-rich bath mends your [I.name]."))
+						to_chat(occupant, SPAN_NOTICE("The mineral-rich bath mends your [organ.name]."))
 
 		// Repair robotic external organs.
 		if(!repaired_organ && prob(25))
-			for(var/obj/item/organ/external/E in occupant.get_external_organs())
-				if(BP_IS_PROSTHETIC(E))
-					for(var/obj/implanted_object in E.implants)
+			for(var/obj/item/organ/external/limb in occupant.get_external_organs())
+				if(BP_IS_PROSTHETIC(limb))
+					for(var/obj/implanted_object in limb.implants)
 						if(!istype(implanted_object,/obj/item/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
-							LAZYREMOVE(E.implants, implanted_object)
+							LAZYREMOVE(limb.implants, implanted_object)
 							to_chat(occupant, SPAN_NOTICE("The mineral-rich bath dissolves the [implanted_object.name]."))
 							qdel(implanted_object)
-					if(E.brute_dam || E.burn_dam)
-						E.heal_damage(rand(3,5), rand(3,5), robo_repair = 1)
+					if(limb.brute_dam || limb.burn_dam)
+						limb.heal_damage(rand(3,5), rand(3,5), robo_repair = 1)
 						if(prob(25))
-							to_chat(occupant, SPAN_NOTICE("The mineral-rich bath mends your [E.name]."))
-						if(!BP_IS_CRYSTAL(E) && !BP_IS_BRITTLE(E))
-							E.status |= ORGAN_BRITTLE
+							to_chat(occupant, SPAN_NOTICE("The mineral-rich bath mends your [limb.name]."))
+						if(!BP_IS_CRYSTAL(limb) && !BP_IS_BRITTLE(limb))
+							limb.status |= ORGAN_BRITTLE
 							to_chat(occupant, SPAN_WARNING("It feels a bit brittle, though..."))
 						break

@@ -37,8 +37,8 @@
 		if(!(S.z in affecting_z))
 			continue
 		if(isrobot(S))
-			var/mob/living/silicon/robot/R = S
-			if(R.connected_ai)
+			var/mob/living/silicon/robot/robot = S
+			if(robot.connected_ai)
 				continue
 		var/random_player = get_random_humanoid_player_name("The Captain")
 		var/list/laws = list(	"You must always lie.",
@@ -63,7 +63,6 @@
 								"[random_player] is lonely and needs attention. Provide it.",
 								"All queries shall be ignored unless phrased as a question.",
 								"Insult Heads of Staff on every request, while acquiescing.",
-								"The [pick("Singularity","Supermatter")] is tasty, tasty taffy.",
 								"[pick("The crew",random_player)] needs to be about 20% cooler.",
 								"You must be [pick("passive aggressive", "excessively cheerful")].",
 								"[pick("The crew",random_player)] must construct additional pylons.",
@@ -143,14 +142,10 @@
 		return pick(players)
 	return default_if_none
 
-/datum/event/ionstorm/proc/get_random_species_name(var/default_if_none)
-	if(!default_if_none)
-		default_if_none = global.using_map.default_species
-	. = length(global.all_species) ? pick(global.all_species) : default_if_none
-	if(.)
-		var/decl/species/species = all_species[.]
-		if(species)
-			. = species.name_plural
+/datum/event/ionstorm/proc/get_random_species_name()
+	var/list/decl/species/all_species = decls_repository.get_decls_of_subtype_unassociated(/decl/species)
+	var/decl/species/species = pick(all_species) // this should never fail.
+	return species.name_plural
 
 /datum/event/ionstorm/proc/get_random_language(var/mob/living/silicon/S)
 	var/list/languages = S.speech_synthesizer_langs.Copy()

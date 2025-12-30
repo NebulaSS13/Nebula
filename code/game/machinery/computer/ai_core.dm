@@ -108,59 +108,59 @@ var/global/list/empty_playable_ai_cores = list()
 	else
 		icon_state = "0"
 
-/obj/structure/aicore/attackby(obj/item/P, mob/user)
+/obj/structure/aicore/attackby(obj/item/used_item, mob/user)
 
 	. = ..()
 	if(.)
 		update_icon()
 	else
 		if(!authorized)
-			if(access_ai_upload in P.GetAccess())
-				to_chat(user, SPAN_NOTICE("You swipe [P] at [src] and authorize it to connect into the systems of [global.using_map.full_name]."))
+			if(access_ai_upload in used_item.GetAccess())
+				to_chat(user, SPAN_NOTICE("You swipe [used_item] at [src] and authorize it to connect into the systems of [global.using_map.full_name]."))
 				authorized = 1
 
 		if(anchored)
 
 			if(!glass_installed && wired)
 
-				if(istype(P, /obj/item/stock_parts/circuitboard/aicore))
+				if(istype(used_item, /obj/item/stock_parts/circuitboard/aicore))
 					if(circuit)
 						to_chat(user, SPAN_WARNING("There is already a circuit installed in \the [src]."))
 						return TRUE
 					if(!wired)
 						to_chat(user, SPAN_WARNING("Wire \the [src] first."))
 						return TRUE
-					if(user.try_unequip(P, src))
+					if(user.try_unequip(used_item, src))
 						playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 						to_chat(user, SPAN_NOTICE("You place the circuit board inside the frame."))
-						circuit = P
+						circuit = used_item
 						update_icon()
 					return TRUE
 
 				if(circuit && circuit_secured)
 
-					if(istype(P, /obj/item/organ/internal) && wired && circuit && circuit_secured)
-						var/obj/item/organ/internal/M = P
+					if(istype(used_item, /obj/item/organ/internal) && wired && circuit && circuit_secured)
+						var/obj/item/organ/internal/M = used_item
 						var/mob/living/brainmob = M.get_brainmob()
 						if(!brainmob)
-							to_chat(user, SPAN_WARNING("Sticking a mindless [P] into the frame would be pointless."))
+							to_chat(user, SPAN_WARNING("Sticking a mindless [used_item] into the frame would be pointless."))
 							return
 						if(brainmob.stat == DEAD)
-							to_chat(user, SPAN_WARNING("Sticking a dead [P] into the frame would sort of defeat the purpose."))
+							to_chat(user, SPAN_WARNING("Sticking a dead [used_item] into the frame would sort of defeat the purpose."))
 							return
 						if(jobban_isbanned(brainmob, "AI"))
-							to_chat(user, SPAN_WARNING("This [P] does not seem to fit."))
+							to_chat(user, SPAN_WARNING("This [used_item] does not seem to fit."))
 							return
-						if(!user.try_unequip(P, src))
+						if(!user.try_unequip(used_item, src))
 							if(brainmob.mind)
 								clear_antag_roles(brainmob.mind, 1)
-							brain = P
-							to_chat(usr, "You connect \the [P] to the frame and slide it into the casing.")
+							brain = used_item
+							to_chat(usr, "You connect \the [used_item] to the frame and slide it into the casing.")
 							update_icon()
 						return TRUE
 
-					if(istype(P, /obj/item/stack/material))
-						var/obj/item/stack/material/RG = P
+					if(istype(used_item, /obj/item/stack/material))
+						var/obj/item/stack/material/RG = used_item
 						if(RG.material.type != /decl/material/solid/glass || !RG.reinf_material || RG.get_amount() < 2)
 							to_chat(user, SPAN_WARNING("You need two sheets of reinforced glass to put in the glass panel."))
 							return TRUE
@@ -175,14 +175,14 @@ var/global/list/empty_playable_ai_cores = list()
 							update_icon()
 						return TRUE
 
-			if(istype(P, /obj/item/aiModule/freeform))
-				var/obj/item/aiModule/freeform/M = P
+			if(istype(used_item, /obj/item/aiModule/freeform))
+				var/obj/item/aiModule/freeform/M = used_item
 				laws.add_inherent_law(M.newFreeFormLaw)
 				to_chat(usr, "Added a freeform law.")
 				return TRUE
 
-			if(istype(P, /obj/item/aiModule))
-				var/obj/item/aiModule/module = P
+			if(istype(used_item, /obj/item/aiModule))
+				var/obj/item/aiModule/module = used_item
 				laws.clear_inherent_laws()
 				if(module.laws)
 					for(var/datum/ai_law/AL in module.laws.inherent_laws)
@@ -224,9 +224,9 @@ var/global/list/deactivated_ai_cores = list()
 		card.clear()
 	qdel(src)
 
-/obj/structure/aicore/deactivated/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/aicard))
-		var/obj/item/aicard/card = W
+/obj/structure/aicore/deactivated/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/aicard))
+		var/obj/item/aicard/card = used_item
 		var/mob/living/silicon/ai/transfer = locate() in card
 		if(transfer)
 			load_ai(transfer,card,user)

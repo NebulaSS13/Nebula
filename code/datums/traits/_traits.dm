@@ -2,12 +2,6 @@
 // Selectable traits are basically skills + stats + feats all rolled into one. You get to choose a
 // certain number of them at character generation and they will alter some interactions with the world.
 
-/hook/startup/proc/initialize_trait_trees()
-	// Precache/build trait trees.
-	for(var/decl/trait/trait in decls_repository.get_decls_of_type_unassociated(/decl/trait))
-		trait.build_references()
-	return 1
-
 /mob/living
 	/// A list of mob-specific traits, for when the list differs from the species list.
 	/// Overrides the species list; if it's identical to it, it will be unset.
@@ -172,7 +166,7 @@
 	if(ispath(parent))
 		parent = GET_DECL(parent)
 
-	if(abstract_type != type && category)
+	if(category)
 		var/datum/trait_category/trait_category = global.trait_categories[category]
 		if(!istype(trait_category))
 			trait_category = new(category)
@@ -238,6 +232,8 @@
 			result += trait.get_trait_selection_data(calling_item, ticked_traits, (recurse_level+1), ignore_children_if_unticked)
 	return result
 
+/// Shows `show_to` a browser window describing the character setup traits taken by `src`.
+/// `show_to` must be non-null.
 /mob/proc/get_trait_data(var/mob/show_to)
 
 	var/list/traits = get_traits()
@@ -264,7 +260,7 @@
 		if(printed_cat)
 			dat += "<hr>"
 
-	var/datum/browser/popup = new((show_to || usr), "trait_summary_\ref[src]", "Aspect Summary")
+	var/datum/browser/popup = new(show_to, "trait_summary_\ref[src]", "Aspect Summary")
 	popup.set_content(jointext(dat, null))
 	popup.open()
 

@@ -35,7 +35,7 @@
  */
 /obj/structure/closet/chefcloset
 	name = "chef's closet"
-	desc = "It's a storage unit for foodservice garments."
+	desc = "It's a storage unit for food service garments."
 	closet_appearance = /decl/closet_appearance/wardrobe/black
 
 /obj/structure/closet/chefcloset/WillContain()

@@ -9,7 +9,7 @@
 
 /datum/artifact_effect/sleepy/New()
 	..()
-	origin_type = pick(EFFECT_PSIONIC, EFFECT_ORGANIC)
+	origin_type = pick((XA_EFFECT_PSIONIC), (XA_EFFECT_ORGANIC))
 
 /datum/artifact_effect/sleepy/DoEffectTouch(var/mob/living/toucher)
 	if(istype(toucher))
@@ -40,5 +40,5 @@
 			return
 		if(prob(message_prob))
 			to_chat(H, SPAN_NOTICE(pick(sleepy_messages)))
-		H.set_status(STAT_DROWSY, min(GET_STATUS(H, STAT_DROWSY) + speed * weakness, limit * weakness))
-		H.set_status(STAT_BLURRY, min(GET_STATUS(H, STAT_BLURRY) + speed * weakness, limit * weakness))
+		H.set_status_condition(STAT_DROWSY, min(GET_STATUS(H, STAT_DROWSY) + speed * weakness, limit * weakness))
+		H.set_status_condition(STAT_BLURRY, min(GET_STATUS(H, STAT_BLURRY) + speed * weakness, limit * weakness))

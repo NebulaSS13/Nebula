@@ -7,15 +7,15 @@
 ***********************************************************************/
 /obj/item/borg/overdrive
 	name = "overdrive"
-	icon = 'icons/obj/decals.dmi'
+	icon = 'icons/obj/signs/warnings.dmi'
 	icon_state = "shock"
 
 /**********************************************************************
 						HUD/SIGHT things
 ***********************************************************************/
 /obj/item/borg/sight
-	icon = 'icons/obj/decals.dmi'
-	icon_state = "securearea"
+	icon = 'icons/obj/signs/warnings.dmi'
+	icon_state = "secureareaold"
 	var/sight_mode = null
 	var/glasses_hud_type
 

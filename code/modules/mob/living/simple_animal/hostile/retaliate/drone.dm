@@ -5,7 +5,6 @@
 	desc                = "An automated combat drone armed with state of the art weaponry and shielding."
 	icon                = 'icons/mob/simple_animal/drone_combat.dmi'
 	burst_projectile    = 0
-	a_intent            = I_HURT
 	max_health          = 300
 	move_intents        = list(
 		/decl/move_intent/walk/animal_slow,
@@ -56,8 +55,15 @@
 /mob/living/simple_animal/hostile/malf_drone/has_ranged_attack()
 	return TRUE
 
-/datum/mob_controller/aggressive/malf_drone/list_targets(var/dist = 7)
-	. = ..(hostile_drone ? hostile_range : dist)
+/datum/mob_controller/aggressive/malf_drone/get_raw_target_list()
+	if(hostile_drone)
+		target_scan_distance = hostile_range
+	else
+		target_scan_distance = initial(target_scan_distance)
+	. = ..()
+
+/datum/mob_controller/aggressive/malf_drone/get_valid_targets()
+	. = ..()
 	for(var/mob/M in .)
 		if(istype(M, body.type))
 			. -= M
@@ -76,6 +82,10 @@
 	ion_trail = new /datum/effect/effect/system/trail/ion()
 	ion_trail.set_up(src)
 	ion_trail.start()
+
+/mob/living/simple_animal/hostile/malf_drone/Destroy()
+	QDEL_NULL(ion_trail)
+	return ..()
 
 /mob/living/simple_animal/hostile/malf_drone/proc/Haywire()
 	var/datum/mob_controller/aggressive/malf_drone/drone_ai = ai
@@ -190,10 +200,6 @@
 	if(. && !gibbed)
 		physically_destroyed()
 
-/mob/living/simple_animal/hostile/malf_drone/Destroy()
-	QDEL_NULL(ion_trail)
-	return ..()
-
 /mob/living/simple_animal/hostile/malf_drone/physically_destroyed(skip_qdel)
 	//some random debris left behind
 	if(has_loot)
@@ -211,6 +217,7 @@
 		//spawn 1-4 boards of a random type
 		var/spawnees = 0
 		var/num_boards = rand(1,4)
+		//TODO: Make these use actual subtypes instead
 		var/list/options = list(1,2,4,8,16,32,64,128,256,512)
 		for(var/i=0, i<num_boards, i++)
 			var/chosen = pick(options)
@@ -219,43 +226,43 @@
 		if(spawnees & 1)
 			C = new(src.loc)
 			C.SetName("Drone CPU motherboard")
-			C.origin_tech = @'{"[TECH_DATA]":[rand(3, 6)]}'
+			C.origin_tech = json_encode(list((TECH_DATA) = rand(3, 6)))
 		if(spawnees & 2)
 			C = new(src.loc)
 			C.SetName("Drone neural interface")
-			C.origin_tech = @'{"[TECH_BIO]":[rand(3, 6)]}'
+			C.origin_tech = json_encode(list((TECH_BIO) = rand(3, 6)))
 		if(spawnees & 4)
 			C = new(src.loc)
 			C.SetName("Drone suspension processor")
-			C.origin_tech = @'{"[TECH_MAGNET]":[rand(3, 6)]}'
+			C.origin_tech = json_encode(list((TECH_MAGNET) = rand(3, 6)))
 		if(spawnees & 8)
 			C = new(src.loc)
 			C.SetName("Drone shielding controller")
-			C.origin_tech = @'{"wormholes":[rand(3, 6)]}'
+			C.origin_tech = json_encode(list((TECH_WORMHOLES) = rand(3, 6)))
 		if(spawnees & 16)
 			C = new(src.loc)
 			C.SetName("Drone power capacitor")
-			C.origin_tech = @'{"[TECH_POWER]":[rand(3, 6)]}'
+			C.origin_tech = json_encode(list((TECH_POWER) = rand(3, 6)))
 		if(spawnees & 32)
 			C = new(src.loc)
 			C.SetName("Drone hull reinforcer")
-			C.origin_tech = @'{"[TECH_MATERIAL]":[rand(3, 6)]}'
+			C.origin_tech = json_encode(list((TECH_MATERIAL) = rand(3, 6)))
 		if(spawnees & 64)
 			C = new(src.loc)
 			C.SetName("Drone auto-repair system")
-			C.origin_tech = @'{"[TECH_ENGINEERING]":[rand(3, 6)]}'
+			C.origin_tech = json_encode(list((TECH_ENGINEERING) = rand(3, 6)))
 		if(spawnees & 128)
 			C = new(src.loc)
 			C.SetName("Drone antigravity overcharge counter")
-			C.origin_tech = @'{"[TECH_EXOTIC_MATTER]":[rand(3, 6)]}'
+			C.origin_tech = json_encode(list((TECH_EXOTIC_MATTER) = rand(3, 6)))
 		if(spawnees & 256)
 			C = new(src.loc)
 			C.SetName("Drone targetting circuitboard")
-			C.origin_tech = @'{"[TECH_COMBAT]":[rand(3, 6)]}'
+			C.origin_tech = json_encode(list((TECH_COMBAT) = rand(3, 6)))
 		if(spawnees & 512)
 			C = new(src.loc)
 			C.SetName("Corrupted drone morality core")
-			C.origin_tech = @'{"[TECH_ESOTERIC]":[rand(3, 6)]}'
+			C.origin_tech = json_encode(list((TECH_ESOTERIC) = rand(3, 6)))
 	return ..()
 
 /mob/living/simple_animal/hostile/malf_drone/isSynthetic()

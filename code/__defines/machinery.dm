@@ -4,9 +4,8 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define MEGAWATTS *1000000
 #define GIGAWATTS *1000000000
 
-#define MACHINERY_TICKRATE 2		// Tick rate for machinery in seconds. As it affects CELLRATE calculation it is kept as define here
-
-#define CELLRATE (1 / ( 3600 / MACHINERY_TICKRATE )) // Multiplier for charge units. Converts cell charge units(watthours) to joules. Takes into consideration that our machinery ticks once per two seconds.
+/// Multiplier for charge units. Converts cell charge units(watthours) to joules. Takes into consideration that our machinery ticks once per two seconds.
+#define CELLRATE (/datum/controller/subsystem/machines::wait / (1 HOUR))
 
 // Doors!
 #define DOOR_CRUSH_DAMAGE 40
@@ -44,7 +43,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 // Camera channels
 // Station channels
 #define CAMERA_CHANNEL_PUBLIC "Public"
-#define CAMERA_CAMERA_CHANNEL_ENGINEERING "Engineering"
+#define CAMERA_CHANNEL_ENGINEERING "Engineering"
 #define CAMERA_CHANNEL_MEDICAL "Medical"
 #define CAMERA_CHANNEL_RESEARCH "Research"
 #define CAMERA_CHANNEL_SECURITY "Security"
@@ -72,7 +71,6 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define STAGE_THREE	5
 #define STAGE_FOUR	7
 #define STAGE_FIVE	9
-#define STAGE_SUPER	11
 
 // NanoUI flags
 #define STATUS_INTERACTIVE 2 // GREEN Visability
@@ -102,21 +100,6 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define ATMOS_DEFAULT_VOLUME_FILTER 500 // L.
 #define ATMOS_DEFAULT_VOLUME_MIXER  500 // L.
 #define ATMOS_DEFAULT_VOLUME_PIPE   70  // L.
-
-// These are used by supermatter and supermatter monitor program, mostly for UI updating purposes. Higher should always be worse!
-#define SUPERMATTER_ERROR -1		// Unknown status, shouldn't happen but just in case.
-#define SUPERMATTER_INACTIVE 0		// No or minimal energy
-#define SUPERMATTER_NORMAL 1		// Normal operation
-#define SUPERMATTER_NOTIFY 2		// Ambient temp > 80% of CRITICAL_TEMPERATURE
-#define SUPERMATTER_WARNING 3		// Ambient temp > CRITICAL_TEMPERATURE OR integrity damaged
-#define SUPERMATTER_DANGER 4		// Integrity < 50%
-#define SUPERMATTER_EMERGENCY 5		// Integrity < 25%
-#define SUPERMATTER_DELAMINATING 6	// Pretty obvious.
-
-#define SUPERMATTER_DATA_EER         "Relative EER"
-#define SUPERMATTER_DATA_TEMPERATURE "Temperature"
-#define SUPERMATTER_DATA_PRESSURE    "Pressure"
-#define SUPERMATTER_DATA_EPR         "Chamber EPR"
 
 // Scrubber modes
 #define SCRUBBER_SIPHON   "siphon"
@@ -171,7 +154,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define  PART_CARD  	/obj/item/stock_parts/computer/card_slot					// ID Card slot component of this computer. Mostly for HoP modification console that needs ID slot for modification.
 #define  PART_PRINTER  	/obj/item/stock_parts/computer/nano_printer			// Nano Printer component of this computer, for your everyday paperwork needs.
 #define  PART_DRIVE  	/obj/item/stock_parts/computer/hard_drive/portable		// Portable data storage
-#define  PART_AI  		/obj/item/stock_parts/computer/ai_slot							// AI slot, an intellicard housing that allows modifications of AIs.
+#define  PART_AI  		/obj/item/stock_parts/computer/ai_slot							// AI slot, an intelliCard housing that allows modifications of AIs.
 #define  PART_TESLA  	/obj/item/stock_parts/computer/tesla_link					// Tesla Link, Allows remote charging from nearest APC.
 #define  PART_SCANNER  	/obj/item/stock_parts/computer/scanner							// One of several optional scanner attachments.
 #define  PART_D_SLOT	/obj/item/stock_parts/computer/drive_slot				// Portable drive slot.

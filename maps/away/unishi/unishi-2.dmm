@@ -13,26 +13,26 @@
 /turf/wall/titanium,
 /area/space)
 "ae" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/advdevice,
 /obj/item/flashlight/lamp,
 /turf/floor/carpet/red,
 /area/unishi/library)
 "af" = (
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 8
 	},
 /turf/floor/carpet/red,
 /area/unishi/library)
 "ah" = (
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/floor/carpet/red,
 /area/unishi/library)
 "ai" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/flashlight/lamp,
 /turf/floor/carpet/red,
 /area/unishi/library)
@@ -44,7 +44,7 @@
 /turf/wall,
 /area/unishi/library)
 "al" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24;
@@ -153,7 +153,7 @@
 /turf/floor/tiled/white,
 /area/unishi/chem)
 "aC" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -289,7 +289,7 @@
 /turf/floor/tiled/white,
 /area/unishi/chem)
 "aU" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/floor/tiled/white,
@@ -334,7 +334,7 @@
 /turf/floor,
 /area/unishi/common)
 "bb" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 1
 	},
 /obj/machinery/light{
@@ -430,11 +430,11 @@
 /turf/floor,
 /area/unishi/common)
 "bt" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bu" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -446,7 +446,7 @@
 /turf/floor/tiled/dark,
 /area/unishi/classroom)
 "bv" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
@@ -844,11 +844,11 @@
 /turf/floor/tiled,
 /area/unishi/meeting)
 "cA" = (
-/obj/structure/bed/chair/office/comfy/black,
+/obj/structure/chair/office/comfy/black,
 /turf/floor/tiled,
 /area/unishi/meeting)
 "cB" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -908,7 +908,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -954,24 +954,24 @@
 /turf/floor/reinforced,
 /area/space)
 "cM" = (
-/obj/structure/bed/chair/office/comfy/black{
+/obj/structure/chair/office/comfy/black{
 	dir = 4
 	},
 /turf/floor/tiled,
 /area/unishi/meeting)
 "cN" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/paper_bin,
 /obj/item/pen/fancy,
 /turf/floor/tiled,
 /area/unishi/meeting)
 "cO" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/pen/fancy,
 /turf/floor/tiled,
 /area/unishi/meeting)
 "cP" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/folder/yellow,
 /obj/item/pen/green,
 /turf/floor/tiled,
@@ -1014,7 +1014,7 @@
 /turf/floor/reinforced,
 /area/unishi/toxins)
 "cW" = (
-/obj/structure/bed/chair/office/comfy/black{
+/obj/structure/chair/office/comfy/black{
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -1023,7 +1023,7 @@
 /turf/floor/tiled,
 /area/unishi/meeting)
 "cX" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -1033,7 +1033,7 @@
 /turf/floor/tiled,
 /area/unishi/meeting)
 "cY" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -1042,7 +1042,7 @@
 /turf/floor/tiled,
 /area/unishi/meeting)
 "cZ" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -1084,13 +1084,13 @@
 /turf/floor/reinforced,
 /area/unishi/toxins)
 "df" = (
-/obj/structure/bed/chair/office/comfy/black{
+/obj/structure/chair/office/comfy/black{
 	dir = 1
 	},
 /turf/floor/tiled,
 /area/unishi/meeting)
 "dg" = (
-/obj/structure/bed/chair/office/comfy/black{
+/obj/structure/chair/office/comfy/black{
 	dir = 1
 	},
 /obj/machinery/alarm{
@@ -1225,7 +1225,7 @@
 /turf/floor/tiled,
 /area/unishi/rnd)
 "dB" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -1286,13 +1286,13 @@
 /turf/wall/titanium,
 /area/unishi/hydro)
 "dK" = (
-/obj/structure/bed/chair/office{
+/obj/structure/chair/office{
 	dir = 1
 	},
 /turf/floor/tiled,
 /area/unishi/rnd)
 "dL" = (
-/obj/structure/bed/chair/office{
+/obj/structure/chair/office{
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1310,7 +1310,7 @@
 /turf/floor/tiled,
 /area/unishi/rnd)
 "dN" = (
-/obj/structure/bed/chair/office{
+/obj/structure/chair/office{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1370,7 +1370,7 @@
 "dS" = (
 /obj/machinery/atmospherics/valve,
 /obj/machinery/vending/hydroseeds,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -1571,7 +1571,7 @@
 /obj/item/chems/spray/extinguisher,
 /obj/item/chems/spray/extinguisher,
 /obj/item/box/animal_cubes/monkeys,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -1888,7 +1888,7 @@
 /turf/floor/tiled/dark,
 /area/unishi/common)
 "fl" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -1982,7 +1982,7 @@
 /turf/floor/tiled/dark,
 /area/unishi/common)
 "fy" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/snack,
 /obj/item/flashlight/lamp,
 /turf/floor/tiled/dark,
@@ -2001,14 +2001,14 @@
 /turf/floor/tiled/dark,
 /area/unishi/common)
 "fB" = (
-/obj/structure/bed/chair/office/comfy/black{
+/obj/structure/chair/office/comfy/black{
 	dir = 4
 	},
 /obj/machinery/light,
 /turf/floor/tiled/dark,
 /area/unishi/common)
 "fC" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/paper_bin,
 /obj/item/flashlight/lamp,
 /turf/floor/tiled/dark,
@@ -2020,7 +2020,7 @@
 /turf/floor/tiled/dark,
 /area/unishi/common)
 "fE" = (
-/obj/structure/bed/chair/office/comfy/black{
+/obj/structure/chair/office/comfy/black{
 	dir = 1
 	},
 /turf/floor/tiled/dark,
@@ -2042,7 +2042,7 @@
 /turf/floor/tiled/white/monotile,
 /area/unishi/common)
 "fH" = (
-/obj/structure/bed/chair/office/comfy/black{
+/obj/structure/chair/office/comfy/black{
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -2068,8 +2068,7 @@
 "fM" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Biohazard";
-	name = "Biohazard Shutter";
-
+	name = "Biohazard Shutter"
 	},
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2109,7 +2108,7 @@
 /turf/floor/tiled/dark,
 /area/unishi/smresearch)
 "fR" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -2215,8 +2214,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Biohazard";
-	name = "Biohazard Shutter";
-
+	name = "Biohazard Shutter"
 	},
 /turf/floor,
 /area/unishi/smresearch)
@@ -2283,7 +2281,7 @@
 /turf/space,
 /area/unishi/smresearch)
 "go" = (
-/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/vomit/mapped,
 /obj/item/defibrillator,
 /turf/floor/tiled/techfloor,
 /area/unishi/smresearch)
@@ -2346,7 +2344,7 @@
 	dir = 4;
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-
+	
 	},
 /obj/item/remains,
 /turf/floor,
@@ -2397,7 +2395,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/vomit/mapped,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -2729,7 +2727,7 @@
 /area/unishi/smresearch)
 "ho" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/obj/machinery/power/supermatter/inert{
+/obj/structure/supermatter/inert{
 	color = ""
 	},
 /obj/machinery/mass_driver{
@@ -2742,7 +2740,7 @@
 	dir = 4;
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-
+	
 	},
 /obj/item/remains,
 /obj/random/shoes,

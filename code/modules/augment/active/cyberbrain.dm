@@ -54,9 +54,9 @@
 	else if(!assembly.enabled && assembly.screen_on)
 		assembly.turn_on(owner)
 
-/obj/item/organ/internal/augment/active/cyberbrain/attackby(var/obj/item/W, var/mob/user)
+/obj/item/organ/internal/augment/active/cyberbrain/attackby(var/obj/item/used_item, var/mob/user)
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
-	. = assembly.attackby(W, user)
+	. = assembly.attackby(used_item, user)
 	if(.)
 		return
 	return ..()
@@ -79,11 +79,11 @@
 		if(os)
 			os.Process()
 
-/obj/item/organ/internal/augment/active/cyberbrain/get_contained_matter()
+/obj/item/organ/internal/augment/active/cyberbrain/get_contained_matter(include_reagents = TRUE)
 	. = ..()
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
 	for(var/obj/part in assembly?.parts)
-		. = MERGE_ASSOCS_WITH_NUM_VALUES(., part.get_contained_matter())
+		. = MERGE_ASSOCS_WITH_NUM_VALUES(., part.get_contained_matter(include_reagents))
 
 /*
  *

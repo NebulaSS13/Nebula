@@ -86,6 +86,9 @@ PACK(syrup_chocolate, /obj/item/chems/chem_disp_cartridge/syrup_chocolate, "Reag
 PACK(syrup_caramel,   /obj/item/chems/chem_disp_cartridge/syrup_caramel,   "Reagent refill - Caramel Syrup",       "caramel syrup reagent cartridge crate")
 PACK(syrup_vanilla,   /obj/item/chems/chem_disp_cartridge/syrup_vanilla,   "Reagent refill - Vanilla Syrup",       "vanilla syrup reagent cartridge crate")
 PACK(syrup_pumpkin,   /obj/item/chems/chem_disp_cartridge/syrup_pumpkin,   "Reagent refill - Pumpkin Spice Syrup", "pumpkin spice syrup reagent cartridge crate")
+PACK(syrup_lavender,  /obj/item/chems/chem_disp_cartridge/syrup_lavender,  "Reagent refill - Lavender Syrup",      "lavender syrup reagent cartridge crate")
+PACK(cinnamon,        /obj/item/chems/chem_disp_cartridge/cinnamon,        "Reagent refill - Cinnamon",            "cinnamon reagent cartridge crate")
+
 
 #undef SEC_PACK
 #undef PACK

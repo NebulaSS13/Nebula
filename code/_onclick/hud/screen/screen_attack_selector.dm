@@ -1,13 +1,9 @@
 /obj/screen/default_attack_selector
-	name       = "default attack selector"
-	icon_state = "attack_none"
-	screen_loc = ui_attack_selector
-
-/obj/screen/default_attack_selector/Destroy()
-	var/mob/living/human/owner = owner_ref?.resolve()
-	if(istype(owner) && owner.attack_selector == src)
-		owner.attack_selector = null
-	. = ..()
+	name                  = "default attack selector"
+	icon_state            = "attack_none"
+	screen_loc            = ui_attack_selector
+	use_supplied_ui_color = TRUE
+	use_supplied_ui_alpha = TRUE
 
 /obj/screen/default_attack_selector/handle_click(mob/user, params)
 
@@ -28,6 +24,7 @@
 	return TRUE
 
 /obj/screen/default_attack_selector/on_update_icon()
+	..()
 	var/mob/living/human/owner = owner_ref?.resolve()
 	var/decl/natural_attack/attack = istype(owner) && owner.default_attack
-	icon_state = attack?.selector_icon_state || "attack_none"
+	icon_state = (istype(attack) && attack.selector_icon_state) ? attack.selector_icon_state : "attack_none"

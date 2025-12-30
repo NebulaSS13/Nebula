@@ -23,6 +23,7 @@
 /obj/machinery/destructive_analyzer/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
+	ADJUST_TAG_VAR(initial_network_key, map_hash)
 
 /obj/machinery/destructive_analyzer/RefreshParts()
 	var/T = 0
@@ -79,9 +80,9 @@
 	D.ui_interact(user)
 	return TRUE
 
-/obj/machinery/destructive_analyzer/attackby(var/obj/item/O, var/mob/user)
+/obj/machinery/destructive_analyzer/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(IS_MULTITOOL(O) && user.a_intent != I_HURT)
+	if(IS_MULTITOOL(used_item) && !user.check_intent(I_FLAG_HARM))
 		var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
 		fabnet.get_new_tag(user)
 		return TRUE
@@ -89,7 +90,7 @@
 	if(busy)
 		to_chat(user, SPAN_WARNING("\The [src] is busy right now."))
 		return TRUE
-	if((. = component_attackby(O, user)))
+	if((. = component_attackby(used_item, user)))
 		return
 	if(isrobot(user))
 		return TRUE
@@ -99,21 +100,21 @@
 	if(panel_open)
 		to_chat(user, SPAN_WARNING("You can't load \the [src] while it's opened."))
 		return TRUE
-	var/tech = O.get_origin_tech()
+	var/tech = used_item.get_origin_tech()
 	if(!tech)
-		to_chat(user, SPAN_WARNING("Nothing can be learned from \the [O]."))
+		to_chat(user, SPAN_WARNING("Nothing can be learned from \the [used_item]."))
 		return TRUE
 
 	var/list/techlvls = cached_json_decode(tech)
-	if(!length(techlvls) || O.holographic)
+	if(!length(techlvls) || used_item.holographic)
 		to_chat(user, SPAN_WARNING("You cannot deconstruct this item."))
 		return TRUE
 
-	if(!user.try_unequip(O, src))
+	if(!user.try_unequip(used_item, src))
 		return TRUE
 	busy = TRUE
-	loaded_item = O
-	to_chat(user, SPAN_NOTICE("You add \the [O] to \the [src]."))
+	loaded_item = used_item
+	to_chat(user, SPAN_NOTICE("You add \the [used_item] to \the [src]."))
 	flick("d_analyzer_la", src)
 	addtimer(CALLBACK(src, PROC_REF(refresh_busy)), 1 SECOND)
 	return TRUE

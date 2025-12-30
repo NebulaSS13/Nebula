@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/weapon/swords/cult.dmi'
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
-// separated into a proc so that deity can modify it
+// separated into a proc so that modpacks can modify it
 /obj/item/sword/cultblade/proc/can_use_safely(mob/living/user)
 	return iscultist(user)
 
@@ -21,12 +21,12 @@
 		affecting = GET_EXTERNAL_ORGAN(H, zone)
 
 	if(affecting)
-		to_chat(user, "<span class='danger'>An unexplicable force rips through your [affecting.name], tearing the sword from your grasp!</span>")
+		to_chat(user, SPAN_DANGER("An unexplicable force rips through your [affecting.name], tearing the sword from your grasp!"))
 	else
-		to_chat(user, "<span class='danger'>An unexplicable force rips through you, tearing the sword from your grasp!</span>")
+		to_chat(user, SPAN_DANGER("An unexplicable force rips through you, tearing the sword from your grasp!"))
 
 	//random amount of damage between half of the blade's force and the full force of the blade.
-	var/force = get_attack_force(user)
+	var/force = expend_attack_force(user)
 	user.apply_damage(rand(force/2, force), BRUTE, zone, (DAM_SHARP|DAM_EDGE), armor_pen = 100)
 	SET_STATUS_MAX(user, STAT_WEAK, 5)
 

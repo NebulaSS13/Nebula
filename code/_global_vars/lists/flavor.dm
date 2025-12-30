@@ -71,6 +71,8 @@ var/global/list/numbers_as_words = list("One", "Two", "Three", "Four",
 	"Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
 	"Eighteen", "Nineteen")
 
+// This is, for some reason, used exclusively for headphones, jukeboxes, and boomboxes.
+// It also seems to exist mostly for the purpose of allowing admins to upload their own songs to those at runtime?
 var/global/list/music_tracks = list(
 	"Beyond" = /decl/music_track/ambispace,
 	"Clouds of Fire" = /decl/music_track/clouds_of_fire,

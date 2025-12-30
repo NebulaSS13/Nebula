@@ -1,7 +1,7 @@
 #define DIONA_SCREEN_LOC_HELD   "RIGHT-8:16,BOTTOM:5"
 #define DIONA_SCREEN_LOC_HAT    "RIGHT-7:16,BOTTOM:5"
 #define DIONA_SCREEN_LOC_INTENT "RIGHT-2,BOTTOM:5"
-#define DIONA_SCREEN_LOC_HEALTH ui_alien_health
+#define DIONA_SCREEN_LOC_HEALTH "RIGHT-1:28,CENTER-1:13"
 
 /mob/living/simple_animal/alien/diona
 	name = "diona nymph"
@@ -24,7 +24,7 @@
 	can_pull_mobs = MOB_PULL_SMALLER
 
 	holder_type = /obj/item/holder/diona
-	possession_candidate = 1
+	possession_candidate = TRUE
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE
 	hud_used = /datum/hud/diona_nymph
 
@@ -83,12 +83,12 @@
 	uid = "bodytype_diona"
 
 /decl/bodytype/diona/Initialize()
-	equip_adjust = list(
-		slot_head_str = list(
+	_equip_adjust = list(
+		(slot_head_str) = list(
 			"[NORTH]" = list(0, -8),
 			"[SOUTH]" = list(0, -8),
-			"[EAST]" =  list(0, -8),
-			"[WEST]" =  list(0, -8)
+			"[EAST]"  = list(0, -8),
+			"[WEST]"  = list(0, -8)
 		)
 	)
 	. = ..()

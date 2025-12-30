@@ -9,7 +9,7 @@
 /decl/spawnpoint/cryo
 	name = "Port Cryogenic Storage"
 	spawn_announcement = "has completed revival in the port cryogenics bay"
-	disallow_job = list(/datum/job/tradeship_robot)
+	disallow_job = list(/datum/job/standard/robot)
 
 /decl/spawnpoint/cryo/two
 	name = "Starboard Cryogenic Storage"
@@ -22,7 +22,7 @@
 /decl/spawnpoint/cryo/captain
 	name = "Captain Compartment"
 	spawn_announcement = "has completed revival in the captain compartment"
-	restrict_job = list(/datum/job/tradeship_captain)
+	restrict_job = list(/datum/job/standard/captain/tradeship)
 	uid = "spawn_cryo_captain"
 
 /obj/abstract/landmark/latejoin/cryo_captain

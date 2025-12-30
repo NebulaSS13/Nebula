@@ -87,7 +87,7 @@
 /turf/floor/tiled/monotile,
 /area/map_template/oldpod)
 "ao" = (
-/obj/structure/bed/chair/shuttle{
+/obj/structure/chair/shuttle{
 	dir = 8
 	},
 /obj/structure/window/reinforced{
@@ -97,7 +97,7 @@
 /turf/floor/tiled/monotile,
 /area/map_template/oldpod)
 "ap" = (
-/obj/structure/bed/chair/shuttle{
+/obj/structure/chair/shuttle{
 	dir = 4
 	},
 /obj/structure/window/reinforced{
@@ -297,10 +297,10 @@
 /obj/machinery/door/firedoor,
 /obj/structure/wall_frame/hull,
 /obj/structure/grille,
-/obj/item/stack/material/rods,
-/obj/item/stack/material/rods,
-/obj/item/stack/material/rods,
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
+/obj/item/stack/material/rods/mapped/steel,
+/obj/item/stack/material/rods/mapped/steel,
+/obj/item/stack/material/rods/mapped/steel,
 /obj/item/shard,
 /obj/item/shard,
 /obj/item/shard,

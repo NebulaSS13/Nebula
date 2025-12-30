@@ -184,7 +184,7 @@
 				overlay.overlays += overlay_image(overlay.icon, loaded_state, _loaded.color, RESET_COLOR)
 	return ..()
 
-/obj/item/gun/launcher/bow/examine(mob/user)
+/obj/item/gun/launcher/bow/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	var/list/strings = list()
 	if(material_alteration & MAT_FLAG_ALTERATION_DESC)
@@ -195,4 +195,4 @@
 		strings += "has \a [_loaded] ready"
 	if(!length(strings))
 		return
-	to_chat(user, "It [english_list(strings)].")
+	. += "It [english_list(strings)]."

@@ -7,8 +7,8 @@
 
 /decl/communication_channel/ooc/get_emblem(client/C)
 	if(C && C.get_byond_membership() && C.get_preference_value(/datum/client_preference/byond_membership/emblem) == PREF_SHOW)
-		var/decl/modpack/byond_membership/bm = GET_DECL(/decl/modpack/byond_membership)
-		return "[html_icon(bm.emblem)] "
+		var/decl/modpack/byond_membership/membership = GET_DECL(/decl/modpack/byond_membership)
+		return "[html_icon(membership.emblem)] "
 
 /datum/client_preference/byond_membership/emblem
 	description = "BYOND Membership Emblem"

@@ -200,7 +200,7 @@
 /obj/item/rig_module/mounted
 
 	name = "mounted gun"
-	desc = "Somesort of mounted gun."
+	desc = "Some sort of mounted gun."
 	selectable = 1
 	usable = 1
 	module_cooldown = 0
@@ -214,10 +214,6 @@
 	interface_desc = "A shoulder-mounted cell-powered laser gun."
 
 	var/obj/item/gun/gun
-
-/obj/item/rig_module/mounted/Destroy()
-	QDEL_NULL(gun)
-	. = ..()
 
 /obj/item/rig_module/mounted/Initialize()
 	. = ..()
@@ -320,7 +316,7 @@
 	if(!check() || !gun)
 		return 0
 
-	if(holder.wearer.a_intent == I_HURT || !target.Adjacent(holder.wearer))
+	if(holder.wearer.check_intent(I_FLAG_HARM) || !target.Adjacent(holder.wearer))
 		gun.Fire(target,holder.wearer)
 		return 1
 	else

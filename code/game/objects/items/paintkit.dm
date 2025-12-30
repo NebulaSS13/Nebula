@@ -13,9 +13,9 @@
 /obj/item/kit/get_single_monetary_worth()
 	. = max(round(..()), (custom ? 100 : 750) * uses) // Luxury good, value is entirely artificial.
 
-/obj/item/kit/examine(mob/user)
+/obj/item/kit/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It has [uses] use\s left.")
+	. += "It has [uses] use\s left."
 
 /obj/item/kit/inherit_custom_item_data(var/datum/custom_item/citem)
 	custom = TRUE
@@ -38,10 +38,10 @@
 	desc = "A kit for modifying a voidsuit."
 	uses = 2
 
-/obj/item/clothing/head/helmet/space/void/attackby(var/obj/item/O, var/mob/user)
+/obj/item/clothing/head/helmet/space/void/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(istype(O,/obj/item/kit/suit))
-		var/obj/item/kit/suit/kit = O
+	if(istype(used_item,/obj/item/kit/suit))
+		var/obj/item/kit/suit/kit = used_item
 		to_chat(user, SPAN_NOTICE("You set about modifying \the [src] into \a [kit.new_name] void helmet."))
 		SetName("[kit.new_name] void helmet")
 		desc = kit.new_desc
@@ -53,10 +53,10 @@
 
 	return ..()
 
-/obj/item/clothing/suit/space/void/attackby(var/obj/item/O, var/mob/user)
+/obj/item/clothing/suit/space/void/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(istype(O, /obj/item/kit/suit))
-		var/obj/item/kit/suit/kit = O
+	if(istype(used_item, /obj/item/kit/suit))
+		var/obj/item/kit/suit/kit = used_item
 		to_chat(user, SPAN_NOTICE("You set about modifying \the [src] into \a [kit.new_name] voidsuit."))
 		SetName("[kit.new_name] voidsuit")
 		desc = kit.new_desc
@@ -71,12 +71,12 @@
 // Mechs are handled in their attackby (mech_interaction.dm).
 /obj/item/kit/paint
 	name = "exosuit decal kit"
-	desc = "A kit containing all the needed tools and parts to repaint a exosuit."
+	desc = "A kit containing all the needed tools and parts to repaint an exosuit."
 	abstract_type = /obj/item/kit/paint
 
-/obj/item/kit/paint/examine(mob/user)
+/obj/item/kit/paint/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "This kit will add a '[new_name]' decal to a exosuit'.")
+	. += "This kit will add a '[new_name]' decal to an exosuit'."
 
 // exosuit kits.
 /obj/item/kit/paint/flames_red

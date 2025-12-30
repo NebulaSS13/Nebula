@@ -76,9 +76,9 @@
 		for(var/i = 1 to 4)
 			add_overlay(image(icon, "catwalk[connections ? connections[i] : "0"]", dir = BITFLAG(i-1)))
 	if(plated_tile)
-		var/image/I = image(icon, "plated")
-		I.color = plated_tile.color
-		add_overlay(I)
+		var/image/overlay_image = image(icon, "plated")
+		overlay_image.color = plated_tile.color
+		add_overlay(overlay_image)
 
 /obj/structure/catwalk/create_dismantled_products(var/turf/T)
 	. = ..()
@@ -109,25 +109,25 @@
 /obj/structure/catwalk/attack_robot(var/mob/user)
 	return attack_hand_with_interaction_checks(user)
 
-/obj/structure/catwalk/attackby(obj/item/C, mob/user)
+/obj/structure/catwalk/attackby(obj/item/used_item, mob/user)
 
 	if((. = ..()))
 		return
 
-	if(istype(C, /obj/item/gun/energy/plasmacutter))
-		var/obj/item/gun/energy/plasmacutter/cutter = C
+	if(istype(used_item, /obj/item/gun/energy/plasmacutter))
+		var/obj/item/gun/energy/plasmacutter/cutter = used_item
 		if(cutter.slice(user))
 			dismantle_structure(user)
 		return TRUE
 
-	if(istype(C, /obj/item/stack/tile/mono) && !plated_tile)
+	if(istype(used_item, /obj/item/stack/tile/mono) && !plated_tile)
 
 		var/ladder = (locate(/obj/structure/ladder) in loc)
 		if(ladder)
 			to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
 			return TRUE
 
-		var/obj/item/stack/tile/ST = C
+		var/obj/item/stack/tile/ST = used_item
 		if(ST.in_use)
 			return TRUE
 
@@ -148,7 +148,7 @@
 			var/decl/flooring/F = decls[flooring_type]
 			if(!F.build_type)
 				continue
-			if(istype(C, F.build_type) && (!F.build_material || C.material?.type == F.build_material))
+			if(istype(used_item, F.build_type) && (!F.build_material || used_item.material?.type == F.build_material))
 				plated_tile = F
 				break
 		update_icon()
@@ -217,10 +217,10 @@
 	if(locate(/obj/structure/catwalk) in loc)
 		warning("Frame Spawner: A catwalk already exists at [loc.x]-[loc.y]-[loc.z]")
 	else
-		var/obj/structure/catwalk/C = new /obj/structure/catwalk(loc)
-		C.plated_tile += GET_DECL(plating_type)
-		C.name = "plated catwalk"
-		C.update_icon()
+		var/obj/structure/catwalk/catwalk = new /obj/structure/catwalk(loc)
+		catwalk.plated_tile += GET_DECL(plating_type)
+		catwalk.name = "plated catwalk"
+		catwalk.update_icon()
 	activated = 1
 	for(var/turf/T in orange(src, 1))
 		for(var/obj/effect/catwalk_plated/other in T)

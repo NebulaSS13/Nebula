@@ -56,11 +56,11 @@
 	)
 	origin_tech = @'{"programming":6,"materials":5,"engineering":6}'
 
-	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
+	var/mob/living/integrated_ai // Direct reference to the actual mob held in the suit.
 	var/obj/item/ai_card  // Reference to the object previously holding the AI.
 	var/obj/item/ai_verbs/verb_holder
 
-/mob
+/mob/living
 	var/get_rig_stats = 0
 
 /obj/item/rig_module/ai_container/Process()
@@ -104,7 +104,7 @@
 		if(!card)
 			card = new /obj/item/aicard(src)
 
-		// Terminal interaction only works with an inteliCarded AI.
+		// Terminal interaction only works with an intelliCarded AI.
 		if(!istype(card))
 			return 0
 
@@ -328,7 +328,7 @@
 /obj/item/rig_module/power_sink
 
 	name = "hardsuit power sink"
-	desc = "An heavy-duty power sink."
+	desc = "A heavy-duty power sink."
 	icon_state = "powersink"
 	toggleable = 1
 	activates_on_touch = 1

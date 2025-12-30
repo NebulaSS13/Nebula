@@ -63,7 +63,7 @@
 	..(signal, receive_method, receive_param)
 
 /datum/computer/file/embedded_program/docking/simple/receive_user_command(command)
-	. = TRUE
+	. = TOPIC_REFRESH
 	switch(command)
 		if("force_door")
 			if (override_enabled)
@@ -74,7 +74,7 @@
 			else
 				enable_override()
 		else
-			. = FALSE
+			. = TOPIC_NOACTION
 
 //tell the docking port to start getting ready for docking - e.g. pressurize
 /datum/computer/file/embedded_program/docking/simple/prepare_for_docking()

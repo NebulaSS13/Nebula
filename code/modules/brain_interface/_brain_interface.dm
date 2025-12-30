@@ -50,41 +50,41 @@
 		else
 			icon_state = "[icon_state]-full"
 
-/obj/item/organ/internal/brain_interface/examine(mob/user, distance)
+/obj/item/organ/internal/brain_interface/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
 		var/mob/living/brain/brainmob = get_brainmob()
 		if(istype(brainmob))
 			if(brainmob.emp_damage)
-				to_chat(user, SPAN_WARNING("The neural interface socket is damaged."))
+				. += SPAN_WARNING("The neural interface socket is damaged.")
 			else
-				to_chat(user, SPAN_NOTICE("It is undamaged."))
+				. += SPAN_NOTICE("It is undamaged.")
 
-/obj/item/organ/internal/brain_interface/attackby(var/obj/item/O, var/mob/user)
+/obj/item/organ/internal/brain_interface/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(istype(O, /obj/item/stack/nanopaste))
+	if(istype(used_item, /obj/item/stack/nanopaste))
 		var/mob/living/brain/brainmob = get_brainmob()
 		if(!istype(brainmob) || !brainmob.emp_damage)
 			to_chat(user, SPAN_WARNING("\The [src] has no damage to repair."))
 			return TRUE
-		var/obj/item/stack/nanopaste/pasta = O
+		var/obj/item/stack/nanopaste/pasta = used_item
 		pasta.use(1)
 		to_chat(user, SPAN_NOTICE("You repair some of the damage to \the [src]'s electronics with the nanopaste."))
 		brainmob.emp_damage = max(brainmob.emp_damage - rand(5,10), 0)
 		return TRUE
 
-	if(istype(O, /obj/item/organ/internal/brain))
+	if(istype(used_item, /obj/item/organ/internal/brain))
 
 		if(holding_brain)
 			to_chat(user, SPAN_WARNING("\The [src] already has a brain in it."))
 			return TRUE
 
-		var/obj/item/organ/internal/brain/inserting_brain = O
+		var/obj/item/organ/internal/brain/inserting_brain = used_item
 		if(BP_IS_PROSTHETIC(inserting_brain))
 			to_chat(user, SPAN_WARNING("You don't need to put a robotic brain into an interface."))
 			return TRUE
 
-		if(inserting_brain.damage >= inserting_brain.max_damage)
+		if(inserting_brain.get_organ_damage() >= inserting_brain.max_damage)
 			to_chat(user, SPAN_WARNING("That brain is well and truly dead."))
 			return TRUE
 
@@ -92,7 +92,7 @@
 			to_chat(user, SPAN_WARNING("\The [inserting_brain] is completely useless."))
 			return TRUE
 
-		if(user.try_unequip(O, src))
+		if(user.try_unequip(used_item, src))
 			user.visible_message(SPAN_NOTICE("\The [user] sticks \the [inserting_brain] into \the [src]."))
 			SetName("[initial(name)] (\the [inserting_brain])")
 			holding_brain = inserting_brain
@@ -101,7 +101,7 @@
 			SSstatistics.add_field("cyborg_mmis_filled",1)
 		return TRUE
 
-	if(istype(O,/obj/item/card/id) || istype(O,/obj/item/modular_computer))
+	if(istype(used_item,/obj/item/card/id) || istype(used_item,/obj/item/modular_computer))
 		if(allowed(user))
 			locked = !locked
 			to_chat(user, SPAN_NOTICE("You [locked ? "lock" : "unlock"] \the [src]."))
@@ -110,7 +110,7 @@
 		return TRUE
 
 	if(holding_brain)
-		return holding_brain.attackby(O, user)
+		return holding_brain.attackby(used_item, user)
 
 	. = ..()
 

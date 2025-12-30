@@ -41,7 +41,7 @@
 	if(ispath(name_language, /decl/language))
 		var/decl/language/L = GET_DECL(name_language)
 		if(istype(L))
-			name = L.get_random_name(pick(MALE,FEMALE))
+			name = L.get_random_language_name(pick(MALE,FEMALE))
 	if(!name)
 		name = capitalize(pick(global.using_map.first_names_female + global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
@@ -199,7 +199,7 @@
 	if(ishuman(user))
 		var/mob/living/human/H = user
 		if(H.species)
-			specific = H.species.name
+			specific = H.species.uid
 	else if(issilicon(user))
 		specific = TRADER_HAIL_SILICON_END
 	if(!speech["[TRADER_HAIL_START][specific]"])

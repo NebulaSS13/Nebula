@@ -18,7 +18,7 @@
 	maximum_line_length = global.musical_config.max_line_length
 	instruments = istype(what) ? list(what) : what
 
-/datum/real_instrument/proc/Topic_call(href, href_list, user)
+/datum/real_instrument/proc/OnTopic(mob/user, href_list)
 	var/target = href_list["target"]
 	var/value = text2num(href_list["value"])
 	if (href_list["value"] && !isnum(value))
@@ -79,7 +79,7 @@
 				src.usage_info = new (owner, src.player)
 			src.usage_info.ui_interact(user)
 		if ("volume")
-			src.player.volume = min(max(min(player.volume+text2num(value), 100), 0), player.max_volume)
+			src.player.play_volume = min(max(min(player.play_volume+text2num(value), 100), 0), player.max_volume)
 		if ("transposition")
 			src.player.song.transposition = max(min(player.song.transposition+value, global.musical_config.highest_transposition), global.musical_config.lowest_transposition)
 		if ("min_octave")
@@ -151,7 +151,7 @@
 		),
 		"basic_options" = list(
 			"cur_instrument" = src.player.song.instrument_data.name,
-			"volume" = src.player.volume,
+			"volume" = src.player.play_volume,
 			"BPM" = round(600 / src.player.song.tempo),
 			"transposition" = src.player.song.transposition,
 			"octave_range" = list(
@@ -239,11 +239,8 @@
 	return 0
 
 
-/obj/structure/synthesized_instrument/Topic(href, href_list)
-	if (..())
-		return 1
-
-	return real_instrument.Topic_call(href, href_list, usr)
+/obj/structure/synthesized_instrument/OnTopic(mob/user, href_list)
+	return ..() || real_instrument.OnTopic(user, href_list)
 
 
 ////////////////////////
@@ -291,10 +288,7 @@
 
 
 /obj/item/synthesized_instrument/proc/shouldStopPlaying(mob/user)
-	return !(src && in_range(src, user))
+	return src && CanPhysicallyInteract(user)
 
-/obj/item/synthesized_instrument/Topic(href, href_list)
-	if (..())
-		return 1
-
-	return real_instrument.Topic_call(href, href_list, usr)
+/obj/item/synthesized_instrument/OnTopic(mob/user, href_list)
+	return ..() || real_instrument.OnTopic(user, href_list)

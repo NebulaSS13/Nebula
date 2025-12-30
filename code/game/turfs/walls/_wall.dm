@@ -18,14 +18,13 @@ var/global/list/wall_fullblend_objects = list(
 
 /turf/wall
 	name = "wall"
-	desc = "A huge chunk of metal used to seperate rooms."
+	desc = "A huge chunk of metal used to separate rooms."
 	icon = 'icons/turf/walls/_previews.dmi'
 	icon_state = "solid"
 	opacity = TRUE
 	density = TRUE
 	blocks_air = 1
 	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
-	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 	explosion_resistance = 10
 	color = COLOR_STEEL
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
@@ -37,8 +36,6 @@ var/global/list/wall_fullblend_objects = list(
 	var/unique_merge_identifier
 	var/damage = 0
 	var/can_open = 0
-	var/decl/material/material
-	var/decl/material/reinf_material
 	var/decl/material/girder_material = /decl/material/solid/metal/steel
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'
@@ -51,6 +48,8 @@ var/global/list/wall_fullblend_objects = list(
 	var/handle_structure_blending = TRUE
 	var/min_dismantle_amount = 2
 	var/max_dismantle_amount = 2
+	/// The reinforcement icon to use. Set in update_material() based on reinf_material.
+	var/reinf_icon
 
 	/// Icon to use if shutter state is non-null.
 	var/shutter_icon = 'icons/turf/walls/shutter.dmi'
@@ -101,10 +100,10 @@ var/global/list/wall_fullblend_objects = list(
 	. = ..()
 	var/turf/debris = locate(old_x, old_y, old_z)
 	if(debris)
-		for(var/turf/wall/W in RANGE_TURFS(debris, 1))
-			W.wall_connections = null
-			W.other_connections = null
-			W.queue_icon_update()
+		for(var/turf/wall/wall in RANGE_TURFS(debris, 1))
+			wall.wall_connections = null
+			wall.other_connections = null
+			wall.queue_icon_update()
 
 // Walls always hide the stuff below them.
 /turf/wall/levelupdate()
@@ -121,10 +120,6 @@ var/global/list/wall_fullblend_objects = list(
 		return //We only work about every 2 seconds
 	if(!radiate())
 		return PROCESS_KILL
-
-/turf/wall/get_material()
-	RETURN_TYPE(/decl/material)
-	return material
 
 /turf/wall/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj,/obj/item/projectile/beam))
@@ -170,26 +165,24 @@ var/global/list/wall_fullblend_objects = list(
 	. = ..()
 
 //Appearance
-/turf/wall/examine(mob/user)
+/turf/wall/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-
 	if(!isnull(shutter_state))
-		to_chat(user, SPAN_NOTICE("The shutter is [shutter_state ? "open" : "closed"]."))
-
+		. += SPAN_NOTICE("The shutter is [shutter_state ? "open" : "closed"].")
 	if(!damage)
-		to_chat(user, SPAN_NOTICE("It looks fully intact."))
+		. += SPAN_NOTICE("It looks fully intact.")
 	else
 		var/dam = damage / material.integrity
 		if(dam <= 0.3)
-			to_chat(user, SPAN_WARNING("It looks slightly damaged."))
+			. += SPAN_WARNING("It looks slightly damaged.")
 		else if(dam <= 0.6)
-			to_chat(user, SPAN_WARNING("It looks moderately damaged."))
+			. += SPAN_WARNING("It looks moderately damaged.")
 		else
-			to_chat(user, SPAN_DANGER("It looks heavily damaged."))
+			. += SPAN_DANGER("It looks heavily damaged.")
 	if(paint_color)
-		to_chat(user, get_paint_examine_message())
+		. += get_paint_examine_message()
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		to_chat(user, SPAN_WARNING("There is fungus growing on [src]."))
+		. += SPAN_WARNING("There is fungus growing on [src].")
 
 /turf/wall/proc/get_paint_examine_message()
 	return SPAN_NOTICE("It has had <font color = '[paint_color]'>a coat of paint</font> applied.")
@@ -301,9 +294,9 @@ var/global/list/wall_fullblend_objects = list(
 
 /turf/wall/proc/burn(temperature)
 	if(!QDELETED(src) && istype(material) && material.combustion_effect(src, temperature, 0.7))
-		for(var/turf/wall/W in range(3,src))
-			if(W != src)
-				addtimer(CALLBACK(W, TYPE_PROC_REF(/turf/wall, burn), temperature/4), 2)
+		for(var/turf/wall/wall in range(3,src))
+			if(wall != src)
+				addtimer(CALLBACK(wall, TYPE_PROC_REF(/turf/wall, burn), temperature/4), 2)
 		physically_destroyed()
 
 /turf/wall/set_color(new_color)

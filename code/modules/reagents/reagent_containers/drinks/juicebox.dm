@@ -3,7 +3,7 @@
 	icon_state = "juicebox_base"
 	name = "juicebox"
 	desc = "A small cardboard juicebox. Cheap and flimsy."
-	volume = 30
+	chem_volume = 30
 	amount_per_transfer_from_this = 5
 	atom_flags = 0
 	material = /decl/material/solid/organic/cardboard
@@ -52,12 +52,12 @@
 
 	appearance = new_appearance
 
-/obj/item/chems/drinks/juicebox/examine(mob/user, distance)
+/obj/item/chems/drinks/juicebox/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(atom_flags & ATOM_FLAG_OPEN_CONTAINER)
-		to_chat(user, SPAN_NOTICE("It has a straw stuck through the foil seal on top."))
+		. += SPAN_NOTICE("It has a straw stuck through the foil seal on top.")
 	else
-		to_chat(user, SPAN_NOTICE("It has a straw stuck to the side and the foil seal is intact."))
+		. += SPAN_NOTICE("It has a straw stuck to the side and the foil seal is intact.")
 
 /obj/item/chems/drinks/juicebox/open(mob/user)
 	playsound(loc,'sound/effects/bonebreak1.ogg', rand(10,50), 1)
@@ -70,7 +70,7 @@
 	desc = "A small cardboard juicebox with a cartoon apple on it."
 
 /obj/item/chems/drinks/juicebox/apple/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/apple, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/apple, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/juicebox/apple/Initialize()
 	. = ..()
@@ -81,7 +81,7 @@
 	desc = "A small cardboard juicebox with a cartoon orange on it."
 
 /obj/item/chems/drinks/juicebox/orange/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/orange, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/orange, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/juicebox/orange/Initialize()
 	. = ..()
@@ -92,7 +92,7 @@
 	desc = "A small cardboard juicebox with some cartoon grapes on it."
 
 /obj/item/chems/drinks/juicebox/grape/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/grape, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/grape, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/juicebox/grape/Initialize()
 	. = ..()
@@ -114,12 +114,12 @@
 	var/decl/material/J = pick(drinktypes)
 	add_to_reagents(J, 20)
 	add_to_reagents(pick(drinktypes - J), 5)
-	return reagents.reagent_volumes
+	return REAGENT_VOLUMES(reagents)
 
 /obj/item/chems/drinks/juicebox/sensible_random/populate_reagents()
 	var/list/chosen_reagents = juice_it()
-	var/decl/material/J = GET_DECL(chosen_reagents[1])
-	var/decl/material/K = GET_DECL(chosen_reagents[2])
+	var/decl/material/J = chosen_reagents[1]
+	var/decl/material/K = chosen_reagents[2]
 	var/splash = pick("teasing", "splash", "hint", "measure", "nip", "slug", "depth", "dash", "sensation", "surge", "squirt", "spritz", "efflux", "gush", "swell")
 	desc = "[J.liquid_name]; [J.lore_text] This one comes with \an [splash] of [K.liquid_name] in a neat box."
 	name = "\improper [J.liquid_name] and [K.liquid_name] juicebox"

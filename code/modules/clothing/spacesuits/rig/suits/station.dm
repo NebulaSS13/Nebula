@@ -389,7 +389,7 @@
 
 /obj/item/clothing/head/helmet/space/rig/zero
 	camera = null
-	desc = "A bubble helmet that maximizes the field of view. A state of the art holographic display provides a stream of information"
+	desc = "A bubble helmet that maximizes the field of view. A state-of-the-art holographic display provides a stream of information"
 	icon = 'icons/clothing/rigs/helmets/helmet_null.dmi'
 
 /obj/item/clothing/suit/space/rig/zero

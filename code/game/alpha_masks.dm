@@ -54,10 +54,14 @@ var/global/list/_alpha_masks = list()
 /atom/movable/proc/get_turf_alpha_mask_states()
 	return 'icons/effects/alpha_mask.dmi'
 
+/atom/movable/proc/should_have_alpha_mask()
+	// Mobs and obj both need to avoid this when on structures. Looks wonky.
+	return simulated && isturf(loc) && !(locate(/obj/structure) in loc)
+
 // Proc called by /turf/Entered() to update a mob's mask overlay.
 /atom/movable/proc/update_turf_alpha_mask()
 	set waitfor = FALSE
-	if(!simulated || updating_turf_alpha_mask)
+	if(!simulated || QDELETED(src) || updating_turf_alpha_mask)
 		return
 	updating_turf_alpha_mask = TRUE
 	sleep(0)
@@ -65,7 +69,7 @@ var/global/list/_alpha_masks = list()
 	if(QDELETED(src))
 		return
 	var/turf/our_turf = loc
-	var/mask_state = isturf(our_turf) && our_turf.get_movable_alpha_mask_state(src)
+	var/mask_state = isturf(our_turf) && should_have_alpha_mask() && our_turf.get_movable_alpha_mask_state(src)
 	if(mask_state)
 		var/atom/movable/alpha_mask/mask = get_or_create_alpha_mask(src)
 		if(mask)

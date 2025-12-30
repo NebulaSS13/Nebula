@@ -31,7 +31,7 @@
 
 /obj/item/food/xenomeat/@SUBTYPES : /obj/item/food/butchery/meat/xeno/@SUBTYPES{@OLD}
 /obj/item/food/cosmoshark/@SUBTYPES : /obj/item/food/butchery/meat/fish/shark/@SUBTYPES{@OLD}
-/obj/item/food/bearmeat/@SUBTYPES : obj/item/food/butchery/meat/bear/@SUBTYPES{@OLD}
+/obj/item/food/bearmeat/@SUBTYPES : /obj/item/food/butchery/meat/bear/@SUBTYPES{@OLD}
 
 /obj/item/food/meatkabob/@SUBTYPES : /obj/item/food/skewer/meat/@SUBTYPES{@OLD}
 /obj/item/food/tofukabob/@SUBTYPES : /obj/item/food/skewer/tofu/@SUBTYPES{@OLD}

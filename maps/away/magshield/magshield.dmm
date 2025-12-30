@@ -106,7 +106,7 @@
 /turf/floor/plating/airless,
 /area/space)
 "ao" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/space,
 /area/space)
 "ap" = (
@@ -529,7 +529,7 @@
 /turf/space,
 /area/magshield/smes_storage)
 "bF" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/space,
 /area/magshield/smes_storage)
 "bG" = (
@@ -641,7 +641,7 @@
 /turf/floor/plating/airless,
 /area/magshield/smes_storage)
 "bY" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/machinery/light/small{
@@ -711,7 +711,7 @@
 /turf/floor/plating,
 /area/magshield/smes_storage)
 "ci" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/structure/cable/yellow{
@@ -915,7 +915,7 @@
 /turf/floor/plating/airless,
 /area/magshield/smes_storage)
 "cH" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1108,7 +1108,7 @@
 	dir = 8;
 	level = 2
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1265,7 +1265,7 @@
 /turf/floor/plating/airless,
 /area/magshield/north)
 "dF" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/floor/plating/airless,
 /area/magshield/north)
 "dG" = (
@@ -1300,7 +1300,7 @@
 /turf/floor/plating/airless,
 /area/magshield/north)
 "dN" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1318,7 +1318,7 @@
 /turf/floor/plating/airless,
 /area/magshield/north)
 "dP" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/plating/airless,
@@ -2079,7 +2079,7 @@
 /turf/floor/tiled,
 /area/magshield/west)
 "fZ" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 4
 	},
 /turf/floor/tiled,
@@ -2268,7 +2268,7 @@
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "gH" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 10
 	},
 /obj/item/box/checkers,
@@ -2278,20 +2278,20 @@
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "gI" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 10
 	},
 /obj/item/belt/champion,
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "gJ" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 10
 	},
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "gK" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 10
 	},
 /obj/item/bible/booze,
@@ -2340,7 +2340,7 @@
 /turf/wall,
 /area/magshield/west)
 "gQ" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -2385,7 +2385,7 @@
 /turf/floor/tiled,
 /area/magshield/west)
 "gY" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/action_figure,
 /turf/floor/tiled,
 /area/magshield/west)
@@ -2483,7 +2483,7 @@
 /turf/floor/tiled,
 /area/magshield/west)
 "hn" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/sword/replica,
 /turf/floor/tiled,
 /area/magshield/west)
@@ -2492,7 +2492,7 @@
 /turf/floor/tiled/white,
 /area/magshield/west)
 "hp" = (
-/obj/structure/bed/chair/comfy/captain,
+/obj/structure/chair/comfy/captain,
 /turf/floor/tiled/white,
 /area/magshield/west)
 "hq" = (
@@ -2523,7 +2523,7 @@
 /turf/floor/plating/airless,
 /area/space)
 "hw" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/plushie/large,
 /turf/floor/tiled,
 /area/magshield/west)
@@ -2565,7 +2565,7 @@
 /turf/floor/tiled,
 /area/magshield/west)
 "hC" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/toy/shipmodel,
 /turf/floor/tiled,
 /area/magshield/west)
@@ -2582,7 +2582,7 @@
 /turf/floor/tiled,
 /area/magshield/west)
 "hG" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -2614,7 +2614,7 @@
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "hK" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/book/manual/supermatter_engine,
 /turf/floor/carpet/blue,
 /area/magshield/west)
@@ -2655,7 +2655,7 @@
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "hS" = (
-/obj/structure/bed/chair/comfy/red,
+/obj/structure/chair/comfy/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -2665,7 +2665,7 @@
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "hT" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/book/manual/evaguide,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2727,7 +2727,7 @@
 /turf/floor/tiled,
 /area/magshield/west)
 "hZ" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/accessory,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
@@ -2735,7 +2735,7 @@
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "ia" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/flame/fuelled/lighter/zippo/random,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -2743,18 +2743,18 @@
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "ib" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/ashtray,
 /obj/random/smokes,
 /obj/machinery/light,
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "ic" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/floor/tiled/dark,
 /area/magshield/west)
 "id" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/space,
 /area/magshield/west)
 "ie" = (
@@ -3057,7 +3057,7 @@
 /turf/floor/tiled,
 /area/magshield/south)
 "je" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/floor/tiled,
 /area/magshield/south)
 "jf" = (
@@ -3148,7 +3148,7 @@
 /turf/floor/tiled,
 /area/magshield/south)
 "js" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/floor/tiled,
@@ -3160,7 +3160,7 @@
 /turf/floor/tiled,
 /area/magshield/south)
 "ju" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -3177,7 +3177,7 @@
 /turf/floor/tiled,
 /area/magshield/south)
 "jw" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/tiled,
@@ -3257,7 +3257,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -3424,7 +3424,7 @@
 /turf/floor/tiled,
 /area/magshield/south)
 "kh" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled,
@@ -3769,7 +3769,7 @@
 /turf/floor/tiled,
 /area/magshield/south)
 "lg" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/space,
 /area/magshield/south)
 "lh" = (

@@ -1,12 +1,17 @@
 /decl/interaction_handler
 	abstract_type = /decl/interaction_handler
 	var/name
+	/// A string displayed when examining an atom that provides this handler as an alt interaction.
+	var/examine_desc
+	/// If set to TRUE, alt interactions will skip is_possible() before displaying in examined_by().
+	var/always_show_on_examine = FALSE
 	var/icon
 	var/icon_state
 	var/expected_target_type = /atom
 	var/expected_user_type = /mob/living
 	var/interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION
 	var/incapacitation_flags
+	var/apply_click_cooldown = DEFAULT_ATTACK_COOLDOWN
 
 /decl/interaction_handler/proc/is_possible(var/atom/target, var/mob/user, var/obj/item/prop)
 

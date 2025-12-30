@@ -9,6 +9,7 @@ var/global/list/flooring_cache = list()
 
 /decl/flooring
 	abstract_type = /decl/flooring
+	decl_flags = DECL_FLAG_MANDATORY_UID
 
 	var/name
 	var/desc
@@ -35,11 +36,17 @@ var/global/list/flooring_cache = list()
 	/// BYOND ticks.
 	var/build_time = 0
 
+	var/drop_material_on_remove = FALSE
+
 	var/descriptor
 	var/flooring_flags
-	var/remove_timer = 10
-	var/can_paint
+	var/remove_timer = 1 SECOND
+	var/can_paint = FALSE
 	var/can_engrave = TRUE
+	var/can_collect = FALSE
+
+	// Not bloody prints, but rather prints on top of the turf (snow, mud)
+	var/print_type
 
 	var/turf_light_range
 	var/turf_light_power
@@ -78,7 +85,7 @@ var/global/list/flooring_cache = list()
 	var/render_trenches = TRUE
 	var/floor_layer = TURF_LAYER
 	var/holographic = FALSE
-	var/dirt_color = "#7c5e42"
+	var/dirt_color = /decl/material/solid/soil::color
 
 	var/list/burned_states
 	var/list/broken_states
@@ -188,40 +195,39 @@ var/global/list/flooring_cache = list()
 	if(target.icon_state != target.floor_icon_state_override)
 		target.icon_state = target.floor_icon_state_override
 
-	var/edge_layer = (icon_edge_layer != FLOOR_EDGE_NONE) ? target.layer + icon_edge_layer : target.layer
-	var/list/edge_overlays = list()
-	var/has_border = 0
-	for(var/step_dir in global.cardinal)
-		var/turf/T = get_step_resolving_mimic(target, step_dir)
-		if(!istype(T) || symmetric_test_link(target, T))
-			continue
-		has_border |= step_dir
-		if(icon_edge_layer != FLOOR_EDGE_NONE)
-			if(has_internal_edges)
-				edge_overlays += get_flooring_overlay("[icon]_[icon_base]-edge-[step_dir]", edge_state, step_dir, edge_layer = edge_layer)
-			if(has_external_edges && target.can_draw_edge_over(T))
-				edge_overlays += get_flooring_overlay("[icon]_[icon_base]-outer-edge-[step_dir]", outer_edge_state, step_dir, TRUE, edge_layer = edge_layer)
+	if (icon_edge_layer != FLOOR_EDGE_NONE && (has_internal_edges || has_external_edges))
+		var/edge_layer = target.layer + icon_edge_layer
+		var/list/edge_overlays = list()
+		var/has_border = 0
+		for(var/step_dir in global.cardinal)
+			var/turf/T = get_step_resolving_mimic(target, step_dir)
+			if(!istype(T) || symmetric_test_link(target, T))
+				continue
+			has_border |= step_dir
+			if(icon_edge_layer != FLOOR_EDGE_NONE)
+				if(has_internal_edges)
+					edge_overlays += get_flooring_overlay("[icon]_[icon_base]-edge-[step_dir]", edge_state, step_dir, edge_layer = edge_layer)
+				if(has_external_edges && target.can_draw_edge_over(T))
+					edge_overlays += get_flooring_overlay("[icon]_[icon_base]-outer-edge-[step_dir]", outer_edge_state, step_dir, TRUE, edge_layer = edge_layer)
 
-	if (has_internal_edges || has_external_edges)
 		var/has_smooth = ~(has_border & (NORTH | SOUTH | EAST | WEST))
 		for(var/step_dir in global.cornerdirs)
 			var/turf/T = get_step_resolving_mimic(target, step_dir)
 			if(!istype(T) || symmetric_test_link(target, T))
 				continue
-			if(icon_edge_layer != FLOOR_EDGE_NONE)
-				if(has_internal_edges)
-					if((has_smooth & step_dir) == step_dir)
-						edge_overlays += get_flooring_overlay("[icon]_[icon_base]-corner-[step_dir]", corner_state, step_dir, edge_layer = edge_layer)
-					else if((has_border & step_dir) == step_dir)
-						edge_overlays += get_flooring_overlay("[icon]_[icon_base]-edge-[step_dir]", edge_state, step_dir, edge_layer = edge_layer)
-				if(has_external_edges && target.can_draw_edge_over(T))
-					if((has_smooth & step_dir) == step_dir)
-						edge_overlays += get_flooring_overlay("[icon]_[icon_base]-outer-corner-[step_dir]", outer_corner_state, step_dir, TRUE, edge_layer = edge_layer)
-					else if((has_border & step_dir) == step_dir)
-						edge_overlays += get_flooring_overlay("[icon]_[icon_base]-outer-edge-[step_dir]", outer_edge_state, step_dir, TRUE, edge_layer = edge_layer)
+			if(has_internal_edges)
+				if((has_smooth & step_dir) == step_dir)
+					edge_overlays += get_flooring_overlay("[icon]_[icon_base]-corner-[step_dir]", corner_state, step_dir, edge_layer = edge_layer)
+				else if((has_border & step_dir) == step_dir)
+					edge_overlays += get_flooring_overlay("[icon]_[icon_base]-edge-[step_dir]", edge_state, step_dir, edge_layer = edge_layer)
+			if(has_external_edges && target.can_draw_edge_over(T))
+				if((has_smooth & step_dir) == step_dir)
+					edge_overlays += get_flooring_overlay("[icon]_[icon_base]-outer-corner-[step_dir]", outer_corner_state, step_dir, TRUE, edge_layer = edge_layer)
+				else if((has_border & step_dir) == step_dir)
+					edge_overlays += get_flooring_overlay("[icon]_[icon_base]-outer-edge-[step_dir]", outer_edge_state, step_dir, TRUE, edge_layer = edge_layer)
 
-	if(length(edge_overlays))
-		target.add_overlay(edge_overlays)
+		if(length(edge_overlays))
+			target.add_overlay(edge_overlays)
 
 	if(target.is_floor_broken())
 		target.add_overlay(get_damage_overlay(target._floor_broken))
@@ -255,8 +261,9 @@ var/global/list/flooring_cache = list()
 		global.flooring_cache[cache_key] = I
 	return global.flooring_cache[cache_key]
 
-/decl/flooring/proc/on_remove()
-	return
+/decl/flooring/proc/on_flooring_remove(turf/removing_from)
+	if(force_material && drop_material_on_remove)
+		force_material.create_object(removing_from, rand(3,5))
 
 /decl/flooring/proc/get_movement_delay(var/travel_dir, var/mob/mover)
 	return movement_delay
@@ -264,9 +271,20 @@ var/global/list/flooring_cache = list()
 /decl/flooring/proc/get_movable_alpha_mask_state(atom/movable/mover)
 	return
 
+/decl/flooring/proc/handle_hand_interaction(turf/floor/floor, mob/user)
+	if(!force_material || !can_collect)
+		return FALSE
+	user.visible_message(SPAN_NOTICE("\The [user] begins scraping together some of \the [name]..."))
+	if(do_after(user, 3 SECONDS, floor) && !QDELETED(floor) && !QDELETED(user) && floor.get_topmost_flooring() == src && isnull(user.get_active_held_item()))
+		var/list/created = force_material.create_object(floor, 1)
+		user.visible_message(SPAN_NOTICE("\The [user] scrapes together [english_list(created)]."))
+		for(var/obj/item/stack/stack in created)
+			stack.add_to_stacks(user, TRUE)
+	return TRUE
+
 /decl/flooring/proc/handle_item_interaction(turf/floor/floor, mob/user, obj/item/item)
 
-	if(!istype(user) || !istype(item) || !istype(floor) || user.a_intent == I_HURT)
+	if(!istype(user) || !istype(item) || !istype(floor) || user.check_intent(I_FLAG_HARM))
 		return FALSE
 
 	if(!(IS_SCREWDRIVER(item) && (flooring_flags & TURF_REMOVE_SCREWDRIVER)) && floor.try_graffiti(user, item))
@@ -276,7 +294,7 @@ var/global/list/flooring_cache = list()
 		if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.get_topmost_flooring() != src)
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You remove the [get_surface_descriptor()] with \the [item]."))
-		floor.set_flooring(null, place_product = TRUE)
+		floor.remove_flooring(floor.get_topmost_flooring(), place_product = TRUE)
 		playsound(floor, 'sound/items/Deconstruct.ogg', 80, 1)
 		return TRUE
 
@@ -289,21 +307,21 @@ var/global/list/flooring_cache = list()
 				if(floor.get_topmost_flooring() != src)
 					return
 				to_chat(user, SPAN_NOTICE("You remove the broken [get_surface_descriptor()]."))
-				floor.set_flooring(null)
+				floor.remove_flooring(floor.get_topmost_flooring())
 			else if(flooring_flags & TURF_IS_FRAGILE)
 				if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor, 0.15))
 					return TRUE
 				if(floor.get_topmost_flooring() != src)
 					return
 				to_chat(user, SPAN_DANGER("You forcefully pry off the [get_surface_descriptor()], destroying them in the process."))
-				floor.set_flooring(null)
+				floor.remove_flooring(floor.get_topmost_flooring())
 			else if(flooring_flags & TURF_REMOVE_CROWBAR)
 				if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor))
 					return TRUE
 				if(floor.get_topmost_flooring() != src)
 					return
 				to_chat(user, SPAN_NOTICE("You lever off the [get_surface_descriptor()]."))
-				floor.set_flooring(null, place_product = TRUE)
+				floor.remove_flooring(floor.get_topmost_flooring(), place_product = TRUE)
 			else
 				return
 			playsound(floor, 'sound/items/Crowbar.ogg', 80, 1)
@@ -315,7 +333,7 @@ var/global/list/flooring_cache = list()
 			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.get_topmost_flooring() != src)
 				return TRUE
 			to_chat(user, SPAN_NOTICE("You unscrew and remove the [get_surface_descriptor()]."))
-			floor.set_flooring(null, place_product = TRUE)
+			floor.remove_flooring(floor.get_topmost_flooring(), place_product = TRUE)
 			playsound(floor, 'sound/items/Screwdriver.ogg', 80, 1)
 			return TRUE
 
@@ -323,7 +341,7 @@ var/global/list/flooring_cache = list()
 			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.get_topmost_flooring() != src)
 				return TRUE
 			to_chat(user, SPAN_NOTICE("You unwrench and remove the [get_surface_descriptor()]."))
-			floor.set_flooring(null, place_product = TRUE)
+			floor.remove_flooring(floor.get_topmost_flooring(), place_product = TRUE)
 			playsound(floor, 'sound/items/Ratchet.ogg', 80, 1)
 			return TRUE
 
@@ -341,3 +359,35 @@ var/global/list/flooring_cache = list()
 
 /decl/flooring/proc/handle_environment_proc(turf/floor/target)
 	return PROCESS_KILL
+
+/decl/flooring/proc/handle_turf_digging(turf/floor/target)
+	return TRUE
+
+/decl/flooring/proc/turf_exited(turf/target, atom/movable/crosser, atom/new_loc)
+	return print_type && try_place_footprints(crosser, target, target, new_loc, "going")
+
+/decl/flooring/proc/turf_entered(turf/target, atom/movable/crosser, atom/old_loc)
+	return print_type && try_place_footprints(crosser, target, old_loc, target, "coming")
+
+/decl/flooring/proc/try_place_footprints(atom/movable/crosser, turf/target, turf/from_turf, turf/to_turf, use_state = "going")
+	if(!ismob(crosser) || !crosser.simulated || !isturf(from_turf) || !isturf(to_turf))
+		return FALSE
+	if(target.check_fluid_depth(FLUID_QDEL_POINT))
+		return FALSE
+	var/movement_dir = get_dir(from_turf, to_turf)
+	if(!movement_dir)
+		return FALSE
+	var/mob/walker = crosser
+	var/footprint_icon = walker.get_footprints_icon()
+	if(!footprint_icon)
+		return FALSE
+	var/obj/effect/footprints/prints = (locate() in target) || new print_type(target)
+	prints.add_footprints(crosser, footprint_icon, movement_dir, use_state)
+
+/decl/flooring/proc/turf_crossed(atom/movable/crosser)
+	return
+
+/// target is the turf that wants to know if it supports footprints
+/// contaminant is, optionally, the material of the coating that wants to be added.
+/decl/flooring/proc/can_show_coating_footprints(turf/target, decl/material/contaminant)
+	return TRUE

@@ -59,7 +59,7 @@
 	if(!limb)
 		return ..()
 	var/target_zone = user.get_target_zone()
-	if(user.a_intent == I_HELP && target_zone != apply_to_zone && istype(limb, /obj/item/organ/external/head))
+	if(user.check_intent(I_FLAG_HELP) && target_zone != apply_to_zone && istype(limb, /obj/item/organ/external/head))
 		var/obj/item/organ/external/head/head = limb
 		head.write_on(user, name)
 		return TRUE

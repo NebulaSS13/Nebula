@@ -1,10 +1,7 @@
 /obj/vehicle/train
 	name = "train"
 	dir = EAST
-
 	move_delay = 1
-
-	current_health = 100
 	max_health = 100
 	fire_dam_coeff = 0.7
 	brute_dam_coeff = 0.5
@@ -29,12 +26,12 @@
 		if(T.lead || T.is_train_head())
 			latch(T)
 
-/obj/vehicle/train/examine(mob/user)
+/obj/vehicle/train/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if (lead)
-		to_chat(user, SPAN_NOTICE("It is hitched to \the [lead]."))
+		. += SPAN_NOTICE("It is hitched to \the [lead].")
 	if (tow)
-		to_chat(user, SPAN_NOTICE("It is towing \the [tow]."))
+		. += SPAN_NOTICE("It is towing \the [tow].")
 
 /obj/vehicle/train/Move()
 	var/old_loc = get_turf(src)

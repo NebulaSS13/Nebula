@@ -1,11 +1,13 @@
 /obj/machinery/disposal/deliveryChute
 	name = "delivery chute"
-	desc = "A chute for big and small packages alike!"
+	desc = "A chute to put things into a disposal network. Takes big and small packages alike!"
 	density = TRUE
 	icon = 'icons/obj/pipes/disposal_chute.dmi'
 	icon_state = "chute"
 	base_type = /obj/machinery/disposal/deliveryChute/buildable
 	frame_type = /obj/structure/disposalconstruct/machine/chute
+	// TODO: Convert attackby() override and c_mode vars to use construct states
+	construct_state = null
 
 	var/c_mode = 0
 
@@ -65,7 +67,7 @@
 
 			var/obj/item/organ/external/E = pick(crush)
 
-			E.take_external_damage(45, used_weapon = "Blunt Trauma")
+			E.take_damage(45, inflicter = "Blunt Trauma")
 			to_chat(L, "\The [src]'s mechanisms crush your [E.name]!")
 
 	H.init(src)	// copy the contents of disposer to holder
@@ -79,8 +81,8 @@
 	update_icon()
 	return
 
-/obj/machinery/disposal/deliveryChute/attackby(var/obj/item/I, var/mob/user)
-	if(IS_SCREWDRIVER(I))
+/obj/machinery/disposal/deliveryChute/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_SCREWDRIVER(used_item))
 		if(c_mode==0)
 			c_mode=1
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, TRUE)
@@ -91,16 +93,16 @@
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, TRUE)
 			to_chat(user, "You attach the screws around the power connection.")
 			return TRUE
-	else if(IS_WELDER(I) && c_mode==1)
-		var/obj/item/weldingtool/W = I
-		if(!W.weld(1,user)) // 'you need more welding fuel' messages are already handled
+	else if(IS_WELDER(used_item) && c_mode==1)
+		var/obj/item/weldingtool/welder = used_item
+		if(!welder.weld(1,user)) // 'you need more welding fuel' messages are already handled
 			return TRUE
 		to_chat(user, "You start slicing the floorweld off the delivery chute.")
 		if(!do_after(user, 2 SECONDS, src))
 			to_chat(user, "You stop slicing the floorweld off the delivery chute.")
 			return TRUE
 		playsound(src.loc, 'sound/items/Welder2.ogg', 100, TRUE)
-		if(!src || !W.isOn()) return TRUE
+		if(!src || !welder.isOn()) return TRUE
 		to_chat(user, "You slice the floorweld off the delivery chute.")
 		var/obj/structure/disposalconstruct/C = new (loc, src)
 		C.update()

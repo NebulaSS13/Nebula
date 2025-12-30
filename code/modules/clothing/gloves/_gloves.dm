@@ -11,7 +11,7 @@
 	siemens_coefficient = 0.75
 	body_parts_covered = SLOT_HANDS
 	slot_flags = SLOT_HANDS
-	attack_verb = list("challenged")
+	attack_verb = "challenged"
 	blood_overlay_type = "bloodyhands"
 	bodytype_equip_flags = BODY_EQUIP_FLAG_HUMANOID
 	fallback_slot = slot_gloves_str

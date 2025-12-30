@@ -62,7 +62,7 @@
 		var/decl/bodytype/prosthetic/company = GET_DECL(model)
 		if(!istype(company))
 			return FALSE
-		var/decl/species/species = get_species_by_key(robofab.picked_prosthetic_species)
+		var/decl/species/species = decls_repository.get_decl_by_id(robofab.picked_prosthetic_species)
 		if(!istype(species))
 			return FALSE
 		var/obj/item/organ/target_limb = path
@@ -92,7 +92,7 @@
 /datum/fabricator_recipe/robotics/prosthetic/build(var/turf/location, var/datum/fabricator_build_order/order)
 	. = ..()
 	var/species_name = order.get_data("species", global.using_map.default_species)
-	var/decl/species/species = get_species_by_key(species_name)
+	var/decl/species/species = decls_repository.get_decl_by_id(species_name)
 	if(species)
 		for(var/obj/item/organ/external/E in .)
 			E.set_species(species_name)

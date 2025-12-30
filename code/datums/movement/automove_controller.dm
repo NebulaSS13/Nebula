@@ -1,7 +1,8 @@
 /// Implements automove logic; can be overridden on mob procs if you want to vary the logic from the below.
 /decl/automove_controller
-	var/completion_signal = FALSE // Set to TRUE if you want movement to stop processing when the atom reaches its target.
-	var/failure_signal    = FALSE // Set to TRUE if you want movement to stop processing when the atom fails to move.
+	var/completion_signal   = FALSE // Set to TRUE if you want movement to stop processing when the atom reaches its target.
+	var/failure_signal      = FALSE // Set to TRUE if you want movement to stop processing when the atom fails to move.
+	var/try_avoid_obstacles = TRUE  // Will try to move 90 degrees around an obstacle.
 
 /decl/automove_controller/proc/handle_mover(atom/movable/mover, datum/automove_metadata/metadata)
 
@@ -49,14 +50,16 @@
 				return TRUE // no idea how we would get into this position
 
 		if(mover.SelfMove(target_dir) && (old_loc != mover.loc))
-			return TRUE
+			mover.handle_post_automoved(old_loc)
+			return (mover.get_automove_target() == mover.loc) // We may have transitioned to the next step in a path.
 
-		// Try to move around any obstacle.
-		var/static/list/_alt_dir_rot = list(45, -45)
-		for(var/alt_dir in shuffle(_alt_dir_rot))
-			mover.reset_movement_delay()
-			if(mover.SelfMove(turn(target_dir, alt_dir)) && (old_loc != mover.loc))
-				return TRUE
+		if(try_avoid_obstacles)
+			// Try to move around any obstacle.
+			var/static/list/_alt_dir_rot = list(45, -45)
+			for(var/alt_dir in shuffle(_alt_dir_rot))
+				mover.reset_movement_delay()
+				if(mover.SelfMove(turn(target_dir, alt_dir)) && (old_loc != mover.loc))
+					return TRUE
 
 		mover.failed_automove()
 

@@ -52,12 +52,12 @@
 	else
 		add_overlay("[icon_state]-nocell")
 
-/obj/item/defibrillator/examine(mob/user)
+/obj/item/defibrillator/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(bcell)
-		to_chat(user, "The charge meter is showing [bcell.percent()]% charge left.")
+		. += "The charge meter is showing [bcell.percent()]% charge left."
 	else
-		to_chat(user, "There is no cell inside.")
+		. += SPAN_WARNING("There is no cell inside.")
 
 /obj/item/defibrillator/ui_action_click()
 	toggle_paddles()
@@ -69,23 +69,23 @@
 	return TRUE
 
 // TODO: This should really use the cell extension
-/obj/item/defibrillator/attackby(obj/item/W, mob/user, params)
-	if(W == paddles)
+/obj/item/defibrillator/attackby(obj/item/used_item, mob/user, params)
+	if(used_item == paddles)
 		reattach_paddles(user)
 		return TRUE
-	else if(istype(W, /obj/item/cell))
+	else if(istype(used_item, /obj/item/cell))
 		if(bcell)
 			to_chat(user, "<span class='notice'>\The [src] already has a cell.</span>")
 		else
-			if(!user.try_unequip(W))
+			if(!user.try_unequip(used_item))
 				return TRUE
-			W.forceMove(src)
-			bcell = W
+			used_item.forceMove(src)
+			bcell = used_item
 			to_chat(user, "<span class='notice'>You install a cell in \the [src].</span>")
 			update_icon()
 		return TRUE
 
-	else if(IS_SCREWDRIVER(W))
+	else if(IS_SCREWDRIVER(used_item))
 		if(bcell)
 			bcell.update_icon()
 			bcell.dropInto(loc)
@@ -283,7 +283,7 @@
 	return 0
 
 /obj/item/shockpaddles/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if(!ishuman(target) || user.a_intent == I_HURT)
+	if(!ishuman(target) || user.check_intent(I_FLAG_HARM))
 		return ..() //Do a regular attack. Harm intent shocking happens as a hit effect
 	var/mob/living/human/H = target
 	if(can_use(user, H))
@@ -365,8 +365,8 @@
 	H.resuscitate()
 	var/obj/item/organ/internal/cell/potato = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
 	if(potato && potato.cell)
-		var/obj/item/cell/C = potato.cell
-		C.give(chargecost)
+		var/obj/item/cell/cell = potato.cell
+		cell.give(chargecost)
 
 	ADJ_STATUS(H, STAT_ASLEEP, -60)
 	log_and_message_admins("used \a [src] to revive [key_name(H)].")
@@ -465,20 +465,20 @@
 
 /obj/item/shockpaddles/robot
 	name = "defibrillator paddles"
-	desc = "A pair of advanced shockpaddles powered by a robot's internal power cell, able to penetrate thick clothing."
+	desc = "A pair of advanced shock paddles powered by a robot's internal power cell, able to penetrate thick clothing."
 	chargecost = 50
 	combat = 1
 	cooldowntime = (3 SECONDS)
 
 /obj/item/shockpaddles/robot/check_charge(var/charge_amt)
-	if(isrobot(src.loc))
-		var/mob/living/silicon/robot/R = src.loc
-		return (R.cell && R.cell.check_charge(charge_amt))
+	if(isrobot(loc))
+		var/mob/living/silicon/robot/robot = loc
+		return robot.cell?.check_charge(charge_amt)
 
 /obj/item/shockpaddles/robot/checked_use(var/charge_amt)
-	if(isrobot(src.loc))
-		var/mob/living/silicon/robot/R = src.loc
-		return (R.cell && R.cell.checked_use(charge_amt))
+	if(isrobot(loc))
+		var/mob/living/silicon/robot/robot = loc
+		return robot.cell?.checked_use(charge_amt)
 
 /obj/item/shockpaddles/rig
 	name = "mounted defibrillator"
@@ -490,19 +490,19 @@
 	wielded = 1
 
 /obj/item/shockpaddles/rig/check_charge(var/charge_amt)
-	if(istype(src.loc, /obj/item/rig_module/device/defib))
-		var/obj/item/rig_module/device/defib/module = src.loc
+	if(istype(loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = loc
 		return (module.holder && module.holder.cell && module.holder.cell.check_charge(charge_amt))
 
 /obj/item/shockpaddles/rig/checked_use(var/charge_amt)
-	if(istype(src.loc, /obj/item/rig_module/device/defib))
-		var/obj/item/rig_module/device/defib/module = src.loc
+	if(istype(loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = loc
 		return (module.holder && module.holder.cell && module.holder.cell.checked_use(charge_amt))
 
 /obj/item/shockpaddles/rig/set_cooldown(var/delay)
 	..()
-	if(istype(src.loc, /obj/item/rig_module/device/defib))
-		var/obj/item/rig_module/device/defib/module = src.loc
+	if(istype(loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = loc
 		module.next_use = world.time + delay
 /*
 	Shockpaddles that are linked to a base unit
@@ -542,7 +542,7 @@
 */
 
 /obj/item/shockpaddles/standalone
-	desc = "A pair of shockpaddles powered by an experimental miniaturized reactor" //Inspired by the advanced e-gun
+	desc = "A pair of shock paddles powered by an experimental miniaturized reactor" //Inspired by the advanced e-gun
 	var/fail_counter = 0
 
 /obj/item/shockpaddles/standalone/Destroy()

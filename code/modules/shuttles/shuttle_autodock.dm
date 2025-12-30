@@ -16,7 +16,7 @@
 	var/obj/effect/shuttle_landmark/landmark_transition  //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
 	var/move_time = 240		//the time spent in the transition area
 
-	category = /datum/shuttle/autodock
+	abstract_type = /datum/shuttle/autodock
 	flags = SHUTTLE_FLAGS_PROCESS | SHUTTLE_FLAGS_ZERO_G
 
 /datum/shuttle/autodock/New(var/map_hash, var/obj/effect/shuttle_landmark/start_waypoint)

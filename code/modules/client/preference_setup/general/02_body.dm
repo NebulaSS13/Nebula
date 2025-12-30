@@ -14,6 +14,53 @@
 	name = "Body"
 	sort_order = 2
 
+/datum/category_item/player_setup_item/physical/body/populate_mob_snapshot(datum/mob_snapshot/snapshot, is_preview_copy = FALSE)
+	snapshot.blood_type = pref.blood_type
+	// we don't check appearance_flags here, apply_appearance_to does that
+	snapshot.skin_color = pref.skin_colour
+	snapshot.skin_tone = pref.skin_tone
+	snapshot.eye_color = pref.eye_colour
+	// so this is the hellish part.
+	// pref.sprite_accessories is sprite_accessories[accessory_category.type][loaded_accessory.type] = metadata
+	// snapshot.sprite_accessories is sprite_accessories[organ_tag][accessory_category.type][loaded_accessory.type] = metadata
+	// we have to convert it here
+	// on the bright side bodytype.default_sprite_accessories uses the same format
+	var/list/new_sprite_accessories = list()
+	// THIS IS HACKY. PLEASE FIND A BETTER WAY TO DO THIS
+	// Adds default bodytype accessories to the snapshot.
+	var/decl/bodytype/the_bodytype = pref.get_bodytype_decl()
+	for(var/accessory_category in the_bodytype.default_sprite_accessories)
+		var/decl/sprite_accessory_category/acc_cat = GET_DECL(accessory_category)
+		if(!acc_cat.always_apply_defaults)
+			continue
+		var/list/accessories = the_bodytype.default_sprite_accessories[accessory_category]
+		acc_cat.prepare_mob_snapshot(snapshot, accessories)
+		for(var/accessory in accessories)
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			var/accessory_metadata = accessories[accessory]
+			for(var/bodypart in accessory_decl.body_parts)
+				LAZYINITLIST(new_sprite_accessories[bodypart])
+				LAZYSET(new_sprite_accessories[bodypart][accessory_category], accessory, accessory_metadata)
+	// jank shit end
+	for(var/accessory_category in pref.sprite_accessories)
+		var/decl/sprite_accessory_category/acc_cat = GET_DECL(accessory_category)
+		var/list/accessories = pref.sprite_accessories[accessory_category]
+		acc_cat.prepare_mob_snapshot(snapshot, accessories)
+		// todo: copy this elsewhere
+		// ^ i have no clue if i ever did this or not. presumably bc i don't know what i meant needed copying
+		for(var/accessory in accessories)
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			var/accessory_metadata = accessories[accessory]
+			for(var/bodypart in accessory_decl.body_parts)
+				LAZYINITLIST(new_sprite_accessories[bodypart])
+				LAZYSET(new_sprite_accessories[bodypart][accessory_category], accessory, accessory_metadata)
+	if(length(new_sprite_accessories))
+		snapshot.sprite_accessories = new_sprite_accessories
+
+/datum/category_item/player_setup_item/physical/body/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	if(LAZYLEN(pref.appearance_descriptors))
+		character.appearance_descriptors = pref.appearance_descriptors.Copy()
+
 /datum/category_item/player_setup_item/physical/body/load_character(datum/pref_record_reader/R)
 
 	pref.skin_colour =            R.read("skin_colour")
@@ -82,9 +129,9 @@
 	if(!pref.bgstate || !(pref.bgstate in global.using_map.char_preview_bgstate_options))
 		pref.bgstate = global.using_map.char_preview_bgstate_options[1]
 
-/datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
+/datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/writer)
 
-	var/decl/species/mob_species = get_species_by_key(pref.species)
+	var/decl/species/mob_species = pref.get_species_decl()
 	var/list/save_accessories = list()
 	for(var/acc_cat in mob_species.available_accessory_categories)
 		if(!(acc_cat in pref.sprite_accessories))
@@ -99,17 +146,20 @@
 				serialize_metadata[metadata.uid] = pref.sprite_accessories[acc_cat][acc][metadata_type]
 			save_accessories[accessory_category.uid][accessory.uid] = serialize_metadata
 
-	W.write("sprite_accessories",     save_accessories)
-	W.write("skin_tone",              pref.skin_tone)
-	W.write("skin_colour",            pref.skin_colour)
-	W.write("eye_colour",             pref.eye_colour)
-	W.write("b_type",                 pref.blood_type)
-	W.write("appearance_descriptors", pref.appearance_descriptors)
-	W.write("bgstate",                pref.bgstate)
+	writer.write("sprite_accessories",     save_accessories)
+	writer.write("skin_tone",              pref.skin_tone)
+	writer.write("skin_colour",            pref.skin_colour)
+	writer.write("eye_colour",             pref.eye_colour)
+	writer.write("b_type",                 pref.blood_type)
+	writer.write("appearance_descriptors", pref.appearance_descriptors)
+	writer.write("bgstate",                pref.bgstate)
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character()
 
-	var/decl/species/mob_species = get_species_by_key(pref.species)
+	var/decl/species/mob_species = pref.get_species_decl()
+	if(!mob_species || (mob_species.spawn_flags & SPECIES_IS_RESTRICTED))
+		pref.species = global.using_map.default_species
+		mob_species = pref.get_species_decl()
 	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 	if(mob_bodytype.appearance_flags & HAS_SKIN_COLOR)
 		pref.skin_colour = pref.skin_colour || mob_bodytype.base_color     || COLOR_BLACK
@@ -121,9 +171,6 @@
 		pref.eye_colour  = mob_bodytype.base_eye_color || COLOR_BLACK
 
 	pref.blood_type = sanitize_text(pref.blood_type, initial(pref.blood_type))
-
-	if(!pref.species || !(pref.species in get_playable_species()))
-		pref.species = global.using_map.default_species
 
 	if(!pref.blood_type || !(pref.blood_type in mob_species.blood_types))
 		pref.blood_type = pickweight(mob_species.blood_types)
@@ -149,9 +196,7 @@
 				for(var/metadata_type in acc_data)
 					var/decl/sprite_accessory_metadata/metadata = GET_DECL(metadata_type)
 					if(istype(metadata))
-						var/value = acc_data[metadata_type]
-						if(!metadata.validate_data(value))
-							acc_data[metadata_type] = metadata.default_value
+						acc_data[metadata_type] = metadata.sanitize_data(acc_data[metadata_type])
 					else
 						acc_data -= metadata_type
 
@@ -186,7 +231,7 @@
 /datum/category_item/player_setup_item/physical/body/content(var/mob/user)
 	. = list()
 
-	var/decl/species/mob_species = get_species_by_key(pref.species)
+	var/decl/species/mob_species = pref.get_species_decl()
 	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 	. += "Blood Type: <a href='byond://?src=\ref[src];blood_type=1'>[pref.blood_type]</a><br>"
 	. += "<a href='byond://?src=\ref[src];random=1'>Randomize Appearance</A><br>"
@@ -264,8 +309,8 @@
 				var/list/accessory_metadata = length(current_accessories) ? current_accessories[current_accessory] : accessory_decl.get_default_accessory_metadata()
 				var/list/metadata_strings = list()
 				for(var/metadata_type in accessory_decl.accessory_metadata_types)
-					var/decl/sprite_accessory_metadata/sam = GET_DECL(metadata_type)
-					metadata_strings += sam.get_metadata_options_string(src, accessory_cat_decl, accessory_decl, LAZYACCESS(accessory_metadata, metadata_type))
+					var/decl/sprite_accessory_metadata/metadata = GET_DECL(metadata_type)
+					metadata_strings += metadata.get_metadata_options_string(src, accessory_cat_decl, accessory_decl, LAZYACCESS(accessory_metadata, metadata_type))
 				var/acc_decl_ref = "\ref[accessory_decl]"
 				accessory_strings += "<tr>"
 				accessory_strings += "<td width = '100px'><b>[accessory_cat_decl.name]</b></td>"
@@ -287,8 +332,8 @@
 				var/list/accessory_metadata = current_accessories[accessory]
 				var/list/metadata_strings = list()
 				for(var/metadata_type in accessory_decl.accessory_metadata_types)
-					var/decl/sprite_accessory_metadata/sam = GET_DECL(metadata_type)
-					metadata_strings += sam.get_metadata_options_string(src, accessory_cat_decl, accessory_decl, LAZYACCESS(accessory_metadata, metadata_type))
+					var/decl/sprite_accessory_metadata/metadata = GET_DECL(metadata_type)
+					metadata_strings += metadata.get_metadata_options_string(src, accessory_cat_decl, accessory_decl, LAZYACCESS(accessory_metadata, metadata_type))
 				var/acc_decl_ref = "\ref[accessory_decl]"
 				accessory_strings += "<tr>"
 				accessory_strings += "<td width = '100px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_remove=1'>Remove</a></td>"
@@ -310,7 +355,7 @@
 
 /datum/category_item/player_setup_item/physical/body/OnTopic(var/href,var/list/href_list, var/mob/user)
 
-	var/decl/species/mob_species = get_species_by_key(pref.species)
+	var/decl/species/mob_species = pref.get_species_decl()
 	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 	if(href_list["set_descriptor"])
 
@@ -334,7 +379,7 @@
 	else if(href_list["blood_type"])
 		var/new_b_type = input(user, "Choose your character's blood type:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in mob_species.blood_types
 		if(new_b_type && CanUseTopic(user))
-			mob_species = get_species_by_key(pref.species)
+			mob_species = pref.get_species_decl()
 			if(new_b_type in mob_species.blood_types)
 				pref.blood_type = new_b_type
 				return TOPIC_REFRESH
@@ -443,7 +488,7 @@
 		if(!(mob_bodytype.appearance_flags & HAS_EYE_COLOR))
 			return TOPIC_NOACTION
 		var/new_eyes = input(user, "Choose your character's eye colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.eye_colour) as color|null
-		mob_species = get_species_by_key(pref.species)
+		mob_species = pref.get_species_decl()
 		mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 		if(new_eyes && (mob_bodytype.appearance_flags & HAS_EYE_COLOR) && CanUseTopic(user))
 			pref.eye_colour = new_eyes
@@ -453,7 +498,7 @@
 		if(!(mob_bodytype.appearance_flags & HAS_A_SKIN_TONE))
 			return TOPIC_NOACTION
 		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [mob_bodytype.max_skin_tone()]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.skin_tone) + 35) as num|null
-		mob_species = get_species_by_key(pref.species)
+		mob_species = pref.get_species_decl()
 		mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 		if(new_s_tone && (mob_bodytype.appearance_flags & HAS_A_SKIN_TONE) && CanUseTopic(user))
 			pref.skin_tone = 35 - max(min(round(new_s_tone), mob_bodytype.max_skin_tone()), 1)
@@ -463,7 +508,7 @@
 		if(!(mob_bodytype.appearance_flags & HAS_SKIN_COLOR))
 			return TOPIC_NOACTION
 		var/new_skin = input(user, "Choose your character's skin colour: ", CHARACTER_PREFERENCE_INPUT_TITLE, pref.skin_colour) as color|null
-		mob_species = get_species_by_key(pref.species)
+		mob_species = pref.get_species_decl()
 		mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 		if(new_skin && (mob_bodytype.appearance_flags & HAS_SKIN_COLOR) && CanUseTopic(user))
 			pref.skin_colour = new_skin

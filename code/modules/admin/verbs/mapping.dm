@@ -24,6 +24,7 @@
 var/global/camera_range_display_status = 0
 var/global/intercom_range_display_status = 0
 
+var/global/list/debug_camera_range_markers = list()
 /obj/effect/debugging/camera_range
 	icon = 'icons/480x480.dmi'
 	icon_state = "25percent"
@@ -33,10 +34,24 @@ var/global/intercom_range_display_status = 0
 	default_pixel_x = -224
 	default_pixel_y = -224
 	reset_offsets(0)
+	global.debug_camera_range_markers += src
 
+/obj/effect/debugging/camera_range/Destroy()
+	global.debug_camera_range_markers -= src
+	return ..()
+
+var/global/list/mapping_debugging_markers = list()
 /obj/effect/debugging/marker
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "yellow"
+
+/obj/effect/debugging/marker/Initialize(mapload)
+	. = ..()
+	global.mapping_debugging_markers += src
+
+/obj/effect/debugging/marker/Destroy()
+	global.mapping_debugging_markers -= src
+	return ..()
 
 /obj/effect/debugging/marker/Move()
 	return 0
@@ -56,7 +71,7 @@ var/global/intercom_range_display_status = 0
 
 
 
-	for(var/obj/effect/debugging/camera_range/C in world)
+	for(var/obj/effect/debugging/camera_range/C as anything in debug_camera_range_markers)
 		qdel(C)
 
 	if(camera_range_display_status)
@@ -93,8 +108,8 @@ var/global/intercom_range_display_status = 0
 		if(!T || !isturf(T) || !T.density )
 			if(!(locate(/obj/structure/grille,T)))
 				var/window_check = 0
-				for(var/obj/structure/window/W in T)
-					if (W.dir == turn(C1.dir,180) || (W.dir in list(NORTHEAST,SOUTHEAST,SOUTHWEST,NORTHWEST)) )
+				for(var/obj/structure/window/window in T)
+					if (window.dir == turn(C1.dir,180) || (window.dir in list(NORTHEAST,SOUTHEAST,SOUTHWEST,NORTHWEST)) )
 						window_check = 1
 						break
 				if(!window_check)
@@ -113,7 +128,7 @@ var/global/intercom_range_display_status = 0
 	else
 		intercom_range_display_status = 1
 
-	for(var/obj/effect/debugging/marker/M in world)
+	for(var/obj/effect/debugging/marker/M in global.mapping_debugging_markers)
 		qdel(M)
 
 	if(intercom_range_display_status)
@@ -150,7 +165,6 @@ var/global/list/debug_verbs = list (
 		/client/proc/hide_debug_verbs,
 		/client/proc/testZAScolors,
 		/client/proc/testZAScolors_remove,
-		/datum/admins/proc/setup_supermatter,
 		/datum/admins/proc/setup_fusion,
 		/client/proc/atmos_toggle_debug,
 		/client/proc/spawn_tanktransferbomb,

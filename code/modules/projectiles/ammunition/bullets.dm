@@ -115,7 +115,7 @@
 
 /obj/item/ammo_casing/shotgun/pellet
 	name = "shotgun shell"
-	desc = "A shotshell."
+	desc = "A shotgun shell."
 	icon = 'icons/obj/ammo/shells/buckshot.dmi'
 	icon_state = ICON_STATE_WORLD
 	projectile_type = /obj/item/projectile/bullet/pellet/shotgun

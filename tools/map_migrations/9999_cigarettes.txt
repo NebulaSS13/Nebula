@@ -1,0 +1,4 @@
+/obj/item/box/fancy/cigarettes/flash_powder : /obj/item/box/fancy/cigarettes/covert/flash_powder{@OLD}
+/obj/item/box/fancy/cigarettes/chemsmoke : /obj/item/box/fancy/cigarettes/covert/flash_powder{@OLD}
+/obj/item/box/fancy/cigarettes/mindbreak : /obj/item/box/fancy/cigarettes/covert/flash_powder{@OLD}
+/obj/item/box/fancy/cigarettes/tricord : /obj/item/box/fancy/cigarettes/covert/flash_powder{@OLD}

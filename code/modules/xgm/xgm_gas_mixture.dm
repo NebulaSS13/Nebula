@@ -8,12 +8,12 @@
 	//Sum of all the gas moles in this mix.  Updated by update_values()
 	var/total_moles = 0
 	//Volume of this mix.
-	var/volume = CELL_VOLUME
+	var/total_volume = CELL_VOLUME
 	//Size of the group this gas_mixture is representing.  1 for singletons.
 	var/group_multiplier = 1
 
 	//List of active tile overlays for this gas_mixture.  Updated by check_tile_graphic()
-	var/list/graphic = list()
+	var/list/graphic
 	//Cache of gas overlay objects
 	var/list/tile_overlay_cache
 	///The last cached color of the gas mixture
@@ -21,19 +21,17 @@
 
 /datum/gas_mixture/New(_volume, _temperature, _group_multiplier)
 	if(!isnull(_volume))
-		volume = _volume
+		total_volume = _volume
 	if(!isnull(_temperature))
 		temperature = _temperature
 	if(!isnull(_group_multiplier))
 		group_multiplier = _group_multiplier
 
 	//Since we may have values defined on creation, update everything.
-	if(volume && length(gas))
+	if(total_volume && length(gas))
 		update_values()
 
 /datum/gas_mixture/proc/get_gas(gasid)
-	if(!gas.len)
-		return 0 //if the list is empty BYOND treats it as a non-associative list, which runtimes
 	return gas[gasid] * group_multiplier
 
 /datum/gas_mixture/proc/get_total_moles()
@@ -74,17 +72,6 @@
 	if(update)
 		update_values()
 
-
-//Variadic version of adjust_gas().  Takes any number of gas and mole pairs and applies them.
-/datum/gas_mixture/proc/adjust_multi()
-	ASSERT(!(args.len % 2))
-
-	for(var/i = 1; i < args.len; i += 2)
-		adjust_gas(args[i], args[i+1], update = 0)
-
-	update_values()
-
-
 /// Merges all the gas from another mixture into this one.  Respects group_multipliers and adjusts temperature correctly.
 /// Does not modify giver in any way.
 /datum/gas_mixture/proc/merge(const/datum/gas_mixture/giver)
@@ -120,9 +107,9 @@
 
 	for(var/g in gas|sharer.gas)
 		var/comb = gas[g] + sharer.gas[g]
-		comb /= volume + sharer.volume
-		gas[g] = comb * volume
-		sharer.gas[g] = comb * sharer.volume
+		comb /= total_volume + sharer.total_volume
+		gas[g] = comb * total_volume
+		sharer.gas[g] = comb * sharer.total_volume
 
 	if(our_heatcap + share_heatcap)
 		temperature = ((temperature * our_heatcap) + (sharer.temperature * share_heatcap)) / (our_heatcap + share_heatcap)
@@ -193,7 +180,7 @@
 	which is bit more realistic (natural log), and returns a fairly accurate entropy around room temperatures and pressures.
 */
 /datum/gas_mixture/proc/specific_entropy_gas(var/gasid)
-	if (!(gasid in gas) || gas[gasid] == 0)
+	if (!gas[gasid])
 		return SPECIFIC_ENTROPY_VACUUM	//that gas isn't here
 
 	//group_multiplier gets divided out in volume/gas[gasid] - also, V/(m*T) = R/(partial pressure)
@@ -201,7 +188,7 @@
 	var/molar_mass = mat.molar_mass
 	var/specific_heat = mat.gas_specific_heat
 	var/safe_temp = max(temperature, TCMB) // We're about to divide by this.
-	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*volume/(gas[gasid] * safe_temp)) * (molar_mass*specific_heat*safe_temp)**(2/3) + 1 ) +  15 )
+	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*total_volume/(gas[gasid] * safe_temp)) * (molar_mass*specific_heat*safe_temp)**(2/3) + 1 ) +  15 )
 
 	//alternative, simpler equation
 	//var/partial_pressure = gas[gasid] * R_IDEAL_GAS_EQUATION * temperature / volume
@@ -222,8 +209,8 @@
 
 //Returns the pressure of the gas mix.  Only accurate if there have been no gas modifications since update_values() has been called.
 /datum/gas_mixture/proc/return_pressure()
-	if(volume)
-		return total_moles * R_IDEAL_GAS_EQUATION * temperature / volume
+	if(total_volume)
+		return total_moles * R_IDEAL_GAS_EQUATION * temperature / total_volume
 	return 0
 
 
@@ -262,7 +249,7 @@
 		gas[g] = gas[g] * (1 - ratio)
 
 	removed.temperature = temperature
-	removed.volume = volume * group_multiplier / out_group_multiplier
+	removed.total_volume = total_volume * group_multiplier / out_group_multiplier
 	update_values()
 	removed.update_values()
 
@@ -270,8 +257,8 @@
 
 //Removes a volume of gas from the mixture and returns a gas_mixture containing the removed air with the given volume
 /datum/gas_mixture/proc/remove_volume(removed_volume)
-	var/datum/gas_mixture/removed = remove_ratio(removed_volume/(volume*group_multiplier), 1)
-	removed.volume = removed_volume
+	var/datum/gas_mixture/removed = remove_ratio(removed_volume/(total_volume*group_multiplier), 1)
+	removed.total_volume = removed_volume
 	return removed
 
 //Removes moles from the gas mixture, limited by a given flag.  Returns a gax_mixture containing the removed air.
@@ -318,7 +305,7 @@
 	return 1
 
 /datum/gas_mixture/GetCloneArgs()
-	return list(volume, temperature, group_multiplier)
+	return list(total_volume, temperature, group_multiplier)
 
 /datum/gas_mixture/PopulateClone(datum/gas_mixture/clone)
 	clone.gas         = gas.Copy()
@@ -367,9 +354,10 @@
 //Two lists can be passed by reference if you need know specifically which graphics were added and removed.
 // Returns TRUE if the graphics list was mutated.
 /datum/gas_mixture/proc/check_tile_graphic(list/graphic_add = null, list/graphic_remove = null)
-	for(var/obj/effect/gas_overlay/O in graphic)
-		if(gas[O.material.type] <= O.material.gas_overlay_limit)
-			LAZYADD(graphic_remove, O)
+	if(LAZYLEN(graphic))
+		for(var/obj/effect/gas_overlay/O in graphic)
+			if(gas[O.material.type] <= O.material.gas_overlay_limit)
+				LAZYADD(graphic_remove, O)
 	for(var/g in gas)
 		//Overlay isn't applied for this gas, check if it's valid and needs to be added.
 		var/decl/material/mat = GET_DECL(g)
@@ -381,13 +369,13 @@
 				LAZYADD(graphic_add, tile_overlay)
 	. = FALSE
 	//Apply changes
-	if(graphic_add && graphic_add.len)
-		graphic |= graphic_add
+	if(LAZYLEN(graphic_add))
+		LAZYADD(graphic, graphic_add)
 		. = TRUE
-	if(graphic_remove && graphic_remove.len)
-		graphic -= graphic_remove
+	if(LAZYLEN(graphic_remove))
+		LAZYREMOVE(graphic, graphic_remove)
 		. = TRUE
-	if(graphic.len)
+	if(LAZYLEN(graphic))
 		var/pressure_mod = clamp(return_pressure() / ONE_ATMOSPHERE, 0, 2)
 		for(var/obj/effect/gas_overlay/O in graphic)
 			var/concentration_mod = clamp(gas[O.material.type] / total_moles, 0.1, 1)
@@ -473,7 +461,7 @@
 
 	var/list/total_gas = list()
 	for(var/datum/gas_mixture/gasmix in gases)
-		total_volume += gasmix.volume
+		total_volume += gasmix.total_volume
 		var/temp_heatcap = gasmix.heat_capacity()
 		total_thermal_energy += gasmix.temperature * temp_heatcap
 		total_heat_capacity += temp_heatcap
@@ -500,7 +488,7 @@
 		for(var/datum/gas_mixture/gasmix in gases)
 			gasmix.gas = combined.gas.Copy()
 			gasmix.temperature = combined.temperature
-			gasmix.multiply(gasmix.volume)
+			gasmix.multiply(gasmix.total_volume)
 
 	return 1
 

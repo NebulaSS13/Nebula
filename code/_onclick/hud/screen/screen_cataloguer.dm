@@ -31,8 +31,8 @@
 		QDEL_NULL(holder_image)
 	return ..()
 
-/obj/screen/scan_radius/on_update_icon()
-	cut_overlays()
+/obj/screen/scan_radius/rebuild_screen_overlays()
+	..()
 	if(scan_range <= 1)
 		add_overlay("single")
 	else
@@ -79,5 +79,3 @@
 			I.pixel_x = world.icon_size * i
 			I.pixel_y = pixel_bound
 			add_overlay(I)
-
-	compile_overlays()

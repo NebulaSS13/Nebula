@@ -1,3 +1,7 @@
+#ifndef MODPACK_SCALING_MODIFIERS
+#define MODPACK_SCALING_MODIFIERS
+#endif
+
 // These values were reverse-engineered from Polaris, where they apparently
 // took quite a lot of fiddling to get looking nice. Cheers to whoever did that.
 /decl/bodytype

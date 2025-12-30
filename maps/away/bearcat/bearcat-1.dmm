@@ -210,7 +210,7 @@
 /obj/effect/floor_decal/industrial/loading{
 	dir = 1
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4
 	},
 /obj/structure/cable{
@@ -272,7 +272,7 @@
 /obj/effect/floor_decal/industrial/loading{
 	dir = 1
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 8
 	},
 /obj/structure/cable{
@@ -395,7 +395,7 @@
 	pixel_x = 24;
 	dir = 8
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /turf/floor/usedup,
@@ -414,7 +414,7 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 9
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -472,7 +472,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/lower)
 "bf" = (
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/structure/cable{
@@ -894,6 +894,7 @@
 "bX" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/item/frame/light/small,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/floor/usedup,
 /area/ship/scrap/broken2)
 "bY" = (
@@ -905,9 +906,10 @@
 	pixel_x = 24;
 	dir = 8
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
+/obj/structure/closet/crate/uranium,
 /turf/floor/usedup,
 /area/ship/scrap/broken2)
 "bZ" = (
@@ -1010,7 +1012,7 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/effect/decal/cleanable/cobweb,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /turf/floor/tiled/dark/airless,
@@ -1351,7 +1353,7 @@
 	pixel_x = 24;
 	dir = 8
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/item/radio/intercom{
@@ -1461,7 +1463,7 @@
 /obj/random/gloves,
 /obj/random/clothing,
 /obj/random/clothing,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /turf/floor/tiled/dark/airless,
@@ -1624,6 +1626,8 @@
 /obj/item/clothing/glasses/welding,
 /obj/item/stack/cable_coil,
 /obj/item/stack/cable_coil,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/broken1)
 "dy" = (
@@ -1748,7 +1752,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc/derelict,
+/obj/machinery/apc/derelict,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -1977,9 +1981,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/storage)
 "ej" = (
-/obj/structure/rack,
-/obj/item/tank/jetpack/oxygen,
-/obj/item/clothing/mask/breath,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/eva)
 "ek" = (
@@ -1991,10 +1993,12 @@
 /obj/structure/rack,
 /obj/item/tank/jetpack/oxygen,
 /obj/item/clothing/mask/breath,
+/obj/item/tank/jetpack/oxygen,
+/obj/item/clothing/mask/breath,
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/eva)
 "el" = (
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/yellow{
@@ -2251,7 +2255,7 @@
 /obj/item/stock_parts/micro_laser,
 /obj/item/stock_parts/micro_laser/ultra,
 /obj/structure/rack,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -2360,7 +2364,7 @@
 /obj/item/box/lights/bulbs,
 /obj/item/box/lights/mixed,
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	name = "Tools Storage APC"
 	},
 /obj/effect/floor_decal/corner/yellow{
@@ -2384,7 +2388,7 @@
 /obj/item/stack/tape_roll/duct_tape,
 /obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
-/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/rods/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/panel/mapped/plastic/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
@@ -2393,6 +2397,9 @@
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eT" = (
@@ -2417,6 +2424,7 @@
 "eW" = (
 /obj/machinery/suit_cycler,
 /obj/machinery/light/small,
+/obj/item/clothing/shoes/magboots,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/eva)
 "eX" = (
@@ -2426,6 +2434,7 @@
 	pixel_x = 24;
 	req_access = newlist()
 	},
+/obj/item/clothing/shoes/magboots,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/eva)
 "eY" = (

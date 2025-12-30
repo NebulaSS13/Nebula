@@ -116,23 +116,17 @@
 		return
 	return !add_material(dropping, user)
 
-/obj/machinery/fuel_compressor/attackby(var/obj/item/thing, var/mob/user)
-	return add_material(thing, user) || ..()
+/obj/machinery/fuel_compressor/attackby(var/obj/item/used_item, var/mob/user)
+	return add_material(used_item, user) || ..()
 
 /obj/machinery/fuel_compressor/proc/add_material(var/obj/item/thing, var/mob/user)
-	if(istype(thing) && thing.reagents && thing.reagents.total_volume && ATOM_IS_OPEN_CONTAINER(thing))
-		for(var/R in thing.reagents.reagent_volumes)
-			var/taking_reagent = REAGENT_VOLUME(thing.reagents, R)
-			thing.remove_from_reagents(R, taking_reagent)
-			stored_material[R] += taking_reagent
+	if(istype(thing) && thing.reagents && REAGENT_TOTAL_VOLUME(thing.reagents) && ATOM_IS_OPEN_CONTAINER(thing))
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(thing.reagents))
+			var/taking_reagent = REAGENT_VOLUME(thing.reagents, reagent)
+			thing.remove_from_reagents(reagent, taking_reagent)
+			stored_material[reagent.type] += taking_reagent
 
 		to_chat(user, SPAN_NOTICE("You add the contents of \the [thing] to \the [src]'s material buffer."))
-		return TRUE
-
-	if(istype(thing, /obj/machinery/power/supermatter/shard))
-		stored_material[/decl/material/solid/exotic_matter] = 5 * SHEET_MATERIAL_AMOUNT
-		to_chat(user, SPAN_NOTICE("You awkwardly cram \the [thing] into \the [src]'s material buffer."))
-		qdel(thing)
 		return TRUE
 
 	if(istype(thing, /obj/item/stack/material))

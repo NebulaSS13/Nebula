@@ -18,14 +18,14 @@
 		A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped") // Basic attack.
 		return TRUE
 
-	if(a_intent == I_HELP)
+	if(check_intent(I_FLAG_HELP))
 		M.visible_message( \
 			SPAN_NOTICE("\The [src] gently pokes \the [M]."), \
 			SPAN_NOTICE("\The [src] gently pokes you."))
 		return TRUE
 
 	var/power = max(0, min(10, (powerlevel + rand(0, 3))))
-	if(a_intent == I_DISARM)
+	if(check_intent(I_FLAG_DISARM))
 		var/stun_prob = 1
 		if(powerlevel > 0 && !isslime(A))
 			switch(power * 10)
@@ -46,10 +46,10 @@
 			SET_STATUS_MAX(src, STAT_WEAK, (power * 0.5))
 		return TRUE
 
-	if(a_intent == I_GRAB && slime_attach(M))
+	if(check_intent(I_FLAG_GRAB) && slime_attach(M))
 		return TRUE
 
-	if(a_intent == I_HURT)
+	if(check_intent(I_FLAG_HARM))
 		if(prob(15) && !M.current_posture.prone)
 			M.visible_message( \
 				SPAN_DANGER("\The [src] pounces at \the [M]!"), \

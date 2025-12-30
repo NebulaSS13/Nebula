@@ -27,23 +27,23 @@
 	for(var/organ_tag in bodytype.has_organ)
 		var/obj/item/organ/I = GET_INTERNAL_ORGAN(H, organ_tag)
 		if(!istype(I))
-			fail("[bodytype.name] failed to register internal organ for tag \"[organ_tag]\" to organ list.")
+			fail("[bodytype.type] failed to register internal organ for tag \"[organ_tag]\" to organ list.")
 			. = 0
 			continue
 		if(!(I in H.get_internal_organs()))
-			fail("[bodytype.name] failed to register internal organ for tag \"[organ_tag]\" to internal_organs.")
+			fail("[bodytype.type] failed to register internal organ for tag \"[organ_tag]\" to internal_organs.")
 			. = 0
 			continue
 		var/req_type = bodytype.has_organ[organ_tag]
 		if(!istype(I, req_type))
-			fail("[bodytype.name] incorrect type of internal organ created for tag \"[organ_tag]\". Expected [req_type], found [I.type].")
+			fail("[bodytype.type] incorrect type of internal organ created for tag \"[organ_tag]\". Expected [req_type], found [I.type].")
 			. = 0
 			continue
 		if(I.organ_tag != organ_tag)
-			fail("[bodytype.name] internal organ tag mismatch. Registered as \"[organ_tag]\", actual tag was \"[I.organ_tag]\".")
+			fail("[bodytype.type] internal organ tag mismatch. Registered as \"[organ_tag]\", actual tag was \"[I.organ_tag]\".")
 			. = 0
 		if(!isnum(I.absolute_max_damage) || I.absolute_max_damage <= 0)
-			fail("[bodytype.name] internal organ has invalid absolute_max_damage value ([I.absolute_max_damage]).")
+			fail("[bodytype.type] internal organ has invalid absolute_max_damage value ([I.absolute_max_damage]).")
 			. = 0
 
 /datum/unit_test/bodytype_organ_creation/proc/check_external_organs(var/mob/living/human/H, var/decl/bodytype/bodytype)
@@ -51,24 +51,24 @@
 	for(var/organ_tag in bodytype.has_limbs)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, organ_tag)
 		if(!istype(E))
-			fail("[bodytype.name] failed to register external organ for tag \"[organ_tag]\" to organs_by_name.")
+			fail("[bodytype.type] failed to register external organ for tag \"[organ_tag]\" to organs_by_name.")
 			. = 0
 			continue
 		if(!(E in H.get_external_organs()))
-			fail("[bodytype.name] failed to register external organ for tag \"[organ_tag]\" to organs.")
+			fail("[bodytype.type] failed to register external organ for tag \"[organ_tag]\" to organs.")
 			. = 0
 			continue
 		var/list/organ_data = bodytype.has_limbs[organ_tag]
 		var/req_type = organ_data["path"]
 		if(!istype(E, req_type))
-			fail("[bodytype.name] incorrect type of external organ created for tag \"[organ_tag]\". Expected [req_type], found [E.type].")
+			fail("[bodytype.type] incorrect type of external organ created for tag \"[organ_tag]\". Expected [req_type], found [E.type].")
 			. = 0
 			continue
 		if(E.organ_tag != organ_tag)
-			fail("[bodytype.name] external organ tag mismatch. Registered as \"[organ_tag]\", actual tag was \"[E.organ_tag]\".")
+			fail("[bodytype.type] external organ tag mismatch. Registered as \"[organ_tag]\", actual tag was \"[E.organ_tag]\".")
 			. = 0
 		if(!isnum(E.absolute_max_damage) || E.absolute_max_damage <= 0)
-			fail("[bodytype.name] external organ has invalid absolute_max_damage value ([E.absolute_max_damage]).")
+			fail("[bodytype.type] external organ has invalid absolute_max_damage value ([E.absolute_max_damage]).")
 			. = 0
 
 /datum/unit_test/bodytype_organ_creation/proc/check_organ_parents(var/mob/living/human/H, var/decl/bodytype/bodytype)
@@ -79,47 +79,51 @@
 			continue
 		var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, E.parent_organ)
 		if(!istype(parent))
-			fail("[bodytype.name] external organ [E] could not find its parent in organs_by_name. Parent tag was \"[E.parent_organ]\".")
+			fail("[bodytype.type] external organ [E] could not find its parent in organs_by_name. Parent tag was \"[E.parent_organ]\".")
 			. = 0
 			continue
 		if(!(parent in external_organs))
-			fail("[bodytype.name] external organ [E] could not find its parent in organs. Parent was [parent](parent.type). Parent tag was \"[E.parent_organ]\".")
+			fail("[bodytype.type] external organ [E] could not find its parent in organs. Parent was [parent](parent.type). Parent tag was \"[E.parent_organ]\".")
 			. = 0
 			continue
 		if(E.parent != parent)
-			fail("[bodytype.name] external organ [E] parent mismatch. Parent reference was [E.parent] with tag \"[E.parent? E.parent.organ_tag : "N/A"]\". Parent was [parent](parent.type). Parent tag was \"[E.parent_organ]\".")
+			fail("[bodytype.type] external organ [E] parent mismatch. Parent reference was [E.parent] with tag \"[E.parent? E.parent.organ_tag : "N/A"]\". Parent was [parent](parent.type). Parent tag was \"[E.parent_organ]\".")
 			. = 0
 			continue
 		if(!(E in parent.children))
-			fail("[bodytype.name] external organ [E] was not found in parent's children. Parent was [parent]. Parent tag was \"[E.parent_organ]\".")
+			fail("[bodytype.type] external organ [E] was not found in parent's children. Parent was [parent]. Parent tag was \"[E.parent_organ]\".")
 			. = 0
 			continue
 
 	for(var/obj/item/organ/internal/I in H.get_internal_organs())
 		if(!I.parent_organ)
-			fail("[bodytype.name] internal organ [I] did not have a parent_organ tag.")
+			fail("[bodytype.type] internal organ [I] did not have a parent_organ tag.")
 			. = 0
 			continue
 		var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, I.parent_organ)
 		if(!istype(parent))
-			fail("[bodytype.name] internal organ [I] could not find its parent in organs_by_name. Parent tag was \"[I.parent_organ]\".")
+			fail("[bodytype.type] internal organ [I] could not find its parent in organs_by_name. Parent tag was \"[I.parent_organ]\".")
 			. = 0
 			continue
 		if(!(parent in external_organs))
-			fail("[bodytype.name] internal organ [I] could not find its parent in organs. Parent was [parent]. Parent tag was \"[I.parent_organ]\".")
+			fail("[bodytype.type] internal organ [I] could not find its parent in organs. Parent was [parent]. Parent tag was \"[I.parent_organ]\".")
 			. = 0
 			continue
 		if(!(I in parent.internal_organs))
-			fail("[bodytype.name] internal organ [I] was not found in parent's internal_organs. Parent was [parent]. Parent tag was \"[I.parent_organ]\".")
+			fail("[bodytype.type] internal organ [I] was not found in parent's internal_organs. Parent was [parent]. Parent tag was \"[I.parent_organ]\".")
 			. = 0
 			continue
 
 /datum/unit_test/bodytype_organ_creation/start_test()
 	var/failcount = 0
-	var/list/bodytype_pairings = get_bodytype_species_pairs()
-	for(var/decl/bodytype/bodytype in bodytype_pairings)
-		var/decl/species/species = bodytype_pairings[bodytype]
-		var/mob/living/human/test_subject = new(null, species.name, null, bodytype)
+	var/datum/mob_snapshot/dummy_appearance = new
+	for(var/decl/bodytype/bodytype in decls_repository.get_decls_of_subtype_unassociated(/decl/bodytype))
+		var/decl/species/species = bodytype.get_user_species_for_validation()
+		if(!species)
+			continue
+		dummy_appearance.root_species  = species
+		dummy_appearance.root_bodytype = bodytype
+		var/mob/living/human/test_subject = new(null, species.uid, dummy_appearance)
 
 		var/fail = 0
 		fail |= !check_internal_organs(test_subject, bodytype)
@@ -127,6 +131,7 @@
 		fail |= !check_organ_parents(test_subject, bodytype)
 
 		if(fail) failcount++
+	QDEL_NULL(dummy_appearance)
 
 	if(failcount)
 		fail("[failcount] bodytypes were created with invalid organ configuration.")
@@ -141,88 +146,87 @@
 /datum/unit_test/bodytype_organ_lists_update/proc/check_internal_organ_present(var/mob/living/human/H, var/obj/item/organ/internal/I)
 	var/decl/bodytype/root_bodytype = H.get_bodytype()
 	if(!(I in H.get_internal_organs()))
-		fail("[root_bodytype.name] internal organ [I] not in internal_organs.")
+		fail("[root_bodytype.type] internal organ [I] not in internal_organs.")
 		return 0
 	var/found = GET_INTERNAL_ORGAN(H, I.organ_tag)
 	if(I != found)
-		fail("[root_bodytype.name] internal organ [I] not in organ list. Organ tag was \"[I.organ_tag]\", found [found? found : "nothing"] instead.")
+		fail("[root_bodytype.type] internal organ [I] not in organ list. Organ tag was \"[I.organ_tag]\", found [found? found : "nothing"] instead.")
 		return 0
 	var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, I.parent_organ)
 	if(!istype(parent))
-		fail("[root_bodytype.name] internal organ [I] could not find its parent in organs_by_name. Parent tag was \"[I.parent_organ]\".")
+		fail("[root_bodytype.type] internal organ [I] could not find its parent in organs_by_name. Parent tag was \"[I.parent_organ]\".")
 		return 0
 	if(!(I in parent.internal_organs))
-		fail("[root_bodytype.name] internal organ [I] was not in parent's internal_organs. Parent was [parent]. Parent tag was \"[I.parent_organ]\".")
+		fail("[root_bodytype.type] internal organ [I] was not in parent's internal_organs. Parent was [parent]. Parent tag was \"[I.parent_organ]\".")
 		return 0
 	return 1
 
 /datum/unit_test/bodytype_organ_lists_update/proc/check_internal_organ_removed(var/mob/living/human/H, var/obj/item/organ/internal/I, var/obj/item/organ/external/old_parent)
 	var/decl/bodytype/root_bodytype = H.get_bodytype()
 	if(I in H.get_internal_organs())
-		fail("[root_bodytype.name] internal organ [I] was not removed from internal_organs.")
+		fail("[root_bodytype.type] internal organ [I] was not removed from internal_organs.")
 		return 0
 	var/found = GET_INTERNAL_ORGAN(H, I.organ_tag)
 	if(found)
-		fail("[root_bodytype.name] internal organ [I] was not removed from organ list. Organ tag was \"[I.organ_tag]\".")
+		fail("[root_bodytype.type] internal organ [I] was not removed from organ list. Organ tag was \"[I.organ_tag]\".")
 		return 0
 	if(I in old_parent.internal_organs)
-		fail("[root_bodytype.name] internal organ [I] was not removed from parent's internal_organs. Parent was [old_parent].")
+		fail("[root_bodytype.type] internal organ [I] was not removed from parent's internal_organs. Parent was [old_parent].")
 		return 0
 	return 1
 
 /datum/unit_test/bodytype_organ_lists_update/proc/check_external_organ_present(var/mob/living/human/H, var/obj/item/organ/external/E)
 	var/decl/bodytype/root_bodytype = H.get_bodytype()
 	if(!(E in H.get_external_organs()))
-		fail("[root_bodytype.name] external organ [E] not in organs.")
+		fail("[root_bodytype.type] external organ [E] not in organs.")
 		return 0
 	var/found = GET_EXTERNAL_ORGAN(H, E.organ_tag)
 	if(E != found)
-		fail("[root_bodytype.name] external organ [E] not in organ list. Organ tag was \"[E.organ_tag]\", found [found? found : "nothing"] instead.")
+		fail("[root_bodytype.type] external organ [E] not in organ list. Organ tag was \"[E.organ_tag]\", found [found? found : "nothing"] instead.")
 		return 0
 	if(E.parent_organ)
 		var/obj/item/organ/external/parent = E.parent
 		if(!istype(parent))
-			fail("[root_bodytype.name] external organ [E] had no parent. Parent tag was \"[E.parent_organ]\".")
+			fail("[root_bodytype.type] external organ [E] had no parent. Parent tag was \"[E.parent_organ]\".")
 			return 0
 		if(parent.organ_tag != E.parent_organ)
-			fail("[root_bodytype.name] external organ [E] parent tag mismatch. Parent tag was \"[E.parent_organ]\", actual tag was \"[parent.organ_tag]\".")
+			fail("[root_bodytype.type] external organ [E] parent tag mismatch. Parent tag was \"[E.parent_organ]\", actual tag was \"[parent.organ_tag]\".")
 			return 0
 		if(!(E in parent.children))
-			fail("[root_bodytype.name] external organ [E] was not in parent's children. Parent was [parent]. Parent tag was \"[E.parent_organ]\".")
+			fail("[root_bodytype.type] external organ [E] was not in parent's children. Parent was [parent]. Parent tag was \"[E.parent_organ]\".")
 			return 0
 	return 1
 
 /datum/unit_test/bodytype_organ_lists_update/proc/check_external_organ_removed(var/mob/living/human/H, var/obj/item/organ/external/E, var/obj/item/organ/external/old_parent = null)
 	var/decl/bodytype/root_bodytype = H.get_bodytype()
 	if(E in H.get_external_organs())
-		fail("[root_bodytype.name] external organ [E] was not removed from organs.")
+		fail("[root_bodytype.type] external organ [E] was not removed from organs.")
 		return 0
 	var/found = GET_EXTERNAL_ORGAN(H, E.organ_tag)
 	if(found)
-		fail("[root_bodytype.name] external organ [E] was not removed from organs_by_name. Organ tag was \"[E.organ_tag]\".")
+		fail("[root_bodytype.type] external organ [E] was not removed from organs_by_name. Organ tag was \"[E.organ_tag]\".")
 		return 0
-	if(old_parent)
-		if(!(E in old_parent.children))
-			fail("[root_bodytype.name] external organ [E] was not removed from parent's children. Parent was [old_parent].")
-			return 0
+	if(old_parent && (E in old_parent.children))
+		fail("[root_bodytype.type] external organ [E] was not removed from parent's children. Parent was [old_parent].")
+		return 0
 	return 1
 
 /datum/unit_test/bodytype_organ_lists_update/proc/test_internal_organ(var/mob/living/human/H, var/obj/item/organ/internal/I)
 	var/decl/bodytype/root_bodytype = H.get_bodytype()
 	if(!check_internal_organ_present(H, I))
-		fail("[root_bodytype.name] internal organ [I] failed initial presence check.")
+		fail("[root_bodytype.type] internal organ [I] failed initial presence check.")
 		return 0
 
 	var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, I.parent_organ)
 
 	H.remove_organ(I)
 	if(!check_internal_organ_removed(H, I, parent))
-		fail("[root_bodytype.name] internal organ [I] was not removed correctly.")
+		fail("[root_bodytype.type] internal organ [I] was not removed correctly.")
 		return 0
 
 	H.add_organ(I, parent)
 	if(!check_internal_organ_present(H, I))
-		fail("[root_bodytype.name] internal organ [I] was not replaced correctly.")
+		fail("[root_bodytype.type] internal organ [I] was not replaced correctly.")
 		return 0
 
 	return 1
@@ -230,37 +234,48 @@
 /datum/unit_test/bodytype_organ_lists_update/proc/test_external_organ(var/mob/living/human/H, var/obj/item/organ/external/E)
 	var/decl/bodytype/root_bodytype = H.get_bodytype()
 	if(!check_external_organ_present(H, E))
-		fail("[root_bodytype.name] external organ [E] failed initial presence check.")
+		fail("[root_bodytype.type] external organ [E] failed initial presence check.")
 		return 0
 
 	var/obj/item/organ/external/parent = E.parent
 
-	H.remove_organ(E)
+	H.remove_organ(E, drop_organ = FALSE, ignore_children = TRUE)
 	if(!check_external_organ_removed(H, E, parent))
-		fail("[root_bodytype.name] external organ [E] was not removed correctly.")
+		fail("[root_bodytype.type] external organ [E] was not removed correctly.")
 		return 0
 
 	H.add_organ(E)
-	if(!check_external_organ_removed(H, E))
-		fail("[root_bodytype.name] external organ [E] was not replaced correctly.")
+	if(!check_external_organ_present(H, E))
+		fail("[root_bodytype.type] external organ [E] was not replaced correctly.")
 		return 0
 
 	return 1
 
 /datum/unit_test/bodytype_organ_lists_update/start_test()
 	var/failcount = 0
-	var/list/bodytype_pairings = get_bodytype_species_pairs()
-	for(var/decl/bodytype/bodytype in bodytype_pairings)
-		var/decl/species/species = bodytype_pairings[bodytype]
-		var/mob/living/human/test_subject = new(null, species.name, null, bodytype)
+	var/datum/mob_snapshot/dummy_appearance = new
+	for(var/decl/bodytype/bodytype in decls_repository.get_decls_of_subtype_unassociated(/decl/bodytype))
+		var/decl/species/species = bodytype.get_user_species_for_validation()
+		if(!species)
+			continue
+		dummy_appearance.root_species  = species
+		dummy_appearance.root_bodytype = bodytype
+		var/mob/living/human/test_subject = new(null, species.uid, dummy_appearance)
 
 		for(var/O in test_subject.get_internal_organs())
 			if(!test_internal_organ(test_subject, O))
 				failcount++
 
-		for(var/O in test_subject.get_external_organs())
-			if(!test_external_organ(test_subject, O))
+		var/list/external_organs_by_depth = list()
+		for(var/obj/item/organ/external/external_organ in test_subject.get_external_organs())
+			external_organs_by_depth[external_organ] = bodytype.has_limbs?[external_organ.organ_tag]?["has_children"] || 0
+		// sort from least to most children, so 0-child organs are first, then 1, then 2, etc.
+		external_organs_by_depth = sortTim(external_organs_by_depth, /proc/cmp_numeric_asc, TRUE)
+		// test from leaf nodes towards root nodes, because this can be destructive if we remove an organ with children
+		for(var/obj/item/organ/external/external_organ in external_organs_by_depth)
+			if(!test_external_organ(test_subject, external_organ))
 				failcount++
+	QDEL_NULL(dummy_appearance)
 
 	if(failcount)
 		fail("[failcount] organs failed to be removed and replaced correctly.")

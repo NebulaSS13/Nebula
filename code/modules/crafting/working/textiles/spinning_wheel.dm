@@ -24,16 +24,16 @@
 /obj/structure/working/spinning_wheel/proc/can_process(obj/item/thing)
 	return istype(thing) && thing.has_textile_fibers()
 
-/obj/structure/working/spinning_wheel/try_take_input(obj/item/W, mob/user)
+/obj/structure/working/spinning_wheel/try_take_input(obj/item/used_item, mob/user)
 
-	if(istype(W.storage))
+	if(istype(used_item.storage))
 		var/list/loading_growns = list()
-		for(var/obj/item/thing in W.get_stored_inventory())
+		for(var/obj/item/thing in used_item.get_stored_inventory())
 			if(can_process(thing))
 				loading_growns += thing
 
 		if(!length(loading_growns))
-			to_chat(user, SPAN_WARNING("Nothing in \the [W] is suitable for processing on \the [src]."))
+			to_chat(user, SPAN_WARNING("Nothing in \the [used_item] is suitable for processing on \the [src]."))
 			return TRUE
 
 		if(length(loaded) >= MAX_LOADED)
@@ -42,24 +42,24 @@
 
 		var/loaded_items = 0
 		for(var/obj/item/thing as anything in loading_growns)
-			if(W.storage.remove_from_storage(thing, src, TRUE))
+			if(used_item.storage.remove_from_storage(thing, src, TRUE))
 				loaded_items++
 				LAZYADD(loaded, thing)
 				if(length(loaded) >= MAX_LOADED)
 					break
 		if(loaded_items)
-			W.storage.finish_bulk_removal()
-			to_chat(user, SPAN_NOTICE("You prepare \the [src] with [loaded_items] items from \the [W]."))
+			used_item.storage.finish_bulk_removal()
+			to_chat(user, SPAN_NOTICE("You prepare \the [src] with [loaded_items] items from \the [used_item]."))
 			update_icon()
 		return TRUE
 
-	if(can_process(W))
+	if(can_process(used_item))
 		if(length(loaded) >= MAX_LOADED)
 			to_chat(user, SPAN_WARNING("\The [src] is already fully stocked and ready for spinning."))
 			return TRUE
-		if(user.try_unequip(W, src))
-			LAZYADD(loaded, W)
-			to_chat(user, SPAN_NOTICE("You prepare \the [src] with \the [W]."))
+		if(user.try_unequip(used_item, src))
+			LAZYADD(loaded, used_item)
+			to_chat(user, SPAN_NOTICE("You prepare \the [src] with \the [used_item]."))
 			update_icon()
 		return TRUE
 	return TRUE
@@ -121,7 +121,7 @@
 	return TRUE
 
 /obj/structure/working/spinning_wheel/try_unload_material(mob/user)
-	if(user.a_intent == I_GRAB)
+	if(user.check_intent(I_FLAG_GRAB))
 		if(!length(loaded))
 			to_chat(user, SPAN_WARNING("\The [src] has no fibers to remove."))
 		else

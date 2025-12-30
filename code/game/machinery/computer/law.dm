@@ -4,13 +4,12 @@
 	icon_screen = "command"
 	var/mob/living/silicon/current
 
-/obj/machinery/computer/upload/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/aiModule))
-		var/obj/item/aiModule/M = O
+/obj/machinery/computer/upload/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/aiModule))
+		var/obj/item/aiModule/M = used_item
 		M.install(src, user)
 		return TRUE
-	else
-		return ..()
+	return ..()
 
 /obj/machinery/computer/upload/ai
 	name = "\improper AI upload console"

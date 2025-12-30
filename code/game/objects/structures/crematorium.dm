@@ -1,6 +1,6 @@
 /obj/structure/crematorium
 	name = "crematorium"
-	desc = "A human incinerator. Works well on barbeque nights."
+	desc = "A human incinerator. Works well on barbecue nights."
 	icon = 'icons/obj/structures/crematorium.dmi'
 	icon_state = "crematorium_closed"
 	density = TRUE
@@ -82,7 +82,7 @@
 	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	if(locked)
-		to_chat(usr, SPAN_WARNING("It's currently locked."))
+		to_chat(user, SPAN_WARNING("It's currently locked."))
 		return TRUE
 	if(open)
 		close()

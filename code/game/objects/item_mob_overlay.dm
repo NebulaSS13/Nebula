@@ -8,13 +8,14 @@ var/global/list/bodypart_to_slot_lookup_table = list(
 )
 
 /obj/item/proc/reconsider_single_icon(var/update_icon)
-	use_single_icon = check_state_in_icon(ICON_STATE_INV, icon) || check_state_in_icon(ICON_STATE_WORLD, icon)
+	var/list/icon_states = get_states_in_icon_cached(icon) // pre-cache to make our up-to-three checks faster
+	// except now we only do two because i rewrote it
+	has_inventory_icon = use_single_icon = icon_states[ICON_STATE_INV]
+	if(!has_inventory_icon)
+		use_single_icon = icon_states[ICON_STATE_WORLD]
 	if(use_single_icon)
-		has_inventory_icon = check_state_in_icon(ICON_STATE_INV, icon)
 		icon_state = get_world_inventory_state()
 		. = TRUE
-	else
-		has_inventory_icon = FALSE
 	if(. || update_icon)
 		update_icon()
 
@@ -27,14 +28,33 @@ var/global/list/icon_state_cache = list()
 	// isicon() is apparently quite expensive so short-circuit out early if we can.
 	if(!istext(checkstate) || isnull(checkicon) || !(isfile(checkicon) || isicon(checkicon)))
 		return FALSE
-	var/checkkey = "\ref[checkicon]"
-	var/list/check = global.icon_state_cache[checkkey]
+	var/list/check = _fetch_icon_state_cache_entry(checkicon) // should never return null once we reach this point
+	return check[checkstate]
+
+/// A proc for getting an associative list of icon states in an icon.
+/// Uses the same cache as check_state_in_icon.
+/// Does not copy, MUST NOT BE MUTATED.
+/proc/get_states_in_icon_cached(checkicon) /* as OD_MAP(text, OD_BOOL) */
+	return _fetch_icon_state_cache_entry(checkicon) || list()
+
+/// get_states_in_icon_cached but it does a copy, so the return value can be mutated.
+/proc/get_states_in_icon(checkicon) /* as OD_MAP(text, OD_BOOL) */
+	var/list/out = get_states_in_icon_cached(checkicon)
+	return out.Copy()
+
+/proc/_fetch_icon_state_cache_entry(checkicon)
+	if(!checkicon)
+		return null
+	// if we want to let people del icons (WHY???) then we can use weakreF()
+	// but right now it's cheaper to just use checkicon directly
+	// ref doesn't even do any deduplication
+	var/list/check = global.icon_state_cache[checkicon]
 	if(!check)
 		check = list()
 		for(var/istate in icon_states(checkicon))
 			check[istate] = TRUE
-		global.icon_state_cache[checkkey] = check
-	. = check[checkstate]
+		global.icon_state_cache[checkicon] = check
+	return check
 
 /obj/item/proc/update_world_inventory_state()
 	if(use_single_icon && has_inventory_icon)
@@ -68,9 +88,9 @@ var/global/list/icon_state_cache = list()
 	if(!use_single_icon)
 		var/mob_state = "[item_state || icon_state][state_modifier]"
 		var/mob_icon = global.default_onmob_icons[slot]
-		var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
+		var/decl/bodytype/root_bodytype = user_mob?.get_equipment_bodytype(slot, bodypart)
 		if(istype(root_bodytype))
-			var/use_slot = (bodypart in root_bodytype.equip_adjust) ? bodypart : slot
+			var/use_slot = (bodypart in root_bodytype.get_equip_adjustments(user_mob)) ? bodypart : slot
 			return root_bodytype.get_offset_overlay_image(user_mob, mob_icon, mob_state, color, use_slot)
 		return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
@@ -153,7 +173,7 @@ var/global/list/icon_state_cache = list()
 				overlay.icon_state = wielded_state
 		apply_additional_mob_overlays(user_mob, bodytype, overlay, slot, bodypart, use_fallback_if_icon_missing)
 
-		var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
+		var/decl/bodytype/root_bodytype = user_mob?.get_equipment_bodytype(slot, bodypart)
 		if(root_bodytype && root_bodytype.bodytype_category != bodytype)
 			var/list/overlays_to_offset = overlay.overlays
 			overlay = root_bodytype.get_offset_overlay_image(user_mob, overlay.icon, overlay.icon_state, color, (bodypart || slot))

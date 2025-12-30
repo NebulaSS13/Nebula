@@ -84,7 +84,6 @@
 	icon = 'icons/clothing/feet/sandals.dmi'
 	bodytype_equip_flags = null
 	body_parts_covered = 0
-	wizard_garb = 1
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
 
@@ -154,7 +153,7 @@
 
 /obj/item/clothing/shoes/athletic
 	name = "athletic shoes"
-	desc = "A pair of sleek atheletic shoes. Made by and for the sporty types."
+	desc = "A pair of sleek athletic shoes. Made by and for the sporty types."
 	icon = 'icons/clothing/feet/sports.dmi'
 
 /obj/item/clothing/shoes/dress/sneakies

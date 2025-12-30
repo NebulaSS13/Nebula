@@ -10,7 +10,7 @@
 	movable_flags = MOVABLE_FLAG_WHEELED
 	var/volume_rate = 800
 
-	volume = 750
+	gas_volume = 750
 
 	power_rating = 7500 //7500 W ~ 10 HP
 	power_losses = 150
@@ -67,7 +67,7 @@
 		else
 			environment = loc.return_air()
 
-		var/transfer_moles = min(1, volume_rate/environment.volume)*environment.total_moles
+		var/transfer_moles = min(1, volume_rate/environment.total_volume)*environment.total_moles
 
 		power_draw = scrub_gas(src, scrubbing_gas, environment, air_contents, transfer_moles, power_rating)
 
@@ -151,7 +151,7 @@
 	name = "huge air scrubber"
 	icon_state = "scrubber:0"
 	anchored = TRUE
-	volume = 50000
+	gas_volume = 50000
 	volume_rate = 5000
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge
 
@@ -181,8 +181,8 @@
 	cut_overlays()
 	icon_state = "scrubber:[!!((use_power == POWER_USE_ACTIVE) && !(stat & (NOPOWER|BROKEN)))]"
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/I, var/mob/user)
-	if(IS_WRENCH(I))
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_WRENCH(used_item))
 		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, "<span class='warning'>Turn \the [src] off first!</span>")
 			return TRUE
@@ -193,7 +193,7 @@
 
 		return TRUE
 	//doesn't hold tanks
-	if(istype(I, /obj/item/tank))
+	if(istype(used_item, /obj/item/tank))
 		return FALSE
 
 	return ..()
@@ -203,8 +203,8 @@
 	name = "stationary air scrubber"
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I, var/mob/user)
-	if(IS_WRENCH(I))
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_WRENCH(used_item))
 		to_chat(user, "<span class='warning'>The bolts are too tight for you to unscrew!</span>")
 		return TRUE
 

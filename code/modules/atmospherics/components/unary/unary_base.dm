@@ -19,7 +19,7 @@
 
 /obj/machinery/atmospherics/unary/Initialize()
 	air_contents = new
-	air_contents.volume = 200
+	air_contents.total_volume = 200
 	if(controlled)
 		reset_area(null, get_area(src))
 	. = ..()
@@ -34,7 +34,7 @@
 /obj/machinery/atmospherics/unary/physically_destroyed()
 	if(loc && air_contents)
 		loc.assume_air(air_contents)
-	. = ..()	
+	. = ..()
 
 /obj/machinery/atmospherics/unary/dismantle()
 	if(loc && air_contents)

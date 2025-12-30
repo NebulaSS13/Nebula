@@ -16,6 +16,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	chem_volume = 1000
+
 	var/processing = 0
 	var/obj/item/chems/glass/beaker = null
 	var/points = 0
@@ -54,7 +56,6 @@
 			/obj/item/stack/material/skin/mapped/synthleather =30))
 
 /obj/machinery/biogenerator/Initialize()
-	create_reagents(1000)
 	beaker = new /obj/item/chems/glass/bottle(src)
 	. = ..()
 
@@ -80,6 +81,9 @@
 	return ..()
 
 /obj/machinery/biogenerator/attackby(var/obj/item/used_item, var/mob/user)
+
+	if(panel_open || IS_SCREWDRIVER(used_item))
+		return ..()
 
 	if(processing)
 		if((. = component_attackby(used_item, user)))
@@ -168,7 +172,7 @@
 /obj/machinery/biogenerator/OnTopic(user, href_list)
 	switch (href_list["action"])
 		if("activate")
-			activate()
+			activate(user)
 		if("detach")
 			if(beaker)
 				beaker.dropInto(src.loc)
@@ -194,8 +198,8 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/biogenerator/proc/activate()
-	if (usr.stat)
+/obj/machinery/biogenerator/proc/activate(mob/user)
+	if (user.incapacitated())
 		return
 	if (stat) //NOPOWER etc
 		return

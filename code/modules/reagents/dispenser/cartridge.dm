@@ -4,26 +4,30 @@
 	icon = 'icons/obj/items/chem/chem_cartridge.dmi'
 	icon_state = "cartridge"
 	w_class = ITEM_SIZE_NORMAL
-	volume = CARTRIDGE_VOLUME_LARGE
+	chem_volume = CARTRIDGE_VOLUME_LARGE
 	amount_per_transfer_from_this = 50
 	material = /decl/material/solid/stone/ceramic
 	// Large, but inaccurate. Use a chem dispenser or beaker for accuracy.
 	possible_transfer_amounts = @"[50,100]"
+	var/_reagent_label
 
-/obj/item/chems/chem_disp_cartridge/initialize_reagents(populate = TRUE)
+/obj/item/chems/chem_disp_cartridge/Initialize()
 	. = ..()
-	if(populate && reagents.primary_reagent)
-		setLabel(reagents.get_primary_reagent_name())
+	var/decl/material/primary_reagent = istype(reagents) && reagents.get_primary_reagent_decl()
+	if(primary_reagent && !_reagent_label)
+		_reagent_label = primary_reagent.name
+	if(_reagent_label)
+		setLabel(_reagent_label)
 
-/obj/item/chems/chem_disp_cartridge/examine(mob/user)
+/obj/item/chems/chem_disp_cartridge/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It has a capacity of [volume] units.")
-	if(reagents.total_volume <= 0)
-		to_chat(user, "It is empty.")
+	. += "It has a capacity of [REAGENT_MAXIMUM_VOLUME(reagents)] unit\s."
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
+		. += "It is empty."
 	else
-		to_chat(user, "It contains [reagents.total_volume] units of reagents.")
+		. += "It contains [REAGENT_TOTAL_VOLUME(reagents)] unit\s of reagents."
 	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "The cap is sealed.")
+		. += "The cap is sealed."
 
 /obj/item/chems/chem_disp_cartridge/verb/verb_set_label(L as text)
 	set name = "Set Cartridge Label"
@@ -48,13 +52,14 @@
 		else if(user)
 			to_chat(user, SPAN_NOTICE("You clear the label on \the [src]."))
 
-/obj/item/chems/chem_disp_cartridge/attack_self()
-	..()
+/obj/item/chems/chem_disp_cartridge/attack_self(mob/user)
+	if((. = ..()))
+		return
 	if (ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(usr, SPAN_NOTICE("You put the cap on \the [src]."))
+		to_chat(user, SPAN_NOTICE("You put the cap on \the [src]."))
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 	else
-		to_chat(usr, SPAN_NOTICE("You take the cap off \the [src]."))
+		to_chat(user, SPAN_NOTICE("You take the cap off \the [src]."))
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/chems/chem_disp_cartridge/afterattack(obj/target, mob/user, proximity_flag, click_parameters)
@@ -65,11 +70,12 @@
 			return TRUE
 		if(handle_eaten_by_mob(user, target) != EATEN_INVALID)
 			return TRUE
-		if(user.a_intent == I_HURT)
+		if(user.check_intent(I_FLAG_HARM))
 			if(standard_splash_mob(user,target))
 				return TRUE
-			if(reagents && reagents.total_volume)
+			var/total_vol = REAGENT_TOTAL_VOLUME(reagents)
+			if(reagents && total_vol)
 				to_chat(user, SPAN_DANGER("You splash the contents of \the [src] onto \the [target]."))
-				reagents.splash(target, reagents.total_volume) //FIXME: probably shouldn't throw the whole 500 units at the mob, since the bottle neck is a bottle neck.
+				reagents.splash(target, total_vol) //FIXME: probably shouldn't throw the whole 500 units at the mob, since the bottle neck is a bottle neck.
 				return TRUE
 	return ..()

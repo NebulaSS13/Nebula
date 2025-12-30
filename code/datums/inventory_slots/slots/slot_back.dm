@@ -7,6 +7,7 @@
 	requires_slot_flags = SLOT_BACK
 	mob_overlay_layer = HO_BACK_LAYER
 	quick_equip_priority = 14
+	fluid_height = (FLUID_SHALLOW + FLUID_OVER_MOB_HEAD) / 2 // halfway between waist and top of head, so roughly chest level
 
 /datum/inventory_slot/back/simple
 	requires_organ_tag = null
@@ -14,6 +15,4 @@
 
 /datum/inventory_slot/back/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
-		if(user == owner)
-			return "You have [_holding.get_examine_line()] on your back."
 		return "[pronouns.He] [pronouns.has] [_holding.get_examine_line()] on [pronouns.his] back."

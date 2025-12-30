@@ -19,6 +19,6 @@
 //Need to change icon?
 /obj/item/organ/internal/augment/active/refresh_action_button()
 	. = ..()
-	if(.)
+	if(. && istype(action))
 		action.button_icon_state = icon_state
 		action.button?.update_icon()

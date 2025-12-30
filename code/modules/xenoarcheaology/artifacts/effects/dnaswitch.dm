@@ -1,6 +1,6 @@
 /datum/artifact_effect/dnaswitch
 	name = "dnaswitch"
-	origin_type = EFFECT_ORGANIC
+	origin_type = XA_EFFECT_ORGANIC
 	var/severity
 	var/static/list/feels = list(
 		"You feel a little different.",
@@ -14,7 +14,7 @@
 
 /datum/artifact_effect/dnaswitch/New()
 	..()
-	if(operation_type == EFFECT_AURA)
+	if(operation_type == XA_EFFECT_AURA)
 		severity = rand(5,30)
 	else
 		severity = rand(25,95)

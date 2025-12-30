@@ -55,9 +55,9 @@
 	if(powernet && (powernet == control.powernet)) //update if we're still in the same powernet
 		control.cdir = angle
 
-/obj/machinery/power/tracker/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/power/tracker/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(IS_CROWBAR(W))
+	if(IS_CROWBAR(used_item))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar tracker.</span>")
 		if(!do_after(user, 5 SECONDS, src))

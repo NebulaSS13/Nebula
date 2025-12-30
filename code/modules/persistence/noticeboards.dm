@@ -9,7 +9,7 @@
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	obj_flags              = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset     = @'{"SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
-	material               = /decl/material/solid/organic/wood
+	material               = /decl/material/solid/organic/wood/oak
 	var/tmp/max_notices    = 5
 	var/list/notices
 
@@ -64,16 +64,16 @@
 	var/nb_notices = LAZYLEN(notices)
 	icon_state = "[bis.base_icon_state][nb_notices > 0? "0[nb_notices]" : ""]"
 
-/obj/structure/noticeboard/attackby(var/obj/item/thing, var/mob/user)
-	if(!istype(thing, /obj/item/paper/sticky) && (istype(thing, /obj/item/paper) || istype(thing, /obj/item/photo)))
+/obj/structure/noticeboard/attackby(var/obj/item/used_item, var/mob/user)
+	if(!istype(used_item, /obj/item/paper/sticky) && (istype(used_item, /obj/item/paper) || istype(used_item, /obj/item/photo)))
 		if(jobban_isbanned(user, "Graffiti"))
 			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
-		else if(LAZYLEN(notices) < max_notices && user.try_unequip(thing, src))
+		else if(LAZYLEN(notices) < max_notices && user.try_unequip(used_item, src))
 			add_fingerprint(user)
-			add_paper(thing)
-			to_chat(user, SPAN_NOTICE("You pin \the [thing] to \the [src]."))
+			add_paper(used_item)
+			to_chat(user, SPAN_NOTICE("You pin \the [used_item] to \the [src]."))
 		else
-			to_chat(user, SPAN_WARNING("You hesitate, certain \the [thing] will not be seen among the many others already attached to \the [src]."))
+			to_chat(user, SPAN_WARNING("You hesitate, certain \the [used_item] will not be seen among the many others already attached to \the [src]."))
 		return TRUE
 	return ..()
 
@@ -82,12 +82,12 @@
 	return TRUE
 
 /obj/structure/noticeboard/attack_hand(var/mob/user)
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		return ..()
 	interact(user)
 	return TRUE
 
-/obj/structure/noticeboard/examine(mob/user, distance, infix, suffix)
+/obj/structure/noticeboard/examined_by(mob/user, distance, infix, suffix)
 	. = ..()
 	interact(user)
 

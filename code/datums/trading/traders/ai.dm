@@ -37,7 +37,6 @@ They sell generic supplies and ask for generic supplies.
 	)
 	possible_trading_items = list(
 		/obj/item/bag                              = TRADER_SUBTYPES_ONLY,
-		/obj/item/bag/cash/infinite                = TRADER_BLACKLIST,
 		/obj/item/backpack                         = TRADER_ALL,
 		/obj/item/backpack/cultpack                = TRADER_BLACKLIST,
 		/obj/item/backpack/holding                 = TRADER_BLACKLIST,
@@ -98,25 +97,23 @@ They sell generic supplies and ask for generic supplies.
 	origin = "Manifacturing Beacon"
 
 	possible_trading_items = list(
-		/obj/structure/aicore             = TRADER_THIS_TYPE,
-		/obj/structure/girder             = TRADER_THIS_TYPE,
-		/obj/structure/grille             = TRADER_THIS_TYPE,
-		/obj/structure/mopbucket          = TRADER_THIS_TYPE,
-		/obj/structure/ore_box            = TRADER_THIS_TYPE,
-		/obj/structure/coatrack           = TRADER_THIS_TYPE,
-		/obj/structure/bookcase           = TRADER_THIS_TYPE,
-		/obj/item/bee_pack                = TRADER_THIS_TYPE,
-		/obj/item/bee_smoker              = TRADER_THIS_TYPE,
-		/obj/item/beehive_assembly        = TRADER_THIS_TYPE,
-		/obj/item/glass_jar               = TRADER_THIS_TYPE,
-		/obj/item/honey_frame             = TRADER_THIS_TYPE,
-		/obj/item/target                  = TRADER_ALL,
-		/obj/structure/tank_rack          = TRADER_SUBTYPES_ONLY,
-		/obj/structure/filing_cabinet     = TRADER_THIS_TYPE,
-		/obj/structure/safe               = TRADER_THIS_TYPE,
-		/obj/structure/plushie            = TRADER_SUBTYPES_ONLY,
-		/obj/structure/sign               = TRADER_SUBTYPES_ONLY,
-		/obj/structure/sign/double        = TRADER_BLACKLIST_ALL,
-		/obj/structure/sign/plaque/golden = TRADER_BLACKLIST_ALL,
-		/obj/structure/sign/poster        = TRADER_BLACKLIST
+		/obj/structure/aicore              = TRADER_THIS_TYPE,
+		/obj/structure/girder              = TRADER_THIS_TYPE,
+		/obj/structure/grille              = TRADER_THIS_TYPE,
+		/obj/structure/mopbucket           = TRADER_THIS_TYPE,
+		/obj/structure/ore_box             = TRADER_THIS_TYPE,
+		/obj/structure/coatrack            = TRADER_THIS_TYPE,
+		/obj/structure/bookcase            = TRADER_THIS_TYPE,
+		/obj/item/glass_jar                = TRADER_THIS_TYPE,
+		/obj/item/training_dummy           = TRADER_THIS_TYPE,
+		/obj/item/training_dummy/syndicate = TRADER_THIS_TYPE,
+		/obj/item/training_dummy/alien     = TRADER_THIS_TYPE,
+		/obj/structure/tank_rack           = TRADER_SUBTYPES_ONLY,
+		/obj/structure/filing_cabinet      = TRADER_THIS_TYPE,
+		/obj/structure/safe                = TRADER_THIS_TYPE,
+		/obj/structure/plushie             = TRADER_SUBTYPES_ONLY,
+		/obj/structure/sign                = TRADER_SUBTYPES_ONLY,
+		/obj/structure/sign/double         = TRADER_BLACKLIST_ALL,
+		/obj/structure/sign/plaque/golden  = TRADER_BLACKLIST_ALL,
+		/obj/structure/sign/poster         = TRADER_BLACKLIST
 	)

@@ -46,9 +46,9 @@
 	if(new_locked)
 		storage?.close_all()
 
-/obj/item/secure_storage/attackby(obj/item/W, mob/user)
+/obj/item/secure_storage/attackby(obj/item/used_item, mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	if(lock.attackby(W, user))
+	if(lock.attackby(used_item, user))
 		return TRUE
 
 	// -> storage/attackby() what with handle insertion, etc
@@ -67,11 +67,12 @@
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	lock.ui_interact(user)
 
-/obj/item/secure_storage/examine(mob/user, distance, infix, suffix)
+/obj/item/secure_storage/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
 		var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-		to_chat(user, SPAN_INFO("The service panel is [lock.open ? "open" : "closed"]."))
+		if(lock)
+			. += SPAN_INFO("The service panel is [lock.open ? "open" : "closed"].")
 
 /obj/item/secure_storage/emag_act(remaining_charges, mob/user, feedback)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)

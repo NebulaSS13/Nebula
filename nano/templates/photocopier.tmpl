@@ -10,7 +10,7 @@
 		<form name='frm_copy' id='frm_copy' method='get'>
 			<input type="hidden" name="src" id="src" value={{:src}} />
 			<div class="itemLabel"><label for="copy_amount">Amount of copies</label></div>
-			<div class="itemValue">
+			<div class="itemContent">
 				<button type="button" class="button" id="amt_copies_minus" onclick='set_amt_copies(Number(_copy_amount.value)-1);'>-</button>
 				<input type="number" class="numBox" style="width:3em;" name="copy_amount" id="copy_amount" value="1" min="1" max={{:((copies_left > 0) && (copies_left < copies_max))? copies_left : copies_max}} {{:copies_left == 0? 'disabled' : ''}} />
 				<button type="button" class="button" id="amt_copies_plus" onclick='set_amt_copies(Number(_copy_amount.value) + 1);'>+</button>
@@ -36,6 +36,7 @@
 		{{else}}
 			<div class="itemLabel">Printing Page</div>
 			<div class="itemContent">{{:data.left_printing}} out of {{:data.total_printing}} page(s)</div>
+			<div class="itemContent">{{:helper.link('Cancel', 'abort', {'cancel_queue': 1})}}</div>
 		{{/if}}
 	</div>
 {{ } }}

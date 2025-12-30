@@ -19,6 +19,7 @@
 	// Visual references.
 	var/antaghud_indicator = "hudsyndicate" // Used by the ghost antagHUD.
 	var/antag_indicator                     // icon_state for icons/mob/mob.dm visual indicator.
+	var/antag_hud_icon = 'icons/screen/hud_antag.dmi'
 	var/faction_indicator                   // See antag_indicator, but for factionalized people only.
 	var/faction_invisible                   // Can members of the faction identify other antagonists?
 
@@ -105,6 +106,17 @@
 
 /decl/special_role/validate()
 	. = ..()
+
+	// Check for our antaghud icons.
+	if(faction_indicator || antag_indicator)
+		if(antag_hud_icon)
+			if(faction_indicator && !check_state_in_icon(faction_indicator, antag_hud_icon))
+				. += "missing faction_indicator '[faction_indicator]' from icon 'antag_hud_icon]'"
+			if(antag_indicator && !check_state_in_icon(antag_indicator, antag_hud_icon))
+				. += "missing antag_indicator '[antag_indicator]' from icon 'antag_hud_icon]'"
+		else
+			. += "missing antag_hud_icon"
+
 	// Grab initial in case it was already successfully loaded.
 	var/initial_base_to_load = initial(base_to_load)
 	if(isnull(initial_base_to_load))
@@ -127,9 +139,6 @@
 
 /decl/special_role/proc/get_leader_welcome_text(mob/recipient)
 	return leader_welcome_text
-
-/decl/special_role/proc/tick()
-	return 1
 
 // Get the raw list of potential players.
 /decl/special_role/proc/build_candidate_list(decl/game_mode/mode, ghosts_only)
@@ -181,7 +190,7 @@
 
 /decl/special_role/proc/attempt_random_spawn()
 	update_current_antag_max(SSticker.mode)
-	build_candidate_list(SSticker.mode, flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	build_candidate_list(SSticker.mode, is_latejoin_template())
 	attempt_spawn()
 	finalize_spawn()
 
@@ -197,7 +206,7 @@
 		message_admins("Could not auto-spawn a [name], active antag limit reached.")
 		return 0
 
-	build_candidate_list(SSticker.mode, flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	build_candidate_list(SSticker.mode, is_latejoin_template())
 	if(!candidates.len)
 		message_admins("Could not auto-spawn a [name], no candidates found.")
 		return 0

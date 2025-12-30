@@ -3,7 +3,7 @@
 	icon_state = "map_valve0"
 
 	name = "manual valve"
-	desc = "A pipe valve."
+	desc = "A valve that controls flow through a pipe network, and must be operated by hand."
 
 	level = LEVEL_BELOW_PLATING
 	dir = SOUTH
@@ -33,12 +33,12 @@
 	open = 1
 	icon_state = "map_valve1"
 
-/obj/machinery/atmospherics/valve/on_update_icon(animation)
-	if(animation)
-		flick("valve[src.open][!src.open]",src)
-	else
-		icon_state = "valve[open]"
+/obj/machinery/atmospherics/valve/proc/do_turn_animation()
+	update_icon()
+	flick("valve[src.open][!src.open]",src)
 
+/obj/machinery/atmospherics/valve/on_update_icon()
+	icon_state = "valve[open]"
 	build_device_underlays(FALSE)
 
 /obj/machinery/atmospherics/valve/hide(var/i)
@@ -94,8 +94,8 @@
 	return TRUE
 
 /obj/machinery/atmospherics/valve/proc/user_toggle()
-	update_icon(1)
-	sleep(10)
+	do_turn_animation()
+	sleep(1 SECOND)
 	toggle()
 
 /obj/machinery/atmospherics/valve/Process()
@@ -119,9 +119,9 @@
 		return FALSE
 	return TRUE
 
-/obj/machinery/atmospherics/valve/examine(mob/user)
+/obj/machinery/atmospherics/valve/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It is [open ? "open" : "closed"].")
+	. += "It is [open ? "open" : "closed"]."
 
 /decl/public_access/public_variable/valve_open
 	expected_type = /obj/machinery/atmospherics/valve
@@ -150,7 +150,7 @@
 
 /obj/machinery/atmospherics/valve/digital		// can be controlled by AI
 	name = "digital valve"
-	desc = "A digitally controlled valve."
+	desc = "A digitally-controlled valve that controls flow through a pipe network."
 	icon = 'icons/atmos/digital_valve.dmi'
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/receiver/buildable,

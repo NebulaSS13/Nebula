@@ -40,7 +40,7 @@
 
 /mob/living/exosuit/premade/random
 	name = "mismatched exosuit"
-	desc = "It seems to have been roughly thrown together and then spraypainted a single colour."
+	desc = "It seems to have been roughly thrown together and then spray-painted a single colour."
 
 /mob/living/exosuit/premade/random/Initialize(mapload, var/obj/structure/heavy_vehicle_frame/source_frame, var/super_random = FALSE, var/using_boring_colours = FALSE)
 	var/list/use_colours

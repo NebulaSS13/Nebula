@@ -30,3 +30,7 @@
 /obj/item/clothing/mask/chameleon/voice/Initialize()
 	. = ..()
 	changer = new(src)
+
+/obj/item/clothing/mask/chameleon/voice/Destroy()
+	QDEL_NULL(changer)
+	return ..()

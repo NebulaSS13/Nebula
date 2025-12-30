@@ -113,9 +113,9 @@
 		covering_shoes = null
 	user.update_floating()
 
-/obj/item/clothing/shoes/magboots/examine(mob/user)
+/obj/item/clothing/shoes/magboots/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	var/state = "disabled"
 	if(item_flags & ITEM_FLAG_MAGNETISED)
 		state = "enabled"
-	to_chat(user, "Its mag-pulse traction system appears to be [state].")
+	. += "Its mag-pulse traction system appears to be [state]."

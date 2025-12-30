@@ -32,10 +32,10 @@
 	SSstatistics.add_field("cyborg_frames_built",1)
 	return TRUE
 
-/obj/item/robot_parts/robot_suit/attackby(obj/item/W, mob/user)
+/obj/item/robot_parts/robot_suit/attackby(obj/item/used_item, mob/user)
 
 	// Uninstall a robotic part.
-	if(IS_CROWBAR(W))
+	if(IS_CROWBAR(used_item))
 		if(!parts.len)
 			to_chat(user, SPAN_WARNING("\The [src] has no parts to remove."))
 			return TRUE
@@ -49,40 +49,40 @@
 		return TRUE
 
 	// Install a robotic part.
-	else if (istype(W, /obj/item/robot_parts))
-		var/obj/item/robot_parts/part = W
-		if(!required_parts[part.bp_tag] || !istype(W, required_parts[part.bp_tag]))
-			to_chat(user, SPAN_WARNING("\The [src] is not compatible with \the [W]."))
+	else if (istype(used_item, /obj/item/robot_parts))
+		var/obj/item/robot_parts/part = used_item
+		if(!required_parts[part.bp_tag] || !istype(used_item, required_parts[part.bp_tag]))
+			to_chat(user, SPAN_WARNING("\The [src] is not compatible with \the [used_item]."))
 		else if(parts[part.bp_tag])
-			to_chat(user, SPAN_WARNING("\The [src] already has \a [W] installed."))
-		else if(part.can_install(user) && user.try_unequip(W, src))
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [used_item] installed."))
+		else if(part.can_install(user) && user.try_unequip(used_item, src))
 			parts[part.bp_tag] = part
 			update_icon()
 		return TRUE
 
 	// Install a brain.
-	else if(istype(W, /obj/item/organ/internal/brain_interface))
+	else if(istype(used_item, /obj/item/organ/internal/brain_interface))
 
 		if(!isturf(loc))
-			to_chat(user, SPAN_WARNING("You can't put \the [W] in without the frame being on the ground."))
+			to_chat(user, SPAN_WARNING("You can't put \the [used_item] in without the frame being on the ground."))
 			return TRUE
 
 		if(!check_completion())
 			to_chat(user, SPAN_WARNING("The frame is not ready for the central processor to be installed."))
 			return TRUE
 
-		var/obj/item/organ/internal/brain_interface/M = W
+		var/obj/item/organ/internal/brain_interface/M = used_item
 		var/mob/living/brainmob = M?.get_brainmob()
 		if(!brainmob)
-			to_chat(user, SPAN_WARNING("Sticking an empty [W.name] into the frame would sort of defeat the purpose."))
+			to_chat(user, SPAN_WARNING("Sticking an empty [used_item.name] into the frame would sort of defeat the purpose."))
 			return TRUE
 
 		if(jobban_isbanned(brainmob, ASSIGNMENT_ROBOT))
-			to_chat(user, SPAN_WARNING("\The [W] does not seem to fit."))
+			to_chat(user, SPAN_WARNING("\The [used_item] does not seem to fit."))
 			return TRUE
 
 		if(brainmob.stat == DEAD)
-			to_chat(user, SPAN_WARNING("Sticking a dead [W.name] into the frame would sort of defeat the purpose."))
+			to_chat(user, SPAN_WARNING("Sticking a dead [used_item.name] into the frame would sort of defeat the purpose."))
 			return TRUE
 
 		var/ghost_can_reenter = 0
@@ -95,10 +95,10 @@
 			else
 				ghost_can_reenter = 1
 		if(!ghost_can_reenter)
-			to_chat(user, SPAN_WARNING("\The [W] is completely unresponsive; there's no point."))
+			to_chat(user, SPAN_WARNING("\The [used_item] is completely unresponsive; there's no point."))
 			return TRUE
 
-		if(!user.try_unequip(W))
+		if(!user.try_unequip(used_item))
 			return TRUE
 
 		SSstatistics.add_field("cyborg_frames_built",1)
@@ -106,11 +106,12 @@
 		if(!O)
 			return TRUE
 
-		O.central_processor = W
+		O.central_processor = used_item
 		O.set_invisibility(INVISIBILITY_NONE)
 		O.custom_name = created_name
 		O.updatename("Default")
 
+		clear_antag_roles(brainmob.mind, implanted = TRUE) // some antag roles persist
 		brainmob.mind.transfer_to(O)
 		if(O.mind && O.mind.assigned_role)
 			O.job = O.mind.assigned_role
@@ -119,7 +120,7 @@
 
 		var/obj/item/robot_parts/chest/chest = parts[BP_CHEST]
 		chest.cell.forceMove(O)
-		W.forceMove(O) //Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
+		used_item.forceMove(O) //Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
 
 		// Since we "magically" installed a cell, we also have to update the correct component.
 		if(O.cell)
@@ -133,7 +134,7 @@
 		qdel(src)
 		return TRUE
 
-	else if(IS_PEN(W))
+	else if(IS_PEN(used_item))
 		var/t = sanitize_safe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
 		if(t && (in_range(src, user) || loc == user))
 			created_name = t

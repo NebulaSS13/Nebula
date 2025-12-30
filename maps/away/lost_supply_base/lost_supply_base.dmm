@@ -117,14 +117,14 @@
 /turf/floor/plating/airless,
 /area/space)
 "aq" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/space,
 /area/space)
 "ar" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/rods/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel,
 /turf/floor/plating/airless,
 /area/space)
@@ -241,7 +241,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -345,7 +345,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -353,7 +353,7 @@
 /turf/floor/tiled/airless,
 /area/lost_supply_base/office)
 "aT" = (
-/obj/structure/bed/chair/comfy/captain,
+/obj/structure/chair/comfy/captain,
 /turf/floor/tiled/airless,
 /area/lost_supply_base/office)
 "aU" = (
@@ -561,7 +561,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -760,7 +760,7 @@
 /turf/floor/plating/airless,
 /area/lost_supply_base)
 "cf" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /obj/item/stack/material/sheet/mapped/steel,
 /turf/floor/plating/airless,
 /area/lost_supply_base)
@@ -885,7 +885,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -1170,7 +1170,7 @@
 /turf/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dy" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/floor/tiled/airless,
@@ -1190,7 +1190,7 @@
 /area/lost_supply_base/common)
 "dB" = (
 /obj/item/utensil/fork,
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/tiled/airless,
@@ -1249,16 +1249,16 @@
 /turf/floor/shuttle/blue,
 /area/space)
 "dT" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /obj/random/handgun,
 /turf/floor/shuttle/blue,
 /area/space)
 "dU" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/floor/shuttle/blue,
 /area/space)
 "dV" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /obj/random/smokes,
 /turf/floor/shuttle/blue,
 /area/space)
@@ -1306,7 +1306,7 @@
 /turf/floor/tiled/airless,
 /area/lost_supply_base/common)
 "ef" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/tiled/airless,
@@ -1405,7 +1405,7 @@
 /turf/floor/shuttle/blue,
 /area/space)
 "ex" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/item/key,
@@ -1426,7 +1426,7 @@
 /area/lost_supply_base/common)
 "eD" = (
 /obj/machinery/atmospherics/unary/tank/hydrogen{
-	volume = 3200
+	gas_volume = 3200
 	},
 /turf/floor/plating/airless,
 /area/lost_supply_base)
@@ -1473,13 +1473,13 @@
 /turf/floor/shuttle/blue,
 /area/space)
 "eM" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/shuttle/blue,
 /area/space)
 "eN" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /obj/random/voidhelmet,
@@ -1580,7 +1580,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24

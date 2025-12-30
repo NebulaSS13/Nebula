@@ -109,6 +109,7 @@
 /obj/item/chems/blood/empty : /obj/item/chems/ivbag{@OLD}
 /obj/item/chems/blood/@SUBTYPES : /obj/item/chems/ivbag/blood/@SUBTYPES{@OLD}
 /obj/item/defib_kit/@SUBTYPES : /obj/item/defibrillator/@SUBTYPES{@OLD}
+/obj/item/chems/spray/sterilizine : /obj/item/chems/spray/antiseptic{@OLD}
 
 # Drinking glasses and cups
 /obj/item/chems/drinks/cup : /obj/item/chems/drinks/glass2/coffeecup{@OLD}
@@ -144,12 +145,13 @@
 
 # CLOTHING
 /obj/item/clothing/head/cone : /obj/item/caution/cone{@OLD}
+/obj/item/clothing/belt/security/tactical : /obj/item/belt/holster/security/tactical{@OLD}
 
 # Item remains
 /obj/effect/decal/remains/@SUBTYPES : /obj/item/remains/@SUBTYPES{@OLD}
 
 # Circuit prefabs
-/obj/item/hand_tele : /obj/prefab/hand_teleporter{@OLD}
+/obj/item/hand_tele : /obj/abstract/prefab/hand_teleporter{@OLD}
 
 # Filing cabinets
 /obj/structure/filingcabinet : /obj/structure/filing_cabinet{@OLD}
@@ -242,10 +244,10 @@
 # FABRICATORS
 /obj/machinery/autolathe{hacked = 1} : /obj/machinery/fabricator/hacked{@OLD; hacked = @SKIP}
 /obj/machinery/autolathe : /obj/machinery/fabricator{@OLD}
-/obj/machinery/pipedispenser : /obj/machinery/fabricator/pipe{@OLD}
-/obj/machinery/pipedispenser/orderable : /obj/machinery/fabricator/pipe{@OLD; anchored = 1}
-/obj/machinery/pipedispenser/disposal : /obj/machinery/fabricator/pipe/disposal{@OLD}
-/obj/machinery/pipedispenser/disposal/orderable : /obj/machinery/fabricator/pipe/disposal{@OLD; anchored = 1}
+/obj/machinery/pipedispenser : /obj/machinery/fabricator/pipe{@OLD; anchored = 1}
+/obj/machinery/pipedispenser/orderable : /obj/machinery/fabricator/pipe{@OLD}
+/obj/machinery/pipedispenser/disposal : /obj/machinery/fabricator/pipe/disposal{@OLD; anchored = 1}
+/obj/machinery/pipedispenser/disposal/orderable : /obj/machinery/fabricator/pipe/disposal{@OLD}
 /obj/machinery/r_n_d/circuit_imprinter : /obj/machinery/fabricator/imprinter{@OLD}
 /obj/machinery/pros_fabricator : /obj/machinery/fabricator/robotics{@OLD}
 /obj/machinery/mecha_part_fabricator : /obj/machinery/fabricator/industrial{@OLD}
@@ -330,6 +332,10 @@
 /obj/machinery/account_database : /obj/machinery/computer/account_database{@OLD}
 /obj/machinery/shield_gen/@SUBTYPES : /obj/machinery/shield_generator
 
+/obj/structure/morgue/crematorium : /obj/structure/crematorium{@OLD}
+
+/obj/item/robot_parts/frame : /obj/item/robot_parts/robot_suit{@OLD}
+
 /obj/structure/closet/secure_closet/psych : /obj/structure/closet/secure_closet/psychiatry{@OLD}
 /obj/structure/closet/firecloset/full : /obj/structure/closet/firecloset{@OLD}
 /obj/structure/closet/firecloset/full/double : /obj/structure/closet/firecloset/chief{@OLD}
@@ -387,6 +393,42 @@
 /obj/structure/closet/grave/@SUBTYPES : /obj/structure/pit/closed/grave{@OLD}
 
 /obj/item/banner/nt : /obj/item/banner/nanotrasen{@OLD}
+
+/obj/item/box/syndie_kit/clerical : /obj/item/backpack/satchel/syndie_kit/clerical{@OLD}
+
+/obj/item/clothing/under/costume/rainbow : /obj/item/clothing/jumpsuit/rainbow{@OLD}
+/obj/item/clothing/under/dress/dress_orange : /obj/item/clothing/dress/orange{@OLD}
+/obj/item/clothing/head/collectable/xenos : /obj/item/clothing/head/xenos{@OLD}
+/obj/item/clothing/head/collectable/bearpelt : /obj/item/clothing/head/bearpelt{@OLD}
+/obj/item/clothing/head/collectable/philosopher_wig : /obj/item/clothing/head/philosopher_wig{@OLD}
+/obj/item/clothing/head/collectable/plaguedoctorhat : /obj/item/clothing/head/plaguedoctorhat{@OLD}
+/obj/item/clothing/head/helmet/space/void/security/riot : /obj/item/clothing/head/helmet/space/void/security/alt{@OLD}
+/obj/item/clothing/suit/space/void/security/riot : /obj/item/clothing/suit/space/void/security/alt{@OLD}
+/obj/item/clothing/head/helmet/space/vox/pressure : /obj/item/clothing/head/helmet/space/vox{@OLD}
+/obj/item/clothing/under/vox/vox_utility : /obj/item/clothing/pants/vox{@OLD}
+/obj/item/clothing/suit/space/pirate : /obj/item/clothing/suit/pirate{@OLD}
+/obj/item/clothing/suit/costume : /obj/item/clothing/suit/pirate{@OLD}
+/obj/item/clothing/suit/costume/hgpirate : /obj/item/clothing/suit/hgpirate{@OLD}
+/obj/item/clothing/suit/storage/vest/heavy/merc : /obj/item/clothing/suit/armor/pcarrier/merc{@OLD}
+/obj/item/clothing/suit/storage/vest/@SUBTYPES : /obj/item/clothing/suit/armor/vest/@SUBTYPES{@OLD}
+
+# Migrate/delete old mech parts
+/obj/item/mecha_parts/mecha_equipment/anticcw_armor_booster : @DELETE
+/obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster : @DELETE
+/obj/item/mecha_parts/mecha_equipment/repair_droid : @DELETE
+/obj/item/mecha_parts/mecha_equipment/teleporter : @DELETE
+/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay : @DELETE
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer : @DELETE
+/obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill : /obj/item/mech_equipment/drill/diamond{@OLD}
+/obj/item/mecha_parts/mecha_equipment/tool/extinguisher : /obj/item/mech_equipment/mounted_system/extinguisher{@OLD}
+/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp : /obj/item/mech_equipment/clamp{@OLD}
+/obj/item/mecha_parts/mecha_equipment/tool/passenger : @DELETE
+/obj/item/mecha_parts/mecha_equipment/tool/rcd : /obj/item/mech_equipment/mounted_system/rcd{@OLD}
+/obj/item/mecha_parts/mecha_equipment/tool/sleeper : /obj/item/mech_equipment/sleeper{@OLD}
+/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun : @DELETE
+/obj/item/mecha_parts/mecha_equipment/weapon/energy/ion : /obj/item/mech_equipment/mounted_system/taser/ion{@OLD}
+/obj/item/mecha_parts/mecha_equipment/weapon/energy/taser : /obj/item/mech_equipment/mounted_system/taser{@OLD}
+/obj/item/mecha_parts/mecha_tracking : @DELETE
 
 ############
 # VAREDITS #

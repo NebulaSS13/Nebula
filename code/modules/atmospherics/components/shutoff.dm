@@ -19,9 +19,9 @@ var/global/list/shutoff_valves = list()
 	icon_state = "vclamp[open]"
 	build_device_underlays(FALSE)
 
-/obj/machinery/atmospherics/valve/shutoff/examine(mob/user)
+/obj/machinery/atmospherics/valve/shutoff/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "The automatic shutoff circuit is [close_on_leaks ? "enabled" : "disabled"].")
+	. += "The automatic shutoff circuit is [close_on_leaks ? "enabled" : "disabled"]."
 
 /obj/machinery/atmospherics/valve/shutoff/Initialize()
 	. = ..()

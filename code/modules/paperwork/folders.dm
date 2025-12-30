@@ -11,6 +11,8 @@
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 	material     = /decl/material/solid/organic/cardboard
 	item_flags   = ITEM_FLAG_CAN_TAPE
+	/// If true, add a cosmetic overlay when we have contents.
+	var/has_paper_overlay = TRUE
 
 /obj/item/folder/blue
 	desc       = "A blue folder."
@@ -28,23 +30,23 @@
 	desc       = "A cyan folder."
 	icon_state = "folder_cyan"
 
-/obj/item/folder/on_update_icon(var/paper_overlay = TRUE)
+/obj/item/folder/on_update_icon()
 	. = ..()
-	if(paper_overlay && length(contents))
+	if(has_paper_overlay && length(contents))
 		add_overlay("folder_paper")
 
-/obj/item/folder/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
-		if(!user.try_unequip(W, src))
+/obj/item/folder/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/paper) || istype(used_item, /obj/item/photo) || istype(used_item, /obj/item/paper_bundle))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		to_chat(user, SPAN_NOTICE("You put the [W] into \the [src]."))
+		to_chat(user, SPAN_NOTICE("You put the [used_item] into \the [src]."))
 		updateUsrDialog()
 		update_icon()
 		return TRUE
 
-	else if(IS_PEN(W))
+	else if(IS_PEN(used_item))
 		updateUsrDialog()
-		var/n_name = sanitize_safe(input(usr, "What would you like to label the folder?", "Folder Labelling", null)  as text, MAX_NAME_LEN)
+		var/n_name = sanitize_safe(input(user, "What would you like to label the folder?", "Folder Labelling", null)  as text, MAX_NAME_LEN)
 		if(!CanPhysicallyInteractWith(user, src))
 			to_chat(user, SPAN_WARNING("You must stay close to \the [src]."))
 			return TRUE
@@ -88,18 +90,19 @@
 	name = "envelope"
 	desc = "A thick envelope. You can't see what's inside."
 	icon_state = "envelope_sealed"
+	has_paper_overlay = FALSE
 	var/sealed = 1
 
 /obj/item/folder/envelope/on_update_icon()
-	. = ..(paper_overlay = FALSE)
+	. = ..()
 	if(sealed)
 		icon_state = "envelope_sealed"
 	else
 		icon_state = "envelope[contents.len > 0]"
 
-/obj/item/folder/envelope/examine(mob/user)
+/obj/item/folder/envelope/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "The seal is [sealed ? "intact" : "broken"].")
+	. += "The seal is [sealed ? "intact" : "broken"]."
 
 /obj/item/folder/envelope/proc/sealcheck(user)
 	var/ripperoni = alert("Are you sure you want to break the seal on \the [src]?", "Confirmation","Yes", "No")
@@ -116,7 +119,7 @@
 	else
 		..()
 
-/obj/item/folder/envelope/attackby(obj/item/W, mob/user)
+/obj/item/folder/envelope/attackby(obj/item/used_item, mob/user)
 	if(sealed)
 		sealcheck(user)
 		return TRUE

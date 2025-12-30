@@ -17,6 +17,7 @@
 	base_type = /obj/machinery/chem_master
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	core_skill = SKILL_CHEMISTRY
+	chem_volume = 120
 
 	var/obj/item/chems/beaker = null
 	var/obj/item/pill_bottle/loaded_pill_bottle = null
@@ -27,72 +28,95 @@
 	var/list/client/has_sprites = list()
 	var/max_pill_count = 20
 	var/sloppy = 1 //Whether reagents will not be fully purified (sloppy = 1) or there will be reagent loss (sloppy = 0) on reagent add.
-	var/reagent_limit = 120
 	var/bottle_label_color = COLOR_WHITE
 	var/bottle_lid_color = COLOR_OFF_WHITE
 
-/obj/machinery/chem_master/Initialize()
-	. = ..()
-	create_reagents(reagent_limit)
-
 /obj/machinery/chem_master/proc/get_remaining_volume()
-	return clamp(reagent_limit - reagents.total_volume, 0, reagent_limit)
+	return reagents ? clamp(REAGENT_MAXIMUM_VOLUME(reagents) - REAGENT_TOTAL_VOLUME(reagents), 0, REAGENT_MAXIMUM_VOLUME(reagents)) : 0
 
-/obj/machinery/chem_master/attackby(var/obj/item/B, var/mob/user)
+/obj/machinery/chem_master/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(istype(B, /obj/item/chems/glass))
+	if(istype(used_item, /obj/item/chems/glass))
 
 		if(beaker)
 			to_chat(user, SPAN_WARNING("A beaker is already loaded into the machine."))
 			return TRUE
-		if(!user.try_unequip(B, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		beaker = B
+		beaker = used_item
 		to_chat(user, SPAN_NOTICE("You add the beaker to the machine!"))
 		updateUsrDialog()
 		icon_state = "mixer1"
 		return TRUE
 
-	if(istype(B, /obj/item/chems))
+	if(istype(used_item, /obj/item/chems))
 		to_chat(user, SPAN_WARNING("\The [src] will only accept beakers."))
 		return TRUE
 
-	if(istype(B, /obj/item/pill_bottle))
+	if(istype(used_item, /obj/item/pill_bottle))
 
 		if(loaded_pill_bottle)
 			to_chat(user, SPAN_WARNING("A pill bottle is already loaded into the machine."))
 			return TRUE
-		if(!user.try_unequip(B, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		loaded_pill_bottle = B
+		loaded_pill_bottle = used_item
 		to_chat(user, SPAN_NOTICE("You add the pill bottle into the dispenser slot!"))
 		updateUsrDialog()
 		return TRUE
 
 	return ..()
 
-/obj/machinery/chem_master/Topic(href, href_list, state)
-	if(..())
-		return 1
-	var/mob/user = usr
+/obj/machinery/chem_master/Topic(href, href_list)
+	. = ..()
+	if(. == TOPIC_CLOSE)
+		close_browser(usr, "window=chem_master")
 
+/obj/machinery/chem_master/OnTopic(mob/user, href_list, state)
+	if((. = ..()))
+		return
 	if (href_list["ejectp"])
 		if(loaded_pill_bottle)
 			loaded_pill_bottle.dropInto(loc)
 			loaded_pill_bottle = null
 	else if(href_list["close"])
-		show_browser(user, null, "window=chem_master")
-		user.unset_machine()
-		return
+		return TOPIC_CLOSE
 
 	if(beaker)
+		// The custom ones modify our href_list.
+		if (href_list["addcustom"])
+			var/decl/material/their_reagent = locate(href_list["addcustom"])
+			if(their_reagent)
+				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
+				if(useramount)
+					useramount = clamp(useramount, 0, 200)
+					href_list["amount"] = num2text(useramount)
+					href_list["add"] = href_list["addcustom"]
+					href_list -= "addcustom"
+				else
+					return TOPIC_HANDLED
+			else
+				return TOPIC_REFRESH // Tried to move a nonexistent reagent, maybe their UI is stale?
+		else if(href_list["removecustom"])
+			var/decl/material/my_reagents = locate(href_list["removecustom"])
+			if(my_reagents)
+				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
+				if(useramount)
+					useramount = clamp(useramount, 0, 200)
+					href_list["amount"] = num2text(useramount)
+					href_list["remove"] = href_list["removecustom"]
+					href_list -= "removecustom"
+				else
+					return TOPIC_HANDLED
+
+		// DO NOT use else if here, we want these to run even if the custom ones do
 		var/datum/reagents/R = beaker.reagents
 		if (href_list["analyze"])
 			var/decl/material/reagent = locate(href_list["analyze"])
 			var/dat = get_chem_info(reagent)
 			if(dat && REAGENT_VOLUME(beaker.reagents, reagent.type))
 				show_browser(user, dat, "window=chem_master;size=575x400")
-			return
+			return TOPIC_HANDLED
 
 		else if (href_list["add"])
 			if(href_list["amount"])
@@ -107,16 +131,7 @@
 					else
 						mult -= 0.4 * (SKILL_MAX - user.get_skill_value(core_skill))/(SKILL_MAX-SKILL_MIN) //10% loss per skill level down from max
 					R.trans_type_to(src, their_reagent.type, amount, mult)
-
-
-
-		else if (href_list["addcustom"])
-			var/decl/material/their_reagent = locate(href_list["addcustom"])
-			if(their_reagent)
-				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
-				if(useramount)
-					useramount = clamp(useramount, 0, 200)
-					src.Topic(href, list("amount" = "[useramount]", "add" = href_list["addcustom"]), state)
+				return TOPIC_REFRESH
 
 		else if (href_list["remove"])
 			if(href_list["amount"])
@@ -132,52 +147,44 @@
 						remove_from_reagents(my_reagents.type, amount)
 						for(var/decl/material/reagent in contaminants)
 							remove_from_reagents(reagent.type, round(rand()*amount, 0.1))
-
-		else if (href_list["removecustom"])
-			var/decl/material/my_reagents = locate(href_list["removecustom"])
-			if(my_reagents)
-				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
-				if(useramount)
-					useramount = clamp(useramount, 0, 200)
-					src.Topic(href, list("amount" = "[useramount]", "remove" = href_list["removecustom"]), state)
+				return TOPIC_REFRESH
 
 		else if (href_list["toggle"])
 			mode = !mode
+			return TOPIC_REFRESH
 		else if (href_list["toggle_sloppy"])
 			sloppy = !sloppy
+			return TOPIC_REFRESH
 
 		else if (href_list["main"])
-			interact(user)
-			return
+			return TOPIC_REFRESH
 		else if (href_list["eject"])
 			beaker.forceMove(loc)
 			beaker = null
 			reagents.clear_reagents()
 			icon_state = "mixer0"
+			return TOPIC_REFRESH
 		else if (href_list["createpill"] || href_list["createpill_multiple"])
 			var/count = 1
 
-			if(reagents.total_volume/count < 1) //Sanity checking.
-				return
+			if(REAGENT_TOTAL_VOLUME(reagents)/count < 1) //Sanity checking.
+				return TOPIC_HANDLED
 
 			if (href_list["createpill_multiple"])
 				count = input("Select the number of pills to make.", "Max [max_pill_count]", pillamount) as num
 				if(!CanInteract(user, state))
-					return
+					return TOPIC_HANDLED
 				count = clamp(count, 1, max_pill_count)
 
-			if(reagents.total_volume/count < 1) //Sanity checking.
-				return
-
-			var/amount_per_pill = reagents.total_volume/count
-			if (amount_per_pill > 30) amount_per_pill = 30
+			var/amount_per_pill = min(REAGENT_TOTAL_VOLUME(reagents)/count, 30)
+			if(amount_per_pill < 1) // Sanity checking.
+				return TOPIC_HANDLED
 
 			var/name = sanitize_safe(input(usr,"Name:","Name your pill!","[reagents.get_primary_reagent_name()] ([amount_per_pill]u)"), MAX_NAME_LEN)
 			if(!CanInteract(user, state))
-				return
-
-			if(reagents.total_volume/count < 1) //Sanity checking.
-				return
+				return TOPIC_HANDLED
+			if(REAGENT_TOTAL_VOLUME(reagents)/count < 1) //Sanity checking.
+				return TOPIC_HANDLED
 			while (count-- && count >= 0)
 				var/obj/item/chems/pill/dispensed/P = new(loc)
 				if(!name) name = reagents.get_primary_reagent_name()
@@ -187,9 +194,11 @@
 				P.update_icon()
 				if(loaded_pill_bottle && loaded_pill_bottle.storage && loaded_pill_bottle.contents.len < loaded_pill_bottle.storage.max_storage_space)
 					P.forceMove(loaded_pill_bottle)
+			return TOPIC_REFRESH
 
 		else if (href_list["createbottle"])
 			create_bottle(user)
+			return TOPIC_REFRESH
 		else if(href_list["change_pill"])
 			#define MAX_PILL_SPRITE 25 //max icon state of the pill sprites
 			var/dat = "<table>"
@@ -197,20 +206,20 @@
 				dat += "<tr><td><a href=\"byond://?src=\ref[src]&pill_sprite=[i]\"><img src=\"pill[i].png\" /></a></td></tr>"
 			dat += "</table>"
 			show_browser(user, dat, "window=chem_master")
-			return
+			return TOPIC_HANDLED
 		else if(href_list["pill_sprite"])
 			pillsprite = href_list["pill_sprite"]
+			return TOPIC_REFRESH
 		else if(href_list["label_color"])
 			bottle_label_color = input(usr, "Pick new bottle label color", "Label color", bottle_label_color) as color
+			return TOPIC_REFRESH
 		else if(href_list["lid_color"])
 			bottle_lid_color = input(usr, "Pick new bottle lid color", "Lid color", bottle_lid_color) as color
-
-	updateUsrDialog()
+			return TOPIC_REFRESH
 
 /obj/machinery/chem_master/proc/fetch_contaminants(mob/user, datum/reagents/reagents, decl/material/main_reagent)
 	. = list()
-	for(var/rtype in reagents.reagent_volumes)
-		var/decl/material/reagent = GET_DECL(rtype)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		if(reagent != main_reagent && prob(user.skill_fail_chance(core_skill, 100)))
 			. += reagent
 
@@ -223,7 +232,7 @@
 	. += "<BR><BR>Description:<BR>"
 	if(detailed_blood && istype(reagent, /decl/material/liquid/blood))
 		var/blood_data = REAGENT_DATA(beaker?.reagents, /decl/material/liquid/blood)
-		. += "Blood Type: [LAZYACCESS(blood_data, DATA_BLOOD_TYPE)]<br>DNA: [LAZYACCESS(blood_data, "blood.DNA")]"
+		. += "Blood Type: [LAZYACCESS(blood_data, DATA_BLOOD_TYPE)]<br>DNA: [LAZYACCESS(blood_data, DATA_BLOOD_DNA)]"
 	else
 		. += "[reagent.lore_text]"
 	. += "<BR><BR><BR><A href='byond://?src=\ref[src];main=1'>(Back)</A>"
@@ -254,7 +263,7 @@
 		spawn()
 			has_sprites += user.client
 			for(var/i = 1 to MAX_PILL_SPRITE)
-				send_rsc(usr, icon('icons/obj/items/chem/pill.dmi', "pill" + num2text(i)), "pill[i].png")
+				send_rsc(user, icon('icons/obj/items/chem/pill.dmi', "pill" + num2text(i)), "pill[i].png")
 	var/dat = list()
 	dat += "<TITLE>[name]</TITLE>"
 	dat += "[name] Menu:"
@@ -273,31 +282,29 @@
 			dat += "<A href='byond://?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[loaded_pill_bottle.storage.max_storage_space]\]</A><BR><BR>"
 		else
 			dat += "No pill bottle inserted.<BR><BR>"
-		if(!R.total_volume)
+		if(!REAGENT_TOTAL_VOLUME(R))
 			dat += "Beaker is empty."
 		else
 			dat += "Add to buffer:<BR>"
-			for(var/rtype in R.reagent_volumes)
-				var/decl/material/G = GET_DECL(rtype)
-				dat += "[G.use_name], [REAGENT_VOLUME(R, rtype)] Units - "
-				dat += "<A href='byond://?src=\ref[src];analyze=\ref[G]'>(Analyze)</A> "
-				dat += "<A href='byond://?src=\ref[src];add=\ref[G];amount=1'>(1)</A> "
-				dat += "<A href='byond://?src=\ref[src];add=\ref[G];amount=5'>(5)</A> "
-				dat += "<A href='byond://?src=\ref[src];add=\ref[G];amount=10'>(10)</A> "
-				dat += "<A href='byond://?src=\ref[src];add=\ref[G];amount=[REAGENT_VOLUME(R, rtype)]'>(All)</A> "
-				dat += "<A href='byond://?src=\ref[src];addcustom=\ref[G]'>(Custom)</A><BR>"
+			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(R))
+				dat += "[reagent.use_name], [REAGENT_VOLUME(R, reagent)] Units - "
+				dat += "<A href='byond://?src=\ref[src];analyze=\ref[reagent]'>(Analyze)</A> "
+				dat += "<A href='byond://?src=\ref[src];add=\ref[reagent];amount=1'>(1)</A> "
+				dat += "<A href='byond://?src=\ref[src];add=\ref[reagent];amount=5'>(5)</A> "
+				dat += "<A href='byond://?src=\ref[src];add=\ref[reagent];amount=10'>(10)</A> "
+				dat += "<A href='byond://?src=\ref[src];add=\ref[reagent];amount=[REAGENT_VOLUME(R, reagent)]'>(All)</A> "
+				dat += "<A href='byond://?src=\ref[src];addcustom=\ref[reagent]'>(Custom)</A><BR>"
 
 		dat += "<HR>Transfer to <A href='byond://?src=\ref[src];toggle=1'>[(!mode ? "disposal" : "beaker")]:</A><BR>"
-		if(reagents.total_volume)
-			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/N = GET_DECL(rtype)
-				dat += "[N.use_name], [REAGENT_VOLUME(reagents, rtype)] Units - "
-				dat += "<A href='byond://?src=\ref[src];analyze=\ref[N]'>(Analyze)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=\ref[N];amount=1'>(1)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=\ref[N];amount=5'>(5)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=\ref[N];amount=10'>(10)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=\ref[N];amount=[REAGENT_VOLUME(reagents, rtype)]'>(All)</A> "
-				dat += "<A href='byond://?src=\ref[src];removecustom=\ref[N]'>(Custom)</A><BR>"
+		if(REAGENT_TOTAL_VOLUME(reagents))
+			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
+				dat += "[reagent.use_name], [REAGENT_VOLUME(reagents, reagent)] Units - "
+				dat += "<A href='byond://?src=\ref[src];analyze=\ref[reagent]'>(Analyze)</A> "
+				dat += "<A href='byond://?src=\ref[src];remove=\ref[reagent];amount=1'>(1)</A> "
+				dat += "<A href='byond://?src=\ref[src];remove=\ref[reagent];amount=5'>(5)</A> "
+				dat += "<A href='byond://?src=\ref[src];remove=\ref[reagent];amount=10'>(10)</A> "
+				dat += "<A href='byond://?src=\ref[src];remove=\ref[reagent];amount=[REAGENT_VOLUME(reagents, reagent)]'>(All)</A> "
+				dat += "<A href='byond://?src=\ref[src];removecustom=\ref[reagent]'>(Custom)</A><BR>"
 		else
 			dat += "Empty<BR>"
 		dat += extra_options()

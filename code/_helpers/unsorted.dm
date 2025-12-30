@@ -270,7 +270,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			return 0
 	return 1
 
-//Ensure the frequency is within bounds of what it should be sending/recieving at
+//Ensure the frequency is within bounds of what it should be sending/receiving at
 /proc/sanitize_frequency(var/f, var/low = PUBLIC_LOW_FREQ, var/high = PUBLIC_HIGH_FREQ)
 	return clamp(round(f), low, high)
 
@@ -687,23 +687,17 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return zone_to_descriptor_mapping[zone] || zone
 
 //Whether or not the given item counts as sharp in terms of dealing damage
-/proc/is_sharp(obj/O)
-	if (!O) return 0
-	if (O.sharp) return 1
-	if (O.edge) return 1
-	return 0
+/obj/proc/is_sharp()
+	return FALSE
 
 //Whether or not the given item counts as cutting with an edge in terms of removing limbs
-/proc/has_edge(obj/O)
-	if (!O) return 0
-	if (O.edge) return 1
-	return 0
-
+/obj/proc/has_edge()
+	return FALSE
 
 //For items that can puncture e.g. thick plastic but aren't necessarily sharp
 //Returns 1 if the given item is capable of popping things like balloons, inflatable barriers, or cutting police tape.
 /obj/item/proc/can_puncture()
-	return sharp
+	return is_sharp()
 
 /obj/item/screwdriver/can_puncture()
 	return 1
@@ -714,17 +708,14 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /obj/item/weldingtool/can_puncture()
 	return 1
 
-/obj/item/screwdriver/can_puncture()
-	return 1
-
 /obj/item/clothing/mask/smokable/cigarette/can_puncture()
-	return src.lit
+	return ..() || lit // in case someone has a sharp cigarette for some reason
 
 /*
 Checks if that loc and dir has a item on the wall
 */
 var/global/list/WALLITEMS = list(
-	/obj/machinery/power/apc, /obj/machinery/alarm, /obj/item/radio/intercom,
+	/obj/machinery/apc, /obj/machinery/alarm, /obj/item/radio/intercom,
 	/obj/structure/extinguisher_cabinet, /obj/structure/reagent_dispensers/peppertank,
 	/obj/machinery/status_display, /obj/machinery/network/requests_console, /obj/machinery/light_switch, /obj/structure/sign,
 	/obj/machinery/newscaster, /obj/machinery/firealarm, /obj/structure/noticeboard,

@@ -65,16 +65,6 @@ var/global/list/localhost_addresses = list(
 		cmd_admin_pm(C, null, ticket)
 		return
 
-	if(href_list["irc_msg"])
-		if(!holder && received_irc_pm < world.time - 6000) //Worst they can do is spam IRC for 10 minutes
-			to_chat(usr, SPAN_WARNING("You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you."))
-			return
-		if(mute_irc)
-			to_chat(usr, SPAN_WARNING("You cannot use this as your client has been muted from sending messages to the admins on IRC."))
-			return
-		cmd_admin_irc_pm(href_list["irc_msg"])
-		return
-
 	if(href_list["close_ticket"])
 		var/datum/ticket/ticket = locate(href_list["close_ticket"])
 
@@ -378,14 +368,10 @@ var/global/list/localhost_addresses = list(
 	if(admin_datums[ckey] && GAME_STATE == RUNLEVEL_GAME) //Only report this stuff if we are currently playing.
 		message_staff("\[[holder.rank]\] [key_name(src)] logged out.")
 		if(!global.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
-			var/full_message = "[key_name(src)] logged out - no more staff online."
-			send2adminirc(full_message)
-			SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Admin Logout (Game ID: [game_id])", "body" = full_message))
+			SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Admin Logout (Game ID: [game_id])", "body" = "[key_name(src)] logged out - no more staff online."))
 			if(get_config_value(/decl/config/toggle/delist_when_no_admins) && get_config_value(/decl/config/toggle/hub_visibility))
 				toggle_config_value(/decl/config/toggle/hub_visibility)
-				full_message = "Toggled hub visibility. The server is now invisible."
-				send2adminirc(full_message)
-				SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Automatic Hub Visibility Toggle (Game ID: [game_id])", "body" = full_message))
+				SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Automatic Hub Visibility Toggle (Game ID: [game_id])", "body" = "Toggled hub visibility. The server is now invisible."))
 
 //checks if a client is afk
 //3000 frames = 5 minutes

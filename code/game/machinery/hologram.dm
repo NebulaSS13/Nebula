@@ -80,6 +80,9 @@ var/global/list/holopads = list()
 
 /obj/machinery/hologram/holopad/Destroy()
 	global.listening_objects -= src
+	global.holopads -= src
+	for (var/mob/living/master in masters)
+		clear_holo(master)
 	return ..()
 
 /obj/machinery/hologram/holopad/interface_interact(var/mob/living/human/user) //Carn: Hologram requests.
@@ -386,13 +389,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	anchored = TRUE
 	idle_power_usage = 5
 	active_power_usage = 100
-
-//Destruction procs.
-/obj/machinery/hologram/holopad/Destroy()
-	global.holopads -= src
-	for (var/mob/living/master in masters)
-		clear_holo(master)
-	return ..()
 
 /*
  * Other Stuff: Is this even used?

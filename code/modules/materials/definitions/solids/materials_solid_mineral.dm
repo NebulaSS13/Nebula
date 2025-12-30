@@ -68,6 +68,7 @@
 	boiling_point = 2504
 	color = "#effffe"
 	reflectiveness = MAT_VALUE_SHINY
+	hardness = MAT_VALUE_VERY_HARD - 5 // Hard enough to whet steel.
 	sparse_material_weight = 3
 	rich_material_weight = 1
 	dissolves_into = list(
@@ -183,10 +184,10 @@
 
 /decl/material/solid/potash/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
-	var/volume = REAGENT_VOLUME(holder, type)
-	if(volume > 3)
+	var/affect_volume = REAGENT_VOLUME(holder, src)
+	if(affect_volume > 3)
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume > 10)
+	if(affect_volume > 10)
 		M.add_chemical_effect(CE_PULSE, 1)
 
 /decl/material/solid/bauxite
@@ -258,6 +259,8 @@
 	// lower than the temperature expected from a kiln so that clay can be used to make bricks to make a high-temperature kiln.
 	bakes_into_at_temperature = 950 CELSIUS
 	can_backfill_floor_type = /decl/flooring/clay
+	gemstone_chance = 0.01
+	gemstone_types  = list(/decl/material/solid/gemstone/sapphire = 1)
 
 /decl/material/solid/soil
 	name = "soil"
@@ -276,6 +279,17 @@
 		/decl/flooring/mud,
 		/decl/flooring/dirt
 	)
+	solution_name = "mud"
+	coated_adjective = "muddy"
+
+// todo: make mud either its own material or a mix of dirt and water
+// or let dirt be in the liquid volumes list for mud?
+// would a ball of mud just be a ball of dirt coated with water?
+// or would water be part of its matter?
+// well anyway.
+// for now, at least, we assume dirt coatings are always mud.
+/decl/material/solid/soil/get_primary_coating_name(datum/reagents/coating)
+	return solution_name
 
 /decl/material/solid/hematite
 	name = "hematite"

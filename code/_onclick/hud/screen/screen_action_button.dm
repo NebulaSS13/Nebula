@@ -3,6 +3,14 @@
 	requires_ui_style = FALSE
 	var/datum/action/action
 
+/obj/screen/action_button/Destroy()
+	if(!QDELETED(action))
+		if(action.button == src)
+			action.button = null
+		QDEL_NULL(action)
+	action = null
+	return ..()
+
 /obj/screen/action_button/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat, _action)
 	action = _action
 	return ..()
@@ -14,6 +22,7 @@
 	return FALSE
 
 /obj/screen/action_button/on_update_icon()
+	..()
 	if(!action)
 		return
 	icon = action.background_icon
@@ -63,8 +72,7 @@
 /obj/screen/action_button/hide_toggle/handle_click(mob/user, params)
 	if(!istype(user.hud_used))
 		return
-	user.hud_used.action_buttons_hidden = !user.hud_used.action_buttons_hidden
-	hidden = user.hud_used.action_buttons_hidden
+	hidden = user.hud_used.toggle_action_buttons_hidden()
 	if(hidden)
 		name = "Show Buttons"
 	else
@@ -72,7 +80,6 @@
 	update_icon()
 	user.update_action_buttons()
 
-/obj/screen/action_button/hide_toggle/on_update_icon()
-	cut_overlays()
+/obj/screen/action_button/hide_toggle/rebuild_screen_overlays()
+	..()
 	add_overlay(hidden ? "show" : "hide")
-	compile_overlays()

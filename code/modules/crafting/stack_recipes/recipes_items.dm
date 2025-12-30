@@ -38,3 +38,21 @@
 			bundles += bundle
 		bundle.merge(paper)
 	return bundles
+
+// These don't check hardness so that you can make them out of clay and fire them, I guess?
+// They used to be in the hardness-based recipes file but aren't now.
+/decl/stack_recipe/ring
+	result_type         = /obj/item/clothing/gloves/ring
+	validation_material = /decl/material/solid/metal/silver
+
+/decl/stack_recipe/ring/thin
+	name                = "ring, thin"
+	result_type         = /obj/item/clothing/gloves/ring/thin
+
+/decl/stack_recipe/ring/thick
+	name                = "ring, thick"
+	result_type         = /obj/item/clothing/gloves/ring/thick
+
+/decl/stack_recipe/ring/split
+	name                = "ring, split"
+	result_type         = /obj/item/clothing/gloves/ring/split

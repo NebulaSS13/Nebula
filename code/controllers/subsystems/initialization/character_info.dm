@@ -136,7 +136,7 @@ SUBSYSTEM_DEF(character_info)
 				fdel(dump_file_name)
 			text2file(JOINTEXT(SScharacter_info.get_character_manifest_html(apply_striping = FALSE)), dump_file_name)
 			if(fexists(dump_file_name))
-				direct_output(usr, ftp(dump_file_name, "dump_manifest.html"))
+				ftp_to(usr, dump_file_name, "dump_manifest.html")
 				return TOPIC_HANDLED
 		catch(var/exception/E)
 			log_debug("Exception when dumping character relationship manifest: [E]")

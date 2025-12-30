@@ -30,7 +30,7 @@
 	STOP_PROCESSING(SSprocessing, src)
 	QDEL_NULL(network)
 
-	if(air?.volume || liquid?.total_volume)
+	if(air?.total_volume || REAGENT_TOTAL_VOLUME(liquid))
 		temporarily_store_fluids()
 
 	QDEL_NULL(air)
@@ -61,16 +61,16 @@
 /datum/pipeline/proc/temporarily_store_fluids()
 	//Update individual gas_mixtures by volume ratio
 
-	var/liquid_transfer_per_pipe = min(REAGENT_UNITS_PER_PIPE, (liquid && length(members)) ? (liquid.total_volume / length(members)) : 0)
-	if(!air?.volume && !liquid_transfer_per_pipe)
+	var/liquid_transfer_per_pipe = min(REAGENT_UNITS_PER_PIPE, (liquid && length(members)) ? (REAGENT_TOTAL_VOLUME(liquid) / length(members)) : 0)
+	if(!air?.total_volume && !liquid_transfer_per_pipe)
 		return
 
 	for(var/obj/machinery/atmospherics/pipe/member in members)
-		if(air?.volume)
+		if(air?.total_volume)
 			member.air_temporary = new
 			member.air_temporary.copy_from(air)
-			member.air_temporary.volume = member.volume
-			member.air_temporary.multiply(member.volume / air.volume)
+			member.air_temporary.total_volume = member.gas_volume
+			member.air_temporary.multiply(member.gas_volume / air.total_volume)
 
 		if(liquid_transfer_per_pipe)
 			member.liquid_temporary = new(REAGENT_UNITS_PER_PIPE, member)
@@ -81,7 +81,7 @@
 	members = list(base)
 	edges = list()
 
-	var/volume = base.volume
+	var/temp_volume = base.gas_volume
 	base.parent = src
 	maximum_pressure = base.maximum_pressure
 
@@ -110,7 +110,7 @@
 						members += item
 						possible_expansions += item
 
-						volume += item.volume
+						temp_volume += item.gas_volume
 						item.parent = src
 
 						maximum_pressure = min(maximum_pressure, item.maximum_pressure)
@@ -119,9 +119,9 @@
 							air.merge(item.air_temporary)
 							item.air_temporary = null
 
-						liquid.maximum_volume += REAGENT_UNITS_PER_PIPE
+						REAGENT_ADD_MAX_VOL(liquid, REAGENT_UNITS_PER_PIPE)
 						if(item.liquid_temporary)
-							item.liquid_temporary.trans_to_holder(liquid, item.liquid_temporary.total_volume)
+							item.liquid_temporary.trans_to_holder(liquid, REAGENT_TOTAL_VOLUME(item.liquid_temporary))
 							item.liquid_temporary = null
 
 						if(item.leaking)
@@ -134,8 +134,8 @@
 
 			possible_expansions -= borderline
 
-	air.volume = volume
-	liquid.maximum_volume = length(members) * REAGENT_UNITS_PER_PIPE
+	air.total_volume = temp_volume
+	REAGENT_SET_MAX_VOL(liquid, (length(members) * REAGENT_UNITS_PER_PIPE))
 
 /datum/pipeline/proc/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(new_network.line_members.Find(src))
@@ -186,79 +186,46 @@
 		air.merge(air_sample)
 		//turf_air already modified by equalize_gases()
 
-	if(liquid?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(liquid))
 		liquid.trans_to_turf(target, FLUID_PUDDLE)
 
 	if(network)
 		network.update = 1
 
 /datum/pipeline/proc/temperature_interact(turf/target, share_volume, thermal_conductivity)
+
+	if(air.total_volume <= 0) // Avoid div by zero.
+		return
+
 	var/total_heat_capacity = air.heat_capacity()
-	var/partial_heat_capacity = total_heat_capacity*(share_volume/air.volume)
+	var/partial_heat_capacity = total_heat_capacity*(share_volume/air.total_volume)
+	var/datum/gas_mixture/target_air = target.return_air()
 
-	if(SHOULD_PARTICIPATE_IN_ZONES(target) && !target.blocks_air)
-		var/delta_temperature = 0
-		var/sharer_heat_capacity = 0
+	if(total_heat_capacity <= 0) // Avoid div by zero.
+		return
 
-		if(target.zone)
-			delta_temperature = (air.temperature - target.zone.air.temperature)
-			sharer_heat_capacity = target.zone.air.heat_capacity()
-		else
-			delta_temperature = (air.temperature - target.air.temperature)
-			sharer_heat_capacity = target.air.heat_capacity()
+	if(target.blocks_air)
+		return
 
-		var/self_temperature_delta = 0
-		var/sharer_temperature_delta = 0
+	if(partial_heat_capacity <= 0)
+		return
 
-		if((sharer_heat_capacity > 0) && (partial_heat_capacity > 0))
-			var/heat = thermal_conductivity*delta_temperature* \
-				(partial_heat_capacity*sharer_heat_capacity/(partial_heat_capacity+sharer_heat_capacity))
+	var/sharer_heat_capacity = target_air.heat_capacity()
 
-			self_temperature_delta = -heat/total_heat_capacity
-			sharer_temperature_delta = heat/sharer_heat_capacity
-		else
-			return 1
+	if(sharer_heat_capacity <= 0)
+		return
 
-		air.temperature += self_temperature_delta
-
-		if(target.zone)
-			target.zone.air.temperature += sharer_temperature_delta/target.zone.air.group_multiplier
-		else
-			target.air.temperature += sharer_temperature_delta
-
-	else if(target.external_atmosphere_participation && !target.blocks_air)
-
-		var/turf/modeled_location = target
-		var/datum/gas_mixture/target_air = modeled_location.return_air()
-
-		var/delta_temperature = air.temperature - target_air.temperature
-		var/sharer_heat_capacity = target_air.heat_capacity()
-
-		if((sharer_heat_capacity > 0) && (partial_heat_capacity > 0))
-			var/heat = thermal_conductivity*delta_temperature* \
-				(partial_heat_capacity*sharer_heat_capacity/(partial_heat_capacity+sharer_heat_capacity))
-			air.temperature += -heat/total_heat_capacity
-		else
-			return 1
-
-	else
-		if((target.heat_capacity > 0) && (partial_heat_capacity > 0))
-			var/delta_temperature = air.temperature - target.temperature
-
-			var/heat = thermal_conductivity*delta_temperature* \
-				(partial_heat_capacity*target.heat_capacity/(partial_heat_capacity+target.heat_capacity))
-
-			air.temperature -= heat/total_heat_capacity
-			// Only increase the temperature of the target if it's simulated.
-			if(target.simulated)
-				target.temperature += heat/target.heat_capacity
+	var/delta_temperature = (air.temperature - target_air.temperature)
+	var/heat = thermal_conductivity * delta_temperature * ( partial_heat_capacity * sharer_heat_capacity / (partial_heat_capacity + sharer_heat_capacity) )
+	air.add_thermal_energy(-heat)
+	target_air.add_thermal_energy(heat)
 
 	if(network)
-		network.update = 1
+		network.update = TRUE
 
 //surface must be the surface area in m^2
 /datum/pipeline/proc/radiate_heat_to_space(surface, thermal_conductivity)
-	var/gas_density = air.total_moles/air.volume
+	var/gas_density = air.total_moles/air.total_volume
 	thermal_conductivity *= min(gas_density / ( RADIATOR_OPTIMUM_PRESSURE/(R_IDEAL_GAS_EQUATION*GAS_CRITICAL_TEMPERATURE) ), 1) //mult by density ratio
 
 	var/heat_gain = get_thermal_radiation(air.temperature, surface, RADIATOR_EXPOSED_SURFACE_AREA_RATIO, thermal_conductivity)

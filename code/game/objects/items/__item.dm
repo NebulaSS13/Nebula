@@ -6,20 +6,24 @@
 	abstract_type = /obj/item
 	temperature_sensitive = TRUE
 
+	/// Set to prefix name with this string ('woven' for 'woven basket' etc)
+	var/name_prefix
+
 	/// Set to false to skip state checking and never draw an icon on the mob (except when held)
 	var/draw_on_mob_when_equipped = TRUE
 
-	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
+	/// this saves our blood splatter/coating overlay, which will be processed not to go over the edges of the sprite.
+	var/image/coating_overlay
 	var/randpixel = 6
 	var/material_health_multiplier = 0.2
 	var/hitsound
 	/// This is used to determine on which slots an item can fit.
 	var/slot_flags = SLOT_NONE
 	/// If it's an item we don't want to log attack_logs with, set this to TRUE
-	var/no_attack_log = 0
+	var/no_attack_log = FALSE
 	var/obj/item/master = null
 	var/origin_tech                    //Used by R&D to determine what research bonuses it grants.
-	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	VAR_PROTECTED/list/attack_verb = "hit" //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/attack_cooldown = DEFAULT_WEAPON_COOLDOWN
 	var/melee_accuracy_bonus = 0
@@ -27,14 +31,24 @@
 	/// Flag for ZAS based contamination (chlorine etc)
 	var/contaminated = FALSE
 
-	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the SLOT_HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc. flags. See setup.dm
-	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the SLOT_HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc. flags. See setup.dm
-	var/max_heat_protection_temperature //Set this variable to determine up to which temperature (IN KELVIN) the item protects against heat damage. Keep at null to disable protection. Only protects areas set by heat_protection flags
-	var/min_cold_protection_temperature //Set this variable to determine down to which temperature (IN KELVIN) the item protects against cold damage. 0 is NOT an acceptable number due to if(varname) tests!! Keep at null to disable protection. Only protects areas set by cold_protection flags
-	var/max_pressure_protection // Set this variable if the item protects its wearer against high pressures below an upper bound. Keep at null to disable protection.
-	var/min_pressure_protection // Set this variable if the item protects its wearer against low pressures above a lower bound. Keep at null to disable protection. 0 represents protection against hard vacuum.
+	/// flags which determine which body parts are protected from heat. Use the SLOT_HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc. flags. See setup.dm
+	var/heat_protection = 0
+	/// flags which determine which body parts are protected from cold. Use the SLOT_HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc. flags. See setup.dm
+	var/cold_protection = 0
+	/// Set this variable to determine up to which temperature (IN KELVIN) the item protects against heat damage.
+	/// Keep at null to disable protection. Only protects areas set by heat_protection flags.
+	var/max_heat_protection_temperature
+	///Set this variable to determine down to which temperature (IN KELVIN) the item protects against cold damage.
+	/// Keep at null to disable protection. Only protects areas set by cold_protection flags
+	var/min_cold_protection_temperature
+	/// Set this variable if the item protects its wearer against high pressures below an upper bound.
+	/// Keep at null to disable protection.
+	var/max_pressure_protection
+	/// Set this variable if the item protects its wearer against low pressures above a lower bound.
+	/// Keep at null to disable protection. 0 represents protection against hard vacuum.
+	var/min_pressure_protection
 
-	var/datum/action/item_action/action = null
+	var/datum/action/item_action/action
 	var/action_button_name //It is also the text which gets displayed on the action button. If not set it defaults to 'Use [name]'. If it's not set, there'll be no button.
 	var/action_button_desc //A description for action button which will be displayed as tooltip.
 	var/default_action_type = /datum/action/item_action // Specify the default type and behavior of the action button for this atom.
@@ -50,28 +64,32 @@
 	var/gas_transfer_coefficient = 1 // for leaking gas from turf to mask and vice-versa (for masks right now, but at some point, i'd like to include space helmets)
 	var/permeability_coefficient = 1 // for chemicals/diseases
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
-	var/slowdown_general = 0 // How much clothing is slowing you down. Negative values speeds you up. This is a general slowdown, no matter equipment slot.
-	var/slowdown_per_slot // How much clothing is slowing you down. This is an associative list: item slot - slowdown
-	var/slowdown_accessory // How much an accessory will slow you down when attached to a worn article of clothing.
-	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
-	var/material_armor_multiplier  // if set, item will use material's armor values multiplied by this.
+	var/slowdown_general = 0 // How this item slows its holder down. Negative values speeds them up. This is a general slowdown, no matter the equipment slot.
+	/// How much this item slows its holder down, based on the slot it's in. This is an associative list: slot_string = slowdown
+	var/slowdown_per_slot
+	/// An additional slowdown amount, contributed by accessories attached to this item. Not to be confused with /obj/item/clothing/var/accessory_slowdown.
+	var/tmp/slowdown_accessory
+	/// If TRUE, the item cannot be removed except via destruction or using the force flag in unequip procs.
+	var/canremove = TRUE
+	/// if set, item will use material's armor values multiplied by this.
+	var/material_armor_multiplier
 	var/armor_type = /datum/extension/armor
 	var/list/armor
 	var/armor_degradation_speed //How fast armor will degrade, multiplier to blocked damage to get armor damage value.
 	var/list/allowed = null //suit storage stuff.
 	var/obj/item/uplink/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
 	var/zoomdevicename = null //name used for message when binoculars/scope is used
-	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
+	/// if the item is actively being used to zoom. For scoped guns and binoculars.
+	var/zoom = FALSE
 
-	var/base_parry_chance	// Will allow weapon to parry melee attacks if non-zero
+	var/base_parry_chance = 0 // Will allow weapon to parry melee attacks if non-zero
 	var/wielded_parry_bonus = 15
 
 	var/use_alt_layer = FALSE // Use the slot's alternative layer when rendering on a mob
 
-	var/list/sprite_sheets // Assoc list of bodytype to icon for producing onmob overlays when this item is held or worn.
+	/// Assoc list of bodytype category to icon for producing onmob overlays when this item is held or worn.
+	var/list/sprite_sheets
 
-	// Material handling for material weapons (not used by default, unless material is supplied or set)
-	var/decl/material/material                      // Reference to material decl. If set to a string corresponding to a material ID, will init the item with that material.
 	///Will apply the flagged modifications to the object
 	var/material_alteration = MAT_FLAG_ALTERATION_NONE
 	var/anomaly_shielding					   // 0..1 value of how well it shields against xenoarch anomalies
@@ -92,7 +110,6 @@
 	/// Controls what method is used to resolve conflicts between equipped items and mob loadout.
 	var/replaced_in_loadout = LOADOUT_CONFLICT_DELETE
 
-	var/paint_color
 	var/paint_verb
 
 	/// What dexterity is required to attack with this item?
@@ -109,12 +126,27 @@
 	var/unwieldsound = 'sound/foley/tooldrop1.ogg'
 
 	var/base_name
+	var/base_desc
 
 	/// Can this object leak into water sources?
 	var/watertight = FALSE
 
 	/// Can this item knock someone out if used as a weapon? Overridden for natural weapons as a nerf to simplemobs.
 	var/weapon_can_knock_prone = TRUE
+
+/// Returns a dexterity value required to use this item as a weapon.
+/obj/item/proc/get_required_attack_dexterity(mob/user, atom/target)
+	// We can likely assume that if we're located inside a rig, then the wearer
+	// has the appropriate dexterity to wear and use the rig, even if they aren't
+	// manually dexterous; specifically useful for things like baxxid and drakes.
+	var/obj/item/rig/rig = get_recursive_loc_of_type(/obj/item/rig)
+	. = istype(rig) ? DEXTERITY_NONE : needs_attack_dexterity
+	if(istype(target))
+		. = target.adjust_required_attack_dexterity(user, .)
+
+// Returns a dexterity value required to interact with this item at all, such as picking it up.
+/obj/item/get_required_interaction_dexterity()
+	return needs_interaction_dexterity
 
 /obj/item/get_color()
 	if(paint_color)
@@ -162,6 +194,7 @@
 /obj/item/Initialize(var/ml, var/material_key)
 
 	base_name ||= name
+	base_desc ||= desc
 
 	if(isnull(current_health))
 		current_health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
@@ -171,6 +204,19 @@
 		set_material(material_key)
 	paint_verb ||= "painted" // fallback for the case of no material
 
+	// This is a bit gross, but it makes writing rings and necklaces much easier.
+	// If the decorations list is already populated at this point, we assume it's
+	// prebaked decorations.
+	// Only things handled appropriately at the moment are gems and material inlays.
+	if(length(decorations))
+		for(var/decoration_type in decorations)
+			decorations -= decoration_type
+			if(ispath(decoration_type, /obj/item/gemstone))
+				decorations[GET_DECL(/decl/item_decoration/setting)] = list("object" = new decoration_type(src))
+			else if(ispath(decoration_type, /decl/material))
+				decorations[GET_DECL(/decl/item_decoration/inset)]   = list("material" = GET_DECL(decoration_type))
+			else
+				PRINT_STACK_TRACE("Item [type] tried to initialize with an unsupported initial decoration type ('[decoration_type]')")
 	. = ..()
 
 	setup_sprite_sheets()
@@ -198,6 +244,9 @@
 
 /obj/item/Destroy()
 
+	// May contain object references.
+	LAZYCLEARLIST(decorations)
+
 	if(LAZYLEN(_item_effects))
 		_item_effects = null
 		SSitem_effects.queued_items -= src
@@ -207,6 +256,14 @@
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(hidden_uplink)
 	QDEL_NULL(coating)
+
+	if(istype(action))
+		if(action.target == src)
+			action.target = null
+		if(!QDELETED(action))
+			QDEL_NULL(action)
+		else
+			action = null
 
 	if(ismob(loc))
 		var/mob/M = loc
@@ -226,7 +283,7 @@
 /obj/item/PopulateClone(obj/item/clone)
 	clone = ..()
 	clone.contaminated = contaminated
-	clone.blood_overlay = image(blood_overlay)
+	clone.coating_overlay = image(coating_overlay)
 	clone.current_health = current_health
 
 	//#TODO: once item damage in, check health!
@@ -282,7 +339,7 @@
 		return FALSE
 	return wielder.can_twohand_item(src)
 
-/obj/item/examine(mob/user, distance)
+/obj/item/get_examine_strings(mob/user, distance, infix, suffix)
 
 	var/list/desc_comp = list()
 	desc_comp += "It is a [w_class_description()] item."
@@ -357,10 +414,16 @@
 	if(drying_wetness > 0 && drying_wetness != initial(drying_wetness))
 		desc_comp += "\The [src] is [get_dryness_text()]."
 
+	if(REAGENT_TOTAL_VOLUME(coating))
+		desc_comp += "It is covered in [coating.get_coated_name()]." // It is covered in dilute oily slimy bloody mud.
+
+	if(check_rights(R_DEBUG, 0, user))
+		desc_comp += "\The [src] has a temperature of [temperature]K."
+
 	return ..(user, distance, "", jointext(desc_comp, "<br/>"))
 
 /obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
-	. = (loc == user && istype(over, /obj/screen/inventory)) || ..()
+	. = (loc == user && istype(over, /obj/screen)) || ..()
 
 /obj/item/handle_mouse_drop(atom/over, mob/user, params)
 
@@ -424,27 +487,11 @@
 	return ..() && (!strict || loc == user)
 
 /obj/item/proc/squash_item(skip_qdel = FALSE)
-
 	if(!istype(material) || material.hardness > MAT_VALUE_MALLEABLE)
 		return null
-
-	var/list/leftover_mats = list()
-	for(var/mat in matter)
-		var/decl/material/material_decl = GET_DECL(mat)
-		if(material_decl.hardness <= MAT_VALUE_MALLEABLE)
-			var/spawn_amount = round(matter[mat] / SHEET_MATERIAL_AMOUNT)
-			if(spawn_amount > 0)
-				var/obj/item/stack/material/lump/lump = new(loc, spawn_amount, mat)
-				LAZYADD(., lump)
-				continue
-		leftover_mats[mat] = matter[mat]
-
-	if(length(leftover_mats))
-		var/obj/item/debris/scraps/remains = new(loc)
-		remains.matter = leftover_mats?.Copy()
-		remains.update_primary_material()
-		LAZYADD(., remains)
-
+	var/list/results = convert_matter_to_lumps(skip_qdel)
+	if(length(results))
+		. = results
 	if(!skip_qdel)
 		matter = null
 		material = null
@@ -452,7 +499,7 @@
 	return . || TRUE
 
 /obj/item/attack_self(mob/user)
-	if(user.a_intent == I_HURT && istype(material))
+	if(user.check_intent(I_FLAG_HARM) && istype(material))
 		var/list/results = squash_item(skip_qdel = TRUE)
 		if(results && user.try_unequip(src, user.loc))
 			user.visible_message(SPAN_DANGER("\The [user] squashes \the [src] into a lump."))
@@ -465,7 +512,7 @@
 			return TRUE
 	return ..()
 
-/obj/item/end_throw()
+/obj/item/end_throw(datum/thrownthing/TT)
 	. = ..()
 	squash_item()
 
@@ -533,29 +580,27 @@
 	return FALSE
 
 /obj/item/attack_ai(mob/living/silicon/ai/user)
-	if (!istype(src.loc, /obj/item/robot_module))
+	if (!istype(loc, /obj/item/robot_module))
 		return
 	//If the item is part of a cyborg module, equip it
 	if(!isrobot(user))
 		return
-	var/mob/living/silicon/robot/R = user
-	R.activate_module(src)
-	if(R.hud_used)
-		R.hud_used.update_robot_modules_display()
+	var/mob/living/silicon/robot/robot = user
+	robot.put_in_hands(src)
 
-/obj/item/proc/try_slapcrafting(obj/item/W, mob/user)
-	if(SSfabrication.try_craft_with(src, W, user))
+/obj/item/proc/try_slapcrafting(obj/item/used_item, mob/user)
+	if(SSfabrication.try_craft_with(src, used_item, user))
 		return TRUE
-	if(SSfabrication.try_craft_with(W, src, user))
+	if(SSfabrication.try_craft_with(used_item, src, user))
 		return TRUE
 	return FALSE
 
-/obj/item/proc/user_can_attack_with(mob/user, silent = FALSE)
-	return !needs_attack_dexterity || user.check_dexterity(needs_attack_dexterity, silent = silent)
+/obj/item/proc/user_can_attack_with(mob/user, atom/target, silent = FALSE)
+	return user.check_dexterity(get_required_attack_dexterity(user, target), silent = silent)
 
 /obj/item/attackby(obj/item/used_item, mob/user)
 	// if can_wield is false we still need to call parent for storage objects to work properly
-	var/can_wield = user_can_attack_with(user, silent = TRUE)
+	var/can_wield = used_item.user_can_attack_with(user, silent = TRUE)
 
 	if(can_wield && try_slapcrafting(used_item, user))
 		return TRUE
@@ -601,7 +646,7 @@
 		addtimer(CALLBACK(user, TYPE_PROC_REF(/mob, check_emissive_equipment)), 0, TIMER_UNIQUE)
 
 	RAISE_EVENT(/decl/observ/mob_unequipped, user, src)
-	RAISE_EVENT_REPEAT(/decl/observ/item_unequipped, src, user)
+	RAISE_EVENT(/decl/observ/item_unequipped, src, user)
 
 // called just after an item is picked up, after it has been equipped to the mob.
 /obj/item/proc/on_picked_up(mob/user, atom/old_loc)
@@ -664,7 +709,7 @@
 			addtimer(CALLBACK(user, TYPE_PROC_REF(/mob, check_emissive_equipment)), 0, TIMER_UNIQUE)
 
 	RAISE_EVENT(/decl/observ/mob_equipped, user, src, slot)
-	RAISE_EVENT_REPEAT(/decl/observ/item_equipped, src, user, slot)
+	RAISE_EVENT(/decl/observ/item_equipped, src, user, slot)
 
 // As above but for items being equipped to an active module on a robot.
 /obj/item/proc/equipped_robot(var/mob/user)
@@ -681,7 +726,6 @@
 	if(slot == slot_in_backpack_str)
 		var/obj/item/back = user.get_equipped_item(slot_back_str)
 		return back?.storage?.can_be_inserted(src, user, TRUE)
-
 
 	var/datum/inventory_slot/inv_slot = user.get_inventory_slot_datum(slot)
 	if(!inv_slot)
@@ -703,7 +747,7 @@
 	return inv_slot?.is_accessible(user, src, disable_warning)
 
 /obj/item/proc/can_be_dropped_by_client(mob/M)
-	return M.canUnEquip(src)
+	return M.can_unequip_item(src)
 
 /obj/item/verb/verb_pickup()
 	set src in oview(1)
@@ -733,7 +777,7 @@
 //handle_shield should return a positive value to indicate that the attack is blocked and should be prevented.
 //If a negative value is returned, it should be treated as a special return value for bullet_act() and handled appropriately.
 //For non-projectile attacks this usually means the attack is blocked.
-//Otherwise should return 0 to indicate that the attack is not affected in any way.
+//Otherwise should return FALSE to indicate that the attack is not affected in any way.
 /obj/item/proc/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/parry_chance = get_parry_chance(user)
 	if(attacker)
@@ -743,8 +787,8 @@
 			user.visible_message(SPAN_DANGER("\The [user] parries [attack_text] with \the [src]!"))
 			playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
 			on_parry(user, damage_source, attacker)
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 /obj/item/proc/on_parry(mob/user, damage_source, mob/attacker)
 	return
@@ -757,24 +801,26 @@
 		if(is_held_twohanded())
 			. += wielded_parry_bonus
 
+/// Occurs when a disarm attempt fails a skill check, resulting in the attacker being damaged.
+/// Return TRUE to block further checks for other objects.
 /obj/item/proc/on_disarm_attempt(mob/target, mob/living/attacker)
 	var/force = get_attack_force(attacker)
 	if(force < 1)
-		return 0
+		return FALSE
 	if(!istype(attacker))
-		return 0
+		return FALSE
 	var/decl/pronouns/pronouns = attacker.get_pronouns()
 	attacker.apply_damage(force, atom_damage_type, attacker.get_active_held_item_slot(), used_weapon = src)
 	attacker.visible_message(SPAN_DANGER("\The [attacker] hurts [pronouns.his] hand on \the [src]!"))
 	playsound(target, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	playsound(target, hitsound, 50, 1, -1)
-	return 1
+	return TRUE
 
 /obj/item/reveal_blood()
 	if(was_bloodied && !fluorescent)
 		fluorescent = FLUORESCENT_GLOWS
 		blood_color = COLOR_LUMINOL
-		blood_overlay.color = COLOR_LUMINOL
+		coating_overlay.color = COLOR_LUMINOL
 		update_icon()
 
 /obj/item/add_blood(mob/living/M, amount = 2, list/blood_data)
@@ -798,21 +844,19 @@
 		LAZYSET(blood_DNA, unique_enzymes, blood_type)
 	return TRUE
 
-var/global/list/_blood_overlay_cache = list()
-var/global/icon/_item_blood_mask = icon('icons/effects/blood.dmi', "itemblood")
-/obj/item/proc/generate_blood_overlay(force = FALSE)
-	if(blood_overlay && !force)
+var/global/list/icon/_coating_overlay_cache = list()
+var/global/icon/_item_coating_mask = icon('icons/effects/blood.dmi', "itemblood")
+/obj/item/proc/generate_coating_overlay(force = FALSE)
+	if(coating_overlay && !force)
 		return
-	var/cache_key = "[icon]-[icon_state]"
-	if(global._blood_overlay_cache[cache_key])
-		blood_overlay = global._blood_overlay_cache[cache_key]
-		return
-	var/icon/I = new /icon(icon, icon_state)
-	I.MapColors(0,0,0, 0,0,0, 0,0,0, 1,1,1)         // Sets the icon RGB channel to pure white.
-	I.Blend(global._item_blood_mask, ICON_MULTIPLY) // Masks the blood overlay against the generated mask.
-	blood_overlay = image(I)
-	blood_overlay.appearance_flags |= NO_CLIENT_COLOR|RESET_COLOR
-	global._blood_overlay_cache[cache_key] = blood_overlay
+	var/cache_key = "\ref[icon]-[icon_state]" // this needs to use ref because of stringification
+	if(!global._coating_overlay_cache[cache_key])
+		var/icon/I = new /icon(icon, icon_state)
+		I.MapColors(0,0,0, 0,0,0, 0,0,0, 1,1,1)         // Sets the icon RGB channel to pure white.
+		I.Blend(global._item_coating_mask, ICON_MULTIPLY) // Masks the coating overlay against the generated mask.
+		global._coating_overlay_cache[cache_key] = I
+	coating_overlay = image(global._coating_overlay_cache[cache_key])
+	coating_overlay.appearance_flags |= NO_CLIENT_COLOR|RESET_COLOR
 
 /obj/item/proc/showoff(mob/user)
 	for(var/mob/M in view(user))
@@ -847,10 +891,10 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 	if(!istype(user.hud_used))
 		return
 
-	if(user.hud_used.hud_shown)
+	if(user.hud_used.is_hud_shown())
 		user.toggle_zoom_hud()	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
 	user.client.view = viewsize
-	zoom = 1
+	zoom = TRUE
 
 	var/viewoffset = WORLD_ICON_SIZE * tileoffset
 	switch(user.dir)
@@ -882,7 +926,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/unzoom(var/mob/user)
 	if(!zoom)
 		return
-	zoom = 0
+	zoom = FALSE
 
 	events_repository.unregister(/decl/observ/destroyed, user, src, TYPE_PROC_REF(/obj/item, unzoom))
 	events_repository.unregister(/decl/observ/moved, user, src, TYPE_PROC_REF(/obj/item, unzoom))
@@ -895,7 +939,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 		return
 
 	user.client.view = world.view
-	if(!user.hud_used.hud_shown)
+	if(istype(user.hud_used) && !user.hud_used.is_hud_shown())
 		user.toggle_zoom_hud()
 	user.client.pixel_x = 0
 	user.client.pixel_y = 0
@@ -906,13 +950,10 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 	return 0 // Process Kill
 
 /obj/item/proc/get_examine_name()
-	. = name
-	if(coating?.total_volume)
-		. = SPAN_WARNING("<font color='[coating.get_color()]'>stained</font> [.]")
-	if(gender == PLURAL)
-		. = "some [.]"
-	else
-		. = "\a [.]"
+	var/examine_prefix = get_examine_prefix()
+	if(examine_prefix)
+		examine_prefix += " "
+	return ADD_ARTICLE_GENDER("[examine_prefix][name]", gender)
 
 /obj/item/proc/get_examine_line()
 	. = "[html_icon(src)] [get_examine_name()]"
@@ -986,11 +1027,11 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/get_autopsy_descriptors()
 	var/list/descriptors = list()
 	descriptors += w_class_description()
-	if(sharp)
+	if(is_sharp())
 		descriptors += "sharp"
-	if(edge)
+	if(has_edge())
 		descriptors += "edged"
-	if(get_attack_force() >= 10 && !sharp && !edge)
+	if(get_attack_force() >= 10 && !is_sharp() && !has_edge())
 		descriptors += "heavy"
 	if(material)
 		descriptors += "made of [material.solid_name]"
@@ -1001,26 +1042,35 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/add_coating(reagent_type, amount, data)
 	if(!coating)
-		coating = new/datum/reagents(10, src)
-	coating.add_reagent(reagent_type, amount, data)
-
-	if(!blood_overlay)
-		generate_blood_overlay()
-	blood_overlay.color = coating.get_color()
-
+		coating = new /datum/reagents(10, src)
+	if(ispath(reagent_type))
+		coating.add_reagent(reagent_type, amount, data)
+	else if(istype(reagent_type, /datum/reagents))
+		var/datum/reagents/source = reagent_type
+		source.trans_to_holder(coating, amount)
+	if(!coating_overlay)
+		generate_coating_overlay()
+	coating_overlay.color = coating.get_color()
 	update_icon()
 
 /obj/item/proc/remove_coating(amount)
 	if(!coating)
 		return
 	coating.remove_any(amount)
-	if(coating.total_volume <= MINIMUM_CHEMICAL_VOLUME)
+	if(REAGENT_TOTAL_VOLUME(coating) <= MINIMUM_CHEMICAL_VOLUME)
+		clean(FALSE)
+
+/obj/item/proc/transfer_coating_to(atom/target, amount = 1, multiplier = 1, copy = 0, defer_update = FALSE, transferred_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID))
+	if(!coating)
+		return
+	coating.trans_to(target, amount, multiplier)
+	if(REAGENT_TOTAL_VOLUME(coating) <= MINIMUM_CHEMICAL_VOLUME)
 		clean(FALSE)
 
 /obj/item/clean(clean_forensics=TRUE)
 	. = ..()
 	QDEL_NULL(coating)
-	blood_overlay = null
+	coating_overlay = null
 	if(clean_forensics)
 		var/datum/extension/forensic_evidence/forensics = get_extension(src, /datum/extension/forensic_evidence)
 		if(forensics)
@@ -1069,7 +1119,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 	for(var/equipped_slot in get_associated_equipment_slots())
 		wearer.update_equipment_overlay(equipped_slot, FALSE)
 	if(do_update_icon)
-		wearer.update_icon()
+		wearer.lazy_update_icon()
 	return TRUE
 
 /obj/item/proc/reconsider_client_screen_presence(var/client/client, var/slot)
@@ -1099,9 +1149,6 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 		step_towards(src,S)
 	else ..()
 
-/obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
-	. = (loc == user && istype(over, /obj/screen)) || ..()
-
 // Supplied during loadout gear tweaking.
 /obj/item/proc/set_custom_name(var/new_name)
 	base_name = new_name
@@ -1127,8 +1174,13 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 		return LOADOUT_CONFLICT_DELETE
 	return replaced_in_loadout
 
+/obj/item/dropped(mob/user, slot)
+	. = ..()
+	user?.clear_available_intents()
+
 /obj/item/equipped(mob/user, slot)
 	. = ..()
+	user?.clear_available_intents()
 	// delay for 1ds to allow the rest of the call stack to resolve
 	if(!QDELETED(src) && !QDELETED(user) && user.get_equipped_slot_for_item(src) == slot)
 		try_burn_wearer(user, slot, 1)
@@ -1159,10 +1211,9 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 		var/decl/material/bait_mat = GET_DECL(mat)
 		if(bait_mat.fishing_bait_value)
 			. += MATERIAL_UNITS_TO_REAGENTS_UNITS(matter[mat]) * bait_mat.fishing_bait_value * BAIT_VALUE_CONSTANT
-	for(var/mat in reagents?.reagent_volumes)
-		var/decl/material/bait_mat = GET_DECL(mat)
-		if(bait_mat.fishing_bait_value)
-			. += reagents.reagent_volumes[mat] * bait_mat.fishing_bait_value * BAIT_VALUE_CONSTANT
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
+		if(reagent.fishing_bait_value)
+			. += REAGENT_VOLUME(reagents, reagent) * reagent.fishing_bait_value * BAIT_VALUE_CONSTANT
 #undef BAIT_VALUE_CONSTANT
 
 /obj/item/proc/get_storage_cost()
@@ -1226,7 +1277,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /// @returns:
 /// - reagent_overlay as /image|null - the overlay image representing the reagents in this object
 /obj/item/proc/get_reagents_overlay(state_prefix)
-	if(reagents?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		return
 	var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
 	if(!primary_reagent)
@@ -1241,8 +1292,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 	if(!reagents_state || !check_state_in_icon(reagents_state, icon))
 		return
 	var/image/reagent_overlay = overlay_image(icon, reagents_state, reagents.get_color(), RESET_COLOR | RESET_ALPHA)
-	for(var/reagent_type in reagents.reagent_volumes)
-		var/decl/material/reagent = GET_DECL(reagent_type)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		if(!reagent.reagent_overlay)
 			continue
 		var/modified_reagent_overlay = state_prefix ? "[state_prefix]_[reagent.reagent_overlay]" : reagent.reagent_overlay
@@ -1254,8 +1304,53 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /obj/item/on_reagent_change()
 	. = ..()
 	// You can't put liquids in clay/sand/dirt vessels, sorry.
-	if(reagents?.total_liquid_volume > 0 && material && material.hardness <= MAT_VALUE_MALLEABLE && !QDELETED(src))
+	if(REAGENT_TOTAL_LIQUID_VOLUME(reagents) > 0 && material && material.hardness <= MAT_VALUE_MALLEABLE && !QDELETED(src))
 		visible_message(SPAN_DANGER("\The [src] falls apart!"))
 		squash_item()
 		if(!QDELETED(src))
 			physically_destroyed()
+
+/obj/item/proc/get_provided_intents(mob/wielder)
+	return null
+
+/obj/item/get_examine_prefix()
+	if(REAGENT_TOTAL_VOLUME(coating))
+		var/coating_string = coating.get_coated_adjectives() // component coloring is handled in here
+		if(get_config_value(/decl/config/enum/colored_coating_names) == CONFIG_COATING_COLOR_MIXTURE)
+			coating_string = FONT_COLORED(coating.get_color(), coating_string)
+		return coating_string
+	return ..()
+
+// Bespoke proc for handling when a centrifuge smooshes us, only currently used by growns and hive frames.
+/obj/item/proc/handle_centrifuge_process(obj/machinery/centrifuge/centrifuge)
+	SHOULD_CALL_PARENT(TRUE)
+	return istype(centrifuge) && !QDELETED(centrifuge.loaded_beaker) && istype(centrifuge.loaded_beaker)
+
+/obj/item/proc/convert_matter_to_lumps(skip_qdel = FALSE)
+
+	var/list/scrap_matter = list()
+	for(var/mat in matter)
+		var/mat_amount = matter[mat]
+		var/obj/item/stack/material/mat_stack = /obj/item/stack/material/lump
+		var/mat_per_stack = SHEET_MATERIAL_AMOUNT * initial(mat_stack.matter_multiplier)
+		var/sheet_amount  = round(mat_amount / mat_per_stack)
+		if(sheet_amount)
+			var/obj/item/stack/material/lump/lump = new(loc, sheet_amount, mat)
+			LAZYADD(., lump)
+			mat_amount -= sheet_amount * mat_per_stack
+		if(mat_amount)
+			scrap_matter[mat] += mat_amount
+
+	if(length(scrap_matter))
+		var/obj/item/debris/scraps/scraps = new(loc)
+		scraps.matter = scrap_matter.Copy()
+		scraps.update_primary_material()
+		LAZYADD(., scraps)
+
+	matter = null
+	material = null
+	if(!skip_qdel)
+		qdel(src)
+
+/obj/item/proc/pick_attack_verb()
+	return DEFAULTPICK(attack_verb, attack_verb) || "attacked" // if it's not a list, return itself or just "attacked"

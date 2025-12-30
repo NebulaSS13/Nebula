@@ -29,9 +29,9 @@ var/global/list/hygiene_props = list()
 	clogged = 0
 	tool_interaction_flags = initial(tool_interaction_flags)
 
-/obj/structure/hygiene/attackby(var/obj/item/thing, var/mob/user)
-	if(clogged > 0 && isplunger(thing))
-		user.visible_message(SPAN_NOTICE("\The [user] strives valiantly to unclog \the [src] with \the [thing]!"))
+/obj/structure/hygiene/attackby(var/obj/item/used_item, var/mob/user)
+	if(clogged > 0 && isplunger(used_item))
+		user.visible_message(SPAN_NOTICE("\The [user] strives valiantly to unclog \the [src] with \the [used_item]!"))
 		spawn
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
 			sleep(5)
@@ -49,12 +49,29 @@ var/global/list/hygiene_props = list()
 			if(clogged <= 0)
 				unclog()
 		return TRUE
+	//toilet paper interaction for clogging toilets and other facilities
+	if (istype(used_item, /obj/item/stack/tape_roll/barricade_tape/toilet))
+		if (clogged == -1)
+			to_chat(user, SPAN_WARNING("Try as you might, you can not clog \the [src] with \the [used_item]."))
+			return TRUE
+		if (clogged)
+			to_chat(user, SPAN_WARNING("\The [src] is already clogged."))
+			return TRUE
+		if (!do_after(user, 3 SECONDS, src))
+			to_chat(user, SPAN_WARNING("You must stay still to clog \the [src]."))
+			return TRUE
+		if (clogged || QDELETED(used_item) || !user.try_unequip(used_item))
+			return TRUE
+		to_chat(user, SPAN_NOTICE("You unceremoniously jam \the [src] with \the [used_item]. What a rebel."))
+		clog(1)
+		qdel(used_item)
+		return TRUE
 	. = ..()
 
-/obj/structure/hygiene/examine(mob/user)
+/obj/structure/hygiene/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(clogged > 0)
-		to_chat(user, SPAN_WARNING("It seems to be badly clogged."))
+		. += SPAN_WARNING("It seems to be badly clogged.")
 
 /obj/structure/hygiene/Process()
 	if(clogged <= 0)
@@ -75,7 +92,7 @@ var/global/list/hygiene_props = list()
 				visible_message("\The [src] gurgles and overflows!")
 				next_gurgle = world.time + 80
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
-			var/adding = min(flood_amt-T?.reagents?.total_volume, rand(30,50)*clogged)
+			var/adding = min(flood_amt - REAGENT_TOTAL_VOLUME(T?.reagents), rand(30,50)*clogged)
 			if(adding > 0)
 				T.add_to_reagents(/decl/material/liquid/water, adding)
 
@@ -124,17 +141,18 @@ var/global/list/hygiene_props = list()
 		swirlie.take_damage(8)
 		return TRUE
 
+	// TODO: storage datum
 	if(cistern && !open)
 		if(!contents.len)
 			to_chat(user, SPAN_NOTICE("The cistern is empty."))
 		else
-			var/obj/item/I = pick(contents)
+			var/obj/item/thing = pick(contents)
 			if(ishuman(user))
-				user.put_in_hands(I)
+				user.put_in_hands(thing)
 			else
-				I.dropInto(loc)
-			to_chat(user, SPAN_NOTICE("You find \a [I] in the cistern."))
-			w_items -= I.w_class
+				thing.dropInto(loc)
+			to_chat(user, SPAN_NOTICE("You find \a [thing] in the cistern."))
+			w_items -= thing.w_class
 		return TRUE
 
 	if(user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
@@ -171,8 +189,8 @@ var/global/list/hygiene_props = list()
 		return TRUE
 	return ..()
 
-/obj/structure/hygiene/toilet/attackby(obj/item/I, var/mob/user)
-	if(IS_CROWBAR(I))
+/obj/structure/hygiene/toilet/attackby(obj/item/used_item, var/mob/user)
+	if(IS_CROWBAR(used_item))
 		to_chat(user, SPAN_NOTICE("You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]."))
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
 		if(do_after(user, 30, src))
@@ -185,16 +203,16 @@ var/global/list/hygiene_props = list()
 		return TRUE
 
 	if(cistern && !isrobot(user)) //STOP PUTTING YOUR MODULES IN THE TOILET.
-		if(I.w_class > ITEM_SIZE_NORMAL)
-			to_chat(user, SPAN_WARNING("\The [I] does not fit."))
+		if(used_item.w_class > ITEM_SIZE_NORMAL)
+			to_chat(user, SPAN_WARNING("\The [used_item] does not fit."))
 			return TRUE
-		if(w_items + I.w_class > ITEM_SIZE_HUGE)
+		if(w_items + used_item.w_class > ITEM_SIZE_HUGE)
 			to_chat(user, SPAN_WARNING("The cistern is full."))
 			return TRUE
-		if(!user.try_unequip(I, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		w_items += I.w_class
-		to_chat(user, SPAN_NOTICE("You carefully place \the [I] into the cistern."))
+		w_items += used_item.w_class
+		to_chat(user, SPAN_NOTICE("You carefully place \the [used_item] into the cistern."))
 		return TRUE
 
 	. = ..()
@@ -230,6 +248,7 @@ var/global/list/hygiene_props = list()
 	clogged = -1
 	can_drain = 1
 	drainage = 0.2 			//showers are tiny, drain a little slower
+	chem_volume = 5
 
 	var/on = 0
 	var/next_mist = 0
@@ -241,11 +260,6 @@ var/global/list/hygiene_props = list()
 	var/datum/sound_token/sound_token
 
 //add heat controls? when emagged, you can freeze to death in it?
-
-/obj/structure/hygiene/shower/Initialize()
-	. = ..()
-	create_reagents(5)
-
 /obj/structure/hygiene/shower/Destroy()
 	QDEL_NULL(sound_token)
 	. = ..()
@@ -283,21 +297,21 @@ var/global/list/hygiene_props = list()
 	if(. != INITIALIZE_HINT_QDEL)
 		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, qdel_self)), 25 SECONDS)
 
-/obj/structure/hygiene/shower/attackby(obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/scanner/gas))
+/obj/structure/hygiene/shower/attackby(obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/scanner/gas))
 		to_chat(user, SPAN_NOTICE("The water temperature seems to be [watertemp]."))
 		return TRUE
 
-	if(IS_WRENCH(I))
+	if(IS_WRENCH(used_item))
 		var/newtemp = input(user, "What setting would you like to set the temperature valve to?", "Water Temperature Valve") in temperature_settings
-		if(newtemp != watertemp && !QDELETED(I) && !QDELETED(user) && !QDELETED(src) && user.Adjacent(src) && I.loc == src)
-			to_chat(user, SPAN_NOTICE("You begin to adjust the temperature valve with \the [I]."))
+		if(newtemp != watertemp && !QDELETED(used_item) && !QDELETED(user) && !QDELETED(src) && user.Adjacent(src) && used_item.loc == src)
+			to_chat(user, SPAN_NOTICE("You begin to adjust the temperature valve with \the [used_item]."))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			if(do_after(user, (5 SECONDS), src) && newtemp != watertemp)
 				watertemp = newtemp
 				user.visible_message(
-					SPAN_NOTICE("\The [user] adjusts \the [src] with \the [I]."),
-					SPAN_NOTICE("You adjust the shower with \the [I]."))
+					SPAN_NOTICE("\The [user] adjusts \the [src] with \the [used_item]."),
+					SPAN_NOTICE("You adjust the shower with \the [used_item]."))
 				add_fingerprint(user)
 		return TRUE
 	. = ..()
@@ -322,7 +336,7 @@ var/global/list/hygiene_props = list()
 		add_to_reagents(/decl/material/liquid/water, REAGENTS_FREE_SPACE(reagents))
 		if(world.time >= next_wash)
 			next_wash = world.time + (10 SECONDS)
-			reagents.splash(get_turf(src), reagents.total_volume, max_spill = 0)
+			reagents.splash(get_turf(src), REAGENT_TOTAL_VOLUME(reagents), max_spill = 0)
 
 /obj/structure/hygiene/shower/proc/process_heat(mob/living/M)
 	if(!on || !istype(M))
@@ -356,7 +370,7 @@ var/global/list/hygiene_props = list()
 	. = ..()
 	if(!. && isitem(dropping) && ATOM_IS_OPEN_CONTAINER(dropping))
 		var/obj/item/thing = dropping
-		if(thing.reagents?.total_volume <= 0)
+		if(REAGENT_TOTAL_VOLUME(thing.reagents) <= 0)
 			to_chat(usr, SPAN_WARNING("\The [thing] is empty."))
 		else
 			visible_message(SPAN_NOTICE("\The [user] tips the contents of \the [thing] into \the [src]."))
@@ -388,15 +402,15 @@ var/global/list/hygiene_props = list()
 		SPAN_NOTICE("You wash your hands using \the [src]."))
 	return TRUE
 
-/obj/structure/hygiene/sink/attackby(obj/item/hit_with, var/mob/user)
-	if(isplunger(hit_with) && clogged > 0)
+/obj/structure/hygiene/sink/attackby(obj/item/used_item, var/mob/user)
+	if(isplunger(used_item) && clogged > 0)
 		return ..()
 
 	if(busy)
 		to_chat(user, SPAN_WARNING("Someone's already washing here."))
 		return TRUE
 
-	var/obj/item/chems/chem_container = hit_with
+	var/obj/item/chems/chem_container = used_item
 	if (istype(chem_container) && ATOM_IS_OPEN_CONTAINER(chem_container) && chem_container.reagents)
 		user.visible_message(
 			SPAN_NOTICE("\The [user] fills \the [chem_container] using \the [src]."),
@@ -405,8 +419,8 @@ var/global/list/hygiene_props = list()
 		chem_container.add_to_reagents(/decl/material/liquid/water, min(REAGENTS_FREE_SPACE(chem_container.reagents), chem_container.amount_per_transfer_from_this))
 		return TRUE
 
-	else if (istype(hit_with, /obj/item/baton))
-		var/obj/item/baton/baton = hit_with
+	else if (istype(used_item, /obj/item/baton))
+		var/obj/item/baton/baton = used_item
 		var/obj/item/cell/cell = baton.get_cell()
 		if(cell?.check_charge(0) && baton.status)
 			if(isliving(user))
@@ -417,25 +431,25 @@ var/global/list/hygiene_props = list()
 			// robot users used to be handled separately, but deductcharge handles that for us
 			baton.deductcharge(baton.hitcost)
 			var/decl/pronouns/user_pronouns = user.get_pronouns()
-			user.visible_message(SPAN_DANGER("\The [user] was stunned by [user_pronouns.his] wet [hit_with]!"))
+			user.visible_message(SPAN_DANGER("\The [user] was stunned by [user_pronouns.his] wet [used_item]!"))
 			return TRUE
-	else if(istype(hit_with, /obj/item/mop))
-		if(REAGENTS_FREE_SPACE(hit_with.reagents) >= 5)
-			hit_with.add_to_reagents(/decl/material/liquid/water, 5)
-			to_chat(user, SPAN_NOTICE("You wet \the [hit_with] in \the [src]."))
+	else if(istype(used_item, /obj/item/mop))
+		if(REAGENTS_FREE_SPACE(used_item.reagents) >= 5)
+			used_item.add_to_reagents(/decl/material/liquid/water, 5)
+			to_chat(user, SPAN_NOTICE("You wet \the [used_item] in \the [src]."))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		else
-			to_chat(user, SPAN_WARNING("\The [hit_with] is saturated."))
+			to_chat(user, SPAN_WARNING("\The [used_item] is saturated."))
 		return TRUE
 
 	var/turf/location = user.loc
 	if(!isturf(location))
 		return FALSE
 
-	if(!istype(hit_with))
+	if(!istype(used_item))
 		return FALSE
 
-	to_chat(usr, SPAN_NOTICE("You start washing \the [hit_with]."))
+	to_chat(usr, SPAN_NOTICE("You start washing \the [used_item]."))
 	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = TRUE
@@ -444,13 +458,13 @@ var/global/list/hygiene_props = list()
 		return TRUE
 	busy = FALSE
 
-	if(istype(hit_with, /obj/item/chems/spray/extinguisher))
+	if(istype(used_item, /obj/item/chems/spray/extinguisher))
 		return TRUE // We're washing, not filling.
 
-	hit_with.clean()
+	used_item.clean()
 	user.visible_message( \
-		SPAN_NOTICE("\The [user] washes \a [hit_with] using \the [src]."),
-		SPAN_NOTICE("You wash \a [hit_with] using \the [src]."))
+		SPAN_NOTICE("\The [user] washes \a [used_item] using \the [src]."),
+		SPAN_NOTICE("You wash \a [used_item] using \the [src]."))
 	return TRUE
 
 
@@ -469,31 +483,10 @@ var/global/list/hygiene_props = list()
 	flick("puddle-splash", src)
 	return ..()
 
-/obj/structure/hygiene/sink/puddle/attackby(obj/item/O, var/mob/user)
-	icon_state = "puddle-splash"
+/obj/structure/hygiene/sink/puddle/attackby(obj/item/used_item, var/mob/user)
 	. = ..()
-	icon_state = "puddle"
-
-//toilet paper interaction for clogging toilets and other facilities
-
-/obj/structure/hygiene/attackby(obj/item/I, mob/user)
-	if (!istype(I, /obj/item/stack/tape_roll/barricade_tape/toilet))
-		return ..()
-	if (clogged == -1)
-		to_chat(user, SPAN_WARNING("Try as you might, you can not clog \the [src] with \the [I]."))
-		return TRUE
-	if (clogged)
-		to_chat(user, SPAN_WARNING("\The [src] is already clogged."))
-		return TRUE
-	if (!do_after(user, 3 SECONDS, src))
-		to_chat(user, SPAN_WARNING("You must stay still to clog \the [src]."))
-		return TRUE
-	if (clogged || QDELETED(I) || !user.try_unequip(I))
-		return TRUE
-	to_chat(user, SPAN_NOTICE("You unceremoniously jam \the [src] with \the [I]. What a rebel."))
-	clog(1)
-	qdel(I)
-	return TRUE
+	if(.)
+		flick("puddle-splash", src)
 
 ////////////////////////////////////////////////////
 // Toilet Paper Roll
@@ -501,7 +494,7 @@ var/global/list/hygiene_props = list()
 /decl/barricade_tape_template/toilet
 	tape_kind         = "toilet paper"
 	tape_desc         = "A length of toilet paper. Seems like custodia is marking their territory again."
-	roll_desc         = "A unbranded roll of standard issue two ply toilet paper. Refined from carefully rendered down sea shells due to the government's 'Abuse Of The Trees Act'."
+	roll_desc         = "An unbranded roll of standard-issue two-ply toilet paper. Refined from carefully rendered-down seashells due to the government's 'Abuse Of The Trees Act'."
 	base_icon_state   = "stripetape"
 	tape_color        = COLOR_WHITE
 	detail_overlay    = "stripes"
@@ -534,7 +527,7 @@ var/global/list/hygiene_props = list()
 ////////////////////////////////////////////////////
 /obj/item/paper/crumpled/bog
 	name       = "sheet of toilet paper"
-	desc       = "A single sheet of toilet paper. Two ply."
+	desc       = "A single sheet of toilet paper. Two-ply."
 	icon       = 'icons/obj/items/paperwork/toilet_paper.dmi'
 
 /obj/structure/hygiene/faucet
@@ -586,6 +579,6 @@ var/global/list/hygiene_props = list()
 	if(open)
 		water_flow()
 
-/obj/structure/hygiene/faucet/examine(mob/user)
+/obj/structure/hygiene/faucet/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It is turned [open ? "on" : "off"].")
+	. += "It is turned [open ? "on" : "off"]."

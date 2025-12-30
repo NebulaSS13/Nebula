@@ -52,7 +52,7 @@
 
 /obj/item/radio/headset/headset_sci
 	name = "science radio headset"
-	desc = "A sciency headset. Like usual."
+	desc = "A science-y headset. Like usual."
 	icon = 'icons/obj/items/device/radio/headsets/headset_science.dmi'
 	encryption_keys = list(/obj/item/encryptionkey/sci)
 
@@ -63,7 +63,7 @@
 
 /obj/item/radio/headset/headset_eng
 	name = "engineering radio headset"
-	desc = "When the engineers wish to gossip like highschoolers."
+	desc = "When the engineers wish to gossip like high-schoolers."
 	icon = 'icons/obj/items/device/radio/headsets/headset_engineering.dmi'
 	encryption_keys = list(/obj/item/encryptionkey/eng)
 

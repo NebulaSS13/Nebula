@@ -91,7 +91,7 @@
 /turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "ay" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "az" = (
@@ -405,7 +405,7 @@
 /turf/unsimulated/floor/vault,
 /area/map_template/rescue_base/base)
 "bq" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 4
 	},
 /turf/unsimulated/floor/dark,
@@ -1036,7 +1036,7 @@
 /turf/unsimulated/floor/vault,
 /area/map_template/rescue_base/base)
 "cP" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/unsimulated/floor/dark,
@@ -1340,7 +1340,7 @@
 /area/map_template/rescue_base/base)
 "dE" = (
 /obj/structure/table/reinforced,
-/obj/prefab/hand_teleporter,
+/obj/abstract/modpack_compat/hand_tele,
 /turf/unsimulated/floor/vault,
 /area/map_template/rescue_base/base)
 "dF" = (
@@ -1386,7 +1386,7 @@
 /turf/unsimulated/floor/rescue_base,
 /area/map_template/rescue_base/base)
 "dO" = (
-/obj/structure/bed/chair/office/dark,
+/obj/structure/chair/office/dark,
 /turf/unsimulated/floor/vault,
 /area/map_template/rescue_base/base)
 "dQ" = (
@@ -1469,7 +1469,7 @@
 /turf/unsimulated/floor/vault,
 /area/map_template/rescue_base/base)
 "eg" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 4
 	},
 /turf/unsimulated/floor/vault,
@@ -1541,7 +1541,7 @@
 /turf/unsimulated/floor/vault,
 /area/map_template/rescue_base/base)
 "ev" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/machinery/button/blast_door{
@@ -1553,7 +1553,7 @@
 /turf/unsimulated/floor/cult,
 /area/map_template/rescue_base/base)
 "ew" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/radio/phone{
@@ -1563,7 +1563,7 @@
 /turf/unsimulated/floor/cult,
 /area/map_template/rescue_base/base)
 "ex" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/machinery/button/blast_door{
@@ -1733,7 +1733,7 @@
 /turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "eH" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/ashtray,
@@ -1741,13 +1741,13 @@
 /turf/unsimulated/floor/cult,
 /area/map_template/rescue_base/base)
 "eI" = (
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 1
 	},
 /turf/unsimulated/floor/cult,
 /area/map_template/rescue_base/base)
 "eJ" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /turf/unsimulated/floor/cult,
@@ -1913,13 +1913,13 @@
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fg" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 1
 	},
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fh" = (
-/obj/structure/bed/chair/shuttle,
+/obj/structure/chair/shuttle,
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fi" = (
@@ -2192,7 +2192,7 @@
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fT" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/machinery/light{
@@ -2206,7 +2206,7 @@
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fV" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -2251,7 +2251,7 @@
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "gb" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled/dark,
@@ -2468,7 +2468,7 @@
 	pixel_x = 27;
 	dir = 8
 	},
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -2527,7 +2527,7 @@
 /turf/floor/plating,
 /area/map_template/rescue_base/start)
 "gV" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/floor/tiled/dark,
@@ -2581,7 +2581,7 @@
 /turf/unsimulated/floor/asteroid,
 /area/map_template/rescue_base/base)
 "hd" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/machinery/light{

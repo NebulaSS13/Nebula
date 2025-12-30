@@ -5,7 +5,7 @@
 	layer = ABOVE_HUMAN_LAYER
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	simulated = FALSE
-	var/duration = 10 //in deciseconds
+	var/duration = 1 SECOND //in deciseconds
 
 /obj/effect/temp_visual/Initialize(mapload, set_dir)
 	if(set_dir)
@@ -17,9 +17,15 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "empdisable"
 
+/obj/effect/temp_visual/emppulse
+	name = "electromagnetic pulse"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "emppulse"
+	duration = 2 SECONDS
+
 /obj/effect/temp_visual/bloodsplatter
 	icon = 'icons/effects/bloodspatter.dmi'
-	duration = 5
+	duration = 0.5 SECONDS
 	layer = LYING_HUMAN_LAYER
 	var/splatter_type = "splatter"
 

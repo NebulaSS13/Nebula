@@ -142,10 +142,10 @@
 		/obj/item/stack/material
 	)
 
-/obj/item/gripper/examine(mob/user)
+/obj/item/gripper/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(wrapped)
-		to_chat(user, "It is holding \a [wrapped].")
+		. += "It is holding \a [wrapped]."
 
 /obj/item/gripper/attack_self(mob/user)
 	if(wrapped)
@@ -223,8 +223,8 @@
 		else
 			to_chat(user, "<span class='danger'>Your gripper cannot hold \the [target].</span>")
 
-	else if(istype(target,/obj/machinery/power/apc))
-		var/obj/machinery/power/apc/A = target
+	else if(istype(target,/obj/machinery/apc))
+		var/obj/machinery/apc/A = target
 		if(A.components_are_accessible(/obj/item/stock_parts/power/battery))
 			var/obj/item/stock_parts/power/battery/bat = A.get_component_of_type(/obj/item/stock_parts/power/battery)
 			var/obj/item/cell/cell = bat.extract_cell(src)
@@ -342,18 +342,19 @@
 		else
 			continue
 
-	for(var/obj/W in T)
+	// TODO: Jesus Christ, use matter or the procs the decompiler nades use.
+	for(var/obj/thing in T)
 		//Different classes of items give different commodities.
-		if(istype(W,/obj/item/trash/cigbutt))
+		if(istype(thing,/obj/item/trash/cigbutt))
 			if(plastic)
 				plastic.add_charge(500)
-		else if(istype(W,/obj/effect/spider/spiderling))
+		else if(istype(thing,/obj/effect/spider/spiderling))
 			if(wood)
 				wood.add_charge(2000)
 			if(plastic)
 				plastic.add_charge(2000)
-		else if(istype(W,/obj/item/light))
-			var/obj/item/light/L = W
+		else if(istype(thing,/obj/item/light))
+			var/obj/item/light/L = thing
 			if(L.status >= 2)
 				if(metal)
 					metal.add_charge(250)
@@ -361,100 +362,45 @@
 					glass.add_charge(250)
 			else
 				continue
-		else if(istype(W,/obj/item/remains/robot))
+		else if(istype(thing,/obj/item/remains/robot))
 			if(metal)
 				metal.add_charge(2000)
 			if(plastic)
 				plastic.add_charge(2000)
 			if(glass)
 				glass.add_charge(1000)
-		else if(istype(W,/obj/item/trash))
+		else if(istype(thing,/obj/item/trash))
 			if(metal)
 				metal.add_charge(1000)
 			if(plastic)
 				plastic.add_charge(3000)
-		else if(istype(W,/obj/effect/decal/cleanable/blood/gibs/robot))
+		else if(istype(thing,/obj/effect/decal/cleanable/blood/gibs/robot))
 			if(metal)
 				metal.add_charge(2000)
 			if(glass)
 				glass.add_charge(2000)
-		else if(istype(W,/obj/item/ammo_casing))
+		else if(istype(thing,/obj/item/ammo_casing))
 			if(metal)
 				metal.add_charge(1000)
-		else if(istype(W,/obj/item/shard/shrapnel))
+		else if(istype(thing,/obj/item/shard/shrapnel))
 			if(metal)
 				metal.add_charge(1000)
-		else if(istype(W,/obj/item/shard))
+		else if(istype(thing,/obj/item/shard))
 			if(glass)
 				glass.add_charge(1000)
-		else if(istype(W,/obj/item/food/grown))
+		else if(istype(thing,/obj/item/food/grown))
 			if(wood)
 				wood.add_charge(4000)
-		else if(istype(W,/obj/item/pipe))
+		else if(istype(thing,/obj/item/pipe))
 			// This allows drones and engiborgs to clear pipe assemblies from floors.
 			pass()
 		else
 			continue
 
-		qdel(W)
+		qdel(thing)
 		grabbed_something = 1
 
 	if(grabbed_something)
 		to_chat(user, "<span class='notice'>You deploy your decompiler and clear out the contents of \the [T].</span>")
 	else
 		to_chat(user, "<span class='danger'>Nothing on \the [T] is useful to you.</span>")
-	return
-
-//PRETTIER TOOL LIST.
-/mob/living/silicon/robot/drone/installed_modules()
-
-	if(weapon_lock)
-		to_chat(src, "<span class='danger'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>")
-		return
-
-	if(!module)
-		module = new /obj/item/robot_module/drone(src)
-
-	var/dat = "<HEAD><TITLE>Drone modules</TITLE></HEAD><BODY>\n"
-	dat += {"
-	<B>Activated Modules</B>
-	<BR>
-	Module 1: [module_state_1 ? "<A HREF='byond://?src=\ref[src];mod=\ref[module_state_1]'>[module_state_1]<A>" : "No Module"]<BR>
-	Module 2: [module_state_2 ? "<A HREF='byond://?src=\ref[src];mod=\ref[module_state_2]'>[module_state_2]<A>" : "No Module"]<BR>
-	Module 3: [module_state_3 ? "<A HREF='byond://?src=\ref[src];mod=\ref[module_state_3]'>[module_state_3]<A>" : "No Module"]<BR>
-	<BR>
-	<B>Installed Modules</B><BR><BR>"}
-
-
-	var/tools = "<B>Tools and devices</B><BR>"
-	var/resources = "<BR><B>Resources</B><BR>"
-
-	for (var/O in module.equipment)
-
-		var/module_string = ""
-
-		if (!O)
-			module_string += text("<B>Resource depleted</B><BR>")
-		else if(activated(O))
-			module_string += text("[O]: <B>Activated</B><BR>")
-		else
-			module_string += text("[O]: <A HREF='byond://?src=\ref[src];act=\ref[O]'>Activate</A><BR>")
-
-		if((istype(O,/obj/item) || istype(O,/obj/item)) && !(istype(O,/obj/item/stack/cable_coil)))
-			tools += module_string
-		else
-			resources += module_string
-
-	dat += tools
-
-	if (emagged)
-		if (!module.emag)
-			dat += text("<B>Resource depleted</B><BR>")
-		else if(activated(module.emag))
-			dat += text("[module.emag]: <B>Activated</B><BR>")
-		else
-			dat += text("[module.emag]: <A HREF='byond://?src=\ref[src];act=\ref[module.emag]'>Activate</A><BR>")
-
-	dat += resources
-
-	show_browser(src, dat, "window=robotmod")

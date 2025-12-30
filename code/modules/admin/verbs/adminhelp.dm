@@ -134,10 +134,6 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 	to_chat(src, SPAN_BLUE("PM to-<b>Staff</b> (<a href='byond://?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]"))
 	var/admin_number_present = global.admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
-	if(admin_number_present <= 0)
-		adminmsg2adminirc(src, null, "[html_decode(original_msg)] - !![admin_number_afk ? "All admins AFK ([admin_number_afk])" : "No admins online"]!!")
-	else
-		adminmsg2adminirc(src, null, "[html_decode(original_msg)]")
 
 	SSstatistics.add_field_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

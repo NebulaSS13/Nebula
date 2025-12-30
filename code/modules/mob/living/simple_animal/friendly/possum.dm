@@ -14,7 +14,7 @@
 	universal_speak = FALSE
 	universal_understand = TRUE
 	mob_size = MOB_SIZE_SMALL
-	possession_candidate = 1
+	possession_candidate = TRUE
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 	holder_type = /obj/item/holder
@@ -97,7 +97,6 @@
 
 /mob/living/simple_animal/opossum/Initialize()
 	. = ..()
-	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
 /mob/living/simple_animal/opossum/poppy

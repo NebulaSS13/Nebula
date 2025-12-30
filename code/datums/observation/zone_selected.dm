@@ -17,7 +17,6 @@
 * Zone Selected Handling *
 *******************/
 
-/obj/screen/zone_selector/set_selected_zone(bodypart)
-	var/old_selecting = selecting
+/obj/screen/zone_selector/set_selected_zone(new_zone, old_zone)
 	if((. = ..()))
-		RAISE_EVENT(/decl/observ/zone_selected, src, old_selecting, selecting)
+		RAISE_EVENT(/decl/observ/zone_selected, src, old_zone, new_zone)

@@ -61,7 +61,8 @@ var/global/arrest_security_status =  "Arrest"
 	set_gender(gender_term)
 	set_age(crewmember?.get_age() || 30)
 	set_status(global.default_physical_status)
-	set_species_name(crewmember ? crewmember.get_species_name() : global.using_map.default_species)
+	var/decl/species/default_species = decls_repository.get_decl_by_id(global.using_map.default_species)
+	set_species_name(crewmember ? crewmember.get_species_name() : default_species.name)
 	set_branch(crewmember ? (crewmember.char_branch && crewmember.char_branch.name) : "None")
 	set_rank(crewmember ? (crewmember.char_rank && crewmember.char_rank.name) : "None")
 
@@ -265,7 +266,7 @@ FIELD_LONG("Exploitable Information", antag_record, access_hacked, access_hacked
 //Options builderes
 /datum/report_field/options/crew_record/rank/proc/record_ranks()
 	var/datum/computer_file/report/crew_record/record = owner
-	var/datum/mil_branch/branch = mil_branches.get_branch(record.get_branch())
+	var/datum/mil_branch/branch = global.using_map.get_branch(record.get_branch())
 	if(!branch)
 		return
 	. = list()
@@ -286,8 +287,8 @@ FIELD_LONG("Exploitable Information", antag_record, access_hacked, access_hacked
 /datum/report_field/options/crew_record/branch/proc/record_branches()
 	. = list()
 	. |= "Unset"
-	for(var/branch in mil_branches.branches)
-		var/datum/mil_branch/branch_datum = mil_branches.branches[branch]
+	for(var/branch in global.using_map.branches)
+		var/datum/mil_branch/branch_datum = global.using_map.branches[branch]
 		. |= branch_datum.name
 
 #undef GETTER_SETTER

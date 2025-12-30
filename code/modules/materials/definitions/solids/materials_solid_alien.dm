@@ -26,5 +26,5 @@
 	melting_point = rand(400,11000)
 	. = ..()
 
-/decl/material/solid/metal/aliumium/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)
+/decl/material/solid/metal/aliumium/place_dismantled_girder(var/turf/target, var/decl/material/r_mat)
 	return

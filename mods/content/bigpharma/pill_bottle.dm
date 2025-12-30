@@ -12,7 +12,7 @@
 	. = ..()
 	handle_med_obfuscation(src)
 
-/obj/item/pill_bottle/examine(mob/user)
+/obj/item/pill_bottle/examined_by(mob/user, distance, infix, suffix)
 	. = ..()
 	var/datum/extension/obfuscated_medication/meds = get_extension(src, /datum/extension/obfuscated_medication)
 	if(meds && user && (user.skill_check(SKILL_CHEMISTRY, meds.skill_threshold) || user.skill_check(SKILL_MEDICAL, meds.skill_threshold)))

@@ -26,13 +26,6 @@
 	title = "Particle Accelerator User's Guide"
 	guide_decl = /datum/codex_entry/guide/particle_accelerator
 
-/obj/item/book/manual/supermatter_engine
-	name = "supermatter engine reference manual"
-	icon = 'icons/obj/items/books/book_supermatter.dmi'
-	author = "Central Engineering Division"
-	title = "Supermatter Engine Operating Manual"
-	guide_decl = /datum/codex_entry/guide/supermatter
-
 /obj/item/book/manual/rust_engine
 	name = "fusion reactor reference Manual"
 	icon_state = "bookMagazine"

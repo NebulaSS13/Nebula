@@ -1,0 +1,12 @@
+#ifndef MODPACK_BEEKEEPING
+#define MODPACK_BEEKEEPING
+// BEGIN_INCLUDE
+#include "_beekeeping.dm"
+#include "closets.dm"
+#include "hive_frame.dm"
+#include "items.dm"
+#include "recipes.dm"
+#include "trading.dm"
+#include "hives\_hive.dm"
+// END_INCLUDE
+#endif

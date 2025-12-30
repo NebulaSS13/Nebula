@@ -74,8 +74,8 @@ var/global/list/radio_beacons = list()
 	var/turf/T = get_turf(src)
 	hide(hides_under_flooring() && !T.is_plating())
 
-/obj/item/radio/beacon/anchored/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/stack/nanopaste))
+/obj/item/radio/beacon/anchored/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/stack/nanopaste))
 		if(functioning)
 			to_chat(user, SPAN_WARNING("\The [src] does not need any repairs."))
 			return TRUE
@@ -83,7 +83,7 @@ var/global/list/radio_beacons = list()
 			to_chat(user, SPAN_WARNING("\The [src] is completely irrepairable."))
 			return TRUE
 
-		var/obj/item/stack/nanopaste/S = I
+		var/obj/item/stack/nanopaste/S = used_item
 		if(!panel_open)
 			to_chat(user, SPAN_WARNING("You can't work on \the [src] until its been opened up."))
 			return TRUE

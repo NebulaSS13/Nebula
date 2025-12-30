@@ -120,8 +120,8 @@
 			product_records.Add(product)
 
 /obj/machinery/vending/Destroy()
-	for(var/datum/stored_items/vending_products/R in product_records)
-		qdel(R)
+	for(var/datum/stored_items/vending_products/product_record in product_records)
+		qdel(product_record)
 	product_records = null
 	return ..()
 
@@ -141,12 +141,12 @@
 		return 1
 
 /obj/machinery/vending/receive_mouse_drop(atom/dropping, mob/user, params)
-	if(!(. = ..()) && isitem(dropping) && istype(user) && user.a_intent == I_HELP && CanPhysicallyInteract(user))
+	if(!(. = ..()) && isitem(dropping) && istype(user) && user.check_intent(I_FLAG_HELP) && CanPhysicallyInteract(user))
 		return attempt_to_stock(dropping, user)
 
-/obj/machinery/vending/attackby(obj/item/W, mob/user)
+/obj/machinery/vending/attackby(obj/item/used_item, mob/user)
 
-	var/obj/item/charge_stick/CS = W.GetChargeStick()
+	var/obj/item/charge_stick/CS = used_item.GetChargeStick()
 	if (currently_vending && vendor_account && !vendor_account.suspended)
 
 		if(!vend_ready)
@@ -159,8 +159,8 @@
 		if (CS)
 			paid = pay_with_charge_card(CS)
 			handled = 1
-		else if (istype(W, /obj/item/cash))
-			var/obj/item/cash/C = W
+		else if (istype(used_item, /obj/item/cash))
+			var/obj/item/cash/C = used_item
 			paid = pay_with_cash(C)
 			handled = 1
 
@@ -171,19 +171,19 @@
 			SSnano.update_uis(src)
 			return TRUE // don't smack that machine with your $2
 
-	if (istype(W, /obj/item/cash))
+	if (istype(used_item, /obj/item/cash))
 		attack_hand_with_interaction_checks(user)
 		return TRUE
 
-	if(IS_MULTITOOL(W) || IS_WIRECUTTER(W))
+	if(IS_MULTITOOL(used_item) || IS_WIRECUTTER(used_item))
 		if(panel_open)
 			attack_hand_with_interaction_checks(user)
 			return TRUE
 
-	if((. = component_attackby(W, user)))
+	if((. = component_attackby(used_item, user)))
 		return
 
-	if((user.a_intent == I_HELP) && attempt_to_stock(W, user))
+	if((user.check_intent(I_FLAG_HELP)) && attempt_to_stock(used_item, user))
 		return TRUE
 
 	return ..() // handle anchoring and bashing
@@ -192,15 +192,10 @@
 	. = ..()
 	SSnano.update_uis(src)
 
-/obj/machinery/vending/receive_mouse_drop(atom/dropping, mob/user, params)
-	. = ..()
-	if(!. && dropping.loc == user && attempt_to_stock(dropping, user))
-		return TRUE
-
 /obj/machinery/vending/proc/attempt_to_stock(var/obj/item/I, var/mob/user)
-	for(var/datum/stored_items/vending_products/R in product_records)
-		if(I.type == R.item_path)
-			stock(I, R, user)
+	for(var/datum/stored_items/vending_products/product_record in product_records)
+		if(I.type == product_record.item_path)
+			stock(I, product_record, user)
 			return 1
 
 /**
@@ -311,22 +306,20 @@
 
 	if (href_list["vend"] && !currently_vending)
 		var/key = text2num(href_list["vend"])
-		if(!is_valid_index(key, product_records))
-			return TOPIC_REFRESH
-		var/datum/stored_items/vending_products/R = product_records[key]
-		if(!istype(R))
+		var/datum/stored_items/vending_products/product_record = LAZYACCESS(product_records, key)
+		if(!product_record)
 			return TOPIC_REFRESH
 
 		// This should not happen unless the request from NanoUI was bad
-		if(!(R.category & categories))
+		if(!(product_record.category & categories))
 			return TOPIC_REFRESH
 
-		if(R.price <= 0)
-			vend(R, user)
+		if(product_record.price <= 0)
+			vend(product_record, user)
 		else if(issilicon(user)) //If the item is not free, provide feedback if a synth is trying to buy something.
 			to_chat(user, SPAN_DANGER("Artificial unit recognized.  Artificial units cannot complete this transaction.  Purchase canceled."))
 		else
-			currently_vending = R
+			currently_vending = product_record
 			if(!vendor_account || vendor_account.suspended)
 				status_message = "This machine is currently unable to process payments due to problems with the associated account."
 				status_error = 1
@@ -348,7 +341,7 @@
 		return list()
 	return ..()
 
-/obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
+/obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/product_record, mob/user)
 	if(!vend_ready)
 		return
 	if((!allowed(user)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
@@ -369,7 +362,7 @@
 	var/vend_state = "[icon_state]-vend"
 	if (check_state_in_icon(vend_state, icon)) //Show the vending animation if needed
 		flick(vend_state, src)
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/vending, finish_vending), R), vend_delay)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/vending, finish_vending), product_record), vend_delay)
 
 /obj/machinery/vending/proc/do_vending_reply()
 	set waitfor = FALSE
@@ -398,14 +391,14 @@
  * Add item to the machine
  *
  * Checks if item is vendable in this machine should be performed before
- * calling. W is the item being inserted, R is the associated vending_product entry.
+ * calling. used_item is the item being inserted, product_record is the associated vending_product entry.
  */
-/obj/machinery/vending/proc/stock(obj/item/W, var/datum/stored_items/vending_products/R, var/mob/user)
-	if(!user.try_unequip(W))
+/obj/machinery/vending/proc/stock(obj/item/used_item, var/datum/stored_items/vending_products/product_record, var/mob/user)
+	if(!user.try_unequip(used_item))
 		return
 
-	if(R.add_product(W))
-		to_chat(user, SPAN_NOTICE("You insert \the [W] in the product receptor."))
+	if(product_record.add_product(used_item))
+		to_chat(user, SPAN_NOTICE("You insert \the [used_item] in the product receptor."))
 		SSnano.update_uis(src)
 		return 1
 
@@ -460,9 +453,9 @@
 //Oh no we're malfunctioning!  Dump out some product and break.
 /obj/machinery/vending/proc/malfunction()
 	set waitfor = FALSE
-	for(var/datum/stored_items/vending_products/R in product_records)
-		while(R.get_amount()>0)
-			R.get_product(loc)
+	for(var/datum/stored_items/vending_products/product_record in product_records)
+		while(product_record.get_amount()>0)
+			product_record.get_product(loc)
 		break
 	set_broken(TRUE)
 
@@ -473,8 +466,8 @@
 	if(!target)
 		return 0
 
-	for(var/datum/stored_items/vending_products/R in shuffle(product_records))
-		throw_item = R.get_product(loc)
+	for(var/datum/stored_items/vending_products/product_record in shuffle(product_records))
+		throw_item = product_record.get_product(loc)
 		if(!QDELETED(throw_item))
 			break
 	if(QDELETED(throw_item))

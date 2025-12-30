@@ -18,8 +18,8 @@
 	var/icon_broken = "lockbox+b"
 
 
-/obj/item/lockbox/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/card/id))
+/obj/item/lockbox/attackby(obj/item/used_item, mob/user)
+	if (istype(used_item, /obj/item/card/id))
 		if(src.broken)
 			to_chat(user, "<span class='warning'>It appears to be broken.</span>")
 			return TRUE
@@ -35,9 +35,9 @@
 		else
 			to_chat(user, "<span class='warning'>Access Denied</span>")
 		return TRUE
-	else if(istype(W, /obj/item/energy_blade))
-		var/obj/item/energy_blade/blade = W
-		if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, W, "The locker has been sliced open by [user] with an energy blade!", "You hear metal being sliced and sparks flying."))
+	else if(istype(used_item, /obj/item/energy_blade))
+		var/obj/item/energy_blade/blade = used_item
+		if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, used_item, "The locker has been sliced open by [user] with an energy blade!", "You hear metal being sliced and sparks flying."))
 			spark_at(src.loc, amount=5)
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		return TRUE

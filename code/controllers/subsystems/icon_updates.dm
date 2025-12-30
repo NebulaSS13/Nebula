@@ -7,7 +7,6 @@ SUBSYSTEM_DEF(icon_update)
 
 	// Linked lists, queue_refs[x] should have null or args stored in queue_args[x]
 	var/list/queue_refs = list()	// Atoms
-	var/list/queue_args = list()	// null or args
 
 /datum/controller/subsystem/icon_update/stat_entry()
 	..("Queue: [queue_refs.len]")
@@ -16,56 +15,43 @@ SUBSYSTEM_DEF(icon_update)
 	fire(FALSE, TRUE)
 
 /datum/controller/subsystem/icon_update/fire(resumed = FALSE, no_mc_tick = FALSE)
-	if(!queue_refs.len)
+	var/list/cached_refs = queue_refs // local variables are quicker to access than instance variables. it's still the same list though
+	if(!cached_refs.len)
 		suspend()
 		return
 
-	while (queue_refs.len)
-
-		if(Master.map_loading)
-			return
-
-		// Pops the atom and its args
-		var/atom/A = queue_refs[queue_refs.len]
-		var/myArgs = queue_args[queue_args.len]
-
-		queue_refs.len -= 1
-		queue_args.len -= 1
-
+	var/static/count = 1 // proc-level static var, as with SSgarbage, in case a runtime makes this proc end early
+	while (count <= length(cached_refs)) // if we kept a copy of the queue to avoid mutating it while we run, this could possibly be made a lot faster by just using a for loop?
+		if(Master.map_loading) // we started loading a map mid-run, so stop and clean up
+			break
+		// Pops the atom from the queue
+		var/atom/A = cached_refs[count++] // count is used to cut our list later and save time
 		if(QDELETED(A))
 			continue
-
 		A.icon_update_queued = FALSE
-
-		if (islist(myArgs))
-			A.update_icon(arglist(myArgs))
-		else
-			A.update_icon()
-
+		A.update_icon()
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			return
+			break
+	cached_refs.Cut(1, count)
+	count = 1
 
 /atom
 	var/icon_update_queued = FALSE
 
-/atom/proc/queue_icon_update(...)
+/atom/proc/queue_icon_update()
 	// Skips if this is already queued
-	if(!icon_update_queued)
+	if(icon_update_queued)
+		return
+	icon_update_queued = TRUE
+	// This is faster than using Add() because BYOND.
+	SSicon_update.queue_refs[++SSicon_update.queue_refs.len] = src
 
-		icon_update_queued = TRUE
-		SSicon_update.queue_refs.Add(src)
-
-		// Makes sure these are in sync, in case runtimes/badmin
-		var/length = length(SSicon_update.queue_refs)
-		SSicon_update.queue_args.len = length
-		SSicon_update.queue_args[length] = args.len ? args : null
-
-		// SSicon_update sleeps when it runs out of things in its
-		// queue, so wake it up.
-		if(!Master.map_loading) // Don't wake early if we're loading a map, it'll get woken up when the map loads.
-			SSicon_update.wake()
+	// SSicon_update sleeps when it runs out of things in its
+	// queue, so wake it up.
+	if(!Master.map_loading) // Don't wake early if we're loading a map, it'll get woken up when the map loads.
+		SSicon_update.wake()
 
 /datum/controller/subsystem/icon_update/StartLoadingMap()
 	suspend()

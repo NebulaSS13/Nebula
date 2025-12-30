@@ -4,7 +4,7 @@
 
 /obj/item/stamp/hop
 	name = "head of personnel's rubber stamp"
-	icon = 'icons/obj/items/stamps/stamp_xo.dmi'
+	icon = 'icons/obj/items/stamps/stamp_cap.dmi'
 
 /obj/item/stamp/ce
 	name = "chief engineer's rubber stamp"
@@ -32,7 +32,7 @@
 
 /obj/item/stamp/ward
 	name = "warden's rubber stamp"
-	icon = 'icons/obj/items/stamps/stamp_cos.dmi'
+	icon = 'icons/obj/items/stamps/stamp_brig.dmi'
 
 /obj/item/stamp/internalaffairs
 	name = "internal affairs' rubber stamp"

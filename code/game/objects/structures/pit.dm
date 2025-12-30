@@ -1,13 +1,13 @@
 /obj/structure/pit
-	name           = "pit"
-	desc           = "Watch your step, partner."
-	icon           = 'icons/obj/structures/pit.dmi'
-	icon_state     = "pit1"
-	blend_mode     = BLEND_MULTIPLY
-	density        = FALSE
-	anchored       = TRUE
-	current_health = ITEM_HEALTH_NO_DAMAGE //You can't break a hole in the ground.
-	var/open       = TRUE
+	name       = "pit"
+	desc       = "Watch your step, partner."
+	icon       = 'icons/obj/structures/pit.dmi'
+	icon_state = "pit1"
+	blend_mode = BLEND_MULTIPLY
+	density    = FALSE
+	anchored   = TRUE
+	max_health = ITEM_HEALTH_NO_DAMAGE //You can't break a hole in the ground.
+	var/open   = TRUE
 
 /obj/structure/pit/attackby(obj/item/used_item, mob/user)
 	if(IS_SHOVEL(used_item))
@@ -147,7 +147,8 @@
 	pixel_x                        = 15
 	pixel_y                        = 8
 	anchored                       = TRUE
-	material                       = /decl/material/solid/organic/wood
+	material                       = /decl/material/solid/organic/wood/oak
+	color                          = /decl/material/solid/organic/wood/oak::color
 	w_class                        = ITEM_SIZE_NORMAL
 	material_alteration            = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
 	var/message                    = "Unknown."
@@ -157,18 +158,18 @@
 	var/destruction_finish_message = "hacking at"
 	var/gravemarker_type           = /obj/item/gravemarker
 
-/obj/structure/gravemarker/examine(mob/user, distance)
+/obj/structure/gravemarker/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance < 2)
 		var/processed_message = user.handle_reading_literacy(user, message)
 		if(processed_message)
-			to_chat(user, "It says: '[processed_message]'")
+			. += "It says: '[processed_message]'"
 	else if(message)
-		to_chat(user, "You can't read the inscription from here.")
+		. += "You can't read the inscription from here."
 
 /obj/structure/gravemarker/attackby(obj/item/used_item, mob/user)
 	// we can dig it up with a shovel if the destruction tool is not a shovel, or if we're not on harm intent
-	var/digging = IS_SHOVEL(used_item) && (destruction_tool != TOOL_SHOVEL || user?.a_intent != I_HURT)
+	var/digging = IS_SHOVEL(used_item) && (destruction_tool != TOOL_SHOVEL || !user?.check_intent(I_FLAG_HARM))
 	if(digging && used_item.do_tool_interaction(TOOL_SHOVEL, user, src, 2 SECONDS, "digging up", "digging up", check_skill = SKILL_HAULING))
 		unbury(user, place_in_hands = TRUE) // deletes the grave marker and spawns an item in its place
 		return TRUE
@@ -199,7 +200,7 @@
 	icon_state = pick("wood","cross")
 
 	var/decl/background_detail/S = GET_DECL(/decl/background_detail/heritage/human)
-	var/nam = S.get_random_name(null, pick(MALE,FEMALE))
+	var/nam = S.get_random_cultural_name(null, pick(MALE,FEMALE))
 	var/cur_year = global.using_map.game_year
 	var/born = cur_year - rand(5,150)
 	var/died = max(cur_year - rand(0,70),born)
@@ -214,6 +215,7 @@
 	destruction_start_message = "smashing"
 	destruction_finish_message = "smashing"
 	material = /decl/material/solid/stone/granite
+	color = /decl/material/solid/stone/granite::color
 
 // Gravemarker items.
 // TODO: unify with signs somehow? some of this behaviour is similar...
@@ -222,7 +224,8 @@
 	desc                = "You're not the first."
 	icon                = 'icons/obj/structures/gravestone.dmi'
 	icon_state          = "wood"
-	material            = /decl/material/solid/organic/wood
+	material            = /decl/material/solid/organic/wood/oak
+	color               = /decl/material/solid/organic/wood/oak::color
 	w_class             = ITEM_SIZE_NORMAL
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
 	var/gravemarker_type = /obj/structure/gravemarker
@@ -232,25 +235,26 @@
 	name = "gravestone"
 	icon_state = "stone"
 	material = /decl/material/solid/stone/granite
+	color = /decl/material/solid/stone/granite::color
 	gravemarker_type = /obj/structure/gravemarker/gravestone
 
-/obj/item/gravemarker/examine(mob/user, distance)
+/obj/item/gravemarker/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance < 2)
 		var/processed_message = user.handle_reading_literacy(user, message)
 		if(processed_message)
-			to_chat(user, "It says: '[processed_message]'")
+			. += "It says: '[processed_message]'"
 	else if(message)
-		to_chat(user, "You can't read the inscription from here.")
+		. += "You can't read the inscription from here."
 
 /obj/item/gravemarker/attack_self(mob/user)
-	if(user.a_intent != I_HURT)
+	if(!user.check_intent(I_FLAG_HARM))
 		try_bury(get_turf(user), user)
 		return TRUE
 	return ..()
 
 /obj/item/gravemarker/afterattack(turf/target, mob/user, proximity)
-	if((. = ..()) || (user.a_intent == I_HURT && !(item_flags & ITEM_FLAG_NO_BLUDGEON)) || !proximity)
+	if((. = ..()) || (user.check_intent(I_FLAG_HARM) && !(item_flags & ITEM_FLAG_NO_BLUDGEON)) || !proximity)
 		return
 	if(!istype(target))
 		target = get_turf(target)

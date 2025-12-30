@@ -37,7 +37,7 @@ var/global/const/CAMERA_CHANNEL_ENGINEERING_OUTPOST = "Engineering Outpost"
 	req_access = list(access_heads)
 
 /obj/machinery/camera/network/maintenance
-	preset_channels = list(CAMERA_CAMERA_CHANNEL_ENGINEERING)
+	preset_channels = list(CAMERA_CHANNEL_ENGINEERING)
 	req_access = list(access_engine)
 
 /obj/machinery/camera/xray/security

@@ -45,7 +45,7 @@
 		"the tradehouse account documents"   = /obj/item/documents/tradehouse/account,
 		"the tradehouse personnel data"      = /obj/item/documents/tradehouse/personnel,
 		"the table-top spaceship model"      = /obj/item/toy/shipmodel,
-		"the AI inteliCard"                  = /obj/item/aicard,
+		"the AI intelliCard"                  = /obj/item/aicard,
 		"the nuclear authentication disk"    = /obj/item/disk/nuclear,
 		"the officer's sword"                = /obj/item/sword/replica/officersword
 	)

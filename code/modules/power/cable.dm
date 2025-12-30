@@ -22,6 +22,8 @@ If d1 = dir1 and d2 = dir2, it's a full X-X cable, getting from dir1 to dir2
 By design, d1 is the smallest direction and d2 is the highest
 */
 
+/// Tracks all cable instances, so that powernets don't have to look through the entire world all the time
+var/global/list/obj/structure/cable/all_cables = list()
 /obj/structure/cable
 	name = "power cable"
 	desc = "A flexible superconducting cable for heavy-duty power transfer."
@@ -82,24 +84,36 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_SILVER
 	paint_color = COLOR_SILVER
 
+/obj/structure/cable/proc/canonize_cable_dirs()
+	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
+	var/dir_components = splittext(icon_state, "-")
+	if(length(dir_components) < 2)
+		CRASH("Cable segment updating dirs with invalid icon_state: [d1], [d2]")
+	d1 = text2num(dir_components[1])
+	d2 = text2num(dir_components[2])
+	if(!(d1 in global.cabledirs) || !(d2 in global.cabledirs))
+		CRASH("Cable segment updating dirs with invalid values: [d1], [d2]")
+
 /obj/structure/cable/Initialize(var/ml)
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
+	if(isnull(d1) || isnull(d2))
+		canonize_cable_dirs()
 	. = ..(ml)
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level == LEVEL_BELOW_PLATING && T)
 		hide(!T.is_plating())
-	global.cable_list += src //add it to the global cable list
+	global.all_cables += src //add it to the global cable list
 
 /obj/structure/cable/Destroy()     // called when a cable is deleted
 	if(powernet)
 		cut_cable_from_powernet()  // update the powernets
-	global.cable_list -= src              // remove it from global cable list
+	global.all_cables -= src              // remove it from global cable list
 	. = ..()                       // then go ahead and delete the cable
 
 // Ghost examining the cable -> tells him the power
 /obj/structure/cable/attack_ghost(mob/user)
 	if(user.client && user.client.inquisitive_ghost)
-		user.examinate(src)
+		user.examine_verb(src)
 		// following code taken from attackby (multitool)
 		if(powernet && (powernet.avail > 0))
 			to_chat(user, SPAN_WARNING("[get_wattage()] in power network."))
@@ -129,18 +143,10 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/structure/cable/on_update_icon()
 	..()
-	// It is really gross to do this here but the order of icon updates to init seems
-	// unreliable and I have now had to spend hours across two PRs chasing down
-	// cable node weirdness due to the way this was handled previously. NO MORE.
+	// this should be less necessary now but it might still be just in case a subtype calls update_icon() in Initialize prior to its parent call
+	// which... don't do that, but better safe than sorry.
 	if(isnull(d1) || isnull(d2))
-		var/dir_components = splittext(icon_state, "-")
-		if(length(dir_components) < 2)
-			CRASH("Cable segment updating dirs with invalid icon_state: [d1], [d2]")
-		d1 = text2num(dir_components[1])
-		d2 = text2num(dir_components[2])
-		if(!(d1 in global.cabledirs) || !(d2 in global.cabledirs))
-			CRASH("Cable segment updating dirs with invalid values: [d1], [d2]")
-
+		canonize_cable_dirs()
 	icon_state = "[d1]-[d2]"
 	alpha = invisibility ? 127 : 255
 
@@ -188,9 +194,10 @@ By design, d1 is the smallest direction and d2 is the highest
 			to_chat(user, SPAN_WARNING("\The [src] is not powered."))
 		return TRUE
 
-	if(used_item.edge)
+	else if(used_item.has_edge())
+
 		var/delay_holder
-		if(used_item.get_attack_force(user) < 5)
+		if(used_item.expend_attack_force(user) < 5)
 			visible_message(SPAN_WARNING("[user] starts sawing away roughly at \the [src] with \the [used_item]."))
 			delay_holder = 8 SECONDS
 		else
@@ -232,7 +239,7 @@ By design, d1 is the smallest direction and d2 is the highest
 				if(c.d1 == UP || c.d2 == UP)
 					qdel(c)
 
-	investigate_log("was cut by [key_name(usr, usr.client)] in [get_area_name(user)]","wires")
+	investigate_log("was cut by [key_name(user, user.client)] in [get_area_name(user)]","wires")
 
 	qdel(src)
 
@@ -242,7 +249,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		return FALSE
 	if (electrocute_mob(user, powernet, src, siemens_coeff))
 		spark_at(src, amount=5, cardinal_only = TRUE)
-		if(HAS_STATUS(usr, STAT_STUN))
+		if(HAS_STATUS(user, STAT_STUN))
 			return TRUE
 	return FALSE
 
@@ -368,8 +375,8 @@ By design, d1 is the smallest direction and d2 is the highest
 				else
 					powernet.add_cable(C) //the cable was powernetless, let's just add it to our powernet
 
-		else if(istype(AM,/obj/machinery/power/apc))
-			var/obj/machinery/power/apc/N = AM
+		else if(istype(AM,/obj/machinery/apc))
+			var/obj/machinery/apc/N = AM
 			var/obj/machinery/power/terminal/terminal = N.terminal()
 			if(!terminal)	continue // APC are connected through their terminal
 
@@ -433,7 +440,6 @@ By design, d1 is the smallest direction and d2 is the highest
 	. = list()	// this will be a list of all connected power objects
 	if(d1 == 0)
 		for(var/obj/machinery/power/P in loc)
-			if(P.powernet == 0) continue // exclude APCs with powernet=0
 			if(!skip_assigned_powernets || !P.powernet)
 				. += P
 
@@ -508,7 +514,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	max_amount = MAXCOIL
 	color = COLOR_MAROON
 	paint_color = COLOR_MAROON
-	desc = "A coil of wiring, suitable for both delicate electronics and heavy duty power supply."
+	desc = "A coil of wiring, suitable for both delicate electronics and heavy-duty power supply."
 	singular_name = "length"
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
@@ -561,7 +567,7 @@ By design, d1 is the smallest direction and d2 is the highest
 //you can use wires to heal robotics
 /obj/item/stack/cable_coil/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	var/obj/item/organ/external/affecting = istype(target) && GET_EXTERNAL_ORGAN(target, user?.get_target_zone())
-	if(affecting && user.a_intent == I_HELP)
+	if(affecting && user.check_intent(I_FLAG_HELP))
 		if(!affecting.is_robotic())
 			to_chat(user, SPAN_WARNING("\The [target]'s [affecting.name] is not robotic. \The [src] cannot repair it."))
 		else if(BP_IS_BRITTLE(affecting))
@@ -609,18 +615,16 @@ By design, d1 is the smallest direction and d2 is the highest
 	else
 		w_class = ITEM_SIZE_SMALL
 
-/obj/item/stack/cable_coil/examine(mob/user, distance)
+/obj/item/stack/cable_coil/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance > 1)
 		return
-
 	if(get_amount() == 1)
-		to_chat(user, "\A [singular_name] of cable.")
+		. += "\A [singular_name] of cable."
 	else if(get_amount() == 2)
-		to_chat(user, "Two [plural_name] of cable.")
+		. += "Two [plural_name] of cable."
 	else
-		to_chat(user, "A coil of power cable. There are [get_amount()] [plural_name] of cable in the coil.")
-
+		. += "A coil of power cable. There are [get_amount()] [plural_name] of cable in the coil."
 
 /obj/item/stack/cable_coil/verb/make_restraint()
 	set name = "Make Cable Restraints"
@@ -896,8 +900,8 @@ By design, d1 is the smallest direction and d2 is the highest
 		var/obj/item/rig_module/module = loc
 		return module.get_cell()
 	if(isrobot(loc))
-		var/mob/living/silicon/robot/R = loc
-		return R.get_cell()
+		var/mob/living/silicon/robot/robot = loc
+		return robot.get_cell()
 
 /obj/item/stack/cable_coil/fabricator/use(var/used)
 	var/obj/item/cell/cell = get_cell()

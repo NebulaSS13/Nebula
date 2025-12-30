@@ -7,6 +7,7 @@
 /decl/interaction_handler/clothing_toggle/hood
 	name = "Adjust Hood"
 	state_decl_type = /decl/clothing_state_modifier/hood
+	examine_desc = "push the hood up or down"
 
 /obj/item/clothing/proc/toggle_hood_verb()
 

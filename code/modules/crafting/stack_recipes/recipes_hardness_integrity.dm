@@ -2,6 +2,18 @@
 	abstract_type      = /decl/stack_recipe/hardness/integrity
 	required_integrity = 50
 
+/decl/stack_recipe/hardness/integrity/sign
+	result_type        = /obj/item/banner/sign
+
+/decl/stack_recipe/hardness/integrity/buckler
+	result_type        = /obj/item/shield_base/buckler
+	difficulty         = MAT_VALUE_HARD_DIY
+
+// TODO: forging
+/decl/stack_recipe/hardness/integrity/shield_fasteners
+	result_type        = /obj/item/shield_fasteners
+	difficulty         = MAT_VALUE_VERY_HARD_DIY
+
 /decl/stack_recipe/hardness/integrity/furniture
 	abstract_type      = /decl/stack_recipe/hardness/integrity/furniture
 	one_per_turf       = TRUE
@@ -19,6 +31,12 @@
 /decl/stack_recipe/hardness/integrity/furniture/banner_frame
 	result_type        = /obj/structure/banner_frame
 
+/decl/stack_recipe/hardness/integrity/furniture/sign_hook
+	result_type        = /obj/structure/banner_frame/sign
+
+/decl/stack_recipe/hardness/integrity/furniture/sign_hook/wall
+	result_type        = /obj/structure/banner_frame/sign/wall
+
 /decl/stack_recipe/hardness/integrity/furniture/coatrack
 	result_type        = /obj/structure/coatrack
 
@@ -31,44 +49,48 @@
 	category           = "seating"
 
 /decl/stack_recipe/hardness/integrity/furniture/bench
-	result_type        = /obj/structure/bed/chair/bench
+	result_type        = /obj/structure/chair/bench
 	category           = "seating"
 
-/decl/stack_recipe/hardness/integrity/furniture/bench/single
-	result_type        = /obj/structure/bed/chair/bench/single
-
 /decl/stack_recipe/hardness/integrity/furniture/bench/pew
-	result_type        = /obj/structure/bed/chair/bench/pew
+	result_type        = /obj/structure/chair/bench/pew
 
-/decl/stack_recipe/hardness/integrity/furniture/bench/pew/single
-	result_type        = /obj/structure/bed/chair/bench/pew/single
+/decl/stack_recipe/hardness/integrity/furniture/bench/lounge
+	result_type        = /obj/structure/chair/bench/lounge
+	difficulty         = MAT_VALUE_VERY_HARD_DIY
 
 /decl/stack_recipe/hardness/integrity/furniture/closet
 	result_type        = /obj/structure/closet
 
 /decl/stack_recipe/hardness/integrity/furniture/tank_dispenser
-	result_type        = /obj/structure/tank_rack
+	result_type        = /obj/structure/tank_rack/empty
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/hardness/integrity/furniture/coffin
 	result_type        = /obj/structure/closet/coffin
 
 /decl/stack_recipe/hardness/integrity/furniture/chair
-	result_type        = /obj/structure/bed/chair
+	result_type        = /obj/structure/chair
 	category           = "seating"
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/office
-	result_type        = /obj/structure/bed/chair/office/comfy/unpadded
+	result_type        = /obj/structure/chair/office/comfy/unpadded
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/comfy
-	result_type        = /obj/structure/bed/chair/comfy/unpadded
+	result_type        = /obj/structure/chair/comfy/unpadded
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/arm
-	result_type        = /obj/structure/bed/chair/armchair/unpadded
+	result_type        = /obj/structure/chair/armchair/unpadded
 
 /decl/stack_recipe/hardness/integrity/furniture/chair/roundedchair
-	result_type        = /obj/structure/bed/chair/rounded
+	result_type        = /obj/structure/chair/rounded
+
+/decl/stack_recipe/hardness/integrity/furniture/chair/backed
+	result_type        = /obj/structure/chair/backed
+
+/decl/stack_recipe/hardness/integrity/furniture/chair/slatted
+	result_type        = /obj/structure/chair/slatted
 
 /decl/stack_recipe/hardness/integrity/furniture/drying_rack
 	result_type        = /obj/structure/drying_rack

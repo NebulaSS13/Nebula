@@ -2,7 +2,7 @@
 	name = "Avian"
 
 /decl/loadout_option/avian
-	whitelisted = list(SPECIES_AVIAN)
+	whitelisted = list(/decl/species/neoavian::uid)
 	category = /decl/loadout_category/avian
 	abstract_type = /decl/loadout_option/avian
 

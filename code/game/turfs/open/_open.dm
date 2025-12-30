@@ -37,46 +37,46 @@
 	if(!QDELETED(AM))
 		AM.fall()
 
-/turf/open/examine(mob/user, distance, infix, suffix)
+/turf/open/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 2)
 		var/depth = 1
 		for(var/turf/T = GetBelow(src); (istype(T) && T.is_open()); T = GetBelow(T))
 			depth += 1
-		to_chat(user, "It is about [depth] level\s deep.")
+		. += "It is about [depth] level\s deep."
 
 /turf/open/is_open()
 	return TRUE
 
-/turf/open/attackby(obj/item/C, mob/user)
+/turf/open/attackby(obj/item/used_item, mob/user)
 
-	if(istype(C, /obj/item/stack/material/rods))
+	if(istype(used_item, /obj/item/stack/material/rods))
 		var/ladder = (locate(/obj/structure/ladder) in src)
 		if(ladder)
 			to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
 			return TRUE
 		var/obj/structure/lattice/lattice = locate(/obj/structure/lattice, src)
 		if(lattice)
-			return lattice.attackby(C, user)
-		var/obj/item/stack/material/rods/rods = C
+			return lattice.attackby(used_item, user)
+		var/obj/item/stack/material/rods/rods = used_item
 		if (rods.use(1))
 			to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			new /obj/structure/lattice(src, rods.material.type)
 		return TRUE
 
-	if (istype(C, /obj/item/stack/tile))
-		var/obj/item/stack/tile/tile = C
+	if (istype(used_item, /obj/item/stack/tile))
+		var/obj/item/stack/tile/tile = used_item
 		tile.try_build_turf(user, src)
 		return TRUE
 
 	//To lay cable.
-	if(IS_COIL(C) && try_build_cable(C, user))
+	if(IS_COIL(used_item) && try_build_cable(used_item, user))
 		return TRUE
 
 	for(var/atom/movable/M in below)
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-			return M.attackby(C, user)
+			return M.attackby(used_item, user)
 
 	return FALSE
 
@@ -102,3 +102,44 @@
 
 /turf/open/airless
 	initial_gas = null
+
+/decl/interaction_handler/dig_ramp_from_above
+	name = "Dig Ramp From Above"
+	expected_target_type = /turf/open
+	examine_desc = "dig a ramp in the direction you are facing, one level down"
+
+/decl/interaction_handler/dig_ramp_from_above/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		// TODO: check for blocking floors etc.
+		prop ||= user.get_usable_hand_slot_organ() // Allows drakes to dig.
+		if(!IS_PICK(prop) && !IS_SHOVEL(prop))
+			return FALSE
+		var/turf/turf = get_turf(target)
+		if(!istype(turf) || !turf.is_open() || !HasBelow(turf.z))
+			return FALSE
+		var/turf/wall/natural/wall = GetBelow(target)
+		if(!istype(wall))
+			return FALSE
+		if(!user.Adjacent(target))
+			return FALSE
+		return TRUE
+
+/decl/interaction_handler/dig_ramp_from_above/invoked(atom/target, mob/user, obj/item/prop)
+	var/turf/wall/natural/wall = GetBelow(target)
+	var/user_dir = get_dir(user, target) // opposite of regular wall carving as we are going downwards
+	if(!(user_dir in global.cardinal))
+		to_chat(user, SPAN_WARNING("You must be standing at a cardinal angle to create a ramp."))
+		return FALSE
+	prop ||= user.get_usable_hand_slot_organ() // Allows drakes to dig.
+	if(wall.material?.hardness > prop?.material?.hardness)
+		to_chat(user, SPAN_WARNING("Your [prop.name] is not hard enough to cut into \the [wall]."))
+		return FALSE
+	var/turf/wall/natural/support = get_step(wall, global.reverse_dir[user_dir])
+	if(!istype(support) || support.ramp_slope_direction)
+		to_chat(user, SPAN_WARNING("You cannot cut a ramp into a wall with no additional walls behind it."))
+		return FALSE
+	if(prop.do_tool_interaction((IS_PICK(prop) ? TOOL_PICK : TOOL_SHOVEL), user, wall, 3 SECONDS, suffix_message = ", forming it into a ramp") && !wall.ramp_slope_direction)
+		wall.make_ramp(user, user_dir)
+		return TRUE
+	return FALSE

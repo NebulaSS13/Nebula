@@ -8,7 +8,7 @@
 	stat_immune = NOSCREEN | NOINPUT | NOPOWER
 	interact_offline = TRUE //Needs to be set so that pipes don't say they lack power in their description
 
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_require_restraints = 1
 	buckle_lying = -1
 	build_icon_state = "simple"
@@ -24,7 +24,7 @@
 	var/datum/gas_mixture/air_temporary    // used when reconstructing a pipeline that broke
 	var/datum/reagents/liquid_temporary // used when reconstructing a pipeline that broke
 	var/datum/pipeline/parent
-	var/volume = 0
+	var/gas_volume = 0
 	var/leaking = 0		// Do not set directly, use set_leaking(TRUE/FALSE)
 
 	//minimum pressure before check_pressure(...) should be called
@@ -128,7 +128,7 @@
 			loc.assume_air(air_temporary)
 			air_temporary = null
 		if(liquid_temporary)
-			liquid_temporary.trans_to(loc, liquid_temporary.total_volume)
+			liquid_temporary.trans_to(loc, REAGENT_TOTAL_VOLUME(liquid_temporary))
 			liquid_temporary = null
 	if(leaking)
 		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
@@ -210,7 +210,7 @@
 		update_sound(0)
 		. = PROCESS_KILL
 	else if(leaking)
-		parent.mingle_with_turf(loc, volume)
+		parent.mingle_with_turf(loc, gas_volume)
 		var/air = parent.air?.return_pressure()
 		if(!sound_token && air)
 			update_sound(1)
@@ -223,9 +223,9 @@
 	icon = 'icons/atmos/pipes.dmi'
 	icon_state = "11"
 	name = "pipe"
-	desc = "A one meter section of regular pipe."
+	desc = "A one-meter section of regular pipe."
 
-	volume = ATMOS_DEFAULT_VOLUME_PIPE
+	gas_volume = ATMOS_DEFAULT_VOLUME_PIPE
 
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
@@ -265,7 +265,7 @@
 	smoke.start()
 	qdel(src)
 
-/obj/machinery/atmospherics/pipe/simple/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/simple/on_update_icon()
 	if(!atmos_initalized)
 		return
 
@@ -285,7 +285,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers
 	name = "scrubbers pipe"
-	desc = "A one meter section of scrubbers pipe."
+	desc = "A one-meter section of scrubbers pipe."
 	icon_state = "11-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
@@ -293,7 +293,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/visible/supply
 	name = "air supply pipe"
-	desc = "A one meter section of supply pipe."
+	desc = "A one-meter section of supply pipe."
 	icon_state = "11-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
@@ -333,7 +333,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers
 	name = "scrubbers pipe"
-	desc = "A one meter section of scrubbers pipe."
+	desc = "A one-meter section of scrubbers pipe."
 	icon_state = "11-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
@@ -341,7 +341,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/hidden/supply
 	name = "air supply pipe"
-	desc = "A one meter section of supply pipe."
+	desc = "A one-meter section of supply pipe."
 	icon_state = "11-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
@@ -380,7 +380,7 @@
 	icon_state = "map"
 	name = "pipe manifold"
 	desc = "A manifold composed of regular pipes."
-	volume = ATMOS_DEFAULT_VOLUME_PIPE * 1.5
+	gas_volume = ATMOS_DEFAULT_VOLUME_PIPE * 1.5
 
 	dir = SOUTH
 	initialize_directions = EAST|NORTH|WEST
@@ -391,7 +391,7 @@
 	pipe_class = PIPE_CLASS_TRINARY
 	connect_dir_type = NORTH | EAST | WEST
 
-/obj/machinery/atmospherics/pipe/manifold/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/manifold/on_update_icon()
 	if(!atmos_initalized)
 		return
 
@@ -416,7 +416,7 @@
 	level = LEVEL_ABOVE_PLATING
 
 /obj/machinery/atmospherics/pipe/manifold/visible/scrubbers
-	name="Scrubbers pipe manifold"
+	name = "scrubbers pipe manifold"
 	desc = "A manifold composed of scrubbers pipes."
 	icon_state = "map-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
@@ -424,7 +424,7 @@
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/manifold/visible/supply
-	name="Air supply pipe manifold"
+	name = "air supply pipe manifold"
 	desc = "A manifold composed of supply pipes."
 	icon_state = "map-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
@@ -463,7 +463,7 @@
 	alpha = 128		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers
-	name="Scrubbers pipe manifold"
+	name = "scrubbers pipe manifold"
 	desc = "A manifold composed of scrubbers pipes."
 	icon_state = "map-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
@@ -471,7 +471,7 @@
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply
-	name="Air supply pipe manifold"
+	name = "air supply pipe manifold"
 	desc = "A manifold composed of supply pipes."
 	icon_state = "map-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
@@ -509,7 +509,7 @@
 	icon_state = ""
 	name = "4-way pipe manifold"
 	desc = "A manifold composed of regular pipes."
-	volume = ATMOS_DEFAULT_VOLUME_PIPE * 2
+	gas_volume = ATMOS_DEFAULT_VOLUME_PIPE * 2
 
 	dir = SOUTH
 	initialize_directions = NORTH|SOUTH|EAST|WEST
@@ -521,7 +521,7 @@
 	rotate_class = PIPE_ROTATE_ONEDIR
 	connect_dir_type = NORTH | SOUTH | EAST | WEST
 
-/obj/machinery/atmospherics/pipe/manifold4w/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/manifold4w/on_update_icon()
 	if(!atmos_initalized)
 		return
 
@@ -634,14 +634,14 @@
 	icon = 'icons/atmos/pipes.dmi'
 	icon_state = "cap"
 	level = LEVEL_ABOVE_PLATING
-	volume = 35
+	gas_volume = 35
 
 	pipe_class = PIPE_CLASS_UNARY
 	dir = SOUTH
 	initialize_directions = SOUTH
 	build_icon_state = "cap"
 
-/obj/machinery/atmospherics/pipe/cap/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/cap/on_update_icon()
 	icon_state = "cap[icon_connect_type]"
 	color = get_color()
 
@@ -699,13 +699,13 @@
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/simple/visible/universal
-	name="Universal pipe adapter"
+	name = "universal pipe adapter"
 	desc = "An adapter for regular, supply, scrubbers, and fuel pipes."
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_HE
 	icon_state = "map_universal"
 	build_icon_state = "universal"
 
-/obj/machinery/atmospherics/pipe/simple/visible/universal/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/simple/visible/universal/on_update_icon()
 	if(!atmos_initalized)
 		return
 
@@ -717,13 +717,13 @@
 			universal_underlays(direction)
 
 /obj/machinery/atmospherics/pipe/simple/hidden/universal
-	name="Universal pipe adapter"
-	desc = "An adapter for regular, supply and scrubbers pipes."
+	name = "universal pipe adapter"
+	desc = "An adapter for regular, supply, scrubbers, and fuel pipes."
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_HE
 	icon_state = "map_universal"
 	build_icon_state = "universal"
 
-/obj/machinery/atmospherics/pipe/simple/hidden/universal/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/simple/hidden/universal/on_update_icon()
 	if(!atmos_initalized)
 		return
 

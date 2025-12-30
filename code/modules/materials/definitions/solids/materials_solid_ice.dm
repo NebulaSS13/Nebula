@@ -34,13 +34,42 @@
 	liquid_name = "water"
 	solid_name = "snow"
 	gas_name = "steam"
+	adjective_name = "snow"
+	coated_adjective = "snowy"
 	color = COLOR_WHITE
 	codex_name = null
 	uid = "solid_snow"
 	hardness = MAT_VALUE_MALLEABLE
 	dug_drop_type = /obj/item/stack/material/ore/handful
-	default_solid_form = /obj/item/stack/material/ore/handful
+	default_solid_form = /obj/item/stack/material/lump/large
 	can_backfill_floor_type = /decl/flooring/snow
+
+/decl/material/solid/ice/snow/handle_stain_dry(obj/effect/decal/cleanable/blood/stain)
+	var/ambient_temperature = stain.get_ambient_temperature()
+	if(ambient_temperature < melting_point)
+		// reset the drying timer, it's not warm enough to melt
+		stain.start_drying() // you'd better not ever melt instantly below your melting point, or else this will cause infinite recursion
+	else if(ambient_temperature > boiling_point)
+		qdel(src) // melt instantly, no questions asked
+	else
+		if(--stain.amount < 0) // reduce the amount of snow (amount is always 0 for footprints currently, but maybe someday?)
+			qdel(src)
+	return TRUE // skip base blood handling
+
+// For snowy footprints melting.
+/decl/material/solid/ice/snow/get_time_to_dry_stain(obj/effect/decal/cleanable/blood/stain)
+	// Attempt to melt once every two minutes at T20C,
+	// and every 5 minutes at T0C, trying to 'fake' latent heat.
+	// Above T20C it scales based on (temperature / T20C).
+	// At or above the boiling point it melts instantly.
+	// This doesn't mean it WILL melt at that point, just that it'll attempt to.
+	var/ambient_temperature = max(stain.get_ambient_temperature(), melting_point)
+	if(ambient_temperature >= boiling_point)
+		return 0 // dry instantly
+	if(ambient_temperature < melting_point)
+		return 5 MINUTES
+	// convert from kelvins to celsius by subtracting the 0C point in Kelvins
+	return Interpolate(5 MINUTES, 2 MINUTES, (ambient_temperature - T0C) / 20) / (stain.amount + 1) // Undo the scaling done by blood.
 
 /decl/material/solid/ice/aspium
 	name = "aspium"

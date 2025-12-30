@@ -9,7 +9,7 @@
 	var/list/authorized = list(  )
 
 
-/obj/machinery/computer/shuttle/attackby(var/obj/item/card as obj, var/mob/user as mob)
+/obj/machinery/computer/shuttle/attackby(var/obj/item/used_item, var/mob/user)
 	if(stat & (BROKEN|NOPOWER))	return TRUE
 
 	var/datum/evacuation_controller/shuttle/evac_control = SSevac.evacuation_controller
@@ -17,20 +17,20 @@
 		to_chat(user, "<span class='danger'>This console should not be in use on this map. Please report this to a developer.</span>")
 		return TRUE
 
-	if(!istype(card, /obj/item/card)) // don't try to get an ID card if we're an emag
-		card = card.GetIdCard() // handles stored IDs in  modcomps and similar
+	if(!istype(used_item, /obj/item/card)) // don't try to get an ID card if we're an emag
+		used_item = used_item.GetIdCard() // handles stored IDs in  modcomps and similar
 
-	if ((!istype(card, /obj/item/card) || evac_control.has_evacuated() || !user))
+	if ((!istype(used_item, /obj/item/card) || evac_control.has_evacuated() || !user))
 		return FALSE
 
-	if (istype(card, /obj/item/card/id))
-		var/obj/item/card/id/id_card = card
+	if (istype(used_item, /obj/item/card/id))
+		var/obj/item/card/id/id_card = used_item
 		if(!LAZYISIN(id_card.access, access_bridge)) //doesn't have this access
 			to_chat(user, "The access level of [id_card.registered_name]\'s card is not high enough.")
 			return TRUE
 
 		var/choice = alert(user, "Would you like to (un)authorize a shortened launch time? [auth_need - authorized.len] authorization\s are still needed. Use abort to cancel all authorizations.", "Shuttle Launch", "Authorize", "Repeal", "Abort")
-		if(evac_control.is_prepared() && user.get_active_held_item() != card)
+		if(evac_control.is_prepared() && user.get_active_held_item() != used_item)
 			return TRUE
 		switch(choice)
 			if("Authorize")
@@ -59,10 +59,10 @@
 				src.authorized = list(  )
 		return TRUE
 
-	else if (istype(card, /obj/item/card/emag) && !emagged)
+	else if (istype(used_item, /obj/item/card/emag) && !emagged)
 		var/choice = alert(user, "Would you like to launch the shuttle?","Shuttle control", "Launch", "Cancel")
 
-		if(!emagged && !evac_control.is_prepared() && user.get_active_held_item() == card && choice == "Launch")
+		if(!emagged && !evac_control.is_prepared() && user.get_active_held_item() == used_item && choice == "Launch")
 			to_world("<span class='notice'><b>Alert: Shuttle launch time shortened to 10 seconds!</b></span>")
 			evac_control.set_launch_time(world.time+100)
 			emagged = 1

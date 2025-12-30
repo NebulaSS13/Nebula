@@ -4,7 +4,7 @@
 	icon_state = "intact"
 	density = TRUE
 
-	name = "Heat Exchanger"
+	name = "heat exchanger"
 	desc = "Exchanges heat between two input gases. Setup for fast heat transfer."
 
 	var/obj/machinery/atmospherics/unary/heat_exchanger/partner = null

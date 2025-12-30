@@ -63,7 +63,7 @@
 /area/ship/scrap/command/bridge)
 "aj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 1
 	},
 /obj/abstract/landmark/corpse/deadcap,
@@ -116,7 +116,8 @@
 /area/ship/scrap/comms)
 "as" = (
 /obj/machinery/door/blast/regular{
-	id_tag = "sensor"
+	id_tag = "sensor";
+	dir = 4
 	},
 /turf/floor/usedup,
 /area/ship/scrap/comms)
@@ -125,10 +126,10 @@
 /turf/wall/r_wall,
 /area/ship/scrap/command/bridge)
 "au" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 8
 	},
 /obj/structure/cable{
@@ -148,9 +149,9 @@
 	department = "Captain";
 	pixel_x = 32;
 	initial_network_id = "freightnet_0451";
-	dir = 4;
+	dir = 4
 	},
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled/dark/usedup,
@@ -228,7 +229,7 @@
 /obj/machinery/computer/cryopod{
 	dir = 8
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/scrap/command/captain)
 "aH" = (
 /turf/floor/bluegrid/airless,
@@ -241,7 +242,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1;
 	name = "Communications APC"
 	},
@@ -260,7 +261,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Bridge APC"
 	},
@@ -289,7 +290,7 @@
 /obj/item/backpack/dufflebag/syndie,
 /obj/item/box/ammo/shotgunshells,
 /obj/item/handcuffs,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/scrap/command/captain)
 "aL" = (
 /obj/item/bedsheet/captain,
@@ -297,12 +298,12 @@
 /obj/item/gun/projectile/pistol/holdout,
 /obj/structure/bed/padded,
 /obj/abstract/submap_landmark/spawnpoint/captain,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/scrap/command/captain)
 "aM" = (
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/machinery/light_switch{
 	pixel_y = 25
 	},
@@ -313,7 +314,7 @@
 	pixel_x = 24;
 	req_access = newlist()
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/scrap/command/captain)
 "aN" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -393,7 +394,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/scrap/command/captain)
 "aU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -402,11 +403,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/scrap/command/captain)
 "aV" = (
-/obj/structure/bed/chair/comfy/brown,
-/turf/floor/wood,
+/obj/structure/chair/comfy/brown,
+/turf/floor/laminate,
 /area/ship/scrap/command/captain)
 "aW" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -466,7 +467,7 @@
 	},
 /obj/structure/window/reinforced/full,
 /obj/structure/table/marble,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/scrap/command/captain)
 "bb" = (
 /obj/structure/cable{
@@ -476,21 +477,22 @@
 	dir = 1;
 	level = 2
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/scrap/command/captain)
 "bc" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc/derelict/full{
+/obj/machinery/apc/derelict/full{
 	dir = 4;
 	name = "Captain's Quarters APC"
 	},
 /obj/item/chems/drinks/glass2/coffeecup/one,
 /obj/item/tank/oxygen,
 /obj/item/clothing/mask/breath/emergency,
-/turf/floor/wood,
+/obj/item/flashlight,
+/turf/floor/laminate,
 /area/ship/scrap/command/captain)
 "bd" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -560,7 +562,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1;
 	name = "Docking Area APC"
 	},
@@ -1080,14 +1082,14 @@
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/saloon)
 "cm" = (
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1;
 	name = "Crew Areas APC"
 	},
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/saloon)
 "cn" = (
@@ -1103,7 +1105,7 @@
 /area/ship/scrap/crew/saloon)
 "co" = (
 /obj/structure/emergency_dispenser/north,
-/obj/structure/bed/chair/wood,
+/obj/structure/chair/wood,
 /obj/item/deck/tarot,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/saloon)
@@ -1175,6 +1177,7 @@
 	},
 /obj/item/plate/tray,
 /obj/item/circular_saw,
+/obj/item/flashlight/lamp,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/saloon)
 "cz" = (
@@ -1202,15 +1205,8 @@
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/cryo)
 "cE" = (
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
 /obj/structure/hygiene/shower{
 	dir = 4
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 1
 	},
 /obj/item/soap,
 /obj/structure/curtain/open/shower,
@@ -1223,17 +1219,6 @@
 	icon_state = "bulb1"
 	},
 /obj/structure/hygiene/toilet,
-/obj/structure/window/reinforced/tinted{
-	dir = 1
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
-	},
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/floor/tiled/usedup,
@@ -1532,11 +1517,6 @@
 /obj/structure/hygiene/shower{
 	dir = 4
 	},
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted,
 /obj/structure/curtain/open/shower,
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/floor/tiled/usedup,
@@ -1544,15 +1524,6 @@
 "dj" = (
 /obj/structure/hygiene/toilet{
 	dir = 1
-	},
-/obj/structure/window/reinforced/tinted,
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
 	},
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/floor_decal/corner/white/diagonal,
@@ -1562,18 +1533,9 @@
 /obj/structure/hygiene/toilet{
 	dir = 1
 	},
-/obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Bathrooms APC"
 	},
@@ -1622,7 +1584,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 1
 	},
 /turf/floor/tiled/usedup,
@@ -1675,7 +1637,7 @@
 /area/ship/scrap/crew/hallway/starboard)
 "dt" = (
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	name = "Dorms APC"
 	},
 /obj/machinery/light_switch{
@@ -1779,7 +1741,7 @@
 /area/ship/scrap/crew/kitchen)
 "dH" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Crew Deck APC"
 	},
@@ -1898,7 +1860,7 @@
 	pixel_x = 3
 	},
 /obj/item/chems/condiment/enzyme,
-/obj/item/chems/glass/rag,
+/obj/item/chems/rag,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/kitchen)
 "dU" = (
@@ -1912,7 +1874,7 @@
 	icon_state = "0-2";
 	pixel_y = 1
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Galley APC"
 	},
@@ -2045,7 +2007,7 @@
 	},
 /obj/item/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /obj/item/chems/condiment/small/saltshaker{
 	pixel_x = -3
 	},
@@ -2253,7 +2215,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/obj/structure/bed/chair/office/light,
+/obj/structure/chair/office/light,
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
@@ -2286,7 +2248,7 @@
 /area/ship/scrap/crew/medbay)
 "eA" = (
 /obj/item/pill_bottle/happy,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/structure/cable{
@@ -2420,7 +2382,7 @@
 "eM" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Cargo Hold APC"
 	},
@@ -2431,7 +2393,7 @@
 /turf/floor/tiled/usedup,
 /area/ship/scrap/cargo)
 "eN" = (
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 4;
 	name = "Crew Deck APC"
 	},
@@ -2445,7 +2407,7 @@
 "eO" = (
 /obj/structure/table,
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict/full{
+/obj/machinery/apc/derelict/full{
 	name = "Medical Bay APC"
 	},
 /obj/machinery/light_switch{
@@ -2459,13 +2421,14 @@
 /obj/item/stack/tape_roll/duct_tape,
 /obj/item/retractor,
 /obj/item/scalpel,
+/obj/item/tank/oxygen,
 /turf/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eP" = (
 /obj/machinery/light,
 /obj/machinery/optable,
 /obj/item/chems/drinks/glass2/coffeecup/britcup,
-/obj/item/chems/glass/rag,
+/obj/item/chems/rag,
 /turf/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eQ" = (
@@ -2517,7 +2480,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/engine/starboard)
 "eU" = (
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/structure/cable{
@@ -2713,7 +2676,7 @@
 	dir = 4;
 	icon_state = "conpipe-c"
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1;
 	name = "Washroom APC"
 	},
@@ -3037,7 +3000,7 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/random/clothing,
-/obj/item/chems/glass/rag,
+/obj/item/chems/rag,
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/crew/wash)
@@ -3104,7 +3067,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/unused)
 "gc" = (
-/obj/machinery/power/apc/derelict/full{
+/obj/machinery/apc/derelict/full{
 	name = "Medical Bay APC"
 	},
 /obj/structure/cable,
@@ -3433,7 +3396,7 @@
 /area/ship/scrap/fire)
 "gL" = (
 /obj/structure/cable,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -3547,7 +3510,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/structure/cable{
@@ -3703,7 +3666,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /mob/living/simple_animal/hostile/carp,
@@ -3728,7 +3691,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 1
 	},
 /obj/structure/sign/warning/compressed_gas{
@@ -3811,7 +3774,7 @@
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
 "hr" = (
-/obj/structure/bed/chair/comfy/brown,
+/obj/structure/chair/comfy/brown,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5
 	},
@@ -4030,7 +3993,7 @@
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/power)
 "hK" = (
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Main Grid"
 	},
 /obj/structure/cable{
@@ -4058,7 +4021,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "hM" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
@@ -4474,7 +4437,7 @@
 /area/ship/scrap/maintenance/atmos)
 "iF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 8
 	},
 /obj/structure/cable,
@@ -4542,13 +4505,13 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "iO" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /mob/living/simple_animal/hostile/carp,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "iP" = (
 /obj/item/stack/material/sheet/mapped/steel,
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "iQ" = (
@@ -4686,7 +4649,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "jc" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/power)
@@ -4701,6 +4664,7 @@
 /obj/structure/window/reinforced{
 	current_health = 1e+007
 	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
 "je" = (
@@ -4861,7 +4825,7 @@
 /turf/wall,
 /area/ship/scrap/maintenance/power)
 "jB" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/space,
 /area/space)
 "jC" = (
@@ -4939,7 +4903,7 @@
 /area/ship/scrap/maintenance/engine/aft)
 "jN" = (
 /obj/item/stack/material/sheet/mapped/steel,
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
@@ -5003,7 +4967,7 @@
 /turf/floor/plating/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jX" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
 "jY" = (
@@ -5033,21 +4997,6 @@
 	},
 /obj/structure/hygiene/sink{
 	pixel_y = 18
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 1
-	},
-/obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	level = 2
@@ -5121,6 +5070,7 @@
 "uM" = (
 /obj/item/stack/material/sheet/mapped/steel,
 /obj/structure/lattice,
+/obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "vs" = (
@@ -5145,6 +5095,10 @@
 /obj/effect/paint/brown,
 /turf/wall/r_wall,
 /area/space)
+"zq" = (
+/obj/item/stack/material/rods,
+/turf/space,
+/area/ship/scrap/maintenance/atmos)
 "zT" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -5171,7 +5125,7 @@
 /obj/structure/closet/secure_closet/engineering_electrical/bearcat,
 /obj/item/cell/device/standard,
 /obj/item/cell/device/standard,
-/obj/machinery/power/apc/derelict{
+/obj/machinery/apc/derelict{
 	dir = 8
 	},
 /obj/structure/cable{
@@ -5197,19 +5151,16 @@
 /turf/wall/r_wall,
 /area/ship/scrap/crew/kitchen)
 "Hd" = (
-/obj/machinery/portable_atmospherics/canister/nitrogen,
-/turf/space,
-/area/space)
+/obj/item/stack/material/sheet/mapped/steel,
+/obj/machinery/atmospherics/unary/tank/nitrogen{
+	dir = 1
+	},
+/turf/floor/plating/airless,
+/area/ship/scrap/maintenance/atmos)
 "HQ" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
-"Ix" = (
-/obj/machinery/network/router{
-	initial_network_id = "freightnet_0451"
-	},
-/turf/floor/bluegrid/airless,
-/area/ship/scrap/comms)
 "IG" = (
 /obj/item/shard,
 /obj/machinery/atmospherics/unary/outlet_injector{
@@ -5251,6 +5202,12 @@
 	},
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
+"KW" = (
+/obj/item/shard,
+/obj/structure/lattice,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/space,
+/area/ship/scrap/maintenance/atmos)
 "Lp" = (
 /turf/floor/reinforced/airless,
 /area/space)
@@ -5290,6 +5247,12 @@
 	},
 /turf/floor/usedup,
 /area/ship/scrap/hidden)
+"Nc" = (
+/obj/machinery/network/router{
+	initial_network_id = "bearnet"
+	},
+/turf/floor/bluegrid/airless,
+/area/ship/scrap/comms)
 "Od" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/effect/floor_decal/corner/yellow{
@@ -5299,7 +5262,7 @@
 /turf/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "PP" = (
-/obj/machinery/power/apc/derelict/full{
+/obj/machinery/apc/derelict/full{
 	name = "Medical Bay APC"
 	},
 /obj/structure/cable{
@@ -11296,14 +11259,14 @@ wp
 gY
 hx
 hx
-ie
+Hd
 iQ
-hw
+zq
 iP
 Eq
-id
+KW
 Yl
-Hd
+aa
 aa
 aa
 aa
@@ -11547,7 +11510,7 @@ IG
 Mm
 hN
 hx
-hM
+hw
 aa
 aa
 aa
@@ -11994,7 +11957,7 @@ xU
 Yv
 Yv
 ar
-Ix
+Nc
 aO
 aX
 Yv

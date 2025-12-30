@@ -526,8 +526,8 @@
 /client/proc/special_set_vv_var(var/datum/O, variable, var_value, client)
 	var/list/vv_set_handlers = decls_repository.get_decls_of_subtype(/decl/vv_set_handler)
 	for(var/vv_handler in vv_set_handlers)
-		var/decl/vv_set_handler/sh = vv_set_handlers[vv_handler]
-		if(sh.can_handle_set_var(O, variable, var_value, client))
-			sh.handle_set_var(O, variable, var_value, client)
+		var/decl/vv_set_handler/set_handler = vv_set_handlers[vv_handler]
+		if(set_handler.can_handle_set_var(O, variable, var_value, client))
+			set_handler.handle_set_var(O, variable, var_value, client)
 			return TRUE
 	return FALSE

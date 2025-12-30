@@ -244,8 +244,8 @@ var/global/list/known_overmap_sectors
 	for(var/thing in get_linked_machines_of_type(/obj/machinery/computer/ship))
 		var/obj/machinery/computer/ship/machine = thing
 		if(machine.z in map_z)
-			for(var/weakref/W in machine.viewers)
-				var/mob/M = W.resolve()
+			for(var/weakref/viewer_ref in machine.viewers)
+				var/mob/M = viewer_ref.resolve()
 				if(istype(M) && M.client)
 					M.client.default_pixel_x = pixel_x
 					M.client.default_pixel_y = pixel_y

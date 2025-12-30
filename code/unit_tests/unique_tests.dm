@@ -207,26 +207,6 @@
 		pass("All gas symbols are unique.")
 	return TRUE
 
-/datum/unit_test/submaps_shall_have_a_unique_descriptor
-	name = "UNIQUENESS: Archetypes shall have a valid, unique descriptor."
-
-/datum/unit_test/submaps_shall_have_a_unique_descriptor/start_test()
-	var/list/submaps_by_name = list()
-
-	var/list/all_submaps = decls_repository.get_decls_of_subtype(/decl/submap_archetype)
-	for(var/submap_type in all_submaps)
-		var/decl/submap_archetype/submap = all_submaps[submap_type]
-		if(submap.descriptor)
-			group_by(submaps_by_name, submap.descriptor, submap_type)
-
-	var/number_of_issues = number_of_issues(submaps_by_name, "Submap Archetype Descriptors")
-	if(length(number_of_issues))
-		fail("Found [number_of_issues] submap archetype\s with duplicate descriptors.")
-	else
-		pass("All submap archetypes have unique descriptors.")
-	return 1
-
-
 /datum/unit_test/proc/number_of_issues(var/list/entries, var/type, var/feedback = /decl/noi_feedback)
 	var/issues = 0
 	for(var/key in entries)

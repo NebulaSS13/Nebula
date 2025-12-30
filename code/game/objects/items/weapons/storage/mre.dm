@@ -30,9 +30,10 @@ MRE Stuff
 	if(length(contents) && storage)
 		storage.make_exact_fit()
 
-/obj/item/mre/examine(mob/user)
+/obj/item/mre/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, meal_desc)
+	if(meal_desc)
+		. += meal_desc
 
 /obj/item/mre/attack_self(mob/user)
 	. = ..()

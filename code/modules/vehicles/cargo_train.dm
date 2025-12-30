@@ -1,6 +1,6 @@
 /obj/vehicle/train/cargo/engine
 	name = "cargo train tug"
-	desc = "A ridable electric car designed for pulling cargo trolleys."
+	desc = "A rideable electric car designed for pulling cargo trolleys."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "cargo_engine"
 	on = 0
@@ -67,17 +67,17 @@
 
 	return ..()
 
-/obj/vehicle/train/cargo/trolley/attackby(obj/item/W, mob/user)
-	if(open && IS_WIRECUTTER(W))
+/obj/vehicle/train/cargo/trolley/attackby(obj/item/used_item, mob/user)
+	if(open && IS_WIRECUTTER(used_item))
 		passenger_allowed = !passenger_allowed
 		user.visible_message("<span class='notice'>[user] [passenger_allowed ? "cuts" : "mends"] a cable in [src].</span>","<span class='notice'>You [passenger_allowed ? "cut" : "mend"] the load limiter cable.</span>")
 		return TRUE
 	return ..()
 
-/obj/vehicle/train/cargo/engine/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/key/cargo_train))
-		if(!key && user.try_unequip(W, src))
-			key = W
+/obj/vehicle/train/cargo/engine/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/key/cargo_train))
+		if(!key && user.try_unequip(used_item, src))
+			key = used_item
 			verbs += /obj/vehicle/train/cargo/engine/verb/remove_key
 		return TRUE
 	return ..()
@@ -95,10 +95,10 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/vehicle/train/cargo/trolley/insert_cell(var/obj/item/cell/C, var/mob/living/human/H)
+/obj/vehicle/train/cargo/trolley/insert_cell(var/obj/item/cell/cell, var/mob/living/human/H)
 	return
 
-/obj/vehicle/train/cargo/engine/insert_cell(var/obj/item/cell/C, var/mob/living/human/H)
+/obj/vehicle/train/cargo/engine/insert_cell(var/obj/item/cell/cell, var/mob/living/human/H)
 	..()
 	update_stats()
 
@@ -187,17 +187,11 @@
 	else
 		return ..()
 
-/obj/vehicle/train/cargo/engine/examine(mob/user, distance)
+/obj/vehicle/train/cargo/engine/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-
-	if(distance > 1)
-		return
-
-	if(!ishuman(usr))
-		return
-
-	to_chat(user, "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition.")
-	to_chat(user, "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%")
+	if(distance <= 1)
+		. += "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
+		. += "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
 
 /obj/vehicle/train/cargo/engine/verb/start_engine()
 	set name = "Start engine"
@@ -258,24 +252,24 @@
 //-------------------------------------------
 // Loading/unloading procs
 //-------------------------------------------
-/obj/vehicle/train/cargo/trolley/load(var/atom/movable/C)
-	if(ismob(C) && !passenger_allowed)
+/obj/vehicle/train/cargo/trolley/load(var/atom/movable/loading)
+	if(ismob(loading) && !passenger_allowed)
 		return 0
-	if(!istype(C,/obj/machinery) && !istype(C,/obj/structure/closet) && !istype(C,/obj/structure/largecrate) && !istype(C,/obj/structure/reagent_dispensers) && !istype(C,/obj/structure/ore_box) && !ishuman(C))
+	if(!istype(loading,/obj/machinery) && !istype(loading,/obj/structure/closet) && !istype(loading,/obj/structure/largecrate) && !istype(loading,/obj/structure/reagent_dispensers) && !istype(loading,/obj/structure/ore_box) && !ishuman(loading))
 		return 0
 
 	//if there are any items you don't want to be able to interact with, add them to this check
 	// ~no more shielded, emitter armed death trains
-	if(istype(C, /obj/machinery))
-		load_object(C)
+	if(istype(loading, /obj/machinery))
+		load_object(loading)
 	else
 		..()
 
 	if(load)
 		return 1
 
-/obj/vehicle/train/cargo/engine/load(var/atom/movable/C)
-	if(!ishuman(C))
+/obj/vehicle/train/cargo/engine/load(var/atom/movable/loading)
+	if(!ishuman(loading))
 		return 0
 
 	return ..()
@@ -284,10 +278,10 @@
 //This prevents the object from being interacted with until it has
 // been unloaded. A dummy object is loaded instead so the loading
 // code knows to handle it correctly.
-/obj/vehicle/train/cargo/trolley/proc/load_object(var/atom/movable/C)
-	if(!isturf(C.loc)) //To prevent loading things from someone's inventory, which wouldn't get handled properly.
+/obj/vehicle/train/cargo/trolley/proc/load_object(var/atom/movable/loading)
+	if(!isturf(loading.loc)) //To prevent loading things from someone's inventory, which wouldn't get handled properly.
 		return 0
-	if(load || C.anchored)
+	if(load || loading.anchored)
 		return 0
 
 	var/datum/vehicle_dummy_load/dummy_load = new()
@@ -295,21 +289,21 @@
 
 	if(!load)
 		return
-	dummy_load.actual_load = C
-	C.forceMove(src)
+	dummy_load.actual_load = loading
+	loading.forceMove(src)
 
 	if(load_item_visible)
-		C.pixel_x += load_offset_x
-		C.pixel_y += load_offset_y
-		C.plane = plane
-		C.layer = VEHICLE_LOAD_LAYER
+		loading.pixel_x += load_offset_x
+		loading.pixel_y += load_offset_y
+		loading.plane = plane
+		loading.layer = VEHICLE_LOAD_LAYER
 
-		overlays += C
+		overlays += loading
 
 		//we can set these back now since we have already cloned the icon into the overlay
-		C.pixel_x = initial(C.pixel_x)
-		C.pixel_y = initial(C.pixel_y)
-		C.reset_plane_and_layer()
+		loading.pixel_x = initial(loading.pixel_x)
+		loading.pixel_y = initial(loading.pixel_y)
+		loading.reset_plane_and_layer()
 
 /obj/vehicle/train/cargo/trolley/unload(var/mob/user, var/direction)
 	if(istype(load, /datum/vehicle_dummy_load))

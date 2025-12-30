@@ -33,12 +33,12 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/floor/wood/walnut,
+/turf/floor/laminate/walnut,
 /area/ship/trade/disused)
 "ae" = (
 /obj/effect/decal/cleanable/generic,
 /obj/item/stool/wood,
-/turf/floor/wood/walnut,
+/turf/floor/laminate/walnut,
 /area/ship/trade/disused)
 "af" = (
 /obj/structure/disposalpipe/up,
@@ -712,7 +712,7 @@
 /turf/floor,
 /area/ship/trade/fore_port_underside_maint)
 "bD" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -22
 	},
@@ -932,7 +932,7 @@
 /turf/floor,
 /area/ship/trade/aft_port_underside_maint)
 "bZ" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -22
 	},
@@ -1012,7 +1012,7 @@
 /turf/floor/plating/dirt,
 /area/ship/trade/aft_port_underside_maint)
 "en" = (
-/turf/floor/wood/walnut,
+/turf/floor/laminate/walnut,
 /area/ship/trade/disused)
 "eu" = (
 /obj/structure/window/basic,
@@ -1074,8 +1074,8 @@
 /area/ship/trade/disused)
 "hc" = (
 /obj/item/radio,
-/obj/structure/table/woodentable/walnut,
-/turf/floor/wood/walnut,
+/obj/structure/table/laminate/walnut,
+/turf/floor/laminate/walnut,
 /area/ship/trade/disused)
 "hf" = (
 /obj/structure/lattice,
@@ -1083,7 +1083,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/turf/floor/wood/walnut,
+/turf/floor/laminate/walnut,
 /area/ship/trade/disused)
 "hg" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
@@ -1122,7 +1122,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/floor/wood/walnut,
+/turf/floor/laminate/walnut,
 /area/ship/trade/disused)
 "jk" = (
 /obj/item/mollusc/barnacle{
@@ -1325,7 +1325,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/backpack/dufflebag,
-/obj/item/chems/glass/rag,
+/obj/item/chems/rag,
 /obj/item/chems/glass/bucket,
 /obj/machinery/firealarm{
 	pixel_y = 21
@@ -1334,7 +1334,7 @@
 /turf/floor/tiled,
 /area/ship/trade/disused)
 "rt" = (
-/obj/structure/bed/chair/padded/beige,
+/obj/structure/chair/padded/beige,
 /turf/floor/carpet/red,
 /area/ship/trade/disused)
 "rv" = (
@@ -1499,7 +1499,7 @@
 /turf/floor/tiled/white,
 /area/ship/trade/livestock)
 "xZ" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -22
 	},
@@ -1518,7 +1518,7 @@
 /obj/item/assembly/mousetrap,
 /obj/item/radio,
 /obj/item/bag/trash,
-/obj/item/chems/glass/rag,
+/obj/item/chems/rag,
 /obj/item/caution,
 /obj/item/caution,
 /obj/item/caution,
@@ -1562,7 +1562,7 @@
 /turf/floor/tiled/steel_grid,
 /area/ship/trade/loading_bay)
 "yT" = (
-/obj/machinery/honey_extractor,
+/obj/machinery/centrifuge/mapped,
 /obj/item/seeds/tomatoseed,
 /turf/floor,
 /area/ship/trade/aft_port_underside_maint)
@@ -1621,9 +1621,7 @@
 /turf/floor,
 /area/ship/trade/fore_port_underside_maint)
 "Dt" = (
-/obj/abstract/level_data_spawner/main_level{
-	name = "Tradeship Basement Deck"
-	},
+/obj/abstract/level_data_spawner/tradeship_basement,
 /turf/space,
 /area/space)
 "Dz" = (
@@ -1724,7 +1722,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -22
 	},
@@ -1767,17 +1765,17 @@
 /turf/floor/carpet/green,
 /area/ship/trade/disused)
 "IG" = (
-/obj/structure/bed/chair/comfy/green{
+/obj/structure/chair/comfy/green{
 	dir = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -22
 	},
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/turf/floor/wood/walnut,
+/turf/floor/laminate/walnut,
 /area/ship/trade/disused)
 "II" = (
 /obj/structure/stairs/long/west,
@@ -1850,7 +1848,7 @@
 /turf/wall/r_wall/hull,
 /area/ship/trade/undercomms)
 "Lx" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 22
 	},
@@ -1865,7 +1863,7 @@
 /obj/structure/bed,
 /obj/item/bedsheet/rainbow,
 /obj/structure/curtain/open/bed,
-/turf/floor/wood/walnut,
+/turf/floor/laminate/walnut,
 /area/ship/trade/disused)
 "LH" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -2021,9 +2019,9 @@
 /turf/floor,
 /area/ship/trade/aft_starboard_underside_maint)
 "Qh" = (
-/obj/structure/table/woodentable/mahogany,
+/obj/structure/table/laminate/mahogany,
 /obj/item/cell/crap/empty,
-/turf/floor/wood/walnut,
+/turf/floor/laminate/walnut,
 /area/ship/trade/disused)
 "Qv" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -2107,7 +2105,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/ship/trade/livestock)
 "Ua" = (
-/obj/structure/bed/chair/wood/walnut,
+/obj/structure/chair/wood/walnut,
 /turf/floor/carpet/red,
 /area/ship/trade/disused)
 "Ug" = (
@@ -2125,7 +2123,7 @@
 /area/ship/trade/loading_bay)
 "VT" = (
 /obj/machinery/hologram/holopad/longrange,
-/turf/floor/wood/walnut,
+/turf/floor/laminate/walnut,
 /area/ship/trade/disused)
 "Xe" = (
 /turf/wall,
@@ -2201,7 +2199,7 @@
 /turf/floor,
 /area/ship/trade/aft_starboard_underside_maint)
 "Zz" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -22
 	},

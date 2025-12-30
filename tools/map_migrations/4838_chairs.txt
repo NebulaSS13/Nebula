@@ -1,0 +1,2 @@
+/obj/structure/bed/chair/janicart/@SUBTYPES : /obj/structure/janicart/@SUBTYPES{@OLD}
+/obj/structure/bed/chair/@SUBTYPES : /obj/structure/chair/@SUBTYPES{@OLD}

@@ -61,12 +61,13 @@
 		forensics.add_from_atom(/datum/forensics/trace_dna, M)
 
 // On examination get hints of evidence
-/obj/item/examine(mob/user, distance)
+/obj/item/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-
 	if(distance <= 1 && user.skill_check(SKILL_FORENSICS, SKILL_ADEPT))
-		to_chat(user, SPAN_INFO("As a murder weapon, it's [english_list(get_autopsy_descriptors())]."))
+		. += SPAN_INFO("As a murder weapon, it's [english_list(get_autopsy_descriptors())].")
 
+/obj/item/examined_by(mob/user, distance, infix, suffix)
+	. = ..()
 	// Detective is on the case
 	var/datum/extension/forensic_evidence/forensics = get_extension(src, /datum/extension/forensic_evidence)
 	if(forensics?.check_spotting(user) && user.has_client_color(/datum/client_color/noir))

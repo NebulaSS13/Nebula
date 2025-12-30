@@ -13,7 +13,7 @@
 	name = "Bishop Rook"
 	desc = "This limb has a polished metallic casing and a holographic face emitter."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/bishop/bishop_rook.dmi'
-	has_eyes = FALSE
+	eye_icon = null // Do not draw eyes.
 	bodytype_category = BODYTYPE_HUMANOID
 	organ_material = /decl/material/solid/metal/steel
 	matter = list(
@@ -32,7 +32,7 @@
 	name = "Hephaestus Titan"
 	desc = "This limb has a casing of an olive drab finish, providing a reinforced housing look."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/hephaestus/hephaestus_titan.dmi'
-	has_eyes = FALSE
+	eye_icon = null // Do not draw eyes.
 	bodytype_category = BODYTYPE_HUMANOID
 	uid = "bodytype_prosthetic_hephaestus_titan"
 
@@ -88,7 +88,7 @@
 	name = "Morpheus Mantis"
 	desc = "This limb has a casing of sleek black metal and repulsive insectile design."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/morpheus/morpheus_mantis.dmi'
-	has_eyes = FALSE
+	eye_icon = null // Do not draw eyes.
 	uid = "bodytype_prosthetic_morpheus_mantis"
 
 /decl/bodytype/prosthetic/veymed

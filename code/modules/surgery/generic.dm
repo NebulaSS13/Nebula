@@ -61,7 +61,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, [fail_string] \the [target]'s [affected.name] in the wrong place with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, [fail_string] \the [target]'s [affected.name] in the wrong place with \the [tool]!</span>")
-	affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	affected.take_damage(10, damage_flags = (DAM_SHARP|DAM_EDGE), inflicter = tool)
 	..()
 
 /decl/surgery_step/generic/cut_open/success_chance(mob/living/user, mob/living/target, obj/item/tool)
@@ -111,7 +111,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, tearing blood vessals and causing massive bleeding in [target]'s [affected.name] with \the [tool]!</span>",	\
 	"<span class='warning'>Your hand slips, tearing blood vessels and causing massive bleeding in [target]'s [affected.name] with \the [tool]!</span>",)
-	affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	affected.take_damage(10, damage_flags = (DAM_SHARP|DAM_EDGE), inflicter = tool)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -157,7 +157,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, tearing the edges of the incision on [target]'s [affected.name] with \the [tool]!</span>",	\
 	"<span class='warning'>Your hand slips, tearing the edges of the incision on [target]'s [affected.name] with \the [tool]!</span>")
-	affected.take_external_damage(12, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	affected.take_damage(12, damage_flags = (DAM_SHARP|DAM_EDGE), inflicter = tool)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -191,19 +191,19 @@
 
 /decl/surgery_step/generic/cauterize/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	var/datum/wound/W = affected.get_incision()
-	user.visible_message("[user] is beginning to [cauterize_term][W ? " \a [W.desc] on" : ""] \the [target]'s [affected.name] with \the [tool]." , \
-	"You are beginning to [cauterize_term][W ? " \a [W.desc] on" : ""] \the [target]'s [affected.name] with \the [tool].")
+	var/datum/wound/wound = affected.get_incision()
+	user.visible_message("[user] is beginning to [cauterize_term][wound ? " \a [wound.desc] on" : ""] \the [target]'s [affected.name] with \the [tool]." , \
+	"You are beginning to [cauterize_term][wound ? " \a [wound.desc] on" : ""] \the [target]'s [affected.name] with \the [tool].")
 	target.custom_pain("Your [affected.name] is being burned!",40,affecting = affected)
 	..()
 
 /decl/surgery_step/generic/cauterize/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	var/datum/wound/W = affected.get_incision()
-	user.visible_message("<span class='notice'>[user] [post_cauterize_term][W ? " \a [W.desc] on" : ""] \the [target]'s [affected.name] with \the [tool].</span>", \
-	"<span class='notice'>You [cauterize_term][W ? " \a [W.desc] on" : ""] \the [target]'s [affected.name] with \the [tool].</span>")
-	if(istype(W))
-		W.close()
+	var/datum/wound/wound = affected.get_incision()
+	user.visible_message("<span class='notice'>[user] [post_cauterize_term][wound ? " \a [wound.desc] on" : ""] \the [target]'s [affected.name] with \the [tool].</span>", \
+	"<span class='notice'>You [cauterize_term][wound ? " \a [wound.desc] on" : ""] \the [target]'s [affected.name] with \the [tool].</span>")
+	if(istype(wound))
+		wound.close()
 		affected.update_wounds()
 	if(affected.clamped())
 		affected.remove_clamps()
@@ -213,7 +213,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, damaging [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, damaging [target]'s [affected.name] with \the [tool]!</span>")
-	affected.take_external_damage(0, 3, used_weapon = tool)
+	affected.take_damage(3, BURN, inflicter = tool)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -245,7 +245,7 @@
 		return ..()
 
 /decl/surgery_step/generic/amputate/proc/is_clean(var/mob/user, var/obj/item/tool, var/mob/target)
-	. = (user.a_intent != I_HELP) ? FALSE : (can_operate(target) >= OPERATE_OKAY && istype(tool, /obj/item/circular_saw))
+	. = (!user.check_intent(I_FLAG_HELP)) ? FALSE : (can_operate(target) >= OPERATE_OKAY && istype(tool, /obj/item/circular_saw))
 
 /decl/surgery_step/generic/amputate/get_speed_modifier(var/mob/user, var/mob/target, var/obj/item/tool, var/tool_archetype)
 	. = ..()
@@ -285,11 +285,11 @@
 		user.visible_message(
 			SPAN_DANGER("\The [user] manages to get \the [tool] stuck in \the [target]'s [affected.name]!"), \
 			SPAN_DANGER("You manage to get \the [tool] stuck in \the [target]'s [affected.name]!"))
-		affected.embed_in_organ(tool, affected.take_external_damage(30, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool))
+		affected.embed_in_organ(tool, affected.take_damage(30, damage_flags = (DAM_SHARP|DAM_EDGE), inflicter = tool))
 	else
 		user.visible_message(
 			SPAN_WARNING("\The [user] slips, mangling \the [target]'s [affected.name] with \the [tool]."), \
 			SPAN_WARNING("You slip, mangling \the [target]'s [affected.name] with \the [tool]."))
-		affected.take_external_damage(30, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+		affected.take_damage(30, damage_flags = (DAM_SHARP|DAM_EDGE), inflicter = tool)
 	affected.fracture()
 	..()

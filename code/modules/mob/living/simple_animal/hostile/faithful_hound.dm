@@ -37,7 +37,7 @@
 		var/new_aggress = 1
 		var/dist = get_dist(mailman, body)
 		if(dist < 2) //Attack! Attack!
-			body.a_intent = I_HURT
+			body.set_intent(I_FLAG_HARM)
 			body.ClickOn(mailman)
 			return
 		if(dist == 2)
@@ -64,9 +64,6 @@
 	if(. && !gibbed)
 		new /obj/item/ectoplasm(get_turf(src))
 		qdel(src)
-
-/mob/living/simple_animal/faithful_hound/Destroy()
-	return ..()
 
 /mob/living/simple_animal/faithful_hound/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	set waitfor = FALSE

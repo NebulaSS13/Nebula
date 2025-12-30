@@ -14,9 +14,11 @@
 	var/supply_method = /decl/supply_method
 	var/decl/security_level/security_level
 
-//Is run once on init for non-base-category supplypacks.
 var/global/list/cargoprices = list()
-/decl/hierarchy/supply_pack/proc/setup()
+/decl/hierarchy/supply_pack/Initialize()
+	. = ..() // make sure children are set up
+	if(is_category())
+		return // don't do any of this for categories
 	if(!num_contained)
 		for(var/entry in contains)
 			num_contained += max(1, contains[entry])
@@ -24,14 +26,12 @@ var/global/list/cargoprices = list()
 		cost = 0
 		for(var/entry in contains)
 			cost += atom_info_repository.get_combined_worth_for(entry) * max(1, contains[entry])
-		var/container_value = containertype ? atom_info_repository.get_single_worth_for(containertype) : 0
-		if(container_value)
-			cost += atom_info_repository.get_single_worth_for(containertype)
+		cost += containertype ? atom_info_repository.get_single_worth_for(containertype) : 0
 		cost = max(1, NONUNIT_CEILING((cost * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.price_markup), WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT))
 	global.cargoprices[name] = cost
 
-	var/decl/supply_method/sm = GET_DECL(supply_method)
-	manifest = sm.setup_manifest(src)
+	var/decl/supply_method/method = GET_DECL(supply_method)
+	manifest = method.setup_manifest(src)
 
 /client/proc/print_cargo_prices()
 	set name = "Print Cargo Prices"
@@ -61,8 +61,8 @@ var/global/list/cargoprices = list()
 	return security_state.current_security_level_is_same_or_higher_than(security_level)
 
 /decl/hierarchy/supply_pack/proc/spawn_contents(var/location)
-	var/decl/supply_method/sm = GET_DECL(supply_method)
-	. = sm.spawn_contents(src, location)
+	var/decl/supply_method/method = GET_DECL(supply_method)
+	. = method.spawn_contents(src, location)
 	for(var/obj/O in .)
 		O.anchored = FALSE
 
@@ -75,18 +75,18 @@ var/global/list/cargoprices = list()
 //NEW NOTE: Do NOT set the price of any crates below 7 points. Doing so allows infinite points.
 */
 
-/decl/supply_method/proc/spawn_contents(var/decl/hierarchy/supply_pack/sp, var/location)
-	if(!sp || !location)
+/decl/supply_method/proc/spawn_contents(var/decl/hierarchy/supply_pack/pack, var/location)
+	if(!pack || !location)
 		return
 	. = list()
-	for(var/entry in sp.contains)
-		for(var/i = 1 to max(1, sp.contains[entry]))
+	for(var/entry in pack.contains)
+		for(var/i = 1 to max(1, pack.contains[entry]))
 			dd_insertObjectList(.,new entry(location))
 
-/decl/supply_method/proc/setup_manifest(var/decl/hierarchy/supply_pack/sp)
+/decl/supply_method/proc/setup_manifest(var/decl/hierarchy/supply_pack/pack)
 	. = list()
 	. += "<ul>"
-	for(var/path in sp.contains)
+	for(var/path in pack.contains)
 		var/atom/A = path
 		if(!ispath(A))
 			continue
@@ -94,13 +94,13 @@ var/global/list/cargoprices = list()
 	. += "</ul>"
 	. = jointext(.,null)
 
-/decl/supply_method/randomized/spawn_contents(var/decl/hierarchy/supply_pack/sp, var/location)
-	if(!sp || !location)
+/decl/supply_method/randomized/spawn_contents(var/decl/hierarchy/supply_pack/pack, var/location)
+	if(!pack || !location)
 		return
 	. = list()
-	for(var/j = 1 to sp.num_contained)
-		var/picked = pick(sp.contains)
+	for(var/j = 1 to pack.num_contained)
+		var/picked = pick(pack.contains)
 		. += new picked(location)
 
-/decl/supply_method/randomized/setup_manifest(var/decl/hierarchy/supply_pack/sp)
-	return "Contains any [sp.num_contained] of:" + ..()
+/decl/supply_method/randomized/setup_manifest(var/decl/hierarchy/supply_pack/pack)
+	return "Contains any [pack.num_contained] of:" + ..()

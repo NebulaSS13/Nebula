@@ -1,0 +1,12 @@
+#ifndef CONTENT_PACK_VENTCRAWL
+#define CONTENT_PACK_VENTCRAWL
+// BEGIN_INCLUDE
+#include "_ventcrawl.dm"
+#include "mob_overrides.dm"
+#include "species_overrides.dm"
+#include "ventcrawl_atmospherics.dm"
+#include "ventcrawl_mob.dm"
+#include "ventcrawl_multiz.dm"
+#include "ventcrawl_verb.dm"
+// END_INCLUDE
+#endif

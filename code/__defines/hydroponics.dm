@@ -4,6 +4,7 @@
 // Defining these to point to the relevant decl types just to avoid a massive changeset.
 // TODO: rename to PLANT_TRAIT or bare decls to avoid mixing up with GetTrait etc.
 #define TRAIT_CHEMS                /decl/plant_trait/chems
+#define TRAIT_POLLEN               /decl/plant_trait/pollen
 #define TRAIT_EXUDE_GASSES         /decl/plant_trait/exude_gasses
 #define TRAIT_ALTER_TEMP           /decl/plant_trait/alter_temp
 #define TRAIT_POTENCY              /decl/plant_trait/potency
@@ -61,3 +62,9 @@
 #define GROWTH_VINES      		  "vines"
 #define GROWTH_BIOMASS         	  "mass"
 #define GROWTH_MOLD          	  "mold"
+
+#define PLANT_SEG_BODY "body" // Non-dissectable plants
+
+#define PLANT_STATE_FRESH   "fresh"
+#define PLANT_STATE_ROASTED "roasted"
+#define PLANT_STATE_DRIED   "dried"

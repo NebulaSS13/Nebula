@@ -7,6 +7,7 @@
 	abstract_type = /obj/item/seeds
 	max_health = 10 //Can't set a material, otherwise extracting seeds would generate free materials
 	material = /decl/material/solid/organic/plantmatter/pith
+	chem_volume = 3
 
 	var/seed_mask_icon = 'icons/obj/seeds/seed_masks.dmi'
 	var/seed_base_name = "packet"
@@ -17,16 +18,11 @@
 	if(isnull(seed) && !isnull(_seed))
 		seed = _seed
 	update_seed()
-	initialize_reagents()
-	. = ..()
-
-/obj/item/seeds/initialize_reagents()
-	create_reagents(3)
 	. = ..()
 
 /obj/item/seeds/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nutriment/plant_oil, 3)
+	add_to_reagents(/decl/material/liquid/oil/plant, 3)
 
 /obj/item/seeds/get_single_monetary_worth()
 	. = seed ? seed.get_monetary_value() : ..()
@@ -83,10 +79,10 @@
 		SetName("sample of [seed.product_name] [seed.seed_noun]")
 		desc = "It's labelled as coming from \a [seed.display_name]."
 
-/obj/item/seeds/examine(mob/user)
+/obj/item/seeds/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(seed && !seed.roundstart)
-		to_chat(user, "It's tagged as variety #[seed.uid].")
+		. += "It's tagged as variety #[seed.uid]."
 
 /obj/item/seeds/extracted
 	name = "handful of seeds"

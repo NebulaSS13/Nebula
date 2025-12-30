@@ -3,17 +3,15 @@
 	var/amount
 	var/datum/seed/seed_type // Keeps track of what our seed is
 	var/list/obj/item/seeds/seeds = list() // Tracks actual objects contained in the pile
-	var/ID
 
-/datum/seed_pile/New(var/obj/item/seeds/O, var/ID)
-	name = O.name
+/datum/seed_pile/New(var/obj/item/seeds/new_seeds)
+	name = new_seeds.name
 	amount = 1
-	seed_type = O.seed
-	seeds += O
-	src.ID = ID
+	seed_type = new_seeds.seed
+	seeds += new_seeds
 
-/datum/seed_pile/proc/matches(var/obj/item/seeds/O)
-	if (O.seed == seed_type)
+/datum/seed_pile/proc/matches(var/obj/item/seeds/check_seeds)
+	if (check_seeds.seed == seed_type)
 		return 1
 	return 0
 
@@ -47,8 +45,7 @@
 		if(isnull(amount))
 			amount = 1
 		for (var/i = 1 to amount)
-			var/O = new typepath
-			add(O)
+			add(new typepath)
 
 /obj/machinery/seed_storage/Destroy()
 	QDEL_NULL_LIST(piles)
@@ -194,7 +191,8 @@
 		if ("soil" in scanner)
 			dat += "<td>Nutri</td><td>Water</td>"
 		dat += "<td>Notes</td><td>Amount</td><td></td></tr>"
-		for (var/datum/seed_pile/S in piles)
+		for (var/key in 1 to length(piles))
+			var/datum/seed_pile/S = piles[key]
 			var/datum/seed/seed = S.seed_type
 			if(!seed)
 				continue
@@ -280,96 +278,79 @@
 				dat += "LUM "
 			dat += "</td>"
 			dat += "<td>[S.amount]</td>"
-			dat += "<td><a href='byond://?src=\ref[src];task=vend;id=[S.ID]'>Vend</a> <a href='byond://?src=\ref[src];task=purge;id=[S.ID]'>Purge</a></td>"
+			dat += "<td><a href='byond://?src=\ref[src];task=vend;id=[key]'>Vend</a> <a href='byond://?src=\ref[src];task=purge;id=[key]'>Purge</a></td>"
 			dat += "</tr>"
 		dat += "</table>"
 
 	show_browser(user, dat, "window=seedstorage;size=800x500")
 	onclose(user, "seedstorage")
 
-/obj/machinery/seed_storage/Topic(var/href, var/list/href_list)
-	if (..())
+/obj/machinery/seed_storage/OnTopic(mob/user, href_list)
+	if((. = ..()))
 		return
 	var/task = href_list["task"]
-	var/ID = text2num(href_list["id"])
+	var/id = text2num(href_list["id"])
+	var/datum/seed_pile/our_pile = LAZYACCESS(piles, id)
 
-	for (var/datum/seed_pile/N in piles)
-		if (N.ID == ID)
-			if (task == "vend")
-				var/obj/O = pick(N.seeds)
-				if (O)
-					--N.amount
-					N.seeds -= O
-					if (N.amount <= 0 || N.seeds.len <= 0)
-						piles -= N
-						qdel(N)
-					flick("[initial(icon_state)]-vend", src)
-					O.dropInto(loc)
-				else
-					piles -= N
-					qdel(N)
-			else if (task == "purge")
-				for (var/obj/O in N.seeds)
-					qdel(O)
-					piles -= N
-					qdel(N)
-			break
-	updateUsrDialog()
+	switch(task)
+		if ("vend")
+			var/obj/vending_seeds = pick(our_pile.seeds)
+			if (vending_seeds)
+				--our_pile.amount
+				our_pile.seeds -= vending_seeds
+				if (our_pile.amount <= 0 || our_pile.seeds.len <= 0)
+					piles -= our_pile
+					qdel(our_pile)
+				flick("[initial(icon_state)]-vend", src)
+				vending_seeds.dropInto(loc)
+			. = TOPIC_REFRESH
+		if ("purge")
+			QDEL_LIST(our_pile.seeds)
+			our_pile.seeds.Cut()
+			. = TOPIC_REFRESH
+	if(!length(our_pile.seeds))
+		piles -= our_pile
+		QDEL_NULL(our_pile)
 
-/obj/machinery/seed_storage/attackby(var/obj/item/O, var/mob/user)
+/obj/machinery/seed_storage/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(istype(O, /obj/item/seeds))
-		add(O)
-		user.visible_message(SPAN_NOTICE("\The [user] puts \the [O] into \the [src]."))
+	if(istype(used_item, /obj/item/seeds))
+		add(used_item)
+		user.visible_message(SPAN_NOTICE("\The [user] puts \the [used_item] into \the [src]."))
 		return TRUE
 
-	if(istype(O, /obj/item/plants) && O.storage)
+	if(istype(used_item, /obj/item/plants) && used_item.storage)
 		var/loaded = 0
 		for(var/obj/item/seeds/G in storage.get_contents())
 			++loaded
-			O.storage.remove_from_storage(user, G, src, TRUE)
+			used_item.storage.remove_from_storage(user, G, src, TRUE)
 			add(G, 1)
-		O.storage.finish_bulk_removal()
+		used_item.storage.finish_bulk_removal()
 		if (loaded)
-			user.visible_message(SPAN_NOTICE("\The [user] puts the seeds from \the [O] into \the [src]."))
+			user.visible_message(SPAN_NOTICE("\The [user] puts the seeds from \the [used_item] into \the [src]."))
 		else
-			to_chat(user, SPAN_WARNING("There are no seeds in \the [O.name]."))
+			to_chat(user, SPAN_WARNING("There are no seeds in \the [used_item]."))
 		return TRUE
 
 	return ..()
 
-/obj/machinery/seed_storage/proc/add(var/obj/item/seeds/O, bypass_removal = 0)
+/obj/machinery/seed_storage/proc/add(var/obj/item/seeds/adding_seeds, bypass_removal = 0)
 	if(!bypass_removal)
-		if (ismob(O.loc))
-			var/mob/user = O.loc
-			if(!user.try_unequip(O, src))
+		if (ismob(adding_seeds.loc))
+			var/mob/user = adding_seeds.loc
+			if(!user.try_unequip(adding_seeds, src))
 				return
-		else if(isobj(O.loc))
-			O.loc?.storage?.remove_from_storage(null, O, src)
+		else if(isobj(adding_seeds.loc))
+			adding_seeds.loc?.storage?.remove_from_storage(null, adding_seeds, src)
 
-	O.forceMove(src)
-	var/newID = 0
+	adding_seeds.forceMove(src)
 
 	for (var/datum/seed_pile/N in piles)
-		if (N.matches(O))
+		if (N.matches(adding_seeds))
 			++N.amount
-			N.seeds += (O)
+			N.seeds += adding_seeds
 			return
-		else if(N.ID >= newID)
-			newID = N.ID + 1
 
-	piles += new /datum/seed_pile(O, newID)
+	piles += new /datum/seed_pile(adding_seeds)
 	flick("[initial(icon_state)]-vend", src)
 	return
-
-/obj/machinery/seed_storage/cannot_transition_to(state_path, mob/user)
-	if(state_path == /decl/machine_construction/default/deconstructed)
-		var/alert = alert(user, "Are you certain you wish to deconstruct this? It will destroy all seeds stored inside!", "Deconstruct Warning", "Yes",  "No")
-		if(alert != "Yes" || !CanPhysicallyInteract(user))
-			return MCS_BLOCK
-	return ..()
-
-/obj/machinery/seed_storage/dismantle()
-	for(var/obj/item/seeds/seed in src)
-		qdel(seed) // ..() would dump them; this would cause lots of client lag. We did warn them above...
-	return ..()

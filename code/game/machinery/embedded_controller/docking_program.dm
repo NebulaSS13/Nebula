@@ -57,7 +57,7 @@
 	var/response_sent = 0		//so we don't spam confirmation messages
 
 	var/override_enabled = 0	//when enabled, do not open/close doors or cycle airlocks and wait for the player to do it manually
-	var/received_confirm = 0	//for undocking, whether the server has recieved a confirmation from the client
+	var/received_confirm = 0	//for undocking, whether the server has received a confirmation from the client
 	var/docking_codes			//would only allow docking when receiving signal with these, if set
 	var/display_name			//how would it show up on docking monitoring program, area name + coordinates if unset
 
@@ -78,8 +78,8 @@
 /datum/computer/file/embedded_program/docking/receive_user_command(command)
 	if(command == "dock" || command == "undock")
 
-		if(!tag_target)			//Prevents from self destructing if no docking buddy
-			return FALSE
+		if(!tag_target)			//Prevents from self-destructing if no docking buddy
+			return TOPIC_NOACTION
 
 		var/datum/signal/signal = new()
 		signal.data["tag"] = tag_target
@@ -87,7 +87,8 @@
 		signal.data["recipient"] = id_tag
 		signal.data["code"] = docking_codes
 		receive_signal(signal)
-		return TRUE
+		return TOPIC_REFRESH
+	return TOPIC_NOACTION
 
 /datum/computer/file/embedded_program/docking/get_receive_filters()
 	return list("[id_tag]" = "primary controller")

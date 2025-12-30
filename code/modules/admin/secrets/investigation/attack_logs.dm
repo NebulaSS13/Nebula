@@ -69,9 +69,8 @@
 	. = filters_per_client[user.client]
 	if(!.)
 		. = list()
-		for(var/af_type in subtypesof(/attack_filter))
-			var/attack_filter/af = af_type
-			if(initial(af.category) == af_type)
+		for(var/datum/attack_filter/af_type as anything in subtypesof(/datum/attack_filter))
+			if(TYPE_IS_ABSTRACT(af_type))
 				continue
 			. += new af_type(src)
 		filters_per_client[user.client] = .
@@ -79,56 +78,56 @@
 /datum/admin_secret_item/investigation/attack_logs/proc/get_filter_html(user)
 	. = list()
 	for(var/filter in get_user_filters(user))
-		var/attack_filter/af = filter
+		var/datum/attack_filter/af = filter
 		. += af.get_html()
 	. = jointext(.," | ")
 
 /datum/admin_secret_item/investigation/attack_logs/proc/filter_log(user, var/datum/attack_log/al)
 	for(var/filter in get_user_filters(user))
-		var/attack_filter/af = filter
+		var/datum/attack_filter/af = filter
 		if(af.filter_attack(al))
 			return TRUE
 	return FALSE
 
 /datum/admin_secret_item/investigation/attack_logs/proc/reset_user_filters(user)
 	for(var/filter in get_user_filters(user))
-		var/attack_filter/af = filter
+		var/datum/attack_filter/af = filter
 		af.reset()
 
-/attack_filter
-	var/category = /attack_filter
+/datum/attack_filter
+	abstract_type = /datum/attack_filter
 	var/datum/admin_secret_item/investigation/attack_logs/holder
 
-/attack_filter/New(var/holder)
+/datum/attack_filter/New(var/holder)
 	..()
 	src.holder = holder
 
-/attack_filter/Topic(href, href_list)
+/datum/attack_filter/Topic(href, href_list)
 	if(..())
 		return TRUE
 	if(OnTopic(href_list))
 		holder.execute(usr)
 		return TRUE
 
-/attack_filter/proc/get_html()
+/datum/attack_filter/proc/get_html()
 	return
 
-/attack_filter/proc/reset()
+/datum/attack_filter/proc/reset()
 	return
 
-/attack_filter/proc/filter_attack(var/datum/attack_log/al)
+/datum/attack_filter/proc/filter_attack(var/datum/attack_log/al)
 	return FALSE
 
-/attack_filter/proc/OnTopic(href_list)
+/datum/attack_filter/proc/OnTopic(href_list)
 	return FALSE
 
 /*
 * Filter logs with one or more missing clients
 */
-/attack_filter/no_client
+/datum/attack_filter/no_client
 	var/filter_missing_clients = TRUE
 
-/attack_filter/no_client/get_html()
+/datum/attack_filter/no_client/get_html()
 	. = list()
 	. += "Must have clients: "
 	if(filter_missing_clients)
@@ -137,7 +136,7 @@
 		. += "<a href='byond://?src=\ref[src];yes=1'>Yes</a><span class='linkOn'>No</span>"
 	. = jointext(.,null)
 
-/attack_filter/no_client/OnTopic(href_list)
+/datum/attack_filter/no_client/OnTopic(href_list)
 	if(href_list["yes"] && !filter_missing_clients)
 		filter_missing_clients = TRUE
 		return TRUE
@@ -145,10 +144,10 @@
 		filter_missing_clients = FALSE
 		return TRUE
 
-/attack_filter/no_client/reset()
+/datum/attack_filter/no_client/reset()
 	filter_missing_clients = initial(filter_missing_clients)
 
-/attack_filter/no_client/filter_attack(var/datum/attack_log/al)
+/datum/attack_filter/no_client/filter_attack(var/datum/attack_log/al)
 	if(!filter_missing_clients)
 		return FALSE
 	if(al.attacker && al.attacker.client.ckey == NO_CLIENT_CKEY)
@@ -160,19 +159,19 @@
 /*
 	Either subject must be the selected client
 */
-/attack_filter/must_be_given_ckey
+/datum/attack_filter/must_be_given_ckey
 	var/ckey_filter
 	var/check_attacker = TRUE
 	var/check_victim = TRUE
 	var/description = "Either ckey is"
 
-/attack_filter/must_be_given_ckey/reset()
+/datum/attack_filter/must_be_given_ckey/reset()
 	ckey_filter = null
 
-/attack_filter/must_be_given_ckey/get_html()
+/datum/attack_filter/must_be_given_ckey/get_html()
 	return "[description]: <a href='byond://?src=\ref[src];select_ckey=1'>[ckey_filter ? ckey_filter : "*ANY*"]</a>"
 
-/attack_filter/must_be_given_ckey/OnTopic(href_list)
+/datum/attack_filter/must_be_given_ckey/OnTopic(href_list)
 	if(!href_list["select_ckey"])
 		return
 	var/ckey = input("Select ckey to filter on","Select ckey", ckey_filter) as null|anything in get_ckeys()
@@ -183,7 +182,7 @@
 			ckey_filter = ckey
 		return TRUE
 
-/attack_filter/must_be_given_ckey/proc/get_ckeys()
+/datum/attack_filter/must_be_given_ckey/proc/get_ckeys()
 	. = list()
 	for(var/log in attack_log_repository.attack_logs_)
 		var/datum/attack_log/al = log
@@ -194,7 +193,7 @@
 	. = sortTim(., /proc/cmp_text_asc)
 	. += "*ANY*"
 
-/attack_filter/must_be_given_ckey/filter_attack(var/datum/attack_log/al)
+/datum/attack_filter/must_be_given_ckey/filter_attack(var/datum/attack_log/al)
 	if(!ckey_filter)
 		return FALSE
 	if(check_attacker && al.attacker && al.attacker.client.ckey == ckey_filter)
@@ -206,19 +205,19 @@
 /*
 	Attacker must be the selected client
 */
-/attack_filter/must_be_given_ckey/attacker
+/datum/attack_filter/must_be_given_ckey/attacker
 	description = "Attacker ckey is"
 	check_victim = FALSE
 
-/attack_filter/must_be_given_ckey/attacker/filter_attack(al)
+/datum/attack_filter/must_be_given_ckey/attacker/filter_attack(al)
 	return ..(al, TRUE, FALSE)
 
 /*
 	Victim must be the selected client
 */
-/attack_filter/must_be_given_ckey/victim
+/datum/attack_filter/must_be_given_ckey/victim
 	description = "Victim ckey is"
 	check_attacker = FALSE
 
-/attack_filter/must_be_given_ckey/victim/filter_attack(al)
+/datum/attack_filter/must_be_given_ckey/victim/filter_attack(al)
 	return ..(al, FALSE, TRUE)

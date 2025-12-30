@@ -1,6 +1,7 @@
 /decl/species/kobaloi
-	name                = SPECIES_KOBALOI
-	name_plural         = SPECIES_KOBALOI
+	uid                 = "species_kobaloi"
+	name                = "Kobaloi"
+	name_plural         = "Kobaloi"
 	spawn_flags         = SPECIES_CAN_JOIN
 	preview_outfit      = null
 	description         = "Kobaloi are small, scaled and furred creatures that usually dwell in the quiet places of the world, \
@@ -16,6 +17,9 @@
 	base_external_prosthetics_model = null
 
 	available_background_info = list(
+		/decl/background_category/citizenship = list(
+			/decl/background_detail/citizenship/other
+		),
 		/decl/background_category/homeworld = list(
 			/decl/background_detail/location/fantasy,
 			/decl/background_detail/location/fantasy/mountains,

@@ -1,5 +1,4 @@
 # ignore misc BYOND files
-Thumbs.db
 *.log
 *.int
 *.rsc
@@ -20,6 +19,11 @@ atupdate
 !config/*/
 config/*
 sql/test_db
+
+# misc OS garbage
+Thumbs.db
+Thumbs.db:encryptable
+.DS_Store
 
 # vscode
 .vscode/*

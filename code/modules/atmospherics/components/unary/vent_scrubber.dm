@@ -68,7 +68,7 @@
 			if(g != /decl/material/gas/oxygen && g != /decl/material/gas/nitrogen)
 				scrubbing_gas += g
 	. = ..()
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
+	air_contents.total_volume = ATMOS_DEFAULT_VOLUME_FILTER
 
 /obj/machinery/atmospherics/unary/vent_scrubber/reset_area(area/old_area, area/new_area)
 	if(!controlled)
@@ -151,17 +151,17 @@
 	var/transfer_moles = 0
 	if(scrubbing == SCRUBBER_SIPHON) //Just siphon all air
 		//limit flow rate from turfs
-		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.total_volume)	//group_multiplier gets divided out here
 		power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
 	else //limit flow rate from turfs
-		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.total_volume)	//group_multiplier gets divided out here
 		power_draw = scrub_gas(src, scrubbing_gas, environment, air_contents, transfer_moles, power_rating)
 
 	if(scrubbing != SCRUBBER_SIPHON && power_draw <= 0)	//99% of all scrubbers
 		//Fucking hibernate because you ain't doing shit.
 		hibernate = world.time + (rand(100,200))
 	else if(scrubbing == SCRUBBER_EXCHANGE) // after sleep check so it only does an exchange if there are bad gasses that have been scrubbed
-		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.volume)
+		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.total_volume)
 		power_draw += pump_gas(src, environment, air_contents, transfer_moles / 4, power_rating)
 
 	if (power_draw >= 0)
@@ -203,16 +203,16 @@
 			return SPAN_WARNING("You cannot take this [src] apart, it too exerted due to internal pressure.")
 	return ..()
 
-/obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/weldingtool))
+/obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/weldingtool))
 
-		var/obj/item/weldingtool/WT = W
+		var/obj/item/weldingtool/welder = used_item
 
-		if(!WT.isOn())
+		if(!welder.isOn())
 			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
 			return 1
 
-		if(!WT.weld(0,user))
+		if(!welder.weld(0,user))
 			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 			return 1
 
@@ -226,7 +226,7 @@
 		if(!src)
 			return 1
 
-		if(!WT.isOn())
+		if(!welder.isOn())
 			to_chat(user, "<span class='notice'>The welding tool needs to be on to finish this task.</span>")
 			return 1
 
@@ -240,16 +240,16 @@
 
 	return ..()
 
-/obj/machinery/atmospherics/unary/vent_scrubber/examine(mob/user, distance)
+/obj/machinery/atmospherics/unary/vent_scrubber/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W.")
+		. += "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W."
 	else
-		to_chat(user, "You are too far away to read the gauge.")
+		. += "You are too far away to read the gauge."
 	if(welded)
-		to_chat(user, "It seems welded shut.")
+		. += "It seems welded shut."
 	if(!(stat & NOPOWER) && use_power && user.skill_check(SKILL_ATMOS,SKILL_BASIC))
-		to_chat(user, "It's running in [scrubbing] mode.")
+		. += "It's running in [scrubbing] mode."
 
 /obj/machinery/atmospherics/unary/vent_scrubber/refresh()
 	..()
@@ -266,7 +266,7 @@
 	desc = "The scrubbing mode code, which identifies what the scrubber is doing."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_STRING
+	var_type = VAR_FORMAT_STRING
 
 /decl/public_access/public_variable/scrubbing/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
 	return machine.scrubbing
@@ -286,7 +286,7 @@
 	desc = "Whether or not the scrubber is in panic mode."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_BOOLEAN
+	var_type = VAR_FORMAT_BOOLEAN
 
 /decl/public_access/public_variable/panic/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
 	return machine.panic
@@ -308,7 +308,7 @@
 	desc = "A list of gases that this scrubber is scrubbing."
 	can_write = FALSE
 	has_updates = FALSE
-	var_type = IC_FORMAT_LIST
+	var_type = VAR_FORMAT_LIST
 
 /decl/public_access/public_variable/scrubbing_gas/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
 	return machine.scrubbing_gas.Copy()

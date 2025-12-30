@@ -25,25 +25,25 @@
 		var/obj/machinery/vending/vendor = over
 		var/target_type = vendor.base_type || vendor.type
 		if(ispath(expected_type, target_type))
-			for(var/datum/stored_items/R in product_records)
+			for(var/datum/stored_items/product_record in product_records)
 				for(var/datum/stored_items/record in vendor.product_records)
-					if(record.merge(R))
+					if(record.merge(product_record))
 						break
-				if(!QDELETED(R))
-					R.migrate(over)
-					vendor.product_records += R
+				if(!QDELETED(product_record))
+					product_record.migrate(over)
+					vendor.product_records += product_record
 			product_records = null
 			SSnano.update_uis(vendor)
 			qdel(src)
 			return TRUE
 	. = ..()
 
-/obj/structure/vending_refill/get_contained_matter()
+/obj/structure/vending_refill/get_contained_matter(include_reagents = TRUE)
 	. = ..()
 	for(var/datum/stored_items/vending_products/record in product_records)
 		. = MERGE_ASSOCS_WITH_NUM_VALUES(., record.get_combined_matter(include_instances = FALSE))
 
-/obj/machinery/vending/get_contained_matter()
+/obj/machinery/vending/get_contained_matter(include_reagents = TRUE)
 	. = ..()
 	for(var/datum/stored_items/vending_products/record in product_records)
 		. = MERGE_ASSOCS_WITH_NUM_VALUES(., record.get_combined_matter(include_instances = FALSE))
@@ -52,8 +52,8 @@
 	var/obj/structure/vending_refill/dump = new(loc)
 	dump.SetName("[dump.name] ([name])")
 	dump.expected_type = base_type || type
-	for(var/datum/stored_items/vending_products/R in product_records)
-		R.migrate(dump)
+	for(var/datum/stored_items/vending_products/product_record in product_records)
+		product_record.migrate(dump)
 	dump.product_records = product_records
 	product_records = null
 	. = ..()

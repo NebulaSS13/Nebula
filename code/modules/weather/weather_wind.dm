@@ -23,6 +23,11 @@
 			wind_direction = turn(wind_direction, 180)
 		if(old_strength != wind_strength)
 			mob_shown_wind.Cut()
+	update_particle_system()
+
+/obj/abstract/weather_system/proc/update_particle_system()
+	for(var/obj/abstract/weather_particles/particle_source in particle_sources)
+		particle_source.update_particle_system(src)
 
 /obj/abstract/weather_system/proc/show_wind(var/mob/M, var/force = FALSE)
 	var/mob_ref = weakref(M)

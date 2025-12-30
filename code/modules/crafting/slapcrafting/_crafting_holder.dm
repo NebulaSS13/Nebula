@@ -6,7 +6,7 @@
 	var/decl/crafting_stage/current_crafting_stage
 	var/label_name
 
-/obj/item/crafting_holder/examine(mob/user, distance)
+/obj/item/crafting_holder/get_examine_hints(mob/user, distance, infix, suffix)
 	. = ..()
 	if(current_crafting_stage)
 		var/list/next_steps = list()
@@ -22,9 +22,9 @@
 
 		if(length(next_products))
 			for(var/thing in next_products)
-				to_chat(user, SPAN_NOTICE("With <b>[thing]</b>, you could finish building <b>[next_products[thing]]</b>."))
+				LAZYADD(., SPAN_NOTICE("With <b>[thing]</b>, you could finish building <b>[next_products[thing]]</b>."))
 		if(length(next_steps))
-			to_chat(user, SPAN_NOTICE("You could continue to work on this with <b>[english_list(next_steps, and_text = " or ")]</b>."))
+			LAZYADD(., SPAN_NOTICE("You could continue to work on this with <b>[english_list(next_steps, and_text = " or ")]</b>."))
 
 /obj/item/crafting_holder/Initialize(var/ml, var/decl/crafting_stage/initial_stage, var/obj/item/target, var/obj/item/tool, var/mob/user)
 
@@ -62,19 +62,19 @@
 	qdel(src)
 	return TRUE
 
-/obj/item/crafting_holder/try_slapcrafting(obj/item/W, mob/user)
+/obj/item/crafting_holder/try_slapcrafting(obj/item/used_item, mob/user)
 	if(current_crafting_stage)
-		var/decl/crafting_stage/next_stage = current_crafting_stage.get_next_stage(W)
-		if(next_stage && next_stage.is_appropriate_tool(W, src) && next_stage.is_sufficient_amount(user, W) && next_stage.progress_to(W, user, src))
-			advance_to(next_stage, user, W)
+		var/decl/crafting_stage/next_stage = current_crafting_stage.get_next_stage(used_item)
+		if(next_stage && next_stage.is_appropriate_tool(used_item, src) && next_stage.is_sufficient_amount(user, used_item) && next_stage.progress_to(used_item, user, src))
+			advance_to(next_stage, user, used_item)
 			return TRUE
 	return FALSE
 
-/obj/item/crafting_holder/attackby(var/obj/item/W, var/mob/user)
+/obj/item/crafting_holder/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(IS_PEN(W))
+	if(IS_PEN(used_item))
 		var/new_label = sanitize_safe(input(user, "What do you wish to label this assembly?", "Assembly Labelling", label_name), MAX_NAME_LEN)
-		if(new_label && !user.incapacitated() && W.loc == user && user.Adjacent(src) && !QDELETED(src))
+		if(new_label && !user.incapacitated() && used_item.loc == user && user.Adjacent(src) && !QDELETED(src))
 			to_chat(user, SPAN_NOTICE("You label \the [src] with '[new_label]'."))
 			label_name = new_label
 		return TRUE

@@ -232,7 +232,7 @@
 			for(var/mob/living/M in landing.contents)
 				if(M == src)
 					continue
-				visible_message("\The [src] hits \the [M.name]!")
+				visible_message("\The [src] hits \the [M]!")
 				M.take_overall_damage(fall_damage)
 		return TRUE
 	return FALSE

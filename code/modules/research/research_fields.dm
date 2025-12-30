@@ -49,7 +49,7 @@
 
 /decl/research_field/programming
 	name = "Data Science"
-	desc = "The study of computer science, data manipuation and artificial intelligence."
+	desc = "The study of computer science, data manipulation and artificial intelligence."
 	id = TECH_DATA
 
 /decl/research_field/esoteria

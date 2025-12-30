@@ -9,6 +9,7 @@
 	. = ..()
 
 /obj/item/ability/psionic/telekinesis/Process()
+	var/mob/living/owner = owner_ref?.resolve()
 	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics)
 	if(!focus || !isturf(focus.loc) || get_dist(get_turf(focus), get_turf(owner)) > psi?.get_rank(PSI_PSYCHOKINESIS))
 		owner.drop_from_inventory(src)
@@ -30,6 +31,7 @@
 	else
 		return FALSE
 
+	var/mob/living/owner = owner_ref?.resolve()
 	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics)
 	if(_focus.anchored || (check_paramount && psi?.get_rank(PSI_PSYCHOKINESIS) < PSI_RANK_PARAMOUNT))
 		focus = _focus
@@ -88,7 +90,7 @@
 		else
 			if(!focus.anchored)
 				var/user_rank = psi?.get_rank(PSI_PSYCHOKINESIS)
-				focus.throw_at(target, user_rank*2, user_rank*10, owner)
+				focus.throw_at(target, user_rank*2, user_rank*10, owner_ref?.resolve())
 			sleep(1)
 			sparkle()
 
@@ -104,5 +106,4 @@
 		O.icon = 'icons/effects/effects.dmi'
 		O.icon_state = "nothing"
 		flick("empdisable",O)
-		sleep(5)
-		qdel(O)
+		QDEL_IN(src, 0.5 SECONDS)

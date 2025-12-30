@@ -5,11 +5,12 @@
 	icon_state = "hydrotray3"
 	density = TRUE
 	anchored = TRUE
-	volume = 100
+	gas_volume = 100
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_NO_CHEM_CHANGE
+	chem_volume = 200
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 	var/base_name = "tray"
@@ -38,7 +39,11 @@
 	var/lastproduce = 0        // Last time tray was harvested
 	var/closed_system          // If set, the tray will attempt to take atmos from a pipe.
 	var/force_update           // Set this to bypass the cycle time check.
-	var/obj/temp_chem_holder   // Something to hold reagents during process_reagents()
+	/// Something to hold reagents during process_reagents()
+	var/obj/effect/chem_holder/temp_chem_holder
+
+	// Counter used by bees.
+	var/pollen = 0
 
 	// Seed details/line data.
 	var/datum/seed/seed = null // The currently planted seed
@@ -161,10 +166,7 @@
 	if(!mechanical)
 		construct_state = /decl/machine_construction/noninteractive
 	. = ..()
-	temp_chem_holder = new()
-	temp_chem_holder.create_reagents(10)
-	temp_chem_holder.atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-	create_reagents(200)
+	temp_chem_holder = new(null, 10)
 	if(mechanical)
 		connect()
 	update_icon()
@@ -191,7 +193,7 @@
 		if(istype(Proj, /obj/item/projectile/energy/floramut/gene))
 			var/obj/item/projectile/energy/floramut/gene/G = Proj
 			if(seed)
-				set_seed(seed.diverge_mutate_gene(G.gene, get_turf(loc)), reset_values = FALSE)	//get_turf just in case it's not in a turf.
+				set_seed(seed.diverge_mutate_gene(G.gene, src), reset_values = FALSE)
 		else
 			mutate(1)
 			return
@@ -228,42 +230,42 @@
 
 	if(!reagents) return
 
-	if(reagents.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		return
 
-	reagents.trans_to_obj(temp_chem_holder, min(reagents.total_volume,rand(1,3)))
+	reagents.trans_to_obj(temp_chem_holder, min(REAGENT_TOTAL_VOLUME(reagents),rand(1,3)))
 
-	for(var/R in temp_chem_holder.reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(temp_chem_holder.reagents))
 
-		var/reagent_total = REAGENT_VOLUME(temp_chem_holder.reagents, R)
+		var/reagent_total = REAGENT_VOLUME(temp_chem_holder.reagents, reagent)
 
 		if(seed && !dead)
 			//Handle some general level adjustments.
-			if(toxic_reagents[R])
-				toxins += toxic_reagents[R]         * reagent_total
-			if(weedkiller_reagents[R])
-				weedlevel += weedkiller_reagents[R] * reagent_total
-			if(pestkiller_reagents[R])
-				pestlevel += pestkiller_reagents[R] * reagent_total
+			if(toxic_reagents[reagent.type])
+				toxins += toxic_reagents[reagent.type]         * reagent_total
+			if(weedkiller_reagents[reagent.type])
+				weedlevel += weedkiller_reagents[reagent.type] * reagent_total
+			if(pestkiller_reagents[reagent.type])
+				pestlevel += pestkiller_reagents[reagent.type] * reagent_total
 
 			// Beneficial reagents have a few impacts along with health buffs.
-			if(beneficial_reagents[R])
-				plant_health += beneficial_reagents[R][1] * reagent_total
-				yield_mod += beneficial_reagents[R][2]    * reagent_total
-				mutation_mod += beneficial_reagents[R][3] * reagent_total
+			if(beneficial_reagents[reagent.type])
+				plant_health += beneficial_reagents[reagent.type][1] * reagent_total
+				yield_mod += beneficial_reagents[reagent.type][2]    * reagent_total
+				mutation_mod += beneficial_reagents[reagent.type][3] * reagent_total
 
 			// Mutagen is distinct from the previous types and mostly has a chance of proccing a mutation.
-			if(mutagenic_reagents[R])
-				mutation_level += reagent_total*mutagenic_reagents[R]+mutation_mod
+			if(mutagenic_reagents[reagent.type])
+				mutation_level += reagent_total*mutagenic_reagents[reagent.type]+mutation_mod
 
 		// Handle nutrient refilling.
-		if(nutrient_reagents[R])
-			nutrilevel += nutrient_reagents[R]  * reagent_total
+		if(nutrient_reagents[reagent.type])
+			nutrilevel += nutrient_reagents[reagent.type]  * reagent_total
 
 		// Handle water and water refilling.
 		var/water_added = 0
-		if(water_reagents[R])
-			var/water_input = water_reagents[R] * reagent_total
+		if(water_reagents[reagent.type])
+			var/water_input = water_reagents[reagent.type] * reagent_total
 			water_added += water_input
 			waterlevel += water_input
 
@@ -351,7 +353,7 @@
 	// harvested yet and it's safe to assume it's restricted to this tray.
 	if(!isnull(SSplants.seeds[seed.name]))
 		set_seed(seed.diverge(), reset_values = FALSE)
-	seed.mutate(severity,get_turf(src))
+	seed.mutate(severity, src)
 
 	return
 
@@ -433,7 +435,7 @@
 			to_chat(user, SPAN_WARNING("There is no plant in \the [src] to remove."))
 		return TRUE
 
-	if(user.a_intent != I_HURT)
+	if(!user.check_intent(I_FLAG_HARM))
 		var/decl/interaction_handler/sample_interaction = GET_DECL(/decl/interaction_handler/hydroponics/sample)
 		if(sample_interaction.is_possible(src, user, used_item))
 			sample_interaction.invoked(src, user, used_item)
@@ -494,15 +496,16 @@
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
 		return TRUE
 
-	var/force = used_item.get_attack_force(user)
-	if(force && seed)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.visible_message("<span class='danger'>\The [seed.display_name] has been attacked by [user] with \the [used_item]!</span>")
-		playsound(get_turf(src), used_item.hitsound, 100, 1)
-		if(!dead)
-			plant_health -= force
-			check_plant_health()
-		return TRUE
+	if(user.check_intent(I_FLAG_HARM) && seed)
+		var/force = used_item.expend_attack_force(user)
+		if(force)
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+			user.visible_message("<span class='danger'>\The [seed.display_name] has been attacked by [user] with \the [used_item]!</span>")
+			playsound(get_turf(src), used_item.hitsound, 100, 1)
+			if(!dead)
+				plant_health -= force
+				check_plant_health()
+			return TRUE
 
 	if(mechanical)
 		return component_attackby(used_item, user)
@@ -573,24 +576,24 @@
 		return TRUE
 	return FALSE
 
-/obj/machinery/portable_atmospherics/hydroponics/examine(mob/user)
-	. = ..(user)
+/obj/machinery/portable_atmospherics/hydroponics/get_examine_strings(mob/user, distance, infix, suffix)
+	. = ..()
 	if(!seed)
-		to_chat(user, "\The [src] is empty.")
+		. += "\The [src] is empty."
 		return
 
-	to_chat(user, SPAN_NOTICE("\A [seed.display_name] is growing here."))
+	. += SPAN_NOTICE("\A [seed.display_name] is growing here.")
 
 	if(user.skill_check(SKILL_BOTANY, SKILL_BASIC))
 		if(weedlevel >= 5)
-			to_chat(user, "\The [src] is <span class='danger'>infested with weeds</span>!")
+			. += "\The [src] is <span class='danger'>infested with weeds</span>!"
 		if(pestlevel >= 5)
-			to_chat(user, "\The [src] is <span class='danger'>infested with tiny worms</span>!")
+			. += "\The [src] is <span class='danger'>infested with tiny worms</span>!"
 
 		if(dead)
-			to_chat(user, "<span class='danger'>The [seed.display_name] is dead.</span>")
+			. += "<span class='danger'>The [seed.display_name] is dead.</span>"
 		else if(plant_health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
-			to_chat(user, "The [seed.display_name] looks <span class='danger'>unhealthy</span>.")
+			. += "The [seed.display_name] looks <span class='danger'>unhealthy</span>."
 
 	if(!Adjacent(user))
 		return
@@ -616,14 +619,14 @@
 			var/light_available = T.get_lumcount() * 5
 			light_string = "a light level of [light_available] lumens"
 
-		to_chat(user, "Water: [round(waterlevel,0.1)]/100")
-		to_chat(user, "Nutrient: [round(nutrilevel,0.1)]/10")
-		to_chat(user, "The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K.")
+		. += "Water: [round(waterlevel,0.1)]/100"
+		. += "Nutrient: [round(nutrilevel,0.1)]/10"
+		. += "The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K."
 	else
 		if(waterlevel < 20)
-			to_chat(user, SPAN_WARNING("The [seed.display_name] is dry."))
+			. += SPAN_WARNING("The [seed.display_name] is dry.")
 		if(nutrilevel < 2)
-			to_chat(user, SPAN_WARNING("The [seed.display_name]'s growth is stunted due to a lack of nutrients."))
+			. += SPAN_WARNING("The [seed.display_name]'s growth is stunted due to a lack of nutrients.")
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb()
 	set name = "Toggle Tray Lid"
@@ -670,6 +673,7 @@
 
 /decl/interaction_handler/hydroponics/close_lid
 	name = "Open/Close Lid"
+	examine_desc = "open or close the lid"
 
 /decl/interaction_handler/hydroponics/close_lid/is_possible(atom/target, mob/user, obj/item/prop)
 	var/obj/machinery/portable_atmospherics/hydroponics/tray = target
@@ -681,9 +685,10 @@
 
 /decl/interaction_handler/hydroponics/sample
 	name = "Sample Plant"
+	examine_desc = "take a sample"
 
 /decl/interaction_handler/hydroponics/sample/is_possible(atom/target, mob/user, obj/item/prop)
-	return ..() && istype(prop) && prop.edge && prop.w_class < ITEM_SIZE_NORMAL
+	return ..() && istype(prop) && prop.has_edge() && prop.w_class < ITEM_SIZE_NORMAL
 
 /decl/interaction_handler/hydroponics/sample/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/machinery/portable_atmospherics/hydroponics/tray = target

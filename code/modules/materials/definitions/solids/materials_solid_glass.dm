@@ -7,7 +7,7 @@
 	color = GLASS_COLOR
 	opacity = 0.3
 	integrity = 50
-	shard_type = SHARD_SHARD
+	shard_name = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = MAT_VALUE_RIGID + 10
 	door_icon_base = "metal"

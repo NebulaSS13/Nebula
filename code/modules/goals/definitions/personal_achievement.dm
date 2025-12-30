@@ -32,5 +32,5 @@
 	completion_message = "Yeah! Smash the state!"
 
 /datum/goal/achievement/newshound
-	description = "Catch up on the news with a newspaper, none of that new-fangled digital media."
+	description = "Catch up on the news with a newspaper, none of that newfangled digital media."
 	completion_message = "You feel much more in-the-know."

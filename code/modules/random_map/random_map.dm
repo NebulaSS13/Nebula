@@ -104,14 +104,15 @@ var/global/list/map_count = list()
 	if(!user)
 		user = world
 
-	var/dat = "<code>+------+<br>"
+	var/dat = list("<code>+------+<br>")
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
 			var/current_cell = TRANSLATE_COORD(x,y)
 			if(current_cell)
 				dat += get_map_char(map[current_cell])
 		dat += "<br>"
-	to_chat(user, "[dat]+------+</code>")
+	dat += "+------+</code>"
+	to_chat(user, JOINTEXT(dat))
 
 /datum/random_map/proc/set_map_size()
 	map = list()
@@ -189,8 +190,7 @@ var/global/list/map_count = list()
 			return wall_type
 
 /datum/random_map/proc/get_additional_spawns(var/value, var/turf/T)
-	if(value == DOOR_CHAR)
-		new /obj/machinery/door/airlock(T)
+	// e.g. if(value == DOOR_CHAR) new /obj/machinery/door/airlock(T)
 
 /datum/random_map/proc/cleanup()
 	return

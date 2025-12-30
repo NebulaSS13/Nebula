@@ -1,6 +1,6 @@
 /obj/machinery/atmospherics/unary/engine/fusion
 	name = "fusion nozzle"
-	desc = "Simple rocket nozzle, expelling gas at hypersonic velocities to propell the ship."
+	desc = "Simple rocket nozzle, expelling gas at hypersonic velocities to propel the ship."
 
 	base_type = /obj/machinery/atmospherics/unary/engine/fusion
 	engine_extension = /datum/extension/ship_engine/gas/fusion
@@ -35,8 +35,8 @@
 			harvest_from = fusion_cores[1]
 	return harvest_from
 
-/obj/machinery/atmospherics/unary/engine/fusion/attackby(var/obj/item/thing, var/mob/user)
-	if(IS_MULTITOOL(thing))
+/obj/machinery/atmospherics/unary/engine/fusion/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_MULTITOOL(used_item))
 		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
 		if(lanm.get_new_tag(user))
 			find_core()

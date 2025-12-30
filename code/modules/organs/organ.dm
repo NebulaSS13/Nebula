@@ -13,15 +13,15 @@
 	// Strings.
 	/// Unique identifier.
 	var/organ_tag = "organ"
-	/// Identifier for use in organ collections, unused if unset. Would be nice to make this a list, but bodytypes rely on initial() with it.
-	var/organ_category
+	/// Identifiers for use in organ collections, unused if unset. Must be formatted as a JSON list string.
+	var/organ_categories
 	/// Organ holding this object.
 	var/parent_organ = BP_CHEST
 
 	// Status tracking.
 	/// Various status flags (such as robotic)
 	var/status = 0
-	/// A flag for telling what capabilities this organ has. ORGAN_PROP_PROSTHETIC, ORGAN_PROP_CRYSTAL, etc..
+	/// A flag for telling what capabilities this organ has. ORGAN_PROP_PROSTHETIC, ORGAN_PROP_CRYSTAL, etc.
 	var/organ_properties = 0
 	/// Cache var for vitality to current owner.
 	var/vital_to_owner
@@ -34,14 +34,14 @@
 	var/decl/species/species
 	/// Original bodytype.
 	var/decl/bodytype/bodytype
+	/// A bodytype used only for icons, marking validation and equipment offsets.
+	var/decl/bodytype/appearance_bodytype
 	/// Current active ailments if any.
 	var/list/ailments
 	/// Taken from first owner.
 	var/meat_name
 
 	// Damage vars.
-	/// Current damage to the organ
-	var/damage = 0
 	/// Damage before becoming broken
 	var/min_broken_damage = 30
 	/// Damage cap, including scarring
@@ -55,8 +55,8 @@
 	/// Whether or not we should scale the damage values of this organ to the owner species.
 	var/scale_max_damage_to_species_health
 
-	/// Set to true if this organ should return info to Stat(). See get_stat_info().
-	var/has_stat_info
+	/// Set to TRUE if this organ should return info to Stat(). See get_stat_info().
+	var/has_stat_info = FALSE
 
 /obj/item/organ/proc/reset_matter()
 	matter = null
@@ -77,21 +77,22 @@
 	return
 
 /obj/item/organ/proc/refresh_action_button()
-	return action
+	if(!QDELETED(src) && istype(action))
+		return action
 
 /obj/item/organ/attack_self(var/mob/user)
 	return (owner && loc == owner && owner == user)
 
 /obj/item/organ/proc/is_broken()
-	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN) || (status & ORGAN_DEAD))
+	return (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN) || (status & ORGAN_DEAD)
 
 //Third argument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance)
+	chem_volume = 5 * (w_class-1)**2
 	. = ..(mapload, material_key)
 	if(. == INITIALIZE_HINT_QDEL)
 		return .
 	setup_organ(supplied_appearance)
-	initialize_reagents()
 
 /obj/item/organ/proc/setup_organ(datum/mob_snapshot/supplied_appearance)
 	//Null DNA setup
@@ -122,29 +123,24 @@
 	else
 		set_species(owner?.get_species() || global.using_map.default_species)
 
-//Called on initialization to add the neccessary reagents
-
-/obj/item/organ/initialize_reagents(populate = TRUE)
-	if(reagents)
-		return
-	create_reagents(5 * (w_class-1)**2)
-	. = ..()
-
 // todo: make this redundant with matter shenanigans
 /obj/item/organ/populate_reagents()
 	var/reagent_to_add = /decl/material/solid/organic/meat
 	if(bodytype)
 		reagent_to_add = bodytype.edible_reagent // can set this to null and skip the next block
 	if(reagent_to_add)
-		add_to_reagents(reagent_to_add, reagents.maximum_volume)
+		add_to_reagents(reagent_to_add, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/organ/proc/copy_from_mob_snapshot(var/datum/mob_snapshot/supplied_appearance)
 	if(supplied_appearance != organ_appearance) // Hacky. Is this ever used? Do any organs ever have DNA set before setup_as_organic?
 		QDEL_NULL(organ_appearance)
 		organ_appearance = supplied_appearance.Clone()
 	blood_DNA = list(organ_appearance.unique_enzymes = organ_appearance.blood_type)
-	set_species(organ_appearance.root_species?.name || global.using_map.default_species)
-	if(organ_appearance.root_bodytype)
+	if(species != organ_appearance.root_species)
+		if(organ_appearance.root_bodytype && organ_appearance.root_bodytype != bodytype)
+			bodytype = organ_appearance.root_bodytype // this lets us take advantage of set_bodytype being called in set_species
+		set_species(organ_appearance.root_species?.uid || global.using_map.default_species)
+	else if(organ_appearance.root_bodytype && organ_appearance.root_bodytype != bodytype)
 		set_bodytype(organ_appearance.root_bodytype)
 
 /obj/item/organ/proc/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
@@ -187,15 +183,15 @@
 	absolute_max_damage = floor(ndamage)
 	max_damage = absolute_max_damage
 
-/obj/item/organ/proc/set_species(specie_name)
+/obj/item/organ/proc/set_species(species_uid)
 	vital_to_owner = null // This generally indicates the owner mob is having species set, and this value may be invalidated.
-	if(istext(specie_name))
-		species = get_species_by_key(specie_name)
+	if(istext(species_uid))
+		species = decls_repository.get_decl_by_id(species_uid)
 	else
-		species = specie_name
+		species = species_uid
 	if(!species)
-		species = get_species_by_key(global.using_map.default_species)
-		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
+		species = decls_repository.get_decl_by_id(global.using_map.default_species)
+		PRINT_STACK_TRACE("Invalid species. Expected a valid species UID as string, was: [log_info_line(species_uid)]")
 
 	set_bodytype(bodytype || species.default_bodytype, override_material = material?.type)
 
@@ -216,7 +212,6 @@
 	reset_status()
 
 /obj/item/organ/proc/die()
-	damage = max_damage
 	status |= ORGAN_DEAD
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL_LIST(ailments)
@@ -241,12 +236,12 @@
 		return
 
 	if(!owner && reagents)
-		if(prob(40) && reagents.total_volume >= 0.1)
+		if(prob(40) && REAGENT_TOTAL_VOLUME(reagents) >= 0.1)
 			if(reagents.has_reagent(/decl/material/liquid/blood))
 				blood_splatter(get_turf(src), src, 1)
 			remove_any_reagents(0.1)
 		if(get_config_value(/decl/config/toggle/health_organs_decay))
-			take_general_damage(rand(1,3))
+			take_damage(rand(1,3))
 		germ_level += rand(2,6)
 		if(germ_level >= INFECTION_LEVEL_TWO)
 			germ_level += rand(2,6)
@@ -263,16 +258,13 @@
 		for(var/datum/ailment/ailment in ailments)
 			handle_ailment(ailment)
 
-	//check if we've hit max_damage
-	if(damage >= max_damage)
-		die()
-
 /obj/item/organ/proc/handle_ailment(var/datum/ailment/ailment)
 	if(ailment.treated_by_reagent_type)
 		for(var/datum/reagents/source as anything in owner.get_metabolizing_reagent_holders())
-			for(var/reagent_type in source.reagent_volumes)
-				if(ailment.treated_by_medication(reagent_type, source.reagent_volumes[reagent_type]))
-					ailment.was_treated_by_medication(source, reagent_type)
+			var/source_volumes = REAGENT_VOLUMES(source)
+			for(var/decl/material/reagent as anything in source_volumes)
+				if(ailment.treated_by_medication(reagent.type, source_volumes[reagent]))
+					ailment.was_treated_by_medication(source, reagent.type)
 					return
 	if(ailment.treated_by_chem_effect && owner.has_chemical_effect(ailment.treated_by_chem_effect, ailment.treated_by_chem_effect_strength))
 		ailment.was_treated_by_chem_effect()
@@ -291,13 +283,17 @@
 			return TRUE
 	return FALSE
 
-/obj/item/organ/examine(mob/user)
-	. = ..(user)
-	show_decay_status(user)
+/obj/item/organ/get_examine_strings(mob/user, distance, infix, suffix)
+	. = ..()
+	var/decay_status = get_decay_status(user)
+	if(decay_status)
+		. += decay_status
 
-/obj/item/organ/proc/show_decay_status(mob/user)
+/obj/item/organ/proc/get_decay_status(mob/user)
+	SHOULD_CALL_PARENT(TRUE)
+	. = list()
 	if(status & ORGAN_DEAD)
-		to_chat(user, "<span class='notice'>The decay has set into \the [src].</span>")
+		. += SPAN_WARNING("Decay has set into \the [src].")
 
 // TODO: bodytemp rework that handles this with better respect to
 // individual organs vs. expected body temperature for other organs.
@@ -328,7 +324,7 @@
 			parent.germ_level++
 
 		if (prob(3))	//about once every 30 seconds
-			take_general_damage(1,silent=prob(30))
+			take_damage(1, silent =prob(30))
 
 /obj/item/organ/proc/handle_rejection()
 	// Process unsuitable transplants. TODO: consider some kind of
@@ -366,7 +362,6 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(!owner)
 		PRINT_STACK_TRACE("rejuvenate() called on organ of type [type] with no owner.")
-	damage = 0
 	reset_status()
 	QDEL_NULL_LIST(ailments)
 	if(!ignore_organ_traits)
@@ -400,17 +395,16 @@
 		germ_level -= round(2 * antibiotics)
 	germ_level = max(0, germ_level)
 
-/obj/item/organ/proc/take_general_damage(var/amount, var/silent = FALSE)
-	CRASH("Not Implemented")
+// Bypass the atom damage system when inside an owner, as organs implement their own health handling etc.
+/obj/item/organ/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
+	if(!owner)
+		return ..()
 
 /obj/item/organ/proc/heal_damage(amount)
-	if(can_recover())
-		damage = clamp(damage - round(amount, 0.1), 0, max_damage)
-		if(owner)
-			owner.update_health()
+	return
 
 /obj/item/organ/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
+	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.check_intent(I_FLAG_HELP)))
 		return ..()
 
 	if(alert("Do you really want to use this organ as food? It will be useless for anything else afterwards.",,"Ew, no.","Bon appetit!") == "Ew, no.")
@@ -430,8 +424,8 @@
 	var/obj/item/food/organ/yum = new(get_turf(src))
 	yum.SetName(name)
 	yum.appearance = src
-	if(reagents && reagents.total_volume)
-		reagents.trans_to(yum, reagents.total_volume)
+	if(reagents && REAGENT_TOTAL_VOLUME(reagents))
+		reagents.trans_to(yum, REAGENT_TOTAL_VOLUME(reagents))
 	transfer_fingerprints_to(yum)
 	if(user)
 		user.put_in_active_hand(yum)
@@ -502,8 +496,10 @@
 	return
 
 var/global/list/ailment_reference_cache = list()
-/proc/get_ailment_reference(var/ailment_type)
+/proc/get_ailment_reference(var/datum/ailment/ailment_type)
 	if(!ispath(ailment_type, /datum/ailment))
+		return
+	if(TYPE_IS_ABSTRACT(ailment_type))
 		return
 	if(!global.ailment_reference_cache[ailment_type])
 		global.ailment_reference_cache[ailment_type] = new ailment_type
@@ -515,7 +511,7 @@ var/global/list/ailment_reference_cache = list()
 		return .
 	for(var/ailment_type in subtypesof(/datum/ailment))
 		var/datum/ailment/ailment = ailment_type
-		if(initial(ailment.category) == ailment_type)
+		if(TYPE_IS_ABSTRACT(ailment))
 			continue
 		ailment = get_ailment_reference(ailment_type)
 		if(ailment.can_apply_to(src))
@@ -617,9 +613,9 @@ var/global/list/ailment_reference_cache = list()
 
 	max_health = max_damage
 	if(current_health == ITEM_HEALTH_NO_DAMAGE)
-		current_health = max_health
+		current_health = get_max_health()
 	else
-		current_health = min(current_health, max_health)
+		current_health = min(current_health, get_max_health())
 
 	action_button_name = null
 	screen_loc = null
@@ -648,7 +644,7 @@ var/global/list/ailment_reference_cache = list()
 	STOP_PROCESSING(SSobj, src)
 	vital_to_owner = null
 
-//Since some types of organs completely ignore being detached, moved it to an overridable organ proc for external prosthetics
+//Since some types of organs completely ignore being detached, moved it to an overrideable organ proc for external prosthetics
 /obj/item/organ/proc/set_detached(var/is_detached)
 	if(is_detached)
 		status |= ORGAN_CUT_AWAY
@@ -684,7 +680,7 @@ var/global/list/ailment_reference_cache = list()
 		place_butcher_product(GET_DECL(species.butchery_data))
 	return ..()
 
-/// Returns a list with two entries, first being the stat panel title, the second being the value. See has_stat_value bool above.
+/// Returns a list with two entries, first being the stat panel title, the second being the value. See has_stat_info bool above.
 /obj/item/organ/proc/get_stat_info()
 	return null
 
@@ -695,3 +691,16 @@ var/global/list/ailment_reference_cache = list()
 		new /obj/effect/decal/cleanable/ash(loc)
 	if(!QDELETED(src))
 		qdel(src)
+
+// For overriding on shapeshifters/changelings in the future.
+/obj/item/organ/proc/set_organ_appearance_bodytype(decl/bodytype/new_bodytype, update_sprite_accessories = TRUE, skip_owner_update = FALSE)
+	if(ispath(new_bodytype, /decl/bodytype))
+		new_bodytype = GET_DECL(new_bodytype)
+	if((new_bodytype && !istype(new_bodytype)) || appearance_bodytype == new_bodytype || bodytype == new_bodytype)
+		return FALSE
+	appearance_bodytype = new_bodytype
+	return TRUE
+
+/obj/item/organ/proc/get_organ_appearance_bodytype()
+	RETURN_TYPE(/decl/bodytype)
+	return appearance_bodytype || bodytype

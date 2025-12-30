@@ -28,12 +28,12 @@
 	wires = null
 	return ..()
 
-/obj/item/plastique/attackby(var/obj/item/I, var/mob/user)
-	if(IS_SCREWDRIVER(I))
+/obj/item/plastique/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_SCREWDRIVER(used_item))
 		open_panel = !open_panel
 		to_chat(user, "<span class='notice'>You [open_panel ? "open" : "close"] the wire panel.</span>")
 		return TRUE
-	else if(IS_WIRECUTTER(I) || IS_MULTITOOL(I) || istype(I, /obj/item/assembly/signaler ))
+	else if(IS_WIRECUTTER(used_item) || IS_MULTITOOL(used_item) || istype(used_item, /obj/item/assembly/signaler ))
 		return wires.Interact(user)
 	else
 		return ..()

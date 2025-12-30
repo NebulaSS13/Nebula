@@ -7,8 +7,8 @@
 	. = mind.StoreMemory(memory, options)
 
 /datum/mind/proc/StoreMemory(var/memory, var/options)
-	var/decl/memory_options/MO = GET_DECL(options || /decl/memory_options/default)
-	return MO.Create(src, memory)
+	var/decl/memory_options/memory_option = GET_DECL(options || /decl/memory_options/default)
+	return memory_option.Create(src, memory)
 
 /datum/mind/proc/RemoveMemory(var/datum/memory/memory, var/mob/remover)
 	if(!memory)
@@ -20,20 +20,18 @@
 	ShowMemory(remover)
 
 /datum/mind/proc/ClearMemories(var/list/tags)
-	for(var/mem in memories)
-		var/datum/memory/M = mem
+	for(var/datum/memory/mem as anything in memories)
 		// If no tags were supplied OR if there is any union between the given tags and memory tags
 		//  then remove the memory
-		if(!length(tags) || length(tags & M.tags))
-			LAZYREMOVE(memories, M)
+		if(!length(tags) || length(tags & mem.tags))
+			LAZYREMOVE(memories, mem)
 
 /datum/mind/proc/CopyMemories(var/datum/mind/target)
 	if(!istype(target))
 		return
 
-	for(var/mem in memories)
-		var/datum/memory/M = mem
-		M.Copy(target)
+	for(var/datum/memory/mem in memories)
+		mem.Copy(target)
 
 /datum/mind/proc/MemoryTags()
 	. = list()
@@ -50,13 +48,12 @@
 	var/list/output = list()
 	var/last_owner_name
 	// We pretend that memories are stored in some semblance of an order
-	for(var/mem in memories)
-		var/datum/memory/M = mem
-		var/owner_name = M.OwnerName()
+	for(var/datum/memory/mem in memories)
+		var/owner_name = mem.OwnerName()
 		if(owner_name != last_owner_name)
 			output += "<B>[current.real_name]'s Memories</B><HR>"
 			last_owner_name = owner_name
-		output += "[M.memory] <a href='byond://?src=\ref[src];remove_memory=\ref[M]'>\[Remove\]</a>"
+		output += "[mem.memory] <a href='byond://?src=\ref[src];remove_memory=\ref[mem]'>\[Remove\]</a>"
 
 	if(objectives.len > 0)
 		output += "<HR><B>Objectives:</B>"
@@ -161,9 +158,8 @@
 		return
 
 	var/relevant_memories = 0
-	for(var/mem in target.memories)
-		var/datum/memory/M = mem
-		if(M.type == memory_type)
+	for(var/datum/memory/mem in target.memories)
+		if(mem.type == memory_type)
 			relevant_memories++
 
 	if(relevant_memories > memory_limit)

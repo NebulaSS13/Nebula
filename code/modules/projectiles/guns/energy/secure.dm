@@ -34,7 +34,7 @@
 
 /obj/item/gun/energy/laser/secure
 	name = "laser carbine"
-	desc = "A G40E carbine, designed to kill with concentrated energy blasts. Fitted with an NT1019 chip to make sure killcount is tracked appropriately."
+	desc = "A G40E carbine, designed to kill with concentrated energy blasts. Fitted with an NT1019 chip to make sure kill count is tracked appropriately."
 	req_access = list(list(access_brig, access_bridge))
 
 /obj/item/gun/energy/laser/secure/on_update_icon()

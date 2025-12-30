@@ -10,6 +10,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material = /decl/material/liquid/slimejelly
 	_base_attack_force = 1
+	chem_volume = 100
 	var/slime_type = /decl/slime_colour/grey
 	var/Uses = 1 // uses before it goes inert
 	var/enhanced = 0 //has it been enhanced before?
@@ -17,39 +18,34 @@
 /obj/item/slime_extract/get_base_value()
 	. = ..() * Uses
 
-/obj/item/slime_extract/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/slime_extract_enhancer))
+/obj/item/slime_extract/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/slime_extract_enhancer))
 		if(enhanced == 1)
-			to_chat(user, "<span class='warning'> This extract has already been enhanced!</span>")
+			to_chat(user, SPAN_WARNING("This extract has already been enhanced!"))
 			return ..()
 		if(Uses == 0)
-			to_chat(user, "<span class='warning'> You can't enhance a used extract!</span>")
+			to_chat(user, SPAN_WARNING("You can't enhance a used extract!"))
 			return ..()
 		to_chat(user, "You apply the enhancer. It now has triple the amount of uses.")
 		Uses = 3
 		enhanced = 1
-		qdel(O)
+		qdel(used_item)
 		return TRUE
 	. = ..()
 
-/obj/item/slime_extract/Initialize(var/ml, var/material, var/_stype = /decl/slime_colour/grey)
-	. = ..(ml, material)
+/obj/item/slime_extract/Initialize(var/ml, var/mat, var/_stype = /decl/slime_colour/grey)
+	. = ..(ml, mat)
 	slime_type = _stype
 	if(!ispath(slime_type, /decl/slime_colour))
 		PRINT_STACK_TRACE("Slime extract initialized with non-decl slime colour: [slime_type || "NULL"].")
 	SSstatistics.extracted_slime_cores_amount++
-	initialize_reagents()
 	update_icon()
-
-/obj/item/slime_extract/initialize_reagents(populate)
-	create_reagents(100)
-	. = ..()
 
 /obj/item/slime_extract/populate_reagents()
 	add_to_reagents(/decl/material/liquid/slimejelly, 30)
 
 /obj/item/slime_extract/on_reagent_change()
-	if((. = ..()) && reagents?.total_volume)
+	if((. = ..()) && REAGENT_TOTAL_VOLUME(reagents))
 		var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 		slime_data.handle_reaction(reagents)
 
@@ -61,7 +57,7 @@
 
 /obj/effect/golemrune
 	anchored = TRUE
-	desc = "a strange rune used to create golems. It glows when it can be activated."
+	desc = "A strange rune used to create golems. It glows when it can be activated."
 	name = "rune"
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "golem"
@@ -73,10 +69,10 @@
 
 /obj/effect/golemrune/Process()
 	var/mob/observer/ghost/ghost
-	for(var/mob/observer/ghost/O in src.loc)
-		if(!O.client || (O.mind && O.mind.current && O.mind.current.stat != DEAD))
+	for(var/mob/observer/ghost/observer in src.loc)
+		if(!observer.client || (observer.mind && observer.mind.current && observer.mind.current.stat != DEAD))
 			continue
-		ghost = O
+		ghost = observer
 		break
 	if(ghost)
 		icon_state = "golem2"
@@ -86,12 +82,12 @@
 /obj/effect/golemrune/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	var/mob/observer/ghost/ghost
-	for(var/mob/observer/ghost/O in src.loc)
-		if(!O.client)
+	for(var/mob/observer/ghost/observer in src.loc)
+		if(!observer.client)
 			continue
-		if(O.mind && O.mind.current && O.mind.current.stat != DEAD)
+		if(observer.mind && observer.mind.current && observer.mind.current.stat != DEAD)
 			continue
-		ghost = O
+		ghost = observer
 		break
 	if(!ghost)
 		to_chat(user, SPAN_WARNING("The rune fizzles uselessly."))
@@ -99,11 +95,11 @@
 	visible_message(SPAN_WARNING("A craggy humanoid figure coalesces into being!"))
 
 	var/mob/living/human/G = new(src.loc)
-	G.set_species(SPECIES_GOLEM)
+	G.set_species(/decl/species/golem::uid)
 	G.key = ghost.key
 
 	var/obj/item/implant/translator/natural/I = new()
-	I.implant_in_mob(G, BP_HEAD)
+	I.implant_in_mob(G, user, BP_HEAD)
 	if (user.languages.len)
 		var/decl/language/lang = user.languages[1]
 		G.add_language(lang.type)

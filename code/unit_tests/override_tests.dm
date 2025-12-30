@@ -2,7 +2,7 @@
 
 /datum/unit_test/override
 	name = "OVERRIDE template"
-	template = /datum/unit_test/override
+	abstract_type = /datum/unit_test/override
 
 /datum/unit_test/override/obj_random_shall_spawn_heaviest_item
 	name = "OVERRIDE: obj/random shall spawn heaviest item"
@@ -43,16 +43,16 @@
 	name = "OVERRIDE: /datum/atom_creator/weighted shall spawn heaviest"
 
 /datum/unit_test/override/atom_creator_weighted_shall_spawn_heaviest/start_test()
-	var/datum/atom_creator/weighted/W = new/datum/atom_creator/weighted(list(/obj/unit_test_light = 9001, /obj/unit_test_heavy = 1))
+	var/datum/atom_creator/weighted/weighted_creator = new/datum/atom_creator/weighted(list(/obj/unit_test_light = 9001, /obj/unit_test_heavy = 1))
 
 	var/safe_turf = get_safe_turf()
-	W.create(safe_turf)
+	weighted_creator.create(safe_turf)
 	var/created_object = locate(/obj/unit_test_heavy) in safe_turf
 	if(created_object)
-		pass("[log_info_line(W)] successfully created the heaviest object.")
+		pass("[log_info_line(weighted_creator)] successfully created the heaviest object.")
 		qdel(created_object)
 	else
-		fail("[log_info_line(W)] failed to create its heaviest object.")
+		fail("[log_info_line(weighted_creator)] failed to create its heaviest object.")
 
 	return 1
 
@@ -60,7 +60,7 @@
 	name = "OVERRIDE: /datum/atom_creator/weighted shall spawn heaviest - Recursive"
 
 /datum/unit_test/override/atom_creator_weighted_shall_spawn_heaviest_recursive/start_test()
-	var/datum/atom_creator/weighted/W = new/datum/atom_creator/weighted(
+	var/datum/atom_creator/weighted/weighted_creator = new/datum/atom_creator/weighted(
 		list(
 			new/datum/atom_creator/weighted(list(/obj/unit_test_light = 9001, /obj/unit_test_heavy = 1)),
 			new/datum/atom_creator/simple(/obj/unit_test_medium, 50)
@@ -68,12 +68,12 @@
 	)
 
 	var/safe_turf = get_safe_turf()
-	W.create(safe_turf)
+	weighted_creator.create(safe_turf)
 	var/created_object = locate(/obj/unit_test_heavy) in safe_turf
 	if(created_object)
-		pass("[log_info_line(W)] successfully created the heaviest object.")
+		pass("[log_info_line(weighted_creator)] successfully created the heaviest object.")
 		qdel(created_object)
 	else
-		fail("[log_info_line(W)] failed to create its heaviest object.")
+		fail("[log_info_line(weighted_creator)] failed to create its heaviest object.")
 
 	return 1

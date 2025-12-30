@@ -12,5 +12,5 @@
 	return ..()
 
 /obj/item/gun/projectile/automatic/smg/usi
-	desc = "A cheap mass produced SMG. This one looks especially run-down. Uses pistol rounds."
+	desc = "A cheap mass-produced SMG. This one looks especially run-down. Uses pistol rounds."
 	jam_chance = 20

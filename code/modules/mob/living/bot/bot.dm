@@ -57,9 +57,9 @@
 /mob/living/bot/handle_regular_status_updates()
 	. = ..()
 	if(.)
-		set_status(STAT_WEAK, 0)
-		set_status(STAT_STUN, 0)
-		set_status(STAT_PARA, 0)
+		set_status_condition(STAT_WEAK, 0)
+		set_status_condition(STAT_STUN, 0)
+		set_status_condition(STAT_PARA, 0)
 
 /mob/living/bot/get_life_damage_types()
 	var/static/list/life_damage_types = list(
@@ -91,26 +91,26 @@
 /mob/living/bot/try_awaken(mob/user)
 	return FALSE
 
-/mob/living/bot/attackby(var/obj/item/O, var/mob/user)
-	if(O.GetIdCard())
+/mob/living/bot/attackby(var/obj/item/used_item, var/mob/user)
+	if(used_item.GetIdCard())
 		if(access_scanner.allowed(user) && !open)
 			locked = !locked
 			to_chat(user, "<span class='notice'>Controls are now [locked ? "locked." : "unlocked."]</span>")
-			Interact(usr)
+			Interact(user)
 		else if(open)
 			to_chat(user, "<span class='warning'>Please close the access panel before locking it.</span>")
 		else
 			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return TRUE
-	else if(IS_SCREWDRIVER(O))
+	else if(IS_SCREWDRIVER(used_item))
 		if(!locked)
 			open = !open
 			to_chat(user, "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>")
-			Interact(usr)
+			Interact(user)
 		else
 			to_chat(user, "<span class='notice'>You need to unlock the controls first.</span>")
 		return TRUE
-	else if(IS_WELDER(O))
+	else if(IS_WELDER(used_item))
 		if(current_health < get_max_health())
 			if(open)
 				heal_overall_damage(10)
@@ -243,7 +243,7 @@
 		resetTarget()
 		lookForTargets()
 		if(will_patrol && !LAZYLEN(grabbed_by) && !target)
-			if(patrol_path && patrol_path.len)
+			if(length(patrol_path))
 				for(var/i = 1 to patrol_speed)
 					sleep(20 / (patrol_speed + 1))
 					handlePatrol()
@@ -267,7 +267,7 @@
 	if(!target || !target.loc)
 		return
 	if(get_dist(src, target) > min_target_dist)
-		if(!target_path.len || get_turf(target) != target_path[target_path.len])
+		if(!length(target_path) || get_turf(target) != target_path[target_path.len])
 			calcTargetPath()
 		if(makeStep(target_path))
 			frustration = 0
@@ -298,9 +298,9 @@
 	return
 
 /mob/living/bot/proc/startPatrol()
-	var/turf/T = getPatrolTurf()
-	if(T)
-		patrol_path = AStar(get_turf(loc), T, TYPE_PROC_REF(/turf, CardinalTurfsWithAccess), TYPE_PROC_REF(/turf, Distance), 0, max_patrol_dist, id = botcard, exclude = obstacle)
+	var/turf/target_turf = getPatrolTurf()
+	if(target_turf)
+		patrol_path = SSpathfinding.find_path_immediate(start = get_turf(loc), end = target_turf, max_node_depth = max_patrol_dist, id = botcard, exclude = obstacle, check_tick = TRUE)
 		if(!patrol_path)
 			patrol_path = list()
 		obstacle = null
@@ -332,23 +332,22 @@
 	return
 
 /mob/living/bot/proc/calcTargetPath()
-	target_path = AStar(get_turf(loc), get_turf(target), TYPE_PROC_REF(/turf, CardinalTurfsWithAccess), TYPE_PROC_REF(/turf, Distance), 0, max_target_dist, id = botcard, exclude = obstacle)
-	if(!target_path)
-		if(target && target.loc)
-			ignore_list |= target
-		resetTarget()
-		obstacle = null
-	return
+	target_path = SSpathfinding.find_path_immediate(start = get_turf(loc), end = get_turf(target), max_node_depth = max_target_dist, min_target_dist = min_target_dist, id = botcard, exclude = obstacle, check_tick = TRUE)
+	if(length(target_path))
+		return
+	if(target?.loc)
+		ignore_list |= target
+	resetTarget()
+	obstacle = null
 
 /mob/living/bot/proc/makeStep(var/list/path)
-	if(!path.len)
-		return 0
-	var/turf/T = path[1]
-	if(get_turf(src) == T)
-		path -= T
+	if(!length(path))
+		return FALSE
+	var/turf/target_turf = path[1]
+	if(get_turf(src) == target_turf)
+		path -= target_turf
 		return makeStep(path)
-
-	return step_towards(src, T)
+	return step_towards(src, target_turf)
 
 /mob/living/bot/proc/resetTarget()
 	target = null
@@ -371,70 +370,6 @@
 	on = 0
 	set_light(0)
 	update_icon()
-
-/******************************************************************/
-// Navigation procs
-// Used for A-star pathfinding
-
-
-// Returns the surrounding cardinal turfs with open links
-// Including through doors openable with the ID
-/turf/proc/CardinalTurfsWithAccess(var/obj/item/card/id/ID)
-	var/L[] = new()
-
-	for(var/d in global.cardinal)
-		var/turf/T = get_step(src, d)
-		if(istype(T) && !T.density && T.simulated && !LinkBlockedWithAccess(src, T, ID))
-			L.Add(T)
-	return L
-
-
-// Returns true if a link between A and B is blocked
-// Movement through doors allowed if ID has access
-/proc/LinkBlockedWithAccess(turf/A, turf/B, obj/item/card/id/ID)
-
-	if(A == null || B == null) return 1
-	var/adir = get_dir(A,B)
-	var/rdir = get_dir(B,A)
-	if((adir & (NORTH|SOUTH)) && (adir & (EAST|WEST)))	//	diagonal
-		var/iStep = get_step(A,adir&(NORTH|SOUTH))
-		if(!LinkBlockedWithAccess(A,iStep, ID) && !LinkBlockedWithAccess(iStep,B,ID))
-			return 0
-
-		var/pStep = get_step(A,adir&(EAST|WEST))
-		if(!LinkBlockedWithAccess(A,pStep,ID) && !LinkBlockedWithAccess(pStep,B,ID))
-			return 0
-		return 1
-
-	if(DirBlockedWithAccess(A,adir, ID))
-		return 1
-
-	if(DirBlockedWithAccess(B,rdir, ID))
-		return 1
-
-	for(var/obj/O in B)
-		if(O.density && !istype(O, /obj/machinery/door) && !(O.atom_flags & ATOM_FLAG_CHECKS_BORDER))
-			return 1
-
-	return 0
-
-// Returns true if direction is blocked from loc
-// Checks doors against access with given ID
-/proc/DirBlockedWithAccess(turf/loc,var/dir,var/obj/item/card/id/ID)
-	for(var/obj/structure/window/D in loc)
-		if(!D.density)			continue
-		if(D.dir == SOUTHWEST)	return 1
-		if(D.dir == dir)		return 1
-
-	for(var/obj/machinery/door/D in loc)
-		if(!D.density)			continue
-		if(istype(D, /obj/machinery/door/window))
-			if( dir & D.dir )	return !D.check_access(ID)
-
-			//if((dir & SOUTH) && (D.dir & (EAST|WEST)))		return !D.check_access(ID)
-			//if((dir & EAST ) && (D.dir & (NORTH|SOUTH)))	return !D.check_access(ID)
-		else return !D.check_access(ID)	// it's a real, air blocking door
-	return 0
 
 /mob/living/bot/GetIdCards(list/exceptions)
 	. = ..()

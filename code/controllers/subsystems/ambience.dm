@@ -33,6 +33,14 @@ SUBSYSTEM_DEF(ambience)
 	/// Whether this turf has been queued for an ambient lighting update.
 	var/ambience_queued = FALSE
 
+/turf/proc/shows_outdoor_ambience()
+	return is_outside()
+
+// Starlight can't be blocked by stuff above a space turf.
+// TODO: decide if open sky deserves the same treatment
+/turf/space/shows_outdoor_ambience()
+	return TRUE
+
 /turf/proc/update_ambient_light_from_z_or_area()
 
 	// If we're not outside, we don't show ambient light.
@@ -40,7 +48,7 @@ SUBSYSTEM_DEF(ambience)
 
 	var/ambient_light_modifier
 	// If we're indoors because of our area, OR we're outdoors and not exposed to the weather, get interior ambience.
-	var/outsideness = is_outside()
+	var/outsideness = shows_outdoor_ambience()
 	if((!outsideness && is_outside == OUTSIDE_AREA) || (outsideness && get_weather_exposure() != WEATHER_EXPOSED))
 		var/area/A = get_area(src)
 		if(isnull(A?.interior_ambient_light_modifier))
@@ -63,10 +71,23 @@ SUBSYSTEM_DEF(ambience)
 
 		// Grab what we need to set ambient light from our level handler.
 		var/datum/level_data/level_data = SSmapping.levels_by_z[z]
+		var/daycycle_id = level_data.daycycle_id
+		// if we don't have a daycycle ourselves, and we're indoors because of a turf blocking us
+		// find the first daycycle above us to use
+		if(!outsideness && !daycycle_id && HasAbove(z))
+			var/turf/above = src
+			var/datum/level_data/above_level_data
+			while ((above = GetAbove(above)))
+				if((above.z_flags & ZM_TERMINATOR) || !HasAbove(above.z))
+					break
+				above_level_data = SSmapping.levels_by_z[above.z]
+				if(above_level_data.daycycle_id)
+					daycycle_id = above_level_data.daycycle_id
+					break
 
 		// Check for daycycle ambience.
-		if(level_data.daycycle_id)
-			var/datum/daycycle/daycycle = SSdaycycle.get_daycycle(level_data.daycycle_id)
+		if(daycycle_id)
+			var/datum/daycycle/daycycle = SSdaycycle.get_daycycle(daycycle_id)
 			var/new_power = daycycle?.current_period?.power
 			if(!isnull(new_power))
 				if(new_power > 0)

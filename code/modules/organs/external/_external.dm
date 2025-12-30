@@ -11,7 +11,6 @@
 	scale_max_damage_to_species_health = TRUE
 	abstract_type = /obj/item/organ/external
 
-	var/_slowdown = 0
 	var/tmp/_icon_cache_key
 	// Strings
 	var/broken_description             // fracture string if any.
@@ -49,7 +48,6 @@
 	var/list/children                  // Sub-limbs.
 	var/list/internal_organs           // Internal organs of this body part
 	var/list/implants                  // Currently implanted objects.
-	var/base_miss_chance = 20          // Chance of missing.
 	var/genetic_degradation = 0        // Amount of current genetic damage.
 
 	//Forensics stuff
@@ -69,8 +67,6 @@
 	var/hatch_state = 0
 	var/stage = 0
 	var/cavity = 0
-
-	var/list/unarmed_attacks
 
 	var/atom/movable/applied_pressure
 	var/atom/movable/splinted
@@ -114,7 +110,7 @@
 		fingerprint.completeness = rand(10,90)
 		forensics.add_data(/datum/forensics/fingerprints, fingerprint)
 
-/obj/item/organ/external/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance, decl/bodytype/new_bodytype)
+/obj/item/organ/external/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance)
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL && isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
@@ -137,14 +133,10 @@
 	if(owner)
 		LAZYREMOVE(owner.bad_external_organs, src)
 
-/obj/item/organ/external/set_species(specie_name)
+/obj/item/organ/external/set_species(species_uid)
 	_icon_cache_key = null
 	. = ..()
 	skin_blend = bodytype.limb_blend
-	for(var/attack_type in species.unarmed_attacks)
-		var/decl/natural_attack/attack = GET_DECL(attack_type)
-		if(istype(attack) && (organ_tag in attack.usable_with_limbs))
-			LAZYADD(unarmed_attacks, attack_type)
 	update_icon()
 
 /obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
@@ -154,7 +146,7 @@
 	if(bodytype != old_bodytype && apply_to_internal_organs)
 		bodytype.rebuild_internal_organs(src, override_material)
 	if(.)
-		update_icon(TRUE)
+		update_icon()
 
 /obj/item/organ/external/copy_from_mob_snapshot(datum/mob_snapshot/supplied_appearance)
 	_icon_cache_key = null
@@ -208,7 +200,7 @@
 
 	if(owner && burn_damage)
 		owner.custom_pain("Something inside your [src] burns a [severity < 2 ? "bit" : "lot"]!", power * 15) //robotic organs won't feel it anyway
-		take_external_damage(0, burn_damage, 0, used_weapon = "Hot metal")
+		take_damage(burn_damage, BURN, inflicter = "Hot metal")
 		check_pain_disarm()
 
 	if(owner && (limb_flags & ORGAN_FLAG_CAN_STAND))
@@ -232,23 +224,23 @@
 		return //no eating the limb until everything's been removed
 	return ..()
 
-/obj/item/organ/external/examine(mob/user, distance)
+/obj/item/organ/external/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1 || isghost(user))
 		for(var/obj/item/embedded in contents)
 			if(istype(embedded, /obj/item/organ))
 				continue
-			to_chat(user, SPAN_DANGER("There is \a [embedded] sticking out of it."))
+			. += SPAN_DANGER("There is \a [embedded] sticking out of it.")
 		var/ouchies = get_wounds_desc()
 		if(ouchies != "nothing")
-			to_chat(user, SPAN_NOTICE("There is [ouchies] visible on it."))
+			. += SPAN_NOTICE("There is [ouchies] visible on it.")
 
-	return
-
-/obj/item/organ/external/show_decay_status(mob/user)
-	..(user)
+/obj/item/organ/external/get_decay_status(mob/user)
+	. = ..()
 	for(var/obj/item/organ/external/child in children)
-		child.show_decay_status(user)
+		var/decay_status = child.get_decay_status(user)
+		if(decay_status)
+			. += decay_status
 
 /obj/item/organ/external/attackby(obj/item/used_item, mob/user)
 
@@ -259,7 +251,7 @@
 		if(connecting_limb.organ_tag == parent_organ)
 
 			if(length(connecting_limb.children))
-				to_chat(usr, SPAN_WARNING("You cannot connect additional limbs to \the [connecting_limb]."))
+				to_chat(user, SPAN_WARNING("You cannot connect additional limbs to \the [connecting_limb]."))
 				return TRUE
 
 			var/mob/holder = loc
@@ -282,7 +274,7 @@
 		else if(connecting_limb.parent_organ == organ_tag)
 
 			if(LAZYLEN(children))
-				to_chat(usr, SPAN_WARNING("You cannot connect additional limbs to \the [src]."))
+				to_chat(user, SPAN_WARNING("You cannot connect additional limbs to \the [src]."))
 				return TRUE
 
 			if(!user.try_unequip(connecting_limb, src))
@@ -318,7 +310,7 @@
 //Handles removing internal organs/implants/items still in the detached limb.
 /obj/item/organ/external/proc/try_remove_internal_item(var/obj/item/used_item, var/mob/user)
 
-	if(stage == 0 && used_item.sharp)
+	if(stage == 0 && used_item.is_sharp())
 		user.visible_message(SPAN_NOTICE("<b>\The [user]</b> cuts \the [src] open with \the [used_item]."))
 		stage++
 		return TRUE
@@ -328,7 +320,7 @@
 		stage++
 		return TRUE
 
-	if(stage == 2 && (used_item.sharp || IS_HEMOSTAT(used_item) || IS_WIRECUTTER(used_item)))
+	if(stage == 2 && (used_item.is_sharp() || IS_HEMOSTAT(used_item) || IS_WIRECUTTER(used_item)))
 		var/list/radial_buttons = make_item_radial_menu_choices(get_contents_recursive())
 		if(LAZYLEN(radial_buttons))
 			var/obj/item/removing = show_radial_menu(user, src, radial_buttons, radius = 42, require_near = TRUE, use_labels = RADIAL_LABELS_OFFSET, check_locs = list(src))
@@ -534,19 +526,21 @@
 		if(!in_place)
 			parent.update_wounds()
 
+/// Drops all clothing covered by this body part.
 /obj/item/organ/external/proc/drop_equipped_clothing()
 	if(!owner)
 		return
+	// TODO: Determine if this is even necessary; slots that require organ tags will vanish when the organ is lost
 	if((body_part & SLOT_FOOT_LEFT) || (body_part & SLOT_FOOT_RIGHT))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_shoes_str))
+		owner.drop_from_slot(slot_shoes_str)
 	if((body_part & SLOT_HAND_LEFT) || (body_part & SLOT_HAND_RIGHT))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_gloves_str))
+		owner.drop_from_slot(slot_gloves_str)
 	if(body_part & SLOT_HEAD)
-		owner.drop_from_inventory(owner.get_equipped_item(slot_head_str))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_glasses_str))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_l_ear_str))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_r_ear_str))
-		owner.drop_from_inventory(owner.get_equipped_item(slot_wear_mask_str))
+		owner.drop_from_slot(slot_head_str)
+		owner.drop_from_slot(slot_glasses_str)
+		owner.drop_from_slot(slot_l_ear_str)
+		owner.drop_from_slot(slot_r_ear_str)
+		owner.drop_from_slot(slot_wear_mask_str)
 
 //Helper proc used by various tools for repairing robot limbs
 /obj/item/organ/external/proc/robo_repair(var/repair_amount, var/damage_type, var/damage_desc, obj/item/tool, mob/living/user)
@@ -730,13 +724,17 @@ This function completely restores a damaged organ to perfect condition.
 /obj/item/organ/external/is_broken()
 	return ((status & ORGAN_CUT_AWAY) || ((status & ORGAN_BROKEN) && !splinted))
 
+// Overridable for modpacks.
+/obj/item/organ/external/proc/check_status_flags_for_process()
+	return (status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_MUTATED|ORGAN_DISLOCATED|ORGAN_DEAD))
+
 //Determines if we even need to process this organ.
 /obj/item/organ/external/proc/need_process()
 
 	if(length(ailments))
 		return TRUE
 
-	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_MUTATED|ORGAN_DISLOCATED|ORGAN_DEAD))
+	if(check_status_flags_for_process())
 		return TRUE
 
 	if((brute_dam || burn_dam) && !BP_IS_PROSTHETIC(src)) //Robot limbs don't autoheal and thus don't need to process when damaged
@@ -772,6 +770,10 @@ This function completely restores a damaged organ to perfect condition.
 	else
 		pain = 0
 	..()
+
+	//check if we've hit max_damage
+	if((brute_dam + burn_dam) >= max_damage)
+		die()
 
 //Updating germ levels. Handles organ germ levels and necrosis.
 /*
@@ -958,7 +960,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		clamped |= wound.clamped
 		number_wounds += wound.amount
 
-	damage = brute_dam + burn_dam
 	update_damage_ratios()
 
 /obj/item/organ/external/proc/update_damage_ratios()
@@ -1511,7 +1512,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(LAZYLEN(internal_organs) && prob(brute_dam + force))
 		owner.custom_pain("A piece of bone in your [encased ? encased : name] moves painfully!", 50, affecting = src)
 		var/obj/item/organ/internal/internal_organ = pick(internal_organs)
-		internal_organ.take_internal_damage(rand(3,5))
+		internal_organ.take_damage(rand(3,5))
 
 /obj/item/organ/external/proc/jointlock(mob/attacker)
 	if(!can_feel_pain())
@@ -1553,7 +1554,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	else if(status & ORGAN_BROKEN)
 		. += max_delay * 3/8
 	else if(BP_IS_PROSTHETIC(src))
-		. += max_delay * CLAMP01(damage/max_damage)
+		. += max_delay * CLAMP01((brute_dam + burn_dam) / max_damage)
 
 /obj/item/organ/external/proc/is_robotic()
 	return bodytype.is_robotic
@@ -1568,7 +1569,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/die() //External organs dying on a dime causes some real issues in combat
 	if(!BP_IS_PROSTHETIC(src) && !BP_IS_CRYSTAL(src))
-		var/decay_rate = damage/(max_damage*2)
+		var/decay_rate = (brute_dam + burn_dam) / (max_damage*2)
 		germ_level += round(rand(decay_rate,decay_rate*1.5)) //So instead, we're going to say the damage is so severe its functions are slowly failing due to the extensive damage
 	else //TODO: more advanced system for synths
 		if(istype(src,/obj/item/organ/external/chest) || istype(src,/obj/item/organ/external/groin))
@@ -1644,3 +1645,5 @@ Note that amputating the affected organ does in fact remove the infection from t
 	_sprite_accessories = null
 	update_icon()
 
+/obj/item/organ/external/is_broken()
+	return (brute_dam + burn_dam) >= min_broken_damage || ..()

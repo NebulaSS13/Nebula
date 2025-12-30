@@ -29,24 +29,24 @@
 /turf/floor/wood,
 /area/template_noop)
 "h" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/wood,
 /obj/item/board,
 /turf/floor/wood,
 /area/template_noop)
 "i" = (
 /obj/item/flashlight/lamp/green,
-/obj/structure/table/woodentable,
+/obj/structure/table/wood,
 /turf/floor/carpet/green,
 /area/template_noop)
 "j" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/wood,
 /obj/item/clothing/mask/smokable/pipe/cobpipe,
 /obj/item/chewables/rollable/generic,
 /obj/item/ashtray,
 /turf/floor/carpet/green,
 /area/template_noop)
 "k" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/wood,
 /obj/item/utensil/fork/plastic,
 /obj/item/utensil/fork/plastic,
 /obj/item/utensil/fork/plastic,
@@ -57,7 +57,7 @@
 /turf/floor/tiled/monotile,
 /area/template_noop)
 "l" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/wood,
 /obj/item/utensil/knife,
 /obj/item/utensil/knife,
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -86,14 +86,14 @@
 /turf/floor/wood,
 /area/template_noop)
 "p" = (
-/obj/structure/bed/chair/wood{
+/obj/structure/chair/wood{
 	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood/corner,
 /turf/floor/wood,
 /area/template_noop)
 "q" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/wood,
 /obj/item/book/manual/detective,
 /obj/item/ashtray,
 /obj/item/deck/cards,
@@ -106,7 +106,7 @@
 /turf/floor/wood,
 /area/template_noop)
 "s" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/wood,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
@@ -126,7 +126,7 @@
 /turf/floor/wood/usedup,
 /area/template_noop)
 "x" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/wood,
 /obj/item/flashlight/lamp,
 /obj/effect/floor_decal/spline/fancy/wood,
 /turf/floor/tiled/monotile,
@@ -154,7 +154,7 @@
 /turf/floor/wood,
 /area/template_noop)
 "C" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/wood,
 /obj/machinery/computer/central_atmos/laptop{
 	desc = "A cheap, beat-up old laptop.";
 	name = "old laptop"
@@ -162,7 +162,7 @@
 /turf/floor/tiled/monotile,
 /area/template_noop)
 "D" = (
-/obj/structure/bed/chair/wood{
+/obj/structure/chair/wood{
 	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood{

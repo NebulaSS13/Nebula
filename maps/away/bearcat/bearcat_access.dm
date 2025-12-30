@@ -39,3 +39,4 @@ var/global/const/access_bearcat_captain = "ACCESS_BEARCAT_CAPTAIN" //999
 
 /obj/machinery/vending/tool/bearcat
 	req_access = list(access_bearcat)
+

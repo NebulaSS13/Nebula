@@ -33,7 +33,7 @@
 	target.update_icon()
 
 /obj/item/inducer/afterattack(obj/O, mob/living/user, var/proximity)
-	if (!proximity || user.a_intent == I_HURT || CannotUse(user) || !recharge(O, user))
+	if (!proximity || user.check_intent(I_FLAG_HARM) || CannotUse(user) || !recharge(O, user))
 		return ..()
 
 /obj/item/inducer/proc/CannotUse(mob/user)
@@ -46,8 +46,8 @@
 		return TRUE
 	return FALSE
 
-/obj/item/inducer/attackby(obj/item/W, mob/user)
-	if(CannotUse(user) || recharge(W, user))
+/obj/item/inducer/attackby(obj/item/used_item, mob/user)
+	if(CannotUse(user) || recharge(used_item, user))
 		return TRUE
 	return ..()
 
@@ -59,15 +59,15 @@
 	else
 		recharging = TRUE
 	var/obj/item/cell/MyC = get_cell()
-	var/obj/item/cell/C = A.get_cell()
+	var/obj/item/cell/cell = A.get_cell()
 	var/obj/O
 	if(istype(A, /obj))
 		O = A
-	if(C)
+	if(cell)
 		var/charge_length = 10
 		var/done_any = FALSE
 		spark_at(user, amount = 1, cardinal_only = TRUE)
-		if(C.charge >= C.maxcharge)
+		if(cell.charge >= cell.maxcharge)
 			to_chat(user, "<span class='notice'>\The [A] is fully charged!</span>")
 			recharging = FALSE
 			return TRUE
@@ -78,15 +78,15 @@
 				charge_length += rand(10, 30)
 		if (user.get_skill_value(SKILL_ELECTRICAL) < SKILL_ADEPT)
 			charge_length += rand(40, 60)
-		while(C.charge < C.maxcharge)
+		while(cell.charge < cell.maxcharge)
 			if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, charge_length, target = user))
 				if(CannotUse(user))
 					return TRUE
-				if(QDELETED(C))
+				if(QDELETED(cell))
 					return TRUE
 				spark_at(user, amount = 1, cardinal_only = TRUE)
 				done_any = TRUE
-				induce(C)
+				induce(cell)
 				if(O)
 					O.update_icon()
 			else

@@ -1,6 +1,6 @@
 /obj/item/mech_equipment/sleeper
 	name = "\improper exosuit sleeper"
-	desc = "An exosuit-mounted sleeper designed to mantain patients stabilized on their way to medical facilities."
+	desc = "An exosuit-mounted sleeper designed to maintain patients stabilized on their way to medical facilities."
 	icon_state = "mech_sleeper"
 	restricted_hardpoints = list(HARDPOINT_BACK)
 	restricted_software = list(MECH_SOFTWARE_MEDICAL)
@@ -22,16 +22,16 @@
 
 /obj/item/mech_equipment/sleeper/uninstalled()
 	. = ..()
-	sleeper.go_out()
+	sleeper?.go_out()
 
 /obj/item/mech_equipment/sleeper/attack_self(var/mob/user)
 	. = ..()
 	if(.)
 		sleeper.ui_interact(user)
 
-/obj/item/mech_equipment/sleeper/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/chems/glass))
-		return sleeper.attackby(I, user)
+/obj/item/mech_equipment/sleeper/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/chems/glass))
+		return sleeper.attackby(used_item, user)
 	else
 		return ..()
 
@@ -65,6 +65,9 @@
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/antitoxins())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/oxy_meds())
 
+/obj/machinery/sleeper/mounted/DefaultTopicState()
+	return global.mech_topic_state
+
 /obj/machinery/sleeper/mounted/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.mech_topic_state)
 	. = ..()
 
@@ -75,14 +78,14 @@
 	return null
 
 //You cannot modify these, it'd probably end with something in nullspace. In any case basic meds are plenty for an ambulance
-/obj/machinery/sleeper/mounted/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/chems/glass))
-		if(!user.try_unequip(I, src))
+/obj/machinery/sleeper/mounted/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/chems/glass))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
 		if(beaker)
 			user.put_in_hands(beaker)
 			user.visible_message("<span class='notice'>\The [user] removes \the [beaker] from \the [src].</span>", "<span class='notice'>You remove \the [beaker] from \the [src].</span>")
-		beaker = I
-		user.visible_message("<span class='notice'>\The [user] adds \a [I] to \the [src].</span>", "<span class='notice'>You add \a [I] to \the [src].</span>")
+		beaker = used_item
+		user.visible_message("<span class='notice'>\The [user] adds \a [used_item] to \the [src].</span>", "<span class='notice'>You add \a [used_item] to \the [src].</span>")
 		return TRUE
 	return FALSE

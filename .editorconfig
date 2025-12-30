@@ -19,4 +19,10 @@ indent_size = 4
 [*.yml]
 indent_style = space
 indent_size = 2
+end_of_line = crlf
 
+[*.txt]
+end_of_line = crlf
+
+[*.md]
+end_of_line = crlf

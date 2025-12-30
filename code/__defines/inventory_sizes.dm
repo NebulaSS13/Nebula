@@ -16,16 +16,17 @@
 	20 - things that take up an entire turf, like wall girders or door assemblies
 */
 
-#define ITEM_SIZE_TINY           1
-#define ITEM_SIZE_SMALL          2
-#define ITEM_SIZE_NORMAL         3
-#define ITEM_SIZE_LARGE          4
-#define ITEM_SIZE_HUGE           5
-#define ITEM_SIZE_GARGANTUAN     6
-#define ITEM_SIZE_STRUCTURE      20
+#define ITEM_SIZE_TINY            1
+#define ITEM_SIZE_SMALL           2
+#define ITEM_SIZE_NORMAL          3
+#define ITEM_SIZE_LARGE           4
+#define ITEM_SIZE_HUGE            5
+#define ITEM_SIZE_GARGANTUAN      6
+#define ITEM_SIZE_STRUCTURE       20
+#define ITEM_SIZE_LARGE_STRUCTURE 30
 
-#define ITEM_SIZE_MIN            ITEM_SIZE_TINY
-#define ITEM_SIZE_MAX            ITEM_SIZE_STRUCTURE
+#define ITEM_SIZE_MIN             ITEM_SIZE_TINY
+#define ITEM_SIZE_MAX             ITEM_SIZE_LARGE_STRUCTURE
 
 #define BASE_STORAGE_COST(w_class) (2**(w_class-1)) //1,2,4,8,16,...
 

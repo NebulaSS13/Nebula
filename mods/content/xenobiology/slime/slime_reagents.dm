@@ -14,22 +14,23 @@
 	metabolism = REM * 0.25
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
-/decl/material/liquid/water/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/water/affect_touch(var/mob/living/victim, var/removed, var/datum/reagents/holder)
 	. = ..()
-	if(isslime(M))
-		M.take_damage(10 * removed, TOX)
-		var/mob/living/slime/S = M
-		if(istype(S) && istype(S.ai, /datum/mob_controller/slime))
-			var/datum/mob_controller/slime/slime_ai = S.ai
-			if(slime_ai.current_target)
+	if(isslime(victim))
+		victim.take_damage(10 * removed, TOX)
+		var/mob/living/slime/slime_victim = victim
+		if(istype(slime_victim) && istype(slime_victim.ai, /datum/mob_controller/slime))
+			var/datum/mob_controller/slime/slime_ai = slime_victim.ai
+			if(slime_ai.current_target) // don't bother resolving it, we're just clearing it
 				slime_ai.current_target = null
-			S.set_feeding_on()
-		if(LAZYACCESS(M.chem_doses, type) == removed)
-			M.visible_message( \
-				SPAN_DANGER("\The [S]'s flesh sizzles where \the [name] touches it!"), \
-				SPAN_DANGER("Your flesh is burned by \the [name]!"))
-			SET_STATUS_MAX(M, STAT_CONFUSE, 2)
-			var/datum/mob_controller/slime/slime_ai = M.ai
+			slime_victim.set_feeding_on()
+		if(CHEM_DOSE(victim, src) == removed)
+			var/reagent_name = get_reagent_name(holder) // mostly to check masked name, but handles phase too
+			victim.visible_message( \
+				SPAN_DANGER("\The [slime_victim]'s flesh sizzles where \the [reagent_name] touches it!"), \
+				SPAN_DANGER("Your flesh is burned by \the [reagent_name]!"))
+			SET_STATUS_MAX(victim, STAT_CONFUSE, 2)
+			var/datum/mob_controller/slime/slime_ai = victim.ai
 			if(istype(slime_ai))
 				slime_ai.attacked = max(slime_ai.attacked, rand(7,10)) // angery
 

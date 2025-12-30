@@ -38,11 +38,11 @@
 		//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
 			if(I.loc?.storage)	//in a container.
 				return ..()
-			
+
 			var/sdepth = I.storage_depth(user)
 			if (sdepth == -1 || sdepth > 1)
 				return ..() //too deeply nested to access
-			
+
 			user.drop_from_inventory(I)
 
 		user.visible_message( \
@@ -92,6 +92,7 @@
 	w_class = initial(w_class)
 	update_icon()
 
-/obj/item/evidencebag/examine(mob/user)
+/obj/item/evidencebag/examined_by(mob/user, distance, infix, suffix)
 	. = ..()
-	if (stored_item) user.examinate(stored_item)
+	if (stored_item)
+		user.examined_by(user, distance, infix, suffix)

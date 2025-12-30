@@ -135,10 +135,11 @@
 		else
 			override_enabled = 1
 			broadcast_override_status()
-		return TRUE
+		return TOPIC_REFRESH
 
-	if (!docking_enabled|| override_enabled)	//only allow the port to be used as an airlock if nothing is docked here or the override is enabled
+	if (!docking_enabled || override_enabled) //only allow the port to be used as an airlock if nothing is docked here or the override is enabled
 		return ..(command)
+	return TOPIC_NOACTION
 
 /datum/computer/file/embedded_program/airlock/multi_docking/get_receive_filters()
 	return ..() + master_tag // master_tag is specifically to get "dock_status"

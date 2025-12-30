@@ -7,7 +7,7 @@
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 40
 	atom_damage_type = BURN
-	sharp = 1 //concentrated burns
+	sharp = TRUE //concentrated burns
 	damage_flags = DAM_LASER
 	eyeblur = 4
 	hitscan = 1
@@ -210,7 +210,7 @@
 	icon_state = "stun"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	damage_flags = 0
-	sharp = 0 //not a laser
+	sharp = FALSE //not a laser
 	damage = 1//flavor burn! still not a laser, dmg will be reduce by energy resistance not laser resistances
 	atom_damage_type = BURN
 	eyeblur = 1//Some feedback that you've been hit
@@ -241,8 +241,8 @@
 	icon_state = "omnilaser"
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
 	damage = 15
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	atom_damage_type = BURN
 	life_span = 5
 	pass_flags = PASS_FLAG_TABLE
@@ -317,7 +317,7 @@
 	name = "dark matter wave"
 	icon_state = "darkt"
 	damage_flags = 0
-	sharp = 0 //not a laser
+	sharp = FALSE //not a laser
 	agony = 40
 	atom_damage_type = STUN
 	muzzle_type = /obj/effect/projectile/muzzle/darkmattertaser
@@ -354,9 +354,9 @@
 	..()
 	if(isliving(target))
 		var/mob/living/L = target
-		L.adjust_fire_stacks(rand(2,4))
-		if(L.fire_stacks >= 3)
-			L.IgniteMob()
+		L.adjust_fire_intensity(rand(2,4))
+		if(L.get_fire_intensity() >= 3)
+			L.ignite_fire()
 
 /obj/item/projectile/beam/pop
 	icon_state = "bluelaser"

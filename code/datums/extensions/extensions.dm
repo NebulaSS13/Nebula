@@ -56,9 +56,13 @@
 		qdel(existing_extension)
 
 	if(initial(extension_base_type.flags) & EXTENSION_FLAG_IMMEDIATE)
-		var/datum/extension/created = construct_extension_instance(extension_type, source, args.Copy(3))
+		var/list/construct_args = args.Copy(3)
+		var/datum/extension/created = construct_extension_instance(extension_type, source, construct_args)
 		source.extensions[extension_base_type] = created
-		created.post_construction()
+		if(length(construct_args))
+			created.post_construction(arglist(construct_args))
+		else
+			created.post_construction()
 		return created
 
 	var/list/extension_data = list(extension_type, source)
@@ -89,21 +93,25 @@
 		return
 	if(islist(.)) //a list, so it's expecting to be lazy-loaded
 		var/list/extension_data = .
-		var/datum/extension/created = construct_extension_instance(extension_data[1], extension_data[2], extension_data.Copy(3))
+		var/list/construct_args = extension_data.Copy(3)
+		var/datum/extension/created = construct_extension_instance(extension_data[1], extension_data[2], construct_args)
 		source.extensions[base_type] = created
-		created.post_construction()
+		if(length(construct_args))
+			created.post_construction(arglist(construct_args))
+		else
+			created.post_construction()
 		return created
 
 //Fast way to check if it has an extension, also doesn't trigger instantiation of lazy loaded extensions
 /proc/has_extension(var/datum/source, var/base_type)
-	return !!(source.extensions && source.extensions[base_type])
+	return !!source.extensions?[base_type]
 
 /proc/construct_extension_instance(var/extension_type, var/datum/source, var/list/arguments)
 	arguments = list(source) + arguments
 	return new extension_type(arglist(arguments))
 
 /proc/remove_extension(var/datum/source, var/base_type)
-	if(!source.extensions || !source.extensions[base_type])
+	if(!source.extensions?[base_type])
 		return
 	if(!islist(source.extensions[base_type]))
 		qdel(source.extensions[base_type])

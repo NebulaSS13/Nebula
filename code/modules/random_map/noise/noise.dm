@@ -61,48 +61,35 @@
 	var/hsize = round(input_size/2)
 
 	/*
-	(x,y+isize)----(x+hsize,y+isize)----(x+size,y+isize)
+	(x,y+isize)----(x+hsize,y+isize)----(x+isize,y+isize)
 	  |                 |                  |
 	  |                 |                  |
 	  |                 |                  |
-	(x,y+hsize)----(x+hsize,y+hsize)----(x+isize,y)
+	(x,y+hsize)----(x+hsize,y+hsize)----(x+isize,y+hsize)
 	  |                 |                  |
 	  |                 |                  |
 	  |                 |                  |
 	(x,y)----------(x+hsize,y)----------(x+isize,y)
 	*/
+	// Pre-halve them to prevent extra divisions.
+	var/topleft = map[TRANSLATE_COORD(x,y+isize)]/2
+	var/topright = map[TRANSLATE_COORD(x+isize,y+isize)]/2
+	var/bottomleft = map[TRANSLATE_COORD(x, y)]/2
+	var/bottomright = map[TRANSLATE_COORD(x+isize,y)]/2
+
 	// Central edge values become average of corners.
-	map[TRANSLATE_COORD(x+hsize,y+isize)] = round((\
-		map[TRANSLATE_COORD(x,y+isize)] +          \
-		map[TRANSLATE_COORD(x+isize,y+isize)] \
-		)/2)
-
-	map[TRANSLATE_COORD(x+hsize,y)] = round((  \
-		map[TRANSLATE_COORD(x,y)] +            \
-		map[TRANSLATE_COORD(x+isize,y)]   \
-		)/2)
-
-	map[TRANSLATE_COORD(x,y+hsize)] = round((  \
-		map[TRANSLATE_COORD(x,y+isize)] + \
-		map[TRANSLATE_COORD(x,y)]              \
-		)/2)
-
-	map[TRANSLATE_COORD(x+isize,y+hsize)] = round((  \
-		map[TRANSLATE_COORD(x+isize,y+isize)] + \
-		map[TRANSLATE_COORD(x+isize,y)]        \
-		)/2)
+	map[TRANSLATE_COORD(x+hsize,y+isize)] = round(topleft + topright) // top = topleft + topright
+	map[TRANSLATE_COORD(x+hsize,y)] = round(bottomleft + bottomright) // bottom = bottomleft + bottomright
+	map[TRANSLATE_COORD(x,y+hsize)] = round(topleft + bottomleft) // left = topleft + bottomleft
+	map[TRANSLATE_COORD(x+isize,y+hsize)] = round(topright + bottomright) // right = topright + bottomright
 
 	// Centre value becomes the average of all other values + possible random variance.
 	var/current_cell = TRANSLATE_COORD(x+hsize,y+hsize)
-	map[current_cell] = round(( \
-		map[TRANSLATE_COORD(x+hsize,y+isize)] + \
-		map[TRANSLATE_COORD(x+hsize,y)] + \
-		map[TRANSLATE_COORD(x,y+hsize)] + \
-		map[TRANSLATE_COORD(x+isize,y)] \
-		)/4)
+	// yes, this is equivalent to the prior averaging. it just avoids more list indexing
+	map[current_cell] = round(round(topleft+topright)/4 + round(bottomleft + bottomright)/4 + round(topleft + bottomleft)/4 + round(topright + bottomright)/4)
 
 	if(prob(random_variance_chance))
-		map[current_cell] *= (rand(1,2)==1 ? (1.0-random_element) : (1.0+random_element))
+		map[current_cell] *= (prob(50) ? (1.0-random_element) : (1.0+random_element))
 		map[current_cell] = max(0,min(cell_range,map[current_cell]))
 
  	// Recurse until size is too small to subdivide.
@@ -116,42 +103,47 @@
 
 /datum/random_map/noise/cleanup()
 	for(var/i = 1 to smoothing_iterations)
-		var/list/next_map[limit_x*limit_y]
+		// var/list/next_map[limit_x*limit_y]
 		// simple box blur from http://amritamaz.net/blog/understanding-box-blur
 		// basically: we do two very fast one-dimensional blurs
 		var/total
 		for(var/y = 1 to limit_y) // for each row
 			// init window for x=1
 			// for a blur with a radius >1 use a for loop instead and replace 2 with the real count
-			var/cellone = map[TRANSLATE_COORD(1, y)]
-			var/celltwo = map[TRANSLATE_COORD(2, y)]
+			var/first_coord = TRANSLATE_COORD(1, y)
+			var/second_coord = TRANSLATE_COORD(2, y)
+			var/cellone = map[first_coord]
+			var/celltwo = map[second_coord]
 			total = cellone + celltwo
-			next_map[TRANSLATE_COORD(1, y)] = round(total / 2)
+			map[first_coord] = round(total / 2)
 			// hardcoding x=2 also, to lower checks in the loop
 			// larger radius would need to also cover all x < 1 + blur_radius
 			total += map[TRANSLATE_COORD(3, y)]
-			next_map[TRANSLATE_COORD(2, y)] = round(total / 3)
+			map[second_coord] = round(total / 3)
 			for(var/x = 3 to limit_x-1) // should technically be 2 + blur_radius to limit_x - blur_radius
 				total -= map[TRANSLATE_COORD(x-2, y)] // x - blur_radius - 1
 				total += map[TRANSLATE_COORD(x+1, y)] // x + blur_radius
-				next_map[TRANSLATE_COORD(x, y)] = round(total / 3) // should technically be 2*blur_radius+1
+				map[TRANSLATE_COORD(x, y)] = round(total / 3) // should technically be 2*blur_radius+1
 		// now do the same in the x axis
-		map = next_map.Copy()
+		// map = next_map.Copy()
 		for(var/x = 1 to limit_x)
 			// see comments above
-			var/cellone = map[TRANSLATE_COORD(x, 1)]
-			var/celltwo = map[TRANSLATE_COORD(x, 2)]
+			var/first_coord = TRANSLATE_COORD(x, 1)
+			var/second_coord = TRANSLATE_COORD(x, 2)
+			var/cellone = map[first_coord]
+			var/celltwo = map[second_coord]
 			total = cellone + celltwo
-			next_map[TRANSLATE_COORD(x, 1)] = round(total / 2)
+			map[first_coord] = round(total / 2)
 			// hardcoding x=2 also, to lower checks in the loop
 			// larger radius would need to also cover all x < 1 + blur_radius
 			total += map[TRANSLATE_COORD(x, 3)]
-			next_map[TRANSLATE_COORD(x, 2)] = round(total / 3)
+			map[second_coord] = round(total / 3)
 			for(var/y = 3 to limit_y-1)
 				total -= map[TRANSLATE_COORD(x, y-2)]
 				total += map[TRANSLATE_COORD(x, y+1)]
-				next_map[TRANSLATE_COORD(x, y)] = round(total / 3)
-		map = next_map
+				map[TRANSLATE_COORD(x, y)] = round(total / 3)
+		// map = next_map
+		CHECK_TICK
 
 	if(smooth_single_tiles)
 		for(var/x in 1 to limit_x - 1)

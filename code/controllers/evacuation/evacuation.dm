@@ -131,8 +131,6 @@
 		evac_waiting.Announce(replacetext(global.using_map.emergency_shuttle_docked_message, "%ETD%", "[estimated_time] minute\s"), new_sound = sound('sound/effects/Evacuation.ogg', volume = 35))
 	else
 		priority_announcement.Announce(replacetext(replacetext(global.using_map.shuttle_docked_message, "%dock_name%", "[global.using_map.dock_name]"),  "%ETD%", "[estimated_time] minute\s"))
-	if(get_config_value(/decl/config/toggle/announce_shuttle_dock_to_irc))
-		send2mainirc("The shuttle has docked with the station. It will depart in approximately [estimated_time] minute\s.")
 
 /datum/evacuation_controller/proc/launch_evacuation()
 

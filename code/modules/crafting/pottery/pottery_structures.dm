@@ -56,6 +56,7 @@
 	name = "Open Firebox"
 	expected_target_type = /obj/structure/fire_source/kiln
 	incapacitation_flags = INCAPACITATION_DISRUPTED
+	examine_desc = "open or close the firebox"
 
 /decl/interaction_handler/open_firebox/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..() && ishuman(user)
@@ -63,5 +64,5 @@
 /decl/interaction_handler/open_firebox/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/structure/fire_source/kiln/kiln = target
 	kiln.firebox_open = !kiln.firebox_open
-	to_chat(usr, SPAN_NOTICE("You [kiln.firebox_open ? "open" : "close"] \the [kiln]'s firebox."))
+	to_chat(user, SPAN_NOTICE("You [kiln.firebox_open ? "open" : "close"] \the [kiln]'s firebox."))
 	kiln.update_icon()

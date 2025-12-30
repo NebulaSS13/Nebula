@@ -7,8 +7,8 @@
 	w_class = ITEM_SIZE_LARGE
 	item_flags = ITEM_FLAG_IS_WEAPON
 	armor_penetration = 10
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	base_parry_chance = 50
@@ -22,13 +22,13 @@
 
 /obj/item/sword/set_edge(new_edge)
 	. = ..()
-	if(. && !edge)
+	if(. && !has_edge())
 		attack_verb = list("attacked", "stabbed", "jabbed", "smacked", "prodded")
 		hitsound = 'sound/weapons/pierce.ogg'
 
 /obj/item/sword/set_sharp(new_sharp)
 	. = ..()
-	if(. && !sharp)
+	if(. && !is_sharp())
 		attack_verb = list("attacked", "smashed", "jabbed", "smacked", "prodded", "bonked")
 		hitsound = "chop"
 
@@ -47,7 +47,7 @@
 	. = ..()
 
 /obj/item/sword/wood
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	draw_handle = FALSE
 
 /obj/item/sword/replica
@@ -72,7 +72,7 @@
 	draw_handle = FALSE
 
 /obj/item/sword/katana/wood
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	draw_handle = FALSE
 
 /obj/item/sword/katana/vibro

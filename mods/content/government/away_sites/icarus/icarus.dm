@@ -38,7 +38,7 @@
 
 /datum/map_template/ruin/away_site/icarus
 	name = "Fallen Icarus"
-	description = "The crashlanding site of the SEV Icarus."
+	description = "The crash-landing site of the SEV Icarus."
 	prefix = "mods/content/government/away_sites/"
 	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
 	cost = 2
@@ -78,7 +78,7 @@
 
 /obj/item/disk/icarus
 	name = "black box backup disk"
-	desc = "Digital storage. Inscription says: \"Deliver to Sol Goverment Expeditionary Corps Command!\". Content is encrypted with quantum crypthography methods."
+	desc = "Digital storage. Inscription says: \"Deliver to Sol Government Expeditionary Corps Command!\". Content is encrypted with quantum cryptography methods."
 	color = COLOR_GRAY40
 	label = "label_warning"
 /obj/item/paper/icarus/log

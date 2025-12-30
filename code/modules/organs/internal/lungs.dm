@@ -11,7 +11,7 @@
 	max_damage = 70
 	relative_size = 60
 
-	var/active_breathing = 1
+	var/active_breathing = TRUE
 	var/has_gills = FALSE
 	var/breath_type
 	var/exhale_type
@@ -37,20 +37,19 @@
 /obj/item/organ/internal/lungs/initialize_reagents(populate)
 	if(!inhaled)
 		inhaled = new/datum/reagents/metabolism(240, (owner || src), CHEM_INHALE)
-	if(!inhaled.my_atom)
-		inhaled.my_atom = src
+	REAGENT_SET_ATOM(inhaled, src)
 	. = ..()
 
 /obj/item/organ/internal/lungs/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place)
 	if(!(. = ..()))
 		return
-	inhaled.my_atom = owner
+	REAGENT_SET_ATOM(inhaled, owner)
 	inhaled.parent = owner
 
 /obj/item/organ/internal/lungs/do_uninstall(in_place, detach, ignore_children)
 	. = ..()
 	if(inhaled)
-		inhaled.my_atom = src
+		REAGENT_SET_ATOM(inhaled, src)
 		inhaled.parent = null
 
 /obj/item/organ/internal/lungs/proc/can_drown()
@@ -59,15 +58,9 @@
 /obj/item/organ/internal/lungs/proc/adjust_oxygen_deprivation(var/amount)
 	oxygen_deprivation = clamp(oxygen_deprivation + amount, 0, species.total_health)
 
-/obj/item/organ/internal/lungs/set_species(species_name)
+/obj/item/organ/internal/lungs/set_species(species_uid)
 	. = ..()
 	sync_breath_types()
-
-// This call needs to be split out to make sure that all the ingested things are metabolised
-// before the process call is made on any of the other organs
-/obj/item/organ/internal/lungs/proc/metabolize()
-	if(is_usable())
-		inhaled.metabolize()
 
 /**
  *  Set these lungs' breath types based on the lungs' species
@@ -86,14 +79,13 @@
 		poison_types =        list(/decl/material/gas/chlorine = TRUE)
 		exhale_type =         /decl/material/gas/carbon_dioxide
 
-
 /obj/item/organ/internal/lungs/Process()
 	..()
 	if(!owner)
 		return
 
 	if(owner.vital_organ_missing_time)
-		owner.ticks_since_last_successful_breath = max(10, owner.ticks_since_last_successful_breath)
+		owner.suffocation_counter = max(10, owner.suffocation_counter)
 		return
 
 	if (germ_level > INFECTION_LEVEL_ONE && active_breathing)
@@ -125,7 +117,7 @@
 			else
 				to_chat(owner, "<span class='danger'>You're having trouble getting enough [breath_type]!</span>")
 
-			owner.ticks_since_last_successful_breath = max(3, owner.ticks_since_last_successful_breath)
+			owner.suffocation_counter = max(3, owner.suffocation_counter)
 
 /obj/item/organ/internal/lungs/proc/rupture()
 	var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
@@ -170,7 +162,7 @@
 
 	var/safe_pressure_min = min_breath_pressure // Minimum safe partial pressure of breathable gas in kPa
 	// Lung damage increases the minimum safe pressure.
-	safe_pressure_min *= 1 + rand(1,4) * damage/max_damage
+	safe_pressure_min *= 1 + rand(1,4) * _organ_damage/max_damage
 
 	var/breatheffect = GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS)
 	if(!forced && breatheffect && !GET_CHEMICAL_EFFECT(owner, CE_STABLE)) //opiates are bad mmkay
@@ -199,12 +191,12 @@
 			to_chat(owner, SPAN_NOTICE("It gets easier to breathe."))
 		breath_fail_ratio = clamp(0,breath_fail_ratio-0.05,1)
 
-	SET_HUD_ALERT(owner, /decl/hud_element/condition/oxygen, (failed_inhale * 2))
+	SET_HUD_ALERT(owner, HUD_OXY, (failed_inhale * 2))
 
 	var/inhaled_gas_used = inhaling / 4
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
 
-	SET_HUD_ALERT(owner, /decl/hud_element/condition/toxins, 0) // Reset our toxins alert for now.
+	SET_HUD_ALERT(owner, HUD_TOX, 0) // Reset our toxins alert for now.
 	if(!failed_inhale) // Enough gas to tell we're being poisoned via chemical burns or whatever.
 		var/poison_total = 0
 		if(poison_types)
@@ -212,7 +204,7 @@
 				if(poison_types[gname])
 					poison_total += breath.gas[gname]
 		if(((poison_total/breath.total_moles)*breath_pressure) > safe_toxins_max)
-			SET_HUD_ALERT(owner, /decl/hud_element/condition/toxins, 1)
+			SET_HUD_ALERT(owner, HUD_TOX, 1)
 
 	// Pass reagents from the gas into our body.
 	// Presumably if you breathe it you have a specialized metabolism for it, so we drop/ignore breath_type. Also avoids
@@ -252,7 +244,7 @@
 	if(failed_breath)
 		handle_failed_breath()
 	else
-		SET_HUD_ALERT(owner, /decl/hud_element/condition/oxygen, 0)
+		SET_HUD_ALERT(owner, HUD_OXY, 0)
 	return failed_breath
 
 /obj/item/organ/internal/lungs/proc/handle_failed_breath()
@@ -263,10 +255,10 @@
 		else
 			owner.emote(pick(/decl/emote/visible/shiver,/decl/emote/visible/twitch))
 
-	if(damage || GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS) || world.time > last_successful_breath + 2 MINUTES)
+	if(_organ_damage || GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS) || world.time > last_successful_breath + 2 MINUTES)
 		owner.take_damage(HUMAN_MAX_OXYLOSS*breath_fail_ratio, OXY)
 
-	SET_HUD_ALERT_MAX(owner, /decl/hud_element/condition/oxygen, 2)
+	SET_HUD_ALERT_MAX(owner, HUD_OXY, 2)
 	last_int_pressure = 0
 
 /obj/item/organ/internal/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)
@@ -274,38 +266,38 @@
 	var/cold_1 = bodytype.get_body_temperature_threshold(COLD_LEVEL_1)
 	var/heat_1 = bodytype.get_body_temperature_threshold(HEAT_LEVEL_1)
 	if((breath.temperature < cold_1 || breath.temperature > heat_1) && !owner.has_genetic_condition(GENE_COND_COLD_RESISTANCE))
-		var/damage = 0
+		var/breath_damage = 0
 		if(breath.temperature <= cold_1)
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>")
 			if(breath.temperature < bodytype.get_body_temperature_threshold(COLD_LEVEL_3))
-				damage = COLD_GAS_DAMAGE_LEVEL_3
+				breath_damage = COLD_GAS_DAMAGE_LEVEL_3
 			else if(breath.temperature < bodytype.get_body_temperature_threshold(COLD_LEVEL_2))
-				damage = COLD_GAS_DAMAGE_LEVEL_2
+				breath_damage = COLD_GAS_DAMAGE_LEVEL_2
 			else
-				damage = COLD_GAS_DAMAGE_LEVEL_1
+				breath_damage = COLD_GAS_DAMAGE_LEVEL_1
 
 			if(prob(20))
-				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+				owner.apply_damage(breath_damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
 			else
-				src.damage += damage
-			SET_HUD_ALERT(owner, /decl/hud_element/condition/fire, 1)
+				_organ_damage += breath_damage
+			SET_HUD_ALERT(owner, HUD_FIRE, 1)
 		else if(breath.temperature >= heat_1)
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
 
 			if(breath.temperature < bodytype.get_body_temperature_threshold(HEAT_LEVEL_2))
-				damage = HEAT_GAS_DAMAGE_LEVEL_1
+				breath_damage = HEAT_GAS_DAMAGE_LEVEL_1
 			else if(breath.temperature < bodytype.get_body_temperature_threshold(HEAT_LEVEL_3))
-				damage = HEAT_GAS_DAMAGE_LEVEL_2
+				breath_damage = HEAT_GAS_DAMAGE_LEVEL_2
 			else
-				damage = HEAT_GAS_DAMAGE_LEVEL_3
+				breath_damage = HEAT_GAS_DAMAGE_LEVEL_3
 
 			if(prob(20))
-				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
+				owner.apply_damage(breath_damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
 			else
-				src.damage += damage
-			SET_HUD_ALERT(owner, /decl/hud_element/condition/fire, 2)
+				_organ_damage += breath_damage
+			SET_HUD_ALERT(owner, HUD_FIRE, 2)
 
 		//breathing in hot/cold air also heats/cools you a bit
 		var/temp_adj = breath.temperature - owner.bodytemperature
@@ -314,7 +306,7 @@
 		else
 			temp_adj /= (BODYTEMP_HEAT_DIVISOR * 5)	//don't raise temperature as much as if we were directly exposed
 
-		var/relative_density = breath.total_moles / (MOLES_CELLSTANDARD * breath.volume/CELL_VOLUME)
+		var/relative_density = breath.total_moles / (MOLES_CELLSTANDARD * breath.total_volume/CELL_VOLUME)
 		temp_adj *= relative_density
 
 		if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
@@ -383,5 +375,5 @@
 	last_cough = world.time
 
 	// Coughing clears out 1-2 reagents from the lungs.
-	if(lung.inhaled.total_volume > 0 && loc)
+	if(REAGENT_TOTAL_VOLUME(lung.inhaled) > 0 && loc)
 		lung.inhaled.splash(loc, rand(1, 2))

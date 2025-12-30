@@ -49,48 +49,48 @@
 	var/obj/item/stock_parts/radio/radio = holder
 	if(href_list["unlink"])
 		machine = null
-		return MT_CLOSE
+		return TOPIC_CLOSE
 	if(href_list["frequency"])
 		var/new_frequency = input(user, "Select a new frequency:", "Frequency Selection", radio.frequency) as null|num
 		if(!new_frequency || (extension_status(user) != STATUS_INTERACTIVE))
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		new_frequency = sanitize_frequency(new_frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
 		if(new_frequency == radio.frequency)
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		radio.set_frequency(new_frequency, radio.filter)
-		return MT_REFRESH
+		return TOPIC_REFRESH
 	if(href_list["id_tag"])
 		var/new_id_tag = input(user, "Select a new ID:", "ID Selection", radio.id_tag) as null|text
 		if(!new_id_tag || (extension_status(user) != STATUS_INTERACTIVE))
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		new_id_tag = sanitize(new_id_tag)
 		if(new_id_tag == radio.id_tag)
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		radio.set_id_tag(new_id_tag)
-		return MT_REFRESH
+		return TOPIC_REFRESH
 	if(href_list["filter"])
 		var/new_filter = input(user, "Select a new radio filter (usually signals are sent to listeners on your id_tag; this will override that behavior):", "Filter Selection", radio.filter) as null|anything in global.all_selectable_radio_filters
 		if(!new_filter || (extension_status(user) != STATUS_INTERACTIVE))
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		if(new_filter == radio.filter)
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		radio.set_frequency(radio.frequency, new_filter)
-		return MT_REFRESH
+		return TOPIC_REFRESH
 	if(href_list["encryption"])
 		var/new_encryption = input(user, "Select a new encryption key:", "Encryption Key Selection", radio.encryption) as null|num
 		if(!new_encryption || (extension_status(user) != STATUS_INTERACTIVE))
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		new_encryption = sanitize_integer(new_encryption, 0, 999, radio.encryption)
 		if(new_encryption == radio.encryption)
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		radio.encryption = new_encryption
-		return MT_REFRESH
+		return TOPIC_REFRESH
 	if(href_list["stockreset"])
 		var/obj/machinery/actual_machine = machine && machine.resolve()
 		if(!actual_machine)
-			return MT_CLOSE
+			return TOPIC_CLOSE
 		actual_machine.apply_preset_to(radio)
-		return MT_REFRESH
+		return TOPIC_REFRESH
 
 // Helper.
 /datum/extension/interactive/multitool/radio/proc/event_list_to_selection_table(table_tag, list/selected_events)
@@ -111,44 +111,44 @@
 	if(href_list["remove"])
 		var/thing = href_list["remove"]
 		LAZYREMOVE(selected_events, thing)
-		return MT_REFRESH
+		return TOPIC_REFRESH
 	if(href_list["rename"])
 		var/thing = href_list["rename"]
 		if(selected_events && selected_events[thing])
 			var/new_name = input(user, "Select a new message key for this item:", "Key Select", thing) as null|text
 			new_name = sanitize(new_name)
 			if(!new_name || (extension_status(user) != STATUS_INTERACTIVE))
-				return MT_REFRESH
+				return TOPIC_REFRESH
 			if(!selected_events || !selected_events[thing])
-				return MT_REFRESH
+				return TOPIC_REFRESH
 			selected_events[new_name] = selected_events[thing]
 			selected_events -= thing
-		return MT_REFRESH
+		return TOPIC_REFRESH
 	if(href_list["new_val"])
 		var/thing = href_list["new_val"]
 		var/decl/public_access/variable = selected_events && selected_events[thing]
 		if(!variable || !LAZYLEN(valid_events))
-			return MT_REFRESH
+			return TOPIC_REFRESH
 		var/valid_variables = list()
 		for(var/path in valid_events)
 			valid_variables += valid_events[path]
 		var/new_var = input(user, "Select a new action for this item:", "Action Select", thing) as null|anything in valid_variables
 		if(!new_var || (extension_status(user) != STATUS_INTERACTIVE))
-			return MT_REFRESH
+			return TOPIC_REFRESH
 		if(!(selected_events && selected_events[thing] == variable))
-			return MT_REFRESH
+			return TOPIC_REFRESH
 		selected_events[thing] = new_var
-		return MT_REFRESH
+		return TOPIC_REFRESH
 	if(href_list["add"])
 		if(!LAZYLEN(valid_events))
-			return MT_REFRESH
+			return TOPIC_REFRESH
 		LAZYSET(selected_events, copytext(md5(num2text(rand(0, 1))), 1, 11), valid_events[pick(valid_events)]) // random key
-		return MT_REFRESH
+		return TOPIC_REFRESH
 	if(href_list["desc"])
 		var/decl/public_access/variable = locate(href_list["desc"])
 		if(istype(variable))
 			to_chat(user, variable.desc)
-		return MT_NOACTION
+		return TOPIC_NOACTION
 
 /datum/extension/interactive/multitool/radio/transmitter/aquire_target()
 	var/obj/machinery/actual_machine = ..()
@@ -178,7 +178,7 @@
 		return
 	var/obj/machinery/actual_machine = machine.resolve()
 	if(!actual_machine)
-		return MT_CLOSE
+		return TOPIC_CLOSE
 	var/obj/item/stock_parts/radio/transmitter/basic/radio = holder
 	if(href_list["on_change"])
 		return event_list_topic(radio.transmit_on_change, actual_machine.public_variables, user, href_list)
@@ -216,7 +216,7 @@
 		return
 	var/obj/machinery/actual_machine = machine.resolve()
 	if(!actual_machine)
-		return MT_CLOSE
+		return TOPIC_CLOSE
 	var/obj/item/stock_parts/radio/transmitter/on_event/radio = holder
 
 	if(href_list["on_event"])
@@ -257,7 +257,7 @@
 		return
 	var/obj/machinery/actual_machine = machine.resolve()
 	if(!actual_machine)
-		return MT_CLOSE
+		return TOPIC_CLOSE
 	var/obj/item/stock_parts/radio/receiver/radio = holder
 	if(href_list["call"])
 		return event_list_topic(radio.receive_and_call, actual_machine.public_methods, user, href_list)

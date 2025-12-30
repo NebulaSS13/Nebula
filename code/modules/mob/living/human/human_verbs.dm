@@ -1,76 +1,3 @@
-/mob/living/human/proc/morph()
-	set name = "Morph"
-	set category = "Superpower"
-
-	if(stat!=CONSCIOUS)
-		reset_view(0)
-		remoteview_target = null
-		return
-
-	if(!has_genetic_condition(GENE_COND_SHAPESHIFTER))
-		src.verbs -= /mob/living/human/proc/morph
-		return
-
-	var/new_facial = input("Please select facial hair color.", "Character Generation", GET_FACIAL_HAIR_COLOR(src)) as color
-	if(new_facial)
-		SET_FACIAL_HAIR_COLOR(src, new_facial, TRUE)
-
-	var/new_hair = input("Please select hair color.", "Character Generation", GET_HAIR_COLOR(src)) as color
-	if(new_hair)
-		SET_HAIR_COLOR(src, new_hair, TRUE)
-
-	var/new_eyes = input("Please select eye color.", "Character Generation", get_eye_colour()) as color
-	if(new_eyes)
-		set_eye_colour(new_eyes)
-
-	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation", "[35-skin_tone]")  as text
-
-	if (!new_tone)
-		new_tone = 35
-	skin_tone = max(min(round(text2num(new_tone)), 220), 1)
-	skin_tone = -skin_tone + 35
-
-	// hair
-	var/list/all_hairs = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
-	var/list/hairs = list()
-
-	// loop through potential hairs
-	for(var/x in all_hairs)
-		hairs += all_hairs[x]
-
-	var/decl/new_style = input("Please select hair style", "Character Generation", GET_HAIR_STYLE(src))  as null|anything in hairs
-
-	// if new style selected (not cancel)
-	if(new_style)
-		SET_HAIR_STYLE(src, new_style.type, TRUE)
-
-	// facial hair
-	var/list/all_fhairs = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
-	var/list/fhairs = list()
-
-	for(var/x in all_fhairs)
-		fhairs += all_fhairs[x]
-
-	new_style = input("Please select facial style", "Character Generation", GET_FACIAL_HAIR_STYLE(src))  as null|anything in fhairs
-
-	if(new_style)
-		SET_FACIAL_HAIR_STYLE(src, new_style.type, TRUE)
-
-	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neutral")
-	if (new_gender)
-		if(new_gender == "Male")
-			gender = MALE
-		else if(new_gender == "Female")
-			gender = FEMALE
-		else
-			gender = NEUTER
-
-	update_hair()
-	try_refresh_visible_overlays()
-
-	var/decl/pronouns/pronouns = get_pronouns()
-	visible_message("<span class='notice'>\The [src] morphs and changes [pronouns.his] appearance!</span>", "<span class='notice'>You change your appearance!</span>", "<span class='warning'>Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!</span>")
-
 /mob/living/human/proc/remotesay()
 	set name = "Project mind"
 	set category = "Superpower"
@@ -86,7 +13,7 @@
 	var/list/creatures = list()
 	for(var/mob/living/h in global.player_list)
 		creatures += h
-	var/mob/target = input("Who do you want to project your mind to ?") as null|anything in creatures
+	var/mob/target = input(usr, "Who do you want to project your mind to?") as null|anything in creatures
 	if (isnull(target))
 		return
 
@@ -128,7 +55,7 @@
 			continue
 		creatures += h
 
-	var/mob/target = input ("Who do you want to project your mind to ?") as mob in creatures
+	var/mob/target = input(usr, "Who do you want to project your mind to?") as mob in creatures
 
 	if (target)
 		remoteview_target = target
@@ -235,7 +162,7 @@
 		return
 
 	var/num_doodles = 0
-	for (var/obj/effect/decal/cleanable/blood/writing/W in T)
+	for (var/obj/effect/decal/cleanable/blood/writing/writing in T)
 		num_doodles++
 	if (num_doodles > 4)
 		to_chat(src, "<span class='warning'>There is no space to write on!</span>")
@@ -252,11 +179,11 @@
 		if (length(message) > max_length)
 			message += "-"
 			to_chat(src, "<span class='warning'>You ran out of blood to write with!</span>")
-		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
-		W.basecolor = (hand_blood_color) ? hand_blood_color : COLOR_BLOOD_HUMAN
-		W.update_icon()
-		W.message = message
-		W.add_fingerprint(src)
+		var/obj/effect/decal/cleanable/blood/writing/writing = new(T)
+		writing.basecolor = (hand_blood_color) ? hand_blood_color : COLOR_BLOOD_HUMAN
+		writing.update_icon()
+		writing.message = message
+		writing.add_fingerprint(src)
 
 /mob/living/human/proc/undislocate()
 	set category = "Object"
@@ -270,7 +197,7 @@
 	usr.setClickCooldown(20)
 
 	if(usr.stat > 0)
-		to_chat(usr, "You are unconcious and cannot do that!")
+		to_chat(usr, "You are unconscious and cannot do that!")
 		return
 
 	if(usr.restrained())
@@ -311,7 +238,7 @@
 		"<span class='danger'>[self ? "You pop" : "[U] pops"] your [current_limb.joint] in the WRONG place!</span>" \
 		)
 		current_limb.add_pain(30)
-		current_limb.take_external_damage(5)
+		current_limb.take_damage(5)
 		shock_stage += 20
 	else
 		visible_message( \
@@ -319,9 +246,3 @@
 		"<span class='danger'>[self ? "You pop" : "[U] pops"] your [current_limb.joint] back in!</span>" \
 		)
 		current_limb.undislocate()
-
-/mob/living/human/verb/pull_punches()
-	set name = "Switch Stance"
-	set desc = "Try not to hurt them."
-	set category = "IC"
-	species.toggle_stance(src)

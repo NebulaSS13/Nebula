@@ -1,11 +1,10 @@
-var/global/datum/uplink/uplink = new()
-
-/datum/uplink
+/decl/uplink
 	var/list/items_assoc
 	var/list/datum/uplink_item/items
 	var/list/datum/uplink_category/categories
 
-/datum/uplink/New()
+/decl/uplink/Initialize()
+	. = ..()
 	items_assoc = list()
 	items = init_subtypes(/datum/uplink_item)
 	categories = init_subtypes(/datum/uplink_category)
@@ -30,11 +29,13 @@ var/global/datum/uplink/uplink = new()
 	var/name
 	var/desc
 	var/item_cost = 0
-	var/list/antag_costs = list()			// Allows specific antag roles to purchase at a different cost
-	var/datum/uplink_category/category		// Item category
-	/// Antag roles this item is displayed to. If empty, display to all. If it includes 'Exclude", anybody except this role can view it
-	/// Examples: list(/decl/special_role/someone); list("Exclude", /decl/special_role/whoever); etc
+	/// Allows specific antag roles to purchase at a different cost
+	var/list/antag_costs = list()
+	var/datum/uplink_category/category
+	/// Antag roles this item is displayed to. If empty, display to all.
 	var/list/decl/special_role/antag_roles
+	/// Antag roles this item will not be displayed to. If empty, display to all.
+	var/list/decl/special_role/exclude_antag_roles
 
 /datum/uplink_item/item
 	var/path = null
@@ -77,13 +78,18 @@ var/global/datum/uplink/uplink = new()
 	if(!U.uplink_owner)
 		return 0
 
-	for(var/antag_role in antag_roles)
-		if(!ispath(antag_role, /decl/special_role))
-			continue
-		var/decl/special_role/antag = GET_DECL(antag_role)
-		if(antag.is_antagonist(U.uplink_owner))
-			return !("Exclude" in antag_roles)
-	return ("Exclude" in antag_roles)
+	if(LAZYLEN(exclude_antag_roles))
+		for(var/antag_role in exclude_antag_roles)
+			var/decl/special_role/antag = GET_DECL(antag_role)
+			if(antag.is_antagonist(U.uplink_owner))
+				return FALSE
+	if(LAZYLEN(antag_roles))
+		for(var/antag_role in antag_roles)
+			var/decl/special_role/antag = GET_DECL(antag_role)
+			if(antag.is_antagonist(U.uplink_owner))
+				return TRUE
+		return FALSE
+	return TRUE
 
 /datum/uplink_item/proc/cost(var/telecrystals, obj/item/uplink/U)
 	. = item_cost

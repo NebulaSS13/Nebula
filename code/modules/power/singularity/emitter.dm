@@ -67,8 +67,8 @@
 			if(active==1)
 				active = 0
 				to_chat(user, "You turn off \the [src].")
-				log_and_message_admins("turned off \the [src]")
-				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user || usr)]","singulo")
+				log_and_message_admins("turned off \the [src]", user)
+				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user)]","singulo")
 			else
 				active = 1
 				if(user)
@@ -77,8 +77,8 @@
 				to_chat(user, "You turn on \the [src].")
 				shot_number = 0
 				fire_delay = get_initial_fire_delay()
-				log_and_message_admins("turned on \the [src]")
-				investigate_log("turned <font color='green'>on</font> by [key_name_admin(user || usr)]","singulo")
+				log_and_message_admins("turned on \the [src]", user)
+				investigate_log("turned <font color='green'>on</font> by [key_name_admin(user)]","singulo")
 			update_icon()
 		else
 			to_chat(user, "<span class='warning'>The controls are locked!</span>")
@@ -133,9 +133,9 @@
 			powered = TRUE
 			update_icon()
 
-/obj/machinery/emitter/attackby(obj/item/W, mob/user)
+/obj/machinery/emitter/attackby(obj/item/used_item, mob/user)
 
-	if(IS_WRENCH(W))
+	if(IS_WRENCH(used_item))
 		if(active)
 			to_chat(user, "Turn off [src] first.")
 			return TRUE
@@ -158,8 +158,8 @@
 				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
 		return TRUE
 
-	if(IS_WELDER(W))
-		var/obj/item/weldingtool/WT = W
+	if(IS_WELDER(used_item))
+		var/obj/item/weldingtool/welder = used_item
 		if(active)
 			to_chat(user, "Turn off [src] first.")
 			return TRUE
@@ -167,7 +167,7 @@
 			if(0)
 				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
 			if(1)
-				if (!WT.weld(0,user))
+				if (!welder.weld(0,user))
 					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 					return TRUE
 				playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
@@ -176,25 +176,25 @@
 					"You hear welding.")
 				if (!do_after(user, 2 SECONDS, src))
 					return TRUE
-				if(!src || !WT.isOn()) return TRUE
+				if(!src || !welder.isOn()) return TRUE
 				state = 2
 				to_chat(user, "You weld [src] to the floor.")
 			if(2)
-				if (WT.weld(0,user))
+				if (welder.weld(0,user))
 					playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to cut [src] free from the floor.", \
 						"You start to cut [src] free from the floor.", \
 						"You hear welding.")
 					if (!do_after(user, 2 SECONDS, src))
 						return TRUE
-					if(!src || !WT.isOn()) return TRUE
+					if(!src || !welder.isOn()) return TRUE
 					state = 1
 					to_chat(user, "You cut [src] free from the floor.")
 				else
 					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 		return TRUE
 
-	if(istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))
+	if(istype(used_item, /obj/item/card/id) || istype(used_item, /obj/item/modular_computer))
 		if(emagged)
 			to_chat(user, "<span class='warning'>The lock seems to be broken.</span>")
 			return TRUE

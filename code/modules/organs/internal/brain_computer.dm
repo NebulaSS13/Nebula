@@ -1,7 +1,7 @@
 // Robobrain.
 /obj/item/organ/internal/brain/robotic
 	name = "computer intelligence core"
-	desc = "The pinnacle of artifical intelligence technology, conveniently stored in a fist-sized cube."
+	desc = "The pinnacle of artificial intelligence technology, conveniently stored in a fist-sized cube."
 	icon = 'icons/obj/items/brain_interface_robotic.dmi'
 	origin_tech = @'{"engineering":4,"materials":4,"wormholes":2,"programming":4}'
 	material = /decl/material/solid/metal/steel
@@ -75,19 +75,20 @@
 		if(response == "Yes" && brainmob && !brainmob?.key && G.assess_candidate(user))
 			G.transfer_personality(user, brainmob)
 
-/obj/item/organ/internal/brain/robotic/show_brain_status(mob/user)
+/obj/item/organ/internal/brain/robotic/get_brain_status(mob/user)
+	. = list()
 	var/mob/living/brainmob = get_brainmob()
 	if(brainmob?.key)
 		switch(brainmob.stat)
 			if(CONSCIOUS)
 				if(!brainmob.client)
-					to_chat(user, SPAN_WARNING("It appears to be in stand-by mode."))
+					. += SPAN_WARNING("It appears to be in stand-by mode.")
 			if(UNCONSCIOUS)
-				to_chat(user, SPAN_WARNING("It doesn't seem to be responsive."))
+				. += SPAN_WARNING("It doesn't seem to be responsive.")
 			if(DEAD)
-				to_chat(user, SPAN_WARNING("It appears to be completely inactive."))
+				. += SPAN_WARNING("It appears to be completely inactive.")
 	else
-		to_chat(user, SPAN_WARNING("It appears to be completely inactive."))
+		. += SPAN_WARNING("It appears to be completely inactive.")
 
 /obj/item/organ/internal/brain/robotic/get_synthetic_owner_name()
 	return "Robot"

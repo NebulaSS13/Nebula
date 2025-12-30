@@ -8,10 +8,16 @@ var/global/default_gyne
 /decl/ghosttrap/kharmaani_egg/forced(var/mob/user)
 	request_player(new /mob/living/simple_animal/alien/kharmaan(get_turf(user)), "A mantid nymph is ready to hatch and needs a player.")
 
+/decl/ghosttrap/kharmaani_egg/transfer_personality(mob/candidate, mob/target)
+	. = ..()
+	var/obj/structure/insectoid_egg/egg = target.loc
+	if(!istype(egg))
+		return // somehow we're missing an egg
+	egg.hatch()
+
 /obj/structure/insectoid_egg
 	name = "alien egg"
 	desc = "A semi-translucent alien egg."
-	current_health = 100
 	max_health = 100
 	icon = 'mods/species/ascent/icons/egg.dmi'
 	icon_state = "egg"
@@ -50,25 +56,24 @@ var/global/default_gyne
 	else
 		icon_state = "egg"
 
-/obj/structure/insectoid_egg/examine(mob/user)
+/obj/structure/insectoid_egg/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-
 	if(hatched || !current_health)
-		to_chat(user, "\icon[src] \The [src] lays in shambles, having been hatched or broken.")
+		. += "\icon[src] \The [src] lays in shambles, having [hatched ? "already hatched" : "been broken"]."
 		return
-
-	if(maturity < 5)
-		to_chat(user, "\icon[src] \The [src] is freshly laid and sticky.")
-	else if(maturity < 15)
-		to_chat(user, "\icon[src] \The [src] is small and still to the touch.")
-	else if(maturity < 30)
-		to_chat(user, "\icon[src] \The [src] has swollen in size; a faint glow can be seen inside the shell.")
-	else if(maturity < 50)
-		to_chat(user, "\icon[src] \The [src] emanates a faint glow and moves from time to time.")
-	else if(maturity < 75)
-		to_chat(user, "\icon[src] \The [src] appears to be close to hatching.")
-	else
-		to_chat(user, "\icon[src] \The [src] is lively and appears ready to hatch at any moment.")
+	switch(maturity)
+		if(0 to 5)
+			. += "\icon[src] \The [src] is freshly laid and sticky."
+		if(5 to 15)
+			. += "\icon[src] \The [src] is small and still to the touch."
+		if(15 to 30)
+			. += "\icon[src] \The [src] has swollen in size; a faint glow can be seen inside the shell."
+		if(30 to 50)
+			. += "\icon[src] \The [src] emanates a faint glow and moves from time to time."
+		if(50 to 75)
+			. += "\icon[src] \The [src] appears to be close to hatching."
+		else
+			. += "\icon[src] \The [src] is lively and appears ready to hatch at any moment."
 
 /obj/structure/insectoid_egg/Process()
 	if(!current_health || hatched || hatching || (world.time <= (last_tick + maturity_rate)))
@@ -90,22 +95,25 @@ var/global/default_gyne
 	maturity = min(100, maturity + 1)
 	ready_to_hatch = maturity == 100 && !ready_to_hatch // Lazy flip from change.
 	if(ready_to_hatch)
+		var/mob/living/simple_animal/alien/kharmaan/new_nymph = mature() // prepare a nymph in the egg
 		var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/kharmaani_egg)
-		G.request_player(src, "A mantid nymph is ready to hatch and needs a player.")
+		G.request_player(new_nymph, "A mantid nymph is ready to hatch and needs a player.")
 
-/obj/structure/insectoid_egg/proc/hatch(var/client/C)
+/obj/structure/insectoid_egg/proc/mature(var/client/C)
 	if(!current_health || maturity != 100 || hatched || hatching)
-		return
-
-	var/mob/living/simple_animal/alien/kharmaan/new_nymph = new(src, SPECIES_MANTID_NYMPH) // Spawn in the egg.
+		return null
+	var/mob/living/simple_animal/alien/kharmaan/new_nymph = new(src) // Spawn in the egg.
 	new_nymph.lastarea = get_area(src)
-	new_nymph.key = C.ckey
 	new_nymph.real_name = "[random_id(/decl/species/mantid, 10000, 99999)] [lineage]"
+	if(C)
+		new_nymph.key = C.key
+	visible_message(SPAN_NOTICE("\icon[src] \The [src] trembles and cracks as it begins to hatch."))
+	return new_nymph
+
+/obj/structure/insectoid_egg/proc/hatch()
 	hatching = TRUE
 	update_icon()
-	visible_message(SPAN_NOTICE("\icon[src] \The [src] trembles and cracks as it begins to hatch."))
 	addtimer(CALLBACK(src, PROC_REF(finish_hatching)), 2.5 SECONDS)
-
 
 /obj/structure/insectoid_egg/proc/finish_hatching()
 	hatched = TRUE

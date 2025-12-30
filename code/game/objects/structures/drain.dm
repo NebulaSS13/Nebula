@@ -11,22 +11,22 @@
 	can_drain = 1
 	var/welded
 
-/obj/structure/hygiene/drain/examine(mob/user)
+/obj/structure/hygiene/drain/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(welded)
-		to_chat(user, "It is welded shut.")
+		. += "It is welded shut."
 
-/obj/structure/hygiene/drain/attackby(var/obj/item/thing, var/mob/user)
-	if(IS_WELDER(thing))
-		var/obj/item/weldingtool/WT = thing
-		if(WT.isOn())
+/obj/structure/hygiene/drain/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_WELDER(used_item))
+		var/obj/item/weldingtool/welder = used_item
+		if(welder.isOn())
 			welded = !welded
 			to_chat(user, "<span class='notice'>You weld \the [src] [welded ? "closed" : "open"].</span>")
 		else
-			to_chat(user, "<span class='warning'>Turn \the [thing] on, first.</span>")
+			to_chat(user, "<span class='warning'>Turn \the [used_item] on, first.</span>")
 		update_icon()
 		return TRUE
-	if(IS_WRENCH(thing))
+	if(IS_WRENCH(used_item))
 		new /obj/item/drain(src.loc)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, "<span class='warning'>[user] unwrenches \the [src].</span>")
@@ -52,8 +52,8 @@
 	material = /decl/material/solid/metal/brass
 	var/constructed_type = /obj/structure/hygiene/drain
 
-/obj/item/drain/attackby(var/obj/item/thing, var/mob/user)
-	if(IS_WRENCH(thing))
+/obj/item/drain/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_WRENCH(used_item))
 		new constructed_type(get_turf(src))
 		playsound(src, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("\The [user] wrenches \the [src] down."))
@@ -85,9 +85,9 @@
 	else
 		icon_state = "[initial(icon_state)][closed ? "-closed" : ""]"
 
-/obj/structure/hygiene/drain/bath/examine(mob/user)
+/obj/structure/hygiene/drain/bath/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It is [closed ? "closed" : "open"]")
+	. += "It is [closed ? "closed" : "open"]"
 
 /obj/structure/hygiene/drain/bath/Process()
 	if(closed)

@@ -8,3 +8,4 @@
 	footstep_type  = /decl/footsteps/water
 	holographic    = TRUE
 	constructed    = TRUE
+	uid            = "floor_water_fake"

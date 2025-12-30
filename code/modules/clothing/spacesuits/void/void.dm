@@ -84,21 +84,21 @@ else if(##equipment_var) {\
 	QDEL_NULL(helmet)
 	QDEL_NULL(tank)
 
-/obj/item/clothing/suit/space/void/examine(user,distance)
+/obj/item/clothing/suit/space/void/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	var/list/part_list = new
+	var/list/part_list = list()
 	for(var/obj/item/I in list(helmet,boots,tank))
 		part_list += "\a [I]"
-	to_chat(user, "\The [src] has [english_list(part_list)] installed.")
+	. += "\The [src] has [english_list(part_list)] installed."
 	if(tank && distance <= 1)
-		to_chat(user, "<span class='notice'>The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].</span>")
+		. += SPAN_NOTICE("The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].")
 
-/obj/item/clothing/suit/space/void/refit_for_bodytype(var/target_bodytype)
+/obj/item/clothing/suit/space/void/refit_for_bodytype(target_bodytype, skip_rename = FALSE)
 	..()
 	if(istype(helmet))
-		helmet.refit_for_bodytype(target_bodytype)
+		helmet.refit_for_bodytype(target_bodytype, skip_rename)
 	if(istype(boots))
-		boots.refit_for_bodytype(target_bodytype)
+		boots.refit_for_bodytype(target_bodytype, skip_rename)
 
 /obj/item/clothing/suit/space/void/equipped(mob/M)
 	..()
@@ -216,9 +216,9 @@ else if(##equipment_var) {\
 	src.tank = null
 	playsound(loc, 'sound/effects/spray3.ogg', 50)
 
-/obj/item/clothing/suit/space/void/attackby(obj/item/W, mob/user)
+/obj/item/clothing/suit/space/void/attackby(obj/item/used_item, mob/user)
 
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)//maybe I should make this into a proc?
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 		else if(helmet || boots || tank)
@@ -241,36 +241,36 @@ else if(##equipment_var) {\
 			to_chat(user, "\The [src] does not have anything installed.")
 		return TRUE
 
-	if(istype(W,/obj/item/clothing/head/helmet/space))
+	if(istype(used_item,/obj/item/clothing/head/helmet/space))
 		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 		else if(helmet)
 			to_chat(user, "\The [src] already has a helmet installed.")
-		else if(user.try_unequip(W, src))
-			to_chat(user, "You attach \the [W] to \the [src]'s helmet mount.")
-			src.helmet = W
+		else if(user.try_unequip(used_item, src))
+			to_chat(user, "You attach \the [used_item] to \the [src]'s helmet mount.")
+			src.helmet = used_item
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return TRUE
 
-	if(istype(W,/obj/item/clothing/shoes/magboots))
+	if(istype(used_item,/obj/item/clothing/shoes/magboots))
 		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 		else if(boots)
 			to_chat(user, "\The [src] already has magboots installed.")
-		else if(user.try_unequip(W, src))
-			to_chat(user, "You attach \the [W] to \the [src]'s boot mounts.")
-			boots = W
+		else if(user.try_unequip(used_item, src))
+			to_chat(user, "You attach \the [used_item] to \the [src]'s boot mounts.")
+			boots = used_item
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return TRUE
 
-	if(istype(W,/obj/item/tank))
+	if(istype(used_item,/obj/item/tank))
 		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 		else if(tank)
 			to_chat(user, "\The [src] already has an airtank installed.")
-		else if(user.try_unequip(W, src))
-			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
-			tank = W
+		else if(user.try_unequip(used_item, src))
+			to_chat(user, "You insert \the [used_item] into \the [src]'s storage compartment.")
+			tank = used_item
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return TRUE
 

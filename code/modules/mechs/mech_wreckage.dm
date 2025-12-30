@@ -1,6 +1,6 @@
 /obj/structure/mech_wreckage
 	name = "wreckage"
-	desc = "It might have some salvagable parts."
+	desc = "It might have some salvageable parts."
 	density = TRUE
 	opacity = TRUE
 	anchored = TRUE
@@ -12,7 +12,7 @@
 /obj/structure/mech_wreckage/Initialize(mapload, var/mob/living/exosuit/exosuit, var/gibbed)
 	. = ..(mapload)
 	if(exosuit)
-		name = "wreckage of \the [exosuit.name]"
+		name = "wreckage of \the [exosuit]"
 		loot_pool = list()
 		if(!gibbed)
 			for(var/obj/item/thing in list(exosuit.arms, exosuit.legs, exosuit.head, exosuit.body))
@@ -58,16 +58,16 @@
 	to_chat(user, "You retrieve \the [thing] from \the [src].")
 	return TRUE
 
-/obj/structure/mech_wreckage/attackby(var/obj/item/W, var/mob/user)
+/obj/structure/mech_wreckage/attackby(var/obj/item/used_item, var/mob/user)
 
 	var/cutting
-	if(IS_WELDER(W))
-		var/obj/item/weldingtool/WT = W
-		if(WT.isOn())
+	if(IS_WELDER(used_item))
+		var/obj/item/weldingtool/welder = used_item
+		if(welder.isOn())
 			cutting = TRUE
 		else
-			to_chat(user, SPAN_WARNING("Turn \the [WT] on, first."))
-	else if(istype(W, /obj/item/gun/energy/plasmacutter))
+			to_chat(user, SPAN_WARNING("Turn \the [welder] on, first."))
+	else if(istype(used_item, /obj/item/gun/energy/plasmacutter))
 		cutting = TRUE
 
 	if(cutting)
@@ -78,7 +78,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] has already been weakened."))
 		return 1
 
-	else if(IS_WRENCH(W))
+	else if(IS_WRENCH(used_item))
 		if(prepared)
 			to_chat(user, SPAN_NOTICE("You finish dismantling \the [src]."))
 			SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), rand(5, 10))
@@ -86,8 +86,8 @@
 		else
 			to_chat(user, SPAN_WARNING("It's too solid to dismantle. Try cutting through some of the bigger bits."))
 		return 1
-	else if(istype(W) && W.get_attack_force(user) > 20)
-		visible_message(SPAN_DANGER("\The [src] has been smashed with \the [W] by \the [user]!"))
+	else if(istype(used_item) && used_item.expend_attack_force(user) > 20)
+		visible_message(SPAN_DANGER("\The [src] has been smashed with \the [used_item] by \the [user]!"))
 		if(prob(20))
 			physically_destroyed()
 		return 1

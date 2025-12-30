@@ -49,6 +49,12 @@
 			ammo_magazine = new magazine_type(src)
 	update_icon()
 
+/obj/item/gun/projectile/Destroy()
+	chambered = null
+	loaded.Cut()
+	ammo_magazine = null
+	return ..()
+
 /obj/item/gun/projectile/consume_next_projectile()
 	if(!is_jammed && prob(jam_chance))
 		src.visible_message("<span class='danger'>\The [src] jams!</span>")
@@ -309,14 +315,14 @@
 		ammo_magazine = null
 		update_icon() //make sure to do this after unsetting ammo_magazine
 
-/obj/item/gun/projectile/examine(mob/user)
+/obj/item/gun/projectile/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(is_jammed && user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
-		to_chat(user, "<span class='warning'>It looks jammed.</span>")
+		. += SPAN_WARNING("It looks jammed.")
 	if(ammo_magazine)
-		to_chat(user, "It has \a [ammo_magazine] loaded.")
+		. += "It has \a [ammo_magazine] loaded."
 	if(user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
-		to_chat(user, "Has [getAmmo()] round\s remaining.")
+		. += "Has [getAmmo()] round\s remaining."
 
 /obj/item/gun/projectile/proc/getAmmo()
 	var/bullets = 0
@@ -355,6 +361,7 @@
 
 /decl/interaction_handler/projectile/remove_silencer
 	name = "Remove Silencer"
+	examine_desc = "remove the silencer"
 
 /decl/interaction_handler/projectile/remove_silencer/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/gun/projectile/gun = target
@@ -362,6 +369,7 @@
 
 /decl/interaction_handler/projectile/unload_ammo
 	name = "Remove Ammunition"
+	examine_desc = "unload the ammunition"
 
 /decl/interaction_handler/projectile/unload_ammo/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/gun/projectile/gun = target

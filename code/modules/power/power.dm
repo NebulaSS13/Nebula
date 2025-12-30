@@ -82,11 +82,11 @@
 
 // attach a wire to a power machine - leads from the turf you are standing on
 //almost never called, overwritten by all power machines but terminal and generator
-/obj/machinery/power/attackby(obj/item/W, mob/user)
+/obj/machinery/power/attackby(obj/item/used_item, mob/user)
 	if((. = ..()))
 		return
-	if(IS_COIL(W))
-		var/obj/item/stack/cable_coil/coil = W
+	if(IS_COIL(used_item))
+		var/obj/item/stack/cable_coil/coil = used_item
 		var/turf/T = user.loc
 		if(!istype(T) || T.density || T.cannot_build_cable())
 			return
@@ -112,8 +112,6 @@
 
 		if(!cable_only && istype(AM,/obj/machinery/power))
 			var/obj/machinery/power/P = AM
-			if(P.powernet == 0)	continue		// exclude APCs which have powernet=0
-
 			if(!unmarked || !P.powernet)		//if unmarked=1 we only return things with no powernet
 				if(d == 0)
 					. += P
@@ -202,8 +200,8 @@
 		PN = power_source
 	else if(istype(power_source,/obj/item/cell))
 		cell = power_source
-	else if(istype(power_source,/obj/machinery/power/apc))
-		var/obj/machinery/power/apc/apc = power_source
+	else if(istype(power_source,/obj/machinery/apc))
+		var/obj/machinery/apc/apc = power_source
 		cell = apc.get_cell()
 		var/obj/machinery/power/terminal/term = apc.terminal()
 		if (term)

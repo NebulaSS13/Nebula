@@ -10,7 +10,9 @@
 	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 
 	icon_state = ICON_STATE_WORLD
-	buckle_pixel_shift = @"{'x':0,'y':0,'z':8}"
+	buckle_pixel_shift = @'{"x":0,"y":0,"z":8}'
+
+	hud_used = /datum/hud/animal
 
 	move_intents = list(
 		/decl/move_intent/walk/animal,
@@ -79,7 +81,6 @@
 	var/return_damage_min
 	var/return_damage_max
 
-	var/performing_delayed_life_action = FALSE
 	var/glowing_eyes = FALSE
 	var/mob_icon_state_flags = 0
 
@@ -113,6 +114,10 @@
 /mob/living/simple_animal/Initialize()
 	. = ..()
 
+	if(isnull(draw_visible_overlays))
+		var/list/defaults = get_default_animal_colours()
+		draw_visible_overlays = defaults?.Copy() // do not mutate static list
+
 	if(length(ability_handlers))
 		for(var/handler in ability_handlers)
 			add_ability_handler(handler)
@@ -126,6 +131,9 @@
 		minbodytemp = 0
 
 	check_mob_icon_states(TRUE)
+	if(length(draw_visible_overlays))
+		update_icon()
+
 	if(isnull(base_animal_type))
 		base_animal_type = type
 	if(LAZYLEN(natural_armor))
@@ -167,16 +175,23 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			mob_icon_state_flags |= MOB_ICON_HAS_PARALYZED_STATE
 		global.simplemob_icon_bitflag_cache[type] = mob_icon_state_flags
 
+/mob/living/simple_animal/proc/add_additional_visible_overlays(list/accumulator)
+	return
+
 /mob/living/simple_animal/refresh_visible_overlays()
 
+	var/list/add_overlays = list()
 	if(length(draw_visible_overlays))
-		var/list/add_overlays = list()
 		for(var/overlay_state in draw_visible_overlays)
 			var/overlay_color = draw_visible_overlays[overlay_state]
 			if(overlay_state == "base")
 				add_overlays += overlay_image(icon, icon_state, overlay_color, RESET_COLOR)
 			else
 				add_overlays += overlay_image(icon, "[icon_state]-[overlay_state]", overlay_color, RESET_COLOR)
+
+	add_additional_visible_overlays(add_overlays)
+
+	if(length(add_overlays))
 		set_current_mob_overlay(HO_SKIN_LAYER, add_overlays)
 	else
 		set_current_mob_overlay(HO_SKIN_LAYER, null)
@@ -270,13 +285,13 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			bodytemperature += ((environment.temperature - bodytemperature) / 5)
 
 	if(bodytemperature < minbodytemp)
-		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 2)
+		SET_HUD_ALERT(src, HUD_FIRE, 2)
 		take_damage(cold_damage_per_tick, BURN)
 	else if(bodytemperature > maxbodytemp)
-		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 1)
+		SET_HUD_ALERT(src, HUD_FIRE, 1)
 		take_damage(heat_damage_per_tick, BURN)
 	else
-		SET_HUD_ALERT(src, /decl/hud_element/condition/fire, 0)
+		SET_HUD_ALERT(src, HUD_FIRE, 0)
 
 	if(!atmos_suitable)
 		take_damage(unsuitable_atmos_damage)
@@ -339,11 +354,11 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		return TRUE
 
-/mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
+/mob/living/simple_animal/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(istype(O, /obj/item/stack/medical))
+	if(istype(used_item, /obj/item/stack/medical))
 		if(stat != DEAD)
-			var/obj/item/stack/medical/MED = O
+			var/obj/item/stack/medical/MED = used_item
 			if(!MED.animal_heal)
 				to_chat(user, SPAN_WARNING("\The [MED] won't help \the [src] at all!"))
 			else if(current_health < get_max_health() && MED.can_use(1))
@@ -426,7 +441,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	return /decl/material/liquid/nutriment
 
 /mob/living/simple_animal/proc/reflect_unarmed_damage(var/mob/living/human/attacker, var/damage_type, var/description)
-	if(attacker.a_intent == I_HURT)
+	if(attacker.check_intent(I_FLAG_HARM))
 		attacker.apply_damage(rand(return_damage_min, return_damage_max), damage_type, attacker.get_active_held_item_slot(), used_weapon = description)
 		if(rand(25))
 			to_chat(attacker, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s [description]!"))
@@ -595,3 +610,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/is_space_movement_permitted(allow_movement = FALSE)
 	return skip_spacemove ? SPACE_MOVE_PERMITTED : ..()
+
+/mob/living/simple_animal/proc/get_default_animal_colour(marking_type)
+	var/list/colors = get_default_animal_colours()
+	return LAZYACCESS(colors, marking_type) // Return null if unset, rather than forcing COLOR_BLACK or such.
+
+/mob/living/simple_animal/proc/get_default_animal_colours()
+	return

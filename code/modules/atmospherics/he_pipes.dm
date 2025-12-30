@@ -1,27 +1,25 @@
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging
-	icon = 'icons/atmos/heat.dmi'
-	icon_state = "11"
-	color = "#404040"
-	pipe_color = "#404040"
-	level = LEVEL_ABOVE_PLATING
-	connect_types = CONNECT_TYPE_HE
+	icon             = 'icons/atmos/heat.dmi'
+	icon_state       = "11"
+	color            = "#404040"
+	pipe_color       = "#404040"
+	level            = LEVEL_ABOVE_PLATING
+	connect_types    = CONNECT_TYPE_HE
 	interact_offline = TRUE //Needs to be set so that pipes don't say they lack power in their description
+	build_icon_state = "he"
+	atom_flags       = 0 // no painting
+	maximum_pressure = 360 ATM
+	fatigue_pressure = 300 ATM
+	can_buckle       = TRUE
+	buckle_lying     = TRUE
+	appearance_flags = KEEP_TOGETHER
+
 	var/initialize_directions_he
 	var/surface = 2	//surface area in m^2
 	var/icon_temperature = T20C //stop small changes in temperature causing an icon refresh
-	build_icon_state = "he"
-	atom_flags = 0 // no painting
-	appearance_flags = KEEP_TOGETHER
-
 	var/thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	var/minimum_temperature_difference = 20
-
-	maximum_pressure = 360 ATM
-	fatigue_pressure = 300 ATM
-
-	can_buckle = 1
-	buckle_lying = 1
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
 	. = ..()
@@ -57,60 +55,62 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/Process()
+
 	if(!parent)
 		..()
+		return
+
+	// Handle pipe heat exchange.
+	var/turf/turf = loc
+	var/datum/gas_mixture/pipe_air = return_air()
+	if(istype(loc, /turf/space))
+		parent.radiate_heat_to_space(surface, 1)
+	else if(istype(turf) && turf.simulated)
+		var/environment_temperature = 0
+		if(turf.blocks_air)
+			environment_temperature = turf.temperature
+		else
+			var/datum/gas_mixture/environment = turf.return_air()
+			environment_temperature = environment?.temperature || 0
+		if(abs(environment_temperature-pipe_air.temperature) > minimum_temperature_difference)
+			parent.temperature_interact(turf, gas_volume, thermal_conductivity)
+
+	// Burn mobs buckled to this pipe.
+	if(buckled_mob)
+		var/hc = pipe_air.heat_capacity()
+		var/avg_temp = (pipe_air.temperature * hc + buckled_mob.bodytemperature * 3500) / (hc + 3500)
+		pipe_air.temperature = avg_temp
+		buckled_mob.bodytemperature = avg_temp
+		var/heat_limit = buckled_mob.get_mob_temperature_threshold(HEAT_LEVEL_3)
+		if(pipe_air.temperature > heat_limit + 1)
+			buckled_mob.apply_damage(4 * log(pipe_air.temperature - heat_limit), BURN, BP_CHEST, used_weapon = "Excessive Heat")
+
+	//fancy radiation glowing
+	if(pipe_air.temperature && (icon_temperature > 500 || pipe_air.temperature > 500)) //start glowing at 500K
+		if(abs(pipe_air.temperature - icon_temperature) > 10)
+			icon_temperature = pipe_air.temperature
+			var/scale = max((icon_temperature - 500) / 1500, 0)
+			var/h_r = heat2color_r(icon_temperature)
+			var/h_g = heat2color_g(icon_temperature)
+			var/h_b = heat2color_b(icon_temperature)
+			if(icon_temperature < 2000) //scale up overlay until 2000K
+				h_r = 64 + (h_r - 64)*scale
+				h_g = 64 + (h_g - 64)*scale
+				h_b = 64 + (h_b - 64)*scale
+			var/scale_color = rgb(h_r, h_g, h_b)
+			var/list/animate_targets = get_above_oo() + src
+			for (var/thing in animate_targets)
+				var/atom/movable/AM = thing
+				animate(AM, color = scale_color, time = 2 SECONDS, easing = SINE_EASING)
+			animate_filter("glow", list(color = scale_color, time = 2 SECONDS, easing = LINEAR_EASING))
+			set_light(min(3, scale*2.5), min(3, scale*2.5), scale_color)
 	else
-		var/turf/turf = loc
-		var/datum/gas_mixture/pipe_air = return_air()
-		if(istype(loc, /turf/space))
-			parent.radiate_heat_to_space(surface, 1)
-		else if(istype(turf) && turf.simulated)
-			var/turf/pipe_turf = loc
-			var/environment_temperature = 0
-			if(pipe_turf.blocks_air)
-				environment_temperature = pipe_turf.temperature
-			else
-				var/datum/gas_mixture/environment = pipe_turf.return_air()
-				environment_temperature = environment.temperature
-			if(abs(environment_temperature-pipe_air.temperature) > minimum_temperature_difference)
-				parent.temperature_interact(pipe_turf, volume, thermal_conductivity)
-
-		if(buckled_mob)
-			var/hc = pipe_air.heat_capacity()
-			var/avg_temp = (pipe_air.temperature * hc + buckled_mob.bodytemperature * 3500) / (hc + 3500)
-			pipe_air.temperature = avg_temp
-			buckled_mob.bodytemperature = avg_temp
-
-			var/heat_limit = 1000
-
-			var/mob/living/human/H = buckled_mob
-			if(istype(H) && H.species)
-				heat_limit = H.get_mob_temperature_threshold(HEAT_LEVEL_3)
-
-			if(pipe_air.temperature > heat_limit + 1)
-				buckled_mob.apply_damage(4 * log(pipe_air.temperature - heat_limit), BURN, BP_CHEST, used_weapon = "Excessive Heat")
+		set_light(0, 0)
 
 		//fancy radiation glowing
 		if(pipe_air.temperature && (icon_temperature > 500 || pipe_air.temperature > 500)) //start glowing at 500K
 			if(abs(pipe_air.temperature - icon_temperature) > 10)
-				icon_temperature = pipe_air.temperature
-				var/scale = max((icon_temperature - 500) / 1500, 0)
-
-				var/h_r = heat2color_r(icon_temperature)
-				var/h_g = heat2color_g(icon_temperature)
-				var/h_b = heat2color_b(icon_temperature)
-
-				if(icon_temperature < 2000) //scale up overlay until 2000K
-					h_r = 64 + (h_r - 64)*scale
-					h_g = 64 + (h_g - 64)*scale
-					h_b = 64 + (h_b - 64)*scale
-				var/scale_color = rgb(h_r, h_g, h_b)
-				var/list/animate_targets = get_above_oo() + src
-				for (var/thing in animate_targets)
-					var/atom/movable/AM = thing
-					animate(AM, color = scale_color, time = 2 SECONDS, easing = SINE_EASING)
-				animate_filter("glow", list(color = scale_color, time = 2 SECONDS, easing = LINEAR_EASING))
-				set_light(min(3, scale*2.5), min(3, scale*2.5), scale_color)
+				animate_heat_glow(pipe_air.temperature)
 		else
 			set_light(0, 0)
 

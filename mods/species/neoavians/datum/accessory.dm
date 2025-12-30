@@ -3,7 +3,7 @@
 	name = "Avian Plumage"
 	icon_state = "avian_default"
 	icon = 'mods/species/neoavians/icons/hair.dmi'
-	species_allowed = list(SPECIES_AVIAN)
+	species_allowed = list(/decl/species/neoavian::uid)
 	color_blend = ICON_MULTIPLY
 	uid = "acc_hair_avian_plumage"
 
@@ -124,7 +124,7 @@
 	icon_state = "beak"
 	body_parts = list(BP_HEAD)
 	icon = 'mods/species/neoavians/icons/markings.dmi'
-	species_allowed = list(SPECIES_AVIAN)
+	species_allowed = list(/decl/species/neoavian::uid)
 	color_blend = ICON_MULTIPLY
 	uid = "acc_marking_avian_beak"
 

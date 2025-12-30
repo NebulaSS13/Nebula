@@ -5,11 +5,10 @@
 		"Engineering" = 1
 	)
 	camera_channels = list(
-		CAMERA_CAMERA_CHANNEL_ENGINEERING
+		CAMERA_CHANNEL_ENGINEERING
 	)
 	software = list(
-		/datum/computer_file/program/power_monitor,
-		/datum/computer_file/program/supermatter_monitor
+		/datum/computer_file/program/power_monitor
 	)
 	supported_upgrades = list(
 		/obj/item/borg/upgrade/rcd
@@ -48,7 +47,6 @@
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/cyborg/aluminium,
 		/obj/item/stack/material/rods/cyborg,
-		/obj/item/stack/material/strut/cyborg,
 		/obj/item/stack/tile/floor/cyborg,
 		/obj/item/stack/tile/roof/cyborg,
 		/obj/item/stack/material/cyborg/glass,
@@ -88,7 +86,6 @@
 		 /obj/item/stack/material/cyborg/steel,
 		 /obj/item/stack/material/cyborg/aluminium,
 		 /obj/item/stack/material/rods/cyborg,
-		 /obj/item/stack/material/strut/cyborg,
 		 /obj/item/stack/tile/floor/cyborg,
 		 /obj/item/stack/tile/roof/cyborg,
 		 /obj/item/stack/material/cyborg/glass/reinforced
@@ -110,7 +107,7 @@
 	var/obj/item/stack/material/cyborg/plasteel/PL = locate() in equipment
 	PL.synths = list(plasteel)
 
-/obj/item/robot_module/engineering/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/engineering/respawn_consumable(var/mob/living/silicon/robot/robot, var/amount)
 	var/obj/item/lightreplacer/LR = locate() in equipment
-	LR.Charge(R, amount)
+	LR.Charge(robot, amount)
 	..()

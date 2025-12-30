@@ -16,7 +16,7 @@
 	return ..()
 
 /datum/computer/file/embedded_program/proc/receive_user_command(command)
-	return FALSE
+	return TOPIC_NOACTION
 
 // Returns all filters on which you want to receive signals
 /datum/computer/file/embedded_program/proc/get_receive_filters(var/for_ui = FALSE)

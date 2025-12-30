@@ -430,7 +430,7 @@
 * Base Test Setup *
 ******************/
 /datum/unit_test/graph_test
-	template = /datum/unit_test/graph_test
+	abstract_type = /datum/unit_test/graph_test
 	async = TRUE
 	var/list/graphs
 
@@ -480,7 +480,7 @@
 /atom/movable/graph_test
 	is_spawnable_type = FALSE
 	var/datum/node/physical/node
-	var/list/neighoursByDirection = list()
+	var/list/neighboursByDirection = list()
 
 /atom/movable/graph_test/Initialize()
 	. = ..()
@@ -489,6 +489,7 @@
 
 /atom/movable/graph_test/Destroy()
 	QDEL_NULL(node)
+	neighboursByDirection.Cut()
 	return ..()
 
 /atom/movable/graph_test/forceMove()
@@ -497,20 +498,21 @@
 
 /atom/movable/graph_test/proc/Connect(atom/movable/graph_test/neighbour)
 	var/direction = get_dir(src, neighbour)
-	neighoursByDirection[num2text(direction)] = neighbour
-	neighbour.neighoursByDirection[num2text(global.flip_dir[direction])] = src
+	neighboursByDirection[num2text(direction)] = neighbour
+	neighbour.neighboursByDirection[num2text(global.flip_dir[direction])] = src
 	node.Connect(neighbour.node)
 
 /atom/movable/graph_test/CheckNodeNeighbours()
 	// This is a lazy setup for ease of debugging
 	// In a practical setup you'd preferably gather a list of neighbours to be disconnected and pass them in a single Disconnect-call
 	// You'd possibly also verify the dir of this and neighbour nodes, to ensure that they're still facing each other properly
-	for(var/direction in neighoursByDirection)
-		var/atom/movable/graph_test/neighbour = neighoursByDirection[direction]
+	for(var/direction in neighboursByDirection)
+		var/atom/movable/graph_test/neighbour = neighboursByDirection[direction]
 		var/turf/expected_loc = get_step(src, text2num(direction))
-		if(neighbour.loc != expected_loc)
+		// can't connect in nullspace
+		if(isnull(neighbour.loc) || neighbour.loc != expected_loc)
 			node.Disconnect(neighbour.node)
-			neighoursByDirection -= direction
+			neighboursByDirection -= direction
 	return TRUE
 
 /datum/graph/testing
@@ -523,7 +525,7 @@
 	var/on_split_was_called
 	var/issues
 
-/datum/graph/testing/New(var/node, var/edges, var/name)
+/datum/graph/testing/New(var/node, var/edges, var/previous_owner, var/name)
 	..()
 	src.name = name || "Graph"
 	issues = list()
@@ -557,8 +559,10 @@
 /datum/graph/testing/proc/CheckExpectations()
 	if(on_check_expectations)
 		issues += DoCheckExpectations(on_check_expectations)
+		QDEL_NULL(on_check_expectations) // stop holding up GC!
 	if(length(split_expectations) && !on_split_was_called)
 		issues += "Had split expectations but OnSplit was not called"
+		QDEL_LIST(split_expectations) // stop holding up GC!
 	if(!length(split_expectations) && on_split_was_called)
 		issues += "Had no split expectations but OnSplit was called"
 	if(expecting_merge != on_merge_was_called)
@@ -574,6 +578,11 @@
 	..()
 	src.expected_nodes = expected_nodes || list()
 	src.expected_edges = expected_edges || list()
+
+/datum/graph_expectation/Destroy(force)
+	expected_nodes.Cut()
+	expected_edges.Cut()
+	return ..()
 
 // Stub for subtype-specific functionality for DoCheckExpectations.
 // Should not access graph.nodes or graph.edges.

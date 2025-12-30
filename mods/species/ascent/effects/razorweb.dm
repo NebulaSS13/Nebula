@@ -13,7 +13,7 @@
 		web.buckle_mob(hit_atom)
 		web.visible_message(SPAN_DANGER("\The [hit_atom] is tangled in \the [web]!"))
 	web.entangle(hit_atom, TRUE)
-	playsound(usr, 'mods/species/ascent/sounds/razorweb_twang.ogg', 50)
+	playsound(src, 'mods/species/ascent/sounds/razorweb_twang.ogg', 50)
 	qdel(src)
 
 // Hey, did you ever see The Cube (1997) directed by Vincenzo Natali?
@@ -32,8 +32,8 @@
 	var/image/gleam
 	var/image/web
 	var/static/species_immunity_list = list(
-		SPECIES_MANTID_ALATE   = TRUE,
-		SPECIES_MANTID_GYNE    = TRUE
+		/decl/species/mantid::uid      = TRUE,
+		/decl/species/mantid/gyne::uid = TRUE
 	)
 
 /obj/effect/razorweb/Destroy()
@@ -68,7 +68,7 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/razorweb/proc/decay()
-	playsound(usr, 'mods/species/ascent/sounds/razorweb_break.ogg', 50)
+	playsound(src, 'mods/species/ascent/sounds/razorweb_break.ogg', 50)
 	qdel_self()
 
 /obj/effect/razorweb/attack_hand(mob/user)
@@ -78,16 +78,16 @@
 	qdel_self()
 	return TRUE
 
-/obj/effect/razorweb/attackby(var/obj/item/thing, var/mob/user)
+/obj/effect/razorweb/attackby(var/obj/item/used_item, var/mob/user)
 
 	var/destroy_self
-	if(thing.get_attack_force(user))
-		visible_message(SPAN_DANGER("\The [user] breaks \the [src] with \the [thing]!"))
+	if(used_item.expend_attack_force(user))
+		visible_message(SPAN_DANGER("\The [user] breaks \the [src] with \the [used_item]!"))
 		destroy_self = TRUE
 
-	if(prob(15) && user.try_unequip(thing))
-		visible_message(SPAN_DANGER("\The [thing] is sliced apart!"))
-		qdel(thing)
+	if(prob(15) && user.try_unequip(used_item))
+		visible_message(SPAN_DANGER("\The [used_item] is sliced apart!"))
+		qdel(used_item)
 
 	if(destroy_self)
 		qdel(src)
@@ -133,7 +133,7 @@
 	var/mob/living/human/H
 	if(ishuman(L))
 		H = L
-		if(species_immunity_list[H.species.name])
+		if(species_immunity_list[H.species.uid])
 			return
 
 	if(!silent)
@@ -163,8 +163,8 @@
 
 	if(prob(break_chance))
 		visible_message(SPAN_DANGER("\The [src] breaks apart!"))
-		playsound(usr, 'mods/species/ascent/sounds/razorweb_break.ogg', 50)
+		playsound(src, 'mods/species/ascent/sounds/razorweb_break.ogg', 50)
 		qdel(src)
 	else
-		playsound(usr, 'mods/species/ascent/sounds/razorweb_twang.ogg', 50)
+		playsound(src, 'mods/species/ascent/sounds/razorweb_twang.ogg', 50)
 		break_chance = min(break_chance+10, 100)

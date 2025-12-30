@@ -26,12 +26,12 @@
 	// update icon/harvestability as appropriate
 */
 
-/obj/structure/flora/plant/examine(mob/user, distance)
+/obj/structure/flora/plant/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(dead)
-		to_chat(user, SPAN_OCCULT("It is dead."))
+		. += SPAN_OCCULT("It is dead.")
 	else if(harvestable)
-		to_chat(user, SPAN_NOTICE("You can see [harvestable] harvestable fruit\s."))
+		. += SPAN_NOTICE("You can see [harvestable] harvestable fruit\s.")
 
 /obj/structure/flora/plant/dismantle_structure(mob/user)
 	if(plant)
@@ -73,15 +73,15 @@
 	reset_color()
 	set_overlays(plant.get_appearance(dead = dead, growth_stage = growth_stage, can_harvest = !!harvestable))
 
-/obj/structure/flora/plant/attackby(obj/item/O, mob/user)
+/obj/structure/flora/plant/attackby(obj/item/used_item, mob/user)
 
-	if(IS_SHOVEL(O) || IS_HATCHET(O))
-		user.visible_message(SPAN_NOTICE("\The [user] uproots \the [src] with \the [O]!"))
+	if(IS_SHOVEL(used_item) || IS_HATCHET(used_item))
+		user.visible_message(SPAN_NOTICE("\The [user] uproots \the [src] with \the [used_item]!"))
 		physically_destroyed()
 		return TRUE
 
 	// Hydrotray boilerplate for taking samples.
-	if(O.edge && O.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
+	if(used_item.has_edge() && used_item.w_class < ITEM_SIZE_NORMAL && !user.check_intent(I_FLAG_HARM))
 		if(sampled)
 			to_chat(user, SPAN_WARNING("There's no bits that can be used for a sampling left."))
 			return TRUE

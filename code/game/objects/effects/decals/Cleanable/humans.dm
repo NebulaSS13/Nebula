@@ -1,4 +1,3 @@
-#define DRYING_TIME 5 MINUTES //for 1 unit of depth in puddle (amount var)
 #define BLOOD_SIZE_SMALL     1
 #define BLOOD_SIZE_MEDIUM    2
 #define BLOOD_SIZE_BIG       3
@@ -16,11 +15,13 @@
 	persistent = TRUE
 	appearance_flags = NO_CLIENT_COLOR
 	cleanable_scent = "blood"
-	scent_descriptor = SCENT_DESC_ODOR
+	scent_descriptor = "odour"
 
 	var/base_icon = 'icons/effects/blood.dmi'
 	var/basecolor=COLOR_BLOOD_HUMAN // Color when wet.
 	var/amount = 5
+	//for 1 unit of depth in puddle (amount var)
+	var/time_to_dry = 5 MINUTES
 	var/drytime
 	var/dryname = "dried blood"
 	var/drydesc = "It's dry and crusty. Someone isn't doing their job."
@@ -29,19 +30,21 @@
 	var/chemical = /decl/material/liquid/blood
 
 /obj/effect/decal/cleanable/blood/reveal_blood()
-	if(!fluorescent)
+	if(ispath(chemical, /decl/material/liquid/blood) && !fluorescent)
 		fluorescent = FLUORESCENT_GLOWS
 		basecolor = COLOR_LUMINOL
 		update_icon()
 
 /obj/effect/decal/cleanable/blood/clean(clean_forensics = TRUE)
-	fluorescent = FALSE
-	if(invisibility != INVISIBILITY_ABSTRACT)
-		set_invisibility(INVISIBILITY_ABSTRACT)
-		amount = 0
-		STOP_PROCESSING(SSobj, src)
-		remove_extension(src, /datum/extension/scent)
-	. = ..(clean_forensics = FALSE)
+	if(ispath(chemical, /decl/material/liquid/blood))
+		clean_forensics = FALSE
+		fluorescent = FALSE
+		if(invisibility != INVISIBILITY_ABSTRACT)
+			set_invisibility(INVISIBILITY_ABSTRACT)
+			amount = 0
+			STOP_PROCESSING(SSobj, src)
+			remove_extension(src, /datum/extension/scent)
+	. = ..(clean_forensics)
 
 /obj/effect/decal/cleanable/blood/hide()
 	return
@@ -50,8 +53,11 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/effect/decal/cleanable/blood/Initialize(mapload)
+// new_chemical is a material typepath, or null
+/obj/effect/decal/cleanable/blood/Initialize(ml, _age, new_chemical)
 	. = ..()
+	if(!isnull(new_chemical))
+		chemical = new_chemical
 	if(merge_with_blood())
 		return INITIALIZE_HINT_QDEL
 	start_drying()
@@ -61,16 +67,31 @@
 	if(!isturf(loc) || blood_size == BLOOD_SIZE_NO_MERGE)
 		return FALSE
 	for(var/obj/effect/decal/cleanable/blood/B in loc)
-		if(B != src && B.blood_size != BLOOD_SIZE_NO_MERGE)
-			if(B.blood_DNA)
-				blood_size = BLOOD_SIZE_NO_MERGE
-				B.blood_DNA |= blood_DNA.Copy()
-			B.alpha = initial(B.alpha) // reset rain-based fading due to more drips
-			return TRUE
+		if(B == src)
+			continue
+		if(B.blood_size == BLOOD_SIZE_NO_MERGE)
+			continue
+		if(B.invisibility >= INVISIBILITY_ABSTRACT) // has been cleaned
+			continue
+		if(B.chemical != chemical) // don't mix blood and oil or oil and mud etc
+			continue // todo: refactor to make bloody steps use reagents and track data/size/amount on there?
+		if(B.blood_DNA)
+			blood_size = BLOOD_SIZE_NO_MERGE
+			B.blood_DNA |= blood_DNA.Copy()
+		B.alpha = initial(B.alpha) // reset rain-based fading due to more drips
+		return TRUE
 	return FALSE
 
 /obj/effect/decal/cleanable/blood/proc/start_drying()
-	drytime = world.time + DRYING_TIME * (amount+1)
+	var/decl/material/our_chemical = GET_DECL(chemical)
+	time_to_dry = our_chemical.get_time_to_dry_stain(src)
+	switch(time_to_dry)
+		if(0) // dry instantly
+			dry()
+			return
+		if(-INFINITY to 0) // don't even bother trying to dry this
+			return
+	drytime = world.time + time_to_dry * (amount+1)
 	update_icon()
 	START_PROCESSING(SSobj, src)
 
@@ -91,29 +112,18 @@
 /obj/effect/decal/cleanable/blood/Crossed(atom/movable/AM)
 	if(!isliving(AM) || amount < 1)
 		return
-
-	var/mob/living/M = AM
-	var/obj/item/organ/external/l_foot = GET_EXTERNAL_ORGAN(M, BP_L_FOOT)
-	var/obj/item/organ/external/r_foot = GET_EXTERNAL_ORGAN(M, BP_R_FOOT)
-	var/hasfeet = l_foot && r_foot
-
-	var/transferred_data = blood_data ? blood_data[pick(blood_data)] : null
-	var/obj/item/clothing/shoes/shoes = M.get_equipped_item(slot_shoes_str)
-	if(istype(shoes) && !M.buckled)//Adding blood to shoes
-		shoes.add_coating(chemical, amount, transferred_data)
-	else if (hasfeet)//Or feet
-		if(l_foot)
-			l_foot.add_coating(chemical, amount, transferred_data)
-		if(r_foot)
-			r_foot.add_coating(chemical, amount, transferred_data)
-	else if (M.buckled && istype(M.buckled, /obj/structure/bed/chair/wheelchair))
-		var/obj/structure/bed/chair/wheelchair/W = M.buckled
-		W.bloodiness = 4
-
-	M.update_equipment_overlay(slot_shoes_str)
+	var/mob/living/walker = AM
+	if(istype(walker.buckled, /obj/structure/chair/wheelchair))
+		var/obj/structure/chair/wheelchair/wheelchair = walker.buckled
+		wheelchair.bloodiness = 4
+	else
+		walker.add_walking_contaminant(chemical, amount, (blood_data ? blood_data[pick(blood_data)] : null))
 	amount--
 
 /obj/effect/decal/cleanable/blood/proc/dry()
+	var/decl/material/our_chemical = GET_DECL(chemical)
+	if(our_chemical.handle_stain_dry(src))
+		return TRUE // prevent additional drying handling; this includes preventing processing, so be careful
 	name = dryname
 	desc = drydesc
 	color = adjust_brightness(color, -50)
@@ -121,6 +131,7 @@
 	blood_data = null
 	remove_extension(src, /datum/extension/scent)
 	STOP_PROCESSING(SSobj, src)
+	return FALSE
 
 /obj/effect/decal/cleanable/blood/attack_hand(mob/user)
 	if(!amount || !length(blood_data) || !ishuman(user))
@@ -185,17 +196,17 @@
 /obj/effect/decal/cleanable/blood/writing/Initialize()
 	. = ..()
 	if(LAZYLEN(random_icon_states))
-		for(var/obj/effect/decal/cleanable/blood/writing/W in loc)
-			random_icon_states.Remove(W.icon_state)
+		for(var/obj/effect/decal/cleanable/blood/writing/writing in loc)
+			random_icon_states.Remove(writing.icon_state)
 		icon_state = pick(random_icon_states)
 	else
 		icon_state = "writing1"
 
-/obj/effect/decal/cleanable/blood/writing/examine(mob/user)
+/obj/effect/decal/cleanable/blood/writing/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	var/processed_message = user.handle_reading_literacy(user, message)
 	if(processed_message)
-		to_chat(user, "It reads: <font color='[basecolor]'>\"[message]\"</font>")
+		. += "It reads: <font color='[basecolor]'>\"[message]\"</font>"
 
 /obj/effect/decal/cleanable/blood/gibs
 	name = "gibs"
@@ -247,7 +258,7 @@
 		for (var/i in 1 to pick(1, 200; 2, 150; 3, 50; 4))
 			sleep(3)
 			if (i > 1)
-				var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(loc)
+				var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(loc, null, chemical)
 				b.basecolor = src.basecolor
 				b.update_icon()
 			if (step_to(src, get_step(src, direction), 0))

@@ -4,12 +4,9 @@
 	icon = 'icons/obj/bike.dmi'
 	icon_state = "bike_off"
 	dir = SOUTH
-
 	load_item_visible = 1
 	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
-	current_health = 100
 	max_health = 100
-
 	locked = 0
 	fire_dam_coeff = 0.6
 	brute_dam_coeff = 0.5
@@ -63,7 +60,7 @@
 		usr.visible_message("\The [usr] puts up \the [src]'s kickstand.")
 	else
 		if(isspaceturf(src.loc))
-			to_chat(usr, "<span class='warning'> You don't think kickstands work in space...</span>")
+			to_chat(usr, "<span class='warning'>You don't think kickstands work in space...</span>")
 			return
 		usr.visible_message("\The [usr] puts down \the [src]'s kickstand.")
 
@@ -92,8 +89,8 @@
 		qdel(trail)
 	trail = null
 
-/obj/vehicle/bike/load(var/atom/movable/C)
-	var/mob/living/M = C
+/obj/vehicle/bike/load(var/atom/movable/loading)
+	var/mob/living/M = loading
 	if(!istype(M)) return 0
 	if(M.buckled || M.anchored || M.restrained() || !Adjacent(M) || !M.Adjacent(src))
 		return 0
@@ -104,21 +101,21 @@
 		engine.emp_act(severity)
 	..()
 
-/obj/vehicle/bike/insert_cell(var/obj/item/cell/C, var/mob/living/human/H)
+/obj/vehicle/bike/insert_cell(var/obj/item/cell/cell, var/mob/living/human/H)
 	return
 
-/obj/vehicle/bike/attackby(obj/item/W, mob/user)
+/obj/vehicle/bike/attackby(obj/item/used_item, mob/user)
 	if(open)
-		if(istype(W, /obj/item/engine))
+		if(istype(used_item, /obj/item/engine))
 			if(engine)
 				to_chat(user, "<span class='warning'>There is already an engine block in \the [src].</span>")
 				return TRUE
-			user.visible_message("<span class='warning'>\The [user] installs \the [W] into \the [src].</span>")
-			load_engine(W)
+			user.visible_message("<span class='warning'>\The [user] installs \the [used_item] into \the [src].</span>")
+			load_engine(used_item)
 			return TRUE
-		else if(engine && engine.attackby(W,user))
+		else if(engine && engine.attackby(used_item,user))
 			return TRUE
-		else if(IS_CROWBAR(W) && engine)
+		else if(IS_CROWBAR(used_item) && engine)
 			to_chat(user, "You pop out \the [engine] from \the [src].")
 			unload_engine()
 			return TRUE
@@ -148,19 +145,19 @@
 	return Move(get_step(src, direction))
 
 /obj/vehicle/bike/Move(var/turf/destination)
-	if(kickstand || (world.time <= l_move_time + move_delay)) return
+	if(kickstand || (world.time <= l_move_time + move_delay)) return FALSE
 	//these things like space, not turf. Dragging shouldn't weigh you down.
 	if(isspaceturf(destination))
 		if(!space_speed)
-			return 0
+			return FALSE
 		move_delay = space_speed
 	else
 		if(!land_speed)
-			return 0
+			return FALSE
 		move_delay = land_speed
 	if(!engine || !engine.use_power())
 		turn_off()
-		return 0
+		return FALSE
 	return ..()
 
 /obj/vehicle/bike/turn_on()

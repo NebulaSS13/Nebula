@@ -7,6 +7,7 @@
 /decl/interaction_handler/clothing_toggle/rolled_sleeves
 	name = "Roll Sleeves Up Or Down"
 	state_decl_type = /decl/clothing_state_modifier/rolled_sleeves
+	examine_desc = "roll $TARGET_THEIR$ sleeves up or down"
 
 /obj/item/clothing/proc/toggle_sleeves_verb()
 

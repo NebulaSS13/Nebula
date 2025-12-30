@@ -113,10 +113,10 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 /obj/machinery/computer/ship/sensors/Destroy()
 	sensor_ref = null
 	if(LAZYLEN(viewers))
-		for(var/weakref/W in viewers)
-			var/M = W.resolve()
+		for(var/weakref/viewer_ref in viewers)
+			var/M = viewer_ref.resolve()
 			if(M)
 				INVOKE_ASYNC(PROC_REF(unlook), M)
 				if(linked)
-					LAZYREMOVE(linked.navigation_viewers, W)
+					LAZYREMOVE(linked.navigation_viewers, viewer_ref)
 	. = ..()

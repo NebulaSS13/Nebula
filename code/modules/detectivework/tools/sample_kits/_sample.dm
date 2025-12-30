@@ -19,10 +19,10 @@
 	. = ..()
 	QDEL_NULL_LIST(evidence)
 
-/obj/item/forensics/sample/examine(mob/user, distance)
+/obj/item/forensics/sample/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1 && object)
-		to_chat(user, "The label says: '[object]'.")
+		. += "The label says: '[object]'."
 
 /obj/item/forensics/sample/proc/copy_evidence(var/atom/supplied)
 	var/datum/extension/forensic_evidence/forensics = get_extension(supplied, /datum/extension/forensic_evidence)
@@ -49,9 +49,9 @@
 /obj/item/forensics/sample/proc/merge_evidence_list(var/list/new_evidence)
 	LAZYDISTINCTADD(evidence, new_evidence)
 
-/obj/item/forensics/sample/attackby(var/obj/O, var/mob/user)
-	if(O.type == src.type)
-		if(user.try_unequip(O) && merge_evidence(O, user))
-			qdel(O)
+/obj/item/forensics/sample/attackby(var/obj/used_item, var/mob/user)
+	if(used_item.type == src.type)
+		if(user.try_unequip(used_item) && merge_evidence(used_item, user))
+			qdel(used_item)
 		return 1
 	return ..()

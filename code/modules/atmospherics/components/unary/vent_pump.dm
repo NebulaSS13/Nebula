@@ -11,8 +11,8 @@
 	icon = 'icons/atmos/vent_pump.dmi'
 	icon_state = "map_vent"
 
-	name = "Air Vent"
-	desc = "Has a valve and pump attached to it."
+	name = "air vent"
+	desc = "A vent that moves air into or out of the attached pipe system, and uses a valve and pump to prevent backflow."
 	use_power = POWER_USE_OFF
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 30000			// 30000 W ~ 40 HP
@@ -85,7 +85,7 @@
 			update_name()
 			events_repository.register(/decl/observ/name_set, A, src, PROC_REF(change_area_name))
 	. = ..()
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
+	air_contents.total_volume = ATMOS_DEFAULT_VOLUME_PUMP
 	update_sound()
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
@@ -160,6 +160,7 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "large air vent"
+	desc = "A high-volume vent that moves lots of air into or out of the attached pipe system, and uses a valve and pump to prevent backflow."
 	power_channel = EQUIP
 	power_rating = 45000
 	base_type = /obj/machinery/atmospherics/unary/vent_pump/high_volume/buildable
@@ -169,7 +170,7 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/Initialize()
 	. = ..()
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
+	air_contents.total_volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
 /obj/machinery/atmospherics/unary/vent_pump/on_update_icon()
 	var/visible_directions = build_device_underlays()
@@ -222,7 +223,7 @@
 			power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
 		else //external -> internal
 			var/datum/pipe_network/network = network_in_dir(dir)
-			transfer_moles = calculate_transfer_moles(environment, air_contents, pressure_delta, network?.volume) / environment.group_multiplier // limit it to just one turf's worth of gas per tick
+			transfer_moles = calculate_transfer_moles(environment, air_contents, pressure_delta, network?.total_volume) / environment.group_multiplier // limit it to just one turf's worth of gas per tick
 			power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
 
 	else
@@ -277,16 +278,16 @@
 	. = ..()
 	toggle_input_toggle()
 
-/obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
-	if(IS_WELDER(W))
+/obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/used_item, mob/user)
+	if(IS_WELDER(used_item))
 
-		var/obj/item/weldingtool/WT = W
+		var/obj/item/weldingtool/welder = used_item
 
-		if(!WT.isOn())
+		if(!welder.isOn())
 			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
 			return 1
 
-		if(!WT.weld(0,user))
+		if(!welder.weld(0,user))
 			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 			return 1
 
@@ -300,7 +301,7 @@
 		if(!src)
 			return 1
 
-		if(!WT.isOn())
+		if(!welder.isOn())
 			to_chat(user, "<span class='notice'>The welding tool needs to be on to finish this task.</span>")
 			return 1
 
@@ -311,7 +312,7 @@
 			"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
 			"You hear welding.")
 		return 1
-	if(IS_MULTITOOL(W))
+	if(IS_MULTITOOL(used_item))
 		var/datum/browser/written_digital/popup = new(user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
 		popup.set_content(jointext(get_console_data(),"<br>"))
 		popup.open()
@@ -319,14 +320,14 @@
 
 	return ..()
 
-/obj/machinery/atmospherics/unary/vent_pump/examine(mob/user, distance)
+/obj/machinery/atmospherics/unary/vent_pump/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W.")
+		. += "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W."
 	else
-		to_chat(user, "You are too far away to read the gauge.")
+		. += "You are too far away to read the gauge."
 	if(welded)
-		to_chat(user, "It seems welded shut.")
+		. += "It seems welded shut."
 
 /obj/machinery/atmospherics/unary/vent_pump/cannot_transition_to(state_path, mob/user)
 	if(state_path == /decl/machine_construction/default/deconstructed)
@@ -356,7 +357,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if((. = ..()))
 		return
-	if(href_list["switchMode"])
+	if(href_list["switchMode"]) // todo: this could easily be refhacked if you don't have a multitool
 		toggle_pump_dir()
 		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
 		return TOPIC_REFRESH
@@ -367,7 +368,7 @@
 	desc = "The pump mode of the vent. Expected values are \"siphon\" or \"release\"."
 	can_write = TRUE
 	has_updates = TRUE
-	var_type = IC_FORMAT_STRING
+	var_type = VAR_FORMAT_STRING
 
 /decl/public_access/public_variable/pump_dir/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
 	return machine.pump_direction ? "release" : "siphon"
@@ -385,7 +386,7 @@
 	desc = "Numerical codes for whether the pump checks internal or internal pressure (or both) prior to operating. Can also be supplied the string keyword \"default\"."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_ANY
+	var_type = VAR_FORMAT_ANY
 
 /decl/public_access/public_variable/pump_checks/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
 	return machine.pressure_checks
@@ -404,7 +405,7 @@
 	desc = "The bound on internal pressure used in checks (a number). When writing, can be supplied the string keyword \"default\" instead."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_ANY
+	var_type = VAR_FORMAT_ANY
 
 /decl/public_access/public_variable/pressure_bound/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
 	return machine.internal_pressure_bound
@@ -561,7 +562,7 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/engine/Initialize()
 	. = ..()
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500 //meant to match air injector
+	air_contents.total_volume = ATMOS_DEFAULT_VOLUME_PUMP + 500 //meant to match air injector
 
 /obj/machinery/atmospherics/unary/vent_pump/power_change()
 	. = ..()

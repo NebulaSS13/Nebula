@@ -65,4 +65,4 @@
 /datum/goal/achievement/specific_object/pet/update_strings()
 	..()
 	var/mob/animal = object_path
-	description = "Pet \a [initial(animal.name)]."
+	description = "Pet \a [initial(animal.name)]." // probably best not to use the atom info repository for this, lest we get 'Pet a monkey (666).'

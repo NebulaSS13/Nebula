@@ -11,4 +11,4 @@
 /decl/outfit/job/shaded_hills/shrine/keeper
 	name    = "Shaded Hills - Shrine Keeper"
 	suit    = /obj/item/clothing/suit/mantle
-	mask    = /obj/item/clothing/neck/necklace/prayer_beads/basalt
+	mask    = /obj/item/clothing/neck/prayer_beads/basalt

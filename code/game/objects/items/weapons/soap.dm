@@ -14,8 +14,9 @@
 	material = /decl/material/liquid/cleaner/soap
 	max_health = 5
 	_base_attack_force = 0
-	var/key_data
+	chem_volume = SOAP_MAX_VOLUME
 
+	var/key_data
 	var/list/valid_colors = list(COLOR_GREEN_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_BROWN, COLOR_PALE_PINK, COLOR_PALE_BTL_GREEN, COLOR_OFF_WHITE, COLOR_GRAY40, COLOR_GOLD)
 	var/list/valid_scents = list("fresh air", "cinnamon", "mint", "cocoa", "lavender", "an ocean breeze", "a summer garden", "vanilla", "cheap perfume")
 	var/list/scent_intensity = list("faintly", "strongly", "overbearingly")
@@ -31,16 +32,11 @@
 /obj/item/soap/crafted/generate_icon()
 	return
 
-/obj/item/soap/initialize_reagents(populate = TRUE)
-	create_reagents(SOAP_MAX_VOLUME)
-	. = ..()
-
 /obj/item/soap/populate_reagents()
 	wet()
 
 /obj/item/soap/Initialize()
 	. = ..()
-	initialize_reagents()
 	generate_icon()
 
 /obj/item/soap/proc/generate_icon()
@@ -54,7 +50,7 @@
 	update_icon()
 
 /obj/item/soap/proc/wet()
-	add_to_reagents(/decl/material/liquid/cleaner/soap, SOAP_CLEANER_ON_WET)
+	add_to_reagents(/decl/material/liquid/cleaner/soap, SOAP_CLEANER_ON_WET, phase = MAT_PHASE_LIQUID)
 
 /obj/item/soap/Crossed(atom/movable/AM)
 	var/mob/living/victim = AM
@@ -72,7 +68,7 @@
 		wet()
 		return TRUE
 
-	if(reagents?.total_volume < 1)
+	if(REAGENT_TOTAL_VOLUME(reagents) < 1)
 		to_chat(user, SPAN_WARNING("\The [src] is too dry to clean \the [target]."))
 		return TRUE
 
@@ -81,13 +77,13 @@
 		if(!isturf(target))
 			return ..()
 		user.visible_message(SPAN_NOTICE("\The [user] starts scrubbing \the [target]."))
-		if(!do_after(user, 8 SECONDS, target) && reagents?.total_volume)
+		if(!do_after(user, 8 SECONDS, target) && REAGENT_TOTAL_VOLUME(reagents))
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You scrub \the [target] clean."))
 	else if(istype(target,/obj/effect/decal/cleanable))
-		to_chat(user, SPAN_NOTICE("You scrub \the [target.name] out."))
+		to_chat(user, SPAN_NOTICE("You scrub \the [target] out."))
 	else
-		to_chat(user, SPAN_NOTICE("You clean \the [target.name]."))
+		to_chat(user, SPAN_NOTICE("You clean \the [target]."))
 
 	reagents.touch_atom(target)
 	reagents.remove_any(1)
@@ -96,28 +92,28 @@
 
 //attack_as_weapon
 /obj/item/soap/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if(ishuman(target) && user?.a_intent != I_HURT)
+	if(ishuman(target) && !user?.check_intent(I_FLAG_HARM))
 		var/mob/living/human/victim = target
 		if(user.get_target_zone() == BP_MOUTH && victim.check_has_mouth())
 			user.visible_message(SPAN_DANGER("\The [user] washes \the [target]'s mouth out with soap!"))
 			if(reagents)
-				reagents.trans_to_mob(target, reagents.total_volume / 2, CHEM_INGEST)
+				reagents.trans_to_mob(target, REAGENT_TOTAL_VOLUME(reagents) / 2, CHEM_INGEST)
 		else
 			user.visible_message(SPAN_NOTICE("\The [user] cleans \the [target]."))
 			if(reagents)
-				reagents.trans_to(target, reagents.total_volume / 8)
+				reagents.trans_to(target, REAGENT_TOTAL_VOLUME(reagents) / 8)
 			target.clean()
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //prevent spam
 		return TRUE
 	return ..()
 
-/obj/item/soap/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/key))
+/obj/item/soap/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/key))
 		if(key_data)
 			to_chat(user, SPAN_WARNING("\The [src] already has a key imprint."))
 		else
-			to_chat(user, SPAN_NOTICE("You imprint \the [I] into \the [src]."))
-			var/obj/item/key/K = I
+			to_chat(user, SPAN_NOTICE("You imprint \the [used_item] into \the [src]."))
+			var/obj/item/key/K = used_item
 			key_data = K.key_data
 			update_icon()
 		return TRUE

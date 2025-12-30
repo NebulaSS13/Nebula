@@ -2,18 +2,18 @@
 // Sticky Note Pad
 ////////////////////////////////////////////////
 /obj/item/sticky_pad
-	name               = "sticky note pad"
-	desc               = "A pad of densely packed sticky notes."
-	color              = COLOR_YELLOW
-	icon               = 'icons/obj/stickynotes.dmi'
-	icon_state         = "pad_full"
-	item_state         = "paper"
-	w_class            = ITEM_SIZE_SMALL
-	material           = /decl/material/solid/organic/paper
-	var/papers         = 50
-	var/tmp/max_papers = 50
-	var/paper_type     = /obj/item/paper/sticky
-	var/obj/item/paper/top                        //The instantiated paper on the top of the pad, if there's one
+	name                 = "sticky note pad"
+	desc                 = "A pad of densely packed sticky notes."
+	color                = COLOR_YELLOW
+	icon                 = 'icons/obj/stickynotes.dmi'
+	icon_state           = "pad_full"
+	item_state           = "paper"
+	w_class              = ITEM_SIZE_SMALL
+	material             = /decl/material/solid/organic/paper
+	var/const/max_papers = 50
+	var/papers           = max_papers
+	var/paper_type       = /obj/item/paper/sticky
+	var/obj/item/paper/top //The instantiated paper on the top of the pad, if there's one
 
 /obj/item/sticky_pad/Initialize(ml, material_key)
 	. = ..()
@@ -35,7 +35,7 @@
 	. = ..()
 	if(papers <= 15)
 		icon_state = "pad_empty"
-	else if(papers <= 50)
+	else if(papers <= max_papers)
 		icon_state = "pad_used"
 	else
 		icon_state = "pad_full"
@@ -43,24 +43,27 @@
 	if(top?.info)
 		icon_state = "[icon_state]_writing"
 
-/obj/item/sticky_pad/attackby(var/obj/item/thing, var/mob/user)
-	if(IS_PEN(thing) || istype(thing, /obj/item/stamp))
-		. = top?.attackby(thing, user)
+/obj/item/sticky_pad/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_PEN(used_item) || istype(used_item, /obj/item/stamp))
+		. = top?.attackby(used_item, user)
 		update_icon()
 		return .
 	return ..()
 
-/obj/item/sticky_pad/examine(mob/user)
+/obj/item/sticky_pad/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, SPAN_NOTICE("It has [papers] sticky note\s left."))
-	to_chat(user, SPAN_NOTICE("You can click it on grab intent to pick it up."))
+	. += SPAN_NOTICE("It has [papers] sticky note\s left.")
+
+/obj/item/sticky_pad/get_examine_hints(mob/user, distance, infix, suffix)
+	. = ..()
+	LAZYADD(., SPAN_NOTICE("You can click it on grab intent to pick it up."))
 
 /obj/item/sticky_pad/dragged_onto(mob/user)
 	user.put_in_hands(top)
 	. = ..()
 
 /obj/item/sticky_pad/attack_hand(var/mob/user)
-	if(user.a_intent == I_GRAB)
+	if(user.check_intent(I_FLAG_GRAB))
 		return ..()
 	if(!top)
 		return TRUE

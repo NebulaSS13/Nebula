@@ -21,19 +21,20 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/proc/get_surgery_overlay_icon()
 	if(limb_flags & ORGAN_FLAG_SKELETAL)
 		return null
-	if(BP_IS_PROSTHETIC(src))
-		return null
-	return species?.get_surgery_overlay_icon(owner)
+	return bodytype?.get_surgery_overlay_icon(owner)
 
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/human/human)
 	_icon_cache_key = null
 	skin_tone = null
 	skin_colour = null
+	var/decl/bodytype/icon_bodytype = get_organ_appearance_bodytype()
+	if(!icon_bodytype)
+		return
 	// This used to do a bodytype set but that was *really really bad.* Things that need that should do it themselves.
-	skin_blend = bodytype.limb_blend
-	if(!isnull(human.skin_tone) && bodytype?.appearance_flags & HAS_A_SKIN_TONE)
+	skin_blend = icon_bodytype.limb_blend
+	if(!isnull(human.skin_tone) && (icon_bodytype.appearance_flags & HAS_A_SKIN_TONE))
 		skin_tone = human.skin_tone
-	if(bodytype.appearance_flags & HAS_SKIN_COLOR)
+	if(icon_bodytype.appearance_flags & HAS_SKIN_COLOR)
 		skin_colour = human.get_skin_colour()
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/human/human)
@@ -42,27 +43,40 @@ var/global/list/limb_icon_cache = list()
 	if(eyes) eyes.update_colour()
 
 /obj/item/organ/external/head/on_remove_effects(mob/living/last_owner)
-	update_icon(1)
+	update_icon()
 	if(last_owner)
 		SetName("[last_owner.real_name]'s head")
 		addtimer(CALLBACK(last_owner, TYPE_PROC_REF(/mob, update_hair)), 1, TIMER_UNIQUE)
 	return ..()
 
+/obj/item/organ/external/set_organ_appearance_bodytype(decl/bodytype/new_bodytype, update_sprite_accessories = TRUE, skip_owner_update = FALSE)
+	. = ..()
+	if(.)
+		if(update_sprite_accessories)
+			sanitize_sprite_accessories(skip_update = TRUE)
+		_icon_cache_key = null
+		get_icon_for_bodytype()
+		update_icon()
+		if(owner && !skip_owner_update)
+			owner.update_body()
+
 /obj/item/organ/external/proc/update_limb_icon_file()
-	if(!bodytype) // This should not happen.
+	var/decl/bodytype/icon_bodytype = get_organ_appearance_bodytype()
+	if(!icon_bodytype) // This should not happen.
 		icon = initial(icon)
 	else if(limb_flags & ORGAN_FLAG_SKELETAL)
-		icon = bodytype.get_skeletal_icon(owner)
+		icon = icon_bodytype.get_skeletal_icon(owner)
 	else if(!BP_IS_PROSTHETIC(src) && (status & ORGAN_MUTATED))
-		icon = bodytype.get_base_icon(owner, get_deform = TRUE)
+		icon = icon_bodytype.get_base_icon(owner, get_deform = TRUE)
 	else
-		icon = bodytype.get_base_icon(owner)
+		icon = icon_bodytype.get_base_icon(owner)
 
 var/global/list/organ_icon_cache = list()
 /obj/item/organ/external/proc/generate_mob_icon()
 
 	// Generate base icon with colour and tone.
-	var/icon/ret = bodytype.apply_limb_colouration(src, new /icon(icon, icon_state))
+	var/decl/bodytype/icon_bodytype = get_organ_appearance_bodytype()
+	var/icon/ret = icon_bodytype.apply_limb_colouration(src, new /icon(icon, icon_state))
 	if(limb_flags & ORGAN_FLAG_SKELETAL)
 		global.organ_icon_cache[_icon_cache_key] = ret
 		return ret
@@ -77,7 +91,7 @@ var/global/list/organ_icon_cache = list()
 		else
 			ret.Blend(rgb(-skin_tone,  -skin_tone,  -skin_tone), ICON_SUBTRACT)
 
-	if((bodytype.appearance_flags & HAS_SKIN_COLOR) && skin_colour)
+	if((icon_bodytype.appearance_flags & HAS_SKIN_COLOR) && skin_colour)
 		ret.Blend(skin_colour, skin_blend)
 
 	// Body markings, hair, lips, etc.
@@ -95,7 +109,7 @@ var/global/list/organ_icon_cache = list()
 	global.organ_icon_cache[_icon_cache_key] = ret
 	return ret
 
-/obj/item/organ/external/proc/get_mob_overlays()
+/obj/item/organ/external/proc/get_limb_mob_overlays()
 	for(var/accessory_category in _sprite_accessories)
 		var/list/draw_accessories = _sprite_accessories[accessory_category]
 		for(var/accessory in draw_accessories)
@@ -113,7 +127,7 @@ var/global/list/organ_icon_cache = list()
 
 /obj/item/organ/external/proc/get_icon_cache_key_components()
 
-	. = list("[icon_state]_[species.name]_[bodytype?.name || "BAD_BODYTYPE"]_[render_alpha]_[icon]")
+	. = list("[icon_state]_[species.uid]_[get_organ_appearance_bodytype()?.uid || "BAD_BODYTYPE"]_[render_alpha]_[icon]")
 
 	// Skeletons don't care about most icon appearance stuff.
 	if(limb_flags & ORGAN_FLAG_SKELETAL)
@@ -193,7 +207,7 @@ var/global/list/organ_icon_cache = list()
 
 	var/list/refresh_accessories
 	if(accessory_metadata)
-		if(!accessory_decl.accessory_is_available(owner, species, bodytype, (owner ? owner.get_traits() : FALSE)))
+		if(!accessory_decl.accessory_is_available(owner, species, get_organ_appearance_bodytype(), (owner ? owner.get_traits() : FALSE)))
 			return FALSE
 		var/list/existing_metadata = LAZYACCESS(accessories, accessory_type)
 		if(same_entries(existing_metadata, accessory_metadata))
@@ -291,7 +305,7 @@ var/global/list/organ_icon_cache = list()
 		icon = mob_icon
 
 	// We may have some overlays of our own (hair, glowing eyes, layered markings)
-	var/list/additional_overlays = get_mob_overlays()
+	var/list/additional_overlays = get_limb_mob_overlays()
 	if(length(additional_overlays))
 		for(var/new_overlay in additional_overlays)
 			add_overlay(new_overlay)
@@ -326,9 +340,10 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 		var/image/temp = image(limb_icon_cache[cache_key])
 		if(species)
 			// Calculate the required colour matrix.
-			var/r = 0.30 * bodytype.health_hud_intensity
-			var/g = 0.59 * bodytype.health_hud_intensity
-			var/b = 0.11 * bodytype.health_hud_intensity
+			var/hud_intensity = get_organ_appearance_bodytype()?.health_hud_intensity || 1
+			var/r = 0.30 * hud_intensity
+			var/g = 0.59 * hud_intensity
+			var/b = 0.11 * hud_intensity
 			temp.color = list(r, r, r, g, g, g, b, b, b)
 		temp.pixel_x = owner.default_pixel_x
 		temp.pixel_y = owner.default_pixel_y
@@ -363,7 +378,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 	if(ispath(accessory_style))
 		accessory_style = GET_DECL(accessory_style)
 	// Check if this style is permitted for this species, period.
-	if(!istype(accessory_style) || !accessory_style?.accessory_is_available(owner, species, bodytype, (owner ? owner.get_traits() : FALSE)))
+	if(!istype(accessory_style) || !accessory_style?.accessory_is_available(owner, species, get_organ_appearance_bodytype(), (owner ? owner.get_traits() : FALSE)))
 		return null
 	// Check if we are concealed (long hair under a hat for example).
 	if(accessory_style.is_hidden(src))
@@ -374,7 +389,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 	for(var/acc_cat in _sprite_accessories)
 		for(var/accessory in _sprite_accessories[acc_cat])
 			var/decl/sprite_accessory/accessory_style = GET_DECL(accessory)
-			if(!istype(accessory_style) || !accessory_style?.accessory_is_available(owner, species, bodytype, (owner ? owner.get_traits() : FALSE)))
+			if(!istype(accessory_style) || !accessory_style?.accessory_is_available(owner, species, get_organ_appearance_bodytype(), (owner ? owner.get_traits() : FALSE)))
 				_sprite_accessories[acc_cat] -= accessory
 				. = TRUE
 	if(.)

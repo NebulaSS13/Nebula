@@ -51,7 +51,7 @@
 		spawn_gibber(lastloc)
 
 //This is the proc for turning a mob into ash. Mostly a copy of gib code (above).
-//Originally created for wizard disintegrate. I've removed the virus code since it's irrelevant here.
+//Originally created for Disintegrate. I've removed the virus code since it's irrelevant here.
 //Dusting robots does not eject the brain, so it's a bit more powerful than gib() /N
 /mob/proc/dust()
 	SHOULD_CALL_PARENT(TRUE)
@@ -92,7 +92,7 @@
 	reset_plane_and_layer()
 	update_posture()
 	if(!gibbed)
-		clear_status_effects()
+		clear_status_conditions()
 
 	set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
 	set_see_in_dark(8)
@@ -101,15 +101,6 @@
 	drop_held_items()
 
 	SSstatistics.report_death(src)
-
-	//TODO:  Change death state to health_dead for all these icon files.  This is a stop gap.
-	if(healths)
-		healths.overlays.Cut() // This is specific to humans but the relevant code is here; shouldn't mess with other mobs.
-		if("health7" in icon_states(healths.icon))
-			healths.icon_state = "health7"
-		else
-			healths.icon_state = "health6"
-			log_debug("[src] ([src.type]) died but does not have a valid health7 icon_state (using health6 instead). report this error to Ccomp5950 or your nearest Developer")
 
 	timeofdeath = world.time
 	if(mind)

@@ -24,6 +24,8 @@
 		return
 
 	var/type_to_spawn = item_to_spawn()
+	if(!type_to_spawn)
+		return
 	if(islist(type_to_spawn))
 		for(var/spawn_type in type_to_spawn)
 			LAZYADD(., create_instance(spawn_type, loc))

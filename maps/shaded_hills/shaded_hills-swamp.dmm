@@ -3,16 +3,16 @@
 /turf/wall/log/walnut/shutter/open,
 /area/shaded_hills/witch_hut)
 "bg" = (
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "cE" = (
 /turf/floor/mud/water,
 /area/shaded_hills/outside/river/swamp)
 "cS" = (
-/obj/structure/bed/chair/wood/ebony{
+/obj/structure/chair/wood/ebony{
 	dir = 8
 	},
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "fG" = (
 /obj/item/seeds/extracted/aloe,
@@ -27,7 +27,7 @@
 /obj/item/seeds/extracted/yarrow,
 /obj/item/seeds/extracted/yarrow,
 /obj/item/seeds/extracted/yarrow,
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "hT" = (
 /turf/floor/mud/water/deep,
@@ -55,7 +55,7 @@
 /obj/structure/closet/crate/chest/ebony,
 /obj/item/rock/hematite,
 /obj/item/rock/flint,
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "oF" = (
 /turf/unsimulated/dark_filler,
@@ -65,7 +65,7 @@
 /area/shaded_hills/caves/swamp)
 "pl" = (
 /obj/structure/drying_rack/ebony,
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "rP" = (
 /obj/structure/reagent_dispensers/barrel/ebony/water,
@@ -86,7 +86,7 @@
 	start_lit = 1
 	},
 /obj/structure/table/end/alt/ebony,
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "vZ" = (
 /turf/floor/mud/water,
@@ -110,7 +110,7 @@
 /obj/structure/door/walnut{
 	dir = 4
 	},
-/turf/floor/path/basalt,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "BY" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
@@ -118,7 +118,7 @@
 /area/shaded_hills/outside/swamp)
 "Dh" = (
 /obj/item/stool/rustic,
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "Do" = (
 /turf/unsimulated/dark_filler,
@@ -130,19 +130,19 @@
 /turf/unsimulated/mask,
 /area/shaded_hills/outside/swamp)
 "Hi" = (
-/obj/structure/table/woodentable/ebony,
+/obj/structure/table/wood/ebony,
 /obj/item/chems/glass/handmade/teapot,
 /obj/item/chems/glass/handmade/cup/wood,
 /obj/item/chems/glass/handmade/cup/wood,
 /obj/item/chems/glass/bucket/wood,
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "Ic" = (
 /turf/floor/clay,
 /area/shaded_hills/outside/river/swamp)
 "KA" = (
 /obj/abstract/landmark/start/shaded_hills/herbalist,
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "LF" = (
 /turf/wall/natural/basalt/shaded_hills,
@@ -156,7 +156,7 @@
 /area/shaded_hills/outside/swamp)
 "SE" = (
 /obj/structure/door/walnut,
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "Ty" = (
 /obj/abstract/landmark/start/shaded_hills/traveller,
@@ -172,7 +172,7 @@
 /obj/structure/table/desk/ebony,
 /obj/item/chems/glass/mortar,
 /obj/item/rock/basalt,
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "Vl" = (
 /obj/structure/wall_sconce/lantern{
@@ -180,7 +180,7 @@
 	start_lit = 1
 	},
 /obj/structure/closet/crate/chest/ebony,
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 "VA" = (
 /turf/wall/brick/basalt,
@@ -198,7 +198,7 @@
 /obj/structure/bed/simple/ebony,
 /obj/item/bedsheet/furs,
 /obj/abstract/landmark/start/shaded_hills/herbalist,
-/turf/floor/wood/walnut,
+/turf/floor/wood/rough/walnut,
 /area/shaded_hills/witch_hut)
 
 (1,1,1) = {"

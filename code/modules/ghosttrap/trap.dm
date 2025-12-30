@@ -176,18 +176,6 @@
 	if(istype(drone))
 		drone.transfer_personality(candidate.client)
 
-/******************
-* Wizard Familiar *
-******************/
-/decl/ghosttrap/wizard_familiar
-	name = "wizard familiar"
-	pref_check = "ghost_wizard"
-	ghost_trap_message = "They are occupying a familiar now."
-	ban_checks = list(/decl/special_role/wizard)
-
-/decl/ghosttrap/wizard_familiar/welcome_candidate(var/mob/target)
-	return 0
-
 // Stub PAI ghost trap so that PAI shows up in the ghost role list.
 // Actually invoking this ghost trap as normal will not do anything.
 /decl/ghosttrap/personal_ai

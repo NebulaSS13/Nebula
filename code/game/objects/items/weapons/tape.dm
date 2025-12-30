@@ -11,7 +11,6 @@
 	max_amount        = 32
 	w_class           = ITEM_SIZE_SMALL
 	material          = /decl/material/solid/organic/plastic
-	current_health    = 10
 	max_health        = 10
 	matter_multiplier = 0.25
 
@@ -147,14 +146,14 @@
 
 	return ..()
 
-/obj/item/stack/tape_roll/duct_tape/proc/stick(var/obj/item/W, mob/user)
-	if(!(W.item_flags & ITEM_FLAG_CAN_TAPE) || !user.try_unequip(W))
+/obj/item/stack/tape_roll/duct_tape/proc/stick(var/obj/item/used_item, mob/user)
+	if(!(used_item.item_flags & ITEM_FLAG_CAN_TAPE) || !user.try_unequip(used_item))
 		return FALSE
 	if(!can_use(1))
 		return FALSE
 	use(1)
 	var/obj/item/duct_tape/tape = new(get_turf(src))
-	tape.attach(W)
+	tape.attach(used_item)
 	user.put_in_hands(tape)
 	return TRUE
 
@@ -184,17 +183,17 @@
 		anchored = FALSE // Unattach it from whereever it's on, if anything.
 	return ..()
 
-/obj/item/duct_tape/attackby(obj/item/W, mob/user)
-	return stuck? stuck.attackby(W, user) : ..()
+/obj/item/duct_tape/attackby(obj/item/used_item, mob/user)
+	return stuck? stuck.attackby(used_item, user) : ..()
 
-/obj/item/duct_tape/examine()
-	return stuck ? stuck.examine(arglist(args)) : ..()
+/obj/item/duct_tape/examined_by(mob/user, distance, infix, suffix)
+	return stuck ? stuck.examined_by(user, distance, infix, suffix) : ..()
 
-/obj/item/duct_tape/proc/attach(var/obj/item/W)
-	stuck      = W
+/obj/item/duct_tape/proc/attach(var/obj/item/used_item)
+	stuck      = used_item
 	anchored   = TRUE
-	SetName("[W.name] (taped)")
-	W.forceMove(src)
+	SetName("[used_item.name] (taped)")
+	used_item.forceMove(src)
 	playsound(src, 'sound/effects/tape.ogg', 25)
 	update_icon()
 

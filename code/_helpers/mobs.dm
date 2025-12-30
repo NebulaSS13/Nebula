@@ -9,11 +9,12 @@
 
 /proc/random_name(gender, species)
 	if(species)
-		var/decl/species/current_species = get_species_by_key(species)
+		var/decl/species/current_species = decls_repository.get_decl_by_id(species)
 		if(current_species)
 			var/decl/background_detail/background = current_species.get_default_background_datum_by_flag(BACKGROUND_FLAG_NAMING)
 			if(background)
-				return background.get_random_name(null, gender)
+				return background.get_random_cultural_name(gender = gender, species = species)
+
 	return capitalize(pick(gender == FEMALE ? global.using_map.first_names_female : global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
 /proc/random_skin_tone(var/decl/bodytype/current_bodytype)
@@ -28,13 +29,13 @@
 		return FALSE
 	if(!isrobot(thing.loc))
 		return FALSE
-	var/mob/living/silicon/robot/R = thing.loc
-	return (thing in R.module.equipment)
+	var/mob/living/silicon/robot/robot = thing.loc
+	return (thing in robot.module.equipment)
 
 /proc/get_exposed_defense_zone(var/atom/movable/target)
 	return pick(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_CHEST, BP_GROIN)
 
-/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, check_holding = TRUE)
+/proc/do_mob(mob/user, mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, check_holding = TRUE)
 	if(!user || !target)
 		return 0
 	var/user_loc = user.loc

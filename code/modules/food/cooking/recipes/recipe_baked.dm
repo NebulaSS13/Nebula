@@ -4,6 +4,9 @@
 		RECIPE_CATEGORY_MICROWAVE,
 		RECIPE_CATEGORY_BAKING_DISH
 	)
+	// some arbitrary value to make sure it doesn't cook in open air, but will when microwaved
+	// todo: rework futurecooking so that microwaves aren't the only appliance for everything (modern stove, oven, fryer, etc)
+	minimum_temperature = 80 CELSIUS
 	//cooking_heat_type = COOKING_HEAT_INDIRECT
 
 /decl/recipe/baked/pizzamargherita

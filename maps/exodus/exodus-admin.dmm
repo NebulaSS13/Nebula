@@ -207,7 +207,7 @@
 /turf/unsimulated/floor/steel,
 /area/centcom)
 "auW" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/unsimulated/floor/steel,
@@ -254,7 +254,7 @@
 /turf/space,
 /area/space)
 "ayg" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/unsimulated/floor/steel,
@@ -330,7 +330,7 @@
 /turf/space,
 /area/shuttle/supply_shuttle)
 "aBA" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
@@ -343,7 +343,7 @@
 /turf/unsimulated/floor/steel,
 /area/centcom)
 "aBC" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
@@ -408,7 +408,7 @@
 /turf/unsimulated/floor/steel,
 /area/centcom)
 "aCv" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/unsimulated/floor/steel,
 /area/centcom)
 "aCx" = (
@@ -520,7 +520,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/red/half{
@@ -558,7 +558,7 @@
 /turf/floor/tiled/dark,
 /area/shuttle/escape_shuttle)
 "aGE" = (
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -756,7 +756,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 8
 	},
 /turf/floor/tiled/monotile,
@@ -785,7 +785,7 @@
 /turf/floor/plating,
 /area/shuttle/escape_shuttle)
 "aIS" = (
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 8
 	},
 /turf/floor/tiled/monotile,
@@ -937,7 +937,7 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/red/half{
@@ -982,7 +982,7 @@
 /turf/unsimulated/floor/white,
 /area/space)
 "aLc" = (
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/red/half{
@@ -997,7 +997,7 @@
 /turf/floor/tiled/dark/monotile,
 /area/shuttle/escape_shuttle)
 "aLe" = (
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/red/half{
@@ -1006,7 +1006,7 @@
 /turf/floor/tiled/dark/monotile,
 /area/shuttle/escape_shuttle)
 "aLf" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/green{
@@ -1024,7 +1024,7 @@
 /turf/floor/tiled/white,
 /area/shuttle/escape_shuttle)
 "aLm" = (
-/obj/structure/bed/chair/office/dark,
+/obj/structure/chair/office/dark,
 /obj/machinery/button/blast_door{
 	desc = "A remote control switch for port-side blast doors.";
 	id_tag = "CentComPort";
@@ -1297,7 +1297,7 @@
 /turf/unsimulated/floor/grass,
 /area/centcom/holding)
 "aMp" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/green{
@@ -1339,19 +1339,19 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 4
 	},
 /turf/floor/tiled/monotile,
 /area/shuttle/escape_shuttle)
 "aMz" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/unsimulated/floor/steel,
 /area/centcom/holding)
 "aMA" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/unsimulated/floor/steel,
@@ -1400,10 +1400,10 @@
 /turf/unsimulated/floor/steel,
 /area/centcom/holding)
 "aMR" = (
-/obj/structure/bed/chair/wood/wings{
+/obj/structure/chair/wood/wings{
 	dir = 4
 	},
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aMT" = (
 /obj/machinery/hologram/holopad,
@@ -1422,7 +1422,7 @@
 	c_tag = "Shuttle East";
 	dir = 4
 	},
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 4
 	},
 /turf/floor/tiled/monotile,
@@ -1440,65 +1440,65 @@
 /turf/unsimulated/floor/steel,
 /area/centcom/holding)
 "aMY" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/food/amanita_pie,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aMZ" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/food/bigbiteburger,
 /obj/machinery/camera/network/crescent{
 	c_tag = "Crescent Bar Center"
 	},
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aNa" = (
-/obj/structure/bed/chair/wood/wings{
+/obj/structure/chair/wood/wings{
 	dir = 8
 	},
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aNb" = (
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aNc" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aNh" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/chems/glass/bowl/mapped/stew,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aNj" = (
 /obj/structure/closet/secure_closet/bar,
 /turf/unsimulated/floor/lino,
 /area/centcom/holding)
 "aNk" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/book/manual/barman_recipes,
-/obj/item/chems/glass/rag,
+/obj/item/chems/rag,
 /turf/unsimulated/floor/lino,
 /area/centcom/holding)
 "aNl" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/machinery/chemical_dispenser/bar_alc/full,
 /turf/unsimulated/floor/lino,
 /area/centcom/holding)
 "aNm" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/machinery/chemical_dispenser/bar_soft/full,
@@ -1508,7 +1508,7 @@
 /turf/unsimulated/floor/lino,
 /area/centcom/holding)
 "aNo" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/green{
@@ -1530,38 +1530,38 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 4
 	},
 /turf/floor/tiled/monotile,
 /area/shuttle/escape_shuttle)
 "aNB" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/food/boiledrice,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aNC" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/chems/glass/bowl/mapped/beet,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aNI" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/food/stuffing,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aNJ" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/food/soylenviridians,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aNK" = (
 /obj/machinery/door/airlock/glass{
@@ -1667,7 +1667,7 @@
 /area/shuttle/escape_shuttle)
 "aPa" = (
 /obj/machinery/hologram/holopad,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aPH" = (
 /obj/machinery/camera/network/crescent{
@@ -1683,7 +1683,7 @@
 /turf/unsimulated/floor/lino,
 /area/centcom/holding)
 "aPK" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/green,
@@ -1713,34 +1713,34 @@
 /turf/floor/tiled/techfloor/grid,
 /area/shuttle/escape_shuttle)
 "aPR" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/chems/glass/bowl/mapped/blood,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aPS" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/food/skewer/tofu,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aRl" = (
 /turf/unsimulated/wall,
 /area/centcom/holding)
 "aRm" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/food/poppypretzel,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aZb" = (
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 1
 	},
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/clothing/pants/slacks/outfit,
@@ -1751,22 +1751,22 @@
 /turf/unsimulated/floor/lino,
 /area/centcom/holding)
 "bgb" = (
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 1
 	},
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /turf/unsimulated/floor/lino,
 /area/centcom/holding)
 "bgJ" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /turf/unsimulated/floor/lino,
 /area/centcom/holding)
 "bjb" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/green{
@@ -1831,11 +1831,11 @@
 /turf/floor/tiled/dark/monotile,
 /area/shuttle/escape_shuttle)
 "bvb" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/food/spesslaw,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "bwE" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -1845,18 +1845,18 @@
 /turf/floor/tiled,
 /area/shuttle/escape_shuttle)
 "byb" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/food/candiedapple,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "bzm" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/chems/glass/bowl/mapped/mushroom,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "bDh" = (
 /obj/structure/table,
@@ -1864,15 +1864,15 @@
 /turf/unsimulated/floor/lino,
 /area/tdome/tdomeadmin)
 "bMb" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	dir = 5
 	},
 /obj/item/food/meatsteak,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "cnP" = (
 /obj/item/stool/padded,
-/turf/unsimulated/floor/wood,
+/turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "cxx" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -1883,7 +1883,7 @@
 /turf/floor/tiled,
 /area/shuttle/escape_shuttle)
 "cEu" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/machinery/camera/network/crescent{
@@ -1905,7 +1905,7 @@
 /turf/floor/tiled/dark/monotile,
 /area/shuttle/escape_shuttle)
 "cIe" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/unsimulated/floor/lino,
 /area/tdome/tdomeadmin)
 "cIv" = (
@@ -1921,7 +1921,7 @@
 /turf/floor/tiled/dark,
 /area/shuttle/escape_shuttle)
 "cQH" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /obj/abstract/landmark{
@@ -1944,7 +1944,7 @@
 	name = "Emergency NanoMed";
 	pixel_x = 28
 	},
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/blue/border{
@@ -1979,7 +1979,7 @@
 /obj/effect/floor_decal/corner/green{
 	dir = 9
 	},
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/unsimulated/floor/steel,
@@ -2085,7 +2085,7 @@
 /turf/unsimulated/floor/vault,
 /area/tdome)
 "fRC" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/unsimulated/floor/vault,
@@ -2116,7 +2116,7 @@
 /turf/floor/tiled,
 /area/shuttle/escape_shuttle)
 "ghj" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/unsimulated/floor/vault,
@@ -2163,7 +2163,7 @@
 /turf/floor/tiled/dark,
 /area/shuttle/escape_shuttle)
 "hlP" = (
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 4
 	},
 /turf/floor/tiled/dark/monotile,
@@ -2202,7 +2202,7 @@
 /turf/floor/tiled/dark,
 /area/shuttle/escape_shuttle)
 "hMN" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /obj/structure/disposalpipe/segment,
@@ -2252,7 +2252,7 @@
 /turf/floor/tiled/monotile,
 /area/shuttle/escape_shuttle)
 "jlk" = (
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 8
 	},
 /turf/floor/tiled/dark/monotile,
@@ -2289,7 +2289,7 @@
 /turf/unsimulated/floor/lino,
 /area/tdome/tdomeadmin)
 "jSH" = (
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue{
@@ -2302,7 +2302,7 @@
 /turf/unsimulated/floor/white,
 /area/tdome)
 "kfk" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /obj/abstract/landmark{
 	name = "tdomeobserve"
 	},
@@ -2314,7 +2314,7 @@
 /turf/unsimulated/floor/lino,
 /area/tdome/tdomeobserve)
 "kjk" = (
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue/diagonal{
@@ -2403,7 +2403,7 @@
 /turf/unsimulated/floor/lino,
 /area/tdome/tdomeadmin)
 "lQy" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /obj/structure/disposalpipe/segment,
 /obj/abstract/landmark{
 	name = "tdomeobserve"
@@ -2422,7 +2422,8 @@
 /turf/unsimulated/floor/vault,
 /area/tdome)
 "lSj" = (
-/obj/effect/forcefield{
+/obj/effect{
+	density = 1;
 	desc = "You can't get in. Heh.";
 	name = "Blocker"
 	},
@@ -2434,7 +2435,8 @@
 /turf/unsimulated/floor/dark,
 /area/tdome)
 "mgi" = (
-/obj/effect/forcefield{
+/obj/effect{
+	density = 1;
 	desc = "You can't get in. Heh.";
 	name = "Blocker"
 	},
@@ -2503,7 +2505,7 @@
 /turf/unsimulated/floor/vault,
 /area/tdome/tdome2)
 "nPB" = (
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 4
 	},
 /turf/floor/tiled/monotile,
@@ -2799,7 +2801,8 @@
 /turf/floor/tiled,
 /area/shuttle/escape_shuttle)
 "xSD" = (
-/obj/effect/forcefield{
+/obj/effect{
+	density = 1;
 	desc = "You can't get in. Heh.";
 	name = "Blocker"
 	},

@@ -70,13 +70,13 @@
 	if(!name_singular)
 		. += "No singular name set."
 
-	var/list/coinage_states = icon_states(icon)
+	var/list/coinage_states = get_states_in_icon_cached(icon) // cache this to avoid excessive ref() usage
 	for(var/datum/denomination/denomination in denominations)
 		if(!istext(denomination.name))
 			. += "Non-text name found for '[denomination.type]'."
 		else if(!(denomination.state in coinage_states))
 			. += "State '[denomination.state]' not found in icon file for '[denomination.type]'."
-		else if(denomination.mark && !(denomination.mark in coinage_states))
+		else if(denomination.mark && !coinage_states[denomination.mark])
 			. += "Mark state '[denomination.mark]' not found in icon file for '[denomination.type]'."
 		else if(!isnum(denomination.marked_value))
 			. += "Non-numerical denomination marked value found for '[denomination]'."

@@ -243,6 +243,8 @@ var/global/list/meteors_major = list(
 	. = ..()
 	z_original = z
 	global.meteor_list += src
+	if(!ismissile)
+		SpinAnimation()
 
 /obj/effect/meteor/Move()
 	. = ..() //process movement...
@@ -258,11 +260,6 @@ var/global/list/meteors_major = list(
 	walk(src, 0)
 	global.meteor_list -= src
 	. = ..()
-
-/obj/effect/meteor/Initialize()
-	. = ..()
-	if(!ismissile)
-		SpinAnimation()
 
 /obj/effect/meteor/Bump(atom/A)
 	..()
@@ -296,8 +293,8 @@ var/global/list/meteors_major = list(
 	SHOULD_CALL_PARENT(FALSE)
 	return
 
-/obj/effect/meteor/attackby(obj/item/W, mob/user, params)
-	if(IS_PICK(W))
+/obj/effect/meteor/attackby(obj/item/used_item, mob/user, params)
+	if(IS_PICK(used_item))
 		qdel(src)
 		return TRUE
 	return ..()
@@ -419,25 +416,22 @@ var/global/list/meteors_major = list(
 	explosion(src.loc, 3, 6, 9, 20, 0)
 
 // This is the final solution against shields - a single impact can bring down most shield generators.
-/obj/effect/meteor/supermatter
-	name = "supermatter shard"
-	desc = "Oh god, what will be next..?"
-	icon = 'icons/obj/supermatter_32.dmi'
-	icon_state = "supermatter"
+/obj/effect/meteor/destroyer
+	abstract_type = /obj/effect/meteor/destroyer
 
-/obj/effect/meteor/supermatter/meteor_effect()
+/obj/effect/meteor/destroyer/meteor_effect()
 	..()
 	explosion(src.loc, 1, 2, 3, 4, 0)
-	for(var/obj/machinery/power/apc/A in range(rand(12, 20), src))
+	for(var/obj/machinery/apc/A in range(rand(12, 20), src))
 		A.energy_fail(round(10 * rand(8, 12)))
 
-/obj/effect/meteor/supermatter/get_shield_damage()
+/obj/effect/meteor/destroyer/get_shield_damage()
 	return ..() * rand(80, 120)
 
 //Missiles, for events and so on
-/obj/effect/meteor/supermatter/missile
+/obj/effect/meteor/destroyer/missile
 	name = "photon torpedo"
-	desc = "An advanded warhead designed to tactically destroy space installations."
+	desc = "An advanced warhead designed to tactically destroy space installations."
 	icon = 'icons/obj/missile.dmi'
 	icon_state = "photon"
 	meteordrop = null

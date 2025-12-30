@@ -27,6 +27,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	abstract_type = /obj/structure/fire_source
 	throwpass = TRUE
+	chem_volume = 100
 
 	// Counter for world.time, used to reduce lighting spam.
 	var/next_light_spam_guard = 0
@@ -57,7 +58,6 @@
 	var/light_color_low =  "#ff0000"
 
 	var/list/affected_exterior_turfs
-	var/next_fuel_consumption = 0
 	var/last_fuel_burn_temperature = T20C
 	// TODO: Replace this and the fuel var with just tracking currently-burning matter?
 	// Or use atom fires when those are implemented?
@@ -70,12 +70,12 @@
 	var/lit = FIRE_OUT
 	/// How much fuel is left?
 	var/fuel = 0
-
+	/// Have we been fed by a bellows recently?
+	var/bellows_oxygenation = 0
 
 /obj/structure/fire_source/Initialize()
 	. = ..()
 	update_icon()
-	create_reagents(100)
 	steam = new(name)
 	steam.attach(get_turf(src))
 	steam.set_up(3, 0, get_turf(src))
@@ -126,8 +126,8 @@
 
 /obj/structure/fire_source/fluid_act(datum/reagents/fluids)
 	. = ..()
-	if(!QDELETED(src) && fluids?.total_volume && reagents)
-		var/transfer = min(reagents.maximum_volume - reagents.total_volume, max(max(1, round(fluids.total_volume * 0.25))))
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids) && reagents)
+		var/transfer = min(REAGENT_MAXIMUM_VOLUME(reagents) - REAGENT_TOTAL_VOLUME(reagents), max(max(1, round(REAGENT_TOTAL_VOLUME(fluids) * 0.25))))
 		if(transfer > 0)
 			fluids.trans_to_obj(src, transfer)
 
@@ -138,6 +138,7 @@
 
 /obj/structure/fire_source/proc/die()
 	if(lit == FIRE_LIT)
+		bellows_oxygenation = 0
 		lit = FIRE_DEAD
 		last_fuel_ignite_temperature = null
 		last_fuel_burn_temperature = T20C
@@ -184,21 +185,24 @@
 /obj/structure/fire_source/proc/get_removable_atoms()
 	return get_contained_external_atoms()
 
-/obj/structure/fire_source/examine(mob/user, distance)
+/obj/structure/fire_source/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
 		if(has_draught)
-			to_chat(user, "\The [src]'s draught is [draught_values[current_draught]].")
+			. += "\The [src]'s draught is [draught_values[current_draught]]."
 		var/list/burn_strings = get_descriptive_temperature_strings(get_effective_burn_temperature())
 		if(length(burn_strings))
-			to_chat(user, "\The [src] is burning hot enough to [english_list(burn_strings)].")
+			. += "\The [src] is burning hot enough to [english_list(burn_strings)]."
 		var/list/removable = get_removable_atoms()
 		if(length(removable))
-			to_chat(user, "Looking within \the [src], you see:")
+			. += "Looking within \the [src], you see:"
 			for(var/atom/thing in removable)
-				to_chat(user, "\icon[thing] \the [thing]")
+				. += "\icon[thing] \the [thing]"
 		else
-			to_chat(user, "\The [src] is empty.")
+			. += "\The [src] is empty."
+
+	if(check_rights(R_DEBUG, 0, user))
+		. += "\The [src] has a temperature of [temperature]K, an effective burn temperature of [get_effective_burn_temperature()]K and a fuel value of [fuel]."
 
 /obj/structure/fire_source/attack_hand(var/mob/user)
 
@@ -216,7 +220,7 @@
 		update_icon()
 		return TRUE
 
-	if(lit != FIRE_LIT && user.a_intent == I_HURT)
+	if(lit != FIRE_LIT && user.check_intent(I_FLAG_HARM))
 		to_chat(user, SPAN_DANGER("You start stomping on \the [src], trying to destroy it."))
 		if(do_after(user, 5 SECONDS, src))
 			visible_message(SPAN_DANGER("\The [user] stamps and kicks at \the [src] until it is completely destroyed."))
@@ -229,7 +233,7 @@
 	var/mob/living/victim = grab.get_affecting_mob()
 	if(!istype(victim))
 		return FALSE
-	if (user.a_intent != I_HURT)
+	if (!user.check_intent(I_FLAG_HARM))
 		return TRUE
 	if (!grab.force_danger())
 		to_chat(user, SPAN_WARNING("You need a better grip!"))
@@ -244,12 +248,11 @@
 /obj/structure/fire_source/isflamesource()
 	return (lit == FIRE_LIT)
 
-/obj/structure/fire_source/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	return ..() || (istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
-
 /obj/structure/fire_source/proc/burn_material(var/decl/material/mat, var/amount)
 	var/effective_burn_temperature = get_effective_burn_temperature()
-	. = mat.get_burn_products(amount, effective_burn_temperature)
+	var/datum/gas_mixture/environment = return_air() // todo: separate local and burn chamber gas mixes?
+	var/ambient_pressure = environment ? environment.return_pressure() : ONE_ATMOSPHERE
+	. = mat.get_burn_products(amount, effective_burn_temperature, ambient_pressure)
 	if(.)
 		if(mat.ignition_point && effective_burn_temperature >= mat.ignition_point)
 			if(mat.accelerant_value > FUEL_VALUE_NONE)
@@ -263,7 +266,7 @@
 			// This means that 100u (under two soup bowls full of water), will suppress a fire with 20 fuel.
 			fuel -= amount * (mat.accelerant_value / FUEL_VALUE_SUPPRESSANT) * 2
 		fuel = max(fuel, 0)
-		loc.take_waste_burn_products(., effective_burn_temperature)
+		loc.take_waste_burn_products(., effective_burn_temperature, ambient_pressure)
 
 // Dump waste gas from burned fuel.
 /obj/structure/fire_source/proc/dump_waste_products(var/atom/target, var/list/waste)
@@ -275,43 +278,45 @@
 					environment.adjust_gas(w, waste[w], FALSE)
 			environment.update_values()
 
-/obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/fire_source/attackby(var/obj/item/used_item, var/mob/user)
 
 	// Gate a few interactions behind intent so they can be bypassed if needed.
-	if(user.a_intent != I_HURT)
+	if(!user.check_intent(I_FLAG_HARM))
 		// Put cooking items onto the fire source.
-		if(istype(thing, /obj/item/chems/cooking_vessel) && user.try_unequip(thing, get_turf(src)))
-			thing.reset_offsets()
+		if(istype(used_item, /obj/item/chems/cooking_vessel) && user.try_unequip(used_item, get_turf(src)))
+			used_item.reset_offsets()
 			return TRUE
 		// Pour fuel or water into a fire.
-		if(istype(thing, /obj/item/chems))
-			var/obj/item/chems/chems = thing
+		if(istype(used_item, /obj/item/chems))
+			var/obj/item/chems/chems = used_item
 			if(chems.standard_pour_into(user, src))
 				return TRUE
 
-	if(lit == FIRE_LIT && istype(thing, /obj/item/flame))
-		thing.fire_act(return_air(), get_effective_burn_temperature(), 500)
+	if(lit == FIRE_LIT && istype(used_item, /obj/item/flame))
+		used_item.fire_act(return_air(), get_effective_burn_temperature(), 500)
 		return TRUE
 
-	if(thing.isflamesource())
-		visible_message(SPAN_NOTICE("\The [user] attempts to light \the [src] with \the [thing]."))
-		try_light(thing.get_heat())
+	if(used_item.isflamesource())
+		visible_message(SPAN_NOTICE("\The [user] attempts to light \the [src] with \the [used_item]."))
+		try_light(used_item.get_heat())
 		return TRUE
 
-	if((lit != FIRE_LIT || user.a_intent == I_HURT))
+	if((lit != FIRE_LIT || user.check_intent(I_FLAG_HARM)))
 		// Only drop in one log at a time.
-		if(istype(thing, /obj/item/stack))
-			var/obj/item/stack/stack = thing
-			thing = stack.split(1)
-		if(!QDELETED(thing) && user.try_unequip(thing, src))
-			user.visible_message(SPAN_NOTICE("\The [user] drops \the [thing] into \the [src]."))
+		if(istype(used_item, /obj/item/stack))
+			var/obj/item/stack/stack = used_item
+			used_item = stack.split(1)
+		if(!QDELETED(used_item) && user.try_unequip(used_item, src))
+			user.visible_message(SPAN_NOTICE("\The [user] drops \the [used_item] into \the [src]."))
 		update_icon()
 		return TRUE
 
 	return ..()
 
 /obj/structure/fire_source/proc/get_draught_multiplier()
-	return has_draught ? draught_values[draught_values[current_draught]] : 1
+	. = has_draught ? draught_values[draught_values[current_draught]] : 1
+	if(bellows_oxygenation)
+		. *= 1.25 // Burns 25% hotter while oxygenated.
 
 /obj/structure/fire_source/proc/process_fuel(ignition_temperature)
 	var/draught_mult = get_draught_multiplier()
@@ -358,22 +363,23 @@
 /obj/structure/fire_source/on_reagent_change()
 	if(!(. = ..()))
 		return
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		var/do_steam = FALSE
+		var/datum/gas_mixture/our_air = return_air()
+		var/ambient_pressure = our_air ? our_air.return_pressure() : ONE_ATMOSPHERE
 		var/list/waste = list()
 
-		for(var/rtype in reagents?.reagent_volumes)
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 
-			var/decl/material/reagent = GET_DECL(rtype)
-			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT && !isnull(reagent.boiling_point) && reagent.boiling_point < get_effective_burn_temperature())
+			if(reagent.accelerant_value <= FUEL_VALUE_SUPPRESSANT && reagent.phase_at_temperature(get_effective_burn_temperature(), ambient_pressure) == MAT_PHASE_GAS)
 				do_steam = TRUE
 
-			var/volume = NONUNIT_CEILING(REAGENT_VOLUME(reagents, rtype) / REAGENT_UNITS_PER_GAS_MOLE, 0.1)
-			var/list/waste_products = burn_material(reagent, volume)
+			var/result_amount = NONUNIT_CEILING(REAGENT_VOLUME(reagents, reagent) / REAGENT_UNITS_PER_GAS_MOLE, 0.1)
+			var/list/waste_products = burn_material(reagent, result_amount)
 			if(!isnull(waste_products))
 				for(var/product in waste_products)
 					waste[product] += waste_products[product]
-				reagents.remove_reagent(reagent.type, volume)
+				reagents.remove_reagent(reagent.type, result_amount)
 
 		dump_waste_products(loc, waste)
 
@@ -415,6 +421,10 @@
 	if(!check_atmos())
 		die()
 		return
+
+	// Spend our bellows charge.
+	if(bellows_oxygenation > 0)
+		bellows_oxygenation--
 
 	fuel -= (FUEL_CONSUMPTION_CONSTANT * get_draught_multiplier())
 	if(!process_fuel())
@@ -464,7 +474,7 @@
 
 	switch(lit)
 		if(FIRE_LIT)
-			if(fuel >= HIGH_FUEL)
+			if(bellows_oxygenation || fuel >= HIGH_FUEL)
 				var/image/I = image(icon, "[icon_state]_lit")
 				I.appearance_flags |= RESET_COLOR | RESET_ALPHA | KEEP_APART
 				add_overlay(I)
@@ -491,7 +501,7 @@
 	try_light(1000)
 
 /obj/structure/fire_source/CanPass(atom/movable/mover, turf/target, height, air_group)
-	. = ..()
+	. = ..() || mover?.checkpass(PASS_FLAG_TABLE)
 	if(. && lit && ismob(mover))
 		var/mob/M = mover
 		if(M.client && !M.current_posture?.prone && !MOVING_QUICKLY(M))
@@ -513,6 +523,7 @@
 /decl/interaction_handler/adjust_draught
 	name = "Adjust Draught"
 	expected_target_type = /obj/structure/fire_source
+	examine_desc = "adjust the draught"
 
 /decl/interaction_handler/adjust_draught/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/structure/fire_source/fire = target

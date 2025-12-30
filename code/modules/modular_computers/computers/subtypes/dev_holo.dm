@@ -1,6 +1,6 @@
 /obj/item/modular_computer/holotablet
 	name = "holotablet"
-	desc = "An holoemitter-fitted device designed for writing reports and notes."
+	desc = "A holoemitter-fitted device designed for writing reports and notes."
 	icon = 'icons/obj/modular_computers/holo/basic.dmi'
 	icon_state = ICON_STATE_WORLD
 

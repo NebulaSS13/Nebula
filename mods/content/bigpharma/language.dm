@@ -21,5 +21,5 @@
 	)
 	var/list/marks = list("™️","©️","®️")
 
-/decl/language/bigpharma/get_random_name()
+/decl/language/bigpharma/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	. = capitalize("[..(FEMALE, 1, rand(2,3), 1)][pick(endings)][pick(marks)]")

@@ -25,7 +25,10 @@ var/global/list/tradeship_paperwork_end_areas = list()
 
 /datum/goal/department/paperwork/tradeship
 	paperwork_types =    list(/obj/item/paperwork/tradeship)
-	signatory_job_list = list(/datum/job/tradeship_captain, /datum/job/tradeship_first_mate)
+	signatory_job_list = list(
+		/datum/job/standard/captain/tradeship,
+		/datum/job/tradeship_first_mate
+	)
 
 /datum/goal/department/paperwork/tradeship/get_paper_spawn_turfs()
 	return global.tradeship_paperwork_spawn_turfs

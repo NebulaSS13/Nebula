@@ -8,7 +8,7 @@
 	response_disarm = "bops"
 	see_in_dark = 5
 	mob_size = MOB_SIZE_SMALL
-	possession_candidate = 1
+	possession_candidate = TRUE
 	holder_type = /obj/item/holder/corgi
 	pass_flags = PASS_FLAG_TABLE
 	base_animal_type = /mob/living/simple_animal/corgi
@@ -42,12 +42,12 @@
 	uid = "bodytype_animal_corgi"
 
 /decl/bodytype/quadruped/animal/corgi/Initialize()
-	equip_adjust = list(
-		slot_head_str = list(
+	_equip_adjust = list(
+		(slot_head_str) = list(
 			"[NORTH]" = list( 1, -8),
 			"[SOUTH]" = list( 1, -8),
-			"[EAST]" =  list( 7, -8),
-			"[WEST]" =  list(-7, -8)
+			"[EAST]"  = list( 7, -8),
+			"[WEST]"  = list(-7, -8)
 		)
 	)
 	. = ..()
@@ -126,9 +126,9 @@
 	if(prob(1))
 		dance()
 
-/mob/living/simple_animal/corgi/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri
-	if(istype(O, /obj/item/newspaper) && !stat)
-		visible_message(SPAN_NOTICE("\The [user] baps \the [src] on the nose with the rolled-up [O.name]!"))
+/mob/living/simple_animal/corgi/attackby(var/obj/item/used_item, var/mob/user)  //Marker -Agouri
+	if(istype(used_item, /obj/item/newspaper) && !stat)
+		visible_message(SPAN_NOTICE("\The [user] baps \the [src] on the nose with the rolled-up [used_item.name]!"))
 		var/datum/mob_controller/corgi/corgi_ai = ai
 		if(istype(corgi_ai))
 			corgi_ai.dance()
@@ -151,19 +151,19 @@
 	uid = "bodytype_animal_puppy"
 
 /decl/bodytype/quadruped/animal/puppy/Initialize()
-	equip_adjust = list(
-		slot_head_str = list(
+	_equip_adjust = list(
+		(slot_head_str) = list(
 			"[NORTH]" = list( 0, -12),
 			"[SOUTH]" = list( 0, -12),
-			"[EAST]" =  list( 5, -14),
-			"[WEST]" =  list(-5, -14)
+			"[EAST]"  = list( 5, -14),
+			"[WEST]"  = list(-5, -14)
 		)
 	)
 	. = ..()
 
 /mob/living/simple_animal/corgi/puppy/Initialize()
 	. = ..()
-	gender = pick(MALE, FEMALE)
+	set_gender(pick(MALE, FEMALE))
 
 //pupplies cannot wear anything.
 /mob/living/simple_animal/corgi/puppy/OnTopic(mob/user, href_list)

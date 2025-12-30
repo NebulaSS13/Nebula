@@ -19,7 +19,7 @@
 	touch_met = 5
 	toxicity = 5
 	scent = "clean linen"
-	scent_descriptor = SCENT_DESC_FRAGRANCE
+	scent_descriptor = "fragrance"
 	value = 0.25
 	dirtiness = DIRTINESS_DECONTAMINATE
 	decontamination_dose = 5

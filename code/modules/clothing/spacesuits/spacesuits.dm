@@ -60,20 +60,20 @@
 
 	if(ispath(camera))
 		camera = new camera(src)
-		camera.set_status(0)
+		camera.set_camera_status(0)
 
 	if(camera)
-		camera.set_status(!camera.status)
+		camera.set_camera_status(!camera.status)
 		if(camera.status)
 			camera.c_tag = user.get_id_name()
 			to_chat(user, "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>")
 		else
 			to_chat(user, "<span class='notice'>Camera deactivated.</span>")
 
-/obj/item/clothing/head/helmet/space/examine(mob/user, distance)
+/obj/item/clothing/head/helmet/space/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1 && camera)
-		to_chat(user, "This helmet has a built-in camera. It's [!ispath(camera) && camera.status ? "" : "in"]active.")
+		. += "This helmet has a built-in camera. It's [!ispath(camera) && camera.status ? "" : "in"]active."
 
 /obj/item/clothing/head/helmet/space/proc/update_tint()
 	if(tinted)
@@ -103,7 +103,7 @@
 		overlay.icon_state = "[overlay.icon_state]_dark"
 	. = ..()
 
-/obj/item/clothing/head/helmet/space/on_update_icon(mob/user)
+/obj/item/clothing/head/helmet/space/on_update_icon()
 	. = ..()
 	var/base_icon_state = get_world_inventory_state()
 	if(!base_icon_state)

@@ -2,10 +2,10 @@ var/global/datum/map/using_map  = new USING_MAP_DATUM
 var/global/list/all_maps        = list()
 var/global/list/votable_maps    = list()
 
-var/global/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
-var/global/const/MAP_HAS_RANK   = 2		//Rank system, also togglable
+var/global/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, toggleable
+var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 
-/hook/startup/proc/initialise_map_list()
+/proc/initialise_map_list()
 	for(var/map_type in subtypesof(/datum/map))
 
 		var/datum/map/map_instance = map_type
@@ -113,7 +113,9 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also togglable
 	var/default_law_type = /datum/ai_laws/asimov  // The default lawset use by synth units, if not overriden by their laws var.
 	var/security_state = /decl/security_state/default // The default security state system to use.
 
-	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
+	var/hud_icons         = 'icons/screen/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
+	var/implant_hud_icons = 'icons/screen/hud_implants.dmi'
+	var/med_hud_icons     = 'icons/screen/hud_med.dmi'
 
 	var/num_exoplanets = 0
 	var/force_exoplanet_type // Used to override exoplanet weighting and always pick the same exoplanet.
@@ -134,23 +136,25 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also togglable
 
 	var/list/station_departments = list()//Gets filled automatically depending on jobs allowed
 
-	var/default_species = SPECIES_HUMAN
+	var/default_species = /decl/species/human::uid
 
 	// Can this map be voted for by players?
 	var/votable = TRUE
 
 	var/list/available_background_info = list(
-		/decl/background_category/homeworld = list(/decl/background_detail/location/other),
-		/decl/background_category/faction =   list(/decl/background_detail/faction/other),
-		/decl/background_category/heritage =   list(/decl/background_detail/heritage/other),
-		/decl/background_category/religion =  list(/decl/background_detail/religion/other)
+		/decl/background_category/citizenship = list(/decl/background_detail/citizenship/other),
+		/decl/background_category/homeworld   = list(/decl/background_detail/location/other),
+		/decl/background_category/faction     = list(/decl/background_detail/faction/other),
+		/decl/background_category/heritage    = list(/decl/background_detail/heritage/other),
+		/decl/background_category/religion    = list(/decl/background_detail/religion/other)
 	)
 
 	var/list/default_background_info = list(
-		/decl/background_category/homeworld = /decl/background_detail/location/other,
-		/decl/background_category/faction =   /decl/background_detail/faction/other,
-		/decl/background_category/heritage =   /decl/background_detail/heritage/other,
-		/decl/background_category/religion =  /decl/background_detail/religion/other
+		/decl/background_category/citizenship = /decl/background_detail/citizenship/other,
+		/decl/background_category/homeworld   = /decl/background_detail/location/other,
+		/decl/background_category/faction     = /decl/background_detail/faction/other,
+		/decl/background_category/heritage    = /decl/background_detail/heritage/other,
+		/decl/background_category/religion    = /decl/background_detail/religion/other
 	)
 
 	// Order must conform to ACCESS_REGION_FOO defines.
@@ -193,12 +197,25 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also togglable
 		"reinforced"
 	)
 	var/background_categories_generated = FALSE
-	var/list/_background_categories
+	// Hard defining this to avoid pulling in unimplemented citizenship decls for the time being.
+	var/list/_background_categories = list(
+		/decl/background_category/heritage,
+		/decl/background_category/homeworld,
+		/decl/background_category/faction,
+		/decl/background_category/religion
+	)
+
+	var/default_ui_style
+
+/datum/map/New()
+	..()
+	default_ui_style ||= DEFAULT_UI_STYLE
 
 /datum/map/proc/get_background_categories()
 	if(!background_categories_generated)
 		if(isnull(_background_categories))
 			_background_categories = decls_repository.get_decls_of_type(/decl/background_category)
+			_background_categories = _background_categories?.Copy() || list() // Avoid mutating the cache.
 		else
 			for(var/cat_type in _background_categories)
 				_background_categories[cat_type] = GET_DECL(cat_type)
@@ -238,6 +255,8 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also togglable
 
 /datum/map/proc/setup_map()
 
+	populate_branches()
+
 	if(!length(loadout_categories))
 		loadout_categories = list()
 		for(var/decl_type in decls_repository.get_decls_of_type(/decl/loadout_category))
@@ -269,10 +288,9 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also togglable
 
 	if(!allowed_jobs)
 		allowed_jobs = list()
-		for(var/jtype in subtypesof(/datum/job))
-			var/datum/job/job = jtype
-			if(initial(job.available_by_default))
-				allowed_jobs += jtype
+		for(var/datum/job/job as anything in subtypesof(/datum/job))
+			if(!TYPE_IS_ABSTRACT(job) && job::available_by_default)
+				allowed_jobs += job
 
 	if(ispath(default_job_type, /datum/job))
 		var/datum/job/J = default_job_type
@@ -558,3 +576,14 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also togglable
 	if(!length(SSmapping.contact_levels))
 		log_error("[name] has no contact levels!")
 		. = FALSE
+	var/decl/species/default_species_decl = decls_repository.get_decl_by_id(default_species)
+	if(default_species_decl.species_flags & SPECIES_IS_RESTRICTED)
+		log_error("[name]'s default species [default_species_decl.type] is set to restricted!")
+	if(default_species_decl.species_flags & SPECIES_IS_WHITELISTED)
+		log_error("[name]'s default species [default_species_decl.type] is set to whitelisted!")
+	if(default_species_decl.species_flags & SPECIES_CAN_JOIN)
+		log_error("[name]'s default species [default_species_decl.type] is not allowed to join the game!")
+
+/datum/map/proc/get_available_submap_archetypes()
+	return decls_repository.get_decls_of_subtype_unassociated(/decl/submap_archetype)
+

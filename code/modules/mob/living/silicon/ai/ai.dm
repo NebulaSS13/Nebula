@@ -82,7 +82,7 @@ var/global/list/ai_verbs_default = list(
 
 	//NEWMALF VARIABLES
 	var/malfunctioning = 0						// Master var that determines if AI is malfunctioning.
-	var/obj/machinery/power/apc/hack = null		// APC that is currently being hacked.
+	var/obj/machinery/apc/hack = null		// APC that is currently being hacked.
 	var/list/hacked_apcs = null					// List of all hacked APCs
 	var/uncardable = 0							// Whether the AI can be carded when malfunctioning.
 	var/hacked_apcs_hidden = 0					// Whether the hacked APCs belonging to this AI are hidden, reduces CPU generation from APCs.
@@ -149,15 +149,7 @@ var/global/list/ai_verbs_default = list(
 			. = INITIALIZE_HINT_QDEL
 		else if(brainmob.mind)
 			brainmob.mind.transfer_to(src)
-			hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-			hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-			hud_list[LIFE_HUD] 		  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-			hud_list[ID_HUD]          = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-			hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-			hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-			hud_list[IMPCHEM_HUD]     = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-			hud_list[IMPTRACK_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-			hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+			reset_hud_overlays()
 			ai_list += src
 
 	create_powersupply()
@@ -557,12 +549,12 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 		camera_light_on = world.timeofday + 1 * 20 // Update the light every 2 seconds.
 
 
-/mob/living/silicon/ai/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/aicard))
-		var/obj/item/aicard/card = W
+/mob/living/silicon/ai/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/aicard))
+		var/obj/item/aicard/card = used_item
 		card.grab_ai(src, user)
 
-	else if(IS_WRENCH(W))
+	else if(IS_WRENCH(used_item))
 		if(anchored)
 			user.visible_message("<span class='notice'>\The [user] starts to unbolt \the [src] from the plating...</span>")
 			if(!do_after(user,40, src))
@@ -579,9 +571,9 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 			user.visible_message("<span class='notice'>\The [user] finishes fastening down \the [src]!</span>")
 			anchored = TRUE
 			return TRUE
-	if(try_stock_parts_install(W, user))
+	if(try_stock_parts_install(used_item, user))
 		return TRUE
-	if(try_stock_parts_removal(W, user))
+	if(try_stock_parts_removal(used_item, user))
 		return TRUE
 	return ..()
 

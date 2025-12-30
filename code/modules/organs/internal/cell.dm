@@ -25,7 +25,7 @@
 		return 0
 	if(status & ORGAN_DEAD)
 		return 0
-	return round(cell.charge*(1 - damage/max_damage))
+	return round(cell.charge*(1 - _organ_damage/max_damage))
 
 /obj/item/organ/internal/cell/proc/checked_use(var/amount)
 	if(!is_usable())
@@ -38,7 +38,7 @@
 	return cell && cell.use(amount)
 
 /obj/item/organ/internal/cell/proc/get_power_drain()
-	var/damage_factor = 1 + 10 * damage/max_damage
+	var/damage_factor = 1 + 10 * _organ_damage/max_damage
 	return servo_cost * damage_factor
 
 /obj/item/organ/internal/cell/Process()
@@ -62,8 +62,8 @@
 
 // TODO: Make this use the cell extension instead?
 // Or have it grant a subtype of cell extension to the mob, maybe?
-/obj/item/organ/internal/cell/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W))
+/obj/item/organ/internal/cell/attackby(obj/item/used_item, mob/user)
+	if(IS_SCREWDRIVER(used_item))
 		if(open)
 			open = FALSE
 			to_chat(user, SPAN_NOTICE("You screw the battery panel in place."))
@@ -72,17 +72,17 @@
 			to_chat(user, SPAN_NOTICE("You unscrew the battery panel."))
 		return TRUE
 	else if(open)
-		if(IS_CROWBAR(W))
+		if(IS_CROWBAR(used_item))
 			if(cell)
 				user.put_in_hands(cell)
 				to_chat(user, SPAN_NOTICE("You remove \the [cell] from \the [src]."))
 				cell = null
 			return TRUE
-		else if (istype(W, /obj/item/cell))
+		else if (istype(used_item, /obj/item/cell))
 			if(cell)
 				to_chat(user, SPAN_WARNING("There is a power cell already installed."))
-			else if(user.try_unequip(W, src))
-				cell = W
+			else if(user.try_unequip(used_item, src))
+				cell = used_item
 				to_chat(user, SPAN_NOTICE("You insert \the [cell]."))
 			return TRUE
 	return ..()

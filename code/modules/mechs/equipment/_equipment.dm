@@ -48,13 +48,13 @@
 	else
 		return 0
 
-/obj/item/mech_equipment/examine(mob/user, distance)
+/obj/item/mech_equipment/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(user.skill_check(SKILL_DEVICES, SKILL_BASIC))
 		if(length(restricted_software))
-			to_chat(user, SPAN_SUBTLE("It seems it would require [english_list(restricted_software)] to be used."))
+			. += SPAN_SUBTLE("It seems it would require [english_list(restricted_software)] to be used.")
 		if(length(restricted_hardpoints))
-			to_chat(user, SPAN_SUBTLE("You figure it could be mounted in the [english_list(restricted_hardpoints)]."))
+			. += SPAN_SUBTLE("You figure it could be mounted in the [english_list(restricted_hardpoints)].")
 
 /obj/item/mech_equipment/proc/deactivate()
 	active = FALSE
@@ -70,10 +70,6 @@
 		deactivate()
 	owner = null
 	canremove = TRUE
-
-/obj/item/mech_equipment/Destroy()
-	owner = null
-	. = ..()
 
 /obj/item/mech_equipment/proc/get_effective_obj()
 	return src

@@ -30,6 +30,7 @@
 		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
 	)
 	limb_mapping = list(BP_CHEST = list(BP_CHEST, BP_M_HAND))
+	footprints_icon = 'icons/mob/footprints/footprints_snake.dmi' // big tail
 
 	heat_discomfort_strings = list(
 		"You feel brittle and overheated.",
@@ -85,8 +86,8 @@
 	uid = "bodytype_crystalline_gyne"
 
 /decl/bodytype/crystalline/mantid/gyne/Initialize()
-	equip_adjust = list(
-		BP_L_HAND = list(
+	_equip_adjust = list(
+		(BP_L_HAND) = list(
 			"[NORTH]" = list(-4, 12),
 			"[EAST]"  = list(-4, 12),
 			"[SOUTH]" = list(-4, 12),

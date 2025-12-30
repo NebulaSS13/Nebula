@@ -9,10 +9,10 @@
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	var/obj/item/sample
 
-/obj/item/core_sampler/examine(mob/user, distance)
+/obj/item/core_sampler/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..(user)
 	if(distance <= 2)
-		to_chat(user, SPAN_NOTICE("This one is [sample ? "full" : "empty"]"))
+		. += SPAN_NOTICE("This one is [sample ? "full" : "empty"]")
 
 /obj/item/core_sampler/proc/sample_item(var/item_to_sample, var/mob/user)
 	var/datum/extension/geological_data/GD = get_extension(item_to_sample, /datum/extension/geological_data)
@@ -51,7 +51,7 @@
 	icon_state = "sliver1"
 	randpixel = 8
 	w_class = ITEM_SIZE_TINY
-	sharp = 1
+	sharp = TRUE
 	material = /decl/material/solid/stone/sandstone
 	material_health_multiplier = 0.25
 

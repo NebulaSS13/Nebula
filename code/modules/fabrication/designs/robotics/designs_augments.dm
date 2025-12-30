@@ -28,6 +28,3 @@
 
 /datum/fabricator_recipe/robotics/augment/nanounit
 	path = /obj/item/organ/internal/augment/active/nanounit
-
-/datum/fabricator_recipe/robotics/augment/circuit
-	path = /obj/item/organ/internal/augment/active/simple/circuit

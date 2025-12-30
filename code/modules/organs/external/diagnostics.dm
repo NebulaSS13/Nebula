@@ -27,28 +27,28 @@
 		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of flesh"
 
 	var/list/wound_descriptors = list()
-	for(var/datum/wound/W in wounds)
-		var/this_wound_desc = W.desc
-		if(W.damage_type == BURN && W.salved)
+	for(var/datum/wound/wound in wounds)
+		var/this_wound_desc = wound.desc
+		if(wound.damage_type == BURN && wound.salved)
 			this_wound_desc = "salved [this_wound_desc]"
 
-		if(W.bleeding())
-			if(W.wound_damage() > W.bleed_threshold)
+		if(wound.bleeding())
+			if(wound.wound_damage() > wound.bleed_threshold)
 				this_wound_desc = "<b>bleeding</b> [this_wound_desc]"
 			else
 				this_wound_desc = "bleeding [this_wound_desc]"
-		else if(W.bandaged)
+		else if(wound.bandaged)
 			this_wound_desc = "bandaged [this_wound_desc]"
 
-		if(W.germ_level > 600)
+		if(wound.germ_level > 600)
 			this_wound_desc = "badly infected [this_wound_desc]"
-		else if(W.germ_level > 330)
+		else if(wound.germ_level > 330)
 			this_wound_desc = "lightly infected [this_wound_desc]"
 
 		if(wound_descriptors[this_wound_desc])
-			wound_descriptors[this_wound_desc] += W.amount
+			wound_descriptors[this_wound_desc] += wound.amount
 		else
-			wound_descriptors[this_wound_desc] = W.amount
+			wound_descriptors[this_wound_desc] = wound.amount
 
 	if(how_open() >= SURGERY_RETRACTED)
 		var/bone = encased ? encased : "bone"
@@ -110,6 +110,9 @@
 	for(var/obj/item/organ/internal/augment/aug in internal_organs)
 		if(istype(aug) && aug.known)
 			. += "[capitalize(aug.name)] implanted"
+	var/obj/item/organ/internal/lungs/L = locate() in src
+	if( L && L.is_bruised())
+		. += "Lung ruptured"
 
 /obj/item/organ/external/proc/inspect(mob/user)
 

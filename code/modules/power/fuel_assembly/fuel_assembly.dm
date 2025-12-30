@@ -87,7 +87,7 @@
 /obj/item/fuel_assembly/tritium
 	material = /decl/material/gas/hydrogen/tritium
 
-/obj/item/fuel_assembly/supermatter
+/obj/item/fuel_assembly/exotic_matter
 	material = /decl/material/solid/exotic_matter
 
 /obj/item/fuel_assembly/hydrogen

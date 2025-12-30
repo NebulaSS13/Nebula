@@ -53,7 +53,7 @@
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 	var/strength_mod = (M.get_trait_level(/decl/trait/malus/ethanol) * 2.5) || 1
 
-	var/effective_dose = LAZYACCESS(M.chem_doses, type) * strength_mod * (1 + REAGENT_VOLUME(holder, type)/60) //drinking a LOT will make you go down faster
+	var/effective_dose = CHEM_DOSE(M, src) * strength_mod * (1 + REAGENT_VOLUME(holder, src)/60) //drinking a LOT will make you go down faster
 	if(effective_dose >= strength) // Early warning
 		ADJ_STATUS(M, STAT_DIZZY, 6) // It is decreased at the speed of 3 per tick
 	if(effective_dose >= strength * 2) // Slurring
@@ -121,7 +121,7 @@
 
 /decl/material/liquid/alcohol/ale
 	name = "ale"
-	lore_text = "A dark alchoholic beverage made by malted barley and yeast."
+	lore_text = "A dark alcoholic beverage made by malted barley and yeast."
 	taste_description = "hearty barley ale"
 	color = "#4c3100"
 	strength = 50
@@ -174,7 +174,7 @@
 
 /decl/material/liquid/alcohol/cognac
 	name = "cognac"
-	lore_text = "A sweet and strongly alchoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
+	lore_text = "A sweet and strongly alcoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
 	taste_description = "rich and smooth alcohol"
 	taste_mult = 1.1
 	color = "#ab3c05"
@@ -199,7 +199,7 @@
 	glass_name = "gin"
 	glass_desc = "A crystal clear glass of Griffeater gin."
 
-//Base type for alchoholic drinks containing coffee
+//Base type for alcoholic drinks containing coffee
 /decl/material/liquid/alcohol/coffee
 	name = "coffee liqueur"
 	lore_text = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
@@ -325,7 +325,7 @@
 /decl/material/liquid/alcohol/vodka
 	name = "vodka"
 	codex_name = "plain vodka"
-	lore_text = "Number one drink AND fueling choice for Independents around the galaxy."
+	lore_text = "High-proof grain alcohol, useful for cocktails... and as bootleg rocket fuel, for those prone to amateur rocketry or trade sanctions."
 	taste_description = "grain alcohol"
 	color = "#0064c8" // rgb: 0, 100, 200
 	strength = 15
@@ -339,7 +339,7 @@
 /decl/material/liquid/alcohol/vodka/premium
 	name = "premium vodka"
 	codex_name = null
-	lore_text = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."
+	lore_text = "Premium distilled vodka made from real, planet-grown potatoes."
 	taste_description = "clear kvass"
 	color = "#aaddff" // rgb: 170, 221, 255 - very light blue.
 	strength = 10
@@ -362,7 +362,7 @@
 
 /decl/material/liquid/alcohol/wine
 	name = "red wine"
-	lore_text = "An premium alchoholic beverage made from distilled grape juice."
+	lore_text = "An premium alcoholic beverage made from distilled grape juice."
 	taste_description = "bitter sweetness"
 	color = "#7e4043" // rgb: 126, 64, 67
 	strength = 15
@@ -375,7 +375,7 @@
 
 /decl/material/liquid/alcohol/wine/premium
 	name = "white wine"
-	lore_text = "An exceptionally expensive alchoholic beverage made from distilled white grapes."
+	lore_text = "An exceptionally expensive alcoholic beverage made from distilled white grapes."
 	taste_description = "white velvet"
 	color = "#ffddaa" // rgb: 255, 221, 170 - a light cream
 	strength = 20
@@ -471,7 +471,7 @@
 	if(M.has_trait(/decl/trait/metabolically_inert))
 		return
 
-	var/dose = LAZYACCESS(M.chem_doses, type)
+	var/dose = CHEM_DOSE(M, src)
 	if(dose > 30)
 		M.take_damage(2 * removed, TOX)
 	if(dose > 60 && ishuman(M) && prob(5))
@@ -479,9 +479,9 @@
 		var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(H, BP_HEART)
 		if(heart)
 			if(dose < 120)
-				heart.take_internal_damage(10 * removed, 0)
+				heart.take_damage(10 * removed, 0)
 			else
-				heart.take_internal_damage(100, 0)
+				heart.take_damage(100, 0)
 
 /decl/material/liquid/alcohol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now
 	name = "aged whiskey"

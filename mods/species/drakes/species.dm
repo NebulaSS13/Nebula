@@ -1,6 +1,7 @@
 /decl/species/grafadreka
-	name = SPECIES_GRAFADREKA
-	name_plural = SPECIES_GRAFADREKA
+	uid = "species_grafadreka"
+	name = "Grafadreka"
+	name_plural = "Grafadreka"
 	description = "The reclusive grafadreka (Icelandic, lit. 'digging dragon'), also known as the snow drake, is a large reptillian pack predator similar in size and morphology to old Earth hyenas. \
 	They commonly dig shallow dens in dirt, snow or foliage, sometimes using them for concealment prior to an ambush. \
 	Biological cousins to the elusive kururak, they have heavy, low-slung bodies and powerful jaws suited to hunting land prey rather than fishing. \
@@ -15,26 +16,35 @@
 	snow_slowdown_mod = -0.5
 	gluttonous = GLUT_TINY
 	available_pronouns = list(
-		/decl/pronouns,
+		/decl/pronouns/pseudoplural,
 		/decl/pronouns/neuter,
 		/decl/pronouns/male,
 		/decl/pronouns/female
 	)
-	unarmed_attacks = list(
-		/decl/natural_attack/bite/sharp/drake,
-		/decl/natural_attack/claws/strong/drake
-	)
+
 	available_background_info = list(
-		/decl/background_category/heritage   = list(/decl/background_detail/heritage/grafadreka),
-		/decl/background_category/homeworld = list(/decl/background_detail/location/grafadreka),
-		/decl/background_category/faction   = list(/decl/background_detail/faction/grafadreka),
-		/decl/background_category/religion  = list(/decl/background_detail/religion/grafadreka)
+		/decl/background_category/citizenship = list(
+			/decl/background_detail/citizenship/other
+		),
+		/decl/background_category/heritage = list(
+			/decl/background_detail/heritage/grafadreka
+		),
+		/decl/background_category/homeworld = list(
+			/decl/background_detail/location/grafadreka
+		),
+		/decl/background_category/faction = list(
+			/decl/background_detail/faction/grafadreka
+		),
+		/decl/background_category/religion = list(
+			/decl/background_detail/religion/grafadreka
+		)
 	)
 	force_background_info = list(
-		/decl/background_category/heritage   = /decl/background_detail/heritage/grafadreka,
-		/decl/background_category/homeworld = /decl/background_detail/location/grafadreka,
-		/decl/background_category/faction   = /decl/background_detail/faction/grafadreka,
-		/decl/background_category/religion  = /decl/background_detail/religion/grafadreka
+		/decl/background_category/citizenship = /decl/background_detail/citizenship/other,
+		/decl/background_category/heritage    = /decl/background_detail/heritage/grafadreka,
+		/decl/background_category/homeworld   = /decl/background_detail/location/grafadreka,
+		/decl/background_category/faction     = /decl/background_detail/faction/grafadreka,
+		/decl/background_category/religion    = /decl/background_detail/religion/grafadreka
 	)
 	species_hud = /datum/hud_data/grafadreka
 	inherent_verbs = list(
@@ -43,6 +53,7 @@
 	traits = list(
 		/decl/trait/sivian_biochemistry = TRAIT_LEVEL_EXISTS
 	)
+	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 
 	// Drakes must be whitelisted for jobs to be able to join as them, see maps.dm.
 	job_blacklist_by_default = TRUE
@@ -63,8 +74,9 @@
 		pain_emotes_with_pain_level = adult_pain_emotes_with_pain_level
 	return ..()
 
-/decl/species/grafadreka/get_surgery_overlay_icon(var/mob/living/human/H)
-	return null // todo: 'mods/species/drakes/icons/surgery.dmi'
+/decl/species/grafadreka/handle_post_spawn(var/mob/living/human/H)
+	. = ..()
+	H.default_attack = GET_DECL(/decl/natural_attack/claws/strong/drake)
 
 // Stub for muscle memory of the Sit verb on Polaris.
 /mob/living/human/proc/drake_sit()

@@ -24,8 +24,8 @@
 	splatter_colour = "#660066"
 
 /decl/species/mantid
-
-	name =                   SPECIES_MANTID_ALATE
+	uid =                    "species_mantid_alate"
+	name =                   "Kharmaan Alate"
 	name_plural =            "Kharmaan Alates"
 	show_ssd =               "quiescent"
 	hidden_from_codex =      TRUE
@@ -71,16 +71,12 @@
 	species_flags =           SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT
 	spawn_flags =             SPECIES_IS_RESTRICTED
 
-	unarmed_attacks = list(
-		/decl/natural_attack/claws/strong/gloves,
-		/decl/natural_attack/bite/sharp
-	)
-
 	force_background_info = list(
-		/decl/background_category/heritage =   /decl/background_detail/heritage/ascent,
-		/decl/background_category/homeworld = /decl/background_detail/location/kharmaani,
-		/decl/background_category/faction =   /decl/background_detail/faction/ascent_alate,
-		/decl/background_category/religion =  /decl/background_detail/religion/kharmaani
+		/decl/background_category/citizenship = /decl/background_detail/citizenship/other,
+		/decl/background_category/heritage    = /decl/background_detail/heritage/ascent,
+		/decl/background_category/homeworld   = /decl/background_detail/location/kharmaani,
+		/decl/background_category/faction     = /decl/background_detail/faction/ascent_alate,
+		/decl/background_category/religion    = /decl/background_detail/religion/kharmaani
 	)
 
 	pain_emotes_with_pain_level = list(
@@ -96,8 +92,8 @@
 	return
 
 /decl/species/mantid/gyne
-
-	name =        SPECIES_MANTID_GYNE
+	uid =         "species_mantid_gyne"
+	name =        "Kharmaan Gyne"
 	name_plural = "Kharmaan Gynes"
 
 	available_bodytypes = list(/decl/bodytype/crystalline/mantid/gyne)
@@ -113,8 +109,9 @@
 	swap_flags =              ALLMOBS
 
 	force_background_info = list(
-		/decl/background_category/heritage =   /decl/background_detail/heritage/ascent,
-		/decl/background_category/homeworld = /decl/background_detail/location/kharmaani,
-		/decl/background_category/faction =   /decl/background_detail/faction/ascent_gyne,
-		/decl/background_category/religion =  /decl/background_detail/religion/kharmaani
+		/decl/background_category/citizenship = /decl/background_detail/citizenship/other,
+		/decl/background_category/heritage    = /decl/background_detail/heritage/ascent,
+		/decl/background_category/homeworld   = /decl/background_detail/location/kharmaani,
+		/decl/background_category/faction     = /decl/background_detail/faction/ascent_gyne,
+		/decl/background_category/religion    = /decl/background_detail/religion/kharmaani
 	)

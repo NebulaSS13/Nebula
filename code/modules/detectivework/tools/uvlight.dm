@@ -47,6 +47,7 @@
 			add_overlay(emissive_overlay(icon, "[icon_state]-on"))
 			z_flags |= ZMM_MANGLE_PLANES
 
+// TODO: does this even work with SSoverlays?
 /obj/item/uv_light/proc/clear_last_scan()
 	if(scanned.len)
 		for(var/atom/O in scanned)
@@ -62,7 +63,7 @@
 		stored_alpha.Cut()
 	if(reset_objects.len)
 		for(var/obj/item/I in reset_objects)
-			I.overlays -= I.blood_overlay
+			I.overlays -= I.coating_overlay
 			if(I.fluorescent == FLUORESCENT_GLOWING)
 				I.fluorescent = FLUORESCENT_GLOWS
 		reset_objects.Cut()
@@ -86,6 +87,6 @@
 						A.alpha = use_alpha
 					if(istype(A, /obj/item))
 						var/obj/item/O = A
-						if(O.was_bloodied && !(O.blood_overlay in O.overlays))
-							O.overlays |= O.blood_overlay
+						if(O.was_bloodied && !(O.coating_overlay in O.overlays))
+							O.overlays |= O.coating_overlay
 							reset_objects |= O

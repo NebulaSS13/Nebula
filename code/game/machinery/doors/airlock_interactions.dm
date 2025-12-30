@@ -59,8 +59,8 @@
 	for(var/i in 1 to round(crush_damage/AIRLOCK_CRUSH_INCREMENT, 1))
 		apply_damage(AIRLOCK_CRUSH_INCREMENT, BRUTE)
 
-	set_status(STAT_STUN, round(crush_damage / 8, 1))
-	set_status(STAT_WEAK, round(crush_damage / 8, 1))
+	set_status_condition(STAT_STUN, round(crush_damage / 8, 1))
+	set_status_condition(STAT_WEAK, round(crush_damage / 8, 1))
 
 	var/turf/T = loc
 	if(!istype(T))

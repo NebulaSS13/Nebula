@@ -45,6 +45,7 @@
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/pickup2.ogg'
 	can_be_twohanded = TRUE // also checks one_hand_penalty
+	needs_attack_dexterity = DEXTERITY_WEAPONS
 
 	var/fire_verb = "fire"
 	var/waterproof = FALSE
@@ -193,15 +194,20 @@
 /obj/item/gun/proc/special_check(var/mob/user)
 
 	if(!isliving(user))
-		return 0
-	if(!user.check_dexterity(DEXTERITY_WEAPONS))
-		return 0
+		return FALSE
+
+	if(!user.check_dexterity(get_required_attack_dexterity(user)))
+		return FALSE
+
+	if(is_secure_gun() && !free_fire() && (!authorized_modes[sel_mode] || !registered_owner))
+		audible_message(SPAN_WARNING("\The [src] buzzes, refusing to fire."), hearing_distance = 3)
+		playsound(loc, 'sound/machines/buzz-sigh.ogg', 10, 0)
+		return FALSE
 
 	var/mob/living/M = user
 	if(!safety() && world.time > last_safety_check + 5 MINUTES && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		if(prob(30))
 			toggle_safety()
-			return 1
 
 	if(M.has_genetic_condition(GENE_COND_CLUMSY) && prob(40)) //Clumsy handling
 		var/obj/P = consume_next_projectile()
@@ -218,8 +224,9 @@
 				M.try_unequip(src)
 		else
 			handle_click_empty(user)
-		return 0
-	return 1
+		return FALSE
+
+	return TRUE
 
 /obj/item/gun/emp_act(severity)
 	for(var/obj/O in contents)
@@ -243,14 +250,14 @@
 		handle_suicide(user)
 		return TRUE
 
-	if(user.a_intent != I_HURT && user.aiming && user.aiming.active) //if aim mode, don't pistol whip
+	if(!user.check_intent(I_FLAG_HARM) && user.aiming && user.aiming.active) //if aim mode, don't pistol whip
 		if (user.aiming.aiming_at != target)
 			PreFire(target, user)
 		else
 			Fire(target, user, pointblank=1)
 		return TRUE
 
-	if(user.a_intent == I_HURT) //point blank shooting
+	if(user.check_intent(I_FLAG_HARM)) //point blank shooting
 		Fire(target, user, pointblank = TRUE)
 		return TRUE
 
@@ -259,7 +266,8 @@
 /obj/item/gun/dropped(var/mob/living/user)
 	check_accidents(user)
 	update_icon()
-	return ..()
+	. = ..()
+	clear_autofire()
 
 /obj/item/gun/proc/Fire(atom/target, atom/movable/firer, clickparams, pointblank = FALSE, reflex = FALSE, set_click_cooldown = TRUE, target_zone = BP_CHEST)
 	if(!firer || !target)
@@ -287,7 +295,7 @@
 			return
 
 		if(safety())
-			if(user.a_intent == I_HURT && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //reflex un-safeying
+			if(user.check_intent(I_FLAG_HARM) && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //reflex un-safeying
 				toggle_safety(user)
 			else
 				handle_click_empty(user)
@@ -622,14 +630,14 @@
 		accuracy = initial(accuracy)
 		screen_shake = initial(screen_shake)
 
-/obj/item/gun/examine(mob/user)
+/obj/item/gun/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		if(firemodes.len > 1)
 			var/datum/firemode/current_mode = firemodes[sel_mode]
-			to_chat(user, "The fire selector is set to [current_mode.name].")
+			. += "The fire selector is set to [current_mode.name]."
 	if(has_safety)
-		to_chat(user, "The safety is [safety() ? "on" : "off"].")
+		. += "The safety is [safety() ? "on" : "off"]."
 	last_safety_check = world.time
 
 /obj/item/gun/proc/try_switch_firemodes(mob/user)
@@ -698,18 +706,13 @@
 	last_handled = world.time
 
 /obj/item/gun/on_disarm_attempt(mob/target, mob/attacker)
-	var/list/turfs = list()
-	for(var/turf/T in view())
-		turfs += T
-	if(turfs.len)
+	var/list/turfs = view()
+	if(length(turfs))
 		var/turf/shoot_to = pick(turfs)
-		target.visible_message("<span class='danger'>\The [src] goes off during the struggle!</span>")
+		target.visible_message(SPAN_DANGER("\The [src] goes off during the struggle!"))
 		afterattack(shoot_to,target)
-		return 1
-
-/obj/item/gun/dropped(mob/living/user)
-	. = ..()
-	clear_autofire()
+		return TRUE
+	return FALSE
 
 /obj/item/gun/proc/can_autofire()
 	return (autofire_enabled && world.time >= next_fire_time)
@@ -761,6 +764,7 @@
 
 /decl/interaction_handler/gun/toggle_safety
 	name = "Toggle Safety"
+	examine_desc = "toggle the safety"
 
 /decl/interaction_handler/gun/toggle_safety/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/gun/gun = target
@@ -768,6 +772,7 @@
 
 /decl/interaction_handler/gun/toggle_firemode
 	name = "Change Firemode"
+	examine_desc = "change the firemode"
 
 /decl/interaction_handler/gun/toggle_firemode/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/gun/gun = target

@@ -4,7 +4,7 @@
 
 /datum/unit_test/mob_damage/vox
 	name = "MOB: Vox damage check template"
-	template = /datum/unit_test/mob_damage/vox
+	abstract_type = /datum/unit_test/mob_damage/vox
 	mob_type = /mob/living/human/vox
 
 /datum/unit_test/mob_damage/vox/brute

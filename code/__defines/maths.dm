@@ -1,5 +1,5 @@
 // Macro functions.
-#define RAND_F(LOW, HIGH) (rand() * (HIGH - LOW) + LOW)
+#define RAND_F(LOW, HIGH) (rand() * ((HIGH) - (LOW)) + (LOW))
 
 // Float-aware floor and ceiling since round() will round upwards when given a second arg.
 #define NONUNIT_FLOOR(x, y)    (floor((x) / (y)) * (y))

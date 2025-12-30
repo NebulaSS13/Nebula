@@ -1,7 +1,7 @@
 var/global/list/all_gps_units = list()
 /obj/item/gps
 	name = "global coordinate system"
-	desc = "A handheld relay used to triangulates the approximate co-ordinates of the device."
+	desc = "A handheld relay used to triangulate the approximate coordinates of the device in spacetime."
 	icon = 'icons/obj/items/device/locator.dmi'
 	icon_state = ICON_STATE_WORLD
 	origin_tech = @'{"materials":2,"programming":2,"wormholes":2}'
@@ -40,10 +40,10 @@ var/global/list/all_gps_units = list()
 	update_holder()
 	update_icon()
 
-/obj/item/gps/examine(mob/user, distance)
+/obj/item/gps/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, SPAN_NOTICE("\The [src]'s screen shows: <i>[get_coordinates()]</i>."))
+		. += SPAN_NOTICE("\The [src]'s screen shows: <i>[get_coordinates()]</i>.")
 
 /obj/item/gps/proc/get_coordinates()
 	var/turf/T = get_turf(src)
@@ -377,6 +377,7 @@ var/global/list/all_gps_units = list()
 /decl/interaction_handler/gps_toggle
 	name = "Toggle Tracking"
 	expected_target_type = /obj/item/gps
+	examine_desc = "toggle GPS tracking"
 
 /decl/interaction_handler/gps_toggle/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/gps/G = target

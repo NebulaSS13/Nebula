@@ -26,11 +26,6 @@
 	)
 	return default_emotes
 
-/mob/living/brain/handle_regular_status_updates()
-	. = ..()
-	if(emp_damage || stat == DEAD || !is_in_interface())
-		SET_STATUS_MAX(src, STAT_SILENCE, 2)
-
 /mob/living/brain/is_deaf()
 	return emp_damage || stat == DEAD || !is_in_interface()
 
@@ -99,8 +94,10 @@
 			emp_damage += rand(0,10)
 	emp_damage = clamp(emp_damage, 0, max_emp_damage)
 
-/mob/living/brain/handle_regular_status_updates() // Status & health update, are we dead or alive etc.
+/mob/living/brain/handle_regular_status_updates() // Status & health update, are we dead or alive, can we communicate, etc.
 	. = ..()
+	if(emp_damage || stat == DEAD || !is_in_interface())
+		SET_STATUS_MAX(src, STAT_SILENCE, 2)
 	if(stat == DEAD || !isSynthetic())
 		emp_damage = 0
 		return

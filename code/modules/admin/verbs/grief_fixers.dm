@@ -4,35 +4,56 @@
 
 	if(!check_rights(R_ADMIN|R_DEBUG)) return
 
-	if(alert("WARNING: Executing this command will perform a full reset of atmosphere. All pipelines will lose any gas that may be in them, and all zones will be reset to contain air mix as on roundstart. The supermatter engine will also be stopped (to prevent overheat due to removal of coolant). Do not use unless the map is suffering serious atmospheric issues due to grief or bug.", "Full Atmosphere Reboot", "No", "Yes") == "No")
+	if(alert("WARNING: Executing this command will perform a full reset of atmosphere. All pipelines will lose any gas that may be in them, and all zones will be reset to contain air mix as on roundstart. This may require any atmos-based generators to shut down. Do not use unless the map is suffering serious atmospheric issues due to grief or bug.", "Full Atmosphere Reboot", "No", "Yes") == "No")
 		return
 	SSstatistics.add_field_details("admin_verb","FA")
 
 	log_and_message_admins("Full atmosphere reset initiated by [usr].")
-	to_world("<span class = 'danger'>Initiating restart of atmosphere. The server may lag a bit.</span>")
+	to_world(SPAN_DANGER("Initiating restart of atmosphere. The server may lag a bit."))
 	sleep(10)
 	var/current_time = world.timeofday
 
-	// Depower the supermatter, as it would quickly blow up once we remove all gases from the pipes.
-	for(var/obj/machinery/power/supermatter/S in SSmachines.machinery)
-		S.power = 0
-	to_chat(usr, "\[1/5\] - Supermatter depowered")
+	var/list/steps = decls_repository.get_decls_of_subtype_unassociated(/decl/atmos_grief_fix_step)
+	steps = sortTim(steps.Copy(), /proc/cmp_decl_sort_value_asc)
+	var/step_count = length(steps)
+	for(var/step_index in 1 to step_count)
+		var/decl/atmos_grief_fix_step/fix_step = steps[step_index]
+		to_chat(usr, "\[[step_index]/[step_count]\] - [fix_step.name].")
+		fix_step.act()
+	to_world(SPAN_DANGER("Atmosphere restart completed in <b>[(world.timeofday - current_time)/(1 SECOND)]</b> seconds."))
 
+/decl/atmos_grief_fix_step
+	abstract_type = /decl/atmos_grief_fix_step
+	var/name
+
+/decl/atmos_grief_fix_step/proc/act()
+	return
+
+/decl/atmos_grief_fix_step/purge_pipenets
+	name = "All pipenets purged of gas"
+	sort_order = 1
+
+/decl/atmos_grief_fix_step/purge_pipenets/act()
 	// Remove all gases from all pipenets
-	for(var/net in SSmachines.pipenets)
-		var/datum/pipe_network/PN = net
+	for(var/datum/pipe_network/PN as anything in SSmachines.pipenets)
 		for(var/datum/gas_mixture/G in PN.gases)
-			G.gas = list()
+			G.gas.Cut()
 			G.update_values()
 
-	to_chat(usr, "\[2/5\] - All pipenets purged of gas.")
+/decl/atmos_grief_fix_step/delete_zones
+	name = "All ZAS Zones removed"
+	sort_order = 2
 
+/decl/atmos_grief_fix_step/delete_zones/act()
 	// Delete all zones.
 	for(var/zone/Z in SSair.zones)
 		Z.c_invalidate()
 
-	to_chat(usr, "\[3/5\] - All ZAS Zones removed.")
+/decl/atmos_grief_fix_step/reset_turfs
+	name = "All turfs reset to roundstart values"
+	sort_order = 3
 
+/decl/atmos_grief_fix_step/reset_turfs/act()
 	var/list/unsorted_overlays = list()
 	var/list/all_gasses = decls_repository.get_decls_of_subtype(/decl/material/gas)
 	for(var/id in all_gasses)
@@ -41,12 +62,11 @@
 
 	for(var/turf/T in world)
 		T.air = null
-		T.overlays.Remove(unsorted_overlays)
 		T.zone = null
 
-	to_chat(usr, "\[4/5\] - All turfs reset to roundstart values.")
+/decl/atmos_grief_fix_step/reboot_zas
+	name = "ZAS Rebooted"
+	sort_order = 4
 
+/decl/atmos_grief_fix_step/reboot_zas/act()
 	SSair.reboot()
-
-	to_chat(usr, "\[5/5\] - ZAS Rebooted")
-	to_world("<span class = 'danger'>Atmosphere restart completed in <b>[(world.timeofday - current_time)/10]</b> seconds.</span>")

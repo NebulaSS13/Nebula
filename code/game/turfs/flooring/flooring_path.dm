@@ -7,6 +7,7 @@
 	neighbour_type = /decl/flooring/path
 	color          = null
 	constructed    = TRUE
+	uid            = "floor_path"
 
 	// If null, this is just skipped.
 	var/paving_adjective = "cobbled"
@@ -15,11 +16,11 @@
 	var/paver_noun = "stones"
 
 /decl/flooring/path/update_turf_strings(turf/floor/target)
-	var/decl/material/material = target?.get_material()
-	ASSERT(material?.adjective_name)
+	var/decl/material/floor_material = target?.get_material()
+	ASSERT(floor_material?.adjective_name)
 	ASSERT(paver_noun)
-	target.SetName("[material.adjective_name] [name]")
-	target.desc = "[jointext_no_nulls(list("A", paving_adjective, "path made of", paver_adjective, material.adjective_name, paver_noun), " ")]."
+	target.SetName("[floor_material.adjective_name] [name]")
+	target.desc = "[jointext_no_nulls(list("A", paving_adjective, "path made of", paver_adjective, floor_material.adjective_name, paver_noun), " ")]."
 
 /decl/flooring/path/cobblestone
 	name            = "cobblestones"
@@ -27,15 +28,21 @@
 	icon_base       = "cobble"
 	icon_edge_layer = FLOOR_EDGE_PATH
 	flooring_flags  = TURF_REMOVE_CROWBAR
+	has_base_range = 1
+	uid            = "floor_path_cobble"
 
 /decl/flooring/path/running_bond
 	name           = "stone path"
 	desc           = "A rustic stone path, laid out in a running bond pattern."
 	icon_base      = "runningbond"
+	has_base_range = 3
 	gender         = NEUTER
+	uid            = "floor_path_bond"
 
 /decl/flooring/path/herringbone
 	name           = "stone path"
 	desc           = "A rustic stone path, laid out in a herringbone pattern."
 	icon_base      = "herringbone"
+	has_base_range = null
 	gender         = NEUTER
+	uid            = "floor_path_herring"

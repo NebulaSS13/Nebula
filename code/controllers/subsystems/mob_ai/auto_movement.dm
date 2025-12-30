@@ -51,5 +51,8 @@ SUBSYSTEM_DEF(automove)
 		if(controller.handle_mover(mover, moving_metadata[mover]) == PROCESS_KILL && !QDELETED(mover))
 			mover.stop_automove()
 		if(MC_TICK_CHECK)
-			processing_atoms.Cut(1, i+1)
+			if(i >= length(processing_atoms))
+				processing_atoms.Cut()
+			else
+				processing_atoms.Cut(1, i+1)
 			return

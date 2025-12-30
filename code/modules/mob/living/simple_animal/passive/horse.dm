@@ -1,21 +1,21 @@
 /mob/living/simple_animal/passive/horse
-	name                 = "horse"
-	real_name            = "horse"
-	desc                 = "A hefty four-legged animal traditionally used for hauling goods, recreational riding, and stomping enemy soldiers to death."
-	icon                 = 'icons/mob/simple_animal/horse.dmi'
-	speak_emote          = list("neighs", "whinnies")
-	possession_candidate = TRUE
-	mob_size             = MOB_SIZE_LARGE
-	pixel_x              = -6
-	default_pixel_x      = -6
-	base_animal_type     = /mob/living/simple_animal/passive/horse
-	faction              = null
-	buckle_pixel_shift   = @"{'x':0,'y':0,'z':16}"
-	can_have_rider       = TRUE
-	max_rider_size       = MOB_SIZE_MEDIUM
-	ai                   = /datum/mob_controller/passive/horse
-
-	var/honse_color // Replace this with "base" state when simple animal stuff is merged.
+	name                  = "horse"
+	real_name             = "horse"
+	desc                  = "A hefty four-legged animal traditionally used for hauling goods, recreational riding, and stomping enemy soldiers to death."
+	icon                  = 'icons/mob/simple_animal/horse.dmi'
+	speak_emote           = list("neighs", "whinnies")
+	possession_candidate  = TRUE
+	mob_size              = MOB_SIZE_LARGE
+	pixel_x               = -6
+	default_pixel_x       = -6
+	base_animal_type      = /mob/living/simple_animal/passive/horse
+	faction               = null
+	buckle_pixel_shift    = @'{"x":0,"y":0,"z":16}'
+	can_have_rider        = TRUE
+	max_rider_size        = MOB_SIZE_MEDIUM
+	ai                    = /datum/mob_controller/passive/horse
+	color                 = "#806146" // preview color
+	draw_visible_overlays = list() // to avoid applying any defaults
 
 /datum/mob_controller/passive/horse
 	emote_speech = list("Neigh!","NEIGH!","Neigh?")
@@ -29,20 +29,18 @@
 
 /mob/living/simple_animal/passive/horse/Initialize()
 	. = ..()
+	color = null // clear preview color
 	add_inventory_slot(new /datum/inventory_slot/back/horse)
 	equip_to_slot_or_del(new /obj/item/saddle(src), slot_back_str)
-	if(!honse_color)
-		honse_color = pick(get_possible_horse_colors())
+	if(!LAZYACCESS(draw_visible_overlays, "base"))
+		LAZYSET(draw_visible_overlays, "base", pick(get_possible_horse_colors()))
 	update_icon()
 
-/mob/living/simple_animal/passive/horse/refresh_visible_overlays()
-	var/list/current_overlays = list(overlay_image(icon, icon_state, honse_color, RESET_COLOR))
+/mob/living/simple_animal/passive/horse/add_additional_visible_overlays(list/accumulator)
 	if(buckled_mob)
-		var/image/horse_front = overlay_image(icon, "[icon_state]-buckled", honse_color, RESET_COLOR)
+		var/image/horse_front = overlay_image(icon, "[icon_state]-buckled", draw_visible_overlays["base"], RESET_COLOR)
 		horse_front.layer = ABOVE_HUMAN_LAYER
-		current_overlays += horse_front
-	set_current_mob_overlay(HO_SKIN_LAYER, current_overlays, redraw_mob = FALSE) // We're almost certainly redrawing in ..() anyway
-	. = ..()
+		accumulator += horse_front
 
 /mob/living/simple_animal/passive/horse/get_bodytype()
 	return GET_DECL(/decl/bodytype/quadruped/animal/horse)

@@ -1,9 +1,13 @@
 /turf/wall/natural/proc/make_ramp(var/mob/user, var/new_slope, var/skip_icon_update = FALSE)
 
 	ramp_slope_direction = new_slope
+	QDEL_NULL_LIST(engravings)
 
 	var/old_ao = permit_ao
 	if(ramp_slope_direction)
+
+		user?.visible_message(SPAN_NOTICE("\The [user] digs out \the [src], forming a ramp."))
+
 		drop_ore()
 		permit_ao  = FALSE
 		blocks_air = FALSE
@@ -23,6 +27,9 @@
 		update_neighboring_ramps()
 
 	else
+
+		user?.visible_message(SPAN_NOTICE("\The [user] clears out \the [src]."))
+
 		permit_ao  = initial(permit_ao)
 		blocks_air = initial(blocks_air)
 		density    = initial(density)
@@ -49,16 +56,18 @@
 
 /turf/wall/natural/get_alt_interactions(mob/user)
 	. = ..()
-	LAZYADD(., /decl/interaction_handler/drill_ramp)
+	LAZYADD(., /decl/interaction_handler/dig_ramp)
 
-/decl/interaction_handler/drill_ramp
-	name = "Drill Ramp"
+/decl/interaction_handler/dig_ramp
+	name = "Dig Ramp"
 	expected_target_type = /turf/wall/natural
+	examine_desc = "dig a ramp in the direction you are facing"
 
-/decl/interaction_handler/drill_ramp/is_possible(atom/target, mob/user, obj/item/prop)
+/decl/interaction_handler/dig_ramp/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..()
 	if(.)
-		if(!IS_PICK(prop))
+		prop ||= user.get_usable_hand_slot_organ() // Allows drakes to dig.
+		if(!IS_PICK(prop) && !IS_SHOVEL(prop))
 			return FALSE
 		var/turf/wall/natural/wall = target
 		if(!HasAbove(wall.z))
@@ -67,17 +76,21 @@
 			return FALSE
 		return TRUE
 
-/decl/interaction_handler/drill_ramp/invoked(atom/target, mob/user, obj/item/prop)
+/decl/interaction_handler/dig_ramp/invoked(atom/target, mob/user, obj/item/prop)
 	var/turf/wall/natural/wall = target
 	var/user_dir = get_dir(wall, user)
 	if(!(user_dir in global.cardinal))
 		to_chat(user, SPAN_WARNING("You must be standing at a cardinal angle to create a ramp."))
 		return FALSE
+	prop ||= user.get_usable_hand_slot_organ() // Allows drakes to dig.
+	if(wall.material?.hardness > prop?.material?.hardness)
+		to_chat(user, SPAN_WARNING("Your [prop.name] is not hard enough to cut into \the [wall]."))
+		return FALSE
 	var/turf/wall/natural/support = get_step(wall, global.reverse_dir[user_dir])
 	if(!istype(support) || support.ramp_slope_direction)
 		to_chat(user, SPAN_WARNING("You cannot cut a ramp into a wall with no additional walls behind it."))
 		return FALSE
-	if(prop.do_tool_interaction(TOOL_PICK, user, wall, 3 SECONDS, suffix_message = ", forming it into a ramp") && !wall.ramp_slope_direction)
+	if(prop.do_tool_interaction((IS_PICK(prop) ? TOOL_PICK : TOOL_SHOVEL), user, wall, 3 SECONDS, suffix_message = ", forming it into a ramp") && !wall.ramp_slope_direction)
 		wall.make_ramp(user, user_dir)
 		return TRUE
 	return FALSE

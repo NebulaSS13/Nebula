@@ -203,8 +203,8 @@
 		CF.set_dir(field_dir)
 
 
-/obj/machinery/shieldwallgen/attackby(obj/item/W, mob/user)
-	if(IS_WRENCH(W))
+/obj/machinery/shieldwallgen/attackby(obj/item/used_item, mob/user)
+	if(IS_WRENCH(used_item))
 		if(active)
 			to_chat(user, "Turn off the field generator first.")
 			return TRUE
@@ -218,7 +218,7 @@
 		src.anchored = FALSE
 		return TRUE
 
-	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
+	if(istype(used_item, /obj/item/card/id)||istype(used_item, /obj/item/modular_computer))
 		if (src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")

@@ -1,6 +1,6 @@
 /obj/machinery/cooker/fryer
 	name = "deep fryer"
-	desc = "Deep fried <i>everything</i>."
+	desc = "Deep-fried <i>everything</i>."
 	icon_state = "fryer_off"
 	can_cook_mobs = 1
 	cook_type = "deep fried"

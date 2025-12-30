@@ -1,3 +1,4 @@
+var/global/universe_has_ended = 0
 /**********************
  * ENDGAME STUFF
  **********************/

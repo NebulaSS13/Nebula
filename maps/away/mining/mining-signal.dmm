@@ -150,7 +150,7 @@
 /turf/floor/tiled,
 /area/outpost/abandoned)
 "aK" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 8;
 	icon_state = "officechair_dark"
 	},
@@ -158,7 +158,7 @@
 /turf/floor/tiled/white,
 /area/outpost/abandoned)
 "aL" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 4;
 	icon_state = "officechair_dark"
 	},
@@ -332,7 +332,7 @@
 /turf/floor/tiled/white,
 /area/outpost/abandoned)
 "bs" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /obj/effect/floor_decal/corner/purple{
 	dir = 5
 	},
@@ -657,43 +657,43 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/outpost/abandoned)
 "cn" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/wood/broken/three,
+/turf/floor/laminate/broken/three,
 /area/outpost/abandoned)
 "co" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/random/trash,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/outpost/abandoned)
 "cp" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/board,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/outpost/abandoned)
 "cq" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/loot,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/outpost/abandoned)
 "cr" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/turf/floor/wood/broken/two,
+/turf/floor/laminate/broken/two,
 /area/outpost/abandoned)
 "cs" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/outpost/abandoned)
 "ct" = (
 /obj/machinery/door/airlock/centcom,
@@ -739,46 +739,46 @@
 	},
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/outpost/abandoned)
 "cI" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/outpost/abandoned)
 "cJ" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/wood/broken/four,
+/turf/floor/laminate/broken/four,
 /area/outpost/abandoned)
 "cK" = (
 /obj/effect/floor_decal/plaque,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/outpost/abandoned)
 "cL" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/random/trash,
-/turf/floor/wood/broken,
+/turf/floor/laminate/broken,
 /area/outpost/abandoned)
 "cM" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/outpost/abandoned)
 "cN" = (
 /obj/structure/filing_cabinet/tall,
 /turf/floor/carpet/blue,
 /area/outpost/abandoned)
 "cO" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/loot,
 /turf/floor/carpet/blue,
 /area/outpost/abandoned)
 "cP" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -975,13 +975,13 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 10
 	},
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/loot,
 /turf/floor/carpet,
 /area/outpost/abandoned)
 "dx" = (
 /obj/effect/floor_decal/spline/fancy/wood,
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /turf/floor/carpet,
 /area/outpost/abandoned)
 "dy" = (
@@ -994,7 +994,7 @@
 /area/outpost/abandoned)
 "dz" = (
 /obj/effect/floor_decal/spline/fancy/wood,
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/loot,
 /turf/floor/carpet/broken,
 /area/outpost/abandoned)
@@ -1002,7 +1002,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /turf/floor/carpet,
 /area/outpost/abandoned)
 "dC" = (
@@ -1061,12 +1061,12 @@
 /area/outpost/abandoned)
 "dK" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
 "dL" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /obj/machinery/light/small/emergency{
 	dir = 1;
 	icon_state = "bulb1"
@@ -1074,7 +1074,7 @@
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
 "dM" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
 "dN" = (
@@ -1100,7 +1100,7 @@
 /turf/wall/titanium,
 /area/outpost/abandoned)
 "dR" = (
-/obj/structure/table/woodentable{
+/obj/structure/table/laminate{
 	icon_state = "solid_flip0"
 	},
 /turf/floor/carpet/blue,
@@ -1561,7 +1561,7 @@
 /area/outpost/abandoned)
 "fs" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/vomit/mapped,
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
 "ft" = (
@@ -1690,7 +1690,7 @@
 	icon_state = "req_comp_rewired";
 	pixel_y = -32;
 	stat = 1;
-	dir = 2;
+	dir = 2
 	},
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -1700,7 +1700,7 @@
 	dir = 4;
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc/high/inactive{
+/obj/machinery/apc/high/inactive{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1746,7 +1746,7 @@
 /turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "fV" = (
-/obj/structure/bed/chair/office/light{
+/obj/structure/chair/office/light{
 	dir = 8
 	},
 /turf/floor/tiled/dark,
@@ -1780,7 +1780,7 @@
 /turf/wall/titanium,
 /area/outpost/abandoned)
 "ga" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt/visible,
@@ -2126,7 +2126,7 @@
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
 "hb" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
@@ -2176,7 +2176,7 @@
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
 "hk" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -2190,7 +2190,7 @@
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
 "hm" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/tiled/airless,
@@ -2428,7 +2428,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/vomit/mapped,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,

@@ -101,8 +101,8 @@ var/global/list/telecomms_hubs = list()
 
 	var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 	var/datum/computer_network/network = network_device?.get_network()
-	for(var/weakref/R in network?.connected_radios)
-		var/obj/item/radio/radio = R.resolve()
+	for(var/weakref/radio_ref in network?.connected_radios)
+		var/obj/item/radio/radio = radio_ref.resolve()
 		if(istype(radio) && !QDELETED(radio))
 			radio.sync_channels_with_network()
 
@@ -163,17 +163,17 @@ var/global/list/telecomms_hubs = list()
 	var/send_name = istype(speaker) ? speaker.GetVoice() : ("[speaker]" || "unknown")
 	var/list/listeners = list() // Dictionary of listener -> boolean (include overmap origin)
 	// Broadcast to all radio devices in our network.
-	for(var/weakref/W as anything in network.connected_radios)
-		var/obj/item/radio/R = W.resolve()
-		if(!istype(R) || QDELETED(R) || !R.can_receive_message(network))
+	for(var/weakref/radio_ref as anything in network.connected_radios)
+		var/obj/item/radio/radio = radio_ref.resolve()
+		if(!istype(radio) || QDELETED(radio) || !radio.can_receive_message(network))
 			continue
-		var/turf/speaking_from = get_turf(R)
+		var/turf/speaking_from = get_turf(radio)
 		if(!speaking_from)
 			continue
-		if(!R.can_decrypt(encryption))
+		if(!radio.can_decrypt(encryption))
 			continue
 		// TODO: This check seems extraneous, given how headsets find their available channels.
-		var/list/check_channels = R.get_available_channels()
+		var/list/check_channels = radio.get_available_channels()
 		if(!LAZYACCESS(check_channels, channel))
 			continue
 
@@ -181,7 +181,7 @@ var/global/list/telecomms_hubs = list()
 		// then append the overmap object name to it, so they know where we're from
 		var/listener_overmap_object = istype(speaking_from) && global.overmap_sectors[num2text(speaking_from.z)]
 		var/send_overmap = send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != listener_overmap_object
-		for(var/mob/listener as anything in R.get_radio_listeners())
+		for(var/mob/listener as anything in radio.get_radio_listeners())
 			listeners[listener] = send_overmap
 
 	// Ghostship is magic: Ghosts can hear radio chatter from anywhere

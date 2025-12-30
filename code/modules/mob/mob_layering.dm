@@ -124,6 +124,10 @@
 				new_pixel_x += pixel_shift["x"] || 0
 				new_pixel_y += pixel_shift["y"] || 0
 				new_pixel_z += pixel_shift["z"] || 0
+			if(pixel_shift == TRUE) // TRUE -> use object's offset
+				new_pixel_x = buckled.pixel_x
+				new_pixel_y = buckled.pixel_y
+				new_pixel_z = buckled.pixel_z
 
 	if(last_pixel_x != new_pixel_x || last_pixel_y != new_pixel_y || last_pixel_z != new_pixel_z)
 		if(anim_time > 0)

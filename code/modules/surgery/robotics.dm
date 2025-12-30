@@ -360,30 +360,30 @@
 /decl/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
 	if(affected)
-		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
-				if(I.surface_accessible)
+		for(var/obj/item/organ/internal/organ in affected.internal_organs)
+			if(BP_IS_PROSTHETIC(organ) && !BP_IS_CRYSTAL(organ) && organ.get_organ_damage() > 0)
+				if(organ.surface_accessible)
 					return affected
 				if(affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED) || affected.hatch_state == HATCH_OPENED)
 					return affected
 
 /decl/surgery_step/robotics/fix_organ_robotic/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	for(var/obj/item/organ/I in affected.internal_organs)
-		if(I && I.damage > 0)
-			if(BP_IS_PROSTHETIC(I))
-				user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
-				"You start mending the damage to [target]'s [I.name]'s mechanisms." )
+	for(var/obj/item/organ/internal/organ in affected.internal_organs)
+		if(organ.get_organ_damage() > 0)
+			if(BP_IS_PROSTHETIC(organ))
+				user.visible_message("[user] starts mending the damage to [target]'s [organ.name]'s mechanisms.", \
+				"You start mending the damage to [target]'s [organ.name]'s mechanisms." )
 	..()
 
 /decl/surgery_step/robotics/fix_organ_robotic/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	for(var/obj/item/organ/I in affected.internal_organs)
-		if(I && I.damage > 0)
-			if(BP_IS_PROSTHETIC(I))
-				user.visible_message("<span class='notice'>[user] repairs [target]'s [I.name] with [tool].</span>", \
-				"<span class='notice'>You repair [target]'s [I.name] with [tool].</span>" )
-				I.damage = 0
+	for(var/obj/item/organ/internal/organ in affected.internal_organs)
+		if(organ.get_organ_damage() > 0)
+			if(BP_IS_PROSTHETIC(organ))
+				user.visible_message("<span class='notice'>[user] repairs [target]'s [organ.name] with [tool].</span>", \
+				"<span class='notice'>You repair [target]'s [organ.name] with [tool].</span>" )
+				organ.set_organ_damage(0)
 	..()
 
 /decl/surgery_step/robotics/fix_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -395,7 +395,7 @@
 	for(var/internal in affected.internal_organs)
 		var/obj/item/organ/internal/I = internal
 		if(I)
-			I.take_internal_damage(rand(3,5))
+			I.take_damage(rand(3,5))
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -416,7 +416,7 @@
 	for(var/obj/item/organ/I in target.get_internal_organs())
 		if(I && !(I.status & ORGAN_CUT_AWAY) && !BP_IS_CRYSTAL(I) && I.parent_organ == target_zone)
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
-			radial_button.name = "Detach \the [I.name]"
+			radial_button.name = "Detach \the [I]"
 			LAZYSET(attached_organs, I.organ_tag, radial_button)
 	if(!LAZYLEN(attached_organs))
 		to_chat(user, SPAN_WARNING("There are no appropriate internal components to decouple."))
@@ -461,7 +461,7 @@
 	for(var/obj/item/organ/I in affected.implants)
 		if ((I.status & ORGAN_CUT_AWAY) && BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && (I.parent_organ == target_zone))
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
-			radial_button.name = "Reattach \the [I.name]"
+			radial_button.name = "Reattach \the [I]"
 			LAZYSET(removable_organs, I.organ_tag, radial_button)
 	var/organ_to_replace = show_radial_menu(user, tool, removable_organs, radius = 42, require_near = TRUE, use_labels = RADIAL_LABELS_OFFSET, check_locs = list(tool))
 	if(!organ_to_replace)

@@ -14,15 +14,15 @@
 	var/P_type_t = ""
 	var/max_metal = 50
 	var/metal = 10
-	var/obj/item/wrench/W
+	var/obj/item/wrench/wrench
 	var/list/Pipes = list("regular pipes"=0,"scrubbers pipes"=31,"supply pipes"=29,"heat exchange pipes"=2, "fuel pipes"=45)
 
 /obj/machinery/pipelayer/Initialize()
 	. = ..()
-	W = new(src)
+	wrench = new(src)
 
 /obj/machinery/pipelayer/Move(new_turf,M_Dir)
-	..()
+	. = ..()
 
 	if(on && a_dis)
 		dismantle_floor(old_turf)
@@ -39,24 +39,24 @@
 	user.visible_message("<span class='notice'>[user] has [!on?"de":""]activated \the [src].</span>", "<span class='notice'>You [!on?"de":""]activate \the [src].</span>")
 	return TRUE
 
-/obj/machinery/pipelayer/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/pipelayer/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(IS_WRENCH(W))
+	if(IS_WRENCH(used_item))
 		P_type_t = input("Choose pipe type", "Pipe type") as null|anything in Pipes
 		P_type = Pipes[P_type_t]
 		user.visible_message("<span class='notice'>[user] has set \the [src] to manufacture [P_type_t].</span>", "<span class='notice'>You set \the [src] to manufacture [P_type_t].</span>")
 		return TRUE
 
-	if(IS_CROWBAR(W))
+	if(IS_CROWBAR(used_item))
 		a_dis=!a_dis
 		user.visible_message("<span class='notice'>[user] has [!a_dis?"de":""]activated auto-dismantling.</span>", "<span class='notice'>You [!a_dis?"de":""]activate auto-dismantling.</span>")
 		return TRUE
 
-	if(istype(W, /obj/item/stack/material) && W.get_material_type() == /decl/material/solid/metal/steel)
+	if(istype(used_item, /obj/item/stack/material) && used_item.get_material_type() == /decl/material/solid/metal/steel)
 
-		var/result = load_metal(W)
+		var/result = load_metal(used_item)
 		if(isnull(result))
-			to_chat(user, "<span class='warning'>Unable to load [W] - no metal found.</span>")
+			to_chat(user, "<span class='warning'>Unable to load [used_item] - no metal found.</span>")
 		else if(!result)
 			to_chat(user, "<span class='notice'>\The [src] is full.</span>")
 		else
@@ -64,7 +64,7 @@
 
 		return TRUE
 
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		if(metal)
 			var/m = round(input(usr,"Please specify the amount of metal to remove","Remove metal",min(round(metal),50)) as num, 1)
 			m = min(m, 50)
@@ -79,9 +79,9 @@
 		return TRUE
 	return ..()
 
-/obj/machinery/pipelayer/examine(mob/user)
+/obj/machinery/pipelayer/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "\The [src] has [metal] sheet\s, is set to produce [P_type_t], and auto-dismantling is [!a_dis?"de":""]activated.")
+	. += "\The [src] has [metal] sheet\s, is set to produce [P_type_t], and auto-dismantling is [!a_dis?"de":""]activated."
 
 /obj/machinery/pipelayer/proc/reset()
 	on=0
@@ -111,7 +111,7 @@
 	if(istype(new_turf, /turf/floor))
 		var/turf/floor/T = new_turf
 		if(!T.is_plating())
-			T.set_flooring(null, place_product = !T.is_floor_damaged())
+			T.clear_flooring(place_product = !T.is_floor_damaged())
 	return new_turf.is_plating()
 
 /obj/machinery/pipelayer/proc/layPipe(var/turf/w_turf,var/M_Dir,var/old_dir)
@@ -129,6 +129,6 @@
 
 	var/obj/item/pipe/P = new(w_turf)
 	P.set_dir(p_dir)
-	P.attackby(W , src)
+	P.attackby(wrench , src)
 
 	return 1

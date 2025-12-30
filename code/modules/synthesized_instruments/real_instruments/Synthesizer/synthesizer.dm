@@ -1,7 +1,7 @@
 //Synthesizer and minimoog. They work the same
 
 /datum/sound_player/synthesizer
-	volume = 40
+	play_volume = 40
 
 /obj/structure/synthesized_instrument/synthesizer
 	name = "The Synthesizer 3.0"
@@ -12,8 +12,8 @@
 	path = /datum/instrument
 	sound_player = /datum/sound_player/synthesizer
 
-/obj/structure/synthesized_instrument/synthesizer/attackby(obj/item/O, mob/user, params)
-	if (IS_WRENCH(O))
+/obj/structure/synthesized_instrument/synthesizer/attackby(obj/item/used_item, mob/user, params)
+	if (IS_WRENCH(used_item))
 		if (!anchored && !isspaceturf(get_turf(src)))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			to_chat(user, "<span class='notice'>You begin to tighten \the [src] to the floor...</span>")

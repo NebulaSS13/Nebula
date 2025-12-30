@@ -79,18 +79,18 @@
 	else
 		close_browser(user, "window=eftpos")
 
-/obj/item/eftpos/attackby(obj/item/O, user)
+/obj/item/eftpos/attackby(obj/item/used_item, user)
 
-	var/obj/item/card/id/I = O.GetIdCard()
+	var/obj/item/card/id/I = used_item.GetIdCard()
 
 	if(I)
 		if(linked_account)
-			scan_card(I, O)
+			scan_card(I, used_item)
 		else
 			to_chat(user, "[html_icon(src)]<span class='warning'>Unable to connect to linked account.</span>")
 		return TRUE
-	else if (istype(O, /obj/item/charge_stick))
-		var/obj/item/charge_stick/E = O
+	else if (istype(used_item, /obj/item/charge_stick))
+		var/obj/item/charge_stick/E = used_item
 		if (linked_account)
 			if(transaction_locked && !transaction_paid)
 				if(!E.is_locked() && transaction_amount <= E.loaded_worth)
@@ -105,7 +105,7 @@
 					else
 						to_chat(user, "[html_icon(src)]<span class='warning'>Transaction failed! Please try again.</span>")
 				else
-					to_chat(user, "[html_icon(src)]<span class='warning'>\The [O] doesn't have that much money!</span>")
+					to_chat(user, "[html_icon(src)]<span class='warning'>\The [used_item] doesn't have that much money!</span>")
 		else
 			to_chat(user, "[html_icon(src)]<span class='warning'>EFTPOS is not connected to an account.</span>")
 		return TRUE

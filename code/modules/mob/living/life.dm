@@ -1,6 +1,5 @@
 /mob/living/Life()
 	set invisibility = FALSE
-	set background = BACKGROUND_ENABLED
 
 	..()
 
@@ -23,13 +22,12 @@
 
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
+	if(QDELETED(src)) // Destroyed by fire or pressure damage in handle_environment()
+		return PROCESS_KILL
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
-	handle_stasis()
 
-	if(stat != DEAD)
-		if(!is_in_stasis())
-			. = handle_living_non_stasis_processes()
-		aura_check(AURA_TYPE_LIFE)
+	if(stat != DEAD && !has_mob_modifier(/decl/mob_modifier/stasis))
+		. = handle_living_non_stasis_processes()
 
 	for(var/obj/item/grab/grab as anything in get_active_grabs())
 		grab.Process()
@@ -41,7 +39,8 @@
 	handle_grasp()
 	handle_stance()
 	handle_regular_hud_updates()
-	handle_status_effects()
+	handle_status_conditions()
+	handle_mob_modifiers()
 	return 1
 
 /mob/living/proc/handle_grasp()
@@ -235,21 +234,20 @@
 
 	// Update chem dosage.
 	// TODO: refactor chem dosage above isSynthetic() and GODMODE checks.
-	if(length(chem_doses))
-		for(var/T in chem_doses)
+	if(length(_chem_doses))
+		for(var/decl/material/reagent as anything in _chem_doses)
 
 			var/still_processing_reagent = FALSE
 			for(var/datum/reagents/holder as anything in metabolizing_holders)
-				if(holder.has_reagent(T))
+				if(holder.has_reagent(reagent))
 					still_processing_reagent = TRUE
 					break
 			if(still_processing_reagent)
 				continue
-			var/decl/material/R = GET_DECL(T)
-			var/dose = LAZYACCESS(chem_doses, T) - R.metabolism*2
-			LAZYSET(chem_doses, T, dose)
-			if(LAZYACCESS(chem_doses, T) <= 0)
-				LAZYREMOVE(chem_doses, T)
+			var/dose = CHEM_DOSE(src, reagent) - reagent.metabolism*2
+			LAZYSET(_chem_doses, reagent, dose)
+			if(CHEM_DOSE(src, reagent) <= 0)
+				LAZYREMOVE(_chem_doses, reagent)
 	if(apply_chemical_effects())
 		update_health()
 
@@ -273,10 +271,10 @@
 	if(!loc)
 		return
 	var/datum/reagents/touching_reagents = get_contact_reagents()
-	if(touching_reagents?.total_volume <= FLUID_MINIMUM_TRANSFER)
+	if(REAGENT_TOTAL_VOLUME(touching_reagents) <= FLUID_MINIMUM_TRANSFER)
 		touching_reagents?.clear_reagents()
 		return
-	var/drip_amount = max(FLUID_MINIMUM_TRANSFER, round(touching_reagents.total_volume * 0.2))
+	var/drip_amount = max(FLUID_MINIMUM_TRANSFER, round(REAGENT_TOTAL_VOLUME(touching_reagents) * 0.2))
 	if(drip_amount)
 		touching_reagents.trans_to(loc, drip_amount)
 
@@ -317,7 +315,7 @@
 	// Push sound to client. Pipe dream TODO: crossfade between the new and old weather ambience.
 	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 0, channel = sound_channels.weather_channel))
 	if(send_sound)
-		sound_to(src, sound(send_sound, repeat = TRUE, wait = 0, volume = 30, channel = sound_channels.weather_channel))
+		sound_to(src, sound(send_sound, repeat = TRUE, wait = 0, volume = 60, channel = sound_channels.weather_channel))
 
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)
 	SHOULD_CALL_PARENT(TRUE)
@@ -444,9 +442,14 @@
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/proc/handle_regular_hud_updates()
+
 	SHOULD_CALL_PARENT(TRUE)
 	if(!should_do_hud_updates())
 		return FALSE
+
+	if(istype(hud_used))
+		hud_used.handle_life_hud_update()
+
 	handle_hud_icons()
 	handle_vision()
 	handle_low_light_vision()
@@ -581,8 +584,7 @@
 	if(!root_bodytype)
 		return
 
-	var/static/list/all_stance_limbs = list(ORGAN_CATEGORY_STANCE, ORGAN_CATEGORY_STANCE_ROOT)
-	var/expected_limbs_for_bodytype = root_bodytype.get_expected_organ_count_for_categories(all_stance_limbs)
+	var/expected_limbs_for_bodytype = root_bodytype.get_expected_organ_count_for_categories(global.all_stance_limbs)
 	if(expected_limbs_for_bodytype <= 0)
 		return // we don't care about stance for whatever reason.
 
@@ -594,7 +596,7 @@
 
 	var/found_limbs = 0
 	var/had_limb_pain = FALSE
-	for(var/obj/item/organ/external/limb in get_organs_by_categories(all_stance_limbs))
+	for(var/obj/item/organ/external/limb in get_organs_by_categories(global.all_stance_limbs))
 		found_limbs++
 		var/add_stance_damage = 0
 		if(limb.is_malfunctioning())
@@ -629,7 +631,7 @@
 
 	// Calculate the expected and actual number of functioning legs we have.
 	var/has_sufficient_working_legs = TRUE
-	var/list/root_limb_tags  = root_bodytype.organ_tags_by_category[ORGAN_CATEGORY_STANCE_ROOT]
+	var/list/root_limb_tags  = root_bodytype.get_expected_organ_tags_for_category(ORGAN_CATEGORY_STANCE_ROOT)
 	var/minimum_working_legs = ceil(length(root_limb_tags) * 0.5)
 	if(minimum_working_legs > 0)
 		var/leg_count = 0

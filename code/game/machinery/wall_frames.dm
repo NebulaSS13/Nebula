@@ -9,15 +9,15 @@
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 	var/fully_construct = FALSE // Results in a machine with all parts auto-installed and ready to go if TRUE; if FALSE, the machine will spawn without removable expected parts
 
-/obj/item/frame/get_contained_matter()
+/obj/item/frame/get_contained_matter(include_reagents = TRUE)
 	. = ..()
 	if(fully_construct)
 		var/list/cost = atom_info_repository.get_matter_for(build_machine_type)
 		for(var/key in cost)
 			.[key] += cost[key]
 
-/obj/item/frame/attackby(obj/item/W, mob/user)
-	if(IS_WRENCH(W))
+/obj/item/frame/attackby(obj/item/used_item, mob/user)
+	if(IS_WRENCH(used_item))
 		for(var/key in matter)
 			SSmaterials.create_object(key, get_turf(src), round(matter[key]/SHEET_MATERIAL_AMOUNT))
 		qdel(src)
@@ -103,32 +103,6 @@
 	fully_construct = TRUE
 	name = "wall-mounted relay kit"
 	desc = "An all-in-one wall-mounted relay kit, comes preassembled."
-
-/obj/item/frame/light
-	name = "light fixture frame"
-	desc = "Used for building lights."
-	icon = 'icons/obj/lighting.dmi'
-	icon_state = "tube-construct-item"
-	build_machine_type = /obj/machinery/light
-	reverse = 1
-
-/obj/item/frame/light/small
-	name = "small light fixture frame"
-	icon_state = "bulb-construct-item"
-	material = /decl/material/solid/metal/steel
-	build_machine_type = /obj/machinery/light/small
-
-/obj/item/frame/light/spot
-	name = "spotlight fixture frame"
-	icon_state = "tube-construct-item"
-	material = /decl/material/solid/metal/steel
-	build_machine_type = /obj/machinery/light/spot
-
-/obj/item/frame/light/nav
-	name = "navigation light fixture frame"
-	icon_state = "tube-construct-item"
-	material = /decl/material/solid/metal/steel
-	build_machine_type = /obj/machinery/light/navigation
 
 /obj/item/frame/button
 	name = "button frame"
@@ -278,10 +252,10 @@
 		return TRUE
 	master_controller_id_tag = null
 
-/obj/item/frame/button/airlock_controller/attackby(obj/item/W, mob/user)
-	if(!istype(W, /obj/item/stock_parts/circuitboard))
+/obj/item/frame/button/airlock_controller/attackby(obj/item/used_item, mob/user)
+	if(!istype(used_item, /obj/item/stock_parts/circuitboard))
 		return ..()
-	var/obj/item/stock_parts/circuitboard/board = W
+	var/obj/item/stock_parts/circuitboard/board = used_item
 	var/obj/machinery/M
 	if(ispath(board.build_path, /obj/machinery/embedded_controller/radio))
 		build_machine_type = board.build_path
@@ -291,7 +265,7 @@
 		. = TRUE
 	if(.)
 		M = build_machine_type
-		to_chat(user, SPAN_NOTICE("You setup \the [src]'s software to work as a '[initial(M.name)]', using \the [W]."))
+		to_chat(user, SPAN_NOTICE("You setup \the [src]'s software to work as a '[initial(M.name)]', using \the [used_item]."))
 		return TRUE
 	return FALSE
 
@@ -305,8 +279,8 @@
 	to_chat(user, SPAN_WARNING("First, use a multitool on the kit to properly setup the controller's software!"))
 
 //Let them also hit it with a circuitboard if they so wish. But multitool is better when you don't want to print one for nothing.
-/obj/item/frame/button/airlock_controller/kit/attackby(obj/item/W, mob/user)
-	if(!IS_MULTITOOL(W))
+/obj/item/frame/button/airlock_controller/kit/attackby(obj/item/used_item, mob/user)
+	if(!IS_MULTITOOL(used_item))
 		return ..()
 	//Handle kit configuration
 	var/obj/machinery/M = /obj/machinery/dummy_airlock_controller

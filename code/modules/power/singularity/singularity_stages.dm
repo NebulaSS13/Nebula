@@ -3,25 +3,25 @@
 	var/name = "gravitational singularity"
 	var/desc = "A gravitational singularity."
 	/// What is the effective physical size of this singularity?
-	var/footprint
+	var/footprint = 1
 	/// What is the numerical size of this singularity?
-	var/stage_size
+	var/stage_size = 0
 	/// What is the minimum singularity energy to reach this sage?
-	var/min_energy
+	var/min_energy = -(INFINITY)
 	/// What is the maximum singularity energy to stay at this sage?
-	var/max_energy
+	var/max_energy = 0
 	/// What icon should the singularity use at this stage?
 	var/icon
 	/// What icon_state should the singularity use at this stage?
 	var/icon_state
 	/// What x offset should the singularity use at this stage?
-	var/pixel_x
+	var/pixel_x = 0
 	/// What y offset should the singularity use at this stage?
-	var/pixel_y
+	var/pixel_y = 0
 	/// What is the pull range of a singularity at this stage?
-	var/grav_pull
+	var/grav_pull = 0
 	/// What is the feeding range of a singularity at this stage?
-	var/consume_range
+	var/consume_range = 0
 	/// If true, the singularity will lose energy in Process().
 	var/dissipates_over_time = TRUE
 	/// How many Process() ticks do we have between dissipations?
@@ -31,9 +31,23 @@
 	/// How much energy do we lose when we dissipate?
 	var/dissipation_energy_loss = 1
 	/// What is the percent chance of an event each tick?
-	var/event_chance
+	var/event_chance = 0
+	/// Do we force a specific event when we proc events?
+	var/decl/singularity_event/forced_event = null
 	/// Will we wander around?
-	var/wander
+	var/wander = FALSE
+	/// Can explosions destroy the singularity?
+	var/explosion_vulnerable = FALSE
+	/// What is the heavy range for the EM pulse event in this stage?
+	var/em_heavy_range = 8
+	/// What is the light range for the EM pulse event in this stage?
+	var/em_light_range = 10
+	/// What do characters feel when they're mesmerized during this stage?
+	var/mesmerize_text = "weak"
+	/// Do we ignore PPE for mesmerizing in this stage?
+	var/the_goggles_do_nothing = FALSE
+	/// Do we ignore obstacles in our way?
+	var/ignore_obstacles = FALSE
 
 /decl/singularity_stage/validate()
 	. = ..()
@@ -41,8 +55,10 @@
 		. += "negative consume_range"
 	if(grav_pull < 0)
 		. += "negative grav_pull"
-	if(grav_pull >= 0 && consume_range >= 0 && grav_pull < consume_range)
+	else if(consume_range >= 0 && grav_pull < consume_range)
 		. += "grav_pull is smaller than consume_range; consume_range will be truncated"
+	if(min_energy > max_energy)
+		. += "min_energy is larger than max_energy, stage will never be able to exist"
 
 /decl/singularity_stage/proc/handle_dissipation(obj/effect/singularity/source)
 	if(dissipates_over_time)
@@ -171,29 +187,7 @@
 	dissipates_over_time = FALSE //It cant go smaller due to e loss.
 	wander = TRUE
 	event_chance = 20
+	ignore_obstacles = TRUE
 
 /decl/singularity_stage/stage_five/grow_to(obj/effect/singularity/source)
 	source.visible_message(SPAN_DANGER("<font size='2'>\The [source] has grown out of control!</font>"))
-
-/decl/singularity_stage/stage_five/shrink_to(obj/effect/singularity/source)
-	source.visible_message(SPAN_WARNING("\The [source] miraculously reduces in size and loses its supermatter properties."))
-
-/decl/singularity_stage/stage_super
-	name = "super gravitational singularity"
-	desc = "A gravitational singularity with the properties of supermatter. <b>It has the power to destroy worlds.</b>"
-	min_energy = 50000
-	max_energy = INFINITY
-	stage_size = STAGE_SUPER
-	footprint = 6
-	icon = 'icons/effects/352x352.dmi'
-	icon_state = "singularity_s11"//uh, whoever drew that, you know that black holes are supposed to look dark right? What's this, the clown's singulo?
-	pixel_x = -160
-	pixel_y = -160
-	grav_pull = 16
-	consume_range = 5
-	dissipates_over_time = 0 //It cant go smaller due to e loss
-	event_chance = 25 //Events will fire off more often.
-	wander = TRUE
-
-/decl/singularity_stage/stage_super/grow_to(obj/effect/singularity/source)
-	source.visible_message(SPAN_SINISTER("<font size='3'>You witness the creation of a destructive force that cannot possibly be stopped by human hands.</font>"))

@@ -1,6 +1,8 @@
 #define RADIATION_CAPACITY 30000 //Radiation isn't particularly effective (TODO BALANCE)
 
 
+// LMAO? This should probably be removed.
+// Check Q2 2025 if this is gone yet or not.
 /obj/machinery/atmospherics/unary/thermal_plate
 //Based off Heat Reservoir and Space Heater
 //Transfers heat between a pipe system and environment, based on which has a greater thermal energy concentration
@@ -8,8 +10,8 @@
 	icon = 'icons/obj/atmospherics/cold_sink.dmi'
 	icon_state = "intact_off"
 
-	name = "Thermal Transfer Plate"
-	desc = "Transfers heat to and from an area"
+	name = "thermal transfer plate"
+	desc = "A device that transfers heat to and from an area."
 	uncreated_component_parts = null
 	frame_type = /obj/item/pipe
 	construct_state = /decl/machine_construction/pipe

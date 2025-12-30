@@ -16,10 +16,6 @@
 	daycycle_type = /datum/daycycle/shaded_hills
 	daycycle_id = "daycycle_shaded_hills"
 	template_edge_padding = 0 // we use a strictly delineated subarea, no need for this guard
-	var/submap_budget   = 0
-	var/submap_category = null
-	var/submap_area
-	var/list/mobs_to_spawn = list()
 
 /datum/daycycle/shaded_hills
 	cycle_duration = 2 HOURS // 1 hour of daylight, 1 hour of night
@@ -28,32 +24,6 @@
 /datum/daycycle/shaded_hills/New()
 	time_in_cycle = rand(cycle_duration)
 	..()
-
-/datum/level_data/main_level/shaded_hills/get_subtemplate_areas(template_category, blacklist, whitelist)
-	return submap_area ? (islist(submap_area) ? submap_area : list(submap_area)) : null
-
-/datum/level_data/main_level/shaded_hills/get_subtemplate_budget()
-	return submap_budget
-
-/datum/level_data/main_level/shaded_hills/get_subtemplate_category()
-	return submap_category
-
-/datum/level_data/main_level/shaded_hills/after_generate_level()
-	. = ..()
-	if(length(mobs_to_spawn))
-		for(var/list/mob_category in mobs_to_spawn)
-			var/list/mob_types = mob_category[1]
-			var/mob_turf  = mob_category[2]
-			var/mob_count = mob_category[3]
-			var/sanity = 1000
-			while(mob_count && sanity)
-				sanity--
-				var/turf/place_mob_at = locate(rand(level_inner_min_x, level_inner_max_x), rand(level_inner_min_y, level_inner_max_y), level_z)
-				if(istype(place_mob_at, mob_turf) && !(locate(/mob/living) in place_mob_at))
-					var/mob_type = pickweight(mob_types)
-					new mob_type(place_mob_at)
-					mob_count--
-					CHECK_TICK
 
 /datum/level_data/main_level/shaded_hills/grassland
 	name = "Shaded Hills - Grassland"
@@ -68,11 +38,12 @@
 		"shaded_hills_swamp"     = SOUTH,
 		"shaded_hills_downlands" = EAST
 	)
-	submap_budget = 5
-	submap_category = MAP_TEMPLATE_CATEGORY_SH_GRASSLAND
-	submap_area = /area/shaded_hills/outside/poi
+	subtemplate_budget = 5
+	subtemplate_category = MAP_TEMPLATE_CATEGORY_FANTASY_GRASSLAND
+	subtemplate_area = /area/shaded_hills/outside/poi
 
-	mobs_to_spawn = list(
+/datum/level_data/main_level/shaded_hills/grassland/get_mobs_to_populate_level()
+	var/static/list/mobs_to_spawn = list(
 		list(
 			list(
 				/mob/living/simple_animal/passive/mouse        = 9,
@@ -85,7 +56,7 @@
 			10
 		)
 	)
-
+	return mobs_to_spawn
 
 /datum/level_data/main_level/shaded_hills/swamp
 	name = "Shaded Hills - Swamp"
@@ -97,11 +68,12 @@
 		/datum/random_map/noise/shaded_hills/swamp,
 		/datum/random_map/noise/forage/shaded_hills/swamp
 	)
-	submap_budget = 5
-	submap_category = MAP_TEMPLATE_CATEGORY_SH_SWAMP
-	submap_area = /area/shaded_hills/outside/swamp/poi
+	subtemplate_budget = 5
+	subtemplate_category = MAP_TEMPLATE_CATEGORY_FANTASY_SWAMP
+	subtemplate_area = /area/shaded_hills/outside/swamp/poi
 
-	mobs_to_spawn = list(
+/datum/level_data/main_level/shaded_hills/swamp/get_mobs_to_populate_level()
+	var/static/list/mobs_to_spawn = list(
 		list(
 			list(
 				/mob/living/simple_animal/passive/mouse        = 6,
@@ -127,6 +99,7 @@
 			10
 		)
 	)
+	return mobs_to_spawn
 
 /datum/level_data/main_level/shaded_hills/woods
 	name = "Shaded Hills - Woods"
@@ -138,11 +111,12 @@
 		/datum/random_map/noise/shaded_hills/woods,
 		/datum/random_map/noise/forage/shaded_hills/woods
 	)
-	submap_budget = 5
-	submap_category = MAP_TEMPLATE_CATEGORY_SH_WOODS
-	submap_area = /area/shaded_hills/outside/woods/poi
+	subtemplate_budget = 5
+	subtemplate_category = MAP_TEMPLATE_CATEGORY_FANTASY_WOODS
+	subtemplate_area = /area/shaded_hills/outside/woods/poi
 
-	mobs_to_spawn = list(
+/datum/level_data/main_level/shaded_hills/woods/get_mobs_to_populate_level()
+	var/static/list/mobs_to_spawn = list(
 		list(
 			list(
 				/mob/living/simple_animal/passive/mouse        = 6,
@@ -162,6 +136,7 @@
 			5
 		)
 	)
+	return mobs_to_spawn
 
 /datum/level_data/main_level/shaded_hills/downlands
 	name = "Shaded Hills - Downlands"
@@ -173,9 +148,9 @@
 	connected_levels = list(
 		"shaded_hills_grassland" = WEST
 	)
-	submap_budget = 5
-	submap_category = MAP_TEMPLATE_CATEGORY_SH_DOWNLANDS
-	submap_area = /area/shaded_hills/outside/downlands/poi
+	subtemplate_budget = 5
+	subtemplate_category = MAP_TEMPLATE_CATEGORY_FANTASY_DOWNLANDS
+	subtemplate_area = /area/shaded_hills/outside/downlands/poi
 
 /datum/level_data/main_level/shaded_hills/caverns
 	name = "Shaded Hills - Caverns"
@@ -183,9 +158,9 @@
 	connected_levels = list(
 		"shaded_hills_dungeon" = EAST
 	)
-	submap_budget = 5
-	submap_category = MAP_TEMPLATE_CATEGORY_SH_CAVERNS
-	submap_area = /area/shaded_hills/caves/deep/poi
+	subtemplate_budget = 5
+	subtemplate_category = MAP_TEMPLATE_CATEGORY_FANTASY_CAVERNS
+	subtemplate_area = /area/shaded_hills/caves/deep/poi
 	level_generators = list(
 		/datum/random_map/automata/cave_system/shaded_hills,
 		/datum/random_map/noise/ore/rich
@@ -198,9 +173,9 @@
 	connected_levels = list(
 		"shaded_hills_caverns" = WEST
 	)
-	submap_budget = 5
-	submap_category = MAP_TEMPLATE_CATEGORY_SH_DUNGEON
-	submap_area = /area/shaded_hills/caves/dungeon/poi
+	subtemplate_budget = 5
+	subtemplate_category = MAP_TEMPLATE_CATEGORY_FANTASY_DUNGEON
+	subtemplate_area = /area/shaded_hills/caves/dungeon/poi
 	base_turf = /turf/floor/rock/basalt
 
 /obj/abstract/level_data_spawner/shaded_hills_grassland

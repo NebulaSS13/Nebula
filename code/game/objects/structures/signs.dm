@@ -23,9 +23,9 @@
 		try_install(target, user)
 		return TRUE
 
-/obj/item/sign/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W) && W.CanUseTopic(user, global.inventory_topic_state) && isturf(user.loc))
-		return try_install(W, user)
+/obj/item/sign/attackby(obj/item/used_item, mob/user)
+	if(IS_SCREWDRIVER(used_item) && used_item.CanUseTopic(user, global.inventory_topic_state) && isturf(user.loc))
+		return try_install(used_item, user)
 	return ..()
 
 /obj/item/sign/on_update_icon()
@@ -87,7 +87,7 @@
 ///A wall mountable sign structure
 /obj/structure/sign
 	name               = "sign"
-	icon               = 'icons/obj/decals.dmi'
+	icon               = 'icons/obj/signs/warnings.dmi'
 	anchored           = TRUE
 	opacity            = FALSE
 	density            = FALSE

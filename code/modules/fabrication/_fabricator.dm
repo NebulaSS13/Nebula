@@ -1,6 +1,6 @@
 /obj/machinery/fabricator
 	name = "autolathe"
-	desc = "It produces common day to day items from a variety of materials."
+	desc = "It produces common day-to-day items from a variety of materials."
 	icon = 'icons/obj/machines/fabricators/autolathe.dmi'
 	icon_state = "autolathe"
 	density = TRUE
@@ -70,14 +70,14 @@
 	QDEL_NULL(sound_token)
 	. = ..()
 
-/obj/machinery/fabricator/examine(mob/user)
+/obj/machinery/fabricator/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(length(storage_capacity))
 		var/list/material_names = list()
 		for(var/thing in storage_capacity)
 			var/decl/material/mat = GET_DECL(thing)
 			material_names += "[storage_capacity[thing]] [mat.use_name]"
-		to_chat(user, SPAN_NOTICE("It can store [english_list(material_names)]."))
+		. += SPAN_NOTICE("It can store [english_list(material_names)].")
 
 /obj/machinery/fabricator/Initialize()
 
@@ -96,6 +96,7 @@
 /obj/machinery/fabricator/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
+	ADJUST_TAG_VAR(initial_network_key, map_hash)
 
 /obj/machinery/fabricator/handle_post_network_connection()
 	..()
@@ -230,6 +231,6 @@
 	return pipe_colors //override with null for hex color selections
 
 // Our stored_material is just the right format to be added to the matter list.
-/obj/machinery/fabricator/get_contained_matter()
+/obj/machinery/fabricator/get_contained_matter(include_reagents = TRUE)
 	. = ..()
 	. = MERGE_ASSOCS_WITH_NUM_VALUES(., stored_material)

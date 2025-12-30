@@ -98,6 +98,7 @@
 /datum/action/eye/CheckRemoval(mob/living/user)
 	if(!user.eyeobj || !istype(user.eyeobj, eye_type))
 		return TRUE
+	return ..()
 
 // Every eye created using a subtype of this extension will have this action added for manual unlooking.
 /datum/action/eye/unlook

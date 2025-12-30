@@ -321,7 +321,7 @@ var/global/BSACooldown = 0
 				dat += "<A href='byond://?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
 			dat += "<hr></li>"
 		if(update_file)
-			direct_output(info, infos)
+			to_file(info, infos)
 
 	dat += "</ul><br><A href='byond://?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
 
@@ -789,9 +789,7 @@ var/global/BSACooldown = 0
 	if (new_vis && !world.reachable)
 		message_admins("WARNING: The server will not show up on the hub because byond is detecting that a firewall is blocking incoming connections.")
 
-	var/full_message = "[key_name(src)]" + long_message
-	send2adminirc(full_message)
-	SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Hub Visibility Toggled (Game ID: [game_id])", "body" = full_message))
+	SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Hub Visibility Toggled (Game ID: [game_id])", "body" = "[key_name(src)]" + long_message))
 
 	log_and_message_admins(long_message)
 	SSstatistics.add_field_details("admin_verb","THUB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
@@ -1254,8 +1252,8 @@ var/global/BSACooldown = 0
 		if(isAI(S))
 			to_chat(usr, "<b>AI [key_name(S, usr)]'s laws:</b>")
 		else if(isrobot(S))
-			var/mob/living/silicon/robot/R = S
-			to_chat(usr, "<b>CYBORG [key_name(S, usr)] [R.connected_ai?"(Slaved to: [R.connected_ai])":"(Independant)"]: laws:</b>")
+			var/mob/living/silicon/robot/robot = S
+			to_chat(usr, "<b>CYBORG [key_name(S, usr)] [robot.connected_ai?"(Slaved to: [robot.connected_ai])":"(Independant)"]: laws:</b>")
 		else if (ispAI(S))
 			to_chat(usr, "<b>pAI [key_name(S, usr)]'s laws:</b>")
 		else
@@ -1417,10 +1415,10 @@ var/global/BSACooldown = 0
 				SPAN_OCCULT("OOC: \The [M] has been paralyzed by a staff member. Please hold all interactions with them until staff have finished with them."),
 				SPAN_OCCULT("OOC: You have been paralyzed by a staff member. Please refer to your currently open admin help ticket or, if you don't have one, admin help for assistance.")
 			)
-			M.set_status(STAT_PARA, 8000)
+			M.set_status_condition(STAT_PARA, 8000)
 			M.admin_paralyzed = TRUE
 		else
-			M.set_status(STAT_PARA, 0)
+			M.set_status_condition(STAT_PARA, 0)
 			M.admin_paralyzed = FALSE
 			M.visible_message(SPAN_OCCULT("OOC: \The [M] has been released from paralysis by staff. You may resume interactions with them."))
 			to_chat(M, SPAN_OCCULT("OOC: You have been released from paralysis by staff and can return to your game."))

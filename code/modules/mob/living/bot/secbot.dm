@@ -51,11 +51,11 @@
 
 /mob/living/bot/secbot/turn_on()
 	..()
-	stun_baton.set_status(on, null)
+	stun_baton.set_cell_status(on, null)
 
 /mob/living/bot/secbot/turn_off()
 	..()
-	stun_baton.set_status(on, null)
+	stun_baton.set_cell_status(on, null)
 
 /mob/living/bot/secbot/on_update_icon()
 	..()
@@ -103,7 +103,7 @@
 				if(emagged < 2)
 					emagged = !emagged
 
-/mob/living/bot/secbot/attackby(var/obj/item/O, var/mob/user)
+/mob/living/bot/secbot/attackby(var/obj/item/used_item, var/mob/user)
 	var/curhealth = current_health
 	. = ..()
 	if(current_health < curhealth)
@@ -204,9 +204,9 @@
 		return TRUE
 
 	if(isanimal(M))
-		a_intent = I_HURT
+		set_intent(I_FLAG_HARM)
 	else
-		a_intent = I_GRAB
+		set_intent(I_FLAG_GRAB)
 
 	stun_baton.use_on_mob(M, src) //robots and turrets aim for center of mass
 	flick(attack_state, src)

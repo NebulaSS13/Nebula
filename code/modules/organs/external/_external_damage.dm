@@ -6,16 +6,13 @@
 	//Continued damage to vital organs can kill you, and robot organs don't count towards total damage so no need to cap them.
 	return (BP_IS_PROSTHETIC(src) || brute_dam + burn_dam + additional_damage < max_damage * 4)
 
-/obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
-	take_external_damage(amount)
-
-/obj/item/organ/external/proc/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)
+/obj/item/organ/external/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health, override_droplimb)
 
 	if(!owner)
-		return
+		return ..()
 
-	brute = round(brute * get_brute_mod(damage_flags), 0.1)
-	burn = round(burn * get_burn_mod(damage_flags), 0.1)
+	var/brute = damage_type == BRUTE ? round(damage * get_brute_mod(damage_flags), 0.1) : 0
+	var/burn  = damage_type == BURN  ? round(damage * get_burn_mod(damage_flags),  0.1) : 0
 
 	if((brute <= 0) && (burn <= 0))
 		return 0
@@ -33,8 +30,8 @@
 		if(prob(25))
 			owner.visible_message(SPAN_WARNING("\The [owner]'s crystalline [name] shines with absorbed energy!"))
 
-	if(used_weapon)
-		add_autopsy_data(used_weapon, brute + burn)
+	if(inflicter)
+		add_autopsy_data(inflicter, brute + burn)
 
 	var/spillover = 0
 	var/pure_brute = brute
@@ -54,7 +51,7 @@
 			var/total_damage = brute_dam + burn_dam + brute + burn + spillover
 			var/threshold = max_damage * get_config_value(/decl/config/num/health_organ_health_multiplier)
 			if(total_damage > threshold)
-				if(attempt_dismemberment(pure_brute, burn, sharp, edge, used_weapon, spillover, total_damage > threshold*6, override_droplimb = override_droplimb))
+				if(attempt_dismemberment(pure_brute, burn, sharp, edge, inflicter, spillover, total_damage > threshold*6, override_droplimb = override_droplimb))
 					return
 
 	//blunt damage is gud at fracturing
@@ -89,7 +86,7 @@
 		if(laser)
 			created_wound = createwound(LASER, burn)
 			if(prob(40))
-				owner.IgniteMob()
+				owner.ignite_fire()
 		else
 			created_wound = createwound(BURN, burn)
 
@@ -99,11 +96,11 @@
 	//Disturb treated burns
 	if(brute > 5)
 		var/disturbed = 0
-		for(var/datum/wound/burn/W in wounds)
-			if((W.disinfected || W.salved) && prob(brute + W.damage))
-				W.disinfected = 0
-				W.salved = 0
-				disturbed += W.damage
+		for(var/datum/wound/burn/wound in wounds)
+			if((wound.disinfected || wound.salved) && prob(brute + wound.damage))
+				wound.disinfected = 0
+				wound.salved = 0
+				disturbed += wound.damage
 		if(disturbed)
 			to_chat(owner,"<span class='warning'>Ow! Your burns were disturbed.</span>")
 			add_pain(0.5*disturbed)
@@ -114,15 +111,16 @@
 
 	// sync the organ's damage with its wounds
 	update_damages()
-	owner.update_health()
+	if(do_update_health)
+		owner.update_health()
 	if(status & ORGAN_BLEEDING)
 		owner.update_bandages()
 
 	if(owner && update_damstate())
 		owner.update_damage_overlays()
 
-	if(created_wound && isobj(used_weapon))
-		var/obj/O = used_weapon
+	if(created_wound && isobj(inflicter))
+		var/obj/O = inflicter
 		O.after_wounding(src, created_wound)
 
 	return created_wound
@@ -153,10 +151,10 @@
 
 	var/list/victims = list()
 	var/organ_hit_chance = 0
-	for(var/obj/item/organ/internal/I in internal_organs)
-		if(I.damage < I.max_damage)
-			victims[I] = I.relative_size
-			organ_hit_chance += I.relative_size
+	for(var/obj/item/organ/internal/organ in internal_organs)
+		if(organ.get_organ_damage() < organ.max_damage)
+			victims[organ] = organ.relative_size
+			organ_hit_chance += organ.relative_size
 
 	//No damageable organs
 	if(!length(victims))
@@ -171,7 +169,7 @@
 	if(prob(organ_hit_chance))
 		var/obj/item/organ/internal/victim = pickweight(victims)
 		damage_amt -= max(damage_amt*victim.damage_reduction, 0)
-		victim.take_internal_damage(damage_amt)
+		victim.take_damage(damage_amt)
 		return TRUE
 
 /obj/item/organ/external/heal_damage(brute, burn, internal = 0, robo_repair = 0)
@@ -179,15 +177,15 @@
 		return
 
 	//Heal damage on the individual wounds
-	for(var/datum/wound/W in wounds)
+	for(var/datum/wound/wound in wounds)
 		if(brute == 0 && burn == 0)
 			break
 
 		// heal brute damage
-		if(W.damage_type == BURN)
-			burn = W.heal_damage(burn)
+		if(wound.damage_type == BURN)
+			burn = wound.heal_damage(burn)
 		else
-			brute = W.heal_damage(brute)
+			brute = wound.heal_damage(brute)
 
 	if(internal)
 		status &= ~ORGAN_BROKEN
@@ -253,8 +251,8 @@
 	else if(is_dislocated())
 		lasting_pain += 5
 	var/tox_dam = 0
-	for(var/obj/item/organ/internal/I in internal_organs)
-		tox_dam += I.getToxLoss()
+	for(var/obj/item/organ/internal/organ in internal_organs)
+		tox_dam += organ.getToxLoss()
 	return pain + lasting_pain + 0.7 * brute_dam + 0.8 * burn_dam + 0.3 * tox_dam + 0.5 * get_genetic_damage()
 
 /obj/item/organ/external/proc/remove_pain(var/amount)

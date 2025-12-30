@@ -13,6 +13,7 @@
 	appearance_flags  = KEEP_TOGETHER
 	var/last_update_depth
 	var/updating_edge_mask
+	var/force_flow_direction
 
 /atom/movable/fluid_overlay/on_turf_height_change(new_height)
 	update_icon()
@@ -21,13 +22,13 @@
 /atom/movable/fluid_overlay/on_update_icon()
 
 	var/datum/reagents/loc_reagents = loc?.reagents
-	var/reagent_volume = loc_reagents?.total_volume
+	var/reagent_volume = REAGENT_TOTAL_VOLUME(loc_reagents)
 
 	// Update layer.
 	var/new_layer
-	var/turf/T = get_turf(src)
-	if(T.pixel_z < 0)
-		new_layer = T.layer + 0.2
+	var/turf/flow_turf = get_turf(src)
+	if(flow_turf.pixel_z < 0)
+		new_layer = flow_turf.layer + 0.2
 	else if(reagent_volume > FLUID_DEEP)
 		new_layer = DEEP_FLUID_LAYER
 	else
@@ -53,15 +54,17 @@
 		if(new_alpha != alpha)
 			alpha = new_alpha
 
+		var/flow_dir = force_flow_direction || flow_turf.last_flow_dir
+		set_dir(flow_dir)
 		// Update icon state. We use overlays so flick() can work on the base fluid overlay.
 		if(reagent_volume <= FLUID_PUDDLE)
 			set_overlays("puddle")
 		else if(reagent_volume <= FLUID_SHALLOW)
-			set_overlays("shallow_still")
+			set_overlays(flow_dir ? "shallow_flow" : "shallow")
 		else if(reagent_volume < FLUID_DEEP)
-			set_overlays("mid_still")
+			set_overlays(flow_dir ? "mid_flow"     : "mid")
 		else if(reagent_volume < (FLUID_DEEP*2))
-			set_overlays("deep_still")
+			set_overlays(flow_dir ? "deep_flow"    : "deep")
 		else
 			set_overlays("ocean")
 	else
@@ -105,7 +108,7 @@ var/global/list/_fluid_edge_mask_cache = list()
 	sleep(0)
 	updating_edge_mask = FALSE
 
-	if(loc?.reagents?.total_volume <= FLUID_PUDDLE)
+	if(REAGENT_TOTAL_VOLUME(loc?.reagents) <= FLUID_PUDDLE)
 		remove_filter("fluid_edge_mask")
 		return
 
@@ -114,7 +117,7 @@ var/global/list/_fluid_edge_mask_cache = list()
 	var/list/connections
 	for(var/checkdir in global.alldirs)
 		var/turf/neighbor = get_step_resolving_mimic(loc, checkdir)
-		if(!neighbor || neighbor.density || neighbor?.reagents?.total_volume > FLUID_PUDDLE)
+		if(!neighbor || neighbor.density || REAGENT_TOTAL_VOLUME(neighbor?.reagents) > FLUID_PUDDLE)
 			LAZYADD(connections, checkdir)
 		else
 			LAZYADD(ignored, checkdir)

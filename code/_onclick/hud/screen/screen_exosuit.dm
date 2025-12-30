@@ -3,6 +3,7 @@
 	icon = 'icons/mecha/mech_hud.dmi'
 	icon_state = "base"
 	requires_ui_style = FALSE
+	apply_screen_overlay = FALSE
 	var/initial_maptext
 	var/height = 14
 
@@ -317,7 +318,8 @@
 	var/mob/living/exosuit/owner = get_owning_exosuit()
 	if(owner)
 		toggled = owner.hatch_closed
-		. = ..()
+	. = ..()
+	if(owner)
 		if(toggled)
 			maptext = MECH_UI_STYLE("OPEN")
 			maptext_x = 5
@@ -340,19 +342,19 @@
 		toggled = owner.head.active_sensors
 	. = ..()
 
-/obj/screen/exosuit/toggle/camera/toggled()
+/obj/screen/exosuit/toggle/camera/toggled(mob/user)
 	var/mob/living/exosuit/owner = get_owning_exosuit()
 	if(!istype(owner) || !owner.head)
-		to_chat(usr, SPAN_WARNING("I/O Error: Camera systems not found."))
+		to_chat(user, SPAN_WARNING("I/O Error: Camera systems not found."))
 		return
 	if(!owner.head.vision_flags)
-		to_chat(usr,  SPAN_WARNING("Alternative sensor configurations not found. Contact manufacturer for more details."))
+		to_chat(user,  SPAN_WARNING("Alternative sensor configurations not found. Contact manufacturer for more details."))
 		return
 	if(!owner.get_cell())
-		to_chat(usr,  SPAN_WARNING("The augmented vision systems are offline."))
+		to_chat(user,  SPAN_WARNING("The augmented vision systems are offline."))
 		return
 	owner.head.active_sensors = ..()
-	to_chat(usr, SPAN_NOTICE("[owner.head.name] advanced sensor mode is [owner.head.active_sensors ? "now" : "no longer" ] active."))
+	to_chat(user, SPAN_NOTICE("[owner.head.name] advanced sensor mode is [owner.head.active_sensors ? "now" : "no longer" ] active."))
 
 /obj/screen/exosuit/needle
 	vis_flags = VIS_INHERIT_ID

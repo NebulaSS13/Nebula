@@ -62,7 +62,7 @@
 /decl/chemical_reaction/recipe/beer
 	name = "Plain Beer"
 	result = /decl/material/liquid/alcohol/beer
-	required_reagents = list(/decl/material/liquid/nutriment/cornoil = 10)
+	required_reagents = list(/decl/material/liquid/oil/plant/corn = 10)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
 	result_amount = 10
 	mix_message = "The solution roils as it rapidly ferments into a foaming amber liquid."

@@ -151,7 +151,7 @@
 				module.show_assignments = 1
 		if("print")
 			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
-				to_chat(usr, SPAN_WARNING("Access denied."))
+				to_chat(user, SPAN_WARNING("Access denied."))
 				return
 			if(computer.has_component(PART_PRINTER)) //This option should never be called if there is no printer
 				if(module.mod_mode)
@@ -175,7 +175,7 @@
 							contents += "  [get_access_desc(A)]"
 
 					if(!computer.print_paper(contents,"access report"))
-						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
+						to_chat(user, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
 						return
 				else
 					var/contents = {"<h4>Crew Manifest</h4>
@@ -183,7 +183,7 @@
 									[html_crew_manifest()]
 									"}
 					if(!computer.print_paper(contents, "crew manifest ([stationtime2text()])"))
-						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
+						to_chat(user, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
 						return
 		if("eject")
 			var/obj/item/stock_parts/computer/card_slot/card_slot = computer.get_component(PART_CARD)
@@ -193,7 +193,7 @@
 				card_slot.insert_id(user.get_active_held_item(), user)
 		if("terminate")
 			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
-				to_chat(usr, SPAN_WARNING("Access denied."))
+				to_chat(user, SPAN_WARNING("Access denied."))
 				return
 			if(computer)
 				id_card.assignment = "Terminated"
@@ -201,7 +201,7 @@
 				RAISE_EVENT(/decl/observ/employee_id_terminated, id_card)
 		if("edit")
 			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
-				to_chat(usr, SPAN_WARNING("Access denied."))
+				to_chat(user, SPAN_WARNING("Access denied."))
 				return
 			if(computer)
 				var/static/regex/hash_check = regex(@"^[0-9a-fA-F]{32}$")
@@ -212,7 +212,7 @@
 						id_card.formal_name_suffix = initial(id_card.formal_name_suffix)
 						id_card.formal_name_prefix = initial(id_card.formal_name_prefix)
 					else
-						computer.show_error(usr, "Invalid name entered!")
+						computer.show_error(user, "Invalid name entered!")
 				else if(href_list["account"])
 					var/account_num = text2num(input("Enter account number.", "Account", id_card.associated_account_number))
 					id_card.associated_account_number = account_num
@@ -243,11 +243,11 @@
 					if(!isnull(sug_blood_type) && CanUseTopic(user))
 						id_card.blood_type = sug_blood_type
 				else if(href_list["front_photo"])
-					var/photo = get_photo(usr)
+					var/photo = get_photo(user)
 					if(photo && CanUseTopic(user))
 						id_card.front = photo
 				else if(href_list["side_photo"])
-					var/photo = get_photo(usr)
+					var/photo = get_photo(user)
 					if(photo && CanUseTopic(user))
 						id_card.side = photo
 				else if(href_list["load_data"])
@@ -275,7 +275,7 @@
 						apply_access(id_card, access)
 		if("assign")
 			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
-				to_chat(usr, SPAN_WARNING("Access denied."))
+				to_chat(user, SPAN_WARNING("Access denied."))
 				return
 			if(computer && id_card)
 				var/t1 = href_list["assign_target"]

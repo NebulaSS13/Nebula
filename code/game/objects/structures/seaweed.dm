@@ -30,8 +30,8 @@
 	icon_state = "lichen"
 	icon = 'icons/obj/structures/plants.dmi'
 
-/obj/effect/decal/cleanable/lichen/attackby(obj/item/I, mob/user)
-	if(I.sharp && I.get_attack_force(user) > 1)
+/obj/effect/decal/cleanable/lichen/attackby(obj/item/used_item, mob/user)
+	if(used_item.is_sharp() && used_item.expend_attack_force(user) > 1)
 		qdel(src)
 		return TRUE
 	. = ..()

@@ -145,9 +145,7 @@ var/global/list/_emotes_by_key
 		var/emote_string = all_strings[string_key]
 		if(!length(emote_string))
 			continue
-		emote_string = emote_replace_target_tokens(emote_string, dummy_emote_target)
-		emote_string = emote_replace_user_tokens(emote_string, dummy_emote_user)
-		emote_string = uppertext(emote_string)
+		emote_string = uppertext(emote_replace_target_tokens(emote_replace_user_tokens(emote_string, dummy_emote_user), dummy_emote_target))
 		for(var/token in tokens)
 			if(findtext(emote_string, token))
 				. += "malformed emote token [token] in [string_key]"
@@ -244,7 +242,7 @@ var/global/list/_emotes_by_key
 	if(use_1p)
 		if(target)
 			use_1p = emote_replace_target_tokens(use_1p, target)
-		use_1p = "<span class='emote'>[capitalize(emote_replace_user_tokens(use_1p, user))]</span>"
+		use_1p = "<span class='emote'>[capitalize_proper_html(emote_replace_user_tokens(use_1p, user))]</span>"
 
 	var/use_3p = get_emote_message_3p(user, target, extra_params)
 	if(use_3p)

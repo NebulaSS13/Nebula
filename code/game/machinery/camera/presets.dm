@@ -1,5 +1,5 @@
 /obj/machinery/camera/network/engineering
-	preset_channels = list(CAMERA_CAMERA_CHANNEL_ENGINEERING)
+	preset_channels = list(CAMERA_CHANNEL_ENGINEERING)
 	req_access = list(access_engine)
 
 /obj/machinery/camera/network/ert

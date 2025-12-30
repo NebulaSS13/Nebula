@@ -272,7 +272,7 @@
 			environment.merge(gas)
 
 /obj/machinery/alarm/proc/overall_danger_level(var/datum/gas_mixture/environment)
-	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
+	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.total_volume
 	var/environment_pressure = environment.return_pressure()
 
 	var/other_moles = 0
@@ -667,7 +667,7 @@
 			var/device_id = href_list["id_tag"]
 			switch(href_list["command"])
 				if("set_external_pressure")
-					var/input_pressure = input(user, "What pressure you like the system to mantain?", "Pressure Controls") as num|null
+					var/input_pressure = input(user, "What pressure you like the system to maintain?", "Pressure Controls") as num|null
 					if(isnum(input_pressure) && CanUseTopic(user, state))
 						send_signal(device_id, list(href_list["command"] = input_pressure))
 					return TOPIC_REFRESH
@@ -845,16 +845,15 @@ FIRE ALARM
 	var/time =         1 SECOND
 	var/timing =       FALSE
 	var/last_process = 0
-	var/static/list/overlays_cache
 
 	var/sound_id
 	var/datum/sound_token/sound_token
 
-/obj/machinery/firealarm/examine(mob/user)
+/obj/machinery/firealarm/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(isContactLevel(loc.z))
 		var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
+		. += "The current alert level is [security_state.current_security_level.name]."
 
 /obj/machinery/firealarm/on_update_icon()
 	cut_overlays()
@@ -884,18 +883,18 @@ FIRE ALARM
 			set_light(2, 0.25, COLOR_RED)
 		else if(isContactLevel(z))
 			var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-			var/decl/security_level/sl = security_state.current_security_level
+			var/decl/security_level/sec_level = security_state.current_security_level
 
-			set_light(sl.light_power, sl.light_range, sl.light_color_alarm)
+			set_light(sec_level.light_power, sec_level.light_range, sec_level.light_color_alarm)
 
-			if(sl.alarm_appearance.alarm_icon)
-				var/image/alert1 = image(sl.icon, sl.alarm_appearance.alarm_icon)
-				alert1.color = sl.alarm_appearance.alarm_icon_color
+			if(sec_level.alarm_appearance.alarm_icon)
+				var/image/alert1 = image(sec_level.icon, sec_level.alarm_appearance.alarm_icon)
+				alert1.color = sec_level.alarm_appearance.alarm_icon_color
 				add_overlay(alert1)
 
-			if(sl.alarm_appearance.alarm_icon_twotone)
-				var/image/alert2 = image(sl.icon, sl.alarm_appearance.alarm_icon_twotone)
-				alert2.color = sl.alarm_appearance.alarm_icon_twotone_color
+			if(sec_level.alarm_appearance.alarm_icon_twotone)
+				var/image/alert2 = image(sec_level.icon, sec_level.alarm_appearance.alarm_icon_twotone)
+				alert2.color = sec_level.alarm_appearance.alarm_icon_twotone_color
 				add_overlay(alert2)
 		else
 			add_overlay("fire0")
@@ -913,7 +912,7 @@ FIRE ALARM
 		alarm(rand(30/severity, 60/severity))
 	..()
 
-/obj/machinery/firealarm/attackby(obj/item/W, mob/user)
+/obj/machinery/firealarm/attackby(obj/item/used_item, mob/user)
 	if((. = ..()))
 		return
 	src.alarm()

@@ -193,15 +193,15 @@ var/global/list/turret_icons
 		return STATUS_CLOSE
 
 	if(!anchored)
-		to_chat(usr, "<span class='notice'>\The [src] has to be secured first!</span>")
+		to_chat(user, "<span class='notice'>\The [src] has to be secured first!</span>")
 		return STATUS_CLOSE
 
 	return ..()
 
 
-/obj/machinery/porta_turret/Topic(href, href_list)
-	if(..())
-		return 1
+/obj/machinery/porta_turret/OnTopic(mob/user, href_list, datum/topic_state/state)
+	if((. = ..()))
+		return
 
 	if(href_list["command"] && href_list["value"])
 		var/value = text2num(href_list["value"])
@@ -221,8 +221,7 @@ var/global/list/turret_icons
 			check_access = value
 		else if(href_list["command"] == "check_anomalies")
 			check_anomalies = value
-
-		return 1
+		. = TOPIC_REFRESH
 
 /obj/machinery/porta_turret/physically_destroyed(skip_qdel)
 	if(installation)
@@ -237,9 +236,9 @@ var/global/list/turret_icons
 	. = ..()
 
 // TODO: remove these or refactor to use construct states
-/obj/machinery/porta_turret/attackby(obj/item/I, mob/user)
+/obj/machinery/porta_turret/attackby(obj/item/used_item, mob/user)
 	if(stat & BROKEN)
-		if(IS_CROWBAR(I))
+		if(IS_CROWBAR(used_item))
 			//If the turret is destroyed, you can remove it with a crowbar to
 			//try and salvage its components
 			to_chat(user, "<span class='notice'>You begin prying the metal coverings off.</span>")
@@ -252,7 +251,7 @@ var/global/list/turret_icons
 			return TRUE
 		return FALSE
 
-	else if(IS_WRENCH(I))
+	else if(IS_WRENCH(used_item))
 		if(enabled || raised)
 			to_chat(user, "<span class='warning'>You cannot unsecure an active turret!</span>")
 			return TRUE
@@ -278,7 +277,7 @@ var/global/list/turret_icons
 		wrenching = 0
 		return TRUE
 
-	else if(istype(I, /obj/item/card/id)||istype(I, /obj/item/modular_computer))
+	else if(istype(used_item, /obj/item/card/id)||istype(used_item, /obj/item/modular_computer))
 		//Behavior lock/unlock mangement
 		if(allowed(user))
 			locked = !locked
@@ -290,9 +289,9 @@ var/global/list/turret_icons
 
 	else
 		//if the turret was attacked with the intention of harming it:
-		var/force = I.get_attack_force(user) * 0.5
+		var/force = used_item.expend_attack_force(user) * 0.5
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		take_damage(force, I.atom_damage_type)
+		take_damage(force, used_item.atom_damage_type)
 		if(force > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
 			if(!attacked && !emagged)
 				attacked = 1

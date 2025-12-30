@@ -10,7 +10,8 @@
 #define LIGHTING_DARKNESS_ICON_STATE "black"	// icon_state used for lighting overlays with no luminosity.
 #define LIGHTING_TRANSPARENT_ICON_STATE "blank"
 
-#define LIGHTING_SOFT_THRESHOLD 0.001 // If the max of the lighting lumcounts of each spectrum drops below this, disable luminosity on the lighting overlays.
+// This is purely used as a threshold for 'is this turf probably dark' to avoid floating point nonsense.
+#define LIGHTING_SOFT_THRESHOLD 0.001
 #define LIGHTING_BLOCKED_FACTOR 0.5	// How much the range of a directional light will be reduced while facing a wall.
 
 // If defined, instant updates will be used whenever server load permits. Otherwise queued updates are always used.
@@ -19,6 +20,10 @@
 // mostly identical to below, but doesn't make sure T is valid first. Should only be used by lighting code.
 #define TURF_IS_DYNAMICALLY_LIT_UNSAFE(T) ((T:dynamic_lighting && T:loc:dynamic_lighting))
 #define TURF_IS_DYNAMICALLY_LIT(T) (isturf(T) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+
+// Note: this does not imply the above, a turf can have ambient light without being dynamically lit.
+#define TURF_IS_AMBIENT_LIT_UNSAFE(T) (T:ambient_active)
+#define TURF_IS_AMBIENT_LIT(T) (isturf(T) && TURF_IS_AMBIENT_LIT_UNSAFE(T))
 
 // If I were you I'd leave this alone.
 #define LIGHTING_BASE_MATRIX \

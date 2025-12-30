@@ -2,6 +2,7 @@
 	abstract_type             = /obj/item/clothing/suit/armor/forged
 	icon_state                = ICON_STATE_WORLD
 	material                  = /decl/material/solid/metal/steel
+	color                     = /decl/material/solid/metal/steel::color
 	material_alteration       = MAT_FLAG_ALTERATION_ALL
 	armor_degradation_speed   = 1
 	armor_type                = /datum/extension/armor/ablative

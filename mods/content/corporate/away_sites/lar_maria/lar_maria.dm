@@ -24,10 +24,10 @@
 
 ///////////////////////////////////crew and prisoners
 /obj/abstract/landmark/corpse/lar_maria
-	eye_colors_per_species = list(SPECIES_HUMAN = list(COLOR_RED))//red eyes
-	skin_tones_per_species = list(SPECIES_HUMAN = list(-15))
-	facial_styles_per_species = list(SPECIES_HUMAN = list(/decl/sprite_accessory/facial_hair/shaved))
-	genders_per_species = list(SPECIES_HUMAN = list(MALE))
+	eye_colors_per_species = list(/decl/species/human::uid = list(COLOR_RED))//red eyes
+	skin_tones_per_species = list(/decl/species/human::uid = list(-15))
+	facial_styles_per_species = list(/decl/species/human::uid = list(/decl/sprite_accessory/facial_hair/shaved))
+	genders_per_species = list(/decl/species/human::uid = list(MALE))
 
 /mob/living/simple_animal/hostile/lar_maria
 	name = "Lar Maria hostile mob"
@@ -83,10 +83,10 @@
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard
 	name = "dead guard"
 	corpse_outfits = list(/decl/outfit/corpse/zhp_guard)
-	skin_tones_per_species = list(SPECIES_HUMAN = list(-15))
+	skin_tones_per_species = list(/decl/species/human::uid = list(-15))
 
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark
-	skin_tones_per_species = list(SPECIES_HUMAN = list(-115))
+	skin_tones_per_species = list(/decl/species/human::uid = list(-115))
 
 /decl/outfit/corpse/zhp_guard
 	name = "Dead ZHP guard"
@@ -161,9 +161,9 @@
 /obj/abstract/landmark/corpse/lar_maria/virologist_female
 	name = "dead virologist"
 	corpse_outfits = list(/decl/outfit/corpse/zhp_virologist_female)
-	hair_styles_per_species = list(SPECIES_HUMAN = list(/decl/sprite_accessory/hair/flair))
-	hair_colors_per_species = list(SPECIES_HUMAN = list("#ae7b48"))
-	genders_per_species = list(SPECIES_HUMAN = list(FEMALE))
+	hair_styles_per_species = list(/decl/species/human::uid = list(/decl/sprite_accessory/hair/flair))
+	hair_colors_per_species = list(/decl/species/human::uid = list("#ae7b48"))
+	genders_per_species = list(/decl/species/human::uid = list(FEMALE))
 
 /decl/outfit/corpse/zhp_virologist_female
 	name = "Dead female ZHP virologist"

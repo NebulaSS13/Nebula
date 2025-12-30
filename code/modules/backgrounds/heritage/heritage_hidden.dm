@@ -15,7 +15,7 @@
 	language = /decl/language/cultcommon
 	uid = "heritage_bloodcult"
 
-/decl/background_detail/heritage/hidden/cultist/get_random_name()
+/decl/background_detail/heritage/hidden/cultist/get_random_cultural_name(mob/recipient, gender, species)
 	return "[pick("Anguished", "Blasphemous", "Corrupt", "Cruel", "Depraved", "Despicable", "Disturbed", "Exacerbated", "Foul", "Hateful", "Inexorable", "Implacable", "Impure", "Malevolent", "Malignant", "Malicious", "Pained", "Profane", "Profligate", "Relentless", "Resentful", "Restless", "Spiteful", "Tormented", "Unclean", "Unforgiving", "Vengeful", "Vindictive", "Wicked", "Wronged")] [pick("Apparition", "Aptrgangr", "Dis", "Draugr", "Dybbuk", "Eidolon", "Fetch", "Fylgja", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Shadow", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")]"
 
 /decl/background_detail/heritage/hidden/monkey

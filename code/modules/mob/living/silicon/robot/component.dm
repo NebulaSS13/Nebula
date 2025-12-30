@@ -19,8 +19,8 @@
 	/// The wrapped device(e.g. radio), only set if external_type isn't null
 	var/obj/item/wrapped
 
-/datum/robot_component/New(mob/living/silicon/robot/R)
-	src.owner = R
+/datum/robot_component/New(mob/living/silicon/robot/robot)
+	src.owner = robot
 
 /datum/robot_component/proc/accepts_component(var/obj/item/thing)
 	. = istype(thing, external_type)
@@ -224,7 +224,6 @@
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "working"
 	material = /decl/material/solid/metal/steel
-	current_health = 30
 	max_health = 30
 	var/burn_damage = 0
 	var/brute_damage = 0

@@ -5,8 +5,8 @@
 	icon = 'icons/obj/augment.dmi'
 	desc = "A handy utility blade for the discerning augmentee. Warranty void if used for cutting."
 	base_parry_chance = 30
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	attack_verb = list("stabbed", "sliced", "cut")
 	origin_tech = @'{"materials":1,"engineering":1,"combat":2}'
 	material = /decl/material/solid/metal/steel

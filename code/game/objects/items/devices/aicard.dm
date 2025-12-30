@@ -1,5 +1,5 @@
 /obj/item/aicard
-	name = "inteliCard"
+	name = "intelliCard"
 	icon = 'icons/obj/items/device/ai_card.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL

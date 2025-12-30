@@ -9,7 +9,7 @@
 	var/rigged = 0
 
 /obj/structure/closet/crate/open(mob/user)
-	if((atom_flags & ATOM_FLAG_CLIMBABLE) && !opened && can_open(user))
+	if((atom_flags & ATOM_FLAG_CLIMBABLE) && LAZYLEN(climbers) && !opened && can_open(user))
 		object_shaken()
 	. = ..()
 	if(.)
@@ -22,7 +22,7 @@
 			for(var/obj/item/assembly/A in src)
 				A.activate()
 
-/obj/structure/closet/crate/examine(mob/user)
+/obj/structure/closet/crate/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(rigged && opened)
 		var/list/devices = list()
@@ -30,15 +30,15 @@
 			devices += H
 		for(var/obj/item/assembly/A in src)
 			devices += A
-		to_chat(user,"There are some wires attached to the lid, connected to [english_list(devices)].")
+		. += "There are some wires attached to the lid, connected to [english_list(devices)]."
 
-/obj/structure/closet/crate/attackby(obj/item/W, mob/user)
+/obj/structure/closet/crate/attackby(obj/item/used_item, mob/user)
 	if(opened)
 		return ..()
-	else if(istype(W, /obj/item/stack/package_wrap))
+	else if(istype(used_item, /obj/item/stack/package_wrap))
 		return FALSE // let afterattack run
-	else if(istype(W, /obj/item/stack/cable_coil))
-		var/obj/item/stack/cable_coil/C = W
+	else if(istype(used_item, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = used_item
 		if(rigged)
 			to_chat(user, "<span class='notice'>[src] is already rigged!</span>")
 			return TRUE
@@ -47,12 +47,12 @@
 			rigged = 1
 			return TRUE
 		return FALSE
-	else if((istype(W, /obj/item/assembly_holder) || istype(W, /obj/item/assembly)) && rigged)
-		if(!user.try_unequip(W, src))
+	else if((istype(used_item, /obj/item/assembly_holder) || istype(used_item, /obj/item/assembly)) && rigged)
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		to_chat(user, "<span class='notice'>You attach [W] to [src].</span>")
+		to_chat(user, "<span class='notice'>You attach [used_item] to [src].</span>")
 		return TRUE
-	else if(IS_WIRECUTTER(W))
+	else if(IS_WIRECUTTER(used_item))
 		if(rigged)
 			to_chat(user, "<span class='notice'>You cut away the wiring.</span>")
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -90,7 +90,7 @@
 
 /obj/structure/closet/crate/internals
 	name = "internals crate"
-	desc = "A internals crate."
+	desc = "An internals crate."
 
 /obj/structure/closet/crate/internals/fuel
 	name = "\improper Fuel tank crate"
@@ -179,7 +179,7 @@
 
 /obj/structure/closet/crate/radiation
 	name = "radioactive crate"
-	desc = "A leadlined crate with a radiation sign on it."
+	desc = "A lead-lined crate with a radiation sign on it."
 	closet_appearance = /decl/closet_appearance/crate/radiation
 
 /obj/structure/closet/crate/radiation_gear
@@ -197,7 +197,7 @@
 
 /obj/structure/closet/crate/secure/explosives
 	name = "explosives crate"
-	desc = "A secure exploxives crate."
+	desc = "A secure explosives crate."
 	closet_appearance = /decl/closet_appearance/crate/secure/hazard
 
 /obj/structure/closet/crate/secure/shuttle
@@ -235,9 +235,6 @@
 	storage_capacity = 2 * MOB_SIZE_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_STRUCTURES
 	icon = 'icons/obj/closets/bases/large_crate.dmi'
-
-/obj/structure/closet/crate/secure/large/supermatter
-	closet_appearance = /decl/closet_appearance/large_crate/secure/hazard
 
 //fluff variant
 /obj/structure/closet/crate/secure/large/reinforced
@@ -322,8 +319,31 @@
 	close_sound = 'sound/effects/storage/briefcase.ogg'
 	closet_appearance = /decl/closet_appearance/crate/chest
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
-	material = /decl/material/solid/organic/wood
-	color = /decl/material/solid/organic/wood::color
+	material = /decl/material/solid/organic/wood/oak
+	color = /decl/material/solid/organic/wood/oak::color
+	var/icon/overlay_icon = 'icons/obj/closets/bases/chest.dmi'
+	// TODO: Rework chest crafting so that this can use reinf_material instead.
+	/// The material used for the opacity and color of the trim overlay.
+	var/decl/material/overlay_material = /decl/material/solid/metal/iron
+
+/obj/structure/closet/crate/chest/Initialize()
+	if(ispath(overlay_material))
+		overlay_material = GET_DECL(overlay_material)
+	. = ..()
+	// icon update is already queued in parent because of closet appearance
+
+/obj/structure/closet/crate/chest/update_material_desc(override_desc)
+	..()
+	if(istype(overlay_material))
+		desc = "[desc] It has a trim made of [overlay_material.solid_name]."
+
+/obj/structure/closet/crate/chest/on_update_icon()
+	. = ..()
+	if(istype(overlay_material))
+		var/overlay_state = opened ? "open-overlay" : "base-overlay"
+		var/image/trim = overlay_image(overlay_icon, overlay_state, overlay_material.color, RESET_COLOR|RESET_ALPHA)
+		trim.alpha = clamp((50 + overlay_material.opacity * 255), 0, 255)
+		add_overlay(trim)
 
 /obj/structure/closet/crate/chest/ebony
 	material = /decl/material/solid/organic/wood/ebony

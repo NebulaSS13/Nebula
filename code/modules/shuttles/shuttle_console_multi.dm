@@ -9,14 +9,14 @@
 			"can_pick" = shuttle.moving_status == SHUTTLE_IDLE,
 		)
 
-/obj/machinery/computer/shuttle_control/multi/handle_topic_href(var/datum/shuttle/autodock/multi/shuttle, var/list/href_list)
+/obj/machinery/computer/shuttle_control/multi/handle_topic_href(var/datum/shuttle/autodock/multi/shuttle, var/list/href_list, var/user)
 	if((. = ..()) != null)
 		return
 
 	if(href_list["pick"])
 		var/dest_key = input("Choose shuttle destination", "Shuttle Destination") as null|anything in shuttle.get_destinations()
-		if(dest_key && CanInteract(usr, global.default_topic_state))
-			shuttle.set_destination(dest_key, usr)
+		if(dest_key && CanInteract(user, global.default_topic_state))
+			shuttle.set_destination(dest_key, user)
 		return TOPIC_REFRESH
 
 

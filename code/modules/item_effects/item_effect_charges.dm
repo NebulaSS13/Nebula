@@ -3,14 +3,14 @@
 	abstract_type = /decl/item_effect/charges
 
 /decl/item_effect/charges/do_ranged_effect(mob/user, obj/item/item, atom/target, list/parameters)
-	var/charges = (LAZYACCESS(parameters, "charges") || 0)
+	var/charges = (LAZYACCESS(parameters, IE_PAR_USES) || 0)
 	if(charges <= 0)
 		return FALSE
-	item.set_item_effect_parameter(src, ITEM_EFFECT_RANGED, "charges", charges-1)
+	item.set_item_effect_parameter(src, IE_CAT_RANGED, IE_PAR_USES, charges-1)
 	return TRUE
 
-/decl/item_effect/charges/examined(obj/item/item, mob/user)
-	to_chat(user, SPAN_NOTICE("\The [item] has [item.get_item_effect_parameter(src, ITEM_EFFECT_RANGED, "charges") || 0] charge\s of [effect_descriptor] left."))
+/decl/item_effect/charges/on_examined(obj/item/item, mob/user)
+	to_chat(user, SPAN_NOTICE("\The [item] has [item.get_item_effect_parameter(src, IE_CAT_RANGED, IE_PAR_USES) || 0] charge\s of [effect_descriptor] left."))
 
 /obj/item/projectile/fireball
 	name = "fireball"

@@ -1,7 +1,7 @@
 // Power Cells
 /obj/item/cell
 	name = "power cell"
-	desc = "A rechargable electrochemical power cell."
+	desc = "A rechargeable electrochemical power cell."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "cell"
 	item_state = "cell"
@@ -79,16 +79,17 @@
 	update_icon()
 	return amount_used
 
-/obj/item/cell/examine(mob/user)
+/obj/item/cell/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "The label states it's capacity is [maxcharge] Wh.")
-	to_chat(user, "The charge meter reads [round(src.percent(), 0.1)]%.")
+	. += "The label states it's capacity is [maxcharge] Wh."
+	. += "The charge meter reads [round(src.percent(), 0.1)]%."
 
 /obj/item/cell/emp_act(severity)
-	//remove this once emp changes on dev are merged in
+	// remove this if EMPs are ever rebalanced so that they don't instantly drain borg cells
+	// todo: containers (partially) shielding contents?
 	if(isrobot(loc))
-		var/mob/living/silicon/robot/R = loc
-		severity *= R.cell_emp_mult
+		var/mob/living/silicon/robot/robot = loc
+		severity *= robot.cell_emp_mult
 
 	// Lose 1/2, 1/4, 1/6 of the current charge per hit or 1/4, 1/8, 1/12 of the max charge per hit, whichever is highest
 	charge -= max(charge / (2 * severity), maxcharge/(4 * severity))
@@ -314,13 +315,13 @@
 
 /obj/item/cell/potato
 	name = "potato battery"
-	desc = "A rechargable starch based power cell."
+	desc = "A rechargeable starch based power cell."
 	origin_tech = @'{"powerstorage":1}'
 	icon = 'icons/obj/power.dmi'
 	icon_state = "potato_cell"
 	maxcharge = 20
 
-//Generic battery cell for guns with rechargable batteries.
+//Generic battery cell for guns with rechargeable batteries.
 /obj/item/cell/gun
 	name = "weapon energy cell"
 	desc = "A military grade high-density battery, expected to deplete after tens of thousands of complete charge cycles."

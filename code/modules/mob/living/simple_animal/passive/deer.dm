@@ -23,11 +23,13 @@
 	ai                 = /datum/mob_controller/passive/deer
 	eye_color          = "#1a1a1a"
 
-	draw_visible_overlays = list(
+/mob/living/simple_animal/passive/deer/get_default_animal_colours()
+	var/static/list/default_colors = list(
 		"base"     = "#b39161",
 		"markings" = "#3a3329",
 		"socks"    = "#ddd5c9"
 	)
+	return default_colors
 
 /mob/living/simple_animal/passive/deer/get_bodytype()
 	return GET_DECL(/decl/bodytype/quadruped/animal/deer)
@@ -36,12 +38,12 @@
 	uid = "bodytype_animal_deer"
 
 /decl/bodytype/quadruped/animal/deer/Initialize()
-	equip_adjust = list(
-		slot_head_str = list(
+	_equip_adjust = list(
+		(slot_head_str) = list(
 			"[NORTH]" = list( 1, -4),
 			"[SOUTH]" = list( 1, -4),
-			"[EAST]" =  list( 9, -4),
-			"[WEST]" =  list(-9, -4)
+			"[EAST]"  = list( 9, -4),
+			"[WEST]"  = list(-9, -4)
 		)
 	)
 	return ..()

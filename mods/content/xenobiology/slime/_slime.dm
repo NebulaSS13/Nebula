@@ -18,7 +18,7 @@
 	status_flags = CANPARALYSE|CANPUSH
 	butchery_data = null
 	ai = /datum/mob_controller/slime
-	hud_used = /datum/hud/animal
+	hud_used = /datum/hud
 	nutrition = 800
 
 	var/is_adult = FALSE
@@ -33,7 +33,6 @@
 	var/slime_type = /decl/slime_colour/grey
 	var/cores = 1 // the number of /obj/item/slime_extract's the slime has left inside
 	var/core_removal_stage = 0 //For removing cores.
-	var/datum/reagents/metabolism/ingested
 
 /mob/living/slime/Destroy()
 	set_feeding_on()
@@ -65,11 +64,9 @@
 
 	. = ..(mapload)
 
-	ingested = new /datum/reagents/metabolism(240, src, CHEM_TOUCH)
-	reagents = ingested
+	reagents = new /datum/reagents/metabolism(240, src, CHEM_TOUCH)
 	render_target = "slime_\ref[src]"
 
-	verbs += /mob/living/proc/ventcrawl
 	slime_type = _stype
 
 	if(!ispath(slime_type, /decl/slime_colour))
@@ -151,7 +148,7 @@
 
 	statpanel("Status")
 	stat(null, "Health: [get_health_percent()]%")
-	stat(null, "Intent: [a_intent]")
+	stat(null, "Intent: [get_intent().name]")
 
 	if (client.statpanel == "Status")
 		stat(null, "Nutrition: [nutrition]/[get_max_nutrition()]")
@@ -206,7 +203,7 @@
 		visible_message(SPAN_NOTICE("\The [user] pokes \the [src]."))
 		return TRUE
 
-	if(user.a_intent == I_HELP)
+	if(user.check_intent(I_FLAG_HELP))
 		if(length(contents))
 			var/atom/movable/AM = pick(contents)
 			AM.dropInto(loc)
@@ -240,45 +237,46 @@
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		return TRUE
 
-	switch(user.a_intent)
-		if(I_HELP)
-			visible_message(SPAN_NOTICE("\The [user] hugs \the [src] to make it feel better!"))
+	if(user.check_intent(I_FLAG_HELP))
+		visible_message(SPAN_NOTICE("\The [user] hugs \the [src] to make it feel better!"))
+		return TRUE
+
+	if(user.check_intent(I_FLAG_DISARM))
+		if(prob(40))
+			visible_message(SPAN_DANGER("\The [user] shoves \the [src] and it wobbles around, disoriented!"))
+			SET_STATUS_MAX(src, STAT_CONFUSE, 2)
+			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+		else
+			visible_message(SPAN_DANGER("\The [user] shoves \the [src]!"))
+			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+		return TRUE
+
+	if(user.check_intent(I_FLAG_HARM))
+		var/damage = rand(1, 9)
+		var/datum/mob_controller/slime/slime_ai = ai
+		if(istype(slime_ai))
+			slime_ai.attacked += 10
+			slime_ai.adjust_friendship(user, -5)
+		if(prob(10))
+			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+			visible_message(SPAN_DANGER("\The [user] has attempted to punch \the [src]!"))
 			return TRUE
-		if(I_DISARM)
-			if(prob(40))
-				visible_message(SPAN_DANGER("\The [user] shoves \the [src] and it wobbles around, disoriented!"))
-				SET_STATUS_MAX(src, STAT_CONFUSE, 2)
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			else
-				visible_message(SPAN_DANGER("\The [user] shoves \the [src]!"))
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-			return TRUE
-		if(I_HURT)
-			var/damage = rand(1, 9)
-			var/datum/mob_controller/slime/slime_ai = ai
-			if(istype(slime_ai))
-				slime_ai.attacked += 10
-				slime_ai.adjust_friendship(user, -5)
-			if(prob(10))
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				visible_message(SPAN_DANGER("\The [user] has attempted to punch \the [src]!"))
-				return TRUE
-			playsound(loc, "punch", 25, 1, -1)
-			visible_message(SPAN_DANGER("\The [user] has punched \the [src]!"))
-			take_damage(damage)
-			return TRUE
+		playsound(loc, "punch", 25, 1, -1)
+		visible_message(SPAN_DANGER("\The [user] has punched \the [src]!"))
+		take_damage(damage)
+		return TRUE
 
 	return ..()
 
-/mob/living/slime/attackby(var/obj/item/W, var/mob/user)
-	var/force = W.get_attack_force(user)
+/mob/living/slime/attackby(var/obj/item/used_item, var/mob/user)
+	var/force = used_item.expend_attack_force(user)
 	if(force > 0)
 		var/datum/mob_controller/slime/slime_ai = ai
 		if(istype(slime_ai))
 			slime_ai.attacked += 10
 			slime_ai.adjust_friendship(user, -5)
 		if(stat == CONSCIOUS && prob(25)) //Only run this check if we're alive or otherwise motile, otherwise surgery will be agonizing for xenobiologists.
-			to_chat(user, SPAN_WARNING("\The [W] passes right through \the [src]!"))
+			to_chat(user, SPAN_WARNING("\The [used_item] passes right through \the [src]!"))
 			return TRUE
 	. = ..()
 	if(feeding_on && prob(force * 5))
@@ -296,9 +294,6 @@
 
 /mob/living/slime/check_has_mouth()
 	return FALSE
-
-/mob/living/slime/set_nutrition(amt)
-	..()
 
 /mob/living/slime/get_hydration()
 	return get_nutrition()
@@ -325,12 +320,6 @@
 /mob/living/slime/mind_initialize()
 	..()
 	mind.assigned_role = "slime"
-
-/mob/living/slime/can_ventcrawl()
-	if(feeding_on)
-		to_chat(src, SPAN_WARNING("You cannot ventcrawl while feeding."))
-		return FALSE
-	. = ..()
 
 /mob/living/slime/handle_airflow(differential, list/connecting_turfs, repelled)
 	return FALSE
@@ -374,6 +363,3 @@
 		. += "Anomalous slime core amount detected."
 	. += "Growth progress:\t[amount_grown]/10."
 	. = jointext(., "<br>")
-
-/mob/living/slime/can_change_intent()
-	return TRUE

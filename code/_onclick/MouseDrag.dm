@@ -15,7 +15,7 @@
 			return
 
 	var/obj/item/gun/gun = get_active_held_item()
-	if(a_intent == I_HURT && istype(over_object) && (isturf(over_object) || isturf(over_object.loc)) && !incapacitated() && istype(gun))
+	if(check_intent(I_FLAG_HARM) && istype(over_object) && (isturf(over_object) || isturf(over_object.loc)) && !incapacitated() && istype(gun))
 		gun.set_autofire(over_object, src)
 
 /mob/proc/OnMouseDown(atom/object, location, control, params)
@@ -25,7 +25,7 @@
 			return
 
 	var/obj/item/gun/gun = get_active_held_item()
-	if(a_intent == I_HURT && istype(object) && (isturf(object) || isturf(object.loc)) && !incapacitated() && istype(gun))
+	if(check_intent(I_FLAG_HARM) && istype(object) && (isturf(object) || isturf(object.loc)) && !incapacitated() && istype(gun))
 		gun.set_autofire(object, src)
 
 /mob/proc/OnMouseUp(atom/object, location, control, params)

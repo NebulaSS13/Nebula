@@ -1,6 +1,6 @@
 /obj/item/clothing/mask/chewable
+	abstract_type = /obj/item/clothing/mask/chewable
 	name = "chewable item master"
-	desc = "You're not sure what this is. You should probably ahelp it."
 	icon = 'icons/clothing/mask/chewables/lollipop.dmi'
 	body_parts_covered = 0
 	bodytype_equip_flags = null
@@ -8,17 +8,11 @@
 	matter = null // no plastic/fiberglass
 
 	var/type_butt = null
-	var/chem_volume = 0
 	var/chewtime = 0
 	var/brand
 
 /obj/item/clothing/mask/chewable/Initialize()
-	. = ..()
 	atom_flags |= ATOM_FLAG_NO_CHEM_CHANGE // so it doesn't react until you light it
-	initialize_reagents()
-
-/obj/item/clothing/mask/chewable/initialize_reagents(populate = TRUE)
-	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 	. = ..()
 
 /obj/item/clothing/mask/chewable/equipped(var/mob/living/user, var/slot)
@@ -39,7 +33,7 @@
 
 /obj/item/clothing/mask/chewable/proc/chew(amount)
 	chewtime -= amount
-	if(reagents && reagents.total_volume)
+	if(reagents && REAGENT_TOTAL_VOLUME(reagents))
 		if(ishuman(loc))
 			var/mob/living/human/user = loc
 			if (src == user.get_equipped_item(slot_wear_mask_str) && user.check_has_mouth())
@@ -51,11 +45,11 @@
 /obj/item/clothing/mask/chewable/Process()
 	chew(1)
 	if(chewtime < 1)
-		extinguish()
+		extinguish_fire()
 
 /obj/item/clothing/mask/chewable/tobacco
 	name = "wad"
-	desc = "A chewy wad of tobacco. Cut in long strands and treated with syrups so it doesn't taste like a ash-tray when you stuff it into your face."
+	desc = "A chewy wad of tobacco. Cut in long strands and treated with syrups so it doesn't taste like an ashtray when you stuff it into your face."
 	throw_speed = 0.5
 	icon = 'icons/clothing/mask/chewables/chew.dmi'
 	type_butt = /obj/item/trash/cigbutt/spitwad
@@ -72,7 +66,7 @@
 	desc = "A disgusting spitwad."
 	icon = 'icons/clothing/mask/chewables/chew_spit.dmi'
 
-/obj/item/clothing/mask/chewable/proc/extinguish(var/mob/user, var/no_message)
+/obj/item/clothing/mask/chewable/extinguish_fire(mob/user, no_message = FALSE)
 	STOP_PROCESSING(SSobj, src)
 	if(type_butt)
 		var/obj/item/trash/cigbutt/butt = new type_butt(get_turf(src))
@@ -89,14 +83,14 @@
 
 /obj/item/clothing/mask/chewable/tobacco/lenni
 	name = "chewing tobacco"
-	desc = "A chewy wad of tobacco. Cut in long strands and treated with syrups so it tastes less like a ash-tray when you stuff it into your face."
+	desc = "A chewy wad of tobacco. Cut in long strands and treated with syrups so it tastes less like an ashtray when you stuff it into your face."
 
 /obj/item/clothing/mask/chewable/tobacco/lenni/populate_reagents()
 	add_to_reagents(/decl/material/solid/tobacco, 2)
 
 /obj/item/clothing/mask/chewable/tobacco/redlady
 	name = "chewing tobacco"
-	desc = "A chewy wad of fine tobacco. Cut in long strands and treated with syrups so it doesn't taste like a ash-tray when you stuff it into your face"
+	desc = "A chewy wad of fine tobacco. Cut in long strands and treated with syrups so it doesn't taste like an ashtray when you stuff it into your face"
 
 /obj/item/clothing/mask/chewable/tobacco/redlady/populate_reagents()
 	add_to_reagents(/decl/material/solid/tobacco/fine, 2)
@@ -107,9 +101,9 @@
 	icon = 'icons/clothing/mask/chewables/gum_nicotine.dmi'
 	type_butt = /obj/item/trash/cigbutt/spitgum
 
-/obj/item/clothing/mask/chewable/tobacco/nico/initialize_reagents(populate = TRUE)
+/obj/item/clothing/mask/chewable/tobacco/nico/Initialize()
 	. = ..()
-	color = reagents.get_color()
+	color = reagents?.get_color()
 
 /obj/item/clothing/mask/chewable/tobacco/nico/populate_reagents()
 	add_to_reagents(/decl/material/liquid/nicotine, 2)
@@ -137,9 +131,9 @@
 /obj/item/clothing/mask/chewable/candy/proc/get_possible_initial_reagents()
 	return
 
-/obj/item/clothing/mask/chewable/candy/initialize_reagents()
+/obj/item/clothing/mask/chewable/candy/Initialize()
 	. = ..()
-	if(reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents))
 		set_color(reagents.get_color())
 		desc += " This one is labeled '[reagents.get_primary_reagent_name()]'."
 
@@ -210,8 +204,8 @@
 		/decl/material/liquid/regenerator,
 		/decl/material/liquid/amphetamines,
 		/decl/material/liquid/antirads,
-		/decl/material/liquid/stimulants,
-		/decl/material/liquid/antidepressants,
+		/decl/material/liquid/accumulated/stimulants,
+		/decl/material/liquid/accumulated/antidepressants,
 		/decl/material/liquid/antitoxins,
 		/decl/material/liquid/brute_meds,
 		/decl/material/liquid/burn_meds,

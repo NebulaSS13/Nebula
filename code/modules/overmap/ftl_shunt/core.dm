@@ -17,7 +17,6 @@
 	var/shunt_x = 1
 	var/shunt_y = 1
 	var/chargepercent = 0
-	var/last_percent_tick = 0
 	var/obj/machinery/computer/ship/ftl/ftl_computer
 	var/required_fuel_joules
 	var/required_charge //This is a function of the required fuel joules.
@@ -98,23 +97,23 @@
 		animate(S, alpha = 255, time = 5.9 SECONDS)
 		add_overlay(S)
 
-/obj/machinery/ftl_shunt/core/examine(mob/user)
+/obj/machinery/ftl_shunt/core/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(sabotaged)
 		if(user.skill_check(SKILL_ENGINES, SKILL_ADEPT))
 			switch(sabotaged)
 				if(SHUNT_SABOTAGE_MINOR)
-					to_chat(user, SPAN_WARNING("It looks like it's been tampered with in some way, and the accelerator vanes seem out of place."))
+					. += SPAN_WARNING("It looks like it's been tampered with in some way, and the accelerator vanes seem out of place.")
 				if(SHUNT_SABOTAGE_MAJOR)
-					to_chat(user, SPAN_WARNING("Light behaves oddly around the core of [src], and it looks to have been tampered with! The vanes are definitely out of place."))
+					. += SPAN_WARNING("Light behaves oddly around the core of [src], and it looks to have been tampered with! The vanes are definitely out of place.")
 				if(SHUNT_SABOTAGE_CRITICAL)
-					to_chat(user, SPAN_DANGER("Light bends around the core of [src] in a manner that eerily reminds you of a singularity... the vanes look completely misaligned!"))
+					. += SPAN_DANGER("Light bends around the core of [src] in a manner that eerily reminds you of a singularity... the vanes look completely misaligned!")
 		else
-			to_chat(user, SPAN_WARNING("It looks like it's been tampered with, but you're not sure to what extent."))
+			. += SPAN_WARNING("It looks like it's been tampered with, but you're not sure to what extent.")
 
-/obj/machinery/ftl_shunt/core/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/stack/telecrystal))
-		var/obj/item/stack/telecrystal/TC = O
+/obj/machinery/ftl_shunt/core/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/stack/telecrystal))
+		var/obj/item/stack/telecrystal/TC = used_item
 
 		if(TC.amount < 10)
 			to_chat(user, SPAN_WARNING("You don't have enough telecrystals to sabotage [src]."))
@@ -238,11 +237,11 @@
 	return FTL_START_CONFIRMED
 
 /obj/machinery/ftl_shunt/core/proc/calculate_jump_requirements()
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
-	if(O)
+	var/obj/effect/overmap/visitable/site = global.overmap_sectors[num2text(z)]
+	if(site)
 		var/shunt_distance
 		var/vessel_mass = ftl_computer.linked.get_vessel_mass()
-		var/shunt_turf = locate(shunt_x, shunt_y, O.z)
+		var/shunt_turf = locate(shunt_x, shunt_y, site.z)
 		shunt_distance = get_dist(get_turf(ftl_computer.linked), shunt_turf)
 		required_fuel_joules = (vessel_mass * JOULES_PER_TON) * shunt_distance
 		required_charge = required_fuel_joules * REQUIRED_CHARGE_MULTIPLIER
@@ -275,12 +274,12 @@
 		cancel_shunt()
 		return //If for some reason we don't have fuel now, just return.
 
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
-	if(O)
-		var/destination = locate(shunt_x, shunt_y, O.z)
+	var/obj/effect/overmap/visitable/site = global.overmap_sectors[num2text(z)]
+	if(site)
+		var/destination = locate(shunt_x, shunt_y, site.z)
 		var/jumpdist = get_dist(get_turf(ftl_computer.linked), destination)
-		var/obj/effect/portal/wormhole/W = new(destination) //Generate a wormhole effect on overmap to give some indication that something is about to happen.
-		QDEL_IN(W, 6 SECONDS)
+		var/obj/effect/portal/wormhole/wormhole = new(destination) //Generate a wormhole effect on overmap to give some indication that something is about to happen.
+		QDEL_IN(wormhole, 6 SECONDS)
 		addtimer(CALLBACK(src, PROC_REF(do_shunt), shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
 		jumping = TRUE
 		update_icon()
@@ -357,7 +356,7 @@
 				if(prob(35))
 					L.flicker()
 
-	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
+	for(var/obj/machinery/apc/A in SSmachines.machinery)
 		if(!(A.z in ftl_computer.linked.map_z))
 			continue
 		switch(shunt_sev)
@@ -403,7 +402,7 @@
 
 			explosion(get_turf(src),-1,-1,8,10) //Effect Two: blow the windows out.
 
-			for(var/obj/machinery/power/apc/A in SSmachines.machinery) //Effect Three: shut down power across the ship.
+			for(var/obj/machinery/apc/A in SSmachines.machinery) //Effect Three: shut down power across the ship.
 				if(!(A.z in ftl_computer.linked.map_z))
 					continue
 				A.energy_fail(rand(60,80))
@@ -411,7 +410,7 @@
 		if(SHUNT_SABOTAGE_CRITICAL)
 			announcetxt = shunt_sabotage_text_critical
 
-			for(var/obj/machinery/power/apc/A in SSmachines.machinery) //Effect One: shut down power across the ship.
+			for(var/obj/machinery/apc/A in SSmachines.machinery) //Effect One: shut down power across the ship.
 				if(!(A.z in ftl_computer.linked.map_z))
 					continue
 				A.energy_fail(rand(100,120))
@@ -584,13 +583,13 @@
 	master = null
 	QDEL_NULL(fuel)
 
-/obj/machinery/ftl_shunt/fuel_port/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/fuel_assembly) && !fuel)
+/obj/machinery/ftl_shunt/fuel_port/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/fuel_assembly) && !fuel)
 		if(!do_after(user, 2 SECONDS, src) || fuel)
 			return TRUE
-		if(!user || !user.try_unequip(O, src))
+		if(!user || !user.try_unequip(used_item, src))
 			return TRUE
-		fuel = O
+		fuel = used_item
 		max_fuel = get_fuel_joules(TRUE)
 		update_icon()
 		return TRUE

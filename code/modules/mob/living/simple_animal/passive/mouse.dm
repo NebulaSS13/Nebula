@@ -52,7 +52,6 @@
 		INVOKE_ASYNC(body, TYPE_PROC_REF(/mob/living/simple_animal, audible_emote), "snuffles.")
 
 /mob/living/simple_animal/passive/mouse/Initialize()
-	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 	if(name == initial(name))
 		name = "[name] ([sequential_id(/mob/living/simple_animal/passive/mouse)])"

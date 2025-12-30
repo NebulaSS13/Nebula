@@ -6,7 +6,7 @@
 
 	w_class             = ITEM_SIZE_HUGE
 	attack_verb         = list("bludgeoned", "whacked", "disciplined", "thrashed")
-	material            = /decl/material/solid/organic/wood
+	material            = /decl/material/solid/organic/wood/oak
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	base_parry_chance   = 30
 	_base_attack_force = 3
@@ -32,7 +32,7 @@
 	. += "narrow"
 
 /obj/item/staff/attackby(obj/item/used_item, mob/user)
-	if(user.a_intent != I_HURT)
+	if(!user.check_intent(I_FLAG_HARM))
 		var/decl/material/bristles_material = used_item.material
 		if(istype(bristles_material) && can_make_broom_with(user, used_item))
 			var/obj/item/staff/broom/broom = new(get_turf(user), material?.type, bristles_material?.type)
@@ -42,9 +42,8 @@
 			return TRUE
 	return ..()
 
-// TODO: move back into wizard modpack when the timelines converge.
 /obj/item/staff/crystal
-	name = "wizard's staff"
+	name = "crystal staff"
 	icon = 'icons/obj/items/staff_crystal.dmi'
 
 /obj/item/staff/crystal/can_make_broom_with(mob/user, obj/item/thing)

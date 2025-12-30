@@ -66,33 +66,33 @@
 			visible_message("[html_icon(src)] [src] beeps and spits out [loaded_disk].")
 			loaded_disk = null
 
-/obj/machinery/botany/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/seeds))
+/obj/machinery/botany/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item,/obj/item/seeds))
 		if(seed)
 			to_chat(user, "There is already a seed loaded.")
 			return TRUE
-		var/obj/item/seeds/S = W
+		var/obj/item/seeds/S = used_item
 		if(S.seed && S.seed.get_trait(TRAIT_IMMUTABLE) > 0)
 			to_chat(user, "That seed is not compatible with our genetics technology.")
-		else if(user.try_unequip(W, src))
-			seed = W
-			to_chat(user, "You load [W] into [src].")
+		else if(user.try_unequip(used_item, src))
+			seed = used_item
+			to_chat(user, "You load [used_item] into [src].")
 		return TRUE
 
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		open = !open
 		to_chat(user, "<span class='notice'>You [open ? "open" : "close"] the maintenance panel.</span>")
 		return TRUE
 
-	if(open && IS_CROWBAR(W))
+	if(open && IS_CROWBAR(used_item))
 		dismantle()
 		return TRUE
 
-	if(istype(W,/obj/item/disk/botany))
+	if(istype(used_item,/obj/item/disk/botany))
 		if(loaded_disk)
 			to_chat(user, "There is already a data disk loaded.")
 			return TRUE
-		var/obj/item/disk/botany/B = W
+		var/obj/item/disk/botany/B = used_item
 		if(B.genes && B.genes.len)
 			if(!disk_needs_genes)
 				to_chat(user, "That disk already has gene data loaded.")
@@ -101,10 +101,10 @@
 			if(disk_needs_genes)
 				to_chat(user, "That disk does not have any gene data loaded.")
 				return TRUE
-		if(!user.try_unequip(W, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		loaded_disk = W
-		to_chat(user, "You load [W] into [src].")
+		loaded_disk = used_item
+		to_chat(user, "You load [used_item] into [src].")
 		return TRUE
 	return ..()
 
@@ -153,13 +153,12 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/botany/Topic(href, href_list)
-
-	if(..())
-		return 1
+/obj/machinery/botany/OnTopic(mob/user, href_list)
+	if((. = ..()))
+		return
 
 	if(href_list["eject_packet"])
-		if(!seed) return
+		if(!seed) return TOPIC_REFRESH // You must be mistaken! We have no seed.
 		seed.dropInto(loc)
 
 		if(seed.seed.name == "new line" || isnull(SSplants.seeds[seed.seed.name]))
@@ -168,76 +167,59 @@
 			SSplants.seeds[seed.seed.name] = seed.seed
 
 		seed.update_seed()
-		visible_message("[html_icon(src)] [src] beeps and spits out [seed].")
+		visible_message("[html_icon(src)] \The [src] beeps and spits out [seed].")
 
 		seed = null
+		. = TOPIC_REFRESH
 
 	if(href_list["eject_disk"])
-		if(!loaded_disk) return
+		if(!loaded_disk) return TOPIC_REFRESH
 		loaded_disk.dropInto(loc)
-		visible_message("[html_icon(src)] [src] beeps and spits out [loaded_disk].")
+		visible_message("[html_icon(src)] \The [src] beeps and spits out [loaded_disk].")
 		loaded_disk = null
+		. = TOPIC_REFRESH
 
-	usr.set_machine(src)
-	src.add_fingerprint(usr)
-
-/obj/machinery/botany/extractor/Topic(href, href_list)
-
-	if(..())
-		return 1
-
-	var/mob/user = usr
-	user.set_machine(src)
-	src.add_fingerprint(user)
+/obj/machinery/botany/extractor/OnTopic(mob/user, href_list)
+	if((. = ..()))
+		return
 
 	if(href_list["scan_genome"])
-
-		if(!seed) return
-
+		if(!seed) return TOPIC_REFRESH
 		last_action = world.time
-		active = 1
+		active = TRUE
+		if(prob(user.skill_fail_chance(SKILL_BOTANY, 100, SKILL_ADEPT)))
+			failed_task = TRUE
+		else
+			genetics = seed.seed
+			degradation = 0
 
-		if(seed && seed.seed)
-			if(prob(user.skill_fail_chance(SKILL_BOTANY, 100, SKILL_ADEPT)))
-				failed_task = 1
-			else
-				genetics = seed.seed
-				degradation = 0
-
-		qdel(seed)
-		seed = null
+		QDEL_NULL(seed)
 
 	if(href_list["get_gene"])
-
 		if(!genetics || !loaded_disk)
-			return
+			return TOPIC_REFRESH
 
 		var/decl/plant_gene/gene_master = locate(href_list["get_gene"])
 		if(ispath(gene_master))
 			gene_master = GET_DECL(gene_master)
 
 		if(!istype(gene_master))
-			return
+			return TOPIC_HANDLED // Potential href hacking?
 
 		last_action = world.time
-		active = 1
-
+		active = TRUE
 		loaded_disk.genes += new /datum/plantgene(gene_master, genetics)
-
 		loaded_disk.genesource = "[genetics.display_name]"
 		if(!genetics.roundstart)
 			loaded_disk.genesource += " (variety #[genetics.uid])"
-
 		loaded_disk.name += " ([gene_master.name], #[genetics.uid])"
 		loaded_disk.desc += " The label reads \'gene [gene_master.name], sampled from [genetics.display_name]\'."
-		eject_disk = 1
-
+		eject_disk = TRUE
 		degradation += rand(20,60) + user.skill_fail_chance(SKILL_BOTANY, 100, SKILL_ADEPT)
 		var/expertise = max(0, user.get_skill_value(SKILL_BOTANY) - SKILL_ADEPT)
 		degradation = max(0, degradation - 10*expertise)
-
 		if(degradation >= 100)
-			failed_task = 1
+			failed_task = TRUE
 			genetics = null
 			degradation = 0
 
@@ -296,30 +278,24 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/botany/editor/Topic(href, href_list)
-
-	if(..())
-		return 1
+/obj/machinery/botany/editor/OnTopic(mob/user, href_list)
+	if((. = ..()))
+		return
 
 	if(href_list["apply_gene"])
-		if(!loaded_disk || !seed) return
-
-		var/mob/user = usr
+		if(!loaded_disk || !seed) return TOPIC_REFRESH
 		last_action = world.time
-		active = 1
+		active = TRUE
 
 		if(!isnull(SSplants.seeds[seed.seed.name]))
 			seed.seed = seed.seed.diverge(1)
 			seed.update_seed()
 
 		if(prob(seed.modified))
-			failed_task = 1
+			failed_task = TRUE
 			seed.modified = 101
 
 		for(var/datum/plantgene/gene in loaded_disk.genes)
 			seed.seed.apply_gene(gene)
 			var/expertise = max(user.get_skill_value(SKILL_BOTANY) - SKILL_ADEPT)
 			seed.modified += rand(5,10) + min(-5, 30 * expertise)
-
-	usr.set_machine(src)
-	src.add_fingerprint(usr)

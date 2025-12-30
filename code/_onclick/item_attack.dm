@@ -26,12 +26,18 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 // If TRUE, prevent afterattack from running.
 /obj/item/proc/resolve_attackby(atom/A, mob/user, var/click_params)
+	if(!user.check_dexterity(get_required_attack_dexterity(user, A)))
+		return TRUE
 	if(!(item_flags & ITEM_FLAG_NO_PRINT))
 		add_fingerprint(user)
 	return A.attackby(src, user, click_params)
 
 // If TRUE, prevent afterattack from running.
 /atom/proc/attackby(obj/item/used_item, mob/user, var/click_params)
+
+	if(try_handle_interactions(user, get_standard_interactions(user), user?.get_active_held_item(), check_alt_interactions = FALSE))
+		return TRUE
+
 	if(storage)
 		if(isrobot(user) && (used_item == user.get_active_held_item()))
 			return FALSE //Robots can't store their modules.
@@ -39,16 +45,17 @@ avoid code duplication. This includes items that may sometimes act as a standard
 			return FALSE
 		used_item.add_fingerprint(user)
 		return storage.handle_item_insertion(user, used_item, click_params = click_params)
+
 	return FALSE
 
-/atom/movable/attackby(obj/item/W, mob/user)
+/atom/movable/attackby(obj/item/used_item, mob/user)
 	. = ..()
 	if(!.)
-		return bash(W,user)
+		return bash(used_item,user)
 
 // Return TRUE if further actions (afterattack, etc) should be prevented, FALSE if they can proceed.
 /atom/movable/proc/bash(obj/item/weapon, mob/user)
-	if(isliving(user) && user.a_intent == I_HELP)
+	if(isliving(user) && !user.check_intent(I_FLAG_HARM))
 		return FALSE
 	if(!weapon.user_can_attack_with(user))
 		return FALSE
@@ -61,7 +68,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(!ismob(user))
 		return TRUE
 
-	if(!QDELETED(used_item) && user.a_intent == I_HELP)
+	if(!QDELETED(used_item) && user.check_intent(I_FLAG_HELP))
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, user.get_target_zone())
 		if(length(E?.ailments))
 			for(var/datum/ailment/ailment in E.ailments)
@@ -69,7 +76,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 					ailment.was_treated_by_item(used_item, user, src)
 					return TRUE
 
-	if(user.a_intent != I_HURT)
+	if(!user.check_intent(I_FLAG_HARM))
 		if(can_operate(src, user) != OPERATE_DENY && used_item.do_surgery(src,user)) //Surgery
 			return TRUE
 		if(try_butcher_in_place(user, used_item))
@@ -80,7 +87,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if(milkable.handle_milked(used_item, user))
 			return TRUE
 
-	if(used_item.edge && has_extension(src, /datum/extension/shearable))
+	if(used_item.has_edge() && has_extension(src, /datum/extension/shearable))
 		var/datum/extension/shearable/shearable = get_extension(src, /datum/extension/shearable)
 		if(shearable.handle_sheared(used_item, user))
 			return TRUE
@@ -119,14 +126,14 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(squash_item())
 		return TRUE
 
-	if(user?.a_intent != I_HURT && is_edible(target) && handle_eaten_by_mob(user, target) != EATEN_INVALID)
+	if(!user?.check_intent(I_FLAG_HARM) && is_edible(target) && handle_eaten_by_mob(user, target) != EATEN_INVALID)
 		return TRUE
 
 	if(item_flags & ITEM_FLAG_NO_BLUDGEON)
 		return FALSE
 
 	// If on help, possibly don't attack.
-	if(user.a_intent == I_HELP)
+	if(user.check_intent(I_FLAG_HELP))
 		switch(user.get_preference_value(/datum/client_preference/help_intent_attack_blocking))
 			if(PREF_ALWAYS)
 				if(user == target)
@@ -147,7 +154,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	user.setClickCooldown(attack_cooldown + w_class)
 	if(animate)
 		user.do_attack_animation(target)
-	if(!user.aura_check(AURA_TYPE_WEAPON, src, user))
+
+	if(target.mob_modifiers_block_attack(MM_ATTACK_TYPE_WEAPON, user, src))
 		return FALSE
 
 	var/hit_zone = target.resolve_item_attack(src, user, user.get_target_zone())
@@ -165,12 +173,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	var/use_hitsound = hitsound
 	if(!use_hitsound)
-		if(edge || sharp)
+		if(has_edge() || is_sharp())
 			use_hitsound = 'sound/weapons/bladeslice.ogg'
 		else
 			use_hitsound = "swing_hit"
 	playsound(loc, use_hitsound, 50, 1, -1)
-	return target.hit_with_weapon(src, user, get_attack_force(user), hit_zone)
+	return target.hit_with_weapon(src, user, expend_attack_force(user), hit_zone)
 
 /obj/item/proc/handle_reflexive_fire(var/mob/user, var/atom/aiming_at)
 	return istype(user) && istype(aiming_at)

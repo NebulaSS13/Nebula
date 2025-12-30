@@ -49,7 +49,7 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 		return TRUE
 
 	// Are we already regenerating?
-	if(friend.has_aura(/obj/aura/sifsap_salve))
+	if(friend.has_mob_modifier(/decl/mob_modifier/sifsap_salve))
 		if(friend == user)
 			to_chat(user, SPAN_WARNING("Your wounds have already been cleaned."))
 		else
@@ -72,7 +72,7 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 	var/friend_ref = "\ref[friend]"
 	global._wounds_being_tended_by_drakes[friend_ref] = world.time + (8 SECONDS)
 
-	if(!do_after(user, 8 SECONDS, friend) || QDELETED(friend) || friend.has_aura(/obj/aura/sifsap_salve) || user.incapacitated() || !drake_spend_sap(user, 10))
+	if(!do_after(user, 8 SECONDS, friend) || QDELETED(friend) || friend.has_mob_modifier(/decl/mob_modifier/sifsap_salve) || user.incapacitated() || !drake_spend_sap(user, 10))
 		global._wounds_being_tended_by_drakes -= friend_ref
 		return TRUE
 
@@ -86,7 +86,7 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 	// Sivian animals get a heal buff from the modifier, others just
 	// get it to stop friendly drakes constantly licking their wounds.
 	// Organ wounds are closed, but the owners get sifsap injected via open wounds.
-	friend.add_aura(new /obj/aura/sifsap_salve(friend, 60 SECONDS))
+	friend.add_mob_modifier(/decl/mob_modifier/sifsap_salve, 60 SECONDS, source = user)
 	var/list/friend_organs = friend.get_external_organs()
 	if(length(friend_organs))
 		for (var/obj/item/organ/external/E in friend_organs)
@@ -95,10 +95,10 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 				var/datum/reagents/bloodstream = friend.get_injected_reagents()
 				if(bloodstream)
 					bloodstream.add_reagent(/decl/material/liquid/sifsap, rand(1,2))
-			for (var/datum/wound/W in E.wounds)
-				W.clamped = TRUE // use this rather than bandaged to avoid message weirdness
-				W.salve()
-				W.disinfect()
+			for (var/datum/wound/wound in E.wounds)
+				wound.clamped = TRUE // use this rather than bandaged to avoid message weirdness
+				wound.salve()
+				wound.disinfect()
 	// Everyone else is just poisoned.
 	else if(!friend.has_trait(/decl/trait/sivian_biochemistry))
 		friend.take_damage(rand(1,2), TOX)

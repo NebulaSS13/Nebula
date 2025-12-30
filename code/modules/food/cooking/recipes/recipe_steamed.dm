@@ -1,5 +1,8 @@
 /decl/recipe/steamed
 	abstract_type = /decl/recipe/steamed
+	// some arbitrary value to make sure it doesn't cook in open air, but will when microwaved
+	// todo: rework futurecooking so that microwaves aren't the only appliance for everything (modern stove, oven, fryer, etc)
+	minimum_temperature = 80 CELSIUS
 
 /decl/recipe/steamed/chawanmushi
 	fruit = list("mushroom" = 1)

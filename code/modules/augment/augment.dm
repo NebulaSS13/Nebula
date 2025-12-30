@@ -22,8 +22,8 @@
 	update_parent_organ()
 	reagents?.clear_reagents() // Removing meat from the reagents list.
 
-/obj/item/organ/internal/augment/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W) && allowed_organs.len > 1)
+/obj/item/organ/internal/augment/attackby(obj/item/used_item, mob/user)
+	if(IS_SCREWDRIVER(used_item) && allowed_organs.len > 1)
 		//Here we can adjust location for implants that allow multiple slots
 		organ_tag = input(user, "Adjust installation parameters") as null|anything in allowed_organs
 		update_parent_organ()
@@ -65,14 +65,14 @@
 		parent_organ = BP_CHEST
 		descriptor = "chest."
 
-/obj/item/organ/internal/augment/examine(mob/user, distance)
+/obj/item/organ/internal/augment/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, "It is configured to be attached to the [descriptor].")
+		. += "It is configured to be attached to the [descriptor]."
 		if(augment_flags & AUGMENTATION_MECHANIC && augment_flags & AUGMENTATION_ORGANIC)
-			to_chat(user, "It can interface with both prosthetic and fleshy organs.")
+			. += "It can interface with both prosthetic and fleshy organs."
 		else
 			if(augment_flags & AUGMENTATION_MECHANIC)
-				to_chat(user, "It can interface with prosthetic organs.")
+				. += "It can interface with prosthetic organs."
 			else if(augment_flags & AUGMENTATION_ORGANIC)
-				to_chat(user, "It can interface with fleshy organs.")
+				. += "It can interface with fleshy organs."

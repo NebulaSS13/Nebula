@@ -13,23 +13,23 @@
 	. = list()
 	if(!isrobot(M))
 		. += "robot"
-	for(var/t in get_all_species())
-		. += t
+	for(var/decl/species/species as anything in decls_repository.get_decls_of_subtype_unassociated(/decl/species))
+		. += species.uid
 	if(ishuman(M))
 		var/mob/living/human/H = M
-		. -= H.species.name
+		. -= H.species.uid
 
 /obj/item/projectile/change/proc/apply_transformation(var/mob/M, var/choice)
 
 	if(choice == "robot")
-		var/mob/living/silicon/robot/R = new(get_turf(M))
-		R.set_gender(M.get_gender())
-		R.job = ASSIGNMENT_ROBOT
-		R.central_processor = new /obj/item/organ/internal/brain_interface(R)
-		transfer_key_from_mob_to_mob(M, R)
-		return R
+		var/mob/living/silicon/robot/robot = new(get_turf(M))
+		robot.set_gender(M.get_gender())
+		robot.job = ASSIGNMENT_ROBOT
+		robot.central_processor = new /obj/item/organ/internal/brain_interface(robot)
+		transfer_key_from_mob_to_mob(M, robot)
+		return robot
 
-	if(get_species_by_key(choice))
+	if(decls_repository.get_decl_by_id(choice))
 		var/mob/living/human/H = M
 		if(!istype(H))
 			H = new(get_turf(M))
@@ -54,13 +54,10 @@
 	var/choice = pick(get_random_transformation_options(M))
 	var/mob/living/new_mob = apply_transformation(M, choice)
 	if(new_mob)
-		new_mob.a_intent = "hurt"
-		if(M.mind)
-			for (var/spell/S in M.mind.learned_spells)
-				new_mob.add_spell(new S.type)
-			new_mob.a_intent = "hurt"
-			transfer_key_from_mob_to_mob(M, new_mob)
-			to_chat(new_mob, "<span class='warning'>Your form morphs into that of \a [choice].</span>")
+		new_mob.set_intent(I_FLAG_HARM)
+		new_mob.copy_abilities_from(M)
+		transfer_key_from_mob_to_mob(M, new_mob)
+		to_chat(new_mob, "<span class='warning'>Your form morphs into that of \a [choice].</span>")
 	else
 		new_mob = M
 	if(new_mob)
@@ -68,4 +65,3 @@
 
 	if(new_mob != M && !QDELETED(M))
 		qdel(M)
-

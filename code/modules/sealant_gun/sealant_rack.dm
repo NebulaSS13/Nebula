@@ -18,6 +18,7 @@
 	LAZYINITLIST(tanks)
 	for(var/i = 1 to rand(1,max_tanks))
 		tanks += new /obj/item/sealant_tank(src)
+	update_icon()
 
 /obj/structure/sealant_rack/on_update_icon()
 	..()
@@ -44,23 +45,23 @@
 		return TRUE
 	return ..()
 
-/obj/structure/sealant_rack/attackby(obj/item/O, mob/user)
+/obj/structure/sealant_rack/attackby(obj/item/used_item, mob/user)
 
-	if(istype(O, /obj/item/gun/launcher/sealant))
+	if(istype(used_item, /obj/item/gun/launcher/sealant))
 		if(loaded_gun)
 			to_chat(user, SPAN_WARNING("There is already a sealant gun hung up on \the [src]."))
 			return TRUE
-		if(user.try_unequip(O, src))
-			loaded_gun = O
+		if(user.try_unequip(used_item, src))
+			loaded_gun = used_item
 			update_icon()
 			return TRUE
 
-	if(istype(O, /obj/item/sealant_tank))
+	if(istype(used_item, /obj/item/sealant_tank))
 		if(length(tanks) >= max_tanks)
 			to_chat(user, SPAN_WARNING("\The [src] is filled to capacity with sealant tanks."))
 			return TRUE
-		if(user.try_unequip(O, src))
-			LAZYADD(tanks, O)
+		if(user.try_unequip(used_item, src))
+			LAZYADD(tanks, used_item)
 			update_icon()
 			return TRUE
 

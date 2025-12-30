@@ -27,13 +27,13 @@
 				I.forceMove(src)
 	. = ..()
 
-/obj/structure/filing_cabinet/attackby(obj/item/P, mob/user)
-	if(!is_type_in_list(P, can_hold))
+/obj/structure/filing_cabinet/attackby(obj/item/used_item, mob/user)
+	if(!is_type_in_list(used_item, can_hold))
 		return ..()
-	if(!user.try_unequip(P, src))
+	if(!user.try_unequip(used_item, src))
 		return TRUE
 	add_fingerprint(user)
-	to_chat(user, SPAN_NOTICE("You put [P] in [src]."))
+	to_chat(user, SPAN_NOTICE("You put [used_item] in [src]."))
 	flick("[initial(icon_state)]-open",src)
 	updateUsrDialog()
 	return TRUE
@@ -41,8 +41,8 @@
 /obj/structure/filing_cabinet/interact(mob/user)
 	user.set_machine(src)
 	var/dat = "<HR><TABLE>"
-	for(var/obj/item/P in src)
-		dat += "<TR><TD><A href='byond://?src=\ref[src];retrieve=\ref[P]'>[P.name]</A></TD></TR>"
+	for(var/obj/item/paper in src)
+		dat += "<TR><TD><A href='byond://?src=\ref[src];retrieve=\ref[paper]'>[paper.name]</A></TD></TR>"
 	dat += "</TABLE>"
 	show_browser(user, "<html><head><title>[name]</title></head><body>[dat]</body></html>", "window=filingcabinet;size=350x300")
 
@@ -53,9 +53,9 @@
 /obj/structure/filing_cabinet/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if(href_list["retrieve"])
 		close_browser(user, "window=filingcabinet")
-		var/obj/item/P = locate(href_list["retrieve"])
-		if(istype(P) && CanPhysicallyInteractWith(user, src))
-			user.put_in_hands(P)
+		var/obj/item/paper = locate(href_list["retrieve"])
+		if(istype(paper) && CanPhysicallyInteractWith(user, src))
+			user.put_in_hands(paper)
 			flick("[initial(icon_state)]-open", src)
 			updateUsrDialog()
 			. = TOPIC_REFRESH

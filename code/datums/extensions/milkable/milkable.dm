@@ -8,6 +8,10 @@
 	var/milk_min  = 5
 	var/milk_max  = 10
 
+	var/cream_type = /decl/material/liquid/drink/milk/cream
+	var/cream_min  = 2
+	var/cream_max  = 5
+
 	var/impatience = 0
 	var/decl/skill/milking_skill = SKILL_BOTANY
 	var/milking_skill_req        = SKILL_BASIC
@@ -42,9 +46,16 @@
 		create_milk()
 
 /datum/extension/milkable/proc/create_milk()
-	var/create_milk = min(rand(milk_min, milk_max), REAGENTS_FREE_SPACE(udder))
-	if(create_milk > 0)
-		udder.add_reagent(milk_type, create_milk, get_milk_data())
+
+	var/create_milk  = min(rand(milk_min, milk_max), REAGENTS_FREE_SPACE(udder))
+	var/create_cream = min(rand(cream_min, cream_max), REAGENTS_FREE_SPACE(udder) - create_milk)
+
+	if(create_milk <= 0 && create_cream <= 0)
+		return
+
+	var/list/milk_data = get_milk_data()
+	udder.add_reagent(milk_type,  create_milk,  milk_data)
+	udder.add_reagent(cream_type, create_cream, milk_data)
 
 /datum/extension/milkable/proc/get_milk_data()
 	var/static/list/milk_data = list(
@@ -62,7 +73,7 @@
 	if(critter.stat == DEAD)
 		return FALSE
 
-	if(udder?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(udder) <= 0)
 		to_chat(user, SPAN_WARNING("\The [critter]'s udder is dry. Wait a little longer."))
 		return TRUE
 
@@ -74,7 +85,7 @@
 			to_chat(user, SPAN_WARNING("Wait for \the [critter] to stop moving before you try milking it."))
 			return TRUE
 
-	if(container.reagents.total_volume >= container.volume)
+	if(REAGENTS_FREE_SPACE(container.reagents) <= 0)
 		to_chat(user, SPAN_WARNING("\The [container] is full."))
 		return TRUE
 
@@ -97,11 +108,11 @@
 	if(critter.stat == DEAD)
 		return FALSE
 
-	if(udder?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(udder) <= 0)
 		to_chat(user, SPAN_WARNING("\The [critter]'s udder is dry. Wait a little longer."))
 		return TRUE
 
-	if(container.reagents.total_volume >= container.volume)
+	if(REAGENTS_FREE_SPACE(container.reagents) <= 0)
 		to_chat(user, SPAN_NOTICE("\The [container] is full."))
 		return TRUE
 
@@ -113,7 +124,7 @@
 		SPAN_NOTICE("\The [user] milks \the [critter] into \the [container]."),
 		SPAN_NOTICE("You milk \the [critter] into \the [container].")
 	)
-	udder.trans_type_to(container, milk_type, min(REAGENTS_FREE_SPACE(container.reagents), rand(15, 20)))
+	udder.trans_to(container, min(REAGENTS_FREE_SPACE(container.reagents), rand(15, 20)))
 	return TRUE
 
 /datum/extension/milkable/proc/handle_milking_failure(mob/user, mob/living/critter)

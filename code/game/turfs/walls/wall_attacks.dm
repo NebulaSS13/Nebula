@@ -17,7 +17,6 @@
 	for(var/turf/turf in loc)
 		if(turf.simulated)
 			SSair.mark_for_update(turf)
-	set_light(density)
 	update_icon()
 	update_air()
 	refresh_opacity()
@@ -111,48 +110,48 @@
 	if(!.)
 		return try_touch(user, (locate(/obj/effect/overlay/wallrot) in src))
 
-/turf/wall/proc/handle_wall_tool_interactions(obj/item/W, mob/user)
+/turf/wall/proc/handle_wall_tool_interactions(obj/item/used_item, mob/user)
 	//get the user's location
 	if(!isturf(user.loc))
 		return FALSE //can't do this stuff whilst inside objects and such
-	if(!construction_stage && try_graffiti(user, W))
+	if(!construction_stage && try_graffiti(user, used_item))
 		return TRUE
-	if(W)
+	if(used_item)
 		radiate()
-		if(W.get_heat() >= T100C)
-			burn(W.get_heat())
+		if(used_item.get_heat() >= T100C)
+			burn(used_item.get_heat())
 			. = TRUE
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		if(IS_WELDER(W))
-			var/obj/item/weldingtool/WT = W
-			if( WT.weld(0,user) )
-				to_chat(user, "<span class='notice'>You burn away the fungi with \the [WT].</span>")
+		if(IS_WELDER(used_item))
+			var/obj/item/weldingtool/welder = used_item
+			if( welder.weld(0,user) )
+				to_chat(user, "<span class='notice'>You burn away the fungi with \the [welder].</span>")
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
 				for(var/obj/effect/overlay/wallrot/WR in src)
 					qdel(WR)
 				return TRUE
 		else
-			var/force = W.get_attack_force(user)
-			if((!is_sharp(W) && force >= 10) || force >= 20)
-				to_chat(user, "<span class='notice'>\The [src] crumbles away under the force of your [W.name].</span>")
+			var/force = used_item.expend_attack_force(user)
+			if((!used_item.is_sharp() && !used_item.has_edge() && force >= 10) || force >= 20)
+				to_chat(user, "<span class='notice'>\The [src] crumbles away under the force of your [used_item.name].</span>")
 				physically_destroyed()
 				return TRUE
 	var/turf/T = user.loc	//get user's location for delay checks
-	if(damage && istype(W, /obj/item/weldingtool))
+	if(damage && istype(used_item, /obj/item/weldingtool))
 
-		var/obj/item/weldingtool/WT = W
+		var/obj/item/weldingtool/welder = used_item
 
-		if(WT.weld(0,user))
+		if(welder.weld(0,user))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
+			if(do_after(user, max(5, damage / 5), src) && welder && welder.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
 				take_damage(-damage)
 		return TRUE
 
 	// Basic dismantling.
 	if(isnull(construction_stage) || !reinf_material)
-		var/datum/extension/demolisher/demolition = get_extension(W, /datum/extension/demolisher)
+		var/datum/extension/demolisher/demolition = get_extension(used_item, /datum/extension/demolisher)
 		if(istype(demolition) && demolition.try_demolish(user, src))
 			return TRUE
 
@@ -161,9 +160,9 @@
 		switch(construction_stage)
 			if(6)
 
-				if(W.is_special_cutting_tool(TRUE))
+				if(used_item.is_special_cutting_tool(TRUE))
 
-					to_chat(user, "<span class='notice'>You drive \the [W] into the wall and begin trying to rip out the support frame...</span>")
+					to_chat(user, "<span class='notice'>You drive \the [used_item] into the wall and begin trying to rip out the support frame...</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 					. = TRUE
 
@@ -175,14 +174,14 @@
 					user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
-				else if(IS_WIRECUTTER(W))
+				else if(IS_WIRECUTTER(used_item))
 					playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 					construction_stage = 5
 					to_chat(user, "<span class='notice'>You cut the outer grille.</span>")
 					update_icon()
 					return TRUE
 			if(5)
-				if(IS_SCREWDRIVER(W))
+				if(IS_SCREWDRIVER(used_item))
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
 					. = TRUE
@@ -192,24 +191,24 @@
 					update_icon()
 					to_chat(user, "<span class='notice'>You remove the support lines.</span>")
 					return
-				else if(istype(W,/obj/item/weldingtool))
-					var/obj/item/weldingtool/WT = W
-					if(WT.weld(0,user))
+				else if(istype(used_item,/obj/item/weldingtool))
+					var/obj/item/weldingtool/welder = used_item
+					if(welder.weld(0,user))
 						construction_stage = 6
 						update_icon()
 						to_chat(user, SPAN_NOTICE("You repair the outer grille."))
 						return TRUE
 			if(4)
 				var/cut_cover
-				if(istype(W,/obj/item/weldingtool))
-					var/obj/item/weldingtool/WT = W
-					if(WT.weld(0,user))
+				if(istype(used_item,/obj/item/weldingtool))
+					var/obj/item/weldingtool/welder = used_item
+					if(welder.weld(0,user))
 						cut_cover=1
 					else
 						return
-				else if (W.is_special_cutting_tool())
-					if(istype(W, /obj/item/gun/energy/plasmacutter))
-						var/obj/item/gun/energy/plasmacutter/cutter = W
+				else if (used_item.is_special_cutting_tool())
+					if(istype(used_item, /obj/item/gun/energy/plasmacutter))
+						var/obj/item/gun/energy/plasmacutter/cutter = used_item
 						if(!cutter.slice(user))
 							return
 					cut_cover = 1
@@ -224,7 +223,7 @@
 					to_chat(user, "<span class='notice'>You press firmly on the cover, dislodging it.</span>")
 					return
 			if(3)
-				if(IS_CROWBAR(W))
+				if(IS_CROWBAR(used_item))
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					. = TRUE
@@ -235,7 +234,7 @@
 					to_chat(user, "<span class='notice'>You pry off the cover.</span>")
 					return
 			if(2)
-				if(IS_WRENCH(W))
+				if(IS_WRENCH(used_item))
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
 					. = TRUE
@@ -247,15 +246,15 @@
 					return
 			if(1)
 				var/cut_cover
-				if(istype(W, /obj/item/weldingtool))
-					var/obj/item/weldingtool/WT = W
-					if( WT.weld(0,user) )
+				if(istype(used_item, /obj/item/weldingtool))
+					var/obj/item/weldingtool/welder = used_item
+					if( welder.weld(0,user) )
 						cut_cover=1
 					else
 						return
-				else if(W.is_special_cutting_tool())
-					if(istype(W, /obj/item/gun/energy/plasmacutter))
-						var/obj/item/gun/energy/plasmacutter/cutter = W
+				else if(used_item.is_special_cutting_tool())
+					if(istype(used_item, /obj/item/gun/energy/plasmacutter))
+						var/obj/item/gun/energy/plasmacutter/cutter = used_item
 						if(!cutter.slice(user))
 							return
 					cut_cover = 1
@@ -270,51 +269,51 @@
 					to_chat(user, "<span class='notice'>You cut the support rods loose from the frame.</span>")
 					return
 			if(0)
-				if(IS_CROWBAR(W))
+				if(IS_CROWBAR(used_item))
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					. = TRUE
-					if(!do_after(user,100,src) || !istype(src, /turf/wall) || !user || !W || !T )	return
-					if(user.loc == T && user.get_active_held_item() == W )
+					if(!do_after(user,100,src) || !istype(src, /turf/wall) || !user || !used_item || !T )	return
+					if(user.loc == T && user.get_active_held_item() == used_item )
 						to_chat(user, "<span class='notice'>You pry off the outer sheath.</span>")
 						dismantle_turf()
 					return
 
 	return FALSE
 
-/turf/wall/attackby(var/obj/item/W, var/mob/user, click_params)
+/turf/wall/attackby(var/obj/item/used_item, var/mob/user, click_params)
 
-	if(istype(W, /obj/item/stack/tile/roof) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES) || !W.user_can_attack_with(user))
+	if(istype(used_item, /obj/item/stack/tile/roof) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES) || !used_item.user_can_attack_with(user))
 		return ..()
 
-	if(handle_wall_tool_interactions(W, user))
+	if(handle_wall_tool_interactions(used_item, user))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		return TRUE
 
-	if(istype(W,/obj/item/frame))
-		var/obj/item/frame/F = W
+	if(istype(used_item,/obj/item/frame))
+		var/obj/item/frame/F = used_item
 		F.try_build(src, click_params)
 		return TRUE
 
 	// Attack the wall with items
-	var/force = W.get_attack_force(user)
-	if(istype(W,/obj/item/rcd) || istype(W, /obj/item/chems) || !force || user.a_intent == I_HELP)
+	var/force = used_item.expend_attack_force(user)
+	if(istype(used_item,/obj/item/rcd) || istype(used_item, /obj/item/chems) || !force || user.check_intent(I_FLAG_HELP))
 		return ..()
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 	var/material_divisor = max(material.brute_armor, reinf_material?.brute_armor)
-	if(W.atom_damage_type == BURN)
+	if(used_item.atom_damage_type == BURN)
 		material_divisor = max(material.burn_armor, reinf_material?.burn_armor)
 	var/effective_force = round(force / material_divisor)
 	if(effective_force < 2)
-		visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W], but it had no effect!"))
+		visible_message(SPAN_DANGER("\The [user] [used_item.pick_attack_verb()] \the [src] with \the [used_item], but it had no effect!"))
 		playsound(src, hitsound, 25, 1)
 		return TRUE
 	// Check for a glancing blow.
-	var/dam_prob = max(0, 100 - material.hardness + effective_force + W.armor_penetration)
+	var/dam_prob = max(0, 100 - material.hardness + effective_force + used_item.armor_penetration)
 	if(!prob(dam_prob))
-		visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W], but it bounced off!"))
+		visible_message(SPAN_DANGER("\The [user] [used_item.pick_attack_verb()] \the [src] with \the [used_item], but it bounced off!"))
 		playsound(src, hitsound, 25, 1)
 		if(user.skill_fail_prob(SKILL_HAULING, 40, SKILL_ADEPT))
 			SET_STATUS_MAX(user, STAT_WEAK, 2)
@@ -322,6 +321,6 @@
 		return TRUE
 
 	playsound(src, get_hit_sound(), 50, 1)
-	visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W]!"))
+	visible_message(SPAN_DANGER("\The [user] [used_item.pick_attack_verb()] \the [src] with \the [used_item]!"))
 	take_damage(effective_force)
 	return TRUE

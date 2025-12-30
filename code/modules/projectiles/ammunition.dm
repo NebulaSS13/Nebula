@@ -36,6 +36,10 @@
 			B.caliber = caliber
 	. = ..()
 
+/obj/item/ammo_casing/Destroy()
+	QDEL_NULL(BB)
+	return ..()
+
 //removes the projectile from the ammo casing
 /obj/item/ammo_casing/proc/expend()
 	. = BB
@@ -82,8 +86,8 @@
 		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(A, /datum/extension/forensic_evidence)
 		forensics.add_from_atom(/datum/forensics/gunshot_residue, src)
 
-/obj/item/ammo_casing/attackby(obj/item/W, mob/user)
-	if(!IS_SCREWDRIVER(W))
+/obj/item/ammo_casing/attackby(obj/item/used_item, mob/user)
+	if(!IS_SCREWDRIVER(used_item))
 		return ..()
 	if(!BB)
 		to_chat(user, "<span class='notice'>There is no bullet in the casing to inscribe anything into.</span>")
@@ -122,12 +126,12 @@
 	if(!BB)
 		SetName("spent [name]")
 
-/obj/item/ammo_casing/examine(mob/user)
+/obj/item/ammo_casing/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(caliber)
-		to_chat(user, "Its caliber is [caliber].")
+		. += "Its caliber is [caliber]."
 	if (!BB)
-		to_chat(user, "This one is spent.")
+		. += "This one is spent."
 
 //An item that holds casings and can be used to put them inside guns
 /obj/item/ammo_magazine
@@ -172,6 +176,16 @@
 		stored_ammo += new ammo_type(src)
 	contents_initialized = TRUE
 
+/obj/item/ammo_magazine/get_contained_matter(include_reagents = TRUE)
+	. = ..()
+	if(!lazyload_contents || contents_initialized || !ammo_type || !initial_ammo)
+		return
+	// Add our expected matter from lazyloaded stuff.
+	var/list/ammo_matter = atom_info_repository.get_matter_for(ammo_type).Copy()
+	for(var/matter_entry in ammo_matter)
+		ammo_matter[matter_entry] *= initial_ammo
+	. = MERGE_ASSOCS_WITH_NUM_VALUES(., ammo_matter)
+
 /obj/item/ammo_magazine/proc/get_stored_ammo_count()
 	. = length(stored_ammo)
 	if(!contents_initialized)
@@ -193,10 +207,10 @@
 		SetName("[name] ([english_list(labels, and_text = ", ")])")
 	update_icon()
 
-/obj/item/ammo_magazine/attackby(obj/item/W, mob/user)
-	if(!istype(W, /obj/item/ammo_casing))
+/obj/item/ammo_magazine/attackby(obj/item/used_item, mob/user)
+	if(!istype(used_item, /obj/item/ammo_casing))
 		return ..()
-	var/obj/item/ammo_casing/C = W
+	var/obj/item/ammo_casing/C = used_item
 	if(C.caliber != caliber)
 		to_chat(user, "<span class='warning'>[C] does not fit into [src].</span>")
 		return TRUE
@@ -253,10 +267,10 @@
 				break
 		icon_state = (new_state)? new_state : initial(icon_state)
 
-/obj/item/ammo_magazine/examine(mob/user)
+/obj/item/ammo_magazine/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	var/self_ammo_count = get_stored_ammo_count()
-	to_chat(user, "There [(self_ammo_count == 1)? "is" : "are"] [self_ammo_count] round\s left!")
+	. += "There [(self_ammo_count == 1)? "is" : "are"] [self_ammo_count] round\s left!"
 
 //magazine icon state caching
 var/global/list/magazine_icondata_keys = list()
@@ -273,10 +287,9 @@ var/global/list/magazine_icondata_states = list()
 /proc/magazine_icondata_cache_add(var/obj/item/ammo_magazine/M)
 	var/list/icon_keys = list()
 	var/list/ammo_states = list()
-	var/list/states = icon_states(M.icon)
 	for(var/i = 0, i <= M.max_ammo, i++)
 		var/ammo_state = "[M.icon_state]-[i]"
-		if(ammo_state in states)
+		if(check_state_in_icon(ammo_state, M.icon))
 			icon_keys += i
 			ammo_states += ammo_state
 

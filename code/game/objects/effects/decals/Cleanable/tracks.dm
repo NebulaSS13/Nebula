@@ -10,8 +10,7 @@
 #define TRACKS_GOING_EAST   64
 #define TRACKS_GOING_WEST   128
 
-// 5 seconds
-#define TRACKS_CRUSTIFY_TIME   50
+#define TRACKS_CRUSTIFY_TIME   5 SECONDS
 
 /datum/fluidtrack
 	var/direction=0
@@ -26,7 +25,8 @@
 	src.wet=_wet
 
 /obj/effect/decal/cleanable/blood/tracks/reveal_blood()
-	if(!fluorescent)
+	// don't reveal non-blood tracks
+	if(ispath(chemical, /decl/material/liquid/blood) && !fluorescent)
 		if(stack && stack.len)
 			for(var/datum/fluidtrack/track in stack)
 				track.basecolor = COLOR_LUMINOL
@@ -68,6 +68,7 @@
 	* @param bloodcolor Color of the blood when wet.
 	*/
 /obj/effect/decal/cleanable/blood/tracks/proc/AddTracks(var/list/DNA, var/comingdir, var/goingdir, var/bloodcolor=COLOR_BLOOD_HUMAN)
+
 	var/updated=0
 	// Shift our goingdir 4 spaces to the left so it's in the GOING bitblock.
 	var/realgoing=BITSHIFT_LEFT(goingdir,4)
@@ -124,7 +125,7 @@
 		update_icon()
 
 /obj/effect/decal/cleanable/blood/tracks/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	color = "#ffffff"
 	var/truedir=0
 
@@ -145,8 +146,9 @@
 		track.fresh=0
 		track.overlay=I
 		stack[stack_idx]=track
-		overlays += I
+		add_overlay(I)
 	updatedtracks=0 // Clear our memory of updated tracks.
+	compile_overlays()
 
 /obj/effect/decal/cleanable/blood/tracks/footprints
 	name = "wet footprints"

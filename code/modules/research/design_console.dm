@@ -1,11 +1,16 @@
 /obj/machinery/computer/design_console
 	name = "design database console"
 	desc = "A console for interfacing with a research and development design network."
+	maximum_component_parts = list(
+		/obj/item/stock_parts/item_holder/disk_reader = 1,
+		/obj/item/stock_parts = 15,
+	)
 
+	/// A cached reference to our disk reader part, if present.
+	var/obj/item/stock_parts/item_holder/disk_reader/disk_reader
 	var/initial_network_id
 	var/initial_network_key
 	var/list/local_cache
-	var/obj/item/disk/design_disk/disk
 	var/obj/machinery/design_database/viewing_database
 	var/showing_designs = FALSE
 
@@ -13,36 +18,35 @@
 	. = ..()
 	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 
+/obj/machinery/computer/design_console/Destroy()
+	viewing_database = null
+	disk_reader = null
+	return ..()
+
 /obj/machinery/computer/design_console/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
+	ADJUST_TAG_VAR(initial_network_key, map_hash)
+
+/obj/machinery/computer/design_console/RefreshParts()
+	. = ..()
+	disk_reader = get_component_of_type(/obj/item/stock_parts/item_holder/disk_reader)
+	if(disk_reader)
+		disk_reader.register_on_insert(CALLBACK(src, PROC_REF(update_ui)))
+		disk_reader.register_on_eject(CALLBACK(src, PROC_REF(update_ui)))
+
+/obj/machinery/computer/design_console/proc/try_get_disk()
+	return disk_reader?.get_inserted()
+
+/obj/machinery/computer/design_console/proc/update_ui()
+	SSnano.update_uis(src)
 
 /obj/machinery/computer/design_console/handle_post_network_connection()
 	..()
 	sync_network()
 
-/obj/machinery/computer/design_console/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/disk/design_disk))
-		if(disk)
-			to_chat(user, SPAN_WARNING("\The [src] already has a disk inserted."))
-			return TRUE
-		if(user.try_unequip(I, src))
-			visible_message("\The [user] slots \the [I] into \the [src].")
-			disk = I
-			return TRUE
-	. = ..()
-
 /obj/machinery/computer/design_console/proc/eject_disk(var/mob/user)
-	if(disk)
-		disk.dropInto(loc)
-		if(user)
-			if(!issilicon(user))
-				user.put_in_hands(disk)
-			if(Adjacent(user, src))
-				visible_message(SPAN_NOTICE("\The [user] removes \the [disk] from \the [src]."))
-		disk = null
-		return TRUE
-	return FALSE
+	return !!disk_reader.eject_item(user)
 
 /obj/machinery/computer/design_console/interface_interact(mob/user)
 	ui_interact(user)
@@ -55,9 +59,13 @@
 	var/datum/computer_network/network = device.get_network()
 	data["network_id"] = device.network_tag
 
+	var/obj/item/disk/design_disk/disk = try_get_disk()
 	if(disk)
 		data["disk_name"] = disk.name
-		data["disk_tech"] = disk.blueprint ? disk.blueprint.name : "no design saved"
+		if(istype(disk))
+			data["disk_tech"] = disk.blueprint ? disk.blueprint.name : "no design saved"
+		else
+			data["disk_tech"] = "invalid data format"
 	else
 		data["disk_name"] = "no disk loaded"
 
@@ -159,7 +167,8 @@
 
 		if(href_list["save_design"])
 			var/datum/fabricator_recipe/design = locate(href_list["save_design"])
-			if(istype(design) && disk)
+			var/obj/item/disk/design_disk/disk = try_get_disk()
+			if(istype(design) && istype(disk))
 				disk.blueprint = design
 				disk.SetName("[initial(disk.name)] ([disk.blueprint.name])")
 			return TOPIC_REFRESH
@@ -219,20 +228,3 @@
 	var/list/techs = get_network_tech_levels()
 	for(var/obj/machinery/fabricator/fab in network.get_devices_by_type(/obj/machinery/fabricator))
 		fab.refresh_design_cache(techs)
-
-/obj/machinery/computer/design_console/get_alt_interactions(var/mob/user)
-	. = ..()
-	LAZYADD(., /decl/interaction_handler/remove_disk/console)
-
-/decl/interaction_handler/remove_disk/console
-	expected_target_type = /obj/machinery/computer/design_console
-
-/decl/interaction_handler/remove_disk/console/is_possible(atom/target, mob/user, obj/item/prop)
-	. = ..()
-	if(.)
-		var/obj/machinery/computer/design_console/D = target
-		. = !!D.disk
-
-/decl/interaction_handler/remove_disk/console/invoked(atom/target, mob/user, obj/item/prop)
-	var/obj/machinery/computer/design_console/D = target
-	D.eject_disk(user)

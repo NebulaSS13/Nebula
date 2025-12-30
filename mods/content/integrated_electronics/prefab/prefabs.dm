@@ -1,0 +1,9 @@
+/decl/prefab/ic_assembly/hand_teleporter
+	data = @'{"assembly":{"type":"type-a electronic mechanism","name":"hand teleporter", "detail_color":"#5d99be"},"components":[{"type":"teleporter locator"},{"type":"wormhole generator"},{"type":"button","name":"Open Wormhole"}],"wires":[[[1,"O",1],[2,"I",1]],[[2,"A",1],[3,"A",1]]]}'
+	power_cell_type = /obj/item/cell/hyper
+
+/obj/abstract/prefab/hand_teleporter
+	name = "hand teleporter"
+	prefab_type = /decl/prefab/ic_assembly/hand_teleporter
+
+OPTIONAL_SPAWNER(hand_tele, /obj/abstract/prefab/hand_teleporter)

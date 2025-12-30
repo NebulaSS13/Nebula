@@ -173,9 +173,6 @@
 /datum/fabricator_recipe/imprinter/circuit/solarcontrol
 	path = /obj/item/stock_parts/circuitboard/solar_control
 
-/datum/fabricator_recipe/imprinter/circuit/supermatter_control
-	path = /obj/item/stock_parts/circuitboard/air_management/supermatter_core
-
 /datum/fabricator_recipe/imprinter/circuit/injector
 	path = /obj/item/stock_parts/circuitboard/air_management/injector_control
 
@@ -347,11 +344,11 @@
 /datum/fabricator_recipe/imprinter/circuit/cooker
 	path = /obj/item/stock_parts/circuitboard/cooker
 
-/datum/fabricator_recipe/imprinter/circuit/honey_extractor
-	path = /obj/item/stock_parts/circuitboard/honey
+/datum/fabricator_recipe/imprinter/circuit/centrifuge
+	path = /obj/item/stock_parts/circuitboard/centrifuge
 
 /datum/fabricator_recipe/imprinter/circuit/seed_extractor
-	path = /obj/item/stock_parts/circuitboard/honey/seed
+	path = /obj/item/stock_parts/circuitboard/seed_extractor
 
 /datum/fabricator_recipe/imprinter/circuit/vending
 	path = /obj/item/stock_parts/circuitboard/vending
@@ -466,9 +463,6 @@
 
 /datum/fabricator_recipe/imprinter/circuit/long_range_relay
 	path = /obj/item/stock_parts/circuitboard/relay/long_range
-
-/datum/fabricator_recipe/imprinter/circuit/inertial_damper
-	path = /obj/item/stock_parts/circuitboard/inertial_damper
 
 /datum/fabricator_recipe/imprinter/circuit/docking_beacon
 	path = /obj/item/stock_parts/circuitboard/docking_beacon

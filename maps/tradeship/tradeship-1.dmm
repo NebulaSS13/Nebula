@@ -167,7 +167,7 @@
 /turf/floor/plating,
 /area/ship/trade/cargo/lower)
 "aw" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -468,7 +468,7 @@
 	pixel_x = 24;
 	dir = 8
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -493,7 +493,7 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 9
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -575,7 +575,7 @@
 /turf/floor/plating,
 /area/ship/trade/maintenance/lower)
 "bj" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -888,7 +888,7 @@
 	icon_state = "0-2";
 	pixel_y = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 22
 	},
@@ -958,7 +958,7 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/effect/decal/cleanable/cobweb,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -1502,7 +1502,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -1842,7 +1842,7 @@
 	level = 2
 	},
 /obj/structure/cable,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "Engineering Supply Storage APC";
 	pixel_x = 22
@@ -1876,7 +1876,7 @@
 	dir = 8;
 	icon_state = "bulb1"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -2046,9 +2046,7 @@
 /turf/floor/reinforced,
 /area/ship/trade/artifact_storage)
 "iS" = (
-/obj/abstract/level_data_spawner/main_level{
-	name = "Tradeship Cargo Deck"
-	},
+/obj/abstract/level_data_spawner/tradeship_cargo,
 /turf/space,
 /area/space)
 "iW" = (
@@ -2120,7 +2118,7 @@
 /turf/wall/r_wall,
 /area/ship/trade/crew/dorms1)
 "lb" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -2396,7 +2394,7 @@
 	icon_state = "0-2";
 	pixel_y = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -2507,7 +2505,7 @@
 	dir = 4;
 	icon_state = "bulb1"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	pixel_y = -22
 	},
 /obj/machinery/alarm{
@@ -3117,7 +3115,7 @@
 /obj/item/stock_parts/micro_laser,
 /obj/item/stock_parts/micro_laser/ultra,
 /obj/structure/rack,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -22
 	},
@@ -3165,7 +3163,7 @@
 	dir = 1;
 	pixel_y = -21
 	},
-/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/vomit/mapped,
 /obj/structure/hygiene/toilet{
 	dir = 1
 	},
@@ -3283,7 +3281,7 @@
 /obj/item/stack/tape_roll/duct_tape,
 /obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
-/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/rods/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/panel/mapped/plastic/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,

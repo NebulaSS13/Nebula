@@ -1,6 +1,6 @@
 /obj/item/rig/light/ninja
 	name = "ominous suit control module"
-	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for assassins."
+	desc = "A unique, vacuum-proof suit of nano-enhanced armor designed specifically for assassins."
 	suit_type = "ominous"
 	icon = 'icons/clothing/rigs/rig_ninja.dmi'
 	armor = list(

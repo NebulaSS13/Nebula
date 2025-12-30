@@ -2,6 +2,7 @@
 	universal_speak = TRUE
 	mob_sort_value = 10
 	invisibility = INVISIBILITY_ABSTRACT
+	is_spawnable_type = FALSE
 	simulated = FALSE
 	density = FALSE
 	stat = DEAD
@@ -9,6 +10,7 @@
 	anchored = TRUE	//  don't get pushed around
 	virtual_mob = null // Hear no evil, speak no evil
 	is_spawnable_type = FALSE
+	skillset = /datum/skillset // moved here from /mob to avoid giving dview a skillset
 
 	var/ready = 0
 	/// Referenced when you want to delete the new_player later on in the code.
@@ -163,7 +165,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		if(!SSjobs.check_general_join_blockers(src, job))
 			return FALSE
 
-		var/decl/species/S = get_species_by_key(client.prefs.species)
+		var/decl/species/S = client.prefs.get_species_decl()
 		if(!check_species_allowed(S))
 			return 0
 
@@ -323,7 +325,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		ordered_submaps = sortTim(SSmapping.submaps.Copy(), /proc/cmp_submap_asc)
 	for(var/datum/submap/submap as anything in ordered_submaps)
 		if(submap?.available())
-			dat += "<tr><td colspan = 3><b>[submap.name] ([submap.archetype.descriptor]):</b></td></tr>"
+			dat += "<tr><td colspan = 3><b>[submap.name] ([submap.archetype.name]):</b></td></tr>"
 			job_summaries = list()
 			for(var/otherthing in submap.jobs)
 				var/datum/job/job = submap.jobs[otherthing]
@@ -360,7 +362,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 
 	var/decl/species/chosen_species
 	if(client.prefs.species)
-		chosen_species = get_species_by_key(client.prefs.species)
+		chosen_species = client.prefs.get_species_decl()
 
 	if(!spawn_turf)
 		var/datum/job/job = SSjobs.get_by_title(mind.assigned_role)
@@ -373,26 +375,21 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		if(!check_species_allowed(chosen_species))
 			spawning = 0 //abort
 			return null
-		new_character = new(spawn_turf, chosen_species.name)
-
-	if(!new_character)
-		new_character = new(spawn_turf)
-
-	new_character.lastarea = get_area(spawn_turf)
-
-	if(global.random_players)
+	if(global.random_players) // apply randomness prior to creating the character
 		var/decl/species/current_species = client.prefs.get_species_decl()
 		var/decl/pronouns/pronouns = pick(current_species.available_pronouns)
 		client.prefs.gender = pronouns.name
 		client.prefs.real_name = client.prefs.get_random_name()
 		client.prefs.randomize_appearance_and_body_for(new_character)
-	client.prefs.copy_to(new_character)
+	new_character = client.prefs.create_character_from_snapshot(spawn_turf)
+	new_character.lastarea = get_area(spawn_turf)
+
+	// client.prefs.copy_to(new_character) // not anymore lol
 
 	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = sound_channels.lobby_channel))// MAD JAMS cant last forever yo
 
 	if(mind)
 		mind.active = 0 //we wish to transfer the key manually
-		mind.original = new_character
 		var/memory = client.prefs.records[PREF_MEM_RECORD]
 		if(memory)
 			mind.StoreMemory(memory)
@@ -427,11 +424,11 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 /mob/new_player/proc/check_species_allowed(var/decl/species/S, var/show_alert=1)
 	if(!S.is_available_for_join() && !has_admin_rights())
 		if(show_alert)
-			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play."))
+			to_chat(src, alert("Your current species, [S.name], is not available for play."))
 		return 0
 	if(!is_alien_whitelisted(src, S))
 		if(show_alert)
-			to_chat(src, alert("You are currently not whitelisted to play [client.prefs.species]."))
+			to_chat(src, alert("You are currently not whitelisted to play [S.name_plural]."))
 		return 0
 	return 1
 
@@ -439,7 +436,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	SHOULD_CALL_PARENT(FALSE)
 	var/decl/species/chosen_species
 	if(client.prefs.species)
-		chosen_species = get_species_by_key(client.prefs.species)
+		chosen_species = client.prefs.get_species_decl()
 	if(!chosen_species || !check_species_allowed(chosen_species, 0))
 		return global.using_map.default_species
 	return chosen_species.name
@@ -481,10 +478,6 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 
 /mob/new_player/get_admin_job_string()
 	return "New player"
-
-/hook/roundstart/proc/update_lobby_browsers()
-	global.using_map.refresh_lobby_browsers()
-	return TRUE
 
 /mob/new_player/change_mob_type(var/new_type, var/turf/location, var/new_name, var/delete_old_mob = FALSE, var/subspecies)
 	to_chat(usr, SPAN_WARNING("You cannot convert players who have not entered the game yet!"))

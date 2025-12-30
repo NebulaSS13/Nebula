@@ -17,7 +17,7 @@
 	var/secure = 0 //if set, then wires will be randomized and bolts will drop if the door is broken
 /obj/item/stock_parts/circuitboard/airlock_electronics/secure
 	name = "secure airlock electronics"
-	desc = "designed to be somewhat more resistant to hacking than standard electronics."
+	desc = "Airlock control electronics, designed to be somewhat more resistant to hacking than standard electronics."
 	origin_tech = @'{"programming":2}'
 	secure = TRUE
 

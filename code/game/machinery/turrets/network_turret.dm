@@ -34,13 +34,13 @@
 	. = ..()
 	set_extension(src, /datum/extension/network_device/sentry_turret)
 
-/obj/machinery/turret/network/attackby(obj/item/I, mob/user)
+/obj/machinery/turret/network/attackby(obj/item/used_item, mob/user)
 	. = ..()
-	if(istype(I, /obj/item/stock_parts/computer/hard_drive/portable))
+	if(istype(used_item, /obj/item/stock_parts/computer/hard_drive/portable))
 		if(!check_access(user))
 			to_chat(user, SPAN_WARNING("\The [src] flashes a red light: you lack access to download its logfile."))
 			return
-		var/obj/item/stock_parts/computer/hard_drive/portable/drive = I
+		var/obj/item/stock_parts/computer/hard_drive/portable/drive = used_item
 		var/datum/computer_file/data/logfile/turret_log = prepare_log_file()
 		if(drive.store_file(turret_log) == OS_FILE_SUCCESS)
 			to_chat(user, SPAN_NOTICE("\The [src] flashes a blue light as it downloads its log file onto \the [drive]!"))

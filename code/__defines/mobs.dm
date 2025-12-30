@@ -3,7 +3,7 @@
 #define UNCONSCIOUS 1
 #define DEAD        2
 
-// Bitflags defining which status effects could be or are inflicted on a mob.
+// Bitflags defining which status conditions could be or are inflicted on a mob.
 #define CANSTUN      BITFLAG(0)
 #define CANWEAKEN    BITFLAG(1)
 #define CANPARALYSE  BITFLAG(2)
@@ -33,12 +33,6 @@
 #define GETPULSE_HAND 0   // Less accurate. (hand)
 #define GETPULSE_TOOL 1   // More accurate. (med scanner, sleeper, etc.)
 #define PULSE_MAX_BPM 250 // Highest, readable BPM by machines and humans.
-
-//intent flags
-#define I_HELP		"help"
-#define I_DISARM	"disarm"
-#define I_GRAB		"grab"
-#define I_HURT		"harm"
 
 //These are used Bump() code for living mobs, in the mob_bump_flag, mob_swap_flags, and mob_push_flags vars to determine whom can bump/swap with whom.
 #define HUMAN 1
@@ -252,6 +246,10 @@
 #define DATA_BLOOD_DOSE_CHEM  /decl/reagent_data_field/blood_dose_chem
 #define DATA_BLOOD_HAS_OXY    /decl/reagent_data_field/blood_has_oxy
 
+// Misc general data.
+#define DATA_COOLDOWN_TIME    /decl/reagent_data_field/cooldown_time
+#define DATA_WATER_HOLINESS   /decl/reagent_data_field/holy
+
 //Used by show_message() and emotes
 #define VISIBLE_MESSAGE 1
 #define AUDIBLE_MESSAGE 2
@@ -276,26 +274,10 @@
 #define CORPSE_CAN_REENTER             BITFLAG(0)
 #define CORPSE_CAN_RESPAWN             BITFLAG(1)
 
-#define SPECIES_HUMAN            "Human"
-#define SPECIES_MONKEY           "Monkey"
-#define SPECIES_ALIEN            "Humanoid"
-#define SPECIES_GOLEM            "Golem"
-
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
 #define SURGERY_RETRACTED 2
 #define SURGERY_ENCASED 3
-
-#define STASIS_MISC     "misc"
-#define STASIS_CRYOBAG  "cryobag"
-#define STASIS_COLD     "cold"
-
-#define AURA_CANCEL 1
-#define AURA_FALSE  2
-#define AURA_TYPE_BULLET "Bullet"
-#define AURA_TYPE_WEAPON "Weapon"
-#define AURA_TYPE_THROWN "Thrown"
-#define AURA_TYPE_LIFE   "Life"
 
 #define SPECIES_BLOOD_DEFAULT 560
 
@@ -365,7 +347,11 @@ var/global/list/dexterity_levels = list(
 #define MOB_ICON_HAS_GIB_STATE       BITFLAG(5)
 #define MOB_ICON_HAS_DUST_STATE      BITFLAG(6)
 #define MOB_ICON_HAS_PARALYZED_STATE BITFLAG(7)
+
+// Additional pronoun sets.
 #define NEUTER_ANIMATE "animate singular neutral"
+#define SECOND_PERSON_SINGULAR "second person singular"
+#define PSEUDOPLURAL "pseudoplural"
 
 // Equipment Overlays Indices //
 #define HO_CONDITION_LAYER  1
@@ -395,7 +381,8 @@ var/global/list/dexterity_levels = list(
 #define HO_HANDCUFF_LAYER   25
 #define HO_INHAND_LAYER     26
 #define HO_FIRE_LAYER       27 //If you're on fire
-#define TOTAL_OVER_LAYERS   27
+#define HO_EFFECT_LAYER     28
+#define TOTAL_OVER_LAYERS   28
 //////////////////////////////////
 
 // Underlay defines; vestigal implementation currently.

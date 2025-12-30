@@ -28,10 +28,10 @@
 	var/safety           = TRUE                  //Whether the safety is on or off. Set to FALSE to allow labeler to interact with things
 	var/mode             = HAND_LABELER_MODE_ADD //What operation the labeler is set to do
 
-/obj/item/hand_labeler/examine(mob/user, distance, infix, suffix)
+/obj/item/hand_labeler/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance < 1)
-		to_chat(user, safety? "Safety is on." : SPAN_WARNING("Safety is off!"))
+		. += safety? "Safety is on." : SPAN_WARNING("Safety is off!")
 		var/modename
 		switch(mode)
 			if(HAND_LABELER_MODE_ADD)
@@ -40,12 +40,12 @@
 				modename = HAND_LABELER_MODE_REM_NAME
 			if(HAND_LABELER_MODE_REMALL)
 				modename = HAND_LABELER_MODE_REMALL_NAME
-		to_chat(user, "It's set to '[SPAN_ITALIC(modename)]' mode.")
-		to_chat(user, "It has [get_labels_left()]/[max_labels] label(s).")
+		. += "It's set to '[SPAN_ITALIC(modename)]' mode."
+		. += "It has [get_labels_left()]/[max_labels] label(s)."
 		if(length(label))
-			to_chat(user, "Its label text reads '[SPAN_ITALIC(label)]'.")
+			. += "Its label text reads '[SPAN_ITALIC(label)]'."
 	else
-		to_chat(user, SPAN_NOTICE("You're too far away to tell much more."))
+		. += SPAN_NOTICE("You're too far away to tell much more.")
 
 /obj/item/hand_labeler/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	return FALSE
@@ -147,11 +147,11 @@
 	update_icon()
 	return TRUE
 
-/obj/item/hand_labeler/attackby(obj/item/W, mob/user)
+/obj/item/hand_labeler/attackby(obj/item/used_item, mob/user)
 
 	//Allow refilling with paper sheets too
-	if(istype(W, /obj/item/paper))
-		var/obj/item/paper/P = W
+	if(istype(used_item, /obj/item/paper))
+		var/obj/item/paper/P = used_item
 		if(!P.is_blank())
 			to_chat(user, SPAN_WARNING("\The [P] is not blank. You can't use that for refilling \the [src]."))
 			return TRUE
@@ -166,18 +166,18 @@
 		if(((incoming_amt + current_amt) / LABEL_MATERIAL_COST) > max_labels)
 			to_chat(user, SPAN_WARNING("There's not enough room in \the [src] for the [label_added] label(s) \the [P] is worth."))
 			return TRUE
-		if(!user.do_skilled(2 SECONDS, SKILL_LITERACY, src) || (QDELETED(W) || QDELETED(src)))
+		if(!user.do_skilled(2 SECONDS, SKILL_LITERACY, src) || (QDELETED(used_item) || QDELETED(src)))
 			return TRUE
 
 		to_chat(user, SPAN_NOTICE("You slice \the [P] into [label_added] small strips and insert them into \the [src]'s paper feed."))
 		add_paper_labels(label_added)
-		qdel(W)
+		qdel(used_item)
 		update_icon()
 		return TRUE
 
 	//Allow reloading from stacks much faster
-	else if(istype(W, /obj/item/stack/material))
-		var/obj/item/stack/material/ST = W
+	else if(istype(used_item, /obj/item/stack/material))
+		var/obj/item/stack/material/ST = used_item
 		var/decl/material/M = ST.material
 		var/max_accepted_labels = max_labels - get_labels_left()
 		var/max_accepted_units  = max_accepted_labels * LABEL_MATERIAL_COST

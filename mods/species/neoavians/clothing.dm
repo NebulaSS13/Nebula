@@ -1,17 +1,9 @@
-/obj/item
-	var/_avian_icon
-
-/obj/item/setup_sprite_sheets()
-	. = ..()
-	if(_avian_icon && !(BODYTYPE_AVIAN in sprite_sheets))
-		LAZYSET(sprite_sheets, BODYTYPE_AVIAN, _avian_icon)
-
 //Shoes
 /obj/item/clothing/shoes/magboots
-	_avian_icon = 'mods/species/neoavians/icons/clothing/feet/magboots.dmi'
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/feet/magboots.dmi'
 
 /obj/item/clothing/shoes/galoshes
-	_avian_icon = 'mods/species/neoavians/icons/clothing/feet/galoshes.dmi'
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/feet/galoshes.dmi'
 
 //Gloves
 /obj/item/clothing/gloves/setup_equip_flags()
@@ -20,28 +12,31 @@
 		bodytype_equip_flags |= BODY_EQUIP_FLAG_AVIAN
 
 /obj/item/clothing/gloves
-	_avian_icon = 'mods/species/neoavians/icons/clothing/gloves.dmi'
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/gloves.dmi'
+
+/obj/item/clothing/gloves/ring
+	_avian_onmob_icon = null
 
 //Backpacks & tanks
 /obj/item/backpack/satchel
-	_avian_icon = 'mods/species/neoavians/icons/clothing/satchel.dmi'
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/satchel.dmi'
 
 //Radsuits (theyre essential?)
 /obj/item/clothing/head/radiation
-	_avian_icon = 'mods/species/neoavians/icons/clothing/head/rad_helm.dmi'
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/head/rad_helm.dmi'
 
 /obj/item/clothing/head/radiation
-	_avian_icon = 'mods/species/neoavians/icons/clothing/head/rad_helm.dmi'
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/head/rad_helm.dmi'
 
 /obj/item/clothing/suit/radiation
-	_avian_icon = 'mods/species/neoavians/icons/clothing/suit/rad_suit.dmi'
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/suit/rad_suit.dmi'
 
 //cloaks
 /obj/item/clothing/suit/cloak
-	_avian_icon = 'mods/species/neoavians/icons/clothing/accessory/cloak.dmi'
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/accessory/cloak.dmi'
 
 /obj/item/clothing/suit/cloak/hide
-	_avian_icon = 'mods/species/neoavians/icons/clothing/accessory/cloak_hide.dmi'
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/accessory/cloak_hide.dmi'
 
 //clothing
 /obj/item/clothing/dress/avian_smock
@@ -49,7 +44,7 @@
 	desc = "A loose-fitting smock favoured by neo-avians."
 	icon = 'mods/species/neoavians/icons/clothing/under/smock.dmi'
 	bodytype_equip_flags = BODY_EQUIP_FLAG_AVIAN
-	_avian_icon = null
+	_avian_onmob_icon = null
 
 /obj/item/clothing/dress/avian_smock/worker
 	name = "worker's smock"
@@ -83,13 +78,13 @@
 	icon = 'mods/species/neoavians/icons/clothing/under/stylish_form.dmi'
 
 /obj/item/clothing/shoes
-	_avian_icon = 'mods/species/neoavians/icons/clothing/feet/shoes.dmi'
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/feet/shoes.dmi'
 
 /obj/item/clothing/shoes/avian
 	name = "small shoes"
 	color = COLOR_GRAY
 	bodytype_equip_flags = BODY_EQUIP_FLAG_AVIAN
-	_avian_icon = null
+	_avian_onmob_icon = null
 	icon = 'mods/species/neoavians/icons/clothing/feet/shoes.dmi'
 
 /obj/item/clothing/shoes/avian/footwraps

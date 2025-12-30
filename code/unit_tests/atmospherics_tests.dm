@@ -2,7 +2,7 @@
 	Unit tests for ATMOSPHERICS primitives
 */
 /datum/unit_test/atmos_machinery
-	template = /datum/unit_test/atmos_machinery
+	abstract_type = /datum/unit_test/atmos_machinery
 	var/list/test_cases = list()
 
 /datum/unit_test/atmos_machinery/proc/create_gas_mixes(gas_mix_data)
@@ -14,11 +14,9 @@
 
 		var/list/initial_gas = mix_data["initial_gas"]
 		if(initial_gas.len)
-			var/list/gas_args = list()
 			for(var/gasid in initial_gas)
-				gas_args += gasid
-				gas_args += initial_gas[gasid]
-			gas_mix.adjust_multi(arglist(gas_args))
+				gas_mix.adjust_gas(gasid, initial_gas[gasid], FALSE)
+			gas_mix.update_values()
 
 		gas_mixes[mix_name] = gas_mix
 	return gas_mixes
@@ -60,7 +58,7 @@
 		pass("[case_name]: conserved moles of each gas ID.")
 
 /datum/unit_test/atmos_machinery/conserve_moles
-	template = /datum/unit_test/atmos_machinery/conserve_moles
+	abstract_type = /datum/unit_test/atmos_machinery/conserve_moles
 	test_cases = list(
 		uphill = list(
 			source = list(

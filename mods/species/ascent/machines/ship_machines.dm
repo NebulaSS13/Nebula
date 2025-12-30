@@ -1,4 +1,4 @@
-MANTIDIFY(/obj/machinery/power/apc/hyper, "mantid power node", "power controller")
+MANTIDIFY(/obj/machinery/apc/hyper, "mantid power node", "power controller")
 MANTIDIFY(/obj/machinery/atmospherics/unary/vent_pump/on, "mantid atmosphere outlet", "vent")
 MANTIDIFY(/obj/machinery/atmospherics/unary/vent_scrubber/on, "mantid atmosphere intake", "scrubber")
 MANTIDIFY(/obj/machinery/hologram/holopad/longrange, "mantid holopad", "holopad")
@@ -53,10 +53,10 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 
 MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 /obj/item/chems/chem_disp_cartridge/ascent/crystal/populate_reagents()
-	add_to_reagents(/decl/material/liquid/crystal_agent, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/crystal_agent, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/chem_disp_cartridge/ascent/bromide/populate_reagents()
-	add_to_reagents(/decl/material/liquid/bromide, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/bromide, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/machinery/sleeper/ascent
 	name = "mantid sleeper"
@@ -164,7 +164,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 		return ..()
 	if(ishuman(user))
 		var/mob/living/human/H = user
-		if(!(H.species.name in ALL_ASCENT_SPECIES))
+		if(!istype(H.get_species(), /decl/species/mantid))
 			to_chat(H, SPAN_WARNING("You have no idea how to use \the [src]."))
 			return TRUE
 	else if(!isascentdrone(user))

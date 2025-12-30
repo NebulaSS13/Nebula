@@ -460,12 +460,6 @@ var/global/const/access_mercenary = "ACCESS_MERCENARY"
 	desc = "Mercenary"
 	access_type = ACCESS_TYPE_ANTAG
 
-var/global/const/access_wizard = "ACCESS_WIZARD"
-/datum/access/wizard
-	id = access_wizard
-	desc = "Wizard"
-	access_type = ACCESS_TYPE_ANTAG
-
 /*******
 * Misc *
 *******/

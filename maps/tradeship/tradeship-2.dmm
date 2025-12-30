@@ -3,7 +3,7 @@
 /turf/space,
 /area/space)
 "ab" = (
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/beige{
@@ -58,14 +58,14 @@
 "af" = (
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/machinery/light_switch{
 	pixel_y = 25
 	},
 /obj/random/action_figure,
 /obj/random_multi/single_item/captains_spare_id,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/trade/command/captain)
 "ag" = (
 /obj/item/bedsheet/captain,
@@ -76,7 +76,7 @@
 	dir = 8;
 	pixel_x = 21
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/trade/command/captain)
 "ah" = (
 /obj/item/radio/intercom{
@@ -135,7 +135,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/segment,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "Crew Deck APC";
 	pixel_x = -22
@@ -404,7 +404,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/trade/command/fmate)
 "aR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -467,7 +467,7 @@
 /turf/floor/carpet/blue,
 /area/ship/trade/command/captain)
 "aW" = (
-/obj/structure/bed/chair/comfy/brown,
+/obj/structure/chair/comfy/brown,
 /turf/floor/carpet/blue,
 /area/ship/trade/command/captain)
 "aX" = (
@@ -575,7 +575,7 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 6
 	},
-/obj/structure/bed/chair/shuttle/black{
+/obj/structure/chair/shuttle/black{
 	dir = 8
 	},
 /obj/machinery/firealarm{
@@ -593,7 +593,7 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 6
 	},
-/obj/structure/bed/chair/shuttle/blue{
+/obj/structure/chair/shuttle/blue{
 	dir = 8
 	},
 /turf/floor/tiled/steel_ridged,
@@ -1121,7 +1121,7 @@
 /turf/floor/tiled/steel_ridged,
 /area/ship/trade/dock)
 "cw" = (
-/obj/structure/bed/chair/comfy/teal{
+/obj/structure/chair/comfy/teal{
 	dir = 1
 	},
 /obj/abstract/landmark/start{
@@ -1194,7 +1194,7 @@
 /turf/wall,
 /area/ship/trade/crew/saloon)
 "cO" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Crew Areas APC";
 	pixel_y = 22
@@ -1265,7 +1265,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/obj/structure/bed/chair/wood,
+/obj/structure/chair/wood,
 /turf/floor/tiled,
 /area/ship/trade/crew/saloon)
 "da" = (
@@ -1387,7 +1387,7 @@
 "ds" = (
 /obj/structure/table,
 /obj/machinery/reagent_temperature,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -1666,7 +1666,7 @@
 /obj/structure/window/reinforced/tinted,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "Bathrooms APC";
 	pixel_x = 22
@@ -1806,7 +1806,7 @@
 /area/space)
 "el" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "Crew Deck APC";
 	pixel_x = 22
@@ -1886,7 +1886,7 @@
 	icon_state = "0-2";
 	pixel_y = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "Galley APC";
 	pixel_x = 22
@@ -1995,7 +1995,7 @@
 	},
 /obj/item/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /obj/item/chems/condiment/small/saltshaker{
 	pixel_x = -3
 	},
@@ -2009,7 +2009,7 @@
 	pixel_x = 3
 	},
 /obj/item/chems/condiment/enzyme,
-/obj/item/chems/glass/rag,
+/obj/item/chems/rag,
 /obj/item/chems/cooking_vessel/pot,
 /turf/floor/tiled,
 /area/ship/trade/crew/kitchen)
@@ -2177,7 +2177,7 @@
 /area/ship/trade/crew/medbay)
 "fg" = (
 /obj/item/pill_bottle/happy,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -2322,7 +2322,7 @@
 /turf/floor/plating/airless,
 /area/ship/trade/maintenance/engine/starboard)
 "fA" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -2414,7 +2414,7 @@
 /turf/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
 "fV" = (
-/obj/structure/bed/chair/office/light,
+/obj/structure/chair/office/light,
 /obj/abstract/landmark/start{
 	name = "Head Doctor"
 	},
@@ -2508,7 +2508,7 @@
 /obj/structure/cable{
 	icon_state = "6-8"
 	},
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "ge" = (
 /obj/machinery/light_switch{
@@ -2525,7 +2525,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "gg" = (
 /obj/effect/paint/brown,
@@ -2651,7 +2651,7 @@
 	dir = 4;
 	pixel_x = -21
 	},
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "gw" = (
 /obj/effect/decal/cleanable/generic,
@@ -2666,14 +2666,14 @@
 	level = 2
 	},
 /obj/item/synthesized_instrument/trumpet,
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "gx" = (
 /obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "gz" = (
 /obj/structure/lattice,
@@ -2725,7 +2725,7 @@
 	pixel_x = 32;
 	dir = 4
 	},
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "gL" = (
 /obj/structure/disposalpipe/segment,
@@ -2981,7 +2981,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -3055,7 +3055,7 @@
 /turf/floor/plating,
 /area/ship/trade/maintenance/hallway)
 "hA" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "Medical Bay APC";
 	pixel_y = -22
 	},
@@ -3131,7 +3131,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc/high{
+/obj/machinery/apc/high{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -3216,7 +3216,7 @@
 /turf/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
 "hW" = (
-/obj/structure/bed/chair/comfy/brown,
+/obj/structure/chair/comfy/brown,
 /obj/abstract/landmark/start{
 	name = "Head Engineer"
 	},
@@ -3434,7 +3434,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/power)
 "ip" = (
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Main Grid"
 	},
 /obj/structure/cable{
@@ -3690,7 +3690,7 @@
 /obj/effect/floor_decal/corner/white{
 	dir = 6
 	},
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled,
@@ -3779,7 +3779,7 @@
 /turf/floor/reinforced/airmix,
 /area/ship/trade/maintenance/atmos)
 "jb" = (
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 1
 	},
 /obj/machinery/media/jukebox/old,
@@ -4463,7 +4463,7 @@
 /area/ship/trade/shuttle/outgoing/general)
 "ld" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
-/obj/machinery/power/apc/high{
+/obj/machinery/apc/high{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -4658,7 +4658,7 @@
 /turf/wall/r_wall,
 /area/ship/trade/crew/medbay/chemistry)
 "nm" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 22
 	},
@@ -4670,7 +4670,7 @@
 /obj/effect/floor_decal/corner/white{
 	dir = 6
 	},
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled,
@@ -4759,7 +4759,7 @@
 /obj/machinery/light,
 /obj/machinery/optable,
 /obj/item/chems/drinks/glass2/coffeecup/britcup,
-/obj/item/chems/glass/rag,
+/obj/item/chems/rag,
 /turf/floor/tiled/white,
 /area/ship/trade/crew/medbay)
 "op" = (
@@ -5047,7 +5047,7 @@
 /turf/wall/r_wall/hull,
 /area/ship/trade/maintenance/atmos)
 "rH" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled/dark,
@@ -5057,7 +5057,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 22
 	},
@@ -5074,14 +5074,14 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 9
 	},
-/obj/structure/bed/chair/shuttle/white{
+/obj/structure/chair/shuttle/white{
 	dir = 4
 	},
 /turf/floor/tiled/steel_ridged,
 /area/ship/trade/shuttle/outgoing/general)
 "rR" = (
 /obj/item/flashlight,
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "rT" = (
 /obj/machinery/computer/modular/preset/engineering,
@@ -5248,7 +5248,7 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/obj/machinery/power/apc/high{
+/obj/machinery/apc/high{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -5261,7 +5261,7 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -5432,7 +5432,7 @@
 /obj/item/boombox,
 /obj/item/stack/tape_roll/barricade_tape/bureaucracy,
 /obj/machinery/keycard_auth,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/trade/command/captain)
 "vS" = (
 /turf/floor/tiled/freezer,
@@ -5532,9 +5532,7 @@
 /turf/floor/tiled,
 /area/ship/trade/crew/saloon)
 "xh" = (
-/obj/abstract/level_data_spawner/main_level{
-	name = "Tradeship Habitation Deck"
-	},
+/obj/abstract/level_data_spawner/tradeship_habitation,
 /turf/space,
 /area/space)
 "xn" = (
@@ -5672,7 +5670,7 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/random/clothing,
-/obj/item/chems/glass/rag,
+/obj/item/chems/rag,
 /obj/item/firstaid/regular,
 /turf/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
@@ -5910,7 +5908,7 @@
 	pixel_y = -2;
 	dir = 8
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/trade/command/fmate)
 "Cb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
@@ -6061,13 +6059,13 @@
 /turf/floor/tiled,
 /area/ship/trade/shuttle/rescue)
 "Dl" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "Medical Bay APC";
 	pixel_y = -22
 	},
 /obj/structure/cable,
 /obj/machinery/icecream_vat,
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "Dq" = (
 /obj/effect/paint/brown,
@@ -6163,7 +6161,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Communications APC";
 	pixel_y = 22
@@ -6192,7 +6190,7 @@
 /obj/item/briefcase/crimekit,
 /obj/item/taperecorder,
 /obj/item/camera,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/trade/command/fmate)
 "Ec" = (
 /obj/structure/closet/crate,
@@ -6202,7 +6200,7 @@
 /obj/random/hat,
 /obj/random/hat,
 /obj/random/masks,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -6482,7 +6480,7 @@
 /area/ship/trade/crew/hallway/port)
 "Hs" = (
 /obj/machinery/light,
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "HA" = (
 /obj/structure/cable{
@@ -6641,11 +6639,11 @@
 /turf/floor/tiled/monotile,
 /area/ship/trade/command/hallway)
 "Jk" = (
-/obj/structure/bed/chair/office/dark,
+/obj/structure/chair/office/dark,
 /obj/abstract/landmark/start{
 	name = "First Mate"
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/trade/command/fmate)
 "Jn" = (
 /obj/effect/floor_decal/corner/beige{
@@ -6682,7 +6680,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Docking Area APC";
 	pixel_y = 22
@@ -6995,7 +6993,7 @@
 	dir = 4;
 	icon_state = "conpipe-c"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Washroom APC";
 	pixel_y = 22
@@ -7084,13 +7082,13 @@
 	dir = 4
 	},
 /obj/structure/bookcase/skill_books/random,
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "NM" = (
 /obj/effect/floor_decal/corner/beige{
 	dir = 9
 	},
-/obj/structure/bed/chair/shuttle/blue{
+/obj/structure/chair/shuttle/blue{
 	dir = 4
 	},
 /obj/item/radio/intercom{
@@ -7132,7 +7130,7 @@
 /obj/item/clothing/shoes/color/brown,
 /obj/random/plushie,
 /mob/living/simple_animal/corgi/Ian,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/trade/command/fmate)
 "Oc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -7142,7 +7140,7 @@
 /obj/machinery/network/relay{
 	initial_network_id = "tradenet"
 	},
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "Og" = (
 /obj/structure/cable{
@@ -7187,7 +7185,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -7234,7 +7232,7 @@
 	dir = 4;
 	id_tag = "tradeship_rescue_shuttle_pump"
 	},
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/white{
@@ -7329,7 +7327,7 @@
 "QH" = (
 /obj/structure/table,
 /obj/structure/cable,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "Medical Bay APC";
 	pixel_y = -22
 	},
@@ -7370,11 +7368,11 @@
 /turf/floor/tiled/techmaint,
 /area/ship/trade/maintenance/hallway)
 "Rb" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "Captain's Quarters APC";
 	pixel_x = 22
@@ -7395,7 +7393,7 @@
 	dir = 8;
 	pixel_x = -21
 	},
-/turf/floor/wood/yew,
+/turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "Rg" = (
 /obj/structure/railing/mapped{
@@ -7557,7 +7555,7 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Docking Area APC";
 	pixel_y = 22
@@ -7739,7 +7737,7 @@
 /area/ship/trade/shuttle/outgoing/general)
 "Vc" = (
 /obj/structure/cable,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -22
 	},
@@ -7749,7 +7747,7 @@
 /area/ship/trade/garden)
 "Vd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/trade/command/fmate)
 "Vl" = (
 /obj/structure/handrail{
@@ -7854,7 +7852,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/ship/trade/command/captain)
 "WE" = (
 /obj/machinery/door/firedoor,
@@ -7968,7 +7966,7 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -7995,7 +7993,7 @@
 /obj/effect/floor_decal/corner/white{
 	dir = 6
 	},
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled,
@@ -8086,7 +8084,7 @@
 /obj/structure/closet/secure_closet/engineering_electrical,
 /obj/item/cell/device/standard,
 /obj/item/cell/device/standard,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -22
 	},

@@ -17,6 +17,7 @@
 	var/mask_type = /obj/item/clothing/mask/breath/emergency
 	var/icon_state_open = "emerg_open"
 	var/icon_state_closed = "emerg"
+	var/icon_state_active
 
 	power_channel = ENVIRON
 	idle_power_usage = 10
@@ -90,8 +91,7 @@
 		visible_message(SPAN_NOTICE("\The [user] detaches \the [contained] and it rapidly retracts back into \the [src]!"))
 	else
 		visible_message(SPAN_NOTICE("\The [contained] rapidly retracts back into \the [src]!"))
-	if(breather.internals)
-		breather.internals.icon_state = "internal0"
+	breather.refresh_hud_element(HUD_INTERNALS)
 	breather = null
 	update_use_power(POWER_USE_IDLE)
 
@@ -136,36 +136,41 @@
 		return
 	return 1
 
-/obj/machinery/oxygen_pump/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W))
+/obj/machinery/oxygen_pump/on_update_icon()
+	if(stat & MAINT)
+		icon_state = icon_state_open
+	else if(icon_state_active && use_power == POWER_USE_ACTIVE) // the base type doesn't have an active state
+		icon_state = icon_state_active
+	else
+		icon_state = icon_state_closed
+
+/obj/machinery/oxygen_pump/attackby(obj/item/used_item, mob/user)
+	if(IS_SCREWDRIVER(used_item))
 		stat ^= MAINT
 		user.visible_message(SPAN_NOTICE("\The [user] [stat & MAINT ? "opens" : "closes"] \the [src]."), SPAN_NOTICE("You [stat & MAINT ? "open" : "close"] \the [src]."))
-		if(stat & MAINT)
-			icon_state = icon_state_open
-		if(!stat)
-			icon_state = icon_state_closed
+		queue_icon_update()
 		return TRUE
-	if(istype(W, /obj/item/tank) && (stat & MAINT))
+	if(istype(used_item, /obj/item/tank))
+		if(!(stat & MAINT))
+			to_chat(user, SPAN_WARNING("Please open the maintenance hatch first."))
+			return TRUE
 		if(tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has a tank installed!"))
 			return TRUE
-		if(!user.try_unequip(W, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		tank = W
+		tank = used_item
 		user.visible_message(SPAN_NOTICE("\The [user] installs \the [tank] into \the [src]."), SPAN_NOTICE("You install \the [tank] into \the [src]."))
 		src.add_fingerprint(user)
 		return TRUE
-	if(istype(W, /obj/item/tank) && !stat)
-		to_chat(user, SPAN_WARNING("Please open the maintenance hatch first."))
-		return TRUE
 	return FALSE // TODO: should this be a parent call? do we want this to be (de)constructable?
 
-/obj/machinery/oxygen_pump/examine(mob/user)
+/obj/machinery/oxygen_pump/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(tank)
-		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())].")
+		. += "The meter shows [round(tank.air_contents.return_pressure())]."
 	else
-		to_chat(user, SPAN_WARNING("It is missing a tank!"))
+		. += SPAN_WARNING("It is missing a tank!")
 
 /obj/machinery/oxygen_pump/Process()
 	if(istype(breather))
@@ -185,7 +190,7 @@
 /obj/machinery/oxygen_pump/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 	if(!tank)
-		to_chat(usr, SPAN_WARNING("It is missing a tank!"))
+		to_chat(user, SPAN_WARNING("It is missing a tank!"))
 		data["tankPressure"] = 0
 		data["releasePressure"] = 0
 		data["defaultReleasePressure"] = 0
@@ -220,9 +225,9 @@
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/machinery/oxygen_pump/Topic(href, href_list)
-	if(..())
-		return 1
+/obj/machinery/oxygen_pump/OnTopic(mob/user, href_list, datum/topic_state/state)
+	if((. = ..()))
+		return
 
 	if (href_list["dist_p"])
 		if (href_list["dist_p"] == "reset")
@@ -233,4 +238,46 @@
 			var/cp = text2num(href_list["dist_p"])
 			tank.distribute_pressure += cp
 		tank.distribute_pressure = min(max(round(tank.distribute_pressure), 0), TANK_MAX_RELEASE_PRESSURE)
-		return 1
+		. = TOPIC_REFRESH // Refreshing is handled in machinery/Topic
+
+/obj/machinery/oxygen_pump/mobile
+	name = "portable oxygen pump"
+	icon = 'icons/obj/machines/medpump.dmi'
+	desc = "A portable oxygen pump with a retractable mask that you can pull over your face in case of emergencies."
+	icon_state = "medpump"
+	icon_state_open = "medpump_open"
+	icon_state_closed = "medpump"
+	icon_state_active = "medpump_active"
+	anchored = FALSE
+	density = TRUE
+
+/obj/machinery/oxygen_pump/mobile/stabilizer
+	name = "portable patient stabilizer"
+	desc = "A portable oxygen pump with a retractable mask used for stabilizing patients in the field."
+	icon_state = "patient_stabilizer"
+	icon_state_closed = "patient_stabilizer"
+	icon_state_open = "patient_stabilizer_open"
+	icon_state_active = "patient_stabilizer_active"
+
+/obj/machinery/oxygen_pump/mobile/stabilizer/Process()
+	. = ..()
+	if(!breather)	// Safety.
+		return
+	if(breather.isSynthetic())
+		return
+
+/* TODO: port modifiers or something similar
+	breather.add_modifier(breather.stat == DEAD ? /datum/modifier/bloodpump/corpse : /datum/modifier/bloodpump, 6 SECONDS)
+*/
+
+	var/obj/item/organ/internal/lungs/lungs = breather.get_organ(BP_LUNGS, /obj/item/organ/internal/lungs)
+	if(!lungs)
+		return
+	if(lungs.status & ORGAN_DEAD)
+		breather.adjustOxyLoss(-(rand(1,8)))
+	else
+		breather.adjustOxyLoss(-(rand(10,15)))
+		if(lungs.is_bruised() && prob(30))
+			lungs.heal_damage(1)
+		else
+			breather.suffocation_counter = max(breather.suffocation_counter - rand(1,5), 0)

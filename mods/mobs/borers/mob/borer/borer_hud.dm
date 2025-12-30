@@ -1,61 +1,62 @@
-/datum/hud/borer
-	var/list/borer_hud_elements = list()
-	var/obj/screen/intent/hud_intent_selector
-	var/obj/screen/borer/toggle_host_control/hud_toggle_control
-	var/obj/screen/borer/inject_chemicals/hud_inject_chemicals
-	var/obj/screen/borer/leave_host/hud_leave_host
+/decl/hud_element/borer
+	abstract_type = /decl/hud_element/borer
 
-/datum/hud/borer/Destroy()
-	QDEL_NULL_LIST(borer_hud_elements)
-	hud_toggle_control =   null
-	hud_inject_chemicals = null
-	hud_leave_host =       null
-	QDEL_NULL(hud_intent_selector)
-	. = ..()
+/decl/hud_element/borer/inject_chemicals
+	elem_type = /obj/screen/borer/inject_chemicals
 
-/datum/hud/borer/FinalizeInstantiation()
-	hud_intent_selector =  new(null, mymob, get_ui_style_data(), get_ui_color(), get_ui_alpha(), UI_ICON_INTENT)
-	adding += hud_intent_selector
-	hud_inject_chemicals = new(null, mymob)
-	hud_leave_host =       new(null, mymob)
-	borer_hud_elements = list(
-		hud_inject_chemicals,
-		hud_leave_host
+/decl/hud_element/borer/leave_host
+	elem_type = /obj/screen/borer/leave_host
+
+/decl/hud_element/borer/toggle_control
+	elem_type = /obj/screen/borer/toggle_host_control
+
+/datum/hud/animal/borer
+	omit_hud_elements = list(
+		/decl/hud_element/movement,
+		/decl/hud_element/stamina
 	)
-	if(isborer(mymob))
-		var/mob/living/simple_animal/borer/borer = mymob
-		if(!borer.neutered)
-			hud_toggle_control = new(null, mymob)
-			borer_hud_elements += hud_toggle_control
-	adding += borer_hud_elements
-	if(mymob)
-		var/mob/living/simple_animal/borer/borer = mymob
-		if(istype(borer) && borer.host)
-			for(var/obj/thing in borer_hud_elements)
-				thing.alpha =        255
-				thing.set_invisibility(INVISIBILITY_NONE)
-	..()
+	additional_hud_elements = list(
+		/decl/hud_element/borer/inject_chemicals,
+		/decl/hud_element/borer/leave_host,
+		/decl/hud_element/borer/toggle_control
+	)
+	var/list/borer_hud_elements
+
+/datum/hud/animal/borer/neutered
+	additional_hud_elements = list(
+		/decl/hud_element/borer/inject_chemicals,
+		/decl/hud_element/borer/leave_host
+	)
+
+/datum/hud/animal/borer/Destroy()
+	borer_hud_elements = null
+	return ..()
+
+/datum/hud/animal/borer/create_and_register_element(decl/hud_element/ui_elem, decl/ui_style/ui_style, ui_color, ui_alpha)
+	var/obj/screen/elem = ..()
+	if(istype(elem) && istype(elem, /obj/screen/borer))
+		LAZYADD(borer_hud_elements, elem)
+	return elem
 
 /mob/living/simple_animal/borer
-	hud_used = /datum/hud/borer
+	hud_used = /datum/hud/animal/borer
 
 /mob/living/simple_animal/borer/proc/reset_ui_callback()
 	if(!is_on_special_ability_cooldown())
-		var/datum/hud/borer/borer_hud = hud_used
+		var/datum/hud/animal/borer/borer_hud = hud_used
 		if(istype(borer_hud))
 			for(var/obj/thing in borer_hud.borer_hud_elements)
 				thing.color = null
 
 /obj/screen/borer
 	icon = 'mods/mobs/borers/icons/borer_ui.dmi'
-	alpha = 0
-	invisibility = INVISIBILITY_MAXIMUM
+	use_supplied_ui_icon = FALSE
 	requires_ui_style = FALSE
 
 /obj/screen/borer/handle_click(mob/user, params)
 	if(!isborer(user))
 		return FALSE
-	var/mob/living/simple_animal/borer/worm = usr
+	var/mob/living/simple_animal/borer/worm = user
 	if(!worm.host)
 		return FALSE
 	return TRUE

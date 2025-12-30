@@ -20,15 +20,16 @@
 	triggers = list("follow")
 
 /decl/slime_command/follow/get_response(var/speaker, var/spoken, var/datum/mob_controller/slime/holder)
-	if(holder.leader)
-		if(holder.leader == speaker)
+	var/mob/leader_mob = holder.leader?.resolve()
+	if(leader_mob)
+		if(leader_mob == speaker)
 			return pick("Yes...", "Lead...", "Following...")
-		if(LAZYACCESS(holder.observed_friends, weakref(speaker)) > LAZYACCESS(holder.observed_friends, weakref(holder.leader)))
-			holder.leader = speaker
+		if(LAZYACCESS(holder.observed_friends, weakref(speaker)) > LAZYACCESS(holder.observed_friends, holder.leader))
+			holder.leader = weakref(speaker)
 			return "Yes... I follow [speaker]..."
-		return "No... I follow [holder.leader]..."
+		return "No... I follow [leader_mob]..."
 	if(LAZYACCESS(holder.observed_friends, weakref(speaker)) > 2)
-		holder.leader = speaker
+		holder.leader = weakref(speaker)
 		return "I follow..."
 	return pick("No...", "I won't follow...")
 
@@ -45,18 +46,20 @@
 				holder.adjust_friendship(speaker, -1)
 				return "Grrr..."
 			return "Fine..."
-	if(holder.current_target)
+	var/mob/actual_target = holder.current_target?.resolve()
+	if(actual_target)
 		if(friendship > 3)
 			holder.current_target = null
 			if(friendship < 6)
 				holder.adjust_friendship(speaker, -1)
 				return "Grrr..."
 			return "Fine..."
-	if(holder.leader)
-		if(holder.leader == speaker)
+	var/mob/leader_mob = holder.leader?.resolve()
+	if(leader_mob)
+		if(leader_mob == speaker)
 			holder.leader = null
 			return "Yes... I'll stop..."
-		if(friendship > LAZYACCESS(holder.observed_friends, weakref(holder.leader)))
+		if(friendship > LAZYACCESS(holder.observed_friends, holder.leader))
 			holder.leader = null
 			return "Yes... I'll stop..."
 		return "No... I'll keep following..."
@@ -66,11 +69,12 @@
 
 /decl/slime_command/stay/get_response(var/speaker, var/spoken, var/datum/mob_controller/slime/holder)
 	var/friendship = LAZYACCESS(holder.observed_friends, weakref(speaker))
-	if(holder.leader)
-		if(holder.leader == speaker)
+	var/mob/leader_mob = holder.leader?.resolve()
+	if(leader_mob)
+		if(leader_mob == speaker)
 			holder.holding_still = friendship * 10
 			return "Yes... Staying..."
-		var/leader_friendship = LAZYACCESS(holder.observed_friends, weakref(holder.leader))
+		var/leader_friendship = LAZYACCESS(holder.observed_friends, holder.leader)
 		if(friendship > leader_friendship)
 			holder.holding_still = (friendship - leader_friendship) * 10
 			return "Yes... Staying..."

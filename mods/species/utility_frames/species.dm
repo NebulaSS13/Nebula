@@ -10,7 +10,8 @@
 	)
 
 /decl/species/utility_frame
-	name =                  SPECIES_FRAME
+	uid =                   "species_frame"
+	name =                  "Utility Frame"
 	name_plural =           "Utility Frames"
 	description =           "Simple AI-driven robots are used for many menial or repetitive tasks in human space."
 	cyborg_noun = null
@@ -30,13 +31,8 @@
 
 	preview_outfit = null
 
-	unarmed_attacks = list(
-		/decl/natural_attack/stomp,
-		/decl/natural_attack/kick,
-		/decl/natural_attack/punch
-	)
 	available_pronouns = list(
-		/decl/pronouns,
+		/decl/pronouns/pseudoplural,
 		/decl/pronouns/neuter
 	)
 	available_background_info = list(

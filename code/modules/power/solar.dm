@@ -73,8 +73,8 @@ var/global/list/solars_list = list()
 
 
 
-/obj/machinery/power/solar/attackby(obj/item/W, mob/user)
-	if(IS_CROWBAR(W))
+/obj/machinery/power/solar/attackby(obj/item/used_item, mob/user)
+	if(IS_CROWBAR(used_item))
 		playsound(loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar panel.</span>")
 		if(do_after(user, 50,src))
@@ -86,9 +86,9 @@ var/global/list/solars_list = list()
 			user.visible_message("<span class='notice'>[user] takes the glass off the solar panel.</span>")
 			qdel(src)
 		return TRUE
-	else if (W)
+	else if (used_item)
 		add_fingerprint(user)
-		current_health -= W.get_attack_force(user)
+		current_health -= used_item.expend_attack_force(user)
 		healthcheck()
 	return ..()
 
@@ -107,7 +107,7 @@ var/global/list/solars_list = list()
 		set_dir(angle2dir(adir))
 	return
 
-//calculates the fraction of the sunlight that the panel recieves
+//calculates the fraction of the sunlight that the panel receives
 /obj/machinery/power/solar/proc/update_solar_exposure()
 
 	var/datum/sun/sun = get_best_sun()
@@ -125,7 +125,7 @@ var/global/list/solars_list = list()
 		return
 
 	sunfrac = cos(p_angle) ** 2
-	//isn't the power recieved from the incoming light proportionnal to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
+	//isn't the power received from the incoming light proportionnal to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
 
 /obj/machinery/power/solar/Process()
 	if(stat & BROKEN)
@@ -240,8 +240,8 @@ var/global/list/solars_list = list()
 		glass_type = null
 		glass_reinforced = null
 
-/obj/item/solar_assembly/attackby(var/obj/item/W, var/mob/user)
-	if(IS_WRENCH(W))
+/obj/item/solar_assembly/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_WRENCH(used_item))
 		if(!anchored && isturf(loc))
 			anchored = TRUE
 			default_pixel_x = 0
@@ -256,8 +256,8 @@ var/global/list/solars_list = list()
 			user.visible_message("<span class='notice'>[user] unwrenches the solar assembly from its place.</span>")
 			playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return TRUE
-	else if(istype(W, /obj/item/stack/material) && W.get_material_type() == /decl/material/solid/glass)
-		var/obj/item/stack/material/S = W
+	else if(istype(used_item, /obj/item/stack/material) && used_item.get_material_type() == /decl/material/solid/glass)
+		var/obj/item/stack/material/S = used_item
 		if(!S.use(2))
 			to_chat(user, "<span class='warning'>You need two sheets of glass to put them into a solar panel.</span>")
 			return TRUE
@@ -270,12 +270,12 @@ var/global/list/solars_list = list()
 		else
 			new /obj/machinery/power/solar(get_turf(src), src)
 		return TRUE
-	if(!tracker && istype(W, /obj/item/tracker_electronics))
+	if(!tracker && istype(used_item, /obj/item/tracker_electronics))
 		tracker = TRUE
-		qdel(W)
+		qdel(used_item)
 		user.visible_message("<span class='notice'>[user] inserts the electronics into the solar assembly.</span>")
 		return TRUE
-	else if(IS_CROWBAR(W))
+	else if(IS_CROWBAR(used_item))
 		new /obj/item/tracker_electronics(loc)
 		tracker = 0
 		user.visible_message("<span class='notice'>[user] takes out the electronics from the solar assembly.</span>")
@@ -427,14 +427,15 @@ var/global/list/solars_list = list()
 	updateDialog()
 
 /obj/machinery/power/solar_control/Topic(href, href_list)
-	if(..())
+	. = ..()
+	if(. == TOPIC_CLOSE)
 		close_browser(usr, "window=solcon")
-		usr.unset_machine()
-		return 0
-	if(href_list["close"] )
-		close_browser(usr, "window=solcon")
-		usr.unset_machine()
-		return 0
+
+/obj/machinery/power/solar_control/OnTopic(mob/user, href_list)
+	if((. = ..()))
+		return
+	if(href_list["close"])
+		return TOPIC_CLOSE
 
 	if(href_list["rate control"])
 		if(href_list["cdir"])
@@ -442,11 +443,11 @@ var/global/list/solars_list = list()
 			targetdir = cdir
 			if(track == 2) //manual update, so losing auto-tracking
 				track = 0
-			spawn(1)
-				set_panels(cdir)
+			addtimer(CALLBACK(src, PROC_REF(set_panels), cdir), 1)
 		if(href_list["tdir"])
 			trackrate = clamp(trackrate+text2num(href_list["tdir"]), -7200, 7200)
 			if(trackrate) nexttime = world.time + 36000/abs(trackrate)
+		return TOPIC_REFRESH
 
 	if(href_list["track"])
 		track = text2num(href_list["track"])
@@ -459,6 +460,7 @@ var/global/list/solars_list = list()
 			targetdir = cdir
 			if(trackrate) nexttime = world.time + 36000/abs(trackrate)
 			set_panels(targetdir)
+		return TOPIC_REFRESH
 
 	if(href_list["search_connected"])
 		search_for_connected()
@@ -466,9 +468,7 @@ var/global/list/solars_list = list()
 		if(connected_tracker && track == 2 && sun)
 			connected_tracker.set_angle(sun.angle)
 		set_panels(cdir)
-
-	interact(usr)
-	return 1
+		return TOPIC_REFRESH
 
 //rotates the panel to the passed angle
 /obj/machinery/power/solar_control/proc/set_panels(var/cdir)

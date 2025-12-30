@@ -26,7 +26,7 @@
 	if(istype(starbearer) && !canremove)
 		name = "halo of starfire"
 		desc = "Beware the fire of the star-bearers; it is too terrible to touch."
-		starbearer.add_aura(new /obj/aura/regenerating(starbearer))
+		starbearer.add_mob_modifier(/decl/mob_modifier/regeneration, source = src)
 		body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_HANDS|SLOT_FEET|SLOT_TAIL
 		item_flags |= ITEM_FLAG_AIRTIGHT
 
@@ -51,7 +51,7 @@
 
 	var/atom/blade
 	for(var/obj/item/held in shuffle(user.get_held_items()))
-		if(has_edge(held))
+		if(held.has_edge())
 			blade = held
 			break
 	if(!blade)
@@ -113,5 +113,5 @@
 	animate(src, alpha = 255, time = 3)
 	sleep(13)
 	animate(src, alpha = 0, time = 40)
-	sleep(40)
-	qdel(src)
+	if(!QDELING(src))
+		QDEL_IN(src, 4 SECONDS)

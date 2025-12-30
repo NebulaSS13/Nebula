@@ -85,16 +85,16 @@ var/global/list/registered_cyborg_weapons = list()
 		return 0
 	return round(power_supply.charge / charge_cost)
 
-/obj/item/gun/energy/examine(mob/user)
-	. = ..(user)
+/obj/item/gun/energy/get_examine_strings(mob/user, distance, infix, suffix)
+	. = ..()
 	var/obj/item/cell/power_supply = get_cell()
 	if(!power_supply)
-		to_chat(user, "Seems like it's dead.")
+		. += "Seems like it's dead."
 		return
 	if (charge_cost == 0)
-		to_chat(user, "This gun seems to have an unlimited number of shots.")
+		. += "This gun seems to have an unlimited number of shots."
 	else
-		to_chat(user, "Has [get_shots_remaining()] shot\s remaining.")
+		. += "Has [get_shots_remaining()] shot\s remaining."
 
 /obj/item/gun/energy/proc/get_charge_ratio()
 	. = 0

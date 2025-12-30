@@ -45,5 +45,4 @@
 		equipment -= D
 		qdel(D)
 	D = new /obj/item/tool/drill/diamond(src)
-	D.canremove = FALSE
 	equipment += D

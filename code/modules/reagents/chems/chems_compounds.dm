@@ -30,8 +30,9 @@
 		H.update_eyes()
 
 /decl/material/liquid/glowsap/on_leaving_metabolism(datum/reagents/metabolism/holder)
-	if(ishuman(holder?.my_atom))
-		var/mob/living/human/H = holder.my_atom
+	var/my_atom = REAGENT_GET_ATOM(holder)
+	if(ishuman(my_atom))
+		var/mob/living/human/H = my_atom
 		addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/human, update_eyes)), 5 SECONDS)
 	. = ..()
 
@@ -48,6 +49,14 @@
 	color = "#000000"
 	value = 0.1
 	uid = "chem_blackpepper"
+
+/decl/material/solid/cinnamon
+	name = "cinnamon"
+	lore_text = "A powder used to flavor food and drinks. Unpleasant to eat a full spoonful of."
+	taste_description = "cinnamon"
+	color = "#a34b0d"
+	value = 0.2
+	uid = "chem_cinnamon"
 
 /decl/material/liquid/enzyme
 	name = "universal enzyme"
@@ -132,7 +141,7 @@
 	if(M.has_trait(/decl/trait/metabolically_inert) || !M.can_feel_pain())
 		return
 
-	var/dose = LAZYACCESS(M.chem_doses, type)
+	var/dose = CHEM_DOSE(M, src)
 	if(dose < agony_dose)
 		if(prob(5) || dose == metabolism) //dose == metabolism is a very hacky way of forcing the message the first time this procs
 			to_chat(M, discomfort_message)
@@ -173,17 +182,17 @@
 	var/effective_strength = 5
 
 	for(var/slot in global.standard_headgear_slots)
-		var/obj/item/I = M.get_equipped_item(slot)
-		if(istype(I))
-			if(I.body_parts_covered & SLOT_EYES)
+		var/obj/item/thing = M.get_equipped_item(slot)
+		if(istype(thing))
+			if(thing.body_parts_covered & SLOT_EYES)
 				eyes_covered = 1
-				eye_protection = I.name
-			if((I.body_parts_covered & SLOT_FACE) && !(I.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
+				eye_protection = thing.name
+			if((thing.body_parts_covered & SLOT_FACE) && !(thing.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
 				mouth_covered = 1
-				face_protection = I.name
-			else if(I.body_parts_covered & SLOT_FACE)
+				face_protection = thing.name
+			else if(thing.body_parts_covered & SLOT_FACE)
 				partial_mouth_covered = 1
-				partial_face_protection = I.name
+				partial_face_protection = thing.name
 
 	if(eyes_covered)
 		if(!mouth_covered)
@@ -218,7 +227,7 @@
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 	if(M.has_trait(/decl/trait/metabolically_inert) || !M.can_feel_pain())
 		return
-	if(LAZYACCESS(M.chem_doses, type) == metabolism)
+	if(CHEM_DOSE(M, src) == metabolism)
 		to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	else
 		M.apply_effect(6, PAIN, 0)
@@ -275,14 +284,14 @@
 
 /decl/material/liquid/lactate/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
-	var/volume = REAGENT_VOLUME(holder, type)
+	var/affect_volume = REAGENT_VOLUME(holder, src)
 	M.add_chemical_effect(CE_PULSE, 1)
-	if(volume >= 10)
+	if(affect_volume >= 10)
 		M.add_chemical_effect(CE_PULSE, 1)
-		M.add_chemical_effect(CE_SLOWDOWN, (volume/15) ** 2)
-	else if(LAZYACCESS(M.chem_doses, type) > 30) //after prolonged exertion
+		M.add_chemical_effect(CE_SLOWDOWN, (affect_volume/15) ** 2)
+	else if(CHEM_DOSE(M, src) > 30) //after prolonged exertion
 		ADJ_STATUS(M, STAT_JITTER, 5)
-		M.add_chemical_effect(CE_BREATHLOSS, 0.02 * volume)
+		M.add_chemical_effect(CE_BREATHLOSS, 0.02 * affect_volume)
 
 /decl/material/liquid/nanoblood
 	name = "nanoblood"
@@ -305,7 +314,7 @@
 		return
 	if(H.regenerate_blood(4 * removed))
 		H.adjust_immunity(-0.1)
-		if(LAZYACCESS(H.chem_doses, type) > H.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
+		if(CHEM_DOSE(H, src) > H.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
 			H.adjust_immunity(-0.5)
 
 /decl/material/solid/tobacco
@@ -315,7 +324,7 @@
 	color = "#684b3c"
 	scannable = 1
 	scent = "cigarette smoke"
-	scent_descriptor = SCENT_DESC_ODOR
+	scent_descriptor = "odour"
 	scent_range = 4
 	hidden_from_codex = TRUE
 	uid = "chem_tobacco"
@@ -331,7 +340,7 @@
 	taste_description = "fine tobacco"
 	value = 1.5
 	scent = "fine tobacco smoke"
-	scent_descriptor = SCENT_DESC_FRAGRANCE
+	scent_descriptor = "fragrance"
 	uid = "chem_tobacco_fine"
 
 /decl/material/solid/tobacco/bad
@@ -340,7 +349,7 @@
 	value = 0.5
 	scent = "acrid tobacco smoke"
 	scent_intensity = /decl/scent_intensity/strong
-	scent_descriptor = SCENT_DESC_ODOR
+	scent_descriptor = "odour"
 	uid = "chem_tobacco_terrible"
 
 /decl/material/solid/tobacco/liquid
@@ -371,8 +380,10 @@
 
 /decl/material/liquid/menthol/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
-	if(world.time > REAGENT_DATA(holder, type) + 3 MINUTES)
-		LAZYSET(holder.reagent_data, type, world.time)
+	var/list/data = REAGENT_DATA(holder, src)
+	if(world.time > LAZYACCESS(data, DATA_COOLDOWN_TIME) + 3 MINUTES)
+		LAZYSET(data, DATA_COOLDOWN_TIME, world.time)
+		REAGENT_SET_DATA(holder, type, data)
 		to_chat(M, SPAN_NOTICE("You feel faintly sore in the throat."))
 
 /decl/material/liquid/nanitefluid
@@ -393,9 +404,9 @@
 		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
 		if(ishuman(M))
 			var/mob/living/human/H = M
-			for(var/obj/item/organ/internal/I in H.get_internal_organs())
-				if(BP_IS_PROSTHETIC(I))
-					I.heal_damage(20*removed)
+			for(var/obj/item/organ/internal/organ in H.get_internal_organs())
+				if(BP_IS_PROSTHETIC(organ))
+					organ.heal_damage(20*removed)
 
 /decl/material/liquid/antiseptic
 	name = "antiseptic"
@@ -447,19 +458,19 @@
 						new /obj/item/shard(get_turf(E), result_mat)
 					E.dismember(0, DISMEMBER_METHOD_BLUNT)
 				else
-					E.take_external_damage(rand(20,30), 0)
+					E.take_damage(rand(20,30))
 					BP_SET_CRYSTAL(E)
 					E.status |= ORGAN_BRITTLE
 				break
 
 		var/list/internal_organs = H.get_internal_organs()
 		var/list/shuffled_organs = LAZYLEN(internal_organs) ? shuffle(internal_organs.Copy()) : null
-		for(var/obj/item/organ/internal/I in shuffled_organs)
-			if(BP_IS_PROSTHETIC(I) || !BP_IS_CRYSTAL(I) || I.damage <= 0 || I.organ_tag == BP_BRAIN)
+		for(var/obj/item/organ/internal/organ in shuffled_organs)
+			if(BP_IS_PROSTHETIC(organ) || !BP_IS_CRYSTAL(organ) || organ.get_organ_damage() <= 0 || organ.organ_tag == BP_BRAIN)
 				continue
 			if(prob(35))
-				to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
-			I.heal_damage(rand(1,3))
+				to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [organ.name] is mended."))
+			organ.heal_damage(rand(1,3))
 			break
 	else
 		to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))

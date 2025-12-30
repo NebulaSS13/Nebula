@@ -100,12 +100,12 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 			to_chat(src, "<span class='danger'>High levels of toxins cause you to spontaneously mutate!</span>")
 
 /mob/living/human/proc/burn_eyes()
-	var/obj/item/organ/internal/eyes/E = get_organ(BP_EYES, /obj/item/organ/internal/eyes)
-	if(E && !E.bodytype.eye_contaminant_guard)
+	var/obj/item/organ/internal/eyes/eyes = get_organ(BP_EYES, /obj/item/organ/internal/eyes)
+	if(eyes && !eyes.bodytype.eye_contaminant_guard)
 		if(prob(20)) to_chat(src, "<span class='danger'>Your eyes burn!</span>")
-		E.damage += 2.5
+		eyes.adjust_organ_damage(2.5)
 		SET_STATUS_MAX(src, STAT_BLURRY, 50)
-		if (prob(max(0,E.damage - 15) + 1) && !GET_STATUS(src, STAT_BLIND))
+		if (prob(max(0,eyes.get_organ_damage() - 15) + 1) && !GET_STATUS(src, STAT_BLIND))
 			to_chat(src, "<span class='danger'>You are blinded!</span>")
 			SET_STATUS_MAX(src, STAT_BLIND, 20)
 

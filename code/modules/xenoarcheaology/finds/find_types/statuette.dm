@@ -86,12 +86,12 @@
 		if(wight_check_index > shadow_wights.len)
 			wight_check_index = 1
 
-		var/obj/effect/shadow_wight/W = shadow_wights[wight_check_index]
-		if(isnull(W))
+		var/obj/effect/shadow_wight/wight = shadow_wights[wight_check_index]
+		if(isnull(wight))
 			shadow_wights.Remove(wight_check_index)
-		else if(isnull(W.loc))
+		else if(isnull(wight.loc))
 			shadow_wights.Remove(wight_check_index)
-		else if(get_dist(W, src) > 10)
+		else if(get_dist(wight, src) > 10)
 			shadow_wights.Remove(wight_check_index)
 
 /obj/item/vampiric/hear_talk(mob/M, text)

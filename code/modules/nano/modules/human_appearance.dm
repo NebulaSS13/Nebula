@@ -14,6 +14,7 @@
 	src.whitelist = species_whitelist
 	src.blacklist = species_blacklist
 
+// FIXME: This doesn't currently handle arbitrary sprite accessory categories, so you can't select ears/tail/etc.
 /datum/nano_module/appearance_changer/Topic(ref, href_list, var/datum/topic_state/state = global.default_topic_state)
 	if(..())
 		return 1
@@ -80,13 +81,14 @@
 		return
 
 	var/list/data = host.initial_data()
-	data["specimen"] = owner.species.name
+	data["current_species_uid"] = owner.species.uid
 	data["gender"] = owner.gender
 	data["change_race"] = can_change(APPEARANCE_RACE)
 	if(data["change_race"])
 		var/species[0]
-		for(var/specimen in owner.generate_valid_species(check_whitelist, whitelist, blacklist))
-			species[++species.len] =  list("specimen" = specimen)
+		for(var/species_uid in owner.generate_valid_species(check_whitelist, whitelist, blacklist))
+			var/decl/species/candidate_species = decls_repository.get_decl_by_id(species_uid)
+			species[++species.len] =  list("uid" = species_uid, "name" = candidate_species.name)
 		data["species"] = species
 
 	data["change_gender"] = can_change(APPEARANCE_GENDER)

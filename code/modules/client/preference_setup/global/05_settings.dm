@@ -11,11 +11,11 @@
 	pref.slot_names =        R.read("slot_names")
 	pref.preference_values = R.read("preference_values")
 
-/datum/category_item/player_setup_item/player_global/settings/save_preferences(datum/pref_record_writer/W)
-	W.write("lastchangelog",     pref.lastchangelog)
-	W.write("default_slot",      pref.default_slot)
-	W.write("slot_names",        pref.slot_names)
-	W.write("preference_values", pref.preference_values)
+/datum/category_item/player_setup_item/player_global/settings/save_preferences(datum/pref_record_writer/writer)
+	writer.write("lastchangelog",     pref.lastchangelog)
+	writer.write("default_slot",      pref.default_slot)
+	writer.write("slot_names",        pref.slot_names)
+	writer.write("preference_values", pref.preference_values)
 
 /datum/category_item/player_setup_item/player_global/settings/sanitize_preferences()
 	// Ensure our preferences are lists.

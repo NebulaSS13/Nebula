@@ -25,3 +25,10 @@
 	song = 'sound/music/Miris-Magic-Dance.ogg'
 	license = /decl/license/cc_by_3_0
 	url = "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100157"
+
+/decl/music_track/adventure
+	artist = "Alexander Nakarada"
+	title = "Adventure"
+	song = 'sound/music/winter/alexander-nakarada-adventure.ogg'
+	license = /decl/license/cc_by_4_0
+	url = "https://creatorchords.com/music/adventure/"

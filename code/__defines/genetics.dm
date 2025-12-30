@@ -5,7 +5,6 @@
 #define GENE_COND_REMOTE_TALK      /decl/genetic_condition/superpower/remotetalk
 #define GENE_COND_RUNNING          /decl/genetic_condition/superpower/running
 #define GENE_COND_REMOTE_VIEW      /decl/genetic_condition/superpower/remoteview
-#define GENE_COND_SHAPESHIFTER     /decl/genetic_condition/superpower/morph
 #define GENE_COND_NO_FINGERPRINTS  /decl/genetic_condition/superpower/noprints
 
 #define GENE_COND_CLUMSY           /decl/genetic_condition/disability/clumsy

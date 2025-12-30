@@ -29,6 +29,7 @@
 	icon_template        = 'mods/species/drakes/icons/template.dmi'
 	skeletal_icon        = 'mods/species/drakes/icons/skeleton.dmi'
 	damage_overlays      = 'mods/species/drakes/icons/damage.dmi'
+	surgery_overlay_icon = null // todo: 'mods/species/drakes/icons/surgery.dmi'
 	bodytype_category    = BODYTYPE_GRAFADREKA
 	eye_blend            = ICON_MULTIPLY
 	limb_blend           = ICON_MULTIPLY
@@ -37,7 +38,8 @@
 	override_limb_types  = list(
 		BP_TAIL   = /obj/item/organ/external/tail/grafadreka,
 		BP_L_HAND = /obj/item/organ/external/hand/quadruped/grafadreka,
-		BP_R_HAND = /obj/item/organ/external/hand/right/quadruped/grafadreka
+		BP_R_HAND = /obj/item/organ/external/hand/right/quadruped/grafadreka,
+		BP_HEAD   = /obj/item/organ/external/head/gripper/grafadreka
 	)
 	base_color           = "#608894"
 	base_eye_color       = COLOR_SILVER
@@ -45,6 +47,8 @@
 	antaghud_offset_x    = 16
 	override_organ_types = list(BP_DRAKE_GIZZARD = /obj/item/organ/internal/drake_gizzard)
 	uid                  = "bodytype_drake"
+	footprints_icon      = 'icons/mob/footprints/footprints_paw.dmi'
+
 	additional_emotes    = list(
 		/decl/emote/audible/drake_warble,
 		/decl/emote/audible/drake_purr,
@@ -140,48 +144,48 @@
 		ARMOR_BOMB   = ARMOR_BOMB_PADDED
 	)
 
-	var/list/sitting_equip_adjust
-	var/list/lying_equip_adjust
+	VAR_PRIVATE/list/_sitting_equip_adjust
+	VAR_PRIVATE/list/_lying_equip_adjust
 
 /decl/bodytype/quadruped/grafadreka/Initialize()
-	if(!length(equip_adjust))
-		equip_adjust = list(
-			slot_head_str = list(
+	if(!length(_equip_adjust))
+		_equip_adjust = list(
+			(slot_head_str) = list(
 				"[NORTH]" = list(16,  -8),
 				"[SOUTH]" = list(16, -12),
-				"[EAST]" =  list(38,  -8),
-				"[WEST]" =  list(-6,  -8)
+				"[EAST]"  = list(38,  -8),
+				"[WEST]"  = list(-6,  -8)
 			)
 		)
 
-	if(!length(sitting_equip_adjust))
-		sitting_equip_adjust = list(
-			slot_head_str = list(
+	if(!length(_sitting_equip_adjust))
+		_sitting_equip_adjust = list(
+			(slot_head_str) = list(
 				"[NORTH]" = list(16, -2),
 				"[SOUTH]" = list(16, -2),
-				"[EAST]" =  list(22, -2),
-				"[WEST]" =  list(12, -2)
+				"[EAST]"  = list(22, -2),
+				"[WEST]"  = list(12, -2)
 			)
 		)
 
-	if(!length(lying_equip_adjust))
-		lying_equip_adjust = list(
-			slot_head_str = list(
+	if(!length(_lying_equip_adjust))
+		_lying_equip_adjust = list(
+			(slot_head_str) = list(
 				"[NORTH]" = list( 24, -24),
 				"[SOUTH]" = list( 24, -24),
-				"[EAST]" =  list( 24, -24),
-				"[WEST]" =  list(-10, -24)
+				"[EAST]"  = list( 24, -24),
+				"[WEST]"  = list(-10, -24)
 			)
 		)
 
 	return ..()
 
-/decl/bodytype/quadruped/grafadreka/get_equip_adjust(mob/mob)
+/decl/bodytype/quadruped/grafadreka/get_equip_adjustments(mob/mob)
 	switch(mob.current_posture?.name)
 		if("lying", "resting")
-			return lying_equip_adjust
+			return _lying_equip_adjust
 		if("sitting")
-			return sitting_equip_adjust
+			return _sitting_equip_adjust
 	return ..()
 
 /decl/bodytype/quadruped/grafadreka/hatchling
@@ -199,9 +203,14 @@
 		/datum/ability_handler/predator/grafadreka/hatchling
 	)
 	z_flags             = 0
+	// TODO: weaker attack subtypes for the baby
 	override_limb_types = list(
-		BP_TAIL = /obj/item/organ/external/tail/grafadreka/hatchling
+		BP_TAIL   = /obj/item/organ/external/tail/grafadreka/hatchling,
+		BP_L_HAND = /obj/item/organ/external/hand/quadruped/grafadreka,
+		BP_R_HAND = /obj/item/organ/external/hand/right/quadruped/grafadreka,
+		BP_HEAD   = /obj/item/organ/external/head/gripper/grafadreka
 	)
+
 	default_emotes      = list(
 		/decl/emote/audible/drake_hatchling_growl,
 		/decl/emote/audible/drake_hatchling_whine,
@@ -214,31 +223,31 @@
 	uid = "bodytype_drake_hatchling"
 
 /decl/bodytype/quadruped/grafadreka/hatchling/Initialize()
-	if(!length(equip_adjust))
-		equip_adjust = list(
-			slot_head_str = list(
+	if(!length(_equip_adjust))
+		_equip_adjust = list(
+			(slot_head_str) = list(
 				"[NORTH]" = list( 0, -18),
 				"[SOUTH]" = list( 0, -18),
-				"[EAST]" =  list( 8, -18),
-				"[WEST]" =  list(-8, -18)
+				"[EAST]"  = list( 8, -18),
+				"[WEST]"  = list(-8, -18)
 			)
 		)
-	if(!length(sitting_equip_adjust))
-		sitting_equip_adjust = list(
-			slot_head_str = list(
+	if(!length(_sitting_equip_adjust))
+		_sitting_equip_adjust = list(
+			(slot_head_str) = list(
 				"[NORTH]" = list( 0, -14),
 				"[SOUTH]" = list( 0, -14),
-				"[EAST]" =  list( 4, -14),
-				"[WEST]" =  list(-4, -14)
+				"[EAST]"  = list( 4, -14),
+				"[WEST]"  = list(-4, -14)
 			)
 		)
-	if(!length(lying_equip_adjust))
-		lying_equip_adjust = list(
-			slot_head_str = list(
+	if(!length(_lying_equip_adjust))
+		_lying_equip_adjust = list(
+			(slot_head_str) = list(
 				"[NORTH]" = list( 0, -24),
 				"[SOUTH]" = list( 0, -24),
-				"[EAST]" =  list( 0, -24),
-				"[WEST]" =  list( 0, -24)
+				"[EAST]"  = list( 0, -24),
+				"[WEST]"  = list( 0, -24)
 			)
 		)
 	return ..()
@@ -253,7 +262,7 @@
 	icon            = 'mods/species/drakes/icons/markings.dmi'
 	icon_state      = "spines"
 	uid             = "acc_marking_drake_spines"
-	species_allowed = list(SPECIES_GRAFADREKA)
+	species_allowed = list(/decl/species/grafadreka::uid)
 	color_blend     = ICON_MULTIPLY
 	body_parts      = list(
 		BP_CHEST,
@@ -304,12 +313,16 @@
 	_base_attack_force = 8
 	needs_attack_dexterity = DEXTERITY_NONE
 
-/obj/item/organ/external/hand/quadruped/grafadreka/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance, decl/bodytype/new_bodytype)
+/obj/item/organ/external/hand/quadruped/grafadreka/get_natural_attacks()
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/claws/strong/drake)
+	return unarmed_attack
+
+/obj/item/organ/external/hand/quadruped/grafadreka/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance)
 	. = ..()
 	item_flags |= ITEM_FLAG_NO_BLUDGEON
 	set_extension(src, /datum/extension/tool, list(
-		TOOL_SHOVEL = TOOL_QUALITY_GOOD,
-		TOOL_HOE    = TOOL_QUALITY_GOOD
+		TOOL_PICK   = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_GOOD
 	))
 
 /obj/item/organ/external/hand/quadruped/grafadreka/set_bodytype(decl/bodytype/new_bodytype, override_material, apply_to_internal_organs)
@@ -320,14 +333,22 @@
 	_base_attack_force = 8
 	needs_attack_dexterity = DEXTERITY_NONE
 
-/obj/item/organ/external/hand/right/quadruped/grafadreka/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance, decl/bodytype/new_bodytype)
+/obj/item/organ/external/hand/right/quadruped/grafadreka/get_natural_attacks()
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/claws/strong/drake)
+	return unarmed_attack
+
+/obj/item/organ/external/hand/right/quadruped/grafadreka/Initialize(mapload, material_key, datum/mob_snapshot/supplied_appearance)
 	. = ..()
 	item_flags |= ITEM_FLAG_NO_BLUDGEON
 	set_extension(src, /datum/extension/tool, list(
-		TOOL_SHOVEL = TOOL_QUALITY_GOOD,
-		TOOL_HOE    = TOOL_QUALITY_GOOD
+		TOOL_PICK   = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_GOOD
 	))
 
 /obj/item/organ/external/hand/right/quadruped/grafadreka/set_bodytype(decl/bodytype/new_bodytype, override_material, apply_to_internal_organs)
 	override_material = /decl/material/solid/organic/bone
 	. = ..()
+
+/obj/item/organ/external/head/gripper/grafadreka/get_natural_attacks()
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/bite/sharp/drake)
+	return unarmed_attack

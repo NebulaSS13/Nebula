@@ -1,6 +1,5 @@
 /datum/map/shaded_hills
-	id_hud_icons            = 'maps/shaded_hills/icons/hud.dmi'
-	allowed_jobs            = list(
+	allowed_jobs = list(
 		/datum/job/shaded_hills/visitor/traveller,
 		/datum/job/shaded_hills/visitor/traveller/learned,
 		/datum/job/shaded_hills/visitor/beggar_knight,
@@ -48,6 +47,7 @@
 
 /datum/job/shaded_hills
 	abstract_type           = /datum/job/shaded_hills
+	hud_icon_state          = "hudblank"
 	department_types        = list(
 		/decl/department/shaded_hills/locals
 	)

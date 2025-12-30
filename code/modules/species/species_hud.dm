@@ -1,17 +1,10 @@
 /datum/hud_data
-	var/has_m_intent = 1  // Set to draw move intent box.
-	var/has_warnings = 1  // Set to draw environment warnings.
-	var/has_pressure = 1  // Draw the pressure indicator.
-	var/has_nutrition = 1 // Draw the nutrition indicator.
-	var/has_bodytemp = 1  // Draw the bodytemp indicator.
-	var/has_drop = 1      // Set to draw drop button.
-	var/has_throw = 1     // Set to draw throw button.
-	var/has_resist = 1    // Set to draw resist button.
-	var/has_internals = 1 // Set to draw the internals toggle button.
-	var/has_up_hint = 1   // Set to draw the "look-up" hint icon
-	var/list/equip_slots = list() // Checked by mob_can_equip().
-	var/list/persistent_slots = list() // Built in New(), used for unhidable inv updates
-	var/list/hidden_slots = list() // Built in New(), used for hidable inv updates
+	/// Checked by mob_can_equip().
+	var/list/equip_slots = list()
+	/// Built in New(), used for unhidable inv updates
+	var/list/persistent_slots = list()
+	/// Built in New(), used for hidable inv updates
+	var/list/hidden_slots = list()
 
 	var/list/inventory_slots = list(
 		/datum/inventory_slot/handcuffs,

@@ -2,7 +2,7 @@
 // have tremendeous capacity in comparsion. Higher tier cells would provide your device with nearly infinite battery life, which is something i want to avoid.
 /obj/item/stock_parts/computer/battery_module
 	name = "standard battery"
-	desc = "A standard power cell, commonly seen in high-end portable microcomputers or low-end laptops. It's rating is 75 Wh."
+	desc = "A standard power cell, commonly seen in high-end portable microcomputers or low-end laptops. Its rating is 75 Wh."
 	icon_state = "battery_normal"
 	critical = 1
 	origin_tech = @'{"powerstorage":1,"engineering":1}'
@@ -35,7 +35,7 @@
 
 /obj/item/stock_parts/computer/battery_module/advanced
 	name = "advanced battery"
-	desc = "An advanced power cell, often used in most laptops. It is too large to be fitted into smaller devices. It's rating is 110 Wh."
+	desc = "An advanced power cell, often used in most laptops. It is too large to be fitted into smaller devices. Its rating is 110 Wh."
 	icon_state = "battery_advanced"
 	origin_tech = @'{"powerstorage":2,"engineering":2}'
 	hardware_size = 2
@@ -44,7 +44,7 @@
 
 /obj/item/stock_parts/computer/battery_module/super
 	name = "super battery"
-	desc = "A very advanced power cell, often used in high-end devices, or as uninterruptable power supply for important consoles or servers. It's rating is 150 Wh."
+	desc = "A very advanced power cell, often used in high-end devices, or as uninterruptible power supply for important consoles or servers. Its rating is 150 Wh."
 	icon_state = "battery_super"
 	origin_tech = @'{"powerstorage":3,"engineering":3}'
 	hardware_size = 2
@@ -53,7 +53,7 @@
 
 /obj/item/stock_parts/computer/battery_module/ultra
 	name = "ultra battery"
-	desc = "A very advanced large power cell. It's often used as uninterruptable power supply for critical consoles or servers. It's rating is 200 Wh."
+	desc = "A very advanced large power cell. It's often used as an uninterruptible power supply for critical consoles or servers. Its rating is 200 Wh."
 	icon_state = "battery_ultra"
 	origin_tech = @'{"powerstorage":5,"engineering":4}'
 	hardware_size = 3
@@ -62,7 +62,7 @@
 
 /obj/item/stock_parts/computer/battery_module/micro
 	name = "micro battery"
-	desc = "A small power cell, commonly seen in most portable microcomputers. It's rating is 50 Wh."
+	desc = "A small power cell, commonly seen in most portable microcomputers. Its rating is 50 Wh."
 	icon_state = "battery_micro"
 	origin_tech = @'{"powerstorage":2,"engineering":2}'
 	battery_rating = 50
@@ -70,7 +70,7 @@
 
 /obj/item/stock_parts/computer/battery_module/nano
 	name = "nano battery"
-	desc = "A tiny power cell, commonly seen in low-end portable microcomputers. It's rating is 30 Wh."
+	desc = "A tiny power cell, commonly seen in low-end portable microcomputers. Its rating is 30 Wh."
 	icon_state = "battery_nano"
 	battery_rating = 30
 	material = /decl/material/solid/metal/steel

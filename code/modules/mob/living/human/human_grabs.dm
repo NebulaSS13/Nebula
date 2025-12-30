@@ -25,4 +25,4 @@
 /mob/living/human/make_grab(atom/movable/target, grab_tag = /decl/grab/simple, defer_hand = FALSE, force_grab_tag = FALSE)
 	. = ..()
 	if(.)
-		remove_cloaking_source(species)
+		remove_mob_modifier(/decl/mob_modifier/cloaked, source = species)

@@ -9,7 +9,7 @@
 	throw_range             = 10
 	slot_flags              = SLOT_LOWER_BODY
 	material_alteration     = MAT_FLAG_ALTERATION_COLOR
-	material                = /decl/material/solid/organic/wood
+	material                = /decl/material/solid/organic/wood/oak
 	drop_sound              = 'sound/foley/tooldrop5.ogg'
 	pickup_sound            = 'sound/foley/paperpickup2.ogg'
 
@@ -26,14 +26,14 @@
 	stored_pen = null
 	return ..()
 
-/obj/item/clipboard/examine(mob/user, distance, infix, suffix)
+/obj/item/clipboard/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(stored_pen)
-		to_chat(user, "It's holding \a [stored_pen].")
+		. += "It's holding \a [stored_pen]."
 	if(!LAZYLEN(papers))
-		to_chat(user, "It contains [length(papers)] / [max_papers] paper\s.")
+		. += "It contains [length(papers)] / [max_papers] paper\s."
 	else
-		to_chat(user, "It has room for [max_papers] paper\s.")
+		. += "It has room for [max_papers] paper\s."
 
 /obj/item/clipboard/proc/top_paper()
 	return LAZYACCESS(papers, 1)
@@ -66,21 +66,21 @@
 		add_overlay(overlay_image(icon, "clipboard_pen", stored_pen.color, RESET_COLOR))
 	add_overlay(overlay_image(icon, "clipboard_over", flags=RESET_COLOR))
 
-/obj/item/clipboard/attackby(obj/item/W, mob/user)
+/obj/item/clipboard/attackby(obj/item/used_item, mob/user)
 	var/obj/item/top_paper = top_paper()
-	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
-		if(!user.try_unequip(W, src))
+	if(istype(used_item, /obj/item/paper) || istype(used_item, /obj/item/photo))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		push_paper(W)
-		to_chat(user, SPAN_NOTICE("You clip the [W] onto \the [src]."))
+		push_paper(used_item)
+		to_chat(user, SPAN_NOTICE("You clip the [used_item] onto \the [src]."))
 		return TRUE
 
-	else if(top_paper?.attackby(W, user))
+	else if(top_paper?.attackby(used_item, user))
 		updateUsrDialog()
 		update_icon()
 		return TRUE
 
-	else if(IS_PEN(W) && add_pen(W, user)) //If we don't have any paper, and hit it with a pen, try slotting it in
+	else if(IS_PEN(used_item) && add_pen(used_item, user)) //If we don't have any paper, and hit it with a pen, try slotting it in
 		return TRUE
 
 	return ..()
@@ -111,7 +111,7 @@
 	user.set_machine(src)
 	show_browser(user, dat, "window=[initial(name)]")
 	onclose(user, initial(name))
-	add_fingerprint(usr)
+	add_fingerprint(user)
 	return
 
 /obj/item/clipboard/proc/add_pen(var/obj/item/I, var/mob/user)
@@ -198,6 +198,7 @@
 /decl/interaction_handler/clipboard_remove_pen
 	name = "Remove Pen"
 	expected_target_type = /obj/item/clipboard
+	examine_desc = "remove the pen"
 
 /decl/interaction_handler/clipboard_remove_pen/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..()

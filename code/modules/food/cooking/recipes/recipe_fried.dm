@@ -1,5 +1,8 @@
 /decl/recipe/fried
 	abstract_type = /decl/recipe/fried
+	// some arbitrary value to make sure it doesn't cook in open air, but will when microwaved
+	// todo: rework futurecooking so that microwaves aren't the only appliance for everything (modern stove, oven, fryer, etc)
+	minimum_temperature = 80 CELSIUS
 	//cooking_heat_type = COOKING_HEAT_DIRECT
 	//cooking_medium_type = /decl/material/liquid/oil
 	container_categories = list(

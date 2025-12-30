@@ -1,7 +1,7 @@
 // VISUAL NET
 //
 // The datum containing all the chunks.
-
+var/global/list/datum/visualnet/all_visual_nets = list()
 /datum/visualnet
 	// The chunks of the map, mapping the areas that an object can see.
 	var/list/chunks = list()
@@ -11,12 +11,12 @@
 
 /datum/visualnet/New()
 	..()
-	visual_nets += src
+	all_visual_nets += src
 	if(!valid_source_types)
 		valid_source_types = list()
 
 /datum/visualnet/Destroy()
-	visual_nets -= src
+	all_visual_nets -= src
 	for(var/source in sources)
 		remove_source(source, FALSE)
 	sources.Cut()

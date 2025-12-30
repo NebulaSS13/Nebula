@@ -88,10 +88,10 @@
 	check_triggers(/datum/artifact_trigger/proc/on_touch, user)
 	touched(user)
 
-/obj/structure/artifact/attackby(obj/item/W, mob/user)
+/obj/structure/artifact/attackby(obj/item/used_item, mob/user)
 	. = ..()
-	visible_message(SPAN_WARNING("[user] hits \the [src] with \the [W]."))
-	check_triggers(/datum/artifact_trigger/proc/on_hit, W, user)
+	visible_message(SPAN_WARNING("[user] hits \the [src] with \the [used_item]."))
+	check_triggers(/datum/artifact_trigger/proc/on_hit, used_item, user)
 
 /obj/structure/artifact/Bumped(M)
 	..()
@@ -111,7 +111,7 @@
 		physically_destroyed()
 
 /obj/structure/artifact/Move()
-	..()
+	. = ..()
 	if(my_effect)
 		my_effect.UpdateMove()
 	if(secondary_effect)
@@ -136,7 +136,7 @@
 
 /obj/structure/artifact/fluid_act(datum/reagents/fluids)
 	..()
-	if(!QDELETED(src) && fluids?.total_volume)
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids))
 		check_triggers(/datum/artifact_trigger/proc/on_fluid_act, fluids)
 
 // Premade subtypes for mapping or testing.

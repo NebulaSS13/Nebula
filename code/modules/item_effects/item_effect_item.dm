@@ -1,6 +1,15 @@
 /obj/item
 	var/list/_item_effects
 
+/obj/item/proc/has_item_effect(decl/item_effect/effect, effect_category)
+	if(!length(_item_effects))
+		return FALSE
+	if(ispath(effect))
+		effect = GET_DECL(effect)
+	if(!istype(effect))
+		return FALSE
+	return LAZYISIN(LAZYACCESS(_item_effects, effect_category), effect)
+
 /obj/item/proc/add_item_effect(effect_type, list/effect_parameters)
 	if(!effect_type || !length(effect_parameters))
 		return FALSE
@@ -13,13 +22,15 @@
 		. = TRUE
 
 	if(.)
-		if(ITEM_EFFECT_LISTENER in effect_parameters)
+		if(IE_CAT_LISTENER in effect_parameters)
 			global.listening_objects |= src
-		if(ITEM_EFFECT_PROCESS in effect_parameters)
+		if(IE_CAT_PROCESS in effect_parameters)
 			SSitem_effects.queued_items |= src
 
 /obj/item/proc/remove_item_effect(decl/item_effect/effect)
-	if(!effect || !length(_item_effects))
+	if(ispath(effect))
+		effect = GET_DECL(effect)
+	if(!istype(effect) || !length(_item_effects))
 		return FALSE
 	var/list/removed_effect_categories = list()
 	for(var/effect_category in _item_effects)
@@ -30,13 +41,23 @@
 				LAZYREMOVE(_item_effects, effect_category)
 			. = TRUE
 	if(.)
-		if(ITEM_EFFECT_LISTENER in removed_effect_categories)
+		if(IE_CAT_LISTENER in removed_effect_categories)
 			global.listening_objects -= src
-		if(ITEM_EFFECT_PROCESS in removed_effect_categories)
+		if(IE_CAT_PROCESS in removed_effect_categories)
 			SSitem_effects.queued_items -= src
 
+/obj/item/proc/get_item_effect_parameters(decl/item_effect/effect, effect_category)
+	if(ispath(effect))
+		effect = GET_DECL(effect)
+	if(!istype(effect) || !length(_item_effects) || !effect_category)
+		return null
+	var/list/effects = LAZYACCESS(_item_effects, effect_category)
+	return LAZYACCESS(effects, effect)
+
 /obj/item/proc/get_item_effect_parameter(decl/item_effect/effect, effect_category, parameter_name)
-	if(!effect || !length(_item_effects) || !effect_category || !parameter_name)
+	if(ispath(effect))
+		effect = GET_DECL(effect)
+	if(!istype(effect) || !length(_item_effects) || !effect_category || !parameter_name)
 		return null
 	var/list/effects = LAZYACCESS(_item_effects, effect_category)
 	if(!LAZYISIN(effects, effect))
@@ -44,7 +65,9 @@
 	return LAZYACCESS(effects[effect], parameter_name)
 
 /obj/item/proc/set_item_effect_parameter(decl/item_effect/effect, effect_category, parameter_name, parameter_value)
-	if(!effect || !length(_item_effects) || !effect_category || !parameter_name)
+	if(ispath(effect))
+		effect = GET_DECL(effect)
+	if(!istype(effect) || !length(_item_effects) || !effect_category || !parameter_name)
 		return FALSE
 	var/list/effects = LAZYACCESS(_item_effects, effect_category)
 	if(!LAZYISIN(effects, effect))
@@ -59,7 +82,7 @@
 /obj/item/resolve_attackby(atom/A, mob/user, var/click_params)
 	if(!(. = ..()))
 		return
-	var/list/item_effects = get_item_effects(ITEM_EFFECT_STRIKE)
+	var/list/item_effects = get_item_effects(IE_CAT_STRIKE)
 	if(!length(item_effects))
 		return
 	if(!istype(user) || QDELETED(user) || QDELETED(src))
@@ -72,7 +95,7 @@
 // PARRY effects
 /obj/item/on_parry(mob/user, damage_source, mob/attacker)
 	. = ..()
-	var/list/item_effects = get_item_effects(ITEM_EFFECT_PARRY)
+	var/list/item_effects = get_item_effects(IE_CAT_PARRY)
 	if(!length(item_effects))
 		return
 	if(!istype(user) || QDELETED(user) || QDELETED(src))
@@ -86,7 +109,7 @@
 // VISUAL effects (world icon)
 /obj/item/on_update_icon()
 	. = ..()
-	var/list/item_effects = get_item_effects(ITEM_EFFECT_VISUAL)
+	var/list/item_effects = get_item_effects(IE_CAT_VISUAL)
 	if(!length(item_effects))
 		return
 	for(var/decl/item_effect/used_effect as anything in item_effects)
@@ -96,7 +119,7 @@
 /obj/item/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	// TODO: this might need work to handle items that do a state or appearance update in the parent call.
 	if(overlay)
-		var/list/item_effects = get_item_effects(ITEM_EFFECT_VISUAL)
+		var/list/item_effects = get_item_effects(IE_CAT_VISUAL)
 		if(length(item_effects))
 			for(var/decl/item_effect/used_effect as anything in item_effects)
 				used_effect.apply_onmob_appearance_to(src, user_mob, bodytype, overlay, slot, bodypart, item_effects[used_effect])
@@ -106,7 +129,7 @@
 /obj/item/attack_self(mob/user)
 	if((. = ..()))
 		return
-	var/list/item_effects = get_item_effects(ITEM_EFFECT_USED)
+	var/list/item_effects = get_item_effects(IE_CAT_USED)
 	if(!length(item_effects))
 		return
 	if(!istype(user) || QDELETED(user) || QDELETED(src))
@@ -120,7 +143,7 @@
 // WIELD effects (unwielded)
 /obj/item/dropped(mob/user)
 	. = ..()
-	var/list/item_effects = get_item_effects(ITEM_EFFECT_WIELDED)
+	var/list/item_effects = get_item_effects(IE_CAT_WIELDED)
 	if(!length(item_effects))
 		return
 	if(!istype(user) || QDELETED(user) || QDELETED(src))
@@ -133,7 +156,7 @@
 // WIELD effects (wielded)
 /obj/item/equipped(mob/user, slot)
 	. = ..()
-	var/list/item_effects = get_item_effects(ITEM_EFFECT_WIELDED)
+	var/list/item_effects = get_item_effects(IE_CAT_WIELDED)
 	if(!length(item_effects))
 		return
 	if(!istype(user) || QDELETED(user) || QDELETED(src) || loc != user || !(slot in user.get_held_item_slots()))
@@ -146,28 +169,28 @@
 // LISTENING effects
 /obj/item/hear_talk(mob/M, text, verb, decl/language/speaking)
 	. = ..()
-	var/list/item_effects = get_item_effects(ITEM_EFFECT_LISTENER)
+	var/list/item_effects = get_item_effects(IE_CAT_LISTENER)
 	if(!length(item_effects))
 		return
 	for(var/decl/item_effect/listening_effect as anything in item_effects)
 		listening_effect.hear_speech(src, M, text, speaking)
 
 // VISIBLE effects
-/obj/item/examine(mob/user, distance)
+/obj/item/examined_by(mob/user, distance, infix, suffix)
 	. = ..()
 	if(!user)
 		return
-	var/list/item_effects = get_item_effects(ITEM_EFFECT_VISIBLE)
+	var/list/item_effects = get_item_effects(IE_CAT_EXAMINE)
 	if(!length(item_effects))
 		return
 	for(var/decl/item_effect/examine_effect as anything in item_effects)
-		examine_effect.examined(src, user, distance, item_effects[examine_effect])
+		examine_effect.on_examined(src, user, distance, item_effects[examine_effect])
 
 // RANGED effects
 /obj/item/afterattack(turf/floor/target, mob/user, proximity)
 	if((. = ..()) || proximity)
 		return
-	var/list/item_effects = get_item_effects(ITEM_EFFECT_RANGED)
+	var/list/item_effects = get_item_effects(IE_CAT_RANGED)
 	if(!length(item_effects))
 		return
 	for(var/decl/item_effect/ranged_effect as anything in item_effects)
@@ -177,7 +200,7 @@
 
 // PROCESS effects
 /obj/item/proc/process_item_effects()
-	var/list/item_effects = get_item_effects(ITEM_EFFECT_PROCESS)
+	var/list/item_effects = get_item_effects(IE_CAT_PROCESS)
 	if(length(item_effects))
 		for(var/decl/item_effect/process_effect as anything in item_effects)
 			process_effect.do_process_effect(src, item_effects[process_effect])

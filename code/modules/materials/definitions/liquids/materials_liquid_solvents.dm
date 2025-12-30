@@ -31,7 +31,7 @@
 /decl/material/liquid/acid/polyacid
 	name = "polytrinic acid"
 	uid = "liquid_polytrinic_acid"
-	lore_text = "Polytrinic acid is a an extremely corrosive chemical substance."
+	lore_text = "Polytrinic acid is an extremely corrosive chemical substance."
 	taste_description = "acid"
 	color = "#8e18a9"
 	solvent_power = MAT_SOLVENT_STRONGEST

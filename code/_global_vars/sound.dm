@@ -1,3 +1,4 @@
+// TODO: make a code/game/sound folder to store these and playsound code?
 var/global/list/shatter_sound = list(
 	'sound/effects/Glassbr1.ogg',
 	'sound/effects/Glassbr2.ogg',

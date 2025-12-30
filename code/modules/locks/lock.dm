@@ -5,13 +5,14 @@
 	name = "locked door"
 	var/lock_preset_id  = "default"
 	var/lock_material   = /decl/material/solid/metal/iron
+	/// If lock_preset_id is null, a random key with this complexity will be generated instead.
 	var/lock_complexity = 1
 
 /obj/abstract/landmark/lock_preset/Initialize()
 	..()
 	for(var/obj/structure/thing in loc)
 		if(!thing.lock && thing.can_install_lock())
-			thing.lock = new /datum/lock(thing, lock_preset_id, lock_material)
+			thing.lock = new /datum/lock(thing, lock_preset_id || lock_complexity, lock_material)
 			thing.update_icon()
 	return INITIALIZE_HINT_QDEL
 

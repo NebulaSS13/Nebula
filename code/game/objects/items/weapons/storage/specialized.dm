@@ -12,8 +12,8 @@
 /obj/item/ore
 	name = "mining satchel"
 	desc = "This sturdy bag can be used to store and transport ores."
-	icon = 'icons/obj/mining.dmi'
-	icon_state = "satchel"
+	icon = 'icons/obj/items/mining_satchel.dmi'
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_LARGE
 	storage = /datum/storage/ore
@@ -57,8 +57,8 @@
 
 /obj/item/sheetsnatcher
 	name = "sheet snatcher"
-	icon = 'icons/obj/mining.dmi'
-	icon_state = "sheetsnatcher"
+	icon = 'icons/obj/items/sheet_snatcher.dmi'
+	icon_state = ICON_STATE_WORLD
 	desc = "A patented storage system designed for any kind of mineral sheet."
 	material = /decl/material/solid/organic/plastic
 	storage = /datum/storage/sheets

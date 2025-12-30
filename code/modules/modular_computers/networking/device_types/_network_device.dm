@@ -394,29 +394,29 @@
 /datum/extension/network_device/proc/sanitize_command_args(command_args, var_type)
 	// First check if the command is a list; if it is, only accept it if the expected type is a list.
 	if(islist(command_args))
-		if(var_type == IC_FORMAT_LIST)
+		if(var_type == VAR_FORMAT_LIST)
 			return command_args
 		else
 			return null
 	switch(var_type)
-		if(IC_FORMAT_ANY)
+		if(VAR_FORMAT_ANY)
 			return command_args
-		if(IC_FORMAT_STRING)
+		if(VAR_FORMAT_STRING)
 			return "[command_args]"
-		if(IC_FORMAT_CHAR)
+		if(VAR_FORMAT_CHAR)
 			if(istext(command_args) && length(command_args) == 1)
 				return command_args
-		if(IC_FORMAT_COLOR)
+		if(VAR_FORMAT_COLOR)
 			return sanitize_hexcolor(command_args, null)
-		if(IC_FORMAT_NUMBER, IC_FORMAT_INDEX)
+		if(VAR_FORMAT_NUMBER, VAR_FORMAT_INDEX)
 			if(istext(command_args))
 				return text2num(command_args)
 			if(isnum(command_args))
 				return command_args
-		if(IC_FORMAT_DIR)
+		if(VAR_FORMAT_DIR)
 			if(istext(command_args))
 				return text2dir(command_args)
-		if(IC_FORMAT_BOOLEAN)
+		if(VAR_FORMAT_BOOLEAN)
 			if(istext(command_args))
 				switch(uppertext(command_args))
 					if("TRUE")
@@ -447,16 +447,16 @@
 	var/list/pub_vars = get_public_variables()
 
 	for(var/path in pub_methods)
-		var/decl/public_access/pub = pub_methods[path]
-		var/alias = pub.name
+		var/decl/public_access/pub_method = pub_methods[path]
+		var/alias = pub_method.name
 		alias = replacetext(alias, " ", "_")
-		LAZYSET(command_and_call, alias, pub)
+		LAZYSET(command_and_call, alias, pub_method)
 
 	for(var/path in pub_vars)
-		var/decl/public_access/pub = pub_vars[path]
-		var/alias = pub.name
+		var/decl/public_access/pub_var = pub_vars[path]
+		var/alias = pub_var.name
 		alias = replacetext(alias, " ", "_")
-		LAZYSET(command_and_write, alias, pub)
+		LAZYSET(command_and_write, alias, pub_var)
 
 /**Returns the outward facing URI for this network device.*/
 /datum/extension/network_device/proc/get_network_URI()

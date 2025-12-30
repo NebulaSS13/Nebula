@@ -45,9 +45,9 @@
 	return "[round(power_supply.charge / charge_cost)]/[max_shots]"
 
 /obj/item/gun/energy/get_hardpoint_status_value()
-	var/obj/item/cell/C = get_cell()
-	if(istype(C))
-		return C.charge/C.maxcharge
+	var/obj/item/cell/cell = get_cell()
+	if(istype(cell))
+		return cell.charge/cell.maxcharge
 	return null
 
 /obj/item/mech_equipment/shields
@@ -62,8 +62,6 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
-
-	var/obj/aura/mechshield/aura = null
 	var/max_charge = 150
 	var/charge = 150
 	var/last_recharge = 0
@@ -72,10 +70,12 @@
 
 /obj/item/mech_equipment/shields/installed(var/mob/living/exosuit/_owner)
 	. = ..()
-	aura = new(owner, src)
+	if(owner)
+		owner.add_mob_modifier(/decl/mob_modifier/mechshield, source = src)
 
 /obj/item/mech_equipment/shields/uninstalled()
-	QDEL_NULL(aura)
+	if(owner)
+		owner.remove_mob_modifier(/decl/mob_modifier/mechshield, source = src)
 	. = ..()
 
 /obj/item/mech_equipment/shields/attack_self(var/mob/user)
@@ -91,23 +91,27 @@
 
 	if(difference > 0)
 		for(var/mob/pilot in owner.pilots)
-			to_chat(pilot, SPAN_DANGER("Warning: Deflector shield failure detect, shutting down!"))
+			to_chat(pilot, SPAN_DANGER("Warning: Deflector shield failure detected, shutting down!"))
 		toggle()
 		playsound(owner.loc,'sound/mecha/internaldmgalarm.ogg',35,1)
 		return difference
 	else return 0
 
 /obj/item/mech_equipment/shields/proc/toggle()
-	if(!aura)
-		return
-	aura.toggle()
+
+	if(owner?.has_mob_modifier(/decl/mob_modifier/mechshield, source = src))
+		owner.remove_mob_modifier(/decl/mob_modifier/mechshield, source = src)
+	else if(owner)
+		owner.add_mob_modifier(/decl/mob_modifier/mechshield, source = src)
+
+	active = owner?.has_mob_modifier(/decl/mob_modifier/mechshield, source = src)
+
 	playsound(owner,'sound/weapons/flash.ogg',35,1)
 	update_icon()
-	if(aura.active)
+	if(active)
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj, src)
-	active = aura.active
 	passive_power_use = active ? 1 KILOWATTS : 0
 	owner.update_icon()
 
@@ -118,9 +122,7 @@
 
 /obj/item/mech_equipment/shields/on_update_icon()
 	. = ..()
-	if(!aura)
-		return
-	if(aura.active)
+	if(owner?.has_mob_modifier(/decl/mob_modifier/mechshield, source = src))
 		icon_state = "shield_droid_a"
 	else
 		icon_state = "shield_droid"
@@ -141,91 +143,7 @@
 	return charge / max_charge
 
 /obj/item/mech_equipment/shields/get_hardpoint_maptext()
-	return "[(aura && aura.active) ? "ONLINE" : "OFFLINE"]: [round((charge / max_charge) * 100)]%"
-
-/obj/aura/mechshield
-	icon = 'icons/mecha/shield.dmi'
-	name = "mechshield"
-	var/obj/item/mech_equipment/shields/shields = null
-	var/active = 0
-	layer = ABOVE_HUMAN_LAYER
-	var/north_layer = MECH_UNDER_LAYER
-	plane = DEFAULT_PLANE
-	pixel_x = 8
-	pixel_y = 4
-	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-
-/obj/aura/mechshield/Initialize(var/maploading, var/obj/item/mech_equipment/shields/holder)
-	. = ..()
-	shields = holder
-
-/obj/aura/mechshield/added_to(var/mob/living/target)
-	. = ..()
-	target.add_vis_contents(src)
-	set_dir(target.dir)
-	events_repository.register(/decl/observ/dir_set, user, src, TYPE_PROC_REF(/obj/aura/mechshield, update_dir))
-
-/obj/aura/mechshield/proc/update_dir(var/user, var/old_dir, var/dir)
-	set_dir(dir)
-
-/obj/aura/mechshield/set_dir(new_dir)
-	. = ..()
-	if(dir == NORTH)
-		layer = north_layer
-	else layer = initial(layer)
-
-/obj/aura/mechshield/Destroy()
-	if(user)
-		events_repository.unregister(/decl/observ/dir_set, user, src, TYPE_PROC_REF(/obj/aura/mechshield, update_dir))
-		user.remove_vis_contents(src)
-	shields = null
-	. = ..()
-
-/obj/aura/mechshield/proc/toggle()
-	active = !active
-
-	update_icon()
-
-	if(active)
-		flick("shield_raise", src)
-	else
-		flick("shield_drop", src)
-
-
-/obj/aura/mechshield/on_update_icon()
-	. = ..()
-	if(active)
-		icon_state = "shield"
-	else
-		icon_state = "shield_null"
-
-/obj/aura/mechshield/bullet_act(var/obj/item/projectile/P, var/def_zone)
-	if(!active)
-		return
-	if(shields)
-		if(shields.charge)
-			P.damage = shields.stop_damage(P.damage)
-			user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash and crackle."))
-			flick("shield_impact", src)
-			playsound(user,'sound/effects/basscannon.ogg',35,1)
-			//light up the night.
-			new /obj/effect/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
-			if(P.damage <= 0)
-				return AURA_FALSE|AURA_CANCEL
-
-			spark_at(user, amount=5)
-
-/obj/aura/mechshield/hitby(atom/movable/M, var/datum/thrownthing/TT)
-	. = ..()
-	if(.)
-		if(!active)
-			return
-		if(shields.charge && TT.speed <= 5)
-			user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash briefly as they deflect \the [M]."))
-			flick("shield_impact", src)
-			playsound(user,'sound/effects/basscannon.ogg',10,1)
-			return AURA_FALSE|AURA_CANCEL
-	//Too fast!
+	return "[owner?.has_mob_modifier(/decl/mob_modifier/mechshield, source = src) ? "ONLINE" : "OFFLINE"]: [round((charge / max_charge) * 100)]%"
 
 //Melee! As a general rule I would recommend using regular objects and putting logic in them.
 /obj/item/mech_equipment/mounted_system/melee
@@ -255,14 +173,14 @@
 	if (!isliving(A))
 		return ..()
 
-	if (user.a_intent == I_HURT)
+	if (user.check_intent(I_FLAG_HARM))
 		user.visible_message(SPAN_DANGER("\The [user] swings \the [src] at \the [A]!"))
 		playsound(user, 'sound/mecha/mechmove03.ogg', 35, 1)
 		return ..()
 
 /obj/item/tool/machete/mech/attack_self(mob/living/user)
 	. = ..()
-	if (user.a_intent != I_HURT)
+	if (!user.check_intent(I_FLAG_HARM))
 		return
 	var/obj/item/mech_equipment/mounted_system/melee/machete/MC = loc
 	if (istype(MC))
@@ -287,11 +205,10 @@
 /obj/item/mech_equipment/ballistic_shield
 	name = "exosuit ballistic shield"
 	desc = "This formidable line of defense, sees widespread use in planetary peacekeeping operations and military formations alike."
-	icon_state = "mech_shield" //Rendering is handled by aura due to layering issues: TODO, figure out a better way to do this
+	icon_state = "mech_shield"
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	origin_tech = @'{"materials":2,"engineering":2}'
-	var/obj/aura/mech_ballistic/aura = null
 	var/last_push = 0
 	var/chance = 60 //For attacks from the front, diminishing returns
 	var/last_max_block = 0 //Blocking during a perfect block window resets this, else there is an anti spam
@@ -300,15 +217,15 @@
 
 /obj/item/mech_equipment/ballistic_shield/installed(mob/living/exosuit/_owner)
 	. = ..()
-	aura = new(owner, src)
+	owner?.add_mob_modifier(/decl/mob_modifier/mech_ballistic, source = src)
 
 /obj/item/mech_equipment/ballistic_shield/uninstalled()
-	QDEL_NULL(aura)
+	owner?.remove_mob_modifier(/decl/mob_modifier/mech_ballistic, source = src)
 	. = ..()
 
 /obj/item/mech_equipment/ballistic_shield/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
-	if (. && user.a_intent == I_HURT && (last_push + 1.6 SECONDS < world.time))
+	if (. && user.check_intent(I_FLAG_HARM) && (last_push + 1.6 SECONDS < world.time))
 		owner.visible_message(SPAN_WARNING("\The [owner] retracts \the [src], preparing to push with it!"), blind_message = SPAN_WARNING("You hear the whine of hydraulics and feel a rush of air!"))
 		owner.setClickCooldown(0.7 SECONDS)
 		last_push = world.time
@@ -379,70 +296,6 @@
 		//Reset timer for maximum chainblocks
 		last_max_block = 0
 
-/obj/aura/mech_ballistic
-	icon = 'icons/mecha/ballistic_shield.dmi'
-	name = "mech_ballistic_shield"
-	var/obj/item/mech_equipment/ballistic_shield/shield = null
-	layer = MECH_UNDER_LAYER
-	plane = DEFAULT_PLANE
-	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-
-/obj/aura/mech_ballistic/Initialize(maploading, obj/item/mech_equipment/ballistic_shield/holder)
-	. = ..()
-	shield = holder
-
-	//Get where we are attached so we know what icon to use
-	if (holder && holder.owner)
-		var/mob/living/exosuit/E = holder.owner
-		for (var/hardpoint in E.hardpoints)
-			var/obj/item/mech_equipment/hardpoint_object = E.hardpoints[hardpoint]
-			if (holder == hardpoint_object)
-				icon_state = "mech_shield_[hardpoint]"
-				var/image/I = image(icon, "[icon_state]_over")
-				I.layer = ABOVE_HUMAN_LAYER
-				overlays.Add(I)
-
-/obj/aura/mech_ballistic/added_to(mob/living/target)
-	. = ..()
-	target.add_vis_contents(src)
-	set_dir(target.dir)
-	global.events_repository.register(/decl/observ/dir_set, user, src, TYPE_PROC_REF(/obj/aura/mech_ballistic, update_dir))
-
-/obj/aura/mech_ballistic/proc/update_dir(user, old_dir, dir)
-	set_dir(dir)
-
-/obj/aura/mech_ballistic/Destroy()
-	if (user)
-		global.events_repository.unregister(/decl/observ/dir_set, user, src, TYPE_PROC_REF(/obj/aura/mech_ballistic, update_dir))
-		user.remove_vis_contents(src)
-	shield = null
-	. = ..()
-
-/obj/aura/mech_ballistic/bullet_act(obj/item/projectile/P, def_zone)
-	. = ..()
-	if (shield && prob(shield.block_chance(P.damage, P.armor_penetration, source = P)))
-		user.visible_message(SPAN_WARNING("\The [P] is blocked by \the [user]'s [shield.name]."))
-		user.bullet_impact_visuals(P, def_zone, 0)
-		shield.on_block_attack()
-		return AURA_FALSE|AURA_CANCEL
-
-/obj/aura/mech_ballistic/hitby(atom/movable/AM, datum/thrownthing/TT)
-	. = ..()
-	if (. && shield)
-		var/throw_damage = AM.get_thrown_attack_force() * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-		if (prob(shield.block_chance(throw_damage, 0, source = AM, attacker = TT.thrower)))
-			user.visible_message(SPAN_WARNING("\The [AM] bounces off \the [user]'s [shield]."))
-			playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
-			shield.on_block_attack()
-			return AURA_FALSE|AURA_CANCEL
-
-/obj/aura/mech_ballistic/attackby(obj/item/I, mob/user)
-	. = ..()
-	if (shield && prob(shield.block_chance(I.get_attack_force(), I.armor_penetration, source = I, attacker = user)))
-		user.visible_message(SPAN_WARNING("\The [I] is blocked by \the [user]'s [shield.name]."))
-		playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
-		return AURA_FALSE|AURA_CANCEL
-
 /obj/item/mech_equipment/flash
 	name = "exosuit flash"
 	icon_state = "mech_flash"
@@ -459,28 +312,12 @@
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 	var/flash_time = (rand(flash_min,flash_max) - 1)
 
-	var/obj/item/cell/C = owner.get_cell()
-	C.use(active_power_use * CELLRATE)
+	var/obj/item/cell/cell = owner.get_cell()
+	cell.use(active_power_use * CELLRATE)
 
 	for (var/mob/living/O in oviewers(flash_range, owner))
 		if(istype(O))
-			var/protection = O.eyecheck()
-			if(protection >= FLASH_PROTECTION_MODERATE)
-				return
-
-			if(protection >= FLASH_PROTECTION_MINOR)
-				flash_time /= 2
-
-			if(ishuman(O))
-				var/mob/living/human/H = O
-				flash_time = round(H.get_flash_mod() * flash_time)
-				if(flash_time <= 0)
-					return
-
-			if(!O.is_blind())
-				O.flash_eyes(FLASH_PROTECTION_MODERATE - protection)
-				SET_STATUS_MAX(O, STAT_BLURRY, flash_time)
-				SET_STATUS_MAX(O, STAT_CONFUSE, (flash_time + 2))
+			O.handle_flashed(flash_time, do_stun = FALSE)
 
 /obj/item/mech_equipment/flash/attack_self(mob/user)
 	. = ..()
@@ -507,33 +344,7 @@
 			playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 			var/flash_time = (rand(flash_min,flash_max))
 
-			var/obj/item/cell/C = owner.get_cell()
-			C.use(active_power_use * CELLRATE)
+			var/obj/item/cell/cell = owner.get_cell()
+			cell.use(active_power_use * CELLRATE)
 
-			var/protection = O.eyecheck()
-			if(protection >= FLASH_PROTECTION_MAJOR)
-				return
-
-			if(protection >= FLASH_PROTECTION_MODERATE)
-				flash_time /= 2
-
-			if(ishuman(O))
-				var/mob/living/human/H = O
-				flash_time = round(H.get_flash_mod() * flash_time)
-				if(flash_time <= 0)
-					return
-
-			if(!O.is_blind())
-				O.flash_eyes(FLASH_PROTECTION_MAJOR - protection)
-				SET_STATUS_MAX(O, STAT_BLURRY, flash_time)
-				SET_STATUS_MAX(O, STAT_CONFUSE, (flash_time + 2))
-
-				if(isanimal(O)) //Hit animals a bit harder
-					SET_STATUS_MAX(O, STAT_STUN, flash_time)
-				else
-					SET_STATUS_MAX(O, STAT_STUN, (flash_time / 2))
-
-				if(flash_time > 3)
-					O.drop_held_items()
-				if(flash_time > 5)
-					SET_STATUS_MAX(O, STAT_WEAK, 2)
+			O.handle_flashed(flash_time)

@@ -1,6 +1,3 @@
-/decl/species/proc/get_valid_shapeshifter_forms(var/mob/living/human/H)
-	return list()
-
 /decl/species/proc/get_additional_examine_text(var/mob/living/human/H)
 	return
 
@@ -19,9 +16,6 @@
 /decl/species/proc/get_vision_flags(var/mob/living/human/H)
 	return vision_flags
 
-/decl/species/proc/get_surgery_overlay_icon(var/mob/living/human/H)
-	return 'icons/mob/surgery.dmi'
-
 /decl/species/proc/get_footstep(var/mob/living/human/H, var/footstep_type)
 	return
 
@@ -33,9 +27,6 @@
 
 /decl/species/proc/get_radiation_mod(var/mob/living/human/H)
 	. = (H && H.isSynthetic() ? 0.5 : radiation_mod)
-
-/decl/species/proc/get_root_species_name(var/mob/living/human/H)
-	return name
 
 /decl/species/proc/get_bodytype_by_name(var/bodytype_name)
 	bodytype_name = trim(lowertext(bodytype_name))

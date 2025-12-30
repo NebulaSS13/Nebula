@@ -88,19 +88,19 @@
 
 /obj/effect/mobius_rift/chamber/Initialize(var/mapload, var/grid_size)//NORTH, SOUTH, EAST, WEST
 	. = ..()
-	var/turf/T
-	T = locate(src.x, src.y + round(grid_size/2), src.z)
-	var/N = new /obj/effect/step_trigger/mobius_rift/seamless_portal(T, NORTH)
-	portals["NORTH"] = N
-	T = locate(src.x, src.y - round(grid_size/2), src.z)
-	var/S = new /obj/effect/step_trigger/mobius_rift/seamless_portal(T, SOUTH)
-	portals["SOUTH"] = S
-	T = locate(src.x + round(grid_size/2), src.y, src.z)
-	var/E = new /obj/effect/step_trigger/mobius_rift/seamless_portal(T, EAST)
-	portals["EAST"] = E
-	T = locate(src.x - round(grid_size/2), src.y, src.z)
-	var/W = new /obj/effect/step_trigger/mobius_rift/seamless_portal(T, WEST)
-	portals["WEST"] = W
+	var/turf/rift_turf
+	rift_turf = locate(src.x, src.y + round(grid_size/2), src.z)
+	var/north_portal = new /obj/effect/step_trigger/mobius_rift/seamless_portal(rift_turf, NORTH)
+	portals["NORTH"] = north_portal
+	rift_turf = locate(src.x, src.y - round(grid_size/2), src.z)
+	var/south_portal = new /obj/effect/step_trigger/mobius_rift/seamless_portal(rift_turf, SOUTH)
+	portals["SOUTH"] = south_portal
+	rift_turf = locate(src.x + round(grid_size/2), src.y, src.z)
+	var/east_portal = new /obj/effect/step_trigger/mobius_rift/seamless_portal(rift_turf, EAST)
+	portals["EAST"] = east_portal
+	rift_turf = locate(src.x - round(grid_size/2), src.y, src.z)
+	var/west_portal = new /obj/effect/step_trigger/mobius_rift/seamless_portal(rift_turf, WEST)
+	portals["WEST"] = west_portal
 
 /obj/effect/mobius_rift/chamber/proc/set_portals(var/list/destinations)
 	for (var/iter = 1 to portals.len)

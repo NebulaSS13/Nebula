@@ -27,15 +27,24 @@
 	var/colour = "body"                 // CSS style to use for strings in this language.
 	var/key = ""                        // Character used to speak in language
 	var/flags = 0                       // Various language flags.
-	var/list/syllables                  // Used when scrambling text for a non-speaker.
-	var/space_chance = 55               // Likelihood of getting a space in the random scramble string
-	var/machine_understands = 1         // Whether machines can parse and understand this language
-	var/shorthand = "???"               // Shorthand that shows up in chat for this language.
-	var/list/partial_understanding      // List of languages that can /somehwat/ understand it, format is: name = chance of understanding a word
-	var/hidden_from_codex               // If it should not show up in Codex
-	var/list/scramble_cache = list()    // Cached syllable strings for masking when heard by a non-speaker
-	var/list/speech_sounds              // List of sounds to randomly play.
-	var/allow_repeated_syllables = TRUE // Control for handling some of the random lang/name gen.
+	/// Syllable list when scrambling text for display to a non-speaker.
+	var/list/syllables
+	/// Likelihood of getting a space in the random scramble string
+	var/space_chance = 55
+	/// Whether machines can parse and understand this language
+	var/machine_understands = TRUE
+	/// Shorthand that shows up in chat for this language.
+	var/shorthand = "???"
+	/// List of languages that can /somehwat/ understand it, format is: typepath = chance of understanding a word
+	var/list/partial_understanding
+	/// If it should not show up in Codex
+	var/hidden_from_codex = FALSE
+	/// Cached syllable strings for masking when heard by a non-speaker
+	var/list/scramble_cache = list()
+	/// List of sounds to randomly play.
+	var/list/speech_sounds
+	/// Control for handling some of the random lang/name gen.
+	var/allow_repeated_syllables = TRUE
 
 /decl/language/proc/can_be_understood_by(var/mob/living/speaker, var/mob/living/listener)
 	if(flags & LANG_FLAG_INNATE)
@@ -58,12 +67,11 @@
 /decl/language/proc/muddle(var/message)
 	return message
 
-/decl/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
+/decl/language/proc/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!length(syllables))
 		if(gender==FEMALE)
 			return capitalize(pick(global.using_map.first_names_female)) + " " + capitalize(pick(global.using_map.last_names))
-		else
-			return capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
+		return capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
 	var/possible_syllables = allow_repeated_syllables ? syllables : syllables.Copy()
 	for(var/i in 1 to name_count)
@@ -92,7 +100,7 @@
 		if(!prob(understand_chance))
 			nword = scramble_word(w)
 			if(new_sentence)
-				nword = capitalize(nword)
+				nword = capitalize_proper_html(nword)
 				new_sentence = FALSE
 			if(ends_sentence)
 				nword = trim(nword)
@@ -104,7 +112,7 @@
 		scrambled_text += nword
 
 	. = jointext(scrambled_text, null)
-	. = capitalize(.)
+	. = capitalize_proper_html(.)
 	. = trim(.)
 
 /decl/language/proc/get_next_scramble_token()

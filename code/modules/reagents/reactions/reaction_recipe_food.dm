@@ -4,7 +4,7 @@
 	abstract_type = /decl/chemical_reaction/recipe/food
 	var/obj_result
 
-/decl/chemical_reaction/recipe/food/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
+/decl/chemical_reaction/recipe/food/on_reaction(datum/reagents/holder, created_volume, list/reaction_data)
 	..()
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(obj_result && isturf(location))
@@ -33,7 +33,7 @@
 /decl/chemical_reaction/recipe/food/dairy/send_data(var/datum/reagents/holder, var/reaction_limit)
 	. = ..()
 	for(var/reagent in required_reagents)
-		var/list/data = LAZYACCESS(holder.reagent_data, reagent)
+		var/list/data = REAGENT_DATA(holder, reagent)
 		if(!islist(data))
 			continue
 		for(var/milk_key in milk_data_keys)
@@ -58,7 +58,7 @@
 	name = "Enzyme Margarine"
 	required_reagents = list(
 		/decl/material/solid/sodiumchloride = 1,
-		/decl/material/liquid/nutriment/plant_oil = 20
+		/decl/material/liquid/oil/plant = 20
 	)
 	catalysts = list(/decl/material/liquid/enzyme = 5)
 	mix_message = "The solution thickens and curdles into a pale yellow solid."

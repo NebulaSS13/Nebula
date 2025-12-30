@@ -22,16 +22,22 @@
 
 	if(!isspaceturf(T))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
 		T = locate(/turf/space)
-	var/list/bodytype_pairings = get_bodytype_species_pairs()
-	for(var/decl/bodytype/bodytype in bodytype_pairings)
-		var/decl/species/species = bodytype_pairings[bodytype]
-		var/mob/living/human/test_subject = new(null, species.name, null, bodytype)
+	var/datum/mob_snapshot/dummy_appearance = new
+	for(var/decl/bodytype/bodytype in decls_repository.get_decls_of_subtype_unassociated(/decl/bodytype))
+		var/decl/species/species = bodytype.get_user_species_for_validation()
+		if(!species)
+			continue
+		dummy_appearance.root_species  = species
+		dummy_appearance.root_bodytype = bodytype
+		var/mob/living/human/test_subject = new(T, species.uid, dummy_appearance)
 		if(test_subject.need_breathe())
 			test_subject.apply_effect(20, STUN, 0)
 			var/obj/item/organ/internal/lungs/L = test_subject.get_organ(test_subject.get_bodytype().breathing_organ, /obj/item/organ/internal/lungs)
 			if(L)
 				L.last_successful_breath = -INFINITY
 			test_subjects["[bodytype.type]"] = list(test_subject, damage_check(test_subject, OXY))
+	QDEL_NULL(dummy_appearance)
+
 	return 1
 
 /datum/unit_test/human_breath/check_result()
@@ -58,26 +64,14 @@
 
 // ============================================================================
 
-var/global/default_mobloc = null
-
-/proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/human)
+/datum/unit_test/mob_damage/proc/create_test_mob_with_mind(var/turf/mobloc, var/mobtype = /mob/living/human)
 	var/list/test_result = list("result" = FAILURE, "msg"    = "", "mobref" = null)
 
-	if(isnull(mobloc))
-		if(!default_mobloc)
-			for(var/turf/floor/tiled/T in world)
-				if(!T.zone?.air)
-					continue
-				var/pressure = T.zone.air.return_pressure()
-				if(90 < pressure && pressure < 120) // Find a turf between 90 and 120
-					default_mobloc = T
-					break
-		mobloc = default_mobloc
 	if(!mobloc)
 		test_result["msg"] = "Unable to find a location to create test mob"
 		return test_result
 
-	var/mob/living/human/H = new mobtype(mobloc, SPECIES_HUMAN) // force human for testing
+	var/mob/living/human/H = new mobtype(mobloc, global.using_map.default_species) // force default species for testing
 
 	H.mind_initialize("TestKey[rand(0,10000)]")
 
@@ -129,7 +123,7 @@ var/global/default_mobloc = null
 
 /datum/unit_test/mob_damage
 	name = "MOB: Template for mob damage"
-	template = /datum/unit_test/mob_damage
+	abstract_type = /datum/unit_test/mob_damage
 	var/damagetype = BRUTE
 	var/mob_type = /mob/living/human
 	var/expected_vulnerability = STANDARD
@@ -260,15 +254,15 @@ var/global/default_mobloc = null
 		fail("[icon_file] is not a valid icon file.")
 		return 1
 
-	var/list/valid_states = icon_states(icon_file)
+	var/list/valid_states = get_states_in_icon_cached(icon_file)
 
-	if(!valid_states.len)
+	if(!length(valid_states))
 		return 1
 
 	for(var/i=1, i<=SSrobots.all_module_names.len, i++)
 		var/modname = lowertext(SSrobots.all_module_names[i])
 		var/bad_msg = "[ascii_red]--------------- [modname]"
-		if(!(modname in valid_states))
+		if(!valid_states[modname])
 			log_unit_test("[bad_msg] does not contain a valid icon state in [icon_file][ascii_reset]")
 			failed=1
 
@@ -288,8 +282,8 @@ var/global/default_mobloc = null
 
 /datum/unit_test/mob_nullspace/start_test()
 	// Simply create one of each species type in nullspace
-	for(var/species_name in get_all_species())
-		var/test_subject = new/mob/living/human(null, species_name)
+	for(var/decl/species/species as anything in decls_repository.get_decls_of_subtype_unassociated(/decl/species))
+		var/test_subject = new/mob/living/human(null, species.uid)
 		test_subjects += test_subject
 	return TRUE
 
@@ -309,13 +303,24 @@ var/global/default_mobloc = null
 
 /datum/unit_test/mob_organ_size/start_test()
 	var/failed = FALSE
-	for(var/species_name in get_all_species())
-		var/mob/living/human/H = new(null, species_name)
-		for(var/obj/item/organ/external/E in H.get_external_organs())
-			for(var/obj/item/organ/internal/I in E.internal_organs)
-				if(I.w_class > E.cavity_max_w_class)
-					failed = TRUE
-					log_bad("Internal organ [I] inside external organ [E] on species [species_name] was too large to fit.")
+	var/datum/mob_snapshot/dummy_appearance = new
+	for(var/decl/bodytype/bodytype in decls_repository.get_decls_of_subtype_unassociated(/decl/bodytype))
+		var/decl/species/species = bodytype.get_user_species_for_validation()
+		if(!species)
+			continue
+		dummy_appearance.root_species  = species
+		dummy_appearance.root_bodytype = bodytype
+		var/mob/living/human/test_subject = new(null, species.uid, dummy_appearance)
+		for(var/obj/item/organ/internal/organ in test_subject.get_internal_organs())
+			var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(test_subject, organ.parent_organ)
+			if(!parent)
+				failed = TRUE
+				log_bad("Internal organ [organ] inside mob of species [species.type] lacked a parent organ (expected [organ.parent_organ])!")
+				continue
+			if(organ.w_class > parent.cavity_max_w_class)
+				failed = TRUE
+				log_bad("Internal organ [organ] inside external organ [parent] on species [species.type] was too large to fit.")
+	QDEL_NULL(dummy_appearance)
 	if(failed)
 		fail("A mob had an internal organ too large for its external organ.")
 	else
@@ -331,13 +336,14 @@ var/global/default_mobloc = null
 
 	var/list/failures = list()
 	for(var/moduletype in typesof(/obj/item/robot_module))
-		var/obj/item/robot_module/mod = new
+		var/obj/item/robot_module/mod = new moduletype(reference_only = TRUE) // Reference copy only; have to do this to access lists.
 		for(var/sprite in mod.module_sprites)
 			var/check_icon = mod.module_sprites[sprite]
 			if(!check_state_in_icon("world", check_icon))
 				failures += "[moduletype] ([sprite]): [check_icon] missing world sprite"
 			if(!check_state_in_icon("world-eyes", check_icon))
 				failures += "[moduletype] ([sprite]): [check_icon] missing eyes sprite"
+		qdel(mod)
 
 	if(length(failures))
 		fail("Some robot modules had invalid or missing icon_states:\n[jointext(failures, "\n")]")

@@ -1,6 +1,7 @@
 /decl/stack_recipe/hardness
 	abstract_type     = /decl/stack_recipe/hardness
 	required_min_hardness = MAT_VALUE_FLEXIBLE + 10
+	validation_material = DEFAULT_FURNITURE_MATERIAL
 
 /decl/stack_recipe/hardness/improvised_armour
 	result_type       = /obj/item/clothing/suit/armor/crafted
@@ -73,9 +74,6 @@
 
 /decl/stack_recipe/hardness/mortar
 	result_type = /obj/item/chems/glass/mortar
-
-/decl/stack_recipe/ring
-	result_type       = /obj/item/clothing/gloves/ring/material
 
 /decl/stack_recipe/hardness/clipboard
 	result_type       = /obj/item/clipboard

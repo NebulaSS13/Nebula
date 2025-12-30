@@ -23,14 +23,19 @@
 /obj/item/banner/nanotrasen
 	name = "\improper NanoTrasen banner"
 	hung_desc = "The banner is emblazoned with the NanoTrasen logo."
-	icon = 'mods/content/corporate/icons/banner.dmi'
 	desc = "A banner emblazoned with the NanoTrasen logo."
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 	color = COLOR_NAVY_BLUE
+	trim_color = COLOR_GOLD
 	decals = list(
-		"banner_trim" =   COLOR_GOLD,
-		"banner_nanotrasen" = COLOR_WHITE
+		/decl/banner_symbol/nanotrasen = COLOR_WHITE
 	)
 
 /obj/structure/banner_frame/nanotrasen
 	banner = /obj/item/banner/nanotrasen
+
+/decl/banner_symbol/nanotrasen
+	icon       = 'mods/content/corporate/icons/banner_symbols.dmi'
+	name       = "NanoTrasen logo"
+	icon_state = "nanotrasen"
+	uid        = "symbol_corporate_nanotrasen"

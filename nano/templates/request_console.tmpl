@@ -66,14 +66,14 @@ Used In File(s): \code\game\machinery\requests_console.dm
 	<div class="item"><b>Message sent successfully.</b></div>
 	<div class="item">{{:helper.link('Continue', 'arrowthick-1-e', { 'setScreen' : 0 })}}</div>
 {{else data.screen == 5}}
-	<div class="item"><b>An Error occured. Message not sent.</b></div>
+	<div class="item"><b>An Error occurred. Message not sent.</b></div>
 	<div class="item">{{:helper.link('Continue', 'arrowthick-1-e', { 'setScreen' : 0 })}}</div>
 {{else data.screen == 6}}
 	<div class="statusDisplay" style="overflow: auto;">
 		{{for data.message_log}}
 			<div class="item">{{:value}}</div>
 		{{empty}}
-			<div class="item">No messages have been recieved.</div>
+			<div class="item">No messages have been received.</div>
 		{{/for}}
 	</div>
 	<div class="item">{{:helper.link('Back', 'arrowreturnthick-1-w', { 'setScreen' : 0 })}}</div>

@@ -231,14 +231,14 @@
 		if(SHIP_STATUS_LANDED)
 			var/obj/effect/overmap/visitable/location = loc
 			if(istype(loc, /obj/effect/overmap/visitable/sector))
-				return "Landed on \the [location.name]. Use secondary thrust to get clear before activating primary engines."
+				return "Landed on \the [location]. Use secondary thrust to get clear before activating primary engines."
 			if(istype(loc, /obj/effect/overmap/visitable/ship))
-				return "Docked with \the [location.name]. Use secondary thrust to get clear before activating primary engines."
+				return "Docked with \the [location]. Use secondary thrust to get clear before activating primary engines."
 			return "Docked with an unknown object."
 		if(SHIP_STATUS_ENCOUNTER)
 			var/datum/shuttle/autodock/overmap/child_shuttle = SSshuttle.shuttles[shuttle]
 			var/obj/effect/overmap/visitable/location = global.overmap_sectors[num2text(child_shuttle.current_location.z)]
-			return "Maneuvering nearby \the [location.name]."
+			return "Maneuvering nearby \the [location]."
 		if(SHIP_STATUS_TRANSIT)
 			return "Maneuvering under secondary thrust."
 		if(SHIP_STATUS_OVERMAP)

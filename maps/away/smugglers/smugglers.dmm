@@ -148,7 +148,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -611,14 +611,14 @@
 /turf/floor/tiled,
 /area/smugglers/office)
 "bD" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/paper,
 /obj/item/pen,
 /obj/item/flashlight/lamp,
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -665,7 +665,7 @@
 /turf/floor/tiled,
 /area/smugglers/office)
 "bK" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/coin{
 	pixel_x = -5;
 	pixel_y = -3
@@ -682,7 +682,7 @@
 /turf/floor/tiled,
 /area/smugglers/office)
 "bL" = (
-/obj/structure/bed/chair/comfy/red{
+/obj/structure/chair/comfy/red{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -831,7 +831,7 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -854,7 +854,7 @@
 /turf/floor,
 /area/smugglers/dorms)
 "cp" = (
-/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/vomit/mapped,
 /obj/random/medical/lite,
 /turf/floor/plating/airless,
 /area/smugglers/dorms)
@@ -865,7 +865,7 @@
 /turf/floor/plating/airless,
 /area/smugglers/dorms)
 "cr" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/machinery/light,
@@ -889,7 +889,7 @@
 /turf/floor/tiled,
 /area/smugglers/dorms)
 "cu" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/machinery/light,

@@ -49,7 +49,7 @@
 	//These vars store their preffered perch and if they dont have one, what they can use as a perch
 	var/obj/parrot_perch = null
 	var/static/list/desired_perches = list(
-		/obj/structure/bed/chair,
+		/obj/structure/chair,
 		/obj/structure/table,
 		/obj/machinery/constructable_frame/computerframe,
 		/obj/structure/displaycase,
@@ -331,9 +331,9 @@
 		update_icon()
 
 //Mobs with objects
-/mob/living/simple_animal/hostile/parrot/attackby(var/obj/item/O, var/mob/user)
+/mob/living/simple_animal/hostile/parrot/attackby(var/obj/item/used_item, var/mob/user)
 	. = ..()
-	if(!stat && !client && !istype(O, /obj/item/stack/medical) && O.get_attack_force(user))
+	if(!stat && !client && !istype(used_item, /obj/item/stack/medical) && used_item.expend_attack_force(user))
 		if(parrot_state == PARROT_PERCH)
 			parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
 		parrot_interest = user
@@ -371,10 +371,10 @@
 					return M
 
 /mob/living/simple_animal/hostile/parrot/proc/search_for_perch()
-	for(var/obj/O in view(src))
+	for(var/obj/thing in view(src))
 		for(var/path in desired_perches)
-			if(istype(O, path))
-				return O
+			if(istype(thing, path))
+				return thing
 	return null
 
 //This proc was made to save on doing two 'in view' loops seperatly

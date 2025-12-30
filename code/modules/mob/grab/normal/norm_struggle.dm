@@ -19,7 +19,7 @@
 	var/mob/living/assailant = grab.assailant
 	if(!affecting)
 		return
-	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
+	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.check_intent(I_FLAG_HELP))
 		var/decl/pronouns/assailant_gender = assailant.get_pronouns()
 		affecting.visible_message(SPAN_DANGER("\The [affecting] isn't prepared to fight back as [assailant] tightens [assailant_gender.his] grip!"))
 		grab.done_struggle = TRUE
@@ -35,7 +35,7 @@
 		grab.upgrade(TRUE)
 		return
 
-	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
+	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.check_intent(I_FLAG_HELP))
 		var/decl/pronouns/assailant_gender = assailant.get_pronouns()
 		affecting.visible_message(SPAN_DANGER("\The [affecting] isn't prepared to fight back as [assailant] tightens [assailant_gender.his] grip!"))
 		grab.done_struggle = TRUE

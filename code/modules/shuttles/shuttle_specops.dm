@@ -14,10 +14,7 @@
 	var/reset_time = 0	//the world.time at which the shuttle will be ready to move again.
 	var/launch_prep = 0
 	var/cancel_countdown = 0
-	category = /datum/shuttle/autodock/ferry/specops
-
-/datum/shuttle/autodock/ferry/specops/New()
-	..()
+	abstract_type = /datum/shuttle/autodock/ferry/specops
 
 /datum/shuttle/autodock/ferry/specops/launch(var/user)
 	if (!can_launch())
@@ -149,10 +146,10 @@
 		sleep(10)
 
 		var/spawn_marauder[] = new()
-		for(var/obj/abstract/landmark/L in global.landmarks_list)
+		for(var/obj/abstract/landmark/L in global.all_landmarks)
 			if(L.name == "Marauder Entry")
 				spawn_marauder.Add(L)
-		for(var/obj/abstract/landmark/L in global.landmarks_list)
+		for(var/obj/abstract/landmark/L in global.all_landmarks)
 			if(L.name == "Marauder Exit")
 				var/obj/effect/portal/P = new(L.loc)
 				P.set_invisibility(INVISIBILITY_ABSTRACT)//So it is not seen by anyone.

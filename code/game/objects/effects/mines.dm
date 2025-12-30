@@ -34,16 +34,14 @@
 	if(ismob(obj))
 		var/mob/mob = obj
 		mob.add_genetic_condition(pick(decls_repository.get_decls_of_type(/decl/genetic_condition/disability)))
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/proc/triggerstun(obj)
 	if(ismob(obj))
 		var/mob/M = obj
 		SET_STATUS_MAX(M, STAT_STUN, 30)
 	spark_at(src, cardinal_only = TRUE)
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/proc/triggern2o(obj)
 	//example: n2o triggerproc
@@ -53,8 +51,7 @@
 		if(target.simulated && !target.blocks_air)
 			target.assume_gas(/decl/material/gas/nitrous_oxide, 30)
 
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/proc/triggerflame(obj)
 	for (var/turf/target in range(1,src))
@@ -62,21 +59,18 @@
 			target.assume_gas(/decl/material/gas/hydrogen, 30)
 			target.hotspot_expose(1000, CELL_VOLUME)
 
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/proc/triggerkick(obj)
 	spark_at(src, cardinal_only = TRUE)
 	if(ismob(obj))
 		var/mob/victim = obj
 		qdel(victim.client)
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/proc/explode(obj)
 	explosion(loc, 0, 1, 2, 3)
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/dnascramble
 	name = "Radiation Mine"

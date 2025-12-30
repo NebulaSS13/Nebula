@@ -1,4 +1,4 @@
-/obj/item/rig/attackby(obj/item/W, mob/user)
+/obj/item/rig/attackby(obj/item/used_item, mob/user)
 
 	if(!isliving(user)) return FALSE
 
@@ -7,11 +7,11 @@
 			return TRUE
 
 	// Pass repair items on to the chestpiece.
-	if(chest && (istype(W,/obj/item/stack/material) || IS_WELDER(W)))
-		return chest.attackby(W,user)
+	if(chest && (istype(used_item,/obj/item/stack/material) || IS_WELDER(used_item)))
+		return chest.attackby(used_item,user)
 
 	// Lock or unlock the access panel.
-	if(W.GetIdCard())
+	if(used_item.GetIdCard())
 		if(subverted)
 			locked = 0
 			to_chat(user, "<span class='danger'>It looks like the locking system has been shorted out.</span>")
@@ -30,7 +30,7 @@
 		to_chat(user, "You [locked ? "lock" : "unlock"] \the [src] access panel.")
 		return TRUE
 
-	else if(IS_CROWBAR(W))
+	else if(IS_CROWBAR(used_item))
 
 		if(!open && locked)
 			to_chat(user, "The access panel is locked shut.")
@@ -40,13 +40,13 @@
 		to_chat(user, "You [open ? "open" : "close"] the access panel.")
 		return TRUE
 
-	else if(IS_SCREWDRIVER(W))
+	else if(IS_SCREWDRIVER(used_item))
 		p_open = !p_open
 		to_chat(user, "You [p_open ? "open" : "close"] the wire cover.")
 		return TRUE
 
 	// Hacking.
-	else if(IS_WIRECUTTER(W) || IS_MULTITOOL(W))
+	else if(IS_WIRECUTTER(used_item) || IS_MULTITOOL(used_item))
 		if(p_open)
 			wires.Interact(user)
 		else
@@ -57,21 +57,21 @@
 
 
 		// Air tank.
-		if(istype(W,/obj/item/tank)) //Todo, some kind of check for suits without integrated air supplies.
+		if(istype(used_item,/obj/item/tank)) //Todo, some kind of check for suits without integrated air supplies.
 
 			if(air_supply)
 				to_chat(user, "\The [src] already has a tank installed.")
 				return TRUE
 
-			if(!user.try_unequip(W))
+			if(!user.try_unequip(used_item))
 				return TRUE
-			air_supply = W
-			W.forceMove(src)
-			to_chat(user, "You slot [W] into [src] and tighten the connecting valve.")
+			air_supply = used_item
+			used_item.forceMove(src)
+			to_chat(user, "You slot [used_item] into [src] and tighten the connecting valve.")
 			return TRUE
 
 		// Check if this is a hardsuit upgrade or a modification.
-		else if(istype(W,/obj/item/rig_module))
+		else if(istype(used_item,/obj/item/rig_module))
 
 			if(ishuman(src.loc))
 				var/mob/living/human/H = src.loc
@@ -79,11 +79,11 @@
 					to_chat(user, "<span class='danger'>You can't install a hardsuit module while the suit is being worn.</span>")
 					return TRUE
 
-			if(is_type_in_list(W,banned_modules))
+			if(is_type_in_list(used_item,banned_modules))
 				to_chat(user, SPAN_DANGER("\The [src] cannot mount this type of module."))
 				return TRUE
 
-			var/obj/item/rig_module/mod = W
+			var/obj/item/rig_module/mod = used_item
 
 			if(!installed_modules) installed_modules = list()
 			if(installed_modules.len)
@@ -92,17 +92,17 @@
 						to_chat(user, SPAN_DANGER("\The [installed_mod] is incompatible with this module."))
 						return TRUE
 					if(installed_mod.banned_modules.len)
-						if(is_type_in_list(W,installed_mod.banned_modules))
+						if(is_type_in_list(used_item,installed_mod.banned_modules))
 							to_chat(user, SPAN_DANGER("\The [installed_mod] is incompatible with this module."))
 							return TRUE
-					if(!installed_mod.redundant && installed_mod.type == W.type)
+					if(!installed_mod.redundant && installed_mod.type == used_item.type)
 						to_chat(user, "The hardsuit already has a module of that class installed.")
 						return TRUE
 
 			to_chat(user, "You begin installing \the [mod] into \the [src].")
 			if(!do_after(user,40,src))
 				return TRUE
-			if(!user || !W)
+			if(!user || !used_item)
 				return TRUE
 			if(!user.try_unequip(mod)) return TRUE
 			to_chat(user, "You install \the [mod] into \the [src].")
@@ -112,15 +112,15 @@
 			update_icon()
 			return TRUE
 
-		else if(!cell && istype(W,/obj/item/cell))
+		else if(!cell && istype(used_item,/obj/item/cell))
 
-			if(!user.try_unequip(W)) return TRUE
-			to_chat(user, "You jack \the [W] into \the [src]'s battery mount.")
-			W.forceMove(src)
-			src.cell = W
+			if(!user.try_unequip(used_item)) return TRUE
+			to_chat(user, "You jack \the [used_item] into \the [src]'s battery mount.")
+			used_item.forceMove(src)
+			src.cell = used_item
 			return TRUE
 
-		else if(IS_WRENCH(W))
+		else if(IS_WRENCH(used_item))
 
 			var/list/current_mounts = list()
 			if(cell) current_mounts   += "cell"
@@ -182,8 +182,8 @@
 					installed_modules -= removed
 					update_icon()
 
-		else if(istype(W,/obj/item/stack/nanopaste)) //EMP repair
-			var/obj/item/stack/S = W
+		else if(istype(used_item,/obj/item/stack/nanopaste)) //EMP repair
+			var/obj/item/stack/S = used_item
 			if(malfunctioning || malfunction_delay)
 				if(S.use(1))
 					to_chat(user, "You pour some of \the [S] over \the [src]'s control circuitry and watch as the nanites do their work with impressive speed and precision.")
@@ -198,7 +198,7 @@
 	// If we've gotten this far, all we have left to do before we pass off to root procs
 	// is check if any of the loaded modules want to use the item we've been given.
 	for(var/obj/item/rig_module/module in installed_modules)
-		if(module.accepts_item(W,user)) //Item is handled in this proc
+		if(module.accepts_item(used_item,user)) //Item is handled in this proc
 			return TRUE
 	return ..()
 

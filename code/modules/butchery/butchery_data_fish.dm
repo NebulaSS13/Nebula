@@ -11,6 +11,9 @@
 	gut_type      = /obj/item/food/butchery/offal/small
 	meat_flags    = ALLERGEN_FISH
 
+/decl/butchery_data/animal/fish/oily
+	meat_type     = /obj/item/food/butchery/meat/fish/oily
+
 /decl/butchery_data/animal/fish/small
 	bone_amount     = 1
 	skin_amount     = 2

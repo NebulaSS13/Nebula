@@ -25,10 +25,6 @@
 	START_PROCESSING(SSobj, src)
 	update_icon()
 
-/obj/item/radio/intercom/wizard
-	name = "enchanted intercom"
-	desc = "Talk into this while you ponder your orb."
-
 /obj/item/radio/intercom/raider
 	name = "piratical intercom"
 	desc = "Pirate radio, but not in the usual sense of the word."

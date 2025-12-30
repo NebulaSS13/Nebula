@@ -109,7 +109,7 @@
 /turf/floor/tiled/steel_ridged,
 /area/template_noop)
 "ax" = (
-/obj/structure/bed/chair/office/light,
+/obj/structure/chair/office/light,
 /obj/structure/emergency_dispenser/east,
 /turf/floor/tiled/white,
 /area/template_noop)
@@ -184,7 +184,7 @@
 /turf/floor/tiled/white,
 /area/template_noop)
 "aM" = (
-/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/vomit/mapped,
 /obj/item/chems/glass/bucket/paint/random,
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = 32
@@ -231,7 +231,7 @@
 /area/template_noop)
 "aU" = (
 /obj/random/junk,
-/obj/structure/bed/chair/office/light,
+/obj/structure/chair/office/light,
 /turf/floor/carpet/blue2,
 /area/template_noop)
 "aV" = (

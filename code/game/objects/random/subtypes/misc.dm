@@ -117,7 +117,6 @@
 	desc = "This is some random junk."
 	icon = 'icons/obj/items/storage/trashbag.dmi'
 	icon_state = "trashbag3"
-	var/spawn_choice
 
 /obj/random/junk/spawn_choices()
 	var/static/list/spawnable_choices
@@ -211,8 +210,8 @@
 		/obj/item/stack/material/plank/mapped/wood/fifty,
 		/obj/item/stack/material/cardstock/mapped/cardboard/fifty,
 		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
-		/obj/item/stack/material/rods/ten,
-		/obj/item/stack/material/rods/fifty
+		/obj/item/stack/material/rods/mapped/steel/ten,
+		/obj/item/stack/material/rods/mapped/steel/fifty
 	)
 	return spawnable_choices
 
@@ -225,7 +224,7 @@
 /obj/random/soap/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/item/soap                         = 12,
-		/obj/item/chems/glass/rag              =  2,
+		/obj/item/chems/rag              =  2,
 		/obj/item/chems/spray/cleaner          =  2,
 		/obj/item/grenade/chem_grenade/cleaner =  1
 	)
@@ -466,16 +465,6 @@
 	)
 	return spawnable_choices
 
-/obj/random/crayon
-	name = "random crayon"
-	desc = "This is a random crayon."
-	icon = 'icons/obj/items/crayons.dmi'
-	icon_state = "crayonred"
-
-/obj/random/crayon/spawn_choices()
-	var/static/list/spawnable_choices = subtypesof(/obj/item/pen/crayon)
-	return spawnable_choices
-
 /obj/random/umbrella
 	name = "Random Umbrella"
 	desc = "This is a random umbrella."
@@ -516,22 +505,22 @@
 
 /obj/random/jewelry/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/ears/stud/wood                = 10,
-		/obj/item/clothing/ears/dangle/wood              = 10,
-		/obj/item/clothing/gloves/bracelet               = 10,
-		/obj/item/clothing/neck/necklace                 = 10,
-		/obj/item/clothing/gloves/ring/material/silver   = 5,
-		/obj/item/clothing/gloves/ring/material/bronze   = 5,
-		/obj/item/clothing/gloves/ring/material/gold     = 3,
-		/obj/item/clothing/ears/stud/silver              = 3,
-		/obj/item/clothing/ears/dangle/silver            = 3,
-		/obj/item/clothing/ears/stud/gold                = 3,
-		/obj/item/clothing/ears/dangle/gold              = 3,
-		/obj/item/clothing/gloves/ring/material/platinum = 1,
-		/obj/item/clothing/ears/stud/platinum            = 1,
-		/obj/item/clothing/ears/dangle/platinum          = 1,
-		/obj/item/clothing/ears/stud/diamond             = 1,
-		/obj/item/clothing/ears/dangle/diamond           = 1
+		/obj/item/clothing/ears/stud/wood       = 10,
+		/obj/item/clothing/ears/dangle/wood     = 10,
+		/obj/item/clothing/gloves/bracelet      = 10,
+		/obj/item/clothing/neck/necklace        = 10,
+		/obj/item/clothing/gloves/ring/silver   = 5,
+		/obj/item/clothing/gloves/ring/bronze   = 5,
+		/obj/item/clothing/gloves/ring/gold     = 3,
+		/obj/item/clothing/ears/stud/silver     = 3,
+		/obj/item/clothing/ears/dangle/silver   = 3,
+		/obj/item/clothing/ears/stud/gold       = 3,
+		/obj/item/clothing/ears/dangle/gold     = 3,
+		/obj/item/clothing/gloves/ring/platinum = 1,
+		/obj/item/clothing/ears/stud/platinum   = 1,
+		/obj/item/clothing/ears/dangle/platinum = 1,
+		/obj/item/clothing/ears/stud/diamond    = 1,
+		/obj/item/clothing/ears/dangle/diamond  = 1
 
 	)
 	return spawnable_choices

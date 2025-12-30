@@ -23,24 +23,24 @@
 
 /obj/structure/sign/department/xenobio_1
 	name       = "\improper XENOBIOLOGY"
-	desc       = "A sign labelling an area as a place where xenobiological entites are researched."
+	desc       = "A sign labelling an area as a place where xenobiological entities are researched."
 	icon_state = "xenobio"
 
 /obj/structure/sign/department/xenobio_2
 	name       = "\improper XENOBIOLOGY"
-	desc       = "A sign labelling an area as a place where xenobiological entites are researched."
+	desc       = "A sign labelling an area as a place where xenobiological entities are researched."
 	icon       = 'icons/obj/signs/location_signs.dmi'
 	icon_state = "xenobio2"
 
 /obj/structure/sign/department/xenobio_3
 	name       = "\improper XENOBIOLOGY"
-	desc       = "A sign labelling an area as a place where xenobiological entites are researched."
+	desc       = "A sign labelling an area as a place where xenobiological entities are researched."
 	icon       = 'icons/obj/signs/location_signs.dmi'
 	icon_state = "xenobio3"
 
 /obj/structure/sign/department/xenobio_4
 	name       = "\improper XENOBIOLOGY"
-	desc       = "A sign labelling an area as a place where xenobiological entites are researched."
+	desc       = "A sign labelling an area as a place where xenobiological entities are researched."
 	icon       = 'icons/obj/signs/location_signs.dmi'
 	icon_state = "xenobio4"
 
@@ -176,6 +176,6 @@
 
 /obj/structure/sign/department/star_of_life
 	name       = "emergency"
-	desc       = "The blue six pointed star with a rod of Asclepius is the intergalactic symbol of emergency medical services."
+	desc       = "The blue six-pointed star with a rod of Asclepius is the intergalactic symbol of emergency medical services."
 	icon       = 'icons/obj/signs/medical.dmi'
 	icon_state = "staroflife"

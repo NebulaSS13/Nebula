@@ -7,7 +7,7 @@
 if (Datum.is_processing) {\
 	if(Datum.is_processing != "SSmachines.[#List]")\
 	{\
-		PRINT_STACK_TRACE("Failed to start processing. [log_info_line(Datum)] is already being processed by [Datum.is_processing] but queue attempt occured on SSmachines.[#List]."); \
+		PRINT_STACK_TRACE("Failed to start processing. [log_info_line(Datum)] is already being processed by [Datum.is_processing] but queue attempt occurred on SSmachines.[#List]."); \
 	}\
 } else {\
 	Datum.is_processing = "SSmachines.[#List]";\
@@ -82,13 +82,19 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 
 #undef INTERNAL_PROCESS_STEP
 
+/datum/controller/subsystem/machines/StartLoadingMap()
+	suspend()
+
+/datum/controller/subsystem/machines/StopLoadingMap()
+	wake()
+
 // rebuild all power networks from scratch - only called at world creation or by the admin verb
 // The above is a lie. Turbolifts also call this proc.
 /datum/controller/subsystem/machines/proc/makepowernets()
 	for(var/datum/powernet/PN in powernets)
 		qdel(PN)
 	powernets.Cut()
-	setup_powernets_for_cables(global.cable_list)
+	setup_powernets_for_cables(global.all_cables)
 
 /datum/controller/subsystem/machines/proc/setup_powernets_for_cables(list/cables)
 	for(var/obj/structure/cable/PC in cables)

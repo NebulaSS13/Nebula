@@ -2,7 +2,7 @@
 	var/list/destination_tags
 	var/list/destinations_cache = list()
 	var/last_cache_rebuild_time = 0
-	category = /datum/shuttle/autodock/multi
+	abstract_type = /datum/shuttle/autodock/multi
 
 /datum/shuttle/autodock/multi/New(map_hash)
 	..()
@@ -42,7 +42,7 @@
 	var/arrival_message
 	var/departure_message
 
-	category = /datum/shuttle/autodock/multi/antag
+	abstract_type = /datum/shuttle/autodock/multi/antag
 
 /datum/shuttle/autodock/multi/antag/New(map_hash)
 	..()

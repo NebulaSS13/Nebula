@@ -12,8 +12,8 @@
 	backyard_grilling_announcement = "is baked into a simple bun."
 
 // Dough + rolling pin = flat dough
-/obj/item/food/dough/attackby(obj/item/W, mob/user)
-	if(!istype(W,/obj/item/kitchen/rollingpin))
+/obj/item/food/dough/attackby(obj/item/used_item, mob/user)
+	if(!istype(used_item,/obj/item/rollingpin))
 		return ..()
 	var/obj/item/food/sliceable/flatdough/result = new()
 	result.dropInto(loc)

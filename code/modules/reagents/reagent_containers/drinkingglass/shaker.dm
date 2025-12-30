@@ -6,7 +6,7 @@
 	icon_state = "fitness-cup_black"
 	base_icon = "fitness-cup"
 	icon = 'icons/obj/drink_glasses/fitness.dmi'
-	volume = 100
+	chem_volume = 100
 	material = /decl/material/solid/organic/plastic
 	filling_states = @"[10,20,30,40,50,60,70,80,90,100]"
 	possible_transfer_amounts = @"[5,10,15,25]"

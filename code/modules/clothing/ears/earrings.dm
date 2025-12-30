@@ -7,7 +7,7 @@
 /obj/item/clothing/ears/stud/glass
 	material = /decl/material/solid/glass
 /obj/item/clothing/ears/stud/wood
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 /obj/item/clothing/ears/stud/iron
 	material = /decl/material/solid/metal/iron
 /obj/item/clothing/ears/stud/steel
@@ -30,7 +30,7 @@
 /obj/item/clothing/ears/dangle/glass
 	material = /decl/material/solid/glass
 /obj/item/clothing/ears/dangle/wood
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 /obj/item/clothing/ears/dangle/iron
 	material = /decl/material/solid/metal/iron
 /obj/item/clothing/ears/dangle/steel

@@ -35,9 +35,9 @@
 
 	var/list/postponed
 	#ifdef MULTIZAS
-	for(var/d = 1, d < 64, d *= 2)
+	for(var/d in global.cardinalz)
 	#else
-	for(var/d = 1, d < 16, d *= 2)
+	for(var/d in global.cardinal)
 	#endif
 
 		var/turf/unsim = get_step(src, d)
@@ -167,7 +167,7 @@
 #define GET_ZONE_NEIGHBOURS(T, ret) \
 	ret = 0; \
 	if (T.zone) { \
-		for (var/_gzn_dir in gzn_check) { \
+		for (var/_gzn_dir in ZAS_GZN_CHECK) { \
 			var/turf/other = get_step(T, _gzn_dir); \
 			if (istype(other) && other.simulated && other.zone == T.zone) { \
 				var/block; \
@@ -198,7 +198,7 @@
 	if (!(check_dirs & (check_dirs - 1))) //Equivalent to: if(IsInteger(log(2, .)))
 		return TRUE
 
-	for(var/dir in global.csrfz_check)
+	for(var/dir in ZAS_CSRFZ_CHECK)
 		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
 		if((dir & check_dirs) == dir)
 			//check that they are connected by the corner turf

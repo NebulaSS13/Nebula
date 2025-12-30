@@ -166,11 +166,11 @@
 
 	if(href_list["order"])
 		clear_order_contents()
-		var/decl/hierarchy/supply_pack/P = locate(href_list["order"]) in SSsupply.master_supply_list
-		if(!istype(P))
+		var/decl/hierarchy/supply_pack/pack = locate(href_list["order"]) in SSsupply.master_supply_list
+		if(!istype(pack))
 			return 1
 
-		if(P.hidden && !emagged)
+		if(pack.hidden && !emagged)
 			return 1
 
 		var/reason = sanitize(input(user,"Reason:","Why do you require this item?","") as null|text,,0)
@@ -190,7 +190,7 @@
 
 		var/datum/supply_order/O = new /datum/supply_order()
 		O.ordernum = SSsupply.ordernum
-		O.object = P
+		O.object = pack
 		O.orderedby = idname
 		O.reason = reason
 		O.orderedrank = idrank
@@ -315,31 +315,32 @@
 	category_contents.Cut()
 	var/decl/hierarchy/supply_pack/root = GET_DECL(/decl/hierarchy/supply_pack)
 	var/decl/currency/cur = GET_DECL(global.using_map.default_currency)
-	for(var/decl/hierarchy/supply_pack/sp in root.children)
-		if(!sp.is_category())
+	// FIXME: This probably doesn't even work properly? It assumes there aren't any nested categories...
+	for(var/decl/hierarchy/supply_pack/pack in root.children)
+		if(!pack.is_category())
 			continue // No children
-		category_names.Add(sp.name)
+		category_names.Add(pack.name)
 		var/list/category[0]
-		for(var/decl/hierarchy/supply_pack/spc in sp.get_descendants())
-			if((spc.hidden || spc.contraband || !spc.sec_available()) && !emagged)
+		for(var/decl/hierarchy/supply_pack/child_pack in pack.get_descendants())
+			if((child_pack.hidden || child_pack.contraband || !child_pack.sec_available()) && !emagged)
 				continue
 			category.Add(list(list(
-				"name" = spc.name,
-				"cost" = cur.format_value(spc.cost),
-				"ref" = "\ref[spc]"
+				"name" = child_pack.name,
+				"cost" = cur.format_value(child_pack.cost),
+				"ref" = "\ref[child_pack]"
 			)))
-		category_contents[sp.name] = category
+		category_contents[pack.name] = category
 
 /datum/nano_module/supply/proc/generate_order_contents(var/order_ref)
-	var/decl/hierarchy/supply_pack/sp = locate(order_ref) in SSsupply.master_supply_list
-	if(!istype(sp))
+	var/decl/hierarchy/supply_pack/pack = locate(order_ref) in SSsupply.master_supply_list
+	if(!istype(pack))
 		return FALSE
 	contents_of_order.Cut()
 	showing_contents_of_ref = order_ref
-	for(var/item_path in sp.contains) // Thanks to Lohikar for helping me with type paths - CarlenWhite
+	for(var/item_path in pack.contains) // Thanks to Lohikar for helping me with type paths - CarlenWhite
 		var/obj/item/stack/OB = item_path // Not always a stack, but will always have a name we can fetch.
 		var/name = initial(OB.name)
-		var/amount = sp.contains[item_path] || 1 // If it's just one item (has no number associated), fallback to 1.
+		var/amount = pack.contains[item_path] || 1 // If it's just one item (has no number associated), fallback to 1.
 		if(ispath(item_path, /obj/item/stack)) // And if it is a stack, consider the amount
 			amount *= initial(OB.amount)
 
@@ -349,9 +350,9 @@
 			"amount" = amount
 		)))
 
-	if(sp.contains.len == 0) // Handles the case where sp.contains is empty, e.g. for livecargo
+	if(!length(pack.contains)) // Handles the case where pack.contains is empty, e.g. for livecargo
 		contents_of_order.Add(list(list(
-			"name" = sp.containername,
+			"name" = pack.containername,
 			"amount" = 1
 		)))
 
@@ -395,7 +396,7 @@
 		return
 
 	var/t = ""
-	t += "<h3>[global.using_map.station_name] Supply Requisition Reciept</h3><hr>"
+	t += "<h3>[global.using_map.station_name] Supply Requisition Receipt</h3><hr>"
 	t += "INDEX: #[O.ordernum]<br>"
 	t += "REQUESTED BY: [O.orderedby]<br>"
 	t += "ASSIGNMENT: [O.orderedrank]<br>"

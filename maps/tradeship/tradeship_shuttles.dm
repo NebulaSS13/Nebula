@@ -15,7 +15,7 @@
 /datum/shuttle/autodock/overmap/rescue
 	name = "Rescue Shuttle"
 	shuttle_area = /area/ship/trade/shuttle/rescue
-	dock_target = "rescue_shuttle"
+	dock_target = "tradeship_rescue_shuttle"
 	current_location = "nav_tradeship_starboard_dock_rescue"
 
 //In case multiple shuttles can dock at a location,

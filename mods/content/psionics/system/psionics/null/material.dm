@@ -11,7 +11,7 @@
 	flags = MAT_FLAG_BRITTLE
 	opacity = 0.5
 	integrity = 30
-	shard_type = SHARD_SHARD
+	shard_name = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 80
 	weight = MAT_VALUE_HEAVY

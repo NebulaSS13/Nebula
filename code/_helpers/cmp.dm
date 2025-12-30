@@ -57,6 +57,8 @@
 
 /proc/cmp_qdel_item_time(datum/qdel_item/A, datum/qdel_item/B)
 	. = B.hard_delete_time - A.hard_delete_time
+	if (!. && B.qdels && A.qdels) // sort by time per call
+		. = (B.destroy_time / B.qdels) - (A.destroy_time / A.qdels)
 	if (!.)
 		. = B.destroy_time - A.destroy_time
 	if (!.)
@@ -83,6 +85,9 @@
 
 /proc/cmp_fusion_reaction_des(var/decl/fusion_reaction/A, var/decl/fusion_reaction/B)
 	return B.priority - A.priority
+
+/proc/cmp_human_examine_priority(decl/human_examination/a, decl/human_examination/b)
+	return a.priority - b.priority
 
 /proc/cmp_program(var/datum/computer_file/program/A, var/datum/computer_file/program/B)
 	return cmp_text_asc(A.filedesc, B.filedesc)
@@ -137,6 +142,9 @@
 /proc/cmp_decl_uid_asc(decl/a, decl/b)
 	return sorttext(b.uid, a.uid)
 
+/proc/cmp_decl_sort_value_asc(decl/a, decl/b)
+	return a.sort_order - b.sort_order
+
 /proc/cmp_inventory_slot_desc(datum/inventory_slot/a, datum/inventory_slot/b)
 	return b.quick_equip_priority - a.quick_equip_priority
 
@@ -155,3 +163,6 @@
 			return -1 // goes after
 		return cmp_skill_asc(a, GET_DECL(b.prerequisites[1]))
 	return cmp_name_or_type_asc(a, b)
+
+/proc/cmp_priority_list(list/A, list/B)
+	return A["priority"] - B["priority"]

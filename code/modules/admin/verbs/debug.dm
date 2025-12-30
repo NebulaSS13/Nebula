@@ -1,19 +1,3 @@
-/client/proc/Debug2()
-	set category = "Debug"
-	set name = "Debug-Game"
-	if(!check_rights(R_DEBUG))	return
-
-	if(Debug2)
-		Debug2 = 0
-		message_admins("[key_name(src)] toggled debugging off.")
-		log_admin("[key_name(src)] toggled debugging off.")
-	else
-		Debug2 = 1
-		message_admins("[key_name(src)] toggled debugging on.")
-		log_admin("[key_name(src)] toggled debugging on.")
-
-	SSstatistics.add_field_details("admin_verb","DG2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 // callproc moved to code/modules/admin/callproc
 
 
@@ -33,7 +17,7 @@
 	t += "<span class='warning'>Temperature: [env.temperature]</span>\n"
 	t += "<span class='warning'>Pressure: [env.return_pressure()]kPa</span>\n"
 	for(var/g in env.gas)
-		t += "<span class='notice'>[g]: [env.gas[g]] / [env.gas[g] * R_IDEAL_GAS_EQUATION * env.temperature / env.volume]kPa</span>\n"
+		t += "<span class='notice'>[g]: [env.gas[g]] / [env.gas[g] * R_IDEAL_GAS_EQUATION * env.temperature / env.total_volume]kPa</span>\n"
 
 	usr.show_message(t, 1)
 	SSstatistics.add_field_details("admin_verb","ASL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -80,9 +64,9 @@
 	set desc = "Specify a location to spawn a pAI device, then specify a key to play that pAI"
 
 	var/list/available = list()
-	for(var/mob/C in SSmobs.mob_list)
-		if(C.key)
-			available.Add(C)
+	for(var/mob/player in SSmobs.mob_list)
+		if(player.key)
+			available.Add(player)
 	var/mob/choice = input("Choose a player to play the pAI", "Spawn pAI") in available
 	if(!choice)
 		return 0
@@ -204,7 +188,7 @@
 		if(!(A.type in areas_all))
 			areas_all.Add(A.type)
 
-	for(var/obj/machinery/power/apc/APC in SSmachines.machinery)
+	for(var/obj/machinery/apc/APC in SSmachines.machinery)
 		var/area/A = get_area(APC)
 		if(!(A.type in areas_with_APC))
 			areas_with_APC.Add(A.type)
@@ -441,10 +425,9 @@
 	set name = "Spawn Material Stack"
 	if(!check_rights(R_DEBUG)) return
 
-	var/decl/material/material = input("Select material to spawn") as null|anything in decls_repository.get_decls_of_subtype_unassociated(/decl/material)
-	if(!istype(material))
-		return
-	material.create_object(get_turf(mob), 50)
+	var/decl/material/spawn_material = input("Select material to spawn") as null|anything in decls_repository.get_decls_of_subtype_unassociated(/decl/material)
+	if(istype(spawn_material))
+		spawn_material.create_object(get_turf(mob), 50)
 
 /client/proc/force_ghost_trap_trigger()
 	set category = "Debug"
@@ -511,6 +494,8 @@
 		. += "<li>qdel() Count: [I.qdels]</li>"
 		if(I.early_destroy)
 			. += "<li>Early destroy count: [I.early_destroy]</li>"
+		if(I.qdels)
+			. += "<li>Average Destroy() Cost: [I.destroy_time / I.qdels]ms/call</li>"
 		. += "<li>Destroy() Cost: [I.destroy_time]ms</li>"
 		if(I.hard_deletes)
 			. += "<li>Total Hard Deletes [I.hard_deletes]</li>"
@@ -526,3 +511,26 @@
 	. += "</ol>"
 
 	show_browser(usr, JOINTEXT(.), "window=dellog")
+
+/client/proc/toggle_browser_inspect()
+	set category = "Debug"
+	set name = "Toggle Browser Inspect"
+
+	#if DM_VERSION >= 516
+
+	var/browser_options = winget(src, null, "browser-options")
+
+	if(findtext(browser_options, "devtools"))
+		// Disable the dev tools.
+		winset(src, null, list("browser-options" = "-devtools"))
+		message_admins("[key_name_admin(usr)] has disabled Browser Inspection.")
+	else
+		// Enable the dev tools.
+		winset(src, null, list("browser-options" = "+devtools"))
+		message_admins("[key_name_admin(usr)] has enabled Browser Inspection.")
+
+	#else
+
+	alert("Browser Inspection is not supported in this version of BYOND, please update to 516 or later.")
+
+	#endif

@@ -20,7 +20,7 @@ var/global/list/blood_types_by_name
 	var/name
 	var/list/antigens
 	var/random_weighting = 1
-	var/antigen_category = SPECIES_MONKEY // Rhesus factor oh no
+	var/antigen_category = "Primate" // Rhesus factor oh no
 
 	var/splatter_name =   "blood"
 	var/splatter_desc =   "It's some blood. That's not supposed to be there."

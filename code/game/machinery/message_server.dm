@@ -135,11 +135,11 @@ var/global/list/message_servers = list()
 	update_icon()
 	return TRUE
 
-/obj/machinery/network/message_server/attackby(obj/item/O, mob/user)
+/obj/machinery/network/message_server/attackby(obj/item/used_item, mob/user)
 	if (active && !(stat & (BROKEN|NOPOWER)) && (spamfilter_limit < MESSAGE_SERVER_DEFAULT_SPAM_LIMIT*2) && \
-		istype(O,/obj/item/stock_parts/circuitboard/message_monitor))
+		istype(used_item,/obj/item/stock_parts/circuitboard/message_monitor))
 		spamfilter_limit += round(MESSAGE_SERVER_DEFAULT_SPAM_LIMIT / 2)
-		qdel(O)
+		qdel(used_item)
 		to_chat(user, "You install additional memory and processors into \the [src]. Its filtering capabilities been enhanced.")
 		return TRUE
 	else

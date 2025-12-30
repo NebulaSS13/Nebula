@@ -5,7 +5,7 @@
 		STAT_PARA
 	)
 
-/mob/living/exosuit/set_status(condition, amount)
+/mob/living/exosuit/set_status_condition(condition, amount)
 	. = !(condition in ignore_status_conditions) && ..()
 
 /mob/living/exosuit/getOxyLoss()

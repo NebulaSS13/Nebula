@@ -115,11 +115,11 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/windoor_assembly/attackby(obj/item/W, mob/user)
+/obj/structure/windoor_assembly/attackby(obj/item/used_item, mob/user)
 	. = ..()
 	if(!. && anchored)
-		if(!secure && istype(W, /obj/item/stack/material/rods))
-			var/obj/item/stack/material/rods/R = W
+		if(!secure && istype(used_item, /obj/item/stack/material/rods))
+			var/obj/item/stack/material/rods/R = used_item
 			if(R.get_amount() < 4)
 				to_chat(user, SPAN_WARNING("You need more rods to do this."))
 				return TRUE
@@ -128,14 +128,14 @@
 				visible_message(SPAN_NOTICE("\The [user] finishes reinforcing \the [src]."))
 				secure = TRUE
 			. = TRUE
-		else if(wired && !electronics && istype(W, /obj/item/stock_parts/circuitboard/airlock_electronics/windoor))
+		else if(wired && !electronics && istype(used_item, /obj/item/stock_parts/circuitboard/airlock_electronics/windoor))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
-			visible_message(SPAN_NOTICE("\The [user] starts installing \the [W] into \the [src]."))
-			if(do_after(user, 4 SECONDS, src) && wired && !electronics && anchored && !QDELETED(src) && user.try_unequip(W, src))
-				visible_message(SPAN_NOTICE("\The [user] finishes installing \the [W] into \the [src]."))
-				electronics = W
+			visible_message(SPAN_NOTICE("\The [user] starts installing \the [used_item] into \the [src]."))
+			if(do_after(user, 4 SECONDS, src) && wired && !electronics && anchored && !QDELETED(src) && user.try_unequip(used_item, src))
+				visible_message(SPAN_NOTICE("\The [user] finishes installing \the [used_item] into \the [src]."))
+				electronics = used_item
 			else
-				W.dropInto(loc)
+				used_item.dropInto(loc)
 			. = TRUE
 	update_icon()
 	update_name()

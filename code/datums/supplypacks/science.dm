@@ -4,7 +4,7 @@
 /decl/hierarchy/supply_pack/science/chemistry_dispenser
 	name = "Equipment - Chemical Reagent dispenser"
 	contains = list(
-			/obj/machinery/chemical_dispenser{anchored = FALSE}
+			/obj/machinery/chemical_dispenser/unanchored
 		)
 	containertype = /obj/structure/largecrate
 	containername = "reagent dispenser crate"
@@ -66,3 +66,12 @@
 	name = "Gear - Illumination grenades"
 	contains = list(/obj/item/grenade/light = 8)
 	containername = "illumination grenade crate"
+
+/decl/hierarchy/supply_pack/science/stasis_cages
+	name          = "Stasis Cage"
+	contains      = list(
+		/obj/structure/stasis_cage = 1
+	)
+	containertype = /obj/structure/closet/crate/large
+	containername = "stasis cage crate"
+	access        = access_research

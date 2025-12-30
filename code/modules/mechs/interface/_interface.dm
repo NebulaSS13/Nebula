@@ -23,8 +23,7 @@
 /obj/screen/zone_selector/exosuit
 	requires_ui_style = FALSE
 
-/mob/living/exosuit/InitializeHud()
-	zone_sel = new /obj/screen/zone_selector/exosuit(null, src)
+/mob/living/exosuit/initialize_hud()
 	if(!LAZYLEN(hud_elements))
 		var/i = 1
 		for(var/hardpoint in hardpoints)
@@ -73,8 +72,8 @@
 	handle_hud_icons_health()
 
 	var/maptext_string = "CHECK<br>POWER"
-	var/obj/item/cell/C = get_cell()
-	if(istype(C))
+	var/obj/item/cell/cell = get_cell()
+	if(istype(cell))
 		maptext_string = "[round(get_cell().charge)]/[round(get_cell().maxcharge)]"
 	hud_power.maptext = STYLE_SMALLFONTS_OUTLINE("<center>[maptext_string]</center>", 5, COLOR_WHITE, COLOR_BLACK)
 	refresh_hud()

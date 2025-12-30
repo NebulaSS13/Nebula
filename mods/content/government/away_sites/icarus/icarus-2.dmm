@@ -38,7 +38,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "al" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled,
@@ -115,7 +115,7 @@
 /turf/floor/tiled,
 /area/icarus/open)
 "aA" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/abstract/landmark/corpse/bridgeofficer,
@@ -127,7 +127,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "aD" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/floor/tiled,
@@ -180,7 +180,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "aO" = (
-/obj/structure/bed/chair/comfy/captain{
+/obj/structure/chair/comfy/captain{
 	dir = 8
 	},
 /turf/floor/tiled,
@@ -199,7 +199,7 @@
 /turf/floor/tiled/dark,
 /area/icarus/vessel)
 "aR" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/tiled,
@@ -341,12 +341,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/floor/bluegrid,
 /area/icarus/vessel)
-"bl" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/floor/bluegrid,
-/area/icarus/vessel)
 "bm" = (
 /obj/machinery/light{
 	dir = 4;
@@ -478,22 +472,22 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "bH" = (
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 4
 	},
 /turf/floor/tiled,
 /area/icarus/vessel)
 "bI" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/loot,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "bJ" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "bK" = (
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 8
 	},
 /turf/floor/tiled,
@@ -572,7 +566,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "ca" = (
-/obj/structure/bed/chair/comfy/brown,
+/obj/structure/chair/comfy/brown,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cb" = (
@@ -604,7 +598,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cf" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/abstract/landmark/corpse/engineer,
@@ -647,7 +641,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cl" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/backpack/captain,
 /obj/machinery/alarm{
 	alarm_id = "xenobio3_alarm";
@@ -657,7 +651,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cm" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/paper/icarus/crew_roster,
 /obj/item/folder/blue,
 /turf/floor/tiled,
@@ -751,7 +745,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cA" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/chems/drinks/bottle/whiskey,
 /turf/floor/tiled,
 /area/icarus/vessel)
@@ -768,12 +762,12 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cD" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/toy/ship_model,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cE" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/action_figure,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
@@ -903,7 +897,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cW" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/disk/secret_project/science,
 /turf/floor/tiled,
 /area/icarus/vessel)
@@ -1006,7 +1000,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "dl" = (
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 4
 	},
 /obj/abstract/landmark/corpse/scientist,
@@ -1075,7 +1069,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "du" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/flashlight/lamp,
 /turf/floor/tiled,
 /area/icarus/vessel)
@@ -1101,7 +1095,7 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "dz" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "dA" = (
@@ -1377,11 +1371,6 @@
 	unique_merge_identifier = "icarus"
 	},
 /area/icarus/vessel)
-"es" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
-/area/icarus/vessel)
 "et" = (
 /obj/structure/shuttle/window,
 /turf/floor/shuttle/white,
@@ -1423,13 +1412,8 @@
 	},
 /turf/floor/shuttle/white,
 /area/icarus/vessel)
-"eA" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
-/area/icarus/vessel)
 "eB" = (
-/obj/structure/bed/chair,
+/obj/structure/chair,
 /turf/floor/shuttle/white,
 /area/icarus/vessel)
 "eC" = (
@@ -1475,7 +1459,7 @@
 /turf/floor/shuttle/white,
 /area/icarus/open)
 "eK" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/shuttle/white,
@@ -1521,18 +1505,13 @@
 /turf/floor/plating,
 /area/icarus/vessel)
 "eS" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/floor/shuttle/white,
 /area/icarus/vessel)
-"eT" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
-/area/icarus/vessel)
 "eU" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/shuttle/white,
@@ -1541,27 +1520,12 @@
 /obj/machinery/light/small,
 /turf/floor/shuttle/white,
 /area/icarus/vessel)
-"eW" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
-/area/icarus/vessel)
 "eX" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
 /turf/floor/shuttle/white,
 /area/icarus/vessel)
-"eY" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
-/area/icarus/open)
-"eZ" = (
-/turf/wall/shuttle{
-	unique_merge_identifier = "icarus"
-	},
-/area/icarus/open)
 "fa" = (
 /obj/structure/cable{
 	icon_state = "1-4"
@@ -20356,7 +20320,7 @@ er
 ey
 eJ
 ey
-eY
+eq
 fd
 fi
 fo
@@ -20469,7 +20433,7 @@ ao
 ao
 ap
 aZ
-bl
+aZ
 bt
 ap
 bU
@@ -20558,7 +20522,7 @@ er
 ez
 eK
 eC
-eY
+eq
 fd
 fi
 fo
@@ -20756,11 +20720,11 @@ ee
 bX
 bX
 ap
-es
-eA
+er
+er
 eL
-eT
-eZ
+er
+eq
 fd
 fi
 fo
@@ -21568,7 +21532,7 @@ er
 eC
 eC
 eV
-eY
+eq
 fd
 fi
 fo
@@ -21770,7 +21734,7 @@ er
 eD
 eC
 eC
-eY
+eq
 fd
 fi
 fo
@@ -21972,7 +21936,7 @@ er
 eD
 eC
 eH
-eY
+eq
 fd
 fi
 fo
@@ -22174,7 +22138,7 @@ er
 eE
 eC
 eG
-eY
+eq
 fd
 fi
 fo
@@ -22373,9 +22337,9 @@ av
 ak
 ap
 eu
-eA
+er
 eM
-eW
+er
 eu
 ep
 fj
@@ -23989,9 +23953,9 @@ ag
 ag
 ap
 ew
-eA
+er
 eM
-eT
+er
 fc
 ep
 fl
@@ -24194,7 +24158,7 @@ er
 eG
 eC
 eD
-eY
+eq
 fd
 fm
 fo
@@ -24396,7 +24360,7 @@ er
 eH
 eC
 eD
-eY
+eq
 fd
 fm
 fo
@@ -24598,7 +24562,7 @@ er
 eC
 eC
 eE
-eY
+eq
 fd
 fm
 fo
@@ -24800,7 +24764,7 @@ er
 eI
 eC
 eC
-eY
+eq
 fd
 fm
 fo
@@ -25604,11 +25568,11 @@ cL
 ag
 ag
 ap
-es
-eA
+er
+er
 eL
-eT
-eZ
+er
+eq
 fd
 fm
 fo
@@ -25810,7 +25774,7 @@ er
 eC
 eS
 eX
-eY
+eq
 fd
 fm
 fo
@@ -26012,7 +25976,7 @@ er
 ey
 kT
 ey
-eY
+eq
 fd
 fm
 fo

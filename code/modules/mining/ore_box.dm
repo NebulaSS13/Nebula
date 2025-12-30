@@ -4,10 +4,10 @@
 /obj/structure/ore_box
 	name                   = "ore box"
 	desc                   = "A heavy box used for storing ore."
-	icon                   = 'icons/obj/mining.dmi'
-	icon_state             = "orebox0"
+	icon                   = 'icons/obj/structures/ore_box.dmi'
+	icon_state             = ICON_STATE_WORLD
 	density                = TRUE
-	material               = /decl/material/solid/organic/wood
+	material               = /decl/material/solid/organic/wood/oak
 	atom_flags             = ATOM_FLAG_CLIMBABLE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	///Maximum amount of ores of all types that can be stored in the box.
@@ -26,21 +26,21 @@
 	to_chat(user, SPAN_NOTICE("You grab a random ore pile from \the [src]."))
 	return TRUE
 
-/obj/structure/ore_box/attackby(obj/item/W, mob/user)
-	if (istype(W, /obj/item/stack/material/ore))
-		return insert_ore(W, user)
-	if(W.storage)
+/obj/structure/ore_box/attackby(obj/item/used_item, mob/user)
+	if (istype(used_item, /obj/item/stack/material/ore))
+		return insert_ore(used_item, user)
+	if(used_item.storage)
 		var/added_ore = FALSE
-		W.storage.hide_from(usr)
-		for(var/obj/item/stack/material/ore/O in W.storage.get_contents())
+		used_item.storage.hide_from(user)
+		for(var/obj/item/stack/material/ore/O in used_item.storage.get_contents())
 			if(total_ores >= maximum_ores)
 				break
-			W.storage.remove_from_storage(user, O, src, TRUE)
+			used_item.storage.remove_from_storage(user, O, src, TRUE)
 			insert_ore(O)
 			added_ore = TRUE
 		if(added_ore)
-			W.storage.finish_bulk_removal()
-			to_chat(user, SPAN_NOTICE("You empty \the [W] into \the [src]."))
+			used_item.storage.finish_bulk_removal()
+			to_chat(user, SPAN_NOTICE("You empty \the [used_item] into \the [src]."))
 			return TRUE
 	return ..()
 
@@ -116,18 +116,18 @@
 	total_ores = 0
 	return TRUE
 
-/obj/structure/ore_box/examine(mob/user, distance)
+/obj/structure/ore_box/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance > 1) //Can only check the contents of ore boxes if you can physically reach them.
 		return
 
 	add_fingerprint(user)
 	if(total_ores <= 0)
-		to_chat(user, "It is empty.")
+		. += "It is empty."
 		return
-	to_chat(user, "It holds:")
+	. += "It holds:"
 	for(var/ore in stored_ore)
-		to_chat(user, "- [stored_ore[ore]] [ore]")
+		. += "- [stored_ore[ore]] [ore]"
 
 /obj/structure/ore_box/explosion_act(severity)
 	. = ..()
@@ -148,6 +148,7 @@
 /decl/interaction_handler/empty/ore_box
 	name = "Empty Box"
 	expected_target_type = /obj/structure/ore_box
+	examine_desc = "empty $TARGET_THEM$"
 
 /decl/interaction_handler/empty/ore_box/is_possible(obj/structure/ore_box/target, mob/user, obj/item/prop)
 	return ..() && target.total_ores > 0

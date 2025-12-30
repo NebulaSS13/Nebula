@@ -87,22 +87,20 @@
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/machinery/atmospherics/unary/heater/Topic(href, href_list)
-	if(..())
-		return 1
+/obj/machinery/atmospherics/unary/heater/OnTopic(mob/user, href_list)
+	if((. = ..()))
+		return
 	if(href_list["toggleStatus"])
 		update_use_power(!use_power)
+		. = TOPIC_REFRESH
 	if(href_list["temp"])
 		var/amount = text2num(href_list["temp"])
-		if(amount > 0)
-			set_temperature = min(set_temperature + amount, max_temperature)
-		else
-			set_temperature = max(set_temperature + amount, 0)
+		set_temperature = clamp(set_temperature + amount, 0, max_temperature)
+		. = TOPIC_REFRESH
 	if(href_list["setPower"]) //setting power to 0 is redundant anyways
 		var/new_setting = clamp(text2num(href_list["setPower"]), 0, 100)
 		set_power_level(new_setting)
-
-	add_fingerprint(usr)
+		. = TOPIC_REFRESH
 
 //upgrading parts
 /obj/machinery/atmospherics/unary/heater/RefreshParts()
@@ -112,14 +110,14 @@
 
 	max_power_rating = initial(max_power_rating) * cap_rating / 2
 	max_temperature = max(initial(max_temperature) - T20C, 0) * ((bin_rating * 4 + cap_rating) / 5) + T20C
-	air_contents.volume = max(initial(internal_volume) - 200, 0) + 200 * bin_rating
+	air_contents.total_volume = max(initial(internal_volume) - 200, 0) + 200 * bin_rating
 	set_power_level(power_setting)
 
 /obj/machinery/atmospherics/unary/heater/proc/set_power_level(var/new_power_setting)
 	power_setting = new_power_setting
 	power_rating = max_power_rating * (power_setting/100)
 
-/obj/machinery/atmospherics/unary/heater/examine(mob/user)
+/obj/machinery/atmospherics/unary/heater/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(panel_open)
-		to_chat(user, "The maintenance hatch is open.")
+		. += "The maintenance hatch is open."

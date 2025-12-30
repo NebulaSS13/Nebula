@@ -107,12 +107,16 @@ steam.start() -- spawns the effect
 /obj/effect/sparks/struck
 	spark_sound = "light_bic"
 
+/obj/effect/sparks/silent
+	spark_sound = null
+
 /obj/effect/sparks/Initialize()
 	. = ..()
 	// this is 2 seconds so that it doesn't appear to freeze after its last move, which ends up making it look like timers are broken
 	// if you change the number of or delay between moves in spread(), this may need to be changed
 	QDEL_IN(src, 2 SECONDS)
-	playsound(loc, spark_sound, 100, 1)
+	if(spark_sound)
+		playsound(loc, spark_sound, 100, 1)
 	set_light(lit_light_range, lit_light_power, lit_light_color)
 	if(isturf(loc))
 		var/turf/T = loc
@@ -139,6 +143,9 @@ steam.start() -- spawns the effect
 
 /datum/effect/effect/system/spark_spread
 	var/spark_type = /obj/effect/sparks
+
+/datum/effect/effect/system/spark_spread/silent
+	spark_type = /obj/effect/sparks/silent
 
 /datum/effect/effect/system/spark_spread/non_electrical
 	spark_type = /obj/effect/sparks/struck
@@ -237,7 +244,7 @@ steam.start() -- spawns the effect
 	time_to_live = 200
 
 /obj/effect/effect/smoke/bad/Move()
-	..()
+	. = ..()
 	for(var/mob/living/M in get_turf(src))
 		affect_mob(M)
 
@@ -261,7 +268,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/sleepy
 
 /obj/effect/effect/smoke/sleepy/Move()
-	..()
+	. = ..()
 	for(var/mob/living/M in get_turf(src))
 		affect_mob(M)
 
@@ -283,7 +290,7 @@ steam.start() -- spawns the effect
 	icon_state = "mustard"
 
 /obj/effect/effect/smoke/mustard/Move()
-	..()
+	. = ..()
 	for(var/mob/living/M in get_turf(src))
 		affect_mob(M)
 
@@ -378,31 +385,30 @@ steam.start() -- spawns the effect
 
 
 /datum/effect/effect/system/trail/start()
-	if(!src.on)
-		src.on = 1
-		src.processing = 1
-	if(src.processing)
-		src.processing = 0
-		spawn(0)
-			var/turf/T = get_turf(src.holder)
-			if(T != src.oldposition)
-				if(is_type_in_list(T, specific_turfs) && (!max_number || number < max_number))
-					var/obj/effect/effect/trail = new trail_type(oldposition)
-					src.oldposition = T
-					effect(trail)
-					number++
-					spawn( duration_of_effect )
-						number--
-						qdel(trail)
-				spawn(2)
-					if(src.on)
-						src.processing = 1
-						src.start()
-			else
-				spawn(2)
-					if(src.on)
-						src.processing = 1
-						src.start()
+	set waitfor = FALSE
+	if(!on)
+		on = TRUE
+		processing = TRUE
+	if(processing)
+		processing = FALSE
+		var/turf/our_turf = get_turf(holder)
+		if(our_turf != oldposition)
+			if(is_type_in_list(our_turf, specific_turfs) && (!max_number || number < max_number))
+				var/obj/effect/effect/trail = new trail_type(oldposition)
+				oldposition = our_turf
+				effect(trail)
+				number++
+				addtimer(CALLBACK(src, PROC_REF(end_trail_effect), trail), duration_of_effect)
+		addtimer(CALLBACK(src, PROC_REF(try_start)), 0.2 SECONDS)
+
+/datum/effect/effect/system/trail/proc/try_start()
+	if(on)
+		processing = TRUE
+		start()
+
+/datum/effect/effect/system/trail/proc/end_trail_effect(obj/effect/effect/trail)
+	number--
+	qdel(trail)
 
 /datum/effect/effect/system/trail/proc/stop()
 	src.processing = 0

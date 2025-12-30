@@ -68,26 +68,26 @@
 	flick("portable_analyzer_load", src)
 	icon_state = "portable_analyzer_full"
 
-/obj/item/portable_destructive_analyzer/examine(mob/user, distance)
+/obj/item/portable_destructive_analyzer/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
 		if(loaded_item)
-			to_chat(user, "It is holding \the [loaded_item].")
-		to_chat(user, "It has the following data saved:")
+			. += "It is holding \the [loaded_item]."
+		. += "It has the following data saved:"
 		for(var/tech in saved_tech_levels)
-			to_chat(user, "[tech]: [saved_tech_levels[tech]]")
+			. += "[tech]: [saved_tech_levels[tech]]"
 
 //This is used to unlock other borg covers.
 /obj/item/card/robot //This is not a child of id cards, as to avoid dumb typechecks on computers.
 	name = "access code transmission device"
-	icon_state = "robot_base"
+	icon_state = "emag"
 	desc = "A circuit grafted onto the bottom of an ID card.  It is used to transmit access codes into other robot chassis, \
 	allowing you to lock and unlock other robots' panels."
 
 //A harvest item for serviceborgs.
 /obj/item/robot_harvester
 	name = "auto harvester"
-	desc = "A hand-held harvest tool that resembles a sickle.  It uses energy to cut plant matter very efficently."
+	desc = "A hand-held harvest tool that resembles a sickle.  It uses energy to cut plant matter very efficiently."
 	icon = 'icons/obj/items/borg_module/autoharvester.dmi'
 	icon_state = "autoharvester"
 	max_health = ITEM_HEALTH_NO_DAMAGE
@@ -192,7 +192,7 @@
 /obj/item/borg/combat/shield
 	name = "personal shielding"
 	desc = "A powerful experimental module that turns aside or absorbs incoming attacks at the cost of charge."
-	icon = 'icons/obj/decals.dmi'
+	icon = 'icons/obj/signs/warnings.dmi'
 	icon_state = "shock"
 	var/shield_level = 0.5 //Percentage of damage absorbed by the shield.
 
@@ -208,7 +208,7 @@
 /obj/item/borg/combat/mobility
 	name = "mobility module"
 	desc = "By retracting limbs and tucking in its head, a combat android can roll at high speeds."
-	icon = 'icons/obj/decals.dmi'
+	icon = 'icons/obj/signs/warnings.dmi'
 	icon_state = "shock"
 
 /obj/item/inflatable_dispenser
@@ -233,14 +233,14 @@
 	max_doors = 5
 	max_health = ITEM_HEALTH_NO_DAMAGE
 
-/obj/item/inflatable_dispenser/examine(mob/user)
+/obj/item/inflatable_dispenser/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It has [stored_walls] wall segment\s and [stored_doors] door segment\s stored.")
-	to_chat(user, "It is set to deploy [mode ? "doors" : "walls"]")
+	. += "It has [stored_walls] wall segment\s and [stored_doors] door segment\s stored."
+	. += "It is set to deploy [mode ? "doors" : "walls"]"
 
-/obj/item/inflatable_dispenser/attack_self()
+/obj/item/inflatable_dispenser/attack_self(mob/user)
 	mode = !mode
-	to_chat(usr, "You set \the [src] to deploy [mode ? "doors" : "walls"].")
+	to_chat(user, "You set \the [src] to deploy [mode ? "doors" : "walls"].")
 
 /obj/item/inflatable_dispenser/afterattack(var/atom/A, var/mob/user)
 	..(A, user)
@@ -296,7 +296,7 @@
 	if(istype(A, /obj/item/inflatable))
 		if(istype(A, /obj/item/inflatable/door))
 			if(stored_doors >= max_doors)
-				to_chat(usr, "\The [src] is full!")
+				to_chat(user, "\The [src] is full!")
 				return
 			stored_doors++
 			qdel(A)
@@ -315,7 +315,7 @@
 /obj/item/chems/spray/cleaner/drone
 	name = "space cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
-	volume = 150
+	chem_volume = 150
 
 /obj/item/robot_rack
 	name = "a generic robot rack"
@@ -326,9 +326,9 @@
 	var/capacity = 1                   //How many objects can be held.
 	var/list/obj/item/held = list()    //What is being held.
 
-/obj/item/robot_rack/examine(mob/user)
+/obj/item/robot_rack/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It can hold up to [capacity] item\s.")
+	. += "It can hold up to [capacity] item\s."
 
 /obj/item/robot_rack/Initialize(mapload, starting_objects = 0)
 	. = ..()
@@ -339,12 +339,12 @@
 	if(!length(held))
 		to_chat(user, "<span class='notice'>The rack is empty.</span>")
 		return
-	var/obj/item/R = held[length(held)]
-	R.dropInto(loc)
-	held -= R
-	R.attack_self(user) // deploy it
-	to_chat(user, "<span class='notice'>You deploy [R].</span>")
-	R.add_fingerprint(user)
+	var/obj/item/rack = held[length(held)]
+	rack.dropInto(loc)
+	held -= rack
+	rack.attack_self(user) // deploy it
+	to_chat(user, "<span class='notice'>You deploy [rack].</span>")
+	rack.add_fingerprint(user)
 
 /obj/item/robot_rack/resolve_attackby(obj/O, mob/user, click_params)
 	if(istype(O, object_type))
@@ -407,8 +407,8 @@
 	. = ..()
 
 /obj/item/bioreactor/Process()
-	var/mob/living/silicon/robot/R = loc
-	if(!istype(R) || !R.cell || R.cell.fully_charged() || !contents.len)
+	var/mob/living/silicon/robot/robot = loc
+	if(!istype(robot) || !robot.cell || robot.cell.fully_charged() || !contents.len)
 		return
 
 	var/generating_power
@@ -435,4 +435,4 @@
 		qdel(using_item)
 
 	if(generating_power)
-		R.cell.give(generating_power * CELLRATE)
+		robot.cell.give(generating_power * CELLRATE)

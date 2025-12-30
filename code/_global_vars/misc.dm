@@ -1,1 +1,0 @@
-var/global/list/all_observable_events = list()

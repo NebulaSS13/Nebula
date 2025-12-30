@@ -2,7 +2,7 @@
  *
  * 1. AI should not implement any bespoke mob logic within the proc it uses
  *    to trigger or respond to game events. It should share entrypoints with
- *    action performed by players and should respect the same intents, etc.
+ *    actions performed by players and should respect the same intents, etc.
  *    that players have to manage, through the same procs players use. This
  *    should mean that players can be slotted into the pilot seat of any mob,
  *    suspending AI behavior, and should then be able to freely use any of the
@@ -62,6 +62,26 @@
 	/// Aggressive AI var; defined here for reference without casting.
 	var/try_destroy_surroundings = FALSE
 
+	/// Reference to the atom we are targetting.
+	var/weakref/target_ref
+
+	/// Current path for A* pathfinding.
+	var/list/executing_path
+	/// A counter for times we have failed to progress along our path.
+	var/path_frustration = 0
+	/// A list of any obstacles we should path around in future.
+	var/list/path_obstacles = null
+
+	/// Radius of target scan area when looking for valid targets. Set to 0 to disable target scanning.
+	var/target_scan_distance = 0
+	/// Time tracker for next target scan.
+	var/next_target_scan_time
+	/// How long minimum between scans.
+	var/target_scan_delay = 1 SECOND
+
+	/// Last mob to attempt to handle this mob.
+	var/weakref/last_handler
+
 /datum/mob_controller/New(var/mob/living/target_body)
 	body = target_body
 	if(expected_type && !istype(body, expected_type))
@@ -71,6 +91,7 @@
 /datum/mob_controller/Destroy()
 	LAZYCLEARLIST(_friends)
 	LAZYCLEARLIST(_enemies)
+	set_target(null)
 	if(is_processing)
 		STOP_PROCESSING(SSmob_ai, src)
 	if(body)
@@ -78,12 +99,6 @@
 			body.ai = null
 		body = null
 	. = ..()
-
-/datum/mob_controller/proc/get_automove_target(datum/automove_metadata/metadata)
-	return null
-
-/datum/mob_controller/proc/can_do_automated_move(variant_move_delay)
-	return body && !body.client
 
 /datum/mob_controller/proc/can_process()
 	if(!body || !body.loc || ((body.client || body.mind) && !(body.status_flags & ENABLE_AI)))
@@ -111,13 +126,13 @@
 // This is the place to actually do work in the AI.
 /datum/mob_controller/proc/do_process()
 	SHOULD_CALL_PARENT(TRUE)
-	if(!QDELETED(body) && !QDELETED(src))
+	if(get_stance() != STANCE_BUSY && !QDELETED(body) && !QDELETED(src))
 		if(!body.stat)
 			try_unbuckle()
 			try_wander()
 			try_bark()
 			// Recheck in case we walked into lava or something during wandering.
-			return !QDELETED(body) && !QDELETED(src)
+			return get_stance() != STANCE_BUSY && !QDELETED(body) && !QDELETED(src)
 		return TRUE
 	return FALSE
 
@@ -131,16 +146,6 @@
 			body.buckled.unbuckle_mob(body)
 		else if(prob(25))
 			body.visible_message(SPAN_WARNING("\The [body] struggles against \the [body.buckled]!"))
-
-
-/datum/mob_controller/proc/get_activity()
-	return current_activity
-
-/datum/mob_controller/proc/set_activity(new_activity)
-	if(current_activity != new_activity)
-		current_activity = new_activity
-		return TRUE
-	return FALSE
 
 // The mob will periodically sit up or step 1 tile in a random direction.
 /datum/mob_controller/proc/try_wander()
@@ -185,132 +190,16 @@
 		else if(ispath(do_emote, /decl/emote))
 			body.emote(do_emote)
 
-/datum/mob_controller/proc/get_target()
-	return null
-
-/datum/mob_controller/proc/set_target(atom/new_target)
-	return
-
-/datum/mob_controller/proc/find_target()
-	return
-
-/datum/mob_controller/proc/valid_target(var/atom/A)
-	return
-
-/datum/mob_controller/proc/move_to_target(var/move_only = FALSE)
-	return
-
-/datum/mob_controller/proc/stop_wandering()
-	stop_wander = TRUE
-
-/datum/mob_controller/proc/resume_wandering()
-	stop_wander = FALSE
-
-/datum/mob_controller/proc/set_stance(new_stance)
-	if(stance != new_stance)
-		stance = new_stance
-		return TRUE
-	return FALSE
-
-/datum/mob_controller/proc/get_stance()
-	return stance
-
-/datum/mob_controller/proc/list_targets(var/dist = 7)
-	return
-
-/datum/mob_controller/proc/open_fire()
-	return
-
-/datum/mob_controller/proc/startle()
-	if(QDELETED(body) || body.stat != UNCONSCIOUS)
-		return
-	body.set_stat(CONSCIOUS)
-	if(body.current_posture?.prone)
-		body.set_posture(/decl/posture/standing)
-
-/datum/mob_controller/proc/retaliate(atom/source)
-	SHOULD_CALL_PARENT(TRUE)
-	if(!istype(body) || body.stat == DEAD)
-		return FALSE
-	startle()
-	if(isliving(source))
-		remove_friend(source)
-	return TRUE
-
 /datum/mob_controller/proc/destroy_surroundings()
-	return
-
-/datum/mob_controller/proc/lose_target()
-	return
-
-/datum/mob_controller/proc/lost_target()
 	return
 
 /datum/mob_controller/proc/handle_death(gibbed)
 	return
 
-/datum/mob_controller/proc/pacify(mob/user)
-	lose_target()
-	add_friend(user)
-
-// General-purpose memorise proc, used by /commanded
-/datum/mob_controller/proc/memorise(mob/speaker, message)
-	return
-
-// General-purpose memory checking proc, used by /faithful_hound
-/datum/mob_controller/proc/check_memory(mob/speaker, message)
-	return FALSE
-
 /// General-purpose scooping reaction proc, used by /passive.
 /// Returns TRUE if the scoop should proceed, FALSE if it should be canceled.
 /datum/mob_controller/proc/scooped_by(mob/initiator)
 	return TRUE
-
-// Enemy tracking - used on /aggressive
-/datum/mob_controller/proc/get_enemies()
-	return _enemies
-
-/datum/mob_controller/proc/add_enemy(mob/enemy)
-	if(istype(enemy))
-		LAZYDISTINCTADD(_enemies, weakref(enemy))
-
-/datum/mob_controller/proc/add_enemies(list/enemies)
-	for(var/thing in enemies)
-		if(ismob(thing))
-			add_friend(thing)
-		else if(istype(thing, /weakref))
-			LAZYDISTINCTADD(_enemies, thing)
-
-/datum/mob_controller/proc/remove_enemy(mob/enemy)
-	LAZYREMOVE(_enemies, weakref(enemy))
-
-/datum/mob_controller/proc/set_enemies(list/new_enemies)
-	_enemies = new_enemies
-
-/datum/mob_controller/proc/is_enemy(mob/enemy)
-	. = istype(enemy) && LAZYLEN(_enemies) && (weakref(enemy) in _enemies)
-
-/datum/mob_controller/proc/clear_enemies()
-	LAZYCLEARLIST(_enemies)
-
-// Friend tracking - used on /aggressive.
-/datum/mob_controller/proc/get_friends()
-	return _friends
-
-/datum/mob_controller/proc/add_friend(mob/friend)
-	if(istype(friend))
-		LAZYDISTINCTADD(_friends, weakref(friend))
-		return TRUE
-	return FALSE
-
-/datum/mob_controller/proc/remove_friend(mob/friend)
-	LAZYREMOVE(_friends, weakref(friend))
-
-/datum/mob_controller/proc/set_friends(list/new_friends)
-	_friends = new_friends
-
-/datum/mob_controller/proc/is_friend(mob/friend)
-	. = istype(friend) && LAZYLEN(_friends) && (weakref(friend) in _friends)
 
 // By default, randomize the target area a bit to make armor/combat
 // a bit more dynamic (and avoid constant organ damage to the chest)
@@ -330,3 +219,20 @@
 		return
 	if(spooked_by_grab && !is_friend(scary_grabber))
 		retaliate(scary_grabber)
+
+// General stubs for when another mob has directed this mob to attack.
+/datum/mob_controller/proc/check_handler_can_order(mob/handler, atom/target, intent_flags)
+	return is_friend(handler)
+
+/datum/mob_controller/proc/process_handler_target(mob/handler, atom/target, intent_flags)
+	if(!check_handler_can_order(handler, target, intent_flags))
+		return process_handler_failure(handler, target)
+	last_handler = weakref(handler)
+	return TRUE
+
+/datum/mob_controller/proc/process_handler_failure(mob/handler, atom/target)
+	return FALSE
+
+/datum/mob_controller/proc/process_holder_interaction(mob/handler)
+	last_handler = weakref(handler)
+	return body?.attack_hand_with_interaction_checks(handler)

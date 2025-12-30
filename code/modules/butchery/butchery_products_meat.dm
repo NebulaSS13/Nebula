@@ -30,7 +30,7 @@
 	return ..()
 
 /obj/item/food/butchery/meat/syntiflesh
-	desc = "A slab of flesh synthetized from reconstituted biomass or artificially grown from chemicals."
+	desc = "A slab of flesh synthesized from reconstituted biomass or artificially grown from chemicals."
 	meat_name = "synthetic"
 
 // Seperate definitions because some food likes to know if it's human.
@@ -53,6 +53,7 @@
 	name = "piece"
 	desc = "It tastes like you'd expect."
 	material = /decl/material/solid/organic/meat/chicken
+	color = /decl/material/solid/organic/meat/chicken::color
 	butchery_data = /decl/butchery_data/animal/small/fowl/chicken
 
 /obj/item/food/butchery/meat/chicken/game
@@ -60,13 +61,14 @@
 	butchery_data = /decl/butchery_data/animal/small/fowl
 
 /obj/item/food/butchery/meat/corgi
-	desc = "Tastes like... well you know..."
+	desc = "Tastes like... well, you know..."
 	butchery_data = /decl/butchery_data/animal/corgi
 
 /obj/item/food/butchery/meat/xeno
 	desc = "A slab of green meat. Smells like acid."
 	icon_state = "xenomeat"
-	color = "#43de18"
+	color = "#43de18" // todo: add xenomeat material and use material alteration
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	center_of_mass = @'{"x":16,"y":10}'
 	bitesize = 6
 	butchery_data = /decl/butchery_data/xeno

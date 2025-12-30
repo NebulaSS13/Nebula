@@ -1,41 +1,36 @@
 /datum/unit_test/vision_glasses
 	name = "EQUIPMENT: Vision Template"
-	template = /datum/unit_test/vision_glasses
-	var/mob/living/human/H = null
+	abstract_type = /datum/unit_test/vision_glasses
+	var/mob/living/human/subject = null
 	var/expectation = SEE_INVISIBLE_NOLIGHTING
 	var/glasses_type = null
 	async = 1
 
 /datum/unit_test/vision_glasses/start_test()
-	var/list/test = create_test_mob_with_mind(get_safe_turf(), /mob/living/human)
-	if(isnull(test))
-		fail("Check Runtimed in Mob creation")
-
-	if(test["result"] == FAILURE)
-		fail(test["msg"])
-		async = 0
-		return 0
-
-	H = locate(test["mobref"])
-	H.equip_to_slot(new glasses_type(H), slot_glasses_str)
+	subject = new(get_safe_turf(), /decl/species/human::uid) // force human so default map species doesn't mess with anything
+	subject.equip_to_slot(new glasses_type(subject), slot_glasses_str)
 	return 1
 
 /datum/unit_test/vision_glasses/check_result()
 
-	if(isnull(H) || H.life_tick < 2)
+	if(isnull(subject) || subject.life_tick < 2)
 		return 0
 
-	if(isnull(H.get_equipped_item(slot_glasses_str)))
+	if(isnull(subject.get_equipped_item(slot_glasses_str)))
 		fail("Mob doesn't have glasses on")
 
-	H.handle_vision()	// Because Life has a client check that bypasses updating vision
+	subject.handle_vision()	// Because Life has a client check that bypasses updating vision
 
-	if(H.see_invisible == expectation)
-		pass("Mob See invisible is [H.see_invisible]")
+	if(subject.see_invisible == expectation)
+		pass("Mob See invisible is [subject.see_invisible]")
 	else
-		fail("Mob See invisible is [H.see_invisible] / expected [expectation]")
+		fail("Mob See invisible is [subject.see_invisible] / expected [expectation]")
 
 	return 1
+
+/datum/unit_test/vision_glasses/teardown_test()
+	QDEL_NULL(subject)
+	. = ..()
 
 /datum/unit_test/vision_glasses/NVG
 	name = "EQUIPMENT: NVG see_invis"
@@ -60,10 +55,10 @@
 
 	for(var/storage_type in typesof(/obj))
 		var/obj/thing = storage_type
-		if(TYPE_IS_ABSTRACT(thing) || !ispath(initial(thing.storage), /datum/storage))
+		if(!TYPE_IS_SPAWNABLE(thing) || !ispath(initial(thing.storage), /datum/storage))
 			continue
 		thing = new thing //should be fine to put it in nullspace...
-		var/bad_msg = "[ascii_red]--------------- [thing.name] \[[thing.type] | [thing.storage]\]"
+		var/bad_msg = "[ascii_red]--------------- [thing.name] \[[thing.type] | [thing.storage || "NULL"]\]"
 		bad_tests += test_storage_capacity(thing.storage, bad_msg)
 
 	if(bad_tests)
@@ -155,7 +150,7 @@
 		failure_list += "[item] was equipped to [equipped_location] despite failing isEquipped (should not be equipped)."
 
 /datum/unit_test/equipment_slot_test/start_test()
-	var/mob/living/human/subject = new(get_safe_turf(), SPECIES_HUMAN) // force human so default map species doesn't mess with anything
+	var/mob/living/human/subject = new(get_safe_turf(), /decl/species/human::uid) // force human so default map species doesn't mess with anything
 	created_atoms |= subject
 	var/list/failures = list()
 

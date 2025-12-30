@@ -87,21 +87,21 @@
 	if(loaded)
 		to_chat(user, "<span class='notice'>It has \a [loaded] loaded.</span>")
 
-/obj/item/gun/magnetic/examine(mob/user)
+/obj/item/gun/magnetic/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(!get_cell() || !capacitor)
-		to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking [SPAN_RED("red")]. Maybe you should check the cell or capacitor.</span>")
+		. += SPAN_NOTICE("The capacitor charge indicator is blinking [SPAN_RED("red")]. Maybe you should check the cell or capacitor.")
 	else
-		to_chat(user, "<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>")
+		. += SPAN_NOTICE("The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.")
 		if(capacitor.charge < power_cost)
-			to_chat(user, "<span class='notice'>The capacitor charge indicator is [SPAN_ORANGE("amber")].</span>")
+			. += SPAN_NOTICE("The capacitor charge indicator is [SPAN_ORANGE("amber")].")
 		else
-			to_chat(user, "<span class='notice'>The capacitor charge indicator is [SPAN_GREEN("green")].</span>")
+			. += SPAN_NOTICE("The capacitor charge indicator is [SPAN_GREEN("green")].")
 
-/obj/item/gun/magnetic/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/gun/magnetic/attackby(var/obj/item/used_item, var/mob/user)
 
 	if(removable_components)
-		if(IS_SCREWDRIVER(thing))
+		if(IS_SCREWDRIVER(used_item))
 			if(!capacitor)
 				to_chat(user, "<span class='warning'>\The [src] has no capacitor installed.</span>")
 				return TRUE
@@ -111,39 +111,39 @@
 			capacitor = null
 			update_icon()
 			return TRUE
-		if(istype(thing, /obj/item/stock_parts/capacitor))
+		if(istype(used_item, /obj/item/stock_parts/capacitor))
 			if(capacitor)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [capacitor] installed.</span>")
 				return TRUE
-			if(!user.try_unequip(thing, src))
+			if(!user.try_unequip(used_item, src))
 				return TRUE
-			capacitor = thing
+			capacitor = used_item
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
 			power_per_tick = (power_cost*0.15) * capacitor.rating
 			user.visible_message("<span class='notice'>\The [user] slots \the [capacitor] into \the [src].</span>")
 			update_icon()
 			return TRUE
 
-	if(!istype(thing, load_type))
+	if(!istype(used_item, load_type))
 		return ..()
 
 	// This is not strictly necessary for the magnetic gun but something using
 	// specific ammo types may exist down the track.
-	var/obj/item/stack/ammo = thing
+	var/obj/item/stack/ammo = used_item
 	if(!istype(ammo))
 		if(loaded)
 			to_chat(user, "<span class='warning'>\The [src] already has \a [loaded] loaded.</span>")
 			return TRUE
-		var/obj/item/magnetic_ammo/mag = thing
+		var/obj/item/magnetic_ammo/mag = used_item
 		if(istype(mag))
 			if(!(load_type == mag.basetype))
 				to_chat(user, "<span class='warning'>\The [src] doesn't seem to accept \a [mag].</span>")
 				return TRUE
 			projectile_type = mag.projectile_type
-		if(!user.try_unequip(thing, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
 
-		loaded = thing
+		loaded = used_item
 	else if(load_sheet_max > 1)
 		var ammo_count = 0
 		var/obj/item/stack/loaded_ammo = loaded

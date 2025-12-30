@@ -8,7 +8,7 @@
 /decl/music_track/martiancowboy
 	artist = "Kevin MacLeod"
 	title = "Martian Cowboy"
-	song = 'sound/music/europa/Martian Cowboy.ogg'
+	song = 'sound/music/europa/MartianCowboy.ogg'
 	license = /decl/license/cc_by_3_0
 	url = "https://incompetech.com/music/royalty-free/index.html?isrc=usuan1100349"
 

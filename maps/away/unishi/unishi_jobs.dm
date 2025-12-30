@@ -4,7 +4,7 @@
 	outfit_type = /decl/outfit/job/unishi/crew
 	supervisors = "your survival"
 	info = "You remember waking up to alarms blaring in your face. Before you could react, a gush of hot air blew \
-	you away, knocking you cold unconcious.  Before this happened you were a crew member \
+	you away, knocking you cold unconscious.  Before this happened you were a crew member \
 	on this research vessel, SRV Verne, as it carried the members of the presitigous Ceti Technical institute in \
 	their pursuit of research. "
 	required_language = /decl/language/human/common
@@ -15,7 +15,7 @@
 	total_positions = 2
 	outfit_type = /decl/outfit/job/unishi/researcher
 	info = "You remember waking up to alarms blaring in your face. Before you could react, a gush of hot air blew \
-	you away, knocking you cold unconcious. Before this happened, you were a researcher, aboard SRV Verne."
+	you away, knocking you cold unconscious. Before this happened, you were a researcher, aboard SRV Verne."
 	required_language = /decl/language/human/common
 
 /decl/outfit/job/unishi

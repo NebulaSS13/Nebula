@@ -40,13 +40,10 @@ SUBSYSTEM_DEF(supply)
 	ordernum = rand(1,9000)
 
 	//Build master supply list
-	var/decl/hierarchy/supply_pack/root = GET_DECL(/decl/hierarchy/supply_pack)
-	for(var/decl/hierarchy/supply_pack/sp in root.children)
-		if(sp.is_category())
-			for(var/decl/hierarchy/supply_pack/spc in sp.get_descendants())
-				spc.setup()
-				master_supply_list += spc
-				CHECK_TICK
+	var/decl/hierarchy/supply_pack/root = IMPLIED_DECL
+	for(var/decl/hierarchy/supply_pack/pack in root.get_descendants())
+		if(!pack.is_category())
+			master_supply_list += pack
 
 // Just add points over time.
 /datum/controller/subsystem/supply/fire()
@@ -62,68 +59,63 @@ SUBSYSTEM_DEF(supply)
 	point_sources[source] += amount
 	point_sources["total"] += amount
 
-	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
-/datum/controller/subsystem/supply/proc/forbidden_atoms_check(atom/A)
-	if(isliving(A))
-		return 1
-	if(istype(A,/obj/item/disk/nuclear))
-		return 1
-	if(istype(A,/obj/machinery/nuclearbomb))
-		return 1
-	if(istype(A,/obj/item/radio/beacon))
-		return 1
+/// To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
+/datum/controller/subsystem/supply/proc/forbidden_atoms_check(atom/checking)
+	if(isliving(checking)) // You can't send a mob to the admin level.
+		return TRUE
+	if(istype(checking, /obj/item/disk/nuclear)) // Keep it somewhere nuclear operatives can reach it.
+		return TRUE
+	if(istype(checking, /obj/machinery/nuclearbomb)) // Don't nuke the admin level.
+		return TRUE
+	if(istype(checking, /obj/item/radio/beacon)) // Because these can be used for teleportation, I guess?
+		return TRUE
 
-	for(var/i=1, i<=A.contents.len, i++)
-		var/atom/B = A.contents[i]
-		if(.(B))
-			return 1
+	for(var/atom/child in checking.contents)
+		if(forbidden_atoms_check(child))
+			return TRUE
+	return FALSE
 
 /datum/controller/subsystem/supply/proc/sell()
-
 	for(var/area/subarea in shuttle.shuttle_area)
-		for(var/atom/movable/AM in subarea)
-			if(AM.anchored)
+		for(var/obj/structure/closet/crate/sold_crate in subarea)
+			if(sold_crate.anchored)
 				continue
-			if(istype(AM, /obj/structure/closet/crate))
-				var/obj/structure/closet/crate/CR = AM
-				RAISE_EVENT(/decl/observ/crate_sold, subarea, CR)
-				add_points_from_source(CR.get_single_monetary_worth() * crate_return_rebate * 0.1, "crate")
-				var/find_slip = 1
+			RAISE_EVENT(/decl/observ/crate_sold, subarea, sold_crate)
+			add_points_from_source(sold_crate.get_single_monetary_worth() * crate_return_rebate * 0.1, "crate")
+			var/find_slip = TRUE
 
-				for(var/atom/atom as anything in CR)
-					// Sell manifests
-					if(find_slip && istype(atom, /obj/item/paper/manifest))
-						var/obj/item/paper/manifest/slip = atom
-						if(!LAZYACCESS(slip.metadata, "is_copy") && LAZYLEN(slip.applied_stamps))
-							add_points_from_source(LAZYACCESS(slip.metadata, "order_total") * slip_return_rebate, "manifest")
-							find_slip = 0
-						continue
+			for(var/atom/movable/subcontent as anything in sold_crate)
+				// Sell manifests
+				if(find_slip && istype(subcontent, /obj/item/paper/manifest))
+					var/obj/item/paper/manifest/slip = subcontent
+					if(!LAZYACCESS(slip.metadata, "is_copy") && LAZYLEN(slip.applied_stamps))
+						add_points_from_source(LAZYACCESS(slip.metadata, "order_total") * slip_return_rebate, "manifest")
+						find_slip = FALSE
+					continue
 
-					// Sell materials
-					if(is_type_in_list(atom, saleable_materials))
-						add_points_from_source(atom.get_combined_monetary_worth() * goods_sale_modifier * 0.1, "goods")
-					// Must sell ore detector disks in crates
-					else if(istype(atom, /obj/item/disk/survey))
-						add_points_from_source(atom.get_combined_monetary_worth() * 0.005, "data")
+				// Sell materials
+				if(is_type_in_list(subcontent, saleable_materials))
+					add_points_from_source(subcontent.get_combined_monetary_worth() * goods_sale_modifier * 0.1, "goods")
+				// Must sell ore detector disks in crates
+				else if(istype(subcontent, /obj/item/disk/survey))
+					add_points_from_source(subcontent.get_combined_monetary_worth() * 0.005, "data")
 
-			qdel(AM)
+			qdel(sold_crate)
 
 /datum/controller/subsystem/supply/proc/get_clear_turfs()
 	var/list/clear_turfs = list()
-
 	for(var/area/subarea in shuttle.shuttle_area)
-		for(var/turf/T in subarea)
-			if(T.density)
+		for(var/turf/candidate_turf in subarea)
+			if(candidate_turf.density)
 				continue
-			var/occupied = 0
-			for(var/atom/A in T.contents)
-				if(!A.simulated || !A.density)
+			var/occupied = FALSE
+			for(var/atom/movable/child as anything in candidate_turf.contents)
+				if(!child.simulated || !child.density)
 					continue
-				occupied = 1
+				occupied = TRUE
 				break
 			if(!occupied)
-				clear_turfs += T
-
+				clear_turfs += candidate_turf
 	return clear_turfs
 
 //Buyin
@@ -133,56 +125,55 @@ SUBSYSTEM_DEF(supply)
 
 	var/list/clear_turfs = get_clear_turfs()
 
-	for(var/S in shoppinglist)
+	for(var/datum/supply_order/order in shoppinglist)
 		if(!clear_turfs.len)
 			break
 		var/turf/pickedloc = pick_n_take(clear_turfs)
-		shoppinglist -= S
-		donelist += S
+		shoppinglist -= order
+		donelist += order
 
-		var/datum/supply_order/SO = S
-		var/decl/hierarchy/supply_pack/SP = SO.object
+		var/decl/hierarchy/supply_pack/supplypack = order.object
 
-		var/obj/A = new SP.containertype(pickedloc)
-		A.SetName("[SP.containername][SO.comment ? " ([SO.comment])":"" ]")
+		var/obj/result = new supplypack.containertype(pickedloc)
+		result.SetName("[supplypack.containername][order.comment ? " ([order.comment])":"" ]")
 		//supply manifest generation begin
 
 		var/obj/item/paper/manifest/slip
-		if(!SP.contraband)
+		if(!supplypack.contraband)
 			var/info = list()
 			info +="<h3>[global.using_map.boss_name] Shipping Manifest</h3><hr><br>"
-			info +="Order #[SO.ordernum]<br>"
+			info +="Order #[order.ordernum]<br>"
 			info +="Destination: [global.using_map.station_name]<br>"
 			info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
 			info +="CONTENTS:<br><ul>"
 
-			slip = new /obj/item/paper/manifest(A, null, JOINTEXT(info))
-			LAZYSET(slip.metadata, "order_total", SP.cost)
+			slip = new /obj/item/paper/manifest(result, null, JOINTEXT(info))
+			LAZYSET(slip.metadata, "order_total", supplypack.cost)
 			LAZYSET(slip.metadata, "is_copy",     FALSE)
 
 		//spawn the stuff, finish generating the manifest while you're at it
-		if(SP.access)
-			if(!islist(SP.access))
-				A.req_access = list(SP.access)
-			else if(islist(SP.access))
-				var/list/L = SP.access // access var is a plain var, we need a list
-				A.req_access = L.Copy()
+		if(supplypack.access)
+			if(!islist(supplypack.access))
+				result.req_access = list(supplypack.access)
+			else if(islist(supplypack.access))
+				var/list/supplypack_access = supplypack.access // access var is a plain var, we need a list
+				result.req_access = supplypack_access.Copy()
 
-		var/list/spawned = SP.spawn_contents(A)
+		var/list/spawned = supplypack.spawn_contents(result)
 		if(slip)
 			for(var/atom/content in spawned)
 				slip.info += "<li>[content.name]</li>" //add the item to the manifest
 			slip.info += "</ul><br>CHECK CONTENTS AND STAMP BELOW THE LINE TO CONFIRM RECEIPT OF GOODS<hr>"
 
 // Adds any given item to the supply shuttle
-/datum/controller/subsystem/supply/proc/addAtom(var/atom/movable/A)
+/datum/controller/subsystem/supply/proc/addAtom(var/atom/movable/added)
 	var/list/clear_turfs = get_clear_turfs()
 	if(!clear_turfs.len)
 		return FALSE
 
 	var/turf/pickedloc = pick(clear_turfs)
 
-	A.forceMove(pickedloc)
+	added.forceMove(pickedloc)
 
 	return TRUE
 

@@ -28,14 +28,14 @@
 	update_icon()
 			//spawn(5) program.process() //no, program.process sends some signals and machines respond and we here again and we lag -rastaf0
 
-/obj/machinery/embedded_controller/Topic(href, href_list)
-	if(..())
-		update_icon()
+/obj/machinery/embedded_controller/OnTopic(mob/user, href_list)
+	if((. = ..()))
 		return
-	if(usr)
-		usr.set_machine(src)
+	if(user)
+		user.set_machine(src)
 	if(program)
 		return program.receive_user_command(href_list["command"]) // Any further sanitization should be done in here.
+	return TOPIC_NOACTION
 
 /obj/machinery/embedded_controller/Process()
 	if(program)
@@ -61,8 +61,6 @@
 	var/tmp/screen_state    = "screen_standby"
 	///Bitflag to indicate which indicator lights are on so dummy controllers can match the same state
 	var/tmp/indicator_state = 0
-	///If set, this controller will route its commands to the master controller with the same id_tag.
-	var/obj/machinery/embedded_controller/radio/master
 	///Radio connection to use for emiting commands
 	var/datum/radio_frequency/radio_connection
 
@@ -174,20 +172,20 @@
 	if(href_list["set_tag"])
 		var/new_tag = input(user, "Enter a new tag to use. Warning: this will reset all tags used by this machine, not just the main one!", "Tag Selection", controller.id_tag) as text|null
 		if(extension_status(user) != STATUS_INTERACTIVE)
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		new_tag = sanitize_name(new_tag, MAX_MESSAGE_LEN, TRUE, FALSE)
 		if(new_tag)
 			controller.reset_id_tags(new_tag)
 			controller.set_frequency(controller.frequency)
-			return MT_REFRESH
+			return TOPIC_REFRESH
 
 	if(href_list["set_freq"])
 		var/new_frequency = input(user, "Enter a new frequency to use.", "frequency Selection", controller.frequency) as num|null
 		if(!new_frequency || (extension_status(user) != STATUS_INTERACTIVE))
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		new_frequency = sanitize_frequency(new_frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
 		controller.set_frequency(new_frequency)
-		return MT_REFRESH
+		return TOPIC_REFRESH
 
 /decl/stock_part_preset/radio/receiver/vent_pump/airlock
 	frequency = EXTERNAL_AIR_FREQ

@@ -1,5 +1,5 @@
 /datum/ailment/head
-	category = /datum/ailment/head
+	abstract_type = /datum/ailment/head
 	applies_to_organ = list(BP_HEAD)
 
 /datum/ailment/head/headache

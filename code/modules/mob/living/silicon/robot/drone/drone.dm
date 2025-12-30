@@ -15,7 +15,7 @@
 	integrated_light_power = 0.4
 	integrated_light_range = 3
 	local_transmit = 1
-	possession_candidate = 1
+	possession_candidate = TRUE
 	speed = -1
 
 	can_pull_size = ITEM_SIZE_NORMAL
@@ -117,7 +117,7 @@
 	uid = "bodytype_drone_construction"
 
 /decl/bodytype/drone/construction/Initialize()
-	equip_adjust = list(
+	_equip_adjust = list(
 		slot_head_str = list(
 			"[NORTH]" = list(1, -12),
 			"[SOUTH]" = list(1, -12),
@@ -166,19 +166,19 @@
 	return
 
 //Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
-/mob/living/silicon/robot/drone/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/borg/upgrade))
-		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")
+/mob/living/silicon/robot/drone/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/borg/upgrade))
+		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [used_item].</span>")
 		return TRUE
-	else if(IS_CROWBAR(W) && user.a_intent != I_HURT)
+	else if(IS_CROWBAR(used_item) && !user.check_intent(I_FLAG_HARM))
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
 		return TRUE
-	else if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
+	else if (istype(used_item, /obj/item/card/id)||istype(used_item, /obj/item/modular_computer))
 		if(stat == DEAD)
 			if(!get_config_value(/decl/config/toggle/on/allow_drone_spawn) || emagged || should_be_dead()) //It's dead, Dave.
 				to_chat(user, "<span class='danger'>The interface is fried, and a distressing burned smell wafts from the robot's interior. You're not rebooting this one.</span>")
 				return TRUE
-			if(!allowed(usr))
+			if(!allowed(user))
 				to_chat(user, "<span class='danger'>Access denied.</span>")
 				return TRUE
 			var/decl/pronouns/pronouns = user.get_pronouns()
@@ -193,7 +193,7 @@
 			SPAN_DANGER("\The [user] swipes [pronouns.his] ID card through \the [src], attempting to shut it down."), \
 			SPAN_DANGER("You swipe your ID card through \the [src], attempting to shut it down."))
 		if(!emagged)
-			if(allowed(usr))
+			if(allowed(user))
 				shut_down()
 			else
 				to_chat(user, SPAN_DANGER("Access denied."))
@@ -311,13 +311,9 @@
 
 /mob/living/silicon/robot/drone/construction/welcome_drone()
 	to_chat(src, "<b>You are a construction drone, an autonomous engineering and fabrication system.</b>.")
-	to_chat(src, "You are assigned to a Sol Central construction project. The name is irrelevant. Your task is to complete construction and subsystem integration as soon as possible.")
+	to_chat(src, "You are assigned to a construction project. The name is irrelevant. Your task is to complete construction and subsystem integration as soon as possible.")
 	to_chat(src, "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows.")
 	to_chat(src, "<b>You do not follow orders from anyone; not the AI, not humans, and not other synthetics.</b>.")
-
-/mob/living/silicon/robot/drone/construction/init()
-	..()
-	flavor_text = "It's a bulky construction drone stamped with a Sol Central glyph."
 
 /proc/too_many_active_drones()
 	var/drones = 0
@@ -351,13 +347,13 @@
 	uid = "bodytype_drone"
 
 /decl/bodytype/drone/Initialize()
-	if(!length(equip_adjust))
-		equip_adjust = list(
-			slot_head_str = list(
+	if(!length(_equip_adjust))
+		_equip_adjust = list(
+			(slot_head_str) = list(
 				"[NORTH]" = list(0, -13),
 				"[SOUTH]" = list(0, -13),
-				"[EAST]" =  list(0, -13),
-				"[WEST]" =  list(0, -13)
+				"[EAST]"  = list(0, -13),
+				"[WEST]"  = list(0, -13)
 			)
 		)
 	. = ..()

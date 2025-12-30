@@ -96,10 +96,10 @@
 	. = ..()
 	launcher = new(src)
 
-/obj/item/gun/projectile/automatic/assault_rifle/grenade/attackby(obj/item/I, mob/user)
-	if(!istype(I, /obj/item/grenade))
+/obj/item/gun/projectile/automatic/assault_rifle/grenade/attackby(obj/item/used_item, mob/user)
+	if(!istype(used_item, /obj/item/grenade))
 		return ..()
-	launcher.load(I, user)
+	launcher.load(used_item, user)
 	return TRUE
 
 /obj/item/gun/projectile/automatic/assault_rifle/grenade/attack_hand(mob/user)
@@ -116,12 +116,12 @@
 	else
 		..()
 
-/obj/item/gun/projectile/automatic/assault_rifle/grenade/examine(mob/user)
+/obj/item/gun/projectile/automatic/assault_rifle/grenade/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(launcher.chambered)
-		to_chat(user, "\The [launcher] has \a [launcher.chambered] loaded.")
+		. += "\The [launcher] has \a [launcher.chambered] loaded."
 	else
-		to_chat(user, "\The [launcher] is empty.")
+		. += "\The [launcher] is empty."
 
 /obj/item/gun/projectile/automatic/assault_rifle/grenade/toggle_safety(mob/user)
 	. = ..()

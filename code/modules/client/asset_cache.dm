@@ -45,7 +45,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	client.sending |= asset_name
 	var/job = ++client.last_asset_job
 
-	direct_output(client, browse("<script>window.location.href='byond://?asset_cache_confirm_arrival=[job]'</script>", "window=asset_cache_browser"))
+	show_browser(client, "<script>window.location.href='byond://?asset_cache_confirm_arrival=[job]'</script>", "window=asset_cache_browser")
 
 	var/t = 0
 	var/timeout_time = (ASSET_CACHE_SEND_TIMEOUT * client.sending.len) + ASSET_CACHE_SEND_TIMEOUT
@@ -85,7 +85,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	client.sending |= unreceived
 	var/job = ++client.last_asset_job
 
-	direct_output(client, browse("<script>window.location.href='byond://?asset_cache_confirm_arrival=[job]'</script>", "window=asset_cache_browser"))
+	show_browser(client, "<script>window.location.href='byond://?asset_cache_confirm_arrival=[job]'</script>", "window=asset_cache_browser")
 
 	var/t = 0
 	var/timeout_time = ASSET_CACHE_SEND_TIMEOUT * client.sending.len
@@ -122,7 +122,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 //all of our asset datums, used for referring to these later
 var/global/list/asset_datums = list()
 
-//get a assetdatum or make a new one
+//get an assetdatum or make a new one
 /proc/get_asset_datum(var/type)
 	if (!(type in asset_datums))
 		return new type()
@@ -185,7 +185,7 @@ var/global/template_file_name = "all_templates.json"
 				if(fexists(path + filename))
 					register_asset(filename, fcopy_rsc(path + filename))
 
-	merge_and_register_templates()
+	merge_and_register_all_templates()
 
 	var/list/mapnames = list()
 	for(var/z in SSmapping.map_levels)
@@ -199,19 +199,35 @@ var/global/template_file_name = "all_templates.json"
 				common[filename] = fcopy_rsc(file_path)
 				register_asset(filename, common[filename])
 
-/datum/asset/nanoui/proc/merge_and_register_templates()
-	var/list/templates = flist(template_dir)
-	for(var/filename in templates)
-		if(copytext(filename, length(filename)) != "/")
-			templates[filename] = replacetext(replacetext(file2text(template_dir + filename), "\n", ""), "\t", "")
-		else
-			templates -= filename
+/datum/asset/nanoui/proc/merge_and_register_all_templates()
+	. = merge_templates(template_dir)
+	. += merge_modpack_templates()
+	register_templates(.)
+
+/datum/asset/nanoui/proc/merge_modpack_templates()
+	PRIVATE_PROC(TRUE)
+	. = list()
+	for(var/mod_template_dir in SSmodpacks.modpack_nanoui_directories)
+		. += merge_templates(mod_template_dir)
+
+/datum/asset/nanoui/proc/register_templates(templates)
 	var/full_file_name = template_temp_dir + global.template_file_name
 	if(fexists(full_file_name))
 		fdel(file(full_file_name))
 	var/template_file = file(full_file_name)
 	to_file(template_file, json_encode(templates))
 	register_asset(global.template_file_name, fcopy_rsc(template_file))
+
+/// Handles adding a directory's templates to the compiled templates list.
+/datum/asset/nanoui/proc/merge_templates(use_dir)
+	PRIVATE_PROC(TRUE)
+	var/list/templates = flist(use_dir)
+	for(var/filename in templates)
+		if(copytext(filename, length(filename)) != "/")
+			templates[filename] = replacetext(replacetext(file2text(use_dir + filename), "\n", ""), "\t", "")
+		else
+			templates -= filename
+	return templates
 
 /datum/asset/nanoui/send(client, uncommon)
 	if(!islist(uncommon))
@@ -223,11 +239,12 @@ var/global/template_file_name = "all_templates.json"
 
 // Note: this is intended for dev work, and is unsafe. Do not use outside of that.
 /datum/asset/nanoui/proc/recompute_and_resend_templates()
-	merge_and_register_templates()
+	merge_and_register_all_templates()
 	for(var/client/C in clients)
-		if(C) // there are sleeps here, potentially
-			send_asset(C, global.template_file_name, FALSE, FALSE)
-			to_chat(C, SPAN_WARNING("Nanoui templates have been updated. Please close and reopen any browser windows."))
+		spawn() // there are sleeps here, potentially
+			if(C)
+				send_asset(C, global.template_file_name, FALSE, FALSE)
+				to_chat(C, SPAN_WARNING("Nanoui templates have been updated. Please close and reopen any browser windows."))
 
 /client/proc/resend_nanoui_templates()
 	set category = "Debug"

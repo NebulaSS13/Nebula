@@ -5,7 +5,7 @@
 	var/decl/license/license
 	var/song
 	var/url // Remember to include http:// or https:// or BYOND will be sad
-	var/volume = 70
+	var/music_volume = 70
 	abstract_type = /decl/music_track
 
 /decl/music_track/Initialize()
@@ -34,7 +34,7 @@
 		to_chat(listener, url)
 
 	to_chat(listener, "<span class='good'>License: <a href='[license.url]'>[license.name]</a></span>")
-	sound_to(listener, sound(song, repeat = 1, wait = 0, volume = volume, channel = sound_channels.lobby_channel))
+	sound_to(listener, sound(song, repeat = 1, wait = 0, volume = music_volume, channel = sound_channels.lobby_channel))
 
 // No VV editing anything about music tracks
 /decl/music_track/VV_static()

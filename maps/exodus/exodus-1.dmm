@@ -228,7 +228,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/sub/fore)
 "aJ" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -405,7 +405,7 @@
 /turf/floor/carpet,
 /area/exodus/maintenance/sub/port)
 "bi" = (
-/obj/structure/bed/chair/wood/wings,
+/obj/structure/chair/wood/wings,
 /turf/floor/plating,
 /area/exodus/maintenance/sub/port)
 "bj" = (
@@ -414,7 +414,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/sub/port)
 "bk" = (
-/obj/structure/bed/chair/wood/wings{
+/obj/structure/chair/wood/wings{
 	dir = 4
 	},
 /turf/floor/plating,
@@ -430,7 +430,7 @@
 /obj/item/deck/cards{
 	pixel_y = 4
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/exodus/maintenance/sub/port)
 "bn" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -441,7 +441,7 @@
 "bo" = (
 /obj/structure/table/gamblingtable,
 /obj/random/coin,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/exodus/maintenance/sub/port)
 "bp" = (
 /obj/random/obstruction,
@@ -461,13 +461,13 @@
 /turf/floor/plating,
 /area/exodus/maintenance/sub/port)
 "bs" = (
-/obj/structure/bed/chair/wood/wings{
+/obj/structure/chair/wood/wings{
 	dir = 1
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/exodus/maintenance/sub/port)
 "bt" = (
-/obj/structure/bed/chair/wood/wings{
+/obj/structure/chair/wood/wings{
 	dir = 1
 	},
 /turf/floor/plating,
@@ -1044,13 +1044,13 @@
 /turf/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "dw" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 8
 	},
 /turf/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "dx" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 1
 	},
 /turf/floor/plating,
@@ -1105,7 +1105,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "dE" = (
-/obj/structure/bed/chair/office/dark,
+/obj/structure/chair/office/dark,
 /turf/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "dF" = (
@@ -1278,7 +1278,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/sub/port)
 "dZ" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 4
 	},
 /turf/floor/plating,
@@ -1425,7 +1425,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -1565,12 +1565,12 @@
 /turf/floor/plating,
 /area/exodus/maintenance/sub/port)
 "eN" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
 	},
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Command Sublevel Subgrid";
 	name = "Powernet Sensor - Command Sublevel Subgrid"
 	},
@@ -1596,7 +1596,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/sub/central)
 "eQ" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1683,7 +1683,7 @@
 /turf/floor/bluegrid,
 /area/exodus/maintenance/sub/command)
 "fc" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2051,7 +2051,7 @@
 /turf/wall/r_wall/prepainted,
 /area/exodus/maintenance/sub/starboard)
 "fS" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2424,7 +2424,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/sub/central)
 "gJ" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/space,
 /area/space)
 "gK" = (
@@ -2727,7 +2727,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -3588,7 +3588,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/atmos)
 "jx" = (
-/obj/machinery/power/sensor{
+/obj/machinery/power_sensor{
 	id_tag = "Atmospherics Subgrid";
 	name = "Powernet Sensor - Atmospherics Subgrid"
 	},
@@ -3605,7 +3605,7 @@
 /obj/structure/cable/cyan{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -3655,7 +3655,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/maintenance/sub/aft)
 "jD" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -3674,7 +3674,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/plating,
@@ -3716,7 +3716,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/atmos)
 "jM" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /obj/abstract/landmark/start{
@@ -4159,7 +4159,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/atmos)
 "kX" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -5714,7 +5714,7 @@
 /turf/floor/tiled/dark/monotile,
 /area/exodus/maintenance/telecomms)
 "Bc" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/chair/office/dark{
 	dir = 8
 	},
 /turf/floor/lino,
@@ -6005,7 +6005,7 @@
 "Nw" = (
 /obj/structure/table/steel,
 /obj/item/box/cups,
-/obj/machinery/power/apc/hyper{
+/obj/machinery/apc/hyper{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24

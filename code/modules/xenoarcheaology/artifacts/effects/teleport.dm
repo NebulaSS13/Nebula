@@ -1,6 +1,6 @@
 /datum/artifact_effect/teleport
 	name = "teleport"
-	origin_type = EFFECT_PSIONIC
+	origin_type = XA_EFFECT_PSIONIC
 
 /datum/artifact_effect/teleport/DoEffectTouch(var/mob/user)
 	teleport_away(user)

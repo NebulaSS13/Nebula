@@ -27,9 +27,9 @@
 	var/obj/item/stock_parts/circuitboard/airlock_electronics/brace/electronics
 
 
-/obj/item/airlock_brace/examine(mob/user)
+/obj/item/airlock_brace/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, examine_health())
+	. += examine_health()
 
 // This is also called from airlock's examine, so it's a different proc to prevent code copypaste.
 /obj/item/airlock_brace/proc/examine_health()
@@ -68,12 +68,12 @@
 /obj/item/airlock_brace/attack_self(mob/user)
 	electronics.attack_self(user)
 
-/obj/item/airlock_brace/attackby(obj/item/W, mob/user)
-	if (istype(W.GetIdCard(), /obj/item/card/id))
+/obj/item/airlock_brace/attackby(obj/item/used_item, mob/user)
+	if (istype(used_item.GetIdCard(), /obj/item/card/id))
 		if(!airlock)
 			return attack_self(user)
 		else
-			var/obj/item/card/id/C = W.GetIdCard()
+			var/obj/item/card/id/C = used_item.GetIdCard()
 			if(check_access(C))
 				to_chat(user, "You swipe \the [C] through \the [src].")
 				if(do_after(user, 10, airlock))
@@ -83,18 +83,18 @@
 				to_chat(user, "You swipe \the [C] through \the [src], but it does not react.")
 		return TRUE
 
-	if (istype(W, /obj/item/crowbar/brace_jack))
+	if (istype(used_item, /obj/item/crowbar/brace_jack))
 		if(!airlock)
 			return FALSE
-		var/obj/item/crowbar/brace_jack/C = W
+		var/obj/item/crowbar/brace_jack/C = used_item
 		to_chat(user, "You begin forcibly removing \the [src] with \the [C].")
 		if(do_after(user, rand(150,300), airlock))
 			to_chat(user, "You finish removing \the [src].")
 			unlock_brace(user)
 		return TRUE
 
-	if(IS_WELDER(W))
-		var/obj/item/weldingtool/C = W
+	if(IS_WELDER(used_item))
+		var/obj/item/weldingtool/C = used_item
 		if(!is_damaged())
 			to_chat(user, "\The [src] does not require repairs.")
 			return TRUE

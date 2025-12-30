@@ -10,7 +10,7 @@
 
 /decl/persistence_handler/graffiti/CheckTurfContents(var/turf/T, var/list/tokens)
 	var/too_much_graffiti = 0
-	for(var/obj/effect/decal/writing/W in .)
+	for(var/obj/effect/decal/writing/writing in .)
 		too_much_graffiti++
 		if(too_much_graffiti >= 5)
 			return FALSE

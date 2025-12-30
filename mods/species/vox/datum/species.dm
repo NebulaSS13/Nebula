@@ -20,8 +20,9 @@
 	transfusion_fail_reagent = /decl/material/gas/ammonia
 
 /decl/species/vox
-	name = SPECIES_VOX
-	name_plural = SPECIES_VOX
+	uid = "species_vox"
+	name = "Vox"
+	name_plural = "Vox"
 	base_external_prosthetics_model = /decl/bodytype/prosthetic/vox/crap
 
 	default_emotes = list(
@@ -30,14 +31,6 @@
 
 	inherent_verbs = list(
 		/mob/living/human/proc/toggle_vox_pressure_seal
-	)
-
-	unarmed_attacks = list(
-		/decl/natural_attack/stomp,
-		/decl/natural_attack/kick,
-		/decl/natural_attack/claws/strong/gloves,
-		/decl/natural_attack/punch,
-		/decl/natural_attack/bite/strong
 	)
 
 	rarity_value = 4
@@ -86,7 +79,7 @@
 	available_pronouns = list(
 		/decl/pronouns/neuter,
 		/decl/pronouns/neuter/person,
-		/decl/pronouns,
+		/decl/pronouns/pseudoplural,
 		/decl/pronouns/male,
 		/decl/pronouns/female
 	)
@@ -98,6 +91,9 @@
 	)
 
 	available_background_info = list(
+		/decl/background_category/citizenship = list(
+			/decl/background_detail/citizenship/other
+		),
 		/decl/background_category/heritage =   list(
 			/decl/background_detail/heritage/vox,
 			/decl/background_detail/heritage/vox/salvager,

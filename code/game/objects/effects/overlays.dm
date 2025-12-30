@@ -35,11 +35,12 @@
 	icon = 'icons/misc/beach.dmi'
 	icon_state = "coconuts"
 
+// This isn't modularized because I hate modularizing layer defines. Bite me.
 /obj/effect/overlay/bluespacify
 	name = "subspace"
 	icon = 'icons/turf/space.dmi'
 	icon_state = "bluespacify"
-	layer = SUPERMATTER_WALL_LAYER
+	layer = SUBSPACE_WALL_LAYER
 
 /obj/effect/overlay/wallrot
 	name = "wallrot"
@@ -54,3 +55,13 @@
 	. = ..()
 	pixel_x += rand(-10, 10)
 	pixel_y += rand(-10, 10)
+
+/// Set and cleaned up by moving projectiles for the most part.
+/obj/effect/overlay/projectile_trail
+	var/obj/item/projectile/master
+
+/obj/effect/overlay/projectile_trail/Destroy()
+	if(master)
+		LAZYREMOVE(master.proj_trails, src)
+		master = null
+	return ..()

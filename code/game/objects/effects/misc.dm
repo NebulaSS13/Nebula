@@ -26,16 +26,16 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/paint/LateInitialize()
-	var/turf/wall/W = get_turf(src)
-	if(istype(W))
-		W.paint_color = color
-		W.stripe_color = color
-		W.update_icon()
+	var/turf/wall/wall = get_turf(src)
+	if(istype(wall))
+		wall.paint_color = color
+		wall.stripe_color = color
+		wall.lazy_update_icon()
 	var/obj/structure/wall_frame/WF = locate() in loc
 	if(WF)
 		WF.paint_color = color
 		WF.stripe_color = color
-		WF.update_icon()
+		WF.lazy_update_icon()
 	qdel(src)
 
 /obj/effect/paint/pink
@@ -72,10 +72,10 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/paint_stripe/LateInitialize()
-	var/turf/wall/W = get_turf(src)
-	if(istype(W))
-		W.stripe_color = color
-		W.update_icon()
+	var/turf/wall/wall = get_turf(src)
+	if(istype(wall))
+		wall.stripe_color = color
+		wall.update_icon()
 	var/obj/structure/wall_frame/WF = locate() in loc
 	if(WF)
 		WF.stripe_color = color

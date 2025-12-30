@@ -1,15 +1,15 @@
 /obj/item/chems/chem_disp_cartridge/small
-	volume = CARTRIDGE_VOLUME_SMALL
+	chem_volume = CARTRIDGE_VOLUME_SMALL
 
 /obj/item/chems/chem_disp_cartridge/medium
-	volume = CARTRIDGE_VOLUME_MEDIUM
+	chem_volume = CARTRIDGE_VOLUME_MEDIUM
 
 /**
  * Helper macro to define a new cartridge type for a given reagent.
  * CART_TYPE: the type suffix to append to the cartridge type path.
  * REAGENT_TYPE: The reagent decl path to fill the cartridge with.
  */
-#define DEFINE_CARTRIDGE_FOR_CHEM(CART_TYPE, REAGENT_TYPE) /obj/item/chems/chem_disp_cartridge/##CART_TYPE/populate_reagents(){add_to_reagents(REAGENT_TYPE, reagents.maximum_volume);}
+#define DEFINE_CARTRIDGE_FOR_CHEM(CART_TYPE, REAGENT_TYPE) /obj/item/chems/chem_disp_cartridge/##CART_TYPE/populate_reagents(){add_to_reagents(REAGENT_TYPE, REAGENT_MAXIMUM_VOLUME(reagents));}
 
 // Multiple
 DEFINE_CARTRIDGE_FOR_CHEM(water, /decl/material/liquid/water)
@@ -73,6 +73,8 @@ DEFINE_CARTRIDGE_FOR_CHEM(syrup_chocolate, /decl/material/liquid/drink/syrup/cho
 DEFINE_CARTRIDGE_FOR_CHEM(syrup_caramel,   /decl/material/liquid/drink/syrup/caramel)
 DEFINE_CARTRIDGE_FOR_CHEM(syrup_vanilla,   /decl/material/liquid/drink/syrup/vanilla)
 DEFINE_CARTRIDGE_FOR_CHEM(syrup_pumpkin,   /decl/material/liquid/drink/syrup/pumpkin)
+DEFINE_CARTRIDGE_FOR_CHEM(syrup_lavender,  /decl/material/liquid/drink/syrup/lavender)
+DEFINE_CARTRIDGE_FOR_CHEM(cinnamon,        /decl/material/solid/cinnamon)
 
 // Bar, coffee
 DEFINE_CARTRIDGE_FOR_CHEM(coffee,   /decl/material/liquid/drink/coffee)

@@ -17,9 +17,9 @@
 	QDEL_NULL_LIST(stored_ammo)
 	. = ..()
 
-/obj/item/stock_parts/ammo_box/attackby(obj/item/W, mob/user)
+/obj/item/stock_parts/ammo_box/attackby(obj/item/used_item, mob/user)
 	. = ..()
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		to_chat(user, SPAN_NOTICE("You dump the ammo stored in \the [src] on the ground."))
 		for(var/obj/item/ammo_casing/casing as anything in stored_ammo)
 			casing.forceMove(get_turf(src))
@@ -28,8 +28,8 @@
 		stored_caliber = null
 		return TRUE
 
-	if(istype(W, /obj/item/ammo_casing))
-		var/obj/item/ammo_casing/casing = W
+	if(istype(used_item, /obj/item/ammo_casing))
+		var/obj/item/ammo_casing/casing = used_item
 		if(stored_caliber && casing.caliber != stored_caliber)
 			to_chat(user, SPAN_WARNING("The caliber of \the [casing] does not match the caliber stored in \the [src]!"))
 			return TRUE
@@ -45,8 +45,8 @@
 		playsound(user, 'sound/weapons/guns/interaction/bullet_insert.ogg', 50, 1)
 		return TRUE
 
-	if(istype(W, /obj/item/ammo_magazine))
-		var/obj/item/ammo_magazine/magazine = W
+	if(istype(used_item, /obj/item/ammo_magazine))
+		var/obj/item/ammo_magazine/magazine = used_item
 		if(stored_caliber && magazine.caliber != stored_caliber)
 			to_chat(user, SPAN_WARNING("The caliber of \the [magazine] does not match the caliber stored in \the [src]!"))
 			return TRUE

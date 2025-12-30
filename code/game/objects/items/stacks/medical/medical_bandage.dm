@@ -25,16 +25,15 @@
 
 /obj/item/stack/medical/bandage/proc/get_poultice_requirement_string()
 	. = list()
-	for(var/reagent in poultice_reagent_requirements)
-		var/decl/material/reagent_decl = GET_DECL(reagent)
-		. += "[poultice_reagent_requirements[reagent]] unit\s of [reagent_decl.liquid_name]"
+	for(var/decl/material/reagent as anything in poultice_reagent_requirements)
+		. += "[poultice_reagent_requirements[reagent.type]] unit\s of [reagent.liquid_name]"
 	. = english_list(.)
 
-/obj/item/stack/medical/bandage/examine(mob/user, distance)
+/obj/item/stack/medical/bandage/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	var/poultice_requirement_string = get_poultice_requirement_string()
 	if(poultice_requirement_string)
-		to_chat(user, SPAN_NOTICE("With a mixture of [poultice_requirement_string], you could use a bandage to make a herbal poultice."))
+		. += SPAN_NOTICE("With a mixture of [poultice_requirement_string], you could use a bandage to make a herbal poultice.")
 
 /obj/item/stack/medical/bandage/attackby(obj/item/used_item, mob/living/user)
 
@@ -76,7 +75,7 @@
 /obj/item/stack/medical/bandage/proc/bandage_wound(mob/user, mob/target, obj/item/organ/external/affecting, datum/wound/wound)
 	user.visible_message(
 		SPAN_NOTICE("\The [user] bandages \a [wound.desc] on \the [target]'s [affecting.name]."),
-	    SPAN_NOTICE("You bandage \a [wound.desc] on \the [target]'s [affecting.name].")
+		SPAN_NOTICE("You bandage \a [wound.desc] on \the [target]'s [affecting.name].")
 	)
 	wound.bandage()
 
