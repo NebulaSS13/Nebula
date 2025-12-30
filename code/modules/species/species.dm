@@ -631,7 +631,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			return
 
 	var/randn = rand(1, 100) - skill_mod + state_mod
-	if(!target.can_slip() && randn <= 25)
+	if(target.can_slip() && randn <= 25)
 		var/armor_check = 100 * target.get_blocked_ratio(affecting, BRUTE, damage = 20)
 		target.apply_effect(push_mod, WEAKEN, armor_check)
 		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
