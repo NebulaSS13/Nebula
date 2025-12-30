@@ -404,6 +404,11 @@
 
 	SSnano.update_uis(src)
 
+/// Used to get a slogan to say in Process().
+/// If you want to do things like non-constant token replacement you can do that in an override.
+/obj/machinery/vending/proc/get_slogan()
+	return pick(slogan_list)
+
 /obj/machinery/vending/Process()
 	if(stat & (BROKEN|NOPOWER))
 		return
@@ -415,8 +420,8 @@
 		seconds_electrified--
 
 	//Pitch to the people!  Really sell it!
-	if(((last_slogan + slogan_delay) <= world.time) && (slogan_list.len > 0) && (!shut_up) && prob(5))
-		var/slogan = pick(slogan_list)
+	if(((last_slogan + slogan_delay) <= world.time) && length(slogan_list) && (!shut_up) && prob(5))
+		var/slogan = get_slogan()
 		speak(slogan)
 		last_slogan = world.time
 
