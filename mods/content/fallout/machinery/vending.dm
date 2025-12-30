@@ -1,6 +1,6 @@
 
 /obj/machinery/vending/nukacola/get_slogan()
-    var/static/list/nukanames = list("Joni", "Lauralee", "Kayden", "Amy", "Alyx", "Vriani", "Yuri", "Bruce", "Mariya", "Jackson", "Sam", "Mak", "Lucy", "Lamb", "Luke", "Dakota", "Vyn", "Augustina", "Tina", "Dae", "Amiya", "Aaron", "Argon", "Hannan", "Piper", "Sofia", "Lukas", "Sarah", "Brooklynn", "Valerie", "Travis", "Aphelion", "Robin", "Tycho", "Nephila", "Seris", "Vel", "Kimberley", "Cosmo", "Mavis", "Myrle", "Amastacia", "Kelly", "Temperance")
+    var/static/list/nukanames = list("Joni", "Lauralee", "Kayden", "Amy", "Alyx", "Vriani", "Yuri", "Bruce", "Mariya", "Jackson", "Sam", "Mak", "Lucy", "Lamb", "Luke", "Dakota", "Vyn", "Augustina", "Tina", "Dae", "Amiya", "Aaron", "Argon", "Hannan", "Piper", "Sofia", "Lukas", "Sarah", "Brooklynn", "Valerie", "Travis", "Aphelion", "Robin", "Tycho", "Nephila", "Seris", "Vel", "Kimberley", "Cosmo", "Mavis", "Myrle", "Amastacia", "Kelly", "Temperance", "Aloi", "Alphei")
     . = ..()
     . = replacetext(., "$NAME$", pick(nukanames))
 
