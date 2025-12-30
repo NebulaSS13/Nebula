@@ -1,9 +1,13 @@
-var/list/nukanames = list("Joni", "Lauralee", "Kayden", "Amy", "Alyx", "Vriani", "Yuri", "Bruce", "Mariya", "Jackson", "Sam", "Mak", "Lucy", "Lamb", "Luke", "Dakota", "Vyn", "Augustina", "Tina", "Dae", "Amiya", "Aaron", "Argon", "Hannan", "Piper", "Sofia", "Lukas", "Sarah", "Brooklynn", "Valerie", "Travis", "Aphelion", "Robin", "Tycho", "Nephila", "Seris", "Vel", "Kimberley", "Cosmo", "Mavis", "Myrle", "Amastacia", "Kelly", "Temperance")
+
+/obj/machinery/vending/nukacola/get_slogan()
+    var/static/list/nukanames = list("Joni", "Lauralee", "Kayden", "Amy", "Alyx", "Vriani", "Yuri", "Bruce", "Mariya", "Jackson", "Sam", "Mak", "Lucy", "Lamb", "Luke", "Dakota", "Vyn", "Augustina", "Tina", "Dae", "Amiya", "Aaron", "Argon", "Hannan", "Piper", "Sofia", "Lukas", "Sarah", "Brooklynn", "Valerie", "Travis", "Aphelion", "Robin", "Tycho", "Nephila", "Seris", "Vel", "Kimberley", "Cosmo", "Mavis", "Myrle", "Amastacia", "Kelly", "Temperance")
+    . = ..()
+    . = replacetext(., "$NAME$", pick(nukanames))
 
 /obj/machinery/vending/nukacola
 	name = "Nuka Cola Vendor"
 	desc = "Bottled and sold by the Nuka Cola Corporation!"
-	product_slogans = "Drink Nuka Cola!;Support the war effort, buy a Nuka Cola!;Share a Nuka with [pick(nukanames)]!"
+	product_slogans = "Drink Nuka Cola!;Support the war effort, buy a Nuka Cola!;Share a Nuka with $NAME$!"
 	product_ads = "Take a Nuka Break!;Nuka Cola has what you crave!"
 	icon = 'mods/content/fallout/machinery/icons/nukacola.dmi'
 	vend_delay = 26
