@@ -3,8 +3,8 @@ var/list/nukanames = list("Joni", "Lauralee", "Kayden", "Amy", "Alyx", "Vriani",
 /obj/machinery/vending/nukacola
 	name = "Nuka Cola Vendor"
 	desc = "Bottled and sold by the Nuka Cola Corporation!"
-	product_slogans = "Take a Nuka Break!;Nuka Cola has what you crave!"
-	product_ads = "Drink Nuka Cola!;Support the war effort, buy a Nuka Cola!;Share a Nuka with [pick(nukanames)]!"
+	product_slogans = "Drink Nuka Cola!;Support the war effort, buy a Nuka Cola!;Share a Nuka with [pick(nukanames)]!"
+	product_ads = "Take a Nuka Break!;Nuka Cola has what you crave!"
 	icon = 'mods/content/fallout/machinery/icons/nukacola.dmi'
 	vend_delay = 26
 	base_type = /obj/machinery/vending/hydronutrients
