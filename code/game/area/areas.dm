@@ -415,9 +415,8 @@ var/global/list/mob/living/forced_ambiance_list = new
 		sound_to(L, sound(null, channel = sound_channels.lobby_channel))
 		forced_ambiance_list -= L
 
-/area/proc/gravitychange(var/gravitystate = 0)
+/area/proc/gravitychange(gravitystate = 0)
 	has_gravity = gravitystate
-
 	for(var/mob/M in src)
 		if(has_gravity)
 			thunk(M)
