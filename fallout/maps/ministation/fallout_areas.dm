@@ -6,7 +6,19 @@
 
 
 /area/fallout/outdoors
-	name = "Outdoors Area"
+	name = "Wasteland"
+	sound_env = PLAIN
+	ambience = list(
+		'sound/effects/wind/desert0.ogg',
+		'sound/effects/wind/desert1.ogg',
+		'sound/effects/wind/desert2.ogg',
+		'sound/effects/wind/desert3.ogg',
+		'sound/effects/wind/desert4.ogg',
+		'sound/effects/wind/desert5.ogg'
+	)
+	is_outside = OUTSIDE_YES
+	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_BACKGROUND
+	interior_ambient_light_modifier = -0.3
 
 	//BOS Areas
 /area/fallout/brotherhood

@@ -1,66 +1,76 @@
-"a" = (/turf/floor/grass,/area/fallout/outdoors)
-"b" = (/obj/item/gun/energy/laser/aer14,/turf/floor/grass,/area/fallout/outdoors)
-"g" = (/turf/wall/brick/granite/shutter/open,/area/fallout/outdoors)
-"i" = (/obj/machinery/door/airlock/glass,/turf/floor/wood/bamboo,/area/fallout/outdoors)
-"p" = (/turf/floor/wood/bamboo,/area/fallout/outdoors)
-"t" = (/obj/item/box/ammo/fallout/slug,/turf/floor/grass,/area/fallout/outdoors)
-"u" = (/turf/wall/brick/granite,/area/fallout/outdoors)
-"D" = (/obj/item/gun/energy/laser/aer9,/turf/floor/grass,/area/fallout/outdoors)
-"G" = (/turf/floor/grass/wild,/area/fallout/outdoors)
-"J" = (/obj/item/gun/energy/laser/aer12,/turf/floor/grass,/area/fallout/outdoors)
-"K" = (/obj/item/gun/energy/laser/reloadable,/turf/floor/grass,/area/fallout/outdoors)
-"M" = (/turf/wall/r_titanium,/area/fallout/outdoors)
-"Q" = (/obj/item/gun/energy/laser,/turf/floor/grass,/area/fallout/outdoors)
+"a" = (/turf/floor/concrete/smooth,/area/fallout/town)
+"b" = (/obj/abstract/weather_system,/turf/floor/rock/sand,/area/fallout/outdoors)
+"c" = (/obj/machinery/light{dir = 1},/turf/floor/concrete,/area/fallout/outdoors)
+"e" = (/turf/wall/brick/granite/shutter/open,/area/fallout/brotherhood/offices1)
+"g" = (/turf/wall/brick/pottery,/area/fallout/town)
+"h" = (/obj/abstract/landmark/latejoin/observer,/turf/floor/rock/sand,/area/fallout/outdoors)
+"k" = (/turf/floor/rock/sand,/area/fallout/outdoors)
+"l" = (/turf/wall/brick/pottery/shutter/open,/area/fallout/town)
+"p" = (/obj/structure/sign/double/barsign{pixel_y = 30},/turf/floor/concrete,/area/fallout/outdoors)
+"r" = (/turf/wall/brick/granite,/area/fallout/brotherhood/offices1)
+"s" = (/turf/floor/concrete,/area/fallout/outdoors)
+"t" = (/obj/item/gun/energy/laser/aer9,/turf/floor/rock/sand,/area/fallout/outdoors)
+"y" = (/obj/item/gun/energy/laser/aer14,/turf/floor/rock/sand,/area/fallout/outdoors)
+"z" = (/obj/machinery/door/airlock/glass/civilian,/turf/floor/concrete,/area/fallout/town)
+"C" = (/obj/abstract/level_data_spawner/ministation,/turf/floor/rock/sand,/area/fallout/outdoors)
+"E" = (/obj/item/gun/energy/laser/reloadable,/turf/floor/rock/sand,/area/fallout/outdoors)
+"I" = (/turf/floor/concrete/reinforced/road,/area/fallout/outdoors)
+"J" = (/obj/machinery/door/airlock/glass,/turf/floor/wood/bamboo,/area/fallout/brotherhood/offices1)
+"L" = (/obj/item/gun/energy/laser,/turf/floor/rock/sand,/area/fallout/outdoors)
+"R" = (/obj/abstract/landmark/latejoin,/turf/floor/rock/sand,/area/fallout/outdoors)
+"T" = (/obj/item/gun/energy/laser/aer12,/turf/floor/rock/sand,/area/fallout/outdoors)
+"W" = (/turf/floor/wood/bamboo,/area/fallout/brotherhood/offices1)
+"Y" = (/obj/item/box/ammo/fallout/slug,/turf/floor/rock/sand,/area/fallout/outdoors)
 
 (1,1,1) = {"
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MaaaaaaaaaaaauuuuuuuuaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaauppppppuaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaauppppppuaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaauppppppuaaaaataaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaauuguiuuuaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaJKaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaQabaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaDaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaGGGGaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaGGGGaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaGGGGaaaaaaaaaaGGGGGaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaGGGGaaaGGGGGGaGGGGGaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaGGGGaaaGGGGGGaGGGGGaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaGGGGaaaGGGGGGaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaGGGGaaaGGGGGGaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaGGGGaaaGGGGGGaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaGGGGGGaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkrrrrrrrrkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkrWWWWWWrkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkrWWWWWWrkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkrWWWWWWrkkkkkYkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkrrerJrrrkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkRkkkkTEkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkLkykkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkktkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkgggggggggkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkgaaaaaaagkkkkhkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkgaaaaaaagkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkgaaaaaaagkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkgaaaaaaagkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkggzggllggkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkssssssscspssscsssssssssskkkkkkkkkkkkkkkkkkkkk
+kkkkkIIIIIIIIIIIIIIIIIIIIIIIIkkkkkkkkkkkkkkkkkkkkk
+kkkkkIIIIIIIIIIIIIIIIIIIIIIIIkkkkkkkkkkkkkkkkkkkkk
+kkkkkIIIIIIIIIIIIIIIIIIIIIIIIkkkkkkkkkkkkkkkkkkkkk
+kkkkksssssssssssssssssssssssskkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kbkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kCkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 "}

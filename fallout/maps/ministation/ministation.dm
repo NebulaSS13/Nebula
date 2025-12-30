@@ -26,7 +26,7 @@ Now poorly imported for Nebula!
 
 	#include "ministation_jobs.dm"
 	#include "ministation_shuttles.dm"
-
+	#include "levels.dm"
 
 
 	//#include "fallout_areas.dm"
