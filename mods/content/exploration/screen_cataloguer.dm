@@ -4,7 +4,7 @@
 	layer = UNDER_HUD_LAYER
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	screen_loc = "CENTER,CENTER"
-	icon = 'icons/screen/scanner.dmi'
+	icon = 'mods/content/exploration/icons/scanner.dmi'
 	icon_state = "blank"
 	alpha = 180
 	requires_owner = FALSE

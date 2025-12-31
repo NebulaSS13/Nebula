@@ -2,7 +2,7 @@
 	name = "cataloguer"
 	desc = "A hand-held device used for compiling information about an object by scanning it, and then uploading it to the local codex. Alt-click to highlight scannable objects around you."
 	color = COLOR_GUNMETAL
-	icon = 'icons/obj/items/device/cataloguer.dmi'
+	icon = 'mods/content/exploration/icons/cataloguer.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"materials":2, "programming":3,"magnets":3}'
@@ -208,3 +208,6 @@
 		if(scan_result)
 			loaded_disk.data += scan_result.worth_points
 			to_chat(user, SPAN_NOTICE("You complete the scan of \the [target], earning [scan_result.worth_points] good explorer point\s."))
+
+/datum/fabricator_recipe/device_component/cataloguer
+	path = /obj/item/cataloguer

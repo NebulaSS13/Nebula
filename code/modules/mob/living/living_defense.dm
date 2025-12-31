@@ -28,7 +28,7 @@
 		visible_message(SPAN_WARNING("[src] triggers their deadman's switch!"))
 		signaler.signal()
 	//Armor
-	var/damage = P.damage
+	var/damage = P.get_projectile_damage(src)
 	var/flags = P.damage_flags()
 	var/damaged
 	if(!P.nodamage)

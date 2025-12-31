@@ -2010,3 +2010,8 @@ default behaviour is:
 		add_genetic_condition(pick(decls_repository.get_decls_of_type(/decl/genetic_condition/superpower)))
 	if(radiation_amount)
 		apply_damage(radiation_amount, IRRADIATE, armor_pen = 100)
+
+// Used by specimen taggers to avoid tagging/overwriting players or named mobs like Runtime.
+/mob/living/proc/is_tagging_suitable()
+	return !key && !client
+

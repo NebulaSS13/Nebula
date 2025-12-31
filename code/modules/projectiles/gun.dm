@@ -46,6 +46,8 @@
 	pickup_sound = 'sound/foley/pickup2.ogg'
 	can_be_twohanded = TRUE // also checks one_hand_penalty
 	needs_attack_dexterity = DEXTERITY_WEAPONS
+	wieldsound = 'sound/weapons/TargetOn.ogg'
+	unwieldsound = 'sound/weapons/TargetOff.ogg'
 
 	var/fire_verb = "fire"
 	var/waterproof = FALSE
@@ -94,6 +96,7 @@
 /obj/item/gun/Initialize()
 	// must have firemodes initialized prior to any update_icon_calls
 	// including reconsider_single_icon(), which is done in ..()
+	LAZYINITLIST(firemodes)
 	for(var/i in 1 to firemodes.len)
 		firemodes[i] = new /datum/firemode(src, firemodes[i])
 	. = ..()
@@ -544,7 +547,7 @@
 		shot_sound = P.fire_sound
 		shot_sound_vol = P.fire_sound_vol
 	if(silencer)
-		shot_sound_vol = 10
+		shot_sound_vol = P.fire_sound_vol_silenced
 
 	playsound(firer, shot_sound, shot_sound_vol, 1)
 

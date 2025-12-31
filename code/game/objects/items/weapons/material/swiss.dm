@@ -1,14 +1,3 @@
-#define SWISSKNF_CLOSED  "Close"
-#define SWISSKNF_LBLADE  "Large Blade"
-#define SWISSKNF_SBLADE  "Small Blade"
-#define SWISSKNF_CLIFTER "Cap Lifter-Screwdriver"
-#define SWISSKNF_COPENER "Can Opener-Screwdriver"
-#define SWISSKNF_CSCREW  "Corkscrew"
-#define SWISSKNF_GBLADE  "Glass Cutter"
-#define SWISSKNF_WCUTTER "Wirecutters"
-#define SWISSKNF_WBLADE  "Wood Saw"
-#define SWISSKNF_CROWBAR "Pry Bar"
-
 /obj/item/knife/folding/swiss
 	name = "combi-knife"
 	desc = "A small, colourable, multi-purpose folding knife."
@@ -16,6 +5,17 @@
 	valid_handle_colors = null
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+
+	var/const/SWISSKNF_CLOSED  = "Close"
+	var/const/SWISSKNF_LBLADE  = "Large Blade"
+	var/const/SWISSKNF_SBLADE  = "Small Blade"
+	var/const/SWISSKNF_CLIFTER = "Cap Lifter-Screwdriver"
+	var/const/SWISSKNF_COPENER = "Can Opener-Screwdriver"
+	var/const/SWISSKNF_CSCREW  = "Corkscrew"
+	var/const/SWISSKNF_GBLADE  = "Glass Cutter"
+	var/const/SWISSKNF_WCUTTER = "Wirecutters"
+	var/const/SWISSKNF_WBLADE  = "Wood Saw"
+	var/const/SWISSKNF_CROWBAR = "Pry Bar"
 
 	var/active_tool = SWISSKNF_CLOSED
 	var/list/tools = list(SWISSKNF_LBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER)
@@ -151,25 +151,8 @@
 	handle_color = COLOR_AMBER
 	tools = list(SWISSKNF_LBLADE, SWISSKNF_SBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_WBLADE, SWISSKNF_WCUTTER)
 
-/obj/item/knife/folding/swiss/explorer
-	name = "explorer's combi-knife"
-	desc = "A small, purple, multi-purpose folding knife. This one adds a wood saw and prybar."
-	handle_color = COLOR_PURPLE
-	tools = list(SWISSKNF_LBLADE, SWISSKNF_SBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_WBLADE, SWISSKNF_CROWBAR)
-
 /obj/item/knife/folding/swiss/loot
 	name = "black combi-knife"
 	desc = "A small, silver, multi-purpose folding knife. This one adds a small blade and corkscrew."
 	handle_color = COLOR_GRAY40
 	tools = list(SWISSKNF_LBLADE, SWISSKNF_SBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_CSCREW)
-
-#undef SWISSKNF_CLOSED
-#undef SWISSKNF_LBLADE
-#undef SWISSKNF_SBLADE
-#undef SWISSKNF_CLIFTER
-#undef SWISSKNF_COPENER
-#undef SWISSKNF_CSCREW
-#undef SWISSKNF_GBLADE
-#undef SWISSKNF_WCUTTER
-#undef SWISSKNF_WBLADE
-#undef SWISSKNF_CROWBAR

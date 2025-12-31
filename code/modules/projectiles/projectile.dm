@@ -78,6 +78,9 @@
 	var/fire_sound
 	var/fire_sound_vol = 50
 	var/fire_sound_vol_silenced = 10
+	var/miss_sounds
+	var/ricochet_sounds
+	var/list/impact_sounds	//for different categories, IMPACT_MEAT etc
 	var/shrapnel_type = /obj/item/shard/shrapnel
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
@@ -687,7 +690,6 @@
 
 /obj/item/projectile/proc/get_projectile_damage(mob/living/target)
 	return damage
-
 
 // Makes a brief effect sprite appear when the projectile hits something solid.
 /obj/item/projectile/proc/impact_visuals(atom/A, hit_x, hit_y)
