@@ -149,7 +149,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 
 // This is an absolutely stupid machine. Basically the same as the debug one with some alterations.
 // It is a placeholder for a proper reactor setup (probably a RUST descendant)
-/obj/machinery/power/ascent_reactor
+/obj/machinery/ascent_reactor
 	name = "mantid fusion stack"
 	desc = "A tall, gleaming assemblage of advanced alien machinery. It hums and crackles with restrained power."
 	icon = 'icons/obj/machines/power/fusion_core.dmi'
@@ -159,7 +159,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 	var/output_power = 9000 KILOWATTS
 	var/image/field_image
 
-/obj/machinery/power/ascent_reactor/attack_hand(mob/user)
+/obj/machinery/ascent_reactor/attack_hand(mob/user)
 	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
 		return ..()
 	if(ishuman(user))
@@ -175,7 +175,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 	update_icon()
 	return TRUE
 
-/obj/machinery/power/ascent_reactor/on_update_icon()
+/obj/machinery/ascent_reactor/on_update_icon()
 	. = ..()
 
 	if(!field_image)
@@ -198,13 +198,13 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 		set_light(0)
 		icon_state = "core0"
 
-/obj/machinery/power/ascent_reactor/Initialize()
+/obj/machinery/ascent_reactor/Initialize()
 	. = ..()
 	update_icon()
 
-/obj/machinery/power/ascent_reactor/Process()
+/obj/machinery/ascent_reactor/Process()
 	if(on)
-		add_avail(output_power)
+		generate_power(output_power)
 
 /obj/machinery/power/smes/buildable/power_shuttle/ascent
 	name = "mantid battery"

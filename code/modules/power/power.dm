@@ -2,6 +2,8 @@
 // POWER MACHINERY BASE CLASS
 // This subtype is for machinery which needs to be directly referenced by its parent powernet during powernet processing.
 // This subtype does not encompass all power generating machinery, or machinery that needs to draw from a powernet in general.
+// If you try using this, make sure you can't just use get_powernet() instead. Ideally either the powernet needs to know about it (APCs)
+// or we need to run logic when we connect or disconnect from a powernet (solar panels/trackers).
 //////////////////////////////
 
 /////////////////////////////

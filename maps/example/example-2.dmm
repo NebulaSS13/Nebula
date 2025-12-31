@@ -436,7 +436,7 @@
 /turf/floor/tiled/steel_grid,
 /area/example/second)
 "Ci" = (
-/obj/machinery/power/debug_items/infinite_generator,
+/obj/machinery/debug_items/infinite_generator,
 /obj/structure/cable/yellow,
 /turf/floor/tiled/white,
 /area/example/second)

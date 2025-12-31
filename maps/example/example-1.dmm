@@ -334,7 +334,7 @@
 /turf/floor/tiled/dark/monotile,
 /area/example/first)
 "qR" = (
-/obj/machinery/power/debug_items/infinite_generator,
+/obj/machinery/debug_items/infinite_generator,
 /obj/structure/cable/yellow,
 /turf/floor,
 /area/example/first)
