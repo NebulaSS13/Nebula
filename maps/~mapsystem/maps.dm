@@ -207,6 +207,9 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 
 	var/default_ui_style
 
+	/// Is maint currently all-access?
+	var/maint_all_access = FALSE
+
 /datum/map/New()
 	..()
 	default_ui_style ||= DEFAULT_UI_STYLE
@@ -475,11 +478,11 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 	return
 
 /datum/map/proc/make_maint_all_access(var/radstorm = 0)
-	maint_all_access = 1
+	maint_all_access = TRUE
 	priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")
 
 /datum/map/proc/revoke_maint_all_access(var/radstorm = 0)
-	maint_all_access = 0
+	maint_all_access = FALSE
 	priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
 
 /datum/map/proc/show_titlescreen(client/C)

@@ -66,7 +66,7 @@
 	if(!istype(supplied_access, /list))
 		return FALSE
 
-	if(maint_all_access)
+	if(global.using_map.maint_all_access) // todo: movable -> loc -> area -> map datum, to allow separate maps?
 		supplied_access = supplied_access.Copy()
 		supplied_access |= access_maint_tunnels
 
