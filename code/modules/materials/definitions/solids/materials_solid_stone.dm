@@ -30,6 +30,7 @@
 /decl/material/solid/stone/Initialize()
 	. = ..()
 	texture = image('icons/turf/wall_texture.dmi', "concrete")
+	texture.appearance_flags |= RESET_COLOR
 	texture.blend_mode = BLEND_MULTIPLY
 
 /decl/material/solid/stone/get_wall_texture()
