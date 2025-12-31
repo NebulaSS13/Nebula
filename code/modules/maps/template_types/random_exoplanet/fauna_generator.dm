@@ -126,7 +126,7 @@
 
 /datum/fauna_generator/proc/generate_breathable_gases(var/datum/gas_mixture/atmosphere, var/list/breath_gases, var/list/toxic_gases)
 	//Set up gases for living things
-	var/list/all_gasses = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
+	var/list/all_gasses = get_filterable_material_types(as_list = TRUE)
 	if(!length(breath_gases))
 		var/list/goodgases = all_gasses.Copy()
 		var/gasnum = min(rand(1,3), goodgases.len)

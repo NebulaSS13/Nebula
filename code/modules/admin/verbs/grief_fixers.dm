@@ -55,9 +55,8 @@
 
 /decl/atmos_grief_fix_step/reset_turfs/act()
 	var/list/unsorted_overlays = list()
-	var/list/all_gasses = decls_repository.get_decls_of_subtype(/decl/material/gas)
-	for(var/id in all_gasses)
-		var/decl/material/mat = all_gasses[id]
+	for(var/id,m in get_filterable_material_types())
+		var/decl/material/mat = m
 		unsorted_overlays |= mat.gas_tile_overlay
 
 	for(var/turf/T in world)
