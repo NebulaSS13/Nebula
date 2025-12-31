@@ -1,8 +1,8 @@
 /turf/floor/reinforced
-	name        = "reinforced floor"
-	icon        = 'icons/turf/flooring/tiles.dmi'
-	icon_state  = "reinforced"
-	_flooring   = /decl/flooring/reinforced
+	name              = "reinforced floor"
+	icon              = 'icons/turf/flooring/tiles.dmi'
+	icon_state        = "reinforced"
+	_flooring         = /decl/flooring/reinforced
 
 /turf/floor/reinforced/airless
 	initial_gas = null

@@ -24,6 +24,7 @@
 		"broken4"
 	)
 	uid            = "floor_reinf"
+	deconstruct_sound = 'sound/items/Deconstruct.ogg'
 
 /decl/flooring/reinforced/circuit
 	name           = "processing strata"
