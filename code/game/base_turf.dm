@@ -34,7 +34,7 @@
 
 // Returns the open turf of a Z-stack by finding the nearest non-open turf below.
 /proc/get_open_turf_type(var/turf/T)
-	if(!HasBelow(T.z))
+	if(!istype(T) || !HasBelow(T.z))
 		return
 	var/turf/below = T
 	while ((below = GetBelow(below)))

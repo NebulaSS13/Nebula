@@ -1,6 +1,6 @@
 /turf/proc/handle_ramp_dug_below(turf/wall/natural/ramp)
 	if(simulated && !is_open())
-		ChangeTurf(get_open_turf_type(z))
+		ChangeTurf(get_open_turf_type(src))
 		return TRUE
 	return FALSE
 

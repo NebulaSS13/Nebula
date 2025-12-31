@@ -52,7 +52,7 @@
 		var/turf/floor_data = floor_type
 		new_icon       = initial(floor_data.icon)
 		new_icon_state = initial(floor_data.icon_state)
-		new_color      = initial(floor_data.color)
+		new_color      = base_color
 
 		var/turf/wall/natural/neighbor = get_step(src, turn(ramp_slope_direction, -90))
 		var/has_left_neighbor  = istype(neighbor) && neighbor.ramp_slope_direction == ramp_slope_direction
@@ -65,10 +65,10 @@
 			state = "ramp-blend-left"
 		else if(has_right_neighbor)
 			state = "ramp-blend-right"
-		var/image/I = image(material_icon_base, state, dir = ramp_slope_direction)
+		var/image/I = image(icon = material_icon_base, icon_state = state, dir = ramp_slope_direction)
 		add_overlay(I)
 		if(shine)
-			I = image(material_icon_base, "[state]-shine", dir = ramp_slope_direction)
+			I = image(icon = material_icon_base, icon_state = "[state]-shine", dir = ramp_slope_direction)
 			I.appearance_flags |= RESET_ALPHA
 			I.alpha = shine
 			add_overlay(I)

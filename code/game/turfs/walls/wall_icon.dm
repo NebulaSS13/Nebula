@@ -112,6 +112,7 @@
 	other_connections = dirs_to_corner_states(other_dirs)
 
 /turf/wall/proc/update_wall_icon()
+
 	var/material_icon_base = get_wall_icon()
 	var/base_color = get_base_color()
 

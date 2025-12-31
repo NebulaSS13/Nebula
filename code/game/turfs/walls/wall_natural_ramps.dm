@@ -4,40 +4,23 @@
 	QDEL_NULL_LIST(engravings)
 
 	var/old_ao = permit_ao
-	if(ramp_slope_direction)
-
-		user?.visible_message(SPAN_NOTICE("\The [user] digs out \the [src], forming a ramp."))
-
-		drop_ore()
-		permit_ao  = FALSE
-		blocks_air = FALSE
-		density    = FALSE
-		opacity    = FALSE
-
-		// Pretend to be a normal floor turf under the ramp.
-		var/turf/under = floor_type
-		icon             = initial(under.icon)
-		icon_state       = initial(under.icon_state)
-		color            = initial(under.color)
-
-		decals = null
-		var/turf/ramp_above = GetAbove(src)
-		if(ramp_above)
-			ramp_above.handle_ramp_dug_below(src)
-		update_neighboring_ramps()
-
-	else
-
+	if(!ramp_slope_direction)
 		user?.visible_message(SPAN_NOTICE("\The [user] clears out \the [src]."))
+		ChangeTurf(floor_type)
+		return
 
-		permit_ao  = initial(permit_ao)
-		blocks_air = initial(blocks_air)
-		density    = initial(density)
-		color      = initial(color)
-		refresh_opacity()
-
-		icon = 'icons/turf/walls/natural.dmi'
-		icon_state = "blank"
+	user?.visible_message(SPAN_NOTICE("\The [user] digs out \the [src], forming a ramp."))
+	drop_ore()
+	permit_ao  = FALSE
+	blocks_air = FALSE
+	density    = FALSE
+	opacity    = FALSE
+	decals = null
+	var/turf/ramp_above = GetAbove(src)
+	if(ramp_above)
+		ramp_above.handle_ramp_dug_below(src)
+	update_neighboring_ramps()
+	update_icon()
 
 	if(!skip_icon_update)
 		for(var/turf/wall/natural/neighbor in RANGE_TURFS(src, 1))
