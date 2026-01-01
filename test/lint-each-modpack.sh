@@ -3,7 +3,6 @@
 set -o pipefail
 
 dmepath=""
-retval=1
 
 for var; do
     if [[ $var != -* && $var == *.dme ]]; then

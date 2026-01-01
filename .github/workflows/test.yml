@@ -67,7 +67,7 @@ jobs:
           fileName: "DMCompiler_linux-x64.tar.gz"
           extract: true
       - name: Run OpenDream
-        run: ./DMCompiler_linux-x64/DMCompiler nebula.dme --define=UNIT_TEST --suppress-unimplemented --skip-anything-typecheck --version=${BYOND_MAJOR}.${BYOND_MINOR} | bash test/annotate_od.sh
+        run: ./test/compile-od-all-modpacks.sh nebula.dme
   Code:
     runs-on: ubuntu-latest
     steps:
