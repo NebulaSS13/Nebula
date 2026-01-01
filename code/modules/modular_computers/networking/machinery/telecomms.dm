@@ -154,7 +154,7 @@ var/global/list/telecomms_hubs = list()
 
 	if(!send_overmap_object)
 		var/turf/T = get_turf(src)
-		send_overmap_object = istype(T) && global.overmap_sectors["[T.z]"]
+		send_overmap_object = istype(T) && global.overmap_sectors[T.z]
 
 	if(channel.secured)
 		encryption |= channel.secured
@@ -179,7 +179,7 @@ var/global/list/telecomms_hubs = list()
 
 		// If we're sending from an overmap object AND our overmap object transmits its identity AND it's different than the listener's
 		// then append the overmap object name to it, so they know where we're from
-		var/listener_overmap_object = istype(speaking_from) && global.overmap_sectors[num2text(speaking_from.z)]
+		var/listener_overmap_object = istype(speaking_from) && global.overmap_sectors[speaking_from.z]
 		var/send_overmap = send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != listener_overmap_object
 		for(var/mob/listener as anything in radio.get_radio_listeners())
 			listeners[listener] = send_overmap
@@ -203,7 +203,7 @@ var/global/list/telecomms_hubs = list()
 		// Find the z-chunks we can chain the transmission to, which is our local chunk plus any overmap sites in range,
 		// assuming we have a functioning comms maser and the overmap site has a telecomms hub and comms antenna.
 		var/list/levels = SSmapping.get_connected_levels(z)
-		var/obj/effect/overmap/O = global.overmap_sectors["[z]"]
+		var/obj/effect/overmap/O = global.overmap_sectors[z]
 		for(var/obj/machinery/shipcomms/broadcaster/our_maser in O?.comms_masers)
 			levels |= our_maser.get_available_z_levels()
 

@@ -120,7 +120,7 @@
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
-	var/obj/effect/overmap/O = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/O = global.overmap_sectors[z]
 	if(!O)
 		return
 	if(stat & (BROKEN|NOPOWER))
@@ -140,7 +140,7 @@
 
 /obj/machinery/shipcomms/proc/get_nearby_entities()
 	. = list()
-	var/obj/effect/overmap/O = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/O = global.overmap_sectors[z]
 	if(!O)
 		return
 	var/turf/origin = get_turf(O)
@@ -173,7 +173,7 @@
 /obj/machinery/shipcomms/Destroy()
 	var/turf/T = get_turf(src)
 	if(istype(T))
-		var/obj/effect/overmap/O = global.overmap_sectors["[T.z]"]
+		var/obj/effect/overmap/O = global.overmap_sectors[T.z]
 		if(O)
 			unregister(O)
 	. = ..()
@@ -181,8 +181,8 @@
 /obj/machinery/shipcomms/update_power_on_move(atom/movable/mover, atom/old_loc, atom/new_loc)
 	..()
 	if(istype(old_loc) && old_loc != new_loc && (!istype(new_loc) || new_loc.z != old_loc.z))
-		var/obj/effect/overmap/lastsector = global.overmap_sectors["[old_loc.z]"]
-		var/obj/effect/overmap/currentsector = istype(new_loc) && global.overmap_sectors["[new_loc.z]"]
+		var/obj/effect/overmap/lastsector = global.overmap_sectors[old_loc.z]
+		var/obj/effect/overmap/currentsector = istype(new_loc) && global.overmap_sectors[new_loc.z]
 		if(istype(lastsector) && lastsector != currentsector)
 			unregister(lastsector.comms_masers)
 		refresh_overmap_registration()
