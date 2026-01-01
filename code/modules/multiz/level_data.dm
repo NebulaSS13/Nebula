@@ -410,11 +410,11 @@
 		exterior_atmosphere.update_values() //Might as well update
 		exterior_atmosphere.check_tile_graphic()
 		return
-	var/list/exterior_atmos_composition = exterior_atmosphere
+	var/alist/exterior_atmos_composition = exterior_atmosphere
 	exterior_atmosphere = new
-	if(islist(exterior_atmos_composition))
-		for(var/gas in exterior_atmos_composition)
-			exterior_atmosphere.adjust_gas(gas, exterior_atmos_composition[gas], FALSE)
+	if(istype(exterior_atmos_composition, /alist))
+		for(var/gas, gas_amount in exterior_atmos_composition)
+			exterior_atmosphere.adjust_gas(gas, gas_amount, FALSE)
 		exterior_atmosphere.temperature = exterior_atmos_temp
 		exterior_atmosphere.update_values()
 		exterior_atmosphere.check_tile_graphic()

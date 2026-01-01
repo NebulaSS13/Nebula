@@ -223,7 +223,7 @@
 		return TRUE
 	return FALSE
 
-var/global/list/STANDARD_AIRMIX = list(
+var/global/alist/STANDARD_AIRMIX = alist(
 	/decl/material/gas/oxygen = MOLES_O2STANDARD,
 	/decl/material/gas/nitrogen = MOLES_N2STANDARD
 )

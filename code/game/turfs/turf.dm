@@ -18,7 +18,7 @@
 	var/turf_flags
 
 	/// Either a mapping of material decls to mol amounts, or a reserved initial gas define like GAS_STANDARD_AIRMIX.
-	var/list/initial_gas
+	var/alist/initial_gas
 
 	//Properties for airtight tiles (/wall)
 	var/thermal_conductivity = 0.05

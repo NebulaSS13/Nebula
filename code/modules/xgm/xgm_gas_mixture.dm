@@ -1,7 +1,16 @@
+// These variables are used to speed up certain calculations by using dot products.
+var/global/alist/cached_specific_heat = alist()
+var/global/alist/cached_molar_mass = alist()
+var/global/alist/cached_mat_r = alist()
+var/global/alist/cached_mat_g = alist()
+var/global/alist/cached_mat_b = alist()
+var/global/alist/cached_mat_a = alist()
+var/global/alist/cached_mat_color_weight = alist()
+
 /datum/gas_mixture
 	//Associative list of gas moles.
 	//Gases with 0 moles are not tracked and are pruned by update_values()
-	var/list/gas = list()
+	var/alist/gas = alist()
 	//Temperature in Kelvin of this gas mix.
 	var/temperature = 0
 
@@ -86,11 +95,12 @@
 			temperature = (giver.temperature*giver_heat_capacity + temperature*self_heat_capacity)/combined_heat_capacity
 
 	if((group_multiplier != 1)||(giver.group_multiplier != 1))
-		for(var/g in giver.gas)
-			gas[g] += giver.gas[g] * giver.group_multiplier / group_multiplier
+		var/scale_factor = giver.group_multiplier / group_multiplier
+		for(var/gas_type, gas_amount in giver.gas)
+			gas[gas_type] += gas_amount * scale_factor
 	else
-		for(var/g in giver.gas)
-			gas[g] += giver.gas[g]
+		for(var/gas_type, gas_amount in giver.gas)
+			gas[gas_type] += gas_amount
 
 	update_values()
 	return TRUE
@@ -105,11 +115,13 @@
 		gas.Cut()
 		sharer.gas.Cut()
 
-	for(var/g in gas|sharer.gas)
-		var/comb = gas[g] + sharer.gas[g]
-		comb /= total_volume + sharer.total_volume
-		gas[g] = comb * total_volume
-		sharer.gas[g] = comb * sharer.total_volume
+	var/scale_factor = total_volume + sharer.total_volume
+	var/origin_scale_factor = total_volume / scale_factor
+	var/sharer_scale_factor = sharer.total_volume / scale_factor
+	for(var/gas_type in gas|sharer.gas) // we can only iterate keys here since merging alists doesn't combine values
+		var/comb = gas[gas_type] + sharer.gas[gas_type]
+		gas[gas_type] = comb * origin_scale_factor
+		sharer.gas[gas_type] = comb * sharer_scale_factor
 
 	if(our_heatcap + share_heatcap)
 		temperature = ((temperature * our_heatcap) + (sharer.temperature * share_heatcap)) / (our_heatcap + share_heatcap)
@@ -123,12 +135,7 @@
 
 //Returns the heat capacity of the gas mix based on the specific heat of the gases.
 /datum/gas_mixture/proc/heat_capacity()
-	. = 0
-	for(var/g in gas)
-		var/decl/material/mat = GET_DECL(g)
-		. += mat.gas_specific_heat * gas[g]
-	. *= max(1, group_multiplier)
-
+	return values_dot(gas, global.cached_specific_heat) * max(1, group_multiplier)
 
 //Adds or removes thermal energy. Returns the actual thermal energy change, as in the case of removing energy we can't go below TCMB.
 /datum/gas_mixture/proc/add_thermal_energy(var/thermal_energy)
@@ -151,7 +158,6 @@
 //Returns the thermal energy change required to get to a new temperature
 /datum/gas_mixture/proc/get_thermal_energy_change(var/new_temperature)
 	return heat_capacity()*(max(new_temperature, 0) - temperature)
-
 
 //Technically vacuum doesn't have a specific entropy. Just use a really big number (infinity would be ideal) here so that it's easy to add gas to vacuum and hard to take gas out.
 #define SPECIFIC_ENTROPY_VACUUM		150000
@@ -197,13 +203,8 @@
 
 //Updates the total_moles count and trims any empty gases.
 /datum/gas_mixture/proc/update_values()
-	total_moles = 0
-	for(var/g in gas)
-		if(gas[g] <= 0)
-			gas -= g
-		else
-			total_moles += gas[g]
-
+	values_cut_under(gas, ATMOS_PRECISION)
+	total_moles = values_sum(gas)
 	//Mark the cached color for update
 	cached_mix_color = null
 
@@ -222,9 +223,9 @@
 
 	var/datum/gas_mixture/removed = new
 
-	for(var/g in gas)
-		removed.gas[g] = QUANTIZE((gas[g] / total_moles) * amount)
-		gas[g] -= removed.gas[g] / group_multiplier
+	for(var/gas_type, gas_amount in gas)
+		removed.gas[gas_type] = QUANTIZE((gas_amount / total_moles) * amount)
+		gas[gas_type] -= removed.gas[gas_type] / group_multiplier
 
 	removed.temperature = temperature
 	update_values()
@@ -244,9 +245,9 @@
 	var/datum/gas_mixture/removed = new
 	removed.group_multiplier = out_group_multiplier
 
-	for(var/g in gas)
-		removed.gas[g] = (gas[g] * ratio * group_multiplier / out_group_multiplier)
-		gas[g] = gas[g] * (1 - ratio)
+	for(var/gas_type, gas_amount in gas)
+		removed.gas[gas_type] = (gas_amount * ratio * group_multiplier / out_group_multiplier)
+		gas[gas_type] = gas_amount * (1 - ratio)
 
 	removed.temperature = temperature
 	removed.total_volume = total_volume * group_multiplier / out_group_multiplier
@@ -269,18 +270,18 @@
 		return removed
 
 	var/sum = 0
-	for(var/g in gas)
-		var/decl/material/mat = GET_DECL(g)
-		var/list/check = mat_flag ? mat.flags : mat.gas_flags
+	for(var/gas_type, gas_amount in gas)
+		var/decl/material/mat = GET_DECL(gas_type)
+		var/check = mat_flag ? mat.flags : mat.gas_flags
 		if(check & flag)
-			sum += gas[g]
+			sum += gas_amount
 
-	for(var/g in gas)
-		var/decl/material/mat = GET_DECL(g)
-		var/list/check = mat_flag ? mat.flags : mat.gas_flags
+	for(var/gas_type, gas_amount in gas)
+		var/decl/material/mat = GET_DECL(gas_type)
+		var/check = mat_flag ? mat.flags : mat.gas_flags
 		if(check & flag)
-			removed.gas[g] = QUANTIZE((gas[g] / sum) * amount)
-			gas[g] -= removed.gas[g] / group_multiplier
+			removed.gas[gas_type] = QUANTIZE((gas_amount / sum) * amount)
+			gas[gas_type] -= removed.gas[gas_type] / group_multiplier
 
 	removed.temperature = temperature
 	update_values()
@@ -291,10 +292,10 @@
 //Returns the amount of gas that has the given flag, in moles
 /datum/gas_mixture/proc/get_by_flag(flag)
 	. = 0
-	for(var/g in gas)
-		var/decl/material/mat = GET_DECL(g)
+	for(var/gas_type, gas_amount in gas)
+		var/decl/material/mat = GET_DECL(gas_type)
 		if(mat.gas_flags & flag)
-			. += gas[g]
+			. += gas_amount
 
 //Copies gas and temperature from another gas_mixture.
 /datum/gas_mixture/proc/copy_from(const/datum/gas_mixture/sample)
@@ -324,22 +325,22 @@
 		if(total_moles == 0 && sample.total_moles != 0 || sample.total_moles == 0 && total_moles != 0)
 			return 0
 
-	var/list/marked = list()
-	for(var/g in gas)
-		if((abs(gas[g] - sample.gas[g]) > MINIMUM_AIR_TO_SUSPEND) && \
-		((gas[g] < (1 - MINIMUM_AIR_RATIO_TO_SUSPEND) * sample.gas[g]) || \
-		(gas[g] > (1 + MINIMUM_AIR_RATIO_TO_SUSPEND) * sample.gas[g])))
+	var/alist/marked = alist()
+	for(var/gas_type, gas_amount in gas)
+		if((abs(gas_amount - sample.gas[gas_type]) > MINIMUM_AIR_TO_SUSPEND) && \
+		((gas_amount < (1 - MINIMUM_AIR_RATIO_TO_SUSPEND) * sample.gas[gas_type]) || \
+		(gas_amount > (1 + MINIMUM_AIR_RATIO_TO_SUSPEND) * sample.gas[gas_type])))
 			return 0
-		marked[g] = 1
+		marked[gas_type] = 1
 
 	if(abs(return_pressure() - sample.return_pressure()) > MINIMUM_PRESSURE_DIFFERENCE_TO_SUSPEND)
 		return 0
 
-	for(var/g in sample.gas)
-		if(!marked[g])
-			if((abs(gas[g] - sample.gas[g]) > MINIMUM_AIR_TO_SUSPEND) && \
-			((gas[g] < (1 - MINIMUM_AIR_RATIO_TO_SUSPEND) * sample.gas[g]) || \
-			(gas[g] > (1 + MINIMUM_AIR_RATIO_TO_SUSPEND) * sample.gas[g])))
+	for(var/sample_type, sample_moles in sample.gas)
+		if(!marked[sample_type])
+			if((abs(gas[sample_type] - sample_moles) > MINIMUM_AIR_TO_SUSPEND) && \
+			((gas[sample_type] < (1 - MINIMUM_AIR_RATIO_TO_SUSPEND) * sample_moles) || \
+			(gas[sample_type] > (1 + MINIMUM_AIR_RATIO_TO_SUSPEND) * sample_moles)))
 				return 0
 
 	if(total_moles > MINIMUM_AIR_TO_SUSPEND)
@@ -358,13 +359,13 @@
 		for(var/obj/effect/gas_overlay/O in graphic)
 			if(gas[O.material.type] <= O.material.gas_overlay_limit)
 				LAZYADD(graphic_remove, O)
-	for(var/g in gas)
+	for(var/gas_type, gas_amount in gas)
+		var/decl/material/mat = GET_DECL(gas_type)
 		//Overlay isn't applied for this gas, check if it's valid and needs to be added.
-		var/decl/material/mat = GET_DECL(g)
-		if(!isnull(mat.gas_overlay_limit) && gas[g] > mat.gas_overlay_limit)
-			if(!LAZYACCESS(tile_overlay_cache, g))
-				LAZYSET(tile_overlay_cache, g, new /obj/effect/gas_overlay(null, g))
-			var/tile_overlay = tile_overlay_cache[g]
+		if(!isnull(mat.gas_overlay_limit) && gas_amount > mat.gas_overlay_limit)
+			if(!LAZYACCESS(tile_overlay_cache, gas_type))
+				LAZYSET(tile_overlay_cache, gas_type, new /obj/effect/gas_overlay(null, gas_type))
+			var/tile_overlay = tile_overlay_cache[gas_type]
 			if(!(tile_overlay in graphic))
 				LAZYADD(graphic_add, tile_overlay)
 	. = FALSE
@@ -413,16 +414,16 @@
 	var/full_heat_capacity = heat_capacity()
 	var/s_full_heat_capacity = other.heat_capacity()
 
-	var/list/avg_gas = list()
+	var/alist/avg_gas = alist()
+	var/scale_factor = (size + share_size)
+	var/self_scale_factor = size / scale_factor
+	var/other_scale_factor = share_size / scale_factor
 
-	for(var/g in gas)
-		avg_gas[g] += gas[g] * size
+	for(var/gas_type, gas_moles in gas)
+		avg_gas[gas_type] += gas_moles * self_scale_factor
 
-	for(var/g in other.gas)
-		avg_gas[g] += other.gas[g] * share_size
-
-	for(var/g in avg_gas)
-		avg_gas[g] /= (size + share_size)
+	for(var/gas_type, gas_moles in other.gas)
+		avg_gas[gas_type] += gas_moles * other_scale_factor
 
 	var/temp_avg = 0
 	if(full_heat_capacity + s_full_heat_capacity)
@@ -433,10 +434,10 @@
 		ratio = sharing_lookup_table[connecting_tiles]
 	//WOOT WOOT DO NOT TOUCH THIS.
 
-	for(var/g in avg_gas)
-		gas[g] = max(0, (gas[g] - avg_gas[g]) * (1 - ratio) + avg_gas[g])
+	for(var/gas_type, gas_amount in avg_gas)
+		gas[gas_type] = max(0, (gas[gas_type] - gas_amount) * (1 - ratio) + gas_amount)
 		if(!one_way)
-			other.gas[g] = max(0, (other.gas[g] - avg_gas[g]) * (1 - ratio) + avg_gas[g])
+			other.gas[gas_type] = max(0, (other.gas[gas_type] - gas_amount) * (1 - ratio) + gas_amount)
 
 	temperature = max(0, (temperature - temp_avg) * (1-ratio) + temp_avg)
 	if(!one_way)
@@ -459,14 +460,14 @@
 	var/total_thermal_energy = 0
 	var/total_heat_capacity = 0
 
-	var/list/total_gas = list()
+	var/alist/total_gas = alist()
 	for(var/datum/gas_mixture/gasmix in gases)
 		total_volume += gasmix.total_volume
 		var/temp_heatcap = gasmix.heat_capacity()
 		total_thermal_energy += gasmix.temperature * temp_heatcap
 		total_heat_capacity += temp_heatcap
-		for(var/g in gasmix.gas)
-			total_gas[g] += gasmix.gas[g]
+		for(var/gas_type, gas_amount in gasmix.gas)
+			total_gas[gas_type] += gas_amount
 
 	if(total_volume > 0)
 		var/datum/gas_mixture/combined = new(total_volume)
@@ -481,8 +482,7 @@
 		combined.react()
 
 		//Average out the gases
-		for(var/g in combined.gas)
-			combined.gas[g] /= total_volume
+		combined.divide(total_volume)
 
 		//Update individual gas_mixtures
 		for(var/datum/gas_mixture/gasmix in gases)
@@ -493,10 +493,7 @@
 	return 1
 
 /datum/gas_mixture/proc/get_mass()
-	. = 0
-	for(var/g in gas)
-		var/decl/material/mat = GET_DECL(g)
-		. += gas[g] * mat.molar_mass * group_multiplier
+	return values_dot(gas, global.cached_molar_mass) * group_multiplier
 
 /datum/gas_mixture/proc/specific_mass()
 	var/M = get_total_moles()
@@ -507,30 +504,23 @@
 ///Returns a color blended from all materials the gas mixture contains
 /datum/gas_mixture/proc/get_overall_color()
 	if(!cached_mix_color)
-		if(!LAZYLEN(gas))
+		if(!length(gas))
 			cached_mix_color = "#ffffffff"
 			return cached_mix_color
 
-		if(LAZYLEN(gas) == 1)
-			var/decl/material/G = GET_DECL(gas[1])
-			cached_mix_color = G.color + num2hex(G.opacity * 255)
+		if(length(gas) == 1)
+			for(var/gas_type in gas)
+				var/decl/material/G = GET_DECL(gas_type)
+				cached_mix_color = G.color + num2hex(G.opacity * 255)
 			return cached_mix_color
 
 		//If we really have to, add up all colors
-		var/list/colors        = list(0, 0, 0, 0)
-		var/total_color_weight = 0
-
-		for(var/mat_path in gas)
+		cached_mix_color = rgb(255,255,255,255)
+		for(var/mat_path, mat_moles in gas)
 			var/decl/material/G = GET_DECL(mat_path)
 			if(G.color_weight <= 0)
 				continue
 			var/hex = uppertext(G.color) + num2hex(G.opacity * 255)
-			var/mod = gas[mat_path] * G.color_weight
-			colors[1] += HEX_RED(hex)   * mod
-			colors[2] += HEX_GREEN(hex) * mod
-			colors[3] += HEX_BLUE(hex)  * mod
-			colors[4] += HEX_ALPHA(hex) * mod
-			total_color_weight += mod
-		cached_mix_color = rgb(colors[1] / total_color_weight, colors[2] / total_color_weight, colors[3] / total_color_weight, colors[4] / total_color_weight)
+			cached_mix_color = BlendHSV(cached_mix_color, hex, (mat_moles * G.color_weight) / total_moles)
 
 	return cached_mix_color

@@ -110,27 +110,28 @@
 	if (source.total_moles < MINIMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
-	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
+	// this takes the associated values of the left side, e.g. source.gas
+	filtering = source.gas & filtering //only filter gasses that are actually there. DO NOT USE &=
 
 	//Determine the specific power of each filterable gas type, and the total amount of filterable gas (gasses selected to be scrubbed)
-	var/total_filterable_moles = 0			//the total amount of filterable gas
-	var/list/specific_power_gas = list()	//the power required to remove one mole of pure gas, for each gas type
-	for (var/g in filtering)
-		if (source.gas[g] < MINIMUM_MOLES_TO_FILTER)
+	var/total_filterable_moles = 0 //the total amount of filterable gas
+	var/alist/specific_power_gas = alist() //the power required to remove one mole of pure gas, for each gas type
+	///the power required to scrub one mol of input gas
+	var/power_per_mol = 0
+	for (var/gas_type, gas_amount in filtering)
+		if (gas_amount < MINIMUM_MOLES_TO_FILTER)
 			continue
 
-		var/specific_power = calculate_specific_power_gas(g, source, sink)/ATMOS_FILTER_EFFICIENCY
-		specific_power_gas[g] = specific_power
-		total_filterable_moles += source.gas[g]
+		var/specific_power = calculate_specific_power_gas(gas_type, source, sink)/ATMOS_FILTER_EFFICIENCY
+		specific_power_gas[gas_type] = specific_power
+		power_per_mol += gas_amount * specific_power
+		total_filterable_moles += gas_amount
 
 	if (total_filterable_moles < MINIMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
 	//now that we know the total amount of filterable gas, we can calculate the amount of power needed to scrub one mole of gas
-	var/total_specific_power = 0		//the power required to remove one mole of filterable gas
-	for (var/g in filtering)
-		var/ratio = source.gas[g]/total_filterable_moles //this converts the specific power per mole of pure gas to specific power per mole of scrubbed gas
-		total_specific_power += specific_power_gas[g]*ratio
+	power_per_mol /= total_filterable_moles //this converts the specific power per mole of pure gas to specific power per mole of scrubbed gas
 
 	//Figure out how much of each gas to filter
 	if (isnull(total_transfer_moles))
@@ -139,8 +140,8 @@
 		total_transfer_moles = min(total_transfer_moles, total_filterable_moles)
 
 	//limit transfer_moles based on available power
-	if (!isnull(available_power) && total_specific_power > 0)
-		total_transfer_moles = min(total_transfer_moles, available_power/total_specific_power)
+	if (!isnull(available_power) && power_per_mol > 0)
+		total_transfer_moles = min(total_transfer_moles, available_power/power_per_mol)
 
 	if (total_transfer_moles < MINIMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
@@ -154,16 +155,15 @@
 		P.last_flow_rate = (total_transfer_moles/source.total_moles)*source.total_volume //group_multiplier gets divided out here
 
 	var/power_draw = 0
-	for (var/g in filtering)
-		var/transfer_moles = source.gas[g]
+	for (var/gas_type, gas_amount in filtering)
 		//filter gas in proportion to the mole ratio
-		transfer_moles = min(transfer_moles, total_transfer_moles*(source.gas[g]/total_filterable_moles))
+		var/transfer_moles = min(gas_amount, total_transfer_moles*(gas_amount/total_filterable_moles))
 
 		//use update=0. All the filtered gasses are supposed to be added simultaneously, so we update after the for loop.
-		source.adjust_gas(g, -transfer_moles, update=0)
-		sink.adjust_gas_temp(g, transfer_moles, source.temperature, update=0)
+		source.adjust_gas(gas_type, -transfer_moles, update=0)
+		sink.adjust_gas_temp(gas_type, transfer_moles, source.temperature, update=0)
 
-		power_draw += specific_power_gas[g]*transfer_moles
+		power_draw += specific_power_gas[gas_type]*transfer_moles
 
 	//Remix the resulting gases
 	sink.update_values()
@@ -181,25 +181,16 @@
 	if (source.total_moles < MINIMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
-	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
+	filtering = filtering & source.gas //only filter gasses that are actually there. DO NOT USE &=
 
-	var/total_specific_power = 0		//the power required to remove one mole of input gas
-	var/total_filterable_moles = 0		//the total amount of filterable gas
-	var/total_unfilterable_moles = 0	//the total amount of non-filterable gas
-	var/list/specific_power_gas = list()	//the power required to remove one mole of pure gas, for each gas type
-	for (var/g in source.gas)
-		if (source.gas[g] < MINIMUM_MOLES_TO_FILTER)
+	var/power_per_mol = 0
+	for (var/gas_type, gas_amount in source.gas)
+		if (gas_amount < MINIMUM_MOLES_TO_FILTER)
 			continue
+		//the power required to move all the moles of this gas from source to sink
+		power_per_mol += gas_amount * calculate_specific_power_gas(gas_type, source, (gas_type in filtering) ? sink_filtered : sink_clean)/ATMOS_FILTER_EFFICIENCY
 
-		if (g in filtering)
-			specific_power_gas[g] = calculate_specific_power_gas(g, source, sink_filtered)/ATMOS_FILTER_EFFICIENCY
-			total_filterable_moles += source.gas[g]
-		else
-			specific_power_gas[g] = calculate_specific_power_gas(g, source, sink_clean)/ATMOS_FILTER_EFFICIENCY
-			total_unfilterable_moles += source.gas[g]
-
-		var/ratio = source.gas[g]/source.total_moles //converts the specific power per mole of pure gas to specific power per mole of input gas mix
-		total_specific_power += specific_power_gas[g]*ratio
+	power_per_mol /= source.total_moles //converts the sum of specific powers per mole of pure gas to specific power per mole of input gas mix
 
 	//Figure out how much of each gas to filter
 	if (isnull(total_transfer_moles))
@@ -208,8 +199,8 @@
 		total_transfer_moles = min(total_transfer_moles, source.total_moles)
 
 	//limit transfer_moles based on available power
-	if (!isnull(available_power) && total_specific_power > 0)
-		total_transfer_moles = min(total_transfer_moles, available_power/total_specific_power)
+	if (!isnull(available_power) && power_per_mol > 0)
+		total_transfer_moles = min(total_transfer_moles, available_power/power_per_mol)
 
 	if (total_transfer_moles < MINIMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
@@ -223,28 +214,21 @@
 		P.last_flow_rate = (total_transfer_moles/source.total_moles)*source.total_volume //group_multiplier gets divided out here
 
 	var/datum/gas_mixture/removed = source.remove(total_transfer_moles)
-	if (!removed) //Just in case
+	if (!removed?.total_moles) //Just in case
 		return -1
 
-	var/filtered_power_used = 0		//power used to move filterable gas to sink_filtered
-	var/unfiltered_power_used = 0	//power used to move unfilterable gas to sink_clean
-	for (var/g in removed.gas)
-		var/power_used = specific_power_gas[g]*removed.gas[g]
-
-		if (g in filtering)
-			//use update=0. All the filtered gasses are supposed to be added simultaneously, so we update after the for loop.
-			sink_filtered.adjust_gas_temp(g, removed.gas[g], removed.temperature, update=0)
-			removed.adjust_gas(g, -removed.gas[g], update=0)
-			filtered_power_used += power_used
-		else
-			unfiltered_power_used += power_used
+	// total power draw
+	. = power_per_mol * removed.total_moles
+	for (var/gas_type, gas_amount in removed.gas & filtering) // only the filtered gases
+		//use update=0. All the filtered gasses are supposed to be added simultaneously, so we update after the for loop.
+		sink_filtered.adjust_gas_temp(gas_type, gas_amount, removed.temperature, update=0)
+		removed.adjust_gas(gas_type, -gas_amount, update=0)
 
 	sink_filtered.update_values()
 	removed.update_values()
-
 	sink_clean.merge(removed)
 
-	return filtered_power_used + unfiltered_power_used
+	return .
 
 //For omni devices. Instead filtering is an associative list mapping gasids to gas mixtures.
 //I don't like the copypasta, but I decided to keep both versions of gas filtering as filter_gas is slightly faster (doesn't create as many temporary lists, doesn't call update_values() as much)
@@ -253,26 +237,15 @@
 	if (source.total_moles < MINIMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
-	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
+	filtering = filtering & source.gas //only filter gasses that are actually there. DO NOT USE &=
 
-	var/total_specific_power = 0		//the power required to remove one mole of input gas
-	var/total_filterable_moles = 0		//the total amount of filterable gas
-	var/total_unfilterable_moles = 0	//the total amount of non-filterable gas
-	var/list/specific_power_gas = list()	//the power required to remove one mole of pure gas, for each gas type
-	for (var/g in source.gas)
-		if (source.gas[g] < MINIMUM_MOLES_TO_FILTER)
+	var/power_per_mol = 0
+	for (var/gas_type, gas_amount in source.gas)
+		if (gas_amount < MINIMUM_MOLES_TO_FILTER)
 			continue
-
-		if (g in filtering)
-			var/datum/gas_mixture/sink_filtered = filtering[g]
-			specific_power_gas[g] = calculate_specific_power_gas(g, source, sink_filtered)/ATMOS_FILTER_EFFICIENCY
-			total_filterable_moles += source.gas[g]
-		else
-			specific_power_gas[g] = calculate_specific_power_gas(g, source, sink_clean)/ATMOS_FILTER_EFFICIENCY
-			total_unfilterable_moles += source.gas[g]
-
-		var/ratio = source.gas[g]/source.total_moles //converts the specific power per mole of pure gas to specific power per mole of input gas mix
-		total_specific_power += specific_power_gas[g]*ratio
+		power_per_mol += gas_amount * (calculate_specific_power_gas(gas_type, source, filtering[gas_type] || sink_clean)/ATMOS_FILTER_EFFICIENCY)
+	//converts the sum of specific powers per mole of pure gas to specific power per mole of input gas mix
+	power_per_mol /= source.total_moles
 
 	//Figure out how much of each gas to filter
 	if (isnull(total_transfer_moles))
@@ -281,8 +254,8 @@
 		total_transfer_moles = min(total_transfer_moles, source.total_moles)
 
 	//limit transfer_moles based on available power
-	if (!isnull(available_power) && total_specific_power > 0)
-		total_transfer_moles = min(total_transfer_moles, available_power/total_specific_power)
+	if (!isnull(available_power) && power_per_mol > 0)
+		total_transfer_moles = min(total_transfer_moles, available_power/power_per_mol)
 
 	if (total_transfer_moles < MINIMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
@@ -299,27 +272,14 @@
 	if (!removed) //Just in case
 		return -1
 
-	var/list/filtered_power_used = list()		//power used to move filterable gas to the filtered gas mixes
-	var/unfiltered_power_used = 0	//power used to move unfilterable gas to sink_clean
-	for (var/g in removed.gas)
-		var/power_used = specific_power_gas[g]*removed.gas[g]
-
-		if (g in filtering)
-			var/datum/gas_mixture/sink_filtered = filtering[g]
-			//use update=0. All the filtered gasses are supposed to be added simultaneously, so we update after the for loop.
-			sink_filtered.adjust_gas_temp(g, removed.gas[g], removed.temperature, update=1)
-			removed.adjust_gas(g, -removed.gas[g], update=0)
-			if (power_used)
-				filtered_power_used[sink_filtered] = power_used
-		else
-			unfiltered_power_used += power_used
-
+	// for some reason we used to separate filtered and unfiltered power but then we just added it back up anyway??
+	var/power_draw = power_per_mol * removed.total_moles
+	for (var/gas_type, gas_amount in removed.gas & filtering) // keys in both with the values of the former
+		var/datum/gas_mixture/sink_filtered = filtering[gas_type]
+		//use update=0. All the filtered gasses are supposed to be added simultaneously, so we update after the for loop.
+		sink_filtered.adjust_gas_temp(gas_type, gas_amount, removed.temperature, update=1)
+		removed.adjust_gas(gas_type, -gas_amount, update=FALSE)
 	removed.update_values()
-
-	var/power_draw = unfiltered_power_used
-	for (var/datum/gas_mixture/sink_filtered in filtered_power_used)
-		power_draw += filtered_power_used[sink_filtered]
-
 	sink_clean.merge(removed)
 
 	return power_draw

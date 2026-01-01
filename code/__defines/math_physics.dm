@@ -27,7 +27,7 @@
 #define ATM *ONE_ATMOSPHERE
 
 #define ATMOS_PRECISION 0.0001
-#define QUANTIZE(variable) (round(variable, ATMOS_PRECISION))
+#define QUANTIZE(variable) (NONUNIT_FLOOR(variable, ATMOS_PRECISION))
 
 #define INFINITY	1.#INF
 
