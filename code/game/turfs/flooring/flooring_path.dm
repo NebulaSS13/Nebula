@@ -27,9 +27,10 @@
 	desc            = "A rustic cobblestone path."
 	icon_base       = "cobble"
 	icon_edge_layer = FLOOR_EDGE_PATH
+	has_corners     = FALSE
 	flooring_flags  = TURF_REMOVE_CROWBAR
-	has_base_range = 1
-	uid            = "floor_path_cobble"
+	has_base_range  = 1
+	uid             = "floor_path_cobble"
 
 /decl/flooring/path/running_bond
 	name           = "stone path"
