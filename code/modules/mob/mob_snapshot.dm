@@ -65,11 +65,11 @@
 
 	if(istype(root_species) && root_species != target.get_species())
 		if(istype(root_bodytype))
-			target.set_species(root_species.uid, root_bodytype)
+			target.set_species(root_species.uid, root_bodytype, skip_icon_updates = TRUE)
 		else
-			target.set_species(root_species.uid)
+			target.set_species(root_species.uid, skip_icon_updates = TRUE)
 	else if(istype(root_bodytype) && target.get_bodytype() != root_bodytype)
-		target.set_bodytype(root_bodytype)
+		target.set_bodytype(root_bodytype, skip_icon_updates = TRUE)
 
 	target.set_fingerprint(fingerprint)
 	target.set_unique_enzymes(unique_enzymes)
@@ -101,7 +101,7 @@
 	extra_limbs = null // can't reuse it!
 
 	for(var/obj/item/organ/organ in target.get_organs())
-		organ.copy_from_mob_snapshot(src)
+		organ.copy_from_mob_snapshot(src, skip_icon_update = TRUE)
 
 	for(var/decl/genetic_condition/condition as anything in genetic_conditions)
 		target.add_genetic_condition(condition.type)

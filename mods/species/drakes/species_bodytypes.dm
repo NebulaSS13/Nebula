@@ -325,8 +325,7 @@
 		TOOL_SHOVEL = TOOL_QUALITY_GOOD
 	))
 
-/obj/item/organ/external/hand/quadruped/grafadreka/set_bodytype(decl/bodytype/new_bodytype, override_material, apply_to_internal_organs)
-	override_material = /decl/material/solid/organic/bone
+/obj/item/organ/external/hand/quadruped/grafadreka/set_bodytype(decl/bodytype/new_bodytype, override_material = /decl/material/solid/organic/bone, skip_icon_update = FALSE, apply_to_internal_organs = TRUE)
 	. = ..()
 
 /obj/item/organ/external/hand/right/quadruped/grafadreka
@@ -345,8 +344,7 @@
 		TOOL_SHOVEL = TOOL_QUALITY_GOOD
 	))
 
-/obj/item/organ/external/hand/right/quadruped/grafadreka/set_bodytype(decl/bodytype/new_bodytype, override_material, apply_to_internal_organs)
-	override_material = /decl/material/solid/organic/bone
+/obj/item/organ/external/hand/right/quadruped/grafadreka/set_bodytype(decl/bodytype/new_bodytype, override_material = /decl/material/solid/organic/bone, skip_icon_update = FALSE, apply_to_internal_organs = TRUE)
 	. = ..()
 
 /obj/item/organ/external/head/gripper/grafadreka/get_natural_attacks()

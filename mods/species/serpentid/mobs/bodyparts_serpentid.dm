@@ -48,7 +48,7 @@
 	if(owner)
 		color = owner.get_eye_colour()
 
-/obj/item/organ/internal/eyes/insectoid/serpentid/copy_from_mob_snapshot(datum/mob_snapshot/supplied_appearance)
+/obj/item/organ/internal/eyes/insectoid/serpentid/copy_from_mob_snapshot(datum/mob_snapshot/supplied_appearance, skip_icon_update = FALSE)
 	. = ..()
 	color = supplied_appearance?.eye_color
 

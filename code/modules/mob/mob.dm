@@ -815,7 +815,7 @@ var/global/const/ACTION_DANGER_ALL = 2
 	reset_layer()
 
 	if(. || force_update)
-		update_icon()
+		queue_icon_update()
 		update_transform()
 
 /mob/proc/facedir(var/ndir)

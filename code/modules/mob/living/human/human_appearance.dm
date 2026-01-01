@@ -26,7 +26,7 @@
 	if(species?.uid == new_species)
 		return
 
-	set_species(new_species, new_bodytype)
+	set_species(new_species, new_bodytype, skip_icon_updates = TRUE)
 
 	//Handle spawning stuff
 	species.handle_pre_spawn(src)

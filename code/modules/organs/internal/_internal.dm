@@ -36,7 +36,7 @@
 	. = ..()
 	set_max_damage(absolute_max_damage)
 
-/obj/item/organ/internal/set_species(species_uid)
+/obj/item/organ/internal/set_species(species_uid, skip_icon_update = FALSE)
 	. = ..()
 	if(species.organs_icon)
 		icon = species.organs_icon
