@@ -15,6 +15,8 @@
 	space_smooth       = SMOOTH_ALL
 	constructed        = TRUE
 	gender             = NEUTER
+	deconstruct_sound  = 'sound/items/Deconstruct.ogg'
+
 	burned_states  = list(
 		"burned0",
 		"burned1"
@@ -87,6 +89,7 @@
 	color              = null
 	build_type         = null
 	uid                = "floor_tiled_new"
+	deconstruct_sound  = 'sound/items/Deconstruct.ogg'
 
 /decl/flooring/tiling/new_tile/cargo_one
 	icon_base          = "cargo_one_full"
