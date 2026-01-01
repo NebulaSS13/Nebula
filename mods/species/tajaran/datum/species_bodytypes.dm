@@ -72,6 +72,6 @@
 	return ..()
 
 /obj/item/organ/external/tail/cat
-	tail_icon  = 'mods/species/tajaran/icons/tail.dmi'
+	tail_icon = 'mods/species/tajaran/icons/tail.dmi'
 	tail_blend = ICON_MULTIPLY
 	tail_animation_states = 1

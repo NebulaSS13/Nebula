@@ -54,7 +54,7 @@
 /datum/gear_tweak/color/markings/tweak_item(mob/user, obj/item/clothing/clothes, metadata)
 	if(valid_colors && !(metadata in valid_colors))
 		return GEAR_TWEAK_SKIPPED
-	clothes.markings_color = sanitize_hexcolor(metadata, clothes.markings_color)
+	clothes.set_markings_color(sanitize_hexcolor(metadata, clothes.markings_color))
 	return GEAR_TWEAK_SUCCESS
 
 /*

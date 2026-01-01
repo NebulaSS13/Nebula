@@ -35,6 +35,12 @@
 /obj/item/clothing/suit/cloak
 	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/accessory/cloak.dmi'
 
+/obj/item/clothing/suit/hooded_cloak
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/accessory/cloak_hooded.dmi'
+
+/obj/item/clothing/head/hood/cloak
+	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/head/cloak_hood.dmi'
+
 /obj/item/clothing/suit/cloak/hide
 	_avian_onmob_icon = 'mods/species/neoavians/icons/clothing/accessory/cloak_hide.dmi'
 
@@ -94,3 +100,20 @@
 	_base_attack_force = 1
 	item_flags = ITEM_FLAG_SILENT
 	w_class = ITEM_SIZE_SMALL
+
+/obj/item/clothing/suit/hooded_cloak/avian
+	name = "striped cloak"
+	paint_color = "#333333"
+	markings_color = "#ff7519"
+	markings_state_modifier = "-stripe"
+	bodytype_equip_flags = BODY_EQUIP_FLAG_AVIAN
+	icon = 'mods/species/neoavians/icons/clothing/accessory/cloak_hooded.dmi'
+	hood = /obj/item/clothing/head/hood/cloak/avian
+
+/obj/item/clothing/head/hood/cloak/avian
+	name = "striped hood"
+	paint_color = "#333333"
+	markings_color = "#ff7519"
+	markings_state_modifier = "-stripe"
+	bodytype_equip_flags = BODY_EQUIP_FLAG_AVIAN
+	icon = 'mods/species/neoavians/icons/clothing/head/cloak_hood.dmi'
