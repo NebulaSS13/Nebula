@@ -6,6 +6,9 @@
 	atom_damage_type = BURN
 	damage_flags = 0
 	nodamage = 1
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/ion
+	hitsound_non_mob = 'sound/weapons/searwall.ogg'
+	hitsound = 'sound/weapons/ionrifle.ogg'
 	var/heavy_effect_range = 1
 	var/light_effect_range = 2
 
@@ -51,6 +54,7 @@
 	atom_damage_type = BURN
 	damage_flags = 0
 	nodamage = 1
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/monochrome_laser
 	var/firing_temperature = 300
 
 /obj/item/projectile/temp/on_hit(var/atom/target, var/blocked = 0)//These two could likely check temp protection on the mob
@@ -88,6 +92,7 @@
 	damage = 0
 	atom_damage_type = TOX
 	nodamage = 1
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/monochrome_laser
 
 /obj/item/projectile/energy/floramut/on_hit(var/atom/target, var/blocked = 0)
 	if(!isliving(target))
@@ -131,6 +136,7 @@
 	damage = 0
 	atom_damage_type = TOX
 	nodamage = 1
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/monochrome_laser
 
 /obj/item/projectile/energy/florayield/on_hit(var/atom/target, var/blocked = 0)
 	if(!isliving(target))
