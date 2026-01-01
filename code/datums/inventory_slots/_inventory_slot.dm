@@ -19,6 +19,8 @@
 	var/requires_slot_flags
 	var/requires_organ_tag
 	var/quick_equip_priority = 0 // Higher priority means it will be checked first. If null, will not be considered for quick equip.
+	/// Additional slot ID(s) to add in quick equip. Will always be added at the lowest priority.
+	var/list/additional_quick_equip_slots
 	/// What depth of fluid is necessary for an item in this slot to be considered submerged?
 	var/fluid_height = FLUID_SHALLOW // we're treating FLUID_SHALLOW as waist level, basically
 

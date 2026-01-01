@@ -6,5 +6,6 @@ var/global/list/verbs =              file2list("config/names/verbs.txt")
 var/global/list/adjectives =         file2list("config/names/adjectives.txt")
 
 var/global/list/abstract_slot_names = list(
-	slot_in_backpack_str = "In Backpack"
+	slot_in_backpack_str = "In Backpack",
+	slot_in_wallet_str = "In Wallet"
 )

@@ -726,6 +726,9 @@
 	if(slot == slot_in_backpack_str)
 		var/obj/item/back = user.get_equipped_item(slot_back_str)
 		return back?.storage?.can_be_inserted(src, user, TRUE)
+	if(slot == slot_in_wallet_str)
+		var/obj/item/wallet = user.get_equipped_item(slot_wear_id_str)
+		return wallet?.storage?.can_be_inserted(src, user, TRUE)
 
 	var/datum/inventory_slot/inv_slot = user.get_inventory_slot_datum(slot)
 	if(!inv_slot)

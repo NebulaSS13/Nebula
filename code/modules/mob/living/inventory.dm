@@ -14,10 +14,17 @@
 		var/list/all_slots = list()
 		for(var/slot in get_inventory_slots())
 			all_slots += get_inventory_slot_datum(slot)
+		var/list/low_priority_slots // Slots that will always be added at the end, in the order of their parent slots' priority.
+		// This is sort of due to technical limitations but mostly due to laziness.
 		for(var/datum/inventory_slot/inv_slot as anything in sortTim(all_slots, /proc/cmp_inventory_slot_desc))
+			if(LAZYLEN(inv_slot.additional_quick_equip_slots))
+				for(var/extra_slot in inv_slot.additional_quick_equip_slots)
+					LAZYADD(low_priority_slots, extra_slot)
 			if(isnull(inv_slot.quick_equip_priority)) // Never quick-equip into some slots.
 				continue
 			_inventory_slot_priority += inv_slot.slot_id
+		if(low_priority_slots)
+			_inventory_slot_priority += low_priority_slots
 	return _inventory_slot_priority
 
 /mob/living/get_inventory_slot_datum(var/slot)
