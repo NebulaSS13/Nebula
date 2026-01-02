@@ -358,8 +358,8 @@
 			if ((DETERMINANT(limit_a_x, limit_a_y, test_x, test_y) > 0) || DETERMINANT(test_x, test_y, limit_b_x, limit_b_y) > 0)
 				continue
 
-		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T) || T.light_source_solo || T.light_source_multi)
-			Tcorners = T.corners
+		Tcorners = T.corners
+		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T) || T.light_source_solo || T.light_source_multi || (T.z_flags & ZM_ALLOW_LIGHTING))
 			if (!T.lighting_corners_initialised)
 				T.lighting_corners_initialised = TRUE
 
@@ -373,11 +373,11 @@
 
 					Tcorners[i] = new /datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[i], i)
 
-			if (!T.has_opaque_atom)
-				for (var/v in 1 to 4)
-					var/val = Tcorners[v]
-					if (val)
-						corners[val] = 0
+		if (Tcorners && !T.has_opaque_atom)
+			for (var/v in 1 to 4)
+				var/val = Tcorners[v]
+				if (val)
+					corners[val] = 0
 
 		turfs += T
 
