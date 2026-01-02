@@ -335,7 +335,6 @@
 
 	var/list/datum/lighting_corner/corners = list()
 	var/list/turf/turfs                    = list()
-	var/thing
 	var/datum/lighting_corner/C
 	var/turf/T
 	var/list/Tcorners
@@ -390,39 +389,34 @@
 
 	var/list/L = turfs - affecting_turfs // New turfs, add us to the affecting lights of them.
 	affecting_turfs += L
-	for (thing in L)
-		T = thing
+	for (T as anything in L)
 		LAZYADD(T.affecting_lights, src)
 
 	L = affecting_turfs - turfs // Now-gone turfs, remove us from the affecting lights.
 	affecting_turfs -= L
-	for (thing in L)
-		T = thing
+	for (T as anything in L)
 		LAZYREMOVE(T.affecting_lights, src)
 
 	LAZYINITLIST(effect_str)
 	if (needs_update == LIGHTING_VIS_UPDATE)
-		for (thing in corners - effect_str)
-			C = thing
+		for (C as anything in corners - effect_str) // newly added corners
 			LAZYADD(C.affecting, src)
 			if (!C.active)
 				effect_str[C] = 0
 				continue
 
-			APPLY_CORNER_BY_HEIGHT(now)
+			INIT_CORNER_BY_HEIGHT(now)
 	else
 		L = corners - effect_str
-		for (thing in L)
-			C = thing
+		for (C as anything in L)
 			LAZYADD(C.affecting, src)
 			if (!C.active)
 				effect_str[C] = 0
 				continue
 
-			APPLY_CORNER_BY_HEIGHT(now)
+			INIT_CORNER_BY_HEIGHT(now)
 
-		for (thing in corners - L)
-			C = thing
+		for (C as anything in corners - L)
 			if (!C.active)
 				effect_str[C] = 0
 				continue
@@ -430,8 +424,7 @@
 			APPLY_CORNER_BY_HEIGHT(now)
 
 	L = effect_str - corners
-	for (thing in L)
-		C = thing
+	for (C as anything in L)
 		REMOVE_CORNER(C, now)
 		LAZYREMOVE(C.affecting, src)
 
