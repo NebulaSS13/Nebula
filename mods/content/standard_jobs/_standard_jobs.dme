@@ -2,6 +2,7 @@
 #define MODPACK_STANDARD_JOBS
 // BEGIN_INCLUDE
 #include "_standard_jobs.dm"
+#include "clothing\winterboots.dm"
 #include "departments\civilian.dm"
 #include "departments\command.dm"
 #include "departments\engineering.dm"

@@ -12,9 +12,11 @@
 	)
 
 /decl/species/tajaran
-	name = SPECIES_TAJARA
+	uid = "species_tajaran"
+	name = "Tajara"
 	name_plural = "Tajaran"
 	base_external_prosthetics_model = null
+
 
 	description = "The Tajaran are a mammalian species roughly resembling felines, \
 	hailing from Meralar in the Rarkajar system. \
@@ -27,21 +29,26 @@
 	and speak a variety of languages, most notably Siik and Akhani."
 
 	hidden_from_codex = FALSE
-	available_bodytypes = list(/decl/bodytype/feline)
+	available_bodytypes = list(
+		/decl/bodytype/tajaran,
+		/decl/bodytype/tajaran/masculine
+	)
+
+	traits = list(/decl/trait/malus/intolerance/caffeine = TRAIT_LEVEL_MAJOR)
 
 	preview_outfit = /decl/outfit/job/generic/engineer
 
 	spawn_flags = SPECIES_CAN_JOIN
 
 	blood_types = list(
-		/decl/blood_type/feline/mplus,
-		/decl/blood_type/feline/mminus,
-		/decl/blood_type/feline/rplus,
-		/decl/blood_type/feline/rminus,
-		/decl/blood_type/feline/mrplus,
-		/decl/blood_type/feline/mrminus,
-		/decl/blood_type/feline/oplus,
-		/decl/blood_type/feline/ominus
+		/decl/blood_type/tajaran/mplus,
+		/decl/blood_type/tajaran/mminus,
+		/decl/blood_type/tajaran/rplus,
+		/decl/blood_type/tajaran/rminus,
+		/decl/blood_type/tajaran/mrplus,
+		/decl/blood_type/tajaran/mrminus,
+		/decl/blood_type/tajaran/oplus,
+		/decl/blood_type/tajaran/ominus
 	)
 
 	flesh_color = "#ae7d32"
@@ -51,13 +58,6 @@
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.2
 	thirst_factor = DEFAULT_THIRST_FACTOR * 1.2
 	gluttonous = GLUT_TINY
-
-	unarmed_attacks = list(
-		/decl/natural_attack/stomp,
-		/decl/natural_attack/kick,
-		/decl/natural_attack/punch,
-		/decl/natural_attack/bite/sharp
-	)
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 
@@ -81,6 +81,9 @@
 
 	autohiss_exempt = list(LANGUAGE_TAJARA)
 
+/decl/species/tajaran/handle_additional_hair_loss(var/mob/living/human/H, var/defer_body_update = TRUE)
+	. = H?.set_skin_colour(rgb(189, 171, 143))
+
 /decl/species/tajaran/Initialize()
 	. = ..()
 	LAZYINITLIST(available_background_info)
@@ -90,5 +93,3 @@
 	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/tajaran/rhemazar)
 	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/tajaran/spacer)
 
-/decl/species/tajaran/handle_additional_hair_loss(var/mob/living/human/H, var/defer_body_update = TRUE)
-	. = H?.set_skin_colour(rgb(189, 171, 143))

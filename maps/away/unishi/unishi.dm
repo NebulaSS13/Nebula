@@ -145,11 +145,5 @@
 	reagents.add_reagent(/decl/material/solid/phoron/safe, 60)
 	update_icon()
 
-/decl/material/solid/phoron/safe/touch_mob(mob/living/M, amount, datum/reagents/holder)
-	return
-
-/decl/material/solid/phoron/safe/affect_blood(mob/living/M, removed, datum/reagents/holder)
-	return
-
-/decl/material/solid/phoron/safe/affect_touch(mob/living/M, removed, datum/reagents/holder)
-	return
+/decl/material/solid/phoron/safe
+	phoron_toxicity = 0

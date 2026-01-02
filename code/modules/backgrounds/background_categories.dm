@@ -54,10 +54,3 @@
 	uid = "heritage_cat_religion"
 	item_type = /decl/background_detail/religion
 	background_flags = BACKGROUND_FLAG_RELIGION
-
-/decl/background_category/citizenship
-	name = "Citizenship"
-	old_tag = "citizenship"
-	uid = "heritage_cat_citizenship"
-	item_type = /decl/background_detail/citizenship
-	background_flags = BACKGROUND_FLAG_CITIZENSHIP

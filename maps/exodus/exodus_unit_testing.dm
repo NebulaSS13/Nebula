@@ -6,6 +6,7 @@
 		/area/exodus/construction = NO_SCRUBBER|NO_VENT,
 		/area/exodus/engineering/atmos/storage = NO_SCRUBBER|NO_VENT,
 		/area/exodus/maintenance = NO_SCRUBBER|NO_VENT,
+		/area/exodus/maintenance/disused = 0,
 		/area/exodus/maintenance/arrivals = NO_SCRUBBER|NO_VENT,
 		/area/exodus/maintenance/atmos_control = 0,
 		/area/exodus/maintenance/auxsolarport = NO_SCRUBBER|NO_VENT,

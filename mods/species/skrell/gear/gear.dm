@@ -93,7 +93,7 @@
 	icon_state = ICON_STATE_WORLD
 	item_state = "skrell_carbine"
 	slot_flags = SLOT_BACK|SLOT_LOWER_BODY
-	desc = "The Vuu'Xqu*ix T-3, known as 'VT-3' by SolGov. Rarely seen out in the wild by anyone outside of a Skrellian SDTF."
+	desc = "The Vuu'Xqu*ix T-3, often simply known as the 'VT-3' by non-Skrell. Rarely seen out in the wild by anyone outside of a Skrellian SDTF."
 	self_recharge = 1
 	projectile_type=/obj/item/projectile/beam/pulse/skrell/single
 	charge_cost=120

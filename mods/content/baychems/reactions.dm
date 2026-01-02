@@ -44,7 +44,7 @@
 	result = /decl/material/liquid/painkillers/strong
 	required_reagents = list(
 		/decl/material/liquid/painkillers = 1,
-		/decl/material/liquid/ethanol = 1,
+		/decl/material/liquid/alcohol/ethanol = 1,
 		/decl/material/liquid/acetone = 1
 	)
 	result_amount = 3
@@ -52,7 +52,7 @@
 /decl/chemical_reaction/drug/oxycodone
 	name = "Oxycodone"
 	result = /decl/material/liquid/painkillers/oxycodone
-	required_reagents = list(/decl/material/liquid/ethanol = 1, /decl/material/liquid/painkillers/strong = 1)
+	required_reagents = list(/decl/material/liquid/alcohol/ethanol = 1, /decl/material/liquid/painkillers/strong = 1)
 	catalysts = list(/decl/material/solid/phoron = 5)
 	result_amount = 1
 
@@ -64,7 +64,7 @@
 
 /decl/chemical_reaction/drug/paroxetine
 	name = "Paroxetine"
-	result = /decl/material/liquid/antidepressants/paroxetine
+	result = /decl/material/liquid/accumulated/antidepressants/paroxetine
 	required_reagents = list(/decl/material/liquid/hallucinogenics = 1, /decl/material/liquid/acetone = 1, /decl/material/liquid/stabilizer = 1)
 	result_amount = 3
 

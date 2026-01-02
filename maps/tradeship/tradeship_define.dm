@@ -42,10 +42,11 @@
 	)
 
 	default_background_info = list(
-		/decl/background_category/faction =     /decl/background_detail/faction/other,
-		/decl/background_category/heritage =    /decl/background_detail/heritage/other,
-		/decl/background_category/religion =    /decl/background_detail/religion/other,
-		/decl/background_category/citizenship = /decl/background_detail/citizenship/other
+		/decl/background_category/citizenship = /decl/background_detail/citizenship/other,
+		/decl/background_category/homeworld   = /decl/background_detail/location/other,
+		/decl/background_category/faction     = /decl/background_detail/faction/other,
+		/decl/background_category/heritage    = /decl/background_detail/heritage/other,
+		/decl/background_category/religion    = /decl/background_detail/religion/other
 	)
 
 /datum/map/tradeship/get_map_info()

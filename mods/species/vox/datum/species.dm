@@ -59,7 +59,7 @@
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 
-	preview_outfit = /decl/outfit/vox/raider
+	preview_outfit = /decl/outfit/vox_raider
 
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
 	stomach_capacity = 12

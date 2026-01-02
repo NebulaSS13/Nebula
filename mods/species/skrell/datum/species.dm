@@ -4,20 +4,17 @@
 	bone_material = /decl/material/solid/organic/bone/cartilage
 
 /decl/species/skrell
-	name = SPECIES_SKRELL
-	name_plural = SPECIES_SKRELL
+	uid = "species_skrell"
+	name = "Skrell"
+	name_plural = "Skrell"
 
 	available_bodytypes = list(
 		/decl/bodytype/skrell
 		)
 
+	traits = list(/decl/trait/malus/intolerance/protein = TRAIT_LEVEL_MINOR)
+
 	primitive_form = "Neaera"
-	unarmed_attacks = list(
-		/decl/natural_attack/stomp,
-		/decl/natural_attack/kick,
-		/decl/natural_attack/punch,
-		/decl/natural_attack/bite
-	)
 
 	description = "The skrell are a highly advanced species of amphibians hailing from \
 	the system known as Qerr'Vallis, which translates to 'Star of the royals' or 'Light of the Crown'. \
@@ -27,6 +24,7 @@
 	While skrell place high value on cooperation, diplomacy and scientific pursuit, \
 	they tend to be very leery of outside interference in their customs and values, \
 	and are highly secretive regarding internal matters of state."
+
 
 	butchery_data = /decl/butchery_data/humanoid/skrell
 
@@ -78,6 +76,51 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
+/decl/species/skrell/fluid_act(var/mob/living/human/H, var/datum/reagents/fluids)
+	. = ..()
+	var/water = REAGENT_VOLUME(fluids, /decl/material/liquid/water)
+	if(water >= 40 && H.hydration < 400) //skrell passively absorb water.
+		H.hydration += 1
+
+/decl/species/skrell/handle_trail(mob/living/human/H, turf/T, old_loc)
+	var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
+	if(!shoes)
+		var/list/bloodDNA
+		var/list/blood_data = REAGENT_DATA(H.vessel, blood_reagent)
+		if(blood_data)
+			bloodDNA = list(blood_data[DATA_BLOOD_DNA] = blood_data[DATA_BLOOD_TYPE])
+		else
+			bloodDNA = list()
+		T.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, H.dir, 0, H.get_skin_colour() + "25") // Coming (25 is the alpha value)
+		if(isturf(old_loc))
+			var/turf/old_turf = old_loc
+			old_turf.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, 0, H.dir, H.get_skin_colour() + "25") // Going (25 is the alpha value)
+
+/decl/species/skrell/check_background()
+	return TRUE
+
+/decl/material/liquid/mucus/skrell
+	name = "slime"
+	uid = "chem_mucus_skrell"
+	lore_text = "A gooey semi-liquid secreted by skrellian skin."
+
+// Copied from blood.
+// TODO: There's not currently a way to check this, which might be a little annoying for forensics.
+// But this is just a stopgap to stop Skrell from literally leaking blood everywhere they go.
+/decl/material/liquid/mucus/skrell/get_reagent_color(datum/reagents/holder)
+	var/list/goo_data = REAGENT_DATA(holder, src)
+	return goo_data?[DATA_BLOOD_COLOR] || ..()
+
+/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints
+	name = "wet footprints"
+	desc = "They look like still wet tracks left by skrellian feet."
+	chemical = /decl/material/liquid/mucus/skrell
+
+/obj/item/organ/internal/eyes/skrell
+	name = "amphibian eyes"
+	desc = "Large black orbs, belonging to some sort of giant frog by looks of it."
+	icon = 'mods/species/skrell/icons/body/organs.dmi'
+
 /decl/species/skrell/Initialize()
 	. = ..()
 	LAZYINITLIST(available_background_info)
@@ -95,38 +138,3 @@
 	LAZYSET(default_background_info, /decl/background_category/heritage, /decl/background_detail/heritage/skrell/caste_malish)
 	LAZYSET(default_background_info, /decl/background_category/religion, /decl/background_detail/religion/skrell)
 
-/decl/species/skrell/fluid_act(var/mob/living/human/H, var/datum/reagents/fluids)
-	. = ..()
-	var/water = REAGENT_VOLUME(fluids, /decl/material/liquid/water)
-	if(water >= 40 && H.hydration < 400) //skrell passively absorb water.
-		H.hydration += 1
-
-/decl/species/skrell/handle_trail(mob/living/human/H, turf/T, old_loc)
-	var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
-	if(!shoes)
-		var/list/bloodDNA
-		var/list/blood_data = REAGENT_DATA(H.vessel, /decl/material/liquid/blood)
-		if(blood_data)
-			bloodDNA = list(blood_data["blood_DNA"] = blood_data["blood_type"])
-		else
-			bloodDNA = list()
-		if(T.simulated)
-			T.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, H.dir, 0, H.get_skin_colour() + "25") // Coming (8c is the alpha value)
-		if(isturf(old_loc))
-			var/turf/old_turf = old_loc
-			if(old_turf.simulated)
-				old_turf.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints, bloodDNA, 0, H.dir, H.get_skin_colour() + "25") // Going (8c is the alpha value)
-
-/decl/species/skrell/check_background()
-	return TRUE
-
-/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints
-	name = "wet footprints"
-	desc = "They look like still wet tracks left by skrellian feet."
-
-/obj/effect/decal/cleanable/blood/tracks/footprints/skrellprints/dry()
-	qdel(src)
-/obj/item/organ/internal/eyes/skrell
-	name = "amphibian eyes"
-	desc = "Large black orbs, belonging to some sort of giant frog by looks of it."
-	icon = 'mods/species/skrell/icons/body/organs.dmi'

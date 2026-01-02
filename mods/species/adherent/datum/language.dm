@@ -6,7 +6,7 @@
 	ask_verb = "rings"
 	exclaim_verb = "peals"
 	colour = "adherent"
-	key = "p"
+	key = "r"
 	flags = LANG_FLAG_WHITELISTED
 	syllables = list("\[Ab\]", "\[Bb\]", "\[Cb\]", "\[Db\]", "\[Eb\]", "\[Fb\]",
 		"\[Gb\]", "\[A#\]", "\[B#\]", "\[C#\]", "\[D#\]", "\[E#\]", "\[F#\]",

@@ -3,8 +3,16 @@ name: Run Tests
 on:
   push:
     branches:
-      - master
+      - dev
+      - stable
+      - staging
+      - polaris-rebase
   pull_request:
+    branches:
+      - dev
+      - stable
+      - staging
+      - polaris-rebase
   workflow_dispatch:
 
 env:

@@ -1,7 +1,7 @@
 /decl/loadout_option/mask/skrell
 	name = "skrellian gill cover"
 	path = /obj/item/clothing/mask/gas/skrell
-	whitelisted = list(SPECIES_SKRELL)
+	whitelisted = list(/decl/species/skrell::uid)
 	uid = "gear_mask_skrell"
 
 /obj/item/clothing/mask/gas/skrell
@@ -13,5 +13,5 @@
 
 /obj/item/clothing/mask/gas/skrell/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
-	if(. && user?.get_species_name() != SPECIES_SKRELL)
+	if(. && user?.get_species()?.uid != /decl/species/skrell::uid)
 		return FALSE

@@ -66,6 +66,7 @@
 		"You feel uncomfortably warm.",
 	)
 	uid            = "bodytype_avian"
+	abstract_type  = /decl/bodytype/avian // Not in use on this fork, disables some species organ validation.
 
 	var/tail       = "tail_avian"
 	var/tail_icon  = 'mods/species/neoavians/icons/tail.dmi'
@@ -91,6 +92,7 @@
 	tail_blend           = ICON_ADD
 	tail                 = "tail_avian_add"
 	uid                  = "bodytype_avian_additive"
+	abstract_type        = /decl/bodytype/avian/additive // Not in use on this fork, disables some species organ validation.
 
 /decl/bodytype/avian/additive/raptor
 	name                 = "raptor, additive"

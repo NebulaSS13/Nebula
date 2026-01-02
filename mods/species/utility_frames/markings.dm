@@ -2,7 +2,7 @@
 	name = "FBP Department Stripe"
 	icon_state = "single_stripe"
 	body_parts = list(BP_CHEST)
-	species_allowed = list(/decl/species/utility_frame::uid, /decl/species/positronic::uid)
+	species_allowed = list(/decl/species/utility_frame::uid, /decl/species/utility_frame/positronic::uid)
 	icon = 'mods/species/utility_frames/icons/markings.dmi'
 	color_blend = ICON_MULTIPLY
 	uid = "acc_marking_frame_stripe"

@@ -5,9 +5,7 @@
 */
 
 /* Current unused keys, please update when you use one.
- * e
  * n
- * r
  * t
  * w
 */

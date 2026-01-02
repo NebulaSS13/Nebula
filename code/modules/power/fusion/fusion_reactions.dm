@@ -101,7 +101,7 @@
 	minimum_reaction_temperature = 8000
 
 // VERY UNIDEAL REACTIONS.
-/decl/fusion_reaction/phoron_exotic_matterr
+/decl/fusion_reaction/phoron_exotic_matter
 	p_react = /decl/material/solid/exotic_matter
 	s_react = /decl/material/solid/phoron
 	energy_consumption = 0

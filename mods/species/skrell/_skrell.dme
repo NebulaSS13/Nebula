@@ -1,7 +1,7 @@
 #ifndef MODPACK_SKRELL
 #define MODPACK_SKRELL
 // BEGIN_INCLUDE
-#include "skrell.dm"
+#include "_skrell.dm"
 #include "datum\accessory.dm"
 #include "datum\blood.dm"
 #include "datum\citizenship.dm"

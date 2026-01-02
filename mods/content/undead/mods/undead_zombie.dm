@@ -64,6 +64,5 @@
 	grant_basic_undead_equipment()
 
 /mob/living/human/zombie/Initialize(mapload, species_uid, datum/mob_snapshot/supplied_appearance)
-	if(!species_uid)
-		species_uid = /decl/species/human::uid
+	species_uid ||= /decl/species/human::uid
 	. = ..()

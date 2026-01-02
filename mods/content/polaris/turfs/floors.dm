@@ -2,25 +2,30 @@
 	color              = /decl/material/solid/organic/wood/sivian::color
 	build_type         = /obj/item/stack/tile/wood/sivian
 	force_material     = /decl/material/solid/organic/wood/sivian
+	uid = "flooring_wood_sif"
 
 /decl/flooring/wood/rough/sif
 	color              = /decl/material/solid/organic/wood/sivian::color
 	build_type         = /obj/item/stack/tile/wood/rough/sivian
 	force_material     = /decl/material/solid/organic/wood/sivian
+	uid = "flooring_wood_rough_sif"
 
 /decl/flooring/grass/sif
 	name = "growth"
 	desc = "A layer of Sivian moss that has adapted to the sheer cold climate."
 	color = "#447171"
 	force_material = /decl/material/solid/organic/plantmatter/grass/sif
+	uid = "flooring_grass_sif"
 
 /decl/flooring/grass/wild/sif
 	name = "thick growth"
 	desc = "A thick, rough layer of Sivian moss that has adapted to the sheer cold climate."
 	color = "#446471"
+	uid = "flooring_grass_wild_sif"
 
 /decl/flooring/tiling/steel_dirty
 	build_type = /obj/item/stack/tile/floor_steel_dirty
+	uid = "flooring_steel_tile_dirty"
 
 /obj/item/stack/tile/floor_steel_dirty
 	name = "dirty steel tile"

@@ -1,4 +1,4 @@
-#define LANGUAGE_LIZARD "Sinta'unathi"
+#define LANGUAGE_UNATHI "Sinta'unathi"
 
 /decl/modpack/unathi
 	name = "Unathi Species"

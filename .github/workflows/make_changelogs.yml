@@ -3,7 +3,7 @@ name: Make changelogs
 on:
   push:
     branches:
-    - master
+    - dev
   workflow_dispatch:
 
 jobs:

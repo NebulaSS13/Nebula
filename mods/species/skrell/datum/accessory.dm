@@ -2,7 +2,7 @@
 	name = "Kanin - Very Short Headtails"
 	icon = 'mods/species/skrell/icons/body/hair.dmi'
 	icon_state = "very_short"
-	species_allowed = list(SPECIES_SKRELL)
+	species_allowed = list(/decl/species/skrell::uid)
 	uid = "acc_hair_skrell_veryshort"
 
 /decl/sprite_accessory/hair/skrell/raskin

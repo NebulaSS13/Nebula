@@ -2,7 +2,7 @@
 	name = "Unathi Horns"
 	icon = 'mods/species/unathi/icons/horns.dmi'
 	icon_state = "horns"
-	species_allowed = list(SPECIES_UNATHI)
+	species_allowed = list(/decl/species/unathi::uid)
 	color_blend = ICON_MULTIPLY
 	accessory_flags = HAIR_VERY_SHORT
 	uid = "acc_hair_una_horns"
@@ -71,7 +71,7 @@
 	name = "Unathi Frills Aqua"
 	icon = 'mods/species/unathi/icons/frills.dmi'
 	icon_state = "frills_aqua"
-	species_allowed = list(SPECIES_UNATHI)
+	species_allowed = list(/decl/species/unathi::uid)
 	color_blend = ICON_MULTIPLY
 	accessory_flags = HAIR_VERY_SHORT
 	uid = "acc_hair_una_aqua"

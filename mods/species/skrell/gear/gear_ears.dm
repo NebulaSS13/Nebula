@@ -4,7 +4,7 @@
 
 /obj/item/clothing/ears/skrell/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
-	if(. && user?.get_species_name() != SPECIES_SKRELL)
+	if(. && user?.get_species()?.uid != /decl/species/skrell::uid)
 		return FALSE
 
 /obj/item/clothing/ears/skrell/band
@@ -43,7 +43,7 @@
 /decl/loadout_option/ears/skrell
 	name = "skrell headtail accessory selection"
 	category = /decl/loadout_category/ears
-	whitelisted = list(SPECIES_SKRELL)
+	whitelisted = list(/decl/species/skrell::uid)
 	path = /obj/item/clothing/ears/skrell
 	loadout_flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_SUBTYPE_SELECTION
 	uid = "gear_accessory_skrell"

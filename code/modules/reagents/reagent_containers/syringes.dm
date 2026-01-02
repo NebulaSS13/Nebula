@@ -388,7 +388,7 @@
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/brute_meds/populate_reagents()
-	add_to_reagents(/decl/material/liquid/brute_meds, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/brute_meds, REAGENT_MAXIMUM_VOLUME(reagents))
 	return ..()
 
 // TG ports

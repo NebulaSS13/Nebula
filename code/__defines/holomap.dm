@@ -25,7 +25,6 @@
 #define HOLOMAP_AREACOLOR_ESCAPE      "#ff0000cc"
 #define HOLOMAP_AREACOLOR_CREW        "#5bc1c199"
 #define HOLOMAP_AREACOLOR_MAINTENANCE "#9c895066"
-
 // If someone can come up with a non-conflicting color for the lifts, please update this.
 #define HOLOMAP_AREACOLOR_LIFTS       null
 

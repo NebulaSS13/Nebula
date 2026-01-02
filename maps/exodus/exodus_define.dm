@@ -12,8 +12,6 @@
 	company_short = "NT"
 	system_name   = "Nyx"
 
-	default_law_type = /datum/ai_laws/nanotrasen
-
 	overmap_ids = list(OVERMAP_ID_SPACE)
 	num_exoplanets = 3
 	away_site_budget = 3
@@ -51,27 +49,6 @@
 		list("name" = "Supply",        "key" = "u", "frequency" = 1347, "color" = COMMS_COLOR_SUPPLY,    "span_class" = "supradio", "secured" = list(access_cargo)),
 		list("name" = "Exploration",   "key" = "x", "frequency" = 1361, "color" = COMMS_COLOR_EXPLORER , "span_class" = "EXPradio", "secured" = list(access_eva)),
 		list("name" = "AI Private",    "key" = "p", "frequency" = 1343, "color" = COMMS_COLOR_AI,        "span_class" = "airadio",  "secured" = list(access_ai_upload))
-	)
-
-	_background_categories = list(
-		/decl/background_category/heritage,
-		/decl/background_category/citizenship,
-		/decl/background_category/faction,
-		/decl/background_category/religion
-	)
-
-	available_background_info = list(
-		/decl/background_category/faction =     list(/decl/background_detail/faction/other),
-		/decl/background_category/heritage =    list(/decl/background_detail/heritage/other),
-		/decl/background_category/religion =    list(/decl/background_detail/religion/other),
-		/decl/background_category/citizenship = list(/decl/background_detail/citizenship/other)
-	)
-
-	default_background_info = list(
-		/decl/background_category/faction =     /decl/background_detail/faction/other,
-		/decl/background_category/heritage =    /decl/background_detail/heritage/other,
-		/decl/background_category/religion =    /decl/background_detail/religion/other,
-		/decl/background_category/citizenship = /decl/background_detail/citizenship/other
 	)
 
 /datum/map/exodus/get_map_info()

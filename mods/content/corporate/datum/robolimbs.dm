@@ -10,6 +10,7 @@
 		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
 		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
 	)
+	skip_organ_validation = TRUE
 
 /decl/bodytype/prosthetic/bishop
 	name = "Bishop"
@@ -39,7 +40,7 @@
 	desc = "This limb has a white polymer casing with blue holo-displays."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/bishop/bishop_glyph.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
-	material = /decl/material/solid/metal/steel
+	organ_material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_SECONDARY
 	)
@@ -47,6 +48,8 @@
 	has_limbs = list(
 		BP_HEAD =   list("path" = /obj/item/organ/external/head),
 	)
+	skip_organ_validation = TRUE
+
 /decl/bodytype/prosthetic/cybersolutions
 	name = "Cyber Solutions"
 	desc = "This limb is grey and utilitarian, with little in the way of aesthetic flourish."
@@ -81,13 +84,14 @@
 	has_limbs = list(
 		BP_HEAD =   list("path" = /obj/item/organ/external/head),
 	)
+	skip_organ_validation = TRUE
 
 /decl/bodytype/prosthetic/einstein
 	name = "Einstein Engines"
 	desc = "This limb is lightweight with a sleek high-contrast design."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/einstein/einstein_main.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
-	material = /decl/material/solid/metal/aluminium
+	organ_material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
@@ -109,6 +113,7 @@
 	has_limbs = list(
 		BP_HEAD =   list("path" = /obj/item/organ/external/head),
 	)
+	skip_organ_validation = TRUE
 
 /decl/bodytype/prosthetic/hephaestus
 	name = "Hephaestus Industries"
@@ -121,7 +126,7 @@
 	name = "Hephaestus - Athena"
 	desc = "This limb has a casing with an olive drab finish, providing a militaristic look."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/hephaestus/hephaestus_titan.dmi'
-	has_eyes = FALSE
+	eye_icon = null
 	bodytype_category = BODYTYPE_HUMANOID
 	uid = "bodytype_prosthetic_hephaestus_titan"
 
@@ -129,13 +134,13 @@
 	name = "Hephaestus - Frontier"
 	desc = "A rugged prosthetic head featuring the standard Hephaestus theme, a visor and an external display."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/hephaestus/hephaestus_frontier.dmi'
-	has_eyes = FALSE
+	eye_icon = null
 	bodytype_category = BODYTYPE_HUMANOID
 	uid = "bodytype_prosthetic_hephaestus_frontier"
 	has_limbs = list(
 		BP_HEAD =   list("path" = /obj/item/organ/external/head),
 	)
-
+	skip_organ_validation = TRUE
 
 /decl/bodytype/prosthetic/wardtakahashi
 	name = "Ward-Takahashi"
@@ -154,7 +159,7 @@
 	desc = "This limb has a sleek black and white polymer finish."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/zenghu/zenghu_spirit.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
-	material = /decl/material/solid/metal/aluminium
+	organ_material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
@@ -174,6 +179,7 @@
 	has_limbs = list(
 		BP_HEAD =   list("path" = /obj/item/organ/external/head),
 	)
+	skip_organ_validation = TRUE
 
 /decl/bodytype/prosthetic/morpheus
 	name = "Morpheus"
@@ -192,6 +198,7 @@
 	has_limbs = list(
 		BP_HEAD =   list("path" = /obj/item/organ/external/head),
 	)
+	skip_organ_validation = TRUE
 
 /decl/bodytype/prosthetic/morpheus/skeletoncrew
 	name = "Morpheus - Skeleton Crew"
@@ -202,6 +209,7 @@
 	has_limbs = list(
 		BP_HEAD =   list("path" = /obj/item/organ/external/head),
 	)
+	skip_organ_validation = TRUE
 
 /decl/bodytype/prosthetic/morpheus/mantis
 	name = "Unbranded - Mantis Prosis"
@@ -264,6 +272,7 @@
 	has_limbs = list(
 		BP_HEAD =   list("path" = /obj/item/organ/external/head),
 	)
+	skip_organ_validation = TRUE
 
 /decl/bodytype/prosthetic/xion/whiteout
 	name = "Xion - Whiteout"
@@ -281,6 +290,7 @@
 	has_limbs = list(
 		BP_HEAD =   list("path" = /obj/item/organ/external/head),
 	)
+	skip_organ_validation = TRUE
 
 /decl/bodytype/prosthetic/nanotrasen
 	name = "NanoTrasen"
@@ -311,7 +321,7 @@
 	appearance_flags = HAS_SKIN_TONE_NORMAL | HAS_UNDERWEAR | HAS_EYE_COLOR
 	body_flags = BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 	bodytype_category = BODYTYPE_HUMANOID
-	material = /decl/material/solid/organic/plastic
+	organ_material = /decl/material/solid/organic/plastic
 	uid = "bodytype_prosthetic_zenghu_fem"
 
 /decl/bodytype/prosthetic/zenghu/masculine
@@ -325,7 +335,7 @@
 	desc = "This limb seems meticulously hand-crafted, and distinctly Unathi in design."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/uesseka/uesseka_main.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
-	material = /decl/material/solid/metal/steel
+	organ_material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_SECONDARY
 	)

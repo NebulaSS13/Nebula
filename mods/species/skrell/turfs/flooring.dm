@@ -1,45 +1,51 @@
 /turf/floor/tiled/skrell
 	icon = 'mods/species/skrell/icons/turf/skrellturf.dmi'
 	icon_state = "skrellblack"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell
+	_flooring = /decl/flooring/reinforced/shuttle/skrell
 
 /turf/floor/tiled/skrell/white
 	icon_state = "skrellwhite"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell/white
+	_flooring = /decl/flooring/reinforced/shuttle/skrell/white
 
 /turf/floor/tiled/skrell/red
 	icon_state = "skrellred"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell/red
+	_flooring = /decl/flooring/reinforced/shuttle/skrell/red
 
 /turf/floor/tiled/skrell/blue
 	icon_state = "skrellblue"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell/blue
+	_flooring = /decl/flooring/reinforced/shuttle/skrell/blue
 
 /turf/floor/tiled/skrell/orange
 	icon_state = "skrellorange"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell/orange
+	_flooring = /decl/flooring/reinforced/shuttle/skrell/orange
 
 /turf/floor/tiled/skrell/green
 	icon_state = "skrellgreen"
-	initial_flooring = /decl/flooring/reinforced/shuttle/skrell/green
+	_flooring = /decl/flooring/reinforced/shuttle/skrell/green
 
 /////////////////////////////////////////////////////////////////////////
 
 /decl/flooring/reinforced/shuttle/skrell
-	icon = 'mods/species/skrell/icons/turf/skrellturf.dmi'
+	icon      = 'mods/species/skrell/icons/turf/skrellturf.dmi'
 	icon_base = "skrellblack"
+	uid       = "floor_reinf_shuttle_skrell"
 
 /decl/flooring/reinforced/shuttle/skrell/white
 	icon_base = "skrellwhite"
+	uid       = "floor_reinf_shuttle_skrell_white"
 
 /decl/flooring/reinforced/shuttle/skrell/red
 	icon_base = "skrellred"
+	uid       = "floor_reinf_shuttle_skrell_red"
 
 /decl/flooring/reinforced/shuttle/skrell/blue
 	icon_base = "skrellblue"
+	uid       = "floor_reinf_shuttle_skrell_blue"
 
 /decl/flooring/reinforced/shuttle/skrell/orange
 	icon_base = "skrellorange"
+	uid       = "floor_reinf_shuttle_skrell_orange"
 
 /decl/flooring/reinforced/shuttle/skrell/green
 	icon_base = "skrellgreen"
+	uid       = "floor_reinf_shuttle_skrell_green"

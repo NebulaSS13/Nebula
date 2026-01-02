@@ -1,5 +1,6 @@
-#define LANGUAGE_TAJARAN       "Siik'maas"
-#define BODYTYPE_TAJARAN       "felinoid body"
+#define LANGUAGE_TAJARA  "Siik"
+#define LANGUAGE_AKHANI  "Akhani"
+#define BODYTYPE_TAJARAN "felinoid body"
 
 /decl/modpack/tajaran
 	name = "Tajaran Species"
@@ -12,7 +13,8 @@
 	SSmodpacks.default_submap_whitelisted_species |= /decl/species/tajaran::uid
 
 /mob/living/human/tajaran/Initialize(mapload, species_uid, datum/mob_snapshot/supplied_appearance)
-	. = ..(species_uid = /decl/species/tajaran::uid)
+	species_uid = /decl/species/tajaran::uid
+	. = ..()
 
 /obj/item
 	var/_tajaran_onmob_icon

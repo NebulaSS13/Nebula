@@ -29,6 +29,7 @@
 	uid = "chem_dexalin_plus"
 
 /decl/material/liquid/oxy_meds/dexalinp/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+	. = ..()
 	M.add_chemical_effect(CE_OXYGENATED, 2) // change to add_chemical_effect_max later
 	holder.remove_reagent(/decl/material/gas/carbon_monoxide, 3 * removed)
 
@@ -58,30 +59,31 @@
 /decl/material/liquid/antiseptic
 	name = "sterilizine"
 
-/decl/material/liquid/stimulants
+/decl/material/liquid/accumulated/stimulants
 	name = "methylphenidate"
 	lore_text = "Improves the ability to concentrate."
 
-/decl/material/liquid/antidepressants
+/decl/material/liquid/accumulated/antidepressants
 	name = "citalopram"
 	lore_text = "Stabilizes the mind a little."
 
 // NEW, NOT RENAMED:
-/decl/material/liquid/antidepressants/paroxetine
+/decl/material/liquid/accumulated/antidepressants/paroxetine
 	name = "paroxetine"
 	value = 3.5
 	uid = "chem_paroxetine"
 
-/decl/material/liquid/antidepressants/paroxetine/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/accumulated/antidepressants/paroxetine/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+	. = ..()
 	var/volume = REAGENT_VOLUME(holder, type)
-	if(volume <= 0.1 && LAZYACCESS(M.chem_doses, type) >= 0.5 && world.time > REAGENT_DATA(holder, type) + 5 MINUTES)
-		LAZYSET(holder.reagent_data, type, world.time)
+	if(volume <= 0.1 && CHEM_DOSE(M, type) >= 0.5 && world.time > REAGENT_DATA(holder, type) + 5 MINUTES)
+		REAGENT_SET_DATA(holder, type, world.time)
 		to_chat(M, SPAN_WARNING("Your mind feels much less stable..."))
 	else
 		M.add_chemical_effect(CE_MIND, 2)
 		M.adjust_hallucination(-10)
 		if(world.time > REAGENT_DATA(holder, type) + 5 MINUTES)
-			LAZYSET(holder.reagent_data, type, world.time)
+			REAGENT_SET_DATA(holder, type, world.time)
 			if(prob(90))
 				to_chat(M, SPAN_NOTICE("Your mind feels much more stable."))
 			else
@@ -109,8 +111,9 @@
 	color = "#008000"
 	value = 2.7
 	uid = "chem_arithrazine"
+	antirad_power = 70
 
 /decl/material/liquid/antirads/arithrazine/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.radiation = max(M.radiation - 70 * removed, 0)
+	. = ..()
 	if(prob(60))
 		M.take_organ_damage(4 * removed, 0)

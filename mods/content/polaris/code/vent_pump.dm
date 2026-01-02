@@ -4,7 +4,7 @@
 	mid_sounds = list()//list('mods/content/polaris/sound/machines/airpumpidle_1.ogg' = 1, 'mods/content/polaris/sound/machines/airpumpidle_2.ogg' = 1, 'mods/content/polaris/sound/machines/airpumpidle_3.ogg' = 1, 'mods/content/polaris/sound/machines/airpumpidle_4.ogg' = 1)
 	mid_length = 19
 	end_sound = 'mods/content/polaris/sound/machines/airpumpshutdown.ogg'
-	volume = 3
+	play_volume = 3
 
 /obj/machinery/atmospherics/unary/vent_pump
 	var/datum/composite_sound/air_pump/soundloop

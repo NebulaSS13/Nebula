@@ -2,7 +2,7 @@
 #define MODPACK_UNATHI
 // BEGIN_INCLUDE
 
-#include "unathi.dm"
+#include "_unathi.dm"
 #include "datum\autohiss.dm"
 #include "datum\blood.dm"
 #include "datum\citizenship.dm"

@@ -248,8 +248,3 @@
 	desc = "It's a blue jumpsuit with some gold markings denoting the rank of \"Captain\"."
 	name = "captain's jumpsuit"
 	icon = 'icons/clothing/jumpsuits/jumpsuit_captain.dmi'
-
-/obj/item/clothing/jumpsuit/captainformal
-	name = "captain's formal uniform"
-	desc = "A captain's formal-wear, for special occasions."
-	icon = 'icons/clothing/uniform_captain_formal.dmi'

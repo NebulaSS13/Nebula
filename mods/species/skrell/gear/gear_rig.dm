@@ -238,6 +238,6 @@
 	icon = 'mods/species/skrell/icons/gear/gear_rig.dmi'
 	icon_state = "welder1"
 	engage_string = "Toggle Welder"
-	device = /obj/item/weldingtool/electric/
+	device = /obj/item/weldingtool/electric
 	usable = TRUE
 	selectable = TRUE
