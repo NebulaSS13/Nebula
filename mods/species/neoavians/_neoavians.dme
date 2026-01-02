@@ -5,6 +5,8 @@
 #include "_overrides.dm"
 #include "clothing.dm"
 #include "datum\accessory.dm"
+#include "datum\blood.dm"
+#include "datum\culture.dm"
 #include "datum\language.dm"
 #include "datum\loadout.dm"
 #include "datum\species.dm"

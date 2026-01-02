@@ -7,7 +7,6 @@
 #include "datum\antagonist.dm"
 #include "datum\codex.dm"
 #include "datum\culture.dm"
-#include "datum\descriptors.dm"
 #include "datum\emotes.dm"
 #include "datum\languages.dm"
 #include "datum\species.dm"

@@ -27,7 +27,7 @@
 	var/list/camera_channels = list()
 	var/list/languages = list(
 		/decl/language/human/common = TRUE,
-		/decl/language/legal = TRUE,
+	//	/decl/language/legal = TRUE,
 		/decl/language/sign = FALSE
 	)
 	var/list/module_sprites = list()

@@ -108,6 +108,13 @@
 /obj/item/chems/syringe/inaprovaline : /obj/item/chems/syringe/stabilizer{@OLD}
 /obj/item/chems/blood/empty : /obj/item/chems/ivbag{@OLD}
 /obj/item/chems/blood/@SUBTYPES : /obj/item/chems/ivbag/blood/@SUBTYPES{@OLD}
+/obj/item/chems/ivbag/blood/AMinus{@OLD} : /obj/item/chems/ivbag/blood/aminus{@OLD}
+/obj/item/chems/ivbag/blood/APlus{@OLD} : /obj/item/chems/ivbag/blood/aplus{@OLD}
+/obj/item/chems/ivbag/blood/BMinus{@OLD} : /obj/item/chems/ivbag/blood/bminus{@OLD}
+/obj/item/chems/ivbag/blood/BPlus{@OLD} : /obj/item/chems/ivbag/blood/bplus{@OLD}
+/obj/item/chems/ivbag/blood/OMinus{@OLD} : /obj/item/chems/ivbag/blood/ominus{@OLD}
+/obj/item/chems/ivbag/blood/OPlus{@OLD} : /obj/item/chems/ivbag/blood/oplus{@OLD}
+/obj/item/chems/blood/@SUBTYPES : /obj/item/chems/ivbag/blood/@SUBTYPES{@OLD}
 /obj/item/defib_kit/@SUBTYPES : /obj/item/defibrillator/@SUBTYPES{@OLD}
 /obj/item/chems/spray/sterilizine : /obj/item/chems/spray/antiseptic{@OLD}
 
@@ -140,6 +147,7 @@
 # STOCK PARTS AND SMES COILS
 /obj/item/stock_parts/subspace/sub_filter : /obj/item/stock_parts/subspace/filter
 /obj/item/smes_coil/@SUBTYPES : /obj/item/stock_parts/smes_coil/@SUBTYPES{@OLD}
+/obj/item/circuitboard/airalarm : /obj/item/stock_parts/circuitboard/air_alarm{@OLD}
 /obj/item/circuitboard/@SUBTYPES : /obj/item/stock_parts/circuitboard/@SUBTYPES{@OLD}
 /obj/item/airlock_electronics : /obj/item/stock_parts/circuitboard/airlock_electronics{@OLD}
 
@@ -255,6 +263,7 @@
 /obj/machinery/bookbinder : /obj/machinery/fabricator/book{@OLD}
 /obj/machinery/organ_printer/flesh : /obj/machinery/fabricator/bioprinter{@OLD}
 /obj/machinery/vending/food : /obj/machinery/fabricator/replicator
+/obj/machinery/robotic_fabricator : /obj/machinery/fabricator/robotics{@OLD}
 
 /obj/machinery/fabricator/@SUBTYPES : /obj/machinery/fabricator/@SUBTYPES{@OLD; res_max_amount = @SKIP; speed = @SKIP}
 
@@ -288,6 +297,18 @@
 /obj/item/stack/material/glass/phoronglass : /obj/item/stack/material/pane/mapped/borosilicate{@OLD}
 /obj/item/stack/material/glass/phoronrglass : /obj/item/stack/material/pane/mapped/rborosilicate{@OLD}
 /obj/item/stack/rods : /obj/item/stack/material/rods{@OLD}
+/obj/item/stack/material/copper : /obj/item/stack/material/ingot/mapped/copper{@OLD}
+/obj/item/stack/material/silver : /obj/item/stack/material/ingot/mapped/silver{@OLD}
+/obj/item/stack/material/platinum : /obj/item/stack/material/ingot/mapped/platinum{@OLD}
+/obj/item/stack/material/concrete : /obj/item/stack/material/brick/mapped/concrete{@OLD}
+/obj/item/stack/material/@SUBTYPES{amount = 5} : /obj/item/stack/material/@SUBTYPES/five{@OLD; amount = @SKIP}
+/obj/item/stack/material/@SUBTYPES{amount = 10} : /obj/item/stack/material/@SUBTYPES/ten{@OLD; amount = @SKIP}
+/obj/item/stack/material/@SUBTYPES{amount = 15} : /obj/item/stack/material/@SUBTYPES/fifteen{@OLD; amount = @SKIP}
+/obj/item/stack/material/@SUBTYPES{amount = 20} : /obj/item/stack/material/@SUBTYPES/twenty{@OLD; amount = @SKIP}
+/obj/item/stack/material/@SUBTYPES{amount = 25} : /obj/item/stack/material/@SUBTYPES/twentyfive{@OLD; amount = @SKIP}
+/obj/item/stack/material/@SUBTYPES{amount = 30} : /obj/item/stack/material/@SUBTYPES/thirty{@OLD; amount = @SKIP}
+/obj/item/stack/material/@SUBTYPES{amount = 40} : /obj/item/stack/material/@SUBTYPES/forty{@OLD; amount = @SKIP}
+/obj/item/stack/material/@SUBTYPES{amount = 50} : /obj/item/stack/material/@SUBTYPES/fifty{@OLD; amount = @SKIP}
 /obj/item/packageWrap{amount = @UNSET} : /obj/item/stack/package_wrap/twenty_five{@OLD; amount = @SKIP}
 /obj/item/packageWrap : /obj/item/stack/package_wrap{@OLD}
 /obj/item/wrapping_paper{amount = @UNSET} : /obj/item/stack/package_wrap/gift/twenty_five{@OLD; amount = @SKIP}

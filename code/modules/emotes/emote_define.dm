@@ -7,7 +7,7 @@
 		. = replacetext(., "$TARGET_THEM$",  target_gender.him)
 		. = replacetext(., "$TARGET_THEIR$", target_gender.his)
 		. = replacetext(., "$TARGET_SELF$",  target_gender.self)
-		. = replacetext(., "$TARGET$",       "<b>\the [target]</b>")
+		. = replacetext(., "$TARGET$",       "<b>[target]</b>")
 
 /proc/emote_replace_user_tokens(var/msg, var/atom/user)
 	. = msg
@@ -18,7 +18,7 @@
 		. = replacetext(., "$USER_THEM$",  user_gender.him)
 		. = replacetext(., "$USER_THEIR$", user_gender.his)
 		. = replacetext(., "$USER_SELF$",  user_gender.self)
-		. = replacetext(., "$USER$",       "<b>\the [user]</b>")
+		. = replacetext(., "$USER$",       "<b>[user]</b>")
 
 // Note about emote messages:
 // - $USER$ / $TARGET$ will be replaced with the relevant name, in bold.

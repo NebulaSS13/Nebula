@@ -120,3 +120,20 @@
 		/obj/item/oxycandle
 	)
 	return spawnable_choices
+
+/obj/random/hardsuit
+	name = "random hardsuit"
+	desc = "This is a random hardsuit."
+	icon = 'icons/clothing/rigs/rig.dmi'
+	icon_state = ICON_STATE_WORLD
+
+/obj/random/hardsuit/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/rig/light/hacker/unlocked  = 4,
+		/obj/item/rig/industrial/unlocked    = 5,
+		/obj/item/rig/eva/unlocked           = 5,
+		/obj/item/rig/light/stealth/unlocked = 4,
+		/obj/item/rig/hazard/unlocked        = 3,
+		/obj/item/rig/merc/empty/unlocked    = 1
+	)
+	return spawnable_choices

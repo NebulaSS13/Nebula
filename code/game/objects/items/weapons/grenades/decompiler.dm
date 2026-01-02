@@ -4,6 +4,7 @@
 	icon = 'icons/obj/items/grenades/delivery.dmi'
 	origin_tech = @'{"materials":3,"magnets":2,"exoticmatter":3}'
 	matter = list(
+		/decl/material/solid/phoron = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/exotic_matter = MATTER_AMOUNT_TRACE
 	)
 

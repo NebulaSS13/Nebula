@@ -1,0 +1,13 @@
+#ifndef MODPACK_BAYCHEMS
+#define MODPACK_BAYCHEMS
+// BEGIN_INCLUDE
+#include "_baychems.dm"
+#include "chems_drugs.dm"
+#include "chems_medicines.dm"
+#include "chems_painkillers.dm"
+#include "chems_poisons.dm"
+#include "items.dm"
+#include "pills.dm"
+#include "reactions.dm"
+// END_INCLUDE
+#endif

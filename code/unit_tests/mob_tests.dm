@@ -24,6 +24,8 @@
 		T = locate(/turf/space)
 	var/datum/mob_snapshot/dummy_appearance = new
 	for(var/decl/bodytype/bodytype in decls_repository.get_decls_of_subtype_unassociated(/decl/bodytype))
+		if(bodytype.skip_organ_validation)
+			continue
 		var/decl/species/species = bodytype.get_user_species_for_validation()
 		if(!species)
 			continue
@@ -208,6 +210,7 @@
 	var/msg = "Damage taken: [ending_damage] out of [damage_amount] || expected: [expected_msg] \[Overall Health:[ending_health] (Initial: [initial_health]\]"
 
 	if(failure)
+		msg += " || species: [H.get_species()?.type || "NULL"] || bodytype: [H.get_bodytype()?.type || "NULL"]"
 		fail(msg)
 	else
 		pass(msg)
@@ -305,6 +308,8 @@
 	var/failed = FALSE
 	var/datum/mob_snapshot/dummy_appearance = new
 	for(var/decl/bodytype/bodytype in decls_repository.get_decls_of_subtype_unassociated(/decl/bodytype))
+		if(bodytype.skip_organ_validation)
+			continue
 		var/decl/species/species = bodytype.get_user_species_for_validation()
 		if(!species)
 			continue

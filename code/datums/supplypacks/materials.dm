@@ -77,6 +77,11 @@
 	contains = list(/obj/item/stack/material/sheet/reinforced/mapped/ocp/ten)
 	containername = "osmium carbide plasteel sheets crate"
 
+/decl/hierarchy/supply_pack/materials/phoron10
+	name = "10 phoron sheets"
+	contains = list(/obj/item/stack/material/crystal/mapped/phoron/ten)
+	containername = "phoron sheets crate"
+
 /decl/hierarchy/supply_pack/materials/gold10
 	name = "10 gold sheets"
 	contains = list(/obj/item/stack/material/ingot/mapped/gold/ten)

@@ -86,8 +86,8 @@
 	req_access = list(access_engine)
 
 /area/exodus/solar
-	requires_power = TRUE
-	always_unpowered = TRUE
+	requires_power = 1
+	always_unpowered = 1
 	has_gravity = FALSE
 	base_turf = /turf/space
 
@@ -510,7 +510,6 @@
 
 /area/exodus/security/brig
 	name = "\improper Security - Brig"
-	req_access = list(access_brig)
 
 /area/exodus/security/brig/processing
 	name = "\improper Security - Processing"
@@ -523,10 +522,12 @@
 /area/exodus/security/brig/solitaryA
 	name = "\improper Security - Solitary 1"
 	icon_state = "sec_prison"
+	req_access = list(access_brig)
 
 /area/exodus/security/brig/solitaryB
 	name = "\improper Security - Solitary 2"
 	icon_state = "sec_prison"
+	req_access = list(access_brig)
 
 //Prison
 
@@ -790,6 +791,9 @@
 	forced_ambience = list('sound/ambience/maintambience.ogg')
 	req_access = list(access_maint_tunnels)
 	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
+
+/area/exodus/maintenance/disused
+	name = "\improper Disused Compartment"
 
 /area/exodus/maintenance/atmos_control
 	name = "\improper Atmospherics Maintenance"

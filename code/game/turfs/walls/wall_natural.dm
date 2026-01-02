@@ -233,3 +233,6 @@ var/global/_wall_chisel_skill = SKILL_CONSTRUCTION
 			return pick(S.base_materials)
 	//Otherwise, just use level strata
 	return ..()
+
+// Stub type for checking in mapgen.
+/turf/wall/natural/ignore_mapgen

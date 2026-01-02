@@ -9,7 +9,7 @@
 	ask_verb = "chuffs"
 	exclaim_verb = "howls"
 	colour = "serpentid_lang"
-	key = "j"
+	key = "e"
 	flags = LANG_FLAG_WHITELISTED
 	space_chance = 40
 

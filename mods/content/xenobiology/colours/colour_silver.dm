@@ -9,10 +9,10 @@
 	baby_icon =    'mods/content/xenobiology/icons/slimes/slime_baby_silver.dmi'
 	adult_icon =   'mods/content/xenobiology/icons/slimes/slime_adult_silver.dmi'
 	extract_icon = 'mods/content/xenobiology/icons/slimes/slime_extract_silver.dmi'
-	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises a large amount of food.")
+	reaction_strings = list(/decl/material/solid/phoron = "Synthesises a large amount of food.")
 	var/static/list/borks = subtypesof(/obj/item/food)
 
-/decl/slime_colour/silver/handle_uranium_reaction(var/datum/reagents/holder)
+/decl/slime_colour/silver/handle_phoron_reaction(var/datum/reagents/holder)
 	var/location = get_turf(holder.get_reaction_loc())
 	if(location)
 		playsound(location, 'sound/effects/phasein.ogg', 100, 1)

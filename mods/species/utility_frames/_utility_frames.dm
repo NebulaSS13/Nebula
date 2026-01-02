@@ -1,3 +1,3 @@
 /decl/modpack/utility_frames
-	name = "Utility Frames"
-	dreams = list("a utility frame", "rogue machine servitors")
+	name = "Synthetics"
+	dreams = list("a drone intelligence", "rogue machine servitors", "a positronic brain")

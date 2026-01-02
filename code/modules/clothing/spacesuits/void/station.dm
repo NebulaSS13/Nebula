@@ -291,6 +291,35 @@
 	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt
 	boots = /obj/item/clothing/shoes/magboots
 
+/obj/item/clothing/head/helmet/space/void/medical/emt
+	name = "emergency medical response voidsuit helmet"
+	desc = "A special helmet designed for work in a hazardous, low pressure environment. Exchanges radiation shielding for some additional protection."
+	icon = 'icons/clothing/spacesuit/void/medical_emt/helmet.dmi'
+	armor = list(
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
+		)
+
+/obj/item/clothing/suit/space/void/medical/emt
+	name = "emergency medical response voidsuit"
+	desc = "A special suit that protects against hazardous, low pressure environments. Exchanges radiation shielding for some additional protection."
+	icon = 'icons/clothing/spacesuit/void/medical_emt/suit.dmi'
+	armor = list(
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
+		)
+	breach_threshold = 17 // These are kinda thicc
+
+/obj/item/clothing/suit/space/void/medical/emt/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/medical/emt
+	boots = /obj/item/clothing/shoes/magboots
+
 //Security
 /obj/item/clothing/head/helmet/space/void/security/alt
 	name = "riot security voidsuit helmet"

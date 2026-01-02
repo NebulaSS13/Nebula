@@ -5,6 +5,7 @@
 	var/list/possible_materials = list(
 		/decl/material/solid/metal/steel,
 		/decl/material/solid/metal/plasteel,
+		/decl/material/solid/phoron,
 		/decl/material/solid/metal/titanium,
 		/decl/material/solid/glass
 	)

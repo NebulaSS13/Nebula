@@ -155,8 +155,9 @@
 	add_to_reagents(/decl/material/liquid/drink/juice/turnip, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/cans/syndicola
-	name = "\improper TerraCola"
-	desc = "A can of the only soft drink state approved for the benefit of the people. Served at room temperature regardless of ambient temperatures thanks to innovative Terran insulation technology."
+	name = "\improper RelanCola"
+	desc = "A can of the only soft drink state approved for the benefit of the people. \
+	Served at room temperature regardless of ambient temperatures thanks to innovative Relani insulation technology."
 	icon_state = "syndi_cola"
 	center_of_mass = @'{"x":16,"y":10}'
 

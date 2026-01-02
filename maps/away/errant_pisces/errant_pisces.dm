@@ -180,9 +180,9 @@
 
 /obj/abstract/landmark/corpse/carp_fisher
 	name = "carp fisher"
-	corpse_outfits = list(/decl/outfit/corpse/carp_fisher)
+	corpse_outfits = list(/decl/outfit/carp_fisher)
 
-/decl/outfit/corpse/carp_fisher
+/decl/outfit/carp_fisher
 	name = "Dead carp fisher"
 	uniform = /obj/item/clothing/jumpsuit/green
 	suit = /obj/item/clothing/suit/apron/overalls

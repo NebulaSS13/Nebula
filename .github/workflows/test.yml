@@ -6,11 +6,13 @@ on:
       - dev
       - stable
       - staging
+      - polaris-rebase
   pull_request:
     branches:
       - dev
       - stable
       - staging
+      - polaris-rebase
   workflow_dispatch:
 
 env:

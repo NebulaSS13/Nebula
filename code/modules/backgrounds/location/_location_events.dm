@@ -30,7 +30,7 @@
 	. = "[pick("Pirates","Criminal elements","A [pick("mercenary","Donk Co.","Waffle Co.","\'REDACTED\'")] strike force")] have [pick("raided","blockaded","attempted to blackmail","attacked")] [location.name] today. Security has been tightened, but many valuable minerals were taken."
 
 /decl/location_event/corporate_attack/announce(var/decl/background_detail/location)
-	. = "A small [pick("pirate","Cybersun Industries","Gorlex Marauders","mercenary")] fleet has precise-jumped into proximity with [location.name], [pick("for a smash-and-grab operation","in a hit and run attack","in an overt display of hostilities")]. Much damage was done, and security has been tightened since the incident."
+	. = "A small [pick("pirate","vox","Vystholm","mercenary")] fleet has precise-jumped into proximity with [location.name], [pick("for a smash-and-grab operation","in a hit and run attack","in an overt display of hostilities")]. Much damage was done, and security has been tightened since the incident."
 
 /decl/location_event/alien_raiders/announce(var/decl/background_detail/location)
 	if(prob(20))
@@ -39,7 +39,7 @@
 		. = "[pick("The alien species designated \'United Exolitics\'","The alien species designated \'REDACTED\'","An unknown alien species")] have raided [location.name] today, stealing wildlife, farm animals, medical research materials and kidnapping civilians. It seems they desire to learn more about us, so the Navy will be standing by to accomodate them the next time they try."
 
 /decl/location_event/ai_liberation/announce(var/decl/background_detail/location)
-	. = "A [pick("\'REDACTED\' was detected on","S.E.L.F operative infiltrated","malignant computer virus was detected on","rogue [pick("slicer","hacker")] was apprehended on")] [location.name] today, and managed to infect [pick("\'REDACTED\'","a sentient sub-system","a class one AI","a sentient defence installation")] before it could be stopped. Many lives were lost as it began systematically murdering civilians, and considerable work must be done to repair the affected areas."
+	. = "A [pick("\'REDACTED\' was detected on","S.E.L.F operative infiltrated","malignant computer virus was detected on","rogue [pick("slicer","hacker")] was apprehended on")] [location.name] today, after it managed to infect [pick("\'REDACTED\'","a sentient sub-system","an A-Class AI","a sentient defence installation")] before it could be stopped. Many lives were lost as it systematically begun murdering civilians, and considerable work must be done to repair the affected areas."
 
 /decl/location_event/mourning/announce(var/decl/background_detail/location)
 	. = "[pick("The popular","The well-liked","The eminent","The well-known")] [pick("professor","entertainer","singer","researcher","public servant","administrator","ship captain","\'REDACTED\'")], [pick( random_name(pick(MALE,FEMALE)), 40; "\'REDACTED\'" )] has [pick("passed away","committed suicide","been murdered","died in a freakish accident")] on [location.name] today. The entire planet is in mourning, and prices have dropped for industrial goods as worker morale drops."
@@ -57,7 +57,7 @@
 	. = "A [pick("festival","week long celebration","day of revelry","planet-wide holiday")] has been declared on [location.name] by [pick("Governor","Commissioner","General","Commandant","Administrator")] [random_name(pick(MALE,FEMALE))] to celebrate [pick("the birth of their [pick("son","daughter")]","coming of age of their [pick("son","daughter")]","the pacification of rogue military cell","the apprehension of a violent criminal who had been terrorising the planet")]. Massive stocks of food and meat have been bought driving up prices across the planet."
 
 /decl/location_event/research_breakthrough/announce(var/decl/background_detail/location)
-	. = "A major breakthough in the field of [pick("exotic matter research","super-compressed materials","nano-augmentation","wormhole research","volatile power manipulation")] \
+	. = "A major breakthough in the field of [pick("phoron research","super-compressed materials","nano-augmentation","wormhole research","volatile power manipulation")] \
 		was announced [pick("yesterday","a few days ago","last week","earlier this month")] by a private firm on [location.name]. \
 		[global.using_map.company_name] declined to comment as to whether this could impinge on profits."
 

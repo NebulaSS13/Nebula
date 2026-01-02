@@ -1,5 +1,5 @@
 /decl/loadout_category/avian
-	name = "Avian"
+	name = "Teshari"
 
 /decl/loadout_option/avian
 	whitelisted = list(/decl/species/neoavian::uid)

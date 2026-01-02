@@ -91,17 +91,26 @@
 	instability =         2 * FUSION_PROCESSING_TIME_MULT
 	minimum_reaction_temperature = 10000
 
+/decl/fusion_reaction/phoron_hydrogen
+	p_react = /decl/material/gas/hydrogen
+	s_react = /decl/material/solid/phoron
+	energy_consumption = 10
+	energy_production = 0
+	instability = 5
+	products = list(/decl/material/solid/metallic_hydrogen = 1)
+	minimum_reaction_temperature = 8000
+
 // VERY UNIDEAL REACTIONS.
-/decl/fusion_reaction/helium_exotic_matter
+/decl/fusion_reaction/phoron_exotic_matter
 	p_react = /decl/material/solid/exotic_matter
-	s_react = /decl/material/gas/helium
+	s_react = /decl/material/solid/phoron
 	energy_consumption = 0
 	energy_production =  5 * FUSION_PROCESSING_TIME_MULT
 	radiation =         40 * FUSION_PROCESSING_TIME_MULT
 	instability =       20 * FUSION_PROCESSING_TIME_MULT
 	hidden_from_codex = TRUE
 
-/decl/fusion_reaction/helium_exotic_matter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
+/decl/fusion_reaction/phoron_exotic_matter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	set waitfor = FALSE
 	. = 1
 	var/datum/event/wormholes/WM = new /datum/event/wormholes(new /datum/event_meta(EVENT_LEVEL_MAJOR))

@@ -6,6 +6,7 @@
 		/area/exodus/construction = NO_SCRUBBER|NO_VENT,
 		/area/exodus/engineering/atmos/storage = NO_SCRUBBER|NO_VENT,
 		/area/exodus/maintenance = NO_SCRUBBER|NO_VENT,
+		/area/exodus/maintenance/disused = 0,
 		/area/exodus/maintenance/arrivals = NO_SCRUBBER|NO_VENT,
 		/area/exodus/maintenance/atmos_control = 0,
 		/area/exodus/maintenance/auxsolarport = NO_SCRUBBER|NO_VENT,
@@ -38,9 +39,7 @@
 		/area/exodus/solar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/exodus/storage/emergency = NO_SCRUBBER|NO_VENT,
 		/area/exodus/storage/emergency2 = NO_SCRUBBER|NO_VENT,
-		/area/ship/exodus_pod_engineering = NO_SCRUBBER|NO_VENT,
-		/area/ship/exodus_pod_mining = NO_SCRUBBER|NO_VENT,
-		/area/ship/exodus_pod_research = NO_SCRUBBER|NO_VENT
+		/area/ship/exodus_pod_engineering = NO_SCRUBBER|NO_VENT
 	)
 
 	area_coherency_test_exempt_areas = list(

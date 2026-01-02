@@ -92,6 +92,9 @@
 		/obj/item/rig_module/cooling_unit
 		)
 
+/obj/item/rig/industrial/unlocked
+	req_access = null
+
 /obj/item/rig/eva
 	name = "EVA hardsuit control module"
 	suit_type = "EVA hardsuit"
@@ -136,6 +139,9 @@
 		/obj/item/rig_module/vision/meson,
 		/obj/item/rig_module/cooling_unit
 		)
+
+/obj/item/rig/eva/unlocked
+	req_access = null
 
 /obj/item/rig/ce
 	name = "advanced engineering hardsuit control module"
@@ -356,6 +362,9 @@
 		/obj/item/rig_module/mounted/taser,
 		/obj/item/rig_module/cooling_unit
 		)
+
+/obj/item/rig/hazard/unlocked
+	req_access = null
 
 /obj/item/rig/zero
 	name = "null suit control module"

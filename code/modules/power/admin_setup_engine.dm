@@ -127,6 +127,9 @@ var/global/list/engine_setup_markers = list()
 			else if(coolant == "N2")
 				P.filtering = /decl/material/gas/nitrogen
 				break
+			if(coolant == "PH")
+				P.filtering = /decl/material/solid/phoron
+				break
 			else if(coolant == "H2")
 				P.filtering = /decl/material/gas/hydrogen
 				break

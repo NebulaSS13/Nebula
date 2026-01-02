@@ -64,6 +64,9 @@
 		/obj/item/rig_module/cooling_unit
 		)
 
+/obj/item/rig/light/hacker/unlocked
+	req_access = null
+
 //The cybersuit is not space-proof. It does however, have good siemens_coefficient values
 /obj/item/clothing/head/lightrig/hacker
 	name = "HUD"
@@ -90,3 +93,6 @@
 		/obj/item/rig_module/stealth_field,
 		/obj/item/rig_module/vision
 	)
+
+/obj/item/rig/light/stealth/unlocked
+	req_access = null

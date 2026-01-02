@@ -1,6 +1,6 @@
 /obj/item/cell/slime
 	name = "charged slime core"
-	desc = "A yellow slime core that crackles with power."
+	desc = "A yellow slime core infused with phoron. It crackles with power."
 	origin_tech = @'{"powerstorage":2,"biotech":4}'
 	icon =  'mods/content/xenobiology/icons/slimes/slime_extract_yellow.dmi'
 	icon_state = ICON_STATE_WORLD

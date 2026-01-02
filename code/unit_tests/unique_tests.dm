@@ -181,9 +181,9 @@
 			continue
 		group_by(decls_by_uid, decl_instance.uid, decl_type)
 
-	var/number_of_issues = number_of_issues(decls_by_uid, "Language UIDs")
+	var/number_of_issues = number_of_issues(decls_by_uid, "/decl UIDs")
 	if(number_of_issues)
-		fail("[number_of_issues] issue\s with decl UIDs found.")
+		fail("[number_of_issues] issue\s with /decl UIDs found.")
 	else
 		pass("All decl UIDs are unique.")
 	return TRUE

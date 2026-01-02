@@ -3,6 +3,7 @@
  *		Oxygen
  *		Anesthetic
  *		Air
+ *		Phoron
  *		Hydrogen
  *		Emergency Oxygen
  */
@@ -38,6 +39,19 @@
 	icon = 'icons/obj/items/tanks/tank_blue.dmi'
 	starting_pressure = list(/decl/material/gas/oxygen = (6 ATM) * O2STANDARD, /decl/material/gas/nitrogen = (6 ATM) * N2STANDARD)
 	gas_volume = 180
+
+/*
+ * Phoron
+ */
+/obj/item/tank/phoron
+	name = "phoron tank"
+	desc = "Contains dangerous phoron. Do not inhale. Warning: extremely flammable."
+	icon = 'icons/obj/items/tanks/tank_greyscaled.dmi'
+	color = "#d3681a"
+	gauge_icon = null
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	slot_flags = null	//they have no straps!
+	starting_pressure = list(/decl/material/solid/phoron = 3*ONE_ATMOSPHERE)
 
 /*
  * Hydrogen
@@ -105,4 +119,15 @@
 	icon = 'icons/obj/items/tanks/tank_red.dmi'
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	starting_pressure = list(/decl/material/gas/nitrogen = 10 ATM)
+	gas_volume = 180
+
+/*
+ * Sleeping gas (nitrous oxide)
+ */
+/obj/item/tank/anesthetic
+	name = "anesthetic tank"
+	desc = "A tank of breathable anaesthetic gas. Count backwards from ten..."
+	icon = 'icons/obj/items/tanks/tank_stirling.dmi' // placeholder! needs red stripe added and outline fixed
+	distribute_pressure = ONE_ATMOSPHERE
+	starting_pressure = list(/decl/material/gas/nitrous_oxide = 3 ATM * N2STANDARD, /decl/material/gas/oxygen = 3 ATM * O2STANDARD)
 	gas_volume = 180

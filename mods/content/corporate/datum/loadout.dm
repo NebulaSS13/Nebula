@@ -46,11 +46,22 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/jumpsuit/aether,
-		/obj/item/clothing/jumpsuit/hephaestus,
-		/obj/item/clothing/jumpsuit/wardt,
-		/obj/item/clothing/jumpsuit/pcrc,
-		/obj/item/clothing/jumpsuit/focal
+		/obj/item/clothing/jumpsuit/corporate/aether,
+		/obj/item/clothing/jumpsuit/corporate/hephaestus,
+		/obj/item/clothing/jumpsuit/corporate/wardt,
+		/obj/item/clothing/jumpsuit/corporate/pcrc,
+		/obj/item/clothing/jumpsuit/corporate/focal,
+		/obj/item/clothing/jumpsuit/corporate/morpheus,
+		/obj/item/clothing/jumpsuit/corporate,
+		/obj/item/clothing/jumpsuit/corporate/techass,
+		/obj/item/clothing/jumpsuit/corporate/veymed,
+		/obj/item/clothing/jumpsuit/corporate/centauri,
+		/obj/item/clothing/jumpsuit/corporate/grayson,
+		/obj/item/clothing/jumpsuit/corporate/kaleidoscope,
+		/obj/item/clothing/jumpsuit/corporate/mbill_flight,
+		/obj/item/clothing/jumpsuit/corporate/wulf,
+		/obj/item/clothing/jumpsuit/corporate/xion,
+		/obj/item/clothing/jumpsuit/corporate/zenghu
 	)
 
 /decl/loadout_option/uniform/corporate
@@ -63,11 +74,7 @@
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
 		/obj/item/clothing/costume/mbill,
-		/obj/item/clothing/costume/saare,
-		/obj/item/clothing/costume/grayson,
-		/obj/item/clothing/costume/morpheus,
-		/obj/item/clothing/costume/skinner,
-		/obj/item/clothing/costume/dais
+		/obj/item/clothing/costume/saare
 	)
 
 /decl/loadout_option/uniform/corp_overalls

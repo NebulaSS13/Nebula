@@ -42,28 +42,37 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 
 // Camera channels
 // Station channels
-#define CAMERA_CHANNEL_PUBLIC "Public"
-#define CAMERA_CHANNEL_ENGINEERING "Engineering"
-#define CAMERA_CHANNEL_MEDICAL "Medical"
-#define CAMERA_CHANNEL_RESEARCH "Research"
-#define CAMERA_CHANNEL_SECURITY "Security"
-
-#define CAMERA_CHANNEL_ROBOTS "Robots"
-#define CAMERA_CHANNEL_MINE "Mining"
-#define CAMERA_CHANNEL_SECRET "Secret"
+#define CAMERA_CHANNEL_PUBLIC              "Public"
+#define CAMERA_CHANNEL_ENGINEERING         "Engineering"
+#define CAMERA_CHANNEL_MEDICAL             "Medical"
+#define CAMERA_CHANNEL_RESEARCH            "Research"
+#define CAMERA_CHANNEL_SECURITY            "Security"
+#define CAMERA_CHANNEL_ROBOTS              "Robots"
+#define CAMERA_CHANNEL_MINE                "Mining"
+#define CAMERA_CHANNEL_SECRET              "Secret"
+#define CAMERA_CHANNEL_COMMAND             "Command"
+#define CAMERA_CHANNEL_ENGINE              "Engine"
+#define CAMERA_CHANNEL_ENGINEERING_OUTPOST "Engineering Outpost"
+#define CAMERA_CHANNEL_BASEMENT_FLOOR      "Basement Floor"
+#define CAMERA_CHANNEL_GROUND_FLOOR        "Ground Floor"
+#define CAMERA_CHANNEL_SECOND_FLOOR        "Second Floor"
+#define CAMERA_CHANNEL_SUPPLY              "Supply"
+#define CAMERA_CHANNEL_ENTERTAINMENT       "Entertainment"
+#define CAMERA_CHANNEL_TOXINS              "Toxins Test Area"
+#define CAMERA_CHANNEL_MISC_RESEARCH       "Miscellaneous Research"
 
 // Non-station channels
-#define CAMERA_CHANNEL_CRESCENT "Crescent"
-#define CAMERA_CHANNEL_ERT "ZeEmergencyResponseTeam"
-#define CAMERA_CHANNEL_MERCENARY "MercurialNet"
-#define CAMERA_CHANNEL_TELEVISION "Television"
+#define CAMERA_CHANNEL_CRESCENT            "Crescent"
+#define CAMERA_CHANNEL_ERT                 "Emergency Response Team"
+#define CAMERA_CHANNEL_MERCENARY           "MercurialNet"
+#define CAMERA_CHANNEL_TELEVISION          "Television"
 
 // Alarm networks
-#define NETWORK_ALARM_ATMOS "Atmosphere Alarms"
+#define NETWORK_ALARM_ATMOS  "Atmosphere Alarms"
 #define NETWORK_ALARM_CAMERA "Camera Alarms"
-#define NETWORK_ALARM_FIRE "Fire Alarms"
+#define NETWORK_ALARM_FIRE   "Fire Alarms"
 #define NETWORK_ALARM_MOTION "Motion Alarms"
-#define NETWORK_ALARM_POWER "Power Alarms"
+#define NETWORK_ALARM_POWER  "Power Alarms"
 
 //singularity defines
 #define STAGE_ONE 	1

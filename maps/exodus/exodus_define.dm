@@ -13,13 +13,15 @@
 	system_name   = "Nyx"
 
 	overmap_ids = list(OVERMAP_ID_SPACE)
-	num_exoplanets = 1
+	num_exoplanets = 3
+	away_site_budget = 3
 
 	lobby_screens = list(
 		'maps/exodus/lobby/exodus.png'
 	)
 
 	evac_controller_type = /datum/evacuation_controller/shuttle
+	game_year = 552
 
 //  For /datum/evacuation_controller/shuttle
 

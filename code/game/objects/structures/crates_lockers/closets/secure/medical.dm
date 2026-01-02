@@ -55,6 +55,18 @@
 		RANDOM_SCRUBS
 	)
 
+/obj/structure/closet/secure_closet/anesthetics
+	name = "anesthetics closet"
+	desc = "Used to knock people out."
+	closet_appearance = /decl/closet_appearance/secure_closet/medical/alt
+	req_access = list(access_surgery)
+
+/obj/structure/closet/secure_closet/anesthetics/WillContain()
+	return list(
+		/obj/item/tank/anesthetic = 3,
+		/obj/item/clothing/mask/breath/medical = 3
+	)
+
 /obj/structure/closet/secure_closet/paramedic
 	name = "paramedic locker"
 	desc = "Supplies for a first responder."
@@ -145,6 +157,22 @@
 		/obj/item/pill_bottle/burn_meds   = 1,
 		/obj/random/medical/pillbottle            = 1
 	)
+
+/obj/structure/closet/secure_closet/medical_wall/anesthetics
+	name = "anesthetics wall closet"
+	desc = "Used to knock people out."
+	req_access = list(access_surgery)
+
+/obj/structure/closet/secure_closet/medical_wall/anesthetics/WillContain()
+	return list(
+		/obj/item/tank/anesthetic = 3,
+		/obj/item/clothing/mask/breath/medical = 3
+	)
+
+/obj/structure/closet/secure_closet/medical_wall/anesthetics/robotics
+	name = "robotics anesthetics wall closet"
+	desc = "Used to knock people out... but in the Robotics lab."
+	req_access = list(access_robotics)
 
 /obj/structure/closet/secure_closet/counselor
 	name = "counselor's locker"

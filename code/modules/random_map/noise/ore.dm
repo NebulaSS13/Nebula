@@ -18,12 +18,14 @@
 		/decl/material/solid/metal/gold        = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
 		/decl/material/solid/metal/silver      = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
 		/decl/material/solid/metal/uranium     = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
+		/decl/material/solid/phoron            = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
 		/decl/material/solid/metal/osmium      = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
 		/decl/material/solid/rutile            = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX)
 	)
 	var/list/deep_metals = list(
 		/decl/material/solid/metal/uranium     = list(RESOURCE_LOW_MIN,    RESOURCE_LOW_MAX),
 		/decl/material/solid/gemstone/diamond  = list(RESOURCE_LOW_MIN,    RESOURCE_LOW_MAX),
+		/decl/material/solid/phoron            = list(RESOURCE_HIGH_MIN,   RESOURCE_HIGH_MAX),
 		/decl/material/solid/metal/osmium      = list(RESOURCE_HIGH_MIN,   RESOURCE_HIGH_MAX),
 		/decl/material/solid/metallic_hydrogen = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX),
 		/decl/material/solid/rutile            = list(RESOURCE_MID_MIN,    RESOURCE_MID_MAX)
@@ -151,6 +153,7 @@
 		/decl/material/solid/metal/gold =              list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/metal/silver =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/metal/uranium =           list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		/decl/material/solid/phoron =                  list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/metal/osmium =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/rutile =                  list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 	)
@@ -162,6 +165,7 @@
 		/decl/material/solid/ice/ediroite =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/metal/uranium =           list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
 		/decl/material/solid/gemstone/diamond =        list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
+		/decl/material/solid/phoron =                  list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
 		/decl/material/solid/metal/osmium =            list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
 		/decl/material/solid/metallic_hydrogen =       list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/rutile =                  list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)

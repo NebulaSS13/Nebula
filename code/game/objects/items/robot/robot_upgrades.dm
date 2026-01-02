@@ -214,7 +214,8 @@
 	require_module = 1
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/phoron = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = @'{"materials":4,"engineering":4,"programming":3}'

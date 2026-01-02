@@ -118,6 +118,8 @@
 	var/failcount = 0
 	var/datum/mob_snapshot/dummy_appearance = new
 	for(var/decl/bodytype/bodytype in decls_repository.get_decls_of_subtype_unassociated(/decl/bodytype))
+		if(bodytype.skip_organ_validation)
+			continue
 		var/decl/species/species = bodytype.get_user_species_for_validation()
 		if(!species)
 			continue
@@ -255,6 +257,8 @@
 	var/failcount = 0
 	var/datum/mob_snapshot/dummy_appearance = new
 	for(var/decl/bodytype/bodytype in decls_repository.get_decls_of_subtype_unassociated(/decl/bodytype))
+		if(bodytype.skip_organ_validation)
+			continue
 		var/decl/species/species = bodytype.get_user_species_for_validation()
 		if(!species)
 			continue

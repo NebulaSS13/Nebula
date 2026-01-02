@@ -15,7 +15,7 @@
 	name = "head of personnel's suit"
 	icon = 'icons/clothing/uniform_hop_whimsy.dmi'
 
-/obj/item/clothing/costume/hosformalmale
+/obj/item/clothing/costume/hosformal
 	name = "head of security's formal uniform"
 	desc = "A male head of security's formal-wear, for special occasions."
 	icon = 'icons/clothing/uniform_hos_formal.dmi'

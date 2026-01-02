@@ -21,6 +21,7 @@
 		/obj/item/stock_parts/smes_coil,
 		/obj/item/stock_parts/computer,
 		/obj/item/fuel_assembly,
+		/obj/item/stack/material/crystal/mapped/phoron,
 		/obj/item/stack/material/aerogel/mapped/deuterium,
 		/obj/item/stack/material/aerogel/mapped/tritium,
 		/obj/item/stack/tile

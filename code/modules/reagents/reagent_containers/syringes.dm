@@ -383,6 +383,14 @@
 	add_to_reagents(/decl/material/liquid/amphetamines, 2 * vol_third)
 	return ..()
 
+/obj/item/chems/syringe/brute_meds
+	desc = "Contains drugs for treating brute trauma."
+	mode = SYRINGE_INJECT
+
+/obj/item/chems/syringe/brute_meds/populate_reagents()
+	add_to_reagents(/decl/material/liquid/brute_meds, REAGENT_MAXIMUM_VOLUME(reagents))
+	return ..()
+
 // TG ports
 
 /obj/item/chems/syringe/advanced
@@ -393,7 +401,7 @@
 	icon = 'icons/obj/syringe_advanced.dmi'
 	material = /decl/material/solid/glass
 	matter = list(
-		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/phoron = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = @'{"biotech":3,"materials":4,"exoticmatter":2}'

@@ -30,10 +30,11 @@
 	value = 1.5
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_antirads"
+	var/antirad_power = 30
 
 /decl/material/liquid/antirads/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
-	M.radiation = max(M.radiation - 30 * removed, 0)
+	M.radiation = max(M.radiation - antirad_power * removed, 0)
 
 /decl/material/liquid/brute_meds
 	name = "styptic powder"

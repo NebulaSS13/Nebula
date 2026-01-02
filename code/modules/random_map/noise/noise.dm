@@ -152,6 +152,7 @@
 				if(has_neighbor_with_path(x, y, get_appropriate_path(map[mapcell]), TRUE))
 					continue
 				map[mapcell] = map[pick(get_neighbors(x, y, TRUE))]
+				CHECK_TICK
 
 #define CHECK_NEIGHBOR_FOR_PATH(X, Y) \
 	TRANSLATE_AND_VERIFY_COORD(X,Y);\

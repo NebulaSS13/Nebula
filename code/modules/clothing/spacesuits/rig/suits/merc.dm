@@ -51,6 +51,9 @@
 		/obj/item/rig_module/electrowarfare_suite,
 		)
 
+/obj/item/rig/merc/empty/unlocked
+	req_access = null
+
 /obj/item/rig/merc/heavy
 	name = "crimson EOD hardsuit control module"
 	desc = "A blood-red hardsuit with heavy armoured plates. Judging by the abnormally thick plates, this one is for working with explosives."

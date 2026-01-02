@@ -31,49 +31,8 @@
 		/datum/job/standard/computer
 	)
 
-	species_to_job_whitelist = list(
-		/decl/species/adherent = list(
-			/datum/job/standard/computer,
-			/datum/job/standard/robot,
-			/datum/job/standard/assistant,
-			/datum/job/standard/janitor,
-			/datum/job/standard/chef,
-			/datum/job/standard/bartender,
-			/datum/job/standard/cargo_tech,
-			/datum/job/standard/engineer,
-			/datum/job/standard/roboticist,
-			/datum/job/standard/chemist,
-			/datum/job/standard/scientist,
-			/datum/job/standard/mining
-		),
-		/decl/species/utility_frame = list(
-			/datum/job/standard/computer,
-			/datum/job/standard/robot,
-			/datum/job/standard/assistant,
-			/datum/job/standard/janitor,
-			/datum/job/standard/chef,
-			/datum/job/standard/bartender,
-			/datum/job/standard/cargo_tech,
-			/datum/job/standard/engineer,
-			/datum/job/standard/roboticist,
-			/datum/job/standard/chemist,
-			/datum/job/standard/scientist,
-			/datum/job/standard/mining
-		),
-		/decl/species/serpentid = list(
-			/datum/job/standard/computer,
-			/datum/job/standard/robot,
-			/datum/job/standard/assistant,
-			/datum/job/standard/janitor,
-			/datum/job/standard/chef,
-			/datum/job/standard/bartender,
-			/datum/job/standard/cargo_tech,
-			/datum/job/standard/roboticist,
-			/datum/job/standard/chemist
-		)
-	)
-
 #define HUMAN_ONLY_JOBS /datum/job/standard/captain, /datum/job/standard/hop, /datum/job/standard/hos
+
 	species_to_job_blacklist = list(
 		/decl/species/unathi = list(
 			HUMAN_ONLY_JOBS

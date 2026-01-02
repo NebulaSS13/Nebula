@@ -577,3 +577,27 @@
 
 /obj/machinery/cryopod/proc/on_mob_spawn()
 	playsound(src, 'sound/machines/ding.ogg', 30, 1)
+
+/obj/machinery/cryopod/robot/door
+	//This inherits from the robot cryo, so synths can be properly cryo'd.  If a non-synth enters and is cryo'd, ..() is called and it'll still work.
+	abstract_type = /obj/machinery/cryopod/robot/door
+	name = "Airlock of Wonders"
+	desc = "An airlock that isn't an airlock, and shouldn't exist.  Yell at a coder/mapper."
+	icon = 'mods/content/polaris/icons/machines/pod_doors.dmi'
+	icon_state = "door_closed"
+	base_icon_state = "door_closed"
+	occupied_icon_state = "door_locked"
+	on_enter_visible_message = "$USER$ steps into $TARGET$."
+
+	time_till_despawn = 1 MINUTE //We want to be much faster then normal cryo, since waiting in an elevator for half an hour is a special kind of hell.
+
+	allow_occupant_types = list(/mob/living/silicon/robot,/mob/living/human)
+	disallow_occupant_types = list(/mob/living/silicon/robot/drone)
+
+/obj/machinery/cryopod/robot/door/dorms
+	name = "Residential District Elevator"
+	desc = "A small elevator that goes down to the deeper section of the colony."
+	on_store_message = "has departed for the residential district."
+	on_store_name = "Residential Oversight"
+	on_enter_occupant_message = "The elevator door closes slowly, ready to bring you down to the residential district."
+	on_store_visible_message = "$TARGET$ makes a ding as it moves $USER$ to the residential district."
