@@ -225,7 +225,7 @@
 		REMOVE_CORNER(C,now)
 		effect_str[C] = 0
 
-	var/actual_range = light_range
+	var/actual_range = (light_angle && facing_opaque) ? light_range * LIGHTING_BLOCKED_FACTOR : light_range
 
 	var/Sx = pixel_turf.x
 	var/Sy = pixel_turf.y
