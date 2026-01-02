@@ -12,6 +12,11 @@ html/changelog.html merge=union
 # Declare files that will always have CRLF line endings on checkout.
 *.dm text eol=crlf
 *.dmm text eol=crlf
+*.dme text eol=crlf
+*.py text eol=crlf
 *.txt text eol=crlf
 *.md text eol=crlf
 *.yml text eol=crlf
+
+# Declare files that will always have LF line endings on checkout.
+*.sh text eol=lf
