@@ -102,6 +102,6 @@
 	LAZYDISTINCTADD(available_background_info[/decl/background_category/heritage], /decl/background_detail/heritage/unathi)
 	LAZYSET(default_background_info, /decl/background_category/heritage, /decl/background_detail/heritage/unathi)
 
-/decl/species/unathi/equip_survival_gear(var/mob/living/human/H)
-	..()
-	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H), slot_shoes_str)
+/decl/species/unathi/equip_survival_gear(mob/living/wearer, box_type = /obj/item/box/survival)
+	. = ..()
+	wearer.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(wearer), slot_shoes_str)
