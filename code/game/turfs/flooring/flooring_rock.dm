@@ -6,6 +6,7 @@
 	has_base_range  = null
 	color           = null
 	icon_edge_layer = FLOOR_EDGE_VOLCANIC
+	has_corners     = FALSE
 	gender          = NEUTER
 	uid             = "floor_reinf_shuttle_rock"
 
