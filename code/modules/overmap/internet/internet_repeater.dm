@@ -51,7 +51,7 @@ var/global/list/internet_repeaters = list()
 	var/data = list()
 	data["powered"] = (use_power == POWER_USE_ACTIVE)
 
-	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(get_z(src))]
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[get_z(src)]
 
 	if(sector)
 		var/list/internet_connections = sector.get_internet_connections()
