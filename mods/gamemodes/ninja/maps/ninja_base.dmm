@@ -122,7 +122,7 @@
 /turf/unsimulated/floor/white,
 /area/map_template/ninja_dojo/dojo)
 "aD" = (
-/obj/machinery/chemical_dispenser/ert,
+/obj/machinery/chemical_dispenser/medicine,
 /obj/item/chems/glass/beaker/large,
 /turf/unsimulated/floor/white,
 /area/map_template/ninja_dojo/dojo)

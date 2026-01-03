@@ -161,17 +161,6 @@
 	)
 	autorun_program = /datum/computer_file/program/supply
 
-/obj/machinery/computer/modular/preset/full/ert
-	default_software = list(
-		/datum/computer_file/program/camera_monitor/ert,
-		/datum/computer_file/program/email_client,
-		/datum/computer_file/program/alarm_monitor,
-		/datum/computer_file/program/comm,
-		/datum/computer_file/program/aidiag,
-		/datum/computer_file/program/records,
-		/datum/computer_file/program/wordprocessor
-	)
-
 /obj/machinery/computer/modular/preset/full/merc
 	default_software = list(
 		/datum/computer_file/program/camera_monitor/hacked,

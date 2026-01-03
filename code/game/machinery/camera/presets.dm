@@ -2,11 +2,6 @@
 	preset_channels = list(CAMERA_CHANNEL_ENGINEERING)
 	req_access = list(access_engine)
 
-/obj/machinery/camera/network/ert
-	preset_channels = list(CAMERA_CHANNEL_ERT)
-	cameranet_enabled = FALSE
-	req_access = list(access_engine)
-
 /obj/machinery/camera/network/medbay
 	preset_channels = list(CAMERA_CHANNEL_MEDICAL)
 	req_access = list(access_medical)

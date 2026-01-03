@@ -172,19 +172,19 @@
 		access_security
 	)
 
-/obj/item/encryptionkey/ert
-	name = "\improper ERT radio encryption key"
+/obj/item/encryptionkey/specops
+	name = "\improper special operations radio encryption key"
 	can_decrypt = list(access_cent_specops)
 
-/obj/item/encryptionkey/ert/Initialize(ml, material_key)
+/obj/item/encryptionkey/specops/Initialize(ml, material_key)
 	. = ..()
 	can_decrypt |= get_all_station_access()
 
-/obj/item/radio/headset/ert
-	name = "emergency response team radio headset"
+/obj/item/radio/headset/specops
+	name = "special operations radio headset"
 	desc = "The headset of the boss's boss."
 	icon = 'icons/obj/items/device/radio/headsets/headset_admin.dmi'
-	encryption_keys = list(/obj/item/encryptionkey/ert)
+	encryption_keys = list(/obj/item/encryptionkey/specops)
 
 /obj/item/encryptionkey/mercenary
 	origin_tech = @'{"esoteric":2}'

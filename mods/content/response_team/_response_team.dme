@@ -1,0 +1,18 @@
+// BEGIN_INCLUDE
+#ifndef MODPACK_RESPONSE_TEAM
+#define MODPACK_RESPONSE_TEAM
+#include "_response_team.dm"
+#include "ert_gear.dm"
+#include "ert_rig.dm"
+#include "game_mode_overrides.dm"
+#include "response_team.dm"
+#include "trader_overrides.dm"
+#include "datum\ert_call_keycard_event.dm"
+#include "datum\ert_camera_monitor.dm"
+#include "datum\ert_config.dm"
+#include "datum\ert_outfit.dm"
+#include "datum\ert_special_role.dm"
+#include "datum\spec_ops_outfit.dm"
+#include "maps\ert_base.dm"
+#endif
+// END_INCLUDE
