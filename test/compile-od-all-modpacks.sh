@@ -29,8 +29,7 @@ fi
 sed -i '1s/^/#define MAP_OVERRIDE\n/' $dmepath.m.dme
 sed -i 's!#include "maps\\_map_include.dm"!#include "maps\\modpack_testing\\modpack_testing.dm"!' $dmepath.m.dme
 failed=0
-# Run the linter, doing a full linting rather than just parsing
-~/dreamchecker -e "$dmepath.m.dme" 2>&1 | tee -a "${GITHUB_WORKSPACE}/output-annotations.txt"
+./DMCompiler_linux-x64/DMCompiler "$dmepath.m.dme" --define=UNIT_TEST --suppress-unimplemented --skip-anything-typecheck --version=${BYOND_MAJOR}.${BYOND_MINOR} | bash test/annotate_od.sh
 # Check the return value
 if [[ $? -ne 0 ]]; then
 	failed=1
