@@ -101,10 +101,9 @@
 	if(problem > 0)
 		problem = max(problem - 1, 0)
 
-	if(LAZYLEN(nodes)) // Added to fix a bad list bug -- TLE
-		for(var/obj/machinery/power/terminal/term in nodes)
-			if( istype( term.master_machine(), /obj/machinery/apc ) )
-				numapc++
+	for(var/obj/machinery/power/terminal/term in nodes)
+		if( istype( term.master_machine(), /obj/machinery/apc ) )
+			numapc++
 
 	netexcess = avail - load
 
