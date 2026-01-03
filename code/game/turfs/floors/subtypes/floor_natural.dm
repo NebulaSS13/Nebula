@@ -105,13 +105,6 @@
 	color             = "#ae9e66"
 	_flooring         = /decl/flooring/sand
 
-/turf/floor/rock/basalt/sand
-	name = "sand"
-	icon = 'icons/turf/flooring/sand.dmi'
-	icon_state = "sand0"
-	color = "#ae9e66"
-	_flooring = /decl/flooring/sand
-
 /turf/floor/rock/sand/water
 	color             = COLOR_SKY_BLUE
 	height            = -(FLUID_SHALLOW)

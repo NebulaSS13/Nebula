@@ -11,7 +11,3 @@
 /turf/floor/rock/volcanic
 	name     = "volcanic floor"
 	material = /decl/material/solid/stone/basalt
-
-/turf/floor/rock/basalt
-	color    = /decl/material/solid/stone/basalt::color
-	material = /decl/material/solid/stone/basalt
