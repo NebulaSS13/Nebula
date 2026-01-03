@@ -13,6 +13,10 @@
 	flooded        = /decl/material/liquid/water
 	color          = COLOR_LIQUID_WATER
 
+/turf/floor/concrete/flooded/salt
+	contaminant_reagent_type = /decl/material/solid/sodiumchloride
+	contaminant_proportion = 0.10 // 1:10 salt:water, NOT 10% salt
+
 /turf/floor/concrete/reinforced
 	name           = "reinforced concrete"
 	icon_state     = "hexacrete"

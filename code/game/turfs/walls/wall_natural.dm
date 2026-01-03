@@ -20,6 +20,10 @@ var/global/_wall_chisel_skill = SKILL_CONSTRUCTION
 	flooded = /decl/material/liquid/water
 	color = COLOR_LIQUID_WATER
 
+/turf/wall/natural/flooded/salt
+	contaminant_reagent_type = /decl/material/solid/sodiumchloride
+	contaminant_proportion = 0.10 // 1:10 salt:water, NOT 10% salt
+
 /turf/wall/natural/get_paint_examine_message()
 	return SPAN_NOTICE("It has been <font color = '[paint_color]'>noticeably discoloured</font> by the elements.")
 

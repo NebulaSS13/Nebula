@@ -11,8 +11,10 @@
 	_base_flooring = /decl/flooring/dirt
 
 /turf/floor/path/Initialize(mapload, no_update_icon)
+	// Take advantage of the set_turf_materials call in ..()
+	// to avoid doing pointless work
+	material ||= get_strata_material_type() || /decl/material/solid/stone/sandstone
 	. = ..()
-	set_turf_materials(material || get_strata_material_type() || /decl/material/solid/stone/sandstone, skip_update = no_update_icon)
 	if(mapload && is_outside() && prob(20))
 		var/image/moss = image('icons/effects/decals/plant_remains.dmi', "leafy_bits", DECAL_LAYER)
 		moss.pixel_x = rand(-6, 6)

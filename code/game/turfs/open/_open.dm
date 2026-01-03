@@ -27,6 +27,11 @@
 	name = "open water"
 	flooded = /decl/material/liquid/water
 
+/turf/open/flooded/salt
+	name = "open saltwater" // alt. ver: open ocean?
+	contaminant_reagent_type = /decl/material/solid/sodiumchloride
+	contaminant_proportion = 0.10 // 1:10 salt:water, NOT 10% salt
+
 /turf/open/Entered(var/atom/movable/mover, var/atom/oldloc)
 	..()
 	mover.fall(oldloc)
