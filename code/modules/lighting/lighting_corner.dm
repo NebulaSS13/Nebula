@@ -349,19 +349,19 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/Ti
 
 	if (!new_opacity)
-		for (;;)
-			if (Tcorn.t1 && (T = Tcorn.t1.below || GET_BELOW(Tcorn.t1)) && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
+		while(TRUE)
+			if (Tcorn.t1 && (T = Tcorn.t1.below || GET_BELOW(Tcorn.t1)) && T.corners?[Tcorn.t1i] && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
 				Ti = Tcorn.t1i
-			else if (Tcorn.t2 && (T = Tcorn.t2.below || GET_BELOW(Tcorn.t2)) && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
+			else if (Tcorn.t2 && (T = Tcorn.t2.below || GET_BELOW(Tcorn.t2)) && T.corners?[Tcorn.t2i] && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
 				Ti = Tcorn.t2i
-			else if (Tcorn.t3 && (T = Tcorn.t3.below || GET_BELOW(Tcorn.t3)) && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
+			else if (Tcorn.t3 && (T = Tcorn.t3.below || GET_BELOW(Tcorn.t3)) && T.corners?[Tcorn.t3i] && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
 				Ti = Tcorn.t3i
-			else if (Tcorn.t4 && (T = Tcorn.t4.below || GET_BELOW(Tcorn.t4)) && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
+			else if (Tcorn.t4 && (T = Tcorn.t4.below || GET_BELOW(Tcorn.t4)) && T.corners?[Tcorn.t4i] && (T.above?.z_flags & ZM_ALLOW_LIGHTING))
 				Ti = Tcorn.t4i
-			else	// Nothing above us that cares about below light.
+			else    // Nothing above us that cares about below light.
 				break
 
-			Tcorn = T.corners[Ti]
+			Tcorn = T.corners?[Ti]
 			below_r += Tcorn.apparent_r
 			below_g += Tcorn.apparent_g
 			below_b += Tcorn.apparent_b
@@ -377,19 +377,19 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	T = null
 	Tcorn = src
 
-	for (;;)
-		if (Tcorn.t1 && (T = Tcorn.t1.above || GET_ABOVE(Tcorn.t1)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	while(TRUE)
+		if (Tcorn.t1 && (T = Tcorn.t1.above || GET_ABOVE(Tcorn.t1)) && T.corners?[Tcorn.t1i] && (T.z_flags & ZM_ALLOW_LIGHTING))
 			Ti = Tcorn.t1i
-		else if (Tcorn.t2 && (T = Tcorn.t2.above || GET_ABOVE(Tcorn.t2)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+		else if (Tcorn.t2 && (T = Tcorn.t2.above || GET_ABOVE(Tcorn.t2)) && T.corners?[Tcorn.t2i] && (T.z_flags & ZM_ALLOW_LIGHTING))
 			Ti = Tcorn.t2i
-		else if (Tcorn.t3 && (T = Tcorn.t3.above || GET_ABOVE(Tcorn.t3)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+		else if (Tcorn.t3 && (T = Tcorn.t3.above || GET_ABOVE(Tcorn.t3)) && T.corners?[Tcorn.t3i] && (T.z_flags & ZM_ALLOW_LIGHTING))
 			Ti = Tcorn.t3i
-		else if (Tcorn.t4 && (T = Tcorn.t4.above || GET_ABOVE(Tcorn.t4)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+		else if (Tcorn.t4 && (T = Tcorn.t4.above || GET_ABOVE(Tcorn.t4)) && T.corners?[Tcorn.t4i] && (T.z_flags & ZM_ALLOW_LIGHTING))
 			Ti = Tcorn.t4i
-		else	// Nothing above us that cares about below light.
+		else    // Nothing above us that cares about below light.
 			break
 
-		Tcorn = T.corners[Ti]
+		Tcorn = T.corners?[Ti]
 		Tcorn.below_r += apparent_r
 		Tcorn.below_g += apparent_g
 		Tcorn.below_b += apparent_b
