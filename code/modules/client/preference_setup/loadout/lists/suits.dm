@@ -111,7 +111,7 @@
 	cost = 3
 	uid = "gear_suit_cloak"
 
-/decl/loadout_option/suit/cloak
+/decl/loadout_option/suit/hooded_cloak
 	name = "cloak, hooded"
 	path = /obj/item/clothing/suit/hooded_cloak
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
