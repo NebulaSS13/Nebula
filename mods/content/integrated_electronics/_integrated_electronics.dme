@@ -10,7 +10,6 @@
 #include "random.dm"
 #include "toggle_circuits_secret.dm"
 #include "assemblies\_assemblies.dm"
-#include "assemblies\circuit_augment.dm"
 #include "components\_integrated_circuit.dm"
 #include "components\access.dm"
 #include "components\arithmetic.dm"

@@ -107,9 +107,6 @@
 			unknown_body++
 		if(unknown_body)
 			. += "Unknown body present"
-	for(var/obj/item/organ/internal/augment/aug in internal_organs)
-		if(istype(aug) && aug.known)
-			. += "[capitalize(aug.name)] implanted"
 	var/obj/item/organ/internal/lungs/L = locate() in src
 	if( L && L.is_bruised())
 		. += "Lung ruptured"

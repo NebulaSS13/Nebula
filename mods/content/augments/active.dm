@@ -22,3 +22,6 @@
 	if(. && istype(action))
 		action.button_icon_state = icon_state
 		action.button?.update_icon()
+
+/datum/action/item_action/organ/augment
+	button_icon = 'mods/content/augments/icons/augment.dmi'

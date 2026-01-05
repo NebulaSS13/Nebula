@@ -27,9 +27,14 @@
 	if(!istype(organ_to_implant_into))
 		return ..()
 
-	if(augment_flags == AUGMENTATION_MECHANIC && !BP_IS_PROSTHETIC(organ_to_implant_into))
-		to_chat(user, SPAN_DANGER("Your [organ_to_implant_into.name] is not prosthetic, and therefore \the [src] can not be installed!"))
-		return ..()
+	if(BP_IS_PROSTHETIC(organ_to_implant_into))
+		if(!(augment_flags & AUGMENTATION_MECHANIC))
+			to_chat(user, SPAN_DANGER("Your [organ_to_implant_into.name] is not organic, and therefore \the [src] can not be installed!"))
+			return ..()
+	else
+		if(!(augment_flags & AUGMENTATION_ORGANIC))
+			to_chat(user, SPAN_DANGER("Your [organ_to_implant_into.name] is not prosthetic, and therefore \the [src] can not be installed!"))
+			return ..()
 
 	user.add_organ(src, organ_to_implant_into)
 	to_chat(user, SPAN_NOTICE("Your [organ_to_implant_into.name] has been replaced with \the [src]."))

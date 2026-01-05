@@ -1,0 +1,24 @@
+#ifndef CONTENT_PACK_AUGMENTS
+#define CONTENT_PACK_AUGMENTS
+// BEGIN_INCLUDE
+#include "_augments.dm"
+#include "active.dm"
+#include "augment_loadout.dm"
+#include "augment_organ.dm"
+#include "bodytype_augment.dm"
+#include "designs_augments.dm"
+#include "overrides.dm"
+#include "simple.dm"
+#include "active\armblades.dm"
+#include "active\cyberbrain.dm"
+#include "active\polytool.dm"
+#include "active\tool\engineering.dm"
+#include "active\tool\surgical.dm"
+#include "passive\armor.dm"
+#include "passive\boost.dm"
+#include "passive\nanoaura.dm"
+#include "passive\boost\muscle.dm"
+#include "passive\boost\reflex.dm"
+#include "passive\boost\shooting.dm"
+// END_INCLUDE
+#endif

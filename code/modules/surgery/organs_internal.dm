@@ -328,6 +328,9 @@
 	else
 		return ..()
 
+/obj/item/organ/internal/proc/get_attachment_failure_reason(obj/item/organ/external/affected, robotic = FALSE)
+	return FALSE
+
 /decl/surgery_step/internal/attach_organ/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 
 	var/list/attachable_organs
@@ -342,7 +345,7 @@
 	if(!LAZYLEN(attachable_organs))
 		return FALSE
 
-	var/obj/item/organ/organ_to_replace = show_radial_menu(user, tool, attachable_organs, radius = 42, require_near = TRUE, use_labels = RADIAL_LABELS_OFFSET, check_locs = list(tool))
+	var/obj/item/organ/internal/organ_to_replace = show_radial_menu(user, tool, attachable_organs, radius = 42, require_near = TRUE, use_labels = RADIAL_LABELS_OFFSET, check_locs = list(tool))
 	if(!organ_to_replace)
 		return FALSE
 
@@ -350,11 +353,10 @@
 		to_chat(user, SPAN_WARNING("You can't find anywhere to attach \the [organ_to_replace] to!"))
 		return FALSE
 
-	if(istype(organ_to_replace, /obj/item/organ/internal/augment))
-		var/obj/item/organ/internal/augment/A = organ_to_replace
-		if(!(A.augment_flags & AUGMENTATION_ORGANIC))
-			to_chat(user, SPAN_WARNING("\The [A] cannot function within a non-robotic limb."))
-			return FALSE
+	var/attach_failure_reason = organ_to_replace.get_attachment_failure_reason(affected, robotic = FALSE) // if this returns FALSE, it can attach
+	if(attach_failure_reason)
+		to_chat(user, attach_failure_reason)
+		return FALSE
 
 	var/decl/species/species = target.get_species()
 	if(!species)

@@ -137,7 +137,7 @@
 			for(var/obj/item/organ/external/limb in occupant.get_external_organs())
 				if(BP_IS_PROSTHETIC(limb))
 					for(var/obj/implanted_object in limb.implants)
-						if(!istype(implanted_object,/obj/item/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
+						if(!should_dissolve_implant(implanted_object)) // We don't want to remove REAL implants. Just shrapnel etc.
 							LAZYREMOVE(limb.implants, implanted_object)
 							to_chat(occupant, SPAN_NOTICE("The mineral-rich bath dissolves the [implanted_object.name]."))
 							qdel(implanted_object)
@@ -149,3 +149,8 @@
 							limb.status |= ORGAN_BRITTLE
 							to_chat(occupant, SPAN_WARNING("It feels a bit brittle, though..."))
 						break
+
+/obj/structure/mineral_bath/proc/should_dissolve_implant(obj/implanted_object)
+	if(istype(implanted_object, /obj/item/implant))
+		return FALSE
+	return prob(25)
