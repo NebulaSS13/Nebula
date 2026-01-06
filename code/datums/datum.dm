@@ -42,10 +42,11 @@
 			qdel(timer)
 
 	if(extensions)
-		for(var/expansion_key in extensions)
-			var/list/extension = extensions[expansion_key]
+		var/list/extension_list
+		for(var/expansion_key, extension in extensions)
 			if(islist(extension))
-				extension.Cut()
+				extension_list = extension
+				extension_list.Cut()
 			else
 				qdel(extension)
 		extensions = null
