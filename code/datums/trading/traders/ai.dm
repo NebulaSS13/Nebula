@@ -49,7 +49,7 @@ They sell generic supplies and ask for generic supplies.
 		/obj/item/box/fancy                        = TRADER_SUBTYPES_ONLY,
 		/obj/item/laundry_basket                   = TRADER_THIS_TYPE,
 		/obj/item/secure_storage/briefcase         = TRADER_THIS_TYPE,
-		/obj/item/plant_satchel                           = TRADER_THIS_TYPE,
+		/obj/item/plant_satchel                    = TRADER_THIS_TYPE,
 		/obj/item/ore_satchel                      = TRADER_THIS_TYPE,
 		/obj/item/toolbox                          = TRADER_ALL,
 		/obj/item/wallet                           = TRADER_THIS_TYPE,
