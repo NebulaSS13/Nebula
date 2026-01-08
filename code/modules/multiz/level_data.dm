@@ -158,7 +158,11 @@
 	///This is set to prevent spamming the log when a turf has tried to grab our strata before we've been initialized
 	var/tmp/_has_warned_uninitialized_strata = FALSE
 
-	VAR_PROTECTED/UT_turf_exceptions_by_door_type // An associate list of door types/list of allowed turfs
+	/// An associate list of door types/list of allowed turfs
+	VAR_PROTECTED/UT_turf_exceptions_by_door_type = list(
+		/obj/machinery/door/firedoor = list(/turf/open),
+		/obj/machinery/door/firedoor/border = list(/turf/open),
+	)
 	///Determines if edge turfs should be centered on the map dimensions.
 	var/origin_is_world_center = TRUE
 	/// If not null, this level will register with a daycycle id/type on New().
