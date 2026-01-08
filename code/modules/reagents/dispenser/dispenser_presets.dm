@@ -28,7 +28,7 @@
 
 	buildable = FALSE
 
-/obj/machinery/chemical_dispenser/ert
+/obj/machinery/chemical_dispenser/medicine
 	name = "medicine dispenser"
 	spawn_cartridges = list(
 			/obj/item/chems/chem_disp_cartridge/adrenaline,
@@ -47,9 +47,7 @@
 			/obj/item/chems/chem_disp_cartridge/antibiotics,
 			/obj/item/chems/chem_disp_cartridge/sedatives
 		)
-
 	buildable = FALSE
-
 
 /obj/machinery/chemical_dispenser/bar_soft
 	name = "soft drink dispenser"

@@ -102,30 +102,26 @@
 // GLOBAL PROCS for powernets handling
 //////////////////////////////////////////
 
-
-// returns a list of all power-related objects (nodes, cable, junctions) in turf,
-// excluding source, that match the direction d
-// if unmarked==1, only return those with no powernet
-/proc/power_list(var/turf/T, var/source, var/d, var/unmarked=0, var/cable_only = 0)
+/// Returns all cables in target_turf matching target_direction, excluding excluded_cable.
+/// If only_no_powernet is TRUE, only cables with no powernet will be returned.
+/// Unused, because get_maching_cable or get_connected_cables is usually preferable, but kept just in case.
+/proc/cable_list(var/turf/target_turf, var/obj/structure/cable/excluded_cable = null, var/target_direction)
 	. = list()
+	var/reverse_direction = target_direction ? global.reverse_dir[target_direction] : 0
+	for(var/obj/structure/cable/other_cable in target_turf)
+		if(other_cable == excluded_cable)
+			continue
+		if(other_cable.d1 == target_direction || other_cable.d2 == target_direction || other_cable.d1 == reverse_direction || other_cable.d2 == reverse_direction)
+			. += other_cable
 
-	var/reverse = d ? global.reverse_dir[d] : 0
-	for(var/AM in T)
-		if(AM == source)	continue			//we don't want to return source
-
-		if(!cable_only && istype(AM,/obj/machinery/power))
-			var/obj/machinery/power/P = AM
-			if(!unmarked || !P.powernet)		//if unmarked=1 we only return things with no powernet
-				if(d == 0)
-					. += P
-
-		else if(istype(AM,/obj/structure/cable))
-			var/obj/structure/cable/C = AM
-
-			if(!unmarked || !C.powernet)
-				if(C.d1 == d || C.d2 == d || C.d1 == reverse || C.d2 == reverse )
-					. += C
-	return .
+/// Like cable_list, but only returns the first cable, since that's all most uses of it check.
+/proc/get_matching_cable(var/turf/target_turf, var/obj/structure/cable/excluded_cable = null, var/target_direction)
+	var/reverse_direction = target_direction ? global.reverse_dir[target_direction] : 0
+	for(var/obj/structure/cable/other_cable in target_turf)
+		if(other_cable == excluded_cable)
+			continue
+		if(other_cable.d1 == target_direction || other_cable.d2 == target_direction || other_cable.d1 == reverse_direction || other_cable.d2 == reverse_direction)
+			return other_cable
 
 //remove the old powernet and replace it with a new one throughout the network.
 /proc/propagate_network(var/obj/structure/cable/cable, var/datum/powernet/PN)

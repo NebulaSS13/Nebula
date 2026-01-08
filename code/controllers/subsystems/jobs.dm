@@ -425,7 +425,7 @@ SUBSYSTEM_DEF(jobs)
 		for(var/required in allowed_skills)
 			if(!wearer.skill_check(required, allowed_skills[required]))
 				return FALSE
-	if(whitelisted && (!(wearer.get_species()?.name in whitelisted)))
+	if(whitelisted && (!(wearer.get_species()?.uid in whitelisted)))
 		return FALSE
 	return TRUE
 
@@ -442,7 +442,7 @@ SUBSYSTEM_DEF(jobs)
 			if(!istype(gear))
 				continue
 			if(!gear.is_permitted(H, job))
-				to_chat(H, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!"))
+				to_chat(H, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [gear.name]!"))
 				continue
 			if(!gear.slot || !gear.spawn_on_mob(H, H.client.prefs.Gear()[gear.uid]))
 				spawn_in_storage.Add(gear)

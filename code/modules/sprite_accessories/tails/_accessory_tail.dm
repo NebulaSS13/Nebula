@@ -59,17 +59,3 @@
 
 /decl/sprite_accessory/tail/none/hide_tail/accessory_is_available(mob/owner, decl/species/species, decl/bodytype/bodytype, list/traits)
 	. = ..() && (BP_TAIL in bodytype.has_limbs)
-
-/*
-// Leaving these in for future reference.
-/decl/sprite_accessory/tail/debug
-	name                     = "Debug Tail"
-	uid                      = "acc_tail_debug"
-	is_whitelisted           = "DEBUG"
-
-/decl/sprite_accessory/tail/debug_inner
-	name                     = "Debug Two-Tone Tail"
-	uid                      = "acc_tail_debug2"
-	is_whitelisted           = "DEBUG"
-	accessory_metadata_types = list(SAM_COLOR, SAM_COLOR_INNER)
-*/

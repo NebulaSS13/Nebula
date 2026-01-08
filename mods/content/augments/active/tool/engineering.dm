@@ -19,13 +19,13 @@
 /obj/item/weldingtool/finger
 	name = "digital welder"
 	desc = "A precise, high quality welding tool."
-	icon = 'icons/obj/items/tool/welders/welder_finger.dmi'
+	icon = 'mods/content/augments/icons/welder_finger.dmi'
 
 /obj/item/wirecutters/finger
 	name = "digital splicer"
 	desc = "A small embedded cutter in your finger."
 	icon_state = "wirecutter_finger"
-	icon = 'icons/obj/augment_tools.dmi'
+	icon = 'mods/content/augments/icons/augment_tools.dmi'
 
 /obj/item/wirecutters/finger/on_update_icon()
 	SHOULD_CALL_PARENT(FALSE)
@@ -35,7 +35,7 @@
 	name = "digital screwdriver"
 	desc = "A nifty power tool at your literal fingertips."
 	icon_state = "screwdriver_finger"
-	icon = 'icons/obj/augment_tools.dmi'
+	icon = 'mods/content/augments/icons/augment_tools.dmi'
 
 /obj/item/screwdriver/finger/on_update_icon()
 	SHOULD_CALL_PARENT(FALSE)
@@ -45,7 +45,7 @@
 	name = "digital prybar"
 	desc = "A somewhat awkward to use prybar. It doubles as a bottle opener."
 	icon_state = "prybar_finger"
-	icon = 'icons/obj/augment_tools.dmi'
+	icon = 'mods/content/augments/icons/augment_tools.dmi'
 
 /obj/item/crowbar/finger/on_update_icon()
 	SHOULD_CALL_PARENT(FALSE)
@@ -55,7 +55,7 @@
 	name = "digital wrench"
 	desc = "A rotating wrench. Don't get your hair caught in it."
 	icon_state = "wrench_finger"
-	icon = 'icons/obj/augment_tools.dmi'
+	icon = 'mods/content/augments/icons/augment_tools.dmi'
 
 /obj/item/wrench/finger/on_update_icon()
 	SHOULD_CALL_PARENT(FALSE)
@@ -65,4 +65,4 @@
 	name = "digital multitool"
 	desc = "A multitool inside of a multitool. Doubletool?"
 	icon_state = "multitool_finger"
-	icon = 'icons/obj/augment_tools.dmi'
+	icon = 'mods/content/augments/icons/augment_tools.dmi'

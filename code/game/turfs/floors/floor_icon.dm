@@ -123,11 +123,13 @@
 /turf/floor/proc/update_floor_strings()
 	var/decl/flooring/flooring = get_topmost_flooring()
 	if(istype(flooring))
-		SetName(flooring.name)
-		desc = flooring.desc
+		flooring.update_turf_strings(src)
 	else
 		SetName(initial(name))
 		desc = initial(desc)
+	// do this once name and desc have been updated
+	if(check_fluid_depth(FLUID_SHALLOW))
+		SetName(get_fluid_name()) // just entirely overwrite name, but keep desc
 
 /turf/floor/proc/update_floor_icon()
 	var/decl/flooring/use_flooring = get_topmost_flooring()
@@ -173,7 +175,9 @@
 		return TRUE
 	return FALSE
 
-/decl/flooring/proc/test_link(var/turf/origin, var/turf/opponent)
+/decl/flooring/proc/test_link(var/turf/opponent)
+	if(omni_smooth) // override EVERYTHING
+		return TRUE
 	// Just a normal floor
 	if (istype(opponent, /turf/floor))
 		if (floor_smooth == SMOOTH_ALL)
@@ -196,7 +200,7 @@
 		if (wall_smooth == SMOOTH_ALL && locate(/obj/structure/wall_frame) in opponent)
 			return TRUE
 	// Wall turf
-	else if(opponent.is_wall())
+	else if(opponent.is_wall()) // don't combine these so that we don't check if a wall is space just because we don't smooth with walls
 		if(wall_smooth == SMOOTH_ALL)
 			return TRUE
 	//If is_open is true, then it's space or openspace
@@ -204,6 +208,3 @@
 		if(space_smooth == SMOOTH_ALL)
 			return TRUE
 	return FALSE
-
-/decl/flooring/proc/symmetric_test_link(var/turf/A, var/turf/B)
-	return test_link(A, B) && test_link(B,A)

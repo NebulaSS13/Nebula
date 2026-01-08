@@ -32,3 +32,10 @@
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	slot  = slot_shoes_str
 	uid = "gear_shoes_avian"
+
+/decl/loadout_option/avian/hooded_cloak
+	name = "striped cloak, hooded"
+	path = /obj/item/clothing/suit/hooded_cloak/avian
+	uid = "gear_cloak_avian"
+	slot = slot_wear_suit_str
+	loadout_flags = GEAR_HAS_COLOR_SELECTION

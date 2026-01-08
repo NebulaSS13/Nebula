@@ -4,6 +4,7 @@
 	icon            = 'icons/turf/flooring/snow.dmi'
 	icon_base       = "snow"
 	icon_edge_layer = FLOOR_EDGE_SNOW
+	has_corners     = FALSE
 	flooring_flags  = TURF_REMOVE_SHOVEL
 	footstep_type   = /decl/footsteps/snow
 	has_base_range  = 13

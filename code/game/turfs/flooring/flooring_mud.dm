@@ -5,6 +5,7 @@
 	icon_base       = "mud"
 	color           = null // autoset from material
 	icon_edge_layer = FLOOR_EDGE_MUD
+	has_corners     = FALSE
 	footstep_type   = /decl/footsteps/mud
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	force_material  = /decl/material/solid/soil
@@ -39,6 +40,7 @@
 	icon            = 'icons/turf/flooring/seafloor.dmi'
 	icon_base       = "seafloor"
 	icon_edge_layer = FLOOR_EDGE_MUD
+	has_corners     = FALSE
 	footstep_type   = /decl/footsteps/mud
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	color           = "#ae9e66"
@@ -61,6 +63,7 @@
 	icon            = 'icons/turf/flooring/dirt.dmi'
 	icon_base       = "dirt"
 	icon_edge_layer = FLOOR_EDGE_DIRT
+	has_corners     = FALSE
 	color           = null // autoset from material
 	footstep_type   = /decl/footsteps/asteroid
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID

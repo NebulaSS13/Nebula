@@ -19,7 +19,22 @@
 /obj/item/clothing/suit/Initialize()
 	if(ispath(hood))
 		hood = new hood(src)
+		hood.paint_color = paint_color
+		hood.markings_color = markings_color
+		if(isnull(hood.markings_state_modifier))
+			hood.markings_state_modifier = markings_state_modifier
+		hood.update_icon()
 	return ..()
+
+/obj/item/clothing/suit/set_color(new_color)
+	. = ..()
+	if(istype(hood))
+		hood.set_color(new_color)
+
+/obj/item/clothing/suit/set_markings_color(new_color)
+	. = ..()
+	if(istype(hood))
+		hood.set_markings_color(new_color)
 
 /obj/item/clothing/suit/Destroy()
 	if(istype(hood))

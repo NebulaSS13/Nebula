@@ -221,12 +221,14 @@ var/global/template_file_name = "all_templates.json"
 /// Handles adding a directory's templates to the compiled templates list.
 /datum/asset/nanoui/proc/merge_templates(use_dir)
 	PRIVATE_PROC(TRUE)
+	var/static/regex/whitespace = new(@"[\n\t]+", "g")
 	var/list/templates = flist(use_dir)
 	for(var/filename in templates)
 		if(copytext(filename, length(filename)) != "/")
-			templates[filename] = replacetext(replacetext(file2text(use_dir + filename), "\n", ""), "\t", "")
+			templates[filename] = whitespace.Replace(file2text(use_dir + filename), "")
 		else
 			templates -= filename
+		CHECK_TICK
 	return templates
 
 /datum/asset/nanoui/send(client, uncommon)

@@ -2,7 +2,7 @@
 	icon_state = "armblade"
 	item_state = null
 	name = "armblade"
-	icon = 'icons/obj/augment.dmi'
+	icon = 'mods/content/augments/icons/augment.dmi'
 	desc = "A handy utility blade for the discerning augmentee. Warranty void if used for cutting."
 	base_parry_chance = 30
 	sharp = TRUE

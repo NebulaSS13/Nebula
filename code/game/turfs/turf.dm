@@ -38,6 +38,14 @@
 	var/footstep_type
 	var/open_turf_type = /turf/open // Which open turf type to use by default above this turf in a multiz context. Overridden by area.
 
+	// If you ever need to refill or flood a turf with more than two reagents, this should be rewritten entirely.
+	// The reason it's written like this is to avoid creating a new list for every turf with contaminants
+	// and that should still hold up even if you have turfs with three or more liquids in the mixture.
+	/// Reagent to contaminate refilled or flooded reagents.
+	var/contaminant_reagent_type
+	/// What fraction of the refilled/flooded liquid should be the contaminant? If zero, no contaminant is added.
+	var/contaminant_proportion
+
 	var/tmp/changing_turf
 	var/tmp/prev_type // Previous type of the turf, prior to turf translation.
 

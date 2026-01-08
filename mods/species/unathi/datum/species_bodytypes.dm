@@ -78,5 +78,5 @@
 	uid                   = "bodytype_unathi_masc"
 
 /obj/item/organ/external/tail/unathi
-	tail_icon             = 'mods/species/unathi/icons/tail.dmi'
+	tail_icon = 'mods/species/unathi/icons/tail.dmi'
 	tail_animation_states = 9

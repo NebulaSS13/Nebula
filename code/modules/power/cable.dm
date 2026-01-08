@@ -418,9 +418,9 @@ var/global/list/obj/structure/cable/all_cables = list()
 					. += C
 		if(cable_dir & (cable_dir - 1)) // Diagonal, check for /\/\/\ style cables along cardinal directions
 			for(var/pair in list(NORTH|SOUTH, EAST|WEST))
-				T = get_step_resolving_mimic(src, cable_dir & pair)
+				T = get_step_resolving_mimic(src, cable_dir & pair) // move either vertically or horizontally
 				if(T)
-					var/req_dir = cable_dir ^ pair
+					var/req_dir = cable_dir ^ pair // flip along the direction we moved, so if we're NORTHEAST we want a cable to our east that's NORTHWEST
 					for(var/obj/structure/cable/C in T)
 						if(C.d1 == req_dir || C.d2 == req_dir)
 							. += C
@@ -452,10 +452,10 @@ var/global/list/obj/structure/cable/all_cables = list()
 	var/turf/T1 = loc
 	if(!T1) return
 
-	var/list/powerlist = power_list(T1,src,0,0) //find the other cables that ended in the centre of the turf, with or without a powernet
-	if(powerlist.len>0)
+	var/obj/structure/cable/other_cable = get_matching_cable(T1, src, 0) // find a cable to start a replacement network from, if it exists
+	if(other_cable)
 		var/datum/powernet/PN = new()
-		propagate_network(powerlist[1],PN) //propagates the new powernet beginning at the source cable
+		propagate_network(other_cable,PN) //propagates the new powernet beginning at the source cable
 
 		if(PN.is_empty()) //can happen with machines made nodeless when smoothing cables
 			qdel(PN)
@@ -463,16 +463,16 @@ var/global/list/obj/structure/cable/all_cables = list()
 // cut the cable's powernet at this cable and updates the powergrid
 /obj/structure/cable/proc/cut_cable_from_powernet()
 	var/turf/T1 = loc
-	var/list/P_list
+	var/obj/structure/cable/other_cable
 	if(!T1)	return
 	if(d1)
 		T1 = get_zstep_resolving_mimic(T1, d1)
-		P_list = power_list(T1, src, turn(d1,180),0,cable_only = 1)	// what adjacently joins on to cut cable...
+		other_cable = get_matching_cable(T1, src, d1) // check our adjacent turf for connecting cables first
+	if(!other_cable)
+		other_cable = get_matching_cable(loc, src, d1) // and fall back to our own turf if we don't find one
 
-	P_list += power_list(loc, src, d1, 0, cable_only = 1)//... and on turf
 
-
-	if(P_list.len == 0)//if nothing in both list, then the cable was a lone cable, just delete it and its powernet
+	if(!other_cable) // if we didn't find another cable, then the cable was a lone cable, just delete it and its powernet
 		powernet.remove_cable(src)
 
 		for(var/obj/machinery/power/P in T1)//check if it was powering a machine
@@ -485,7 +485,7 @@ var/global/list/obj/structure/cable/all_cables = list()
 	powernet.remove_cable(src) //remove the cut cable from its powernet
 
 	var/datum/powernet/newPN = new()// creates a new powernet...
-	propagate_network(P_list[1], newPN)//... and propagates it to the other side of the cable
+	propagate_network(other_cable, newPN)//... and propagates it to the other side of the cable
 
 	// Disconnect machines connected to nodes
 	if(d1 == 0) // if we cut a node (O-X) cable

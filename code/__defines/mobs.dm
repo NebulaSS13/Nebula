@@ -160,21 +160,6 @@
 // Robo Organs.
 #define BP_VOICE             "vocal synthesiser"
 
-//Augmetations
-#define BP_AUGMENT_R_ARM        "right arm augment"
-#define BP_AUGMENT_L_ARM        "left arm augment"
-#define BP_AUGMENT_R_HAND       "right hand augment"
-#define BP_AUGMENT_L_HAND       "left hand augment"
-#define BP_AUGMENT_R_LEG        "right leg augment"
-#define BP_AUGMENT_L_LEG        "left leg augment"
-#define BP_AUGMENT_CHEST_ARMOUR "chest armor augment"
-#define BP_AUGMENT_CHEST_ACTIVE "active chest augment"
-#define BP_AUGMENT_HEAD         "head augment"
-
-//Augment flags
-#define AUGMENTATION_MECHANIC 1
-#define AUGMENTATION_ORGANIC  2
-
 // Prosthetic helpers.
 #define BP_IS_PROSTHETIC(org) (!QDELETED(org) && (org.organ_properties & ORGAN_PROP_PROSTHETIC))
 #define BP_IS_ROBOTIC(org)    (!QDELETED(org) && (org.bodytype?.is_robotic))

@@ -29,6 +29,7 @@
 	icon_base       = "chlorine"
 	has_base_range  = 11
 	icon_edge_layer = FLOOR_EDGE_CHLORINE_SAND
+	has_corners     = FALSE
 	color           = "#d2e0b7"
 	dirt_color      = "#d2e0b7"
 	footstep_type   = /decl/footsteps/sand

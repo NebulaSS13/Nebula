@@ -105,8 +105,8 @@ var/global/list/map_count = list()
 		user = world
 
 	var/dat = list("<code>+------+<br>")
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
+	for(var/x in 1 to limit_x)
+		for(var/y in 1 to limit_y)
 			var/current_cell = TRANSLATE_COORD(x,y)
 			if(current_cell)
 				dat += get_map_char(map[current_cell])
@@ -115,12 +115,11 @@ var/global/list/map_count = list()
 	to_chat(user, JOINTEXT(dat))
 
 /datum/random_map/proc/set_map_size()
-	map = list()
-	map.len = limit_x * limit_y
+	map =  new /list(limit_x * limit_y)
 
 /datum/random_map/proc/seed_map()
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
+	for(var/x in 1 to limit_x)
+		for(var/y in 1 to limit_y)
 			var/current_cell = TRANSLATE_COORD(x,y)
 			if(prob(initial_wall_cell))
 				map[current_cell] = WALL_CHAR
@@ -128,8 +127,8 @@ var/global/list/map_count = list()
 				map[current_cell] = initial_cell_char
 
 /datum/random_map/proc/clear_map()
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
+	for(var/x in 1 to limit_x)
+		for(var/y in 1 to limit_y)
 			map[TRANSLATE_COORD(x,y)] = 0
 
 /datum/random_map/proc/generate()
@@ -161,8 +160,8 @@ var/global/list/map_count = list()
 	if(!origin_y) origin_y = 1
 	if(!origin_z) origin_z = 1
 
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
+	for(var/x in 1 to limit_x)
+		for(var/y in 1 to limit_y)
 			CHECK_TICK
 			apply_to_turf(x,y)
 
@@ -200,8 +199,8 @@ var/global/list/map_count = list()
 		return
 	tx-- // Update origin so that x/y index
 	ty-- // doesn't push it off-kilter by one.
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
+	for(var/x in 1 to limit_x)
+		for(var/y in 1 to limit_y)
 			var/current_cell = TRANSLATE_COORD(x,y)
 			if(!current_cell)
 				continue

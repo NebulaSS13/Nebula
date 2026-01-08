@@ -6,11 +6,12 @@
 	has_base_range  = null
 	color           = null
 	icon_edge_layer = FLOOR_EDGE_VOLCANIC
+	has_corners     = FALSE
 	gender          = NEUTER
 	uid             = "floor_reinf_shuttle_rock"
 
 /decl/flooring/rock/update_turf_strings(turf/floor/target)
-	var/decl/material/turf_material = target?.get_material()
+	var/decl/material/turf_material = RESOLVE_TO_DECL(target?.get_material())
 	ASSERT(turf_material?.adjective_name)
 	target.SetName("[turf_material.adjective_name] [name]")
 	target.desc = "An expanse of bare [turf_material.solid_name]."

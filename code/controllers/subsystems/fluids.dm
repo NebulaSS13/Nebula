@@ -71,7 +71,10 @@ SUBSYSTEM_DEF(fluids)
 				continue
 			checked_targets[neighbor] = TRUE
 			flooded_a_neighbor = TRUE
-			neighbor.add_to_reagents(current_fluid_holder.flooded, FLUID_MAX_DEPTH)
+			if(current_fluid_holder.contaminant_reagent_type && current_fluid_holder.contaminant_proportion)
+				neighbor.add_to_reagents_contaminated(current_fluid_holder.flooded, FLUID_MAX_DEPTH, contaminant_type = current_fluid_holder.contaminant_reagent_type, contaminant_proportion = current_fluid_holder.contaminant_proportion)
+			else
+				neighbor.add_to_reagents(current_fluid_holder.flooded, FLUID_MAX_DEPTH)
 
 		if(!flooded_a_neighbor)
 			REMOVE_ACTIVE_FLUID_SOURCE(current_fluid_holder)
