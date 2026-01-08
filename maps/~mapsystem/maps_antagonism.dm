@@ -1,6 +1,6 @@
 /datum/map
 	var/list/potential_theft_targets = list(
-		"the captain's antique laser gun"    = /obj/item/gun/energy/captain,
+		"the captain's antique laser gun"    = /obj/item/gun/energy/retro/captain,
 		"an RCD"                             = /obj/item/rcd,
 		"a jetpack"                          = /obj/item/tank/jetpack,
 		"a captain's jumpsuit"               = /obj/item/clothing/jumpsuit/captain,

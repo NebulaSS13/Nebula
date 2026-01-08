@@ -700,7 +700,7 @@
 /mob/living/silicon/robot/Move(a, b, flag)
 	. = ..()
 	if(. && module && isturf(loc))
-		var/obj/item/ore/orebag = locate() in get_held_items()
+		var/obj/item/stack/material/ore/orebag = locate() in get_held_items()
 		if(orebag)
 			loc.attackby(orebag, src)
 		module.handle_turf(loc, src)
