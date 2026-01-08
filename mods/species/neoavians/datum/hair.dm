@@ -1,4 +1,3 @@
-//hair
 /decl/sprite_accessory/hair/avian
 	name = "Teshari Plumage"
 	icon_state = "avian_default"
@@ -53,11 +52,6 @@
 	color_blend = ICON_ADD
 	uid = "acc_hair_avian_plumage_alt"
 
-/decl/sprite_accessory/hair/avian/alt/ears
-	name = "Teshari Ears"
-	icon_state = "avian_ears"
-	uid = "acc_hair_avian_ears_alt"
-
 /decl/sprite_accessory/hair/avian/alt/excited
 	name = "Teshari Spiky Alt"
 	icon_state = "avian_spiky_alt"
@@ -93,11 +87,6 @@
 	icon_state = "avian_upright_alt"
 	uid = "acc_hair_avian_upright_alt"
 
-/decl/sprite_accessory/hair/avian/alt/mane_beardless
-	name = "Teshari Large Ears"
-	icon_state = "avian_mane_beardless"
-	uid = "acc_hair_avian_large_ears"
-
 /decl/sprite_accessory/hair/avian/alt/droopy
 	name = "Teshari Droopy"
 	icon_state = "avian_droopy"
@@ -117,53 +106,3 @@
 	name = "Teshari Long way"
 	icon_state = "avian_longway"
 	uid = "acc_hair_avian_longway"
-
-//markings
-/decl/sprite_accessory/marking/avian
-	name = "Beak (Head)"
-	icon_state = "beak"
-	body_parts = list(BP_HEAD)
-	icon = 'mods/species/neoavians/icons/markings.dmi'
-	species_allowed = list(/decl/species/neoavian::uid)
-	color_blend = ICON_MULTIPLY
-	uid = "acc_marking_avian_beak"
-
-/decl/sprite_accessory/marking/avian/avian
-	name = "Raptor Ears (Head)"
-	icon_state = "ears"
-	uid = "acc_marking_avian_raptorears"
-
-/decl/sprite_accessory/marking/avian/wing_feathers
-	name = "Wing Feathers (Left)"
-	body_parts = list(BP_L_HAND)
-	icon_state = "wing_feathers"
-	uid = "acc_marking_avian_wingfeathers_left"
-
-/decl/sprite_accessory/marking/avian/wing_feathers/right
-	name = "Wing Feathers (Right)"
-	body_parts = list(BP_R_HAND)
-	uid = "acc_marking_avian_wingfeathers_right"
-
-/decl/sprite_accessory/marking/avian/additive
-	name = "Beak, Additive (Head)"
-	icon_state = "beak-add"
-	color_blend = ICON_ADD
-	uid = "acc_marking_avian_beak_alt"
-
-/decl/sprite_accessory/marking/avian/resomi
-	name = "Raptor Ears, Additive (Head)"
-	icon_state = "ears-add"
-	color_blend = ICON_ADD
-	uid = "acc_marking_avian_raptorears_alt"
-
-/decl/sprite_accessory/marking/avian/wing_feathers/additive
-	name = "Wing Feathers, Additive (Left)"
-	icon_state = "wing_feathers-add"
-	color_blend = ICON_ADD
-	uid = "acc_marking_avian_wingfeathers_left_alt"
-
-/decl/sprite_accessory/marking/avian/wing_feathers/right/additive
-	name = "Wing Feathers, Additive (Right)"
-	icon_state = "wing_feathers-add"
-	color_blend = ICON_ADD
-	uid = "acc_marking_avian_wingfeathers_right_alt"

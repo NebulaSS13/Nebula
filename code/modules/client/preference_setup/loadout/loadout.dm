@@ -406,6 +406,13 @@
 	var/list/allowed_branches
 	/// Skills required to spawn with this item.
 	var/list/allowed_skills
+	// The various valid values for loadout_flags.
+	var/const/GEAR_HAS_COLOR_SELECTION = BITFLAG(0)
+	var/const/GEAR_HAS_TYPE_SELECTION = BITFLAG(1)
+	var/const/GEAR_HAS_SUBTYPE_SELECTION = BITFLAG(2)
+	var/const/GEAR_HAS_CUSTOM_SELECTION = BITFLAG(3)
+	var/const/GEAR_NO_EQUIP = BITFLAG(4)
+	var/const/GEAR_NO_FINGERPRINTS = BITFLAG(5)
 	/// Special tweaks in new
 	var/loadout_flags
 	/// Special tweak in New

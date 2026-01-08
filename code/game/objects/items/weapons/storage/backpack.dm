@@ -355,54 +355,6 @@
 		return 1
 	return ..()
 
-//ERT backpacks.
-/obj/item/backpack/ert
-	name = "emergency response team backpack"
-	desc = "A spacious backpack with lots of pockets, used by members of the Emergency Response Team."
-	icon = 'icons/obj/items/storage/backpack/backpack_ert.dmi'
-	var/marking_state
-	var/marking_colour
-
-/obj/item/backpack/ert/on_update_icon()
-	. = ..()
-	if(marking_state)
-		var/image/I = image(icon, marking_state)
-		I.color = marking_colour
-		I.appearance_flags |= RESET_COLOR
-		add_overlay(I)
-
-/obj/item/backpack/ert/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay && slot == slot_back_str && marking_state)
-		var/image/I = image(overlay.icon, "[overlay.icon_state]-[marking_state]")
-		I.color = marking_colour
-		I.appearance_flags |= RESET_COLOR
-		overlay.add_overlay(I)
-	. = ..()
-
-/obj/item/backpack/ert/commander
-	name = "emergency response team commander backpack"
-	desc = "A spacious backpack with lots of pockets, worn by the commander of an Emergency Response Team."
-	marking_colour = COLOR_BLUE_GRAY
-	marking_state = "com"
-
-/obj/item/backpack/ert/security
-	name = "emergency response team security backpack"
-	desc = "A spacious backpack with lots of pockets, worn by security members of an Emergency Response Team."
-	marking_colour = COLOR_NT_RED
-	marking_state = "sec"
-
-/obj/item/backpack/ert/engineer
-	name = "emergency response team engineer backpack"
-	desc = "A spacious backpack with lots of pockets, worn by engineering members of an Emergency Response Team."
-	marking_colour = COLOR_GOLD
-	marking_state = "eng"
-
-/obj/item/backpack/ert/medical
-	name = "emergency response team medical backpack"
-	desc = "A spacious backpack with lots of pockets, worn by medical members of an Emergency Response Team."
-	marking_colour = COLOR_OFF_WHITE
-	marking_state = "med"
-
 /*
  * Messenger Bags
  */

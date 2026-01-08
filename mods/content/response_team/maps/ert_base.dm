@@ -1,6 +1,7 @@
 /datum/map_template/ruin/antag_spawn/ert
 	name = "ERT Base"
-	suffixes = list("ert/ert_base.dmm")
+	prefix = "mods/content/response_team/maps/"
+	suffixes = list("ert_base.dmm")
 	modify_tag_vars = FALSE
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/rescue)
 	apc_test_exempt_areas = list(
@@ -42,6 +43,22 @@
 	landmark_tag = "nav_ert_start"
 	docking_controller = "ert_rescue_base"
 
+/obj/machinery/camera/network/ert
+	preset_channels = list(CAMERA_CHANNEL_ERT)
+	cameranet_enabled = FALSE
+	req_access = list(access_engine)
+
+/obj/machinery/computer/modular/preset/full/ert
+	default_software = list(
+		/datum/computer_file/program/camera_monitor/ert,
+		/datum/computer_file/program/email_client,
+		/datum/computer_file/program/alarm_monitor,
+		/datum/computer_file/program/comm,
+		/datum/computer_file/program/aidiag,
+		/datum/computer_file/program/records,
+		/datum/computer_file/program/wordprocessor
+	)
+
 // Areas
 
 /area/map_template/rescue_base
@@ -60,6 +77,3 @@
 	name = "\improper Response Team Base"
 	icon_state = "shuttlered"
 	base_turf = /turf/unsimulated/floor/rescue_base
-
-// Separated in preparation for making ERTs into a modpack.
-#include "rig.dm"

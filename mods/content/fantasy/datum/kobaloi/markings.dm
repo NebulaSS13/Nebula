@@ -1,6 +1,6 @@
 /obj/item/organ/external/tail/kobaloi
-	tail_icon        = 'mods/content/fantasy/icons/kobaloi/body.dmi'
-	tail_blend       = ICON_MULTIPLY
+	tail_icon  = 'mods/content/fantasy/icons/kobaloi/body.dmi'
+	tail_blend = ICON_MULTIPLY
 
 /decl/sprite_accessory/marking/kobaloi
 	abstract_type    = /decl/sprite_accessory/marking/kobaloi

@@ -50,4 +50,4 @@
 	name = "\improper Foundation radio headset"
 	desc = "The headset of the occult cavalry."
 	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
-	encryption_keys = list(/obj/item/encryptionkey/ert)
+	encryption_keys = list(/obj/item/encryptionkey/specops)

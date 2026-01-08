@@ -15,6 +15,3 @@
 
 /datum/fabricator_recipe/protolathe/integrated_printer_upgrade_clone
 	path = /obj/item/disk/integrated_circuit/upgrade/clone
-
-/datum/fabricator_recipe/robotics/augment/circuit
-	path = /obj/item/organ/internal/augment/active/simple/circuit

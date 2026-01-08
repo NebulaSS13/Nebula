@@ -50,7 +50,7 @@
 	glasses =  /obj/item/clothing/glasses/sunglasses/quantum
 	uniform =  /obj/item/clothing/jumpsuit/quantum
 	shoes =    /obj/item/clothing/shoes/color/black/quantum
-	l_ear =    /obj/item/radio/headset/ert/quantum
+	l_ear =    /obj/item/radio/headset/quantum
 	back =     /obj/item/backpack/holding/quantum
 	head =     /obj/item/clothing/head/beret
 	belt =     /obj/item/belt/utility/full/quantum
@@ -165,15 +165,16 @@
 	return ..()
 
 // Headset
-/obj/item/radio/headset/ert/quantum
+/obj/item/radio/headset/quantum
 	name = "quantum mechanic's headset"
 	desc = "A quantum mechanic's headset. The letter 'Ω' is stamped on the side."
+	icon = 'icons/obj/items/device/radio/headsets/headset_admin.dmi'
 	encryption_keys = list(
 		/obj/item/encryptionkey/binary,
-		/obj/item/encryptionkey/ert
+		/obj/item/encryptionkey/specops
 	)
 
-/obj/item/radio/headset/ert/quantum/attack_hand(mob/user)
+/obj/item/radio/headset/quantum/attack_hand(mob/user)
 	if(!user)
 		return TRUE
 

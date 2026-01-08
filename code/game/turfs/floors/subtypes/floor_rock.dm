@@ -5,13 +5,10 @@
 	_base_flooring = /decl/flooring/rock
 
 /turf/floor/rock/Initialize(mapload, no_update_icon)
+	// Take advantage of the set_turf_materials call in ..()
+	material ||= get_strata_material_type() || /decl/material/solid/stone/sandstone
 	. = ..()
-	set_turf_materials(material || get_strata_material_type() || /decl/material/solid/stone/sandstone, skip_update = no_update_icon)
 
 /turf/floor/rock/volcanic
 	name     = "volcanic floor"
-	material = /decl/material/solid/stone/basalt
-
-/turf/floor/rock/basalt
-	color    = /decl/material/solid/stone/basalt::color
 	material = /decl/material/solid/stone/basalt

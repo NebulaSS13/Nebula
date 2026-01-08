@@ -7,6 +7,7 @@
 	#include "../../mods/content/mundane.dm"
 	#include "../../mods/content/scaling_descriptors.dm"
 
+	#include "../../mods/content/augments/_augments.dme"
 	#include "../../mods/content/beekeeping/_beekeeping.dme"
 	#include "../../mods/content/bigpharma/_bigpharma.dme"
 	#include "../../mods/content/biomods/_biomods.dme"
@@ -28,6 +29,7 @@
 	#include "../../mods/content/pheromones/_pheromones.dme"
 	#include "../../mods/content/plant_dissection/_plant_dissection.dme"
 	#include "../../mods/content/psionics/_psionics.dme"
+	#include "../../mods/content/response_team/_response_team.dme"
 	#include "../../mods/content/sealant_gun/_sealant_gun.dme"
 	#include "../../mods/content/shackles/_shackles.dme"
 	#include "../../mods/content/standard_jobs/_standard_jobs.dme"

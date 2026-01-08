@@ -50,17 +50,35 @@
 	color = "#41311b"
 	floor_type = /turf/floor/dirt
 
-/turf/wall/natural/basalt
-	material = /decl/material/solid/stone/basalt
-	color = COLOR_DARK_GRAY
-	floor_type = /turf/floor/rock/basalt
-
-/turf/wall/natural/random/basalt
-	material = /decl/material/solid/stone/basalt
-	color = COLOR_DARK_GRAY
-	floor_type = /turf/floor/rock/basalt
-
-/turf/wall/natural/random/high_chance/basalt
-	material = /decl/material/solid/stone/basalt
-	color = COLOR_DARK_GRAY
-	floor_type = /turf/floor/rock/basalt
+#define MATERIAL_NATURAL_TURFS(ID, MAT)      \
+/turf/floor/rock/##ID {                      \
+	color    = /decl/material/##MAT::color;  \
+	material = /decl/material/##MAT          \
+}                                            \
+/turf/floor/rock/##ID/sand {                 \
+	name = "sand";                           \
+	icon = 'icons/turf/flooring/sand.dmi';   \
+	icon_state = "sand0";                    \
+	color = "#ae9e66";                     \
+	_flooring = /decl/flooring/sand;         \
+}                                            \
+/turf/wall/natural/##ID {                    \
+	material = /decl/material/##MAT;         \
+	color = /decl/material/##MAT::color;     \
+	floor_type = /turf/floor/rock/##ID;      \
+}                                            \
+/turf/wall/natural/random/##ID {             \
+	material = /decl/material/##MAT;         \
+	color = /decl/material/##MAT::color;     \
+	floor_type = /turf/floor/rock/##ID;      \
+}                                            \
+/turf/wall/natural/random/high_chance/##ID { \
+	material = /decl/material/##MAT;         \
+	color = /decl/material/##MAT::color;     \
+	floor_type = /turf/floor/rock/##ID       \
+}
+MATERIAL_NATURAL_TURFS(sandstone, solid/stone/sandstone)
+MATERIAL_NATURAL_TURFS(basalt,    solid/stone/basalt)
+MATERIAL_NATURAL_TURFS(granite,   solid/stone/granite)
+MATERIAL_NATURAL_TURFS(marble,    solid/stone/marble)
+#undef MATERIAL_NATURAL_TURFS

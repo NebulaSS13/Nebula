@@ -28,7 +28,7 @@
 
 /decl/outfit/commando
 	name =     "Special Role - Deathsquad Commando"
-	l_ear =    /obj/item/radio/headset/ert
+	l_ear =    /obj/item/radio/headset/specops
 	uniform =  /obj/item/clothing/jumpsuit/green
 	l_pocket = /obj/item/plastique
 	shoes =    /obj/item/clothing/shoes/jackboots/swat

@@ -32,6 +32,14 @@
 // Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
 #define SANITIZE_LIST(L) ( islist(L) ? L : list() )
 
+// The above but for alists. Prefixed with A_ because inserting "A" randomly in the name just made it confusing
+#define A_LAZYINITLIST(AL) if (!AL) { AL = alist(); }
+#define A_UNSETEMPTY(AL) if(!length(AL)) { AL = null; }
+#define A_LAZYREMOVE(AL, I) if(AL) { AL -= I; A_UNSETEMPTY(AL) }
+#define A_LAZYSET(AL, A, I) if(!AL) { AL = alist(); } AL[A] = I;
+#define A_LAZYCLEARLIST(AL) if(AL) { AL.Cut(); AL = null; }
+#define A_LAZYLEN(AL) length(AL)
+
 /// Passed into BINARY_INSERT to compare keys
 #define COMPARE_KEY __BIN_LIST[__BIN_MID]
 /// Passed into BINARY_INSERT to compare values

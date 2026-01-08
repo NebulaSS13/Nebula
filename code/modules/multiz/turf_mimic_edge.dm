@@ -208,6 +208,10 @@
 /turf/mimic_edge/transition/flooded
 	flooded = /decl/material/liquid/water
 
+/turf/mimic_edge/transition/flooded/salt
+	contaminant_reagent_type = /decl/material/solid/sodiumchloride
+	contaminant_proportion = 0.10 // 1:10 salt:water, NOT 10% salt
+
 ////////////////////////////////
 // Loop Edges
 ////////////////////////////////

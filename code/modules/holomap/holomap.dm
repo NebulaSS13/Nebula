@@ -232,7 +232,7 @@
 
 	//This is where the fun begins
 	if(length(global.using_map.overmap_ids))
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[z]
 
 		if(isAI)
 			T = get_turf(user.client.eye)

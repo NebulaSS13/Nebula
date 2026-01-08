@@ -2,6 +2,7 @@
 
 	#include "../../mods/content/mundane.dm"
 
+	#include "../../mods/content/augments/_augments.dme"
 	#include "../../mods/content/baychems/_baychems.dme"
 	#include "../../mods/content/beekeeping/_beekeeping.dme"
 
@@ -20,7 +21,8 @@
 
 	// Must come after borers for compatibility.
 	#include "../../mods/content/psionics/_psionics.dme"
-
+	#include "../../mods/content/response_team/_response_team.dme"
+	#include "../../mods/content/sealant_gun/_sealant_gun.dme"
 	#include "../../mods/content/standard_jobs/_standard_jobs.dme"
 	#include "../../mods/content/supermatter/_supermatter.dme"
 	#include "../../mods/content/tabloids/_tabloids.dme"

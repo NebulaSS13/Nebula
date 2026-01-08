@@ -481,3 +481,13 @@ Helpers
 /datum/controller/subsystem/ticker/proc/print_lobby_message()
 	to_world("<B>[SPAN_BLUE("Welcome to the pre-game lobby!")]</B>")
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
+
+
+/datum/controller/subsystem/ticker/proc/get_game_mode_options()
+	. = list()
+	. += "<b>Respawning:</b> <a href='byond://?src=\ref[mode];toggle=respawn'>[mode.deny_respawn ? "disallowed" : "allowed"]</a>"
+	. += "<b>Shuttle delay multiplier:</b> <a href='byond://?src=\ref[mode];set=shuttle_delay'>[mode.shuttle_delay]</a><br/>"
+	. += "<b>Shuttle auto-recall:</b> <a href='byond://?src=\ref[mode];toggle=shuttle_recall'>[mode.auto_recall_shuttle ? "enabled" : "disabled"]</a>"
+	. += "" // we want a blank line here for some design reason idk
+	. += "<b>Moderate event time modifier:</b> <a href='byond://?src=\ref[mode];set=event_modifier_moderate'>[mode.event_delay_mod_moderate || "unset"]</a><br/>"
+	. += "<b>Major event time modifier:</b> <a href='byond://?src=\ref[mode];set=event_modifier_severe'>[mode.event_delay_mod_major || "unset"]</a><br/>"

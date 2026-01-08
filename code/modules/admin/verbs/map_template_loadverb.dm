@@ -47,7 +47,7 @@
 		to_chat(usr, SPAN_WARNING("That template has already been loaded and is flagged against being loaded again."))
 		return
 
-	var/new_z_centre = template.load_new_z(FALSE) // Don't skip changeturf
+	var/new_z_centre = template.load_new_z()
 	if (new_z_centre)
 		log_and_message_admins("has placed a map template ([template.name]) on a new zlevel.", location=new_z_centre)
 	else

@@ -48,21 +48,21 @@
 
 	//See if shields can stop it first
 	var/overmap_only = TRUE
-	var/list/overmap_sectors = list()
+	var/list/event_overmap_sectors = list()
 	if(!length(affecting_z))
 		return
 
 	for(var/i in affecting_z)
-		var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(i)]
+		var/obj/effect/overmap/visitable/sector = global.overmap_sectors[i]
 		if(istype(sector))
-			overmap_sectors |= sector
+			event_overmap_sectors |= sector
 		else
 			overmap_only = FALSE
 			break
 
 	var/list/shields = list()
 	if(overmap_only)
-		for(var/obj/effect/overmap/visitable/sector as anything in overmap_sectors)
+		for(var/obj/effect/overmap/visitable/sector as anything in event_overmap_sectors)
 			var/list/sector_shields = sector.get_linked_machines_of_type(/obj/machinery/shield_generator)
 			if(length(sector_shields))
 				shields |= sector_shields

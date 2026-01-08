@@ -13,6 +13,12 @@
 
 	#include "../../mods/content/mundane.dm"
 	#include "../../mods/content/baychems/_baychems.dme"
+
+	#include "../../mods/content/plant_dissection/_plant_dissection.dme"
+
+	#include "../../mods/content/augments/_augments.dme"
+	#include "../../mods/content/beekeeping/_beekeeping.dme"
+	#include "../../mods/content/bigpharma/_bigpharma.dme"
 	#include "../../mods/content/blob/_blob.dme"
 	#include "../../mods/content/breath_holding/_breath_holding.dme"
 	#include "../../mods/content/corporate/_corporate.dme"

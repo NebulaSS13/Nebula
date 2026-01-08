@@ -64,6 +64,12 @@
 	path = /obj/item/clothing/suit/jacket/winter
 	uid = "gear_suit_winter_coat"
 
+/decl/loadout_option/suit/parka
+	name = "parka"
+	path = /obj/item/clothing/suit/jacket/winter/parka
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	uid = "gear_suit_parka"
+
 /decl/loadout_option/suit/track
 	name = "track jacket selection"
 	path = /obj/item/clothing/suit/toggle/track
@@ -111,7 +117,7 @@
 	cost = 3
 	uid = "gear_suit_cloak"
 
-/decl/loadout_option/suit/cloak
+/decl/loadout_option/suit/hooded_cloak
 	name = "cloak, hooded"
 	path = /obj/item/clothing/suit/hooded_cloak
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
