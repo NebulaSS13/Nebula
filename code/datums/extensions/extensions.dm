@@ -38,7 +38,8 @@
 	source.PopulateClone(src)
 
 /datum
-	var/list/datum/extension/extensions
+	/// A lazy alist() keyed by extension base type. Values are either a list of extension init arguments for lazy-loaded extensions, or an extension datum.
+	var/alist/extensions
 
 //Variadic - Additional positional arguments can be given. Named arguments might not work so well
 /proc/set_extension(var/datum/source, var/datum/extension/extension_type)
@@ -49,8 +50,7 @@
 		CRASH("Invalid base type: Expected /datum/extension, was [log_info_line(extension_base_type)]")
 	if(!ispath(extension_type, extension_base_type))
 		CRASH("Invalid extension type: Expected [extension_base_type], was [log_info_line(extension_type)]")
-	if(!source.extensions)
-		source.extensions = list()
+	A_LAZYINITLIST(source.extensions)
 	var/datum/extension/existing_extension = source.extensions[extension_base_type]
 	if(istype(existing_extension))
 		qdel(existing_extension)
@@ -115,7 +115,7 @@
 		return
 	if(!islist(source.extensions[base_type]))
 		qdel(source.extensions[base_type])
-	LAZYREMOVE(source.extensions, base_type)
+	A_LAZYREMOVE(source.extensions, base_type)
 
 ///Copy the extension instance on the 'source' and put it on the 'destination'.
 /proc/copy_extension(var/datum/source, var/datum/destination, var/base_type)
