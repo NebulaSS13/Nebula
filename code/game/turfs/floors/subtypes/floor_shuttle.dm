@@ -4,6 +4,9 @@
 	desc       = "A synthetic floor plate commonly seen in shuttles and other vehicles."
 	_flooring  = /decl/flooring/reinforced/shuttle
 
+/turf/floor/shuttle/airless
+	initial_gas = null
+
 /turf/floor/shuttle/blue
 	icon_state = "floor"
 	_flooring  = /decl/flooring/reinforced/shuttle/blue

@@ -104,5 +104,11 @@
 	return 'icons/turf/walls/solid.dmi'
 
 /turf/wall/shuttle/dark
+	color = COLOR_GUNMETAL
 	paint_color = COLOR_GUNMETAL
 	stripe_color = COLOR_MAROON
+
+/turf/wall/shuttle/light
+	color = COLOR_SILVER
+	paint_color = COLOR_SILVER
+	stripe_color = COLOR_SKY_BLUE
