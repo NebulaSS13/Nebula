@@ -158,6 +158,8 @@
 	initial_padding_color = "#62e36c"
 /obj/structure/chair/comfy/yellow
 	initial_padding_color = "#ffbf00"
+/obj/structure/chair/comfy/orange
+	initial_padding_color = COLOR_ORANGE
 
 /obj/structure/chair/comfy/captain
 	name = "captain chair"
