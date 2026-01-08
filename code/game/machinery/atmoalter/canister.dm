@@ -81,12 +81,6 @@
 	can_label      = FALSE
 	start_gas      = /decl/material/gas/hydrogen
 
-/obj/machinery/portable_atmospherics/canister/phoron
-	name = "\improper Canister \[Phoron\]"
-	icon_state = "orange"
-	canister_color = "orange"
-	can_label = 0
-
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide
 	name           = "\improper CO2 canister"
 	icon_state     = "black"
@@ -129,7 +123,13 @@ EMPTY_CANISTER(nitrogen, /obj/machinery/portable_atmospherics/canister/nitrogen)
 EMPTY_CANISTER(carbon_dioxide, /obj/machinery/portable_atmospherics/canister/carbon_dioxide)
 EMPTY_CANISTER(sleeping_agent, /obj/machinery/portable_atmospherics/canister/sleeping_agent)
 EMPTY_CANISTER(hydrogen, /obj/machinery/portable_atmospherics/canister/hydrogen)
-EMPTY_CANISTER(phoron, /obj/machinery/portable_atmospherics/canister/phoron)
+
+// Special types used for engine setup admin verb, they contain double amount of that of normal canister.
+#define ENGINE_SETUP_CANISTER(BASE_TYPE) ##BASE_TYPE/engine_setup/start_pressure = BASE_TYPE::start_pressure * 2;
+ENGINE_SETUP_CANISTER(/obj/machinery/portable_atmospherics/canister/nitrogen)
+ENGINE_SETUP_CANISTER(/obj/machinery/portable_atmospherics/canister/carbon_dioxide)
+ENGINE_SETUP_CANISTER(/obj/machinery/portable_atmospherics/canister/hydrogen)
+
 /obj/machinery/portable_atmospherics/canister/on_update_icon()
 
 	cut_overlays()
@@ -334,21 +334,6 @@ EMPTY_CANISTER(phoron, /obj/machinery/portable_atmospherics/canister/phoron)
 	if(destroyed)
 		return STATUS_CLOSE
 	return ..()
-
-/obj/machinery/portable_atmospherics/canister/phoron/Initialize()
-	. = ..()
-	air_contents.adjust_gas(/decl/material/solid/phoron, MolesForPressure())
-	queue_icon_update()
-// Special types used for engine setup admin verb, they contain double amount of that of normal canister.
-#define ENGINE_SETUP_CANISTER(BASE_TYPE) ##BASE_TYPE/engine_setup/start_pressure = BASE_TYPE::start_pressure * 2;
-ENGINE_SETUP_CANISTER(/obj/machinery/portable_atmospherics/canister/nitrogen)
-ENGINE_SETUP_CANISTER(/obj/machinery/portable_atmospherics/canister/carbon_dioxide)
-ENGINE_SETUP_CANISTER(/obj/machinery/portable_atmospherics/canister/hydrogen)
-
-/obj/machinery/portable_atmospherics/canister/phoron/engine_setup/Initialize()
-	. = ..()
-	src.air_contents.adjust_gas(/decl/material/solid/phoron, MolesForPressure())
-	queue_icon_update()
 
 // Spawn debug tanks.
 /obj/machinery/portable_atmospherics/canister/helium

@@ -25,10 +25,6 @@
 	name = "O2 creation"
 	spawned_gas = /decl/material/gas/oxygen
 
-/datum/artifact_effect/gas/phoron
-	name = "Phoron creation"
-	spawned_gas = /decl/material/solid/phoron
-
 /datum/artifact_effect/gas/hydrogen
 	name = "H2 creation"
 	spawned_gas = /decl/material/gas/hydrogen
