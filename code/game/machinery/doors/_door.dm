@@ -574,6 +574,8 @@
 
 	if (!fore && !aft)
 		return list()
+	else if (fore.override_unlock || aft.override_unlock)
+		return list()
 	else if (fore.secure || aft.secure)
 		return req_access_union(fore, aft)
 	else
