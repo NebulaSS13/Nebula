@@ -118,6 +118,7 @@ GLOBAL_GETTER(cable_colors, /list, SetupCableColors())
 	. = list()
 
 	var/list/valid_cable_coils = typesof(/obj/item/stack/cable_coil) - typesof(
+		/obj/item/stack/cable_coil/five,
 		/obj/item/stack/cable_coil/single,
 		/obj/item/stack/cable_coil/cut,
 		/obj/item/stack/cable_coil/cyborg,

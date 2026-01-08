@@ -840,6 +840,8 @@ var/global/list/obj/structure/cable/all_cables = list()
 //////////////////////////////
 // Misc.
 /////////////////////////////
+/obj/item/stack/cable_coil/five
+	amount = 5
 
 /obj/item/stack/cable_coil/cut
 	item_state = "coil2"
