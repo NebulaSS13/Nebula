@@ -23,6 +23,9 @@
 		var/bad_msg = "--------------- [A.proper_name]([A.type])"
 
 		var/exemptions = get_exemptions(A)
+		if(exemptions & global.using_map.SKIP_ALL_TESTS)
+			continue
+
 		if(!A.apc && !(exemptions & global.using_map.NO_APC))
 			log_bad("[bad_msg] lacks an APC.")
 			area_good = 0
