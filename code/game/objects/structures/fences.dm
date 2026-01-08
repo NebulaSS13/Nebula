@@ -22,6 +22,7 @@
 	icon_state = "straight"
 
 	material = /decl/material/solid/metal/steel
+	material_alteration = MAT_FLAG_ALTERATION_ALL
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 
 	var/cuttable = TRUE
