@@ -16,7 +16,7 @@
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/scanner/gas,
-		/obj/item/ore,
+		/obj/item/ore_satchel,
 		/obj/item/flashlight/lantern,
 		/obj/item/tool/shovel,
 		/obj/item/tool/pickaxe,

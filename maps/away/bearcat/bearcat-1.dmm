@@ -1935,7 +1935,7 @@
 /area/ship/scrap/maintenance/storage)
 "ef" = (
 /obj/structure/closet/crate/plastic,
-/obj/item/ore,
+/obj/item/ore_satchel,
 /obj/item/tool/pickaxe,
 /obj/item/stack/flag/yellow,
 /obj/item/box/glowsticks,

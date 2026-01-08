@@ -17,7 +17,7 @@
 
 	var/list/bag_whitelist = list(
 		/obj/item/pill_bottle,
-		/obj/item/plants
+		/obj/item/plant_satchel
 		)
 	var/blacklisted_types = list()
 	var/item_size_limit = ITEM_SIZE_HUGE
@@ -265,7 +265,7 @@
 	obj_flags = null
 	grind_sound = 'sound/machines/juicer.ogg'
 	blacklisted_types = list(/obj/item/stack/material)
-	bag_whitelist = list(/obj/item/plants)
+	bag_whitelist = list(/obj/item/plant_satchel)
 	item_size_limit = ITEM_SIZE_SMALL
 	skill_to_check = SKILL_COOKING
 
