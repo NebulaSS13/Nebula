@@ -164,3 +164,6 @@
 	else
 		to_chat(usr, "The windoor will now slide to the left.")
 	update_icon()
+
+/obj/structure/windoor_assembly/secure
+	secure = TRUE
