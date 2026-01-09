@@ -272,8 +272,6 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 
 	// We init before Z-Mimic, cannot rely on above/below.
 	while ((T = GET_BELOW(T)) && ((below.t1?.z_flags | below.t2?.z_flags | below.t3?.z_flags | below.t4?.z_flags) & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
-		T.ambient_has_indirect = TRUE
-
 		if (!T.corners || !T.corners[Ti])
 			T.generate_missing_corners()
 

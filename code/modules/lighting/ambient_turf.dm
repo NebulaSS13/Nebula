@@ -4,9 +4,6 @@
 	/// The power of the above is multiplied by this. Setting too high may drown out normal lights on the same turf.
 	var/ambient_light_multiplier = 0.3
 
-	/// If this is TRUE, an above turf's ambient light is affecting this turf.
-	var/tmp/ambient_has_indirect = FALSE
-
 	// Record-keeping, do not touch -- that means you, admins.
 	var/tmp/ambient_active = FALSE	//! Do we have non-zero ambient light? Use [TURF_IS_AMBIENT_LIT] instead of reading this directly.
 	var/tmp/ambient_light_old_r = 0

@@ -358,6 +358,7 @@
 				continue
 
 		Tcorners = T.corners
+		// These checks are inlined from generate_missing_corners. They must be kept in sync.
 		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T) || T.light_source_solo || T.light_source_multi || (T.z_flags & ZM_ALLOW_LIGHTING))
 			if (!T.lighting_corners_initialised)
 				T.lighting_corners_initialised = TRUE
