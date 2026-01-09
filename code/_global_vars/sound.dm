@@ -129,3 +129,10 @@ var/global/list/sweeping_sound = list(
 	'sound/foley/sweeping6.ogg',
 	'sound/foley/sweeping7.ogg',
 )
+
+var/global/list/ricochet_sound = list(
+	'sound/weapons/guns/ricochet1.ogg',
+	'sound/weapons/guns/ricochet2.ogg',
+	'sound/weapons/guns/ricochet3.ogg',
+	'sound/weapons/guns/ricochet4.ogg'
+)

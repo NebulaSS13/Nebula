@@ -9,14 +9,31 @@
 	embed = 1
 	space_knockback = 1
 	penetration_modifier = 1.0
+	impact_effect_type = /obj/effect/temp_visual/impact_effect
+	muzzle_type = /obj/effect/projectile/muzzle/bullet
+	hitsound_non_mob = "ricochet"
+
 	var/mob_passthrough_check = 0
 	var/caliber
 
-	muzzle_type = /obj/effect/projectile/muzzle/bullet
-	miss_sounds = list('sound/weapons/guns/miss1.ogg','sound/weapons/guns/miss2.ogg','sound/weapons/guns/miss3.ogg','sound/weapons/guns/miss4.ogg')
-	ricochet_sounds = list('sound/weapons/guns/ricochet1.ogg', 'sound/weapons/guns/ricochet2.ogg',
-							'sound/weapons/guns/ricochet3.ogg', 'sound/weapons/guns/ricochet4.ogg')
-	impact_sounds = list(BULLET_IMPACT_MEAT = SOUNDS_BULLET_MEAT, BULLET_IMPACT_METAL = SOUNDS_BULLET_METAL)
+/obj/item/projectile/bullet/get_miss_sounds()
+	var/static/list/miss_sounds = list(
+		'sound/weapons/guns/miss1.ogg',
+		'sound/weapons/guns/miss2.ogg',
+		'sound/weapons/guns/miss3.ogg',
+		'sound/weapons/guns/miss4.ogg'
+	)
+
+/obj/item/projectile/bullet/get_ricochet_sounds()
+	return global.ricochet_sound
+
+/obj/item/projectile/bullet/get_impact_sounds()
+
+	var/static/list/impact_sounds = list(
+		(BULLET_IMPACT_MEAT) = SOUNDS_BULLET_MEAT,
+		(BULLET_IMPACT_METAL) = SOUNDS_BULLET_METAL
+	)
+	return impact_sounds
 
 /obj/item/projectile/bullet/get_autopsy_descriptors()
 	. = ..()
@@ -34,7 +51,6 @@
 	else
 		mob_passthrough_check = 0
 	. = ..()
-
 	if(. == 1 && isliving(target_mob))
 		var/mob/living/squish = target_mob
 		if(!squish.isSynthetic())
