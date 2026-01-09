@@ -1,0 +1,5 @@
+author: Penelope Haze
+changes:
+  - {balance: Certain supply packs that give a random selection are now priced 
+      more fairly.}
+delete-after: true
