@@ -60,7 +60,6 @@
 /obj/structure/catwalk/can_climb_from_below(var/mob/climber)
 	return TRUE
 
-
 /obj/structure/catwalk/proc/redraw_nearby_catwalks()
 	for(var/direction in global.alldirs)
 		var/obj/structure/catwalk/L = locate() in get_step(src, direction)

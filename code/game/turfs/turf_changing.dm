@@ -80,6 +80,7 @@
 	var/old_ambient_light_old_r = ambient_light_old_r
 	var/old_ambient_light_old_g = ambient_light_old_g
 	var/old_ambient_light_old_b = ambient_light_old_b
+	var/old_dangerous_objects   = dangerous_objects
 
 	var/old_zone_membership_candidate = zone_membership_candidate
 
@@ -104,6 +105,7 @@
 	// Set our observation bookkeeping lists back.
 	changed_turf.event_listeners =  old_event_listeners
 	changed_turf._listening_to =    old_listening_to
+	changed_turf.dangerous_objects = old_dangerous_objects
 
 	changed_turf.affecting_heat_sources = old_affecting_heat_sources
 

@@ -14,6 +14,8 @@
 	force_material     = /decl/material/solid/organic/plantmatter/grass
 	growth_value       = 1.2 // Shouldn't really matter since you can't plant on grass, it turns to dirt first.
 	uid                = "floor_grass"
+	can_conceal_hazards = TRUE
+
 	var/harvestable    = FALSE
 
 /decl/flooring/grass/fire_act(turf/floor/target, datum/gas_mixture/air, exposed_temperature, exposed_volume)

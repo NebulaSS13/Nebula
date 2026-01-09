@@ -27,6 +27,7 @@ var/global/list/flooring_cache = list()
 	var/damage_temperature
 	var/icon_edge_layer = FLOOR_EDGE_NONE
 	var/has_environment_proc
+	var/can_conceal_hazards = FALSE
 
 	/// Unbuildable if not set. Must be /obj/item/stack.
 	var/build_type

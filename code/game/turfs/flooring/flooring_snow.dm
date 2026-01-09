@@ -13,6 +13,7 @@
 	print_type      = /obj/effect/footprints
 	drop_material_on_remove = TRUE
 	uid             = "floor_snow"
+	can_conceal_hazards = TRUE
 
 /decl/flooring/snow/get_movement_delay(var/travel_dir, var/mob/mover)
 	. = ..()

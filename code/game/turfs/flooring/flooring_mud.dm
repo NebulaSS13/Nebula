@@ -70,6 +70,7 @@
 	force_material  = /decl/material/solid/soil
 	growth_value    = 1
 	uid             = "floor_dirt"
+	can_conceal_hazards = TRUE
 
 /decl/flooring/dirt/fluid_act(turf/floor/target, datum/reagents/fluids)
 	if(target.get_topmost_flooring() == src)
