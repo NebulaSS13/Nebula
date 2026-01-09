@@ -27,6 +27,12 @@
 	)
 	return impact_sounds
 
+/obj/item/projectile/beam/blue
+	damage = 30
+	muzzle_type = /obj/effect/projectile/muzzle/laser/blue
+	tracer_type = /obj/effect/projectile/tracer/laser/blue
+	impact_type = /obj/effect/projectile/impact/laser/blue
+
 /obj/item/projectile/beam/megabot
 	damage = 45
 	distance_falloff = 0.5
