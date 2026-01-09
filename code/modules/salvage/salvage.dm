@@ -32,7 +32,7 @@
 	update_icon()
 
 /obj/item/salvage/proc/get_repair_options()
-	return list(/decl/salvage_repair_option/material_sheet)
+	return subtypesof(/decl/salvage_repair_option/material_sheet)
 
 /obj/item/salvage/attackby(obj/item/used_item, mob/user)
 

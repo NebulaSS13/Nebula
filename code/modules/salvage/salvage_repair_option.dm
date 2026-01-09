@@ -33,14 +33,30 @@
 
 /decl/salvage_repair_option/material_sheet
 	selection_prob = 40
+	abstract_type = /decl/salvage_repair_option/material_sheet
+
+/decl/salvage_repair_option/material_sheet/plastic
 	selection_types = list(
-		/obj/item/stack/material/sheet,
+		/obj/item/stack/material/panel
+	)
+	selection_materials = list(
+		/decl/material/solid/organic/plastic
+	)
+
+/decl/salvage_repair_option/material_sheet/glass
+	selection_types = list(
 		/obj/item/stack/material/pane
 	)
 	selection_materials = list(
-		/decl/material/solid/metal/plasteel,
-		/decl/material/solid/organic/plastic,
 		/decl/material/solid/glass
+	)
+
+/decl/salvage_repair_option/material_sheet/plasteel
+	selection_types = list(
+		/obj/item/stack/material/sheet/reinforced
+	)
+	selection_materials = list(
+		/decl/material/solid/metal/plasteel
 	)
 
 /decl/salvage_repair_option/launcher
