@@ -159,7 +159,7 @@
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
 	var/decl/environment_data/env_info = GET_DECL(environment_type)
-	for(var/g in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
+	for(var/g in get_filterable_material_types())
 		if(!env_info.important_gasses[g])
 			trace_gas += g
 	// not everything in these lists is a subtype of /decl/material/gas, so:

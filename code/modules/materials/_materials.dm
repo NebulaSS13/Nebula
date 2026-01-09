@@ -1,3 +1,20 @@
+var/global/alist/_filterable_mats_alist
+var/global/list/_filterable_mats_list
+
+/proc/get_filterable_material_types(as_list = FALSE)
+
+	if(isnull(_filterable_mats_alist))
+		_filterable_mats_alist = alist()
+		for(var/decl/material/mat in decls_repository.get_decls_of_subtype_unassociated(/decl/material))
+			if(!isnull(mat.boiling_point))
+				_filterable_mats_alist[mat.type] = mat
+
+	if(as_list)
+		if(isnull(_filterable_mats_list))
+			_filterable_mats_list = alist2list(_filterable_mats_alist)
+		return _filterable_mats_list
+	return _filterable_mats_alist
+
 /*
 	MATERIAL DECLS
 	This data is used by various parts of the game for basic physical properties and behaviors
