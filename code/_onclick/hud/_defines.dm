@@ -52,7 +52,6 @@
 #define ui_movi "RIGHT-2:24,BOTTOM:5"
 #define ui_attack_selector "RIGHT-2:27,BOTTOM+2:9"
 #define ui_zonesel "RIGHT-1:28,BOTTOM:5"
-#define ui_stamina "RIGHT-2:24,BOTTOM:8"
 
 #define ui_borg_module "RIGHT-1:28,BOTTOM+1:7"
 
