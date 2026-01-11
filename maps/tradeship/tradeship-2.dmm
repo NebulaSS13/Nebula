@@ -4520,7 +4520,7 @@
 /turf/space,
 /area/ship/trade/shuttle/outgoing/general)
 "lZ" = (
-/obj/structure/sign/department/redcross{
+/obj/structure/sign/department/cross{
 	pixel_x = 32;
 	dir = 8
 	},

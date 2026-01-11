@@ -1416,7 +1416,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "et" = (
-/obj/structure/sign/directions/supply{
+/obj/structure/sign/directions/cargo/supply{
 	dir = 1
 	},
 /turf/wall/r_wall/prepainted,

@@ -750,13 +750,13 @@
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cB" = (
-/obj/structure/sign/double/solgovflag/left{
+/obj/structure/sign/double/flag/solgov/left{
 	pixel_y = -32
 	},
 /turf/floor/tiled,
 /area/icarus/vessel)
 "cC" = (
-/obj/structure/sign/double/solgovflag/right{
+/obj/structure/sign/double/flag/solgov/right{
 	pixel_y = -32
 	},
 /turf/floor/tiled,

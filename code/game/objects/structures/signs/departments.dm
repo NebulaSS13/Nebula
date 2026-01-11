@@ -4,7 +4,7 @@
 
 /obj/structure/sign/department
 	abstract_type = /obj/structure/sign/department
-	icon          = 'icons/obj/signs/slim_location_signs.dmi'
+	icon          = 'icons/obj/signs/departments.dmi'
 
 ///////////////////////////////////////////////////////////////////////////////////
 // Department Sign Definitions
@@ -18,36 +18,37 @@
 /obj/structure/sign/department/science_2
 	name       = "\improper RESEARCH"
 	desc       = "A sign labelling an area where research is performed."
-	icon       = 'icons/obj/signs/location_signs.dmi'
 	icon_state = "science2"
+
+/obj/structure/sign/department/science_3
+	icon_state = "science1"
 
 /obj/structure/sign/department/xenobio_1
 	name       = "\improper XENOBIOLOGY"
 	desc       = "A sign labelling an area as a place where xenobiological entities are researched."
 	icon_state = "xenobio"
 
+/obj/structure/sign/department/xenobio_1/large
+	icon_state = "xenobio-large"
+
 /obj/structure/sign/department/xenobio_2
 	name       = "\improper XENOBIOLOGY"
 	desc       = "A sign labelling an area as a place where xenobiological entities are researched."
-	icon       = 'icons/obj/signs/location_signs.dmi'
 	icon_state = "xenobio2"
 
 /obj/structure/sign/department/xenobio_3
 	name       = "\improper XENOBIOLOGY"
 	desc       = "A sign labelling an area as a place where xenobiological entities are researched."
-	icon       = 'icons/obj/signs/location_signs.dmi'
 	icon_state = "xenobio3"
 
 /obj/structure/sign/department/xenobio_4
 	name       = "\improper XENOBIOLOGY"
 	desc       = "A sign labelling an area as a place where xenobiological entities are researched."
-	icon       = 'icons/obj/signs/location_signs.dmi'
 	icon_state = "xenobio4"
 
 /obj/structure/sign/department/xenoarch
 	name       = "\improper XENOARCHAEOLOGY"
 	desc       = "A sign labelling an area as a place where xenoarchaeological finds are researched."
-	icon       = 'icons/obj/signs/location_signs.dmi'
 	icon_state = "xenobio4"
 
 /obj/structure/sign/department/chemistry
@@ -55,16 +56,20 @@
 	desc       = "A sign labelling an area containing chemical equipment."
 	icon_state = "chemistry"
 
+/obj/structure/sign/department/chemistry/alt_1
+	icon_state = "chemistry1"
+
+/obj/structure/sign/department/chemistry/alt_2
+	icon_state = "chemistry2"
+
 /obj/structure/sign/department/xenoflora
 	name       = "\improper XENOFLORA"
 	desc       = "A sign labelling an area as a place where xenobiological plants are researched."
-	icon       = 'icons/obj/signs/location_signs.dmi'
 	icon_state = "hydro4"
 
 /obj/structure/sign/department/botany
 	name       = "\improper BOTANY"
-	desc       = "A warning sign which reads 'BOTANY!'."
-	icon       = 'icons/obj/signs/location_signs.dmi'
+	desc       = "A warning sign which reads 'BOTANY'."
 	icon_state = "hydro3"
 
 /obj/structure/sign/department/hydro
@@ -75,18 +80,29 @@
 /obj/structure/sign/department/hydrostorage
 	name       = "\improper HYDROPONICS STORAGE"
 	desc       = "A sign labelling an area as a place where plant growing supplies are kept."
-	icon       = 'icons/obj/signs/location_signs.dmi'
 	icon_state = "hydro3"
+
+/obj/structure/sign/department/hydro/alt_1
+	icon_state = "hydro1"
+
+/obj/structure/sign/department/hydro/alt_2
+	icon_state = "hydro2"
 
 /obj/structure/sign/department/janitor
 	name       = "\improper JANITORIAL CLOSET"
 	desc       = "A sign indicating a room used to store cleaning supplies."
 	icon_state = "janitor"
 
+/obj/structure/sign/department/janitor/alt
+	icon_state = "custodian"
+
 /obj/structure/sign/department/engineering
 	name       = "\improper ENGINEERING"
 	desc       = "A sign labelling an area as the Engineering department."
 	icon_state = "engineering"
+
+/obj/structure/sign/department/engineering/engine
+	icon_state = "engine"
 
 /obj/structure/sign/department/telecomms
 	name       = "\improper TELECOMMUNICATIONS"
@@ -98,10 +114,16 @@
 	desc       = "A sign labelling the area as a cargo bay."
 	icon_state = "cargo"
 
+/obj/structure/sign/department/cargo/large
+	icon_state = "cargo-large"
+
 /obj/structure/sign/department/mail_delivery
 	name       = "\improper MAIL DELIVERY"
 	desc       = "A sign labelling a mail delivery point."
 	icon_state = "mail"
+
+/obj/structure/sign/department/mail_delivery/large
+	icon_state = "mail-large"
 
 /obj/structure/sign/department/bridge
 	name       = "\improper BRIDGE"
@@ -120,6 +142,9 @@
 
 /obj/structure/sign/department/security/alt
 	icon_state = "sec_cuff"
+
+/obj/structure/sign/department/security/large
+	icon_state = "security"
 
 /obj/structure/sign/department/eva
 	name       = "\improper EVA"
@@ -141,41 +166,44 @@
 	desc       = "A sign that lets you know that this is where you want to be when the station is full of holes and on fire."
 	icon_state = "evac"
 
-/obj/structure/sign/department/watercloset
-	name       = "\improper BATHROOMS"
+/obj/structure/sign/department/evac/large
+	icon_state = "evac-large"
+
+/obj/structure/sign/department/restroom
+	name       = "restroom"
 	desc       = "Need to take a piss? You've come to the right place."
 	icon_state = "watercloset"
 
+/obj/structure/sign/department/restroom/alt
+	icon_state = "restroom"
+
 /obj/structure/sign/department/examroom
-	name       = "\improper Exam Room"
+	name       = "exam room"
 	icon_state = "examroom"
 
-/obj/structure/sign/department/redcross
+/obj/structure/sign/department/examroom/large
+	icon_state = "examroom-large"
+
+/obj/structure/sign/department/cross
 	name       = "medbay"
 	desc       = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
-	icon       = 'icons/obj/signs/medical.dmi'
 	icon_state = "redcross"
 
-/obj/structure/sign/department/greencross
-	name       = "medbay"
-	desc       = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
-	icon       = 'icons/obj/signs/medical.dmi'
+/obj/structure/sign/department/cross/green
 	icon_state = "greencross"
 
-/obj/structure/sign/department/bluecross_1
-	name       = "infirmary"
-	desc       = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
-	icon       = 'icons/obj/signs/medical.dmi'
+/obj/structure/sign/department/cross/blue
 	icon_state = "bluecross"
 
-/obj/structure/sign/department/bluecross_2
-	name       = "infirmary"
-	desc       = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
-	icon       = 'icons/obj/signs/medical.dmi'
+/obj/structure/sign/department/cross/blue2
 	icon_state = "bluecross2"
 
-/obj/structure/sign/department/star_of_life
+/obj/structure/sign/department/cross/star_of_life
 	name       = "emergency"
 	desc       = "The blue six-pointed star with a rod of Asclepius is the intergalactic symbol of emergency medical services."
-	icon       = 'icons/obj/signs/medical.dmi'
 	icon_state = "staroflife"
+
+/obj/structure/sign/department/chapel
+	name       = "\improper CHAPEL"
+	desc       = "A sign labelling this area as the Chapel."
+	icon_state = "holy"

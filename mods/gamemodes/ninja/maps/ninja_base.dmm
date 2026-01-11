@@ -352,7 +352,7 @@
 /turf/unsimulated/floor/snow_plating,
 /area/map_template/ninja_dojo/dojo)
 "bo" = (
-/obj/effect/floor_decal/snow,
+/obj/effect/floor_decal/snow_floor,
 /turf/unsimulated/floor/snow_plating,
 /area/map_template/ninja_dojo/dojo)
 "bp" = (
@@ -445,7 +445,7 @@
 /turf/unsimulated/floor/freezer,
 /area/map_template/ninja_dojo/dojo)
 "bE" = (
-/obj/effect/floor_decal/snow,
+/obj/effect/floor_decal/snow_floor,
 /turf/unsimulated/floor/freezer,
 /area/map_template/ninja_dojo/dojo)
 "bF" = (
@@ -469,7 +469,7 @@
 /turf/unsimulated/floor/carpet,
 /area/map_template/ninja_dojo/dojo)
 "bJ" = (
-/obj/effect/floor_decal/snow,
+/obj/effect/floor_decal/snow_floor,
 /turf/unsimulated/floor/ice,
 /area/map_template/ninja_dojo/dojo)
 "bK" = (
@@ -484,7 +484,7 @@
 /turf/unsimulated/floor/wood,
 /area/map_template/ninja_dojo/dojo)
 "bM" = (
-/obj/effect/floor_decal/snow,
+/obj/effect/floor_decal/snow_floor,
 /obj/abstract/modpack_compat/aliumizer,
 /turf/unsimulated/floor/ice,
 /area/map_template/ninja_dojo/dojo)

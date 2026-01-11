@@ -1147,7 +1147,7 @@
 /turf/unsimulated/floor/steel,
 /area/centcom/holding)
 "aLJ" = (
-/obj/structure/sign/department/redcross,
+/obj/structure/sign/department/cross,
 /turf/unsimulated/wall,
 /area/centcom/holding)
 "aLK" = (

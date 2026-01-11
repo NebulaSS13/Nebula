@@ -339,7 +339,7 @@
 /area/icarus/vessel)
 "bu" = (
 /obj/machinery/door/firedoor,
-/obj/structure/sign/department/greencross{
+/obj/structure/sign/department/cross/green{
 	pixel_x = -30
 	},
 /turf/floor/tiled,
@@ -683,7 +683,7 @@
 "cx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/sign/department/greencross{
+/obj/structure/sign/department/cross/green{
 	pixel_x = -30
 	},
 /turf/floor/tiled,

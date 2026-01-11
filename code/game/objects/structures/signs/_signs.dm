@@ -87,7 +87,7 @@
 ///A wall mountable sign structure
 /obj/structure/sign
 	name               = "sign"
-	icon               = 'icons/obj/signs/warnings.dmi'
+	icon               = 'icons/obj/signs/signs.dmi'
 	anchored           = TRUE
 	opacity            = FALSE
 	density            = FALSE
@@ -134,3 +134,18 @@
 
 /obj/structure/sign/double/handle_default_screwdriver_attackby(mob/user, obj/item/screwdriver)
 	return FALSE
+
+/obj/structure/sign/clock
+	name       = "clock"
+	desc       = "It's a functionally useless print-out of a clock face."
+	icon_state = "clock"
+
+/obj/structure/sign/calendar
+	name       = "calendar"
+	desc       = "It's a functionally useless print-out of a calendar."
+	icon_state = "calendar"
+
+/obj/structure/sign/periodic_table
+	name       = "periodic table"
+	desc       = "It's an old, outdated copy of the periodic table of elements."
+	icon_state = "periodic"
