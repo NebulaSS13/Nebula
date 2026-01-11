@@ -5,8 +5,8 @@
 	ask_verb = "intones"
 	exclaim_verb = "chants"
 	colour = "cult"
-	key = "f"
-	flags = LANG_FLAG_RESTRICTED
+	language_key = "cult"
+	language_flags = LANG_FLAG_RESTRICTED
 	space_chance = 100
 	syllables = list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri", \
 		"orkan", "allaq", "sas'so", "c'arta", "forbici", "tarem", "n'ath", "reth", "sh'yro", "eth", "d'raggathnor", \
@@ -26,8 +26,8 @@
 	ask_verb = "intones"
 	exclaim_verb = "chants"
 	colour = "cult"
-	key = "y"
-	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
+	language_key = "occult"
+	language_flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
 
@@ -35,8 +35,8 @@
 	name = "Alium"
 	colour = "cult"
 	speech_verb = "hisses"
-	key = "c"
-	flags = LANG_FLAG_RESTRICTED
+	language_key = "alien"
+	language_flags = LANG_FLAG_RESTRICTED
 	syllables = list("qy","bok","mok","yok","dy","gly","ryl","byl","dok","forbici", "tarem", "n'ath", "reth", "sh'yro", "eth", "d'raggathnor","niii",
 	"d'rekkathnor", "khari'd", "gual'te", "ki","ki","ki","ki","ya","ta","wej","nym","assah","qwssa","nieasl","qyno","shaffar",
 	"eg","bog","voijs","nekks","bollos","qoulsan","borrksakja","neemen","aka","nikka","qyegno","shafra","beolas","Byno")

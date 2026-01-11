@@ -29,10 +29,10 @@
 		var/mob/living/M = src.loc
 		M.say(pick(heard_talk))
 
-/obj/item/clothing/mask/gas/poltergeist/hear_talk(mob/M, text)
+/obj/item/clothing/mask/gas/poltergeist/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
 	..()
 	if(heard_talk.len > max_stored_messages)
 		heard_talk.Remove(pick(heard_talk))
-	heard_talk.Add(text)
+	heard_talk.Add(istype(phrases) ? phrases.unformatted_message : phrases)
 	if(isliving(src.loc) && world.time - last_twitch > 50)
 		last_twitch = world.time

@@ -234,7 +234,7 @@
 /decl/human_examination/pose/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
 	if (!source.pose)
 		return
-	var/treated_pose = trim(source.handle_autopunctuation(source.pose))
+	var/treated_pose = trim(handle_autopunctuation(source.pose))
 	// if the pose starts with is, are, do, does, or doesn't, apply basic verb correction
 	if(starts_with(treated_pose, "is ")) // if the pose starts with is
 		treated_pose = "[pronouns.is] [copytext(treated_pose, 1, 4)]"
@@ -248,7 +248,7 @@
 		treated_pose = "[pronouns.does]n't [copytext(treated_pose, 1, 9)]"
 	else if(starts_with(treated_pose, "don't "))
 		treated_pose = "[pronouns.does]n't [copytext(treated_pose, 1, 7)]"
-	return "[pronouns.He] [source.handle_autopunctuation(source.pose)]"
+	return "[pronouns.He] [handle_autopunctuation(source.pose)]"
 
 /decl/human_examination/comments
 	priority = /decl/human_examination/pose::priority + 99 // OOC info should show up pretty late.

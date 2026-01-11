@@ -133,19 +133,9 @@
 /obj/proc/hides_under_flooring()
 	return level == LEVEL_BELOW_PLATING
 
-/obj/proc/hear_talk(mob/M, text, verb, decl/language/speaking)
+/obj/proc/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
 	if(talking_atom)
-		talking_atom.catchMessage(text, M)
-/*
-	var/mob/mo = locate(/mob) in src
-	if(mo)
-		var/rendered = "<span class='game say'><span class='name'>[M.name]: </span> <span class='message'>[text]</span></span>"
-		mo.show_message(rendered, 2)
-		*/
-	return
-
-/obj/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
-	return
+		talking_atom.catchMessage(istype(phrases) ? phrases.unformatted_message : phrases, speaker)
 
 /obj/proc/damage_flags()
 	. = 0

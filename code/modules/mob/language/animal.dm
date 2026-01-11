@@ -2,7 +2,7 @@
 	name = "Animal Noises" // translate them!
 	desc = "Some varieties of animal can communicate amongst themselves, apparently."
 	colour = "say_quote"
-	key = "a"
+	language_key = "awoo"
 	shorthand = "A"
 	hidden_from_codex = TRUE
 
@@ -23,7 +23,7 @@
 			return TRUE
 	return FALSE
 
-/decl/language/animal/scramble(mob/living/speaker, input, list/known_languages)
+/decl/language/animal/scramble(mob/living/speaker, input, list/known_languages, capitalize_string)
 	if(istype(speaker.ai) && length(speaker.ai.emote_speech))
 		return DEFAULTPICK(speaker.ai.emote_speech, "...")
 	return "..."

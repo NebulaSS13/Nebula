@@ -645,7 +645,7 @@
 	- `range?`: The number of tiles away the message will be visible from. Default: world.view
 	- `check_ghosts?`: Set to `TRUE` if ghosts should see the message if their preferences allow
 */
-/atom/proc/visible_message(var/message, var/self_message, var/blind_message, var/range = world.view, var/check_ghosts = null)
+/atom/proc/visible_message(var/message, var/self_message, var/blind_message, var/range = world.view, var/check_ghosts = null, atom/source)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
@@ -653,14 +653,14 @@
 
 	for(var/o in objs)
 		var/obj/O = o
-		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE, source = source)
 
 	for(var/m in mobs)
 		var/mob/M = m
 		if(M.see_invisible >= invisibility)
-			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE, source = source)
 		else if(blind_message)
-			M.show_message(blind_message, AUDIBLE_MESSAGE)
+			M.show_message(blind_message, AUDIBLE_MESSAGE, source = source)
 
 /**
 	Show a message to all mobs and objects in earshot of this atom
@@ -673,7 +673,7 @@
 	- `check_ghosts?`: TRUE if ghosts should hear the message if their preferences allow
 	- `radio_message?`: The string to send over radios
 */
-/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance = world.view, var/check_ghosts = null, var/radio_message)
+/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance = world.view, var/check_ghosts = null, var/radio_message, atom/source)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
@@ -681,10 +681,10 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
-		M.show_message(message,2,deaf_message,1)
+		M.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE, source = source)
 	for(var/o in objs)
 		var/obj/O = o
-		O.show_message(message,2,deaf_message,1)
+		O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE, source = source)
 
 /**
 	Attempt to drop this atom onto the destination.
@@ -1085,3 +1085,10 @@
 // Test for if stepping on a tile containing this obj is safe to do, used for things like landmines and cliffs.
 /atom/proc/is_safe_to_step(mob/living/stepper)
 	return TRUE
+
+//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
+/atom/proc/show_message(msg, type, alt, alt_type, atom/source)
+	return
+
+/atom/proc/see_signlang(message, verb = "gestures", decl/language/language, mob/speaker, prefix)
+	return

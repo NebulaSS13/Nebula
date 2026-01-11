@@ -181,19 +181,22 @@
 	var/list/hearturfs = list()
 	FOR_DVIEW(var/turf/T, range, center, INVISIBILITY_MAXIMUM)
 		hearturfs[T] = TRUE
-		for(var/mob/M in T)
-			mobs += M
+		if(islist(mobs))
+			for(var/mob/M in T)
+				mobs += M
 	END_FOR_DVIEW
 
-	for(var/mob/M in global.player_list)
-		if(check_ghosts && M.stat == DEAD && M.get_preference_value(check_ghosts) != PREF_NEARBY)
-			mobs |= M
-		else if(hearturfs[get_turf(M)])
-			mobs |= M
+	if(islist(mobs))
+		for(var/mob/M in global.player_list)
+			if(check_ghosts && M.stat == DEAD && M.get_preference_value(check_ghosts) != PREF_NEARBY)
+				mobs |= M
+			else if(hearturfs[get_turf(M)])
+				mobs |= M
 
-	for(var/obj/O in global.listening_objects)
-		if(hearturfs[get_turf(O)])
-			objs += O
+	if(islist(objs))
+		for(var/obj/O in global.listening_objects)
+			if(hearturfs[get_turf(O)])
+				objs += O
 
 
 

@@ -13,11 +13,20 @@
 	for(var/lang in pref.alternate_languages)
 		character.add_language(lang)
 
+/datum/category_item/player_setup_item/background/languages/proc/get_language_by_name(var/language_name)
+	var/static/list/languages_by_name
+	if(!languages_by_name)
+		languages_by_name = list()
+		for(var/decl/language/lang in decls_repository.get_decls_of_subtype_unassociated(/decl/language))
+			if(lang.name)
+				languages_by_name[lang.name] = lang
+	. = languages_by_name[language_name]
+
 /datum/category_item/player_setup_item/background/languages/load_character(datum/pref_record_reader/R)
 	pref.alternate_languages = list()
 	var/list/language_names = R.read("language")
 	for(var/lang in language_names)
-		var/decl/language/lang_decl = SSlore.get_language_by_name(lang)
+		var/decl/language/lang_decl = get_language_by_name(lang)
 		if(istype(lang_decl))
 			pref.alternate_languages |= lang_decl.type
 
@@ -93,17 +102,17 @@
 	for(var/thing in language_types)
 		var/decl/language/lang = language_types[thing]
 		// Abstract, forbidden and restricted languages aren't supposed to be available to anyone in chargen.
-		if(lang.flags & (LANG_FLAG_FORBIDDEN|LANG_FLAG_RESTRICTED))
+		if(lang.language_flags & (LANG_FLAG_FORBIDDEN|LANG_FLAG_RESTRICTED))
 			continue
 		// Admin don't need to worry about whitelisted checks or background datums, give them everything.
 		// Non-whitelisted languages should be handled by background datums.
-		if(user.has_admin_rights() || ((lang.flags & LANG_FLAG_WHITELISTED) && is_alien_whitelisted(user, lang)))
+		if(user.has_admin_rights() || ((lang.language_flags & LANG_FLAG_WHITELISTED) && is_alien_whitelisted(user, lang)))
 			allowed_languages[thing] = TRUE
 
 /datum/category_item/player_setup_item/background/languages/proc/is_allowed_language(var/mob/user, var/decl/language/lang)
 	if(ispath(lang, /decl/language))
 		lang = GET_DECL(lang)
-	if(!istype(lang) || (lang.flags & LANG_FLAG_FORBIDDEN))
+	if(!istype(lang) || (lang.language_flags & LANG_FLAG_FORBIDDEN))
 		return FALSE
 	if(isnull(allowed_languages) || isnull(free_languages))
 		rebuild_language_cache(user)

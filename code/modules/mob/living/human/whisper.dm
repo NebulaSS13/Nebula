@@ -20,9 +20,4 @@
 	if(get_id_name("Unknown") == GetVoice())
 		SetName(get_id_name("Unknown"))
 
-	whisper_say(message)
-
-
-//This is used by both the whisper verb and human/say() to handle whispering
-/mob/living/human/proc/whisper_say(var/message, var/decl/language/speaking = null, var/verb="whispers")
-	say(message, speaking, verb, whispering = TRUE)
+	say(list(message, get_default_language()), whispering = TRUE)

@@ -6,8 +6,8 @@
 	ask_verb = "asks"
 	exclaim_verb = "exclaims"
 	colour = "indian"
-	key = "m"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "kobaloi"
+	language_flags = LANG_FLAG_WHITELISTED
 	space_chance = 100 // We generate entire words rather than syllables, so we always need a space.
 
 	// Consonant and vowel lists adapted from https://dwarffortresswiki.org/index.php/DF2014:Kobold_language

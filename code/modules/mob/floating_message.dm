@@ -15,48 +15,39 @@ var/global/list/floating_chat_colors = list()
 /atom/movable
 	var/list/stored_chat_text
 
-/atom/movable/proc/animate_chat(message, decl/language/language, small, list/show_to, duration = CHAT_MESSAGE_LIFESPAN)
+/atom/movable/proc/animate_chat(datum/speech/phrases, small, list/show_to, stars, duration = CHAT_MESSAGE_LIFESPAN)
 	set waitfor = FALSE
 
-	/// Get rid of any URL schemes that might cause BYOND to automatically wrap something in an anchor tag
-	var/static/regex/url_scheme = new(@"[A-Za-z][A-Za-z0-9+-\.]*:\/\/", "g")
-	message = replacetext(message, url_scheme, "")
-
-	var/static/regex/html_metachars = new(@"&[A-Za-z]{1,7};", "g")
-	message = replacetext(message, html_metachars, "")
-
-	//additional style params for the message
+	// Pre-calculate style params for the message.
 	var/style
 	var/fontsize = 7
 	var/limit = 120
-
 	if(small)
 		fontsize = 6
-
-	if(copytext_char(message, length_char(message) - 1) == "!!")
+	if(copytext_char(phrases.unformatted_message, length_char(phrases.unformatted_message) - 1) == "!!")
 		fontsize = 8
 		limit = 60
 		style += "font-weight: bold;"
-
-	if(length_char(message) > limit)
-		message = "[copytext_char(message, 1, limit)]..."
-
 	if(!global.floating_chat_colors[name])
 		global.floating_chat_colors[name] = get_random_colour(0, 160, 230)
 	style += "color: [global.floating_chat_colors[name]];"
 
-	// create 2 messages, one that appears if you know the language, and one that appears when you don't know the language
-	var/image/understood = generate_floating_text(src, capitalize(message), style, fontsize, duration, show_to)
-	var/image/gibberish = language ? generate_floating_text(src, language.scramble(src, message), style, fontsize, duration, show_to) : understood
-
 	for(var/client/C in show_to)
-		if(!C.mob.is_deaf() && C.get_preference_value(/datum/client_preference/floating_messages) == PREF_SHOW)
-			if(C.mob.say_understands(src, language))
-				C.images += understood
-			else
-				C.images += gibberish
+		if(C.mob.is_deaf() || C.get_preference_value(/datum/client_preference/floating_messages) != PREF_SHOW)
+			continue
+		var/list/messages = phrases.compile_for_listener(C.mob)
+		var/message = capitalize(messages[1])
+		/// Get rid of any URL schemes that might cause BYOND to automatically wrap something in an anchor tag
+		var/static/regex/url_scheme = new(@"[A-Za-z][A-Za-z0-9+-\.]*:\/\/", "g")
+		message = replacetext(message, url_scheme, "")
+		var/static/regex/html_metachars = new(@"&[A-Za-z]{1,7};", "g")
+		message = replacetext(message, html_metachars, "")
+		if(length_char(message) > limit)
+			message = "[copytext_char(message, 1, limit)]..."
+		C.images += generate_floating_text(src, message, style, fontsize, duration, show_to)
 
 /proc/generate_floating_text(atom/movable/holder, message, style, size, duration, show_to)
+
 	var/image/I = image(null, get_atom_on_turf(holder))
 	I.plane = HUD_PLANE
 	I.layer = HUD_ABOVE_ITEM_LAYER
@@ -69,7 +60,7 @@ var/global/list/floating_chat_colors = list()
 
 	style = "font-family: 'Small Fonts'; -dm-text-outline: 1px black; font-size: [size]px; line-height: 1.1; [style]"
 	I.maptext = "<center><span style=\"[style]\">[message]</span></center>"
-	animate(I, CHAT_MESSAGE_SPAWN_TIME, alpha = 255, pixel_z = 16)
+	animate(I, CHAT_MESSAGE_SPAWN_TIME, alpha = 255, pixel_z = I.pixel_z + 16)
 
 	var/move_up_z = 10
 	for(var/image/old in holder.stored_chat_text)

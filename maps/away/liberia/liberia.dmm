@@ -1126,7 +1126,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/machinery/hologram/holopad/longrange,
+/obj/machinery/holopad/longrange,
 /turf/floor/carpet/blue2,
 /area/liberia/mule)
 "cf" = (
@@ -1898,7 +1898,7 @@
 /turf/floor/tiled/dark,
 /area/liberia/bridge)
 "dv" = (
-/obj/machinery/hologram/holopad/longrange,
+/obj/machinery/holopad/longrange,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/effect/overmap/visitable/ship/liberia,
 /turf/floor/tiled/dark/monotile,

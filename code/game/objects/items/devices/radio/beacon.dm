@@ -24,7 +24,7 @@ var/global/list/radio_beacons = list()
 /obj/item/radio/beacon/toggle_panel(var/mob/user)
 	return FALSE
 
-/obj/item/radio/beacon/hear_talk()
+/obj/item/radio/beacon/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
 	return
 
 /obj/item/radio/beacon/emp_act(severity)

@@ -336,7 +336,7 @@ var/global/list/pai_cards = list()
 		else
 			qdel(src)
 
-/obj/item/paicard/show_message(msg, type, alt, alt_type)
+/obj/item/paicard/show_message(msg, type, alt, alt_type, atom/source)
 	if(pai && pai.client)
 		var/rendered = "<span class='message'>[msg]</span>"
 		pai.show_message(rendered, type)

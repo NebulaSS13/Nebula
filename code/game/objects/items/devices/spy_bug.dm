@@ -45,9 +45,8 @@
 		return TRUE
 	return ..()
 
-/obj/item/spy_bug/hear_talk(mob/M, var/msg, verb, decl/language/speaking)
-	radio.hear_talk(M, msg, speaking)
-
+/obj/item/spy_bug/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+	radio.hear_talk(speaker, phrases, verb, stars, force_language)
 
 /obj/item/spy_monitor
 	name = "\improper PDA"
@@ -138,8 +137,8 @@
 		return -1
 	return 0
 
-/obj/item/spy_monitor/hear_talk(mob/M, var/msg, verb, decl/language/speaking)
-	return radio.hear_talk(M, msg, speaking)
+/obj/item/spy_monitor/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+	return radio.hear_talk(speaker, phrases, verb, stars, force_language)
 
 /obj/item/radio/spy
 	listening = 0

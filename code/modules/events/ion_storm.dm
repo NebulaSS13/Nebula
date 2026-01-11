@@ -139,16 +139,16 @@
 
 /datum/event/ionstorm/proc/get_random_language(var/mob/living/silicon/S)
 	var/list/languages = S.speech_synthesizer_langs.Copy()
-	for(var/decl/language/L in languages)
-		if(L.type == S.default_language)
-			languages -= L
+	for(var/decl/language/language in languages)
+		if(language.type == S.default_language)
+			languages -= language
 		// Also removing any languages that won't work well over radio.
 		// A synth is unlikely to have any besides Binary, but we're playing it safe
-		else if(L.flags & (LANG_FLAG_HIVEMIND|LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG))
-			languages -= L
+		else if(language.language_flags & (LANG_FLAG_HIVEMIND|LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG))
+			languages -= language
 
 	if(length(languages))
-		var/decl/language/L = pick(languages)
-		return L.name
+		var/decl/language/language = pick(languages)
+		return language.name
 	else // Highly unlikely but it is a failsafe fallback.
 		return "gibberish"

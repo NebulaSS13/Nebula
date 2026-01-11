@@ -15,10 +15,7 @@
 		return FALSE
 	return TRUE
 
-/proc/broadcast_analog_radio_message(datum/radio_frequency/connection, mob/speaker,
-	obj/item/radio/radio, message, intercom_only = FALSE,
-	hard_to_hear, list/z_levels, verbage = "says", decl/language/speaking = null, list/secured
-	)
+/proc/broadcast_analog_radio_message(datum/radio_frequency/connection, mob/speaker, obj/item/radio/radio, datum/speech/phrases, intercom_only = FALSE, hard_to_hear, list/z_levels, verbage = "says", list/secured)
 
 	var/list/radios = list(radio)
 	var/list/radios_insecure = list()
@@ -53,13 +50,11 @@
 
 	// Send to all recipients
 	for (var/mob/receiver in receive)
-		receiver.hear_radio(message, verbage, speaking, formatted_msg, part_b, part_c, speaker, hard_to_hear, send_name)
+		receiver.hear_radio(phrases, verbage, formatted_msg, part_b, part_c, speaker, hard_to_hear, send_name)
 
 	if(length(receive_insecure))
-		var/decl/language/machine/noise_lang = GET_DECL(/decl/language/machine)
-		var/scrambled_message = noise_lang.scramble(null, message, null)
 		for (var/mob/receiver in receive_insecure)
-			receiver.hear_radio(scrambled_message, verbage, speaking, formatted_msg, part_b, part_c, speaker, hard_to_hear, "unknown")
+			receiver.hear_radio(phrases, verbage, formatted_msg, part_b, part_c, speaker, hard_to_hear, "unknown", scramble = TRUE)
 
 	return TRUE
 

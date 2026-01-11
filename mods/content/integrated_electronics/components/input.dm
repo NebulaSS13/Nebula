@@ -828,18 +828,19 @@
 	. = ..()
 	global.listening_objects += src
 
-/obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M, text, verb, decl/language/speaking)
-	var/translated = TRUE
-	if(M && text)
-		if(speaking && !speaking.machine_understands)
-			text = speaking.scramble(M, text)
-			translated = FALSE
-		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
-		set_pin_data(IC_OUTPUT, 2, text)
+/obj/item/integrated_circuit/input/microphone/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+
+	if(speaker)
+		set_pin_data(IC_OUTPUT, 1, speaker.GetVoice())
+		if(istype(phrases))
+			var/list/messages = phrases.compile_for_listener(src, machine_listener = TRUE)
+			set_pin_data(IC_OUTPUT, 2, messages[1])
+		else
+			set_pin_data(IC_OUTPUT, 2, phrases)
 
 	push_data()
 	activate_pin(1)
-	if(translated && !(speaking.type == /decl/language/human/common))
+	if(istype(phrases) && phrases.language.type != /decl/language/human/common)
 		activate_pin(2)
 
 /obj/item/integrated_circuit/input/sensor

@@ -91,13 +91,13 @@
 	frequency = new_frequency
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
-/obj/item/implant/explosive/hear_talk(mob/M, msg)
-	hear(msg)
+/obj/item/implant/explosive/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+	hear(phrases)
 
-/obj/item/implant/explosive/hear(var/msg)
+/obj/item/implant/explosive/hear(datum/speech/phrases)
 	if(!phrase)
 		return
-	if(findtext(sanitize_phrase(msg),phrase))
+	if(findtext(sanitize_phrase(istype(phrases) ? phrases.unformatted_message : phrases), phrase))
 		activate()
 		qdel(src)
 

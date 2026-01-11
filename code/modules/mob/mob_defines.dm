@@ -134,7 +134,7 @@
 
 	// Offset the overhead text if necessary.
 	var/offset_overhead_text_x = 0
-	var/offset_overhead_text_y = 0
+	var/offset_overhead_text_y = 24
 
 	/// What bodypart are we currently targetting?
 	var/selected_zone = BP_CHEST

@@ -207,16 +207,16 @@
 		var/decl/language/lang = GET_DECL(default_language)
 		dat += "Current default language: [lang.name] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
-	for(var/decl/language/L in languages)
-		if(!(L.flags & LANG_FLAG_NONGLOBAL))
+	for(var/decl/language/language in languages)
+		if(!(language.language_flags & LANG_FLAG_NONGLOBAL))
 			var/default_str
-			if(L == default_language)
+			if(language == default_language)
 				default_str = " - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a>"
 			else
-				default_str = " - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a>"
+				default_str = " - <a href='byond://?src=\ref[src];default_lang=\ref[language]'>set default</a>"
 
-			var/synth = (L in speech_synthesizer_langs)
-			dat += "<b>[L.name] ([get_language_prefix()][L.key])</b>[synth ? default_str : null]<br/>Speech Synthesizer: <i>[synth ? "YES" : "NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"
+			var/synth = (language in speech_synthesizer_langs)
+			dat += "<b>[language.name] ([get_language_prefix()][language.language_key])</b>[synth ? default_str : null]<br/>Speech Synthesizer: <i>[synth ? "YES" : "NOT SUPPORTED"]</i><br/>[language.desc]<br/><br/>"
 
 	show_browser(src, dat, "window=checklanguage")
 	return

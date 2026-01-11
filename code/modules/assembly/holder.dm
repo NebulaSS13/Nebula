@@ -168,11 +168,9 @@
 		qdel(src)
 	return
 
-/obj/item/assembly_holder/hear_talk(mob/living/M, msg, verb, decl/language/speaking)
-	if(a_right)
-		a_right.hear_talk(M,msg,verb,speaking)
-	if(a_left)
-		a_left.hear_talk(M,msg,verb,speaking)
+/obj/item/assembly_holder/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+	a_left?.hear_talk( speaker, phrases, verb, stars, force_language)
+	a_right?.hear_talk(speaker, phrases, verb, stars, force_language)
 
 /obj/item/assembly_holder/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()

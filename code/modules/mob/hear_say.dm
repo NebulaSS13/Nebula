@@ -1,6 +1,5 @@
 // At minimum every mob has a hear_say proc.
-
-/mob/proc/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/proc/hear_say(datum/speech/phrases, verb = "says", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, stars = FALSE, atom/relayed_by)
 	if(!client)
 		return
 
@@ -9,7 +8,7 @@
 			//Or someone snoring.  So we make it where they won't hear it.
 		return
 
-	if(language && (language.flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG)))
+	if(phrases.language?.language_flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG))
 		sound_vol = 0
 		speech_sound = null
 
@@ -25,23 +24,12 @@
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
+	var/list/messages = phrases.compile_for_listener(src)
 	if(HAS_STATUS(src, STAT_ASLEEP) || stat == UNCONSCIOUS)
-		hear_sleep(message)
+		hear_sleep(messages[1])
 		return
 
-	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
-	if (language && (language.flags & LANG_FLAG_NONVERBAL))
-		if (!speaker || is_blind() || !(speaker in view(src)))
-			message = stars(message)
-
-	var/understands_language = say_understands(speaker, language)
-	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for INNATE languages
-		if(!understands_language)
-			if(language)
-				message = language.scramble(speaker, message, languages)
-			else
-				message = stars(message)
-
+	var/message = messages[2]
 	var/speaker_name = speaker?.GetVoice() || "Unknown"
 	if(italics)
 		message = "<i>[message]</i>"
@@ -54,35 +42,42 @@
 		if(get_preference_value(/datum/client_preference/ghost_ears) == PREF_ALL_SPEECH && (speaker in view(src)))
 			message = "<b>[message]</b>"
 
-	if(is_deaf() || get_sound_volume_multiplier() < 0.2)
-		if(!language || !(language.flags & LANG_FLAG_INNATE)) // LANG_FLAG_INNATE is the flag for audible-emote-language, so we don't want to show an "x talks but you cannot hear them" message if it's set
-			if(speaker == src)
-				to_chat(src, SPAN_WARNING("You cannot hear yourself speak!"))
-			else if(!is_blind())
-				var/decl/pronouns/pronouns = speaker.get_pronouns()
-				to_chat(src, "<span class='name'>\The [speaker_name]</span> talks but you cannot hear [pronouns.him].")
+	// LANG_FLAG_INNATE is the flag for audible-emote-language, so we don't want to show an "x talks but you cannot hear them" message if it's set
+	if((is_deaf() || get_sound_volume_multiplier() < 0.2) && (!phrases.language || !(phrases.language.language_flags & LANG_FLAG_INNATE)))
+		if(speaker == src)
+			to_chat(src, SPAN_WARNING("You cannot hear yourself speak!"))
+		else if(!is_blind())
+			var/decl/pronouns/pronouns = speaker.get_pronouns()
+			to_chat(src, "<span class='name'>\The [speaker_name]</span> talks but you cannot hear [pronouns.him].")
+		return
+
+	var/nverb = phrases.force_verb || verb
+	// This is kinda gross now we have mixed languages, but the alternative is just removing the language hint.
+	if (phrases.language)
+		if (say_understands(speaker, phrases.language))
+			var/skip = FALSE
+			if (isliving(src))
+				var/mob/living/L = src
+				skip = L.default_language == phrases.language
+			if (!skip)
+				switch(src.get_preference_value(/datum/client_preference/language_display))
+					if (PREF_FULL)
+						nverb = "[verb] in [phrases.language.name]"
+					if(PREF_SHORTHAND)
+						nverb = "[verb] ([phrases.language.shorthand])"
+					if(PREF_OFF)
+						nverb = verb
+
+	var/msg
+	if(istype(relayed_by))
+		msg = "<span class='game say'>[track]<span class='name'><i><small>\icon[relayed_by] [capitalize(strip_improper(relayed_by.name))] relayed:</small></i> \The [speaker_name]</span> <span class=\"body\">[nverb], <span class='message'>\"[message]\"</span></span></span>"
 	else
-		if (language)
-			var/nverb = verb
-			if (understands_language)
-				var/skip = FALSE
-				if (isliving(src))
-					var/mob/living/L = src
-					skip = L.default_language == language
-				if (!skip)
-					switch(src.get_preference_value(/datum/client_preference/language_display))
-						if(PREF_FULL) // Full language name
-							nverb = "[verb] in [language.name]"
-						if(PREF_SHORTHAND) //Shorthand codes
-							nverb = "[verb] ([language.shorthand])"
-						if(PREF_OFF)//Regular output
-							nverb = verb
-			on_hear_say("<span class='game say'>[track]<span class='name'>\The [speaker_name]</span> [language.format_message(message, nverb)]</span>")
-		else
-			on_hear_say("<span class='game say'>[track]<span class='name'>\The [speaker_name]</span> [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
-		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
-			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
-			src.playsound_local(source, speech_sound, sound_vol, 1)
+		msg = "<span class='game say'>[track]<span class='name'>\The [speaker_name]</span> <span class=\"body\">[nverb], <span class='message'>\"[message]\"</span></span></span>"
+
+	on_hear_say(msg)
+	if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
+		var/turf/source = speaker? get_turf(speaker) : get_turf(src)
+		src.playsound_local(source, speech_sound, sound_vol, 1)
 
 /mob/proc/on_hear_say(var/message)
 	to_chat(src, message)
@@ -91,48 +86,25 @@
 	var/time = say_timestamp()
 	to_chat(src, "[time] [message]")
 
-/mob/proc/hear_radio(var/message, var/verb="says", var/decl/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="", var/vsource)
+/mob/proc/hear_radio(datum/speech/phrases, verb = "says", part_a, part_b, part_c, mob/speaker, hard_to_hear = FALSE, vname = "", vsource, scramble = FALSE)
 
 	if(!client)
 		return
 
+	if(phrases.language && (phrases.language.language_flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG|LANG_FLAG_HIVEMIND)))
+		return // we should not have gotten this far
+
+	var/list/messages = phrases.compile_for_listener(src, skip_non_verbal = TRUE, scramble = scramble, hard_to_hear = hard_to_hear)
 	if(HAS_STATUS(src, STAT_ASLEEP) || stat == UNCONSCIOUS) //If unconscious or sleeping
-		hear_sleep(message)
+		hear_sleep(messages[1])
 		return
 
 	var/track = null
-
-	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
-	if (language && (language.flags & LANG_FLAG_NONVERBAL))
-		if (!speaker || is_blind() || !(speaker in view(src)))
-			message = stars(message)
-
-	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for LANG_FLAG_INNATE languages
-		if(!say_understands(speaker,language))
-			if(isanimal(speaker))
-				if(LAZYLEN(speaker.ai?.emote_speech))
-					message = pick(speaker.ai.emote_speech)
-				else
-					return
-			else
-				if(language)
-					message = language.scramble(speaker, message, languages)
-				else
-					message = stars(message)
-
-		if(hard_to_hear)
-			if(hard_to_hear <= 5)
-				message = stars(message)
-			else // Used for compression
-				message = RadioChat(null, message, 80, 1+(hard_to_hear/10))
-
 	var/speaker_name = vname ? vname : speaker.name
-
 	if(ishuman(speaker))
 		var/mob/living/human/H = speaker
 		if(H.voice && !vname)
 			speaker_name = H.voice
-
 	if(hard_to_hear)
 		speaker_name = "unknown"
 
@@ -192,33 +164,32 @@
 		else
 			track = "[speaker_name]"
 
-	var/formatted
-	if (language)
-		var/nverb = verb
-		if (say_understands(speaker, language))
+	var/nverb = phrases.force_verb || verb
+	// This is kinda gross now we have mixed languages, but the alternative is just removing the language hint.
+	if (phrases.language)
+		if (say_understands(speaker, phrases.language))
 			var/skip = FALSE
 			if (isliving(src))
 				var/mob/living/L = src
-				skip = L.default_language == language
+				skip = L.default_language == phrases.language
 			if (!skip)
 				switch(src.get_preference_value(/datum/client_preference/language_display))
 					if (PREF_FULL)
-						nverb = "[verb] in [language.name]"
+						nverb = "[verb] in [phrases.language.name]"
 					if(PREF_SHORTHAND)
-						nverb = "[verb] ([language.shorthand])"
+						nverb = "[verb] ([phrases.language.shorthand])"
 					if(PREF_OFF)
 						nverb = verb
-		formatted = language.format_message_radio(message, nverb)
-	else
-		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
+
+	var/message = "[nverb], <span class=\"body\">\"[messages[2]]\"</span>"
 	if(has_genetic_condition(GENE_COND_DEAFENED) || GET_STATUS(src, STAT_DEAF))
 		var/mob/living/human/H = src
 		if(istype(H) && H.has_headset_in_ears() && prob(20))
 			to_chat(src, SPAN_WARNING("You feel your headset vibrate but can hear nothing from it!"))
 	else if(vsource)
-		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted, " <small>\[[vsource]\]</small>")
+		on_hear_radio(part_a, speaker_name, track, part_b, part_c, message, " <small>\[[vsource]\]</small>")
 	else
-		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted, null)
+		on_hear_radio(part_a, speaker_name, track, part_b, part_c, message, null)
 
 /proc/say_timestamp()
 	return "<span class='say_quote'>\[[stationtime2text()]\]</span>"
@@ -237,7 +208,8 @@
 	var/time = say_timestamp()
 	to_chat(src, "[time][part_a][track][vsource][part_b][formatted][part_c]")
 
-/mob/proc/hear_signlang(var/message, var/verb = "gestures", var/decl/language/language, var/mob/speaker = null)
+/mob/see_signlang(message, verb = "gestures", decl/language/language, mob/speaker, prefix)
+
 	if(!client)
 		return
 
@@ -265,12 +237,15 @@
 			else        	adverb = " a very lengthy message"
 		message = "<B>[speaker]</B> [verb][adverb]."
 
+	if(prefix)
+		message = "[prefix] [message]"
+
 	if(src.status_flags & PASSEMOTES)
-		for(var/obj/item/holder/H in src.contents)
+		for(var/obj/item/holder/H in contents)
 			H.show_message(message)
-		for(var/mob/living/M in src.contents)
+		for(var/mob/living/M in contents)
 			M.show_message(message)
-	src.show_message(message)
+	show_message(message)
 
 /mob/proc/hear_sleep(var/message)
 	if (is_deaf())

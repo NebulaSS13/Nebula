@@ -444,13 +444,13 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		return global.using_map.default_species
 	return chosen_species.name
 
-/mob/new_player/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/italics = 0, var/mob/speaker = null)
+/mob/new_player/hear_say(datum/speech/phrases, verb = "says", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, stars = FALSE, atom/relayed_by)
 	return
 
-/mob/new_player/hear_radio(var/message, var/verb="says", var/decl/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="", var/vsource)
+/mob/new_player/hear_radio(datum/speech/phrases, verb = "says", part_a, part_b, part_c, mob/speaker, hard_to_hear = FALSE, vname = "", vsource, scramble = FALSE)
 	return
 
-/mob/new_player/show_message(msg, type, alt, alt_type)
+/mob/new_player/show_message(msg, type, alt, alt_type, atom/source)
 	return
 
 /mob/new_player/MayRespawn()
@@ -459,8 +459,8 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 /mob/new_player/touch_map_edge(var/overmap_id = OVERMAP_ID_SPACE)
 	return
 
-/mob/new_player/say(var/message)
-	sanitize_and_communicate(/decl/communication_channel/ooc, client, message)
+/mob/new_player/say(datum/speech/phrases, verb = "says", whispering)
+	sanitize_and_communicate(/decl/communication_channel/ooc, client, istype(phrases) ? phrases.unformatted_message : phrases)
 
 /mob/new_player/verb/next_lobby_track()
 	set name = "Play Different Lobby Track"

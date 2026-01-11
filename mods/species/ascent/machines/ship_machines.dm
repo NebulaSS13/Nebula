@@ -1,7 +1,7 @@
 MANTIDIFY(/obj/machinery/apc/hyper, "mantid power node", "power controller")
 MANTIDIFY(/obj/machinery/atmospherics/unary/vent_pump/on, "mantid atmosphere outlet", "vent")
 MANTIDIFY(/obj/machinery/atmospherics/unary/vent_scrubber/on, "mantid atmosphere intake", "scrubber")
-MANTIDIFY(/obj/machinery/hologram/holopad/longrange, "mantid holopad", "holopad")
+MANTIDIFY(/obj/machinery/holopad/longrange, "mantid holopad", "holopad")
 MANTIDIFY(/obj/machinery/optable, "mantid operating table", "operating table")
 MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 
@@ -80,7 +80,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 	base_type = /obj/machinery/fabricator
 	construct_state = /decl/machine_construction/default/no_deconstruct
 
-/obj/machinery/hologram/holopad/longrange/ascent
+/obj/machinery/holopad/longrange/ascent
 	req_access = list(access_ascent)
 
 /obj/effect/catwalk_plated/ascent
