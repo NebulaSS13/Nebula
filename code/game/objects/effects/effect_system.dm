@@ -281,6 +281,59 @@ steam.start() -- spawns the effect
 	M.cough()
 
 /////////////////////////////////////////////
+// 'Elemental' smoke
+/////////////////////////////////////////////
+/obj/effect/effect/smoke/elemental
+	name = "cloud"
+	desc = "A cloud of some kind that seems really generic and boring."
+	opacity = FALSE
+	abstract_type = /obj/effect/effect/smoke/elemental
+	var/strength = 5 // How much damage to do inside each affect()
+
+/obj/effect/effect/smoke/elemental/Initialize()
+	START_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/effect/effect/smoke/elemental/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/effect/effect/smoke/elemental/Move(atom/old_loc, direction, forced = FALSE)
+	. = ..()
+	if(.)
+		for(var/mob/living/victim in range(1, src))
+			affect(victim)
+
+/obj/effect/effect/smoke/elemental/Process()
+	for(var/mob/living/victim in range(1, src))
+		affect(victim)
+
+/obj/effect/effect/smoke/elemental/proc/affect(mob/living/victim)
+	return
+
+/obj/effect/effect/smoke/elemental/fire
+	name = "burning cloud"
+	desc = "A cloud of something that is on fire."
+	color = COLOR_ORANGE
+	light_color = "#ff0000"
+	light_range = 2
+	light_power = 5
+
+/obj/effect/effect/smoke/elemental/fire/affect(mob/living/victim)
+	victim.take_damage(strength, BURN)
+	victim.ignite_fire()
+
+/obj/effect/effect/smoke/elemental/mist
+	name = "misty cloud"
+	desc = "A cloud filled with water vapor."
+	color = "#ccffff"
+	alpha = 128
+	strength = 1
+
+/obj/effect/effect/smoke/elemental/mist/affect(mob/living/victim)
+	victim.extinguish_fire()
+
+/////////////////////////////////////////////
 // Mustard Gas
 /////////////////////////////////////////////
 
@@ -358,6 +411,11 @@ steam.start() -- spawns the effect
 /datum/effect/effect/system/smoke_spread/sleepy
 	smoke_type = /obj/effect/effect/smoke/sleepy
 
+/datum/effect/effect/system/smoke_spread/fire
+	smoke_type = /obj/effect/effect/smoke/elemental/fire
+
+/datum/effect/effect/system/smoke_spread/mist
+	smoke_type = /obj/effect/effect/smoke/elemental/mist
 
 /datum/effect/effect/system/smoke_spread/mustard
 	smoke_type = /obj/effect/effect/smoke/mustard
