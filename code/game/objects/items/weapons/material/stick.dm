@@ -18,7 +18,7 @@
 /obj/item/stick/attackby(obj/item/used_item, mob/user)
 
 	if(used_item.is_sharp() && used_item.has_edge() && !sharp)
-		user.visible_message("<span class='warning'>[user] sharpens [src] with [used_item].</span>", "<span class='warning'>You sharpen [src] using [used_item].</span>")
+		user.visible_action_message("sharpen", "[src] with \the [used_item].")
 		set_sharp(TRUE)
 		SetName("sharpened " + name)
 		update_attack_force()
@@ -66,10 +66,7 @@
 /obj/item/stick/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(user != target && user.check_intent(I_FLAG_HELP))
 		//Playful poking is its own thing
-		user.visible_message(
-			SPAN_NOTICE("\The [user] pokes \the [target] with \the [src]."),
-			SPAN_NOTICE("You poke \the [target] with \the [src].")
-		)
+		user.visible_action_message("poke", "\the [target] with \the [src].")
 		//Consider adding a check to see if target is dead
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(target)

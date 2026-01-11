@@ -195,10 +195,6 @@
 		contained_ore.Cut()
 		playsound(src, 'sound/machines/vending_machine.ogg', 60, 1)
 		playsound(box, 'sound/effects/rockcrumble.ogg', 60, 1)
-		visible_message(
-			SPAN_NOTICE("\The [user] unloads \the [src]'s storage cache into \the [box]."),
-			SPAN_NOTICE("You unload \the [src]'s storage cache into \the [box]."),
-			SPAN_NOTICE("You hear rocks falling into a container.")
-		)
+		user.visible_action_message("unload", "\the [src]'s storage cache into \the [box].", blind_message = SPAN_NOTICE("You hear rocks falling into a container."))
 	else
 		to_chat(user, SPAN_NOTICE("You must move an ore box up to \the [src] before you can unload it."))

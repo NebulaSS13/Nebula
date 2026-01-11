@@ -331,25 +331,18 @@ var/global/list/overmap_helm_computers
  */
 /obj/machinery/computer/ship/helm/proc/display_operator_change_message(mob/old_operator, mob/new_operator, autopilot)
 	if (!old_operator)
-		new_operator.visible_message(
-			SPAN_NOTICE("\The [new_operator] takes \the [src]'s controls."),
-			SPAN_NOTICE("You take \the [src]'s controls.")
-		)
+		new_operator.visible_action_message("take", "\the [src]'s controls.")
+		new_operator.visible_action_message("take", "\the [src]'s controls.")
 	else if (!new_operator)
 		if (autopilot)
-			old_operator.visible_message(
-				SPAN_NOTICE("\The [old_operator] engages \the [src]'s autopilot and releases the controls."),
-				SPAN_NOTICE("You engage \the [src]'s autopilot and release the controls.")
-			)
+			old_operator.visible_action_message("engage", "\the [src]'s autopilot and release$USER_S$ the controls.")
 		else
-			old_operator.visible_message(
-				SPAN_WARNING("\The [old_operator] releases \the [src]'s controls."),
-				SPAN_WARNING("You release \the [src]'s controls.")
-			)
+			old_operator.visible_action_message("release", "\the [src]'s controls.", dangerous = ACTION_DANGER_NONE)
 	else
+		var/decl/pronouns/self_pronouns = old_operator.get_self_pronouns()
 		old_operator.visible_message(
 			SPAN_WARNING("\The [new_operator] takes \the [src]'s controls from \the [old_operator]."),
-			SPAN_DANGER("\The [new_operator] takes \the [src]'s controls from you!")
+			SPAN_DANGER("\The [new_operator] takes \the [src]'s controls from [self_pronouns.him]!")
 		)
 
 

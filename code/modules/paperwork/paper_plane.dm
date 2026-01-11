@@ -31,7 +31,7 @@
 	if(user)
 		if(!user.try_unequip(src))
 			return
-		user.visible_message(SPAN_NOTICE("\The [user] unfolds \the [src]."), SPAN_NOTICE("You unfold \the [src]."))
+		user.visible_action_message("unfold", "\the [src].")
 		if(my_paper)
 			user.put_in_active_hand(my_paper)
 	else if(my_paper)
@@ -83,7 +83,7 @@
 	return ..() && !target.is_crumpled
 
 /decl/interaction_handler/make_paper_plane/invoked(atom/target, mob/user, obj/item/prop)
-	user.visible_message(SPAN_NOTICE("\The [user] folds \the [target] into a plane."), SPAN_NOTICE("You fold \the [target] into a plane."))
+	user.visible_action_message("fold", "\the [target] into a plane.")
 	var/obj/item/paper_plane/PP = new
 	user.try_unequip(target, PP)
 	PP.set_paper(target)

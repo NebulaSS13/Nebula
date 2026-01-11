@@ -315,7 +315,7 @@
 			if(!user.try_unequip(used_item, src))
 				return TRUE
 			beaker = used_item
-			user.visible_message(SPAN_NOTICE("\The [user] adds \a [used_item] to \the [src]."), SPAN_NOTICE("You add \a [used_item] to \the [src]."))
+			user.visible_action_message("add", "\a [used_item] to \the [src].")
 		else
 			to_chat(user, SPAN_WARNING("\The [src] has a beaker already."))
 		return TRUE

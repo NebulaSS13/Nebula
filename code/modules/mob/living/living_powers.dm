@@ -121,5 +121,5 @@
 	if(my_species && my_species.sniff_message_3p && my_species.sniff_message_1p)
 		visible_message(SPAN_NOTICE("\The [src] [my_species.sniff_message_3p]."), SPAN_NOTICE(my_species.sniff_message_1p))
 	else
-		visible_message(SPAN_NOTICE("\The [src] sniffs the air."), SPAN_NOTICE("You sniff the air."))
+		visible_action_message("sniff", "the air.")
 	LAZYCLEARLIST(smell_cooldown)

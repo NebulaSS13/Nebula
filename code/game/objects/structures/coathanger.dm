@@ -44,10 +44,7 @@
 	if(!length(contents) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/obj/item/removing = contents[contents.len]
-	user.visible_message( \
-		SPAN_NOTICE("\The [user] takes \the [removing] off \the [src]."),
-		SPAN_NOTICE("You take \the [removing] off \the [src].")
-	)
+	user.visible_action_message("take", "\the [removing] off \the [src].")
 	removing.dropInto(loc)
 	user.put_in_active_hand(removing)
 	update_icon()
@@ -77,10 +74,7 @@
 		to_chat(user, SPAN_NOTICE("There is no room on \the [src] to hang \the [used_item]."))
 		return TRUE
 	if(user.try_unequip(used_item, src))
-		user.visible_message( \
-			SPAN_NOTICE("\The [user] hangs \the [used_item] on \the [src]."), \
-			SPAN_NOTICE("You hang \the [used_item] on \the [src].") \
-		)
+		user.visible_action_message("hang", "\the [used_item] on \the [src].")
 		update_icon()
 	return TRUE
 

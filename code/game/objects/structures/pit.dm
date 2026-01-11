@@ -266,9 +266,9 @@
 		return FALSE
 	var/obj/structure/pit/grave = locate() in target_turf
 	var/where = grave ? "on \the [grave]" : "in \the [target_turf]"
-	user.visible_message(SPAN_NOTICE("\The [user] starts planting \a [src] [where]."), SPAN_NOTICE("You start planting \a [src] [where]."), SPAN_NOTICE("You hear soil shifting."))
+	user.visible_action_message("start", "planting \a [src] [where].", blind_message = "You hear soil shifting.")
 	if(!do_after(user, 5 SECONDS, grave || target_turf))
-		user.visible_message(SPAN_NOTICE("\The [user] stops planting \a [src] [where]."), SPAN_NOTICE("You stop planting \a [src] [where]."), SPAN_NOTICE("You hear the soil become still once more."))
+		user.visible_action_message("stop", "planting \a [src] [where].", blind_message = "You hear the soil become still once more.")
 		return TRUE
 	// check again after the delay, just in case
 	if(!can_bury(target_turf, user))
@@ -276,7 +276,7 @@
 	if(bury(target_turf, user))
 		grave = locate() in target_turf // could have been removed or created during the delay
 		where = grave ? "on \the [grave]" : "in \the [target_turf]"
-		user.visible_message(SPAN_NOTICE("\The [user] plants \a [src] [where]."), SPAN_NOTICE("You plant \a [src] [where]."), SPAN_NOTICE("You hear soil shifting."))
+		user.visible_action_message("plant", "\a [src] [where].", blind_message = "You hear soil shifting.")
 
 /obj/item/gravemarker/proc/can_bury(turf/target_turf, mob/user, silent = FALSE)
 	var/obj/structure/pit/grave = locate() in target_turf

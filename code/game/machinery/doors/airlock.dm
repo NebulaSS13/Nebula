@@ -677,31 +677,19 @@ About the new airlock wires panel:
 		return FALSE
 
 	if (src.lock_cut_state == BOLTS_FINE)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] begins [cut_verb] through the bolt cover on [src]."),
-			SPAN_NOTICE("You begin [cut_verb] through the bolt cover.")
-			)
+		user.visible_action_message("begin", "[cut_verb] through the bolt cover on \the [src].")
 
 		playsound(src, cut_sound, 100, 1)
 		if (do_after(user, cut_delay, src))
-			user.visible_message(
-				SPAN_NOTICE("\The [user] removes the bolt cover from [src]."),
-				SPAN_NOTICE("You remove the cover and expose the door bolts.")
-				)
+			user.visible_action_message("remove", "the bolt cover from \the [src]", self_postfix = "and expose$USER_S$ the door bolts.", other_postfix = ".")
 			src.lock_cut_state = BOLTS_EXPOSED
 		return TRUE
 
 	if (src.lock_cut_state == BOLTS_EXPOSED)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] begins [cut_verb] through [src]'s bolts."),
-			SPAN_NOTICE("You begin [cut_verb] through the door bolts.")
-			)
+		user.visible_action_message("begin", "[cut_verb] through \the [src]'s bolts.")
 		playsound(src, cut_sound, 100, 1)
 		if (do_after(user, cut_delay, src))
-			user.visible_message(
-				SPAN_NOTICE("\The [user] severs the door bolts, unlocking [src]."),
-				SPAN_NOTICE("You sever the door bolts, unlocking the door.")
-				)
+			user.visible_action_message("sever", "the door bolts, unlocking \the [src].")
 			src.lock_cut_state = BOLTS_CUT
 			src.unlock(1) //force it
 		return TRUE
@@ -747,8 +735,7 @@ About the new airlock wires panel:
 			to_chat(user, SPAN_NOTICE("Your [welder.name] doesn't have enough fuel."))
 			return TRUE
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
-		user.visible_message(SPAN_WARNING("\The [user] begins welding \the [src] [welded ? "open" : "closed"]!"),
-							SPAN_NOTICE("You begin welding \the [src] [welded ? "open" : "closed"]."))
+		user.visible_action_message("begin", "welding \the [src] [welded ? "open" : "closed"].")
 		if(do_after(user, (rand(3,5)) SECONDS, src))
 			if(density && !operating && !repairing)
 				playsound(src, 'sound/items/Welder2.ogg', 50, 1)
@@ -825,11 +812,11 @@ About the new airlock wires panel:
 			playsound(src, 'sound/weapons/smash.ogg', 100, 1)
 			current_health -= F.expend_attack_force(user) * 2
 			if(current_health <= 0)
-				user.visible_message(SPAN_DANGER("[user] smashes \the [weapon] into the airlock's control panel! It explodes in a shower of sparks!"), SPAN_DANGER("You smash \the [weapon] into the airlock's control panel! It explodes in a shower of sparks!"))
+				user.visible_action_message("smash", "\the [weapon] into \the [src]'s control panel! It explodes in a shower of sparks!", dangerous = ACTION_DANGER_ALL)
 				current_health = 0
 				set_broken(TRUE)
 			else
-				user.visible_message(SPAN_DANGER("[user] smashes \the [weapon] into the airlock's control panel!"))
+				user.visible_action_message("smash", "\the [weapon] into \the [src]'s control panel!", dangerous = ACTION_DANGER_ALL)
 			return TRUE
 	return ..()
 

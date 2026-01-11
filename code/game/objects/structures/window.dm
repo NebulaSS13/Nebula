@@ -165,18 +165,10 @@
 
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
 		user.do_attack_animation(src)
-		user.visible_message(
-			SPAN_DANGER("\The [user] bangs against \the [src]!"),
-			SPAN_DANGER("You bang against \the [src]!"),
-			"You hear a banging sound."
-		)
+		user.visible_action_message("bang", "against \the [src]!", ACTION_DANGER_ALL, SPAN_DANGER("You hear a banging sound."))
 	else
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] knocks on \the [src]."),
-			SPAN_NOTICE("You knock on \the [src]."),
-			"You hear a knocking sound."
-		)
+		user.visible_action_message("knock", "on \the [src].", ACTION_DANGER_NONE, SPAN_NOTICE("You hear a knocking sound."))
 	return TRUE
 
 /obj/structure/window/do_simple_ranged_interaction(var/mob/user)

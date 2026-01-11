@@ -564,10 +564,7 @@ default behaviour is:
 		)
 		sleep(3 SECONDS)
 		if(get_fire_intensity() <= 0)
-			visible_message(
-				SPAN_NOTICE("\The [src] successfully extinguishes [pronouns.him][pronouns.self]!"),
-				SPAN_NOTICE("You extinguish yourself.")
-			)
+			visible_action_message("successfully extinguish", "$USER_SELF$!")
 			extinguish_fire()
 		return TRUE
 
@@ -842,7 +839,7 @@ default behaviour is:
 	set waitfor = 0
 	sleep(rand(5,10))
 	if(!HAS_STATUS(src, STAT_PARA) && stat == CONSCIOUS)
-		visible_message(SPAN_DANGER("\The [src] starts having a seizure!"))
+		visible_action_message("start", "having a seizure!", dangerous = ACTION_DANGER_ALL)
 		SET_STATUS_MAX(src, STAT_PARA, rand(8,16))
 		set_status_condition(STAT_JITTER, rand(150,200))
 		take_damage(rand(50, 60), PAIN)
@@ -972,7 +969,9 @@ default behaviour is:
 			blood_splatter(loc, src, large = TRUE)
 		if(prob(25))
 			take_damage(1)
-			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))
+			var/decl/pronouns/self_pronouns = get_self_pronouns()
+			var/damage_string = "[isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"
+			visible_message(SPAN_DANGER("\The [src]'s [damage_string]!"), SPAN_DANGER("[self_pronouns.His] [damage_string]"))
 
 /mob/living/CanUseTopicPhysical(mob/user)
 	. = CanUseTopic(user, global.physical_no_access_topic_state)

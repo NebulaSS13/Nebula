@@ -77,10 +77,7 @@
 	return FALSE
 
 /obj/item/food/proc/show_slice_message(mob/user, obj/item/tool)
-	user.visible_message(
-		SPAN_NOTICE("\The [user] slices \the [src]!"),
-		SPAN_NOTICE("You slice \the [src]!")
-	)
+	user.visible_action_message("slice", "\the [src]!")
 
 /obj/item/food/proc/show_slice_message_poor(mob/user, obj/item/tool)
 	user.visible_message(

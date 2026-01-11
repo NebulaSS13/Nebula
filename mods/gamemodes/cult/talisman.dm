@@ -28,13 +28,10 @@
 	user.say("Dream Sign: Evil Sealing Talisman!") //TODO: never change this shit
 	var/obj/item/nullrod/nrod = locate() in target
 	if(nrod)
-		user.visible_message(
-			SPAN_DANGER("\The [user] invokes \the [src] at [target], but they are unaffected."),
-			SPAN_DANGER("You invoke \the [src] at [target], but they are unaffected.")
-		)
+		user.visible_action_message("invoke", "\the [src] at [target], but they are unaffected.", dangerous = ACTION_DANGER_ALL)
 		return TRUE
 
-	user.visible_message(SPAN_DANGER("\The [user] invokes \the [src] at [target]."), SPAN_DANGER("You invoke \the [src] at [target]."))
+	user.visible_action_message("invoke", "\the [src] at [target].", dangerous = ACTION_DANGER_ALL)
 	if(isliving(target))
 		if(issilicon(target))
 			SET_STATUS_MAX(target, STAT_WEAK, 15)
@@ -59,7 +56,7 @@
 	if(!proximity)
 		return
 	user.say("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
-	user.visible_message(SPAN_DANGER("\The [user] invokes \the [src] at [target]."), SPAN_DANGER("You invoke \the [src] at [target]."))
+	user.visible_action_message("invoke", "\the [src] at [target].", dangerous = ACTION_DANGER_ALL)
 	target.emp_act(1)
 	user.try_unequip(src)
 	qdel(src)

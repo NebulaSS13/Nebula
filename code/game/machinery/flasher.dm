@@ -39,10 +39,7 @@
 	if(IS_WIRECUTTER(used_item))
 		add_fingerprint(user, 0, used_item)
 		src.disable = !src.disable
-		if (src.disable)
-			user.visible_message("<span class='warning'>[user] has disconnected \the [src]'s flashbulb!</span>", "<span class='warning'>You disconnect \the [src]'s flashbulb!</span>")
-		if (!src.disable)
-			user.visible_message("<span class='warning'>[user] has connected \the [src]'s flashbulb!</span>", "<span class='warning'>You connect \the [src]'s flashbulb!</span>")
+		user.visible_action_message(disable ? "disconnect" : "connect", "\the [src]'s flashbulb!", dangerous = ACTION_DANGER_WARNING)
 		return TRUE
 	else
 		return ..()

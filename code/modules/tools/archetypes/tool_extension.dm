@@ -84,10 +84,7 @@
 	if(check_result != TOOL_USE_SUCCESS)
 		return check_result
 
-	user.visible_message(
-		SPAN_NOTICE("\The [user] begins [start_message || tool_archetype.tool_message] \the [target] with \the [tool]."),
-		SPAN_NOTICE("You begin [start_message || tool_archetype.tool_message] \the [target] with \the [tool].")
-	)
+	user.visible_action_message("begin", "[start_message || tool_archetype.tool_message] \the [target] with \the [tool].")
 
 	var/datum/extension/tool/tool_data = get_extension(tool, /datum/extension/tool)
 	var/use_sound = istype(tool_data) ? tool_data.get_tool_sound(archetype) : null

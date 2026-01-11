@@ -102,11 +102,11 @@
 
 /obj/item/gun/launcher/syringe/attack_self(mob/user)
 	if(next)
-		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", "<span class='warning'>You unlatch and carefully relax the bolt on [src], unloading the spring.</span>")
+		user.visible_action_message("unlatch", "and carefully relax$USER_ES$", dangerous = ACTION_DANGER_WARNING, self_postfix = "the bolt on \the [src], unloading the spring.", other_postfix = "the bolt on \the [src].")
 		next = null
 	else if(darts.len)
 		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", "<span class='warning'>You draw back the bolt on \the [src], loading the spring!</span>")
+		user.visible_action_message("draw", "back the bolt on \the [src],", dangerous = ACTION_DANGER_WARNING, self_postfix = "clicking it into place.", other_postfix = "loading the spring!")
 		next = darts[1]
 	add_fingerprint(user)
 
@@ -122,10 +122,7 @@
 	var/obj/item/syringe_cartridge/C = darts[1]
 	darts -= C
 	user.put_in_hands(C)
-	user.visible_message(
-		SPAN_NOTICE("\The [user] removes \a [C] from \the [src]."),
-		SPAN_NOTICE("You remove \a [C] from \the [src].")
-	)
+	user.visible_action_message("remove", "\a [C] from \the [src].")
 	return TRUE
 
 /obj/item/gun/launcher/syringe/attackby(var/obj/item/used_item, mob/user)
@@ -137,7 +134,7 @@
 		if(!user.try_unequip(C, src))
 			return TRUE
 		darts += C //add to the end
-		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
+		user.visible_action_message("insert", "\a [C] into [src].")
 		return TRUE
 	else
 		return ..()

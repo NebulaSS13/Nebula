@@ -169,18 +169,12 @@
 	target_zone = check_zone(target_zone)
 	if(target.get_organ_sprite_accessory_by_category(SAC_COSMETICS, target_zone))
 		if(target == user)
-			to_chat(user, SPAN_NOTICE("You wipe off the makeup with [src]."))
+			user.self_action_message("wipe", "off the makeup with \the [src].")
 			target.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
 			return TRUE
-		user.visible_message(
-			SPAN_NOTICE("\The [user] begins to wipe \the [target]'s makeup off with \the [src]."),
-			SPAN_NOTICE("You begin to wipe off [target]'s makeup .")
-		)
-		if(do_after(user, 10, target) && do_after(target, 10, check_holding = 0))	//user needs to keep their active hand, H does not.
-			user.visible_message(
-				SPAN_NOTICE("\The [user] wipes \the [target]'s makeup off with \the [src]."),
-				SPAN_NOTICE("You wipe off \the [target]'s makeup .")
-			)
+		user.visible_action_message("begin", "to wipe off \the [target]'s makeup with \the [src].")
+		if(do_mob(user, target, 1 SECOND)) //user needs to keep their active hand, target does not.
+			user.visible_action_message("wipe", "off \the [target]'s makeup with \the [src].")
 		target.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
 		return TRUE
 
@@ -285,30 +279,32 @@
 
 	return t
 
-/obj/item/paper/proc/burnpaper(obj/item/paper, mob/user)
+/obj/item/paper/proc/burnpaper(obj/item/lighter, mob/user)
 	var/class = "warning"
 
-	if(paper.isflamesource() && !user.restrained())
-		if(istype(paper, /obj/item/flame/fuelled/lighter/zippo))
+	if(lighter.isflamesource() && !user.restrained())
+		if(istype(lighter, /obj/item/flame/fuelled/lighter/zippo))
 			class = "rose"
 
 		var/decl/pronouns/pronouns = user.get_pronouns()
-		user.visible_message("<span class='[class]'>[user] holds \the [paper] up to \the [src], it looks like [pronouns.he] [pronouns.is] trying to burn it!</span>", \
-		"<span class='[class]'>You hold \the [paper] up to \the [src], burning it slowly.</span>")
+		user.visible_message("<span class='[class]'>[user] holds \the [lighter] up to \the [src], it looks like [pronouns.he] [pronouns.is] trying to burn it!</span>", \
+		"<span class='[class]'>You hold \the [lighter] up to \the [src], burning it slowly.</span>")
 
-		spawn(20)
-			if(get_dist(src, user) < 2 && user.get_active_held_item() == paper && paper.isflamesource())
-				user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
-				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
+		addtimer(CALLBACK(PROC_REF(_finishburnpaper), lighter, user, class), 2 SECONDS)
 
-				new /obj/effect/decal/cleanable/ash(get_turf(src))
-				qdel(src)
-
-			else
-				to_chat(user, SPAN_WARNING("You must hold \the [paper] steady to burn \the [src]."))
+/obj/item/paper/proc/_finishburnpaper(obj/item/lighter, mob/user, class)
+	if(user.restrained())
+		return
+	if(user.Adjacent(src) && user.get_active_held_item() == lighter && lighter.isflamesource())
+		var/obj_phrase = "right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap."
+		user.visible_message(SPAN_CLASS(class, user.get_action_string(FALSE, "burn", obj_phrase)), SPAN_CLASS(class, user.get_action_string(TRUE, "burn", obj_phrase)))
+		new /obj/effect/decal/cleanable/ash(get_turf(src))
+		qdel(src)
+	else
+		to_chat(user, SPAN_WARNING("You must hold \the [lighter] steady to burn \the [src]."))
 
 /obj/item/paper/CouldNotUseTopic(mob/user)
-	to_chat(user, SPAN_WARNING("You can't reach!"))
+	user.self_action_message("can't", "reach!", dangerous = ACTION_DANGER_OTHERS)
 
 /obj/item/paper/OnTopic(mob/user, href_list, datum/topic_state/state)
 
@@ -321,14 +317,14 @@
 		//Try to find a usable pen on the user, if not abort
 		var/obj/item/I = user.get_accessible_pen()
 		if(!IS_PEN(I))
-			to_chat(user, SPAN_WARNING("You need something to write with!"))
+			user.self_action_message("need", "something to write with!", dangerous = ACTION_DANGER_OTHERS)
 			return TOPIC_NOACTION
 
 		//If we got a pen that's not in our hands, make sure to move it over
 		if(user.get_active_held_item() != I && user.get_empty_hand_slot() && user.put_in_hands(I))
-			to_chat(user, SPAN_NOTICE("You grab your trusty [I.name]!"))
+			user.self_action_message("grab", "$USER_THEIR$ trusty [I.name]!")
 		else if(user.get_active_held_item() != I)
-			to_chat(user, SPAN_WARNING("You'd use your trusty [I.name], but your hands are full!"))
+			user.self_action_message("would", "use $USER_THEIR$ trusty [I.name], but $USER_THEIR$ hands are full!", dangerous = ACTION_DANGER_OTHERS)
 			return TOPIC_NOACTION
 
 		var/pen_flags = I.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG)
@@ -338,7 +334,8 @@
 		var/iscrayon = pen_flags & PEN_FLAG_CRAYON
 		var/isfancy  = pen_flags & PEN_FLAG_FANCY
 
-		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0, trim = 0)
+		var/decl/pronouns/self_pronouns = user.get_self_pronouns()
+		var/t =  sanitize(input("Enter what [self_pronouns.he] [verb_agree_with_pronouns("want", self_pronouns)] to write:", "Write", null, null) as message, free_space, extra = 0, trim = 0)
 		if(!t)
 			return TOPIC_NOACTION
 
@@ -346,7 +343,7 @@
 		t = parsepencode(t, I, user, iscrayon, isfancy) // Encode everything from pencode to html
 
 		if(fields > MAX_FIELDS)
-			to_chat(user, SPAN_WARNING("Too many fields. Sorry, you can't do this."))
+			to_chat(user, SPAN_WARNING("Too many fields. Sorry, [self_pronouns.he] can't do this."))
 			fields = last_fields_value
 			return TOPIC_NOACTION
 
@@ -406,7 +403,7 @@
 	else if(used_item.get_tool_quality(TOOL_STAMP))
 		apply_custom_stamp(used_item.icon, "with \the [used_item]")
 		playsound(src, 'sound/effects/stamp.ogg', 50, TRUE)
-		to_chat(user, SPAN_NOTICE("You stamp the paper with your [used_item.name]."))
+		user.visible_action_message("stamp", "\the [src] with $USER_THEIR$ [used_item.name].")
 		return TRUE
 
 	else if(used_item.isflamesource())
@@ -422,16 +419,16 @@
 /obj/item/paper/proc/try_bundle_with(var/obj/item/paper/other, var/mob/user)
 	if(!can_bundle_with(other))
 		if(user)
-			to_chat(user, SPAN_WARNING("You can't bundle those!"))
+			user.self_action_message("can't", "bundle those!", dangerous = ACTION_DANGER_OTHERS)
 		return
 
 	var/obj/item/paper_bundle/B = new(loc)
 	if(user)
 		if(!user.can_unequip_item(src))
-			to_chat(user, SPAN_WARNING("You can't unequip \the [src]!"))
+			user.self_action_message("can't", "unequip \the [src]!", dangerous = ACTION_DANGER_OTHERS)
 			return
 		if(!user.can_unequip_item(other))
-			to_chat(user, SPAN_WARNING("You can't unequip \the [other]!"))
+			user.self_action_message("can't", "unequip \the [other]!", dangerous = ACTION_DANGER_OTHERS)
 			return
 		user.try_unequip(src, B)
 		user.try_unequip(other, B)
@@ -517,13 +514,14 @@
 	set category = "Object"
 	set src in usr
 	if(usr.incapacitated())
-		to_chat(usr, SPAN_WARNING("You can't do that in your current state!"))
+		usr.self_action_message("can't", "do that in $USER_THEIR$ current state!", dangerous = ACTION_DANGER_OTHERS)
 		return
 
 	if(usr.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
-		to_chat(usr, SPAN_WARNING("You cut yourself on the paper."))
+		usr.self_action_message("cut", "$TARGET$ on \the [src].", dangerous = ACTION_DANGER_OTHERS)
 		return
-	var/n_name = sanitize_safe(input(usr, "What would you like to name the paper?", "Paper Naming", name) as text, MAX_NAME_LEN)
+	var/decl/pronouns/self_pronouns = usr.get_self_pronouns()
+	var/n_name = sanitize_safe(input(usr, "What would [self_pronouns.he] like to name the paper?", "Paper Naming", name) as text, MAX_NAME_LEN)
 
 	// We check loc one level up, so we can rename in clipboards and such. See also: /obj/item/photo/rename()
 	if(!n_name || !CanInteract(usr, global.deep_inventory_topic_state))
@@ -633,7 +631,7 @@ var/global/datum/topic_state/default/paper_state/paper_topic_state = new
 	var/obj/item/paper/scroll/scroll = target
 	// TODO: paper sound
 	scroll.furled = !scroll.furled
-	user.visible_message(SPAN_NOTICE("\The [user] [scroll.furled ? "furls" : "unfurls"] \the [target]."))
+	user.visible_action_message(scroll.furled ? "furls" : "unfurls", "\the [target].")
 	scroll.update_icon()
 
 /decl/interaction_handler/scroll/furl

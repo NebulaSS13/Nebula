@@ -46,6 +46,6 @@ MANTIDIFY(/obj/structure/chair/padded/purple, "mantid nest", "resting place") //
 	. = ..(user, TRUE)
 	if(!skip_text)
 		if(.)
-			user.visible_message("\The [user] grabs a hydration ration orb from \the [src].", "You grab a hydration ration orb from \the [src].")
+			user.visible_action_message("grab", "a hydration ration orb from \the [src].")
 		else
 			to_chat(user, "\The [src]'s orb supply is empty. Notify a control mind.")

@@ -185,7 +185,7 @@
 
 /mob/living/bot/medbot/default_help_interaction(mob/user)
 	if(is_tipped)
-		user.visible_message(SPAN_NOTICE("\The [user] begins righting [src]."), SPAN_NOTICE("You begin righting [src]..."))
+		user.visible_action_message("begin", "righting [src].")
 		if(do_after(user, 3 SECONDS, target=src))
 			set_right(user)
 		return TRUE
@@ -325,7 +325,7 @@
 
 /mob/living/bot/medbot/proc/tip_over(mob/user)
 	playsound(src, 'sound/machines/warning-buzzer.ogg', 50)
-	user.visible_message(SPAN_DANGER("[user] tips over [src]!"), SPAN_DANGER("You tip [src] over!"))
+	user.targeted_visible_action_message(src, "tip", "$TARGET$ over!", dangerous = ACTION_DANGER_ALL)
 	is_tipped = TRUE
 	tipper_name = user.name
 	var/matrix/mat = transform
@@ -334,13 +334,13 @@
 /mob/living/bot/medbot/proc/set_right(mob/user)
 	var/list/messagevoice
 	if(user)
-		user.visible_message(SPAN_NOTICE("[user] sets [src] right-side up!"), SPAN_NOTICE("You set [src] right-side up!"))
+		user.targeted_visible_action_message(src, "set", "$TARGET$ right-side up!")
 		if(user.name == tipper_name)
 			messagevoice = list("I forgive you." = 'sound/voice/medbot/forgive.ogg')
 		else
 			messagevoice = list("Thank you!" = 'sound/voice/medbot/thank_you.ogg', "You are a good person." = 'sound/voice/medbot/youre_good.ogg')
 	else
-		visible_message(SPAN_NOTICE("[src] manages to [pick("writhe", "wriggle", "wiggle")] enough to right itself."))
+		user.visible_action_message("manage", "to [pick("writhe", "wriggle", "wiggle")] enough to right $USER_SELF$.")
 		messagevoice = list("Fuck you." = 'sound/voice/medbot/fuck_you.ogg', "Your behavior has been reported, have a nice day." = 'sound/voice/medbot/reported.ogg')
 
 	tipper_name = null

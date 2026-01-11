@@ -10,7 +10,7 @@
 
 /obj/item/clothingbag/attack_self(mob/user)
 	if(!opened)
-		user.visible_message("<span class='notice'>\The [user] tears open \the [src]!</span>", "<span class='notice'>You tear open \the [src]!</span>")
+		user.visible_action_message("tear", "open \the [src]!")
 		opened = 1
 		icon_state = icon_used
 		for(var/obj/item in contents)

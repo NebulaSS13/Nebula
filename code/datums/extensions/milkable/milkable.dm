@@ -94,15 +94,9 @@
 		handle_milking_failure(user, critter)
 		return TRUE
 
-	user.visible_message(
-		SPAN_NOTICE("\The [user] starts milking \the [critter] into \the [container]."),
-		SPAN_NOTICE("You start milking \the [critter] into \the [container].")
-	)
+	user.visible_action_message("start", "milking \the [critter] into \the [container].")
 	if(!user.do_skilled(4 SECONDS, milking_skill, target = critter, check_holding = TRUE))
-		user.visible_message(
-			SPAN_NOTICE("\The [user] stops milking \the [critter]."),
-			SPAN_NOTICE("You stop milking \the [critter].")
-		)
+		user.visible_action_message("stop", "milking \the [critter].")
 		return TRUE
 
 	if(critter.stat == DEAD)
@@ -120,10 +114,7 @@
 		to_chat(user, SPAN_WARNING("Wait for \the [critter] to stop moving before you try milking it."))
 		return TRUE
 
-	user.visible_message(
-		SPAN_NOTICE("\The [user] milks \the [critter] into \the [container]."),
-		SPAN_NOTICE("You milk \the [critter] into \the [container].")
-	)
+	user.visible_action_message("milk", "\the [critter] into \the [container].")
 	udder.trans_to(container, min(REAGENTS_FREE_SPACE(container.reagents), rand(15, 20)))
 	return TRUE
 

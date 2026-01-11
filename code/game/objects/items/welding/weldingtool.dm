@@ -87,7 +87,7 @@
 	w_class = tank.size_in_use
 	set_base_attack_force(tank.unlit_force)
 	if(user && !quiet)
-		user.visible_message("[user] slots \a [T] into \the [src].", "You slot \a [T] into \the [src].")
+		user.visible_action_message("slot", "\a [T] into \the [src].")
 
 	if(!quiet)
 		playsound(loc, 'sound/effects/hypospray.ogg', 50, TRUE)
@@ -113,7 +113,7 @@
 
 	if(user)
 		user.put_in_hands(tank)
-		user.visible_message("[user] removes \the [tank] from \the [src].", "You remove \the [tank] from \the [src].")
+		user.visible_action_message("remove", "\the [tank] from \the [src].")
 	else
 		tank.dropInto(get_turf(src))
 

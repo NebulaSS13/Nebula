@@ -77,18 +77,12 @@
 		user.adjust_fire_intensity(1)
 	user.ignite_fire()
 	if (user.is_on_fire())
-		user.visible_message(
-			SPAN_DANGER("The fire spreads from \the [src] to \the [user]!"),
-			SPAN_DANGER("The fire spreads to you as well!")
-		)
+		user.visible_action_message("catch", "fire", dangerous = ACTION_DANGER_ALL, self_postfix = "as well!", other_postfix = "spreading from \the [src]!")
 		return TRUE
 
 	adjust_fire_intensity(-0.5) //Less effective than stop, drop, and roll - also accounting for the fact that it takes half as long.
 	if (get_fire_intensity() <= 0)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] successfully pats out \the [src]'s flames."),
-			SPAN_NOTICE("You successfully pat out \the [src]'s flames.")
-		)
+		user.visible_action_message("successfully pat", "out \the [src]'s flames.")
 		extinguish_fire()
 		set_fire_intensity(0)
 
@@ -97,17 +91,13 @@
 // Returns TRUE if further interactions should be halted, FALSE otherwise.
 /mob/living/proc/try_awaken(mob/user)
 
-	var/decl/pronouns/pronouns = get_pronouns()
 	var/obj/item/uniform = get_equipped_item(slot_w_uniform_str)
 	if(uniform)
 		uniform.add_fingerprint(user)
 
 	// They're SSD, so permanently asleep.
 	if(ssd_check() && get_species()?.get_ssd(src))
-		user.visible_message(
-			SPAN_NOTICE("\The [user] shakes \the [src] trying to wake [pronouns.him] up!"),
-			SPAN_NOTICE("You shake \the [src], but they do not respond...")
-		)
+		user.targeted_visible_action_message(src, "shake", "$TARGET$", self_postfix = "trying to wake $TARGET_THEM$ up!", other_postfix = "but $TARGET_THEY$ $TARGET_DOES$ not respond...")
 		playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		. = TRUE
 
@@ -117,10 +107,7 @@
 		ADJ_STATUS(src, STAT_ASLEEP, -5)
 		if(!HAS_STATUS(src, STAT_ASLEEP))
 			set_posture(/decl/posture/lying) // overrides 'delibrate' lying so you will stand up if possible.
-		user.visible_message(
-			SPAN_NOTICE("\The [user] shakes \the [src] trying to wake [pronouns.him] up!"),
-			SPAN_NOTICE("You shake \the [src] trying to wake [pronouns.him] up!")
-		)
+		user.targeted_visible_action_message(src, "shake", "$TARGET$ trying to wake $TARGET_THEM$ up!")
 		. = TRUE
 
 	if(.)

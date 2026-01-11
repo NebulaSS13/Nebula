@@ -20,13 +20,11 @@
 			return affected
 
 /decl/surgery_step/fix_face/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
-	user.visible_message("[user] starts repairing damage to \the [target]'s face with \the [tool].", \
-	"You start repairing damage to \the [target]'s face with \the [tool].")
+	user.visible_action_message("start", "repairing damage to \the [target]'s face with \the [tool].")
 	..()
 
 /decl/surgery_step/fix_face/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='notice'>[user] repairs \the [target]'s face with \the [tool].</span>",	\
-	"<span class='notice'>You repair \the [target]'s face with \the [tool].</span>")
+	user.visible_action_message("repair", "\the [target]'s face with \the [tool].")
 	var/obj/item/organ/external/h = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(h)
 		h.status &= ~ORGAN_DISFIGURED

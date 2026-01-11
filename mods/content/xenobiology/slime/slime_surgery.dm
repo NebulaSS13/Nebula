@@ -39,13 +39,11 @@
 	return ..() && istype(target) && target.core_removal_stage == 0
 
 /decl/surgery_step/slime/cut_flesh/begin_step(mob/user, mob/living/slime/target, target_zone, obj/item/tool)
-	user.visible_message("[user] starts cutting through [target]'s flesh with \the [tool].", \
-	"You start cutting through [target]'s flesh with \the [tool].")
+	user.targeted_visible_action_message(target, "start", "cutting through $TARGET'S$ flesh with \the [tool].")
 	..()
 
 /decl/surgery_step/slime/cut_flesh/end_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='notice'>[user] cuts through [target]'s flesh with \the [tool].</span>",	\
-	"<span class='notice'>You cut through [target]'s flesh with \the [tool], revealing its silky innards.</span>")
+	user.targeted_visible_action_message(target, "cut", "through $TARGET'S$ flesh", self_postfix = "with \the [tool], revealing its silky innards.", other_postfix = "with \the [tool].")
 	target.core_removal_stage = 1
 	..()
 
@@ -68,19 +66,17 @@
 	return ..() && istype(target) && target.core_removal_stage == 1
 
 /decl/surgery_step/slime/cut_innards/begin_step(mob/user, mob/living/slime/target, target_zone, obj/item/tool)
-	user.visible_message("[user] starts cutting [target]'s silky innards apart with \the [tool].", \
-	"You start cutting [target]'s silky innards apart with \the [tool].")
+	user.targeted_visible_action_message(target, "start", "cutting $TARGET'S$ silky innards apart with \the [tool].")
 	..()
 
 /decl/surgery_step/slime/cut_innards/end_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='notice'>[user] cuts [target]'s innards apart with \the [tool], exposing the cores.</span>",	\
-	"<span class='notice'>You cut [target]'s innards apart with \the [tool], exposing the cores.</span>")
+	user.visible_action_message("cut", "\the [target]'s innards apart with \the [tool], exposing the cores.")
 	target.core_removal_stage = 2
 	..()
 
 /decl/surgery_step/slime/cut_innards/fail_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='warning'>[user]'s hand slips, tearing [target]'s innards with \the [tool]!</span>", \
-	"<span class='warning'>Your hand slips, tearing [target]'s innards with \the [tool]!</span>")
+	user.visible_message(SPAN_WARNING("[user]'s hand slips, tearing \the [target]'s innards with \the [tool]!"), \
+	SPAN_WARNING("Your hand slips, tearing \the [target]'s innards with \the [tool]!"))
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -100,25 +96,23 @@
 	return ..() && (istype(target) && target.core_removal_stage == 2 && target.cores > 0) //This is being passed a human as target, unsure why.
 
 /decl/surgery_step/slime/saw_core/begin_step(mob/user, mob/living/slime/target, target_zone, obj/item/tool)
-	user.visible_message(
-		SPAN_NOTICE("\The [user] starts cutting out one of \the [target]'s cores with \the [tool]."), \
-		SPAN_NOTICE("You start cutting out one of \the [target]'s cores with \the [tool]."))
+	user.visible_action_message("start", "cutting out one of \the [target]'s cores with \the [tool].")
 	..()
 
 /decl/surgery_step/slime/saw_core/end_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
+	var/decl/pronouns/self_pronouns = user.get_self_pronouns()
 	if(target.cores <= 0)
-		to_chat(user, SPAN_WARNING("You cannot find any cores within \the [target]."))
+		to_chat(user, SPAN_WARNING("[self_pronouns.He] cannot find any cores within \the [target]."))
 		return
 	var/atom/core = new /obj/item/slime_extract(target.loc, /decl/material/liquid/slimejelly, target.slime_type)
 	target.cores--
-	user.visible_message(
-		SPAN_NOTICE("\The [user] cuts \the [core] out of \the [target] with \the [tool]."),	\
-		SPAN_NOTICE("You cut \the [core] out of \the [target] with \the [tool]. It looks like there are [target.cores] core\s left."))
+	user.visible_action_message("cut", "\the [core] out of \the [target] with \the [tool].", self_postfix = "It looks like there are [target.cores] core\s left.")
 	target.update_icon()
 	..()
 
 /decl/surgery_step/slime/saw_core/fail_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
+	var/decl/pronouns/self_pronouns = user.get_self_pronouns()
 	user.visible_message(
 		SPAN_DANGER("\The [user]'s hand slips, failing to extract the slime core."), \
-		SPAN_DANGER("Your hand slips, causing you to miss the core!"))
+		SPAN_DANGER("[self_pronouns.His] hand slips, causing [self_pronouns.him] to miss the core!"))
 	..()

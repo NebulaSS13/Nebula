@@ -254,7 +254,7 @@
 	sealing = 1
 
 	if(!seal_target && !suit_is_deployed())
-		wearer.visible_message("<span class='danger'>[wearer]'s suit flashes an error light.</span>","<span class='danger'>Your suit flashes an error light. It can't function properly without being fully deployed.</span>")
+		wearer.visible_message(SPAN_DANGER("[wearer]'s suit flashes an error light."), SPAN_DANGER("Your suit flashes an error light. It can't function properly without being fully deployed."))
 		failed_to_seal = 1
 
 	if(!failed_to_seal)
@@ -671,9 +671,7 @@
 	..()
 
 	if(seal_delay > 0 && istype(M) && M.get_equipped_item(slot_back_str) == src)
-		M.visible_message(
-			SPAN_HARDSUIT("[M] starts putting on \the [src]..."),
-			SPAN_HARDSUIT("You start putting on \the [src]..."))
+		M.visible_action_message("start", "putting on \the [src].", "font_blue")
 
 		if(!do_after(M,seal_delay,src))
 			if(M && M.get_equipped_item(slot_back_str) == src)
@@ -683,9 +681,7 @@
 			return
 
 	if(istype(M) && M.get_equipped_item(slot_back_str) == src)
-		M.visible_message(
-			SPAN_HARDSUIT("<b>[M] struggles into \the [src].</b>"),
-			SPAN_HARDSUIT("<b>You struggle into \the [src].</b>"))
+		M.visible_action_message("struggle", "into \the [src].", "font_blue")
 		wearer = M
 		update_icon()
 

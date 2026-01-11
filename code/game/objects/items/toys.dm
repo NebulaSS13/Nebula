@@ -527,11 +527,9 @@
 /obj/item/marshalling_wand/attack_self(mob/user)
 	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
 	if (user.check_intent(I_FLAG_HELP))
-		user.visible_message("<span class='notice'>[user] beckons with \the [src], signalling forward motion.</span>",
-							"<span class='notice'>You beckon with \the [src], signalling forward motion.</span>")
+		user.visible_action_message("beckon", "with \the [src], signalling forward motion.")
 	else if (user.check_intent(I_FLAG_DISARM))
-		user.visible_message("<span class='notice'>[user] holds \the [src] above their head, signalling a stop.</span>",
-							"<span class='notice'>You hold \the [src] above your head, signalling a stop.</span>")
+		user.visible_action_message("hold", "\the [src] above $USER_THEIR$ head, signalling a stop.")
 	else if (user.check_intent(I_FLAG_GRAB))
 		var/wand_dir
 		if(user.get_equipped_item(BP_L_HAND) == src)
@@ -540,11 +538,9 @@
 			wand_dir = "right"
 		else
 			wand_dir = pick("left", "right")
-		user.visible_message("<span class='notice'>[user] waves \the [src] to the [wand_dir], signalling a turn.</span>",
-							"<span class='notice'>You wave \the [src] to the [wand_dir], signalling a turn.</span>")
+		user.visible_action_message("wave", "\the [src] to the [wand_dir], signalling a turn.")
 	else if (user.check_intent(I_FLAG_HARM))
-		user.visible_message("<span class='warning'>[user] frantically waves \the [src] above their head!</span>",
-							"<span class='warning'>You frantically wave \the [src] above your head!</span>")
+		user.visible_action_message("frantically wave", "\the [src] above $USER_HEAD$ head!")
 
 /obj/item/toy/shipmodel
 	name = "table-top spaceship model"
@@ -563,13 +559,13 @@
 	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
 		return ..()
 	if (user.check_intent(I_FLAG_HELP))
-		user.visible_message("<span class='notice'>[user] rings \the [src], signalling the beginning of the contest.</span>")
+		user.visible_action_message("ring", "\the [src], signalling the beginning of the contest.")
 		playsound(user.loc, 'sound/items/oneding.ogg', 60)
 	else if (user.check_intent(I_FLAG_DISARM))
-		user.visible_message("<span class='notice'>[user] rings \the [src] three times, signalling the end of the contest!</span>")
+		user.visible_action_message("ring", "\the [src] three times, signalling the end of the contest.")
 		playsound(user.loc, 'sound/items/threedings.ogg', 60)
 	else if (user.check_intent(I_FLAG_HARM))
-		user.visible_message("<span class='warning'>[user] rings \the [src] repeatedly, signalling a disqualification!</span>")
+		user.visible_action_message("ring", "\the [src] repeatedly, signalling a disqualification!", dangerous = ACTION_DANGER_WARNING)
 		playsound(user.loc, 'sound/items/manydings.ogg', 60)
 	return TRUE
 
@@ -645,12 +641,12 @@
 		"Very doubtful")
 
 /obj/item/toy/eightball/attack_self(mob/user)
-	user.visible_message("<span class='notice'>\The [user] shakes \the [src] for a moment, and it says, \"[pick(possible_answers) ].\"</span>")
+	user.visible_action_message("shake", "\the [src] for a moment, and it says, \"[pick(possible_answers)].\"")
 
 /obj/item/toy/eightball/afterattack(obj/O, mob/user, var/proximity)
 	. = ..()
 	if (proximity)
-		visible_message("<span class='warning'>\The [src] says, \"[pick(possible_answers) ]\" as it hits \the [O]!</span>")
+		visible_message(SPAN_WARNING("\The [src] says, \"[pick(possible_answers)]\" as it hits \the [O]!"))
 
 
 //////////////////////////////////////////////////////

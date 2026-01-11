@@ -37,19 +37,16 @@
 /obj/item/food/can/attackby(obj/item/used_item, mob/user)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		if(istype(used_item, /obj/item/knife))
-			user.visible_message(
-				SPAN_NOTICE("\The [user] starts trying to open \the [src] with \the [used_item]."),
-				SPAN_NOTICE("You start to open \the [src].")
-			)
+			user.visible_action_message("start", "trying to open \the [src] with \the [used_item].")
 			var/open_timer = istype(used_item, /obj/item/knife/opener) ? 5 SECONDS : 15 SECONDS
 			if(!do_after(user, open_timer, src))
-				to_chat(user, SPAN_WARNING("You must remain uninterrupted to open \the [src]."))
+				user.self_action_message("must", "remain uninterrupted to open \the [src].", ACTION_DANGER_OTHERS)
 				return TRUE
-			to_chat(user, SPAN_NOTICE("You unseal \the [src] with a crack of metal."))
+			user.self_action_message("unseal", "\the [src] with a crack of metal.")
 			unseal()
 			return TRUE
 		else if(istype(used_item,/obj/item/utensil))
-			to_chat(user, SPAN_WARNING("You need a can opener to open this!"))
+			user.self_action_message("need", "a can opener to open \the [src]!", ACTION_DANGER_OTHERS)
 			return TRUE
 	return ..()
 

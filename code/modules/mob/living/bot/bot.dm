@@ -114,7 +114,7 @@
 		if(current_health < get_max_health())
 			if(open)
 				heal_overall_damage(10)
-				user.visible_message("<span class='notice'>\The [user] repairs \the [src].</span>","<span class='notice'>You repair \the [src].</span>")
+				user.visible_action_message("repair", "\the [src].")
 			else
 				to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 		else

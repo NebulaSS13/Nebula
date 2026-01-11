@@ -242,7 +242,7 @@
 				A.update_icon()
 				A.cell.forceMove(src)
 				A.cell = null
-				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
+				user.targeted_visible_action_message("remove", "\the [wrapped] from $TARGET$!", dangerous = A.has_power ? ACTION_DANGER_OTHERS : ACTION_DANGER_NONE)
 				A.power_down()
 
 /obj/item/gripper/proc/finish_using(var/atom/target, var/mob/living/user, params, force_holder, resolved)

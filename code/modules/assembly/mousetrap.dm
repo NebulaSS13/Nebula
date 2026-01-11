@@ -80,9 +80,7 @@
 	var/mob/living/M = AM
 	if(MOVING_DELIBERATELY(M))
 		return
-	M.visible_message(
-		SPAN_DANGER("\The [M] steps on \the [src]!"),
-		SPAN_DANGER("You step on \the [src]!"))
+	M.visible_action_message("step", "on \the [src]!", dangerous = ACTION_DANGER_ALL)
 	triggered(M)
 
 /obj/item/assembly/mousetrap/on_found(mob/finder)

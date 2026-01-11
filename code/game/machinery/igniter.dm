@@ -123,10 +123,7 @@
 	if(panel_open && IS_WIRECUTTER(used_item))
 		add_fingerprint(user)
 		disable = !disable
-		if(disable)
-			user.visible_message(SPAN_WARNING("[user] has disabled \the [src]!"), SPAN_WARNING("You disable the connection to \the [src]."))
-		else
-			user.visible_message(SPAN_WARNING("[user] has reconnected \the [src]!"), SPAN_WARNING("You fix the connection to \the [src]."))
+		user.visible_action_message(disable ? "disable" : "fix", "the connection to \the [src]!", dangerous = ACTION_DANGER_WARNING)
 		update_icon()
 		return TRUE
 	else

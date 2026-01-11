@@ -29,10 +29,7 @@
 		"You hear the shuffling of cloth."
 	)
 	if(!do_after(user, 5 SECONDS))
-		user.visible_message(
-			SPAN_NOTICE("\The [user] gives up on [pack_msg]ing \the [src]."),
-			SPAN_NOTICE("You give up on [pack_msg]ing \the [src].")
-		)
+		user.visible_action_message("give", "up on [pack_msg]ing \the [src].")
 		return TRUE
 	if(packed != initial_pack)
 		return TRUE

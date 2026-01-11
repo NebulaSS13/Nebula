@@ -101,9 +101,9 @@
 		return
 	var/mob/living/human/preacher = user
 	if(preacher.mind?.assigned_job?.is_holy)
-		preacher.visible_message("\The [preacher] begins to read a passage from \the [src]...", "You begin to read a passage from \the [src]...")
+		preacher.visible_action_message("begin", "to read a passage from \the [src]...")
 		if(do_after(preacher, 5 SECONDS))
-			preacher.visible_message("\The [preacher] reads a passage from \the [src].", "You read a passage from \the [src].")
+			preacher.visible_action_message("read", "a passage from \the [src].")
 			for(var/mob/living/human/H in view(preacher))
 				if(preacher.get_background_datum_by_flag(BACKGROUND_FLAG_RELIGION) == H.get_background_datum_by_flag(BACKGROUND_FLAG_RELIGION))
 					to_chat(H, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))

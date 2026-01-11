@@ -368,7 +368,9 @@
 		animate_tail_reset()
 		heal_damage(PAIN, 3)
 		if(prob(2) && is_asystole() && isSynthetic())
-			visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")].")
+			var/static/synth_asystole_options = list("emit" = "a low pitched whirr.", "beep" = "urgently.")
+			var/chosen_option = pick(synth_asystole_options)
+			visible_action_message(chosen_option, synth_asystole_options[chosen_option])
 	else
 		set_stat(CONSCIOUS)
 

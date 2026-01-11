@@ -161,10 +161,12 @@
 // Determines span styling used for visible_action_message.
 /// Uses SPAN_NOTICE for both self and other messages.
 var/global/const/ACTION_DANGER_NONE = 0
+/// Uses SPAN_WARNING for both self and others.
+var/global/const/ACTION_DANGER_WARNING = 1
 /// Uses SPAN_DANGER for others and SPAN_WARNING for self.
-var/global/const/ACTION_DANGER_OTHERS = 1
+var/global/const/ACTION_DANGER_OTHERS = 2
 /// Uses SPAN_DANGER for both self and others.
-var/global/const/ACTION_DANGER_ALL = 2
+var/global/const/ACTION_DANGER_ALL = 3
 /**
 	Show an action message to all mobs and objects in sight of this mob.
 
@@ -187,6 +189,9 @@ var/global/const/ACTION_DANGER_ALL = 2
 		if(ACTION_DANGER_NONE)
 			other_message = SPAN_NOTICE(other_message)
 			self_message = SPAN_NOTICE(self_message)
+		if(ACTION_DANGER_WARNING)
+			other_message = SPAN_WARNING(other_message)
+			self_message = SPAN_WARNING(self_message)
 		if(ACTION_DANGER_OTHERS)
 			other_message = SPAN_DANGER(other_message)
 			self_message = SPAN_WARNING(self_message)
@@ -210,6 +215,9 @@ var/global/const/ACTION_DANGER_ALL = 2
 		if(ACTION_DANGER_NONE)
 			other_message = SPAN_NOTICE(other_message)
 			self_message = SPAN_NOTICE(self_message)
+		if(ACTION_DANGER_WARNING)
+			other_message = SPAN_WARNING(other_message)
+			self_message = SPAN_WARNING(self_message)
 		if(ACTION_DANGER_OTHERS)
 			other_message = SPAN_DANGER(other_message)
 			self_message = SPAN_WARNING(self_message)
@@ -231,6 +239,8 @@ var/global/const/ACTION_DANGER_ALL = 2
 	switch(dangerous)
 		if(ACTION_DANGER_NONE)
 			the_message = SPAN_NOTICE(the_message)
+		if(ACTION_DANGER_WARNING)
+			the_message = SPAN_WARNING(the_message)
 		if(ACTION_DANGER_OTHERS)
 			the_message = SPAN_WARNING(the_message)
 		if(ACTION_DANGER_ALL)

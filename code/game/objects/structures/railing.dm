@@ -255,7 +255,7 @@ WOOD_RAILING_SUBTYPE(yew)
 			if(do_after(user, 2 SECONDS, src))
 				if(anchored)
 					return TRUE
-				user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
+				user.visible_action_message("dismantle", "\the [src].")
 				material.create_object(loc, 2)
 				qdel(src)
 			return TRUE
@@ -283,7 +283,7 @@ WOOD_RAILING_SUBTYPE(yew)
 			if(do_after(user, 20, src))
 				if(current_health >= current_max_health)
 					return TRUE
-				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
+				user.visible_action_message("repair", "some damage to \the [src].")
 				current_health = min(current_health+(current_max_health/5), current_max_health)
 			return TRUE
 

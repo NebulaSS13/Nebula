@@ -134,7 +134,7 @@
 		return TRUE
 
 	else if(!destroyed && user.check_intent(I_FLAG_HARM))
-		visible_message(SPAN_WARNING("[user] kicks \the [src]."), SPAN_WARNING("You kick \the [src]."))
+		user.visible_action_message("kick", "\the [src].", dangerous = ACTION_DANGER_ALL)
 		take_damage(2)
 		return TRUE
 	return FALSE

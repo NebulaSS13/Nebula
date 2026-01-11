@@ -368,11 +368,8 @@
 		if(blocked)
 			to_chat(target, SPAN_WARNING("\The [blocked] is in the way!"))
 			return TRUE
-		var/decl/pronouns/pronouns = user.get_pronouns()
 		var/puff_str = pick("drag","puff","pull")
-		user.visible_message(\
-			SPAN_NOTICE("\The [user] takes a [puff_str] on [pronouns.his] [name]."), \
-			SPAN_NOTICE("You take a [puff_str] on your [name]."))
+		user.visible_action_message("take", "a [puff_str] on $USER_THEIR$ [name].")
 		smoke(12, TRUE)
 		add_trace_DNA(target)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -526,11 +523,11 @@
 
 /obj/item/clothing/mask/smokable/pipe/attack_self(var/mob/user)
 	if(lit)
-		user.visible_message(SPAN_NOTICE("[user] puts out [src]."), SPAN_NOTICE("You put out [src]."))
+		user.visible_action_message("put", "out [src].")
 		extinguish_fire(user, no_message = TRUE)
 	else if (smoketime)
 		var/turf/location = get_turf(user)
-		user.visible_message(SPAN_NOTICE("[user] empties out [src]."), SPAN_NOTICE("You empty out [src]."))
+		user.visible_action_message("empty", "out \the [src].")
 		new /obj/effect/decal/cleanable/ash(location)
 		smoketime = 0
 		reagents.clear_reagents()

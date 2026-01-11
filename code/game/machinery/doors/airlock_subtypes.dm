@@ -158,8 +158,8 @@
 	if(panel_open && !arePowerSystemsOn())
 		if(IS_WRENCH(used_item))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			user.visible_message(SPAN_WARNING("[user.name] starts frantically pumping the bolt override mechanism!"), SPAN_WARNING("You start frantically pumping the bolt override mechanism!"))
-			if(do_after(user, 160) && locked)
+			user.visible_action_message("start", "frantically pumping the bolt override mechanism!", dangerous = ACTION_DANGER_WARNING)
+			if(do_after(user, 16 SECONDS) && locked)
 				visible_message("\The [src] bolts disengage!")
 				locked = FALSE
 				return TRUE

@@ -73,10 +73,7 @@
 	return !affecting.is_bandaged()
 
 /obj/item/stack/medical/bandage/proc/bandage_wound(mob/user, mob/target, obj/item/organ/external/affecting, datum/wound/wound)
-	user.visible_message(
-		SPAN_NOTICE("\The [user] bandages \a [wound.desc] on \the [target]'s [affecting.name]."),
-		SPAN_NOTICE("You bandage \a [wound.desc] on \the [target]'s [affecting.name].")
-	)
+	user.visible_action_message("bandage", "\a [wound.desc] on \the [target]'s [affecting.name].")
 	wound.bandage()
 
 /obj/item/stack/medical/bandage/try_treat_limb(mob/living/target, mob/living/user, obj/item/organ/external/affecting)
@@ -85,10 +82,7 @@
 		to_chat(user, SPAN_WARNING("The wounds on [target]'s [affecting.name] have already been bandaged."))
 		return FALSE
 
-	user.visible_message(
-		SPAN_NOTICE("\The [user] starts treating [target]'s [affecting.name]."),
-		SPAN_NOTICE("You start treating [target]'s [affecting.name].")
-	)
+	user.visible_action_message("start", "treating [target]'s [affecting.name].")
 
 	. = 0
 	for (var/datum/wound/wound in affecting.wounds)
@@ -161,15 +155,9 @@
 		    SPAN_NOTICE("You clean and seal \a [wound.desc] on [target]'s [affecting.name].")
 		)
 	else if (wound.damage_type == BRUISE)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] places a medical patch over \a [wound.desc] on [target]'s [affecting.name]."),
-			SPAN_NOTICE("You place a medical patch over \a [wound.desc] on [target]'s [affecting.name].")
-		)
+		user.visible_action_message("place", "a medical patch over \a [wound.desc] on [target]'s [affecting.name].")
 	else
-		user.visible_message(
-			SPAN_NOTICE("\The [user] smears some bioglue over \a [wound.desc] on [target]'s [affecting.name]."),
-		    SPAN_NOTICE("You smear some bioglue over \a [wound.desc] on [target]'s [affecting.name].")
-		)
+		user.visible_action_message("smear", "some bioglue over \a [wound.desc] on [target]'s [affecting.name].")
 	wound.bandage()
 	wound.disinfect()
 	wound.heal_damage(heal_brute)

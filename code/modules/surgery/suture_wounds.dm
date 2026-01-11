@@ -20,8 +20,7 @@
 
 /decl/surgery_step/suture_wounds/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] is beginning to close a wound on [target]'s [affected.name] with \the [tool]." , \
-		"You are beginning to close a wound on [target]'s [affected.name] with \the [tool].")
+	user.targeted_visible_action_message(target, "begin", "to close a wound on $TARGET'S$ [affected.name] with \the [tool].")
 	target.custom_pain("Your [affected.name] is being stabbed!",1)
 	..()
 
@@ -32,11 +31,9 @@
 			// Close it up to a point that it can be bandaged and heal naturally!
 			wound.heal_damage(rand(10,20)+10)
 			if(wound.damage >= wound.autoheal_cutoff)
-				user.visible_message(SPAN_NOTICE("\The [user] partially closes a wound on [target]'s [affected.name] with \the [tool]."), \
-				SPAN_NOTICE("You partially close a wound on [target]'s [affected.name] with \the [tool]."))
+				user.targeted_visible_action_message(target, "partially close", "a wound on $TARGET'S$ [affected.name] with \the [tool].")
 			else
-				user.visible_message(SPAN_NOTICE("\The [user] closes a wound on [target]'s [affected.name] with \the [tool]."), \
-				SPAN_NOTICE("You close a wound on [target]'s [affected.name] with \the [tool]."))
+				user.targeted_visible_action_message(target, "close", "a wound on $TARGET'S$ [affected.name] with \the [tool].")
 				if(!wound.damage)
 					affected.wounds -= wound
 					qdel(wound)

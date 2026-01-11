@@ -69,7 +69,7 @@
 		add_to_reagents(/decl/material/liquid/nutriment/glucose, (tray.weedlevel + tray.pestlevel))
 		tray.weedlevel = 0
 		tray.pestlevel = 0
-		visible_message(SPAN_NOTICE("<b>\The [src]</b> begins rooting through \the [tray], ripping out pests and weeds, and eating them noisily."),SPAN_NOTICE("You begin rooting through \the [tray], ripping out pests and weeds, and eating them noisily."))
+		visible_action_message("begin", "rooting through \the [tray], ripping out pests and weeds, and eating them noisily.")
 		return TRUE
 
 	if(tray.nutrilevel < 10)
@@ -91,5 +91,5 @@
 			to_chat(src, SPAN_NOTICE("You haven't eaten enough to refill \the [tray]'s water."))
 		return TRUE
 
-	visible_message(SPAN_NOTICE("<b>\The [src]</b> rolls around in \the [tray] for a bit."),SPAN_NOTICE("You roll around in \the [tray] for a bit."))
+	visible_action_message("roll", "around in \the [tray] for a bit.")
 	return TRUE

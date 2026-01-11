@@ -99,9 +99,7 @@
 
 /obj/machinery/optable/proc/take_victim(mob/living/target, mob/living/user)
 	if (target == user)
-		user.visible_message( \
-		SPAN_NOTICE("\The [user] climbs on \the [src]."), \
-		SPAN_NOTICE("You climb on \the [src]."))
+		user.visible_action_message("climb", "on \the [src].")
 	else
 		visible_message(SPAN_NOTICE("\The [target] has been laid on \the [src] by \the [user]."))
 	target.dropInto(loc)

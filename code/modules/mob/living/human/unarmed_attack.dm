@@ -134,29 +134,28 @@
 	return TRUE
 
 /decl/natural_attack/proc/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
-	var/msg = "\The [user] [pick(attack_verb)] \the [target]"
+	var/msg = "$TARGET$"
 	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
 	if(affecting)
 		msg = "[msg] in the [affecting.name]"
 	if(islist(attack_noun) && length(attack_noun))
-		msg = "[msg] with their [pick(attack_noun)]"
+		msg = "[msg] with $USER_THEIR$ [pick(attack_noun)]"
 	if(msg)
-		user.visible_message(SPAN_DANGER("[msg]!"))
+		user.targeted_visible_action_message(target, pick(attack_verb), "[msg]!")
 		playsound(user.loc, attack_sound, 25, 1, -1)
 
 /decl/natural_attack/proc/handle_eye_attack(var/mob/living/human/user, var/mob/living/human/target)
 	var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(target, BP_EYES)
-	var/decl/pronouns/pronouns = user.get_pronouns()
 	if(eyes)
 		eyes.take_damage(rand(3,4), 1)
-		user.visible_message(SPAN_DANGER("\The [user] jams [pronouns.his] [eye_attack_text] into \the [target]'s [eyes.name]!"))
 		if(eyes.can_feel_pain())
-			to_chat(target, SPAN_DANGER("You experience immense pain as [eye_attack_text_victim] are jammed into your [eyes.name]!"))
+			to_chat(target, SPAN_DANGER(target.get_action_string(TRUE, "experience", "immense pain as [eye_attack_text_victim] are jammed into $USER_THEIR$ [eyes.name]!")))
 		else
-			to_chat(target, SPAN_DANGER("You experience [eye_attack_text_victim] being jammed into your [eyes.name]."))
+			to_chat(target, SPAN_DANGER(target.get_action_string(TRUE, "experience", "[eye_attack_text_victim] being jammed into $USER_THEIR$ [eyes.name].")))
+
+		user.targeted_visible_action_message("jam", "$USER_THEIR$ [eye_attack_text] into $TARGET'S$ [eyes.name]!")
 	else
-		var/decl/pronouns/target_gender = target.get_pronouns()
-		user.visible_message(SPAN_DANGER("\The [user] attempts to press [pronouns.his] [eye_attack_text] into \the [target]'s eyes, but [target_gender.he] [target_gender.does]n't have any!"))
+		user.targeted_visible_action_message(target, "attempt", "to press $USER_THEIR$ [eye_attack_text] into $TARGET'S$ eyes, but $TARGET_THEY$ $TARGET_DOES$n't have any!")
 
 /decl/natural_attack/proc/damage_flags()
 	return (sharp ? DAM_SHARP : 0) | (edge ? DAM_EDGE : 0)
@@ -192,7 +191,7 @@
 /decl/natural_attack/punch
 	name = "punch"
 	selector_icon_state = "attack_punch"
-	attack_verb = list("punched")
+	attack_verb = list("punch")
 	attack_noun = list("fist")
 	eye_attack_text = "fingers"
 	eye_attack_text_victim = "digits"
@@ -209,54 +208,75 @@
 	attack_damage = clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
 
 	if(target == user)
-		var/decl/pronouns/pronouns = user.get_pronouns()
-		user.visible_message(SPAN_DANGER("\The [user] [pick(attack_verb)] [pronouns.self] in \the [affecting]!"))
+		user.visible_action_message(pick(attack_verb), "$USER_SELF$ in \the [affecting]!", dangerous = ACTION_DANGER_ALL)
 		return 0
 
 	target.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
 	user.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
 
-	var/decl/pronouns/user_gender =   user.get_pronouns()
-	var/decl/pronouns/target_gender = target.get_pronouns()
-	var/attack_string
+	var/attack_use_verb
+	var/attack_phrase
 	if(!target.current_posture.prone)
 		switch(zone)
 			if(BP_HEAD, BP_MOUTH, BP_EYES)
 				// ----- HEAD ----- //
 				switch(attack_damage)
 					if(1 to 2)
-						attack_string = "slapped \the [target] across [target_gender.his] cheek"
+						attack_use_verb = "slap"
+						attack_phrase = "$TARGET$ across $TARGET_THEIR$ cheek!"
 					if(3 to 4)
-						user.visible_message(pick(
-							80; attack_string = "[pick(attack_verb)] \the [target] in the head",
-							20; attack_string = "struck \the [target] in the head[pick("", " with a closed fist")]",
-							50; attack_string = "threw a hook against \the [target]'s head"
-							))
+						switch(rand(1, 15))
+							if(1 to 8)
+								attack_use_verb = pick(attack_verb)
+								attack_phrase = "$TARGET$ in the head!"
+							if(9 to 10)
+								attack_use_verb = "strike"
+								attack_phrase = "$TARGET$ in the head[prob(50) ? " with a closed fist" : null]!"
+							if(11 to 15)
+								attack_use_verb = "throw"
+								attack_phrase = "a hook against $TARGET'S$ head!"
 					if(5)
-						user.visible_message(pick(
-							10; attack_string = "gave \the [target] a solid slap across [target_gender.his] face",
-							90; attack_string = "smashed [user_gender.his] [pick(attack_noun)] into \the [target]'s [pick("[affecting.name]", "face", "jaw")]"
-							))
+						if(prob(10))
+							attack_use_verb = "give"
+							attack_phrase = "$TARGET$ a solid slap across $TARGET_THEIR$ face!"
+						else
+							attack_use_verb = "smash"
+							attack_phrase = "$USER_THEIR$ [pick(attack_noun)] into $TARGET'S$ [pick("[affecting.name]", "face", "jaw")]!"
 			else
 				// ----- BODY ----- //
 				switch(attack_damage)
 					if(1 to 2)
-						attack_string = "threw a glancing punch at [target]'s [affecting.name]"
+						attack_use_verb = "throw"
+						attack_phrase = "a glancing punch at $TARGET'S$ [affecting.name]!"
 					if(1 to 4)
-						attack_string = "[pick(attack_verb)] [target] in \the [affecting]"
+						attack_use_verb = pick(attack_verb)
+						attack_phrase = "$TARGET$ in \the [affecting]!"
 					if(5)
-						attack_string = "smashed [user_gender.his] [pick(attack_noun)] into [target]'s [affecting.name]"
+						attack_use_verb = "smash"
+						attack_phrase = "$USER_THEIR$ [pick(attack_noun)] into $TARGET'S$ [affecting.name]!"
 	else
 		//why do we have a separate set of verbs for lying targets?
-		attack_string = "[pick("punched", "threw a punch at", "struck", "slammed their [pick(attack_noun)] into")] \the [target]'s [affecting.name]"
+		switch(rand(1,4))
+			if(1)
+				attack_use_verb = "punch"
+				attack_phrase = "$TARGET'S$ [affecting.name]!"
+			if(2)
+				attack_use_verb = "throw"
+				attack_phrase = "a punch at $TARGET'S$ [affecting.name]!"
+			if(3)
+				attack_use_verb = "strike"
+				attack_phrase = "$TARGET'S$ [affecting.name]!"
+			if(4)
+				attack_use_verb = "slam"
+				attack_phrase = "$USER_THEIR$ [pick(attack_noun)] into $TARGET'S$ [affecting.name]!"
 
-	if(attack_string)
-		user.visible_message(SPAN_DANGER("\The [user] [attack_string]!"))
+	if(attack_use_verb && attack_phrase)
+		user.targeted_visible_action_message(target, attack_use_verb, attack_phrase, ACTION_DANGER_ALL)
 
 /decl/natural_attack/kick
 	name = "kick"
 	selector_icon_state = "attack_kick"
-	attack_verb = list("struck")
+	attack_verb = list("strike")
 	attack_noun = list("foot", "knee")
 	attack_sound = "swing_hit"
 	damage = 0
@@ -289,7 +309,7 @@
 /decl/natural_attack/stomp
 	name = "stomp"
 	selector_icon_state = "attack_stomp"
-	attack_verb = list("stomped on")
+	attack_verb = list("stomps on")
 	attack_noun = list("foot")
 	attack_sound = "swing_hit"
 	damage = 0
@@ -339,7 +359,7 @@
 	deal_halloss = 3
 	selector_icon_state = "attack_light_strike"
 	attack_noun = list("limb")
-	attack_verb = list("tapped", "lightly struck")
+	attack_verb = list("tap", "lightly struck")
 	shredding = 0
 	damage = 0
 	sharp = FALSE

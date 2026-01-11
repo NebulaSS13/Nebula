@@ -59,7 +59,7 @@
 		if(closed)
 			to_chat(user, "<span class='notice'>You need to open \the [src] with a crowbar before smoking the bees.</span>")
 			return TRUE
-		user.visible_message("<span class='notice'>\The [user] smokes the bees in \the [src].</span>", "<span class='notice'>You smoke the bees in \the [src].</span>")
+		user.visible_action_message("smoke", "the bees in \the [src].")
 		smoked = 30
 		update_icon()
 		return TRUE
@@ -75,7 +75,7 @@
 			to_chat(user, "<span class='notice'>\The [used_item] is full with beeswax and honey, empty it in the extractor first.</span>")
 			return TRUE
 		++frames
-		user.visible_message("<span class='notice'>\The [user] loads \the [used_item] into \the [src].</span>", "<span class='notice'>You load \the [used_item] into \the [src].</span>")
+		user.visible_action_message("load", "\the [used_item] into \the [src].")
 		update_icon()
 		qdel(used_item)
 		return TRUE
@@ -94,11 +94,11 @@
 			to_chat(user, "<span class='notice'>You need to open \the [src] with a crowbar before moving the bees.</span>")
 			return TRUE
 		if(B.full)
-			user.visible_message("<span class='notice'>\The [user] puts the queen and the bees from \the [used_item] into \the [src].</span>", "<span class='notice'>You put the queen and the bees from \the [used_item] into \the [src].</span>")
+			user.visible_action_message("put", "the queen and the bees from \the [used_item] into \the [src].")
 			bee_count = 20
 			B.empty()
 		else
-			user.visible_message("<span class='notice'>\The [user] puts bees and larvae from \the [src] into \the [used_item].</span>", "<span class='notice'>You put bees and larvae from \the [src] into \the [used_item].</span>")
+			user.visible_action_message("put", "bees and larvae from \the [src] into \the [used_item].")
 			bee_count /= 2
 			B.fill()
 		update_icon()
@@ -122,7 +122,7 @@
 		to_chat(user, "<span class='notice'>You start dismantling \the [src]...</span>")
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 30, src))
-			user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
+			user.visible_action_message("dismantle", "\the [src].")
 			new /obj/item/beehive_assembly(loc)
 			qdel(src)
 		return TRUE
@@ -138,8 +138,8 @@
 	if(!smoked && bee_count)
 		to_chat(user, "<span class='notice'>The bees won't let you take the honeycombs out like this, smoke them first.</span>")
 		return
-	user.visible_message("<span class='notice'>\The [user] starts taking the honeycombs out of \the [src].</span>", "<span class='notice'>You start taking the honeycombs out of \the [src]...</span>")
-	while(honeycombs >= 100 && do_after(user, 30, src))
+	user.visible_action_message("start", "taking the honeycombs out of \the [src]...")
+	while(honeycombs >= 100 && do_after(user, 3 SECONDS, src))
 		new /obj/item/hive_frame/crafted/filled(loc)
 		honeycombs -= 100
 		--frames

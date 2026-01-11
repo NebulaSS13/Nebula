@@ -324,7 +324,7 @@
 		return TRUE
 	var/force = used_item.expend_attack_force(user)
 	if(force)
-		user.visible_message(SPAN_NOTICE("\The [user] hits \the [src] with \the [used_item]."), SPAN_NOTICE("You hit \the [src] with \the [used_item]."))
+		user.visible_action_message("hit", "\the [src] with \the [used_item].")
 		take_damage(force, used_item.atom_damage_type)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)

@@ -80,9 +80,7 @@
 		if(!stat && !istype(buckled, /obj/effect/energy_net))
 			to_chat(user, SPAN_WARNING("It's going to be difficult to convince \the [src] to move into \the [cage] without capturing it in a net."))
 			return TRUE
-		user.visible_message( \
-			SPAN_NOTICE("\The [user] begins stuffing \the [src] into \the [cage]."), \
-			SPAN_NOTICE("You begin stuffing \the [src] into \the [cage]."))
+		user.visible_action_message("begin", "stuffing \the [src] into \the [cage].")
 		Bumped(user)
 		if(do_after(user, 20, cage))
 			cage.visible_message( \

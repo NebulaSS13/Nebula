@@ -228,7 +228,7 @@
 		user.put_in_active_hand(cup)
 		cups--
 		if(!skip_text)
-			visible_message("\The [user] grabs a paper cup from \the [src].", "You grab a paper cup from \the [src]'s cup compartment.")
+			user.visible_action_message("grab", "a paper cup from \the [src]'s cup compartment.")
 		return TRUE
 
 	if(!skip_text)

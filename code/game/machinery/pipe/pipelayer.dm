@@ -44,7 +44,7 @@
 	if(IS_WRENCH(used_item))
 		P_type_t = input("Choose pipe type", "Pipe type") as null|anything in Pipes
 		P_type = Pipes[P_type_t]
-		user.visible_message("<span class='notice'>[user] has set \the [src] to manufacture [P_type_t].</span>", "<span class='notice'>You set \the [src] to manufacture [P_type_t].</span>")
+		user.visible_action_message("set", "\the [src] to manufacture [P_type_t].")
 		return TRUE
 
 	if(IS_CROWBAR(used_item))
@@ -60,7 +60,7 @@
 		else if(!result)
 			to_chat(user, "<span class='notice'>\The [src] is full.</span>")
 		else
-			user.visible_message("<span class='notice'>[user] has loaded metal into \the [src].</span>", "<span class='notice'>You load metal into \the [src]</span>")
+			user.visible_action_message("load", "metal into \the [src]")
 
 		return TRUE
 
@@ -73,7 +73,7 @@
 			if(m)
 				use_metal(m)
 				SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), m)
-				user.visible_message(SPAN_NOTICE("[user] removes [m] sheet\s of metal from \the [src]."), SPAN_NOTICE("You remove [m] sheet\s of metal from \the [src]"))
+				user.visible_action_message("remove", "[m] sheet\s of metal from \the [src].")
 		else
 			to_chat(user, "\The [src] is empty.")
 		return TRUE

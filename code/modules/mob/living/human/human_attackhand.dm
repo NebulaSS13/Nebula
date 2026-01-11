@@ -3,6 +3,7 @@
 		hit_zone = get_target_zone()
 	var/list/available_attacks = get_mob_natural_attacks()
 	var/decl/natural_attack/use_attack = default_attack
+	var/decl/pronouns/self_pronouns = get_self_pronouns()
 	if(!use_attack || !use_attack.attack_is_usable(src, target, hit_zone) || !(use_attack in available_attacks))
 		var/alert_non_default_attack = use_attack?.name
 		use_attack = null
@@ -17,7 +18,7 @@
 		if(!use_attack && length(other_attacks))
 			use_attack = pick(other_attacks)
 		if(use_attack && alert_non_default_attack)
-			to_chat(src, SPAN_WARNING("You cannot [alert_non_default_attack] \the [target] currently, so you switch attacks."))
+			to_chat(src, SPAN_WARNING("[self_pronouns.He] cannot [alert_non_default_attack] \the [target] currently, so [self_pronouns.he] [verb_agree_with_pronouns("switch", self_pronouns)] attacks."))
 
 	. = use_attack?.resolve_to_soft_variant(src)
 
@@ -70,14 +71,15 @@
 		. += (!include_visible || owner?.is_blind()) ? "completely limp" : "dangling uselessly"
 
 /mob/living/human/proc/check_self_injuries(include_pain = TRUE, include_visible = TRUE)
+	var/decl/pronouns/self_pronouns = get_self_pronouns()
 	if(include_visible)
-		var/decl/pronouns/pronouns = get_pronouns()
+		// this is annoying: we use different verbs for self and other
 		visible_message(
-			SPAN_NOTICE("\The [src] examines [pronouns.self]."),
-			SPAN_NOTICE("You check yourself for injuries.")
+			SPAN_NOTICE(get_action_string(FALSE, "examine", "$USER_SELF$.")),
+			SPAN_NOTICE(get_action_string(TRUE, "check", "$USER_SELF$ for injuries."))
 		)
 	else if(include_pain)
-		to_chat(src, SPAN_NOTICE("You take note of how your body feels..."))
+		self_action_message("take", "note of how $USER_THEIR$ body feels...")
 	else
 		return // This should never happen, we should always check pain, visible status, or both.
 
@@ -85,13 +87,13 @@
 	for(var/obj/item/organ/external/org in get_external_organs())
 		var/list/status = org.get_injury_status(include_pain, include_visible)
 		if(length(status))
-			to_chat(src, "Your [org.name] is <span class='warning'>[english_list(status)].</span>")
+			to_chat(src, "[self_pronouns.His] [org.name] is <span class='warning'>[english_list(status)].</span>")
 		else if(is_blind() || !include_visible)
-			to_chat(src, "You <span class='notice'>can't feel anything wrong</span> with your [org.name].")
+			to_chat(src, "[self_pronouns.He] <span class='notice'>can't feel anything wrong</span> with [self_pronouns.his] [org.name].")
 		else if(!include_pain)
-			to_chat(src, "You <span class='notice'>can't see anything wrong</span> with your [org.name].")
+			to_chat(src, "[self_pronouns.He] <span class='notice'>can't see anything wrong</span> with [self_pronouns.his] [org.name].")
 		else
-			to_chat(src, "Your [org.name] is <span class='notice'>OK.</span>")
+			to_chat(src, "[self_pronouns.His] [org.name] is <span class='notice'>OK.</span>")
 
 /mob/living/human/default_help_interaction(mob/user)
 	if(apply_pressure(user, user.get_target_zone()))
@@ -122,7 +124,7 @@
 		return TRUE
 
 	if(user.incapacitated())
-		to_chat(user, SPAN_WARNING("You can't attack while incapacitated."))
+		self_action_message("can't", "attack while incapacitated.", ACTION_DANGER_OTHERS)
 		return TRUE
 
 	if(!ishuman(user))
@@ -142,14 +144,14 @@
 		return TRUE
 
 	if(world.time < H.last_attack + attack.delay)
-		to_chat(H, SPAN_NOTICE("You can't attack again so soon."))
+		self_action_message("can't", "attack again so soon.")
 		return TRUE
 
 	last_handled_by_mob = weakref(H)
 	H.last_attack = world.time
 
 	if(!affecting)
-		to_chat(user, SPAN_DANGER("They are missing that limb!"))
+		to_chat(user, SPAN_DANGER(user.get_targeted_action_string(src, TRUE, "are", "missing that limb!")))
 		return TRUE
 
 	// We didn't see this coming, so we get the full blow
@@ -195,15 +197,15 @@
 			hit_zone = ran_zone(hit_zone, target = src)
 		if(prob(15) && hit_zone != BP_CHEST) // Missed!
 			if(!src.current_posture.prone)
-				attack_message = "\The [H] attempted to strike \the [src], but missed!"
+				attack_message = "\The [H] attempts to strike \the [src], but misses!"
 			else
 				var/decl/pronouns/pronouns = get_pronouns()
-				attack_message = "\The [H] attempted to strike \the [src], but [pronouns.he] rolled out of the way!"
+				attack_message = "\The [H] attempts to strike \the [src], but [pronouns.he] rolls out of the way!"
 				src.set_dir(pick(global.cardinal))
 			miss_type = 1
 
 	if(!miss_type && block)
-		attack_message = "[H] went for [src]'s [affecting.name] but was blocked!"
+		attack_message = "[H] goes for [src]'s [affecting.name] but is blocked!"
 		miss_type = 2
 
 	H.do_attack_animation(src)
@@ -251,13 +253,13 @@
 /mob/living/human/proc/start_compressions(mob/living/human/H, starting = FALSE, cpr_mode)
 	if(length(H.get_held_items()))
 		performing_cpr = FALSE
-		to_chat(H, SPAN_WARNING("You cannot perform CPR with anything in your hands."))
+		to_chat(H, SPAN_WARNING(get_action_string(TRUE, "cannot", "perform CPR with anything in $USER_THEIR$ hands.")))
 		return
 
 	//Keeps doing CPR unless cancelled, or the target recovers
 	if(!(performing_cpr && H.Adjacent(src) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath)))
 		performing_cpr = FALSE
-		to_chat(H, SPAN_NOTICE("You stop performing CPR on \the [src]."))
+		to_chat(H, SPAN_NOTICE(get_targeted_action_string(src, TRUE, "stop", "performing CPR on $TARGET$.")))
 		return
 
 	else if (starting)
@@ -272,15 +274,15 @@
 
 		if(length(H.get_held_items()))
 			performing_cpr = FALSE
-			to_chat(H, SPAN_WARNING("You cannot perform CPR with anything in your hands."))
+			to_chat(H, SPAN_WARNING(get_action_string(TRUE, "cannot", "perform CPR with anything in $USER_THEIR$ hands.")))
 			return
 
-		H.visible_message(SPAN_NOTICE("\The [H] is trying to perform CPR on \the [src]."))
+		H.targeted_visible_action_message(src, "try", "to perform CPR on $TARGET$.")
 
 	var/pumping_skill = max(H.get_skill_value(SKILL_MEDICAL), H.get_skill_value(SKILL_ANATOMY))
 	var/cpr_delay = 15 * H.skill_delay_mult(SKILL_ANATOMY, 0.2)
 
-	H.visible_message(SPAN_NOTICE("\The [H] performs CPR on \the [src]!"))
+	H.targeted_visible_action_message(src, "perform", "CPR on $TARGET$.")
 
 	H.do_attack_animation(src, null)
 	var/starting_pixel_y = pixel_y
@@ -301,34 +303,37 @@
 			resuscitate()
 
 	if(!do_after(H, cpr_delay, FALSE)) //Chest compresssions are fast, need to wait for the loading bar to do mouth to mouth
+		to_chat(H, SPAN_NOTICE(get_targeted_action_string(src, TRUE, "stop", "performing CPR on $TARGET$.")))
 		to_chat(H, SPAN_NOTICE("You stop performing CPR on \the [src]."))
 		performing_cpr = FALSE //If it cancelled, cancel it. Simple.
 		return
 
 	if(cpr_mode == "Mouth-to-Mouth")
 		if(!H.check_has_mouth())
-			to_chat(H, SPAN_WARNING("You don't have a mouth, you cannot do mouth-to-mouth resuscitation!"))
+			to_chat(H, SPAN_WARNING(get_action_string(TRUE, "lack", "have a mouth, $USER_THEY$ cannot perform mouth-to-mouth resuscitation!")))
 			return TRUE
 
 		if(!check_has_mouth())
-			to_chat(H, SPAN_WARNING("They don't have a mouth, you cannot do mouth-to-mouth resuscitation!"))
+			var/decl/pronouns/victim_pronouns = get_visible_pronouns_for_viewer(H)
+			var/decl/pronouns/self_pronouns = H.get_self_pronouns()
+			to_chat(H, SPAN_WARNING("[victim_pronouns.He] [victim_pronouns.does]n't have a mouth, [self_pronouns.he] cannot do mouth-to-mouth resuscitation!"))
 			return TRUE
 
 		for(var/slot in global.airtight_slots)
 			var/obj/item/gear = H.get_equipped_item(slot)
 			if(gear && (gear.body_parts_covered & SLOT_FACE))
-				to_chat(H, SPAN_WARNING("You need to remove your mouth covering for mouth-to-mouth resuscitation!"))
+				to_chat(H, SPAN_WARNING(get_action_string(TRUE, "need", "to remove $USER_THEIR$ mouth covering for mouth-to-mouth resuscitation!")))
 				return TRUE
 
 		for(var/slot in global.airtight_slots)
 			var/obj/item/gear = get_equipped_item(slot)
 			if(gear && (gear.body_parts_covered & SLOT_FACE))
-				to_chat(H, SPAN_WARNING("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
+				to_chat(H, SPAN_WARNING(get_targeted_action_string(src, TRUE, "need", "to remove $TARGET'S$ mouth covering for mouth-to-mouth resuscitation!")))
 				return TRUE
 
 		var/decl/bodytype/root_bodytype = H.get_bodytype()
 		if(!GET_INTERNAL_ORGAN(H, root_bodytype.breathing_organ))
-			to_chat(H, SPAN_WARNING("You need lungs for mouth-to-mouth resuscitation!"))
+			to_chat(H, SPAN_WARNING(get_action_string(TRUE, "need", "lungs for mouth-to-mouth resuscitation!")))
 			return TRUE
 
 		if(!need_breathe())
@@ -341,7 +346,7 @@
 		if(!lungs.handle_owner_breath(H.get_breath_from_environment(), 1))
 			if(!lungs.is_bruised())
 				suffocation_counter = 0
-			to_chat(src, SPAN_NOTICE("You feel a breath of fresh air enter your lungs. It feels good."))
+			to_chat(src, SPAN_WARNING(get_targeted_action_string(src, TRUE, "feel", "a breath of fresh air enter $USER_THEIR$ lungs. It feels good.")))
 
 	// Again.
 	start_compressions(H, FALSE, cpr_mode)
@@ -351,7 +356,9 @@
 	. = FALSE
 	for(var/obj/item/grab/grab as anything in get_active_grabs())
 		if(grab.affecting)
-			visible_message(SPAN_DANGER("\The [user] has broken \the [src]'s grip on [grab.affecting]!"))
+			// todo: an even more niche language helper that can handle replacing a variable object (like grab.affecting) with pronouns
+			// if it's the same as the viewer or user
+			targeted_visible_action_message(src, "break", "$TARGET'S$ grip on [grab.affecting]!")
 			. = TRUE
 		drop_from_inventory(grab)
 
@@ -369,19 +376,12 @@
 		return 0
 
 	if(organ.applied_pressure)
-		var/message = "<span class='warning'>[ismob(organ.applied_pressure)? "Someone" : "\A [organ.applied_pressure]"] is already applying pressure to [user == src? "your [organ.name]" : "[src]'s [organ.name]"].</span>"
+		var/decl/pronouns/self_pronouns = get_self_pronouns()
+		var/message = "<span class='warning'>[ismob(organ.applied_pressure)? "Someone" : "\A [organ.applied_pressure]"] is already applying pressure to [user == src? "[self_pronouns.his] [organ.name]" : "[src]'s [organ.name]"].</span>"
 		to_chat(user, message)
 		return 0
 
-	if(user == src)
-		var/decl/pronouns/pronouns = user.get_pronouns()
-		user.visible_message( \
-			SPAN_NOTICE("\The [user] starts applying pressure to [pronouns.his] [organ.name]!"), \
-			SPAN_NOTICE("You start applying pressure to your [organ.name]!"))
-	else
-		user.visible_message( \
-			SPAN_NOTICE("\The [user] starts applying pressure to \the [src]'s [organ.name]!"), \
-			SPAN_NOTICE("You start applying pressure to \the [src]'s [organ.name]!"))
+	user.targeted_visible_action_message(src, "start", "applying pressure to $TARGET'S$ [organ.name]!")
 	// TODO: refactor applying pressure to use grabs instead? would probably require making grabs locked to the zone they were started on
 	spawn(0)
 		organ.applied_pressure = user
@@ -391,15 +391,7 @@
 
 		organ.applied_pressure = null
 
-		if(user == src)
-			var/decl/pronouns/pronouns = user.get_pronouns()
-			user.visible_message( \
-				SPAN_NOTICE("\The [user] stops applying pressure to [pronouns.his] [organ.name]!"), \
-				SPAN_NOTICE("You stop applying pressure to your [organ.name]!"))
-		else
-			user.visible_message( \
-				SPAN_NOTICE("\The [user] stops applying pressure to \the [src]'s [organ.name]!"), \
-				SPAN_NOTICE("You stop applying pressure to \the [src]'s [organ.name]!"))
+		user.targeted_visible_action_message(src, "stop", "applying pressure to $TARGET'S$ [organ.name]!")
 
 	return 1
 
@@ -418,7 +410,8 @@
 	if(QDELETED(src) || !istype(new_attack) || !(new_attack in get_mob_natural_attacks()))
 		return
 	default_attack = new_attack
-	to_chat(src, SPAN_NOTICE("Your default unarmed attack is now <b>[default_attack?.name || "cleared"]</b>."))
+	var/decl/pronouns/self_pronouns = get_self_pronouns()
+	to_chat(src, SPAN_NOTICE("[self_pronouns.His] default unarmed attack is now <b>[default_attack?.name || "cleared"]</b>."))
 	if(default_attack)
 		var/summary = default_attack.summarize()
 		if(summary)

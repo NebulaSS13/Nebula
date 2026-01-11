@@ -251,7 +251,7 @@
 
 /obj/item/camera/proc/eject_film(mob/user)
 	if(film)
-		user.visible_message(SPAN_NOTICE("[user] ejects \the [film] from \the [src]."), SPAN_NOTICE("You eject \the [film] from \the [src]."))
+		user.visible_action_message("eject", "\the [film] from \the [src].")
 		playsound(user, 'sound/machines/button1.ogg', 40, TRUE)
 		user.put_in_hands(film)
 		film = null
@@ -268,8 +268,8 @@
 			if(user.get_skill_value(SKILL_DEVICES) >= SKILL_EXPERT)
 				if(user.do_skilled(1 SECONDS, SKILL_DEVICES, src))
 					user.visible_message(
-						SPAN_NOTICE("In a swift flick of the finger, [user] ejects \the [film], and slides in \the [used_item]!"),
-						SPAN_NOTICE("From habit you instinctively pop the old [film] from \the [src] and insert a new [used_item] deftly!"))
+						SPAN_NOTICE("With a swift flick of the finger, [user] ejects \the [film] and slides in \the [used_item]!"),
+						SPAN_NOTICE("From habit you instinctively pop the old [film.name] from \the [src] and insert a new [used_item.name] deftly!"))
 					user.try_unequip(used_item, src)
 					user.put_in_active_hand(film)
 					film = used_item
@@ -281,13 +281,12 @@
 		else
 			if(user.do_skilled(1 SECONDS, SKILL_DEVICES, src))
 				if(user.get_skill_value(SKILL_DEVICES) >= SKILL_EXPERT)
+					user.visible_action_message("swiftly slide", "\the [used_item] into $USER_THEIR$ [name].")
 					user.visible_message(
 						SPAN_NOTICE("[user] swiftly slides \the [used_item] into \the [src]!"),
 						SPAN_NOTICE("You insert \a [used_item] swiftly into \the [src]!"))
 				else
-					user.visible_message(
-						SPAN_NOTICE("[user] inserts \a [used_item] into his [src]."),
-						SPAN_NOTICE("You insert \the [used_item] into \the [src]."))
+					user.visible_action_message("insert", "\the [used_item] into $USER_THEIR$ [name].")
 				user.try_unequip(used_item, src)
 				film = used_item
 				return TRUE

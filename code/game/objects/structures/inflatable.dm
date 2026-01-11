@@ -14,11 +14,11 @@
 	if(!isturf(user.loc))
 		to_chat(user, SPAN_WARNING("\The [src] cannot be inflated here."))
 		return
-	user.visible_message("[user] starts inflating \the [src].", "You start inflating \the [src].")
+	user.visible_action_message("start", "inflating \the [src].")
 	if(!do_after(user, 1 SECOND, src))
 		return
 	playsound(loc, 'sound/items/zip.ogg', 75, 1)
-	user.visible_message(SPAN_NOTICE("[user] inflates \the [src]."), SPAN_NOTICE("You inflate \the [src]."))
+	user.visible_action_message("inflate", "\the [src].")
 	var/obj/structure/inflatable/debris = new deploy_path(user.loc)
 	transfer_fingerprints_to(debris)
 	debris.add_fingerprint(user)

@@ -11,7 +11,5 @@
 /obj/item/guitar/attack_self(mob/user)
 	. = ..()
 	if(!.)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] strums \the [src]!"),
-			SPAN_NOTICE("You strum \the [src]!"))
+		user.visible_action_message("strum", "\the [src]!")
 		return TRUE

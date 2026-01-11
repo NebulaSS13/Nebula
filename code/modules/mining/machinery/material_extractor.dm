@@ -171,7 +171,7 @@
 				return TRUE
 			output_container = used_item
 			events_repository.register(/decl/observ/destroyed, output_container, src, TYPE_PROC_REF(/obj/machinery/material_processing/extractor, remove_container))
-			user.visible_message(SPAN_NOTICE("\The [user] places \a [used_item] in \the [src]."), SPAN_NOTICE("You place \a [used_item] in \the [src]."))
+			user.visible_action_message("place", "\a [used_item] in \the [src].")
 			return TRUE
 
 		to_chat(user, SPAN_WARNING("\The [src] already has an output container!"))

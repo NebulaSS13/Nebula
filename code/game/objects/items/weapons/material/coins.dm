@@ -66,18 +66,15 @@
 	playsound(src, 'sound/effects/coin_flip.ogg', 75, 1)
 
 	if(user && !thrown)
-		user.visible_message(
-			SPAN_NOTICE("[user] flips \the [src] into the air."),
-			SPAN_NOTICE("You flip \the [src] into the air."),
-			"You hear a coin ring.")
+		user.visible_action_message("flip", "\the [src] into the air.", blind_message = SPAN_NOTICE("You hear a coin ring."))
 
 	sleep(1.5 SECOND)
 
 	if(!QDELETED(src))
 		if(!QDELETED(user) && loc == user && !thrown)
-			user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [rigged ? "on the side" : pick(faces)]!"))
+			user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [rigged ? "the side" : pick(faces)]!"))
 		else
-			visible_message(SPAN_NOTICE("\The [src] landed on [rigged ? "on the side" : pick(faces)]!"))
+			visible_message(SPAN_NOTICE("\The [src] landed on [rigged ? "the side" : pick(faces)]!"))
 
 	can_flip = TRUE
 

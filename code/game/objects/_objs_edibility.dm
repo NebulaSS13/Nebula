@@ -26,10 +26,7 @@
 				)
 
 		else
-			user.visible_message(
-				SPAN_NOTICE("\The [user] feeds the last of \the [src] to \the [target]."),
-				SPAN_NOTICE("You feed the last of \the [src] to \the [target].")
-			)
+			user.visible_action_message("feed", "the last of \the [src] to \the [target].")
 
 /obj/proc/handle_consumed(mob/feeder, mob/eater, consumption_method = EATING_METHOD_EAT)
 	if(eater)

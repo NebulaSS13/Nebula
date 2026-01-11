@@ -249,7 +249,7 @@ var/global/chicken_count = 0
 	var/obj/item/food/G = used_item //feedin' dem chickens
 	if(findtext(G.get_grown_tag(), "wheat")) // includes chopped, crushed, dried etc.
 		if(!stat && eggsleft < 4)
-			user.visible_message(SPAN_NOTICE("[user] feeds \the [used_item] to \the [src]! It clucks happily."), SPAN_NOTICE("You feed \the [used_item] to \the [src]! It clucks happily."), SPAN_NOTICE("You hear clucking."))
+			user.visible_action_message("feed", "\the [used_item] to \the [src]! It clucks happily.", blind_message = "You hear clucking.")
 			qdel(used_item)
 			eggsleft += rand(1, 2)
 		else

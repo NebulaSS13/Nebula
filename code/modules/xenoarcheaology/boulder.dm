@@ -48,10 +48,7 @@
 
 	if(istype(used_item, /obj/item/measuring_tape))
 		var/obj/item/measuring_tape/P = used_item
-		user.visible_message(
-			SPAN_NOTICE("\The [user] extends \the [P] towards \the [src]."),
-			SPAN_NOTICE("You extend \the [P] towards \the [src].")
-		)
+		user.visible_action_message("extend", "\the [P] towards \the [src].")
 		if(do_after(user, 15))
 			to_chat(user, SPAN_NOTICE("\The [src] has been excavated to a depth of [src.excavation_level]cm."))
 		return TRUE

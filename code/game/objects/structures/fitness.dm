@@ -86,9 +86,7 @@
 				message = "; this does not look safe"
 		else
 			message = fail_message[min(1 + round(weight - skill), fail_message.len)]
-		H.visible_message( \
-			SPAN_NOTICE("\The [H] fails to lift the weights[message]."), \
-			SPAN_NOTICE("You fail to lift the weights[message]."))
+		H.visible_action_message("fail", "to lift the weights[message].")
 	else
 		if(!synth)
 			var/adj_weight = weight * 5

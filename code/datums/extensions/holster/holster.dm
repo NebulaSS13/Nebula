@@ -52,7 +52,7 @@
 		if(isobj(storage?.holder))
 			var/obj/obj_holder = storage.holder
 			obj_holder.w_class = max(obj_holder.w_class, holstered.w_class)
-		user.visible_message("<span class='notice'>\The [user] holsters \the [holstered].</span>", "<span class='notice'>You holster \the [holstered].</span>")
+		user.visible_action_message("holster", "\the [holstered].")
 		atom_holder.SetName("occupied [initial(atom_holder.name)]")
 		atom_holder.update_icon()
 		events_repository.register(/decl/observ/moved, holstered, src, PROC_REF(check_holster))
@@ -82,15 +82,9 @@
 				G.check_accidents(user)
 				if(G.safety() && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //Experienced shooter will disable safety before shooting.
 					G.toggle_safety(user)
-			user.visible_message(
-				"<span class='danger'>\The [user] draws \the [holstered], ready to go!</span>",
-				"<span class='warning'>You draw \the [holstered], ready to go!</span>"
-				)
+			user.visible_action_message("draw", "\the [holstered], ready to go!", dangerous = ACTION_DANGER_OTHERS)
 		else
-			user.visible_message(
-				"<span class='notice'>\The [user] draws \the [holstered], pointing it at the ground.</span>",
-				"<span class='notice'>You draw \the [holstered], pointing it at the ground.</span>"
-				)
+			user.visible_action_message("draw", "\the [holstered], pointing it at the ground.")
 		if(sound_out)
 			playsound(get_turf(atom_holder), sound_out, sound_vol)
 		holstered.add_fingerprint(user)

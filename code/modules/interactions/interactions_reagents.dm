@@ -145,9 +145,6 @@
 		var/turf/target_turf = target
 		fluid_name = "\the [target_turf.get_fluid_name()]"
 
-	user.visible_message(
-		SPAN_NOTICE("\The [user] drinks from [fluid_name]."),
-		SPAN_NOTICE("You drink from [fluid_name].")
-	)
+	user.visible_action_message("drink", "from [fluid_name].")
 	target.reagents.trans_to_mob(user, 5, CHEM_INGEST)
 	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)

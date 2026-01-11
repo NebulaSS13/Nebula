@@ -156,7 +156,7 @@
 
 	charge.charges--
 	var/obj/item/grenade/new_grenade = new charge.product_type(get_turf(wearer))
-	wearer.visible_message(SPAN_DANGER("[wearer] launches \a [new_grenade]!"), SPAN_DANGER("You launch \a [new_grenade]!"))
+	wearer.visible_action_message("launch", "\a [new_grenade]!", dangerous = ACTION_DANGER_ALL)
 	log_and_message_admins("fired a grenade ([new_grenade.name]) from a rigsuit grenade launcher.")
 	new_grenade.activate(wearer)
 	new_grenade.throw_at(target,fire_force,fire_distance)

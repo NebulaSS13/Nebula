@@ -87,15 +87,9 @@
 		to_chat(user, SPAN_WARNING("You need to wipe off the old makeup first!"))
 		return TRUE
 
-	user.visible_message(
-		SPAN_NOTICE("\The [user] begins to do \the [target]'s makeup with \the [src]."),
-		SPAN_NOTICE("You begin to apply \the [src] to \the [target].")
-	)
+	user.visible_action_message("begin", "to do \the [target]'s makeup with \the [src].")
 	if(do_after(user, 2 SECONDS, target))
-		user.visible_message(
-			SPAN_NOTICE("\The [user] does \the [target]'s makeup with \the [src]."),
-			SPAN_NOTICE("You apply \the [src] to \the [target].")
-		)
+		user.visible_action_message("do", "\the [target]'s makeup with \the [src].")
 		if(target.get_organ_sprite_accessory_metadata(cosmetic_type, apply_marking_to_limb))
 			return TRUE
 		target.set_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, list(SAM_COLOR = makeup_color), apply_marking_to_limb)

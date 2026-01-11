@@ -7,7 +7,7 @@
 	decorations = list(/obj/item/gemstone/round)
 
 /obj/item/clothing/gloves/ring/engagement/attack_self(mob/user)
-	user.visible_message(SPAN_WARNING("\The [user] gets down on one knee, presenting \the [src]."), SPAN_WARNING("You get down on one knee, presenting \the [src]."))
+	user.visible_action_message("get", "down on one knee, presenting \the [src].", dangerous = ACTION_DANGER_OTHERS)
 
 /obj/item/clothing/gloves/ring/cti
 	name        = "\improper CTI ring"

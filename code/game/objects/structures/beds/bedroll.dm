@@ -59,32 +59,15 @@
 
 /obj/structure/bed/bedroll/show_buckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
-		visible_message(
-			SPAN_NOTICE("\The [buckled] climbs into \the [src]."),
-			SPAN_NOTICE("You climb into \the [src]."),
-			SPAN_NOTICE("You hear a rustling sound.")
-		)
+		buckled.visible_action_message("climb", "into \the [src].", blind_message = SPAN_NOTICE("You hear a rustling sound."))
 	else
-		var/decl/pronouns/pronouns = buckled.get_pronouns()
-		visible_message(
-			SPAN_NOTICE("\The [buckled] [pronouns.is] bundled into \the [src] by \the [buckling]."),
-			SPAN_NOTICE("You are bundled into \the [src] by \the [buckling]."),
-			SPAN_NOTICE("You hear a rustling sound.")
-		)
+		buckling.targeted_visible_action_message("bundle", "\the [buckled] into \the [src].", blind_message = SPAN_NOTICE("You hear a rustling sound."))
 
 /obj/structure/bed/bedroll/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
-		visible_message(
-			SPAN_NOTICE("\The [buckled] climbs out of \the [src]."),
-			SPAN_NOTICE("You climb out of \the [src]."),
-			SPAN_NOTICE("You hear a rustling sound.")
-		)
+		buckled.visible_action_message("climb", "out of \the [src].", blind_message = SPAN_NOTICE("You hear a rustling sound."))
 	else
-		visible_message(
-			SPAN_NOTICE("\The [buckled] was pulled out of \the [src] by \the [buckling]."),
-			SPAN_NOTICE("You were pulled out of \the [src] by \the [buckling]."),
-			SPAN_NOTICE("You hear a rustling sound.")
-		)
+		buckling.targeted_visible_action_message("pull", "\the [buckled] out of \the [src].", blind_message = SPAN_NOTICE("You hear a rustling sound."))
 
 /obj/structure/bed/bedroll/on_update_icon()
 	. = ..()
@@ -112,7 +95,7 @@
 		return TRUE
 
 /obj/structure/bed/bedroll/proc/roll_bed(mob/user)
-	visible_message(SPAN_NOTICE("\The [user] rolls up \the [src]."))
+	user.visible_action_message("roll", "up \the [src].")
 	var/obj/item/bedroll/roll = new item_path(get_turf(src), material?.type)
 	roll.padding_material = reinf_material?.type
 	roll.matter = matter?.Copy()

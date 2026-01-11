@@ -55,10 +55,7 @@
 
 /datum/storage/med_pouch/open(mob/user)
 	if(!opened)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] tears open \the [holder], breaking the vacuum seal!"),
-			SPAN_NOTICE("You tear open \the [holder], breaking the vacuum seal!")
-		)
+		user.visible_action_message("tear", "open \the [holder], breaking the vacuum seal!")
 	. = ..()
 
 /datum/storage/cigpapers

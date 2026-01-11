@@ -323,7 +323,7 @@
 			if(species.gluttonous & GLUT_PROJECTILE_VOMIT)
 				M.throw_at(get_edge_target_turf(src,dir),7,7,src)
 
-	visible_message(SPAN_DANGER("\The [src] throws up!"),SPAN_DANGER("You throw up!"))
+	visible_action_message("throw", "up!", dangerous = ACTION_DANGER_ALL)
 	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 	var/turf/location = loc
 	if(istype(location) && location.simulated)

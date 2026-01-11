@@ -52,17 +52,11 @@
 		return
 
 	if(isliving(user))
-		if(stored_name)
-			user.visible_message("<span class='notice'>[user] displays their [src.name].\nIt reads: [stored_name], [badge_string].</span>","<span class='notice'>You display your [src.name].\nIt reads: [stored_name], [badge_string].</span>")
-		else
-			user.visible_message("<span class='notice'>[user] displays their [src.name].\nIt reads: [badge_string].</span>","<span class='notice'>You display your [src.name]. It reads: [badge_string].</span>")
+		user.visible_action_message("display", "$USER_THEIR$ [src.name].\nIt reads: [stored_name ? "[stored_name], " : ""][badge_string].")
 
 /obj/item/clothing/badge/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(isliving(user) && user.check_intent(I_FLAG_HARM))
-		user.visible_message(
-			SPAN_DANGER("\The [user] invades \the [target]'s personal space, thrusting \the [src] into their face insistently."),
-			SPAN_DANGER("You invade \the [target]'s personal space, thrusting \the [src] into their face insistently.")
-		)
+		user.targeted_visible_action_message(target, "invade", "$TARGET'S$ personal space, thrusting \the [src] into $TARGET_THEIR$ face insistently.", dangerous = ACTION_DANGER_ALL)
 		if(stored_name)
 			to_chat(target, SPAN_NOTICE("It reads: [stored_name], [badge_string]."))
 		return TRUE

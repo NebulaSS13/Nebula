@@ -71,7 +71,7 @@
 			to_chat(user, "<span class='notice'>\The [A] is fully charged!</span>")
 			recharging = FALSE
 			return TRUE
-		user.visible_message("\The [user] starts recharging \the [A] with \the [src].","<span class='notice'>You start recharging \the [A] with \the [src].</span>")
+		user.visible_action_message("start", "recharging \the [A] with \the [src].")
 		if (istype(A, /obj/item/gun/energy))
 			charge_length = 30
 			if (user.get_skill_value(SKILL_WEAPONS) <= SKILL_ADEPT)
@@ -92,7 +92,7 @@
 			else
 				break
 		if(done_any) // Only show a message if we succeeded at least once
-			user.visible_message("\The [user] recharged \the [A]!","<span class='notice'>You recharged \the [A]!</span>")
+			user.visible_action_message("successfully recharge", "\the [A]!")
 		recharging = FALSE
 		return TRUE
 	else

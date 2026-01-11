@@ -57,10 +57,7 @@
 /obj/machinery/microwave/attackby(var/obj/item/used_item, var/mob/user)
 	if(broken > 0)
 		if(broken == 2 && IS_SCREWDRIVER(used_item)) // If it's broken and they're using a screwdriver
-			user.visible_message(
-				SPAN_NOTICE("\The [user] starts to fix part of [src]."),
-				SPAN_NOTICE("You start to fix part of [src].")
-			)
+			user.visible_action_message("start", "to fix part of [src].")
 			if (do_after(user, 20, src))
 				user.visible_message(
 					SPAN_NOTICE("\The [user] fixes part of [src]."),
@@ -68,10 +65,7 @@
 				)
 				broken = 1 // Fix it a bit
 		else if(broken == 1 && IS_WRENCH(used_item)) // If it's broken and they're doing the wrench
-			user.visible_message(
-				SPAN_NOTICE("\The [user] starts to fix part of [src]."),
-				SPAN_NOTICE("You start to fix part of [src].")
-			)
+			user.visible_action_message("start", "to fix part of [src].")
 			if (do_after(user, 20, src))
 				user.visible_message(
 					SPAN_NOTICE("\The [user] fixes [src]."),
@@ -89,10 +83,7 @@
 		return
 	else if(dirty==100) // The microwave is all dirty so can't be used!
 		if(istype(used_item, /obj/item/chems/spray/cleaner) || istype(used_item, /obj/item/chems/rag)) // If they're trying to clean it then let them
-			user.visible_message(
-				SPAN_NOTICE("\The [user] starts to clean [src]."),
-				SPAN_NOTICE("You start to clean [src].")
-			)
+			user.visible_action_message("start", "to clean [src].")
 			if (do_after(user, 20, src))
 				user.visible_message(
 					SPAN_NOTICE("\The [user] has cleaned [src]."),
@@ -293,7 +284,7 @@
 
 	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	addtimer(CALLBACK(src, PROC_REF(half_time_process)), cook_time / 2)
-	visible_message(SPAN_NOTICE("[src] turns on."), SPAN_NOTICE("You hear a microwave."))
+	visible_message(SPAN_NOTICE("[src] turns on."), null, SPAN_NOTICE("You hear a microwave."))
 
 	if(cook_dirty)
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1) // Play a splat sound

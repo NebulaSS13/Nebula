@@ -16,10 +16,7 @@
 		var/obj/item/flame/match/match = used_item
 		if(match.light(null, no_message = TRUE))
 			playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
-			user.visible_message(
-				SPAN_NOTICE("[user] strikes [used_item] on \the [src]."),
-				SPAN_NOTICE("You strike [used_item] on \the [src].")
-			)
+			user.visible_action_message("strike", "\the [used_item] on \the [src].")
 			used_item.update_icon()
 			return TRUE
 	return ..()

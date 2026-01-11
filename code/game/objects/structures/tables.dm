@@ -142,9 +142,7 @@
 		return ..()
 
 	if(felted)
-		user.visible_message(
-			SPAN_NOTICE("\The [user] removes the felting from \the [src]."),
-			SPAN_NOTICE("You remove the felting from \the [src]."))
+		user.visible_action_message("remove", "the felting from \the [src].")
 		new /obj/item/stack/tile/carpet(loc)
 		felted = FALSE
 		update_icon()
@@ -173,8 +171,7 @@
 			additional_reinf_material.create_object(src.loc)
 			additional_reinf_material = null
 
-		user.visible_message(SPAN_NOTICE("\The [user] removes the [remove_mat.solid_name] [remove_noun] from \the [src]."),
-			SPAN_NOTICE("You remove the [remove_mat.solid_name] [remove_noun] from \the [src]."))
+		user.visible_action_message("remove", "the [remove_mat.solid_name] [remove_noun] from \the [src].")
 		update_materials()
 	return TRUE
 
@@ -197,9 +194,7 @@
 	if(!felted && istype(used_item, /obj/item/stack/tile/carpet))
 		var/obj/item/stack/tile/carpet/C = used_item
 		if(C.use(1))
-			user.visible_message(
-				SPAN_NOTICE("\The [user] adds \the [C] to \the [src]."),
-				SPAN_NOTICE("You add \the [C] to \the [src]."))
+			user.visible_action_message("add", "\the [C] to \the [src].")
 			felted = TRUE
 			update_icon()
 		else

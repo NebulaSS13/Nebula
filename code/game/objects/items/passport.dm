@@ -27,9 +27,5 @@
 	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species_name()]\nGender: [capitalize(pronouns.name)]\nAge: [H.get_age()]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
 
 /obj/item/passport/attack_self(mob/user)
-	user.visible_message(
-		SPAN_ITALIC("\The [user] checks over \the [src]."),
-		SPAN_ITALIC("You check over \the [src]."),
-		SPAN_ITALIC("You hear the faint rustle of pages."),
-		5)
+	user.visible_action_message("check", "over \the [src].", dangerous = "italic", blind_message = "You hear the faint rustle of pages.", range = 5)
 	to_chat(user, info || SPAN_WARNING("\The [src] is completely blank!"))
