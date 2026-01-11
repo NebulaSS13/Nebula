@@ -5,17 +5,18 @@
 	max_health = 100
 	fire_dam_coeff = 0.7
 	brute_dam_coeff = 0.5
+	layer = ABOVE_HUMAN_LAYER
 
 	var/passenger_allowed = 1
-
 	var/active_engines = 0
 	var/train_length = 0
-
 	var/obj/vehicle/train/lead
 	var/obj/vehicle/train/tow
 
+	var/static/list/all_throw_dirs = list(NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHWEST, SOUTHEAST)
+
 /obj/vehicle/train/user_buckle_mob(mob/living/M, mob/user)
-	return load(M)
+	return load_onto_vehicle(M)
 
 //-------------------------------------------
 // Standard procs
@@ -95,7 +96,7 @@
 			return 1
 		return 0
 
-	unload(user, direction)
+	unload_from_vehicle(user, direction)
 
 	to_chat(user, "<span class='notice'>You climb down from [src].</span>")
 	return 1
@@ -110,7 +111,7 @@
 /obj/vehicle/train/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && istype(dropping, /atom/movable))
-		if(!load(dropping))
+		if(!load_onto_vehicle(dropping))
 			to_chat(user, SPAN_WARNING("You were unable to load \the [dropping] onto \the [src]."))
 		return TRUE
 
@@ -121,9 +122,9 @@
 	if(user != load && (user in src))
 		user.forceMove(loc)
 	else if(load)
-		unload(user)
+		unload_from_vehicle(user)
 	else if(!load && !user.buckled)
-		load(user)
+		load_onto_vehicle(user)
 	return TRUE
 
 /obj/vehicle/train/verb/unlatch_v()
@@ -235,5 +236,7 @@
 		T.update_car(train_length, active_engines)
 		T = T.lead
 
-/obj/vehicle/train/proc/update_car(var/train_length, var/active_engines)
-	return
+/obj/vehicle/train/proc/update_car(var/_train_length, var/_active_engines)
+	SHOULD_CALL_PARENT(TRUE)
+	train_length = _train_length
+	active_engines = _active_engines

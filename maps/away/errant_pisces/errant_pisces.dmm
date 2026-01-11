@@ -451,7 +451,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/vehicle/train/cargo/trolley,
+/obj/vehicle/train/trolley,
 /turf/floor/plating,
 /area/errant_pisces/enginering)
 "bp" = (
@@ -569,7 +569,7 @@
 /turf/floor/plating,
 /area/errant_pisces/enginering)
 "bK" = (
-/obj/vehicle/train/cargo/trolley,
+/obj/vehicle/train/trolley,
 /turf/floor/plating,
 /area/errant_pisces/enginering)
 "bL" = (
@@ -4380,11 +4380,11 @@
 /turf/floor/tiled/white,
 /area/errant_pisces/science_wing)
 "lU" = (
-/obj/vehicle/train/cargo/engine,
+/obj/vehicle/train/engine,
 /turf/floor/plating,
 /area/errant_pisces/general_storage)
 "lV" = (
-/obj/vehicle/train/cargo/trolley,
+/obj/vehicle/train/trolley,
 /turf/floor/plating,
 /area/errant_pisces/general_storage)
 "lW" = (
