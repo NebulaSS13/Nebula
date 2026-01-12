@@ -8,6 +8,37 @@ var/global/regex/actual_error_file_line
 		log_world("\[[time_stamp()]] Uncaught exception: [E]")
 		return ..()
 
+	//this is snowflake because of a byond bug (ID:2306577), do not attempt to call non-builtin procs in this block OR BEFORE IT
+	if(copytext(E.name, 1, 32) == "Maximum recursion level reached")//32 == length() of that string + 1
+		var/list/proc_path_to_count = list()
+		var/crashed = FALSE
+		try
+			var/callee/stack_entry = caller
+			while(!isnull(stack_entry))
+				proc_path_to_count[stack_entry.proc] += 1
+				stack_entry = stack_entry.caller
+		catch
+			//union job. avoids crashing the stack again
+			//I just do not trust this construct to work reliably
+			crashed = TRUE
+
+		var/list/split = splittext(E.desc, "\n")
+		for (var/i in 1 to split.len)
+			if (split[i] != "" || copytext(split[1], 1, 2) != "  ")
+				split[i] = "  [split[i]]"
+		split += "--Stack Info [crashed ? "(Crashed, may be missing info)" : ""]:"
+		for(var/path in proc_path_to_count)
+			split += "  [path] = [proc_path_to_count[path]]"
+		E.desc = jointext(split, "\n")
+		// expanding the first line of log_world to avoid hitting the stack limit again
+		to_file(world.log, "\[[time2text(station_time_in_ticks, "hh:mm:ss")]] Runtime Error: [E.name]\n[E.desc]")
+		//log to world while intentionally triggering the byond bug. this does not DO anything, it just errors
+		//(seemingly because log_info_line is deep enough to hit the raised limit 516.1667 introduced)
+		log_world("runtime error: [E.name]\n[E.desc]\n[log_info_line(usr)]\n[log_info_line(src)]")
+		//if we got to here without silently ending, the byond bug has been fixed.
+		log_world("The \"bug\" with recursion runtimes has been fixed. Please remove the snowflake check from world/Error in [__FILE__]:[__LINE__]")
+		return //this will never happen.
+
 	if (!global.actual_error_file_line)
 		global.actual_error_file_line = regex("^%% (.*?),(.*?) %% ")
 
