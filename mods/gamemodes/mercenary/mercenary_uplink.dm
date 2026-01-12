@@ -33,7 +33,7 @@
 	desc = "A pump action grenade launcher loaded with a random assortment of grenades"
 	item_cost = 60
 	antag_roles = list(/decl/special_role/mercenary)
-	path = /obj/item/gun/launcher/grenade/loaded
+	path = /obj/item/gun/launcher/grenade/random
 
 /datum/uplink_item/item/visible_weapons/smg
 	name = "Standard Submachine Gun"

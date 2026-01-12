@@ -1,13 +1,14 @@
 var/global/repository/atom_info/atom_info_repository = new()
 
 /repository/atom_info
-	var/list/matter_cache =         list()
+	var/list/matter_cache         = list()
 	var/list/combined_worth_cache = list()
-	var/list/single_worth_cache =   list()
-	var/list/name_cache =           list()
-	var/list/description_cache =    list()
-	var/list/matter_mult_cache =    list()
-	var/list/origin_tech_cache =    list()
+	var/list/single_worth_cache   = list()
+	var/list/name_cache           = list()
+	var/list/description_cache    = list()
+	var/list/matter_mult_cache    = list()
+	var/list/origin_tech_cache    = list()
+	var/list/appearance_cache     = list()
 
 /repository/atom_info/proc/create_key_for(var/_path, var/_mat, var/_amount)
 	. = "[_path]"
@@ -24,7 +25,7 @@ var/global/repository/atom_info/atom_info_repository = new()
 	else
 		. = new _path
 
-/repository/atom_info/proc/update_cached_info_for(var/_path, var/_mat, var/_amount, var/key)
+/repository/atom_info/proc/update_cached_info_for(var/_path, var/_mat, var/_amount, var/key, var/cache_appearance = FALSE)
 	var/atom/instance
 	if(!matter_cache[key])
 		instance = get_instance_of(_path, _mat, _amount)
@@ -41,6 +42,9 @@ var/global/repository/atom_info/atom_info_repository = new()
 	if(!description_cache[key])
 		instance = instance || get_instance_of(_path, _mat, _amount)
 		description_cache[key] = instance.desc
+	if(cache_appearance && !appearance_cache[key])
+		instance = instance || get_instance_of(_path, _mat, _amount)
+		appearance_cache[key] = instance.appearance
 	if(!matter_mult_cache[key] && ispath(_path, /obj))
 		var/obj/obj_instance = instance || get_instance_of(_path, _mat, _amount)
 		matter_mult_cache[key] = obj_instance.get_matter_amount_modifier()
@@ -85,3 +89,9 @@ var/global/repository/atom_info/atom_info_repository = new()
 	var/key = create_key_for(_path, _mat, _amount)
 	update_cached_info_for(_path, _mat, _amount, key)
 	. = origin_tech_cache[key]
+
+// Bespoke proc; only cache appearance if and when this proc is called, not more generally.
+/repository/atom_info/proc/get_appearance_of(var/_path, var/_mat, var/_amount)
+	var/key = create_key_for(_path, _mat, _amount)
+	update_cached_info_for(_path, _mat, _amount, key, cache_appearance = TRUE)
+	. = appearance_cache[key]
