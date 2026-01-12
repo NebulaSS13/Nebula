@@ -11,6 +11,8 @@
 	var/has_admin_data             // If set, shows up on the admin persistence panel.
 	var/ignore_area_flags = FALSE  // Set to TRUE to skip area flag checks such as nonpersistent areas.
 	var/ignore_invalid_loc = FALSE // Set to TRUE to skip checking for a non-null station turf for the entry.
+	var/area_restricted = TRUE     // Can this item persist outside of a flagged area?
+	var/station_restricted = TRUE  // Can this item persist outside of a station level?
 
 /decl/persistence_handler/proc/SetFilename()
 	if(name)

@@ -194,6 +194,9 @@
 	butchery_data = /decl/butchery_data/animal/cat/black
 	holder_type = /obj/item/holder/runtime
 
+/mob/living/simple_animal/passive/cat/fluff/runtime/is_tagging_suitable()
+	return FALSE
+
 /obj/item/holder/runtime
 	origin_tech = @'{"programming":1,"biotech":1}'
 

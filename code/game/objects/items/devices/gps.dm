@@ -1,6 +1,7 @@
 var/global/list/all_gps_units = list()
 /obj/item/gps
-	name = "global coordinate system"
+	name = "global positioning system"
+	base_name = "global positioning system"
 	desc = "A handheld relay used to triangulate the approximate coordinates of the device in spacetime."
 	icon = 'icons/obj/items/device/locator.dmi'
 	icon_state = ICON_STATE_WORLD
@@ -24,21 +25,36 @@ var/global/list/all_gps_units = list()
 	var/can_hide_signal = FALSE       // If it can toggle the above var.
 	var/is_special_gps_marker = FALSE // How the GPS marker should be handled.
 
+	var/tag_category        // Any special category for this tracker to sit in (used by xenofauna tags)
+	var/list/tag_categories // Any special categories this tracker should show (used in xenofauna GPS)
+
 	var/mob/holder
 	var/is_in_processing_list = FALSE
 	var/list/tracking_devices
 	var/list/showing_tracked_names
-	var/obj/compass_holder/compass
+	VAR_PRIVATE/obj/compass_holder/_compass
 	var/list/decals
+
 
 /obj/item/gps/Initialize()
 	global.all_gps_units += src
 	. = ..()
-	name = "[initial(name)] ([gps_tag])"
 	events_repository.register(/decl/observ/moved, src, src, PROC_REF(update_holder))
-	compass = new(src)
+	create_compass()
 	update_holder()
 	update_icon()
+	update_name()
+
+/obj/item/gps/proc/set_gps_tag(_tag)
+	_tag = sanitize(_tag)
+	if(istext(_tag) && length(_tag) > 0 && gps_tag != _tag)
+		gps_tag = _tag
+		update_name()
+
+/obj/item/gps/update_name()
+	. = ..()
+	if(gps_tag)
+		SetName("[base_name] ([gps_tag])")
 
 /obj/item/gps/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
@@ -60,7 +76,8 @@ var/global/list/all_gps_units = list()
 	if(holder && (force_clear || loc != holder))
 		moved_event.unregister(holder, src)
 		dir_set_event.unregister(holder, src)
-		holder.client?.screen -= compass
+		if(_compass)
+			holder.client?.screen -= _compass
 		holder = null
 
 	if(!force_clear && ismob(loc))
@@ -72,16 +89,16 @@ var/global/list/all_gps_units = list()
 		if(!is_in_processing_list)
 			START_PROCESSING(SSobj, src)
 			is_in_processing_list = TRUE
-		if(holder.client)
+		if(holder.client && _compass)
 			if(check_visible_to_holder())
-				holder.client.screen |= compass
+				holder.client.screen |= _compass
 			else
-				holder.client.screen -= compass
+				holder.client.screen -= _compass
 	else
 		STOP_PROCESSING(SSobj, src)
 		is_in_processing_list = FALSE
-		if(holder?.client)
-			holder.client.screen -= compass
+		if(holder?.client && _compass)
+			holder.client.screen -= _compass
 
 /obj/item/gps/equipped_robot()
 	. = ..()
@@ -105,13 +122,12 @@ var/global/list/all_gps_units = list()
 	global.all_gps_units -= src
 	events_repository.unregister(/decl/observ/moved, src, src, PROC_REF(update_holder))
 	update_holder(force_clear = TRUE)
-	QDEL_NULL(compass)
+	QDEL_NULL(_compass)
 	return ..()
 
 /obj/item/gps/proc/can_track(var/obj/item/gps/other, var/reachable_z_levels)
-	if(!other.tracking || other.emped || other.hide_signal)
+	if(!other.tracking || other.emped || other.hide_signal || (other.tag_category && !(other.tag_category in tag_categories)))
 		return FALSE
-
 	var/turf/origin = get_turf(src)
 	var/turf/target = get_turf(other)
 	if(!istype(origin) || !istype(target))
@@ -131,9 +147,12 @@ var/global/list/all_gps_units = list()
 		LAZYDISTINCTADD(reachable_z_levels, adding_sites)
 	return (target.z in reachable_z_levels)
 
+/obj/item/gps/proc/create_compass()
+	_compass ||= new(src)
+
 /obj/item/gps/proc/update_compass(var/update_compass_icon)
 
-	compass.hide_waypoints(FALSE)
+	_compass?.hide_waypoints(FALSE)
 
 	var/turf/my_turf = get_turf(src)
 	for(var/thing in tracking_devices)
@@ -143,14 +162,15 @@ var/global/list/all_gps_units = list()
 			LAZYREMOVE(showing_tracked_names, thing)
 			continue
 
-		var/turf/gps_turf = get_turf(gps)
-		var/gps_tag = LAZYACCESS(showing_tracked_names, thing) ? gps.gps_tag : null
-		if(istype(gps_turf))
-			compass.set_waypoint("\ref[gps]", gps_tag, gps_turf.x, gps_turf.y, gps_turf.z, LAZYACCESS(tracking_devices, "\ref[gps]"))
-			if(can_track(gps) && my_turf && gps_turf != my_turf)
-				compass.show_waypoint("\ref[gps]")
+		if(_compass)
+			var/turf/gps_turf = get_turf(gps)
+			var/use_gps_tag = LAZYACCESS(showing_tracked_names, thing) ? gps.gps_tag : null
+			if(istype(gps_turf))
+				_compass.set_waypoint("\ref[gps]", use_gps_tag, gps_turf.x, gps_turf.y, gps_turf.z, LAZYACCESS(tracking_devices, "\ref[gps]"))
+				if(can_track(gps) && my_turf && gps_turf != my_turf)
+					_compass.show_waypoint("\ref[gps]")
 
-	compass.rebuild_overlay_lists(update_compass_icon)
+	_compass?.rebuild_overlay_lists(update_compass_icon)
 
 /obj/item/gps/proc/toggle_tracking(var/mob/user, var/silent)
 
@@ -321,7 +341,7 @@ var/global/list/all_gps_units = list()
 	if(href_list["stop_track"])
 		var/gps_ref = href_list["stop_track"]
 		var/obj/item/gps/gps = locate(gps_ref)
-		compass.clear_waypoint(gps_ref)
+		_compass?.clear_waypoint(gps_ref)
 		LAZYREMOVE(tracking_devices, gps_ref)
 		LAZYREMOVE(showing_tracked_names, gps_ref)
 		if(istype(gps) && !QDELETED(gps))
@@ -353,8 +373,7 @@ var/global/list/all_gps_units = list()
 		var/a = input("Please enter desired tag.", name, gps_tag) as text
 		a = uppertext(copytext(sanitize(a), 1, 11))
 		if(CanInteract(user, topic_state))
-			gps_tag = a
-			name = "[initial(name)] ([gps_tag])"
+			set_gps_tag(a)
 			to_chat(user, SPAN_NOTICE("You set your GPS's tag to '[gps_tag]'."))
 			. = TOPIC_REFRESH
 
@@ -398,6 +417,7 @@ var/global/list/all_gps_units = list()
 
 // Department subtypes.
 /obj/item/gps/mining
+	gps_tag = "MIN0"
 	color = "#c08f45"
 	decals = list(
 		"stripe-outside" = "#702e98",
@@ -405,6 +425,7 @@ var/global/list/all_gps_units = list()
 	)
 
 /obj/item/gps/science
+	gps_tag = "SCI0"
 	color = "#dbcfdf"
 	decals = list(
 		"stripe-outside" = "#cc33ff",
@@ -412,15 +433,23 @@ var/global/list/all_gps_units = list()
 	)
 
 /obj/item/gps/medical
+	gps_tag = "MED0"
 	color = "#ebebeb"
 	decals = list(
 		"stripe-outside" = "#6ab8fe",
 		"stripe-inside" =  "#339efe"
 	)
 
-/obj/item/gps/explorer
-	color = "#4a4a4a"
+/obj/item/gps/security
+	gps_tag = "SEC0"
+	color = "#5c0000"
 	decals = list(
-		"stripe-outside" = "#500677",
-		"stripe-inside" =  "#68099e"
+		"stripe-outside" = "#ff0000",
+		"stripe-inside" =  "#800000"
+	)
+
+/obj/item/gps/security/hos
+	decals = list(
+		"stripe-outside" = "#ffae00",
+		"stripe-inside" =  "#9e7900"
 	)
