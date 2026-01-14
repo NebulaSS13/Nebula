@@ -1,0 +1,22 @@
+#ifndef CONTENT_PACK_EXPLORATION
+#define CONTENT_PACK_EXPLORATION
+// BEGIN_INCLUDE
+#include "_exploration.dm"
+#include "access.dm"
+#include "projectiles.dm"
+#include "screen_cataloguer.dm"
+#include "specimen_codex.dm"
+#include "specimen_mob.dm"
+#include "equipment\cataloguer.dm"
+#include "equipment\clothing.dm"
+#include "equipment\device.dm"
+#include "equipment\guns.dm"
+#include "equipment\loadout.dm"
+#include "equipment\melee.dm"
+#include "equipment\radios.dm"
+#include "equipment\specimen_tag.dm"
+#include "equipment\specimen_tagger.dm"
+#include "structures\closets.dm"
+#include "structures\stasis_cage.dm"
+// END_INCLUDE
+#endif

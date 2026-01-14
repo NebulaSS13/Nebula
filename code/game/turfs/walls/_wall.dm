@@ -129,8 +129,10 @@ var/global/list/wall_fullblend_objects = list(
 
 	var/proj_damage = Proj.get_structure_damage()
 
-	if(Proj.ricochet_sounds && prob(15))
-		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
+	if(prob(15))
+		var/list/ricochet_sounds = Proj.get_ricochet_sounds()
+		if(length(ricochet_sounds))
+			playsound(src, pick(ricochet_sounds), 100, 1)
 
 	if(reinf_material)
 		if(Proj.atom_damage_type == BURN)

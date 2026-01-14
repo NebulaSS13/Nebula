@@ -225,7 +225,7 @@
 		REMOVE_CORNER(C,now)
 		effect_str[C] = 0
 
-	var/actual_range = light_range
+	var/actual_range = (light_angle && facing_opaque) ? light_range * LIGHTING_BLOCKED_FACTOR : light_range
 
 	var/Sx = pixel_turf.x
 	var/Sy = pixel_turf.y
@@ -335,7 +335,6 @@
 
 	var/list/datum/lighting_corner/corners = list()
 	var/list/turf/turfs                    = list()
-	var/thing
 	var/datum/lighting_corner/C
 	var/turf/T
 	var/list/Tcorners
@@ -358,8 +357,9 @@
 			if ((DETERMINANT(limit_a_x, limit_a_y, test_x, test_y) > 0) || DETERMINANT(test_x, test_y, limit_b_x, limit_b_y) > 0)
 				continue
 
-		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T) || T.light_source_solo || T.light_source_multi)
-			Tcorners = T.corners
+		Tcorners = T.corners
+		// These checks are inlined from generate_missing_corners. They must be kept in sync.
+		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T) || T.light_source_solo || T.light_source_multi || (T.z_flags & ZM_ALLOW_LIGHTING))
 			if (!T.lighting_corners_initialised)
 				T.lighting_corners_initialised = TRUE
 
@@ -373,11 +373,11 @@
 
 					Tcorners[i] = new /datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[i], i)
 
-			if (!T.has_opaque_atom)
-				for (var/v in 1 to 4)
-					var/val = Tcorners[v]
-					if (val)
-						corners[val] = 0
+		if (Tcorners && !T.has_opaque_atom)
+			for (var/v in 1 to 4)
+				var/val = Tcorners[v]
+				if (val)
+					corners[val] = 0
 
 		turfs += T
 
@@ -390,39 +390,34 @@
 
 	var/list/L = turfs - affecting_turfs // New turfs, add us to the affecting lights of them.
 	affecting_turfs += L
-	for (thing in L)
-		T = thing
+	for (T as anything in L)
 		LAZYADD(T.affecting_lights, src)
 
 	L = affecting_turfs - turfs // Now-gone turfs, remove us from the affecting lights.
 	affecting_turfs -= L
-	for (thing in L)
-		T = thing
+	for (T as anything in L)
 		LAZYREMOVE(T.affecting_lights, src)
 
 	LAZYINITLIST(effect_str)
 	if (needs_update == LIGHTING_VIS_UPDATE)
-		for (thing in corners - effect_str)
-			C = thing
+		for (C as anything in corners - effect_str) // newly added corners
 			LAZYADD(C.affecting, src)
 			if (!C.active)
 				effect_str[C] = 0
 				continue
 
-			APPLY_CORNER_BY_HEIGHT(now)
+			INIT_CORNER_BY_HEIGHT(now)
 	else
 		L = corners - effect_str
-		for (thing in L)
-			C = thing
+		for (C as anything in L)
 			LAZYADD(C.affecting, src)
 			if (!C.active)
 				effect_str[C] = 0
 				continue
 
-			APPLY_CORNER_BY_HEIGHT(now)
+			INIT_CORNER_BY_HEIGHT(now)
 
-		for (thing in corners - L)
-			C = thing
+		for (C as anything in corners - L)
 			if (!C.active)
 				effect_str[C] = 0
 				continue
@@ -430,8 +425,7 @@
 			APPLY_CORNER_BY_HEIGHT(now)
 
 	L = effect_str - corners
-	for (thing in L)
-		C = thing
+	for (C as anything in L)
 		REMOVE_CORNER(C, now)
 		LAZYREMOVE(C.affecting, src)
 

@@ -140,8 +140,7 @@
 		access_research,
 		access_medical,
 		access_cargo,
-		access_bar,
-		access_explorer
+		access_bar
 	)
 
 /obj/item/radio/headset/heads/hop
@@ -156,8 +155,7 @@
 		access_cargo,
 		access_bridge,
 		access_security,
-		access_mining,
-		access_explorer
+		access_mining
 	)
 
 /obj/item/radio/headset/heads/hos

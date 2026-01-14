@@ -138,25 +138,25 @@ var/global/list/global/aquarium_states_and_layers = list(
 	for(var/atom/movable/AM in get_contained_external_atoms())
 		add_overlay(AM)
 
-/obj/structure/glass_tank/can_climb(var/mob/living/user, post_climb_check=0)
+/obj/structure/glass_tank/can_climb(mob/living/user, post_climb_check = FALSE, silent = FALSE)
 	if (!user.can_touch(src) || !(atom_flags & ATOM_FLAG_CLIMBABLE) || (!post_climb_check && (user in climbers)))
-		return 0
-
+		return FALSE
 	if (!Adjacent(user))
-		to_chat(user, SPAN_DANGER("You can't climb there, the way is blocked."))
-		return 0
-
+		if(!silent)
+			to_chat(user, SPAN_WARNING("You can't climb there, the way is blocked."))
+		return FALSE
 	var/obj/occupied = turf_is_crowded()
 	if(occupied)
-		to_chat(user, SPAN_DANGER("There's \a [occupied] in the way."))
-		return 0
-	return 1
+		if(!silent)
+			to_chat(user, SPAN_WARNING("There's \a [occupied] in the way."))
+		return FALSE
+	return TRUE
 
 /obj/structure/glass_tank/do_climb(var/mob/living/user)
 	if(!istype(user) || !can_climb(user))
 		return
 	user.visible_message(SPAN_WARNING("\The [user] starts climbing into \the [src]!"))
-	if(!do_after(user,50))
+	if(!do_after(user, 5 SECONDS))
 		return
 	if (!can_climb(user))
 		return

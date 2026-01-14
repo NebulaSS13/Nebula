@@ -23,6 +23,5 @@
 		access_medical,
 		access_cargo,
 		access_bar,
-		access_ai_upload,
-		access_explorer
+		access_ai_upload
 	)

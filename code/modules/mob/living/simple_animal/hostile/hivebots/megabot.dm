@@ -5,7 +5,7 @@
 /mob/living/simple_animal/hostile/hivebot/mega
 	name = "hivemind"
 	desc = "A huge quadruped robot equipped with a myriad of weaponry."
-	icon = 'icons/mob/simple_animal/megabot.dmi'
+	icon = 'icons/mob/simple_animal/hivebots/megabot.dmi'
 	max_health = 440
 	natural_weapon = /obj/item/natural_weapon/circular_saw
 	natural_armor = list(

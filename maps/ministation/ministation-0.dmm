@@ -3645,7 +3645,7 @@
 /area/ministation/atmospherics)
 "pS" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/vehicle/train/cargo/trolley,
+/obj/vehicle/train/trolley,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "pT" = (
@@ -10707,7 +10707,7 @@
 /area/ministation/engine)
 "NR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/sign/directions/supply{
+/obj/structure/sign/directions/cargo/supply{
 	dir = 1;
 	pixel_x = -32;
 	pixel_y = 32
@@ -11114,7 +11114,7 @@
 /turf/floor/plating,
 /area/space)
 "OW" = (
-/obj/structure/sign/directions/supply{
+/obj/structure/sign/directions/cargo/supply{
 	dir = 1;
 	pixel_x = -32;
 	pixel_y = 32
@@ -13140,7 +13140,7 @@
 /area/ministation/engine)
 "Ws" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/vehicle/train/cargo/engine,
+/obj/vehicle/train/engine,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "Wt" = (

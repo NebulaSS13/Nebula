@@ -1961,7 +1961,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/crew/hallway/starboard)
 "ed" = (
-/obj/structure/sign/department/redcross,
+/obj/structure/sign/department/cross,
 /turf/wall,
 /area/ship/scrap/crew/medbay)
 "ee" = (

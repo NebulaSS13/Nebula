@@ -19,13 +19,16 @@ var/global/list/cargoprices = list()
 	. = ..() // make sure children are set up
 	if(is_category())
 		return // don't do any of this for categories
+	var/total_contained = 0
+	for(var/entry in contains)
+		total_contained += max(1, contains[entry])
 	if(!num_contained)
-		for(var/entry in contains)
-			num_contained += max(1, contains[entry])
+		num_contained = total_contained
 	if(isnull(cost))
 		cost = 0
 		for(var/entry in contains)
 			cost += atom_info_repository.get_combined_worth_for(entry) * max(1, contains[entry])
+		cost *= num_contained / total_contained // if you get a random selection, it costs the expected value rather than the total worth. gambling!
 		cost += containertype ? atom_info_repository.get_single_worth_for(containertype) : 0
 		cost = max(1, NONUNIT_CEILING((cost * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.price_markup), WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT))
 	global.cargoprices[name] = cost

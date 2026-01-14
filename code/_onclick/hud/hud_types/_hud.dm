@@ -92,6 +92,9 @@
 	var/action_buttons_hidden = FALSE
 	var/obj/screen/action_button/hide_toggle/hide_actions_toggle
 
+	var/const/HAND_UI_PER_ROW = 4
+	var/const/HAND_UI_INITIAL_Y_OFFSET = 21
+
 	// TODO: declify these.
 	VAR_PROTECTED/gun_mode_toggle_type
 	VAR_PRIVATE/obj/screen/gun/mode/gun_mode_toggle
@@ -351,11 +354,10 @@
 			qdel(inv_box)
 
 	// Rebuild offsets for the hand elements.
-	var/const/elems_per_row = 4
-	var/hand_y_offset = 21
+	var/hand_y_offset = HAND_UI_INITIAL_Y_OFFSET
 	var/list/elements = hud_elements_hands?.Copy()
 	while(length(elements))
-		var/copy_index = min(length(elements), elems_per_row)+1
+		var/copy_index = min(length(elements), HAND_UI_PER_ROW)+1
 		var/list/sublist = elements.Copy(1, copy_index)
 		elements.Cut(1, copy_index)
 		var/hand_x_offset = (world.icon_size/2) * (1 - length(sublist))
@@ -389,6 +391,7 @@
 			if(mymob.client)
 				mymob.client.screen |= swap_elem
 
+	refresh_element(HUD_STAMINA)
 	update_hand_elements()
 
 	return TRUE

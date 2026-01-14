@@ -64,7 +64,7 @@
 		id_tag = "[sequential_id("obj/machinery")]"
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
-		for(var/g in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
+		for(var/g in get_filterable_material_types())
 			if(g != /decl/material/gas/oxygen && g != /decl/material/gas/nitrogen)
 				scrubbing_gas += g
 	. = ..()

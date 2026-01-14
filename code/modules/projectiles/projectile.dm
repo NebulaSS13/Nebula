@@ -25,6 +25,10 @@
 	var/proj_trail_icon_state = "trail"
 	/// Any extant trail effects.
 	var/list/proj_trails
+	/// An effect to spawn when a non-hitscan projectile collides with a target.
+	var/impact_effect_type
+	/// A sound to play when striking a non-mob (hitsound is used for mobs)
+	var/hitsound_non_mob
 
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
@@ -73,6 +77,7 @@
 
 	var/fire_sound
 	var/fire_sound_vol = 50
+	var/fire_sound_vol_silenced = 10
 	var/miss_sounds
 	var/ricochet_sounds
 	var/list/impact_sounds	//for different categories, IMPACT_MEAT etc
@@ -131,6 +136,10 @@
 
 //called when the projectile stops flying because it collided with something
 /obj/item/projectile/proc/on_impact(var/atom/A)
+
+	impact_sounds(A)
+	impact_visuals(A)
+
 	if(damage && atom_damage_type == BURN)
 		var/turf/T = get_turf(A)
 		if(T)
@@ -208,6 +217,7 @@
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/special_miss_modifier=0)
+	SHOULD_CALL_PARENT(TRUE)
 	if(!istype(target_mob))
 		return
 
@@ -234,13 +244,18 @@
 	if(result == PROJECTILE_FORCE_MISS)
 		if(!silenced)
 			target_mob.visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
+			var/list/miss_sounds = get_miss_sounds()
 			if(LAZYLEN(miss_sounds))
 				playsound(target_mob.loc, pick(miss_sounds), 60, 1)
 		return FALSE
 
 	//hit messages
 	if(silenced)
-		to_chat(target_mob, "<span class='danger'>You've been hit in the [parse_zone(def_zone)] by \the [src]!</span>")
+		to_chat(target_mob, SPAN_DANGER("You've been hit in the [parse_zone(def_zone)] by \the [src]!"))
+		if(hitsound)
+			var/impact_volume = get_impact_volume_by_damage()
+			if(impact_volume)
+				playsound(target_mob, hitsound, impact_volume, 1, -1)
 	else
 		target_mob.visible_message("<span class='danger'>\The [target_mob] is hit by \the [src] in the [parse_zone(def_zone)]!</span>")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
 
@@ -671,4 +686,62 @@
 		QDEL_NULL(beam_index)
 
 /obj/item/projectile/proc/update_effect(var/obj/effect/projectile/effect)
+	return
+
+/obj/item/projectile/proc/get_projectile_damage(mob/living/target)
+	return damage
+
+// Makes a brief effect sprite appear when the projectile hits something solid.
+/obj/item/projectile/proc/impact_visuals(atom/A, hit_x, hit_y)
+	 // Hitscan things have their own impact sprite.
+	if(!impact_effect_type || hitscan)
+		return
+	if(isnull(hit_x) && isnull(hit_y))
+		if(trajectory)
+			// Effect goes where the projectile 'stopped'.
+			hit_x = A.pixel_x + trajectory.return_px()
+			hit_y = A.pixel_y + trajectory.return_py()
+		else if(A == original)
+			// Otherwise it goes where the person who fired clicked.
+			hit_x = A.pixel_x + p_x - 16
+			hit_y = A.pixel_y + p_y - 16
+		else
+			// Otherwise it'll be random.
+			hit_x = A.pixel_x + rand(-8, 8)
+			hit_y = A.pixel_y + rand(-8, 8)
+	new impact_effect_type(get_turf(A), src, hit_x, hit_y)
+
+/obj/item/projectile/proc/get_impact_volume_by_damage()
+	if(damage || agony)
+		var/value_to_use = damage > agony ? damage : agony
+		// Multiply projectile damage by 1.2, then CLAMP the value between 30 and 100.
+		// This was 0.67 but in practice it made all projectiles that did 45 or less damage play at 30,
+		// which is hard to hear over the gunshots, and is rather rare for a projectile to do that much.
+		return clamp((value_to_use) * 1.2, 30, 100)
+	return 50 //if the projectile doesn't do damage or agony, play its hitsound at 50% volume.
+
+/obj/item/projectile/proc/impact_sounds(atom/A)
+
+	var/play_volume = clamp(get_impact_volume_by_damage() + 20, 0, 100)
+	if(play_volume <= 0)
+		return
+	if(silenced)
+		play_volume = min(play_volume, 5)
+
+	var/play_sound
+	if(ismob(A)) // Mob sounds are handled in attack_mob().
+		play_sound = hitsound
+	else
+		play_sound = hitsound_non_mob
+	if(!play_sound)
+		return
+	playsound(A, play_sound, play_volume, 1, -1)
+
+/obj/item/projectile/proc/get_miss_sounds()
+	return
+
+/obj/item/projectile/proc/get_ricochet_sounds()
+	return
+
+/obj/item/projectile/proc/get_impact_sounds()
 	return

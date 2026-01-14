@@ -108,8 +108,37 @@
 		return FALSE
 	return TRUE
 
-// For uplink purchase, comes loaded with a random assortment of grenades
+/obj/item/gun/launcher/grenade/loaded
+	var/initial_load_type
+
 /obj/item/gun/launcher/grenade/loaded/Initialize()
+	. = ..()
+	if(initial_load_type)
+		chambered = new initial_load_type(src)
+		LAZYINITLIST(grenades)
+		for(var/i = 1 to max_grenades)
+			grenades += new initial_load_type(src)
+
+/obj/item/gun/launcher/grenade/loaded/anti_photon
+	initial_load_type = /obj/item/grenade/anti_photon
+
+/obj/item/gun/launcher/grenade/loaded/smoke
+	initial_load_type = /obj/item/grenade/smokebomb
+
+/obj/item/gun/launcher/grenade/loaded/teargas
+	initial_load_type = /obj/item/grenade/chem_grenade/teargas
+
+/obj/item/gun/launcher/grenade/loaded/flashbang
+	initial_load_type = /obj/item/grenade/flashbang
+
+/obj/item/gun/launcher/grenade/loaded/emp
+	initial_load_type = /obj/item/grenade/empgrenade
+
+/obj/item/gun/launcher/grenade/loaded/frag
+	initial_load_type = /obj/item/grenade/frag/shell
+
+// For uplink purchase, comes loaded with a random assortment of grenades
+/obj/item/gun/launcher/grenade/random/Initialize()
 	. = ..()
 
 	var/list/grenade_types = list(

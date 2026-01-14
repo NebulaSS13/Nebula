@@ -1,4 +1,3 @@
-
 /mob/living/simple_animal
 	name = "animal"
 	max_health = 20
@@ -71,9 +70,6 @@
 	var/bleed_ticks = 0
 	var/bleed_colour = COLOR_BLOOD_HUMAN
 	var/can_bleed = TRUE
-
-	// contained in a cage
-	var/in_stasis = 0
 
 	//for simple animals with abilities, mostly megafauna
 	var/ability_cooldown

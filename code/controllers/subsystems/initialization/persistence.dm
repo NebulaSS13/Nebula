@@ -38,11 +38,19 @@ SUBSYSTEM_DEF(persistence)
 
 	var/turf/T = get_turf(value)
 	if(!T)
-		return
+		return FALSE
 
-	var/area/A = get_area(T)
-	if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
-		return
+	var/decl/persistence_handler/handler = RESOLVE_TO_DECL(track_type)
+	if(!istype(handler))
+		return FALSE
+
+	if(handler.station_restricted && (!T || !(T.z in SSmapping.station_levels) ))
+		return FALSE
+
+	if(handler.area_restricted)
+		var/area/A = get_area(T)
+		if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
+			return FALSE
 
 	var/datum/level_data/level = SSmapping.levels_by_z[T.z]
 	if(!istype(level) || !level.permit_persistence)

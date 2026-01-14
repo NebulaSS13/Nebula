@@ -3,7 +3,6 @@
 	icon_state = "laser"
 	temperature = T0C + 300
 	fire_sound='sound/weapons/Laser.ogg'
-	impact_sounds = list(BULLET_IMPACT_MEAT = SOUNDS_LASER_MEAT, BULLET_IMPACT_METAL = SOUNDS_LASER_METAL)
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 40
 	atom_damage_type = BURN
@@ -14,10 +13,25 @@
 	invisibility = INVISIBILITY_ABSTRACT	//beam projectiles are invisible as they are rendered by the effect engine
 	penetration_modifier = 0.3
 	distance_falloff = 2.5
+	hitsound = 'sound/weapons/sear.ogg'
+	hitsound_non_mob = 'sound/weapons/searwall.ogg'
 
 	muzzle_type = /obj/effect/projectile/muzzle/laser
 	tracer_type = /obj/effect/projectile/tracer/laser
 	impact_type = /obj/effect/projectile/impact/laser
+
+/obj/item/projectile/beam/get_impact_sounds()
+	var/static/list/impact_sounds = list(
+		(BULLET_IMPACT_MEAT)  = SOUNDS_LASER_MEAT,
+		(BULLET_IMPACT_METAL) = SOUNDS_LASER_METAL
+	)
+	return impact_sounds
+
+/obj/item/projectile/beam/blue
+	damage = 30
+	muzzle_type = /obj/effect/projectile/muzzle/laser/blue
+	tracer_type = /obj/effect/projectile/tracer/laser/blue
+	impact_type = /obj/effect/projectile/impact/laser/blue
 
 /obj/item/projectile/beam/megabot
 	damage = 45

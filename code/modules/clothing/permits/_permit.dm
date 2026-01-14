@@ -66,11 +66,6 @@
 	name = "bar shotgun permit"
 	desc = "A card indicating that the owner is allowed to carry a shotgun in the bar."
 
-/obj/item/clothing/permit/gun/planetside
-	name = "planetside weapon permit"
-	desc = "A card indicating that the owner is allowed to carry a weapon while on the surface."
-	detail_color = COLOR_PALE_PINK
-
 /obj/item/clothing/permit/gun/paramedic
 	name = "paramedic weapon permit"
 	desc = "A card indicating that the owner is allowed to carry a weapon while on EVA retrieval missions."
@@ -80,7 +75,3 @@
 	name = "holy weapon permit"
 	desc = "A card indicating that the owner is allowed to carry a weapon for religious rites and purposes."
 	detail_color = COLOR_GRAY15
-
-/obj/item/clothing/permit/gun/planetside/exploration
-	name = "explorer weapon permit"
-	desc = "A card indicating that the owner is allowed to carry weaponry during active exploration missions."

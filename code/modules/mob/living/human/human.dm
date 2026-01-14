@@ -1145,3 +1145,7 @@
 				robolimb_count++
 		full_prosthetic = robolimb_count > 0 && (robolimb_count == LAZYLEN(limbs)) //If no organs, no way to tell
 	return full_prosthetic
+
+// Don't tag your crewmates please.
+/mob/living/human/is_tagging_suitable()
+	return FALSE

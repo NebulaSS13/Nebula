@@ -156,7 +156,8 @@
 	randpixel = 2
 	amount = 20
 	max_amount = 20
-	singular_name = "length"
+	singular_name = "length of network cable"
+	plural_name = "lengths of network cable"
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
 	throw_range = 5

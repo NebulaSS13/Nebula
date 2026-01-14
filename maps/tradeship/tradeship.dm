@@ -35,6 +35,7 @@
 	#include "../../mods/content/supermatter/_supermatter.dme"
 	#include "../../mods/content/ventcrawl/_ventcrawl.dme"
 	#include "../../mods/content/xenobiology/_xenobiology.dme"
+	#include "../../mods/content/exploration/_exploration.dme"
 
 	#include "../../mods/gamemodes/cult/_cult.dme"
 	#include "../../mods/gamemodes/heist/_heist.dme"

@@ -106,6 +106,9 @@
 	can_buckle = TRUE
 	var/aaa_words = list("delaminat", "meteor", "fire", "breach")
 
+/mob/living/simple_animal/opossum/poppy/is_tagging_suitable()
+	return FALSE
+
 /mob/living/simple_animal/opossum/poppy/hear_broadcast(decl/language/language, mob/speaker, speaker_name, message)
 	. = ..()
 	addtimer(CALLBACK(src, PROC_REF(check_keywords), message), rand(1 SECOND, 3 SECONDS))

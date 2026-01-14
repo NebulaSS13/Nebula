@@ -15,13 +15,12 @@
 	origin_tech = @'{"magnets":1,"engineering":1}'
 	use_delay = 50
 	printout_color = "#fff7f0"
-	var/survey_data = 0
-
 	scan_sound = 'sound/effects/ping.ogg'
+	var/survey_data = 0
 
 /obj/item/scanner/mining/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	. += "A tiny indicator on \the [src] shows it holds [survey_data] good explorer point\s."
+	. += "A tiny indicator on \the [src] shows it holds [survey_data] survey point\s."
 
 /obj/item/scanner/mining/is_valid_scan_target(turf/T)
 	return istype(T)
@@ -39,13 +38,13 @@
 	if(scan_results[2])
 		survey_data += scan_results[2]
 		playsound(loc, 'sound/machines/ping.ogg', 40, 1)
-		to_chat(user, SPAN_NOTICE("New survey data stored - earned [scan_results[2]] GEP."))
+		to_chat(user, SPAN_NOTICE("New survey data stored - earned [scan_results[2]] survey points."))
 
 /obj/item/scanner/mining/proc/put_disk_in_hand(var/mob/M)
 	if(!survey_data)
 		to_chat(M, SPAN_WARNING("There is no survey data stored on \the [src]."))
 		return FALSE
-	visible_message(SPAN_NOTICE("\The [src] spits out a disk containing [survey_data] GEP."))
+	visible_message(SPAN_NOTICE("\The [src] spits out a disk containing [survey_data] survey points."))
 	var/obj/item/disk/survey/D = new(get_turf(src))
 	D.data = survey_data
 	survey_data = 0

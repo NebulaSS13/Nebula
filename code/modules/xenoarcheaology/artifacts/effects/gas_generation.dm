@@ -5,7 +5,7 @@
 /datum/artifact_effect/gas/New()
 	..()
 	if(!spawned_gas)
-		spawned_gas = pick(decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
+		spawned_gas = pick(get_filterable_material_types(as_list = TRUE))
 	operation_type = pick((XA_EFFECT_TOUCH), (XA_EFFECT_AURA))
 	origin_type = XA_EFFECT_SYNTH
 

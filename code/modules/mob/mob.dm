@@ -713,7 +713,7 @@ var/global/const/ACTION_DANGER_ALL = 2
 		return TRUE
 	if(!anchored && istype(over, /obj/vehicle/train))
 		var/obj/vehicle/train/beep = over
-		if(!beep.load(src))
+		if(!beep.load_onto_vehicle(src))
 			to_chat(user, SPAN_WARNING("You were unable to load \the [src] onto \the [over]."))
 		return TRUE
 	. = ..()

@@ -127,9 +127,9 @@
 	if(!Proj.nodamage)
 		switch(Proj.atom_damage_type)
 			if(BRUTE)
-				take_damage(Proj.damage)
+				take_damage(Proj.get_projectile_damage(src))
 			if(BURN)
-				take_damage(Proj.damage, BURN)
+				take_damage(Proj.get_projectile_damage(src), BURN)
 	Proj.on_hit(src,100) //wow this is a terrible hack
 	return 100
 
