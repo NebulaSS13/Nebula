@@ -339,7 +339,7 @@
 /area/icarus/vessel)
 "bu" = (
 /obj/machinery/door/firedoor,
-/obj/structure/sign/department/greencross{
+/obj/structure/sign/department/cross/green{
 	pixel_x = -30
 	},
 /turf/floor/tiled,
@@ -683,7 +683,7 @@
 "cx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/sign/department/greencross{
+/obj/structure/sign/department/cross/green{
 	pixel_x = -30
 	},
 /turf/floor/tiled,
@@ -1801,7 +1801,7 @@
 /turf/floor/plating,
 /area/icarus/vessel)
 "fS" = (
-/obj/vehicle/train/cargo/engine,
+/obj/vehicle/train/engine,
 /turf/floor/plating,
 /area/icarus/vessel)
 "fT" = (
@@ -1926,7 +1926,7 @@
 /turf/floor/plating,
 /area/icarus/vessel)
 "gp" = (
-/obj/vehicle/train/cargo/trolley,
+/obj/vehicle/train/trolley,
 /turf/floor/plating,
 /area/icarus/vessel)
 "gq" = (
@@ -2545,7 +2545,7 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/vehicle/train/cargo/trolley,
+/obj/vehicle/train/trolley,
 /turf/unsimulated/floor/sand,
 /area/icarus/open)
 "ii" = (

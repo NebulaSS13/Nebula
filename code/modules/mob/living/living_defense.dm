@@ -28,7 +28,7 @@
 		visible_message(SPAN_WARNING("[src] triggers their deadman's switch!"))
 		signaler.signal()
 	//Armor
-	var/damage = P.damage
+	var/damage = P.get_projectile_damage(src)
 	var/flags = P.damage_flags()
 	var/damaged
 	if(!P.nodamage)
@@ -42,7 +42,8 @@
 
 // For visuals and blood splatters etc
 /mob/living/proc/bullet_impact_visuals(var/obj/item/projectile/P, var/def_zone, var/damage)
-	var/list/impact_sounds = LAZYACCESS(P.impact_sounds, get_bullet_impact_effect_type(def_zone))
+	var/list/all_impact_sounds = P.get_impact_sounds()
+	var/list/impact_sounds = LAZYACCESS(all_impact_sounds, get_bullet_impact_effect_type(def_zone))
 	if(length(impact_sounds))
 		playsound(src, pick(impact_sounds), 75)
 	if(get_bullet_impact_effect_type(def_zone) != BULLET_IMPACT_MEAT)

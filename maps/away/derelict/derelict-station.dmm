@@ -2423,7 +2423,7 @@
 /turf/wall,
 /area/constructionsite/medical)
 "iE" = (
-/obj/structure/sign/department/bluecross_2,
+/obj/structure/sign/department/cross/blue2,
 /turf/wall,
 /area/constructionsite/hallway/aft)
 "iF" = (

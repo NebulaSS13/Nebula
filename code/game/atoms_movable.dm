@@ -628,3 +628,7 @@
 
 /atom/movable/proc/is_valid_merchant_pad_target()
 	return simulated
+
+// TODO reimplement this properly.
+/atom/movable/proc/is_incorporeal()
+	return !simulated

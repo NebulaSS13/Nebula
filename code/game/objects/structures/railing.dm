@@ -314,13 +314,13 @@ WOOD_RAILING_SUBTYPE(yew)
 	if(!QDELETED(src))
 		qdel(src)
 
-/obj/structure/railing/can_climb(var/mob/living/user, post_climb_check=0)
-	. = ..()
-	if(. && get_turf(user) == get_turf(src))
+/obj/structure/railing/can_climb(mob/living/user, post_climb_check = FALSE, silent = FALSE)
+	if((. = ..()) && get_turf(user) == get_turf(src))
 		var/turf/T = get_step(src, dir)
 		if(T.turf_is_crowded(user))
-			to_chat(user, "<span class='warning'>You can't climb there, the way is blocked.</span>")
-			return 0
+			if(!silent)
+				to_chat(user, SPAN_WARNING("You can't climb there, the way is blocked."))
+			return FALSE
 
 /obj/structure/railing/do_climb(var/mob/living/user)
 	. = ..()

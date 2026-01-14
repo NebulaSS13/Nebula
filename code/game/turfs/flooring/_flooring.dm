@@ -27,6 +27,7 @@ var/global/list/flooring_cache = list()
 	var/damage_temperature
 	var/icon_edge_layer = FLOOR_EDGE_NONE
 	var/has_environment_proc
+	var/can_conceal_hazards = FALSE
 
 	/// Unbuildable if not set. Must be /obj/item/stack.
 	var/build_type
@@ -393,3 +394,6 @@ var/global/list/flooring_cache = list()
 /// contaminant is, optionally, the material of the coating that wants to be added.
 /decl/flooring/proc/can_show_coating_footprints(turf/target, decl/material/contaminant)
 	return TRUE
+
+/decl/flooring/proc/get_vehicle_transit_delay(obj/vehicle/vehicle)
+	return vehicle::base_speed

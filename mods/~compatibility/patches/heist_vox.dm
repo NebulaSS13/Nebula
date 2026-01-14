@@ -1,6 +1,6 @@
 /decl/special_role/raider/Initialize()
 	. = ..()
-	LAZYSET(outfits_per_species, /decl/species/vox::uid, /decl/outfit/vox_raider)
+	LAZYSET(outfits_per_species, /decl/species/vox::uid, /decl/outfit/vox/raider)
 
 // The following mirror is ~special~.
 /obj/structure/mirror/raider
@@ -22,7 +22,7 @@
 	if(choice != "Yes")
 		return TRUE
 
-	var/decl/outfit/outfit = GET_DECL(/decl/outfit/vox_raider)
+	var/decl/outfit/outfit = GET_DECL(/decl/outfit/vox/raider)
 	var/mob/living/human/vox/vox = new(get_turf(src), /decl/species/vox::uid)
 	outfit.equip_outfit(vox)
 	if(user.mind)

@@ -199,3 +199,9 @@
 
 /turf/floor/can_show_coating_footprints(decl/material/contaminant = null)
 	return ..() && get_topmost_flooring()?.can_show_coating_footprints(src, contaminant)
+
+/turf/floor/proc/get_vehicle_transit_delay(obj/vehicle/vehicle)
+	var/decl/flooring/terrain = get_topmost_flooring()
+	if(!istype(vehicle) || QDELETED(vehicle) || !istype(terrain) || vehicle.vehicle_transit_type == vehicle::VEHICLE_GENERIC)
+		return vehicle::base_speed
+	return terrain.get_vehicle_transit_delay(vehicle)

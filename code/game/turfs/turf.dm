@@ -7,6 +7,9 @@
 	temperature_sensitive = TRUE
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
+	// Linear lazylist of weakrefs to dangerous things on this turf.
+	var/list/dangerous_objects
+
 	/// Will participate in ZAS, join zones, etc.
 	var/zone_membership_candidate = FALSE
 	/// Will participate in external atmosphere simulation if the turf is outside and no zone is set.
@@ -937,3 +940,24 @@
 
 /turf/take_vaporized_reagent(reagent, amount)
 	return assume_gas(reagent, round(amount / REAGENT_UNITS_PER_GAS_MOLE))
+
+// Tells the turf that it currently contains something that automated movement should consider if planning to enter the tile.
+// This uses lazy list macros to reduce memory footprint, since for 99% of turfs the list would've been empty anyways.
+/turf/proc/register_dangerous_object(atom/thing)
+	if(!istype(thing))
+		return FALSE
+	LAZYDISTINCTADD(dangerous_objects, weakref(thing))
+
+// Similar to above, for when the dangerous object stops being dangerous/gets deleted/moved/etc.
+/turf/proc/unregister_dangerous_object(atom/thing)
+	if(!istype(thing))
+		return FALSE
+	LAZYREMOVE(dangerous_objects, weakref(thing))
+
+/turf/proc/is_safe_to_enter(mob/living/stepper)
+	if(LAZYLEN(dangerous_objects))
+		for(var/weakref/ref in dangerous_objects)
+			var/atom/thing = ref.resolve()
+			if(istype(thing) && !QDELETED(thing) && !thing.is_safe_to_step(stepper))
+				return FALSE
+	return TRUE

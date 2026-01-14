@@ -515,7 +515,8 @@ var/global/list/obj/structure/cable/all_cables = list()
 	color = COLOR_MAROON
 	paint_color = COLOR_MAROON
 	desc = "A coil of wiring, suitable for both delicate electronics and heavy-duty power supply."
-	singular_name = "length"
+	singular_name = "length of cable"
+	plural_name = "lengths of cable"
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
 	throw_range = 5
@@ -620,11 +621,11 @@ var/global/list/obj/structure/cable/all_cables = list()
 	if(distance > 1)
 		return
 	if(get_amount() == 1)
-		. += "\A [singular_name] of cable."
+		. += "\A [singular_name]."
 	else if(get_amount() == 2)
-		. += "Two [plural_name] of cable."
+		. += "Two [plural_name]."
 	else
-		. += "A coil of power cable. There are [get_amount()] [plural_name] of cable in the coil."
+		. += "A coil of power cable. There are [get_amount()] [plural_name] in the coil."
 
 /obj/item/stack/cable_coil/verb/make_restraint()
 	set name = "Make Cable Restraints"
@@ -634,11 +635,11 @@ var/global/list/obj/structure/cable/all_cables = list()
 	if(ishuman(M) && !M.incapacitated())
 		if(!isturf(usr.loc)) return
 		if(!src.use(15))
-			to_chat(usr, SPAN_WARNING("You need at least 15 [plural_name] of cable to make restraints!"))
+			to_chat(usr, SPAN_WARNING("You need at least 15 [plural_name] to make restraints!"))
 			return
 		var/obj/item/handcuffs/cable/B = new /obj/item/handcuffs/cable(usr.loc)
 		B.set_color(color)
-		to_chat(usr, SPAN_NOTICE("You wind some [plural_name] of cable together to make some restraints."))
+		to_chat(usr, SPAN_NOTICE("You wind some [plural_name] together to make some restraints."))
 	else
 		to_chat(usr, SPAN_NOTICE("You cannot do that."))
 
@@ -676,7 +677,7 @@ var/global/list/obj/structure/cable/all_cables = list()
 		return
 
 	if(get_amount() < 1) // Out of cable
-		to_chat(user, SPAN_WARNING("There is no [plural_name] of cable left."))
+		to_chat(user, SPAN_WARNING("There is no [plural_name] left."))
 		return
 
 	if(get_dist(F,user) > 1) // Too far
@@ -696,7 +697,7 @@ var/global/list/obj/structure/cable/all_cables = list()
 	var/end_dir = 0
 	if(istype(F) && F.is_open())
 		if(!can_use(2))
-			to_chat(user, SPAN_WARNING("You don't have enough [plural_name] of cable to do this!"))
+			to_chat(user, SPAN_WARNING("You don't have enough [plural_name] to do this!"))
 			return
 		end_dir = DOWN
 
@@ -840,6 +841,8 @@ var/global/list/obj/structure/cable/all_cables = list()
 //////////////////////////////
 // Misc.
 /////////////////////////////
+/obj/item/stack/cable_coil/five
+	amount = 5
 
 /obj/item/stack/cable_coil/cut
 	item_state = "coil2"

@@ -48,29 +48,27 @@
 /mob/proc/can_overcome_gravity()
 	return FALSE
 
-/mob/living/human/can_overcome_gravity()
+/mob/living/can_overcome_gravity()
 	//First do species check
-	if(species && species.can_overcome_gravity(src))
-		return 1
-	else
-		var/turf/T = loc
-		if(((T.get_physical_height() + T.get_fluid_depth()) >= FLUID_DEEP) || T.get_fluid_depth() >= FLUID_MAX_DEPTH)
-			if(can_float())
-				return 1
-
-		for(var/atom/a in src.loc)
-			if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
-				return 1
-
-		//Last check, list of items that could plausibly be used to climb but aren't climbable themselves
-		var/list/objects_to_stand_on = list(
-				/obj/item/stool,
-				/obj/structure/bed,
-			)
-		for(var/type in objects_to_stand_on)
-			if(locate(type) in src.loc)
-				return 1
-	return 0
+	var/decl/species/my_species = get_species()
+	if(my_species?.can_overcome_gravity(src))
+		return TRUE
+	var/turf/T = loc
+	if(((T.get_physical_height() + T.get_fluid_depth()) >= FLUID_DEEP) || T.get_fluid_depth() >= FLUID_MAX_DEPTH)
+		if(can_float())
+			return TRUE
+	for(var/atom/climbable in src.loc)
+		if((climbable.atom_flags & ATOM_FLAG_CLIMBABLE) && climbable.can_climb(src, silent = TRUE))
+			return TRUE
+	//Last check, list of items that could plausibly be used to climb but aren't climbable themselves
+	var/static/list/objects_to_stand_on = list(
+		/obj/item/stool,
+		/obj/structure/bed,
+	)
+	for(var/type in objects_to_stand_on)
+		if(locate(type) in src.loc)
+			return TRUE
+	return FALSE
 
 //FALLING STUFF
 

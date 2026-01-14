@@ -66,12 +66,3 @@
 	name = "Gear - Illumination grenades"
 	contains = list(/obj/item/grenade/light = 8)
 	containername = "illumination grenade crate"
-
-/decl/hierarchy/supply_pack/science/stasis_cages
-	name          = "Stasis Cage"
-	contains      = list(
-		/obj/structure/stasis_cage = 1
-	)
-	containertype = /obj/structure/closet/crate/large
-	containername = "stasis cage crate"
-	access        = access_xenofauna

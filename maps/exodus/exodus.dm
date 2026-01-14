@@ -25,6 +25,7 @@
 	#include "../../mods/content/sealant_gun/_sealant_gun.dme"
 	#include "../../mods/content/standard_jobs/_standard_jobs.dme"
 	#include "../../mods/content/supermatter/_supermatter.dme"
+	#include "../../mods/content/exploration/_exploration.dme"
 	#include "../../mods/content/tabloids/_tabloids.dme"
 
 	#include "../../mods/gamemodes/cult/_cult.dme"

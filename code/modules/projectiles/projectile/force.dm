@@ -5,6 +5,8 @@
 	damage = 20
 	atom_damage_type = BURN
 	damage_flags = 0
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/blue_laser
+	hitsound_non_mob = 'sound/weapons/searwall.ogg'
 
 /obj/item/projectile/forcebolt/strong
 	name = "force bolt"

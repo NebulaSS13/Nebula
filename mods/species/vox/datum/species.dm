@@ -59,7 +59,7 @@
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 
-	preview_outfit = /decl/outfit/vox_raider
+	preview_outfit = /decl/outfit/vox/raider
 
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
 	stomach_capacity = 12
@@ -129,7 +129,7 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
-/decl/species/vox/equip_survival_gear(mob/living/wearer, extended)
+/decl/species/vox/equip_survival_gear(mob/living/wearer, box_type = /obj/item/box/survival)
 	wearer.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(wearer), slot_wear_mask_str)
 	var/obj/item/backpack/backpack = wearer.get_equipped_item(slot_back_str)
 	if(istype(backpack))

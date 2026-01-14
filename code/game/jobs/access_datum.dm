@@ -268,12 +268,6 @@ var/global/const/access_research = "ACCESS_RESEARCH" //47
 	desc = "Science"
 	region = ACCESS_REGION_RESEARCH
 
-var/global/const/access_explorer = "ACCESS_EXPLORER"
-/datum/access/explorer
-	id = access_explorer
-	desc = "Explorer"
-	region = ACCESS_REGION_GENERAL
-
 var/global/const/access_mining = "ACCESS_MINING" //48
 /datum/access/mining
 	id = access_mining
@@ -308,12 +302,6 @@ var/global/const/access_xenobiology = "ACCESS_XENOBIO" //55
 /datum/access/xenobiology
 	id = access_xenobiology
 	desc = "Xenobiology Lab"
-	region = ACCESS_REGION_RESEARCH
-
-var/global/const/access_xenofauna = "ACCESS_XENOFAUNA"
-/datum/access/xenofauna
-	id = access_xenofauna
-	desc = "Xenfauna Lab"
 	region = ACCESS_REGION_RESEARCH
 
 var/global/const/access_ce = "ACCESS_CHIEF_ENGINEER" //56

@@ -11579,7 +11579,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/structure/sign/warning/pods{
+/obj/structure/sign/directions/pods{
 	dir = 4;
 	pixel_x = 32
 	},
@@ -16554,7 +16554,7 @@
 /obj/effect/floor_decal/corner/lime{
 	dir = 10
 	},
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_y = -32
 	},
@@ -16567,7 +16567,7 @@
 /obj/effect/floor_decal/corner/lime{
 	dir = 10
 	},
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_y = -32
 	},
@@ -30160,7 +30160,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_y = 32
 	},
@@ -34004,7 +34004,7 @@
 /turf/floor/bluegrid,
 /area/exodus/turret_protected/ai_upload)
 "btO" = (
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_x = -32
 	},
@@ -35194,7 +35194,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/storage)
 "bwe" = (
-/obj/vehicle/train/cargo/trolley,
+/obj/vehicle/train/trolley,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/storage)
@@ -35205,7 +35205,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/storage)
 "bwg" = (
-/obj/vehicle/train/cargo/engine,
+/obj/vehicle/train/engine,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/cable/green{
 	icon_state = "1-2"
@@ -35602,7 +35602,7 @@
 /turf/floor/tiled/white,
 /area/exodus/medical/chemistry)
 "bwY" = (
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_x = 32
 	},
@@ -38702,7 +38702,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_x = 32
 	},
@@ -38900,7 +38900,7 @@
 /turf/floor/plating,
 /area/exodus/medical/genetics/cloning)
 "bDF" = (
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_x = -32
 	},
@@ -41579,7 +41579,7 @@
 /turf/wall/prepainted,
 /area/exodus/research/storage)
 "bIK" = (
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_x = 32
 	},
@@ -44783,7 +44783,7 @@
 "bPd" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance,
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_y = 32
 	},
@@ -45447,7 +45447,7 @@
 "bQy" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance,
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_y = 32
 	},
@@ -47185,7 +47185,7 @@
 /turf/floor/reinforced,
 /area/exodus/research/misc_lab)
 "bTT" = (
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_y = 32
 	},
@@ -48937,7 +48937,7 @@
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
-/obj/structure/sign/department/greencross{
+/obj/structure/sign/department/cross/green{
 	pixel_y = -32;
 	dir = 1
 	},
@@ -49213,7 +49213,7 @@
 /turf/wall/prepainted,
 /area/exodus/maintenance/research_port)
 "bYg" = (
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_x = -32
 	},
@@ -50539,7 +50539,7 @@
 /obj/effect/floor_decal/corner/pink{
 	dir = 5
 	},
-/obj/structure/sign/department/greencross{
+/obj/structure/sign/department/cross/green{
 	pixel_y = 32
 	},
 /turf/floor/tiled/white,
@@ -60134,7 +60134,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/engineering/storage)
 "cwX" = (
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_y = 32
 	},
@@ -65134,7 +65134,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/structure/sign/department/star_of_life{
+/obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
 	pixel_x = 32
 	},

@@ -5,6 +5,16 @@
 	if(DoMove(direction, src) & MOVEMENT_HANDLED)
 		return TRUE // Doesn't necessarily mean the atom physically moved
 
+/mob/living/SelfMove(var/direction)
+	// If on walk intent, don't willingly step into hazardous tiles.
+	// Unless the walker is confused.
+	var/turf/destination = get_step(src, direction)
+	if(istype(destination) && MOVING_DELIBERATELY(src) && !HAS_STATUS(src, STAT_CONFUSE))
+		if(!destination.is_safe_to_enter(src))
+			to_chat(src, SPAN_WARNING("\The [destination] is dangerous to move into."))
+			return FALSE // In case any code wants to know if movement happened.
+	return ..() // Parent call should make the mob move.
+
 /mob/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	. = current_posture.prone || ..() || !mover.density
 

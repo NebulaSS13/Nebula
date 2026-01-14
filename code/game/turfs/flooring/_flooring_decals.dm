@@ -1221,7 +1221,7 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/solarpanel
 	icon_state = "solarpanel"
 
-/obj/effect/floor_decal/snow
+/obj/effect/floor_decal/snow_floor
 	icon = 'icons/turf/overlays.dmi'
 	icon_state = "snowfloor"
 
@@ -1635,3 +1635,33 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/corner_oldtile/green/full
 	name = "corner oldtile full"
 	icon_state = "corner_oldtile_full"
+
+// Decorative overlays.
+/obj/effect/floor_decal/vines
+	name       = "vines"
+	desc       = "A tangle of plant growth."
+	icon_state = "vines"
+
+/obj/effect/floor_decal/vines/top
+	icon_state = "vines_top"
+
+/obj/effect/floor_decal/vines/mid
+	icon_state = "vines_mid"
+
+/obj/effect/floor_decal/vines/bottom
+	icon_state = "vines_bottom"
+
+/obj/effect/floor_decal/snow
+	name       = "snow"
+	desc       = "A fine dusting of snow."
+	icon_state = "snowy"
+
+/obj/effect/floor_decal/rust
+	name       = "rust"
+	desc       = "A clumpy area of rust."
+	icon_state = "rusted"
+
+/obj/effect/floor_decal/floornums
+	name       = "floor marker"
+	desc       = "A number corresponding to the position of this floor."
+	icon_state = "floornums"

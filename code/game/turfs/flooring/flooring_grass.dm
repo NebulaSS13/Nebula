@@ -14,6 +14,8 @@
 	force_material     = /decl/material/solid/organic/plantmatter/grass
 	growth_value       = 1.2 // Shouldn't really matter since you can't plant on grass, it turns to dirt first.
 	uid                = "floor_grass"
+	can_conceal_hazards = TRUE
+
 	var/harvestable    = FALSE
 
 /decl/flooring/grass/fire_act(turf/floor/target, datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -48,6 +50,9 @@
 		return TRUE
 	return ..()
 
+/decl/flooring/grass/get_vehicle_transit_delay(obj/vehicle/vehicle)
+	return 1
+
 /decl/flooring/grass/fake
 	desc            = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
 	icon            = 'icons/turf/flooring/fakegrass.dmi'
@@ -56,3 +61,6 @@
 	build_type      = /obj/item/stack/tile/grass
 	force_material  = /decl/material/solid/organic/plastic
 	uid                = "floor_grass_fake"
+
+/decl/flooring/grass/fake/get_vehicle_transit_delay(obj/vehicle/vehicle)
+	return vehicle::base_speed

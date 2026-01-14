@@ -742,17 +742,19 @@
 	- `post_climb_check?`: If we should check if the user can continue climbing
 	- Return: `TRUE` if they can climb, otherwise `FALSE`
 */
-/atom/proc/can_climb(var/mob/living/user, post_climb_check=0)
+/atom/proc/can_climb(mob/living/user, post_climb_check = FALSE, silent = FALSE)
 	if (!(atom_flags & ATOM_FLAG_CLIMBABLE) || !user.can_touch(src) || (!post_climb_check && climbers && (user in climbers)))
 		return FALSE
 
 	if (!user.Adjacent(src))
-		to_chat(user, "<span class='danger'>You can't climb there, the way is blocked.</span>")
+		if(!silent)
+			to_chat(user, SPAN_WARNING("You can't climb there, the way is blocked."))
 		return FALSE
 
 	var/obj/occupied = turf_is_crowded(user)
 	if(occupied)
-		to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
+		if(!silent)
+			to_chat(user, SPAN_WARNING("There's \a [occupied] in the way."))
 		return FALSE
 	return TRUE
 
@@ -1065,3 +1067,18 @@
 	if(blood_color)
 		return FONT_COLORED(blood_color, "stained")
 	return null
+
+// Used to mark a turf as containing objects that are dangerous to step onto.
+/atom/proc/register_dangerous_to_step()
+	var/turf/T = get_turf(src)
+	if(T)
+		T.register_dangerous_object(src)
+
+/atom/proc/unregister_dangerous_to_step()
+	var/turf/T = get_turf(src)
+	if(T)
+		T.unregister_dangerous_object(src)
+
+// Test for if stepping on a tile containing this obj is safe to do, used for things like landmines and cliffs.
+/atom/proc/is_safe_to_step(mob/living/stepper)
+	return TRUE

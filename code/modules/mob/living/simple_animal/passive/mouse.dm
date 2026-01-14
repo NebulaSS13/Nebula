@@ -117,6 +117,9 @@
 	SetName(initial(name))
 	real_name = name
 
+/mob/living/simple_animal/passive/mouse/brown/Tom/is_tagging_suitable()
+	return FALSE
+
 // rats, they're the rats (from Polaris)
 /mob/living/simple_animal/passive/mouse/rat
 	name = "rat"
