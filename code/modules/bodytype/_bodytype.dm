@@ -89,6 +89,8 @@ var/global/list/bodytypes_by_category = list()
 	var/z_flags              = 0
 	/// Amount to shift overlays when lying. TODO: check if this is still needed with KEEP_TOGETHER
 	var/list/prone_overlay_offset
+	/// Set to TRUE to skip unit testing as a primary bodytype in a human. Generally for partial prosthetic models.
+	var/skip_organ_validation = FALSE
 
 	/// Per-bodytype per-zone message strings, see /mob/proc/get_hug_zone_messages
 	var/list/default_hug_message
@@ -675,7 +677,7 @@ var/global/list/bodytypes_by_category = list()
 		var/organ_type = has_organ[organ_tag]
 		var/obj/item/organ/O = new organ_type(H, null, supplied_data)
 		if(organ_tag != O.organ_tag)
-			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
+			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the bodytype organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
 		H.add_organ(O, GET_EXTERNAL_ORGAN(H, O.parent_organ), FALSE, FALSE, skip_health_update = TRUE)
 	H.update_health()
