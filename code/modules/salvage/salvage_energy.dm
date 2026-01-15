@@ -14,4 +14,4 @@
 	salvaged_type = /obj/item/gun/energy/laser
 
 /obj/item/salvage/energy/laser_retro
-	salvaged_type = /obj/item/gun/energy/captain // TODO: swap to retro laser when merged
+	salvaged_type = /obj/item/gun/energy/retro/captain
