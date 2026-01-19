@@ -12,7 +12,7 @@
 
 /turf/floor/tiled/dark/cryo
 	initial_gas = list(/decl/material/gas/nitrogen = MOLES_CELLSTANDARD)
-	temperature = 73
+	temperature = -200 CELSIUS
 
 /turf/floor/tiled/dark/monotile
 	name          = "floor"
@@ -74,7 +74,7 @@
 
 /turf/floor/tiled/techfloor/cryo
 	initial_gas = list(/decl/material/gas/nitrogen = MOLES_CELLSTANDARD)
-	temperature = 73
+	temperature = -200 CELSIUS
 
 /turf/floor/tiled/monotile
 	name          = "floor"
@@ -118,7 +118,7 @@
 
 /turf/floor/tiled/techfloor/grid/cryo
 	initial_gas = list(/decl/material/gas/nitrogen = MOLES_CELLSTANDARD)
-	temperature = 73
+	temperature = -200 CELSIUS
 
 /turf/floor/tiled/airless
 	name          = "airless floor"

@@ -1018,3 +1018,10 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	if(!istype(reagent))
 		return FALSE
 	return TRUE
+
+/datum/reagents/proc/get_explosive_power()
+	for(var/decl/material/mat in reagent_volumes)
+		if(isnull(mat.explosive_power_divisor))
+			continue
+		. += (reagent_volumes[mat] / mat.explosive_power_divisor)
+	. = round(., 1)
