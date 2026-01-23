@@ -3759,7 +3759,7 @@
 /turf/floor/plating,
 /area/ministation/bridge)
 "tT" = (
-/obj/machinery/atmospherics/unary/freezer{
+/obj/machinery/atmospherics/unary/temperature/freezer{
 	dir = 8;
 	set_temperature = 263
 	},
@@ -5996,7 +5996,7 @@
 /turf/floor/tiled/white,
 /area/ministation/science)
 "JY" = (
-/obj/machinery/atmospherics/unary/freezer,
+/obj/machinery/atmospherics/unary/temperature/freezer,
 /obj/structure/sign/warning/nosmoking_burned{
 	pixel_y = 32
 	},
@@ -6117,7 +6117,7 @@
 /turf/floor/tiled/white,
 /area/ministation/science)
 "LK" = (
-/obj/machinery/atmospherics/unary/freezer{
+/obj/machinery/atmospherics/unary/temperature/freezer{
 	set_temperature = 263
 	},
 /obj/machinery/light{

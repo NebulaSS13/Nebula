@@ -1795,6 +1795,7 @@
 #include "code\modules\atmospherics\components\unary\heat_source.dm"
 #include "code\modules\atmospherics\components\unary\outlet_injector.dm"
 #include "code\modules\atmospherics\components\unary\tank.dm"
+#include "code\modules\atmospherics\components\unary\temperature_base.dm"
 #include "code\modules\atmospherics\components\unary\thermal_plate.dm"
 #include "code\modules\atmospherics\components\unary\unary_base.dm"
 #include "code\modules\atmospherics\components\unary\vent_pump.dm"

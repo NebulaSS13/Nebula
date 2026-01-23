@@ -4285,13 +4285,13 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/atmos)
 "ln" = (
-/obj/machinery/atmospherics/unary/freezer{
+/obj/machinery/atmospherics/unary/temperature/freezer{
 	icon_state = "freezer"
 	},
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/atmos)
 "lo" = (
-/obj/machinery/atmospherics/unary/heater{
+/obj/machinery/atmospherics/unary/temperature/heater{
 	icon_state = "heater"
 	},
 /turf/floor/tiled/steel_grid,
