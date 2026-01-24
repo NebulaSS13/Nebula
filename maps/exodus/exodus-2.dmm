@@ -42587,7 +42587,7 @@
 /turf/floor/tiled/white,
 /area/exodus/research)
 "bLl" = (
-/obj/machinery/atmospherics/unary/freezer{
+/obj/machinery/atmospherics/unary/temperature/freezer{
 	icon_state = "freezer"
 	},
 /obj/effect/floor_decal/corner/purple{
@@ -42665,7 +42665,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/maintenance/atmos_control)
 "bLv" = (
-/obj/machinery/atmospherics/unary/heater{
+/obj/machinery/atmospherics/unary/temperature/heater{
 	icon_state = "heater"
 	},
 /obj/effect/floor_decal/corner/purple{
@@ -47178,7 +47178,7 @@
 	pixel_x = -6;
 	pixel_y = 25
 	},
-/obj/machinery/atmospherics/unary/freezer{
+/obj/machinery/atmospherics/unary/temperature/freezer{
 	dir = 8;
 	icon_state = "freezer"
 	},

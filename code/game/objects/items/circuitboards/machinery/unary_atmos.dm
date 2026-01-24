@@ -11,7 +11,7 @@
 
 /obj/item/stock_parts/circuitboard/unary_atmos/heater
 	name = "circuitboard (gas heating system)"
-	build_path = /obj/machinery/atmospherics/unary/heater
+	build_path = /obj/machinery/atmospherics/unary/temperature/heater
 	origin_tech = @'{"powerstorage":2,"engineering":1}'
 	req_components = list(
 							/obj/item/stack/cable_coil = 5,
@@ -20,7 +20,7 @@
 
 /obj/item/stock_parts/circuitboard/unary_atmos/cooler
 	name = "circuitboard (gas cooling system)"
-	build_path = /obj/machinery/atmospherics/unary/freezer
+	build_path = /obj/machinery/atmospherics/unary/temperature/freezer
 	origin_tech = @'{"magnets":2,"engineering":2}'
 	req_components = list(
 							/obj/item/stack/cable_coil = 2,
