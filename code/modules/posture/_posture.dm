@@ -14,6 +14,8 @@
 	var/selectable_type
 	/// String to use in Change Posture.
 	var/posture_change_message
+	/// Postural multiplier to effective blood circulation volume, a generalization of the old feature of 'laying down increases your effective blood volume'.
+	var/blood_volume_multiplier = 1
 
 /decl/posture/proc/can_be_selected_by(mob/mob)
 	return is_user_selectable

@@ -130,7 +130,10 @@
 	..()
 
 /mob/living/human/proc/getOxyLossPercent()
-	return (get_damage(OXY) / species.total_health) * 100
+	return getOxyLossFraction() * 100
+
+/mob/living/human/proc/getOxyLossFraction()
+	return (get_damage(OXY) / species.total_health)
 
 /mob/living/human/getOxyLoss()
 	if(need_breathe())
