@@ -12,6 +12,10 @@
 	var/active = 0
 	var/drill_time = 10
 	var/turf/drilling_turf
+	matter = list(
+		/decl/material/solid/metal/plasteel/ocp = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+	)
 
 /obj/machinery/giga_drill/physical_attack_hand(mob/user)
 	if(active)

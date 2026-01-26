@@ -255,7 +255,8 @@ var/global/list/materials_by_gas_symbol = list()
 	var/burn_temperature = 100 CELSIUS
 	var/burn_product
 	var/list/vapor_products // If splashed, releases these gasses in these proportions. // TODO add to unit test after solvent PR is merged
-
+	/// A divisor applied to volume when calculating explosive force (lower is stronger) - if null, reagent is no explosive
+	var/explosive_power_divisor
 	var/scent //refer to _scent.dm
 	var/scent_intensity = /decl/scent_intensity/normal
 	var/scent_descriptor = "smell"

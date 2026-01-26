@@ -166,6 +166,17 @@
 /obj/item/box/ammo/blanks/WillContain()
 	return list(/obj/item/ammo_casing/shotgun/blank = 8)
 
+/obj/item/box/ammo/blanks/large
+	icon_state = "largebox"
+	w_class = ITEM_SIZE_LARGE
+
+/obj/item/box/ammo/blanks/large/Initialize(ml, material_key)
+	. = ..()
+	storage.make_exact_fit()
+
+/obj/item/box/ammo/blanks/large/WillContain()
+	return list(/obj/item/ammo_casing/shotgun/blank = 16)
+
 /obj/item/box/ammo/practiceshells
 	name = "box of practice shells"
 /obj/item/box/ammo/practiceshells/WillContain()

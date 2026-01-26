@@ -2922,6 +2922,7 @@
 #include "code\modules\mob\living\human\whisper.dm"
 #include "code\modules\mob\living\human\descriptors\_descriptors.dm"
 #include "code\modules\mob\living\human\descriptors\descriptors_age.dm"
+#include "code\modules\mob\living\human\descriptors\descriptors_body_length.dm"
 #include "code\modules\mob\living\human\descriptors\descriptors_generic.dm"
 #include "code\modules\mob\living\maneuvers\_maneuver.dm"
 #include "code\modules\mob\living\maneuvers\maneuver_leap.dm"

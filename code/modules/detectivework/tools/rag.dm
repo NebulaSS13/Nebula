@@ -194,6 +194,14 @@
 		return
 	if(!can_ignite())
 		return
+	//also copied from matches
+	var/explosive_power= istype(reagents) && reagents.get_explosive_power()
+	if(explosive_power > 0)
+		var/datum/effect/effect/system/reagents_explosion/e = new()
+		e.set_up(explosive_power, get_turf(src), 0, 0)
+		e.start()
+		qdel(src)
+		return
 	START_PROCESSING(SSobj, src)
 	set_light(2, 1, "#e38f46")
 	_on_fire = TRUE
