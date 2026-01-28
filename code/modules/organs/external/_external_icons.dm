@@ -127,22 +127,24 @@ var/global/list/organ_icon_cache = list()
 
 /obj/item/organ/external/proc/get_icon_cache_key_components()
 
-	. = list("[icon_state]_[species.uid]_[get_organ_appearance_bodytype()?.uid || "BAD_BODYTYPE"]_[render_alpha]_[icon]")
+	. = list(icon_state, species.uid, get_organ_appearance_bodytype()?.uid || "BAD_BODYTYPE", render_alpha, icon)
 
 	// Skeletons don't care about most icon appearance stuff.
 	if(limb_flags & ORGAN_FLAG_SKELETAL)
-		. += "_skeletal_[skin_blend]"
+		. += "skeletal"
+		. += skin_blend
 		return
 
 	if(status & ORGAN_DEAD)
-		. += "_dead"
-	. += "_tone_[skin_tone]_color_[skin_colour]_[skin_blend]"
+		. += "dead"
+	. += list("tone", skin_tone, "color", skin_colour, skin_blend)
 	for(var/accessory_category in _sprite_accessories)
 		var/list/draw_accessories = _sprite_accessories[accessory_category]
 		for(var/accessory in draw_accessories)
 			var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
 			if(istype(accessory_decl) && !accessory_decl.sprite_overlay_layer)
-				. += "_[accessory]_[json_encode(draw_accessories[accessory])]"
+				. += accessory
+				. += json_encode(draw_accessories[accessory])
 
 /obj/item/organ/external/proc/clear_sprite_accessories(var/skip_update = FALSE)
 	if(!length(_sprite_accessories))
@@ -299,7 +301,7 @@ var/global/list/organ_icon_cache = list()
 	if(icon_state != next_state)
 		icon_state = next_state
 
-	_icon_cache_key = jointext(get_icon_cache_key_components(), null)
+	_icon_cache_key = jointext(get_icon_cache_key_components(), "_")
 	var/icon/mob_icon = global.organ_icon_cache[_icon_cache_key] || generate_mob_icon()
 	if(icon != mob_icon)
 		icon = mob_icon

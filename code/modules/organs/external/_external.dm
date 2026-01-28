@@ -133,13 +133,14 @@
 	if(owner)
 		LAZYREMOVE(owner.bad_external_organs, src)
 
-/obj/item/organ/external/set_species(species_uid)
+/obj/item/organ/external/set_species(species_uid, skip_icon_update = FALSE)
 	_icon_cache_key = null
-	. = ..()
 	skin_blend = bodytype.limb_blend
-	update_icon()
+	. = ..()
+	if(!. && !skip_icon_update) // didn't update icon in parent
+		update_icon()
 
-/obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
+/obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype, override_material = null, skip_icon_update = FALSE, apply_to_internal_organs = TRUE)
 	_icon_cache_key = null
 	var/decl/bodytype/old_bodytype = bodytype
 	. = ..(new_bodytype, override_material)
@@ -148,7 +149,7 @@
 	if(.)
 		update_icon()
 
-/obj/item/organ/external/copy_from_mob_snapshot(datum/mob_snapshot/supplied_appearance)
+/obj/item/organ/external/copy_from_mob_snapshot(datum/mob_snapshot/supplied_appearance, skip_icon_update = FALSE)
 	_icon_cache_key = null
 	if(organ_tag in supplied_appearance?.sprite_accessories)
 		var/list/sprite_cats = supplied_appearance.sprite_accessories[organ_tag]

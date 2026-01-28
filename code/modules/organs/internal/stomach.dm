@@ -12,7 +12,7 @@
 	QDEL_NULL(ingested)
 	. = ..()
 
-/obj/item/organ/internal/stomach/set_species(species_uid)
+/obj/item/organ/internal/stomach/set_species(species_uid, skip_icon_update = FALSE)
 	if(species?.gluttonous)
 		verbs -= /obj/item/organ/internal/stomach/proc/throw_up
 	. = ..()

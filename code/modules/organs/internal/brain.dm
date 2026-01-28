@@ -45,7 +45,7 @@
 /obj/item/organ/internal/brain/getToxLoss()
 	return 0
 
-/obj/item/organ/internal/brain/set_species(species_uid)
+/obj/item/organ/internal/brain/set_species(species_uid, skip_icon_update = FALSE)
 	. = ..()
 	icon_state = "brain-prosthetic"
 	if(species)

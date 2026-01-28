@@ -456,10 +456,10 @@
 		custom_pain(msg,40,affecting = organ)
 	organ.take_damage(rand(1,3) + O.w_class, damage_flags = DAM_EDGE)
 
-/mob/proc/set_bodytype(var/decl/bodytype/new_bodytype)
+/mob/proc/set_bodytype(var/decl/bodytype/new_bodytype, skip_icon_updates = FALSE)
 	return
 
-/mob/living/human/set_bodytype(var/decl/bodytype/new_bodytype)
+/mob/living/human/set_bodytype(var/decl/bodytype/new_bodytype, skip_icon_updates = FALSE)
 
 	var/decl/bodytype/old_bodytype = get_bodytype()
 	if(ispath(new_bodytype))
@@ -475,18 +475,19 @@
 		old_bodytype.remove_abilities(src)
 	new_bodytype.grant_abilities(src)
 	apply_bodytype_appearance()
-	force_update_limbs()
-	update_hair()
-	update_eyes()
+	if(!skip_icon_updates)
+		force_update_limbs()
+		update_hair()
+		update_eyes()
 	return TRUE
 
-/mob/proc/set_species(var/new_species_uid, var/new_bodytype = null)
+/mob/proc/set_species(var/new_species_uid, var/new_bodytype = null, var/skip_icon_updates = FALSE)
 	return
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
 // For transforming an existing mob, look at change_species()
-/mob/living/human/set_species(var/new_species_uid, var/new_bodytype = null)
+/mob/living/human/set_species(var/new_species_uid, var/new_bodytype = null, var/skip_icon_updates = FALSE)
 	if(!new_species_uid)
 		CRASH("set_species on mob '[src]' was passed a null species uid!")
 	var/decl/species/new_species = decls_repository.get_decl_by_id(new_species_uid)
@@ -515,7 +516,7 @@
 	//Handle bodytype
 	if(!new_bodytype)
 		new_bodytype = species.get_bodytype_by_pronouns(new_pronouns)
-	set_bodytype(new_bodytype)
+	set_bodytype(new_bodytype, skip_icon_updates = skip_icon_updates)
 
 	available_maneuvers = species.maneuvers.Copy()
 
@@ -981,7 +982,7 @@
 	else if(!species_uid)
 		species_uid = global.using_map.default_species //Humans cannot exist without a species!
 
-	set_species(species_uid, supplied_appearance?.root_bodytype)
+	set_species(species_uid, supplied_appearance?.root_bodytype, skip_icon_updates = TRUE)
 	var/decl/bodytype/root_bodytype = get_bodytype() // root bodytype is set in set_species
 	ASSERT((!supplied_appearance?.root_bodytype) || (root_bodytype == supplied_appearance.root_bodytype))
 	if(!get_skin_colour())

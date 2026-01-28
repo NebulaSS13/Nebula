@@ -119,9 +119,9 @@
 		log_debug("obj/item/organ/setup(): [src] had null bodytype, with an owner with null bodytype!")
 	bodytype = new_bodytype // used in later setup procs
 	if(supplied_appearance)
-		copy_from_mob_snapshot(supplied_appearance)
+		copy_from_mob_snapshot(supplied_appearance, skip_icon_update = !!owner) // if we have an owner then we expect them to update us later
 	else
-		set_species(owner?.get_species() || global.using_map.default_species)
+		set_species(owner?.get_species() || global.using_map.default_species, skip_icon_update = !!owner) // if we have an owner then we expect them to update us later
 
 // todo: make this redundant with matter shenanigans
 /obj/item/organ/populate_reagents()
@@ -131,7 +131,7 @@
 	if(reagent_to_add)
 		add_to_reagents(reagent_to_add, REAGENT_MAXIMUM_VOLUME(reagents))
 
-/obj/item/organ/proc/copy_from_mob_snapshot(var/datum/mob_snapshot/supplied_appearance)
+/obj/item/organ/proc/copy_from_mob_snapshot(var/datum/mob_snapshot/supplied_appearance, skip_icon_update = FALSE)
 	if(supplied_appearance != organ_appearance) // Hacky. Is this ever used? Do any organs ever have DNA set before setup_as_organic?
 		QDEL_NULL(organ_appearance)
 		organ_appearance = supplied_appearance.Clone()
@@ -139,11 +139,11 @@
 	if(species != organ_appearance.root_species)
 		if(organ_appearance.root_bodytype && organ_appearance.root_bodytype != bodytype)
 			bodytype = organ_appearance.root_bodytype // this lets us take advantage of set_bodytype being called in set_species
-		set_species(organ_appearance.root_species?.uid || global.using_map.default_species)
+		set_species(organ_appearance.root_species?.uid || global.using_map.default_species, skip_icon_update = skip_icon_update)
 	else if(organ_appearance.root_bodytype && organ_appearance.root_bodytype != bodytype)
-		set_bodytype(organ_appearance.root_bodytype)
+		set_bodytype(organ_appearance.root_bodytype, skip_icon_update = skip_icon_update)
 
-/obj/item/organ/proc/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
+/obj/item/organ/proc/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE, skip_icon_update = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(isnull(new_bodytype))
 		PRINT_STACK_TRACE("Null bodytype passed to set_bodytype!")
@@ -183,7 +183,7 @@
 	absolute_max_damage = floor(ndamage)
 	max_damage = absolute_max_damage
 
-/obj/item/organ/proc/set_species(species_uid)
+/obj/item/organ/proc/set_species(species_uid, skip_icon_update = FALSE)
 	vital_to_owner = null // This generally indicates the owner mob is having species set, and this value may be invalidated.
 	if(istext(species_uid))
 		species = decls_repository.get_decl_by_id(species_uid)
@@ -193,7 +193,7 @@
 		species = decls_repository.get_decl_by_id(global.using_map.default_species)
 		PRINT_STACK_TRACE("Invalid species. Expected a valid species UID as string, was: [log_info_line(species_uid)]")
 
-	set_bodytype(bodytype || species.default_bodytype, override_material = material?.type)
+	. = set_bodytype(bodytype || species.default_bodytype, override_material = material?.type, skip_icon_update = skip_icon_update)
 
 	// Adjust limb health proportinate to total species health.
 	var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1

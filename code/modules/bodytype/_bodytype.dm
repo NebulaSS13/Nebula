@@ -712,7 +712,7 @@ var/global/list/bodytypes_by_category = list()
 	if(!istype(organ, /obj/item/organ/external))
 		return
 	var/obj/item/organ/external/limb = organ
-	for(var/bp_tag in has_organ)
+	for(var/bp_tag in has_organ) // make sure all organs that go inside this limb fit inside it
 		var/obj/item/organ/internal/I = has_organ[bp_tag]
 		if(initial(I.parent_organ) == organ.organ_tag)
 			limb.cavity_max_w_class = max(limb.cavity_max_w_class, get_resized_organ_w_class(initial(I.w_class)))

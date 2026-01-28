@@ -58,7 +58,7 @@
 /obj/item/organ/internal/lungs/proc/adjust_oxygen_deprivation(var/amount)
 	oxygen_deprivation = clamp(oxygen_deprivation + amount, 0, species.total_health)
 
-/obj/item/organ/internal/lungs/set_species(species_uid)
+/obj/item/organ/internal/lungs/set_species(species_uid, skip_icon_update = FALSE)
 	. = ..()
 	sync_breath_types()
 

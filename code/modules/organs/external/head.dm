@@ -94,7 +94,7 @@
 /obj/item/organ/external/head/get_agony_multiplier()
 	return (owner && owner.headcheck(organ_tag)) ? 1.50 : 1
 
-/obj/item/organ/external/head/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
+/obj/item/organ/external/head/set_bodytype(decl/bodytype/new_bodytype, override_material = null, skip_icon_update = FALSE, apply_to_internal_organs = TRUE)
 	. = ..()
 	can_intake_reagents = !(bodytype.body_flags & BODY_FLAG_NO_EAT)
 
@@ -115,7 +115,7 @@
 
 /obj/item/organ/external/head/get_icon_cache_key_components()
 	. = ..()
-	. += "_eyes_[bodytype.eye_icon || "none"]_[get_eyes_organ()?.eye_colour || "none"]"
+	. += list("eyes", bodytype.eye_icon || "none", get_eyes_organ()?.eye_colour || "none")
 
 /obj/item/organ/external/head/generate_mob_icon()
 	var/icon/ret = ..()
