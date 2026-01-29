@@ -149,10 +149,31 @@ SUBSYSTEM_DEF(mapping)
 
 	setup_data_for_levels(min_z = old_maxz + 1)
 
+	// Now that levels are in place, preload any associated persistent data.
+	// This is to avoid dependencies on other atoms or any other weird ordering
+	// problems like we used to get with old DMMS and SSatoms.
+	var/list/preloaded_levels = list()
+	for(var/datum/level_data/level in levels_by_z)
+		if(level.preload_persistent_data())
+			preloaded_levels += level
+
+	// Now actually load the serde data into the map.
+	for(var/datum/level_data/level as anything in preloaded_levels)
+		level.load_persistent_data()
+
+	// Clear our reference data for GC
+	// This might not be needed but it saves refs floating around I guess.
+	for(var/key in level_persistence_ref_map)
+		var/list/stale_data = global.level_persistence_ref_map[key]
+		stale_data.Cut()
+
+	global.level_persistence_ref_map.Cut()
+
 	// Generate turbolifts last, since away sites may have elevators to generate too.
 	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
 		turbolift.build_turbolift()
 
+	// With levels set up and serde complete (and levels flagged) we can do any remaining level generation.
 	global.using_map.finalize_map_generation()
 
 	. = ..()

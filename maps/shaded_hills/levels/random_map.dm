@@ -11,6 +11,13 @@
 	smooth_single_tiles  = TRUE
 	target_turf_type = /turf/unsimulated/mask
 
+/datum/random_map/noise/forage/shaded_hills
+	abstract_type = /datum/random_map/noise/forage/shaded_hills
+
+/datum/random_map/noise/ore/poor/shaded_hills
+
+/datum/random_map/noise/ore/rich/shaded_hills
+
 /datum/random_map/noise/shaded_hills/swamp
 	descriptor           = "Shaded Hills swamp"
 
@@ -32,10 +39,6 @@
 	if(value <= 6)
 		return /turf/floor/grass/wild
 	return /turf/floor/grass
-
-// TODO
-/datum/random_map/noise/forage/shaded_hills
-	abstract_type = /datum/random_map/noise/forage/shaded_hills
 
 /datum/random_map/noise/forage/shaded_hills/grassland/New()
 	forage["grass"] |= list(

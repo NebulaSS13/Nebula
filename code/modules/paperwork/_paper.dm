@@ -43,7 +43,7 @@
 
 /obj/item/paper/Initialize(mapload, material_key, var/_text, var/_title, var/list/md = null)
 	. = ..(mapload, material_key)
-	set_content(_text ? _text : info, _title)
+	set_content(_text ? _text : info, _title ? _title : name)
 	if(md)
 		LAZYDISTINCTADD(metadata, md) //Merge them
 	if(!mapload && persist_on_init)

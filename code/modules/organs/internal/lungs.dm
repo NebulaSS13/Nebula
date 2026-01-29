@@ -34,10 +34,20 @@
 	QDEL_NULL(inhaled)
 	. = ..()
 
-/obj/item/organ/internal/lungs/initialize_reagents(populate)
+/obj/item/organ/internal/lungs/Serialize()
+	. = ..()
+	SERIALIZE_REAGENTS(inhaled, /obj/item/organ/internal/lungs, "inhaled")
+
+/obj/item/organ/internal/lungs/Deserialize(list/instance_map)
+	. = ..()
+	DESERIALIZE_REAGENTS(inhaled, "inhaled")
+
+/obj/item/organ/internal/lungs/initialize_reagents()
+	FINALIZE_REAGENTS_SERDE(inhaled)
 	if(!inhaled)
-		inhaled = new/datum/reagents/metabolism(240, (owner || src), CHEM_INHALE)
-	REAGENT_SET_ATOM(inhaled, src)
+		inhaled = new/datum/reagents/metabolism(240, src, CHEM_INHALE)
+	var/owner_atom = owner || src
+	REAGENT_SET_ATOM(inhaled, owner_atom)
 	. = ..()
 
 /obj/item/organ/internal/lungs/do_install(mob/living/human/target, obj/item/organ/external/affected, in_place)

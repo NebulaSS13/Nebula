@@ -11,8 +11,10 @@
 			material = get_default_material()
 		. = TRUE
 
-	if(. && !skip_update)
-		queue_icon_update()
+	if(.)
+		state_was_modified()
+		if(!skip_update)
+			queue_icon_update()
 
 /turf/floor/get_material()
 	var/decl/flooring/flooring = get_topmost_flooring()

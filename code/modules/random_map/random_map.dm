@@ -159,7 +159,6 @@ var/global/list/map_count = list()
 	if(!origin_x) origin_x = 1
 	if(!origin_y) origin_y = 1
 	if(!origin_z) origin_z = 1
-
 	for(var/x in 1 to limit_x)
 		for(var/y in 1 to limit_y)
 			CHECK_TICK

@@ -9,7 +9,10 @@
 
 /mob/living/human/Initialize(mapload, species_uid, datum/mob_snapshot/supplied_appearance)
 
+	// Health is dynamically calculated from organ state, so no point keeping a
+	// serialized or modified value, it will be recalculated almost immediately.
 	current_health = get_max_health()
+	species_uid ||= species // Pass our current species in as an arg (in case of serde)
 	reset_hud_overlays()
 	var/list/newargs = args.Copy(2)
 	setup_human(arglist(newargs))

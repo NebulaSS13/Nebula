@@ -11,6 +11,9 @@
 	var/has_admin_data             // If set, shows up on the admin persistence panel.
 	var/ignore_area_flags = FALSE  // Set to TRUE to skip area flag checks such as nonpersistent areas.
 	var/ignore_invalid_loc = FALSE // Set to TRUE to skip checking for a non-null station turf for the entry.
+	var/list/legacy_map_values     // A list of legacy keys to new keys.
+	var/legacy_type
+	var/serialization_handler = /decl/serialization_handler/json // Which serialization handler to use for load/save
 	var/area_restricted = TRUE     // Can this item persist outside of a flagged area?
 	var/station_restricted = TRUE  // Can this item persist outside of a station level?
 
@@ -20,79 +23,21 @@
 	if(!isnull(entries_decay_at) && !isnull(entries_expire_at))
 		entries_decay_at = floor(entries_expire_at * entries_decay_at)
 
-/decl/persistence_handler/proc/GetValidTurf(var/turf/T, var/list/tokens)
-	if(T && isStationLevel(T.z) && CheckTurfContents(T, tokens))
-		return T
-
-/decl/persistence_handler/proc/CheckTurfContents(var/turf/T, var/list/tokens)
-	return TRUE
-
-/decl/persistence_handler/proc/CheckTokenSanity(var/list/tokens)
-	if(!islist(tokens))
-		return FALSE
-	if(isnull(tokens["x"]) || isnull(tokens["y"]) || isnull(tokens["z"]))
-		return FALSE
-	if(!isnull(entries_expire_at))
-		if(isnull(tokens["age"]))
-			return FALSE
-		if(tokens["age"] > entries_expire_at)
-			return FALSE
-	return TRUE
-
-/decl/persistence_handler/proc/CreateEntryInstance(var/turf/creating, var/list/tokens)
-	return
-
-/decl/persistence_handler/proc/ProcessAndApplyTokens(var/list/tokens)
-
-	// If it's old enough we start to trim down any textual information and scramble strings.
-	if(tokens["message"] && !isnull(entries_decay_at) && !isnull(entry_decay_weight))
-		var/_n = tokens["age"]
-		var/_message = tokens["message"]
-		if(_n >= entries_decay_at)
-			var/decayed_message = ""
-			for(var/i = 1 to length(_message))
-				var/char = copytext(_message, i, i + 1)
-				if(prob(round(_n * entry_decay_weight)))
-					if(prob(99))
-						decayed_message += pick(".",",","-","'","\\","/","\"",":",";")
-				else
-					decayed_message += char
-			_message = decayed_message
-		if(length(_message))
-			tokens["message"] = _message
-		else
-			return
-
-	. = GetValidTurf(locate(tokens["x"], tokens["y"], tokens["z"]), tokens)
-	if(.)
-		. = CreateEntryInstance(., tokens)
-
 /decl/persistence_handler/proc/IsValidEntry(var/atom/entry)
 	if(!istype(entry))
 		return FALSE
-	if(!isnull(entries_expire_at) && GetEntryAge(entry) >= entries_expire_at)
+	if(!entry.ShouldSerialize(entries_expire_at))
 		return FALSE
 	var/turf/T = get_turf(entry)
 	if(!ignore_invalid_loc && (!T || !isStationLevel(T.z)))
 		return FALSE
 	var/area/A = get_area(T)
-	if(!ignore_area_flags && (!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT)))
+	if(!ignore_area_flags && (!A || (A.area_flags & AREA_FLAG_NO_LEGACY_PERSISTENCE)))
 		return FALSE
 	return TRUE
 
 /decl/persistence_handler/proc/GetEntryAge(var/atom/entry)
 	return 0
-
-/decl/persistence_handler/proc/CompileEntry(var/atom/entry)
-	var/turf/T = get_turf(entry)
-	. = list()
-	.["x"] =   T?.x || 0
-	.["y"] =   T?.y || 0
-	.["z"] =   T?.z || 0
-	.["age"] = GetEntryAge(entry)
-
-/decl/persistence_handler/proc/FinalizeTokens(var/list/tokens)
-	. = tokens || list()
 
 /decl/persistence_handler/Initialize()
 
@@ -103,38 +48,66 @@
 	if(!fexists(filename))
 		return
 
-	var/list/entries = cached_json_decode(safe_file2text(filename, FALSE))
+	var/decl/serialization_handler/handler = GET_DECL(serialization_handler)
+	var/list/entries = handler.load_data_from_file(filename)
+
 	if(!length(entries))
 		return
 
-	var/list/encoding_flag = entries[1]
-	if(encoding_flag && ("url_encoded" in encoding_flag))
-		entries -= encoding_flag
-		for(var/list/entry in entries)
-			for(var/i in 1 to entry.len)
-				var/item = entry[i]
-				var/decoded_value = (istext(entry[item]) ? url_decode(entry[item]) : entry[item])
-				var/decoded_key = url_decode(item)
-				entry[i] = decoded_key
-				entry[decoded_key] = decoded_value
+	// Check for old-style persistence data and generate a key.
+	if(length(entries) && !istext(entries[1]))
+		try
+		// Save a backup of the old file just in case we cook it.
+			fcopy(filename, "[filename]-legacy.[time2text(REALTIMEOFDAY, "YY-MM-DD_hh-mm")].backup")
+		catch(var/exception/e)
+			log_error("Exception during saving backup of legacy file [filename]: [EXCEPTION_TEXT(e)]")
 
-	for(var/list/entry in entries)
-		entry = FinalizeTokens(entry)
-		if(CheckTokenSanity(entry))
-			ProcessAndApplyTokens(entry)
+		// Update the data to match the expected format of the new system.
+		var/list/entries_with_key = list()
+		var/i = 1
+		for(var/entry in entries)
+			entries_with_key[num2text(i)] = UpdateFromLegacyFormat(entry)
+		entries = entries_with_key
+
+	instantiate_serialized_data(null, name, entries, entries_decay_at, entry_decay_weight)
 
 /decl/persistence_handler/proc/Shutdown()
 	var/list/entries = list()
-	for(var/thing in SSpersistence.tracking_values[type])
+	for(var/atom/thing in SSpersistence.tracking_values[type])
 		if(IsValidEntry(thing))
-			entries += list(CompileEntry(thing))
-
-	if(fexists(filename))
-		fdel(filename)
-	to_file(file(filename), json_encode(entries))
+			var/list/things_to_serialize = thing.GetPossiblySerializableInstances()
+			for(var/datum/subthing in things_to_serialize)
+				entries[subthing.get_run_uid()] = subthing.Serialize()
+	var/decl/serialization_handler/handler = GET_DECL(serialization_handler)
+	handler.save_data_to_file(filename, entries, name)
 
 /decl/persistence_handler/proc/RemoveValue(var/atom/value)
 	qdel(value)
+
+/decl/persistence_handler/proc/UpdateFromLegacyFormat(list/_entry)
+
+	// Convert any old values to the new indices.
+	for(var/map_key in legacy_map_values)
+		if(map_key in _entry)
+			var/value = _entry[map_key]
+			_entry -= map_key
+			_entry[legacy_map_values[map_key]] = value
+
+	// Convert entry coords into new format.
+	if(("x" in _entry) || ("y" in _entry) || ("z" in _entry))
+		_entry["loc"] = list(
+			_entry["x"] || 1,
+			_entry["y"] || 1,
+			_entry["z"] || 1
+		)
+		_entry -= "x"
+		_entry -= "y"
+		_entry -= "z"
+
+	if(legacy_type && !(nameof(/datum::type) in _entry))
+		_entry[nameof(/datum::type)] = legacy_type
+
+	return _entry
 
 /decl/persistence_handler/proc/GetAdminSummary(var/mob/user, var/can_modify)
 	. = list("<tr><td colspan = 4><b>[capitalize(name)]</b></td></tr>")

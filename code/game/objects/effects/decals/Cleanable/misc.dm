@@ -37,13 +37,13 @@
 	return TRUE
 
 /obj/effect/decal/cleanable/flour
-	name               = "flour"
-	desc               = "It's still good. Four second rule!"
-	gender             = PLURAL
-	icon               = 'icons/effects/effects.dmi'
-	icon_state         = "flour"
-	persistent         = TRUE
-	sweepable          = TRUE
+	name                   = "flour"
+	desc                   = "It's still good. Four second rule!"
+	gender                 = PLURAL
+	icon                   = 'icons/effects/effects.dmi'
+	icon_state             = "flour"
+	use_legacy_persistence = TRUE
+	sweepable              = TRUE
 
 /obj/effect/decal/cleanable/cobweb
 	name               = "cobweb"
@@ -55,13 +55,13 @@
 	sweepable          = TRUE
 
 /obj/effect/decal/cleanable/molten_item
-	name               = "gooey grey mass"
-	desc               = "It looks like a melted... something."
-	icon               = 'icons/effects/molten_item.dmi'
-	icon_state         = "molten"
-	persistent         = TRUE
-	generic_filth      = TRUE
-	weather_sensitive  = FALSE
+	name                   = "gooey grey mass"
+	desc                   = "It looks like a melted... something."
+	icon                   = 'icons/effects/molten_item.dmi'
+	icon_state             = "molten"
+	use_legacy_persistence = TRUE
+	generic_filth          = TRUE
+	weather_sensitive      = FALSE
 
 /obj/effect/decal/cleanable/cobweb2
 	name               = "cobweb"
@@ -74,14 +74,14 @@
 
 //Vomit (sorry)
 /obj/effect/decal/cleanable/vomit
-	name               = "vomit"
-	desc               = "Gosh, how unpleasant."
-	gender             = PLURAL
-	icon               = 'icons/effects/vomit.dmi'
-	icon_state         = "vomit_1"
-	persistent         = TRUE
-	generic_filth      = TRUE
-	chem_volume        = 30
+	name                   = "vomit"
+	desc                   = "Gosh, how unpleasant."
+	gender                 = PLURAL
+	icon                   = 'icons/effects/vomit.dmi'
+	icon_state             = "vomit_1"
+	use_legacy_persistence = TRUE
+	generic_filth          = TRUE
+	chem_volume            = 30
 
 /obj/effect/decal/cleanable/vomit/Initialize(ml, _age)
 	random_icon_states = icon_states(icon)
@@ -106,40 +106,40 @@
 		walker.add_walking_contaminant(reagents, rand(2, 3))
 
 /obj/effect/decal/cleanable/tomato_smudge
-	name               = "tomato smudge"
-	desc               = "It's red."
-	icon               = 'icons/effects/tomatodecal.dmi'
-	icon_state         = "tomato_floor1"
-	random_icon_states = list("tomato_floor1", "tomato_floor2", "tomato_floor3")
-	persistent         = TRUE
-	generic_filth      = TRUE
+	name                   = "tomato smudge"
+	desc                   = "It's red."
+	icon                   = 'icons/effects/tomatodecal.dmi'
+	icon_state             = "tomato_floor1"
+	random_icon_states     = list("tomato_floor1", "tomato_floor2", "tomato_floor3")
+	use_legacy_persistence = TRUE
+	generic_filth          = TRUE
 
 /obj/effect/decal/cleanable/egg_smudge
-	name               = "smashed egg"
-	desc               = "Seems like this one won't hatch."
-	icon               = 'icons/effects/tomatodecal.dmi'
-	icon_state         = "smashed_egg1"
-	random_icon_states = list("smashed_egg1", "smashed_egg2", "smashed_egg3")
-	persistent         = TRUE
-	generic_filth      = TRUE
+	name                   = "smashed egg"
+	desc                   = "Seems like this one won't hatch."
+	icon                   = 'icons/effects/tomatodecal.dmi'
+	icon_state             = "smashed_egg1"
+	random_icon_states     = list("smashed_egg1", "smashed_egg2", "smashed_egg3")
+	use_legacy_persistence = TRUE
+	generic_filth          = TRUE
 
 /obj/effect/decal/cleanable/pie_smudge //honk
-	name               = "smashed pie"
-	desc               = "It's pie cream from a cream pie."
-	icon               = 'icons/effects/tomatodecal.dmi'
-	icon_state         = "smashed_pie"
-	random_icon_states = list("smashed_pie")
-	persistent         = TRUE
-	generic_filth      = TRUE
+	name                   = "smashed pie"
+	desc                   = "It's pie cream from a cream pie."
+	icon                   = 'icons/effects/tomatodecal.dmi'
+	icon_state             = "smashed_pie"
+	random_icon_states     = list("smashed_pie")
+	use_legacy_persistence = TRUE
+	generic_filth          = TRUE
 
 /obj/effect/decal/cleanable/fruit_smudge
-	name               = "smudge"
-	desc               = "Some kind of fruit smear."
-	icon               = 'icons/effects/blood.dmi'
-	icon_state         = "mfloor1"
-	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
-	persistent         = TRUE
-	generic_filth      = TRUE
+	name                   = "smudge"
+	desc                   = "Some kind of fruit smear."
+	icon                   = 'icons/effects/blood.dmi'
+	icon_state             = "mfloor1"
+	random_icon_states     = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
+	use_legacy_persistence = TRUE
+	generic_filth          = TRUE
 
 /obj/effect/decal/cleanable/champagne
 	name               = "champagne"

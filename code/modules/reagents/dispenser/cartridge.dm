@@ -11,10 +11,14 @@
 	possible_transfer_amounts = @"[50,100]"
 	var/_reagent_label
 
-/obj/item/chems/chem_disp_cartridge/Initialize()
+/obj/item/chems/chem_disp_cartridge/Serialize()
+	. = ..()
+	SERIALIZE_IF_MODIFIED(_reagent_label, /obj/item/chems/chem_disp_cartridge)
+
+/obj/item/chems/chem_disp_cartridge/Initialize(ml, material_key)
 	. = ..()
 	var/decl/material/primary_reagent = istype(reagents) && reagents.get_primary_reagent_decl()
-	if(primary_reagent && !_reagent_label)
+	if(primary_reagent && isnull(_reagent_label))
 		_reagent_label = primary_reagent.name
 	if(_reagent_label)
 		setLabel(_reagent_label)

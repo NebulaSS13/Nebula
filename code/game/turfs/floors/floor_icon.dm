@@ -158,6 +158,7 @@
 		_floor_broken = new_broken
 		if(!skip_update)
 			queue_icon_update()
+		state_was_modified()
 		return TRUE
 	return FALSE
 
@@ -172,6 +173,7 @@
 		_floor_burned = new_burned
 		if(!skip_update)
 			queue_icon_update()
+		state_was_modified()
 		return TRUE
 	return FALSE
 

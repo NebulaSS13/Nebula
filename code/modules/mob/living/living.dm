@@ -1,6 +1,8 @@
 /mob/living/Initialize()
 
-	current_health            = get_max_health()
+	if(isnull(current_health) || current_health == INFINITY)
+		current_health = get_max_health()
+
 	original_fingerprint_seed = sequential_id(/mob)
 	fingerprint               = md5(num2text(original_fingerprint_seed))
 	original_genetic_seed     = sequential_id(/mob)
