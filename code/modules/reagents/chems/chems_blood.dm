@@ -89,3 +89,4 @@
 	value = 0
 	exoplanet_rarity_gas = MAT_RARITY_UNCOMMON
 	compost_value = 1 // yum
+	opacity = 1.0
