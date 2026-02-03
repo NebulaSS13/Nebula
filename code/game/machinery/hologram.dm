@@ -58,6 +58,7 @@ var/global/list/holopads = list()
 	var/allow_ai = TRUE
 	var/static/list/reachable_overmaps = list(OVERMAP_ID_SPACE)
 
+	var/static/list/used_holopad_ids = list()
 	var/holopad_id
 
 /obj/machinery/hologram/holopad/Initialize()
@@ -68,7 +69,13 @@ var/global/list/holopads = list()
 	// Null ID means we want to use our area name.
 	if(isnull(holopad_id))
 		var/area/A = get_area(src)
-		holopad_id = A?.proper_name || "Unknown"
+		var/holopad_index = 1
+		var/holopad_base = A?.proper_name || "Unknown"
+		holopad_id = "[holopad_base] #[holopad_index]"
+		while(holopad_id in used_holopad_ids)
+			holopad_index++
+			holopad_id = "[holopad_base] #[holopad_index]"
+	used_holopad_ids |= holopad_id
 
 	// For overmap sites, always tag the sector name so we have a unique discriminator for long range calls.
 	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[z]

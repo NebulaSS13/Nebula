@@ -127,6 +127,8 @@
 		return
 	. += "It holds:"
 	for(var/ore in stored_ore)
+		if(stored_ore[ore] == 0)
+			continue
 		. += "- [stored_ore[ore]] [ore]"
 
 /obj/structure/ore_box/explosion_act(severity)

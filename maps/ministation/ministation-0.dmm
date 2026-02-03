@@ -426,7 +426,7 @@
 /turf/floor/plating/airless,
 /area/space)
 "ce" = (
-/obj/item/ore,
+/obj/item/ore_satchel,
 /turf/floor/plating/airless,
 /area/space)
 "cf" = (
@@ -10925,7 +10925,7 @@
 /obj/machinery/camera/network/mining{
 	dir = 1
 	},
-/obj/item/ore,
+/obj/item/ore_satchel,
 /turf/floor/plating/airless,
 /area/space)
 "Oy" = (

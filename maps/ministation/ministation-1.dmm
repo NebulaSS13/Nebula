@@ -5707,7 +5707,7 @@
 	dir = 5
 	},
 /obj/structure/table/glass,
-/obj/item/plants,
+/obj/item/plant_satchel,
 /obj/item/scanner/plant,
 /obj/item/wirecutters/clippers,
 /obj/item/book/skill/service/botany,

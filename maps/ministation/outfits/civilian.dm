@@ -4,7 +4,7 @@
 	uniform = /obj/item/clothing/jumpsuit/cargotech
 	id_type = /obj/item/card/id/ministation/cargo
 	pda_type = /obj/item/modular_computer/pda/cargo
-	backpack_contents = list(/obj/item/crowbar = 1, /obj/item/ore = 1)
+	backpack_contents = list(/obj/item/crowbar = 1, /obj/item/ore_satchel = 1)
 	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR
 
 /decl/outfit/job/ministation/cargo/Initialize()

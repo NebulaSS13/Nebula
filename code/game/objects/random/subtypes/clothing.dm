@@ -238,3 +238,21 @@
 		/obj/item/clothing/suit/space/void/medical/alt
 	)
 	return spawnable_choices
+
+/obj/random/poncho
+	name = "random poncho"
+	icon = /obj/item/clothing/suit/poncho/green::icon
+	icon_state = /obj/item/clothing/suit/poncho/green::icon_state
+
+/obj/random/poncho/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/clothing/suit/poncho/green,
+		/obj/item/clothing/suit/poncho/red,
+		/obj/item/clothing/suit/poncho/purple,
+		/obj/item/clothing/suit/poncho/blue,
+		/obj/item/clothing/suit/poncho/security,
+		/obj/item/clothing/suit/poncho/medical,
+		/obj/item/clothing/suit/poncho/engineering,
+		/obj/item/clothing/suit/poncho/cargo
+	)
+	return spawn_choices

@@ -13,13 +13,14 @@
 
 	if(!output_turf || !input_turf)
 		return
-	
+
 	if(length(output_turf.contents) >= MAX_UNLOAD_TURF_CONTENTS)
 		return
 
 	var/ore_this_tick = 0
 	for(var/obj/structure/ore_box/unloading in input_turf)
 		for(var/obj/item/stack/material/ore in unloading)
+			unloading.remove_ore(ore)
 			ore.dropInto(output_turf)
 			ore_this_tick++
 			if(ore_this_tick >= MAX_UNLOAD_ORE_PER_TICK || length(output_turf.contents) >= MAX_UNLOAD_TURF_CONTENTS)

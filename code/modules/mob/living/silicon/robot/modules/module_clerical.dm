@@ -31,7 +31,7 @@
 		/obj/item/tool/hoe/mini,
 		/obj/item/tool/axe/hatchet,
 		/obj/item/scanner/plant,
-		/obj/item/plants,
+		/obj/item/plant_satchel,
 		/obj/item/robot_harvester,
 		/obj/item/rollingpin,
 		/obj/item/knife/kitchen,

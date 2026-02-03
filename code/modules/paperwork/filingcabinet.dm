@@ -131,3 +131,15 @@
 	. += "<b>Species:</b> [record.get_species_name()]"
 	. += "<b>Details:</b> [record.get_employment_record()]"
 	return jointext(., "<br>")
+
+/obj/structure/filing_cabinet/records/security
+	name = "security record archive"
+	archive_name = "security record"
+
+/obj/structure/filing_cabinet/records/security/collate_data(var/datum/computer_file/report/crew_record/record)
+	. = list()
+	. += "<b>Name:</b> [record.get_name()]"
+	. += "<b>Gender:</b> [record.get_gender()]"
+	. += "<b>Species:</b> [record.get_species_name()]"
+	. += "<b>Details:</b> [record.get_security_record()]"
+	return jointext(., "<br>")

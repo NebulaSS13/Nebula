@@ -58,6 +58,9 @@
 /decl/curtain_kind/plastic/shower/security
 	color = COLOR_DARK_RED
 
+/decl/curtain_kind/plastic/shower/medical
+	color = COLOR_CYAN
+
 /decl/curtain_kind/plastic/canteen
 	name = "privacy curtain"
 	color = COLOR_BLUE_GRAY

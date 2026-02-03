@@ -74,6 +74,36 @@
 	)
 	return spawnable_choices
 
+/obj/random/tech_supply/nofail
+	name = "guaranteed random tech supply"
+	spawn_nothing_percentage = 0
+
+/obj/random/tech_supply/component
+	name = "random tech component"
+	desc = "This is a random machine component."
+
+/obj/random/tech_supply/component/nofail
+	name = "guaranteed random tech component"
+	spawn_nothing_percentage = 0
+
+/obj/random/tech_supply/component/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/stock_parts/console_screen = 2,
+		/obj/item/stock_parts/capacitor = 3,
+		/obj/item/stock_parts/capacitor/adv = 2,
+		/obj/item/stock_parts/capacitor/super = 1,
+		/obj/item/stock_parts/manipulator = 3,
+		/obj/item/stock_parts/manipulator/nano = 2,
+		/obj/item/stock_parts/manipulator/pico = 1,
+		/obj/item/stock_parts/matter_bin = 3,
+		/obj/item/stock_parts/matter_bin/adv = 2,
+		/obj/item/stock_parts/matter_bin/super = 1,
+		/obj/item/stock_parts/scanning_module = 3,
+		/obj/item/stock_parts/scanning_module/adv = 2,
+		/obj/item/stock_parts/scanning_module/phasic = 1
+	)
+	return spawn_choices
+
 /obj/random/tank
 	name = "random tank"
 	desc = "This is a tank."
@@ -120,3 +150,50 @@
 		/obj/item/oxycandle
 	)
 	return spawnable_choices
+
+/obj/random/hardsuit
+	name = "random hardsuit"
+	desc = "This is a random hardsuit."
+	icon = 'icons/clothing/rigs/rig.dmi'
+	icon_state = ICON_STATE_WORLD
+
+/obj/random/hardsuit/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/rig/light/hacker/unlocked  = 4,
+		/obj/item/rig/industrial/unlocked    = 5,
+		/obj/item/rig/eva/unlocked           = 5,
+		/obj/item/rig/light/stealth/unlocked = 4,
+		/obj/item/rig/hazard/unlocked        = 3,
+		/obj/item/rig/merc/empty/unlocked    = 1
+	)
+	return spawnable_choices
+
+/obj/random/powercell
+	name = "random powercell"
+	desc = "This is a random powercell."
+	icon = /obj/item/cell::icon
+	icon_state = /obj/item/cell::icon_state
+
+/obj/random/powercell/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/cell = 40,
+		/obj/item/cell/gun = 25,
+		/obj/item/cell/high = 25,
+		/obj/item/cell/super = 9,
+		/obj/item/cell/hyper = 1
+	)
+	return spawn_choices
+
+/obj/random/smes_coil
+	name = "random smes coil"
+	desc = "This is a random smes coil."
+	icon = /obj/item/stock_parts/smes_coil::icon
+	icon_state = /obj/item/stock_parts/smes_coil::icon_state
+
+/obj/random/smes_coil/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/stock_parts/smes_coil = 4,
+		/obj/item/stock_parts/smes_coil/super_capacity = 1,
+		/obj/item/stock_parts/smes_coil/super_io = 1
+	)
+	return spawn_choices

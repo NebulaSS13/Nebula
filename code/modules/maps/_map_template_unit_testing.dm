@@ -1,7 +1,8 @@
 /datum/map_template
-	var/const/NO_APC = 1
-	var/const/NO_VENT = 2
-	var/const/NO_SCRUBBER = 4
+	var/const/NO_APC         = BITFLAG(0)
+	var/const/NO_VENT        = BITFLAG(1)
+	var/const/NO_SCRUBBER    = BITFLAG(2)
+	var/const/SKIP_ALL_TESTS = BITFLAG(3)
 
 	var/list/area_usage_test_exempted_areas = list()
 	var/list/area_usage_test_exempted_root_areas = list()

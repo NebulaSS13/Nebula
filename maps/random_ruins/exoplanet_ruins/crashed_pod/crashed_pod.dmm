@@ -613,7 +613,7 @@
 /obj/item/tool/axe/hatchet,
 /obj/item/plantspray/pests,
 /obj/item/plantspray/weeds,
-/obj/item/plants,
+/obj/item/plant_satchel,
 /obj/item/chems/glass/bottle/eznutrient,
 /obj/item/seeds/wheatseed,
 /obj/effect/decal/cleanable/dirt/visible,
@@ -626,8 +626,8 @@
 /obj/structure/closet/crate{
 	dir = 8
 	},
-/obj/item/ore,
-/obj/item/ore,
+/obj/item/ore_satchel,
+/obj/item/ore_satchel,
 /obj/item/mop,
 /obj/item/flashlight/lantern,
 /obj/item/flashlight/lantern,

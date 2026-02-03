@@ -64,7 +64,7 @@
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit,
 		/obj/item/stack/flag,
-		/obj/item/ore,
+		/obj/item/ore_satchel,
 		/obj/item/t_scanner,
 		/obj/item/tool,
 		/obj/item/rcd
@@ -171,7 +171,7 @@
 		/obj/item/flashlight,
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit,
-		/obj/item/ore,
+		/obj/item/ore_satchel,
 		/obj/item/toolbox,
 		/obj/item/briefcase/inflatable,
 		/obj/item/inflatable_dispenser,

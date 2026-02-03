@@ -56,6 +56,9 @@
 	stasis_power = 0
 	interact_offline = TRUE
 	stat_immune = NOPOWER
+	// Spawned inside a mech component, not built as a machine.
+	construct_state = null
+	base_type = /obj/machinery/sleeper/mounted
 
 /obj/machinery/sleeper/mounted/standard/Initialize(mapload, d, populate_parts)
 	. = ..()
