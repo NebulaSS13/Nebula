@@ -18,6 +18,9 @@
 /datum/storage/box/animal_cube
 	can_hold = list(/obj/item/food/animal_cube)
 
+/datum/storage/box/large/metal
+	use_sound = 'sound/effects/closet_open.ogg'
+
 /datum/storage/box/snappop
 	can_hold = list(/obj/item/toy/snappop)
 
