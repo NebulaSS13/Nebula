@@ -118,7 +118,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/breath_type = /decl/material/gas/oxygen                 // Non-oxygen gas breathed, if any.
 	/// Material types considered noticeably poisonous when inhaled (ie. updates the toxins indicator on the HUD).
 	/// This is an associative list for speed.
-	var/poison_types = list(/decl/material/gas/chlorine = TRUE)
+	var/poison_types = list(
+		/decl/material/gas/chlorine = TRUE
+	)
 	var/exhale_type = /decl/material/gas/carbon_dioxide         // Exhaled gas type.
 	var/blood_reagent = /decl/material/liquid/blood
 
