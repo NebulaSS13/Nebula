@@ -27,7 +27,7 @@
 	if(!sharp && (istype(used_item, /obj/item/stack/material/bolt) || istype(used_item, /obj/item/stack/material/bundle)))
 
 		var/choice = input(user, "Do you want to make a torch, or a splint?", "Stick Crafting") as null|anything in list("Torch", "Splint")
-		if(!choice || QDELETED(user) || user.get_active_held_item() != used_item || QDELETED(used_item) || !QDELETED(src) || (loc != user && !Adjacent(user)) || sharp)
+		if(!choice || QDELETED(user) || user.get_active_held_item() != used_item || QDELETED(used_item) || QDELETED(src) || (loc != user && !Adjacent(user)) || sharp)
 			return TRUE
 
 		var/obj/item/stack/material/cloth = used_item
