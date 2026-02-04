@@ -448,19 +448,6 @@ var/global/list/all_gps_units = list()
 		"stripe-inside" =  "#800000"
 	)
 
-/obj/item/gps/security/hos
-	decals = list(
-		"stripe-outside" = "#ffae00",
-		"stripe-inside" =  "#9e7900"
-	)
-
-/obj/item/gps/xenofauna
-	color = "#b1b1b1"
-	decals = list(
-		"stripe-outside" = "#500677",
-		"stripe-inside" =  "#68099e"
-	)
-
 /obj/item/gps/security
 	color = "#5c0000"
 	decals = list(

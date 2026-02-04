@@ -15,7 +15,7 @@
 
 /turf/floor/bluegrid/cryo
 	initial_gas = list(/decl/material/gas/nitrogen = MOLES_CELLSTANDARD)
-	temperature = 73
+	temperature = -200 CELSIUS
 
 /turf/floor/greengrid
 	name        = "mainframe floor"

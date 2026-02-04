@@ -73,13 +73,18 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	VAR_PRIVATE/list/solid_volumes // This should be taken as powders/flakes, rather than large solid pieces of material.
 	VAR_PRIVATE/list/reagent_data
 	VAR_PRIVATE/atom/my_atom
-	VAR_PRIVATE/cached_color
-	VAR_PRIVATE/primary_reagent
-	VAR_PRIVATE/primary_solid
-	VAR_PRIVATE/primary_liquid
-	VAR_PRIVATE/total_volume = 0
-	VAR_PRIVATE/total_liquid_volume // Used to determine when to create fluids in the world and the like.
 	VAR_PRIVATE/maximum_volume = 120
+	VAR_PRIVATE/tmp/cached_color
+	VAR_PRIVATE/tmp/primary_reagent
+	VAR_PRIVATE/tmp/primary_solid
+	VAR_PRIVATE/tmp/primary_liquid
+	VAR_PRIVATE/tmp/total_volume = 0
+	VAR_PRIVATE/tmp/total_liquid_volume // Used to determine when to create fluids in the world and the like.
+
+// Reagent serde is handled per atom.
+/datum/reagents/ShouldSerialize(_age)
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
 
 /datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
 	src.maximum_volume = maximum_volume
@@ -986,30 +991,18 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 		. = FONT_COLORED(get_color(), .)
 
 /* Atom reagent creation - use it all the time */
-/atom/proc/create_reagents(var/max_vol)
-	if(istype(reagents))
-		log_debug("Attempted to create a new reagents holder when already referencing one: [log_info_line(src)]")
-		REAGENT_SET_MAX_VOL(reagents, max(REAGENT_MAXIMUM_VOLUME(reagents), max_vol))
-	else if(!reagents)
-		reagents = new/datum/reagents(max_vol, src)
-	else
-		return
+/atom/proc/create_or_update_reagents(vol, override_volume)
+	if(islist(reagents))
+		return // We are pending serde, this will be handled in initialize_reagents().
+	else if(istype(reagents))
+		var/use_max_vol = override_volume ? vol : max(vol, REAGENT_MAXIMUM_VOLUME(reagents))
+		REAGENT_SET_MAX_VOL(reagents, use_max_vol)
+		reagents.update_total()
+	else if(isnull(reagents))
+		reagents = new /datum/reagents(vol, src)
 	return reagents
 
-/atom/proc/create_or_update_reagents(_vol, override_volume)
-	if(isnull(reagents))
-		return create_reagents(_vol)
-	if(istype(reagents))
-		if(override_volume)
-			REAGENT_SET_MAX_VOL(reagents, _vol) // should we remove excess reagents here?
-		else
-			REAGENT_SET_MAX_VOL(reagents, max(REAGENT_MAXIMUM_VOLUME(reagents), _vol))
-		reagents.update_total()
-		return reagents
-
 /// Infinite reagent sink: nothing is ever actually added to it, useful for complex, filtered deletion of reagents without holder churn.
-/datum/reagents/sink
-
 /datum/reagents/sink/add_reagent(var/decl/material/reagent, amount, data, safety, defer_update, phase)
 	amount = CHEMS_QUANTIZE(min(amount, REAGENTS_FREE_SPACE(src)))
 	if(amount <= 0)
@@ -1018,3 +1011,10 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	if(!istype(reagent))
 		return FALSE
 	return TRUE
+
+/datum/reagents/proc/get_explosive_power()
+	for(var/decl/material/mat in reagent_volumes)
+		if(isnull(mat.explosive_power_divisor))
+			continue
+		. += (reagent_volumes[mat] / mat.explosive_power_divisor)
+	. = round(., 1)

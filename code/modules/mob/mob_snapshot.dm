@@ -19,16 +19,19 @@
 
 /datum/mob_snapshot/New(mob/living/donor, genetic_info_only = FALSE)
 
-	real_name      = donor?.real_name        || "unknown"
-	eye_color      = donor?.get_eye_colour() || COLOR_BLACK
-	blood_type     = donor?.get_blood_type()
-	unique_enzymes = donor?.get_unique_enzymes()
-	skin_color     = donor?.get_skin_colour()
-	skin_tone      = donor?.get_skin_tone()
-	fingerprint    = donor?.get_full_print(ignore_blockers = TRUE)
+	if(!istype(donor))
+		return
 
-	root_species   = donor?.get_species()  || decls_repository.get_decl_by_id(global.using_map.default_species)
-	root_bodytype  = donor?.get_bodytype() || root_species.default_bodytype
+	real_name      = donor.real_name        || "unknown"
+	eye_color      = donor.get_eye_colour() || COLOR_BLACK
+	blood_type     = donor.get_blood_type()
+	unique_enzymes = donor.get_unique_enzymes()
+	skin_color     = donor.get_skin_colour()
+	skin_tone      = donor.get_skin_tone()
+	fingerprint    = donor.get_full_print(ignore_blockers = TRUE)
+
+	root_species   = donor.get_species()  || decls_repository.get_decl_by_id(global.using_map.default_species)
+	root_bodytype  = donor.get_bodytype() || root_species.default_bodytype
 
 	for(var/obj/item/organ/external/limb in donor?.get_external_organs())
 		// Discard anything not relating to our core/original bodytype and species.
@@ -113,4 +116,5 @@
 	return TRUE
 
 /mob/proc/get_mob_snapshot(check_dna = FALSE)
+	RETURN_TYPE(/datum/mob_snapshot)
 	return (!check_dna || has_genetic_information()) ? new /datum/mob_snapshot(src, genetic_info_only = check_dna) : null

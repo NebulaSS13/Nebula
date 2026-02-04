@@ -179,6 +179,8 @@
 	if(!(. = ..()))
 		return
 
+	state_was_modified()
+
 	if(REAGENT_TOTAL_LIQUID_VOLUME(reagents) < FLUID_SLURRY)
 		dump_solid_reagents()
 
@@ -204,7 +206,7 @@
 
 	for(var/checkdir in global.cardinal)
 		var/turf/neighbor = get_step_resolving_mimic(src, checkdir)
-		if(REAGENT_TOTAL_VOLUME(neighbor?.reagents) > FLUID_QDEL_POINT)
+		if(istype(neighbor) && (islist(neighbor.reagents) || (istype(neighbor.reagents) && REAGENT_TOTAL_VOLUME(neighbor.reagents) > FLUID_QDEL_POINT)))
 			ADD_ACTIVE_FLUID(neighbor)
 
 /turf/proc/dump_solid_reagents(datum/reagents/solids)

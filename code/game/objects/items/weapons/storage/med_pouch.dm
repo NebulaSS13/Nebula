@@ -195,16 +195,23 @@ Single Use Emergency Pouches
 	chem_volume   = 15
 	abstract_type = /obj/item/chems/pill/pouch_pill
 	var/_reagent_name
+	var/_reagent_volume
 
 /obj/item/chems/pill/pouch_pill/Initialize(ml, material_key)
 	. = ..()
-	if(!REAGENT_TOTAL_VOLUME(reagents))
+	if(!istype(reagents) || !REAGENT_TOTAL_VOLUME(reagents))
 		log_warning("[log_info_line(src)] was deleted for containing no reagents during init!")
 		return INITIALIZE_HINT_QDEL
-	if(reagents?.get_primary_reagent_name() && !_reagent_name)
-		_reagent_name = "emergency [reagents.get_primary_reagent_name()] pill ([REAGENT_TOTAL_VOLUME(reagents)]u)"
-	if(_reagent_name)
-		SetName(_reagent_name)
+	if(isnull(_reagent_name))
+		_reagent_name = reagents.get_primary_reagent_name()
+		_reagent_volume = REAGENT_TOTAL_VOLUME(reagents)
+	if(_reagent_name && _reagent_volume)
+		SetName("emergency [_reagent_name] pill ([_reagent_volume]u)")
+
+/obj/item/chems/pill/pouch_pill/Serialize()
+	. = ..()
+	SERIALIZE_IF_MODIFIED(_reagent_name, /obj/item/chems/pill/pouch_pill)
+	SERIALIZE_IF_MODIFIED(_reagent_volume, /obj/item/chems/pill/pouch_pill)
 
 /obj/item/chems/pill/pouch_pill/stabilizer/populate_reagents()
 	add_to_reagents(/decl/material/liquid/stabilizer, REAGENT_MAXIMUM_VOLUME(reagents))

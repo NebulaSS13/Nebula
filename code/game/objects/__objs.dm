@@ -27,17 +27,20 @@
 	var/directional_offset
 
 /obj/Initialize(mapload)
-	//Health should be set to max_health only if it's null.
 	. = ..()
 	create_matter()
 	//Only apply directional offsets if the mappers haven't set any offsets already
 	if(!pixel_x && !pixel_y && !pixel_w && !pixel_z)
 		update_directional_offset()
+
+	//Health should be set to max_health only if it's null.
+	var/_max_health = get_max_health()
 	if(isnull(current_health) || current_health == INFINITY)
-		current_health = get_max_health()
-	else
-		current_health = min(current_health, get_max_health())
-	if(!isnull(chem_volume) && chem_volume >= 0) // 0-volume holders perserved for legacy code reasons. Ideally shouldn't exist if <= 0
+		current_health = _max_health
+	current_health = min(current_health, _max_health)
+
+	// Initialize our reagents if they've been preloaded or we have a chem_volume
+	if((!isnull(chem_volume) && chem_volume >= 0) || islist(reagents))
 		initialize_reagents()
 
 /obj/object_shaken()
@@ -264,15 +267,21 @@
 	return TRUE
 
 /**
- * Init starting reagents and/or reagent var. Called if chem_volume > 0 in /obj/Initialize()
- * populate: If set to true, we expect map load/admin spawned reagents to be set.
+ * Init starting reagents and/or reagent var. Called in /obj/Initialize() if volume is above 0.
+ * Skips populate_initialize() if reagents is null, or if it is a list, ie. we are pending deserialization.
  */
-/obj/proc/initialize_reagents(var/populate = TRUE)
+/obj/proc/initialize_reagents()
 	SHOULD_CALL_PARENT(TRUE)
-	if(REAGENT_TOTAL_VOLUME(reagents) > 0)
+	// Check if this is getting called twice, or we created reagents somewhere in Initialize() (bad juju)
+	if(istype(reagents))
 		log_warning("\The [src] possibly is initializing its reagents more than once!")
-	create_or_update_reagents(chem_volume)
-	if(populate)
+	// If preloaded from serde, handle expected list structure.
+	// Returns if preload is successful to skip populate_reagents() call.
+	FINALIZE_REAGENTS_SERDE_AND_RETURN(reagents)
+	// Standard non-serde reagent init behavior after this point.
+	if(chem_volume > 0)
+		create_or_update_reagents(chem_volume)
+	if(istype(reagents))
 		populate_reagents()
 
 /**

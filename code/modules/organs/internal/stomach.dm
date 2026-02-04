@@ -12,6 +12,14 @@
 	QDEL_NULL(ingested)
 	. = ..()
 
+/obj/item/organ/internal/stomach/Serialize()
+	. = ..()
+	SERIALIZE_REAGENTS(ingested, /obj/item/organ/internal/stomach, "ingested")
+
+/obj/item/organ/internal/stomach/Deserialize(list/instance_map)
+	. = ..()
+	DESERIALIZE_REAGENTS(ingested, "ingested")
+
 /obj/item/organ/internal/stomach/set_species(species_uid)
 	if(species?.gluttonous)
 		verbs -= /obj/item/organ/internal/stomach/proc/throw_up
@@ -21,10 +29,12 @@
 	if(species && !stomach_capacity)
 		stomach_capacity = species.stomach_capacity
 
-/obj/item/organ/internal/stomach/initialize_reagents(populate)
+/obj/item/organ/internal/stomach/initialize_reagents()
+	FINALIZE_REAGENTS_SERDE(ingested)
 	if(!ingested)
-		ingested = new/datum/reagents/metabolism(240, (owner || src), CHEM_INGEST)
-	REAGENT_SET_ATOM(ingested, src)
+		ingested = new/datum/reagents/metabolism(240, src, CHEM_INGEST)
+	var/owner_atom = owner || src
+	REAGENT_SET_ATOM(ingested, owner_atom)
 	. = ..()
 
 /obj/item/organ/internal/stomach/do_install()

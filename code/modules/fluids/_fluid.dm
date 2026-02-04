@@ -117,7 +117,7 @@ var/global/list/_fluid_edge_mask_cache = list()
 	var/list/connections
 	for(var/checkdir in global.alldirs)
 		var/turf/neighbor = get_step_resolving_mimic(loc, checkdir)
-		if(!neighbor || neighbor.density || REAGENT_TOTAL_VOLUME(neighbor?.reagents) > FLUID_PUDDLE)
+		if(!neighbor || neighbor.density || !istype(neighbor?.reagents) || REAGENT_TOTAL_VOLUME(neighbor?.reagents) > FLUID_PUDDLE)
 			LAZYADD(connections, checkdir)
 		else
 			LAZYADD(ignored, checkdir)

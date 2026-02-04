@@ -19,4 +19,5 @@
 	for(var/atom/movable/thing in contents)
 		thing.on_turf_height_change(new_height)
 
+	state_was_modified()
 	return TRUE

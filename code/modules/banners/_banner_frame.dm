@@ -21,12 +21,19 @@
 	var/obj/item/banner/banner
 	var/accepts_banner_type = /obj/item/banner
 
+// Avoiding random generation behavior on subtypes.
+// We don't serialize a reference to the banner item anyway.
+/obj/structure/banner_frame/GetSerializedType()
+	return /obj/structure/banner_frame
+
 /obj/structure/banner_frame/set_dir(ndir)
 	return ..(force_south_facing ? SOUTH : ndir)
 
 /obj/structure/banner_frame/Initialize(ml, _mat, _reinf_mat)
 	if(ispath(banner))
 		set_banner(new banner(src))
+	else if(isnull(banner))
+		set_banner(locate(/obj/item/banner) in src)
 	. = ..()
 	update_icon()
 

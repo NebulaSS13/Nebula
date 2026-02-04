@@ -10,10 +10,39 @@
 	anchored = TRUE
 
 	var/message
-	var/graffiti_age = 0
 	var/author = "unknown"
 
+/obj/effect/decal/writing/Serialize()
+	. = ..()
+	SERIALIZE_IF_MODIFIED(message, /obj/effect/decal/writing)
+	SERIALIZE_IF_MODIFIED(author, /obj/effect/decal/writing)
+
+// If it's old enough we start to trim down any textual information and scramble strings.
+#define SERDE_MESSAGE nameof(/obj/effect/decal/writing::message)
+/obj/effect/decal/writing/HandlePersistentDecay(entries_decay_at, entry_decay_weight)
+	var/original_message = __deserialization_payload[SERDE_MESSAGE]
+	var/decayed_message = apply_serde_message_decay(
+		__deserialization_payload[SERDE_MESSAGE],
+		__deserialization_payload[nameof(/obj/effect/decal::age)],
+		entry_decay_weight,
+		entries_decay_at
+	)
+	to_world_log("decayed graffifi: [original_message] -> [decayed_message]")
+	__deserialization_payload[SERDE_MESSAGE] = decayed_message
+#undef SERDE_MESSAGE
+
 /obj/effect/decal/writing/Initialize(mapload, var/_age, var/_message, var/_author)
+
+	var/turf/checking_turf = loc
+	if(istype(checking_turf) && !checking_turf.can_engrave())
+		return INITIALIZE_HINT_QDEL
+
+	var/too_much_graffiti = 0
+	for(var/obj/effect/decal/writing/writing in loc)
+		too_much_graffiti++
+		if(too_much_graffiti >= 5)
+			return INITIALIZE_HINT_QDEL
+
 	var/list/random_icon_states = get_states_in_icon(icon)
 	for(var/obj/effect/decal/writing/writing in loc)
 		random_icon_states -= writing.icon_state
@@ -22,9 +51,10 @@
 	SSpersistence.track_value(src, /decl/persistence_handler/graffiti)
 	. = ..(mapload)
 	if(!isnull(_age))
-		graffiti_age = _age
-	message = _message
-	if(!isnull(author))
+		age = _age
+	if(_message && !message)
+		message = _message
+	if(_author && !author)
 		author = _author
 
 /obj/effect/decal/writing/Destroy()

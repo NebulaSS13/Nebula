@@ -1603,4 +1603,3 @@ var/global/const/ACTION_DANGER_ALL = 2
 // Returns true if the mob is cloaked, otherwise false
 /mob/proc/is_cloaked()
 	return FALSE
-

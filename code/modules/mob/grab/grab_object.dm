@@ -77,6 +77,10 @@
 	if(affecting_mob && assailant?.check_intent(I_FLAG_HARM))
 		upgrade(TRUE)
 
+/obj/item/grab/ShouldSerialize(_age)
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
+
 /obj/item/grab/mob_can_unequip(mob/user, slot, disable_warning = FALSE, dropping = FALSE)
 	if(dropping)
 		return TRUE

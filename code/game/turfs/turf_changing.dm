@@ -55,6 +55,7 @@
 
 	// Track a number of old values for the purposes of raising
 	// state change events after changing the turf to the new type.
+	var/old_earliest_type =    _earliest_type
 	var/old_fire =             fire
 	var/old_above =            above
 	var/old_opacity =          opacity
@@ -200,6 +201,9 @@
 	if(HasBelow(z) && changed_turf.is_open() && !old_is_open)
 		for(var/atom/movable/thing in changed_turf.get_contained_external_atoms())
 			thing.fall()
+
+	changed_turf._earliest_type = old_earliest_type
+	changed_turf.state_was_modified()
 
 /turf/proc/transport_properties_from(turf/other, transport_air)
 	if(transport_air && can_inherit_air && (other.zone || other.air))
