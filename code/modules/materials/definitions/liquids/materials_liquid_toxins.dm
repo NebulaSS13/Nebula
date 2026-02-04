@@ -227,6 +227,7 @@
 	taste_mult = 1.2
 	metabolism = REM * 0.25
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	opacity = 1.0
 
 /decl/material/liquid/hair_remover
 	name = "hair remover"
