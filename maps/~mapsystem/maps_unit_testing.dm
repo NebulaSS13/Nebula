@@ -1,7 +1,8 @@
 /datum/map
-	var/const/NO_APC = 1
-	var/const/NO_VENT = 2
-	var/const/NO_SCRUBBER = 4
+	var/const/NO_APC         = BITFLAG(0)
+	var/const/NO_VENT        = BITFLAG(1)
+	var/const/NO_SCRUBBER    = BITFLAG(2)
+	var/const/SKIP_ALL_TESTS = BITFLAG(3)
 
 	/// Defines the expected result of the atmospherics shuttle unit test for atmosphere.
 	var/shuttle_atmos_expectation = UT_NORMAL

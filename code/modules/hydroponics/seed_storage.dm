@@ -319,7 +319,7 @@
 		user.visible_message(SPAN_NOTICE("\The [user] puts \the [used_item] into \the [src]."))
 		return TRUE
 
-	if(istype(used_item, /obj/item/plants) && used_item.storage)
+	if(istype(used_item, /obj/item/plant_satchel) && used_item.storage)
 		var/loaded = 0
 		for(var/obj/item/seeds/G in storage.get_contents())
 			++loaded

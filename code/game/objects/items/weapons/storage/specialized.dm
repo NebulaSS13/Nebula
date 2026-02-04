@@ -9,7 +9,7 @@
 //        Mining Satchel
 // -----------------------------
 
-/obj/item/ore
+/obj/item/ore_satchel
 	name = "mining satchel"
 	desc = "This sturdy bag can be used to store and transport ores."
 	icon = 'icons/obj/items/mining_satchel.dmi'
@@ -37,7 +37,7 @@
 //          Plant bag
 // -----------------------------
 
-/obj/item/plants
+/obj/item/plant_satchel
 	name = "botanical satchel"
 	desc = "This bag can be used to store all kinds of plant products and botanical specimen."
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'

@@ -464,7 +464,7 @@
 		plant_seed(user, used_item)
 		return TRUE
 
-	if (istype(used_item, /obj/item/plants))
+	if (istype(used_item, /obj/item/plant_satchel))
 		physical_attack_hand(user) // Harvests and clears out dead plants.
 		if(used_item.storage)
 			for (var/obj/item/food/grown/G in get_turf(user))

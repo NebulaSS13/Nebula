@@ -120,30 +120,56 @@
 // Map definitions.
 /obj/item/stack/material/ore/uranium
 	material = /decl/material/solid/pitchblende
+/obj/item/stack/material/ore/uranium/three
+	amount =  3
 /obj/item/stack/material/ore/iron
 	material = /decl/material/solid/hematite
+/obj/item/stack/material/ore/iron/ten
+	amount = 10
 /obj/item/stack/material/ore/coal
 	material = /decl/material/solid/graphite
+/obj/item/stack/material/ore/coal/ten
+	amount = 10
 /obj/item/stack/material/ore/silver
 	material = /decl/material/solid/metal/silver
+/obj/item/stack/material/ore/silver/five
+	amount =  5
 /obj/item/stack/material/ore/gold
 	material = /decl/material/solid/metal/gold
+/obj/item/stack/material/ore/gold/five
+	amount =  5
 /obj/item/stack/material/ore/diamond
 	material = /decl/material/solid/gemstone/diamond
+/obj/item/stack/material/ore/diamond/three
+	amount =  3
 /obj/item/stack/material/ore/osmium
 	material = /decl/material/solid/metal/platinum
+/obj/item/stack/material/ore/osmium/three
+	amount =  3
 /obj/item/stack/material/ore/hydrogen
 	material = /decl/material/solid/metallic_hydrogen
+/obj/item/stack/material/ore/hydrogen/two
+	amount =  2
 /obj/item/stack/material/ore/slag
 	material = /decl/material/solid/slag
 /obj/item/stack/material/ore/phosphorite
 	material = /decl/material/solid/phosphorite
-/obj/item/stack/material/ore/aluminium
+/obj/item/stack/material/ore/bauxite
 	material = /decl/material/solid/bauxite
+/obj/item/stack/material/ore/bauxite/ten
+	amount = 10
 /obj/item/stack/material/ore/rutile
 	material = /decl/material/solid/rutile
+/obj/item/stack/material/ore/rutile/five
+	amount =  5
 /obj/item/stack/material/ore/galena
 	material = /decl/material/solid/galena
+/obj/item/stack/material/ore/galena/ten
+	amount = 10
+/obj/item/stack/material/ore/tetrahedrite
+	material = /decl/material/solid/tetrahedrite
+/obj/item/stack/material/ore/tetrahedrite/ten
+	amount = 10
 /obj/item/stack/material/ore/hydrogen_hydrate
 	material = /decl/material/solid/ice/hydrogen // todo: set back to hydrate when clathrate is added to hydrogen hydrate dname
 /obj/item/stack/material/ore/methane
@@ -181,6 +207,9 @@
 
 /obj/item/stack/material/ore/handful/sand
 	material      = /decl/material/solid/sand
+
+/obj/item/stack/material/ore/handful/sand/fifteen
+	amount = 15
 
 /client/proc/spawn_ore_pile()
 	set name = "Spawn Ore Pile"

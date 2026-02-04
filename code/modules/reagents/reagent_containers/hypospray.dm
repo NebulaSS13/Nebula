@@ -187,6 +187,10 @@
 		update_name()
 	update_icon()
 
+/obj/item/chems/hypospray/autoinjector/used/Initialize()
+	. = ..()
+	atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
+
 /obj/item/chems/hypospray/autoinjector/populate_reagents()
 	SHOULD_CALL_PARENT(TRUE)
 	. = ..()

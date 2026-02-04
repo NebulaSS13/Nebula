@@ -15,13 +15,13 @@
 	path= /obj/item/belt/utility
 
 /datum/fabricator_recipe/textiles/storage/mining_satchel
-	path = /obj/item/ore
+	path = /obj/item/ore_satchel
 
 /datum/fabricator_recipe/textiles/storage/botanical_satchel
-	path = /obj/item/plants
+	path = /obj/item/plant_satchel
 
 /datum/fabricator_recipe/textiles/storage/wallet
 	path = /obj/item/wallet/leather
 
 /datum/fabricator_recipe/textiles/storage/money_bag
-	path = /obj/item/bag/cash 
+	path = /obj/item/bag/cash

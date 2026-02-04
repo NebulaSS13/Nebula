@@ -35,6 +35,12 @@
 	crafting_stack_type = /obj/item/stack/material/lump/large
 	matter_multiplier = 3
 
+/obj/item/stack/material/lump/large/marble
+	material = /decl/material/solid/stone/marble
+
+/obj/item/stack/material/lump/large/marble/five
+	amount = 5
+
 /obj/item/stack/material/lump/large/clay
 	material = /decl/material/solid/clay
 	is_spawnable_type = TRUE

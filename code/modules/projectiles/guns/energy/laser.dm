@@ -54,18 +54,29 @@
 			desc += " The optical pathway is melted and useless."
 			projectile_type = null
 
-/obj/item/gun/energy/captain
-	name = "antique laser gun"
+/obj/item/gun/energy/retro
+	name = "retro laser pistol"
 	icon = 'icons/obj/guns/caplaser.dmi'
+	desc = "A now-obsolete handheld laser weapon, still popular with some for ease of maintenance."
 	icon_state = ICON_STATE_WORLD
-	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well."
-	slot_flags = SLOT_LOWER_BODY //too unusually shaped to fit in a holster
 	w_class = ITEM_SIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
 	max_shots = 5 //to compensate a bit for self-recharging
 	one_hand_penalty = 1 //a little bulky
+
+/obj/item/gun/energy/retro/empty/Initialize(ml, material_key)
+	. = ..()
+	var/obj/item/cell/cell = get_cell()
+	if(cell)
+		cell.charge = 0
+		update_icon()
+
+/obj/item/gun/energy/retro/captain
+	name = "antique laser gun"
+	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well."
 	self_recharge = 1
+	slot_flags = SLOT_LOWER_BODY //too unusually shaped to fit in a holster
 
 /obj/item/gun/energy/lasercannon
 	name = "laser cannon"

@@ -6,7 +6,7 @@
 		/obj/item/rcd,
 		/obj/item/tool,
 		/obj/item/t_scanner,
-		/obj/item/ore,
+		/obj/item/ore_satchel,
 		/obj/item/tank
 	)
 	armor = list(

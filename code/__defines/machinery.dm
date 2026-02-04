@@ -66,20 +66,14 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define CAMERA_CHANNEL_ERT                 "Emergency Response Team"
 #define CAMERA_CHANNEL_MERCENARY           "MercurialNet"
 #define CAMERA_CHANNEL_TELEVISION          "Television"
-#define CAMERA_CHANNEL_CRESCENT            "Crescent"
-#define CAMERA_CHANNEL_ERT                 "Emergency Response Team"
-#define CAMERA_CHANNEL_MERCENARY           "MercurialNet"
-#define CAMERA_CHANNEL_TELEVISION          "Television"
 
 // Alarm networks
 #define NETWORK_ALARM_ATMOS  "Atmosphere Alarms"
-#define NETWORK_ALARM_ATMOS  "Atmosphere Alarms"
 #define NETWORK_ALARM_CAMERA "Camera Alarms"
-#define NETWORK_ALARM_FIRE   "Fire Alarms"
 #define NETWORK_ALARM_FIRE   "Fire Alarms"
 #define NETWORK_ALARM_MOTION "Motion Alarms"
 #define NETWORK_ALARM_POWER  "Power Alarms"
-#define NETWORK_ALARM_POWER  "Power Alarms"
+
 
 //singularity defines
 #define STAGE_ONE 	1

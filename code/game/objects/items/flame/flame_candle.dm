@@ -17,6 +17,21 @@
 /obj/item/flame/candle/spent
 	_fuel           = 0
 
+/obj/item/flame/candle/infinite/get_fuel()
+	return 10
+
+/obj/item/flame/candle/infinite/has_fuel(amount)
+	return TRUE
+
+/obj/item/flame/candle/infinite/expend_fuel(amount)
+	return TRUE
+
+/obj/item/flame/candle/infinite/red
+	paint_color = COLOR_RED
+
+/obj/item/flame/candle/infinite/white
+	paint_color = COLOR_WHITE
+
 /obj/item/flame/candle/red
 	paint_color = COLOR_RED
 

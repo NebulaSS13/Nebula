@@ -49,3 +49,6 @@
 			if(i > length(candles_storage.candle_offsets))
 				break
 	compile_overlays()
+
+/obj/item/candelabra/infinite/WillContain()
+	return list(/obj/item/flame/candle/infinite = 3)
