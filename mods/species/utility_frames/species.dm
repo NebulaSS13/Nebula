@@ -36,7 +36,8 @@
 		/decl/pronouns/neuter
 	)
 	available_background_info = list(
-		/decl/background_category/heritage = list(/decl/background_detail/heritage/synthetic)
+		/decl/background_category/citizenship = list(/decl/background_detail/citizenship/synthetic),
+		/decl/background_category/heritage    = list(/decl/background_detail/heritage/synthetic)
 	)
 
 	exertion_effect_chance = 10
