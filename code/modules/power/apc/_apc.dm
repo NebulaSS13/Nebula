@@ -874,3 +874,15 @@ var/global/list/all_apcs = list()
 	if(area && !(processing_flags & MACHINERY_PROCESS_SELF))
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
+/obj/machinery/apc/unlocked
+	initial_access = list()
+	req_access = list()
+
+/obj/machinery/apc/unlocked/Initialize(mapload, ndir, populate_parts)
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/apc/unlocked/LateInitialize()
+	. = ..()
+	for(var/obj/item/stock_parts/access_lock/lock in get_all_components_of_type(/obj/item/stock_parts/access_lock))
+		lock.locked = FALSE

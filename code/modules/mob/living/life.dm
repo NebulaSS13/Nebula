@@ -244,10 +244,14 @@
 					break
 			if(still_processing_reagent)
 				continue
-			var/dose = CHEM_DOSE(src, reagent) - reagent.metabolism*2
-			LAZYSET(_chem_doses, reagent, dose)
-			if(CHEM_DOSE(src, reagent) <= 0)
+			var/amount_removed = get_adjusted_metabolism(reagent.metabolism*2) // reagents metabolize out twice as fast as they metabolize in
+			if(!(reagent.flags & IGNORE_MOB_SIZE))
+				amount_removed *= (MOB_SIZE_MEDIUM/mob_size)
+			var/dose = CHEM_DOSE(src, reagent) - amount_removed
+			if(dose <= 0)
 				LAZYREMOVE(_chem_doses, reagent)
+			else
+				LAZYSET(_chem_doses, reagent, dose)
 	if(apply_chemical_effects())
 		update_health()
 

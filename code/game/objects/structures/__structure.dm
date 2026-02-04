@@ -8,7 +8,6 @@
 
 	/// Multiplier for degree of comfort offered to mobs buckled to this furniture.
 	var/user_comfort = 0 // TODO: extremely uncomfortable chairs
-
 	var/structure_flags
 	var/last_damage_message
 	var/hitsound = 'sound/weapons/Genhit.ogg'
@@ -16,7 +15,6 @@
 	var/parts_amount
 	var/footstep_type
 	var/mob_offset
-
 	var/paint_verb
 
 /obj/structure/get_color()

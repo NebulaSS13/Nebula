@@ -11,6 +11,8 @@ SUBSYSTEM_DEF(atoms)
 	var/atom_init_stage = INITIALIZATION_INSSATOMS
 	var/old_init_stage
 
+	/// An associative list of UIDs to atoms that were deserialized prior to flush.
+	var/list/deserialized_atoms = list()
 	/// A non-associative list of lists, with the format list(list(atom, list(Initialize arguments))).
 	var/list/created_atoms = list()
 	/// A non-associative list of lists, with the format list(list(atom, list(LateInitialize arguments))).
@@ -29,9 +31,20 @@ SUBSYSTEM_DEF(atoms)
 
 	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
 
-	var/list/mapload_arg = list(TRUE)
-
+	// Preload any atoms that have deserialized during the initial load process prior to flush.
 	var/index = 1
+	var/list/postinit_serde_atoms = list()
+	if(length(deserialized_atoms))
+		while(index <= length(deserialized_atoms))
+			var/uid = deserialized_atoms[index++]
+			var/atom/instance = deserialized_atoms[uid]
+			if(instance.Preload(deserialized_atoms) == SERDE_HINT_POSTINIT)
+				postinit_serde_atoms += instance
+			CHECK_TICK
+		report_progress("Deserialized [index-1] atom\s.")
+		index = 1
+
+	var/list/mapload_arg = list(TRUE)
 	// Things can add to the end of this list while we iterate, so we can't use a for loop.
 	while(index <= length(created_atoms))
 		// Don't remove from this list while we run, that's expensive.
@@ -49,9 +62,9 @@ SUBSYSTEM_DEF(atoms)
 			else
 				InitAtom(A, mapload_arg)
 			CHECK_TICK
-
-	report_progress("Initialized [index] atom\s")
 	created_atoms.Cut()
+
+	report_progress("Initialized [index-1] atom\s.")
 
 	atom_init_stage = INITIALIZATION_INNEW_REGULAR
 
@@ -64,6 +77,25 @@ SUBSYSTEM_DEF(atoms)
 			CHECK_TICK
 		report_progress("Late initialized [index] atom\s")
 		late_loaders.Cut()
+
+	if(length(postinit_serde_atoms))
+		index = 1
+		while(index <= length(postinit_serde_atoms))
+			var/atom/instance = postinit_serde_atoms[index++]
+			instance.DeserializePostInit(deserialized_atoms)
+			CHECK_TICK
+		postinit_serde_atoms.Cut()
+
+	// Clear out the serde payloads now that everything should be tidied away.
+	if(length(deserialized_atoms))
+		index = 1
+		while(index <= length(deserialized_atoms))
+			var/uid = deserialized_atoms[index++]
+			var/atom/instance = deserialized_atoms[uid]
+			if(istype(instance))
+				instance.__deserialization_payload = null
+			CHECK_TICK
+		deserialized_atoms.Cut()
 
 /datum/controller/subsystem/atoms/proc/InitAtom(atom/A, list/arguments)
 	var/the_type = A.type

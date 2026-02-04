@@ -55,21 +55,25 @@
 		remove_flooring(_flooring, TRUE, place_product)
 	if(!skip_update)
 		update_from_flooring()
+	state_was_modified()
 	return TRUE
 
 /turf/floor/proc/remove_flooring(var/decl/flooring/flooring, skip_update, place_product)
 
 	// Remove floor layers one by one.
 	_topmost_flooring  = null
+
 	if(islist(flooring))
 		for(var/floor in UNLINT(flooring))
 			if(remove_flooring(floor, TRUE, place_product))
 				. = TRUE
-		if(. && !skip_update)
-			set_floor_broken(skip_update = TRUE)
-			set_floor_burned(skip_update = TRUE)
-			update_from_flooring()
-		return
+		if(.)
+			state_was_modified()
+			if(!skip_update)
+				set_floor_broken(skip_update = TRUE)
+				set_floor_burned(skip_update = TRUE)
+				update_from_flooring()
+			return
 
 	// Validate our input.
 	flooring = RESOLVE_TO_DECL(flooring)
@@ -84,6 +88,8 @@
 			_flooring = _flooring[1]
 	else if(_flooring == flooring)
 		_flooring = null
+
+	state_was_modified()
 
 	// If the turf was not the topmost turf, then we don't really need to care about it.
 	if(!was_topmost)
@@ -140,7 +146,7 @@
 			_flooring = RESOLVE_TO_DECL(newflooring)
 		else
 			return FALSE
-
+		state_was_modified()
 		if(!skip_update)
 			update_from_flooring()
 		return TRUE
@@ -162,6 +168,7 @@
 		for(var/floor in UNLINT(newflooring))
 			if(add_flooring(floor, skip_update = FALSE))
 				. = TRUE
+		state_was_modified()
 		if(!skip_update)
 			set_floor_broken(skip_update = TRUE)
 			set_floor_burned(skip_update = TRUE)
@@ -188,6 +195,8 @@
 		if(!islist(_flooring))
 			_flooring = list(_flooring)
 		_flooring |= newflooring
+
+	state_was_modified()
 
 	// Update for the new top layer.
 	if(!skip_update)

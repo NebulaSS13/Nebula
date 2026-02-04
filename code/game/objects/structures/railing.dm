@@ -27,6 +27,9 @@
 	color = COLOR_ORANGE
 	paint_color = COLOR_ORANGE
 
+/obj/structure/railing/mapped/grey
+	paint_color = COLOR_SILVER
+
 /obj/structure/railing/mapped/no_density
 	density = FALSE
 

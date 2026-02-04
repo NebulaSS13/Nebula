@@ -12,13 +12,13 @@
 	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7", "dir_splatter_1", "dir_splatter_2")
 	blood_DNA = list()
 	generic_filth = TRUE
-	persistent = TRUE
+	use_legacy_persistence = TRUE
 	appearance_flags = NO_CLIENT_COLOR
 	cleanable_scent = "blood"
 	scent_descriptor = "odour"
 
 	var/base_icon = 'icons/effects/blood.dmi'
-	var/basecolor=COLOR_BLOOD_HUMAN // Color when wet.
+	var/basecolor = COLOR_BLOOD_HUMAN // Color when wet.
 	var/amount = 5
 	//for 1 unit of depth in puddle (amount var)
 	var/time_to_dry = 5 MINUTES
@@ -28,6 +28,18 @@
 	var/blood_size = BLOOD_SIZE_MEDIUM // A relative size; larger-sized blood will not override smaller-sized blood, except maybe at mapload.
 	var/list/blood_data
 	var/chemical = /decl/material/liquid/blood
+
+/obj/effect/decal/cleanable/blood/Serialize()
+	. = ..()
+	if(!generic_filth) // Generic filth is serialized to a type without these vars, so deserializing them will cause errors.
+		SERIALIZE_IF_MODIFIED(fluorescent, /obj/effect/decal/cleanable/blood)
+		SERIALIZE_IF_MODIFIED(basecolor, /obj/effect/decal/cleanable/blood)
+		SERIALIZE_IF_MODIFIED(drytime, /obj/effect/decal/cleanable/blood)
+		SERIALIZE_DECL_IF_MODIFIED(chemical, /obj/effect/decal/cleanable/blood)
+
+/obj/effect/decal/cleanable/blood/Deserialize(list/instance_map)
+	. = ..()
+	DESERIALIZE_DECL_TO_TYPE(chemical)
 
 /obj/effect/decal/cleanable/blood/reveal_blood()
 	if(ispath(chemical, /decl/material/liquid/blood) && !fluorescent)
@@ -277,7 +289,7 @@
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "mucus"
 	generic_filth = TRUE
-	persistent = TRUE
+	use_legacy_persistence = TRUE
 
 #undef BLOOD_SIZE_SMALL
 #undef BLOOD_SIZE_MEDIUM

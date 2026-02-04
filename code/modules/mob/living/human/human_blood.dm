@@ -185,8 +185,6 @@
 
 //Percentage of maximum blood volume, affected by the condition of circulation organs
 /mob/living/human/proc/get_blood_circulation()
-
-
 	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 	if(!heart)
 		return 0.25 * get_blood_volume()
@@ -210,8 +208,7 @@
 			if(PULSE_2FAST, PULSE_THREADY)
 				pulse_mod *= 1.25
 	blood_volume *= pulse_mod
-	if(current_posture.prone)
-		blood_volume *= 1.25
+	blood_volume *= current_posture.blood_volume_multiplier
 
 	var/min_efficiency = recent_pump ? 0.5 : 0.3
 	blood_volume *= max(min_efficiency, (1-(heart.get_organ_damage() / heart.max_damage)))
@@ -236,7 +233,8 @@
 	else
 		blood_volume = 100
 
-	var/blood_volume_mod = max(0, 1 - getOxyLossPercent()/(species.total_health/2))
+	// blood_volume_mod is 1 with no oxyloss, 0 at half species health (50%), and cannot go below 0
+	var/blood_volume_mod = max(0, (1 - getOxyLossFraction()*2))
 	var/oxygenated_mult = 0
 	switch(GET_CHEMICAL_EFFECT(src, CE_OXYGENATED))
 		if(1)
@@ -245,6 +243,6 @@
 			oxygenated_mult = 0.7
 		if(3)
 			oxygenated_mult = 0.9
-	blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
-	blood_volume = blood_volume * blood_volume_mod
-	return min(blood_volume, 100)
+	blood_volume_mod += oxygenated_mult * (1 - blood_volume_mod) // give us back a fraction of our missing oxygenation
+	blood_volume *= blood_volume_mod
+	return clamp(blood_volume, 0, 100)

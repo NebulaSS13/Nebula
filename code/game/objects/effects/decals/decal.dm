@@ -1,5 +1,6 @@
 /obj/effect/decal
 	layer = DECAL_LAYER
+	var/age = 0
 
 /obj/effect/decal/fall_damage()
 	return 0

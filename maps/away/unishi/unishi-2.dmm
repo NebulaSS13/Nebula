@@ -1528,7 +1528,7 @@
 /area/unishi/hydro)
 "er" = (
 /obj/effect/vine,
-/obj/machinery/atmospherics/unary/freezer{
+/obj/machinery/atmospherics/unary/temperature/freezer{
 	dir = 8;
 	icon_state = "freezer"
 	},
@@ -1664,7 +1664,7 @@
 /area/unishi/hydro)
 "eJ" = (
 /obj/effect/vine,
-/obj/machinery/atmospherics/unary/heater{
+/obj/machinery/atmospherics/unary/temperature/heater{
 	dir = 8
 	},
 /turf/floor/tiled,

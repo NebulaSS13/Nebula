@@ -111,6 +111,11 @@
 /mob/living/simple_animal/Initialize()
 	. = ..()
 
+	// Deserialize any JSON payload for our overlays.
+	if(istext(draw_visible_overlays))
+		draw_visible_overlays = cached_json_decode(draw_visible_overlays)
+		if(!islist(draw_visible_overlays))
+			draw_visible_overlays = null
 	if(isnull(draw_visible_overlays))
 		var/list/defaults = get_default_animal_colours()
 		draw_visible_overlays = defaults?.Copy() // do not mutate static list

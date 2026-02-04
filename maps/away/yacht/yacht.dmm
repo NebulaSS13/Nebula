@@ -92,7 +92,7 @@
 /obj/structure/safe,
 /obj/item/chems/pill/cyanide,
 /obj/item/rig/medical/equipped,
-/obj/item/gun/energy/captain,
+/obj/item/gun/energy/retro/captain,
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/laminate/walnut,
@@ -1001,7 +1001,7 @@
 /turf/floor/plating,
 /area/yacht/engine)
 "di" = (
-/obj/machinery/atmospherics/unary/heater,
+/obj/machinery/atmospherics/unary/temperature/heater,
 /turf/floor/plating,
 /area/yacht/engine)
 "dj" = (
@@ -1009,7 +1009,7 @@
 /turf/floor/plating,
 /area/yacht/engine)
 "dk" = (
-/obj/machinery/atmospherics/unary/heater,
+/obj/machinery/atmospherics/unary/temperature/heater,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/plating,
 /area/yacht/engine)
@@ -1100,7 +1100,7 @@
 /turf/floor/plating,
 /area/yacht/engine)
 "dw" = (
-/obj/machinery/atmospherics/unary/heater{
+/obj/machinery/atmospherics/unary/temperature/heater{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt/visible,

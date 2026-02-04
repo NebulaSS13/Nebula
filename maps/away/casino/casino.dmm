@@ -4575,7 +4575,7 @@
 /turf/floor/plating,
 /area/casino/casino_bow)
 "ne" = (
-/obj/machinery/atmospherics/unary/heater{
+/obj/machinery/atmospherics/unary/temperature/heater{
 	dir = 8
 	},
 /turf/floor/plating,

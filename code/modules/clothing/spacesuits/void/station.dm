@@ -73,7 +73,7 @@
 		/obj/item/tank,
 		/obj/item/stack/flag,
 		/obj/item/suit_cooling_unit,
-		/obj/item/ore,
+		/obj/item/ore_satchel,
 		/obj/item/t_scanner,
 		/obj/item/tool,
 		/obj/item/rcd

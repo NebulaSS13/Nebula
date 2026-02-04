@@ -592,9 +592,21 @@
 
 	dpdir = sortdir | posdir | negdir
 
-/obj/structure/disposalpipe/sortjunction/Initialize()
+/obj/structure/disposalpipe/sortjunction/proc/validate_sort_type()
+	. = istext(sort_type) && sort_type != ""
+	if(!.)
+		if(name == initial(name))
+			sort_type = "Unknown"
+		else
+			sort_type = name || "Unknown"
+		log_debug("Mapped untagged junction had empty sort_type, setting to '[sort_type]'.")
+
+/obj/structure/disposalpipe/sortjunction/Initialize(ml)
 	. = ..()
-	if(sort_type) global.tagger_locations |= sort_type
+	if(sort_type)
+		global.tagger_locations |= sort_type
+	if(ml && !validate_sort_type())
+		log_warning("Mapped sorting junction of type [type] initializing at [x],[y],[z] with invalid sort_type '[sort_type || "EMPTY"]'!")
 
 	updatedir()
 	updatename()
@@ -662,6 +674,9 @@
 	desc = "An underfloor disposal pipe which filters all wrapped and tagged items."
 	flipped_state = /obj/structure/disposalpipe/sortjunction/wildcard/flipped
 
+/obj/structure/disposalpipe/sortjunction/wildcard/validate_sort_type()
+	return TRUE // Special case
+
 /obj/structure/disposalpipe/sortjunction/wildcard/divert_check(var/checkTag)
 	return checkTag != ""
 
@@ -670,6 +685,12 @@
 	name = "untagged sorting junction"
 	desc = "An underfloor disposal pipe which filters all untagged items."
 	flipped_state = /obj/structure/disposalpipe/sortjunction/untagged/flipped
+
+/obj/structure/disposalpipe/sortjunction/untagged/validate_sort_type()
+	. = (sort_type == "")
+	if(!.)
+		log_debug("Mapped untagged junction had non-empty sort_type, setting to empty string.")
+		sort_type = ""
 
 /obj/structure/disposalpipe/sortjunction/untagged/divert_check(var/checkTag)
 	return checkTag == ""

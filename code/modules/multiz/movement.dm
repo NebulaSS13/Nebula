@@ -321,6 +321,7 @@
 
 /mob/living/verb/check_sky()
 	set name = "Check Sky"
+	set category = "IC"
 	if(!client || is_physically_disabled() || !isturf(loc))
 		to_chat(src, SPAN_WARNING("You can't check the sky right now."))
 		return

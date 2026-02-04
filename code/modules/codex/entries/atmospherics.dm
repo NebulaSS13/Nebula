@@ -54,7 +54,7 @@
 
 //Freezers
 /datum/codex_entry/atmos_freezer
-	associated_paths = list(/obj/machinery/atmospherics/unary/freezer)
+	associated_paths = list(/obj/machinery/atmospherics/unary/temperature/freezer)
 	mechanics_text = "Cools down the gas of the pipe it is connected to.  It uses massive amounts of electricity while on. \
 	It can be upgraded by replacing the capacitors, manipulators, and matter bins.  It can be deconstructed by screwing the maintenance panel open with a \
 	screwdriver, and then using a crowbar."
@@ -63,7 +63,7 @@
 
 //Heaters
 /datum/codex_entry/atmos_heater
-	associated_paths = list(/obj/machinery/atmospherics/unary/heater)
+	associated_paths = list(/obj/machinery/atmospherics/unary/temperature/heater)
 	mechanics_text = "Heats up the gas of the pipe it is connected to.  It uses massive amounts of electricity while on. \
 	It can be upgraded by replacing the capacitors, manipulators, and matter bins.  It can be deconstructed by screwing the maintenance panel open with a \
 	screwdriver, and then using a crowbar."

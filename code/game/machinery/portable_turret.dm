@@ -95,7 +95,7 @@
 			iconholder = 1
 			eprojectile = /obj/item/projectile/beam
 
-		if(/obj/item/gun/energy/captain)
+		if(/obj/item/gun/energy/retro/captain)
 			iconholder = 1
 
 		if(/obj/item/gun/energy/lasercannon)

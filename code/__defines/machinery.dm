@@ -74,6 +74,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_ALARM_MOTION "Motion Alarms"
 #define NETWORK_ALARM_POWER  "Power Alarms"
 
+
 //singularity defines
 #define STAGE_ONE 	1
 #define STAGE_TWO 	3

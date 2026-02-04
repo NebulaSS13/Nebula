@@ -167,6 +167,8 @@
 	curtain_kind_path = /decl/curtain_kind/plastic/shower/engineering
 /obj/item/curtain/shower/security
 	curtain_kind_path = /decl/curtain_kind/plastic/shower/security
+/obj/item/curtain/shower/medical
+	curtain_kind_path = /decl/curtain_kind/plastic/shower/medical
 /obj/item/curtain/canteen
 	curtain_kind_path = /decl/curtain_kind/plastic/canteen
 
@@ -225,3 +227,6 @@
 /obj/structure/curtain/open/shower/security
 	curtain_kind_path = /decl/curtain_kind/plastic/shower/security
 	color = /decl/curtain_kind/plastic/shower/security::color
+/obj/structure/curtain/open/shower/medical
+	curtain_kind_path = /decl/curtain_kind/plastic/shower/medical
+	color = /decl/curtain_kind/plastic/shower/medical::color

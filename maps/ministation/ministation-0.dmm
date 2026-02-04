@@ -426,7 +426,7 @@
 /turf/floor/plating/airless,
 /area/space)
 "ce" = (
-/obj/item/ore,
+/obj/item/ore_satchel,
 /turf/floor/plating/airless,
 /area/space)
 "cf" = (
@@ -3835,7 +3835,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/freezer,
+/obj/machinery/atmospherics/unary/temperature/freezer,
 /turf/floor/tiled/techfloor,
 /area/ministation/atmospherics)
 "qL" = (
@@ -10925,7 +10925,7 @@
 /obj/machinery/camera/network/mining{
 	dir = 1
 	},
-/obj/item/ore,
+/obj/item/ore_satchel,
 /turf/floor/plating/airless,
 /area/space)
 "Oy" = (

@@ -4,15 +4,17 @@
 	icon          = 'icons/turf/flooring/tiles.dmi'
 	icon_state    = "tiled"
 	_flooring     = /decl/flooring/tiling
+	color         = /decl/flooring/tiling::color
 
 /turf/floor/tiled/dark
 	name          = "dark floor"
 	icon_state    = "dark"
 	_flooring     = /decl/flooring/tiling/dark
+	color         = /decl/flooring/tiling/dark::color
 
 /turf/floor/tiled/dark/cryo
 	initial_gas = list(/decl/material/gas/nitrogen = MOLES_CELLSTANDARD)
-	temperature = 73
+	temperature = -200 CELSIUS
 
 /turf/floor/tiled/dark/monotile
 	name          = "floor"
@@ -40,6 +42,7 @@
 	name          = "floor"
 	icon_state    = "steel_monofloor"
 	_flooring     = /decl/flooring/tiling/mono
+	color         = /decl/flooring/tiling/mono::color
 
 /turf/floor/tiled/white/airless
 	name          = "airless floor"
@@ -50,6 +53,7 @@
 	name          = "tiles"
 	icon_state    = "freezer"
 	_flooring     = /decl/flooring/tiling/freezer
+	color         = /decl/flooring/tiling/freezer::color
 
 /turf/floor/tiled/freezer/kitchen
 	name          = "kitchen freezer floor" // TODO: force override of flooring name
@@ -74,7 +78,7 @@
 
 /turf/floor/tiled/techfloor/cryo
 	initial_gas = list(/decl/material/gas/nitrogen = MOLES_CELLSTANDARD)
-	temperature = 73
+	temperature = -200 CELSIUS
 
 /turf/floor/tiled/monotile
 	name          = "floor"
@@ -110,6 +114,7 @@
 	name          = "stone slab floor"
 	icon_state    = "stone"
 	_flooring     = /decl/flooring/tiling/stone
+	color         = /decl/flooring/tiling/stone::color
 
 /turf/floor/tiled/techfloor/grid
 	name          = "floor"
@@ -118,7 +123,7 @@
 
 /turf/floor/tiled/techfloor/grid/cryo
 	initial_gas = list(/decl/material/gas/nitrogen = MOLES_CELLSTANDARD)
-	temperature = 73
+	temperature = -200 CELSIUS
 
 /turf/floor/tiled/airless
 	name          = "airless floor"

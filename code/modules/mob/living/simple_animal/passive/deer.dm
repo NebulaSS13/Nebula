@@ -96,10 +96,10 @@
 	desc = "A fleet-footed forest animal known for a love of vtubers."
 
 /mob/living/simple_animal/passive/deer/sparkle/Initialize()
-	draw_visible_overlays = list(
+	draw_visible_overlays ||= list(
 		"base"     = get_random_colour(),
 		"markings" = get_random_colour(TRUE),
 		"socks"    = get_random_colour()
 	)
-	eye_color      = get_random_colour(TRUE)
+	eye_color ||= get_random_colour(TRUE)
 	. = ..()

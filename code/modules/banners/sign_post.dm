@@ -9,11 +9,17 @@
 	icon_state          = "sign_preview"
 	density             = TRUE
 
+/obj/structure/banner_frame/sign/GetSerializedType()
+	return /obj/structure/banner_frame/sign
+
 /obj/structure/banner_frame/sign/wall
 	base_icon_state     = "sign_hanging"
 	icon_state          = "sign_hanging_preview"
 	force_south_facing  = FALSE
 	density             = FALSE
+
+/obj/structure/banner_frame/sign/wall/GetSerializedType()
+	return /obj/structure/banner_frame/sign/wall
 
 /obj/structure/banner_frame/sign/random/Initialize(ml, _mat, _reinf_mat)
 	material = pick(decls_repository.get_decls_of_subtype(/decl/material/solid/organic/wood))

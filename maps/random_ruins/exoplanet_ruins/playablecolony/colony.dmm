@@ -1617,7 +1617,7 @@
 /turf/floor/tiled/techfloor,
 /area/map_template/colony)
 "dJ" = (
-/obj/machinery/atmospherics/unary/freezer{
+/obj/machinery/atmospherics/unary/temperature/freezer{
 	icon_state = "freezer"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -3379,7 +3379,7 @@
 /turf/floor/lino,
 /area/map_template/colony/messhall)
 "gL" = (
-/obj/machinery/atmospherics/unary/heater{
+/obj/machinery/atmospherics/unary/temperature/heater{
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -5387,7 +5387,7 @@
 /turf/floor/tiled/techfloor,
 /area/map_template/colony)
 "kt" = (
-/obj/machinery/atmospherics/unary/freezer{
+/obj/machinery/atmospherics/unary/temperature/freezer{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -6964,7 +6964,7 @@
 /turf/floor/concrete,
 /area/template_noop)
 "nr" = (
-/obj/machinery/atmospherics/unary/heater{
+/obj/machinery/atmospherics/unary/temperature/heater{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -7429,8 +7429,8 @@
 /obj/item/tool/pickaxe,
 /obj/item/tool/shovel,
 /obj/item/tool/shovel,
-/obj/item/ore,
-/obj/item/ore,
+/obj/item/ore_satchel,
+/obj/item/ore_satchel,
 /obj/item/backpack/dufflebag/eng,
 /obj/item/backpack/dufflebag/eng,
 /obj/machinery/door/window/northright,
