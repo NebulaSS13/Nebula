@@ -1,11 +1,12 @@
 /decl/material/liquid/pigment
 	name = "pigment"
-	lore_text = "Intensely coloured powder."
+	lore_text = "Intensely coloured powder." // then why is it a liquid?
 	taste_description = "the back of class"
 	color = "#888888"
 	overdose = 5
 	hidden_from_codex = TRUE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	opacity = 1.0
 	uid = "chem_pigment"
 
 /decl/material/liquid/pigment/red
