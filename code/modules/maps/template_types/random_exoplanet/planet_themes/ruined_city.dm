@@ -123,6 +123,9 @@
 	floor_type = null
 	material = /decl/material/solid/stone/concrete
 
+/turf/wall/concrete/reinforced
+	reinf_material = /decl/material/solid/metal/steel
+
 //Generic ruin
 /datum/random_map/maze/concrete
 	wall_type =  /turf/wall/concrete

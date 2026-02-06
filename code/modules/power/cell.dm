@@ -330,6 +330,9 @@
 	maxcharge = 500
 	w_class = ITEM_SIZE_SMALL //Perhaps unwise.
 
+/obj/item/cell/gun/empty
+	charge = 0
+
 /obj/item/cell/gun/on_update_icon()
 	. = ..()
 	 //Color the battery charging overlay against the percentage of the battery capacity. However the index of gradient() is set to 1, instead of 100, so we divide it by 100. Colors were chosen by the sprite artist.

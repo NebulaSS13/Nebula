@@ -1,7 +1,6 @@
 /* Types of tanks!
  * Contains:
  *		Oxygen
- *		Anesthetic
  *		Air
  *		Hydrogen
  *		Emergency Oxygen
@@ -54,6 +53,9 @@
 
 /obj/item/tank/hydrogen/empty
 	starting_pressure = list()
+
+/obj/item/tank/hydrogen/collector
+	starting_pressure = list(/decl/material/gas/hydrogen = 70)
 
 /*
  * Emergency Oxygen

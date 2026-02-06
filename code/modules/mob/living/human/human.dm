@@ -614,7 +614,7 @@
 	for(var/obj/item/organ/external/E in get_external_organs())
 		E.sanitize_sprite_accessories()
 
-	for(var/acc_cat in root_bodytype.default_sprite_accessories)
+	for(var/acc_cat in root_bodytype?.default_sprite_accessories)
 		var/decl/sprite_accessory_category/acc_cat_decl = GET_DECL(acc_cat)
 		if(!acc_cat_decl.always_apply_defaults)
 			continue

@@ -4,14 +4,14 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/rad_collector
 	name = "radiation collector array"
-	desc = "A device which uses radiation and hydrogen to produce power."
+	desc = "A device which uses radiation and a reactant to produce power."
 	icon = 'icons/obj/machines/rad_collector.dmi'
 	icon_state = "ca"
 	anchored = FALSE
 	density = TRUE
 	initial_access = list(access_engine_equip)
 	max_health = 100
-	var/obj/item/tank/hydrogen/loaded_tank = null
+	var/obj/item/tank/loaded_tank = null
 
 	var/max_safe_temp = 1000 + T0C
 	var/melted
@@ -80,22 +80,22 @@ var/global/list/rad_collectors = list()
 		return FALSE
 	. = TRUE
 	if((stat & BROKEN) || melted)
-		to_chat(user, "<span class='warning'>\The [src] is completely destroyed!</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is completely destroyed!"))
 	if(!src.locked)
 		toggle_power()
 		user.visible_message("[user.name] turns \the [src] [active? "on":"off"].", \
 		"You turn \the [src] [active? "on":"off"].")
 		investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [loaded_tank?"Fuel: [round(loaded_tank.air_contents.gas[/decl/material/gas/hydrogen]/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
 	else
-		to_chat(user, "<span class='warning'>The controls are locked!</span>")
+		to_chat(user, SPAN_WARNING("The controls are locked!"))
 
 /obj/machinery/rad_collector/attackby(obj/item/used_item, mob/user)
-	if(istype(used_item, /obj/item/tank/hydrogen))
+	if(istype(used_item, /obj/item/tank))
 		if(!src.anchored)
-			to_chat(user, "<span class='warning'>\The [src] needs to be secured to the floor first.</span>")
+			to_chat(user, SPAN_WARNING("\The [src] needs to be secured to the floor first."))
 			return TRUE
 		if(src.loaded_tank)
-			to_chat(user, "<span class='warning'>There's already a tank loaded.</span>")
+			to_chat(user, SPAN_WARNING("There's already a tank loaded."))
 			return TRUE
 		if(!user.try_unequip(used_item, src))
 			return TRUE
@@ -108,11 +108,11 @@ var/global/list/rad_collectors = list()
 			return TRUE
 	else if(IS_WRENCH(used_item))
 		if(loaded_tank)
-			to_chat(user, "<span class='notice'>Remove the tank first.</span>")
+			to_chat(user, SPAN_NOTICE("Remove the tank first."))
 			return TRUE
 		for(var/obj/machinery/rad_collector/R in get_turf(src))
 			if(R != src)
-				to_chat(user, "<span class='warning'>You cannot install more than one collector on the same spot.</span>")
+				to_chat(user, SPAN_WARNING("You cannot install more than one collector on the same spot."))
 				return TRUE
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		src.anchored = !src.anchored
@@ -129,7 +129,7 @@ var/global/list/rad_collectors = list()
 				src.locked = 0 //just in case it somehow gets locked
 				to_chat(user, SPAN_WARNING("The controls can only be locked when \the [src] is active."))
 		else
-			to_chat(user, "<span class='warning'>Access denied!</span>")
+			to_chat(user, SPAN_WARNING("Access denied!"))
 		return TRUE
 	return ..()
 
@@ -164,12 +164,11 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/rad_collector/proc/eject()
 	locked = 0
-	var/obj/item/tank/hydrogen/Z = src.loaded_tank
-	if (!Z)
+	if (!loaded_tank)
 		return
-	Z.dropInto(loc)
-	Z.reset_plane_and_layer()
-	src.loaded_tank = null
+	loaded_tank.dropInto(loc)
+	loaded_tank.reset_plane_and_layer()
+	loaded_tank = null
 	if(active)
 		toggle_power()
 	else
