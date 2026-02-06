@@ -1,7 +1,6 @@
 /* Types of tanks!
  * Contains:
  *		Oxygen
- *		Anesthetic
  *		Air
  *		Phoron
  *		Hydrogen
@@ -53,6 +52,9 @@
 	slot_flags = null	//they have no straps!
 	starting_pressure = list(/decl/material/solid/phoron = 3*ONE_ATMOSPHERE)
 
+/obj/item/tank/phoron/collector
+	starting_pressure = list(/decl/material/solid/phoron = 70)
+
 /*
  * Hydrogen
  */
@@ -68,6 +70,9 @@
 
 /obj/item/tank/hydrogen/empty
 	starting_pressure = list()
+
+/obj/item/tank/hydrogen/collector
+	starting_pressure = list(/decl/material/gas/hydrogen = 70)
 
 /*
  * Emergency Oxygen

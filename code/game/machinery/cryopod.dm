@@ -475,7 +475,7 @@
 	if(!usr.can_enter_cryopod(usr))
 		return
 
-	visible_message(emote_replace_user_tokens(emote_replace_target_tokens(on_enter_visible_message, src), usr), range = 3)
+	visible_message(capitalize_proper_html(emote_replace_user_tokens(emote_replace_target_tokens(on_enter_visible_message, src), usr)), range = 3)
 
 	if(do_after(usr, 20, src))
 

@@ -169,6 +169,7 @@
 /obj/item/box/ammo/blanks/large
 	icon_state = "largebox"
 	w_class = ITEM_SIZE_LARGE
+	storage = /datum/storage/box/large/metal
 
 /obj/item/box/ammo/blanks/large/Initialize(ml, material_key)
 	. = ..()

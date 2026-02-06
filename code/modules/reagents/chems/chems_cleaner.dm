@@ -38,3 +38,4 @@
 	ignition_point   = 353
 	boiling_point    = 373
 	accelerant_value = 0.3
+	opacity          = 1.0 // liquid is opaque by default, but soap is solid (or maybe it should be like, mostly opaque? tbd)

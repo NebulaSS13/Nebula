@@ -12,7 +12,7 @@
 	glass_desc = "Are you sure this is tomato juice?"
 	coated_adjective = "bloody"
 	value = 2.5
-	opacity = TRUE
+	opacity = 1.0
 	min_fluid_opacity = FLUID_MAX_ALPHA
 	max_fluid_opacity = 240
 	compost_value = 1 // yum
@@ -89,3 +89,4 @@
 	value = 0
 	exoplanet_rarity_gas = MAT_RARITY_UNCOMMON
 	compost_value = 1 // yum
+	opacity = 1.0
