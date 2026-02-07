@@ -8,6 +8,7 @@
 
 /datum/category_item/player_setup_item/background/species/populate_mob_snapshot(datum/mob_snapshot/snapshot, is_preview_copy = FALSE)
 	snapshot.root_species = pref.get_species_decl()
+	snapshot.root_species = RESOLVE_TO_DECL(snapshot.root_species)
 
 // This must always return a decl, NEVER null.
 /datum/preferences/proc/get_species_decl()
