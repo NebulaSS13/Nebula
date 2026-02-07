@@ -10,3 +10,6 @@
 
 /obj/machinery/network/pager/security
 	department = /decl/department/security
+
+/obj/item/eftpos/departmental/security
+	default_department = /decl/department/security
