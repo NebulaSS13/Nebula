@@ -68,9 +68,11 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 	var/shuttle_leaving_dock
 	var/shuttle_called_message
 	var/shuttle_recall_message
+	var/shuttle_arriving_at_dock_message
 	var/emergency_shuttle_docked_message
 	var/emergency_shuttle_leaving_dock
 	var/emergency_shuttle_recall_message
+	var/emergency_shuttle_arriving_at_dock_message
 
 	var/list/holodeck_programs = list() // map of string ids to /datum/holodeck_program instances
 	var/list/holodeck_supported_programs = list() // map of maps - first level maps from list-of-programs string id (e.g. "BarPrograms") to another map
@@ -197,6 +199,7 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 		"reinforced"
 	)
 	var/background_categories_generated = FALSE
+
 	// Hard defining this to avoid pulling in unimplemented citizenship decls for the time being.
 	var/list/_background_categories = list(
 		/decl/background_category/heritage,
