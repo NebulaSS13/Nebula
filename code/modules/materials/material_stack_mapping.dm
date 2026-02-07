@@ -9,8 +9,6 @@ DEFINE_STACK_SUBTYPES(concrete,       "concrete",                      solid/sto
 DEFINE_STACK_SUBTYPES(graphite,       "graphite",                      solid/graphite,                        brick,            null)
 DEFINE_STACK_SUBTYPES(diamond,        "diamond",                       solid/gemstone/diamond,                gemstone,         null)
 DEFINE_STACK_SUBTYPES(uranium,        "uranium",                       solid/metal/uranium,                   puck,             null)
-DEFINE_STACK_SUBTYPES(phoron,         "phoron",                        solid/phoron,                          crystal,          null)
-DEFINE_STACK_SUBTYPES(supermatter,    "supermatter",                   solid/exotic_matter/supermatter,       crystal,          null)
 DEFINE_STACK_SUBTYPES(plastic,        "plastic",                       solid/organic/plastic,                 panel,            null)
 DEFINE_STACK_SUBTYPES(fiberglass,     "fiberglass",                    solid/fiberglass,                      sheet/reinforced, null)
 DEFINE_STACK_SUBTYPES(gold,           "gold",                          solid/metal/gold,                      ingot,            null)
@@ -65,6 +63,8 @@ DEFINE_STACK_SUBTYPES(aluminium,      "aluminium",                     solid/met
 DEFINE_STACK_SUBTYPES(titanium,       "titanium",                      solid/metal/titanium,                  rods,             null)
 
 DEFINE_STACK_SUBTYPES(cotton,         "cotton",                        solid/organic/cloth,                   thread,           null)
+DEFINE_STACK_SUBTYPES(cloth,          "cloth",                         solid/organic/cloth,                   bolt,             null)
+
 DEFINE_STACK_SUBTYPES(dried_gut,      "dried gut",                     solid/organic/leather/gut,             thread,           null)
 
 DEFINE_STACK_SUBTYPES(iron,           "iron",                          solid/metal/iron,                      bar,              null)
