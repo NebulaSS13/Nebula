@@ -46,6 +46,9 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = list()
 
+	if(desc)
+		. += desc
+
 	// Collect equipment visibility flags.
 	var/hideflags = get_equipment_visibility()
 	//no accuately spotting headsets from across the room.
