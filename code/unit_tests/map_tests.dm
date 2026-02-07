@@ -829,8 +829,8 @@ var/global/_unit_test_sort_junctions = list()
 
 /obj/structure/disposalholder/unit_test
 	is_spawnable_type = FALSE // NO
-	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
 	speed = 100
+	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
 
 /obj/structure/disposalholder/unit_test/merge()
 	return FALSE
