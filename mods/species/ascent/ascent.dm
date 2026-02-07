@@ -12,7 +12,7 @@
 #define MANTIDIFY(_thing, _name, _desc) \
 ##_thing/ascent/name = _name; \
 ##_thing/ascent/desc = "Some kind of strange alien " + _desc + " technology."; \
-##_thing/ascent/color = COLOR_PURPLE;
+##_thing/ascent/paint_color = COLOR_PURPLE;
 
 /decl/modpack/ascent
 	name = "The Ascent"
