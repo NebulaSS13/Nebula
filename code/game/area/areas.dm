@@ -13,6 +13,9 @@ var/global/list/areas = list()
 	luminosity =    0
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
+	// If true, this area will force light switches on during init.
+	var/start_lit = FALSE
+
 	// If true, will allow natural walls in this area to have xenoarchaeology finds in them.
 	var/allow_xenoarchaeology_finds = TRUE
 

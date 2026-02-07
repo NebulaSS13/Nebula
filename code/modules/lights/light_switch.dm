@@ -44,6 +44,11 @@
 	. = ..()
 	if(isnull(on))
 		on = get_config_value(/decl/config/toggle/lights_start_on)
+	if(!on)
+		var/area/area = get_area(src)
+		if(area?.start_lit)
+			on = TRUE
+
 	connected_area?.set_lightswitch(on)
 	update_icon()
 
