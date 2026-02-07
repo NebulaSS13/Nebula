@@ -15,7 +15,7 @@
 	uid = "species_tajaran"
 	name = "Tajara"
 	name_plural = "Tajaran"
-	base_external_prosthetics_model = null
+	base_external_prosthetics_model = /decl/bodytype/prosthetic/basic_human
 
 	description = "A small mammalian carnivore. If you are reading this, you are probably a Tajaran."
 	hidden_from_codex = FALSE
