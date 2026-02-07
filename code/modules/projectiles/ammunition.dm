@@ -28,6 +28,10 @@
 	if(. && BB)
 		LAZYREMOVE(., BB)
 
+/obj/item/ammo_casing/spent/Initialize()
+	. = ..()
+	expend()
+
 /obj/item/ammo_casing/Initialize()
 	if(ispath(projectile_type))
 		BB = new projectile_type(src)
