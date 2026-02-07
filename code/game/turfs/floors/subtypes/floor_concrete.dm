@@ -2,8 +2,7 @@
 	name           = "concrete"
 	icon           = 'icons/turf/flooring/concrete.dmi'
 	icon_state     = "inset"
-	_flooring      = /decl/flooring/concrete
-	_base_flooring = /decl/flooring/dirt
+	_base_flooring = /decl/flooring/concrete
 	material       = /decl/material/solid/stone/concrete
 
 /turf/floor/concrete/smooth
@@ -20,7 +19,7 @@
 /turf/floor/concrete/reinforced
 	name           = "reinforced concrete"
 	icon_state     = "hexacrete"
-	_flooring      = /decl/flooring/concrete/reinforced
+	_base_flooring = /decl/flooring/concrete/reinforced
 
 /turf/floor/concrete/reinforced/damaged/LateInitialize()
 	. = ..()
@@ -30,4 +29,4 @@
 	name           = "asphalt"
 	color          = COLOR_GRAY40
 	icon_state     = "concrete"
-	_flooring      = /decl/flooring/concrete/asphalt
+	_base_flooring = /decl/flooring/concrete/asphalt
