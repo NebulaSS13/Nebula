@@ -1,3 +1,7 @@
+/datum/storage/pockets/suit/ascent
+	storage_slots = 10
+	max_w_class = ITEM_SIZE_LARGE
+
 /decl/outfit/job/ascent
 	name         = "Ascent - Gyne"
 	mask         = /obj/item/clothing/mask/gas/ascent
@@ -57,30 +61,33 @@
 	_gyne_onmob_icon = 'mods/species/ascent/icons/clothing/under_harness_gyne.dmi'
 	body_parts_covered = 0
 	slot_flags = SLOT_OVER_BODY | SLOT_LOWER_BODY
-	storage = /datum/storage/pockets/suit
+	storage = /datum/storage/pockets/suit/ascent
 	allowed = list(
 		/obj/item/flashlight,
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit,
 		/obj/item/inflatable_dispenser,
-		/obj/item/rcd
-	)
-
-/obj/item/clothing/suit/ascent/Initialize()
-	. = ..()
-	if(!storage)
-		return
-	for(var/tool in list(
+		/obj/item/rcd,
 		/obj/item/gun/energy/particle/small,
 		/obj/item/multitool/mantid,
 		/obj/item/clustertool,
-		/obj/item/clustertool,
 		/obj/item/weldingtool/electric/mantid,
-		/obj/item/stack/medical/resin
-	))
-		allowed |= tool
-		storage.handle_item_insertion(null, new tool(src))
-	if(length(storage.get_contents()))
-		storage.make_exact_fit()
-		storage.can_hold |= /obj/item/chems/drinks/cans/waterbottle/ascent
-	allowed |= /obj/item/chems/drinks/cans/waterbottle/ascent
+		/obj/item/stack/medical/resin,
+		/obj/item/chems/drinks/cans/waterbottle/ascent
+	)
+
+/obj/item/clothing/suit/ascent/medical/WillContain()
+	return list(
+		/obj/item/stack/medical/resin = 3,
+		/obj/item/chems/drinks/cans/waterbottle/ascent = 3
+	)
+
+/obj/item/clothing/suit/ascent/utility/WillContain()
+	return list(
+		/obj/item/gun/energy/particle/small,
+		/obj/item/multitool/mantid,
+		/obj/item/clustertool = 2,
+		/obj/item/weldingtool/electric/mantid,
+		/obj/item/stack/medical/resin,
+		/obj/item/chems/drinks/cans/waterbottle/ascent
+	)
