@@ -165,8 +165,6 @@
 						damprob = stability_effect ? 80 : 100
 						if(prob(damprob))
 							take_damage(1)
-						if(prob(damprob))
-							take_damage(1)
 	..()
 
 /obj/item/organ/internal/brain/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
