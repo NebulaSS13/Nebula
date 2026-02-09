@@ -168,7 +168,7 @@
 	plant_health = seed.get_trait(TRAIT_ENDURANCE)
 	if(isnull(default_pixel_y))
 		default_pixel_y = rand(-12,12)
-	if(isnull(default_pixel_y))
+	if(isnull(default_pixel_x))
 		default_pixel_x = rand(-12,12)
 	reset_offsets(0)
 	if(seed)
