@@ -38,11 +38,8 @@
 /obj/machinery/flasher/attackby(obj/item/used_item, mob/user)
 	if(IS_WIRECUTTER(used_item))
 		add_fingerprint(user, 0, used_item)
-		src.disable = !src.disable
-		if (src.disable)
-			user.visible_message("<span class='warning'>[user] has disconnected \the [src]'s flashbulb!</span>", "<span class='warning'>You disconnect \the [src]'s flashbulb!</span>")
-		if (!src.disable)
-			user.visible_message("<span class='warning'>[user] has connected \the [src]'s flashbulb!</span>", "<span class='warning'>You connect \the [src]'s flashbulb!</span>")
+		disable = !disable
+		user.visible_message(SPAN_WARNING("\The [user] has [disable ? "disconnected" : "reconnected"] \the [src]'s flashbulb!"), SPAN_WARNING("You [disable ? "disconnect" : "reconnect"] \the [src]'s flashbulb!"))
 		return TRUE
 	else
 		return ..()

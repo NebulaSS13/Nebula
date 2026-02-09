@@ -404,7 +404,6 @@
 	. = ..(user)
 	if(reinf_material)
 		. += SPAN_NOTICE("It is reinforced with the [reinf_material.solid_name] lattice.")
-	if (reinf_material)
 		switch (construction_state)
 			if (CONSTRUCTION_STATE_NO_FRAME)
 				. += SPAN_WARNING("The window is not in the frame.")
