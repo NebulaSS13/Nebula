@@ -1,7 +1,7 @@
 /area/hallway
 	name = "hallway"
 	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
-	start_lit = TRUE
+	area_start_lit = TRUE
 
 /area/maintenance
 	area_flags = AREA_FLAG_RAD_SHIELDED

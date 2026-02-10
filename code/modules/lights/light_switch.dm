@@ -42,12 +42,12 @@
 
 /obj/machinery/light_switch/LateInitialize()
 	. = ..()
+
 	if(isnull(on))
-		on = get_config_value(/decl/config/toggle/lights_start_on)
-	if(!on)
-		var/area/area = get_area(src)
-		if(area?.start_lit)
-			on = TRUE
+		if(isnull(connected_area?.area_start_lit))
+			on = get_config_value(/decl/config/toggle/lights_start_on)
+		else
+			on = connected_area.lightswitch
 
 	connected_area?.set_lightswitch(on)
 	update_icon()
