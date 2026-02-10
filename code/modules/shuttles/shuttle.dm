@@ -463,17 +463,7 @@
 		return dir2angle(destination.dir) - dir2angle(rotation_center.dir)
 	return 0 // do not rotate
 
-/datum/shuttle/proc/message_passengers(var/message)
-	for(var/client/C)
-		if(!C.mob)
-			continue
-		var/area/mob_area = get_area(C.mob)
-		if(!istype(mob_area))
-			continue
-		// I don't know how much of this is actually needed.
-		if(ispath(shuttle_area) && istype(mob_area, shuttle_area))
-			C.mob.visible_message(message)
-		else if(istype(shuttle_area, /area) && mob_area == shuttle_area)
-			C.mob.visible_message(message)
-		else if(islist(shuttle_area) && ((mob_area in shuttle_area) || (mob_area.type in shuttle_area)))
-			C.mob.visible_message(message)
+/datum/shuttle/proc/message_passengers(audible_message, visible_message)
+	for(var/mob/hearer in global.living_mob_list_ + global.ghost_mob_list)
+		if(is_type_in_list(get_area(hearer), shuttle_area))
+			hearer.show_message(audible_message, AUDIBLE_MESSAGE, visible_message, VISIBLE_MESSAGE)
