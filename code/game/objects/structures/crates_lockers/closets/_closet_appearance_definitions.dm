@@ -356,6 +356,15 @@
 		"stripe_vertical_mid_partial" = COLOR_BLUE_GRAY
 	)
 
+/decl/closet_appearance/secure_closet/medical/paramedic
+	decals = list(
+		"lower_side_vent"
+	)
+	extra_decals = list(
+		"medical" = COLOR_BLUE_GRAY,
+		"stripe_vertical_mid_full" = COLOR_BLUE_GRAY
+	)
+
 /decl/closet_appearance/secure_closet/cargo
 	color = COLOR_WARM_YELLOW
 	decals = list(

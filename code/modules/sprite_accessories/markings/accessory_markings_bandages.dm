@@ -2,6 +2,8 @@
 	icon          = 'icons/mob/human_races/species/default_bandages.dmi'
 	abstract_type = /decl/sprite_accessory/marking/bandage
 	color_blend   = null
+	species_allowed = null // Everyone can be bandaged.
+	bodytype_categories_allowed = list(BODYTYPE_HUMANOID) // Only fit the humanoid silhouette, though.
 
 /decl/sprite_accessory/marking/bandage/nosetape
 	name = "Bandage, Nose Tape"

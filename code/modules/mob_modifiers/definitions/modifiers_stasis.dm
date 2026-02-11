@@ -18,7 +18,6 @@
 			var/add_stasis = source_atom.get_cryogenic_power()
 			if(add_stasis)
 				stasis_power += add_stasis
-				to_chat(_owner, "[source_atom] gave [add_stasis]")
 
 	if(stasis_power > 1 && GET_STATUS(_owner, STAT_DROWSY) < stasis_power * 4)
 		ADJ_STATUS(_owner, STAT_DROWSY, min(stasis_power, 3))

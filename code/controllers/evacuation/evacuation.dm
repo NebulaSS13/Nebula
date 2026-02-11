@@ -117,7 +117,7 @@
 			if(istype(A) && (A.area_flags & AREA_FLAG_HALLWAY))
 				A.readyreset()
 		emergency_evacuation = 0
-	else if(global.using_map.emergency_shuttle_recall_message)
+	else if(global.using_map.shuttle_recall_message)
 		priority_announcement.Announce(global.using_map.shuttle_recall_message)
 
 	return 1

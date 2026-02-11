@@ -4663,7 +4663,7 @@
 	id_tag = "Casino_escape_pod_1";
 	name = "Casino escape pod One controller";
 	pixel_x = 24;
-	tag_door = "escape_pod_17_hatch";
+	tag_door = "escape_pod_casino_17_hatch";
 	dir = 8
 	},
 /turf/floor/plating,

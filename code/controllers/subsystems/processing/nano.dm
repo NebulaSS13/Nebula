@@ -50,7 +50,7 @@ PROCESSING_SUBSYSTEM_DEF(nano)
   */
 /datum/controller/subsystem/processing/nano/proc/update_uis(datum/src_object)
 	. = 0
-	if (!src_object.open_uis)
+	if (!src_object?.open_uis)
 		return
 
 	for (var/ui_key in src_object.open_uis)

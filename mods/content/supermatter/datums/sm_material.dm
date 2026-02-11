@@ -10,3 +10,5 @@
 	gas_symbol_html = "Sp<sub>*</sub>"
 	gas_symbol = "Sp*"
 	default_solid_form = /obj/item/stack/material/gemstone
+
+DEFINE_STACK_SUBTYPES(supermatter,    "supermatter",                   solid/exotic_matter/supermatter,       crystal,          null)

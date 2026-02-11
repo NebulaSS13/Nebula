@@ -22,6 +22,12 @@
 	accessory_slot = ACCESSORY_SLOT_ARMOR_L
 	slot_flags = SLOT_FEET
 
+/obj/item/clothing/shoes/legguards/tan
+	paint_color = COLOR_TAN
+
+/obj/item/clothing/shoes/legguards/blue
+	paint_color = COLOR_NAVY_BLUE
+
 /obj/item/clothing/shoes/legguards/craftable
 	material_armor_multiplier = 1
 	matter = null

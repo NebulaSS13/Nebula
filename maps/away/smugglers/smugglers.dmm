@@ -778,7 +778,6 @@
 /area/smugglers/dorms)
 "cd" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
@@ -829,7 +828,6 @@
 /area/smugglers/dorms)
 "cl" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable,
 /obj/machinery/apc{
 	dir = 8;
@@ -843,7 +841,6 @@
 /turf/floor/tiled,
 /area/smugglers/dorms)
 "cn" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
 /area/smugglers/dorms)

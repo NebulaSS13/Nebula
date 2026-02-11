@@ -15,7 +15,7 @@
 	uid = "species_tajaran"
 	name = "Tajara"
 	name_plural = "Tajaran"
-	base_external_prosthetics_model = null
+	base_external_prosthetics_model = /decl/bodytype/prosthetic/basic_human
 
 
 	description = "The Tajaran are a mammalian species roughly resembling felines, \

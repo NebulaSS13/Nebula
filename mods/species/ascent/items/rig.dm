@@ -267,3 +267,17 @@
 	desc = "They look like a cross between a can opener and a Swiss army knife the size of a shoebox."
 	bodytype_equip_flags = BODY_EQUIP_FLAG_GYNE | BODY_EQUIP_FLAG_ALATE
 	_gyne_onmob_icon = 'mods/species/ascent/icons/rig/rig_gloves_gyne.dmi'
+
+/obj/random/ascent_tool
+	name = "random Ascent tool"
+	icon = /obj/item/clustertool::icon
+	icon_state = /obj/item/clustertool::icon_state
+
+/obj/random/ascent_tool/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/clustertool,
+		/obj/item/weldingtool/electric/mantid,
+		/obj/item/multitool/mantid,
+		/obj/item/stack/medical/resin
+	)
+	return spawn_choices

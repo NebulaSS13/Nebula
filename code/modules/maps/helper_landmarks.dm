@@ -19,7 +19,12 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 		init_load_subtemplate()
 
 /obj/abstract/landmark/map_load_mark/proc/get_subtemplate()
-	. = LAZYLEN(map_template_names) && pick(map_template_names)
+	if(isnull(map_template_names))
+		return null
+	if(istext(map_template_names))
+		return map_template_names
+	if(length(map_template_names))
+		return pick(map_template_names)
 
 /obj/abstract/landmark/map_load_mark/proc/init_load_subtemplate()
 	set waitfor = FALSE
@@ -33,14 +38,14 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 	var/datum/map_template/template = get_subtemplate()
 	var/turf/spawn_loc = get_turf(src)
 
-	if(!QDELETED(src))
-		qdel(src)
-
 	if(istype(spawn_loc))
 		if(istext(template))
 			template = SSmapping.get_template(template)
 		if(istype(template))
 			template.load(spawn_loc, centered = centered)
+
+	if(!QDELETED(src))
+		qdel(src)
 
 //Throw things in the area around randomly
 /obj/abstract/landmark/carnage_mark

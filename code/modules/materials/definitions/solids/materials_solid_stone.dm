@@ -48,7 +48,7 @@
 	name          = "limestone"
 	uid           = "solid_limestone"
 	lore_text     = "A pale sedimentary rock, often containing fossils. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
-	color         = COLOR_OFF_WHITE
+	color         = COLOR_BEIGE
 	value         = 1.5
 	melting_point = T0C + 600
 	hardness      = MAT_VALUE_RIGID + 5
