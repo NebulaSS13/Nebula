@@ -273,10 +273,7 @@ var/global/list/diversion_junctions = list()
 		return TOPIC_HANDLED
 
 	if(href_list["pump"])
-		if(text2num(href_list["pump"]))
-			mode = 1
-		else
-			mode = 0
+		mode = !!text2num(href_list["pump"])
 		update_icon()
 		. = TOPIC_REFRESH
 

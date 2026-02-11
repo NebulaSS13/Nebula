@@ -85,10 +85,7 @@
 			return 0
 		target_floor = queued_floors[1]
 		queued_floors -= target_floor
-		if(current_floor_index < floors.Find(target_floor))
-			moving_upwards = 1
-		else
-			moving_upwards = 0
+		moving_upwards = (current_floor_index < floors.Find(target_floor))
 
 	if(doors_are_open())
 		if(!doors_closing)

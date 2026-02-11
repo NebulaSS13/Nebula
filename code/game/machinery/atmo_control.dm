@@ -59,10 +59,7 @@
 /obj/machinery/computer/air_control/proc/get_console_data()
 	if(sensor_info)
 		var/list/temp = list()
-		if(input_tag || output_tag)
-			data["control"] = 1
-		else
-			data["control"] = 0
+		data["control"] = !!(input_tag || output_tag)
 
 		if(!sensor_name && sensor_tag)
 			temp += list("long_name" = sensor_tag)
