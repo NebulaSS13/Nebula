@@ -48,3 +48,9 @@
 /obj/item/stack/material/lump/large/soil
 	material = /decl/material/solid/soil
 	is_spawnable_type = TRUE
+
+/obj/item/stack/material/lump/large/marble
+	material = /decl/material/solid/stone/marble
+	is_spawnable_type = TRUE
+/obj/item/stack/material/lump/large/marble/five
+	amount =  5

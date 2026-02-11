@@ -32,7 +32,7 @@
 
 	var/storage_desc = "crewmembers"
 	var/storage_name = "Cryogenic Oversight Control"
-	var/allow_items = 1
+	var/allow_items = TRUE
 
 /obj/machinery/computer/cryopod/Destroy()
 	QDEL_NULL_LIST(frozen_items)
@@ -46,7 +46,14 @@
 
 	storage_desc = "cyborgs"
 	storage_name = "Robotic Storage Control"
-	allow_items = 0
+	allow_items = FALSE
+
+/obj/machinery/computer/cryopod/checkpoint
+	name = "travel oversight console"
+	desc = "An interface between visitors and the checkpoint systems tasked with keeping track of all visitors who enter or exit from the area."
+
+	storage_desc = "visitors"
+	storage_name = "Travel Oversight Control"
 
 /obj/machinery/computer/cryopod/interface_interact(mob/user)
 	interact(user)
@@ -133,6 +140,11 @@
 	build_path = /obj/machinery/computer/cryopod/robot
 	origin_tech = @'{"programming":3}'
 
+/obj/item/stock_parts/circuitboard/checkpointcontrol
+	name = "circuit board (Checkpoint Console)"
+	build_path = /obj/machinery/computer/cryopod/checkpoint
+	origin_tech = @'{"programming":3}'
+
 //Decorative structures to go alongside cryopods.
 /obj/structure/cryofeed
 
@@ -190,13 +202,12 @@
 	disallow_occupant_types = list(/mob/living/silicon/robot/drone)
 	applies_stasis = 0
 
-// Cryo
 /obj/machinery/cryopod/robot/door
 	//This inherits from the robot cryo, so synths can be properly cryo'd.  If a non-synth enters and is cryo'd, ..() is called and it'll still work.
 	abstract_type = /obj/machinery/cryopod/robot/door
 	name = "Airlock of Wonders"
 	desc = "An airlock that isn't an airlock, and shouldn't exist.  Yell at a coder/mapper."
-	icon = 'icons/obj/machines/tramdoors.dmi'
+	icon = 'icons/obj/machines/pod_doors.dmi'
 	icon_state = "door_closed"
 	base_icon_state = "door_closed"
 	occupied_icon_state = "door_locked"
@@ -214,6 +225,15 @@
 	on_store_name = "Residential Oversight"
 	on_enter_occupant_message = "The elevator door closes slowly, ready to bring you down to the residential district."
 	on_store_visible_message = "$TARGET$ makes a ding as it moves $USER$ to the residential district."
+
+/obj/machinery/cryopod/robot/door/checkpoint
+	name = "automated checkpoint"
+	desc = "A reinforced, automated checkpoint tracking arrivals and departures from the outpost. Beyond this vault is a small airstrip, then nothing but untamed wilderness."
+	on_store_message = "has departed from the colony."
+	on_store_name = "Travel Oversight"
+	on_enter_occupant_message = "The checkpoint unseals and grinds open, and you step through."
+	on_store_visible_message = "The checkpoint grinds closed after $TARGET$ passes through it."
+	time_till_despawn = 1 SECOND
 
 /obj/machinery/cryopod/lifepod
 	name = "life pod"

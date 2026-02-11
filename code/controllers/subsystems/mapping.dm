@@ -176,6 +176,10 @@ SUBSYSTEM_DEF(mapping)
 	// With levels set up and serde complete (and levels flagged) we can do any remaining level generation.
 	global.using_map.finalize_map_generation()
 
+	// Do this dead last as all gen has to run before it makes sense.
+	for(var/datum/level_data/level in levels_by_z)
+		level.build_area_ceilings()
+
 	. = ..()
 
 /datum/controller/subsystem/mapping/proc/setup_data_for_levels(min_z = 1, max_z = world.maxz)

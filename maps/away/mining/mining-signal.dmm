@@ -347,7 +347,6 @@
 /area/outpost/abandoned)
 "bu" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/floor_decal/corner/purple{
 	dir = 5
 	},
@@ -435,7 +434,6 @@
 	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/white,
 /area/outpost/abandoned)
 "bF" = (
@@ -460,7 +458,6 @@
 /area/outpost/abandoned)
 "bI" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/item/trash/cigbutt/cigarbutt,
 /turf/floor,
 /area/outpost/abandoned)
@@ -473,7 +470,6 @@
 /turf/floor/tiled/white,
 /area/outpost/abandoned)
 "bL" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/white,
 /area/outpost/abandoned)
@@ -591,7 +587,6 @@
 	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
 "ce" = (
@@ -632,7 +627,6 @@
 /turf/floor/tiled/white,
 /area/outpost/abandoned)
 "ck" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor,
 /area/outpost/abandoned)
@@ -711,11 +705,9 @@
 "cv" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
 "cw" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -738,22 +730,18 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/laminate,
 /area/outpost/abandoned)
 "cI" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/laminate,
 /area/outpost/abandoned)
 "cJ" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/laminate/broken/four,
 /area/outpost/abandoned)
 "cK" = (
 /obj/effect/floor_decal/plaque,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/laminate,
 /area/outpost/abandoned)
@@ -808,7 +796,6 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -907,11 +894,9 @@
 /area/outpost/abandoned)
 "di" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/carpet/broken,
 /area/outpost/abandoned)
 "dj" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/carpet,
 /area/outpost/abandoned)
@@ -1126,7 +1111,6 @@
 /area/outpost/abandoned)
 "dV" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/plating/broken,
 /area/outpost/abandoned)
 "dW" = (
@@ -1249,8 +1233,6 @@
 /area/outpost/abandoned)
 "es" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "et" = (
@@ -1261,13 +1243,10 @@
 	},
 /obj/item/shard,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "eu" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /mob/living/bot/medbot,
 /turf/floor/tiled/white/airless,
@@ -1293,8 +1272,6 @@
 /turf/floor/plating/broken/one,
 /area/outpost/abandoned)
 "eA" = (
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/gibspawner/human,
 /turf/floor/tiled/airless,
@@ -1349,14 +1326,12 @@
 	icon_state = "shardsmall"
 	},
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "eK" = (
 /obj/item/shard{
 	icon_state = "piecesmall"
 	},
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/dark,
 /area/outpost/abandoned)
@@ -1431,7 +1406,6 @@
 /area/outpost/abandoned)
 "eW" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
 	dir = 4
@@ -1440,8 +1414,6 @@
 /area/outpost/abandoned)
 "eX" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/generic,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
 	dir = 4
@@ -1449,7 +1421,6 @@
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
 "eY" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/wrench,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
@@ -1508,7 +1479,6 @@
 /area/outpost/abandoned)
 "fh" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "fi" = (
@@ -1539,7 +1509,6 @@
 /area/outpost/abandoned)
 "fo" = (
 /obj/random/medical,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/white/airless,
 /area/outpost/abandoned)
@@ -1585,7 +1554,6 @@
 /turf/floor/plating/broken/one,
 /area/outpost/abandoned)
 "fx" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/ammo_magazine/pistol/small,
 /turf/floor/tiled/airless,
@@ -1639,7 +1607,6 @@
 	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "fG" = (
@@ -1647,7 +1614,6 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/white/airless,
 /area/outpost/abandoned)
@@ -1896,7 +1862,6 @@
 /area/mine/explored)
 "gt" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/barren,
 /area/mine/explored)
 "gu" = (
@@ -1996,7 +1961,6 @@
 /turf/floor/plating,
 /area/outpost/abandoned)
 "gK" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable/orange{
 	icon_state = "2-8"
@@ -2393,8 +2357,6 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/item/ammo_casing/pistol/magnum,
 /turf/floor/tiled/dark,
 /area/outpost/abandoned)
@@ -2430,9 +2392,6 @@
 	},
 /obj/effect/decal/cleanable/vomit/mapped,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor,
 /area/outpost/abandoned)
 "wb" = (
@@ -2462,7 +2421,6 @@
 /turf/floor/tiled/white,
 /area/outpost/abandoned)
 "HD" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/white/airless,
 /area/outpost/abandoned)

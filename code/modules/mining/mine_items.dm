@@ -39,6 +39,9 @@
 
 	var/upright = FALSE
 
+/obj/item/stack/flag/ten
+	amount = 10
+
 /obj/item/stack/flag/red
 	light_color = COLOR_RED
 

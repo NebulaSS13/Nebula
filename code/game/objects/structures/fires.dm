@@ -535,6 +535,10 @@
 	obj_flags = OBJ_FLAG_HOLLOW
 	has_draught = FALSE
 
+/obj/structure/fire_source/firepit/fuelled/Initialize()
+	new /obj/item/stack/material/log/mapped/wood/fifteen(src)
+	. = ..()
+
 /obj/structure/fire_source/stove
 	name = "stove"
 	desc = "Just the thing to warm your hands by."

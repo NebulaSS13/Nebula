@@ -26,20 +26,20 @@
 	var/type_to_spawn = item_to_spawn()
 	if(!type_to_spawn)
 		return
-	if(islist(type_to_spawn))
-		for(var/spawn_type in type_to_spawn)
-			LAZYADD(., create_instance(spawn_type, loc))
-	else if(ispath(type_to_spawn))
-		LAZYADD(., create_instance(type_to_spawn, loc))
 
-	for(var/atom/A as anything in .)
+	for(var/atom/A as anything in create_instance(type_to_spawn))
 		if(pixel_x || pixel_y)
 			A.default_pixel_x = pixel_x
 			A.default_pixel_y = pixel_y
 			A.reset_offsets(0)
 
 /obj/random/proc/create_instance(var/build_path, var/spawn_loc)
-	return new build_path(spawn_loc)
+	if(ispath(build_path))
+		return list(new build_path(spawn_loc))
+	if(islist(build_path))
+		for(var/spawn_type in build_path)
+			for(var/created in create_instance(spawn_type, spawn_loc))
+				LAZYADD(., created)
 
 // Returns an associative list in format path:weight
 /obj/random/proc/spawn_choices()

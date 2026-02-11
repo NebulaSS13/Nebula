@@ -59,6 +59,8 @@
 	var/list/body_parts
 	/// Set to a layer integer to apply this as an overlay over the top of hair and such.
 	var/sprite_overlay_layer
+	/// Set to a layer integer to apply this as an overlay over the top of entire planes.
+	var/sprite_overlay_plane
 	/// A list of sprite accessory types that are disallowed by this one being included.
 	var/list/disallows_accessories
 	/// Whether or not this accessory is transferred via DNA (ie. not a scar or tattoo)

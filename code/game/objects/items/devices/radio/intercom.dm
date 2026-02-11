@@ -84,3 +84,13 @@
 /obj/item/radio/intercom/locked/entertainment
 	broadcasting = TRUE
 	locked_frequency = 1461
+
+/obj/item/radio/intercom/locked/ai_private
+	name = "\improper AI intercom"
+	frequency = 1343
+	broadcasting = TRUE
+	listening = TRUE
+
+/obj/item/radio/intercom/interrogation
+	name = "station intercom (Interrogation)"
+	frequency  = 1449

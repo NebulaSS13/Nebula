@@ -40,12 +40,12 @@
 	update_desc()
 
 /obj/item/clothing/gloves/ring/proc/update_desc()
+	desc = base_desc || initial(desc)
 	if(istype(material) && (material_alteration & MAT_FLAG_ALTERATION_DESC))
-		desc = "A ring made from [material.solid_name]."
+		desc += " This one is made from [material.solid_name]."
 	if(inscription)
 		desc += "<br>Written on \the [src] is the inscription \"[inscription]\""
-	if(base_desc)
-		desc = "[base_desc] [desc]"
+	desc = trim(desc)
 
 /obj/item/clothing/gloves/ring/attackby(var/obj/item/used_item, var/mob/user)
 	if(can_inscribe && used_item.is_sharp() && user.check_intent(I_FLAG_HELP))

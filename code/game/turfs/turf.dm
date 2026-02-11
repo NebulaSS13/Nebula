@@ -367,7 +367,7 @@
 				return 0
 
 	// Check if they need to climb out of a hole.
-	if(has_gravity() && !get_supporting_platform())
+	if(mover.z == z && !is_open() && has_gravity() && !get_supporting_platform())
 		var/mob/mover_mob = mover
 		if(!istype(mover_mob) || (!mover_mob.throwing && !mover_mob.can_overcome_gravity()))
 			var/turf/old_turf  = mover.loc

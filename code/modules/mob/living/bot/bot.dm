@@ -42,6 +42,8 @@
 /mob/living/bot/Initialize()
 	. = ..()
 	update_icon()
+	add_language(/decl/language/human/common)
+	set_default_language(GET_DECL(/decl/language/human/common))
 
 	botcard = new /obj/item/card/id(src)
 	botcard.access = botcard_access?.Copy()

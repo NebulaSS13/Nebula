@@ -615,3 +615,33 @@
 		/obj/item/remains/mouse
 	)
 	return spawn_choices
+
+/obj/random/pizzabox
+	name = "random pizza"
+	icon = /obj/item/pizzabox::icon
+	icon_state = /obj/item/pizzabox::icon_state
+
+/obj/random/pizzabox/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/pizzabox/vegetable,
+		/obj/item/pizzabox/mushroom,
+		/obj/item/pizzabox/meat,
+		/obj/item/pizzabox/margherita
+	)
+	return spawn_choices
+
+/obj/random/dufflebag
+	name = "random dufflebag"
+	icon = /obj/item/backpack/dufflebag::icon
+	icon_state = /obj/item/backpack/dufflebag::icon_state
+
+/obj/random/dufflebag/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/backpack/dufflebag         = 10,
+		/obj/item/backpack/dufflebag/med     = 10,
+		/obj/item/backpack/dufflebag/sec     = 10,
+		/obj/item/backpack/dufflebag/eng     = 10,
+		/obj/item/backpack/dufflebag/captain = 5,
+		/obj/item/backpack/dufflebag/syndie  = 1
+	)
+	return spawn_choices

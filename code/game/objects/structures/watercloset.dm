@@ -92,9 +92,8 @@ var/global/list/hygiene_props = list()
 				visible_message("\The [src] gurgles and overflows!")
 				next_gurgle = world.time + 80
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
-			var/adding = min(flood_amt - REAGENT_TOTAL_VOLUME(T?.reagents), rand(30,50)*clogged)
-			if(adding > 0)
-				T.add_to_reagents(/decl/material/liquid/water, adding)
+			if(loc.get_fluid_depth() < flood_amt)
+				T.add_to_reagents(/decl/material/liquid/water, round(rand(10,20)*clogged))
 
 /obj/structure/hygiene/proc/drain()
 	if(!can_drain) return

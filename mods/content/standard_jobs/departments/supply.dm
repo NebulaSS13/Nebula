@@ -6,3 +6,6 @@
 
 /obj/machinery/network/pager/cargo
 	department = /decl/department/supply
+
+/obj/item/eftpos/departmental/cargo
+	default_department = /decl/department/supply
