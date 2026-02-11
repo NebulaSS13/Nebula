@@ -144,6 +144,28 @@
 		ARMOR_BOMB   = ARMOR_BOMB_PADDED
 	)
 
+	cold_level_1 = 200
+	cold_level_2 = 140
+	cold_level_3 = 80
+
+	heat_level_1 = 330
+	heat_level_2 = 380
+	heat_level_3 = 800
+
+	heat_discomfort_level = 294
+	heat_discomfort_strings = list(
+		"You feel soothingly warm.",
+		"You feel the heat sink into your bones.",
+		"You feel warm enough to take a nap."
+	)
+
+	cold_discomfort_level   = 230
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You feel sluggish and cold.",
+		"Your scales bristle against the cold."
+	)
+
 	VAR_PRIVATE/list/_sitting_equip_adjust
 	VAR_PRIVATE/list/_lying_equip_adjust
 
@@ -289,6 +311,8 @@
 		BP_TAIL,
 		BP_HEAD
 	)
+	sprite_overlay_plane = ABOVE_LIGHTING_PLANE
+	sprite_overlay_layer = ABOVE_LIGHTING_LAYER
 
 /decl/sprite_accessory/marking/grafadreka/claws
 	name       = "Drake Claws"

@@ -405,7 +405,6 @@
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
 	dir = 1;
-	current_health = 1e+006
 	},
 /obj/structure/hygiene/shower{
 	dir = 4
@@ -534,7 +533,6 @@
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
 	dir = 1;
-	current_health = 1e+006
 	},
 /obj/structure/hygiene/shower{
 	dir = 4
@@ -2073,7 +2071,6 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	current_health = 1e+006
 	},
 /obj/structure/cable{
 	icon_state = "1-8"
@@ -2086,7 +2083,6 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	current_health = 1e+006
 	},
 /obj/machinery/door/window/eastright,
 /turf/floor/tiled/white,

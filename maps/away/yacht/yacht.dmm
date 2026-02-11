@@ -44,7 +44,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/chair/comfy/captain,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/laminate/walnut,
 /area/yacht/bridge)
 "al" = (
@@ -944,12 +943,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/plating,
 /area/yacht/engine)
 "cW" = (
 /obj/structure/closet/secure_closet/freezer/kitchen,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/laminate/yew,
 /area/yacht/living)
@@ -1299,7 +1296,6 @@
 	icon_state = "1-8"
 	},
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/machinery/atmospherics/pipe/simple/visible/universal{
 	dir = 4
 	},
@@ -1386,7 +1382,6 @@
 /area/yacht/engine)
 "Ty" = (
 /obj/structure/closet/secure_closet/freezer/meat,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/laminate/yew,
 /area/yacht/living)

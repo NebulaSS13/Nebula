@@ -1,5 +1,6 @@
 /mob/living/human
 
+	desc = null // Desc is largely generated in examine procs.
 	ai = /datum/mob_controller/human
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY

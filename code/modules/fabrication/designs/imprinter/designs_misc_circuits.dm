@@ -98,6 +98,9 @@
 /datum/fabricator_recipe/imprinter/circuit/robot_storage
 	path = /obj/item/stock_parts/circuitboard/robotstoragecontrol
 
+/datum/fabricator_recipe/imprinter/circuit/checkpoint_control
+	path = /obj/item/stock_parts/circuitboard/checkpointcontrol
+
 /datum/fabricator_recipe/imprinter/circuit/destructive_analyzer
 	path = /obj/item/stock_parts/circuitboard/destructive_analyzer
 

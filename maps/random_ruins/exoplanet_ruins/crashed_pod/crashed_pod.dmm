@@ -563,7 +563,6 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
 "aV" = (
@@ -948,10 +947,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
 "bC" = (
@@ -1319,7 +1314,6 @@
 /turf/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
 "Ta" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/hygiene/sink{
 	dir = 8;

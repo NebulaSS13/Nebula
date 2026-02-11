@@ -92,7 +92,6 @@
 /area/icarus/vessel)
 "av" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "aw" = (
@@ -776,7 +775,6 @@
 /area/icarus/vessel)
 "cF" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/floor/tiled,
@@ -1280,8 +1278,6 @@
 /area/icarus/open)
 "ed" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
 /area/icarus/open)
 "ee" = (
@@ -1290,7 +1286,6 @@
 /turf/floor/tiled,
 /area/icarus/open)
 "ef" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
 /area/icarus/open)

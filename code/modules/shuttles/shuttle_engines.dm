@@ -1,6 +1,7 @@
 /obj/structure/shuttle
 	name = "shuttle"
 	abstract_type = /obj/structure/shuttle
+	atmos_canpass = CANPASS_NEVER
 
 /obj/structure/shuttle/window
 	name = "shuttle window"
@@ -9,7 +10,6 @@
 	density = TRUE
 	opacity = FALSE
 	anchored = TRUE
-	atmos_canpass = CANPASS_DENSITY
 
 /obj/structure/shuttle/engine
 	name = "engine"

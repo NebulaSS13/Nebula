@@ -121,6 +121,8 @@ var/global/list/organ_icon_cache = list()
 			var/image/accessory_image = image(accessory_decl.get_cached_accessory_icon(src, draw_accessories[accessory]))
 			if(accessory_decl.sprite_overlay_layer != FLOAT_LAYER)
 				accessory_image.layer = accessory_decl.sprite_overlay_layer
+			if(accessory_decl.sprite_overlay_plane)
+				accessory_image.plane = accessory_decl.sprite_overlay_plane
 			if(accessory_decl.layer_blend != ICON_OVERLAY)
 				accessory_image.blend_mode = iconMode2blendMode(accessory_decl.layer_blend)
 			LAZYADD(., accessory_image)

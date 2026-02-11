@@ -109,6 +109,9 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 		/decl/stock_part_preset/radio/event_transmitter/airlock/shuttle = 1
 	)
 
+/obj/machinery/door/airlock/external/bolted/ascent/open
+	icon_state = /obj/machinery/door/airlock/ascent::icon_state_open
+
 /obj/machinery/light/ascent
 	name = "mantid light"
 	light_type = /obj/item/light/tube/ascent

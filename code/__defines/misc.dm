@@ -101,6 +101,7 @@
 #define AREA_FLAG_HIDE_FROM_HOLOMAP       BITFLAG(12) // if we shouldn't be drawn on station holomaps
 #define AREA_FLAG_ALLOW_LEVEL_PERSISTENCE BITFLAG(13) // Whether or not this area should pass changed turfs to SSpersistence.
 #define AREA_FLAG_IS_STATION_AREA         BITFLAG(14) // TODO: Polaris port.
+#define AREA_FLAG_CONSTRUCTED             BITFLAG(15) // Set base flooring above this area to plating.
 
 //Map template flags
 #define TEMPLATE_FLAG_ALLOW_DUPLICATES    BITFLAG(0)  // Lets multiple copies of the template to be spawned

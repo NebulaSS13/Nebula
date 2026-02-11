@@ -3720,7 +3720,6 @@
 /area/ship/scrap/maintenance/engineering)
 "ho" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/decal/cleanable/dirt/visible,
 /obj/item/radio/intercom{
 	pixel_y = 20
 	},

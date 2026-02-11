@@ -12,3 +12,6 @@
 	announce_channel = "Command"
 	colour = "#800080"
 	display_color = "#87ceeb"
+
+/obj/item/eftpos/departmental/command
+	default_department = /decl/department/command

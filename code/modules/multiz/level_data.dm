@@ -163,7 +163,7 @@
 		/obj/machinery/door/firedoor = list(/turf/open),
 		/obj/machinery/door/firedoor/border = list(/turf/open),
 	)
-	///Determines if edge turfs should be centered on the map dimensions.
+	/// Determines if edge turfs should be centered on the map dimensions.
 	var/origin_is_world_center = TRUE
 	/// If not null, this level will register with a daycycle id/type on New().
 	var/daycycle_id = "general_solars"
@@ -354,6 +354,22 @@
 
 	_level_setup_completed = TRUE
 
+/datum/level_data/proc/build_area_ceilings()
+	// Set base flooring on turfs above station areas in order to prevent easily digging down into station areas.
+	if(!HasAbove(level_z))
+		return
+	for(var/turf/below as anything in block(locate(level_inner_min_x, level_inner_min_y, level_z), locate(level_inner_max_x, level_inner_max_y, level_z)))
+		var/turf/floor/above = GetAbove(below)
+		if(!istype(above))
+			continue
+		var/area/area = get_area(below)
+		if(!istype(area) || !(area.area_flags & AREA_FLAG_CONSTRUCTED))
+			continue
+		var/decl/flooring/base_flooring = above.get_base_flooring()
+		if(!base_flooring || base_flooring.constructed)
+			continue
+		above.set_base_flooring(/decl/flooring/plating) // TODO: check if we can skip update here.
+
 ///Calculate the bounds of the level, the border area, and the inner accessible area.
 ///   Basically, by default levels are assumed to be loaded relative to the world center, so if they're smaller than the world
 ///   they get their origin offset so they're in the middle of the world. By default templates are always loaded at origin 1,1.
@@ -474,6 +490,9 @@
 	for(var/gen_type in level_generators)
 		report_progress("Placing [gen_type] on [level_id]...")
 		new gen_type(origx, origy, level_z, endx, endy, FALSE, TRUE, get_base_area_instance())
+	place_subtemplates()
+
+/datum/level_data/proc/place_subtemplates()
 	// Place points of interest.
 	var/budget = get_subtemplate_budget()
 	if(budget)
@@ -819,11 +838,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 		possible_subtemplates += poi
 
 	if(!length(possible_subtemplates))
-		return //If we don't have any templates, don't bother
-
-	if(!length(possible_subtemplates))
 		log_world("Level [level_id] was given no templates to pick from.")
-		return
+		return //If we don't have any templates, don't bother
 
 	var/list/repeatable_templates = list()
 	var/list/areas_whitelist = get_subtemplate_areas(template_category, blacklist, whitelist)
