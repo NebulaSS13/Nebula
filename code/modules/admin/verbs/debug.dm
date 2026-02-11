@@ -452,12 +452,7 @@
 	if (!theme)
 		theme = /datum/exoplanet_theme
 
-	var/daycycle = alert("Should the planet have a day-night cycle?","Day Night Cycle", "Yes", "No")
-
-	if (daycycle == "Yes")
-		daycycle = TRUE
-	else
-		daycycle = FALSE
+	var/daycycle = alert("Should the planet have a day-night cycle?","Day Night Cycle", "Yes", "No") == "Yes"
 
 	var/last_chance = alert("Spawn exoplanet?", "Final Confirmation", "Yes", "Cancel")
 

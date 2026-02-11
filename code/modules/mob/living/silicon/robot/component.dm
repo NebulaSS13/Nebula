@@ -74,13 +74,13 @@
 	return (installed == 1) && (brute_damage + burn_damage < max_damage) && (!idle_usage || powered)
 
 /datum/robot_component/proc/update_power_state()
-	if(toggled == 0)
-		powered = 0
+	if(!toggled)
+		powered = FALSE
 		return
 	if(owner.cell_use_power(idle_usage))
-		powered = 1
+		powered = TRUE
 	else
-		powered = 0
+		powered = FALSE
 
 // ARMOUR
 // Protects the cyborg from damage. Usually first module to be hit
