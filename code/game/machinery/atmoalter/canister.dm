@@ -139,7 +139,7 @@ EMPTY_CANISTER(hydrogen, /obj/machinery/portable_atmospherics/canister/hydrogen)
 	if(get_port())
 		add_overlay("can-connector")
 
-	var/tank_pressure = return_pressure()
+	var/tank_pressure = air_contents?.return_pressure()
 	if(tank_pressure < 10)
 		add_overlay("can-o0")
 	else if(tank_pressure < ONE_ATMOSPHERE)
@@ -205,18 +205,6 @@ EMPTY_CANISTER(hydrogen, /obj/machinery/portable_atmospherics/canister/hydrogen)
 	if(holding)
 		holding.update_icon()
 
-/obj/machinery/portable_atmospherics/canister/proc/return_temperature()
-	var/datum/gas_mixture/GM = return_air()
-	if(GM?.total_volume>0)
-		return GM.temperature
-	return 0
-
-/obj/machinery/portable_atmospherics/canister/proc/return_pressure()
-	var/datum/gas_mixture/GM = return_air()
-	if(GM?.total_volume>0)
-		return GM.return_pressure()
-	return 0
-
 /obj/machinery/portable_atmospherics/canister/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.atom_damage_type == BRUTE || Proj.atom_damage_type == BURN))
 		return
@@ -258,8 +246,8 @@ EMPTY_CANISTER(hydrogen, /obj/machinery/portable_atmospherics/canister/hydrogen)
 	data["name"] = name
 	data["canLabel"] = can_label ? 1 : 0
 	data["portConnected"] = get_port() ? 1 : 0
-	data["tankPressure"] = round(air_contents.return_pressure() ? air_contents.return_pressure() : 0)
-	data["releasePressure"] = round(release_pressure ? release_pressure : 0)
+	data["tankPressure"] = round(air_contents.return_pressure())
+	data["releasePressure"] = round(release_pressure)
 	data["minReleasePressure"] = round(0.1 ATM)
 	data["maxReleasePressure"] = round(10 ATM)
 	data["valveOpen"] = valve_open ? 1 : 0
