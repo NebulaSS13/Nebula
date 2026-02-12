@@ -711,10 +711,6 @@
 	RAISE_EVENT(/decl/observ/mob_equipped, user, src, slot)
 	RAISE_EVENT(/decl/observ/item_equipped, src, user, slot)
 
-// As above but for items being equipped to an active module on a robot.
-/obj/item/proc/equipped_robot(var/mob/user)
-	return
-
 //the mob M is attempting to equip this item into the slot passed through as 'slot'. Return 1 if it can do this and 0 if it can't.
 //Set disable_warning to 1 if you wish it to not give you outputs.
 //Set ignore_equipped to 1 if you wish to ignore covering checks etc. when this item is already equipped.
