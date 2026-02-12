@@ -184,8 +184,6 @@
 
 #define PIXEL_MULTIPLIER WORLD_ICON_SIZE/32
 
-#define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
-
 //Error handler defines
 #define ERROR_USEFUL_LEN 2
 
