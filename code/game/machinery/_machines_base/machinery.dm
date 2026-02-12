@@ -31,12 +31,6 @@ Class Variables:
    panel_open (num)
 	  Whether the panel is open
 
-   uid (num)
-	  Unique id of machine across all machines.
-
-   gl_uid (global num)
-	  Next uid value in sequence
-
    stat (bitflag)
 	  Machine status bit flags.
 	  Possible bit flags:
@@ -112,9 +106,7 @@ Class Procs:
 	var/list/uncreated_component_parts = list(/obj/item/stock_parts/power/apc)
 	/// null - no max. list(type part = number max).
 	var/list/maximum_component_parts = list(/obj/item/stock_parts = 10)
-	var/uid
 	var/panel_open = FALSE
-	var/static/gl_uid = 1
 	/// Can the machine be interacted with while de-powered.
 	var/interact_offline = FALSE
 	/// sound played on successful interface use
