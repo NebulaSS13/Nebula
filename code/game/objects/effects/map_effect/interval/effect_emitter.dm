@@ -14,15 +14,14 @@
 	if(!istype(effect_system))
 		return INITIALIZE_HINT_QDEL
 	effect_system.attach(src)
+	effect_system.set_up(effect_amount, effect_cardinals_only, src.loc, effect_forced_dir)
 	return ..()
 
 /obj/abstract/map_effect/interval/effect_emitter/interval/Destroy()
 	QDEL_NULL(effect_system)
 	return ..()
 
-
 /obj/abstract/map_effect/interval/effect_emitter/trigger_map_effect()
-	to_world("[type]: effect firing")
 	if(istype(effect_system) && !QDELETED(src))
 		effect_system.set_up(effect_amount, effect_cardinals_only, src.loc, effect_forced_dir)
 		effect_system.start()
