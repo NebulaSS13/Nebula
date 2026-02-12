@@ -929,14 +929,14 @@ FIRE ALARM
 
 	if(src.timing)
 		if(src.time > 0)
-			src.time = src.time - ((world.timeofday - last_process)/10)
+			src.time = src.time - ((REALTIMEOFDAY - last_process)/(1 SECOND))
 		else
 			src.alarm()
 			src.time = 0
 			src.timing = 0
 			STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		src.updateDialog()
-	last_process = world.timeofday
+	last_process = REALTIMEOFDAY
 
 	if(locate(/obj/fire) in loc)
 		alarm()
@@ -994,7 +994,7 @@ FIRE ALARM
 		. = TOPIC_REFRESH
 	else if (href_list["time"])
 		src.timing = text2num(href_list["time"])
-		last_process = world.timeofday
+		last_process = REALTIMEOFDAY
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		. = TOPIC_REFRESH
 	else if (href_list["tp"])
