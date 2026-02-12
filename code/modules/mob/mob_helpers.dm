@@ -562,43 +562,6 @@ english_only - whether to use traditional english letters only (for use in NanoU
 /mob/proc/ssd_check()
 	return !client && !teleop && (last_ckey || !ai)
 
-/mob/proc/try_teleport(var/area/thearea)
-	if(istype(thearea, /list))
-		var/list/area_list = thearea
-		thearea = area_list[1]
-	var/list/L = list()
-	for(var/turf/T in get_area_turfs(thearea))
-		if(!T.density)
-			var/clear = 1
-			for(var/obj/O in T)
-				if(O.density)
-					clear = 0
-					break
-			if(clear)
-				L+=T
-
-	if(buckled)
-		buckled = null
-
-	var/attempt = null
-	var/success = 0
-	var/turf/end
-	var/candidates = L.Copy()
-	while(L.len)
-		attempt = pick(L)
-		success = Move(attempt)
-		if(!success)
-			L.Remove(attempt)
-		else
-			end = attempt
-			break
-
-	if(!success)
-		end = pick(candidates)
-		forceMove(end)
-
-	return end
-
 //Tries to find the mob's email.
 /proc/find_email(real_name)
 	for(var/mob/mob in global.living_mob_list_)
