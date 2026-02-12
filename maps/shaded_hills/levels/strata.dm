@@ -2,7 +2,7 @@
 /decl/strata/shaded_hills
 	name = "mountainous rock"
 	base_materials = list(/decl/material/solid/stone/basalt)
-	default_strata_candidate = FALSE
+	default_strata_candidate = STRATA_RANDOM_NEVER // this is for a specific map
 	ores_sparse = list(
 		/decl/material/solid/quartz,
 		/decl/material/solid/graphite,

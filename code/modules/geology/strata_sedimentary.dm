@@ -1,7 +1,7 @@
 /decl/strata/sedimentary
 	name = "sedimentary rock"
 	base_materials = list(/decl/material/solid/stone/sandstone)
-	default_strata_candidate = TRUE
+	default_strata_candidate = STRATA_RANDOM_ANY
 	ores_rich = list(
 		/decl/material/solid/pitchblende,
 		/decl/material/solid/pyrite,
