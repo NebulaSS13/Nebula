@@ -207,7 +207,7 @@
 		return
 
 	if(value == DOOR_VALUE)
-		new/obj/machinery/door/airlock/alien(T)
+		new /obj/machinery/door/airlock/alien(T)
 		return
 
 	if(value == ARTIFACT_VALUE)
