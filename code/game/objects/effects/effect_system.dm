@@ -372,7 +372,7 @@ steam.start() -- spawns the effect
 		n = 10
 	number = n
 	cardinals = c
-	if(istype(loca, /turf/))
+	if(istype(loca, /turf))
 		location = loca
 	else
 		location = get_turf(loca)
