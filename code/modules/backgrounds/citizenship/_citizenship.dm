@@ -1,7 +1,7 @@
 /decl/background_detail/citizenship
 	abstract_type = /decl/background_detail/citizenship
 	category = /decl/background_category/citizenship
-	var/ruling_body = "Other Faction"
+	var/ruling_body = "Other Faction" // currently unused? todo: display this or remove it? nothing seems to actually set it...
 	var/capital
 	var/size_heading = "Systems"
 	var/size_value
