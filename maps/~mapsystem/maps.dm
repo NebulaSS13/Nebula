@@ -555,7 +555,7 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 	var/obj/item/passport/pass = new passport_type(get_turf(H))
 	if(istype(pass))
 		pass.set_info(H)
-	if(!H.equip_to_slot(pass, slot_in_wallet_str) && !H.equip_to_slot(pass, slot_in_backpack_str))
+	if(!H.equip_to_slot_if_possible(pass, slot_in_wallet_str, del_on_fail=FALSE, disable_warning=TRUE) && !H.equip_to_slot_if_possible(pass, slot_in_backpack_str, del_on_fail=FALSE, disable_warning=TRUE))
 		H.put_in_hands(pass)
 
 /datum/map/proc/populate_overmap_events()
