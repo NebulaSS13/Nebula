@@ -668,6 +668,8 @@ var/global/list/bodytypes_by_category = list()
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
 		var/obj/item/organ/external/E = new limb_path(H, null, supplied_data) //explicitly specify the dna and bodytype
+		E.skin_colour = supplied_data.skin_color //match skin colors
+		E.skin_tone = supplied_data.skin_tone
 		H.add_organ(E, GET_EXTERNAL_ORGAN(H, E.parent_organ), FALSE, FALSE, skip_health_update = TRUE)
 
 	//Create missing internal organs
