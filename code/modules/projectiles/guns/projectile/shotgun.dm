@@ -24,6 +24,12 @@
 	else
 		icon_state = "[get_world_inventory_state()]-empty"
 
+/obj/item/gun/projectile/shotgun/pump/update_base_icon_state()
+	if(chambered)
+		icon_state = get_world_inventory_state()
+	else
+		icon_state = "[get_world_inventory_state()]-empty"
+
 /obj/item/gun/projectile/shotgun/pump/consume_next_projectile()
 	if(chambered)
 		return chambered.BB
