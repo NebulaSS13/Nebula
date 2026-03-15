@@ -190,7 +190,7 @@ var/global/list/telecomms_hubs = list()
 			listeners[ghost_listener] = TRUE
 
 	for(var/mob/listener in listeners)
-		listener.hear_radio(message, message_verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, vname = send_name, vsource = (listeners[listener] ? send_overmap_object.name : null))
+		listener.hear_radio(message, message_verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, vname = send_name, vsource = (listeners[listener] ? send_overmap_object?.name : null))
 
 	if(!chain_transmit)
 		return

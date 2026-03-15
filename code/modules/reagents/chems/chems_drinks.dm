@@ -185,6 +185,7 @@
 	color = "#eeddcc"
 	uid = "chem_drink_garlic"
 	antibiotic_strength = 0.65
+	affect_blood_on_ingest = TRUE
 
 	glass_name = "garlic oil"
 	glass_desc = "A potion of guaranteed bad breath."
