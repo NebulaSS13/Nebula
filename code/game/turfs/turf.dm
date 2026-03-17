@@ -374,7 +374,7 @@
 			var/old_height     = old_turf.get_physical_height() + REAGENT_TOTAL_VOLUME(old_turf.reagents)
 			var/current_height = get_physical_height() + REAGENT_TOTAL_VOLUME(reagents)
 			if(abs(current_height - old_height) > FLUID_SHALLOW)
-				if(current_height > old_height)
+				if(current_height > old_height && !is_open() && !old_turf?.is_open()) // check is_open() due to open turf depth stuff.
 					return 0
 				if(istype(mover_mob) && MOVING_DELIBERATELY(mover_mob))
 					to_chat(mover_mob, SPAN_WARNING("You refrain from stepping over the edge; it looks like a steep drop down to \the [src]."))

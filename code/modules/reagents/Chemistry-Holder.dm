@@ -502,6 +502,8 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 /// Removes up to [amount] of reagents from [src]. Returns actual amount removed.
 /datum/reagents/proc/remove_any(var/amount = 1, var/defer_update = FALSE, var/removed_phases = (MAT_PHASE_LIQUID | MAT_PHASE_SOLID), skip_reagents = null)
 
+	amount = CHEMS_QUANTIZE(amount)
+
 	if(amount <= 0)
 		return 0
 
@@ -537,8 +539,11 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 	else
 		return 0
 
-	var/removing = clamp(CHEMS_QUANTIZE(amount), 0, total_volume) // not ideal but something is making total_volume become NaN
-	if(!removing || total_volume <= 0)
+	var/removing = clamp(amount, 0, total_volume) // not ideal but something is making total_volume become NaN
+	if(!removing)
+		return 0 // don't clear, we aren't removing any
+
+	if(total_volume <= removing) // we're removing everything
 		. = 0
 		clear_reagents()
 		return

@@ -150,6 +150,8 @@
 
 /obj/item/organ/external/copy_from_mob_snapshot(datum/mob_snapshot/supplied_appearance)
 	_icon_cache_key = null
+	skin_colour = supplied_appearance.skin_color //match skin colors
+	skin_tone = supplied_appearance.skin_tone
 	if(organ_tag in supplied_appearance?.sprite_accessories)
 		var/list/sprite_cats = supplied_appearance.sprite_accessories[organ_tag]
 		for(var/category in sprite_cats)

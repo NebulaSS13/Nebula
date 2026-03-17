@@ -27,7 +27,7 @@
 	if(!type_to_spawn)
 		return
 
-	for(var/atom/A as anything in create_instance(type_to_spawn))
+	for(var/atom/A as anything in create_instance(type_to_spawn, loc))
 		if(pixel_x || pixel_y)
 			A.default_pixel_x = pixel_x
 			A.default_pixel_y = pixel_y
