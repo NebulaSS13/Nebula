@@ -4,11 +4,22 @@ SUBSYSTEM_DEF(ambience)
 	priority = SS_PRIORITY_LIGHTING
 	init_order = SS_INIT_LIGHTING
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT // Copied from icon update subsystem.
-	flags = SS_NO_INIT
 	var/list/queued = list()
 
 /datum/controller/subsystem/ambience/stat_entry()
 	..("P:[length(queued)]")
+
+/datum/controller/subsystem/ambience/Initialize(start_timeofday)
+	for(var/datum/level_data/the_level as anything in SSmapping.levels_by_z)
+		// this may actually be faster than adding them to the queue. TBD.
+		for(var/turf/target_turf as anything in block(the_level.level_inner_min_x, the_level.level_inner_min_y, the_level.level_z, the_level.level_inner_max_x, the_level.level_inner_max_y, the_level.level_z))
+			if(target_turf.ambience_queued) // Somehow wound up queued, handle it then.
+				continue
+			if(!target_turf.simulated)
+				continue
+			target_turf.update_ambient_light_from_z_or_area()
+	// also flush the queue prior to roundstart
+	fire(no_mc_tick = TRUE)
 
 /datum/controller/subsystem/ambience/fire(resumed = FALSE, no_mc_tick = FALSE)
 	var/list/curr = queued

@@ -906,7 +906,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 	return TRUE
 
 /datum/level_data/proc/update_turf_ambience()
-	if(SSatoms.atom_init_stage >= INITIALIZATION_INNEW_REGULAR)
+	if(SSambience.initialized) // our turfs will update themselves later anyway
 		for(var/turf/level_turf as anything in block(level_inner_min_x, level_inner_min_y, level_z, level_inner_max_x, level_inner_max_y, level_z))
 			level_turf.update_ambient_light_from_z_or_area() // AMBIENCE_QUEUE_TURF(level_turf) - seems to be less consistent
 			CHECK_TICK
