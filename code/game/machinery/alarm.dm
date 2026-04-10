@@ -65,15 +65,18 @@
 	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":-21}, "WEST":{"x":21}}'
 
 	var/alarm_id = null
-	var/breach_detection = 1 // Whether to use automatic breach detection or not
+	var/breach_detection = TRUE // Whether to use automatic breach detection or not
 	var/frequency = 1439
 	var/alarm_frequency = 1437
-	var/remote_control = 0
-	var/rcon_setting = 2
+	/// If TRUE, remote controllers like the atmos control computer can control the air alarm; if FALSE, they can only view it.
+	/// Typically auto-set by rcon_setting.
+	var/remote_control = FALSE
+	/// On RCON_AUTO, remote control is enabled when danger_level is DANGER_DANGER.
+	var/rcon_setting = RCON_AUTO
 	var/rcon_remote_override_access = list(access_ce)
-	var/locked = 1
-	var/aidisabled = 0
-	var/shorted = 0
+	var/locked = TRUE
+	var/aidisabled = FALSE
+	var/shorted = FALSE
 
 	var/mode = AALARM_MODE_SCRUBBING
 	var/screen = AALARM_SCREEN_MAIN
@@ -89,14 +92,17 @@
 	var/list/TLV = list() // stands for Threshold Limit Value, since it handles exposure amounts
 	var/list/trace_gas = list() //list of other gases that this air alarm is able to detect
 
-	var/danger_level = 0
-	var/pressure_dangerlevel = 0
-	var/oxygen_dangerlevel = 0
-	var/co2_dangerlevel = 0
-	var/temperature_dangerlevel = 0
-	var/other_dangerlevel = 0
+	var/const/DANGER_NONE   = 0
+	var/const/DANGER_WARN   = 1
+	var/const/DANGER_DANGER = 2 // danger, danger, circuits ready
+	var/danger_level = DANGER_NONE
+	var/pressure_dangerlevel = DANGER_NONE
+	var/oxygen_dangerlevel = DANGER_NONE
+	var/co2_dangerlevel = DANGER_NONE
+	var/temperature_dangerlevel = DANGER_NONE
+	var/other_dangerlevel = DANGER_NONE
 	var/environment_type = /decl/environment_data
-	var/report_danger_level = 1
+	var/report_danger_level = TRUE
 
 /obj/machinery/alarm/cold
 	target_temperature = T0C+4
@@ -215,14 +221,14 @@
 	//atmos computer remote controll stuff
 	switch(rcon_setting)
 		if(RCON_NO)
-			remote_control = 0
+			remote_control = FALSE
 		if(RCON_AUTO)
-			if(danger_level == 2)
-				remote_control = 1
+			if(danger_level == DANGER_DANGER)
+				remote_control = TRUE
 			else
-				remote_control = 0
+				remote_control = FALSE
 		if(RCON_YES)
-			remote_control = 1
+			remote_control = TRUE
 
 	return
 
@@ -318,10 +324,10 @@
 
 /obj/machinery/alarm/proc/get_danger_level(var/current_value, var/list/danger_levels)
 	if((current_value >= danger_levels[4] && danger_levels[4] > 0) || current_value <= danger_levels[1])
-		return 2
+		return DANGER_DANGER
 	if((current_value > danger_levels[3] && danger_levels[3] > 0) || current_value < danger_levels[2])
-		return 1
-	return 0
+		return DANGER_WARN
+	return DANGER_NONE
 
 /obj/machinery/alarm/on_update_icon()
 	// Broken or deconstructed states
@@ -477,7 +483,7 @@
 /obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/data[0]
 	var/remote_connection = istype(state, /datum/topic_state/remote)  // Remote connection means we're non-adjacent/connecting from another computer
-	var/remote_access = remote_connection && CanInteract(user, state) // Remote access means we also have the privilege to alter the air alarm.
+	var/remote_access = remote_control && remote_connection && CanInteract(user, state) // Remote access means we also have the privilege to alter the air alarm.
 
 	data["locked"] = locked && !issilicon(user)
 	data["remote_connection"] = remote_connection

@@ -37,7 +37,7 @@ var/global/list/areas = list()
 	/// Disables constructing or using APCs in this area.
 	var/always_unpowered =    FALSE
 
-	var/atmosalm =            0
+	var/atmosalm =            /obj/machinery/alarm::DANGER_NONE
 	var/power_equip =         1 // Status
 	var/power_light =         1
 	var/power_environ =       1
@@ -191,7 +191,7 @@ var/global/list/areas = list()
 	return cameras
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
-	if (danger_level == 0)
+	if (danger_level == /obj/machinery/alarm::DANGER_NONE)
 		atmosphere_alarm.clearAlarm(src, alarm_source)
 	else
 		atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
@@ -202,10 +202,10 @@ var/global/list/areas = list()
 			danger_level = max(danger_level, AA.danger_level)
 
 	if(danger_level != atmosalm)
-		if (danger_level < 1 && atmosalm >= 1)
+		if (danger_level < /obj/machinery/alarm::DANGER_WARN && atmosalm >= /obj/machinery/alarm::DANGER_WARN)
 			//closing the doors on red and opening on green provides a bit of hysteresis that will hopefully prevent fire doors from opening and closing repeatedly due to noise
 			air_doors_open()
-		else if (danger_level >= 2 && atmosalm < 2)
+		else if (danger_level >= /obj/machinery/alarm::DANGER_DANGER && atmosalm < /obj/machinery/alarm::DANGER_DANGER)
 			air_doors_close()
 
 		atmosalm = danger_level
