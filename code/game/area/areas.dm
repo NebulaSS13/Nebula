@@ -48,8 +48,6 @@ var/global/list/areas = list()
 	var/oneoff_light   =      0
 	var/oneoff_environ =      0
 	var/has_gravity =         TRUE
-	/// If FALSE, this area is unable to have its gravity overridden by a gravity generator. Used on /area/space.
-	var/can_have_gravity =    TRUE
 	var/air_doors_activated = FALSE
 
 	var/obj/machinery/apc/apc

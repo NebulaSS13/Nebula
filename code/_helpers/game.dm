@@ -401,12 +401,6 @@
 		temps[direction] = rstats
 	return temps
 
-/proc/MinutesToTicks(var/minutes)
-	return SecondsToTicks(60 * minutes)
-
-/proc/SecondsToTicks(var/seconds)
-	return seconds * 10
-
 /proc/window_flash(var/client_or_usr)
 	if (!client_or_usr)
 		return
