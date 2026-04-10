@@ -123,21 +123,18 @@
 	outputs = list("Q" = IC_PINTYPE_BOOLEAN,"!Q" = IC_PINTYPE_BOOLEAN)
 	activators = list("pulse in C" = IC_PINTYPE_PULSE_IN, "pulse out Q" = IC_PINTYPE_PULSE_OUT, "pulse out !Q" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
-	var/lstate=FALSE
+	var/latch_state = FALSE
 
 /obj/item/integrated_circuit/logic/binary/gdlatch/do_work()
-	var/datum/integrated_io/A = inputs[1]
-	var/datum/integrated_io/B = inputs[2]
-	var/datum/integrated_io/O = outputs[1]
-	var/datum/integrated_io/Q = outputs[2]
-	if(B.data)
-		if(A.data)
-			lstate=TRUE
-		else
-			lstate=FALSE
+	var/datum/integrated_io/data_pin = inputs[1]
+	var/datum/integrated_io/load_pin = inputs[2]
+	var/datum/integrated_io/Q_pin = outputs[1]
+	var/datum/integrated_io/Qnot_pin = outputs[2]
+	if(load_pin.data)
+		latch_state = !!data_pin.data
 
-	O.data = lstate ? TRUE : FALSE
-	Q.data = !lstate ? TRUE : FALSE
+	Q_pin.data = latch_state
+	Qnot_pin.data = !latch_state
 	if(get_pin_data(IC_OUTPUT, 1))
 		activate_pin(2)
 	else

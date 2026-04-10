@@ -66,10 +66,7 @@
 /obj/item/rig_module/ai_container/Process()
 	if(integrated_ai)
 		var/obj/item/rig/rig = get_rig()
-		if(rig && rig.ai_override_enabled)
-			integrated_ai.get_rig_stats = 1
-		else
-			integrated_ai.get_rig_stats = 0
+		integrated_ai.get_rig_stats = rig?.ai_override_enabled
 
 /mob/living/Stat()
 	. = ..()

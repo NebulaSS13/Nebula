@@ -44,11 +44,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 					msg += "<b>[original_word] <A HREF='byond://?_src_=holder;adminchecklaws=\ref[mob]'>(CL)</A></b> "
 					continue
 				else
-					var/mob/found = ckeys[word]
-					if(!found)
-						found = surnames[word]
-						if(!found)
-							found = forenames[word]
+					var/mob/found = ckeys[word] || surnames[word] || forenames[word]
 					if(found)
 						if(!(found in mobs_found))
 							mobs_found += found

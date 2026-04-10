@@ -126,25 +126,17 @@
 	data["geneMasks"] = SSplants.gene_masked_list
 	data["activity"] = active
 	data["degradation"] = degradation
-
-	if(loaded_disk)
-		data["disk"] = 1
-	else
-		data["disk"] = 0
-
-	if(seed)
-		data["loaded"] = "[seed.name]"
-	else
-		data["loaded"] = 0
+	data["disk"] = !!loaded_disk
+	data["loaded"] = seed?.name || FALSE
 
 	if(genetics)
-		data["hasGenetics"] = 1
+		data["hasGenetics"] = TRUE
 		data["sourceName"] = genetics.display_name
 		if(!genetics.roundstart)
 			data["sourceName"] += " (variety #[genetics.uid])"
 	else
-		data["hasGenetics"] = 0
-		data["sourceName"] = 0
+		data["hasGenetics"] = FALSE
+		data["sourceName"] = FALSE
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
