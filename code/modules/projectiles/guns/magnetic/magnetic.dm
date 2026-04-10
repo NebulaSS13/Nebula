@@ -83,9 +83,9 @@
 			if(mag.remaining)
 				add_overlay("[icon_state]_ammo")
 
-/obj/item/gun/magnetic/proc/show_ammo(var/mob/user)
+/obj/item/gun/magnetic/proc/get_ammo_string(mob/user, distance)
 	if(loaded)
-		to_chat(user, "<span class='notice'>It has \a [loaded] loaded.</span>")
+		return SPAN_NOTICE("It has \a [loaded] loaded.")
 
 /obj/item/gun/magnetic/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
@@ -97,6 +97,9 @@
 			. += SPAN_NOTICE("The capacitor charge indicator is [SPAN_ORANGE("amber")].")
 		else
 			. += SPAN_NOTICE("The capacitor charge indicator is [SPAN_GREEN("green")].")
+	var/ammo_string = get_ammo_string(user, distance)
+	if(ammo_string)
+		. += ammo_string
 
 /obj/item/gun/magnetic/attackby(var/obj/item/used_item, var/mob/user)
 
