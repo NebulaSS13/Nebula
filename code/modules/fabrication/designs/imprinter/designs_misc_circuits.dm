@@ -191,12 +191,6 @@
 /datum/fabricator_recipe/imprinter/circuit/pacmanpotato
 	path = /obj/item/stock_parts/circuitboard/pacman/super/potato
 
-/datum/fabricator_recipe/imprinter/circuit/batteryrack
-	path = /obj/item/stock_parts/circuitboard/batteryrack
-
-/datum/fabricator_recipe/imprinter/circuit/smes_cell
-	path = /obj/item/stock_parts/circuitboard/smes
-
 /datum/fabricator_recipe/imprinter/circuit/alerts
 	path = /obj/item/stock_parts/circuitboard/stationalert
 
