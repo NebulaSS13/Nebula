@@ -37,7 +37,7 @@
 
 /obj/structure/flora/tree/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
-	if(!ml && protects_against_weather)
+	if(!ml && protects_against_weather && SSambience.initialized)
 		for(var/turf/T as anything in RANGE_TURFS(src, 1))
 			AMBIENCE_QUEUE_TURF(T)
 
@@ -45,7 +45,7 @@
 /obj/structure/flora/tree/Destroy()
 	var/list/turfs_to_update = RANGE_TURFS(src, 1)
 	. = ..()
-	if(protects_against_weather)
+	if(protects_against_weather && SSambience.initialized)
 		for(var/turf/T in turfs_to_update)
 			AMBIENCE_QUEUE_TURF(T)
 
