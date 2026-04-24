@@ -4114,7 +4114,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/sub/aft)
 "kQ" = (
-/obj/item/stack/material/rods{
+/obj/item/stack/material/rods/mapped/steel{
 	amount = 6
 	},
 /turf/space,
