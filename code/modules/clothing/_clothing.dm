@@ -228,7 +228,7 @@
 			return
 
 	set_icon(initial(icon)) // this is not going to work correctly for custom icons
-	icon_state = JOINTEXT(list(get_world_inventory_state(), get_clothing_state_modifier()))
+	set_icon_state(JOINTEXT(list(get_world_inventory_state(), get_clothing_state_modifier())))
 	if(markings_state_modifier && markings_color)
 		add_overlay(mutable_appearance(icon, "[icon_state][markings_state_modifier]", markings_color))
 	update_clothing_icon()
