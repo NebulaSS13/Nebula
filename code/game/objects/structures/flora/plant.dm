@@ -14,7 +14,7 @@
 	opacity = TRUE
 	density = TRUE
 
-/obj/structure/flora/plant/Process()
+/obj/structure/flora/plant/process_plants()
 	if(plant?.produces_pollen <= 0)
 		return PROCESS_KILL
 	if(pollen < MAX_POLLEN_PER_FLOWER)
