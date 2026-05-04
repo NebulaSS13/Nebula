@@ -195,9 +195,9 @@
 			break
 	return FALSE
 
-/obj/effect/insect_swarm/failed_automove()
+/obj/effect/insect_swarm/finished_automove()
 	..()
-	stop_automove()
+	next_work = world.time // we'be a busy bee, check to for new work once you reach your destination
 	return FALSE
 
 /obj/effect/insect_swarm/get_automove_target(datum/automove_metadata/metadata)
@@ -208,11 +208,14 @@
 	. = ..()
 
 /obj/effect/insect_swarm/can_do_automated_move(variant_move_delay)
-	return !is_smoked()
+	return ..() && !is_smoked()
 
 /obj/effect/insect_swarm/start_automove(target, movement_type, datum/automove_metadata/metadata)
 	move_target = target
 	. = ..()
+
+/obj/effect/insect_swarm/get_default_automove_controller_type()
+	return /decl/automove_controller/stop_on_fail_or_completion
 
 /obj/effect/insect_swarm/proc/handle_hive_behavior()
 
@@ -230,7 +233,7 @@
 			stop_automove()
 			return
 		if(!hive_has_swarm() && loc != hive.loc)
-			start_automove(owner.holder)
+			start_automove(hive)
 			return
 
 	do_work()
@@ -279,10 +282,6 @@
 		merge(other_swarm)
 		return
 
-/obj/effect/insect_swarm/DoMove(direction, mob/mover, is_external)
-	. = ..()
-	to_world("swarm tried to move: [.]")
-
 /obj/effect/insect_swarm/pollinator
 	var/pollen = 0
 
@@ -292,25 +291,27 @@
 	if(world.time < next_work)
 		return
 
+	var/atom/movable/hive = owner?.holder
+
+	// Move to move target (hive or flowers)
+	if(move_target)
+		if(!(move_target in view(src, 7))) // no longer able to see our move target
+			stop_automove()
+			// don't bail early if we just stopped automove, that would introduce stutter as it'd take one tick to decide what to do next
+		else
+			// let us automove, don't restart it
+			return
+
 	// Unload pollen into hive.
 	if(pollen)
-		if(loc == get_turf(owner.holder))
+		if(loc == get_turf(hive))
 			owner.add_reserves(pollen)
 			pollen = 0
 			next_work = world.time + 5 SECONDS
 			stop_automove()
 		else
-			start_automove(owner.holder)
+			start_automove(hive)
 		return
-
-	// Move to flowers.
-	if(move_target)
-		if(get_turf(move_target) == loc || !(move_target in view(src, 7)))
-			move_target = null
-			stop_automove()
-		else
-			start_automove(move_target)
-			return
 
 	// Harvest from flowers in our loc.
 	for(var/obj/machinery/portable_atmospherics/hydroponics/flower in loc)
@@ -358,7 +359,7 @@
 	if(closest_target)
 		start_automove(closest_target)
 	else
-		start_automove(owner.holder)
+		start_automove(hive)
 
 /obj/effect/insect_swarm/proc/was_smoked(smoke_time = 10 SECONDS)
 	smoked_until = max(smoked_until, world.time + smoke_time)
