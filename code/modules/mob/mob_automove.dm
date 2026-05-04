@@ -62,4 +62,4 @@
 
 // We do some early checking here to avoid doing the same checks repeatedly by calling SelfMove().
 /mob/can_do_automated_move(variant_move_delay)
-	. = MayMove() && !incapacitated() && (!istype(ai) || ai.can_do_automated_move())
+	. = ..() && !incapacitated() && (!istype(ai) || ai.can_do_automated_move())
