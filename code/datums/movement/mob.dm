@@ -120,7 +120,7 @@
 	next_move += max(0, delay)
 
 // Stop effect
-/datum/movement_handler/mob/DoMove(direction, mob/mover, is_external)
+/datum/movement_handler/mob/stop_effect/DoMove(direction, mob/mover, is_external)
 	if(MayMove(mover, is_external) == MOVEMENT_STOP)
 		return MOVEMENT_HANDLED
 
