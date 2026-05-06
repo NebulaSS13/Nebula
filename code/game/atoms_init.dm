@@ -95,6 +95,8 @@
 
 // Called if an atom is deleted before it initializes. Only call Destroy in this if you know what you're doing.
 /atom/proc/EarlyDestroy(force = FALSE)
+	// since this is set up in New, we have to make sure it's cleared in EarlyDestroy too
+	QDEL_NULL(storage)
 	return QDEL_HINT_QUEUE
 
 
