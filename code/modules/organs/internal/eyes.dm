@@ -39,7 +39,7 @@
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
-/obj/item/organ/external/eyes/set_organ_appearance_bodytype(decl/bodytype/new_bodytype, update_sprite_accessories = TRUE, skip_owner_update = FALSE)
+/obj/item/organ/internal/eyes/set_organ_appearance_bodytype(decl/bodytype/new_bodytype, update_sprite_accessories = TRUE, skip_owner_update = FALSE)
 	. = ..()
 	if(. && owner && !skip_owner_update)
 		owner.update_eyes()
