@@ -35,7 +35,7 @@
 /decl/pronouns/proc/get_message_for_being_kicked_in_the_dick()
 	return "Oh god, that hurt!"
 
-/proc/get_pronouns_by_gender(var/gender)
+/proc/get_pronouns_by_gender(var/gender) as /decl/pronouns
 	switch(gender)
 		if(PLURAL)
 			. = /decl/pronouns
@@ -56,7 +56,7 @@
 	. = GET_DECL(.) || GET_DECL(/decl/pronouns)
 
 // Atom helpers.
-/atom/proc/get_pronouns(var/ignore_coverings)
+/atom/proc/get_pronouns(var/ignore_coverings) as /decl/pronouns
 	RETURN_TYPE(/decl/pronouns)
 	. = get_pronouns_by_gender(gender)
 

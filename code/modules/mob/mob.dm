@@ -1191,17 +1191,17 @@ var/global/const/ACTION_DANGER_ALL = 2
 		return FALSE
 	return TRUE
 
-/mob/proc/get_species()
+/mob/proc/get_species() as /decl/species
 	RETURN_TYPE(/decl/species)
 	return
 
-/mob/proc/get_bodytype()
+/mob/proc/get_bodytype() as /decl/bodytype
 	RETURN_TYPE(/decl/bodytype)
 
 // Bit of a stub for now, but should return the bodytype specific
 // to the slot and organ being checked in the future instead of
 // always using the mob root bodytype.
-/mob/proc/get_equipment_bodytype(slot, bodypart)
+/mob/proc/get_equipment_bodytype(slot, bodypart) as /decl/bodytype
 	RETURN_TYPE(/decl/bodytype)
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	return root_bodytype?.resolve_to_equipment_bodytype(src)
