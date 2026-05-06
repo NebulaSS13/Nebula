@@ -63,28 +63,6 @@
 		M.bodytemperature = firing_temperature
 	return 1
 
-/obj/item/projectile/meteor
-	name = "meteor"
-	icon = 'icons/obj/meteor.dmi'
-	icon_state = "smallf"
-	damage = 0
-	atom_damage_type = BRUTE
-	nodamage = 1
-
-/obj/item/projectile/meteor/Bump(var/atom/A, forced=0)
-	if(!istype(A))
-		return
-	if(A == firer)
-		forceMove(A.loc)
-		return
-	A.explosion_act(2)
-	playsound(src.loc, 'sound/effects/meteorimpact.ogg', 40, 1)
-	for(var/mob/M in range(10, src))
-		if(!M.stat && !isAI(M))
-			shake_camera(M, 3, 1)
-	qdel(src)
-	return TRUE
-
 /obj/item/projectile/energy/floramut
 	name = "alpha somatoray"
 	icon_state = "energy"
@@ -147,15 +125,6 @@
 			M.adjust_nutrition(30)
 	else
 		M.show_message(SPAN_NOTICE("The radiation beam dissipates harmlessly through your body."))
-
-
-/obj/item/projectile/beam/mindflayer
-	name = "flayer ray"
-
-/obj/item/projectile/beam/mindflayer/on_hit(var/atom/target, var/blocked = 0)
-	if(ishuman(target))
-		var/mob/living/human/M = target
-		ADJ_STATUS(M, STAT_CONFUSE, rand(5,8))
 
 /obj/item/projectile/chameleon
 	name = "bullet"

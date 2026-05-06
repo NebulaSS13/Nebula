@@ -25,7 +25,6 @@
 #include "abilities\construct.dm"
 #include "abilities\harvest.dm"
 #include "abilities\shade.dm"
-#include "cultify\de-cultify.dm"
 #include "cultify\defile.dm"
 #include "cultify\mob.dm"
 #include "cultify\turf.dm"
