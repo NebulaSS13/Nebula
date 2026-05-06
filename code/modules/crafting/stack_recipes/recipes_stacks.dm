@@ -6,7 +6,10 @@
 	category            = "tiling"
 
 /decl/stack_recipe/tile/wood
-	result_type         = /obj/item/stack/tile/wood
+	abstract_type       = /decl/stack_recipe/tile/wood
+
+/decl/stack_recipe/tile/wood/oak
+	result_type         = /obj/item/stack/tile/wood/oak
 	required_material   = /decl/material/solid/organic/wood/oak
 
 /decl/stack_recipe/tile/wood/mahogany
@@ -26,8 +29,13 @@
 	result_type         = /obj/item/stack/tile/wood/walnut
 	required_material   = /decl/material/solid/organic/wood/walnut
 
-/decl/stack_recipe/tile/wood/mahogany/rough
+/decl/stack_recipe/tile/wood/oak/rough
 	crafting_extra_cost_factor = 2 // wasteful but easy
+	difficulty                 = MAT_VALUE_EASY_DIY
+	result_type                = /obj/item/stack/tile/wood/rough/oak
+
+/decl/stack_recipe/tile/wood/mahogany/rough
+	crafting_extra_cost_factor = 2
 	difficulty                 = MAT_VALUE_EASY_DIY
 	result_type                = /obj/item/stack/tile/wood/rough/mahogany
 
