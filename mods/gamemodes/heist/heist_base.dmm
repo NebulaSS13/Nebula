@@ -737,7 +737,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "SkipjackShuttersNorth";
 	name = "Blast Doors";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1104,7 +1104,7 @@
 	dir = 4;
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1131,7 +1131,7 @@
 	dir = 8;
 	id_tag = "SkipjackShuttersEast";
 	name = "Skipjack Shutters";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1149,7 +1149,7 @@
 "dB" = (
 /obj/structure/rack,
 /obj/item/gun/launcher/bow/crossbow/powered,
-/obj/item/stack/material/rods/ten,
+/obj/item/stack/material/rods/mapped/steel/ten,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -1203,7 +1203,7 @@
 	dir = 4;
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	
+
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/floor/plating,

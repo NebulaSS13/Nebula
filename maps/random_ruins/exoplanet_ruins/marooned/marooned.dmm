@@ -3,11 +3,11 @@
 /turf/template_noop,
 /area/template_noop)
 "ac" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/template_noop,
 /area/template_noop)
 "ad" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /obj/item/stack/material/sheet/reinforced/mapped/ocp,
 /turf/template_noop,
 /area/template_noop)

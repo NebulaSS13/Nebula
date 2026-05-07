@@ -14,7 +14,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	max_health = 100
 	parts_amount = 2
-	parts_type = /obj/item/stack/material/strut
+	parts_type = /obj/item/stack/material/rods
 
 	var/broken =    FALSE
 	var/neighbor_status = 0

@@ -217,19 +217,19 @@
 
 	// Clothing does not generally align with each other's world icons, so we just use the mob overlay in this case.
 	if(should_use_combined_accessory_appearance())
-		var/image/I = get_mob_overlay(ismob(loc) ? loc : null, get_fallback_slot())
-		if(I?.icon) // Null or invisible overlay, we don't want to make our clothing invisible just because it has an accessory.
-			I.plane = plane
-			I.layer = layer
-			I.color = color
-			I.alpha = alpha
-			I.name  = name
-			appearance = I
+		var/image/overlay_image = get_mob_overlay(ismob(loc) ? loc : null, get_fallback_slot())
+		if(overlay_image?.icon) // Null or invisible overlay, we don't want to make our clothing invisible just because it has an accessory.
+			icon = overlay_image.icon
+			icon_state = overlay_image.icon_state
+			underlays = overlay_image.underlays.Copy()
+			// we need to use the managed overlays system or else they will end up overwritten
+			set_overlays(overlay_image.overlays.Copy())
 			set_dir(SOUTH)
 			update_clothing_icon()
 			return
 
-	icon_state = JOINTEXT(list(get_world_inventory_state(), get_clothing_state_modifier()))
+	set_icon(initial(icon)) // this is not going to work correctly for custom icons
+	set_icon_state(JOINTEXT(list(get_world_inventory_state(), get_clothing_state_modifier())))
 	if(markings_state_modifier && markings_color)
 		add_overlay(mutable_appearance(icon, "[icon_state][markings_state_modifier]", markings_color))
 	update_clothing_icon()

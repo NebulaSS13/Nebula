@@ -1442,7 +1442,7 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/unsimulated/floor/sand,
 /area/icarus/open)
 "eR" = (
@@ -1492,7 +1492,7 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/unsimulated/floor/sand,
 /area/icarus/open)
 "eW" = (
@@ -1518,7 +1518,7 @@
 /area/icarus/open)
 "eZ" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/unsimulated/floor/sand,
 /area/icarus/open)
 "fa" = (
@@ -1589,7 +1589,7 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/unsimulated/floor/sand,
 /area/icarus/open)
 "fh" = (
@@ -1604,13 +1604,13 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/unsimulated/floor/sand,
 /area/icarus/open)
 "fj" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/unsimulated/floor/sand,
 /area/icarus/open)
 "fk" = (
@@ -1669,7 +1669,7 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/unsimulated/floor/sand,
 /area/icarus/open)
 "fq" = (

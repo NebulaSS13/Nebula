@@ -117,14 +117,14 @@
 /turf/floor/plating/airless,
 /area/space)
 "aq" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/space,
 /area/space)
 "ar" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/rods/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel,
 /turf/floor/plating/airless,
 /area/space)
@@ -760,7 +760,7 @@
 /turf/floor/plating/airless,
 /area/lost_supply_base)
 "cf" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /obj/item/stack/material/sheet/mapped/steel,
 /turf/floor/plating/airless,
 /area/lost_supply_base)
