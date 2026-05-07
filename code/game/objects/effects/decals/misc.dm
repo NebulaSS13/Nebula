@@ -6,9 +6,3 @@
 	layer = POINTER_LAYER
 	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-
-// Used for spray that you spray at walls, tables, hydrovats etc
-/obj/effect/decal/spraystill
-	density = FALSE
-	anchored = TRUE
-	layer = PROJECTILE_LAYER

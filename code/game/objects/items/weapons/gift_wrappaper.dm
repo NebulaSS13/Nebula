@@ -28,29 +28,6 @@
 	if(!QDELETED(src))
 		qdel(src)
 
-// this can't be made, should it just be removed?
-// should it be made into a subtype of closet? of living statue?
-/obj/effect/spresent/relaymove(mob/user)
-	if (user.stat)
-		return
-	to_chat(user, "<span class='warning'>You can't move.</span>")
-
-/obj/effect/spresent/attackby(obj/item/used_item, mob/user)
-	if(!IS_WIRECUTTER(used_item))
-		to_chat(user, "<span class='warning'>I need wirecutters for that.</span>")
-		return TRUE
-
-	to_chat(user, "<span class='notice'>You cut open the present.</span>")
-
-	for(var/mob/M in src) //Should only be one but whatever.
-		M.dropInto(loc)
-		if (M.client)
-			M.client.eye = M.client.mob
-			M.client.perspective = MOB_PERSPECTIVE
-
-	qdel(src)
-	return TRUE
-
 /obj/item/a_gift/attack_self(mob/M)
 	var/gift_type = pick(
 		/obj/item/wallet,
