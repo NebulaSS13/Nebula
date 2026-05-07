@@ -70,7 +70,6 @@
 	requires_ui_style    = FALSE
 	apply_screen_overlay = FALSE
 	var/intent_width     = 16
-	var/intent_height    = 16
 	var/list/intent_selectors
 
 /obj/screen/intent/Initialize(mapload, mob/_owner, decl/ui_style/ui_style, ui_color, ui_alpha, ui_cat)
