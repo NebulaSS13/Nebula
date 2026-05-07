@@ -152,7 +152,7 @@
 /area/casino/casino_bridge)
 "aw" = (
 /obj/item/wirecutters,
-/obj/item/stack/material/rods/mapped/steel,
+/obj/item/stack/material/rods,
 /turf/space,
 /area/space)
 "ax" = (

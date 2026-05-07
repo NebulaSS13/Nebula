@@ -18,8 +18,7 @@
 
 /decl/material/liquid/drink/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
-	if(!injectable_nutrition)
-		M.take_damage(removed, TOX) // Probably not a good idea; not very deadly though
+	M.take_damage(removed, TOX) // Probably not a good idea; not very deadly though
 
 /decl/material/liquid/drink/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
@@ -182,13 +181,11 @@
 	name = "garlic oil"
 	lore_text = "A strong-smelling, pungent oil pressed from garlic cloves. It has some antibiotic properties, and can help with infections."
 	taste_description = "bad breath"
-	nutriment_factor = 0.5 // Injectable Nutrition flag causes it to be digested twice
-	hydration_factor = 3 // Cut in half from 6 so double digestion gives normal amount
+	nutriment_factor = 1
 	color = "#eeddcc"
 	uid = "chem_drink_garlic"
 	antibiotic_strength = 0.65
 	affect_blood_on_ingest = TRUE
-	injectable_nutrition = TRUE
 
 	glass_name = "garlic oil"
 	glass_desc = "A potion of guaranteed bad breath."

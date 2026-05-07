@@ -10,7 +10,7 @@
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	throwpass = TRUE
 	parts_amount = 2
-	parts_type = /obj/item/stack/material/rods
+	parts_type = /obj/item/stack/material/strut
 	density = TRUE
 	anchored = TRUE
 	structure_flags = STRUCTURE_FLAG_SURFACE
