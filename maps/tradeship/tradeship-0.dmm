@@ -27,7 +27,7 @@
 /turf/floor,
 /area/ship/trade/undercomms)
 "ad" = (
-/obj/structure/door/wood{
+/obj/structure/door/oak{
 	name = "captain's quarters"
 	},
 /obj/structure/cable{

@@ -3787,7 +3787,7 @@
 /area/casino/casino_mainfloor)
 "kQ" = (
 /obj/machinery/door/firedoor,
-/obj/structure/door/wood{
+/obj/structure/door/oak{
 	name = "VIP Private room"
 	},
 /obj/structure/cable{
@@ -3802,7 +3802,7 @@
 /area/casino/casino_private_vip)
 "kS" = (
 /obj/machinery/door/firedoor,
-/obj/structure/door/wood{
+/obj/structure/door/oak{
 	name = "Private room 1"
 	},
 /obj/structure/cable{
@@ -3817,7 +3817,7 @@
 /area/casino/casino_private1)
 "kU" = (
 /obj/machinery/door/firedoor,
-/obj/structure/door/wood{
+/obj/structure/door/oak{
 	name = "Private room 2"
 	},
 /obj/structure/cable{
