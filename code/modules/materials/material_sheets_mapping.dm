@@ -114,6 +114,11 @@ STACK_SUBTYPES(plastic,        "plastic",                       solid/organic/pl
 STACK_SUBTYPES(aluminium,      "aluminium",                     solid/metal/aluminium,       strut,            null)
 STACK_SUBTYPES(titanium,       "titanium",                      solid/metal/titanium,        strut,            null)
 
+STACK_SUBTYPES(steel,          "steel",                         solid/metal/steel,           rods,             null)
+STACK_SUBTYPES(plastic,        "plastic",                       solid/organic/plastic,       rods,             null)
+STACK_SUBTYPES(aluminium,      "aluminium",                     solid/metal/aluminium,       rods,             null)
+STACK_SUBTYPES(titanium,       "titanium",                      solid/metal/titanium,        rods,             null)
+
 STACK_SUBTYPES(cotton,         "cotton",                        solid/organic/cloth,         thread,           null)
 STACK_SUBTYPES(dried_gut,      "dried gut",                     solid/organic/leather/gut,   thread,           null)
 

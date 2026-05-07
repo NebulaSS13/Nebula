@@ -154,24 +154,3 @@
 	material = /decl/material/solid/organic/plantmatter/grass/dry
 	drying_wetness = null
 	dried_type = null
-
-/obj/item/stack/material/strut
-	name = "struts"
-	singular_name = "strut"
-	plural_name = "struts"
-	icon_state = "sheet-strut"
-	plural_icon_state = "sheet-strut-mult"
-	max_icon_state = "sheet-strut-max"
-	stack_merge_type = /obj/item/stack/material/strut
-	crafting_stack_type = /obj/item/stack/material/strut
-
-/obj/item/stack/material/strut/cyborg
-	name = "metal strut synthesizer"
-	desc = "A device that makes metal strut."
-	gender = NEUTER
-	matter = null
-	uses_charge = 1
-	charge_costs = list(500)
-	material = /decl/material/solid/metal/steel
-	max_health = ITEM_HEALTH_NO_DAMAGE
-	is_spawnable_type = FALSE

@@ -22,7 +22,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	parts_amount = 2
-	parts_type = /obj/item/stack/material/strut
+	parts_type = /obj/item/stack/material/rods
 	user_comfort = 1
 	obj_flags = OBJ_FLAG_SUPPORT_MOB
 	var/base_icon = "bed"

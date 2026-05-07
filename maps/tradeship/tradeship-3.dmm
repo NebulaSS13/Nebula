@@ -870,7 +870,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/ship/trade/comms)
 "yM" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/floor/plating,
 /area/ship/trade/bridge_unused)

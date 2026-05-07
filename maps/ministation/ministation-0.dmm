@@ -422,7 +422,7 @@
 /turf/floor/tiled,
 /area/ministation/cargo)
 "cd" = (
-/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/rods/mapped/steel/fifty,
 /turf/floor/plating/airless,
 /area/space)
 "ce" = (
@@ -4268,8 +4268,8 @@
 /obj/structure/closet/crate,
 /obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
-/obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/rods/mapped/steel/fifty,
+/obj/item/stack/material/rods/mapped/steel/fifty,
 /obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
@@ -4755,7 +4755,7 @@
 /turf/floor/tiled/monotile,
 /area/ministation/atmospherics)
 "va" = (
-/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/rods/mapped/steel/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
@@ -8636,7 +8636,7 @@
 /obj/structure/table,
 /obj/item/folder/yellow,
 /obj/item/clothing/head/earmuffs,
-/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/rods/mapped/steel/fifty,
 /obj/item/cash/scavbucks,
 /turf/floor/tiled,
 /area/ministation/engine)

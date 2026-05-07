@@ -3283,7 +3283,7 @@
 /obj/item/stack/tape_roll/duct_tape,
 /obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
-/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/rods/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/panel/mapped/plastic/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,

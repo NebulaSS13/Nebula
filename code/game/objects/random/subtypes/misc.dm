@@ -211,8 +211,8 @@
 		/obj/item/stack/material/plank/mapped/wood/fifty,
 		/obj/item/stack/material/cardstock/mapped/cardboard/fifty,
 		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
-		/obj/item/stack/material/rods/ten,
-		/obj/item/stack/material/rods/fifty
+		/obj/item/stack/material/rods/mapped/steel/ten,
+		/obj/item/stack/material/rods/mapped/steel/fifty
 	)
 	return spawnable_choices
 

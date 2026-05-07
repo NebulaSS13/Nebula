@@ -12749,9 +12749,7 @@
 /obj/item/stack/material/pane/mapped/rglass{
 	amount = 50
 	},
-/obj/item/stack/material/rods{
-	amount = 50
-	},
+/obj/item/stack/material/rods/mapped/steel/fifty,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/tiled/steel_grid,
 /area/exodus/ai_monitored/storage/eva)
@@ -31610,9 +31608,7 @@
 /turf/floor/tiled/white,
 /area/exodus/research/lab)
 "boW" = (
-/obj/item/stack/material/rods{
-	amount = 50
-	},
+/obj/item/stack/material/rods/mapped/steel/fifty,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/item/cell/high,
@@ -58793,7 +58789,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/starboard)
 "ctg" = (
-/obj/item/stack/material/rods{
+/obj/item/stack/material/rods/mapped/steel{
 	amount = 6
 	},
 /turf/space,
@@ -58839,9 +58835,7 @@
 /turf/floor/plating,
 /area/exodus/engineering/engine_room)
 "cts" = (
-/obj/item/stack/material/rods{
-	amount = 10
-	},
+/obj/item/stack/material/rods/mapped/steel/ten,
 /obj/structure/lattice,
 /turf/space,
 /area/space)
@@ -62056,9 +62050,7 @@
 /turf/floor/plating,
 /area/exodus/engineering/engine_room)
 "cHK" = (
-/obj/item/stack/material/rods{
-	amount = 10
-	},
+/obj/item/stack/material/rods/mapped/steel/ten,
 /turf/space,
 /area/space)
 "cHL" = (
