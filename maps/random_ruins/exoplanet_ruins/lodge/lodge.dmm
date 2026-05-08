@@ -185,7 +185,7 @@
 /turf/floor/wood,
 /area/template_noop)
 "H" = (
-/obj/structure/door/wood,
+/obj/structure/door/oak,
 /turf/floor/wood,
 /area/template_noop)
 "I" = (

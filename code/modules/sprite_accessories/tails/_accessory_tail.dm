@@ -35,8 +35,6 @@
 	color_blend          = ICON_MULTIPLY
 
 	var/icon_animation_states
-	var/hair_state
-	var/hair_blend = ICON_ADD
 
 /decl/sprite_accessory/tail/none
 	name                        = "Default Tail"

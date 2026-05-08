@@ -121,7 +121,8 @@
 	// we don't care about volume because turfs always create a maximum volume holder on reagent add.
 	FINALIZE_REAGENTS_SERDE(reagents)
 
-	AMBIENCE_QUEUE_TURF(src)
+	if(SSambience.initialized) // if not initialized, we'll loop over all turfs anyway
+		AMBIENCE_QUEUE_TURF(src)
 
 	if (opacity)
 		has_opaque_atom = TRUE
@@ -636,7 +637,8 @@
 	state_was_modified()
 	is_outside = new_outside
 	update_external_atmos_participation()
-	AMBIENCE_QUEUE_TURF(src)
+	if(SSambience.initialized) // if not initialized, we'll loop over all turfs anyway
+		AMBIENCE_QUEUE_TURF(src)
 
 	if(!skip_weather_update)
 		update_weather()

@@ -1,12 +1,12 @@
 /decl/strata/igneous
 	name = "igneous rock"
 	base_materials = list(/decl/material/solid/stone/basalt)
-	default_strata_candidate = TRUE
+	default_strata_candidate = STRATA_RANDOM_ANY
 	ores_rich = list(
 		/decl/material/solid/gemstone/diamond,
 		/decl/material/solid/quartz,
 		/decl/material/solid/graphite,
-		/decl/material/solid/densegraphite,	
+		/decl/material/solid/densegraphite,
 		/decl/material/solid/metal/gold,
 		/decl/material/solid/quartz,
 		/decl/material/solid/metal/platinum,

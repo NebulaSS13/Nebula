@@ -30,15 +30,6 @@
 	check_failure()
 	return QDELING(src) // return true if deleted, false otherwise
 
-/obj/machinery/shield/malfai
-	name = "emergency forcefield"
-	desc = "A weak forcefield which seems to be projected by the emergency atmosphere containment field."
-	max_health = 100 // Half health, it's not suposed to resist much.
-
-/obj/machinery/shield/malfai/Process()
-	current_health -= 0.5 // Slowly lose integrity over time
-	check_failure()
-
 /obj/machinery/shield/proc/check_failure()
 	if (current_health <= 0)
 		visible_message(SPAN_NOTICE("\The [src] dissipates!"))

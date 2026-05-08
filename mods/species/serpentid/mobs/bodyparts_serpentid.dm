@@ -43,7 +43,7 @@
 /obj/item/organ/internal/eyes/insectoid/serpentid/proc/remove_shield()
 	owner.clear_fullscreen("eyeshield")
 
-/obj/item/organ/internal/eyes/serpentid/Initialize()
+/obj/item/organ/internal/eyes/insectoid/serpentid/Initialize()
 	. = ..()
 	if(owner)
 		color = owner.get_eye_colour()

@@ -4,16 +4,6 @@
 /obj/effect/overlay/singularity_pull()
 	return
 
-/obj/effect/overlay/beam//Not actually a projectile, just an effect.
-	name="beam"
-	icon='icons/effects/beam.dmi'
-	icon_state= "b_beam"
-	var/tmp/atom/BeamSource
-
-/obj/effect/overlay/beam/Initialize()
-	. = ..()
-	QDEL_IN(src, 1 SECOND)
-
 /obj/effect/overlay/palmtree_r
 	name = "Palm tree"
 	icon = 'icons/misc/beach2.dmi'

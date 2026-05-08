@@ -126,8 +126,7 @@
 				if(!part)
 					image_key += "0"
 					continue
-				if(part)
-					image_key += "[part.bodytype.get_icon_cache_uid(part.owner)]"
+				image_key += "[part.bodytype.get_icon_cache_uid(part.owner)]"
 				if(!BP_IS_PROSTHETIC(part) && (part.status & ORGAN_DEAD))
 					image_key += "2"
 				else

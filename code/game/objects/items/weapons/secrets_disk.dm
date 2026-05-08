@@ -18,6 +18,7 @@
 		"gamma", "delta", "epsilon", "zeta", "theta", "lambda", "omicron", "sigma", "tau",
 		"upsilon", "omega", "echelon", "prism", "calypso", "bernoulli", "harmony", "nyx", "fresnel"
 	)
+	return codenames
 
 /obj/item/disk/secret_project/proc/get_secret_project_types()
 	var/static/list/types = list(
@@ -41,6 +42,7 @@
 		"that is extremely powerful", "which is highly efficient", "which is incredibly compact", "created by aliens",
 		"that runs off of an exotic form of matter", "that runs off of hydrogen gas", "that just looks really cool"
 	)
+	return descriptors
 
 /obj/item/disk/secret_project/Initialize()
 	. = ..()

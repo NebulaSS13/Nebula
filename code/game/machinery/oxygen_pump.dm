@@ -195,22 +195,17 @@
 		data["releasePressure"] = 0
 		data["defaultReleasePressure"] = 0
 		data["maxReleasePressure"] = 0
-		data["maskConnected"] = 0
-		data["tankInstalled"] = 0
+		data["tankInstalled"] = FALSE
 	// this is the data which will be sent to the ui
-	if(tank)
-		data["tankPressure"] = round(tank.air_contents.return_pressure() ? tank.air_contents.return_pressure() : 0)
+	else
+		var/tank_pressure = tank.air_contents.return_pressure()
+		data["tankPressure"] = round(tank_pressure ? tank_pressure : 0)
 		data["releasePressure"] = round(tank.distribute_pressure ? tank.distribute_pressure : 0)
 		data["defaultReleasePressure"] = round(TANK_DEFAULT_RELEASE_PRESSURE)
 		data["maxReleasePressure"] = round(TANK_MAX_RELEASE_PRESSURE)
-		data["maskConnected"] = 0
-		data["tankInstalled"] = 1
+		data["tankInstalled"] = TRUE
 
-	if(!breather)
-		data["maskConnected"] = 0
-	if(breather)
-		data["maskConnected"] = 1
-
+	data["maskConnected"] = !!breather
 
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

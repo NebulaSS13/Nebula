@@ -208,10 +208,7 @@
 		data["secondaryOutletPressure"] = circ2.air2.return_pressure()
 		data["secondaryOutletTemperature"] = circ2.air2.temperature
 
-	if(circ1 && circ2)
-		data["circConnected"] = 1
-	else
-		data["circConnected"] = 0
+	data["circConnected"] = !!(circ1 && circ2)
 
 
 	// update the ui if it exists, returns null if no ui is passed/found

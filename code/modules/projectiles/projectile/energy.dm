@@ -96,9 +96,6 @@
 	eyeblur = 1//Some feedback that you've been hit
 	step_delay = 0.7
 
-/obj/item/projectile/energy/electrode/green
-	icon_state = "spark_green"
-
 /obj/item/projectile/energy/electrode/stunshot
 	agony = 80
 	damage = 3
@@ -132,13 +129,6 @@
 	name = "largebolt"
 	damage = 20
 	agony = 60
-
-/obj/item/projectile/energy/neurotoxin
-	name = "neuro"
-	icon_state = "neurotoxin"
-	damage = 5
-	atom_damage_type = TOX
-	weaken = 5
 
 /obj/item/projectile/energy/radiation
 	name = "radiation bolt"

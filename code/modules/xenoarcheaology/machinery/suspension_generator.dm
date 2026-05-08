@@ -1,6 +1,6 @@
 /obj/machinery/suspension_gen
 	name = "suspension field generator"
-	desc = "Multi-phase mobile suspension field generator MK II \"Steadfast\". It has stubby legs bolted up against it's body for stabilising."
+	desc = "Multi-phase mobile suspension field generator MK II \"Steadfast\". It has stubby legs bolted up against its body for stabilising."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "suspension2"
 	density = TRUE
