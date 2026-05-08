@@ -8,9 +8,6 @@
 	impact_effect_type = /obj/effect/temp_visual/impact_effect/blue_laser
 	hitsound_non_mob = 'sound/weapons/searwall.ogg'
 
-/obj/item/projectile/forcebolt/strong
-	name = "force bolt"
-
 /obj/item/projectile/forcebolt/on_hit(var/atom/movable/target, var/blocked = 0)
 	if(istype(target) && isturf(target.loc))
 		var/throwdir = get_dir(firer,target)

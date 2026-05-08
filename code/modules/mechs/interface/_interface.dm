@@ -20,9 +20,6 @@
 	if(client)
 		client.screen |= hud_elements
 
-/obj/screen/zone_selector/exosuit
-	requires_ui_style = FALSE
-
 /mob/living/exosuit/initialize_hud()
 	if(!LAZYLEN(hud_elements))
 		var/i = 1

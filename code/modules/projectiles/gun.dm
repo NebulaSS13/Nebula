@@ -579,7 +579,7 @@
 			playsound(user, shot_sound, 10, 1)
 		else
 			playsound(user, shot_sound, 50, 1)
-		if(istype(in_chamber, /obj/item/projectile/beam/lastertag))
+		if(istype(in_chamber, /obj/item/projectile/beam/lasertag))
 			user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 			mouthshoot = 0
 			return

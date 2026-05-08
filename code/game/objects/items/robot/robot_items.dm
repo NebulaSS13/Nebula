@@ -3,14 +3,6 @@
 	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /**********************************************************************
-						Cyborg Spec Items
-***********************************************************************/
-/obj/item/borg/overdrive
-	name = "overdrive"
-	icon = 'icons/obj/signs/warnings.dmi'
-	icon_state = "shock-large"
-
-/**********************************************************************
 						HUD/SIGHT things
 ***********************************************************************/
 /obj/item/borg/sight
