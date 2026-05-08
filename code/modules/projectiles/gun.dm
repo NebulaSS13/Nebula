@@ -78,7 +78,6 @@
 	var/selector_sound = 'sound/weapons/guns/selector.ogg'
 
 	//aiming system stuff
-	var/tmp/list/mob/living/aim_targets //List of who yer targeting.
 	var/tmp/last_safety_check = -INFINITY
 	var/safety_state = 1
 	var/has_safety = TRUE
@@ -501,7 +500,7 @@
 			disp_mod += 0.5
 
 		//accuracy bonus from aiming
-		if (aim_targets && (target in aim_targets))
+		if (user.aiming?.aiming_at == target)
 			//If you aim at someone beforehead, it'll hit more often.
 			//Kinda balanced by fact you need like 2 seconds to aim
 			//As opposed to no-delay pew pew
@@ -580,7 +579,7 @@
 			playsound(user, shot_sound, 10, 1)
 		else
 			playsound(user, shot_sound, 50, 1)
-		if(istype(in_chamber, /obj/item/projectile/beam/lastertag))
+		if(istype(in_chamber, /obj/item/projectile/beam/lasertag))
 			user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 			mouthshoot = 0
 			return

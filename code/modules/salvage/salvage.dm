@@ -14,7 +14,8 @@
 	if(!ispath(salvaged_type, /obj/item))
 		return INITIALIZE_HINT_QDEL
 	// TODO: grab partial initial matter from the salvage type.
-	icon_rotation = rand(-45, 45)
+	if(do_rotation)
+		icon_rotation = rand(-45, 45)
 	name = "[pick("busted", "broken", "shattered", "scrapped")] [salvaged_type::name]"
 	w_class = salvaged_type::w_class
 

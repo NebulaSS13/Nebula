@@ -3,15 +3,23 @@
 	var/list/base_materials
 	var/list/ores_sparse
 	var/list/ores_rich
-	var/default_strata_candidate = FALSE
+	var/const/STRATA_RANDOM_NEVER = 0
+	var/const/STRATA_RANDOM_PLANET = BITFLAG(0)
+	var/const/STRATA_RANDOM_LEVEL  = BITFLAG(1)
+	var/const/STRATA_RANDOM_ANY    = STRATA_RANDOM_PLANET | STRATA_RANDOM_LEVEL
+	var/default_strata_candidate = STRATA_RANDOM_NEVER
 	var/maximum_temperature = INFINITY
 
 /decl/strata/proc/is_valid_exoplanet_strata(var/datum/planetoid_data/planet)
+	if(!(default_strata_candidate & STRATA_RANDOM_PLANET))
+		return FALSE
 	if(istype(planet.atmosphere))
 		return planet.atmosphere.temperature <= maximum_temperature
 	return TCMB <= maximum_temperature
 
 /decl/strata/proc/is_valid_level_stratum(datum/level_data/level_data)
+	if(!(default_strata_candidate & STRATA_RANDOM_LEVEL))
+		return FALSE
 	var/temperature_to_check = istype(level_data.exterior_atmosphere) ? level_data.exterior_atmosphere.temperature : level_data.exterior_atmos_temp
 	return (temperature_to_check || TCMB) <= maximum_temperature
 

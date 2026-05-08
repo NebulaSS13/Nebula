@@ -60,9 +60,10 @@
 	if(isrobot(loc) || istype(loc, /obj/item/rig_module))
 		return loc.get_cell()
 
-/obj/item/gun/magnetic/railgun/flechette/ascent/show_ammo(var/mob/user)
+/obj/item/gun/magnetic/railgun/flechette/ascent/get_ammo_string(mob/user, distance)
 	var/obj/item/cell/cell = get_cell()
-	to_chat(user, "<span class='notice'>There are [cell ? floor(cell.charge/charge_per_shot) : 0] shot\s remaining.</span>")
+	var/shots_left = cell ? floor(cell.charge/charge_per_shot) : 0
+	return SPAN_NOTICE("There [shots_left == 1 ? "is" : "are"] [shots_left] shot\s remaining.")
 
 /obj/item/gun/magnetic/railgun/flechette/ascent/check_ammo()
 	var/obj/item/cell/cell = get_cell()

@@ -28,7 +28,6 @@
 
 	var/active = FALSE
 	var/active_parry_chance = 15
-	var/active_throwforce =   20
 	var/active_armour_pen =   50
 	var/active_edge =         1
 	var/active_sharp =        1
@@ -36,6 +35,7 @@
 	var/active_hitsound =     'sound/weapons/blade1.ogg'
 	var/active_sound =        'sound/weapons/saberon.ogg'
 	VAR_PROTECTED/_active_base_attack_force = 30
+	VAR_PROTECTED/_active_thrown_force_multiplier = 2/3
 
 	var/inactive_sound =      'sound/weapons/saberoff.ogg'
 
@@ -93,9 +93,10 @@
 		obj_flags |= OBJ_FLAG_NO_STORAGE
 		set_sharp(active_sharp)
 		set_edge(active_edge)
-		base_parry_chance = active_parry_chance
-		armor_penetration = active_armour_pen
-		hitsound =          active_hitsound
+		base_parry_chance =        active_parry_chance
+		armor_penetration =        active_armour_pen
+		hitsound =                 active_hitsound
+		_thrown_force_multiplier = _active_thrown_force_multiplier
 
 		w_class = max(w_class, ITEM_SIZE_NORMAL)
 		slot_flags &= ~SLOT_POCKET
@@ -107,9 +108,10 @@
 		obj_flags &= ~OBJ_FLAG_NO_STORAGE
 		set_sharp(initial(sharp))
 		set_edge(initial(edge))
-		base_parry_chance = initial(base_parry_chance)
-		armor_penetration = initial(armor_penetration)
-		hitsound =          initial(hitsound)
+		base_parry_chance =        initial(base_parry_chance)
+		armor_penetration =        initial(armor_penetration)
+		hitsound =                 initial(hitsound)
+		_thrown_force_multiplier = initial(_thrown_force_multiplier)
 
 		w_class = initial(w_class)
 		slot_flags = initial(slot_flags)

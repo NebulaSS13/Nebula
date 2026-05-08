@@ -92,14 +92,6 @@
 	..()
 	shatter()
 
-/obj/item/light/bulb/fire
-	name = "fire bulb"
-	desc = "A replacement fire bulb."
-	icon_state = "fbulb"
-	base_state = "fbulb"
-	item_state = "egg4"
-	material = /decl/material/solid/glass
-
 // update the icon state and description of the light
 /obj/item/light/on_update_icon()
 	. = ..()

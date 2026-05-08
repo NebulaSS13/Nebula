@@ -87,8 +87,6 @@
 			removed = inhale_met
 	if(!removed)
 		removed = metabolism
-	if(!removed)
-		removed = metabolism
 	removed = M.get_adjusted_metabolism(removed)
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size

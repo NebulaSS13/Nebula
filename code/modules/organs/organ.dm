@@ -701,6 +701,6 @@ var/global/list/ailment_reference_cache = list()
 	appearance_bodytype = new_bodytype
 	return TRUE
 
-/obj/item/organ/proc/get_organ_appearance_bodytype()
+/obj/item/organ/proc/get_organ_appearance_bodytype() as /decl/bodytype
 	RETURN_TYPE(/decl/bodytype)
 	return appearance_bodytype || bodytype

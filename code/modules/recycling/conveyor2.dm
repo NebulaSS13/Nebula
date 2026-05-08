@@ -18,9 +18,6 @@ var/global/list/all_conveyor_switches = list()
 	var/movedir        // the actual direction to move stuff in
 	var/list/affecting // the list of all items that will be moved this ptick
 
-/obj/machinery/conveyor/centcom_auto
-	id_tag = "round_end_belt"
-
 	// create a conveyor
 /obj/machinery/conveyor/Initialize(mapload, newdir, on = 0)
 	. = ..(mapload)

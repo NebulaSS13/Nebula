@@ -25,7 +25,8 @@
 	atom_flags |= ATOM_FLAG_INITIALIZED
 	_earliest_type ||= type
 
-	AMBIENCE_QUEUE_TURF(src)
+	if(SSambience.initialized) // if not initialized, we'll loop over all turfs anyway
+		AMBIENCE_QUEUE_TURF(src)
 
 	//We might be an edge
 	if(y == world.maxy || forced_dirs & NORTH)

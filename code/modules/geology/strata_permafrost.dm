@@ -18,4 +18,5 @@
 		/decl/material/solid/ice/hydrate/krypton,
 		/decl/material/solid/ice/hydrate/xenon,
 	)
+	default_strata_candidate = STRATA_RANDOM_PLANET
 	maximum_temperature = T0C

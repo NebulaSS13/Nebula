@@ -6,6 +6,7 @@
 *.lk
 *.backup
 *.before
+codex/
 data/
 dmdoc/
 cfg/

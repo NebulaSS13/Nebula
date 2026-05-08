@@ -4,7 +4,6 @@
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	material = /decl/material/solid/metal/steel
 	var/frame_type = /obj/machinery/constructable_frame/machine_frame
-	var/work_skill = SKILL_CONSTRUCTION
 
 /obj/structure/salvage/proc/get_salvageable_components()
 	return

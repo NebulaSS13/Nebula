@@ -100,10 +100,6 @@ var/global/list/all_gps_units = list()
 		if(holder?.client && _compass)
 			holder.client.screen -= _compass
 
-/obj/item/gps/equipped_robot()
-	. = ..()
-	update_holder()
-
 /obj/item/gps/equipped()
 	. = ..()
 	update_holder()

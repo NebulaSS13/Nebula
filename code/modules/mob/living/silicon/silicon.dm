@@ -271,7 +271,7 @@
 	if(!(alarm.alarm_z() in SSmapping.get_connected_levels(my_z)))
 		return // Didn't actually hear it as far as we're concerned.
 	if(!next_alarm_notice)
-		next_alarm_notice = world.time + SecondsToTicks(10)
+		next_alarm_notice = world.time + (10 SECONDS)
 
 	var/list/alarms = queued_alarms[alarm_handler]
 	if(was_raised)

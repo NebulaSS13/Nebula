@@ -306,7 +306,7 @@
 /turf/unsimulated/floor/white,
 /area/map_template/ninja_dojo/dojo)
 "bh" = (
-/obj/structure/door/wood,
+/obj/structure/door/oak,
 /turf/unsimulated/floor/wood,
 /area/map_template/ninja_dojo/dojo)
 "bi" = (

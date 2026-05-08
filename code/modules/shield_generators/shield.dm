@@ -299,10 +299,6 @@
 /obj/item/projectile/beam/can_pass_shield(var/obj/machinery/shield_generator/gen)
 	return !gen.check_flag(MODEFLAG_PHOTONIC)
 
-// Beams
-/obj/item/projectile/ship_munition/energy/can_pass_shield(var/obj/machinery/shield_generator/gen)
-	return !gen.check_flag(MODEFLAG_PHOTONIC)
-
 // Shield on-impact logic here. This is called only if the object is actually blocked by the field (can_pass_shield applies first)
 /atom/movable/proc/shield_impact(var/obj/effect/shield/S)
 	return

@@ -22,22 +22,6 @@
 			return
 		log_and_message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
 
-/obj/effect/dead_plant
-	anchored = TRUE
-	opacity = FALSE
-	density = FALSE
-	color = DEAD_PLANT_COLOUR
-
-/obj/effect/dead_plant/attack_hand()
-	SHOULD_CALL_PARENT(FALSE)
-	qdel(src)
-	return TRUE
-
-/obj/effect/dead_plant/attackby()
-	..()
-	qdel(src)
-	return TRUE // if we're deleted we can't do any further interactions
-
 /obj/effect/vine
 	name = "vine"
 	anchored = TRUE

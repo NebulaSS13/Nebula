@@ -539,11 +539,8 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		var/effect = max(0, min(200, power * config_hallucination_power * sqrt( 1 / max(1,get_dist(subject, src)))) )
 		subject.adjust_hallucination(effect, 0.25 * effect)
 
-	if(power)
-		var/size_calc = max((power / 200), 1) //this needs to be a decently small value, but not TOO small.
-		animate_filter("outline", list(size = size_calc))
-	if(!power)
-		animate_filter("outline", list(size = 0))
+	var/size_calc = power ? max(power / 200, 1) : 0 //this needs to be a decently small value if we have power, but not TOO small.
+	animate_filter("outline", list(size = size_calc))
 
 	color = color_matrix_contrast(Interpolate(1, 5, clamp( (damage - emergency_point) / (explosion_point - emergency_point), 0, 1)))
 

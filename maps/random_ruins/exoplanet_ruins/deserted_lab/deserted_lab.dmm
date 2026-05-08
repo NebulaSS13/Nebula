@@ -120,7 +120,7 @@
 /turf/floor/tiled/white,
 /area/template_noop)
 "az" = (
-/obj/structure/door/wood,
+/obj/structure/door/oak,
 /turf/floor/carpet/blue2,
 /area/template_noop)
 "aA" = (

@@ -47,9 +47,9 @@
 
 /obj/item/projectile/bullet/attack_mob(var/mob/target_mob, var/distance, var/miss_modifier)
 	if(penetrating > 0 && damage > 20 && prob(damage))
-		mob_passthrough_check = 1
+		mob_passthrough_check = TRUE
 	else
-		mob_passthrough_check = 0
+		mob_passthrough_check = FALSE
 	. = ..()
 	if(. == 1 && isliving(target_mob))
 		var/mob/living/squish = target_mob
