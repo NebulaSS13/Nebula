@@ -16,3 +16,9 @@
 /decl/sprite_accessory_metadata/color/alt
 	name = "Secondary Color"
 	uid = "sa_metadata_color_alt"
+	additional_icon_state = "_inner"
+
+/decl/sprite_accessory_metadata/color/extra
+	name = "Tertiary Color"
+	uid = "sa_metadata_color_extra"
+	additional_icon_state = "_extra"

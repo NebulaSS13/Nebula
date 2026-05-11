@@ -77,6 +77,11 @@
 	var/is_whitelisted
 	/// A set of trait levels to check for.
 	var/list/required_traits
+	/// A list of metadata types to attempt to apply after initial overlay gen.
+	var/list/additional_states = list(
+		(SAM_COLOR_INNER),
+		(SAM_COLOR_EXTRA)
+	)
 
 /decl/sprite_accessory/Initialize()
 	. = ..()
@@ -205,9 +210,6 @@
 
 		accessory_icon = icon(use_icon, use_state)
 
-		// Inner overlay and color.
-		var/inner_color = LAZYACCESS(metadata, SAM_COLOR_INNER)
-
 		// Base icon and color.
 		if(!isnull(color_blend))
 			var/decl/sprite_accessory_metadata/gradient/gradient_metadata = GET_DECL(SAM_GRADIENT)
@@ -218,21 +220,28 @@
 				gradient_icon = null
 			if(gradient_icon)
 				gradient_icon.Blend(accessory_icon, ICON_AND)
-				if(!isnull(inner_color))
-					gradient_icon.Blend(inner_color, color_blend)
+				var/gradient_color = LAZYACCESS(metadata, SAM_COLOR_INNER)
+				if(!isnull(gradient_color))
+					gradient_icon.Blend(gradient_color, color_blend)
 			var/color = LAZYACCESS(metadata, SAM_COLOR)
 			if(!isnull(color))
 				accessory_icon.Blend(color, color_blend)
 			if(gradient_icon)
 				accessory_icon.Blend(gradient_icon, ICON_OVERLAY)
 
-		if(!isnull(inner_color))
-			var/inner_state = "[use_state]_inner"
-			if(check_state_in_icon(inner_state, use_icon))
-				var/icon/inner_icon = icon(use_icon, inner_state)
-				if(!isnull(color_blend))
-					inner_icon.Blend(inner_color, color_blend)
-				accessory_icon.Blend(inner_icon, ICON_OVERLAY)
+		// Additional overlays based on metadata (inner and extra)
+		for(var/extra_metadata_type in additional_states)
+			var/decl/sprite_accessory_metadata/extra_metadata = RESOLVE_TO_DECL(extra_metadata_type)
+			if(!istype(extra_metadata) || !extra_metadata.additional_icon_state)
+				continue
+			var/extra_color = LAZYACCESS(metadata, SAM_COLOR_EXTRA)
+			if(!isnull(extra_color))
+				var/extra_state = "[use_state][extra_metadata.additional_icon_state]"
+				if(check_state_in_icon(extra_state, use_icon))
+					var/icon/extra_icon = icon(use_icon, extra_state)
+					if(!isnull(color_blend))
+						extra_icon.Blend(extra_color, color_blend)
+					accessory_icon.Blend(extra_icon, ICON_OVERLAY)
 
 		// Clip the icon if needed.
 		if(mask_to_bodypart)
