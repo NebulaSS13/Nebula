@@ -251,3 +251,11 @@
 /decl/stack_recipe/planks/furniture/target_stake
 	result_type            = /obj/structure/target_stake
 	difficulty             = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/planks/furniture/fence
+	result_type            = /obj/structure/fence/plank
+	difficulty             = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/planks/furniture/fence_door
+	result_type            = /obj/structure/fence/door/plank
+	difficulty             = MAT_VALUE_NORMAL_DIY
