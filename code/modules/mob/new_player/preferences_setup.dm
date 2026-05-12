@@ -109,11 +109,12 @@
 		mannequin.update_icon()
 		mannequin.compile_overlays()
 
-/datum/preferences/proc/update_preview_icon()
+/datum/preferences/proc/update_preview_icon(redress_mob = TRUE)
 	var/mob/living/human/dummy/mannequin/mannequin = get_mannequin(client?.ckey)
 	if(mannequin)
-		mannequin.delete_inventory(TRUE)
-		dress_preview_mob(mannequin)
+		if(redress_mob)
+			mannequin.delete_inventory(TRUE)
+			dress_preview_mob(mannequin)
 		update_character_previews(mannequin)
 
 /datum/preferences/proc/get_random_name()

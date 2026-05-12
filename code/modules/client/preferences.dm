@@ -309,6 +309,7 @@ var/global/list/time_prefs_fixed = list()
 	if(href_list["save"])
 		save_preferences()
 		save_character()
+		return TRUE // don't regenerate our preview, that's wasteful
 	else if(href_list["reload"])
 		load_preferences()
 		load_character()
@@ -325,6 +326,8 @@ var/global/list/time_prefs_fixed = list()
 		if(isnewplayer(client.mob))
 			var/mob/new_player/M = client.mob
 			M.show_lobby_menu()
+		update_setup_window(usr)
+		return TRUE // don't do a duplicate icon update
 
 	else if(href_list["resetslot"])
 		if(real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
@@ -339,12 +342,15 @@ var/global/list/time_prefs_fixed = list()
 		equip_preview_mob ^= text2num(href_list["toggle_preview_value"])
 	else if(href_list["cycle_bg"])
 		bgstate = next_in_list(bgstate, global.using_map.char_preview_bgstate_options)
+		update_preview_icon(redress_mob = FALSE)
+		return TRUE
 	else
 		return FALSE
 
+	// this should get hit for reset, reload, load, slot change, and equipment preview toggle
 	update_preview_icon()
 	update_setup_window(usr)
-	return 1
+	return TRUE
 
 /datum/category_item/player_setup_item/records/character_info/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
 	if(is_preview_copy)
