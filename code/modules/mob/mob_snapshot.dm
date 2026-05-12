@@ -16,6 +16,8 @@
 	var/list/genetic_conditions
 	/// Please find a better way to do this. This is done to add tails if we have the tail accessory selected...
 	var/list/extra_limbs
+	/// A list of trait levels to add. Should contain only 'heritable' traits... whatever that means.
+	var/list/heritable_traits
 
 /datum/mob_snapshot/New(mob/living/donor, genetic_info_only = FALSE)
 
@@ -73,6 +75,10 @@
 			target.set_species(root_species.uid)
 	else if(istype(root_bodytype) && target.get_bodytype() != root_bodytype)
 		target.set_bodytype(root_bodytype)
+
+	// we try to set traits as soon as possible after species set
+	for(var/target_trait in heritable_traits)
+		target.set_trait(target_trait, heritable_traits[target_trait])
 
 	target.set_fingerprint(fingerprint)
 	target.set_unique_enzymes(unique_enzymes)
