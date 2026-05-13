@@ -894,20 +894,10 @@
 		if(!defer_language_update)
 			update_languages()
 
-/mob/living/proc/get_background_datum_by_flag(background_flag)
-	var/list/all_categories = global.using_map.get_background_categories()
-	for(var/cat_type in all_categories)
-		var/decl/background_category/background_cat = all_categories[cat_type]
-		if(background_cat.background_flags && (background_cat.background_flags & background_flag))
-			return get_background_datum(cat_type)
-
-/mob/living/proc/get_background_datum(cat_type)
-	return null
-
 /mob/living/human/get_background_datum(cat_type)
 	. = LAZYACCESS(background_info, cat_type)
 	if(!istype(., /decl/background_detail))
-		. = global.using_map.default_background_info[cat_type]
+		. = ..()
 		PRINT_STACK_TRACE("get_background_datum() tried to return a non-instance value for background category '[cat_type]' - full background list: [json_encode(background_info)] default species culture list: [json_encode(global.using_map.default_background_info)]")
 
 /mob/living/human/get_digestion_product()
