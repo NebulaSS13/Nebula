@@ -66,7 +66,7 @@
 	var/area/A = new
 	A.SetName(area_name)
 	for(var/turf/T in selected_turfs)
-		ChangeArea(T, A)
+		T.ChangeArea(A)
 	finalize_area(A)
 	remove_selection() // Reset the selection for clarity.
 
@@ -90,7 +90,7 @@
 	var/datum/level_data/our_level_data = SSmapping.levels_by_z[our_turf.z]
 	var/area/base_area = our_level_data.get_base_area_instance()
 	for(var/turf/T in A.contents)
-		ChangeArea(T, base_area)
+		T.ChangeArea(base_area)
 	if(!(locate(/turf) in A))
 		qdel(A) // uh oh, is this safe?
 
@@ -316,7 +316,7 @@
 	var/datum/level_data/our_level_data = SSmapping.levels_by_z[our_turf.z]
 	var/area/base_area = our_level_data.get_base_area_instance()
 	for(var/turf/T in A.contents)
-		ChangeArea(T, base_area)
+		T.ChangeArea(base_area)
 	if(!(locate(/turf) in A))
 		qdel(A) // uh oh, is this safe?
 

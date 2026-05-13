@@ -175,7 +175,8 @@ var/global/list/map_count = list()
 	. = (newpath && !istype(T, newpath)) ? T.ChangeTurf(newpath) : T
 	get_additional_spawns(map[current_cell], ., get_spawn_dir(x, y))
 	if(use_area)
-		ChangeArea(., use_area)
+		T = .
+		T.ChangeArea(use_area)
 
 /datum/random_map/proc/get_spawn_dir()
 	return 0

@@ -232,7 +232,7 @@
 		if(change_turf)
 			T = T.ChangeTurf(picked_turf)
 		if(change_area)
-			ChangeArea(T, A)
+			T.ChangeArea(A)
 
 ///Prepare level for being used. Setup borders, lateral z connections, ambient lighting, atmosphere, etc..
 /datum/level_data/proc/setup_level_data(var/skip_gen = FALSE)
