@@ -165,9 +165,13 @@
 /obj/machinery/atmospherics/get_color()
 	return pipe_color
 
-/obj/machinery/atmospherics/set_color(new_color)
-	pipe_color = new_color
-	update_icon()
+/obj/machinery/atmospherics/set_color(new_color, skip_update)
+	if(pipe_color != new_color)
+		pipe_color = new_color
+		if(!skip_update)
+			update_icon()
+		return TRUE
+	return FALSE
 
 /obj/machinery/atmospherics/pipe/color_cache_name(var/obj/machinery/atmospherics/node)
 	if(istype(src, /obj/machinery/atmospherics/unary/tank))
@@ -183,11 +187,12 @@
 	else
 		return pipe_color
 
-/obj/machinery/atmospherics/pipe/set_color(new_color)
-	..()
-	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
-	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
-		node.update_icon()
+/obj/machinery/atmospherics/pipe/set_color(new_color, skip_update)
+	. = ..()
+	if(. && !skip_update)
+		//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+			node.update_icon()
 
 /obj/machinery/atmospherics/pipe/proc/try_leak()
 	var/missing = FALSE

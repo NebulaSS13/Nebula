@@ -155,13 +155,14 @@
 		return material.color
 	return initial(color)
 
-/obj/item/set_color(new_color)
+/obj/item/set_color(new_color, skip_update)
 	if(new_color == COLOR_WHITE)
 		new_color = null
 	if(paint_color != new_color)
 		paint_color = new_color
 		. = TRUE
-		refresh_color()
+		if(!skip_update)
+			refresh_color()
 
 /obj/item/refresh_color()
 	if(paint_color)

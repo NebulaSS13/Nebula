@@ -18,12 +18,12 @@
 	var/is_reinforced = 0
 	var/set_name
 
-/obj/structure/heavy_vehicle_frame/set_color(new_colour)
+/obj/structure/heavy_vehicle_frame/set_color(new_color, skip_update)
 	var/painted_component = FALSE
 	for(var/obj/item/mech_component/comp in list(body, arms, legs, head))
-		if(comp.set_color(new_colour))
+		if(comp.set_color(new_color, skip_update))
 			painted_component = TRUE
-	if(painted_component)
+	if(!skip_update && painted_component)
 		queue_icon_update()
 
 /obj/structure/heavy_vehicle_frame/Destroy()

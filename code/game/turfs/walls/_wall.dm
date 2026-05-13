@@ -301,9 +301,13 @@ var/global/list/wall_fullblend_objects = list(
 				addtimer(CALLBACK(wall, TYPE_PROC_REF(/turf/wall, burn), temperature/4), 2)
 		physically_destroyed()
 
-/turf/wall/set_color(new_color)
-	paint_color = new_color
-	update_icon()
+/turf/wall/set_color(new_color, skip_update)
+	if(paint_color != new_color)
+		paint_color = new_color
+		if(!skip_update)
+			update_icon()
+		return TRUE
+	return FALSE
 
 /turf/wall/proc/CheckPenetration(var/base_chance, var/damage)
 	return round(damage/material.integrity*180)

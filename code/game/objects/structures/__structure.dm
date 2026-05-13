@@ -24,13 +24,14 @@
 		return material.color
 	return initial(color)
 
-/obj/structure/set_color(new_color)
+/obj/structure/set_color(new_color, skip_update)
 	if(new_color == COLOR_WHITE)
 		new_color = null
 	if(paint_color != new_color)
 		paint_color = new_color
 		. = TRUE
-		refresh_color()
+		if(!skip_update)
+			refresh_color()
 
 /obj/structure/refresh_color()
 	if(paint_color)

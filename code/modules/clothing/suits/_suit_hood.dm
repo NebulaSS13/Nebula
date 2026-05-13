@@ -6,20 +6,20 @@
 		hood = new hood(src, material)
 		hood.canremove = FALSE
 		if(markings_color)
-			hood.set_markings_color(markings_color)
+			hood.set_markings_color(markings_color, skip_update = TRUE)
 		if(paint_color)
-			hood.set_color(paint_color)
+			hood.set_color(paint_color, skip_update = TRUE)
 		if(isnull(hood.markings_state_modifier))
 			hood.markings_state_modifier = markings_state_modifier
 		hood.update_icon()
 	return ..()
 
-/obj/item/clothing/suit/set_color(new_color)
+/obj/item/clothing/suit/set_color(new_color, skip_update)
 	. = ..()
 	if(. && istype(hood))
-		hood.set_color(new_color)
+		hood.set_color(new_color, skip_update)
 
-/obj/item/clothing/suit/set_markings_color(new_color)
+/obj/item/clothing/suit/set_markings_color(new_color, skip_update)
 	. = ..()
 	if(istype(hood))
 		hood.set_markings_color(new_color)
