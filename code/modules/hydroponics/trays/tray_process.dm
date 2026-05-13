@@ -67,7 +67,6 @@
 
 	if(pollen < MAX_POLLEN_PER_FLOWER)
 		pollen += seed?.produces_pollen * POLLEN_PRODUCTION_MULT
-		to_world("\ref[src] has pollen [pollen] ([seed?.produces_pollen] * [POLLEN_PRODUCTION_MULT])")
 
 	// Maintain tray nutrient and water levels.
 	if(seed.get_trait(TRAIT_REQUIRES_NUTRIENTS) && seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) > 0 && nutrilevel > 0 && prob(25))
