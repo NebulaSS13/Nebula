@@ -125,7 +125,7 @@
 		add_screen_element(category_toggle, "toggle", TRUE)
 		toggle_category_visibility(TRUE)
 
-/datum/ability_handler/proc/refresh_element_positioning(row = 1, col = 1)
+/datum/ability_handler/proc/refresh_element_positioning(row = 1, col = 0)
 	if(!LAZYLEN(screen_elements))
 		return 0
 	var/button_pos = col
@@ -134,14 +134,14 @@
 	for(var/ability in screen_elements)
 		var/obj/screen/element = screen_elements[ability]
 		if(istype(element, /obj/screen/ability/category))
-			element.screen_loc = "RIGHT-[col]:-4,TOP-[row]"
+			element.screen_loc = "RIGHT-[col]:-4,TOP-[row]:-24"
 		else if(!element.invisibility)
 			button_pos++
 			if((button_pos-col) > 5)
 				button_row++
 				.++
 				button_pos = col+1
-			element.screen_loc = "RIGHT-[button_pos]:-4,TOP-[button_row]"
+			element.screen_loc = "RIGHT-[button_pos]:-4,TOP-[button_row]:-24"
 
 /datum/ability_handler/proc/toggle_category_visibility(force_state)
 	showing_abilities = isnull(force_state) ? !showing_abilities : force_state

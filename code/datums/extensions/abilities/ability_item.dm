@@ -54,8 +54,8 @@
 		// Fire a projectile if that is how this ability works.
 		ability.fire_projectile_at(user, target, metadata)
 	else
-		// Otherwise, apply to the target. Range checking etc. will be handled in apply_effect().
-		ability.apply_effect(user, target, metadata)
+		// Otherwise, apply to the target. Range checking etc. will be handled in apply_ability_effect().
+		ability.apply_ability_effect(user, target, metadata)
 
 	// Clean up our item if needed.
 	if(ability.item_end_on_cast)
