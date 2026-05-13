@@ -10,7 +10,7 @@
 	swarm_color           = COLOR_GOLD
 	swarm_type            = /obj/effect/insect_swarm/pollinator
 	sting_reagent         = /decl/material/liquid/bee_venom
-	sting_amount          = 1
+	sting_amount          = 0.2
 	produce_reagents      = list(/decl/material/liquid/nutriment/honey = 1)
 	produce_material      = /decl/material/solid/organic/wax
 
@@ -22,7 +22,7 @@
 	swarm_desc            = "A swarm of humming wasps."
 	insect_desc           = "A solitary wasp."
 	sting_reagent         = /decl/material/liquid/cyanide
-	sting_amount          = 5
+	sting_amount          = 1
 	swarm_color           = COLOR_BRONZE
 	swarm_type            = /obj/effect/insect_swarm/pollinator // tarantula hunter...
 */

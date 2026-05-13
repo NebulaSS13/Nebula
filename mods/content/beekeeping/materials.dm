@@ -13,8 +13,10 @@
 	metabolism = REM * 0.25
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
+	var/pain_mult = 10
+	var/pain_threshold = 100
 
 /decl/material/liquid/bee_venom/affect_blood(mob/living/M, removed, datum/reagents/holder)
 	. = ..()
-	if(istype(M))
-		M.adjustHalLoss(max(1, ceil(removed * 10)))
+	if(istype(M) && M.getHalLoss() < pain_threshold)
+		M.adjustHalLoss(max(1, ceil(removed * pain_mult)))

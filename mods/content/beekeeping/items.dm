@@ -20,7 +20,7 @@
 
 	if(!smoked && isturf(A))
 		for(var/obj/effect/insect_swarm/swarm in A)
-			swarm.was_smoked()
+			swarm.was_smoked(smoke_time = 1 MINUTE)
 			smoked = TRUE
 
 	if(smoked)

@@ -1,6 +1,6 @@
 /datum/trader/trading_beacon/manufacturing/New()
 	LAZYSET(possible_trading_items, /obj/item/bee_pack,                             TRADER_THIS_TYPE)
-	LAZYSET(possible_trading_items, /obj/item/smoker,                           TRADER_THIS_TYPE)
+	LAZYSET(possible_trading_items, /obj/item/smoker,                               TRADER_THIS_TYPE)
 	LAZYSET(possible_trading_items, /obj/item/hive_frame/crafted,                   TRADER_THIS_TYPE)
 	LAZYSET(possible_trading_items, /obj/item/stack/material/plank/mapped/wood/ten, TRADER_THIS_TYPE)
 	..()

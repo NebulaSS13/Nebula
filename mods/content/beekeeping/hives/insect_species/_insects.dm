@@ -27,6 +27,8 @@
 	// Venom delivered by swarms whens stinging a victim.
 	var/sting_reagent
 	var/sting_amount
+	var/per_sting_reagents = 0.1
+	var/per_sting_pain     = 1
 
 /decl/insect_species/Initialize()
 	if(produce_material)
@@ -110,7 +112,7 @@
 	if(!swarm.is_agitated() && !prob(max(1, round(swarm.swarm_intensity/4))))
 		return FALSE
 	var/base_sting_chance = (sting_amount * clamp(round(swarm.swarm_intensity/10), 1, 10))
-	var/sting_mult = swarm.is_agitated() ? max(base_sting_chance, 65) : base_sting_chance
+	var/sting_mult = swarm.is_agitated() ? max(base_sting_chance, 15) : base_sting_chance
 	for(var/mob/living/victim in loc)
 		if(!victim.simulated || victim.stat || victim.current_posture?.prone)
 			continue
@@ -118,11 +120,20 @@
 		var/obj/item/organ/external/affecting = victim.get_organ(pick(global.all_limb_tags))
 		if(!affecting || BP_IS_PROSTHETIC(affecting) || BP_IS_CRYSTAL(affecting))
 			continue
-		if(injected_reagents && victim.can_inject(victim, affecting.organ_tag))
-			to_chat(victim, SPAN_DANGER("\A [swarm] stings you [sting_mult <= sting_amount * 2 ? "" : "multiple times"] on your [affecting.name]!"))
-			injected_reagents.add_reagent(sting_reagent, sting_mult)
-			affecting.add_pain(sting_mult)
-			. = TRUE
+		if(!injected_reagents || !victim.can_inject(null, affecting.organ_tag))
+			continue
+
+		to_chat(victim, SPAN_DANGER("\A [swarm] stings you [sting_mult <= sting_amount * 2 ? "" : "multiple times"] on your [affecting.name]!"))
+
+		var/sting_venom = (per_sting_reagents * sting_mult) - REAGENT_VOLUME(injected_reagents, sting_reagent)
+		if(sting_venom > 0)
+			injected_reagents.add_reagent(sting_reagent, sting_venom)
+
+		var/sting_pain = (per_sting_pain * sting_mult) - victim.getHalLoss()
+		if(sting_pain > 0)
+			affecting.add_pain(sting_pain)
+
+		. = TRUE
 
 /decl/insect_species/proc/can_spawn_in_flora(var/obj/structure/flora)
 

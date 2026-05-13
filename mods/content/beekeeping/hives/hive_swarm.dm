@@ -361,9 +361,10 @@
 	else
 		start_automove(hive)
 
-/obj/effect/insect_swarm/proc/was_smoked(smoke_time = 10 SECONDS)
+/obj/effect/insect_swarm/proc/was_smoked(smoke_time = 1 MINUTE)
 	smoked_until = max(smoked_until, world.time + smoke_time)
 	swarm_agitation = round(swarm_agitation * 0.75)
+	update_icon()
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_icon), TRUE), smoke_time, (TIMER_UNIQUE|TIMER_OVERRIDE))
 
 /obj/effect/insect_swarm/proc/is_smoked()

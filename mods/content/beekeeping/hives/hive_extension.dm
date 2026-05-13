@@ -210,7 +210,7 @@
 	for(var/obj/effect/insect_swarm/swarm as anything in swarms)
 		. += swarm.swarm_intensity
 
-/datum/extension/insect_hive/proc/smoked_by(mob/user, atom/source, smoke_time = 10 SECONDS)
+/datum/extension/insect_hive/proc/smoked_by(mob/user, atom/source, smoke_time = 1 MINUTE)
 	smoked_until = max(smoked_until, world.time + smoke_time)
 	// this is a little weird due to telekinetic bee smoking but so it goes
 	for(var/obj/effect/insect_swarm/swarm as anything in swarms)
