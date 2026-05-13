@@ -3,7 +3,6 @@
 // Stone, stick, plank and palisade sprites by Doe.
 
 #define CUT_TIME 10 SECONDS
-#define CLIMB_TIME 5 SECONDS
 
 ///section is intact
 #define NO_HOLE 0
@@ -14,67 +13,112 @@
 #define MAX_HOLE_SIZE LARGE_HOLE
 
 /obj/structure/fence
-	name = "fence"
-	desc = "A fence. Not as effective as a wall, but generally it keeps people out."
-	density = TRUE
-	anchored = TRUE
-	icon = 'icons/obj/structures/fence.dmi'
-	icon_state = "straight"
-	material = /decl/material/solid/metal/steel
-	material_alteration = MAT_FLAG_ALTERATION_ALL
+	name                   = "fence"
+	desc                   = "A fence. Not as effective as a wall, but generally it keeps people out."
+	density                = TRUE
+	anchored               = TRUE
+	icon                   = /decl/fence_type::fence_icon
+	icon_state             = /decl/fence_type::straight_state
+	material               = /decl/material/solid/metal/steel
+	atom_flags             = ATOM_FLAG_CLIMBABLE
+	material_alteration    = MAT_FLAG_ALTERATION_ALL
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 
 	var/decl/fence_type/fence_data = /decl/fence_type
-	var/hole_size = NO_HOLE
+	var/hole_size                  = NO_HOLE
+	var/connected_dirs             = 0
 
-/obj/structure/fence/Initialize(mapload)
-	update_cut_status()
+/obj/structure/fence/Destroy()
+	var/turf/prior_loc = loc
+	. = ..()
+	if(istype(prior_loc))
+		for(var/check_dir in global.cardinal)
+			for(var/obj/structure/fence/fence in get_step_resolving_mimic(prior_loc, check_dir))
+				fence.update_icon()
+
+/obj/structure/fence/Initialize(ml, _mat, _reinf_mat)
 	if(ispath(fence_data))
 		fence_data = GET_DECL(fence_data)
-		SetName(fence_data.name)
-		desc = (fence_data.desc)
+		set_icon(fence_data.fence_icon)
 	else if(!istype(fence_data))
 		fence_data = null
-	queue_icon_update()
-	return ..()
-
-/obj/structure/fence/update_icon()
 	. = ..()
-	if(!istype(fence_data))
-		return
-	update_fence_icon()
+	update_cut_status()
+	if(ml)
+		queue_icon_update()
+	else
+		return INITIALIZE_HINT_LATELOAD
+
+/obj/structure/fence/LateInitialize()
+	. = ..()
+	update_icon()
+	for(var/check_dir in global.cardinal)
+		var/turf/neighbor = get_step_resolving_mimic(get_turf(src), check_dir)
+		if(istype(neighbor))
+			for(var/obj/structure/fence/fence in neighbor)
+				if(fence_data == RESOLVE_TO_DECL(fence.fence_data))
+					fence.update_icon()
+
+/obj/structure/fence/update_material_name(override_name)
+	override_name ||= fence_data.name
+	. = ..()
+
+/obj/structure/fence/update_material_desc(override_desc)
+	override_desc ||= fence_data.desc
+	. = ..()
+
+/obj/structure/fence/on_update_icon()
+	. = ..()
+	if(istype(fence_data))
+		update_fence_connections()
+		update_fence_icon()
+
+/obj/structure/fence/proc/is_fencepost()
+	return FALSE // TODO: detect doors and junctions next to us.
+
+/obj/structure/fence/proc/update_fence_connections()
+	// Find any adjacent fences.
+	connected_dirs = 0
+	var/turf/my_turf = get_turf(src)
+	for(var/check_dir in global.cardinal)
+		var/turf/neighbor = get_step_resolving_mimic(my_turf, check_dir)
+		if(!istype(neighbor))
+			continue
+		for(var/obj/structure/fence/fence in neighbor)
+			if(fence_data == RESOLVE_TO_DECL(fence.fence_data))
+				connected_dirs |= check_dir
+				break
 
 /obj/structure/fence/proc/update_fence_icon()
 
-	// Find any adjacent fences.
-	var/static/list/direct_adjacent = list(NORTH, SOUTH, EAST, WEST)
-	var/connected_dirs = 0
-	for(var/check_dir in direct_adjacent)
-		var/turf/neighbor = get_step_resolving_mimic(get_turf(src), check_dir)
-		if(!istype(neighbor) || !(locate(/obj/structure/fence) in neighbor))
-			continue
-		connected_dirs |= check_dir
+	// Standalone segment.
+	if(!connected_dirs)
+		set_icon_state(fence_data.single_state)
+
+	// Four-way junction.
+	else if(connected_dirs == (NORTH|SOUTH|EAST|WEST))
+		set_icon_state(fence_data.four_way_state)
 
 	// End segments.
-	if(check_dir == NORTH || check_dir == SOUTH || check_dir == EAST || check_dir == WEST)
-		set_dir(global.reverse_dir[check_dir])
+	else if(connected_dirs == NORTH || connected_dirs == SOUTH || connected_dirs == EAST || connected_dirs == WEST)
+		set_dir(connected_dirs)
 		set_icon_state(fence_data.end_state)
+
 	// Straight segments.
-	else if(check_dir == (NORTH | SOUTH) || check_dir == (EAST | WEST))
-		if(check_dir & NORTH)
+	else if(connected_dirs == (NORTH | SOUTH) || connected_dirs == (EAST | WEST))
+		if(connected_dirs & NORTH)
 			set_dir(NORTH)
 		else
 			set_dir(EAST)
-		switch(hole_size)
-			if(MEDIUM_HOLE)
-				set_icon_state("[fence_data.straight_state]-cut2")
-			if(LARGE_HOLE)
-				set_icon_state("[fence_data.straight_state]-cut3")
-			else
-				set_icon_state(fence_data.straight_state)
+		if(hole_size > 0)
+			set_icon_state("[fence_data.straight_state]-cut[hole_size]")
+		else if(is_fencepost())
+			set_icon_state(fence_data.post_state)
+		else
+			set_icon_state(fence_data.straight_state)
 
 	// Corner segments.
-	else if(check_dir in global.cornerdirs)
+	else if(connected_dirs in global.cornerdirs)
 		set_icon_state(fence_data.corner_state)
 		var/static/list/_corner_fence_to_state_mapping = alist(
 			(NORTHWEST) = SOUTH,
@@ -82,10 +126,15 @@
 			(SOUTHWEST) = EAST,
 			(SOUTHEAST) = WEST
 		)
-		set_dir(_corner_fence_to_state_mapping[check_dir])
+		set_dir(_corner_fence_to_state_mapping[connected_dirs])
 
-	// Junction segments - not currently supported.
-
+	// Junction segments.
+	else
+		set_icon_state(fence_data.three_way_state)
+		for(var/check_dir in global.cardinal)
+			if(!(connected_dirs & check_dir))
+				set_dir(check_dir)
+				break
 
 /obj/structure/fence/proc/is_cuttable()
 	return icon_state == fence_data.straight_state && hole_size < MAX_HOLE_SIZE
@@ -100,7 +149,7 @@
 
 /obj/structure/fence/get_examine_hints(mob/user, distance, infix, suffix)
 	. = ..()
-	if(cuttable && hole_size < MAX_HOLE_SIZE)
+	if(is_cuttable())
 		LAZYADD(., SPAN_SUBTLE("Use wirecutters to [hole_size > NO_HOLE ? "expand the":"cut a"] hole into the fence, allowing passage."))
 
 /obj/structure/fence/cut/medium
@@ -134,10 +183,9 @@
 		return TRUE
 	return ..()
 
-
 /obj/structure/fence/attackby(obj/item/used_item, mob/user)
 	if(IS_WIRECUTTER(used_item))
-		if(!cuttable)
+		if(!is_cuttable())
 			to_chat(user, SPAN_WARNING("This section of the fence can't be cut."))
 			return TRUE
 		var/current_stage = hole_size
@@ -162,7 +210,7 @@
 	return ..()
 
 /obj/structure/fence/proc/update_cut_status()
-	if(!cuttable)
+	if(!is_cuttable())
 		return
 	density = TRUE
 	switch(hole_size)
@@ -179,62 +227,60 @@
 	name = "fence door"
 	desc = "Not very useful without a real lock."
 	icon_state = "door-closed"
-	cuttable = FALSE
-	var/open = FALSE
-	var/locked = FALSE
 
-/obj/structure/fence/door/Initialize(mapload)
+/obj/structure/fence/door/update_material_name(override_name)
+	override_name ||= fence_data.door_name
 	. = ..()
-	update_door_status()
+
+/obj/structure/fence/door/update_material_desc(override_desc)
+	override_desc ||= fence_data.door_desc
+	. = ..()
+	return INITIALIZE_HINT_LATELOAD
 
 /obj/structure/fence/door/update_fence_icon()
 	if(!istype(fence_data))
 		return
-	if(density)
-		set_icon_state(fence_data.door_closed_state)
+	if((connected_dirs & NORTH) || (connected_dirs & SOUTH))
+		set_dir(NORTH)
 	else
-		set_icon_state(fence_data.door_opened_state)
+		set_dir(EAST)
+	if(density)
+		set_icon_state(fence_data.door_state_closed)
+	else
+		set_icon_state(fence_data.door_state_opened)
 
 /obj/structure/fence/door/opened
 	icon_state = "door-opened"
-	open = TRUE
 	density = TRUE
 
 /obj/structure/fence/door/locked
 	desc = "It looks like it has a strong padlock attached."
-	locked = TRUE
+
+/obj/structure/fence/door/locked/Initialize(mapload)
+	lock ||= "[random_id(type, 10000, 99999)]"
+	. = ..()
 
 /obj/structure/fence/door/attack_hand(mob/user, list/params)
 	SHOULD_CALL_PARENT(FALSE)
 	if(can_open(user))
 		toggle(user)
 	else
-		to_chat(user, SPAN_WARNING("\The [src] is [!open ? "locked" : "stuck open"]."))
+		to_chat(user, SPAN_WARNING("\The [src] is [density ? "locked" : "stuck open"]."))
 	return TRUE
 
 /obj/structure/fence/door/proc/toggle(mob/user)
-	switch(open)
-		if(FALSE)
-			visible_message(SPAN_NOTICE("\The [user] opens \the [src]."))
-			open = TRUE
-		if(TRUE)
-			visible_message(SPAN_NOTICE("\The [user] closes \the [src]."))
-			open = FALSE
-
-	update_door_status()
+	density = !density
+	if(density)
+		visible_message(SPAN_NOTICE("\The [user] closes \the [src]."))
+	else
+		visible_message(SPAN_NOTICE("\The [user] opens \the [src]."))
 	playsound(src, 'sound/machines/click.ogg', 100, 1)
-
-/obj/structure/fence/door/proc/update_door_status()
-	density = !open
 	update_icon()
 
 /obj/structure/fence/door/proc/can_open(mob/user)
-	if(locked)
-		return FALSE
-	return TRUE
+	return !lock || !lock.isLocked()
 
 #undef CUT_TIME
-#undef CLIMB_TIME
 
 #undef NO_HOLE
 #undef MEDIUM_HOLE
