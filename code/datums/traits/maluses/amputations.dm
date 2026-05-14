@@ -3,6 +3,7 @@
 	category = "Missing Limbs"
 	abstract_type = /decl/trait/malus/amputation
 	reapply_on_rejuvenation = TRUE
+	is_heritable = FALSE
 	var/list/apply_to_limbs
 	var/list/ban_traits_relating_to_limbs
 
