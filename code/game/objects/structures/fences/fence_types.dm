@@ -2,7 +2,7 @@
 	var/name              = "chain link fence"
 	var/desc              = "A chain link fence. Not as effective as a wall, but generally it keeps people out."
 	var/door_name         = "fence gate"
-	var/door_desc         = "Not very useful without a real lock."
+	var/door_desc         = "Much like a regular door, but thinner."
 	var/fence_icon        = 'icons/obj/structures/fences/chain.dmi'
 	var/single_state      = "single"
 	var/corner_state      = "corner"

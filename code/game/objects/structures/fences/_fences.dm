@@ -2,15 +2,6 @@
 // Chain link sprites ported from /VG/
 // Stone, stick, plank and palisade sprites by Doe.
 
-#define CUT_TIME 10 SECONDS
-
-///section is intact
-#define NO_HOLE 0
-///medium hole in the section - can climb through
-#define MEDIUM_HOLE 1
-///large hole in the section - can walk through
-#define LARGE_HOLE 2
-#define MAX_HOLE_SIZE LARGE_HOLE
 
 /obj/structure/fence
 	name                   = "fence"
@@ -27,6 +18,15 @@
 	var/decl/fence_type/fence_data = /decl/fence_type
 	var/hole_size                  = NO_HOLE
 	var/connected_dirs             = 0
+
+	var/const/CUT_TIME      = 10 SECONDS
+	///section is intact
+	var/const/NO_HOLE       = 0
+	///medium hole in the section - can climb through
+	var/const/MEDIUM_HOLE   = 1
+	///large hole in the section - can walk through
+	var/const/LARGE_HOLE    = 2
+	var/const/MAX_HOLE_SIZE = LARGE_HOLE
 
 /obj/structure/fence/Destroy()
 	var/turf/prior_loc = loc
@@ -224,9 +224,12 @@
 
 //FENCE DOORS
 /obj/structure/fence/door
-	name = "fence door"
-	desc = "Not very useful without a real lock."
+	name = "fence gate"
+	desc = "Much like a regular door, but thinner."
 	icon_state = "door-closed"
+
+/obj/structure/fence/door/can_install_lock()
+	return TRUE
 
 /obj/structure/fence/door/update_material_name(override_name)
 	override_name ||= fence_data.door_name
@@ -253,39 +256,23 @@
 	icon_state = "door-opened"
 	density = TRUE
 
-/obj/structure/fence/door/locked
-	desc = "It looks like it has a strong padlock attached."
-
 /obj/structure/fence/door/locked/Initialize(mapload)
-	lock ||= "[random_id(type, 10000, 99999)]"
+	lock ||= "fence key #[random_id(type, 10000, 99999)]"
 	. = ..()
 
 /obj/structure/fence/door/attack_hand(mob/user, list/params)
 	SHOULD_CALL_PARENT(FALSE)
-	if(can_open(user))
-		toggle(user)
+	if(!density || can_open(user))
+		density = !density
+		visible_message(SPAN_NOTICE("\The [user] [density ? "opens" : "closes"] \the [src]."))
+		playsound(src, 'sound/machines/click.ogg', 100, 1)
+		update_icon()
 	else
-		to_chat(user, SPAN_WARNING("\The [src] is [density ? "locked" : "stuck open"]."))
+		to_chat(user, SPAN_WARNING("\The [src] is locked."))
 	return TRUE
-
-/obj/structure/fence/door/proc/toggle(mob/user)
-	density = !density
-	if(density)
-		visible_message(SPAN_NOTICE("\The [user] closes \the [src]."))
-	else
-		visible_message(SPAN_NOTICE("\The [user] opens \the [src]."))
-	playsound(src, 'sound/machines/click.ogg', 100, 1)
-	update_icon()
 
 /obj/structure/fence/door/proc/can_open(mob/user)
 	return !lock || !lock.isLocked()
-
-#undef CUT_TIME
-
-#undef NO_HOLE
-#undef MEDIUM_HOLE
-#undef LARGE_HOLE
-#undef MAX_HOLE_SIZE
 
 // Mapping/crafting helpers.
 /obj/structure/fence/brick
