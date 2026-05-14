@@ -3,6 +3,7 @@
 	decl_flags = DECL_FLAG_MANDATORY_UID
 	var/name
 	var/default_value
+	var/additional_icon_state
 
 /decl/sprite_accessory_metadata/proc/get_new_value_for(mob/user, decl/sprite_accessory/accessory_decl, current_value)
 	return

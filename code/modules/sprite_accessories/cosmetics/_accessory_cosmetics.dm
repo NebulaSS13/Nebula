@@ -1,5 +1,6 @@
 /decl/sprite_accessory_category/cosmetics
 	name                        = "Cosmetics"
+	single_selection            = FALSE
 	default_accessory           = /decl/sprite_accessory/cosmetics/none
 	base_accessory_type         = /decl/sprite_accessory/cosmetics
 	uid                         = "acc_cat_cosmetics"
