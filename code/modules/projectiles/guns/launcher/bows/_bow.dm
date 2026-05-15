@@ -46,51 +46,6 @@
 	/// How big is this bow when unstrung? Uses initial w_class if unset.
 	var/unstrung_w_class
 
-/obj/item/gun/launcher/bow/set_autofire(var/atom/fire_at, var/mob/fire_by, var/autoturn = TRUE)
-	if(!autofire_enabled || autofiring_at)
-		return ..()
-	. = ..()
-	if(ismob(fire_by))
-		if(!get_loaded_arrow(fire_by) && fire_by.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
-			load_available_ammo(fire_by)
-		if(check_can_draw(fire_by))
-			tension = 0
-			next_tension_step = world.time + get_draw_time(fire_by)
-			fire_by.set_dir(get_dir(fire_by, fire_at))
-			show_draw_message(fire_by)
-			update_icon()
-
-/obj/item/gun/launcher/bow/try_autofire(autoturn)
-	if(!autofire_enabled)
-		return ..()
-	var/mob/wielder = loc
-	if(!ismob(wielder) || !check_can_draw(wielder))
-		clear_autofire()
-	else
-		wielder.set_dir(get_dir(wielder, autofiring_at))
-		if(world.time >= next_tension_step && tension < max_tension)
-			next_tension_step = world.time + get_draw_time(wielder)
-			tension++
-			if(tension == max_tension)
-				show_max_draw_message(wielder)
-			else
-				show_working_draw_message(wielder)
-			update_icon()
-
-/obj/item/gun/launcher/bow/clear_autofire()
-	if(!autofire_enabled)
-		return ..()
-	var/mob/living/wielder = loc
-	if(tension && istype(wielder) && !wielder.incapacitated() && wielder.get_active_held_item() == src && get_loaded_arrow())
-		wielder.set_dir(get_dir(wielder, autofiring_at))
-		Fire(autofiring_at, autofiring_by, null, (get_dist(autofiring_at, autofiring_by) <= 1), FALSE, FALSE)
-	. = ..()
-	if(tension)
-		if(istype(wielder))
-			show_cancel_draw_message(wielder)
-		tension = 0
-		update_icon()
-
 /obj/item/gun/launcher/bow/handle_click_empty(atom/movable/firer)
 	if(check_fire_message_spam("click"))
 		to_chat(firer, SPAN_WARNING("\The [src] has nothing loaded."))

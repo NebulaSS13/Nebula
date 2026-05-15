@@ -1354,3 +1354,25 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/pick_attack_verb()
 	return DEFAULTPICK(attack_verb, attack_verb) || "attacked" // if it's not a list, return itself or just "attacked"
+
+/obj/item/equipped(mob/user, slot)
+	if(user?.get_active_held_item() == src)
+		user.on_mouse_up()
+	. = ..()
+
+/obj/item/dropped(mob/user)
+	if(user?.get_active_held_item() == src)
+		user.on_mouse_up()
+	. = ..()
+
+// Called on initial mouse down event from wielding mob. Return TRUE to begin processing every 1ds.
+/obj/item/proc/wielder_mouse_drag_down(mob/user, object, location, control, params)
+	return FALSE
+
+// Called every 1ds while mouse is down with an item that returned TRUE to wielder_mouse_drag_down(). Return FALSE to end processing.
+/obj/item/proc/wielder_mouse_drag_held(mob/user, atom/target)
+	return FALSE
+
+// Called on mouse up event from wielding mob.
+/obj/item/proc/wielder_mouse_drag_up(mob/user, atom/target)
+	return FALSE

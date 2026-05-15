@@ -63,3 +63,60 @@
 			show_working_draw_message(user)
 			continue_drawing(user)
 	update_icon()
+
+/obj/item/gun/launcher/bow/wielder_mouse_drag_down(mob/user, object, location, control, params)
+	if(drawing_bow)
+		return FALSE
+	. = ..()
+
+// Nock an arrow, or continue to draw the string back.
+// We do this here so we don't instantly nock an arrow even if this is not a proper drag yet.
+// DO NOT CALL PARENT, default full auto behavior is to fire while held.
+/obj/item/gun/launcher/bow/wielder_mouse_drag_held(mob/user, atom/target)
+
+	if(!autofire_enabled)
+		return FALSE
+
+	// High skills mean you automatically nock an arrow before you draw.
+	if(tension <= 0 && !get_loaded_arrow(user) && user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+		load_available_ammo(user)
+
+	if(!check_can_draw(user))
+		return FALSE
+
+	// Start drawing.
+	if(!drawing_bow)
+		drawing_bow = TRUE
+		tension = 0
+		next_tension_step = world.time + get_draw_time(user)
+		if(user && isatom(target))
+			user.set_dir(get_dir(user, target))
+		show_draw_message(user)
+		update_icon()
+		return TRUE
+
+	// Already drawing - keep drawing.
+	if(world.time >= next_tension_step && tension < max_tension)
+		next_tension_step = world.time + get_draw_time(user)
+		tension++
+		if(tension == max_tension)
+			show_max_draw_message(user)
+		else
+			show_working_draw_message(user)
+		update_icon()
+	return TRUE
+
+// Fire!
+/obj/item/gun/launcher/bow/wielder_mouse_drag_up(mob/user, atom/target)
+	if(!autofire_enabled || !istype(target))
+		return FALSE
+	if(tension && istype(user) && !user.incapacitated() && user.get_active_held_item() == src && get_loaded_arrow())
+		user.set_dir(get_dir(user, target))
+		Fire(target, user, null, (get_dist(target, user) <= 1), FALSE, FALSE)
+	if(tension)
+		if(istype(user))
+			show_cancel_draw_message(user)
+		tension = 0
+		update_icon()
+	drawing_bow = FALSE
+	return TRUE

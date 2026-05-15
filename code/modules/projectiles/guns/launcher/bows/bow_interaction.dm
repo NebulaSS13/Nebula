@@ -84,8 +84,9 @@
 /obj/item/gun/launcher/bow/proc/relax_tension(mob/user)
 	tension = 0
 	update_icon()
-	if(autofire_enabled)
-		clear_autofire()
+	// Cancel any drag fire.
+	if(autofire_enabled && user.get_active_held_item() == src)
+		user.on_mouse_up()
 	else if(user)
 		show_string_relax_message(user)
 
