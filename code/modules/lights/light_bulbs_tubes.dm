@@ -31,9 +31,10 @@
 /obj/item/light/get_color()
 	return b_color
 
-/obj/item/light/set_color(color)
+/obj/item/light/set_color(new_color, skip_update)
 	b_color = isnull(color) ? COLOR_WHITE : color
-	queue_icon_update() // avoid running update_icon before Initialize
+	if(!skip_update)
+		queue_icon_update() // avoid running update_icon before Initialize
 
 /obj/item/light/tube
 	name = "light tube"

@@ -39,9 +39,9 @@
 /obj/machinery/light/get_color()
 	return lightbulb?.get_color()
 
-/obj/machinery/light/set_color(color)
-	. = lightbulb?.set_color(color)
-	if(.)
+/obj/machinery/light/set_color(new_color, skip_update)
+	. = lightbulb?.set_color(color, skip_update)
+	if(. && !skip_update)
 		update_light_status(TRUE)
 		update_icon()
 

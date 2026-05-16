@@ -3,20 +3,23 @@
 
 /obj/item/clothing/suit/Initialize()
 	if(ispath(hood))
-		hood = new hood(src)
-		hood.paint_color = paint_color
-		hood.markings_color = markings_color
+		hood = new hood(src, material)
+		hood.canremove = FALSE
+		if(markings_color)
+			hood.set_markings_color(markings_color, skip_update = TRUE)
+		if(paint_color)
+			hood.set_color(paint_color, skip_update = TRUE)
 		if(isnull(hood.markings_state_modifier))
 			hood.markings_state_modifier = markings_state_modifier
 		hood.update_icon()
 	return ..()
 
-/obj/item/clothing/suit/set_color(new_color)
+/obj/item/clothing/suit/set_color(new_color, skip_update)
 	. = ..()
 	if(. && istype(hood))
-		hood.set_color(new_color)
+		hood.set_color(new_color, skip_update)
 
-/obj/item/clothing/suit/set_markings_color(new_color)
+/obj/item/clothing/suit/set_markings_color(new_color, skip_update)
 	. = ..()
 	if(istype(hood))
 		hood.set_markings_color(new_color)
@@ -47,18 +50,6 @@
 	. = ..()
 	if(length(.) && istype(hood)) // this is considered a component rather than a contained item
 		. -= hood
-
-/obj/item/clothing/suit/Initialize()
-	if(ispath(hood))
-		hood = new hood(src, material)
-		if(paint_color)
-			hood.set_color(paint_color)
-	return ..()
-
-/obj/item/clothing/suit/Destroy()
-	if(istype(hood))
-		QDEL_NULL(hood)
-	return ..()
 
 /obj/item/clothing/suit/equipped(mob/user, slot)
 	if(slot != slot_wear_suit_str)
