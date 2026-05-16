@@ -13,7 +13,6 @@
 	uid = "stateless"
 	description = "You do not possess any kind of official citizenship."
 	economic_power = 0
-	capital = "None"
 
 /decl/background_detail/citizenship/synthetic
 	name = "Stateless Drone"
