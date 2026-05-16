@@ -220,9 +220,9 @@
 		mymob.remove_mob_modifier(/decl/mob_modifier/restrained, source = mymob)
 
 	if(mymob.current_posture?.prone)
-		mymob.add_mob_modifier(/decl/mob_modifier/prone, source = mymob)
+		mymob.add_mob_modifier(/decl/mob_modifier/lying, source = mymob)
 	else
-		mymob.remove_mob_modifier(/decl/mob_modifier/prone, source = mymob)
+		mymob.remove_mob_modifier(/decl/mob_modifier/lying, source = mymob)
 
 	for(var/obj/screen/elem as anything in hud_elements_update_in_life)
 		elem.update_icon()

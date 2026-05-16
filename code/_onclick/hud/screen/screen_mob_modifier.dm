@@ -1,5 +1,5 @@
 /obj/screen/mob_modifiers
-	screen_loc = "CENTER,TOP"
+	screen_loc = "CENTER:8,TOP"
 	icon_state = "blank"
 	requires_ui_style = FALSE
 
