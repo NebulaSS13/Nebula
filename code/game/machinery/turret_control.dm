@@ -48,6 +48,10 @@
 	. = ..()
 
 /obj/machinery/turretid/Initialize()
+	. = ..()
+	return INITIALIZE_HINT_LATELOAD // Because areas initialize AFTER these!
+
+/obj/machinery/turretid/LateInitialize()
 	if(!control_area)
 		control_area = get_area(src)
 	else if(istext(control_area))
@@ -55,6 +59,8 @@
 			if(A.name && A.name==control_area)
 				control_area = A
 				break
+	else if(ispath(control_area))
+		control_area = locate(control_area) in global.areas
 
 	if(control_area)
 		var/area/A = control_area

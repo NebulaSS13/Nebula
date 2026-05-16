@@ -695,10 +695,10 @@ var/global/const/ACTION_DANGER_ALL = 2
 	return ..()
 
 /mob/proc/pull_damage()
-	return 0
+	return FALSE
 
 /mob/living/human/pull_damage()
-	if(!current_posture.prone|| get_damage(BRUTE) + get_damage(BURN) < 100)
+	if(buckled || !current_posture.prone || get_damage(BRUTE) + get_damage(BURN) < 100)
 		return FALSE
 	for(var/obj/item/organ/external/e in get_external_organs())
 		if((e.status & ORGAN_BROKEN) && !e.splinted)
