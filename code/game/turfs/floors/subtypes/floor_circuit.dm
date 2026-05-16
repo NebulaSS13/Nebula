@@ -29,7 +29,7 @@
 	temperature = TCMB
 
 /turf/floor/greengrid/nitrogen
-	initial_gas = list(/decl/material/gas/nitrogen = MOLES_N2STANDARD)
+	initial_gas = alist(/decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
 /turf/floor/blackgrid
 	name        = "mainframe floor"

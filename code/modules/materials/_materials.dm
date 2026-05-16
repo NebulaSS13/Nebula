@@ -391,6 +391,9 @@ var/global/list/materials_by_gas_symbol = list()
 		else if(isnull(ignition_point) || (new_temperature_damage_threshold > ignition_point))
 			temperature_damage_threshold = new_temperature_damage_threshold
 
+	global.cached_specific_heat[type] = gas_specific_heat
+	global.cached_molar_mass[type] = molar_mass
+
 	if(!shard_icon)
 		shard_icon = shard_name
 	if(!burn_armor)
