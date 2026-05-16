@@ -10255,7 +10255,7 @@
 	dir = 1
 	},
 /obj/machinery/turretid/stun{
-	control_area = "\improper AI Upload Chamber";
+	control_area = /area/ministation/ai_core;
 	id_tag = "aihome";
 	pixel_y = -24;
 	dir = 1
@@ -13371,7 +13371,6 @@
 /obj/machinery/turretid/stun{
 	name = "AI Upload turret control";
 	id_tag = "upload";
-	control_area = "\improper AI Upload Chamber";
 	pixel_y = -24;
 	dir = 1
 	},
