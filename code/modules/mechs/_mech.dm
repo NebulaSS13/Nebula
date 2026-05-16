@@ -68,10 +68,10 @@
 
 	var/mob/living/current_user = null
 
-
-//Pixel projectiles need a client, so we need a way to pass who the last user was for view calcs
-/mob/living/proc/get_effective_gunner()
-	return src
+/mob/living/exosuit/carried_mob_intent_changed(mob/user, decl/intent/new_intent)
+	if(user in pilots)
+		return set_intent(new_intent)
+	return ..()
 
 /mob/living/exosuit/get_effective_gunner()
 	return current_user
@@ -260,4 +260,3 @@
 	if(current_user)
 		return FALSE
 	return ..()
-
