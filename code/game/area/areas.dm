@@ -137,46 +137,46 @@ var/global/list/areas = list()
 	..()
 	return QDEL_HINT_HARDDEL
 
-// Changes the area of T to A. Do not do this manually.
+// Changes the area of src to A. Do not do this manually.
 // Area is expected to be a non-null instance.
-/proc/ChangeArea(var/turf/T, var/area/A)
+/turf/proc/ChangeArea(var/area/A)
 	if(!istype(A))
 		CRASH("Area change attempt failed: invalid area supplied.")
-	var/old_outside = T.is_outside()
-	var/area/old_area = get_area(T)
+	var/old_outside = is_outside()
+	var/area/old_area = get_area(src)
 	if(old_area == A)
 		return
 
 	var/old_area_ambience = old_area?.interior_ambient_light_modifier
 
-	A.contents.Add(T)
+	A.contents.Add(src)
 	if(old_area)
-		old_area.Exited(T, A)
-		for(var/atom/movable/AM as anything in T)
+		old_area.Exited(src, A)
+		for(var/atom/movable/AM as anything in src)
 			old_area.Exited(AM, A)  // Note: this _will_ raise exited events.
-	A.Entered(T, old_area)
-	for(var/atom/movable/AM as anything in T)
+	A.Entered(src, old_area)
+	for(var/atom/movable/AM as anything in src)
 		A.Entered(AM, old_area) // Note: this will _not_ raise moved or entered events. If you change this, you must also change everything which uses them.
 
-	for(var/obj/machinery/M in T)
+	for(var/obj/machinery/M in src)
 		M.area_changed(old_area, A) // They usually get moved events, but this is the one way an area can change without triggering one.
 
-	T.update_registrations_on_adjacent_area_change()
+	update_registrations_on_adjacent_area_change()
 	for(var/direction in global.cardinal)
-		var/turf/adjacent_turf = get_step(T, direction)
+		var/turf/adjacent_turf = get_step(src, direction)
 		if(adjacent_turf)
 			adjacent_turf.update_registrations_on_adjacent_area_change()
 
 	// Handle updating weather and atmos if the outside status of the turf changed.
-	if(T.is_outside == OUTSIDE_AREA)
-		T.update_external_atmos_participation() // Refreshes outside status and adds exterior air to turf air if necessary.
+	if(is_outside == OUTSIDE_AREA)
+		update_external_atmos_participation() // Refreshes outside status and adds exterior air to turf air if necessary.
 
-	if(T.is_outside() != old_outside)
-		T.update_weather()
+	if(is_outside() != old_outside)
+		update_weather()
 		if(SSambience.initialized) // if not initialized, we'll loop over all turfs anyway
-			AMBIENCE_QUEUE_TURF(T)
+			AMBIENCE_QUEUE_TURF(src)
 	else if(A.interior_ambient_light_modifier != old_area_ambience && SSambience.initialized)
-		AMBIENCE_QUEUE_TURF(T)
+		AMBIENCE_QUEUE_TURF(src)
 
 /turf/proc/update_registrations_on_adjacent_area_change()
 	for(var/obj/machinery/door/firedoor/door in src)

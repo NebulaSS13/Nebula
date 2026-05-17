@@ -119,7 +119,7 @@
 	if(!istype(T) || !istype(area_mode))
 		return FALSE
 	if (area_mode.selected_area)
-		ChangeArea(T, area_mode.selected_area)
+		T.ChangeArea(area_mode.selected_area)
 		to_chat(build_mode.user, SPAN_NOTICE("Set area of turf [T.name] to [area_mode.selected_area.proper_name]"))
 		return TRUE
 	to_chat(build_mode.user, SPAN_WARNING("Pick or create an area first"))
