@@ -652,9 +652,11 @@
 	aicard = null
 	controlling = null
 
+/obj/item/integrated_circuit/manipulation/ai/proc/can_load_ai(obj/item/used_item, mob/user)
+	return istype(used_item, /obj/item/aicard) || istype(used_item, /obj/item/paicard) || istype(used_item, /obj/item/organ/internal/brain/robotic)
 
 /obj/item/integrated_circuit/manipulation/ai/attackby(var/obj/item/used_item, var/mob/user)
-	if(is_type_in_list(used_item, list(/obj/item/aicard, /obj/item/paicard, /obj/item/organ/internal/brain_interface)))
+	if(can_load_ai(used_item, user))
 		load_ai(user, used_item)
 		return TRUE
 	else return ..()

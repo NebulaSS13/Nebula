@@ -10,3 +10,7 @@
 #ifdef CONTENT_PACK_AUGMENTS
 #include "circuits/augment_circuits.dm"
 #endif
+// Add support for MMIs to the AI manipulator circuit.
+#ifdef CONTENT_PACK_BRAIN_INTERFACE
+#include "circuits/brain_interface_circuits.dm"
+#endif

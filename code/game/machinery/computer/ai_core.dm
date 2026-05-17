@@ -51,7 +51,7 @@ var/global/list/empty_playable_ai_cores = list()
 				if(open_for_latejoin)
 					empty_playable_ai_cores += D
 			else
-				var/mob/living/silicon/ai/A = new /mob/living/silicon/ai ( loc, laws, brain )
+				var/mob/living/silicon/ai/A = new /mob/living/silicon/ai ( loc, laws, brain.get_brainmob() )
 				if(A) //if there's no brain, the mob is deleted and a structure/AIcore is created
 					A.on_mob_init()
 					A.rename_self("ai", 1)

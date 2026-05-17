@@ -247,7 +247,6 @@ Sells devices, odds and ends, and medical stuff
 		/obj/item/synthesized_instrument/violin   = TRADER_THIS_TYPE,
 		/obj/item/hailer                          = TRADER_THIS_TYPE,
 		/obj/item/uv_light                        = TRADER_THIS_TYPE,
-		/obj/item/organ/internal/brain_interface  = TRADER_SUBTYPES_ONLY,
 		/obj/item/robotanalyzer                   = TRADER_THIS_TYPE,
 		/obj/item/chems/toner_cartridge           = TRADER_THIS_TYPE,
 		/obj/item/camera_film                     = TRADER_THIS_TYPE,

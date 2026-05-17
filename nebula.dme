@@ -1849,8 +1849,6 @@
 #include "code\modules\bodytype\bodytype_prosthetic_models.dm"
 #include "code\modules\bodytype\bodytype_quadruped.dm"
 #include "code\modules\bodytype\bodytype_random.dm"
-#include "code\modules\brain_interface\_brain_interface.dm"
-#include "code\modules\brain_interface\interface_radio.dm"
 #include "code\modules\butchery\_butchery.dm"
 #include "code\modules\butchery\butchery_data.dm"
 #include "code\modules\butchery\butchery_data_animal.dm"
