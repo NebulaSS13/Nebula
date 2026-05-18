@@ -16,8 +16,6 @@
 	var/width
 	///Preferred height for all the planet z-levels. Null means it's up to each z-levels. Not reliable for telling the height of the levels under this planet.
 	var/height
-	///Preferred amount of vertically connected z-levels for this planets. Null means it's up to each z-levels.
-	var/tallness = 1
 	///Topmost level data datum id of the root z stack (ID only, because this datum has an uncontrolled lifetime, and we don't want dangling refs)
 	var/topmost_level_id
 	///Level data id for the level that's considered to be the planet's surface. In other words, the topmost firm ground level of the root z stack.
