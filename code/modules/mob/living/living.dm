@@ -2017,3 +2017,6 @@ default behaviour is:
 /mob/living/proc/is_tagging_suitable()
 	return !key && !client
 
+//Pixel projectiles need a client, so we need a way to pass who the last user was for view calcs
+/mob/living/proc/get_effective_gunner()
+	return src

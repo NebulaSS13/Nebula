@@ -198,6 +198,7 @@
 	maptext_x = -16
 	maptext_width = 64
 	maptext_y = -8
+	screen_loc = "RIGHT-2:28,CENTER+1:22"
 
 /obj/screen/exosuit/toggle
 	name = "toggle"
@@ -363,9 +364,9 @@
 /obj/screen/exosuit/heat
 	name = "heat probe"
 	icon_state = "heatprobe"
+	screen_loc = "RIGHT-2:28,CENTER+1:12"
 	var/celsius = TRUE
 	var/obj/screen/exosuit/needle/gauge_needle = null
-	desc = "TEST"
 
 /obj/screen/exosuit/heat/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
 	. = ..()
@@ -417,6 +418,7 @@
 /obj/screen/exosuit/health
 	name = "exosuit integrity"
 	icon_state = "health"
+	screen_loc = "RIGHT-2:28,CENTER:12"
 
 /obj/screen/exosuit/health/handle_click(mob/user, params)
 	if(!..())
