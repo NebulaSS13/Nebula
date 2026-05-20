@@ -19,7 +19,7 @@
 	icon_state = "fox"
 	uid        = "accessory_ears_fox"
 
-/decl/sprite_accessory/ears/biomods/antlers
+/decl/sprite_accessory/ears/biomods/animal/antlers
 	name       = "Antlers"
 	icon_state = "antlers"
 	uid        = "accessory_ears_antlers"

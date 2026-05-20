@@ -847,7 +847,7 @@
 
 /* Set the atom colour. This is a stub effectively due to the broad use of direct setting. */
 // TODO: implement this everywhere that it should be used instead of direct setting.
-/atom/proc/set_color(var/new_color)
+/atom/proc/set_color(new_color, skip_update)
 	if(isnull(new_color))
 		return reset_color()
 	if(color != new_color)

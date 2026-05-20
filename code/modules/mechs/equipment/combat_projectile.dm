@@ -1,3 +1,11 @@
+/obj/item/mech_equipment/mounted_system/projectile
+	name = "mounted submachine gun"
+	icon_state = "mech_ballistic"
+	holding = /obj/item/gun/projectile/automatic/smg/mech
+	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
+	restricted_software = list(MECH_SOFTWARE_WEAPONS)
+	origin_tech = @'{"programming":4,"combat":6,"engineering":5}'
+
 /obj/item/mech_equipment/mounted_system/projectile/attackby(var/obj/item/used_item, var/mob/user)
 	var/obj/item/gun/projectile/automatic/A = holding
 	if(!istype(A))
@@ -10,12 +18,6 @@
 		to_chat(user, SPAN_NOTICE("You load the ammo magazine into \the [src]."))
 	return TRUE
 
-/obj/item/mech_equipment/mounted_system/projectile/attack_self(var/mob/user)
-	. = ..()
-	if(. && holding)
-		var/obj/item/gun/M = holding
-		return M.switch_firemodes()
-
 /obj/item/gun/projectile/automatic/get_hardpoint_status_value()
 	if(!isnull(ammo_magazine))
 		return ammo_magazine.get_stored_ammo_count()
@@ -26,14 +28,6 @@
 	return 0
 
 //Weapons below this.
-/obj/item/mech_equipment/mounted_system/projectile
-	name = "mounted submachine gun"
-	icon_state = "mech_ballistic"
-	holding = /obj/item/gun/projectile/automatic/smg/mech
-	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
-	restricted_software = list(MECH_SOFTWARE_WEAPONS)
-	origin_tech = @'{"programming":4,"combat":6,"engineering":5}'
-
 /obj/item/gun/projectile/automatic/smg/mech
 	magazine_type = /obj/item/ammo_magazine/mech/smg_top
 	allowed_magazines = /obj/item/ammo_magazine/mech/smg_top

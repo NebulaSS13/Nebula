@@ -51,7 +51,7 @@
 							if(!area)
 								area = new load_path(null)
 								instanced_areas[load_path] = area
-							ChangeArea(spawn_loc, area)
+							spawn_loc.ChangeArea(area)
 
 						else if(ispath(load_path, /atom))
 							created_instance = new load_path(spawn_loc)

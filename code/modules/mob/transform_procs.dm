@@ -51,8 +51,8 @@
 /mob/living/AIize(move = TRUE)
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/t in get_external_organs())
-		qdel(t)
+	delete_organs()
+	drop_equipped_items()
 	for(var/obj/item/thing in src)
 		drop_from_inventory(thing)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
@@ -65,7 +65,7 @@
 		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = sound_channels.lobby_channel))// stop the jams for AIs
 
 
-	var/mob/living/silicon/ai/O = new (loc, global.using_map.default_law_type,,1)//No brain but safety is in effect.
+	var/mob/living/silicon/ai/O = new (loc, global.using_map.default_law_type,null,1)//No brain but safety is in effect.
 	O.set_invisibility(INVISIBILITY_NONE)
 	O.aiRestorePowerRoutine = 0
 	if(mind)
@@ -101,28 +101,23 @@
 	qdel(src)
 	return O
 
-//human -> robot
-/mob/living/human/proc/Robotize(var/supplied_robot_type = /mob/living/silicon/robot)
+//living mob -> robot
+/mob/living/proc/Robotize(var/supplied_robot_type = ASSIGNMENT_ROBOT, skip_qdel = FALSE)
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	QDEL_NULL_LIST(worn_underwear)
-	for(var/obj/item/thing in src)
-		drop_from_inventory(thing)
-	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
-	icon = null
-	set_invisibility(INVISIBILITY_ABSTRACT)
-	for(var/t in get_external_organs())
-		qdel(t)
+	drop_equipped_items()
+	var/robot_type_path = SSrobots.get_mob_type_by_title(supplied_robot_type)
+	var/mob/living/silicon/robot/O = new robot_type_path(loc)
 
-	var/mob/living/silicon/robot/O = new supplied_robot_type( loc )
-
-	O.set_gender(gender)
+	O.set_gender(get_gender())
 	O.set_invisibility(INVISIBILITY_NONE)
 
 	if(!mind)
 		mind_initialize()
 		mind.assigned_role = ASSIGNMENT_ROBOT
+		if(supplied_robot_type != ASSIGNMENT_ROBOT)
+			mind.role_alt_title = supplied_robot_type
 	mind.active = TRUE
 	mind.transfer_to(O)
 	if(O.mind && O.mind.assigned_role == ASSIGNMENT_ROBOT)
@@ -135,7 +130,8 @@
 	RAISE_EVENT(/decl/observ/cyborg_created, O)
 	O.Namepick()
 
-	qdel(src)
+	if(!skip_qdel)
+		qdel(src)
 	return O
 
 /mob/living/human/proc/corgize()

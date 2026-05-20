@@ -5,7 +5,7 @@
 	#include "../../mods/content/augments/_augments.dme"
 	#include "../../mods/content/baychems/_baychems.dme"
 	#include "../../mods/content/beekeeping/_beekeeping.dme"
-
+	#include "../../mods/content/brain_interface/_brain_interface.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/government/_government.dme"
 	#include "../../mods/content/matchmaking/_matchmaking.dme"

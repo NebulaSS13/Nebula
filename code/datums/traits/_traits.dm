@@ -106,6 +106,8 @@
 	var/available_at_map_tech = MAP_TECH_LEVEL_ANY
 	/// Whether or not a rejuvenation should apply this aspect.
 	var/reapply_on_rejuvenation = FALSE
+	/// Whether this trait should be copied and applied by mob snapshots.
+	var/is_heritable = TRUE
 	/// What species can select this trait in chargen?
 	var/list/permitted_species
 	/// What species cannot select this trait in chargen?

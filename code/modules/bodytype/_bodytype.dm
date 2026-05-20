@@ -639,7 +639,7 @@ var/global/list/bodytypes_by_category = list()
 		set_extension(limb, /datum/extension/armor, natural_armour_values)
 
 //fully_replace: If true, all existing organs will be discarded. Useful when doing mob transformations, and not caring about the existing organs
-/decl/bodytype/proc/create_missing_organs(mob/living/human/H, fully_replace = FALSE)
+/decl/bodytype/proc/create_missing_organs(mob/living/human/H, fully_replace = FALSE, datum/mob_snapshot/snapshot_to_use = null)
 	if(fully_replace)
 		H.delete_organs()
 
@@ -659,8 +659,10 @@ var/global/list/bodytypes_by_category = list()
 				qdel(O)
 
 	//Create missing limbs
-	var/datum/mob_snapshot/supplied_data = H.get_mob_snapshot()
-	supplied_data.root_bodytype = src // This may not have been set on the target mob torso yet.
+	var/datum/mob_snapshot/supplied_data = snapshot_to_use
+	if(!supplied_data)
+		supplied_data = H.get_mob_snapshot()
+		supplied_data.root_bodytype = src // This may not have been set on the target mob torso yet.
 
 	for(var/limb_type in has_limbs)
 		if(GET_EXTERNAL_ORGAN(H, limb_type)) //Skip existing

@@ -381,6 +381,7 @@ var/global/list/dexterity_levels = list(
 // Sprite accessory metadata types for shorter reference.
 #define SAM_COLOR       /decl/sprite_accessory_metadata/color
 #define SAM_COLOR_INNER /decl/sprite_accessory_metadata/color/alt
+#define SAM_COLOR_EXTRA /decl/sprite_accessory_metadata/color/extra
 #define SAM_GRADIENT    /decl/sprite_accessory_metadata/gradient
 
 // Helpers for setting mob appearance. They are extremely ugly, hence the helpers.

@@ -280,13 +280,14 @@
 	return ..()
 
 /decl/sprite_accessory/marking/grafadreka
-	name            = "Drake Spines"
-	icon            = 'mods/species/drakes/icons/markings.dmi'
-	icon_state      = "spines"
-	uid             = "acc_marking_drake_spines"
-	species_allowed = list(/decl/species/grafadreka::uid)
-	color_blend     = ICON_MULTIPLY
-	body_parts      = list(
+	name             = "Drake Spines"
+	icon             = 'mods/species/drakes/icons/markings.dmi'
+	icon_state       = "spines"
+	uid              = "acc_marking_drake_spines"
+	species_allowed  = list(/decl/species/grafadreka::uid)
+	color_blend      = ICON_MULTIPLY
+	mask_to_bodypart = FALSE
+	body_parts       = list(
 		BP_CHEST,
 		BP_GROIN,
 		BP_TAIL,

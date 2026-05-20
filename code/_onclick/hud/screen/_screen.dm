@@ -71,7 +71,7 @@
 /obj/screen/get_color()
 	return color
 
-/obj/screen/set_color(new_color)
+/obj/screen/set_color(new_color, skip_update)
 	if(color != new_color)
 		color = new_color
 		return TRUE

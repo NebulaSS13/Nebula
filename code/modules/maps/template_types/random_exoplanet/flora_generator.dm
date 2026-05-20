@@ -71,9 +71,9 @@
 		S.exude_gasses -= exuded_gases_exclusions
 	if(length(atmos.gas))
 		if(S.consume_gasses)
-			S.consume_gasses = list(pick(atmos.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
-		for(var/g in atmos.gas)
-			var/decl/material/mat = GET_DECL(g)
+			S.consume_gasses = list(apick(atmos.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
+		for(var/gas_type in atmos.gas)
+			var/decl/material/mat = GET_DECL(gas_type)
 			if(mat.gas_flags & XGM_GAS_CONTAMINANT)
 				S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
 	if(prob(50))

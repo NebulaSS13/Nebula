@@ -65,7 +65,7 @@
 /obj/screen/ability/button/handle_click(mob/user, params)
 	if(owning_handler.prepared_ability == ability)
 		owning_handler.cancel_prepared_ability()
-	else if(ability.use_ability(user, get_turf(user), owning_handler)) // tmp, needs better/multi-step target selection
+	else if(ability.use_ability(user, user, owning_handler)) // tmp, needs better/multi-step target selection
 		update_icon()
 		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_icon)), ability.get_cooldown_time(ability.get_metadata_for_user(user)) + 1)
 

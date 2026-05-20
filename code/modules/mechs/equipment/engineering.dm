@@ -179,8 +179,7 @@
 	owner.update_icon()
 
 /obj/item/mech_equipment/atmos_shields/attack_self(mob/user)
-	. = ..()
-	if(.)
+	if(!(. = ..()))
 		if(active)
 			deactivate()
 		else

@@ -103,7 +103,7 @@ var/global/list/ai_verbs_default = list(
 	src.verbs -= ai_verbs_default
 	src.verbs += /mob/living/verb/ghost
 
-/mob/living/silicon/ai/Initialize(mapload, var/datum/ai_laws/L, var/obj/item/organ/internal/brain_interface/B, var/safety = 0)
+/mob/living/silicon/ai/Initialize(mapload, var/datum/ai_laws/L, var/mob/living/brain/brainmob, var/safety = 0)
 	announcement = new()
 	announcement.title = "A.I. Announcement"
 	announcement.announcement_type = "A.I. Announcement"
@@ -143,7 +143,6 @@ var/global/list/ai_verbs_default = list(
 	add_language(/decl/language/sign, 0)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
-		var/mob/living/brainmob = B?.get_brainmob()
 		if(!brainmob) // If there is no player/brain inside.
 			empty_playable_ai_cores += new/obj/structure/aicore/deactivated(loc)//New empty terminal.
 			. = INITIALIZE_HINT_QDEL

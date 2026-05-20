@@ -16,7 +16,6 @@
 	homeworld. Most other interstellar states have comperable policies. As such, statelessness tends to be at least semi-voluntary, \
 	standing in for allegience to a defunct or unrecognized government or representing a total rejection of all interstellar governments."
 	economic_power = 0
-	capital = "None"
 
 /decl/background_detail/citizenship/synthetic
 	name = "Stateless Drone"

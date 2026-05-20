@@ -10,7 +10,3 @@
 	if(radio)
 		radio.hear_talk(src, sanitize(message), verb, speaking)
 
-/mob/living/brain/get_radio()
-	var/obj/item/organ/internal/brain_interface/container = get_container()
-	if(istype(container))
-		return container.get_radio()

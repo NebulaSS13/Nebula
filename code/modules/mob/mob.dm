@@ -695,10 +695,10 @@ var/global/const/ACTION_DANGER_ALL = 2
 	return ..()
 
 /mob/proc/pull_damage()
-	return 0
+	return FALSE
 
 /mob/living/human/pull_damage()
-	if(!current_posture.prone|| get_damage(BRUTE) + get_damage(BURN) < 100)
+	if(buckled || !current_posture.prone || get_damage(BRUTE) + get_damage(BURN) < 100)
 		return FALSE
 	for(var/obj/item/organ/external/e in get_external_organs())
 		if((e.status & ORGAN_BROKEN) && !e.splinted)
@@ -1603,3 +1603,13 @@ var/global/const/ACTION_DANGER_ALL = 2
 // Returns true if the mob is cloaked, otherwise false
 /mob/proc/is_cloaked()
 	return FALSE
+
+/mob/proc/get_background_datum_by_flag(background_flag)
+	var/list/all_categories = global.using_map.get_background_categories()
+	for(var/cat_type in all_categories)
+		var/decl/background_category/background_cat = all_categories[cat_type]
+		if(background_cat.background_flags && (background_cat.background_flags & background_flag))
+			return get_background_datum(cat_type)
+
+/mob/proc/get_background_datum(cat_type)
+	return global.using_map.default_background_info[cat_type]

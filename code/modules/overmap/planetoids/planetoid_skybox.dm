@@ -27,10 +27,8 @@
 	var/list/colors = list()
 	for(var/lvl in map_z)
 		var/datum/level_data/level_data = SSmapping.levels_by_z[lvl]
-		///#TODO: Check if the z-level is visible from space
-		for(var/g in level_data.exterior_atmosphere?.gas)
-			var/decl/material/mat = GET_DECL(g)
-			colors += mat.color
+		if(level_data.exterior_atmosphere)
+			colors += level_data.exterior_atmosphere.get_overall_color()
 	if(length(colors))
 		return MixColors(colors)
 

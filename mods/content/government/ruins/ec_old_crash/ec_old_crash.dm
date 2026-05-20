@@ -43,10 +43,10 @@
 	external_pressure_bound = 0.25 ATM
 
 /turf/floor/tiled/lowpressure
-	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD)
+	initial_gas = alist(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD)
 
 /turf/floor/tiled/white/lowpressure
-	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD)
+	initial_gas = alist(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD)
 
 /obj/item/disk/astrodata
 	name = "astronomical data disk"

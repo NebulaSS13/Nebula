@@ -43,7 +43,7 @@
 	_base_flooring = /decl/flooring/plating/ascent
 	icon_state     = "curvy"
 	icon           = 'icons/turf/flooring/alium.dmi'
-	initial_gas    = list(
+	initial_gas    = alist(
 		/decl/material/gas/methyl_bromide = MOLES_CELLSTANDARD * 0.5,
 		/decl/material/gas/oxygen         = MOLES_CELLSTANDARD * 0.5
 	)
@@ -58,7 +58,7 @@
 	icon_state     = "jaggy"
 	color          = COLOR_GRAY40
 	_flooring      = /decl/flooring/tiling_ascent
-	initial_gas    = list(
+	initial_gas    = alist(
 		/decl/material/gas/methyl_bromide = MOLES_CELLSTANDARD * 0.5,
 		/decl/material/gas/oxygen         = MOLES_CELLSTANDARD * 0.5
 	)

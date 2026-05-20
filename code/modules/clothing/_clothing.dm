@@ -452,11 +452,12 @@
 	if(get_vitals_sensor())
 		LAZYADD(., /decl/interaction_handler/clothing_set_sensors)
 
-/obj/item/clothing/proc/set_markings_color(new_color)
+/obj/item/clothing/proc/set_markings_color(new_color, skip_update)
 	if(markings_color != new_color)
 		markings_color = new_color
-		update_icon()
-		update_clothing_icon()
+		if(!skip_update)
+			update_icon()
+			update_clothing_icon()
 		return TRUE
 	return FALSE
 

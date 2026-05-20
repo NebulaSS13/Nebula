@@ -2,10 +2,9 @@
 /decl/ability/cult/construct
 	name                    = "Artificer"
 	desc                    = "This spell conjures a construct which may be controlled by shades."
-	target_selector         = /decl/ability_targeting/clear_turf
+	target_selector         = /decl/ability_targeting/clear_turf/construct
 	overlay_icon            = 'mods/gamemodes/cult/icons/effects.dmi'
 	overlay_icon_state      = "sparkles"
-	target_selector         = /decl/ability_targeting/clear_turf/construct
 	var/summon_type         = /obj/structure/constructshell
 
 /decl/ability_targeting/clear_turf/construct/validate_target(mob/user, atom/target, list/metadata, decl/ability/ability)
@@ -14,14 +13,14 @@
 		return FALSE
 	return ..() && !istype(target, cult_ability.summon_type) && !(locate(cult_ability.summon_type) in target)
 
-/decl/ability/cult/construct/apply_effect(mob/user, atom/hit_target, list/metadata, obj/item/projectile/ability/projectile)
+/decl/ability/cult/construct/apply_ability_effect(mob/user, atom/hit_target, list/metadata, obj/item/projectile/ability/projectile)
 	. = ..()
 	var/turf/target_turf = get_turf(hit_target)
 	if(istype(target_turf))
 		if(ispath(summon_type, /turf))
 			target_turf = target_turf.ChangeTurf(summon_type, TRUE, FALSE, TRUE, TRUE, FALSE)
 			if(target_turf) // We reapply effects as target no longer exists.
-				apply_effect_to(user, target_turf, metadata)
+				apply_ability_effect_to(user, target_turf, metadata)
 		else if(ispath(summon_type, /atom))
 			new summon_type(target_turf)
 
@@ -87,7 +86,7 @@
 		return TRUE
 	return FALSE
 
-/decl/ability/cult/construct/pylon/apply_effect(mob/user, atom/hit_target, list/metadata, obj/item/projectile/ability/projectile)
+/decl/ability/cult/construct/pylon/apply_ability_effect(mob/user, atom/hit_target, list/metadata, obj/item/projectile/ability/projectile)
 	for(var/obj/structure/cult/pylon/P in get_turf(hit_target))
 		if(P.isbroken)
 			P.repair(user)

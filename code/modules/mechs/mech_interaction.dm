@@ -349,8 +349,8 @@
 		var/to_place = input("Where would you like to install it?") as null|anything in (realThing.restricted_hardpoints & free_hardpoints)
 		if(!to_place)
 			to_chat(user, SPAN_WARNING("There is no room to install \the [used_item]."))
-		else if(!install_system(used_item, to_place, user))
-			to_chat(user, SPAN_WARNING("\The [used_item] could not be installed in that hardpoint."))
+		else
+			install_system(used_item, to_place, user)
 		return TRUE
 
 	// Apply customisation.
