@@ -182,7 +182,7 @@
 
 	else
 		// Otherwise, just apply to the target directly.
-		apply_effect(user, target, metadata)
+		apply_ability_effect(user, target, metadata)
 
 	if(end_prep_on_cast && handler.prepared_ability == src)
 		handler.cancel_prepared_ability()
@@ -325,7 +325,7 @@
 
 	return TRUE
 
-/decl/ability/proc/apply_effect(mob/user, atom/hit_target, list/metadata, obj/item/projectile/ability/projectile)
+/decl/ability/proc/apply_ability_effect(mob/user, atom/hit_target, list/metadata, obj/item/projectile/ability/projectile)
 	SHOULD_CALL_PARENT(TRUE)
 	if(use_sound)
 		playsound(get_turf(user), use_sound, use_sound_volume, 1)
@@ -339,7 +339,7 @@
 		show_ability_cast_msg(user, targets, metadata)
 	while(length(targets))
 		var/target = targets[1]
-		apply_effect_to(user, target, metadata)
+		apply_ability_effect_to(user, target, metadata)
 		targets = prune_targets(user, target, targets, metadata)
 	finish_casting(user, hit_target, metadata)
 
@@ -366,7 +366,7 @@
 	ability_overlay.set_density(FALSE)
 	QDEL_IN(ability_overlay, overlay_lifespan)
 
-/decl/ability/proc/apply_effect_to(mob/user, atom/target, list/metadata)
+/decl/ability/proc/apply_ability_effect_to(mob/living/user, atom/target, list/metadata)
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	apply_visuals(user, target, metadata)

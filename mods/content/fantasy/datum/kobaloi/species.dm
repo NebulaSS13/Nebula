@@ -16,6 +16,16 @@
 	preview_outfit      = /decl/outfit/job/generic/fantasy
 	base_external_prosthetics_model = null
 
+	available_accessory_categories = list(
+		SAC_HAIR,
+		SAC_FACIAL_HAIR,
+		SAC_HORNS,
+		SAC_EARS,
+		SAC_TAIL,
+		SAC_COSMETICS,
+		SAC_MARKINGS
+	)
+
 	available_background_info = list(
 		/decl/background_category/citizenship = list(
 			/decl/background_detail/citizenship/other

@@ -9,7 +9,7 @@
 	ambient_light_level = 1
 	ambient_light_color = "#f3e6ca"
 	strata = /decl/strata/shaded_hills
-	exterior_atmosphere = list(
+	exterior_atmosphere = alist(
 		/decl/material/gas/oxygen =   MOLES_O2STANDARD,
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)

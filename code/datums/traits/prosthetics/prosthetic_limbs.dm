@@ -6,6 +6,7 @@
 	available_at_map_tech = MAP_TECH_LEVEL_ANY // the base trait must be available so that wooden prostheses are available
 	abstract_type = /decl/trait/prosthetic_limb
 	reapply_on_rejuvenation = TRUE
+	is_heritable = FALSE
 	var/fullbody_synthetic_only = FALSE
 	var/replace_children = TRUE
 	var/check_bodytype

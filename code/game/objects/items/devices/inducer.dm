@@ -47,8 +47,18 @@
 	return FALSE
 
 /obj/item/inducer/attackby(obj/item/used_item, mob/user)
-	if(CannotUse(user) || recharge(used_item, user))
+	var/obj/item/cell/my_cell = get_cell()
+	var/datum/extension/loaded_cell/panel/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+
+	if(cell_loaded?.has_tool_unload_interaction(used_item))
+		return cell_loaded.try_unload(user, used_item)
+
+	else if(!istype(my_cell) && istype(used_item, /obj/item/cell))
+		return cell_loaded?.try_load(user, used_item)
+
+	else if(CannotUse(user) || recharge(used_item, user))
 		return TRUE
+
 	return ..()
 
 /obj/item/inducer/proc/recharge(atom/A, mob/user)

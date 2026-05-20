@@ -43,7 +43,7 @@
 			square = square.ChangeTurf(overmap_edge_type)
 		else
 			square = square.ChangeTurf(overmap_turf_type)
-		ChangeArea(square, A)
+		square.ChangeArea(A)
 
 /datum/overmap/proc/generate_overmap()
 	testing("Building overmap [name]...")

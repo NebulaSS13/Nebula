@@ -12,9 +12,9 @@
 
 /obj/machinery/portable_atmospherics/get_single_monetary_worth()
 	. = ..()
-	for(var/gas in air_contents?.gas)
-		var/decl/material/gas_data = GET_DECL(gas)
-		. += gas_data.get_value() * air_contents.gas[gas] * GAS_WORTH_MULTIPLIER
+	for(var/gas_type, gas_amount in air_contents?.gas)
+		var/decl/material/gas_data = GET_DECL(gas_type)
+		. += gas_data.get_value() * gas_amount * GAS_WORTH_MULTIPLIER
 	. = max(1, round(.))
 
 /obj/machinery/portable_atmospherics/Initialize()

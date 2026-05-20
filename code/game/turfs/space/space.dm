@@ -60,7 +60,7 @@
 /turf/space/LateInitialize()
 	if(SSmapping.base_floor_area)
 		var/area/new_area = locate(SSmapping.base_floor_area) || new SSmapping.base_floor_area
-		ChangeArea(src, new_area)
+		ChangeArea(new_area)
 	ChangeTurf(SSmapping.base_floor_type)
 
 /turf/space/proc/toggle_transit(var/direction)

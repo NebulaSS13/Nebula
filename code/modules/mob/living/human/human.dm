@@ -462,7 +462,7 @@
 /mob/proc/set_bodytype(var/decl/bodytype/new_bodytype)
 	return
 
-/mob/living/human/set_bodytype(var/decl/bodytype/new_bodytype)
+/mob/living/human/set_bodytype(var/decl/bodytype/new_bodytype, var/datum/mob_snapshot/snapshot_to_use = null)
 
 	var/decl/bodytype/old_bodytype = get_bodytype()
 	if(ispath(new_bodytype))
@@ -489,7 +489,7 @@
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
 // For transforming an existing mob, look at change_species()
-/mob/living/human/set_species(var/new_species_uid, var/new_bodytype = null)
+/mob/living/human/set_species(var/new_species_uid, var/new_bodytype = null, var/datum/mob_snapshot/snapshot_to_use = null)
 	if(!new_species_uid)
 		CRASH("set_species on mob '[src]' was passed a null species uid!")
 	var/decl/species/new_species = decls_repository.get_decl_by_id(new_species_uid)
@@ -518,7 +518,7 @@
 	//Handle bodytype
 	if(!new_bodytype)
 		new_bodytype = species.get_bodytype_by_pronouns(new_pronouns)
-	set_bodytype(new_bodytype)
+	set_bodytype(new_bodytype, snapshot_to_use = snapshot_to_use)
 
 	available_maneuvers = species.maneuvers.Copy()
 
@@ -894,20 +894,10 @@
 		if(!defer_language_update)
 			update_languages()
 
-/mob/living/proc/get_background_datum_by_flag(background_flag)
-	var/list/all_categories = global.using_map.get_background_categories()
-	for(var/cat_type in all_categories)
-		var/decl/background_category/background_cat = all_categories[cat_type]
-		if(background_cat.background_flags && (background_cat.background_flags & background_flag))
-			return get_background_datum(cat_type)
-
-/mob/living/proc/get_background_datum(cat_type)
-	return null
-
 /mob/living/human/get_background_datum(cat_type)
 	. = LAZYACCESS(background_info, cat_type)
 	if(!istype(., /decl/background_detail))
-		. = global.using_map.default_background_info[cat_type]
+		. = ..()
 		PRINT_STACK_TRACE("get_background_datum() tried to return a non-instance value for background category '[cat_type]' - full background list: [json_encode(background_info)] default species culture list: [json_encode(global.using_map.default_background_info)]")
 
 /mob/living/human/get_digestion_product()
@@ -984,7 +974,7 @@
 	else if(!species_uid)
 		species_uid = global.using_map.default_species //Humans cannot exist without a species!
 
-	set_species(species_uid, supplied_appearance?.root_bodytype)
+	set_species(species_uid, supplied_appearance?.root_bodytype, snapshot_to_use = supplied_appearance)
 	var/decl/bodytype/root_bodytype = get_bodytype() // root bodytype is set in set_species
 	ASSERT((!supplied_appearance?.root_bodytype) || (root_bodytype == supplied_appearance.root_bodytype))
 	if(!get_skin_colour())

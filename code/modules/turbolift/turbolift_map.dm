@@ -186,8 +186,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/turbolift_spawner)
 
 		var/area_path = areas_to_use[az]
 		var/area/A = locate(area_path) || new area_path()
-		for(var/T in floor_turfs)
-			ChangeArea(T, A)
+		for(var/turf/T as anything in floor_turfs)
+			T.ChangeArea(A)
 		cfloor.set_area_ref("\ref[A]")
 
 		// Place exterior doors.

@@ -59,6 +59,7 @@
 	var/mob/living/integrated_ai // Direct reference to the actual mob held in the suit.
 	var/obj/item/ai_card  // Reference to the object previously holding the AI.
 	var/obj/item/ai_verbs/verb_holder
+	var/list/simple_insert_types = list(/obj/item/paicard)
 
 /mob/living
 	var/get_rig_stats = 0
@@ -133,7 +134,7 @@
 		return 1
 
 	// Okay, it wasn't a terminal being touched, check for all the simple insertions.
-	if(input_device.type in list(/obj/item/paicard, /obj/item/organ/internal/brain_interface))
+	if(is_type_in_list(input_device, simple_insert_types))
 		if(integrated_ai)
 			integrated_ai.attackby(input_device,user)
 			// If the transfer was successful, we can clear out our vars.

@@ -72,19 +72,35 @@
 			return FALSE
 	return TRUE
 
+/decl/ability_targeting/target_self
+	target_turf = FALSE
+
+/decl/ability_targeting/target_self/validate_target(mob/user, atom/target, list/metadata, decl/ability/ability)
+	return target == user
+
+/decl/ability_targeting/target_self/get_affected(mob/user, atom/hit_target, list/metadata, decl/ability/ability, obj/item/projectile/ability/projectile)
+	return list(user)
+
 /decl/ability_targeting/clear_turf
 	ignore_dense_turfs = TRUE
 
 /decl/ability_targeting/clear_turf/validate_target(mob/user, atom/target, list/metadata, decl/ability/ability)
 	. = ..() && isturf(target)
 	if(.)
-		var/turf/target_turf = target
-		return !target_turf.contains_dense_objects(user)
+		var/turf/turf_to_target = target
+		return !turf_to_target.contains_dense_objects(user)
 
-/decl/ability_targeting/living_mob
-	target_turf               = FALSE
+/decl/ability_targeting/single_atom
+	target_turf = FALSE
+	user_is_immune = TRUE
 
-/decl/ability_targeting/living_mob/validate_target(mob/user, atom/target, list/metadata, decl/ability/ability)
+/decl/ability_targeting/single_atom/can_target_user
+	user_is_immune = FALSE
+
+/decl/ability_targeting/single_atom/get_affected(mob/user, atom/hit_target, list/metadata, decl/ability/ability, obj/item/projectile/ability/projectile)
+	return list(hit_target)
+
+/decl/ability_targeting/single_atom/living_mob/validate_target(mob/user, atom/target, list/metadata, decl/ability/ability)
 	. = ..() && isliving(target)
 	if(.)
 		var/mob/living/victim = target

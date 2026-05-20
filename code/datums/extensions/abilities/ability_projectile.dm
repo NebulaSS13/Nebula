@@ -22,10 +22,10 @@
 
 /obj/item/projectile/ability/Bump(var/atom/A, forced=0)
 	if(loc && carried_ability && !expended)
-		carried_ability.apply_effect(owner, A, ability_metadata, src)
+		carried_ability.apply_ability_effect(owner, A, ability_metadata, src)
 	return TRUE
 
 /obj/item/projectile/ability/on_impact(var/atom/A)
 	if(loc && carried_ability && !expended)
-		carried_ability.apply_effect(owner, A, ability_metadata, src)
+		carried_ability.apply_ability_effect(owner, A, ability_metadata, src)
 	return TRUE

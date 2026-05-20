@@ -15,6 +15,7 @@
 	affect_blood_on_ingest = 0
 	affect_blood_on_inhale = 0
 	opacity = 1.0 // liquids are half transparent by default; meat and etc should not be transparent
+	hardness = MAT_VALUE_SOFT // same softness as meat
 
 	// Technically a room-temperature solid, but saves
 	// repathing it to /solid all over the codebase.

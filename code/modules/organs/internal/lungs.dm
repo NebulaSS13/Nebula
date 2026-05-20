@@ -210,9 +210,9 @@
 	if(!failed_inhale) // Enough gas to tell we're being poisoned via chemical burns or whatever.
 		var/poison_total = 0
 		if(poison_types)
-			for(var/gname in breath.gas)
-				if(poison_types[gname])
-					poison_total += breath.gas[gname]
+			for(var/gas_type, gas_amount in breath.gas)
+				if(poison_types[gas_type])
+					poison_total += gas_amount
 		if(((poison_total/breath.total_moles)*breath_pressure) > safe_toxins_max)
 			SET_HUD_ALERT(owner, HUD_TOX, 1)
 

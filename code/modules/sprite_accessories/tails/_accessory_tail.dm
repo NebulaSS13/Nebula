@@ -37,7 +37,7 @@
 	var/icon_animation_states
 
 /decl/sprite_accessory/tail/none
-	name                        = "Default Tail"
+	name                        = "No Custom Tail"
 	icon_state                  = "none"
 	uid                         = "acc_tail_none"
 	bodytypes_allowed           = null
