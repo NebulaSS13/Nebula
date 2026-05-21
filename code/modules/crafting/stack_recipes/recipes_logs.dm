@@ -23,3 +23,18 @@
 /decl/stack_recipe/logs/wall_frame
 	result_type                 = /obj/structure/wall_frame/log
 	difficulty                  = MAT_VALUE_HARD_DIY
+
+/decl/stack_recipe/logs/furniture
+	abstract_type          = /decl/stack_recipe/logs/furniture
+	one_per_turf           = TRUE
+	on_floor               = TRUE
+	difficulty             = MAT_VALUE_HARD_DIY
+	category               = "furniture"
+
+/decl/stack_recipe/logs/furniture/fence
+	result_type            = /obj/structure/fence/palisade
+	difficulty             = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/logs/furniture/fence_door
+	result_type            = /obj/structure/fence/door/palisade
+	difficulty             = MAT_VALUE_NORMAL_DIY

@@ -77,3 +77,19 @@
 	result_type                 = /obj/structure/grille
 	one_per_turf                = TRUE
 	difficulty                  = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/rods/furniture
+	abstract_type          = /decl/stack_recipe/rods/furniture
+	one_per_turf           = TRUE
+	on_floor               = TRUE
+	difficulty             = MAT_VALUE_HARD_DIY
+	category               = "furniture"
+
+/decl/stack_recipe/rods/furniture/fence
+	result_type            = /obj/structure/fence/stick
+	difficulty             = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/rods/furniture/fence_door
+	result_type            = /obj/structure/fence/door/stick
+	difficulty             = MAT_VALUE_NORMAL_DIY
+
