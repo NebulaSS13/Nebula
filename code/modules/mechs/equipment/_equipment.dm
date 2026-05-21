@@ -72,15 +72,6 @@
 /obj/item/mech_equipment/proc/get_effective_obj()
 	return src
 
-/obj/item/mech_equipment/proc/MouseDragInteraction()
-	return 0
-
-/obj/item/mech_equipment/proc/MouseDownInteraction()
-	return 0
-
-/obj/item/mech_equipment/proc/MouseUpInteraction()
-	return 0
-
 /obj/item/mech_equipment/mob_can_unequip(mob/user, slot, disable_warning = FALSE, dropping = FALSE)
 	. = ..()
 	if(. && owner)

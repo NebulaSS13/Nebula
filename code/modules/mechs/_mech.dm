@@ -260,3 +260,34 @@
 	if(current_user)
 		return FALSE
 	return ..()
+
+// Handling for auto-fire mechanic
+/mob/living/exosuit/mob_can_autofire(obj/item/gun/autofiring, atom/autofiring_at)
+	if(!(autofiring in selected_system)) // Make sure the gun is still selected.
+		return FALSE
+	return ..()
+
+/mob/living/exosuit/proc/relayed_pilot_check(mob/user)
+	if(!user || incapacitated() || user.incapacitated())
+		return FALSE
+	if(!(user in pilots) && user != src)
+		return FALSE
+	if(!selected_system)
+		return FALSE
+	return TRUE
+
+// TODO: make mechs use inventory slots so we can just call on_mouse_foo().
+/mob/living/exosuit/relayed_mouse_down(mob/user, object, location, control, params)
+	if(!relayed_pilot_check(user))
+		return ..()
+	. = selected_system.wielder_mouse_drag_down(src, object, location, control, params)
+
+/mob/living/exosuit/relayed_mouse_held(mob/user, atom/target)
+	if(!relayed_pilot_check(user))
+		return ..()
+	return selected_system.wielder_mouse_drag_held(src, target)
+
+/mob/living/exosuit/relayed_mouse_up(mob/user, atom/target)
+	if(!relayed_pilot_check(user))
+		return ..()
+	return selected_system.wielder_mouse_drag_up(src, target)

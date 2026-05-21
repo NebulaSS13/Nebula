@@ -1613,3 +1613,7 @@ var/global/const/ACTION_DANGER_ALL = 2
 
 /mob/proc/get_background_datum(cat_type)
 	return global.using_map.default_background_info[cat_type]
+
+// Check if this mob can full-auto fire a gun at a target.
+/mob/proc/mob_can_autofire(obj/item/gun/gun, atom/target)
+	return TRUE // TODO: dexterity check? That will be handled by the item itself probably.

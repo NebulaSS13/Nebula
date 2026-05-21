@@ -39,3 +39,12 @@
 
 /obj/item/mech_equipment/mounted_system/get_hardpoint_maptext()
 	return (holding ? holding.get_hardpoint_maptext() : null)
+
+/obj/item/mech_equipment/mounted_system/wielder_mouse_drag_held(mob/user, atom/target)
+	return (holding ? holding.wielder_mouse_drag_held(user, target) : ..())
+
+/obj/item/mech_equipment/mounted_system/wielder_mouse_drag_up(mob/user, atom/target)
+	return (holding ? holding.wielder_mouse_drag_up(user, target) : ..())
+
+/obj/item/mech_equipment/mounted_system/wielder_mouse_drag_down(mob/user, object, location, control, params)
+	return (holding ? holding.wielder_mouse_drag_down(user, object, location, control, params) : ..())
