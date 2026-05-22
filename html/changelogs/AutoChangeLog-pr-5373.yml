@@ -1,6 +1,0 @@
-author: MistakeNot4892
-changes:
-  - {tweak: Mech plasmacutter is full auto and mech AR full auto should now 
-      work.}
-  - {tweak: Autofire should be more responsive in general.}
-delete-after: true
