@@ -12,6 +12,7 @@
 	default_solid_form = /obj/item/stack/material/cubes
 	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	wall_damage_threshold = 20
 
 /decl/material/solid/metal/aliumium/Initialize()
 	icon_base = 'icons/turf/walls/metal.dmi'

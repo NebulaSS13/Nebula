@@ -11,7 +11,6 @@
 		material = get_default_material()
 	if(material)
 		explosion_resistance = material.explosion_resistance
-		hitsound = material.hitsound
 	if(reinf_material)
 		reinf_icon = islist(reinf_material.icon_reinf) ? pick(reinf_material.icon_reinf) : reinf_material.icon_reinf
 		if(reinf_material.explosion_resistance > explosion_resistance)

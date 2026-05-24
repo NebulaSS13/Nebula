@@ -37,7 +37,6 @@
 /decl/stack_recipe/rods/girder
 	result_type                 = /obj/structure/girder
 	required_wall_support_value = 10
-	req_amount                  = 5 * SHEET_MATERIAL_AMOUNT // Arbitrary value since girders return weird matter values.
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/rods/wall_frame

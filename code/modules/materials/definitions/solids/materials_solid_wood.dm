@@ -56,6 +56,7 @@
 	compost_value = 0.2
 	paint_verb = "stained"
 	liquid_name = "wood pulp"
+	wall_damage_threshold = 8
 
 /decl/material/solid/organic/wood/oak
 	name = "oak"

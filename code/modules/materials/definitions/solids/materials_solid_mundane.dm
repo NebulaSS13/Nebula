@@ -23,3 +23,4 @@
 		/decl/material/gas/sulfur_dioxide    = 0.05,
 		/decl/material/gas/carbon_dioxide    = 0.05
 	)
+	wall_damage_threshold = 10

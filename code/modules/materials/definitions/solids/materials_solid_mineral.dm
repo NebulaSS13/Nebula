@@ -19,6 +19,7 @@
 	)
 	ore_type_value = ORE_NUCLEAR
 	ore_data_value = 3
+	wall_damage_threshold = 5
 
 /decl/material/solid/graphite
 	name = "graphite"

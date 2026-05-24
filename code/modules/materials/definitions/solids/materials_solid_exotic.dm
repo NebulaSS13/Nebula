@@ -30,6 +30,7 @@
 	default_solid_form = /obj/item/stack/material/segment
 	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	wall_damage_threshold = 20
 
 /decl/material/solid/exotic_matter
 	name = "exotic matter"
@@ -65,3 +66,4 @@
 	default_solid_form = /obj/item/stack/material/segment
 	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	wall_damage_threshold = 10

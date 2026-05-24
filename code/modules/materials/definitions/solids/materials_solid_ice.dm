@@ -20,6 +20,7 @@
 	heating_products       = list(
 		/decl/material/liquid/water = 1
 	)
+	wall_damage_threshold = 5
 
 /decl/material/solid/ice/Initialize()
 	liquid_name ||= "liquid [name]" // avoiding the 'molten ice' issue

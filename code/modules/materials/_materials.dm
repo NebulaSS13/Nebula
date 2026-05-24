@@ -328,6 +328,9 @@ var/global/list/materials_by_gas_symbol = list()
 
 	var/forgable = FALSE // Can this material be forged in bar/billet form?
 
+	// Physical attacks against walls must beat this threshold to cause damage.
+	var/wall_damage_threshold = 2
+
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
 	name = "placeholder"
