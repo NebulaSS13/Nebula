@@ -12,6 +12,7 @@
 	bakes_into_at_temperature = T0C+500
 	bakes_into_material = /decl/material/solid/carbon
 */
+	wall_damage_threshold = 5
 
 /decl/material/solid/organic/plastic
 	name = "plastic"

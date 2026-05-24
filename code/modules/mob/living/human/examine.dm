@@ -168,11 +168,13 @@
 				shown_objects += embedlist
 				var/parsedembed[0]
 				for(var/obj/embedded in embedlist)
-					if(!parsedembed.len || (!parsedembed.Find(embedded.name) && !parsedembed.Find("multiple [embedded.name]")))
-						parsedembed.Add(embedded.name)
-					else if(!parsedembed.Find("multiple [embedded.name]"))
-						parsedembed.Remove(embedded.name)
-						parsedembed.Add("multiple "+embedded.name)
+					var/single_embed_string = "\a [embedded.name]"
+					var/plural_embed_string = "multiple [text_make_plural(embedded.name)]"
+					if(!parsedembed.len || (!parsedembed.Find(single_embed_string) && !parsedembed.Find(plural_embed_string)))
+						parsedembed.Add(single_embed_string)
+					else if(!parsedembed.Find(plural_embed_string))
+						parsedembed.Remove(single_embed_string)
+						parsedembed.Add(plural_embed_string)
 				wound_flavor_text[limb.organ_tag] += SPAN_WARNING("The [wound.desc] on [pronouns.his] [limb.name] has \a [english_list(parsedembed, and_text = " and a ", comma_text = ", a ")] sticking out of it!")
 
 		if(limb.splinted && limb.splinted.loc == limb)

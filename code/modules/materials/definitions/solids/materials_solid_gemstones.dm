@@ -18,6 +18,7 @@
 	hardness                = MAT_VALUE_VERY_HARD
 	reflectiveness          = MAT_VALUE_VERY_SHINY
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
+	wall_damage_threshold = 10
 
 /decl/material/solid/gemstone/diamond
 	name                    = "diamond"
