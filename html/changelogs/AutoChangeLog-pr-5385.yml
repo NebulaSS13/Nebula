@@ -1,0 +1,6 @@
+author: Penelope Haze
+changes:
+  - {tweak: Deactivating message passing on the message server now prevents 
+      requests console messages from being received. They will still be logged 
+      for admins and on the in-game message server console.}
+delete-after: true
