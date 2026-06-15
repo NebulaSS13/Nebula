@@ -235,7 +235,7 @@
 						bound_overlay.reset_internal_layering()
 #endif
 				var/target_state = bound_overlay.hidden
-				if (Tnew.mouse_opacity == 2 && (Tnew.z_flags & ZM_HIDE_ATOMS))
+				if (Tnew.mouse_opacity == MOUSE_OPACITY_PRIORITY && (Tnew.z_flags & ZM_HIDE_ATOMS))
 					target_state |= ZM_HIDE_OPAQUE
 				else
 					target_state &= ~ZM_HIDE_OPAQUE

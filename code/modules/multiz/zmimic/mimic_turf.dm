@@ -70,7 +70,7 @@
 		below.above = src
 
 	if (!(z_flags & (ZM_MIMIC_OVERWRITE|ZM_NO_OCCLUDE)) && mouse_opacity)
-		mouse_opacity = 2
+		mouse_opacity = MOUSE_OPACITY_PRIORITY
 
 	// TODO: There should be a more efficient way to do this, but it doesn't seem to have a meaningful impact on init time as-is.
 	for (var/turf/T as anything in RANGE_TURFS(src, 1))
