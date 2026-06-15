@@ -542,7 +542,7 @@ SUBSYSTEM_DEF(zcopy)
 		OO.queued = 0
 
 		// If an atom has explicit plane sets on its overlays/underlays, we need to mangle the appearance's overlays/underlays to align with Z-Mimic's plane usage.
-		if (OO.z_flags & (ZMM_MANGLE_PLANES | ZMM_AUTOMANGLE))
+		if (OO.z_flags & ZMM_MANGLE_PLANES)
 			var/new_appearance = fixup_appearance_planes(OO.appearance)
 			if (new_appearance)
 				OO.appearance = new_appearance
