@@ -168,7 +168,6 @@
 	//  Both the origin and destination are turfs with different areas.
 	//  When either origin or destination is a turf and the other is not.
 	var/is_new_area = (is_origin_turf ^ is_destination_turf) || (is_origin_turf && is_destination_turf && loc.loc != destination.loc)
-	var/was_below_z_turf = MOVABLE_IS_BELOW_ZTURF(src)
 
 	var/atom/origin = loc
 	loc = destination
@@ -210,17 +209,48 @@
 			L = thing
 			L.source_atom.update_light()
 
-	// Z-Mimic.
-	if (bound_overlay)
-		// The overlay will handle cleaning itself up on non-openspace turfs.
-		if (isturf(destination))
+		// Z-Mimic.
+		if (bound_overlay)
+			// Some types (like humantypes) change this per Move.
+			if (bound_overlay.glide_size != glide_size)
+				bound_overlay.glide_size = glide_size
+			// The overlay will handle cleaning itself up on non-openspace turfs.
 			bound_overlay.forceMove(get_step(src, UP))
-			if (dir != bound_overlay.dir)
+			if (bound_overlay.dir != dir)
 				bound_overlay.set_dir(dir)
-		else	// Not a turf, so we need to destroy immediately instead of waiting for the destruction timer to proc.
-			qdel(bound_overlay)
-	else if (isturf(loc) && (!origin || !was_below_z_turf) && MOVABLE_SHALL_MIMIC(src))
-		SSzcopy.discover_movable(src)
+
+#if ZM_STATEFUL_MIMIC_FLAGS != 0
+			var/turf/Told = astype(origin, /turf)?.above
+#endif
+			var/turf/Tnew = astype(loc, /turf)?.above
+
+			if (Tnew)
+#if ZM_STATEFUL_MIMIC_FLAGS != 0
+				if (Told)
+					var/old_flags = Told.z_flags & ZM_STATEFUL_MIMIC_FLAGS
+					var/new_flags = Tnew.z_flags & ZM_STATEFUL_MIMIC_FLAGS
+
+					if (old_flags != new_flags)
+						ZM_DEBUG_LOG("Told = [old_flags], Tnew = [new_flags]")
+						bound_overlay.reset_internal_layering()
+#endif
+				var/target_state = bound_overlay.hidden
+				if (Tnew.mouse_opacity == 2 && (Tnew.z_flags & ZM_HIDE_ATOMS))
+					target_state |= ZM_HIDE_OPAQUE
+				else
+					target_state &= ~ZM_HIDE_OPAQUE
+
+				if (Tnew.z_flags & ZM_BOUNDARY)
+					target_state |= ZM_HIDE_BOUNDARY
+				else
+					target_state &= ~ZM_HIDE_BOUNDARY
+
+				if (bound_overlay.hidden != target_state)
+					bound_overlay.name = target_state ? "" : bound_overlay.cached_name
+					bound_overlay.hidden = target_state
+
+		else if (isturf(loc) && (!origin || !TURF_IS_MIMICKING(origin)) && MOVABLE_SHALL_MIMIC(src) && MOVABLE_IS_BELOW_ZTURF(src))
+			SSzcopy.discover_movable(src)
 
 	if(buckled_mob)
 		if(isturf(loc))
@@ -244,7 +274,6 @@
 /atom/movable/Move(...)
 
 	var/old_loc = loc
-	var/was_below_z_turf = MOVABLE_IS_BELOW_ZTURF(src)
 	. = ..()
 
 	if(.)
@@ -276,11 +305,45 @@
 
 		// Z-Mimic.
 		if (bound_overlay)
+			// Some types (like humantypes) change this per Move.
+			if (bound_overlay.glide_size != glide_size)
+				bound_overlay.glide_size = glide_size
 			// The overlay will handle cleaning itself up on non-openspace turfs.
 			bound_overlay.forceMove(get_step(src, UP))
 			if (bound_overlay.dir != dir)
 				bound_overlay.set_dir(dir)
-		else if (isturf(loc) && (!old_loc || !was_below_z_turf) && MOVABLE_SHALL_MIMIC(src))
+
+#if ZM_STATEFUL_MIMIC_FLAGS != 0
+			var/turf/Told = astype(old_loc, /turf)?.above
+#endif
+			var/turf/Tnew = astype(loc, /turf)?.above
+
+			if (Tnew)
+#if ZM_STATEFUL_MIMIC_FLAGS != 0
+				if (Told)
+					var/old_flags = Told.z_flags & ZM_STATEFUL_MIMIC_FLAGS
+					var/new_flags = Tnew.z_flags & ZM_STATEFUL_MIMIC_FLAGS
+
+					if (old_flags != new_flags)
+						ZM_DEBUG_LOG("Told = [old_flags], Tnew = [new_flags]")
+						bound_overlay.reset_internal_layering()
+#endif
+				var/target_state = bound_overlay.hidden
+				if (Tnew.mouse_opacity == 2 && (Tnew.z_flags & ZM_HIDE_ATOMS))
+					target_state |= ZM_HIDE_OPAQUE
+				else
+					target_state &= ~ZM_HIDE_OPAQUE
+
+				if (Tnew.z_flags & ZM_BOUNDARY)
+					target_state |= ZM_HIDE_BOUNDARY
+				else
+					target_state &= ~ZM_HIDE_BOUNDARY
+
+				if (bound_overlay.hidden != target_state)
+					bound_overlay.name = target_state ? "" : bound_overlay.cached_name
+					bound_overlay.hidden = target_state
+
+		else if (isturf(loc) && (!old_loc || !TURF_IS_MIMICKING(old_loc)) && MOVABLE_SHALL_MIMIC(src) && MOVABLE_IS_BELOW_ZTURF(src))
 			SSzcopy.discover_movable(src)
 
 		if(isturf(loc))

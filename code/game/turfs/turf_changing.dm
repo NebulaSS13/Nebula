@@ -66,6 +66,7 @@
 	var/old_lighting_overlay = lighting_overlay
 	var/old_dynamic_lighting = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
 	var/old_z_opacity        = z_flags & ZM_ALLOW_LIGHTING
+	var/old_z_flags          = z_flags & ZM_INFECTIOUS_MIMIC_FLAGS
 	var/old_flooded =          flooded
 	var/old_outside =          is_outside
 	var/old_is_open =          is_open()
@@ -110,8 +111,11 @@
 
 	changed_turf.affecting_heat_sources = old_affecting_heat_sources
 
+#ifndef AO_USE_LIGHTING_OPACITY
+	// If we're using opacity-based AO, this is done in recalc_atom_opacity().
 	if (permit_ao)
 		regenerate_ao()
+#endif
 
 	// Update ZAS, atmos and fire.
 	if(keep_air && changed_turf.can_inherit_air)
@@ -133,7 +137,18 @@
 	if(changed_turf.density != old_density && changed_turf.event_listeners?[/decl/observ/density_set])
 		changed_turf.raise_event_non_global(/decl/observ/density_set, old_density, changed_turf.density)
 
-	// lighting stuff
+	// lighting and z-mimic stuff
+
+	// This only copies a subset, see ZM_INFECTIOUS_MIMIC_FLAGS. This must be done before ambient lights are rebuilt.
+	if (old_z_flags)
+		z_flags |= old_z_flags
+		if (z_flags & ZM_MIMIC_BELOW)
+			setup_zmimic(FALSE)
+		// If we're a boundary *but not also a mimic*, initialize the boundary info.
+		else if (z_flags & ZM_BOUNDARY)
+			setup_zmimic_boundary()
+	else if (z_flags & ZM_MIMIC_BELOW)
+		setup_zmimic(FALSE)
 
 	affecting_lights = old_affecting_lights
 	corners = old_corners

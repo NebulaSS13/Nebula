@@ -10,13 +10,17 @@
 		bound_overlay.set_dir(ndir)
 
 /atom/movable/update_above()
-	if (!bound_overlay || !isturf(loc))
+	if (!isturf(loc))
 		return
 
 	if (MOVABLE_IS_BELOW_ZTURF(src))
+		if (!bound_overlay)
+			SSzcopy.discover_movable(src)
+			return
+
 		SSzcopy.queued_overlays += bound_overlay
 		bound_overlay.queued += 1
-	else
+	else if (bound_overlay)	// qdel is null-safe, but might as well save a proc call
 		qdel(bound_overlay)
 
 // Grabs a list of every openspace object that's directly or indirectly mimicking this object. Returns an empty list if none found.
@@ -35,8 +39,9 @@
 	anchored = TRUE
 	mouse_opacity = FALSE
 	abstract_type = /atom/movable/openspace // unsure if this is valid, check with Lohi -- Yes, it's valid.
+	var/target_slot = 0
 
-/atom/movable/openspace/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
+/atom/movable/openspace/can_fall()
 	return FALSE
 
 // No blowing up abstract objects.
@@ -52,10 +57,11 @@
 	desc = "You shouldn't see this."
 	icon = 'icons/effects/lighting_overlay.dmi'
 	icon_state = "blank"
-	plane = OPENTURF_MAX_PLANE
+	plane = ZM_COMPUTE_PLANE(0, ZM_SLICE_SLOT_LIGHTING)
 	layer = MIMICED_LIGHTING_LAYER
-	blend_mode = BLEND_MULTIPLY
 	color = SHADOWER_DARKENING_COLOR
+	var/lighting_generation = 0
+	var/lighting_generation_static = 0
 
 /atom/movable/openspace/multiplier/Destroy(force)
 	if(!force)
@@ -67,13 +73,17 @@
 
 	return ..()
 
-/atom/movable/openspace/multiplier/proc/copy_lighting(atom/movable/lighting_overlay/LO, use_shadower_mult = TRUE)
+/atom/movable/openspace/multiplier/proc/copy_lighting(atom/movable/lighting_overlay/LO)
+	if (LO.needs_update)
+		// If this LO is pending an update, avoid this update and just let it update us.
+		return
+	ASSERT(LO.z == z - 1)
 	var/mutable_appearance/MA = new /mutable_appearance(LO)
 	MA.layer = MIMICED_LIGHTING_LAYER
-	MA.plane = OPENTURF_MAX_PLANE
-	MA.blend_mode = BLEND_MULTIPLY
+	MA.plane = ZM_COMPUTE_PLANE(0, ZM_SLICE_SLOT_LIGHTING)
 
-	if (use_shadower_mult)
+	var/turf/T = loc
+	if (!(T.below.z_flags & ZM_NO_SHADOW))
 		if (MA.icon_state == LIGHTING_BASE_ICON_STATE)
 			// We're using a color matrix, so just darken the colors across the board.
 			var/list/c_list = MA.color
@@ -93,7 +103,10 @@
 		else
 			// Not a color matrix, so we can just use the color var ourselves.
 			MA.color = SHADOWER_DARKENING_COLOR
+
 	appearance = MA
+
+	lighting_generation += 1
 	set_invisibility(INVISIBILITY_NONE)
 
 	if (our_overlays || priority_overlays)
@@ -106,7 +119,7 @@
 
 // Object used to hold a mimiced atom's appearance.
 /atom/movable/openspace/mimic
-	plane = OPENTURF_MAX_PLANE
+	plane = ZMIMIC_MAXIMUM_PLANE
 	var/atom/movable/associated_atom
 	var/depth
 	var/queued = 0
@@ -114,11 +127,15 @@
 	var/mimiced_type
 	var/original_z
 	var/override_depth
+	var/reset_generation = 0
+	var/hidden = FALSE
+	var/cached_name
 	var/have_performed_fixup = FALSE
 
 /atom/movable/openspace/mimic/New()
-	atom_flags |= ATOM_FLAG_INITIALIZED
+	atom_flags = ATOM_FLAG_INITIALIZED
 	SSzcopy.openspace_overlays += 1
+	loc?.Entered(src, null)
 
 /atom/movable/openspace/mimic/Destroy()
 	SSzcopy.openspace_overlays -= 1
@@ -133,6 +150,10 @@
 
 	return ..()
 
+/atom/movable/openspace/mimic/proc/timeout(filename, line, reason)
+	ZM_DEBUG_LOG("Mimic timeout from origin [filename]:[line], caused by [reason]; was mimicking [associated_atom || "NULL"] ([associated_atom?.type || "NULL"]) at [x],[y],[z]")
+	qdel(src)
+
 /atom/movable/openspace/mimic/attackby(obj/item/used_item, mob/user)
 	to_chat(user, SPAN_NOTICE("\The [src] is too far away."))
 	return TRUE
@@ -146,6 +167,11 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return associated_atom.examined_by(user, distance, infix, suffix)
 
+/atom/movable/openspace/mimic/examined_by(mob/user, distance, infix, suffix)
+	SHOULD_CALL_PARENT(FALSE)
+	var/decl/pronouns/P = get_pronouns_by_gender(gender)
+	return associated_atom.examined_by(user, null, infix, suffix || "[P.He] [P.is] [z - original_z] level\s below you.")
+
 // Trying to grab a mimic tries to grab the copied atom instead.
 /atom/movable/openspace/mimic/try_make_grab(mob/living/user, defer_hand)
 	return associated_atom.try_make_grab(user, defer_hand)
@@ -153,36 +179,64 @@
 /atom/movable/openspace/mimic/forceMove(turf/dest)
 	var/atom/old_loc = loc
 	. = ..()
+	if (QDELING(src))	// Everything in this block is nonsense if we're being destroyed.
+		return
+	// The mimic might be reclaimed from the destruction timer, so do this regardless of if this mimic is likely to continue existing.
+	// It might be more efficient to do this on reclaim instead.
+	if (old_loc?.z != loc?.z)
+		reset_internal_layering()
+
+	var/new_hide_state = FALSE
 	if (MOVABLE_IS_ON_ZTURF(src))
 		if (destruction_timer)
 			deltimer(destruction_timer)
 			destruction_timer = null
-		if (old_loc?.z != loc?.z) // Null checking in case of qdel(), observed with dirt effect falling through multiz.
-			reset_internal_layering()
 	else if (!destruction_timer)
-		destruction_timer = ZM_DESTRUCTION_TIMER(src)
+		destruction_timer = ZM_DESTRUCTION_TIMER(src, "forceMove")
+		new_hide_state = TRUE
+
+	var/target_state = ZM_DIFF_HIDE_STATE(new_hide_state, ZM_HIDE_NONMIMIC, src)
+	if (hidden != target_state)
+		name = target_state ? "" : cached_name
+		hidden = target_state
 
 // Called when the turf we're on is deleted/changed.
 /atom/movable/openspace/mimic/proc/owning_turf_changed()
 	if (!destruction_timer)
-		destruction_timer = ZM_DESTRUCTION_TIMER(src)
+		destruction_timer = ZM_DESTRUCTION_TIMER(src, "OTC")
 
-/atom/movable/openspace/mimic/proc/reset_internal_layering()
+/atom/movable/openspace/mimic/proc/reset_internal_layering(depth_hint, no_discover = FALSE)
+	reset_generation += 1
+	var/root_z
 	if (bound_overlay?.override_depth)
 		depth = bound_overlay.override_depth
+
 	else if (isturf(associated_atom.loc))
-		depth = min(SSzcopy.zlev_maximums[associated_atom.z] - associated_atom.z, OPENTURF_MAX_DEPTH)
-		override_depth = depth
+		// Find the new root.
+		root_z = depth_hint	// If we were reset by the mimic below us, they will have already calculated the root and we can just use that.
+		if (!root_z)
+			var/atom/movable/openspace/mimic/M
+			for (M = src; istype(M); M = M.associated_atom)
+				// body intentionally left empty
 
-	plane = OPENTURF_MAX_PLANE - depth
+			root_z = M.z
 
-	bound_overlay?.reset_internal_layering()
+#ifdef ZM_ENH_DEBUG
+		var/old_depth = depth
+#endif
+		depth = min(SSzcopy.zlev_maximums[associated_atom.z] - root_z, OPENTURF_MAX_DEPTH)
+		original_z = root_z
+		ZM_DEBUG_LOG("Resetting mimic ([src], copying [associated_atom.type], ([x], [y], [z])) layering: [old_depth] -> [depth]")
+
+	bound_overlay?.reset_internal_layering(root_z, TRUE)
+	if (!no_discover)
+		SSzcopy.discover_movable(associated_atom, only_reset = TRUE)
 
 // -- TURF PROXY --
 
 // This thing holds the mimic appearance for non-OVERWRITE turfs.
 /atom/movable/openspace/turf_proxy
-	plane = OPENTURF_MAX_PLANE
+	plane = ZMIMIC_MAXIMUM_PLANE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	z_flags = ZMM_IGNORE  // Only one of these should ever be visible at a time, the mimic logic will handle that.
 
@@ -205,7 +259,7 @@
 
 // A type for copying non-overwrite turfs' self-appearance.
 /atom/movable/openspace/turf_mimic
-	plane = OPENTURF_MAX_PLANE	// These *should* only ever be at the top?
+	plane = ZMIMIC_MAXIMUM_PLANE	// These *should* only ever be at the top?
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	var/turf/delegate
 

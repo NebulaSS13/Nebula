@@ -1,101 +1,177 @@
 /*
-Types (also see terminology section):
-	openspace/multiplier -> shadows the below level, also copies lighting
-	openspace/mimic -> copies below movables
-	openspace/turf_proxy -> holds the appearance of the below turf for non-OVERWRITE Z-turfs
-	openspace/turf_mimic -> copies openspace/turf_proxy objects
 
-Public API:
-	Notifying Z-Mimic of icon updates:
-	- UPDATE_OO_IF_PRESENT
-		- valid on movables only
-		- if this movable is being copied, update the copies
-		- cheap (if this movable is not being mimiced, this is a null check)
+	- Z-Mimic -
 
-	- atom/update_above()
-		- similar to UPDATE_OO_IF_PRESENT, but for both turfs and movables
-		- less cheap (pretty much just proc-call overhead)
+	This is a system for rendering the Z-level(s) below this one under turfs in a way that's as indistinguishable to players as possible, while also remaining scalable
+	enough to run on maps with extreme numbers of Z-enabled turfs (100k+). While it may be complex internally, interacting with Z-Mimic should be straightforward.
 
-	Checking state:
-	- TURF_IS_MIMICKING(turf or any)
-		- value: bool - if the passed turf is z-mimic enabled
 
-	- movable/get_above_oo()
-		- return: list of movables
-		- get a list of every openspace mimic that's copying this atom for things like animate()
+	- Usage (Turf) -
 
-	Changing state:
-	- turf/enable_zmimic(extra_flags = 0)
-		- return: bool - FALSE if this turf was already mimicking, TRUE otherwise
-		- Enables z-mimic for this turf, potentially adding extra z_flags.
-		- This will automatically queue the turf for update.
+	Most of the time just setting the turf level `z_flags` is all you need to do. To enable Z-Mimic for a turf:
 
-	- turf/disable_zmimic()
-		- return: bool - FALSE if this turf was not mimicking, TRUE otherwise
-		- Disables z-mimic for this turf.
-		- This will clean up associated mimic objects, but they may hang around for a few additional seconds.
+		z_flags = MIMIC_DEFAULTS
 
-	Vars:
-	- turf/z_flags
-		- bitfield
-			- ZM_MIMIC_BELOW: copy below atoms
-			- ZM_MIMIC_OVERWRITE: z-mimic can overwrite this turf's appearance
-			- ZM_ALLOW_LIGHTING: lighting should pass through this turf
-			- ZM_ALLOW_ATMOS: air should pass through this turf
-			- ZM_MIMIC_NO_AO: normal turf AO should be skipped, only do openspace AO (if your turf is not solid, you probably want this)
-			- ZM_NO_OCCLUDE: don't block clicking on below atoms if not OVERWRITE
+	There are also presets for some common situations:
+	- MIMIC_PRESET_HOLE: Just a z-hole. No icon, nothing to cast a shadow on, allows atmos.
+	- MIMIC_PRESET_HOLE_WITH_BORDER: A z-hole with an icon, like an icon smoothed border. Allows atmos.
+	- MIMIC_PRESET_TRANSLUCENT_TURF: A turf that has translucent/transparent accents. Does not allow atmos, but allows players to see the things below. Blocks clicks, even where alpha is 0.
 
-	- atom/movable/z_flags
-		- bitfield
-			- ZMM_IGNORE: Do not copy this atom. Atoms with INVISIBILITY_ABSTRACT are automatically not copied.
-			- ZMM_MANGLE_PLANES: Scan this atom's overlays and monkeypatch explicit plane sets. Fixes emissive overlays shining through floors, but expensive -- use only if necessary.
+	You may want to enable some other flags based on what the turf is doing, but this is all that is necesssary to enable baseline Z copy for a turf. Other flags that are
+	likely to be useful include:
 
-Implementation details:
-	Z-Mimic makes some assumptions. While it may continue to work if these are violated, don't be surprised if it behaves strangely, renders things in the incorrect order, or outright breaks.
+	- ZM_MIMIC_BELOW: Enable Z-mimic. Part of MIMIC_DEFAULTS.
+	- ZM_MIMIC_OVERWRITE: Replace the turf's appearance instead of preserving it. This is more efficient, but means the turf can't have its own icon or overlays. This is intended for simple Z-holes.
+	- ZM_ALLOW_LIGHTING: Allow lights to shine through this Z-turf. Part of MIMIC_DEFAULTS.
+	- ZM_ALLOW_ATMOS: Allow ZAS to form connections through this Z-turf.
+	- ZM_NO_SHADOW: Do not darken lighting on this Z-turf. Z-AO will still render. This does not remove the shadower object, nor improve performance.
 
-	Assumptions:
-	- Z-Stacks will not be taller than OPENTURF_MAX_DEPTH.
-		- If violated: Warning emitted on boot, layering may break for items near the bottom of the z-stack.
-	- Atoms will render correctly if copied to another plane.
-	- Atoms will layer correctly if copied to the same plane as other arbitrary in-world atoms.
-	- Atoms without ZMM_MANGLE_PLANES do not have any overlays that have explicit plane sets.
-		- If violated: Atoms on the below floor may be partially visible on the current floor.
-	- Z-Stacks are 1:1 across the entire x/y plane.
-		- If violated: Z-turfs may form nonsensical connections.
-	- Z-Stacks are contiguous and linear -- get_step(UP) corresponds to moving up a z-level (within a z-stack) in all cases.
-		- If violated: layering becomes nonsensical.
-	- Z-Stacks will not be changed (note: adding new Z-stacks is OK) after an openturf has been initialized on that z-stack.
-		- If violated: Z-Turfs may act as if they are still connected even though they are not.
-	- /turf/space is never above another turf type in the Z-Stack.
-	- Turfs that are setting ZM_MIMIC_OVERWRITE do not care about their appearance.
-		- If violated: Appearance of turf is lost.
-	- Multiturf movable atoms are symmetric, and centered on their visual center.
-		- If violated: Multitile atoms may not render in cases where they should.
-	- SHADOWER_DARKENING_FACTOR and SHADOWER_DARKENING_COLOR represent the same shade of grey.
-		- If violated: unlit and lit z-turfs may look inconsistent with each other.
-	- Lighting will mimic correctly without being associated with a plane.
-		- If violated: depending on implementation, lighting may be inverted, or not render at all.
-		- This can usually be addressed by changing /atom/movable/openspace/multiplier/proc/copy_lighting().
+	Niche use flags that you probably won't need:
+	- ZM_MIMIC_NO_AO: Skip regular turf AO. This is intended for simple Z-holes.
+	- ZM_NO_OCCLUDE: By default, Z-Mimic assumes that turfs that are *not* MIMIC_OVERWRITE are blocking the entire turf (like glass flooring) and will intercept clicks.
+	 This will force the turf to allow clickthrough, which can be useful if creating a Z-hole turf with smoothed edges. This does not prevent clicking on the Z-turf itself.
+	- ZM_OVERRIDE: Unrelated to OVERWRITE. If this is set, Z-Mimic will ignore the normal copy pipeline and will just copy either the turf's baseturf, or use the contents
+	 of the `z_appearance` var if it is set. Z-turfs with this set are considered the bottom of a Z-group, so can be used to prevent Z-Mimic from interacting with Z-connections.
+	- ZM_BOUNDARY: Internal use, do not set manually. This indicates that this turf is beside an active Z-turf, so is creating atom mimics despite not being a mimic turf.
+	- ZM_HIDE_ATOMS: If this turf is considered opaque (see MIMIC_NO_OCCLUDE), also hide atoms from the right click menu. This prevents examining below atoms, however.
 
-	Known Limitations:
-	- Multiturf movable atoms are not rendered if they are not centered on a z-turf, but overlap one.
-	- vis_contents is ignored -- mimics will not copy it.
+	Z-Mimic can be toggled after a turf has been created using the `enable_zmimic()` and `disable_zmimic()` procs.
+	If a turf's appearance has been updated in a way that doesn't involve SSoverlays, call `update_above()` on the turf to instruct Z-Mimic to recopy its appearance. This is cheap.
 
-	Terminology (of varying obscurity):
-	- Z-Stack
-		- A set of z-connected turfs with the same x/y coordinates.
-	- Z-Depth
-		- How many Z-levels this atom is *from the top of a Z-Stack* (absolute layering), regardless of z-turf presence
-	- Shadower / Multiplier
-		- An abstract object used to darken lower levels, copy lighting, and host Z-AO overlays.
-	- Mimic / Openspace Object
-		- An abstract object that holds appearances of atoms and proxies clicks.
-	- Turf Proxy / Turf Object
-		- An abstract object that holds Z-Copy turf appearances for non-OVERWRITE turfs.
-	- Turf Mimic
-		- An abstract object that holds appearances of non-OVERWRITE z-turfs below this z-turf.
-	- Foreign Turf
-		- A turf below this z-turf that is contributing to our appearance.
-	- Mimic Underlay
-		- A turf appearance holder specifically for fake space below a z-turf at the bottom of a z-stack.
+	- Usage (Movable) -
+
+	Generally movables should not need to care about Z-Mimic. There are some edge cases that may require `z_flags` to be set:
+	- If your atom is long (greater than one turf along the facing axis), you should set ZMM_LOOKAHEAD.
+	- If your atom is wide (greater than one turf perpendicular to the facing axis), you should set ZMM_LOOKBESIDE.
+	- If your atom is wide on both axes, set both flags.
+	- If your atom always contains overlays with `plane` explicitly set, consider setting ZMM_MANGLE_PLANES to improve efficiency. If this is only sometimes true, omit this flag and let ZM detect.
+	- If your atom should not render under ZM at all (for instance, it uses rendering features that ZM does not support, or it is an abstract object), set ZMM_IGNORE.
+
+	If you update the appearance of your movable without interacting with SSoverlays, consider adding an `UPDATE_OO_IF_PRESENT` call at the end to notify ZM of appearance updates. This call is very cheap.
+
+	- Public API -
+	These are all calls in ZM that are considered public API, anything other these calls is considered unstable (in the API sense) and may change without regards to compatibility.
+
+	Movables:
+		- `UPDATE_OO_IF_PRESENT` (macro)
+			- Only valid in contexts where `src` is a movable.
+			- If this movable has an associated Z-Mimic mimic, update its appearance.
+			- Cheap, but SSoverlays will automatically run this for you if you make overlay calls.
+
+		- `MOVABLE_IS_BELOW_ZTURF(M)` (macro)
+			- Check if a specified movable is below an active Z-mimic turf and should be mimicked.
+			- This respects the LOOKAHEAD/LOOKBESIDE flags.
+
+		- `MOVABLE_IS_ON_ZTURF(M)` (macro)
+			- Check if a specified movable is on an active Z-mimic turf.
+			- This respects the LOOKAHEAD/LOOKBESIDE flags.
+
+		- `z_flags` (var)
+			- Flags `ZMM_IGNORE`, `ZMM_LOOKAHEAD`, `ZMM_LOOKBESIDE`, and `ZMM_MANGLE_PLANES` are considered stable.
+
+		- `get_above_oo()` (proc)
+			- Return a list of mimics copying this movable, directly or indirectly.
+			- This can be useful if trying to `animate()` a movable and you want this animation to also apply to mimics.
+				- Keep in mind that the mimic cannot update its appearance while `animate()` runs.
+
+	Turfs:
+		- `TURF_IS_MIMICKING(T)` (macro)
+			- Check if a specified turf is copying movables. This includes mimic boundary turfs.
+			- Cheap.
+
+		- `TURF_IS_MIMIC(T)` (macro)
+			- Check if a specified turf is a Z-mimic turf. This is implied by the above, but this excludes boundaries.
+			- Cheap.
+
+		- `enable_zmimic(additional_flags = 0)` (proc)
+			- Enable Z-mimic on a turf after it has been initialized.
+			- Returns: TRUE if this turf transitioned from non-mimic to mimic, FALSE otherwise.
+
+		- `disable_zmimic()` (proc)
+			- Disable Z-mimic on a turf after it has been initialized.
+			- Returns: TRUE if this turf transitioned from mimic to non-mimic, FALSE otherwise.
+			- Mimic objects will hang around for a few seconds after this is called, though they should be hidden from rightclick.
+
+	Atoms:
+		- `update_above()` (proc)
+			- Update above mimics' appearance. Valid on turfs and movables.
+
+	Z-Copy (SSzcopy):
+		- `calculate_zstack_limits()` (proc)
+			- Regenerate Z-group information. Call this if you create new Z-levels, even if they do not contain Z-turfs.
+
+		- `update_all()` (proc)
+			- Intended for admin/developer proc-call. Do not use in code.
+			- Force all mimic turfs and mimic objects on the map to update.
+
+		- `hard_reset()` (proc)
+			- Intended for admin/developer proc-call. Do not use in code.
+			- Flush all Z-Mimic state and rebuild from scratch.
+
+		- `unsupported_rebuild_z_state()` (proc)
+			- Harder than hard_reset(). Will forcibly reconstruct ZM connection information, as well as performing a hard reset.
+			- Please don't use this without knowing its implications.
+			- Actually using this proc is fully unsupported, and may corrupt Z-lighting for the rest of the round.
+			- This does not rebuild Z-lighting.
+			- This does not rebuild boundary information.
+			- This proc may be necessary if you are doing (unsupported) things with dynamic Z-groups and need to kick Z-Mimic.
+
+*/
+
+/*
+
+	- Z-Mimic Internals -
+
+	ZM fundamentally works by creating mimic objects to hold appearances for movables *directly below*, including other mimic objects. This recursive copy allows ZM to
+	copy appearance of many levels without having to ever consider more than one level at a time, but requires Z-groups to update bottom to top. This is enforced by allowing
+	multiple queue entries for the same object, though ZM will only actually evaluate the last entry. ZM stores relations between mimic objects as a doubly-linked list on the
+	movables, as well as storing turf up/down connections as a doubly-linked list.
+
+	ZM's code makes some assumptions, though this list is not necessarily exhaustive:
+	- Z-groups will not be taller than OPENSPACE_MAX_DEPTH.
+		- If violated: Warning emitted on boot, layering behavior undefined for atoms with a depth below OPENSPACE_MAX_DEPTH.
+		- There is little drawback to increasing OPENSPACE_MAX_DEPTH beyond greater plane use and slightly higher client graphics load.
+	- Atoms should render correctly if relocated to another plane.
+		- This generally does not apply to overlays on atoms due to overlay mangling.
+	- Z coordinates are linear and do not skip levels.
+		- A turf above another turf (within the same Z-group) is always at `z = below.z + 1`.
+		- More specifically: `get_step(ref, UP) == GET_ABOVE(ref)`, where turfs are members of the same Z-group.
+		- ZM does math on the `z` coordinate to calculate depth.
+	- Z-groups are contiguous across the entire Z-level.
+		- If two turfs have the same z coordinate, they must have the same z connections / be part of the same z-group.
+		- ZM assumes that z-groups are global, and stores the maximum Z value for a z-group with z-level granularity.
+		- Virtual z-levels are only supported if every virtual z in the real z-level has identical Z-connections, or does not interact with ZM (e.g., only one level tall).
+		- MIMIC_OVERRIDE turfs will block ZM scans and connections below them do not need to make sense, but use with care.
+	- Z-groups are immutable after they have been used.
+		- Changing Z-connections after ZM has been initialized on a level is undefined behavior, though primarily due to lighting.
+		- MIMIC_OVERRIDE turfs will block ZM scans and connections below them can change, but use with care.
+		- Creating new Z-levels and registering them with Z-Mimic (via `calculate_zstack_limits()`) is allowed and expected.
+	- Unlike older versions of Z-Mimic, making space turfs mimic is supported.
+		- Actually doing this will increase Z-Mimic's memory usage on maps with a lot of space, though it will probably not be a problematic amount -- test.
+		- This may look strange due to interactions with lighting -- depth cues will still render, but lighting generally does not on space.
+	- `vis_contents` is not copied, though particles are.
+	- ZMM_LOOKAHEAD and ZMM_LOOKBESIDE only increase the scan radius by one turf (in both directions).
+		- Atoms larger than this may not render in some cases where they should, but this will probably not be very obvious. Support for these can be added if it becomes necessary.
+
+	Miscellaneous notes:
+	- The destruction timer exists to preserve gliding in/out below Z-turfs, as well as reduce mimic churn when movables are moving between z and non-z turfs frequently.
+		- Some of this behavior is now also provided by MIMIC_BOUNDARY turfs, which are more reliable at preserving gliding.
+	- Mimics that move between Z-levels or move between Z-turfs with different rendering behavior require `reset_internal_layering()` to be run.
+		- This is handled in Move()/forceMove(), though Z-turfs are only considered different if their Z-flags contain a different set of values in the subset `ZM_STATEFUL_MIMIC_FLAGS`.
+	- A turf can be a BOUNDARY and a MIMIC at the same time. Converting a BOUNDARY into a MIMIC is considered a boundary promotion, and converting a MIMIC into a BOUNDARY is
+	considered a boundary demotion.
+	- ZM proxies examine: when a mimic is examined, it will call its parent atom's examine proc with a z-depth description suffix.
+		- This behavior does not apply to turfs, though `desc` is copied by ZM too and will display fine.
+	- ZAO copy is implemented by simply manually assigning ZAO to the correct absolute ZM plane, then blindly copying the overlays. This requires shadowers (which hold the ZAO) to
+	not be mangled by overlay mangling.
+	- 'Z-stack' and 'Z-group' are related, but not the same: a z-stack is the discovered stack of active ZM turfs, whereas a Z-group is the set of Z-connections discovered by ZM.
+		- A z-stack is always within a single z-group, though may span the entire height of the z-group.
+
+	Internal types:
+		- openspace/multiplier -> shadows below level, holds Z-AO overlays, handles lighting copy.
+			- These render on ZM_SLICE_SLOT_LIGHTING, with Z-AO being on ZM_SLICE_SLOT_CAP.
+		- openspace/mimic -> holds appearance of copied atoms, proxies examine
+			- These are allowed to copy other mimic objects, as well as multipliers. Their behavior may change based on the root object they're copying.
+		- openspace/turf_proxy -> holds appearance of non-OVERWRITE turfs
+		- openspace/turf_mimic -> mimic for the above
 */

@@ -19,7 +19,7 @@
 	/// Force this one to pretend it's an overedge turf.
 	var/forced_dirs = 0
 
-/turf/space/Initialize()
+/turf/space/Initialize(mapload)
 
 	SHOULD_CALL_PARENT(FALSE)
 	atom_flags |= ATOM_FLAG_INITIALIZED
@@ -43,6 +43,10 @@
 		appearance = SSskybox.mapedge_cache["[edge]"]
 	else //Dust
 		appearance = SSskybox.dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"]
+
+	if (mapload && (z_flags & ZM_MIMIC_BELOW))
+		// If CT fired, ZM is done in CT for BOUNDARY ordering reasons.
+		setup_zmimic(mapload)
 
 	if(!HasBelow(z))
 		return INITIALIZE_HINT_NORMAL

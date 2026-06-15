@@ -69,6 +69,7 @@
 	client.images = null				//remove the images such as AIs being unable to see runes
 	client.screen = list()				//remove hud items just in case
 	client.set_right_click_menu_mode(shift_to_open_context_menu)
+	client.zm_objs.Cut()
 
 	next_move = 1
 	set_sight(sight|SEE_SELF)
@@ -90,6 +91,7 @@
 	RAISE_EVENT(/decl/observ/logged_in, src)
 
 	hud_reset(TRUE)
+	SSzcopy.CreatePlanesFor(client)
 
 	if(istype(machine))
 		machine.on_user_login(src)

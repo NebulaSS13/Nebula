@@ -140,7 +140,8 @@
 	if(simulated)
 		updateVisibility(src, FALSE)
 
-	if (z_flags & ZM_MIMIC_BELOW)
+	if (mapload && (z_flags & ZM_MIMIC_BELOW))
+		// If CT fired, ZM is done in CT for BOUNDARY ordering reasons.
 		setup_zmimic(mapload)
 
 	if(flooded)

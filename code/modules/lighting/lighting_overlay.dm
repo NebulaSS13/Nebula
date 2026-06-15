@@ -10,6 +10,7 @@
 	invisibility  = INVISIBILITY_LIGHTING
 	simulated     = FALSE
 	blend_mode    = BLEND_OVERLAY
+	z_flags = ZMM_IGNORE
 
 	var/needs_update = FALSE
 
@@ -133,10 +134,9 @@
 
 	// If there's a Z-turf above us, update its shadower.
 	if (T.above)
-		if (T.above.shadower)
-			T.above.shadower.copy_lighting(src)
-		else
-			T.above.update_mimic()
+		// This used to directly call the relevant update procs (currently `SSzcopy.update_lighting(turf)`), but doing that tends to explode elevators.
+		// This is somewhat less efficient, but works reliably.
+		T.above.update_mimic()
 
 #undef ALL_EQUAL
 
