@@ -10,8 +10,8 @@
 	var/slice_prefix = "slice"
 	var/assign_target = FALSE
 
-/obj/mimic_master/slice/New(loc, depth)
-	..()
+/obj/mimic_master/slice/Initialize(mapload, depth)
+	..(mapload)
 	plane = root_plane - ZM_DEPTH_TO_OFFSET_RAW(depth, stack_size) + slot
 	ASSERT(slice_kind != null)
 	ASSERT(slot != null)
@@ -39,7 +39,7 @@
 	slot = ZM_SLICE_SLOT_LIGHTING
 	slice_kind = ZM_SLICE_TY_LIGHTING
 
-/obj/mimic_master/slice/shadower_master/New(loc, depth)
+/obj/mimic_master/slice/shadower_master/Initialize(mapload, depth)
 	..()
 	filters += filter(type = "alpha", render_source = ZM_SLICE_VIRTUAL(ZM_SLICE_TY_ZSUM, depth))
 
@@ -54,7 +54,7 @@
 	slot = ZM_VSLICE_SLOT_ZSUM
 	slice_kind = ZM_SLICE_TY_ZSUM
 
-/obj/mimic_master/slice/virtual/zsum/New(loc, depth)
+/obj/mimic_master/slice/virtual/zsum/Initialize(mapload, depth)
 	..()
 	if (depth != OPENTURF_MAX_DEPTH)
 		render_source = ZM_SLICE_VIRTUAL(ZM_SLICE_TY_ZSUM, depth + 1)
