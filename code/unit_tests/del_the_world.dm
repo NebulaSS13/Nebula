@@ -13,7 +13,9 @@
 		// throw assert failures around non-null alarm area on spawn
 		/obj/machinery/alarm,
 		// Needs a level above.
-		/obj/structure/stairs
+		/obj/structure/stairs,
+		// These being created outside of ZM is undefined behavior.
+		/atom/movable/openspace
 	)
 
 	// Suspend to avoid fluid flows shoving stuff off the testing turf.
