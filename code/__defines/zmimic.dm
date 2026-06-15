@@ -84,7 +84,7 @@
 #define ZM_HIDE_OPAQUE   4	//! This mimic is being hidden by its parent having mouse_opacity set with MIMIC_HIDE_ATOMS active.
 
 // For debug purposes, should contain the above defines in ascending order.
-var/list/mimic_defines = list(
+var/global/list/mimic_defines = list(
 	"ZM_MIMIC_BELOW",
 	"ZM_MIMIC_OVERWRITE",
 	"ZM_ALLOW_LIGHTING",

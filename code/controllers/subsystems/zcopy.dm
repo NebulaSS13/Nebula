@@ -46,7 +46,7 @@
 /// Check if we need to yield to the MC. This macro will sleep or break.
 #define ZM_MC_TRY_YIELD if ((++__yield) >= ZM_PUMP_RATIO) { __yield = 0; if (no_mc_tick) { CHECK_TICK; } else if (MC_TICK_CHECK) { break; } }
 
-var/list/zm_offset_to_target = list(ZM_SLICE_TY_BASIC, ZM_SLICE_TY_LIGHTING, ZM_SLICE_TY_CAP)
+var/global/list/zm_offset_to_target = list(ZM_SLICE_TY_BASIC, ZM_SLICE_TY_LIGHTING, ZM_SLICE_TY_CAP)
 
 //#define ZM_RECORD_STATS	// This doesn't work on O7/Neb right now.
 
@@ -957,13 +957,13 @@ SUBSYSTEM_DEF(zcopy)
 		var/list/offsets = list()
 		var/local_acc = 0
 		for (var/offset in (OPENTURF_PLANES_PER_DEPTH - 1) to 0 step -1)
-			var/ident = zm_offset_to_target[offset + 1]
+			var/ident = global.zm_offset_to_target[offset + 1]
 			var/plane = ZM_COMPUTE_PLANE(d, offset)
 			var/plane_str = "[plane]"
 
 			offsets += plane
 
-			local_temp += "<strong>Depth [d] ([ident]), plane [plane], computed target <code>[ZM_SLICE(zm_offset_to_target[offset + 1], d)]</code></strong>"
+			local_temp += "<strong>Depth [d] ([ident]), plane [plane], computed target <code>[ZM_SLICE(global.zm_offset_to_target[offset + 1], d)]</code></strong>"
 			SSzcopy.debug_fmt_planelist(atoms_list_list[plane_str], local_temp, T)
 			local_acc += length(atoms_list_list[plane_str])
 			atoms_list_list -= plane_str	// remove the found plane so we can find orphans
