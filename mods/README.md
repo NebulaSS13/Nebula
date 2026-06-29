@@ -38,8 +38,103 @@ Modpacks have a defined, user-controlled load order, and cross-modpack compatibi
 ### Enabling Your Modpack
 Modpacks are enabled on a per-map basis. To activate a modpack, you `#include` the modpack's .dme in a map's .dme file.
 
-### Overriding Stock Code
-TODO: Actually write this section. It's distinct from the "How do I write upstream/core code with extension via modpacks in mind?" part because it's the *opposite,* this section is about overriding core code while the other section is about writing core code to be extended. Maybe do a basic explanation of side-overrides and associated footguns here.
+### Overriding Core Code
+Sometimes a modpack needs to change how existing non-modpack code behaves, rather than just add new content. Because DM lets you extend any type in any file, a modpack can re-declare an existing type and redefine its vars or procs. This is called a *side-override*: normal overrides are created deeper in the type hierarchy on a subtype, while side-overrides exist 'to the side' of the existing override(s) for a type. (Even though it's not on a parent- or child-type, we still call `..()` the "parent call" even inside a side-override.)
+
+This is the *opposite* of the approach described in "How do I write upstream/core code with extension via modpacks in mind?" below. That section is about writing core code so modpacks can hook into it without touching it; this section is about the cases where you have to touch it anyway. Prefer the extension approach when stock code already offers a hook (a decl subtype to add, a list to append to, a subtype to iterate over). Reach for a side-override only when there's no such entry point.
+
+By convention, overrides go in a file named `overrides.dm` (or `<thing>_overrides.dm` for a focused group, e.g. `living_overrides.dm`) and are `#include`d from the modpack's `.dme` like any other file. Keeping them in clearly-named files makes it obvious at a glance which stock behavior a modpack changes. Cleverly-designed modpacks will define their core code hooks/overrides separate from per-type value overrides, so they can change as little as possible for each type, making changes less brittle.
+
+#### Overriding a var
+The simplest type of override just extends an existing type and changes variable values:
+
+```dm
+// mods/content/fantasy/items/material_overrides.dm
+// FRANCE ISN'T REAL
+/obj/item/chems/drinks/bottle/champagne
+	name = "sparkling wine bottle"
+
+/decl/material/liquid/alcohol/champagne
+	name       = "sparkling wine"
+	glass_name = "sparkling wine"
+	glass_desc = "Sparkling white wine, a favourite at noble and merchant parties."
+	lore_text  = "Sparkling white wine, a favourite at noble and merchant parties."
+```
+
+This is safe and done entirely at compile-time without adding any new code; it just changes the initial value of vars that the existing type already declares. The only conflict risk is two modpacks setting the same var on the same type to different values, in which case the last one loaded wins. Some modpacks may intend this, while others may want to write a compatibility patch (see below).
+
+#### Overriding a proc
+To change behavior, redefine the proc on the existing type. Most overrides should call `..()` so the stock implementation (and any other modpack's override of it) still runs:
+
+```dm
+// mods/content/augments/passive/armor.dm
+// override to add armor augment damage mods
+/obj/item/organ/external/get_brute_mod(var/damage_flags)
+	. = ..()                    // run the stock proc, keep its result
+	var/obj/item/organ/internal/augment/armor/armor_augment = owner?.get_organ(BP_AUGMENT_CHEST_ARMOUR, /obj/item/organ/internal/augment/armor)
+	if(armor_augment)
+		. *= armor_augment.brute_mult
+```
+
+You can call `..()` at the start (to modify the result afterward), at the end (to run your logic first), or conditionally (to sometimes short-circuit and sometimes defer to stock):
+
+```dm
+// mods/content/breath_holding/living_overrides.dm
+// override to make a held breath take priority
+/mob/living/get_breath(obj/item/organ/internal/lungs/lungs)
+	if(lungs?.holding_breath && lungs.held_breath)
+		return lungs.held_breath // intentionally skip the stock proc
+	return ..()
+```
+
+#### Overriding a static list getter (the injector pattern)
+One common pattern in core code is the *static list getter,* used to avoid creating a new list every time the getter is called. This is much more efficient, but is a little more complex to override. Take this getter, for example:
+
+```dm
+// code/game/objects/items/weapons/secrets_disk.dm
+/obj/item/disk/secret_project/proc/get_secret_project_nouns()
+	var/static/list/nouns = list(
+		"a superluminal artillery cannon", "a fusion engine", "an atmospheric scrubber",\
+		"a human cloning pod", "a microwave oven", "a wormhole generator", "a laser carbine", "an energy pistol",\
+		"a wormhole", "a teleporter", "a huge mining drill", "a strange spacecraft", "a space station",\
+		"a sleek-looking fighter spacecraft", "a ballistic rifle", "an energy sword", "an inanimate carbon rod"
+	)
+	return nouns
+```
+
+We want to extend this by adding "a supermatter engine" to the list. A naive approach might be like this:
+
+```dm
+//Example code not actually used
+/obj/item/disk/secret_project/get_secret_project_nouns()
+	. = ..()
+	. += "a supermatter engine"
+```
+
+This works at first glance, if you call it once. However, because the getter uses a *static list,* it's saved between calls. That means it will be added every time we use the getter, which will quickly add a lot of duplicate entries to the list. Another naive fix for this would be using `|=` to avoid duplicates, but this is expensive because it checks if the item already exists in the list. Wouldn't it be nice to just add it once?
+
+For this, we use something called an injector, which uses a static var to track whether or not we've run our override before. If we're running it for the first time, we make all our changes to the static list returned by `..()`, and after that we set our tracking variable to ensure we never modify it again:
+
+```dm
+// mods/content/supermatter/overrides/sm_strings.dm
+/obj/item/disk/secret_project/get_secret_project_nouns()
+	var/static/sm_injected = FALSE
+	if(sm_injected)
+		return ..()
+	sm_injected = TRUE
+	. = ..()
+	. += "a supermatter engine"
+	return .
+```
+
+This also works for removing items from static lists, and may be useful for run-once code in other contexts as well. Another good example is in mods/content/corporate/items/random.dm.
+
+#### Footguns
+- **Multiple side-overrides chain through `..()` in definition order.** Unlike a normal override, which lives on a new subtype deeper in the type tree, a side-override is defined directly on the existing type. If there are several side-overrides of `/mob/living/some_proc()`, they're all kept and chained: `..()` in the last-defined override calls the previous one, and so on down to the first, which then walks up the type tree to the base implementation. The order in which they run depends on the order they're defined in, so don't write a side-override that assumes it runs first, last, or in any particular position relative to another modpack's. (You can generally assume that it will run after the core definition, though.)
+- **Extend, don't copy.** It may be easier to copy an existing proc definition, skip the parent call, and make a change somewhere in the middle. This is (almost) always a horrible idea, because you may not even notice something breaks when an update changes the definition you copied. The correct solution is to add it to an override that runs before or after the parent call, and if you *really* need to run it in the middle, consider adding a proc to the core code that your modpack can override (or split the existing proc into two or more).
+- **Always call `..()` unless you really mean to break the chain.** Forgetting `..()` drops the base implementation *and* any earlier modpack's side-override, which can break unrelated core features and any other modpack that expected that proc to do its normal job. Only omit it when you genuinely intend to replace the behavior wholesale.
+- **Don't depend on load order between modpacks.** A modpack may depend only on itself and stock code. If your override only makes sense when *another* modpack is also enabled, it's a cross-modpack interaction and belongs in `mods/~compatibility` (see below), which is loaded last and therefore modpack load-order agnostic.
+- **Side-overrides are the most fragile thing to maintain across upstream changes.** When upstream code renames a proc, changes its signature, or alters what `..()` returns, your override breaks. The fewer side-overrides a modpack has, the less it breaks when upstream code is refactored. **There being no merge conflicts doesn't mean your code wasn't broken by an update!**
 
 ### Cross-modpack interactions
 Sometimes, a modpack that's enabled might need to do something in response to another modpack also being enabled. Compatibility patches allow for this to happen without the modpacks in question requiring a hard dependency on each other.
