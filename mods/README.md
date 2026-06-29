@@ -157,7 +157,168 @@ Some modpacks extend other modpacks and make no sense to include on their own, i
 Modular code on a downstream with an upstream that does frequent refactors and rewrites is inevitably going to break when the upstream codebase does anything. Names change, so do assumptions, and even design directions might diverge so far that reconciling them will be hard or even impossible. There's not really getting around that, but we can at least mitigate it by designing stable interfaces and documenting changes. When upstream code is written with modularity in mind, downstreams have a much easier time adding content.
 
 ## How do I write upstream/core code with extension via modpacks in mind?
-TODO: Actually write this section. Give examples like `/decl/atmos_grief_fix_step`, `/decl/human_examination`, the cocktails system, etc. Iterating over subtypes of a base type makes it easy for modpacks to add new code. Also maybe address some footguns like trying to make something modular before trying to make it actually work? Could also discuss the open-closed principle I guess, e.g. write code that gets *extended* rather than *modified* (so avoiding side-overrides where possible, etc.).
+This is the counterpart of "Overriding Core Code" above. There, a modpack reaches into core code and changes it from the side; here, you're the one writing the core code, and your goal is to leave an *entry point* that modpacks can hook into without ever editing your code. The guiding idea is the open/closed principle: code should be open for extension but closed for modification. Every time a modpack can add a feature by writing a new file instead of side-overriding one of yours, that's one fewer thing that silently breaks when you refactor later.
+
+The single most useful tool for this is **iterating over decl subtypes.** Define an abstract decl as a hook point, write your core logic to enumerate every subtype of it and call into them, and modpacks extend the system simply by defining a new subtype. Nothing in core needs to know the modpack exists.
+
+### Pattern: action decls
+Take the "fix atmospherics grief" admin tool. Core code defines an abstract decl with a small interface, then enumerates every subtype, sorts them, and calls each:
+
+```dm
+// code/modules/admin/verbs/grief_fixers.dm
+/decl/atmos_grief_fix_step
+	abstract_type = /decl/atmos_grief_fix_step
+	var/name
+
+/decl/atmos_grief_fix_step/proc/act()
+	return
+
+// ...elsewhere, the verb that runs them all:
+var/list/steps = decls_repository.get_decls_of_subtype_unassociated(/decl/atmos_grief_fix_step)
+steps = sortTim(steps.Copy(), /proc/cmp_decl_sort_value_asc)
+for(var/decl/atmos_grief_fix_step/fix_step as anything in steps)
+	to_chat(usr, "[fix_step.name].")
+	fix_step.act()
+```
+
+A modpack can then add a step without touching any of the above. It just defines a new subtype and the core loop runs it in the specified order:
+
+```dm
+// mods/content/supermatter/datums/sm_grief_fix.dm
+/decl/atmos_grief_fix_step/supermatter
+	name = "Supermatter depowered"
+	sort_order = 0
+
+/decl/atmos_grief_fix_step/supermatter/act()
+	// Depower the supermatter, as it would quickly blow up once we remove all gases from the pipes.
+	for(var/obj/structure/supermatter/S in SSsupermatter.processing)
+		S.power = 0
+```
+
+Note the two things that make this clean: `abstract_type` marks the base as not-runnable so the enumeration only picks up real steps, and a `sort_order` var (read by the `cmp_decl_sort_value_asc` comparator) lets each subtype declare where it belongs in the sequence rather than relying on definition or load order. When you design a hook like this, give modpacks an explicit ordering knob instead of leaving order undefined.
+
+### Pattern: output builder decls
+Enumerable decls don't have to *do* something; they can be useful just for a calculation or return value used in base-game code. Human examination text works this way. Base human examination code defines a stub decl whose whole purpose is to be subtyped by modpacks:
+
+```dm
+// code/modules/mob/living/human/human_examine_decl.dm
+/decl/human_examination //This is essentially a stub-method for modpacks to be able to add onto the human examination stuff
+	var/priority = 0
+
+/decl/human_examination/proc/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	return
+```
+
+Core's examine code enumerates these decls (sorted by `priority`) and appends whatever each returns. A modpack adds a line to the examine output by defining a subtype of `/decl/human_examination` and implementing `do_examine()`; see `mods/content/matchmaking/matchmaker.dm` for a working example.
+
+### Pattern: condition/recipe decls
+Similarly to output builder decls (see prior section), the cocktails system (`code/modules/reagents/cocktails.dm`), chemical reaction system (`code\modules\reagents\reactions\_reaction.dm`), and stack recipe system (`code\modules\crafting\stack_recipes\_recipe.dm`) follow a similar idea: a base type that gets enumerated, so modpacks add new recipes by adding subtypes rather than editing a central list. By combining this with other principles, modpacks can extend, remove, or modify existing recipes, cocktails, reactions, etc. without needing to edit them directly.
+
+### Pattern: events (`/decl/observ`)
+The decl patterns above allow core and modpack code to request extensible subtypes representing information, behavior, or conditions. Conversely, events allow modular code to request an update when something particular happens, and they're easily the most versatile tool for writing code that doesn't require side-overrides. When something notable happens, core code raises an event, and anything that cares can register to be notified. The code raising the event has no idea who's listening, and never needs a call added for each new listener. This is exactly what makes it good for modular code: a modpack can react to a core event (or even another modpack's event) without the event-issuing code containing a single reference to the consumer of that event.
+
+An event is a `/decl/observ` subtype. Defining one is just a declaration plus a doc comment describing the arguments listeners will receive:
+
+```dm
+// code/datums/observation/death.dm
+//	Raised when: A mob dies.
+//	Arguments the called proc should expect:
+//		/mob/dying_mob: the mob that died.
+/decl/observ/death
+	name = "Death"
+	expected_type = /mob
+```
+
+Events are typically raised with the `RAISE_EVENT` macro, passing the source as the first argument followed by any event-specific arguments.
+
+```dm
+// code/datums/observation/death.dm
+/mob/living/add_to_dead_mob_list()
+	. = ..()
+	if(.)
+		RAISE_EVENT(/decl/observ/death, src)
+```
+
+A modpack (or any object) hooks in by registering a callback through `events_repository`. The arguments are `(event_type, event_source, listener, proc_to_call)`; the listener's proc receives the event source plus whatever extra args the event documents. Crucially, you must **unregister** when you no longer care (and always before the listener is destroyed), or the listener will be forced to clean them up manually on deletion, which can be slow. This augment registers on the item it's holding and tears the registration down when that item goes away (through another event):
+
+```dm
+// mods/content/augments/simple.dm
+/obj/item/organ/internal/augment/active/simple/Initialize()
+	. = ..()
+	// ...
+	events_repository.register(/decl/observ/moved,      holding, src, PROC_REF(check_holding))
+	events_repository.register(/decl/observ/destroyed,  holding, src, PROC_REF(check_holding))
+
+/obj/item/organ/internal/augment/active/simple/proc/check_holding()
+	if(QDELETED(holding))
+		events_repository.unregister(/decl/observ/moved,     holding, src)
+		events_repository.unregister(/decl/observ/destroyed, holding, src)
+		holding = null
+```
+
+Pass `event_source` to register for events from one specific object; use `register_global(event_type, listener, proc_call)` to hear about that event from *every* source. Some high-traffic events forbid this for performance with the `OBSERVATION_NO_GLOBAL_REGISTRATIONS` flag, so check the event's definition; if writing something that may need that level of performance, `raise_event_non_global` can be used instead of `RAISE_EVENT`.
+
+When you're writing core code, raising an event is the right move whenever you can imagine *someone, someday* wanting to react to something (death, an item moving, a mob examining something) without you knowing who they are or why they want it. It costs one `RAISE_EVENT` line (and the overhead of dispatching events to listeners) and buys almost-unlimited extensibility in modpacks.
+
+The problem is it's easy to get overeager: every event has a small registration/dispatch cost, so raise them when needed rather than sprinkling them everywhere on the off chance. You can always make an upstream PR to add a new event when it's needed.
+
+As an aside, those familiar with TGstation's "DCS" system (datum, component, signal) will recognize this as very similar to TG's signals. They do functionally the same thing.
+
+### Pattern: extensions (`/datum/extension`)
+Events let modpacks react to *moments*; extensions let them attach *state and behavior* to an object without subtyping it or piling vars onto its definition. An extension is a separate datum (`/datum/extension`) that hangs off a "holder" datum, keeping a self-contained feature's data and procs encapsulated in its own type instead of smeared across the holder's variable space. This is composition over inheritance: rather than making a new `/obj/item/chems/pill` subtype for "a pill that hides what it contains," you attach an `obfuscated_medication` extension to any pill.
+
+That separation of concerns is the whole point. The holder doesn't grow a var or a proc for the feature; the feature lives entirely in the extension, can be attached to several unrelated holder types (anything matching its `expected_type`), and can be added or removed at runtime. For a modpack this means adding a self-contained capability to a core object while not touching the core object's *definition* at all. This can even be useful in core code for functionality shared across types whose common ancestor is unacceptably early in the type hierarchy, like `/datum/extension/loaded_cell` (`code\datums\extensions\cell\cell.dm`) or `/datum/extension/padding` (`code\datums\extensions\padding\padding.dm`).
+
+An extension subtype sets `base_type` (attaching a second extension derived from the same `base_type` replaces the first) and `expected_type` (the holders it's allowed on, enforced at construction):
+
+```dm
+// mods/content/bigpharma/extension.dm
+/datum/extension/obfuscated_medication
+	base_type     = /datum/extension/obfuscated_medication
+	expected_type = /obj/item
+	flags         = EXTENSION_FLAG_IMMEDIATE
+	var/original_reagent
+
+/datum/extension/obfuscated_medication/pill
+	expected_type = /obj/item/chems/pill
+
+/datum/extension/obfuscated_medication/pill/update_appearance()
+	var/obj/item/pill = holder    // every extension knows its holder
+	pill.icon_state = get_medication_icon_state_from_reagent_name(original_reagent, "pill", 1, 5)
+```
+
+You attach an extension to a holder via `set_extension(holder, extension_type, ...)`; any extra arguments are forwarded to the extension's `New()`/`post_construction()`. Then you can retrieve it with `get_extension(holder, base_type)`. By default extensions are lazy-loaded (only instantiated on first `get_extension`); set `EXTENSION_FLAG_IMMEDIATE` if it must exist the moment it's attached. There's also `has_extension()` (a cheap presence check that won't trigger lazy instantiation), `remove_extension()`, and `get_or_create_extension()`:
+
+```dm
+// mods/content/augments/active/cyberbrain.dm
+/obj/item/organ/internal/augment/active/cyberbrain/Initialize()
+	. = ..()
+	// ...
+	set_extension(src, /datum/extension/interactive/os/device/implant)
+	set_extension(src, /datum/extension/assembly/modular_computer/cyberbrain)
+	// ...
+
+/obj/item/organ/internal/augment/active/cyberbrain/proc/install_default_hardware()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	for(var/component_type in default_hardware)
+		assembly.try_install_component(null, new component_type(src))
+```
+
+Note that the cyberbrain above attaches *two* unrelated extensions (a modular-computer assembly extension and the OS extension) to one organ. Each is a distinct concern with its own state, neither knows about the other, and neither required a new organ subtype.
+
+When you're writing core code, prefer an extension over adding vars/procs to a base type whenever the feature is **optional, self-contained, or only relevant to some instances.** This keeps the base type lean and gives modpacks a clean attachment point. Create a subtype instead when the behavior is intrinsic to what the object *is* rather than an add-on. As with all of these patterns, don't build an extension for something only one type will ever use and that isn't a separable concern; overengineering is the enemy of getting things done.
+
+As with observation events, those familiar with DCS will note that these are similar to components, with the caveat that explicitly checking for extensions and calling methods on them is perfectly acceptable. You can still avoid it through the use of events, and doing so will often lead to cleaner, more extensible code (after all, if you need to add a hook, chances are something else will too), but it is by no means mandatory or even preferred by all developers.
+
+### Other hooks worth leaving
+- **Append to lists, don't replace them.** If core code builds a list that modpacks might want to add to, expose it (or build it from decl subtypes) so a modpack can contribute an entry. The static-list-getter injector pattern in "Overriding Core Code" above exists precisely *because* a getter didn't leave an easier entry point. Don't make modpacks resort to it if you can offer a cleaner hook.
+- **Split a proc to create a hook.** If a modpack would otherwise need to side-override the middle of a long proc (the "Extend, don't copy" footgun), the right fix on the core side is to factor that middle out into its own overridable proc, so modpacks can override the small piece and call `..()`.
+- **Add vars to a type for modpacks to fill in.** A core type can carry a var that core logic respects but only modpacks ever set, letting modpacks opt into behavior declaratively.
+
+### Footguns
+- **Don't focus too hard on abstraction before getting something working.** It's tempting to design an elaborate system ahead of time to make implementation easier, but a structure for extension is only useful once you understand what that structure needs to accomplish. Implement a working feature first, *then* focus on the points modpacks might actually want to modify. Time spent abstracting and modularizing a system that's fundamentally broken is time wasted.
+- **A stable interface is a promise.** Once modpacks (and downstreams) hook into your decl or proc, renaming it or changing its signature breaks them silently. Treat hook points as a small, deliberate API: keep them narrow, name them clearly, and **document them,** because changing them is more troublesome than changing ordinary internal code.
+- **Be aware of subtype ordering.** If the order your subtypes run in matters, give them an explicit ordering var (like `sort_order`/`priority` above). Relying on enumeration or load order makes behavior depend on which modpacks happen to be enabled, which is exactly the kind of fragility this whole approach is meant to avoid.
 
 # Contribution
 Please contribute to this README/guide. It's currently unfinished and doesn't cover a lot of important things. Thanks.
