@@ -198,8 +198,8 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 			Downward: check if self is ALLOW_LIGHTING and below
 
 		This corner will be shared by all four of its turfs, so it doesn't matter which condition passes.
-		The above/below corners should be created iff one of the masters is considered dynamically lit, including dynamic promotion. No other condition matters, and light is not
-			allowed to transmit through a static lit turf, even if it is marked as ZM_ALLOW_LIGHTING.
+		The above/below corners should be created if the master has a Z-connection and is ALLOW_LIGHTING, regardless of if it's actually dynamic. This allows light to shine
+			through Z-turfs that are themselves not dynamic.
 	*/
 
 	// BOTH is 0, so it's true for both conditions.
@@ -218,25 +218,25 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		It's just the same block of code repeated four times (for each master), plus the case of there now being no above corner, but previously having had one.
 		We also only initialize the one corner we need rather than all four since there's no benefit to initializing them all -- if a true light needs them, it'll make them itself.
 	*/
-	if      (t1 && (T = t1.above || GET_ABOVE(t1)) && (T.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+	if      (t1 && (T = t1.above || GET_ABOVE(t1)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		if (!(above_corner = T.corners?[t1i]) && GOING_UP)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t1i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t1i], t1i, LIGHTING_CORNER_GENERATE_UP)
 			above_corner = T.corners[t1i]
-	else if (t2 && (T = t2.above || GET_ABOVE(t2)) && (T.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+	else if (t2 && (T = t2.above || GET_ABOVE(t2)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		if (!(above_corner = T.corners?[t2i]) && GOING_UP)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t2i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t2i], t2i, LIGHTING_CORNER_GENERATE_UP)
 			above_corner = T.corners[t2i]
-	else if (t3 && (T = t3.above || GET_ABOVE(t3)) && (T.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+	else if (t3 && (T = t3.above || GET_ABOVE(t3)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		if (!(above_corner = T.corners?[t3i]) && GOING_UP)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t3i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t3i], t3i, LIGHTING_CORNER_GENERATE_UP)
 			above_corner = T.corners[t3i]
-	else if (t4 && (T = t4.above || GET_ABOVE(t4)) && (T.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+	else if (t4 && (T = t4.above || GET_ABOVE(t4)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		if (!(above_corner = T.corners?[t4i]) && GOING_UP)
 			if (!T.corners)
 				T.corners = new(4)
@@ -280,25 +280,25 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 					SSlighting.corner_queue += corn
 
 	// As above, so below. The ordering here is a bit different from the above block, check the comment at the top of this proc.
-	if      ((t1?.z_flags & ZM_ALLOW_LIGHTING) && (T = t1.below || GET_BELOW(t1)) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+	if      ((t1?.z_flags & ZM_ALLOW_LIGHTING) && (T = t1.below || GET_BELOW(t1)))
 		if (!(below_corner = T.corners?[t1i]) && GOING_DOWN)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t1i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t1i], t1i, LIGHTING_CORNER_GENERATE_DOWN)
 			below_corner = T.corners[t1i]
-	else if ((t2?.z_flags & ZM_ALLOW_LIGHTING) && (T = t2.below || GET_BELOW(t2)) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+	else if ((t2?.z_flags & ZM_ALLOW_LIGHTING) && (T = t2.below || GET_BELOW(t2)))
 		if (!(below_corner = T.corners?[t2i]) && GOING_DOWN)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t2i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t2i], t2i, LIGHTING_CORNER_GENERATE_DOWN)
 			below_corner = T.corners[t2i]
-	else if ((t3?.z_flags & ZM_ALLOW_LIGHTING) && (T = t3.below || GET_BELOW(t3)) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+	else if ((t3?.z_flags & ZM_ALLOW_LIGHTING) && (T = t3.below || GET_BELOW(t3)))
 		if (!(below_corner = T.corners?[t3i]) && GOING_DOWN)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t3i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t3i], t3i, LIGHTING_CORNER_GENERATE_DOWN)
 			below_corner = T.corners[t3i]
-	else if ((t4?.z_flags & ZM_ALLOW_LIGHTING) && (T = t4.below || GET_BELOW(t4)) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+	else if ((t4?.z_flags & ZM_ALLOW_LIGHTING) && (T = t4.below || GET_BELOW(t4)))
 		if (!(below_corner = T.corners?[t4i]) && GOING_DOWN)
 			if (!T.corners)
 				T.corners = new(4)
