@@ -143,7 +143,14 @@
 // This is inlined in lighting_source.dm.
 // Update it too if you change this.
 /turf/proc/generate_missing_corners()
-	if (!TURF_IS_DYNAMICALLY_LIT_UNSAFE(src) && !ambient_light)
+	var/is_dyn = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src) || ambient_light
+	if (!is_dyn)
+		for (var/turf/Tneigh as anything in RANGE_TURFS(1, src))
+			if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(Tneigh))
+				is_dyn = TRUE
+				break
+
+	if (!is_dyn)
 		return
 
 	lighting_corners_initialised = TRUE
