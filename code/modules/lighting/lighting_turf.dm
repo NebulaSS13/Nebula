@@ -145,7 +145,7 @@
 /turf/proc/generate_missing_corners()
 	var/is_dyn = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src) || ambient_light
 	if (!is_dyn)
-		for (var/turf/Tneigh as anything in RANGE_TURFS(1, src))
+		for (var/turf/Tneigh as anything in RANGE_TURFS(src, 1))
 			if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(Tneigh))
 				is_dyn = TRUE
 				break

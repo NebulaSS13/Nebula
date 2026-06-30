@@ -347,6 +347,7 @@
 	var/test_y
 
 	var/should_do_wedge = light_angle && !facing_opaque
+	var/is_dyn_or_adj
 
 	FOR_DVIEW(T, NONUNIT_CEILING(actual_range, 1), source_turf, 0) do
 		if (should_do_wedge)	// Directional lighting coordinate filter.
@@ -361,7 +362,7 @@
 		// These checks are inlined from generate_missing_corners. They must be kept (roughly) in sync. This one intentionally does not check for ambient turfs.
 		is_dyn_or_adj = TURF_IS_DYNAMICALLY_LIT_UNSAFE(T)
 		if (!is_dyn_or_adj)
-			for (var/turf/Tneigh as anything in RANGE_TURFS(1, T))
+			for (var/turf/Tneigh as anything in RANGE_TURFS(T, 1))
 				if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(Tneigh))
 					is_dyn_or_adj = TRUE
 					break
