@@ -32,7 +32,7 @@ exactly 2 "/mob text paths" '"/mob'
 exactly 6 "/obj text paths" '"/obj'
 exactly 10 "/turf text paths" '"/turf'
 exactly 1 "world<< uses" 'world\s*<<'
-exactly 75 "'in world' uses" '\s+\bin world\b(?=\s*$|\s*//|\s*\))' -P
+exactly 76 "'in world' uses" '\s+\bin world\b(?=\s*$|\s*//|\s*\))' -P
 exactly 1 "world.log<< uses" 'world.log\s*<<'
 exactly 23 "<< uses" '(?<![<\\])<<(?!<)' -P
 exactly 1 "direct_output uses" '\bdirect_output\('
