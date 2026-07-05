@@ -5,12 +5,12 @@
 	autoclose = 0
 	glass = 1
 	airlock_type = "Lift"
-	icon = 'icons/obj/doors/elevator/door.dmi'
-	fill_file = 'icons/obj/doors/elevator/fill_steel.dmi'
-	glass_file = 'icons/obj/doors/elevator/fill_glass.dmi'
-	bolts_file = 'icons/obj/doors/elevator/lights_bolts.dmi'
-	deny_file = 'icons/obj/doors/elevator/lights_deny.dmi'
-	lights_file = 'icons/obj/doors/elevator/lights_green.dmi'
+	icon = 'mods/content/turbolift/icons/door/door.dmi'
+	fill_file = 'mods/content/turbolift/icons/door/fill_steel.dmi'
+	glass_file = 'mods/content/turbolift/icons/door/fill_glass.dmi'
+	bolts_file = 'mods/content/turbolift/icons/door/lights_bolts.dmi'
+	deny_file = 'mods/content/turbolift/icons/door/lights_deny.dmi'
+	lights_file = 'mods/content/turbolift/icons/door/lights_green.dmi'
 
 	paintable = PAINT_WINDOW_PAINTABLE
 

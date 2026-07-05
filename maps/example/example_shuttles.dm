@@ -31,7 +31,7 @@
 
 /obj/abstract/turbolift_spawner/example
 	name = "Testing Site elevator placeholder"
-	icon = 'icons/obj/turbolift_preview_nowalls_3x3.dmi'
+	icon = 'mods/content/turbolift/icons/turbolift_preview_nowalls_3x3.dmi'
 	depth = 3
 	lift_size_x = 2
 	lift_size_y = 2
