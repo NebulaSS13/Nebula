@@ -347,6 +347,7 @@
 	var/test_y
 
 	var/should_do_wedge = light_angle && !facing_opaque
+	var/is_dyn_or_adj
 
 	FOR_DVIEW(T, NONUNIT_CEILING(actual_range, 1), source_turf, 0) do
 		if (should_do_wedge)	// Directional lighting coordinate filter.
@@ -357,9 +358,17 @@
 			if ((DETERMINANT(limit_a_x, limit_a_y, test_x, test_y) > 0) || DETERMINANT(test_x, test_y, limit_b_x, limit_b_y) > 0)
 				continue
 
+		// If we're shining a light from a static lit turf onto a dynamic lit one, we do actually want to create corners to light that turf.
+		// These checks are inlined from generate_missing_corners. They must be kept (roughly) in sync. This one intentionally does not check for ambient turfs.
+		is_dyn_or_adj = TURF_IS_DYNAMICALLY_LIT_UNSAFE(T)
+		if (!is_dyn_or_adj)
+			for (var/turf/Tneigh as anything in RANGE_TURFS(T, 1))
+				if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(Tneigh))
+					is_dyn_or_adj = TRUE
+					break
+
 		Tcorners = T.corners
-		// These checks are inlined from generate_missing_corners. They must be kept in sync.
-		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T) || T.light_source_solo || T.light_source_multi || (T.z_flags & ZM_ALLOW_LIGHTING))
+		if (is_dyn_or_adj)
 			if (!T.lighting_corners_initialised)
 				T.lighting_corners_initialised = TRUE
 
