@@ -1203,19 +1203,6 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/has_textile_fibers()
 	return FALSE
 
-// Returns a value used as a multiplier in the fishing delay calc. Higher represents a stronger reduction in fishing time.
-#define BAIT_VALUE_CONSTANT 0.1
-/obj/item/proc/get_bait_value()
-	. = 0
-	for(var/mat in matter)
-		var/decl/material/bait_mat = GET_DECL(mat)
-		if(bait_mat.fishing_bait_value)
-			. += MATERIAL_UNITS_TO_REAGENTS_UNITS(matter[mat]) * bait_mat.fishing_bait_value * BAIT_VALUE_CONSTANT
-	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
-		if(reagent.fishing_bait_value)
-			. += REAGENT_VOLUME(reagents, reagent) * reagent.fishing_bait_value * BAIT_VALUE_CONSTANT
-#undef BAIT_VALUE_CONSTANT
-
 /obj/item/proc/get_storage_cost()
 	//If you want to prevent stuff above a certain w_class from being stored, use max_w_class
 	return BASE_STORAGE_COST(w_class)

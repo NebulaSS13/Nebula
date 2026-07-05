@@ -98,15 +98,7 @@ var/global/list/areas = list()
 		area_blurb_category = type
 	..()
 
-/area/proc/get_additional_fishing_results()
-	return
-
 /area/Initialize()
-	var/list/additional_fishing_results = get_additional_fishing_results()
-	if(LAZYLEN(additional_fishing_results))
-		LAZYINITLIST(fishing_results)
-		for(var/fish in additional_fishing_results)
-			fishing_results[fish] = additional_fishing_results[fish]
 	. = ..()
 	global.areas += src
 	if(!requires_power || !apc)

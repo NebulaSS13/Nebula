@@ -9,7 +9,7 @@
 	color = /decl/material/solid/organic/wood/oak::color
 	matter = null
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
-	icon = 'icons/obj/fishing_rod.dmi'
+	icon = 'mods/content/fishing/icons/fishing_rod.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_LARGE
 
@@ -346,7 +346,7 @@
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
-	icon = 'icons/obj/fishing_rod_advanced.dmi'
+	icon = 'mods/content/fishing/icons/fishing_rod_advanced.dmi'
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	fishing_rod_quality = 0.2
 	line = /obj/item/fishing_line/high_quality

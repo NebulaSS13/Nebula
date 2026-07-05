@@ -19,6 +19,7 @@
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/dungeon_loot/_dungeon_loot.dme"
 	#include "../../mods/content/fantasy/_fantasy.dme"
+	#include "../../mods/content/fishing/_fishing.dme"
 	#include "../../mods/content/generic_shuttles/_generic_shuttles.dme"
 	#include "../../mods/content/government/_government.dme"
 	#include "../../mods/content/inertia/_inertia.dme"

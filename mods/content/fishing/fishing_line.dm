@@ -1,6 +1,6 @@
 /obj/item/fishing_line
 	name = "fishing line"
-	icon = 'icons/obj/fishing_line.dmi'
+	icon = 'mods/content/fishing/icons/fishing_line.dmi'
 	icon_state = ICON_STATE_WORLD
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_DESC
 	max_health = 100
