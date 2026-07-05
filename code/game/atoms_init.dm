@@ -114,7 +114,7 @@
 	// Changing this behavior will almost certainly break power; update accordingly.
 	if (!ml && loc)
 		loc.Entered(src, null)
-	if(loc && (z_flags & ZMM_WIDE_LOAD))
+	if(loc && MOVABLE_SHALL_MIMIC(src) && MOVABLE_IS_BELOW_ZTURF(src))
 		SSzcopy.discover_movable(src)
 
 /atom/movable/EarlyDestroy(force = FALSE)
