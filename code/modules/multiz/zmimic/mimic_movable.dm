@@ -127,7 +127,6 @@
 	var/mimiced_type
 	var/original_z
 	var/override_depth
-	var/reset_generation = 0
 	var/hidden = FALSE
 	var/cached_name
 	var/have_performed_fixup = FALSE
@@ -177,60 +176,52 @@
 	return associated_atom.try_make_grab(user, defer_hand)
 
 /atom/movable/openspace/mimic/forceMove(turf/dest)
-	var/atom/old_loc = loc
-	. = ..()
 	if (QDELING(src))	// Everything in this block is nonsense if we're being destroyed.
-		return
-	// The mimic might be reclaimed from the destruction timer, so do this regardless of if this mimic is likely to continue existing.
-	// It might be more efficient to do this on reclaim instead.
-	if (old_loc?.z != loc?.z)
-		reset_internal_layering()
+		return ..()
 
-	var/new_hide_state = FALSE
+	if (!dest)
+		ZM_DEBUG_LOG("Mimic moved to nullspace; deleting self.")
+		qdel(src)
+		return
+
+	var/turf/old_loc = loc
+	var/force_layering_update = FALSE
+
+	if (isnull(override_depth) && isturf(old_loc) && isturf(dest) && old_loc.z != dest.z)
+		var/atom/movable/openspace/mimic/parent_mimic = astype(associated_atom)
+		// If we're the top-most mimic, we can directly compute depth. Otherwise, pull it off our parent mimic since it should already have either computed it itself, or stolen it from _its_ parent.
+		depth = parent_mimic?.depth
+		if (depth == null)	// depth of 0 is valid
+			depth = ZM_COMPUTE_DEPTH(associated_atom.z)
+			ZM_DEBUG_LOG("Recomputing depth, no parent: result is [depth]")
+			force_layering_update = TRUE
+
+	. = ..()
+
 	if (MOVABLE_IS_ON_ZTURF(src))
 		if (destruction_timer)
 			deltimer(destruction_timer)
 			destruction_timer = null
+
+		if (isturf(old_loc))
+			var/flag_difference = old_loc.z_flags ^ dest.z_flags
+
+			if (force_layering_update || (flag_difference & ZM_FLAGS_AFFECTS_LAYERING))
+				SSzcopy.update_mimic_layering(src)
+
+			if (flag_difference & ZM_FLAGS_AFFECTS_VIS)
+				SSzcopy.update_mimic_occlusion(src)
+		else	// If we're moving from null to a z-turf, just rebuild both.
+			SSzcopy.update_mimic_layering(src)
+			SSzcopy.update_mimic_occlusion(src)
+
 	else if (!destruction_timer)
 		destruction_timer = ZM_DESTRUCTION_TIMER(src, "forceMove")
-		new_hide_state = TRUE
-
-	var/target_state = ZM_DIFF_HIDE_STATE(new_hide_state, ZM_HIDE_NONMIMIC, src)
-	if (hidden != target_state)
-		name = target_state ? "" : cached_name
-		hidden = target_state
 
 // Called when the turf we're on is deleted/changed.
 /atom/movable/openspace/mimic/proc/owning_turf_changed()
 	if (!destruction_timer)
 		destruction_timer = ZM_DESTRUCTION_TIMER(src, "OTC")
-
-/atom/movable/openspace/mimic/proc/reset_internal_layering(depth_hint, no_discover = FALSE)
-	reset_generation += 1
-	var/root_z
-	if (bound_overlay?.override_depth)
-		depth = bound_overlay.override_depth
-
-	else if (isturf(associated_atom.loc))
-		// Find the new root.
-		root_z = depth_hint	// If we were reset by the mimic below us, they will have already calculated the root and we can just use that.
-		if (!root_z)
-			var/atom/movable/openspace/mimic/M
-			for (M = src; istype(M); M = M.associated_atom)
-				// body intentionally left empty
-
-			root_z = M.z
-
-#ifdef ZM_ENH_DEBUG
-		var/old_depth = depth
-#endif
-		depth = min(SSzcopy.zlev_maximums[associated_atom.z] - root_z, OPENTURF_MAX_DEPTH)
-		original_z = root_z
-		ZM_DEBUG_LOG("Resetting mimic ([src], copying [associated_atom.type], ([x], [y], [z])) layering: [old_depth] -> [depth]")
-
-	bound_overlay?.reset_internal_layering(root_z, TRUE)
-	if (!no_discover)
-		SSzcopy.discover_movable(associated_atom, only_reset = TRUE)
 
 // -- TURF PROXY --
 

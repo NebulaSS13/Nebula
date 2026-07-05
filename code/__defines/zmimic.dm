@@ -73,10 +73,11 @@
 /// Preset: you're creating a turf with translucent accents (like glass flooring). This will block clicks even where alpha on the icon is 0, add MIMIC_NO_OCCLUDE if this is unwanted.
 #define ZM_MIMIC_PRESET_TRANSLUCENT_TURF (ZM_MIMIC_DEFAULTS)
 
-/// Flags that require layering resets when a movable moves between turfs with different values for.
-#define ZM_STATEFUL_MIMIC_FLAGS (0)
+#define ZM_FLAGS_AFFECTS_VIS (ZM_BOUNDARY | ZM_HIDE_ATOMS)	//! Flags that affect mimic right-click visibility (maps to ZM_HIDE_*).
+#define ZM_FLAGS_AFFECTS_LAYERING (0)	//! Flags that affect mimic layering (different render slice placement).
+
 /// Flags that persist across changeturf.
-#define ZM_INFECTIOUS_MIMIC_FLAGS (ZM_BOUNDARY|ZM_OVERRIDE)	// Hopefully I don't regret making OVERRIDE sticky.
+#define ZM_INFECTIOUS_MIMIC_FLAGS (ZM_OVERRIDE)	// Hopefully I don't regret making OVERRIDE sticky.
 
 // ZM hide state flags for simplicity of logic.
 #define ZM_HIDE_BOUNDARY 1	//! This mimic is being hidden by its parent being a boundary.

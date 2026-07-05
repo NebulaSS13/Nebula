@@ -211,43 +211,7 @@
 
 		// Z-Mimic.
 		if (bound_overlay)
-			// Some types (like humantypes) change this per Move.
-			if (bound_overlay.glide_size != glide_size)
-				bound_overlay.glide_size = glide_size
-			// The overlay will handle cleaning itself up on non-openspace turfs.
-			bound_overlay.forceMove(get_step(src, UP))
-			if (bound_overlay.dir != dir)
-				bound_overlay.set_dir(dir)
-
-#if ZM_STATEFUL_MIMIC_FLAGS != 0
-			var/turf/Told = astype(origin, /turf)?.above
-#endif
-			var/turf/Tnew = astype(loc, /turf)?.above
-
-			if (Tnew)
-#if ZM_STATEFUL_MIMIC_FLAGS != 0
-				if (Told)
-					var/old_flags = Told.z_flags & ZM_STATEFUL_MIMIC_FLAGS
-					var/new_flags = Tnew.z_flags & ZM_STATEFUL_MIMIC_FLAGS
-
-					if (old_flags != new_flags)
-						ZM_DEBUG_LOG("Told = [old_flags], Tnew = [new_flags]")
-						bound_overlay.reset_internal_layering()
-#endif
-				var/target_state = bound_overlay.hidden
-				if (Tnew.mouse_opacity == MOUSE_OPACITY_PRIORITY && (Tnew.z_flags & ZM_HIDE_ATOMS))
-					target_state |= ZM_HIDE_OPAQUE
-				else
-					target_state &= ~ZM_HIDE_OPAQUE
-
-				if (Tnew.z_flags & ZM_BOUNDARY)
-					target_state |= ZM_HIDE_BOUNDARY
-				else
-					target_state &= ~ZM_HIDE_BOUNDARY
-
-				if (bound_overlay.hidden != target_state)
-					bound_overlay.name = target_state ? "" : bound_overlay.cached_name
-					bound_overlay.hidden = target_state
+			move_mimic(origin)
 
 		else if (isturf(loc) && (!origin || !TURF_IS_MIMICKING(origin)) && MOVABLE_SHALL_MIMIC(src) && MOVABLE_IS_BELOW_ZTURF(src))
 			SSzcopy.discover_movable(src)
@@ -305,43 +269,7 @@
 
 		// Z-Mimic.
 		if (bound_overlay)
-			// Some types (like humantypes) change this per Move.
-			if (bound_overlay.glide_size != glide_size)
-				bound_overlay.glide_size = glide_size
-			// The overlay will handle cleaning itself up on non-openspace turfs.
-			bound_overlay.forceMove(get_step(src, UP))
-			if (bound_overlay.dir != dir)
-				bound_overlay.set_dir(dir)
-
-#if ZM_STATEFUL_MIMIC_FLAGS != 0
-			var/turf/Told = astype(old_loc, /turf)?.above
-#endif
-			var/turf/Tnew = astype(loc, /turf)?.above
-
-			if (Tnew)
-#if ZM_STATEFUL_MIMIC_FLAGS != 0
-				if (Told)
-					var/old_flags = Told.z_flags & ZM_STATEFUL_MIMIC_FLAGS
-					var/new_flags = Tnew.z_flags & ZM_STATEFUL_MIMIC_FLAGS
-
-					if (old_flags != new_flags)
-						ZM_DEBUG_LOG("Told = [old_flags], Tnew = [new_flags]")
-						bound_overlay.reset_internal_layering()
-#endif
-				var/target_state = bound_overlay.hidden
-				if (Tnew.mouse_opacity == 2 && (Tnew.z_flags & ZM_HIDE_ATOMS))
-					target_state |= ZM_HIDE_OPAQUE
-				else
-					target_state &= ~ZM_HIDE_OPAQUE
-
-				if (Tnew.z_flags & ZM_BOUNDARY)
-					target_state |= ZM_HIDE_BOUNDARY
-				else
-					target_state &= ~ZM_HIDE_BOUNDARY
-
-				if (bound_overlay.hidden != target_state)
-					bound_overlay.name = target_state ? "" : bound_overlay.cached_name
-					bound_overlay.hidden = target_state
+			move_mimic(old_loc)
 
 		else if (isturf(loc) && (!old_loc || !TURF_IS_MIMICKING(old_loc)) && MOVABLE_SHALL_MIMIC(src) && MOVABLE_IS_BELOW_ZTURF(src))
 			SSzcopy.discover_movable(src)
@@ -354,6 +282,17 @@
 		for(var/mob/viewer in storage?.storage_ui?.is_seeing)
 			if(!storage.can_view(viewer))
 				storage.close(viewer)
+
+/atom/movable/proc/move_mimic(atom/old_loc)
+	// Some types (like humantypes) change this per Move.
+	if (bound_overlay.glide_size != glide_size)
+		bound_overlay.glide_size = glide_size
+
+	if (bound_overlay.dir != dir)
+		bound_overlay.set_dir(dir)
+
+	// The overlay will handle cleaning itself up on non-openspace turfs. Moving to `get_step(UP)` is invalid here, since that might place us in an unrelated Z-group.
+	bound_overlay.forceMove(astype(loc, /turf)?.above)
 
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)

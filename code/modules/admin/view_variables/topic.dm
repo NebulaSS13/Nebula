@@ -4,6 +4,8 @@
 		return
 	if(href_list["Vars"])
 		debug_variables(locate(href_list["Vars"]))
+	if(href_list["zm_analyze"])
+		analyze_openturf(locate(href_list["zm_analyze"]))
 
 	//~CARN: for renaming mobs (updates their name, real_name, mind.name, their ID/PDA and datacore records).
 	else if(href_list["rename"])
