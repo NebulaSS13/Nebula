@@ -130,6 +130,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
+/obj/structure/railing/mapped{
+	dir = 4
+	},
 /turf/floor/tiled/dark/monotile,
 /area/example/second)
 "kf" = (
@@ -495,6 +498,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
+/obj/structure/railing/mapped{
+	dir = 4
+	},
 /turf/floor/tiled/steel_grid,
 /area/example/second)
 "Gn" = (
@@ -649,14 +655,24 @@
 	},
 /turf/floor,
 /area/example/second)
+"Vp" = (
+/obj/structure/ladder,
+/obj/structure/railing/mapped{
+	dir = 4
+	},
+/turf/open,
+/area/example/second)
 "VG" = (
 /obj/machinery/fabricator/bioprinter,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/white/monotile,
 /area/example/second)
 "VL" = (
+/obj/structure/sign/warning/fall{
+	pixel_y = 32
+	},
 /turf/open,
-/area/turbolift/example/second)
+/area/example/second)
 "WW" = (
 /obj/effect/floor_decal/corner/mauve/mono,
 /obj/machinery/recycler,
@@ -2588,7 +2604,7 @@ sA
 XE
 XE
 XE
-NY
+Vp
 jW
 FE
 Gn
@@ -2643,8 +2659,8 @@ qV
 CW
 XE
 VL
-VL
-VL
+wP
+wP
 Gn
 wP
 wP
@@ -2696,9 +2712,9 @@ CW
 CW
 CW
 XE
-VL
-VL
-VL
+wP
+wP
+wP
 Gn
 wP
 wP
@@ -2750,9 +2766,9 @@ CW
 CW
 CW
 XE
-VL
-VL
-VL
+wP
+wP
+wP
 Gn
 wP
 wP

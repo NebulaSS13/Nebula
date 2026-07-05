@@ -141,12 +141,6 @@
 "gO" = (
 /turf/wall/titanium,
 /area/shuttle/ferry)
-"gT" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 6
-	},
-/turf/floor/tiled/steel_grid,
-/area/example/first)
 "he" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -225,9 +219,7 @@
 	dir = 1
 	},
 /obj/structure/ladder,
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4
-	},
+/obj/effect/floor_decal/industrial/warning/full,
 /turf/floor/tiled/dark/monotile,
 /area/example/first)
 "mo" = (
@@ -427,10 +419,6 @@
 /obj/machinery/light,
 /turf/floor/tiled/steel_grid,
 /area/example/first)
-"tA" = (
-/obj/abstract/turbolift_spawner/example,
-/turf/floor,
-/area/turbolift/example/first)
 "uD" = (
 /obj/machinery/light,
 /turf/floor,
@@ -652,15 +640,6 @@
 /obj/machinery/light,
 /turf/floor/tiled/steel_grid,
 /area/example/first)
-"FZ" = (
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 1
-	},
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/floor,
-/area/example/first)
 "Gg" = (
 /obj/structure/railing/mapped{
 	dir = 1
@@ -762,15 +741,9 @@
 	},
 /turf/floor/tiled/steel_grid,
 /area/example/first)
-"LM" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1
-	},
-/turf/floor,
-/area/example/first)
 "LP" = (
-/turf/floor/plating,
-/area/turbolift/example/first)
+/turf/floor/tiled/dark/monotile,
+/area/example/first)
 "LW" = (
 /obj/machinery/teleport/station,
 /turf/floor/tiled/dark/monotile,
@@ -809,12 +782,6 @@
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/floor/tiled/dark/monotile,
-/area/example/first)
-"Pp" = (
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 4
-	},
-/turf/floor,
 /area/example/first)
 "Pv" = (
 /obj/structure/rack,
@@ -871,9 +838,6 @@
 	},
 /turf/floor/tiled/steel_grid,
 /area/example/first)
-"RW" = (
-/turf/floor,
-/area/turbolift/example/first)
 "Ss" = (
 /obj/structure/tank_rack/oxygen,
 /obj/effect/floor_decal/corner/orange/half{
@@ -932,10 +896,10 @@
 /turf/floor,
 /area/example/first)
 "Wi" = (
-/obj/effect/floor_decal/industrial/warning/fulltile,
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8
+/obj/effect/floor_decal/corner/orange{
+	dir = 6
 	},
+/obj/effect/floor_decal/industrial/warning,
 /turf/floor/tiled/steel_grid,
 /area/example/first)
 "Wj" = (
@@ -2892,9 +2856,9 @@ XZ
 XZ
 XZ
 mc
-xT
-gT
-Pp
+CU
+WW
+Yp
 VY
 kw
 kw
@@ -2946,9 +2910,9 @@ KT
 oz
 XZ
 LP
-LP
-tA
-LM
+CU
+WW
+Yp
 VY
 kw
 kw
@@ -3000,9 +2964,9 @@ CU
 oz
 XZ
 LP
-LP
-RW
-LM
+CU
+WW
+Yp
 on
 he
 tt
@@ -3054,9 +3018,9 @@ CU
 oz
 XZ
 LP
-LP
-RW
-LM
+CU
+WW
+Yp
 Yp
 WF
 WF
@@ -3107,10 +3071,10 @@ Mc
 CU
 oz
 XZ
+LP
+hA
 Wi
-Wi
-Wi
-FZ
+WS
 Yp
 jP
 HA
