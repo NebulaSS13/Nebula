@@ -72,6 +72,7 @@
 	update_icon()
 
 /obj/structure/lift/button/standalone
+	directional_offset = null
 	icon_state = "plinth"
 
 /obj/structure/lift/button/on_update_icon()
