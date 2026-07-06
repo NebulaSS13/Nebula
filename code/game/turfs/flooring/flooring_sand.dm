@@ -5,7 +5,7 @@
 	icon            = 'icons/turf/flooring/sand.dmi'
 	icon_base       = "sand"
 	icon_edge_layer = FLOOR_EDGE_SAND
-	color			= "#ffd076"
+	color           = null
 	has_base_range  = 4
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	force_material  = /decl/material/solid/sand
