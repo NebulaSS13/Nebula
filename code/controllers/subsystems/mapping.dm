@@ -256,7 +256,7 @@ SUBSYSTEM_DEF(mapping)
 	planetoid_data_by_z.len = world.maxz
 	connected_z_cache.Cut()
 
-	SSzcopy.calculate_zstack_limits()
+	SSzcopy?.calculate_zstack_limits()
 
 	//Update SSWeather's indexed lists, if we can.
 	if(SSweather?.weather_by_z)
