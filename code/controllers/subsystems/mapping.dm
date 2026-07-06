@@ -256,20 +256,34 @@ SUBSYSTEM_DEF(mapping)
 	planetoid_data_by_z.len = world.maxz
 	connected_z_cache.Cut()
 
+	SSzcopy.calculate_zstack_limits()
+
 	//Update SSWeather's indexed lists, if we can.
 	if(SSweather?.weather_by_z)
 		SSweather.weather_by_z.len = world.maxz
+
+/// This is equivalent to calling `increment_world_z_size()` in a loop, but more efficient.
+/datum/controller/subsystem/mapping/proc/bulk_increment_world_z_size(num_z_levels, new_level_type, defer_setup = FALSE)
+	ASSERT(num_z_levels > 0)
+	var/old_max = world.maxz
+	world.maxz += num_z_levels
+
+	reindex_lists()
+
+	if (!new_level_type)
+		CRASH("Missing z-level data type for z[old_max] through z[old_max + num_z_levels]!")
+
+	for (var/i in 1 to num_z_levels)
+		var/datum/level_data/level = new new_level_type(old_max + i, defer_setup)
+		level.initialize_new_level()
 
 /datum/controller/subsystem/mapping/proc/increment_world_z_size(var/new_level_type, var/defer_setup = FALSE)
 
 	world.maxz++
 	reindex_lists()
 
-	if(SSzcopy.zlev_maximums.len)
-		SSzcopy.calculate_zstack_limits()
 	if(!new_level_type)
-		PRINT_STACK_TRACE("Missing z-level data type for z["[world.maxz]"]!")
-		return
+		CRASH("Missing z-level data type for z[world.maxz]!")
 
 	var/datum/level_data/level = new new_level_type(world.maxz, defer_setup)
 	level.initialize_new_level()
