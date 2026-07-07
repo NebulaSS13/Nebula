@@ -34,12 +34,11 @@
 #define ZM_SLICE_SLOT_LIGHTING 1	//! Shadowers and other *BLEND_MULTIPLY* objects.
 #define ZM_SLICE_SLOT_CAP 2	//! ZAO and other non-MULTIPLY effects that must render on top of everything else, including lighting.
 
-#define ZM_BASEMENT_CAP_PLANE -399
 #define ZM_BASEMENT_MAX_PLANE -400
 #define ZM_BASEMENT_PLANES_PER_DEPTH 1
 #define ZM_VSLICE_SLOT_ZSUM 0
 
-/// How many items should we process before we check for yield? Increasing this increases efficiency, but also raises risk of overrun.
+/// How many items should we process before we check for yield? Increasing this increases efficiency, but also raises risk of overrun. This is tuned for world.fps = 100.
 #define ZM_PUMP_RATIO 4
 /// Initialize state required for ZM_MC_TRY_YIELD.
 #define ZM_PUMP_INIT var/__yield
@@ -853,19 +852,12 @@ SUBSYSTEM_DEF(zcopy)
 	C.screen += slice
 	LAZYADD(C.zm_objs[slice.slice_prefix], slice)
 
-/datum/controller/subsystem/zcopy/proc/CreatePrimordialSlice(client/C, path)
-	var/obj/mimic_master/master = new path
-	C.screen += master
-	LAZYADD(C.zm_objs["primordial"], master)
-
 /datum/controller/subsystem/zcopy/proc/CreatePlanesFor(client/C)
 	for (var/i in 0 to OPENTURF_MAX_DEPTH)
 		CreateSlice(C, /obj/mimic_master/slice/basic, i)
 		CreateSlice(C, /obj/mimic_master/slice/shadower_master, i)
 		CreateSlice(C, /obj/mimic_master/slice/cap, i)
 		CreateSlice(C, /obj/mimic_master/slice/virtual/zsum, i)
-
-	CreatePrimordialSlice(C, /obj/mimic_master/plane_zero)
 
 #define FMT_DEPTH(X) (X == null ? "(null)" : X)
 #define FMT_OK(X) (X) ? "<font color='green'>OK</font>" : "<font color='red'>MISMATCH</font>"

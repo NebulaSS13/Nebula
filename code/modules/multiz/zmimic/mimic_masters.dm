@@ -62,10 +62,3 @@
 		filter(type = "layer", render_source = ZM_SLICE(ZM_SLICE_TY_BASIC, depth))
 	)
 	render_target = ZM_SLICE_VIRTUAL(ZM_SLICE_TY_ZSUM, depth)
-
-// -- Non-slice Z masters -
-
-/// Contains game world.
-/obj/mimic_master/plane_zero
-	plane = DEFAULT_PLANE
-	render_target = "plane_zero"
