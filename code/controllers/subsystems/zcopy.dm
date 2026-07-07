@@ -16,7 +16,7 @@
 #define ZM_DEPTH_TO_OFFSET(X) ZM_DEPTH_TO_OFFSET_RAW(X, OPENTURF_PLANES_PER_DEPTH)
 /// Compute the final target plane given a stack depth number and a slot offset.
 #define ZM_COMPUTE_PLANE(DEPTH, SLOT) (ZMIMIC_MAXIMUM_PLANE - ZM_DEPTH_TO_OFFSET(DEPTH) + (SLOT))
-#define ZM_COMPUTE_DEPTH(Z) max((SSzcopy.zlev_maximums[Z] - (Z)), OPENTURF_MAX_DEPTH)
+#define ZM_COMPUTE_DEPTH(Z) min((SSzcopy.zlev_maximums[Z] - (Z)), OPENTURF_MAX_DEPTH)
 
 #define SHADOWER_DARKENING_FACTOR 0.6	// The multiplication factor for openturf shadower darkness. Lighting will be multiplied by this.
 #define SHADOWER_DARKENING_COLOR "#999999"	// The above, but as an RGB string for lighting-less turfs.
