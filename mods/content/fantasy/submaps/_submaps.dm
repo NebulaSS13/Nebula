@@ -47,6 +47,7 @@
 	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_BACKGROUND
 
 /area/fantasy/outside/point_of_interest
+	abstract_type = /area/fantasy/outside/point_of_interest
 	name = "Point Of Interest"
 	description = null
 	area_blurb_category = /area/fantasy/outside/point_of_interest

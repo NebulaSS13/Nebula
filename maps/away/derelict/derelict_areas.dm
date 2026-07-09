@@ -1,3 +1,6 @@
+/area/derelict
+	abstract_type = /area/derelict
+
 /area/derelict/ship
 	name = "\improper Abandoned Ship"
 	icon_state = "yellow"

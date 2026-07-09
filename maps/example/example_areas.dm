@@ -1,4 +1,5 @@
 /area/example
+	abstract_type = /area/example
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/example/first
@@ -14,6 +15,7 @@
 	icon_state = "storage"
 
 /area/turbolift/example
+	abstract_type = /area/turbolift/example
 	name = "\improper Testing Site Elevator"
 	icon_state = "shuttle"
 	requires_power = FALSE

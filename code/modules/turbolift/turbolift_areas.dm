@@ -1,5 +1,6 @@
 // Used for creating the exchange areas.
 /area/turbolift
+	abstract_type = /area/turbolift
 	name = "\improper Turbolift"
 	base_turf = /turf/open
 	requires_power = FALSE
