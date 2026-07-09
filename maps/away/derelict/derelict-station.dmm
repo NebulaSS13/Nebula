@@ -998,7 +998,7 @@
 /turf/floor/plating/airless,
 /area/constructionsite/hallway/fore)
 "dw" = (
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/hallway/fore)
 "dx" = (
 /obj/random/junk,
