@@ -3,119 +3,9 @@
 // Holographic tables are in code/modules/tables/presets.dm
 // Holographic racks are in code/modules/tables/rack.dm
 
-/turf/floor/holofloor
-	thermal_conductivity = 0
-
-/turf/floor/holofloor/get_lumcount(var/minlum = 0, var/maxlum = 1)
-	return 0.8
-
-/turf/floor/holofloor/attackby(obj/item/used_item, mob/user)
-	return TRUE
-	// HOLOFLOOR DOES NOT GIVE A FUCK
-
-/turf/floor/holofloor/carpet
-	name          = "brown carpet"
-	icon          = 'icons/turf/flooring/carpet.dmi'
-	icon_state    = "brown"
-	_flooring     = /decl/flooring/carpet
-
-/turf/floor/holofloor/concrete
-	name          = "brown carpet"
-	icon          = 'icons/turf/flooring/carpet.dmi'
-	icon_state    = "brown"
-	_flooring     = /decl/flooring/carpet
-
-/turf/floor/holofloor/concrete
-	name          = "floor"
-	icon          = 'icons/turf/flooring/misc.dmi'
-	icon_state    = "concrete"
-	_flooring     = null
-
-/turf/floor/holofloor/tiled
-	name          = "floor"
-	icon          = 'icons/turf/flooring/tiles.dmi'
-	icon_state    = "steel"
-	_flooring     = /decl/flooring/tiling
-
-/turf/floor/holofloor/tiled/dark
-	name          = "dark floor"
-	icon_state    = "dark"
-	_flooring     = /decl/flooring/tiling/dark
-
-/turf/floor/holofloor/tiled/stone
-	name          = "stone floor"
-	icon_state    = "stone"
-	_flooring     = /decl/flooring/tiling/stone
-
-/turf/floor/holofloor/lino
-	name          = "lino"
-	icon          = 'icons/turf/flooring/linoleum.dmi'
-	icon_state    = "lino"
-	_flooring     = /decl/flooring/linoleum
-
-/turf/floor/holofloor/wood
-	name          = "wooden floor"
-	icon          = 'icons/turf/flooring/wood.dmi'
-	icon_state    = "wood0"
-	color         = WOOD_COLOR_CHOCOLATE
-	_flooring     = /decl/flooring/wood
-
-/turf/floor/holofloor/grass
-	name          = "lush grass"
-	icon          = 'icons/turf/flooring/fakegrass.dmi'
-	icon_state    = "grass0"
-	_flooring     = /decl/flooring/grass/fake
-
-/turf/floor/holofloor/snow
-	name          = "snow"
-	icon          = 'icons/turf/flooring/snow.dmi'
-	icon_state    = "snow0"
-	_flooring     = /decl/flooring/snow/fake
-
-/turf/floor/holofloor/space
-	name          = "\proper space"
-	icon          = 'icons/turf/flooring/fake_space.dmi'
-	icon_state    = "space0"
-	_flooring     = /decl/flooring/fake_space
-
-/turf/floor/holofloor/reinforced
-	name          = "reinforced holofloor"
-	icon          = 'icons/turf/flooring/tiles.dmi'
-	_flooring     = /decl/flooring/reinforced
-	icon_state    = "reinforced"
-
-/turf/floor/holofloor/beach
-	desc          = "Uncomfortably gritty for a hologram."
-	icon          = 'icons/misc/beach.dmi'
-	_flooring     = /decl/flooring/sand/fake
-	abstract_type = /turf/floor/holofloor/beach
-
-/turf/floor/holofloor/beach/sand
-	name          = "sand"
-	icon_state    = "desert0"
-
-/turf/floor/holofloor/beach/coastline
-	name          = "coastline"
-	icon          = 'icons/misc/beach2.dmi'
-	icon_state    = "sandwater"
-	_flooring     = /decl/flooring/sand/fake
-
-/turf/floor/holofloor/beach/water
-	name          = "water"
-	icon_state    = "seashallow"
-	_flooring     = /decl/flooring/fake_water
-
-/turf/floor/holofloor/desert
-	name          = "desert sand"
-	desc          = "Uncomfortably gritty for a hologram."
-	icon          = 'icons/turf/flooring/barren.dmi'
-	icon_state    = "barren"
-	_flooring     = /decl/flooring/sand/fake
-
-/turf/floor/holofloor/desert/Initialize(var/ml)
-	. = ..()
-	if(prob(10))
-		LAZYADD(decals, image('icons/turf/flooring/decals.dmi', "asteroid[rand(0,9)]"))
+/obj
+	/// if the obj is a holographic object spawned by the holodeck
+	var/holographic = FALSE
 
 /obj/structure/holostool
 	name          = "stool"
@@ -123,10 +13,18 @@
 	icon          = 'icons/obj/furniture.dmi'
 	icon_state    = "stool_padded_preview"
 	anchored      = TRUE
+	worthless     = TRUE
+	holographic   = TRUE
 
 /obj/item/clothing/gloves/boxing/hologlove
 	name          = "boxing gloves"
 	desc          = "Because you really needed another excuse to punch your crewmates."
+	worthless     = TRUE
+	holographic   = TRUE
+
+/obj/structure/window/reinforced/holowindow
+	worthless     = TRUE
+	holographic   = TRUE
 
 /obj/structure/window/reinforced/holowindow/full
 	dir           = NORTHEAST
@@ -148,27 +46,31 @@
 // This subtype is deleted when a ready button in the same area is pressed.
 /obj/structure/window/reinforced/holowindow/disappearing
 
+/obj/machinery/door/window/holowindoor
+	holographic = TRUE
+	worthless = TRUE
+
 /obj/machinery/door/window/holowindoor/attackby(obj/item/used_item, mob/user)
 
-	if (src.operating == 1)
+	if (operating)
 		return TRUE
 
-	if(src.density && istype(used_item, /obj/item) && !istype(used_item, /obj/item/card))
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
+	if(density && istype(used_item, /obj/item) && !istype(used_item, /obj/item/card))
+		playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("<span class='danger'>\The [src] was hit by \the [used_item].</span>")
 		if(used_item.atom_damage_type == BRUTE || used_item.atom_damage_type == BURN)
 			take_damage(used_item.expend_attack_force(user))
 		return TRUE
 
-	src.add_fingerprint(user)
-	if (src.allowed(user))
-		if (src.density)
+	add_fingerprint(user)
+	if (allowed(user))
+		if (density)
 			open()
 		else
 			close()
 		return TRUE
 
-	else if (src.density)
+	else if (density)
 		flick("[base_state]deny", src)
 		return TRUE
 	return FALSE
@@ -184,14 +86,18 @@
 /obj/structure/bed/holobed
 	tool_interaction_flags = 0
 	holographic = TRUE
+	worthless = TRUE
 	material = /decl/material/solid/metal/aluminium/holographic
 
 /obj/structure/chair/holochair
 	tool_interaction_flags = 0
 	holographic = TRUE
+	worthless = TRUE
 	material = /decl/material/solid/metal/aluminium/holographic
 
 /obj/item/holo
+	holographic = TRUE
+	worthless = TRUE
 	atom_damage_type =  PAIN
 	no_attack_log = 1
 	max_health = ITEM_HEALTH_NO_DAMAGE
@@ -258,6 +164,8 @@
 	anchored = TRUE
 	density = TRUE
 	throwpass = 1
+	holographic = TRUE
+	worthless = TRUE
 
 /obj/structure/holohoop/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if (istype(mover,/obj/item) && mover.throwing)
@@ -284,6 +192,8 @@
 	layer = TABLE_LAYER
 	throwpass = 1
 	dir = EAST
+	holographic = TRUE
+	worthless = TRUE
 
 /obj/structure/holonet/end
 	icon_state = "volleynet_end"
@@ -315,6 +225,8 @@
 	idle_power_usage = 2
 	active_power_usage = 6
 	power_channel = ENVIRON
+	holographic = TRUE
+	worthless = TRUE
 
 /obj/machinery/readybutton/attack_ai(mob/living/silicon/ai/user)
 	to_chat(user, "The AI is not to interact with these devices!")
@@ -364,51 +276,3 @@
 
 	for(var/mob/M in currentarea)
 		to_chat(M, "FIGHT!")
-
-//Holocarp
-
-/mob/living/simple_animal/hostile/carp/holodeck
-	icon = 'icons/mob/simple_animal/holocarp.dmi'
-	alpha = 127
-	butchery_data = null
-
-/mob/living/simple_animal/hostile/carp/holodeck/carp_randomify()
-	return
-
-/mob/living/simple_animal/hostile/carp/holodeck/on_update_icon()
-	SHOULD_CALL_PARENT(FALSE)
-	return
-
-/mob/living/simple_animal/hostile/carp/holodeck/Initialize()
-	. = ..()
-	set_light(2) //hologram lighting
-
-/mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
-	if (safe)
-		faction = MOB_FACTION_NEUTRAL
-		natural_weapon.set_base_attack_force(0)
-		environment_smash = 0
-		ai?.try_destroy_surroundings = FALSE
-	else
-		faction = "carp"
-		natural_weapon.set_base_attack_force(natural_weapon.get_initial_base_attack_force())
-
-/mob/living/simple_animal/hostile/carp/holodeck/gib(do_gibs = TRUE)
-	SHOULD_CALL_PARENT(FALSE)
-	if(stat != DEAD)
-		death(gibbed = TRUE)
-	if(stat == DEAD)
-		qdel(src)
-		return TRUE
-	return FALSE
-
-/mob/living/simple_animal/hostile/carp/holodeck/get_death_message(gibbed)
-	return "fades away..."
-
-/mob/living/simple_animal/hostile/carp/holodeck/get_self_death_message(gibbed)
-	return "You have been destroyed."
-
-/mob/living/simple_animal/hostile/carp/holodeck/death(gibbed)
-	. = ..()
-	if(. && !gibbed)
-		gib()

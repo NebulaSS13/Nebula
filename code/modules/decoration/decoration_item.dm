@@ -74,6 +74,8 @@
 			return TRUE
 
 /obj/item/get_single_monetary_worth()
+	if(worthless)
+		return 0
 	. = ..()
 	var/base_value = .
 	for(var/decl/item_decoration/decoration as anything in decorations)

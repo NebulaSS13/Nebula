@@ -222,7 +222,7 @@
 /decl/material/solid/metal/steel/holographic
 	name = "holographic steel"
 	uid = "solid_holographic_steel"
-	holographic = TRUE
+	visual_only = TRUE
 
 /decl/material/solid/metal/stainlesssteel
 	name = "stainless steel"
@@ -269,7 +269,7 @@
 /decl/material/solid/metal/aluminium/holographic
 	name = "holoaluminium"
 	uid = "solid_holographic_aluminium"
-	holographic = TRUE
+	visual_only = TRUE
 
 /decl/material/solid/metal/plasteel
 	name = "plasteel"

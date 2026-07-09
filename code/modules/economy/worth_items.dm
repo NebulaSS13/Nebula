@@ -3,10 +3,6 @@
 #define BASE_ARMOUR_WORTH    50
 
 /obj/item/get_base_value()
-
-	if(holographic)
-		return 0
-
 	. = ..()
 
 	if(origin_tech)
@@ -75,7 +71,7 @@
 #undef MUNDANE_ARMOUR_VALUE
 #undef BASE_ARMOUR_WORTH
 
-/obj/item/organ/get_single_monetary_worth()
+/obj/item/organ/get_value_multiplier()
 	. = ..()
 	if(species)
-		. = round(. * species.rarity_value)
+		. *= species.rarity_value

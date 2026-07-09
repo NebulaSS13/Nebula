@@ -21,6 +21,7 @@
 	#include "../../mods/content/fantasy/_fantasy.dme"
 	#include "../../mods/content/generic_shuttles/_generic_shuttles.dme"
 	#include "../../mods/content/government/_government.dme"
+	#include "../../mods/content/holodeck/_holodeck.dme"
 	#include "../../mods/content/inertia/_inertia.dme"
 	#include "../../mods/content/integrated_electronics/_integrated_electronics.dme"
 	#include "../../mods/content/item_sharpening/_item_sharpening.dme"

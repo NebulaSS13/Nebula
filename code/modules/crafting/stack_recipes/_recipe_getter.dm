@@ -19,7 +19,7 @@
 /proc/get_stack_recipes(decl/material/mat, decl/material/reinf_mat, stack_type, tool_type, flat = FALSE)
 
 	// No recipes for holograms or fluids.
-	if(istype(mat) && (mat.holographic || mat.phase_at_temperature() != MAT_PHASE_SOLID))
+	if(istype(mat) && (mat.visual_only || mat.phase_at_temperature() != MAT_PHASE_SOLID))
 		return list()
 
 	#ifndef UNIT_TEST // key creation is SLOW and in unit testing almost every call to this will be a cache fail
