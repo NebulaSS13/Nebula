@@ -378,7 +378,7 @@
 /area/ship/scrap/gambling)
 "aW" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /obj/machinery/light/small{
 	dir = 1;
 	icon_state = "bulb1"
@@ -497,7 +497,7 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 5
 	},
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /obj/machinery/light/small{
 	dir = 1;
 	icon_state = "bulb1"
@@ -527,7 +527,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/gambling)
 "bj" = (
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /obj/item/hand/missing_card,
 /turf/floor/usedup,
 /area/ship/scrap/gambling)
@@ -553,7 +553,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /obj/item/hand/missing_card,
 /turf/floor/usedup,
 /area/ship/scrap/gambling)
@@ -701,7 +701,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /obj/item/hand/missing_card,
 /turf/floor/usedup,
 /area/ship/scrap/gambling)
@@ -801,7 +801,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /turf/floor/tiled/dark/airless,
 /area/ship/scrap/crew/dorms1)
 "bO" = (
@@ -1019,7 +1019,7 @@
 /area/ship/scrap/crew/dorms2)
 "cj" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /obj/machinery/light/small{
 	dir = 1;
 	icon_state = "bulb1"
@@ -1473,7 +1473,7 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 5
 	},
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /obj/machinery/light/small{
 	dir = 1;
 	icon_state = "bulb1"
@@ -1687,7 +1687,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /turf/floor/tiled/dark/airless,
 /area/ship/scrap/crew/dorms3)
 "dG" = (

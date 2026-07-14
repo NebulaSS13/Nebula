@@ -2580,7 +2580,7 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 5
 	},
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /obj/machinery/light{
 	dir = 1;
 	icon_state = "bulb1"
@@ -2720,7 +2720,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -21
@@ -2847,7 +2847,7 @@
 /area/ship/trade/science/fabricaton)
 "Ib" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/structure/holostool,
+/obj/item/stool/padded,
 /obj/machinery/light{
 	dir = 1;
 	icon_state = "bulb1"
