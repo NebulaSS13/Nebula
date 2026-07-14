@@ -1,5 +1,6 @@
 ///Windy surface
 /area/exoplanet
+	// not abstract, this can get instantiated
 	name = "\improper Planetary surface"
 	ambience = list(
 		'sound/effects/wind/wind_2_1.ogg',

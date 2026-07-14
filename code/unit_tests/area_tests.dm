@@ -82,7 +82,9 @@
 
 /datum/unit_test/areas_shall_be_used/start_test()
 	var/unused_areas = 0
-	for(var/area_type in subtypesof(/area))
+	for(var/area/area_type as anything in subtypesof(/area))
+		if(TYPE_IS_ABSTRACT(area_type))
+			continue
 		if(area_type in global.using_map.area_usage_test_exempted_areas)
 			continue
 		if(is_path_in_list(area_type, global.using_map.area_usage_test_exempted_root_areas))
