@@ -63,9 +63,10 @@
 // We autobuild our z levels.
 /obj/effect/overmap/visitable/ship/landable/find_z_levels()
 	if(!use_mapped_z_levels)
+		var/initial_z = world.maxz
+		SSmapping.bulk_increment_world_z_size(multiz + 1, level_type)
 		for(var/i = 0 to multiz)
-			SSmapping.increment_world_z_size(level_type)
-			map_z += world.maxz
+			map_z += initial_z + i + 1
 	else
 		..()
 

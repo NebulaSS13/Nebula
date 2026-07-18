@@ -140,8 +140,10 @@ var/global/dmm_suite/preloader/_preloader = new
 			if(zexpansion && !measureOnly) // don't actually expand the world if we're only measuring bounds
 				if(cropMap)
 					continue
-				while(world.maxz < zcrd) //create new z_levels if needed.
-					SSmapping.increment_world_z_size(level_data_type)
+				var/desired_levels = zcrd - world.maxz
+				if (desired_levels > 0)	//create new z_levels if needed.
+					SSmapping.bulk_increment_world_z_size(desired_levels, level_data_type)
+
 			bounds[MAP_MINX] = min(bounds[MAP_MINX], clamp(xcrdStart, x_lower, x_upper))
 			bounds[MAP_MINZ] = min(bounds[MAP_MINZ], zcrd)
 			bounds[MAP_MAXZ] = max(bounds[MAP_MAXZ], zcrd)
