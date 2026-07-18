@@ -89,7 +89,8 @@ var/global/list/flooring_cache = list()
 
 	var/render_trenches = TRUE
 	var/floor_layer = TURF_LAYER
-	var/holographic = FALSE
+	/// If TRUE, this turf cannot be damaged, painted, pried off, etc.
+	var/visual_only = FALSE
 	var/dirt_color = /decl/material/solid/soil::color
 
 	var/list/burned_states
@@ -105,7 +106,7 @@ var/global/list/flooring_cache = list()
 	if(!istype(force_material))
 		force_material = null
 
-	if(holographic)
+	if(visual_only)
 		turf_flags         = null
 		damage_temperature = INFINITY
 		build_type         = null

@@ -11,6 +11,8 @@
 	var/custom = FALSE
 
 /obj/item/kit/get_single_monetary_worth()
+	if(worthless)
+		return 0
 	. = max(round(..()), (custom ? 100 : 750) * uses) // Luxury good, value is entirely artificial.
 
 /obj/item/kit/get_examine_strings(mob/user, distance, infix, suffix)

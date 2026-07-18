@@ -21,8 +21,6 @@
 	var/in_use = FALSE // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
-	/// if the obj is a holographic object spawned by the holodeck
-	var/holographic = FALSE
 	///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: @'{"NORTH":{"x":12,"y":5}, "EAST":{"x":10,"y":50}}'
 	var/directional_offset
 

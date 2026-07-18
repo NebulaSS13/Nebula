@@ -76,7 +76,7 @@
 /decl/material/solid/organic/plastic/holographic
 	name = "holographic plastic"
 	uid = "solid_holographic_plastic"
-	holographic = TRUE
+	visual_only = TRUE
 
 /decl/material/solid/organic/cardboard
 	name = "cardboard"

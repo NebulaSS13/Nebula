@@ -12,28 +12,28 @@
 /obj/structure/rack,
 /obj/random/tech_supply,
 /obj/random/bomb_supply,
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "ah" = (
 /obj/structure/rack,
 /obj/random/tech_supply,
 /obj/random/loot,
 /obj/random/loot,
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "ai" = (
 /obj/structure/table/steel_reinforced,
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "aj" = (
 /obj/machinery/porta_turret/stationary,
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "ak" = (
 /obj/structure/rack,
 /obj/item/cell/hyper,
 /obj/item/cell/hyper,
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "am" = (
 /obj/structure/rack,
@@ -45,7 +45,7 @@
 	dir = 4
 	},
 /obj/machinery/door/window/brigdoor/southleft,
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "an" = (
 /obj/machinery/mech_recharger,
@@ -53,10 +53,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/floor/holofloor/tiled/dark,
-/area/outpost/abandoned)
-"ao" = (
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "ap" = (
 /obj/structure/table,
@@ -125,23 +122,23 @@
 	dir = 8;
 	icon_state = "bulb1"
 	},
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "aE" = (
 /obj/random/trash,
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "aF" = (
 /obj/random/technology_scanner,
 /obj/machinery/porta_turret/stationary,
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "aG" = (
 /obj/machinery/light/small/emergency{
 	dir = 4;
 	icon_state = "bulb1"
 	},
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "aH" = (
 /turf/floor/plating,
@@ -257,7 +254,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "be" = (
 /obj/effect/decal/cleanable/blood,
@@ -345,13 +342,6 @@
 	},
 /turf/floor/tiled/white,
 /area/outpost/abandoned)
-"bu" = (
-/obj/effect/decal/cleanable/dirt/visible,
-/obj/effect/floor_decal/corner/purple{
-	dir = 5
-	},
-/turf/floor/tiled/white,
-/area/outpost/abandoned)
 "bv" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/machinery/light/small{
@@ -429,13 +419,6 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor,
 /area/outpost/abandoned)
-"bE" = (
-/obj/effect/floor_decal/corner/purple{
-	dir = 5
-	},
-/obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/tiled/white,
-/area/outpost/abandoned)
 "bF" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -467,10 +450,6 @@
 /area/outpost/abandoned)
 "bK" = (
 /obj/effect/gibspawner/human,
-/turf/floor/tiled/white,
-/area/outpost/abandoned)
-"bL" = (
-/obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/white,
 /area/outpost/abandoned)
 "bM" = (
@@ -625,10 +604,6 @@
 	icon_state = "warning"
 	},
 /turf/floor/tiled/white,
-/area/outpost/abandoned)
-"ck" = (
-/obj/effect/decal/cleanable/dirt/visible,
-/turf/floor,
 /area/outpost/abandoned)
 "cl" = (
 /obj/structure/hygiene/shower{
@@ -799,10 +774,6 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/airless,
 /area/outpost/abandoned)
-"cW" = (
-/obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/tiled/airless,
-/area/outpost/abandoned)
 "cX" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/corner/paleblue{
@@ -899,10 +870,6 @@
 "dj" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/carpet,
-/area/outpost/abandoned)
-"dk" = (
-/obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/carpet/broken,
 /area/outpost/abandoned)
 "dl" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -1231,10 +1198,6 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/white/airless,
 /area/outpost/abandoned)
-"es" = (
-/obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/tiled/white/airless,
-/area/outpost/abandoned)
 "et" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/structure/table,
@@ -1476,10 +1439,6 @@
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/floor_decal/industrial/warning/cee,
 /turf/floor/plating,
-/area/outpost/abandoned)
-"fh" = (
-/obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "fi" = (
 /obj/item/pen,
@@ -1857,10 +1816,6 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
-/obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/barren,
-/area/mine/explored)
-"gt" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/barren,
 /area/mine/explored)
@@ -2419,10 +2374,6 @@
 	icon_state = "bulb1"
 	},
 /turf/floor/tiled/white,
-/area/outpost/abandoned)
-"HD" = (
-/obj/effect/decal/cleanable/dirt/visible,
-/turf/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "IX" = (
 /obj/machinery/door/firedoor,
@@ -11822,7 +11773,7 @@ cu
 cU
 af
 dE
-cW
+cw
 dD
 dW
 fm
@@ -12025,9 +11976,9 @@ cV
 cG
 dF
 dV
-es
-HD
-HD
+dW
+dW
+dW
 fF
 cG
 aa
@@ -12223,7 +12174,7 @@ aa
 af
 cc
 cw
-cW
+cw
 ds
 dD
 dW
@@ -13845,7 +13796,7 @@ dI
 ea
 dH
 eV
-cW
+cw
 fK
 af
 aa
@@ -14044,10 +13995,10 @@ aa
 aa
 af
 dJ
-cW
+cw
 ez
 eW
-cW
+cw
 fL
 af
 aa
@@ -14246,10 +14197,10 @@ cy
 af
 af
 dK
-cW
+cw
 dH
 eX
-cW
+cw
 fM
 af
 af
@@ -14449,7 +14400,7 @@ cZ
 cG
 dL
 eb
-cW
+cw
 eY
 ft
 dH
@@ -14852,7 +14803,7 @@ sb
 db
 af
 dN
-cW
+cw
 cw
 eZ
 fv
@@ -15054,10 +15005,10 @@ tb
 bZ
 cy
 dH
-cW
+cw
 cw
 fa
-cW
+cw
 fO
 fY
 gf
@@ -15247,7 +15198,7 @@ az
 aX
 az
 bm
-bu
+bt
 bK
 bQ
 bX
@@ -15453,15 +15404,15 @@ bv
 bJ
 bQ
 bX
-ck
+by
 vb
 dd
 dt
 dP
 dH
-cW
+cw
 eZ
-cW
+cw
 dH
 af
 af
@@ -15667,7 +15618,7 @@ cw
 fQ
 dH
 dH
-cW
+cw
 gy
 cw
 gK
@@ -15867,8 +15818,8 @@ eC
 fc
 fx
 cw
-cW
-cW
+cw
+cw
 gm
 dH
 gE
@@ -16068,7 +16019,7 @@ eg
 eD
 fd
 eD
-cW
+cw
 ga
 ga
 gn
@@ -16076,8 +16027,8 @@ gn
 gF
 dH
 gP
-cW
-cW
+cw
+cw
 gL
 hl
 ht
@@ -16279,7 +16230,7 @@ af
 af
 cy
 gS
-cW
+cw
 gL
 dH
 hu
@@ -16453,9 +16404,9 @@ aa
 aa
 af
 ag
-ao
+dT
 aD
-ao
+dT
 ba
 bh
 af
@@ -16655,9 +16606,9 @@ aa
 aa
 af
 ah
-ao
-ao
-ao
+dT
+dT
+dT
 bb
 bi
 af
@@ -16857,13 +16808,13 @@ aa
 aa
 af
 ai
-ao
+dT
 aj
 af
 af
 af
 af
-bu
+bt
 bJ
 bQ
 af
@@ -17059,11 +17010,11 @@ aa
 aa
 af
 aj
-ao
-ao
+dT
+dT
 af
-ao
-ao
+dT
+dT
 af
 bB
 bJ
@@ -17261,11 +17212,11 @@ aa
 aa
 af
 ak
-ao
+dT
 aE
 aN
-ao
-ao
+dT
+dT
 bn
 bx
 bH
@@ -17463,14 +17414,14 @@ aa
 aa
 af
 aj
-ao
-ao
+dT
+dT
 af
 bc
-ao
+dT
 af
 bC
-bL
+bJ
 bT
 bZ
 co
@@ -17485,7 +17436,7 @@ ab
 ab
 gb
 ej
-gt
+ej
 fe
 ab
 gM
@@ -17665,7 +17616,7 @@ aa
 aa
 af
 ai
-ao
+dT
 aF
 af
 af
@@ -17867,8 +17818,8 @@ aa
 aa
 af
 am
-ao
-ao
+dT
+dT
 aO
 pb
 bj
@@ -18069,7 +18020,7 @@ aa
 aa
 af
 an
-ao
+dT
 aG
 aP
 be
@@ -18081,7 +18032,7 @@ bP
 bZ
 cr
 cL
-dk
+di
 dA
 dm
 ab
@@ -19904,7 +19855,7 @@ cQ
 dS
 em
 eK
-fh
+eL
 dT
 fS
 af
@@ -20106,8 +20057,8 @@ cQ
 cQ
 af
 eL
-fh
-fh
+eL
+eL
 eL
 af
 aa
@@ -20703,7 +20654,7 @@ aH
 af
 bx
 bN
-bL
+bJ
 bU
 af
 af
@@ -20903,7 +20854,7 @@ aH
 aH
 aI
 bq
-bE
+bC
 bJ
 bJ
 bP

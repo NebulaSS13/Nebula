@@ -82,7 +82,7 @@
 	uid = "solid_holographic_wood"
 	color = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
 	adjective_name = "holowood"
-	holographic = TRUE
+	visual_only = TRUE
 
 /decl/material/solid/organic/wood/mahogany
 	name = "mahogany"

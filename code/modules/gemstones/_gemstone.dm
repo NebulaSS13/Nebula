@@ -35,6 +35,8 @@ var/global/list/_available_gemstone_cuts
 	SetName("[cut.adjective] [material.solid_name]")
 
 /obj/item/gemstone/get_single_monetary_worth()
+	if(worthless)
+		return 0
 	. = ..() * cut.worth_multiplier
 
 /obj/item/gemstone/attackby(obj/item/used_item, mob/user)
