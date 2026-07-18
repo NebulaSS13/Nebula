@@ -1,47 +1,34 @@
-/obj/item/beehive_assembly
-	name = "beehive assembly"
-	desc = "Contains everything you need to build a beehive."
-	icon = 'mods/content/beekeeping/icons/apiary_bees_etc.dmi'
-	icon_state = "apiary"
-	material = /decl/material/solid/organic/wood/oak
-
-/obj/item/beehive_assembly/attack_self(var/mob/user)
-	to_chat(user, "<span class='notice'>You start assembling \the [src]...</span>")
-	if(do_after(user, 30, src))
-		user.visible_message("<span class='notice'>\The [user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")
-		new /obj/machinery/beehive(get_turf(user))
-		qdel(src)
-
-/obj/item/bee_smoker
-	name = "bee smoker"
-	desc = "A device used to calm down bees before harvesting honey."
+/obj/item/smoker
+	name = "smoker"
+	desc = "A device used to calm insects down before harvesting from a hive."
 	icon = 'mods/content/beekeeping/icons/smoker.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/metal/steel
 
-/obj/item/bee_pack
-	name = "bee pack"
-	desc = "Contains a queen bee and some worker bees. Everything you'll need to start a hive!"
-	icon = 'mods/content/beekeeping/icons/beekeeping.dmi'
-	icon_state = "beepack"
-	material = /decl/material/solid/organic/plastic
-	var/full = 1
+// TODO: consume reagents or charges? Unnecessary complexity?
+/obj/item/smoker/resolve_attackby(atom/A, mob/user, click_params)
 
-/obj/item/bee_pack/Initialize()
-	. = ..()
-	overlays += "beepack-full"
+	if(!user.check_dexterity(get_required_attack_dexterity(user, A)))
+		return TRUE
 
-/obj/item/bee_pack/proc/empty()
-	full = 0
-	name = "empty bee pack"
-	desc = "A stasis pack for moving bees. It's empty."
-	overlays.Cut()
-	overlays += "beepack-empty"
+	var/smoked = FALSE
+	if(has_extension(A, /datum/extension/insect_hive))
+		var/datum/extension/insect_hive/hive = get_extension(A, /datum/extension/insect_hive)
+		if(hive.smoked_by(user, A))
+			smoked = TRUE
 
-/obj/item/bee_pack/proc/fill()
-	full = initial(full)
-	SetName(initial(name))
-	desc = initial(desc)
-	overlays.Cut()
-	overlays += "beepack-full"
+	if(!smoked && isturf(A))
+		for(var/obj/effect/insect_swarm/swarm in A)
+			swarm.was_smoked(smoke_time = 1 MINUTE)
+			smoked = TRUE
+
+	if(smoked)
+		var/turf/smoked_turf = get_turf(A)
+		if(smoked_turf)
+			playsound(smoked_turf, 'sound/effects/refill.ogg', 25, 1)
+			user.visible_message(SPAN_NOTICE("\The [user] douses \the [A] in smoke from \the [src]."))
+			new /obj/effect/effect/smoke(smoked_turf, 2 SECONDS)
+		return TRUE
+
+	return ..()

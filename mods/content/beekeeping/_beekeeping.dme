@@ -3,10 +3,17 @@
 // BEGIN_INCLUDE
 #include "_beekeeping.dm"
 #include "closets.dm"
-#include "hive_frame.dm"
 #include "items.dm"
+#include "materials.dm"
 #include "recipes.dm"
 #include "trading.dm"
-#include "hives\_hive.dm"
+#include "hives\hive_extension.dm"
+#include "hives\hive_flora.dm"
+#include "hives\hive_frame.dm"
+#include "hives\hive_queen.dm"
+#include "hives\hive_structure.dm"
+#include "hives\hive_swarm.dm"
+#include "hives\insect_species\_insects.dm"
+#include "hives\insect_species\insects_pollinators.dm"
 // END_INCLUDE
 #endif

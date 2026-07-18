@@ -583,9 +583,16 @@
 	throwing = null
 
 /atom/movable/proc/reset_movement_delay()
+	set_next_move_time(world.time)
+
+/atom/movable/proc/get_next_move_time()
 	var/datum/movement_handler/delay/delay = locate() in movement_handlers
-	if(istype(delay))
-		delay.next_move = world.time
+	return delay?.next_move
+
+/atom/movable/proc/set_next_move_time(new_time)
+	var/datum/movement_handler/delay/delay = locate() in movement_handlers
+	if(delay)
+		delay.next_move = new_time
 
 /atom/movable/get_affecting_weather()
 	var/turf/my_turf = get_turf(src)
