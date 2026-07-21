@@ -828,7 +828,7 @@
 	. = ..()
 	global.listening_objects += src
 
-/obj/item/integrated_circuit/input/microphone/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/item/integrated_circuit/input/microphone/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 
 	if(speaker)
 		set_pin_data(IC_OUTPUT, 1, speaker.GetVoice())

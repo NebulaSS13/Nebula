@@ -16,7 +16,7 @@
 	. = ..()
 	global.listening_objects += src
 
-/obj/item/implant/translator/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/item/implant/translator/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	if(!imp_in || !istype(phrases))
 		return
 	if(length(languages) == max_languages)

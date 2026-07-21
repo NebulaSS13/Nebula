@@ -45,7 +45,7 @@
 		return TRUE
 	return ..()
 
-/obj/item/spy_bug/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/item/spy_bug/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	radio.hear_talk(speaker, phrases, verb, stars, force_language)
 
 /obj/item/spy_monitor
@@ -137,7 +137,7 @@
 		return -1
 	return 0
 
-/obj/item/spy_monitor/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/item/spy_monitor/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	return radio.hear_talk(speaker, phrases, verb, stars, force_language)
 
 /obj/item/radio/spy

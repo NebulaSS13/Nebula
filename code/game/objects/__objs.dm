@@ -133,7 +133,7 @@
 /obj/proc/hides_under_flooring()
 	return level == LEVEL_BELOW_PLATING
 
-/obj/proc/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/proc/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	if(talking_atom)
 		talking_atom.catchMessage(istype(phrases) ? phrases.unformatted_message : phrases, speaker)
 

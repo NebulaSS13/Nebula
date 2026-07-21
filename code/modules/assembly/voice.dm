@@ -15,7 +15,7 @@
 	. = ..()
 	global.listening_objects += src
 
-/obj/item/assembly/voice/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/item/assembly/voice/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	if(listening)
 		recorded = istype(phrases) ? phrases.unformatted_message : phrases
 		listening = 0

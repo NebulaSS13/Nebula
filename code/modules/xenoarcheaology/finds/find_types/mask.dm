@@ -29,7 +29,7 @@
 		var/mob/living/M = src.loc
 		M.say(pick(heard_talk))
 
-/obj/item/clothing/mask/gas/poltergeist/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/item/clothing/mask/gas/poltergeist/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	..()
 	if(heard_talk.len > max_stored_messages)
 		heard_talk.Remove(pick(heard_talk))

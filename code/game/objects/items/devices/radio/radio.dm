@@ -443,7 +443,7 @@
 		var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 		return network_device?.get_network() == check_network_membership
 
-/obj/item/radio/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/item/radio/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	if(on && broadcasting && get_dist(src, speaker) <= canhear_range)
 		talk_into(speaker, istype(phrases) ? phrases.unformatted_message : phrases, verb)
 

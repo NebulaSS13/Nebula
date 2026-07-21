@@ -96,7 +96,7 @@
 	if(distance <= 1 && wires_accessible)
 		. += SPAN_NOTICE("The wires are exposed.")
 
-/obj/item/taperecorder/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/item/taperecorder/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	if(mytape && recording)
 		var/list/messages = istype(phrases) ? phrases.compile_for_listener(src, machine_listener = TRUE) : phrases
 		mytape.record_speech("[speaker.name] [verb], \"[messages[1]]\"")

@@ -16,7 +16,7 @@
 	global.listening_objects -= src
 	return ..()
 
-/obj/machinery/fabricator/replicator/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/machinery/fabricator/replicator/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	if(!istype(phrases))
 		return ..()
 	for(var/list/phrase in phrases.phrases)

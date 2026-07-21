@@ -167,7 +167,7 @@
 			wield_effect.do_wielded_effect(user, src, parameters)
 
 // LISTENING effects
-/obj/item/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/item/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	. = ..()
 	var/list/item_effects = get_item_effects(IE_CAT_LISTENER)
 	if(!length(item_effects))

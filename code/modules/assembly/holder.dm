@@ -168,7 +168,7 @@
 		qdel(src)
 	return
 
-/obj/item/assembly_holder/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/item/assembly_holder/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	a_left?.hear_talk( speaker, phrases, verb, stars, force_language)
 	a_right?.hear_talk(speaker, phrases, verb, stars, force_language)
 

@@ -33,7 +33,7 @@
 			if(listener != speaker && !(listener in local_audience))
 				listener.see_signlang(message, verb, language, speaker, prefix)
 
-/obj/machinery/holopad/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars = FALSE, decl/language/force_language)
+/obj/machinery/holopad/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	..()
 	var/phrase_msg = "\ref[speaker]: [istype(phrases) ? phrases.formatted_message : phrases]"
 	if(last_message == phrase_msg)
