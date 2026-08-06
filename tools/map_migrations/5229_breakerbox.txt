@@ -1,0 +1,1 @@
+/obj/machinery/power/breakerbox/@SUBTYPES : /obj/machinery/breakerbox{@OLD}
