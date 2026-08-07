@@ -13,7 +13,7 @@
 	var/rate = 3
 	var/mega_energy = 1
 
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /decl/machine_construction/emitter/unsecured/gyrotron
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/receiver
 	)
@@ -21,7 +21,7 @@
 
 /obj/machinery/emitter/gyrotron/anchored
 	anchored = TRUE
-	state = 2
+	construct_state = /decl/machine_construction/emitter/welded/gyrotron
 
 /obj/machinery/emitter/gyrotron/Initialize()
 	set_extension(src, /datum/extension/local_network_member)

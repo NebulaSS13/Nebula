@@ -19,13 +19,10 @@
 	var/burst_shots = 3
 	var/last_shot = 0
 	var/shot_number = 0
-	var/const/STATE_UNSECURE = 0
-	var/const/STATE_BOLTED  = 1
-	var/const/STATE_WELDED  = 2
-	var/state = STATE_UNSECURE
 	var/locked = FALSE
 	var/powered = FALSE
 	core_skill = SKILL_ENGINES
+	construct_state = /decl/machine_construction/emitter/unsecured
 
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/receiver,
@@ -42,7 +39,11 @@
 
 /obj/machinery/emitter/anchored
 	anchored = TRUE
-	state = STATE_WELDED
+	construct_state = /decl/machine_construction/emitter/welded
+
+/// Returns TRUE if the emitter is able to fire based on its construction state (currently checks if welded down).
+/obj/machinery/emitter/proc/can_fire()
+	return istype(construct_state, /decl/machine_construction/emitter/welded)
 
 /obj/machinery/emitter/Destroy()
 	log_and_message_admins("deleted \the [src]")
@@ -65,29 +66,28 @@
 	if(!istype(user))
 		user = null // safety, as the proc is publicly available.
 
-	if(state == STATE_WELDED)
-		if(!locked)
-			if(active)
-				active = FALSE
-				to_chat(user, "You turn off \the [src].")
-				log_and_message_admins("turned off \the [src]", user)
-				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user)]","singulo")
-			else
-				active = TRUE
-				if(user)
-					operator_skill = user.get_skill_value(core_skill)
-				update_efficiency()
-				to_chat(user, "You turn on \the [src].")
-				shot_number = 0
-				fire_delay = get_initial_fire_delay()
-				log_and_message_admins("turned on \the [src]", user)
-				investigate_log("turned <font color='green'>on</font> by [key_name_admin(user)]","singulo")
-			update_icon()
-		else
-			to_chat(user, "<span class='warning'>The controls are locked!</span>")
-	else
-		to_chat(user, "<span class='warning'>\The [src] needs to be firmly secured to the floor first.</span>")
+	if(!can_fire())
+		to_chat(user, SPAN_WARNING("\The [src] needs to be firmly secured to the floor first."))
 		return 1
+	if(!locked)
+		if(active)
+			active = FALSE
+			to_chat(user, SPAN_NOTICE("You turn off \the [src]."))
+			log_and_message_admins("turned off \the [src]", user)
+			investigate_log("turned <font color='red'>off</font> by [key_name_admin(user)]","singulo")
+		else
+			active = TRUE
+			if(user)
+				operator_skill = user.get_skill_value(core_skill)
+			update_efficiency()
+			to_chat(user, SPAN_NOTICE("You turn on \the [src]."))
+			shot_number = 0
+			fire_delay = get_initial_fire_delay()
+			log_and_message_admins("turned on \the [src]", user)
+			investigate_log("turned <font color='green'>on</font> by [key_name_admin(user)]","singulo")
+		update_icon()
+	else
+		to_chat(user, SPAN_WARNING("The controls are locked!"))
 
 /obj/machinery/emitter/proc/update_efficiency()
 	efficiency = initial(efficiency)
@@ -102,7 +102,7 @@
 /obj/machinery/emitter/Process()
 	if(stat & (BROKEN))
 		return
-	if(state != STATE_WELDED)
+	if(!can_fire())
 		active = FALSE
 		update_icon()
 		return
@@ -137,66 +137,6 @@
 			update_icon()
 
 /obj/machinery/emitter/attackby(obj/item/used_item, mob/user)
-
-	if(IS_WRENCH(used_item))
-		if(active)
-			to_chat(user, "Turn off [src] first.")
-			return TRUE
-		switch(state)
-			if(STATE_UNSECURE)
-				state = STATE_BOLTED
-				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
-				user.visible_message("[user.name] secures [src] to the floor.", \
-					"You secure the external reinforcing bolts to the floor.", \
-					"You hear a ratchet.")
-				anchored = TRUE
-			if(STATE_BOLTED)
-				state = STATE_UNSECURE
-				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
-				user.visible_message("[user.name] unsecures [src] reinforcing bolts from the floor.", \
-					"You undo the external reinforcing bolts.", \
-					"You hear a ratchet.")
-				anchored = FALSE
-			if(STATE_WELDED)
-				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
-		return TRUE
-
-	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
-		if(active)
-			to_chat(user, "Turn off [src] first.")
-			return TRUE
-		switch(state)
-			if(STATE_UNSECURE)
-				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
-			if(STATE_BOLTED)
-				if (!welder.weld(0,user))
-					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
-					return TRUE
-				playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
-				user.visible_message("[user.name] starts to weld [src] to the floor.", \
-					"You start to weld [src] to the floor.", \
-					"You hear welding.")
-				if (!do_after(user, 2 SECONDS, src))
-					return TRUE
-				if(!src || !welder.isOn()) return TRUE
-				state = STATE_WELDED
-				to_chat(user, "You weld [src] to the floor.")
-			if(STATE_WELDED)
-				if (welder.weld(0,user))
-					playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
-					user.visible_message("[user.name] starts to cut [src] free from the floor.", \
-						"You start to cut [src] free from the floor.", \
-						"You hear welding.")
-					if (!do_after(user, 2 SECONDS, src))
-						return TRUE
-					if(!src || !welder.isOn()) return TRUE
-					state = STATE_BOLTED
-					to_chat(user, "You cut [src] free from the floor.")
-				else
-					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
-		return TRUE
-
 	if(istype(used_item, /obj/item/card/id) || istype(used_item, /obj/item/modular_computer))
 		if(emagged)
 			to_chat(user, "<span class='warning'>The lock seems to be broken.</span>")
