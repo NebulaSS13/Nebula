@@ -12,16 +12,19 @@
 
 	var/efficiency = 0.3	// Energy efficiency. 30% at this time, so 100kW load means 30kW laser pulses.
 	var/minimum_power = 10 KILOWATTS // The minimum power below which the emitter will turn off; different than the power needed to fire.
-	var/active = 0
+	var/active = FALSE
 	var/fire_delay = 100
 	var/max_burst_delay = 100
 	var/min_burst_delay = 20
 	var/burst_shots = 3
 	var/last_shot = 0
 	var/shot_number = 0
-	var/state = 0
-	var/locked = 0
-	var/powered = 0
+	var/const/STATE_UNSECURE = 0
+	var/const/STATE_BOLTED  = 1
+	var/const/STATE_WELDED  = 2
+	var/state = STATE_UNSECURE
+	var/locked = FALSE
+	var/powered = FALSE
 	core_skill = SKILL_ENGINES
 
 	uncreated_component_parts = list(
@@ -39,7 +42,7 @@
 
 /obj/machinery/emitter/anchored
 	anchored = TRUE
-	state = 2
+	state = STATE_WELDED
 
 /obj/machinery/emitter/Destroy()
 	log_and_message_admins("deleted \the [src]")
@@ -62,15 +65,15 @@
 	if(!istype(user))
 		user = null // safety, as the proc is publicly available.
 
-	if(state == 2)
+	if(state == STATE_WELDED)
 		if(!locked)
-			if(active==1)
-				active = 0
+			if(active)
+				active = FALSE
 				to_chat(user, "You turn off \the [src].")
 				log_and_message_admins("turned off \the [src]", user)
 				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user)]","singulo")
 			else
-				active = 1
+				active = TRUE
 				if(user)
 					operator_skill = user.get_skill_value(core_skill)
 				update_efficiency()
@@ -99,11 +102,11 @@
 /obj/machinery/emitter/Process()
 	if(stat & (BROKEN))
 		return
-	if(state != 2)
+	if(state != STATE_WELDED)
 		active = FALSE
 		update_icon()
 		return
-	if(((last_shot + fire_delay) <= world.time) && (active == 1))
+	if(((last_shot + fire_delay) <= world.time) && active)
 		if(active_power_usage - can_use_power_oneoff(active_power_usage) < minimum_power)
 			powered = FALSE
 			update_icon()
@@ -140,21 +143,21 @@
 			to_chat(user, "Turn off [src] first.")
 			return TRUE
 		switch(state)
-			if(0)
-				state = 1
+			if(STATE_UNSECURE)
+				state = STATE_BOLTED
 				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 				user.visible_message("[user.name] secures [src] to the floor.", \
 					"You secure the external reinforcing bolts to the floor.", \
 					"You hear a ratchet.")
 				anchored = TRUE
-			if(1)
-				state = 0
+			if(STATE_BOLTED)
+				state = STATE_UNSECURE
 				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 				user.visible_message("[user.name] unsecures [src] reinforcing bolts from the floor.", \
 					"You undo the external reinforcing bolts.", \
 					"You hear a ratchet.")
 				anchored = FALSE
-			if(2)
+			if(STATE_WELDED)
 				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
 		return TRUE
 
@@ -164,9 +167,9 @@
 			to_chat(user, "Turn off [src] first.")
 			return TRUE
 		switch(state)
-			if(0)
+			if(STATE_UNSECURE)
 				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
-			if(1)
+			if(STATE_BOLTED)
 				if (!welder.weld(0,user))
 					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 					return TRUE
@@ -177,9 +180,9 @@
 				if (!do_after(user, 2 SECONDS, src))
 					return TRUE
 				if(!src || !welder.isOn()) return TRUE
-				state = 2
+				state = STATE_WELDED
 				to_chat(user, "You weld [src] to the floor.")
-			if(2)
+			if(STATE_WELDED)
 				if (welder.weld(0,user))
 					playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to cut [src] free from the floor.", \
@@ -188,7 +191,7 @@
 					if (!do_after(user, 2 SECONDS, src))
 						return TRUE
 					if(!src || !welder.isOn()) return TRUE
-					state = 1
+					state = STATE_BOLTED
 					to_chat(user, "You cut [src] free from the floor.")
 				else
 					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
@@ -208,8 +211,8 @@
 
 /obj/machinery/emitter/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
-		locked = 0
-		emagged = 1
+		locked = FALSE
+		emagged = TRUE
 		req_access.Cut()
 		user.visible_message("[user.name] emags [src].","<span class='warning'>You short out the lock.</span>")
 		return 1
