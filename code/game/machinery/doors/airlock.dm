@@ -632,6 +632,7 @@ About the new airlock wires panel:
 	var/cut_verb
 	var/cut_sound
 
+	// todo: should this use the demolisher extension?
 	if(IS_WELDER(item))
 		var/obj/item/weldingtool/welder = item
 		if(!welder.weld(0,user))
