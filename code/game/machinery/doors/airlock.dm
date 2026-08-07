@@ -868,7 +868,8 @@ About the new airlock wires panel:
 		spark_at(da, amount=5, cardinal_only = TRUE)
 	else
 		da.anchored = TRUE
-	da.state = 1
+	// circuit is dumped onto the turf by parent call
+	da.wired = TRUE
 	da.created_name = name
 	da.update_icon()
 
