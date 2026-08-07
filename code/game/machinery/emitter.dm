@@ -114,10 +114,10 @@
 		var/drawn_power = min(active_power_usage, active_power_usage - use_power_oneoff(active_power_usage))
 		last_shot = world.time
 		if(shot_number < burst_shots)
-			fire_delay = get_burst_delay()
+			fire_delay = get_shot_delay()
 			shot_number ++
 		else
-			fire_delay = get_rand_burst_delay()
+			fire_delay = get_burst_delay()
 			shot_number = 0
 
 		//need to calculate the power per shot as the emitter doesn't fire continuously.
@@ -163,13 +163,15 @@
 	return ..()
 
 /obj/machinery/emitter/proc/get_initial_fire_delay()
-	return 100
+	return 10 SECONDS
 
-/obj/machinery/emitter/proc/get_rand_burst_delay()
+/// The number of deciseconds between each burst-fire grouping.
+/obj/machinery/emitter/proc/get_burst_delay()
 	return rand(min_burst_delay, max_burst_delay)
 
-/obj/machinery/emitter/proc/get_burst_delay()
-	return 2
+/// The number of deciseconds between each shot in a burst.
+/obj/machinery/emitter/proc/get_shot_delay()
+	return 0.2 SECONDS
 
 /obj/machinery/emitter/proc/get_emitter_beam()
 	return new /obj/item/projectile/beam/emitter(get_turf(src))
