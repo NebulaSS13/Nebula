@@ -29,7 +29,7 @@
 	if(anchored != last_anchored)
 		find_connections()
 
-/obj/structure/ladder/handle_default_wrench_attackby()
+/obj/structure/ladder/handle_default_wrench_attackby(mob/user, obj/item/wrench)
 	var/last_anchored = anchored
 	. = ..()
 	if(anchored != last_anchored)
