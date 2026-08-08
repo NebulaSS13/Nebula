@@ -64,15 +64,16 @@
 	to_chat(user, SPAN_NOTICE("Slicing lattice joints..."))
 	physically_destroyed()
 
+/obj/structure/lattice/handle_default_welder_attackby(mob/user, obj/item/weldingtool/welder)
+	if(welder.do_tool_interaction(TOOL_WELDER, user, src, 0))
+		deconstruct(user)
+		return TRUE
+	return FALSE
+
 /obj/structure/lattice/attackby(obj/item/used_item, mob/user)
 	if (istype(used_item, /obj/item/stack/tile))
 		var/turf/T = get_turf(src)
 		T.attackby(used_item, user) //BubbleWrap - hand this off to the underlying turf instead
-		return TRUE
-	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
-		if(welder.weld(0, user))
-			deconstruct(user)
 		return TRUE
 	if(istype(used_item, /obj/item/gun/energy/plasmacutter))
 		var/obj/item/gun/energy/plasmacutter/cutter = used_item
