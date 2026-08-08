@@ -147,22 +147,16 @@
 				T.visible_message(SPAN_DANGER("The ceiling above has been pried off!"))
 		return TRUE
 
-	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
-		if(welder.isOn() && is_plating() && welder.weld(0, user))
-			if(is_floor_damaged())
-				to_chat(user, SPAN_NOTICE("You fix some damage to \the [src]."))
-				playsound(src, 'sound/items/Welder.ogg', 80, 1)
+	if(IS_WELDER(used_item) && is_plating())
+		if(is_floor_damaged())
+			if(used_item.do_tool_interaction(TOOL_WELDER, user, src))
 				icon_state = "plating"
 				set_floor_burned(skip_update = TRUE)
 				set_floor_broken()
-			else
-				playsound(src, 'sound/items/Welder.ogg', 80, 1)
-				visible_message(SPAN_NOTICE("\The [user] has started melting \the [src]'s reinforcements!"))
-				if(do_after(user, 5 SECONDS) && welder.isOn() && welder_melt())
-					visible_message(SPAN_NOTICE("\The [user] has melted \the [src]'s reinforcements! It should now be possible to pry it off."))
-					playsound(src, 'sound/items/Welder.ogg', 80, 1)
-			return TRUE
+		else
+			if(used_item.do_tool_interaction(TOOL_WELDER, user, src, 5 SECONDS, "melting the reinforcements of") && welder_melt())
+				visible_message(SPAN_NOTICE("\The [user] has melted \the [src]'s reinforcements! It should now be possible to pry it off."))
+		return TRUE
 
 	if(istype(used_item, /obj/item/gun/energy/plasmacutter) && (is_plating()) && !is_floor_damaged())
 		var/obj/item/gun/energy/plasmacutter/cutter = used_item
