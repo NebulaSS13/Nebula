@@ -201,27 +201,16 @@
 
 //attack by item
 //weldingtool: unfasten and convert to obj/disposalconstruct
-/obj/structure/disposalpipe/attackby(var/obj/item/used_item, var/mob/user)
-	if(!istype(used_item, /obj/item/weldingtool))
-		return ..()
+/obj/structure/disposalpipe/handle_default_welder_attackby(mob/user, obj/item/used_item)
 	if(!can_deconstruct())
 		return TRUE
-	src.add_fingerprint(user, 0, used_item)
-	var/obj/item/weldingtool/welder = used_item
-	if(welder.weld(0,user))
-		playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-		to_chat(user, "You begin slicing \the [src].")
-		if(!do_after(user, 3 SECONDS, src))
-			to_chat(user, "You must stay still while welding the pipe.")
-			return TRUE
-		if(!welder.isOn())
-			return TRUE
-		welded()
+	add_fingerprint(user, 0, used_item)
+	if(!used_item.do_tool_interaction(TOOL_WELDER, user, src, 3 SECONDS, "slicing"))
+		to_chat(user, "You must stay still while welding the pipe.")
 		return TRUE
-	to_chat(user, "You need more welding fuel to cut the pipe.")
-	return TRUE
+	welded()
 
-	// called when pipe is cut with welder
+// called when pipe is cut with welder
 /obj/structure/disposalpipe/proc/welded()
 	var/obj/structure/disposalconstruct/C = new (src.loc, src)
 	src.transfer_fingerprints_to(C)
