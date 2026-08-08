@@ -39,15 +39,10 @@ var/global/list/floor_light_cache = list()
 		return TRUE
 
 	if(IS_WELDER(used_item) && (damaged || (stat & BROKEN)))
-		var/obj/item/weldingtool/welder = used_item
-		if(!welder.weld(0, user))
-			to_chat(user, SPAN_WARNING("\The [src] must be on to complete this task."))
+		if(!used_item.do_tool_interaction(TOOL_WELDER, user, src, 2 SECONDS, success_message = "repairing") || QDELETED(src))
 			return TRUE
-		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(do_after(user, 20, src) && !QDELETED(src) && welder.isOn())
-			visible_message(SPAN_NOTICE("\The [user] has repaired \the [src]."))
-			set_broken(FALSE)
-			damaged = null
+		set_broken(FALSE)
+		damaged = null
 		return TRUE
 
 	if(IS_WRENCH(used_item))
