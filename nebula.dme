@@ -3908,7 +3908,6 @@
 #include "code\modules\thermoelectric_generator\teg_circuits.dm"
 #include "code\modules\tools\tool.dm"
 #include "code\modules\tools\tool_serde.dm"
-#include "code\modules\tools\archetypes\_tool_defines.dm"
 #include "code\modules\tools\archetypes\tool_archetype.dm"
 #include "code\modules\tools\archetypes\tool_archetype_definition_pen.dm"
 #include "code\modules\tools\archetypes\tool_archetype_definitions.dm"
