@@ -123,34 +123,19 @@ field_generator power level display
 				to_chat(user, "<span class='warning'> \The [src] needs to be unwelded from the floor.</span>")
 				return TRUE
 	else if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
 		switch(state)
 			if(0)
 				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
 				return TRUE
 			if(1)
-				if (!welder.weld(0,user))
+				if(!used_item.do_tool_interaction(TOOL_WELDER, user, src, 2 SECONDS, suffix_message = ", attaching it to the floor"))
 					return TRUE
-				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-				user.visible_message("[user.name] starts to weld \the [src] to the floor.", \
-					"You start to weld \the [src] to the floor.", \
-					"You hear welding.")
-				if (!do_after(user, 2 SECONDS, src))
-					return TRUE
-				if(!src || !welder.isOn()) return TRUE
 				state = 2
-				to_chat(user, "You weld the field generator to the floor.")
+				to_chat(user, "You weld \the [src] to the floor.")
 				return TRUE
 			if(2)
-				if (!welder.weld(0,user))
+				if(!used_item.do_tool_interaction(TOOL_WELDER, user, src, 2 SECONDS, "to cut free", suffix_message = ", detaching it from the floor"))
 					return TRUE
-				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-				user.visible_message("[user.name] starts to cut \the [src] free from the floor.", \
-					"You start to cut \the [src] free from the floor.", \
-					"You hear welding.")
-				if (!do_after(user, 2 SECONDS, src))
-					return TRUE
-				if(!src || !welder.isOn()) return TRUE
 				state = 1
 				to_chat(user, "You cut \the [src] free from the floor.")
 				return TRUE
