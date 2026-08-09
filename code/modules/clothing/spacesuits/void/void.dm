@@ -274,6 +274,17 @@ else if(##equipment_var) {\
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return TRUE
 
+	if(istype(W,/obj/item/suit_cooling_unit))
+		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
+			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
+		else if(tank)
+			to_chat(user, "\The [src] already has an airtank installed.")
+		else if(user.try_unequip(W, src))
+			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
+			tank = W
+			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+		return TRUE
+
 	return ..()
 
 /obj/item/clothing/suit/space/void/attack_self() //sole purpose of existence is to toggle the helmet
