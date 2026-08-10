@@ -48,8 +48,6 @@ SUBSYSTEM_DEF(mapping)
 	var/base_floor_area
 	/// A list of connected z-levels to avoid repeatedly rebuilding connections
 	var/list/connected_z_cache = list()
-	/// A list of turbolift holders to initialize.
-	var/list/turbolifts_to_initialize = list()
 	///Associative list of planetoid/exoplanet data currently registered. The key is the planetoid id, the value is the planetoid_data datum.
 	var/list/planetoid_data_by_id
 	///List of all z-levels in the world where the index corresponds to a z-level, and the key at that index is the planetoid_data datum for the associated planet
@@ -169,9 +167,9 @@ SUBSYSTEM_DEF(mapping)
 
 	global.level_persistence_ref_map.Cut()
 
-	// Generate turbolifts last, since away sites may have elevators to generate too.
-	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
-		turbolift.build_turbolift()
+	for(var/modpack_name in SSmodpacks.loaded_modpacks)
+		var/decl/modpack/loaded_modpack = SSmodpacks.loaded_modpacks[modpack_name]
+		loaded_modpack.on_mapping_pre_finalize()
 
 	// With levels set up and serde complete (and levels flagged) we can do any remaining level generation.
 	global.using_map.finalize_map_generation()

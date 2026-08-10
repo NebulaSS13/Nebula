@@ -38,6 +38,7 @@
 	#include "../../mods/content/standard_jobs/_standard_jobs.dme"
 	#include "../../mods/content/supermatter/_supermatter.dme"
 	#include "../../mods/content/tabloids/_tabloids.dme"
+	#include "../../mods/content/turbolift/_turbolift.dme"
 	#include "../../mods/content/undead/_undead.dme"
 	#include "../../mods/content/ventcrawl/_ventcrawl.dme"
 	#include "../../mods/content/xenobiology/_xenobiology.dme"

@@ -1,7 +1,7 @@
 // Map object.
 /obj/abstract/turbolift_spawner
 	name = "turbolift map placeholder"
-	icon = 'icons/obj/turbolift_preview_3x3.dmi'
+	icon = 'mods/content/turbolift/icons/turbolift_preview_3x3.dmi'
 	dir = SOUTH         // Direction of the holder determines the placement of the lift control panel and doors.
 	var/depth = 1       // Number of floors to generate, including the initial floor.
 	var/lift_size_x = 2 // Number of turfs on each axis to generate in addition to the first
@@ -31,10 +31,12 @@ INITIALIZE_IMMEDIATE(/obj/abstract/turbolift_spawner)
 	if(SSmapping.initialized)
 		build_turbolift()
 	else
-		SSmapping.turbolifts_to_initialize += src
+		var/decl/modpack/turbolift/turbolift_modpack = IMPLIED_DECL
+		turbolift_modpack.turbolifts_to_initialize += src
 
 /obj/abstract/turbolift_spawner/Destroy()
-	SSmapping.turbolifts_to_initialize -= src
+	var/decl/modpack/turbolift/turbolift_modpack = IMPLIED_DECL
+	turbolift_modpack.turbolifts_to_initialize -= src
 	return ..()
 
 /obj/abstract/turbolift_spawner/proc/build_turbolift()
@@ -254,6 +256,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/turbolift_spawner)
 	if(SSmisc_late.initialized)
 		lift.open_doors()
 	else
-		SSmisc_late.turbolifts_to_open += lift
+		var/decl/modpack/turbolift/turbolift_modpack = IMPLIED_DECL
+		turbolift_modpack.turbolifts_to_open += lift
 
 	qdel(src) // We're done.

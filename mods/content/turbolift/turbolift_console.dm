@@ -1,7 +1,7 @@
 // Base type, do not use.
 /obj/structure/lift
 	name = "turbolift control component"
-	icon = 'icons/obj/turbolift.dmi'
+	icon = 'mods/content/turbolift/icons/turbolift.dmi'
 	anchored = TRUE
 	density = FALSE
 	layer = ABOVE_OBJ_LAYER
@@ -72,6 +72,7 @@
 	update_icon()
 
 /obj/structure/lift/button/standalone
+	directional_offset = null
 	icon_state = "plinth"
 
 /obj/structure/lift/button/on_update_icon()
