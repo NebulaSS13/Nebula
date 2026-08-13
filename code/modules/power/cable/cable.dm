@@ -283,49 +283,25 @@ var/global/list/obj/structure/cable/all_cables = list()
 ////////////////////////////////////////////////
 
 //handles merging diagonally matching cables
-//for info : direction^3 is flipping horizontally, direction^12 is flipping vertically
+//for info : direction^NORTH|SOUTH is flipping horizontally, direction^EAST|WEST is flipping vertically
 /obj/structure/cable/proc/mergeDiagonalsNetworks(var/direction)
 
-	//search for and merge diagonally matching cables from the first direction component (north/south)
-	var/turf/T  = get_step_resolving_mimic(src, direction & (NORTH|SOUTH))
+	//search for and merge diagonally matching cables from the each direction component
+	for(var/checking_direction in list(NORTH|SOUTH, EAST|WEST))
+		var/turf/T  = get_step_resolving_mimic(src, direction & checking_direction)
+		var/cached_dir = direction ^ checking_direction // not equivalent to turning because this only flips on the axis we're checking
+		for(var/obj/structure/cable/C in T)
+			if(src == C)
+				continue
+			if(C.d1 == cached_dir || C.d2 == cached_dir) //we've got a diagonally matching cable
+				if(!C.powernet) //if the matching cable somehow got no powernet, make him one (should not happen for cables)
+					var/datum/powernet/newPN = new()
+					newPN.add_cable(C)
 
-	for(var/obj/structure/cable/C in T)
-
-		if(!C)
-			continue
-
-		if(src == C)
-			continue
-
-		if(C.d1 == (direction ^ (NORTH|SOUTH)) || C.d2 == (direction ^ (NORTH|SOUTH))) //we've got a diagonally matching cable
-			if(!C.powernet) //if the matching cable somehow got no powernet, make him one (should not happen for cables)
-				var/datum/powernet/newPN = new()
-				newPN.add_cable(C)
-
-			if(powernet) //if we already have a powernet, then merge the two powernets
-				merge_powernets(powernet,C.powernet)
-			else
-				C.powernet.add_cable(src) //else, we simply connect to the matching cable powernet
-
-	//the same from the second direction component (east/west)
-	T  = get_step_resolving_mimic(src, direction & (EAST|WEST))
-
-	for(var/obj/structure/cable/C in T)
-
-		if(!C)
-			continue
-
-		if(src == C)
-			continue
-		if(C.d1 == (direction ^ (EAST|WEST)) || C.d2 == (direction ^ (EAST|WEST))) //we've got a diagonally matching cable
-			if(!C.powernet) //if the matching cable somehow got no powernet, make him one (should not happen for cables)
-				var/datum/powernet/newPN = new()
-				newPN.add_cable(C)
-
-			if(powernet) //if we already have a powernet, then merge the two powernets
-				merge_powernets(powernet,C.powernet)
-			else
-				C.powernet.add_cable(src) //else, we simply connect to the matching cable powernet
+				if(powernet) //if we already have a powernet, then merge the two powernets
+					merge_powernets(powernet,C.powernet)
+				else
+					C.powernet.add_cable(src) //else, we simply connect to the matching cable powernet
 
 // merge with the powernets of power objects in the given direction
 /obj/structure/cable/proc/mergeConnectedNetworks(var/direction)
