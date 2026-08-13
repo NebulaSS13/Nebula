@@ -16,15 +16,7 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(!istype(wearer) || wearer.get_equipped_item(slot_back_str) != src)
-		to_chat(usr, "<span class='warning'>The hardsuit is not being worn.</span>")
-		return
-
-	if(!check_power_cost(usr))
-		return
-
-	if(canremove)
-		to_chat(usr, "<span class='warning'>The suit is not active.</span>")
+	if(!check_usable(usr))
 		return
 
 	if(!check_suit_access(usr))
@@ -106,14 +98,10 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(!istype(wearer) || wearer.get_equipped_item(slot_back_str) != src)
-		to_chat(usr, "<span class='warning'>The hardsuit is not being worn.</span>")
+	if(!check_usable(usr))
 		return
 
 	if(!check_suit_access(usr))
-		return
-
-	if(!check_power_cost(usr))
 		return
 
 	deploy(wearer)
@@ -141,14 +129,7 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(malfunction_check(usr))
-		return
-
-	if(!check_power_cost(usr, 0, 0, 0, 0))
-		return
-
-	if(canremove)
-		to_chat(usr, "<span class='warning'>The suit is not active.</span>")
+	if(!check_usable(usr))
 		return
 
 	if(!visor)
@@ -171,15 +152,7 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(malfunction_check(usr))
-		return
-
-	if(canremove)
-		to_chat(usr, "<span class='warning'>The suit is not active.</span>")
-		return
-
-	if(!istype(wearer) || wearer.get_equipped_item(slot_back_str) != src)
-		to_chat(usr, "<span class='warning'>The hardsuit is not being worn.</span>")
+	if(!check_usable(usr))
 		return
 
 	if(!speech)
@@ -188,6 +161,40 @@
 
 	speech.engage()
 
+/obj/item/rig/proc/check_usable(mob/user)
+	if(malfunction_check(user))
+		return FALSE
+
+	if(!check_power_cost(user))
+		return FALSE
+
+	if(canremove)
+		to_chat(user, SPAN_WARNING("The suit is not active."))
+		return FALSE
+
+	if(!istype(wearer) || wearer.get_equipped_item(slot_back_str) != src)
+		to_chat(user, SPAN_WARNING("The hardsuit is not being worn."))
+		return FALSE
+	return TRUE
+
+/obj/item/rig/proc/get_selectable_modules(mob/user)
+	. = list()
+	for(var/obj/item/rig_module/module in installed_modules)
+		if(module.selectable)
+			. |= module
+
+/obj/item/rig/proc/get_toggleable_modules(mob/user)
+	. = list()
+	for(var/obj/item/rig_module/module in installed_modules)
+		if(module.toggleable)
+			. |= module
+
+/obj/item/rig/proc/get_usable_modules(mob/user)
+	. = list()
+	for(var/obj/item/rig_module/module in installed_modules)
+		if(module.usable)
+			. |= module
+
 /obj/item/rig/verb/select_module()
 
 	set name = "Select Module"
@@ -195,24 +202,10 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(malfunction_check(usr))
+	if(!check_usable(usr))
 		return
 
-	if(!check_power_cost(usr, 0, 0, 0, 0))
-		return
-
-	if(canremove)
-		to_chat(usr, "<span class='warning'>The suit is not active.</span>")
-		return
-
-	if(!istype(wearer) || wearer.get_equipped_item(slot_back_str) != src)
-		to_chat(usr, "<span class='warning'>The hardsuit is not being worn.</span>")
-		return
-
-	var/list/selectable = list()
-	for(var/obj/item/rig_module/module in installed_modules)
-		if(module.selectable)
-			selectable |= module
+	var/list/selectable = get_selectable_modules()
 
 	var/obj/item/rig_module/module = input("Which module do you wish to select?") as null|anything in selectable
 
@@ -232,26 +225,12 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(malfunction_check(usr))
+	if(!check_usable(usr))
 		return
 
-	if(!check_power_cost(usr, 0, 0, 0, 0))
-		return
+	var/list/toggleable = get_toggleable_modules()
 
-	if(canremove)
-		to_chat(usr, "<span class='warning'>The suit is not active.</span>")
-		return
-
-	if(!istype(wearer) || wearer.get_equipped_item(slot_back_str) != src)
-		to_chat(usr, "<span class='warning'>The hardsuit is not being worn.</span>")
-		return
-
-	var/list/selectable = list()
-	for(var/obj/item/rig_module/module in installed_modules)
-		if(module.toggleable)
-			selectable |= module
-
-	var/obj/item/rig_module/module = input("Which module do you wish to toggle?") as null|anything in selectable
+	var/obj/item/rig_module/module = input("Which module do you wish to toggle?") as null|anything in toggleable
 
 	if(!istype(module))
 		return
@@ -270,24 +249,10 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(malfunction_check(usr))
+	if(!check_usable(usr))
 		return
 
-	if(canremove)
-		to_chat(usr, "<span class='warning'>The suit is not active.</span>")
-		return
-
-	if(!istype(wearer) || wearer.get_equipped_item(slot_back_str) != src)
-		to_chat(usr, "<span class='warning'>The hardsuit is not being worn.</span>")
-		return
-
-	if(!check_power_cost(usr, 0, 0, 0, 0))
-		return
-
-	var/list/selectable = list()
-	for(var/obj/item/rig_module/module in installed_modules)
-		if(module.usable)
-			selectable |= module
+	var/list/selectable = get_usable_modules()
 
 	var/obj/item/rig_module/module = input("Which module do you wish to engage?") as null|anything in selectable
 
