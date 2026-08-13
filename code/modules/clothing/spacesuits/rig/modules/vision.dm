@@ -163,10 +163,14 @@
 	. = ..()
 	if(holder)
 		holder.visor = src
+		holder.verbs |= /obj/item/rig/proc/switch_vision_mode
+		holder.verbs |= /obj/item/rig/proc/toggle_vision
 
 /obj/item/rig_module/vision/removed()
 	if(holder)
 		holder.visor = null
+		holder.verbs -= /obj/item/rig/proc/switch_vision_mode
+		holder.verbs -= /obj/item/rig/proc/toggle_vision
 	. = ..()
 
 /obj/item/rig_module/vision/engage()

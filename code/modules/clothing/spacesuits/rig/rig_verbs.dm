@@ -9,7 +9,7 @@
 	if(wearer && wearer.get_equipped_item(slot_back_str) == src)
 		ui_interact(usr)
 
-/obj/item/rig/verb/toggle_vision()
+/obj/item/rig/proc/toggle_vision()
 
 	set name = "Toggle Visor"
 	set desc = "Turns your rig visor off or on."
@@ -122,7 +122,7 @@
 
 	toggle_seals(wearer)
 
-/obj/item/rig/verb/switch_vision_mode()
+/obj/item/rig/proc/switch_vision_mode()
 
 	set name = "Switch Vision Mode"
 	set desc = "Switches between available vision modes."
