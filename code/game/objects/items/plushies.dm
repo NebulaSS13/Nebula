@@ -1,3 +1,47 @@
+/datum/extension/plushie
+	base_type = /datum/extension/plushie
+	expected_type = /obj
+	var/phrase
+	var/phrase_sound
+	var/phrase_volume
+	var/phrase_vary
+
+/datum/extension/plushie/New(datum/holder, phrase, phrase_sound, phrase_volume, phrase_vary)
+	..()
+	src.phrase = phrase
+	src.phrase_sound = phrase_sound
+	src.phrase_volume = phrase_volume
+	src.phrase_vary = phrase_vary
+
+/datum/extension/plushie/proc/on_attack(mob/user)
+	var/obj/plush = holder
+	playsound(plush.loc, 'sound/effects/rustle1.ogg', 100, 1)
+	if(user.check_intent(I_FLAG_HELP))
+		user.visible_message(
+			SPAN_NOTICE("<b>\The [user]</b> hugs \the [holder]!"),
+			SPAN_NOTICE("You hug \the [plush]!"))
+	else if (user.check_intent(I_FLAG_HARM))
+		user.visible_message(
+			SPAN_WARNING("<b>\The [user]</b> punches \the [plush]!"),
+			SPAN_WARNING("You punch \the [plush]!"))
+	else if (user.check_intent(I_FLAG_GRAB))
+		user.visible_message(
+			SPAN_WARNING("<b>\The [user]</b> attempts to strangle \the [plush]!"),
+			SPAN_WARNING("You attempt to strangle \the [plush]!"))
+	else
+		user.visible_message(
+			SPAN_NOTICE("<b>\The [user]</b> pokes \the [plush]."),
+			SPAN_NOTICE("You poke \the [plush]."))
+	if(phrase)
+		plush.audible_message("<span class='game say'><span class='name'>\The [plush]</span> says, <span class='message'><span class='body'>\"[phrase]\"</span></span></span>")
+	on_any_interact()
+	return TRUE
+
+/datum/extension/plushie/proc/on_any_interact()
+	var/obj/plush = holder
+	if(phrase_sound)
+		playsound(plush.loc, phrase_sound, phrase_volume, phrase_vary)
+
 //Large plushies.
 /obj/structure/plushie
 	abstract_type = /obj/structure/plushie
@@ -11,31 +55,15 @@
 	var/phrase_volume = 20
 	var/phrase_vary = TRUE
 
+/obj/structure/plushie/Initialize(ml, _mat, _reinf_mat)
+	. = ..()
+	set_extension(src, /datum/extension/plushie, phrase, phrase_sound, phrase_volume, phrase_vary)
+
 /obj/structure/plushie/attack_hand(mob/user)
 	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
-	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
-	if(user.check_intent(I_FLAG_HELP))
-		user.visible_message(
-			SPAN_NOTICE("<b>\The [user]</b> hugs \the [src]!"),
-			SPAN_NOTICE("You hug \the [src]!"))
-	else if (user.check_intent(I_FLAG_HARM))
-		user.visible_message(
-			SPAN_WARNING("<b>\The [user]</b> punches \the [src]!"),
-			SPAN_WARNING("You punch \the [src]!"))
-	else if (user.check_intent(I_FLAG_GRAB))
-		user.visible_message(
-			SPAN_WARNING("<b>\The [user]</b> attempts to strangle \the [src]!"),
-			SPAN_WARNING("You attempt to strangle \the [src]!"))
-	else
-		user.visible_message(
-			SPAN_NOTICE("<b>\The [user]</b> pokes \the [src]."),
-			SPAN_NOTICE("You poke \the [src]."))
-	if(phrase)
-		audible_message("<span class='game say'><span class='name'>\The [src]</span> says, <span class='message'><span class='body'>\"[phrase]\"</span></span></span>")
-	if(phrase_sound)
-		playsound(loc, phrase_sound, phrase_volume, phrase_vary)
-	return TRUE
+	var/datum/extension/plushie/plush_extension = get_extension(src, __IMPLIED_TYPE__)
+	return plush_extension.on_attack(user)
 
 /obj/structure/plushie/ian
 	name = "plush corgi"
@@ -74,33 +102,19 @@
 	var/phrase_volume = 20
 	var/phrase_vary = TRUE
 
+/obj/item/toy/plushie/Initialize(ml, material_key)
+	. = ..()
+	set_extension(src, /datum/extension/plushie, phrase, phrase_sound, phrase_volume, phrase_vary)
+
 /obj/item/toy/plushie/attack_self(mob/user)
-	if(user.check_intent(I_FLAG_HELP))
-		user.visible_message(
-			SPAN_NOTICE("<b>\The [user]</b> hugs \the [src]!"),
-			SPAN_NOTICE("You hug \the [src]!"))
-	else if (user.check_intent(I_FLAG_HARM))
-		user.visible_message(
-			SPAN_WARNING("<b>\The [user]</b> punches \the [src]!"),
-			SPAN_WARNING("You punch \the [src]!"))
-	else if (user.check_intent(I_FLAG_GRAB))
-		user.visible_message(
-			SPAN_WARNING("<b>\The [user]</b> attempts to strangle \the [src]!"),
-			SPAN_WARNING("You attempt to strangle \the [src]!"))
-	else
-		user.visible_message(
-			SPAN_NOTICE("<b>\The [user]</b> pokes \the [src]."),
-			SPAN_NOTICE("You poke \the [src]."))
-	if(phrase)
-		audible_message("<span class='game say'><span class='name'>\The [src]</span> says, <span class='message'><span class='body'>\"[phrase]\"</span></span></span>")
-	if(phrase_sound)
-		playsound(loc, phrase_sound, phrase_volume, phrase_vary)
-	return TRUE
+	var/datum/extension/plushie/plush_extension = get_extension(src, __IMPLIED_TYPE__)
+	return plush_extension.on_attack(user)
 
 /obj/item/toy/plushie/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	. = ..()
-	if(. && phrase_sound)
-		playsound(src, phrase_sound, phrase_volume, phrase_vary)
+	if(.)
+		var/datum/extension/plushie/plush_extension = get_extension(src, __IMPLIED_TYPE__)
+		plush_extension.on_any_interact()
 
 // Various miscellaneous animal plushies.
 /obj/item/toy/plushie/deer
