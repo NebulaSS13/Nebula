@@ -257,6 +257,15 @@
 	interact(user)
 	return TRUE
 
+#define REAGENT_TOPIC_LINKS(HOLDER, REAGENT, ACTION) \
+dat += "[REAGENT.use_name], [REAGENT_VOLUME(HOLDER, REAGENT)] Units - ";\
+dat += "<A href='byond://?src=\ref[src];analyze=\ref[REAGENT]'>(Analyze)</A> ";\
+dat += "<A href='byond://?src=\ref[src];[ACTION]=\ref[REAGENT];amount=1'>(1)</A> ";\
+dat += "<A href='byond://?src=\ref[src];[ACTION]=\ref[REAGENT];amount=5'>(5)</A> ";\
+dat += "<A href='byond://?src=\ref[src];[ACTION]=\ref[REAGENT];amount=10'>(10)</A> ";\
+dat += "<A href='byond://?src=\ref[src];[ACTION]=\ref[REAGENT];amount=[REAGENT_VOLUME(HOLDER, REAGENT)]'>(All)</A> ";\
+dat += "<A href='byond://?src=\ref[src];[ACTION]custom=\ref[REAGENT]'>(Custom)</A><BR>"
+
 /obj/machinery/chem_master/interact(mob/user)
 	user.set_machine(src)
 	if(!(user.client in has_sprites))
@@ -287,29 +296,19 @@
 		else
 			dat += "Add to buffer:<BR>"
 			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(R))
-				dat += "[reagent.use_name], [REAGENT_VOLUME(R, reagent)] Units - "
-				dat += "<A href='byond://?src=\ref[src];analyze=\ref[reagent]'>(Analyze)</A> "
-				dat += "<A href='byond://?src=\ref[src];add=\ref[reagent];amount=1'>(1)</A> "
-				dat += "<A href='byond://?src=\ref[src];add=\ref[reagent];amount=5'>(5)</A> "
-				dat += "<A href='byond://?src=\ref[src];add=\ref[reagent];amount=10'>(10)</A> "
-				dat += "<A href='byond://?src=\ref[src];add=\ref[reagent];amount=[REAGENT_VOLUME(R, reagent)]'>(All)</A> "
-				dat += "<A href='byond://?src=\ref[src];addcustom=\ref[reagent]'>(Custom)</A><BR>"
+				REAGENT_TOPIC_LINKS(R, reagent, "add")
 
 		dat += "<HR>Transfer to <A href='byond://?src=\ref[src];toggle=1'>[(!mode ? "disposal" : "beaker")]:</A><BR>"
 		if(REAGENT_TOTAL_VOLUME(reagents))
 			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
-				dat += "[reagent.use_name], [REAGENT_VOLUME(reagents, reagent)] Units - "
-				dat += "<A href='byond://?src=\ref[src];analyze=\ref[reagent]'>(Analyze)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=\ref[reagent];amount=1'>(1)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=\ref[reagent];amount=5'>(5)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=\ref[reagent];amount=10'>(10)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=\ref[reagent];amount=[REAGENT_VOLUME(reagents, reagent)]'>(All)</A> "
-				dat += "<A href='byond://?src=\ref[src];removecustom=\ref[reagent]'>(Custom)</A><BR>"
+				REAGENT_TOPIC_LINKS(reagents, reagent, "remove")
 		else
 			dat += "Empty<BR>"
 		dat += extra_options()
 	show_browser(user, strip_improper(JOINTEXT(dat)), "window=chem_master;size=575x400")
 	onclose(user, "chem_master")
+
+#undef REAGENT_TOPIC_LINKS
 
 //Use to add extra stuff to the end of the menu.
 /obj/machinery/chem_master/proc/extra_options()
