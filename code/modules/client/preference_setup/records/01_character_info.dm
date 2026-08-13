@@ -61,3 +61,9 @@
 
 	if(. == TOPIC_REFRESH && istext(pref.comments_record_id) && length(pref.comments_record_id))
 		SScharacter_info.queue_to_save(pref.comments_record_id)
+
+/datum/category_item/player_setup_item/records/character_info/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	if(is_preview_copy)
+		return
+	pref.validate_comments_record() // Make sure a record has been generated for this character.
+	character.comments_record_id = pref.comments_record_id
