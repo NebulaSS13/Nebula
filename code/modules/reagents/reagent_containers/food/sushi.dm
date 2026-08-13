@@ -90,7 +90,7 @@
 	if(istype(used_item, /obj/item/food/sashimi))
 		var/obj/item/food/sashimi/other_sashimi = used_item
 		if(slices + other_sashimi.slices > 5)
-			to_chat(user, "<span class='warning'>Show some restraint, would you?</span>")
+			to_chat(user, SPAN_WARNING("Show some restraint, would you?"))
 			return TRUE
 		if(!user.try_unequip(used_item))
 			return TRUE
@@ -104,12 +104,11 @@
 
 	// Make sushi.
 	if(istype(used_item, /obj/item/food/boiledrice))
-		if(slices > 1)
-			to_chat(user, "<span class='warning'>Putting more than one slice of fish on your sushi is just greedy.</span>")
-		else
-			if(!user.try_unequip(used_item))
-				return TRUE
-			new /obj/item/food/sushi(get_turf(src), null, TRUE, used_item, src)
+		if(!user.try_unequip(used_item))
+			return TRUE
+		var/obj/item/food/boiledrice/used_rice = used_item
+		if(used_rice.try_make_sushi(src, user))
+			return TRUE
 		return TRUE
 	. = ..()
 
@@ -126,46 +125,39 @@
 
  // Used for turning rice into sushi.
 /obj/item/food/boiledrice/attackby(var/obj/item/used_item, var/mob/user)
-	if((locate(/obj/structure/table) in loc))
-		if(istype(used_item, /obj/item/food/sashimi))
-			var/obj/item/food/sashimi/sashimi = used_item
-			if(sashimi.slices > 1)
-				to_chat(user, "<span class='warning'>Putting more than one slice of fish on your sushi is just greedy.</span>")
-			else
-				new /obj/item/food/sushi(get_turf(src), null, TRUE, src, used_item)
-			return TRUE
-		var/static/list/sushi_types = list(
+	if(try_make_sushi(used_item, user, reference_item = src)) // since we're the thing being clicked, we want to be the reference item
+		return TRUE
+	return ..()
+
+// Used for turning other food into sushi.
+/obj/item/food/boiledrice/resolve_attackby(atom/attacked_object, mob/user, click_params)
+	if(try_make_sushi(attacked_object, user))
+		return TRUE
+	return ..()
+
+// reference_item is the item whose loc and pixel offsets we're using
+/obj/item/food/boiledrice/proc/try_make_sushi(obj/item/food/used_item, mob/user, obj/item/reference_item = used_item)
+	var/static/list/non_fish_sushi_typecache
+	if(!non_fish_sushi_typecache)
+		non_fish_sushi_typecache = typecacheof(list(
 			/obj/item/food/friedegg,
 			/obj/item/food/tofu,
 			/obj/item/food/butchery/cutlet,
-			/obj/item/food/butchery/cutlet/raw,
 			/obj/item/food/spider,
 			/obj/item/food/butchery/meat/chicken
-		)
-		if(is_type_in_list(used_item, sushi_types))
-			new /obj/item/food/sushi(get_turf(src), null, TRUE, src, used_item)
+		))
+	// before you get confused like i did: yes, raw chicken sushi exists
+	// it's called torisashi and it's... dubiously safe
+	// raw beef could also be used i guess, like tataki or etc, or carpaccio/crudo instead of sashimi
+	// you could just check the cooked_food var for non-fish butchery items but i decided against it
+	if(!used_item || !(locate(/obj/structure/table) in reference_item.loc))
+		return FALSE
+	if(istype(used_item, /obj/item/food/sashimi))
+		var/obj/item/food/sashimi/used_sashimi = used_item
+		if(used_sashimi.slices > 1)
+			to_chat(user, SPAN_WARNING("Putting more than one slice of fish on your sushi is just greedy."))
 			return TRUE
-	. = ..()
-// Used for turning other food into sushi.
-// TODO: maybe make these resolve_attackby overrides on boiledrice instead?
-/obj/item/food/friedegg/attackby(var/obj/item/used_item, var/mob/user)
-	if((locate(/obj/structure/table) in loc) && istype(used_item, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), null, TRUE, used_item, src)
-		return TRUE
-	. = ..()
-/obj/item/food/tofu/attackby(var/obj/item/used_item, var/mob/user)
-	if((locate(/obj/structure/table) in loc) && istype(used_item, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), null, TRUE, used_item, src)
-		return TRUE
-	. = ..()
-/obj/item/food/butchery/cutlet/raw/attackby(var/obj/item/used_item, var/mob/user)
-	if((locate(/obj/structure/table) in loc) && istype(used_item, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), null, TRUE, used_item, src)
-		return TRUE
-	. = ..()
-/obj/item/food/butchery/cutlet/attackby(var/obj/item/used_item, var/mob/user)
-	if((locate(/obj/structure/table) in loc) && istype(used_item, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), null, TRUE, used_item, src)
-		return TRUE
-	. = ..()
-// End non-fish sushi.
+	else if(!is_type_in_typecache(used_item, non_fish_sushi_typecache))
+		return FALSE
+	new /obj/item/food/sushi(get_turf(reference_item), null, TRUE, src, used_item)
+	return TRUE
