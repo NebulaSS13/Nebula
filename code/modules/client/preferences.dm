@@ -352,12 +352,6 @@ var/global/list/time_prefs_fixed = list()
 	update_setup_window(usr)
 	return TRUE
 
-/datum/category_item/player_setup_item/records/character_info/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
-	if(is_preview_copy)
-		return
-	pref.validate_comments_record() // Make sure a record has been generated for this character.
-	character.comments_record_id = pref.comments_record_id
-
 /datum/preferences/proc/create_character_from_snapshot(spawn_turf)
 	// Sanitizing rather than saving as someone might still be editing.
 	player_setup.sanitize_setup()
@@ -367,7 +361,6 @@ var/global/list/time_prefs_fixed = list()
 	var/mob/living/human/character = new(spawn_turf, null, new_character_snapshot)
 	apply_post_snapshot_preferences(character, FALSE)
 	return character
-
 
 /datum/preferences/proc/copy_to(mob/living/human/character, is_preview_copy = FALSE)
 	apply_snapshot_to_mob(character, is_preview_copy) // this is effectively what create_character_from_snapshot does, but on an existing mob
