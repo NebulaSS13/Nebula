@@ -12,17 +12,17 @@
 
 	var/efficiency = 0.3	// Energy efficiency. 30% at this time, so 100kW load means 30kW laser pulses.
 	var/minimum_power = 10 KILOWATTS // The minimum power below which the emitter will turn off; different than the power needed to fire.
-	var/active = 0
+	var/active = FALSE
 	var/fire_delay = 100
 	var/max_burst_delay = 100
 	var/min_burst_delay = 20
 	var/burst_shots = 3
 	var/last_shot = 0
 	var/shot_number = 0
-	var/state = 0
-	var/locked = 0
-	var/powered = 0
+	var/locked = FALSE
+	var/powered = FALSE
 	core_skill = SKILL_ENGINES
+	construct_state = /decl/machine_construction/emitter/unsecured
 
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/receiver,
@@ -39,7 +39,11 @@
 
 /obj/machinery/emitter/anchored
 	anchored = TRUE
-	state = 2
+	construct_state = /decl/machine_construction/emitter/welded
+
+/// Returns TRUE if the emitter is able to fire based on its construction state (currently checks if welded down).
+/obj/machinery/emitter/proc/can_fire()
+	return istype(construct_state, /decl/machine_construction/emitter/welded)
 
 /obj/machinery/emitter/Destroy()
 	log_and_message_admins("deleted \the [src]")
@@ -62,29 +66,28 @@
 	if(!istype(user))
 		user = null // safety, as the proc is publicly available.
 
-	if(state == 2)
-		if(!locked)
-			if(active==1)
-				active = 0
-				to_chat(user, "You turn off \the [src].")
-				log_and_message_admins("turned off \the [src]", user)
-				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user)]","singulo")
-			else
-				active = 1
-				if(user)
-					operator_skill = user.get_skill_value(core_skill)
-				update_efficiency()
-				to_chat(user, "You turn on \the [src].")
-				shot_number = 0
-				fire_delay = get_initial_fire_delay()
-				log_and_message_admins("turned on \the [src]", user)
-				investigate_log("turned <font color='green'>on</font> by [key_name_admin(user)]","singulo")
-			update_icon()
-		else
-			to_chat(user, "<span class='warning'>The controls are locked!</span>")
-	else
-		to_chat(user, "<span class='warning'>\The [src] needs to be firmly secured to the floor first.</span>")
+	if(!can_fire())
+		to_chat(user, SPAN_WARNING("\The [src] needs to be firmly secured to the floor first."))
 		return 1
+	if(!locked)
+		if(active)
+			active = FALSE
+			to_chat(user, SPAN_NOTICE("You turn off \the [src]."))
+			log_and_message_admins("turned off \the [src]", user)
+			investigate_log("turned <font color='red'>off</font> by [key_name_admin(user)]","singulo")
+		else
+			active = TRUE
+			if(user)
+				operator_skill = user.get_skill_value(core_skill)
+			update_efficiency()
+			to_chat(user, SPAN_NOTICE("You turn on \the [src]."))
+			shot_number = 0
+			fire_delay = get_initial_fire_delay()
+			log_and_message_admins("turned on \the [src]", user)
+			investigate_log("turned <font color='green'>on</font> by [key_name_admin(user)]","singulo")
+		update_icon()
+	else
+		to_chat(user, SPAN_WARNING("The controls are locked!"))
 
 /obj/machinery/emitter/proc/update_efficiency()
 	efficiency = initial(efficiency)
@@ -99,11 +102,11 @@
 /obj/machinery/emitter/Process()
 	if(stat & (BROKEN))
 		return
-	if(state != 2)
+	if(!can_fire())
 		active = FALSE
 		update_icon()
 		return
-	if(((last_shot + fire_delay) <= world.time) && (active == 1))
+	if(((last_shot + fire_delay) <= world.time) && active)
 		if(active_power_usage - can_use_power_oneoff(active_power_usage) < minimum_power)
 			powered = FALSE
 			update_icon()
@@ -111,10 +114,10 @@
 		var/drawn_power = min(active_power_usage, active_power_usage - use_power_oneoff(active_power_usage))
 		last_shot = world.time
 		if(shot_number < burst_shots)
-			fire_delay = get_burst_delay()
+			fire_delay = get_shot_delay()
 			shot_number ++
 		else
-			fire_delay = get_rand_burst_delay()
+			fire_delay = get_burst_delay()
 			shot_number = 0
 
 		//need to calculate the power per shot as the emitter doesn't fire continuously.
@@ -134,66 +137,6 @@
 			update_icon()
 
 /obj/machinery/emitter/attackby(obj/item/used_item, mob/user)
-
-	if(IS_WRENCH(used_item))
-		if(active)
-			to_chat(user, "Turn off [src] first.")
-			return TRUE
-		switch(state)
-			if(0)
-				state = 1
-				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
-				user.visible_message("[user.name] secures [src] to the floor.", \
-					"You secure the external reinforcing bolts to the floor.", \
-					"You hear a ratchet.")
-				anchored = TRUE
-			if(1)
-				state = 0
-				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
-				user.visible_message("[user.name] unsecures [src] reinforcing bolts from the floor.", \
-					"You undo the external reinforcing bolts.", \
-					"You hear a ratchet.")
-				anchored = FALSE
-			if(2)
-				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
-		return TRUE
-
-	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
-		if(active)
-			to_chat(user, "Turn off [src] first.")
-			return TRUE
-		switch(state)
-			if(0)
-				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
-			if(1)
-				if (!welder.weld(0,user))
-					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
-					return TRUE
-				playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
-				user.visible_message("[user.name] starts to weld [src] to the floor.", \
-					"You start to weld [src] to the floor.", \
-					"You hear welding.")
-				if (!do_after(user, 2 SECONDS, src))
-					return TRUE
-				if(!src || !welder.isOn()) return TRUE
-				state = 2
-				to_chat(user, "You weld [src] to the floor.")
-			if(2)
-				if (welder.weld(0,user))
-					playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
-					user.visible_message("[user.name] starts to cut [src] free from the floor.", \
-						"You start to cut [src] free from the floor.", \
-						"You hear welding.")
-					if (!do_after(user, 2 SECONDS, src))
-						return TRUE
-					if(!src || !welder.isOn()) return TRUE
-					state = 1
-					to_chat(user, "You cut [src] free from the floor.")
-				else
-					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
-		return TRUE
-
 	if(istype(used_item, /obj/item/card/id) || istype(used_item, /obj/item/modular_computer))
 		if(emagged)
 			to_chat(user, "<span class='warning'>The lock seems to be broken.</span>")
@@ -208,8 +151,8 @@
 
 /obj/machinery/emitter/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
-		locked = 0
-		emagged = 1
+		locked = FALSE
+		emagged = TRUE
 		req_access.Cut()
 		user.visible_message("[user.name] emags [src].","<span class='warning'>You short out the lock.</span>")
 		return 1
@@ -220,13 +163,15 @@
 	return ..()
 
 /obj/machinery/emitter/proc/get_initial_fire_delay()
-	return 100
+	return 10 SECONDS
 
-/obj/machinery/emitter/proc/get_rand_burst_delay()
+/// The number of deciseconds between each burst-fire grouping.
+/obj/machinery/emitter/proc/get_burst_delay()
 	return rand(min_burst_delay, max_burst_delay)
 
-/obj/machinery/emitter/proc/get_burst_delay()
-	return 2
+/// The number of deciseconds between each shot in a burst.
+/obj/machinery/emitter/proc/get_shot_delay()
+	return 0.2 SECONDS
 
 /obj/machinery/emitter/proc/get_emitter_beam()
 	return new /obj/item/projectile/beam/emitter(get_turf(src))

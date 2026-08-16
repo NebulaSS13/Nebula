@@ -61848,10 +61848,8 @@
 /turf/floor/plating,
 /area/exodus/engineering/engine_room)
 "cIa" = (
-/obj/machinery/emitter{
-	anchored = 1;
-	id_tag = "EngineEmitter";
-	state = 2
+/obj/machinery/emitter/anchored{
+	id_tag = "EngineEmitter"
 	},
 /obj/structure/cable/cyan,
 /obj/machinery/power/terminal{

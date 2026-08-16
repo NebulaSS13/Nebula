@@ -1,0 +1,8 @@
+# emitters use construct states instead of a bespoke state var
+# handle redundant var sets if present
+/obj/machinery/emitter/anchored{state = 2} : @OLD{@OLD; state = @SKIP; anchored = @SKIP}
+/obj/machinery/emitter/gyrotron/anchored{state = 2} : @OLD{@OLD; state = @SKIP; anchored = @SKIP}
+# remove state/anchored vars, change subtype if needed
+/obj/machinery/emitter/@SUBTYPES{state = 2} : /obj/machinery/emitter/@SUBTYPES/anchored{@OLD; state = @SKIP; anchored = @SKIP}
+/obj/machinery/emitter/@SUBTYPES{state = 1} : /obj/machinery/emitter/@SUBTYPES{@OLD; state = @SKIP; anchored = @SKIP}
+/obj/machinery/emitter/@SUBTYPES{state = 0} : /obj/machinery/emitter/@SUBTYPES{@OLD; state = @SKIP; anchored = @SKIP}
