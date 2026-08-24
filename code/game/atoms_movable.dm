@@ -4,7 +4,7 @@
 	glide_size = 8
 	abstract_type = /atom/movable
 
-	var/can_buckle_mobs = 0 // Maximum amount of mobs that can be buckled to this atom.
+	var/max_buckled_mobs = 0 // Maximum amount of mobs that can be buckled to this atom.
 	var/buckle_movable = 0
 	var/buckle_allow_rotation = 0
 	var/buckle_layer_above = FALSE
@@ -55,10 +55,10 @@
 		buckle_mob.reset_offsets()
 
 /atom/movable/proc/get_buckled_pixel_shift(index = 1)
-	if(islist(_buckle_pixel_shift) && length(_buckle_pixel_shift))
-		if(index < 1 || length(_buckle_pixel_shift) > index)
+	if(islist(_buckle_pixel_shift) && length(_buckle_pixel_shift) && !(num2text(NORTH) in _buckle_pixel_shift)) // shit check for whether not this list is assoc
+		if(index < 1 || index > length(_buckle_pixel_shift))
 			index = 1
-		return _buckle_pixel_shift[1]
+		return _buckle_pixel_shift[index]
 	return _buckle_pixel_shift
 
 /atom/movable/proc/get_buckled_position(mob/buckled)
@@ -106,9 +106,9 @@
 
 /atom/movable/attack_hand(mob/user)
 	// Unbuckle anything buckled to us.
-	if(!can_buckle_mobs || !has_buckled_mob() || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+	if(!max_buckled_mobs || !has_buckled_mob() || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
 		return ..()
-	user_unbuckle_mob(user)
+	user_unbuckle_mob(user, ((user in get_buckled_mobs()) ? user : null))
 	return TRUE
 
 /atom/movable/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
@@ -398,7 +398,7 @@
 	return get_buckled_mob()
 
 /atom/movable/proc/can_buckle_mob(var/mob/living/dropping)
-	. = (can_buckle_mobs && istype(dropping) && !dropping.buckled && !dropping.anchored && !dropping.has_buckled_mob() && length(get_buckled_mobs()) < can_buckle_mobs)
+	. = (max_buckled_mobs && istype(dropping) && !dropping.buckled && !dropping.anchored && !dropping.has_buckled_mob() && length(get_buckled_mobs()) < max_buckled_mobs)
 
 /atom/movable/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
@@ -409,7 +409,7 @@
 /atom/movable/proc/buckle_mob(mob/living/buckling_mob)
 
 	var/list/buckle_mobs = get_buckled_mobs()
-	if(length(buckle_mobs >= can_buckle_mobs) || (buckling_mob in buckle_mobs))
+	if(length(buckle_mobs) >= max_buckled_mobs || (buckling_mob in buckle_mobs))
 		return FALSE
 
 	if(!istype(buckling_mob) || (buckling_mob.loc != loc) || buckling_mob.buckled || LAZYLEN(buckling_mob.pinned) || (buckle_require_restraints && !buckling_mob.restrained()))
@@ -421,7 +421,7 @@
 		buckling_mob.set_dir(buckle_dir ? buckle_dir : dir)
 	buckling_mob.update_posture()
 	buckling_mob.update_floating()
-	add_buckled_mod(buckling_mob)
+	add_buckled_mob(buckling_mob)
 
 	if(buckle_sound)
 		playsound(src, buckle_sound, 20)
@@ -442,7 +442,7 @@
 	unbuckling.anchored = initial(unbuckling.anchored)
 	unbuckling.update_posture()
 	unbuckling.update_floating()
-	unbuckling = null
+	remove_buckled_mob(unbuckling)
 	post_buckle_mob(.)
 
 /atom/movable/proc/post_buckle_mob(mob/living/buckling_mob)
@@ -453,7 +453,7 @@
 		refresh_buckled_mobs()
 
 /atom/movable/proc/user_buckle_mob(mob/living/buckling_mob, mob/user)
-	if(can_buckle_mobs >= length(get_buckled_mobs()))
+	if(length(get_buckled_mobs()) >= max_buckled_mobs)
 		return FALSE
 	if(buckling_mob != user && user.incapacitated())
 		return FALSE
@@ -490,14 +490,15 @@
 			SPAN_NOTICE("You hear metal clanking.")
 		)
 
-/atom/movable/proc/user_unbuckle_mob(mob/user)
-	var/mob/living/buckling_mob = unbuckle_mob()
-	if(buckling_mob)
-		show_unbuckle_message(buckling_mob, user)
-		for(var/obj/item/grab/grab as anything in (buckling_mob.grabbed_by|grabbed_by))
+/atom/movable/proc/user_unbuckle_mob(mob/user, mob/living/unbuckling_mob)
+	unbuckling_mob ||= unbuckle_mob()
+	if(unbuckling_mob)
+		show_unbuckle_message(unbuckling_mob, user)
+		for(var/obj/item/grab/grab as anything in (unbuckling_mob.grabbed_by|grabbed_by))
 			qdel(grab)
 		add_fingerprint(user)
-	return buckling_mob
+		unbuckle_mob(unbuckling_mob)
+	return unbuckling_mob
 
 /atom/movable/proc/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
@@ -531,10 +532,10 @@
 /atom/movable/proc/get_buckled_mobs()
 	return _buckled_mobs
 
-/atom/movable/proc/add_buckled_mod(mob/buckling_mob)
+/atom/movable/proc/add_buckled_mob(mob/buckling_mob)
 	LAZYDISTINCTADD(_buckled_mobs, buckling_mob)
 
-/atom/movable/proc/remove_buckled_mod(mob/buckling_mob)
+/atom/movable/proc/remove_buckled_mob(mob/buckling_mob)
 	LAZYREMOVE(_buckled_mobs, buckling_mob)
 
 /atom/movable/singularity_act()

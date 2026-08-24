@@ -1,22 +1,22 @@
 /obj/item/beartrap
-	name         = "mechanical trap"
-	desc         = "A mechanically activated leg trap. Low-tech, but reliable. Looks like it could really hurt if you set it off."
-	throw_speed  = 2
-	throw_range  = 1
-	gender       = PLURAL
-	icon         = 'icons/obj/items/beartrap.dmi'
-	icon_state   = "beartrap0"
-	randpixel    = 0
-	w_class      = ITEM_SIZE_NORMAL
-	origin_tech  = @'{"materials":1}'
-	material     = /decl/material/solid/metal/steel
-	can_buckle_mobs = 0 //disallow manual un/buckling
-	var/deployed    = FALSE
+	name             = "mechanical trap"
+	desc             = "A mechanically activated leg trap. Low-tech, but reliable. Looks like it could really hurt if you set it off."
+	throw_speed      = 2
+	throw_range      = 1
+	gender           = PLURAL
+	icon             = 'icons/obj/items/beartrap.dmi'
+	icon_state       = "beartrap0"
+	randpixel        = 0
+	w_class          = ITEM_SIZE_NORMAL
+	origin_tech      = @'{"materials":1}'
+	material         = /decl/material/solid/metal/steel
+	max_buckled_mobs = 0 //disallow manual un/buckling
+	var/deployed     = FALSE
 
 /obj/item/beartrap/proc/can_use(mob/user)
 	. = (user.check_dexterity(DEXTERITY_SIMPLE_MACHINES) && !issilicon(user) && !user.stat && !user.restrained())
 
-/obj/item/beartrap/user_unbuckle_mob(mob/user)
+/obj/item/beartrap/user_unbuckle_mob(mob/user, mob/living/unbuckling_mob)
 	var/mob/buckle_mob = get_buckled_mob(user = user)
 	if(buckle_mob && can_use(user))
 		user.visible_message(

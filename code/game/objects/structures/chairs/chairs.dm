@@ -4,7 +4,7 @@
 	icon = 'icons/obj/structures/furniture/chair.dmi'
 	icon_state = ICON_STATE_WORLD + "_preview"
 	anchored = TRUE
-	can_buckle_mobs = 1
+	max_buckled_mobs = 1
 	buckle_lying = FALSE // force people to sit up in chairs when buckled
 	buckle_sound = 'sound/effects/buckle.ogg'
 	material = DEFAULT_FURNITURE_MATERIAL

@@ -1,13 +1,14 @@
 /obj/structure/vehicle
-	can_buckle_mobs     = 1
-	buckle_lying   = FALSE // force people to sit up when buckled to it
-	buckle_sound   = 'sound/effects/buckle.ogg'
-	buckle_movable = TRUE
-	anchored       = FALSE
-	density        =  TRUE
+	abstract_type     = /obj/structure/vehicle
+	max_buckled_mobs  = 1
+	buckle_lying      = FALSE // force people to sit up when buckled to it
+	buckle_sound      = 'sound/effects/buckle.ogg'
+	buckle_movable    = TRUE
+	anchored          = FALSE
+	density           =  TRUE
 	movement_handlers = list(
 		/datum/movement_handler/deny_multiz,
-		/datum/movement_handler/delay = list(1),
+		/datum/movement_handler/delay = list(2),
 		/datum/movement_handler/move_relay_self/vehicle
 	)
 
@@ -15,6 +16,12 @@
 	var/vehicle_name
 	var/requires_fluid_depth
 	var/key_type
+
+/obj/structure/vehicle/get_examine_hints(mob/user, distance, infix, suffix)
+	. = ..()
+	if(max_buckled_mobs)
+		var/passenger_str = SPAN_SUBTLE("Looks like it'll hold [max_buckled_mobs] [max_buckled_mobs == 1 ? "person" : "people"].")
+		LAZYADD(., passenger_str)
 
 /obj/structure/vehicle/proc/check_pilot_can_pilot(mob/living/pilot)
 	return TRUE

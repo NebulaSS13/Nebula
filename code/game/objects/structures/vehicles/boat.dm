@@ -19,12 +19,12 @@
 	icon_state = ICON_STATE_WORLD
 	max_health = 100
 	pixel_x = -2
-	layer = ABOVE_HUMAN_LAYER
 	key_type = /obj/item/oar
 	requires_fluid_depth = FLUID_SHALLOW
 	pilot_verb = "pilot"
 	material = /decl/material/solid/organic/wood/oak
 	material_alteration = MAT_FLAG_ALTERATION_ALL
+	layer = DEEP_FLUID_LAYER + 0.001
 
 /obj/structure/vehicle/boat/Initialize(ml, _mat, _reinf_mat)
 	_buckle_pixel_shift ||= list(
@@ -35,6 +35,9 @@
 	)
 	. = ..()
 
+/obj/structure/vehicle/boat/is_platform()
+	return can_float_on_liquids() && loc?.get_fluid_depth()
+
 /obj/structure/vehicle/boat/check_pilot_can_pilot(mob/pilot)
 	return pilot.adjust_stamina(-10)
 
@@ -42,44 +45,44 @@
 	return TRUE // Health check for damage causing leaks?
 
 /obj/structure/vehicle/boat/dragon
-	name = "dragon boat"
-	desc = "It's a large wooden boat, carved to have a nordic-looking dragon on the front. Looks like it'll hold five people. Oars not included."
-	max_health = 250
-	icon = 'icons/obj/structures/boat_dragon.dmi'
-	pixel_x = -16
-	can_buckle_mobs = 5
+	name             = "dragon boat"
+	desc             = "It's a large wooden boat, carved to have a nordic-looking dragon on the front. Oars not included."
+	max_health       = 250
+	icon             = 'icons/obj/structures/boat_dragon.dmi'
+	default_pixel_x  = -16
+	max_buckled_mobs = 5
 
 /obj/structure/vehicle/boat/dragon/Initialize(ml, _mat, _reinf_mat)
 	_buckle_pixel_shift = list(
 		list(
-			"[NORTH]" = list("x" =  0, "y" = 12, "z" = 0),
-			"[SOUTH]" = list("x" =  0, "y" =  7, "z" = 0),
-			"[EAST]"  = list("x" =  8, "y" =  7, "z" = 0),
-			"[WEST]"  = list("x" = -8, "y" =  7, "z" = 0)
+			"[NORTH]" = list("x" =   0, "y" = 12, "z" = 0),
+			"[SOUTH]" = list("x" =   0, "y" =  7, "z" = 0),
+			"[EAST]"  = list("x" =  20, "y" =  7, "z" = 0),
+			"[WEST]"  = list("x" = -20, "y" =  7, "z" = 0)
 		),
 		list(
-			"[NORTH]" = list("x" =  0, "y" =  10, "z" = 0),
-			"[SOUTH]" = list("x" =  0, "y" =  9, "z" = 0),
-			"[EAST]"  = list("x" =  4, "y" =  7, "z" = 0),
-			"[WEST]"  = list("x" = -4, "y" =  7, "z" = 0)
+			"[NORTH]" = list("x" =   0, "y" = 10, "z" = 0),
+			"[SOUTH]" = list("x" =   0, "y" =  9, "z" = 0),
+			"[EAST]"  = list("x" =  10, "y" =  7, "z" = 0),
+			"[WEST]"  = list("x" = -10, "y" =  7, "z" = 0)
 		),
 		list(
-			"[NORTH]" = list("x" =  0, "y" =  8, "z" = 0),
-			"[SOUTH]" = list("x" =  0, "y" = 11, "z" = 0),
-			"[EAST]"  = list("x" =  0, "y" =  7, "z" = 0),
-			"[WEST]"  = list("x" =  0, "y" =  7, "z" = 0)
+			"[NORTH]" = list("x" =   0, "y" =  8, "z" = 0),
+			"[SOUTH]" = list("x" =   0, "y" = 11, "z" = 0),
+			"[EAST]"  = list("x" =   0, "y" =  7, "z" = 0),
+			"[WEST]"  = list("x" =   0, "y" =  7, "z" = 0)
 		),
 		list(
-			"[NORTH]" = list("x" =  0, "y" =  6, "z" = 0),
-			"[SOUTH]" = list("x" =  0, "y" = 13, "z" = 0),
-			"[EAST]"  = list("x" = -4, "y" =  7, "z" = 0),
-			"[WEST]"  = list("x" =  4, "y" =  7, "z" = 0)
+			"[NORTH]" = list("x" =   0, "y" =  6, "z" = 0),
+			"[SOUTH]" = list("x" =   0, "y" = 13, "z" = 0),
+			"[EAST]"  = list("x" = -10, "y" =  7, "z" = 0),
+			"[WEST]"  = list("x" =  10, "y" =  7, "z" = 0)
 		),
 		list(
-			"[NORTH]" = list("x" =  0, "y" =  4, "z" = 0),
-			"[SOUTH]" = list("x" =  0, "y" = 15, "z" = 0),
-			"[EAST]"  = list("x" = -8, "y" =  7, "z" = 0),
-			"[WEST]"  = list("x" =  8, "y" =  7, "z" = 0)
+			"[NORTH]" = list("x" =   0, "y" =  4, "z" = 0),
+			"[SOUTH]" = list("x" =   0, "y" = 15, "z" = 0),
+			"[EAST]"  = list("x" = -20, "y" =  7, "z" = 0),
+			"[WEST]"  = list("x" =  20, "y" =  7, "z" = 0)
 		)
 	)
 	. = ..()

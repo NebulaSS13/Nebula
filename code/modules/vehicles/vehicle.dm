@@ -13,7 +13,7 @@
 	light_range = 3
 	abstract_type = /obj/vehicle
 
-	can_buckle_mobs = 1
+	max_buckled_mobs = 1
 	buckle_movable = 1
 	buckle_lying = 0
 
