@@ -470,7 +470,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	return FALSE
 
 //Used for swimming
-/decl/species/proc/can_float(var/mob/living/human/H)
+/decl/species/proc/can_float_on_liquids(var/mob/living/human/H)
 	if(!H.is_physically_disabled())
 		return TRUE //We could tie it to stamina
 	return FALSE

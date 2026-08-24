@@ -101,7 +101,7 @@
 			var/obj/structure/platform = ext.get_supporting_platform()
 			if(platform)
 				new_pixel_z += platform.pixel_z
-			else if(ext.height < 0)
+			else if(ext.height < 0 && can_fall())
 				new_pixel_z += ext.pixel_z
 
 		// Check for catwalks/supporting platforms.
