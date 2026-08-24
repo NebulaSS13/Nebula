@@ -11,7 +11,7 @@
 	atom_flags       = 0 // no painting
 	maximum_pressure = 360 ATM
 	fatigue_pressure = 300 ATM
-	can_buckle_mobs       = 1
+	max_buckled_mobs  = 1
 	buckle_lying     = TRUE
 	appearance_flags = KEEP_TOGETHER
 

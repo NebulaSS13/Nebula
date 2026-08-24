@@ -1460,7 +1460,7 @@ default behaviour is:
 	return TRUE
 
 /mob/living/proc/can_direct_mount(var/mob/user)
-	if((user.faction == faction || !faction) && can_buckle_mobs && istype(user) && !user.incapacitated() && (user in get_buckled_mobs()))
+	if((user.faction == faction || !faction) && max_buckled_mobs && istype(user) && !user.incapacitated() && (user in get_buckled_mobs()))
 		if(client && !check_intent(I_FLAG_HELP))
 			return FALSE // do not Ratatouille your colleagues
 		// TODO: Piloting skillcheck for hands-free moving? Stupid but amusing

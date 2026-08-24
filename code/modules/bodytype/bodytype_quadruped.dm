@@ -21,7 +21,7 @@
 
 /decl/bodytype/quadruped/apply_appearance(var/mob/living/human/H)
 	. = ..()
-	H.can_buckle_mobs     = rideable
+	H.max_buckled_mobs     = rideable
 	H.set_buckled_pixel_shift(riding_offset)
 
 /decl/bodytype/quadruped/get_ignited_icon_state(mob/living/victim)

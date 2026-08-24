@@ -31,7 +31,7 @@
 	desc = "A clamp used to lift people or things."
 	icon = 'icons/obj/hoists.dmi'
 	icon_state = "hoist_hook"
-	can_buckle_mobs = 1
+	max_buckled_mobs = 1
 	anchored = TRUE
 	simulated = FALSE
 
