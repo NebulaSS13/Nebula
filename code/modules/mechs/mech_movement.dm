@@ -26,7 +26,7 @@
 		return !(can_overcome_gravity())
 
 //For swimming
-// /mob/living/exosuit/can_float()
+// /mob/living/exosuit/can_float_on_liquids()
 // 	return FALSE //Nope
 
 /datum/movement_handler/mob/delay/exosuit

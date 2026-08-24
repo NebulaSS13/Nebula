@@ -55,7 +55,7 @@
 		return TRUE
 	var/turf/T = loc
 	if(((T.get_physical_height() + T.get_fluid_depth()) >= FLUID_DEEP) || T.get_fluid_depth() >= FLUID_MAX_DEPTH)
-		if(can_float())
+		if(can_float_on_liquids())
 			return TRUE
 	for(var/atom/climbable in src.loc)
 		if((climbable.atom_flags & ATOM_FLAG_CLIMBABLE) && climbable.can_climb(src, silent = TRUE))
@@ -132,7 +132,7 @@
 		if(location_override.get_fluid_depth() >= FLUID_DEEP && (below == loc))
 			if(!(below.get_fluid_depth() >= 0.95 * FLUID_MAX_DEPTH)) //No salmon skipping up a stream of falling water
 				return TRUE
-			return !can_float()
+			return !can_float_on_liquids()
 
 	return TRUE
 
@@ -373,19 +373,25 @@
 		to_chat(src, "<span class='notice'>You can't look below right now.</span>")
 
 //Swimming and floating
-/atom/movable/proc/can_float()
+/atom/movable/proc/can_float_on_liquids()
 	return FALSE
 
-/mob/living/can_float()
+/mob/living/can_float_on_liquids()
+	if(buckled)
+		return buckled.can_float_on_liquids()
 	return !is_physically_disabled()
 
-/mob/living/simple_animal/can_float()
+/mob/living/simple_animal/can_float_on_liquids()
+	if(buckled)
+		return ..()
 	return is_aquatic
 
-/mob/living/human/can_float()
-	return species.can_float(src)
+/mob/living/human/can_float_on_liquids()
+	return ..() && species.can_float_on_liquids(src)
 
-/mob/living/silicon/can_float()
+/mob/living/silicon/can_float_on_liquids()
+	if(buckled)
+		return ..()
 	return FALSE //If they can fly otherwise it will be checked first
 
 /mob/living

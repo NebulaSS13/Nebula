@@ -2599,7 +2599,7 @@
 	dir = 1;
 	pixel_y = -23
 	},
-/obj/structure/janicart{
+/obj/structure/vehicle/janicart{
 	dir = 4
 	},
 /turf/floor/tiled,
