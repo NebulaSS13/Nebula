@@ -1,4 +1,5 @@
 /obj/machinery/computer/upload
+	abstract_type = /obj/machinery/computer/upload
 	name = "unused upload console"
 	icon_keyboard = "rd_key"
 	icon_screen = "command"
