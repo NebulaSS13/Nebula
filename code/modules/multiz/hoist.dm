@@ -31,7 +31,7 @@
 	desc = "A clamp used to lift people or things."
 	icon = 'icons/obj/hoists.dmi'
 	icon_state = "hoist_hook"
-	can_buckle = TRUE
+	can_buckle_mobs = 1
 	anchored = TRUE
 	simulated = FALSE
 
@@ -101,7 +101,7 @@
 	return ..()
 
 // This will handle mobs unbuckling themselves.
-/obj/effect/hoist_hook/unbuckle_mob()
+/obj/effect/hoist_hook/unbuckle_mob(mob/unbuckling)
 	. = ..()
 	if (. && !QDELETED(source_hoist))
 		var/mob/victim = .

@@ -191,7 +191,7 @@
 /obj/item/grab/proc/get_affecting_mob()
 	if(isobj(affecting))
 		var/obj/O = affecting
-		return O.buckled_mob
+		return O.get_buckled_mob()
 	if(isliving(affecting))
 		return affecting
 

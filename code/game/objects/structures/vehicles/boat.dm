@@ -27,13 +27,13 @@
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 /obj/structure/vehicle/boat/Initialize(ml, _mat, _reinf_mat)
-	. = ..()
-	buckle_pixel_shift = list(
+	_buckle_pixel_shift ||= list(
 		"[NORTH]" = list("x" = 0, "y" = 4, "z" = 0),
 		"[SOUTH]" = list("x" = 0, "y" = 7, "z" = 0),
 		"[EAST]"  = list("x" = 0, "y" = 7, "z" = 0),
 		"[WEST]"  = list("x" = 0, "y" = 7, "z" = 0)
 	)
+	. = ..()
 
 /obj/structure/vehicle/boat/check_pilot_can_pilot(mob/pilot)
 	return pilot.adjust_stamina(-10)
@@ -47,6 +47,42 @@
 	max_health = 250
 	icon = 'icons/obj/structures/boat_dragon.dmi'
 	pixel_x = -16
+	can_buckle_mobs = 5
+
+/obj/structure/vehicle/boat/dragon/Initialize(ml, _mat, _reinf_mat)
+	_buckle_pixel_shift = list(
+		list(
+			"[NORTH]" = list("x" =  0, "y" = 12, "z" = 0),
+			"[SOUTH]" = list("x" =  0, "y" =  7, "z" = 0),
+			"[EAST]"  = list("x" =  8, "y" =  7, "z" = 0),
+			"[WEST]"  = list("x" = -8, "y" =  7, "z" = 0)
+		),
+		list(
+			"[NORTH]" = list("x" =  0, "y" =  10, "z" = 0),
+			"[SOUTH]" = list("x" =  0, "y" =  9, "z" = 0),
+			"[EAST]"  = list("x" =  4, "y" =  7, "z" = 0),
+			"[WEST]"  = list("x" = -4, "y" =  7, "z" = 0)
+		),
+		list(
+			"[NORTH]" = list("x" =  0, "y" =  8, "z" = 0),
+			"[SOUTH]" = list("x" =  0, "y" = 11, "z" = 0),
+			"[EAST]"  = list("x" =  0, "y" =  7, "z" = 0),
+			"[WEST]"  = list("x" =  0, "y" =  7, "z" = 0)
+		),
+		list(
+			"[NORTH]" = list("x" =  0, "y" =  6, "z" = 0),
+			"[SOUTH]" = list("x" =  0, "y" = 13, "z" = 0),
+			"[EAST]"  = list("x" = -4, "y" =  7, "z" = 0),
+			"[WEST]"  = list("x" =  4, "y" =  7, "z" = 0)
+		),
+		list(
+			"[NORTH]" = list("x" =  0, "y" =  4, "z" = 0),
+			"[SOUTH]" = list("x" =  0, "y" = 15, "z" = 0),
+			"[EAST]"  = list("x" = -8, "y" =  7, "z" = 0),
+			"[WEST]"  = list("x" =  8, "y" =  7, "z" = 0)
+		)
+	)
+	. = ..()
 
 /obj/structure/vehicle/boat/dragon/on_update_icon()
 	. = ..()

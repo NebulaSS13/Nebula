@@ -12,7 +12,7 @@
 	holder_type = /obj/item/holder/corgi
 	pass_flags = PASS_FLAG_TABLE
 	base_animal_type = /mob/living/simple_animal/corgi
-	can_buckle = TRUE
+	can_buckle_mobs = 1
 	butchery_data = /decl/butchery_data/animal/corgi
 	ai = /datum/mob_controller/corgi
 
@@ -141,7 +141,7 @@
 	real_name = "corgi"
 	desc = "It's a corgi puppy."
 	icon = 'icons/mob/simple_animal/puppy.dmi'
-	can_buckle = FALSE
+	can_buckle_mobs = 0
 	butchery_data = /decl/butchery_data/animal/corgi/puppy
 
 /mob/living/simple_animal/corgi/puppy/get_bodytype()

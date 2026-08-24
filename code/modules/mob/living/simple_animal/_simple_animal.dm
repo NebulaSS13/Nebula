@@ -9,7 +9,7 @@
 	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 
 	icon_state = ICON_STATE_WORLD
-	buckle_pixel_shift = @'{"x":0,"y":0,"z":8}'
+	_buckle_pixel_shift = @'{"x":0,"y":0,"z":8}'
 
 	hud_used = /datum/hud/animal
 

@@ -16,9 +16,9 @@
 /obj/item/saddle/equipped(mob/user, slot)
 	. = ..()
 	if(user == loc && slot == slot_back_str)
-		user.can_buckle = TRUE
+		user.can_buckle_mobs = 1
 
 /obj/item/saddle/dropped(mob/user)
 	. = ..()
 	if(user)
-		user.can_buckle = initial(user.can_buckle)
+		user.can_buckle_mobs = initial(user.can_buckle_mobs)

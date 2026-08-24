@@ -25,7 +25,7 @@
 		return prob(60)
 
 	var/atom/movable/moving_movable = A
-	if (ismovable(A) && moving_movable.buckled_mob)//if someone is buckled, it will not pass
+	if (ismovable(A) && moving_movable.has_buckled_mob()) //if someone is buckled, it will not pass
 		return 0
 
 	if(istype(A, /obj/vehicle))	//no vehicles
