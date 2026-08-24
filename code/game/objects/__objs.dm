@@ -21,8 +21,6 @@
 	var/in_use = FALSE // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
-	/// if the obj is a holographic object spawned by the holodeck
-	var/holographic = FALSE
 	///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: @'{"NORTH":{"x":12,"y":5}, "EAST":{"x":10,"y":50}}'
 	var/directional_offset
 
@@ -74,6 +72,23 @@
 
 /obj/return_air()
 	return loc?.return_air()
+
+/obj/proc/get_internal_pressure_difference()
+	var/datum/gas_mixture/int_air = return_air()
+	var/datum/gas_mixture/env_air = loc.return_air()
+	return int_air.return_pressure()-env_air.return_pressure()
+
+/// Return TRUE if the internal pressure difference is over `limit`.
+/obj/proc/check_internal_pressure_difference_over(limit)
+	var/datum/gas_mixture/int_air = return_air()
+	var/datum/gas_mixture/env_air = loc.return_air()
+	return (int_air.return_pressure()-env_air.return_pressure()) > limit
+
+/// Return TRUE if the internal pressure difference is under `limit`.
+/obj/proc/check_internal_pressure_difference_under(limit)
+	var/datum/gas_mixture/int_air = return_air()
+	var/datum/gas_mixture/env_air = loc.return_air()
+	return (int_air.return_pressure()-env_air.return_pressure()) < limit
 
 /obj/proc/updateUsrDialog()
 	if(in_use)

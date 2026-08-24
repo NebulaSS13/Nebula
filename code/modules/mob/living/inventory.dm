@@ -67,13 +67,17 @@
 /mob/living/select_held_item_slot(var/slot)
 	. = ..()
 	var/last_slot = get_active_held_item_slot()
-	if(slot != last_slot && (slot in get_held_item_slots()))
-		_held_item_slot_selected = slot
-		if(istype(hud_used))
-			hud_used.update_hand_elements()
-		var/obj/item/I = get_active_held_item()
-		if(istype(I))
-			I.on_active_hand()
+	if(slot == last_slot)
+		return
+	on_mouse_up()
+	if(!(slot in get_held_item_slots()))
+		return
+	_held_item_slot_selected = slot
+	if(istype(hud_used))
+		hud_used.update_hand_elements()
+	var/obj/item/I = get_active_held_item()
+	if(istype(I))
+		I.on_active_hand()
 
 // Defer proc for the sake of delimbing root limbs with multiple graspers (serpentid)
 /mob/living/proc/queue_hand_rebuild()

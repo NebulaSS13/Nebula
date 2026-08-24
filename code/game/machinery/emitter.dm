@@ -1,0 +1,206 @@
+#define EMITTER_DAMAGE_POWER_TRANSFER 450 //used to transfer power to containment field generators
+
+/obj/machinery/emitter
+	name = "emitter"
+	desc = "A massive heavy industrial laser. This design is a fixed installation, capable of shooting in only one direction."
+	icon = 'icons/obj/singularity.dmi'
+	icon_state = "emitter"
+	anchored = FALSE
+	density = TRUE
+	initial_access = list(access_engine_equip)
+	active_power_usage = 100 KILOWATTS
+
+	var/efficiency = 0.3	// Energy efficiency. 30% at this time, so 100kW load means 30kW laser pulses.
+	var/minimum_power = 10 KILOWATTS // The minimum power below which the emitter will turn off; different than the power needed to fire.
+	var/active = FALSE
+	var/fire_delay = 100
+	var/max_burst_delay = 100
+	var/min_burst_delay = 20
+	var/burst_shots = 3
+	var/last_shot = 0
+	var/shot_number = 0
+	var/locked = FALSE
+	var/powered = FALSE
+	core_skill = SKILL_ENGINES
+	construct_state = /decl/machine_construction/emitter/unsecured
+
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/power/terminal
+	)
+	public_variables = list(
+		/decl/public_access/public_variable/emitter_active,
+		/decl/public_access/public_variable/emitter_locked
+	)
+	public_methods = list(
+		/decl/public_access/public_method/toggle_emitter
+	)
+	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/emitter = 1, /decl/stock_part_preset/terminal_connect = 1)
+
+/obj/machinery/emitter/anchored
+	anchored = TRUE
+	construct_state = /decl/machine_construction/emitter/welded
+
+/// Returns TRUE if the emitter is able to fire based on its construction state (currently checks if welded down).
+/obj/machinery/emitter/proc/can_fire()
+	return istype(construct_state, /decl/machine_construction/emitter/welded)
+
+/obj/machinery/emitter/Destroy()
+	log_and_message_admins("deleted \the [src]")
+	investigate_log("<font color='red'>deleted</font> at ([x],[y],[z])","singulo")
+	return ..()
+
+/obj/machinery/emitter/on_update_icon()
+	if (active && powered)
+		icon_state = "emitter_+a"
+	else
+		icon_state = "emitter"
+
+/obj/machinery/emitter/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
+	activate(user)
+	return TRUE
+
+/obj/machinery/emitter/proc/activate(mob/user)
+	if(!istype(user))
+		user = null // safety, as the proc is publicly available.
+
+	if(!can_fire())
+		to_chat(user, SPAN_WARNING("\The [src] needs to be firmly secured to the floor first."))
+		return 1
+	if(!locked)
+		if(active)
+			active = FALSE
+			to_chat(user, SPAN_NOTICE("You turn off \the [src]."))
+			log_and_message_admins("turned off \the [src]", user)
+			investigate_log("turned <font color='red'>off</font> by [key_name_admin(user)]","singulo")
+		else
+			active = TRUE
+			if(user)
+				operator_skill = user.get_skill_value(core_skill)
+			update_efficiency()
+			to_chat(user, SPAN_NOTICE("You turn on \the [src]."))
+			shot_number = 0
+			fire_delay = get_initial_fire_delay()
+			log_and_message_admins("turned on \the [src]", user)
+			investigate_log("turned <font color='green'>on</font> by [key_name_admin(user)]","singulo")
+		update_icon()
+	else
+		to_chat(user, SPAN_WARNING("The controls are locked!"))
+
+/obj/machinery/emitter/proc/update_efficiency()
+	efficiency = initial(efficiency)
+	if(!operator_skill)
+		return
+	var/skill_modifier = 0.8 * (SKILL_MAX - operator_skill)/(SKILL_MAX - SKILL_MIN) //How much randomness is added
+	efficiency *= 1 + (rand() - 1) * skill_modifier //subtract off between 0.8 and 0, depending on skill and luck.
+
+/obj/machinery/emitter/emp_act(var/severity)
+	return 1
+
+/obj/machinery/emitter/Process()
+	if(stat & (BROKEN))
+		return
+	if(!can_fire())
+		active = FALSE
+		update_icon()
+		return
+	if(((last_shot + fire_delay) <= world.time) && active)
+		if(active_power_usage - can_use_power_oneoff(active_power_usage) < minimum_power)
+			powered = FALSE
+			update_icon()
+			return
+		var/drawn_power = min(active_power_usage, active_power_usage - use_power_oneoff(active_power_usage))
+		last_shot = world.time
+		if(shot_number < burst_shots)
+			fire_delay = get_shot_delay()
+			shot_number ++
+		else
+			fire_delay = get_burst_delay()
+			shot_number = 0
+
+		//need to calculate the power per shot as the emitter doesn't fire continuously.
+		var/burst_time = (min_burst_delay + max_burst_delay)/2 + 2*(burst_shots-1)
+		var/power_per_shot = (drawn_power * efficiency) * (burst_time/10) / burst_shots
+
+		if(prob(35))
+			spark_at(src, amount=5, cardinal_only = TRUE)
+
+		var/obj/item/projectile/beam/emitter/A = get_emitter_beam()
+		playsound(loc, A.fire_sound, 25, 1)
+		A.damage = round(power_per_shot/EMITTER_DAMAGE_POWER_TRANSFER)
+		A.launch( get_step(loc, dir) )
+
+		if(!powered)
+			powered = TRUE
+			update_icon()
+
+/obj/machinery/emitter/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/card/id) || istype(used_item, /obj/item/modular_computer))
+		if(emagged)
+			to_chat(user, "<span class='warning'>The lock seems to be broken.</span>")
+			return TRUE
+		if(allowed(user))
+			locked = !locked
+			to_chat(user, "The controls are now [locked ? "locked." : "unlocked."]")
+		else
+			to_chat(user, "<span class='warning'>Access denied.</span>")
+		return TRUE
+	return ..()
+
+/obj/machinery/emitter/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		locked = FALSE
+		emagged = TRUE
+		req_access.Cut()
+		user.visible_message("[user.name] emags [src].","<span class='warning'>You short out the lock.</span>")
+		return 1
+
+/obj/machinery/emitter/components_are_accessible(var/path)
+	if(ispath(path, /obj/item/stock_parts/power/terminal))
+		return TRUE
+	return ..()
+
+/obj/machinery/emitter/proc/get_initial_fire_delay()
+	return 10 SECONDS
+
+/// The number of deciseconds between each burst-fire grouping.
+/obj/machinery/emitter/proc/get_burst_delay()
+	return rand(min_burst_delay, max_burst_delay)
+
+/// The number of deciseconds between each shot in a burst.
+/obj/machinery/emitter/proc/get_shot_delay()
+	return 0.2 SECONDS
+
+/obj/machinery/emitter/proc/get_emitter_beam()
+	return new /obj/item/projectile/beam/emitter(get_turf(src))
+
+/decl/public_access/public_method/toggle_emitter
+	name = "toggle emitter"
+	desc = "Toggles whether or not the emitter is active. It must be unlocked to work."
+	call_proc = TYPE_PROC_REF(/obj/machinery/emitter, activate)
+
+/decl/public_access/public_variable/emitter_active
+	expected_type = /obj/machinery/emitter
+	name = "emitter active"
+	desc = "Whether or not the emitter is firing."
+	can_write = FALSE
+	has_updates = FALSE
+
+/decl/public_access/public_variable/emitter_active/access_var(obj/machinery/emitter/emitter)
+	return emitter.active
+
+/decl/public_access/public_variable/emitter_locked
+	expected_type = /obj/machinery/emitter
+	name = "emitter locked"
+	desc = "Whether or not the emitter is locked. Being locked prevents one from changing the active state."
+	can_write = FALSE
+	has_updates = FALSE
+
+/decl/public_access/public_variable/emitter_locked/access_var(obj/machinery/emitter/emitter)
+	return emitter.locked
+
+/decl/stock_part_preset/radio/receiver/emitter
+	frequency = BUTTON_FREQ
+	receive_and_call = list("button_active" = /decl/public_access/public_method/toggle_emitter)

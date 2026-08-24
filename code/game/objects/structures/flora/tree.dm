@@ -114,6 +114,11 @@ var/global/list/christmas_trees = list()
 	icon_state               = "tree_1"
 	protects_against_weather = FALSE
 	stump_type               = /obj/structure/flora/stump/tree/dead
+	storage                  = /datum/storage/dead_tree
+
+/datum/storage/dead_tree
+	max_w_class = ITEM_SIZE_NORMAL
+	max_storage_space = ITEM_SIZE_SMALL * 5
 
 /obj/structure/flora/tree/dead/random/init_appearance()
 	icon_state = "tree_[rand(1, 6)]"

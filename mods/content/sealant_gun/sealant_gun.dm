@@ -4,6 +4,7 @@
 	icon             = 'mods/content/sealant_gun/icons/sealant_gun.dmi'
 	icon_state       = ICON_STATE_WORLD
 	autofire_enabled = TRUE
+	autofire_delay   = 0.5 SECONDS
 	has_safety       = FALSE
 	waterproof       = TRUE
 	w_class          = ITEM_SIZE_GARGANTUAN

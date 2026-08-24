@@ -11,6 +11,8 @@
 	var/controlled = TRUE	// if true, report to air alarm, if false, probably in direct contact with something else by radio (e.g. airlocks)
 
 /obj/machinery/atmospherics/unary/get_single_monetary_worth()
+	if(worthless)
+		return 0
 	. = ..()
 	for(var/gas_type, gas_amount in air_contents?.gas)
 		var/decl/material/gas_data = GET_DECL(gas_type)

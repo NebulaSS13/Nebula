@@ -278,7 +278,7 @@ var/global/list/materials_by_gas_symbol = list()
 	var/sound_manipulate          //Default sound something like a material stack made of this material does when picked up
 	var/sound_dropped             //Default sound something like a material stack made of this material does when hitting the ground or placed down
 
-	var/holographic // Set to true if this material is fake/visual only.
+	var/visual_only // Set to true if this material is fake/visual only. Can be used for holograms, placeholders, etc.
 
 	/// Does high temperature baking change this material into something else?
 	var/bakes_into_material
@@ -286,9 +286,7 @@ var/global/list/materials_by_gas_symbol = list()
 
 	/// If set to a material type, stacks of this material will be able to be tanned on a drying rack after being wetted to convert them to tans_to.
 	var/tans_to
-	/// A multiplier for this material when used in fishing bait.
-	var/fishing_bait_value = 0
-	/// A relative value used only by fishing line at time of commit.
+	/// A relative value used only by bowstrings and the fishing modpack at time of writing.
 	var/tensile_strength = 0
 
 	/// What form does this take if dug out of the ground, if any?
@@ -328,6 +326,9 @@ var/global/list/materials_by_gas_symbol = list()
 
 	var/forgable = FALSE // Can this material be forged in bar/billet form?
 
+	// Physical attacks against walls must beat this threshold to cause damage.
+	var/wall_damage_threshold = 2
+
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
 	name = "placeholder"
@@ -335,7 +336,7 @@ var/global/list/materials_by_gas_symbol = list()
 	hidden_from_codex = TRUE
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
-	holographic = TRUE
+	visual_only = TRUE
 
 // Make sure we have a use name and shard icon even if they aren't explicitly set.
 /decl/material/Initialize()
@@ -353,7 +354,7 @@ var/global/list/materials_by_gas_symbol = list()
 	adjective_name ||= use_name
 
 	// Null/clear a bunch of physical vars as this material is fake.
-	if(holographic)
+	if(visual_only)
 		temperature_burn_milestone_material = null
 		can_boil_to_gas              = FALSE
 		shard_name                   = SHARD_NONE
@@ -405,7 +406,7 @@ var/global/list/materials_by_gas_symbol = list()
 	global.materials_by_gas_symbol[gas_symbol] = type
 	generate_armor_values()
 
-	if(!holographic)
+	if(!visual_only)
 		var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
 		for(var/ctype in cocktails)
 			var/decl/cocktail/cocktail = cocktails[ctype]

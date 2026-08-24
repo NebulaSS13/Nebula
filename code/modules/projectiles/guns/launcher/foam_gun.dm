@@ -86,7 +86,7 @@
 	icon =  'icons/obj/guns/foam/machine_gun.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	fire_delay = 0
-	autofire_enabled = 1
+	autofire_enabled = TRUE
 	one_hand_penalty = 3
 	max_darts = 30
 	burst_delay = 1

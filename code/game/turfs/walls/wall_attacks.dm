@@ -94,7 +94,7 @@
 
 	if (isnull(construction_stage) || !reinf_material)
 		to_chat(user, "<span class='notice'>You push \the [src], but nothing happens.</span>")
-		playsound(src, hitsound, 25, 1)
+		playsound(src, get_hit_sound(), 25, 1)
 		return TRUE
 
 /turf/wall/attack_hand(var/mob/user)
@@ -302,25 +302,27 @@
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
+
+	var/damage_threshold = max(2, max(material.wall_damage_threshold, reinf_material?.wall_damage_threshold))
 	var/material_divisor = max(material.brute_armor, reinf_material?.brute_armor)
 	if(used_item.atom_damage_type == BURN)
 		material_divisor = max(material.burn_armor, reinf_material?.burn_armor)
 	var/effective_force = round(force / material_divisor)
-	if(effective_force < 2)
-		visible_message(SPAN_DANGER("\The [user] [used_item.pick_attack_verb()] \the [src] with \the [used_item], but it had no effect!"))
-		playsound(src, hitsound, 25, 1)
+	if(effective_force < damage_threshold)
+		visible_message(SPAN_DANGER("\The [user] has [used_item.pick_attack_verb()] \the [src] with \the [used_item], but it has no effect!"))
+		playsound(src, get_hit_sound(), 25, 1)
 		return TRUE
 	// Check for a glancing blow.
 	var/dam_prob = max(0, 100 - material.hardness + effective_force + used_item.armor_penetration)
 	if(!prob(dam_prob))
-		visible_message(SPAN_DANGER("\The [user] [used_item.pick_attack_verb()] \the [src] with \the [used_item], but it bounced off!"))
-		playsound(src, hitsound, 25, 1)
+		visible_message(SPAN_DANGER("\The [user] has [used_item.pick_attack_verb()] \the [src] with \the [used_item], but it bounced off!"))
+		playsound(src, get_hit_sound(), 25, 1)
 		if(user.skill_fail_prob(SKILL_HAULING, 40, SKILL_ADEPT))
 			SET_STATUS_MAX(user, STAT_WEAK, 2)
 			visible_message(SPAN_DANGER("\The [user] is knocked back by the force of the blow!"))
 		return TRUE
 
+	visible_message(SPAN_DANGER("\The [user] has [used_item.pick_attack_verb()] \the [src] with \the [used_item]!"))
 	playsound(src, get_hit_sound(), 50, 1)
-	visible_message(SPAN_DANGER("\The [user] [used_item.pick_attack_verb()] \the [src] with \the [used_item]!"))
 	take_damage(effective_force)
 	return TRUE

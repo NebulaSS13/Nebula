@@ -25,6 +25,8 @@
 	add_to_reagents(/decl/material/liquid/oil/plant, 3)
 
 /obj/item/seeds/get_single_monetary_worth()
+	if(worthless)
+		return 0
 	. = seed ? seed.get_monetary_value() : ..()
 
 // Used for extracts/seed sampling purposes.

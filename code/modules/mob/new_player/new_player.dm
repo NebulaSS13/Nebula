@@ -228,7 +228,10 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	if(!character)
 		return 0
 
-	character = SSjobs.equip_job_title(character, job.title, 1)					//equips the human
+	character = SSjobs.equip_job_title(character, job.title, 1) //equips the human
+	if(!character)
+		return 0
+
 	SScustomitems.equip_custom_items(character)
 
 	if(job.do_spawn_special(character, src, TRUE)) //This replaces the AI spawn logic with a proc stub. Refer to silicon.dm for the spawn logic.

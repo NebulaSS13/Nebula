@@ -1203,19 +1203,6 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/has_textile_fibers()
 	return FALSE
 
-// Returns a value used as a multiplier in the fishing delay calc. Higher represents a stronger reduction in fishing time.
-#define BAIT_VALUE_CONSTANT 0.1
-/obj/item/proc/get_bait_value()
-	. = 0
-	for(var/mat in matter)
-		var/decl/material/bait_mat = GET_DECL(mat)
-		if(bait_mat.fishing_bait_value)
-			. += MATERIAL_UNITS_TO_REAGENTS_UNITS(matter[mat]) * bait_mat.fishing_bait_value * BAIT_VALUE_CONSTANT
-	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
-		if(reagent.fishing_bait_value)
-			. += REAGENT_VOLUME(reagents, reagent) * reagent.fishing_bait_value * BAIT_VALUE_CONSTANT
-#undef BAIT_VALUE_CONSTANT
-
 /obj/item/proc/get_storage_cost()
 	//If you want to prevent stuff above a certain w_class from being stored, use max_w_class
 	return BASE_STORAGE_COST(w_class)
@@ -1354,3 +1341,25 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/pick_attack_verb()
 	return DEFAULTPICK(attack_verb, attack_verb) || "attacked" // if it's not a list, return itself or just "attacked"
+
+/obj/item/equipped(mob/user, slot)
+	if(user?.get_active_held_item() == src)
+		user.on_mouse_up()
+	. = ..()
+
+/obj/item/dropped(mob/user)
+	if(user?.get_active_held_item() == src)
+		user.on_mouse_up()
+	. = ..()
+
+// Called on initial mouse down event from wielding mob. Return TRUE to begin processing every 1ds.
+/obj/item/proc/wielder_mouse_drag_down(mob/user, object, location, control, params)
+	return FALSE
+
+// Called every 1ds while mouse is down with an item that returned TRUE to wielder_mouse_drag_down(). Return FALSE to end processing.
+/obj/item/proc/wielder_mouse_drag_held(mob/user, atom/target)
+	return FALSE
+
+// Called on mouse up event from wielding mob.
+/obj/item/proc/wielder_mouse_drag_up(mob/user, atom/target)
+	return FALSE

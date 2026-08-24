@@ -48,21 +48,9 @@ var/global/list/message_servers = list()
 	active_power_usage = 100
 
 	var/list/datum/data_rc_msg/rc_msgs = list()
-	var/active = 1
+	var/active = TRUE
 	var/power_failure = 0 // Reboot timer after power outage
 	var/decryptkey = "password"
-
-	/// Spam filtering stuff. Messages having theese tokens will be rejected by server. Case sensitive.
-	var/list/spamfilter = list(
-		"You have won",
-		"your prize",
-		"male enhancement",
-		"shitcurity",
-		"are happy to inform you",
-		"account number",
-		"enter your PIN"
-	)
-	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT	//Maximal amount of tokens
 
 	stat_immune = 0
 	uncreated_component_parts = null
@@ -80,7 +68,7 @@ var/global/list/message_servers = list()
 /obj/machinery/network/message_server/Process()
 	..()
 	if(active && (stat & (BROKEN|NOPOWER)))
-		active = 0
+		active = FALSE
 		power_failure = 10
 		update_icon()
 		return
@@ -88,7 +76,7 @@ var/global/list/message_servers = list()
 		return
 	else if(power_failure > 0)
 		if(!(--power_failure))
-			active = 1
+			active = TRUE
 			update_icon()
 
 /obj/machinery/network/message_server/proc/send_rc_message(var/recipient = "",var/sender = "",var/message = "",var/stamp = "", var/id_auth = "", var/priority = 1)
@@ -99,6 +87,8 @@ var/global/list/message_servers = list()
 	if (stamp)
 		authmsg += "[stamp]<br>"
 	. = FALSE
+	if(!active)
+		return // message suppressed but still saved on the message server
 
 	var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 	var/datum/computer_network/network = network_device?.get_network()
@@ -129,21 +119,11 @@ var/global/list/message_servers = list()
 /obj/machinery/network/message_server/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
-	to_chat(user, "You toggle PDA message passing from [active ? "On" : "Off"] to [active ? "Off" : "On"]")
+	to_chat(user, "You toggle message passing from [active ? "On" : "Off"] to [active ? "Off" : "On"]")
 	active = !active
 	power_failure = 0
 	update_icon()
 	return TRUE
-
-/obj/machinery/network/message_server/attackby(obj/item/used_item, mob/user)
-	if (active && !(stat & (BROKEN|NOPOWER)) && (spamfilter_limit < MESSAGE_SERVER_DEFAULT_SPAM_LIMIT*2) && \
-		istype(used_item,/obj/item/stock_parts/circuitboard/message_monitor))
-		spamfilter_limit += round(MESSAGE_SERVER_DEFAULT_SPAM_LIMIT / 2)
-		qdel(used_item)
-		to_chat(user, "You install additional memory and processors into \the [src]. Its filtering capabilities been enhanced.")
-		return TRUE
-	else
-		return ..()
 
 /obj/machinery/network/message_server/on_update_icon()
 	icon_state = initial(icon_state)

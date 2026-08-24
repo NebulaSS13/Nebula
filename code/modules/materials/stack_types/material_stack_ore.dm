@@ -56,7 +56,7 @@
 			//Randomize the orientation and position of each ores in the image
 			var/matrix/M = matrix()
 			M.Translate(rand(-6, 6), rand(-6, 6))
-			M.Turn(pick(-72, -58, -45, -27.-5, 0, 0, 0, 0, 0, 27.5, 45, 58, 72))
+			M.Turn(pick(-72, -58, -45, -27.5, 0, 0, 0, 0, 0, 27.5, 45, 58, 72))
 			var/image/oreoverlay = image('icons/obj/materials/ore.dmi', IS)
 			oreoverlay.transform = M
 			scrapboard.overlays += oreoverlay

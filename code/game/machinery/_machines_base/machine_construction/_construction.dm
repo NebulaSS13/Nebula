@@ -14,6 +14,7 @@
 
 // Called on state transition; can intercept, but must call parent.
 /obj/machinery/proc/state_transition(var/decl/machine_construction/new_state, var/mob/user)
+	SHOULD_CALL_PARENT(TRUE)
 	construct_state = new_state
 
 // Return a change state define or a fail message to block transition.

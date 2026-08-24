@@ -153,12 +153,6 @@
 	path = /obj/item/stack/tape_roll/duct_tape
 	pass_multiplier_to_product_new = FALSE // they are printed as single items with 32 uses
 
-/datum/fabricator_recipe/fishing_line
-	path = /obj/item/fishing_line
-
-/datum/fabricator_recipe/fishing_line_high_quality
-	path = /obj/item/fishing_line/high_quality
-
 /datum/fabricator_recipe/chipboard // base type is for oak
 	path = /obj/item/stack/material/sheet/mapped/chipboard_oak
 	category = "Textiles"

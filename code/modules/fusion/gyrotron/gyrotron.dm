@@ -10,10 +10,11 @@
 	active_power_usage = GYRO_POWER
 
 	var/initial_id_tag
+	/// Time between shots, in SECONDS, NOT DECISECONDS
 	var/rate = 3
 	var/mega_energy = 1
 
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /decl/machine_construction/emitter/unsecured/gyrotron
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/receiver
 	)
@@ -21,7 +22,7 @@
 
 /obj/machinery/emitter/gyrotron/anchored
 	anchored = TRUE
-	state = 2
+	construct_state = /decl/machine_construction/emitter/welded/gyrotron
 
 /obj/machinery/emitter/gyrotron/Initialize()
 	set_extension(src, /datum/extension/local_network_member)
@@ -39,11 +40,11 @@
 	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
 	. = ..()
 
-/obj/machinery/emitter/gyrotron/get_rand_burst_delay()
-	return rate*10
-
 /obj/machinery/emitter/gyrotron/get_burst_delay()
-	return rate*10
+	return rate SECONDS
+
+/obj/machinery/emitter/gyrotron/get_shot_delay()
+	return rate SECONDS
 
 /obj/machinery/emitter/gyrotron/get_emitter_beam()
 	var/obj/item/projectile/beam/emitter/beam = ..()

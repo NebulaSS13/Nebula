@@ -152,7 +152,7 @@
 	var/new_z_opacity = z_flags & ZM_ALLOW_LIGHTING
 	if (new_z_opacity != old_z_opacity)
 		for (var/datum/lighting_corner/corn in corners)
-			corn.rebuild_ztraversal(!new_z_opacity)
+			corn.generate_z_connections()
 
 	var/tidlu = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
 	if ((old_opacity != opacity) || (tidlu != old_dynamic_lighting) || force_lighting_update)

@@ -271,7 +271,7 @@ default behaviour is:
 			gear_tree |= storage_contents
 
 /mob/living/proc/can_inject(var/mob/user, var/target_zone)
-	return 1
+	return TRUE
 
 /mob/living/proc/get_organ_target()
 	var/mob/shooter = src
@@ -2020,3 +2020,6 @@ default behaviour is:
 //Pixel projectiles need a client, so we need a way to pass who the last user was for view calcs
 /mob/living/proc/get_effective_gunner()
 	return src
+
+/mob/living/proc/is_playing_dead()
+	return stat || current_posture?.prone || (status_flags & FAKEDEATH)

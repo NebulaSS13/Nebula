@@ -149,9 +149,9 @@
 	burst = 3
 	burst_accuracy = list(0,-1,-1)
 	dispersion = list(0.0, 0.6, 1.0)
+	autofire_enabled = TRUE
 
 	fire_delay = 0
-	autofire_enabled = 1
 
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
@@ -177,8 +177,8 @@
 		return FALSE
 	return TRUE
 
-/obj/item/gun/projectile/automatic/machine/set_autofire(atom/fire_at, mob/fire_by, autoturn)
-	if(!special_check(fire_by))
+/obj/item/gun/projectile/automatic/machine/wielder_mouse_drag_down(mob/user, object, location, control, params)
+	if(!special_check(user))
 		return FALSE
 	. = ..()
 	if(. && !spin_up_time)
@@ -186,7 +186,7 @@
 			sound_token = play_looping_sound(src, "machine_gun", 'sound/mecha/hydraulic.ogg', volume = 30)
 		spin_up_time = world.time
 
-/obj/item/gun/projectile/automatic/machine/clear_autofire()
+/obj/item/gun/projectile/automatic/machine/wielder_mouse_drag_up(mob/user, atom/target)
 	. = ..()
 	spin_up_time = null
 	QDEL_NULL(sound_token)

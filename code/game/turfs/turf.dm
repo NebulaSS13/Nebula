@@ -845,10 +845,6 @@
 /turf/get_color()
 	return paint_color || get_material()?.color || color
 
-/turf/proc/get_fishing_result(obj/item/food/bait)
-	var/area/A = get_area(src)
-	return A.get_fishing_result(src, bait)
-
 /turf/get_affecting_weather()
 	return weather
 

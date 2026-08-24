@@ -49,6 +49,8 @@ SUBSYSTEM_DEF(customitems)
 
 //gets the relevant list for the key from the listlist if it exists, check to make sure they are meant to have it and then calls the giving function
 /datum/controller/subsystem/customitems/proc/equip_custom_items(mob/living/human/M)
+	if(!istype(M) || !M.ckey)
+		return
 	var/list/key_list = custom_items_by_ckey[M.ckey]
 	if(!length(key_list))
 		return

@@ -1,9 +1,11 @@
 /area/hallway
+	abstract_type = /area/hallway
 	name = "hallway"
 	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 	area_start_lit = TRUE
 
 /area/maintenance
+	abstract_type = /area/maintenance
 	area_flags = AREA_FLAG_RAD_SHIELDED
 	sound_env = TUNNEL_ENCLOSED
 	turf_initializer = /decl/turf_initializer/maintenance
@@ -12,6 +14,7 @@
 	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/shuttle
+	abstract_type = /area/shuttle
 	requires_power = 0
 	sound_env = SMALL_ENCLOSED
 	base_turf = /turf/space
@@ -19,6 +22,10 @@
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/ship
+	abstract_type = /area/ship
 	name = "\improper Generic Ship"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg')
 	holomap_color = HOLOMAP_AREACOLOR_CREW
+
+/area/map_template
+	abstract_type = /area/map_template

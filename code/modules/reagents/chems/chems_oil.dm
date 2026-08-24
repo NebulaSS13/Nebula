@@ -10,7 +10,6 @@
 	uid                    = "chem_oil_lamp"
 	color                  = "#664330"
 	value                  = 1.5
-	fishing_bait_value     = 0
 	taste_mult             = 4
 	metabolism             = REM * 4
 	exoplanet_rarity_gas   = MAT_RARITY_NOWHERE

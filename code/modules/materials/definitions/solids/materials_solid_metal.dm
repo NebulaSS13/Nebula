@@ -20,6 +20,8 @@
 	icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	tensile_strength = 0.8 // metal wire is probably better than plastic?
+	wall_damage_threshold = 10
+	hitsound = 'sound/effects/metalhit.ogg'
 	forgable = TRUE
 	glows_with_heat = TRUE
 
@@ -220,7 +222,7 @@
 /decl/material/solid/metal/steel/holographic
 	name = "holographic steel"
 	uid = "solid_holographic_steel"
-	holographic = TRUE
+	visual_only = TRUE
 
 /decl/material/solid/metal/stainlesssteel
 	name = "stainless steel"
@@ -267,7 +269,7 @@
 /decl/material/solid/metal/aluminium/holographic
 	name = "holoaluminium"
 	uid = "solid_holographic_aluminium"
-	holographic = TRUE
+	visual_only = TRUE
 
 /decl/material/solid/metal/plasteel
 	name = "plasteel"

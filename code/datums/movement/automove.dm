@@ -37,4 +37,4 @@
 
 /// Generalized entrypoint for checking CanMove and such on /mob.
 /atom/movable/proc/can_do_automated_move(variant_move_delay)
-	return FALSE
+	return MayMove(src)
