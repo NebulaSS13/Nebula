@@ -18,8 +18,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/map_data)
 			z_levels.len = i
 		z_levels[i] = src
 
-	if (length(SSzcopy.zlev_maximums))
-		SSzcopy.calculate_zstack_limits()
+	SSzcopy.calculate_zstack_limits()
+
 	return ..()
 
 /obj/abstract/map_data/Destroy(forced)

@@ -101,6 +101,14 @@
 	name                       = "pedestal, round"
 	result_type                = /obj/structure/pedestal/round
 
+/decl/stack_recipe/bricks/furniture/fence
+	result_type                = /obj/structure/fence/brick
+	difficulty                 = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/bricks/furniture/fence_door
+	result_type                = /obj/structure/fence/door/brick
+	difficulty                 = MAT_VALUE_NORMAL_DIY
+
 /decl/stack_recipe/bricks/gravestone
 	result_type                = /obj/item/gravemarker/gravestone
 	difficulty                 = MAT_VALUE_NORMAL_DIY

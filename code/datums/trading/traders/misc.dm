@@ -119,8 +119,7 @@
 		/obj/item/chems/spray/waterflower          = TRADER_THIS_TYPE,
 		/obj/item/gun/launcher/pneumatic/small     = TRADER_THIS_TYPE,
 		/obj/item/gun/projectile/revolver/capgun   = TRADER_THIS_TYPE,
-		/obj/item/clothing/mask/fakemoustache      = TRADER_THIS_TYPE,
-		/obj/item/grenade/spawnergrenade/fake_carp = TRADER_THIS_TYPE
+		/obj/item/clothing/mask/fakemoustache      = TRADER_THIS_TYPE
 	)
 
 /datum/trader/ship/replica_shop

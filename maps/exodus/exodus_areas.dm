@@ -11,6 +11,7 @@
 //Do not remove dots after comments
 
 /area/exodus
+	abstract_type = /area/exodus
 	secure = TRUE
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 

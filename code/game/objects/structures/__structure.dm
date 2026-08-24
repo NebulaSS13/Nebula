@@ -64,7 +64,7 @@
 	. = ..()
 	update_materials()
 	paint_verb ||= "painted" // fallback for the case of no material
-	if(lock && !istype(loc))
+	if(lock && !istype(lock))
 		lock = new /datum/lock(src, lock)
 	if(!CanFluidPass())
 		fluid_update(TRUE)

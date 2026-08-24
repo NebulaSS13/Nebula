@@ -6,6 +6,6 @@
 	icon_base      = "fakewater"
 	has_base_range = null
 	footstep_type  = /decl/footsteps/water
-	holographic    = TRUE
+	visual_only    = TRUE
 	constructed    = TRUE
 	uid            = "floor_water_fake"

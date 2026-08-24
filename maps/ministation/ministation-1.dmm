@@ -8744,7 +8744,7 @@
 /turf/floor/tiled,
 /area/ministation/hall/e2)
 "Oo" = (
-/obj/machinery/beehive,
+/obj/structure/apiary/mapped,
 /turf/floor/fake_grass,
 /area/ministation/hydro)
 "Op" = (

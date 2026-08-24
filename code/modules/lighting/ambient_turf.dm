@@ -18,7 +18,11 @@
 	ambient_light = isnull(color) ? ambient_light : color
 	ambient_light_multiplier = isnull(multiplier) ? ambient_light_multiplier : multiplier
 
-	update_ambient_light()
+	// If we haven't initialized our corners yet, do that instead to avoid ambience double-init.
+	if (!corners || !lighting_corners_initialised)
+		generate_missing_corners()
+	else
+		update_ambient_light()
 
 /// Replace one ambient light with another. This is effectively a delta update, but it can be used to pretend that our one channel is doing color blending.
 /turf/proc/replace_ambient_light(old_color, new_color, old_multiplier, new_multiplier = 0)
@@ -79,13 +83,12 @@
 	ambient_light_old_g += lg
 	ambient_light_old_b += lb
 
-	if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
-		if (!corners || !lighting_corners_initialised)
-			generate_missing_corners()
+	if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src) && (!corners || !lighting_corners_initialised))
+		generate_missing_corners()
 
-		// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.
-		for (var/datum/lighting_corner/C in corners)
-			C.update_ambient_lumcount(lr, lg, lb, !update)
+	// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.
+	for (var/datum/lighting_corner/C in corners)
+		C.update_ambient_lumcount(lr, lg, lb, !update)
 
 	if (!ambient_active)
 		SSlighting.total_ambient_turfs += 1

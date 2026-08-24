@@ -143,8 +143,14 @@
 // This is inlined in lighting_source.dm.
 // Update it too if you change this.
 /turf/proc/generate_missing_corners()
-	// If a turf is dynamically lit, has a light source, or mimics lighting, it needs to have corners created.
-	if (!TURF_IS_DYNAMICALLY_LIT_UNSAFE(src) && !light_source_solo && !light_source_multi && !(z_flags & ZM_ALLOW_LIGHTING))
+	var/is_dyn = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src) || ambient_light
+	if (!is_dyn)
+		for (var/turf/Tneigh as anything in RANGE_TURFS(src, 1))
+			if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(Tneigh))
+				is_dyn = TRUE
+				break
+
+	if (!is_dyn)
 		return
 
 	lighting_corners_initialised = TRUE

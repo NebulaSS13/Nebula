@@ -565,7 +565,7 @@ SUBSYSTEM_DEF(jobs)
 
 	job.post_equip_job_title(H, alt_title || job_title)
 
-	H.client.show_location_blurb(30)
+	H.client?.show_location_blurb(30)
 
 	return H
 

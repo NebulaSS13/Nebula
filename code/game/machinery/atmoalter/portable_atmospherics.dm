@@ -11,6 +11,8 @@
 	var/start_pressure = ONE_ATMOSPHERE
 
 /obj/machinery/portable_atmospherics/get_single_monetary_worth()
+	if(worthless)
+		return 0
 	. = ..()
 	for(var/gas_type, gas_amount in air_contents?.gas)
 		var/decl/material/gas_data = GET_DECL(gas_type)

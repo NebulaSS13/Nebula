@@ -142,4 +142,4 @@
 	. += "A tiny indicator on \the [src] shows it holds [data] good explorer point\s."
 
 /obj/item/disk/survey/get_base_value()
-	. = holographic ? 0 : (sqrt(data) * 5)
+	return sqrt(data) * 5

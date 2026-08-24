@@ -66,7 +66,7 @@ Used In File(s): \code\game\machinery\requests_console.dm
 	<div class="item"><b>Message sent successfully.</b></div>
 	<div class="item">{{:helper.link('Continue', 'arrowthick-1-e', { 'setScreen' : 0 })}}</div>
 {{else data.screen == 5}}
-	<div class="item"><b>An Error occurred. Message not sent.</b></div>
+	<div class="item"><b>An error occurred and your message could not be sent. Retry in 30 seconds. If the issue persists, contact your system administrator for assistance.</b></div>
 	<div class="item">{{:helper.link('Continue', 'arrowthick-1-e', { 'setScreen' : 0 })}}</div>
 {{else data.screen == 6}}
 	<div class="statusDisplay" style="overflow: auto;">
@@ -104,9 +104,9 @@ Used In File(s): \code\game\machinery\requests_console.dm
 	</div>
 {{else}}
 	{{if data.newmessagepriority == 1}}
-		<div class="item"><font color='red'>There are new messages</font></div>
+		<div class="item"><font color='red'>There are new messages.</font></div>
 	{{else data.newmessagepriority == 2}}
-		<div class="item"><font color='red'><b>NEW PRIORITY MESSAGES</b></font></div>
+		<div class="item"><font color='red'><b>NEW PRIORITY MESSAGE!</b></font></div>
 	{{/if}}
 	<div class="item">{{:helper.link('View Messages', data.newmessagepriority ? 'mail-closed' : 'mail-open', { 'setScreen' : 6 })}}</div>
 	<br>

@@ -108,16 +108,6 @@
 		S.add_ion_law(law)
 		S.show_laws()
 
-	for(var/z in affecting_z)
-		var/obj/machinery/network/message_server/MS = get_message_server_for_z(z)
-		if(MS)
-			MS.spamfilter.Cut()
-			var/i
-			for (i = 1, i <= MS.spamfilter_limit, i++)
-				MS.spamfilter += pick("kitty","HONK","rev","malf","liberty","freedom","drugs", "[global.using_map.station_short]", \
-					"admin","ponies","heresy","meow","Pun Pun","monkey","Ian","moron","pizza","message","spam",\
-					"director", "Hello", "Hi!"," ","nuke","crate","dwarf","xeno")
-
 /datum/event/ionstorm/tick()
 	if(botEmagChance)
 		for(var/mob/living/bot/bot in global.living_mob_list_)

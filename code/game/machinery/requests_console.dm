@@ -107,7 +107,7 @@ var/global/req_console_information = list()
 
 	data["message"] = message
 	data["recipient"] = recipient
-	data["priortiy"] = priority
+	data["priority"] = priority
 	data["msgStamped"] = msgStamped
 	data["msgVerified"] = msgVerified
 	data["announceAuth"] = announceAuth

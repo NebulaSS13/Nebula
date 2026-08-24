@@ -998,7 +998,7 @@
 /turf/floor/plating/airless,
 /area/constructionsite/hallway/fore)
 "dw" = (
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/hallway/fore)
 "dx" = (
 /obj/random/junk,
@@ -1048,7 +1048,7 @@
 /obj/machinery/door/airlock/glass/command{
 	name = "Bridge"
 	},
-/turf/floor/holofloor/tiled/dark,
+/turf/floor/tiled/dark,
 /area/constructionsite/hallway/fore)
 "dI" = (
 /obj/machinery/door/airlock/glass{
@@ -2916,7 +2916,7 @@
 /turf/floor/tiled/dark/airless,
 /area/constructionsite)
 "kt" = (
-/obj/machinery/power/breakerbox,
+/obj/machinery/breakerbox,
 /turf/floor/plating/airless,
 /area/constructionsite)
 "ku" = (
@@ -3321,10 +3321,8 @@
 /turf/floor/plating/airless,
 /area/AIsattele)
 "lZ" = (
-/obj/machinery/emitter{
-	anchored = 1;
-	dir = 4;
-	state = 2
+/obj/machinery/emitter/anchored{
+	dir = 4
 	},
 /turf/floor/plating/airless,
 /area/constructionsite/engineering)
@@ -3333,10 +3331,8 @@
 /turf/floor/plating/airless,
 /area/constructionsite/engineering)
 "mb" = (
-/obj/machinery/emitter{
-	anchored = 1;
-	dir = 8;
-	state = 2
+/obj/machinery/emitter/anchored{
+	dir = 8
 	},
 /turf/floor/plating/airless,
 /area/constructionsite/engineering)

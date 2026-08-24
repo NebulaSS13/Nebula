@@ -4191,7 +4191,7 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "ib" = (
-/obj/machinery/power/breakerbox/activated,
+/obj/machinery/breakerbox/activated,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},

@@ -12,6 +12,7 @@
 	bakes_into_at_temperature = T0C+500
 	bakes_into_material = /decl/material/solid/carbon
 */
+	wall_damage_threshold = 5
 
 /decl/material/solid/organic/plastic
 	name = "plastic"
@@ -75,7 +76,7 @@
 /decl/material/solid/organic/plastic/holographic
 	name = "holographic plastic"
 	uid = "solid_holographic_plastic"
-	holographic = TRUE
+	visual_only = TRUE
 
 /decl/material/solid/organic/cardboard
 	name = "cardboard"
@@ -216,7 +217,6 @@
 	dug_drop_type = /obj/item/stack/material/slab
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
-	fishing_bait_value = 0.75
 	allergen_flags = ALLERGEN_VEGETABLE
 	exoplanet_rarity_plant = MAT_RARITY_MUNDANE
 

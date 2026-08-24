@@ -5,6 +5,7 @@
 	icon            = 'icons/turf/flooring/sand.dmi'
 	icon_base       = "sand"
 	icon_edge_layer = FLOOR_EDGE_SAND
+	color           = null // autoset from material
 	has_base_range  = 4
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	force_material  = /decl/material/solid/sand
@@ -43,7 +44,7 @@
 /decl/flooring/sand/fake
 	name            = "holosand"
 	desc            = "Uncomfortably coarse and gritty for a hologram."
-	holographic     = TRUE
+	visual_only     = TRUE
 	uid             = "floor_sand_fake"
 
 /decl/flooring/fake_space
@@ -52,7 +53,7 @@
 	icon            = 'icons/turf/flooring/fake_space.dmi'
 	icon_base       = "space"
 	has_base_range  = 25
-	holographic     = TRUE
+	visual_only     = TRUE
 	gender          = NEUTER
 	uid             = "floor_space_fake"
 

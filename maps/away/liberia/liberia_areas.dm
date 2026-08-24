@@ -1,4 +1,5 @@
 /area/liberia
+	abstract_type = /area/liberia
 	req_access = list(access_merchant)
 
 /area/liberia/dockinghall

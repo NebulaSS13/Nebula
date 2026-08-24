@@ -23,18 +23,13 @@
 
 	// These areas are used specifically by code and need to be broken out somehow
 	var/list/area_usage_test_exempted_areas = list(
-		/area/ship,
-		/area/hallway,
-		/area/maintenance,
 		/area/overmap,
-		/area/shuttle,
 		/area/template_noop
 	)
 
 	var/list/area_usage_test_exempted_root_areas = list(
 		/area/map_template,
 		/area/exoplanet,
-		/area/turbolift
 	)
 
 	var/list/area_purity_test_exempt_areas = list()

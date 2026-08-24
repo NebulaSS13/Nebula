@@ -135,12 +135,8 @@
 	. = ..()
 
 /obj/machinery/atmospherics/pipe/deconstruction_pressure_check()
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-
-	if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
-		return FALSE
-	return TRUE
+	// this uses !over instead of under so that it's <= instead of <
+	return !check_internal_pressure_difference_over(2 ATM)
 
 /obj/machinery/atmospherics/pipe/cannot_transition_to(state_path, mob/user)
 	if(state_path == /decl/machine_construction/default/deconstructed)

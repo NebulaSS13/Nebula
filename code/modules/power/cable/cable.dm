@@ -44,7 +44,7 @@ var/global/list/obj/structure/cable/all_cables = list()
 	var/d1
 	var/d2
 	var/datum/powernet/powernet
-	var/obj/machinery/power/breakerbox/breaker_box
+	var/obj/machinery/breakerbox/breaker_box
 
 /obj/structure/cable/drain_power(var/drain_check, var/surge, var/amount = 0)
 

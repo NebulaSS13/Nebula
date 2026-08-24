@@ -22,9 +22,6 @@
 	difficulty             = MAT_VALUE_VERY_HARD_DIY
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
-/decl/stack_recipe/planks/fishing_rod
-	result_type            = /obj/item/fishing_rod
-
 /decl/stack_recipe/planks/stick
 	result_type            = /obj/item/stick
 	difficulty             = MAT_VALUE_EASY_DIY
@@ -250,4 +247,12 @@
 
 /decl/stack_recipe/planks/furniture/target_stake
 	result_type            = /obj/structure/target_stake
+	difficulty             = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/planks/furniture/fence
+	result_type            = /obj/structure/fence/plank
+	difficulty             = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/planks/furniture/fence_door
+	result_type            = /obj/structure/fence/door/plank
 	difficulty             = MAT_VALUE_NORMAL_DIY

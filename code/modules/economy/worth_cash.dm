@@ -42,7 +42,7 @@
 		update_from_worth()
 
 /obj/item/cash/get_base_value()
-	. = holographic ? 0 : absolute_worth
+	return absolute_worth
 
 /obj/item/cash/proc/set_currency(var/new_currency)
 	currency = new_currency
@@ -245,7 +245,7 @@
 			. += SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [floor(loaded_worth / cur.absolute_value)].")
 
 /obj/item/charge_stick/get_base_value()
-	. = holographic ? 0 : loaded_worth
+	return loaded_worth
 
 /obj/item/charge_stick/attackby(var/obj/item/used_item, var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)

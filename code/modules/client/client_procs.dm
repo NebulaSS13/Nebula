@@ -430,23 +430,16 @@ var/global/list/localhost_addresses = list(
 	if(world.byond_version >= 511 && byond_version >= 511 && client_fps >= CLIENT_MIN_FPS && client_fps <= CLIENT_MAX_FPS)
 		vars["fps"] = client_fps
 
-/client/MouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
-	. = ..()
-	var/mob/living/M = mob
-	if(istype(M))
-		M.OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
-
 /client/MouseUp(object, location, control, params)
 	. = ..()
-	var/mob/living/M = mob
-	if(istype(M))
-		M.OnMouseUp(object, location, control, params)
+	if(mob?.on_mouse_up())
+		_block_next_click = TRUE
 
 /client/MouseDown(object, location, control, params)
 	. = ..()
 	var/mob/living/M = mob
 	if(istype(M) && !M.in_throw_mode)
-		M.OnMouseDown(object, location, control, params)
+		M.on_mouse_down(object, location, control, params)
 
 /client/verb/SetWindowIconSize(var/val as num|text)
 	set hidden = 1
@@ -599,6 +592,12 @@ var/global/const/MAX_VIEW = 41
 		winset(src, "mainwindow.split", "splitter=[pct]")
 
 /client/Click(atom/A)
+
+	// Mouse drag safeguard against a trailing Click() called after MouseUp().
+	if(_block_next_click)
+		_block_next_click = FALSE
+		return
+
 	if(!user_acted(src))
 		return
 

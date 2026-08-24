@@ -25,6 +25,7 @@
 	ore_result_amount = 4
 	sound_manipulate = 'sound/foley/rockscrape.ogg'
 	sound_dropped    = 'sound/foley/rockscrape.ogg'
+	wall_damage_threshold = 10
 	var/image/texture
 
 /decl/material/solid/stone/Initialize()

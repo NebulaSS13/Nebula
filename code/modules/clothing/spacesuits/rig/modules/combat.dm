@@ -237,6 +237,15 @@
 	gun.Fire(target,holder.wearer)
 	return 1
 
+/obj/item/rig_module/mounted/wielder_mouse_drag_held(mob/user, atom/target)
+	return istype(gun) ? gun.wielder_mouse_drag_held(user, target) : ..()
+
+/obj/item/rig_module/mounted/wielder_mouse_drag_up(mob/user, atom/target)
+	return istype(gun) ? gun.wielder_mouse_drag_up(user, target) : ..()
+
+/obj/item/rig_module/mounted/wielder_mouse_drag_down(mob/user, object, location, control, params)
+	return istype(gun) ? gun.wielder_mouse_drag_down(user, object, location, control, params) : ..()
+
 /obj/item/rig_module/mounted/lcannon
 
 	name = "mounted laser cannon"

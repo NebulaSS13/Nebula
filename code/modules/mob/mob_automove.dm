@@ -25,7 +25,6 @@
 /mob/failed_automove()
 	..()
 	stop_automove()
-	_automove_target = null
 	return FALSE
 
 /mob/start_automove(target, movement_type, datum/automove_metadata/metadata)
@@ -63,4 +62,4 @@
 
 // We do some early checking here to avoid doing the same checks repeatedly by calling SelfMove().
 /mob/can_do_automated_move(variant_move_delay)
-	. = MayMove() && !incapacitated() && (!istype(ai) || ai.can_do_automated_move())
+	. = ..() && !incapacitated() && (!istype(ai) || ai.can_do_automated_move())

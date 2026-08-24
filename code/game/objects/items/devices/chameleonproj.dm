@@ -102,7 +102,7 @@
 	density = FALSE
 	anchored = TRUE
 	is_spawnable_type = FALSE
-	movement_handlers = list(/datum/movement_handler/delay/chameleon_projector)
+	movement_handlers = list(/datum/movement_handler/delay/chameleon_projector = list(2.5 SECONDS))
 	var/obj/item/chameleon/master = null
 
 /obj/effect/dummy/chameleon/Initialize(mapload, var/obj/item/chameleon/projector)
@@ -151,9 +151,6 @@
 	var/turf/my_turf = loc
 	if(!my_turf.get_supporting_platform() && !(locate(/obj/structure/lattice) in loc))
 		disrupted()
-
-/datum/movement_handler/delay/chameleon_projector
-	delay = 2.5 SECONDS
 
 /datum/movement_handler/delay/chameleon_projector/MayMove(mob/mover, is_external)
 	return host.loc?.has_gravity() ? ..() : MOVEMENT_STOP

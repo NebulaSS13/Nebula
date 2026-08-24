@@ -44,12 +44,6 @@
 		auto_align(used_item, click_params)
 		return TRUE
 
-/obj/structure/rack/holorack/dismantle_structure(mob/user)
-	material = null
-	reinf_material = null
-	parts_type = null
-	. = ..()
-
 /obj/structure/rack/dark
 	color = COLOR_GRAY40
 

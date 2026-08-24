@@ -12,9 +12,9 @@
 	holding.canremove = FALSE
 	if(!origin_tech)
 		origin_tech = holding.get_origin_tech()
-	events_repository.register(/decl/observ/moved, holding, src, /obj/item/organ/internal/augment/active/simple/proc/check_holding)
-	events_repository.register(/decl/observ/destroyed, holding, src, /obj/item/organ/internal/augment/active/simple/proc/check_holding)
-	events_repository.register(/decl/observ/item_unequipped, holding, src, /obj/item/organ/internal/augment/active/simple/proc/check_holding)
+	events_repository.register(/decl/observ/moved, holding, src, PROC_REF(check_holding))
+	events_repository.register(/decl/observ/destroyed, holding, src, PROC_REF(check_holding))
+	events_repository.register(/decl/observ/item_unequipped, holding, src, PROC_REF(check_holding))
 
 /obj/item/organ/internal/augment/active/simple/proc/check_holding()
 
