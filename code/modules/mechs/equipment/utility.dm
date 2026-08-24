@@ -39,7 +39,7 @@
 			return
 		if(istype(target, /obj))
 			var/obj/O = target
-			if(O.buckled_mob)
+			if(O.has_buckled_mob())
 				return
 			if(locate(/mob/living) in O)
 				to_chat(user, SPAN_WARNING("You can't load living things into the cargo compartment."))
@@ -106,7 +106,7 @@
 
 			owner.visible_message(SPAN_NOTICE("\The [owner] begins loading \the [O]."))
 			if(do_after(owner, 20, O, 0, 1))
-				if((O in carrying) || O.buckled_mob || O.anchored || (locate(/mob/living) in O)) //Repeat checks
+				if((O in carrying) || O.has_buckled_mob() || O.anchored || (locate(/mob/living) in O)) //Repeat checks
 					return
 				if(length(carrying) >= carrying_capacity)
 					to_chat(user, SPAN_WARNING("\The [src] is fully loaded!"))

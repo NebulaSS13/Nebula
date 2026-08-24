@@ -5,7 +5,7 @@
 	icon_state = "bike_off"
 	dir = SOUTH
 	load_item_visible = 1
-	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
+	_buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
 	max_health = 100
 	locked = 0
 	fire_dam_coeff = 0.6
@@ -187,10 +187,14 @@
 	..()
 
 /obj/vehicle/bike/bullet_act(var/obj/item/projectile/Proj)
-	if(buckled_mob && prob((100-protection_percent)))
-		buckled_mob.bullet_act(Proj)
-		return
-	..()
+	var/hit_pilot = FALSE
+	for(var/mob/buckle_mob in get_buckled_mobs())
+		if(prob((100-protection_percent)))
+			buckle_mob.bullet_act(Proj)
+			hit_pilot = TRUE
+			break
+	if(!hit_pilot)
+		..()
 
 /obj/vehicle/bike/on_update_icon()
 	overlays.Cut()

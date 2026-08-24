@@ -4,7 +4,7 @@
 	icon = 'icons/obj/structures/furniture/chair.dmi'
 	icon_state = ICON_STATE_WORLD + "_preview"
 	anchored = TRUE
-	can_buckle = TRUE
+	can_buckle_mobs = 1
 	buckle_lying = FALSE // force people to sit up in chairs when buckled
 	buckle_sound = 'sound/effects/buckle.ogg'
 	material = DEFAULT_FURNITURE_MATERIAL
@@ -30,7 +30,7 @@
 		get_or_create_extension(src, padding_extension_type, initial_padding_material, initial_padding_color)
 
 /obj/structure/chair/do_simple_ranged_interaction(var/mob/user)
-	if(!buckled_mob && user)
+	if(!has_buckled_mob() && user)
 		rotate(user)
 	return TRUE
 
@@ -66,7 +66,7 @@
 	var/base_color = get_color()
 	var/datum/extension/padding/padding_extension = get_extension(src, __IMPLIED_TYPE__)
 	var/use_padding_color = padding_extension?.get_padding_color(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-	var/use_layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
+	var/use_layer = has_buckled_mob() ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 
 	var/image/I = overlay_image(icon, "[icon_state]_over", base_color, RESET_COLOR)
 	I.layer = use_layer
@@ -210,41 +210,41 @@
 
 /obj/structure/chair/office/Move()
 	. = ..()
-	if(buckled_mob)
-		var/mob/living/occupant = buckled_mob
-		if (occupant && (src.loc != occupant.loc))
-			if (propelled)
-				for (var/mob/O in src.loc)
-					if (O != occupant)
-						Bump(O)
-			else
-				unbuckle_mob()
+	if(has_buckled_mob())
+		for(var/mob/living/occupant in get_buckled_mobs())
+			if (occupant && (src.loc != occupant.loc))
+				if (propelled)
+					for (var/mob/O in src.loc)
+						if (O != occupant)
+							Bump(O)
+				else
+					unbuckle_mob(occupant)
 
 /obj/structure/chair/office/Bump(atom/A)
 	..()
-	if(!buckled_mob)
+	if(!has_buckled_mob())
 		return
 
 	if(propelled)
-		var/mob/living/occupant = unbuckle_mob()
-
-		var/def_zone = ran_zone()
-		var/blocked = 100 * occupant.get_blocked_ratio(def_zone, BRUTE, damage = 10)
-		occupant.throw_at(A, 3, propelled)
-		occupant.apply_effect(6, STUN, blocked)
-		occupant.apply_effect(6, WEAKEN, blocked) //#TODO: geez that might be a bit overkill
-		occupant.apply_effect(6, STUTTER, blocked)
-		occupant.apply_damage(10, BRUTE, def_zone)
-		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
-		if(isliving(A))
-			var/mob/living/victim = A
-			def_zone = ran_zone()
-			blocked = 100 * victim.get_blocked_ratio(def_zone, BRUTE, damage = 10)
-			victim.apply_effect(6, STUN, blocked)
-			victim.apply_effect(6, WEAKEN, blocked)  //#TODO: geez that might be a bit overkill
-			victim.apply_effect(6, STUTTER, blocked)
-			victim.apply_damage(10, BRUTE, def_zone)
-		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
+		while(has_buckled_mob())
+			var/mob/living/occupant = unbuckle_mob()
+			var/def_zone = ran_zone()
+			var/blocked = 100 * occupant.get_blocked_ratio(def_zone, BRUTE, damage = 10)
+			occupant.throw_at(A, 3, propelled)
+			occupant.apply_effect(6, STUN, blocked)
+			occupant.apply_effect(6, WEAKEN, blocked) //#TODO: geez that might be a bit overkill
+			occupant.apply_effect(6, STUTTER, blocked)
+			occupant.apply_damage(10, BRUTE, def_zone)
+			playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
+			if(isliving(A))
+				var/mob/living/victim = A
+				def_zone = ran_zone()
+				blocked = 100 * victim.get_blocked_ratio(def_zone, BRUTE, damage = 10)
+				victim.apply_effect(6, STUN, blocked)
+				victim.apply_effect(6, WEAKEN, blocked)  //#TODO: geez that might be a bit overkill
+				victim.apply_effect(6, STUTTER, blocked)
+				victim.apply_damage(10, BRUTE, def_zone)
+			occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/chair/office/light
 	initial_padding_color = "#f0f0f0"
@@ -316,7 +316,7 @@
 
 /obj/structure/chair/shuttle/get_base_icon()
 	. = ..()
-	if (buckled_mob)
+	if (has_buckled_mob())
 		. += "_buckled"
 
 /obj/structure/chair/shuttle/blue

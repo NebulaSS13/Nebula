@@ -1,5 +1,5 @@
 /obj/structure/vehicle
-	can_buckle     = TRUE
+	can_buckle_mobs     = 1
 	buckle_lying   = FALSE // force people to sit up when buckled to it
 	buckle_sound   = 'sound/effects/buckle.ogg'
 	buckle_movable = TRUE
@@ -16,7 +16,7 @@
 	var/requires_fluid_depth
 	var/key_type
 
-/obj/structure/vehicle/proc/check_pilot_can_pilot(mob/user/pilot)
+/obj/structure/vehicle/proc/check_pilot_can_pilot(mob/living/pilot)
 	return TRUE
 
 /obj/structure/vehicle/attackby(obj/item/used_item, mob/user)
@@ -33,7 +33,7 @@
 
 /obj/structure/vehicle/relaymove(mob/user, direction)
 	if(user.incapacitated(INCAPACITATION_DISRUPTED))
-		unbuckle_mob()
+		unbuckle_mob(user)
 	user.glide_size = glide_size
 	step(src, direction)
 	set_dir(direction)

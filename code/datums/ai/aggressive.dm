@@ -98,13 +98,15 @@
 		lose_target()
 		return
 
-	if(isliving(target) && body.buckled_mob == target && (!body.faction || body.buckled_mob.faction != body.faction))
-		body.visible_message(SPAN_DANGER("\The [body] attempts to unseat \the [body.buckled_mob]!"))
+	// TODO: update this to handle being ridden by an enemy we are not targeting; maybe update target to that mob prior to this block.
+	var/mob/living/target_mob = target
+	if(istype(target_mob) && (target in body.get_buckled_mobs()) && (!body.faction || target_mob.faction != body.faction))
+		body.visible_message(SPAN_DANGER("\The [body] attempts to unseat \the [target]!"))
 		body.set_dir(pick(global.cardinal))
 		body.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(prob(33))
-			body.unbuckle_mob()
-			if(body.buckled_mob != target && !QDELETED(target))
+			body.unbuckle_mob(target)
+			if(!(target in body.get_buckled_mobs()) && !QDELETED(target))
 				to_chat(target, SPAN_DANGER("You are thrown off \the [body]!"))
 				var/mob/living/victim = target
 				SET_STATUS_MAX(victim, STAT_WEAK, 3)

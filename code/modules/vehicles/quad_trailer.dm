@@ -12,7 +12,7 @@
 	load_item_visible = 1
 	load_offset_x = 0
 	load_offset_y = 13
-	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 16)
+	_buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 16)
 	pixel_x = -16
 	paint_color = "#ffffff"
 	var/mob_offset_y = 16

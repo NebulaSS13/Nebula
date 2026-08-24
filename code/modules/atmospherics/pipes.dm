@@ -8,7 +8,7 @@
 	stat_immune = NOSCREEN | NOINPUT | NOPOWER
 	interact_offline = TRUE //Needs to be set so that pipes don't say they lack power in their description
 
-	can_buckle = TRUE
+	can_buckle_mobs = 1
 	buckle_require_restraints = 1
 	buckle_lying = -1
 	build_icon_state = "simple"

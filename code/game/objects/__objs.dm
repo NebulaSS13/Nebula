@@ -225,7 +225,7 @@
 	return w_class
 
 /obj/get_mob()
-	return buckled_mob
+	return get_buckled_mob()
 
 /obj/set_dir(ndir)
 	. = ..()

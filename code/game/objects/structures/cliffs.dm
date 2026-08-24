@@ -208,8 +208,9 @@ two tiles on initialization, and which way a cliff is facing may change during m
 			safe_fall = TRUE
 
 	// Buckled people can't react to save themselves, if they're not on a vehicle.
-	if(!istype(mover, /obj/vehicle) && !isexosuit(mover) && !faller && mover.buckled_mob)
-		faller = mover.buckled_mob
+	// TODO: revisit this for multi-buckle structures
+	if(!istype(mover, /obj/vehicle) && !isexosuit(mover) && !faller && mover.has_buckled_mob())
+		faller = mover.get_buckled_mob()
 
 	if(safe_fall)
 		visible_message(SPAN_NOTICE("\The [mover] glides down from \the [src]."))
@@ -229,10 +230,10 @@ two tiles on initialization, and which way a cliff is facing may change during m
 			vehicle.take_damage(40 * harm)
 			vehicle.visible_message(SPAN_WARNING("\The [vehicle] absorbs some of the impact, damaging it."))
 			harm = round(harm * 0.5)
-			if(vehicle.buckled_mob)
-				var/damage = clamp(vehicle.buckled_mob.get_max_health() * 0.4, 20, 100)
-				vehicle.buckled_mob.take_damage(damage * harm, BRUTE, inflicter = src)
-				shake_camera(vehicle.buckled_mob, 1, 1)
+			for(var/mob/buckle_mob in vehicle.get_buckled_mobs())
+				var/damage = clamp(buckle_mob.get_max_health() * 0.4, 20, 100)
+				buckle_mob.take_damage(damage * harm, BRUTE, inflicter = src)
+				shake_camera(buckle_mob, 1, 1)
 		else if(isexosuit(mover))
 			var/mob/living/exosuit/Mech = mover
 			harm = round(harm * 0.5)
