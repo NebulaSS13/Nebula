@@ -1,8 +1,8 @@
 /mob/living/death(gibbed)
 	. = ..()
 	if(.)
-		if(buckled_mob)
-			unbuckle_mob()
+		if(has_buckled_mob())
+			unbuckle_mobs()
 		if(hiding)
 			hiding = FALSE
 		var/obj/item/rig/rig = get_rig()

@@ -14,7 +14,7 @@
 
 /obj/structure/vehicle/janicart/Initialize()
 	// Handled in init due to dirs needing to be stringified
-	buckle_pixel_shift = list(
+	_buckle_pixel_shift = list(
 		"[NORTH]" = list("x" =   0, "y" = 4, "z" = 0),
 		"[SOUTH]" = list("x" =   0, "y" = 7, "z" = 0),
 		"[EAST]"  = list("x" = -13, "y" = 7, "z" = 0),
@@ -57,9 +57,9 @@
 	return TRUE
 
 /obj/structure/vehicle/janicart/bullet_act(var/obj/item/projectile/Proj)
-	if(buckled_mob)
+	for(var/mob/buckle_mob in get_buckled_mobs())
 		if(prob(85))
-			return buckled_mob.bullet_act(Proj)
+			return buckle_mob.bullet_act(Proj)
 	visible_message(SPAN_WARNING("\The [Proj] ricochets off the [vehicle_name || name]!"))
 
 /obj/item/janicart_key

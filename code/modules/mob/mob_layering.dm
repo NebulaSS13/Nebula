@@ -57,7 +57,7 @@
 	. = ..()
 
 /mob/living/simple_animal/get_base_layer()
-	if(buckled_mob)
+	if(has_buckled_mob())
 		return UNDER_MOB_LAYER
 	return ..()
 
@@ -107,8 +107,8 @@
 		// Check for catwalks/supporting platforms.
 
 		// Update offsets from our buckled atom.
-		if(buckled && buckled.buckle_pixel_shift)
-			var/list/pixel_shift = buckled.buckle_pixel_shift
+		var/list/pixel_shift = buckled?.get_buckled_pixel_shift(buckled.get_buckled_position(src))
+		if(pixel_shift)
 			if(istext(pixel_shift))
 				pixel_shift = cached_json_decode(pixel_shift)
 			if(islist(pixel_shift))

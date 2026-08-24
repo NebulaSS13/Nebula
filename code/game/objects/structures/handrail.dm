@@ -5,13 +5,13 @@
 	desc = "A safety railing with buckles to secure yourself to when floor isn't stable enough."
 	density = FALSE
 	anchored = TRUE
-	can_buckle = TRUE
+	can_buckle_mobs = 1
 	buckle_sound = 'sound/effects/buckle.ogg'
 	buckle_allow_rotation = TRUE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 /obj/structure/handrail/attack_hand(mob/user)
-	if(!can_buckle || buckled_mob || !istype(user) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
+	if(!can_buckle_mobs || has_buckled_mob() || !istype(user) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	user_buckle_mob(user, user)
 	return TRUE

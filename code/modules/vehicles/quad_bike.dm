@@ -8,7 +8,7 @@
 	locked = 0
 	load_item_visible = 1
 	load_offset_x = 0
-	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
+	_buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
 	pixel_x = -16
 	base_speed = 0.45
 	car_limit = 1	//It gets a trailer. That's about it.

@@ -6,7 +6,7 @@
 	icon = 'icons/obj/structures/rollerbed.dmi'
 	icon_state = "down"
 	anchored = FALSE
-	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 6)
+	_buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 6)
 	movable_flags = MOVABLE_FLAG_WHEELED
 	tool_interaction_flags = 0
 	padding_extension_type = null // Cannot be padded.
@@ -45,7 +45,7 @@
 	return ..()
 
 /obj/structure/bed/roller/attack_hand(mob/user)
-	if(!beaker || buckled_mob || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
+	if(!beaker || has_buckled_mob() || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	remove_beaker(user)
 	return TRUE
@@ -57,7 +57,7 @@
 
 /obj/structure/bed/roller/post_buckle_mob(mob/living/M)
 	. = ..()
-	if(M == buckled_mob)
+	if(M in get_buckled_mobs())
 		set_density(1)
 		queue_icon_update()
 	else
@@ -67,7 +67,7 @@
 		queue_icon_update()
 
 /obj/structure/bed/roller/Process()
-	if(!iv_attached || !buckled_mob || !beaker)
+	if(!iv_attached || !has_buckled_mob() || !beaker)
 		return PROCESS_KILL
 
 	//SSObj fires twice as fast as SSMobs, so gotta slow down to not OD our victims.
@@ -75,8 +75,9 @@
 		return
 
 	if(REAGENT_TOTAL_VOLUME(beaker.reagents) > 0)
-		beaker.reagents.trans_to_mob(buckled_mob, beaker.amount_per_transfer_from_this, CHEM_INJECT)
-		queue_icon_update()
+		for(var/mob/patient in get_buckled_mobs())
+			beaker.reagents.trans_to_mob(patient, beaker.amount_per_transfer_from_this, CHEM_INJECT)
+			queue_icon_update()
 
 /obj/structure/bed/roller/proc/remove_beaker(mob/user)
 	to_chat(user, "You detach \the [beaker] to \the [src].")
@@ -101,21 +102,21 @@
 
 /obj/structure/bed/roller/handle_mouse_drop(atom/over, mob/user, params)
 	if(ishuman(user) || isrobot(user))
-		if(over == buckled_mob && beaker)
+		if((over in get_buckled_mobs()) && beaker)
 			if(iv_attached)
-				detach_iv(buckled_mob, user)
+				detach_iv(over, user)
 			else
-				attach_iv(buckled_mob, user)
+				attach_iv(over, user)
 			return TRUE
 	if(ishuman(over))
 		var/mob/M = over
 		if(loc == M.loc && user_buckle_mob(M, user))
-			attach_iv(buckled_mob, user)
+			attach_iv(M, user)
 			return TRUE
 	if(beaker)
 		remove_beaker(user)
 		return TRUE
-	if(!buckled_mob)
+	if(!has_buckled_mob())
 		collapse(user)
 		return TRUE
 	. = ..()

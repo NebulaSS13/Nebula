@@ -11,7 +11,7 @@
 	atom_flags       = 0 // no painting
 	maximum_pressure = 360 ATM
 	fatigue_pressure = 300 ATM
-	can_buckle       = TRUE
+	can_buckle_mobs       = 1
 	buckle_lying     = TRUE
 	appearance_flags = KEEP_TOGETHER
 
@@ -82,14 +82,14 @@
 			parent.temperature_interact(turf, gas_volume, thermal_conductivity)
 
 	// Burn mobs buckled to this pipe.
-	if(buckled_mob)
+	for(var/mob/buckle_mob in get_buckled_mobs())
 		var/hc = pipe_air.heat_capacity()
-		var/avg_temp = (pipe_air.temperature * hc + buckled_mob.bodytemperature * 3500) / (hc + 3500)
+		var/avg_temp = (pipe_air.temperature * hc + buckle_mob.bodytemperature * 3500) / (hc + 3500)
 		pipe_air.temperature = avg_temp
-		buckled_mob.bodytemperature = avg_temp
-		var/heat_limit = buckled_mob.get_mob_temperature_threshold(HEAT_LEVEL_3)
+		buckle_mob.bodytemperature = avg_temp
+		var/heat_limit = buckle_mob.get_mob_temperature_threshold(HEAT_LEVEL_3)
 		if(pipe_air.temperature > heat_limit + 1)
-			buckled_mob.apply_damage(4 * log(pipe_air.temperature - heat_limit), BURN, BP_CHEST, used_weapon = "Excessive Heat")
+			buckle_mob.apply_damage(4 * log(pipe_air.temperature - heat_limit), BURN, BP_CHEST, used_weapon = "Excessive Heat")
 
 	//fancy radiation glowing
 	if(pipe_air.temperature && (icon_temperature > 500 || pipe_air.temperature > 500)) //start glowing at 500K

@@ -266,7 +266,7 @@
 				victim.standard_weapon_hit_effects(S, user, S.expend_attack_force()*2, BP_HEAD)
 		qdel(grab)
 		return TRUE
-	else if(can_buckle && !buckled_mob && istype(victim) && istype(user))
+	else if(can_buckle_mobs && !has_buckled_mob() && istype(victim) && istype(user))
 		user.visible_message(SPAN_NOTICE("\The [user] attempts to put \the [victim] onto \the [src]!"))
 		if(do_after(user, 2 SECONDS, src) && !QDELETED(victim) && !QDELETED(user) && !QDELETED(grab) && user_buckle_mob(victim, user))
 			qdel(grab)
