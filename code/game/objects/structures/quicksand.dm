@@ -6,7 +6,7 @@
 	icon_state = "open"
 	density = FALSE
 	anchored = TRUE
-	can_buckle_mobs = 1
+	max_buckled_mobs = 1
 	buckle_dir = SOUTH
 	var/exposed = 0
 	var/busy
@@ -18,7 +18,7 @@
 		return INITIALIZE_HINT_QDEL
 	appearance = T.appearance
 
-/obj/effect/quicksand/user_unbuckle_mob(mob/user)
+/obj/effect/quicksand/user_unbuckle_mob(mob/user, mob/living/unbuckling_mob)
 	if(has_buckled_mob() && !user.stat && !user.restrained())
 		var/mob/victim = get_buckled_mob(user = user)
 		if(busy)

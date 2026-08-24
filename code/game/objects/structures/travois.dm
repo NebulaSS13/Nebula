@@ -7,7 +7,7 @@
 	anchored = FALSE
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/obj/structures/travois.dmi'
-	can_buckle_mobs = 1
+	max_buckled_mobs = 1
 	buckle_dir = SOUTH
 	buckle_lying = TRUE
 	buckle_sound = 'sound/effects/buckle.ogg'

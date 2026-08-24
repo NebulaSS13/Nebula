@@ -26,7 +26,7 @@
 /obj/structure/chair/wheelchair/attack_hand(mob/user)
 	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
 		return ..()
-	user_unbuckle_mob(user)
+	user_unbuckle_mob(user, ((user in get_buckled_mobs()) ? user : null))
 	return TRUE
 
 /obj/structure/chair/wheelchair/Bump(atom/A)

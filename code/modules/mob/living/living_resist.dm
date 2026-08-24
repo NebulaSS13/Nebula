@@ -10,7 +10,7 @@
 		return
 
 	if(!restrained())
-		if(buckled.can_buckle_mobs)
+		if(buckled.max_buckled_mobs)
 			buckled.user_unbuckle_mob(src)
 		else
 			to_chat(src, "<span class='warning'>You can't seem to escape from \the [buckled]!</span>")

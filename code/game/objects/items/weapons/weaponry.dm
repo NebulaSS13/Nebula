@@ -96,7 +96,7 @@
 	opacity = FALSE
 	mouse_opacity = MOUSE_OPACITY_NORMAL
 	anchored = TRUE
-	can_buckle_mobs = 0 //no manual buckling or unbuckling
+	max_buckled_mobs = 0 //no manual buckling or unbuckling
 
 	max_health = 25
 	var/countdown = 15
@@ -203,9 +203,8 @@
 	healthcheck()
 	return TRUE
 
-/obj/effect/energy_net/user_unbuckle_mob(mob/user)
+/obj/effect/energy_net/user_unbuckle_mob(mob/user, mob/living/unbuckling_mob)
 	return escape_net(user)
-
 
 /obj/effect/energy_net/proc/escape_net(mob/user)
 	set waitfor = FALSE
