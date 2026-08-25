@@ -3,7 +3,7 @@
 // Requires 5 seconds to toggle and can be toggled once a minute
 // Used for advanced grid control (read: Substations)
 
-/obj/machinery/power/breakerbox
+/obj/machinery/breakerbox
 	name = "breaker box"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "bbox_off"
@@ -13,7 +13,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	stat_immune = 0
 	uncreated_component_parts = null
-	base_type = /obj/machinery/power/breakerbox
+	base_type = /obj/machinery/breakerbox
 
 	var/icon_state_on = "bbox_on"
 	var/icon_state_off = "bbox_off"
@@ -23,27 +23,27 @@
 	/// If world.time < lock_time, system is locked for interactions.
 	var/lock_time = 0
 
-/obj/machinery/power/breakerbox/activated
+/obj/machinery/breakerbox/activated
 	icon_state = parent_type::icon_state_on
 
 	// Enabled on server startup. Used in substations to keep them in bypass mode.
-/obj/machinery/power/breakerbox/activated/Initialize()
+/obj/machinery/breakerbox/activated/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/machinery/power/breakerbox/activated/LateInitialize()
+/obj/machinery/breakerbox/activated/LateInitialize()
 	set_state(TRUE)
 	. = ..()
 
-/obj/machinery/power/breakerbox/get_examine_strings(mob/user, distance, infix, suffix)
+/obj/machinery/breakerbox/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(on)
 		. += SPAN_GOOD("It seems to be online.")
 	else
 		. += SPAN_WARNING("It seems to be offline.")
 
-/obj/machinery/power/breakerbox/proc/try_toggle_state(mob/living/user, digital = FALSE)
-	if(lock_time < world.time)
+/obj/machinery/breakerbox/proc/try_toggle_state(mob/living/user, digital = FALSE)
+	if(world.time < lock_time) // maybe rename this unlock_time to make it clearer it's the time it unlocks at
 		to_chat(user, SPAN_WARNING("System locked. Please try again later."))
 		return TRUE
 
@@ -68,13 +68,13 @@
 	busy = FALSE
 	return TRUE
 
-/obj/machinery/power/breakerbox/attack_ai(mob/living/silicon/ai/user)
+/obj/machinery/breakerbox/attack_ai(mob/living/silicon/ai/user)
 	return try_toggle_state(user, digital = TRUE)
 
-/obj/machinery/power/breakerbox/physical_attack_hand(mob/user)
+/obj/machinery/breakerbox/physical_attack_hand(mob/user)
 	return try_toggle_state(user, digital = FALSE)
 
-/obj/machinery/power/breakerbox/attackby(obj/item/used_item, mob/user)
+/obj/machinery/breakerbox/attackby(obj/item/used_item, mob/user)
 	if(IS_MULTITOOL(used_item))
 		var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
 		if(!CanPhysicallyInteract(user))
@@ -85,11 +85,11 @@
 		return TRUE
 	return ..()
 
-/obj/machinery/power/breakerbox/on_update_icon()
+/obj/machinery/breakerbox/on_update_icon()
 	. = ..()
 	icon_state = on ? icon_state_on : icon_state_off
 
-/obj/machinery/power/breakerbox/proc/set_state(state)
+/obj/machinery/breakerbox/proc/set_state(state)
 	on = state
 	update_icon()
 	if(on)
@@ -121,7 +121,7 @@
 			qdel(C)
 
 // Used by RCON to toggle the breaker box.
-/obj/machinery/power/breakerbox/proc/auto_toggle()
+/obj/machinery/breakerbox/proc/auto_toggle()
 	if(lock_time > world.time)
 		return FALSE // still on cooldown
 	set_state(!on)

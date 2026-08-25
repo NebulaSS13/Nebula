@@ -60,7 +60,7 @@
 	uid             = "floor_permafrost"
 
 /decl/flooring/permafrost/get_vehicle_transit_delay(obj/vehicle/vehicle)
-	if(holographic)
+	if(visual_only)
 		return vehicle::base_speed
 	if(vehicle.vehicle_transit_type == vehicle::VEHICLE_SNOWMOBILE)
 		return 0.8
@@ -69,6 +69,6 @@
 /decl/flooring/snow/fake
 	name            = "holosnow"
 	desc            = "Not quite the same as snow on an entertainment terminal, but close."
-	holographic     = TRUE
+	visual_only     = TRUE
 	uid             = "floor_snow_fake"
 

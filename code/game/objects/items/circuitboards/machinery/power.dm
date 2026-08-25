@@ -29,7 +29,7 @@
 
 /obj/item/stock_parts/circuitboard/breaker
 	name = "circuitboard (breaker box)"
-	build_path = /obj/machinery/power/breakerbox
+	build_path = /obj/machinery/breakerbox
 	board_type = "machine"
 	origin_tech = @'{"powerstorage":4,"engineering":4}'
 	req_components = list(

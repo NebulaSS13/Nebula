@@ -76,7 +76,7 @@
 /decl/material/solid/organic/plastic/holographic
 	name = "holographic plastic"
 	uid = "solid_holographic_plastic"
-	holographic = TRUE
+	visual_only = TRUE
 
 /decl/material/solid/organic/cardboard
 	name = "cardboard"
@@ -217,7 +217,6 @@
 	dug_drop_type = /obj/item/stack/material/slab
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
-	fishing_bait_value = 0.75
 	allergen_flags = ALLERGEN_VEGETABLE
 	exoplanet_rarity_plant = MAT_RARITY_MUNDANE
 

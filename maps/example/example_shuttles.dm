@@ -29,23 +29,3 @@
 	)
 	ceiling_type = /turf/floor/shuttle_ceiling
 
-/obj/abstract/turbolift_spawner/example
-	name = "Testing Site elevator placeholder"
-	icon = 'icons/obj/turbolift_preview_nowalls_3x3.dmi'
-	depth = 3
-	lift_size_x = 2
-	lift_size_y = 2
-	door_type =     null
-	wall_type =     null
-	firedoor_type = null
-	light_type =    null
-	floor_type =  /turf/floor/tiled/techfloor
-	button_type = /obj/structure/lift/button/standalone
-	panel_type =  /obj/structure/lift/panel/standalone
-	areas_to_use = list(
-		/area/turbolift/example/first,
-		/area/turbolift/example/second,
-		/area/turbolift/example/third
-	)
-	floor_departure_sound = 'sound/effects/lift_heavy_start.ogg'
-	floor_arrival_sound = 'sound/effects/lift_heavy_stop.ogg'

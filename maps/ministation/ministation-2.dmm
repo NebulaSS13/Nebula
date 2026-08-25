@@ -3147,7 +3147,7 @@
 /obj/machinery/door/firedoor{
 	dir = 8
 	},
-/turf/floor/holofloor/lino,
+/turf/floor/lino,
 /area/ministation/telecomms)
 "op" = (
 /obj/machinery/light/small{

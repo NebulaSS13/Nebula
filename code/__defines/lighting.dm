@@ -25,6 +25,11 @@
 #define TURF_IS_AMBIENT_LIT_UNSAFE(T) (T:ambient_active)
 #define TURF_IS_AMBIENT_LIT(T) (isturf(T) && TURF_IS_AMBIENT_LIT_UNSAFE(T))
 
+// These are centered around zero to simplify logic; 'up' is 'is greater than -1', 'down' is 'is less than 0'. 0 matches both conditions.
+#define LIGHTING_CORNER_GENERATE_UP    1
+#define LIGHTING_CORNER_GENERATE_BOTH  0
+#define LIGHTING_CORNER_GENERATE_DOWN -1
+
 // If I were you I'd leave this alone.
 #define LIGHTING_BASE_MATRIX \
 	list            \

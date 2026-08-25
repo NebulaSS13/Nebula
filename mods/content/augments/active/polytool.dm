@@ -14,9 +14,9 @@
 		var/obj/item/I = new path (src)
 		I.canremove = FALSE
 		items += I
-		events_repository.register(/decl/observ/moved, I, src, /obj/item/organ/internal/augment/active/polytool/proc/check_holding)
-		events_repository.register(/decl/observ/destroyed, I, src, /obj/item/organ/internal/augment/active/polytool/proc/check_holding)
-		events_repository.register(/decl/observ/item_unequipped, I, src, /obj/item/organ/internal/augment/active/polytool/proc/check_holding)
+		events_repository.register(/decl/observ/moved, I, src, PROC_REF(check_holding))
+		events_repository.register(/decl/observ/destroyed, I, src, PROC_REF(check_holding))
+		events_repository.register(/decl/observ/item_unequipped, I, src, PROC_REF(check_holding))
 
 /obj/item/organ/internal/augment/active/polytool/Destroy()
 	for(var/obj/item/item in items)

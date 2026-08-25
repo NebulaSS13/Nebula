@@ -6631,7 +6631,7 @@
 /turf/wall/prepainted,
 /area/exodus/maintenance/substation/security)
 "anR" = (
-/obj/machinery/power/breakerbox/activated{
+/obj/machinery/breakerbox/activated{
 	RCon_tag = "Security Substation Bypass"
 	},
 /turf/floor/plating,
@@ -13766,7 +13766,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/substation/civilian_east)
 "aDv" = (
-/obj/machinery/power/breakerbox/activated{
+/obj/machinery/breakerbox/activated{
 	RCon_tag = "Civilian East Substation Bypass"
 	},
 /turf/floor/plating,
@@ -16993,7 +16993,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/obj/machinery/power/breakerbox/activated{
+/obj/machinery/breakerbox/activated{
 	RCon_tag = "Civilian West Substation Bypass"
 	},
 /turf/floor/plating,
@@ -24402,7 +24402,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/locker)
 "bay" = (
-/obj/machinery/power/breakerbox/activated{
+/obj/machinery/breakerbox/activated{
 	RCon_tag = "Medical Substation Bypass"
 	},
 /turf/floor/plating,
@@ -32916,7 +32916,7 @@
 /turf/floor/tiled/white,
 /area/exodus/medical/exam_room)
 "bsa" = (
-/obj/machinery/power/breakerbox/activated{
+/obj/machinery/breakerbox/activated{
 	RCon_tag = "Command Substation Bypass"
 	},
 /obj/machinery/light,
@@ -51093,7 +51093,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/cargo)
 "ccA" = (
-/obj/machinery/power/breakerbox/activated{
+/obj/machinery/breakerbox/activated{
 	RCon_tag = "Research Substation Bypass"
 	},
 /turf/floor/plating,
@@ -53849,7 +53849,7 @@
 /turf/floor/tiled/white/monotile,
 /area/exodus/medical/surgery2)
 "cib" = (
-/obj/machinery/power/breakerbox/activated{
+/obj/machinery/breakerbox/activated{
 	RCon_tag = "Engineering Substation Bypass"
 	},
 /turf/floor/plating,
@@ -61848,10 +61848,8 @@
 /turf/floor/plating,
 /area/exodus/engineering/engine_room)
 "cIa" = (
-/obj/machinery/emitter{
-	anchored = 1;
-	id_tag = "EngineEmitter";
-	state = 2
+/obj/machinery/emitter/anchored{
+	id_tag = "EngineEmitter"
 	},
 /obj/structure/cable/cyan,
 /obj/machinery/power/terminal{

@@ -402,3 +402,9 @@
 #define MM_ATTACK_RESULT_NONE      0
 #define MM_ATTACK_RESULT_DEFLECTED BITFLAG(0)
 #define MM_ATTACK_RESULT_BLOCKED   BITFLAG(1)
+
+// Effectively a speed modifier for how fast pollen is produced by flowering plants. Pollen per second.
+// In theory, one pollen every 5 seconds (at time of writing)
+#define POLLEN_PER_SECOND 0.2
+#define POLLEN_PRODUCTION_MULT (POLLEN_PER_SECOND * (SSplants.wait / 10))
+#define MAX_POLLEN_PER_FLOWER 10

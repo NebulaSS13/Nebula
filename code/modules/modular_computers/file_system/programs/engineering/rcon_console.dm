@@ -44,7 +44,7 @@
 
 	// BREAKER DATA (simplified view)
 	var/list/breakerlist[0]
-	for(var/obj/machinery/power/breakerbox/BR in known_breakers)
+	for(var/obj/machinery/breakerbox/BR in known_breakers)
 		breakerlist.Add(list(list(
 		"RCON_tag" = BR.RCon_tag,
 		"enabled" = BR.on
@@ -90,8 +90,8 @@
 			SMES.set_output(outputset)
 
 	if(href_list["toggle_breaker"])
-		var/obj/machinery/power/breakerbox/toggle = null
-		for(var/obj/machinery/power/breakerbox/breaker in known_breakers)
+		var/obj/machinery/breakerbox/toggle = null
+		for(var/obj/machinery/breakerbox/breaker in known_breakers)
 			if(breaker.RCon_tag == href_list["toggle_breaker"])
 				toggle = breaker
 		if(toggle)
@@ -129,7 +129,7 @@
 	known_SMESs = sortTim(known_SMESs, /proc/cmp_rcon_tag_asc)
 
 	known_breakers = new /list()
-	for(var/obj/machinery/power/breakerbox/breaker in SSmachines.machinery)
+	for(var/obj/machinery/breakerbox/breaker in SSmachines.machinery)
 		if(can_connect_to(breaker))
 			known_breakers.Add(breaker)
 
@@ -145,6 +145,6 @@
 		var/obj/machinery/power/smes/buildable/SMES = M
 		return SMES.RCon_tag && SMES.RCon_tag != "NO_TAG" && SMES.RCon
 
-	if(istype(M, /obj/machinery/power/breakerbox))
-		var/obj/machinery/power/breakerbox/breaker = M
+	if(istype(M, /obj/machinery/breakerbox))
+		var/obj/machinery/breakerbox/breaker = M
 		return breaker.RCon_tag != "NO_TAG"

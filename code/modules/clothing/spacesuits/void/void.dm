@@ -34,7 +34,11 @@
 		ARMOR_BIO = ARMOR_BIO_SHIELDED,
 		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit)
+	allowed = list(
+		/obj/item/flashlight,
+		/obj/item/tank,
+		/obj/item/suit_cooling_unit
+	)
 	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_TAIL
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
@@ -264,6 +268,17 @@ else if(##equipment_var) {\
 		return TRUE
 
 	if(istype(used_item,/obj/item/tank))
+		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
+			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
+		else if(tank)
+			to_chat(user, "\The [src] already has an airtank installed.")
+		else if(user.try_unequip(used_item, src))
+			to_chat(user, "You insert \the [used_item] into \the [src]'s storage compartment.")
+			tank = used_item
+			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+		return TRUE
+
+	if(istype(used_item,/obj/item/suit_cooling_unit))
 		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 		else if(tank)

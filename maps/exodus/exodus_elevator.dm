@@ -23,7 +23,7 @@
 
 /obj/abstract/turbolift_spawner/exodus/engineering
 	name = "Exodus turbolift map placeholder - Engineering"
-	icon = 'icons/obj/turbolift_preview_3x3.dmi'
+	icon = 'mods/content/turbolift/icons/turbolift_preview_3x3.dmi'
 	dir = EAST
 	lift_size_x = 4
 	lift_size_y = 4

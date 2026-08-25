@@ -59,14 +59,14 @@
 
 /obj/structure/bed/bedroll/show_buckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
-		visible_message(
+		buckled.visible_message(
 			SPAN_NOTICE("\The [buckled] climbs into \the [src]."),
 			SPAN_NOTICE("You climb into \the [src]."),
 			SPAN_NOTICE("You hear a rustling sound.")
 		)
 	else
 		var/decl/pronouns/pronouns = buckled.get_pronouns()
-		visible_message(
+		buckled.visible_message(
 			SPAN_NOTICE("\The [buckled] [pronouns.is] bundled into \the [src] by \the [buckling]."),
 			SPAN_NOTICE("You are bundled into \the [src] by \the [buckling]."),
 			SPAN_NOTICE("You hear a rustling sound.")
@@ -74,13 +74,13 @@
 
 /obj/structure/bed/bedroll/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
-		visible_message(
+		buckled.visible_message(
 			SPAN_NOTICE("\The [buckled] climbs out of \the [src]."),
 			SPAN_NOTICE("You climb out of \the [src]."),
 			SPAN_NOTICE("You hear a rustling sound.")
 		)
 	else
-		visible_message(
+		buckled.visible_message(
 			SPAN_NOTICE("\The [buckled] was pulled out of \the [src] by \the [buckling]."),
 			SPAN_NOTICE("You were pulled out of \the [src] by \the [buckling]."),
 			SPAN_NOTICE("You hear a rustling sound.")

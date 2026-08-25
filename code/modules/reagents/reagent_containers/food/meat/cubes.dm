@@ -36,6 +36,8 @@
 	add_to_reagents(/decl/material/solid/organic/meat, 10)
 
 /obj/item/food/animal_cube/get_single_monetary_worth()
+	if(worthless)
+		return 0
 	. = (spawn_type ? round(atom_info_repository.get_combined_worth_for((islist(spawn_type) ? spawn_type[1] : spawn_type)) * 1.25) : 5)
 	if(wrapper_type)
 		. += atom_info_repository.get_combined_worth_for(wrapper_type)

@@ -15,7 +15,7 @@ on:
 
 env:
   BYOND_MAJOR: "516"
-  BYOND_MINOR: "1663"
+  BYOND_MINOR: "1685"
   SPACEMAN_DMM_VERSION: suite-1.11
 
 jobs:
@@ -106,6 +106,11 @@ jobs:
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Install Dependencies
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt update || true
+          sudo apt install -o APT::Immediate-Configure=false curl:i386
       - name: Run Tests
         env:
           TEST: MAP
