@@ -120,6 +120,7 @@
 		if (ao_overlays_mimic)
 			if (!shadower)
 				shadower = new(src)
+				shadower.source_z = z - 1
 				SSzcopy.openspace_multipliers += 1
 			shadower.add_overlay(ao_overlays_mimic, TRUE, now = TRUE)
 
