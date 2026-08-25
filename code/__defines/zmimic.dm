@@ -74,11 +74,11 @@
 #define ZM_MIMIC_NO_AO    16	//! If the turf shouldn't apply regular turf AO and only do Z-mimic AO.
 #define ZM_NO_OCCLUDE     32	//! Don't occlude below atoms if we're a non-mimic z-turf.
 #define ZM_OVERRIDE       64	//! Copy only z_appearance or baseturf and bail, do not attempt to copy movables. This is significantly cheaper and allows you to override the mimic, but results in movables not being visible. This also terminates the Z-stack for purposes of ZM invariants.
-#define ZM_BOUNDARY     128	//! Internal use. Partially mimic the turf: allow creation of movables, but do not copy the actual turf. Movables are hidden from rightclick.
-#define ZM_HIDE_ATOMS   256	//! If this turf is considered opaque to mouse clicks, also hide below mimics from the right-click menu. This makes it impossible to examine atoms below, however.
-#define ZM_VISUALLY_BIG 512	//! This turf is visually larger than WORLD_ICON_SIZE, so we need to copy it even if it isn't directly visible.
+#define ZM_BOUNDARY      128	//! Internal use. Partially mimic the turf: allow creation of movables, but do not copy the actual turf. Movables are hidden from rightclick.
+#define ZM_HIDE_ATOMS    256	//! If this turf is considered opaque to mouse clicks, also hide below mimics from the right-click menu. This makes it impossible to examine atoms below, however.
+#define ZM_VISUALLY_BIG  512	//! This turf is visually larger than WORLD_ICON_SIZE, so we need to copy it even if it isn't directly visible.
 #define ZM_OVER_VB      2048	//! Internal use. This turf is above a turf that is VISUALLY_BIG.
-#define ZM_MIMIC_NO_ZAO       4096	//! Skip Z-AO for this turf. Useful for border turfs where the AO wouldn't be visible anyway, since this is cheaper.
+#define ZM_MIMIC_NO_ZAO 4096	//! Skip Z-AO for this turf. Useful for border turfs where the AO wouldn't be visible anyway, since this is cheaper.
 
 
 // Convenience flags.
