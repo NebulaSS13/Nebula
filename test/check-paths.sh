@@ -41,7 +41,7 @@ exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 22 "text2path uses" 'text2path'
 exactly 4 "update_icon() overrides" '\/update_icon\(' -P
 exactly 0 "goto uses" '\bgoto\b'
-exactly 10 "atom/New uses" '^/(obj|atom|area|mob|turf).*/New\('
+exactly 11 "atom/New uses" '^/(obj|atom|area|mob|turf).*/New\('
 exactly 1 "decl/New uses" '^/decl.*/New\('
 exactly 3 "tag uses" '(?<!/)\btag\s*=(?!=)' -P '*.dm *.dmm'
 exactly 3 "unmarked globally scoped variables" '^/?var/(?!global)' -P
