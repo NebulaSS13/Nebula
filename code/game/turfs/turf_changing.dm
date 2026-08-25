@@ -149,6 +149,12 @@
 			setup_zmimic_boundary()
 	else if (z_flags & ZM_MIMIC_BELOW)
 		setup_zmimic(FALSE)
+	else if (HasAbove(z) || HasBelow(z))
+		for (var/turf/T as anything in RANGE_TURFS(src, 1))
+			if (TURF_IS_MIMIC(T))
+				z_flags |= ZM_BOUNDARY
+				setup_zmimic_boundary()
+				break
 
 	affecting_lights = old_affecting_lights
 	corners = old_corners

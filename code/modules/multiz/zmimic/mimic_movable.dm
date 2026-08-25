@@ -13,7 +13,7 @@
 	if (!isturf(loc))
 		return
 
-	if (MOVABLE_IS_BELOW_ZTURF(src))
+	if (MOVABLE_IS_BELOW_ZTURF(src) && MOVABLE_SHALL_MIMIC(src))
 		if (!bound_overlay)
 			SSzcopy.discover_movable(src)
 			return
@@ -39,10 +39,19 @@
 	anchored = TRUE
 	mouse_opacity = FALSE
 	abstract_type = /atom/movable/openspace // unsure if this is valid, check with Lohi -- Yes, it's valid.
-	var/target_slot = 0
+	var/target_slot = ZM_SLICE_SLOT_ROOT
 
 /atom/movable/openspace/can_fall()
 	return FALSE
+
+// This is an abstract object, we don't care about the move stack or throwing events.
+/atom/movable/openspace/Move()
+	if (bound_overlay)
+		bound_overlay.forceMove(get_step(src, UP))
+		// forceMove could've deleted our overlay
+		if (bound_overlay && bound_overlay.dir != dir)
+			bound_overlay.set_dir(dir)
+	return TRUE
 
 // No blowing up abstract objects.
 /atom/movable/openspace/explosion_act(ex_sev)
@@ -60,8 +69,9 @@
 	plane = ZM_COMPUTE_PLANE(0, ZM_SLICE_SLOT_LIGHTING)
 	layer = MIMICED_LIGHTING_LAYER
 	color = SHADOWER_DARKENING_COLOR
+	target_slot = ZM_SLICE_SLOT_LIGHTING
 	var/lighting_generation = 0
-	var/lighting_generation_static = 0
+	var/source_z
 
 /atom/movable/openspace/multiplier/Destroy(force)
 	if(!force)
@@ -71,6 +81,8 @@
 	if (istype(myturf))
 		myturf.shadower = null
 
+	SSzcopy.openspace_multipliers -= 1
+
 	return ..()
 
 /atom/movable/openspace/multiplier/proc/copy_lighting(atom/movable/lighting_overlay/LO)
@@ -78,33 +90,10 @@
 		// If this LO is pending an update, avoid this update and just let it update us.
 		return
 	ASSERT(LO.z == z - 1)
-	var/mutable_appearance/MA = new /mutable_appearance(LO)
-	MA.layer = MIMICED_LIGHTING_LAYER
-	MA.plane = ZM_COMPUTE_PLANE(0, ZM_SLICE_SLOT_LIGHTING)
-
-	var/turf/T = loc
-	if (!(T.below.z_flags & ZM_NO_SHADOW))
-		if (MA.icon_state == LIGHTING_BASE_ICON_STATE)
-			// We're using a color matrix, so just darken the colors across the board.
-			var/list/c_list = MA.color
-			c_list[CL_MATRIX_RR] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_RG] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_RB] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_GR] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_GG] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_GB] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_BR] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_BG] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_BB] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_AR] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_AG] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_AB] *= SHADOWER_DARKENING_FACTOR
-			MA.color = c_list
-		else
-			// Not a color matrix, so we can just use the color var ourselves.
-			MA.color = SHADOWER_DARKENING_COLOR
-
-	appearance = MA
+	source_z = LO.z
+	var/depth = ZM_COMPUTE_DEPTH(source_z)
+	layer = MIMICED_LIGHTING_LAYER
+	plane = ZM_COMPUTE_PLANE(depth, ZM_SLICE_SLOT_LIGHTING)
 
 	lighting_generation += 1
 	set_invisibility(INVISIBILITY_NONE)
@@ -115,6 +104,16 @@
 		// compile_overlays() calls update_above().
 		update_above()
 
+/atom/movable/openspace/fake_multiplier
+	name = "openspace multiplier"
+	desc = "You shouldn't see this."
+	icon = 'icons/effects/lighting_overlay.dmi'
+	icon_state = "blank"
+	plane = FLOAT_PLANE	// kind of nonsensical, but will never directly be on a map
+
+/atom/movable/openspace/fake_multiplier/New()
+	atom_flags = ATOM_FLAG_INITIALIZED
+
 // -- OPENSPACE MIMIC --
 
 // Object used to hold a mimiced atom's appearance.
@@ -124,9 +123,9 @@
 	var/depth
 	var/queued = 0
 	var/destruction_timer
-	var/mimiced_type
+	var/mimicked_type
 	var/original_z
-	var/override_depth
+	var/override_plane
 	var/hidden = FALSE
 	var/cached_name
 	var/have_performed_fixup = FALSE
@@ -187,7 +186,7 @@
 	var/turf/old_loc = loc
 	var/force_layering_update = FALSE
 
-	if (isnull(override_depth) && isturf(old_loc) && isturf(dest) && old_loc.z != dest.z)
+	if (isnull(override_plane) && isturf(old_loc) && isturf(dest) && old_loc.z != dest.z)
 		var/atom/movable/openspace/mimic/parent_mimic = astype(associated_atom)
 		// If we're the top-most mimic, we can directly compute depth. Otherwise, pull it off our parent mimic since it should already have either computed it itself, or stolen it from _its_ parent.
 		depth = parent_mimic?.depth
@@ -225,7 +224,7 @@
 
 // -- TURF PROXY --
 
-// This thing holds the mimic appearance for non-OVERWRITE turfs.
+// This thing holds the mimic appearance of the root turf for non-REPLACE turfs.
 /atom/movable/openspace/turf_proxy
 	plane = ZMIMIC_MAXIMUM_PLANE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
@@ -248,9 +247,8 @@
 
 // -- TURF MIMIC --
 
-// A type for copying non-overwrite turfs' self-appearance.
+// Holds the appearance of a non-REPLACE z-turf on turfs above it to allow rendering multiple turfs in a z-stack.
 /atom/movable/openspace/turf_mimic
-	plane = ZMIMIC_MAXIMUM_PLANE	// These *should* only ever be at the top?
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	var/turf/delegate
 

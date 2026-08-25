@@ -11,8 +11,16 @@ SUBSYSTEM_DEF(overlays)
 	var/list/overlay_icon_state_caches = list()
 	var/list/overlay_icon_cache = list()
 
+/// How many items should we process before we check for yield? Increasing this increases efficiency, but also raises risk of overrun.
+#define OVR_PUMP_RATIO 4
+/// Initialize state required for OVR_MC_TRY_YIELD.
+#define OVR_PUMP_INIT var/__yield
+
+/// Check if we need to yield to the MC. This macro will sleep or break.
+#define OVR_MC_TRY_YIELD if ((++__yield) >= OVR_PUMP_RATIO) { __yield = 0; if (no_mc_tick) { CHECK_TICK; } else if (MC_TICK_CHECK) { break; } }
+
 /datum/controller/subsystem/overlays/stat_entry()
-	..("Ov:[processing.len - (idex - 1)]")
+	..("Ov: [processing.len - (idex - 1)]")
 
 /datum/controller/subsystem/overlays/Initialize()
 	Flush()
@@ -23,7 +31,9 @@ SUBSYSTEM_DEF(overlays)
 	overlay_icon_cache = SSoverlays.overlay_icon_cache
 	processing = SSoverlays.processing
 
-/datum/controller/subsystem/overlays/fire(resumed = FALSE, mc_check = TRUE)
+/datum/controller/subsystem/overlays/fire(resumed = FALSE, no_mc_tick = FALSE)
+	OVR_PUMP_INIT
+
 	var/list/processing = src.processing
 	while(idex <= processing.len)
 		var/atom/thing = processing[idex++]
@@ -31,11 +41,7 @@ SUBSYSTEM_DEF(overlays)
 		if(!QDELETED(thing) && thing.overlay_queued)	// Don't double-process if something already forced a compile.
 			thing.compile_overlays()
 
-		if(mc_check)
-			if(MC_TICK_CHECK)
-				break
-		else
-			CHECK_TICK
+		OVR_MC_TRY_YIELD
 
 	if (idex > 1)
 		processing.Cut(1, idex)
@@ -44,7 +50,7 @@ SUBSYSTEM_DEF(overlays)
 /datum/controller/subsystem/overlays/proc/Flush()
 	if(processing.len)
 		log_ss("overlays", "Flushing [processing.len] overlays.")
-		fire(mc_check = FALSE)
+		fire(FALSE, TRUE)
 
 /atom/proc/compile_overlays()
 	var/list/oo = our_overlays
@@ -112,14 +118,12 @@ SUBSYSTEM_DEF(overlays)
 
 /atom/proc/build_appearance_list(atom/new_overlays)
 	var/static/image/appearance_bro = new
-	if(islist(new_overlays))
-		var/list/new_overlays_list = new_overlays
-		if(null in new_overlays_list)
-			new_overlays_list -= new /list(length(new_overlays_list)) // Clears nulls from the list prior to appearancifying.
-		for(var/i in 1 to length(new_overlays_list))
-			var/image/cached_overlay = new_overlays_list[i]
-			APPEARANCEIFY(cached_overlay, new_overlays_list[i])
-		return new_overlays_list
+	if (islist(new_overlays))
+		new_overlays:RemoveAll(null)
+		for (var/i in 1 to length(new_overlays))
+			var/image/cached_overlay = UNLINT(new_overlays[i])
+			APPEARANCEIFY(cached_overlay, UNLINT(new_overlays[i]))
+		return new_overlays
 	else
 		APPEARANCEIFY(new_overlays, .)
 
@@ -155,14 +159,15 @@ SUBSYSTEM_DEF(overlays)
 	var/init_o_len = LAZYLEN(cached_overlays)
 	var/init_p_len = LAZYLEN(cached_priority)  //starter pokemon
 
-	LAZYREMOVE(cached_overlays, overlays_list)
 	if(priority)
 		LAZYREMOVE(cached_priority, overlays_list)
+	else
+		LAZYREMOVE(cached_overlays, overlays_list)
 
 	if(NOT_QUEUED_ALREADY && ((init_o_len != LAZYLEN(cached_priority)) || (init_p_len != LAZYLEN(cached_overlays))))
 		QUEUE_FOR_COMPILE
 
-/atom/proc/add_overlay(list/overlays_list, priority = FALSE)
+/atom/proc/add_overlay(list/overlays_list, priority = FALSE, now = FALSE)
 	if(!overlays_list)
 		return
 
@@ -177,10 +182,12 @@ SUBSYSTEM_DEF(overlays)
 	else
 		LAZYADD(our_overlays, overlays_list)
 
-	if(NOT_QUEUED_ALREADY)
+	if (now)
+		compile_overlays()
+	else if(NOT_QUEUED_ALREADY)
 		QUEUE_FOR_COMPILE
 
-/atom/proc/set_overlays(list/overlays_list, priority = FALSE)	// Sets overlays to a list, equivalent to cut_overlays() + add_overlay().
+/atom/proc/set_overlays(list/overlays_list, priority = FALSE, now = FALSE)	// Sets overlays to a list, equivalent to cut_overlays() + add_overlays().
 	if (!overlays_list)
 		return
 
@@ -195,7 +202,9 @@ SUBSYSTEM_DEF(overlays)
 		if (overlays_list)
 			LAZYADD(our_overlays, overlays_list)
 
-	if (NOT_QUEUED_ALREADY)
+	if (now)
+		compile_overlays()
+	else if (NOT_QUEUED_ALREADY)
 		QUEUE_FOR_COMPILE
 
 /atom/proc/copy_overlays(atom/other, cut_old = FALSE)	//copys our_overlays from another atom

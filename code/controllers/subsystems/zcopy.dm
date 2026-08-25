@@ -18,8 +18,7 @@
 #define ZM_COMPUTE_PLANE(DEPTH, SLOT) (ZMIMIC_MAXIMUM_PLANE - ZM_DEPTH_TO_OFFSET(DEPTH) + (SLOT))
 #define ZM_COMPUTE_DEPTH(Z) min((SSzcopy.zlev_maximums[Z] - (Z)), OPENTURF_MAX_DEPTH)
 
-#define SHADOWER_DARKENING_FACTOR 0.6	// The multiplication factor for openturf shadower darkness. Lighting will be multiplied by this.
-#define SHADOWER_DARKENING_COLOR "#999999"	// The above, but as an RGB string for lighting-less turfs.
+#define SHADOWER_DARKENING_COLOR "#999999"	// The multiplication factor for openturf shadower darkness. The lighting slice is multiplied by this.
 
 #define ZM_SLICE(Ty, D) "zm_slice_[D]_[Ty]"
 #define ZM_SLICE_VIRTUAL(Ty, D) "*zm_slice_[D]_[Ty]"
@@ -38,7 +37,7 @@
 #define ZM_BASEMENT_PLANES_PER_DEPTH 1
 #define ZM_VSLICE_SLOT_ZSUM 0
 
-/// How many items should we process before we check for yield? Increasing this increases efficiency, but also raises risk of overrun. This is tuned for world.fps = 100.
+/// How many items should we process before we check for yield? Increasing this increases efficiency, but also raises risk of overrun. This was tuned for world.fps = 100.
 #define ZM_PUMP_RATIO 4
 /// Initialize state required for ZM_MC_TRY_YIELD.
 #define ZM_PUMP_INIT var/__yield
@@ -78,6 +77,7 @@ SUBSYSTEM_DEF(zcopy)
 	var/openspace_overlays = 0
 	var/openspace_turfs = 0
 	var/openspace_boundaries = 0
+	var/openspace_multipliers = 0
 
 	var/multiqueue_skips_turf = 0	//! How many times did we skip a redundant turf update due to not being the most recent update?
 	var/multiqueue_skips_object = 0	//! How many times did we skip a redundant object update due to not being the most recent update?
@@ -87,10 +87,13 @@ SUBSYSTEM_DEF(zcopy)
 	var/total_updates_object = 0
 	var/total_boundary_reocclusion = 0	//! How many times was a boundary removed by a ZM turf being changed to a non-mimic?
 	var/deferred_discoveries = 0	//! How many times did we have to recursively discover? This overlaps with the discovery total.
+	var/discovery_invalid = 0
 	var/lighting_updates = 0
 	var/total_boundary_promotions = 0	//! How many turfs were promoted from boundary to mimic?
 	var/total_boundary_demotions = 0	//! How many turfs were demoted from mimic to boundary?
 	var/total_boundary_removals = 0	//! How many boundaries were made non-z turfs?
+	var/total_space_zeroinit = 0
+	var/total_space_fastinit = 0
 
 #ifdef ZM_RECORD_STATS
 	var/list/turf_stats = list()
@@ -103,6 +106,9 @@ SUBSYSTEM_DEF(zcopy)
 	// cached debug strings, since rebuilding this every stat() tick is wasteful given how rarely it changes
 	var/list/last_zlev_max
 	var/last_zgr_text
+
+	/// Looks like a shadower, isn't really. Glorified image, only a movable for AO purposes.
+	var/atom/movable/openspace/fake_multiplier/fake_shadower = new
 
 	// Caches for fixup.
 	var/list/fixup_cache = list()	//! Cache of already mangled `[old_appearance] = mangled_appearance` mappings.
@@ -193,10 +199,10 @@ SUBSYSTEM_DEF(zcopy)
 		// This one gets broken out from the below because it's more important.
 		"Q: { Tb: [pending_boundaries.len - (pb_idex - 1)] | T: [queued_turfs.len - (qt_idex - 1)] | O: [queued_overlays.len - (qo_idex - 1)] }",
 		// In order: Total objects, Updated, State changes, Skipped,
-		"T(O): { Tb: [openspace_boundaries] | T: [openspace_turfs] | O: [openspace_overlays] }",
+		"T(O): { Tb: [openspace_boundaries] | T: [openspace_turfs] | O: [openspace_overlays] | Sh: [openspace_multipliers] }",
 		"T(U): { Tb: [total_boundary_reocclusion] | T: [total_updates_turf] | L: [lighting_updates] | O: [total_updates_object] }",
 		"T(St): { BPr: [total_boundary_promotions] | BDe: [total_boundary_demotions] | BRm: [total_boundary_removals] | D: [total_updates_discovery] | DDef: [deferred_discoveries] }",
-		"Sk: { T: [multiqueue_skips_turf] | O: [multiqueue_skips_object] }",
+		"Sk: { T: [multiqueue_skips_turf] | O: [multiqueue_skips_object] | DInv: [discovery_invalid] | SZero: [total_space_zeroinit] | SFast: [total_space_fastinit] }",
 		"F(St): { H: [fixup_hit] / [fixup_hit_root] | M: [fixup_miss] / [fixup_miss_root] | N: [fixup_noop] / [fixup_noop_root] } F(C): { Mangle: [fixup_cache.len] | No-op: [fixup_known_good.len] }"
 	)
 	..(entries.Join("\n\t"))
@@ -343,7 +349,8 @@ SUBSYSTEM_DEF(zcopy)
 		curr_turfs[qt_idex] = null
 		qt_idex += 1
 
-		if (!isturf(T) || !(T.z_flags & ZM_MIMIC_BELOW) || !T.z_queued)
+		// Visually big turfs are allowed to update even if they aren't strictly mimic turfs.
+		if (!isturf(T) || !T.z_queued)
 			continue
 
 		// If we're not at our most recent queue position, don't bother -- we're updating again later anyways.
@@ -352,15 +359,22 @@ SUBSYSTEM_DEF(zcopy)
 			multiqueue_skips_turf += 1
 			continue
 
+		if (!(T.z_flags & ZM_FLAGS_CAN_TURF_UPDATE))
+			continue
+
 		// Z-Turf on the bottom-most level, just fake-copy space (or baseturf).
 		// It's impossible for anything to be on the synthetic turf, so ignore the rest of the ZM machinery.
 		if (!T.below)
+			if (!(T.z_flags & ZM_MIMIC_BELOW))	// don't care about doing this for boundaries (please don't make space a bigturf)
+				continue
+
 			ZM_RECORD_START
 			flush_z_state(T)
 			if (T.z_flags & ZM_OVERRIDE)
 				simple_appearance_copy(T, get_base_turf_by_area(T), ZMIMIC_MAXIMUM_PLANE)
 			else
 				simple_appearance_copy(T, SSskybox.dust_cache["[((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25]"])
+				T.z_eventually_space = TRUE
 
 			T.z_generation += 1
 			T.z_queued -= 1
@@ -375,20 +389,25 @@ SUBSYSTEM_DEF(zcopy)
 			ZM_MC_TRY_YIELD
 			continue
 
-		if (!T.shadower)	// If we don't have a shadower yet, something has gone horribly wrong.
-			WARNING("Turf [T] at [T.x],[T.y],[T.z] was queued, but had no shadower.")
-			continue
-
 		T.z_generation += 1
 
 		ZM_RECORD_START
 
 		// We need to find the non-z turf that's visually at the bottom of this group. BOUNDARY turfs are regular turfs, so they need to not be considered here.
-		// OVERRIDE turfs are considered the end of a Z-group regardless of actual connections.
+		// OVERRIDEs also don't copy the things below them, so they're considered a termination point too.
 		// This logic is duplicated below in analyze_openturf().
+		var/list/ao_intermediates	//! This is a list of turfs in the z-stack that have AO that we need to manually copy.
 		var/turf/Td = T
-		while (Td.below && (Td.z_flags & ZM_MIMIC_BELOW) && !(Td.z_flags & ZM_OVERRIDE))
+
+		while (Td.below && ZM_TURF_DOES_NOT_TERMINATE_ROOT_SCAN(Td))
 			Td = Td.below
+			if (Td && (!isnull(Td.ao_neighbors) && Td.ao_neighbors != AO_ALL_NEIGHBORS) || (!isnull(Td.ao_neighbors_mimic) && Td.ao_neighbors_mimic != AO_ALL_NEIGHBORS))
+				LAZYADD(ao_intermediates, Td)
+
+		if ((T.z_flags & ZM_BOUNDARY) && !(Td.z_flags & ZM_VISUALLY_BIG))
+			T.z_queued -= 1
+			log_debug("zcopy: Got a mimic boundary at [T.z],[T.y],[T.z] that was not above VISUALLY_BIG? Confused, but ignoring.")
+			continue
 
 		T.z_discovered_root = Td
 
@@ -425,33 +444,82 @@ SUBSYSTEM_DEF(zcopy)
 			T.z_eventually_space = TRUE
 			t_target = SPACE_PLANE
 
-		if (T.z_flags & ZM_MIMIC_OVERWRITE)
+		var/list/intermediate_ao_overlays
+		if (ao_intermediates && !Td.z_appearance)
+#ifdef ZM_ENH_DEBUG
+			T.z_ao_intermediates = ao_intermediates
+#endif
+			for (var/turf/ao_contributor in ao_intermediates)
+				var/depth = ZM_COMPUTE_DEPTH(ao_contributor.z)
+				// Make sure the analyzer's overlay logic remains in sync with this logic.
+				var/target_plane_self = ZM_COMPUTE_PLANE(depth, ZM_SLICE_SLOT_ROOT)
+				var/target_plane_z_ao = ZM_COMPUTE_PLANE(depth + 1, ZM_SLICE_SLOT_CAP)
+				// this may allocate the list, though it will modify it in place if it exists
+				intermediate_ao_overlays = ao_contributor.zm_render_foreign_ao_to(Td, intermediate_ao_overlays, target_plane_self, target_plane_z_ao)
+
+		if (T.z_flags & ZM_MIMIC_REPLACE)
 			// This openturf doesn't care about its icon, so we can just overwrite it.
 			if (T.below.mimic_proxy)
 				QDEL_NULL(T.below.mimic_proxy)
 			T.appearance = Td.z_appearance || Td
+			if (length(T.overlays))
+				T.our_overlays = T.overlays.Copy()	// We call into SSoverlays for AO, so make sure we don't lose the mimic overlays.
+			else
+				T.our_overlays = null
+			if (Td.ao_overlays)
+				T.cut_overlay(Td.ao_overlays)
+			if (Td.ao_overlays_mimic)
+				T.cut_overlay(Td.ao_overlays_mimic)
+			if (intermediate_ao_overlays)
+				T.add_overlay(intermediate_ao_overlays)
+
 			T.name = initial(T.name)
 			T.desc = initial(T.desc)
 			T.gender = initial(T.gender)
 			T.opacity = FALSE
 			T.plane = t_target
+			T.z_was_replaced = TRUE
 		else
 			// Some openturfs have icons, so we can't overwrite their appearance.
 			if (!T.below.mimic_proxy)
-				T.below.mimic_proxy = new(T)
+				T.below.mimic_proxy = new(T)	// TODO: Why is this on the below turf when it's ours?
 			var/atom/movable/openspace/turf_proxy/TO = T.below.mimic_proxy
 			TO.appearance = Td.z_appearance || Td
 			TO.name = T.name
 			TO.gender = T.gender	// Need to grab this too so PLURAL works properly in examine.
 			TO.opacity = FALSE
 			TO.plane = t_target
+			if (length(TO.overlays))
+				TO.our_overlays = TO.overlays.Copy()
+			else
+				TO.our_overlays = null
+			if (Td.ao_overlays)
+				TO.cut_overlay(Td.ao_overlays)
+			if (Td.ao_overlays_mimic)
+				TO.cut_overlay(Td.ao_overlays_mimic)
+			if (intermediate_ao_overlays)
+				TO.add_overlay(intermediate_ao_overlays)
+
+			if (TO.overlay_queued)
+				TO.compile_overlays()
+
 			TO.mouse_opacity = initial(TO.mouse_opacity)
+			if (T.z_was_replaced)	// best effort attempt to reset the appearance to something sane
+				T.reset_appearance()
+				T.z_was_replaced = FALSE
 
-		T.queue_ao(T.ao_neighbors_mimic == null)	// If ao_neighbors hasn't been set yet, we need to do a rebuild
+		// If ao_neighbors hasn't been set yet, we need to do a rebuild.
+		// For efficiency, we also handle regular AO for Z-turfs to avoid double-updating due to subsystem init order.
+		if (T.ao_neighbors == null || T.ao_neighbors_mimic == null)
+			T.queue_ao(TRUE, TRUE)
+		else if (T.z_flags & ZM_MIMIC_REPLACE)	// If it hasn't been replaced, we won't have lost these.
+			T.apply_ao()
 
-		// Explicitly copy turf delegates so they show up properly on below levels.
-		//   I think it's possible to get this to work without discrete delegate copy objects, but I'd rather this just work.
-		if ((T.below.z_flags & (ZM_MIMIC_BELOW|ZM_MIMIC_OVERWRITE)) == ZM_MIMIC_BELOW)
+		if (T.overlay_queued)
+			T.compile_overlays()
+
+		// More than one turf can be visible when a z-stack contains a non-REPLACE z-turf, so we need to create a holder object to hold the non-root turf appearance for this level.
+		if ((T.below.z_flags & (ZM_MIMIC_BELOW | ZM_MIMIC_REPLACE)) == ZM_MIMIC_BELOW)
 			// Below is a delegate, gotta explicitly copy it for recursive copy.
 			if (!T.below.mimic_above_copy)
 				T.below.mimic_above_copy = new(T)
@@ -459,7 +527,8 @@ SUBSYSTEM_DEF(zcopy)
 			DC.appearance = T.below
 			DC.mouse_opacity = initial(DC.mouse_opacity)
 			DC.target_slot = ZM_SLICE_SLOT_ROOT
-			DC.plane = ZM_COMPUTE_PLANE(turf_depth - 1, ZM_SLICE_SLOT_ROOT)
+			var/target_depth = ZM_COMPUTE_DEPTH(T.below.z)
+			DC.plane = ZM_COMPUTE_PLANE(target_depth, ZM_SLICE_SLOT_ROOT)
 
 		else if (T.below.mimic_above_copy)
 			QDEL_NULL(T.below.mimic_above_copy)
@@ -494,18 +563,18 @@ SUBSYSTEM_DEF(zcopy)
 
 /// Update the passed turf's shadower from the lighting object below it.
 /datum/controller/subsystem/zcopy/proc/update_lighting(turf/target_turf)
-	ASSERT(target_turf.shadower != null)
 	var/atom/movable/lighting_overlay/object = target_turf.below?.lighting_overlay
-	if (object)
+	if (object /*&& object.icon_state != LIGHTING_TRANSPARENT_ICON_STATE*/)	// This logically should work, but it causes rendering artifacts instead.
+		if (!target_turf.shadower)
+			target_turf.shadower = new(target_turf)
+			openspace_multipliers += 1
 		target_turf.shadower.copy_lighting(object)
-	else
-		if (target_turf.below.z_flags & ZM_NO_SHADOW)
-			target_turf.shadower.color = null
-		else
-			target_turf.shadower.color = SHADOWER_DARKENING_COLOR
-
-		target_turf.shadower.lighting_generation_static += 1	// other generation is updated in copy_lighting()
-		target_turf.shadower.update_above()
+	else if (target_turf.shadower)
+		// If a turf is not using Z-AO, we can delete the extant shadower.
+		if (target_turf.ao_neighbors_mimic == AO_ALL_NEIGHBORS || !AO_Z_SELF_CHECK(target_turf))
+			qdel(target_turf.shadower, TRUE)
+		else if (object)	// Otherwise we need to update if it's there to avoid half-broken shadowers. No need to *create* it, though.
+			target_turf.shadower.copy_lighting(object)
 
 	lighting_updates += 1
 	target_turf.z_generation_lighting += 1
@@ -550,7 +619,7 @@ SUBSYSTEM_DEF(zcopy)
 		if (OO.particles != OO.associated_atom.particles)
 			OO.particles = OO.associated_atom.particles
 
-		OO.plane = ZM_COMPUTE_PLANE(OO.depth, OO.target_slot)
+		OO.plane = OO.override_plane || ZM_COMPUTE_PLANE(OO.depth, OO.target_slot)
 		OO.opacity = FALSE
 		OO.queued = 0
 
@@ -567,7 +636,7 @@ SUBSYSTEM_DEF(zcopy)
 		total_updates_object += 1
 
 		ZM_RECORD_STOP
-		ZM_RECORD_WRITE(mimic_stats, OO.mimiced_type)
+		ZM_RECORD_WRITE(mimic_stats, OO.mimicked_type)
 
 		ZM_MC_TRY_YIELD
 
@@ -580,7 +649,8 @@ SUBSYSTEM_DEF(zcopy)
 /datum/controller/subsystem/zcopy/proc/discover_movable(atom/movable/object)
 	ASSERT(!QDELETED(object))
 
-	if (!isturf(object.loc))
+	if (!isturf(object.loc) || !MOVABLE_SHALL_MIMIC(object))	// We have to check this again here since atoms might change their eligibility during Initialize().
+		discovery_invalid++
 		return TRUE
 	var/turf/Tloc = object.loc
 	var/turf/T = Tloc.above || GetAbove(Tloc)	// it is valid for Tloc itself to not be a mimic due to LOOKAHEAD/LOOKBESIDE
@@ -618,7 +688,7 @@ SUBSYSTEM_DEF(zcopy)
 	total_updates_discovery += 1
 
 	ZM_RECORD_STOP
-	ZM_RECORD_WRITE(discovery_stats, "Depth [OO.depth] on [OO.z]")
+	ZM_RECORD_WRITE(discovery_stats, "[OO.mimicked_type] on [OO.z]")
 
 	if (defer)
 		deferred_discoveries += 1
@@ -628,7 +698,7 @@ SUBSYSTEM_DEF(zcopy)
 
 /// Regenerate a mimic's layering and render slice membership information. This does not recursively update. It's valid to call this on a mimic that is located on a non-mimic turf, but it must be on a turf.
 /datum/controller/subsystem/zcopy/proc/update_mimic_layering(atom/movable/openspace/mimic/target_mimic)
-	var/override_depth
+	var/override_plane
 	var/original_type = target_mimic.associated_atom.type
 	var/original_z = target_mimic.associated_atom.z
 
@@ -636,38 +706,44 @@ SUBSYSTEM_DEF(zcopy)
 	if (!isturf(T))
 		CRASH("Attempt to generate mimic layering for orphaned mimic.")
 
+	// If we're mimicking another ZM object, copy its target render slot. This will handle blur for turf objects as well as the lighting slot for shadowers.
+	var/target_slot = astype(target_mimic.associated_atom, /atom/movable/openspace)?.target_slot || ZM_SLICE_SLOT_ROOT
+
 	switch (target_mimic.associated_atom.type)
 		// Depth for recursive mimic needs to be inherited.
 		if (/atom/movable/openspace/mimic)
 			var/atom/movable/openspace/mimic/OOO = target_mimic.associated_atom
-			original_type = OOO.mimiced_type
-			override_depth = OOO.override_depth
+			original_type = OOO.mimicked_type
+			override_plane = OOO.override_plane
 			original_z = OOO.original_z
 
-		// If this is a turf proxy (the mimic for a non-OVERWRITE turf), it needs to respect space parallax if relevant.
+		// Turf mimics are a special case of mimic: they mimic non-REPLACE turfs so midspan turfs render. Their visual z-level is the z-level of their copied turf.
+		if (/atom/movable/openspace/turf_mimic)
+			var/atom/movable/openspace/turf_mimic/TM = target_mimic.associated_atom
+			original_z = TM.delegate.z
+
+		// If this is a turf proxy (the mimic for a non-REPLACE turf), it needs to respect space parallax if relevant.
 		if (/atom/movable/openspace/turf_proxy)
 			if (T.z_eventually_space)
-				// Yes, this is an awful hack; I don't want to add yet another override_* var.
-				override_depth = (ZMIMIC_MAXIMUM_PLANE - SPACE_PLANE)/OPENTURF_PLANES_PER_DEPTH	// TODO: Please not this -- while it's valid, this is awful.
+				override_plane = SPACE_PLANE
 
-	target_mimic.depth = override_depth || ZM_COMPUTE_DEPTH(original_z)
-	target_mimic.target_slot = 0
-
-	switch (original_type)
-		// These types need to be pushed a layer down for bigturfs to function correctly.
-		if (/atom/movable/openspace/turf_proxy, /atom/movable/openspace/turf_mimic)
-			target_mimic.depth += 1
+		// Multipliers are more or less just a special case of movable mimic. Like with the turf_mimic, their visual z-level is the z-level of their associated lighting overlay.
 		if (/atom/movable/openspace/multiplier)
-			// Ignore override depth for these.
-			target_mimic.depth = min(zlev_maximums[target_mimic.z] - original_z + 1, OPENTURF_MAX_DEPTH)
-			target_mimic.target_slot = ZM_SLICE_SLOT_LIGHTING
+			var/atom/movable/openspace/multiplier/M = target_mimic.associated_atom
+			original_z = M.source_z
 
-	target_mimic.mimiced_type = original_type
-	target_mimic.override_depth = override_depth
+	if (override_plane)
+		target_mimic.depth = -1
+	else
+		target_mimic.depth = ZM_COMPUTE_DEPTH(original_z)
+
+	target_mimic.target_slot = target_slot
+	target_mimic.mimicked_type = original_type
+	target_mimic.override_plane = override_plane
 	target_mimic.original_z = original_z
 
 	// We're only trying to rebuild layering information, no need to update the appearance.
-	target_mimic.plane = ZM_COMPUTE_PLANE(target_mimic.depth, target_mimic.target_slot)
+	target_mimic.plane = override_plane || ZM_COMPUTE_PLANE(target_mimic.depth, target_mimic.target_slot)
 
 /// Update if a mimic should be hidden from right-click, usually by it being underneath a non-mimic turf.
 /datum/controller/subsystem/zcopy/proc/update_mimic_occlusion(atom/movable/openspace/mimic/target_mimic)
@@ -679,13 +755,12 @@ SUBSYSTEM_DEF(zcopy)
 	if (!isturf(T))
 		ZM_DEBUG_LOG("Mimic of [target_mimic.associated_atom] ([target_mimic.associated_atom.type]) is being hidden because of a non-turf loc")
 		target_mimic.hidden = ZM_HIDE_NONMIMIC
-	else if (!MOVABLE_IS_ON_ZTURF(target_mimic))
+	else if (!MOVABLE_IS_ON_ZTURF(target_mimic))	// If this movable isn't under a z-turf, hide it to avoid cluttering the right-click menu.
 		target_mimic.hidden = ZM_HIDE_NONMIMIC
 	else
 		target_mimic.hidden = 0
 
-		// Check if we need to be hiding this movable's mimic from right click.
-		// If we're only resetting
+		// If this movable is under a click-opaque turf and that turf has opted into hiding atoms, hide this movable.
 		if (T.mouse_opacity == 2 && (T.z_flags & ZM_HIDE_ATOMS))
 			target_mimic.hidden |= ZM_HIDE_OPAQUE
 		else
@@ -723,13 +798,14 @@ SUBSYSTEM_DEF(zcopy)
 		qdel(OO)
 
 /datum/controller/subsystem/zcopy/proc/simple_appearance_copy(turf/T, new_appearance, target_plane)
-	if (T.z_flags & ZM_MIMIC_OVERWRITE)
+	if (T.z_flags & ZM_MIMIC_REPLACE)
 		T.appearance = new_appearance
 		T.name = initial(T.name)
 		T.desc = initial(T.desc)
 		T.gender = initial(T.gender)
 		if (T.plane == DEFAULT_PLANE && target_plane)
 			T.plane = target_plane
+
 	else
 		// Some openturfs have icons, so we can't overwrite their appearance.
 		if (!T.mimic_underlay)
@@ -776,7 +852,7 @@ SUBSYSTEM_DEF(zcopy)
 	// Don't fixup the root object's plane.
 	if (depth > 0)
 		switch (appearance:plane)
-			if (DEFAULT_PLANE, FLOAT_PLANE)
+			if (FLOAT_PLANE)
 				// fine
 				EMPTY_BLOCK_GUARD
 			else
@@ -872,8 +948,10 @@ SUBSYSTEM_DEF(zcopy)
 	var/turf/parent
 	var/computed_depth
 
-/atom/movable/openspace/debug/shadower
-	var/associated_depth
+/atom/movable/openspace/debug/ao
+	var/neighbors
+	var/is_z = FALSE
+	var/turf/associated_turf
 
 /client/proc/analyze_openturf(turf/T)
 	set name = "Analyze Openturf"
@@ -893,21 +971,20 @@ SUBSYSTEM_DEF(zcopy)
 		CHECK_TICK
 
 	var/list/temp_objects = list()
+	var/alist/lighting_overlays = alist()
+
+	if (T.lighting_overlay)
+		lighting_overlays[ZM_COMPUTE_DEPTH(T.lighting_overlay.z)] = T.lighting_overlay
 
 	// Manually compute stack information to check connections
 	var/turf/Tscan = T
-	var/list/computed_stack = list()
-	if (TURF_IS_MIMICKING(T))	// non-mimic turfs can enter this proc due to boundaries
-		while (Tscan && TURF_IS_MIMICKING(Tscan) && !(Tscan.z_flags & ZM_OVERRIDE))
-			computed_stack += Tscan
-			Tscan = GetBelow(Tscan)
+	var/list/computed_stack = list(T)
 
-		// Terminating/root turf -- this may be null if the turf is a mimic but has no below (allowed behavior).
-		if (Tscan)
-			computed_stack += Tscan
-	else
-		computed_stack += T
-		Tscan = null
+	while (HasBelow(Tscan.z) && ZM_TURF_DOES_NOT_TERMINATE_Z_STACK(Tscan))
+		Tscan = GetBelow(Tscan)
+		computed_stack += Tscan
+		if (Tscan.lighting_overlay)
+			lighting_overlays[ZM_COMPUTE_DEPTH(Tscan.lighting_overlay.z)] = Tscan.lighting_overlay
 
 	var/root = "(null)"
 	if (T.z_discovered_root)
@@ -934,28 +1011,57 @@ SUBSYSTEM_DEF(zcopy)
 		"<b>Queue occurrences:</b> [T.z_queued]",
 		// boundaries don't compute eventually_space, nor do non-z turfs
 		"<b>Above space:</b> Apparent: [FMT_YESNO(T.z_eventually_space)], Actual: [FMT_YESNO(is_above_space)] - [FMT_MAYBE(T.z_eventually_space == is_above_space, !TURF_IS_MIMIC(T))]",
-		"<b>Root:</b> [FMT_MAYBE(T.z_discovered_root == Tscan, !TURF_IS_MIMIC(T))]",	// boundaries don't set this, nor do non-z turfs
-		"- Apparent [root]",
+		"<b>Root:</b> [FMT_MAYBE(T.z_discovered_root == Tscan, T.z_was_fastinit || !TURF_IS_MIMIC(T))]",	// fast init doesn't set this, nor do boundaries, nor do non-z turfs
+		"- Apparent [root]" + (T.z_was_fastinit ? " (fast init)" : ""),
 		"- Actual [computed_root]",
 		"<b>Z Flags</b>: [english_list(bitfield2list(T.z_flags, global.mimic_defines), "(none)")]",
 		"<b>Has shadower:</b> [FMT_YESNO(T.shadower)]",
 		"<b>Has turf proxy:</b> [FMT_YESNO(T.mimic_proxy)]",
 		"<b>Has above copy:</b> [FMT_YESNO(T.mimic_above_copy)]",
 		"<b>Has mimic underlay:</b> [FMT_YESNO(T.mimic_underlay)]",
+		"<b>Fast init:</b> Allowed: [FMT_YESNO(T.z_allow_fastinit)] / Used: [FMT_YESNO(T.z_was_fastinit)]",
+		"<b>Was replaced:</b> [T.z_was_replaced ? "Yes" : "No"]",
 		"<b>Depth:</b> [FMT_DEPTH(T.z_depth)] [T.z_depth == OPENTURF_MAX_DEPTH ? "(max)" : ""]",
 		"<b>Generation:</b> [T.z_generation] general, [T.z_generation_lighting] lighting",
 		"<b>Update count:</b> Claimed [claimed_update_count], Actual [real_update_count] - [FMT_OK(claimed_update_count == real_update_count)]"
 	)
 
 	var/list/found_oo = list(T)
-	var/list/shadow_stack = list(T.shadower)
-	var/list/apparent_stack = list()
 
-	apparent_stack += T
-	if (T.shadower)
-		shadow_stack += T.shadower
+#ifdef ZM_ENH_DEBUG
+	// This involves keeping a ton of extra lists around, so it's only available if enhanced ZM debugging is on.
+	if (LAZYLEN(T.z_ao_intermediates))
+		for (var/turf/ao_turf in (T.z_ao_intermediates + T))
+			var/depth = ZM_COMPUTE_DEPTH(ao_turf.z)
+			if (ao_turf.ao_neighbors != AO_ALL_NEIGHBORS && ao_turf.ao_neighbors != null && length(ao_turf.ao_overlays))
+				var/atom/movable/openspace/debug/ao/aod = new
+				aod.neighbors = ao_turf.ao_neighbors
+				aod.associated_turf = ao_turf
 
-	for (var/turf/Tbelow = T.below; TURF_IS_MIMICKING(Tbelow); Tbelow = Tbelow.below)
+				aod.plane = ZM_COMPUTE_PLANE(depth, ZM_SLICE_SLOT_ROOT)
+				aod.pixel_x = ao_turf.ao_overlays[1]:pixel_x
+				aod.pixel_y = ao_turf.ao_overlays[1]:pixel_y
+				found_oo += aod
+
+			if (ao_turf.ao_neighbors_mimic != AO_ALL_NEIGHBORS && ao_turf.ao_neighbors_mimic != null && length(ao_turf.ao_overlays_mimic))
+				var/atom/movable/openspace/debug/ao/aod = new
+				aod.neighbors = ao_turf.ao_neighbors_mimic
+				aod.associated_turf = ao_turf
+				aod.is_z = TRUE
+
+				aod.plane = ZM_COMPUTE_PLANE(depth + 1, ZM_SLICE_SLOT_CAP)
+				aod.pixel_x = ao_turf.ao_overlays_mimic[1]:pixel_x
+				aod.pixel_y = ao_turf.ao_overlays_mimic[1]:pixel_y
+				found_oo += aod
+
+#endif
+
+	var/list/apparent_stack = list(T)
+
+	var/turf/Tbelow = T
+	while (Tbelow.below && ZM_TURF_DOES_NOT_TERMINATE_Z_STACK(Tbelow))
+		Tbelow = Tbelow.below
+
 		var/atom/movable/openspace/debug/turf/VTO = new
 		VTO.computed_depth = SSzcopy.zlev_maximums[Tbelow.z] - Tbelow.z
 		VTO.appearance = Tbelow
@@ -963,7 +1069,6 @@ SUBSYSTEM_DEF(zcopy)
 		VTO.plane = ZM_COMPUTE_PLANE(VTO.computed_depth, ZM_SLICE_SLOT_ROOT)
 		found_oo += VTO
 		temp_objects += VTO
-		shadow_stack += Tbelow.shadower
 		apparent_stack += Tbelow
 
 	// manually add root, since above loop (intentionally) omits it
@@ -994,17 +1099,6 @@ SUBSYSTEM_DEF(zcopy)
 	for (var/atom/movable/openspace/O in T)
 		found_oo += O
 
-	for (var/atom/movable/shadower in shadow_stack)
-		if (shadower.overlays.len)
-			for (var/overlay in shadower.overlays)
-				var/atom/movable/openspace/debug/shadower/D = new
-				D.associated_depth = shadower.loc:z_depth
-				D.appearance = overlay
-				if (D.plane < -10000)	// FLOAT_PLANE
-					D.plane = T.shadower.plane
-				found_oo += D
-				temp_objects += D
-
 	sortTim(found_oo, GLOBAL_PROC_REF(cmp_planelayer))
 
 	var/list/atoms_list_list = list()
@@ -1030,14 +1124,19 @@ SUBSYSTEM_DEF(zcopy)
 		var/list/local_temp = list()
 		var/list/offsets = list()
 		var/local_acc = 0
+
+		if (d in lighting_overlays)
+			out += "<strong><em><font color='#646464'>Depth [d], foreign lighting</font></em></strong>"
+			out += SSzcopy.debug_fmt_thing(lighting_overlays[d], T)
+
 		for (var/offset in (OPENTURF_PLANES_PER_DEPTH - 1) to 0 step -1)
-			var/ident = global.zm_offset_to_target[offset + 1]
+			var/ident = zm_offset_to_target[offset + 1]
 			var/plane = ZM_COMPUTE_PLANE(d, offset)
 			var/plane_str = "[plane]"
 
 			offsets += plane
 
-			local_temp += "<strong>Depth [d] ([ident]), plane [plane], computed target <code>[ZM_SLICE(global.zm_offset_to_target[offset + 1], d)]</code></strong>"
+			local_temp += "<strong>Depth [d] ([ident]), plane [plane], computed target <code>[ZM_SLICE(zm_offset_to_target[offset + 1], d)]</code></strong>"
 			SSzcopy.debug_fmt_planelist(atoms_list_list[plane_str], local_temp, T)
 			local_acc += length(atoms_list_list[plane_str])
 			atoms_list_list -= plane_str	// remove the found plane so we can find orphans
@@ -1053,7 +1152,11 @@ SUBSYSTEM_DEF(zcopy)
 		SSzcopy.debug_fmt_planelist(atoms_list_list["[SPACE_PLANE]"], out, T)
 		atoms_list_list -= "[SPACE_PLANE]"
 
-	log_debug("atoms_list_list => [json_encode(atoms_list_list)]")
+	if (atoms_list_list["[SKYBOX_PLANE]"])
+		out += "<strong>Skybox plane</strong> ([SKYBOX_PLANE])"
+		SSzcopy.debug_fmt_planelist(atoms_list_list["[SKYBOX_PLANE]"], out, T)
+		atoms_list_list -= "[SKYBOX_PLANE]"
+
 	for (var/key in atoms_list_list)
 		out += "<strong style='color: red;'>Unknown plane: [key]</strong>"
 		SSzcopy.debug_fmt_planelist(atoms_list_list[key], out, T)
@@ -1068,46 +1171,60 @@ SUBSYSTEM_DEF(zcopy)
 		qdel(item)
 
 // Yes, I know this proc is a bit of a mess. Feel free to clean it up.
-/datum/controller/subsystem/zcopy/proc/debug_fmt_thing(atom/A, list/out, turf/original)
+/datum/controller/subsystem/zcopy/proc/debug_fmt_thing(atom/A, turf/original)
 	if (istype(A, /atom/movable/openspace/mimic))
 		var/atom/movable/openspace/mimic/OO = A
-		var/base = "<li>[fmt_label("Mimic", A)] plane [A.plane], layer [A.layer], depth [FMT_DEPTH(OO.depth)], override depth [FMT_DEPTH(OO.override_depth)]"
+		var/base = "[fmt_label("Mimic", A)] plane [A.plane], layer [A.layer], depth [FMT_DEPTH(OO.depth)], override depth [FMT_DEPTH(OO.override_plane)]"
 		if (QDELETED(OO.associated_atom))	// This shouldn't happen, but can if the deletion hook is not working.
-			return "[base] - [OO.type] copying <unknown> ([OO.mimiced_type]) - <font color='red'>ORPHANED</font></em></li>"
+			return "[base] - [OO.type] copying <unknown> ([OO.mimicked_type]) - <font color='red'>ORPHANED</font></em>"
 
 		var/atom/movable/AA = OO.associated_atom
-		var/copied_type = AA.type == OO.mimiced_type ? "[AA.type] \[direct\]" : "[AA.type], eventually [OO.mimiced_type]"
-		if (OO.mimiced_type == /atom/movable/openspace/mimic)	// This is invalid, these should always be a 'real' type.
+		var/copied_type = AA.type == OO.mimicked_type ? "[AA.type] \[direct\]" : "[AA.type], eventually [OO.mimicked_type]"
+		if (OO.mimicked_type == /atom/movable/openspace/mimic)	// This is invalid, these should always be a 'real' type.
 			copied_type += " <font color='red'>CORRUPT</font>"
-		return "[base], associated Z-level [AA.z] - [OO.type] copying [AA] ([copied_type])</li>"
+		return "[base], associated Z-level [AA.z] - [OO.type] copying [AA] ([copied_type])"
 
 	else if (istype(A, /atom/movable/openspace/turf_mimic))
 		var/atom/movable/openspace/turf_mimic/DC = A
-		return "<li>[fmt_label("Turf Mimic", A)] plane [A.plane], layer [A.layer], Z-level [A.z], delegate of \icon[DC.delegate] [DC.delegate] ([DC.delegate.type])</li>"
+		return "[fmt_label("Turf Mimic", A)] plane [A.plane], layer [A.layer], Z-level [A.z], delegate of \icon[DC.delegate] [DC.delegate] ([DC.delegate.type])"
 
 	else if (isturf(A))
 		if (A == original)
-			return "<li>[fmt_label("Turf", A)] plane [A.plane], layer [A.layer], depth [FMT_DEPTH(A:z_depth)], Z-level [A.z] - [A] ([A.type]) - <font color='green'>SELF</font></li>"
+			return "[fmt_label("Turf", A)] plane [A.plane], layer [A.layer], depth [FMT_DEPTH(A:z_depth)], Z-level [A.z] - [A] ([A.type]) - <font color='green'>SELF</font>"
 
 		else	// foreign turfs - not visible here, but sometimes good for figuring out layering -- showing these is currently not enabled
-			return "<li>[fmt_label("Foreign Turf", A)] <em><font color='#646464'>plane [A.plane], layer [A.layer], depth [FMT_DEPTH(A:z_depth)], Z-level [A.z] - [A] ([A.type])</font></em> - <font color='red'>FOREIGN</font></em></li>"
+			return "[fmt_label("Foreign Turf", A)] <em><font color='#646464'>plane [A.plane], layer [A.layer], depth [FMT_DEPTH(A:z_depth)], Z-level [A.z] - [A] ([A.type])</font></em> - <font color='red'>FOREIGN</font></em>"
 
+	else if (A.type == /atom/movable/lighting_overlay)
+		var/computed_depth = ZM_COMPUTE_DEPTH(A.z)
+		var/base = "[fmt_label("Lighting Overlay", A)] <em><font color='#646464'>computed depth [FMT_DEPTH(computed_depth)]</font></em>"
+		if (A == original.lighting_overlay)
+			base += " - <font color='green'>OURS</font>"
+		else
+			base += " - <font color='red'>FOREIGN</font>"
+		return base
 
 	else if (A.type == /atom/movable/openspace/multiplier)
-		return "<li>[fmt_label("Shadower", A)] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type]), generation [A:lighting_generation]</li>"
+		var/base = "[fmt_label("Shadower", A)] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type]), generation [A:lighting_generation]"
+		if (A.z != original.z)
+			base += " - <font color='red'>FOREIGN</font>"
+		return base
 
-	else if (A.type == /atom/movable/openspace/debug/shadower)	// These are fake objects that exist just to show the shadower's overlays in this list.
-		return "<li>[fmt_label("Shadower True Overlay", A, vv = FALSE)] depth [A:associated_depth], plane [A.plane], layer [A.layer] - <font color='grey'>VIRTUAL</font></li>"
+	else if (A.type == /atom/movable/openspace/debug/ao)	// Fake objects holding state of AO from both our turf as well as midspan AO intermediate turfs.
+		var/atom/movable/openspace/debug/ao/aod = A
+		var/neighbor_text = english_list(bitfield2list(aod.neighbors, n_neighbors))
+		var/label = aod.is_z ? "Z-AO True Overlay" : "AO True Overlay"
+		return "[fmt_label(label, A, vv = FALSE)] plane [aod.plane], layer [aod.layer], pixel x/y [aod.pixel_x]/[aod.pixel_y], neighbors [neighbor_text], associated turf [fmt_label(aod.associated_turf, aod.associated_turf, TRUE, TRUE)] - <font color='grey'>VIRTUAL</font>"
 
 	else if (A.type == /atom/movable/openspace/debug/turf)
 		var/atom/movable/openspace/debug/turf/VTO = A
-		return "<li>[fmt_label("Foreign Turf", VTO.parent, recurse = TRUE)] <em><font color='#646464'>plane [VTO.plane], layer [VTO.layer], computed depth [FMT_DEPTH(VTO.computed_depth)] - [VTO.parent] ([VTO.parent.type])</font></em> - <font color='red'>FOREIGN</font>"
+		return "[fmt_label("Foreign Turf", VTO.parent, recurse = TRUE)] <em><font color='#646464'>plane [VTO.plane], layer [VTO.layer], computed depth [FMT_DEPTH(VTO.computed_depth)] - [VTO.parent] ([VTO.parent.type])</font></em> - <font color='red'>FOREIGN</font>"
 
 	else if (A.type == /atom/movable/openspace/turf_proxy)
-		return "<li>[fmt_label("Turf Proxy", A)] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type])</li>"
+		return "[fmt_label("Turf Proxy", A)] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type])"
 
 	else
-		return "<li>[fmt_label("?", A)] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type])</li>"
+		return "[fmt_label("?", A)] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type])"
 
 /datum/controller/subsystem/zcopy/proc/fmt_label(label, atom/target, vv = TRUE, recurse = FALSE)
 	. = "\icon[target] <b>\[[label]\]</b> "
@@ -1116,14 +1233,14 @@ SUBSYSTEM_DEF(zcopy)
 
 	if (recurse)
 		. += ", <a href='?_src_=vars;zm_analyze=\ref[target]'>OA</a>) "
-	else
+	else if (vv)
 		. += ") "
 
 /datum/controller/subsystem/zcopy/proc/debug_fmt_planelist(list/things, list/out, turf/original)
 	if (things)
 		out += "<ul>"
 		for (var/thing in things)
-			out += debug_fmt_thing(thing, out, original)
+			out += "<li>" + debug_fmt_thing(thing, original) + "</li>"
 		out += "</ul>"
 	else
 		out += "<em>No atoms.</em>"

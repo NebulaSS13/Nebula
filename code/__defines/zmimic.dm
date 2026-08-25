@@ -1,3 +1,13 @@
+/**
+	If this is enabled (default), a VISUALLY_BIG turf will stop upwards propagation of OVER_VB (visually big) within a stack.
+	It is assumed that a turf that is VISUALLY_BIG will be the same size or larger as the turfs below it, so it will stop upwards propagation of the ABOVE_VB flag to avoid
+		creating a bunch of turf proxy objects that players aren't going to see anyway.
+	This should be enabled if your VISUALLY_BIG turfs are usually or always larger than the turfs that might be below them, but it may cause edges of turfs below that logically
+		should be visible to not render. This artifact is unlikely to be noticed by players though, and older versions of Z-Mimic did not render even the more visible case anyway.
+	Disabling this may increase memory usage if your map contains a large amount of VISUALLY_BIG turfs.
+*/
+#define ZM_VISUALLY_BIG_STOPS_VB_PROPAGATION
+
 /// Enable extra ZM debug logs -- these are useful for diagnosing layering issues, but they're potentially expensive.
 // #define ZM_ENH_DEBUG
 
@@ -50,24 +60,33 @@
 */
 #define MOVABLE_SHALL_MIMIC(AM) (!QDELETED(AM) && !(AM.z_flags & ZMM_IGNORE) && AM.invisibility != INVISIBILITY_ABSTRACT)
 
+/// Should the ZM turf root scan progress through this turf? This is the visually terminating turf, the one that's actually visible here (so, stops at boundaries).
+#define ZM_TURF_DOES_NOT_TERMINATE_ROOT_SCAN(T) (((T).z_flags & (ZM_MIMIC_BELOW | ZM_OVER_VB)) && !((T).z_flags & ZM_OVERRIDE))
+/// Should the ZM z-stack scan progress through this turf? This is the actual root of the z-stack as far as movable render is concerned (so, this includes boundaries).
+#define ZM_TURF_DOES_NOT_TERMINATE_Z_STACK(T) (((T).z_flags & (ZM_MIMIC_BELOW | ZM_OVER_VB | ZM_BOUNDARY)) && !((T).z_flags & ZM_OVERRIDE))
+
+
 // Turf MZ flags.
 #define ZM_MIMIC_BELOW     1	//! If this turf should mimic the turf on the Z below.
-#define ZM_MIMIC_OVERWRITE 2	//! If this turf is Z-mimicking, overwrite the turf's appearance instead of using a movable. This is faster, but means the turf cannot have its own appearance (say, edges or a translucent sprite).
+#define ZM_MIMIC_REPLACE   2	//! If this turf is Z-mimicking, replace the turf's appearance instead of using a movable. This is faster, but means the turf cannot have its own appearance (say, edges or a translucent sprite).
 #define ZM_ALLOW_LIGHTING  4	//! If this turf should permit passage of lighting.
 #define ZM_ALLOW_ATMOS     8	//! If this turf permits passage of air.
 #define ZM_MIMIC_NO_AO    16	//! If the turf shouldn't apply regular turf AO and only do Z-mimic AO.
 #define ZM_NO_OCCLUDE     32	//! Don't occlude below atoms if we're a non-mimic z-turf.
 #define ZM_OVERRIDE       64	//! Copy only z_appearance or baseturf and bail, do not attempt to copy movables. This is significantly cheaper and allows you to override the mimic, but results in movables not being visible. This also terminates the Z-stack for purposes of ZM invariants.
-#define ZM_NO_SHADOW     128	//! If this turf is being copied, don't darken the shadower.
-#define ZM_BOUNDARY      256	//! Internal use. Partially mimic the turf: allow creation of movables, but do not copy the actual turf. Movables are hidden from rightclick.
-#define ZM_HIDE_ATOMS    512	//! If this turf is considered opaque to mouse clicks, also hide below mimics from the right-click menu. This makes it harder to examine atoms below, however.
+#define ZM_BOUNDARY     128	//! Internal use. Partially mimic the turf: allow creation of movables, but do not copy the actual turf. Movables are hidden from rightclick.
+#define ZM_HIDE_ATOMS   256	//! If this turf is considered opaque to mouse clicks, also hide below mimics from the right-click menu. This makes it impossible to examine atoms below, however.
+#define ZM_VISUALLY_BIG 512	//! This turf is visually larger than WORLD_ICON_SIZE, so we need to copy it even if it isn't directly visible.
+#define ZM_OVER_VB      2048	//! Internal use. This turf is above a turf that is VISUALLY_BIG.
+#define ZM_MIMIC_NO_ZAO       4096	//! Skip Z-AO for this turf. Useful for border turfs where the AO wouldn't be visible anyway, since this is cheaper.
+
 
 // Convenience flags.
 #define ZM_MIMIC_DEFAULTS (ZM_MIMIC_BELOW|ZM_ALLOW_LIGHTING)	//! Common defaults for zturfs.
 #define ZMM_WIDE_LOAD (ZMM_LOOKAHEAD | ZMM_LOOKBESIDE)	//! Atom is big and needs to scan one extra turf in both X and Y. This only extends the range by one turf. Cheap, but not free.
 
 /// Preset: you're creating a hole in the ground. No icon, nothing to cast shadows on. Just a hole.
-#define ZM_MIMIC_PRESET_HOLE (ZM_MIMIC_DEFAULTS | ZM_OVERWRITE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS)
+#define ZM_MIMIC_PRESET_HOLE (ZM_MIMIC_DEFAULTS | ZM_MIMIC_REPLACE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS)
 /// Preset: you're creating a hole in the ground with a border. This turf has an icon, but you want to be able to click things in the hole like with a regular Z-hole.
 #define ZM_MIMIC_PRESET_HOLE_WITH_BORDER (ZM_MIMIC_DEFAULTS | ZM_NO_OCCLUDE | ZM_ALLOW_ATMOS)
 /// Preset: you're creating a turf with translucent accents (like glass flooring). This will block clicks even where alpha on the icon is 0, add MIMIC_NO_OCCLUDE if this is unwanted.
@@ -75,6 +94,7 @@
 
 #define ZM_FLAGS_AFFECTS_VIS (ZM_BOUNDARY | ZM_HIDE_ATOMS)	//! Flags that affect mimic right-click visibility (maps to ZM_HIDE_*).
 #define ZM_FLAGS_AFFECTS_LAYERING (0)	//! Flags that affect mimic layering (different render slice placement).
+#define ZM_FLAGS_CAN_TURF_UPDATE (ZM_MIMIC_BELOW | ZM_OVER_VB)	//! At least one of these flags is required for a turf to go through Z-Copy update.
 
 /// Flags that persist across changeturf.
 #define ZM_INFECTIOUS_MIMIC_FLAGS (ZM_OVERRIDE)	// Hopefully I don't regret making OVERRIDE sticky.
@@ -84,18 +104,26 @@
 #define ZM_HIDE_NONMIMIC 2	//! This mimic is being hidden by its parent not being a mimic.
 #define ZM_HIDE_OPAQUE   4	//! This mimic is being hidden by its parent having mouse_opacity set with MIMIC_HIDE_ATOMS active.
 
+var/global/list/mimic_hide_defines = list(
+	"ZM_HIDE_BOUNDARY",
+	"ZM_HIDE_NONMIMIC",
+	"ZM_HIDE_OPAQUE"
+)
+
 // For debug purposes, should contain the above defines in ascending order.
 var/global/list/mimic_defines = list(
 	"ZM_MIMIC_BELOW",
-	"ZM_MIMIC_OVERWRITE",
+	"ZM_MIMIC_REPLACE",
 	"ZM_ALLOW_LIGHTING",
 	"ZM_ALLOW_ATMOS",
 	"ZM_MIMIC_NO_AO",
 	"ZM_NO_OCCLUDE",
 	"ZM_OVERRIDE",
-	"ZM_NO_SHADOW",
 	"ZM_BOUNDARY",
-	"ZM_HIDE_ATOMS"
+	"ZM_HIDE_ATOMS",
+	"ZM_VISUALLY_BIG",
+	"ZM_OVER_VB",
+	"ZM_MIMIC_NO_ZAO"
 )
 
 // Movable flags.

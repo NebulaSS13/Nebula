@@ -38,6 +38,7 @@
 	blend_mode = BLEND_MULTIPLY
 	slot = ZM_SLICE_SLOT_LIGHTING
 	slice_kind = ZM_SLICE_TY_LIGHTING
+	color = SHADOWER_DARKENING_COLOR
 
 /obj/mimic_master/slice/shadower_master/Initialize(mapload, depth)
 	..()

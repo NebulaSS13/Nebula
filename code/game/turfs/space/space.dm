@@ -44,19 +44,41 @@
 	else //Dust
 		appearance = SSskybox.dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"]
 
-	if (mapload && (z_flags & ZM_MIMIC_BELOW))
-		// If CT fired, ZM is done in CT for BOUNDARY ordering reasons.
-		setup_zmimic(mapload)
+	// Z-Copy does this too, but we want to avoid calling into Z-Copy.
+	var/turf/lower
+	if (z_flags)
+		lower = HasBelow(z) ? get_step(src, DOWN) : null
+		if (lower)
+			z_eventually_space = lower.z_eventually_space
+
+		permit_ao = !z_eventually_space
+
+	// This is a common turf that frequently has fuck-all on it, so we're going to cheat.
+	if (mapload && z_flags && (z_flags & ZM_MIMIC_BELOW))
+		if (lower)
+			if (!z_eventually_space || !lower.z_allow_fastinit)	// Have stuff, can't avoid doing the full ZM path. This should be uncommon though.
+				z_allow_fastinit = FALSE
+				setup_zmimic(mapload)
+			else	// Fast init, we only care about setting up the Z-stack. For efficiency, we're not going to bother with boundaries - it's unlikely the lack of transition will be visible to a player.
+				below = lower
+				below.above = src
+				SSzcopy.openspace_turfs += 1
+				SSzcopy.total_space_fastinit += 1
+				z_was_fastinit = TRUE
+		else	// Nothing below, nothing would be copied -- cheat, and skip actually calling into ZM. State will still be correct, because the implicit below is us.
+			z_flags = 0
+			// SSzcopy.openspace_turfs += 1	// Counting these as openspace is kind of cheating, they're not meaningfully participating in ZM.
+			SSzcopy.total_space_zeroinit += 1
 
 	if(!HasBelow(z))
 		return INITIALIZE_HINT_NORMAL
 
-	var/turf/below = GetBelow(src)
-	if(isspaceturf(below))
+	lower ||= HasBelow(z) ? get_step(src, DOWN) : null
+	if(isspaceturf(lower))
 		return INITIALIZE_HINT_NORMAL
 
-	var/area/A = below.loc
-	if(!below.density && (A.area_flags & AREA_FLAG_EXTERNAL))
+	var/area/A = lower.loc
+	if(!lower.density && (A.area_flags & AREA_FLAG_EXTERNAL))
 		return INITIALIZE_HINT_NORMAL
 
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
