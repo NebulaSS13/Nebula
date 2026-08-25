@@ -261,6 +261,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				. |= HAS_FUEL
 			if(. == (HAS_OXIDIZER|HAS_FUEL))
 				return TRUE
+	return FALSE
 
 /datum/gas_mixture/proc/check_combustibility()
 	var/const/HAS_OXIDIZER = BITFLAG(0)
@@ -275,6 +276,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				. |= HAS_FUEL
 			if(. == (HAS_OXIDIZER|HAS_FUEL))
 				return TRUE
+	return FALSE
 
 //returns a value between 0 and vsc.fire_firelevel_multiplier
 /datum/gas_mixture/proc/calculate_firelevel(total_fuel, total_oxidizers, reaction_limit, gas_volume)
