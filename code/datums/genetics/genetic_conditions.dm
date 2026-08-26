@@ -1,4 +1,5 @@
 /decl/genetic_condition
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	/// Descriptive name, used in VV panel.
 	var/name
 	/// Verb to be added or removed on activate/deactivate
@@ -50,73 +51,91 @@
 /decl/genetic_condition/superpower/no_breath
 	name               = "No Breathing"
 	activation_message = "You feel no need to breathe."
+	uid                = "genetic_condition_superpower_nobreath"
 
 /decl/genetic_condition/superpower/remoteview
 	name               = "Remote Viewing"
 	grant_verb         = /mob/living/human/proc/remoteobserve
 	activation_message = "Your mind expands."
+	uid                = "genetic_condition_superpower_remoteview"
 
 /decl/genetic_condition/superpower/running
 	name               = "Super Speed"
 	activation_message = "Your leg muscles pulsate."
+	uid                = "genetic_condition_superpower_running"
 
 /decl/genetic_condition/superpower/remotetalk
 	name               = "Telepathy"
 	grant_verb         = /mob/living/human/proc/remotesay
 	activation_message = "You expand your mind outwards."
+	uid                = "genetic_condition_superpower_remotetalk"
 
 /decl/genetic_condition/superpower/cold_resist
 	name               = "Cold Resistance"
 	underlay_state     = "fire_s"
 	activation_message = "Your body is filled with warmth."
+	uid                = "genetic_condition_superpower_cold_resist"
 
 /decl/genetic_condition/superpower/noprints
 	name               = "No Prints"
 	activation_message = "Your fingers feel numb."
+	uid                = "genetic_condition_superpower_noprints"
 
 /decl/genetic_condition/superpower/xray
 	name               = "X-Ray Vision"
 	activation_message = "The walls suddenly disappear."
+	uid                = "genetic_condition_superpower_xray"
 
 /decl/genetic_condition/superpower/space_resist
 	name               = "Space Resistance"
 	activation_message = "Your skin feels strange."
+	uid                = "genetic_condition_superpower_spaceresist"
 
 /decl/genetic_condition/disability
 	abstract_type      = /decl/genetic_condition/disability
 
 /decl/genetic_condition/disability/clumsy
 	name               = "Clumsy"
+	uid                = "genetic_condition_disability_clumsy"
 
 /decl/genetic_condition/disability/nearsighted
 	name               = "Nearsighted"
+	uid                = "genetic_condition_disability_nearsighted"
 
 /decl/genetic_condition/disability/epilepsy
 	name               = "Epilepsy"
+	uid                = "genetic_condition_disability_epilepsy"
 
 /decl/genetic_condition/disability/coughing
 	name               = "Coughing"
+	uid                = "genetic_condition_disability_coughing"
 
 /decl/genetic_condition/disability/tourettes
 	name               = "Tourettes"
+	uid                = "genetic_condition_disability_tourettes"
 
 /decl/genetic_condition/disability/nervous
 	name               = "Nervous"
+	uid                = "genetic_condition_disability_nervous"
 
 /decl/genetic_condition/disability/blinded
 	name               = "Blinded"
 	check_synthetic    = null
+	uid                = "genetic_condition_disability_blinded"
 
 /decl/genetic_condition/disability/muted
 	name               = "Mute"
 	check_synthetic    = null
+	uid                = "genetic_condition_disability_mute"
 
 /decl/genetic_condition/disability/deafened
 	name               = "Deafened"
 	check_synthetic    = null
+	uid                = "genetic_condition_disability_deafened"
 
 /decl/genetic_condition/husk
 	name               = "Husk"
+	uid                = "genetic_condition_husk"
 
 /decl/genetic_condition/husk/activate_condition(mob/living/M)
 	. = ..()
