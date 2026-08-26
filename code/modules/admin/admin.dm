@@ -176,7 +176,7 @@ var/global/BSACooldown = 0
 				for(var/decl/genetic_condition/mutation as anything in decls_repository.get_decls_of_type_unassociated(/decl/genetic_condition))
 					if(i % 5 == 0)
 						body += "</tr><tr>"
-					body += "<td><a href='byond://?src=\ref[src];toggle_mutation=\ref[M];block=\ref[mutation]' style='color:[M.has_genetic_condition(mutation.type) ? "#006600" : "#ff0000"];'>[mutation.name]</a></td>"
+					body += "<td><a href='byond://?src=\ref[src];toggle_mutation=\ref[M];block=[mutation.uid]' style='color:[M.has_genetic_condition(mutation.type) ? "#006600" : "#ff0000"];'>[mutation.name]</a></td>"
 					i++
 				body += "</tr></table>"
 
