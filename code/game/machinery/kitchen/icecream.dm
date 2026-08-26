@@ -98,11 +98,11 @@
 	dat += "<b>VAT CONTENT</b><br>"
 	for(var/decl/material/reagent as anything in REAGENT_LIQUID_VOLUMES(reagents))
 		dat += "[reagent.get_reagent_name(reagents, MAT_PHASE_LIQUID)]: [LIQUID_VOLUME(reagents, reagent)]"
-		dat += "<A href='byond://?src=\ref[src];disposeI=\ref[reagent]'>Purge</A><BR>"
+		dat += "<A href='byond://?src=\ref[src];disposeI=[reagent.uid]'>Purge</A><BR>"
 
 	for(var/decl/material/reagent as anything in REAGENT_SOLID_VOLUMES(reagents))
 		dat += "[reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)]: [SOLID_VOLUME(reagents, reagent)]"
-		dat += "<A href='byond://?src=\ref[src];disposeI=\ref[reagent]'>Purge</A><BR>"
+		dat += "<A href='byond://?src=\ref[src];disposeI=[reagent.uid]'>Purge</A><BR>"
 
 	dat += "<a href='byond://?src=\ref[src];refresh=1'>Refresh</a> <a href='byond://?src=\ref[src];close=1'>Close</a>"
 
@@ -183,7 +183,7 @@
 		. = TOPIC_REFRESH
 
 	else if(href_list["disposeI"])
-		var/decl/material/reagent = locate(href_list["disposeI"])
+		var/decl/material/reagent = decls_repository.get_decl_by_id(href_list["disposeI"])
 		if(reagent)
 			reagents.clear_reagent(reagent.type)
 		. = TOPIC_REFRESH
