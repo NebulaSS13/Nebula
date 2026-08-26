@@ -382,6 +382,8 @@
 	return ..()
 
 /decl/loadout_category
+	decl_flags = DECL_FLAG_MANDATORY_UID
+	uid = "loadout_category_miscellaneous"
 	var/name = "Miscellaneous"
 	var/max_selections = INFINITY
 	var/list/gear = list()
