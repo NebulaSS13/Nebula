@@ -9,6 +9,7 @@ var/global/list/default_uplink_source_priority = list(
 )
 
 /decl/uplink_source
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	var/name
 	var/desc
 
@@ -17,6 +18,7 @@ var/global/list/default_uplink_source_priority = list(
 
 /decl/uplink_source/pda
 	name = "PDA"
+	uid = "uplink_pda"
 
 /decl/uplink_source/pda/Initialize()
 	desc = NO_GUARANTEE_NO_EXTRA_COST_DESC("a PDA")
@@ -48,6 +50,7 @@ var/global/list/default_uplink_source_priority = list(
 
 /decl/uplink_source/radio
 	name = "Radio"
+	uid = "uplink_radio"
 
 /decl/uplink_source/radio/Initialize()
 	desc = NO_GUARANTEE_NO_EXTRA_COST_DESC("a radio")
@@ -67,6 +70,7 @@ var/global/list/default_uplink_source_priority = list(
 /decl/uplink_source/implant
 	name = "Implant"
 	desc = "Teleports an uplink implant into your head. Costs 20% of the initial TC amount."
+	uid = "uplink_implant"
 
 /decl/uplink_source/implant/setup_uplink_source(var/mob/living/human/recipient, var/amount)
 	if(!istype(recipient))
@@ -82,6 +86,7 @@ var/global/list/default_uplink_source_priority = list(
 /decl/uplink_source/unit
 	name = "Uplink Unit"
 	desc = "Teleports an uplink unit to your location. Has 30% more TC."
+	uid = "uplink_unit"
 
 /decl/uplink_source/unit/setup_uplink_source(var/mob/M, var/amount)
 	var/obj/item/radio/uplink/U = new(M, M.mind, round(amount * 1.3))
@@ -90,6 +95,7 @@ var/global/list/default_uplink_source_priority = list(
 /decl/uplink_source/telecrystals
 	name = "Telecrystals"
 	desc = "Get your telecrystals in pure form, without the means to trade them for goods, Gives 150% of initial TC amount"
+	uid = "uplink_telecrystals"
 
 /decl/uplink_source/telecrystals/setup_uplink_source(var/mob/M, var/amount)
 	amount = round(amount * 1.5)
