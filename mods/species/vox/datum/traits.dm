@@ -15,9 +15,11 @@
 	name = "Apex-Edited"
 	description = "Coming soon!"
 	category = "Psyche"
+	uid = "trait_vox_apex_edited"
 
 // Perks for interacting with vox equipment.
 /decl/trait/vox/symbiosis
 	name = "Self-Maintaining Equipment"
 	description = "Coming soon!"
 	category = "Symbiosis"
+	uid = "trait_vox_self_maintaining"

@@ -15,15 +15,18 @@
 	name = "Heavy Frame"
 	description = "Coming soon!"
 	category = "Frame Customisation"
+	uid = "trait_utility_frame_heavy"
 
 // Additional augments, organs, better armour, robomodules
 /decl/trait/utility_frame/upgrade
 	name = "Upgraded Widget"
 	description = "Coming soon!"
 	category = "Upgrades"
+	uid = "trait_utility_frame_upgraded_widget"
 
 // Various maluses
 /decl/trait/utility_frame/fault
 	name = "Faulty Widget"
 	description = "Coming soon!"
 	category = "Faults"
+	uid = "trait_utility_frame_faulty_widget"
