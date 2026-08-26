@@ -60,10 +60,14 @@
 */
 #define MOVABLE_SHALL_MIMIC(AM) (!QDELETED(AM) && !(AM.z_flags & ZMM_IGNORE) && AM.invisibility != INVISIBILITY_ABSTRACT)
 
+/// Is this turf always the end of a scan?
+#define ZM_TURF_FORCE_TERMINATES(T) ((T).z_flags & ZM_OVERRIDE)
 /// Should the ZM turf root scan progress through this turf? This is the visually terminating turf, the one that's actually visible here (so, stops at boundaries).
-#define ZM_TURF_DOES_NOT_TERMINATE_ROOT_SCAN(T) (((T).z_flags & (ZM_MIMIC_BELOW | ZM_OVER_VB)) && !((T).z_flags & ZM_OVERRIDE))
+#define ZM_TURF_DOES_NOT_TERMINATE_ROOT_SCAN(T) (((T).z_flags & ZM_MIMIC_BELOW) && !ZM_TURF_FORCE_TERMINATES(T))
+/// Should the ZM oversize turf scan progress through this turf? These are turfs that are above a turf flagged as VISUALLY_BIG.
+#define ZM_TURF_DOES_NOT_TERMINATE_VB_SCAN(T) (((T).z_flags & ZM_OVER_VB) && !ZM_TURF_FORCE_TERMINATES(T))
 /// Should the ZM z-stack scan progress through this turf? This is the actual root of the z-stack as far as movable render is concerned (so, this includes boundaries).
-#define ZM_TURF_DOES_NOT_TERMINATE_Z_STACK(T) (((T).z_flags & (ZM_MIMIC_BELOW | ZM_OVER_VB | ZM_BOUNDARY)) && !((T).z_flags & ZM_OVERRIDE))
+#define ZM_TURF_DOES_NOT_TERMINATE_Z_STACK(T) (((T).z_flags & (ZM_MIMIC_BELOW | ZM_OVER_VB | ZM_BOUNDARY)) && !ZM_TURF_FORCE_TERMINATES(T))
 
 
 // Turf MZ flags.

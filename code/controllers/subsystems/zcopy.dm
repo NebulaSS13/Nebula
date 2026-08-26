@@ -94,6 +94,8 @@ SUBSYSTEM_DEF(zcopy)
 	var/total_boundary_removals = 0	//! How many boundaries were made non-z turfs?
 	var/total_space_zeroinit = 0
 	var/total_space_fastinit = 0
+	var/total_large_boundary_proxy_creations = 0	// How many times did we create a boundary intermediate image?
+	var/total_large_boundary_scans = 0	// How many times did we need to perform a scan for boundary intermediates (OVER_VB underlay holders)?
 
 #ifdef ZM_RECORD_STATS
 	var/list/turf_stats = list()
@@ -202,6 +204,7 @@ SUBSYSTEM_DEF(zcopy)
 		"T(O): { Tb: [openspace_boundaries] | T: [openspace_turfs] | O: [openspace_overlays] | Sh: [openspace_multipliers] }",
 		"T(U): { Tb: [total_boundary_reocclusion] | T: [total_updates_turf] | L: [lighting_updates] | O: [total_updates_object] }",
 		"T(St): { BPr: [total_boundary_promotions] | BDe: [total_boundary_demotions] | BRm: [total_boundary_removals] | D: [total_updates_discovery] | DDef: [deferred_discoveries] }",
+		"T(VB): { Scan: [total_large_boundary_scans] | New: [total_large_boundary_proxy_creations] }",
 		"Sk: { T: [multiqueue_skips_turf] | O: [multiqueue_skips_object] | DInv: [discovery_invalid] | SZero: [total_space_zeroinit] | SFast: [total_space_fastinit] }",
 		"F(St): { H: [fixup_hit] / [fixup_hit_root] | M: [fixup_miss] / [fixup_miss_root] | N: [fixup_noop] / [fixup_noop_root] } F(C): { Mangle: [fixup_cache.len] | No-op: [fixup_known_good.len] }"
 	)
@@ -397,6 +400,7 @@ SUBSYSTEM_DEF(zcopy)
 		// OVERRIDEs also don't copy the things below them, so they're considered a termination point too.
 		// This logic is duplicated below in analyze_openturf().
 		var/list/ao_intermediates	//! This is a list of turfs in the z-stack that have AO that we need to manually copy.
+		var/list/extra_underlays	//! This is a list of boundary turf appearances used to fake multi-turf copy for large turfs below non-large turfs.
 		var/turf/Td = T
 
 		while (Td.below && ZM_TURF_DOES_NOT_TERMINATE_ROOT_SCAN(Td))
@@ -404,18 +408,33 @@ SUBSYSTEM_DEF(zcopy)
 			if (Td && (!isnull(Td.ao_neighbors) && Td.ao_neighbors != AO_ALL_NEIGHBORS) || (!isnull(Td.ao_neighbors_mimic) && Td.ao_neighbors_mimic != AO_ALL_NEIGHBORS))
 				LAZYADD(ao_intermediates, Td)
 
-		if ((T.z_flags & ZM_BOUNDARY) && !(Td.z_flags & ZM_VISUALLY_BIG))
-			T.z_queued -= 1
-			log_debug("zcopy: Got a mimic boundary at [T.z],[T.y],[T.z] that was not above VISUALLY_BIG? Confused, but ignoring.")
-			continue
+		// If our root is above a VISUALLY_BIG and is a boundary (OVER_VB can't be set on non-BOUNDARY), we need to do a second root scan to find the VB turf(s).
+		if (Td.z_flags & ZM_OVER_VB)
+			total_large_boundary_scans++
+			var/turf/Tvbr = Td
+
+			// This is a fairly cold path, so it's not worth microoptimizing it. ~800 turfs of ~100,000 considered trigger it on O7.
+			while (Tvbr.below && ZM_TURF_DOES_NOT_TERMINATE_VB_SCAN(Tvbr))
+				Tvbr = Tvbr.below
+
+				if (Tvbr.z_flags & ZM_VISUALLY_BIG)
+					var/mutable_appearance/fatass = new(Tvbr)
+					var/depth = ZM_COMPUTE_DEPTH(Tvbr.z)
+					fatass.plane = ZM_COMPUTE_PLANE(depth, ZM_SLICE_SLOT_ROOT)
+					// can't just nuke overlays since they're used for smoothing, but we don't want AO overlays
+					if (Tvbr.ao_overlays)
+						fatass.overlays -= Tvbr.ao_overlays
+					if (Tvbr.ao_overlays_mimic)
+						fatass.overlays -= Tvbr.ao_overlays_mimic
+
+					LAZYADD(extra_underlays, fatass)
+					total_large_boundary_proxy_creations++
 
 		T.z_discovered_root = Td
 
 		// Depth must be the depth of the *visible* turf, not self.
-		var/turf_depth
 		// If you're getting runtimes here, you violated a ZM invariant. Not a bug in ZM, you should be notifying ZM when you resize the world.
-		turf_depth = T.z_depth = zlev_maximums[Td.z] - Td.z
-
+		var/turf_depth = T.z_depth = zlev_maximums[Td.z] - Td.z
 		var/t_target = ZM_COMPUTE_PLANE(turf_depth, ZM_SLICE_SLOT_ROOT)	// This is where the turf (but not the copied atoms) gets put.
 
 		// Turf is set to mimic baseturf, handle that and bail.
@@ -473,6 +492,9 @@ SUBSYSTEM_DEF(zcopy)
 			if (intermediate_ao_overlays)
 				T.add_overlay(intermediate_ao_overlays)
 
+			if (extra_underlays)
+				T.underlays += extra_underlays
+
 			T.name = initial(T.name)
 			T.desc = initial(T.desc)
 			T.gender = initial(T.gender)
@@ -502,6 +524,9 @@ SUBSYSTEM_DEF(zcopy)
 
 			if (TO.overlay_queued)
 				TO.compile_overlays()
+
+			if (extra_underlays)
+				TO.underlays += extra_underlays
 
 			TO.mouse_opacity = initial(TO.mouse_opacity)
 			if (T.z_was_replaced)	// best effort attempt to reset the appearance to something sane
