@@ -85,7 +85,7 @@
 	if(beaker)
 		// The custom ones modify our href_list.
 		if (href_list["addcustom"])
-			var/decl/material/their_reagent = locate(href_list["addcustom"])
+			var/decl/material/their_reagent = decls_repository.get_decl_by_id(href_list["addcustom"])
 			if(their_reagent)
 				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
 				if(useramount)
@@ -98,7 +98,7 @@
 			else
 				return TOPIC_REFRESH // Tried to move a nonexistent reagent, maybe their UI is stale?
 		else if(href_list["removecustom"])
-			var/decl/material/my_reagents = locate(href_list["removecustom"])
+			var/decl/material/my_reagents = decls_repository.get_decl_by_id(href_list["removecustom"])
 			if(my_reagents)
 				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
 				if(useramount)
@@ -112,7 +112,7 @@
 		// DO NOT use else if here, we want these to run even if the custom ones do
 		var/datum/reagents/R = beaker.reagents
 		if (href_list["analyze"])
-			var/decl/material/reagent = locate(href_list["analyze"])
+			var/decl/material/reagent = decls_repository.get_decl_by_id(href_list["analyze"])
 			var/dat = get_chem_info(reagent)
 			if(dat && REAGENT_VOLUME(beaker.reagents, reagent.type))
 				show_browser(user, dat, "window=chem_master;size=575x400")
@@ -120,7 +120,7 @@
 
 		else if (href_list["add"])
 			if(href_list["amount"])
-				var/decl/material/their_reagent = locate(href_list["add"])
+				var/decl/material/their_reagent = decls_repository.get_decl_by_id(href_list["add"])
 				if(their_reagent)
 					var/mult = 1
 					var/amount = clamp((text2num(href_list["amount"])), 0, get_remaining_volume())
@@ -135,7 +135,7 @@
 
 		else if (href_list["remove"])
 			if(href_list["amount"])
-				var/decl/material/my_reagents = locate(href_list["remove"])
+				var/decl/material/my_reagents = decls_repository.get_decl_by_id(href_list["remove"])
 				if(my_reagents)
 					var/amount = clamp((text2num(href_list["amount"])), 0, 200)
 					var/contaminants = fetch_contaminants(user, reagents, my_reagents)
@@ -259,16 +259,17 @@
 
 #define REAGENT_TOPIC_LINKS(HOLDER, REAGENT, ACTION) \
 dat += "[REAGENT.use_name], [REAGENT_VOLUME(HOLDER, REAGENT)] Units - ";\
-dat += "<A href='byond://?src=\ref[src];analyze=\ref[REAGENT]'>(Analyze)</A> ";\
-dat += "<A href='byond://?src=\ref[src];[ACTION]=\ref[REAGENT];amount=1'>(1)</A> ";\
-dat += "<A href='byond://?src=\ref[src];[ACTION]=\ref[REAGENT];amount=5'>(5)</A> ";\
-dat += "<A href='byond://?src=\ref[src];[ACTION]=\ref[REAGENT];amount=10'>(10)</A> ";\
-dat += "<A href='byond://?src=\ref[src];[ACTION]=\ref[REAGENT];amount=[REAGENT_VOLUME(HOLDER, REAGENT)]'>(All)</A> ";\
-dat += "<A href='byond://?src=\ref[src];[ACTION]custom=\ref[REAGENT]'>(Custom)</A><BR>"
+dat += "<A href='byond://?src=\ref[src];analyze=[REAGENT.uid]'>(Analyze)</A> ";\
+dat += "<A href='byond://?src=\ref[src];[ACTION]=[REAGENT.uid];amount=1'>(1)</A> ";\
+dat += "<A href='byond://?src=\ref[src];[ACTION]=[REAGENT.uid];amount=5'>(5)</A> ";\
+dat += "<A href='byond://?src=\ref[src];[ACTION]=[REAGENT.uid];amount=10'>(10)</A> ";\
+dat += "<A href='byond://?src=\ref[src];[ACTION]=[REAGENT.uid];amount=[REAGENT_VOLUME(HOLDER, REAGENT)]'>(All)</A> ";\
+dat += "<A href='byond://?src=\ref[src];[ACTION]custom=[REAGENT.uid]'>(Custom)</A><BR>"
 
 /obj/machinery/chem_master/interact(mob/user)
 	user.set_machine(src)
 	if(!(user.client in has_sprites))
+		// todo: convert this to use the asset system
 		spawn()
 			has_sprites += user.client
 			for(var/i = 1 to MAX_PILL_SPRITE)
