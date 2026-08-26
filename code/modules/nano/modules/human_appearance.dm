@@ -47,7 +47,7 @@
 			return TRUE
 
 	if(href_list["hair"])
-		var/decl/sprite_accessory/hair = locate(href_list["hair"])
+		var/decl/sprite_accessory/hair = decls_repository.get_decl_by_id(href_list["hair"])
 		if(can_change(APPEARANCE_HAIR) && istype(hair) && (hair.type in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_HAIR)) && SET_HAIR_STYLE(owner, hair.type, FALSE))
 			owner.update_hair() // No idea why this is necessary, setting the accessory above should be fine.
 			return TRUE
@@ -58,7 +58,7 @@
 			return TRUE
 
 	if(href_list["facial_hair"])
-		var/decl/sprite_accessory/facial_hair = locate(href_list["facial_hair"])
+		var/decl/sprite_accessory/facial_hair = decls_repository.get_decl_by_id(href_list["facial_hair"])
 		if(can_change(APPEARANCE_FACIAL_HAIR) && istype(facial_hair) && (facial_hair.type in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_FACIAL_HAIR)) && SET_FACIAL_HAIR_STYLE(owner, facial_hair.type, FALSE))
 			owner.update_hair() // No idea why this is necessary, setting the accessory above should be fine.
 			return TRUE
@@ -115,7 +115,7 @@
 		var/hair_styles[0]
 		for(var/hair_style in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_HAIR))
 			var/decl/sprite_accessory/hair_decl = GET_DECL(hair_style)
-			hair_styles[++hair_styles.len] = list("hairstyle" = hair_decl.name, "ref" = "\ref[hair_decl]")
+			hair_styles[++hair_styles.len] = list("hairstyle" = hair_decl.name, "uid" = hair_decl.uid)
 		data["hair_styles"] = hair_styles
 		var/hairstyle = GET_HAIR_STYLE(owner)
 		var/decl/sprite_accessory/hair = GET_DECL(hairstyle) || GET_DECL(/decl/sprite_accessory/hair/bald)
@@ -126,7 +126,7 @@
 		var/facial_hair_styles[0]
 		for(var/facial_hair_style in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_FACIAL_HAIR))
 			var/decl/sprite_accessory/facial_hair_decl = GET_DECL(facial_hair_style)
-			facial_hair_styles[++facial_hair_styles.len] = list("facialhairstyle" = facial_hair_decl.name, "ref" = "\ref[facial_hair_decl]")
+			facial_hair_styles[++facial_hair_styles.len] = list("facialhairstyle" = facial_hair_decl.name, "uid" = facial_hair_decl.uid)
 		data["facial_hair_styles"] = facial_hair_styles
 		var/facial_hairstyle = GET_FACIAL_HAIR_STYLE(owner)
 		var/decl/sprite_accessory/facial_hair = GET_DECL(facial_hairstyle) || GET_DECL(/decl/sprite_accessory/facial_hair/shaved)
