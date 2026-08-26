@@ -159,5 +159,10 @@
 			return TRUE
 	else if(!is_type_in_typecache(used_item, non_fish_sushi_typecache))
 		return FALSE
-	new /obj/item/food/sushi(get_turf(reference_item), null, TRUE, src, used_item)
+	var/obj/item/food/sushi/result = new /obj/item/food/sushi(get_turf(reference_item), null, TRUE, src, used_item)
+	// copy offsets from the item on the table, so it doesn't jump around
+	// todo: a helper for this that takes into account center_of_mass?
+	result.pixel_x = reference_item.pixel_x
+	result.pixel_y = reference_item.pixel_y
+	result.pixel_z = reference_item.pixel_z
 	return TRUE
