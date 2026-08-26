@@ -219,7 +219,7 @@
 	var/chargen_name = get_chargen_name(calling_item.pref)
 	var/chargen_desc = get_chargen_desc(calling_item.pref)
 	if(istype(calling_item) && (ticked || calling_item.get_trait_total() + trait_cost <= get_config_value(/decl/config/num/max_character_traits)) && !incompatible_trait_taken)
-		result += "<a href='byond://?src=\ref[calling_item];toggle_trait=\ref[src]'>[ticked ? "<font color='#E67300'>[chargen_name]</font>" : "[chargen_name]"] ([trait_cost])</a>"
+		result += "<a href='byond://?src=\ref[calling_item];toggle_trait=[uid]'>[ticked ? "<font color='#E67300'>[chargen_name]</font>" : "[chargen_name]"] ([trait_cost])</a>"
 	else
 		result += ticked ? "<font color='#E67300'>[chargen_name]</font>" : "[chargen_name]"
 
