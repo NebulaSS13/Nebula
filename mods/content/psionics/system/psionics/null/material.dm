@@ -30,3 +30,4 @@
 /decl/stack_recipe/tile/nullglass
 	result_type = /obj/item/stack/tile/floor_nullglass
 	required_material = /decl/material/nullglass
+	uid = "stack_recipe_nullglass_tile"

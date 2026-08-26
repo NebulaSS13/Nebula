@@ -8,6 +8,8 @@
 	difficulty                  = MAT_VALUE_EASY_DIY
 	recipe_skill                = SKILL_BOTANY
 	req_amount                  = 30 * SHEET_MATERIAL_AMOUNT // Arbitrary amount to make 20 food items.
+	uid                         = "stack_recipe_fodder_stack"
 
 /decl/stack_recipe/fodder/bale
 	result_type                 = /obj/structure/haystack/bale
+	uid                         = "stack_recipe_fodder_bale"

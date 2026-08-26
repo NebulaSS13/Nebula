@@ -16,6 +16,7 @@
 	one_per_turf         = TRUE
 	result_type          = /obj/structure/window
 	allow_multiple_craft = FALSE
+	uid                  = "stack_recipe_window_full"
 
 /decl/stack_recipe/opacity/fullwindow/can_make(mob/user)
 	. = ..()
@@ -36,6 +37,7 @@
 	result_type          = /obj/structure/window
 	one_per_turf         = FALSE
 	allow_multiple_craft = FALSE
+	uid                  = "stack_recipe_window_border"
 
 /decl/stack_recipe/opacity/borderwindow/can_make(mob/user)
 	. = ..()
@@ -54,6 +56,7 @@
 /decl/stack_recipe/opacity/windoor
 	result_type          = /obj/structure/windoor_assembly
 	allow_multiple_craft = FALSE
+	uid                  = "stack_recipe_window_door"
 
 /decl/stack_recipe/opacity/windoor/can_make(mob/user)
 	. = ..()
