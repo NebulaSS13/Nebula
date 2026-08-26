@@ -1,5 +1,6 @@
 /decl/loadout_category/head
 	name = "Headwear"
+	uid = "loadout_category_head"
 
 /decl/loadout_option/head
 	slot = slot_head_str

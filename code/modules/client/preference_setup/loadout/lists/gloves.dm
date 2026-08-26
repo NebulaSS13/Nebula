@@ -1,5 +1,6 @@
 /decl/loadout_category/hands
 	name = "Handwear"
+	uid = "loadout_category_hands"
 
 /decl/loadout_option/gloves
 	cost = 2

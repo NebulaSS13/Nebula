@@ -1,5 +1,6 @@
 /decl/loadout_category/feet
 	name = "Footwear"
+	uid = "loadout_category_feet"
 
 /decl/loadout_option/shoes
 	slot = slot_shoes_str
