@@ -14,40 +14,45 @@
 
 /decl/stack_recipe/soft/teapot
 	result_type                 = /obj/item/chems/glass/handmade/teapot
+	uid                         = "stack_recipe_soft_handmade_teapot"
 
 /decl/stack_recipe/soft/cup
 	result_type                 = /obj/item/chems/glass/handmade/cup
+	uid                         = "stack_recipe_soft_handmade_cup"
 
 /decl/stack_recipe/soft/mug
 	result_type                 = /obj/item/chems/glass/handmade/mug
+	uid                         = "stack_recipe_soft_handmade_mug"
 
 /decl/stack_recipe/soft/vase
 	result_type                 = /obj/item/chems/glass/handmade/vase
+	uid                         = "stack_recipe_soft_handmade_vase"
 
 /decl/stack_recipe/soft/bowl
 	result_type                 = /obj/item/chems/glass/handmade/bowl
+	uid                         = "stack_recipe_soft_handmade_bowl"
 
 /decl/stack_recipe/soft/jar
 	result_type                 = /obj/item/chems/glass/handmade/jar
+	uid                         = "stack_recipe_soft_handmade_jar"
 
 /decl/stack_recipe/soft/bottle
 	result_type                 = /obj/item/chems/glass/handmade/bottle
+	uid                         = "stack_recipe_soft_handmade_bottle"
 
 /decl/stack_recipe/soft/bottle_wide
 	result_type                 = /obj/item/chems/glass/handmade/bottle/wide
+	uid                         = "stack_recipe_soft_handmade_bottle_wide"
 
 /decl/stack_recipe/soft/bottle_tall
 	result_type                 = /obj/item/chems/glass/handmade/bottle/tall
+	uid                         = "stack_recipe_soft_handmade_bottle_tall"
 
 /decl/stack_recipe/soft/stack
 	name                        = "brick"
 	name_plural                 = "bricks"
 	result_type                 = /obj/item/stack/material/brick
-
-/decl/stack_recipe/soft/bar
-	name                        = "bar"
-	name_plural                 = "bars"
-	result_type                 = /obj/item/stack/material/bar
+	uid                         = "stack_recipe_soft_stack_brick"
 
 /decl/stack_recipe/soft/stack/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	var/obj/item/stack/S = ..()
@@ -61,37 +66,45 @@
 	name                        = "bar"
 	name_plural                 = "bars"
 	result_type                 = /obj/item/stack/material/bar
-	result_type                 = /obj/item/stack/material/bar/wax
+	uid                         = "stack_recipe_soft_stack_bar"
 
 /decl/stack_recipe/soft/stack/large_lump
 	name                        = "large lump"
 	name_plural                 = "large lumps"
 	result_type                 = /obj/item/stack/material/lump/large
+	uid                         = "stack_recipe_soft_stack_lump_large"
 
 /decl/stack_recipe/soft/stack/small_lump
 	name                        = "small lump"
 	name_plural                 = "small lumps"
 	result_type                 = /obj/item/stack/material/lump
+	uid                         = "stack_recipe_soft_stack_lump_small"
 
 /decl/stack_recipe/soft/crucible
-	result_type = /obj/item/chems/crucible
+	result_type                 = /obj/item/chems/crucible
+	uid                         = "stack_recipe_soft_crucible"
 
 /decl/stack_recipe/soft/mould
-	name = "mould, blank"
-	result_type = /obj/item/chems/mould
-	category = "moulds"
+	name                        = "mould, blank"
+	result_type                 = /obj/item/chems/mould
+	category                    = "moulds"
+	uid                         = "stack_recipe_soft_mould_blank"
 
+// todo: remove since you can make a clay crucible to take an impression of?
 /decl/stack_recipe/soft/mould/crucible
 	name = "mould, crucible"
 	result_type = /obj/item/chems/mould/crucible
+	uid                         = "stack_recipe_soft_mould_crucible"
 
 /decl/stack_recipe/soft/mould/rod
 	name = "mould, rod"
 	result_type = /obj/item/chems/mould/rod
+	uid                         = "stack_recipe_soft_mould_rod"
 
 /decl/stack_recipe/soft/mould/ingot
 	name = "mould, ingot"
 	result_type = /obj/item/chems/mould/ingot
+	uid                         = "stack_recipe_soft_mould_ingot"
 
 /decl/stack_recipe/soft/sculpture
 	abstract_type               = /decl/stack_recipe/soft/sculpture
@@ -101,11 +114,14 @@
 
 /decl/stack_recipe/soft/sculpture/snowman
 	result_type                 = /obj/structure/snowman
+	uid                         = "stack_recipe_soft_sculpture_snowman"
 
 /decl/stack_recipe/soft/sculpture/snowspider
 	result_type                 = /obj/structure/snowman/spider
 	difficulty                  = MAT_VALUE_HARD_DIY
+	uid                         = "stack_recipe_soft_sculpture_snowspider"
 
 /decl/stack_recipe/soft/sculpture/snowbot
 	result_type                 = /obj/structure/snowman/bot
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
+	uid                         = "stack_recipe_soft_sculpture_nowbot"

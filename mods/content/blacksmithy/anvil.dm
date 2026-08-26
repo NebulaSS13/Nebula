@@ -130,6 +130,7 @@
 	material            = /decl/material/solid/metal/steel
 	max_health          = 500
 
-/decl/stack_recipe/steel/furniture
+/decl/stack_recipe/steel/furniture/anvil
 	result_type       = /obj/structure/anvil/improvised
 	difficulty        = MAT_VALUE_HARD_DIY
+	uid               = "stack_recipe_steel_anvil_improvised"

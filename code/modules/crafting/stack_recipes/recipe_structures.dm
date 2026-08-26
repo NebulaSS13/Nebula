@@ -7,3 +7,4 @@
 	required_material   = /decl/material/solid/metal/chromium
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	category            = "furniture"
+	uid                 = "stack_recipe_anomaly_container"

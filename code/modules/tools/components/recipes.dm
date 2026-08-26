@@ -21,9 +21,11 @@
 
 /decl/stack_recipe/tool/handle/long
 	result_type                 = /obj/item/tool_component/handle/long
+	uid                         = "stack_recipe_tool_handle_long"
 
 /decl/stack_recipe/tool/handle/short
 	result_type                 = /obj/item/tool_component/handle/short
+	uid                         = "stack_recipe_tool_handle_short"
 
 /decl/stack_recipe/tool/head
 	abstract_type               = /decl/stack_recipe/tool/head
@@ -31,15 +33,19 @@
 
 /decl/stack_recipe/tool/head/hammer
 	result_type                 = /obj/item/tool_component/head/hammer
+	uid                         = "stack_recipe_tool_head_hammer"
 
 /decl/stack_recipe/tool/head/hoe
 	result_type                 = /obj/item/tool_component/head/hoe
+	uid                         = "stack_recipe_tool_head_hoe"
 
 /decl/stack_recipe/tool/head/shovel
 	result_type                 = /obj/item/tool_component/head/shovel
+	uid                         = "stack_recipe_tool_head_shovel"
 
 /decl/stack_recipe/tool/head/handaxe
 	result_type                 = /obj/item/tool_component/head/handaxe
+	uid                         = "stack_recipe_tool_head_handaxe"
 
 /decl/stack_recipe/tool/head/sledgehammer
 	difficulty                  = MAT_VALUE_VERY_HARD_DIY
@@ -48,6 +54,7 @@
 		/obj/item/stack/material/ore,
 		/obj/item/stack/material/lump
 	)
+	uid                         = "stack_recipe_tool_head_sledgehammer"
 
 /decl/stack_recipe/tool/head/pickaxe
 	difficulty                  = MAT_VALUE_VERY_HARD_DIY
@@ -56,3 +63,4 @@
 		/obj/item/stack/material/ore,
 		/obj/item/stack/material/lump
 	)
+	uid                         = "stack_recipe_tool_head_pickaxe"

@@ -15,6 +15,7 @@
  */
 /decl/stack_recipe
 	abstract_type = /decl/stack_recipe
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	/// Descriptive name, omitting any materials etc. Taken from product if null.
 	var/name
 	/// Descriptive name for multiple products, uses "[name]s" if null.

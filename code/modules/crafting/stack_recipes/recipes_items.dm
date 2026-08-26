@@ -5,21 +5,25 @@
 	required_material = /decl/material/solid/metal/aluminium
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	category          = "weapons"
+	uid               = "stack_recipe_chem_grenade"
 
 /decl/stack_recipe/candle
 	result_type       = /obj/item/flame/candle/handmade
 	difficulty        = MAT_VALUE_EASY_DIY
 	required_material = /decl/material/solid/organic/wax
+	uid               = "stack_recipe_candle"
 
 /decl/stack_recipe/scroll
 	name              = "scroll"
 	result_type       = /obj/item/paper/scroll
 	required_material = /decl/material/solid/organic/paper
+	uid               = "stack_recipe_scroll"
 
 /decl/stack_recipe/paper_sheets
 	name              = "sheet of paper"
 	result_type       = /obj/item/paper
 	required_material = /decl/material/solid/organic/paper
+	uid               = "stack_recipe_paper_sheet"
 
 /decl/stack_recipe/paper_sheets/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	. = ..()
@@ -44,15 +48,19 @@
 /decl/stack_recipe/ring
 	result_type         = /obj/item/clothing/gloves/ring
 	validation_material = /decl/material/solid/metal/silver
+	uid                 = "stack_recipe_ring"
 
 /decl/stack_recipe/ring/thin
 	name                = "ring, thin"
 	result_type         = /obj/item/clothing/gloves/ring/thin
+	uid                 = "stack_recipe_ring_thin"
 
 /decl/stack_recipe/ring/thick
 	name                = "ring, thick"
 	result_type         = /obj/item/clothing/gloves/ring/thick
+	uid                 = "stack_recipe_ring_thick"
 
 /decl/stack_recipe/ring/split
 	name                = "ring, split"
 	result_type         = /obj/item/clothing/gloves/ring/split
+	uid                 = "stack_recipe_ring_split"
