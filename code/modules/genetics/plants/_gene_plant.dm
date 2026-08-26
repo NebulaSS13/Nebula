@@ -1,5 +1,6 @@
 /decl/plant_gene
 	abstract_type   = /decl/plant_gene
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	//expected_source = /datum/seed
 	//expected_target = /datum/seed
 	/// Set to a randomized gene mask in Initialize().

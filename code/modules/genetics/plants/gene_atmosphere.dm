@@ -5,6 +5,7 @@
 		TRAIT_LOWKPA_TOLERANCE,
 		TRAIT_HIGHKPA_TOLERANCE
 	)
+	uid = "plant_gene_atmosphere"
 
 /decl/plant_gene/atmosphere/mutate(datum/seed/seed, turf/location)
 	if(prob(60))

@@ -5,6 +5,7 @@
 		TRAIT_IDEAL_LIGHT,
 		TRAIT_LIGHT_TOLERANCE
 	)
+	uid = "plant_gene_environment"
 
 /decl/plant_gene/environment/mutate(datum/seed/seed, turf/location)
 	if(prob(60))
