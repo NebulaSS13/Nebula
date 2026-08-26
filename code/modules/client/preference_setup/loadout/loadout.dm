@@ -165,9 +165,9 @@
 			if(loadout_cat.max_selections < INFINITY)
 				category_selections = " - [loadout_cat.max_selections - pref.total_loadout_selections[category]] remaining"
 			if(category_cost)
-				. += " <a href='byond://?src=\ref[src];select_category=\ref[loadout_cat]'><font color = '#e67300'>[loadout_cat.name] - [category_cost][category_selections]</font></a> "
+				. += " <a href='byond://?src=\ref[src];select_category=[loadout_cat.uid]'><font color = '#e67300'>[loadout_cat.name] - [category_cost][category_selections]</font></a> "
 			else
-				. += " <a href='byond://?src=\ref[src];select_category=\ref[loadout_cat]'>[loadout_cat.name] - 0[category_selections]</a> "
+				. += " <a href='byond://?src=\ref[src];select_category=[loadout_cat.uid]'>[loadout_cat.name] - 0[category_selections]</a> "
 
 	. += "</b></center></td></tr>"
 	. += "<tr><td colspan=3><hr></td></tr>"
@@ -184,9 +184,9 @@
 			if(istype(gear))
 				if(gear.slot)
 					i++
-					. += "<tr><td colspan=2><center>Layer [i]: [gear.name]</center></td><td><a href='byond://?src=\ref[src];gear=\ref[gear];layer_lower=1'>Layer under</a><a href='byond://?src=\ref[src];gear=\ref[gear];layer_higher=1'>Layer over</a><a href='byond://?src=\ref[src];toggle_gear=\ref[gear]'>Remove</a></td></tr>"
+					. += "<tr><td colspan=2><center>Layer [i]: [gear.name]</center></td><td><a href='byond://?src=\ref[src];gear=[gear.uid];layer_lower=1'>Layer under</a><a href='byond://?src=\ref[src];gear=[gear.uid];layer_higher=1'>Layer over</a><a href='byond://?src=\ref[src];toggle_gear=[gear.uid]'>Remove</a></td></tr>"
 				else
-					other_gear += "<tr><td colspan=2><center>[gear.name]</center></td><td><a href='byond://?src=\ref[src];toggle_gear=\ref[gear]'>Remove</a></td></tr>"
+					other_gear += "<tr><td colspan=2><center>[gear.name]</center></td><td><a href='byond://?src=\ref[src];toggle_gear=[gear.uid]'>Remove</a></td></tr>"
 
 		if(length(other_gear))
 			. += "<tr><td colspan=3><b><hr><center>Other gear</b><hr></center></td></tr>"
@@ -213,7 +213,7 @@
 
 		var/ticked = (gear.uid in pref.gear_list[pref.gear_slot])
 		var/list/entry = list()
-		entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='byond://?src=\ref[src];toggle_gear=\ref[gear]'>[gear.name]</a></td>"
+		entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='byond://?src=\ref[src];toggle_gear=[gear.uid]'>[gear.name]</a></td>"
 		entry += "<td width = 10% style='vertical-align:top'>[gear.cost]</td>"
 		entry += "<td><font size=2>[gear.get_description(get_gear_metadata(gear, TRUE))]</font>"
 
@@ -280,7 +280,7 @@
 			for(var/datum/gear_tweak/tweak in gear.gear_tweaks)
 				var/contents = tweak.get_contents(get_tweak_metadata(gear, tweak))
 				if(contents)
-					entry += " <a href='byond://?src=\ref[src];gear=\ref[gear];tweak=\ref[tweak]'>[contents]</a>"
+					entry += " <a href='byond://?src=\ref[src];gear=[gear.uid];tweak=\ref[tweak]'>[contents]</a>"
 			entry += "</td></tr>"
 		if(!hide_unavailable_gear || allowed || ticked)
 			. += entry
@@ -308,7 +308,7 @@
 
 /datum/category_item/player_setup_item/loadout/OnTopic(href, href_list, user)
 	if(href_list["toggle_gear"])
-		var/decl/loadout_option/gear_to_toggle = locate(href_list["toggle_gear"])
+		var/decl/loadout_option/gear_to_toggle = decls_repository.get_decl_by_id(href_list["toggle_gear"])
 		if(!istype(gear_to_toggle))
 			return TOPIC_REFRESH
 		if(gear_to_toggle.uid in pref.gear_list[pref.gear_slot])
@@ -319,7 +319,7 @@
 
 	if(href_list["gear"])
 
-		var/decl/loadout_option/gear = locate(href_list["gear"])
+		var/decl/loadout_option/gear = decls_repository.get_decl_by_id(href_list["gear"])
 		if(!istype(gear))
 			return TOPIC_NOACTION
 
@@ -366,7 +366,7 @@
 		recalculate_loadout_cost()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	if(href_list["select_category"])
-		var/decl/loadout_category/loadout_cat = locate(href_list["select_category"])
+		var/decl/loadout_category/loadout_cat = decls_repository.get_decl_by_id(href_list["select_category"])
 		if(istype(loadout_cat) && (loadout_cat in global.using_map.loadout_categories))
 			current_tab = loadout_cat.type
 		else
