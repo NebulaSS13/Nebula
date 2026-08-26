@@ -190,30 +190,30 @@
 	if(!is_admin) return
 
 	if(href_list["add_antagonist"])
-		var/decl/special_role/antag = locate(href_list["add_antagonist"])
+		var/decl/special_role/antag = decls_repository.get_decl_by_id(href_list["add_antagonist"])
 		if(antag)
 			if(antag.add_antagonist(src, 1, 1, 0, 1, 1)) // Ignore equipment and role type for this.
-				log_admin("[key_name_admin(usr)] made [key_name(src)] into a [antag.name].")
+				log_admin("[key_name_admin(usr)] made [key_name(src)] into \a [antag].")
 			else
-				to_chat(usr, "<span class='warning'>[src] could not be made into a [antag.name]!</span>")
+				to_chat(usr, "<span class='warning'>[src] could not be made into \a [antag]!</span>")
 
 	else if(href_list["remove_antagonist"])
-		var/decl/special_role/antag = locate(href_list["remove_antagonist"])
+		var/decl/special_role/antag = decls_repository.get_decl_by_id(href_list["remove_antagonist"])
 		if(istype(antag))
 			antag.remove_antagonist(src)
 
 	else if(href_list["equip_antagonist"])
-		var/decl/special_role/antag = locate(href_list["equip_antagonist"])
+		var/decl/special_role/antag = decls_repository.get_decl_by_id(href_list["equip_antagonist"])
 		if(istype(antag))
 			antag.equip_role(src.current)
 
 	else if(href_list["unequip_antagonist"])
-		var/decl/special_role/antag = locate(href_list["unequip_antagonist"])
+		var/decl/special_role/antag = decls_repository.get_decl_by_id(href_list["unequip_antagonist"])
 		if(istype(antag))
 			antag.unequip_role(src.current)
 
 	else if(href_list["move_antag_to_spawn"])
-		var/decl/special_role/antag = locate(href_list["move_antag_to_spawn"])
+		var/decl/special_role/antag = decls_repository.get_decl_by_id(href_list["move_antag_to_spawn"])
 		if(istype(antag))
 			antag.place_mob(src.current)
 

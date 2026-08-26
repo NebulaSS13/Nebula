@@ -3,13 +3,13 @@
 	var/dat = "<tr><td><b>[name]:</b>"
 	var/extra = get_extra_panel_options(player)
 	if(is_antagonist(player))
-		dat += "<a href='byond://?src=\ref[player];remove_antagonist=\ref[src]'>\[-\]</a>"
-		dat += "<a href='byond://?src=\ref[player];equip_antagonist=\ref[src]'>\[equip\]</a>"
+		dat += "<a href='byond://?src=\ref[player];remove_antagonist=[uid]'>\[-\]</a>"
+		dat += "<a href='byond://?src=\ref[player];equip_antagonist=[uid]'>\[equip\]</a>"
 		if(LAZYLEN(starting_locations))
-			dat += "<a href='byond://?src=\ref[player];move_antag_to_spawn=\ref[src]'>\[move to spawn\]</a>"
+			dat += "<a href='byond://?src=\ref[player];move_antag_to_spawn=[uid]'>\[move to spawn\]</a>"
 		if(extra) dat += "[extra]"
 	else
-		dat += "<a href='byond://?src=\ref[player];add_antagonist=\ref[src]'>\[+\]</a>"
+		dat += "<a href='byond://?src=\ref[player];add_antagonist=[uid]'>\[+\]</a>"
 	dat += "</td></tr>"
 
 	return dat
