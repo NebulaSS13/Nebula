@@ -46,6 +46,7 @@
 	desc = "Whether or not the holosign is active."
 	can_write = FALSE
 	has_updates = FALSE
+	uid = "public_var_holosign_active"
 
 /decl/public_access/public_variable/holosign_on/access_var(obj/machinery/holosign/sign)
 	return sign.lit
@@ -54,6 +55,7 @@
 	name = "holosign toggle"
 	desc = "Toggle the holosign's active state."
 	call_proc = TYPE_PROC_REF(/obj/machinery/holosign, toggle)
+	uid = "public_method_holosign_toggle"
 
 /decl/stock_part_preset/radio/receiver/holosign
 	frequency = BUTTON_FREQ

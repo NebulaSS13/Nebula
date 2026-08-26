@@ -56,11 +56,13 @@
 	name = "launch"
 	desc = "Makes the mass driver launch immediately"
 	call_proc = TYPE_PROC_REF(/obj/machinery/mass_driver, drive)
+	uid = "public_method_massdriver_launch"
 
 /decl/public_access/public_method/driver_drive_delayed
 	name = "delayed launch"
 	desc = "Makes the mass driver launch after a short delay"
 	call_proc = TYPE_PROC_REF(/obj/machinery/mass_driver, delayed_drive)
+	uid = "public_method_massdriver_launch_delayed"
 
 /decl/stock_part_preset/radio/receiver/driver
 	frequency = BLAST_DOORS_FREQ

@@ -265,6 +265,7 @@
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_STRING
+	uid = "public_var_vent_scrubber_mode"
 
 /decl/public_access/public_variable/scrubbing/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
 	return machine.scrubbing
@@ -285,6 +286,7 @@
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_BOOLEAN
+	uid = "public_var_vent_scrubber_panic"
 
 /decl/public_access/public_variable/panic/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
 	return machine.panic
@@ -307,6 +309,7 @@
 	can_write = FALSE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_LIST
+	uid = "public_var_vent_scrubber_scrubbing_gas"
 
 /decl/public_access/public_variable/scrubbing_gas/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
 	return machine.scrubbing_gas.Copy()
@@ -315,12 +318,14 @@
 	name = "toggle panic siphon"
 	desc = "Toggles the panic siphon function."
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/unary/vent_scrubber, toggle_panic)
+	uid = "public_method_vent_scrubber_panic_toggle"
 
 /decl/public_access/public_method/set_scrub_gas
 	name = "set filter gases"
 	desc = "Given a list of gases, sets whether the gas is being scrubbed to the value of the gas in the list."
 	forward_args = TRUE
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/unary/vent_scrubber, set_scrub_gas)
+	uid = "public_method_vent_scrubber_set_scrub_gas"
 
 /decl/stock_part_preset/radio/event_transmitter/vent_scrubber
 	frequency = PUMP_FREQ

@@ -137,11 +137,12 @@
 
 /decl/public_access/public_variable/volume_rate
 	expected_type = /obj/machinery/atmospherics/unary/outlet_injector
-	name = "volume_rate"
+	name = "volume rate"
 	desc = "The rate at which the machine pumps (a number)."
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_NUMBER
+	uid = "public_var_outlet_injector_volume_rate"
 
 /decl/public_access/public_variable/volume_rate/access_var(obj/machinery/atmospherics/unary/outlet_injector/machine)
 	return machine.volume_rate
@@ -156,6 +157,7 @@
 	name = "inject"
 	desc = "Injects gas into its environment."
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/unary/outlet_injector, inject)
+	uid = "public_method_outlet_injector_inject"
 
 /decl/stock_part_preset/radio/event_transmitter/outlet_injector
 	frequency = ATMOS_TANK_FREQ

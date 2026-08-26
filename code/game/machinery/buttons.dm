@@ -89,6 +89,7 @@
 	desc = "Toggled whenever the button is pressed."
 	can_write = FALSE
 	has_updates = TRUE
+	uid = "public_var_button_active"
 
 /decl/public_access/public_variable/button_active/access_var(obj/machinery/button/button)
 	return button.active
@@ -104,6 +105,7 @@
 	desc = "Toggled whenever the button is pressed. Inverse value of button toggle."
 	can_write = FALSE
 	has_updates = TRUE
+	uid = "public_var_button_active_inverse"
 
 /decl/public_access/public_variable/inv_button_active/access_var(obj/machinery/button/button)
 	return !button.active
@@ -121,6 +123,7 @@
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_BOOLEAN
+	uid = "public_var_button_state"
 
 /decl/public_access/public_variable/button_state/access_var(obj/machinery/button/button)
 	return button.state

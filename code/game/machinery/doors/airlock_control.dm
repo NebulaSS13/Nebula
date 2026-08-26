@@ -57,16 +57,19 @@
 	name = "engage bolts"
 	desc = "Bolts the airlock, if possible."
 	call_proc = TYPE_PROC_REF(/obj/machinery/door/airlock, lock)
+	uid = "public_method_airlock_lock"
 
 /decl/public_access/public_method/airlock_unlock
 	name = "disengage bolts"
 	desc = "Unbolts the airlock, if possible."
 	call_proc = TYPE_PROC_REF(/obj/machinery/door/airlock, unlock)
+	uid = "public_method_airlock_unlock"
 
 /decl/public_access/public_method/airlock_toggle_bolts
 	name = "toggle bolts"
 	desc = "Toggles whether the airlock is bolted or not, if possible."
 	call_proc = TYPE_PROC_REF(/obj/machinery/door/airlock, toggle_lock)
+	uid = "public_method_airlock_bolts_toggle"
 
 /decl/public_access/public_variable/airlock_door_state
 	expected_type = /obj/machinery/door/airlock
@@ -75,6 +78,7 @@
 	can_write = FALSE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_STRING
+	uid = "public_var_airlock_state"
 
 /decl/public_access/public_variable/airlock_door_state/access_var(obj/machinery/door/airlock/door)
 	return door.density ? "closed" : "open"
@@ -86,6 +90,7 @@
 	can_write = FALSE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_STRING
+	uid = "public_var_airlock_bolt_state"
 
 /decl/public_access/public_variable/airlock_bolt_state/access_var(obj/machinery/door/airlock/door)
 	return door.locked ? "locked" : "unlocked"
@@ -191,6 +196,7 @@
 	can_write = FALSE
 	has_updates = TRUE
 	var_type = VAR_FORMAT_NUMBER
+	uid = "public_var_airlock_sensor_pressure"
 
 /decl/public_access/public_variable/airlock_pressure/access_var(obj/machinery/airlock_sensor/sensor)
 	return sensor.pressure
@@ -210,6 +216,7 @@
 	expected_type = /obj/machinery/airlock_sensor
 	can_write     = TRUE
 	var_type      = VAR_FORMAT_BOOLEAN
+	uid           = "public_var_airlock_sensor_cycling"
 
 /decl/public_access/public_variable/set_airlock_cycling/airlock_sensor/access_var(obj/machinery/airlock_sensor/owner)
 	return owner.master_cycling
@@ -360,6 +367,7 @@
 	expected_type = /obj/machinery/button/access
 	can_write     = TRUE
 	var_type      = VAR_FORMAT_BOOLEAN
+	uid           = "public_var_airlock_button_cycling"
 
 /decl/public_access/public_variable/set_airlock_cycling/access_button/access_var(obj/machinery/button/access/owner)
 	return owner.master_cycling
@@ -377,6 +385,7 @@
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_STRING
+	uid = "public_var_airlock_button_command"
 
 /decl/public_access/public_variable/button_command/access_var(obj/machinery/button/access/button)
 	return button.command

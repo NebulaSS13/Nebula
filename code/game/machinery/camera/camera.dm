@@ -357,12 +357,14 @@
 	name = "toggle camera"
 	desc = "Toggles camera on or off."
 	call_proc = TYPE_PROC_REF(/obj/machinery/camera, toggle_status)
+	uid = "public_method_camera_toggle"
 
 /decl/public_access/public_variable/camera_state
 	expected_type = /obj/machinery/camera
 	name = "camera status"
 	desc = "Status of the camera."
 	can_write = FALSE
+	uid = "public_var_camera_status"
 
 /decl/public_access/public_variable/camera_state/access_var(obj/machinery/camera/C)
 	return C.status ? "enabled" : "disabled"
@@ -372,6 +374,7 @@
 	name = "camera name"
 	desc = "Displayed name of the camera."
 	can_write = FALSE
+	uid = "public_var_camera_name"
 
 /decl/public_access/public_variable/camera_name/access_var(obj/machinery/camera/C)
 	var/datum/extension/network_device/camera/camera_device = get_extension(C, /datum/extension/network_device/)
@@ -382,6 +385,7 @@
 	name = "camera channels"
 	desc = "List of the channels this camera broadcasts on."
 	can_write = FALSE
+	uid = "public_var_camera_channels"
 
 /decl/public_access/public_variable/camera_channels/access_var(obj/machinery/camera/C)
 	return english_list(C.get_channels())
