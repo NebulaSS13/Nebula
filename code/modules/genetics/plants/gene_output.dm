@@ -4,6 +4,7 @@
 		TRAIT_PRODUCES_POWER,
 		TRAIT_BIOLUM
 	)
+	uid = "plant_gene_output"
 
 /decl/plant_gene/output/mutate(datum/seed/seed, turf/location)
 	if(prob(50))

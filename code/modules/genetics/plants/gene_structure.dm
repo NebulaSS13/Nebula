@@ -6,3 +6,4 @@
 		TRAIT_HARVEST_REPEAT,
 		TRAIT_LARGE
 	)
+	uid = "plant_gene_structure"

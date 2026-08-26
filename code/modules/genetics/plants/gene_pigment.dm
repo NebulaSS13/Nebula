@@ -6,3 +6,4 @@
 		TRAIT_BIOLUM_COLOUR,
 		TRAIT_LEAVES_COLOUR
 	)
+	uid = "plant_gene_pigment"
