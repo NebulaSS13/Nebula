@@ -49,7 +49,7 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 	// Pre-init all our gene master datums. This generates mask strings and prepares us for trait copying/mutation.
 	// We'll also populate our masked gene list here for the botany machine UI.
 	for(var/decl/plant_gene/gene in decls_repository.get_decls_of_type_unassociated(/decl/plant_gene))
-		gene_masked_list.Add(list(list("tag" = "\ref[gene]", "mask" = gene.name)))
+		gene_masked_list.Add(list(list("tag" = gene.uid, "mask" = gene.name)))
 
 	// Populate the global seed datum list.
 	for(var/type in subtypesof(/datum/seed))
