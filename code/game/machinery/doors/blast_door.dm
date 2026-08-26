@@ -233,6 +233,7 @@
 	name = "delayed close door"
 	desc = "Closes the door if possible, after a short delay."
 	call_proc = TYPE_PROC_REF(/obj/machinery/door/blast, delayed_close)
+	uid = "public_method_blastdoor_close_delayed"
 
 /decl/stock_part_preset/radio/receiver/blast_door
 	frequency = BLAST_DOORS_FREQ

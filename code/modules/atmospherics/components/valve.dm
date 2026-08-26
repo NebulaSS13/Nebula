@@ -125,6 +125,7 @@
 	desc = "Whether or not the valve is open."
 	can_write = FALSE
 	has_updates = FALSE
+	uid = "public_var_valve_open"
 
 /decl/public_access/public_variable/valve_open/access_var(obj/machinery/atmospherics/valve/valve)
 	return valve.open
@@ -133,16 +134,19 @@
 	name = "open valve"
 	desc = "Sets the valve to open."
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/valve, open)
+	uid = "public_method_valve_open"
 
 /decl/public_access/public_method/close_valve
 	name = "open valve"
 	desc = "Sets the valve to open."
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/valve, close)
+	uid = "public_method_valve_close"
 
 /decl/public_access/public_method/toggle_valve
 	name = "toggle valve"
 	desc = "Toggles whether the valve is open or closed."
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/valve, toggle)
+	uid = "public_method_valve_toggle"
 
 /obj/machinery/atmospherics/valve/digital		// can be controlled by AI
 	name = "digital valve"

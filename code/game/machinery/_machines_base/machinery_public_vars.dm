@@ -1,4 +1,5 @@
 /decl/public_access
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	var/name
 	var/desc
 

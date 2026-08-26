@@ -622,6 +622,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	desc = "Sends the specified document over to the specified network tag."
 	call_proc = TYPE_PROC_REF(/obj/machinery/faxmachine, receive_fax)
 	forward_args = TRUE
+	uid = "public_method_fax_receive_message"
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // Admin Faxes Handling

@@ -478,6 +478,7 @@
 	can_write = FALSE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_NUMBER
+	uid = "public_var_atmos_powerdraw"
 
 /decl/public_access/public_variable/power_draw/access_var(obj/machinery/atmospherics/machine)
 	return machine.last_power_draw
@@ -489,6 +490,7 @@
 	can_write = FALSE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_NUMBER
+	uid = "public_var_atmos_flowrate"
 
 /decl/public_access/public_variable/flow_rate/access_var(obj/machinery/atmospherics/machine)
 	return machine.last_flow_rate

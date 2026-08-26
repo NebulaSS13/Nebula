@@ -122,6 +122,7 @@
 	name = "flash"
 	desc = "Performs a flash, if possible."
 	call_proc = TYPE_PROC_REF(/obj/machinery/flasher, flash)
+	uid = "public_var_flasher_flash"
 
 /decl/stock_part_preset/radio/receiver/flasher
 	frequency = BUTTON_FREQ
