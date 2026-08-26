@@ -20,6 +20,7 @@
 	default_outfit = /decl/outfit/actor
 	default_access = list()
 	id_title = "Actor"
+	uid = "special_role_actor"
 
 /obj/abstract/landmark/actor_spawn
 	name = "ActorSpawn"

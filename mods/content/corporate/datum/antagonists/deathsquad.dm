@@ -20,6 +20,7 @@
 	faction = "deathsquad"
 	default_outfit = /decl/outfit/commando
 	id_title = "Asset Protection"
+	uid = "special_role_deathsquad"
 	var/deployed = 0
 
 /decl/special_role/deathsquad/attempt_spawn()

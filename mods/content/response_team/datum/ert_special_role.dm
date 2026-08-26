@@ -23,6 +23,7 @@
 	default_outfit = /decl/outfit/ert
 
 	base_to_load = "ERT Base"
+	uid = "special_role_emergency_responder"
 
 /decl/special_role/ert/create_default(var/mob/source)
 	var/mob/living/human/M = ..()
