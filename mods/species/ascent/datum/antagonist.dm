@@ -14,6 +14,7 @@
 	initial_spawn_req = 4
 	initial_spawn_target = 6
 	rig_type = /obj/item/rig/mantid
+	uid = "special_role_gyne_hunter"
 
 /decl/special_role/hunter/update_antag_mob(var/datum/mind/player, var/preserve_appearance)
 	. = ..()

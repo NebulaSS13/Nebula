@@ -21,6 +21,7 @@
 	faction_indicator = "hud_rev"
 	faction_invisible = 1
 	faction = "revolutionary"
+	uid = "special_role_revolutionary"
 
 	blacklisted_jobs = list(/datum/job/submap)
 	var/command_department_id
