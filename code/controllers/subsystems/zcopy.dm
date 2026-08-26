@@ -1011,14 +1011,15 @@ SUBSYSTEM_DEF(zcopy)
 		if (Tscan.lighting_overlay)
 			lighting_overlays[ZM_COMPUTE_DEPTH(Tscan.lighting_overlay.z)] = Tscan.lighting_overlay
 
+	var/turf/true_root = T
+	while (HasBelow(true_root.z) && ZM_TURF_DOES_NOT_TERMINATE_ROOT_SCAN(true_root))
+		true_root = GetBelow(true_root)
+
 	var/root = "(null)"
 	if (T.z_discovered_root)
 		root = "[T.z_discovered_root] (z [T.z_discovered_root.z], ty [T.z_discovered_root.type], \ref[T.z_discovered_root])"
 
-	var/computed_root = "(null)"
-	if (computed_stack.len)
-		Tscan = computed_stack[computed_stack.len]
-		computed_root = "[Tscan] (z [Tscan.z], ty [Tscan.type], \ref[Tscan])"
+	var/computed_root = "[true_root] (z [true_root.z], ty [true_root.type], \ref[true_root])"
 
 	var/above_label = "(no above)"
 	if (T.above)
@@ -1036,7 +1037,7 @@ SUBSYSTEM_DEF(zcopy)
 		"<b>Queue occurrences:</b> [T.z_queued]",
 		// boundaries don't compute eventually_space, nor do non-z turfs
 		"<b>Above space:</b> Apparent: [FMT_YESNO(T.z_eventually_space)], Actual: [FMT_YESNO(is_above_space)] - [FMT_MAYBE(T.z_eventually_space == is_above_space, !TURF_IS_MIMIC(T))]",
-		"<b>Root:</b> [FMT_MAYBE(T.z_discovered_root == Tscan, T.z_was_fastinit || !TURF_IS_MIMIC(T))]",	// fast init doesn't set this, nor do boundaries, nor do non-z turfs
+		"<b>Root:</b> [FMT_MAYBE(T.z_discovered_root == true_root, T.z_was_fastinit || !TURF_IS_MIMIC(T))]",	// fast init doesn't set this, nor do boundaries, nor do non-z turfs
 		"- Apparent [root]" + (T.z_was_fastinit ? " (fast init)" : ""),
 		"- Actual [computed_root]",
 		"<b>Z Flags</b>: [english_list(bitfield2list(T.z_flags, global.mimic_defines), "(none)")]",
@@ -1104,13 +1105,13 @@ SUBSYSTEM_DEF(zcopy)
 
 	if (computed_stack ~= apparent_stack)
 		out += "<b>Z-stack:</b> <font color='green'>OK</font>"
-		out += SSzcopy.debug_fmt_turf_list(computed_stack)
+		out += SSzcopy.debug_fmt_turf_list(computed_stack, true_root)
 	else
 		out += "<b>Z-stack:</b> <font color='red'>MISMATCH</font>"
 		out += "Expected:"
-		out += SSzcopy.debug_fmt_turf_list(computed_stack)
+		out += SSzcopy.debug_fmt_turf_list(computed_stack, true_root)
 		out += "Actual:"
-		out += SSzcopy.debug_fmt_turf_list(apparent_stack)
+		out += SSzcopy.debug_fmt_turf_list(apparent_stack, true_root)
 
 	if (!TURF_IS_MIMICKING(T))
 		out += "<h3>Not a mimic.</h3>"
@@ -1270,7 +1271,7 @@ SUBSYSTEM_DEF(zcopy)
 	else
 		out += "<em>No atoms.</em>"
 
-/datum/controller/subsystem/zcopy/proc/debug_fmt_turf_list(list/turf/turfs)
+/datum/controller/subsystem/zcopy/proc/debug_fmt_turf_list(list/turf/turfs, turf/root)
 	var/list/working = list("<ul>")
 	for (var/item in turfs)
 		var/turf/T = astype(item, /turf)
@@ -1283,7 +1284,13 @@ SUBSYSTEM_DEF(zcopy)
 		if (flags.len)
 			flags_text = "<code>[flags.Join(" | ")]</code>"
 
-		working += "<li>[T.z]: [T], <code>[T.type]</code>, flags [flags_text]</li>"
+		var/terminating_text = ""
+		var/prefix_text = "[T.z]"
+		if (item == root)
+			terminating_text = " - <b>ROOT</b>"
+			prefix_text = "<b>[prefix_text]</b>"
+
+		working += "<li>[prefix_text]: [T], <code>[T.type]</code>, flags [flags_text][terminating_text]</li>"
 
 	working += "</ul>"
 
