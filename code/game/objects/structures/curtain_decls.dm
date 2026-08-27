@@ -2,6 +2,7 @@
 // Curtain types declaration
 //
 /decl/curtain_kind
+	abstract_type = /decl/curtain_kind
 	var/name = "curtain"
 	var/color = COLOR_WHITE
 	var/alpha = 255
