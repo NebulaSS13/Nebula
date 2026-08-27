@@ -1,4 +1,5 @@
 /decl/research_field
+	abstract_type = /decl/research_field
 	var/name
 	var/desc
 	var/id

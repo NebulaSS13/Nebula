@@ -1,4 +1,5 @@
 /decl/grab
+	abstract_type = /decl/grab
 	var/name                    = "generic grab"
 	/// Whether or not the grabbed person can move out of the grab
 	var/stop_move               = 0

@@ -8,6 +8,7 @@ Do not work with lazy-initialized parts.
 	var/list/stock_part_presets  // Format: assotiative list of decl path -> number to apply.
 
 /decl/stock_part_preset
+	abstract_type = /decl/stock_part_preset
 	var/expected_part_type
 
 /decl/stock_part_preset/proc/apply(obj/machinery/machine, obj/item/stock_parts/part)

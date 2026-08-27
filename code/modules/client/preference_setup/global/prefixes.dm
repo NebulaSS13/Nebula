@@ -1,4 +1,5 @@
 /decl/prefix
+	abstract_type = /decl/prefix
 	decl_flags = DECL_FLAG_MANDATORY_UID
 	var/name
 	var/default_key

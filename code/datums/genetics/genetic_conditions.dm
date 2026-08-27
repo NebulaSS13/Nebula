@@ -1,4 +1,5 @@
 /decl/genetic_condition
+	abstract_type = /decl/genetic_condition
 	decl_flags = DECL_FLAG_MANDATORY_UID
 	/// Descriptive name, used in VV panel.
 	var/name
