@@ -1,5 +1,6 @@
 // This system is used to grab a ghost from observers with the required preferences and lack of bans set.
 /decl/ghosttrap
+	abstract_type = /decl/ghosttrap
 	var/name
 	var/minutes_since_death = 0     // If non-zero the ghost must have been dead for this many minutes to be allowed to spawn
 	var/list/ban_checks

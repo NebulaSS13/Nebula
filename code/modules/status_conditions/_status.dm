@@ -3,6 +3,7 @@ var/global/list/status_marker_holders = list()
 // Check code/modules/mob/mob_status.dm code/modules/mob/living/living_status.dm 
 // for the procs that check/set/process these status conditions. 
 /decl/status_condition
+	abstract_type = /decl/status_condition
 	var/name
 	var/check_flags = 0
 	var/list/victim_data

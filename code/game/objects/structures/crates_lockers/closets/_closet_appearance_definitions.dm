@@ -3,6 +3,7 @@
 	. = ..(maploading)
 
 /decl/closet_appearance
+	// this is NOT abstract
 	var/color = COLOR_GRAY40
 	var/decals = list(
 		"upper_vent",

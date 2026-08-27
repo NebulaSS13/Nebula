@@ -1,4 +1,5 @@
 /decl/submap_archetype
+	abstract_type = /decl/submap_archetype
 	var/descriptor = "generic ship archetype"
 	var/list/whitelisted_species = list()
 	var/list/blacklisted_species = list()
