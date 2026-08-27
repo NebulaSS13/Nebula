@@ -253,6 +253,7 @@
 
 //These now are basically only used to spawn hazards. Will be useful when we need to spawn group of moving hazards
 /decl/overmap_event
+	abstract_type = /decl/overmap_event
 	var/name = "map event"
 	var/radius = 2
 	var/count = 6

@@ -1,5 +1,6 @@
 // Datum used for gathering a set of prometheus metrics.
 /decl/metric_family
+	abstract_type = /decl/metric_family
 	var/name = null
 	var/metric_type = null
 	var/help = null
