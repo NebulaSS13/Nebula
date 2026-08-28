@@ -1582,7 +1582,7 @@ var/global/list/misc_jobban_roles = list("Botany Roles", "Graffiti")
 
 	if(href_list["toggle_mutation"])
 		var/mob/M = locate(href_list["toggle_mutation"])
-		var/decl/genetic_condition/condition = locate(href_list["block"])
+		var/decl/genetic_condition/condition = decls_repository.get_decl_by_id(href_list["block"])
 		if(istype(condition) && istype(M) && !QDELETED(M))
 			var/result
 			var/had_condition

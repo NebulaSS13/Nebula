@@ -67,7 +67,7 @@
 	data["boss_short"] = global.using_map.boss_short
 
 	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-	data["current_security_level_ref"] = any2ref(security_state.current_security_level)
+	data["current_security_level_ref"] = security_state.current_security_level.uid
 	data["current_security_level_title"] = security_state.current_security_level.name
 
 	data["cannot_change_security_level"] = !security_state.can_change_security_level()
@@ -76,7 +76,7 @@
 	for(var/decl/security_level/security_level in security_state.comm_console_security_levels)
 		var/list/security_setup = list()
 		security_setup["title"] = security_level.name
-		security_setup["ref"] = any2ref(security_level)
+		security_setup["uid"] = security_level.uid
 		security_levels[++security_levels.len] = security_setup
 	data["security_levels"] = security_levels
 
@@ -243,8 +243,8 @@
 			. = 1
 			if(is_authenticated(user) && !issilicon(user) && ntn_cont && ntn_comm)
 				var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-				var/decl/security_level/target_level = locate(href_list["target"]) in security_state.comm_console_security_levels
-				if(target_level && security_state.can_switch_to(target_level))
+				var/decl/security_level/target_level = decls_repository.get_decl_by_id(href_list["target"])
+				if(target_level && (target_level in security_state.comm_console_security_levels) && security_state.can_switch_to(target_level))
 					var/confirm = alert("Are you sure you want to change the alert level to [target_level.name]?", name, "No", "Yes")
 					if(confirm == "Yes" && can_still_topic())
 						if(security_state.set_security_level(target_level))

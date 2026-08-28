@@ -176,7 +176,7 @@ var/global/BSACooldown = 0
 				for(var/decl/genetic_condition/mutation as anything in decls_repository.get_decls_of_type_unassociated(/decl/genetic_condition))
 					if(i % 5 == 0)
 						body += "</tr><tr>"
-					body += "<td><a href='byond://?src=\ref[src];toggle_mutation=\ref[M];block=\ref[mutation]' style='color:[M.has_genetic_condition(mutation.type) ? "#006600" : "#ff0000"];'>[mutation.name]</a></td>"
+					body += "<td><a href='byond://?src=\ref[src];toggle_mutation=\ref[M];block=[mutation.uid]' style='color:[M.has_genetic_condition(mutation.type) ? "#006600" : "#ff0000"];'>[mutation.name]</a></td>"
 					i++
 				body += "</tr></table>"
 
@@ -1166,7 +1166,7 @@ var/global/BSACooldown = 0
 		for(var/antag_type in SSticker.mode.associated_antags)
 			var/decl/special_role/antag = GET_DECL(antag_type)
 			if(antag)
-				out += "<a href='byond://?src=\ref[SSticker.mode];debug_antag=\ref[antag]'>[antag.name]</a>.</br>"
+				out += "<a href='byond://?src=\ref[SSticker.mode];debug_antag=[antag.uid]'>[antag.name]</a>.</br>"
 
 	if(SSticker.mode.round_autoantag)
 		out += "<b>Autotraitor <a href='byond://?src=\ref[SSticker.mode];toggle=autotraitor'>enabled</a></b>."
@@ -1182,9 +1182,9 @@ var/global/BSACooldown = 0
 	if(SSticker.mode.antag_templates && SSticker.mode.antag_templates.len)
 		for(var/decl/special_role/antag in SSticker.mode.antag_templates)
 			antag.update_current_antag_max(SSticker.mode)
-			out += " <a href='byond://?src=\ref[SSticker.mode];debug_antag=\ref[antag]'>[antag.name]</a>"
+			out += " <a href='byond://?src=\ref[SSticker.mode];debug_antag=[antag.uid]'>[antag.name]</a>"
 			out += " ([antag.get_antag_count()]/[antag.cur_max]) "
-			out += " <a href='byond://?src=\ref[SSticker.mode];remove_antag_type=\ref[antag]'>\[-\]</a><br/>"
+			out += " <a href='byond://?src=\ref[SSticker.mode];remove_antag_type=[antag.uid]'>\[-\]</a><br/>"
 	else
 		out += " None."
 	out += " <a href='byond://?src=\ref[SSticker.mode];add_antag_type=1'>\[+\]</a><br/>"

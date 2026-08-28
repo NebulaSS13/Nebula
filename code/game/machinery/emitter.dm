@@ -180,6 +180,7 @@
 	name = "toggle emitter"
 	desc = "Toggles whether or not the emitter is active. It must be unlocked to work."
 	call_proc = TYPE_PROC_REF(/obj/machinery/emitter, activate)
+	uid = "public_method_emitter_toggle"
 
 /decl/public_access/public_variable/emitter_active
 	expected_type = /obj/machinery/emitter
@@ -187,6 +188,7 @@
 	desc = "Whether or not the emitter is firing."
 	can_write = FALSE
 	has_updates = FALSE
+	uid = "public_var_emitter_active"
 
 /decl/public_access/public_variable/emitter_active/access_var(obj/machinery/emitter/emitter)
 	return emitter.active
@@ -197,6 +199,7 @@
 	desc = "Whether or not the emitter is locked. Being locked prevents one from changing the active state."
 	can_write = FALSE
 	has_updates = FALSE
+	uid = "public_var_emitter_locked"
 
 /decl/public_access/public_variable/emitter_locked/access_var(obj/machinery/emitter/emitter)
 	return emitter.locked

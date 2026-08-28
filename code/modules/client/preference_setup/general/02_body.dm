@@ -302,7 +302,7 @@
 			if(!length(available_styles) || (length(available_styles) == 1 && available_styles[1] == GET_DECL(accessory_cat_decl.default_accessory)))
 				continue
 
-			var/cat_decl_ref = "\ref[accessory_cat_decl]"
+			var/cat_decl_ref = accessory_cat_decl.uid
 			if(accessory_cat_decl.single_selection)
 				var/current_accessory = length(current_accessories) ? current_accessories[1] : accessory_cat_decl.default_accessory
 				var/decl/sprite_accessory/accessory_decl = GET_DECL(current_accessory)
@@ -311,7 +311,7 @@
 				for(var/metadata_type in accessory_decl.accessory_metadata_types)
 					var/decl/sprite_accessory_metadata/metadata = GET_DECL(metadata_type)
 					metadata_strings += metadata.get_metadata_options_string(src, accessory_cat_decl, accessory_decl, LAZYACCESS(accessory_metadata, metadata_type))
-				var/acc_decl_ref = "\ref[accessory_decl]"
+				var/acc_decl_ref = accessory_decl.uid
 				accessory_strings += "<tr>"
 				accessory_strings += "<td width = '100px'><b>[accessory_cat_decl.name]</b></td>"
 				accessory_strings += "<td width = '100px'>[jointext(metadata_strings, "<br>")]</td>"
@@ -334,7 +334,7 @@
 				for(var/metadata_type in accessory_decl.accessory_metadata_types)
 					var/decl/sprite_accessory_metadata/metadata = GET_DECL(metadata_type)
 					metadata_strings += metadata.get_metadata_options_string(src, accessory_cat_decl, accessory_decl, LAZYACCESS(accessory_metadata, metadata_type))
-				var/acc_decl_ref = "\ref[accessory_decl]"
+				var/acc_decl_ref = accessory_decl.uid
 				accessory_strings += "<tr>"
 				accessory_strings += "<td width = '100px'><a href='byond://?src=\ref[src];acc_cat_decl=[cat_decl_ref];acc_decl=[acc_decl_ref];acc_remove=1'>Remove</a></td>"
 				accessory_strings += "<td width = '100px'>[jointext(metadata_strings, "<br>")]</td>"
@@ -386,8 +386,8 @@
 
 	else if (href_list["acc_decl"] || href_list["acc_cat_decl"])
 
-		var/decl/sprite_accessory/accessory_decl = locate(href_list["acc_decl"])
-		var/decl/sprite_accessory_category/accessory_category = locate(href_list["acc_cat_decl"])
+		var/decl/sprite_accessory/accessory_decl = decls_repository.get_decl_by_id(href_list["acc_decl"])
+		var/decl/sprite_accessory_category/accessory_category = decls_repository.get_decl_by_id(href_list["acc_cat_decl"])
 		if(!istype(accessory_decl) && !istype(accessory_category))
 			return TOPIC_NOACTION
 		if(!istype(accessory_category))
@@ -405,7 +405,7 @@
 
 			if(!istype(accessory_decl))
 				return TOPIC_NOACTION
-			var/decl/sprite_accessory_metadata/metadata_decl = locate(href_list["acc_metadata"])
+			var/decl/sprite_accessory_metadata/metadata_decl = decls_repository.get_decl_by_id(href_list["acc_metadata"])
 			if(!istype(metadata_decl) || !(metadata_decl.type in accessory_decl.accessory_metadata_types))
 				return TOPIC_NOACTION
 			var/list/accessory_metadata = current_accessories[accessory_decl.type] || accessory_decl.get_default_accessory_metadata()

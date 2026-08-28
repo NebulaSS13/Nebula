@@ -234,7 +234,7 @@
 	if(href_list["make"])
 
 		// Retrieve our recipe decl.
-		var/decl/stack_recipe/recipe = locate(href_list["make"])
+		var/decl/stack_recipe/recipe = decls_repository.get_decl_by_id(href_list["make"])
 		if(!istype(recipe))
 			return TOPIC_NOACTION
 

@@ -1,5 +1,6 @@
 /decl/loadout_category/utility
 	name = "Utility"
+	uid = "loadout_category_utility"
 
 // "Useful" items - I'm guessing things that might be used at work?
 /decl/loadout_option/utility

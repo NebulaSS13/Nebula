@@ -174,6 +174,7 @@ Thus, the two variables affect pump operation are set in New():
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_NUMBER
+	uid = "public_var_pump_target_pressure"
 
 /decl/public_access/public_variable/pump_target_output/access_var(obj/machinery/atmospherics/binary/pump/machine)
 	return machine.target_pressure

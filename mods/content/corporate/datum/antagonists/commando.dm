@@ -12,6 +12,7 @@
 	default_access = list(access_mercenary)
 	rig_type = /obj/item/rig/merc
 	id_title = "Commando"
+	uid = "special_role_deathsquad_mercenary"
 
 /decl/outfit/mercenary_commando
 	name =    "Special Role - Mercenary Commando"

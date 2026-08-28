@@ -15,7 +15,7 @@
 		. = TOPIC_REFRESH
 
 	if(href_list["eject_mat"])
-		var/decl/material/mat = locate(href_list["eject_mat"])
+		var/decl/material/mat = decls_repository.get_decl_by_id(href_list["eject_mat"])
 		if(istype(mat))
 			try_dump_material(mat.type)
 			. = TOPIC_REFRESH

@@ -125,6 +125,7 @@
 	desc = "If true, the output is diverted to the side; if false, the output goes straight."
 	can_write = FALSE
 	has_updates = FALSE
+	uid = "public_var_tvalve_state"
 
 /decl/public_access/public_variable/tvalve_state/access_var(obj/machinery/atmospherics/tvalve/tvalve)
 	return tvalve.state
@@ -133,16 +134,19 @@
 	name = "valve go straight"
 	desc = "Sets the valve to send output straight."
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/tvalve, go_straight)
+	uid = "public_method_tvalve_straight"
 
 /decl/public_access/public_method/tvalve_go_side
 	name = "valve go side"
 	desc = "Redirects output to the side."
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/tvalve, go_to_side)
+	uid = "public_method_tvalve_side"
 
 /decl/public_access/public_method/tvalve_toggle
 	name = "valve toggle"
 	desc = "Toggles the output direction."
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/tvalve, toggle)
+	uid = "public_method_tvalve_toggle"
 
 /decl/stock_part_preset/radio/receiver/tvalve
 	frequency = FUEL_FREQ

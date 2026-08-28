@@ -1,5 +1,6 @@
 /decl/special_role
 	abstract_type = /decl/special_role
+	decl_flags = DECL_FLAG_MANDATORY_UID
 
 	// Text shown when becoming this antagonist.
 	var/list/restricted_jobs = 		list() // Jobs that cannot be this antagonist at roundstart (depending on config)

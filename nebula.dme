@@ -1897,7 +1897,6 @@
 #include "code\modules\client\preferences_toggle.dm"
 #include "code\modules\client\mouse_pointer\_mouse_pointer.dm"
 #include "code\modules\client\mouse_pointer\mouse_pointer_definitions.dm"
-#include "code\modules\client\preference_setup\_defines.dm"
 #include "code\modules\client\preference_setup\preference_setup.dm"
 #include "code\modules\client\preference_setup\antagonism\01_candidacy.dm"
 #include "code\modules\client\preference_setup\antagonism\02_setup.dm"

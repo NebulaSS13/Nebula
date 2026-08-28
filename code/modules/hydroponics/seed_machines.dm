@@ -191,7 +191,7 @@
 		if(!genetics || !loaded_disk)
 			return TOPIC_REFRESH
 
-		var/decl/plant_gene/gene_master = locate(href_list["get_gene"])
+		var/decl/plant_gene/gene_master = decls_repository.get_decl_by_id(href_list["get_gene"])
 		if(ispath(gene_master))
 			gene_master = GET_DECL(gene_master)
 

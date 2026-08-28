@@ -16,6 +16,7 @@
 	default_outfit = /decl/outfit/ninja
 	id_title = "Infiltrator"
 	rig_type = /obj/item/rig/light/ninja
+	uid = "special_role_ninja"
 	var/list/ninja_titles
 	var/list/ninja_names
 

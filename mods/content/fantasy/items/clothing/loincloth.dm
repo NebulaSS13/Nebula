@@ -8,4 +8,5 @@
 	material = /decl/material/solid/organic/skin/fur
 
 /decl/stack_recipe/textiles/loincloth
-	result_type       = /obj/item/clothing/pants/loincloth
+	result_type = /obj/item/clothing/pants/loincloth
+	uid         = "stack_recipe_textile_loincloth"

@@ -114,7 +114,7 @@
 		. = TOPIC_REFRESH
 
 	if(href_list["toggle_casting"])
-		var/decl/material/mat = locate(href_list["toggle_casting"])
+		var/decl/material/mat = decls_repository.get_decl_by_id(href_list["toggle_casting"])
 		if(istype(mat))
 			if(mat.type in casting)
 				casting -= mat.type
@@ -134,7 +134,7 @@
 			continue
 		var/samt = floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 		var/obj/item/stack/material/sheet = mat.default_solid_form
-		materials += list(list("label" = "[mat.liquid_name]<br>[ramt]u ([samt] [samt == 1 ? initial(sheet.singular_name) : initial(sheet.plural_name)])", "casting" = (mtype in casting), "key" = "\ref[mat]"))
+		materials += list(list("label" = "[mat.liquid_name]<br>[ramt]u ([samt] [samt == 1 ? initial(sheet.singular_name) : initial(sheet.plural_name)])", "casting" = (mtype in casting), "key" = mat.uid))
 		data["materials"] = materials
 	return data
 

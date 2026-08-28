@@ -13,10 +13,12 @@
 	one_per_turf               = TRUE
 	on_floor                   = TRUE
 	category                   = "furniture"
+	uid                        = "stack_recipe_textile_rug"
 
 /decl/stack_recipe/textiles/cloak
 	result_type                = /obj/item/clothing/suit/cloak/hide
 	category                   = "clothing"
+	uid                        = "stack_recipe_textile_cloak"
 
 /decl/stack_recipe/textiles/banner
 	name                       = "banner"
@@ -24,41 +26,50 @@
 	category                   = "furniture"
 	crafting_extra_cost_factor = 1.1 // less material is lost because it's relatively simple
 	difficulty                 = MAT_VALUE_NORMAL_DIY // Slightly easier than making actual clothing.
+	uid                        = "stack_recipe_textile_banner"
 
 /decl/stack_recipe/textiles/banner/forked
 	name                       = "banner, forked"
 	result_type                = /obj/item/banner/forked
+	uid                        = "stack_recipe_textile_banner_forked"
 
 /decl/stack_recipe/textiles/banner/pointed
 	name                       = "banner, pointed"
 	result_type                = /obj/item/banner/pointed
+	uid                        = "stack_recipe_textile_banner_pointed"
 
 /decl/stack_recipe/textiles/banner/rounded
 	name                       = "banner, rounded"
 	result_type                = /obj/item/banner/rounded
+	uid                        = "stack_recipe_textile_banner_rounded"
 
 /decl/stack_recipe/textiles/banner/square
 	name                       = "banner, square"
 	result_type                = /obj/item/banner/square
+	uid                        = "stack_recipe_textile_banner_square"
 
 /decl/stack_recipe/textiles/banner/tasselled
 	name                       = "banner, tasselled"
 	result_type                = /obj/item/banner/tasselled
+	uid                        = "stack_recipe_textile_banner_tasselled"
 
 /decl/stack_recipe/textiles/sack
 	result_type                = /obj/item/bag/sack
 	category                   = "storage"
 	crafting_extra_cost_factor = 1.1 // less material is lost because it's relatively simple
 	difficulty                 = MAT_VALUE_NORMAL_DIY // Slightly easier than making actual clothing.
+	uid                        = "stack_recipe_textile_sack"
 
 /decl/stack_recipe/textiles/bandolier
 	result_type           = /obj/item/clothing/webbing/bandolier/crafted
 	category              = "storage"
+	uid                   = "stack_recipe_textile_bandolier"
 
 /decl/stack_recipe/textiles/headband
 	result_type           = /obj/item/clothing/head/headband
 	crafting_extra_cost_factor = 1.2 // less material is lost because it's relatively simple
 	category              = "clothing"
+	uid                   = "stack_recipe_textile_headband"
 
 
 /decl/stack_recipe/textiles/leather
@@ -66,44 +77,55 @@
 	validation_material   = /decl/material/solid/organic/leather
 	craft_stack_types     = /obj/item/stack/material/skin
 	category              = "clothing"
+	uid                   = "stack_recipe_textile_leather_"
 
 /decl/stack_recipe/textiles/leather/bedroll
 	result_type           = /obj/item/bedroll
 	difficulty            = MAT_VALUE_NORMAL_DIY // Slightly easier than making clothing.
 	category              = "bedding"
+	uid                   = "stack_recipe_textile_leather_bedroll"
 
 /decl/stack_recipe/textiles/leather/shoes
 	result_type           = /obj/item/clothing/shoes/craftable
+	uid                   = "stack_recipe_textile_leather_shoes"
 
 /decl/stack_recipe/textiles/leather/boots
 	result_type           = /obj/item/clothing/shoes/craftable/boots
+	uid                   = "stack_recipe_textile_leather_boots"
 
 /decl/stack_recipe/textiles/leather/coat
 	result_type           = /obj/item/clothing/suit/leathercoat
+	uid                   = "stack_recipe_textile_leather_coat"
 
 /decl/stack_recipe/textiles/leather/gloves
 	result_type           = /obj/item/clothing/gloves/thick
+	uid                   = "stack_recipe_textile_leather_gloves"
 
 /decl/stack_recipe/textiles/leather/sling
 	result_type                = /obj/item/gun/launcher/bow/sling
 	crafting_extra_cost_factor = 1.1 // less material is lost because it's relatively simple
 	difficulty                 = MAT_VALUE_NORMAL_DIY // Slightly easier than making clothing.
+	uid                        = "stack_recipe_textile_leather_sling"
 
 /decl/stack_recipe/textiles/leather/sack
 	result_type                = /obj/item/bag/sack
 	difficulty                 = MAT_VALUE_HARD_DIY
+	uid                        = "stack_recipe_textile_leather_sack"
 
 /decl/stack_recipe/textiles/leather/backpack
 	result_type                = /obj/item/backpack/crafted/backpack
 	difficulty                 = MAT_VALUE_VERY_HARD_DIY
+	uid                        = "stack_recipe_textile_leather_backpack"
 
 /decl/stack_recipe/textiles/leather/backpack/haversack
 	result_type                = /obj/item/backpack/crafted
+	uid                        = "stack_recipe_textile_leather_haversack"
 
 /decl/stack_recipe/textiles/leather/waterskin
 	result_type           = /obj/item/chems/glass/waterskin/crafted
 	required_material     = /decl/material/solid/organic/leather
 	category              = null
+	uid                   = "stack_recipe_textile_leather_waterskin"
 
 /decl/stack_recipe/textiles/cloth
 	abstract_type         = /decl/stack_recipe/textiles/cloth
@@ -115,31 +137,38 @@
 	result_type           = /obj/item/chems/filter
 	difficulty            = MAT_VALUE_EASY_DIY // see above comment
 	category              = "utility"
+	uid                   = "stack_recipe_textile_cloth_filter"
 
 /decl/stack_recipe/textiles/cloth/bandana
 	result_type           = /obj/item/clothing/mask/bandana/colourable
 	difficulty            = MAT_VALUE_EASY_DIY // see above comment
 	crafting_extra_cost_factor = 1 // basically just a rag
+	uid                   = "stack_recipe_textile_cloth_bandana"
 
 /decl/stack_recipe/textiles/cloth/gloves
 	result_type           = /obj/item/clothing/gloves
+	uid                   = "stack_recipe_textile_cloth_gloves"
 
 /decl/stack_recipe/textiles/cloth/robe
 	result_type           = /obj/item/clothing/suit/robe
+	uid                   = "stack_recipe_textile_cloth_robe"
 
 /decl/stack_recipe/textiles/cloth/poncho
 	result_type           = /obj/item/clothing/suit/poncho/colored
+	uid                   = "stack_recipe_textile_cloth_poncho"
 
 /decl/stack_recipe/textiles/cloth/bedding
 	result_type                = /obj/item/bedsheet
 	crafting_extra_cost_factor = 1.1 // less material is lost because it's relatively simple
 	category                   = "bedding"
+	uid                        = "stack_recipe_textile_cloth_bedsheet"
 
 /decl/stack_recipe/textiles/cloth/bandages
 	result_type                = /obj/item/stack/medical/bandage/crafted
 	difficulty                 = MAT_VALUE_EASY_DIY
 	crafting_extra_cost_factor = 1.1 // it's not that much more complicated than making a rag, but you probably want to at least tidy up the edges
 	category                   = "medical"
+	uid                        = "stack_recipe_textile_cloth_bandage"
 
 /decl/stack_recipe/textiles/fur
 	abstract_type         = /decl/stack_recipe/textiles/fur
@@ -151,6 +180,7 @@
 	crafting_extra_cost_factor = 1.1 // you're basically just trimming the edges and cleaning the pelt
 	result_type                = /obj/item/bedsheet/furs
 	category                   = "bedding"
+	uid                        = "stack_recipe_textile_fur_bedding"
 
 /decl/stack_recipe/textiles/surgical_sutures
 	result_type                 = /obj/item/ancient_surgery/sutures
@@ -159,8 +189,10 @@
 	crafting_extra_cost_factor  = 1 // no overall material loss, you're just prepping the thread
 	category                    = "medical"
 	available_to_map_tech_level = MAP_TECH_LEVEL_MEDIEVAL
+	uid                         = "stack_recipe_textile_sutures"
 
 /decl/stack_recipe/textiles/rag
-	result_type = /obj/item/chems/rag
+	result_type                = /obj/item/chems/rag
 	crafting_extra_cost_factor = 1 // whatever you produce is going to be a rag, there's no wastage
-	difficulty = MAT_VALUE_TRIVIAL_DIY
+	difficulty                 = MAT_VALUE_TRIVIAL_DIY
+	uid                        = "stack_recipe_textile_rag"

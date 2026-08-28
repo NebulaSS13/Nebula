@@ -25,7 +25,7 @@
 		material_data["stored"]    = stored_material[material] ? stored_material[material] : 0
 		material_data["max"]       = storage_capacity[material]
 		material_data["unit"]      = is_solid ? SHEET_UNIT : "ml"
-		material_data["eject_key"] = "\ref[mat]"
+		material_data["eject_key"] = mat.uid
 		material_storage += list(material_data)
 	return material_storage
 

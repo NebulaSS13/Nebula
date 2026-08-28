@@ -3,6 +3,7 @@
 	associated_traits = list(
 		TRAIT_TELEPORTING
 	)
+	uid = "plant_gene_special"
 
 /decl/plant_gene/special/mutate(datum/seed/seed, atom/location)
 	if(prob(65))

@@ -67,7 +67,7 @@
 	for(var/mat in stored)
 		var/decl/material/stored_material = GET_DECL(mat)
 		var/sheets = floor(stored[mat]/(SHEET_MATERIAL_AMOUNT * 1.5))
-		data["materials"] += list(list("name" = stored_material.solid_name, "amount" = sheets, "harvest" = harvesting[mat], "mat_ref" = "\ref[stored_material]"))
+		data["materials"] += list(list("name" = stored_material.solid_name, "amount" = sheets, "harvest" = harvesting[mat], "mat_uid" = stored_material.uid))
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -109,7 +109,7 @@
 /obj/machinery/kinetic_harvester/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 
 	if(href_list["remove_mat"])
-		var/decl/material/remove_material = locate(href_list["remove_mat"])
+		var/decl/material/remove_material = decls_repository.get_decl_by_id(href_list["remove_mat"])
 		if(istype(remove_material))
 			var/sheet_cost = (SHEET_MATERIAL_AMOUNT * 1.5)
 			var/sheets = floor(stored[remove_material.type]/sheet_cost)
@@ -126,7 +126,7 @@
 		return TOPIC_REFRESH
 
 	if(href_list["toggle_harvest"])
-		var/decl/material/harvest_material = locate(href_list["toggle_harvest"])
+		var/decl/material/harvest_material = decls_repository.get_decl_by_id(href_list["toggle_harvest"])
 		if(istype(harvest_material))
 			if(harvesting[harvest_material.type])
 				harvesting -= harvest_material.type

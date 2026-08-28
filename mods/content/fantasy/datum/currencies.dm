@@ -46,9 +46,12 @@
 /decl/stack_recipe/coin/imperial
 	currency = /decl/currency/imperial
 	name = "\improper Imperial crown"
+	uid = "stack_recipe_coin_imperial_crown"
 
 /decl/stack_recipe/coin/imperial/quin
 	name = "\improper Imperial quincrown"
+	uid = "stack_recipe_coin_imperial_quincrown"
 
 /decl/stack_recipe/coin/imperial/huge
 	name = "\improper Imperial crown regalis"
+	uid = "stack_recipe_coin_imperial_regalis"

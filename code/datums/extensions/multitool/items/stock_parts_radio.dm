@@ -102,7 +102,7 @@
 		. += "<td><a href='byond://?src=\ref[src];[table_tag]=1;rename=[thing]'>[thing]</a></td>"
 		var/decl/public_access/variable = selected_events[thing]
 		. += "<td><a href='byond://?src=\ref[src];[table_tag]=1;new_val=[thing]'>[variable.name]</a></td>"
-		. += "<td><a href='byond://?src=\ref[src];[table_tag]=1;desc=\ref[variable]'>(?)</a></td>"
+		. += "<td><a href='byond://?src=\ref[src];[table_tag]=1;desc=[variable.uid]'>(?)</a></td>"
 		. += "</tr>"
 	. += "<tr><td><a href='byond://?src=\ref[src];[table_tag]=1;add=1'>(+)</a></td></tr>"
 	. += "</table>"
@@ -145,7 +145,7 @@
 		LAZYSET(selected_events, copytext(md5(num2text(rand(0, 1))), 1, 11), valid_events[pick(valid_events)]) // random key
 		return TOPIC_REFRESH
 	if(href_list["desc"])
-		var/decl/public_access/variable = locate(href_list["desc"])
+		var/decl/public_access/variable = decls_repository.get_decl_by_id(href_list["desc"])
 		if(istype(variable))
 			to_chat(user, variable.desc)
 		return TOPIC_NOACTION
@@ -202,7 +202,7 @@
 
 	dat += "<b>Choose event:</b><br>"
 	if(radio.event)
-		dat += "<a href='byond://?src=\ref[src];event=1;new_val=event'>[radio.event]</a>  (<a href='byond://?src=\ref[src];event=1;desc=\ref[radio.event]'>?</a>)"
+		dat += "<a href='byond://?src=\ref[src];event=1;new_val=event'>[radio.event]</a>  (<a href='byond://?src=\ref[src];event=1;desc=[radio.event.uid]'>?</a>)"
 	else
 		dat += "<a href='byond://?src=\ref[src];event=1;add=1'>(+)</a>"
 	dat += "<br>"

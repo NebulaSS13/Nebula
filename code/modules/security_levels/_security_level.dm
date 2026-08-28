@@ -1,4 +1,5 @@
 /decl/security_level
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	var/icon = 'icons/misc/security_state.dmi'
 	var/name
 

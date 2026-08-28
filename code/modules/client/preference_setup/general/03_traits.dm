@@ -175,7 +175,7 @@
 			return TOPIC_REFRESH
 
 		if(href_list["toggle_trait"])
-			var/decl/trait/trait = locate(href_list["toggle_trait"])
+			var/decl/trait/trait = decls_repository.get_decl_by_id(href_list["toggle_trait"])
 			if(!istype(trait))
 				return TOPIC_NOACTION
 			// Disable trait (and children).

@@ -11,7 +11,7 @@
 		stack_max = text2num(href_list["change_stack_max"])
 		. = TOPIC_REFRESH
 	if(href_list["release_sheets"] && output_turf)
-		var/decl/material/mat = locate(href_list["release_sheets"])
+		var/decl/material/mat = decls_repository.get_decl_by_id(href_list["release_sheets"])
 		if(istype(mat) && stacked[mat.type] > 0)
 			mat.create_object(output_turf, stacked[mat.type])
 			stacked -= mat.type
@@ -24,7 +24,7 @@
 	for(var/stack in stacked)
 		if(stacked[stack] > 0)
 			var/decl/material/mat = GET_DECL(stack)
-			stacks += list(list("name" = "[capitalize(mat.solid_name)] x [stacked[stack]]", "key" = "\ref[mat]"))
+			stacks += list(list("name" = "[capitalize(mat.solid_name)] x [stacked[stack]]", "key" = mat.uid))
 	data["stacks"] = stacks
 	return data
 

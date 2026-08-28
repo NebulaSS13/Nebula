@@ -6,6 +6,7 @@
 		TRAIT_YIELD,
 		TRAIT_SPREAD
 	)
+	uid = "plant_gene_vigour"
 
 /decl/plant_gene/vigour/mutate(datum/seed/seed, atom/location)
 	if(prob(65))

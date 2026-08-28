@@ -1,5 +1,6 @@
 /decl/loadout_category/uniform
 	name = "Uniform"
+	uid = "loadout_category_uniform"
 
 /decl/loadout_option/uniform
 	slot = slot_w_uniform_str
