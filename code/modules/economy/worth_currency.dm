@@ -129,9 +129,11 @@
 /decl/stack_recipe/coin/credits
 	name = "two credit coin"
 	currency = /decl/currency/credits
+	uid = "stack_recipe_coin_credit_two"
 
 /decl/stack_recipe/coin/credits/one
 	name = "one credit coin"
+	uid = "stack_recipe_coin_credit_one"
 
 /datum/denomination/coin/mid
 	state = "coin_medium"
@@ -155,12 +157,15 @@
 /decl/stack_recipe/coin/trader
 	currency = /decl/currency/trader
 	name = "ten scrip coin"
+	uid = "stack_recipe_coin_scrip_ten"
 
 /decl/stack_recipe/coin/trader/mid
 	name = "five scrip coin"
+	uid = "stack_recipe_coin_scrip_five"
 
 /decl/stack_recipe/coin/trader/small
 	name = "one scrip coin"
+	uid = "stack_recipe_coin_scrip_one"
 
 /decl/currency/scav
 	name = "scavbucks"
@@ -171,12 +176,15 @@
 /datum/denomination/trash
 	name = "wiggly string"
 	state = "string"
+
 /datum/denomination/trash/bone
 	name = "pointy bone"
 	state = "bone"
+
 /datum/denomination/trash/rock
 	name = "neat rock"
 	state = "rock"
+
 /datum/denomination/trash/shell
 	name = "tasty shell"
 	state = "shell"

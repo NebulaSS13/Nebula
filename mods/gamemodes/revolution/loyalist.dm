@@ -20,6 +20,7 @@
 	blacklisted_jobs = list(/datum/job/submap)
 	skill_setter = /datum/antag_skill_setter/station
 	faction = "loyalist"
+	uid = "special_role_loyalist"
 	var/command_department_id
 
 /decl/special_role/loyalist/Initialize()

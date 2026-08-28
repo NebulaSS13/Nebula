@@ -16,6 +16,7 @@
 	base_to_load = "Heist Base"
 	default_outfit = /decl/outfit/raider
 	id_title = "Visitor"
+	uid = "special_role_raider"
 
 	var/list/outfits_per_species
 

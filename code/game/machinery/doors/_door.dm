@@ -607,19 +607,23 @@
 	name = "open door"
 	desc = "Opens the door if possible."
 	call_proc = TYPE_PROC_REF(/obj/machinery/door, open)
+	uid = "public_method_door_open"
 
 /decl/public_access/public_method/toggle_door
 	name = "toggle door"
 	desc = "Toggles whether the door is open or not, if possible."
 	call_proc = TYPE_PROC_REF(/obj/machinery/door, toggle)
+	uid = "public_method_door_toggle"
 
 /decl/public_access/public_method/toggle_door_to
 	name = "toggle door to"
 	desc = "Toggles the door, depending on the supplied argument, to open (if 1) or closed (if 0)."
 	call_proc = TYPE_PROC_REF(/obj/machinery/door, toggle)
 	forward_args = TRUE
+	uid = "public_method_door_set"
 
 /decl/public_access/public_method/close_door
 	name = "close door"
 	desc = "Closes the door if possible."
 	call_proc = TYPE_PROC_REF(/obj/machinery/door, close)
+	uid = "public_method_door_close"

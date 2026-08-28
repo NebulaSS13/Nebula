@@ -367,6 +367,7 @@
 	can_write = TRUE
 	has_updates = TRUE
 	var_type = VAR_FORMAT_STRING
+	uid = "public_var_vent_pump_dir"
 
 /decl/public_access/public_variable/pump_dir/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
 	return machine.pump_direction ? "release" : "siphon"
@@ -385,6 +386,7 @@
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_ANY
+	uid = "public_var_vent_pump_checks"
 
 /decl/public_access/public_variable/pump_checks/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
 	return machine.pressure_checks
@@ -404,6 +406,7 @@
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_ANY
+	uid = "public_var_vent_pump_bound_internal"
 
 /decl/public_access/public_variable/pressure_bound/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
 	return machine.internal_pressure_bound
@@ -423,6 +426,7 @@
 	expected_type = /obj/machinery/atmospherics/unary/vent_pump
 	name = "external pressure bound"
 	desc = "The bound on external pressure used in checks (a number). When writing, can be supplied the string keyword \"default\" instead."
+	uid = "public_var_vent_pump_bound_external"
 
 /decl/public_access/public_variable/pressure_bound/external/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
 	return machine.external_pressure_bound
@@ -439,11 +443,13 @@
 	name = "activate purge mode"
 	desc = "Activates purge mode, overriding pressure checks and removing air."
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/unary/vent_pump, purge)
+	uid = "public_method_vent_pump_purge"
 
 /decl/public_access/public_method/toggle_pump_dir
 	name = "toggle pump direction"
 	desc = "Toggles the pump's direction, from release to siphon or vice versa."
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/unary/vent_pump, toggle_pump_dir)
+	uid = "public_method_vent_pump_toggle_dir"
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump
 	frequency = PUMP_FREQ

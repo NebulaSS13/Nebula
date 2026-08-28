@@ -1,5 +1,6 @@
 /decl/loadout_category/augmentation
 	name = "Augmentations"
+	uid = "loadout_category_augmentation"
 
 /decl/loadout_option/augmentation
 	category = /decl/loadout_category/augmentation

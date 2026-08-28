@@ -3,6 +3,7 @@
 
 /decl/loadout_category/fantasy/clothing
 	name = "Clothing"
+	uid = "loadout_category_fantasy_clothing"
 
 /decl/loadout_option/fantasy
 	abstract_type = /decl/loadout_option/fantasy
@@ -215,6 +216,7 @@
 
 /decl/loadout_category/fantasy/utility
 	name = "Utility"
+	uid = "loadout_category_fantasy_utility"
 
 /decl/loadout_option/fantasy/utility
 	abstract_type = /decl/loadout_option/fantasy/utility

@@ -1,5 +1,6 @@
 /decl/loadout_category/clothing
 	name = "Clothing"
+	uid = "loadout_category_clothing"
 
 /decl/loadout_option/clothing
 	category = /decl/loadout_category/clothing

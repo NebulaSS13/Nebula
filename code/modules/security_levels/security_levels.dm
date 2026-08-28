@@ -32,6 +32,7 @@
 
 /decl/security_level/default/code_green
 	name = "code green"
+	uid = "security_level_green"
 
 	light_range = 2
 	light_power = 1
@@ -47,6 +48,7 @@
 
 /decl/security_level/default/code_blue
 	name = "code blue"
+	uid = "security_level_blue"
 
 	light_range = 2
 	light_power = 1
@@ -61,6 +63,7 @@
 
 /decl/security_level/default/code_red
 	name = "code red"
+	uid = "security_level_red"
 
 	light_range = 4
 	light_power = 2
@@ -75,6 +78,7 @@
 
 /decl/security_level/default/code_delta
 	name = "code delta"
+	uid = "security_level_delta"
 
 	light_range = 4
 	light_power = 2
@@ -101,5 +105,6 @@
 /// A dummy security level with no effects.
 /decl/security_level/none
 	name = "none"
+	uid = "security_level_none"
 	// Since currently we're required to have an alarm_appearance, we just use a blank one.
 	alarm_appearance = /datum/alarm_appearance

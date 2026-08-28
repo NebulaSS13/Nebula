@@ -19,6 +19,7 @@
 
 	base_to_load = "Mercenary Base"
 	default_outfit = /decl/outfit/mercenary
+	uid = "special_role_mercenary"
 
 /decl/special_role/mercenary/create_global_objectives()
 	if(!..())

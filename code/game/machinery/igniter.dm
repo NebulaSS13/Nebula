@@ -66,6 +66,7 @@
 	desc = "Whether or not the igniter is igniting."
 	can_write = FALSE
 	has_updates = FALSE
+	uid = "public_var_igniter_active"
 
 /decl/public_access/public_variable/igniter_on/access_var(obj/machinery/igniter/igniter)
 	return igniter.on
@@ -74,6 +75,7 @@
 	name = "igniter toggle"
 	desc = "Toggle the igniter on or off."
 	call_proc = TYPE_PROC_REF(/obj/machinery/igniter, toggle_igniter)
+	uid = "public_method_igniter_toggle"
 
 /decl/stock_part_preset/radio/receiver/igniter
 	frequency = BUTTON_FREQ
@@ -162,6 +164,7 @@
 	name = "spark"
 	desc = "Creates sparks to ignite nearby gases."
 	call_proc = TYPE_PROC_REF(/obj/machinery/sparker, create_sparks)
+	uid = "public_method_sparker_spark"
 
 /decl/stock_part_preset/radio/receiver/sparker
 	frequency = BUTTON_FREQ

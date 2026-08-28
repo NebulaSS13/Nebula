@@ -6,6 +6,7 @@
 		TRAIT_FLESH_COLOUR,
 		TRAIT_JUICY
 	)
+	uid = "plant_gene_fruit"
 
 /decl/plant_gene/fruit/mutate(datum/seed/seed, turf/location)
 	if(prob(65))

@@ -11,6 +11,7 @@
 	one_per_turf = FALSE
 	on_floor     = FALSE
 	category     = "items"
+	uid          = "stack_recipe_stick_barrel_rim"
 
 /obj/structure/reagent_dispensers/barrel
 	// Skill used for coopery.

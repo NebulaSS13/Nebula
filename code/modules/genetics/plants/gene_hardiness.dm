@@ -6,6 +6,7 @@
 		TRAIT_WEED_TOLERANCE,
 		TRAIT_ENDURANCE
 	)
+	uid = "plant_gene_hardiness"
 
 /decl/plant_gene/hardiness/mutate(datum/seed/seed, turf/location)
 	if(prob(60))

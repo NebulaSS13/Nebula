@@ -22,6 +22,7 @@
 	antaghud_indicator = "hud_renegade"
 	skill_setter = /datum/antag_skill_setter/station
 	blocked_job_event_categories = list(ASSIGNMENT_COMPUTER)
+	uid = "special_role_renegade"
 
 	var/list/spawn_guns = list(
 		/obj/item/gun/projectile/revolver/lasvolver,

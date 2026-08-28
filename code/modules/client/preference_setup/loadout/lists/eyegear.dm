@@ -1,5 +1,6 @@
 /decl/loadout_category/eyes
 	name = "Eyewear"
+	uid = "loadout_category_eyes"
 
 /decl/loadout_option/eyes
 	category = /decl/loadout_category/eyes

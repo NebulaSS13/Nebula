@@ -26,6 +26,7 @@
 	return MCS_CHANGE
 
 /decl/machine_construction
+	abstract_type = /decl/machine_construction
 	var/needs_board  // Type of circuitboard expected, if any. Used in unit testing.
 	var/cannot_print // If false, unit testing will attempt to guarantee that the machine is buildable in-round. This inverts that behavior.
 	var/visible_components = TRUE // Whether user can see installed components on examine

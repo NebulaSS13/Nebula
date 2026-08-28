@@ -3,6 +3,7 @@
 	name_plural = "Beguiled"
 	welcome_text = "Your mind is no longer solely your own..."
 	flags = ANTAG_IMPLANT_IMMUNE
+	uid = "special_role_beguiled"
 
 	var/list/minion_controllers = list()
 

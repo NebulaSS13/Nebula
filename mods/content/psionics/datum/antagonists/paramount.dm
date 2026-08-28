@@ -12,6 +12,7 @@
 	min_player_age = 18
 	faction = "paramount"
 	default_outfit = /decl/outfit/paramount
+	uid = "special_role_paramount"
 
 /decl/outfit/paramount
 	name =    "Special Role - Paramount Grandmaster"

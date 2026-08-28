@@ -24,6 +24,7 @@
 	faction = "foundation"
 	default_outfit = /decl/outfit/foundation
 	id_title = "Foundation Agent"
+	uid = "special_role_foundation_agent"
 
 /decl/special_role/foundation/equip_role(var/mob/living/human/player)
 	. = ..()

@@ -197,6 +197,7 @@
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_BOOLEAN
+	uid = "public_var_passive_gate_unlocked"
 
 /decl/public_access/public_variable/passive_gate_unlocked/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
 	return machine.unlocked
@@ -214,6 +215,7 @@
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_NUMBER
+	uid = "public_var_passive_gate_flowrate"
 
 /decl/public_access/public_variable/passive_gate_flow_rate/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
 	return machine.set_flow_rate
@@ -231,6 +233,7 @@
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_NUMBER
+	uid = "public_var_passive_gate_mode"
 
 /decl/public_access/public_variable/passive_gate_mode/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
 	return machine.regulate_mode
@@ -248,6 +251,7 @@
 	can_write = TRUE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_NUMBER
+	uid = "public_var_passive_gate_target_pressure"
 
 /decl/public_access/public_variable/passive_gate_target_pressure/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
 	return machine.target_pressure
@@ -262,6 +266,7 @@
 	name = "toggle valve"
 	desc = "Open or close the valve."
 	call_proc = TYPE_PROC_REF(/obj/machinery/atmospherics/binary/passive_gate, toggle_unlocked)
+	uid = "public_method_passive_gate_toggle"
 
 /decl/stock_part_preset/radio/event_transmitter/passive_gate
 	frequency = PUMP_FREQ

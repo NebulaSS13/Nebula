@@ -2,10 +2,16 @@
 // Curtain types declaration
 //
 /decl/curtain_kind
+	abstract_type = /decl/curtain_kind
 	var/name = "curtain"
 	var/color = COLOR_WHITE
 	var/alpha = 255
-	var/material_key = /decl/material/solid/organic/plastic
+	var/material_key
+
+/decl/curtain_kind/validate()
+	. = ..()
+	if(isnull(material_key))
+		. += "no material key set"
 
 /decl/curtain_kind/proc/make_item(var/loc)
 	var/obj/item/curtain/C = new(loc)

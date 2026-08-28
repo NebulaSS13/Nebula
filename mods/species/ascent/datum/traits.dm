@@ -20,15 +20,18 @@
 	name = "Upgraded Support Systems"
 	description = "Coming soon!"
 	category = "Suit Upgrades"
+	uid = "trait_ascent_suit_upgrade"
 
 // Physical modifications like extra organs or different resistances.
 /decl/trait/ascent/adaptation
 	name = "Specialized Molt"
 	description = "Coming soon!"
 	category = "Adaptations"
+	uid = "trait_ascent_specialized_molt"
 
 // Behavioral compulsions enforced by AI
 /decl/trait/ascent/derangement
 	name = "Megalomania"
 	description = "Coming soon!"
 	category = "Derangements"
+	uid = "trait_ascent_megalomania"

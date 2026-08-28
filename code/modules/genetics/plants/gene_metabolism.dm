@@ -5,6 +5,7 @@
 		TRAIT_REQUIRES_WATER,
 		TRAIT_ALTER_TEMP
 	)
+	uid = "plant_gene_metabolism"
 
 /decl/plant_gene/metabolism/mutate(datum/seed/seed, turf/location)
 	if(prob(65))

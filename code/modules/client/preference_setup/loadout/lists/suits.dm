@@ -1,5 +1,6 @@
 /decl/loadout_category/suit
 	name = "Suits"
+	uid = "loadout_category_suit"
 
 /decl/loadout_option/suit
 	slot = slot_wear_suit_str

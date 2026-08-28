@@ -6,6 +6,7 @@
 		TRAIT_NUTRIENT_CONSUMPTION,
 		TRAIT_WATER_CONSUMPTION
 	)
+	uid = "plant_gene_diet"
 
 /decl/plant_gene/diet/mutate(datum/seed/seed, turf/location)
 	if(prob(60))

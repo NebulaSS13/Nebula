@@ -21,6 +21,7 @@
 
 	spawn_announcement_title = "Lifesign Alert"
 	spawn_announcement_delay = 5000
+	uid = "special_role_borer"
 
 /decl/special_role/borer/get_extra_panel_options(var/datum/mind/player)
 	return "<a href='byond://?src=\ref[src];move_to_spawn=\ref[player.current]'>\[put in host\]</a>"

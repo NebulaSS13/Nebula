@@ -7,6 +7,7 @@
 		TRAIT_YIELD,
 		TRAIT_ENDURANCE
 	)
+	uid = "plant_gene_biochemistry"
 
 /decl/plant_gene/biochemistry/mutate(datum/seed/seed)
 	seed.set_trait(TRAIT_POTENCY, seed.get_trait(TRAIT_POTENCY)+rand(-20,20),200, 0)

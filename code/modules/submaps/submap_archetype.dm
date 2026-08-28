@@ -1,4 +1,5 @@
 /decl/submap_archetype
+	abstract_type = /decl/submap_archetype
 	// TODO: use UID instead of name for pref saving.
 	var/name = "generic ship archetype"
 	var/list/whitelisted_species = list()

@@ -49,6 +49,7 @@
 			appearances[disguise.backpack_type] = disguise
 
 /decl/cardborg_appearance
+	abstract_type = /decl/cardborg_appearance
 	var/backpack_type
 	var/icon_state = ICON_STATE_WORLD
 	var/icon = 'icons/mob/robots/robot.dmi'

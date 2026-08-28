@@ -3,6 +3,7 @@
 * bypass_colorize: if false, the hologram will be decolorized.
 */
 /decl/ai_holo
+	abstract_type = /decl/ai_holo
 	var/requires_malf = FALSE
 	var/icon = 'icons/mob/hologram.dmi'
 	var/icon_state = "icon_state"

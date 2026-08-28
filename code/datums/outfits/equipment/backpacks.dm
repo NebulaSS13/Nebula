@@ -53,6 +53,7 @@
 
 /* Code */
 /decl/backpack_outfit
+	abstract_type = /decl/backpack_outfit
 	var/flags
 	var/name
 	var/path

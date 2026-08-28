@@ -37,6 +37,7 @@
 	can_write = FALSE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_LIST
+	uid = "public_var_gas"
 
 /decl/public_access/public_variable/gas/access_var(obj/machinery/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()
@@ -59,6 +60,7 @@
 	can_write = FALSE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_STRING
+	uid = "public_var_pressure"
 
 /decl/public_access/public_variable/pressure/access_var(obj/machinery/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()
@@ -71,6 +73,7 @@
 	can_write = FALSE
 	has_updates = FALSE
 	var_type = VAR_FORMAT_NUMBER
+	uid = "public_var_temperature"
 
 /decl/public_access/public_variable/temperature/access_var(obj/machinery/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()

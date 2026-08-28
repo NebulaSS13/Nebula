@@ -84,6 +84,7 @@
 
 /decl/trait
 	abstract_type = /decl/trait
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	/// String identifier.
 	var/name
 	/// Flavour text.
