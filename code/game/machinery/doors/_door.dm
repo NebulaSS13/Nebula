@@ -15,6 +15,7 @@
 	uncreated_component_parts = null
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 	max_health = 300
+	interaction_priority = TRUE
 
 	var/can_open_manually = TRUE
 

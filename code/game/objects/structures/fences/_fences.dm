@@ -227,6 +227,7 @@
 	name = "fence gate"
 	desc = "Much like a regular door, but thinner."
 	icon_state = "door-closed"
+	interaction_priority   = TRUE
 
 /obj/structure/fence/door/can_install_lock()
 	return TRUE

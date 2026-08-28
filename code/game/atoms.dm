@@ -73,6 +73,9 @@
 	/// (DATUM) Similar to above, but largely used by /turf/wall, /obj/structure and /obj/item/stack/material
 	var/decl/material/reinf_material
 
+	/// (BOOLEAN) Set to TRUE to prioritise this atom when using the interact hotkey.
+	var/interaction_priority
+
 /atom/proc/get_max_health()
 	return max_health
 

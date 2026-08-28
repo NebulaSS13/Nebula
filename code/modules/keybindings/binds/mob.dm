@@ -183,3 +183,30 @@
 /datum/keybinding/mob/minimal_hud/down(client/user)
 	user.mob.minimize_hud()
 	return TRUE
+
+/datum/keybinding/mob/interact
+	hotkey_keys = list("Enter")
+	name = "interact"
+	full_name = "Interact"
+	description = "Interact with the turf directly in front of you."
+
+/datum/keybinding/mob/interact/down(client/user)
+	user.mob.interact_with_facing()
+	return TRUE
+
+/mob/proc/interact_with_facing()
+
+	var/turf/facing = get_step(get_turf(src), dir)
+	if(!istype(facing) || !facing.simulated)
+		return
+
+	var/list/atoms = facing.get_contained_external_atoms()
+	// Move non-prioritised atoms to the end of the list (to avoid burning our hands on lights when trying to open a closet)
+	if(length(atoms) > 1)
+		atoms = sortTim(atoms, /proc/cmp_planelayer_interact_priority)
+	LAZYDISTINCTADD(atoms, facing) // Turf is always at the end of the list.
+
+	// Try to click something.
+	for(var/atom/clickable as anything in atoms)
+		if(clickable.invisibility <= see_invisible)
+			return clickable.Click()

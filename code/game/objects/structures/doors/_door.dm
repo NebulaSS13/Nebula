@@ -9,6 +9,7 @@
 	anchored              = TRUE
 	opacity               = TRUE
 	structure_flags       = STRUCTURE_FLAG_THROWN_DAMAGE
+	interaction_priority  = TRUE
 	var/has_window        = FALSE
 	var/changing_state    = FALSE
 	var/door_sound_volume = 25

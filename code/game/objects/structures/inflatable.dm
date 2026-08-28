@@ -192,6 +192,7 @@
 	density = TRUE
 	anchored = TRUE
 	opacity = FALSE
+	interaction_priority = TRUE
 
 	icon_state = "door_closed"
 	undeploy_path = /obj/item/inflatable/door
