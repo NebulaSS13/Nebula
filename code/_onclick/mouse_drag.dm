@@ -71,6 +71,10 @@
 
 /mob/proc/on_mouse_up(remove_from_processing = TRUE)
 
+	// This proc triggers attackby() in item melee code
+	// and hence the linter does not want it to block.
+	set waitfor = FALSE
+
 	if(!_is_holding_mouse)
 		return FALSE
 

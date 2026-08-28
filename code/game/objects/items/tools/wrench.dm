@@ -45,6 +45,12 @@
 	slot_flags                 = SLOT_BACK
 	_base_attack_force         = 20
 
+/obj/item/wrench/pipe/get_melee_attack_profiles(mob/user)
+	var/static/list/attack_profiles = list(
+		GET_DECL(/decl/melee_attack_profile/sweep)
+	)
+	return attack_profiles
+
 /obj/item/wrench/pipe/get_handle_color()
 	return null
 

@@ -415,6 +415,14 @@
 
 	if(drying_wetness > 0 && drying_wetness != initial(drying_wetness))
 		desc_comp += "\The [src] is [get_dryness_text()]."
+		desc_comp += "*--------*"
+
+	var/list/attacks = list()
+	for(var/decl/melee_attack_profile/attack as anything in get_melee_attack_profiles())
+		if(attack.usage_desc)
+			attacks += SPAN_INFO(attack.usage_desc)
+	if(length(attacks))
+		desc_comp |= attacks
 
 	if(REAGENT_TOTAL_VOLUME(coating))
 		desc_comp += "It is covered in [coating.get_coated_name()]." // It is covered in dilute oily slimy bloody mud.
@@ -1352,15 +1360,3 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 	if(user?.get_active_held_item() == src)
 		user.on_mouse_up()
 	. = ..()
-
-// Called on initial mouse down event from wielding mob. Return TRUE to begin processing every 1ds.
-/obj/item/proc/wielder_mouse_drag_down(mob/user, object, location, control, params)
-	return FALSE
-
-// Called every 1ds while mouse is down with an item that returned TRUE to wielder_mouse_drag_down(). Return FALSE to end processing.
-/obj/item/proc/wielder_mouse_drag_held(mob/user, atom/target)
-	return FALSE
-
-// Called on mouse up event from wielding mob.
-/obj/item/proc/wielder_mouse_drag_up(mob/user, atom/target)
-	return FALSE

@@ -315,6 +315,9 @@ var/global/const/ACTION_DANGER_ALL = 2
 		. += move_intent.move_delay
 	else
 		. += _automove_delay
+	var/obj/item/active_item = get_active_held_item()
+	if(active_item?.is_charging_attack() != /obj/item::ATTACK_NOT_CHARGING)
+		. *= 1.75
 	. = max(. + (ENCUMBERANCE_MOVEMENT_MOD * encumbrance()), 1)
 
 #undef ENCUMBERANCE_MOVEMENT_MOD
@@ -1214,12 +1217,23 @@ var/global/const/ACTION_DANGER_ALL = 2
 
 /// Update the mouse pointer of the attached client in this mob.
 /mob/proc/update_mouse_pointer()
+
 	if(!client)
 		return
 	if(client.keys_held["Shift"])
 		client.add_mouse_pointer(/decl/mouse_pointer/examine)
 	else
 		client.remove_mouse_pointer(/decl/mouse_pointer/examine)
+
+	var/obj/item/held = get_active_held_item()
+	switch(held?.is_charging_attack())
+		if(held.ATTACK_CHARGING)
+			client.add_mouse_pointer(/decl/mouse_pointer/attacking, icon_index = 1)
+		if(held.ATTACK_CHARGED)
+			client.add_mouse_pointer(/decl/mouse_pointer/attacking, icon_index = 2)
+		else
+			client.remove_mouse_pointer(/decl/mouse_pointer/attacking)
+
 
 /mob/keybind_face_direction(direction)
 	facedir(direction)
