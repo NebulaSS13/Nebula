@@ -41,7 +41,7 @@
 	color = SHADOWER_DARKENING_COLOR
 
 /obj/mimic_master/slice/shadower_master/Initialize(mapload, depth)
-	..()
+	. = ..()
 	filters += filter(type = "alpha", render_source = ZM_SLICE_VIRTUAL(ZM_SLICE_TY_ZSUM, depth))
 
 /obj/mimic_master/slice/cap
@@ -56,7 +56,7 @@
 	slice_kind = ZM_SLICE_TY_ZSUM
 
 /obj/mimic_master/slice/virtual/zsum/Initialize(mapload, depth)
-	..()
+	. = ..()
 	if (depth != OPENTURF_MAX_DEPTH)
 		render_source = ZM_SLICE_VIRTUAL(ZM_SLICE_TY_ZSUM, depth + 1)
 	filters = list(
