@@ -13,6 +13,7 @@
 #include "equipment\guns.dm"
 #include "equipment\loadout.dm"
 #include "equipment\melee.dm"
+#include "equipment\munitions.dm"
 #include "equipment\radios.dm"
 #include "equipment\specimen_tag.dm"
 #include "equipment\specimen_tagger.dm"
