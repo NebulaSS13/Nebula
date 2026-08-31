@@ -1,4 +1,5 @@
 /decl/slime_command
+	abstract_type = /decl/slime_command
 	var/list/triggers
 
 /decl/slime_command/proc/resolve(var/speaker, var/spoken, var/datum/mob_controller/slime/holder)

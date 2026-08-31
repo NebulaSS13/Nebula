@@ -206,10 +206,14 @@
 		"pressure" = /decl/public_access/public_variable/airlock_pressure
 	)
 
-/decl/public_access/public_variable/set_airlock_cycling/airlock_sensor
-	expected_type = /obj/machinery/airlock_sensor
+/decl/public_access/public_variable/set_airlock_cycling
 	can_write     = TRUE
 	var_type      = VAR_FORMAT_BOOLEAN
+	abstract_type = /decl/public_access/public_variable/set_airlock_cycling
+
+/decl/public_access/public_variable/set_airlock_cycling/airlock_sensor
+	expected_type = /obj/machinery/airlock_sensor
+	uid           = "public_var_airlock_sensor_cycling"
 
 /decl/public_access/public_variable/set_airlock_cycling/airlock_sensor/access_var(obj/machinery/airlock_sensor/owner)
 	return owner.master_cycling

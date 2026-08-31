@@ -1,8 +1,10 @@
 /decl/public_access
+	abstract_type = /decl/public_access
 	var/name
 	var/desc
 
 /decl/public_access/public_variable
+	abstract_type = /decl/public_access/public_variable
 	var/expected_type
 	var/can_write = FALSE
 	var/var_type = VAR_FORMAT_BOOLEAN // Reuses IC defines for better compatibility.
@@ -115,6 +117,7 @@ Public methods machines can expose. Pretty bare-bones; just wraps a proc and giv
 */
 
 /decl/public_access/public_method
+	abstract_type = /decl/public_access/public_method
 	var/call_proc
 	var/forward_args = FALSE
 

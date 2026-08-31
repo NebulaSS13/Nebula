@@ -1,6 +1,7 @@
 var/global/list/laser_wavelengths
 
 /decl/laser_wavelength
+	abstract_type = /decl/laser_wavelength
 	var/name
 	var/color
 	var/light_color
