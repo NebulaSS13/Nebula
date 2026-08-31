@@ -3,6 +3,7 @@
 #define RANDOM_CHEM_EFFECT_FLOAT 3
 
 /decl/random_chem_effect
+	abstract_type = /decl/random_chem_effect
 	var/minimum = 0
 	var/maximum = 1
 	var/mode = RANDOM_CHEM_EFFECT_TRUE

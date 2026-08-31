@@ -17,7 +17,7 @@
 // suitable for encoding as a JSON protobuf mapping.
 /datum/metric_family/proc/_to_proto()
 	var/list/collected = collect()
-	
+
 	var/list/out = list(
 		"name" = name,
 		"type" = metric_type,
@@ -36,7 +36,7 @@
 			label_pairs[++label_pairs.len] = list("name" = k, "value" = m[1][k])
 
 		metrics[++metrics.len] = list("label" = label_pairs, PROMETHEUS_METRIC_NAME(metric_type) = list("value" = m[2]))
-	
+
 	if(metrics.len == 0)
 		return null
 	out["metric"] = metrics

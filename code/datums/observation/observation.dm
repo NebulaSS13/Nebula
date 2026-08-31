@@ -57,6 +57,7 @@
 //		The first argument shall always be the event_source belonging to the event. Beyond that there are no restrictions.
 
 /decl/observ
+	abstract_type = /decl/observ
 	var/name = "Unnamed Event"                // The name of this event, used mainly for debug/VV purposes. The list of event managers can be reached through the "Debug Controller" verb, selecting the "Observation" entry.
 	var/expected_type = /datum                // The expected event source for this event. register() will CRASH() if it receives an unexpected type.
 	var/list/list/list/event_sources = list() // Associative list of event sources, each with their own associative list. This associative list contains an instance/list of procs to call when the event is raised.

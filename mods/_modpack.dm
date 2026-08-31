@@ -1,4 +1,5 @@
 /decl/modpack
+	abstract_type = /decl/modpack
 	/// A string name for the modpack. Used for looking up other modpacks in init.
 	var/name
 	/// A string desc for the modpack. Can be used for modpack verb list as description.

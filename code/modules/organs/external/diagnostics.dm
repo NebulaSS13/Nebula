@@ -178,6 +178,7 @@
 	return sounds
 
 /decl/diagnostic_sign
+	abstract_type = /decl/diagnostic_sign
 	var/name = "Some symptom"
 	var/descriptor
 	var/explanation

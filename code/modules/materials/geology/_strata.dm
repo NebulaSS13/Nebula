@@ -1,4 +1,5 @@
 /decl/strata
+	abstract_type = /decl/strata
 	var/name
 	var/list/base_materials
 	var/list/ores_sparse

@@ -1,6 +1,7 @@
 #define FUSION_PROCESSING_TIME_MULT 2 // SSmachines.wait / (1 SECOND) - previous values were intended for SSobj 1-second wait.
 
 /decl/fusion_reaction
+	abstract_type = /decl/fusion_reaction
 	var/p_react // Primary reactant.
 	var/s_react // Secondary reactant.
 	var/minimum_energy_level = 1
