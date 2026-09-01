@@ -1,18 +1,18 @@
 /decl/flooring/wood/sif
-	color              = /decl/material/solid/organic/wood/sivian::color
-	build_type         = /obj/item/stack/tile/wood/sivian
-	force_material     = /decl/material/solid/organic/wood/sivian
+	color              = /decl/material/solid/organic/wood/sif::color
+	build_type         = /obj/item/stack/tile/wood/sif
+	force_material     = /decl/material/solid/organic/wood/sif
 	uid = "flooring_wood_sif"
 
 /decl/flooring/wood/rough/sif
-	color              = /decl/material/solid/organic/wood/sivian::color
-	build_type         = /obj/item/stack/tile/wood/rough/sivian
-	force_material     = /decl/material/solid/organic/wood/sivian
+	color              = /decl/material/solid/organic/wood/sif::color
+	build_type         = /obj/item/stack/tile/wood/rough/sif
+	force_material     = /decl/material/solid/organic/wood/sif
 	uid = "flooring_wood_rough_sif"
 
 /decl/flooring/laminate/sif
-	build_type         = /obj/item/stack/tile/wood/laminate/sivian
-	force_material     = /decl/material/solid/organic/wood/chipboard/sivian
+	build_type         = /obj/item/stack/tile/wood/laminate/sif
+	force_material     = /decl/material/solid/organic/wood/chipboard/sif
 	uid                = "floor_wood_lami_sifwood"
 
 /decl/flooring/grass/sif
@@ -39,17 +39,13 @@
 	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
-WOOD_TILE_SUBTYPE("sifwood", sivian, sivian)
-WOOD_TILE_SUBTYPE("rough sifwood", rough/sivian, sivian)
-WOOD_TILE_SUBTYPE("sifwood laminate", laminate/sivian, chipboard/sivian)
-
 /turf/floor/wood/sif
 	_flooring = /decl/flooring/wood/sif
-	color = /decl/material/solid/organic/wood/sivian::color
+	color = /decl/material/solid/organic/wood/sif::color
 
 /turf/floor/wood/broken/sif
 	_flooring = /decl/flooring/wood/sif
-	color = /decl/material/solid/organic/wood/sivian::color
+	color = /decl/material/solid/organic/wood/sif::color
 
 /turf/floor/tiled/steel_dirty
 	_flooring = /decl/flooring/tiling/steel_dirty

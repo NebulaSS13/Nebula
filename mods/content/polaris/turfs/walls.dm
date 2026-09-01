@@ -1,6 +1,6 @@
 /turf/wall/log/sif
-	material = /decl/material/solid/organic/wood/sivian
-	color = /decl/material/solid/organic/wood/sivian::color
+	material = /decl/material/solid/organic/wood/sif
+	color = /decl/material/solid/organic/wood/sif::color
 
 /turf/wall/natural/cynosure
 	strata_override = /decl/strata/sedimentary/cynosure
