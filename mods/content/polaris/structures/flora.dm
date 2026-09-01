@@ -56,7 +56,7 @@
 	icon_state = "tree_sif_stump"
 
 /obj/structure/flora/tree/sif/init_appearance()
-	icon_state = "tree_sif[rand(0, 6)]"
+	icon_state = "tree_sif[rand(0, 5)]"
 	update_icon()
 
 /obj/structure/flora/tree/sif/on_update_icon()

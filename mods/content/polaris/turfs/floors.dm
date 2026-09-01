@@ -10,6 +10,11 @@
 	force_material     = /decl/material/solid/organic/wood/sivian
 	uid = "flooring_wood_rough_sif"
 
+/decl/flooring/laminate/sif
+	build_type         = /obj/item/stack/tile/wood/laminate/sivian
+	force_material     = /decl/material/solid/organic/wood/chipboard/sivian
+	uid                = "floor_wood_lami_sifwood"
+
 /decl/flooring/grass/sif
 	name = "growth"
 	desc = "A layer of Sivian moss that has adapted to the sheer cold climate."
@@ -34,14 +39,17 @@
 	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
-WOOD_TILE_SUBTYPE("sifwood",       sivian,       sivian)
+WOOD_TILE_SUBTYPE("sifwood", sivian, sivian)
 WOOD_TILE_SUBTYPE("rough sifwood", rough/sivian, sivian)
+WOOD_TILE_SUBTYPE("sifwood laminate", laminate/sivian, chipboard/sivian)
 
 /turf/floor/wood/sif
 	_flooring = /decl/flooring/wood/sif
+	color = /decl/material/solid/organic/wood/sivian::color
 
 /turf/floor/wood/broken/sif
 	_flooring = /decl/flooring/wood/sif
+	color = /decl/material/solid/organic/wood/sivian::color
 
 /turf/floor/tiled/steel_dirty
 	_flooring = /decl/flooring/tiling/steel_dirty
