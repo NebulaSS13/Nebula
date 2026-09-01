@@ -227,8 +227,8 @@ SUBSYSTEM_DEF(mapping)
 		if(!TYPE_IS_ABSTRACT(template))
 			. += new template_type(type) // send name as a param to catch people doing illegal ad hoc creation
 
-/datum/controller/subsystem/mapping/proc/get_template(var/template_name)
-	return map_templates[template_name]
+/datum/controller/subsystem/mapping/proc/get_template(var/template)
+	return istype(template, /datum/map_template) ? template : map_templates[template]
 
 /datum/controller/subsystem/mapping/proc/get_templates_by_category(var/temple_cat) // :33
 	return map_templates_by_category[temple_cat]
