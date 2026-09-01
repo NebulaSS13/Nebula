@@ -14,6 +14,7 @@
 #include "datum\random_maps\sif_forest.dm"
 #include "datum\random_maps\sif_underground.dm"
 #include "datum\species\overrides.dm"
+#include "items\drone_permit.dm"
 #include "items\head.dm"
 #include "items\headsets.dm"
 #include "items\overrides.dm"
