@@ -588,3 +588,12 @@
 	on_store_name = "Residential Oversight"
 	on_enter_occupant_message = "The elevator door closes slowly, ready to bring you down to the residential district."
 	on_store_visible_message = "$TARGET$ makes a ding as it moves $USER$ to the residential district."
+
+/obj/machinery/cryopod/robot/door/checkpoint
+	name = "automated checkpoint"
+	desc = "A reinforced, automated checkpoint tracking arrivals and departures from the outpost. Beyond this vault is a small airstrip, then nothing but untamed wilderness."
+	on_store_message = "has departed from the colony."
+	on_store_name = "Travel Oversight"
+	on_enter_occupant_message = "The checkpoint unseals and grinds open, and you step through."
+	on_store_visible_message = "The checkpoint grinds closed after $TARGET$ passes through it."
+	time_till_despawn = 1 SECOND

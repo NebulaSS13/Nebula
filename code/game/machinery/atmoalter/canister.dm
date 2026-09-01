@@ -82,10 +82,11 @@
 	start_gas      = /decl/material/gas/hydrogen
 
 /obj/machinery/portable_atmospherics/canister/phoron
-	name = "\improper Canister \[Phoron\]"
-	icon_state = "orange"
-	canister_color = "orange"
-	can_label = 0
+	name           = "phoron canister"
+	icon_state     = "purple"
+	canister_color = "purple"
+	can_label      = FALSE
+	start_gas      = /decl/material/solid/phoron
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide
 	name           = "\improper CO2 canister"
