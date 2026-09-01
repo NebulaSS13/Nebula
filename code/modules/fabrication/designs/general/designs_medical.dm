@@ -43,3 +43,6 @@
 
 /datum/fabricator_recipe/medical/hypospray/autoinjector
 	path = /obj/item/chems/hypospray/autoinjector/empty
+
+/datum/fabricator_recipe/medical/hypospray/autoinjector/large
+	path = /obj/item/chems/hypospray/autoinjector/large/empty
