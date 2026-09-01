@@ -19,13 +19,13 @@
 	icon_state = "frame"
 	desc = "A remote control for a door."
 	initial_access = list(access_brig)
-	anchored = TRUE    		// can't pick it up
-	density = FALSE       		// can walk through it.
-	var/releasetime = 0		// when world.timeofday reaches it - release the prisoner
-	var/timing = 1    		// boolean, true/1 timer is on, false/0 means it's not timing
+	anchored = TRUE			// can't pick it up
+	density = FALSE			// can walk through it.
+	var/releasetime = 0		// when REALTIMEOFDAY reaches it - release the prisoner
+	var/timing = TRUE		// boolean, true/1 timer is on, false/0 means it's not timing
 	var/picture_state		// icon_state of alert picture, if not displaying text/numbers
-	var/list/obj/machinery/targets = list()
 	var/timetoset = 0		// Used to set releasetime upon starting the timer
+	var/list/obj/machinery/targets = list()
 
 	maptext_height = 26
 	maptext_width = 32
@@ -57,18 +57,10 @@
 // update the door_timer window and the icon
 /obj/machinery/door_timer/Process()
 	if(stat & (NOPOWER|BROKEN))	return
-	if(src.timing)
-
-		// poorly done midnight rollover
-		// (no seriously there's gotta be a better way to do this)
-		var/timeleft = timeleft()
-		if(timeleft > 1e5)
-			src.releasetime = 0
-
-
-		if(world.timeofday > src.releasetime)
-			src.timer_end(TRUE) // open doors, reset timer, clear status screen, broadcast to sec HUDs
-			src.timing = 0
+	if(timing)
+		if(timeleft() <= 0)
+			timer_end(TRUE) // open doors, reset timer, clear status screen, broadcast to sec HUDs
+			timing = FALSE
 
 		src.update_icon()
 
@@ -76,7 +68,6 @@
 		timer_end()
 
 	return
-
 
 // open/closedoor checks if door_timer has power, if so it checks if the
 // linked door is open/closed (by density) then opens it/closes it.
@@ -86,8 +77,7 @@
 	if(stat & (NOPOWER|BROKEN))	return 0
 
 	// Set releasetime
-	releasetime = world.timeofday + timetoset
-
+	releasetime = REALTIMEOFDAY + timetoset
 
 	//set timing
 	timing = 1
@@ -104,48 +94,38 @@
 		C.queue_icon_update()
 	return 1
 
-
 // Opens and unlocks doors, power check
-/obj/machinery/door_timer/proc/timer_end(var/broadcast_to_huds = 0)
-	if(stat & (NOPOWER|BROKEN))	return 0
+/obj/machinery/door_timer/proc/timer_end(var/broadcast_to_huds = FALSE)
+	if(stat & (NOPOWER|BROKEN))
+		return FALSE
 
 	// Reset releasetime
 	releasetime = 0
-
 	//reset timing
-	timing = 0
+	timing = FALSE
 
 	if (broadcast_to_huds)
 		broadcast_security_hud_message("The timer for [id_tag] has expired.", src)
 
 	for(var/obj/machinery/door/window/brigdoor/door in targets)
-		if(!door.density)	continue
+		if(!door.density)
+			continue
 		spawn(0)
 			door.open()
 
 	for(var/obj/structure/closet/secure_closet/brig/C in targets)
-		if(C.broken)	continue
-		if(C.opened)	continue
-		C.locked = 0
+		if(C.broken || C.opened)
+			continue
+		C.locked = FALSE
 		C.queue_icon_update()
 
-	return 1
-
+	return TRUE
 
 // Check for releasetime timeleft
 /obj/machinery/door_timer/proc/timeleft()
-	. = round((releasetime - world.timeofday)/10)
+	. = round((releasetime - REALTIMEOFDAY)/(1 SECOND))
 	if(. < 0)
 		. = 0
-
-// Set timetoset
-/obj/machinery/door_timer/proc/timeset(var/seconds)
-	timetoset = seconds * 10
-
-	if(timetoset <= 0)
-		timetoset = 0
-
-	return
 
 /obj/machinery/door_timer/interface_interact(var/mob/user)
 	ui_interact(user)
@@ -154,7 +134,7 @@
 /obj/machinery/door_timer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/data = list()
 
-	var/timeval = timing ? timeleft() : timetoset/10
+	var/timeval = timing ? timeleft() : timetoset / (1 SECOND)
 	data["timing"] = timing
 	data["minutes"] = round(timeval/60)
 	data["seconds"] = timeval % 60
@@ -189,7 +169,7 @@
 			timer_end()
 		else
 			timer_start()
-			if(timetoset > 18000)
+			if(timetoset > (30 MINUTES))
 				log_and_message_admins("has started a brig timer over 30 minutes in length!")
 		. =  TOPIC_REFRESH
 
@@ -200,11 +180,10 @@
 
 	if (href_list["adjust"])
 		timetoset += text2num(href_list["adjust"])
-		timetoset = clamp(timetoset, 0, 36000)
+		timetoset = clamp(timetoset, 0, 1 HOUR)
 		. = TOPIC_REFRESH
 
 	update_icon()
-
 
 //icon update function
 // if NOPOWER, display blank
@@ -228,15 +207,12 @@
 		if(maptext)
 			maptext = ""
 		update_display("Set","Time") // would be nice to have some default printed text
-	return
-
 
 // Adds an icon in case the screen is broken/off, stolen from status_display.dm
 /obj/machinery/door_timer/proc/set_picture(var/state)
 	picture_state = state
 	overlays.Cut()
 	overlays += image('icons/obj/status_display.dmi', icon_state=picture_state)
-
 
 //Checks to see if there's 1 line or 2, adds text-icons-numbers/letters over display
 // Stolen from status_display
@@ -246,24 +222,6 @@
 	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
 	if(maptext != new_text)
 		maptext = new_text
-
-
-//Actual string input to icon display for loop, with 5 pixel x offsets for each letter.
-//Stolen from status_display
-/obj/machinery/door_timer/proc/texticon(var/tn, var/px = 0, var/py = 0)
-	var/image/I = image('icons/obj/status_display.dmi', "blank")
-	var/len = length(tn)
-
-	for(var/d = 1 to len)
-		var/char = copytext(tn, len-d+1, len-d+2)
-		if(char == " ")
-			continue
-		var/image/ID = image('icons/obj/status_display.dmi', icon_state=char)
-		ID.pixel_x = -(d-1)*5 + px
-		ID.pixel_y = py
-		I.overlays += ID
-	return I
-
 
 /obj/machinery/door_timer/cell_1
 	name = "Cell 1"
