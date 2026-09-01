@@ -26,8 +26,21 @@
 		/obj/item/clothing/shoes/legguards/riot
 	)
 
-// Parts
+/obj/item/clothing/armor_attachment/plate/riot
+	name = "riot armor plate"
+	desc = "A thick armor plate with additional padding, providing good protection against low-velocity trauma. Attaches to a plate carrier."
+	icon = 'icons/clothing/accessories/armor/armor_plate_riot.dmi'
+	accessory_slowdown = 0.5
+	armor = list(
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED
+		)
+	siemens_coefficient = 0.7
 
+// Parts
 /obj/item/clothing/shoes/legguards/riot
 	name = "riot leg guards"
 	desc = "A pair of armored leg pads with heavy padding to protect against melee attacks. Looks like they might impair movement."

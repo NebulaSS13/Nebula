@@ -18,13 +18,31 @@
 	matter = list(
 		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
-		)
+	)
 	origin_tech = @'{"materials":3,"engineering":1,"combat":3}'
 
 /obj/item/clothing/suit/armor/bulletproof/prepared
 	starting_accessories = list(
 		/obj/item/clothing/gloves/armguards/ballistic,
 		/obj/item/clothing/shoes/legguards/ballistic
+	)
+
+/obj/item/clothing/armor_attachment/plate/bulletproof
+	name = "ballistic armor plate"
+	desc = "A woven armor plate with additional plating, providing good protection against high-velocity trauma. Attaches to a plate carrier."
+	icon = 'icons/clothing/accessories/armor/armor_plate_bulletproof.dmi'
+	accessory_slowdown = 0.5
+	siemens_coefficient = 0.7
+	armor = list(
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_AP,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED
+		)
+	matter = list(
+		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/clothing/gloves/armguards/ballistic
