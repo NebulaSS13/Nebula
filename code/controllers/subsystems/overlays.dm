@@ -119,11 +119,12 @@ SUBSYSTEM_DEF(overlays)
 /atom/proc/build_appearance_list(atom/new_overlays)
 	var/static/image/appearance_bro = new
 	if (islist(new_overlays))
-		new_overlays:RemoveAll(null)
-		for (var/i in 1 to length(new_overlays))
-			var/image/cached_overlay = UNLINT(new_overlays[i])
-			APPEARANCEIFY(cached_overlay, UNLINT(new_overlays[i]))
-		return new_overlays
+		var/list/overlays_list = new_overlays
+		overlays_list.RemoveAll(null)
+		for (var/i in 1 to length(overlays_list))
+			var/image/cached_overlay = overlays_list[i]
+			APPEARANCEIFY(cached_overlay, overlays_list[i])
+		return overlays_list
 	else
 		APPEARANCEIFY(new_overlays, .)
 
