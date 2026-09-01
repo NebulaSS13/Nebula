@@ -9,6 +9,7 @@ var/global/list/default_uplink_source_priority = list(
 )
 
 /decl/uplink_source
+	abstract_type = /decl/uplink_source
 	var/name
 	var/desc
 

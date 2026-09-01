@@ -5,7 +5,7 @@
 	icon_state = "curtain_rolled"
 	_base_attack_force = 3 //just plastic
 	w_class = ITEM_SIZE_HUGE //curtains, yeap
-	var/curtain_kind_path = /decl/curtain_kind //path to decl containing the curtain's details
+	var/curtain_kind_path //path to decl containing the curtain's details
 
 /obj/item/curtain/Initialize(ml, material_key)
 	. = ..()
@@ -73,7 +73,7 @@
 	opacity = TRUE
 	density = FALSE
 	anchored = TRUE
-	var/curtain_kind_path = /decl/curtain_kind
+	var/curtain_kind_path
 
 /obj/structure/curtain/open
 	icon_state = "open"
@@ -81,7 +81,10 @@
 	opacity = FALSE
 
 /obj/structure/curtain/Initialize(ml, _mat, _reinf_mat)
-	. = ..(ml)
+	if(curtain_kind_path) // these are overridden, don't initialize them early
+		_mat = null
+		_reinf_mat = null
+	. = ..()
 	set_extension(src, /datum/extension/turf_hand)
 	if(curtain_kind_path)
 		set_curtain_kind(GET_DECL(curtain_kind_path))

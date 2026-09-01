@@ -81,6 +81,7 @@ Class Procs:
 	)
 	temperature_sensitive = TRUE
 	abstract_type = /obj/machinery
+	interaction_priority = TRUE
 
 	var/stat = 0
 	var/waterproof = TRUE

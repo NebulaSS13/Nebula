@@ -12,6 +12,7 @@
 	idle_power_usage = 2
 	active_power_usage = 20
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
+	interaction_priority = null
 
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc

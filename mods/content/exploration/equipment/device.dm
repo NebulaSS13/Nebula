@@ -6,6 +6,9 @@
 		"stripe-inside" =  "#68099e"
 	)
 
+/obj/item/gps/explorer/on
+	tracking = TRUE
+
 /obj/item/gps/xenofauna
 	color = "#b1b1b1"
 	decals = list(

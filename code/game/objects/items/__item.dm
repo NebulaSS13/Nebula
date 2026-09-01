@@ -5,6 +5,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	abstract_type = /obj/item
 	temperature_sensitive = TRUE
+	interaction_priority = TRUE
 
 	/// Set to prefix name with this string ('woven' for 'woven basket' etc)
 	var/name_prefix

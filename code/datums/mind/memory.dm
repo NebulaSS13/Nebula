@@ -122,6 +122,7 @@
 
 // General memory handling
 /decl/memory_options
+	abstract_type = /decl/memory_options
 	var/memory_type = /datum/memory
 
 /decl/memory_options/proc/validate_mind(var/datum/mind/target)

@@ -1,4 +1,5 @@
 /decl/scent_type
+	abstract_type = /decl/scent_type
 	var/color
 	var/scent //this is for the desc, the actual scent goes in the datum
 	var/scent_datum

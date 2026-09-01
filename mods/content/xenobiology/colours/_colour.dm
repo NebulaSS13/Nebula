@@ -1,4 +1,5 @@
 /decl/slime_colour
+	abstract_type = /decl/slime_colour
 	var/name
 	var/min_children = 4
 	var/max_children = 4
