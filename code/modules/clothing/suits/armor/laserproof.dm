@@ -10,12 +10,25 @@
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
 		ARMOR_LASER = ARMOR_LASER_RIFLES,
 		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT
-		)
+	)
 	siemens_coefficient = 0
 	starting_accessories = list(
 		/obj/item/clothing/gloves/armguards/ablative,
 		/obj/item/clothing/shoes/legguards/ablative
 	)
+
+/obj/item/clothing/armor_attachment/plate/laserproof
+	name = "ablative armor plate"
+	desc = "A durasteel-scaled synthetic armor plate, providing good protection against lasers. Attaches to a plate carrier."
+	icon = 'icons/clothing/accessories/armor/armor_plate_laserproof.dmi'
+	accessory_slowdown = 0.5
+	armor = list(
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_RIFLES,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT
+	)
+	siemens_coefficient = 0.1
 
 /obj/item/clothing/suit/armor/laserproof/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(istype(damage_source, /obj/item/projectile/energy) || istype(damage_source, /obj/item/projectile/beam))
