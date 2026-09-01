@@ -200,35 +200,6 @@
 	)
 	return spawnable_choices
 
-/obj/random/material //Random materials for building stuff
-	name = "random material"
-	desc = "This is a random material."
-	icon = 'icons/obj/items/stacks/materials.dmi'
-	icon_state = "sheet"
-
-/obj/random/material/spawn_choices()
-	var/static/list/spawnable_choices = list(
-		/obj/item/stack/material/sheet/mapped/steel/ten,
-		/obj/item/stack/material/pane/mapped/glass/ten,
-		/obj/item/stack/material/pane/mapped/rglass/ten,
-		/obj/item/stack/material/panel/mapped/plastic/ten,
-		/obj/item/stack/material/plank/mapped/wood/ten,
-		/obj/item/stack/material/cardstock/mapped/cardboard/ten,
-		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/ten,
-		/obj/item/stack/material/sheet/mapped/steel/fifty,
-		/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
-		/obj/item/stack/material/ingot/mapped/copper/fifty,
-		/obj/item/stack/material/pane/mapped/glass/fifty,
-		/obj/item/stack/material/pane/mapped/rglass/fifty,
-		/obj/item/stack/material/panel/mapped/plastic/fifty,
-		/obj/item/stack/material/plank/mapped/wood/fifty,
-		/obj/item/stack/material/cardstock/mapped/cardboard/fifty,
-		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
-		/obj/item/stack/material/rods/mapped/steel/ten,
-		/obj/item/stack/material/rods/mapped/steel/fifty
-	)
-	return spawnable_choices
-
 /obj/random/soap
 	name = "Random Cleaning Supplies"
 	desc = "This is a random bar of soap. Soap! SOAP?! SOAP!!!"
@@ -423,6 +394,24 @@
 	var/static/list/spawnable_choices = list(
 		/obj/machinery/vending/coffee,
 		/obj/machinery/vending/cola
+	)
+	return spawnable_choices
+
+/obj/random/vendor/all
+	name = "random civilian vending machine"
+
+/obj/random/vendor/all/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/machinery/vending/coffee,
+		/obj/machinery/vending/snack,
+		/obj/machinery/vending/cola,
+		/obj/machinery/vending/fitness,
+		/obj/machinery/vending/cigarette,
+		/obj/machinery/vending/hotfood,
+		/obj/machinery/vending/weeb,
+		/obj/machinery/vending/sol,
+		/obj/machinery/vending/snix,
+		/obj/machinery/vending/sovietsoda,
 	)
 	return spawnable_choices
 
@@ -645,3 +634,19 @@
 		/obj/item/backpack/dufflebag/syndie  = 1
 	)
 	return spawn_choices
+
+/obj/random/fishing_junk
+	name = "random fishing junk"
+	icon = /obj/item/pizzabox::icon
+	icon_state = /obj/item/pizzabox::icon_state
+
+/obj/random/fishing_junk/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/trash/mollusc_shell/clam                   = 2,
+		/obj/item/trash/mollusc_shell/barnacle               = 2,
+		/obj/item/remains/mouse                              = 2,
+		/obj/item/remains/lizard                             = 2,
+		/obj/item/stick                                      = 1,
+		/obj/item/trash/mollusc_shell                        = 1
+	)
+	return spawnable_choices

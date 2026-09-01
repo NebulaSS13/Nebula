@@ -1700,10 +1700,10 @@
 /obj/random/maintenance/security{
 	spawn_nothing_percentage = 50
 	},
-/obj/random/projectile/sec{
+/obj/random/sec{
 	spawn_nothing_percentage = 40
 	},
-/obj/random/projectile/sec{
+/obj/random/sec{
 	spawn_nothing_percentage = 40
 	},
 /turf/floor/tiled,

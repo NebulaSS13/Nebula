@@ -180,6 +180,7 @@
 	detail_color = COLOR_CYAN
 	abstract_type = /obj/item/chems/hypospray/autoinjector
 	var/autolabel = TRUE  		// if set, will add label with the name of the first initial reagent
+	var/unidentified = TRUE
 
 /obj/item/chems/hypospray/autoinjector/Initialize()
 	. = ..()
@@ -194,7 +195,9 @@
 /obj/item/chems/hypospray/autoinjector/populate_reagents()
 	SHOULD_CALL_PARENT(TRUE)
 	. = ..()
-	if(REAGENT_TOTAL_VOLUME(reagents) > 0 && autolabel && !label_text) // don't override preset labels
+	if(unidentified)
+		label_text = "unidentified, [REAGENT_TOTAL_VOLUME(reagents)]u"
+	else if(REAGENT_TOTAL_VOLUME(reagents) > 0 && autolabel && !label_text) // don't override preset labels
 		label_text = "[reagents.get_primary_reagent_name()], [REAGENT_TOTAL_VOLUME(reagents)]u"
 
 /obj/item/chems/hypospray/autoinjector/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)

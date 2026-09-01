@@ -10,7 +10,3 @@
 /obj/item/gun/energy/laser/dogan/consume_next_projectile()
 	projectile_type = pick(/obj/item/projectile/beam/midlaser, /obj/item/projectile/beam/lasertag/red, /obj/item/projectile/beam)
 	return ..()
-
-/obj/item/gun/projectile/automatic/smg/usi
-	desc = "A cheap mass-produced SMG. This one looks especially run-down. Uses pistol rounds."
-	jam_chance = 20
