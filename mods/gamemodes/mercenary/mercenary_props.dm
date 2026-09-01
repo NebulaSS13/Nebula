@@ -15,6 +15,9 @@
 // Four times as many TCs, because it used to spawn with 40 when traitors got 10, but that was never updated when TC costs were inflated.
 /obj/item/radio/uplink/mercenary
 	tc_amount = /obj/item/radio/uplink::tc_amount * 4
+<<<<<<< HEAD
 
 /obj/item/radio/intercom/mercenary
 	inherent_decryption = list(access_mercenary)
+=======
+>>>>>>> 05df1b1ce24 (Added special role checking to aggressive AI for merc viscerator.)
