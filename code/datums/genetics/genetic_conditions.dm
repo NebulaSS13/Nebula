@@ -1,4 +1,5 @@
 /decl/genetic_condition
+	abstract_type = /decl/genetic_condition
 	/// Descriptive name, used in VV panel.
 	var/name
 	/// Verb to be added or removed on activate/deactivate

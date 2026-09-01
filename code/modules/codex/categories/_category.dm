@@ -1,4 +1,5 @@
 /decl/codex_category
+	abstract_type = /decl/codex_category
 	var/name = "Generic Category"
 	var/desc = "Some description for category's codex entry"
 	var/list/items = list()

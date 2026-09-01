@@ -1,4 +1,5 @@
 /decl/item_modifier
+	abstract_type = /decl/item_modifier
 	var/name
 	var/list/type_setups
 

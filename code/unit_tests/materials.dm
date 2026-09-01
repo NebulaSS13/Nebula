@@ -112,3 +112,41 @@
 	else
 		pass("[length(passed_designs)] crafting recipes had consistent output materials.")
 	return 1
+
+/datum/unit_test/curtain_items_shall_have_consistent_matter
+	name = "MATERIALS: Curtain Items Shall Have Consistent Matter Lists"
+
+/datum/unit_test/curtain_items_shall_have_consistent_matter/start_test()
+	var/list/all_curtain_subtypes = subtypesof(/obj/item/curtain)
+	var/list/failed_curtains = list()
+	var/list/passed_curtains = list()
+
+	for(var/curtain_type in all_curtain_subtypes)
+		var/obj/item/curtain/curtain_subtype = curtain_type
+		var/decl/curtain_kind/curtain_kind = GET_DECL(curtain_subtype::curtain_kind_path)
+		if(!curtain_kind || TYPE_IS_ABSTRACT(curtain_subtype))
+			continue
+		var/list/failed = list()
+		curtain_subtype = new curtain_type // atom info repository was failing me here
+		var/used_matter = curtain_subtype.matter
+		var/expected_material = curtain_kind.material_key
+		switch(length(used_matter))
+			if(0)
+				failed += "did not have matter"
+			if(1)
+				if(!used_matter[expected_material])
+					failed += "did not have expected material (had [used_matter[1]], expected [expected_material])"
+			else
+				failed += "had too many materials ([length(used_matter)], expected 1)"
+		if(length(failed))
+			failed_curtains += "[curtain_type] - [english_list(failed)]"
+		else
+			passed_curtains += curtain_type
+		QDEL_NULL(curtain_subtype)
+
+	var/failed_count = length(failed_curtains)
+	if(failed_count)
+		fail("[failed_count] curtain items had inconsistent matter lists: [jointext(failed_curtains, "\n")].")
+	else
+		pass("[length(passed_curtains)] curtain items had consistent matter lists.")
+	return 1

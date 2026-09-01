@@ -1,4 +1,5 @@
 /decl/psionic_faculty
+	abstract_type = /decl/psionic_faculty
 	var/id
 	var/name
 	var/associated_intent_flag
