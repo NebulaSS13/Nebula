@@ -101,6 +101,6 @@
 		/obj/item/gun/projectile/zipgun                 = TRADER_THIS_TYPE,
 		/obj/item/gun/projectile/bolt_action/sniper/ant = TRADER_THIS_TYPE,
 		/obj/item/gun/energy/laser/dogan                = TRADER_THIS_TYPE,
-		/obj/item/gun/projectile/automatic/smg/usi      = TRADER_THIS_TYPE,
+		/obj/item/gun/projectile/automatic/smg/uzi      = TRADER_THIS_TYPE,
 		/obj/item/clothing/webbing/holster              = TRADER_ALL
 	)

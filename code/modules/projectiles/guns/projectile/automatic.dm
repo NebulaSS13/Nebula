@@ -37,6 +37,10 @@
 	if(ammo_magazine)
 		add_overlay("[get_world_inventory_state()]mag-[round(ammo_magazine.get_stored_ammo_count(),5)]")
 
+/obj/item/gun/projectile/automatic/smg/uzi
+	desc = "A cheap mass-produced SMG. This one looks especially run-down. Uses pistol rounds."
+	jam_chance = 20
+
 /obj/item/gun/projectile/automatic/assault_rifle
 	name = "assault rifle"
 	desc = "The Z8 Bulldog is an older model bullpup carbine. Makes you feel like a space marine when you hold it."
