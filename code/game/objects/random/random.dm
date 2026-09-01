@@ -34,6 +34,10 @@
 			A.reset_offsets(0)
 
 /obj/random/proc/create_instance(var/build_path, var/spawn_loc)
+	if(ispath(build_path, /turf))
+		var/turf/changing = get_turf(spawn_loc)
+		if(istype(changing))
+			return list(changing.ChangeTurf(build_path))
 	if(ispath(build_path))
 		return list(new build_path(spawn_loc))
 	if(islist(build_path))

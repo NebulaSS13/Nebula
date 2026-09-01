@@ -12,6 +12,10 @@
 	is_spawnable_type = TRUE;                                              \
 	color = parent_type::paint_color || /decl/material/MAT_TYPE::color;    \
 }                                                                          \
+/obj/item/stack/material/##STACK_TYPE/mapped/##MAT_ID/three {              \
+	name = "3 " + MAT_NAME;                                                \
+	amount = 3;                                                            \
+}                                                                          \
 /obj/item/stack/material/##STACK_TYPE/mapped/##MAT_ID/five {               \
 	name = "5 " + MAT_NAME;                                                \
 	amount = 5;                                                            \
