@@ -5,7 +5,7 @@
 ///Welder specifically for the welder pack.
 /obj/item/fuelled_tool/welding/pack
 	name         = "welding gun"
-	desc         = "A welding gun with hoses connecting into a welder fuel tank pack."
+	desc         = "A welding gun with hoses connecting into a fuel tank pack."
 	slot_flags   = SLOT_HANDS
 	throw_speed  = 0
 	throw_range  = 0

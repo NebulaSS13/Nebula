@@ -10,15 +10,17 @@
 	origin_tech     = @'{"engineering":1}'
 	drop_sound      = 'sound/foley/tooldrop1.ogg'
 	attack_cooldown = DEFAULT_ATTACK_COOLDOWN
-	var/waterproof                      = FALSE
+
+	var/idle_fuel_usage               = 0.5
+	var/waterproof                    = FALSE
 	/// Whether or not the tool is off(0), on(1) or currently running(2)
-	var/running_state                   = FALSE
-	var/tmp/fuel_name                   = /decl/material/liquid/fuel::name
+	var/running_state                 = FALSE
+	var/tmp/fuel_name                 = /decl/material/liquid/fuel::name
 	/// where the fuel is stored
 	var/obj/item/chems/fuel_tank/tank = /obj/item/chems/fuel_tank
-	var/tmp/activate_sound              = 'sound/items/welderactivate.ogg'
-	var/tmp/deactivate_sound            = 'sound/items/welderdeactivate.ogg'
-	var/datum/composite_sound/fire_crackles/running_loop
+	var/tmp/activate_sound            = 'sound/items/welderactivate.ogg'
+	var/tmp/deactivate_sound          = 'sound/items/welderdeactivate.ogg'
+	var/datum/composite_sound/running_loop
 
 /obj/item/fuelled_tool/Initialize(ml, material_key)
 	. = ..()
@@ -35,6 +37,17 @@
 	if(istype(running_loop))
 		QDEL_NULL(running_loop)
 	return ..()
+
+/obj/item/fuelled_tool/attack_hand(mob/user)
+	if (tank && user.is_holding_offhand(src) && user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
+		return remove_tank(user)
+	return ..()
+
+/obj/item/fuelled_tool/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/chems/fuel_tank))
+		insert_tank(used_item, user)
+		return TRUE
+	. = ..()
 
 /obj/item/fuelled_tool/dropped(mob/user)
 	. = ..()
@@ -107,13 +120,13 @@
 	update_icon()
 	return TRUE
 
-/obj/item/fuelled_tool/afterattack(var/obj/O, var/mob/user, proximity, click_parameters)
-	return handle_afterattack(O, user, proximity, click_parameters) || ..()
+/obj/item/fuelled_tool/afterattack(var/atom/target, var/mob/user, proximity, click_parameters)
+	return handle_afterattack(target, user, proximity, click_parameters) || ..()
 
-/obj/item/fuelled_tool/proc/handle_afterattack(var/obj/O, var/mob/user, proximity, click_parameters)
-	if(proximity && istype(O, /obj/structure/reagent_dispensers/fueltank) && !running_state)
+/obj/item/fuelled_tool/proc/handle_afterattack(var/atom/target, var/mob/user, proximity, click_parameters)
+	if(proximity && istype(target, /obj/structure/reagent_dispensers/fueltank) && !running_state)
 		if(tank)
-			return tank.afterattack(O, user, proximity, click_parameters)
+			return tank.afterattack(target, user, proximity, click_parameters)
 		to_chat(user, SPAN_WARNING("\The [src] has no tank attached!"))
 	return FALSE
 
@@ -163,23 +176,33 @@
 		return FALSE
 	return TRUE
 
+/obj/item/fuelled_tool/proc/perform_activation_check(mob/user)
+	return TRUE
+
+/obj/item/fuelled_tool/proc/show_activation_message(mob/user)
+	user.visible_message(SPAN_NOTICE("\The [user] turns \the [src] on."), SPAN_NOTICE("You turn on \the [src]."))
+
 /obj/item/fuelled_tool/proc/turn_on(var/mob/user)
 	if (!can_turn_on(user))
 		return
 
+	if(!perform_activation_check(user))
+		return
+
 	if(user)
-		user.visible_message(SPAN_NOTICE("\The [user] turns \the [src] on."), SPAN_NOTICE("You turn on \the [src]."))
+		show_activation_message(user)
 	else
 		visible_message(SPAN_WARNING("\The [src] turns on."))
 
-	update_physical_damage()
 	playsound(src, activate_sound, 50, TRUE)
 	if(running_loop && !running_loop.started)
 		running_loop.start(src)
 
 	running_state = TRUE
 	obj_flags |= OBJ_FLAG_NO_STORAGE
+	update_physical_damage()
 	update_icon()
+	update_held_icon()
 	START_PROCESSING(SSobj, src)
 	return TRUE
 
@@ -191,14 +214,16 @@
 	else
 		visible_message(SPAN_WARNING("\The [src] turns off."))
 
-	update_physical_damage()
-	playsound(src, deactivate_sound, 50, TRUE)
+	if(deactivate_sound)
+		playsound(src, deactivate_sound, 50, TRUE)
 	if(running_loop?.started)
 		running_loop.stop(src)
 
 	running_state = FALSE
 	obj_flags &= ~OBJ_FLAG_NO_STORAGE
+	update_physical_damage()
 	update_icon()
+	update_held_icon()
 	return TRUE
 
 /obj/item/fuelled_tool/proc/toggle(var/mob/user)
@@ -207,16 +232,12 @@
 	return turn_on(user)
 
 /obj/item/fuelled_tool/proc/handle_idling(fuel_usage = 0.5)
-	return
+	return use_fuel(fuel_usage)
 
 // Handle burning fuel while the tool is running.
-/obj/item/fuelled_tool/proc/idling(fuel_usage = 0.5)
+/obj/item/fuelled_tool/Process()
+	..()
 	if(!running_state)
-		return
-	if((!waterproof && submerged()) || (get_fuel() < fuel_usage))
+		return PROCESS_KILL
+	if((!waterproof && submerged()) || (get_fuel() < idle_fuel_usage) || !handle_idling(idle_fuel_usage))
 		turn_off()
-		return
-	handle_idling(fuel_usage)
-	if(use_fuel(fuel_usage))
-		return TRUE
-	turn_off()

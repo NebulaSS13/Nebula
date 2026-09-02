@@ -13,7 +13,7 @@
 	uid = "chem_fuel"
 	toxicity = 2
 
-	glass_name = "welder fuel"
+	glass_name = "fuel"
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
 	value = 1.5
 
