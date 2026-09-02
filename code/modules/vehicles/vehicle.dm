@@ -125,8 +125,8 @@
 		if(!open)
 			to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 			return TRUE
-		var/obj/item/weldingtool/welder = used_item
-		if(!welder.welding)
+		var/obj/item/fuelled_tool/welding/welder = used_item
+		if(!welder.running_state)
 			to_chat(user, "<span class='notice'>Unable to repair while [used_item] is off.</span>")
 			return TRUE
 		if(welder.weld(5, user))

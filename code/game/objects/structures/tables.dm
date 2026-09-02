@@ -650,7 +650,7 @@
 /obj/structure/table/handle_default_wrench_attackby(var/mob/user, var/obj/item/wrench)
 	return !reinf_material && ..()
 
-/obj/structure/table/handle_default_welder_attackby(var/mob/user, var/obj/item/weldingtool/welder)
+/obj/structure/table/handle_default_welder_attackby(var/mob/user, var/obj/item/fuelled_tool/welding/welder)
 	return !reinf_material && ..()
 
 /obj/structure/table/handle_default_crowbar_attackby(var/mob/user, var/obj/item/crowbar)

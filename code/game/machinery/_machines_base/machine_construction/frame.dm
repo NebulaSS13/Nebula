@@ -19,9 +19,9 @@
 			to_chat(user, "<span class='notice'>You wrench \the [machine] into place.</span>")
 			machine.anchored = TRUE
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(!welder.weld(0, user))
-			to_chat(user, "The welding tool must be on to complete this task.")
+			to_chat(user, "\The [welder] must be on to complete this task.")
 			return TRUE
 		playsound(machine.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(do_after(user, 20, machine))

@@ -276,7 +276,7 @@ WOOD_RAILING_SUBTYPE(yew)
 			return TRUE
 	// Repair
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/F = used_item
+		var/obj/item/fuelled_tool/welding/F = used_item
 		if(F.isOn())
 			var/current_max_health = get_max_health()
 			if(current_health >= current_max_health)

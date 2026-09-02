@@ -40,7 +40,7 @@
 	return FALSE
 
 /// Handles a welding tool applied to the emitter in this state. Return TRUE if the interaction was handled.
-/decl/machine_construction/emitter/proc/welder_interaction(obj/item/weldingtool/welder, mob/user, obj/machinery/emitter/machine)
+/decl/machine_construction/emitter/proc/welder_interaction(obj/item/fuelled_tool/welding/welder, mob/user, obj/machinery/emitter/machine)
 	return FALSE
 
 /decl/machine_construction/emitter/attackby(obj/item/used_item, mob/user, obj/machinery/emitter/machine)
@@ -118,7 +118,7 @@
 	machine.anchored = TRUE
 	return TRUE
 
-/decl/machine_construction/emitter/unsecured/welder_interaction(obj/item/weldingtool/welder, mob/user, obj/machinery/emitter/machine)
+/decl/machine_construction/emitter/unsecured/welder_interaction(obj/item/fuelled_tool/welding/welder, mob/user, obj/machinery/emitter/machine)
 	to_chat(user, SPAN_WARNING("\The [machine] needs to be wrenched to the floor."))
 	return TRUE
 
@@ -141,7 +141,7 @@
 	machine.anchored = FALSE
 	return TRUE
 
-/decl/machine_construction/emitter/anchored/welder_interaction(obj/item/weldingtool/welder, mob/user, obj/machinery/emitter/machine)
+/decl/machine_construction/emitter/anchored/welder_interaction(obj/item/fuelled_tool/welding/welder, mob/user, obj/machinery/emitter/machine)
 	if(!welder.do_tool_interaction(TOOL_WELDER, user, machine, 2 SECONDS, \
 		"welding", \
 		"welding", \
@@ -165,7 +165,7 @@
 	to_chat(user, SPAN_WARNING("\The [machine] needs to be unwelded from the floor."))
 	return TRUE
 
-/decl/machine_construction/emitter/welded/welder_interaction(obj/item/weldingtool/welder, mob/user, obj/machinery/emitter/machine)
+/decl/machine_construction/emitter/welded/welder_interaction(obj/item/fuelled_tool/welding/welder, mob/user, obj/machinery/emitter/machine)
 	if(!welder.do_tool_interaction(TOOL_WELDER, user, machine, 2 SECONDS, \
 		"cutting free", \
 		"cutting free", \

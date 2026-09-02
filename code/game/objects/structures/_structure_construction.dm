@@ -7,7 +7,7 @@
 		return tool_toggle_anchors(user, wrench)
 	return FALSE
 
-/obj/structure/proc/handle_default_welder_attackby(var/mob/user, var/obj/item/weldingtool/welder)
+/obj/structure/proc/handle_default_welder_attackby(var/mob/user, var/obj/item/fuelled_tool/welding/welder)
 	if((tool_interaction_flags & TOOL_INTERACTION_DECONSTRUCT) && can_dismantle(user))
 		return welder_dismantle(user, welder)
 	return FALSE
@@ -182,7 +182,7 @@
 	dismantle_structure(user)
 	return TRUE
 
-/obj/structure/proc/welder_dismantle(mob/user, obj/item/weldingtool/welder)
+/obj/structure/proc/welder_dismantle(mob/user, obj/item/fuelled_tool/welding/welder)
 	if(material && !material.removed_by_welder)
 		to_chat(user, SPAN_WARNING("\The [src] is too delicate to be dismantled with \the [welder]; try a crowbar."))
 		return TRUE

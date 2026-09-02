@@ -144,9 +144,9 @@
 		update()
 		update_verbs()
 		return TRUE
-	else if(istype(used_item, /obj/item/weldingtool))
+	else if(istype(used_item, /obj/item/fuelled_tool/welding))
 		if(anchored)
-			var/obj/item/weldingtool/welder = used_item
+			var/obj/item/fuelled_tool/welding/welder = used_item
 			if(welder.weld(0,user))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "Welding \the [src] in place.")
@@ -158,7 +158,7 @@
 					return TRUE
 				return TRUE
 			else
-				to_chat(user, "You need more welding fuel to complete this task.")
+				to_chat(user, "You need more fuel to complete this task.")
 				return TRUE
 		else
 			to_chat(user, "You need to attach it to the plating first!")

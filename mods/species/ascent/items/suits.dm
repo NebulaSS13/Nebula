@@ -33,7 +33,7 @@
 		/obj/item/clustertool,
 		/obj/item/tank/mantid,
 		/obj/item/gun/energy/particle/small,
-		/obj/item/weldingtool/electric/mantid,
+		/obj/item/fuelled_tool/welding/electric/mantid,
 		/obj/item/multitool/mantid,
 		/obj/item/stack/medical/resin,
 		/obj/item/chems/drinks/cans/waterbottle/ascent

@@ -10,7 +10,7 @@
 		return TRUE
 
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(!welder.isOn())
 			to_chat(user, "\The [used_item] is off.")
 			return TRUE

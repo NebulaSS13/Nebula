@@ -8,8 +8,8 @@
 	var/static/list/spawnable_choices = list(
 		/obj/item/screwdriver           = 5,
 		/obj/item/wirecutters           = 5,
-		/obj/item/weldingtool           = 5,
-		/obj/item/weldingtool/largetank = 1,
+		/obj/item/fuelled_tool/welding           = 5,
+		/obj/item/fuelled_tool/welding/largetank = 1,
 		/obj/item/crowbar               = 5,
 		/obj/item/wrench                = 5,
 		/obj/item/flashlight            = 5
@@ -23,8 +23,8 @@
 /obj/random/tool/power/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/random/tool                   = 320,
-		/obj/item/weldingtool/electric     = 15,
-		/obj/item/weldingtool/experimental =  3,
+		/obj/item/fuelled_tool/welding/electric     = 15,
+		/obj/item/fuelled_tool/welding/experimental =  3,
 		/obj/item/tool/hydraulic_cutter    =  1,
 		/obj/item/tool/power_drill         =  1
 	)

@@ -265,7 +265,7 @@ var/global/list/closets = list()
 				receive_mouse_drop(grab.affecting, user)      //act like they were dragged onto the closet
 				return TRUE
 			if(IS_WELDER(used_item))
-				var/obj/item/weldingtool/welder = used_item
+				var/obj/item/fuelled_tool/welding/welder = used_item
 				if(welder.weld(0,user))
 					slice_into_parts(welder, user)
 					return TRUE
@@ -315,10 +315,10 @@ var/global/list/closets = list()
 		return FALSE //Return false to get afterattack to be called
 
 	if(IS_WELDER(used_item) && (setup & CLOSET_CAN_BE_WELDED))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(!welder.weld(0,user))
 			if(welder.isOn())
-				to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
+				to_chat(user, SPAN_NOTICE("You need more fuel to complete this task."))
 			return TRUE
 		welded = !welded
 		update_icon()

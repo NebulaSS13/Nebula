@@ -14,7 +14,7 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 	icon = 'mods/species/ascent/icons/ascent.dmi'
 	icon_state = "multitool"
 
-/obj/item/weldingtool/electric/mantid
+/obj/item/fuelled_tool/welding/electric/mantid
 	name = "mantid welding tool"
 	desc = "An oddly shaped alien welding tool."
 	icon = 'mods/species/ascent/icons/ascent.dmi'

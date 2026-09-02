@@ -281,14 +281,14 @@
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/used_item, mob/user)
 	if(IS_WELDER(used_item))
 
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 
 		if(!welder.isOn())
-			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
+			to_chat(user, "<span class='notice'>\The [welder] needs to be on to start this task.</span>")
 			return 1
 
 		if(!welder.weld(0,user))
-			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
+			to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
 			return 1
 
 		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
@@ -302,7 +302,7 @@
 			return 1
 
 		if(!welder.isOn())
-			to_chat(user, "<span class='notice'>The welding tool needs to be on to finish this task.</span>")
+			to_chat(user, "<span class='notice'>\The [welder] needs to be on to finish this task.</span>")
 			return 1
 
 		welded = !welded

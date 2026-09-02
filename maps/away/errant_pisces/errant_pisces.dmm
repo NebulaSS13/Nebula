@@ -4662,7 +4662,7 @@
 "mI" = (
 /obj/machinery/optable,
 /obj/item/clothing/glasses/welding,
-/obj/item/weldingtool,
+/obj/item/fuelled_tool/welding,
 /turf/floor/tiled/white,
 /area/errant_pisces/science_wing)
 "mJ" = (

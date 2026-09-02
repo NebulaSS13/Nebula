@@ -21,7 +21,7 @@
 	/// cooldown
 	var/operating = FALSE
 	var/turf/previous_turf = null
-	var/obj/item/weldingtool/welding_tool = null
+	var/obj/item/fuelled_tool/welding/welding_tool = null
 	var/obj/item/assembly/igniter/igniter = null
 	var/obj/item/tank/tank = null
 
@@ -300,7 +300,7 @@
 
 // slightly weird looking initialize cuz it has to do some stuff first
 /obj/item/flamethrower/full/Initialize()
-	welding_tool = new /obj/item/weldingtool(src)
+	welding_tool = new /obj/item/fuelled_tool/welding(src)
 	welding_tool.status = FALSE
 	igniter = new /obj/item/assembly/igniter(src)
 	igniter.secured = FALSE

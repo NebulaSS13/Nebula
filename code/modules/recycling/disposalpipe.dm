@@ -202,12 +202,12 @@
 //attack by item
 //weldingtool: unfasten and convert to obj/disposalconstruct
 /obj/structure/disposalpipe/attackby(var/obj/item/used_item, var/mob/user)
-	if(!istype(used_item, /obj/item/weldingtool))
+	if(!istype(used_item, /obj/item/fuelled_tool/welding))
 		return ..()
 	if(!can_deconstruct())
 		return TRUE
 	src.add_fingerprint(user, 0, used_item)
-	var/obj/item/weldingtool/welder = used_item
+	var/obj/item/fuelled_tool/welding/welder = used_item
 	if(welder.weld(0,user))
 		playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 		to_chat(user, "You begin slicing \the [src].")
@@ -218,7 +218,7 @@
 			return TRUE
 		welded()
 		return TRUE
-	to_chat(user, "You need more welding fuel to cut the pipe.")
+	to_chat(user, "You need more fuel to cut the pipe.")
 	return TRUE
 
 	// called when pipe is cut with welder

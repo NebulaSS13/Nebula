@@ -148,7 +148,7 @@
 		return TRUE
 
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(welder.isOn() && is_plating() && welder.weld(0, user))
 			if(is_floor_damaged())
 				to_chat(user, SPAN_NOTICE("You fix some damage to \the [src]."))

@@ -108,7 +108,7 @@
 	icon = 'mods/species/ascent/icons/ascent.dmi'
 	icon_state = "welder1"
 	engage_string = "Toggle Welder"
-	device = /obj/item/weldingtool/electric/mantid
+	device = /obj/item/fuelled_tool/welding/electric/mantid
 	usable = TRUE
 	selectable = TRUE
 
@@ -249,7 +249,7 @@
 	allowed = list(
 		/obj/item/clustertool,
 		/obj/item/gun/energy/particle/small,
-		/obj/item/weldingtool/electric/mantid,
+		/obj/item/fuelled_tool/welding/electric/mantid,
 		/obj/item/multitool/mantid,
 		/obj/item/stack/medical/resin,
 		/obj/item/chems/drinks/cans/waterbottle/ascent
@@ -276,7 +276,7 @@
 /obj/random/ascent_tool/spawn_choices()
 	var/static/list/spawn_choices = list(
 		/obj/item/clustertool,
-		/obj/item/weldingtool/electric/mantid,
+		/obj/item/fuelled_tool/welding/electric/mantid,
 		/obj/item/multitool/mantid,
 		/obj/item/stack/medical/resin
 	)

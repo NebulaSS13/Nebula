@@ -10,7 +10,7 @@
 		/decl/language/human/common = FALSE
 	)
 	equipment = list(
-		/obj/item/weldingtool,
+		/obj/item/fuelled_tool/welding,
 		/obj/item/screwdriver,
 		/obj/item/wrench,
 		/obj/item/crowbar,

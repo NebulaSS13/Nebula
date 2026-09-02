@@ -136,7 +136,7 @@
 /obj/item/mech_component/proc/update_components()
 	return
 
-/obj/item/mech_component/proc/repair_brute_generic(var/obj/item/weldingtool/welder, var/mob/user)
+/obj/item/mech_component/proc/repair_brute_generic(var/obj/item/fuelled_tool/welding/welder, var/mob/user)
 	if(!istype(welder))
 		return
 	if(!brute_damage)

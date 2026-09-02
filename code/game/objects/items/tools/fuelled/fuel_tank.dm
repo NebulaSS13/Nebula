@@ -1,10 +1,10 @@
 //////////////////////////////////////////////////////////////////
-// Welding tool tanks
+// Tool fuel tanks
 //////////////////////////////////////////////////////////////////
-/obj/item/chems/welder_tank
+/obj/item/chems/fuel_tank
 	name               = "welding tank"
 	base_name          = "welding tank"
-	desc               = "An interchangeable fuel tank meant for a welding tool."
+	desc               = "An interchangeable fuel tank meant for a tool like a welder or chainsaw."
 	icon               = 'icons/obj/items/tool/welders/welder_tanks.dmi'
 	icon_state         = "tank_normal"
 	w_class            = ITEM_SIZE_SMALL
@@ -19,10 +19,10 @@
 	var/unlit_force    = 7
 	var/lit_force      = 11
 
-/obj/item/chems/welder_tank/populate_reagents()
+/obj/item/chems/fuel_tank/populate_reagents()
 	add_to_reagents(/decl/material/liquid/fuel, REAGENT_MAXIMUM_VOLUME(reagents))
 
-/obj/item/chems/welder_tank/get_examine_strings(mob/user, distance, infix, suffix)
+/obj/item/chems/fuel_tank/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance > 1)
 		return
@@ -33,7 +33,7 @@
 		. += "It contains [total_vol] units of liquid."
 	. += "It can hold up to [REAGENT_MAXIMUM_VOLUME(reagents)] units."
 
-/obj/item/chems/welder_tank/afterattack(obj/O, mob/user, proximity, click_parameters)
+/obj/item/chems/fuel_tank/afterattack(obj/O, mob/user, proximity, click_parameters)
 	if (!ATOM_IS_OPEN_CONTAINER(src) || !proximity)
 		return
 	if(standard_dispenser_refill(user, O))
@@ -52,7 +52,7 @@
 			return TRUE
 	return ..()
 
-/obj/item/chems/welder_tank/standard_dispenser_refill(mob/user, obj/structure/reagent_dispensers/target, skip_container_check = FALSE)
+/obj/item/chems/fuel_tank/standard_dispenser_refill(mob/user, obj/structure/reagent_dispensers/target, skip_container_check = FALSE)
 	if(!can_refuel)
 		to_chat(user, SPAN_DANGER("\The [src] does not have a refuelling port."))
 		return FALSE
@@ -60,30 +60,30 @@
 	if(.)
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, TRUE, -6)
 
-/obj/item/chems/welder_tank/standard_pour_into(mob/user, atom/target)
+/obj/item/chems/fuel_tank/standard_pour_into(mob/user, atom/target)
 	if(!can_refuel)
 		to_chat(user, SPAN_DANGER("\The [src] is sealed shut."))
 		return FALSE
 	. = ..()
 
-/obj/item/chems/welder_tank/standard_splash_mob(mob/user, mob/target)
+/obj/item/chems/fuel_tank/standard_splash_mob(mob/user, mob/target)
 	if(!can_refuel)
 		to_chat(user, SPAN_DANGER("\The [src] is sealed shut."))
 		return FALSE
 	. = ..()
 
-/obj/item/chems/welder_tank/handle_eaten_by_mob(mob/user, mob/target)
+/obj/item/chems/fuel_tank/handle_eaten_by_mob(mob/user, mob/target)
 	if(!can_refuel)
 		to_chat(user, SPAN_DANGER("\The [src] is sealed shut."))
 		return EATEN_UNABLE
 	return ..()
 
-/obj/item/chems/welder_tank/get_alt_interactions(var/mob/user)
+/obj/item/chems/fuel_tank/get_alt_interactions(var/mob/user)
 	. = ..()
 	if(!can_refuel)
 		LAZYREMOVE(., /decl/interaction_handler/set_transfer/chems)
 
-/obj/item/chems/welder_tank/mini
+/obj/item/chems/fuel_tank/mini
 	name               = "small welding tank"
 	base_name          = "small welding tank"
 	icon_state         = "tank_small"
@@ -94,7 +94,7 @@
 	lit_force          = 7
 	_base_attack_force = 4
 
-/obj/item/chems/welder_tank/large
+/obj/item/chems/fuel_tank/large
 	name               = "large welding tank"
 	base_name          = "large welding tank"
 	icon_state         = "tank_large"
@@ -103,7 +103,7 @@
 	size_in_use        = ITEM_SIZE_NORMAL
 	_base_attack_force = 6
 
-/obj/item/chems/welder_tank/huge
+/obj/item/chems/fuel_tank/huge
 	name               = "huge welding tank"
 	base_name          = "huge welding tank"
 	icon_state         = "tank_huge"
@@ -114,7 +114,7 @@
 	lit_force          = 15
 	_base_attack_force = 8
 
-/obj/item/chems/welder_tank/experimental
+/obj/item/chems/fuel_tank/experimental
 	name               = "experimental welding tank"
 	base_name          = "experimental welding tank"
 	icon_state         = "tank_experimental"
@@ -128,16 +128,16 @@
 	_base_attack_force = 8
 	var/tmp/last_gen   = 0
 
-/obj/item/chems/welder_tank/experimental/Initialize(ml, material_key)
+/obj/item/chems/fuel_tank/experimental/Initialize(ml, material_key)
 	. = ..()
 	atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 	START_PROCESSING(SSobj, src)
 
-/obj/item/chems/welder_tank/experimental/Destroy()
+/obj/item/chems/fuel_tank/experimental/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/chems/welder_tank/experimental/Process()
+/obj/item/chems/fuel_tank/experimental/Process()
 	if(REAGENT_VOLUME(reagents, /decl/material/liquid/fuel) < REAGENT_MAXIMUM_VOLUME(reagents))
 		var/gen_amount = ((world.time-last_gen)/25)
 		add_to_reagents(/decl/material/liquid/fuel, gen_amount)

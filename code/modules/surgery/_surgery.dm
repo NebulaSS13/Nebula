@@ -13,7 +13,7 @@ var/global/list/surgery_tool_exceptions = list(
 	/obj/item/chems/borghypo,
 	// Cyborg repair:
 	/obj/item/robotanalyzer,
-	/obj/item/weldingtool,
+	/obj/item/fuelled_tool/welding,
 	/obj/item/stack/cable_coil,
 	// Modular computer functions like scanners:
 	/obj/item/modular_computer,

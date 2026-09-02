@@ -24,8 +24,8 @@
 		/obj/item/crowbar/red,
 		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/radio/shortwave,
-		/obj/item/weldingtool/mini,
-		/obj/item/chems/welder_tank/mini
+		/obj/item/fuelled_tool/welding/mini,
+		/obj/item/chems/fuel_tank/mini
 	)
 
 /obj/item/toolbox/mechanical
@@ -37,7 +37,7 @@
 	return list(
 			/obj/item/screwdriver,
 			/obj/item/wrench,
-			/obj/item/weldingtool,
+			/obj/item/fuelled_tool/welding,
 			/obj/item/crowbar,
 			/obj/item/scanner/gas,
 			/obj/item/wirecutters
@@ -71,7 +71,7 @@
 			/obj/item/clothing/gloves/insulated,
 			/obj/item/screwdriver,
 			/obj/item/wrench,
-			/obj/item/weldingtool,
+			/obj/item/fuelled_tool/welding,
 			/obj/item/crowbar,
 			/obj/item/wirecutters,
 			/obj/item/multitool
@@ -81,7 +81,7 @@
 	return list(
 			/obj/item/clothing/gloves/insulated,
 			/obj/item/tool/power_drill,
-			/obj/item/weldingtool/electric,
+			/obj/item/fuelled_tool/welding/electric,
 			/obj/item/tool/hydraulic_cutter,
 			/obj/item/multitool
 		)

@@ -59,7 +59,7 @@
 	/obj/item/light/tube,
 	/obj/item/tool/pickaxe,
 	/obj/item/tool/shovel,
-	/obj/item/weldingtool,
+	/obj/item/fuelled_tool/welding,
 	/obj/item/wirecutters,
 	/obj/item/wrench,
 	/obj/item/screwdriver,

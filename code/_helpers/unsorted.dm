@@ -705,7 +705,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /obj/item/pen/can_puncture()
 	return 1
 
-/obj/item/weldingtool/can_puncture()
+/obj/item/fuelled_tool/welding/can_puncture()
 	return 1
 
 /obj/item/clothing/mask/smokable/cigarette/can_puncture()
