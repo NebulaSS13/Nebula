@@ -28,7 +28,7 @@
 
 /obj/item/training_dummy/proc/perform_repair(mob/user, obj/item/tool)
 	var/obj/item/fuelled_tool/welding/welder = tool
-	if(!istype(welder) || !welder.isOn())
+	if(!istype(welder) || !welder.tool_is_running())
 		to_chat(user, SPAN_WARNING("Turn \the [welder] on first."))
 		return FALSE
 	return tool.do_tool_interaction(TOOL_WELDER, user, src, 2 SECONDS)

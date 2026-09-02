@@ -149,7 +149,7 @@
 
 	if(IS_WELDER(used_item))
 		var/obj/item/fuelled_tool/welding/welder = used_item
-		if(welder.isOn() && is_plating() && welder.weld(0, user))
+		if(welder.tool_is_running() && is_plating() && welder.weld(0, user))
 			if(is_floor_damaged())
 				to_chat(user, SPAN_NOTICE("You fix some damage to \the [src]."))
 				playsound(src, 'sound/items/Welder.ogg', 80, 1)
@@ -159,7 +159,7 @@
 			else
 				playsound(src, 'sound/items/Welder.ogg', 80, 1)
 				visible_message(SPAN_NOTICE("\The [user] has started melting \the [src]'s reinforcements!"))
-				if(do_after(user, 5 SECONDS) && welder.isOn() && welder_melt())
+				if(do_after(user, 5 SECONDS) && welder.tool_is_running() && welder_melt())
 					visible_message(SPAN_NOTICE("\The [user] has melted \the [src]'s reinforcements! It should now be possible to pry it off."))
 					playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			return TRUE

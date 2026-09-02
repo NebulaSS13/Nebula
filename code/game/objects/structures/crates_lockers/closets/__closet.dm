@@ -317,7 +317,7 @@ var/global/list/closets = list()
 	if(IS_WELDER(used_item) && (setup & CLOSET_CAN_BE_WELDED))
 		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(!welder.weld(0,user))
-			if(welder.isOn())
+			if(welder.tool_is_running())
 				to_chat(user, SPAN_NOTICE("You need more fuel to complete this task."))
 			return TRUE
 		welded = !welded

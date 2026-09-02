@@ -25,7 +25,7 @@
 			return TRUE
 		playsound(machine.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(do_after(user, 20, machine))
-			if(!welder.isOn())
+			if(!welder.tool_is_running())
 				return TRUE
 			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
 			to_chat(user, "<span class='notice'>You deconstruct \the [machine].</span>")

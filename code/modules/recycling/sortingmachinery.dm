@@ -102,7 +102,7 @@
 			to_chat(user, "You stop slicing the floorweld off the delivery chute.")
 			return TRUE
 		playsound(src.loc, 'sound/items/Welder2.ogg', 100, TRUE)
-		if(!src || !welder.isOn()) return TRUE
+		if(!src || !welder.tool_is_running()) return TRUE
 		to_chat(user, "You slice the floorweld off the delivery chute.")
 		var/obj/structure/disposalconstruct/C = new (loc, src)
 		C.update()

@@ -214,7 +214,7 @@
 		if(!do_after(user, 3 SECONDS, src))
 			to_chat(user, "You must stay still while welding the pipe.")
 			return TRUE
-		if(!welder.isOn())
+		if(!welder.tool_is_running())
 			return TRUE
 		welded()
 		return TRUE

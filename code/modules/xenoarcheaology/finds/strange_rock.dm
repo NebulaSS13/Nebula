@@ -31,7 +31,7 @@
 
 	if(IS_WELDER(used_item))
 		var/obj/item/fuelled_tool/welding/welder = used_item
-		if(welder.isOn())
+		if(welder.tool_is_running())
 			if(welder.weld(2))
 				if(inside)
 					inside.dropInto(loc)

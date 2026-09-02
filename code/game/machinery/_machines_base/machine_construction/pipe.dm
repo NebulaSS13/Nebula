@@ -26,7 +26,7 @@
 /decl/machine_construction/pipe/welder/deconstruct_transition(obj/item/used_item, mob/user, obj/machinery/machine)
 	if(IS_WELDER(used_item))
 		var/obj/item/fuelled_tool/welding/welder = used_item
-		if(!welder.isOn())
+		if(!welder.tool_is_running())
 			return FALSE
 		if(!welder.weld(0,user))
 			return FALSE
@@ -40,7 +40,7 @@
 		playsound(get_turf(machine), 'sound/items/Welder.ogg', 50, 1)
 		if(!do_after(user, 5 SECONDS, machine))
 			return TRUE
-		if(!welder.isOn())
+		if(!welder.tool_is_running())
 			return TRUE
 		playsound(get_turf(machine), 'sound/items/Welder2.ogg', 50, 1)
 		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)

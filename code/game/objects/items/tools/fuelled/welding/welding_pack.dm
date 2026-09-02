@@ -200,7 +200,7 @@
 		return
 	if(user)
 		to_chat(user, SPAN_NOTICE("You re-attach \the [welder] to \the [src]."))
-	if(welder.isOn())
+	if(welder.tool_is_running())
 		welder.turn_off(user)
 
 	if(user && (user == welder.loc))

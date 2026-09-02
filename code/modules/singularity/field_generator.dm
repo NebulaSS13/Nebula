@@ -137,7 +137,7 @@ field_generator power level display
 					"You hear welding.")
 				if (!do_after(user, 2 SECONDS, src))
 					return TRUE
-				if(!src || !welder.isOn()) return TRUE
+				if(!src || !welder.tool_is_running()) return TRUE
 				state = 2
 				to_chat(user, "You weld the field generator to the floor.")
 				return TRUE
@@ -150,7 +150,7 @@ field_generator power level display
 					"You hear welding.")
 				if (!do_after(user, 2 SECONDS, src))
 					return TRUE
-				if(!src || !welder.isOn()) return TRUE
+				if(!src || !welder.tool_is_running()) return TRUE
 				state = 1
 				to_chat(user, "You cut \the [src] free from the floor.")
 				return TRUE

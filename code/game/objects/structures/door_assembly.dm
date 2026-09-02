@@ -163,7 +163,7 @@
 				var/mat_name = reinf_material.solid_name
 				user.visible_message("[user] welds the [mat_name] plating off the airlock assembly.", "You start to weld the [mat_name] plating off the airlock assembly.")
 				if(do_after(user, 4 SECONDS, src))
-					if(!welder.isOn())
+					if(!welder.tool_is_running())
 						return TRUE
 					to_chat(user, "<span class='notice'>You welded the [mat_name] plating off!</span>")
 					reinf_material.create_object(get_turf(src), 2)
@@ -173,7 +173,7 @@
 			if(!anchored)
 				user.visible_message("[user] dissassembles the airlock assembly.", "You start to dissassemble the airlock assembly.")
 				if(do_after(user, 4 SECONDS, src))
-					if(!welder.isOn())
+					if(!welder.tool_is_running())
 						return TRUE
 					to_chat(user, "<span class='notice'>You dissasembled the airlock assembly!</span>")
 					dismantle_structure(user)

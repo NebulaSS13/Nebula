@@ -94,7 +94,7 @@
 	compile_overlays()
 
 /obj/item/fuelled_tool/chainsaw/get_running_force()
-	return isOn() ? active_force : inactive_force
+	return tool_is_running() ? active_force : inactive_force
 
 /obj/item/fuelled_tool/chainsaw/update_physical_damage()
 	. = ..()
@@ -132,7 +132,7 @@
 /obj/item/fuelled_tool/chainsaw/proc/can_saw_apart(mob/user, atom/target)
 	if(QDELETED(src) || QDELETED(user) || QDELETED(target) || !target.simulated)
 		return FALSE
-	if(user.incapacitated() || !isOn() || loc != user || !is_held_twohanded(user))
+	if(user.incapacitated() || !tool_is_running() || loc != user || !is_held_twohanded(user))
 		return FALSE
 	if(!is_type_in_list(target, destroyable_atoms))
 		return FALSE

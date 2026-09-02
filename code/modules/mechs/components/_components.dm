@@ -142,7 +142,7 @@
 	if(!brute_damage)
 		to_chat(user, SPAN_NOTICE("You inspect \the [src] but find nothing to weld."))
 		return
-	if(!welder.isOn())
+	if(!welder.tool_is_running())
 		to_chat(user, SPAN_WARNING("Turn \the [welder] on, first."))
 		return
 	if(welder.weld((SKILL_MAX + 1) - user.get_skill_value(SKILL_CONSTRUCTION), user))

@@ -236,7 +236,7 @@
 		if(is_reinforced == FRAME_REINFORCED)
 			to_chat(user, SPAN_WARNING("The reinforcement inside \the [src] has not been secured."))
 			return TRUE
-		if(!welder.isOn())
+		if(!welder.tool_is_running())
 			to_chat(user, SPAN_WARNING("Turn \the [welder] on, first."))
 			return TRUE
 		if(welder.weld(1, user))

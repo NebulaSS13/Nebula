@@ -590,7 +590,7 @@ var/global/list/diversion_junctions = list()
 			if(!do_after(user, 2 SECONDS, src))
 				to_chat(user, "You must remain still to deconstruct \the [src].")
 				return TRUE
-			if(QDELETED(src) || !welder.isOn())
+			if(QDELETED(src) || !welder.tool_is_running())
 				return TRUE
 			to_chat(user, "You sliced the floorweld off the disposal outlet.")
 			var/obj/structure/disposalconstruct/machine/outlet/C = new (loc, src)
