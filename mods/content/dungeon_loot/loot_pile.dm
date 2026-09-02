@@ -42,12 +42,11 @@
 	if(!isliving(user))
 		return ..()
 
-	var/mob/living/L = user
 	if(busy)
-		to_chat(L, SPAN_WARNING("\The [src] is already being searched."))
+		to_chat(user, SPAN_WARNING("\The [src] is already being searched."))
 		return TRUE
 
-	L.visible_message("\The [user] searches through \the [src].", SPAN_NOTICE("You search through \the [src]."), SPAN_NOTICE("You hear some rustling."))
+	user.visible_message("\The [user] searches through \the [src].", SPAN_NOTICE("You search through \the [src]."), SPAN_NOTICE("You hear some rustling."))
 
 	//Do the searching
 	busy = TRUE
@@ -58,40 +57,40 @@
 
 	// The loot's all gone.
 	if(loot_depletion && loot_left <= 0)
-		to_chat(L, SPAN_WARNING("\The [src] has been picked clean."))
+		to_chat(user, SPAN_WARNING("\The [src] has been picked clean."))
 		return TRUE
 
 	//You already searched this one
 	if(!allow_multiple_looting && LAZYISIN(searched_by, user.ckey))
-		to_chat(L, SPAN_WARNING("You can't find anything else vaguely useful in \the [src]. Another set of eyes might, however."))
+		to_chat(user, SPAN_WARNING("You can't find anything else vaguely useful in \the [src]. Another set of eyes might, however."))
 		return TRUE
 
 	// You got unlucky.
 	if(chance_nothing && prob(chance_nothing))
-		to_chat(L, SPAN_WARNING("Nothing in this pile really catches your eye this time."))
+		to_chat(user, SPAN_WARNING("Nothing in this pile really catches your eye this time."))
 		return TRUE
 
 	// You found something!
 	LAZYDISTINCTADD(searched_by, user.ckey)
-	var/obj/item/loot = null
-	var/span = "notice" // Blue
 
+	var/span = "notice" // Blue
 	if(prob(chance_rare) && length(get_rare_loot())) // You won THE GRAND PRIZE!
-		loot = produce_rare_item()
+		produce_rare_item()
 		span = "cult" // Purple and bold.
 	else if(prob(chance_uncommon) && length(get_uncommon_loot())) // Otherwise you might still get something good.
-		loot = produce_uncommon_item()
+		produce_uncommon_item()
 		span = "alium" // Green
 	else if(length(get_common_loot())) // Welp.
-		loot = produce_common_item()
+		produce_common_item()
 
-	if(loot)
+	for(var/obj/item/loot in src)
+		to_chat(user, SPAN_CLASS(span, "You found \a [loot]!"))
 		loot.forceMove(get_turf(src))
-		to_chat(L, SPAN_CLASS(span, "You found \a [loot]!"))
+		user.put_in_hands(loot)
 		if(loot_depletion)
 			loot_left--
 			if(loot_left <= 0)
-				to_chat(L, SPAN_WARNING("You seem to have gotten the last of the spoils inside \the [src]."))
+				to_chat(user, SPAN_WARNING("You seem to have gotten the last of the spoils inside \the [src]."))
 				if(delete_on_depletion)
 					qdel(src)
 	return TRUE
@@ -100,19 +99,19 @@
 	var/list/common_loot = get_common_loot()
 	if(length(common_loot))
 		var/path = pick(common_loot)
-		return new path(src)
+		new path(src)
 
 /obj/structure/loot_pile/proc/produce_uncommon_item()
 	var/list/uncommon_loot = get_uncommon_loot()
 	if(length(uncommon_loot))
 		var/path = pick(uncommon_loot)
-		return new path(src)
+		new path(src)
 
 /obj/structure/loot_pile/proc/produce_rare_item()
 	var/list/rare_loot = get_rare_loot()
 	if(length(rare_loot))
 		var/path = pick(rare_loot)
-		return new path(src)
+		new path(src)
 
 /// Returns a list of generally less-than-useful junk and filler, at least for maint loot piles.
 /obj/structure/loot_pile/proc/get_common_loot()
