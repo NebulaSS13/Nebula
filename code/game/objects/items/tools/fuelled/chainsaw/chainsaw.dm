@@ -152,10 +152,12 @@
 
 	// Try/catch to avoid getting stuck with an always-on cutting loop
 	try
+		running_state = 2
 		user.visible_message(SPAN_DANGER("\The [user] begins sawing apart \the [target] with \the [src]!"))
 		if(do_after(user, get_chainsaw_delay(user, target), target) && can_saw_apart(user, target))
 			target.handle_chainsawed(user, src)
 			user.visible_message(SPAN_DANGER("\The [user] saws through \the [target] with \the [src]!"))
+		running_state = min(running_state, 1)
 	catch(var/exception/E)
 		log_error("Exception during chainsaw saw_apart() proc: [EXCEPTION_TEXT(E)]")
 

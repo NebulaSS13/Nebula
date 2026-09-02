@@ -7,7 +7,7 @@
 		return tool_toggle_anchors(user, wrench)
 	return FALSE
 
-/obj/structure/proc/handle_default_welder_attackby(var/mob/user, var/obj/item/fuelled_tool/welding/welder)
+/obj/structure/proc/handle_default_welder_attackby(var/mob/user, var/obj/item/welder)
 	if((tool_interaction_flags & TOOL_INTERACTION_DECONSTRUCT) && can_dismantle(user))
 		return welder_dismantle(user, welder)
 	return FALSE
