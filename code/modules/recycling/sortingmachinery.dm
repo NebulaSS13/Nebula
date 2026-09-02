@@ -94,8 +94,8 @@
 			to_chat(user, "You attach the screws around the power connection.")
 			return TRUE
 	else if(IS_WELDER(used_item) && c_mode==1)
-		var/obj/item/weldingtool/welder = used_item
-		if(!welder.weld(1,user)) // 'you need more welding fuel' messages are already handled
+		var/obj/item/fuelled_tool/welding/welder = used_item
+		if(!welder.weld(1,user)) // 'you need more fuel' messages are already handled
 			return TRUE
 		to_chat(user, "You start slicing the floorweld off the delivery chute.")
 		if(!do_after(user, 2 SECONDS, src))

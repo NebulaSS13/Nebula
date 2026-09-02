@@ -70,7 +70,7 @@
 		T.attackby(used_item, user) //BubbleWrap - hand this off to the underlying turf instead
 		return TRUE
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(welder.weld(0, user))
 			deconstruct(user)
 		return TRUE

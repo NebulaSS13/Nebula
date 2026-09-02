@@ -18,7 +18,7 @@
 	path = /obj/item/scanner/price
 
 /datum/fabricator_recipe/protolathe/tool/experimental_welder
-	path = /obj/item/weldingtool/experimental
+	path = /obj/item/fuelled_tool/welding/experimental
 
 /datum/fabricator_recipe/protolathe/tool/shield_diffuser
 	path = /obj/item/shield_diffuser

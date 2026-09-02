@@ -15,7 +15,7 @@
 			return FALSE
 		user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
 		if(do_after(user, 100, src))
-			var/obj/item/weldingtool/w = used_item
+			var/obj/item/fuelled_tool/welding/w = used_item
 			if(w.weld(10))
 				damaged = 0
 				user.visible_message("[user] repairs [src].", "You repair [src].")

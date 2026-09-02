@@ -18,7 +18,7 @@
 
 /obj/structure/hygiene/drain/attackby(var/obj/item/used_item, var/mob/user)
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(welder.isOn())
 			welded = !welded
 			to_chat(user, "<span class='notice'>You weld \the [src] [welded ? "closed" : "open"].</span>")

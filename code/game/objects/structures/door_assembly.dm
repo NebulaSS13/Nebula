@@ -156,7 +156,7 @@
 		return TRUE
 
 	if(IS_WELDER(used_item) && (can_install_glass || !anchored))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if (welder.weld(0, user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 			if(reinf_material)
@@ -179,7 +179,7 @@
 					dismantle_structure(user)
 				return TRUE
 		else
-			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
+			to_chat(user, "<span class='notice'>You need more fuel.</span>")
 			return TRUE
 
 	if(IS_WRENCH(used_item) && state == 0)

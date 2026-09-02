@@ -126,7 +126,7 @@
 	. = istype(M) && (!stack_material || M.material.type == stack_material) && ..()
 
 /decl/crafting_stage/welding/consume_crafting_resource(var/mob/user, var/obj/item/thing, var/obj/item/target)
-	var/obj/item/weldingtool/T = thing
+	var/obj/item/fuelled_tool/welding/T = thing
 	. = istype(T) && T.weld(0, user) && T.isOn()
 
 /decl/crafting_stage/welding

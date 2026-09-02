@@ -220,9 +220,9 @@
 			to_chat(user, "There is no structural damage on \the [src] to repair.")
 			return TRUE
 
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(!welder.weld(5))
-			to_chat(user, SPAN_WARNING("You need more welding fuel to repair this suit."))
+			to_chat(user, SPAN_WARNING("You need more fuel to repair this suit."))
 			return TRUE
 
 		repair_breaches(BRUTE, 3, user)
