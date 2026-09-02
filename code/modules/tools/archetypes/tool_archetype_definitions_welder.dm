@@ -8,7 +8,7 @@
 	var/obj/item/fuelled_tool/welding/welder = tool
 	if(!istype(tool) || !expend_fuel)
 		return TOOL_USE_SUCCESS // Let's assume that this tool value is only given to non-welders if they should bypass fuel usage.
-	if(!welder.isOn())
+	if(!welder.tool_is_running())
 		to_chat(user, SPAN_WARNING("\The [welder] needs to be turned on to begin this task."))
 		return TOOL_USE_FAILURE
 	if(!welder.weld(expend_fuel, user))
@@ -20,7 +20,7 @@
 	var/obj/item/fuelled_tool/welding/welder = tool
 	if(!istype(tool) || !expend_fuel)
 		return TOOL_USE_SUCCESS
-	if(!welder.isOn())
+	if(!welder.tool_is_running())
 		to_chat(user, SPAN_WARNING("\The [welder] needs to be turned on to finish this task."))
 		return TOOL_USE_FAILURE
 	if(!welder.weld(expend_fuel, user))

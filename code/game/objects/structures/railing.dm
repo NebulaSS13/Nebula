@@ -277,7 +277,7 @@ WOOD_RAILING_SUBTYPE(yew)
 	// Repair
 	if(IS_WELDER(used_item))
 		var/obj/item/fuelled_tool/welding/F = used_item
-		if(F.isOn())
+		if(F.tool_is_running())
 			var/current_max_health = get_max_health()
 			if(current_health >= current_max_health)
 				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")

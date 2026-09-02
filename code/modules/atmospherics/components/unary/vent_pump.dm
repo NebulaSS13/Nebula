@@ -283,7 +283,7 @@
 
 		var/obj/item/fuelled_tool/welding/welder = used_item
 
-		if(!welder.isOn())
+		if(!welder.tool_is_running())
 			to_chat(user, "<span class='notice'>\The [welder] needs to be on to start this task.</span>")
 			return 1
 
@@ -301,7 +301,7 @@
 		if(!src)
 			return 1
 
-		if(!welder.isOn())
+		if(!welder.tool_is_running())
 			to_chat(user, "<span class='notice'>\The [welder] needs to be on to finish this task.</span>")
 			return 1
 

@@ -146,7 +146,7 @@
 		tank.remove_from_reagents(/decl/material/liquid/fuel, amount)
 
 //Returns whether or not the tool is currently on.
-/obj/item/fuelled_tool/proc/isOn()
+/obj/item/fuelled_tool/proc/tool_is_running()
 	return !!running_state
 
 /obj/item/fuelled_tool/on_update_icon()

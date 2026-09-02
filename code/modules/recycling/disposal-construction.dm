@@ -151,7 +151,7 @@
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "Welding \the [src] in place.")
 				if(do_after(user, 2 SECONDS, src))
-					if(!src || !welder.isOn()) return TRUE
+					if(!src || !welder.tool_is_running()) return TRUE
 					to_chat(user, "\The [src] has been welded in place!")
 					build(CP)
 					qdel(src)

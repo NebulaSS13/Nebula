@@ -23,10 +23,10 @@
 	. = ..()
 
 /obj/item/fuelled_tool/welding/get_heat()
-	. = max(..(), isOn() ? 3800 : 0)
+	. = max(..(), tool_is_running() ? 3800 : 0)
 
 /obj/item/fuelled_tool/welding/isflamesource()
-	. = isOn()
+	. = tool_is_running()
 
 /obj/item/fuelled_tool/welding/proc/toggle_unscrewed(var/mob/user)
 	if(isrobot(loc))
@@ -135,10 +135,10 @@
 	update_held_icon()
 
 /obj/item/fuelled_tool/welding/get_running_force()
-	return isOn() ? tank?.lit_force : tank?.unlit_force
+	return tool_is_running() ? tank?.lit_force : tank?.unlit_force
 
 /obj/item/fuelled_tool/welding/get_running_damage_type()
-	return isOn() ? BURN : BRUTE
+	return tool_is_running() ? BURN : BRUTE
 
 /obj/item/fuelled_tool/welding/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	var/obj/item/organ/external/affecting = istype(target) && GET_EXTERNAL_ORGAN(target, user?.get_target_zone())
@@ -155,7 +155,7 @@
 	return ..()
 
 /obj/item/fuelled_tool/welding/get_autopsy_descriptors()
-	if(isOn())
+	if(tool_is_running())
 		return list("jet of flame")
 	return ..()
 

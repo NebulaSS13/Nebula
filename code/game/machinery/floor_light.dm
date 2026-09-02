@@ -44,7 +44,7 @@ var/global/list/floor_light_cache = list()
 			to_chat(user, SPAN_WARNING("\The [src] must be on to complete this task."))
 			return TRUE
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(do_after(user, 20, src) && !QDELETED(src) && welder.isOn())
+		if(do_after(user, 20, src) && !QDELETED(src) && welder.tool_is_running())
 			visible_message(SPAN_NOTICE("\The [user] has repaired \the [src]."))
 			set_broken(FALSE)
 			damaged = null

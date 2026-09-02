@@ -186,7 +186,7 @@
 	if(material && !material.removed_by_welder)
 		to_chat(user, SPAN_WARNING("\The [src] is too delicate to be dismantled with \the [welder]; try a crowbar."))
 		return TRUE
-	if(!welder.isOn())
+	if(!welder.tool_is_running())
 		to_chat(user, SPAN_WARNING("Try lighting \the [welder] first."))
 		return TRUE
 	if(welder.get_fuel() < 5)

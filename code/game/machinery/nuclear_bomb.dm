@@ -85,7 +85,7 @@ var/global/bomb_set
 			if(0)
 				if(IS_WELDER(used_item))
 					var/obj/item/fuelled_tool/welding/welder = used_item
-					if(!welder.isOn()) return TRUE
+					if(!welder.tool_is_running()) return TRUE
 					if(welder.get_fuel() < 5) // uses up 5 fuel.
 						to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
 						return TRUE
@@ -111,7 +111,7 @@ var/global/bomb_set
 			if(2)
 				if(IS_WELDER(used_item))
 					var/obj/item/fuelled_tool/welding/welder = used_item
-					if(!welder.isOn()) return TRUE
+					if(!welder.tool_is_running()) return TRUE
 					if (welder.get_fuel() < 5) // uses up 5 fuel.
 						to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
 						return TRUE
