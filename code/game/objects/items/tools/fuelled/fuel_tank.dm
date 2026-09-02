@@ -2,8 +2,8 @@
 // Tool fuel tanks
 //////////////////////////////////////////////////////////////////
 /obj/item/chems/fuel_tank
-	name               = "welding tank"
-	base_name          = "welding tank"
+	name               = "fuel tank"
+	base_name          = "fuel tank"
 	desc               = "An interchangeable fuel tank meant for a tool like a welder or chainsaw."
 	icon               = 'icons/obj/items/tool/welders/welder_tanks.dmi'
 	icon_state         = "tank_normal"
@@ -56,8 +56,9 @@
 	if(!can_refuel)
 		to_chat(user, SPAN_DANGER("\The [src] does not have a refuelling port."))
 		return FALSE
+	var/old_level = REAGENT_TOTAL_LIQUID_VOLUME(reagents)
 	. = ..()
-	if(.)
+	if(. && old_level != REAGENT_TOTAL_LIQUID_VOLUME(reagents))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, TRUE, -6)
 
 /obj/item/chems/fuel_tank/standard_pour_into(mob/user, atom/target)
@@ -84,8 +85,8 @@
 		LAZYREMOVE(., /decl/interaction_handler/set_transfer/chems)
 
 /obj/item/chems/fuel_tank/mini
-	name               = "small welding tank"
-	base_name          = "small welding tank"
+	name               = "small fuel tank"
+	base_name          = "small fuel tank"
 	icon_state         = "tank_small"
 	w_class            = ITEM_SIZE_TINY
 	chem_volume        = 5
@@ -95,8 +96,8 @@
 	_base_attack_force = 4
 
 /obj/item/chems/fuel_tank/large
-	name               = "large welding tank"
-	base_name          = "large welding tank"
+	name               = "large fuel tank"
+	base_name          = "large fuel tank"
 	icon_state         = "tank_large"
 	w_class            = ITEM_SIZE_SMALL
 	chem_volume        = 40
@@ -104,8 +105,8 @@
 	_base_attack_force = 6
 
 /obj/item/chems/fuel_tank/huge
-	name               = "huge welding tank"
-	base_name          = "huge welding tank"
+	name               = "huge fuel tank"
+	base_name          = "huge fuel tank"
 	icon_state         = "tank_huge"
 	w_class            = ITEM_SIZE_NORMAL
 	chem_volume        = 80
@@ -115,8 +116,8 @@
 	_base_attack_force = 8
 
 /obj/item/chems/fuel_tank/experimental
-	name               = "experimental welding tank"
-	base_name          = "experimental welding tank"
+	name               = "experimental fuel tank"
+	base_name          = "experimental fuel tank"
 	icon_state         = "tank_experimental"
 	w_class            = ITEM_SIZE_NORMAL
 	chem_volume        = 40
