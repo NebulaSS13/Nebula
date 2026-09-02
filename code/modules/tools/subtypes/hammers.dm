@@ -3,12 +3,12 @@
 	desc                = "A simple hammer. Ancient technology once thought lost."
 	icon                = 'icons/obj/items/tool/hammers/hammer.dmi'
 	attack_verb         = list(
-		"bludgeons",
-		"slaps",
-		"beats",
-		"strikes",
-		"bashes",
-		"hammers"
+		"bludgeoned",
+		"slapped",
+		"beaten",
+		"struck",
+		"bashed",
+		"hammered"
 	)
 	var/demolisher_type = /datum/extension/demolisher/delicate
 

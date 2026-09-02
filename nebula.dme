@@ -1432,6 +1432,7 @@
 #include "code\game\objects\structures\coathanger.dm"
 #include "code\game\objects\structures\compost.dm"
 #include "code\game\objects\structures\crematorium.dm"
+#include "code\game\objects\structures\crystal.dm"
 #include "code\game\objects\structures\curtain_decls.dm"
 #include "code\game\objects\structures\curtains.dm"
 #include "code\game\objects\structures\defensive_barrier.dm"
