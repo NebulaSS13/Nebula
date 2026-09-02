@@ -966,3 +966,6 @@
 			if(istype(thing) && !QDELETED(thing) && !thing.is_safe_to_step(stepper))
 				return FALSE
 	return TRUE
+
+/turf/get_object_size()
+	return ITEM_SIZE_LARGE_STRUCTURE

@@ -178,7 +178,7 @@
 		return
 	return ..()
 
-//rag must have a minimum of 2 units welder fuel and at least 80% of the reagents must be welder fuel.
+//rag must have a minimum of 2 units fuel and at least 80% of the reagents must be fuel.
 //maybe generalize flammable reagents someday
 /obj/item/chems/rag/can_ignite()
 	var/total_fuel = 0

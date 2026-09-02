@@ -1085,3 +1085,7 @@
 // Test for if stepping on a tile containing this obj is safe to do, used for things like landmines and cliffs.
 /atom/proc/is_safe_to_step(mob/living/stepper)
 	return TRUE
+
+// Helper for when destroyed by a chainsaw (for the purposes of overriding)
+/atom/proc/handle_chainsawed(mob/user, obj/item/chainsaw)
+	physically_destroyed()

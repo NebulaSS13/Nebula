@@ -503,7 +503,7 @@
 /atom/movable/proc/crossed_mob(var/mob/living/victim)
 	return
 
-/atom/movable/proc/get_object_size()
+/atom/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
 
 /atom/movable/get_manual_heat_source_coefficient()

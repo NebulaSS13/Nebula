@@ -1278,6 +1278,8 @@
 #include "code\game\objects\items\tools\wrench.dm"
 #include "code\game\objects\items\tools\fuelled\_fuelled.dm"
 #include "code\game\objects\items\tools\fuelled\fuel_tank.dm"
+#include "code\game\objects\items\tools\fuelled\chainsaw\chainsaw.dm"
+#include "code\game\objects\items\tools\fuelled\chainsaw\electric_chainsaw.dm"
 #include "code\game\objects\items\tools\fuelled\welding\electric_welder.dm"
 #include "code\game\objects\items\tools\fuelled\welding\welder.dm"
 #include "code\game\objects\items\tools\fuelled\welding\welding_pack.dm"

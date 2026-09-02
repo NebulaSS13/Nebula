@@ -67,18 +67,18 @@
 			location.hotspot_expose(WELDING_TOOL_HOTSPOT_TEMP_ACTIVE, 50, 1)
 		turn_off()
 
-/obj/item/fuelled_tool/welding/handle_afterattack(var/obj/O, var/mob/user)
-	if(running_state)
+/obj/item/fuelled_tool/welding/handle_afterattack(var/atom/target, var/mob/user, proximity, click_parameters)
+	if(proximity && running_state)
 		weld(1)
 		var/turf/location = get_turf(user)
-		if(isliving(O))
-			var/mob/living/L = O
+		if(isliving(target))
+			var/mob/living/L = target
 			L.ignite_fire()
-		else if(isatom(O))
-			O.handle_external_heating(WELDING_TOOL_HOTSPOT_TEMP_ACTIVE, src, user)
+		else if(isatom(target))
+			target.handle_external_heating(WELDING_TOOL_HOTSPOT_TEMP_ACTIVE, src, user)
 		if (isturf(location))
 			location.hotspot_expose(WELDING_TOOL_HOTSPOT_TEMP_ACTIVE, 50, 1)
-		spark_at(get_turf(O), 3, FALSE, O)
+		spark_at(get_turf(target), 3, FALSE, target)
 		user.setClickCooldown(attack_cooldown + w_class) //Prevent spam
 		return TRUE
 	return ..()
@@ -104,6 +104,9 @@
 	return TRUE
 
 /obj/item/fuelled_tool/welding/handle_idling(fuel_usage = 0.5)
+	. = ..()
+	if(!.)
+		return
 	//consider ourselves in a mob if we are in the mob's contents and not in their hands
 	if(isliving(loc))
 		var/mob/living/L = loc
