@@ -48,6 +48,8 @@
 	var/list/encryption_keys
 	var/encryption_key_capacity
 
+	var/list/inherent_decryption
+
 	var/on = TRUE
 	var/frequency = PUB_FREQ
 	var/intercom_handling = FALSE
@@ -85,6 +87,8 @@
 		needed_access -= key.can_decrypt
 		if (!length(needed_access))
 			return TRUE
+	if(length(inherent_decryption))
+		needed_access -= inherent_decryption
 	return FALSE // not all keys were removed
 
 /obj/item/radio/proc/set_frequency(new_frequency)
