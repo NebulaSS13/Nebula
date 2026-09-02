@@ -30,7 +30,7 @@
 		/obj/item/rcd,
 		/obj/item/crowbar,
 		/obj/item/screwdriver,
-		/obj/item/weldingtool,
+		/obj/item/fuelled_tool/welding,
 		/obj/item/wirecutters,
 		/obj/item/wrench,
 		/obj/item/multitool,

@@ -633,7 +633,7 @@ About the new airlock wires panel:
 	var/cut_sound
 
 	if(IS_WELDER(item))
-		var/obj/item/weldingtool/welder = item
+		var/obj/item/fuelled_tool/welding/welder = item
 		if(!welder.weld(0,user))
 			return FALSE
 		cut_verb = "cutting"
@@ -742,7 +742,7 @@ About the new airlock wires panel:
 		return
 
 	if(!repairing && IS_WELDER(used_item) && !operating && density)
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(!welder.weld(0,user))
 			to_chat(user, SPAN_NOTICE("Your [welder.name] doesn't have enough fuel."))
 			return TRUE
