@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////
 
 ///Welder specifically for the welder pack.
-/obj/item/weldingtool/weldpack
+/obj/item/fuelled_tool/welding/pack
 	name         = "welding gun"
 	desc         = "A welding gun with hoses connecting into a welder fuel tank pack."
 	slot_flags   = SLOT_HANDS
@@ -16,32 +16,32 @@
 	obj_flags    = OBJ_FLAG_NO_STORAGE
 	var/obj/item/chems/weldpack/linked_pack
 
-/obj/item/weldingtool/weldpack/Initialize(ml, material_key, var/obj/item/chems/weldpack/pack)
+/obj/item/fuelled_tool/welding/pack/Initialize(ml, material_key, var/obj/item/chems/weldpack/pack)
 	. = ..()
 	if(istype(pack))
 		linked_pack = pack
 
-/obj/item/weldingtool/weldpack/insert_tank(obj/item/chems/welder_tank/T, mob/user, no_updates, quiet)
+/obj/item/fuelled_tool/welding/pack/insert_tank(obj/item/chems/fuel_tank/T, mob/user, no_updates, quiet)
 	return FALSE
 
-/obj/item/weldingtool/weldpack/remove_tank(mob/user)
+/obj/item/fuelled_tool/welding/pack/remove_tank(mob/user)
 	return FALSE
 
-/obj/item/weldingtool/weldpack/toggle_unscrewed(mob/user)
+/obj/item/fuelled_tool/welding/pack/toggle_unscrewed(mob/user)
 	return FALSE
 
-/obj/item/weldingtool/weldpack/attempt_modify(obj/item/used_item, mob/user)
+/obj/item/fuelled_tool/welding/pack/attempt_modify(obj/item/used_item, mob/user)
 	return FALSE
 
-/obj/item/weldingtool/weldpack/dropped(mob/user)
+/obj/item/fuelled_tool/welding/pack/dropped(mob/user)
 	. = ..()
 	if(linked_pack)
 		linked_pack.reattach_gun(user)
 
-/obj/item/weldingtool/weldpack/get_fuel()
+/obj/item/fuelled_tool/welding/pack/get_fuel()
 	return linked_pack? linked_pack.get_fuel() : 0
 
-/obj/item/weldingtool/weldpack/use_fuel(amount)
+/obj/item/fuelled_tool/welding/pack/use_fuel(amount)
 	. = TRUE
 	if(get_fuel() < amount)
 		. = FALSE //Try to burn as much as possible anyways
@@ -49,12 +49,12 @@
 		linked_pack.remove_from_reagents(/decl/material/liquid/fuel, amount)
 
 /**Called by the parent when the welderpack is dropped */
-/obj/item/weldingtool/weldpack/proc/on_pack_dropped(var/mob/user)
+/obj/item/fuelled_tool/welding/pack/proc/on_pack_dropped(var/mob/user)
 	if(!linked_pack.is_welder_attached())
 		linked_pack.reattach_gun(user)
 
 /**Called by the parent when the welderpack is deleting */
-/obj/item/weldingtool/weldpack/proc/on_pack_deleted()
+/obj/item/fuelled_tool/welding/pack/proc/on_pack_deleted()
 	if(!linked_pack.is_welder_attached())
 		linked_pack.reattach_gun()
 
@@ -70,7 +70,7 @@
 	w_class     = ITEM_SIZE_HUGE
 	atom_flags  = ATOM_FLAG_OPEN_CONTAINER
 	chem_volume = 350
-	var/obj/item/weldingtool/weldpack/welder = /obj/item/weldingtool/weldpack
+	var/obj/item/fuelled_tool/welding/pack/welder = /obj/item/fuelled_tool/welding/pack
 
 // Duplicated from welder tanks.
 /obj/item/chems/weldpack/afterattack(obj/O, mob/user, proximity, click_parameters)
@@ -115,8 +115,8 @@
 		return TRUE
 
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/tool = used_item
-		if(tool.welding)
+		var/obj/item/fuelled_tool/welding/tool = used_item
+		if(tool.running_state)
 			var/decl/pronouns/pronouns = user.get_pronouns()
 			user.visible_message(
 				SPAN_DANGER("\The [user] singes [pronouns.his] [name] with [pronouns.his] [used_item.name]!"),
@@ -136,11 +136,11 @@
 		playsound(src, 'sound/effects/refill.ogg', 50, TRUE, -6)
 		return TRUE
 
-	else if(istype(used_item, /obj/item/chems/welder_tank))
+	else if(istype(used_item, /obj/item/chems/fuel_tank))
 		if(!REAGENT_TOTAL_VOLUME(reagents))
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 			return TRUE
-		var/obj/item/chems/welder_tank/tank = used_item
+		var/obj/item/chems/fuel_tank/tank = used_item
 		reagents.trans_to_obj(tank, REAGENT_MAXIMUM_VOLUME(tank.reagents))
 		to_chat(user, SPAN_NOTICE("You refuel \the [used_item]."))
 		playsound(src, 'sound/effects/refill.ogg', 50, TRUE, -6)

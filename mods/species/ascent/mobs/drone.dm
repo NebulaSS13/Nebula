@@ -18,7 +18,7 @@
 		/obj/item/soap,
 		/obj/item/mop/advanced,
 		/obj/item/plunger/unbreakable,
-		/obj/item/weldingtool/electric/mantid,
+		/obj/item/fuelled_tool/welding/electric/mantid,
 		/obj/item/chems/spray/extinguisher,
 		/obj/item/t_scanner,
 		/obj/item/scanner/gas,

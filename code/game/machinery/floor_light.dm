@@ -39,7 +39,7 @@ var/global/list/floor_light_cache = list()
 		return TRUE
 
 	if(IS_WELDER(used_item) && (damaged || (stat & BROKEN)))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(!welder.weld(0, user))
 			to_chat(user, SPAN_WARNING("\The [src] must be on to complete this task."))
 			return TRUE

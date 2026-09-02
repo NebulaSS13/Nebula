@@ -1,5 +1,5 @@
 /decl/material/liquid/fuel
-	name = "welding fuel"
+	name = "fuel"
 	lore_text = "A stable hydrazine-based compound whose exact manufacturing specifications are a closely-guarded secret. One of the most common fuels in human space. Extremely flammable."
 	taste_description = "gross metal"
 	color = "#660000"

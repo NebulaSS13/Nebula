@@ -5,7 +5,7 @@
 	tool_message = "welding"
 
 /decl/tool_archetype/welder/handle_pre_interaction(var/mob/user, var/obj/item/tool, var/expend_fuel = 0)
-	var/obj/item/weldingtool/welder = tool
+	var/obj/item/fuelled_tool/welding/welder = tool
 	if(!istype(tool) || !expend_fuel)
 		return TOOL_USE_SUCCESS // Let's assume that this tool value is only given to non-welders if they should bypass fuel usage.
 	if(!welder.isOn())
@@ -17,7 +17,7 @@
 	return TOOL_USE_SUCCESS
 
 /decl/tool_archetype/welder/handle_post_interaction(var/mob/user, var/obj/item/tool, var/expend_fuel = 0)
-	var/obj/item/weldingtool/welder = tool
+	var/obj/item/fuelled_tool/welding/welder = tool
 	if(!istype(tool) || !expend_fuel)
 		return TOOL_USE_SUCCESS
 	if(!welder.isOn())

@@ -25,7 +25,7 @@
 // Same, but uses different tool.
 /decl/machine_construction/pipe/welder/deconstruct_transition(obj/item/used_item, mob/user, obj/machinery/machine)
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(!welder.isOn())
 			return FALSE
 		if(!welder.weld(0,user))

@@ -122,7 +122,7 @@
 	if(!istype(target))
 		return FALSE
 	if(IS_WELDER(tool))
-		var/obj/item/weldingtool/welder = tool
+		var/obj/item/fuelled_tool/welding/welder = tool
 		if(!welder.isOn() || !welder.weld(1,user))
 			return FALSE
 	var/obj/item/rig/rig = target.get_rig()
