@@ -69,8 +69,8 @@
 
 	for(var/key in personal_macro_set) //We don't care about the bound key, just the key itself
 		var/keycode = replacetext(key, regex("(Alt|Shift|Ctrl)", "g"), "")
-		if(!length(keycode) || keycode == "Unbound" || keycode[SSinput.forced_macro_set])
-			continue //Modifier-only keybind entry or empty keybind. We've already bound those.
+		if(!length(keycode) || keycode == "Unbound" || keycode[SSinput.core_macro_set])
+			continue //Modifier-only, empty, or special keybind entry.
 		if(!prefs.hotkeys && !SSinput.unprintables_cache[keycode]) //Track printable hotkeys and skip them.
 			printables += key
 			continue
