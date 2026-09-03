@@ -6,7 +6,6 @@
 Scent intensity
 *****/
 /decl/scent_intensity
-	abstract_type = /decl/scent_intensity
 	var/cooldown = 5 MINUTES
 	var/intensity = 1
 
