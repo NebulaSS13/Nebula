@@ -3,6 +3,10 @@
 #include "patches/heist_vox.dm"
 #endif
 
+#ifdef GAMEMODE_PACK_CULT
+#include "patches/cult.dm"
+#endif
+
 #ifdef MODPACK_PSIONICS
 #include "patches/psionics.dm"
 #endif

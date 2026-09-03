@@ -3,9 +3,6 @@
 		if(prob(10))
 			var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 			cult.offer_uncult(M)
-		if(prob(2))
-			var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
-			M.visible_message(SPAN_WARNING("\The [M] coughs up \the [S]!"))
 		return TRUE
 	return FALSE
 

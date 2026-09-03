@@ -65,15 +65,14 @@
 		var/turf/neighbour = get_step_resolving_mimic(tile, dir)
 		if(!neighbour || !neighbour.density)
 			continue
-		switch(dir)
-			if(WEST)
-				new /obj/effect/decal/cleanable/cobweb(tile)
-			if(EAST)
-				new /obj/effect/decal/cleanable/cobweb2(tile)
-		if(prob(web_probability))
-			var/obj/effect/spider/spiderling/spiderling = new /obj/effect/spider/spiderling/mundane/dormant(tile)
-			spiderling.pixel_y = spiderling.shift_range
-			spiderling.pixel_x = dir == WEST ? -spiderling.shift_range : spiderling.shift_range
+		spawn_effect(tile, dir)
+
+/decl/turf_initializer/maintenance/proc/spawn_effect(turf/tile, dir)
+	switch(dir)
+		if(WEST)
+			new /obj/effect/decal/cleanable/cobweb(tile)
+		if(EAST)
+			new /obj/effect/decal/cleanable/cobweb2(tile)
 
 /decl/turf_initializer/maintenance/proc/get_dirt_amount()
 	return rand(10, 50) + rand(0, 50)

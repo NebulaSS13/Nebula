@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/giant_spider/hunter
 	desc = "A monstrously huge black spider with shimmering eyes."
-	icon = 'icons/mob/simple_animal/spider_black.dmi'
+	icon = 'mods/mobs/spiders/icons/spider_black.dmi'
 	max_health = 150
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 10
@@ -11,6 +11,17 @@
 	ability_cooldown = 3 MINUTES
 	ai = /datum/mob_controller/aggressive/giant_spider/hunter
 	var/leap_range = 5
+
+/mob/living/simple_animal/hostile/giant_spider/hunter/small
+	name = "spiderling"
+	desc = "A large black spider with shimmering eyes."
+	max_health = 70
+	natural_weapon = /obj/item/natural_weapon/bite/weak
+	available_maneuvers = null
+
+/mob/living/simple_animal/hostile/giant_spider/hunter/small/Initialize(mapload, atom/parent)
+	. = ..()
+	set_scale(0.75)
 
 /mob/living/simple_animal/hostile/giant_spider/hunter/get_door_pry_time()
 	return 5 SECONDS
