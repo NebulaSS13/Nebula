@@ -103,6 +103,7 @@
 
 /datum/keybinding/mob/cycle_intent_left
 	hotkey_keys = list("F")
+	classic_keys = list("Unbound")
 	name = "cycle_intent_left"
 	full_name = "Сycle Intent: Left"
 
@@ -195,7 +196,7 @@
 	return TRUE
 
 /datum/keybinding/mob/interact
-	hotkey_keys = list("Enter")
+	hotkey_keys = list("Return")
 	name = "interact"
 	full_name = "Interact"
 	description = "Interact with the turf directly in front of you."

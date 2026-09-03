@@ -54,6 +54,10 @@ SUBSYSTEM_DEF(input)
 	// This list may be out of date, and may include keys not actually legal to bind?
 	// The only full list is from 2008. http://www.byond.com/docs/notes/macro.html
 	unprintables_cache = list(
+		// Modifiers. Not actually ON the list, but still safe as they're. Special.
+		"Shift" = TRUE,
+		"Ctrl" = TRUE,
+		"Alt" = TRUE,
 		// Arrow Keys
 		"North" = TRUE,
 		"West" = TRUE,

@@ -121,7 +121,12 @@
 			var/datum/keybinding/kb = i
 			if(!length(user_binds[kb.name]) || (user_binds[kb.name][1] == "Unbound" && length(user_binds[kb.name]) == 1))
 				. += "<tr><td width='40%'>[kb.full_name]</td><td width='15%'><a class='fluid' href='byond://?src=\ref[src];preference=keybindings_capture;keybinding=[kb.name];old_key=["Unbound"]'>Unbound</a></td>"
-				var/list/default_keys = pref.hotkeys ? kb.hotkey_keys : kb.classic_keys
+				var/list/default_keys
+				if(pref.hotkeys)
+					default_keys = kb.hotkey_keys
+				else
+					default_keys = kb.classic_keys || kb.hotkey_keys
+
 				var/class
 				if(user_binds[kb.name] ~= default_keys)
 					class = "class='linkOff fluid'"
@@ -264,7 +269,10 @@
 			return TOPIC_REFRESH
 
 		if("keybindings_reset")
-			pref.key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key)
+			if(pref.hotkeys)
+				pref.key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key)
+			else
+				pref.key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key_fc)
 			user.client.set_macros()
 			return TOPIC_REFRESH
 
@@ -280,7 +288,12 @@
 					pref.key_bindings -= old_key
 
 			var/datum/keybinding/kb = global.keybindings_by_name[kb_name]
-			for(var/key in kb.hotkey_keys)
+			var/list/default_keys
+			if(pref.hotkeys)
+				default_keys = kb.hotkey_keys
+			else
+				default_keys = kb.classic_keys || kb.hotkey_keys
+			for(var/key in default_keys)
 				pref.key_bindings[key] += list(kb_name)
 				pref.key_bindings[key] = sortTim(pref.key_bindings[key], /proc/cmp_text_asc)
 			user.client.set_macros()

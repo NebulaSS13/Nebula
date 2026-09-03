@@ -664,12 +664,6 @@ var/global/const/MAX_VIEW = 41
 					winset(src, "default-\ref[key]", "parent=default;name=[key];command=.me")
 					communication_hotkeys += key
 
-	// winget() does not work for F1 and F2
-	for(var/key in communication_hotkeys)
-		if(!(key in list("F1","F2")) && !winget(src, "default-\ref[key]", "command"))
-			to_chat(src, SPAN_WARNING("You probably entered the game with a different keyboard layout.\n<a href='byond://?src=\ref[src];reset_macros=1'>Please switch to the English layout and click here to fix the communication hotkeys.</a>"))
-			break
-
 /client/proc/get_byond_membership()
 	return prefs?.is_byond_member || IsByondMember()
 
