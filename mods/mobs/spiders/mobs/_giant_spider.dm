@@ -2,7 +2,7 @@
 /mob/living/simple_animal/hostile/giant_spider
 	name = "giant spider"
 	desc = "A monstrously huge green spider with shimmering eyes."
-	icon = 'icons/mob/simple_animal/spider.dmi'
+	icon = 'mods/mobs/spiders/icons/spider.dmi'
 	speak_emote = list("chitters")
 	see_in_dark = 10
 	response_harm = "pokes"
@@ -24,10 +24,13 @@
 	glowing_eyes = TRUE
 	ai = /datum/mob_controller/aggressive/giant_spider
 
+	var/poison_chance = 10
 	var/poison_per_bite = 6
 	var/poison_type = /decl/material/liquid/venom
-	var/eye_colour
-	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
+
+/mob/living/simple_animal/hostile/giant_spider/proc/get_allowed_eye_colors()
+	var/static/list/_allowed_eye_colors = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
+	return _allowed_eye_colors
 
 /mob/living/simple_animal/hostile/giant_spider/has_footsteps()
 	return TRUE
@@ -47,19 +50,16 @@
 /mob/living/simple_animal/hostile/giant_spider/get_door_pry_time()
 	return 8 SECONDS
 
-/mob/living/simple_animal/hostile/giant_spider/get_eye_overlay()
-	var/image/ret = ..()
-	if(ret && eye_colour)
-		ret.color = eye_colour
-	return ret
-
 /mob/living/simple_animal/hostile/giant_spider/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)
 	. = ..() && can_act()
 
 /mob/living/simple_animal/hostile/giant_spider/Initialize(var/mapload, var/atom/parent)
 	color = parent?.color || color
 	set_max_health(rand(initial(max_health), (1.4 * initial(max_health))))
-	eye_colour = pick(allowed_eye_colours)
+	if(isnull(eye_color))
+		var/list/allowed_eye_colors = get_allowed_eye_colors()
+		if(length(allowed_eye_colors))
+			eye_color = pick(allowed_eye_colors)
 	. = ..()
 
 /mob/living/simple_animal/hostile/giant_spider/apply_attack_effects(mob/living/target)
@@ -73,10 +73,9 @@
 		var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 		if(istype(S) && !length(S.breaches))
 			return
-	if(target.reagents)
+	if(target.reagents && prob(poison_chance))
 		target.add_to_reagents(poison_type, rand(0.5 * poison_per_bite, poison_per_bite))
-		if(prob(poison_per_bite))
-			to_chat(target, "<span class='warning'>You feel a tiny prick.</span>")
+		to_chat(target, SPAN_WARNING("You feel a tiny prick."))
 
 /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement()
 	stop_automove()

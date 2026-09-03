@@ -84,15 +84,6 @@
 	if((. = ..()) && !QDELETED(src) && reagents?.has_reagent(/decl/material/liquid/water))
 		spawn_creature()
 
-//Spider cubes, all that's left of the cube PR
-/obj/item/food/animal_cube/spider
-	name = "spider cube"
-	spawn_type = /obj/effect/spider/spiderling
-
-/obj/item/food/animal_cube/wrapped/spider
-	name = "spider cube"
-	spawn_type = /obj/effect/spider/spiderling
-
 /obj/item/food/animal_cube/monkey
 	name = "monkey cube"
 	spawn_type = /mob/living/human/monkey

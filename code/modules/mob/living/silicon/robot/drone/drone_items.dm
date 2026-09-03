@@ -287,6 +287,54 @@
 /obj/item/matter_decompiler/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	return FALSE
 
+/obj/item/matter_decompiler/proc/try_ingest(atom/thing)
+	//Different classes of items give different commodities.
+	if(istype(thing,/obj/item/trash/cigbutt))
+		if(plastic)
+			plastic.add_charge(500)
+	else if(istype(thing,/obj/item/light))
+		var/obj/item/light/L = thing
+		if(L.status >= 2)
+			if(metal)
+				metal.add_charge(250)
+			if(glass)
+				glass.add_charge(250)
+	else if(istype(thing,/obj/item/remains/robot))
+		if(metal)
+			metal.add_charge(2000)
+		if(plastic)
+			plastic.add_charge(2000)
+		if(glass)
+			glass.add_charge(1000)
+	else if(istype(thing,/obj/item/trash))
+		if(metal)
+			metal.add_charge(1000)
+		if(plastic)
+			plastic.add_charge(3000)
+	else if(istype(thing,/obj/effect/decal/cleanable/blood/gibs/robot))
+		if(metal)
+			metal.add_charge(2000)
+		if(glass)
+			glass.add_charge(2000)
+	else if(istype(thing,/obj/item/ammo_casing))
+		if(metal)
+			metal.add_charge(1000)
+	else if(istype(thing,/obj/item/shard/shrapnel))
+		if(metal)
+			metal.add_charge(1000)
+	else if(istype(thing,/obj/item/shard))
+		if(glass)
+			glass.add_charge(1000)
+	else if(istype(thing,/obj/item/food/grown))
+		if(wood)
+			wood.add_charge(4000)
+	else if(istype(thing,/obj/item/pipe))
+		// This allows drones and engiborgs to clear pipe assemblies from floors.
+		pass()
+	else
+		return FALSE
+	return TRUE
+
 /obj/item/matter_decompiler/afterattack(atom/target, mob/living/user, proximity, params)
 
 	if(!proximity) return //Not adjacent.
@@ -343,59 +391,8 @@
 
 	// TODO: Jesus Christ, use matter or the procs the decompiler nades use.
 	for(var/obj/thing in T)
-		//Different classes of items give different commodities.
-		if(istype(thing,/obj/item/trash/cigbutt))
-			if(plastic)
-				plastic.add_charge(500)
-		else if(istype(thing,/obj/effect/spider/spiderling))
-			if(wood)
-				wood.add_charge(2000)
-			if(plastic)
-				plastic.add_charge(2000)
-		else if(istype(thing,/obj/item/light))
-			var/obj/item/light/L = thing
-			if(L.status >= 2)
-				if(metal)
-					metal.add_charge(250)
-				if(glass)
-					glass.add_charge(250)
-			else
-				continue
-		else if(istype(thing,/obj/item/remains/robot))
-			if(metal)
-				metal.add_charge(2000)
-			if(plastic)
-				plastic.add_charge(2000)
-			if(glass)
-				glass.add_charge(1000)
-		else if(istype(thing,/obj/item/trash))
-			if(metal)
-				metal.add_charge(1000)
-			if(plastic)
-				plastic.add_charge(3000)
-		else if(istype(thing,/obj/effect/decal/cleanable/blood/gibs/robot))
-			if(metal)
-				metal.add_charge(2000)
-			if(glass)
-				glass.add_charge(2000)
-		else if(istype(thing,/obj/item/ammo_casing))
-			if(metal)
-				metal.add_charge(1000)
-		else if(istype(thing,/obj/item/shard/shrapnel))
-			if(metal)
-				metal.add_charge(1000)
-		else if(istype(thing,/obj/item/shard))
-			if(glass)
-				glass.add_charge(1000)
-		else if(istype(thing,/obj/item/food/grown))
-			if(wood)
-				wood.add_charge(4000)
-		else if(istype(thing,/obj/item/pipe))
-			// This allows drones and engiborgs to clear pipe assemblies from floors.
-			pass()
-		else
+		if(!try_ingest(thing))
 			continue
-
 		qdel(thing)
 		grabbed_something = 1
 

@@ -1,7 +1,7 @@
 /obj/item/ascent_molt
 	name = "molted carapace"
 	icon = 'icons/effects/effects.dmi'
-	icon_state = "cocoon3"
+	icon_state = "cocoon"
 	color = COLOR_PURPLE
 	desc = "The molted carapace of some alien creature."
 	material = /decl/material/solid/gemstone/crystal
