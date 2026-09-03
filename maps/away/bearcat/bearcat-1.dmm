@@ -1717,7 +1717,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/obj/effect/decal/cleanable/spiderling_remains,
+/obj/effect/decal/cleanable/spider_remains,
 /obj/machinery/light/small{
 	dir = 8
 	},

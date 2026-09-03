@@ -137,7 +137,7 @@
 	if(!spawnable_choices)
 		spawnable_choices = list(
 			/obj/effect/decal/cleanable/generic            = 20,
-			/obj/effect/decal/cleanable/spiderling_remains = 95,
+			/obj/effect/decal/cleanable/spider_remains     = 95,
 			/obj/item/remains/mouse                        = 95,
 			/obj/item/remains/robot                        = 95,
 			/obj/item/paper/crumpled                       = 95,
@@ -170,7 +170,7 @@
 		/obj/effect/decal/cleanable/blood/gibs/robot,
 		/obj/effect/decal/cleanable/blood/oil,
 		/obj/effect/decal/cleanable/blood/oil/streak,
-		/obj/effect/decal/cleanable/spiderling_remains,
+		/obj/effect/decal/cleanable/spider_remains,
 		/obj/item/remains/mouse,
 		/obj/effect/decal/cleanable/vomit,
 		/obj/effect/decal/cleanable/blood/splatter,
@@ -608,7 +608,7 @@
 	var/static/list/spawn_choices = list(
 		/obj/item/assembly/mousetrap,
 		/obj/item/assembly/mousetrap/armed,
-		/obj/effect/decal/cleanable/spiderling_remains,
+		/obj/effect/decal/cleanable/spider_remains,
 		/obj/effect/decal/cleanable/ash,
 		/obj/item/trash/cigbutt,
 		/obj/item/trash/cigbutt/cigarbutt,

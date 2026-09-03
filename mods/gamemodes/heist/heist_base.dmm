@@ -401,7 +401,7 @@
 /turf/unsimulated/floor/dark,
 /area/map_template/syndicate_mothership/raider_base)
 "bs" = (
-/obj/effect/decal/cleanable/spiderling_remains,
+/obj/effect/decal/cleanable/spider_remains,
 /turf/unsimulated/floor/plating,
 /area/map_template/syndicate_mothership/raider_base)
 "bt" = (
