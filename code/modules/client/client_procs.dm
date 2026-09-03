@@ -637,6 +637,8 @@ var/global/const/MAX_VIEW = 41
 	var/list/communication_hotkeys = list()
 	for(var/key in D.key_bindings)
 		for(var/kb_name in D.key_bindings[key])
+			if(!prefs.hotkeys && !SSinput.unprintables_cache[key])
+				continue
 			switch(kb_name)
 				if("north")
 					movement_keys[key] = NORTH
@@ -674,12 +676,12 @@ var/global/const/MAX_VIEW = 41
 /client/proc/set_right_click_menu_mode(shift_only)
 	if(shift_only)
 		winset(src, "mapwindow.map", "right-click=true")
-		winset(src, "ShiftUp", "is-disabled=false")
-		winset(src, "Shift", "is-disabled=false")
+		winset(src, "default.PROTECTED-Shift", "command=\".winset :map.right-click=false\nKeyDown Shift\"")
+		winset(src, "default.PROTECTED-ShiftUp", "command=\".winset :map.right-click=true\nKeyUp Shift\"")
 	else
 		winset(src, "mapwindow.map", "right-click=false")
-		winset(src, "default.Shift", "is-disabled=true")
-		winset(src, "default.ShiftUp", "is-disabled=true")
+		winset(src, "default.PROTECTED-Shift", "command=\"KeyDown Shift\"")
+		winset(src, "default.PROTECTED-ShiftUp", "command=\"KeyUp Shift\"")
 
 /client/verb/drop_item()
 	set hidden = 1

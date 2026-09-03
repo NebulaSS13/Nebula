@@ -2,20 +2,6 @@
 	abstract_type = /datum/keybinding/client
 	category = CATEGORY_CLIENT
 
-/datum/keybinding/client/hotkey_mode
-	hotkey_keys = list("Tab")
-	name = "hotkey_mode"
-	full_name = "Toggle Hotkeys"
-
-/datum/keybinding/client/hotkey_mode/down(client/user)
-	if(user.prefs)
-		user.prefs.hotkeys = !user.prefs.hotkeys
-		if(user.prefs.hotkeys)
-			winset(user, null, "outputwindow.input.background-color=[COLOR_INPUT_DISABLED];mapwindow.map.focus=true")
-		else
-			winset(user, null, "outputwindow.input.background-color=[COLOR_INPUT_ENABLED];outputwindow.input.focus=true")
-	return TRUE
-
 /datum/keybinding/client/admin_help
 	hotkey_keys = list("F1")
 	name = "admin_help"

@@ -50,12 +50,40 @@
 /datum/category_item/player_setup_item/controls
 	abstract_type = /datum/category_item/player_setup_item/controls
 
+/datum/category_group/player_setup_category/controls/content(mob/user)
+	. = ""
+	for(var/datum/category_item/player_setup_item/PI in items)
+		. += "[PI.content(user)]<br>"
+
+/datum/category_item/player_setup_item/controls/hotkey_mode
+	name = "Hotkey Mode"
+	sort_order = 1
+
+/datum/category_item/player_setup_item/controls/hotkey_mode/load_preferences(datum/pref_record_reader/R)
+	pref.hotkeys = R.read("hotkey_mode")
+
+/datum/category_item/player_setup_item/controls/hotkey_mode/save_preferences(datum/pref_record_writer/writer)
+	writer.write("hotkey_mode", pref.hotkeys)
+
+/datum/category_item/player_setup_item/controls/hotkey_mode/sanitize_preferences()
+	pref.hotkeys = sanitize_bool(pref.hotkeys, TRUE)
+
+/datum/category_item/player_setup_item/controls/hotkey_mode/content(mob/user)
+	return "<center><b>Hotkey Mode:</b><a href='byond://?src=\ref[src]'>[pref.hotkeys ? "Hotkey" : "Focus Chat"]</a></center>"
+
+/datum/category_item/player_setup_item/controls/hotkey_mode/OnTopic(href, list/href_list, mob/user)
+	pref.hotkeys = !pref.hotkeys
+	user.client.set_macros()
+	return TOPIC_REFRESH
+
+
 /datum/category_item/player_setup_item/controls/keybindings
 	name = "Keybindings"
-	sort_order = 1
+	sort_order = 2
 
 /datum/category_item/player_setup_item/controls/keybindings/load_preferences(datum/pref_record_reader/R)
 	pref.key_bindings = R.read("key_bindings")
+
 
 /datum/category_item/player_setup_item/controls/keybindings/sanitize_preferences()
 	pref.key_bindings = sanitize_keybindings(pref.key_bindings)
