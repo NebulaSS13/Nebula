@@ -14,6 +14,9 @@
 	var/list/macro_set = params2list(winget(src, "default.*", "command")) // The third arg doesnt matter here as we're just removing them all
 	for(var/k in 1 to length(macro_set))
 		var/list/split_name = splittext(macro_set[k], ".")
+		if(split_name[2] in SSinput.protected_macro_ids)
+			testing("Skipping Protected Macro [split_name[2]]")
+			continue //Skip protected macros
 		var/macro_name = "[split_name[1]].[split_name[2]]" // [3] is "command"
 		erase_output = "[erase_output];[macro_name].parent=null"
 	winset(src, null, erase_output)
@@ -50,39 +53,29 @@
 	erase_all_macros()
 
 	//Set up the stuff we don't let them override.
-	var/list/macro_set = SSinput.macro_set
+	var/list/macro_set = SSinput.core_macro_set
 	for(var/k in 1 to length(macro_set))
 		var/key = macro_set[k]
 		var/command = macro_set[key]
 		winset(src, "shared-\ref[key]", "parent=default;name=[key];command=[command]")
 
-	var/list/printables
-	//If they use hotkeys, we can safely use ANY
-	if(prefs.hotkeys)
-		var/list/hk_macro_set = SSinput.hotkey_only_set
-		for(var/k in 1 to length(hk_macro_set))
-			var/key = hk_macro_set[k]
-			var/command = hk_macro_set[key]
-			winset(src, "hotkey_only-\ref[key]", "parent=default;name=[key];command=[command]")
-	else //Otherwise, we can't.
-		/// Install the shared set, so that we force capture all modifier keys
-		var/list/c_macro_set = SSinput.classic_only_set
-		for(var/k in 1 to length(c_macro_set))
-			var/key = c_macro_set[k]
-			var/command = c_macro_set[key]
-			winset(src, "classic_only-\ref[key]", "parent=default;name=[key];command=[command]")
-		printables = list()
-		//This is to save time muching down this massive list, it might result in holes, it may be better to simply hardcode all these into the skin.
-		//I might try that one day, but that day is not today.
-		for(var/key in personal_macro_set) //We don't care about the bound key, just the key itself
-			var/keycode = replacetext(key, regex("(Alt|Shift|Ctrl)", "g"), "")
-			if(!length(keycode))
-				continue //Modifier-only keybind entry. We always those.
-			if(!prefs.hotkeys && !SSinput.unprintables_cache[keycode]) //Track printable hotkeys and skip them.
-				printables += key
-				continue
-			winset(src, "personal-\ref[keycode]", "parent=default;name=[keycode];command=\"KeyDown [keycode]\"")
-			winset(src, "personal-\ref[keycode]]-UP", "parent=default;name=[keycode]+UP;command=\"KeyUp [keycode]\"")
+	/// Install the shared set, so that we force capture all modifier keys
+	var/list/m_macro_set = SSinput.modifier_set
+	for(var/k in 1 to length(m_macro_set))
+		var/key = m_macro_set[k]
+		var/command = m_macro_set[key]
+		winset(src, "modifier-\ref[key]", "parent=default;name=[key];command=[command]")
+	var/list/printables = list()
+
+	for(var/key in personal_macro_set) //We don't care about the bound key, just the key itself
+		var/keycode = replacetext(key, regex("(Alt|Shift|Ctrl)", "g"), "")
+		if(!length(keycode) || keycode == "Unbound" || keycode[SSinput.forced_macro_set])
+			continue //Modifier-only keybind entry or empty keybind. We've already bound those.
+		if(!prefs.hotkeys && !SSinput.unprintables_cache[keycode]) //Track printable hotkeys and skip them.
+			printables += key
+			continue
+		winset(src, "personal-\ref[keycode]", "parent=default;name=[keycode];command=\"KeyDown [keycode]\"")
+		winset(src, "personal-\ref[keycode]]-UP", "parent=default;name=[keycode]+UP;command=\"KeyUp [keycode]\"")
 
 
 	if(prefs.hotkeys)

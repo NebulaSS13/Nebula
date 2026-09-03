@@ -226,7 +226,20 @@
 
 			if(global._kbMap[new_key])
 				new_key = global._kbMap[new_key]
-
+			if(SSinput.blacklisted_keys[new_key])
+				alert(user, "Warning: \[[new_key]\] can't be rebound:\n[SSinput.blacklisted_keys[new_key]]","Bind Error", "Cancel")
+				show_browser(user, null, "window=capturekeypress")
+				return TOPIC_REFRESH
+			if(SSinput.warn_keys[new_key])
+				var/response = alert(user, "Warning: Binding the key \[[new_key]\] can cause issues:\n[SSinput.warn_keys[new_key]]","Bind Warning", "Cancel", "Bind Anyways")
+				if(response != "Bind Anyways")
+					show_browser(user, null, "window=capturekeypress")
+					return TOPIC_REFRESH
+			if(!pref.hotkeys && !SSinput.unprintables_cache[new_key])
+				var/response = alert(user, "Notice: Binding the key \[[new_key]\] will have no effect, as you are in Focus Chat mode.","Bind Warning", "Cancel", "Bind Anyways")
+				if(response != "Bind Anyways")
+					show_browser(user, null, "window=capturekeypress")
+					return TOPIC_REFRESH
 			var/full_key
 			switch(new_key)
 				if("Alt")

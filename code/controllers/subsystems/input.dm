@@ -6,40 +6,46 @@ SUBSYSTEM_DEF(input)
 	priority = SS_PRIORITY_INPUT
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 
-	/// Standard macroset *ALL* players get
-	var/list/macro_set
-	/// Macros applied only to hotkey users
-	var/list/hotkey_only_set
-	/// Macros applied onlt to classic users
-	var/list/classic_only_set
+	/// 'Hard-wired' macros that have special behaviour.
+	var/list/core_macro_set
+	/// Macros for capturing modifier keys. These are always applied.
+	var/list/modifier_set
 	/// Typecache of all unprintable keys that are safe for classic to bind
 	var/list/unprintables_cache
 	/// Macro IDs we shouldn't clear during client.clear_macros()
 	var/list/protected_macro_ids
-
+	/// Keys with global warnings associated with them.
+	var/list/warn_keys
+	/// Fully reserved blacklisted keys
+	var/list/blacklisted_keys
 
 /datum/controller/subsystem/input/Initialize()
 	setup_default_macro_sets()
 	refresh_client_macro_sets()
+
+	warn_keys = list(
+		"C" = "Interferes with the ability to copy text from the chatbox.",
+		"V" = "Interferes with the ability to paste text into the chatbox."
+	)
+	// This should include everything in core_macro_set
+	blacklisted_keys = list(
+		"Back" = "Hardwired to Clear Input",
+		"Tab" = "Hardwired to Focus Chat"
+		//Escape can't be bound as it's the 'unbind' key during setup.
+	)
+
 	return ..()
 
 // This is for when macro sets are eventualy datumized
 /datum/controller/subsystem/input/proc/setup_default_macro_sets()
-	macro_set = list(
-		// These could probably just be put in the skin. I actually don't 	understand WHY they aren't just in the skin. Besides the use of defines for Tab.
+	core_macro_set = list(
+		// These could probably just be put in the skin. I actually don't understand WHY they aren't just in the skin. Besides the use of defines for Tab.
 		"Back" = "\".winset \\\"input.text=\\\"\\\"\\\"\"",
 		"Tab" = "\".winset \\\"input.focus=true?map.focus=true input.background-color=[COLOR_INPUT_DISABLED]:input.focus=true input.background-color=[COLOR_INPUT_ENABLED]\\\"\"",
 		"Escape" = "Reset-Held-Keys",
 	)
-	hotkey_only_set = list(
-		// We don't need to protect printables with hotkey mode, We can save time and just use the magic key.
-		"Any" = "\"KeyDown \[\[*\]\]\"",
-		"Any+UP" = "\"KeyUp \[\[*\]\]\"",
-	)
-	classic_only_set = list(
+	modifier_set = list(
 		//We need to force these to capture them for macro modifiers.
-		//Did I mention I fucking despise the way this system works at a base, almost reptilian-barely-understands-consciousness level?
-		//Because I do.
 		"Alt" = "\"KeyDown Alt\"",
 		"Alt+UP" = "\"KeyUp Alt\"",
 		"Ctrl" = "\"KeyDown Ctrl\"",
