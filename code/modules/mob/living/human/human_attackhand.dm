@@ -230,6 +230,7 @@
 	if(attack.apply_cooldown)
 		H.setClickCooldown(attack.apply_cooldown)
 
+	remove_cloak()
 	if(istype(ai))
 		ai.retaliate(user)
 	return TRUE

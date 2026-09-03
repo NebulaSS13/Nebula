@@ -3031,6 +3031,7 @@
 #include "code\modules\mob\living\silicon\robot\modules\module_uncertified.dm"
 #include "code\modules\mob\living\simple_animal\_simple_animal.dm"
 #include "code\modules\mob\living\simple_animal\natural_weapons.dm"
+#include "code\modules\mob\living\simple_animal\simple_animal_cloak.dm"
 #include "code\modules\mob\living\simple_animal\simple_animal_codex.dm"
 #include "code\modules\mob\living\simple_animal\simple_animal_damage.dm"
 #include "code\modules\mob\living\simple_animal\simple_animal_serde.dm"

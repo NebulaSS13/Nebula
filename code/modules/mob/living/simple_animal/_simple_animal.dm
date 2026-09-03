@@ -221,6 +221,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	else if(current_posture?.prone && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
 		icon_state += "-resting"
 	..()
+	if(stat == CONSCIOUS && is_cloaked())
+		animate(src, alpha = cloaked_alpha, time = cloak_anim_time)
+	else
+		animate(src, alpha = initial(alpha), time = cloak_anim_time)
 
 /mob/living/simple_animal/get_eye_colour()
 	return eye_color || ..()
@@ -564,7 +568,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(istype(ai))
 		ai.resume()
 
-/mob/living/simple_animal/has_ranged_attack()
+/mob/living/simple_animal/has_ranged_attack(atom/target)
 	return !!projectiletype && get_ranged_attack_distance() > 0
 
 /mob/living/simple_animal/proc/shoot_wrapper(target, location, user)
@@ -574,7 +578,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/proc/shoot_at(var/atom/target, var/atom/start)
 	if(!start)
 		start = get_turf(src)
-	if(!can_act() || !istype(target) || !istype(start) || target == start || !has_ranged_attack())
+	if(!can_act() || !istype(target) || !istype(start) || target == start || !has_ranged_attack(target))
 		return FALSE
 	var/obj/item/projectile/A = new projectiletype(get_turf(start))
 	if(!A)
@@ -587,7 +591,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	return ranged_range
 
 /mob/living/simple_animal/handle_ranged_attack(atom/target)
-	if(!has_ranged_attack() || !istype(target))
+	if(!has_ranged_attack(target) || !istype(target))
 		return
 	visible_message(SPAN_DANGER("\The [src] [fire_desc] at \the [target]!"))
 	if(burst_projectile)
@@ -602,7 +606,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	return TRUE
 
 /mob/living/simple_animal/get_attack_telegraph_delay()
-	return attack_delay
+	return is_cloaked() ? 0 : attack_delay
 
 /mob/living/simple_animal/set_stat(var/new_stat)
 	if((. = ..()))

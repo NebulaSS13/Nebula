@@ -1609,6 +1609,9 @@ var/global/const/ACTION_DANGER_ALL = 2
 /mob/proc/is_cloaked()
 	return FALSE
 
+/mob/proc/is_fully_cloaked()
+	return is_cloaked()
+
 /mob/proc/get_background_datum_by_flag(background_flag)
 	var/list/all_categories = global.using_map.get_background_categories()
 	for(var/cat_type in all_categories)
@@ -1622,3 +1625,13 @@ var/global/const/ACTION_DANGER_ALL = 2
 // Check if this mob can full-auto fire a gun at a target.
 /mob/proc/mob_can_autofire(obj/item/gun/gun, atom/target)
 	return TRUE // TODO: dexterity check? That will be handled by the item itself probably.
+
+// Stubs to make some AI logic easier to write.
+/mob/proc/can_cloak(ignore_timing = FALSE)
+	return FALSE
+
+/mob/proc/apply_cloak()
+	return
+
+/mob/proc/remove_cloak()
+	return
