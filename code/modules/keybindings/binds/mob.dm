@@ -7,6 +7,7 @@
 
 /datum/keybinding/mob/toggle_throw_mode
 	hotkey_keys = list("R", "Southwest")
+	classic_keys = list("Southwest")
 	name = "toggle_throw_mode"
 	full_name = "Toggle Throw mode"
 	description = "Toggle throwing the current item or not."
@@ -17,6 +18,7 @@
 
 /datum/keybinding/mob/hold_throw_mode
 	hotkey_keys = list("Space")
+	classic_keys = list("Unbound")
 	name = "hold_throw_mode"
 	full_name = "Hold throw mode"
 	description = "Hold this to turn on throw mode, and release it to turn off throw mode"
@@ -31,6 +33,7 @@
 
 /datum/keybinding/mob/swap_hands
 	hotkey_keys = list("X", "Northeast")
+	classic_keys = list("Northeast")
 	name = "swap_hands"
 	full_name = "Swap Hands"
 
@@ -40,6 +43,7 @@
 
 /datum/keybinding/mob/drop_item
 	hotkey_keys = list("Q", "Northwest")
+	classic_keys = list("Northwest")
 	name = "drop_item"
 	full_name = "Drop Item"
 
@@ -49,6 +53,7 @@
 
 /datum/keybinding/mob/select_help_intent
 	hotkey_keys = list("1")
+	classic_keys = list("Unbound")
 	name = "select_help_intent"
 	full_name = "Select Help Intent"
 
@@ -58,6 +63,7 @@
 
 /datum/keybinding/mob/select_disarm_intent
 	hotkey_keys = list("2")
+	classic_keys = list("Unbound")
 	name = "select_disarm_intent"
 	full_name = "Select Disarm Intent"
 
@@ -67,6 +73,7 @@
 
 /datum/keybinding/mob/select_grab_intent
 	hotkey_keys = list("3")
+	classic_keys = list("Unbound")
 	name = "select_grab_intent"
 	full_name = "Select Grab Intent"
 
@@ -76,6 +83,7 @@
 
 /datum/keybinding/mob/select_harm_intent
 	hotkey_keys = list("4")
+	classic_keys = list("Unbound")
 	name = "select_harm_intent"
 	full_name = "Select Harm Intent"
 
@@ -85,6 +93,7 @@
 
 /datum/keybinding/mob/cycle_intent_right
 	hotkey_keys = list("G", "Insert")
+	classic_keys = list("Insert")
 	name = "cycle_intent_right"
 	full_name = "Сycle Intent: Right"
 
@@ -103,6 +112,7 @@
 
 /datum/keybinding/mob/activate_inhand
 	hotkey_keys = list("Z", "Y","Southeast") // Southeast = PAGEDOWN
+	classic_keys = list("Southeast")
 	name = "activate_inhand"
 	full_name = "Activate In-Hand"
 	description = "Uses whatever item you have inhand"
