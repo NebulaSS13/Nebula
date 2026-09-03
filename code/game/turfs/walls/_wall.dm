@@ -194,11 +194,8 @@ var/global/list/wall_fullblend_objects = list(
 	if(!can_melt())
 		return
 	var/turf/floor/F = ChangeTurf(/turf/floor/plating)
-	if(!istype(F))
-		return
-	F.burn_tile()
-	F.icon_state = "wall_thermite"
-	visible_message(SPAN_DANGER("\The [src] spontaneously combusts!"))
+	if(istype(F))
+		F.burn_tile()
 
 /turf/wall/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	if(damage)
