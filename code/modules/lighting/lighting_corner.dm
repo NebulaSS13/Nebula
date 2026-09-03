@@ -15,12 +15,16 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	// tX is the turf itself, tXi is the index of this corner in that turf's corners list.
 	var/turf/t1
 	var/t1i
+	var/t1m
 	var/turf/t2
 	var/t2i
+	var/t2m
 	var/turf/t3
 	var/t3i
+	var/t3m
 	var/turf/t4
 	var/t4i
+	var/t4m
 
 	/// If a connection for z-lights exists, the corner above us.
 	var/datum/lighting_corner/above_corner
@@ -72,6 +76,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/has_ambience = FALSE
 
 	t1 = new_turf.resolve_to_actual_turf()
+	t1m = new_turf != t1
 	z = t1.z
 	t1i = oi
 
@@ -90,44 +95,52 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/turf/T
 	// This is to resolve the proper diagonal direction relative to the corner position for mimiced turfs.
 	var/Tc
+	// temporary holder for the resolved turf to set t2m, t3m, etc with
+	var/turf/resolved_turf
 
 
 	// Diagonal one is easy.
-	T = get_step_resolving_mimic(t1, diagonal)
-	if (T) // In case we're on the map's border.
-		if (!T.corners)
-			T.corners = new(4)
+	T = get_step(t1, diagonal)
+	resolved_turf = T?.resolve_to_actual_turf()
+	t2m = T == resolved_turf
+	if (resolved_turf) // In case we're on the map's border.
+		if (!resolved_turf.corners)
+			resolved_turf.corners = new(4)
 
-		t2 = T
+		t2 = resolved_turf
 		t2i = REVERSE_LIGHTING_CORNER_DIAGONAL[diagonal]
-		T.corners[t2i] = src
-		if (TURF_IS_AMBIENT_LIT_UNSAFE(T))
+		resolved_turf.corners[t2i] = src
+		if (TURF_IS_AMBIENT_LIT_UNSAFE(resolved_turf))
 			has_ambience = TRUE
 
 	// Now the horizontal one.
-	T = get_step_resolving_mimic(t1, horizontal)
+	T = get_step(t1, horizontal)
+	resolved_turf = T?.resolve_to_actual_turf()
+	t3m = T == resolved_turf
 	Tc = t1.x + (horizontal == EAST  ? 1 : -1)
-	if (T) // Ditto.
-		if (!T.corners)
-			T.corners = new(4)
+	if (resolved_turf) // Ditto.
+		if (!resolved_turf.corners)
+			resolved_turf.corners = new(4)
 
-		t3 = T
+		t3 = resolved_turf
 		t3i = REVERSE_LIGHTING_CORNER_DIAGONAL[((Tc > x) ? EAST : WEST) | ((t1.y > y) ? NORTH : SOUTH)] // Get the dir based on coordinates.
-		T.corners[t3i] = src
-		if (TURF_IS_AMBIENT_LIT_UNSAFE(T))
+		resolved_turf.corners[t3i] = src
+		if (TURF_IS_AMBIENT_LIT_UNSAFE(resolved_turf))
 			has_ambience = TRUE
 
 	// And finally the vertical one.
-	T = get_step_resolving_mimic(t1, vertical)
+	T = get_step(t1, vertical)
+	resolved_turf = T?.resolve_to_actual_turf()
+	t4m = T == resolved_turf
 	Tc = t1.y + (vertical   == NORTH ? 1 : -1)
-	if (T)
-		if (!T.corners)
-			T.corners = new(4)
+	if (resolved_turf)
+		if (!resolved_turf.corners)
+			resolved_turf.corners = new(4)
 
-		t4 = T
+		t4 = resolved_turf
 		t4i = REVERSE_LIGHTING_CORNER_DIAGONAL[((t1.x > x) ? EAST : WEST) | ((Tc > y) ? NORTH : SOUTH)] // Get the dir based on coordinates.
-		T.corners[t4i] = src
-		if (TURF_IS_AMBIENT_LIT_UNSAFE(T))
+		resolved_turf.corners[t4i] = src
+		if (TURF_IS_AMBIENT_LIT_UNSAFE(resolved_turf))
 			has_ambience = TRUE
 
 	if (has_ambience)
@@ -219,29 +232,29 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		It's just the same block of code repeated four times (for each master), plus the case of there now being no above corner, but previously having had one.
 		We also only initialize the one corner we need rather than all four since there's no benefit to initializing them all -- if a true light needs them, it'll make them itself.
 
-		Nebula specific: due to lighting on edges of z-levels wrapping around, this logic needs to exclude masters that are on a different Z-level.
+		Nebula specific: due to lighting on edges of z-levels wrapping around, this logic needs to exclude masters that wrap around the level.
 			This logic assumes that all (up to) four masters of this corner are equivalent, but this is not true of corners found via z-level transition boundaries.
 			Turfs with transition corners should have at least one non-transition corner, so we just ignore them.
 	*/
-	if      (t1?.z == z && (T = t1.above || GET_ABOVE(t1)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	if      (t1 && !t1m && (T = t1.above || GET_ABOVE(t1)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		if (!(above_corner = T.corners?[t1i]) && GOING_UP)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t1i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t1i], t1i, LIGHTING_CORNER_GENERATE_UP)
 			above_corner = T.corners[t1i]
-	else if (t2?.z == z && (T = t2.above || GET_ABOVE(t2)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	else if (t2 && !t2m && (T = t2.above || GET_ABOVE(t2)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		if (!(above_corner = T.corners?[t2i]) && GOING_UP)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t2i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t2i], t2i, LIGHTING_CORNER_GENERATE_UP)
 			above_corner = T.corners[t2i]
-	else if (t3?.z == z && (T = t3.above || GET_ABOVE(t3)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	else if (t3 && !t3m && (T = t3.above || GET_ABOVE(t3)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		if (!(above_corner = T.corners?[t3i]) && GOING_UP)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t3i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t3i], t3i, LIGHTING_CORNER_GENERATE_UP)
 			above_corner = T.corners[t3i]
-	else if (t4?.z == z && (T = t4.above || GET_ABOVE(t4)) && (T.z_flags & ZM_ALLOW_LIGHTING))
+	else if (t4 && !t4m && (T = t4.above || GET_ABOVE(t4)) && (T.z_flags & ZM_ALLOW_LIGHTING))
 		if (!(above_corner = T.corners?[t4i]) && GOING_UP)
 			if (!T.corners)
 				T.corners = new(4)
@@ -285,25 +298,25 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 					SSlighting.corner_queue += corn
 
 	// As above, so below. The ordering here is a bit different from the above block, check the comment at the top of this proc.
-	if      (t1?.z == z && (t1.z_flags & ZM_ALLOW_LIGHTING) && (T = t1.below || GET_BELOW(t1)))
+	if      (t1 && !t1m && (t1.z_flags & ZM_ALLOW_LIGHTING) && (T = t1.below || GET_BELOW(t1)))
 		if (!(below_corner = T.corners?[t1i]) && GOING_DOWN)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t1i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t1i], t1i, LIGHTING_CORNER_GENERATE_DOWN)
 			below_corner = T.corners[t1i]
-	else if (t2?.z == z && (t2.z_flags & ZM_ALLOW_LIGHTING) && (T = t2.below || GET_BELOW(t2)))
+	else if (t2 && !t2m && (t2.z_flags & ZM_ALLOW_LIGHTING) && (T = t2.below || GET_BELOW(t2)))
 		if (!(below_corner = T.corners?[t2i]) && GOING_DOWN)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t2i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t2i], t2i, LIGHTING_CORNER_GENERATE_DOWN)
 			below_corner = T.corners[t2i]
-	else if (t3?.z == z && (t3.z_flags & ZM_ALLOW_LIGHTING) && (T = t3.below || GET_BELOW(t3)))
+	else if (t3 && !t3m && (t3.z_flags & ZM_ALLOW_LIGHTING) && (T = t3.below || GET_BELOW(t3)))
 		if (!(below_corner = T.corners?[t3i]) && GOING_DOWN)
 			if (!T.corners)
 				T.corners = new(4)
 			T.corners[t3i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[t3i], t3i, LIGHTING_CORNER_GENERATE_DOWN)
 			below_corner = T.corners[t3i]
-	else if (t4?.z == z && (t4.z_flags & ZM_ALLOW_LIGHTING) && (T = t4.below || GET_BELOW(t4)))
+	else if (t4 && !t4m && (t4.z_flags & ZM_ALLOW_LIGHTING) && (T = t4.below || GET_BELOW(t4)))
 		if (!(below_corner = T.corners?[t4i]) && GOING_DOWN)
 			if (!T.corners)
 				T.corners = new(4)
