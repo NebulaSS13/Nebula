@@ -632,9 +632,12 @@ About the new airlock wires panel:
 	var/cut_verb
 	var/cut_sound
 
+	// todo: should this use the demolisher extension?
 	if(IS_WELDER(item))
-		var/obj/item/weldingtool/welder = item
-		if(!welder.weld(0,user))
+		var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+		if(welder_archetype.can_use_tool(item) != TOOL_USE_SUCCESS)
+			return FALSE
+		if(welder_archetype.handle_pre_interaction(item, user, 0) != TOOL_USE_SUCCESS)
 			return FALSE
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
@@ -742,22 +745,13 @@ About the new airlock wires panel:
 		return
 
 	if(!repairing && IS_WELDER(used_item) && !operating && density)
-		var/obj/item/weldingtool/welder = used_item
-		if(!welder.weld(0,user))
-			to_chat(user, SPAN_NOTICE("Your [welder.name] doesn't have enough fuel."))
+		if(!used_item.do_tool_interaction(TOOL_WELDER, user, src, rand(3,5) SECONDS, suffix_message = welded ? ", unsealing it" : ", sealing it closed"))
 			return TRUE
-		playsound(src, 'sound/items/Welder.ogg', 50, 1)
-		user.visible_message(SPAN_WARNING("\The [user] begins welding \the [src] [welded ? "open" : "closed"]!"),
-							SPAN_NOTICE("You begin welding \the [src] [welded ? "open" : "closed"]."))
-		if(do_after(user, (rand(3,5)) SECONDS, src))
-			if(density && !operating && !repairing)
-				playsound(src, 'sound/items/Welder2.ogg', 50, 1)
-				welded = !welded
-				update_icon()
-				return TRUE
-		else
-			to_chat(user, SPAN_NOTICE("You must remain still to complete this task."))
+		if(!density || operating || repairing)
 			return TRUE
+		welded = !welded
+		update_icon()
+		return TRUE
 
 	else if(IS_WIRECUTTER(used_item) || IS_MULTITOOL(used_item) || istype(used_item, /obj/item/assembly/signaler))
 		return wires.Interact(user)
@@ -868,7 +862,8 @@ About the new airlock wires panel:
 		spark_at(da, amount=5, cardinal_only = TRUE)
 	else
 		da.anchored = TRUE
-	da.state = 1
+	// circuit is dumped onto the turf by parent call
+	da.wired = TRUE
 	da.created_name = name
 	da.update_icon()
 

@@ -58,13 +58,16 @@
 
 /obj/item/shard/attackby(obj/item/used_item, mob/user)
 	if(IS_WELDER(used_item) && material.shard_can_repair)
-		var/obj/item/weldingtool/welder = used_item
-		if(welder.weld(0, user))
-			material.create_object(get_turf(src))
-			qdel(src)
+		var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+		if(welder_archetype.can_use_tool(used_item) != TOOL_USE_SUCCESS)
 			return TRUE
-	if(istype(used_item, /obj/item/stack/cable_coil))
+		if(welder_archetype.handle_pre_interaction(user, used_item, 0) != TOOL_USE_SUCCESS)
+			return TRUE
+		material.create_object(get_turf(src))
+		qdel(src)
+		return TRUE
 
+	if(istype(used_item, /obj/item/stack/cable_coil))
 		if(!material || (material.shard_name in list(SHARD_SPLINTER, SHARD_SHRAPNEL)))
 			to_chat(user, SPAN_WARNING("\The [src] is not suitable for using as a shank."))
 			return TRUE

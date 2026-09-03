@@ -125,9 +125,9 @@
 	var/obj/item/stack/material/M = thing
 	. = istype(M) && (!stack_material || M.material.type == stack_material) && ..()
 
-/decl/crafting_stage/welding/consume_crafting_resource(var/mob/user, var/obj/item/thing, var/obj/item/target)
-	var/obj/item/weldingtool/T = thing
-	. = istype(T) && T.weld(0, user) && T.isOn()
+/decl/crafting_stage/welding/consume_crafting_resource(var/mob/user, var/obj/item/used_item, var/obj/item/target)
+	var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+	return welder_archetype.can_use_tool(used_item) == TOOL_USE_SUCCESS && welder_archetype.handle_pre_interaction(user, used_item, 0) == TOOL_USE_SUCCESS
 
 /decl/crafting_stage/welding
 	consume_completion_trigger = FALSE

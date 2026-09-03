@@ -280,38 +280,17 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/used_item, mob/user)
 	if(IS_WELDER(used_item))
+		if(!used_item.do_tool_interaction(TOOL_WELDER, user, src, 2 SECONDS, welded ? "unwelding" : "welding", welded ? "unwelding" : "welding"))
+			return TRUE
 
-		var/obj/item/weldingtool/welder = used_item
-
-		if(!welder.isOn())
-			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
-			return 1
-
-		if(!welder.weld(0,user))
-			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
-			return 1
-
-		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
-		playsound(src, 'sound/items/Welder.ogg', 50, 1)
-
-		if(!do_after(user, 20, src))
-			to_chat(user, "<span class='notice'>You must remain close to finish this task.</span>")
-			return 1
-
-		if(!src)
-			return 1
-
-		if(!welder.isOn())
-			to_chat(user, "<span class='notice'>The welding tool needs to be on to finish this task.</span>")
-			return 1
+		if(QDELETED(src))
+			return TRUE
 
 		welded = !welded
 		update_icon()
 		playsound(src, 'sound/items/Welder2.ogg', 50, 1)
-		user.visible_message("<span class='notice'>\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"].</span>", \
-			"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
-			"You hear welding.")
-		return 1
+		return TRUE
+
 	if(IS_MULTITOOL(used_item))
 		var/datum/browser/written_digital/popup = new(user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
 		popup.set_content(jointext(get_console_data(),"<br>"))
