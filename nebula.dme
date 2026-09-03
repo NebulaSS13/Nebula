@@ -4066,6 +4066,7 @@
 #include "code\unit_tests\items.dm"
 #include "code\unit_tests\job_tests.dm"
 #include "code\unit_tests\json.dm"
+#include "code\unit_tests\keybinds.dm"
 #include "code\unit_tests\machine_tests.dm"
 #include "code\unit_tests\map_tests.dm"
 #include "code\unit_tests\materials.dm"
