@@ -130,6 +130,7 @@ meteor_act
 		return // If it has no force then no need to do anything else.
 
 	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
+	remove_cloak()
 	if(istype(ai))
 		ai.retaliate(user)
 
