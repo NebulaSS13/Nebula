@@ -14,6 +14,27 @@
 	)
 	return spooders
 
+/obj/random/spider_mutant
+	name = "Random Mutant Spider"
+	desc = "This is a random mutated spider."
+	icon = /mob/living/simple_animal/hostile/giant_spider/volatile::icon
+	icon_state = /mob/living/simple_animal/hostile/giant_spider/volatile::icon_state
+
+/obj/random/spider_mutant/spawn_choices()
+	var/static/list/spooders = list(
+		/obj/random/spider                                        = 5,
+		/mob/living/simple_animal/hostile/giant_spider/ranged/webslinger = 10,
+		/mob/living/simple_animal/hostile/giant_spider/carrier    = 10,
+		/mob/living/simple_animal/hostile/giant_spider/lurker     = 33,
+		/mob/living/simple_animal/hostile/giant_spider/tunneller   = 33,
+		/mob/living/simple_animal/hostile/giant_spider/pepper     = 40,
+		/mob/living/simple_animal/hostile/giant_spider/thermic    = 20,
+		/mob/living/simple_animal/hostile/giant_spider/ranged/electric   = 40,
+		/mob/living/simple_animal/hostile/giant_spider/volatile   = 1,
+		/mob/living/simple_animal/hostile/giant_spider/frost      = 40
+	)
+	return spooders
+
 /obj/random/spider_nurse
 	name = "Random Nurse Spider"
 	desc = "This is a random nurse spider."

@@ -86,7 +86,7 @@
 		return FALSE
 	if (ishuman(target))
 		var/mob/living/human/H = target
-		if ((H.is_invisible_to(body)))
+		if (H.is_invisible_to(body))
 			lose_target()
 			return FALSE
 	if(body.next_move >= world.time)
@@ -107,18 +107,13 @@
 		lose_target()
 		return
 
-<<<<<<< HEAD
+	if(finding_position(target))
+		return
+
 	// TODO: update this to handle being ridden by an enemy we are not targeting; maybe update target to that mob prior to this block.
 	var/mob/living/target_mob = target
 	if(istype(target_mob) && (target in body.get_buckled_mobs()) && (!body.faction || target_mob.faction != body.faction))
 		body.visible_message(SPAN_DANGER("\The [body] attempts to unseat \the [target]!"))
-=======
-	if(finding_position(target))
-		return
-
-	if(isliving(target) && body.buckled_mob == target && (!body.faction || body.buckled_mob.faction != body.faction))
-		body.visible_message(SPAN_DANGER("\The [body] attempts to unseat \the [body.buckled_mob]!"))
->>>>>>> a60b438b36d (Implements simple_animal cloaking and integrates it into aggressive AI.)
 		body.set_dir(pick(global.cardinal))
 		body.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(prob(33))

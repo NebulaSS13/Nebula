@@ -85,7 +85,7 @@
 
 	// By default, simple mobs should attack slightly slower than players, allowing a suitably attentive
 	// player to dodge/kite if they're paying attention, and not letting themselves get cornered/incapacitated.
-	var/attack_delay = DEFAULT_ATTACK_COOLDOWN * 1.3
+	var/attack_delay = DEFAULT_ATTACK_COOLDOWN * 1.15
 
 	// Base percentage chance to hit in melee against another mob, if controlled by an AI.
 	var/telegraphed_melee_accuracy = 85
@@ -99,11 +99,12 @@
 	var/projectilesound
 	var/casingtype
 	var/fire_desc = "fires" //"X fire_desc at Y!"
-	var/ranged_range = 6 //tiles of range for ranged attackers to attack
+	var/ranged_range = 7 //tiles of range for ranged attackers to attack
 
 	// Associative list of colors to state modifiers to draw over the top of this creature's base icon.
 	var/list/draw_visible_overlays
 	var/eye_color
+
 
 	var/list/ability_handlers
 
