@@ -72,7 +72,12 @@
 
 	return 1
 
+/mob/living/simple_animal/proc/immune_to_damage_type(damage_type)
+	return FALSE
+
 /mob/living/simple_animal/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
+	if(damage > 0 && immune_to_damage_type(damage_type))
+		return
 	. = ..()
 	if((damage_type == BRUTE) && (damage_flags & (DAM_EDGE | DAM_SHARP | DAM_BULLET))) // damage flags that should cause bleeding
 		adjustBleedTicks(damage)
