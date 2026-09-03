@@ -32,7 +32,8 @@
 	if(updating_macros > 2) //Are we the only one in line?
 		updating_macros-- //No, dequeue and let them handle it.
 		return
-	//This isn't an UNTIL because we would rather this lag than deadlock.
+	//This isn't an UNTIL because the lock time should be relatively short,
+	//and we want this resolved as fast as possible (instead of waiting for stoplag()'s cycle time)
 	while(!(updating_macros == 1))
 		sleep(1)
 
