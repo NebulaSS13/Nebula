@@ -4,6 +4,8 @@
 	try_destroy_surroundings = TRUE
 	target_scan_distance = 10
 
+	var/socially_distancing = FALSE // If set, will try to stay 3 tiles away from the target.
+	var/ambusher = FALSE // If set, will avoid the enemy unless cloaked.
 	var/attack_same_faction = FALSE
 	var/only_attack_enemies = FALSE
 	var/break_stuff_probability = 10
@@ -26,14 +28,18 @@
 	if(isnull(stance))
 		set_stance(get_target() ? STANCE_ATTACK : STANCE_IDLE)
 
-	if(isturf(body.loc) && !body.buckled)
-		switch(stance)
+	if(ambusher && body.can_cloak() && !body.is_cloaked())
+		body.apply_cloak()
 
-			if(STANCE_IDLE)
-				if(do_target_scan())
-					set_target(find_target())
-					if(get_target())
-						set_stance(STANCE_ATTACK)
+	if(isturf(body.loc) && !body.buckled)
+
+		// Separate to main block so we don't waste an AI tick staring into space.
+		if(stance == STANCE_IDLE && do_target_scan())
+			set_target(find_target())
+			if(get_target())
+				set_stance(STANCE_ATTACK)
+
+		switch(stance)
 
 			if(STANCE_ATTACK)
 
@@ -77,7 +83,7 @@
 		return FALSE
 	if (ishuman(target))
 		var/mob/living/human/H = target
-		if (H.is_cloaked())
+		if ((H.is_invisible_to(body)))
 			lose_target()
 			return FALSE
 	if(body.next_move >= world.time)
@@ -98,6 +104,9 @@
 		lose_target()
 		return
 
+	if(finding_position(target))
+		return
+
 	if(isliving(target) && body.buckled_mob == target && (!body.faction || body.buckled_mob.faction != body.faction))
 		body.visible_message(SPAN_DANGER("\The [body] attempts to unseat \the [body.buckled_mob]!"))
 		body.set_dir(pick(global.cardinal))
@@ -108,21 +117,20 @@
 				to_chat(target, SPAN_DANGER("You are thrown off \the [body]!"))
 				var/mob/living/victim = target
 				SET_STATUS_MAX(victim, STAT_WEAK, 3)
-		return target
+		return
 
 	if(!body.Adjacent(target))
-		return target
+		return
 
 	// AI-driven mobs have a melee telegraph that needs to be handled here.
 	if(!body.do_attack_windup_checking(target))
-		return target
+		return
 
 	if(QDELETED(body) || body.incapacitated() || QDELETED(target))
-		return target
+		return
 
 	body.set_intent(I_FLAG_HARM)
 	body.ClickOn(target)
-	return target
 
 /datum/mob_controller/aggressive/destroy_surroundings()
 
@@ -212,17 +220,43 @@
 	if(HAS_STATUS(body, STAT_CONFUSE))
 		body.start_automove(pick(orange(2, body)))
 		return
+
 	stop_wandering()
+
 	var/atom/target = get_target()
 	if(!istype(target) || !attackable(target) || !(target in get_raw_target_list()))
 		lose_target()
 		return
-	if(body.has_ranged_attack() && get_dist(body, target) <= body.get_ranged_attack_distance() && !move_only)
+
+	if(finding_position(target))
+		return
+
+	if(body.has_ranged_attack(target) && !target.Adjacent(body) && get_dist(body, target) <= body.get_ranged_attack_distance() && !move_only)
 		body.stop_automove()
 		handle_ranged_target(target)
 		return
+
 	set_stance(STANCE_ATTACKING)
 	body.start_automove(target)
+
+// Flee until our cloak returns. Note that setting ambusher on a mob that can't cloak means it will flee forever.
+/datum/mob_controller/aggressive/proc/finding_position(atom/target)
+	if(!target)
+		return FALSE
+
+	var/run_away = FALSE
+	if(socially_distancing && get_dist(body, target) < 3 && body.has_ranged_attack(target))
+		run_away = TRUE
+	if(ambusher && !body.is_fully_cloaked())
+		run_away = TRUE
+
+	if(run_away)
+		var/static/datum/automove_metadata/_ambusher_flee_metadata = new(
+			_avoid_target = TRUE,
+			_acceptable_distance = 3
+		)
+		body.start_automove(target, metadata = _ambusher_flee_metadata)
+	return run_away
 
 /datum/mob_controller/aggressive/list_targets()
 	// Base hostile mobs will just destroy everything in view.
@@ -252,7 +286,7 @@
 			return FALSE
 		if(ishuman(M))
 			var/mob/living/human/H = M
-			if (H.is_cloaked())
+			if (H.is_invisible_to(body))
 				return FALSE
 	return TRUE
 
