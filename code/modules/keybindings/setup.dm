@@ -75,11 +75,14 @@
 		//This is to save time muching down this massive list, it might result in holes, it may be better to simply hardcode all these into the skin.
 		//I might try that one day, but that day is not today.
 		for(var/key in personal_macro_set) //We don't care about the bound key, just the key itself
-			if(!prefs.hotkeys && !SSinput.unprintables_cache[key]) //Track printable hotkeys and skip them.
+			var/keycode = replacetext(key, regex("(Alt|Shift|Ctrl)", "g"), "")
+			if(!length(keycode))
+				continue //Modifier-only keybind entry. We always those.
+			if(!prefs.hotkeys && !SSinput.unprintables_cache[keycode]) //Track printable hotkeys and skip them.
 				printables += key
 				continue
-			winset(src, "personal-\ref[key]", "parent=default;name=[key];command=\"KeyDown [key]\"")
-			winset(src, "personal-\ref[key]]-UP", "parent=default;name=[key]+UP;command=\"KeyUp [key]\"")
+			winset(src, "personal-\ref[keycode]", "parent=default;name=[keycode];command=\"KeyDown [keycode]\"")
+			winset(src, "personal-\ref[keycode]]-UP", "parent=default;name=[keycode]+UP;command=\"KeyUp [keycode]\"")
 
 
 	if(prefs.hotkeys)
