@@ -1,4 +1,5 @@
 #include "yacht_areas.dm"
+#include "../../../mods/mobs/spiders/_spiders.dme"
 
 /obj/effect/overmap/visitable/ship/yacht
 	name = "private yacht"

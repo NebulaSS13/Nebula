@@ -89,7 +89,7 @@
 "q" = (
 /obj/item/telebaton,
 /obj/item/seeds/random,
-/obj/effect/decal/cleanable/spiderling_remains,
+/obj/effect/decal/cleanable/spider_remains,
 /obj/structure/fireaxecabinet{
 	pixel_x = -32
 	},
@@ -121,7 +121,7 @@
 /turf/floor/lino,
 /area/template_noop)
 "w" = (
-/obj/effect/decal/cleanable/spiderling_remains,
+/obj/effect/decal/cleanable/spider_remains,
 /obj/effect/decal/cleanable/blood,
 /mob/living/simple_animal/hostile/giant_spider,
 /turf/floor/lino,
@@ -225,7 +225,7 @@
 /turf/floor/lino,
 /area/template_noop)
 "O" = (
-/obj/effect/decal/cleanable/spiderling_remains,
+/obj/effect/decal/cleanable/spider_remains,
 /turf/template_noop,
 /area/template_noop)
 "P" = (
