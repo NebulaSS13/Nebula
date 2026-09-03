@@ -114,6 +114,6 @@
 	name = "mandibles"
 	_base_attack_force = 25
 
-/mob/living/simple_animal/hostile/antlion/mega/Initialize()
-	. = ..()
-	set_scale(1.5)
+/mob/living/simple_animal/hostile/antlion/mega
+	icon_scale_x = 1.5
+	icon_scale_y = 1.5
