@@ -904,10 +904,10 @@
 	return
 
 /**
-	Get a list of alt interactions for a user from this atom.
+	Get a list of alt interaction paths for a user from this atom.
 
 	- `user`: The mob that these alt interactions are for
-	- Return: A list containing the alt interactions
+	- Return: A list containing the typepaths of alt interactions
 */
 /atom/proc/get_alt_interactions(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
