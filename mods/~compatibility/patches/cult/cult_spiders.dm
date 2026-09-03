@@ -1,0 +1,5 @@
+/decl/material/liquid/water/affect_holy(mob/living/M, removed, datum/reagents/holder)
+	. = ..()
+	if(. && prob(2))
+		var/obj/effect/spider/spiderling/spiderling = new(M.loc)
+		M.visible_message(SPAN_WARNING("\The [M] coughs up \the [spiderling]!"))

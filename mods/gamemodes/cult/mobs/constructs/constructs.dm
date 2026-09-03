@@ -148,7 +148,7 @@
 
 			return -1 // complete projectile permutation
 
-	return (..(P))
+	return ..(P)
 
 /mob/living/simple_animal/construct/armoured/mind_initialize()
 	..()

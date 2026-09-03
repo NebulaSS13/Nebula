@@ -13,5 +13,5 @@
 	. = ..()
 	for(var/datum/mob_modifier/modifier in modifiers)
 		var/atom/source = modifier.source?.resolve()
-		if(istype(source) && source.get_recursive_loc_of_type(/mob/living) != _owner)
+		if(istype(source) && source != _owner && source.get_recursive_loc_of_type(/mob/living) != _owner)
 			_owner.remove_mob_modifier(src, source = source)
