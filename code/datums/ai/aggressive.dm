@@ -83,7 +83,7 @@
 		return FALSE
 	if (ishuman(target))
 		var/mob/living/human/H = target
-		if ((H.is_invisible_to(body)))
+		if (H.is_invisible_to(body))
 			lose_target()
 			return FALSE
 	if(body.next_move >= world.time)
