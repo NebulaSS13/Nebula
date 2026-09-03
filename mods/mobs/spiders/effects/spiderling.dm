@@ -1,146 +1,7 @@
-//generic procs copied from obj/effect/alien
-/obj/effect/spider
-	name = "web"
-	desc = "It's stringy and sticky."
-	icon = 'icons/effects/effects.dmi'
-	anchored = TRUE
-	density = FALSE
-	max_health = 15
-
-//similar to weeds, but only barfed out by nurses manually
-/obj/effect/spider/explosion_act(severity)
-	..()
-	if(!QDELETED(src) && (severity == 1 || (severity == 2 && prob(50) || (severity == 3 && prob(5)))))
-		qdel(src)
-
-/obj/effect/spider/attack_hand(mob/user)
-	SHOULD_CALL_PARENT(FALSE)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(src)
-	if(prob(50))
-		visible_message(SPAN_WARNING("\The [user] tries to squash \the [src], but misses!"))
-		disturbed()
-		return TRUE
-	var/showed_msg = FALSE
-	if(ishuman(user))
-		var/mob/living/human/H = user
-		var/decl/natural_attack/attack = H.get_unarmed_attack(src)
-		if(istype(attack))
-			attack.show_attack(H, src, H.get_target_zone(), 1)
-			showed_msg = TRUE
-	if(!showed_msg)
-		visible_message(SPAN_DANGER("\The [user] squashes \the [src] flat!"))
-	die()
-	return TRUE
-
-/obj/effect/spider/attackby(var/obj/item/used_item, var/mob/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-
-	visible_message("<span class='warning'>\The [src] has been [used_item.pick_attack_verb()] with \the [used_item][(user ? " by [user]." : ".")]</span>")
-
-	var/damage = used_item.expend_attack_force(user) / 4
-
-	if(used_item.has_edge())
-		damage += 5
-
-	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
-
-		if(welder.weld(0, user))
-			damage = 15
-			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
-
-	current_health -= damage
-	healthcheck()
-	return TRUE
-
-/obj/effect/spider/bullet_act(var/obj/item/projectile/Proj)
-	..()
-	current_health -= Proj.get_structure_damage()
-	healthcheck()
-
-/obj/effect/spider/proc/healthcheck()
-	if(current_health <= 0)
-		qdel(src)
-
-/obj/effect/spider/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 300 + T0C)
-		current_health -= 5
-		healthcheck()
-	if(!QDELETED(src))
-		return ..()
-
-/obj/effect/spider/stickyweb
-	icon_state = "stickyweb1"
-
-/obj/effect/spider/stickyweb/Initialize()
-	. = ..()
-	if(prob(50))
-		icon_state = "stickyweb2"
-
-/obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-	if(istype(mover, /mob/living/simple_animal/hostile/giant_spider))
-		return 1
-	else if(isliving(mover))
-		if(prob(50))
-			to_chat(mover, "<span class='warning'>You get stuck in \the [src] for a moment.</span>")
-			return 0
-	else if(istype(mover, /obj/item/projectile))
-		return prob(30)
-	return 1
-
-/obj/effect/spider/eggcluster
-	name = "egg cluster"
-	desc = "They seem to pulse slightly with an inner life."
-	icon_state = "eggs"
-	var/amount_grown = 0
-
-/obj/effect/spider/eggcluster/Initialize(mapload, atom/parent)
-	. = ..()
-	color = parent?.color || color
-	pixel_x = rand(3,-3)
-	pixel_y = rand(3,-3)
-	START_PROCESSING(SSobj, src)
-
-/obj/effect/spider/eggcluster/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	if(istype(loc, /obj/item/organ/external))
-		var/obj/item/organ/external/O = loc
-		LAZYREMOVE(O.implants, src)
-	. = ..()
-
-/obj/effect/spider/eggcluster/Process()
-
-	if(!loc)
-		qdel(src)
-		return
-
-	if(prob(80))
-		amount_grown += rand(0,2)
-
-	if(amount_grown >= 100)
-		var/num = rand(3,9)
-		if(istype(loc, /obj/item/organ/external))
-			var/obj/item/organ/external/O = loc
-			for(var/i=0, i<num, i++)
-				LAZYADD(O.implants, new /obj/effect/spider/spiderling(O, src))
-		else
-			new /obj/effect/spider/spiderling(loc, src)
-		qdel(src)
-
-/obj/effect/spider/proc/disturbed()
-	return
-
-/obj/effect/spider/proc/die()
-	visible_message("<span class='alert'>[src] dies!</span>")
-	new /obj/effect/decal/cleanable/spiderling_remains(loc)
-	qdel(src)
-
 /obj/effect/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
-	icon = 'icons/mob/simple_animal/spider.dmi' // updated in Initialize()
+	icon = 'mods/mobs/spiders/icons/spider.dmi' // updated in Initialize()
 	icon_state = "lesser"
 	anchored = FALSE
 	layer = BELOW_OBJ_LAYER
@@ -152,17 +13,24 @@
 	var/travelling_in_vent = 0
 	var/dormant = FALSE    // If dormant, does not add the spiderling to the process list unless it's also growing
 	var/growth_chance = 50 // % chance of beginning growth, and eventually become a beautiful death machine
-
 	var/shift_range = 6
-	var/castes = list(/mob/living/simple_animal/hostile/giant_spider = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/guard = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/nurse = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/spitter = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/hunter = 1)
+
+/obj/effect/spider/spiderling/proc/get_castes()
+	var/static/list/castes = list(
+		/mob/living/simple_animal/hostile/giant_spider            = 2,
+		/mob/living/simple_animal/hostile/giant_spider/guard      = 2,
+		/mob/living/simple_animal/hostile/giant_spider/nurse      = 2,
+		/mob/living/simple_animal/hostile/giant_spider/spitter    = 2,
+		/mob/living/simple_animal/hostile/giant_spider/hunter     = 1
+	)
+	return castes
 
 /obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
-	greater_form = pickweight(castes)
-	icon = initial(greater_form.icon)
+	var/list/castes = get_castes()
+	if(!greater_form && length(castes))
+		greater_form = pickweight(castes)
+	if(ispath(greater_form))
+		icon = initial(greater_form.icon)
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)
 
@@ -299,7 +167,8 @@
 					break
 
 		if(amount_grown >= 100)
-			new greater_form(src.loc, src)
+			if(greater_form)
+				new greater_form(src.loc, src)
 			qdel(src)
 	else if(isorgan(loc))
 		if(!amount_grown) amount_grown = 1
@@ -322,27 +191,3 @@
 
 	if(amount_grown > 0)
 		amount_grown += rand(0,2)
-
-/obj/effect/decal/cleanable/spiderling_remains
-	name = "spiderling remains"
-	desc = "Green squishy mess."
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "greenshatter"
-	anchored = TRUE
-	layer = BLOOD_LAYER
-
-/obj/effect/spider/cocoon
-	name = "cocoon"
-	desc = "Something wrapped in silky spider web."
-	icon_state = "cocoon1"
-	max_health = 60
-
-/obj/effect/spider/cocoon/Initialize()
-	. = ..()
-	icon_state = pick("cocoon1","cocoon2","cocoon3")
-
-/obj/effect/spider/cocoon/Destroy()
-	src.visible_message("<span class='warning'>\The [src] splits open.</span>")
-	for(var/atom/movable/A in contents)
-		A.dropInto(loc)
-	return ..()
