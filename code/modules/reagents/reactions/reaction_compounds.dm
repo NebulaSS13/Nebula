@@ -192,3 +192,14 @@
 		/decl/material/liquid/oil/fish = 2,
 		/decl/material/solid/graphite  = 1
 	)
+
+/decl/chemical_reaction/compound/thermite
+	name = "Thermite"
+	result = /decl/material/liquid/thermite
+	required_reagents = list(
+		/decl/material/solid/metal/aluminium = 1,
+		/decl/material/solid/metal/iron = 1,
+		/decl/material/liquid/acetone = 1
+	)
+	result_amount = 3
+	mix_message = "The solution becomes a thick grey paste."

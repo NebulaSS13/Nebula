@@ -1057,6 +1057,7 @@
 #include "code\game\objects\effects\decals\Cleanable\humans.dm"
 #include "code\game\objects\effects\decals\Cleanable\misc.dm"
 #include "code\game\objects\effects\decals\Cleanable\robots.dm"
+#include "code\game\objects\effects\decals\Cleanable\thermite.dm"
 #include "code\game\objects\effects\decals\Cleanable\tracks.dm"
 #include "code\game\objects\effects\map_effect\_map_effect.dm"
 #include "code\game\objects\effects\map_effect\interval\_interval.dm"
