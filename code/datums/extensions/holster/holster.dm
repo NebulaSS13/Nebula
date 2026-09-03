@@ -206,7 +206,7 @@
 	for(var/obj/item/thing in accessories)
 		var/datum/extension/holster/holster = get_extension(thing, /datum/extension/holster)
 		if(holster?.holstered)
-			LAZYADD(., GET_DECL(/decl/interaction_handler/unholster_accessory))
+			LAZYADD(., /decl/interaction_handler/unholster_accessory)
 
 /obj/item/clothing/get_quick_interaction_handler(mob/user)
 	if(!(. = ..()))
