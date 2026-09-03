@@ -369,13 +369,6 @@
 /obj/item/box/animal_cubes/monkeys/WillContain()
 	return list(/obj/item/food/animal_cube/wrapped/monkey = 5)
 
-/obj/item/box/animal_cubes/spiders
-	name = "spiderling cube box"
-	desc = "Drymate brand spider cubes. WHY WOULD YOU ORDER THIS!?"
-
-/obj/item/box/animal_cubes/spiders/WillContain()
-	return list(/obj/item/food/animal_cube/wrapped/spider = 5)
-
 /obj/item/box/animal_cubes/carp
 	name = "space carp cube box"
 	desc = "Drymate brand carp cubes. Allergen information: May contain traces of pike."
