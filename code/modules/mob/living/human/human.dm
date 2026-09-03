@@ -813,7 +813,6 @@
 /mob/living/human/is_invisible_to(var/mob/viewer)
 	return (is_cloaked() || ..())
 
-
 /mob/living/human/proc/resuscitate()
 	if(!is_asystole() || !should_have_organ(BP_HEART))
 		return

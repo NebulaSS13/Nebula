@@ -17,11 +17,20 @@
 
 /obj/effect/spider/spiderling/proc/get_castes()
 	var/static/list/castes = list(
-		/mob/living/simple_animal/hostile/giant_spider            = 2,
-		/mob/living/simple_animal/hostile/giant_spider/guard      = 2,
-		/mob/living/simple_animal/hostile/giant_spider/nurse      = 2,
-		/mob/living/simple_animal/hostile/giant_spider/spitter    = 2,
-		/mob/living/simple_animal/hostile/giant_spider/hunter     = 1
+		/mob/living/simple_animal/hostile/giant_spider/hunter            = 4,
+		/mob/living/simple_animal/hostile/giant_spider/guard             = 3,
+		/mob/living/simple_animal/hostile/giant_spider/nurse             = 3,
+		/mob/living/simple_animal/hostile/giant_spider                   = 3,
+		/mob/living/simple_animal/hostile/giant_spider/ranged/electric   = 2,
+		/mob/living/simple_animal/hostile/giant_spider/frost             = 2,
+		/mob/living/simple_animal/hostile/giant_spider/lurker            = 2,
+		/mob/living/simple_animal/hostile/giant_spider/pepper            = 2,
+		/mob/living/simple_animal/hostile/giant_spider/ranged/spitter    = 2,
+		/mob/living/simple_animal/hostile/giant_spider/thermic           = 2,
+		/mob/living/simple_animal/hostile/giant_spider/tunneller         = 2,
+		/mob/living/simple_animal/hostile/giant_spider/ranged/webslinger = 2,
+		/mob/living/simple_animal/hostile/giant_spider/carrier           = 1,
+		/mob/living/simple_animal/hostile/giant_spider/volatile          = 1
 	)
 	return castes
 
@@ -191,3 +200,7 @@
 
 	if(amount_grown > 0)
 		amount_grown += rand(0,2)
+
+/obj/effect/spider/spiderling/frost
+	icon = /mob/living/simple_animal/hostile/giant_spider/frost::icon
+	greater_form = /mob/living/simple_animal/hostile/giant_spider/frost

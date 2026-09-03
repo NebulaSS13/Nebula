@@ -19,6 +19,9 @@
 		LAZYREMOVE(O.implants, src)
 	. = ..()
 
+/obj/effect/spider/eggcluster/frost
+	grown_type = /obj/effect/spider/spiderling/frost
+
 /obj/effect/spider/eggcluster/Process()
 
 	if(!loc)
