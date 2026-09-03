@@ -53,6 +53,7 @@
 	else
 		visible_message(SPAN_DANGER("\The [src] has been [O.pick_attack_verb()] by \the [user]!"))
 
+	remove_cloak()
 	if(istype(ai))
 		ai.retaliate(user)
 
