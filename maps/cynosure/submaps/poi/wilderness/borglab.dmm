@@ -1,0 +1,2254 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/random/maintenance,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"ab" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/rust,
+/obj/random/energy,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"ac" = (
+/obj/machinery/light/fixture{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/mob/living/human/frame/malf/ranged,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"ad" = (
+/obj/effect/floor_decal/sign/c,
+/turf/wall/concrete/reinforced,
+/area/cynosure_submap/BorgLab)
+"ae" = (
+/obj/effect/floor_decal/rust/mono_rusted3,
+/obj/random/maintenance/research,
+/mob/living/human/frame/malf/ranged/ionrifle,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"af" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust/mono_rusted3,
+/obj/effect/decal/cleanable/generic,
+/mob/living/simple_animal/hostile/malf_drone/lesser,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"ag" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/mob/living/human/frame/malf/melee/sword,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"ah" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/light/small/emergency,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/contraband,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"ai" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/decal/cleanable/dirt/visible,
+/mob/living/human/frame/malf/ranged,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"aj" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/random/energy/highend,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"ak" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/random/grenade/lethal,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"al" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/random/contraband,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"bj" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/brown,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"bz" = (
+/obj/random/trash,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"bE" = (
+/obj/structure/closet/secure_closet/chemical{
+	locked = 0
+	},
+/obj/item/box/pillbottles,
+/obj/item/box/syringes,
+/obj/item/screwdriver,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"bI" = (
+/obj/structure/window/reinforced,
+/obj/structure/grille/broken,
+/obj/item/shard{
+	pixel_y = 10
+	},
+/obj/item/shard{
+	pixel_x = 6
+	},
+/obj/effect/decal/cleanable/generic,
+/obj/machinery/door/blast/regular/open{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"bL" = (
+/turf/floor/dirt,
+/area/cynosure_submap/BorgLab)
+"bN" = (
+/obj/machinery/artifact_analyser,
+/obj/effect/floor_decal/rust/mono_rusted3,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"bY" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/loot_pile/surface/bones,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"cA" = (
+/obj/effect/floor_decal/sign/d,
+/turf/wall/concrete/reinforced,
+/area/cynosure_submap/BorgLab)
+"cC" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/structure/hygiene/sink{
+	dir = 4;
+	pixel_x = 11
+	},
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/BorgLab)
+"cZ" = (
+/obj/effect/floor_decal/techfloor/orange,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"dd" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"de" = (
+/obj/machinery/portable_atmospherics/powered/scrubber/huge,
+/obj/effect/floor_decal/rust,
+/obj/machinery/light/fixture,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"du" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"dK" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/blast/regular/open{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"dT" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"ej" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"eV" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/structure/table,
+/obj/structure/railing/mapped,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"fh" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/gibspawner/robot,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"ga" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/item/shard{
+	pixel_x = -3;
+	pixel_y = -6
+	},
+/obj/item/shard,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"gc" = (
+/obj/structure/railing/mapped{
+	dir = 1
+	},
+/obj/machinery/light/small/emergency{
+	dir = 8
+	},
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"gf" = (
+/obj/structure/table,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/item/cell/super/empty,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"gh" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/light/fixture{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"gN" = (
+/obj/structure/window/reinforced/tinted/frosted{
+	dir = 4
+	},
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"he" = (
+/obj/structure/window/reinforced{
+	dir = 4;
+	},
+/obj/structure/window/reinforced{
+	dir = 8;
+	},
+/obj/item/shard{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/obj/machinery/door/blast/regular{
+	dir = 8;
+	name = "Containment Door"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"hW" = (
+/obj/machinery/door/airlock/maintenance,
+/turf/floor/tiled/techmaint,
+/area/cynosure_submap/BorgLab)
+"ic" = (
+/obj/structure/window/reinforced/tinted/frosted{
+	dir = 4
+	},
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"if" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/single,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"ii" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/firealarm{
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"iS" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"iY" = (
+/obj/structure/loot_pile/maint/boxfort,
+/turf/floor/dirt,
+/area/cynosure_submap/BorgLab)
+"jf" = (
+/obj/effect/floor_decal/rust,
+/obj/random/trash,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"jz" = (
+/obj/machinery/light/small/emergency{
+	dir = 8
+	},
+/obj/effect/floor_decal/rust/color_rustedcee{
+	dir = 4
+	},
+/obj/machinery/button/blast_door{
+	dir = 8
+	},
+/turf/floor/tiled/dark,
+/area/cynosure_submap/BorgLab)
+"jR" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/item/salvage/energy/ionrifle,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"kj" = (
+/obj/effect/floor_decal/rust,
+/obj/random/junk,
+/obj/random/trash,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"kt" = (
+/obj/item/scanner/spectrometer/adv,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"kI" = (
+/obj/machinery/door/airlock/maintenance,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/techmaint,
+/area/cynosure_submap/BorgLab)
+"lz" = (
+/obj/machinery/light_switch,
+/turf/wall/concrete/reinforced,
+/area/cynosure_submap/BorgLab)
+"lJ" = (
+/obj/structure/hygiene/sink{
+	dir = 4;
+	pixel_x = 11
+	},
+/obj/machinery/light/small/emergency{
+	dir = 1
+	},
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"lU" = (
+/obj/machinery/chem_master,
+/obj/effect/floor_decal/rust/mono_rusted3,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"ma" = (
+/obj/effect/floor_decal/sign/b,
+/turf/wall/concrete/reinforced,
+/area/cynosure_submap/BorgLab)
+"mf" = (
+/obj/machinery/door/airlock/maintenance,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/techmaint,
+/area/cynosure_submap/BorgLab)
+"mi" = (
+/obj/structure/closet/radiation,
+/obj/random/maintenance,
+/obj/random/maintenance,
+/obj/random/maintenance,
+/obj/effect/floor_decal/rust/color_rustedcee,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"mw" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/random/rifle,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"mB" = (
+/obj/machinery/door/window/brigdoor/westright{
+	dir = 2;
+	name = "Containment Pen"
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/blast/regular{
+	dir = 8;
+	name = "Containment Door"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"mE" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/item/backpack/holding/duffle,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"nb" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"ne" = (
+/obj/machinery/door/window/brigdoor/westright{
+	dir = 1;
+	name = "Containment Pen"
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/blast/regular{
+	dir = 8;
+	name = "Containment Door"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"nk" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"ny" = (
+/obj/structure/curtain/open/shower,
+/obj/effect/floor_decal/borderfloor/cee{
+	dir = 4
+	},
+/obj/effect/floor_decal/rust,
+/obj/structure/hygiene/shower{
+	dir = 4;
+	pixel_x = 5
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"nW" = (
+/obj/effect/floor_decal/rust,
+/obj/structure/table,
+/obj/effect/floor_decal/rust/mono_rusted3,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"oa" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/item/shard{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"op" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/generic,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"pe" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/random/trash,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"pY" = (
+/obj/machinery/port_gen/pacman,
+/obj/structure/cable/blue{
+	icon_state = "0-2"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"qa" = (
+/obj/structure/table,
+/obj/item/food/monkeysdelight,
+/obj/effect/floor_decal/rust/mono_rusted2,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/BorgLab)
+"qW" = (
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"ra" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"rO" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/obj/item/shard{
+	pixel_x = 6
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"rP" = (
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
+	},
+/obj/random/junk,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"sr" = (
+/turf/floor/dirt,
+/area/template_noop)
+"sK" = (
+/obj/structure/closet/crate/secure,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"ta" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/brown,
+/obj/machinery/light/fixture{
+	dir = 8
+	},
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"th" = (
+/obj/effect/floor_decal/rust,
+/obj/structure/table,
+/obj/random/maintenance/research,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"tr" = (
+/obj/machinery/light/small/fixture{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister/phoron,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust/color_rustedfull,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"tx" = (
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"ty" = (
+/obj/effect/decal/cleanable/generic,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"tX" = (
+/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/decal/cleanable/generic,
+/obj/machinery/door/blast/regular/open{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"ub" = (
+/obj/effect/floor_decal/industrial/warning,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"ug" = (
+/obj/machinery/door/window/brigdoor/westright{
+	dir = 2;
+	name = "Containment Pen"
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/effect/decal/cleanable/generic,
+/obj/machinery/door/blast/regular/open{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"uQ" = (
+/obj/effect/gibspawner/human,
+/obj/random/trash,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"uU" = (
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"uX" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/closet/crate/secure,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"wq" = (
+/obj/structure/table,
+/obj/item/radio/phone,
+/obj/effect/floor_decal/rust/mono_rusted2,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/BorgLab)
+"wt" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/blast/regular{
+	dir = 8;
+	name = "Containment Door"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"xh" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/gibspawner/human,
+/obj/random/trash,
+/mob/living/simple_animal/hostile/malf_drone/lesser,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"xk" = (
+/obj/structure/sign/warning/caution,
+/turf/wall/concrete/reinforced,
+/area/cynosure_submap/BorgLab)
+"xu" = (
+/obj/machinery/artifact_scanpad,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust/mono_rusted3,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"xz" = (
+/obj/structure/bed,
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"xO" = (
+/obj/effect/decal/cleanable/generic,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"xU" = (
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"yq" = (
+/obj/structure/grille/broken,
+/obj/item/shard,
+/obj/machinery/door/blast/regular{
+	dir = 8;
+	name = "Containment Door"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"yz" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/item/shard{
+	pixel_x = -3;
+	pixel_y = -6
+	},
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"yB" = (
+/obj/random/trash,
+/mob/living/exosuit/premade/powerloader/autonomous,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"yI" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/mob/living/simple_animal/hostile/malf_drone/lesser,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"yR" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"ze" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/floor/dirt,
+/area/cynosure_submap/BorgLab)
+"zk" = (
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"As" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"AI" = (
+/mob/living/simple_animal/hostile/malf_drone/lesser,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Bl" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"Bq" = (
+/obj/random/trash,
+/mob/living/simple_animal/mechanical/mining_drone,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Cf" = (
+/obj/structure/table,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/effect/floor_decal/rust,
+/obj/item/stock_parts/circuitboard/apc,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Cz" = (
+/obj/item/stack/material/crystal/mapped/phoron/ten,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"CA" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"CS" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/gibspawner/robot,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"CX" = (
+/obj/structure/table,
+/obj/random/junk,
+/obj/random/trash,
+/obj/random/maintenance/research,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Dj" = (
+/obj/structure/table,
+/obj/item/chems/glass/beaker/large,
+/obj/item/chems/dropper,
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Dq" = (
+/turf/template_noop,
+/area/cynosure_submap/BorgLab)
+"Ds" = (
+/obj/effect/floor_decal/rust,
+/obj/structure/closet/firecloset/chief,
+/obj/effect/floor_decal/rust/color_rustedfull,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Dv" = (
+/obj/structure/hygiene/toilet,
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/BorgLab)
+"DF" = (
+/turf/template_noop,
+/area/template_noop)
+"DW" = (
+/obj/random/trash,
+/obj/random/maintenance/research,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Fj" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/item/shard{
+	pixel_y = 10
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Ft" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Fu" = (
+/obj/item/box/beakers,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Fv" = (
+/obj/structure/table,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/random/maintenance/research,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Gy" = (
+/obj/random/maintenance/research,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"Gz" = (
+/mob/living/simple_animal/mechanical/mining_drone,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"GA" = (
+/obj/machinery/door/airlock/maintenance,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"GC" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"GS" = (
+/obj/item/stack/material/ingot/mapped/gold/twentyfive,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Ic" = (
+/obj/random/trash,
+/mob/living/exosuit/premade/powerloader/autonomous,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Jd" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Jh" = (
+/obj/effect/floor_decal/rust,
+/obj/item/shard,
+/obj/effect/floor_decal/rust/mono_rusted3,
+/obj/random/trash,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Jm" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Jo" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/grille,
+/obj/item/shard{
+	pixel_y = 10
+	},
+/obj/item/shard{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/obj/machinery/door/blast/regular{
+	dir = 8;
+	name = "Containment Door"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Jp" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Jr" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"JZ" = (
+/obj/effect/floor_decal/industrial/warning/corner,
+/obj/structure/railing/mapped{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"KH" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced{
+	dir = 4;
+	},
+/obj/item/shard{
+	pixel_y = 10
+	},
+/obj/item/shard{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/obj/effect/decal/cleanable/generic,
+/obj/machinery/door/blast/regular/open{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Lr" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/grille/broken,
+/obj/item/shard{
+	pixel_x = -3;
+	pixel_y = -6
+	},
+/obj/item/shard{
+	pixel_y = 10
+	},
+/obj/machinery/door/blast/regular{
+	dir = 8;
+	name = "Containment Door"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Lz" = (
+/obj/structure/table,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/random/trash,
+/obj/random/maintenance/research,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"LB" = (
+/obj/item/stack/material/crystal/mapped/phoron/ten,
+/obj/random/toolbox,
+/obj/item/box/lights/mixed,
+/obj/random/maintenance/research,
+/obj/random/maintenance/research,
+/obj/random/maintenance/research,
+/obj/random/maintenance/research,
+/obj/item/stack/material/crystal/mapped/phoron/ten,
+/obj/structure/rack,
+/obj/random/toolbox,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"LC" = (
+/obj/effect/gibspawner/human,
+/mob/living/exosuit/premade/light/autonomous,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"MT" = (
+/obj/machinery/space_heater,
+/obj/effect/floor_decal/rust,
+/obj/machinery/light/small/emergency{
+	dir = 4
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Nb" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Nj" = (
+/obj/effect/floor_decal/rust,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Nq" = (
+/obj/effect/floor_decal/rust,
+/obj/item/shard,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Ns" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/gibspawner/robot,
+/obj/random/maintenance,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Nt" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/industrial/warning/corner,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Nv" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust/mono_rusted3,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"NB" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/item/shard{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"NC" = (
+/obj/structure/grille/broken,
+/obj/structure/window/reinforced{
+	dir = 4;
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/item/shard,
+/obj/item/shard{
+	pixel_y = 10
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Oq" = (
+/obj/effect/floor_decal/rust,
+/obj/random/trash,
+/obj/item/stack/material/crystal/mapped/phoron/ten,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Oz" = (
+/obj/item/gun/energy/plasmacutter,
+/obj/machinery/firealarm{
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/rust,
+/obj/item/shard,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"OD" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"OH" = (
+/obj/effect/wingrille_spawn/reinforced,
+/obj/machinery/door/blast/regular/open{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"OW" = (
+/obj/structure/table,
+/obj/item/flashlight/lamp,
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/item/salvage/energy/laserrifle,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Pf" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Qe" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/random/tool/power,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Qg" = (
+/turf/wall/natural,
+/area/template_noop)
+"Qn" = (
+/obj/structure/window/reinforced/tinted/frosted{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Qs" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/light/small/emergency,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"Qz" = (
+/obj/effect/floor_decal/rust,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"QW" = (
+/obj/structure/closet/l3closet/general,
+/obj/effect/floor_decal/rust,
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/obj/random/maintenance/research,
+/obj/random/maintenance/research,
+/obj/effect/floor_decal/rust/color_rustedcee,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Rt" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/random/maintenance/research,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"RG" = (
+/turf/wall/natural,
+/area/cynosure_submap/BorgLab)
+"RL" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Su" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/item/stack/material/puck/mapped/uranium/fifteen,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Sy" = (
+/obj/structure/windoor_assembly{
+	dir = 4
+	},
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"SG" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"SZ" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/structure/loot_pile/surface/bones,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Tj" = (
+/obj/structure/table,
+/obj/machinery/chemical_dispenser/full,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Tp" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Tv" = (
+/obj/effect/floor_decal/sign/a,
+/turf/wall/concrete/reinforced,
+/area/cynosure_submap/BorgLab)
+"TD" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"TN" = (
+/obj/structure/closet/l3closet/virology,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"TU" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"TW" = (
+/obj/effect/gibspawner/human,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Uj" = (
+/obj/structure/closet/firecloset/chief,
+/obj/effect/floor_decal/rust{
+	pixel_y = 1
+	},
+/obj/machinery/light/small/emergency{
+	dir = 1
+	},
+/obj/random/maintenance,
+/obj/random/maintenance/medical,
+/obj/effect/floor_decal/rust/color_rustedcee,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Uy" = (
+/obj/effect/floor_decal/rust,
+/obj/random/trash,
+/obj/random/maintenance/research,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Uz" = (
+/obj/structure/hygiene/shower{
+	dir = 1
+	},
+/obj/structure/curtain/open/shower,
+/obj/effect/floor_decal/borderfloorwhite/cee{
+	dir = 1
+	},
+/obj/item/soap,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/BorgLab)
+"UM" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"UV" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"UW" = (
+/obj/structure/window/reinforced{
+	dir = 4;
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/grille/broken,
+/obj/item/shard{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/obj/machinery/door/blast/regular/open{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Vc" = (
+/obj/effect/floor_decal/industrial/warning,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Vh" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Vr" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/obj/item/shard{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"VH" = (
+/obj/structure/cable/blue,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/item/frame/apc,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"VU" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Wh" = (
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/turf/floor/reinforced,
+/area/cynosure_submap/BorgLab)
+"Wq" = (
+/obj/effect/floor_decal/rust,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"WK" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/item/salvage/energy/laser_retro,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/mob/living/simple_animal/hostile/viscerator/mercenary,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"WQ" = (
+/turf/wall/concrete/reinforced,
+/area/cynosure_submap/BorgLab)
+"WR" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/industrial/warning/cee{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"XG" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust/mono_rusted3,
+/obj/effect/gibspawner/human,
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Yy" = (
+/obj/structure/table/steel,
+/obj/item/coin/phoron,
+/obj/item/toolbox/syndicate/powertools,
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/random/maintenance/research,
+/obj/random/maintenance/research,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"YD" = (
+/obj/effect/wingrille_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	dir = 8;
+	name = "Containment Door"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"YZ" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"Za" = (
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"Zc" = (
+/obj/structure/railing/mapped,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"Zn" = (
+/obj/item/measuring_tape,
+/turf/floor/concrete,
+/area/cynosure_submap/BorgLab)
+"Zq" = (
+/obj/machinery/door/window/brigdoor/westright{
+	dir = 1;
+	name = "Containment Pen"
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/effect/decal/cleanable/generic,
+/obj/machinery/door/blast/regular/open{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Zt" = (
+/obj/effect/wingrille_spawn/reinforced,
+/turf/floor/plating,
+/area/cynosure_submap/BorgLab)
+"Zy" = (
+/obj/effect/floor_decal/rust,
+/obj/effect/floor_decal/rust,
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+"ZO" = (
+/obj/effect/floor_decal/rust,
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/BorgLab)
+
+(1,1,1) = {"
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+sr
+DF
+sr
+Qg
+Qg
+Qg
+Qg
+Qg
+Qg
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+"}
+(2,1,1) = {"
+DF
+DF
+DF
+DF
+DF
+sr
+DF
+DF
+Qg
+Qg
+Qg
+Qg
+Qg
+Qg
+WQ
+WQ
+WQ
+Qg
+Qg
+sr
+DF
+sr
+DF
+DF
+DF
+"}
+(3,1,1) = {"
+DF
+Qg
+Qg
+sr
+sr
+Qg
+Qg
+Qg
+Qg
+Qg
+Qg
+WQ
+WQ
+WQ
+xk
+jz
+xk
+WQ
+Qg
+Qg
+DF
+DF
+DF
+sr
+DF
+"}
+(4,1,1) = {"
+DF
+sr
+Qg
+Qg
+Qg
+Qg
+WQ
+WQ
+WQ
+WQ
+WQ
+WQ
+Tj
+Dj
+Cf
+Rt
+xu
+WQ
+RG
+RG
+RG
+bL
+bL
+DF
+DF
+"}
+(5,1,1) = {"
+sr
+Qg
+Qg
+WQ
+WQ
+WQ
+WQ
+mi
+rP
+ta
+Ns
+Zt
+lU
+kj
+YZ
+Fu
+bN
+WQ
+RG
+RG
+RG
+bL
+Qg
+Qg
+DF
+"}
+(6,1,1) = {"
+Qg
+Qg
+Qg
+WQ
+pY
+VH
+WQ
+Uj
+Za
+gf
+ZO
+mf
+CA
+kt
+fh
+Zy
+de
+WQ
+RG
+RG
+RG
+bL
+Qg
+Qg
+DF
+"}
+(7,1,1) = {"
+Qg
+Qg
+Qg
+WQ
+tr
+TU
+WQ
+QW
+yI
+bj
+CA
+NC
+Nq
+dT
+Gy
+DW
+bE
+WQ
+RG
+RG
+iY
+bL
+bL
+Qg
+DF
+"}
+(8,1,1) = {"
+DF
+Qg
+Qg
+WQ
+Yy
+Oq
+GA
+Qn
+Sy
+ic
+gN
+WQ
+Oz
+Uy
+MT
+xU
+Zn
+WQ
+RG
+RG
+bL
+bL
+bL
+DF
+sr
+"}
+(9,1,1) = {"
+sr
+Qg
+Qg
+WQ
+LB
+Cz
+WQ
+Dv
+cC
+Uz
+WQ
+WQ
+hW
+Zt
+WQ
+qa
+wq
+WQ
+RG
+RG
+RG
+bL
+DF
+DF
+DF
+"}
+(10,1,1) = {"
+DF
+Qg
+Qg
+WQ
+WQ
+WQ
+WQ
+WQ
+WQ
+WQ
+WQ
+eV
+zk
+JZ
+WQ
+WQ
+WQ
+WQ
+WQ
+RG
+RG
+DF
+DF
+sr
+DF
+"}
+(11,1,1) = {"
+Qg
+Qg
+Qg
+Qg
+Qg
+WQ
+WQ
+aa
+jf
+Vc
+bI
+du
+uU
+ag
+YD
+Jd
+tx
+Su
+WQ
+WQ
+RG
+DF
+DF
+DF
+DF
+"}
+(12,1,1) = {"
+DF
+DF
+Qg
+Qg
+Qg
+WQ
+WQ
+xz
+LC
+Jp
+ug
+ej
+XG
+nb
+ne
+aj
+Ic
+Nj
+WQ
+WQ
+RG
+Qg
+DF
+DF
+DF
+"}
+(13,1,1) = {"
+DF
+DF
+Qg
+Qg
+Qg
+WQ
+WQ
+OW
+nk
+ab
+OH
+Pf
+nW
+YZ
+YD
+VU
+tx
+jR
+WQ
+WQ
+RG
+Qg
+DF
+DF
+DF
+"}
+(14,1,1) = {"
+DF
+DF
+DF
+Qg
+Qg
+WQ
+WQ
+WQ
+WQ
+WQ
+WQ
+gh
+Lz
+ah
+cA
+WQ
+WQ
+WQ
+WQ
+WQ
+RG
+Qg
+DF
+DF
+DF
+"}
+(15,1,1) = {"
+DF
+DF
+DF
+Qg
+Qg
+WQ
+WQ
+uX
+TW
+UV
+YD
+yR
+Fv
+Ft
+Lr
+Jd
+GS
+SZ
+WQ
+WQ
+RG
+DF
+DF
+DF
+DF
+"}
+(16,1,1) = {"
+DF
+DF
+DF
+DF
+Qg
+WQ
+WQ
+TD
+Gz
+Vc
+wt
+ra
+ae
+Jm
+ne
+RL
+Bq
+Nj
+WQ
+WQ
+RG
+Qg
+DF
+DF
+DF
+"}
+(17,1,1) = {"
+DF
+DF
+DF
+Qg
+Qg
+WQ
+WQ
+Nj
+uQ
+UM
+yq
+rO
+Jh
+YZ
+he
+op
+tx
+cZ
+WQ
+WQ
+RG
+Qg
+DF
+DF
+DF
+"}
+(18,1,1) = {"
+DF
+DF
+DF
+Qg
+Qg
+WQ
+WQ
+WQ
+WQ
+WQ
+WQ
+ii
+af
+ai
+ad
+WQ
+WQ
+WQ
+WQ
+WQ
+RG
+Qg
+DF
+DF
+DF
+"}
+(19,1,1) = {"
+DF
+DF
+DF
+Qg
+Qg
+WQ
+WQ
+mw
+TU
+Vc
+YD
+As
+ty
+dd
+UW
+ga
+bz
+ak
+WQ
+WQ
+RG
+Qg
+Qg
+DF
+DF
+"}
+(20,1,1) = {"
+DF
+DF
+DF
+DF
+Qg
+WQ
+WQ
+TD
+yB
+OD
+mB
+As
+CS
+oa
+dK
+Tp
+AI
+Nj
+WQ
+WQ
+RG
+Qg
+Qg
+DF
+DF
+"}
+(21,1,1) = {"
+DF
+DF
+DF
+Qg
+Qg
+WQ
+WQ
+bY
+tx
+Qe
+YD
+if
+CX
+Nb
+OH
+op
+tx
+mE
+WQ
+WQ
+RG
+Qg
+DF
+DF
+DF
+"}
+(22,1,1) = {"
+DF
+DF
+DF
+Qg
+Qg
+WQ
+WQ
+WQ
+WQ
+WQ
+WQ
+ac
+th
+Qs
+ma
+WQ
+WQ
+WQ
+WQ
+WQ
+RG
+RG
+DF
+DF
+DF
+"}
+(23,1,1) = {"
+sr
+DF
+Qg
+Qg
+Qg
+WQ
+WQ
+pe
+Wh
+yz
+Jo
+GC
+th
+Fj
+KH
+NB
+Nj
+Qz
+WQ
+WQ
+RG
+RG
+DF
+DF
+DF
+"}
+(24,1,1) = {"
+DF
+sr
+bL
+iY
+RG
+WQ
+WQ
+WK
+xO
+ub
+mB
+Vr
+Bl
+uU
+Zq
+op
+xh
+SZ
+WQ
+WQ
+RG
+RG
+DF
+DF
+DF
+"}
+(25,1,1) = {"
+DF
+DF
+bL
+bL
+RG
+WQ
+WQ
+Jr
+Wq
+ub
+YD
+iS
+YZ
+Vh
+tX
+Jd
+tx
+al
+WQ
+WQ
+RG
+RG
+bL
+DF
+sr
+"}
+(26,1,1) = {"
+DF
+DF
+Qg
+bL
+RG
+RG
+WQ
+WQ
+WQ
+WQ
+lz
+Nt
+Nv
+SG
+Tv
+WQ
+WQ
+WQ
+WQ
+RG
+RG
+bL
+bL
+DF
+DF
+"}
+(27,1,1) = {"
+DF
+Qg
+Qg
+bL
+Dq
+RG
+RG
+WQ
+WQ
+sK
+WQ
+WQ
+kI
+WQ
+WQ
+qW
+WQ
+WQ
+RG
+RG
+ze
+bL
+bL
+DF
+DF
+"}
+(28,1,1) = {"
+DF
+Qg
+Qg
+bL
+Dq
+Dq
+RG
+RG
+WQ
+WQ
+WQ
+ny
+YZ
+TN
+WQ
+WQ
+WQ
+RG
+RG
+RG
+bL
+bL
+Qg
+Qg
+DF
+"}
+(29,1,1) = {"
+DF
+Qg
+Qg
+Dq
+Dq
+bL
+Dq
+RG
+RG
+WQ
+WQ
+lJ
+WR
+Ds
+WQ
+WQ
+Qg
+Qg
+DF
+bL
+bL
+bL
+Qg
+Qg
+DF
+"}
+(30,1,1) = {"
+DF
+Qg
+Qg
+sr
+DF
+DF
+DF
+DF
+Qg
+Qg
+WQ
+WQ
+hW
+WQ
+WQ
+Qg
+DF
+DF
+sr
+DF
+DF
+Qg
+Qg
+Qg
+DF
+"}
+(31,1,1) = {"
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+WQ
+Zc
+uU
+gc
+WQ
+DF
+DF
+DF
+DF
+sr
+DF
+DF
+DF
+DF
+DF
+"}
+(32,1,1) = {"
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+sr
+sr
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+DF
+"}

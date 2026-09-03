@@ -27,7 +27,7 @@
 	body_temperature     = null
 	passive_temp_gain    = 5  // stabilize at ~80 C in a 20 C environment.
 	blood_volume         = 0
-	base_external_prosthetics_model = null
+	base_external_prosthetics_model = /decl/bodytype/prosthetic/basic_human
 
 	preview_outfit = null
 

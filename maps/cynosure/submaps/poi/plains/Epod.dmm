@@ -1,0 +1,265 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/template_noop,
+/area/cynosure_submap/Epod1)
+"c" = (
+/obj/item/stock_parts/circuitboard/airlock_electronics,
+/turf/template_noop,
+/area/cynosure_submap/Epod1)
+"d" = (
+/obj/structure/door_assembly/door_assembly_ext,
+/turf/template_noop,
+/area/cynosure_submap/Epod1)
+"e" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/cynosure_submap/Epod1)
+"f" = (
+/obj/structure/shuttle/engine/propulsion/burst{
+	dir = 1
+	},
+/turf/wall/shuttle,
+/area/cynosure_submap/Epod1)
+"g" = (
+/turf/floor/shuttle,
+/area/cynosure_submap/Epod1)
+"h" = (
+/turf/wall/shuttle,
+/area/cynosure_submap/Epod1)
+"i" = (
+/obj/structure/chair,
+/obj/item/radio/intercom{
+	dir = 4;
+	name = "Station Intercom (General)";
+	pixel_x = -22
+	},
+/obj/structure/emergency_dispenser{
+	pixel_x = 28
+	},
+/obj/item/fuelled_tool/welding,
+/turf/floor/shuttle,
+/area/cynosure_submap/Epod1)
+"j" = (
+/turf/floor/dirt,
+/area/cynosure_submap/Epod1)
+"k" = (
+/obj/structure/chair,
+/obj/machinery/vending/wallmed1{
+	name = "Emergency NanoMed";
+	pixel_x = 28;
+	pixel_y = 0
+	},
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/abstract/landmark/crashed_pod,
+/turf/floor/shuttle,
+/area/cynosure_submap/Epod1)
+"l" = (
+/obj/structure/chair,
+/obj/machinery/status_display{
+	density = 0;
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/obj/item/backpack/satchel,
+/obj/random/cash,
+/obj/random/cash,
+/obj/random/contraband,
+/turf/floor/shuttle,
+/area/cynosure_submap/Epod1)
+"m" = (
+/obj/structure/shuttle/window,
+/obj/structure/grille,
+/turf/floor/shuttle,
+/area/cynosure_submap/Epod1)
+"n" = (
+/obj/structure/flora/tree/dead,
+/turf/floor/dirt,
+/area/cynosure_submap/Epod1)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+b
+a
+"}
+(3,1,1) = {"
+a
+b
+e
+b
+b
+b
+b
+b
+e
+a
+"}
+(4,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+b
+a
+"}
+(5,1,1) = {"
+a
+b
+b
+b
+e
+b
+b
+b
+b
+a
+"}
+(6,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+b
+a
+"}
+(7,1,1) = {"
+a
+b
+b
+b
+b
+e
+b
+b
+b
+a
+"}
+(8,1,1) = {"
+a
+b
+b
+b
+j
+j
+j
+j
+b
+a
+"}
+(9,1,1) = {"
+a
+b
+b
+b
+j
+j
+j
+j
+b
+a
+"}
+(10,1,1) = {"
+a
+b
+f
+h
+h
+h
+h
+j
+e
+a
+"}
+(11,1,1) = {"
+a
+b
+g
+i
+k
+l
+m
+j
+j
+a
+"}
+(12,1,1) = {"
+a
+c
+f
+h
+h
+h
+h
+n
+j
+a
+"}
+(13,1,1) = {"
+a
+d
+b
+b
+j
+j
+j
+j
+b
+a
+"}
+(14,1,1) = {"
+a
+b
+b
+e
+j
+j
+j
+b
+e
+a
+"}
+(15,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

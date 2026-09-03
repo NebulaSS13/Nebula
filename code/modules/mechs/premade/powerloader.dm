@@ -30,6 +30,9 @@
 	install_system(new /obj/item/mech_equipment/drill/steel(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
 
+/mob/living/exosuit/premade/powerloader/autonomous
+	ai = /datum/mob_controller/aggressive
+
 /obj/item/mech_component/manipulators/powerloader
 	name = "exosuit arms"
 	exosuit_desc_string = "heavy-duty industrial lifters"
@@ -122,6 +125,9 @@
 /mob/living/exosuit/premade/firefighter
 	name = "firefighting exosuit"
 	desc = "A mix and match of industrial parts designed to withstand fires."
+
+/mob/living/exosuit/premade/firefighter/autonomous
+	ai = /datum/mob_controller/aggressive
 
 /mob/living/exosuit/premade/firefighter/Initialize()
 	if(!arms)

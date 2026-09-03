@@ -1,0 +1,170 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/wall/natural,
+/area/cynosure_submap/KururakDen)
+"c" = (
+/turf/floor/barren,
+/area/cynosure_submap/KururakDen)
+"d" = (
+/obj/random/sif/kururak,
+/turf/floor/barren,
+/area/cynosure_submap/KururakDen)
+"e" = (
+/mob/living/simple_mob/passive/kururak/leader,
+/turf/floor/barren,
+/area/cynosure_submap/KururakDen)
+"f" = (
+/obj/random/boulder,
+/turf/floor/barren,
+/area/cynosure_submap/KururakDen)
+"g" = (
+/obj/random/junk,
+/obj/random/medical/pillbottle,
+/turf/floor/barren,
+/area/cynosure_submap/KururakDen)
+"h" = (
+/obj/random/junk,
+/turf/floor/barren,
+/area/cynosure_submap/KururakDen)
+"i" = (
+/obj/random/powercell,
+/obj/random/unidentified_medicine/old_medicine,
+/obj/random/trash,
+/turf/floor/barren,
+/area/cynosure_submap/KururakDen)
+"j" = (
+/obj/random/humanoidremains,
+/obj/random/coin,
+/obj/random/contraband,
+/obj/random/random_projectile,
+/turf/floor/barren,
+/area/cynosure_submap/KururakDen)
+"P" = (
+/obj/random/sif/kururak,
+/obj/item/cell/mantid,
+/turf/floor/barren,
+/area/cynosure_submap/KururakDen)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+a
+b
+b
+b
+b
+a
+"}
+(3,1,1) = {"
+a
+a
+a
+b
+c
+h
+f
+b
+b
+a
+"}
+(4,1,1) = {"
+a
+a
+b
+b
+b
+d
+c
+P
+b
+a
+"}
+(5,1,1) = {"
+a
+a
+b
+b
+g
+c
+e
+j
+b
+a
+"}
+(6,1,1) = {"
+a
+b
+b
+f
+d
+c
+f
+b
+b
+a
+"}
+(7,1,1) = {"
+a
+b
+b
+b
+c
+i
+b
+b
+b
+a
+"}
+(8,1,1) = {"
+a
+a
+b
+b
+c
+b
+b
+a
+a
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(10,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

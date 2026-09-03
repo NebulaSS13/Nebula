@@ -1,0 +1,253 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/natural,
+/area/cynosure_submap/plainsdrake_den)
+"p" = (
+/obj/item/food/spider,
+/obj/effect/decal/cleanable/spiderling_remains,
+/turf/floor/barren,
+/area/cynosure_submap/plainsdrake_den)
+"u" = (
+/obj/structure/flora/bush/fullgrass,
+/turf/template_noop,
+/area/cynosure_submap/plainsdrake_den)
+"y" = (
+/obj/item/food/spider,
+/obj/random/helmet,
+/turf/floor/barren,
+/area/cynosure_submap/plainsdrake_den)
+"A" = (
+/obj/random/boulder,
+/turf/floor/barren,
+/area/cynosure_submap/plainsdrake_den)
+"B" = (
+/obj/item/stack/material/skin/mapped/chitin,
+/turf/floor/barren,
+/area/cynosure_submap/plainsdrake_den)
+"C" = (
+/turf/template_noop,
+/area/cynosure_submap/plainsdrake_den)
+"F" = (
+/obj/structure/flora/bush/sparsegrass,
+/turf/template_noop,
+/area/cynosure_submap/plainsdrake_den)
+"G" = (
+/turf/floor/barren,
+/area/cynosure_submap/plainsdrake_den)
+"J" = (
+/obj/structure/flora/bush/grassybush,
+/turf/template_noop,
+/area/cynosure_submap/plainsdrake_den)
+"O" = (
+/obj/random/contraband,
+/obj/random/junk,
+/turf/floor/barren,
+/area/cynosure_submap/plainsdrake_den)
+"Q" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/cynosure_submap/plainsdrake_den)
+"W" = (
+/obj/item/stack/material/skin/mapped/chitin,
+/obj/effect/decal/cleanable/spiderling_remains,
+/turf/floor/barren,
+/area/cynosure_submap/plainsdrake_den)
+"Z" = (
+/turf/floor/barren,
+/area/cynosure_submap/plainsdrake_den)
+
+(1,1,1) = {"
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+"}
+(2,1,1) = {"
+C
+C
+C
+a
+C
+C
+Q
+C
+C
+C
+C
+C
+C
+"}
+(3,1,1) = {"
+C
+u
+a
+a
+Z
+F
+C
+C
+C
+C
+C
+Q
+C
+"}
+(4,1,1) = {"
+C
+a
+a
+W
+Z
+Z
+a
+a
+a
+a
+C
+C
+C
+"}
+(5,1,1) = {"
+C
+a
+Z
+Z
+Z
+Z
+A
+a
+Z
+a
+a
+a
+C
+"}
+(6,1,1) = {"
+C
+a
+Z
+a
+a
+Z
+Z
+Z
+Z
+Z
+Z
+a
+C
+"}
+(7,1,1) = {"
+C
+Z
+Z
+Z
+Z
+Z
+Z
+a
+Z
+B
+Z
+Z
+Z
+"}
+(8,1,1) = {"
+Z
+Z
+a
+O
+B
+a
+p
+Z
+a
+a
+Z
+Z
+Z
+"}
+(9,1,1) = {"
+C
+a
+a
+a
+a
+a
+a
+Z
+Z
+a
+a
+Z
+a
+"}
+(10,1,1) = {"
+C
+J
+a
+C
+C
+a
+a
+G
+Z
+y
+a
+a
+a
+"}
+(11,1,1) = {"
+C
+C
+C
+C
+C
+u
+a
+a
+a
+a
+a
+a
+C
+"}
+(12,1,1) = {"
+C
+Q
+C
+C
+a
+C
+C
+C
+a
+a
+a
+C
+C
+"}
+(13,1,1) = {"
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+"}

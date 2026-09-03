@@ -1,0 +1,292 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementA)
+"c" = (
+/turf/wall/concrete{
+	can_open = 1
+	},
+/area/cynosure/maintenance/construction/d1/basementA)
+"h" = (
+/obj/item/remains/lizard,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"k" = (
+/obj/structure/window/basic{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/obj/random/powercell,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"m" = (
+/turf/template_noop,
+/area/template_noop)
+"n" = (
+/obj/structure/dogbed,
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"o" = (
+/obj/structure/window/basic{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/random/maintenance,
+/obj/random/vendor/drink,
+/obj/random/snack,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"p" = (
+/obj/structure/dogbed,
+/mob/living/simple_animal/lizard,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"u" = (
+/obj/structure/flora/pottedplant/overgrown,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"v" = (
+/obj/machinery/door/window/westright,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"w" = (
+/obj/structure/sign/poster{
+	dir = 8;
+	pixel_x = -32;
+	poster_design = /decl/poster_design/bay_19
+	},
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/basementA)
+"x" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"z" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"B" = (
+/obj/structure/dogbed,
+/mob/living/simple_animal/lizard,
+/obj/item/trash/sosjerky,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"E" = (
+/obj/structure/window/basic{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/structure/bedsheetbin,
+/obj/random/plushie,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"G" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"H" = (
+/obj/structure/chair/office/dark{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"I" = (
+/obj/item/chems/glass/bowl{
+	pixel_y = -6
+	},
+/obj/structure/hygiene/sink{
+	dir = 4;
+	pixel_x = -12;
+	pixel_y = -4
+	},
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"L" = (
+/obj/item/trash/sosjerky,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"M" = (
+/obj/structure/window/basic{
+	dir = 1
+	},
+/obj/machinery/disposal,
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"N" = (
+/obj/structure/chair/office/dark{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"O" = (
+/obj/machinery/light/small,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/basementA)
+"P" = (
+/obj/machinery/door/window/northleft,
+/obj/structure/window/basic{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"R" = (
+/obj/structure/disposalpipe/trunk,
+/obj/structure/disposaloutlet{
+	dir = 4
+	},
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"T" = (
+/obj/structure/window/basic{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/item/flashlight/lamp/green,
+/obj/item/paper_bin{
+	pixel_x = 1;
+	pixel_y = 9
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"U" = (
+/obj/item/toy/plushie/lizard,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"V" = (
+/obj/machinery/space_heater,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"W" = (
+/obj/machinery/apc/unlocked{
+	locked = 0;
+	name = "south bump";
+	operating = 0;
+	pixel_y = -24
+	},
+/obj/structure/cable,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"X" = (
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"Y" = (
+/obj/structure/dogbed,
+/mob/living/simple_animal/lizard,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementA)
+"Z" = (
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+V
+G
+I
+R
+M
+w
+z
+a
+"}
+(3,1,1) = {"
+a
+B
+X
+X
+X
+T
+H
+W
+a
+"}
+(4,1,1) = {"
+a
+n
+X
+U
+X
+k
+Z
+Z
+c
+"}
+(5,1,1) = {"
+a
+Y
+X
+X
+X
+o
+N
+O
+a
+"}
+(6,1,1) = {"
+a
+p
+L
+X
+h
+E
+Z
+u
+a
+"}
+(7,1,1) = {"
+a
+V
+X
+x
+X
+P
+v
+a
+a
+"}
+(8,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+m
+"}

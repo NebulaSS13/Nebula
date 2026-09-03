@@ -295,8 +295,17 @@ var/global/chicken_count = 0
 			icon = 'icons/mob/simple_animal/duck_brown.dmi'
 		if("mallard")
 			icon = 'icons/mob/simple_animal/duck_mallard.dmi'
+		if("crystal")
+			icon = 'icons/mob/simple_animal/duck_crystal.dmi'
 		else
 			icon = 'icons/mob/simple_animal/duck_white.dmi'
+
+/mob/living/simple_animal/fowl/duck/crystal
+	name = "crystal-feather duck"
+	desc = "A glittering flightless bird."
+	body_color = "crystal"
+	max_health = 50
+	glowing_eyes = TRUE
 
 /obj/item/food/egg
 	var/amount_grown = 0

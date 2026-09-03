@@ -72,3 +72,17 @@
 /obj/item/gun/magnetic/railgun/flechette/ascent/use_ammo()
 	var/obj/item/cell/cell = get_cell()
 	if(cell) cell.use(charge_per_shot)
+
+
+/obj/random/gun/random/ascent
+	name = "random Ascent projectile weapon"
+	icon = /obj/item/gun/energy/particle::icon
+	icon_state = /obj/item/gun/energy/particle::icon_state
+
+/obj/random/gun/random/ascent/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/gun/magnetic/railgun/flechette/ascent = 1,
+		/obj/item/gun/energy/particle                   = 10,
+		/obj/item/gun/energy/particle/small             = 25
+	)
+	return spawnable_choices

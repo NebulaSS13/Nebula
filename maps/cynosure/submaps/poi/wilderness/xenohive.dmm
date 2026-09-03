@@ -1,0 +1,1219 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ct" = (
+/obj/structure/girder,
+/obj/item/stack/material/sheet/mapped/steel,
+/obj/item/stack/material/sheet/mapped/steel,
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"cJ" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/XenoHive)
+"cP" = (
+/obj/machinery/optable,
+/obj/effect/decal/cleanable/blood,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"dG" = (
+/obj/effect/floor_decal/rust,
+/obj/structure/loot_pile/exosuit/combat,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"ec" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/mob/living/simple_animal/hostile/skathari/drone,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"ee" = (
+/obj/structure/grille/broken,
+/obj/item/shard/phoron,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/XenoHive)
+"eB" = (
+/obj/random/maintenance/security,
+/obj/random/sec,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"eY" = (
+/obj/structure/door/skathari,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"fz" = (
+/obj/structure/loot_pile/exosuit/combat,
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"fC" = (
+/obj/structure/door/skathari,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"fM" = (
+/turf/floor/dirt,
+/area/cynosure_submap/XenoHive)
+"fT" = (
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"fX" = (
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"go" = (
+/turf/floor/dirt,
+/area/template_noop)
+"gu" = (
+/obj/item/bodybag,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"hL" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"hQ" = (
+/obj/structure/salvage/bliss,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"iv" = (
+/obj/random/junk,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"jr" = (
+/obj/machinery/light/small,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"jK" = (
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"kg" = (
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"km" = (
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"kK" = (
+/obj/structure/table/steel_reinforced,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"lb" = (
+/obj/structure/bed/skathari,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"lD" = (
+/obj/effect/skathari/resin/wall,
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"lH" = (
+/obj/effect/skathari/resin/membrane,
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"mf" = (
+/mob/living/simple_animal/hostile/skathari/drone,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"mi" = (
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/random/tool/power,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"mV" = (
+/obj/structure/salvage/autolathe,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"mW" = (
+/obj/structure/grille,
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/XenoHive)
+"nd" = (
+/obj/random/maintenance/security,
+/obj/random/contraband,
+/obj/random/rifle,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"nG" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"nK" = (
+/obj/structure/door/skathari,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"nV" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"oC" = (
+/obj/machinery/light/small,
+/obj/structure/table/steel_reinforced,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"oY" = (
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"pk" = (
+/obj/machinery/floodlight,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"qe" = (
+/obj/structure/sign/warning/secure_area,
+/turf/wall/r_wall,
+/area/cynosure_submap/XenoHive)
+"rg" = (
+/obj/structure/girder/displaced,
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"rp" = (
+/turf/wall/natural,
+/area/cynosure_submap/XenoHive)
+"rB" = (
+/mob/living/simple_animal/hostile/skathari/drone,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"rW" = (
+/obj/random/maintenance/security,
+/obj/random/sec,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"tS" = (
+/obj/structure/table/steel_reinforced,
+/obj/random/maintenance,
+/obj/structure/noticeboard/anomaly,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"ut" = (
+/obj/structure/bed/skathari,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/XenoHive)
+"uH" = (
+/obj/structure/table,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"uI" = (
+/obj/structure/salvage/server,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"vG" = (
+/obj/machinery/door/airlock/highsecurity,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"vU" = (
+/obj/item/clothing/suit/armor/pcarrier/tan,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"wT" = (
+/obj/structure/table/steel_reinforced,
+/obj/structure/salvage/personal,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"ym" = (
+/obj/random/maintenance/security,
+/obj/random/scrapped_shotgun,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"yq" = (
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"yE" = (
+/obj/structure/door/skathari,
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"AC" = (
+/obj/effect/skathari/resin/wall,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"AK" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/firstaid/surgery,
+/obj/item/scanner/autopsy,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"Bf" = (
+/mob/living/simple_animal/hostile/skathari/drone,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/XenoHive)
+"Bk" = (
+/obj/structure/chair/office/dark{
+	dir = 8
+	},
+/obj/structure/loot_pile/surface/bones,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"Bv" = (
+/obj/random/obstruction,
+/turf/floor/dirt,
+/area/cynosure_submap/XenoHive)
+"BQ" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"BT" = (
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"Cx" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/stack/material/aerogel/mapped/tritium/fifty,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"Cy" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/XenoHive)
+"CF" = (
+/obj/structure/door/skathari,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"El" = (
+/obj/structure/table/steel_reinforced,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"Fc" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"FQ" = (
+/turf/wall/raidershuttle,
+/area/cynosure_submap/XenoHive)
+"Gt" = (
+/obj/structure/grille,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/XenoHive)
+"GO" = (
+/obj/structure/chair/office/dark{
+	dir = 1
+	},
+/obj/structure/loot_pile/surface/bones,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"GV" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/cell/mantid,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"Hb" = (
+/obj/structure/safe,
+/obj/item/organ/internal/augment/simple/armblade,
+/obj/item/organ/internal/kidneys/vox,
+/obj/item/organ/internal/eyes,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"Hg" = (
+/obj/random/contraband,
+/obj/random/maintenance/security,
+/obj/random/scrapped_smg,
+/obj/effect/decal/cleanable/blood,
+/obj/item/energy_blade/axe,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/XenoHive)
+"Ii" = (
+/obj/structure/rack,
+/obj/random/medical,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"Jm" = (
+/obj/structure/bed/skathari,
+/obj/item/toy/plushie/face_hugger,
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"Jn" = (
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/item/backpack/holding,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"JL" = (
+/obj/structure/bed/skathari,
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"KL" = (
+/obj/structure/bed/skathari,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"KM" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"Lc" = (
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"Lg" = (
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"Ln" = (
+/obj/effect/skathari/resin/wall,
+/turf/wall/r_wall,
+/area/cynosure_submap/XenoHive)
+"Lq" = (
+/obj/effect/skathari/resin/wall,
+/turf/wall/raidershuttle,
+/area/cynosure_submap/XenoHive)
+"LD" = (
+/obj/effect/gibspawner/human,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"LR" = (
+/obj/random/toolbox,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"LX" = (
+/obj/structure/foamedmetal,
+/turf/floor/dirt,
+/area/cynosure_submap/XenoHive)
+"Mt" = (
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"MN" = (
+/mob/living/simple_animal/hostile/skathari,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/XenoHive)
+"Nw" = (
+/mob/living/simple_animal/hostile/skathari,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"Nz" = (
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"NK" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"Oc" = (
+/obj/structure/rack,
+/obj/random/tech_supply,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"Ot" = (
+/obj/structure/bed/skathari,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"Ov" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/portable_destructive_analyzer,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"Pd" = (
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"Qn" = (
+/obj/structure/table/steel_reinforced,
+/obj/random/tool/power,
+/obj/random/powercell,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"QO" = (
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"Ri" = (
+/obj/effect/gibspawner/human,
+/obj/structure/grille/broken,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/XenoHive)
+"Rj" = (
+/turf/wall/r_wall,
+/area/cynosure_submap/XenoHive)
+"Rp" = (
+/obj/effect/skathari/resin/membrane,
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"RA" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/dirt,
+/area/cynosure_submap/XenoHive)
+"RG" = (
+/obj/structure/rack,
+/obj/random/maintenance/engineering,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"SB" = (
+/turf/floor/dirt,
+/area/cynosure_submap/XenoHive)
+"ST" = (
+/obj/structure/salvage/server,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"SU" = (
+/mob/living/simple_animal/hostile/skathari,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"TZ" = (
+/obj/structure/loot_pile/surface/bones,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/XenoHive)
+"Uv" = (
+/obj/effect/skathari/resin/wall,
+/turf/wall/r_wall,
+/area/cynosure_submap/XenoHive)
+"UJ" = (
+/obj/machinery/light/small/emergency{
+	dir = 8
+	},
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"UR" = (
+/turf/template_noop,
+/area/template_noop)
+"UV" = (
+/obj/structure/bed/roller,
+/obj/effect/decal/cleanable/blood,
+/obj/random/scrapped_gun,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"VG" = (
+/obj/item/organ/internal/stomach,
+/obj/item/organ/internal/kidneys,
+/obj/structure/closet/crate/freezer,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"VK" = (
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"VS" = (
+/obj/structure/rack,
+/obj/random/powercell,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"Wi" = (
+/mob/living/simple_animal/hostile/skathari,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"WG" = (
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"WR" = (
+/mob/living/simple_animal/hostile/skathari,
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"WU" = (
+/obj/structure/bed/skathari,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"Xc" = (
+/obj/structure/chair/office/dark{
+	dir = 4
+	},
+/turf/floor/tiled/dark,
+/area/cynosure_submap/XenoHive)
+"Xr" = (
+/obj/structure/door/skathari,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"Xs" = (
+/obj/structure/loot_pile/surface/bones,
+/turf/floor/tiled/white,
+/area/cynosure_submap/XenoHive)
+"XW" = (
+/turf/floor/plating,
+/area/cynosure_submap/XenoHive)
+"Yp" = (
+/obj/effect/gibspawner/human,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/XenoHive)
+"Yt" = (
+/mob/living/simple_animal/hostile/skathari/drone,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+"ZA" = (
+/obj/effect/decal/cleanable/vomit,
+/turf/floor/tiled,
+/area/cynosure_submap/XenoHive)
+
+(1,1,1) = {"
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+"}
+(2,1,1) = {"
+UR
+UR
+UR
+rp
+rp
+rp
+rp
+rp
+rp
+rp
+rp
+rp
+UR
+UR
+rp
+rp
+rp
+rp
+rp
+rp
+rp
+UR
+UR
+UR
+UR
+"}
+(3,1,1) = {"
+UR
+UR
+rp
+rp
+Rj
+Rj
+Rj
+Rj
+Rj
+Rj
+Rj
+Rj
+rp
+rp
+rp
+Rj
+Rj
+Rj
+Ln
+Ln
+rp
+rp
+rp
+UR
+UR
+"}
+(4,1,1) = {"
+UR
+rp
+rp
+Rj
+Rj
+Lq
+Lq
+Lq
+Lq
+Lq
+Lq
+Lq
+Rj
+rp
+Rj
+Rj
+AK
+cP
+uH
+Ln
+Ln
+rp
+rp
+UR
+UR
+"}
+(5,1,1) = {"
+UR
+rp
+rp
+Rj
+Lq
+Lq
+ut
+ut
+ut
+ut
+ut
+Lq
+Lq
+Ln
+Ln
+VG
+VK
+Pd
+lb
+Hb
+Ln
+Ln
+rp
+rp
+UR
+"}
+(6,1,1) = {"
+UR
+rp
+rp
+Rj
+Lq
+ut
+Yp
+Cy
+MN
+Cy
+MN
+ut
+Lq
+fz
+Ln
+nV
+Ot
+Pd
+mf
+Pd
+lb
+Ln
+rp
+rp
+UR
+"}
+(7,1,1) = {"
+UR
+rp
+rp
+Rj
+Lq
+Cy
+MN
+jK
+Lc
+jK
+Hg
+Cy
+Lq
+XW
+WU
+lb
+mf
+Pd
+Pd
+Pd
+lb
+Ln
+rp
+rp
+UR
+"}
+(8,1,1) = {"
+UR
+rp
+rp
+Rj
+Lq
+ut
+Cy
+Cy
+cJ
+Bf
+Cy
+ut
+Lq
+XW
+XW
+Pd
+Pd
+Pd
+lb
+WG
+Xs
+Ln
+rp
+rp
+UR
+"}
+(9,1,1) = {"
+UR
+rp
+rp
+Rj
+FQ
+FQ
+mW
+ee
+Ri
+TZ
+Gt
+Rp
+Lq
+JL
+Jm
+fT
+Ln
+km
+KL
+eB
+AC
+Ln
+rp
+rp
+UR
+"}
+(10,1,1) = {"
+UR
+rp
+rp
+Rj
+FQ
+Jn
+QO
+mi
+KM
+Pd
+Qn
+GV
+Lq
+lD
+Lg
+BT
+BT
+yq
+BT
+WU
+BT
+Ln
+rp
+rp
+UR
+"}
+(11,1,1) = {"
+UR
+rp
+rp
+Rj
+FQ
+tS
+rB
+nd
+VK
+VK
+Pd
+Pd
+yE
+XW
+lD
+El
+BT
+WU
+Xc
+BT
+Ov
+Rj
+rp
+rp
+UR
+"}
+(12,1,1) = {"
+UR
+rp
+rp
+Rj
+FQ
+wT
+GO
+VK
+lb
+Pd
+Pd
+lb
+Lq
+XW
+lH
+El
+BT
+Cx
+kK
+iv
+oC
+Rj
+rp
+rp
+UR
+"}
+(13,1,1) = {"
+UR
+rp
+rp
+Rj
+Rj
+FQ
+BQ
+Pd
+Pd
+ym
+lb
+Lq
+Lq
+XW
+lH
+hL
+BT
+BT
+Mt
+Mt
+mV
+Rj
+rp
+fM
+UR
+"}
+(14,1,1) = {"
+UR
+rp
+rp
+Rj
+Rj
+Rj
+Lq
+Lq
+Xr
+Lq
+Ln
+Lq
+WR
+XW
+Ln
+Ln
+Uv
+CF
+Uv
+Rj
+Rj
+Rj
+rp
+fM
+UR
+"}
+(15,1,1) = {"
+UR
+UR
+rp
+rp
+rp
+Rj
+Uv
+BT
+BT
+Wi
+Ln
+Ln
+XW
+Ln
+Ln
+Rj
+Mt
+BT
+BT
+Ln
+Ln
+rp
+fM
+UR
+UR
+"}
+(16,1,1) = {"
+UR
+rp
+rp
+rp
+Rj
+Rj
+nG
+Mt
+BT
+BT
+BT
+Ln
+fC
+Ln
+Rj
+UJ
+Mt
+Mt
+BT
+BT
+Ln
+Ln
+rp
+UR
+UR
+"}
+(17,1,1) = {"
+UR
+rp
+rp
+Rj
+Rj
+uI
+Mt
+uI
+Mt
+ST
+BT
+rW
+kg
+Ln
+pk
+Mt
+Nw
+ZA
+fX
+BT
+BT
+Ln
+qe
+rp
+UR
+"}
+(18,1,1) = {"
+UR
+rp
+rp
+Rj
+uI
+LR
+SU
+uI
+Mt
+uI
+BT
+BT
+BT
+eY
+Mt
+NK
+UV
+Rj
+KL
+BT
+BT
+vG
+RA
+fM
+UR
+"}
+(19,1,1) = {"
+UR
+rp
+rp
+Rj
+hQ
+Bk
+Mt
+uI
+LD
+uI
+Mt
+BT
+BT
+nK
+Mt
+Mt
+Ii
+Rj
+Yt
+BT
+BT
+vG
+SB
+RA
+go
+"}
+(20,1,1) = {"
+UR
+rp
+rp
+Rj
+Rj
+uI
+Mt
+uI
+Mt
+uI
+Mt
+uI
+ST
+Ln
+BT
+BT
+fX
+fX
+fX
+Mt
+BT
+Ln
+qe
+fM
+go
+"}
+(21,1,1) = {"
+UR
+rp
+rp
+rp
+Rj
+Rj
+ec
+Mt
+Mt
+Mt
+jr
+Rj
+Ln
+Ln
+Rj
+vU
+Nz
+oY
+Mt
+Fc
+Ln
+Ln
+rp
+rp
+UR
+"}
+(22,1,1) = {"
+UR
+UR
+rp
+rp
+rp
+Rj
+Rj
+Oc
+RG
+VS
+Rj
+Rj
+rp
+rp
+ct
+rg
+dG
+Nz
+gu
+Rj
+Ln
+rp
+rp
+rp
+UR
+"}
+(23,1,1) = {"
+UR
+UR
+UR
+rp
+rp
+rp
+Rj
+Rj
+Rj
+Rj
+Rj
+rp
+rp
+Bv
+LX
+Rj
+Rj
+Rj
+Rj
+Rj
+rp
+rp
+rp
+rp
+UR
+"}
+(24,1,1) = {"
+UR
+UR
+UR
+UR
+rp
+rp
+rp
+rp
+rp
+rp
+rp
+rp
+fM
+fM
+rp
+rp
+rp
+fM
+rp
+rp
+rp
+rp
+UR
+UR
+UR
+"}
+(25,1,1) = {"
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+UR
+"}

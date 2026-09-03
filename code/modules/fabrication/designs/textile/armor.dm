@@ -22,7 +22,7 @@
 	path = /obj/item/clothing/armor_attachment/plate/tactical
 
 /datum/fabricator_recipe/textiles/armor/plate/merc
-	path = /obj/item/clothing/armor_attachment/plate/merc
+	path = /obj/item/clothing/armor_attachment/plate/tactical
 
 /datum/fabricator_recipe/textiles/armor/plate/laserproof
 	path = /obj/item/clothing/armor_attachment/plate/laserproof

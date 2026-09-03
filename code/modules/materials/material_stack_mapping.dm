@@ -77,3 +77,6 @@ DEFINE_STACK_SUBTYPES(chipboard_walnut,   "walnut chipboard",          solid/org
 DEFINE_STACK_SUBTYPES(chipboard_yew,      "yew chipboard",             solid/organic/wood/chipboard/yew,      sheet,            null)
 
 DEFINE_STACK_SUBTYPES(phoron,             "phoron",                    solid/phoron,                          crystal,          null)
+
+/obj/item/stack/material/pane/mapped/glass/phoronglass/five
+/obj/item/stack/material/pane/mapped/glass/phoronrglass/five

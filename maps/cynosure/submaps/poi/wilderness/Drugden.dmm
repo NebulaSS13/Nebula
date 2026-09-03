@@ -1,0 +1,925 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/template_noop,
+/area/cynosure_submap/Drugd)
+"c" = (
+/turf/wall/natural,
+/area/cynosure_submap/Drugd)
+"d" = (
+/turf/wall/concrete,
+/area/cynosure_submap/Drugd)
+"e" = (
+/obj/machinery/door/airlock,
+/turf/floor,
+/area/cynosure_submap/Drugd)
+"f" = (
+/turf/floor/tiled,
+/area/cynosure_submap/Drugd)
+"g" = (
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled,
+/area/cynosure_submap/Drugd)
+"h" = (
+/obj/random/trash,
+/turf/floor/concrete,
+/area/cynosure_submap/Drugd)
+"i" = (
+/obj/structure/closet/cabinet,
+/obj/random/lipstick,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"j" = (
+/obj/structure/bed,
+/obj/item/bedsheet,
+/obj/structure/curtain/open/bed,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"k" = (
+/obj/structure/table/wood,
+/obj/item/chems/pill/happy{
+	name = "pill"
+	},
+/obj/random/medical/pillbottle,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"l" = (
+/turf/floor/concrete,
+/area/cynosure_submap/Drugd)
+"m" = (
+/obj/structure/curtain/black,
+/turf/floor/concrete,
+/area/cynosure_submap/Drugd)
+"n" = (
+/obj/random/trash,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"o" = (
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"p" = (
+/obj/item/remains/mouse,
+/turf/floor/concrete,
+/area/cynosure_submap/Drugd)
+"q" = (
+/obj/structure/closet/cabinet,
+/obj/random/maintenance,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"r" = (
+/obj/structure/table/wood,
+/obj/item/chems/pill/stimulants{
+	name = "pill"
+	},
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"s" = (
+/obj/structure/chair/comfy/beige{
+	dir = 1;
+	icon_state = "armchair_preview"
+	},
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"t" = (
+/obj/item/chems/pill/antidepressants{
+	name = "pill"
+	},
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"u" = (
+/obj/random/junk,
+/turf/floor/concrete,
+/area/cynosure_submap/Drugd)
+"v" = (
+/obj/structure/closet/cabinet,
+/obj/item/poster,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"w" = (
+/obj/structure/chair/comfy/beige,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"x" = (
+/obj/structure/table/wood,
+/obj/item/flashlight/lamp,
+/obj/item/chems/syringe/drugs,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"y" = (
+/obj/structure/chair/comfy/beige,
+/obj/item/chems/pill/antidepressants{
+	name = "pill"
+	},
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"z" = (
+/obj/structure/loot_pile/maint/junk,
+/turf/floor/concrete,
+/area/cynosure_submap/Drugd)
+"A" = (
+/obj/item/chems/pill/antidepressants{
+	name = "pill"
+	},
+/obj/item/chems/pill/antidepressants{
+	name = "pill"
+	},
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"B" = (
+/obj/structure/table,
+/obj/item/pill_bottle/happy,
+/obj/random/medical/pillbottle,
+/turf/floor/tiled,
+/area/cynosure_submap/Drugd)
+"C" = (
+/obj/structure/table,
+/obj/item/stack/medical/splint,
+/turf/floor/tiled,
+/area/cynosure_submap/Drugd)
+"D" = (
+/obj/structure/table,
+/obj/item/chems/pill/antidepressants,
+/obj/item/chems/pill/antidepressants,
+/turf/floor/tiled,
+/area/cynosure_submap/Drugd)
+"E" = (
+/obj/structure/table,
+/obj/random/medical,
+/turf/floor/tiled,
+/area/cynosure_submap/Drugd)
+"F" = (
+/obj/structure/closet/cabinet,
+/obj/item/clothing/suit/jacket,
+/obj/item/knife/folding/combat/switchblade,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"G" = (
+/obj/item/chems/pill/zoom{
+	name = "pill"
+	},
+/obj/random/trash,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"H" = (
+/obj/item/chems/pill/zoom{
+	name = "pill"
+	},
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"I" = (
+/obj/structure/loot_pile/maint/boxfort,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"J" = (
+/obj/structure/table,
+/obj/item/scalpel,
+/turf/floor/tiled,
+/area/cynosure_submap/Drugd)
+"K" = (
+/obj/item/wheelchair_kit,
+/turf/floor/tiled,
+/area/cynosure_submap/Drugd)
+"L" = (
+/obj/structure/table,
+/obj/random/firstaid,
+/turf/floor/concrete,
+/area/cynosure_submap/Drugd)
+"M" = (
+/obj/structure/loot_pile/maint/junk,
+/turf/floor/tiled,
+/area/cynosure_submap/Drugd)
+"N" = (
+/obj/effect/floor_decal/rust,
+/obj/structure/table,
+/obj/random/contraband,
+/turf/floor/tiled,
+/area/cynosure_submap/Drugd)
+"O" = (
+/obj/structure/table,
+/obj/item/chems/pill/zoom,
+/obj/item/chems/pill/zoom,
+/turf/floor/concrete,
+/area/cynosure_submap/Drugd)
+"P" = (
+/obj/structure/table/wood,
+/obj/item/chems/pill/strong_painkillers{
+	name = "pill"
+	},
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"Q" = (
+/mob/living/simple_animal/hostile/hivebot/melee/armored/guard,
+/turf/floor/concrete,
+/area/cynosure_submap/Drugd)
+"R" = (
+/obj/structure/girder,
+/turf/floor,
+/area/cynosure_submap/Drugd)
+"S" = (
+/obj/item/shard,
+/turf/floor/concrete,
+/area/cynosure_submap/Drugd)
+"T" = (
+/obj/structure/table/wood,
+/obj/item/flashlight/lamp,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"U" = (
+/obj/structure/table/wood,
+/obj/item/chems/syringe/drugs,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"V" = (
+/obj/structure/closet/cabinet,
+/obj/random/scrapped_gun,
+/obj/random/toy,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"W" = (
+/obj/structure/closet/cabinet,
+/obj/random/mre,
+/obj/random/medical/lite,
+/turf/floor/carpet,
+/area/cynosure_submap/Drugd)
+"Z" = (
+/obj/machinery/door/airlock,
+/turf/floor/concrete,
+/area/cynosure_submap/Drugd)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+c
+c
+c
+b
+b
+b
+b
+b
+b
+b
+a
+"}
+(3,1,1) = {"
+a
+b
+b
+b
+b
+b
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+b
+b
+b
+b
+b
+b
+a
+"}
+(4,1,1) = {"
+a
+b
+b
+b
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+b
+b
+a
+"}
+(5,1,1) = {"
+a
+b
+b
+b
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+b
+a
+"}
+(6,1,1) = {"
+a
+b
+b
+b
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+a
+"}
+(7,1,1) = {"
+a
+b
+b
+b
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+d
+d
+d
+d
+d
+d
+d
+c
+c
+c
+a
+"}
+(8,1,1) = {"
+a
+b
+b
+b
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+d
+B
+J
+N
+l
+R
+d
+c
+c
+c
+a
+"}
+(9,1,1) = {"
+a
+b
+b
+b
+b
+c
+c
+c
+c
+c
+c
+c
+c
+c
+d
+C
+K
+l
+Q
+l
+d
+c
+c
+c
+a
+"}
+(10,1,1) = {"
+a
+b
+b
+b
+b
+b
+c
+c
+c
+c
+c
+c
+c
+c
+d
+D
+g
+l
+l
+S
+d
+c
+c
+c
+a
+"}
+(11,1,1) = {"
+a
+b
+b
+b
+b
+b
+c
+c
+c
+c
+c
+c
+c
+c
+d
+E
+L
+O
+l
+l
+d
+c
+c
+b
+a
+"}
+(12,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+Z
+d
+d
+c
+c
+b
+a
+"}
+(13,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+d
+f
+g
+g
+p
+u
+l
+z
+l
+l
+h
+l
+l
+l
+c
+c
+b
+a
+"}
+(14,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+e
+f
+g
+l
+l
+l
+l
+l
+l
+f
+l
+l
+l
+u
+c
+c
+b
+a
+"}
+(15,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+d
+f
+h
+l
+l
+h
+l
+g
+f
+M
+g
+l
+h
+d
+c
+c
+b
+a
+"}
+(16,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+d
+d
+d
+m
+d
+d
+d
+m
+d
+d
+d
+m
+d
+d
+c
+c
+c
+a
+"}
+(17,1,1) = {"
+a
+b
+b
+b
+b
+b
+c
+c
+d
+i
+n
+q
+d
+v
+o
+F
+d
+V
+o
+W
+d
+c
+c
+c
+a
+"}
+(18,1,1) = {"
+a
+b
+b
+b
+b
+c
+c
+c
+d
+j
+o
+r
+d
+w
+o
+G
+d
+P
+o
+T
+d
+c
+c
+c
+a
+"}
+(19,1,1) = {"
+a
+b
+b
+b
+b
+c
+c
+c
+d
+k
+o
+s
+d
+x
+o
+H
+d
+w
+o
+U
+d
+c
+c
+c
+a
+"}
+(20,1,1) = {"
+a
+b
+b
+b
+b
+c
+c
+c
+d
+j
+o
+t
+d
+y
+A
+I
+d
+w
+o
+n
+d
+c
+c
+b
+a
+"}
+(21,1,1) = {"
+a
+b
+b
+b
+b
+c
+c
+c
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+c
+c
+c
+a
+"}
+(22,1,1) = {"
+a
+b
+b
+b
+b
+b
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+a
+"}
+(23,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+b
+a
+"}
+(24,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+b
+c
+c
+c
+c
+b
+b
+b
+b
+c
+c
+c
+c
+b
+b
+b
+a
+"}
+(25,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

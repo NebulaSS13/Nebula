@@ -56,3 +56,7 @@
 
 /mob/living/simple_animal/aquatic/fish/large/trout/river
 	name = "rainbow trout"
+
+/mob/living/simple_animal/aquatic/fish/large/perch
+	name = "perch"
+	icon = 'icons/mob/simple_animal/fish_trout.dmi'

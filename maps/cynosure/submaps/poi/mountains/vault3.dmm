@@ -1,0 +1,133 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/wall,
+/area/cynosure_submap/cave/vault3)
+"c" = (
+/obj/random/minevault,
+/turf/floor/plating,
+/area/cynosure_submap/cave/vault3)
+"d" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/floor/plating,
+/area/cynosure_submap/cave/vault3)
+"e" = (
+/mob/living/simple_animal/hostile/skathari/drone,
+/turf/floor/plating,
+/area/cynosure_submap/cave/vault3)
+"f" = (
+/turf/floor/plating,
+/area/cynosure_submap/cave/vault3)
+"g" = (
+/turf/floor/plating,
+/area/cynosure_submap/cave/vault3)
+"h" = (
+/mob/living/simple_animal/hostile/skathari/queen/empress/mother,
+/turf/floor/plating,
+/area/cynosure_submap/cave/vault3)
+"i" = (
+/obj/structure/bed/skathari,
+/turf/floor/plating,
+/area/cynosure_submap/cave/vault3)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+b
+b
+b
+b
+b
+a
+a
+"}
+(3,1,1) = {"
+a
+b
+b
+e
+g
+g
+b
+b
+a
+"}
+(4,1,1) = {"
+a
+b
+c
+f
+f
+f
+i
+b
+a
+"}
+(5,1,1) = {"
+a
+b
+d
+f
+h
+f
+g
+b
+a
+"}
+(6,1,1) = {"
+a
+b
+c
+f
+f
+f
+i
+b
+a
+"}
+(7,1,1) = {"
+a
+b
+b
+g
+g
+g
+b
+b
+a
+"}
+(8,1,1) = {"
+a
+a
+b
+b
+b
+b
+b
+a
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

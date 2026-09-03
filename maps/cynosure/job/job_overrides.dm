@@ -1,0 +1,146 @@
+/datum/job/standard/captain
+	access = list(
+		access_security,
+		access_sec_doors,
+		access_brig,
+		access_warden,
+		access_forensics_lockers,
+		access_heads,
+		access_medical,
+		access_engine,
+		access_change_ids,
+		access_ai_upload,
+		access_eva,
+		access_bridge,
+		access_all_personal_lockers,
+		access_maint_tunnels,
+		access_bar,
+		access_janitor,
+		access_construction,
+		access_morgue,
+		access_crematorium,
+		access_kitchen,
+		access_cargo,
+		access_cargo_bot,
+		access_mailsorting,
+		access_qm,
+		access_hydroponics,
+		access_lawyer,
+		access_chapel_office,
+		access_library,
+		access_research,
+		access_mining,
+		access_heads_vault,
+		access_mining_station,
+		access_hop,
+		access_RC_announce,
+		access_keycard_auth,
+		access_gateway
+	)
+	minimal_access = list(
+		access_security,
+		access_sec_doors,
+		access_brig,
+		access_warden,
+		access_forensics_lockers,
+		access_heads,
+		access_medical,
+		access_engine,
+		access_change_ids,
+		access_ai_upload,
+		access_eva,
+		access_bridge,
+		access_all_personal_lockers,
+		access_maint_tunnels,
+		access_bar,
+		access_janitor,
+		access_construction,
+		access_morgue,
+		access_crematorium,
+		access_kitchen,
+		access_cargo,
+		access_cargo_bot,
+		access_mailsorting,
+		access_qm,
+		access_hydroponics,
+		access_lawyer,
+		access_chapel_office,
+		access_library,
+		access_research,
+		access_mining,
+		access_heads_vault,
+		access_mining_station,
+		access_hop,
+		access_RC_announce,
+		access_keycard_auth,
+		access_gateway
+	)
+
+/datum/job/standard/bartender
+	access = list(
+		access_hydroponics,
+		access_bar,
+		access_kitchen
+	)
+	minimal_access = list(
+		access_bar
+	)
+
+/datum/job/standard/doctor
+	minimal_access = list(
+		access_medical,
+		access_medical_equip,
+		access_morgue,
+		access_surgery,
+		access_virology,
+		access_eva,
+		access_maint_tunnels,
+		access_external_airlocks
+	)
+
+/datum/job/standard/scientist
+	access = list(
+		access_robotics,
+		access_tox,
+		access_tox_storage,
+		access_research,
+		access_xenobiology,
+		access_xenoarch,
+		access_explorer,
+		access_xenofauna
+	)
+	minimal_access = list(
+		access_tox,
+		access_tox_storage,
+		access_research,
+		access_xenoarch,
+		access_xenobiology,
+		access_explorer,
+		access_xenofauna
+	)
+
+/datum/job/standard/warden
+	access = list(
+		access_security,
+		access_warden,
+		access_eva,
+		access_sec_doors,
+		access_brig,
+		access_armory,
+		access_maint_tunnels,
+		access_morgue,
+		access_emergency_storage,
+		access_external_airlocks
+	)
+	minimal_access = list(
+		access_security,
+		access_warden,
+		access_eva,
+		access_sec_doors,
+		access_brig,
+		access_armory,
+		access_maint_tunnels,
+		access_morgue,
+		access_emergency_storage,
+		access_external_airlocks
+	)

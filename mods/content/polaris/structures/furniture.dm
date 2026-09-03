@@ -1,36 +1,40 @@
-/obj/structure/drying_rack/sifwood
+/obj/structure/drying_rack/sif
 	material = /decl/material/solid/organic/wood/sif
 	color = /decl/material/solid/organic/wood/sif::color
 
-/obj/structure/chair/wood/wings/sifwood
+/obj/structure/chair/wood/wings/sif
 	material = /decl/material/solid/organic/wood/sif
 	color = /decl/material/solid/organic/wood/sif::color
 
-/obj/structure/door/sifwood
+/obj/structure/door/sif
 	material = /decl/material/solid/organic/wood/sif
 	color = /decl/material/solid/organic/wood/sif::color
 
-/obj/structure/table/sifwood
+/obj/structure/table/sif
 	material = /decl/material/solid/organic/wood/sif
 	color = /decl/material/solid/organic/wood/sif::color
 
-/obj/structure/table/bench/sifwood
+/obj/structure/table/bench/sif
 	material = /decl/material/solid/organic/wood/sif
 	color = /decl/material/solid/organic/wood/sif::color
 
-/obj/structure/table/bench/sifwood/padded
+/obj/structure/table/bench/sif/padded
 	icon_state = "padded_preview"
 	reinf_material = /decl/material/solid/organic/wood/sif
 	felted = TRUE
 
-/obj/structure/fire_source/firepit/sifwood/Initialize()
+/obj/structure/fire_source/firepit/sif/Initialize()
 	new /obj/item/stack/material/log/mapped/sif/fifteen(src)
 	. = ..()
 
-/obj/structure/boat/sifwood
+/obj/structure/boat/sif
 	material = /decl/material/solid/organic/wood/sif
 	color = /decl/material/solid/organic/wood/sif::color
 
-/obj/item/oar/sifwood
+/obj/structure/boat/dragon/sif
+	material = /decl/material/solid/organic/wood/sif
+	color = /decl/material/solid/organic/wood/sif::color
+
+/obj/item/oar/sif
 	material = /decl/material/solid/organic/wood/sif
 	color = /decl/material/solid/organic/wood/sif::color

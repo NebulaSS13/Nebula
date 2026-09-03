@@ -128,6 +128,14 @@
 /obj/item/clothing/head/winterhood/mining
 	icon = 'icons/clothing/head/hood_winter_mining.dmi'
 
+/obj/item/clothing/suit/jacket/winter/cosmic
+	name = "cosmic winter coat"
+	hood = /obj/item/clothing/head/winterhood/cosmic
+	icon = 'icons/clothing/suits/wintercoat/cosmic.dmi'
+
+/obj/item/clothing/head/winterhood/cosmic
+	icon = 'icons/clothing/head/hood_winter_cosmic.dmi'
+
 /obj/item/clothing/suit/jacket/winter/parka
 	name = "parka"
 	desc = "A heavy fur-lined jacket designed to keep you extra warm in sub-zero conditions."
@@ -146,3 +154,6 @@
 
 /obj/item/clothing/suit/jacket/winter/parka/purple
 	paint_color = COLOR_PURPLE
+
+/obj/item/clothing/suit/jacket/winter/parka/blue
+	paint_color = COLOR_BLUE_GRAY

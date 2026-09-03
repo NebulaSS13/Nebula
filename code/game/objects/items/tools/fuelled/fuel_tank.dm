@@ -143,3 +143,4 @@
 		var/gen_amount = ((world.time-last_gen)/25)
 		add_to_reagents(/decl/material/liquid/fuel, gen_amount)
 		last_gen = world.time
+

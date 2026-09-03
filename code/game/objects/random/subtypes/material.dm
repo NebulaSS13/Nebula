@@ -49,6 +49,7 @@
 		/obj/item/stack/material/gemstone/mapped/diamond/three,
 		/obj/item/stack/material/aerogel/mapped/deuterium/five,
 		/obj/item/stack/material/puck/mapped/uranium/five,
+		/obj/item/stack/material/crystal/mapped/phoron/five,
 		/obj/item/stack/material/ingot/mapped/silver/five,
 		/obj/item/stack/material/ingot/mapped/platinum/five,
 		/obj/item/stack/material/segment/mapped/mhydrogen/three,
@@ -88,6 +89,7 @@
 		/obj/structure/boulder/silver   = 65,
 		/obj/structure/boulder/gold     = 50,
 		/obj/structure/boulder/uranium  = 30,
+		/obj/structure/boulder/phoron   = 30,
 		/obj/structure/boulder/platinum = 15,
 		/obj/structure/boulder/lead     = 15,
 		/obj/structure/boulder/diamond  = 7

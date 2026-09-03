@@ -1,0 +1,171 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/wall/natural/ignore_mapgen,
+/area/cynosure_submap/FrostflyNest)
+"c" = (
+/obj/structure/boulder,
+/turf/floor/barren,
+/area/cynosure_submap/FrostflyNest)
+"d" = (
+/obj/random/medical/lite,
+/turf/floor/barren,
+/area/cynosure_submap/FrostflyNest)
+"e" = (
+/turf/floor/barren,
+/area/cynosure_submap/FrostflyNest)
+"f" = (
+/obj/structure/boulder,
+/turf/floor/barren,
+/area/cynosure_submap/FrostflyNest)
+"g" = (
+/obj/random/humanoidremains,
+/turf/floor/barren,
+/area/cynosure_submap/FrostflyNest)
+"h" = (
+/turf/floor/barren,
+/area/cynosure_submap/FrostflyNest)
+"i" = (
+/obj/random/medical/lite,
+/turf/floor/barren,
+/area/cynosure_submap/FrostflyNest)
+"j" = (
+/obj/random/humanoidremains,
+/obj/random/gun/random,
+/turf/floor/barren,
+/area/cynosure_submap/FrostflyNest)
+"k" = (
+/obj/random/medical/pillbottle,
+/turf/floor/barren,
+/area/cynosure_submap/FrostflyNest)
+"l" = (
+/obj/random/gun/random,
+/turf/floor/barren,
+/area/cynosure_submap/FrostflyNest)
+"x" = (
+/obj/random/boulder,
+/turf/floor/barren,
+/area/cynosure_submap/FrostflyNest)
+
+(1,1,1) = {"
+a
+a
+b
+b
+b
+b
+c
+b
+b
+a
+"}
+(2,1,1) = {"
+a
+b
+b
+b
+b
+b
+e
+b
+b
+b
+"}
+(3,1,1) = {"
+b
+b
+b
+b
+f
+k
+e
+b
+b
+b
+"}
+(4,1,1) = {"
+b
+b
+b
+h
+j
+e
+x
+b
+b
+b
+"}
+(5,1,1) = {"
+b
+b
+f
+i
+e
+e
+e
+g
+b
+b
+"}
+(6,1,1) = {"
+c
+e
+g
+e
+f
+g
+f
+b
+b
+b
+"}
+(7,1,1) = {"
+b
+b
+b
+d
+e
+e
+l
+b
+b
+b
+"}
+(8,1,1) = {"
+b
+b
+b
+b
+x
+b
+b
+b
+b
+a
+"}
+(9,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+b
+a
+"}
+(10,1,1) = {"
+a
+a
+b
+b
+b
+b
+b
+a
+a
+a
+"}

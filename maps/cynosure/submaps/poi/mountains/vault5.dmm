@@ -1,0 +1,152 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/effect/skathari/resin/wall,
+/turf/floor/barren,
+/area/cynosure_submap/cave/vault5)
+"c" = (
+/obj/structure/door/skathari,
+/turf/floor/barren,
+/area/cynosure_submap/cave/vault5)
+"d" = (
+/obj/structure/bed/skathari,
+/obj/random/sidearm,
+/turf/floor/barren,
+/area/cynosure_submap/cave/vault5)
+"e" = (
+/turf/floor/barren,
+/area/cynosure_submap/cave/vault5)
+"f" = (
+/obj/item/clothing/suit/armor/pcarrier/tactical,
+/turf/floor/barren,
+/area/cynosure_submap/cave/vault5)
+"g" = (
+/obj/structure/bed/skathari,
+/turf/floor/barren,
+/area/cynosure_submap/cave/vault5)
+"h" = (
+/obj/random/minevault,
+/mob/living/simple_animal/hostile/skathari,
+/turf/floor/barren,
+/area/cynosure_submap/cave/vault5)
+"i" = (
+/obj/structure/insectoid_egg,
+/turf/floor/barren,
+/area/cynosure_submap/cave/vault5)
+"j" = (
+/mob/living/simple_animal/hostile/skathari/queen/empress,
+/turf/floor/barren,
+/area/cynosure_submap/cave/vault5)
+"k" = (
+/obj/random/rifle,
+/obj/random/helmet,
+/turf/floor/barren,
+/area/cynosure_submap/cave/vault5)
+"V" = (
+/obj/random/minevault,
+/mob/living/simple_animal/hostile/skathari,
+/obj/random/gun/random/ascent,
+/turf/floor/barren,
+/area/cynosure_submap/cave/vault5)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+b
+b
+b
+b
+b
+a
+a
+"}
+(3,1,1) = {"
+a
+b
+b
+g
+i
+h
+b
+b
+a
+"}
+(4,1,1) = {"
+a
+b
+d
+e
+e
+e
+k
+b
+a
+"}
+(5,1,1) = {"
+a
+c
+e
+e
+j
+e
+e
+c
+a
+"}
+(6,1,1) = {"
+a
+b
+f
+e
+e
+e
+g
+b
+a
+"}
+(7,1,1) = {"
+a
+b
+b
+V
+i
+g
+b
+b
+a
+"}
+(8,1,1) = {"
+a
+a
+b
+b
+b
+b
+b
+a
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

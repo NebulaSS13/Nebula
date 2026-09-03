@@ -1,0 +1,703 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ae" = (
+/obj/structure/railing/mapped,
+/obj/item/bone,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"cR" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"dq" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/structure/fire_source/firepit/sif,
+/turf/floor/grass/sif,
+/area/cynosure_submap/priderock)
+"dD" = (
+/obj/random/junk,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"fL" = (
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/obj/structure/cliff/automatic{
+	dir = 8
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"hI" = (
+/obj/structure/table/wood,
+/turf/floor/grass/sif,
+/area/cynosure_submap/priderock)
+"ik" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"jM" = (
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/obj/item/towel/random,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"md" = (
+/obj/random/trash,
+/turf/template_noop,
+/area/cynosure_submap/priderock)
+"nG" = (
+/obj/structure/railing/mapped,
+/obj/random/junk,
+/obj/item/bone/ribs,
+/obj/item/bone/skull,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"nV" = (
+/obj/item/stack/material/log/mapped/sif,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"qh" = (
+/obj/structure/cliff/automatic{
+	dir = 8
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"qP" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"qY" = (
+/obj/structure/cliff/automatic{
+	dir = 9
+	},
+/obj/structure/railing/mapped{
+	dir = 1
+	},
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"sr" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/grass/sif,
+/area/cynosure_submap/priderock)
+"uv" = (
+/obj/structure/cliff/automatic/ramp,
+/obj/structure/railing/mapped{
+	dir = 4
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"uG" = (
+/turf/floor/rock,
+/area/cynosure_submap/priderock)
+"wU" = (
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"xE" = (
+/obj/structure/closet/crate/bin,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"yi" = (
+/obj/structure/cliff/automatic/ramp{
+	dir = 9
+	},
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"yI" = (
+/obj/structure/cliff/automatic{
+	dir = 4
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"An" = (
+/obj/structure/railing/mapped,
+/obj/random/humanoidremains,
+/obj/random/humanoidremains,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"As" = (
+/obj/structure/closet/crate,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/cargo,
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/obj/random/medical,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Bf" = (
+/obj/random/trash,
+/obj/random/trash,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Bv" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"BB" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/cynosure_submap/priderock)
+"Dg" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Dx" = (
+/obj/structure/cliff/automatic/corner{
+	dir = 9
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"DU" = (
+/obj/structure/cliff/automatic/corner,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Ff" = (
+/obj/structure/cliff/automatic{
+	dir = 8
+	},
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Fg" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Fo" = (
+/obj/structure/cliff/automatic{
+	dir = 4
+	},
+/obj/structure/railing/mapped{
+	dir = 4
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"FO" = (
+/obj/random/junk,
+/turf/floor/grass/sif,
+/area/cynosure_submap/priderock)
+"Gk" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/structure/table/bench/wooden,
+/turf/floor/grass/sif,
+/area/cynosure_submap/priderock)
+"Hw" = (
+/obj/random/trash,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"If" = (
+/obj/structure/chair,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Ix" = (
+/obj/structure/cliff/automatic{
+	dir = 10
+	},
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Jk" = (
+/turf/floor/grass/sif,
+/area/cynosure_submap/priderock)
+"Lm" = (
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/item/bone/skull/tajaran,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Lo" = (
+/obj/structure/cliff/automatic{
+	dir = 2
+	},
+/obj/structure/railing/mapped,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"LK" = (
+/obj/structure/cliff/automatic,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Mg" = (
+/obj/structure/cliff/automatic{
+	dir = 2
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Oc" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Od" = (
+/obj/structure/cliff/automatic/corner{
+	dir = 10
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Pb" = (
+/obj/item/backpack/dufflebag/syndie/med,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Pn" = (
+/obj/structure/table/bench/wooden,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"PW" = (
+/obj/random/tool,
+/obj/random/tool,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Si" = (
+/obj/structure/cliff/automatic{
+	dir = 6
+	},
+/obj/structure/railing/mapped{
+	dir = 4
+	},
+/obj/structure/railing/mapped,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"SE" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/rock,
+/area/cynosure_submap/priderock)
+"Tb" = (
+/obj/structure/railing/mapped,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Td" = (
+/obj/structure/cliff/automatic{
+	dir = 10
+	},
+/obj/structure/railing/mapped,
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Ud" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/junk,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"UG" = (
+/obj/vehicle/train/engine/quadbike/random{
+	desc = "A rideable electric ATV designed for all terrain. Looks very worn down.";
+	locked = 1;
+	name = "Old looking ATV"
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"VF" = (
+/obj/structure/cliff/automatic{
+	dir = 5
+	},
+/obj/structure/railing/mapped{
+	dir = 1
+	},
+/obj/structure/railing/mapped{
+	dir = 4
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"VM" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/template_noop,
+/area/cynosure_submap/priderock)
+"Wk" = (
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Xd" = (
+/obj/structure/cliff/automatic,
+/obj/structure/railing/mapped{
+	dir = 1
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"XN" = (
+/obj/item/clothing/head/bearpelt,
+/obj/item/binoculars,
+/turf/floor/rock,
+/area/cynosure_submap/priderock)
+"Yd" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"YP" = (
+/turf/floor/rock,
+/area/cynosure_submap/priderock)
+"Zc" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/priderock)
+"Zm" = (
+/turf/template_noop,
+/area/cynosure_submap/priderock)
+"ZA" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/grass/sif,
+/area/cynosure_submap/priderock)
+"ZJ" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/grass/sif,
+/area/cynosure_submap/priderock)
+"ZO" = (
+/obj/structure/table/wood,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/plushie,
+/turf/floor/grass/sif,
+/area/cynosure_submap/priderock)
+
+(1,1,1) = {"
+Zm
+Zm
+Zm
+Wk
+Wk
+Zm
+Zm
+Zm
+Zm
+Hw
+Zm
+Zm
+Zm
+Wk
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+"}
+(2,1,1) = {"
+Zm
+Zm
+Zm
+BB
+Zm
+Wk
+Wk
+Wk
+Fo
+Fo
+Fo
+Fo
+yI
+Fo
+DU
+Wk
+md
+Zm
+Zm
+Zm
+"}
+(3,1,1) = {"
+Zm
+Zm
+Oc
+Wk
+Zm
+UG
+Wk
+Tb
+Pb
+FO
+YP
+Wk
+SE
+Oc
+Xd
+Wk
+md
+Zm
+Zm
+Zm
+"}
+(4,1,1) = {"
+Zm
+Wk
+uv
+Fo
+Fo
+DU
+YP
+Tb
+FO
+SE
+qY
+fL
+Td
+SE
+Xd
+Wk
+VM
+Zm
+Zm
+Zm
+"}
+(5,1,1) = {"
+qP
+sr
+qP
+Fg
+ZJ
+Xd
+Wk
+Tb
+wU
+Zc
+Xd
+YP
+ae
+Yd
+Xd
+Zm
+Wk
+Wk
+Zm
+Zm
+"}
+(6,1,1) = {"
+Zm
+Wk
+ZJ
+Fg
+qP
+LK
+YP
+Tb
+YP
+ZJ
+LK
+Wk
+nG
+YP
+VF
+yI
+Fo
+DU
+Wk
+Zm
+"}
+(7,1,1) = {"
+Zm
+Wk
+yi
+Ix
+ZJ
+LK
+YP
+Tb
+Jk
+SE
+Xd
+YP
+An
+Wk
+YP
+uG
+XN
+LK
+Wk
+Zm
+"}
+(8,1,1) = {"
+Zm
+Zm
+Bf
+Lo
+Oc
+Xd
+YP
+Tb
+wU
+Dg
+Xd
+YP
+Lm
+Ff
+qh
+Ff
+Ff
+Dx
+Wk
+Wk
+"}
+(9,1,1) = {"
+Zm
+Zm
+Zm
+Lo
+Oc
+VF
+yI
+Si
+Jk
+ik
+VF
+Fo
+Fo
+DU
+Zm
+Hw
+Zm
+Wk
+Zm
+Zm
+"}
+(10,1,1) = {"
+Zm
+Oc
+Zm
+Mg
+ZJ
+Oc
+Wk
+nV
+ZJ
+ZJ
+Wk
+Jk
+As
+Xd
+Zm
+Hw
+Wk
+Zm
+Zm
+Zm
+"}
+(11,1,1) = {"
+Zm
+Zm
+Zm
+Lo
+qP
+ZA
+Oc
+ZJ
+ZJ
+Oc
+FO
+Jk
+Wk
+LK
+Wk
+VM
+Zm
+Zm
+Zm
+Zm
+"}
+(12,1,1) = {"
+Zm
+Wk
+Zm
+Mg
+ZJ
+Ud
+Oc
+ZJ
+ZA
+If
+hI
+cR
+Wk
+Xd
+Zm
+Zm
+Wk
+Zm
+Zm
+Zm
+"}
+(13,1,1) = {"
+Zm
+Zm
+Bv
+Lo
+Pn
+dq
+Gk
+Oc
+ZJ
+If
+ZO
+cR
+Jk
+Xd
+Wk
+VM
+BB
+Zm
+Zm
+Zm
+"}
+(14,1,1) = {"
+Zm
+Zm
+Zm
+Lo
+PW
+Wk
+Oc
+Jk
+xE
+Jk
+jM
+dD
+Wk
+Xd
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+"}
+(15,1,1) = {"
+Zm
+Zm
+Zm
+Od
+Ff
+qh
+Ff
+Ff
+Ff
+Ff
+Ff
+qh
+Ff
+Dx
+Wk
+Zm
+Zm
+Zm
+Zm
+Zm
+"}

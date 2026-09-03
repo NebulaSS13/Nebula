@@ -652,3 +652,20 @@
 		/obj/item/trash/mollusc_shell                        = 1
 	)
 	return spawnable_choices
+
+/obj/random/humanoidremains
+	name = "Random Humanoid Remains"
+	desc = "This is a random pile of remains."
+	icon = 'icons/effects/blood.dmi'
+	icon_state = "remains"
+	spawn_nothing_percentage = 15
+
+/obj/random/humanoidremains/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/remains/human   = 30,
+		/obj/item/remains/ribcage = 25,
+		/obj/item/remains/tajaran = 25,
+		/obj/item/remains/unathi  = 10,
+		/obj/item/remains/posi    = 10
+	)
+	return spawn_choices
