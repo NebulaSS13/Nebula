@@ -8,6 +8,20 @@
 #define N_SOUTHEAST 64
 #define N_SOUTHWEST 1024
 
+var/global/list/n_neighbors = list(
+	"(1, invalid)",
+	"N_NORTH",	// 2
+	"N_SOUTH", 	//4
+	"(8, invalid)",
+	"N_EAST",	// 16
+	"N_NORTHEAST",
+	"N_SOUTHEAST",
+	"(128, invalid)",
+	"N_WEST",	// 256
+	"N_NORTHWEST",
+	"N_SOUTHWEST"
+)
+
 #define CORNER_NONE             0
 #define CORNER_COUNTERCLOCKWISE 1
 #define CORNER_DIAGONAL         2

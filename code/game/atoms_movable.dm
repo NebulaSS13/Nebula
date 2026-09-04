@@ -186,7 +186,6 @@
 	//  Both the origin and destination are turfs with different areas.
 	//  When either origin or destination is a turf and the other is not.
 	var/is_new_area = (is_origin_turf ^ is_destination_turf) || (is_origin_turf && is_destination_turf && loc.loc != destination.loc)
-	var/was_below_z_turf = MOVABLE_IS_BELOW_ZTURF(src)
 
 	var/atom/origin = loc
 	loc = destination
@@ -228,17 +227,12 @@
 			L = thing
 			L.source_atom.update_light()
 
-	// Z-Mimic.
-	if (bound_overlay)
-		// The overlay will handle cleaning itself up on non-openspace turfs.
-		if (isturf(destination))
-			bound_overlay.forceMove(get_step(src, UP))
-			if (dir != bound_overlay.dir)
-				bound_overlay.set_dir(dir)
-		else	// Not a turf, so we need to destroy immediately instead of waiting for the destruction timer to proc.
-			qdel(bound_overlay)
-	else if (isturf(loc) && (!origin || !was_below_z_turf) && MOVABLE_SHALL_MIMIC(src))
-		SSzcopy.discover_movable(src)
+		// Z-Mimic.
+		if (bound_overlay)
+			move_mimic(origin)
+
+		else if (isturf(loc) && (!origin || !TURF_IS_MIMICKING(origin)) && MOVABLE_SHALL_MIMIC(src) && MOVABLE_IS_BELOW_ZTURF(src))
+			SSzcopy.discover_movable(src)
 
 	var/list/buckled_mobs = get_buckled_mobs()
 	if(length(buckled_mobs))
@@ -264,7 +258,6 @@
 /atom/movable/Move(...)
 
 	var/old_loc = loc
-	var/was_below_z_turf = MOVABLE_IS_BELOW_ZTURF(src)
 	. = ..()
 
 	if(.)
@@ -296,11 +289,9 @@
 
 		// Z-Mimic.
 		if (bound_overlay)
-			// The overlay will handle cleaning itself up on non-openspace turfs.
-			bound_overlay.forceMove(get_step(src, UP))
-			if (bound_overlay.dir != dir)
-				bound_overlay.set_dir(dir)
-		else if (isturf(loc) && (!old_loc || !was_below_z_turf) && MOVABLE_SHALL_MIMIC(src))
+			move_mimic(old_loc)
+
+		else if (isturf(loc) && (!old_loc || !TURF_IS_MIMICKING(old_loc)) && MOVABLE_SHALL_MIMIC(src) && MOVABLE_IS_BELOW_ZTURF(src))
 			SSzcopy.discover_movable(src)
 
 		if(isturf(loc))
@@ -311,6 +302,17 @@
 		for(var/mob/viewer in storage?.storage_ui?.is_seeing)
 			if(!storage.can_view(viewer))
 				storage.close(viewer)
+
+/atom/movable/proc/move_mimic(atom/old_loc)
+	// Some types (like humantypes) change this per Move.
+	if (bound_overlay.glide_size != glide_size)
+		bound_overlay.glide_size = glide_size
+
+	if (bound_overlay.dir != dir)
+		bound_overlay.set_dir(dir)
+
+	// The overlay will handle cleaning itself up on non-openspace turfs. Moving to `get_step(UP)` is invalid here, since that might place us in an unrelated Z-group.
+	bound_overlay.forceMove(astype(loc, /turf)?.above)
 
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)

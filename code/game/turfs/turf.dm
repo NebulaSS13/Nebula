@@ -130,7 +130,7 @@
 	if (!mapload)
 		SSair.mark_for_update(src)
 		update_weather(force_update_below = TRUE)
-	else if (permit_ao)
+	else if (permit_ao && !(z_flags & ZM_MIMIC_BELOW))
 		queue_ao()
 
 	// we're being loaded in a new z-level, we need to build lighting
@@ -140,7 +140,8 @@
 	if(simulated)
 		updateVisibility(src, FALSE)
 
-	if (z_flags & ZM_MIMIC_BELOW)
+	if (mapload && (z_flags & ZM_MIMIC_BELOW))
+		// If CT fired, ZM is done in CT for BOUNDARY ordering reasons.
 		setup_zmimic(mapload)
 
 	if(flooded)

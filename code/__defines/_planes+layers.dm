@@ -71,7 +71,9 @@ What is the naming convention for planes or layers?
 	#define DEBRIS_LAYER                 1
 	#define DUST_LAYER                   2
 
-// Openspace uses planes -80 through -70.
+// Z-Mimic needs OPENTURF_PLANES_PER_DEPTH * OPENTURF_MAX_DEPTH planes. ZM will emit a compile-time warning if an invalid range is specified here.
+#define ZMIMIC_MINIMUM_PLANE -80
+#define ZMIMIC_MAXIMUM_PLANE -50
 
 #define OVER_OPENSPACE_PLANE        -3
 

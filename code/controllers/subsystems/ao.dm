@@ -4,11 +4,15 @@ SUBSYSTEM_DEF(ao)
 	wait = 1
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	flags = SS_NO_INIT
+
 	var/list/queue = list()
 	var/list/cache = list()
 
+	var/updates_async = 0
+	var/updates_sync = 0
+
 /datum/controller/subsystem/ao/stat_entry()
-	..("P:[queue.len]")
+	..("Q: [queue.len] T: { A: [updates_async] | S: [updates_sync] }")
 
 /datum/controller/subsystem/ao/fire(resumed = 0, no_mc_tick = FALSE)
 	var/list/curr = queue
@@ -17,14 +21,8 @@ SUBSYSTEM_DEF(ao)
 		curr.len--
 
 		if (!QDELETED(target))
-			if (target.ao_queued == AO_UPDATE_REBUILD)
-				var/old_n = target.ao_neighbors
-				target.calculate_ao_neighbors()
-				if (old_n != target.ao_neighbors)
-					target.update_ao()
-			else
-				target.update_ao()
-			target.ao_queued = AO_UPDATE_NONE
+			target.update_ao()
+			updates_async++
 
 		if (no_mc_tick)
 			CHECK_TICK
