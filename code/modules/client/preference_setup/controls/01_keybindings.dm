@@ -1,6 +1,8 @@
 /datum/preferences
 	/// Whether or not this client has standard hotkeys enabled
 	var/hotkeys = TRUE
+	/// Focus Chat masked-out hotkey nag.
+	var/fc_hotkey_nag = TRUE
 	/// Custom Keybindings
 	var/list/key_bindings = list()
 
@@ -76,6 +78,25 @@
 	user.client.set_macros()
 	return TOPIC_REFRESH
 
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag
+	name = "Focus Chat Masked Hotkey Nag"
+	sort_order = 1
+
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag/load_preferences(datum/pref_record_reader/R)
+	pref.fc_hotkey_nag = R.read("fc_hotkey_nag")
+
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag/save_preferences(datum/pref_record_writer/writer)
+	writer.write("fc_hotkey_nag", pref.fc_hotkey_nag)
+
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag/sanitize_preferences()
+	pref.fc_hotkey_nag = sanitize_bool(pref.fc_hotkey_nag, TRUE)
+
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag/content(mob/user)
+	return "<center><b>Masked Hotkey Warning:</b><a href='byond://?src=\ref[src]'>[pref.fc_hotkey_nag ? "Enabled" : "Disabled"]</a></center>"
+
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag/OnTopic(href, list/href_list, mob/user)
+	pref.fc_hotkey_nag = !pref.fc_hotkey_nag
+	return TOPIC_REFRESH
 
 /datum/category_item/player_setup_item/controls/keybindings
 	name = "Keybindings"
