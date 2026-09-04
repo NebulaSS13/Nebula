@@ -32,42 +32,32 @@
 
 	if(get_recursive_loc_of_type(/mob) != speaker || !can_be_handled_by(speaker))
 		return
-	message = lowertext(strip_html_properly(message))
-
-	var/command = trim(copytext(message, 1, 6))
-	if(command != "go to" && command != "find")
-		return
 
 	// TODO make this less stupid/magic, can be exploited for metagaming as written.
 	// Check Z-level?
 	// Check faction/knowledge?
 
+	var/static/regex/command_regex = regex(@"(go to|find)([a-zA-Z\s]+)[,.!?]*", "i")
+	command_regex.Find(strip_html_properly(message))
+	if(length(command_regex.group) < 2)
+		return
+
 	current_target = null
-
-	var/find_punctuation
-	var/static/list/punctuation = list(".", ",", "!", "?")
-	for(var/punct in punctuation)
-		var/found_at = findtext(message, punct)
-		if(found_at == 0)
-			continue
-		find_punctuation = isnull(find_punctuation) ? findtext(message, punct) : min(find_punctuation, findtext(message, punct))
-
-	var/target_string = lowertext(trim(copytext(message, 6, find_punctuation)))
-
+	var/target_string = command_regex.group[2]
 	for(var/mob/player in global.living_mob_list_)
-		if(findtext(lowertext(player.name), target_string))
+		if(findtext(player.name, target_string))
 			current_target = weakref(player)
 			break
 
 	if(isnull(current_target))
 		for(var/mob/player in global.dead_mob_list_)
-			if(findtext(lowertext(player.name), target_string))
+			if(findtext(player.name, target_string))
 				current_target = weakref(player)
 				break
 
 	var/decl/pronouns/bird_pronouns = get_pronouns()
 	var/mob/mob_target = current_target?.resolve()
-	if(!istype(mob_target) || QDELETED(mob_target))
+	if(!mob_target)
 		to_chat(speaker, SPAN_WARNING("\The [src] blinks a few times at you, head tilting left and right. [bird_pronouns.He] doesn't seem to know who you mean."))
 	else if(mob_target == speaker)
 		to_chat(speaker, SPAN_WARNING("\The [src] blinks a few times at you, then pecks you with [bird_pronouns.his] beak. [bird_pronouns.He] [bird_pronouns.has] already found you."))
