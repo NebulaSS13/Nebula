@@ -11,8 +11,8 @@
 	var/end_state         = "end"
 	var/three_way_state   = "three_way"
 	var/four_way_state    = "four_way"
-	var/door_state_closed = "door-opened"
-	var/door_state_opened = "door-closed"
+	var/door_state_closed = "door-closed"
+	var/door_state_opened = "door-opened"
 
 /decl/fence_type/validate()
 	. = ..()

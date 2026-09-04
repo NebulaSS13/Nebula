@@ -17,7 +17,7 @@
 	var/candle_volume = 4600
 	var/on = 0
 	var/activation_sound = 'sound/effects/flare.ogg'
-	var/brightness_on = 1 // Moderate-low bright.
+	var/oxycandle_light_range = 1 // Moderate-low bright.
 
 /obj/item/oxycandle/Initialize()
 	. = ..()
@@ -72,7 +72,7 @@
 	if(on == 1)
 		icon_state = "oxycandle_on"
 		item_state = icon_state
-		set_light(brightness_on)
+		set_light(oxycandle_light_range)
 	else if(on == 2)
 		icon_state = "oxycandle_burnt"
 		item_state = icon_state
