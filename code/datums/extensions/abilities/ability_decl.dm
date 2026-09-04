@@ -1,3 +1,15 @@
+#define SHOW_AUDIENCE(USER, TARGET, FIRST_MSG, THIRD_MSG, STYLE)                                                                        \
+	if(FIRST_MSG && THIRD_MSG) {                                                                                                        \
+		USER.visible_message(                                                                                                           \
+			SPAN_STYLE(STYLE, capitalize_proper_html(emote_replace_target_tokens(emote_replace_user_tokens(THIRD_MSG, USER), TARGET))), \
+			SPAN_STYLE(STYLE, capitalize_proper_html(emote_replace_target_tokens(FIRST_MSG, TARGET)))                                   \
+		)                                                                                                                               \
+	} else if(FIRST_MSG) {                                                                                                              \
+		to_chat(USER, SPAN_STYLE(STYLE, capitalize_proper_html(emote_replace_user_tokens(FIRST_MSG, USER))))                            \
+	} else if(THIRD_MSG) {                                                                                                              \
+		USER.visible_message(SPAN_STYLE(STYLE, capitalize_proper_html(emote_replace_user_tokens(THIRD_MSG, USER))))                     \
+	}
+
 /decl/ability
 	abstract_type = /decl/ability
 	/// A descriptive identifier string.
@@ -90,6 +102,8 @@
 	var/cast_failed_no_charges     = "You are out of charges for that ability."
 	/// Failed due to being silenced/disabled
 	var/cast_failed_disabled_str   = "You are unable to use that ability for another $TIME$!"
+	/// Style to apply to casting success messages.
+	var/cast_style                 = "danger"
 
 	// Various casting messages.
 	/// "$USER$ begins preparing to use an ability on $TARGET$."
@@ -106,6 +120,8 @@
 	var/cancel_ability_1p_str
 	/// "You fail to cast an ability."
 	var/fail_cast_1p_str
+	/// "$USER fails to cast an ability."
+	var/fail_cast_3p_str
 
 /decl/ability/Initialize()
 	target_selector = GET_DECL(target_selector)
@@ -172,8 +188,7 @@
 		return
 
 	if(!prepare_to_cast(user, target, metadata, handler))
-		if(fail_cast_1p_str)
-			to_chat(user, SPAN_WARNING(capitalize_proper_html(emote_replace_user_tokens(fail_cast_1p_str, user))))
+		SHOW_AUDIENCE(user, target, fail_cast_1p_str, fail_cast_3p_str, "warning")
 		return
 
 	if(projectile_type)
@@ -206,36 +221,13 @@
 	projectile.launch(target)
 	return projectile
 
-/decl/ability/proc/show_cast_channel_msg(mob/user, atom/target, list/metadata)
-	if(prepare_message_3p_str && prepare_message_1p_str)
-		user.visible_message(
-			SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(emote_replace_user_tokens(prepare_message_3p_str, user), target))),
-			SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(prepare_message_1p_str, target)))
-		)
-	else if(prepare_message_1p_str)
-		user.visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(prepare_message_1p_str, target))))
-	else if(prepare_message_3p_str)
-		user.visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(emote_replace_user_tokens(prepare_message_3p_str, user), target))))
-
-/decl/ability/proc/show_ability_cast_msg(mob/user, list/targets, list/metadata)
-	var/atom/target = targets[1]
-	if(cast_message_3p_str && cast_message_1p_str)
-		user.visible_message(
-			SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(emote_replace_user_tokens(cast_message_3p_str, user), target))),
-			SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(cast_message_1p_str, target)))
-		)
-	else if(cast_message_1p_str)
-		user.visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(cast_message_1p_str, target))))
-	else if(cast_message_3p_str)
-		user.visible_message(SPAN_NOTICE(capitalize_proper_html(emote_replace_target_tokens(emote_replace_user_tokens(cast_message_3p_str, user), target))))
-
 /decl/ability/proc/prepare_to_cast(mob/user, atom/target, list/metadata, datum/ability_handler/handler)
 	var/use_cooldown_time = get_cooldown_time(metadata)
 	if(ability_use_channel)
 		if(world.time < handler.next_channel)
 			return FALSE
 		handler.next_channel = world.time + ability_use_channel
-		show_cast_channel_msg(user, target, metadata)
+		SHOW_AUDIENCE(user, target, prepare_message_1p_str, prepare_message_3p_str, "notice")
 		if(!do_after(user, ability_use_channel, target) || !can_use_ability(user, metadata))
 			handler.next_channel = 0 // Don't make them sit out the entire channel period, it's just a debounce/duplicate ability preventative
 			return FALSE
@@ -336,7 +328,8 @@
 
 	var/list/targets = target_selector.get_affected(user, hit_target, metadata, src, projectile)
 	if(length(targets))
-		show_ability_cast_msg(user, targets, metadata)
+		var/target = targets[1]
+		SHOW_AUDIENCE(user, target, cast_message_1p_str, cast_message_3p_str, cast_style)
 	while(length(targets))
 		var/target = targets[1]
 		apply_ability_effect_to(user, target, metadata)
@@ -366,6 +359,7 @@
 	ability_overlay.set_density(FALSE)
 	QDEL_IN(ability_overlay, overlay_lifespan)
 
+// OVERRIDE THIS PROC FOR ABILITY EFFECTS.
 /decl/ability/proc/apply_ability_effect_to(mob/living/user, atom/target, list/metadata)
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
