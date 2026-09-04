@@ -38,6 +38,7 @@
 
 	#include "../../mods/mobs/borers/_borers.dme"
 	#include "../../mods/mobs/dionaea/_dionaea.dme"
+	#include "../../mods/mobs/spiders/_spiders.dme"
 
 	#include "../../mods/species/ascent/_ascent.dme"
 	#include "../../mods/species/tajaran/_tajaran.dme"

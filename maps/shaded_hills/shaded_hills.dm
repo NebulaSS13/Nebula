@@ -11,6 +11,8 @@
 	#include "../../mods/content/blacksmithy/_blacksmithy.dme"
 	#include "../../mods/content/birds/_birds.dme"
 
+	#include "../../mods/mobs/spiders/_spiders.dme"
+
 	#include "areas/_areas.dm"
 	#include "areas/downlands.dm"
 	#include "areas/grassland.dm"
@@ -39,6 +41,7 @@
 	#include "shaded_hills_events.dm"
 	#include "shaded_hills_locks.dm"
 	#include "shaded_hills_map.dm"
+	#include "shaded_hills_random.dm"
 	#include "shaded_hills_skills.dm"
 	#include "shaded_hills_testing.dm"
 	#include "shaded_hills_turfs.dm"

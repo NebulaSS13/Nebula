@@ -8,13 +8,6 @@
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "monkey crate"
 
-/decl/hierarchy/supply_pack/livecargo/spidercubes
-	name = "Inert - Spider Cubes"
-	contains = list(/obj/item/box/animal_cubes/spiders)
-	containertype = /obj/structure/closet/crate/secure
-	containername = "spiderling crate"
-	access = access_research
-
 /decl/hierarchy/supply_pack/livecargo/carpcubes
 	name = "Inert - Space Carp Cubes"
 	contains = list(/obj/item/box/animal_cubes/carp)

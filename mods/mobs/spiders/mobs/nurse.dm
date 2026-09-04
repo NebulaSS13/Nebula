@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/giant_spider/nurse
 	desc = "A monstrously huge beige spider with shimmering eyes."
-	icon = 'icons/mob/simple_animal/spider_beige.dmi'
+	icon = 'mods/mobs/spiders/icons/spider_beige.dmi'
 	max_health = 80
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
