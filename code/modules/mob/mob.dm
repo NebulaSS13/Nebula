@@ -61,7 +61,8 @@
 	if(ispath(ai_type))
 		return ai_type
 
-/mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
+//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
+/mob/show_message(msg, type, alt, alt_type, atom/source)
 	if(!client)	return
 
 	//spaghetti code
@@ -89,7 +90,7 @@
 // message is the message output to anyone who can see e.g. "[src] does something!"
 // self_message (optional) is what the src mob sees  e.g. "You do something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
-/mob/visible_message(var/message, var/self_message, var/blind_message, var/range = world.view, var/check_ghosts = null, var/narrate = FALSE)
+/mob/visible_message(message, self_message, blind_message, range = world.view, check_ghosts = null, narrate = FALSE, atom/source = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
@@ -97,7 +98,7 @@
 
 	for(var/o in objs)
 		var/obj/O = o
-		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE, source = source)
 
 	for(var/m in mobs)
 		var/mob/M = m
@@ -109,19 +110,19 @@
 			mob_message = add_ghost_track(mob_message, M)
 
 		if(self_message && M == src)
-			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE, source = source)
 			continue
 
 		if(!M.is_blind() || narrate)
-			M.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+			M.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE, source = source)
 			continue
 
 		if(blind_message)
-			M.show_message(blind_message, AUDIBLE_MESSAGE)
+			M.show_message(blind_message, AUDIBLE_MESSAGE, source = source)
 			continue
 	//Multiz, have shadow do same
 	if(bound_overlay)
-		bound_overlay.visible_message(message, self_message, blind_message)
+		bound_overlay.visible_message(message, self_message, blind_message, source = source)
 
 /mob/proc/get_action_string(is_self, var/using_verb, var/object_phrase, var/infix, var/postfix)
 	var/decl/pronouns/using_pronouns = is_self ? get_self_pronouns() : get_visible_pronouns()
@@ -245,7 +246,7 @@ var/global/const/ACTION_DANGER_ALL = 2
 // self_message (optional) is what the src mob hears.
 // deaf_message (optional) is what deaf people will see.
 // hearing_distance (optional) is the range, how many tiles away the message can be heard.
-/mob/audible_message(var/message, var/self_message, var/deaf_message, var/hearing_distance = world.view, var/check_ghosts = null, var/narrate = FALSE, var/radio_message)
+/mob/audible_message(message, self_message, deaf_message, hearing_distance = world.view, check_ghosts = null, narrate = FALSE, radio_message = null, atom/source = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
@@ -261,18 +262,18 @@ var/global/const/ACTION_DANGER_ALL = 2
 			mob_message = add_ghost_track(mob_message, M)
 
 		if(self_message && M == src)
-			M.show_message(self_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
+			M.show_message(self_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE, source = source)
 		else if(is_invisible_to(M) || narrate) // Cannot view the invisible
-			M.show_message(mob_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
+			M.show_message(mob_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE, source = source)
 		else
-			M.show_message(mob_message, AUDIBLE_MESSAGE)
+			M.show_message(mob_message, AUDIBLE_MESSAGE, source = source)
 
 	for(var/o in objs)
 		var/obj/O = o
 		if(radio_message)
-			O.hear_talk(src, radio_message, null, GET_DECL(/decl/language/noise))
+			O.hear_talk(src, radio_message, null, null, GET_DECL(/decl/language/noise))
 		else
-			O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
+			O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE, source = source)
 
 /mob/proc/add_ghost_track(var/message, var/mob/observer/ghost/M)
 	ASSERT(istype(M))

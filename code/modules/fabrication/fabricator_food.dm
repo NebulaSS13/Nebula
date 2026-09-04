@@ -16,22 +16,27 @@
 	global.listening_objects -= src
 	return ..()
 
-/obj/machinery/fabricator/replicator/hear_talk(var/mob/M, var/text, var/verb, var/decl/language/speaking)
-	if(speaking && !speaking.machine_understands)
+/obj/machinery/fabricator/replicator/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
+	if(!istype(phrases))
 		return ..()
-	var/true_text = lowertext(html_decode(text))
-	if(findtext(true_text, "status"))
-		addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/fabricator/replicator, state_status)), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
-	else if(findtext(true_text, "menu"))
-		addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/fabricator/replicator, state_menu)), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
-	else
+	for(var/list/phrase in phrases.phrases)
+		var/decl/language/speaking = phrase[2]
+		if(speaking && !speaking.machine_understands)
+			continue
+		var/true_text = lowertext(html_decode(phrase[1]))
+		if(findtext(true_text, "status"))
+			addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/fabricator/replicator, state_status)), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+			return
+		if(findtext(true_text, "menu"))
+			addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/fabricator/replicator, state_menu)), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+			return
 		for(var/datum/fabricator_recipe/recipe in design_cache)
 			if(recipe.hidden && !(fab_status_flags & FAB_HACKED))
 				continue
 			if(findtext(true_text, lowertext(recipe.name)))
 				addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/fabricator, try_queue_build), recipe, 1), 2 SECONDS)
-				break
-	..()
+				return
+	. = ..()
 
 /obj/machinery/fabricator/replicator/can_ingest(var/obj/item/thing)
 	return istype(thing, /obj/item/food) || ..()

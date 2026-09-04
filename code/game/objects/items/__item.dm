@@ -625,7 +625,7 @@
 
 	return ..()
 
-/obj/item/proc/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
+/obj/item/proc/talk_into(mob/living/speaker, datum/speech/phrases, verb = "says")
 	return
 
 // apparently called whenever an item is removed from a slot, container, or anything else.

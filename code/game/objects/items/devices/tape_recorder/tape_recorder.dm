@@ -96,17 +96,12 @@
 	if(distance <= 1 && wires_accessible)
 		. += SPAN_NOTICE("The wires are exposed.")
 
-/obj/item/taperecorder/hear_talk(mob/living/M, msg, var/verb="says", decl/language/speaking=null)
+/obj/item/taperecorder/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	if(mytape && recording)
+		var/list/messages = istype(phrases) ? phrases.compile_for_listener(src, machine_listener = TRUE) : phrases
+		mytape.record_speech("[speaker.name] [verb], \"[messages[1]]\"")
 
-		if(speaking)
-			if(!speaking.machine_understands)
-				msg = speaking.scramble(M, msg)
-			mytape.record_speech("[M.name] [speaking.format_message_plain(msg, verb)]")
-		else
-			mytape.record_speech("[M.name] [verb], \"[msg]\"")
-
-/obj/item/taperecorder/show_message(msg, type, alt, alt_type)
+/obj/item/taperecorder/show_message(msg, type, alt, alt_type, atom/source)
 	var/recordedtext
 	if (msg && type == AUDIBLE_MESSAGE) //must be hearable
 		recordedtext = msg

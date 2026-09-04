@@ -321,28 +321,35 @@
 				return channel.frequency
 	return frequency
 
-/obj/item/radio/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
+/obj/item/radio/talk_into(mob/living/speaker, datum/speech/phrases, verb = "says")
 	set waitfor = FALSE
 	if(!on) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
-	if(!istype(M) || !message) return 0
+	if(!istype(speaker))
+		return FALSE
 
-	if(speaking && (speaking.flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG))) return 0
+	var/list/audible_phrases = list()
+	for(var/list/phrase in phrases.phrases)
+		var/decl/language/speaking = phrase[2]
+		if(!speaking || !(speaking.language_flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG)))
+			audible_phrases += list(phrase)
+	if(!length(audible_phrases))
+		return FALSE
 
-	if (!broadcasting)
+	if(!broadcasting)
 		// Sedation chemical effect should prevent radio use.
-		if((M.has_chemical_effect(CE_SEDATE, 1) || M.incapacitated(INCAPACITATION_DISRUPTED)))
-			to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
+		if((speaker.has_chemical_effect(CE_SEDATE, 1) || speaker.incapacitated(INCAPACITATION_DISRUPTED)))
+			to_chat(speaker, SPAN_WARNING("You're unable to reach \the [src]."))
 			return 0
 
-		if(M.radio_interrupt_cooldown > world.time)
-			to_chat(M, SPAN_WARNING("You're disrupted as you reach for \the [src]."))
+		if(speaker.radio_interrupt_cooldown > world.time)
+			to_chat(speaker, SPAN_WARNING("You're disrupted as you reach for \the [src]."))
 			return 0
 
-		if(istype(M))
-			M.trigger_aiming(TARGET_CAN_RADIO)
+		if(istype(speaker))
+			speaker.trigger_aiming(TARGET_CAN_RADIO)
 
-	addtimer(CALLBACK(src, PROC_REF(transmit), M, message, message_mode, verb, speaking), 0)
+	addtimer(CALLBACK(src, PROC_REF(transmit), speaker, phrases, verb), 0)
 
 /obj/item/radio/proc/can_transmit_binary()
 	for(var/obj/item/encryptionkey/key in encryption_keys)
@@ -350,7 +357,7 @@
 			return TRUE
 	return FALSE
 
-/obj/item/radio/proc/transmit(var/mob/speaker, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
+/obj/item/radio/proc/transmit(var/mob/living/speaker, datum/speech/phrases, var/verb = "says")
 
 	if(wires.IsIndexCut(WIRE_TRANSMIT))
 		return 0
@@ -368,9 +375,9 @@
 	if(loc && loc == speaker)
 		playsound(loc, 'sound/effects/walkietalkie.ogg', 20, 0, -1)
 
-	if(message_mode == MESSAGE_MODE_SPECIAL && can_transmit_binary())
+	if(phrases.message_mode == MESSAGE_MODE_SPECIAL && can_transmit_binary())
 		var/decl/language/binary/binary = GET_DECL(/decl/language/binary)
-		binary.broadcast(speaker, message)
+		binary.broadcast(speaker, phrases)
 		return TRUE
 
 	var/turf/position = get_turf(src)
@@ -379,10 +386,10 @@
 
 	var/list/current_sector = SSmapping.get_connected_levels(position.z)
 	var/use_frequency = frequency
-	if(message_mode && !analog)
+	if(phrases.message_mode && !analog)
 		var/list/current_channels = get_available_channels()
-		message_mode = lowertext(message_mode)
-		if(message_mode == MESSAGE_MODE_DEFAULT)
+		phrases.message_mode = lowertext(phrases.message_mode)
+		if(phrases.message_mode == MESSAGE_MODE_DEFAULT)
 			for(var/datum/radio_channel/channel in current_channels)
 				if(!channel.secured)
 					use_frequency = channel.frequency
@@ -393,7 +400,7 @@
 						use_frequency = channel.frequency
 						break
 
-		else if(message_mode == MESSAGE_MODE_DEPARTMENT)
+		else if(phrases.message_mode == MESSAGE_MODE_DEPARTMENT)
 			for(var/datum/radio_channel/channel in current_channels)
 				if(channel.secured && can_decrypt(channel.secured))
 					use_frequency = channel.frequency
@@ -405,7 +412,7 @@
 						break
 		else
 			for(var/datum/radio_channel/channel in current_channels)
-				if(channel.key != message_mode || !(LAZYACCESS(channels, channel)))
+				if(channel.key != phrases.message_mode || !(LAZYACCESS(channels, channel)))
 					continue
 				if(can_decrypt(channel.secured))
 					use_frequency = channel.frequency
@@ -416,7 +423,7 @@
 		if(last_frequency != use_frequency)
 			set_frequency(use_frequency)
 
-		broadcast_analog_radio_message(analog_radio_connection, speaker, src, message, intercom, message_compression, current_sector, verb, speaking, analog_secured)
+		broadcast_analog_radio_message(analog_radio_connection, speaker, src, phrases, intercom, message_compression, current_sector, verb, analog_secured)
 		if(frequency != last_frequency)
 			set_frequency(last_frequency)
 	else
@@ -427,7 +434,7 @@
 		for(var/weakref/H as anything in network?.connected_hubs)
 			var/obj/machinery/network/telecomms_hub/hub = H.resolve()
 			if(istype(hub) && !QDELETED(hub) && hub.can_receive_message(network))
-				hub.transmit_message(speaker, message, verb, speaking, use_frequency, message_compression, checked_hubs)
+				hub.transmit_message(speaker, phrases, verb, use_frequency, message_compression, checked_hubs)
 				break // Only one hub per message, since it transmits over the whole network.
 
 /obj/item/radio/proc/can_receive_message(var/check_network_membership)
@@ -436,9 +443,9 @@
 		var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 		return network_device?.get_network() == check_network_membership
 
-/obj/item/radio/hear_talk(mob/M, msg, var/verb = "says", var/decl/language/speaking = null)
-	if(on && broadcasting && get_dist(src, M) <= canhear_range)
-		talk_into(M, msg, null, verb, speaking)
+/obj/item/radio/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
+	if(on && broadcasting && get_dist(src, speaker) <= canhear_range)
+		talk_into(speaker, istype(phrases) ? phrases.unformatted_message : phrases, verb)
 
 /obj/item/radio/proc/get_accessible_channel_descriptions(var/mob/user)
 	var/prefix = user?.get_department_radio_prefix()

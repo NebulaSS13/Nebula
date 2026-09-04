@@ -653,12 +653,12 @@
 
 	for(var/decl/language/lang in languages)
 		// Forbidden languages are always removed.
-		if(!(lang.flags & LANG_FLAG_FORBIDDEN))
+		if(!(lang.language_flags & LANG_FLAG_FORBIDDEN))
 			// Admin can have whatever available language they want.
 			if(has_admin_rights())
 				continue
 			// Whitelisted languages are fine.
-			if((lang.flags & LANG_FLAG_WHITELISTED) && is_alien_whitelisted(src, lang))
+			if((lang.language_flags & LANG_FLAG_WHITELISTED) && is_alien_whitelisted(src, lang))
 				continue
 			// Background-granted languages are fine.
 			if(lang.type in permitted_languages)

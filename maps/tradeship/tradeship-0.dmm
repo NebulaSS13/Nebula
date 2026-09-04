@@ -2122,7 +2122,7 @@
 /turf/floor,
 /area/ship/trade/loading_bay)
 "VT" = (
-/obj/machinery/hologram/holopad/longrange,
+/obj/machinery/holopad/longrange,
 /turf/floor/laminate/walnut,
 /area/ship/trade/disused)
 "Xe" = (

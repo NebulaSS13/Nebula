@@ -1320,7 +1320,7 @@
 /area/ministation/engine)
 "ft" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/machinery/hologram/holopad,
+/obj/machinery/holopad,
 /obj/item/radio/intercom/locked{
 	dir = 4;
 	pixel_x = -22
@@ -9321,7 +9321,7 @@
 /turf/floor/bluegrid,
 /area/ministation/ai_upload)
 "JM" = (
-/obj/machinery/hologram/holopad,
+/obj/machinery/holopad,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
@@ -11558,7 +11558,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
 	},
-/obj/machinery/hologram/holopad,
+/obj/machinery/holopad,
 /turf/floor/tiled,
 /area/ministation/smcontrol)
 "QG" = (

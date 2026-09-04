@@ -365,6 +365,15 @@ var/global/regex/starts_lowercase_regex = regex(@"^[a-z]")
 /proc/trim(text)
 	return trim_left(trim_right(text))
 
+/// Adds punctuation to an emote or speech message automatically.
+/proc/handle_autopunctuation(message)
+	if(!message)
+		return
+	var/end_char = copytext_char(trim_right(strip_html_properly(message)), -1)
+	if(!(end_char in list(".", "?", "!", "-", "~")))
+		message += "."
+	return message
+
 //Returns a string with the first element of the string capitalized.
 // NOTE: This will not work if there are any HTML tags.
 /proc/capitalize(text)

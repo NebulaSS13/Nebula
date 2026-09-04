@@ -88,9 +88,9 @@
 
 //Makes the speech a proc so all verbal components can be easily manipulated as a whole, or individually easily
 /obj/effect/rune/proc/speak_incantation(var/mob/living/user, var/incantation)
-	var/decl/language/L = GET_DECL(/decl/language/cultcommon)
-	if(istype(L) && incantation && (L in user.languages))
-		user.say(incantation, L)
+	var/decl/language/language = GET_DECL(/decl/language/cultcommon)
+	if(istype(language) && incantation && (language in user.languages))
+		user.say(incantation, language)
 
 /obj/effect/rune/get_surgery_success_modifier(delicate)
 	return delicate ? -10 : 0

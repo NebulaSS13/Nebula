@@ -880,7 +880,7 @@
 /turf/unsimulated/floor/vault,
 /area/map_template/rescue_base/base)
 "cv" = (
-/obj/machinery/hologram/holopad/longrange,
+/obj/machinery/holopad/longrange,
 /turf/unsimulated/floor/dark,
 /area/map_template/rescue_base/base)
 "cw" = (
@@ -1960,7 +1960,7 @@
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fo" = (
-/obj/machinery/hologram/holopad/longrange,
+/obj/machinery/holopad/longrange,
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fp" = (

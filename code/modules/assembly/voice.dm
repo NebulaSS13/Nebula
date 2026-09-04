@@ -15,14 +15,14 @@
 	. = ..()
 	global.listening_objects += src
 
-/obj/item/assembly/voice/hear_talk(mob/living/M, msg)
+/obj/item/assembly/voice/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	if(listening)
-		recorded = msg
+		recorded = istype(phrases) ? phrases.unformatted_message : phrases
 		listening = 0
 		var/turf/T = get_turf(src)	//otherwise it won't work in hand
 		T.visible_message("[html_icon(src)] beeps, \"Activation message is '[recorded]'.\"")
 	else
-		if(findtext(msg, recorded))
+		if(findtext(istype(phrases) ? phrases.unformatted_message : phrases, recorded))
 			pulse_device(0)
 
 /obj/item/assembly/voice/activate()
