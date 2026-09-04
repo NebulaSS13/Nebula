@@ -143,7 +143,7 @@
 	icon = 'icons/clothing/head/pumpkin.dmi'
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
-	brightness_on = 2
+	headlamp_range = 2
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/organic/plantmatter
 	valid_accessory_slots = list(ACCESSORY_SLOT_OVER_HELMET)

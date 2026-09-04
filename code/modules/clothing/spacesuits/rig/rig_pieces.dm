@@ -19,7 +19,7 @@
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	heat_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	cold_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
-	brightness_on = 4
+	headlamp_range = 4
 	light_wedge = LIGHT_WIDE
 	bodytype_equip_flags = null
 

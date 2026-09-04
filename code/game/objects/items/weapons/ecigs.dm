@@ -9,7 +9,7 @@
 	chem_volume = 0 //ecig has no storage on its own but has reagent container created by parent obj
 	material = /decl/material/solid/organic/plastic
 
-	var/brightness_on = 1
+	var/headlamp_range = 1
 	var/cartridge_type = /obj/item/chems/ecig_cartridge/med_nicotine
 	var/obj/item/chems/ecig_cartridge/ec_cartridge
 	var/power_usage = 450 //value for simple ecig, enough for about 1 cartridge, in JOULES!
@@ -122,7 +122,7 @@
 /obj/item/clothing/mask/smokable/ecig/on_update_icon()
 	. = ..()
 	if(lit)
-		set_light(brightness_on)
+		set_light(headlamp_range)
 	else
 		set_light(0)
 	if(ec_cartridge && check_state_in_icon("[icon_state]-loaded", icon))
