@@ -20,7 +20,8 @@
 		return
 	if(length(masters) || ((sourcepad || targetpad) && !incoming_connection))
 		last_message = msg
-		var/list/local_audience = get_mobs_or_objects_in_view(7, get_turf(src), TRUE, FALSE)
+		var/list/local_audience = list()
+		get_listeners_in_range(get_turf(src), 7, local_audience)
 		for(var/mob/listener in get_audience())
 			if(!(listener in local_audience))
 				listener.show_message("<i><small>\icon[src] [capitalize(strip_improper(name))] relayed:</small></i> [msg]", type, source)
@@ -28,7 +29,8 @@
 /obj/machinery/holopad/see_signlang(message, verb = "gestures", decl/language/language, mob/speaker, prefix)
 	if(length(masters) || ((sourcepad || targetpad) && !incoming_connection))
 		prefix ||= "<i><small>\icon[src] [capitalize(strip_improper(name))] relayed:</small></i>"
-		var/list/local_audience = get_mobs_or_objects_in_view(7, get_turf(speaker), TRUE, FALSE)
+		var/list/local_audience = list()
+		get_listeners_in_range(get_turf(speaker), 7, local_audience)
 		for(var/mob/listener in get_audience())
 			if(listener != speaker && !(listener in local_audience))
 				listener.see_signlang(message, verb, language, speaker, prefix)
@@ -40,7 +42,8 @@
 		return
 	if(length(masters) || ((sourcepad || targetpad) && !incoming_connection))
 		last_message = phrase_msg
-		var/list/local_audience = get_mobs_or_objects_in_view(7, get_turf(speaker), TRUE, FALSE)
+		var/list/local_audience = list()
+		get_listeners_in_range(get_turf(speaker), 7, local_audience)
 		for(var/mob/listener in get_audience())
 			if(listener != speaker && !(listener in local_audience))
 				listener.hear_say(phrases, verb, speaker = speaker, relayed_by = src)
