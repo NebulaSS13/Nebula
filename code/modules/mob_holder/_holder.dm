@@ -123,9 +123,18 @@
 		if(length(cards))
 			LAZYDISTINCTADD(., cards)
 
+/obj/item/holder/handle_mouse_drop(atom/over, mob/user, params)
+	if(over == user && user != src && !(user in src))
+		for(var/mob/my_mob in contents)
+			my_mob.show_stripping_window(user) // TODO: verify that you can even strip items from a mob currently in an item
+			. = TRUE
+	. = . || ..()
+
 /obj/item/holder/attack_self(mob/user)
-	for(var/mob/M in contents)
-		M.show_stripping_window(user)
+	var/mob/living/my_mob = locate() in contents
+	if(istype(my_mob?.ai))
+		my_mob.ai.process_holder_interaction(user)
+	return TRUE
 
 /obj/item/holder/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
