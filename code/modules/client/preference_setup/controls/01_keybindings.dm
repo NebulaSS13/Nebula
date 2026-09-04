@@ -80,7 +80,7 @@
 
 /datum/category_item/player_setup_item/controls/fc_hotkey_nag
 	name = "Focus Chat Masked Hotkey Nag"
-	sort_order = 1
+	sort_order = 2
 
 /datum/category_item/player_setup_item/controls/fc_hotkey_nag/load_preferences(datum/pref_record_reader/R)
 	pref.fc_hotkey_nag = R.read("fc_hotkey_nag")
@@ -100,7 +100,7 @@
 
 /datum/category_item/player_setup_item/controls/keybindings
 	name = "Keybindings"
-	sort_order = 2
+	sort_order = 3
 
 /datum/category_item/player_setup_item/controls/keybindings/load_preferences(datum/pref_record_reader/R)
 	pref.key_bindings = R.read("key_bindings")
