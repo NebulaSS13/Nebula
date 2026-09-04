@@ -645,7 +645,7 @@
 	- `range?`: The number of tiles away the message will be visible from. Default: world.view
 	- `check_ghosts?`: Set to `TRUE` if ghosts should see the message if their preferences allow
 */
-/atom/proc/visible_message(var/message, var/self_message, var/blind_message, var/range = world.view, var/check_ghosts = null, atom/source)
+/atom/proc/visible_message(message, self_message, blind_message, range = world.view, check_ghosts = null, narrate = FALSE, atom/source = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
@@ -673,7 +673,7 @@
 	- `check_ghosts?`: TRUE if ghosts should hear the message if their preferences allow
 	- `radio_message?`: The string to send over radios
 */
-/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance = world.view, var/check_ghosts = null, var/radio_message, atom/source)
+/atom/proc/audible_message(message, self_message, deaf_message, hearing_distance = world.view, check_ghosts = null, narrate = FALSE, radio_message = null, atom/source = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
