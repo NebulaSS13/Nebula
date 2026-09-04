@@ -17,7 +17,7 @@
 			if(!SSinput.unprintables_cache[stripped_key] && stripped_key != "Unbound")
 				failures.Add(binding.type)
 
-	if(failures)
+	if(length(failures))
 		fail("Printable keys bound by default in Focus Chat keybind set.")
 		log_bad("Bad Types:")
 		for(var/bad_type in failures)
