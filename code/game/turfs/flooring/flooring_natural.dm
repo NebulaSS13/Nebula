@@ -4,10 +4,12 @@
 	icon            = 'icons/turf/flooring/seafloor.dmi'
 	icon_base       = "seafloor"
 	icon_edge_layer = FLOOR_EDGE_SEAFLOOR
+	has_corners     = FALSE
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	force_material  = /decl/material/solid/sand
 	gender          = NEUTER
 	footstep_type   = /decl/footsteps/sand
+	uid             = "floor_seafloor"
 
 /decl/flooring/shrouded
 	name            = "packed sand"
@@ -19,6 +21,7 @@
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	force_material  = /decl/material/solid/sand
 	footstep_type   = /decl/footsteps/asteroid
+	uid             = "floor_shrouded"
 
 /decl/flooring/meat
 	name            = "fleshy ground"
@@ -29,6 +32,8 @@
 	has_base_range  = null
 	footstep_type   = /decl/footsteps/mud
 	force_material  = /decl/material/solid/organic/meat
+	print_type      = /obj/effect/footprints
+	uid             = "floor_meat"
 
 /decl/flooring/barren
 	name            = "ground"
@@ -39,8 +44,10 @@
 	footstep_type   = /decl/footsteps/asteroid
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
 	icon_edge_layer = FLOOR_EDGE_BARREN
-	force_material  = /decl/material/solid/soil
+	has_corners     = FALSE
+	force_material  = /decl/material/solid/sand
 	growth_value    = 0.1
+	uid             = "floor_barren"
 
 /decl/flooring/clay
 	name            = "clay"
@@ -48,10 +55,14 @@
 	icon            = 'icons/turf/flooring/clay.dmi'
 	icon_base       = "clay"
 	icon_edge_layer = FLOOR_EDGE_CLAY
+	has_corners     = FALSE
 	footstep_type   = /decl/footsteps/mud
 	turf_flags      = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH | TURF_FLAG_ABSORB_LIQUID
 	force_material  = /decl/material/solid/clay
 	growth_value    = 1.2
+	can_collect     = TRUE
+	print_type      = /obj/effect/footprints
+	uid             = "floor_clay"
 
 /decl/flooring/ice
 	name            = "ice"
@@ -60,6 +71,10 @@
 	icon_base       = "ice"
 	color           = COLOR_LIQUID_WATER
 	force_material  = /decl/material/solid/ice
+	uid             = "floor_ice"
+
+/decl/flooring/ice/get_vehicle_transit_delay(obj/vehicle/vehicle)
+	return vehicle.vehicle_transit_type == vehicle::VEHICLE_SNOWMOBILE ? 0.8 : ..()
 
 /decl/flooring/ice/update_turf_icon(turf/floor/target)
 	. = ..()

@@ -1,7 +1,7 @@
 /turf/proc/drill_act()
 	SHOULD_CALL_PARENT(TRUE)
 	drop_diggable_resources()
-	dig_pit(MAT_VALUE_VERY_HARD)
+	dig_pit(tool_hardness = MAT_VALUE_VERY_HARD)
 	var/base_turf = get_base_turf_by_area(src)
 	if(!istype(src, base_turf))
 		return ChangeTurf(base_turf)

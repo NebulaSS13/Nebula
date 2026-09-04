@@ -6,7 +6,7 @@
 	icon_state                    = ICON_STATE_WORLD
 	material_alteration           = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	presentation_flags            = PRESENTATION_FLAG_NAME
-	volume                        = 30
+	chem_volume                   = 30
 	amount_per_transfer_from_this = 5
 
 /obj/item/chems/glass/bowl/can_lid()
@@ -155,18 +155,18 @@
 		add_to_reagents(filling, fillings[filling])
 
 /obj/item/chems/glass/bowl/mystery/update_name()
-	if(!drained && reagents?.total_volume)
+	if(!drained && REAGENT_TOTAL_VOLUME(reagents))
 		SetName("mystery soup")
 	else
 		..()
 
 /obj/item/chems/glass/bowl/mystery/on_reagent_change()
-	if(reagents?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		drained = TRUE
 	. = ..()
 
 /obj/item/chems/glass/bowl/mystery/update_container_desc()
-	if(!drained && reagents?.total_volume)
+	if(!drained && REAGENT_TOTAL_VOLUME(reagents))
 		desc = "The mystery is, why aren't you eating it?"
 	else
 		..()

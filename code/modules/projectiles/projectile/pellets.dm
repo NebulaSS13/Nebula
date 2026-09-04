@@ -16,8 +16,20 @@
 	var/pellet_loss = round((distance - 1)/range_step) //pellets lost due to distance
 	return max(pellets - pellet_loss, 1)
 
+/obj/item/projectile/bullet/pellet/fire(angle, atom/direct_target)
+	if(direct_target)
+		for (var/i in 1 to pellets)
+			var/old_zone = def_zone
+			def_zone = ran_zone(def_zone, base_spread, direct_target)
+			direct_target.bullet_act(src, def_zone)
+			def_zone = old_zone
+		return
+	..()
+
 /obj/item/projectile/bullet/pellet/attack_mob(var/mob/target_mob, var/distance, var/miss_modifier)
-	if (pellets < 0) return 1
+	SHOULD_CALL_PARENT(FALSE)
+	if (pellets < 0)
+		return 1
 
 	var/total_pellets = get_pellets(distance)
 	var/spread = max(base_spread - (spread_step*distance), 0)
@@ -39,7 +51,9 @@
 		if (..()) hits++
 		def_zone = old_zone //restore the original zone the projectile was aimed at
 
-	pellets -= hits //each hit reduces the number of pellets left
+	if(hits > 0)
+		pellets -= hits //each hit reduces the number of pellets left
+
 	if (hits >= total_pellets || pellets <= 0)
 		return 1
 	return 0

@@ -51,7 +51,6 @@ var/global/list/ticket_panels = list()
 		src.closed_by = closed_by
 		to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>Your ticket has been closed by [closed_by.key].</b></span>")
 		message_staff("<span class='notice'><b>[src.owner.key_name(0)]</b>'s ticket has been closed by <b>[closed_by.key]</b>.</span>")
-		send2adminirc("[src.owner.key_name(0)]'s ticket has been closed by [closed_by.key].")
 		SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Ticket ([id]) (Game ID: [game_id]) Ticket Closed", "body" = "[src.owner.key_name(0)] 's ticket (ID [id]) has been closed by [closed_by.key]."))
 
 	var/closed_by_not_assigned = TRUE
@@ -100,7 +99,6 @@ var/global/list/ticket_panels = list()
 		ticket_take.Execute()
 
 	message_staff("<span class='notice'><b>[assigned_admin.key]</b> has assigned themself to <b>[src.owner.key_name(0)]'s</b> ticket.</span>")
-	send2adminirc("[assigned_admin.key] has assigned themself to [src.owner.key_name(0)]'s ticket.")
 	to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>[assigned_admin.key] has added themself to your ticket and should respond shortly. Thanks for your patience!</b></span>")
 	SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Ticket ([id]) (Game ID: [game_id]) Ticked Assigned", "body" = "[assigned_admin.key] has added themself to ticket ID [id]."))
 

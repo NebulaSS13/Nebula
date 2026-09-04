@@ -66,7 +66,7 @@
 		to_chat(user, SPAN_WARNING(failure_message))
 	return FALSE
 
-/obj/item/examine(mob/user, distance, infix, suffix)
+/obj/item/get_examine_strings(mob/user, distance, infix, suffix)
 
 	. = ..()
 
@@ -89,4 +89,5 @@
 		LAZYADD(tool_strings, tool_string)
 
 	if(length(tool_strings))
-		to_chat(user, "[gender == PLURAL ? "They look" : "It looks"] like [english_list(tool_strings)].")
+		var/decl/pronouns/tool_pronouns = get_pronouns()
+		. += "[tool_pronouns.He] [verb_agree_with_pronouns("look", tool_pronouns)] like [english_list(tool_strings)]."

@@ -2,7 +2,8 @@
 	name = "damage zone"
 	icon_state = "zone_sel_tail"
 	screen_loc = ui_zonesel
-	var/selecting = BP_CHEST
+	use_supplied_ui_color = TRUE
+	use_supplied_ui_alpha = TRUE
 
 /obj/screen/zone_selector/handle_click(mob/user, params)
 	var/list/PL = params2list(params)
@@ -61,19 +62,16 @@
 					if(25 to 27)
 						if(icon_x in 15 to 17)
 							new_selecting = BP_EYES
-	set_selected_zone(new_selecting)
+	user.set_target_zone(new_selecting)
 	return TRUE
 
-/obj/screen/zone_selector/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
-	. = ..()
-	update_icon()
-
-/obj/screen/zone_selector/proc/set_selected_zone(bodypart)
-	var/old_selecting = selecting
-	selecting = bodypart
-	if(old_selecting != selecting)
+/obj/screen/zone_selector/proc/set_selected_zone(new_zone, old_zone)
+	if(new_zone != old_zone)
 		update_icon()
 		return TRUE
 
-/obj/screen/zone_selector/on_update_icon()
-	set_overlays(image('icons/mob/zone_sel.dmi', "[selecting]"))
+/obj/screen/zone_selector/rebuild_screen_overlays()
+	..()
+	var/mob/living/owner = owner_ref?.resolve()
+	if(istype(owner))
+		add_overlay(image('icons/mob/zone_sel.dmi', "[owner.selected_zone]"))

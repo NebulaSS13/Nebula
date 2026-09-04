@@ -27,8 +27,8 @@
 	master = null
 	. = ..()
 
-/obj/machinery/power/terminal/attackby(obj/item/W, mob/user)
-	if(IS_WIRECUTTER(W))
+/obj/machinery/power/terminal/attackby(obj/item/used_item, mob/user)
+	if(IS_WIRECUTTER(used_item))
 		var/turf/T = get_turf(src)
 		var/obj/machinery/machine = master_machine()
 
@@ -56,11 +56,11 @@
 		return TRUE
 	. = ..()
 
-/obj/machinery/power/terminal/examine(mob/user)
+/obj/machinery/power/terminal/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	var/obj/machinery/machine = master_machine()
 	if(machine)
-		to_chat(user, "It is attached to \the [machine].")
+		. += "It is attached to \the [machine]."
 
 /obj/machinery/power/terminal/proc/master_machine()
 	var/obj/machinery/machine = master && master.loc

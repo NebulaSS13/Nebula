@@ -2,7 +2,6 @@
 	name = "clown"
 	desc = "A denizen of clown planet"
 	icon = 'icons/mob/simple_animal/clown.dmi'
-	a_intent = I_HURT
 	max_health = 75
 	harm_intent_damage = 8
 	minbodytemp = 270

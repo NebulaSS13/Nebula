@@ -53,7 +53,3 @@
 		)
 	)
 	. = ..()
-
-/obj/item/mech_component/chassis/pod/prebuild()
-	. = ..()
-	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof(src)

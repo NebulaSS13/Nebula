@@ -87,7 +87,7 @@
 	containername = "collector crate"
 	access = access_engine_equip
 
-/decl/hierarchy/supply_pack/engineering/PA
+/decl/hierarchy/supply_pack/engineering/particle_accelerator
 	name = "Equipment - Particle accelerator"
 	contains = list(/obj/structure/particle_accelerator/fuel_chamber,
 					/obj/machinery/particle_accelerator/control_box,
@@ -154,20 +154,6 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "shield generator construction kit crate"
 	access = access_engine
-
-/decl/hierarchy/supply_pack/engineering/inertial_damper
-	name = "Equipment - inertial damper construction kit"
-	contains = list(/obj/item/stock_parts/circuitboard/inertial_damper, /obj/item/stock_parts/capacitor, /obj/item/stock_parts/micro_laser, /obj/item/stock_parts/console_screen)
-	containertype = /obj/structure/closet/crate/secure
-	containername = "inertial damper construction kit crate"
-	access = access_engine
-
-/decl/hierarchy/supply_pack/engineering/smbig
-	name = "Power - Supermatter core"
-	contains = list(/obj/machinery/power/supermatter)
-	containertype = /obj/structure/closet/crate/secure/large/supermatter
-	containername = "\improper Supermatter crate (CAUTION)"
-	access = access_ce
 
 /decl/hierarchy/supply_pack/engineering/robotics
 	name = "Parts - Robotics assembly"

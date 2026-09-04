@@ -12,8 +12,8 @@
 /decl/surgery_step/suture_wounds/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
-		for(var/datum/wound/W in affected.wounds)
-			if(W.damage_type == CUT && W.damage >= W.autoheal_cutoff)
+		for(var/datum/wound/wound in affected.wounds)
+			if(wound.damage_type == CUT && wound.damage >= wound.autoheal_cutoff)
 				return TRUE
 		to_chat(user, SPAN_WARNING("\The [target]'s [affected.name] has no wounds that are large enough to need suturing."))
 	return FALSE
@@ -27,21 +27,21 @@
 
 /decl/surgery_step/suture_wounds/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	for(var/datum/wound/W in affected.wounds)
-		if(W.damage_type == CUT && W.damage >= W.autoheal_cutoff)
+	for(var/datum/wound/wound in affected.wounds)
+		if(wound.damage_type == CUT && wound.damage >= wound.autoheal_cutoff)
 			// Close it up to a point that it can be bandaged and heal naturally!
-			W.heal_damage(rand(10,20)+10)
-			if(W.damage >= W.autoheal_cutoff)
+			wound.heal_damage(rand(10,20)+10)
+			if(wound.damage >= wound.autoheal_cutoff)
 				user.visible_message(SPAN_NOTICE("\The [user] partially closes a wound on [target]'s [affected.name] with \the [tool]."), \
 				SPAN_NOTICE("You partially close a wound on [target]'s [affected.name] with \the [tool]."))
 			else
 				user.visible_message(SPAN_NOTICE("\The [user] closes a wound on [target]'s [affected.name] with \the [tool]."), \
 				SPAN_NOTICE("You close a wound on [target]'s [affected.name] with \the [tool]."))
-				if(!W.damage)
-					affected.wounds -= W
-					qdel(W)
-				else if(W.damage <= 10)
-					W.clamped = 1
+				if(!wound.damage)
+					affected.wounds -= wound
+					qdel(wound)
+				else if(wound.damage <= 10)
+					wound.clamped = 1
 			break
 	affected.update_damages()
 	..()

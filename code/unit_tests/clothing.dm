@@ -8,7 +8,8 @@
 	var/list/icon_states_checked = list()
 	var/list/reported_failures = list()
 
-	var/decl/species/default_species = get_species_by_key(SPECIES_HUMAN)
+	// TODO: Make this not hardcoded to humans, and test more than just the default bodytype.
+	var/decl/species/default_species = decls_repository.get_decl_by_id(/decl/species/human::uid)
 	var/decl/bodytype/default_bodytype = default_species.default_bodytype
 	var/state_base = default_bodytype.bodytype_category
 
@@ -106,7 +107,7 @@
 				generated_tokens += clothes.markings_state_modifier
 
 			// Keep track of which states we've looked for or otherwise evaluated for later state checking.
-			var/list/check_states = icon_states(clothes.icon)
+			var/list/check_states = get_states_in_icon(clothes.icon)
 
 			// Validate against the list of generated tokens.
 			for(var/gen_token in generated_tokens)

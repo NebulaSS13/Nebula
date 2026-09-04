@@ -18,7 +18,8 @@
 		LAZYDISTINCTADD(., registered_radio.GetRadios(message_mode))
 
 /datum/extension/radio_provider/proc/GetRadio(message_mode)
-	return LAZYACCESS(GetRadios(message_mode), 1)
+	var/list/radios = GetRadios(message_mode)
+	return LAZYACCESS(radios, 1)
 
 /atom/movable/proc/GetRadios(message_mode)
 	var/datum/extension/radio_provider/radio_provider = get_extension(src, /datum/extension/radio_provider)
@@ -31,7 +32,4 @@
 	. = ..()
 	var/datum/extension/radio_provider/radio = get_or_create_extension(src, /datum/extension/radio_provider)
 	radio.register_radio(some_radio)
-
-/atom/movable/get_radio(message_mode)
-	return LAZYACCESS(GetRadios(message_mode), 1)
 */

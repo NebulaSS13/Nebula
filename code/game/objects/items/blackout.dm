@@ -9,7 +9,7 @@
 
 /obj/item/blackout
 	name = "blackout pulser"
-	desc = "A complicated eletronic device of unknown purpose"
+	desc = "A complicated electronic device of unknown purpose."
 	icon = 'icons/obj/items/blackout.dmi'
 	icon_state = "device_blackout-off"
 	max_health = ITEM_HEALTH_NO_DAMAGE
@@ -74,8 +74,8 @@
 
 	var/datum/powernet/powernet = terminal_in.powernet
 	for(var/obj/machinery/power/terminal/terminal_out in powernet.nodes)
-		if(istype(terminal_out.master, /obj/machinery/power/apc))
-			var/obj/machinery/power/apc/A = terminal_out.master
+		if(istype(terminal_out.master, /obj/machinery/apc))
+			var/obj/machinery/apc/A = terminal_out.master
 			A.energy_fail(rand(30 * severity, 60 * severity))
 		if(istype(terminal_out.master, /obj/machinery/power/smes/buildable))
 			var/obj/machinery/power/smes/buildable/S = terminal_out.master

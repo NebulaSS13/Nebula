@@ -1,4 +1,4 @@
-/obj/machinery/power/apc/liberia
+/obj/machinery/apc/liberia
 	req_access = list(access_merchant)
 
 /obj/machinery/alarm/liberia

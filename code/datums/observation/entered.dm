@@ -12,6 +12,7 @@
 /decl/observ/entered
 	name = "Entered"
 	expected_type = /atom
+	flags = OBSERVATION_NO_GLOBAL_REGISTRATIONS
 
 /*******************
 * Entered Handling *
@@ -19,4 +20,5 @@
 
 /atom/Entered(atom/movable/enterer, atom/old_loc)
 	..()
-	RAISE_EVENT(/decl/observ/entered, src, enterer, old_loc)
+	if(event_listeners?[/decl/observ/entered])
+		raise_event_non_global(/decl/observ/entered, enterer, old_loc)

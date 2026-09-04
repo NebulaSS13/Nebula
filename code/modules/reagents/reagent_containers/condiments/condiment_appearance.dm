@@ -75,7 +75,7 @@
 	condiment_center_of_mass = @'{"x":16,"y":8}'
 
 /decl/condiment_appearance/cornoil
-	condiment_type = /decl/material/liquid/nutriment/cornoil
+	condiment_type = /decl/material/liquid/oil/plant/corn
 	condiment_name = "corn oil"
 	condiment_desc = "A delicious oil used in cooking. Made from corn."
 	condiment_icon = 'icons/obj/food/condiments/cornoil.dmi'
@@ -124,3 +124,9 @@
 	condiment_desc = "A small bottle of the essential oil of some kind of mint plant."
 	condiment_icon = 'icons/obj/food/condiments/coldsauce.dmi'
 	condiment_key  = "small"
+
+/decl/condiment_appearance/cinnamon
+	condiment_type = /decl/material/solid/cinnamon
+	condiment_name = "cinnamon"
+	condiment_desc = "A small bottle of ground cinnamon."
+	condiment_icon = 'icons/obj/food/condiments/generic.dmi'

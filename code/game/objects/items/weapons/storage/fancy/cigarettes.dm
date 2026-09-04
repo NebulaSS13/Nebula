@@ -17,11 +17,7 @@
 	return list(/obj/item/clothing/mask/smokable/cigarette = 6)
 
 /obj/item/box/fancy/cigarettes/Initialize(ml, material_key)
-	. = ..()
-	initialize_reagents()
-
-/obj/item/box/fancy/cigarettes/initialize_reagents(populate)
-	create_reagents(5 * max(storage?.max_storage_space, 1)) //so people can inject cigarettes without opening a packet, now with being able to inject the whole one
+	chem_volume = 5 * max(/datum/storage/box/cigarettes::max_storage_space, 1) //so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 	. = ..()
 
 /obj/item/box/fancy/cigarettes/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
@@ -46,7 +42,7 @@
 
 		storage?.remove_from_storage(user, cig, null)
 		user.equip_to_slot(cig, slot_wear_mask_str)
-		reagents.maximum_volume = 5 * contents.len
+		create_or_update_reagents(5 * contents.len)
 		to_chat(user, SPAN_NOTICE("You take a cigarette out of the pack."))
 		update_icon()
 		return TRUE
@@ -130,7 +126,7 @@
 //cigarellos
 /obj/item/box/fancy/cigarettes/cigarello
 	name = "pack of Trident Original cigars"
-	desc = "The Trident brand's wood tipped little cigar, favored by the Sol corps diplomatique for their pleasant aroma. Machine made on Mars for over 100 years."
+	desc = "The Trident brand's wood tipped little cigar, favored by some for their pleasant aroma. Machine made on Mars for over 100 years."
 	icon = 'icons/obj/items/storage/cigpack/cigarillo.dmi'
 	icon_state = "CRpacket"
 	item_state = "Dpacket"
@@ -142,7 +138,7 @@
 
 /obj/item/box/fancy/cigarettes/cigarello/variety
 	name = "pack of Trident Fruit cigars"
-	desc = "The Trident brand's wood tipped little cigar, favored by the Sol corps diplomatique for their pleasant aroma. Machine made on Mars for over 100 years. This is a fruit variety pack."
+	desc = "The Trident brand's wood tipped little cigar, favored by some for their pleasant aroma. Machine made on Mars for over 100 years. This is a fruit variety pack."
 	icon = 'icons/obj/items/storage/cigpack/cigarillo_fruity.dmi'
 	icon_state = "CRFpacket"
 
@@ -157,7 +153,7 @@
 
 /obj/item/box/fancy/cigarettes/cigarello/mint
 	name = "pack of Trident Menthol cigars"
-	desc = "The Trident brand's wood tipped little cigar, favored by the Sol corps diplomatique for their pleasant aroma. Machine made on Mars for over 100 years. These are the menthol variety."
+	desc = "The Trident brand's wood tipped little cigar, favored by some for their pleasant aroma. Machine made on Mars for over 100 years. These are the menthol variety."
 	icon = 'icons/obj/items/storage/cigpack/cigarillo_menthol.dmi'
 	icon_state = "CRMpacket"
 
@@ -167,76 +163,57 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Syndie Cigs
 ////////////////////////////////////////////////////////////////////////////////
+/obj/item/box/fancy/cigarettes/covert
+	abstract_type = /obj/item/box/fancy/cigarettes/covert
+	/// (TYPEPATH) Used to reset the name and description of covert cigarette packs on init.
+	var/obj/item/box/fancy/cigarettes/disguised_as = /obj/item/box/fancy/cigarettes
+	/// (STRING) Part of a string appended to the description on init.
+	var/scribble = null
+
+/obj/item/box/fancy/cigarettes/covert/Initialize(ml, material_key)
+	. = ..()
+	if(ispath(disguised_as, /obj/item/box/fancy/cigarettes))
+		//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
+		if(name == initial(name)) // allow mapped names to override it
+			SetName(disguised_as::name)
+		if(desc == initial(desc) && istext(scribble)) // ditto for mapped descs
+			desc = "[disguised_as::desc] '[scribble]' has been scribbled on it."
 
 // Flash Powder Pack
-/obj/item/box/fancy/cigarettes/flash_powder
+/obj/item/box/fancy/cigarettes/covert/flash_powder
 	name = "pack of flash powder laced Trans-Stellar Duty-frees"
+	disguised_as = /obj/item/box/fancy/cigarettes
+	scribble = "F"
 
-/obj/item/box/fancy/cigarettes/flash_powder/Initialize(ml, material_key)
-	. = ..()
-	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
-	var/obj/item/box/fancy/cigarettes/C = /obj/item/box/fancy/cigarettes
-	if(name == initial(name))
-		SetName(initial(C.name))
-	if(desc == initial(desc))
-		desc = "[initial(desc)] 'F' has been scribbled on it."
-
-/obj/item/box/fancy/cigarettes/flash_powder/populate_reagents()
+/obj/item/box/fancy/cigarettes/covert/flash_powder/populate_reagents()
 	var/max_storage_space = max(1, storage?.max_storage_space)
 	add_to_reagents(/decl/material/solid/metal/aluminium, max_storage_space)
 	add_to_reagents(/decl/material/solid/potassium,       max_storage_space)
 	add_to_reagents(/decl/material/solid/sulfur,          max_storage_space)
 
 //Chemsmoke Pack
-/obj/item/box/fancy/cigarettes/chemsmoke
+/obj/item/box/fancy/cigarettes/covert/chemsmoke
 	name = "pack of smoke powder laced Trans-Stellar Duty-frees"
+	scribble = "S"
 
-/obj/item/box/fancy/cigarettes/chemsmoke/Initialize(ml, material_key)
-	. = ..()
-	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
-	var/obj/item/box/fancy/cigarettes/C = /obj/item/box/fancy/cigarettes
-	if(name == initial(name))
-		SetName(initial(C.name))
-	if(desc == initial(desc))
-		desc = "[initial(desc)] 'S' has been scribbled on it."
-
-/obj/item/box/fancy/cigarettes/chemsmoke/populate_reagents()
+/obj/item/box/fancy/cigarettes/covert/chemsmoke/populate_reagents()
 	var/max_storage_space = max(1, storage?.max_storage_space)
 	add_to_reagents(/decl/material/solid/potassium,        max_storage_space)
 	add_to_reagents(/decl/material/liquid/nutriment/sugar, max_storage_space)
 	add_to_reagents(/decl/material/solid/phosphorus,       max_storage_space)
 
 //Mindbreak Pack (now called /decl/chemical_reaction/hallucinogenics)
-/obj/item/box/fancy/cigarettes/mindbreak
-	name = "pack of mindbreak toxin laced Trans-Stellar Duty-frees" //#TODO: maybe fix the lore for that?
+/obj/item/box/fancy/cigarettes/covert/mindbreak
+	name = "pack of hallucinogen-laced Trans-Stellar Duty-frees" //#TODO: maybe fix the lore for that?
+	scribble = "H"
 
-/obj/item/box/fancy/cigarettes/mindbreak/Initialize(ml, material_key)
-	. = ..()
-	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
-	var/obj/item/box/fancy/cigarettes/C = /obj/item/box/fancy/cigarettes
-	if(name == initial(name))
-		SetName(initial(C.name))
-	if(desc == initial(desc))
-		desc = "[initial(desc)] 'MB' has been scribbled on it." //#TODO: maybe fix the lore for that?
+/obj/item/box/fancy/cigarettes/covert/mindbreak/populate_reagents()
+	add_to_reagents(/decl/material/liquid/hallucinogenics, (3 * max(1, storage?.max_storage_space)))
 
-/obj/item/box/fancy/cigarettes/mindbreak/populate_reagents()
-	var/max_storage_space = max(1, storage?.max_storage_space)
-	add_to_reagents(/decl/material/solid/silicon,         max_storage_space)
-	add_to_reagents(/decl/material/liquid/fuel/hydrazine, max_storage_space)
-	add_to_reagents(/decl/material/liquid/antitoxins,     max_storage_space)
+//Tricord pack (now called 'regenerative serum')
+/obj/item/box/fancy/cigarettes/covert/tricord
+	name = "pack of regenerative serum-laced Trans-Stellar Duty-frees" //#TODO: maybe fix the lore for that?
+	scribble = "R"
 
-//Tricord pack (now called /decl/material/liquid/regenerator)
-/obj/item/box/fancy/cigarettes/tricord
-	name = "pack of tricordazine laced Trans-Stellar Duty-frees" //#TODO: maybe fix the lore for that?
-
-/obj/item/box/fancy/cigarettes/tricord/Initialize(ml, material_key)
-	. = ..()
-	//Reset the name to the default cig pack. Done for codex reasons, since it indexes things by initial names
-	var/obj/item/box/fancy/cigarettes/C = /obj/item/box/fancy/cigarettes
-	if(name == initial(name))
-		SetName(initial(C.name))
-	if(desc == initial(desc))
-		desc = "[initial(desc)] 'T' has been scribbled on it." //#TODO: maybe fix the lore for that?
-
-/obj/item/box/fancy/cigarettes/tricord/populate_reagents()
+/obj/item/box/fancy/cigarettes/covert/tricord/populate_reagents()
 	add_to_reagents(/decl/material/liquid/regenerator, (4 * max(1, storage?.max_storage_space)))

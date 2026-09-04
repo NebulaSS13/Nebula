@@ -24,14 +24,14 @@
 			if(uplink_source)
 				pref.uplink_sources += uplink_source
 
-/datum/category_item/player_setup_item/antagonism/basic/save_character(datum/pref_record_writer/W)
+/datum/category_item/player_setup_item/antagonism/basic/save_character(datum/pref_record_writer/writer)
 	var/uplink_order = list()
 	for(var/entry in pref.uplink_sources)
-		var/decl/uplink_source/UL = entry
-		uplink_order += UL.name
+		var/decl/uplink_source/uplink_source = entry
+		uplink_order += uplink_source.name
 
-	W.write("uplink_sources", uplink_order)
-	W.write("exploit_record", pref.exploit_record)
+	writer.write("uplink_sources", uplink_order)
+	writer.write("exploit_record", pref.exploit_record)
 
 /datum/category_item/player_setup_item/antagonism/basic/sanitize_character()
 	if(!istype(pref.uplink_sources))
@@ -43,10 +43,10 @@
 	. +="<b>Antag Setup:</b><br>"
 	. +="Uplink Source Priority: <a href='byond://?src=\ref[src];add_source=1'>Add</a><br>"
 	for(var/entry in pref.uplink_sources)
-		var/decl/uplink_source/US = entry
-		. +="[US.name] <a href='byond://?src=\ref[src];move_source_up=\ref[US]'>Move Up</a> <a href='byond://?src=\ref[src];move_source_down=\ref[US]'>Move Down</a> <a href='byond://?src=\ref[src];remove_source=\ref[US]'>Remove</a><br>"
-		if(US.desc)
-			. += "<font size=1>[US.desc]</font><br>"
+		var/decl/uplink_source/uplink = entry
+		. +="[uplink.name] <a href='byond://?src=\ref[src];move_source_up=\ref[uplink]'>Move Up</a> <a href='byond://?src=\ref[src];move_source_down=\ref[uplink]'>Move Down</a> <a href='byond://?src=\ref[src];remove_source=\ref[uplink]'>Remove</a><br>"
+		if(uplink.desc)
+			. += "<font size=1>[uplink.desc]</font><br>"
 	if(!pref.uplink_sources.len)
 		. += "<span class='warning'>You will not receive an uplink unless you add an uplink source!</span>"
 	. +="<br>"
@@ -64,25 +64,25 @@
 			return TOPIC_REFRESH
 
 	if(href_list["remove_source"])
-		var/decl/uplink_source/US = locate(href_list["remove_source"]) in pref.uplink_sources
-		if(US && pref.uplink_sources.Remove(US))
+		var/decl/uplink_source/uplink = locate(href_list["remove_source"]) in pref.uplink_sources
+		if(uplink && pref.uplink_sources.Remove(uplink))
 			return TOPIC_REFRESH
 
 	if(href_list["move_source_up"])
-		var/decl/uplink_source/US = locate(href_list["move_source_up"]) in pref.uplink_sources
-		if(!US)
+		var/decl/uplink_source/uplink = locate(href_list["move_source_up"]) in pref.uplink_sources
+		if(!uplink)
 			return TOPIC_NOACTION
-		var/index = pref.uplink_sources.Find(US)
+		var/index = pref.uplink_sources.Find(uplink)
 		if(index <= 1)
 			return TOPIC_NOACTION
 		pref.uplink_sources.Swap(index, index - 1)
 		return TOPIC_REFRESH
 
 	if(href_list["move_source_down"])
-		var/decl/uplink_source/US = locate(href_list["move_source_down"]) in pref.uplink_sources
-		if(!US)
+		var/decl/uplink_source/uplink = locate(href_list["move_source_down"]) in pref.uplink_sources
+		if(!uplink)
 			return TOPIC_NOACTION
-		var/index = pref.uplink_sources.Find(US)
+		var/index = pref.uplink_sources.Find(uplink)
 		if(index >= pref.uplink_sources.len)
 			return TOPIC_NOACTION
 		pref.uplink_sources.Swap(index, index + 1)

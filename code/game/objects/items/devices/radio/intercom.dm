@@ -25,10 +25,6 @@
 	START_PROCESSING(SSobj, src)
 	update_icon()
 
-/obj/item/radio/intercom/wizard
-	name = "enchanted intercom"
-	desc = "Talk into this while you ponder your orb."
-
 /obj/item/radio/intercom/raider
 	name = "piratical intercom"
 	desc = "Pirate radio, but not in the usual sense of the word."
@@ -88,3 +84,13 @@
 /obj/item/radio/intercom/locked/entertainment
 	broadcasting = TRUE
 	locked_frequency = 1461
+
+/obj/item/radio/intercom/locked/ai_private
+	name = "\improper AI intercom"
+	frequency = 1343
+	broadcasting = TRUE
+	listening = TRUE
+
+/obj/item/radio/intercom/interrogation
+	name = "station intercom (Interrogation)"
+	frequency  = 1449

@@ -1,6 +1,6 @@
 /obj/item/bowstring
 	name = "bowstring"
-	icon = 'icons/obj/fishing_line.dmi' // works well enough for the time being
+	icon = 'icons/obj/bowstring.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "A flexible length of material used to string bows."
 	material = /decl/material/solid/organic/meat/gut
@@ -12,7 +12,7 @@
 	. = ..()
 	if(material)
 		max_health = max(1, round(initial(max_health) * material.tensile_strength))
-		current_health = max_health
+		current_health = get_max_health()
 
 /obj/item/bowstring/Destroy()
 	if(istype(loc, /obj/item/gun/launcher/bow))

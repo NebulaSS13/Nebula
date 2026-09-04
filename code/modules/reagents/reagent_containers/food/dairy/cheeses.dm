@@ -22,7 +22,7 @@
 
 /obj/item/food/dairy/cheese/wheel
 	name = "wheel"
-	desc = "A big wheel of delcious cheese."
+	desc = "A big wheel of delicious cheese."
 	icon = 'icons/obj/food/dairy/cheese_wheel.dmi'
 	slice_path = /obj/item/food/dairy/cheese/wedge/slice
 	slice_num = 5

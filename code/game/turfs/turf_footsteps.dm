@@ -1,8 +1,8 @@
 /proc/get_footstep_for_mob(var/footstep_type, var/mob/living/stepper)
 	. = istype(stepper) && stepper.get_mob_footstep(footstep_type)
 	if(!.)
-		var/decl/footsteps/FS = GET_DECL(footstep_type)
-		. = pick(FS.footstep_sounds)
+		var/decl/footsteps/footsteps = GET_DECL(footstep_type)
+		. = pick(footsteps.footstep_sounds)
 
 /turf/proc/get_footstep_sound(var/mob/stepper)
 	for(var/obj/structure/S in contents)

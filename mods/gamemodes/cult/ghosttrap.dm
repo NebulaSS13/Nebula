@@ -20,9 +20,3 @@
 	var/obj/item/soulstone/stone = new(get_turf(user))
 	stone.shade = new(stone)
 	request_player(stone.shade, "The soul stone shade summon ritual has been performed. ")
-
-#ifdef GAMEMODE_PACK_DEITY
-/decl/ghosttrap/cult_shade/Initialize()
-	ban_checks |= /decl/special_role/godcultist
-	. = ..()
-#endif

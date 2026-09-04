@@ -3,11 +3,18 @@
 	desc = "A simple garment."
 	icon = 'icons/clothing/suits/rough_robe.dmi'
 	gender = PLURAL
+	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	slot_flags = SLOT_UPPER_BODY | SLOT_OVER_BODY
 	valid_accessory_slots = UNIFORM_DEFAULT_ACCESSORIES
 	accessory_slot = ACCESSORY_SLOT_DECOR
+
+/obj/item/clothing/suit/robe/sleeved
+	desc = "A simple garment with long sleeves."
+	cold_protection = SLOT_ARMS|SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
+	body_parts_covered = SLOT_ARMS|SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
+	icon = 'icons/clothing/suits/sleeved_robe.dmi'
 
 /obj/item/clothing/suit/robe/thawb
 	name = "thawb"

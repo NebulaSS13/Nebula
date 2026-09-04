@@ -64,7 +64,7 @@
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit,
 		/obj/item/stack/flag,
-		/obj/item/ore,
+		/obj/item/ore_satchel,
 		/obj/item/t_scanner,
 		/obj/item/tool,
 		/obj/item/rcd
@@ -80,6 +80,9 @@
 /obj/item/clothing/gloves/rig/industrial
 	icon = 'icons/clothing/rigs/gloves/gloves.dmi'
 	siemens_coefficient = 0
+
+/obj/item/rig/industrial/unlocked
+	req_access = null
 
 /obj/item/rig/industrial/equipped
 
@@ -117,6 +120,9 @@
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/toolbox,/obj/item/briefcase/inflatable,/obj/item/inflatable_dispenser,/obj/item/t_scanner,/obj/item/rcd)
 
 	req_access = list(access_engine_equip)
+
+/obj/item/rig/eva/unlocked
+	req_access = null
 
 /obj/item/clothing/head/helmet/space/rig/eva
 	camera = /obj/machinery/camera/network/engineering
@@ -165,7 +171,7 @@
 		/obj/item/flashlight,
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit,
-		/obj/item/ore,
+		/obj/item/ore_satchel,
 		/obj/item/toolbox,
 		/obj/item/briefcase/inflatable,
 		/obj/item/inflatable_dispenser,
@@ -338,6 +344,9 @@
 	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/handcuffs,/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/baton)
 	anomaly_shielding = 1
 
+/obj/item/rig/hazard/unlocked
+	req_access = null
+
 /obj/item/clothing/head/helmet/space/rig/hazard
 	camera = /obj/machinery/camera/network/security
 	icon = 'icons/clothing/rigs/helmets/helmet_hazard.dmi'
@@ -389,7 +398,7 @@
 
 /obj/item/clothing/head/helmet/space/rig/zero
 	camera = null
-	desc = "A bubble helmet that maximizes the field of view. A state of the art holographic display provides a stream of information"
+	desc = "A bubble helmet that maximizes the field of view. A state-of-the-art holographic display provides a stream of information"
 	icon = 'icons/clothing/rigs/helmets/helmet_null.dmi'
 
 /obj/item/clothing/suit/space/rig/zero

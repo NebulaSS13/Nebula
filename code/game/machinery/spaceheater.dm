@@ -23,7 +23,8 @@
 	var/active = 0
 	var/heating_power = 40 KILOWATTS
 
-/obj/machinery/space_heater/on_update_icon(var/rebuild_overlay = 0)
+/obj/machinery/space_heater/on_update_icon()
+	. = ..()
 	if(!on)
 		icon_state = "sheater-off"
 		set_light(0)
@@ -36,77 +37,71 @@
 	else
 		icon_state = "sheater-standby"
 		set_light(0)
+	if(panel_open)
+		add_overlay("sheater-open")
 
-	if(rebuild_overlay)
-		overlays.Cut()
-		if(panel_open)
-			overlays  += "sheater-open"
-
-/obj/machinery/space_heater/examine(mob/user)
+/obj/machinery/space_heater/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-
-	to_chat(user, "The heater is [on ? "on" : "off"] and the hatch is [panel_open ? "open" : "closed"].")
+	. += "\The [src] is [on ? "on" : "off"] and the hatch is [panel_open ? "open" : "closed"]."
 	var/obj/item/cell/cell = get_cell()
 	if(panel_open)
-		to_chat(user, "The power cell is [cell ? "installed" : "missing"].")
+		. += "The power cell is [cell ? "installed" : "missing"]."
 	else
-		to_chat(user, "The charge meter reads [cell ? round(cell.percent(),1) : 0]%")
+		. += "The charge meter reads [cell ? round(cell.percent(),1) : 0]%"
 
 /obj/machinery/space_heater/state_transition(decl/machine_construction/new_state, mob/user)
 	. = ..()
-	if(istype(new_state, /decl/machine_construction/default/panel_open) && CanInteract(user, DefaultTopicState()))
-		interact(user)
+	if(istype(new_state, /decl/machine_construction/default/panel_closed) || !CanInteract(user, DefaultTopicState()))
+		SSnano.close_uis(src)
+	else if(istype(new_state, /decl/machine_construction/default/panel_open))
+		SSnano.update_uis(src)
 
 /obj/machinery/space_heater/interface_interact(mob/user)
 	if(panel_open)
 		interact(user)
 		return TRUE
 
-/obj/machinery/space_heater/interact(mob/user)
-	if(panel_open)
-		var/list/dat = list()
-		var/obj/item/cell/cell = get_cell()
-		dat += "Power cell: "
-		if(cell)
-			dat += "Installed<BR>"
-		else
-			dat += "Removed<BR>"
-
-		dat += "Power Level: [cell ? round(cell.percent(),1) : 0]%<BR><BR>"
-
-		dat += "Set Temperature: "
-
-		dat += "<A href='byond://?src=\ref[src];op=temp;val=-5'>-</A>"
-
-		dat += " [set_temperature]K ([set_temperature-T0C]&deg;C)"
-		dat += "<A href='byond://?src=\ref[src];op=temp;val=5'>+</A><BR>"
-
-		var/datum/browser/popup = new(usr, "spaceheater", "Space Heater Control Panel")
-		popup.set_content(jointext(dat, null))
-		popup.open()
+/obj/machinery/space_heater/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = global.physical_no_access_topic_state)
+	if(!panel_open)
+		SSnano.close_uis(src) // should be handled in state_transition, but just in case
+		return
+	var/obj/item/cell/cell = get_cell()
+	var/list/data = list(
+		"has_cell" = !!cell,
+		"cell_percent" = cell?.percent(),
+		"set_temperature" = set_temperature,
+	)
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "space_heater.tmpl", "Space Heater Control Panel")
+		ui.set_initial_data(data)
+		ui.open()
 
 /obj/machinery/space_heater/physical_attack_hand(mob/user)
 	if(!panel_open)
 		on = !on
-		user.visible_message("<span class='notice'>[user] switches [on ? "on" : "off"] \the [src].</span>","<span class='notice'>You switch [on ? "on" : "off"] \the [src].</span>")
+		user.visible_message(
+			SPAN_NOTICE("[user] switches [on ? "on" : "off"] \the [src]."),
+			SPAN_NOTICE("You switch [on ? "on" : "off"] \the [src]."),
+			SPAN_NOTICE("You hear a [on ? "machine rumble to life" : "rumbling machine go silent"].")
+		)
 		update_icon()
 		return TRUE
 	return FALSE
 
-/obj/machinery/space_heater/Topic(href, href_list, state = global.physical_topic_state)
-	if (..())
-		show_browser(usr, null, "window=spaceheater")
-		usr.unset_machine()
-		return 1
+// This machine has physical, mechanical buttons.
+/obj/machinery/space_heater/DefaultTopicState()
+	return global.physical_topic_state
 
-	switch(href_list["op"])
-		if("temp")
-			var/value = text2num(href_list["val"])
-
-			// limit to 0-90 degC
-			set_temperature = clamp(set_temperature + value, T0C, T0C + 90)
-
-	updateDialog()
+/obj/machinery/space_heater/OnTopic(mob/user, href_list, state)
+	if ((. = ..()))
+		return
+	if(href_list["adj_temp"])
+		var/old_temperature = set_temperature
+		set_temperature = clamp(round(set_temperature + text2num(href_list["adj_temp"])), T0C, 90 CELSIUS) // 90C is pretty damn hot but okay
+		if(old_temperature != set_temperature)
+			. = TOPIC_REFRESH
 
 /obj/machinery/space_heater/power_change()
 	. = ..()

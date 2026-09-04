@@ -16,13 +16,13 @@
 
 // TODO: I wanted to make it so you had to actually use your hand to open it if it's closed, but
 // that'd be out of scope for just an attackby audit. Someone fix this so it can call parent please.
-/obj/structure/extinguisher_cabinet/attackby(obj/item/O, mob/user)
+/obj/structure/extinguisher_cabinet/attackby(obj/item/used_item, mob/user)
 	if(isrobot(user))
 		return FALSE
-	if(istype(O, /obj/item/chems/spray/extinguisher))
-		if(!has_extinguisher && opened && user.try_unequip(O, src))
-			has_extinguisher = O
-			to_chat(user, "<span class='notice'>You place [O] in [src].</span>")
+	if(istype(used_item, /obj/item/chems/spray/extinguisher))
+		if(!has_extinguisher && opened && user.try_unequip(used_item, src))
+			has_extinguisher = used_item
+			to_chat(user, "<span class='notice'>You place [used_item] in [src].</span>")
 			playsound(src.loc, 'sound/effects/extin.ogg', 50, 0)
 		else
 			opened = !opened
@@ -80,6 +80,7 @@
 /decl/interaction_handler/extinguisher_cabinet_open
 	name = "Open/Close"
 	expected_target_type = /obj/structure/extinguisher_cabinet
+	examine_desc = "open or close $TARGET_THEM$"
 
 /decl/interaction_handler/extinguisher_cabinet_open/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/structure/extinguisher_cabinet/C = target

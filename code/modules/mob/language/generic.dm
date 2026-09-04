@@ -4,7 +4,7 @@
 	desc = "Noises"
 	key = ""
 	flags = LANG_FLAG_RESTRICTED|LANG_FLAG_NONGLOBAL|LANG_FLAG_INNATE|LANG_FLAG_NO_TALK_MSG|LANG_FLAG_NO_STUTTER
-	hidden_from_codex = 1
+	hidden_from_codex = TRUE
 
 /decl/language/noise/format_message(message, verb)
 	return "<span class='message'><span class='[colour]'>[message]</span></span>"
@@ -21,7 +21,8 @@
 
 /decl/language/sign
 	name = "Sign Language"
-	desc = "A sign language commonly used for those who are deaf or mute."
+	desc = "In an age of commonplace extra-vehicular activity and habitation of airless worlds, \
+	sign language is often an essential communication tool for large portions of the population."
 	signlang_verb = list("gestures")
 	colour = "say_quote"
 	key = "s"

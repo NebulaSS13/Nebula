@@ -43,6 +43,13 @@
 
 	var/obj/abstract/lightning_overlay/lightning_overlay // A visible atom used for animated lighting effects.
 	var/tmp/list/vis_contents_additions                  // Holder for a list used to add required atoms to turf vis_contents.
+	/// A list of particle sources to randomize particle-based effects per-turf.
+	var/list/obj/abstract/weather_particles/particle_sources = newlist(
+		/obj/abstract/weather_particles,
+		/obj/abstract/weather_particles,
+		/obj/abstract/weather_particles,
+		/obj/abstract/weather_particles
+	)
 
 // Main heartbeat proc, called by SSweather.
 /obj/abstract/weather_system/proc/tick()
@@ -73,8 +80,8 @@
 	QDEL_NULL(lightning_overlay)
 	. = ..()
 
-// Called by /turf/examine() to show current weather status.
-/obj/abstract/weather_system/examine(mob/user, distance)
+// Called by /turf/examined_by() to show current weather status.
+/obj/abstract/weather_system/examined_by(mob/user, distance)
 	SHOULD_CALL_PARENT(FALSE)
 	var/decl/state/weather/weather_state = weather_system.current_state
 	if(istype(weather_state))
@@ -106,3 +113,35 @@
 	invisibility      = INVISIBILITY_NONE
 	is_spawnable_type = FALSE
 	appearance_flags  = RESET_COLOR | KEEP_APART
+
+// Dummy object for weather particles.
+/obj/abstract/weather_particles
+	// plane             = EMISSIVE_PLANE
+	// layer             = ABOVE_LIGHTING_LAYER
+	icon              = null
+	invisibility      = INVISIBILITY_NONE
+	is_spawnable_type = FALSE
+	appearance_flags  = RESET_COLOR | KEEP_APART
+	layer             = ABOVE_HUMAN_LAYER
+
+/obj/abstract/weather_particles/proc/update_particle_system(obj/abstract/weather_system/holder)
+	if(!istype(particles, /particles/weather))
+		return
+	var/particles/weather/weather_particles = particles
+	weather_particles.color = holder.color // sync color
+	alpha = holder.alpha // sync alpha
+	// reset rotation and velocity
+	weather_particles.rotation = 0
+	weather_particles.velocity = generator("vector", weather_particles.base_velocity[1], weather_particles.base_velocity[2], NORMAL_RAND)
+	if(holder.wind_direction != 0 && holder.wind_strength != 0) // direction is set
+		// rain always falls down, but if the wind is east or west
+		// then it also gets a little bit of side momentum
+		// based on the horizontal component of the direction
+		var/wind_angle = 90 - dir2angle(holder.wind_direction) // byond's coordinate axis is fucky
+		var/x_wind_vel = cos(wind_angle) * holder.wind_strength
+		var/z_wind_vel = sin(wind_angle) * holder.wind_strength // experimental!
+		// tilt to an angle that makes sense for our min/max velocity
+		// 0 is south, but if our velocity is pure south we get -90, so add 90
+		// and then invert it, because byond uses counter-clockwise and we want clockwise
+		weather_particles.rotation = generator("num", 90 - arctan(x_wind_vel * 0.50, weather_particles.base_velocity[1][2]), 90 - arctan(x_wind_vel, weather_particles.base_velocity[2][2]), NORMAL_RAND)
+		weather_particles.velocity += generator("vector", list(0, 0, 0), list(x_wind_vel * weather_particles.wind_intensity, 0, z_wind_vel), NORMAL_RAND)

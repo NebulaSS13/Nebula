@@ -52,10 +52,6 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 	testing(msg)
 	#endif
 
-/hook/startup/proc/loadAdmins()
-	load_admins()
-	return 1
-
 /proc/load_admins()
 	//clear the datums references
 	admin_datums.Cut()

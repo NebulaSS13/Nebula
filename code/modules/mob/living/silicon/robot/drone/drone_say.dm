@@ -21,7 +21,7 @@
 			if(istype(L))
 				return L.broadcast(src,trim(copytext(message,2)))
 
-		//Must be concious to speak
+		//Must be conscious to speak
 		if (stat)
 			return 0
 

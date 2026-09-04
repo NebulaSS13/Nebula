@@ -13,7 +13,7 @@
 		popup.set_content(html)
 		popup.open()
 	else
-		close_window(usr)
+		close_window(user)
 
 /datum/extension/interactive/multitool/proc/get_interact_window(var/obj/item/multitool/M, var/mob/user)
 	return
@@ -36,7 +36,7 @@
 
 /datum/extension/interactive/multitool/extension_act(href, href_list, var/mob/user)
 	if(..())
-		close_window(usr)
+		close_window(user)
 		return TRUE
 
 	var/obj/item/multitool/M = user.get_multitool()
@@ -45,26 +45,29 @@
 		. = send_buffer(M, buffer, user)
 	else if(href_list["purge"])
 		M.set_buffer(null)
-		. = MT_REFRESH
+		. = TOPIC_REFRESH
 	else
 		. = on_topic(href, href_list, user)
 
-	switch(.)
-		if(MT_REFRESH)
-			interact(M, user)
-		if(MT_CLOSE)
-			close_window(user)
-	return MT_NOACTION ? FALSE : TRUE
+	if(. & TOPIC_CLOSE)
+		close_window(user)
+		return TOPIC_HANDLED // don't run any other Topic() behavior for this call
+	else if(. & TOPIC_REFRESH)
+		interact(M, user)
+		return TOPIC_HANDLED // don't return TOPIC_REFRESH to avoid any potential double-refreshes
+	else if(!.)
+		return TOPIC_NOACTION
+	return TOPIC_REFRESH
 
 /datum/extension/interactive/multitool/proc/on_topic(href, href_list, user)
-	return MT_NOACTION
+	return TOPIC_NOACTION
 
 /datum/extension/interactive/multitool/proc/send_buffer(var/obj/item/multitool/M, var/atom/buffer, var/mob/user)
 	if(M.get_buffer() == buffer && buffer)
 		receive_buffer(M, buffer, user)
 	else if(!buffer)
 		to_chat(user, "<span class='warning'>Unable to acquire data from the buffered object. Purging from memory.</span>")
-	return MT_REFRESH
+	return TOPIC_REFRESH
 
 /datum/extension/interactive/multitool/proc/receive_buffer(var/obj/item/multitool/M, var/atom/buffer, var/mob/user)
 	return

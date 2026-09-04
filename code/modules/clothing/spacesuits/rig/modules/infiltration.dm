@@ -46,7 +46,7 @@
 
 	var/mob/living/human/H = holder.wearer
 
-	if(H.add_cloaking_source(src))
+	if(H.add_mob_modifier(/decl/mob_modifier/cloaked, source = src))
 		anim(H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
 /obj/item/rig_module/stealth_field/deactivate()
@@ -56,7 +56,7 @@
 
 	var/mob/living/human/H = holder.wearer
 
-	if(H.remove_cloaking_source(src))
+	if(H.remove_mob_modifier(/decl/mob_modifier/cloaked, source = src))
 		anim(H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
 		anim(H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
@@ -185,7 +185,6 @@
 	interface_name = "dead man's switch"
 	interface_desc = "An integrated automatic self-destruct module. When the wearer dies, so does the surrounding area. Can be triggered manually."
 	var/list/explosion_values = list(1,2,4,5)
-	var/blinking = 0
 	var/blink_mode = 0
 	var/blink_delay = 10
 	var/blink_time = 40

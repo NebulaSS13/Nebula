@@ -11,7 +11,7 @@
 	)
 	mid_length = 10
 	end_sound = 'sound/ambience/firecrackle06.ogg'
-	volume = 10
+	play_volume = 10
 
 /datum/composite_sound/grill
 	start_sound = 'sound/machines/kitchen/grill/grill-start.ogg'
@@ -19,4 +19,4 @@
 	mid_sounds = list('sound/machines/kitchen/grill/grill-mid1.ogg'=10)
 	mid_length = 40
 	end_sound = 'sound/machines/kitchen/grill/grill-stop.ogg'
-	volume = 50
+	play_volume = 50

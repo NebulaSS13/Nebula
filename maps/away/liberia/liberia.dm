@@ -8,8 +8,7 @@
 	name = "Liberia"
 	description = "A Merchant ship."
 	suffixes = list("liberia/liberia.dmm")
-	cost = 0.5
-	spawn_weight = 50
+	cost = 1
 	area_usage_test_exempted_root_areas = list(/area/liberia)
 	shuttles_to_initialise = list(
 		/datum/shuttle/autodock/overmap/mule

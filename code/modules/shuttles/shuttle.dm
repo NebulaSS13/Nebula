@@ -12,7 +12,7 @@
 	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
 	var/flags = 0
 	var/process_state = IDLE_STATE //Used with SHUTTLE_FLAGS_PROCESS, as well as to store current state.
-	var/category = /datum/shuttle
+	abstract_type = /datum/shuttle
 	var/multiz = 0	//how many multiz levels, starts at 0
 
 	var/ceiling_type = /turf/floor/shuttle_ceiling
@@ -35,6 +35,9 @@
 	var/current_port_tag
 	/// A list of all available docking ports to use for rotation/placement when landing and docking.
 	var/list/docking_ports
+
+	/// Set to TRUE to process every time SSshuttle fires, regardless of state.
+	var/always_process = FALSE
 
 /datum/shuttle/New(map_hash, var/obj/effect/shuttle_landmark/initial_location)
 	..()
@@ -106,6 +109,10 @@
 
 	. = ..()
 
+// Return FALSE to end a jump early.
+/datum/shuttle/proc/post_warmup_checks()
+	return TRUE
+
 /datum/shuttle/proc/short_jump(var/obj/effect/shuttle_landmark/destination)
 	if(moving_status != SHUTTLE_IDLE) return
 
@@ -116,7 +123,7 @@
 		if (moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
 
-		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+		if(!post_warmup_checks() || !fuel_check()) //fuel error (probably out of fuel) occurred, so cancel the launch
 			var/datum/shuttle/autodock/S = src
 			if(istype(S))
 				S.cancel_launch(null)
@@ -135,10 +142,11 @@
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
 	spawn(warmup_time*10)
+
 		if(moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
 
-		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+		if(!post_warmup_checks() || !fuel_check()) //fuel error (probably out of fuel) occurred, so cancel the launch
 			var/datum/shuttle/autodock/S = src
 			if(istype(S))
 				S.cancel_launch(null)
@@ -184,7 +192,7 @@
 	var/obj/effect/shuttle_landmark/old_location = current_location
 	RAISE_EVENT(/decl/observ/shuttle_pre_move, src, old_location, destination)
 	shuttle_moved(destination, translation, angle_offset)
-	RAISE_EVENT_REPEAT(/decl/observ/shuttle_moved, src, old_location, destination)
+	RAISE_EVENT(/decl/observ/shuttle_moved, src, old_location, destination)
 	if(istype(old_location))
 		old_location.shuttle_departed(src)
 	destination.shuttle_arrived(src)
@@ -208,7 +216,7 @@
 	var/obj/effect/shuttle_landmark/old_location = current_location
 	RAISE_EVENT(/decl/observ/shuttle_pre_move, src, old_location, destination)
 	shuttle_moved(destination, translation, angle_offset)
-	RAISE_EVENT_REPEAT(/decl/observ/shuttle_moved, src, old_location, destination)
+	RAISE_EVENT(/decl/observ/shuttle_moved, src, old_location, destination)
 	if(istype(old_location))
 		old_location.shuttle_departed(src)
 	destination.shuttle_arrived(src)
@@ -454,3 +462,8 @@
 	if(istype(center_dock) && center_dock.reorient)
 		return dir2angle(destination.dir) - dir2angle(rotation_center.dir)
 	return 0 // do not rotate
+
+/datum/shuttle/proc/message_passengers(audible_message, visible_message)
+	for(var/mob/hearer in global.living_mob_list_ + global.ghost_mob_list)
+		if(is_type_in_list(get_area(hearer), shuttle_area))
+			hearer.show_message(audible_message, AUDIBLE_MESSAGE, visible_message, VISIBLE_MESSAGE)

@@ -19,11 +19,11 @@
 				break
 		if(!new_name)
 			to_chat(user, SPAN_WARNING("No eligible shuttle could be located. Make sure the board is inside a shuttle and try again."))
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		if(!board.is_valid_shuttle(SSshuttle.shuttles[new_name]))
 			to_chat(user, SPAN_WARNING("The current shuttle does not support this console type. Try a different shuttle or circuit board."))
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		board.shuttle_tag = new_name
 		to_chat(user, SPAN_NOTICE("You set the shuttle name to '[new_name]'."))
-		return MT_REFRESH
+		return TOPIC_REFRESH
 	return ..()

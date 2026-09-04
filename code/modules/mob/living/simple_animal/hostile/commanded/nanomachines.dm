@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/commanded/nanomachine
 	name = "swarm"
-	desc = "a cloud of tiny, tiny robots."
+	desc = "A cloud of tiny, tiny robots."
 	icon = 'icons/mob/simple_animal/nanomachines.dmi'
 	natural_weapon = /obj/item/natural_weapon/nanomachine
 	max_health = 10
@@ -20,7 +20,7 @@
 
 /obj/item/natural_weapon/nanomachine
 	name = "decompilers"
-	attack_verb = list("swarmed")
+	attack_verb = "swarmed"
 	_base_attack_force = 2
 	sharp = TRUE
 
@@ -52,8 +52,8 @@
 		if(LAZYLEN(targets) != 1)
 			body.say("ERROR. TARGET COULD NOT BE PARSED.")
 			return 0
-		var/weakref/target_ref = targets[1]
-		set_target(target_ref.resolve())
+		var/weakref/single_target_ref = targets[1]
+		set_target(single_target_ref.resolve())
 		set_stance(STANCE_COMMANDED_HEAL)
 		return 1
 	if(findtext(text,"emergency protocol"))

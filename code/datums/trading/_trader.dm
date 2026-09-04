@@ -41,7 +41,7 @@
 	if(ispath(name_language, /decl/language))
 		var/decl/language/L = GET_DECL(name_language)
 		if(istype(L))
-			name = L.get_random_name(pick(MALE,FEMALE))
+			name = L.get_random_language_name(pick(MALE,FEMALE))
 	if(!name)
 		name = capitalize(pick(global.using_map.first_names_female + global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
 
@@ -67,7 +67,7 @@
 
 /datum/trader/proc/add_to_pool(var/list/pool, var/list/possible, var/base_chance = 100, var/force = 0)
 	var/divisor = 1
-	if(pool && pool.len)
+	if(LAZYLEN(pool))
 		divisor = pool.len
 	if(force || prob(base_chance/divisor))
 		var/new_item = get_possible_item(possible)
@@ -160,7 +160,7 @@
 	return value
 
 /datum/trader/proc/offer_items_for_trade(var/list/offers, var/num, var/turf/location, skill = SKILL_MAX)
-	if(!offers || !offers.len)
+	if(!LAZYLEN(offers))
 		return TRADER_NOT_ENOUGH
 	num = clamp(num, 1, trading_items.len)
 	var/offer_worth = 0
@@ -199,7 +199,7 @@
 	if(ishuman(user))
 		var/mob/living/human/H = user
 		if(H.species)
-			specific = H.species.name
+			specific = H.species.uid
 	else if(issilicon(user))
 		specific = TRADER_HAIL_SILICON_END
 	if(!speech["[TRADER_HAIL_START][specific]"])
@@ -229,7 +229,7 @@
 	return get_response(TRADER_COMPLIMENT_ACCEPT, "Thank you!")
 
 /datum/trader/proc/trade(var/list/offers, var/num, var/turf/location)
-	if(offers && offers.len)
+	if(LAZYLEN(offers))
 		for(var/offer in offers)
 			if(ismob(offer))
 				var/text = mob_transfer_message
@@ -263,7 +263,7 @@
 /datum/trader/proc/sell_items(var/list/offers, skill = SKILL_MAX)
 	if(!(trade_flags & TRADER_GOODS))
 		return TRADER_NO_GOODS
-	if(!offers || !offers.len)
+	if(!LAZYLEN(offers))
 		return TRADER_NOT_ENOUGH
 
 	var/wanted

@@ -12,8 +12,8 @@
 	shorthand = "KV"
 	machine_understands = FALSE
 	var/list/correct_mouthbits = list(
-		SPECIES_MANTID_ALATE,
-		SPECIES_MANTID_GYNE
+		/decl/species/mantid::uid,
+		/decl/species/mantid/gyne::uid
 	)
 
 /decl/language/mantid/can_be_spoken_properly_by(var/mob/speaker)
@@ -24,7 +24,7 @@
 		return SPEECH_RESULT_GOOD
 	if(ishuman(speaker))
 		var/mob/living/human/H = speaker
-		if(H.species.name in correct_mouthbits)
+		if(H.species.uid in correct_mouthbits)
 			return SPEECH_RESULT_GOOD
 	return SPEECH_RESULT_MUDDLED
 
@@ -47,7 +47,7 @@
 /decl/language/mantid/nonvocal
 	key = "]"
 	name = "Ascent-Glow"
-	desc = "A complex visual language of bright bio-luminescent flashes, 'spoken' natively by the Kharmaani of the Ascent."
+	desc = "A complex visual language of bright bioluminescent flashes, 'spoken' natively by the Kharmaani of the Ascent."
 	colour = "alien"
 	speech_verb = "flashes"
 	ask_verb = "gleams"
@@ -74,7 +74,7 @@
 		return TRUE
 	else if(ishuman(speaker))
 		var/mob/living/human/H = speaker
-		return (H.species.name == SPECIES_MANTID_ALATE || H.species.name == SPECIES_MANTID_GYNE)
+		return istype(H.get_species(), /decl/species/mantid)
 	return FALSE
 
 /decl/language/mantid/worldnet

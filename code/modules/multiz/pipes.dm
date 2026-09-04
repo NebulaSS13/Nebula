@@ -8,7 +8,7 @@
 	name = "upwards pipe"
 	desc = "A pipe segment to connect upwards."
 
-	volume = 70
+	gas_volume = 70
 
 	dir = SOUTH
 	initialize_directions = SOUTH

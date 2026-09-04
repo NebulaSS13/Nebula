@@ -187,7 +187,6 @@ var/global/datum/controller/master/Master = new
 
 	var/msg = "Initializations complete within [time] second\s!"
 	report_progress(msg)
-	log_world(msg)
 
 	initializing = FALSE
 

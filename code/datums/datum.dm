@@ -9,10 +9,17 @@
 	var/list/active_timers
 	/// Used to avoid unnecessary refstring creation in Destroy().
 	var/tmp/has_state_machine = FALSE
+	/// Var for holding a unique-to-this-run identifier for a serialized datum.
+	VAR_PRIVATE/tmp/__run_uid
 
-#ifdef TESTING
+#ifdef REFTRACKING_ENABLED
 	var/tmp/running_find_references
+	/// When was this datum last touched by a reftracker?
+	/// If this value doesn't match with the start of the search
+	/// We know this datum has never been seen before, and we should check it
 	var/tmp/last_find_references = 0
+	/// How many references we're trying to find when searching
+	var/tmp/references_to_clear = 0
 #endif
 
 // Default implementation of clean-up code.
@@ -24,7 +31,7 @@
 	tag = null
 	weakref = null // Clear this reference to ensure it's kept for as brief duration as possible.
 
-	if(istype(SSnano))
+	if(length(open_uis)) // inline the open ui check to avoid unnecessary proc call overhead
 		SSnano.close_uis(src)
 
 	if(active_timers)
@@ -37,28 +44,27 @@
 			qdel(timer)
 
 	if(extensions)
-		for(var/expansion_key in extensions)
-			var/list/extension = extensions[expansion_key]
+		var/list/extension_list
+		for(var/expansion_key, extension in extensions)
 			if(islist(extension))
-				extension.Cut()
+				extension_list = extension
+				extension_list.Cut()
 			else
 				qdel(extension)
 		extensions = null
 
-	var/decl/observ/destroyed/destroyed_event = GET_DECL(/decl/observ/destroyed)
-	// Typecheck is needed (rather than nullchecking) due to oddness with new() ordering during world creation.
-	if(istype(events_repository) && destroyed_event.event_sources[src])
-		RAISE_EVENT(/decl/observ/destroyed, src)
+	if(event_listeners?[/decl/observ/destroyed])
+		raise_event_non_global(/decl/observ/destroyed)
 
 	if (!isturf(src))	// Not great, but the 'correct' way to do it would add overhead for little benefit.
 		cleanup_events(src)
 
 	if(has_state_machine)
-		var/list/machines = global.state_machines["\ref[src]"]
+		var/list/machines = global.state_machines[src]
 		if(length(machines))
 			for(var/base_type in machines)
 				qdel(machines[base_type])
-			global.state_machines -= "\ref[src]"
+			global.state_machines -= src
 
 	return QDEL_HINT_QUEUE
 
@@ -111,10 +117,3 @@
  */
 /datum/proc/PopulateClone(var/datum/clone)
 	return clone
-
-/////////////////////////////////////////////////////////////
-//Common implementations
-/////////////////////////////////////////////////////////////
-
-/image/GetCloneArgs()
-	return list(icon, loc, icon_state, layer, dir)

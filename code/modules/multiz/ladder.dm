@@ -120,12 +120,12 @@
 /obj/structure/ladder/grab_attack(obj/item/grab/grab, mob/user)
 	return FALSE
 
-/obj/structure/ladder/attackby(obj/item/I, mob/user)
-	. = !istype(I, /obj/item/grab) && ..()
+/obj/structure/ladder/attackby(obj/item/used_item, mob/user)
+	. = !istype(used_item, /obj/item/grab) && ..()
 	if(!.)
-		climb(user, I)
+		climb(user, used_item)
 
-/obj/structure/ladder/hitby(obj/item/I)
+/obj/structure/ladder/hitby(obj/item/thing)
 	. = ..()
 	if(!target_down)
 		return
@@ -136,16 +136,16 @@
 	if(!istype(landing))
 		return
 	for(var/atom/A in landing)
-		if(!A.CanPass(I, I.loc, 1.5, 0))
+		if(!A.CanPass(thing, thing.loc, 1.5, 0))
 			blocker = A
 			break
 	if(!blocker)
-		visible_message(SPAN_DANGER("\The [I] goes down \the [src]!"))
-		I.forceMove(landing)
-		landing.visible_message(SPAN_DANGER("\The [I] falls from the top of \the [target_down]!"))
+		visible_message(SPAN_DANGER("\The [thing] goes down \the [src]!"))
+		thing.forceMove(landing)
+		landing.visible_message(SPAN_DANGER("\The [thing] falls from the top of \the [target_down]!"))
 
 /obj/structure/ladder/attack_hand(var/mob/user)
-	if(user.a_intent == I_HURT || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+	if(user.check_intent(I_FLAG_HARM) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
 		return ..()
 	climb(user)
 	return TRUE
@@ -168,7 +168,7 @@
 	if(target_ladder)
 		M.dropInto(target_ladder.loc)
 
-/obj/structure/ladder/proc/climb(mob/M, obj/item/I)
+/obj/structure/ladder/proc/climb(mob/M, obj/item/thing)
 	if(!M.may_climb_ladders(src))
 		return
 
@@ -186,7 +186,7 @@
 	M.visible_message(SPAN_NOTICE("\The [M] begins climbing [direction] \the [src]."))
 	target_ladder.audible_message(SPAN_NOTICE("You hear something coming [direction] \the [src]."))
 	if(do_after(M, climb_time, src))
-		climbLadder(M, target_ladder, I)
+		climbLadder(M, target_ladder, thing)
 
 /obj/structure/ladder/attack_ghost(var/mob/M)
 	instant_climb(M)
@@ -250,7 +250,7 @@
 /mob/observer/ghost/may_climb_ladders(var/ladder)
 	return TRUE
 
-/obj/structure/ladder/proc/climbLadder(mob/user, target_ladder, obj/item/I = null)
+/obj/structure/ladder/proc/climbLadder(mob/user, target_ladder, obj/item/thing = null)
 	var/turf/T = get_turf(target_ladder)
 	for(var/atom/A in T)
 		if(!A.CanPass(user, user.loc, 1.5, 0))
@@ -258,10 +258,10 @@
 			//We cannot use the ladder, but we probably can remove the obstruction
 			var/atom/movable/M = A
 			if(istype(M) && M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-				if(isnull(I) || istype(I, /obj/item/grab))
+				if(isnull(thing) || istype(thing, /obj/item/grab))
 					M.attack_hand_with_interaction_checks(user)
 				else
-					M.attackby(I, user)
+					M.attackby(thing, user)
 			return FALSE
 	playsound(src, pick(climbsounds), 50)
 	playsound(target_ladder, pick(climbsounds), 50)
@@ -277,8 +277,8 @@
 	else
 		icon_state = "[base_icon][!!target_up][!!target_down]"
 	if(target_down && draw_shadow)
-		var/image/I = image(icon, "downward_shadow")
-		I.appearance_flags |= RESET_COLOR
-		underlays = list(I)
+		var/image/overlay_image = image(icon, "downward_shadow")
+		overlay_image.appearance_flags |= RESET_COLOR
+		underlays = list(overlay_image)
 	else
 		underlays.Cut()

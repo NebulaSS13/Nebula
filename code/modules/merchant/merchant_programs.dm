@@ -39,7 +39,7 @@
 
 /datum/computer_file/program/merchant/proc/get_available_hubs()
 	. = list()
-	var/turf/T = get_turf(holder)
+	var/turf/T = get_turf(holder.resolve())
 	for(var/datum/trade_hub/hub in SStrade.trade_hubs)
 		if(hub.is_accessible_from(T))
 			. |= hub

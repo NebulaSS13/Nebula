@@ -33,17 +33,17 @@
 
 	update_icon()
 
-/obj/item/flamethrower/examine(mob/user, distance)
+/obj/item/flamethrower/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
 		if(tank)
-			to_chat(user, SPAN_NOTICE("Release pressure is set to [throw_amount] kPa. The tank has about [round(tank.air_contents.return_pressure(), 10)] kPa left in it."))
+			. += SPAN_NOTICE("Release pressure is set to [throw_amount] kPa. The tank has about [round(tank.air_contents.return_pressure(), 10)] kPa left in it.")
 		else
-			to_chat(user, SPAN_WARNING("It has no tank installed."))
+			. += SPAN_WARNING("It has no tank installed.")
 		if(igniter)
-			to_chat(user, SPAN_NOTICE("It has \an [igniter] installed."))
+			. += SPAN_NOTICE("It has \an [igniter] installed.")
 		else
-			to_chat(user, SPAN_WARNING("It has no igniter installed."))
+			. += SPAN_WARNING("It has no igniter installed.")
 
 /obj/item/flamethrower/Destroy()
 	QDEL_NULL(welding_tool)
@@ -94,7 +94,7 @@
 
 	// Make sure our user is still holding us
 	if(user && user.get_active_held_item() == src)
-		if(user.a_intent == I_HELP) //don't shoot if we're on help intent
+		if(user.check_intent(I_FLAG_HELP)) //don't shoot if we're on help intent
 			to_chat(user, SPAN_WARNING("You refrain from firing \the [src] as your intent is set to help."))
 			return
 
@@ -106,11 +106,11 @@
 /obj/item/flamethrower/isflamesource()
 	return lit
 
-/obj/item/flamethrower/attackby(obj/item/W, mob/user)
+/obj/item/flamethrower/attackby(obj/item/used_item, mob/user)
 	if(user.incapacitated())
 		return TRUE
 
-	if(IS_WRENCH(W) && !secured)//Taking this apart
+	if(IS_WRENCH(used_item) && !secured)//Taking this apart
 		var/turf/T = get_turf(src)
 		if(welding_tool)
 			welding_tool.dropInto(T)
@@ -128,14 +128,14 @@
 		qdel(src)
 		return TRUE
 
-	if(IS_SCREWDRIVER(W) && igniter && !lit)
+	if(IS_SCREWDRIVER(used_item) && igniter && !lit)
 		secured = !secured
 		to_chat(user, SPAN_NOTICE("\The [igniter] is now [secured ? "secured" : "unsecured"]!"))
 		update_icon()
 		return TRUE
 
-	if(isigniter(W))
-		var/obj/item/assembly/igniter/I = W
+	if(isigniter(used_item))
+		var/obj/item/assembly/igniter/I = used_item
 		if(I.secured)
 			to_chat(user, SPAN_WARNING("\The [I] is not ready to attach yet! Use a screwdriver on it first."))
 			return TRUE
@@ -149,23 +149,23 @@
 		update_icon()
 		return TRUE
 
-	if(istype(W, /obj/item/tank))
+	if(istype(used_item, /obj/item/tank))
 		if(tank)
 			to_chat(user, SPAN_WARNING("There appears to already be a tank loaded in \the [src]!"))
 			return TRUE
 
-		user.drop_from_inventory(W, src)
-		tank = W
+		user.drop_from_inventory(used_item, src)
+		tank = used_item
 		update_icon()
 		return TRUE
 
-	if(istype(W, /obj/item/scanner/gas))
-		var/obj/item/scanner/gas/A = W
+	if(istype(used_item, /obj/item/scanner/gas))
+		var/obj/item/scanner/gas/A = used_item
 		A.analyze_gases(src, user)
 		return TRUE
 
 
-	if(W.isflamesource()) // you can light it with external input, even without an igniter
+	if(used_item.isflamesource()) // you can light it with external input, even without an igniter
 		attempt_lighting(user, TRUE)
 		update_icon()
 		return TRUE
@@ -296,7 +296,7 @@
 	target.create_fire(tank.air_contents.temperature * 2 + 400)
 	target.hotspot_expose(1000, 100)
 	for(var/mob/living/M in target)
-		M.IgniteMob(1)
+		M.ignite_fire()
 
 // slightly weird looking initialize cuz it has to do some stuff first
 /obj/item/flamethrower/full/Initialize()

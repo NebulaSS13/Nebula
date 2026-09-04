@@ -20,7 +20,7 @@
 	var/list/s3c  = list("m", "r", "ng", "b", "rb", "mb", "g", "lg", "l", "lb", "lm", "k", "nk", "ld", "d", "rsn")
 	var/list/s3r  = list("is", "us", "er", "in")
 
-/decl/language/kobaloi/get_random_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
+/decl/language/kobaloi/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	return capitalize(get_next_scramble_token())
 
 /decl/language/kobaloi/get_next_scramble_token()

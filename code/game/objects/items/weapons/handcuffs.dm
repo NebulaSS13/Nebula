@@ -33,13 +33,13 @@
 		loc.visible_message(SPAN_WARNING("\The [src] attached to \the [loc] snap and fall away!"), range = 1)
 	. = ..()
 
-/obj/item/handcuffs/examine(mob/user)
+/obj/item/handcuffs/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if (current_health > 0 && get_max_health() > 0)
 		var display = get_percent_health()
 		if (display > 66)
 			return
-		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))
+		. += SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged.")
 
 /obj/item/handcuffs/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 

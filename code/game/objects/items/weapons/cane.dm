@@ -61,14 +61,13 @@
 		return TRUE
 	return ..()
 
-/obj/item/cane/fancy/sword/attackby(var/obj/item/knife/folding/W, var/mob/user)
-
-	if(!istype(concealed_blade) && istype(W) && user.try_unequip(W, src))
+/obj/item/cane/fancy/sword/attackby(var/obj/item/used_item, var/mob/user)
+	if(!istype(concealed_blade) && istype(used_item, /obj/item/knife/folding) && user.try_unequip(used_item, src))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] has sheathed \a [W] into \the [src]."),
-			SPAN_NOTICE("You sheathe \the [W] into \the [src].")
+			SPAN_NOTICE("\The [user] has sheathed \a [used_item] into \the [src]."),
+			SPAN_NOTICE("You sheathe \the [used_item] into \the [src].")
 		)
-		concealed_blade = W
+		concealed_blade = used_item
 		update_icon()
 		user.update_inhand_overlays()
 		return TRUE

@@ -1,0 +1,2 @@
+# APCs are no longer a subtype of /obj/machinery/power
+/obj/machinery/power/apc/@SUBTYPES : /obj/machinery/apc/@SUBTYPES{@OLD}

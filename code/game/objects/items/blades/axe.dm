@@ -5,7 +5,7 @@
 	drop_sound          = 'sound/foley/tooldrop1.ogg'
 	w_class             = ITEM_SIZE_HUGE
 	slot_flags          = SLOT_BACK
-	hilt_material       = /decl/material/solid/organic/wood
+	hilt_material       = /decl/material/solid/organic/wood/oak
 	guard_material      = /decl/material/solid/organic/leather/gut
 	pommel_material     = null
 	attack_verb         = list("attacked", "chopped", "cleaved", "torn", "cut")
@@ -19,8 +19,8 @@
 	. = ..()
 	if(proximity && A && is_held_twohanded())
 		if(istype(A,/obj/structure/window))
-			var/obj/structure/window/W = A
-			W.shatter()
+			var/obj/structure/window/window = A
+			window.shatter()
 		else if(istype(A,/obj/structure/grille))
 			qdel(A)
 		else if(istype(A,/obj/effect/vine))

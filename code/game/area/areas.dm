@@ -4,7 +4,7 @@ var/global/list/areas = list()
 
 /area
 
-	level = null
+	level = 0
 	name = "Unknown"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
@@ -13,6 +13,9 @@ var/global/list/areas = list()
 	luminosity =    0
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
+	// If true, this area will force light switches on during init.
+	var/area_start_lit = null
+
 	// If true, will allow natural walls in this area to have xenoarchaeology finds in them.
 	var/allow_xenoarchaeology_finds = TRUE
 
@@ -20,8 +23,10 @@ var/global/list/areas = list()
 	var/interior_ambient_light_modifier
 	// If set, will apply ambient light of this colour to turfs under a ceiling.
 
-	var/proper_name /// Automatically set by SetName and Initialize; cached result of strip_improper(name).
-	var/holomap_color	// Color of this area on the holomap. Must be a hex color (as string) or null.
+	/// Automatically set by SetName and Initialize; cached result of strip_improper(name).
+	var/tmp/proper_name
+	/// Color of this area on the holomap. Must be a hex color (as string) or null.
+	var/holomap_color
 
 	var/fire
 	var/party
@@ -29,9 +34,10 @@ var/global/list/areas = list()
 
 	var/lightswitch =         TRUE
 	var/requires_power =      TRUE
-	var/always_unpowered =    FALSE //this gets overriden to 1 for space in area/New()
+	/// Disables constructing or using APCs in this area.
+	var/always_unpowered =    FALSE
 
-	var/atmosalm =            0
+	var/atmosalm =            /obj/machinery/alarm::DANGER_NONE
 	var/power_equip =         1 // Status
 	var/power_light =         1
 	var/power_environ =       1
@@ -44,7 +50,7 @@ var/global/list/areas = list()
 	var/has_gravity =         TRUE
 	var/air_doors_activated = FALSE
 
-	var/obj/machinery/power/apc/apc
+	var/obj/machinery/apc/apc
 	var/list/all_doors		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
 	var/list/ambience = list(
 		'sound/ambience/ambigen1.ogg',
@@ -123,45 +129,46 @@ var/global/list/areas = list()
 	..()
 	return QDEL_HINT_HARDDEL
 
-// Changes the area of T to A. Do not do this manually.
+// Changes the area of src to A. Do not do this manually.
 // Area is expected to be a non-null instance.
-/proc/ChangeArea(var/turf/T, var/area/A)
+/turf/proc/ChangeArea(var/area/A)
 	if(!istype(A))
 		CRASH("Area change attempt failed: invalid area supplied.")
-	var/old_outside = T.is_outside()
-	var/area/old_area = get_area(T)
+	var/old_outside = is_outside()
+	var/area/old_area = get_area(src)
 	if(old_area == A)
 		return
 
 	var/old_area_ambience = old_area?.interior_ambient_light_modifier
 
-	A.contents.Add(T)
+	A.contents.Add(src)
 	if(old_area)
-		old_area.Exited(T, A)
-		for(var/atom/movable/AM as anything in T)
+		old_area.Exited(src, A)
+		for(var/atom/movable/AM as anything in src)
 			old_area.Exited(AM, A)  // Note: this _will_ raise exited events.
-	A.Entered(T, old_area)
-	for(var/atom/movable/AM as anything in T)
+	A.Entered(src, old_area)
+	for(var/atom/movable/AM as anything in src)
 		A.Entered(AM, old_area) // Note: this will _not_ raise moved or entered events. If you change this, you must also change everything which uses them.
 
-	for(var/obj/machinery/M in T)
+	for(var/obj/machinery/M in src)
 		M.area_changed(old_area, A) // They usually get moved events, but this is the one way an area can change without triggering one.
 
-	T.update_registrations_on_adjacent_area_change()
+	update_registrations_on_adjacent_area_change()
 	for(var/direction in global.cardinal)
-		var/turf/adjacent_turf = get_step(T, direction)
+		var/turf/adjacent_turf = get_step(src, direction)
 		if(adjacent_turf)
 			adjacent_turf.update_registrations_on_adjacent_area_change()
 
 	// Handle updating weather and atmos if the outside status of the turf changed.
-	if(T.is_outside == OUTSIDE_AREA)
-		T.update_external_atmos_participation() // Refreshes outside status and adds exterior air to turf air if necessary.
+	if(is_outside == OUTSIDE_AREA)
+		update_external_atmos_participation() // Refreshes outside status and adds exterior air to turf air if necessary.
 
-	if(T.is_outside() != old_outside)
-		T.update_weather()
-		AMBIENCE_QUEUE_TURF(T)
-	else if(A.interior_ambient_light_modifier != old_area_ambience)
-		AMBIENCE_QUEUE_TURF(T)
+	if(is_outside() != old_outside)
+		update_weather()
+		if(SSambience.initialized) // if not initialized, we'll loop over all turfs anyway
+			AMBIENCE_QUEUE_TURF(src)
+	else if(A.interior_ambient_light_modifier != old_area_ambience && SSambience.initialized)
+		AMBIENCE_QUEUE_TURF(src)
 
 /turf/proc/update_registrations_on_adjacent_area_change()
 	for(var/obj/machinery/door/firedoor/door in src)
@@ -177,7 +184,7 @@ var/global/list/areas = list()
 	return cameras
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
-	if (danger_level == 0)
+	if (danger_level == /obj/machinery/alarm::DANGER_NONE)
 		atmosphere_alarm.clearAlarm(src, alarm_source)
 	else
 		atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
@@ -188,10 +195,10 @@ var/global/list/areas = list()
 			danger_level = max(danger_level, AA.danger_level)
 
 	if(danger_level != atmosalm)
-		if (danger_level < 1 && atmosalm >= 1)
+		if (danger_level < /obj/machinery/alarm::DANGER_WARN && atmosalm >= /obj/machinery/alarm::DANGER_WARN)
 			//closing the doors on red and opening on green provides a bit of hysteresis that will hopefully prevent fire doors from opening and closing repeatedly due to noise
 			air_doors_open()
-		else if (danger_level >= 2 && atmosalm < 2)
+		else if (danger_level >= /obj/machinery/alarm::DANGER_DANGER && atmosalm < /obj/machinery/alarm::DANGER_DANGER)
 			air_doors_close()
 
 		atmosalm = danger_level
@@ -297,7 +304,7 @@ var/global/list/areas = list()
 #define DO_PARTY(COLOR) animate(color = COLOR, time = 0.5 SECONDS, easing = QUAD_EASING)
 
 /area/on_update_icon()
-	if((atmosalm || fire || eject || party) && (!requires_power||power_environ) && !istype(src, /area/space))//If it doesn't require power, can still activate this proc.
+	if((atmosalm || fire || eject || party) && (!requires_power||power_environ) && !always_unpowered)//If it doesn't require power, can still activate this proc.
 		if(fire && !atmosalm && !eject && !party) // FIRE
 			color = "#ff9292"
 			animate(src)	// stop any current animations.
@@ -393,8 +400,8 @@ var/global/list/mob/living/forced_ambiance_list = new
 	if(LAZYLEN(forced_ambience) && !(L in forced_ambiance_list))
 		forced_ambiance_list += L
 		L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = sound_channels.lobby_channel))
-	if(LAZYLEN(ambience) && prob(5) && (world.time >= L.client.played + 3 MINUTES))
-		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = sound_channels.ambience_channel))
+	if(LAZYLEN(ambience) && prob(35) && (world.time >= L.client.played + 1.5 MINUTES))
+		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 25, channel = sound_channels.ambience_channel))
 		L.client.played = world.time
 
 /area/proc/clear_ambience(var/mob/living/L)
@@ -402,9 +409,8 @@ var/global/list/mob/living/forced_ambiance_list = new
 		sound_to(L, sound(null, channel = sound_channels.lobby_channel))
 		forced_ambiance_list -= L
 
-/area/proc/gravitychange(var/gravitystate = 0)
+/area/proc/gravitychange(gravitystate = 0)
 	has_gravity = gravitystate
-
 	for(var/mob/M in src)
 		if(has_gravity)
 			thunk(M)
@@ -449,9 +455,9 @@ var/global/list/mob/living/forced_ambiance_list = new
 				M.throw_at(T, maxrange, speed)
 
 /area/proc/prison_break()
-	var/obj/machinery/power/apc/theAPC = get_apc()
+	var/obj/machinery/apc/theAPC = get_apc()
 	if(theAPC && theAPC.operating)
-		for(var/obj/machinery/power/apc/temp_apc in src)
+		for(var/obj/machinery/apc/temp_apc in src)
 			temp_apc.overload_lighting(70)
 		for(var/obj/machinery/door/airlock/temp_airlock in src)
 			temp_airlock.prison_open()

@@ -31,11 +31,8 @@
 
 /datum/category_item/player_setup_item/records/character_info/OnTopic(var/href,var/list/href_list, var/mob/user)
 
-	if (record_key && href_list["set_record"])
-		var/new_record = sanitize(input(user,"Enter new [lowertext(name)] here.", CHARACTER_PREFERENCE_INPUT_TITLE, html_decode(pref.records[record_key])) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
-		if(!isnull(new_record) && !jobban_isbanned(user, "Records") && !jobban_isbanned(user, name) && CanUseTopic(user))
-			pref.records[record_key] = new_record
-		return TOPIC_REFRESH
+	if((. = ..())) // does nothing because it has no records_key
+		return
 
 	var/datum/character_information/comments = pref.comments_record_id && SScharacter_info.get_record(pref.comments_record_id, TRUE)
 	if(comments)
@@ -64,3 +61,9 @@
 
 	if(. == TOPIC_REFRESH && istext(pref.comments_record_id) && length(pref.comments_record_id))
 		SScharacter_info.queue_to_save(pref.comments_record_id)
+
+/datum/category_item/player_setup_item/records/character_info/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	if(is_preview_copy)
+		return
+	pref.validate_comments_record() // Make sure a record has been generated for this character.
+	character.comments_record_id = pref.comments_record_id

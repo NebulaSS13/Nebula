@@ -71,7 +71,7 @@
 		lines += "[entry] => [num2text(data[STAT_ENTRY_TIME], 10)]ms ([data[STAT_ENTRY_COUNT]]) (avg:[num2text(data[STAT_ENTRY_TIME]/(data[STAT_ENTRY_COUNT] || 1), 99)])"
 
 	if (user)
-		direct_output(user, browse("<ol><li>[lines.Join("</li><li>")]</li></ol>", "window=[url_encode("stats:[ref(stats)]")]"))
+		show_browser(user, "<ol><li>[lines.Join("</li><li>")]</li></ol>", "window=[url_encode("stats:[ref(stats)]")]")
 
 	. = lines.Join("\n")
 
@@ -110,7 +110,8 @@
 	var/init = call_ext(lib, "init")()
 	if("0" != init) CRASH("[lib] init error: [init]")
 
-/world/New()
+var/global/datum/profiler/_profiler = new
+/datum/profiler/New()
 	prof_init()
-	. = ..()
+	..()
 #endif

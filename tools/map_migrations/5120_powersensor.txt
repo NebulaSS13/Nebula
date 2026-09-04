@@ -1,0 +1,2 @@
+# Powernet sensors are no longer a subtype of /obj/machinery/power
+/obj/machinery/power/sensor/@SUBTYPES : /obj/machinery/power_sensor/@SUBTYPES{@OLD}

@@ -3,6 +3,6 @@
 	return (flooring && flooring.is_psi_null()) ? src : ..()
 
 /turf/floor/tiled/nullglass
-	name = "nullglass floor"
+	name       = "nullglass floor"
 	icon_state = "nullglass"
-	_flooring = /decl/flooring/tiling/nullglass
+	_flooring  = /decl/flooring/tiling/nullglass

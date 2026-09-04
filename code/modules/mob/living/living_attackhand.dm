@@ -1,22 +1,19 @@
 /mob/living/attack_hand(mob/user)
 	// Allow grabbing a mob that you are buckled to, so that you can generate a control grab (for riding).
-	if(buckled == user && user.a_intent == I_GRAB)
+	if(buckled == user && user.check_intent(I_FLAG_GRAB))
 		return try_make_grab(user)
 	return ..() || (user && default_interaction(user))
 
 /mob/living/proc/default_interaction(var/mob/user)
-
 	SHOULD_CALL_PARENT(TRUE)
-
-	switch(user.a_intent)
-		if(I_HURT)
-			. = default_hurt_interaction(user)
-		if(I_HELP)
-			. = default_help_interaction(user)
-		if(I_DISARM)
-			. = default_disarm_interaction(user)
-		if(I_GRAB)
-			. = default_grab_interaction(user)
+	if(user.check_intent(I_FLAG_HARM))
+		. = default_hurt_interaction(user)
+	else if(user.check_intent(I_FLAG_HELP))
+		. = default_help_interaction(user)
+	else if(user.check_intent(I_FLAG_DISARM))
+		. = default_disarm_interaction(user)
+	else if(user.check_intent(I_FLAG_GRAB))
+		. = default_grab_interaction(user)
 
 /mob/living/proc/default_hurt_interaction(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
@@ -56,11 +53,11 @@
 
 // Returns TRUE if further interactions should be halted, FALSE otherwise.
 /mob/living/proc/try_extinguish(mob/living/user)
-	if (!on_fire || !istype(user))
+	if (!is_on_fire() || !istype(user))
 		return FALSE
 
 	playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-	if (user.on_fire)
+	if (user.is_on_fire())
 		user.visible_message(
 			SPAN_WARNING("\The [user] tries to pat out \the [src]'s flames, but to no avail!"),
 			SPAN_WARNING("You try to pat out [src]'s flames, but to no avail! Put yourself out first!")
@@ -75,25 +72,25 @@
 	if(!do_mob(user, src, 15))
 		return TRUE
 
-	fire_stacks -= 0.5
-	if (prob(10) && (user.fire_stacks <= 0))
-		user.fire_stacks += 1
-	user.IgniteMob()
-	if (user.on_fire)
+	adjust_fire_intensity(-0.5)
+	if (prob(10) && (user.get_fire_intensity() <= 0))
+		user.adjust_fire_intensity(1)
+	user.ignite_fire()
+	if (user.is_on_fire())
 		user.visible_message(
 			SPAN_DANGER("The fire spreads from \the [src] to \the [user]!"),
 			SPAN_DANGER("The fire spreads to you as well!")
 		)
 		return TRUE
 
-	fire_stacks -= 0.5 //Less effective than stop, drop, and roll - also accounting for the fact that it takes half as long.
-	if (fire_stacks <= 0)
+	adjust_fire_intensity(-0.5) //Less effective than stop, drop, and roll - also accounting for the fact that it takes half as long.
+	if (get_fire_intensity() <= 0)
 		user.visible_message(
 			SPAN_NOTICE("\The [user] successfully pats out \the [src]'s flames."),
 			SPAN_NOTICE("You successfully pat out \the [src]'s flames.")
 		)
-		ExtinguishMob()
-		fire_stacks = 0
+		extinguish_fire()
+		set_fire_intensity(0)
 
 	return TRUE
 
@@ -106,8 +103,7 @@
 		uniform.add_fingerprint(user)
 
 	// They're SSD, so permanently asleep.
-	var/show_ssd = get_species_name()
-	if(show_ssd && ssd_check())
+	if(ssd_check() && get_species()?.get_ssd(src))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] shakes \the [src] trying to wake [pronouns.him] up!"),
 			SPAN_NOTICE("You shake \the [src], but they do not respond...")

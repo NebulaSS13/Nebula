@@ -1,8 +1,10 @@
 //The base type is suitable for generic buffs not needing special treatment.
 /datum/skill_buff
 	var/list/buffs              //Format: list(skill_path = amount)
-	var/limit                   //How many buffs of this type a skillset can have. null = no limit
-	var/datum/skillset/skillset //The skillset to which this buff belongs.
+	/// How many buffs of this type a skillset can have. null = no limit
+	var/limit
+	/// The skillset to which this buff belongs.
+	var/datum/skillset/skillset
 
 /datum/skill_buff/New(buff)
 	buffs = buff
@@ -17,7 +19,7 @@
 //Clamps the buff amounts so that the target stays between SKILL_MIN and SKILL_MAX in all skills.
 /datum/skill_buff/proc/tailor_buff(mob/target)
 	if(!buffs)
-		return
+		return 0
 	var/list/temp_buffs = buffs.Copy()
 	for(var/skill_type in temp_buffs)
 		var/has_now = target.get_skill_value(skill_type)
@@ -28,10 +30,10 @@
 
 /datum/skill_buff/proc/can_buff(mob/target)
 	if(!length(buffs) || !istype(target))
-		return //what are we even buffing?
+		return FALSE //what are we even buffing?
 	if(target.too_many_buffs(type))
-		return
-	return 1
+		return FALSE
+	return TRUE
 
 /datum/skill_buff/proc/remove()
 	var/datum/skillset/my_skillset = skillset
@@ -78,4 +80,5 @@
 /mob/proc/too_many_buffs(datum/skill_buff/buff_type)
 	var/limit = initial(buff_type.limit)
 	if(limit && (length(fetch_buffs_of_type(buff_type, 0)) >= limit))
-		return 1
+		return TRUE
+	return FALSE

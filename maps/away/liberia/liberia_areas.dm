@@ -1,4 +1,5 @@
 /area/liberia
+	abstract_type = /area/liberia
 	req_access = list(access_merchant)
 
 /area/liberia/dockinghall
@@ -42,11 +43,11 @@
 	icon_state = "engine"
 
 /area/liberia/personellroom1
-	name = "\improper Liberia - Personell Room 1"
+	name = "\improper Liberia - Personal Room 1"
 	icon_state = "dk_yellow"
 
 /area/liberia/personellroom2
-	name = "\improper Liberia - Personell Room 2"
+	name = "\improper Liberia - Personal Room 2"
 	icon_state = "purple"
 
 /area/liberia/traidingroom

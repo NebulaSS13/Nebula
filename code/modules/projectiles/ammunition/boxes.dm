@@ -63,7 +63,7 @@
 		add_overlay(overlay_image(icon, "shotholder-marking", marking_color, RESET_COLOR))
 
 /obj/item/ammo_magazine/shotholder/attack_hand(mob/user)
-	if(loc != user || user.a_intent != I_HURT || !get_stored_ammo_count() || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
+	if(loc != user || !user.check_intent(I_FLAG_HARM) || !get_stored_ammo_count() || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	create_initial_contents()
 	var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]

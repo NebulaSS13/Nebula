@@ -159,13 +159,13 @@
 
 /decl/chemical_reaction/drug/stimulants
 	name = "Stimulants"
-	result = /decl/material/liquid/stimulants
+	result = /decl/material/liquid/accumulated/stimulants
 	required_reagents = list(/decl/material/liquid/hallucinogenics = 1, /decl/material/solid/lithium = 1)
 	result_amount = 3
 
 /decl/chemical_reaction/drug/antidepressants
 	name = "Antidepressants"
-	result = /decl/material/liquid/antidepressants
+	result = /decl/material/liquid/accumulated/antidepressants
 	required_reagents = list(/decl/material/liquid/hallucinogenics = 1, /decl/material/solid/carbon = 1)
 	result_amount = 3
 

@@ -5,7 +5,7 @@
 	accessory_visibility = ACCESSORY_VISIBILITY_ATTACHMENT
 
 /obj/item/clothing/neck/stethoscope/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if(ishuman(target) && isliving(user) && user.a_intent == I_HELP)
+	if(ishuman(target) && isliving(user) && user.check_intent(I_FLAG_HELP))
 		var/obj/item/organ/organ = GET_EXTERNAL_ORGAN(target, user.get_target_zone())
 		if(organ)
 			user.visible_message(

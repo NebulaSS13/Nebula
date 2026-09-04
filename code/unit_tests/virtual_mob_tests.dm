@@ -1,10 +1,10 @@
 /datum/unit_test/virtual
 	name = "VIRTUAL: Template"
-	template = /datum/unit_test/virtual
+	abstract_type = /datum/unit_test/virtual
 
 /datum/unit_test/virtual/helper
 	name = "VIRTUAL: Template Helper"
-	template = /datum/unit_test/virtual/helper
+	abstract_type = /datum/unit_test/virtual/helper
 
 	var/helper_proc
 	var/list/expected_mobs

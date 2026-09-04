@@ -19,10 +19,10 @@
 	for(var/obj/O in get_contained_external_atoms())
 		O.dropInto(loc)
 
-/obj/machinery/bodyscanner/examine(mob/user)
+/obj/machinery/bodyscanner/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if (occupant && user.Adjacent(src))
-		occupant.examine(arglist(args))
+		occupant.get_examine_strings(user, distance, infix, suffix)
 
 /obj/machinery/bodyscanner/relaymove(mob/user)
 	..()

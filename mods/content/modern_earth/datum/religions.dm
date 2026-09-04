@@ -20,7 +20,7 @@
 
 /decl/background_detail/religion/sikh
 	name = "Sikhsm"
-	description = "An Indian monotheistic religion based on the spiritual teachings of Guru Nanak and the nine Sikh gurus that succeeded him. Someone who practicies Sikhism is called a Sikh."
+	description = "An Indian monotheistic religion based on the spiritual teachings of Guru Nanak and the nine Sikh gurus that succeeded him. Someone who practices Sikhism is called a Sikh."
 	uid = "religion_sikhsm"
 
 /decl/background_detail/religion/muslim

@@ -62,7 +62,7 @@
 	data["message_line1"] = msg_line1
 	data["message_line2"] = msg_line2
 	data["state"] = current_status
-	data["isAI"] = issilicon(usr)
+	data["isAI"] = issilicon(user)
 	data["authenticated"] = is_authenticated(user)
 	data["boss_short"] = global.using_map.boss_short
 
@@ -153,17 +153,17 @@
 			current_status = text2num(href_list["target"])
 		if("announce")
 			. = 1
-			if(is_authenticated(user) && !issilicon(usr) && ntn_comm)
+			if(is_authenticated(user) && !issilicon(user) && ntn_comm)
 				if(user)
 					var/obj/item/card/id/id_card = user.GetIdCard()
 					crew_announcement.announcer = GetNameAndAssignmentFromId(id_card)
 				else
 					crew_announcement.announcer = "Unknown"
 				if(announcment_cooldown)
-					to_chat(usr, "Please allow at least one minute to pass between announcements.")
+					to_chat(user, "Please allow at least one minute to pass between announcements.")
 					return TRUE
-				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|message
-				if(!input || !can_still_topic() || filter_block_message(usr, input))
+				var/input = input(user, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|message
+				if(!input || !can_still_topic() || filter_block_message(user, input))
 					return 1
 				var/affected_zlevels = SSmapping.get_connected_levels(get_host_z())
 				crew_announcement.Announce(input, zlevels = affected_zlevels)
@@ -174,35 +174,35 @@
 			. = 1
 			if(href_list["target"] == "emagged")
 				if(program)
-					if(is_authenticated(user) && program.computer.emagged() && !issilicon(usr) && ntn_comm)
+					if(is_authenticated(user) && program.computer.emagged() && !issilicon(user) && ntn_comm)
 						if(centcomm_message_cooldown)
-							to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
+							to_chat(user, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 							SSnano.update_uis(src)
 							return
-						var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
-						if(!input || !can_still_topic() || filter_block_message(usr, input))
+						var/input = sanitize(input(user, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
+						if(!input || !can_still_topic() || filter_block_message(user, input))
 							return 1
-						Syndicate_announce(input, usr)
-						to_chat(usr, "<span class='notice'>Message transmitted.</span>")
-						log_say("[key_name(usr)] has made an illegal announcement: [input]")
+						Syndicate_announce(input, user)
+						to_chat(user, "<span class='notice'>Message transmitted.</span>")
+						log_say("[key_name(user)] has made an illegal announcement: [input]")
 						centcomm_message_cooldown = 1
 						spawn(300)//30 second cooldown
 							centcomm_message_cooldown = 0
 			else if(href_list["target"] == "regular")
-				if(is_authenticated(user) && !issilicon(usr) && ntn_comm)
+				if(is_authenticated(user) && !issilicon(user) && ntn_comm)
 					if(centcomm_message_cooldown)
-						to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
+						to_chat(user, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 						SSnano.update_uis(src)
 						return
 					if(!is_relay_online())//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
-						to_chat(usr, "<span class='warning'>No emergency communication relay detected. Unable to transmit message.</span>")
+						to_chat(user, "<span class='warning'>No emergency communication relay detected. Unable to transmit message.</span>")
 						return 1
 					var/input = sanitize(input("Please choose a message to transmit to [global.using_map.boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
-					if(!input || !can_still_topic() || filter_block_message(usr, input))
+					if(!input || !can_still_topic() || filter_block_message(user, input))
 						return 1
-					Centcomm_announce(input, usr)
-					to_chat(usr, "<span class='notice'>Message transmitted.</span>")
-					log_say("[key_name(usr)] has made an IA [global.using_map.boss_short] announcement: [input]")
+					Centcomm_announce(input, user)
+					to_chat(user, "<span class='notice'>Message transmitted.</span>")
+					log_say("[key_name(user)] has made an IA [global.using_map.boss_short] announcement: [input]")
 					centcomm_message_cooldown = 1
 					spawn(300) //30 second cooldown
 						centcomm_message_cooldown = 0
@@ -241,7 +241,7 @@
 						post_status(href_list["target"])
 		if("setalert")
 			. = 1
-			if(is_authenticated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
+			if(is_authenticated(user) && !issilicon(user) && ntn_cont && ntn_comm)
 				var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 				var/decl/security_level/target_level = locate(href_list["target"]) in security_state.comm_console_security_levels
 				if(target_level && security_state.can_switch_to(target_level))
@@ -250,7 +250,7 @@
 						if(security_state.set_security_level(target_level))
 							SSstatistics.add_field(target_level.type,1)
 			else
-				to_chat(usr, "You press the button, but a red light flashes and nothing happens.") //This should never happen
+				to_chat(user, "You press the button, but a red light flashes and nothing happens.") //This should never happen
 
 			current_status = STATE_DEFAULT
 		if("viewmessage")
@@ -270,13 +270,13 @@
 			. = 1
 			if(is_authenticated(user) && ntn_comm)
 				if(!program.computer.print_paper(current_viewing_message["contents"],current_viewing_message["title"]))
-					to_chat(usr, "<span class='notice'>Hardware Error: Printer was unable to print the selected file.</span>")
+					to_chat(user, "<span class='notice'>Hardware Error: Printer was unable to print the selected file.</span>")
 		if("unbolt_doors")
 			global.using_map.unbolt_saferooms()
-			to_chat(usr, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms unbolted.</span>")
+			to_chat(user, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms unbolted.</span>")
 		if("bolt_doors")
 			global.using_map.bolt_saferooms()
-			to_chat(usr, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms bolted.</span>")
+			to_chat(user, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms bolted.</span>")
 
 #undef STATE_DEFAULT
 #undef STATE_MESSAGELIST
@@ -365,7 +365,7 @@ var/global/last_message_id = 0
 	if(isnull(emergency))
 		emergency = 1
 
-	if(!global.universe.OnShuttleCall(usr))
+	if(!global.universe.OnShuttleCall(user))
 		to_chat(user, "<span class='notice'>Cannot establish a connection.</span>")
 		return
 

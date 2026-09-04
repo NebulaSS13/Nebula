@@ -4,8 +4,8 @@
 	icon_state          = ICON_STATE_WORLD
 	anchored            = TRUE
 	density             = TRUE
-	color               = /decl/material/solid/organic/wood::color
-	material            = /decl/material/solid/organic/wood
+	color               = /decl/material/solid/organic/wood/oak::color
+	material            = /decl/material/solid/organic/wood/oak
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	atom_flags          = ATOM_FLAG_CLIMBABLE
 	obj_flags           = OBJ_FLAG_ANCHORABLE
@@ -49,21 +49,21 @@
 		work_sound.stop(src)
 	update_icon()
 
-/obj/structure/working/attackby(obj/item/W, mob/user)
+/obj/structure/working/attackby(obj/item/used_item, mob/user)
 
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		return ..()
 
 	if(working)
 		to_chat(user, SPAN_WARNING("\The [src] is currently in use, please wait for it to be finished."))
 		return TRUE
 
-	if(try_take_input(W, user))
+	if(try_take_input(used_item, user))
 		return TRUE
 
 	return ..()
 
-/obj/structure/working/proc/try_take_input(obj/item/W, mob/user, silent)
+/obj/structure/working/proc/try_take_input(obj/item/used_item, mob/user, silent)
 	return FALSE
 
 /obj/structure/working/proc/try_unload_material(mob/user)
@@ -74,7 +74,7 @@
 
 /obj/structure/working/attack_hand(mob/user)
 
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		return ..()
 
 	if(working)

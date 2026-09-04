@@ -9,6 +9,7 @@ var/global/list/default_uplink_source_priority = list(
 )
 
 /decl/uplink_source
+	abstract_type = /decl/uplink_source
 	var/name
 	var/desc
 
@@ -54,35 +55,30 @@ var/global/list/default_uplink_source_priority = list(
 	. = ..()
 
 /decl/uplink_source/radio/setup_uplink_source(var/mob/M, var/amount)
-	var/obj/item/radio/R = find_in_mob(M, /obj/item/radio)
-	if(!R)
+	var/obj/item/radio/radio = find_in_mob(M, /obj/item/radio)
+	if(!radio)
 		return SETUP_FAILED
 
-	var/obj/item/uplink/T = new(R, M.mind, amount)
-	R.hidden_uplink = T
-	R.traitor_frequency = sanitize_frequency(rand(PUBLIC_LOW_FREQ+1, PUB_FREQ-1))
-	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [R.name]. Simply dial the frequency [format_frequency(R.traitor_frequency)] to unlock its hidden features.</span>")
-	M.StoreMemory("<B>Radio Freq:</B> [format_frequency(R.traitor_frequency)] ([R.name]).", /decl/memory_options/system)
+	var/obj/item/uplink/T = new(radio, M.mind, amount)
+	radio.hidden_uplink = T
+	radio.traitor_frequency = sanitize_frequency(rand(PUBLIC_LOW_FREQ+1, PUB_FREQ-1))
+	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [radio.name]. Simply dial the frequency [format_frequency(radio.traitor_frequency)] to unlock its hidden features.</span>")
+	M.StoreMemory("<B>Radio Freq:</B> [format_frequency(radio.traitor_frequency)] ([radio.name]).", /decl/memory_options/system)
 
 /decl/uplink_source/implant
 	name = "Implant"
 	desc = "Teleports an uplink implant into your head. Costs 20% of the initial TC amount."
 
-/decl/uplink_source/implant/setup_uplink_source(var/mob/living/human/H, var/amount)
-	if(!istype(H))
+/decl/uplink_source/implant/setup_uplink_source(var/mob/living/human/recipient, var/amount)
+	if(!istype(recipient))
 		return SETUP_FAILED
 
-	var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(H, BP_HEAD)
+	var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(recipient, BP_HEAD)
 	if(!head)
 		return SETUP_FAILED
 
-	var/obj/item/implant/uplink/U = new(H, round(amount * 0.8))
-	U.imp_in = H
-	U.implanted = TRUE
-	U.part = head
-	LAZYADD(head.implants, U)
-
-	U.implanted(H) // This proc handles the installation feedback
+	var/obj/item/implant/uplink/uplink_implant = new(recipient, round(amount * 0.8))
+	uplink_implant.implant_in_mob(recipient, recipient, head)
 
 /decl/uplink_source/unit
 	name = "Uplink Unit"
@@ -127,14 +123,14 @@ var/global/list/default_uplink_source_priority = list(
 	if(M.client && M.client.prefs)
 		priority_order = M.client.prefs.uplink_sources
 
-	if(!priority_order || !priority_order.len)
+	if(!LAZYLEN(priority_order))
 		priority_order = list()
 		for(var/entry in global.default_uplink_source_priority)
 			priority_order |= GET_DECL(entry)
 
 	for(var/entry in priority_order)
-		var/decl/uplink_source/US = entry
-		if(US.setup_uplink_source(M, amount) != SETUP_FAILED)
+		var/decl/uplink_source/uplink = entry
+		if(uplink.setup_uplink_source(M, amount) != SETUP_FAILED)
 			return TRUE
 
 	to_chat(M, "<span class='warning'>Either by choice or circumstance you will be without an uplink.</span>")

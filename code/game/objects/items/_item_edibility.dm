@@ -8,7 +8,7 @@
 	var/utensil_food_type = get_utensil_food_type()
 	if(!istype(utensil) || !utensil_food_type)
 		return
-	var/remove_amt = min(reagents?.total_volume, get_food_default_transfer_amount(user))
+	var/remove_amt = min(REAGENT_TOTAL_VOLUME(reagents), get_food_default_transfer_amount(user))
 	if(remove_amt)
 
 		// Create a dummy copy of the target food item.
@@ -28,7 +28,7 @@
 		utensil.loaded_food.reagents.clear_reagents()
 		reagents.trans_to(utensil.loaded_food, remove_amt)
 		handle_chunk_separated()
-		if(!reagents.total_volume)
+		if(!REAGENT_TOTAL_VOLUME(reagents))
 			handle_consumed(user) // it's not actually being consumed, so i'm not sure this is correct
 		utensil.update_icon()
 

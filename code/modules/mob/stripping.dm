@@ -47,7 +47,7 @@
 				visible_message(SPAN_NOTICE("\The [user] [sensor.get_sensors_locked() ? "" : "un"]locks \the [src]'s vitals sensor controls."), range = 2)
 			return
 		if("internals")
-			visible_message("<span class='danger'>\The [usr] is trying to set \the [src]'s internals!</span>")
+			visible_message("<span class='danger'>\The [user] is trying to set \the [src]'s internals!</span>")
 			if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 				toggle_internals(user)
 			return

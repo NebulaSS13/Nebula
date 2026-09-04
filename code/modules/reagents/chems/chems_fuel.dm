@@ -20,25 +20,28 @@
 /decl/material/liquid/fuel/explosion_act(obj/item/chems/holder, severity)
 	. = ..()
 	if(.)
-		var/volume = REAGENT_VOLUME(holder?.reagents, type)
-		if(volume <= 50)
+		var/product_volume = REAGENT_VOLUME(holder?.reagents, type)
+		if(product_volume <= 50)
 			return
 		var/turf/T = get_turf(holder)
 		var/datum/gas_mixture/products = new(_temperature = 5 * FLAMMABLE_GAS_FLASHPOINT)
-		var/gas_moles = 3 * volume
-		products.adjust_multi(/decl/material/gas/nitricoxide, 0.1 * gas_moles, /decl/material/gas/nitrodioxide, 0.1 * gas_moles, /decl/material/gas/nitrogen, 0.6 * gas_moles, /decl/material/gas/hydrogen, 0.02 * gas_moles)
+		var/gas_moles = 3 * product_volume
+		products.adjust_gas(/decl/material/gas/nitricoxide, 0.1 * gas_moles, FALSE)
+		products.adjust_gas(/decl/material/gas/nitrodioxide, 0.1 * gas_moles, FALSE)
+		products.adjust_gas(/decl/material/gas/nitrogen, 0.6 * gas_moles, FALSE)
+		products.adjust_gas(/decl/material/gas/hydrogen, 0.02 * gas_moles, TRUE)
 		T.assume_air(products)
-		if(volume > 500)
+		if(product_volume > 500)
 			explosion(T,1,2,4)
-		else if(volume > 100)
+		else if(product_volume > 100)
 			explosion(T,0,1,3)
-		else if(volume > 50)
+		else if(product_volume > 50)
 			explosion(T,-1,1,2)
-		holder?.reagents?.remove_reagent(type, volume)
+		holder?.reagents?.remove_reagent(type, product_volume)
 
 /decl/material/liquid/fuel/hydrazine
 	name = "hydrazine"
-	lore_text = "A toxic, colorless, flammable liquid with a strong ammonia-like odor, in hydrate form."
+	lore_text = "A toxic, colorless, flammable liquid with a strong ammonia-like odour, in hydrate form."
 	taste_description = "sweet tasting metal"
 	color = "#808080"
 	metabolism = REM * 0.2

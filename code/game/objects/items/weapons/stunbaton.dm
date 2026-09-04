@@ -5,11 +5,9 @@
 	icon = 'icons/obj/items/weapon/stunbaton.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
-	sharp = 0
-	edge = 0
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = @'{"combat":2}'
-	attack_verb = list("beaten")
+	attack_verb = "beaten"
 	base_parry_chance = 30
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
@@ -37,7 +35,7 @@
 
 /obj/item/baton/infinite/Initialize(var/ml, var/material_key, var/loaded_cell_type)
 	. = ..(ml, material_key, loaded_cell_type = /obj/item/cell/device/infinite)
-	set_status(1, null)
+	set_cell_status(1, null)
 
 /obj/item/baton/proc/update_status()
 	var/obj/item/cell/cell = get_cell()
@@ -68,10 +66,10 @@
 		set_light(0)
 
 /obj/item/baton/attack_self(mob/user)
-	set_status(!status, user)
+	set_cell_status(!status, user)
 	add_fingerprint(user)
 
-/obj/item/baton/proc/set_status(var/newstatus, mob/user)
+/obj/item/baton/proc/set_cell_status(var/newstatus, mob/user)
 	var/obj/item/cell/cell = get_cell()
 	if(cell?.charge >= hitcost)
 		if(status != newstatus)
@@ -112,7 +110,7 @@
 		var/mob/living/human/H = target
 		affecting = GET_EXTERNAL_ORGAN(H, hit_zone)
 	var/abuser =  user ? "" : "by [user]"
-	if(user && user.a_intent == I_HURT)
+	if(user && user.check_intent(I_FLAG_HARM))
 		. = ..()
 		if(.)
 			return
@@ -153,25 +151,25 @@
 	hitcost = 20
 
 // Addition made by Techhead0, thanks for fullfilling the todo!
-/obj/item/baton/robot/examine(mob/user, distance, infix, suffix)
+/obj/item/baton/robot/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance == 1)
-		to_chat(user, SPAN_NOTICE("The baton is running off an external power supply."))
+		. += SPAN_NOTICE("The baton is running off an external power supply.")
 
 // Override proc for the stun baton module, found in PC Security synthetics
 // Refactored to fix #14470 - old proc defination increased the hitcost beyond
 // usability without proper checks.
 // Also hard-coded to be unuseable outside their righteous synthetic owners.
 /obj/item/baton/robot/attack_self(mob/user)
-	var/mob/living/silicon/robot/R = isrobot(user) ? user : null // null if the user is NOT a robot
-	if (R)
+	var/mob/living/silicon/robot/robot = isrobot(user) ? user : null // null if the user is NOT a robot
+	if (robot)
 		return ..()
 	else	// Stop pretending and get out of your cardborg suit, human.
 		to_chat(user, "<span class='warning'>You don't seem to be able to interact with this by yourself.</span>")
 		add_fingerprint(user)
 	return 0
 
-/obj/item/baton/robot/attackby(obj/item/W, mob/user)
+/obj/item/baton/robot/attackby(obj/item/used_item, mob/user)
 	return FALSE
 
 /obj/item/baton/robot/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
@@ -209,7 +207,7 @@
 	stunforce = 0
 	agonyforce = 60	//same force as a stunbaton, but uses way more charge.
 	hitcost = 25
-	attack_verb = list("poked")
+	attack_verb = "poked"
 	slot_flags = null
 	matter = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE,

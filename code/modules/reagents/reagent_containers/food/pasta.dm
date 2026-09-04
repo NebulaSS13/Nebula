@@ -54,7 +54,7 @@
 
 /obj/item/food/meatballspagetti
 	name = "spaghetti & meatballs"
-	desc = "Now thats a nice meatball!"
+	desc = "Now that's a nice meatball!"
 	icon = 'icons/obj/food/pasta/meatball_spaghetti.dmi'
 	plate = /obj/item/plate
 	filling_color = "#de4545"

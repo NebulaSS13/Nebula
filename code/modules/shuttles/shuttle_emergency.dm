@@ -1,8 +1,9 @@
 /datum/shuttle/autodock/ferry/emergency
-	category = /datum/shuttle/autodock/ferry/emergency
+	abstract_type = /datum/shuttle/autodock/ferry/emergency
 	move_time = 10 MINUTES
 	flags = SHUTTLE_FLAGS_PROCESS | SHUTTLE_FLAGS_ZERO_G | SHUTTLE_FLAGS_NO_CODE
 	var/datum/evacuation_controller/shuttle/emergency_controller
+	var/departed
 
 /datum/shuttle/autodock/ferry/emergency/New(map_hash)
 	. = ..()
@@ -28,11 +29,16 @@
 
 /datum/shuttle/autodock/ferry/emergency/shuttle_moved(obj/effect/shuttle_landmark/destination, list/turf_translation, angle = 0)
 	if(next_location != waypoint_station)
-		emergency_controller.shuttle_leaving() // This is a hell of a line. v
-		priority_announcement.Announce(replacetext(replacetext((emergency_controller.emergency_evacuation ? global.using_map.emergency_shuttle_leaving_dock : global.using_map.shuttle_leaving_dock), "%dock_name%", "[global.using_map.dock_name]"),  "%ETA%", "[round(emergency_controller.get_eta()/60,1)] minute\s"))
-
+		var/msg
+		if(departed)
+			msg = emergency_controller.emergency_evacuation ? global.using_map.emergency_shuttle_arriving_at_dock_message : global.using_map.shuttle_arriving_at_dock_message
+		else
+			msg = emergency_controller.emergency_evacuation ? global.using_map.emergency_shuttle_leaving_dock : global.using_map.shuttle_leaving_dock
+			emergency_controller.shuttle_leaving()
+			departed = TRUE
+		if(msg)
+			priority_announcement.Announce(replacetext(replacetext(msg, "%dock_name%", "[global.using_map.dock_name]"),  "%ETA%", "[round(emergency_controller.get_eta()/60,1)] minute\s"))
 	..()
-
 	if(current_location == waypoint_offsite && emergency_controller.has_evacuated())
 		emergency_controller.shuttle_evacuated()
 
@@ -174,8 +180,8 @@
 		emagged = 1
 		return 1
 
-/obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/W, mob/user)
-	if(read_authorization(W))
+/obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/used_item, mob/user)
+	if(read_authorization(used_item))
 		return TRUE
 	return ..()
 
@@ -201,7 +207,7 @@
 			else
 				shuttle_status = "Standing-by at [global.using_map.dock_name]."
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
-			shuttle_status = "Shuttle has recieved command and will depart shortly."
+			shuttle_status = "Shuttle has received command and will depart shortly."
 		if(WAIT_ARRIVE)
 			shuttle_status = "Proceeding to destination."
 		if(WAIT_FINISH)

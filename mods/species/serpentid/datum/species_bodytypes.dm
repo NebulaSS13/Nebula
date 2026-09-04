@@ -34,15 +34,16 @@
 		BP_HEAD         = list("path" = /obj/item/organ/external/head/insectoid/serpentid),
 		BP_L_ARM        = list("path" = /obj/item/organ/external/arm/insectoid),
 		BP_L_HAND       = list("path" = /obj/item/organ/external/hand/insectoid),
-		BP_L_HAND_UPPER = list("path" = /obj/item/organ/external/hand/insectoid/upper),
+		BP_L_HAND_UPPER = list("path" = /obj/item/organ/external/hand/insectoid/upper/serpentid),
 		BP_R_ARM        = list("path" = /obj/item/organ/external/arm/right/insectoid),
 		BP_R_HAND       = list("path" = /obj/item/organ/external/hand/right/insectoid),
-		BP_R_HAND_UPPER = list("path" = /obj/item/organ/external/hand/right/insectoid/upper),
+		BP_R_HAND_UPPER = list("path" = /obj/item/organ/external/hand/right/insectoid/upper/serpentid),
 		BP_R_LEG        = list("path" = /obj/item/organ/external/leg/right/insectoid/serpentid),
 		BP_L_LEG        = list("path" = /obj/item/organ/external/leg/insectoid/serpentid),
 		BP_L_FOOT       = list("path" = /obj/item/organ/external/foot/insectoid/serpentid),
 		BP_R_FOOT       = list("path" = /obj/item/organ/external/foot/right/insectoid/serpentid)
 	)
+
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height =      1.75,
 		/datum/appearance_descriptor/body_length = 1
@@ -63,17 +64,58 @@
 		ARMOR_BIO    = ARMOR_BIO_SHIELDED,
 		ARMOR_RAD    = 0.5*ARMOR_RAD_MINOR
 	)
+	footprints_icon = 'icons/mob/footprints/footprints_snake.dmi'
 
 /decl/bodytype/serpentid/Initialize()
-	equip_adjust = list(
-		BP_L_HAND_UPPER =  list("[NORTH]" = list( 0, 8),  "[EAST]" = list(0, 8),  "[SOUTH]" = list(-0, 8),  "[WEST]" = list( 0, 8)),
-		BP_R_HAND_UPPER =  list("[NORTH]" = list( 0, 8),  "[EAST]" = list(0, 8),  "[SOUTH]" = list( 0, 8),  "[WEST]" = list( 0, 8)),
-		BP_L_HAND =        list("[NORTH]" = list( 4, 0),  "[EAST]" = list(0, 0),  "[SOUTH]" = list(-4, 0),  "[WEST]" = list( 0, 0)),
-		BP_R_HAND =        list("[NORTH]" = list(-4, 0),  "[EAST]" = list(0, 0),  "[SOUTH]" = list( 4, 0),  "[WEST]" = list( 0, 0)),
-		slot_head_str =    list("[NORTH]" = list( 0, 7),  "[EAST]" = list(0, 8),  "[SOUTH]" = list( 0, 8),  "[WEST]" = list( 0, 8)),
-		slot_back_str =    list("[NORTH]" = list( 0, 7),  "[EAST]" = list(0, 8),  "[SOUTH]" = list( 0, 8),  "[WEST]" = list( 0, 8)),
-		slot_belt_str =    list("[NORTH]" = list( 0, 0),  "[EAST]" = list(8, 0),  "[SOUTH]" = list( 0, 0),  "[WEST]" = list(-8, 0)),
-		slot_glasses_str = list("[NORTH]" = list( 0, 10), "[EAST]" = list(0, 11), "[SOUTH]" = list( 0, 11), "[WEST]" = list( 0, 11))
+	_equip_adjust = list(
+		(BP_L_HAND_UPPER) = list(
+			"[NORTH]" = list( 0, 8),
+			"[EAST]"  = list( 0, 8),
+			"[SOUTH]" = list(-0, 8),
+			"[WEST]"  = list( 0, 8)
+		),
+		(BP_R_HAND_UPPER) = list(
+			"[NORTH]" = list( 0, 8),
+			"[EAST]"  = list( 0, 8),
+			"[SOUTH]" = list( 0, 8),
+			"[WEST]"  = list( 0, 8)
+		),
+		(BP_L_HAND) = list(
+			"[NORTH]" = list( 4, 0),
+			"[EAST]"  = list( 0, 0),
+			"[SOUTH]" = list(-4, 0),
+			"[WEST]"  = list( 0, 0)
+		),
+		(BP_R_HAND) = list(
+			"[NORTH]" = list(-4, 0),
+			"[EAST]"  = list( 0, 0),
+			"[SOUTH]" = list( 4, 0),
+			"[WEST]"  = list( 0, 0)
+		),
+		(slot_head_str) = list(
+			"[NORTH]" = list( 0, 7),
+			"[EAST]"  = list( 0, 8),
+			"[SOUTH]" = list( 0, 8),
+			"[WEST]"  = list( 0, 8)
+		),
+		(slot_back_str) = list(
+			"[NORTH]" = list( 0, 7),
+			"[EAST]"  = list( 0, 8),
+			"[SOUTH]" = list( 0, 8),
+			"[WEST]"  = list( 0, 8)
+		),
+		(slot_belt_str) = list(
+			"[NORTH]" = list( 0, 0),
+			"[EAST]"  = list( 8, 0),
+			"[SOUTH]" = list( 0, 0),
+			"[WEST]"  = list(-8, 0)
+		),
+		(slot_glasses_str) = list(
+			"[NORTH]" = list( 0, 10),
+			"[EAST]"  = list( 0, 11),
+			"[SOUTH]" = list( 0, 11),
+			"[WEST]"  = list( 0, 11)
+		)
 	)
 	. = ..()
 
@@ -81,3 +123,11 @@
 	name = "green"
 	icon_base = 'mods/species/serpentid/icons/body_green.dmi'
 	uid = "bodytype_serpentid_green"
+
+/obj/item/organ/external/hand/insectoid/upper/serpentid/get_natural_attacks()
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/forelimb_slash)
+	return unarmed_attack
+
+/obj/item/organ/external/hand/right/insectoid/upper/serpentid/get_natural_attacks()
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/forelimb_slash)
+	return unarmed_attack

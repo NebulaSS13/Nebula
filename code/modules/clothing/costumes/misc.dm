@@ -77,7 +77,7 @@
 
 /obj/item/clothing/costume/oldman
 	name = "old man's suit"
-	desc = "A classic suit for the older gentleman with built in back support."
+	desc = "A classic suit for the older gentleman with built-in back support."
 	icon = 'icons/clothing/costumes/uniform_lawyer_old.dmi'
 
 /obj/item/clothing/costume/lawyer
@@ -111,16 +111,6 @@
 	desc = "<i>'Special delivery!'</i>"
 	icon = 'icons/clothing/jumpsuits/jumpsuit_mailman.dmi'
 
-/obj/item/clothing/costume/vice
-	name = "vice officer's jumpsuit"
-	desc = "It's the standard issue pretty-boy outfit, as seen on Holo-Vision."
-	icon = 'icons/clothing/uniform_vice.dmi'
-
-/obj/item/clothing/costume/johnny
-	name = "brown jumpsuit"
-	desc = "A label on the inside of the collar reads, 'johnny~~~'."
-	icon = 'icons/clothing/jumpsuits/jumpsuit_johnny.dmi'
-
 /obj/item/clothing/costume/psyche
 	name = "psychedelic jumpsuit"
 	desc = "Groovy!"
@@ -137,9 +127,3 @@
 	desc = "A thick, layered grey undersuit lined with power cables. Feels a little like wearing an electrical storm."
 	icon = 'icons/clothing/jumpsuits/jumpsuit_psionic.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
-
-/obj/item/clothing/costume/caretaker
-	name = "caretaker's jumpsuit"
-	desc = "A holy jumpsuit. Treat it well."
-	icon = 'icons/clothing/jumpsuits/caretaker.dmi'
-	bodytype_equip_flags = BODY_EQUIP_FLAG_HUMANOID

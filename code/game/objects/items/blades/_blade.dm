@@ -15,9 +15,11 @@
 	slot_flags                        = SLOT_LOWER_BODY
 	material                          = /decl/material/solid/metal/steel
 	_base_attack_force                = 10
-	var/decl/material/hilt_material   = /decl/material/solid/organic/wood
-	var/decl/material/guard_material  = /decl/material/solid/organic/wood
-	var/decl/material/pommel_material = /decl/material/solid/organic/wood
+
+	var/decl/material/hilt_material   = /decl/material/solid/organic/wood/oak
+	var/decl/material/guard_material  = /decl/material/solid/organic/wood/oak
+	var/decl/material/pommel_material = /decl/material/solid/organic/wood/oak
+
 	/// Cache var for blade material shine calculation.
 	var/tmp/shine
 
@@ -73,7 +75,7 @@
 				initial_tool_qualities[TOOL_HATCHET] = TOOL_QUALITY_MEDIOCRE
 		set_extension(src, /datum/extension/tool/variable/simple, initial_tool_qualities)
 
-	shine = istype(material) ? clamp((material.reflectiveness * 0.01) * 255, 10, (0.6 * ReadHSV(RGBtoHSV(material.color))[3])) : null
+	shine = istype(material) ? clamp((material.reflectiveness * 0.01) * 255, 10, (0.6 * rgb2num(material.color, COLORSPACE_HSV)[3])) : null
 	icon_state = ICON_STATE_WORLD
 	on_update_icon()
 

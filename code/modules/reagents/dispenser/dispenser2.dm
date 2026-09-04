@@ -42,9 +42,9 @@
 		for(var/type in spawn_cartridges)
 			add_cartridge(new type(src))
 
-/obj/machinery/chemical_dispenser/examine(mob/user)
+/obj/machinery/chemical_dispenser/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It has [cartridges.len] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - cartridges.len] more.")
+	. += "It has [cartridges.len] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - cartridges.len] more."
 
 /obj/machinery/chemical_dispenser/proc/add_cartridge(obj/item/chems/chem_disp_cartridge/C, mob/user)
 	. = FALSE
@@ -86,12 +86,12 @@
 	cartridges -= label
 	SSnano.update_uis(src)
 
-/obj/machinery/chemical_dispenser/attackby(obj/item/hit_with, mob/user)
-	if(istype(hit_with, /obj/item/chems/chem_disp_cartridge))
-		add_cartridge(hit_with, user)
+/obj/machinery/chemical_dispenser/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/chems/chem_disp_cartridge))
+		add_cartridge(used_item, user)
 		return TRUE
 
-	if(IS_CROWBAR(hit_with) && !panel_open && length(cartridges))
+	if(IS_CROWBAR(used_item) && !panel_open && length(cartridges))
 		var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
 		if(!label) return TRUE
 		var/obj/item/chems/chem_disp_cartridge/C = remove_cartridge(label)
@@ -100,12 +100,12 @@
 			C.dropInto(loc)
 			return TRUE
 
-	if(is_type_in_list(hit_with, acceptable_containers))
+	if(is_type_in_list(used_item, acceptable_containers))
 		if(container)
 			to_chat(user, SPAN_WARNING("There is already \a [container] on \the [src]!"))
 			return TRUE
 
-		var/obj/item/chems/new_container = hit_with
+		var/obj/item/chems/new_container = used_item
 
 		if(!accept_drinking && (istype(new_container,/obj/item/chems/condiment) || istype(new_container,/obj/item/chems/drinks)))
 			to_chat(user, SPAN_WARNING("This machine only accepts beakers!"))
@@ -146,15 +146,15 @@
 	data["isBeakerLoaded"] = container ? 1 : 0
 	data["glass"] = accept_drinking
 	var beakerD[0]
-	if(LAZYLEN(container?.reagents?.reagent_volumes))
-		for(var/rtype in container.reagents.reagent_volumes)
-			var/decl/material/R = GET_DECL(rtype)
-			beakerD[++beakerD.len] = list("name" = R.use_name, "volume" = REAGENT_VOLUME(container.reagents, rtype))
+	var/beaker_volumes = REAGENT_VOLUMES(container?.reagents)
+	if(LAZYLEN(beaker_volumes))
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(container.reagents))
+			beakerD[++beakerD.len] = list("name" = reagent.use_name, "volume" = REAGENT_VOLUME(container.reagents, reagent))
 	data["beakerContents"] = beakerD
 
 	if(container) // Container has had null reagents in the past; may be due to qdel without clearing reference.
-		data["beakerCurrentVolume"] = container.reagents?.total_volume || 0
-		data["beakerMaxVolume"] = container.reagents?.maximum_volume || 0
+		data["beakerCurrentVolume"] = REAGENT_TOTAL_VOLUME(container.reagents)
+		data["beakerMaxVolume"] = REAGENT_MAXIMUM_VOLUME(container.reagents)
 	else
 		data["beakerCurrentVolume"] = null
 		data["beakerMaxVolume"] = null
@@ -162,7 +162,7 @@
 	var chemicals[0]
 	for(var/label in cartridges)
 		var/obj/item/chems/chem_disp_cartridge/C = cartridges[label]
-		chemicals[++chemicals.len] = list("label" = label, "amount" = C.reagents.total_volume)
+		chemicals[++chemicals.len] = list("label" = label, "amount" = REAGENT_TOTAL_VOLUME(C.reagents))
 	data["chemicals"] = chemicals
 
 	// update the ui if it exists, returns null if no ui is passed/found

@@ -6,17 +6,22 @@
 /obj/vehicle
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
-	layer = ABOVE_HUMAN_LAYER
+	layer = OBJ_LAYER
 	density = TRUE
 	anchored = TRUE
 	animate_movement=1
 	light_range = 3
 	abstract_type = /obj/vehicle
 
-	can_buckle = 1
+	max_buckled_mobs = 1
 	buckle_movable = 1
 	buckle_lying = 0
 
+	var/const/VEHICLE_GENERIC    = 1
+	var/const/VEHICLE_QUADBIKE   = 2
+	var/const/VEHICLE_SNOWMOBILE = 3
+
+	var/vehicle_transit_type = VEHICLE_GENERIC
 	var/attack_log = null
 	var/on = 0
 	var/fire_dam_coeff = 1.0
@@ -26,19 +31,46 @@
 	var/stat = 0
 	var/emagged = 0
 	var/powered = 0		//set if vehicle is powered and should use fuel when moving
-	var/move_delay = 1	//set this to limit the speed of the vehicle
+
+	/// How long a single move takes with this vehicle.
+	var/move_delay = 1
+	/// The base delay of a move with this vehicle, assuming no terrain modifiers. If null, uses default running
+	var/base_speed
+	/// Speed when a location is flooded.
+	var/water_delay = 4
 
 	var/obj/item/cell/cell
-	var/charge_use = 200 //W
+	var/charge_use = 200 // W
 
 	var/atom/movable/load		//all vehicles can take a load, since they should all be a least drivable
 	var/load_item_visible = 1	//set if the loaded item should be overlayed on the vehicle sprite
 	var/load_offset_x = 0		//pixel_x offset for item overlay
 	var/load_offset_y = 0		//pixel_y offset for item overlay
-
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
+/obj/vehicle/Initialize(mapload)
+	update_vehicle_move_delay(null)
+	base_speed ||= get_config_value(/decl/config/num/movement_run)
+	. = ..()
+
+/obj/vehicle/proc/update_vehicle_move_delay(atom/prev_loc)
+
+	var/turf/floor/prev_turf = prev_loc
+	var/turf/floor/this_turf = loc
+	if(istype(prev_turf) && istype(this_turf) && this_turf.get_topmost_flooring() == prev_turf.get_topmost_flooring() && this_turf.check_fluid_depth(FLUID_SHALLOW) == prev_turf.check_fluid_depth(FLUID_SHALLOW))
+		return // Same speed if terrain type doesn't change
+
+	var/terrain_mod
+	if(loc?.check_fluid_depth(FLUID_SHALLOW))
+		terrain_mod = water_delay
+	else if(istype(this_turf))
+		terrain_mod = this_turf.get_vehicle_transit_delay(src)
+
+	if(isnull(terrain_mod))
+		move_delay = base_speed
+	else
+		move_delay = base_speed * terrain_mod
 
 /obj/vehicle/Move()
 	if(world.time > l_move_time + move_delay)
@@ -68,10 +100,10 @@
 	else
 		return 0
 
-/obj/vehicle/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/hand_labeler))
+/obj/vehicle/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/hand_labeler))
 		return FALSE // allow afterattack to run
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		if(!locked)
 			open = !open
 			update_icon()
@@ -79,13 +111,13 @@
 			return TRUE
 		to_chat(user, SPAN_WARNING("You can't [open ? "close" : "open"] the maintenance panel while \the [src] is locked!"))
 		return TRUE
-	else if(IS_CROWBAR(W) && cell && open)
+	else if(IS_CROWBAR(used_item) && cell && open)
 		remove_cell(user)
 		return TRUE
-	else if(istype(W, /obj/item/cell) && !cell && open)
-		insert_cell(W, user)
+	else if(istype(used_item, /obj/item/cell) && !cell && open)
+		insert_cell(used_item, user)
 		return TRUE
-	else if(IS_WELDER(W))
+	else if(IS_WELDER(used_item))
 		var/current_max_health = get_max_health()
 		if(current_health >= current_max_health)
 			to_chat(user, "<span class='notice'>[src] does not need repairs.</span>")
@@ -93,9 +125,9 @@
 		if(!open)
 			to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 			return TRUE
-		var/obj/item/weldingtool/welder = W
+		var/obj/item/weldingtool/welder = used_item
 		if(!welder.welding)
-			to_chat(user, "<span class='notice'>Unable to repair while [W] is off.</span>")
+			to_chat(user, "<span class='notice'>Unable to repair while [used_item] is off.</span>")
 			return TRUE
 		if(welder.weld(5, user))
 			current_health = min(current_max_health, current_health+10)
@@ -106,7 +138,7 @@
 	return ..() // handles bash()
 
 /obj/vehicle/bash(obj/item/weapon, mob/user)
-	if(isliving(user) && user.a_intent == I_HELP)
+	if(isliving(user) && user.check_intent(I_FLAG_HELP))
 		return FALSE
 	if(!weapon.user_can_attack_with(user))
 		return FALSE
@@ -115,10 +147,10 @@
 	// physical damage types that can impart force; swinging a bat or energy sword
 	switch(weapon.atom_damage_type)
 		if(BURN)
-			current_health -= weapon.get_attack_force(user) * fire_dam_coeff
+			current_health -= weapon.expend_attack_force(user) * fire_dam_coeff
 			. = TRUE
 		if(BRUTE)
-			current_health -= weapon.get_attack_force(user) * brute_dam_coeff
+			current_health -= weapon.expend_attack_force(user) * brute_dam_coeff
 			. = TRUE
 		else
 			. = FALSE
@@ -144,23 +176,17 @@
 		healthcheck()
 
 /obj/vehicle/emp_act(severity)
-	var/was_on = on
+	addtimer(CALLBACK(src, PROC_REF(end_emp), on), severity * 30 SECONDS)
 	stat |= EMPED
-	var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
-	pulse2.icon = 'icons/effects/effects.dmi'
-	pulse2.icon_state = "empdisable"
-	pulse2.SetName("emp sparks")
-	pulse2.anchored = TRUE
-	pulse2.set_dir(pick(global.cardinal))
-
-	spawn(10)
-		qdel(pulse2)
+	var/obj/effect/temp_visual/emp_burst/burst = new /obj/effect/temp_visual/emp_burst(loc)
+	burst.set_dir(pick(global.cardinal))
 	if(on)
 		turn_off()
-	spawn(severity*300)
-		stat &= ~EMPED
-		if(was_on)
-			turn_on()
+
+/obj/vehicle/proc/end_emp(was_on)
+	stat &= ~EMPED
+	if(was_on)
+		turn_on()
 
 /obj/vehicle/attack_ai(mob/living/silicon/ai/user)
 	return
@@ -168,7 +194,7 @@
 /obj/vehicle/unbuckle_mob(mob/user)
 	. = ..(user)
 	if(load == .)
-		unload(.)
+		unload_from_vehicle(.)
 
 //-------------------------------------------
 // Vehicle procs
@@ -213,7 +239,7 @@
 		var/mob/living/M = load
 		M.apply_effects(5, 5)
 
-	unload()
+	unload_from_vehicle()
 
 	new /obj/effect/gibspawner/robot(my_turf)
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
@@ -240,23 +266,23 @@
 		turn_on()
 		return
 
-/obj/vehicle/proc/insert_cell(var/obj/item/cell/C, var/mob/living/human/H)
+/obj/vehicle/proc/insert_cell(var/obj/item/cell/cell, var/mob/living/user)
 	if(cell)
 		return
-	if(!istype(C))
+	if(!istype(cell))
 		return
-	if(!H.try_unequip(C, src))
+	if(!user.try_unequip(cell, src))
 		return
-	cell = C
+	cell = cell
 	powercheck()
-	to_chat(usr, "<span class='notice'>You install [C] in [src].</span>")
+	to_chat(user, "<span class='notice'>You install [cell] in [src].</span>")
 
-/obj/vehicle/proc/remove_cell(var/mob/living/human/H)
+/obj/vehicle/proc/remove_cell(var/mob/living/user)
 	if(!cell)
 		return
 
-	to_chat(usr, "<span class='notice'>You remove [cell] from [src].</span>")
-	H.put_in_hands(cell)
+	to_chat(user, "<span class='notice'>You remove [cell] from [src].</span>")
+	user.put_in_hands(cell)
 	cell = null
 	powercheck()
 
@@ -267,39 +293,39 @@
 // the vehicle load() definition before
 // calling this parent proc.
 //-------------------------------------------
-/obj/vehicle/proc/load(var/atom/movable/C)
+/obj/vehicle/proc/load_onto_vehicle(var/atom/movable/loading)
 	//This loads objects onto the vehicle so they can still be interacted with.
 	//Define allowed items for loading in specific vehicle definitions.
-	if(!isturf(C.loc)) //To prevent loading things from someone's inventory, which wouldn't get handled properly.
+	if(!isturf(loading.loc)) //To prevent loading things from someone's inventory, which wouldn't get handled properly.
 		return 0
-	if(load || C.anchored)
+	if(load || loading.anchored)
 		return 0
 
 	// if a create/closet, close before loading
-	var/obj/structure/closet/crate = C
+	var/obj/structure/closet/crate = loading
 	if(istype(crate) && crate.opened && !crate.close())
 		return 0
 
-	C.forceMove(loc)
-	C.set_dir(dir)
-	C.anchored = TRUE
+	loading.forceMove(loc)
+	loading.set_dir(dir)
+	loading.anchored = TRUE
 
-	load = C
+	load = loading
 
 	if(load_item_visible)
-		C.plane = plane
-		C.layer = VEHICLE_LOAD_LAYER		//so it sits above the vehicle
+		loading.plane = plane
+		loading.layer = VEHICLE_LOAD_LAYER		//so it sits above the vehicle
 
-	if(ismob(C))
-		buckle_mob(C)
+	if(ismob(loading))
+		buckle_mob(loading)
 	else if(load_item_visible)
-		C.pixel_x += load_offset_x
-		C.pixel_y += load_offset_y
+		loading.pixel_x += load_offset_x
+		loading.pixel_y += load_offset_y
 
 	return 1
 
 
-/obj/vehicle/proc/unload(var/mob/user, var/direction)
+/obj/vehicle/proc/unload_from_vehicle(var/mob/user, var/direction)
 	if(!load)
 		return
 

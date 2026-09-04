@@ -48,7 +48,7 @@
 	. = ..()
 
 /obj/structure/mirror/attack_hand(mob/user)
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		return ..()
 	if(shattered)
 		to_chat(user, SPAN_WARNING("You enter the key combination for the style you want on the panel, but the nanomachines inside \the [src] refuse to come out."))
@@ -97,18 +97,17 @@
 	if(!ishuman(user))
 		return
 
-	var/W = weakref(user)
-	var/datum/nano_module/appearance_changer/AC = LAZYACCESS(ui_users, W)
+	var/weakref/user_ref = weakref(user)
+	var/datum/nano_module/appearance_changer/AC = LAZYACCESS(ui_users, user_ref)
 	if(!AC)
 		AC = new(mirror, user)
 		AC.name = title
 		if(flags)
 			AC.flags = flags
-		LAZYSET(ui_users, W, AC)
+		LAZYSET(ui_users, user_ref, AC)
 	AC.ui_interact(user)
 
 /proc/clear_ui_users(var/list/ui_users)
-	for(var/W in ui_users)
-		var/AC = ui_users[W]
-		qdel(AC)
+	for(var/user_ref in ui_users)
+		qdel(ui_users[user_ref])
 	LAZYCLEARLIST(ui_users)

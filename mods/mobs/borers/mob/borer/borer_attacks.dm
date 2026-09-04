@@ -3,7 +3,7 @@
 	if(host)
 		return TRUE // We cannot click things outside of our host.
 
-	if(!isliving(A) || a_intent != I_GRAB || stat)
+	if(!isliving(A) || !check_intent(I_FLAG_GRAB) || stat)
 		return ..()
 
 	if(!can_use_borer_ability(requires_host_value = FALSE, check_last_special = FALSE))
@@ -42,7 +42,7 @@
 	host.status_flags |= PASSEMOTES
 	forceMove(host)
 
-	var/datum/hud/borer/borer_hud = hud_used
+	var/datum/hud/animal/borer/borer_hud = hud_used
 	if(istype(borer_hud))
 		for(var/obj/thing in borer_hud.borer_hud_elements)
 			thing.alpha =        255

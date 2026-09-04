@@ -47,7 +47,7 @@
 		/obj/item/gun/energy/laser/practice,
 		/obj/item/gun/energy/laser,
 		/obj/item/gun/energy/xray,
-		/obj/item/gun/energy/captain
+		/obj/item/gun/energy/retro/captain
 	)
 	var/egun_icons = list(
 		'icons/obj/guns/xenoarch/egun_1.dmi',

@@ -1,5 +1,4 @@
 # ignore misc BYOND files
-Thumbs.db
 *.log
 *.int
 *.rsc
@@ -7,9 +6,10 @@ Thumbs.db
 *.lk
 *.backup
 *.before
-data/
-dmdoc/
-cfg/
+/codex/
+/data/
+/dmdoc/
+/cfg/
 build_log.txt
 use_map
 stopserver
@@ -17,12 +17,17 @@ reboot_called
 atupdate
 
 # ignore config, but not subdirs
-!config/*/
-config/*
-sql/test_db
+/!config/*/
+/config/*
+/sql/test_db
+
+# misc OS garbage
+Thumbs.db
+Thumbs.db:encryptable
+.DS_Store
 
 # vscode
-.vscode/*
+/.vscode/*
 *.code-workspace
 .history
 

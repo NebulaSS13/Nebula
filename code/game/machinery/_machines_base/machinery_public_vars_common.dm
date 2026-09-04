@@ -36,7 +36,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	desc = "An automatically generated area id, if this machine is tied to an area controller."
 	can_write = FALSE
 	has_updates = FALSE
-	var_type = IC_FORMAT_STRING
+	var_type = VAR_FORMAT_STRING
 
 /decl/public_access/public_variable/area_uid/access_var(obj/machinery/machine)
 	return machine.area_uid()
@@ -51,7 +51,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	desc = "A generic variable intended to give machines a text designator to sort them into categories by function."
 	can_write = TRUE
 	has_updates = TRUE
-	var_type = IC_FORMAT_STRING
+	var_type = VAR_FORMAT_STRING
 
 /decl/public_access/public_variable/identifier/access_var(obj/machinery/machine)
 	return machine.identifier
@@ -67,7 +67,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	desc = "Whether the machine is off (0) or on (positive). Some machines have multiple power states. Writing to this variable may turn the machine off or on."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_NUMBER
+	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/use_power/access_var(obj/machinery/machine)
 	return machine.use_power
@@ -85,7 +85,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	desc = "The machine's name."
 	can_write = TRUE
 	has_updates = FALSE
-	var_type = IC_FORMAT_STRING
+	var_type = VAR_FORMAT_STRING
 
 /decl/public_access/public_variable/name/access_var(obj/machinery/machine)
 	return machine.name
@@ -101,23 +101,23 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	desc = "Obtain the list of reagents and their data in the machine."
 	can_write = FALSE
 	has_updates = TRUE
-	var_type = IC_FORMAT_LIST
+	var_type = VAR_FORMAT_LIST
 
 /decl/public_access/public_variable/reagents/access_var(obj/machinery/machine)
-	return machine?.reagents?.reagent_data
+	return istype(machine?.reagents) ? UNLINT(machine.reagents.reagent_data) : null
 
 /decl/public_access/public_variable/reagents/volumes
 	name = "reagents volumes"
 	desc = "Obtain the list of reagents and their volumes in the machine."
-	var_type = IC_FORMAT_LIST
+	var_type = VAR_FORMAT_LIST
 
 /decl/public_access/public_variable/reagents/volumes/access_var(obj/machinery/machine)
-	return machine?.reagents?.reagent_volumes
+	return istype(machine?.reagents) ? UNLINT(REAGENT_VOLUMES(machine.reagents)) : null
 
 /decl/public_access/public_variable/reagents/free_space
 	name = "reagents free space"
 	desc = "Obtain the volume of free space left for reagents in the machine."
-	var_type = IC_FORMAT_NUMBER
+	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/reagents/free_space/access_var(obj/machinery/machine)
 	return REAGENTS_FREE_SPACE(machine?.reagents)
@@ -125,18 +125,18 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 /decl/public_access/public_variable/reagents/total_volume
 	name = "reagents total volume"
 	desc = "Obtain the total volume of reagents in the machine."
-	var_type = IC_FORMAT_NUMBER
+	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/reagents/total_volume/access_var(obj/machinery/machine)
-	return machine?.reagents?.total_volume
+	return REAGENT_TOTAL_VOLUME(machine?.reagents)
 
 /decl/public_access/public_variable/reagents/maximum_volume
 	name = "reagents maximum volume"
 	desc = "Obtain the maximum volume of reagents that can fit in the machine."
-	var_type = IC_FORMAT_NUMBER
+	var_type = VAR_FORMAT_NUMBER
 
 /decl/public_access/public_variable/reagents/maximum_volume/access_var(obj/machinery/machine)
-	return machine?.reagents?.maximum_volume
+	return REAGENT_MAXIMUM_VOLUME(machine?.reagents)
 
 /decl/public_access/public_method/toggle_power
 	name = "toggle power"

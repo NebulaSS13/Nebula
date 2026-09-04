@@ -5,7 +5,7 @@
 	name = "Pressure Tank"
 	desc = "A large vessel containing pressurized gas."
 
-	var/volume = 10000 //in liters, 1 meters by 1 meters by 2 meters ~tweaked it a little to simulate a pressure tank without needing to recode them yet
+	var/gas_volume = 10000 //in liters, 1 meters by 1 meters by 2 meters ~tweaked it a little to simulate a pressure tank without needing to recode them yet
 	var/start_pressure = 25 ATM
 	var/filling // list of gas ratios to use.
 
@@ -25,15 +25,13 @@
 
 /obj/machinery/atmospherics/unary/tank/Initialize()
 	. = ..()
-	air_contents.volume = volume
+	air_contents.total_volume = gas_volume
 	air_contents.temperature = T20C
 
 	if(filling)
-		var/list/gases = list()
 		for(var/gas in filling)
-			gases += gas
-			gases += start_pressure * filling[gas] * (air_contents.volume)/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-		air_contents.adjust_multi(arglist(gases))
+			air_contents.adjust_gas(gas, start_pressure * filling[gas] * (air_contents.total_volume)/(R_IDEAL_GAS_EQUATION*air_contents.temperature), FALSE)
+		air_contents.update_values()
 		update_icon()
 
 /obj/machinery/atmospherics/unary/tank/set_initial_level()

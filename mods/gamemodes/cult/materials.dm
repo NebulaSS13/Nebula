@@ -4,7 +4,7 @@
 	icon_base = 'icons/turf/walls/cult.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced_cult.dmi'
 	color = "#402821"
-	shard_type = SHARD_STONE_PIECE
+	shard_name = SHARD_STONE_PIECE
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	hidden_from_codex = TRUE
@@ -12,7 +12,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
-/decl/material/solid/stone/cult/place_dismantled_girder(var/turf/target)
+/decl/material/solid/stone/cult/place_dismantled_girder(var/turf/target, var/decl/material/r_mat)
 	return list(new /obj/structure/girder/cult(target))
 
 /decl/material/solid/stone/cult/reinforced

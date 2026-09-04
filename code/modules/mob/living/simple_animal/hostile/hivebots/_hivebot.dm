@@ -1,11 +1,9 @@
 /mob/living/simple_animal/hostile/hivebot
 	name = "hivebot"
 	desc = "A junky looking robot with four spiky legs."
-	icon = 'icons/mob/simple_animal/hivebot.dmi'
+	icon = 'icons/mob/simple_animal/hivebots/hivebot_green.dmi'
 	max_health = 55
 	natural_weapon = /obj/item/natural_weapon/drone_slicer
-	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
-	projectiletype = /obj/item/projectile/beam/smalllaser
 	faction = "hivebot"
 	min_gas = null
 	max_gas = null

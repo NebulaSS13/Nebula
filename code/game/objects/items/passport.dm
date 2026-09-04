@@ -5,7 +5,7 @@
 	_base_attack_force = 1
 	gender = PLURAL
 	w_class = ITEM_SIZE_SMALL
-	attack_verb = list("whipped")
+	attack_verb = "whipped"
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A set of identifying documents."
 	material = /decl/material/solid/organic/paper

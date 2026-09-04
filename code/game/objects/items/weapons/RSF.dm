@@ -22,17 +22,17 @@ RSF
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 
-/obj/item/rsf/examine(mob/user, distance)
+/obj/item/rsf/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(distance <= 0)
-		to_chat(user, "It currently holds [stored_matter]/30 fabrication-units.")
+	if(distance <= 1)
+		. += "It currently holds [stored_matter]/30 fabrication-units."
 
-/obj/item/rsf/attackby(obj/item/W, mob/user)
-	if (istype(W, /obj/item/rcd_ammo))
+/obj/item/rsf/attackby(obj/item/used_item, mob/user)
+	if (istype(used_item, /obj/item/rcd_ammo))
 		if ((stored_matter + 10) > 30)
 			to_chat(user, "The RSF can't hold any more matter.")
 			return TRUE
-		qdel(W)
+		qdel(used_item)
 		stored_matter += 10
 		playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 		to_chat(user, "The RSF now holds [stored_matter]/30 fabrication-units.")
@@ -67,8 +67,8 @@ RSF
 	if(!proximity) return
 
 	if(isrobot(user))
-		var/mob/living/silicon/robot/R = user
-		if(R.stat || !R.cell || R.cell.charge <= 0)
+		var/mob/living/silicon/robot/robot = user
+		if(robot.stat || !robot.cell || robot.cell.charge <= 0)
 			return
 	else
 		if(stored_matter <= 0)
@@ -106,9 +106,9 @@ RSF
 	product.dropInto(A.loc)
 
 	if(isrobot(user))
-		var/mob/living/silicon/robot/R = user
-		if(R.cell)
-			R.cell.use(used_energy)
+		var/mob/living/silicon/robot/robot = user
+		if(robot.cell)
+			robot.cell.use(used_energy)
 	else
 		stored_matter--
 		to_chat(user, "The RSF now holds [stored_matter]/30 fabrication-units.")

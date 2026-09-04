@@ -32,13 +32,13 @@
 	else
 		overlays.Cut()
 
-/obj/machinery/cell_charger/examine(var/mob/user, var/distance)
+/obj/machinery/cell_charger/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 5)
 		var/obj/item/cell/cell = get_cell()
-		to_chat(user, "There's [cell ? "a" : "no"] cell in the charger.")
+		. += "There's [cell ? "a" : "no"] cell in the charger."
 		if(cell)
-			to_chat(user, "Current charge: [cell.charge].")
+			. += "Current charge: [cell.charge]."
 
 /obj/machinery/cell_charger/component_stat_change(obj/item/stock_parts/part, old_stat, flag)
 	. = ..()
@@ -52,8 +52,8 @@
 			STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		update_icon()
 
-/obj/machinery/cell_charger/attackby(obj/item/W, mob/user)
-	if(IS_WRENCH(W) && !panel_open)
+/obj/machinery/cell_charger/attackby(obj/item/used_item, mob/user)
+	if(IS_WRENCH(used_item) && !panel_open)
 		. = TRUE
 		if(get_cell())
 			to_chat(user, "<span class='warning'>Remove the cell first!</span>")

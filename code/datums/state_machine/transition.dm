@@ -1,6 +1,7 @@
 // Used to connect `/decl/state`s together so the FSM knows what state to switch to, and on what conditions.
 // On a directed graph, these would be the arrows connecting the nodes representing states.
 /decl/state_transition
+	abstract_type = /decl/state_transition
 	var/list/from = null
 	var/decl/state/target = null
 

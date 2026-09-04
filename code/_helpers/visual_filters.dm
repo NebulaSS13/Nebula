@@ -1,17 +1,17 @@
-// These involve BYOND's built in filters that do visual effects, and not stuff that distinguishes between things.
+// These involve BYOND's built-in filters that do visual effects, and not stuff that distinguishes between things.
 
 // All of this ported from TG.
 // And then ported to Nebula from Polaris.
 /atom/movable
-	var/list/filter_data // For handling persistent filters
-
-/proc/cmp_filter_data_priority(list/A, list/B)
-	return A["priority"] - B["priority"]
+	VAR_PRIVATE/list/filter_data // For handling persistent filters
 
 // Defining this for future proofing and ease of searching for erroneous usage.
 /image/proc/add_filter(filter_name, priority, list/params)
 	filters += filter(arglist(params))
 	return TRUE
+
+/atom/movable/proc/has_filter(filter_name)
+	return (name in filter_data)
 
 /atom/movable/proc/add_filter(filter_name, priority, list/params, force_update = FALSE)
 
@@ -35,7 +35,7 @@
 
 /atom/movable/proc/update_filters()
 	filters = null
-	filter_data = sortTim(filter_data, /proc/cmp_filter_data_priority, TRUE)
+	filter_data = sortTim(filter_data, /proc/cmp_priority_list, TRUE)
 	for(var/f in filter_data)
 		var/list/data = filter_data[f]
 		var/list/arguments = data.Copy()
@@ -63,16 +63,19 @@
 	if (!filter_data || !filter_data[filter_name])
 		return
 
-	var/list/monkeypatched_params = params.Copy()
-	monkeypatched_params.Insert(1, null)
 	var/index = filter_data.Find(filter_name)
+	if(index <= 0)
+		return
 
 	// First, animate ourselves.
-	monkeypatched_params[1] = filters[index]
+	var/list/monkeypatched_params = params.Copy()
+	monkeypatched_params.Insert(1, filters[index])
 	animate(arglist(monkeypatched_params))
 
 	// If we're being copied by Z-Mimic, update mimics too.
 	if (bound_overlay)
 		for (var/atom/movable/AM as anything in get_above_oo())
+			if(index > length(AM.filters))
+				continue // presumably there is a z-mimic flush pending - TODO check if this would fuck with the wrong filter on the shadower
 			monkeypatched_params[1] = AM.filters[index]
 			animate(arglist(monkeypatched_params))

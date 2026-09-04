@@ -1,10 +1,10 @@
 /datum/artifact_effect/emp
 	name = "emp"
-	origin_type = EFFECT_ELECTRO
+	origin_type = XA_EFFECT_ELECTRO
 
 /datum/artifact_effect/emp/New()
 	..()
-	operation_type = EFFECT_PULSE
+	operation_type = XA_EFFECT_PULSE
 
 /datum/artifact_effect/emp/DoEffectPulse()
 	if(holder)

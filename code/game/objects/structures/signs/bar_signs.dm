@@ -1,4 +1,3 @@
-
 /obj/structure/sign/double/maltesefalcon
 	name = "The Maltese Falcon"
 	desc = "The Maltese Falcon, Space Bar and Grill."
@@ -13,3 +12,4 @@
 
 /obj/structure/sign/double/maltesefalcon/right
 	icon_state = "maltesefalcon-right"
+

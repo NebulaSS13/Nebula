@@ -190,9 +190,20 @@ def main(args):
         print("Using replacement:", args.update_source)
         updates = [args.update_source]
     else:
-        with open(args.update_source) as f:
-            updates = [line for line in f if line and not line.startswith("#") and not line.isspace()]
-        print(f"Using {len(updates)} replacements from file:", args.update_source)
+        # optional support for passing a directory
+        if os.path.isdir(args.update_source):
+            updates = []
+            for root, _, files in os.walk(args.update_source):
+                for filepath in files:
+                    if filepath.endswith(".txt"):
+                        path = os.path.join(root, filepath)
+                        with open(path) as f:
+                            updates.extend(line for line in f if line and not line.startswith("#") and not line.isspace())
+            print(f"Using {len(updates)} replacements from directory:", args.update_source)
+        else:
+            with open(args.update_source) as f:
+                updates = [line for line in f if line and not line.startswith("#") and not line.isspace()]
+            print(f"Using {len(updates)} replacements from file:", args.update_source)
 
     if args.map:
         update_map(args.map, updates, verbose=args.verbose)

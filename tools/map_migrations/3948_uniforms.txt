@@ -37,7 +37,7 @@
 /obj/item/clothing/under/geneticist/@SUBTYPES : /obj/item/clothing/jumpsuit/geneticist/@SUBTYPES{@OLD}
 /obj/item/clothing/under/virologist/@SUBTYPES : /obj/item/clothing/jumpsuit/virologist/@SUBTYPES{@OLD}
 /obj/item/clothing/under/tactical/@SUBTYPES : /obj/item/clothing/jumpsuit/tactical/@SUBTYPES{@OLD}
-/obj/item/clothing/under/caretaker/@SUBTYPES : obj/item/clothing/jumpsuit/caretaker/@SUBTYPES{@OLD}
+/obj/item/clothing/under/caretaker/@SUBTYPES : /obj/item/clothing/jumpsuit/caretaker/@SUBTYPES{@OLD}
 /obj/item/clothing/under/hazard/@SUBTYPES : /obj/item/clothing/jumpsuit/hazard/@SUBTYPES{@OLD}
 /obj/item/clothing/under/head_of_security/@SUBTYPES : /obj/item/clothing/jumpsuit/head_of_security/@SUBTYPES{@OLD}
 /obj/item/clothing/under/warden/@SUBTYPES : /obj/item/clothing/jumpsuit/warden/@SUBTYPES{@OLD}

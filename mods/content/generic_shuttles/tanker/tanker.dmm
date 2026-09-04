@@ -223,7 +223,7 @@
 "vC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/power/apc/high{
+/obj/machinery/apc/high{
 	dir = 4;
 	pixel_x = 24
 	},
@@ -257,7 +257,7 @@
 /turf/floor/tiled/steel_grid,
 /area/tanker)
 "yG" = (
-/obj/structure/bed/chair/office,
+/obj/structure/chair/office,
 /turf/floor/tiled/steel_grid,
 /area/tanker)
 "An" = (
@@ -315,7 +315,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/structure/bed/chair/shuttle{
+/obj/structure/chair/shuttle{
 	dir = 8
 	},
 /turf/floor/tiled/steel_grid,
@@ -475,7 +475,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/structure/bed/chair/shuttle{
+/obj/structure/chair/shuttle{
 	dir = 8
 	},
 /turf/floor/tiled/steel_grid,

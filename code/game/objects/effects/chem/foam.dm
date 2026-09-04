@@ -11,6 +11,7 @@
 	layer = ABOVE_OBJ_LAYER
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	animate_movement = 0
+	chem_volume = 10
 	var/amount = 3
 	var/metal = 0
 
@@ -56,11 +57,9 @@
 
 		F = new(T, metal)
 		F.amount = amount
-		if(!metal)
-			F.create_reagents(10)
-			if(reagents)
-				for(var/R in reagents.reagent_volumes)
-					F.add_to_reagents(R, 1, safety = 1) //added safety check since reagents in the foam have already had a chance to react
+		if(!metal && REAGENT_TOTAL_VOLUME(reagents))
+			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
+				F.add_to_reagents(reagent, 1, safety = 1) //added safety check since reagents in the foam have already had a chance to react
 
 /obj/effect/effect/foam/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume) // foam disolves when heated, except metal foams
 	if(!metal && prob(max(0, exposed_temperature - 475)))
@@ -93,8 +92,8 @@
 	// bit of a hack here. Foam carries along any reagent also present in the glass it is mixed with (defaults to water if none is present). Rather than actually transfer the reagents, this makes a list of the reagent ids and spawns 1 unit of that reagent when the foam disolves.
 
 	if(carry && !metal)
-		for(var/R in carry.reagent_volumes)
-			carried_reagents += R
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(carry))
+			carried_reagents += reagent
 
 /datum/effect/effect/system/foam_spread/start()
 	spawn(0)
@@ -107,8 +106,6 @@
 		F.amount = amount
 
 		if(!metal) // don't carry other chemicals if a metal foam
-			F.create_reagents(10)
-
 			if(carried_reagents)
 				for(var/id in carried_reagents)
 					F.add_to_reagents(id, 1, safety = 1) //makes a safety call because all reagents should have already reacted anyway
@@ -170,11 +167,11 @@
 	physically_destroyed()
 	return TRUE
 
-/obj/structure/foamedmetal/attackby(var/obj/item/I, var/mob/user)
-	if(prob(I.get_attack_force(user) * 20 - metal * 25))
+/obj/structure/foamedmetal/attackby(var/obj/item/used_item, var/mob/user)
+	if(prob(used_item.expend_attack_force(user) * 20 - metal * 25))
 		user.visible_message(
 			SPAN_WARNING("\The [user] smashes through the foamed metal."),
-			SPAN_NOTICE("You smash through the foamed metal with \the [I].")
+			SPAN_NOTICE("You smash through the foamed metal with \the [used_item].")
 		)
 		physically_destroyed()
 	else

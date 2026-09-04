@@ -35,7 +35,7 @@
 
 /datum/extension/obfuscated_medication/pill_bottle/get_original_reagent(var/obj/item/donor)
 	for(var/obj/item/chems/pill/pill in donor?.contents)
-		if(pill.reagents?.total_volume)
+		if(REAGENT_TOTAL_VOLUME(pill.reagents))
 			return pill.reagents.get_primary_reagent_name(codex = TRUE)
 
 /datum/extension/obfuscated_medication/pill_bottle/update_appearance()
@@ -48,7 +48,7 @@
 
 /datum/extension/obfuscated_medication/foil_pack/get_original_reagent(var/obj/item/donor)
 	for(var/obj/item/chems/pill/pill in donor?.contents)
-		if(pill.reagents?.total_volume)
+		if(REAGENT_TOTAL_VOLUME(pill.reagents))
 			return pill.reagents.get_primary_reagent_name(codex = TRUE)
 
 /datum/extension/obfuscated_medication/foil_pack/update_appearance()

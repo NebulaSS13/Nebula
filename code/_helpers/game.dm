@@ -176,30 +176,7 @@
 
 	return L
 
-// Returns a list of mobs and/or objects in range of R from source. Used in radio and say code.
-/proc/get_mobs_or_objects_in_view(var/R, var/atom/source, var/include_mobs = 1, var/include_objects = 1)
-
-	var/turf/T = get_turf(source)
-	var/list/hear = list()
-
-	if(!T)
-		return hear
-
-	var/list/range = hear(R, T)
-	for(var/I in range)
-		if(ismob(I))
-			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
-			if(include_mobs)
-				var/mob/M = I
-				if(M.client)
-					hear += M
-		else if(istype(I,/obj/))
-			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
-			if(include_objects)
-				hear += I
-	return hear
-
-// Alternative to get_mobs_or_objects_in_view which only considers mobs and "listening" objects.
+// Returns a list of mobs and/or objects in range of get_range from source. Used in radio and say code. Only considers mobs and "listening" objects.
 /proc/get_listeners_in_range(turf/center, range, list/mobs, list/objs, check_ghosts=FALSE)
 	var/list/hearturfs = list()
 	FOR_DVIEW(var/turf/T, range, center, INVISIBILITY_MAXIMUM)
@@ -271,33 +248,12 @@
 			return M
 	return null
 
-/datum/projectile_data
-	var/src_x
-	var/src_y
-	var/time
-	var/distance
-	var/power_x
-	var/power_y
-	var/dest_x
-	var/dest_y
-
-/datum/projectile_data/New(var/src_x, var/src_y, var/time, var/distance, \
-						   var/power_x, var/power_y, var/dest_x, var/dest_y)
-	src.src_x = src_x
-	src.src_y = src_y
-	src.time = time
-	src.distance = distance
-	src.power_x = power_x
-	src.power_y = power_y
-	src.dest_x = dest_x
-	src.dest_y = dest_y
-
 /proc/MixColors(const/list/colors)
 	switch(length(colors))
 		if(1)
 			return colors[1]
 		if(2)
-			return BlendRGBasHSV(colors[1], colors[2], 0.5)
+			return BlendHSV(colors[1], colors[2], 0.5)
 	var/list/reds = list()
 	var/list/blues = list()
 	var/list/greens = list()
@@ -400,12 +356,6 @@
 					rstats[i] = environment.vars[stats[i]]
 		temps[direction] = rstats
 	return temps
-
-/proc/MinutesToTicks(var/minutes)
-	return SecondsToTicks(60 * minutes)
-
-/proc/SecondsToTicks(var/seconds)
-	return seconds * 10
 
 /proc/window_flash(var/client_or_usr)
 	if (!client_or_usr)

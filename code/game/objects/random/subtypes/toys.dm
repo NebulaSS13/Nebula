@@ -229,3 +229,25 @@
 		/obj/item/toy/figure/ert
 	)
 	return spawnable_choices
+
+/obj/random/mech_toy
+	name = "random mech toy"
+	desc = "This is a random mech toy."
+	icon = /obj/item/toy/prize/powerloader::icon
+	icon_state = /obj/item/toy/prize/powerloader::icon_state
+
+/obj/random/mech_toy/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/toy/prize/powerloader,
+		/obj/item/toy/prize/fireripley,
+		/obj/item/toy/prize/deathripley,
+		/obj/item/toy/prize/gygax,
+		/obj/item/toy/prize/durand,
+		/obj/item/toy/prize/honk,
+		/obj/item/toy/prize/marauder,
+		/obj/item/toy/prize/seraph,
+		/obj/item/toy/prize/mauler,
+		/obj/item/toy/prize/odysseus,
+		/obj/item/toy/prize/phazon
+	)
+	return spawnable_choices

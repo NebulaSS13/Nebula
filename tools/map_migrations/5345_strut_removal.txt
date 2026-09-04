@@ -1,0 +1,3 @@
+/obj/item/stack/material/rods/ten : /obj/item/stack/material/rods/mapped/steel/ten{@OLD}
+/obj/item/stack/material/rods/fifty : /obj/item/stack/material/rods/mapped/steel/fifty{@OLD}
+/obj/item/stack/material/rods : /obj/item/stack/material/rods/mapped/steel{@OLD}

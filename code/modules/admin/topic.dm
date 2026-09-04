@@ -1,4 +1,5 @@
 #define MAX_JOBBAN_CELLS 5
+var/global/list/misc_jobban_roles = list("Botany Roles", "Graffiti")
 
 /datum/admins/Topic(href, href_list)
 	..()
@@ -174,7 +175,7 @@
 		else if(task == "permissions")
 			if(!D)	return
 			var/list/permissionlist = list()
-			for(var/i=1, i<=R_MAXPERMISSION, i<<=1)		//that <<= is shorthand for i = i << 1. Which is a left BITSHIFT_LEFT
+			for(var/i=1, i<=R_MAXPERMISSION, i = BITSHIFT_LEFT(i, 1))
 				permissionlist[rights2text(i)] = i
 			var/new_permission = input("Select a permission to turn on/off", "Permission toggle", null, null) as null|anything in permissionlist
 			if(!new_permission)	return
@@ -233,6 +234,8 @@
 				delmob = TRUE
 
 		var/transform_key = replacetext(href_list["simplemake"], "_", " ")
+		// Nothing ever seems to pass species to any simplemake href links...
+		// TODO: Remove subspecies argument if it actually is defunct?
 		if(M.try_rudimentary_transform(transform_key, delmob, href_list["species"]))
 			log_and_message_admins("has used rudimentary transformation on [key_name_admin(M)]. Transforming to [transform_key]; deletemob=[delmob]")
 
@@ -383,11 +386,10 @@
 		jobs += "</tr></table>"
 		#undef ANTAG_COLUMNS
 
-		var/list/misc_roles = list("Botany Roles", "Graffiti")
 		//Other roles  (BLUE, because I have no idea what other color to make this)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(misc_roles)]'>Other Roles</th></tr><tr align='center'>"
-		for(var/entry in misc_roles)
+		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(misc_jobban_roles)]'>Other Roles</th></tr><tr align='center'>"
+		for(var/entry in misc_jobban_roles)
 			if(jobban_isbanned(M, entry))
 				jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=[entry];jobban_mob_target=\ref[M]'><font color=red>[entry]</font></a></td>"
 			else
@@ -908,9 +910,9 @@
 
 		//Job + antagonist
 		if(M.mind)
-			special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>[M.mind.get_special_role_name("unknown role")]</b></font>; Has been rev: [(M.mind.has_been_rev)?"Yes":"No"]"
+			special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>[M.mind.get_special_role_name("unknown role")]</b></font>"
 		else
-			special_role_description = "Role: <i>Mind datum missing</i> Antagonist: <i>Mind datum missing</i>; Has been rev: <i>Mind datum missing</i>;"
+			special_role_description = "Role: <i>Mind datum missing</i> Antagonist: <i>Mind datum missing</i>"
 
 		//Health
 		if(isliving(M))
@@ -979,8 +981,7 @@
 		var/obj/effect/stop/S
 		S = new /obj/effect/stop(M.loc)
 		S.victim = M
-		spawn(20)
-			qdel(S)
+		QDEL_IN(S, 2 SECONDS)
 
 		var/turf/floor/T = get_turf(M)
 		if(istype(T))
@@ -993,7 +994,7 @@
 			M.take_damage(min(99, M.current_health - 1))
 			SET_STATUS_MAX(M, STAT_STUN, 20)
 			SET_STATUS_MAX(M, STAT_WEAK, 20)
-			M.set_status(STAT_STUTTER, 20)
+			M.set_status_condition(STAT_STUTTER, 20)
 
 	else if(href_list["CentcommReply"])
 		var/mob/living/L = locate(href_list["CentcommReply"])

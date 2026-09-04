@@ -1,6 +1,6 @@
 //IPC-face object for FPB.
 /obj/item/clothing/mask/monitor
-	name = "display monitor"
+	name = "unbranded display monitor"
 	desc = "A rather clunky old CRT-style display screen, fit for mounting on an optical output."
 	flags_inv = HIDEEYES
 	body_parts_covered = SLOT_EYES

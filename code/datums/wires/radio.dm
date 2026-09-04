@@ -3,7 +3,7 @@
 	wire_count = 3
 	descriptions = list(
 		new /datum/wire_description(WIRE_SIGNAL, "This wire connects several radio components."),
-		new /datum/wire_description(WIRE_RECEIVE, "This wire runs to the radio reciever.", SKILL_EXPERT),
+		new /datum/wire_description(WIRE_RECEIVE, "This wire runs to the radio receiver.", SKILL_EXPERT),
 		new /datum/wire_description(WIRE_TRANSMIT, "This wire runs to the radio transmitter.")
 	)
 
@@ -12,35 +12,35 @@ var/global/const/WIRE_RECEIVE = 2
 var/global/const/WIRE_TRANSMIT = 4
 
 /datum/wires/radio/CanUse(var/mob/living/L)
-	var/obj/item/radio/R = holder
-	if(R.panel_open)
+	var/obj/item/radio/radio = holder
+	if(radio.panel_open)
 		return 1
 	return 0
 
 /datum/wires/radio/UpdatePulsed(var/index)
-	var/obj/item/radio/R = holder
+	var/obj/item/radio/radio = holder
 	switch(index)
 		if(WIRE_SIGNAL)
-			R.listening = !R.listening && !IsIndexCut(WIRE_RECEIVE)
-			R.broadcasting = R.listening && !IsIndexCut(WIRE_TRANSMIT)
+			radio.listening = !radio.listening && !IsIndexCut(WIRE_RECEIVE)
+			radio.broadcasting = radio.listening && !IsIndexCut(WIRE_TRANSMIT)
 
 		if(WIRE_RECEIVE)
-			R.listening = !R.listening && !IsIndexCut(WIRE_SIGNAL)
+			radio.listening = !radio.listening && !IsIndexCut(WIRE_SIGNAL)
 
 		if(WIRE_TRANSMIT)
-			R.broadcasting = !R.broadcasting && !IsIndexCut(WIRE_SIGNAL)
+			radio.broadcasting = !radio.broadcasting && !IsIndexCut(WIRE_SIGNAL)
 	SSnano.update_uis(holder)
 
 /datum/wires/radio/UpdateCut(var/index, var/mended)
-	var/obj/item/radio/R = holder
+	var/obj/item/radio/radio = holder
 	switch(index)
 		if(WIRE_SIGNAL)
-			R.listening = mended && !IsIndexCut(WIRE_RECEIVE)
-			R.broadcasting = mended && !IsIndexCut(WIRE_TRANSMIT)
+			radio.listening = mended && !IsIndexCut(WIRE_RECEIVE)
+			radio.broadcasting = mended && !IsIndexCut(WIRE_TRANSMIT)
 
 		if(WIRE_RECEIVE)
-			R.listening = mended && !IsIndexCut(WIRE_SIGNAL)
+			radio.listening = mended && !IsIndexCut(WIRE_SIGNAL)
 
 		if(WIRE_TRANSMIT)
-			R.broadcasting = mended && !IsIndexCut(WIRE_SIGNAL)
+			radio.broadcasting = mended && !IsIndexCut(WIRE_SIGNAL)
 	SSnano.update_uis(holder)

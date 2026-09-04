@@ -9,6 +9,7 @@
 		/obj/item/stack/material/sheet,
 		/obj/item/stack/material/panel
 	)
+	validation_material         = /decl/material/solid/glass
 
 /decl/stack_recipe/opacity/fullwindow
 	name                 = "full-tile window"

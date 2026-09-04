@@ -6,10 +6,6 @@ var/global/join_motd = null
 
 var/global/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
-var/global/Debug2 = 0
-
-var/global/gravity_is_on = 1
-
 // Database connections. A connection is established on world creation.
 // Ideally, the connection dies when the server restarts (After feedback logging.).
 var/global/DBConnection/dbcon // General-purpose record database.

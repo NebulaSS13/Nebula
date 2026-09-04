@@ -16,9 +16,9 @@
 	return M.stock_parts.Copy()
 
 /datum/extension/interactive/os/silicon/emagged()
-	var/mob/living/silicon/robot/R = holder
-	if(istype(R))
-		return R.emagged
+	var/mob/living/silicon/robot/robot = holder
+	if(istype(robot))
+		return robot.emagged
 	return FALSE
 
 /datum/extension/interactive/os/silicon/host_status()
@@ -37,7 +37,7 @@
 	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		return os.check_eye()
-	else 
+	else
 		return ..()
 
 /datum/extension/interactive/os/silicon/small/get_hardware_flag()

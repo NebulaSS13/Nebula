@@ -1,6 +1,6 @@
 /datum/artifact_effect/goodfeeling
 	name = "good feeling"
-	origin_type = EFFECT_PSIONIC
+	origin_type = XA_EFFECT_PSIONIC
 	var/static/list/messages = list("You feel good.",
 		"Everything seems to be going alright.",
 		"You've got a good feeling about this.",

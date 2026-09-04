@@ -10,6 +10,7 @@
 	turf_light_color     = LIGHT_COLOR_LAVA
 	turf_light_range     = 2
 	turf_light_power     = 0.7
+	uid                  = "floor_lava"
 
 /decl/flooring/lava/handle_environment_proc(turf/floor/target)
 	. = PROCESS_KILL

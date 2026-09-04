@@ -1,0 +1,8 @@
+#ifndef MODPACK_TRITONIAN_SPECIES
+#define MODPACK_TRITONIAN_SPECIES
+// BEGIN_INCLUDE
+#include "_tritonian.dm"
+#include "datum\species.dm"
+#include "datum\species_bodytypes.dm"
+// END_INCLUDE
+#endif

@@ -1,6 +1,6 @@
 /obj/item/clothing/jumpsuit
 	name = "jumpsuit"
-	desc = "The latest in space fashion."
+	desc = "The latest in utilitarian fashion."
 	icon = 'icons/clothing/jumpsuits/jumpsuit.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	permeability_coefficient = 0.90

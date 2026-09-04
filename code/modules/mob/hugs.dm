@@ -40,8 +40,8 @@ var/global/list/_default_hug_messages = list(
 	hug_3p = emote_replace_target_tokens(hug_3p, target)
 	hug_1p = emote_replace_target_tokens(hug_1p, target)
 	visible_message(
-		SPAN_NOTICE(capitalize(hug_3p)),
-		SPAN_NOTICE(capitalize(hug_1p))
+		SPAN_NOTICE(capitalize_proper_html(hug_3p)),
+		SPAN_NOTICE(capitalize_proper_html(hug_1p))
 	)
 
 	playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)

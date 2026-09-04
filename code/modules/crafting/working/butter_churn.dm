@@ -5,14 +5,7 @@
 	product_type = /obj/item/food/dairy/butter/stick
 	work_sound   = /datum/composite_sound/loom_working
 	atom_flags   = ATOM_FLAG_OPEN_CONTAINER
-
-/obj/structure/working/butter_churn/Initialize()
-	. = ..()
-	initialize_reagents()
-
-/obj/structure/working/butter_churn/initialize_reagents(populate)
-	create_reagents(200)
-	. = ..()
+	chem_volume  = 200
 
 /obj/structure/working/butter_churn/try_start_working(mob/user)
 

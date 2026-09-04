@@ -1,0 +1,3 @@
+# REPATH DOORS
+/obj/structure/door/wood/saloon/@SUBTYPES : /obj/structure/door/@SUBTYPES/saloon{@OLD}
+/obj/structure/door/wood/@SUBTYPES : /obj/structure/door/oak/@SUBTYPES{@OLD}

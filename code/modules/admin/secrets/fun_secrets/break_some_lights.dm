@@ -11,7 +11,7 @@
 	var/list/epicentreList = list()
 	for(var/i in 1 to 2)
 		var/list/possibleEpicentres = list()
-		for(var/obj/abstract/landmark/newEpicentre in global.landmarks_list)
+		for(var/obj/abstract/landmark/newEpicentre in global.all_landmarks)
 			if(newEpicentre.name == "lightsout" && !(newEpicentre in epicentreList))
 				possibleEpicentres += newEpicentre
 		if(length(possibleEpicentres))
@@ -23,6 +23,6 @@
 		return
 
 	for(var/obj/abstract/landmark/epicentre in epicentreList)
-		for(var/obj/machinery/power/apc/apc in range(epicentre,lightsoutRange))
+		for(var/obj/machinery/apc/apc in range(epicentre,lightsoutRange))
 			apc.overload_lighting()
 			CHECK_TICK

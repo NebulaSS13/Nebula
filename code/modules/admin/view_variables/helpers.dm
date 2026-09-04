@@ -1,6 +1,4 @@
-
-// Keep these two together, they *must* be defined on both
-// If /client ever becomes /datum/client or similar, they can be merged
+// If /client/var/parent_type ever stops being /datum, this proc will need to be redefined on client.
 /datum/proc/get_view_variables_header()
 	return "<b>[src]</b>"
 
@@ -8,16 +6,16 @@
 	return {"
 		<a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=name'><b>[src]</b></a>
 		<br><font size='1'>
-		<a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a>
+		<a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=left'>\<\<</a>
 		<a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a>
-		<a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
+		<a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>\>\></a>
 		</font>
 		"}
 
 /mob/living/get_view_variables_header()
 	return {"
 		<a href='byond://?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>
-		<br><a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a> <a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
+		<br><a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=left'>\<\<</a> <a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='byond://?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>\>\></a>
 		<br><a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='byond://?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
 		<br>
 		BRUTE:<a href='byond://?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BRUTE]'>[get_damage(BRUTE)]</a>
@@ -37,7 +35,6 @@
 	return ..() + {"
 		<option value='?_src_=vars;mob_player_panel=\ref[src]'>Show player panel</option>
 		<option>---</option>
-		<option value='?_src_=vars;give_spell=\ref[src]'>Give Spell</option>
 		<option value='?_src_=vars;godmode=\ref[src]'>Toggle Godmode</option>
 		<option value='?_src_=vars;build_mode=\ref[src]'>Toggle Build Mode</option>
 
@@ -49,6 +46,9 @@
 		<option value='?_src_=vars;remlanguage=\ref[src]'>Remove Language</option>
 		<option value='?_src_=vars;addorgan=\ref[src]'>Add Organ</option>
 		<option value='?_src_=vars;remorgan=\ref[src]'>Remove Organ</option>
+
+		<option value='?_src_=vars;give_ability=\ref[src]'>Give Ability</option>
+		<option value='?_src_=vars;remove_ability=\ref[src]'>Remove Ability</option>
 
 		<option value='?_src_=vars;fix_nano=\ref[src]'>Fix NanoUI</option>
 
@@ -62,8 +62,8 @@
 
 /mob/living/get_view_variables_options()
 	return ..() + {"
-		<option value='?_src_=vars;addaura=\ref[src]'>Add Aura</option>
-		<option value='?_src_=vars;removeaura=\ref[src]'>Remove Aura</option>
+		<option value='?_src_=vars;add_mob_modifier=\ref[src]'>Add Modifier</option>
+		<option value='?_src_=vars;remove_mob_modifier=\ref[src]'>Remove Modifier</option>
 		<option value='?_src_=vars;addstressor=\ref[src]'>Add Stressor</option>
 		<option value='?_src_=vars;removestressor=\ref[src]'>Remove Stressor</option>
 		<option value='?_src_=vars;setstatuscond=\ref[src]'>Set Status Condition</option>

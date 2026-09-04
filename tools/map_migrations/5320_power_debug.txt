@@ -1,0 +1,2 @@
+/obj/machinery/power/debug_items/@SUBTYPES : /obj/machinery/debug_items/@SUBTYPES{@OLD}
+/obj/machinery/power/ascent_reactor/@SUBTYPES : /obj/machinery/ascent_reactor/@SUBTYPES{@OLD}

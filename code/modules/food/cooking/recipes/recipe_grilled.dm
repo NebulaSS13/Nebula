@@ -5,6 +5,9 @@
 		RECIPE_CATEGORY_MICROWAVE,
 		RECIPE_CATEGORY_SKILLET
 	)
+	// some arbitrary value to make sure it doesn't cook in open air, but will when microwaved
+	// todo: rework futurecooking so that microwaves aren't the only appliance for everything (modern stove, oven, fryer, etc)
+	minimum_temperature = 80 CELSIUS
 	completion_message = "The meat sizzles as it is cooked through."
 
 /decl/recipe/grilled/plainsteak

@@ -98,7 +98,7 @@
 			to_chat(usr, SPAN_WARNING("Network error."))
 			return
 		var/list/accesses = get_access(usr)
-		if(!network.get_mainframes_by_role(MF_ROLE_CREW_RECORDS, accesses))
+		if(!length(network.get_mainframes_by_role(MF_ROLE_CREW_RECORDS, accesses)))
 			to_chat(usr, SPAN_WARNING("You may not have access to generate new crew records, or there may not be a crew record mainframe active on the network."))
 			return
 		active_record = new/datum/computer_file/report/crew_record()
@@ -163,7 +163,7 @@
 		var/obj/item/photo/photo = user.get_active_held_item()
 		return photo.img
 	if(issilicon(user))
-		var/mob/living/silicon/tempAI = usr
+		var/mob/living/silicon/tempAI = user
 		var/obj/item/photo/selection = tempAI.GetPicture()
 		if (selection)
 			return selection.img

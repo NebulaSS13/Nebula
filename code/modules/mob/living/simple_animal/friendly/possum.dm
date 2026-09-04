@@ -14,7 +14,7 @@
 	universal_speak = FALSE
 	universal_understand = TRUE
 	mob_size = MOB_SIZE_SMALL
-	possession_candidate = 1
+	possession_candidate = TRUE
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 	holder_type = /obj/item/holder
@@ -97,15 +97,17 @@
 
 /mob/living/simple_animal/opossum/Initialize()
 	. = ..()
-	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
 /mob/living/simple_animal/opossum/poppy
 	name = "Poppy the Safety Possum"
 	desc = "It's an opossum, a small scavenging marsupial. It's wearing appropriate personal protective equipment, though."
 	icon = 'icons/mob/simple_animal/poppy_possum.dmi'
-	can_buckle = TRUE
+	max_buckled_mobs = 1
 	var/aaa_words = list("delaminat", "meteor", "fire", "breach")
+
+/mob/living/simple_animal/opossum/poppy/is_tagging_suitable()
+	return FALSE
 
 /mob/living/simple_animal/opossum/poppy/hear_broadcast(decl/language/language, mob/speaker, speaker_name, message)
 	. = ..()

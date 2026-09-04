@@ -43,8 +43,17 @@
 	name = "Sack"
 	path = /obj/item/bag/sack
 
+/decl/backpack_outfit/haversack
+	name = "Haversack"
+	path = /obj/item/backpack/crafted
+
+/decl/backpack_outfit/backpack/crafted
+	name = "Handmade Backpack"
+	path = /obj/item/backpack/crafted/backpack
+
 /* Code */
 /decl/backpack_outfit
+	abstract_type = /decl/backpack_outfit
 	var/flags
 	var/name
 	var/path
@@ -182,9 +191,9 @@
 /proc/get_default_outfit_backpack()
 	var backpacks = global.using_map.get_available_backpacks()
 	for(var/backpack in backpacks)
-		var/decl/backpack_outfit/bo = backpacks[backpack]
-		if(bo.is_default)
-			return bo
+		var/decl/backpack_outfit/backpack_option = backpacks[backpack]
+		if(backpack_option.is_default)
+			return backpack_option
 
 #undef BACKPACK_HAS_TYPE_SELECTION
 #undef BACKPACK_HAS_SUBTYPE_SELECTION

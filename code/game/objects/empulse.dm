@@ -14,13 +14,7 @@
 		log_and_message_admins("EMP with size ([heavy_range], [light_range]) in area [epicenter.loc.name] ")
 
 	if(heavy_range > 1)
-		var/obj/effect/overlay/pulse = new/obj/effect/overlay(epicenter)
-		pulse.icon = 'icons/effects/effects.dmi'
-		pulse.icon_state = "emppulse"
-		pulse.SetName("electromagnetic pulse")
-		pulse.anchored = TRUE
-		spawn(20)
-			qdel(pulse)
+		new /obj/effect/temp_visual/emppulse(epicenter)
 
 	if(heavy_range > light_range)
 		light_range = heavy_range

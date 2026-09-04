@@ -19,7 +19,7 @@
 
 /decl/codex_category/materials/chemistry/compounds
 	name = "Compounds"
-	desc = "Chemical reactions with non-medical, mundane, interesting or spectacular effects."
+	desc = "Chemical reactions with nonmedical, mundane, interesting or spectacular effects."
 	guide_name = "Compounds"
 	reaction_category = REACTION_TYPE_COMPOUND
 

@@ -14,12 +14,12 @@
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
 	item_flags = ITEM_FLAG_IS_WEAPON
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	_base_attack_force = 10
 
 /obj/item/classic_baton/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if (user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
-		var/force = get_attack_force(user)
+		var/force = expend_attack_force(user)
 		to_chat(user, SPAN_WARNING("You club yourself over the head."))
 		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
 		if(ishuman(user))
@@ -66,8 +66,8 @@
 	update_held_icon()
 
 /obj/item/telebaton/on_update_icon()
-	if(length(blood_DNA))
-		generate_blood_overlay(TRUE) // Force recheck.
+	if(REAGENT_TOTAL_VOLUME(coating) || blood_DNA)
+		generate_coating_overlay(TRUE) // Force recheck.
 	. = ..()
 	if(on)
 		icon = 'icons/obj/items/weapon/telebaton_extended.dmi'
@@ -76,7 +76,7 @@
 
 /obj/item/telebaton/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if(on && user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
-		var/force = get_attack_force(user)
+		var/force = expend_attack_force(user)
 		to_chat(user, SPAN_DANGER("You club yourself over the head."))
 		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
 		if(ishuman(user))

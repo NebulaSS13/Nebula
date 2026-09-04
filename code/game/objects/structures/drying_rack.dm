@@ -4,11 +4,23 @@
 	icon = 'icons/obj/drying_rack.dmi'
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/metal/steel
+	color = /decl/material/solid/metal/steel::color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/obj/item/drying
 
+/obj/structure/drying_rack/Initialize(ml, _mat, _reinf_mat)
+	. = ..()
+	// This is mostly for serde.
+	for(var/obj/item/thing in get_contained_external_atoms())
+		if(!drying && thing.is_dryable())
+			drying = thing
+			update_icon()
+		else
+			thing.dropInto(loc)
+
 /obj/structure/drying_rack/ebony
 	material = /decl/material/solid/organic/wood/ebony
+	color = /decl/material/solid/organic/wood/ebony::color
 
 /obj/structure/drying_rack/Destroy()
 	QDEL_NULL(drying)
@@ -43,10 +55,10 @@
 		drying.update_icon()
 	update_icon()
 
-/obj/structure/drying_rack/examine(mob/user, distance, infix, suffix)
+/obj/structure/drying_rack/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(drying)
-		to_chat(user, "\The [drying] is [drying.get_dryness_text()].")
+		. += "\The [drying] is [drying.get_dryness_text()]."
 
 /obj/structure/drying_rack/on_update_icon()
 	..()
@@ -54,12 +66,12 @@
 	if(drying_state)
 		add_overlay(drying_state)
 
-/obj/structure/drying_rack/attackby(var/obj/item/W, var/mob/user)
+/obj/structure/drying_rack/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(!drying && W.is_dryable())
-		if(user.try_unequip(W))
-			W.forceMove(src)
-			drying = W
+	if(!drying && used_item.is_dryable())
+		if(user.try_unequip(used_item))
+			used_item.forceMove(src)
+			drying = used_item
 			if(!is_processing)
 				START_PROCESSING(SSobj, src)
 			update_icon()

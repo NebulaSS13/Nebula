@@ -1,4 +1,5 @@
 /decl/footsteps
+	abstract_type = /decl/footsteps
 	var/list/footstep_sounds
 
 /decl/footsteps/catwalk

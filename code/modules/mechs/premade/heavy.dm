@@ -90,10 +90,6 @@
 			"[WEST]"  = list("x" = 12, "y" = 8)
 		)
 	)
-
-	. = ..()
-
-/obj/item/mech_component/chassis/heavy/prebuild()
 	. = ..()
 	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
 

@@ -53,8 +53,8 @@
 /obj/item/book/skill/custom/question
 	icon = 'icons/obj/items/books/book_white_question.dmi'
 
-/obj/item/book/skill/custom/attackby(obj/item/pen, mob/user)
-	if(!IS_PEN(pen))
+/obj/item/book/skill/custom/attackby(obj/item/used_item, mob/user)
+	if(!IS_PEN(used_item))
 		return ..()
 	if(!user.skill_check(SKILL_LITERACY, SKILL_BASIC))
 		to_chat(user, SPAN_WARNING("You can't even read, yet you want to write a whole educational textbook?"))
@@ -64,26 +64,26 @@
 		return TRUE
 	var/state_check = skill_option_string // the state skill_option_string is in just before opening the input
 	var/choice = input(user, "What would you like to change?","Textbook editing") as null|anything in list("Title", "Author", skill_option_string)
-	if(!can_write(pen,user))
+	if(!can_write(used_item,user))
 		return TRUE
 
 	switch(choice)
 		if("Title")
-			edit_title(pen, user)
+			edit_title(used_item, user)
 
 		if("Skill")
 			if(state_check != "Skill") // make sure someone hasn't already started the book while we were staring at menus woops
 				to_chat(user, SPAN_WARNING("The skill has already been selected and the writing started."))
 				return TRUE
-			edit_skill(pen, user)
+			edit_skill(used_item, user)
 
 		if("Continue writing content")
 			if(state_check != "Continue writing content")
 				return TRUE
-			continue_skill(pen, user)
+			continue_skill(used_item, user)
 
 		if("Author")
-			edit_author(pen, user)
+			edit_author(used_item, user)
 
 		else
 			return TRUE

@@ -108,3 +108,11 @@
 
 /decl/stack_recipe/steel/furniture/drill_brace
 	result_type       = /obj/structure/drill_brace
+
+/decl/stack_recipe/steel/furniture/armor_stand
+	result_type       = /obj/structure/armor_stand
+	difficulty        = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/steel/furniture/target_stake
+	result_type       = /obj/structure/target_stake
+	difficulty        = MAT_VALUE_NORMAL_DIY

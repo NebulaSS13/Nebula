@@ -1,7 +1,8 @@
 /decl/species/human
-	name = SPECIES_HUMAN
+	uid = "species_human"
+	name = "Human"
 	name_plural = "Humans"
-	primitive_form = SPECIES_MONKEY
+	primitive_form = /decl/species/monkey::uid
 	description = "A medium-sized creature prone to great ambition. If you are reading this, you are probably a human."
 	hidden_from_codex = FALSE
 	spawn_flags = SPECIES_CAN_JOIN
@@ -28,9 +29,6 @@
 		/decl/emote/exertion/synthetic,
 		/decl/emote/exertion/synthetic/creak
 	)
-
-/decl/species/human/get_root_species_name(var/mob/living/human/H)
-	return SPECIES_HUMAN
 
 /decl/species/human/get_ssd(var/mob/living/human/H)
 	if(H.stat == CONSCIOUS)

@@ -7,18 +7,18 @@
 
 	var/screwdriver_time_needed = 7.5 SECONDS
 
-/obj/structure/closet/coffin/examine(mob/user, distance)
+/obj/structure/closet/coffin/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1 && !opened)
-		to_chat(user, "The lid is [locked ? "tightly secured with screws." : "unsecured and can be opened."]")
+		. += "The lid is [locked ? "tightly secured with screws." : "unsecured and can be opened."]"
 
 /obj/structure/closet/coffin/can_open(mob/user)
 	. =  ..()
 	if(locked)
 		return FALSE
 
-/obj/structure/closet/coffin/attackby(obj/item/W, mob/user)
-	if(!opened && IS_SCREWDRIVER(W))
+/obj/structure/closet/coffin/attackby(obj/item/used_item, mob/user)
+	if(!opened && IS_SCREWDRIVER(used_item))
 		to_chat(user, SPAN_NOTICE("You begin screwing [src]'s lid [locked ? "open" : "shut"]."))
 		playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
 		if(do_after(user, screwdriver_time_needed, src))

@@ -23,10 +23,7 @@
 	if(!new_species)
 		return
 
-	if(species?.name == new_species)
-		return
-
-	if(!(new_species in get_all_species()))
+	if(species?.uid == new_species)
 		return
 
 	set_species(new_species, new_bodytype)
@@ -92,19 +89,17 @@
 
 /mob/living/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
 	var/list/valid_species = new()
-	for(var/current_species_name in get_all_species())
-		var/decl/species/current_species = get_species_by_key(current_species_name)
-
+	for(var/decl/species/current_species as anything in decls_repository.get_decls_of_subtype_unassociated(/decl/species))
 		if(check_whitelist) //If we're using the whitelist, make sure to check it!
 			if((current_species.spawn_flags & SPECIES_IS_RESTRICTED) && !check_rights(R_ADMIN, 0, src))
 				continue
 			if(!is_alien_whitelisted(src, current_species))
 				continue
-		if(whitelist.len && !(current_species_name in whitelist))
+		if(whitelist.len && !(current_species.uid in whitelist))
 			continue
-		if(blacklist.len && (current_species_name in blacklist))
+		if(blacklist.len && (current_species.uid in blacklist))
 			continue
 
-		valid_species += current_species_name
+		valid_species += current_species.uid
 
 	return valid_species

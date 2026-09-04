@@ -1,0 +1,15 @@
+#ifndef MODPACK_SPECIES_ADHERENT
+#define MODPACK_SPECIES_ADHERENT
+// BEGIN_INCLUDE
+#include "_adherent.dm"
+#include "datum\culture.dm"
+#include "datum\emotes.dm"
+#include "datum\faction.dm"
+#include "datum\language.dm"
+#include "datum\location.dm"
+#include "datum\species.dm"
+#include "datum\species_bodytypes.dm"
+#include "organs\organs_external.dm"
+#include "organs\organs_internal.dm"
+// END_INCLUDE
+#endif

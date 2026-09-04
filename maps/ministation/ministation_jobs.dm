@@ -1,25 +1,24 @@
 /datum/map/ministation
-	default_job_type = /datum/job/ministation/assistant
+	default_job_type = /datum/job/standard/assistant/ministation
 	default_department_type = /decl/department/civilian
-	id_hud_icons = 'maps/ministation/hud.dmi'
 	allowed_jobs = list(
-		/datum/job/ministation/assistant,
-		/datum/job/ministation/bartender,
-		/datum/job/ministation/captain,
-		/datum/job/ministation/cargo,
-		/datum/job/ministation/robot,
-		/datum/job/computer,
-		/datum/job/ministation/detective,
-		/datum/job/ministation/doctor,
-		/datum/job/ministation/doctor/head,
-		/datum/job/ministation/engineer,
-		/datum/job/ministation/engineer/head,
-		/datum/job/ministation/hop,
-		/datum/job/ministation/janitor,
-		/datum/job/ministation/scientist,
-		/datum/job/ministation/scientist/head,
-		/datum/job/ministation/security,
-		/datum/job/ministation/security/head,
-		/datum/job/ministation/librarian,
-		/datum/job/ministation/tradehouse/rep
+		/datum/job/standard/assistant/ministation,
+		/datum/job/standard/bartender/ministation,
+		/datum/job/standard/captain/ministation,
+		/datum/job/standard/cargo_tech/ministation,
+		/datum/job/standard/robot,
+		/datum/job/standard/computer,
+		/datum/job/standard/detective/ministation,
+		/datum/job/standard/doctor/ministation,
+		/datum/job/standard/cmo/ministation,
+		/datum/job/standard/engineer/ministation,
+		/datum/job/standard/chief_engineer/ministation,
+		/datum/job/standard/hop/ministation,
+		/datum/job/standard/janitor/ministation,
+		/datum/job/standard/scientist/ministation,
+		/datum/job/standard/rd/ministation,
+		/datum/job/standard/officer/ministation,
+		/datum/job/standard/hos/ministation,
+		/datum/job/standard/librarian/ministation,
+		/datum/job/tradehouse_rep
 	)

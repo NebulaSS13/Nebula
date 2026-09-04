@@ -37,7 +37,7 @@
 /decl/item_effect/debug/hear_speech(obj/item/item, mob/user, message, decl/language/speaking)
 	log_debug("[type]: [item] heard [user] say [message] in [speaking] ([json_encode(args)])")
 
-/decl/item_effect/debug/examined(obj/item/item, mob/user)
+/decl/item_effect/debug/on_examined(obj/item/item, mob/user)
 	log_debug("[type]: [user] examined [item] ([json_encode(args)])")
 
 /decl/item_effect/debug/do_process_effect(obj/item/item, list/parameters)
@@ -46,21 +46,21 @@
 /obj/item/sword/katana/debug/Initialize()
 	. = ..()
 	add_item_effect(/decl/item_effect/debug, list(
-		ITEM_EFFECT_VISUAL   = list("vis"         = "ual"),
-		ITEM_EFFECT_STRIKE   = list("foo"         = "bar"),
-		ITEM_EFFECT_PARRY    = list("fizz"        = "buzz"),
-		ITEM_EFFECT_USED     = list("aard"        = "vark"),
-		ITEM_EFFECT_VISIBLE  = list("ooo"         = "aaa"),
-		ITEM_EFFECT_LISTENER = list("walla walla" = "bing bong"),
-		ITEM_EFFECT_PROCESS  = list("hyonk"       = "hjonk")
+		(IE_CAT_VISUAL)   = list("vis"         = "ual"),
+		(IE_CAT_STRIKE)   = list("foo"         = "bar"),
+		(IE_CAT_PARRY)    = list("fizz"        = "buzz"),
+		(IE_CAT_USED)     = list("aard"        = "vark"),
+		(IE_CAT_EXAMINE)  = list("ooo"         = "aaa"),
+		(IE_CAT_LISTENER) = list("walla walla" = "bing bong"),
+		(IE_CAT_PROCESS)  = list("hyonk"       = "hjonk")
 	))
 	add_item_effect(/decl/item_effect/charges/fireball, list(
-		ITEM_EFFECT_VISIBLE,
-		ITEM_EFFECT_RANGED   = list("charges" = 5)
+		(IE_CAT_EXAMINE),
+		(IE_CAT_RANGED)   = list(IE_PAR_USES = 5)
 	))
-	add_item_effect(/decl/item_effect/aura/regeneration, list(
-		ITEM_EFFECT_VISIBLE,
-		ITEM_EFFECT_WIELDED
+	add_item_effect(/decl/item_effect/mob_modifier/regeneration, list(
+		(IE_CAT_EXAMINE),
+		(IE_CAT_WIELDED)
 	))
 
 /obj/item/staff/crystal/beacon/fireball
@@ -71,6 +71,6 @@
 /obj/item/staff/crystal/beacon/fireball/Initialize(ml, material_key)
 	. = ..()
 	add_item_effect(/decl/item_effect/charges/fireball, list(
-		ITEM_EFFECT_VISIBLE,
-		ITEM_EFFECT_RANGED   = list("charges" = 5)
+		(IE_CAT_EXAMINE),
+		(IE_CAT_RANGED)   = list(IE_PAR_USES = 5)
 	))

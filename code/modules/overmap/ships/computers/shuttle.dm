@@ -42,8 +42,8 @@
 		if(length(port_choices))
 			port = input("Choose shuttle docking port:", "Shuttle Docking Port") as null|anything in port_choices
 		else
-			to_chat(usr, SPAN_WARNING("No functional docking ports, defaulting to center-of-mass landing."))
-		if(CanInteract(usr, global.default_topic_state) && (port in port_choices))
+			to_chat(user, SPAN_WARNING("No functional docking ports, defaulting to center-of-mass landing."))
+		if(CanInteract(user, global.default_topic_state) && (port in port_choices))
 			shuttle.set_port(port_choices[port])
 	if(href_list["pick"])
 		var/list/possible_d = shuttle.get_possible_destinations()
@@ -51,9 +51,9 @@
 		if(possible_d.len)
 			D = input("Choose shuttle destination", "Shuttle Destination") as null|anything in possible_d
 		else
-			to_chat(usr, SPAN_WARNING("No valid landing sites in range."))
+			to_chat(user, SPAN_WARNING("No valid landing sites in range."))
 		possible_d = shuttle.get_possible_destinations()
-		if(CanInteract(usr, global.default_topic_state) && (D in possible_d))
+		if(CanInteract(user, global.default_topic_state) && (D in possible_d))
 			shuttle.set_destination(possible_d[D])
 		return TOPIC_REFRESH
 	if(href_list["manual_landing"])
@@ -68,10 +68,10 @@
 			else
 				start_landing(user, shuttle)
 			return TOPIC_REFRESH
-		to_chat(usr, SPAN_WARNING("The manual controls look hopelessly complex to you!"))
+		to_chat(user, SPAN_WARNING("The manual controls look hopelessly complex to you!"))
 
 /obj/machinery/computer/shuttle_control/explore/proc/start_landing(var/mob/user, var/datum/shuttle/autodock/overmap/shuttle)
-	var/obj/effect/overmap/visitable/current_sector = global.overmap_sectors[num2text(z)]
+	var/obj/effect/overmap/visitable/current_sector = global.overmap_sectors[z]
 	var/obj/effect/overmap/visitable/target_sector
 	if(current_sector && istype(current_sector))
 
@@ -110,7 +110,7 @@
 	var/mob/observer/eye/landing/landing_eye = eye_extension.extension_eye
 	var/turf/lz_turf = eye_extension.get_eye_turf()
 
-	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(lz_turf.z)]
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[lz_turf.z]
 	if(!sector.allow_free_landing())	// Additional safety check to ensure the sector permits landing.
 		to_chat(user, SPAN_WARNING("Invalid landing zone!"))
 		return
@@ -129,11 +129,6 @@
 		else
 			qdel(lz)
 	to_chat(user, SPAN_WARNING("Invalid landing zone!"))
-
-/obj/machinery/computer/shuttle_control/proc/end_landing()
-	var/datum/extension/eye/landing_eye = get_extension(src, /datum/extension/eye/)
-	if(landing_eye)
-		landing_eye.unlook()
 
 /obj/machinery/computer/shuttle_control/explore/power_change()
 	. = ..()

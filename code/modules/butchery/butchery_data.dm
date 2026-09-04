@@ -85,7 +85,7 @@
 		for(var/obj/item/food/slab in .)
 			LAZYADD(meat, slab)
 		if(length(meat))
-			var/reagent_split = round(donor.reagents.total_volume/length(meat), 1)
+			var/reagent_split = round(REAGENT_TOTAL_VOLUME(donor.reagents)/length(meat), 1)
 			for(var/obj/item/food/slab as anything in meat)
 				donor.reagents.trans_to_obj(slab, reagent_split)
 

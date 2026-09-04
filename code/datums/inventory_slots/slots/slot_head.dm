@@ -9,6 +9,7 @@
 	requires_slot_flags = SLOT_HEAD
 	mob_overlay_layer = HO_HEAD_LAYER
 	quick_equip_priority = 9
+	fluid_height = FLUID_OVER_MOB_HEAD
 
 /datum/inventory_slot/head/simple
 	requires_organ_tag = null

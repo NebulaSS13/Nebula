@@ -1,4 +1,5 @@
 /area/errant_pisces
+	abstract_type = /area/errant_pisces
 	icon = 'maps/away/errant_pisces/icons/areas.dmi'
 
 /area/errant_pisces/bow_port

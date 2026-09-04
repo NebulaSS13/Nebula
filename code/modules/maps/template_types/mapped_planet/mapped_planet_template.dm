@@ -6,7 +6,6 @@
 /datum/map_template/planetoid
 	name                 = "planetoid"
 	abstract_type        = /datum/map_template/planetoid
-	template_parent_type = /datum/map_template/planetoid
 	template_categories  = list(MAP_TEMPLATE_CATEGORY_PLANET)
 	level_data_type      = /datum/level_data/planetoid
 	modify_tag_vars      = TRUE

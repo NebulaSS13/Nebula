@@ -2,7 +2,7 @@
 	name = "religious insignia"
 	path = /obj/item/clothing/insignia
 	cost = 1
-	allowed_roles = list(/datum/job/chaplain)
+	allowed_roles = list(/datum/job/standard/chaplain)
 	uid = "gear_accessory_insignia"
 
 /decl/loadout_option/accessory/insignia/Initialize()

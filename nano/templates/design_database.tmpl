@@ -6,12 +6,16 @@
 <div class = "item">
 	<div class="itemLabel">External storage</div>
 	<table width = '90%'>
-	{{if data.disk_tech}}
+	{{if data.disk_tech || data.disk_error}}
 		<tr><td colspan = 2>{{:helper.link(data.disk_name, null, {'eject_disk' : 1})}}</td></tr>
-		<tr><td width = '60%'>Data</td><td>Stored</td></tr>
-		{{for data.disk_tech}}
-			<tr><td width = '60%'><abbr title='{{:value.desc}}'>{{:value.field}}</abbr></td><td>{{:value.level}}</td></tr>
-		{{/for}}
+		{{if data.disk_error}}
+			<tr>invalid data format</tr>
+		{{else}}
+			<tr><td width = '60%'>Data</td><td>Stored</td></tr>
+			{{for data.disk_tech}}
+				<tr><td width = '60%'><abbr title='{{:value.desc}}'>{{:value.field}}</abbr></td><td>{{:value.level}}</td></tr>
+			{{/for}}
+		{{/if}}
 	{{else}}
 		<tr><td colspan = 2>{{:data.disk_name}}</td></tr>
 	{{/if}}

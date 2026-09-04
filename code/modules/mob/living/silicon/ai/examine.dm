@@ -1,36 +1,33 @@
-/mob/living/silicon/ai/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
+/mob/living/silicon/ai/examined_by(mob/user, distance, infix, suffix)
 	. = ..()
+	user?.showLaws(src)
 
-	var/msg = ""
-	if (src.stat == DEAD)
-		msg += "<span class='deadsay'>It appears to be powered-down.</span>\n"
+/mob/living/silicon/ai/get_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
+	. = ..()
+	if(stat == DEAD)
+		. += "<span class='deadsay'>It appears to be powered-down.</span>"
 	else
-		msg += "<span class='warning'>"
-		if (src.get_damage(BRUTE))
-			if (src.get_damage(BRUTE) < 30)
-				msg += "It looks slightly dented.\n"
-			else
-				msg += "<B>It looks severely dented!</B>\n"
-		if (src.get_damage(BURN))
-			if (src.get_damage(BURN) < 30)
-				msg += "It looks slightly charred.\n"
-			else
-				msg += "<B>Its casing is melted and heat-warped!</B>\n"
+		var/brute_damage = get_damage(BRUTE)
+		if (brute_damage >= 30)
+			. += SPAN_WARNING("<B>It looks severely dented!</B>")
+		else if(brute_damage)
+			. += SPAN_WARNING("It looks slightly dented.")
+		var/burn_damage = get_damage(BURN)
+		if(burn_damage >= 30)
+			. += SPAN_WARNING("<B>Its casing is melted and heat-warped!</B>")
+		else if(burn_damage)
+			. += SPAN_WARNING("It looks slightly charred.")
 		if (!has_power())
-			if (src.get_damage(OXY) > 175)
-				msg += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER CRITICAL\" warning.</B>\n"
-			else if(src.get_damage(OXY) > 100)
-				msg += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER LOW\" warning.</B>\n"
+			var/oxy_damage = get_damage(OXY)
+			if (oxy_damage > 175)
+				. += SPAN_WARNING("<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER CRITICAL\" warning.</B>")
+			else if(oxy_damage > 100)
+				. += SPAN_WARNING("<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER LOW\" warning.</B>")
 			else
-				msg += "It seems to be running on backup power.\n"
-
-		if (src.stat == UNCONSCIOUS)
-			msg += "It is non-responsive and displaying the text: \"RUNTIME: Sensory Overload, stack 26/3\".\n"
-		msg += "</span>"
-	msg += "*---------*"
-	to_chat(user, msg)
-	user.showLaws(src)
-	return
+				. += SPAN_WARNING("It seems to be running on backup power.")
+		if (stat == UNCONSCIOUS)
+			. += SPAN_WARNING("It is non-responsive and displaying the text: \"RUNTIME: Sensory Overload, stack 26/3\".")
+	. += "*---------*"
 
 /mob/proc/showLaws(var/mob/living/silicon/S)
 	return

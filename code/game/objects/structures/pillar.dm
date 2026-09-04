@@ -17,3 +17,14 @@
 
 /obj/structure/pillar/triad
 	icon = 'icons/obj/structures/pillars/pillar_triad.dmi'
+
+/obj/structure/pillar/wide
+	name = "wide pillar"
+	w_class = ITEM_SIZE_LARGE_STRUCTURE
+	icon = 'icons/obj/structures/pillars/pillar_wide_round.dmi'
+
+/obj/structure/pillar/wide/square
+	icon = 'icons/obj/structures/pillars/pillar_wide_square.dmi'
+
+/obj/structure/pillar/wide/inset
+	icon = 'icons/obj/structures/pillars/pillar_wide_inset.dmi'

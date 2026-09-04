@@ -1,0 +1,2 @@
+/obj/item/target/@SUBTYPES : /obj/item/target_dummy/@SUBTYPES{@OLD}
+/obj/structure/target_stake/@SUBTYPES : /obj/structure/target_stake/steel/@SUBTYPES{@OLD}

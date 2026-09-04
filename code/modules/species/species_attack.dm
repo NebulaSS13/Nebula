@@ -2,8 +2,8 @@
 	attack_verb = list("bit", "chomped on")
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	name = "sharp bite"
 
 /decl/natural_attack/claws
@@ -14,13 +14,13 @@
 	eye_attack_text_victim = "sharp claws"
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	name = "claws"
 	usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
 	var/blocked_by_gloves = TRUE
 
-/decl/natural_attack/claws/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
+/decl/natural_attack/claws/attack_is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 	return (!user.get_equipped_item(slot_gloves_str) || !blocked_by_gloves)
 
 /decl/natural_attack/claws/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
@@ -124,7 +124,7 @@
 		BP_GROIN
 	)
 
-/decl/natural_attack/tail/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone) //ensures that you can't tail someone in the skull
+/decl/natural_attack/tail/attack_is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone) //ensures that you can't tail someone in the skull
 	if(!(zone in can_hit_zones))
 		return FALSE
 	for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))

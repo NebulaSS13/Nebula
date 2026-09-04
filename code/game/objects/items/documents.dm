@@ -10,7 +10,7 @@
 	_base_attack_force = 0
 	var/description_antag = "These conversations contain a massive amount of dirt on major figures: drugs, sex, money..."
 
-/obj/item/documents/examine(mob/user)
+/obj/item/documents/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(description_antag)
-		to_chat(user, description_antag)
+		. += description_antag

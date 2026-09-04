@@ -33,12 +33,13 @@
 
 /atom/Entered(var/atom/movable/am, var/atom/old_loc)
 	. = ..()
-	RAISE_EVENT(/decl/observ/moved, am, old_loc, am.loc)
+	if(am.event_listeners?[/decl/observ/moved])
+		am.raise_event_non_global(/decl/observ/moved, old_loc, am.loc)
 
 /atom/movable/Entered(var/atom/movable/am, atom/old_loc)
 	. = ..()
-	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
-	if(moved_event.has_listeners(am))
+	// We inline and simplify has_listeners here since we know this event can never have global registrations.
+	if(am.event_listeners?[/decl/observ/moved])
 		events_repository.register(/decl/observ/moved, src, am, TYPE_PROC_REF(/atom/movable, recursive_move))
 
 /atom/movable/Exited(var/atom/movable/am, atom/new_loc)

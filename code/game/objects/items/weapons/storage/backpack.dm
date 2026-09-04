@@ -13,21 +13,22 @@
 	storage = /datum/storage/backpack
 	material = /decl/material/solid/organic/leather/synth
 
+/obj/item/backpack/get_associated_equipment_slots()
+	. = ..()
+	LAZYDISTINCTADD(., slot_back_str)
+
 //Cannot be washed :(
 /obj/item/backpack/can_contaminate()
 	return FALSE
 
-/obj/item/backpack/equipped()
-	if(!has_extension(src, /datum/extension/appearance))
-		set_extension(src, /datum/extension/appearance/cardborg)
-	..()
-
-/obj/item/backpack/attackby(obj/item/W, mob/user)
+/obj/item/backpack/attackby(obj/item/used_item, mob/user)
 	if (storage?.use_sound)
 		playsound(src.loc, storage.use_sound, 50, 1, -5)
 	return ..()
 
 /obj/item/backpack/equipped(var/mob/user, var/slot)
+	if(!has_extension(src, /datum/extension/appearance))
+		set_extension(src, /datum/extension/appearance/cardborg)
 	if (slot == slot_back_str && storage?.use_sound)
 		playsound(loc, storage.use_sound, 50, 1, -5)
 	return ..(user, slot)
@@ -54,10 +55,10 @@
 	explosion(src.loc,(dist),(dist*2),(dist*4))
 	return 1000
 
-/obj/item/backpack/holding/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/backpack/holding) || istype(W, /obj/item/bag/trash/advanced))
+/obj/item/backpack/holding/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/backpack/holding) || istype(used_item, /obj/item/bag/trash/advanced))
 		to_chat(user, "<span class='warning'>The spatial interfaces of the two devices conflict and malfunction.</span>")
-		qdel(W)
+		qdel(used_item)
 		return 1
 	return ..()
 
@@ -347,60 +348,12 @@
 	anchored = i ? TRUE : FALSE
 	alpha = i ? 128 : initial(alpha)
 
-/obj/item/backpack/satchel/flat/attackby(obj/item/W, mob/user)
+/obj/item/backpack/satchel/flat/attackby(obj/item/used_item, mob/user)
 	var/turf/T = get_turf(src)
 	if(hides_under_flooring() && isturf(T) && !T.is_plating())
 		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
 		return 1
 	return ..()
-
-//ERT backpacks.
-/obj/item/backpack/ert
-	name = "emergency response team backpack"
-	desc = "A spacious backpack with lots of pockets, used by members of the Emergency Response Team."
-	icon = 'icons/obj/items/storage/backpack/backpack_ert.dmi'
-	var/marking_state
-	var/marking_colour
-
-/obj/item/backpack/ert/on_update_icon()
-	. = ..()
-	if(marking_state)
-		var/image/I = image(icon, marking_state)
-		I.color = marking_colour
-		I.appearance_flags |= RESET_COLOR
-		add_overlay(I)
-
-/obj/item/backpack/ert/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay && slot == slot_back_str && marking_state)
-		var/image/I = image(overlay.icon, "[overlay.icon_state]-[marking_state]")
-		I.color = marking_colour
-		I.appearance_flags |= RESET_COLOR
-		overlay.add_overlay(I)
-	. = ..()
-
-/obj/item/backpack/ert/commander
-	name = "emergency response team commander backpack"
-	desc = "A spacious backpack with lots of pockets, worn by the commander of an Emergency Response Team."
-	marking_colour = COLOR_BLUE_GRAY
-	marking_state = "com"
-
-/obj/item/backpack/ert/security
-	name = "emergency response team security backpack"
-	desc = "A spacious backpack with lots of pockets, worn by security members of an Emergency Response Team."
-	marking_colour = COLOR_NT_RED
-	marking_state = "sec"
-
-/obj/item/backpack/ert/engineer
-	name = "emergency response team engineer backpack"
-	desc = "A spacious backpack with lots of pockets, worn by engineering members of an Emergency Response Team."
-	marking_colour = COLOR_GOLD
-	marking_state = "eng"
-
-/obj/item/backpack/ert/medical
-	name = "emergency response team medical backpack"
-	desc = "A spacious backpack with lots of pockets, worn by medical members of an Emergency Response Team."
-	marking_colour = COLOR_OFF_WHITE
-	marking_state = "med"
 
 /*
  * Messenger Bags
@@ -413,7 +366,7 @@
 
 /obj/item/backpack/messenger/chem
 	name = "pharmacy messenger bag"
-	desc = "A serile backpack worn over one shoulder. This one is in Chemistry colors."
+	desc = "A sterile backpack worn over one shoulder. This one is in Chemistry colors."
 	icon = 'icons/obj/items/storage/backpack/messenger_chem.dmi'
 
 /obj/item/backpack/messenger/med
@@ -445,3 +398,17 @@
 	name = "security messenger bag"
 	desc = "A tactical backpack worn over one shoulder. This one is in Security colors."
 	icon = 'icons/obj/items/storage/backpack/messenger_sec.dmi'
+
+// Crafted backpacks.
+/obj/item/backpack/crafted
+	name = "haversack"
+	desc = "A rather rough handmade haversack."
+	icon = 'icons/obj/items/storage/backpack/backpack_haversack.dmi'
+	material = /decl/material/solid/organic/leather
+	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
+
+/obj/item/backpack/crafted/backpack
+	name = "backpack"
+	name_prefix = "handmade"
+	desc = "A rather rough handmade backpack."
+	icon = 'icons/obj/items/storage/backpack/backpack_crafted.dmi'

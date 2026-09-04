@@ -115,7 +115,7 @@
 			if("safety")
 				safety = !safety
 
-/mob/living/bot/mulebot/attackby(var/obj/item/O, var/mob/user)
+/mob/living/bot/mulebot/attackby(var/obj/item/used_item, var/mob/user)
 	. = ..()
 	update_icon()
 
@@ -183,7 +183,7 @@
 
 /mob/living/bot/mulebot/calcTargetPath()
 	..()
-	if(!target_path.len && target != home) // I presume that target is not null
+	if(!length(target_path) && target != home) // I presume that target is not null
 		resetTarget()
 		target = home
 		targetName = "Home"

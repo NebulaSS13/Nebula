@@ -1,6 +1,6 @@
 /decl/trait/build_references()
 	. = ..()
-	LAZYDISTINCTADD(blocked_species, SPECIES_VOX)
+	LAZYDISTINCTADD(blocked_species, /decl/species/vox::uid)
 
 /decl/trait/vox
 	abstract_type = /decl/trait/vox
@@ -8,7 +8,7 @@
 /decl/trait/vox/build_references()
 	. = ..()
 	blocked_species = null
-	permitted_species = list(SPECIES_VOX)
+	permitted_species = list(/decl/species/vox::uid)
 
 // Bonuses or maluses to skills/checks/actions.
 /decl/trait/vox/psyche

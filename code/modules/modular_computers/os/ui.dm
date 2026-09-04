@@ -61,7 +61,7 @@
 	. = min(., extension_status(user))
 
 // Handles user's GUI input
-/datum/extension/interactive/os/extension_act(href, href_list, user)
+/datum/extension/interactive/os/extension_act(href, href_list, mob/user)
 	if( href_list["PC_exit"] )
 		kill_program(active_program)
 		return TOPIC_HANDLED
@@ -94,7 +94,7 @@
 		system_shutdown()
 		return TOPIC_HANDLED
 	if( href_list["PC_minimize"] )
-		minimize_program(usr)
+		minimize_program(user)
 		return TOPIC_HANDLED
 
 	if( href_list["PC_killprogram"] )
@@ -105,7 +105,7 @@
 
 		kill_program(P)
 		update_uis()
-		to_chat(usr, "<span class='notice'>Program [P.filename].[P.filetype] with PID [rand(100,999)] has been killed.</span>")
+		to_chat(user, "<span class='notice'>Program [P.filename].[P.filetype] with PID [rand(100,999)] has been killed.</span>")
 		return TOPIC_HANDLED
 
 	if( href_list["PC_runprogram"] )
@@ -117,15 +117,15 @@
 		return TOPIC_REFRESH
 
 	if( href_list["PC_terminal"] )
-		open_terminal(usr)
+		open_terminal(user)
 		return TOPIC_HANDLED
 
 	if( href_list["PC_login"])
-		login_prompt(usr)
+		login_prompt(user)
 		return TOPIC_REFRESH
 
 	if( href_list["PC_logout"])
-		logout_account(usr)
+		logout_account(user)
 		return TOPIC_REFRESH
 
 /datum/extension/interactive/os/proc/regular_ui_update()

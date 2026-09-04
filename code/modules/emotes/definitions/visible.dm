@@ -1,6 +1,5 @@
 /decl/emote/visible
-	key = "tail"
-	emote_message_3p = "$USER$ waves $USER_THEIR$ tail."
+	abstract_type = /decl/emote/visible
 	message_type = VISIBLE_MESSAGE
 
 /decl/emote/visible/scratch

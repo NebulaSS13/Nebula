@@ -15,5 +15,5 @@
 
 /obj/item/clothing/medal/nanotrasen/bronze
 	name = "corporate sciences medal"
-	desc = "A bronze medal awarded to employees for signifigant contributions to the fields of science or engineering."
+	desc = "A bronze medal awarded to employees for significant contributions to the fields of science or engineering."
 	icon = 'mods/content/corporate/icons/clothing/accessories/medal_bronze.dmi'

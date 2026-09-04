@@ -57,7 +57,7 @@
 	heated_reagents = list(
 		/decl/material/liquid/regenerator = 5,
 		/decl/material/liquid/amphetamines = 0.75,
-		/decl/material/liquid/stimulants = 0.25
+		/decl/material/liquid/accumulated/stimulants = 0.25
 	)
 	var/has_been_heated = 0 // Unlike the warm var, this checks if the one-time self-heating operation has been used.
 

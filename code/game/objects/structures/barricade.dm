@@ -18,12 +18,12 @@
 
 /obj/structure/barricade/spike/Initialize()
 	if(!reinf_material)
-		reinf_material = /decl/material/solid/organic/wood
+		reinf_material = /decl/material/solid/organic/wood/oak
 	. = ..()
 
 /obj/structure/barricade/Initialize()
 	if(!material)
-		material = /decl/material/solid/organic/wood
+		material = /decl/material/solid/organic/wood/oak
 	. = ..()
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
@@ -49,16 +49,16 @@
 	else
 		icon_state = "barricade"
 
-/obj/structure/barricade/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/stack/material/rods) && !reinf_material)
-		var/obj/item/stack/material/rods/R = W
-		if(R.get_amount() < 5)
+/obj/structure/barricade/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/stack/material/rods) && !reinf_material)
+		var/obj/item/stack/material/rods/rods = used_item
+		if(rods.get_amount() < 5)
 			to_chat(user, SPAN_WARNING("You need more rods to build a cheval de frise."))
 		else
 			visible_message(SPAN_NOTICE("\The [user] begins to work on \the [src]."))
-			if(do_after(user, 4 SECONDS, src) && !reinf_material && R.use(5))
-				visible_message(SPAN_NOTICE("\The [user] fastens \the [R] to \the [src]."))
-				reinf_material = R.material
+			if(do_after(user, 4 SECONDS, src) && !reinf_material && rods.use(5))
+				visible_message(SPAN_NOTICE("\The [user] fastens \the [rods] to \the [src]."))
+				reinf_material = rods.material
 				update_materials(TRUE)
 	. = ..()
 

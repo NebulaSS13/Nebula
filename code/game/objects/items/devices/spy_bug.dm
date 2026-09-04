@@ -29,22 +29,21 @@
 	QDEL_NULL(radio)
 	return ..()
 
-/obj/item/spy_bug/examine(mob/user, distance)
+/obj/item/spy_bug/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 0)
-		to_chat(user, "It's a tiny camera, microphone, and transmission device in a happy union.")
-		to_chat(user, "Needs to be both configured and brought in contact with monitor device to be fully functional.")
+		. += "It's a tiny camera, microphone, and transmission device in a happy union."
+		. += "Needs to be both configured and brought in contact with monitor device to be fully functional."
 
 /obj/item/spy_bug/attack_self(mob/user)
 	radio.attack_self(user)
 
-/obj/item/spy_bug/attackby(obj/W, mob/user)
-	if(istype(W, /obj/item/spy_monitor))
-		var/obj/item/spy_monitor/SM = W
+/obj/item/spy_bug/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/spy_monitor))
+		var/obj/item/spy_monitor/SM = used_item
 		SM.pair(src, user)
 		return TRUE
-	else
-		return ..()
+	return ..()
 
 /obj/item/spy_bug/hear_talk(mob/M, var/msg, verb, decl/language/speaking)
 	radio.hear_talk(M, msg, speaking)
@@ -79,21 +78,20 @@
 	cameras.Cut()
 	return ..()
 
-/obj/item/spy_monitor/examine(mob/user, distance)
+/obj/item/spy_monitor/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, "The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made.")
+		. += "The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made."
 
 /obj/item/spy_monitor/attack_self(mob/user)
 	radio.attack_self(user)
 	view_cameras(user)
 
-/obj/item/spy_monitor/attackby(obj/W, mob/user)
-	if(istype(W, /obj/item/spy_bug))
-		pair(W, user)
+/obj/item/spy_monitor/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/spy_bug))
+		pair(used_item, user)
 		return TRUE
-	else
-		return ..()
+	return ..()
 
 /obj/item/spy_monitor/proc/pair(var/obj/item/spy_bug/SB, var/mob/living/user)
 	to_chat(user, SPAN_NOTICE("\The [SB] has been paired with \the [src]."))

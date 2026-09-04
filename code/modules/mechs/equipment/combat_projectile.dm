@@ -1,20 +1,22 @@
-/obj/item/mech_equipment/mounted_system/projectile/attackby(var/obj/item/O, var/mob/user)
+/obj/item/mech_equipment/mounted_system/projectile
+	name = "mounted submachine gun"
+	icon_state = "mech_ballistic"
+	holding = /obj/item/gun/projectile/automatic/smg/mech
+	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
+	restricted_software = list(MECH_SOFTWARE_WEAPONS)
+	origin_tech = @'{"programming":4,"combat":6,"engineering":5}'
+
+/obj/item/mech_equipment/mounted_system/projectile/attackby(var/obj/item/used_item, var/mob/user)
 	var/obj/item/gun/projectile/automatic/A = holding
 	if(!istype(A))
 		return FALSE
-	if(istype(O, /obj/item/crowbar))
+	if(istype(used_item, /obj/item/crowbar))
 		A.unload_ammo(user)
 		to_chat(user, SPAN_NOTICE("You remove the ammo magazine from \the [src]."))
-	else if(istype(O, A.magazine_type))
-		A.load_ammo(O, user)
+	else if(istype(used_item, A.magazine_type))
+		A.load_ammo(used_item, user)
 		to_chat(user, SPAN_NOTICE("You load the ammo magazine into \the [src]."))
 	return TRUE
-
-/obj/item/mech_equipment/mounted_system/projectile/attack_self(var/mob/user)
-	. = ..()
-	if(. && holding)
-		var/obj/item/gun/M = holding
-		return M.switch_firemodes()
 
 /obj/item/gun/projectile/automatic/get_hardpoint_status_value()
 	if(!isnull(ammo_magazine))
@@ -26,14 +28,6 @@
 	return 0
 
 //Weapons below this.
-/obj/item/mech_equipment/mounted_system/projectile
-	name = "mounted submachine gun"
-	icon_state = "mech_ballistic"
-	holding = /obj/item/gun/projectile/automatic/smg/mech
-	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
-	restricted_software = list(MECH_SOFTWARE_WEAPONS)
-	origin_tech = @'{"programming":4,"combat":6,"engineering":5}'
-
 /obj/item/gun/projectile/automatic/smg/mech
 	magazine_type = /obj/item/ammo_magazine/mech/smg_top
 	allowed_magazines = /obj/item/ammo_magazine/mech/smg_top
@@ -115,56 +109,3 @@
 	material = /decl/material/solid/metal/steel
 	ammo_type = /obj/item/ammo_casing/rifle
 	max_ammo = 300
-
-// Handling for auto-fire mechanic
-/mob/living/exosuit/can_autofire(obj/item/gun/autofiring, atom/autofiring_at)
-	if(autofiring.autofiring_by != src)
-		return FALSE
-	var/client/C = current_user ? current_user.client : client
-
-	if(!C || !C.mob || C.mob.incapacitated())
-		return FALSE
-
-	if(!(autofiring_at in view(C.view, src)))
-		return FALSE
-	if(!(get_dir(src, autofiring_at) & dir))
-		return FALSE
-	if(!(autofiring in selected_system)) // Make sure the gun is still selected.
-		return FALSE
-	return TRUE
-
-/obj/item/mech_equipment/mounted_system/projectile/MouseDownInteraction(atom/object, location, control, params, mob/user)
-	var/obj/item/gun/gun = holding
-	if(istype(object) && (isturf(object) || isturf(object.loc)) && istype(gun))
-		if(user != src)
-			if(!user.incapacitated())
-				gun.set_autofire(object, owner, FALSE) // Passed gun-firer is still the exosuit since all checks need to be done on the suit.
-				owner.current_user = user
-		else
-			if(!owner.incapacitated())
-				gun.set_autofire(object, owner, FALSE)
-				owner.current_user = null
-
-/obj/item/mech_equipment/mounted_system/projectile/MouseUpInteraction(atom/object, location, control, params, mob/user)
-	var/obj/item/gun/gun = holding
-	if(istype(gun))
-		gun.clear_autofire()
-	if(owner) // In case the owning exosuit has been gibbed etc.
-		owner.current_user = null
-
-/obj/item/mech_equipment/mounted_system/projectile/MouseDragInteraction(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params, mob/user)
-	var/obj/item/gun/gun = holding
-	if(!owner)
-		gun?.clear_autofire()
-		return
-	if(!istype(gun))
-		owner?.current_user = null
-		return
-	if(istype(over_object) && (isturf(over_object) || isturf(over_object.loc)))
-		if(user.incapacitated() || (user != owner && user != owner.current_user))
-			gun.clear_autofire()
-			return
-		gun.set_autofire(over_object, owner, FALSE)
-		return
-
-	gun.clear_autofire()

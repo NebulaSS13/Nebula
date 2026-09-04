@@ -18,9 +18,9 @@
 
 /mob/living/silicon/ai/add_ion_law(var/law)
 	..()
-	for(var/mob/living/silicon/robot/R in global.silicon_mob_list)
-		if(R.lawupdate && (R.connected_ai == src))
-			R.show_laws()
+	for(var/mob/living/silicon/robot/robot in global.silicon_mob_list)
+		if(robot.lawupdate && (robot.connected_ai == src))
+			robot.show_laws()
 
 /mob/living/silicon/ai/proc/ai_checklaws()
 	set category = "Silicon Commands"

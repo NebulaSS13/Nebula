@@ -38,7 +38,7 @@
 
 /datum/map_template/ruin/away_site/icarus
 	name = "Fallen Icarus"
-	description = "The crashlanding site of the SEV Icarus."
+	description = "The crash-landing site of the SEV Icarus."
 	prefix = "mods/content/government/away_sites/"
 	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
 	cost = 2
@@ -78,7 +78,7 @@
 
 /obj/item/disk/icarus
 	name = "black box backup disk"
-	desc = "Digital storage. Inscription says: \"Deliver to Sol Goverment Expeditionary Corps Command!\". Content is encrypted with quantum crypthography methods."
+	desc = "Digital storage. Inscription says: \"Deliver to Sol Government Expeditionary Corps Command!\". Content is encrypted with quantum cryptography methods."
 	color = COLOR_GRAY40
 	label = "label_warning"
 /obj/item/paper/icarus/log
@@ -161,17 +161,17 @@
 /obj/structure/sign/solgov
 	name = "\improper SolGov Seal"
 	desc = "A familiar seal showing this vessel is SolGov property."
-	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
+	icon = 'mods/content/government/away_sites/icarus/icarus_signs.dmi'
 	icon_state = "solgovseal"
 
-/obj/structure/sign/double/solgovflag
+/obj/structure/sign/double/flag/solgov
 	name = "Sol Central Government Flag"
 	desc = "The iconic flag of the Sol Central Government, a symbol with many different meanings."
-	abstract_type = /obj/structure/sign/double/solgovflag
-	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
+	abstract_type = /obj/structure/sign/double/flag/solgov
+	icon = 'mods/content/government/away_sites/icarus/icarus_signs.dmi'
 
-/obj/structure/sign/double/solgovflag/left
+/obj/structure/sign/double/flag/solgov/left
 	icon_state = "solgovflag-left"
 
-/obj/structure/sign/double/solgovflag/right
+/obj/structure/sign/double/flag/solgov/right
 	icon_state = "solgovflag-right"

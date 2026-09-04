@@ -136,7 +136,7 @@
 		)
 
 /obj/item/clothing/jumpsuit/psych
-	desc = "A basic white jumpsuit. It has turqouise markings that denote the wearer as a psychiatrist."
+	desc = "A basic white jumpsuit. It has turquoise markings that denote the wearer as a psychiatrist."
 	name = "psychiatrist's jumpsuit"
 	icon = 'icons/clothing/jumpsuits/jumpsuit_psych.dmi'
 

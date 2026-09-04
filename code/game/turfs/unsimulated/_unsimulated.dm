@@ -3,6 +3,7 @@
 	initial_gas = GAS_STANDARD_AIRMIX
 	abstract_type = /turf/unsimulated
 	simulated = FALSE
+	dynamic_lighting = FALSE
 
 // Shortcut a bunch of simulation stuff since this turf just needs to sit there.
 // We don't even call Initialize(), how cool is that???
@@ -25,6 +26,9 @@
 
 /turf/unsimulated/get_lumcount(var/minlum = 0, var/maxlum = 1)
 	return 0.8
+
+/turf/unsimulated/get_movable_alpha_mask_state(atom/movable/mover)
+	return null
 
 // For the purposes of spacemove/spacedrift.
 /turf/unsimulated/is_floor()

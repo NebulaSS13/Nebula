@@ -6,16 +6,44 @@
 	difficulty                 = null // Autoset from material difficulty
 	crafting_extra_cost_factor = 1.5 // measure twice, cut once; material is lost. todo: produce scraps?
 	abstract_type              = /decl/stack_recipe/textiles
+	validation_material        = /decl/material/solid/organic/cloth
+
+/decl/stack_recipe/textiles/rug
+	result_type                = /obj/structure/rug/crafted
+	one_per_turf               = TRUE
+	on_floor                   = TRUE
+	category                   = "furniture"
 
 /decl/stack_recipe/textiles/cloak
-	result_type           = /obj/item/clothing/suit/cloak/hide
-	category              = "clothing"
+	result_type                = /obj/item/clothing/suit/cloak/hide
+	category                   = "clothing"
 
 /decl/stack_recipe/textiles/banner
+	name                       = "banner"
 	result_type                = /obj/item/banner
 	category                   = "furniture"
 	crafting_extra_cost_factor = 1.1 // less material is lost because it's relatively simple
 	difficulty                 = MAT_VALUE_NORMAL_DIY // Slightly easier than making actual clothing.
+
+/decl/stack_recipe/textiles/banner/forked
+	name                       = "banner, forked"
+	result_type                = /obj/item/banner/forked
+
+/decl/stack_recipe/textiles/banner/pointed
+	name                       = "banner, pointed"
+	result_type                = /obj/item/banner/pointed
+
+/decl/stack_recipe/textiles/banner/rounded
+	name                       = "banner, rounded"
+	result_type                = /obj/item/banner/rounded
+
+/decl/stack_recipe/textiles/banner/square
+	name                       = "banner, square"
+	result_type                = /obj/item/banner/square
+
+/decl/stack_recipe/textiles/banner/tasselled
+	name                       = "banner, tasselled"
+	result_type                = /obj/item/banner/tasselled
 
 /decl/stack_recipe/textiles/sack
 	result_type                = /obj/item/bag/sack
@@ -35,13 +63,14 @@
 
 /decl/stack_recipe/textiles/leather
 	abstract_type         = /decl/stack_recipe/textiles/leather
+	validation_material   = /decl/material/solid/organic/leather
 	craft_stack_types     = /obj/item/stack/material/skin
 	category              = "clothing"
 
 /decl/stack_recipe/textiles/leather/bedroll
-	result_type = /obj/item/bedroll
-	difficulty  = MAT_VALUE_NORMAL_DIY // Slightly easier than making clothing.
-	category    = "bedding"
+	result_type           = /obj/item/bedroll
+	difficulty            = MAT_VALUE_NORMAL_DIY // Slightly easier than making clothing.
+	category              = "bedding"
 
 /decl/stack_recipe/textiles/leather/shoes
 	result_type           = /obj/item/clothing/shoes/craftable
@@ -60,6 +89,17 @@
 	crafting_extra_cost_factor = 1.1 // less material is lost because it's relatively simple
 	difficulty                 = MAT_VALUE_NORMAL_DIY // Slightly easier than making clothing.
 
+/decl/stack_recipe/textiles/leather/sack
+	result_type                = /obj/item/bag/sack
+	difficulty                 = MAT_VALUE_HARD_DIY
+
+/decl/stack_recipe/textiles/leather/backpack
+	result_type                = /obj/item/backpack/crafted/backpack
+	difficulty                 = MAT_VALUE_VERY_HARD_DIY
+
+/decl/stack_recipe/textiles/leather/backpack/haversack
+	result_type                = /obj/item/backpack/crafted
+
 /decl/stack_recipe/textiles/leather/waterskin
 	result_type           = /obj/item/chems/glass/waterskin/crafted
 	required_material     = /decl/material/solid/organic/leather
@@ -67,6 +107,7 @@
 
 /decl/stack_recipe/textiles/cloth
 	abstract_type         = /decl/stack_recipe/textiles/cloth
+	validation_material   = /decl/material/solid/organic/cloth
 	craft_stack_types     = /obj/item/stack/material/bolt
 	category              = "clothing"
 
@@ -103,6 +144,7 @@
 /decl/stack_recipe/textiles/fur
 	abstract_type         = /decl/stack_recipe/textiles/fur
 	craft_stack_types     = /obj/item/stack/material/skin/pelt
+	validation_material   = /decl/material/solid/organic/skin/fur
 
 /decl/stack_recipe/textiles/fur/bedding
 	difficulty                 = MAT_VALUE_EASY_DIY
@@ -119,6 +161,6 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_MEDIEVAL
 
 /decl/stack_recipe/textiles/rag
-	result_type = /obj/item/chems/glass/rag
+	result_type = /obj/item/chems/rag
 	crafting_extra_cost_factor = 1 // whatever you produce is going to be a rag, there's no wastage
 	difficulty = MAT_VALUE_TRIVIAL_DIY

@@ -1,5 +1,6 @@
 /decl/pronouns/male
 	name = MALE
+	uid = "pronouns_male"
 	bureaucratic_term  = "male"
 	informal_term = "guy"
 	honorific = "Mr."
@@ -15,6 +16,7 @@
 	self = "himself"
 	s    = "s"
 	es   = "es"
+	pluralize_verb = PLURALIZE_ALL
 
 	// Thanks oldcoders.
 	var/static/list/weird_euphemisms_for_your_balls = list(

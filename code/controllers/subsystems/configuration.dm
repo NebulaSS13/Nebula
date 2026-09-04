@@ -15,7 +15,7 @@ SUBSYSTEM_DEF(configuration)
 
 	load_files()
 	load_sql()
-	load_event()
+	load_event(load_event_from)
 
 	for(var/client/C)
 		C.update_post_config_load()

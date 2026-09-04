@@ -37,7 +37,7 @@
 				shuttle_status = "Standing-by at [shuttle.get_location_name()]."
 
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
-			shuttle_status = "Shuttle has recieved command and will depart shortly."
+			shuttle_status = "Shuttle has received command and will depart shortly."
 		if(WAIT_ARRIVE)
 			shuttle_status = "Proceeding to \the [shuttle.get_destination_name()]."
 		if(WAIT_FINISH)
@@ -89,7 +89,7 @@
 
 	if(href_list["set_codes"])
 		var/newcode = input("Input new docking codes", "Docking codes", shuttle.docking_codes) as text|null
-		if (newcode && CanInteract(usr, global.default_topic_state))
+		if (newcode && CanInteract(user, global.default_topic_state))
 			shuttle.set_docking_codes(uppertext(newcode))
 		return TOPIC_REFRESH
 

@@ -19,61 +19,59 @@ var/global/const/BORG_WIRE_CAMERA = 16
 /datum/wires/robot/GetInteractWindow(mob/user)
 
 	. = ..()
-	var/mob/living/silicon/robot/R = holder
+	var/mob/living/silicon/robot/robot = holder
 	var/datum/extension/network_device/camera/D = get_extension(holder, /datum/extension/network_device/)
 
-	. += text("<br>\n[(R.lawupdate ? "The LawSync light is on." : "The LawSync light is off.")]")
-	. += text("<br>\n[(R.connected_ai ? "The AI link light is on." : "The AI link light is off.")]")
+	. += text("<br>\n[(robot.lawupdate ? "The LawSync light is on." : "The LawSync light is off.")]")
+	. += text("<br>\n[(robot.connected_ai ? "The AI link light is on." : "The AI link light is off.")]")
 	. += text("<br>\n[(D.is_functional() ? "The Camera light is on." : "The Camera light is off.")]")
-	. += text("<br>\n[(R.lockcharge ? "The lockdown light is on." : "The lockdown light is off.")]")
+	. += text("<br>\n[(robot.lockcharge ? "The lockdown light is on." : "The lockdown light is off.")]")
 	return .
 
 /datum/wires/robot/UpdateCut(var/index, var/mended)
 
-	var/mob/living/silicon/robot/R = holder
+	var/mob/living/silicon/robot/robot = holder
 	switch(index)
 		if(BORG_WIRE_LAWCHECK) //Cut the law wire, and the borg will no longer receive law updates from its AI
 			if(!mended)
-				if (R.lawupdate == 1)
-					to_chat(R, "LawSync protocol engaged.")
-					R.show_laws()
+				if (robot.lawupdate == 1)
+					to_chat(robot, "LawSync protocol engaged.")
+					robot.show_laws()
 			else
-				if (R.lawupdate == 0 && !R.emagged)
-					R.lawupdate = 1
+				if (robot.lawupdate == 0 && !robot.emagged)
+					robot.lawupdate = 1
 
 		if (BORG_WIRE_AI_CONTROL) //Cut the AI wire to reset AI control
 			if(!mended)
-				R.disconnect_from_ai()
+				robot.disconnect_from_ai()
 
 		if (BORG_WIRE_CAMERA)
 			cameranet.update_visibility(src, FALSE)
 
 		if(BORG_WIRE_LOCKED_DOWN)
-			R.SetLockdown(!mended)
+			robot.SetLockdown(!mended)
 
 
 /datum/wires/robot/UpdatePulsed(var/index)
-	var/mob/living/silicon/robot/R = holder
+	var/mob/living/silicon/robot/robot = holder
 	switch(index)
 		if (BORG_WIRE_AI_CONTROL) //pulse the AI wire to make the borg reselect an AI
-			if(!R.emagged)
-				var/mob/living/silicon/ai/new_ai = select_active_ai(R, get_z(R))
-				R.connect_to_ai(new_ai)
+			if(!robot.emagged)
+				var/mob/living/silicon/ai/new_ai = select_active_ai(robot, get_z(robot))
+				robot.connect_to_ai(new_ai)
 
 		if (BORG_WIRE_CAMERA)
 			var/datum/extension/network_device/camera/robot/D = get_extension(src, /datum/extension/network_device)
 			if(D && D.is_functional())
-				R.visible_message("[R]'s camera lens focuses loudly.")
-				to_chat(R, "Your camera lense focuses loudly.")
+				robot.visible_message("[robot]'s camera lens focuses loudly.")
+				to_chat(robot, "Your camera lense focuses loudly.")
 
 		if(BORG_WIRE_LOCKED_DOWN)
-			R.SetLockdown(!R.lockcharge) // Toggle
+			robot.SetLockdown(!robot.lockcharge) // Toggle
 
 /datum/wires/robot/CanUse(var/mob/living/L)
-	var/mob/living/silicon/robot/R = holder
-	if(R.wiresexposed)
-		return 1
-	return 0
+	var/mob/living/silicon/robot/robot = holder
+	return robot.wiresexposed
 
 /datum/wires/robot/proc/IsCameraCut()
 	return wires_status & BORG_WIRE_CAMERA

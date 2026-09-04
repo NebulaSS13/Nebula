@@ -24,7 +24,7 @@
 		var/mob/living/L = AM
 		if(L.get_bodytype()?.bodytype_flag & BODY_EQUIP_FLAG_VOX)
 			return FALSE
-		if(L.faction == SPECIES_VOX)
+		if(L.faction == /mob/living/simple_animal/hostile/slug/vox::faction)
 			return FALSE
 		squish()
 
@@ -33,6 +33,9 @@
 	new /mob/living/simple_animal/hostile/slug(get_turf(src))
 	playsound(src.loc,'sound/effects/attackblob.ogg',100, 1)
 	qdel(src)
+
+/mob/living/simple_animal/hostile/slug/vox
+	faction = "Vox"
 
 //a slug sling basically launches a small egg that hatches (either on a person or on the floor), releasing a terrible blood thirsty monster.
 //Balanced due to the non-spammy nature of the gun, as well as the frailty of the creatures.

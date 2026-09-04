@@ -3,6 +3,7 @@
 	. = ..(maploading)
 
 /decl/closet_appearance
+	// this is NOT abstract
 	var/color = COLOR_GRAY40
 	var/decals = list(
 		"upper_vent",
@@ -354,6 +355,15 @@
 		"medcircle" =COLOR_BLUE_GRAY,
 		"stripe_vertical_right_partial" = COLOR_BLUE_GRAY,
 		"stripe_vertical_mid_partial" = COLOR_BLUE_GRAY
+	)
+
+/decl/closet_appearance/secure_closet/medical/paramedic
+	decals = list(
+		"lower_side_vent"
+	)
+	extra_decals = list(
+		"medical" = COLOR_BLUE_GRAY,
+		"stripe_vertical_mid_full" = COLOR_BLUE_GRAY
 	)
 
 /decl/closet_appearance/secure_closet/cargo

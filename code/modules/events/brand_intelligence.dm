@@ -19,8 +19,8 @@
 	if(!vendingMachines.len)
 		kill()
 		return
-	var/weakref/W = pick_n_take(vendingMachines)
-	originMachine = W.resolve()
+	var/weakref/vendor_ref = pick_n_take(vendingMachines)
+	originMachine = vendor_ref.resolve()
 	originMachine.shut_up = 0
 	originMachine.shoot_inventory = 1
 	originMachine.shooting_chance = 15
@@ -31,11 +31,11 @@
 		return
 
 	if(IsMultiple(activeFor, 5) && prob(15))
-		var/weakref/W = pick(vendingMachines)
-		vendingMachines -= W
-		var/obj/machinery/vending/infectedMachine = W.resolve()
+		var/weakref/vendor_ref = pick(vendingMachines)
+		vendingMachines -= vendor_ref
+		var/obj/machinery/vending/infectedMachine = vendor_ref.resolve()
 		if(infectedMachine)
-			infectedVendingMachines += W
+			infectedVendingMachines += vendor_ref
 			infectedMachine.shut_up = 0
 			infectedMachine.shoot_inventory = 1
 
@@ -53,8 +53,8 @@
 		originMachine.shut_up = 1
 		originMachine.shooting_chance = initial(originMachine.shooting_chance)
 		originMachine = null
-	for(var/weakref/W in infectedVendingMachines)
-		var/obj/machinery/vending/infectedMachine = W.resolve()
+	for(var/weakref/vendor_ref in infectedVendingMachines)
+		var/obj/machinery/vending/infectedMachine = vendor_ref.resolve()
 		if(!infectedMachine)
 			continue
 		infectedMachine.shut_up = 1

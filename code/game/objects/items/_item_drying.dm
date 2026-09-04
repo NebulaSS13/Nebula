@@ -38,7 +38,8 @@
 	if(color && dried_product_takes_color)
 		thing.color = color
 	if(isturf(loc) && !silent)
-		visible_message(SPAN_NOTICE("\The [src] [gender == PLURAL ? "are" : "is"] dry!"))
+		var/decl/pronouns/pronouns = get_pronouns()
+		visible_message(SPAN_NOTICE("\The [src] [pronouns.is] dry!"))
 	if(thing != src)
 		qdel(src)
 	return thing
@@ -46,7 +47,7 @@
 /obj/item/proc/get_max_drying_wetness()
 	return initial(drying_wetness) || drying_wetness || 1
 
-// Returns a string used in drying rack examine().
+// Returns a string used in drying rack examined_by().
 /obj/item/proc/get_dryness_text(var/obj/rack)
 	var/moistness = drying_wetness / get_max_drying_wetness()
 	if(moistness > 0.65)
@@ -77,9 +78,9 @@
 	if(!length(matter))
 		return FALSE
 	for(var/mat in matter)
-		var/decl/material/material = GET_DECL(mat)
+		var/decl/material/heated_material = GET_DECL(mat)
 		// We should burn if we're above the temperature damage threshold.
-		if(!isnull(material.temperature_damage_threshold) && exposed_temperature >= material.temperature_damage_threshold)
+		if(!isnull(heated_material.temperature_damage_threshold) && exposed_temperature >= heated_material.temperature_damage_threshold)
 			return TRUE
 	return FALSE
 

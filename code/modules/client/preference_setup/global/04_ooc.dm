@@ -10,8 +10,8 @@
 	pref.ignored_players = R.read("ignored_players")
 
 
-/datum/category_item/player_setup_item/player_global/ooc/save_preferences(datum/pref_record_writer/W)
-	W.write("ignored_players", pref.ignored_players)
+/datum/category_item/player_setup_item/player_global/ooc/save_preferences(datum/pref_record_writer/writer)
+	writer.write("ignored_players", pref.ignored_players)
 
 
 /datum/category_item/player_setup_item/player_global/ooc/sanitize_preferences()

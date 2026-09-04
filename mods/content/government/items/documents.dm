@@ -29,3 +29,8 @@
 		/obj/item/documents/scg/blue     = 7,
 		/obj/item/documents/scg/brains   = 7
 	)
+
+/obj/item/clothing/gloves/ring/seal/secretary
+	name = "\improper Secretary-General's official seal"
+	desc = "The official seal of the Secretary-General of the Sol Central Government, featured prominently on a silver ring."
+	use_material_name = FALSE

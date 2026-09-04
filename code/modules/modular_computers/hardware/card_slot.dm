@@ -1,7 +1,7 @@
 /obj/item/stock_parts/computer/card_slot
 	name = "RFID card slot"
 	desc = "Slot that allows this computer to write data on RFID cards. Necessary for some programs to run properly."
-	power_usage = 10 //W
+	power_usage = 10 // W
 	critical = 0
 	icon_state = "cardreader"
 	hardware_size = 1
@@ -102,10 +102,10 @@
 		loc.verbs |= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
 	return TRUE
 
-/obj/item/stock_parts/computer/card_slot/attackby(obj/item/card/id/I, mob/user)
-	if(!istype(I))
+/obj/item/stock_parts/computer/card_slot/attackby(obj/item/used_item, mob/user)
+	if(!istype(used_item, /obj/item/card/id))
 		return ..()
-	insert_id(I, user)
+	insert_id(used_item, user)
 	return TRUE
 
 /obj/item/stock_parts/computer/card_slot/broadcaster // read only

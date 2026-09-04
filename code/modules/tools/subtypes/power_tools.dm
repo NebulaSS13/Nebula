@@ -1,6 +1,6 @@
 /obj/item/tool/hydraulic_cutter
 	name                      = "hydraulic cutter"
-	desc                      = "A universal, miniturized hydraulic tool with interchangable heads for either prying or cutting. But not both at the same time."
+	desc                      = "A universal, miniaturized hydraulic tool with interchangeable heads for either prying or cutting. But not both at the same time."
 	icon                      = 'icons/obj/items/tool/cutter.dmi'
 	icon_state                = ICON_STATE_WORLD
 	slot_flags                = SLOT_LOWER_BODY

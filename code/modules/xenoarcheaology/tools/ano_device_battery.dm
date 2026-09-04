@@ -57,17 +57,18 @@
 
 /obj/item/anodevice/Destroy()
 	inserted_battery = null
+	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/anodevice/attackby(var/obj/I, var/mob/user)
-	if(!istype(I, /obj/item/anobattery))
+/obj/item/anodevice/attackby(var/obj/item/used_item, var/mob/user)
+	if(!istype(used_item, /obj/item/anobattery))
 		return ..()
 	if(inserted_battery)
 		return TRUE
-	if(!user.try_unequip(I, src))
+	if(!user.try_unequip(used_item, src))
 		return TRUE
-	to_chat(user, SPAN_NOTICE("You insert \the [I] into \the [src]."))
-	inserted_battery = I
+	to_chat(user, SPAN_NOTICE("You insert \the [used_item] into \the [src]."))
+	inserted_battery = used_item
 	update_icon()
 	return TRUE
 
@@ -109,12 +110,12 @@
 		if(!inserted_battery.battery_effect.activated)
 			inserted_battery.battery_effect.ToggleActivate(1)
 		switch(inserted_battery.battery_effect.operation_type)
-			if(EFFECT_TOUCH)
+			if(XA_EFFECT_TOUCH)
 				visible_message("\The [src] shudders.")
 				if(ismob(loc))
 					inserted_battery.battery_effect.DoEffectTouch(loc)
 				inserted_battery.use_power(energy_consumed_on_touch)
-			if(EFFECT_PULSE)
+			if(XA_EFFECT_PULSE)
 				inserted_battery.battery_effect.pulse_tick = inserted_battery.battery_effect.pulse_period
 				//consume power relative to the time the artifact takes to charge and the effect range
 				inserted_battery.use_power(inserted_battery.battery_effect.effect_range * inserted_battery.battery_effect.effect_range * inserted_battery.battery_effect.pulse_period)
@@ -188,14 +189,10 @@
 	else
 		icon_state = "anodev_empty"
 
-/obj/item/anodevice/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	. = ..()
-
 /obj/item/anodevice/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if (!istype(target))
 		return ..()
-	if(activated && inserted_battery?.battery_effect?.operation_type == EFFECT_TOUCH)
+	if(activated && inserted_battery?.battery_effect?.operation_type == XA_EFFECT_TOUCH)
 		inserted_battery.battery_effect.DoEffectTouch(target)
 		inserted_battery.use_power(energy_consumed_on_touch)
 		user.visible_message(SPAN_NOTICE("\The [user] taps [target] with \the [src], and it shudders on contact."))

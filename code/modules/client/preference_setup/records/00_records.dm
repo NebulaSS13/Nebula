@@ -2,6 +2,7 @@
 	var/list/records = list()
 
 /datum/category_item/player_setup_item/records
+	abstract_type = /datum/category_item/player_setup_item/records
 	var/record_key
 
 /datum/category_item/player_setup_item/records/content(var/mob/user)

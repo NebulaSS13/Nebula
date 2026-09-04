@@ -19,7 +19,7 @@
 //Normal valves
 /datum/codex_entry/atmos_valve
 	associated_paths = list(/obj/machinery/atmospherics/valve)
-	mechanics_text = "Click this to turn the valve.  If red, the pipes on each end are seperated.  Otherwise, they are connected."
+	mechanics_text = "Click this to turn the valve.  If red, the pipes on each end are separated.  Otherwise, they are connected."
 	disambiguator = "atmospherics"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
@@ -54,7 +54,7 @@
 
 //Freezers
 /datum/codex_entry/atmos_freezer
-	associated_paths = list(/obj/machinery/atmospherics/unary/freezer)
+	associated_paths = list(/obj/machinery/atmospherics/unary/temperature/freezer)
 	mechanics_text = "Cools down the gas of the pipe it is connected to.  It uses massive amounts of electricity while on. \
 	It can be upgraded by replacing the capacitors, manipulators, and matter bins.  It can be deconstructed by screwing the maintenance panel open with a \
 	screwdriver, and then using a crowbar."
@@ -63,7 +63,7 @@
 
 //Heaters
 /datum/codex_entry/atmos_heater
-	associated_paths = list(/obj/machinery/atmospherics/unary/heater)
+	associated_paths = list(/obj/machinery/atmospherics/unary/temperature/heater)
 	mechanics_text = "Heats up the gas of the pipe it is connected to.  It uses massive amounts of electricity while on. \
 	It can be upgraded by replacing the capacitors, manipulators, and matter bins.  It can be deconstructed by screwing the maintenance panel open with a \
 	screwdriver, and then using a crowbar."
@@ -147,7 +147,7 @@
 /datum/codex_entry/transfer_valve
 	associated_paths = list(/obj/item/transfer_valve)
 	mechanics_text = "This machine is used to merge the contents of two different gas tanks. Plug the tanks into the transfer, then open the valve to mix them together. You can also attach various assembly devices to trigger this process."
-	antag_text = "With a tank of hot hydrogen and cold oxygen, this benign little atmospheric device becomes an incredibly deadly bomb. You don't want to be anywhere near it when it goes off."
+	antag_text = "With a tank of hot accelerant and cold oxidiser, this benign little atmospheric device becomes an incredibly deadly bomb. You don't want to be anywhere near it when it goes off."
 	disambiguator = "component"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 

@@ -6,25 +6,25 @@
 /obj/machinery/fabricator/proc/take_reagents(var/obj/item/thing, var/mob/user, var/destructive = FALSE)
 	if(!thing.reagents || (!destructive && !ATOM_IS_OPEN_CONTAINER(thing)))
 		return SUBSTANCE_TAKEN_NONE
-	for(var/R in thing.reagents.reagent_volumes)
-		if(!base_storage_capacity[R])
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(thing.reagents))
+		if(!base_storage_capacity[reagent.type])
 			continue
-		var/taking_reagent = min(REAGENT_VOLUME(thing.reagents, R), floor((storage_capacity[R] - stored_material[R]) * REAGENT_UNITS_PER_MATERIAL_UNIT))
+		var/taking_reagent = min(REAGENT_VOLUME(thing.reagents, reagent), floor((storage_capacity[reagent.type] - stored_material[reagent.type]) * REAGENT_UNITS_PER_MATERIAL_UNIT))
 		if(taking_reagent <= 0)
 			continue
 		var/reagent_matter = round(taking_reagent / REAGENT_UNITS_PER_MATERIAL_UNIT)
 		if(reagent_matter <= 0)
 			continue
-		thing.remove_from_reagents(R, taking_reagent)
-		stored_material[R] += reagent_matter
+		thing.remove_from_reagents(reagent, taking_reagent)
+		stored_material[reagent.type] += reagent_matter
 		// If we're destroying this, take everything.
 		if(destructive)
 			. = SUBSTANCE_TAKEN_ALL
 			continue
 		// Otherwise take the first applicable and useful reagent.
-		if(stored_material[R] == storage_capacity[R])
+		if(stored_material[reagent.type] == storage_capacity[reagent.type])
 			return SUBSTANCE_TAKEN_FULL
-		else if(thing.reagents.total_volume > 0)
+		else if(REAGENT_TOTAL_VOLUME(thing.reagents) > 0)
 			return SUBSTANCE_TAKEN_SOME
 		else
 			return SUBSTANCE_TAKEN_ALL
@@ -40,22 +40,22 @@
 	var/mat_colour = thing.color
 	for(var/mat in thing.matter)
 
-		var/decl/material/material_def = GET_DECL(mat)
-		if(!material_def || !base_storage_capacity[material_def.type])
+		var/decl/material/ingest_material = GET_DECL(mat)
+		if(!ingest_material || !base_storage_capacity[mat])
 			continue
 
-		var/taking_material = min(thing.matter[mat], storage_capacity[material_def.type] - stored_material[material_def.type])
+		var/taking_material = min(thing.matter[mat], storage_capacity[mat] - stored_material[mat])
 		if(taking_material <= 0)
 			continue
 
 		if(!mat_colour)
-			mat_colour = material_def.color
+			mat_colour = ingest_material.color
 
-		stored_material[material_def.type] += taking_material
+		stored_material[mat] += taking_material
 		if(stack_ref)
 			stacks_used = max(stacks_used, ceil(taking_material/stack_matter_div))
 
-		if(storage_capacity[material_def.type] == stored_material[material_def.type])
+		if(storage_capacity[mat] == stored_material[mat])
 			. = SUBSTANCE_TAKEN_FULL
 		else if(. != SUBSTANCE_TAKEN_FULL)
 			. = SUBSTANCE_TAKEN_ALL
@@ -91,77 +91,77 @@
 	else
 		to_chat(user, SPAN_WARNING("\The [src] cannot process \the [thing]."))
 
-/obj/machinery/fabricator/attackby(var/obj/item/O, var/mob/user)
-	if((. = component_attackby(O, user)))
+/obj/machinery/fabricator/attackby(var/obj/item/used_item, var/mob/user)
+	if((. = component_attackby(used_item, user)))
 		return
-	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
+	if(panel_open && (IS_MULTITOOL(used_item) || IS_WIRECUTTER(used_item)))
 		attack_hand_with_interaction_checks(user)
 		return TRUE
-	if((obj_flags & OBJ_FLAG_ANCHORABLE) && (IS_WRENCH(O) || IS_HAMMER(O)))
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && (IS_WRENCH(used_item) || IS_HAMMER(used_item)))
 		return ..()
 	if(stat & (NOPOWER | BROKEN))
 		return TRUE
 
 	// Gate some simple interactions beind intent so people can still feed lathes disks.
-	if(user.a_intent != I_HURT)
+	if(!user.check_intent(I_FLAG_HARM))
 
 		// Set or update our local network.
-		if(IS_MULTITOOL(O))
+		if(IS_MULTITOOL(used_item))
 			var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
 			fabnet.get_new_tag(user)
 			return TRUE
 
 		// Install new designs.
-		if(istype(O, /obj/item/disk/design_disk))
-			var/obj/item/disk/design_disk/disk = O
+		if(istype(used_item, /obj/item/disk/design_disk))
+			var/obj/item/disk/design_disk/disk = used_item
 			if(!disk.blueprint)
-				to_chat(usr, SPAN_WARNING("\The [O] is blank."))
+				to_chat(user, SPAN_WARNING("\The [used_item] is blank."))
 				return TRUE
 			if(disk.blueprint in installed_designs)
-				to_chat(usr, SPAN_WARNING("\The [src] is already loaded with the blueprint stored on \the [O]."))
+				to_chat(user, SPAN_WARNING("\The [src] is already loaded with the blueprint stored on \the [used_item]."))
 				return TRUE
 			installed_designs += disk.blueprint
 			design_cache |= disk.blueprint
-			visible_message(SPAN_NOTICE("\The [user] inserts \the [O] into \the [src], and after a second or so of loud clicking, the fabricator beeps and spits it out again."))
+			visible_message(SPAN_NOTICE("\The [user] inserts \the [used_item] into \the [src], and after a second or so of loud clicking, the fabricator beeps and spits it out again."))
 			return TRUE
 
 	// Attempt to bash on harm intent.
 	// I'd like for this to be a more general parent call but instead it's just a direct check-and-call.
-	else if(!(O.item_flags & ITEM_FLAG_NO_BLUDGEON) && (. = bash(O, user))) // Bash successful, no need to try intake.
+	else if(!(used_item.item_flags & ITEM_FLAG_NO_BLUDGEON) && (. = bash(used_item, user))) // Bash successful, no need to try intake.
 		return
 
 	// TEMP HACK FIX:
 	// Autolathes currently do not process atom contents. As a workaround, refuse all atoms with contents.
-	if(length(O.contents) && !ignore_input_contents_length)
+	if(length(used_item.contents) && !ignore_input_contents_length)
 		to_chat(user, SPAN_WARNING("\The [src] cannot process an object containing other objects. Empty it out first."))
 		return TRUE
 	// REMOVE FIX WHEN LATHES TAKE CONTENTS PLS.
 
 	// Take reagents, if any are applicable.
-	var/atom_name = O.name
-	var/reagents_taken = take_reagents(O, user)
+	var/atom_name = used_item.name
+	var/reagents_taken = take_reagents(used_item, user)
 	if(reagents_taken != SUBSTANCE_TAKEN_NONE)
 		show_intake_message(user, reagents_taken, atom_name, took_reagents = TRUE)
 		updateUsrDialog()
 		return TRUE
 
-	if(!can_ingest(O))
-		to_chat(user, SPAN_WARNING("\The [src] cannot process \the [O]."))
+	if(!can_ingest(used_item))
+		to_chat(user, SPAN_WARNING("\The [src] cannot process \the [used_item]."))
 		return TRUE
 
 	// Take everything if we have a recycler.
-	if(!is_robot_module(O) && user.try_unequip(O))
-		var/result = max(take_materials(O, user), max(reagents_taken, take_reagents(O, user, TRUE)))
+	if(!is_robot_module(used_item) && user.try_unequip(used_item))
+		var/result = max(take_materials(used_item, user), max(reagents_taken, take_reagents(used_item, user, TRUE)))
 		show_intake_message(user, result, atom_name)
 		if(result == SUBSTANCE_TAKEN_NONE)
-			user.put_in_active_hand(O)
+			user.put_in_active_hand(used_item)
 			return TRUE
-		if(istype(O, /obj/item/stack))
-			var/obj/item/stack/stack = O
+		if(istype(used_item, /obj/item/stack))
+			var/obj/item/stack/stack = used_item
 			if(!QDELETED(stack) && stack.amount > 0)
 				user.put_in_active_hand(stack)
 		else
-			qdel(O)
+			qdel(used_item)
 		updateUsrDialog()
 		return TRUE
 	. = ..()

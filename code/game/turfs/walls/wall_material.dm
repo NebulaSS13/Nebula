@@ -25,5 +25,7 @@
 		girder_material = new_girder_material
 		. = TRUE
 
-	if(. && !skip_update)
-		update_material()
+	if(.)
+		state_was_modified()
+		if(!skip_update)
+			queue_icon_update()

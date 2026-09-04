@@ -13,15 +13,13 @@
 	self_recharge = 1
 	charge_meter = 0
 	has_safety = FALSE
-	var/required_antag_type = /decl/special_role/wizard
+	var/required_antag_type
 
 /obj/item/gun/energy/staff/special_check(var/mob/user)
-	if(required_antag_type)
-		var/decl/special_role/antag = GET_DECL(required_antag_type)
-		if(user.mind && !antag.is_antagonist(user.mind))
-			to_chat(usr, "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>")
-			return 0
-
+	var/decl/special_role/antag = GET_DECL(required_antag_type)
+	if(user.mind && (!antag?.is_antagonist(user.mind)))
+		to_chat(user, SPAN_WARNING("You focus your mind on \the [src], but nothing happens!"))
+		return FALSE
 	return ..()
 
 /obj/item/gun/energy/staff/handle_click_empty(mob/user = null)

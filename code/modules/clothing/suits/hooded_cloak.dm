@@ -8,11 +8,12 @@
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_OVER_BODY
 	allowed = list(/obj/item/tank/emergency/oxygen)
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS|SLOT_HANDS|SLOT_FEET
 	accessory_slot = ACCESSORY_SLOT_OVER
 	accessory_visibility = ACCESSORY_VISIBILITY_ATTACHMENT
 	hood = /obj/item/clothing/head/hood/cloak
 	material_alteration = MAT_FLAG_ALTERATION_ALL
+	material = /decl/material/solid/organic/cloth/wool
 
 /obj/item/clothing/suit/hooded_cloak/get_assumed_clothing_state_modifiers()
 	var/static/list/expected_state_modifiers = list(

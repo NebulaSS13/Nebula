@@ -1,11 +1,11 @@
 /obj/item/dice
 	name = "d6"
-	desc = "A dice with six sides."
+	desc = "A die with six sides."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "d66"
 	w_class = ITEM_SIZE_TINY
 	var/sides = 6
-	attack_verb = list("diced")
+	attack_verb = "diced"
 	material = /decl/material/solid/organic/plastic
 
 /obj/item/dice/Initialize()
@@ -37,31 +37,31 @@
 
 /obj/item/dice/d4
 	name = "d4"
-	desc = "A dice with four sides."
+	desc = "A die with four sides."
 	icon_state = "d44"
 	sides = 4
 
 /obj/item/dice/d8
 	name = "d8"
-	desc = "A dice with eight sides."
+	desc = "A die with eight sides."
 	icon_state = "d88"
 	sides = 8
 
 /obj/item/dice/d10
 	name = "d10"
-	desc = "A dice with ten sides."
+	desc = "A die with ten sides."
 	icon_state = "d1010"
 	sides = 10
 
 /obj/item/dice/d12
 	name = "d12"
-	desc = "A dice with twelve sides."
+	desc = "A die with twelve sides."
 	icon_state = "d1212"
 	sides = 12
 
 /obj/item/dice/d20
 	name = "d20"
-	desc = "A dice with twenty sides."
+	desc = "A die with twenty sides."
 	icon_state = "d2020"
 	sides = 20
 
@@ -77,7 +77,7 @@
 /obj/item/dice/d100
 	name = "d100"
 	desc = "A die with ten sides. This one is for the tens digit."
-	icon_state = "d10001"
+	icon_state = "d1001"
 	sides = 10
 
 /obj/item/dice/d100/roll_die()

@@ -29,7 +29,6 @@
 
 	radar = image(loc = effect, icon = 'icons/obj/overmap.dmi', icon_state = "sensor_range")
 	radar.color = source.color
-	radar.tag = "radar"
 	radar.add_filter("blur", 1, list(type = "blur", size = 1))
 	radar.appearance_flags |= RESET_TRANSFORM | KEEP_APART
 	radar.appearance_flags &= ~PIXEL_SCALE
@@ -69,8 +68,8 @@
 		return
 	var/list/showing = owner.linked?.navigation_viewers || owner.viewers
 	if(length(showing))
-		for(var/weakref/W in showing)
-			var/mob/M = W.resolve()
+		for(var/weakref/viewer_ref in showing)
+			var/mob/M = viewer_ref.resolve()
 			if(istype(M) && M.client)
 				M.client.images |= images
 
@@ -79,8 +78,8 @@
 		return
 	var/list/showing = owner.linked?.navigation_viewers || owner.viewers
 	if(length(showing))
-		for(var/weakref/W in showing)
-			var/mob/M = W.resolve()
+		for(var/weakref/viewer_ref in showing)
+			var/mob/M = viewer_ref.resolve()
 			if(istype(M) && M.client)
 				M.client.images -= images
 

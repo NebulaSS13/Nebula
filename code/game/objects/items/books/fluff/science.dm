@@ -5,7 +5,7 @@
 	title = "Spectroscopy: Analysing the Anomalies of the Cosmos"
 	fluff_text = {"
 		It's perhaps one of the most exciting times to be alive, with the recent breakthroughs in understanding and categorisation of things we may one day no longer call
-		'anomalies,' but rather 'infrequent or rare occurrences of certain celestial weather or phenomena.' Perhaps a little more long winded, but no less eloquent all the
+		'anomalies,' but rather 'infrequent or rare occurrences of certain celestial weather or phenomena.' Perhaps a little more long-winded, but no less eloquent all the
 		same! Why, look at the strides we're making in piercing the walls of spacetime or our steadily improving ability to clarify and stabilise subspace emissions; it's
 		certainly an exciting time to be alive. For the moment, the Hydrolian hasn't seen two spatial anomalies alike but the day will come and it is soon, I can feel it.
 	"}
@@ -16,7 +16,7 @@
 	author = "Jasper Pascal, Senior Lecturer in Materials Analysis at the University of Jol'Nar"
 	title = "Materials Analysis and the Chemical Implications"
 	fluff_text = {"
-		In today's high tech research fields, leaps and bounds are being made every day. Whether it's great strides forward in our understanding of the physical universe
+		In today's high-tech research fields, leaps and bounds are being made every day. Whether it's great strides forward in our understanding of the physical universe
 		or the operation of some fancy new piece of equipment, it seems like all the cool fields are producing new toys to play with, leaving doddery old fields such as
 		materials analysis and chemistry relegated to the previous few centuries, when we were still learning the makeup and structure of the elements.
 		<br><br>

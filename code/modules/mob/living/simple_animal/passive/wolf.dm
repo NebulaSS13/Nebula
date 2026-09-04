@@ -11,11 +11,13 @@
 	eye_color          = "#9b7214"
 	ability_handlers = list(/datum/ability_handler/predator)
 
-	draw_visible_overlays = list(
+/mob/living/simple_animal/passive/wolf/get_default_animal_colours()
+	var/static/list/default_colors = list(
 		"base"     = "#6a6a6d",
 		"markings" = "#574938",
 		"socks"    = "#41414d"
 	)
+	return default_colors
 
 /datum/mob_controller/passive/hunter/wolf
 	emote_speech   = list("Awoo!","Aroo!","Rrr!")
@@ -33,10 +35,10 @@
 	desc = "A predatory canine commonly known to watch speedruns and take party drugs."
 
 /mob/living/simple_animal/passive/wolf/sparkle/Initialize()
-	draw_visible_overlays = list(
+	draw_visible_overlays ||= list(
 		"base"     = get_random_colour(),
 		"markings" = get_random_colour(TRUE),
 		"socks"    = get_random_colour()
 	)
-	eye_color = get_random_colour(TRUE)
+	eye_color ||= get_random_colour(TRUE)
 	. = ..()

@@ -24,14 +24,14 @@
 	set_extension(src, /datum/extension/network_device/lazy)
 
 //look at it
-/obj/item/holowarrant/examine(mob/user, distance)
+/obj/item/holowarrant/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(active)
-		to_chat(user, "It's a holographic warrant for '[active.fields["namewarrant"]]'.")
+		. += "It's a holographic warrant for '[active.fields["namewarrant"]]'."
 	if(distance <= 1)
-		show_content(user)
+		show_content(user) // opens a browser
 	else
-		to_chat(user, "<span class='notice'>You have to be closer if you want to read it.</span>")
+		. += SPAN_WARNING("You have to be closer if you want to read it.")
 
 //hit yourself with it
 /obj/item/holowarrant/attack_self(mob/user)
@@ -58,9 +58,9 @@
 
 	if(href_list["select"])
 		var/list/active_warrants = list()
-		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
-			if(!W.archived)
-				active_warrants["[capitalize(W.get_category())] - [W.get_name()]"] = W
+		for(var/datum/computer_file/report/warrant/warrant in global.all_warrants)
+			if(!warrant.archived)
+				active_warrants["[capitalize(warrant.get_category())] - [warrant.get_name()]"] = warrant
 		if(!length(active_warrants))
 			to_chat(user,SPAN_WARNING("There are no active warrants available."))
 			return TOPIC_HANDLED
@@ -81,10 +81,10 @@
 		D.ui_interact(user)
 		return TOPIC_HANDLED
 
-/obj/item/holowarrant/attackby(obj/item/W, mob/user)
+/obj/item/holowarrant/attackby(obj/item/used_item, mob/user)
 	if(!active)
 		return ..()
-	var/obj/item/card/id/I = W.GetIdCard()
+	var/obj/item/card/id/I = used_item.GetIdCard()
 	if(I && check_access_list(I.GetAccess()))
 		var/choice = alert(user, "Would you like to authorize this warrant?","Warrant authorization","Yes","No")
 		var/datum/report_field/signature/auth = active.field_from_name("Authorized by")
@@ -103,7 +103,7 @@
 		SPAN_NOTICE("\The [user] holds up a warrant projector and shows the contents to \the [target]."),
 		SPAN_NOTICE("You show the warrant to \the [target].")
 	)
-	target.examinate(src)
+	target.examine_verb(src)
 	return TRUE
 
 /obj/item/holowarrant/on_update_icon()

@@ -14,7 +14,7 @@
 	calls_and_responses = list(
 		new /datum/chatter_conversation/debug_one
 	)
-	
+
 /datum/chatter_conversation/debug_one/create_lines()
 	chatter_lines = list(
 		new /datum/chatter_line("Sir One",  "Dame Two", "This is $NAME$ to $TARGET$, what's our vector, Victor?"),
@@ -48,7 +48,7 @@
 	create_conversations()
 	next_chatter_time = world.time + rand(min_chatter_time_elapsed, max_chatter_time_elapsed)
 	if(listener_landmark && ispath(listener_instance))
-		for(var/obj/abstract/landmark/landmark in global.landmarks_list)
+		for(var/obj/abstract/landmark/landmark in global.all_landmarks)
 			if(landmark.name != listener_landmark)
 				continue
 			var/turf/T = get_turf(landmark)
@@ -94,7 +94,7 @@
 		next_chatter_time = world.time + rand(min_chatter_time_elapsed, max_chatter_time_elapsed)
 	else
 		next_chatter_time = world.time + rand(min_line_time, max_line_time)
-		
+
 /decl/radio_chatter/proc/hear_chat()
 	if(current_dialogue_sequence)
 		interrupted = TRUE

@@ -30,18 +30,20 @@
 		make_blood()
 
 	if(!should_have_organ(BP_HEART))
-		vessel.clear_reagents()
-		vessel.maximum_volume = 0
+		if(istype(vessel))
+			vessel.clear_reagents()
+			REAGENT_SET_MAX_VOL(vessel, 0)
 		return
 
-	if(vessel.total_volume < species.blood_volume)
-		vessel.maximum_volume = species.blood_volume
-		adjust_blood(species.blood_volume - vessel.total_volume)
-	else if(vessel.total_volume > species.blood_volume)
-		vessel.remove_any(vessel.total_volume - species.blood_volume)
-		vessel.maximum_volume = species.blood_volume
+	if(istype(vessel))
+		if(REAGENT_TOTAL_VOLUME(vessel) < species.blood_volume)
+			REAGENT_SET_MAX_VOL(vessel, species.blood_volume)
+			adjust_blood(species.blood_volume - REAGENT_TOTAL_VOLUME(vessel))
+		else if(REAGENT_TOTAL_VOLUME(vessel) > species.blood_volume)
+			vessel.remove_any(REAGENT_TOTAL_VOLUME(vessel) - species.blood_volume)
+			REAGENT_SET_MAX_VOL(vessel, species.blood_volume)
 
-	LAZYSET(vessel.reagent_data, species.blood_reagent, list(
+	REAGENT_SET_DATA(vessel, species.blood_reagent, list(
 		DATA_BLOOD_DONOR      = weakref(src),
 		DATA_BLOOD_SPECIES    = get_species_name(),
 		DATA_BLOOD_DNA        = get_unique_enzymes(),
@@ -54,9 +56,9 @@
 /mob/living/human/proc/drip(var/amt, var/tar = src, var/ddir)
 	var/datum/reagents/bloodstream = get_injected_reagents()
 	if(remove_blood(amt))
-		if(bloodstream.total_volume && vessel.total_volume)
-			var/chem_share = round(0.3 * amt * (bloodstream.total_volume/vessel.total_volume), 0.01)
-			bloodstream.remove_any(chem_share * bloodstream.total_volume)
+		if(REAGENT_TOTAL_VOLUME(bloodstream) && REAGENT_TOTAL_VOLUME(vessel))
+			var/chem_share = round(0.3 * amt * (REAGENT_TOTAL_VOLUME(bloodstream) / REAGENT_TOTAL_VOLUME(vessel)), 0.01)
+			bloodstream.remove_any(chem_share * REAGENT_TOTAL_VOLUME(bloodstream))
 		blood_splatter(tar, src, (ddir && ddir>0), spray_dir = ddir)
 		return amt
 	return 0
@@ -154,7 +156,7 @@
 	if(stress_modifier)
 		amount *= 1-(get_config_value(/decl/config/num/health_stress_blood_recovery_constant) * stress_modifier)
 
-	var/blood_volume_raw = vessel.total_volume
+	var/blood_volume_raw = REAGENT_TOTAL_VOLUME(vessel)
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
 	if(amount)
 		adjust_blood(amount, get_blood_data())
@@ -170,21 +172,19 @@
 		reagents.trans_to_obj(container, amount)
 		return 1
 
-	if(vessel.total_volume < amount)
+	if(REAGENT_TOTAL_VOLUME(vessel) < amount)
 		return null
 	if(vessel.has_reagent(species.blood_reagent))
-		LAZYSET(vessel.reagent_data, species.blood_reagent, get_blood_data())
+		REAGENT_SET_DATA(vessel, species.blood_reagent, get_blood_data())
 	vessel.trans_to_holder(container.reagents, amount)
 	return 1
 
 //Percentage of maximum blood volume.
 /mob/living/human/proc/get_blood_volume()
-	return species.blood_volume ? round((vessel.total_volume/species.blood_volume)*100) : 0
+	return species.blood_volume ? round((REAGENT_TOTAL_VOLUME(vessel)/species.blood_volume)*100) : 0
 
 //Percentage of maximum blood volume, affected by the condition of circulation organs
 /mob/living/human/proc/get_blood_circulation()
-
-
 	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 	if(!heart)
 		return 0.25 * get_blood_volume()
@@ -208,11 +208,10 @@
 			if(PULSE_2FAST, PULSE_THREADY)
 				pulse_mod *= 1.25
 	blood_volume *= pulse_mod
-	if(current_posture.prone)
-		blood_volume *= 1.25
+	blood_volume *= current_posture.blood_volume_multiplier
 
 	var/min_efficiency = recent_pump ? 0.5 : 0.3
-	blood_volume *= max(min_efficiency, (1-(heart.damage / heart.max_damage)))
+	blood_volume *= max(min_efficiency, (1-(heart.get_organ_damage() / heart.max_damage)))
 	if(!heart.open && has_chemical_effect(CE_BLOCKAGE, 1))
 		blood_volume *= max(0, 1-GET_CHEMICAL_EFFECT(src, CE_BLOCKAGE))
 
@@ -234,7 +233,8 @@
 	else
 		blood_volume = 100
 
-	var/blood_volume_mod = max(0, 1 - getOxyLossPercent()/(species.total_health/2))
+	// blood_volume_mod is 1 with no oxyloss, 0 at half species health (50%), and cannot go below 0
+	var/blood_volume_mod = max(0, (1 - getOxyLossFraction()*2))
 	var/oxygenated_mult = 0
 	switch(GET_CHEMICAL_EFFECT(src, CE_OXYGENATED))
 		if(1)
@@ -243,6 +243,6 @@
 			oxygenated_mult = 0.7
 		if(3)
 			oxygenated_mult = 0.9
-	blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
-	blood_volume = blood_volume * blood_volume_mod
-	return min(blood_volume, 100)
+	blood_volume_mod += oxygenated_mult * (1 - blood_volume_mod) // give us back a fraction of our missing oxygenation
+	blood_volume *= blood_volume_mod
+	return clamp(blood_volume, 0, 100)

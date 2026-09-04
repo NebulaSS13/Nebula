@@ -12,8 +12,8 @@
 	air1 = new
 	air2 = new
 
-	air1.volume = 200
-	air2.volume = 200
+	air1.total_volume = 200
+	air2.total_volume = 200
 	. = ..()
 
 /obj/machinery/atmospherics/binary/air_in_dir(direction)
@@ -23,11 +23,7 @@
 		return air1
 
 /obj/machinery/atmospherics/binary/deconstruction_pressure_check()
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
-		return FALSE
-	return TRUE
+	return !check_internal_pressure_difference_over(2 ATM)
 
 // Will only be used if you set the anchorable obj flag.
 /obj/machinery/atmospherics/binary/wrench_floor_bolts(mob/user, delay = 2 SECONDS, obj/item/tool)

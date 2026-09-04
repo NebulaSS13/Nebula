@@ -7,7 +7,7 @@
 	if(incapacitated() || !target || istype(target, /obj/screen) || !istype(item) || !(item in get_held_items()))
 		return FALSE
 
-	var/place_item = a_intent != I_HURT && Adjacent(target)
+	var/place_item = !check_intent(I_FLAG_HARM) && Adjacent(target)
 
 	if(istype(item, /obj/item/grab))
 		var/obj/item/grab/grab = item
@@ -31,7 +31,7 @@
 		if(isliving(target))
 			var/mob/living/mob = target
 			if(length(mob.get_held_item_slots()))
-				if(mob == src || (mob.in_throw_mode && mob.a_intent == I_HELP))
+				if(mob == src || (mob.in_throw_mode && mob.check_intent(I_FLAG_HELP)))
 					if(!try_unequip(item, play_dropsound = place_item))
 						return FALSE
 					if(target != src)
@@ -41,7 +41,7 @@
 							SPAN_NOTICE("You give \the [mob] \a [item].")
 						)
 					else
-						var/same_hand = a_intent == I_HELP
+						var/same_hand = check_intent(I_FLAG_HELP)
 						var/decl/pronouns/user_pronouns = get_pronouns()
 						visible_message(
 							"<b>\The [src]</b> tosses \the [item] [same_hand ? "in the air and catches it." : "between [user_pronouns.his] hands"].",

@@ -2,7 +2,7 @@
 	var/push_direction // push things that get caught in the transit tile this direction
 
 //Overwrite because we dont want people building rods in space.
-/turf/space/transit/attackby(obj/O, mob/user)
+/turf/space/transit/attackby(obj/item/used_item, mob/user)
 	return TRUE
 
 /turf/space/transit/Initialize()

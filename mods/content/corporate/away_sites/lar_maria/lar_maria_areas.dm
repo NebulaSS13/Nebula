@@ -1,4 +1,5 @@
 /area/lar_maria
+	abstract_type = /area/lar_maria
 	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_sprites.dmi'
 
 /////////////////////////////Upper level areas

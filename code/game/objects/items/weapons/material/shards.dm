@@ -1,20 +1,20 @@
 // Glass shards
 
 /obj/item/shard
-	name = "shard"
+	name = SHARD_SHARD
 	icon = 'icons/obj/items/shards.dmi'
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	icon_state = "large"
 	randpixel = 8
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	w_class = ITEM_SIZE_SMALL
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	material = /decl/material/solid/glass
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
-	var/has_handle
+	var/has_handle = FALSE
 
 /obj/item/shard/Initialize(ml, material_key)
 	. = ..()
@@ -28,7 +28,7 @@
 			var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
 			if(istype(hand) && !BP_IS_PROSTHETIC(hand))
 				to_chat(H, SPAN_DANGER("You slice your hand on \the [src]!"))
-				hand.take_external_damage(rand(5,10), used_weapon = src)
+				hand.take_damage(rand(5,10), inflicter = src)
 
 /obj/item/shard/set_material(var/new_material)
 	..(new_material)
@@ -38,10 +38,10 @@
 	icon_state = "[material.shard_icon][pick("large", "medium", "small")]"
 	update_icon()
 
-	if(material.shard_type)
-		SetName("[material.solid_name] [material.shard_type]")
+	if(material.shard_name)
+		SetName("[material.solid_name] [material.shard_name]")
 		desc = "A small piece of [material.solid_name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
-		switch(material.shard_type)
+		switch(material.shard_name)
 			if(SHARD_SPLINTER, SHARD_SHRAPNEL)
 				gender = PLURAL
 			else
@@ -53,23 +53,25 @@
 	. = ..()
 	// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
 	alpha = 255 * (material ? (1 - (1 - material.opacity)**2) : 1)
+	if(has_handle)
+		add_overlay(overlay_image(icon, "handle", has_handle, RESET_COLOR))
 
-/obj/item/shard/attackby(obj/item/W, mob/user)
-	if(IS_WELDER(W) && material.shard_can_repair)
-		var/obj/item/weldingtool/WT = W
-		if(WT.weld(0, user))
+/obj/item/shard/attackby(obj/item/used_item, mob/user)
+	if(IS_WELDER(used_item) && material.shard_can_repair)
+		var/obj/item/weldingtool/welder = used_item
+		if(welder.weld(0, user))
 			material.create_object(get_turf(src))
 			qdel(src)
 			return TRUE
-	if(istype(W, /obj/item/stack/cable_coil))
+	if(istype(used_item, /obj/item/stack/cable_coil))
 
-		if(!material || (material.shard_type in list(SHARD_SPLINTER, SHARD_SHRAPNEL)))
+		if(!material || (material.shard_name in list(SHARD_SPLINTER, SHARD_SHRAPNEL)))
 			to_chat(user, SPAN_WARNING("\The [src] is not suitable for using as a shank."))
 			return TRUE
 		if(has_handle)
 			to_chat(user, SPAN_WARNING("\The [src] already has a handle."))
 			return TRUE
-		var/obj/item/stack/cable_coil/cable = W
+		var/obj/item/stack/cable_coil/cable = used_item
 		if(cable.use(3))
 			to_chat(user, SPAN_NOTICE("You wind some cable around the thick end of \the [src]."))
 			has_handle = cable.color
@@ -79,11 +81,6 @@
 		to_chat(user, SPAN_WARNING("You need 3 or more units of cable to give \the [src] a handle."))
 		return TRUE
 	return ..()
-
-/obj/item/shard/on_update_icon()
-	. = ..()
-	if(has_handle)
-		add_overlay(overlay_image(icon, "handle", has_handle, RESET_COLOR))
 
 /obj/item/shard/Crossed(atom/movable/AM)
 	..()
@@ -114,7 +111,7 @@
 		if(!affecting || BP_IS_PROSTHETIC(affecting))
 			continue
 		to_chat(victim, SPAN_DANGER("You step on \the [src]!"))
-		affecting.take_external_damage(5, 0)
+		affecting.take_damage(5)
 		if(affecting.can_feel_pain())
 			SET_STATUS_MAX(victim, STAT_WEAK, 3)
 		return

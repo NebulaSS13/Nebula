@@ -65,6 +65,12 @@
 /obj/item/box/glasses/mug/WillContain()
 	return list(/obj/item/chems/drinks/glass2/mug = max(1, storage?.storage_slots))
 
+/obj/item/box/glasses/coffeecup/WillContain()
+	return list(/obj/item/chems/drinks/glass2/coffeecup = max(1, storage?.storage_slots))
+
+/obj/item/box/glasses/teacup/WillContain()
+	return list(/obj/item/chems/drinks/glass2/coffeecup/teacup = max(1, storage?.storage_slots))
+
 /obj/item/box/glasses/wine/WillContain()
 	return list(/obj/item/chems/drinks/glass2/wine = max(1, storage?.storage_slots))
 

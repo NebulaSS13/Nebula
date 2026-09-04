@@ -52,13 +52,13 @@
 /obj/item/fossil/animal/skull/horned
 	icon_state = "hskull"
 
-/obj/item/fossil/skull/attackby(obj/item/W, mob/user)
-	if(!istype(W, /obj/item/fossil/animal))
+/obj/item/fossil/skull/attackby(obj/item/used_item, mob/user)
+	if(!istype(used_item, /obj/item/fossil/animal))
 		return ..()
 	if(!user.try_unequip(src))
 		return FALSE
 	var/obj/structure/skeleton/skellybones = new (get_turf(src))
-	user.try_unequip(W, skellybones)
+	user.try_unequip(used_item, skellybones)
 	forceMove(skellybones)
 	return TRUE
 
@@ -75,26 +75,26 @@
 	. = ..()
 	required_bones = rand(6)+3
 
-/obj/structure/skeleton/examine(mob/user, distance)
+/obj/structure/skeleton/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(bone_count < required_bones)
-		to_chat(user, "It's incomplete, looks like it could use [required_bones - bone_count] more bones.")
-	if(.)
-		to_chat(user, "The plaque reads \'[plaque_contents]\'.")
+		. += "It's incomplete, looks like it could use [required_bones - bone_count] more bones."
+	if(distance <= 1)
+		. += "The plaque reads \'[plaque_contents]\'."
 
-/obj/structure/skeleton/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/fossil/animal))
+/obj/structure/skeleton/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/fossil/animal))
 		if(bone_count >= required_bones)
 			to_chat(user, SPAN_NOTICE("\The [src] is already complete."))
 			return TRUE
-		if(!user.try_unequip(W, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
 		bone_count++
 		if(bone_count == required_bones)
 			icon_state = "skel"
 			set_density(1)
 		return TRUE
-	else if(IS_PEN(W))
+	else if(IS_PEN(used_item))
 		plaque_contents = sanitize(input("What would you like to write on the plaque:","Skeleton plaque",""))
 		user.visible_message("[user] writes something on the base of [src].","You relabel the plaque on the base of [src].")
 		return TRUE

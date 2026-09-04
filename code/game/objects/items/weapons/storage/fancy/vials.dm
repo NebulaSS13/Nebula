@@ -46,6 +46,6 @@
 	else
 		add_overlay("ledb")
 
-/obj/item/lockbox/vials/attackby(obj/item/W, mob/user)
+/obj/item/lockbox/vials/attackby(obj/item/used_item, mob/user)
 	. = ..()
 	update_icon()

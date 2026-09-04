@@ -12,6 +12,10 @@ var/global/list/_tool_crafting_lookup
 	return global._tool_crafting_lookup
 
 var/global/list/_tool_crafting_components = list(
+	/obj/item/tool/chisel = list(
+		/obj/item/tool_component/head/chisel,
+		/obj/item/tool_component/handle/short
+	),
 	/obj/item/tool/hammer = list(
 		/obj/item/tool_component/head/hammer,
 		/obj/item/tool_component/handle/short
@@ -34,6 +38,10 @@ var/global/list/_tool_crafting_components = list(
 	),
 	/obj/item/tool/axe = list(
 		/obj/item/tool_component/head/handaxe,
+		/obj/item/tool_component/handle/short
+	),
+	/obj/item/tool/hammer/forge = list(
+		/obj/item/tool_component/head/forging_hammer,
 		/obj/item/tool_component/handle/short
 	)
 )

@@ -15,7 +15,7 @@
 
 /obj/item/flashlight/maglight
 	name = "maglight"
-	desc = "A very, very heavy duty flashlight."
+	desc = "A very, very heavy-duty flashlight."
 	icon = 'icons/obj/lighting/maglight.dmi'
 	_base_attack_force = 10
 	attack_verb = list ("smacked", "thwacked", "thunked")

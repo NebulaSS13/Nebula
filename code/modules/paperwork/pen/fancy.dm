@@ -1,7 +1,7 @@
 /obj/item/pen/fancy
 	name              = "fountain pen"
 	icon              = 'icons/obj/items/pens/pen_fancy.dmi'
-	sharp             = 1 //pointy
+	sharp             = TRUE
 	stroke_color      = "#1c1713" //dark ashy brownish
 	stroke_color_name = "dark ashy brownish"
 	material          = /decl/material/solid/metal/steel

@@ -59,7 +59,8 @@
 /obj/structure/transit_tube_pod/Initialize()
 	. = ..()
 
-	air_contents.adjust_multi(/decl/material/gas/oxygen, MOLES_O2STANDARD * 2, /decl/material/gas/nitrogen, MOLES_N2STANDARD)
+	air_contents.adjust_gas(/decl/material/gas/oxygen, MOLES_O2STANDARD * 2, FALSE)
+	air_contents.adjust_gas(/decl/material/gas/nitrogen, MOLES_N2STANDARD, TRUE)
 	air_contents.temperature = T20C
 
 	// Give auto tubes time to align before trying to start moving
@@ -380,7 +381,7 @@
 
 
 // Parse the icon_state into a list of directions.
-// This means that mappers can use Dream Maker's built in
+// This means that mappers can use Dream Maker's built-in
 //  "Generate Instances from Icon-states" option to get all
 //  variations. Additionally, as a separate proc, sub-types
 //  can handle it more intelligently.

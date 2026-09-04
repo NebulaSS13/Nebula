@@ -103,12 +103,12 @@ var/global/list/surgery_tool_exception_cache = list()
 		if(allowed_species)
 			. = FALSE
 			if(species)
-				for(var/species_name in allowed_species)
-					if(species.get_root_species_name(target) == species_name)
+				for(var/species_uid in allowed_species)
+					if(species.uid == species_uid)
 						return TRUE
 		if(species && disallowed_species)
-			for(var/species_name in disallowed_species)
-				if(species.get_root_species_name(target) == species_name)
+			for(var/species_uid in disallowed_species)
+				if(species.uid == species_uid)
 					return FALSE
 
 /decl/surgery_step/proc/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
@@ -236,7 +236,7 @@ var/global/list/surgery_tool_exception_cache = list()
 /obj/item/proc/do_surgery(mob/living/M, mob/living/user, fuckup_prob)
 
 	// Check for the Hippocratic oath.
-	if(!istype(M) || !istype(user) || user.a_intent == I_HURT)
+	if(!istype(M) || !istype(user) || user.check_intent(I_FLAG_HARM))
 		return FALSE
 
 	// Check for multi-surgery drifting.
@@ -292,7 +292,7 @@ var/global/list/surgery_tool_exception_cache = list()
 			return TRUE
 
 		// If we're on an optable, we are protected from some surgery fails. Bypass this for some items (like health analyzers).
-		if((locate(/obj/machinery/optable) in get_turf(M)) && user.a_intent == I_HELP)
+		if((locate(/obj/machinery/optable) in get_turf(M)) && user.check_intent(I_FLAG_HELP))
 			// Keep track of which tools we know aren't appropriate for surgery on help intent.
 			if(global.surgery_tool_exception_cache[type])
 				return FALSE
@@ -304,7 +304,7 @@ var/global/list/surgery_tool_exception_cache = list()
 			return TRUE
 
 	// Otherwise we can make a start on surgery!
-	else if(istype(M) && !QDELETED(M) && user.a_intent != I_HURT && user.get_active_held_item() == src)
+	else if(istype(M) && !QDELETED(M) && !user.check_intent(I_FLAG_HARM) && user.get_active_held_item() == src)
 		// Double-check this in case it changed between initial check and now.
 		if(zone in global.surgeries_in_progress[operation_ref])
 			to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))

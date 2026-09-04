@@ -12,16 +12,16 @@
 	categories_by_name = new()
 	for(var/category_type in typesof(category_group_type))
 		var/datum/category_group/category = category_type
-		if(initial(category.name))
-			category = new category(src)
-			categories += category
-			categories_by_name[category.name] = category
+		if(TYPE_IS_ABSTRACT(category))
+			continue
+		category = new category(src)
+		categories += category
+		ASSERT(category.name)
+		categories_by_name[category.name] = category
 	categories = sortTim(categories, /proc/cmp_category_groups)
 
 /datum/category_collection/Destroy()
-	for(var/category in categories)
-		qdel(category)
-	categories.Cut()
+	QDEL_LIST(categories)
 	return ..()
 
 /******************
@@ -43,10 +43,12 @@
 
 	for(var/item_type in typesof(category_item_type))
 		var/datum/category_item/item = item_type
-		if(initial(item.name))
-			item = new item(src)
-			items += item
-			items_by_name[item.name] = item
+		if(TYPE_IS_ABSTRACT(item))
+			continue
+		item = new item(src)
+		items += item
+		ASSERT(item.name)
+		items_by_name[item.name] = item
 
 	// For whatever reason dd_insertObjectList(items, item) doesn't insert in the correct order
 	// If you change this, confirm that character setup doesn't become completely unordered.
@@ -67,6 +69,7 @@
 * Category Items *
 *****************/
 /datum/category_item
+	abstract_type = /datum/category_item
 	var/name = ""
 	var/datum/category_group/category		// The group this item belongs to
 

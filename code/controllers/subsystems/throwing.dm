@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(throwing)
 			continue
 		if (QDELETED(TT))
 			if(!QDELETED(AM))
-				AM.end_throw()
+				AM.end_throw(TT)
 				processing -= AM
 			if (MC_TICK_CHECK)
 				return
@@ -103,7 +103,7 @@ SUBSYSTEM_DEF(throwing)
 
 /datum/thrownthing/Destroy()
 	SSthrowing.processing -= thrownthing
-	thrownthing.end_throw()
+	thrownthing.end_throw(src)
 	thrownthing = null
 	target = null
 	thrower = null
@@ -192,7 +192,7 @@ SUBSYSTEM_DEF(throwing)
 	if(!QDELETED(thrownthing))
 		thrownthing.fall()
 
-	thrownthing.end_throw()
+	thrownthing.end_throw(src)
 	qdel(src)
 
 /datum/thrownthing/proc/hit_atom(atom/A)

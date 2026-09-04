@@ -71,7 +71,7 @@
 		return TRUE
 	return ..()
 
-/obj/item/belt/holster/examine(mob/user)
+/obj/item/belt/holster/examined_by(mob/user, distance, infix, suffix)
 	. = ..()
 	var/datum/extension/holster/holster = get_extension(src, /datum/extension/holster)
 	holster.examine_holster(user)

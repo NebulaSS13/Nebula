@@ -1,7 +1,7 @@
-// A wrapper that allows the computer to contain an inteliCard.
+// A wrapper that allows the computer to contain an intelliCard.
 /obj/item/stock_parts/computer/ai_slot
-	name = "inteliCard slot"
-	desc = "An IIS interlink with connection uplinks that allow the device to interface with most common inteliCard models. Too large to fit into tablets. Uses a lot of power when active."
+	name = "intelliCard slot"
+	desc = "An IIS interlink with connection uplinks that allow the device to interface with most common intelliCard models. Too large to fit into tablets. Uses a lot of power when active."
 	icon_state = "aislot"
 	hardware_size = 1
 	critical = 0
@@ -21,16 +21,16 @@
 		power_usage = power_usage_occupied
 	..()
 
-/obj/item/stock_parts/computer/ai_slot/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/aicard))
+/obj/item/stock_parts/computer/ai_slot/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/aicard))
 		if(stored_card)
 			to_chat(user, "\The [src] is already occupied.")
 			return TRUE
-		if(!user.try_unequip(W, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		do_insert_ai(user, W)
+		do_insert_ai(user, used_item)
 		return TRUE
-	if(IS_SCREWDRIVER(W))
+	if(stored_card && IS_SCREWDRIVER(used_item))
 		to_chat(user, "You manually remove \the [stored_card] from \the [src].")
 		do_eject_ai(user)
 		return TRUE
@@ -58,14 +58,15 @@
 		device = locate() in src
 
 	if(!device.stored_card)
-		to_chat(user, "There is no intellicard connected to \the [src].")
+		to_chat(user, "There is no intelliCard connected to \the [src].")
 		return
 
 	device.do_eject_ai(user)
 
 /obj/item/stock_parts/computer/ai_slot/proc/do_eject_ai(mob/user)
-	stored_card.dropInto(loc)
-	stored_card = null
+	if(stored_card)
+		stored_card.dropInto(loc)
+		stored_card = null
 
 	loc.verbs -= /obj/item/stock_parts/computer/ai_slot/verb/eject_ai
 

@@ -77,6 +77,8 @@
 #define ORGAN_CATEGORY_STANCE      "stance"
 /// Limb is considered the 'root' of a given stance limb (leg) - also counted for stance damage a la ORGAN_CATEGORY_STANCE
 #define ORGAN_CATEGORY_STANCE_ROOT "stance_root"
+// Limb is considered a manipulator, currently only used when trying to pilot a wheelchair.
+#define ORGAN_CATEGORY_MANIPLE     "maniple"
 
 // Droplimb types.
 #define DISMEMBER_METHOD_EDGE  0

@@ -1,7 +1,7 @@
 /decl/psionic_faculty/redaction
 	id = PSI_REDACTION
 	name = "Redaction"
-	associated_intent = I_HELP
+	associated_intent_flag = I_FLAG_HELP
 	armour_types = list(ARMOR_BIO, ARMOR_RAD)
 
 /decl/psionic_power/redaction
@@ -91,7 +91,7 @@
 				return TRUE
 			if(E.status & ORGAN_BROKEN)
 				to_chat(user, SPAN_NOTICE("You coax shattered bones to come together and fuse, mending the break."))
-				E.status &= ~ORGAN_BROKEN
+				E.mend_fracture()
 				E.stage = 0
 				return TRUE
 			if(E.is_dislocated() && !E.is_parent_dislocated())
@@ -99,23 +99,24 @@
 				E.undislocate(skip_pain = TRUE)
 				return TRUE
 
-		for(var/datum/wound/W in E.wounds)
-			if(W.bleeding())
-				if(redaction_rank >= PSI_RANK_MASTER || W.wound_damage() < 30)
+		for(var/datum/wound/wound in E.wounds)
+			if(wound.bleeding())
+				if(redaction_rank >= PSI_RANK_MASTER || wound.wound_damage() < 30)
 					to_chat(user, SPAN_NOTICE("You knit together severed veins and broken flesh, stemming the bleeding."))
-					W.bleed_timer = 0
-					W.clamped = TRUE
+					wound.bleed_timer = 0
+					wound.clamped = TRUE
 					E.status &= ~ORGAN_BLEEDING
 					return TRUE
 				else
-					to_chat(user, SPAN_NOTICE("This [W.desc] is beyond your power to heal."))
+					to_chat(user, SPAN_NOTICE("This [wound.desc] is beyond your power to heal."))
 
 		if(redaction_rank >= PSI_RANK_GRANDMASTER)
-			for(var/obj/item/organ/internal/I in E.internal_organs)
-				if(!BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0 && I.organ_tag != BP_BRAIN)
-					to_chat(user, SPAN_NOTICE("You encourage the damaged tissue of \the [I] to repair itself."))
+			for(var/obj/item/organ/internal/organ in E.internal_organs)
+				var/organ_damage = organ.get_organ_damage()
+				if(!BP_IS_PROSTHETIC(organ) && !BP_IS_CRYSTAL(organ) && organ_damage > 0 && organ.organ_tag != BP_BRAIN)
+					to_chat(user, SPAN_NOTICE("You encourage the damaged tissue of \the [organ] to repair itself."))
 					var/heal_rate = redaction_rank
-					I.damage = max(0, I.damage - rand(heal_rate,heal_rate*2))
+					organ.adjust_organ_damage(-rand(heal_rate, heal_rate*2))
 					return TRUE
 
 		to_chat(user, SPAN_NOTICE("You can find nothing within \the [target]'s [E.name] to mend."))

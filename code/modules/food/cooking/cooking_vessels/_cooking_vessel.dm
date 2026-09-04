@@ -11,31 +11,45 @@
 	color                         = /decl/material/solid/metal/stainlesssteel::color
 	amount_per_transfer_from_this = 15
 
+	// Used for work sounds.
+	var/datum/sound_token/work_sound_token
+	var/sound_id
+	var/work_sound
+
 	var/cooking_category
 	var/started_cooking
 	var/decl/recipe/last_recipe
 
-// TODO: ladle
-/obj/item/chems/cooking_vessel/attackby(obj/item/W, mob/user)
+/obj/item/chems/cooking_vessel/Initialize(ml, material_key)
+	. = ..()
+	if(work_sound)
+		sound_id = "[work_sound]"
 
-	if(user.a_intent == I_HURT)
+/obj/item/chems/cooking_vessel/Destroy()
+	QDEL_NULL(work_sound_token)
+	return ..()
+
+// TODO: ladle
+/obj/item/chems/cooking_vessel/attackby(obj/item/used_item, mob/user)
+
+	if(user.check_intent(I_FLAG_HARM))
 		return ..()
 
 	// Fill or take from the vessel.
-	if(W.reagents && ATOM_IS_OPEN_CONTAINER(W))
-		if(W.reagents.total_volume)
-			if(istype(W, /obj/item/chems))
-				var/obj/item/chems/vessel = W
+	if(used_item.reagents && ATOM_IS_OPEN_CONTAINER(used_item))
+		if(REAGENT_TOTAL_VOLUME(used_item.reagents))
+			if(istype(used_item, /obj/item/chems))
+				var/obj/item/chems/vessel = used_item
 				if(vessel.standard_pour_into(user, src))
 					return TRUE
-		else if(standard_pour_into(user, W))
+		else if(standard_pour_into(user, used_item))
 			return TRUE
 
 	return ..()
 
 // Boilerplate from /obj/item/chems/glass. TODO generalize to a lower level.
 /obj/item/chems/cooking_vessel/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if(get_attack_force() && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
+	if(get_attack_force() && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.check_intent(I_FLAG_HARM))
 		return ..()
 	return FALSE
 
@@ -52,16 +66,18 @@
 		return TRUE
 	if(handle_eaten_by_mob(user, target) != EATEN_INVALID)
 		return TRUE
-	if(user.a_intent == I_HURT)
+
+	var/total_vol = REAGENT_TOTAL_VOLUME(reagents)
+	if(user.check_intent(I_FLAG_HARM))
 		if(standard_splash_mob(user,target))
 			return TRUE
-		if(reagents && reagents.total_volume)
+		if(reagents && total_vol)
 			to_chat(user, SPAN_DANGER("You splash the contents of \the [src] onto \the [target]."))
-			reagents.splash(target, reagents.total_volume)
+			reagents.splash(target, total_vol)
 			return TRUE
-	else if(reagents && reagents.total_volume)
+	else if(reagents && total_vol)
 		to_chat(user, SPAN_NOTICE("You splash a small amount of the contents of \the [src] onto \the [target]."))
-		reagents.splash(target, min(reagents.total_volume, 5))
+		reagents.splash(target, min(total_vol, 5))
 		return TRUE
 	. = ..()
 // End boilerplate.
@@ -73,30 +89,29 @@
 	for(var/obj/item/thing in get_stored_inventory())
 		. += "\the [thing]"
 
-	if(reagents?.total_volume)
-		for(var/solid_type in reagents.solid_volumes)
-			var/decl/material/reagent = GET_DECL(solid_type)
-			var/reagent_name = reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)
-			. += "[reagents.solid_volumes[solid_type]]u of [reagent_name]"
+	if(REAGENT_TOTAL_VOLUME(reagents))
+		for(var/decl/material/reagent as anything in REAGENT_SOLID_VOLUMES(reagents))
+			. += "[SOLID_VOLUME(reagents, reagent)]u of [reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)]"
 
-		for(var/liquid_type in reagents.liquid_volumes)
-			var/decl/material/reagent = GET_DECL(liquid_type)
+		var/datum/gas_mixture/environment = loc?.return_air()
+		var/ambient_pressure = environment ? environment.return_pressure() : ONE_ATMOSPHERE
+		for(var/decl/material/reagent as anything in REAGENT_LIQUID_VOLUMES(reagents))
 			var/reagent_name = reagent.get_reagent_name(reagents, MAT_PHASE_LIQUID)
-			if(!isnull(reagent.boiling_point) && temperature >= reagent.boiling_point && reagent.soup_hot_desc)
-				. += "[reagents.liquid_volumes[liquid_type]]u of [reagent.soup_hot_desc] [reagent_name]"
+			if(reagent.phase_at_temperature(temperature, ambient_pressure) == MAT_PHASE_GAS && reagent.soup_hot_desc)
+				. += "[LIQUID_VOLUME(reagents, reagent)]u of [reagent.soup_hot_desc] [reagent_name]"
 			else
-				. += "[reagents.liquid_volumes[liquid_type]]u of [reagent_name]"
+				. += "[LIQUID_VOLUME(reagents, reagent)]u of [reagent_name]"
 
-/obj/item/chems/cooking_vessel/examine(mob/user, distance)
+/obj/item/chems/cooking_vessel/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(user && distance <= 1)
 		var/list/contents_strings = get_cooking_contents_strings()
 		if(length(contents_strings))
-			to_chat(user, SPAN_NOTICE("\The [src] contains:"))
+			. += SPAN_NOTICE("\The [src] contains:")
 			for(var/content_string in contents_strings)
-				to_chat(user, SPAN_NOTICE("- [content_string]"))
+				. += SPAN_NOTICE("- [content_string]")
 		else
-			to_chat(user, SPAN_NOTICE("\The [src] is empty."))
+			. += SPAN_NOTICE("\The [src] is empty.")
 
 /obj/item/chems/cooking_vessel/Process()
 	var/decl/recipe/recipe = select_recipe(cooking_category, src, temperature)
@@ -104,6 +119,7 @@
 		//TODO fail last recipe
 		started_cooking = null
 		last_recipe = null
+		QDEL_NULL(work_sound_token)
 		return PROCESS_KILL
 	if(isnull(started_cooking) || recipe != last_recipe)
 		started_cooking = world.time
@@ -113,12 +129,14 @@
 		if(recipe && recipe == last_recipe && recipe.can_bulk_cook)
 			// Bulk cooking has benefits like reduced cook time
 			// we don't just do it instantly because there's messages each time
-			started_cooking = world.time + (recipe.cooking_time / 2)
+			started_cooking = world.time + (recipe.cooking_time / 5)
 		else
 			started_cooking = null
 			last_recipe = null
 		return
 	last_recipe = recipe
+	if(!work_sound_token)
+		work_sound_token = play_looping_sound(src, sound_id, work_sound, volume = 30)
 	update_icon()
 
 /obj/item/chems/cooking_vessel/on_update_icon()

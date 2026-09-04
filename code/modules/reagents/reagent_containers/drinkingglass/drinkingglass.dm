@@ -12,7 +12,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	icon_state = null
 	base_icon = "square" // Base icon name
 	filling_states = @"[20,40,60,80,100]"
-	volume = 30
+	chem_volume = 30
 	material = /decl/material/solid/glass
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
@@ -32,6 +32,12 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	var/custom_name
 	var/custom_desc
 
+/obj/item/chems/drinks/glass2/update_name()
+	if(custom_name)
+		SetName(custom_name)
+		return
+	return ..()
+
 // Reverse the matter effect of the hollow flag, keep the force effect.
 // Glasses are so tiny that their effective matter is ten times lower than forks/knives due to OBJ_FLAG_HOLLOW.
 /obj/item/chems/drinks/glass2/get_matter_amount_modifier()
@@ -39,58 +45,42 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	if(obj_flags & OBJ_FLAG_HOLLOW)
 		. /= HOLLOW_OBJECT_MATTER_MULTIPLIER
 
-/obj/item/chems/drinks/glass2/examine(mob/M)
-	. = ..()
-
-	for(var/I in extras)
-		if(istype(I, /obj/item/glass_extra))
-			to_chat(M, "There is \a [I] in \the [src].")
-		else if(istype(I, /obj/item/food/processed_grown/slice))
-			to_chat(M, "There is \a [I] on the rim.")
-		else
-			to_chat(M, "There is \a [I] somewhere on the glass. Somehow.")
-
-	if(has_ice())
-		to_chat(M, "There is some ice floating in the drink.")
-
-	if(has_fizz())
-		to_chat(M, "It is fizzing slightly.")
-
 /obj/item/chems/drinks/glass2/proc/has_ice()
-	if(LAZYLEN(reagents.reagent_volumes))
+	var/reagent_volumes = REAGENT_VOLUMES(reagents)
+	if(LAZYLEN(reagent_volumes))
 		var/decl/material/R = reagents.get_primary_reagent_decl()
 		if(!((R.type == /decl/material/solid/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
-			if(reagents.has_reagent(/decl/material/solid/ice, reagents.total_volume / 10)) // 10% ice by volume
+			if(reagents.has_reagent(/decl/material/solid/ice, REAGENT_TOTAL_VOLUME(reagents) / 10)) // 10% ice by volume
 				return 1
 
 	return 0
 
 /obj/item/chems/drinks/glass2/proc/has_fizz()
-	if(LAZYLEN(reagents.reagent_volumes))
-		var/decl/material/R = reagents.get_primary_reagent_decl()
-		if(("fizz" in R.glass_special))
+	var/reagent_volumes = REAGENT_VOLUMES(reagents)
+	if(LAZYLEN(reagent_volumes))
+		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
+		if(("fizz" in primary_reagent.glass_special))
 			return 1
 		var/totalfizzy = 0
-		for(var/rtype in reagents.reagent_volumes)
-			var/decl/material/re = GET_DECL(rtype)
-			if("fizz" in re.glass_special)
-				totalfizzy += REAGENT_VOLUME(reagents, rtype)
-		if(totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
+			if("fizz" in reagent.glass_special)
+				totalfizzy += REAGENT_VOLUME(reagents, reagent)
+		if(totalfizzy >= REAGENT_TOTAL_VOLUME(reagents) / 5) // 20% fizzy by volume
 			return 1
 	return 0
 
 /obj/item/chems/drinks/glass2/proc/has_vapor()
-	if(LAZYLEN(reagents.reagent_volumes) > 0)
+	var/reagent_volumes = REAGENT_VOLUMES(reagents)
+	if(LAZYLEN(reagent_volumes) > 0)
 		if(temperature > T0C + 40)
 			return 1
-		var/decl/material/R = reagents.get_primary_reagent_decl()
-		if(!("vapor" in R.glass_special))
+		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
+		if(!("vapor" in primary_reagent.glass_special))
 			var/totalvape = 0
-			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/re = GET_DECL(rtype)
-				if("vapor" in re.glass_special)
-					totalvape += REAGENT_VOLUME(reagents, type)
-			if(totalvape >= volume * 0.6) // 60% vapor by container volume
+			for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
+				if("vapor" in reagent.glass_special)
+					totalvape += REAGENT_VOLUME(reagents, reagent)
+			if(totalvape >= REAGENT_MAXIMUM_VOLUME(reagents) * 0.6) // 60% vapor by container volume
 				return 1
 	return 0
 
@@ -111,9 +101,9 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		return FALSE
 	return TRUE
 
-/obj/item/chems/drinks/glass2/examine(mob/user, distance)
+/obj/item/chems/drinks/glass2/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(!istype(user) || distance > 1)
+	if(!istype(user))
 		return
 	var/list/extra_text
 	for(var/extra in extras)
@@ -122,9 +112,14 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 			LAZYADD(extra_text, GE.glass_desc)
 		else if(istype(extra, /obj/item/food/processed_grown/slice))
 			LAZYADD(extra_text, "There is \a [extra] on the rim.")
+		else
+			. += "There is \a [extra] somewhere on the glass. Somehow."
 	if(length(extra_text))
-		to_chat(user, SPAN_NOTICE(jointext(extra_text," ")))
-
+		. += SPAN_NOTICE(jointext(extra_text," "))
+	if(has_ice())
+		. += "There is some ice floating in the drink."
+	if(has_fizz())
+		. += "It is fizzing slightly."
 
 /obj/item/chems/drinks/glass2/proc/get_filling_overlay(amount, overlay)
 	var/image/I = new()
@@ -142,7 +137,8 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	underlays.Cut()
 	icon_state = base_icon
 
-	if (LAZYLEN(reagents?.reagent_volumes) > 0)
+	var/reagent_volumes = REAGENT_VOLUMES(reagents)
+	if (LAZYLEN(reagent_volumes) > 0)
 		var/decl/material/R = reagents.get_primary_reagent_decl()
 		if(R.cocktail_ingredient)
 			for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(R.type))
@@ -205,14 +201,14 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		else continue
 		side = "right"
 
-/obj/item/chems/drinks/glass2/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/utensil/spoon))
-		if(user.a_intent == I_HURT)
+/obj/item/chems/drinks/glass2/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/utensil/spoon))
+		if(user.check_intent(I_FLAG_HARM))
 			user.visible_message("<span class='warning'>[user] bashes \the [src] with a spoon, shattering it to pieces! What a rube.</span>")
 			playsound(src, "shatter", 30, 1)
 			if(reagents)
 				user.visible_message("<span class='notice'>The contents of \the [src] splash all over [user]!</span>")
-				reagents.splash(user, reagents.total_volume)
+				reagents.splash(user, REAGENT_TOTAL_VOLUME(reagents))
 			qdel(src)
 			return TRUE
 		user.visible_message("<span class='notice'>[user] gently strikes \the [src] with a spoon, calling the room to attention.</span>")
@@ -228,7 +224,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		update_icon()
 
 /obj/item/chems/drinks/glass2/physically_destroyed(var/skip_qdel)
-	reagents.splash(loc, reagents.total_volume)
+	reagents.splash(loc, REAGENT_TOTAL_VOLUME(reagents))
 	if(istype(material))
 		playsound(src, "shatter", 30, 1)
 		material.place_shards(get_turf(src), w_class)

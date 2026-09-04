@@ -17,3 +17,4 @@
 		"broken3",
 		"broken4"
 	)
+	uid            = "floor_plating"

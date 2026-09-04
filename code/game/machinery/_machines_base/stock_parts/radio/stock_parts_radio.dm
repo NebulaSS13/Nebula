@@ -24,7 +24,7 @@
 	id_tag = new_tag
 	set_frequency(frequency, filter)
 
-/obj/item/stock_parts/radio/proc/get_receive_filter() // what filter should we register with to recieve updates on?
+/obj/item/stock_parts/radio/proc/get_receive_filter() // what filter should we register with to receive updates on?
 	return RADIO_NULL
 
 /obj/item/stock_parts/radio/proc/set_frequency(new_frequency, new_filter)

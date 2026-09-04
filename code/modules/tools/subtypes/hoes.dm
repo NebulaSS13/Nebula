@@ -11,8 +11,8 @@
 	w_class             = ITEM_SIZE_LARGE
 
 /obj/item/tool/hoe/wood
-	color    = /decl/material/solid/organic/wood::color
-	material = /decl/material/solid/organic/wood
+	color    = /decl/material/solid/organic/wood/oak::color
+	material = /decl/material/solid/organic/wood/oak
 
 /obj/item/tool/hoe/wood/walnut
 	color    = /decl/material/solid/organic/wood/walnut::color

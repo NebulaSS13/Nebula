@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/storage/lunchboxes/lunchbox_rainbow.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
-	attack_verb = list("lunched")
+	attack_verb = "lunched"
 	material = /decl/material/solid/organic/plastic
 	storage = /datum/storage/lunchbox
 	var/tmp/filled = FALSE

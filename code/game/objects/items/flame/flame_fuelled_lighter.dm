@@ -33,7 +33,7 @@
 		user.visible_message(SPAN_NOTICE("After a few attempts, \the [user] manages to light \the [src], burning their finger in the process."))
 	playsound(src.loc, "light_bic", 100, 1, -4)
 
-/obj/item/flame/fuelled/lighter/extinguish(var/mob/user, var/no_message)
+/obj/item/flame/fuelled/lighter/snuff_out(mob/user, no_message = FALSE)
 	if(!no_message && user)
 		no_message = TRUE
 	. = ..()

@@ -33,7 +33,7 @@
 
 /obj/item/natural_weapon/shade
 	name = "foul touch"
-	attack_verb = list("drained")
+	attack_verb = "drained"
 	atom_damage_type =  BURN
 	_base_attack_force = 10
 

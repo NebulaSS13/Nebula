@@ -32,14 +32,14 @@
 	if(href_list["back"])
 		current_group = null
 		return TOPIC_REFRESH
-	
+
 	if(href_list["create_group"])
-		var/group_name = sanitize_for_group(input(usr, "Enter the name of the new group. Maximum 15 characters, only alphanumeric characters, _ and - are allowed:", "Create Group"))
+		var/group_name = sanitize_for_group(input(user, "Enter the name of the new group. Maximum 15 characters, only alphanumeric characters, _ and - are allowed:", "Create Group"))
 		if(!length(group_name))
 			return TOPIC_HANDLED
 		if(!CanInteract(user, global.default_topic_state))
 			return TOPIC_REFRESH
-		
+
 		var/output = D.add_group(group_name, current_group)
 		if(group_name in D.all_groups)
 			to_chat(user, SPAN_NOTICE(output))
@@ -59,15 +59,15 @@
 			else
 				to_chat(user, SPAN_NOTICE(output))
 			return TOPIC_REFRESH
-	
+
 	if(href_list["toggle_submanagement"])
 		D.toggle_submanagement()
 		return TOPIC_REFRESH
-	
+
 	if(href_list["toggle_parent_account_creation"])
 		D.toggle_parent_account_creation()
 		return TOPIC_REFRESH
-	
+
 	if(href_list["view_child_groups"])
 		var/parent_group = href_list["view_child_groups"]
 		if(parent_group && (parent_group in D.group_dict))
@@ -75,7 +75,7 @@
 		else
 			current_group = null
 		return TOPIC_REFRESH
-	
+
 	if(href_list["info"])
 		switch(href_list["info"])
 			if("submanagement")

@@ -1,7 +1,7 @@
 /datum/ailment/fault
 	applies_to_robotics    = TRUE
 	applies_to_prosthetics = TRUE
-	category = /datum/ailment/fault
+	abstract_type = /datum/ailment/fault
 	treated_by_item_type = list(
 		/obj/item/stack/nanopaste,
 		/obj/item/stack/tape_roll/duct_tape

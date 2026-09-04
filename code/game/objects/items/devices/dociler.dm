@@ -11,9 +11,9 @@
 	var/loaded = 1
 	var/mode = "completely"
 
-/obj/item/dociler/examine(mob/user)
+/obj/item/dociler/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "<span class='notice'>It is currently set to [mode] docile mode.</span>")
+	. += SPAN_NOTICE("It is currently set to '[mode] docile' mode.")
 
 /obj/item/dociler/attack_self(var/mob/user)
 	if(mode == "somewhat")

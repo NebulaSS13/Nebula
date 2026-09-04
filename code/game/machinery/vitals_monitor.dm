@@ -19,14 +19,14 @@
 	victim = null
 	. = ..()
 
-/obj/machinery/vitals_monitor/examine(mob/user)
+/obj/machinery/vitals_monitor/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(victim)
 		if(stat & NOPOWER)
-			to_chat(user, SPAN_NOTICE("It's unpowered."))
+			. += SPAN_NOTICE("It's unpowered.")
 			return
-		to_chat(user, SPAN_NOTICE("Vitals of [victim]:"))
-		to_chat(user, SPAN_NOTICE("Pulse: [victim.get_pulse_as_string(GETPULSE_TOOL)]"))
+		. += SPAN_NOTICE("Vitals of [victim]:")
+		. += SPAN_NOTICE("Pulse: [victim.get_pulse_as_string(GETPULSE_TOOL)]")
 
 		var/brain_activity = "none"
 		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(victim, BP_BRAIN)
@@ -41,7 +41,7 @@
 						brain_activity = "extremely weak"
 			else
 				brain_activity = "some"
-		to_chat(user, SPAN_NOTICE("Brain activity: [brain_activity]"))
+		. += SPAN_NOTICE("Brain activity: [brain_activity]")
 
 		var/breathing = "none"
 		var/obj/item/organ/internal/lungs/lungs = victim.get_organ(BP_LUNGS, /obj/item/organ/internal/lungs)
@@ -51,7 +51,7 @@
 			else if(lungs.breath_fail_ratio < 1)
 				breathing = "shallow"
 
-		to_chat(user, SPAN_NOTICE("Breathing: [breathing]"))
+		. += SPAN_NOTICE("Breathing: [breathing]")
 
 /obj/machinery/vitals_monitor/Process()
 	if(QDELETED(victim))

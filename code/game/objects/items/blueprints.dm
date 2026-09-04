@@ -53,13 +53,13 @@
 
 	var/turf/T = get_turf(src)
 	if(istype(T) && length(global.using_map.overmap_ids))
-		var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors[num2text(T.z)]
+		var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors[T.z]
 		if(!S) // The blueprints are useless now, but keep them around for fluff.
-			desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."
+			desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your whereabouts."
 			return FALSE
 
 		name += " - [S.name]"
-		desc = "Blueprints of \the [S.name]. There is a \"Classified\" stamp and several coffee stains on it."
+		desc = "Blueprints of \the [S]. There is a \"Classified\" stamp and several coffee stains on it."
 		valid_z_levels += S.map_z
 		area_prefix = S.name
 		return TRUE
@@ -75,14 +75,14 @@
 	icon_state = "blueprints2"
 
 /obj/item/blueprints/outpost/attack_self(mob/user)
-	var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors[num2text(get_z(user))]
+	var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors[get_z(user)]
 	area_prefix = S.name
 	. = ..()
 
 /obj/item/blueprints/outpost/set_valid_z_levels()
 	var/turf/T = get_turf(src)
 	if(istype(T) && length(global.using_map.overmap_ids))
-		var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors[num2text(T.z)]
+		var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors[T.z]
 		if(istype(S))
 			T = locate(1, 1, S.z)
 			var/area/overmap/map = T && get_area(T)
@@ -91,7 +91,7 @@
 				for(var/obj/effect/overmap/visitable/sector/planetoid/E in map)
 					valid_z_levels |= E.map_z
 				return TRUE
-	desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."
+	desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your whereabouts."
 	return FALSE
 
 //For use on /obj/effect/overmap/visitable/ship/landable ships.
@@ -100,8 +100,8 @@
 
 /obj/item/blueprints/shuttle/set_valid_z_levels()
 	var/turf/T = get_turf(src)
-	if(istype(T) && length(global.using_map.overmap_ids) && global.overmap_sectors[num2text(T.z)])
-		var/obj/effect/overmap/visitable/ship/landable/S = global.overmap_sectors[num2text(T.z)]
+	if(istype(T) && length(global.using_map.overmap_ids) && global.overmap_sectors[T.z])
+		var/obj/effect/overmap/visitable/ship/landable/S = global.overmap_sectors[T.z]
 		if(isnull(shuttle_name))
 			shuttle_name = S.shuttle
 		update_linked_name(S, null, S.name)
@@ -111,7 +111,7 @@
 		area_prefix = S.name
 		return TRUE
 	// The blueprints are useless now, but keep them around for fluff.
-	desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."
+	desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your whereabouts."
 	return FALSE
 
 /obj/item/blueprints/shuttle/proc/update_linked_name(atom/namee, old_name, new_name)
@@ -122,7 +122,7 @@
 	events_repository.unregister(/decl/observ/name_set, destroyed, src, PROC_REF(update_linked_name))
 	events_repository.unregister(/decl/observ/destroyed, destroyed, src, PROC_REF(on_shuttle_destroy))
 	name = initial(name)
-	desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."
+	desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your whereabouts."
 	valid_z_levels = list()
 	area_prefix = null
 

@@ -1,0 +1,11 @@
+#ifndef MODPACK_UTILITY_PROMETHEUS
+#define MODPACK_UTILITY_PROMETHEUS
+// BEGIN_INCLUDE
+#include "_prometheus_metrics.dm"
+#include "metric_family.dm"
+#include "metric_topic.dm"
+#include "metrics.dm"
+#include "metrics\byond.dm"
+#include "metrics\ss13.dm"
+// END_INCLUDE
+#endif

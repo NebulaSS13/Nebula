@@ -1,13 +1,14 @@
+#include "../../../mods/content/modern_earth/_modern_earth.dme" // for the British flag cups, which could honestly just be removed
 #include "bearcat_areas.dm"
 #include "bearcat_jobs.dm"
 #include "bearcat_access.dm"
 
 /obj/abstract/submap_landmark/joinable_submap/bearcat
-	name = "FTV Bearcat"
+	name      = "FTV Bearcat"
 	archetype = /decl/submap_archetype/derelict/bearcat
 
 /decl/submap_archetype/derelict/bearcat
-	descriptor = "derelict cargo vessel"
+	name      = "derelict cargo vessel"
 	crew_jobs = list(
 		/datum/job/submap/bearcat_captain,
 		/datum/job/submap/bearcat_crewman
@@ -88,16 +89,16 @@
 	door_color = COLOR_AMBER
 
 /turf/floor/usedup
-	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
+	initial_gas = alist(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
 /turf/floor/tiled/usedup
-	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
+	initial_gas = alist(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
 /turf/floor/tiled/dark/usedup
-	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
+	initial_gas = alist(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
 /turf/floor/tiled/white/usedup
-	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
+	initial_gas = alist(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
 /obj/abstract/landmark/corpse/deadcap
 	name = "Dead Captain"
@@ -113,7 +114,7 @@
 	if(!istype(corpse))
 		return
 	corpse.SetName("Captain")
-	var/obj/structure/bed/chair/C = locate() in loc
+	var/obj/structure/chair/C = locate() in loc
 	if(C)
 		C.buckle_mob(corpse)
 	qdel(src)

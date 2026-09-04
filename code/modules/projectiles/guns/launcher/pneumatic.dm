@@ -61,12 +61,12 @@
 	unload_hopper(user)
 	return TRUE
 
-/obj/item/gun/launcher/pneumatic/attackby(obj/item/W, mob/user)
-	if(!tank && istype(W, /obj/item/tank) && user.try_unequip(W, src))
-		tank = W
+/obj/item/gun/launcher/pneumatic/attackby(obj/item/used_item, mob/user)
+	if(!tank && istype(used_item, /obj/item/tank) && user.try_unequip(used_item, src))
+		tank = used_item
 		user.visible_message(
-			"\The [user] jams \the [W] into [src]'s valve and twists it closed.",
-			"You jam \the [W] into \the [src]'s valve and twist it closed."
+			"\The [user] jams \the [used_item] into [src]'s valve and twists it closed.",
+			"You jam \the [used_item] into \the [src]'s valve and twist it closed."
 		)
 		update_icon()
 		return TRUE
@@ -99,19 +99,19 @@
 	storage.remove_from_storage((ismob(firer) ? firer : null), launched, src)
 	return launched
 
-/obj/item/gun/launcher/pneumatic/examine(mob/user, distance)
+/obj/item/gun/launcher/pneumatic/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance > 2)
 		return
-	to_chat(user, "The valve is dialed to [pressure_setting]%.")
+	. += "The valve is dialed to [pressure_setting]%."
 	if(tank)
-		to_chat(user, "The tank dial reads [tank.air_contents.return_pressure()] kPa.")
+		. += "The tank dial reads [tank.air_contents.return_pressure()] kPa."
 	else
-		to_chat(user, "Nothing is attached to the tank valve!")
+		. += "Nothing is attached to the tank valve!"
 
 /obj/item/gun/launcher/pneumatic/update_release_force(obj/item/projectile)
 	if(tank)
-		release_force = ((fire_pressure*tank.volume)/projectile.w_class)/force_divisor //projectile speed.
+		release_force = ((fire_pressure*tank.gas_volume)/projectile.w_class)/force_divisor //projectile speed.
 		if(release_force > 80) release_force = 80 //damage cap.
 	else
 		release_force = 0

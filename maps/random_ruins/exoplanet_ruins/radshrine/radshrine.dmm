@@ -10,7 +10,7 @@
 /turf/wall/uranium,
 /area/template_noop)
 "e" = (
-/obj/structure/bed/chair/wood,
+/obj/structure/chair/wood,
 /obj/effect/decal/cleanable/cobweb,
 /turf/floor/carpet/red,
 /area/template_noop)
@@ -30,7 +30,7 @@
 /turf/floor/reinforced,
 /area/template_noop)
 "I" = (
-/obj/structure/bed/chair/wood,
+/obj/structure/chair/wood,
 /turf/floor/carpet/red,
 /area/template_noop)
 

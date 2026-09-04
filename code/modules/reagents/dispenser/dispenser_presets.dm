@@ -1,3 +1,6 @@
+/obj/machinery/chemical_dispenser/unanchored
+	anchored = FALSE
+
 /obj/machinery/chemical_dispenser/full
 	spawn_cartridges = list(
 			/obj/item/chems/chem_disp_cartridge/hydrazine,
@@ -25,7 +28,7 @@
 
 	buildable = FALSE
 
-/obj/machinery/chemical_dispenser/ert
+/obj/machinery/chemical_dispenser/medicine
 	name = "medicine dispenser"
 	spawn_cartridges = list(
 			/obj/item/chems/chem_disp_cartridge/adrenaline,
@@ -44,9 +47,7 @@
 			/obj/item/chems/chem_disp_cartridge/antibiotics,
 			/obj/item/chems/chem_disp_cartridge/sedatives
 		)
-
 	buildable = FALSE
-
 
 /obj/machinery/chemical_dispenser/bar_soft
 	name = "soft drink dispenser"
@@ -59,6 +60,9 @@
 	base_type = /obj/machinery/chemical_dispenser/bar_soft
 	beaker_offset = -2
 	beaker_positions = list(-1,3,7,11,15)
+
+/obj/machinery/chemical_dispenser/bar_soft/unanchored
+	anchored = FALSE
 
 /obj/machinery/chemical_dispenser/bar_soft/full
 	spawn_cartridges = list(
@@ -98,6 +102,8 @@
 	beaker_offset = -2
 	beaker_positions = list(-3,2,7,12,17)
 
+/obj/machinery/chemical_dispenser/bar_alc/unanchored
+	anchored = FALSE
 
 /obj/machinery/chemical_dispenser/bar_alc/full
 	spawn_cartridges = list(
@@ -151,7 +157,9 @@
 			/obj/item/chems/chem_disp_cartridge/syrup_chocolate,
 			/obj/item/chems/chem_disp_cartridge/syrup_caramel,
 			/obj/item/chems/chem_disp_cartridge/syrup_vanilla,
-			/obj/item/chems/chem_disp_cartridge/syrup_pumpkin
+			/obj/item/chems/chem_disp_cartridge/syrup_pumpkin,
+			/obj/item/chems/chem_disp_cartridge/syrup_lavender,
+			/obj/item/chems/chem_disp_cartridge/cinnamon
 		)
 
 	buildable = FALSE

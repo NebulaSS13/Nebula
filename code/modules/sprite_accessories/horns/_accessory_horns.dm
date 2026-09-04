@@ -3,6 +3,7 @@
 	base_accessory_type  = /decl/sprite_accessory/horns
 	default_accessory    = /decl/sprite_accessory/horns/none
 	uid                  = "acc_cat_horns"
+	single_selection     = FALSE
 
 /decl/sprite_accessory/horns
 	hidden_by_gear_slot  = slot_head_str
@@ -25,7 +26,6 @@
 	bodytypes_allowed           = null
 	bodytypes_denied            = null
 	species_allowed             = null
-	subspecies_allowed          = null
 	bodytype_categories_allowed = null
 	bodytype_categories_denied  = null
 	body_flags_allowed          = null

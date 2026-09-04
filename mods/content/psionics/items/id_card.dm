@@ -15,14 +15,14 @@
 	icon = 'icons/obj/id/id_warrantcard.dmi'
 	detail_color = null
 
-/obj/item/card/id/foundation/examine(mob/user, distance)
+/obj/item/card/id/foundation/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1 && isliving(user))
 		var/datum/ability_handler/psionics/psi = user.get_ability_handler(/datum/ability_handler/psionics)
 		if(psi)
-			to_chat(user, SPAN_WARNING("There is a psionic compulsion surrounding \the [src], forcing anyone who reads it to perceive it as a legitimate document of authority. The actual text just reads 'I can do what I want.'"))
+			. += SPAN_WARNING("There is a psionic compulsion surrounding \the [src], forcing anyone who reads it to perceive it as a legitimate document of authority. The actual text just reads 'I can do what I want.'")
 		else
-			to_chat(user, SPAN_NOTICE("This is the real deal, stamped by [global.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe it implicitly."))
+			. += SPAN_NOTICE("This is the real deal, stamped by [global.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe it implicitly.")
 
 /obj/item/card/id/foundation/attack_self(var/mob/user)
 	. = ..()

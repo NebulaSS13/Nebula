@@ -7,15 +7,6 @@
 	return
 /mob/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	return
-/mob/proc/has_organ(organ_tag)
-	return !!get_organ(organ_tag, /obj/item/organ)
-/mob/proc/get_organ(var/organ_tag, var/expected_type)
-	RETURN_TYPE(/obj/item/organ)
-	return
-/mob/proc/get_injured_organs()
-	return
-/mob/proc/get_organs()
-	return
 // End grab casting stubs.
 
 /mob/can_be_grabbed(var/mob/grabber, var/target_zone)

@@ -185,9 +185,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
 		announce_ghost_joinleave(ghost)
 
-/mob/observer/ghost/is_active()
-	return FALSE
-
 /mob/observer/ghost/Stat()
 	. = ..()
 	if(statpanel("Status") && SSevac.evacuation_controller)
@@ -626,3 +623,21 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			ghost_all_access = new
 		if(!is_type_in_list(ghost_all_access, exceptions))
 			LAZYDISTINCTADD(., ghost_all_access)
+
+/mob/observer/ghost/Login()
+	..()
+	if (ghost_image)
+		ghost_image.appearance = src
+		ghost_image.appearance_flags = RESET_ALPHA
+	SSghost_images.queue_image_update(src)
+
+/mob/observer/ghost/proc/check_existence_failure()
+	if(!QDELETED(src) && !key) //we've transferred to another mob. This ghost should be deleted.
+		qdel(src)
+
+/mob/observer/ghost/Logout()
+	..()
+	addtimer(CALLBACK(src, PROC_REF(check_existence_failure)), 0)
+
+/mob/observer/ghost/say(var/message)
+	sanitize_and_communicate(/decl/communication_channel/dsay, client, message)

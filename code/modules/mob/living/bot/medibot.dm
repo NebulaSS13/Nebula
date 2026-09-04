@@ -40,22 +40,22 @@
 	//The last time we were tipped/righted and said a voice line, to avoid spam
 	var/last_tipping_action_voice = 0
 
-/mob/living/bot/medbot/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
+/mob/living/bot/medbot/get_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(tipped_status == MEDBOT_PANIC_NONE)
 		return
 
 	switch(tipped_status)
 		if(MEDBOT_PANIC_NONE to MEDBOT_PANIC_LOW)
-			to_chat(user, "It appears to be tipped over, and is quietly waiting for someone to set it right.")
+			. += "It appears to be tipped over, and is quietly waiting for someone to set it right."
 		if(MEDBOT_PANIC_LOW to MEDBOT_PANIC_MED)
-			to_chat(user, "It is tipped over and requesting help.")
+			. += "It is tipped over and requesting help."
 		if(MEDBOT_PANIC_MED to MEDBOT_PANIC_HIGH)
-			to_chat(user, SPAN_WARNING("They are tipped over and appear visibly distressed.")) // now we humanize the medbot as a they, not an it
+			. += SPAN_WARNING("They are tipped over and appear visibly distressed.") // now we humanize the medbot as a they, not an it
 		if(MEDBOT_PANIC_HIGH to MEDBOT_PANIC_FUCK)
-			to_chat(user, SPAN_WARNING("They are tipped over and visibly panicking!"))
+			. += SPAN_WARNING("They are tipped over and visibly panicking!")
 		if(MEDBOT_PANIC_FUCK to INFINITY)
-			to_chat(user, SPAN_DANGER("They are freaking out from being tipped over!"))
+			. += SPAN_DANGER("They are freaking out from being tipped over!")
 
 /mob/living/bot/medbot/handleIdle()
 	if(vocal && prob(1))
@@ -151,8 +151,8 @@
 	else
 		icon_state = "medibot[on]"
 
-/mob/living/bot/medbot/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/chems/glass))
+/mob/living/bot/medbot/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/chems/glass))
 		if(locked)
 			to_chat(user, "<span class='notice'>You cannot insert a beaker because the panel is locked.</span>")
 			return TRUE
@@ -160,10 +160,10 @@
 			to_chat(user, "<span class='notice'>There is already a beaker loaded.</span>")
 			return TRUE
 
-		if(!user.try_unequip(O, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		reagent_glass = O
-		to_chat(user, "<span class='notice'>You insert [O].</span>")
+		reagent_glass = used_item
+		to_chat(user, "<span class='notice'>You insert [used_item].</span>")
 		return TRUE
 	else
 		return ..()
@@ -199,7 +199,7 @@
 	. = ..()
 	. += "<br>Beaker: "
 	if(reagent_glass)
-		. += "<A href='byond://?src=\ref[src];command=eject'>Loaded \[[reagent_glass.reagents.total_volume]/[reagent_glass.reagents.maximum_volume]\]</a>"
+		. += "<A href='byond://?src=\ref[src];command=eject'>Loaded \[[REAGENT_TOTAL_VOLUME(reagent_glass.reagents)]/[REAGENT_MAXIMUM_VOLUME(reagent_glass.reagents)]\]</a>"
 	else
 		. += "None loaded"
 
@@ -306,8 +306,8 @@
 
 	// If they're injured, we're using a beaker, and they don't have on of the chems in the beaker
 	if(reagent_glass && use_beaker && ((patient.get_damage(BRUTE) >= heal_threshold) || (patient.get_damage(TOX) >= heal_threshold) || (patient.get_damage(TOX) >= heal_threshold) || (patient.get_damage(OXY) >= (heal_threshold + 15))))
-		for(var/R in reagent_glass.reagents.reagent_volumes)
-			if(!patient.reagents.has_reagent(R))
+		for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagent_glass.reagents))
+			if(!patient.reagents.has_reagent(reagent))
 				return 1
 			continue
 

@@ -1,7 +1,7 @@
 /obj/item/stack/medical/resin
 	name = "resin patches"
 	singular_name = "resin patch"
-	desc = "A resin-based patching kit used to repair crystalline bodyparts. The label is written in a colourful, angular, unreadable script."
+	desc = "A resin-based patching kit used to repair crystalline body parts. The label is written in a colourful, angular, unreadable script."
 	icon_state = "resin-pack"
 	heal_brute = 10
 	heal_burn =  10
@@ -12,7 +12,7 @@
 
 /obj/item/stack/medical/resin/crafted
 	name = "resin globules"
-	desc = "A lump of slick, shiny resin. Used to repair damage to crystalline bodyparts."
+	desc = "A lump of slick, shiny resin. Used to repair damage to crystalline body parts."
 	singular_name = "resin globule"
 	icon_state = "resin-lump"
 	heal_brute = 5

@@ -32,7 +32,7 @@
 	var/opened = FALSE
 
 /obj/item/grooming/comb/butterfly/attack_self(mob/user)
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		return ..()
 	opened = !opened
 	if(opened)

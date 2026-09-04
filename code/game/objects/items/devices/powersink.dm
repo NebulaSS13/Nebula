@@ -67,8 +67,8 @@
 		STOP_PROCESSING_POWER_OBJECT(src)
 	. = ..()
 
-/obj/item/powersink/attackby(var/obj/item/I, var/mob/user)
-	if(IS_SCREWDRIVER(I))
+/obj/item/powersink/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_SCREWDRIVER(used_item))
 		if(mode == DISCONNECTED)
 			var/turf/T = loc
 			if(isturf(T) && !!T.is_plating())
@@ -139,7 +139,7 @@
 				// Enough power drained this tick, no need to torture more APCs
 				if(drained >= drain_rate)
 					break
-				var/obj/machinery/power/apc/A = T.master_machine()
+				var/obj/machinery/apc/A = T.master_machine()
 				if(istype(A))
 					drained += A.drain_power(amount = drain_rate)
 		power_drained += drained

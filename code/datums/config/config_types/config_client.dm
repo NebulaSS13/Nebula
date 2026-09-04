@@ -51,7 +51,7 @@
 /decl/config/toggle/popup_admin_pm
 	uid = "popup_admin_pm"
 	desc = list(
-		"Remove the # to show a popup 'reply to' window to every non-admin that recieves an adminPM.",
+		"Remove the # to show a popup 'reply to' window to every non-admin that receives an adminPM.",
 		"The intention is to make adminPMs more visible. (although I fnd popups annoying so this defaults to off)."
 	)
 

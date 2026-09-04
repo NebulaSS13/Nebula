@@ -27,7 +27,7 @@
 
 /obj/item/natural_weapon/revenant
 	name = "shadow tendril"
-	attack_verb = list("gripped")
+	attack_verb = "gripped"
 	hitsound = 'sound/hallucinations/growl1.ogg'
 	atom_damage_type =  BURN
 	_base_attack_force = 15

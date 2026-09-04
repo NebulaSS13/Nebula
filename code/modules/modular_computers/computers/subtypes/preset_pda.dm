@@ -28,13 +28,6 @@
 		"stripe" = COLOR_RED,
 	)
 
-/obj/item/modular_computer/pda/ert
-	color = COLOR_OFF_WHITE
-	decals = list(
-		"stripe" = COLOR_DARK_BLUE_GRAY,
-		"stripe2" = COLOR_GOLD
-	)
-
 /obj/item/modular_computer/pda/heads
 	color = COLOR_NAVY_BLUE
 

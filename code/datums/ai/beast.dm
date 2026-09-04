@@ -36,16 +36,16 @@
 			qdel(S)
 		break
 
-/datum/mob_controller/aggressive/beast/list_targets(var/dist = 7)
+/datum/mob_controller/aggressive/beast/list_targets()
 	. = ..()
 	if(!length(.))
 		if(LAZYLEN(prey))
 			. = list()
-			for(var/weakref/W in prey)
-				var/mob/M = W.resolve()
+			for(var/weakref/prey_ref in prey)
+				var/mob/M = prey_ref.resolve()
 				if(M)
 					. |= M
 		else if(body.get_nutrition() < body.get_max_nutrition() * 0.75) //time to look for some food
-			for(var/mob/living/L in view(body, dist))
+			for(var/mob/living/L in get_raw_target_list())
 				if(attack_same_faction || L.faction != body.faction)
 					LAZYDISTINCTADD(prey, weakref(L))

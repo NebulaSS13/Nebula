@@ -91,10 +91,8 @@
 				A.readyalert()
 		if(!skip_announce)
 			global.using_map.emergency_shuttle_called_announcement()
-	else
-		if(!skip_announce)
-			priority_announcement.Announce(replacetext(replacetext(global.using_map.shuttle_called_message, "%dock_name%", "[global.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60)] minute\s"))
-
+	else if(!skip_announce && global.using_map.shuttle_called_message)
+		priority_announcement.Announce(replacetext(replacetext(global.using_map.shuttle_called_message, "%dock_name%", "[global.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60)] minute\s"))
 	return 1
 
 /datum/evacuation_controller/proc/cancel_evacuation()
@@ -113,12 +111,13 @@
 	auto_recall_time =  null
 
 	if(emergency_evacuation)
-		evac_recalled.Announce(global.using_map.emergency_shuttle_recall_message)
+		if(global.using_map.emergency_shuttle_recall_message)
+			evac_recalled.Announce(global.using_map.emergency_shuttle_recall_message)
 		for(var/area/A in global.areas)
 			if(istype(A) && (A.area_flags & AREA_FLAG_HALLWAY))
 				A.readyreset()
 		emergency_evacuation = 0
-	else
+	else if(global.using_map.shuttle_recall_message)
 		priority_announcement.Announce(global.using_map.shuttle_recall_message)
 
 	return 1
@@ -131,8 +130,6 @@
 		evac_waiting.Announce(replacetext(global.using_map.emergency_shuttle_docked_message, "%ETD%", "[estimated_time] minute\s"), new_sound = sound('sound/effects/Evacuation.ogg', volume = 35))
 	else
 		priority_announcement.Announce(replacetext(replacetext(global.using_map.shuttle_docked_message, "%dock_name%", "[global.using_map.dock_name]"),  "%ETD%", "[estimated_time] minute\s"))
-	if(get_config_value(/decl/config/toggle/announce_shuttle_dock_to_irc))
-		send2mainirc("The shuttle has docked with the station. It will depart in approximately [estimated_time] minute\s.")
 
 /datum/evacuation_controller/proc/launch_evacuation()
 

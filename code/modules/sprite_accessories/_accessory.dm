@@ -29,10 +29,8 @@
 	var/list/decl/bodytype/bodytypes_allowed
 	/// Restricted from specific bodytypes. null matches none
 	var/list/decl/bodytype/bodytypes_denied
-	/// Restrict some styles to specific root species names
-	var/list/species_allowed = list(SPECIES_HUMAN)
-	/// Restrict some styles to specific species names, irrespective of root species name
-	var/list/subspecies_allowed
+	/// Restrict some styles to specific species UIDs.
+	var/list/species_allowed = list(/decl/species/human::uid)
 	/// Restrict some styles to specific bodytype flags.
 	var/body_flags_allowed
 	/// Restrict some styles to specific bodytype flags.
@@ -61,6 +59,8 @@
 	var/list/body_parts
 	/// Set to a layer integer to apply this as an overlay over the top of hair and such.
 	var/sprite_overlay_layer
+	/// Set to a layer integer to apply this as an overlay over the top of entire planes.
+	var/sprite_overlay_plane
 	/// A list of sprite accessory types that are disallowed by this one being included.
 	var/list/disallows_accessories
 	/// Whether or not this accessory is transferred via DNA (ie. not a scar or tattoo)
@@ -77,6 +77,11 @@
 	var/is_whitelisted
 	/// A set of trait levels to check for.
 	var/list/required_traits
+	/// A list of metadata types to attempt to apply after initial overlay gen.
+	var/list/additional_states = list(
+		(SAM_COLOR_INNER),
+		(SAM_COLOR_EXTRA)
+	)
 
 /decl/sprite_accessory/Initialize()
 	. = ..()
@@ -90,9 +95,7 @@
 	if(species)
 		var/species_is_permitted = TRUE
 		if(species_allowed)
-			species_is_permitted = (species.get_root_species_name(owner) in species_allowed)
-		if(subspecies_allowed)
-			species_is_permitted = (species.name in subspecies_allowed)
+			species_is_permitted = (species.uid in species_allowed)
 		if(!species_is_permitted)
 			return FALSE
 	if(bodytype)
@@ -170,8 +173,7 @@
 	LAZYINITLIST(metadata)
 	for(var/metadata_type in accessory_metadata_types)
 		var/decl/sprite_accessory_metadata/metadata_decl = GET_DECL(metadata_type)
-		if(!(metadata_type in metadata) || !metadata_decl.validate_data(metadata[metadata_type]))
-			metadata[metadata_type] = metadata_decl.default_value
+		metadata[metadata_type] = metadata_decl.sanitize_data(metadata[metadata_type])
 	return metadata
 
 /decl/sprite_accessory/proc/get_cached_accessory_icon_key(var/obj/item/organ/external/organ, var/list/metadata)
@@ -208,9 +210,6 @@
 
 		accessory_icon = icon(use_icon, use_state)
 
-		// Inner overlay and color.
-		var/inner_color = LAZYACCESS(metadata, SAM_COLOR_INNER)
-
 		// Base icon and color.
 		if(!isnull(color_blend))
 			var/decl/sprite_accessory_metadata/gradient/gradient_metadata = GET_DECL(SAM_GRADIENT)
@@ -221,21 +220,28 @@
 				gradient_icon = null
 			if(gradient_icon)
 				gradient_icon.Blend(accessory_icon, ICON_AND)
-				if(!isnull(inner_color))
-					gradient_icon.Blend(inner_color, color_blend)
+				var/gradient_color = LAZYACCESS(metadata, SAM_COLOR_INNER)
+				if(!isnull(gradient_color))
+					gradient_icon.Blend(gradient_color, color_blend)
 			var/color = LAZYACCESS(metadata, SAM_COLOR)
 			if(!isnull(color))
 				accessory_icon.Blend(color, color_blend)
 			if(gradient_icon)
 				accessory_icon.Blend(gradient_icon, ICON_OVERLAY)
 
-		if(!isnull(inner_color))
-			var/inner_state = "[use_state]_inner"
-			if(check_state_in_icon(inner_state, use_icon))
-				var/icon/inner_icon = icon(use_icon, inner_state)
-				if(!isnull(color_blend))
-					inner_icon.Blend(inner_color, color_blend)
-				accessory_icon.Blend(inner_icon, ICON_OVERLAY)
+		// Additional overlays based on metadata (inner and extra)
+		for(var/extra_metadata_type in additional_states)
+			var/decl/sprite_accessory_metadata/extra_metadata = RESOLVE_TO_DECL(extra_metadata_type)
+			if(!istype(extra_metadata) || !extra_metadata.additional_icon_state)
+				continue
+			var/extra_color = LAZYACCESS(metadata, SAM_COLOR_EXTRA)
+			if(!isnull(extra_color))
+				var/extra_state = "[use_state][extra_metadata.additional_icon_state]"
+				if(check_state_in_icon(extra_state, use_icon))
+					var/icon/extra_icon = icon(use_icon, extra_state)
+					if(!isnull(color_blend))
+						extra_icon.Blend(extra_color, color_blend)
+					accessory_icon.Blend(extra_icon, ICON_OVERLAY)
 
 		// Clip the icon if needed.
 		if(mask_to_bodypart)
@@ -265,5 +271,8 @@
 	return list(SAM_COLOR = get_random_colour())
 
 /decl/sprite_accessory_category/proc/prepare_character(mob/living/character, list/accessories)
+	return
+
+/decl/sprite_accessory_category/proc/prepare_mob_snapshot(datum/mob_snapshot/snapshot, list/accessories)
 	return
 

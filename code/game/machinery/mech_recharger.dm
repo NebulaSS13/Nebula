@@ -1,6 +1,6 @@
 /obj/machinery/mech_recharger
 	name = "exosuit dock"
-	desc = "A exosuit recharger, built into the floor."
+	desc = "An exosuit recharger, built into the floor."
 	icon = 'icons/mecha/mech_bay.dmi'
 	icon_state = "recharge_floor"
 	density = FALSE

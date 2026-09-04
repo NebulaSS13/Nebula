@@ -1,18 +1,18 @@
 #include "../../../../mods/mobs/dionaea/_dionaea.dme"
 
 /datum/map_template/ruin/exoplanet/playablecolony
-	name = "established colony"
-	description = "a fully functional colony on the frontier of settled space"
-	suffixes = list("playablecolony/colony.dmm")
-	cost = 2
+	name           = "established colony"
+	description    = "a fully functional colony on the frontier of settled space"
+	suffixes       = list("playablecolony/colony.dmm")
+	cost           = 2
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
-	template_tags = TEMPLATE_TAG_HUMAN|TEMPLATE_TAG_HABITAT
+	template_tags  = TEMPLATE_TAG_HUMAN|TEMPLATE_TAG_HABITAT
 	apc_test_exempt_areas = list(
 		/area/map_template/colony/mineralprocessing = NO_SCRUBBER|NO_VENT
 	)
 
 /decl/submap_archetype/playablecolony
-	descriptor = "established colony"
+	name      = "established colony"
 	crew_jobs = list(/datum/job/submap/colonist)
 
 /datum/job/submap/colonist

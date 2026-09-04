@@ -10,17 +10,6 @@
 	SHOULD_CALL_PARENT(TRUE)
 	..()
 	cut_overlays()
-	if(auras)
-		var/decl/bodytype/my_bodytype = get_bodytype()
-		for(var/obj/aura/aura as anything in auras)
-			var/image/A = new()
-			A.appearance = aura
-			if(my_bodytype)
-				if(my_bodytype.pixel_offset_x)
-					A.pixel_x += -(my_bodytype.pixel_offset_x)
-				if(my_bodytype.pixel_offset_y)
-					A.pixel_y += -(my_bodytype.pixel_offset_y)
-			add_overlay(A)
 	try_refresh_visible_overlays()
 
 /mob/living/proc/set_organ_sprite_accessory(var/accessory_type, var/accessory_category, var/accessory_metadata, var/organ_tag, var/skip_update = FALSE)
@@ -77,3 +66,24 @@
 
 /mob/living/get_current_mob_underlay(var/underlay_layer)
 	return mob_underlays[underlay_layer]
+
+/mob/living/refresh_visible_overlays()
+	. = ..()
+	var/list/modifier_overlays = null
+	for(var/decl/mob_modifier/archetype in _mob_modifiers)
+		var/image/status_overlay = archetype.get_modifier_mob_overlay(src)
+		if(status_overlay)
+			LAZYADD(modifier_overlays, status_overlay)
+	set_current_mob_overlay(HO_EFFECT_LAYER, modifier_overlays, FALSE)
+
+/decl/mob_modifier/proc/get_modifier_mob_overlay(mob/living/_owner)
+	if(!mob_overlay_icon || !mob_overlay_state || !istype(_owner))
+		return null
+	var/image/mob_overlay = overlay_image(mob_overlay_icon, mob_overlay_state, COLOR_WHITE, RESET_COLOR)
+	var/decl/bodytype/owner_bodytype = _owner.get_bodytype()
+	if(owner_bodytype)
+		if(owner_bodytype.pixel_offset_x)
+			mob_overlay.pixel_x += -(owner_bodytype.pixel_offset_x)
+		if(owner_bodytype.pixel_offset_y)
+			mob_overlay.pixel_y += -(owner_bodytype.pixel_offset_y)
+	return mob_overlay

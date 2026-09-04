@@ -50,6 +50,6 @@
 /proc/create_wormhole(turf/enter, turf/exit)
 	if(!enter || !exit)
 		return
-	var/obj/effect/portal/wormhole/W = new (enter)
-	W.target = exit
-	return W
+	var/obj/effect/portal/wormhole/wormhole = new (enter)
+	wormhole.target = exit
+	return wormhole

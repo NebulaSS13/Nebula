@@ -6,6 +6,7 @@
 #define MOVE_INTENT_NEUTRAL    BITFLAG(3)
 
 /decl/move_intent
+	abstract_type = /decl/move_intent
 	var/name
 	var/flags = MOVE_INTENT_NONE
 	var/move_delay = 1

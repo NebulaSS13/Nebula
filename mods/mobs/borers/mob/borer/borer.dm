@@ -9,8 +9,6 @@
 	response_disarm =  "prods"
 	response_harm =    "stamps on"
 	base_movement_delay = 2
-
-	a_intent = I_HURT
 	status_flags = CANPUSH
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	pass_flags = PASS_FLAG_TABLE
@@ -73,9 +71,9 @@
 	roundstart = TRUE
 
 /mob/living/simple_animal/borer/symbiote
-	name = "symbiote"
+	name      = "symbiote"
 	real_name = "symbiote"
-	neutered = TRUE
+	neutered  = TRUE
 
 /mob/living/simple_animal/borer/Login()
 	. = ..()
@@ -85,10 +83,11 @@
 
 /mob/living/simple_animal/borer/Initialize(var/mapload, var/gen=1)
 
+	hud_used = neutered ? /datum/hud/animal/borer/neutered : /datum/hud/animal/borer
+
 	. = ..()
 
 	add_language(/decl/language/corticalborer)
-	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
 	generation = gen
@@ -102,8 +101,8 @@
 
 /mob/living/simple_animal/borer/handle_vision()
 	. = ..()
-	set_status(STAT_BLIND,  host ? GET_STATUS(host, STAT_BLIND)  : 0)
-	set_status(STAT_BLURRY, host ? GET_STATUS(host, STAT_BLURRY) : 0)
+	set_status_condition(STAT_BLIND,  host ? GET_STATUS(host, STAT_BLIND)  : 0)
+	set_status_condition(STAT_BLURRY, host ? GET_STATUS(host, STAT_BLURRY) : 0)
 
 /mob/living/simple_animal/borer/handle_disabilities()
 	. = ..()
@@ -227,7 +226,7 @@
 #define COLOR_BORER_RED "#ff5555"
 /mob/living/simple_animal/borer/proc/set_ability_cooldown(var/amt)
 	set_special_ability_cooldown(amt)
-	var/datum/hud/borer/borer_hud = hud_used
+	var/datum/hud/animal/borer/borer_hud = hud_used
 	if(istype(borer_hud))
 		for(var/obj/thing in borer_hud.borer_hud_elements)
 			thing.color = COLOR_BORER_RED
@@ -236,7 +235,7 @@
 
 /mob/living/simple_animal/borer/proc/leave_host()
 
-	var/datum/hud/borer/borer_hud = hud_used
+	var/datum/hud/animal/borer/borer_hud = hud_used
 	if(istype(borer_hud))
 		for(var/obj/thing in borer_hud.borer_hud_elements)
 			thing.alpha = 0

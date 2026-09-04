@@ -7,10 +7,7 @@
 	layer = MOB_LAYER
 	density = TRUE
 	max_health = 100
-
 	preparing_arrest_sounds = new()
-
-	a_intent = I_HURT
 	mob_bump_flag = HEAVY
 	mob_swap_flags = ~HEAVY
 	mob_push_flags = HEAVY

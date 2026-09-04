@@ -6,31 +6,31 @@
 /obj/item/food/proc/get_combined_food_products()
 	return
 
-/obj/item/food/attackby(obj/item/W, mob/living/user)
+/obj/item/food/attackby(obj/item/used_item, mob/living/user)
 
-	if(W?.storage)
+	if(used_item?.storage)
 		return ..()
 
 	// Plating food.
-	if(istype(W, /obj/item/plate))
-		var/obj/item/plate/plate = W
+	if(istype(used_item, /obj/item/plate))
+		var/obj/item/plate/plate = used_item
 		if(plate.try_plate_food(src, user))
 			return TRUE
 
 	// Eating with forks
-	if(user.a_intent == I_HELP && do_utensil_interaction(W, user))
+	if(user.check_intent(I_FLAG_HELP) && do_utensil_interaction(used_item, user))
 		return TRUE
 
 	// Hiding items inside larger food items.
-	if(user.a_intent != I_HURT && is_sliceable() && W.w_class < w_class && !is_robot_module(W) && !istype(W, /obj/item/chems/condiment))
-		if(user.try_unequip(W, src))
-			to_chat(user, SPAN_NOTICE("You slip \the [W] inside \the [src]."))
+	if(!user.check_intent(I_FLAG_HARM) && is_sliceable() && used_item.w_class < w_class && !is_robot_module(used_item) && !istype(used_item, /obj/item/chems/condiment))
+		if(user.try_unequip(used_item, src))
+			to_chat(user, SPAN_NOTICE("You slip \the [used_item] inside \the [src]."))
 			add_fingerprint(user)
-			W.forceMove(src)
+			used_item.forceMove(src)
 		return TRUE
 
 	// Creating food combinations.
-	if(try_create_combination(W, user))
+	if(try_create_combination(used_item, user))
 		return TRUE
 
 	return ..()
@@ -38,8 +38,8 @@
 /obj/item/food/proc/get_grown_tag()
 	return
 
-/obj/item/food/proc/try_create_combination(obj/item/W, mob/user)
-	if(!length(get_combined_food_products()) || !istype(W) || QDELETED(src) || QDELETED(W))
+/obj/item/food/proc/try_create_combination(obj/item/used_item, mob/user)
+	if(!length(get_combined_food_products()) || !istype(used_item) || QDELETED(src) || QDELETED(used_item))
 		return FALSE
 
 	// See if we can make anything with this.
@@ -47,9 +47,9 @@
 	if(!length(combined_food_products))
 		return FALSE
 
-	var/create_type = combined_food_products[W.type]
-	if(!create_type && istype(W, /obj/item/food))
-		var/obj/item/food/food = W
+	var/create_type = combined_food_products[used_item.type]
+	if(!create_type && istype(used_item, /obj/item/food))
+		var/obj/item/food/food = used_item
 		var/check_grown_tag = food.get_grown_tag()
 		if(check_grown_tag)
 			create_type = combined_food_products[check_grown_tag]
@@ -59,20 +59,20 @@
 		for(var/food_type in create_type)
 			names[atom_info_repository.get_name_for(food_type)] = food_type
 		create_type = input(user, "What do you want to make?", "Food Assembly") as null|anything in names
-		if(!create_type || QDELETED(user) || user.incapacitated() || QDELETED(src) || QDELETED(W))
+		if(!create_type || QDELETED(user) || user.incapacitated() || QDELETED(src) || QDELETED(used_item))
 			return TRUE
 		create_type = names[create_type]
 
 	// TODO: move reagents/matter into produced food object.
-	if(ispath(create_type) && user.canUnEquip(src))
+	if(ispath(create_type) && user.can_unequip_item(src))
 		var/obj/item/food/result
 		if(ispath(create_type, /obj/item/food))
 
 			// Create the food with no plate, and move over any existing plate.
 			result = new create_type(null, null, TRUE) // Skip plate creation.
 
-			if(istype(W, /obj/item/food))
-				var/obj/item/food/other_food = W
+			if(istype(used_item, /obj/item/food))
+				var/obj/item/food/other_food = used_item
 				result.plate = other_food.plate
 				other_food.plate = null
 
@@ -92,18 +92,18 @@
 			user.put_in_hands(result)
 		else
 			result.dropInto(loc)
-		qdel(W)
+		qdel(used_item)
 		qdel(src)
 		to_chat(user, SPAN_NOTICE("You make \the [result]!"))
 		return TRUE
 
 	// Reverse the interaction to avoid the dumb thing where combinations aren't commutative.
-	var/obj/item/food/food = W
+	var/obj/item/food/food = used_item
 	if(istype(food))
 		return food.try_create_combination(src, user)
 	return FALSE
 
-/obj/item/food/examine(mob/user, distance)
+/obj/item/food/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance > 1)
 		return
@@ -120,7 +120,7 @@
 			product_string = english_list(names, and_text = " or ")
 		else
 			product_string = "\a [atom_info_repository.get_name_for(product)]"
-		to_chat(user, SPAN_NOTICE("With this and \a [ispath(thing_type) ? atom_info_repository.get_name_for(thing_type): thing_type], you could make [product_string]."))
+		. += SPAN_NOTICE("With this and \a [ispath(thing_type) ? atom_info_repository.get_name_for(thing_type): thing_type], you could make [product_string].")
 
 /obj/item/food/bun/get_combined_food_products()
 	var/static/list/combined_food_products = list(

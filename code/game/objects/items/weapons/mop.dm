@@ -7,10 +7,12 @@
 	throw_range = 10
 	w_class = ITEM_SIZE_NORMAL
 	attack_verb = list("mopped", "bashed", "bludgeoned", "whacked")
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	matter = list(
 		/decl/material/solid/organic/cloth = MATTER_AMOUNT_SECONDARY,
 	)
+	chem_volume = 30
+
 	var/mopspeed = 40
 	var/static/list/moppable_types
 
@@ -23,13 +25,8 @@
 
 /obj/item/mop/Initialize()
 	. = ..()
-	initialize_reagents()
 	if(!moppable_types)
 		populate_moppable_types()
-
-/obj/item/mop/initialize_reagents(populate = TRUE)
-	create_reagents(30)
-	. = ..()
 
 /obj/item/mop/afterattack(atom/A, mob/user, proximity)
 	if(!proximity)
@@ -38,13 +35,14 @@
 	if(!istype(moppable_turf))
 		return ..()
 
-	if(moppable_turf?.reagents?.total_volume > 0)
-		if(moppable_turf.reagents.total_volume > FLUID_SHALLOW)
+	var/mop_reagents = REAGENT_TOTAL_VOLUME(moppable_turf?.reagents)
+	if(mop_reagents > 0)
+		if(mop_reagents > FLUID_SHALLOW)
 			to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 			return TRUE
 		user.visible_message(SPAN_NOTICE("\The [user] begins to mop up \the [moppable_turf]."))
 		if(do_after(user, 40, moppable_turf) && !QDELETED(moppable_turf))
-			if(moppable_turf.reagents?.total_volume > FLUID_SHALLOW)
+			if(REAGENT_TOTAL_VOLUME(moppable_turf.reagents) > FLUID_SHALLOW)
 				to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 			else
 				to_chat(user, SPAN_NOTICE("You have finished mopping!"))
@@ -54,22 +52,22 @@
 	if(!is_type_in_list(A, moppable_types))
 		return ..()
 
-	if(reagents?.total_volume < 1)
+	if(REAGENT_TOTAL_VOLUME(reagents) < 1)
 		to_chat(user, SPAN_WARNING("\The [src] is dry!"))
 		return TRUE
 
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		user.visible_message(SPAN_DANGER("\The [user] begins to aggressively mop \the [moppable_turf]!"))
 	else
 		user.visible_message(SPAN_NOTICE("\The [user] begins to clean \the [moppable_turf]."))
-	if(do_after(user, mopspeed, moppable_turf) && reagents?.total_volume)
+	if(do_after(user, mopspeed, moppable_turf) && REAGENT_TOTAL_VOLUME(reagents))
 		reagents.touch_turf(moppable_turf)
 		reagents.remove_any(1)
 		to_chat(user, SPAN_NOTICE("You have finished mopping!"))
 	return TRUE
 
-/obj/effect/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/mop) || istype(I, /obj/item/soap))
+/obj/effect/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/mop) || istype(used_item, /obj/item/soap))
 		return FALSE
 	return ..()
 
@@ -106,12 +104,12 @@
 	playsound(user, 'sound/machines/click.ogg', 30, 1)
 
 /obj/item/mop/advanced/Process()
-	if(reagents.total_volume < reagents.maximum_volume)
+	if(REAGENT_TOTAL_VOLUME(reagents) < REAGENT_MAXIMUM_VOLUME(reagents))
 		add_to_reagents(refill_reagent, refill_rate)
 
-/obj/item/mop/advanced/examine(mob/user)
+/obj/item/mop/advanced/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, SPAN_NOTICE("The condenser switch is set to <b>[refill_enabled ? "ON" : "OFF"]</b>."))
+	. += SPAN_NOTICE("The condenser switch is set to <b>[refill_enabled ? "ON" : "OFF"]</b>.")
 
 /obj/item/mop/advanced/Destroy()
 	STOP_PROCESSING(SSobj, src)

@@ -42,30 +42,22 @@
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
-/obj/machinery/psi_meter/Topic(href, href_list)
+/obj/machinery/psi_meter/OnTopic(mob/user, href_list)
 	. = ..()
-	if(!.)
-
-		if(!issilicon(usr) && !Adjacent(usr))
-			return FALSE
-
-		var/refresh
-		if(href_list["print"])
-			if(last_assay)
-				var/obj/item/paper/P = new(loc)
-				P.name = "paper - Psi-Assay ([last_assayed.name])"
-				P.info = jointext(last_assay - last_assay[last_assay.len],null) // Last line is 'print | clear' link line.
-				return TRUE
-
-		if(href_list["clear"])
-			last_assay = null
-			refresh = TRUE
-		else if(href_list["assay"])
-			last_assayed = locate(href_list["assay"])
-			if(istype(last_assayed))
-				last_assayed.show_psi_assay(usr, src)
-				refresh = TRUE
-
-		if(refresh)
-			interact(usr)
-			return TRUE
+	if(.)
+		return
+	if(href_list["print"])
+		if(last_assay)
+			var/obj/item/paper/P = new(loc)
+			P.name = "paper - Psi-Assay ([last_assayed.name])"
+			P.info = jointext(last_assay - last_assay[last_assay.len],null) // Last line is 'print | clear' link line.
+			return TOPIC_HANDLED
+	if(href_list["clear"])
+		last_assay = null
+		return TOPIC_REFRESH
+	else if(href_list["assay"])
+		last_assayed = locate(href_list["assay"])
+		if(istype(last_assayed))
+			last_assayed.show_psi_assay(usr, src)
+			return TOPIC_REFRESH
+	return TOPIC_NOACTION

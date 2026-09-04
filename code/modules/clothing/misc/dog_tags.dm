@@ -12,7 +12,7 @@
 	var/owner_branch
 
 /obj/item/clothing/dog_tags/attack_self(mob/user)
-	if(user.a_intent != I_HURT)
+	if(!user.check_intent(I_FLAG_HARM))
 		user.visible_message(SPAN_NOTICE("\The [user] displays \the [src]."))
 		if(owner_name)
 			user.visible_message(SPAN_NOTICE("They read: \"[owner_name] - [owner_rank] - [owner_branch].\""))

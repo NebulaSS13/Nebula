@@ -26,27 +26,35 @@
 
 //Takes a list of the form list(message, verb, whispering) and modifies it as needed
 //Returns 1 if a speech problem was applied, 0 otherwise
-/mob/living/proc/handle_speech_problems(var/list/message_data)
-	var/message = message_data[1]
-	var/verb = message_data[2]
+/mob/living/proc/handle_speech_problems(var/list/message_data, var/decl/language/spoken)
+	var/say_message = message_data[1]
+	var/say_verb = message_data[2]
 
-	. = 0
-
-	if(HAS_STATUS(src, STAT_SLUR))
-		message = slur(message)
-		verb = pick("slobbers","slurs")
-		. = 1
+	. = FALSE
+	var/obj/item/clothing/mask/M = get_equipped_item(slot_wear_mask_str)
+	if(istype(M) && M.voicechange)
+		say_message = pick(M.say_messages)
+		say_verb = pick(M.say_verbs)
+		. = TRUE
+	else if(HAS_STATUS(src, STAT_SILENCE) || has_genetic_condition(GENE_COND_MUTED))
+		to_chat(src, SPAN_WARNING("You are unable to speak!"))
+		say_message = ""
+		. = TRUE
+	else if(HAS_STATUS(src, STAT_SLUR))
+		say_message = slur(say_message)
+		say_verb = pick("slobbers","slurs")
+		. = TRUE
 	else if(HAS_STATUS(src, STAT_STUTTER))
-		message = NewStutter(message)
-		verb = pick("stammers","stutters")
-		. = 1
+		say_message = NewStutter(say_message)
+		say_verb = pick("stammers","stutters")
+		. = TRUE
 	else if(has_chemical_effect(CE_SQUEAKY, 1))
-		message = "<font face = 'Comic Sans MS'>[message]</font>"
-		verb = "squeaks"
-		. = 1
+		say_message = "<font face = 'Comic Sans MS'>[say_message]</font>"
+		say_verb = "squeaks"
+		. = TRUE
 
-	message_data[1] = message
-	message_data[2] = verb
+	message_data[1] = say_message
+	message_data[2] = say_verb
 
 // Grabs any radios equipped to the mob, with message_mode used to
 // determine relevancy. See handle_message_mode below.
@@ -179,6 +187,9 @@
 			to_chat(src, SPAN_WARNING("You don't have the right equipment to communicate in that way!")) // weird phrasing, but needs to cover speaking and signing
 			return
 
+	// The LANG_FLAG_NO_STUTTER check means nonvocal or unusually-produced
+	// languages (e.g. sign language, noise emotes, computer beeps)
+	// will not be affected by stuttering, slurring, silence, etc. effects.
 	if(!(speaking && (speaking.flags & LANG_FLAG_NO_STUTTER)))
 		var/list/message_data = list(message, verb, 0)
 		if(handle_speech_problems(message_data))

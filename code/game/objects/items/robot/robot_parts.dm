@@ -22,12 +22,12 @@
 		if(!ispath(model, /decl/bodytype/prosthetic))
 			model = /decl/bodytype/prosthetic/basic_human
 		model_info = model
-		var/decl/bodytype/prosthetic/R = GET_DECL(model)
-		if(R)
-			SetName("[R.name] [initial(name)]")
-			desc = "[R.desc]"
-			if(icon_state in icon_states(R.icon_base))
-				icon = R.icon_base
+		var/decl/bodytype/prosthetic/robot_model = GET_DECL(model)
+		if(robot_model)
+			SetName("[robot_model.name] [initial(name)]")
+			desc = "[robot_model.desc]"
+			if(icon_state in icon_states(robot_model.icon_base))
+				icon = robot_model.icon_base
 	else
 		SetDefaultName()
 
@@ -41,7 +41,7 @@
 	name = "left arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_arm"
-	model_info = 1
+	model_info = TRUE
 	bp_tag = BP_L_ARM
 	material = /decl/material/solid/metal/steel
 
@@ -49,7 +49,7 @@
 	name = "right arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_arm"
-	model_info = 1
+	model_info = TRUE
 	bp_tag = BP_R_ARM
 	material = /decl/material/solid/metal/steel
 
@@ -57,7 +57,7 @@
 	name = "left leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_leg"
-	model_info = 1
+	model_info = TRUE
 	bp_tag = BP_L_LEG
 	material = /decl/material/solid/metal/steel
 
@@ -65,7 +65,7 @@
 	name = "right leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_leg"
-	model_info = 1
+	model_info = TRUE
 	bp_tag = BP_R_LEG
 	material = /decl/material/solid/metal/steel
 
@@ -73,7 +73,7 @@
 	name = "head"
 	desc = "A standard reinforced braincase, with spine-plugged neural socket and sensor gimbals."
 	icon_state = "head"
-	model_info = 1
+	model_info = TRUE
 	bp_tag = BP_HEAD
 	material = /decl/material/solid/metal/steel
 	var/obj/item/flash/flash1 = null
@@ -90,7 +90,7 @@
 	name = "torso"
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
 	icon_state = "chest"
-	model_info = 1
+	model_info = TRUE
 	bp_tag = BP_CHEST
 	material = /decl/material/solid/metal/steel
 	var/wires = 0.0
@@ -106,54 +106,54 @@
 		success = FALSE
 	return success && ..()
 
-/obj/item/robot_parts/chest/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/cell))
+/obj/item/robot_parts/chest/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/cell))
 		if(src.cell)
 			to_chat(user, "<span class='warning'>You have already inserted a cell!</span>")
 		else
-			if(!user.try_unequip(W, src))
+			if(!user.try_unequip(used_item, src))
 				return TRUE
-			src.cell = W
+			src.cell = used_item
 			to_chat(user, "<span class='notice'>You insert the cell!</span>")
 		return TRUE
-	if(IS_COIL(W))
+	if(IS_COIL(used_item))
 		if(src.wires)
 			to_chat(user, "<span class='warning'>You have already inserted wire!</span>")
 		else
-			var/obj/item/stack/cable_coil/coil = W
+			var/obj/item/stack/cable_coil/coil = used_item
 			if(coil.use(1))
 				src.wires = 1.0
 				to_chat(user, "<span class='notice'>You insert the wire!</span>")
 		return TRUE
 	return ..()
 
-/obj/item/robot_parts/head/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/flash))
+/obj/item/robot_parts/head/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/flash))
 		if(isrobot(user))
 			var/current_module = user.get_active_held_item()
-			if(current_module == W)
+			if(current_module == used_item)
 				to_chat(user, "<span class='warning'>How do you propose to do that?</span>")
 				return TRUE
 			else
-				add_flashes(W,user)
+				add_flashes(used_item,user)
 		else
-			add_flashes(W,user)
+			add_flashes(used_item,user)
 		return TRUE
 	return ..()
 
-/obj/item/robot_parts/head/proc/add_flashes(obj/item/W, mob/user) //Made into a seperate proc to avoid copypasta
+/obj/item/robot_parts/head/proc/add_flashes(obj/item/used_item, mob/user) //Made into a seperate proc to avoid copypasta
 	if(src.flash1 && src.flash2)
 		to_chat(user, "<span class='notice'>You have already inserted the eyes!</span>")
 		return
 	else if(src.flash1)
-		if(!user.try_unequip(W, src))
+		if(!user.try_unequip(used_item, src))
 			return
-		src.flash2 = W
+		src.flash2 = used_item
 		to_chat(user, "<span class='notice'>You insert the flash into the eye socket!</span>")
 	else
-		if(!user.try_unequip(W, src))
+		if(!user.try_unequip(used_item, src))
 			return
-		src.flash1 = W
+		src.flash1 = used_item
 		to_chat(user, "<span class='notice'>You insert the flash into the eye socket!</span>")
 
 

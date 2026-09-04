@@ -98,7 +98,7 @@ var/global/datum/repository/crew/crew_repository = new()
 	var/current_priority = INFINITY
 	var/list/modifiers_of_this_priority = list()
 
-	for(var/crew_sensor_modifier/csm in modifiers.L)
+	for(var/crew_sensor_modifier/csm in modifiers.GetQueue())
 		if(csm.priority < current_priority)
 			. = check_queue(modifiers_of_this_priority, H, S, pos, crew_data)
 			if(. != MOD_SUIT_SENSORS_NONE)
@@ -123,7 +123,7 @@ var/global/datum/repository/crew/crew_repository = new()
 	var/datum/priority_queue/pq = modifier_queues_by_type[base_type]
 	if(!pq)
 		CRASH("The given base type was not a valid base type.")
-	if(csm in pq.L)
+	if(csm in pq.GetQueue())
 		CRASH("This crew sensor modifier has already been supplied.")
 	pq.Enqueue(csm)
 	return TRUE

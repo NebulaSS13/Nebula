@@ -54,8 +54,9 @@
 // Carbon Paper Alt Interactions
 /////////////////////////////////////////////////
 /decl/interaction_handler/carbon_paper_remove
-	name = "remove carbon-copy"
+	name = "Remove Carbon-Copy"
 	expected_target_type = /obj/item/paper/carbon
+	examine_desc = "remove the carbon-copy"
 
 /decl/interaction_handler/carbon_paper_remove/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/paper/carbon/paper = target

@@ -80,9 +80,9 @@
 				continue
 
 			var/danger_level = max(alarm.danger_level, alarm.alarm_area.atmosalm)
-			if(danger_level == 2)
+			if(danger_level == /obj/machinery/alarm::DANGER_DANGER)
 				alarmsAlert[++alarmsAlert.len] = list("name" = alarm_name, "ref"= "\ref[alarm]", "danger" = danger_level)
-			else if(danger_level == 1)
+			else if(danger_level == /obj/machinery/alarm::DANGER_WARN)
 				alarmsDanger[++alarmsDanger.len] = list("name" = alarm_name, "ref"= "\ref[alarm]", "danger" = danger_level)
 			else
 				alarms[++alarms.len] = list("name" = alarm_name, "ref"= "\ref[alarm]", "danger" = danger_level)

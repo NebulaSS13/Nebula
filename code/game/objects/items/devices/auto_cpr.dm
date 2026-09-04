@@ -24,7 +24,7 @@
 
 /obj/item/auto_cpr/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(ishuman(target) && user.a_intent == I_HELP)
+	if(ishuman(target) && user.check_intent(I_FLAG_HELP))
 		var/obj/item/suit = target.get_equipped_item(slot_wear_suit_str)
 		if(suit)
 			to_chat(user, SPAN_WARNING("Their [suit] is in the way, remove it first!"))

@@ -95,7 +95,7 @@
 	if(alert("Are you sure you want to create this? It will appear at your position.",,"No","Yes") != "Yes")
 		return
 
-	var/datum/random_map/winding_dungeon/W = /datum/random_map/winding_dungeon
+	var/datum/random_map/winding_dungeon/dungeon = /datum/random_map/winding_dungeon
 
 	for(var/x in 1 to vars["limit_x"])
 		for(var/y in 1 to vars["limit_y"])
@@ -104,5 +104,5 @@
 			if(!T)
 				to_chat(src, "<span class='danger'>Error, turf could not be located. Probably out of bounds.</span>")
 				return
-			T.ChangeTurf(initial(W.target_turf_type))
+			T.ChangeTurf(initial(dungeon.target_turf_type))
 	new /datum/random_map/winding_dungeon(usr.x, usr.y, usr.z, variable_list = vars)

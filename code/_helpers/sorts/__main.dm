@@ -169,7 +169,7 @@ reverse a descending sequence without violating stability.
 	var/r = 0	//becomes 1 if any bits are shifted off
 	while(n >= MIN_MERGE)
 		r |= (n & 1)
-		n >>= 1
+		n = BITSHIFT_RIGHT(n, 1)
 	return n + r
 
 //Examines the stack of runs waiting to be merged and merges adjacent runs until the stack invariants are reestablished:

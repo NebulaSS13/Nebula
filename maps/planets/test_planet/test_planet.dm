@@ -7,7 +7,7 @@
 
 /datum/gas_mixture/atmos_neutralia
 	temperature = T20C
-	gas = list(
+	gas = alist(
 		/decl/material/gas/oxygen   = MOLES_O2STANDARD,
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD,
 	)

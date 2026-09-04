@@ -30,10 +30,9 @@
 	generate_overmap()
 	testing("Overmap build for [name] complete.")
 
-	for(var/event_type in subtypesof(/datum/overmap_event))
-		var/datum/overmap_event/event = event_type
-		if(initial(event.overmap_id) == name)
-			LAZYADD(valid_event_types, event_type)
+	for(var/decl/overmap_event/event in decls_repository.get_decls_of_subtype_unassociated(/decl/overmap_event))
+		if(event.overmap_id == name)
+			LAZYADD(valid_event_types, event.type)
 
 	..()
 
@@ -44,7 +43,7 @@
 			square = square.ChangeTurf(overmap_edge_type)
 		else
 			square = square.ChangeTurf(overmap_turf_type)
-		ChangeArea(square, A)
+		square.ChangeArea(A)
 
 /datum/overmap/proc/generate_overmap()
 	testing("Building overmap [name]...")
@@ -62,7 +61,7 @@
 	if (!T || !A)
 		return
 
-	var/obj/effect/overmap/visitable/M = global.overmap_sectors[num2text(T.z)]
+	var/obj/effect/overmap/visitable/M = global.overmap_sectors[T.z]
 	if (!M)
 		return
 

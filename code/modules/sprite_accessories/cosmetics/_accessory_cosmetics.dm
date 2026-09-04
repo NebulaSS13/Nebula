@@ -1,5 +1,6 @@
 /decl/sprite_accessory_category/cosmetics
 	name                        = "Cosmetics"
+	single_selection            = FALSE
 	default_accessory           = /decl/sprite_accessory/cosmetics/none
 	base_accessory_type         = /decl/sprite_accessory/cosmetics
 	uid                         = "acc_cat_cosmetics"
@@ -12,7 +13,6 @@
 	bodytypes_allowed           = null
 	bodytypes_denied            = null
 	species_allowed             = null
-	subspecies_allowed          = null
 	bodytype_categories_allowed = null
 	bodytype_categories_denied  = null
 	body_flags_allowed          = null

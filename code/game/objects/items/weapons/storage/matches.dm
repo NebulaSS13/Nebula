@@ -11,15 +11,15 @@
 /obj/item/box/matches/WillContain()
 	return list(/obj/item/flame/match = 10)
 
-/obj/item/box/matches/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/flame/match))
-		var/obj/item/flame/match/match = W
+/obj/item/box/matches/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/flame/match))
+		var/obj/item/flame/match/match = used_item
 		if(match.light(null, no_message = TRUE))
 			playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
 			user.visible_message(
-				SPAN_NOTICE("[user] strikes [W] on \the [src]."),
-				SPAN_NOTICE("You strike [W] on \the [src].")
+				SPAN_NOTICE("[user] strikes [used_item] on \the [src]."),
+				SPAN_NOTICE("You strike [used_item] on \the [src].")
 			)
-			W.update_icon()
+			used_item.update_icon()
 			return TRUE
 	return ..()

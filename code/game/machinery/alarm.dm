@@ -65,15 +65,18 @@
 	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":-21}, "WEST":{"x":21}}'
 
 	var/alarm_id = null
-	var/breach_detection = 1 // Whether to use automatic breach detection or not
+	var/breach_detection = TRUE // Whether to use automatic breach detection or not
 	var/frequency = 1439
 	var/alarm_frequency = 1437
-	var/remote_control = 0
-	var/rcon_setting = 2
+	/// If TRUE, remote controllers like the atmos control computer can control the air alarm; if FALSE, they can only view it.
+	/// Typically auto-set by rcon_setting.
+	var/remote_control = FALSE
+	/// On RCON_AUTO, remote control is enabled when danger_level is DANGER_DANGER.
+	var/rcon_setting = RCON_AUTO
 	var/rcon_remote_override_access = list(access_ce)
-	var/locked = 1
-	var/aidisabled = 0
-	var/shorted = 0
+	var/locked = TRUE
+	var/aidisabled = FALSE
+	var/shorted = FALSE
 
 	var/mode = AALARM_MODE_SCRUBBING
 	var/screen = AALARM_SCREEN_MAIN
@@ -89,14 +92,17 @@
 	var/list/TLV = list() // stands for Threshold Limit Value, since it handles exposure amounts
 	var/list/trace_gas = list() //list of other gases that this air alarm is able to detect
 
-	var/danger_level = 0
-	var/pressure_dangerlevel = 0
-	var/oxygen_dangerlevel = 0
-	var/co2_dangerlevel = 0
-	var/temperature_dangerlevel = 0
-	var/other_dangerlevel = 0
+	var/const/DANGER_NONE   = 0
+	var/const/DANGER_WARN   = 1
+	var/const/DANGER_DANGER = 2 // danger, danger, circuits ready
+	var/danger_level = DANGER_NONE
+	var/pressure_dangerlevel = DANGER_NONE
+	var/oxygen_dangerlevel = DANGER_NONE
+	var/co2_dangerlevel = DANGER_NONE
+	var/temperature_dangerlevel = DANGER_NONE
+	var/other_dangerlevel = DANGER_NONE
 	var/environment_type = /decl/environment_data
-	var/report_danger_level = 1
+	var/report_danger_level = TRUE
 
 /obj/machinery/alarm/cold
 	target_temperature = T0C+4
@@ -159,7 +165,7 @@
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
 	var/decl/environment_data/env_info = GET_DECL(environment_type)
-	for(var/g in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
+	for(var/g in get_filterable_material_types())
 		if(!env_info.important_gasses[g])
 			trace_gas += g
 	// not everything in these lists is a subtype of /decl/material/gas, so:
@@ -215,14 +221,14 @@
 	//atmos computer remote controll stuff
 	switch(rcon_setting)
 		if(RCON_NO)
-			remote_control = 0
+			remote_control = FALSE
 		if(RCON_AUTO)
-			if(danger_level == 2)
-				remote_control = 1
+			if(danger_level == DANGER_DANGER)
+				remote_control = TRUE
 			else
-				remote_control = 0
+				remote_control = FALSE
 		if(RCON_YES)
-			remote_control = 1
+			remote_control = TRUE
 
 	return
 
@@ -272,7 +278,7 @@
 			environment.merge(gas)
 
 /obj/machinery/alarm/proc/overall_danger_level(var/datum/gas_mixture/environment)
-	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
+	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.total_volume
 	var/environment_pressure = environment.return_pressure()
 
 	var/other_moles = 0
@@ -318,10 +324,10 @@
 
 /obj/machinery/alarm/proc/get_danger_level(var/current_value, var/list/danger_levels)
 	if((current_value >= danger_levels[4] && danger_levels[4] > 0) || current_value <= danger_levels[1])
-		return 2
+		return DANGER_DANGER
 	if((current_value > danger_levels[3] && danger_levels[3] > 0) || current_value < danger_levels[2])
-		return 1
-	return 0
+		return DANGER_WARN
+	return DANGER_NONE
 
 /obj/machinery/alarm/on_update_icon()
 	// Broken or deconstructed states
@@ -477,7 +483,7 @@
 /obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/data[0]
 	var/remote_connection = istype(state, /datum/topic_state/remote)  // Remote connection means we're non-adjacent/connecting from another computer
-	var/remote_access = remote_connection && CanInteract(user, state) // Remote access means we also have the privilege to alter the air alarm.
+	var/remote_access = remote_control && remote_connection && CanInteract(user, state) // Remote access means we also have the privilege to alter the air alarm.
 
 	data["locked"] = locked && !issilicon(user)
 	data["remote_connection"] = remote_connection
@@ -667,7 +673,7 @@
 			var/device_id = href_list["id_tag"]
 			switch(href_list["command"])
 				if("set_external_pressure")
-					var/input_pressure = input(user, "What pressure you like the system to mantain?", "Pressure Controls") as num|null
+					var/input_pressure = input(user, "What pressure you like the system to maintain?", "Pressure Controls") as num|null
 					if(isnum(input_pressure) && CanUseTopic(user, state))
 						send_signal(device_id, list(href_list["command"] = input_pressure))
 					return TOPIC_REFRESH
@@ -845,16 +851,15 @@ FIRE ALARM
 	var/time =         1 SECOND
 	var/timing =       FALSE
 	var/last_process = 0
-	var/static/list/overlays_cache
 
 	var/sound_id
 	var/datum/sound_token/sound_token
 
-/obj/machinery/firealarm/examine(mob/user)
+/obj/machinery/firealarm/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(isContactLevel(loc.z))
 		var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
+		. += "The current alert level is [security_state.current_security_level.name]."
 
 /obj/machinery/firealarm/on_update_icon()
 	cut_overlays()
@@ -884,18 +889,18 @@ FIRE ALARM
 			set_light(2, 0.25, COLOR_RED)
 		else if(isContactLevel(z))
 			var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-			var/decl/security_level/sl = security_state.current_security_level
+			var/decl/security_level/sec_level = security_state.current_security_level
 
-			set_light(sl.light_power, sl.light_range, sl.light_color_alarm)
+			set_light(sec_level.light_power, sec_level.light_range, sec_level.light_color_alarm)
 
-			if(sl.alarm_appearance.alarm_icon)
-				var/image/alert1 = image(sl.icon, sl.alarm_appearance.alarm_icon)
-				alert1.color = sl.alarm_appearance.alarm_icon_color
+			if(sec_level.alarm_appearance.alarm_icon)
+				var/image/alert1 = image(sec_level.icon, sec_level.alarm_appearance.alarm_icon)
+				alert1.color = sec_level.alarm_appearance.alarm_icon_color
 				add_overlay(alert1)
 
-			if(sl.alarm_appearance.alarm_icon_twotone)
-				var/image/alert2 = image(sl.icon, sl.alarm_appearance.alarm_icon_twotone)
-				alert2.color = sl.alarm_appearance.alarm_icon_twotone_color
+			if(sec_level.alarm_appearance.alarm_icon_twotone)
+				var/image/alert2 = image(sec_level.icon, sec_level.alarm_appearance.alarm_icon_twotone)
+				alert2.color = sec_level.alarm_appearance.alarm_icon_twotone_color
 				add_overlay(alert2)
 		else
 			add_overlay("fire0")
@@ -913,7 +918,7 @@ FIRE ALARM
 		alarm(rand(30/severity, 60/severity))
 	..()
 
-/obj/machinery/firealarm/attackby(obj/item/W, mob/user)
+/obj/machinery/firealarm/attackby(obj/item/used_item, mob/user)
 	if((. = ..()))
 		return
 	src.alarm()
@@ -924,14 +929,14 @@ FIRE ALARM
 
 	if(src.timing)
 		if(src.time > 0)
-			src.time = src.time - ((world.timeofday - last_process)/10)
+			src.time = src.time - ((REALTIMEOFDAY - last_process)/(1 SECOND))
 		else
 			src.alarm()
 			src.time = 0
 			src.timing = 0
 			STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		src.updateDialog()
-	last_process = world.timeofday
+	last_process = REALTIMEOFDAY
 
 	if(locate(/obj/fire) in loc)
 		alarm()
@@ -989,7 +994,7 @@ FIRE ALARM
 		. = TOPIC_REFRESH
 	else if (href_list["time"])
 		src.timing = text2num(href_list["time"])
-		last_process = world.timeofday
+		last_process = REALTIMEOFDAY
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		. = TOPIC_REFRESH
 	else if (href_list["tp"])

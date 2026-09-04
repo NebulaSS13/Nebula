@@ -53,7 +53,7 @@
 	if(!child_shuttle || !istype(child_shuttle))
 		return
 	if(child_shuttle.current_location.flags & SLANDMARK_FLAG_DISCONNECTED) // Keep an eye on the distance between the shuttle and the sector if we aren't fully docked.
-		var/obj/effect/overmap/visitable/ship/landable/encounter = global.overmap_sectors[num2text(child_shuttle.current_location.z)]
+		var/obj/effect/overmap/visitable/ship/landable/encounter = global.overmap_sectors[child_shuttle.current_location.z]
 		if((get_dist(src, encounter) > min(child_shuttle.range, 1))) // Some leeway so 0 range shuttles are still able to chase.
 			child_shuttle.attempt_force_move(landmark)
 		if(istype(encounter))
@@ -63,9 +63,10 @@
 // We autobuild our z levels.
 /obj/effect/overmap/visitable/ship/landable/find_z_levels()
 	if(!use_mapped_z_levels)
+		var/initial_z = world.maxz
+		SSmapping.bulk_increment_world_z_size(multiz + 1, level_type)
 		for(var/i = 0 to multiz)
-			SSmapping.increment_world_z_size(level_type)
-			map_z += world.maxz
+			map_z += initial_z + i + 1
 	else
 		..()
 
@@ -145,7 +146,7 @@
 	ADJUST_TAG_VAR(shuttle_name, map_hash)
 
 /obj/effect/shuttle_landmark/ship/Destroy()
-	var/obj/effect/overmap/visitable/ship/landable/ship = global.overmap_sectors[num2text(z)]
+	var/obj/effect/overmap/visitable/ship/landable/ship = global.overmap_sectors[z]
 	if(istype(ship) && ship.landmark == src)
 		ship.landmark = null
 	. = ..()
@@ -209,7 +210,7 @@
 	on_landing(from, into)
 
 /obj/effect/overmap/visitable/ship/landable/proc/on_landing(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
-	var/obj/effect/overmap/visitable/target = global.overmap_sectors[num2text(into.z)]
+	var/obj/effect/overmap/visitable/target = global.overmap_sectors[into.z]
 	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
 	if(into.landmark_tag == shuttle_datum.motherdock) // If our motherdock is a landable ship, it won't be found properly here so we need to find it manually.
 		for(var/obj/effect/overmap/visitable/ship/landable/landable in SSshuttle.ships)
@@ -231,14 +232,14 @@
 		if(SHIP_STATUS_LANDED)
 			var/obj/effect/overmap/visitable/location = loc
 			if(istype(loc, /obj/effect/overmap/visitable/sector))
-				return "Landed on \the [location.name]. Use secondary thrust to get clear before activating primary engines."
+				return "Landed on \the [location]. Use secondary thrust to get clear before activating primary engines."
 			if(istype(loc, /obj/effect/overmap/visitable/ship))
-				return "Docked with \the [location.name]. Use secondary thrust to get clear before activating primary engines."
+				return "Docked with \the [location]. Use secondary thrust to get clear before activating primary engines."
 			return "Docked with an unknown object."
 		if(SHIP_STATUS_ENCOUNTER)
 			var/datum/shuttle/autodock/overmap/child_shuttle = SSshuttle.shuttles[shuttle]
-			var/obj/effect/overmap/visitable/location = global.overmap_sectors[num2text(child_shuttle.current_location.z)]
-			return "Maneuvering nearby \the [location.name]."
+			var/obj/effect/overmap/visitable/location = global.overmap_sectors[child_shuttle.current_location.z]
+			return "Maneuvering nearby \the [location]."
 		if(SHIP_STATUS_TRANSIT)
 			return "Maneuvering under secondary thrust."
 		if(SHIP_STATUS_OVERMAP)

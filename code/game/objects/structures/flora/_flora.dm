@@ -25,16 +25,16 @@
 	clear_materials()
 	return ..()
 
-/obj/structure/flora/attackby(obj/item/O, mob/user)
-	if(user.a_intent != I_HURT && can_cut_down(O, user))
+/obj/structure/flora/attackby(obj/item/used_item, mob/user)
+	if(!user.check_intent(I_FLAG_HARM) && can_cut_down(used_item, user))
 		play_cut_sound(user)
-		cut_down(O, user)
+		cut_down(used_item, user)
 		return TRUE
 	. = ..()
 
 /**Whether the item used by user can cause cut_down to be called. Used to bypass default attack proc for some specific items/tools. */
-/obj/structure/flora/proc/can_cut_down(var/obj/item/I, var/mob/user)
-	return (I.get_attack_force(user) >= 5) && I.sharp //Anything sharp and relatively strong can cut us instantly
+/obj/structure/flora/proc/can_cut_down(var/obj/item/used_item, var/mob/user)
+	return (used_item.expend_attack_force(user) >= 5) && used_item.is_sharp() //Anything sharp and relatively strong can cut us instantly
 
 /**What to do when the can_cut_down check returns true. Normally simply calls dismantle. */
 /obj/structure/flora/proc/play_cut_sound(mob/user)
@@ -42,7 +42,7 @@
 	if(snd_cut)
 		playsound(src, snd_cut, 40, TRUE)
 
-/obj/structure/flora/proc/cut_down(var/obj/item/I, var/mob/user)
+/obj/structure/flora/proc/cut_down(var/obj/item/used_item, var/mob/user)
 	dismantle_structure(user)
 	return TRUE
 
@@ -74,3 +74,4 @@
 	icon            = 'icons/effects/decals/plant_remains.dmi'
 	icon_state      = "leafy_bits"
 	cleanable_scent = "freshly cut plants"
+	sweepable       = TRUE

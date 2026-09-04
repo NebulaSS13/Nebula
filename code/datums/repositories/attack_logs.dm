@@ -33,7 +33,7 @@ var/global/repository/attack_logs/attack_log_repository = new()
 	else
 		message = "[victim.name] [action_message]"
 
-	intent = mob_attacker ? uppertext(mob_attacker.a_intent) : "N/A"
+	intent = mob_attacker ? uppertext(mob_attacker.get_intent().uid) : "N/A"
 	target_zone = uppertext(mob_attacker?.get_target_zone() || "N/A")
 
 	if(mob_attacker)

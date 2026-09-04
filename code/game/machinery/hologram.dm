@@ -58,6 +58,7 @@ var/global/list/holopads = list()
 	var/allow_ai = TRUE
 	var/static/list/reachable_overmaps = list(OVERMAP_ID_SPACE)
 
+	var/static/list/used_holopad_ids = list()
 	var/holopad_id
 
 /obj/machinery/hologram/holopad/Initialize()
@@ -68,10 +69,16 @@ var/global/list/holopads = list()
 	// Null ID means we want to use our area name.
 	if(isnull(holopad_id))
 		var/area/A = get_area(src)
-		holopad_id = A?.proper_name || "Unknown"
+		var/holopad_index = 1
+		var/holopad_base = A?.proper_name || "Unknown"
+		holopad_id = "[holopad_base] #[holopad_index]"
+		while(holopad_id in used_holopad_ids)
+			holopad_index++
+			holopad_id = "[holopad_base] #[holopad_index]"
+	used_holopad_ids |= holopad_id
 
 	// For overmap sites, always tag the sector name so we have a unique discriminator for long range calls.
-	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(z)]
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[z]
 	if(sector)
 		holopad_id = "[sector.name] - [holopad_id]"
 
@@ -80,6 +87,9 @@ var/global/list/holopads = list()
 
 /obj/machinery/hologram/holopad/Destroy()
 	global.listening_objects -= src
+	global.holopads -= src
+	for (var/mob/living/master in masters)
+		clear_holo(master)
 	return ..()
 
 /obj/machinery/hologram/holopad/interface_interact(var/mob/living/human/user) //Carn: Hologram requests.
@@ -132,8 +142,8 @@ var/global/list/holopads = list()
 				var/list/zlevels_long = list()
 
 				if(holopadType == HOLOPAD_LONG_RANGE && length(reachable_overmaps))
-					for(var/zlevel in global.overmap_sectors)
-						var/obj/effect/overmap/visitable/O = global.overmap_sectors[zlevel]
+					for(var/zlevel, sector in global.overmap_sectors)
+						var/obj/effect/overmap/visitable/O = sector
 						if(!isnull(O) && (O.overmap_id in reachable_overmaps) && LAZYLEN(O.map_z))
 							zlevels_long |= O.map_z
 
@@ -386,13 +396,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	anchored = TRUE
 	idle_power_usage = 5
 	active_power_usage = 100
-
-//Destruction procs.
-/obj/machinery/hologram/holopad/Destroy()
-	global.holopads -= src
-	for (var/mob/living/master in masters)
-		clear_holo(master)
-	return ..()
 
 /*
  * Other Stuff: Is this even used?

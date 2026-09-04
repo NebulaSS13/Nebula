@@ -1,4 +1,5 @@
 /decl/prefix
+	abstract_type = /decl/prefix
 	var/name
 	var/default_key
 	var/is_locked = FALSE

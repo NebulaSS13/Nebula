@@ -3,13 +3,13 @@
 
 /decl/hierarchy/supply_pack/operations/cargotrain
 	name = "Equipment - Cargo Train Tug"
-	contains = list(/obj/vehicle/train/cargo/engine)
+	contains = list(/obj/vehicle/train/engine)
 	containertype = /obj/structure/largecrate
 	containername = "cargo train tug crate"
 
 /decl/hierarchy/supply_pack/operations/cargotrailer
 	name = "Equipment - Cargo Train Trolley"
-	contains = list(/obj/vehicle/train/cargo/trolley)
+	contains = list(/obj/vehicle/train/trolley)
 	containertype = /obj/structure/largecrate
 	containername = "cargo train trolley crate"
 

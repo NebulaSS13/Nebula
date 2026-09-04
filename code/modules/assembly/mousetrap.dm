@@ -1,9 +1,9 @@
 /obj/item/assembly/mousetrap
 	name = "rat trap"
-	desc = "A handy little spring-loaded trap for catching pesty rodents."
+	desc = "A handy little spring-loaded trap for catching pesky pests."
 	icon_state = "mousetrap"
 	origin_tech = @'{"combat":1}'
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	var/armed = 0
 
@@ -11,10 +11,10 @@
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(TOOL_HEMOSTAT = TOOL_QUALITY_WORST))
 
-/obj/item/assembly/mousetrap/examine(mob/user)
+/obj/item/assembly/mousetrap/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(armed)
-		to_chat(user, "It looks like it's armed.")
+		. += "It looks like it's armed."
 
 /obj/item/assembly/mousetrap/on_update_icon()
 	. = ..()
@@ -41,7 +41,7 @@
 					affecting = GET_EXTERNAL_ORGAN(H, type)
 					SET_STATUS_MAX(H, STAT_STUN, 3)
 		if(affecting)
-			affecting.take_external_damage(1, 0)
+			affecting.take_damage(1)
 
 	else if(ismouse(target))
 		var/mob/living/simple_animal/passive/mouse/M = target

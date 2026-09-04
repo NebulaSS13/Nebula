@@ -9,29 +9,41 @@
 	///The current health of the obj. Leave to null, unless you want the object to start at a different health than max_health.
 	current_health = null
 
+	// If non-null and positive, will create a reagent holder on Initialize()
+	var/chem_volume
+
 	var/obj_flags
 	var/datum/talking_atom/talking_atom
 	var/list/req_access
 	var/list/matter //Used to store information about the contents of the object.
 	var/w_class // Size of the object.
-	var/sharp = 0		// whether this object cuts
-	var/edge = 0		// whether this object is more likely to dismember
-	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
-	var/atom_damage_type = BRUTE
+
+	var/in_use = FALSE // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
-	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
-	var/list/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: @'{"NORTH":{"x":12,"y":5}, "EAST":{"x":10,"y":50}}'
+	///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: @'{"NORTH":{"x":12,"y":5}, "EAST":{"x":10,"y":50}}'
+	var/directional_offset
 
 /obj/Initialize(mapload)
-	//Health should be set to max_health only if it's null.
 	. = ..()
 	create_matter()
 	//Only apply directional offsets if the mappers haven't set any offsets already
 	if(!pixel_x && !pixel_y && !pixel_w && !pixel_z)
 		update_directional_offset()
-	if(isnull(current_health))
-		current_health = get_max_health()
+
+	//Health should be set to max_health only if it's null.
+	var/_max_health = get_max_health()
+	if(isnull(current_health) || current_health == INFINITY)
+		current_health = _max_health
+	current_health = min(current_health, _max_health)
+
+	// Initialize our reagents if they've been preloaded or we have a chem_volume
+	if((!isnull(chem_volume) && chem_volume >= 0) || islist(reagents))
+		initialize_reagents()
+
+/obj/object_shaken()
+	shake_animation()
+	return ..()
 
 /obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	. = ..()
@@ -60,6 +72,23 @@
 
 /obj/return_air()
 	return loc?.return_air()
+
+/obj/proc/get_internal_pressure_difference()
+	var/datum/gas_mixture/int_air = return_air()
+	var/datum/gas_mixture/env_air = loc.return_air()
+	return int_air.return_pressure()-env_air.return_pressure()
+
+/// Return TRUE if the internal pressure difference is over `limit`.
+/obj/proc/check_internal_pressure_difference_over(limit)
+	var/datum/gas_mixture/int_air = return_air()
+	var/datum/gas_mixture/env_air = loc.return_air()
+	return (int_air.return_pressure()-env_air.return_pressure()) > limit
+
+/// Return TRUE if the internal pressure difference is under `limit`.
+/obj/proc/check_internal_pressure_difference_under(limit)
+	var/datum/gas_mixture/int_air = return_air()
+	var/datum/gas_mixture/env_air = loc.return_air()
+	return (int_air.return_pressure()-env_air.return_pressure()) < limit
 
 /obj/proc/updateUsrDialog()
 	if(in_use)
@@ -120,12 +149,12 @@
 
 /obj/proc/damage_flags()
 	. = 0
-	if(has_edge(src))
-		. |= DAM_EDGE
-	if(is_sharp(src))
-		. |= DAM_SHARP
+	if(is_sharp())
+		. |= DAM_SHARP|DAM_EDGE
 		if(atom_damage_type == BURN)
 			. |= DAM_LASER
+	else if(has_edge())
+		. |= DAM_EDGE
 
 /obj/attackby(obj/item/used_item, mob/user)
 	// We need to call parent even if we lack dexterity, so that storage can work.
@@ -134,6 +163,9 @@
 			wrench_floor_bolts(user, null, used_item)
 			update_icon()
 			return TRUE
+	var/datum/extension/padding/padding_extension = get_extension(src, __IMPLIED_TYPE__)
+	if(padding_extension && padding_extension.handle_use_item(used_item, user))
+		return TRUE
 	return ..()
 
 /obj/proc/wrench_floor_bolts(mob/user, delay = 2 SECONDS, obj/item/tool)
@@ -163,12 +195,12 @@
 /obj/proc/can_embed()
 	return FALSE
 
-/obj/examine(mob/user, distance, infix, suffix)
+/obj/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if((obj_flags & OBJ_FLAG_ROTATABLE))
-		to_chat(user, SPAN_SUBTLE("\The [src] can be rotated with alt-click."))
+		. += SPAN_SUBTLE("\The [src] can be rotated with alt-click.")
 	if((obj_flags & OBJ_FLAG_ANCHORABLE))
-		to_chat(user, SPAN_SUBTLE("\The [src] can be anchored or unanchored with a wrench."))
+		. += SPAN_SUBTLE("\The [src] can be anchored or unanchored with a wrench.")
 
 /obj/proc/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -193,7 +225,7 @@
 	return w_class
 
 /obj/get_mob()
-	return buckled_mob
+	return get_buckled_mob()
 
 /obj/set_dir(ndir)
 	. = ..()
@@ -250,14 +282,21 @@
 	return TRUE
 
 /**
- * Init starting reagents and/or reagent var. Not called at the /obj level.
- * populate: If set to true, we expect map load/admin spawned reagents to be set.
+ * Init starting reagents and/or reagent var. Called in /obj/Initialize() if volume is above 0.
+ * Skips populate_initialize() if reagents is null, or if it is a list, ie. we are pending deserialization.
  */
-/obj/proc/initialize_reagents(var/populate = TRUE)
+/obj/proc/initialize_reagents()
 	SHOULD_CALL_PARENT(TRUE)
-	if(reagents?.total_volume > 0)
+	// Check if this is getting called twice, or we created reagents somewhere in Initialize() (bad juju)
+	if(istype(reagents))
 		log_warning("\The [src] possibly is initializing its reagents more than once!")
-	if(populate)
+	// If preloaded from serde, handle expected list structure.
+	// Returns if preload is successful to skip populate_reagents() call.
+	FINALIZE_REAGENTS_SERDE_AND_RETURN(reagents)
+	// Standard non-serde reagent init behavior after this point.
+	if(chem_volume > 0)
+		create_or_update_reagents(chem_volume)
+	if(istype(reagents))
 		populate_reagents()
 
 /**
@@ -286,7 +325,7 @@
 /obj/proc/WillContain()
 	return
 
-/obj/get_contained_matter()
+/obj/get_contained_matter(include_reagents = TRUE)
 	. = ..()
 	if(length(matter))
 		. = MERGE_ASSOCS_WITH_NUM_VALUES(., matter.Copy())
@@ -316,7 +355,7 @@
 
 /obj/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(!QDELETED(src) && fluids?.total_volume)
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids))
 		fluids.touch_obj(src)
 
 // TODO: maybe iterate the entire matter list or do some partial damage handling
@@ -330,8 +369,9 @@
 	. = ..()
 	if(QDELETED(src))
 		return
-	if(reagents?.total_volume)
-		reagents.trans_to(loc, reagents.total_volume)
+	var/reagent_volume = REAGENT_TOTAL_VOLUME(reagents)
+	if(reagent_volume)
+		reagents.trans_to(loc, reagent_volume)
 	dump_contents()
 	return place_melted_product(meltable_materials)
 
@@ -409,17 +449,71 @@
 /obj/physically_destroyed(skip_qdel)
 	var/dumped_reagents = FALSE
 	var/atom/last_loc = loc
-	if(last_loc && reagents?.total_volume)
-		reagents.trans_to(loc, reagents.total_volume, defer_update = TRUE)
+	if(last_loc && REAGENT_TOTAL_VOLUME(reagents))
+		reagents.trans_to(loc, REAGENT_TOTAL_VOLUME(reagents), defer_update = TRUE)
 		dumped_reagents = TRUE
 		reagents.clear_reagents() // We are qdeling, don't bother with a more nuanced update.
 	. = ..()
-	if(dumped_reagents && last_loc && !QDELETED(last_loc) && last_loc.reagents?.total_volume)
+	if(dumped_reagents && last_loc && !QDELETED(last_loc) && REAGENT_TOTAL_VOLUME(last_loc.reagents))
 		last_loc.reagents.handle_update()
 		HANDLE_REACTIONS(last_loc.reagents)
+
+// Used by HE pipes and forging bars/billets. Defaults are for HE pipes.
+/obj/proc/animate_heat_glow(icon_temperature, scale_sub = 500, scale_div = 1500, scale_max = 2000, skip_filter = FALSE, anim_time = 2 SECONDS)
+
+	var/scale = max((icon_temperature - scale_sub) / scale_div, 0)
+	var/h_r = heat2color_r(icon_temperature)
+	var/h_g = heat2color_g(icon_temperature)
+	var/h_b = heat2color_b(icon_temperature)
+
+	var/base_color = get_color()
+	var/b_r = HEX_RED(base_color)
+	var/b_g = HEX_GREEN(base_color)
+	var/b_b = HEX_BLUE(base_color)
+
+	if(icon_temperature < scale_max)
+		h_r = b_r + (h_r - b_r)*scale
+		h_g = b_g + (h_g - b_g)*scale
+		h_b = b_b + (h_b - b_b)*scale
+
+	var/scale_color = rgb(h_r, h_g, h_b)
+	var/list/animate_targets = get_above_oo() + src
+	for (var/thing in animate_targets)
+		var/atom/movable/AM = thing
+		if(anim_time > 0)
+			animate(AM, color = scale_color, time = anim_time, easing = SINE_EASING)
+		else
+			color = scale_color
+	if(!skip_filter)
+		animate_filter("glow", list(color = scale_color, time = anim_time, easing = LINEAR_EASING))
+
+	set_light(min(3, scale*2.5), min(3, scale*2.5), scale_color)
+
+/obj/proc/update_heat_glow(anim_time)
+
+	// We have no real way to find temperature bounds without a material that has a melting point.
+	var/decl/material/my_material = get_material()
+	if(!istype(my_material) || !my_material.glows_with_heat || isnull(my_material.melting_point) || QDELETED(src))
+		set_light(0, 0)
+		if(isatom(loc))
+			loc.update_icon()
+		return
+
+	var/temperature_percentage
+	if(temperature >= my_material.melting_point) // We should have melted...
+		temperature_percentage = 1
+	else if(temperature <= T20C) // Arbitrary point for the sake of not trying to find a proportional temperature delta with ice
+		temperature_percentage = 0
+	else
+		temperature_percentage = (my_material.melting_point - T20C) / (temperature - T20C)
+	if(temperature_percentage < 0.25)
+		set_light(0, 0)
+	else
+		animate_heat_glow(temperature, scale_sub = round((my_material.melting_point - T20C) * 0.25) + T20C, scale_div = round(my_material.melting_point * 0.75), scale_max = my_material.melting_point, skip_filter = TRUE, anim_time = anim_time)
+	if(isatom(loc))
+		loc.update_icon()
 
 /obj/is_valid_merchant_pad_target()
 	if(anchored)
 		return FALSE
 	return ..()
-

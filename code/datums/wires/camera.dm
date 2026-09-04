@@ -42,7 +42,7 @@ var/global/const/CAMERA_WIRE_ALARM = 8
 
 		if(CAMERA_WIRE_POWER)
 			C.cut_power = !mended
-			C.set_status(mended, usr)
+			C.set_camera_status(mended, usr)
 
 		if(CAMERA_WIRE_LIGHT)
 			C.light_disabled = !mended

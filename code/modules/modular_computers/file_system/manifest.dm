@@ -26,8 +26,8 @@
 		mil_ranks[name] = ""
 
 		if(global.using_map.flags & MAP_HAS_RANK)
-			var/datum/mil_branch/branch_obj = mil_branches.get_branch(CR.get_branch())
-			var/datum/mil_rank/rank_obj = mil_branches.get_rank(CR.get_branch(), CR.get_rank())
+			var/datum/mil_branch/branch_obj = global.using_map.get_branch(CR.get_branch())
+			var/datum/mil_rank/rank_obj = global.using_map.get_rank(CR.get_branch(), CR.get_rank())
 
 			if(branch_obj && rank_obj)
 				mil_ranks[name] = "<abbr title=\"[rank_obj.name], [branch_obj.name]\">[rank_obj.name_short]</abbr> "

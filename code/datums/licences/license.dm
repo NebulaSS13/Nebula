@@ -1,4 +1,5 @@
 /decl/license
+	abstract_type = /decl/license
 	var/name
 	var/url
 	var/attribution_mandatory = TRUE

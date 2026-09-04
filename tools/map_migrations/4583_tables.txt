@@ -1,0 +1,11 @@
+/obj/structure/table/woodentable/@SUBTYPES : /obj/structure/table/wood/@SUBTYPES{@OLD}
+/obj/structure/table/woodentable_reinforced/@SUBTYPES : /obj/structure/table/wood/reinforced/@SUBTYPES{@OLD}
+/obj/item/stack/tile/wood/@SUBTYPES : /obj/item/stack/tile/wood/oak/@SUBTYPES{@OLD} 
+/obj/item/stack/tile/mahogany/@SUBTYPES : /obj/item/stack/tile/wood/mahogany/@SUBTYPES{@OLD}
+/obj/item/stack/tile/maple/@SUBTYPES : /obj/item/stack/tile/wood/maple/@SUBTYPES{@OLD}
+/obj/item/stack/tile/ebony/@SUBTYPES : /obj/item/stack/tile/wood/ebony/@SUBTYPES{@OLD}
+/obj/item/stack/tile/walnut/@SUBTYPES : /obj/item/stack/tile/wood/walnut/@SUBTYPES{@OLD}
+/obj/item/stack/tile/bamboo/@SUBTYPES : /obj/item/stack/tile/wood/bamboo/@SUBTYPES{@OLD}
+/obj/item/stack/tile/yew/@SUBTYPES : /obj/item/stack/tile/wood/yew/@SUBTYPES{@OLD}
+
+

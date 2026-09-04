@@ -82,13 +82,13 @@
 	. = ..()
 	take_damage(P.damage, P.atom_damage_type)
 
-/obj/machinery/bash(obj/item/W, mob/user)
-	if(!istype(W))
+/obj/machinery/bash(obj/item/used_item, mob/user)
+	if(!istype(used_item))
 		return FALSE
-	var/force = W.get_attack_force(user)
+	var/force = used_item.expend_attack_force(user)
 	if(force <= 5)
 		return FALSE
 	. = ..()
 	if(.)
-		user.setClickCooldown(W.attack_cooldown + W.w_class)
-		take_damage(force, W.atom_damage_type)
+		user.setClickCooldown(used_item.attack_cooldown + used_item.w_class)
+		take_damage(force, used_item.atom_damage_type)

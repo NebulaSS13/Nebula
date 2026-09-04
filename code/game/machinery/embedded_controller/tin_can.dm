@@ -44,34 +44,34 @@
 	..()
 
 /datum/computer/file/embedded_program/airlock/tin_can/receive_user_command(command)
-	. = TRUE
+	. = TOPIC_REFRESH
 	switch(command)
 		if("toggle_door_safety")
 			door_safety = !door_safety
 			toggleDoor(memory["exterior_status"], tag_exterior_door, door_safety)
 		if("evacuate_atmos")
 			if(state == STATE_EVACUATE)
-				return
+				return TOPIC_HANDLED
 			state = STATE_EVACUATE
 			toggleDoor(memory["exterior_status"], tag_exterior_door, door_safety, "close")
-			signalPump(tag_pump_out_internal, 1, 0, 0) // Interior pump, target is a vaccum
+			signalPump(tag_pump_out_internal, 1, 0, 0) // Interior pump, target is a vacuum
 			signalPump(tag_pump_out_external, 1, 1, 10000) // Exterior pump, target is infinite
 		if("fill_atmos")
 			if(state == STATE_FILL)
-				return
+				return TOPIC_HANDLED
 			state = STATE_FILL
 			toggleDoor(memory["exterior_status"], tag_exterior_door, door_safety, "close")
 			signalPump(tag_pump_out_internal, 1, 1, memory["external_sensor_pressure"]) // Interior pump, target is exterior pressure
 			signalPump(tag_pump_out_external, 1, 0, 0) // Exterior pump, target is zero, to intake
 		if("seal")
 			if(state == STATE_SEALED)
-				return
+				return TOPIC_HANDLED
 			state = STATE_SEALED
 			toggleDoor(memory["exterior_status"], tag_exterior_door, door_safety, "close")
 			signalPump(tag_pump_out_internal, 0)
 			signalPump(tag_pump_out_external, 0)
 		else
-			. = FALSE
+			. = TOPIC_NOACTION
 
 /datum/computer/file/embedded_program/airlock/tin_can/process()
 	if(door_safety)

@@ -4,7 +4,7 @@
 /decl/hierarchy/supply_pack/science/chemistry_dispenser
 	name = "Equipment - Chemical Reagent dispenser"
 	contains = list(
-			/obj/machinery/chemical_dispenser{anchored = FALSE}
+			/obj/machinery/chemical_dispenser/unanchored
 		)
 	containertype = /obj/structure/largecrate
 	containername = "reagent dispenser crate"
@@ -43,7 +43,7 @@
 					/obj/item/clothing/gloves/thick,
 					/obj/item/clothing/shoes/color/black,
 					/obj/item/scanner/gas,
-					/obj/item/ore,
+					/obj/item/ore_satchel,
 					/obj/item/flashlight/lantern,
 					/obj/item/tool/shovel,
 					/obj/item/tool/pickaxe,

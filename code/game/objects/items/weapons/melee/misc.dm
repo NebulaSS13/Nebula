@@ -13,18 +13,6 @@
 	material = /decl/material/solid/organic/leather
 	_base_attack_force = 10
 
-/obj/item/whip/abyssal
-	name = "abyssal whip"
-	desc = "A weapon from the abyss. Requires 70 attack to wield."
-	icon_state = "whip"
-	item_state = "whip"
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_LOWER_BODY
-	w_class = ITEM_SIZE_NORMAL
-	origin_tech = @'{"combat":4}'
-	attack_verb = list("flicked", "whipped", "lashed")
-	_base_attack_force = 16 //max hit with 60 strength and no equipment. Duel Arena no No forfeit - Snapshot
-
 /obj/item/whip/tail
 	name = "drake's tail"
 	desc = "The tail of a large scaled creature, obviously evolved as some kind of whipping weapon. It's razor sharp and incredibly tough, though relatively lightweight."

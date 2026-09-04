@@ -62,11 +62,11 @@
 	comments_record_id = comments.record_id
 
 /datum/preferences/proc/save_preferences()
-	var/datum/pref_record_writer/json_list/W = new(PREF_SER_VERSION)
-	player_setup.save_preferences(W)
+	var/datum/pref_record_writer/json_list/writer = new(PREF_SER_VERSION)
+	player_setup.save_preferences(writer)
 	if(istext(comments_record_id) && length(comments_record_id))
 		SScharacter_info.queue_to_save(comments_record_id)
-	save_pref_record("preferences", W.data)
+	save_pref_record("preferences", writer.data)
 
 /datum/preferences/proc/get_slot_key(slot)
 	return "character_[global.using_map.preferences_key()]_[slot]"
@@ -98,14 +98,14 @@
 	update_preview_icon()
 
 /datum/preferences/proc/save_character(override_key=null)
-	var/datum/pref_record_writer/json_list/W = new(PREF_SER_VERSION)
-	player_setup.save_character(W)
+	var/datum/pref_record_writer/json_list/writer = new(PREF_SER_VERSION)
+	player_setup.save_character(writer)
 
 	var/record_key = override_key || get_slot_key(default_slot)
-	save_pref_record(record_key, W.data)
+	save_pref_record(record_key, writer.data)
 
 	// Cache the character's name for listing
-	LAZYSET(slot_names, record_key, W.data["real_name"])
+	LAZYSET(slot_names, record_key, writer.data["real_name"])
 	SScharacter_setup.queue_preferences_save(src)
 
 /datum/preferences/proc/sanitize_preferences()

@@ -2,7 +2,7 @@
 * Template Setup *
 *****************/
 /datum/unit_test/proximity
-	template = /datum/unit_test/proximity
+	abstract_type = /datum/unit_test/proximity
 	var/turf/wall/wall
 	var/obj/proximity_listener/proximity_listener
 
@@ -24,7 +24,7 @@
 		wall.set_opacity(opacity)
 
 /datum/unit_test/proximity/visibility
-	template = /datum/unit_test/proximity/visibility
+	abstract_type = /datum/unit_test/proximity/visibility
 	var/list/expected_number_of_turfs_by_trigger_type
 
 /datum/unit_test/proximity/visibility/start_test()

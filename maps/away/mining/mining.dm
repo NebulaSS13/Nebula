@@ -215,10 +215,9 @@
 	. = ..()
 	number = rand(10,99)
 
-/obj/structure/totem/examine(mob/user)
+/obj/structure/totem/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It's been engraved with the symbols '<font face='Shage'>RWH QaG [number]</font>'.") //i am not a linguist
-
+	. += "It's been engraved with the symbols '<font face='Shage'>RWH QaG [number]</font>'."
 
 /obj/item/stool/stone/Initialize(mapload)
 	. = ..(mapload, /decl/material/solid/stone/sandstone)

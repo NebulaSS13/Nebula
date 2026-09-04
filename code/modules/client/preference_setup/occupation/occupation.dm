@@ -34,17 +34,17 @@
 	pref.hiding_maps =       R.read("hiding_maps")
 	load_skills()
 
-/datum/category_item/player_setup_item/occupation/save_character(datum/pref_record_writer/W)
+/datum/category_item/player_setup_item/occupation/save_character(datum/pref_record_writer/writer)
 	save_skills()
-	W.write("alternate_option",  pref.alternate_option)
-	W.write("job_high",          pref.job_high)
-	W.write("job_medium",        pref.job_medium)
-	W.write("job_low",           pref.job_low)
-	W.write("player_alt_titles", pref.player_alt_titles)
-	W.write("skills_saved",      pref.skills_saved)
-	W.write("branches",          pref.branches)
-	W.write("ranks",             pref.ranks)
-	W.write("hiding_maps",       pref.hiding_maps)
+	writer.write("alternate_option",  pref.alternate_option)
+	writer.write("job_high",          pref.job_high)
+	writer.write("job_medium",        pref.job_medium)
+	writer.write("job_low",           pref.job_low)
+	writer.write("player_alt_titles", pref.player_alt_titles)
+	writer.write("skills_saved",      pref.skills_saved)
+	writer.write("branches",          pref.branches)
+	writer.write("ranks",             pref.ranks)
+	writer.write("hiding_maps",       pref.hiding_maps)
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
 	if(!istype(pref.job_medium))		pref.job_medium = list()
@@ -119,9 +119,9 @@
 				var/datum/mil_branch/player_branch
 				var/branch_string = ""
 				var/rank_branch_string = ""
-				var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
+				var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : global.using_map.spawn_branches(S)
 				if(global.using_map && (global.using_map.flags & MAP_HAS_BRANCH) && LAZYLEN(branch_rank))
-					player_branch = mil_branches.get_branch(pref.branches[job.title])
+					player_branch = global.using_map.get_branch(pref.branches[job.title])
 					if(player_branch)
 						if(LAZYLEN(branch_rank) > 1)
 							branch_string += "<td style='width:10%;text-align:left'><a href='byond://?src=\ref[src];char_branch=1;checking_job=\ref[job]'>[player_branch.name_short || player_branch.name]</a></td>"
@@ -130,9 +130,9 @@
 				if(!branch_string)
 					branch_string = "<td>-</td>"
 				if(player_branch)
-					var/ranks = branch_rank[player_branch.name] || mil_branches.spawn_ranks(player_branch.name, S)
+					var/ranks = branch_rank[player_branch.name] || global.using_map.spawn_ranks(player_branch.name, S)
 					if(LAZYLEN(ranks))
-						player_rank = mil_branches.get_rank(player_branch.name, pref.ranks[job.title])
+						player_rank = global.using_map.get_rank(player_branch.name, pref.ranks[job.title])
 						if(player_rank)
 							if(LAZYLEN(ranks) > 1)
 								rank_branch_string += "<td style='width:10%;text-align:left'><a href='byond://?src=\ref[src];char_rank=1;checking_job=\ref[job]'>[player_rank.name_short || player_rank.name]</a></td>"
@@ -150,7 +150,7 @@
 				var/help_link = "</td><td width = '10%' align = 'center'><a href='byond://?src=\ref[src];job_info=[title]'>?</a></td>"
 				lastJob = job
 
-				var/species_name = S.get_root_species_name()
+				var/species_uid = S.uid
 				var/bad_message = ""
 				if(job.total_positions == 0 && job.spawn_positions == 0)
 					bad_message = "<b>\[UNAVAILABLE]</b>"
@@ -159,8 +159,8 @@
 				else if(!job.player_old_enough(user.client))
 					var/available_in_days = job.available_in_days(user.client)
 					bad_message = "\[IN [(available_in_days)] DAYS]"
-				else if(LAZYACCESS(job.minimum_character_age, species_name) && user.client && (user.client.prefs.get_character_age() < job.minimum_character_age[species_name]))
-					bad_message = "\[MIN CHAR AGE: [job.minimum_character_age[species_name]]]"
+				else if(LAZYACCESS(job.minimum_character_age, species_uid) && user.client && (user.client.prefs.get_character_age() < job.minimum_character_age[species_uid]))
+					bad_message = "\[MIN CHAR AGE: [job.minimum_character_age[species_uid]]]"
 				else if(!job.is_species_allowed(S))
 					bad_message = "<b>\[SPECIES RESTRICTED]</b>"
 				else if(!S.check_background(job, user.client.prefs))
@@ -184,9 +184,6 @@
 				else
 					skill_link = "<a href='byond://?src=\ref[src];set_skills=[title]'>View Skills</a>"
 				skill_link = "<td>[skill_link]</td>"
-
-				if(!user.skillset.skills_transferable)
-					skill_link = ""
 
 				// Begin assembling the actual HTML.
 				index += 1
@@ -275,16 +272,16 @@
 
 		var/datum/job/job = SSjobs.get_by_title(job_name)
 
-		var/datum/mil_branch/player_branch = pref.branches[job.title] ? mil_branches.get_branch(pref.branches[job.title]) : null
-		var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
+		var/datum/mil_branch/player_branch = pref.branches[job.title] ? global.using_map.get_branch(pref.branches[job.title]) : null
+		var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : global.using_map.spawn_branches(S)
 		if(!player_branch || !(player_branch.name in branch_rank))
-			player_branch = LAZYLEN(branch_rank) ? mil_branches.get_branch(branch_rank[1]) : null
+			player_branch = LAZYLEN(branch_rank) ? global.using_map.get_branch(branch_rank[1]) : null
 
 		if(player_branch)
-			var/datum/mil_rank/player_rank = pref.ranks[job.title] ? mil_branches.get_rank(player_branch.name, pref.ranks[job.title]) : null
-			var/ranks = branch_rank[player_branch.name] || mil_branches.spawn_ranks(player_branch.name, S)
+			var/datum/mil_rank/player_rank = pref.ranks[job.title] ? global.using_map.get_rank(player_branch.name, pref.ranks[job.title]) : null
+			var/ranks = branch_rank[player_branch.name] || global.using_map.spawn_ranks(player_branch.name, S)
 			if(!player_rank || !(player_rank.name in ranks))
-				player_rank = LAZYLEN(ranks) ? mil_branches.get_rank(player_branch.name, ranks[1]) : null
+				player_rank = LAZYLEN(ranks) ? global.using_map.get_rank(player_branch.name, ranks[1]) : null
 
 			// Now make the assignments
 			pref.branches[job.title] = player_branch.name
@@ -340,9 +337,9 @@
 		var/datum/job/job = locate(href_list["checking_job"])
 		if(istype(job))
 			var/decl/species/S = pref.get_species_decl()
-			var/list/options = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
+			var/list/options = job.allowed_branches ? job.get_branch_rank(S) : global.using_map.spawn_branches(S)
 			var/choice = input(user, "Choose your branch of service.", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
-			if(choice && CanUseTopic(user) && mil_branches.is_spawn_branch(choice, S))
+			if(choice && CanUseTopic(user) && global.using_map.is_spawn_branch(choice, S))
 				pref.branches[job.title] = choice
 				pref.ranks -= job.title
 				pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// Check our skillset is still valid
@@ -353,12 +350,12 @@
 	else if(href_list["char_rank"])
 		var/datum/job/job = locate(href_list["checking_job"])
 		if(istype(job))
-			var/datum/mil_branch/branch = mil_branches.get_branch(pref.branches[job.title])
+			var/datum/mil_branch/branch = global.using_map.get_branch(pref.branches[job.title])
 			var/decl/species/S = pref.get_species_decl()
-			var/list/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
-			var/list/options = branch_rank[branch.name] || mil_branches.spawn_ranks(branch.name, S)
+			var/list/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : global.using_map.spawn_branches(S)
+			var/list/options = branch_rank[branch.name] || global.using_map.spawn_ranks(branch.name, S)
 			var/choice = input(user, "Choose your rank.", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
-			if(choice && CanUseTopic(user) && mil_branches.is_spawn_rank(branch.name, choice, pref.get_species_decl()))
+			if(choice && CanUseTopic(user) && global.using_map.is_spawn_rank(branch.name, choice, pref.get_species_decl()))
 				pref.ranks[job.title] = choice
 				pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// Check our skillset is still valid
 				validate_branch_and_rank()
@@ -425,7 +422,7 @@
 		if(job.allowed_branches)
 			dat += "You can be of following ranks:"
 			for(var/T in job.allowed_branches)
-				var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
+				var/datum/mil_branch/B = global.using_map.get_branch_by_type(T)
 				dat += "<li>[B.name]: [job.get_ranks(B.name)]"
 		dat += "<hr style='clear:left;'>"
 		if(get_config_value(/decl/config/text/wikiurl))

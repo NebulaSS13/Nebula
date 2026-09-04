@@ -1,6 +1,6 @@
 /decl/surgery_step/generic/cut_open/crystal
 	name = "Drill keyhole incision"
-	description = "This procedure drills a keyhold incision into crystalline limbs to allow for delicate internal work."
+	description = "This procedure drills a keyhole incision into crystalline limbs to allow for delicate internal work."
 	allowed_tools = list(TOOL_SURGICAL_DRILL = 100)
 	fail_string = "cracking"
 	access_string = "a neat hole"

@@ -559,7 +559,7 @@
 		<br>
 		<h1><a name="Terms">A note on terms</a></h1>
 		<ul>
-			<li><b>Mass spectrometry</b> - MS is the procedure used used to measure and quantify the components of matter. The most prized tool in the field of
+			<li><b>Mass spectrometry</b> - MS is the procedure used to measure and quantify the components of matter. The most prized tool in the field of
 				'Materials analysis.'</li>
 			<li><b>Radiometric dating</b> - MS applied using the right carrier reagents can be used to accurately determine the age of a sample.</li>
 			<li><b>Dissonance ratio</b> - This is a pseudoarbitrary value indicating the overall presence of a particular element in a greater composite.
@@ -600,10 +600,6 @@
 
 /datum/codex_entry/guide/construction
 	name = "Guide to Construction"
-
-/datum/codex_entry/guide/supermatter
-	name = "Guide to Supermatter Engines"
-	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/guide/fusion
 	name = "Guide to Fusion Reactors"

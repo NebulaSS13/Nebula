@@ -49,22 +49,22 @@
 			return TRUE
 	return ..()
 
-/obj/item/clothing/attackby(var/obj/item/I, var/mob/user)
+/obj/item/clothing/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(istype(I, /obj/item/clothing))
+	if(istype(used_item, /obj/item/clothing))
 
-		var/obj/item/clothing/accessory = I
+		var/obj/item/clothing/accessory = used_item
 		if(!isnull(accessory.accessory_slot))
 			if(can_attach_accessory(accessory, user))
 				if(user.try_unequip(accessory))
 					attach_accessory(user, accessory)
 			else
-				to_chat(user, SPAN_WARNING("You cannot attach \the [I] to \the [src]."))
+				to_chat(user, SPAN_WARNING("You cannot attach \the [used_item] to \the [src]."))
 			return TRUE
 
 	if(length(accessories))
 		for(var/obj/item/clothing/accessory in accessories)
-			accessory.attackby(I, user)
+			accessory.attackby(used_item, user)
 		return TRUE
 
 	. = ..()
@@ -91,7 +91,7 @@
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory)
 	if(!accessory || !(accessory in accessories) || !accessory.accessory_removable || !accessory.canremove)
 		return
-	accessory.on_removed(user)
+	accessory.on_accessory_removed(user)
 	update_icon()
 
 /obj/item/clothing/proc/removetie_verb()
@@ -178,7 +178,7 @@
 		return TRUE
 	return FALSE
 
-/obj/item/clothing/proc/on_removed(var/mob/user)
+/obj/item/clothing/proc/on_accessory_removed(var/mob/user)
 	var/obj/item/clothing/holder = loc
 	if(istype(holder))
 		if(user)
@@ -216,7 +216,8 @@
 		accessory_visibility      = clothes.accessory_visibility
 		accessory_slowdown        = clothes.accessory_slowdown
 		mimicking_state_modifiers = TRUE
-		clothing_state_modifiers = clothes.clothing_state_modifiers?.Copy()
+		clothing_state_modifiers  = clothes.clothing_state_modifiers?.Copy()
+		bodytype_equip_flags      = clothes.bodytype_equip_flags
 	else
 		accessory_hide_on_states  = get_initial_accessory_hide_on_states()
 		accessory_slot            = initial(accessory_slot)
@@ -225,5 +226,6 @@
 		accessory_slowdown        = initial(accessory_slowdown)
 		mimicking_state_modifiers = FALSE
 		clothing_state_modifiers  = null
+		bodytype_equip_flags      = initial(bodytype_equip_flags)
 
 	update_clothing_state_toggles()

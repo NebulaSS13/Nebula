@@ -1,9 +1,11 @@
 /datum/keybinding
+	abstract_type = /datum/keybinding
 	/// A default hotkey keys.
 	var/list/hotkey_keys
 	/// A classic hotkey keys when client don't use hotkey mode. Uses `hotkey_keys` if not defined.
 	var/list/classic_keys
 
+	// TODO: convert to /decl/keybinding, replace name with uid and full_name with name
 	/// A unique keybind id for preference storing.
 	var/name
 	/// A full keybind name for displaying.

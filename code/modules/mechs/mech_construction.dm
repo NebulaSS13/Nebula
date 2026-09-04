@@ -61,15 +61,19 @@
 
 /mob/living/exosuit/proc/install_system(var/obj/item/system, var/system_hardpoint, var/mob/user)
 	set waitfor = FALSE
+
 	if(hardpoints_locked || hardpoints[system_hardpoint])
+		to_chat(user, SPAN_WARNING("\The [system] could not be installed in that hardpoint, as it is locked or occupied."))
 		return FALSE
 
 	var/obj/item/mech_equipment/ME = system
 	if(istype(ME))
 		if(ME.restricted_hardpoints && !(system_hardpoint in ME.restricted_hardpoints))
+			to_chat(user, SPAN_WARNING("\The [system] could not be installed in that hardpoint, as it is restricted."))
 			return FALSE
 		if(ME.restricted_software)
 			if(!head || !head.software)
+				to_chat(user, SPAN_WARNING("\The [system] could not be installed in that hardpoint, as it requires specialist software."))
 				return FALSE
 			var/found
 			for(var/software in ME.restricted_software)
@@ -77,6 +81,7 @@
 					found = TRUE
 					break
 			if(!found)
+				to_chat(user, SPAN_WARNING("\The [system] could not be installed in that hardpoint, as it requires specialist software."))
 				return FALSE
 	else
 		return FALSE
@@ -91,10 +96,10 @@
 			if(!do_after(user, delay, src) || user.get_active_held_item() != system)
 				return FALSE
 
-			if(user.try_unequip(system))
-				to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
-				playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-			else return FALSE
+			if(!user.try_unequip(system))
+				return FALSE
+			to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
+			playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 
 	events_repository.register(/decl/observ/destroyed, system, src, PROC_REF(forget_module))
 

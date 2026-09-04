@@ -138,7 +138,13 @@ SUBSYSTEM_DEF(air)
 		if(!SHOULD_PARTICIPATE_IN_ZONES(T))
 			continue
 		simulated_turf_count++
+		// We also skip anything already queued, since it'll be settled when fire() runs anyway.
+		if(T.needs_air_update)
+			continue
 		T.update_air_properties()
+		// air state is necessarily globally incomplete during this
+		// so we can't do T.post_update_air_properties(), which needs
+		// connections to have been settled already.
 		CHECK_TICK
 
 	report_progress({"Total Simulated Turfs: [simulated_turf_count]
@@ -198,7 +204,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 		T.update_air_properties()
 		T.post_update_air_properties()
-		T.needs_air_update = 0
+		T.needs_air_update = FALSE
 		#ifdef ZASDBG
 		T.remove_vis_contents(zasdbgovl_mark)
 		#endif
@@ -214,7 +220,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 		T.update_air_properties()
 		T.post_update_air_properties()
-		T.needs_air_update = 0
+		T.needs_air_update = FALSE
 		#ifdef ZASDBG
 		T.remove_vis_contents(zasdbgovl_mark)
 		#endif
@@ -368,13 +374,15 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	#ifdef ZASDBG
 	ASSERT(isturf(T))
 	#endif
-	if(T.needs_air_update)
+	// don't queue us if we've already been queued
+	// and if SSair hasn't run, every turf in the world will get updated soon anyway
+	if(T.needs_air_update || !SSair.initialized)
 		return
 	tiles_to_update += T
 	#ifdef ZASDBG
 	T.add_vis_contents(zasdbgovl_mark)
 	#endif
-	T.needs_air_update = 1
+	T.needs_air_update = TRUE
 
 /datum/controller/subsystem/air/proc/mark_zone_update(zone/Z)
 	#ifdef ZASDBG

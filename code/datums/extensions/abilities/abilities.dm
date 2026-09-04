@@ -26,7 +26,7 @@
 
 /// Clicking a grab on the currently grabbed mob.
 /datum/extension/abilities/proc/do_grabbed_invocation(atom/target)
-	if(isliving(holder) && istype(target) && LAZYLEN(ability_handlers))
+	if(isliving(holder) && istype(target) && LAZYLEN(ability_handlers) && !istype(target, /obj/screen))
 		for(var/datum/ability_handler/handler in ability_handlers)
 			if(handler.can_do_grabbed_invocation(holder, target) && handler.do_grabbed_invocation(holder, target))
 				return TRUE
@@ -34,7 +34,7 @@
 
 /// Clicking an adjacent target (UnarmedAttack())
 /datum/extension/abilities/proc/do_melee_invocation(atom/target)
-	if(isliving(holder) && istype(target) && LAZYLEN(ability_handlers))
+	if(isliving(holder) && istype(target) && LAZYLEN(ability_handlers) && !istype(target, /obj/screen))
 		for(var/datum/ability_handler/handler in ability_handlers)
 			if(handler.can_do_melee_invocation(holder, target) && handler.do_melee_invocation(holder, target))
 				return TRUE
@@ -42,7 +42,7 @@
 
 /// Clicking a distant target (RangedAttack())
 /datum/extension/abilities/proc/do_ranged_invocation(atom/target)
-	if(isliving(holder) && istype(target) && LAZYLEN(ability_handlers))
+	if(isliving(holder) && istype(target) && LAZYLEN(ability_handlers) && !istype(target, /obj/screen))
 		for(var/datum/ability_handler/handler in ability_handlers)
 			if(handler.can_do_ranged_invocation(holder, target) && handler.do_ranged_invocation(holder, target))
 				return TRUE
@@ -54,3 +54,8 @@
 		for(var/datum/ability_handler/handler in ability_handlers)
 			handler.refresh_login()
 
+/datum/extension/abilities/proc/refresh_element_positioning()
+	var/row = 0
+	for(var/datum/ability_handler/handler in ability_handlers)
+		if(length(handler.screen_elements))
+			row += handler.refresh_element_positioning(row)

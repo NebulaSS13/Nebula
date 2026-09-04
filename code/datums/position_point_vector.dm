@@ -190,27 +190,3 @@
 
 /datum/point/vector/proc/on_z_change()
 	return
-
-/datum/point/vector/processed		//pixel_speed is per decisecond.
-	var/last_process = 0
-	var/last_move = 0
-	var/paused = FALSE
-
-/datum/point/vector/processed/Destroy()
-	STOP_PROCESSING(SSprojectiles, src)
-	return ..()
-
-/datum/point/vector/processed/proc/start()
-	last_process = world.time
-	last_move = world.time
-	START_PROCESSING(SSprojectiles, src)
-
-/datum/point/vector/processed/Process()
-	if(paused)
-		last_move += world.time - last_process
-		last_process = world.time
-		return
-	var/needed_time = world.time - last_move
-	last_process = world.time
-	last_move = world.time
-	increment(needed_time / SSprojectiles.wait)

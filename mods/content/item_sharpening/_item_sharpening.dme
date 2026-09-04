@@ -1,0 +1,11 @@
+#ifndef MODPACK_ITEM_SHARPENING
+#define MODPACK_ITEM_SHARPENING
+// BEGIN_INCLUDE
+#include "_item_sharpening.dm"
+#include "blade_sharpen.dm"
+#include "effect_sharpen.dm"
+#include "grindstone.dm"
+#include "item_sharpen.dm"
+#include "whetstone.dm"
+//END_INCLUDE
+#endif

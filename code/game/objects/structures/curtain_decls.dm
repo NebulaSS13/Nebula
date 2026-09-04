@@ -2,6 +2,7 @@
 // Curtain types declaration
 //
 /decl/curtain_kind
+	abstract_type = /decl/curtain_kind
 	var/name = "curtain"
 	var/color = COLOR_WHITE
 	var/alpha = 255
@@ -57,6 +58,9 @@
 
 /decl/curtain_kind/plastic/shower/security
 	color = COLOR_DARK_RED
+
+/decl/curtain_kind/plastic/shower/medical
+	color = COLOR_CYAN
 
 /decl/curtain_kind/plastic/canteen
 	name = "privacy curtain"

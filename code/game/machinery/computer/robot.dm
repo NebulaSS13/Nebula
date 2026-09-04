@@ -68,7 +68,7 @@
 			return TOPIC_HANDLED
 
 		// Antag AI checks
-		if(!isAI(user) || !(user.mind.assigned_special_role && user.mind.original == user))
+		if(!isAI(user) || !player_is_antag(user.mind))
 			to_chat(user, "<span class='warning'>Access Denied</span>")
 			return TOPIC_HANDLED
 
@@ -103,52 +103,52 @@
 		. = TOPIC_REFRESH
 
 // Proc: get_cyborgs()
-// Parameters: 1 (operator - mob which is operating the console.)
+// Parameters: 1 (user - mob which is operating the console.)
 // Description: Returns NanoUI-friendly list of accessible cyborgs.
-/obj/machinery/computer/robotics/proc/get_cyborgs(var/mob/operator)
+/obj/machinery/computer/robotics/proc/get_cyborgs(var/mob/user)
 	var/list/robots = list()
 
-	for(var/mob/living/silicon/robot/R in global.silicon_mob_list)
+	for(var/mob/living/silicon/robot/robot in global.silicon_mob_list)
 		// Ignore drones
-		if(isdrone(R))
+		if(isdrone(robot))
 			continue
 		// Ignore antagonistic cyborgs
-		if(R.scrambledcodes)
+		if(robot.scrambledcodes)
 			continue
 
-		var/list/robot = list()
-		robot["name"] = R.name
-		var/turf/T = get_turf(R)
+		var/list/robot_data = list()
+		robot_data["name"] = robot.name
+		var/turf/T = get_turf(robot)
 		var/area/A = get_area(T)
 
 		if(istype(T) && istype(A) && isContactLevel(T.z))
-			robot["location"] = "[A.proper_name] ([T.x], [T.y])"
+			robot_data["location"] = "[A.proper_name] ([T.x], [T.y])"
 		else
-			robot["location"] = "Unknown"
+			robot_data["location"] = "Unknown"
 
-		if(R.stat)
-			robot["status"] = "Not Responding"
-		else if (R.lockcharge)
-			robot["status"] = "Lockdown"
+		if(robot.stat)
+			robot_data["status"] = "Not Responding"
+		else if (robot.lockcharge)
+			robot_data["status"] = "Lockdown"
 		else
-			robot["status"] = "Operational"
+			robot_data["status"] = "Operational"
 
-		if(R.cell)
-			robot["cell"] = 1
-			robot["cell_capacity"] = R.cell.maxcharge
-			robot["cell_current"] = R.cell.charge
-			robot["cell_percentage"] = round(R.cell.percent())
+		if(robot.cell)
+			robot_data["cell"] = 1
+			robot_data["cell_capacity"] = robot.cell.maxcharge
+			robot_data["cell_current"] = robot.cell.charge
+			robot_data["cell_percentage"] = round(robot.cell.percent())
 		else
-			robot["cell"] = 0
+			robot_data["cell"] = 0
 
-		robot["module"] = R.module ? R.module.name : "None"
-		robot["master_ai"] = R.connected_ai ? R.connected_ai.name : "None"
-		robot["hackable"] = 0
+		robot_data["module"] = robot.module ? robot.module.name : "None"
+		robot_data["master_ai"] = robot.connected_ai ? robot.connected_ai.name : "None"
+		robot_data["hackable"] = 0
 		// Antag AIs know whether linked cyborgs are hacked or not.
-		if(operator && isAI(operator) && (R.connected_ai == operator) && (operator.mind.assigned_special_role && operator.mind.original == operator))
-			robot["hacked"] = R.emagged ? 1 : 0
-			robot["hackable"] = R.emagged? 0 : 1
-		robots.Add(list(robot))
+		if(user && isAI(user) && (robot.connected_ai == user) && player_is_antag(user.mind))
+			robot_data["hacked"] = robot.emagged ? 1 : 0
+			robot_data["hackable"] = robot.emagged? 0 : 1
+		robots.Add(list(robot_data))
 	return robots
 
 // Proc: get_cyborg_by_name()
@@ -157,6 +157,6 @@
 /obj/machinery/computer/robotics/proc/get_cyborg_by_name(var/name)
 	if (!name)
 		return
-	for(var/mob/living/silicon/robot/R in global.silicon_mob_list)
-		if(R.name == name)
-			return R
+	for(var/mob/living/silicon/robot/robot in global.silicon_mob_list)
+		if(robot.name == name)
+			return robot

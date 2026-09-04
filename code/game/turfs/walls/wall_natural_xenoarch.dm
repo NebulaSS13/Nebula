@@ -78,12 +78,12 @@
 	var/excav_level = P.get_tool_property(TOOL_PICK, TOOL_PROP_EXCAVATION_DEPTH)
 	excavation_level += excav_level
 	//archaeo overlays
-	if(!archaeo_overlay && finds && finds.len)
+	if(!archaeo_overlay && LAZYLEN(finds))
 		var/datum/find/F = finds[1]
 		if(F.excavation_required <= excavation_level + F.view_range)
 			archaeo_overlay = image('icons/turf/excavation_overlays.dmi',"overlay_archaeo[rand(1,3)]")
 			queue_icon_update()
-	else if(archaeo_overlay && (!finds || !finds.len))
+	else if(archaeo_overlay && !LAZYLEN(finds))
 		archaeo_overlay = null
 		queue_icon_update()
 
@@ -112,13 +112,13 @@
 	if(amount_rocks > 0)
 		pass_geodata_to(new /obj/item/stack/material/ore(src, amount_rocks, material?.type))
 
-/turf/wall/natural/proc/destroy_artifacts(var/obj/item/W, var/newDepth)
+/turf/wall/natural/proc/destroy_artifacts(var/obj/item/used_item, var/newDepth)
 	if(!length(finds))
 		return
 	var/datum/find/F = finds[1]
 	if(newDepth > F.excavation_required) // Digging too deep can break the item. At least you won't summon a Balrog (probably)
-		if(W)
-			. = ". <b>[pick("There is a crunching noise","[W] collides with some different rock","Part of the rock face crumbles away","Something breaks under [W]")]</b>"
+		if(used_item)
+			. = ". <b>[pick("There is a crunching noise","[used_item] collides with some different rock","Part of the rock face crumbles away","Something breaks under [used_item]")]</b>"
 		if(prob(10))
 			return
 		if(prob(25))

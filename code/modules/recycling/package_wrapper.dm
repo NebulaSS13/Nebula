@@ -108,7 +108,7 @@
 			to_chat(user, SPAN_WARNING("\The [target] moving around too much. Restrain or incapacitate them first."))
 
 /obj/item/stack/package_wrap/afterattack(var/obj/target, mob/user, proximity_flag, click_parameters)
-	if(!proximity_flag || !can_wrap(target) || (user.isEquipped(target) && !user.canUnEquip(target)))
+	if(!proximity_flag || !can_wrap(target) || (user.isEquipped(target) && !user.can_unequip_item(target)))
 		return
 	user.setClickCooldown(attack_cooldown)
 	return wrap(target, user) || ..()

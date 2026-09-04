@@ -51,12 +51,14 @@
 	if(electric)
 		if(ishuman(src.loc))
 			var/mob/living/human/M = src.loc
+			var/decl/pronouns/pronouns = get_pronouns()
+			var/malfunction = verb_agree_with_pronouns("malfunction", pronouns, is_after_pronoun = FALSE)
 			if(M.get_equipped_item(slot_glasses_str) != src)
-				to_chat(M, SPAN_DANGER("\The [src] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
+				to_chat(M, SPAN_DANGER("\The [src] [malfunction], releasing a small spark."))
 			else
 				SET_STATUS_MAX(M, STAT_BLIND, 2)
 				SET_STATUS_MAX(M, STAT_BLURRY, 4)
-				to_chat(M, SPAN_DANGER("Your [name] malfunction[gender != PLURAL ? "s":""], blinding you!"))
+				to_chat(M, SPAN_DANGER("Your [name] [malfunction], blinding you!"))
 
 				// Don't cure being nearsighted
 				if(!M.has_genetic_condition(GENE_COND_NEARSIGHTED))

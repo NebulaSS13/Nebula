@@ -24,7 +24,7 @@
 	name = "daytime"
 	announcement = "The sun rises over the horizon, beginning another day."
 	period = 0.4
-	power = 1
+	power = 0.8
 	color = COLOR_DAYLIGHT
 
 /datum/daycycle_period/sunset

@@ -68,8 +68,7 @@
 	default_software = list(
 		/datum/computer_file/program/alarm_monitor,
 		/datum/computer_file/program/camera_monitor,
-		/datum/computer_file/program/shields_monitor,
-		/datum/computer_file/program/supermatter_monitor
+		/datum/computer_file/program/shields_monitor
 	)
 
 /obj/machinery/computer/modular/telescreen/preset/entertainment

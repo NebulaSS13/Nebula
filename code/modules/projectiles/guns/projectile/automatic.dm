@@ -96,10 +96,10 @@
 	. = ..()
 	launcher = new(src)
 
-/obj/item/gun/projectile/automatic/assault_rifle/grenade/attackby(obj/item/I, mob/user)
-	if(!istype(I, /obj/item/grenade))
+/obj/item/gun/projectile/automatic/assault_rifle/grenade/attackby(obj/item/used_item, mob/user)
+	if(!istype(used_item, /obj/item/grenade))
 		return ..()
-	launcher.load(I, user)
+	launcher.load(used_item, user)
 	return TRUE
 
 /obj/item/gun/projectile/automatic/assault_rifle/grenade/attack_hand(mob/user)
@@ -116,12 +116,12 @@
 	else
 		..()
 
-/obj/item/gun/projectile/automatic/assault_rifle/grenade/examine(mob/user)
+/obj/item/gun/projectile/automatic/assault_rifle/grenade/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(launcher.chambered)
-		to_chat(user, "\The [launcher] has \a [launcher.chambered] loaded.")
+		. += "\The [launcher] has \a [launcher.chambered] loaded."
 	else
-		to_chat(user, "\The [launcher] is empty.")
+		. += "\The [launcher] is empty."
 
 /obj/item/gun/projectile/automatic/assault_rifle/grenade/toggle_safety(mob/user)
 	. = ..()
@@ -149,9 +149,9 @@
 	burst = 3
 	burst_accuracy = list(0,-1,-1)
 	dispersion = list(0.0, 0.6, 1.0)
+	autofire_enabled = TRUE
 
 	fire_delay = 0
-	autofire_enabled = 1
 
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
@@ -177,8 +177,8 @@
 		return FALSE
 	return TRUE
 
-/obj/item/gun/projectile/automatic/machine/set_autofire(atom/fire_at, mob/fire_by, autoturn)
-	if(!special_check(fire_by))
+/obj/item/gun/projectile/automatic/machine/wielder_mouse_drag_down(mob/user, object, location, control, params)
+	if(!special_check(user))
 		return FALSE
 	. = ..()
 	if(. && !spin_up_time)
@@ -186,7 +186,7 @@
 			sound_token = play_looping_sound(src, "machine_gun", 'sound/mecha/hydraulic.ogg', volume = 30)
 		spin_up_time = world.time
 
-/obj/item/gun/projectile/automatic/machine/clear_autofire()
+/obj/item/gun/projectile/automatic/machine/wielder_mouse_drag_up(mob/user, atom/target)
 	. = ..()
 	spin_up_time = null
 	QDEL_NULL(sound_token)

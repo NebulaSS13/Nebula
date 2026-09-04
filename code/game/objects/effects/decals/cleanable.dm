@@ -6,24 +6,39 @@
 	var/burnable = TRUE
 	var/sweepable = FALSE
 	var/weather_sensitive = TRUE
-	var/persistent = FALSE
+	var/use_legacy_persistence = FALSE
 	var/generic_filth = FALSE
-	var/age = 0
 	var/list/random_icon_states
 	var/image/hud_overlay/hud_overlay
 	var/cleanable_scent
 	var/scent_type = /datum/extension/scent/custom
 	var/scent_intensity = /decl/scent_intensity/normal
-	var/scent_descriptor = SCENT_DESC_SMELL
+	var/scent_descriptor = "smell"
 	var/scent_range = 2
+	var/have_randomized_icon_state = FALSE
+
+/obj/effect/decal/cleanable/ShouldSerialize(_age)
+	return ..() && use_legacy_persistence
+
+/obj/effect/decal/cleanable/GetSerializedType()
+	return generic_filth ? /obj/effect/decal/cleanable/filth : ..()
+
+/obj/effect/decal/cleanable/Serialize()
+	. = ..()
+	SERIALIZE_IF_MODIFIED(icon_state, /atom)
+
+/obj/effect/decal/cleanable/Deserialize(list/instance_map)
+	. = ..()
+	have_randomized_icon_state = TRUE
 
 /obj/effect/decal/cleanable/Initialize(var/ml, var/_age)
-	if(random_icon_states && length(src.random_icon_states) > 0)
-		src.icon_state = pick(src.random_icon_states)
+	if(!have_randomized_icon_state && length(random_icon_states))
+		icon_state = pick(random_icon_states)
+		have_randomized_icon_state = TRUE
 	if(!ml)
 		if(!isnull(_age))
 			age = _age
-		if(persistent)
+		if(use_legacy_persistence)
 			SSpersistence.track_value(src, /decl/persistence_handler/filth)
 
 	. = ..()
@@ -43,7 +58,7 @@
 /obj/effect/decal/cleanable/Destroy()
 	if(weather_sensitive)
 		SSweather_atoms.weather_atoms -= src
-	if(persistent)
+	if(use_legacy_persistence)
 		SSpersistence.forget_value(src, /decl/persistence_handler/filth)
 	. = ..()
 
@@ -72,7 +87,7 @@
 
 /obj/effect/decal/cleanable/fluid_act(var/datum/reagents/fluid)
 	SHOULD_CALL_PARENT(FALSE)
-	if(fluid?.total_liquid_volume && !QDELETED(src))
-		if(reagents?.total_volume)
-			reagents.trans_to(fluid, reagents.total_volume)
+	if(REAGENT_TOTAL_LIQUID_VOLUME(fluid) && !QDELETED(src))
+		if(REAGENT_TOTAL_VOLUME(reagents))
+			reagents.trans_to(fluid, REAGENT_TOTAL_VOLUME(reagents))
 		qdel(src)

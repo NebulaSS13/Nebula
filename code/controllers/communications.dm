@@ -94,13 +94,13 @@ var/global/const/EXTERNAL_AIR_FREQ = 1381 // Used by some external airlocks.
 //Other devices can then choose to send signals to only those devices that belong to a particular filter.
 //This is done for performance, so we don't send signals to lots of machines unnecessarily.
 
-//This filter is special because devices belonging to default also recieve signals sent to any other filter.
+//This filter is special because devices belonging to default also receive signals sent to any other filter.
 var/global/const/RADIO_DEFAULT = "radio_default"
-//This filter is special because devices belonging to it do not recieve any signals at all. Useful for devices which only transmit.
+//This filter is special because devices belonging to it do not receive any signals at all. Useful for devices which only transmit.
 var/global/const/RADIO_NULL = "radio_null"
 
 var/global/const/RADIO_TO_AIRALARM =   "radio_airalarm" //air alarms
-var/global/const/RADIO_FROM_AIRALARM = "radio_airalarm_rcvr" //devices interested in recieving signals from air alarms
+var/global/const/RADIO_FROM_AIRALARM = "radio_airalarm_rcvr" //devices interested in receiving signals from air alarms
 var/global/const/RADIO_CHAT =          "radio_telecoms"
 var/global/const/RADIO_ATMOSIA =       "radio_atmos"
 var/global/const/RADIO_NAVBEACONS =    "radio_navbeacon"
@@ -123,11 +123,7 @@ var/global/list/all_selectable_radio_filters = list(
 	RADIO_MAGNETS
 )
 
-var/global/datum/controller/radio/radio_controller
-
-/hook/startup/proc/createRadioController()
-	radio_controller = new /datum/controller/radio()
-	return 1
+var/global/datum/controller/radio/radio_controller = new /datum/controller/radio()
 
 //callback used by objects to react to incoming radio signals
 /obj/proc/receive_signal(datum/signal/signal, receive_method, receive_param)

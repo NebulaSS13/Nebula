@@ -58,10 +58,7 @@
 /obj/machinery/body_scanconsole/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(connected && connected.occupant)
 		data["scanEnabled"] = TRUE
-		if(ishuman(connected.occupant))
-			data["isCompatible"] = TRUE
-		else
-			data["isCompatible"] = FALSE
+		data["isCompatible"] = ishuman(connected.occupant)
 	else
 		data["scanEnabled"] = FALSE
 

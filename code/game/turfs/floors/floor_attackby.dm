@@ -1,10 +1,14 @@
 /turf/floor/attack_hand(mob/user)
-	if(!ishuman(user))
-		return ..()
-	var/mob/living/human/H = user
-	var/obj/item/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
-	if(hand && try_graffiti(H, hand))
+
+	// Collect snow or mud.
+	var/decl/flooring/flooring = get_topmost_flooring()
+	if(flooring?.handle_hand_interaction(src, user))
 		return TRUE
+
+	var/obj/item/hand = GET_EXTERNAL_ORGAN(user, user.get_active_held_item_slot())
+	if(hand && try_graffiti(user, hand))
+		return TRUE
+
 	return ..()
 
 /turf/floor/attackby(var/obj/item/used_item, var/mob/user)

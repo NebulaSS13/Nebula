@@ -1,6 +1,6 @@
 /obj/machinery/meter
 	name = "meter"
-	desc = "A gas flow meter."
+	desc = "A meter that monitors gas composition, pressure, and temperature in the attached pipe."
 	icon = 'icons/obj/meter.dmi'
 	icon_state = "meterX"
 	var/atom/target = null //A pipe for the base type
@@ -78,23 +78,23 @@
 	else
 		icon_state = "meter4"
 
-/obj/machinery/meter/examine(mob/user, distance)
+/obj/machinery/meter/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 
 	if(distance > 3 && !(isAI(user) || isghost(user)))
-		to_chat(user, "<span class='warning'>You are too far away to read it.</span>")
+		. += SPAN_WARNING("You are too far away to read it.")
 
 	else if(stat & (NOPOWER|BROKEN))
-		to_chat(user, "<span class='warning'>The display is off.</span>")
+		. += SPAN_WARNING("The display is off.")
 
 	else if(src.target)
 		var/datum/gas_mixture/environment = target.return_air()
 		if(environment)
-			to_chat(user, "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C).")
+			. += "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)."
 		else
-			to_chat(user, "The sensor error light is blinking.")
+			. += "The sensor error light is blinking."
 	else
-		to_chat(user, "The connect error light is blinking.")
+		. += "The connect error light is blinking."
 
 // turf meter -- prioritizes turfs over pipes for target acquisition
 

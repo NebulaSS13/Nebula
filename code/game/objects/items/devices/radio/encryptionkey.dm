@@ -43,17 +43,17 @@
 		return TRUE
 	. = ..()
 
-/obj/item/encryptionkey/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/card/id))
-		var/obj/item/card/id/id = W
+/obj/item/encryptionkey/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/card/id))
+		var/obj/item/card/id/id = used_item
 		var/list/access = id.GetAccess()
 		if(!length(access))
-			to_chat(user, SPAN_WARNING("\The [W] has no access keys to copy."))
+			to_chat(user, SPAN_WARNING("\The [used_item] has no access keys to copy."))
 			return TRUE
 		LAZYINITLIST(can_decrypt)
 		can_decrypt |= access
 		UNSETEMPTY(can_decrypt)
-		to_chat(user, SPAN_NOTICE("You pass \the [W] across \the [src], copying the access keys into the encryption cache."))
+		to_chat(user, SPAN_NOTICE("You pass \the [used_item] across \the [src], copying the access keys into the encryption cache."))
 		return TRUE
 	. = ..()
 

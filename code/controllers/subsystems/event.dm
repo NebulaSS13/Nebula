@@ -28,10 +28,11 @@ SUBSYSTEM_DEF(event)
 /datum/controller/subsystem/event/Initialize()
 
 	if(!event_containers)
+		// Order must conform to EVENT_LEVEL_MUNDANE, EVENT_LEVEL_MODERATE, EVENT_LEVEL_MAJOR.
 		event_containers = list(
-			EVENT_LEVEL_MUNDANE  = new global.using_map.event_container_mundane,
-			EVENT_LEVEL_MODERATE = new global.using_map.event_container_moderate,
-			EVENT_LEVEL_MAJOR    = new global.using_map.event_container_major
+			new global.using_map.event_container_mundane,
+			new global.using_map.event_container_moderate,
+			new global.using_map.event_container_major
 		)
 		all_events = null
 

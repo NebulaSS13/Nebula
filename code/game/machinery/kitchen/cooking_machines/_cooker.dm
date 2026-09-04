@@ -37,12 +37,12 @@
 		cooking_obj = null
 	return ..()
 
-/obj/machinery/cooker/examine(mob/user)
+/obj/machinery/cooker/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(cooking_obj)
-		to_chat(user, "You can see \a [cooking_obj] inside.")
+		. += "You can see \a [cooking_obj] inside."
 	if(panel_open)
-		to_chat(user, "The panel is open.")
+		. += "The service panel is open."
 
 /obj/machinery/cooker/components_are_accessible(path)
 	return !cooking && ..()
@@ -65,14 +65,14 @@
 	return	TRUE
 
 
-/obj/machinery/cooker/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/cooker/attackby(var/obj/item/used_item, var/mob/user)
 	set waitfor = 0  //So that any remaining parts of calling proc don't have to wait for the long cooking time ahead.
 
 	if(cooking)
 		to_chat(user, "<span class='warning'>\The [src] is running!</span>")
 		return TRUE
 
-	if((. = component_attackby(I, user)))
+	if((. = component_attackby(used_item, user)))
 		return
 
 	if(!cook_type || (stat & (NOPOWER|BROKEN)))
@@ -80,7 +80,7 @@
 		return TRUE
 
 	// We're trying to cook something else. Check if it's valid.
-	var/obj/item/food/check = I
+	var/obj/item/food/check = used_item
 	if(istype(check) && islist(check.cooked) && (cook_type in check.cooked))
 		to_chat(user, "<span class='warning'>\The [check] has already been [cook_type].</span>")
 		return TRUE
@@ -100,12 +100,12 @@
 			M.apply_damage(rand(30,40), BURN, BP_CHEST)
 
 	// Not sure why a food item that passed the previous checks would fail to drop, but safety first.
-	if(!user.try_unequip(I))
+	if(!user.try_unequip(used_item))
 		return TRUE
 
 	// We can actually start cooking now.
-	user.visible_message("<span class='notice'>\The [user] puts \the [I] into \the [src].</span>")
-	cooking_obj = I
+	user.visible_message("<span class='notice'>\The [user] puts \the [used_item] into \the [src].</span>")
+	cooking_obj = used_item
 	cooking_obj.forceMove(src)
 	cooking = 1
 	icon_state = on_icon
@@ -131,8 +131,9 @@
 		cook_path = /obj/item/food/variable
 	var/obj/item/food/result = new cook_path(src) //Holy typepaths, Batman.
 
-	if(cooking_obj.reagents && cooking_obj.reagents.total_volume)
-		cooking_obj.reagents.trans_to(result, cooking_obj.reagents.total_volume)
+	var/cooking_reagents = REAGENT_TOTAL_VOLUME(cooking_obj.reagents)
+	if(cooking_reagents > 0)
+		cooking_obj.reagents.trans_to(result, cooking_reagents)
 
 	// Set icon and appearance.
 	change_product_appearance(result)

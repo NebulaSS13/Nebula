@@ -4,7 +4,6 @@
 	base_accessory_type   = /decl/sprite_accessory/marking
 	uid                   = "acc_cat_markings"
 	always_apply_defaults = TRUE
-	clear_in_pref_apply   = TRUE
 
 /decl/sprite_accessory/marking
 	icon                  = 'icons/mob/human_races/species/default_markings.dmi'

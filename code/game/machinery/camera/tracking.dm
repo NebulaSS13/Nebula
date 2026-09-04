@@ -149,33 +149,32 @@
 
 /mob/living/silicon/ai/proc/ai_actual_track(mob/living/target)
 	if(!istype(target))	return
-	var/mob/living/silicon/ai/U = usr
 
-	if(target == U.cameraFollow)
+	if(target == cameraFollow)
 		return
 
-	if(U.cameraFollow)
-		U.ai_cancel_tracking()
-	U.cameraFollow = target
-	to_chat(U, "Tracking target...")
+	if(cameraFollow)
+		ai_cancel_tracking()
+	cameraFollow = target
+	to_chat(src, "Tracking target...")
 	target.tracking_initiated()
 
 	spawn (0)
-		while (U.cameraFollow == target)
-			if (U.cameraFollow == null)
+		while (cameraFollow == target)
+			if (cameraFollow == null)
 				return
 
 			switch(target.tracking_status())
 				if(TRACKING_NO_COVERAGE)
-					to_chat(U, "Target is not near any active cameras.")
+					to_chat(src, "Target is not near any active cameras.")
 					sleep(100)
 					continue
 				if(TRACKING_TERMINATE)
-					U.ai_cancel_tracking(1)
+					ai_cancel_tracking(1)
 					return
 
-			if(U.eyeobj)
-				U.eyeobj.setLoc(get_turf(target), 0)
+			if(eyeobj)
+				eyeobj.setLoc(get_turf(target), 0)
 			else
 				view_core()
 				return

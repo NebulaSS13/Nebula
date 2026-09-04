@@ -90,6 +90,7 @@
 			continue // We only check if user is provided. If no user is provided, it's assumed to be an admin check.
 		. |= M.network_tag
 
+/// Returns the first (order is arbitrarily decided) fileserver with a given mainframe role.
 /datum/computer_network/proc/get_file_server_by_role(role, list/accesses)
 	if(length(get_mainframes_by_role(role, accesses)) > 0)
 		return get_mainframes_by_role(role, accesses)[1]

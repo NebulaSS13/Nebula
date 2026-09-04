@@ -89,7 +89,7 @@
 /obj/machinery/papershredder/proc/is_bin_empty()
 	return !(length(shredder_bin) > 0 && cached_total_matter)
 
-/obj/machinery/papershredder/proc/can_shred(var/obj/item/I, var/mob/user = null)
+/obj/machinery/papershredder/proc/can_shred_document(var/obj/item/I, var/mob/user = null)
 	if(!istype(I))
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [I] cannot be shredded by \the [src]!"))
@@ -115,12 +115,12 @@
 /obj/machinery/papershredder/attackby(var/obj/item/used_item, var/mob/user)
 	//Silently skip tools, and things we don't have the dexterity to use
 	if(!has_extension(used_item, /datum/extension/tool) && used_item.user_can_attack_with(user, silent = TRUE))
-		var/trying_to_smack = !(used_item.item_flags & ITEM_FLAG_NO_BLUDGEON) && user && user.a_intent == I_HURT
+		var/trying_to_smack = !(used_item.item_flags & ITEM_FLAG_NO_BLUDGEON) && user && user.check_intent(I_FLAG_HARM)
 		if(used_item.storage)
 			empty_bin(user, used_item)
 			return TRUE
 
-		else if(!trying_to_smack && can_shred(used_item))
+		else if(!trying_to_smack && can_shred_document(used_item))
 			shred(used_item, user)
 			return TRUE
 	return ..()
@@ -129,6 +129,9 @@
 /obj/machinery/papershredder/proc/create_shredded()
 	for(var/key in shredder_bin)
 		var/decl/material/M = GET_DECL(key)
+		var/shard_type = M.shard_type
+		if(!shard_type)
+			continue
 		var/amt_per_shard = atom_info_repository.get_matter_for(M.shard_type, key, 1)
 		if(shredder_bin[key] > amt_per_shard)
 			LAZYADD(., M.place_cuttings(src, shredder_bin[key]))
@@ -193,6 +196,7 @@
 /decl/interaction_handler/empty/paper_shredder
 	name = "Empty Bin"
 	expected_target_type = /obj/machinery/papershredder
+	examine_desc         = "empty $TARGET_THEM$"
 
 /decl/interaction_handler/empty/paper_shredder/is_possible(obj/machinery/papershredder/target, mob/user, obj/item/prop)
 	return ..() && !target.is_bin_empty()
@@ -223,9 +227,9 @@
 	if(material)
 		SetName("[initial(name)] [material.solid_name]")
 
-/obj/item/shreddedp/attackby(var/obj/item/W, var/mob/user)
-	if(W.isflamesource())
-		burnpaper(W, user)
+/obj/item/shreddedp/attackby(var/obj/item/used_item, var/mob/user)
+	if(used_item.isflamesource())
+		burnpaper(used_item, user)
 		return TRUE
 	return ..()
 

@@ -15,7 +15,7 @@
 	cable.amount = 100
 
 /obj/machinery/cablelayer/Move(new_turf,M_Dir)
-	..()
+	. = ..()
 	layCable(new_turf,M_Dir)
 
 /obj/machinery/cablelayer/physical_attack_hand(mob/user)
@@ -26,19 +26,19 @@
 	user.visible_message("\The [user] [!on?"dea":"a"]ctivates \the [src].", "You switch [src] [on? "on" : "off"]")
 	return TRUE
 
-/obj/machinery/cablelayer/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/stack/cable_coil))
+/obj/machinery/cablelayer/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/stack/cable_coil))
 
-		var/result = load_cable(O)
+		var/result = load_cable(used_item)
 		if(!result)
 			to_chat(user, "<span class='warning'>\The [src]'s cable reel is full.</span>")
 		else
 			to_chat(user, "You load [result] lengths of cable into [src].")
 		return TRUE
 
-	if(IS_WIRECUTTER(O))
+	if(IS_WIRECUTTER(used_item))
 		if(cable && cable.amount)
-			var/m = round(input(usr,"Please specify the length of cable to cut","Cut cable",min(cable.amount,30)) as num, 1)
+			var/m = round(input(user,"Please specify the length of cable to cut","Cut cable",min(cable.amount,30)) as num, 1)
 			m = min(m, cable.amount)
 			m = min(m, 30)
 			if(m)
@@ -47,13 +47,13 @@
 				var/obj/item/stack/cable_coil/CC = new (get_turf(src))
 				CC.amount = m
 		else
-			to_chat(usr, "<span class='warning'>There's no more cable on the reel.</span>")
+			to_chat(user, "<span class='warning'>There's no more cable on the reel.</span>")
 		return TRUE
 	return ..()
 
-/obj/machinery/cablelayer/examine(mob/user)
+/obj/machinery/cablelayer/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "\The [src]'s cable reel has [cable.amount] length\s left.")
+	. += "\The [src]'s cable reel has [cable.amount] length\s left."
 
 /obj/machinery/cablelayer/proc/load_cable(var/obj/item/stack/cable_coil/CC)
 	if(istype(CC) && CC.amount)
@@ -87,7 +87,7 @@
 	if(istype(new_turf, /turf/floor))
 		var/turf/floor/T = new_turf
 		if(!T.is_plating())
-			T.set_flooring(null, place_product = !T.is_floor_damaged())
+			T.clear_flooring(place_product = !T.is_floor_damaged())
 	return new_turf.is_plating()
 
 /obj/machinery/cablelayer/proc/layCable(var/turf/new_turf,var/M_Dir)

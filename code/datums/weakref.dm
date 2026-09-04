@@ -14,15 +14,13 @@
 	return D.weakref
 
 /weakref
-	var/ref
-
-	// Handy info for debugging
-	var/tmp/ref_name
-	var/tmp/ref_type
+	var/ref          //- Actual datum ref.
+	var/name         //- Useful for input() on lists of weakrefs.
+	var/tmp/ref_type //- Handy info for debugging
 
 /weakref/New(datum/D)
-	ref = "\ref[D]"
-	ref_name = "[D]"
+	ref      = "\ref[D]"
+	name     = "[D]"
 	ref_type = D.type
 
 /weakref/Destroy()
@@ -38,7 +36,7 @@
 	return null
 
 /weakref/get_log_info_line()
-	return "[ref_name] ([ref_type]) ([ref]) (WEAKREF)"
+	return "[name] ([ref_type]) ([ref]) (WEAKREF)"
 
 /weakref/CanClone()
 	return FALSE //Pass weakref as references since they're unique per atom instance

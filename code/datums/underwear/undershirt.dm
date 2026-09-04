@@ -1,4 +1,5 @@
 /datum/category_item/underwear/undershirt
+	abstract_type = /datum/category_item/underwear/undershirt
 	underwear_name = "undershirt"
 	underwear_type = /obj/item/underwear/undershirt
 

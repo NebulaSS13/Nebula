@@ -73,7 +73,6 @@ var/global/list/admin_verbs_admin = list(
 	/datum/admins/proc/show_skills,
 	/client/proc/man_up,
 	/client/proc/global_man_up,
-	/client/proc/response_team, // Response Teams admin verb,
 	/client/proc/toggle_antagHUD_use,
 	/client/proc/toggle_antagHUD_restrictions,
 	/client/proc/allow_character_respawn,    // Allows a ghost to respawn ,
@@ -158,13 +157,13 @@ var/global/list/admin_verbs_server = list(
 	/datum/admins/proc/removeserverwhitelist,
 	/datum/admins/proc/panicbunker,
 	/datum/admins/proc/addbunkerbypass,
-	/datum/admins/proc/revokebunkerbypass
+	/datum/admins/proc/revokebunkerbypass,
+	/datum/admins/proc/force_persistence_save_verb
 	)
 var/global/list/admin_verbs_debug = list(
 	/datum/admins/proc/jump_to_fluid_source,
 	/datum/admins/proc/jump_to_fluid_active,
 	/client/proc/cmd_admin_list_open_jobs,
-	/client/proc/Debug2,
 	/client/proc/ZASSettings,
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/debug_controller,
@@ -219,6 +218,7 @@ var/global/list/admin_verbs_debug = list(
 	/datum/admins/proc/force_weather_state,
 	/datum/admins/proc/force_kill_weather,
 	/client/proc/force_reload_theme_css,
+	/client/proc/toggle_browser_inspect,
 	)
 
 var/global/list/admin_verbs_paranoid_debug = list(
@@ -288,7 +288,6 @@ var/global/list/admin_verbs_hideable = list(
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/callproc,
 	/client/proc/callproc_target,
-	/client/proc/Debug2,
 	/client/proc/reload_admins,
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/debug_controller,
@@ -882,16 +881,6 @@ var/global/list/admin_verbs_mod = list(
 		sound_to(T, 'sound/voice/ManUp1.ogg')
 
 	log_and_message_admins("told everyone to man up and deal with it.")
-
-/client/proc/give_spell(mob/T as mob in SSmobs.mob_list) // -- Urist
-	set category = "Fun"
-	set name = "Give Spell"
-	set desc = "Gives a spell to a mob."
-	var/spell/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spells
-	if(!S) return
-	T.add_spell(new S)
-	SSstatistics.add_field_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_and_message_admins("gave [key_name(T)] the spell [S].")
 
 /client/proc/change_lobby_screen()
 	set name = "Lobby Screen: Change"

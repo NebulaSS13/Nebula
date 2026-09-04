@@ -22,8 +22,8 @@
 			// Have a chance to rot lots of other walls.
 			var/rotcount = 0
 			var/actual_severity = severity * rand(5, 10)
-			for(var/turf/wall/W in range(5, center)) if(prob(50))
-				W.rot()
+			for(var/turf/wall/wall in range(5, center)) if(prob(50))
+				wall.rot()
 				rotcount++
 
 				// Only rot up to severity walls

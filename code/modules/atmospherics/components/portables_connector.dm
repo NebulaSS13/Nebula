@@ -3,7 +3,7 @@
 	icon_state = "map_connector"
 
 	name = "connector port"
-	desc = "For connecting portable devices related to atmospherics control."
+	desc = "A connector port with a flexible tube that can be attached to portable atmospherics devices using a wrench."
 
 	dir = SOUTH
 	initialize_directions = SOUTH
@@ -60,16 +60,12 @@
 			return list(connection.merged_mixture)
 
 /obj/machinery/atmospherics/portables_connector/deconstruction_pressure_check()
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
-		return FALSE
-	return TRUE
+	return !check_internal_pressure_difference_over(2 ATM)
 
 /obj/machinery/atmospherics/portables_connector/cannot_transition_to(state_path, mob/user)
 	if(state_path == /decl/machine_construction/default/deconstructed)
 		if (connected_device)
-			return SPAN_WARNING("You cannot unwrench \the [src], dettach \the [connected_device] first.")
+			return SPAN_WARNING("You cannot unwrench \the [src], detach \the [connected_device] first.")
 		if (locate(/obj/machinery/portable_atmospherics, src.loc))
 			return MCS_BLOCK
 	return ..()

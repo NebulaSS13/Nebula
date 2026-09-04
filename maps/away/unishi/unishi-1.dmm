@@ -26,7 +26,7 @@
 /turf/floor,
 /area/unishi/engineering)
 "af" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;
@@ -251,7 +251,7 @@
 /area/unishi/engineering)
 "aO" = (
 /obj/machinery/atmospherics/unary/tank/oxygen{
-	volume = 3200
+	gas_volume = 3200
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor,
@@ -262,7 +262,7 @@
 /turf/floor,
 /area/unishi/engineroom)
 "aQ" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24;

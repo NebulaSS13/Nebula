@@ -4,6 +4,6 @@
 	icon_state = "fire0"
 	screen_loc = ui_construct_fire
 
-/obj/screen/construct_health
+/obj/screen/health/construct
 	name = "health"
 	screen_loc = ui_construct_health

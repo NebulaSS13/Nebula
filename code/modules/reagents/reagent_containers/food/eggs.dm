@@ -8,7 +8,7 @@
 	icon = 'icons/obj/food/eggs/egg.dmi'
 	icon_state = ICON_STATE_WORLD
 	filling_color = "#fdffd1"
-	volume = 10
+	chem_volume = 10
 	center_of_mass = @'{"x":16,"y":13}'
 	material = /decl/material/solid/organic/bone/eggshell
 	obj_flags = OBJ_FLAG_HOLLOW
@@ -22,7 +22,7 @@
 	if(!(proximity && ATOM_IS_OPEN_CONTAINER(O))) // Must be adjacent and open.
 		return
 	to_chat(user, "You crack \the [src] into \the [O].")
-	reagents.trans_to(O, reagents.total_volume)
+	reagents.trans_to(O, REAGENT_TOTAL_VOLUME(reagents))
 	qdel(src)
 
 /obj/item/food/egg/throw_impact(atom/hit_atom)
@@ -30,19 +30,19 @@
 	if(QDELETED(src))
 		return // Could potentially happen with unscupulous atoms on hitby() throwing again, etc.
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
-	reagents.splash(hit_atom, reagents.total_volume)
+	reagents.splash(hit_atom, REAGENT_TOTAL_VOLUME(reagents))
 	visible_message("<span class='warning'>\The [src] has been squashed!</span>","<span class='warning'>You hear a smack.</span>")
 	qdel(src)
 
-/obj/item/food/egg/attackby(obj/item/W, mob/user)
-	if(IS_PEN(W))
-		var/clr = W.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR_NAME)
+/obj/item/food/egg/attackby(obj/item/used_item, mob/user)
+	if(IS_PEN(used_item))
+		var/clr = used_item.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR_NAME)
 
 		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
-			to_chat(usr, SPAN_WARNING("The egg refuses to take on this color!"))
+			to_chat(user, SPAN_WARNING("The egg refuses to take on this color!"))
 			return TRUE
 
-		to_chat(usr, SPAN_NOTICE("You color \the [src] [clr]"))
+		to_chat(user, SPAN_NOTICE("You color \the [src] [clr]"))
 		icon_state = "egg-[clr]"
 		return TRUE
 	return ..()
@@ -96,7 +96,7 @@
 
 /obj/item/food/boiledegg
 	name = "boiled egg"
-	desc = "A hard boiled egg."
+	desc = "A hard-boiled egg."
 	icon = 'icons/obj/food/eggs/egg.dmi'
 	icon_state = ICON_STATE_WORLD
 	filling_color = "#ffffff"

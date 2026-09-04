@@ -6,7 +6,7 @@
 	density = TRUE
 	anchored = TRUE
 	setup = 0
-	current_health = 0 //destroying the statue kills the mob within
+	max_health = 1 //destroying the statue kills the mob within
 	var/intialTox = 0 	//these are here to keep the mob from taking damage from things that logically wouldn't affect a rock
 	var/intialFire = 0	//it's a little sloppy I know but it was this or the GODMODE flag. Lesser of two evils.
 	var/intialBrute = 0
@@ -98,10 +98,10 @@
 		current_health -= 60 / severity
 		check_health()
 
-/obj/structure/closet/statue/attackby(obj/item/I, mob/user)
-	current_health -= I.get_attack_force(user)
+/obj/structure/closet/statue/attackby(obj/item/used_item, mob/user)
+	current_health -= used_item.expend_attack_force(user)
 	user.do_attack_animation(src)
-	visible_message("<span class='danger'>[user] strikes [src] with [I].</span>")
+	visible_message("<span class='danger'>[user] strikes [src] with [used_item].</span>")
 	check_health()
 	return TRUE
 

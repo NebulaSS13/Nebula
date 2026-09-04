@@ -27,7 +27,7 @@
 
 /turf/floor/fluid_act(var/datum/reagents/fluids)
 	. = ..()
-	if(!QDELETED(fluids) && fluids.total_volume)
+	if(!QDELETED(fluids) && REAGENT_TOTAL_VOLUME(fluids))
 		for(var/decl/flooring/flooring in get_all_flooring())
 			if(flooring.fluid_act(src, fluids))
 				return
@@ -42,7 +42,7 @@
 	if(!is_floor_burned() && prob(5))
 		burn_tile(exposed_temperature)
 	else if(temp_destroy && exposed_temperature >= (temp_destroy + 100) && prob(1) && has_flooring())
-		set_flooring(null) //destroy the tile, exposing plating
+		remove_flooring(get_topmost_flooring()) //destroy the tile, exposing plating
 		burn_tile(exposed_temperature)
 	return ..()
 
@@ -54,6 +54,6 @@
 /turf/floor/adjacent_fire_act(turf/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	var/dir_to = get_dir(src, adj_turf)
 
-	for(var/obj/structure/window/W in src)
-		if(W.dir == dir_to || W.is_fulltile()) //Same direction or diagonal (full tile)
-			W.fire_act(adj_air, adj_temp, adj_volume)
+	for(var/obj/structure/window/window in src)
+		if(window.dir == dir_to || window.is_fulltile()) //Same direction or diagonal (full tile)
+			window.fire_act(adj_air, adj_temp, adj_volume)

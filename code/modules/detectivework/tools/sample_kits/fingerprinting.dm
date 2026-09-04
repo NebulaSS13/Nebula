@@ -80,7 +80,7 @@
 	if(!can_take_print_from(H, user))
 		return 1
 
-	var/time_to_take = H.a_intent == I_HELP ? 1 SECOND : 3 SECONDS
+	var/time_to_take = H.check_intent(I_FLAG_HELP) ? 1 SECOND : 3 SECONDS
 	user.visible_message(SPAN_NOTICE("\The [user] starts taking fingerprints from \the [H]."))
 	if(!do_mob(user, H, time_to_take))
 		user.visible_message(SPAN_WARNING("\The [user] tries to take prints from \the [H], but they move away."))

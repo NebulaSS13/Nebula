@@ -11,34 +11,33 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 
-/obj/machinery/seed_extractor/attackby(var/obj/item/O, var/mob/user)
+/obj/machinery/seed_extractor/attackby(var/obj/item/used_item, var/mob/user)
 
 	// Fruits and vegetables.
-	if(istype(O, /obj/item/food/grown))
-		if(!user.try_unequip(O))
+	if(istype(used_item, /obj/item/food/grown))
+		if(!user.try_unequip(used_item))
 			return TRUE
-		var/obj/item/food/grown/F = O
+		var/obj/item/food/grown/F = used_item
 		if(!F.seed)
-			to_chat(user, SPAN_WARNING("\The [O] doesn't seem to have any usable seeds inside it."))
+			to_chat(user, SPAN_WARNING("\The [used_item] doesn't seem to have any usable seeds inside it."))
 			return TRUE
-		to_chat(user, SPAN_NOTICE("You extract some seeds from [O]."))
+		to_chat(user, SPAN_NOTICE("You extract some seeds from [used_item]."))
 		for(var/i = 1 to rand(1,4))
 			new /obj/item/seeds/modified(get_turf(src), null, F.seed)
-		qdel(O)
+		qdel(used_item)
 		return TRUE
 
 	//Grass.
-	if(istype(O, /obj/item/stack/tile/grass))
-		var/obj/item/stack/tile/grass/S = O
+	if(istype(used_item, /obj/item/stack/tile/grass))
+		var/obj/item/stack/tile/grass/S = used_item
 		if (S.use(1))
 			to_chat(user, SPAN_NOTICE("You extract some seeds from the grass tile."))
 			new /obj/item/seeds/grassseed(loc)
 		return TRUE
 
-	if(istype(O, /obj/item/fossil/plant)) // Fossils
-		var/obj/item/seeds/random/R = new(get_turf(src))
-		to_chat(user, SPAN_NOTICE("\The [src] scans \the [O] and spits out \a [R]."))
-		qdel(O)
+	if(istype(used_item, /obj/item/fossil/plant)) // Fossils
+		to_chat(user, SPAN_NOTICE("\The [src] scans \the [used_item] and spits out \a [new /obj/item/seeds/random(get_turf(src))]."))
+		qdel(used_item)
 		return TRUE
 
 	return ..()

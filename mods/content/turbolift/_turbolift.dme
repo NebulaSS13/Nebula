@@ -1,0 +1,14 @@
+#ifndef MODPACK_TURBOLIFT
+#define MODPACK_TURBOLIFT
+// BEGIN_INCLUDE
+#include "_turbolift.dm"
+#include "turbolift.dm"
+#include "turbolift_areas.dm"
+#include "turbolift_console.dm"
+#include "turbolift_door.dm"
+#include "turbolift_floor.dm"
+#include "turbolift_init.dm"
+#include "turbolift_map.dm"
+#include "turbolift_turfs.dm"
+// END_INCLUDE
+#endif

@@ -137,11 +137,6 @@
 	add_device(D)
 	add_log("New main router set.", router.network_tag)
 
-/datum/computer_network/proc/set_access_controller(datum/extension/network_device/D)
-	access_controller = D
-	devices |= D
-	add_log("New main access controller set.", D.network_tag)
-
 // Returns list(signal type, signal strength) on success, null on failure.
 /datum/computer_network/proc/check_connection(datum/extension/network_device/D, specific_action)
 	if(!router)

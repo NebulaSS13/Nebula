@@ -64,16 +64,14 @@
 
 	// These values may be null and are generally optional.
 	var/hair_colour      = GET_HAIR_COLOR(src)
-	var/tail_hair        = tail_organ.get_tail_hair()
 	var/tail_blend       = tail_organ.get_tail_blend()
-	var/tail_hair_blend  = tail_organ.get_tail_hair_blend()
 	var/list/tail_colors = tail_organ.get_tail_metadata()
 	if(!islist(tail_colors) || !length(tail_colors))
 		return
 
 	var/tail_color       = LAZYACCESS(tail_colors, SAM_COLOR)
 	var/tail_inner_color = LAZYACCESS(tail_colors, SAM_COLOR_INNER)
-	var/icon_key = "[tail_state][tail_icon][tail_blend][tail_color][tail_inner_color][tail_hair][tail_hair_blend][hair_colour]"
+	var/icon_key = "[tail_state][tail_icon][tail_blend][tail_color][tail_inner_color][hair_colour]"
 	var/icon/blended_tail_icon = global.tail_icon_cache[icon_key]
 	if(!blended_tail_icon)
 
@@ -89,14 +87,6 @@
 					inner_tail.Blend(tail_inner_color, tail_blend)
 					blended_tail_icon.Blend(inner_tail, ICON_OVERLAY)
 
-		// The following will not work with animated tails.
-		if(tail_hair)
-			var/tail_hair_state = "[tail_state]_[tail_hair]"
-			if(check_state_in_icon(tail_hair_state, tail_icon))
-				var/icon/hair_icon = icon(tail_icon, tail_hair_state)
-				if(hair_colour && !isnull(tail_hair_blend)) // 0 is a valid blend mode
-					hair_icon.Blend(hair_colour, tail_hair_blend)
-				blended_tail_icon.Blend(hair_icon, ICON_OVERLAY)
 		global.tail_icon_cache[icon_key] = blended_tail_icon
 	return blended_tail_icon
 

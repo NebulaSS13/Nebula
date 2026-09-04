@@ -1,0 +1,2 @@
+/obj/machinery/atmospherics/unary/heater/@SUBTYPES : /obj/machinery/atmospherics/unary/temperature/heater{@OLD}
+/obj/machinery/atmospherics/unary/freezer/@SUBTYPES : /obj/machinery/atmospherics/unary/temperature/freezer{@OLD}

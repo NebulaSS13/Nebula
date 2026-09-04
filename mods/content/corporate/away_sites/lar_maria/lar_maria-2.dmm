@@ -509,7 +509,7 @@
 /turf/floor/plating,
 /area/lar_maria/solar_control)
 "br" = (
-/obj/machinery/suit_cycler,
+/obj/machinery/suit_cycler/engineering/prepared/atmospheric,
 /turf/floor/plating,
 /area/lar_maria/solar_control)
 "bs" = (
@@ -573,7 +573,7 @@
 /turf/floor/plating,
 /area/lar_maria/solar_control)
 "bB" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -617,6 +617,9 @@
 /obj/structure/bookcase,
 /obj/machinery/light{
 	dir = 1
+	},
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
 	},
 /turf/floor/tiled,
 /area/lar_maria/library)
@@ -694,37 +697,37 @@
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "bV" = (
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "bW" = (
 /obj/machinery/door/firedoor,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "bX" = (
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "bY" = (
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "bZ" = (
 /obj/effect/decal/cleanable/blood,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "ca" = (
 /obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "cb" = (
 /obj/structure/closet/emcloset,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "cc" = (
 /obj/machinery/light{
@@ -798,41 +801,59 @@
 /area/lar_maria/dorms)
 "cp" = (
 /obj/machinery/door/airlock,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "cq" = (
 /obj/machinery/door/airlock,
 /obj/effect/decal/cleanable/blood,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "cr" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/engineering_guide,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cs" = (
 /obj/structure/bookcase,
 /obj/item/book/fluff/stasis,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cu" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/medical_diagnostics_manual,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cv" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/detective,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cx" = (
 /obj/structure/bookcase,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cy" = (
 /obj/structure/bookcase,
 /obj/item/book/fluff/anomaly_spectroscopy,
 /obj/item/book/fluff/anomaly_testing,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
 /turf/floor/tiled,
 /area/lar_maria/library)
 "cz" = (
@@ -854,35 +875,35 @@
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "cD" = (
-/obj/structure/table/woodentable,
-/turf/floor/wood,
+/obj/structure/table/laminate,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "cE" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/smokes,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "cF" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/toy,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "cG" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/box/glowsticks,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "cH" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/smokes,
 /obj/random/drinkbottle,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "cI" = (
 /obj/machinery/computer/modular{
 	dir = 8
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "cJ" = (
 /obj/structure/window/basic{
@@ -899,7 +920,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/structure/bed/chair/office/light{
+/obj/structure/chair/office/light{
 	dir = 8
 	},
 /turf/floor/tiled,
@@ -920,7 +941,7 @@
 /obj/structure/window/basic{
 	dir = 4
 	},
-/obj/structure/bed/chair/office/light{
+/obj/structure/chair/office/light{
 	dir = 8
 	},
 /turf/floor/tiled,
@@ -959,7 +980,7 @@
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "cR" = (
-/obj/machinery/atmospherics/binary/pump{
+/obj/machinery/atmospherics/binary/pump/on{
 	dir = 4
 	},
 /turf/floor/plating,
@@ -1006,35 +1027,35 @@
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "cY" = (
-/obj/structure/bed/chair/comfy/purple{
+/obj/structure/chair/comfy/purple{
 	dir = 1
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "cZ" = (
 /obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "da" = (
 /obj/structure/bookcase/manuals/medical,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "db" = (
-/obj/structure/bed/chair/comfy/black{
+/obj/structure/chair/comfy/black{
 	dir = 1
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "dc" = (
 /mob/living/simple_animal/hostile/lar_maria/guard/ranged,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "de" = (
-/obj/structure/bed/chair/comfy/brown{
+/obj/structure/chair/comfy/brown{
 	dir = 1
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "df" = (
 /obj/structure/closet,
@@ -1042,11 +1063,11 @@
 /obj/random/smokes,
 /obj/random/snack,
 /obj/random/snack,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "dg" = (
 /obj/structure/bookcase/manuals/engineering,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "dh" = (
 /obj/structure/window/basic,
@@ -1062,7 +1083,7 @@
 /turf/floor/tiled,
 /area/lar_maria/library)
 "dj" = (
-/obj/structure/bed/chair/office/light{
+/obj/structure/chair/office/light{
 	dir = 4
 	},
 /turf/floor/tiled,
@@ -1094,7 +1115,11 @@
 /area/lar_maria/atmos)
 "dn" = (
 /obj/machinery/atmospherics/omni/mixer{
-	dir = 4
+	dir = 4;
+	tag_west = 1;
+	tag_north = 1;
+	tag_north_con = 0.79;
+	tag_west_con = 0.21
 	},
 /turf/floor/plating,
 /area/lar_maria/atmos)
@@ -1106,43 +1131,45 @@
 /area/lar_maria/atmos)
 "dp" = (
 /obj/machinery/atmospherics/omni/filter{
-	dir = 4
+	dir = 4;
+	tag_south = 8;
+	tag_filter_gas_south = "gas_carbon_dioxide";
+	tag_east = 2;
+	tag_west = 1
 	},
-/obj/abstract/landmark/allowed_leak,
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "dr" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan,
-/obj/abstract/landmark/allowed_leak,
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "ds" = (
 /mob/living/simple_animal/hostile/lar_maria/virologist,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "dt" = (
 /obj/structure/bed/padded,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "du" = (
 /obj/machinery/light,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "dv" = (
 /obj/structure/closet,
 /obj/random/masks,
 /obj/random/accessory,
 /obj/random/smokes,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "dw" = (
 /obj/random/closet,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "dx" = (
 /obj/structure/bed/padded,
 /obj/random/plushie,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "dy" = (
 /obj/structure/window/basic,
@@ -1179,12 +1206,10 @@
 /area/lar_maria/atmos)
 "dD" = (
 /obj/machinery/atmospherics/binary/oxyregenerator,
-/obj/abstract/landmark/allowed_leak,
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "dE" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
-/obj/abstract/landmark/allowed_leak,
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "dF" = (
@@ -1212,7 +1237,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "dJ" = (
 /obj/structure/window/basic{
@@ -1289,7 +1314,7 @@
 /turf/floor/plating,
 /area/lar_maria/atmos)
 "dS" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1316,18 +1341,18 @@
 "dX" = (
 /obj/structure/bed/padded,
 /obj/random/plushie/large,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "dY" = (
 /obj/structure/closet,
 /obj/random/loot,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "dZ" = (
 /obj/structure/closet,
 /obj/random/shoes,
 /obj/random/snack,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "ea" = (
 /obj/structure/table,
@@ -1338,7 +1363,7 @@
 /obj/structure/window/basic{
 	dir = 4
 	},
-/obj/structure/bed/chair/office/light{
+/obj/structure/chair/office/light{
 	dir = 8
 	},
 /turf/floor/tiled,
@@ -1358,7 +1383,7 @@
 /obj/structure/window/basic{
 	dir = 4
 	},
-/obj/structure/bed/chair/office/light{
+/obj/structure/chair/office/light{
 	dir = 8
 	},
 /obj/machinery/light,
@@ -1374,7 +1399,7 @@
 /turf/floor/tiled,
 /area/lar_maria/library)
 "eh" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1386,41 +1411,41 @@
 /turf/floor/tiled,
 /area/lar_maria/library)
 "ei" = (
-/obj/structure/bed/chair/comfy/beige,
-/turf/floor/wood,
+/obj/structure/chair/comfy/beige,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "ej" = (
 /obj/machinery/botany,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "ek" = (
-/obj/structure/bed/chair/comfy/brown,
-/turf/floor/wood,
+/obj/structure/chair/comfy/brown,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "el" = (
 /obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "em" = (
 /obj/machinery/suit_cycler,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "en" = (
 /obj/structure/closet,
 /obj/random/loot,
 /obj/random/accessory,
 /obj/item/clothing/head/soft/zhp_cap,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "eo" = (
-/obj/structure/bed/chair/comfy/green,
-/turf/floor/wood,
+/obj/structure/chair/comfy/green,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "ep" = (
 /obj/structure/closet,
 /obj/random/accessory,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "eq" = (
 /turf/wall/r_wall,
@@ -1482,13 +1507,13 @@
 /turf/floor/tiled,
 /area/lar_maria/office)
 "eC" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/paper_bin,
 /obj/item/pen/blue,
 /turf/floor/tiled,
 /area/lar_maria/office)
 "eD" = (
-/obj/structure/bed/chair/office/light,
+/obj/structure/chair/office/light,
 /obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
 /turf/floor/tiled,
@@ -1498,20 +1523,20 @@
 /turf/floor/tiled,
 /area/lar_maria/office)
 "eF" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/box/handcuffs,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "eG" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/smokes,
 /obj/random/snack,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "eH" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/box/beakers,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "eI" = (
 /obj/structure/hygiene/toilet,
@@ -1588,7 +1613,7 @@
 /turf/floor/tiled,
 /area/lar_maria/office)
 "eU" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /turf/floor/tiled,
 /area/lar_maria/office)
 "eV" = (
@@ -1642,7 +1667,7 @@
 "fh" = (
 /obj/machinery/door/firedoor,
 /obj/effect/decal/cleanable/blood,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fi" = (
 /obj/machinery/alarm{
@@ -1650,7 +1675,7 @@
 	pixel_y = -25
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fj" = (
 /obj/machinery/light/small{
@@ -1663,7 +1688,7 @@
 /turf/floor/tiled/white,
 /area/lar_maria/head_m)
 "fl" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1696,7 +1721,7 @@
 /turf/floor/tiled,
 /area/lar_maria/office)
 "fo" = (
-/obj/structure/bed/chair/office/light,
+/obj/structure/chair/office/light,
 /turf/floor/tiled,
 /area/lar_maria/office)
 "fp" = (
@@ -1783,7 +1808,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/floor/tiled,
@@ -1794,7 +1819,7 @@
 /turf/floor/tiled,
 /area/lar_maria/office)
 "fB" = (
-/obj/structure/bed/chair/office/light,
+/obj/structure/chair/office/light,
 /obj/effect/decal/cleanable/blood,
 /turf/floor/tiled,
 /area/lar_maria/office)
@@ -1812,31 +1837,31 @@
 /turf/floor/tiled,
 /area/lar_maria/office)
 "fF" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/cane/aluminium,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fG" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/item/clothing/head/soft/zhp_cap,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fH" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/drinkbottle,
 /obj/random/contraband,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fI" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/toolbox,
 /obj/item/scalpel,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fJ" = (
-/obj/structure/table/woodentable,
+/obj/structure/table/laminate,
 /obj/random/snack,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fK" = (
 /obj/machinery/door/airlock,
@@ -1853,6 +1878,7 @@
 "fM" = (
 /obj/structure/table,
 /obj/random/gloves,
+/obj/random/medical/lite,
 /turf/floor/tiled,
 /area/lar_maria/office)
 "fN" = (
@@ -1866,6 +1892,7 @@
 "fP" = (
 /obj/structure/table/steel,
 /obj/random/firstaid,
+/obj/random/medical/lite,
 /turf/floor/tiled,
 /area/lar_maria/office)
 "fQ" = (
@@ -1879,7 +1906,7 @@
 /turf/floor/tiled,
 /area/lar_maria/office)
 "fR" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1905,25 +1932,25 @@
 /obj/machinery/vending/engivend{
 	req_access = list()
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fV" = (
 /mob/living/simple_animal/hostile/lar_maria/guard,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fW" = (
 /obj/structure/bookcase,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fX" = (
 /mob/living/simple_animal/hostile/lar_maria/virologist/female,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fY" = (
 /obj/structure/closet,
 /obj/random/handgun,
 /obj/random/powercell,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "fZ" = (
 /obj/structure/hygiene/shower{
@@ -2001,7 +2028,7 @@
 /turf/floor/tiled,
 /area/lar_maria/office)
 "gl" = (
-/obj/structure/bed/chair/office/light{
+/obj/structure/chair/office/light{
 	dir = 1
 	},
 /turf/floor/tiled,
@@ -2012,10 +2039,10 @@
 	dir = 4;
 	pixel_x = -25
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "gn" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2024,12 +2051,12 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "go" = (
 /obj/structure/bed/padded,
 /obj/abstract/landmark/corpse/lar_maria/virologist,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/dorms)
 "gp" = (
 /obj/random/trash,
@@ -2067,7 +2094,7 @@
 /obj/machinery/door/airlock,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/mess_hall)
 "gw" = (
 /obj/machinery/door/airlock,
@@ -2076,7 +2103,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/turf/floor/wood,
+/turf/floor/laminate,
 /area/lar_maria/mess_hall)
 "gx" = (
 /turf/wall/r_wall,
@@ -2099,6 +2126,7 @@
 "gC" = (
 /obj/structure/table,
 /obj/random/trash,
+/obj/random/medical/pillbottle,
 /turf/floor/plating,
 /area/lar_maria/hallway)
 "gD" = (
@@ -2188,7 +2216,7 @@
 /turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gQ" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /turf/floor/tiled,
@@ -2200,7 +2228,7 @@
 /turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "gS" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/tiled,
@@ -2248,6 +2276,15 @@
 /area/lar_maria/mess_hall)
 "hb" = (
 /obj/structure/closet/crate/trashcart,
+/obj/random/trash,
+/obj/random/trash,
+/obj/random/trash,
+/obj/random/useful{
+	spawn_nothing_percentage = 70
+	},
+/obj/item/book/union_charter{
+	dat = "<em>The contents of the book are heavily defaced and nearly illegible.</em>"
+	},
 /turf/floor/plating,
 /area/lar_maria/hallway)
 "hc" = (
@@ -2255,7 +2292,7 @@
 /turf/floor/plating,
 /area/lar_maria/hallway)
 "hd" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /obj/machinery/light/small{
@@ -2291,7 +2328,7 @@
 /turf/open,
 /area/lar_maria/hallway)
 "hi" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -2303,7 +2340,7 @@
 /turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "hj" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled,
@@ -2367,21 +2404,17 @@
 "hu" = (
 /turf/floor/plating,
 /area/lar_maria/hallway)
-"hv" = (
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
-/obj/random/trash,
-/turf/floor/plating,
-/area/lar_maria/hallway)
 "hw" = (
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
+	},
+/obj/machinery/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
 	},
 /turf/floor/tiled,
 /area/lar_maria/hallway)
@@ -2493,7 +2526,7 @@
 "hI" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /turf/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "hJ" = (
@@ -2654,7 +2687,7 @@
 /turf/floor/tiled/white,
 /area/lar_maria/head_f)
 "in" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2765,7 +2798,7 @@
 /turf/floor/tiled,
 /area/lar_maria/mess_hall)
 "iz" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/abstract/landmark/corpse/lar_maria/virologist,
@@ -2993,7 +3026,8 @@
 /obj/machinery/button/access/interior{
 	id_tag = "ZHPDock_airlock";
 	pixel_x = 25;
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 8
 	},
 /turf/floor/plating,
 /area/lar_maria/hallway)
@@ -3026,7 +3060,8 @@
 "jn" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "ZHPDock_airlock_sensor";
-	pixel_x = 25
+	pixel_x = 22;
+	dir = 8
 	},
 /turf/floor/plating,
 /area/lar_maria/hallway)
@@ -3052,7 +3087,7 @@
 /turf/floor/plating,
 /area/space)
 "kb" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 8
 	},
 /obj/machinery/light/small{
@@ -3061,7 +3096,7 @@
 /turf/floor/plating,
 /area/lar_maria/solar_control)
 "lb" = (
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/machinery/light/small{
@@ -3089,6 +3124,14 @@
 	},
 /turf/floor/plating,
 /area/lar_maria/solar_control)
+"nm" = (
+/obj/structure/bookcase,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
+	},
+/obj/item/book/manual/evaguide,
+/turf/floor/tiled,
+/area/lar_maria/library)
 "ob" = (
 /obj/structure/ladder,
 /obj/machinery/light/small{
@@ -3097,13 +3140,6 @@
 	},
 /turf/floor/plating,
 /area/lar_maria/solar_control)
-"ok" = (
-/obj/machinery/atmospherics/binary/pump{
-	dir = 4
-	},
-/obj/abstract/landmark/allowed_leak,
-/turf/floor/plating,
-/area/lar_maria/atmos)
 "pb" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
@@ -3161,17 +3197,28 @@
 /obj/machinery/light/small,
 /turf/floor/plating,
 /area/lar_maria/atmos)
+"uf" = (
+/obj/machinery/atmospherics/omni/filter{
+	dir = 4;
+	tag_south = 8;
+	tag_filter_gas_south = "gas_oxygen";
+	tag_east = 2;
+	tag_west = 1
+	},
+/turf/floor/plating,
+/area/lar_maria/atmos)
 "vb" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/structure/mirror{
-	pixel_x = 30
-	},
 /obj/machinery/alarm{
 	pixel_y = 23;
 	req_access = newlist()
+	},
+/obj/structure/mirror{
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/floor/tiled/white,
 /area/lar_maria/head_m)
@@ -3181,11 +3228,21 @@
 	pixel_x = 11
 	},
 /obj/structure/mirror{
-	pixel_x = 30
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/random/trash,
 /turf/floor/tiled/white,
 /area/lar_maria/head_m)
+"wW" = (
+/obj/machinery/atmospherics/omni/filter{
+	dir = 4;
+	tag_north = 8;
+	tag_east = 2;
+	tag_west = 1
+	},
+/turf/floor/plating,
+/area/lar_maria/atmos)
 "xb" = (
 /obj/structure/hygiene/sink{
 	dir = 8;
@@ -3193,35 +3250,51 @@
 	pixel_y = 2
 	},
 /obj/structure/mirror{
-	pixel_x = -30
+	pixel_x = -29;
+	dir = 4
 	},
 /turf/floor/tiled/white,
 /area/lar_maria/head_f)
-"Ag" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 8
-	},
-/obj/abstract/landmark/allowed_leak,
+"xx" = (
+/obj/machinery/atmospherics/pipe/simple/visible/universal,
 /turf/floor/plating,
 /area/lar_maria/atmos)
+"Ag" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/red{
+	dir = 8
+	},
+/turf/floor/plating,
+/area/lar_maria/atmos)
+"Am" = (
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	id_tag = "ZHPDock";
+	tag_airpump = "ZHPEastSolar_pump";
+	tag_chamber_sensor = "ZHPEastSolar_sensor";
+	tag_exterior_door = "ZHPEastSolar_outer";
+	tag_interior_door = "ZHPEastSolar_inner";
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/floor/plating,
+/area/lar_maria/hallway)
 "DG" = (
 /obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/floor/tiled,
 /area/lar_maria/office)
-"FZ" = (
-/obj/machinery/atmospherics/pipe/simple/visible/red,
-/obj/abstract/landmark/allowed_leak,
+"Kg" = (
+/obj/machinery/suit_cycler/medical/prepared,
 /turf/floor/plating,
-/area/lar_maria/atmos)
-"YS" = (
-/obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 10
+/area/lar_maria/solar_control)
+"NR" = (
+/obj/structure/bookcase,
+/obj/random/single/textbook{
+	spawn_nothing_percentage = 80
 	},
-/obj/abstract/landmark/allowed_leak,
-/turf/floor/plating,
-/area/lar_maria/atmos)
+/obj/item/book/union_charter,
+/turf/floor/tiled,
+/area/lar_maria/library)
 
 (1,1,1) = {"
 aa
@@ -20885,7 +20958,7 @@ bw
 bw
 bI
 cd
-cx
+NR
 cM
 di
 cd
@@ -21489,7 +21562,7 @@ aA
 ad
 bw
 bw
-cx
+nm
 cf
 cx
 cO
@@ -22503,7 +22576,7 @@ pb
 ci
 cA
 cR
-ok
+cR
 dB
 tb
 bx
@@ -22517,7 +22590,7 @@ ex
 eu
 gC
 hd
-hv
+hc
 hS
 iq
 iN
@@ -22704,7 +22777,7 @@ bx
 bM
 ci
 cn
-YS
+cl
 dn
 dB
 bM
@@ -22901,13 +22974,13 @@ aY
 bg
 nb
 br
-br
+Kg
 bx
 bN
 ci
 cn
 cn
-ok
+cR
 dC
 dO
 bx
@@ -23333,7 +23406,7 @@ je
 jg
 ji
 jm
-hu
+Am
 jo
 jq
 aa
@@ -23511,10 +23584,10 @@ bA
 bG
 bQ
 ck
-bQ
 cU
+xx
 Ag
-bQ
+xx
 dR
 bG
 eA
@@ -23713,8 +23786,8 @@ bB
 bx
 bR
 ci
-cn
 cV
+cn
 dp
 dD
 dS
@@ -23917,7 +23990,7 @@ bS
 ci
 cA
 cn
-dp
+uf
 dE
 dT
 bx
@@ -24118,8 +24191,8 @@ bx
 qb
 cl
 cB
-FZ
-dp
+cB
+wW
 dF
 ub
 bx

@@ -48,12 +48,10 @@
 		add_to_reagents(reagent, picked_reagents[reagent])
 
 	var/list/names = new
-	for(var/liquid_type in reagents.liquid_volumes)
-		var/decl/material/liquid = GET_DECL(liquid_type)
-		names += liquid.get_reagent_name(reagents, MAT_PHASE_LIQUID)
+	for(var/decl/material/reagent as anything in REAGENT_LIQUID_VOLUMES(reagents))
+		names += reagent.get_reagent_name(reagents, MAT_PHASE_LIQUID)
 
-	for(var/solid_type in reagents.solid_volumes)
-		var/decl/material/solid = GET_DECL(solid_type)
-		names += solid.get_reagent_name(reagents, MAT_PHASE_SOLID)
+	for(var/decl/material/reagent as anything in REAGENT_SOLID_VOLUMES(reagents))
+		names += reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)
 
 	desc = "Contains [english_list(names)]."

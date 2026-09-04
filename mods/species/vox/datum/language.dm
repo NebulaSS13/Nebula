@@ -22,5 +22,5 @@
 		return FALSE
 	return TRUE
 
-/decl/language/vox/get_random_name()
+/decl/language/vox/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	return ..(FEMALE,1,6)

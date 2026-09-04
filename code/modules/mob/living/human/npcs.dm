@@ -2,7 +2,7 @@
 	real_name = "Pun Pun"
 	gender = MALE
 
-/mob/living/human/monkey/punpun/Initialize(mapload, species_name, datum/mob_snapshot/supplied_appearance)
+/mob/living/human/monkey/punpun/Initialize(mapload, species_uid, datum/mob_snapshot/supplied_appearance)
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
@@ -35,8 +35,8 @@
 	sensor.set_sensor_mode(VITALS_SENSOR_OFF)
 	attach_accessory(null, sensor)
 
-/mob/living/human/blank/Initialize(mapload, species_name, datum/mob_snapshot/supplied_appearance)
-	species_name = SPECIES_HUMAN
+/mob/living/human/blank/Initialize(mapload, species_uid, datum/mob_snapshot/supplied_appearance)
+	species_uid = /decl/species/human::uid
 	..()
 	return INITIALIZE_HINT_LATELOAD
 

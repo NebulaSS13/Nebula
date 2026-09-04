@@ -104,37 +104,34 @@
 			add_overlay(I)
 	pixel_z = default_pixel_z
 
-/turf/floor/on_update_icon(var/update_neighbors)
+/turf/floor/on_update_icon()
 	. = ..()
 
 	color = get_color()
 
 	cut_overlays()
-	update_height_appearance() // Also refreshes out base layer.
-	update_floor_icon(update_neighbors)
+	update_height_appearance() // Also refreshes our base layer.
+	update_floor_icon()
 
 	for(var/image/I in decals)
 		if(I.layer < layer)
 			continue
 		add_overlay(I)
 
-	if(update_neighbors)
-		for(var/turf/floor/F in orange(src, 1))
-			F.queue_ao()
-			F.queue_icon_update()
-
 	compile_overlays()
 
 /turf/floor/proc/update_floor_strings()
 	var/decl/flooring/flooring = get_topmost_flooring()
 	if(istype(flooring))
-		SetName(flooring.name)
-		desc = flooring.desc
+		flooring.update_turf_strings(src)
 	else
 		SetName(initial(name))
 		desc = initial(desc)
+	// do this once name and desc have been updated
+	if(check_fluid_depth(FLUID_SHALLOW))
+		SetName(get_fluid_name()) // just entirely overwrite name, but keep desc
 
-/turf/floor/proc/update_floor_icon(update_neighbors)
+/turf/floor/proc/update_floor_icon()
 	var/decl/flooring/use_flooring = get_topmost_flooring()
 	if(istype(use_flooring))
 		use_flooring.update_turf_icon(src)
@@ -161,6 +158,7 @@
 		_floor_broken = new_broken
 		if(!skip_update)
 			queue_icon_update()
+		state_was_modified()
 		return TRUE
 	return FALSE
 
@@ -175,24 +173,24 @@
 		_floor_burned = new_burned
 		if(!skip_update)
 			queue_icon_update()
+		state_was_modified()
 		return TRUE
 	return FALSE
 
-/decl/flooring/proc/test_link(var/turf/origin, var/turf/opponent)
-	if(!istype(origin) || !istype(opponent))
-		return FALSE
-
+/decl/flooring/proc/test_link(var/turf/opponent)
+	if(omni_smooth) // override EVERYTHING
+		return TRUE
 	// Just a normal floor
 	if (istype(opponent, /turf/floor))
-		var/turf/floor/floor_opponent = opponent
-		var/decl/flooring/opponent_flooring = floor_opponent.get_topmost_flooring()
 		if (floor_smooth == SMOOTH_ALL)
 			return TRUE
+		var/turf/floor/floor_opponent = opponent
+		var/decl/flooring/opponent_flooring = floor_opponent.get_topmost_flooring()
 		//If the floor is the same as us,then we're linked,
-		else if (istype(opponent_flooring, neighbour_type))
+		if (istype(opponent_flooring, neighbour_type))
 			return TRUE
 		//If we get here it must be using a whitelist or blacklist
-		else if (floor_smooth == SMOOTH_WHITELIST)
+		if (floor_smooth == SMOOTH_WHITELIST)
 			if (flooring_whitelist[opponent_flooring.type])
 				//Found a match on the typecache
 				return TRUE
@@ -201,11 +199,10 @@
 				//No match on the typecache
 				return TRUE
 		//Check for window frames.
-		if (wall_smooth == SMOOTH_ALL)
-			if(locate(/obj/structure/wall_frame) in opponent)
-				return TRUE
+		if (wall_smooth == SMOOTH_ALL && locate(/obj/structure/wall_frame) in opponent)
+			return TRUE
 	// Wall turf
-	else if(opponent.is_wall())
+	else if(opponent.is_wall()) // don't combine these so that we don't check if a wall is space just because we don't smooth with walls
 		if(wall_smooth == SMOOTH_ALL)
 			return TRUE
 	//If is_open is true, then it's space or openspace
@@ -213,6 +210,3 @@
 		if(space_smooth == SMOOTH_ALL)
 			return TRUE
 	return FALSE
-
-/decl/flooring/proc/symmetric_test_link(var/turf/A, var/turf/B)
-	return test_link(A, B) && test_link(B,A)

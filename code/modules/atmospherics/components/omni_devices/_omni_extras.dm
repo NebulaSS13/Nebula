@@ -30,7 +30,7 @@
 	if(istype(M))
 		master = M
 	air = new
-	air.volume = 200
+	air.total_volume = 200
 
 /datum/omni_port/Destroy()
 	QDEL_NULL(network)

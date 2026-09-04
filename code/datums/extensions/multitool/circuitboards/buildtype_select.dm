@@ -25,5 +25,5 @@
 			board.build_path = path
 			var/obj/thing = path
 			board.SetName("circuitboard ([initial(thing.name)])")
-			return MT_REFRESH
+			return TOPIC_REFRESH
 	return ..()

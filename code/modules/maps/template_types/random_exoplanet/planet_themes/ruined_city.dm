@@ -123,6 +123,9 @@
 	floor_type = null
 	material = /decl/material/solid/stone/concrete
 
+/turf/wall/concrete/reinforced
+	reinf_material = /decl/material/solid/metal/steel
+
 //Generic ruin
 /datum/random_map/maze/concrete
 	wall_type =  /turf/wall/concrete
@@ -204,7 +207,7 @@
 		return
 
 	if(value == DOOR_VALUE)
-		new/obj/machinery/door/airlock/alien(T)
+		new /obj/machinery/door/airlock/alien(T)
 		return
 
 	if(value == ARTIFACT_VALUE)

@@ -21,13 +21,13 @@
 		skills[skill.type] = SKILL_EXPERT
 	. = ..()
 
-/obj/item/robot_module/syndicate/build_equipment(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/syndicate/build_equipment(var/mob/living/silicon/robot/robot)
 	. = ..()
-	id = R.idcard
+	id = robot.idcard
 	equipment += id
 
-/obj/item/robot_module/syndicate/finalize_equipment(var/mob/living/silicon/robot/R)
-	R.internals = locate(/obj/item/tank/jetpack/carbondioxide) in equipment
+/obj/item/robot_module/syndicate/finalize_equipment(var/mob/living/silicon/robot/robot)
+	robot.set_internals(locate(/obj/item/tank/jetpack/carbondioxide) in equipment)
 	. = ..()
 
 /obj/item/robot_module/syndicate/Destroy()

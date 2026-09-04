@@ -1,6 +1,6 @@
 /datum/artifact_effect/teleport
 	name = "teleport"
-	origin_type = EFFECT_PSIONIC
+	origin_type = XA_EFFECT_PSIONIC
 
 /datum/artifact_effect/teleport/DoEffectTouch(var/mob/user)
 	teleport_away(user)
@@ -22,7 +22,7 @@
 	if(prob(100 * weakness))
 		to_chat(M, "<span class='warning'>You are displaced by a strange force!</span>")
 		if(M.buckled)
-			M.buckled.unbuckle_mob()
+			M.buckled.unbuckle_mob(M)
 		if(M.anchored)
 			return
 		spark_at(get_turf(M))

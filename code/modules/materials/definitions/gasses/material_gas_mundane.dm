@@ -1,7 +1,7 @@
 /decl/material/gas/oxygen
 	name = "oxygen"
 	uid = "gas_oxygen"
-	lore_text = "An ubiquitous oxidizing agent."
+	lore_text = "A ubiquitous oxidizing agent."
 	flags = MAT_FLAG_FUSION_FUEL
 	gas_specific_heat = 20
 	molar_mass = 0.032
@@ -65,28 +65,24 @@
 	. = ..()
 	var/warning_message
 	var/warning_prob = 10
-	var/dosage = LAZYACCESS(M.chem_doses, type)
+	var/dosage = CHEM_DOSE(M, src)
 	var/mob/living/human/H = M
 	if(dosage >= 3)
 		warning_message = pick("extremely dizzy","short of breath","faint","confused")
 		warning_prob = 15
 		M.take_damage(10, OXY,20)
 		if(istype(H))
-			SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 1)
+			SET_HUD_ALERT(H, HUD_OXY, 1)
 	else if(dosage >= 1.5)
 		warning_message = pick("dizzy","short of breath","faint","momentarily confused")
 		M.take_damage(3, OXY,5)
 		if(istype(H))
-			SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 1)
+			SET_HUD_ALERT(H, HUD_OXY, 1)
 	else if(dosage >= 0.25)
 		warning_message = pick("a little dizzy","short of breath")
 		warning_prob = 10
-		if(istype(H))
-			SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 0)
-	else if(istype(H))
-		SET_HUD_ALERT(H, /decl/hud_element/condition/carbon_dioxide, 0)
-	if(istype(H) && dosage > 1 && H.ticks_since_last_successful_breath < 15)
-		H.ticks_since_last_successful_breath++
+	if(istype(H) && dosage > 1 && H.suffocation_counter < 15)
+		H.suffocation_counter++
 	if(warning_message && prob(warning_prob))
 		to_chat(M, SPAN_WARNING("You feel [warning_message]."))
 
@@ -137,7 +133,7 @@
 
 /decl/material/gas/nitrous_oxide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
-	var/dosage = LAZYACCESS(M.chem_doses, type)
+	var/dosage = CHEM_DOSE(M, src)
 	if(dosage >= 1)
 		if(prob(5)) SET_STATUS_MAX(M, STAT_ASLEEP, 3)
 		SET_STATUS_MAX(M, STAT_DIZZY, 3)
@@ -153,7 +149,7 @@
 /decl/material/gas/nitrogen
 	name = "nitrogen"
 	uid = "gas_nitrogen"
-	lore_text = "An ubiquitous noble gas."
+	lore_text = "A ubiquitous noble gas."
 	gas_specific_heat = 20
 	molar_mass = 0.028
 	latent_heat = 199
@@ -261,7 +257,7 @@
 
 /decl/material/gas/xenon/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
-	var/dosage = LAZYACCESS(M.chem_doses, type)
+	var/dosage = CHEM_DOSE(M, src)
 	if(dosage >= 1)
 		if(prob(5)) SET_STATUS_MAX(M, STAT_ASLEEP, 3)
 		SET_STATUS_MAX(M, STAT_DIZZY, 3)

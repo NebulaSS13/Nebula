@@ -1,0 +1,13 @@
+#ifndef MODPACK_SHIP_INERTIA
+#define MODPACK_SHIP_INERTIA
+// BEGIN_INCLUDE
+#include "_inertia.dm"
+#include "fabrication.dm"
+#include "inertia_controller.dm"
+#include "inertia_failure.dm"
+#include "inertial_damper.dm"
+#include "ship_inertia.dm"
+#include "supplies.dm"
+#include "wires.dm"
+// END_INCLUDE
+#endif

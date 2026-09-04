@@ -10,7 +10,15 @@
 			continue
 
 		var/decl/material/p_mat = GET_DECL(reaction.p_react)
+		if(!istype(p_mat))
+			log_error("Could not find /decl instance for [rtype]'s primary reactant [reaction.p_react || "NULL"].")
+			continue
+
 		var/decl/material/s_mat = GET_DECL(reaction.s_react)
+		if(!istype(s_mat))
+			log_error("Could not find /decl instance for [rtype]'s secondary reactant [reaction.s_react || "NULL"].")
+			continue
+
 		var/list/reaction_info = list()
 		reaction_info += "Fusion between [p_mat.name] and [s_mat.name] can be achieved with a plasma temperature of [T0C + reaction.minimum_reaction_temperature] Kelvin or higher."
 		reaction_info += "This reaction consumes [initial(reaction.energy_consumption)] heat unit\s and produces [reaction.energy_production] heat unit\s."

@@ -4,7 +4,7 @@
 	icon_state = "intact"
 	density = TRUE
 
-	name = "Heat Exchanger"
+	name = "heat exchanger"
 	desc = "Exchanges heat between two input gases. Setup for fast heat transfer."
 
 	var/obj/machinery/atmospherics/unary/heat_exchanger/partner = null
@@ -76,12 +76,7 @@
 		partner.update_networks()
 
 /obj/machinery/atmospherics/unary/heat_exchanger/deconstruction_pressure_check()
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-
-	if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
-		return FALSE
-	return TRUE
+	return !check_internal_pressure_difference_over(2 ATM)
 
 /obj/machinery/atmospherics/unary/heat_exchanger/cannot_transition_to(state_path, mob/user)
 	if(state_path == /decl/machine_construction/default/deconstructed)

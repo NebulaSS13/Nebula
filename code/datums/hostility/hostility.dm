@@ -1,4 +1,5 @@
 // A singleton useful for recycling hostility logic in things such as mobs or turrets.
+// intentionally NOT abstract
 /decl/hostility
 
 // Returns a value determining whether or not whatever is calling should attack the target.

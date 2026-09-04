@@ -68,7 +68,6 @@
 		/obj/item/stack/material/ore     = TRADER_ALL
 	)
 	possible_trading_items = list(
-		/obj/machinery/power/supermatter = TRADER_ALL,
 		/obj/item/aiModule               = TRADER_SUBTYPES_ONLY
 	)
 	want_multiplier = 5000
@@ -90,51 +89,3 @@
 		TRADER_BRIBE_ACCEPT      = "Blub will stay for " + TRADER_TOKEN_TIME + " binutes bonger.",
 		TRADER_BRIBE_REFUSAL     = "Blub must go. Blub's beople beed blem."
 	)
-
-//probably could stick soem Howl references in here but like, eh. Haven't seen it in years.
-/datum/trader/ship/unique/wizard
-	name = "Sorcerer"
-	origin = "A moving castle"
-	possible_origins = list(
-		"An indistinct location",
-		"Unknown location",
-		"The Diamond Sphere",
-		"Beyond the Veil",
-		"Deadverse"
-	)
-
-	possible_wanted_items = list(
-		/mob/living/simple_animal/familiar               = TRADER_SUBTYPES_ONLY,
-		/mob/living/simple_animal/familiar/pet           = TRADER_BLACKLIST,
-		/mob/living/simple_animal/hostile/mimic          = TRADER_ALL
-	)
-	possible_trading_items = list(
-		/obj/item/clothing/gloves/wizard                 = TRADER_THIS_TYPE,
-		/obj/item/clothing/head/helmet/space/void/wizard = TRADER_THIS_TYPE,
-		/obj/item/clothing/head/wizard                   = TRADER_ALL,
-		/obj/item/clothing/suit/space/void/wizard        = TRADER_THIS_TYPE,
-		/obj/item/toy/figure/wizard                      = TRADER_THIS_TYPE,
-		/obj/item/staff                                  = TRADER_ALL,
-	) //Probably see about getting some more wizard based shit
-
-	speech = list(
-		TRADER_HAIL_GENERIC      = "Hello! Are you here on pleasure or business?",
-		TRADER_HAIL_DENY         = "I'm sorry, but I REALLY don't want to speak to you.",
-		TRADER_TRADE_COMPLETE    = "Pleasure doing business with you!",
-		TRADER_NO_MONEY          = "Cash? Ha! What's cash to a man like me?",
-		TRADER_NOT_ENOUGH        = "Hm, well I do enjoy what you're offering, I prefer a fair trade.",
-		TRADER_FOUND_UNWANTED    = "What? I want oddities! Don't you understand?",
-		TRADER_HOW_MUCH          = "I want dark things, brooding things... things that go bump in the night. Things that bleed wrong, live wrong, are wrong.",
-		TRADER_WHAT_WANT         = "Have anything from a broodish cult?",
-		TRADER_COMPLIMENT_DENY   = "Like I haven't heard that one before!",
-		TRADER_COMPLIMENT_ACCEPT = "Haha! Aren't you nice.",
-		TRADER_INSULT_GOOD       = "Naughty naughty.",
-		TRADER_INSULT_BAD        = "Now where do you get off talking to me like that?",
-		TRADER_BRIBE_ACCEPT      = "Well, if you're not pulling the knob on my staff, I can stay for another " + TRADER_TOKEN_TIME + " minutes.",
-		TRADER_BRIBE_REFUSAL     = "A wizard does not depart early or late, but precisely when they intend to. No.",
-		TRADER_NO_BLACKLISTED    = "I cannot accept such a thing. No trade."
-	)
-
-/datum/trader/ship/unique/wizard/New()
-	speech[TRADER_HAIL_START + SPECIES_GOLEM] = "Interesting... how incredibly interesting... come! Let us do business!"
-	..()

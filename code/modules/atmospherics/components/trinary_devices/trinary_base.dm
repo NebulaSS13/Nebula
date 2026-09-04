@@ -15,9 +15,9 @@
 	air2 = new
 	air3 = new
 
-	air1.volume = 200
-	air2.volume = 200
-	air3.volume = 200
+	air1.total_volume = 200
+	air2.total_volume = 200
+	air3.total_volume = 200
 	. = ..()
 
 /obj/machinery/atmospherics/trinary/air_in_dir(direction)

@@ -12,5 +12,5 @@
 	machine_understands = FALSE
 	hidden_from_codex = TRUE
 
-/decl/language/diona/get_random_name()
+/decl/language/diona/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	. = "[pick(list("To Sleep Beneath","Wind Over","Embrace of","Dreams of","Witnessing","To Walk Beneath","Approaching the"))] [pick(list("the Void","the Sky","Encroaching Night","Planetsong","Starsong","the Wandering Star","the Empty Day","Daybreak","Nightfall","the Rain"))]"

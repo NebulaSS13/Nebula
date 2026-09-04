@@ -2,7 +2,7 @@
 	name = "Shoal Crew"
 	description = "Most vox are content to live and work on the arkships, serving their alloted span under the watchful \
 	eye of their betters, who in turn serve the apex. Although there is always some degree of social turmoil amongst the \
-	ark families, with contests and challenges resulting in shifting heirarchies, it usually does not go any further than \
+	ark families, with contests and challenges resulting in shifting hierarchies, it usually does not go any further than \
 	the general day-to-day energy exhibited by all vox. The average ark labourer is not ambitious, and knows things could \
 	be a lot worse."
 	hidden_from_codex = TRUE

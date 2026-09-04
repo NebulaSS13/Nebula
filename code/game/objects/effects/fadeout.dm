@@ -1,0 +1,16 @@
+/obj/effect/dummy/fadeout/Initialize(mapload, fade_dir = SOUTH, atom/donor)
+	. = ..()
+	set_dir(fade_dir)
+	appearance = donor // grab appearance before ghostizing in case they fall over etc
+	switch(dir)
+		if(NORTH)
+			animate(src, pixel_z =  32, alpha = 0, time = 1 SECOND)
+		if(SOUTH)
+			animate(src, pixel_z = -32, alpha = 0, time = 1 SECOND)
+		if(EAST)
+			animate(src, pixel_w =  32, alpha = 0, time = 1 SECOND)
+		if(WEST)
+			animate(src, pixel_w = -32, alpha = 0, time = 1 SECOND)
+		else
+			animate(src, alpha = 0, time = 1 SECOND)
+	QDEL_IN(src, 1 SECOND)

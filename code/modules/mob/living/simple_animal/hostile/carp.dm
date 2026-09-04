@@ -45,7 +45,7 @@
 
 /mob/living/simple_animal/hostile/carp/proc/carp_randomify()
 	max_health = rand(initial(max_health), (1.5 * initial(max_health)))
-	current_health = max_health
+	current_health = get_max_health()
 	if(prob(1))
 		carp_color = pick(COLOR_WHITE, COLOR_BLACK)
 	else

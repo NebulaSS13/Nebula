@@ -4,7 +4,7 @@
 	meat_type     = /obj/item/stack/material/rods
 
 	bone_material = /decl/material/solid/metal/titanium
-	bone_type     = /obj/item/stack/material/strut
+	bone_type     = /obj/item/stack/material/rods
 
 	skin_material = /decl/material/solid/metal/aluminium
 	skin_type     = /obj/item/stack/material/sheet/shiny

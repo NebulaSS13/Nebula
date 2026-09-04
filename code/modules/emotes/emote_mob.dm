@@ -15,8 +15,8 @@
 /mob/living/check_mob_can_emote(var/emote_type)
 	return ..() && !(HAS_STATUS(src, STAT_SILENCE) && emote_type == AUDIBLE_MESSAGE)
 
-/mob/living/brain/check_mob_can_emote(var/emote_type)
-	return ..() && istype(get_container(), /obj/item/organ/internal/brain_interface)
+/mob/living/brain/check_mob_can_emote(var/emote_type, allow_brain_emote = FALSE)
+	return ..() && allow_brain_emote
 
 #define EMOTE_REFRESH_SPAM_COOLDOWN (5 SECONDS)
 /mob/proc/emote(var/act, var/m_type, var/message)
@@ -99,9 +99,10 @@
 	next_emote = world.time + use_emote.emote_delay
 	use_emote.do_emote(src, message)
 
-	for (var/obj/item/implant/I in src)
-		if (I.implanted)
-			I.trigger(act, src)
+	for (var/obj/item/implant/implant in src)
+		if(!implant.implanted)
+			continue
+		implant.trigger(act, src)
 
 #undef EMOTE_REFRESH_SPAM_COOLDOWN
 

@@ -1,0 +1,11 @@
+#ifndef CONTENT_PACK_BRAIN_INTERFACE
+#define CONTENT_PACK_BRAIN_INTERFACE
+// BEGIN_INCLUDE
+#include "brain_interface.dm"
+#include "brain_interface_organ.dm"
+#include "brainmob_overrides.dm"
+#include "fabricator_recipes.dm"
+#include "interface_radio.dm"
+#include "misc_overrides.dm"
+// END_INCLUDE
+#endif

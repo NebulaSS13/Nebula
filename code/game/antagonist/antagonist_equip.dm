@@ -12,7 +12,7 @@
 	// This could use work.
 	if(flags & ANTAG_CLEAR_EQUIPMENT)
 		for(var/obj/item/thing in player.contents)
-			if(player.canUnEquip(thing))
+			if(player.can_unequip_item(thing))
 				qdel(thing)
 		//mainly for nonhuman antag compatibility. Should not effect item spawning.
 		player.species.equip_survival_gear(player)
@@ -21,10 +21,13 @@
 		var/decl/outfit/outfit = GET_DECL(default_outfit)
 		outfit.equip_outfit(player)
 
-	if(default_access)
-		var/obj/item/card/id/id = player.get_equipped_item(slot_wear_id_str)
-		if(id)
+	var/obj/item/card/id/id = player.get_equipped_item(slot_wear_id_str)
+	if(id)
+		if(default_access)
 			LAZYDISTINCTADD(id.access, default_access)
+		if(id_title)
+			id.assignment = id_title
+			id.position = id_title
 
 	if(rig_type)
 		equip_rig(rig_type, player)

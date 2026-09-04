@@ -4,6 +4,7 @@
 /obj/structure/flora/stump
 	name         = "stump"
 	hitsound     = 'sound/effects/hit_wood.ogg'
+	storage      = /datum/storage/dead_tree
 	var/log_type = /obj/item/stack/material/log
 
 /obj/structure/flora/stump/get_material_health_modifier()
@@ -27,7 +28,7 @@
 	icon       = 'icons/obj/flora/tree_stumps.dmi'
 	w_class    = ITEM_SIZE_HUGE
 	pixel_x    = -16 //All trees are offset 16 pixels
-	material   = /decl/material/solid/organic/wood
+	material   = /decl/material/solid/organic/wood/oak
 
 //dead trees
 /obj/structure/flora/stump/tree/dead
@@ -40,6 +41,7 @@
 //pine trees
 /obj/structure/flora/stump/tree/pine
 	icon_state = "pine_1"
+	material   = /decl/material/solid/organic/wood/oak // TODO: pine
 
 /obj/structure/flora/stump/tree/pine/init_appearance()
 	icon_state = "pine_[rand(1, 3)]"

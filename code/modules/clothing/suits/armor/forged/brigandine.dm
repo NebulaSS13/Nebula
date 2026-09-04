@@ -10,3 +10,4 @@
 	name = "gambeson"
 	desc = "A quilted, padded jacket, typically worn underneath heavier armour."
 	icon = 'icons/clothing/shirts/gambeson.dmi'
+	material = /decl/material/solid/organic/cloth/wool

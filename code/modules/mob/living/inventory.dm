@@ -14,10 +14,17 @@
 		var/list/all_slots = list()
 		for(var/slot in get_inventory_slots())
 			all_slots += get_inventory_slot_datum(slot)
+		var/list/low_priority_slots // Slots that will always be added at the end, in the order of their parent slots' priority.
+		// This is sort of due to technical limitations but mostly due to laziness.
 		for(var/datum/inventory_slot/inv_slot as anything in sortTim(all_slots, /proc/cmp_inventory_slot_desc))
+			if(LAZYLEN(inv_slot.additional_quick_equip_slots))
+				for(var/extra_slot in inv_slot.additional_quick_equip_slots)
+					LAZYADD(low_priority_slots, extra_slot)
 			if(isnull(inv_slot.quick_equip_priority)) // Never quick-equip into some slots.
 				continue
 			_inventory_slot_priority += inv_slot.slot_id
+		if(low_priority_slots)
+			_inventory_slot_priority += low_priority_slots
 	return _inventory_slot_priority
 
 /mob/living/get_inventory_slot_datum(var/slot)
@@ -58,18 +65,19 @@
 		queue_hand_rebuild()
 
 /mob/living/select_held_item_slot(var/slot)
+	. = ..()
 	var/last_slot = get_active_held_item_slot()
-	if(slot != last_slot && (slot in get_held_item_slots()))
-		_held_item_slot_selected = slot
-		if(istype(hud_used))
-			for(var/obj/screen/inventory/hand in hud_used.hand_hud_objects)
-				hand.cut_overlay("hand_selected")
-				if(hand.slot_id == slot)
-					hand.add_overlay("hand_selected")
-				hand.compile_overlays()
-		var/obj/item/I = get_active_held_item()
-		if(istype(I))
-			I.on_active_hand()
+	if(slot == last_slot)
+		return
+	on_mouse_up()
+	if(!(slot in get_held_item_slots()))
+		return
+	_held_item_slot_selected = slot
+	if(istype(hud_used))
+		hud_used.update_hand_elements()
+	var/obj/item/I = get_active_held_item()
+	if(istype(I))
+		I.on_active_hand()
 
 // Defer proc for the sake of delimbing root limbs with multiple graspers (serpentid)
 /mob/living/proc/queue_hand_rebuild()
@@ -156,8 +164,8 @@
 
 	// For any old slots which had no equivalent, drop the item into the world
 	for(var/old_slot_id in old_slots)
+		drop_from_slot(old_slot_id)
 		var/datum/inventory_slot/old_slot = old_slots[old_slot_id]
-		drop_from_inventory(old_slot.get_equipped_item())
 		old_slot.clear_slot() // Call this manually since it is no longer in _inventory_slots
 		qdel(old_slot)
 
@@ -198,12 +206,12 @@
 	if(!equip_to_appropriate_slot(I))
 		to_chat(src, SPAN_WARNING("You are unable to equip that."))
 
-/mob/living/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
+/mob/living/proc/equip_in_one_of_slots(obj/item/prop, list/slots, del_on_fail = 1)
 	for (var/slot in slots)
-		if (equip_to_slot_if_possible(W, slots[slot], del_on_fail = 0))
+		if (equip_to_slot_if_possible(prop, slots[slot], del_on_fail = 0))
 			return slot
 	if (del_on_fail)
-		qdel(W)
+		qdel(prop)
 	return null
 
 //Same as get_covering_equipped_items, but using target zone instead of bodyparts flags

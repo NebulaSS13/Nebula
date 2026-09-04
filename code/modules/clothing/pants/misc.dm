@@ -1,6 +1,6 @@
 /obj/item/clothing/pants/fire_overpants
 	name = "fire overpants"
-	desc = "some overpants made of fire-resistant synthetic fibers. To be worn over the uniform."
+	desc = "Some overpants made of fire-resistant synthetic fibers, worn over one's uniform."
 	icon = 'icons/clothing/pants/overpants.dmi'
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50

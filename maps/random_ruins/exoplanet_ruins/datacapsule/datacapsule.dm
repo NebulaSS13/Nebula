@@ -49,15 +49,21 @@
 	desc = "Impact resistant server rack. You might be able to pry a disk out."
 	var/disk_looted
 
-/obj/structure/backup_server/attackby(obj/item/W, mob/user, var/click_params)
-	if(IS_CROWBAR(W))
+/obj/structure/backup_server/attackby(obj/item/used_item, mob/user, var/click_params)
+	if(IS_CROWBAR(used_item))
 		if(disk_looted)
 			to_chat(user, SPAN_WARNING("There's no disk in \the [src]."))
 		else
 			to_chat(user, SPAN_NOTICE("You pry out the data drive from \the [src]."))
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 			var/obj/item/stock_parts/computer/hard_drive/cluster/drive = new(get_turf(src))
-			drive.origin_tech = @'{"[TECH_DATA]":[rand(4,5)],"[TECH_ENGINEERING]":[rand(4,5)],"[TECH_EXOTIC_MATTER]":[rand(4,5)],"[TECH_COMBAT]":[rand(2,5)],"[TECH_ESOTERIC]":[rand(0,6)]}'
+			drive.origin_tech = json_encode(list(
+				(TECH_DATA) = rand(4,5),
+				(TECH_ENGINEERING) = rand(4,5),
+				(TECH_EXOTIC_MATTER) = rand(4,5),
+				(TECH_COMBAT) = rand(2,5),
+				(TECH_ESOTERIC) = rand(0,6)
+			))
 			disk_looted = TRUE
 		return TRUE
 	. = ..()

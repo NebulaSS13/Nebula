@@ -6,6 +6,10 @@
 	color = COLOR_PURPLE
 	spawn_nothing_percentage = 50
 
+/obj/random/contraband/nofail
+	name = "guaranteed random illegal item"
+	spawn_nothing_percentage = 0
+
 /obj/random/contraband/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/item/grooming/comb                        = 4,
@@ -52,6 +56,16 @@
 		/obj/item/chems/drinks/glass2/mug,
 		/obj/item/chems/drinks/glass2/wine
 	)
+	return spawnable_choices
+
+/obj/random/mug
+	name = "random coffee cup"
+	desc = "A random coffee cup/mug."
+	icon = 'icons/obj/drink_glasses/coffecup.dmi'
+	icon_state = "coffeecup"
+
+/obj/random/mug/spawn_choices()
+	var/static/list/spawnable_choices = typesof(/obj/item/chems/drinks/glass2/coffeecup) - /obj/item/chems/drinks/glass2/coffeecup/custom
 	return spawnable_choices
 
 /obj/random/drinkbottle
@@ -117,7 +131,6 @@
 	desc = "This is some random junk."
 	icon = 'icons/obj/items/storage/trashbag.dmi'
 	icon_state = "trashbag3"
-	var/spawn_choice
 
 /obj/random/junk/spawn_choices()
 	var/static/list/spawnable_choices
@@ -211,8 +224,8 @@
 		/obj/item/stack/material/plank/mapped/wood/fifty,
 		/obj/item/stack/material/cardstock/mapped/cardboard/fifty,
 		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
-		/obj/item/stack/material/rods/ten,
-		/obj/item/stack/material/rods/fifty
+		/obj/item/stack/material/rods/mapped/steel/ten,
+		/obj/item/stack/material/rods/mapped/steel/fifty
 	)
 	return spawnable_choices
 
@@ -225,7 +238,7 @@
 /obj/random/soap/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/item/soap                         = 12,
-		/obj/item/chems/glass/rag              =  2,
+		/obj/item/chems/rag              =  2,
 		/obj/item/chems/spray/cleaner          =  2,
 		/obj/item/grenade/chem_grenade/cleaner =  1
 	)
@@ -305,7 +318,7 @@
 		/obj/item/box/large                      = 2,
 		/obj/item/box/glowsticks                 = 3,
 		/obj/item/wallet                         = 1,
-		/obj/item/ore                            = 2,
+		/obj/item/ore_satchel                    = 2,
 		/obj/item/belt/utility/full              = 2,
 		/obj/item/belt/medical/emt               = 2,
 		/obj/item/belt/medical                   = 2,
@@ -388,12 +401,28 @@
 	desc = "This is a randomly selected vending machine."
 	icon = 'icons/obj/machines/vending/coffee.dmi'
 	icon_state = "world-hellfire"
+	abstract_type = /obj/random/vendor
 
-/obj/random/vendor/spawn_choices()
+/obj/random/vendor/food
+	name = "random food vending machine"
+
+/obj/random/vendor/food/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/machinery/vending/weeb,
 		/obj/machinery/vending/sol,
-		/obj/machinery/vending/snix
+		/obj/machinery/vending/snix,
+		/obj/machinery/vending/snack
+	)
+	return spawnable_choices
+
+
+/obj/random/vendor/drink
+	name = "random drink vending machine"
+
+/obj/random/vendor/drink/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/machinery/vending/coffee,
+		/obj/machinery/vending/cola
 	)
 	return spawnable_choices
 
@@ -466,16 +495,6 @@
 	)
 	return spawnable_choices
 
-/obj/random/crayon
-	name = "random crayon"
-	desc = "This is a random crayon."
-	icon = 'icons/obj/items/crayons.dmi'
-	icon_state = "crayonred"
-
-/obj/random/crayon/spawn_choices()
-	var/static/list/spawnable_choices = subtypesof(/obj/item/pen/crayon)
-	return spawnable_choices
-
 /obj/random/umbrella
 	name = "Random Umbrella"
 	desc = "This is a random umbrella."
@@ -516,22 +535,113 @@
 
 /obj/random/jewelry/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/ears/stud/wood                = 10,
-		/obj/item/clothing/ears/dangle/wood              = 10,
-		/obj/item/clothing/gloves/bracelet               = 10,
-		/obj/item/clothing/neck/necklace                 = 10,
-		/obj/item/clothing/gloves/ring/material/silver   = 5,
-		/obj/item/clothing/gloves/ring/material/bronze   = 5,
-		/obj/item/clothing/gloves/ring/material/gold     = 3,
-		/obj/item/clothing/ears/stud/silver              = 3,
-		/obj/item/clothing/ears/dangle/silver            = 3,
-		/obj/item/clothing/ears/stud/gold                = 3,
-		/obj/item/clothing/ears/dangle/gold              = 3,
-		/obj/item/clothing/gloves/ring/material/platinum = 1,
-		/obj/item/clothing/ears/stud/platinum            = 1,
-		/obj/item/clothing/ears/dangle/platinum          = 1,
-		/obj/item/clothing/ears/stud/diamond             = 1,
-		/obj/item/clothing/ears/dangle/diamond           = 1
+		/obj/item/clothing/ears/stud/wood       = 10,
+		/obj/item/clothing/ears/dangle/wood     = 10,
+		/obj/item/clothing/gloves/bracelet      = 10,
+		/obj/item/clothing/neck/necklace        = 10,
+		/obj/item/clothing/gloves/ring/silver   = 5,
+		/obj/item/clothing/gloves/ring/bronze   = 5,
+		/obj/item/clothing/gloves/ring/gold     = 3,
+		/obj/item/clothing/ears/stud/silver     = 3,
+		/obj/item/clothing/ears/dangle/silver   = 3,
+		/obj/item/clothing/ears/stud/gold       = 3,
+		/obj/item/clothing/ears/dangle/gold     = 3,
+		/obj/item/clothing/gloves/ring/platinum = 1,
+		/obj/item/clothing/ears/stud/platinum   = 1,
+		/obj/item/clothing/ears/dangle/platinum = 1,
+		/obj/item/clothing/ears/stud/diamond    = 1,
+		/obj/item/clothing/ears/dangle/diamond  = 1
 
 	)
 	return spawnable_choices
+
+/obj/random/ore_pile
+	name = "random ore pile"
+	desc = "A pile of random ores. High chance of a larger pile of common ores, lower chances of small piles of rarer ores."
+
+/obj/random/ore_pile/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/stack/material/ore/handful/sand/fifteen = 15,
+		/obj/item/stack/material/ore/bauxite/ten          = 10,
+		/obj/item/stack/material/ore/coal/ten             = 10,
+		/obj/item/stack/material/ore/tetrahedrite/ten     = 10,
+		/obj/item/stack/material/ore/iron/ten             = 10,
+		/obj/item/stack/material/ore/galena/ten           = 10,
+		/obj/item/stack/material/lump/large/marble/five   =  5,
+		/obj/item/stack/material/ore/gold/five            =  5,
+		/obj/item/stack/material/ore/diamond/three        =  3,
+		/obj/item/stack/material/ore/osmium/three         =  3,
+		/obj/item/stack/material/ore/hydrogen/two         =  2,
+		/obj/item/stack/material/ore/rutile/five          =  5,
+		/obj/item/stack/material/ore/silver/five          =  3,
+		/obj/item/stack/material/ore/uranium/three        =  2
+	)
+	return spawnable_choices
+
+/obj/random/meat
+	name = "random meat"
+	icon = /obj/item/food/butchery/meat/beef::icon
+	icon_state = /obj/item/food/butchery/meat/beef::icon_state
+	color = /obj/item/food/butchery/meat/beef::color
+
+/obj/random/meat/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/food/butchery/meat/beef,
+		/obj/item/food/butchery/meat/goat,
+		/obj/item/food/butchery/meat/chicken,
+		/obj/item/food/butchery/meat/corgi,
+		/obj/item/food/butchery/meat/bear,
+		/obj/item/food/butchery/meat/fish/shark,
+		/obj/item/food/butchery/meat/fish/carp,
+		/obj/item/food/butchery/meat/fish/octopus,
+		/obj/item/food/butchery/meat/fish/mollusc
+	)
+	return spawnable_choices
+
+/obj/random/mouseremains
+	name = "random mouseremains"
+	desc = "For use with mouse spawners."
+	icon = /obj/item/assembly/mousetrap::icon
+	icon_state = /obj/item/assembly/mousetrap::icon_state
+
+/obj/random/mouseremains/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/assembly/mousetrap,
+		/obj/item/assembly/mousetrap/armed,
+		/obj/effect/decal/cleanable/spiderling_remains,
+		/obj/effect/decal/cleanable/ash,
+		/obj/item/trash/cigbutt,
+		/obj/item/trash/cigbutt/cigarbutt,
+		/obj/item/remains/mouse
+	)
+	return spawn_choices
+
+/obj/random/pizzabox
+	name = "random pizza"
+	icon = /obj/item/pizzabox::icon
+	icon_state = /obj/item/pizzabox::icon_state
+
+/obj/random/pizzabox/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/pizzabox/vegetable,
+		/obj/item/pizzabox/mushroom,
+		/obj/item/pizzabox/meat,
+		/obj/item/pizzabox/margherita
+	)
+	return spawn_choices
+
+/obj/random/dufflebag
+	name = "random dufflebag"
+	icon = /obj/item/backpack/dufflebag::icon
+	icon_state = /obj/item/backpack/dufflebag::icon_state
+
+/obj/random/dufflebag/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/backpack/dufflebag         = 10,
+		/obj/item/backpack/dufflebag/med     = 10,
+		/obj/item/backpack/dufflebag/sec     = 10,
+		/obj/item/backpack/dufflebag/eng     = 10,
+		/obj/item/backpack/dufflebag/captain = 5,
+		/obj/item/backpack/dufflebag/syndie  = 1
+	)
+	return spawn_choices

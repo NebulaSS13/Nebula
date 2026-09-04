@@ -18,6 +18,7 @@
 	anchored = FALSE
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 	idle_power_usage = 100
+	chem_volume = 100
 
 	var/list/product_types = list()
 	var/dispense_flavour = ICECREAM_VANILLA
@@ -66,13 +67,8 @@
 
 /obj/machinery/icecream_vat/Initialize(mapload, d, populate_parts)
 	. = ..()
-	initialize_reagents()
 	while(product_types.len < 8)
 		product_types.Add(5)
-
-/obj/machinery/icecream_vat/initialize_reagents(populate = TRUE)
-	create_reagents(100)
-	. = ..()
 
 /obj/machinery/icecream_vat/populate_reagents()
 	add_to_reagents(/decl/material/liquid/drink/milk, 5)
@@ -100,15 +96,13 @@
 	dat += "<b>Chocolate cones:</b> <a href='byond://?src=\ref[src];cone=[CONE_CHOC]'><b>Dispense</b></a> <a href='byond://?src=\ref[src];make=[CONE_CHOC];amount=1'><b>Make</b></a> <a href='byond://?src=\ref[src];make=[CONE_CHOC];amount=5'><b>x5</b></a> [product_types[CONE_CHOC]] cones left. (Ingredients: flour, sugar, coco powder)<br></div>"
 	dat += "<br>"
 	dat += "<b>VAT CONTENT</b><br>"
-	for(var/liquid_type in reagents?.liquid_volumes)
-		var/decl/material/R = GET_DECL(liquid_type)
-		dat += "[R.get_reagent_name(reagents, MAT_PHASE_LIQUID)]: [LIQUID_VOLUME(reagents, liquid_type)]"
-		dat += "<A href='byond://?src=\ref[src];disposeI=\ref[R]'>Purge</A><BR>"
+	for(var/decl/material/reagent as anything in REAGENT_LIQUID_VOLUMES(reagents))
+		dat += "[reagent.get_reagent_name(reagents, MAT_PHASE_LIQUID)]: [LIQUID_VOLUME(reagents, reagent)]"
+		dat += "<A href='byond://?src=\ref[src];disposeI=\ref[reagent]'>Purge</A><BR>"
 
-	for(var/solid_type in reagents?.solid_volumes)
-		var/decl/material/R = GET_DECL(solid_type)
-		dat += "[R.get_reagent_name(reagents, MAT_PHASE_SOLID)]: [SOLID_VOLUME(reagents, solid_type)]"
-		dat += "<A href='byond://?src=\ref[src];disposeI=\ref[R]'>Purge</A><BR>"
+	for(var/decl/material/reagent as anything in REAGENT_SOLID_VOLUMES(reagents))
+		dat += "[reagent.get_reagent_name(reagents, MAT_PHASE_SOLID)]: [SOLID_VOLUME(reagents, reagent)]"
+		dat += "<A href='byond://?src=\ref[src];disposeI=\ref[reagent]'>Purge</A><BR>"
 
 	dat += "<a href='byond://?src=\ref[src];refresh=1'>Refresh</a> <a href='byond://?src=\ref[src];close=1'>Close</a>"
 
@@ -116,37 +110,38 @@
 	popup.set_content(dat)
 	popup.open()
 
-/obj/machinery/icecream_vat/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/food/icecream))
-		var/obj/item/food/icecream/I = O
-		if(!I.ice_creamed)
+/obj/machinery/icecream_vat/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/food/icecream))
+		var/obj/item/food/icecream/icecream = used_item
+		if(!icecream.ice_creamed)
 			if(product_types[dispense_flavour] > 0)
-				src.visible_message("[html_icon(src)] <span class='info'>[user] scoops delicious [flavour_name] icecream into [I].</span>")
+				src.visible_message("[html_icon(src)] <span class='info'>[user] scoops delicious [flavour_name] icecream into [icecream].</span>")
 				product_types[dispense_flavour] -= 1
-				I.add_ice_cream(flavour_name)
+				icecream.add_ice_cream(flavour_name)
 			//	if(beaker)
-			//		beaker.reagents.trans_to(I, 10)
-				if(I.reagents.total_volume < 10)
-					I.add_to_reagents(/decl/material/liquid/nutriment/sugar, 10 - I.reagents.total_volume)
+			//		beaker.reagents.trans_to(icecream, 10)
+				var/icecream_volume = REAGENT_TOTAL_VOLUME(icecream.reagents)
+				if(icecream_volume < 10)
+					icecream.add_to_reagents(/decl/material/liquid/nutriment/sugar, 10 - icecream_volume)
 			else
 				to_chat(user, "<span class='warning'>There is not enough icecream left!</span>")
 		else
-			to_chat(user, "<span class='notice'>[O] already has icecream in it.</span>")
+			to_chat(user, "<span class='notice'>[used_item] already has icecream in it.</span>")
 		return TRUE
-	else if(ATOM_IS_OPEN_CONTAINER(O))
+	else if(ATOM_IS_OPEN_CONTAINER(used_item))
 		return TRUE
 	else
 		return ..()
 
 /obj/machinery/icecream_vat/proc/make(var/mob/user, var/make_type, var/amount)
-	for(var/R in get_ingredient_list(make_type))
-		if(reagents.has_reagent(R, amount))
+	for(var/reagent in get_ingredient_list(make_type))
+		if(reagents.has_reagent(reagent, amount))
 			continue
 		amount = 0
 		break
 	if(amount)
-		for(var/R in get_ingredient_list(make_type))
-			remove_from_reagents(R, amount)
+		for(var/reagent in get_ingredient_list(make_type))
+			remove_from_reagents(reagent, amount)
 		product_types[make_type] += amount
 		var/flavour = get_flavour_name(make_type)
 		if(make_type > 6)
@@ -172,10 +167,10 @@
 		var/cone_name = get_flavour_name(dispense_cone)
 		if(product_types[dispense_cone] >= 1)
 			product_types[dispense_cone] -= 1
-			var/obj/item/food/icecream/I = new(src.loc)
-			I.cone_type = cone_name
-			I.icon_state = "icecream_cone_[cone_name]"
-			I.desc = "Delicious [cone_name] cone, but no ice cream."
+			var/obj/item/food/icecream/icecream = new(src.loc)
+			icecream.cone_type = cone_name
+			icecream.icon_state = "icecream_cone_[cone_name]"
+			icecream.desc = "Delicious [cone_name] cone, but no ice cream."
 			src.visible_message("<span class='info'>[user] dispenses a crunchy [cone_name] cone from [src].</span>")
 		else
 			to_chat(user, "<span class='warning'>There are no [cone_name] cones left!</span>")
@@ -188,9 +183,9 @@
 		. = TOPIC_REFRESH
 
 	else if(href_list["disposeI"])
-		var/decl/material/R = locate(href_list["disposeI"])
-		if(R)
-			reagents.clear_reagent(R.type)
+		var/decl/material/reagent = locate(href_list["disposeI"])
+		if(reagent)
+			reagents.clear_reagent(reagent.type)
 		. = TOPIC_REFRESH
 
 	if(href_list["refresh"])
@@ -203,7 +198,7 @@
 	icon_state = "icecream_cone_waffle" //default for admin-spawned cones, href_list["cone"] should overwrite this all the time
 	layer = ABOVE_OBJ_LAYER
 	bitesize = 3
-	volume = 20
+	chem_volume = 20
 	nutriment_amt = 5
 	nutriment_type = /decl/material/liquid/nutriment
 	nutriment_desc = list("crunchy waffle cone" = 1)

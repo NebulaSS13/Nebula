@@ -17,7 +17,9 @@
 	if(waiting_to_leave())
 		return
 	state = EVAC_IN_TRANSIT
-	priority_announcement.Announce(replacetext(replacetext(global.using_map.emergency_shuttle_leaving_dock, "%dock_name%", "[global.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
+	var/msg = global.using_map.emergency_shuttle_leaving_dock
+	if(msg)
+		priority_announcement.Announce(replacetext(replacetext(msg, "%dock_name%", "[global.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
 	return 1
 
 /datum/evacuation_controller/lifepods/available_evac_options()

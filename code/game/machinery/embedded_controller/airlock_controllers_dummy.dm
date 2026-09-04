@@ -1,7 +1,7 @@
 ///Provides remote access to a controller (since they must be unique).
 /obj/machinery/dummy_airlock_controller
 	name               = "remote airlock control terminal"
-	desc               = "A secondary airlock control terminal meant to be subordinated to a master airlock control terminal to allow remotely controlling the later from the former."
+	desc               = "A secondary airlock control terminal meant to be subordinated to a master airlock control terminal to allow remotely controlling the latter from the former."
 	icon               = 'icons/obj/airlock_machines.dmi'
 	icon_state         = "airlock_control_off"
 	layer              = ABOVE_OBJ_LAYER
@@ -132,12 +132,12 @@
 	if(href_list["input_tag"])
 		var/new_tag = input(user, "Enter the tag of the controller to connect to.", "Tag Selection", terminal.id_tag) as text|null
 		if(extension_status(user) != STATUS_INTERACTIVE)
-			return MT_NOACTION
+			return TOPIC_NOACTION
 		new_tag = sanitize_name(new_tag, MAX_MESSAGE_LEN, TRUE, FALSE)
 		if(new_tag)
 			terminal.id_tag = new_tag
 			terminal.setup_target_controller()
-			return MT_REFRESH
+			return TOPIC_REFRESH
 
 	if(istext(href_list["set_tag"]))
 		var/new_tag = href_list["set_tag"]
@@ -145,6 +145,6 @@
 		if(new_tag)
 			terminal.id_tag = new_tag
 			terminal.setup_target_controller()
-			return MT_REFRESH
+			return TOPIC_REFRESH
 
 	return ..()

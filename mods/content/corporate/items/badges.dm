@@ -5,7 +5,7 @@
 /obj/item/box/holobadgeNT/WillContain()
 	return list(
 		/obj/item/clothing/badge/holo/NT = 4,
-		/obj/item/clothing/badge/holo/NT/cord = 2
+		/obj/item/clothing/badge/holo/cord/NT = 2
 	)
 
 /obj/item/clothing/badge/nanotrasen
@@ -22,6 +22,9 @@
 	badge_string = "Corporate Security"
 	badge_access = access_research
 
-/obj/item/clothing/badge/holo/NT/cord
-	icon = 'mods/content/corporate/icons/clothing/accessories/holobadge_cord.dmi'
-	slot_flags = SLOT_FACE
+/obj/item/clothing/badge/holo/cord/NT
+	name = "corporate holobadge"
+	desc = "This glowing green badge marks the holder as a member of corporate security."
+	color = null
+	badge_string = "Corporate Security"
+	badge_access = access_research

@@ -120,9 +120,9 @@
 
 		if(target)
 			if(base_area)
-				ChangeArea(target, get_area(source))
+				target.ChangeArea(get_area(source))
 				. += transport_turf_contents(source, target, ignore_background, translate_air, angle = angle)
-				ChangeArea(source, base_area)
+				source.ChangeArea(base_area)
 			else
 				. += transport_turf_contents(source, target, ignore_background, translate_air, angle = angle)
 	//change the old turfs

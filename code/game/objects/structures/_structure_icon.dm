@@ -35,10 +35,10 @@ var/global/list/default_noblend_objects = list(/obj/machinery/door/window, /obj/
 /obj/structure/proc/find_blendable_obj_in_turf(var/turf/T, var/propagate)
 	if(is_type_in_list(T, global.default_blend_objects))
 		if(propagate && istype(T, /turf/wall))
-			for(var/turf/wall/W in RANGE_TURFS(T, 1))
-				W.wall_connections = null
-				W.other_connections = null
-				W.queue_icon_update()
+			for(var/turf/wall/wall in RANGE_TURFS(T, 1))
+				wall.wall_connections = null
+				wall.other_connections = null
+				wall.queue_icon_update()
 		return TRUE
 	for(var/obj/O in T)
 		if(!is_type_in_list(O, global.default_blend_objects))
@@ -56,6 +56,7 @@ var/global/list/default_noblend_objects = list(/obj/machinery/door/window, /obj/
 
 	var/list/dirs
 	var/list/other_dirs
+	// TODO: Allow structures to limit dirs?
 	for(var/direction in global.alldirs)
 		var/turf/T = get_step(src, direction)
 		if(T)

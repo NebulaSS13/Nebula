@@ -3,11 +3,11 @@
 /turf/template_noop,
 /area/template_noop)
 "ac" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /turf/template_noop,
 /area/template_noop)
 "ad" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /obj/item/stack/material/sheet/reinforced/mapped/ocp,
 /turf/template_noop,
 /area/template_noop)
@@ -51,7 +51,7 @@
 /area/map_template/marooned)
 "am" = (
 /obj/abstract/landmark/corpse/marooned_officer,
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/blood,
@@ -183,7 +183,7 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/item/trash/liquidfood,
@@ -207,7 +207,7 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/obj/structure/bed/chair{
+/obj/structure/chair{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline,

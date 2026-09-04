@@ -38,7 +38,7 @@
 		SSticker.mode.station_was_nuked = 1
 		SSticker.mode.station_explosion_in_progress = FALSE
 		if(!SSticker.mode.check_finished())//If the mode does not deal with the nuke going off so just reboot because everyone is stuck as is
-			universe_has_ended = 1
+			universe_has_ended = TRUE
 
 /datum/universal_state/nuclear_explosion/OnExit()
 	if(SSticker.mode)

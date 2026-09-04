@@ -23,7 +23,7 @@
 
 	var/started_on 			= 0 	// When the program started some science.
 	var/current_interval 	= 0		// How long the current interval will be.
-	var/next_event 			= 0 	// in world timeofday, when the next event is scheduled to pop.
+	var/next_event 			= 0 	// based on world.timeofday, when the next event is scheduled to pop.
 	var/program_status		= PROGRAM_STATUS_RUNNING		// Program periodically needs a restart, increases crash chance slightly over time.
 	var/crashed_at			= 0		// When the program crashed.
 
@@ -109,7 +109,7 @@
 		"Simulating Alien Abductions",
 		"Scanning Pigeons",
 		"Iterating Chaos Array",
-		"Abstracting Supermatter",
+		"Abstracting Exotic Matter",
 		"Adjusting Social Network",
 		"Recalculating Clown Principle"
 	)

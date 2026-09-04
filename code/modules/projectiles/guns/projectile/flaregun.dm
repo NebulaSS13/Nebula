@@ -20,10 +20,10 @@
 /obj/item/gun/projectile/flare/loaded
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
 
-/obj/item/gun/projectile/flare/examine(mob/user, distance)
+/obj/item/gun/projectile/flare/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 2 && loaded.len)
-		to_chat(user, "\A [loaded[1]] is chambered.")
+		. += "\A [loaded[1]] is chambered."
 
 /obj/item/gun/projectile/flare/special_check()
 	if(loaded.len && !istype(loaded[1], /obj/item/ammo_casing/shotgun/flash))

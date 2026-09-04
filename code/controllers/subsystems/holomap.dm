@@ -104,4 +104,5 @@ SUBSYSTEM_DEF(minimap)
 				if(!areas[areaToPaint])
 					areas[areaToPaint] = icon(HOLOMAP_ICON, "blank")
 				areas[areaToPaint].DrawBox(HOLOMAP_AREACOLOR_BASE, x + offset_x, y + offset_y) //We draw white because we want a generic version to use later. However if there is no colour we ignore it
+		CHECK_TICK
 	return areas

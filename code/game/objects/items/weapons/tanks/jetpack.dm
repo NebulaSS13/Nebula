@@ -25,10 +25,10 @@
 	QDEL_NULL(ion_trail)
 	. = ..()
 
-/obj/item/tank/jetpack/examine(mob/living/user)
+/obj/item/tank/jetpack/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(air_contents.total_moles < 5)
-		to_chat(user, "<span class='danger'>The meter on \the [src] indicates you are almost out of gas!</span>")
+		. += SPAN_DANGER("The meter on \the [src] indicates you are almost out of gas!")
 
 /obj/item/tank/jetpack/verb/toggle_rockets()
 	set name = "Toggle Jetpack Stabilization"
@@ -36,7 +36,7 @@
 	src.stabilization_on = !( src.stabilization_on )
 	to_chat(usr, "You toggle the stabilization [stabilization_on? "on":"off"].")
 
-/obj/item/tank/jetpack/on_update_icon(override)
+/obj/item/tank/jetpack/on_update_icon()
 	. = ..()
 	if(on)
 		add_overlay("[icon_state]-on")
@@ -110,8 +110,8 @@
 	starting_pressure = list(/decl/material/gas/carbon_dioxide = 6 ATM)
 
 /obj/item/tank/jetpack/rig
-	name = "integrated manuvering module thrusterpack"
-	desc = "The 'manuvering' part of a manuvering jet module for a hardsuit. You could... probably use this standalone?"
+	name = "integrated maneuvering module thrusterpack"
+	desc = "The 'maneuvering' part of a maneuvering jet module for a hardsuit. You could... probably use this standalone?"
 	starting_pressure = list(/decl/material/gas/oxygen = 6 ATM)
 	var/obj/item/rig/holder
 

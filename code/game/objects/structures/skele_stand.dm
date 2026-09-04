@@ -9,7 +9,7 @@
 
 /obj/structure/skele_stand/Initialize()
 	. = ..()
-	gender = pick(MALE, FEMALE, PLURAL)
+	set_gender(pick(MALE, FEMALE, PLURAL))
 
 /obj/structure/skele_stand/proc/rattle_bones(mob/user, atom/thingy)
 	if((world.time - cooldown) <= 1 SECOND)
@@ -47,34 +47,35 @@
 /obj/structure/skele_stand/Bumped(atom/thing)
 	rattle_bones(null, thing)
 
-/obj/structure/skele_stand/examine(mob/user)
+/obj/structure/skele_stand/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(swag.len)
 		var/list/swagnames = list()
 		for(var/slot in swag)
 			var/obj/item/clothing/C = swag[slot]
 			swagnames += C.get_examine_line()
-		to_chat(user,"[gender == MALE ? "He" : "She"] is wearing [english_list(swagnames)].")
+		var/decl/pronouns/stand_pronouns = get_pronouns()
+		. += "[stand_pronouns.He] [stand_pronouns.is] wearing [english_list(swagnames)]."
 
-/obj/structure/skele_stand/attackby(obj/item/W, mob/user)
-	if(IS_PEN(W))
+/obj/structure/skele_stand/attackby(obj/item/used_item, mob/user)
+	if(IS_PEN(used_item))
 		var/nuname = sanitize(input(user,"What do you want to name this skeleton as?","Skeleton Christening",name) as text|null)
 		if(nuname && CanPhysicallyInteract(user))
 			SetName(nuname)
 			return TRUE
-	if(istype(W,/obj/item/clothing))
-		var/obj/item/clothing/clothes = W
+	if(istype(used_item,/obj/item/clothing))
+		var/obj/item/clothing/clothes = used_item
 		if(!clothes.fallback_slot)
 			return FALSE
 		if(swag[clothes.fallback_slot])
 			to_chat(user,SPAN_NOTICE("There is already that kind of clothing on \the [src]."))
-		else if(user.try_unequip(W, src))
-			swag[clothes.fallback_slot] = W
+		else if(user.try_unequip(used_item, src))
+			swag[clothes.fallback_slot] = used_item
 			update_icon()
 		return TRUE
 	. = ..()
 	if(!.)
-		rattle_bones(user, W)
+		rattle_bones(user, used_item)
 		return TRUE
 
 /obj/structure/skele_stand/Destroy()

@@ -45,7 +45,6 @@
 	var/static/list/exception_types = list(
 		/obj/machinery/light,
 		/obj/machinery/camera,
-		/obj/structure/lift/button/standalone,
 		/obj/structure/hygiene/sink
 	)
 

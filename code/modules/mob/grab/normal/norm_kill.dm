@@ -27,4 +27,4 @@
 	SET_STATUS_MAX(affecting, STAT_WEAK, 5)	//Should keep you down unless you get help.
 	if(isliving(affecting))
 		var/mob/living/M = affecting
-		M.ticks_since_last_successful_breath = max(M.ticks_since_last_successful_breath + 2, 3)
+		M.suffocation_counter = max(M.suffocation_counter + 2, 3)

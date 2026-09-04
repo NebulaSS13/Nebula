@@ -1,6 +1,6 @@
 /datum/unit_test/chemistry
 	name = "CHEMISTRY: Reagent Template"
-	template = /datum/unit_test/chemistry
+	abstract_type = /datum/unit_test/chemistry
 
 	var/container_volume = 45
 	var/donor_type = /obj/item
@@ -11,7 +11,7 @@
 	var/turf/test_loc = get_safe_turf()
 
 	var/atom/from = new donor_type(test_loc)
-	from.create_reagents(container_volume)
+	from.create_or_update_reagents(container_volume)
 	from.add_to_reagents(/decl/material/liquid/water, container_volume)
 
 	var/atom/target
@@ -22,7 +22,7 @@
 	else
 		target = new recipient_type(test_loc)
 	if(!target.reagents)
-		target.create_reagents(container_volume)
+		target.create_or_update_reagents(container_volume)
 	if(ismob(target))
 		var/mob/victim = target
 		victim.death() // to prevent reagent processing
@@ -62,13 +62,13 @@
 		var/datum/reagents/checking = get_first_reagent_holder(from)
 		if(!checking)
 			return "first holder is null."
-		if(checking?.total_volume != from_remaining_target)
-			return "first holder should have [from_remaining_target]u remaining but has [checking.total_volume]u."
+		if(REAGENT_TOTAL_VOLUME(checking) != from_remaining_target)
+			return "first holder should have [from_remaining_target]u remaining but has [REAGENT_TOTAL_VOLUME(checking)]u."
 		checking = get_second_reagent_holder(target)
 		if(!checking)
 			return "second holder is null."
-		if(checking?.total_volume != to_holding_target)
-			return "second holder should hold [to_holding_target]u but has [checking.total_volume]u."
+		if(REAGENT_TOTAL_VOLUME(checking) != to_holding_target)
+			return "second holder should hold [to_holding_target]u but has [REAGENT_TOTAL_VOLUME(checking)]u."
 
 /datum/unit_test/chemistry/proc/validate_holders(var/atom/from, var/atom/target)
 	if(QDELETED(from))
@@ -219,7 +219,7 @@
 
 	// Cleanup pt. 2
 	chem_refs.Cut()
-	if(spawn_spot.reagents?.total_volume)
+	if(REAGENT_TOTAL_VOLUME(spawn_spot.reagents))
 		spawn_spot.reagents.clear_reagents()
 		failures += "- spawn turf had fluids post-test"
 

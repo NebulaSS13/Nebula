@@ -33,35 +33,6 @@
 	new /obj/item/clothing/mask/gas/syndicate(src)
 	new /obj/item/clothing/head/helmet/space/void/merc(src)
 
-
-/obj/structure/closet/syndicate/nuclear
-	desc = "It's a storage unit for nuclear-operative gear."
-
-/obj/structure/closet/syndicate/nuclear/Initialize()
-	. = ..()
-
-	new /obj/item/ammo_magazine/smg(src)
-	new /obj/item/ammo_magazine/smg(src)
-	new /obj/item/ammo_magazine/smg(src)
-	new /obj/item/ammo_magazine/smg(src)
-	new /obj/item/ammo_magazine/smg(src)
-	new /obj/item/box/handcuffs(src)
-	new /obj/item/box/flashbangs(src)
-	new /obj/item/gun/energy/gun(src)
-	new /obj/item/gun/energy/gun(src)
-	new /obj/item/gun/energy/gun(src)
-	new /obj/item/gun/energy/gun(src)
-	new /obj/item/gun/energy/gun(src)
-	new /obj/item/pinpointer/nukeop(src)
-	new /obj/item/pinpointer/nukeop(src)
-	new /obj/item/pinpointer/nukeop(src)
-	new /obj/item/pinpointer/nukeop(src)
-	new /obj/item/pinpointer/nukeop(src)
-	new /obj/item/modular_computer/pda/mercenary(src)
-	var/obj/item/radio/uplink/U = new(src)
-	U.tc_amount = 40
-	return
-
 /obj/structure/closet/syndicate/resources
 	desc = "An old, dusty locker."
 
@@ -128,7 +99,7 @@
 		/obj/item/stack/material/puck/mapped/uranium/fifty,
 		/obj/item/stack/material/gemstone/mapped/diamond/fifty,
 		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
-		/obj/item/stack/material/rods/fifty
+		/obj/item/stack/material/rods/mapped/steel/fifty
 	)
 
 	for(var/i = 0, i < 2, i++)

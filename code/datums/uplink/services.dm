@@ -71,22 +71,22 @@
 		deactivate()
 	. = ..()
 
-/obj/item/uplink_service/examine(mob/user, distance)
+/obj/item/uplink_service/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
 		switch(state)
 			if(AWAITING_ACTIVATION)
-				to_chat(user, "It is labeled '[service_label]' and appears to be awaiting activation.")
+				LAZYADD(., "It is labeled '[service_label]' and appears to be awaiting activation.")
 			if(CURRENTLY_ACTIVE)
-				to_chat(user, "It is labeled '[service_label]' and appears to be active.")
+				LAZYADD(., "It is labeled '[service_label]' and appears to be active.")
 			if(HAS_BEEN_ACTIVATED)
-				to_chat(user, "It is labeled '[service_label]' and appears to be permanently disabled.")
+				LAZYADD(., "It is labeled '[service_label]' and appears to be permanently disabled.")
 
 /obj/item/uplink_service/attack_self(var/mob/user)
 	if(state != AWAITING_ACTIVATION)
 		to_chat(user, "<span class='warning'>\The [src] won't activate again.</span>")
 		return
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(get_z(src))]
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors[get_z(src)]
 	var/choice = alert(user, "This will only affect your current location[istype(O) ? " ([O])" : ""]. Proceed?","Confirmation", "Yes", "No")
 	if(choice != "Yes")
 		return

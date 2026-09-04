@@ -7,6 +7,7 @@
 /decl/interaction_handler/clothing_toggle/buttons
 	name = "Toggle Open Or Closed"
 	state_decl_type = /decl/clothing_state_modifier/buttons
+	examine_desc = "fasten or undo $TARGET_THEIR$ buttons"
 
 /obj/item/clothing/proc/toggle_buttons_verb()
 

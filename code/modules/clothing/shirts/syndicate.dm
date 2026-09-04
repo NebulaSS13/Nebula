@@ -1,6 +1,6 @@
 /obj/item/clothing/shirt/syndicate
 	name = "tactical turtleneck"
-	desc = "It's some non-descript, slightly suspicious looking, turtleneck sweater."
+	desc = "It's some nondescript, slightly suspicious looking, turtleneck sweater."
 	icon = 'icons/clothing/shirts/sweater_tactical.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_SMALL,

@@ -11,7 +11,7 @@
 	var/place_item_y = -5
 
 /obj/structure/pedestal/attackby(obj/item/used_item, mob/user)
-	if(user.a_intent != I_HURT && user.try_unequip(used_item, get_turf(src)))
+	if(!user.check_intent(I_FLAG_HARM) && user.try_unequip(used_item, get_turf(src)))
 		used_item.reset_offsets(anim_time = 0)
 		used_item.pixel_y = used_item.default_pixel_y + place_item_y
 		return TRUE

@@ -12,9 +12,9 @@
 		.["Any"]++
 
 		if(isrobot(M))
-			var/mob/living/silicon/robot/R = M
-			if(R.module?.associated_department)
-				var/decl/department/dept = GET_DECL(R.module.associated_department)
+			var/mob/living/silicon/robot/robot = M
+			if(robot.module?.associated_department)
+				var/decl/department/dept = GET_DECL(robot.module.associated_department)
 				.[dept.name] = .[dept.name] + 1
 		else
 			for(var/dtype in M.mind?.assigned_job?.department_types)

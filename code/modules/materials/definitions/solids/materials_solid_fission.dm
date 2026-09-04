@@ -27,7 +27,8 @@
 	fission_heat = 35000
 	fission_energy = 4000
 	neutron_absorption = 4
-	
+	wall_damage_threshold = 20
+
 
 /decl/material/solid/metal/neptunium // Np-237.
 	name = "neptunium"

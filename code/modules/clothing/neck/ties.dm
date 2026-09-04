@@ -34,6 +34,10 @@
 	name = "long yellow tie"
 	color = "#c4c83d"
 
+/obj/item/clothing/neck/tie/long/blue
+	name = "long blue tie"
+	color = "#3d62c8"
+
 /obj/item/clothing/neck/tie/navy
 	name = "navy tie"
 	color = "#182e44"

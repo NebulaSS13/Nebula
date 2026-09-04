@@ -1,5 +1,5 @@
 #define GET_ALLOWED_VALUES(write_to, check_key) \
-	var/decl/species/S = get_species_by_key(pref.species); \
+	var/decl/species/S = pref.get_species_decl(); \
 	if(!S) { \
 		write_to = list(); \
 	} else if(S.force_background_info[check_key]) { \
@@ -24,6 +24,13 @@
 	for(var/cat_type in global.using_map.get_background_categories())
 		hidden[cat_type] = TRUE
 	..()
+
+/datum/category_item/player_setup_item/background/details/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	if(is_preview_copy)
+		return
+	for(var/token in pref.background_info)
+		character.set_background_value(token, pref.background_info[token], defer_language_update = TRUE)
+	character.update_languages()
 
 /datum/category_item/player_setup_item/background/details/sanitize_character()
 
@@ -60,7 +67,7 @@
 	if(istype(check))
 		pref.real_name = check.sanitize_background_name(pref.real_name, pref.species)
 		if(!pref.real_name)
-			pref.real_name = check.get_random_name(get_mannequin(pref.client?.ckey), pref.gender)
+			pref.real_name = check.get_random_cultural_name(get_mannequin(pref.client?.ckey), pref.gender, pref.species)
 
 // Load an associative list of background category type to a background type.
 /datum/category_item/player_setup_item/background/details/load_character(datum/pref_record_reader/R)
@@ -77,12 +84,12 @@
 		if(istype(background))
 			pref.background_info[cat.type] = background.type
 
-/datum/category_item/player_setup_item/background/details/save_character(datum/pref_record_writer/W)
+/datum/category_item/player_setup_item/background/details/save_character(datum/pref_record_writer/writer)
 	for(var/background_cat_type in pref.background_info)
 		var/decl/background_category/cat = GET_DECL(background_cat_type)
 		var/decl/background_detail/entry = GET_DECL(pref.background_info[background_cat_type])
 		if(istype(cat) && istype(entry))
-			W.write(cat.uid, entry.uid)
+			writer.write(cat.uid, entry.uid)
 
 /datum/category_item/player_setup_item/background/details/content()
 	. = list()

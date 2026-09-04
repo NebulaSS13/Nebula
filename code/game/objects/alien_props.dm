@@ -19,7 +19,7 @@
 // APC
 #define APC_UPDATE_ALLGOOD 128
 
-/obj/machinery/power/apc/alien
+/obj/machinery/apc/alien
 	name = "alien device"
 	desc = "It's affixed to the floor, with a thick wire going into it."
 	icon = 'icons/obj/xenoarchaeology.dmi'
@@ -30,7 +30,7 @@
 		/obj/item/cell/alien
 	)
 
-/obj/machinery/power/apc/alien/on_update_icon()
+/obj/machinery/apc/alien/on_update_icon()
 	check_updates()
 	if(update_state & APC_UPDATE_ALLGOOD)
 		icon_state = "ano11"

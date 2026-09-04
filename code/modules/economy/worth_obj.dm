@@ -18,8 +18,6 @@
 	. = length(matter) ? ..() : (material?.value || 1)
 
 /obj/get_base_value()
-	if(holographic)
-		return 0
 	if(length(matter))
 		. = 0
 		for(var/mat in matter)

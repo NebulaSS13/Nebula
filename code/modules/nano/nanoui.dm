@@ -134,7 +134,7 @@ nanoui is used to open and update nano browser uis
   *
   * @return nothing
   */
-/datum/nanoui/proc/set_status(state, push_update)
+/datum/nanoui/proc/set_nano_status(state, push_update)
 	if (state != status) // Only update if it is different
 		if (status == STATUS_DISABLED)
 			status = state
@@ -164,7 +164,7 @@ nanoui is used to open and update nano browser uis
 	if(new_status == STATUS_CLOSE)
 		close()
 		return 1
-	set_status(new_status, push_update)
+	set_nano_status(new_status, push_update)
 
  /**
   * Set the ui to auto update (every master_controller tick)
@@ -388,7 +388,7 @@ nanoui is used to open and update nano browser uis
 		<script type='text/javascript'>
 			function receiveUpdateData(jsonString)
 			{
-				// We need both jQuery and NanoStateManager to be able to recieve data
+				// We need both jQuery and NanoStateManager to be able to receive data
 				// At the moment any data received before those libraries are loaded will be lost
 				if (typeof NanoStateManager != 'undefined' && typeof jQuery != 'undefined')
 				{
@@ -396,7 +396,7 @@ nanoui is used to open and update nano browser uis
 				}
 				//else
 				//{
-				//	alert('browser.recieveUpdateData failed due to jQuery or NanoStateManager being unavailiable.');
+				//	alert('browser.receiveUpdateData failed due to jQuery or NanoStateManager being unavailiable.');
 				//}
 			}
 		</script>
@@ -514,13 +514,14 @@ nanoui is used to open and update nano browser uis
 		set_show_map(text2num(href_list["showMap"]))
 		map_update = 1
 
-	if(href_list["mapZLevel"])
-		var/map_z = text2num(href_list["mapZLevel"])
+	if(href_list["switchMapZLevel"])
+		var/map_z = text2num(href_list["switchMapZLevel"])
 		if(isMapLevel(map_z))
 			set_map_z_level(map_z)
 			map_update = 1
 
-	if ((src_object && src_object.Topic(href, href_list, state)) || map_update)
+	// src_object.Topic() might null out src_object by deleting us.
+	if (src_object && (src_object.Topic(href, href_list, state) || (!QDELETED(src) && src_object && map_update)))
 		SSnano.update_uis(src_object) // update all UIs attached to src_object
 
  /**

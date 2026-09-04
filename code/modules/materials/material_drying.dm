@@ -1,6 +1,6 @@
 /obj/item/stack/material/fluid_act(var/datum/reagents/fluids)
 	. = ..()
-	if(!QDELETED(src) && fluids?.total_volume && material?.tans_to)
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids) && material?.tans_to)
 		if(!dried_type)
 			dried_type = type
 		drying_wetness = get_max_drying_wetness()

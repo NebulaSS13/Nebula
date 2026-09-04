@@ -126,10 +126,10 @@
 
 /obj/item/box/syndie_kit/cigarette/WillContain()
 	return list(
-		/obj/item/box/fancy/cigarettes/flash_powder = 2,
-		/obj/item/box/fancy/cigarettes/chemsmoke = 2,
-		/obj/item/box/fancy/cigarettes/mindbreak,
-		/obj/item/box/fancy/cigarettes/tricord,
+		/obj/item/box/fancy/cigarettes/covert/flash_powder = 2,
+		/obj/item/box/fancy/cigarettes/covert/chemsmoke = 2,
+		/obj/item/box/fancy/cigarettes/covert/mindbreak,
+		/obj/item/box/fancy/cigarettes/covert/tricord,
 		/obj/item/flame/fuelled/lighter/zippo/random,
 		)
 

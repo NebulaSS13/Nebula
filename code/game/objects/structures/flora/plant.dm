@@ -7,14 +7,20 @@
 	var/dead = FALSE
 	var/sampled = FALSE
 	var/datum/seed/plant
-	var/harvestable
+	var/harvestable = 0 // Note that this is a counter, not a bool.
+	var/pollen = 0
 
 /obj/structure/flora/plant/large
 	opacity = TRUE
 	density = TRUE
 
+/obj/structure/flora/plant/process_plants()
+	if(plant?.produces_pollen <= 0)
+		return PROCESS_KILL
+	if(pollen < MAX_POLLEN_PER_FLOWER)
+		pollen += plant.produces_pollen * POLLEN_PRODUCTION_MULT
+
 /* Notes for future work moving logic off hydrotrays onto plants themselves:
-/obj/structure/flora/plant/Process()
 	// check our immediate environment
 	// ask our environment for available reagents
 	//    process the reagents
@@ -26,12 +32,12 @@
 	// update icon/harvestability as appropriate
 */
 
-/obj/structure/flora/plant/examine(mob/user, distance)
+/obj/structure/flora/plant/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(dead)
-		to_chat(user, SPAN_OCCULT("It is dead."))
+		. += SPAN_OCCULT("It is dead.")
 	else if(harvestable)
-		to_chat(user, SPAN_NOTICE("You can see [harvestable] harvestable fruit\s."))
+		. += SPAN_NOTICE("You can see [harvestable] harvestable fruit\s.")
 
 /obj/structure/flora/plant/dismantle_structure(mob/user)
 	if(plant)
@@ -61,9 +67,13 @@
 			var/potency = plant.get_trait(TRAIT_POTENCY)
 			set_light(l_range = max(1, round(potency/10)), l_power = clamp(round(potency/30), 0, 1), l_color = plant.get_trait(TRAIT_BIOLUM_COLOUR))
 	update_icon()
-	return ..()
+	. = ..()
+	if(plant?.produces_pollen && !is_processing)
+		START_PROCESSING(SSplants, src)
 
 /obj/structure/flora/plant/Destroy()
+	if(is_processing)
+		STOP_PROCESSING(SSplants, src)
 	plant = null
 	. = ..()
 
@@ -73,15 +83,15 @@
 	reset_color()
 	set_overlays(plant.get_appearance(dead = dead, growth_stage = growth_stage, can_harvest = !!harvestable))
 
-/obj/structure/flora/plant/attackby(obj/item/O, mob/user)
+/obj/structure/flora/plant/attackby(obj/item/used_item, mob/user)
 
-	if(IS_SHOVEL(O) || IS_HATCHET(O))
-		user.visible_message(SPAN_NOTICE("\The [user] uproots \the [src] with \the [O]!"))
+	if(IS_SHOVEL(used_item) || IS_HATCHET(used_item))
+		user.visible_message(SPAN_NOTICE("\The [user] uproots \the [src] with \the [used_item]!"))
 		physically_destroyed()
 		return TRUE
 
 	// Hydrotray boilerplate for taking samples.
-	if(O.edge && O.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
+	if(used_item.has_edge() && used_item.w_class < ITEM_SIZE_NORMAL && !user.check_intent(I_FLAG_HARM))
 		if(sampled)
 			to_chat(user, SPAN_WARNING("There's no bits that can be used for a sampling left."))
 			return TRUE
@@ -146,4 +156,25 @@
 
 /obj/structure/flora/plant/random_mushroom/Initialize()
 	plant = pick(get_mushroom_variants())
+	return ..()
+
+/obj/structure/flora/plant/random_flower
+	name = "flower"
+	color = COLOR_PINK
+	icon_state = "flower5"
+	is_spawnable_type = TRUE
+
+// Only contains roundstart plants, this is meant to be a mapping helper.
+/obj/structure/flora/plant/random_flower/proc/get_flower_variants()
+	var/static/list/flower_variants
+	if(isnull(flower_variants))
+		flower_variants = list()
+		for(var/plant in SSplants.seeds)
+			var/datum/seed/seed = SSplants.seeds[plant]
+			if(!isnull(seed?.name) && seed.produces_pollen)
+				flower_variants |= seed.name
+	return flower_variants
+
+/obj/structure/flora/plant/random_flower/Initialize()
+	plant = pick(get_flower_variants())
 	return ..()

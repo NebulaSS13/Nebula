@@ -15,7 +15,7 @@
 		return FALSE // Can potentially add uninstall code here, but not currently supported.
 	return ..()
 
-/obj/item/stock_parts/proc/set_status(var/obj/machinery/machine, var/flag)
+/obj/item/stock_parts/proc/set_component_status(var/obj/machinery/machine, var/flag)
 	var/old_stat = status
 	status |= flag
 	if(old_stat != status)
@@ -34,7 +34,7 @@
 			machine.component_stat_change(src, old_stat, flag)
 
 /obj/item/stock_parts/proc/on_install(var/obj/machinery/machine)
-	set_status(machine, PART_STAT_INSTALLED)
+	set_component_status(machine, PART_STAT_INSTALLED)
 
 /obj/item/stock_parts/proc/on_uninstall(var/obj/machinery/machine, var/temporary = FALSE)
 	unset_status(machine, PART_STAT_INSTALLED)
@@ -48,7 +48,7 @@
 	if(istype(machine))
 		LAZYDISTINCTADD(machine.processing_parts, src)
 		START_PROCESSING_MACHINE(machine, MACHINERY_PROCESS_COMPONENTS)
-		set_status(machine, PART_STAT_PROCESSING)
+		set_component_status(machine, PART_STAT_PROCESSING)
 
 /obj/item/stock_parts/proc/stop_processing(var/obj/machinery/machine)
 	if(istype(machine))
@@ -86,22 +86,27 @@
 		if(ELECTROCUTE)
 			cause = "sparks"
 	visible_message(SPAN_WARNING("Something [cause] inside \the [machine]."), range = 2)
-	SetName("broken [name]")
+	update_name()
+
+/obj/item/stock_parts/update_name()
+	. = ..()
+	if(!is_functional())
+		SetName("broken [name]") // prepend 'broken' to the results
 
 /obj/item/stock_parts/proc/is_functional()
 	return (!can_take_damage()) || (current_health > 0)
 
-/obj/item/stock_parts/examine(mob/user)
+/obj/item/stock_parts/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(can_take_damage())
 		if(!is_functional())
-			to_chat(user, SPAN_WARNING("It is completely broken."))
+			. += SPAN_WARNING("It is completely broken.")
 		else if(get_percent_health() < 50)
-			to_chat(user, SPAN_WARNING("It is heavily damaged."))
+			. += SPAN_WARNING("It is heavily damaged.")
 		else if(get_percent_health() < 75)
-			to_chat(user, SPAN_NOTICE("It is showing signs of damage."))
+			. += SPAN_NOTICE("It is showing signs of damage.")
 		else if(is_damaged())
-			to_chat(user, SPAN_NOTICE("It is showing some wear and tear."))
+			. += SPAN_NOTICE("It is showing some wear and tear.")
 
 //Machines handle damaging for us, so don't do it twice
 /obj/item/stock_parts/explosion_act(severity)
@@ -109,3 +114,14 @@
 	if(istype(M) && (src in M.component_parts))
 		return
 	..()
+
+/// Alt-click interactions provided to our parent machine.
+/obj/item/stock_parts/proc/get_machine_alt_interactions(mob/user)
+	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_BE_PURE(TRUE)
+	RETURN_TYPE(/list)
+	. = list()
+
+/// A stub for showing messages based on part status when a machine is examined.
+/obj/item/stock_parts/proc/on_machine_examined(mob/user)
+	SHOULD_CALL_PARENT(TRUE)

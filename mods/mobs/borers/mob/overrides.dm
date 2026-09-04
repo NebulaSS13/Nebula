@@ -22,8 +22,10 @@
 		var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
 		if(B.controlling)
 			var/image/holder = hud_list[STATUS_HUD]
+			holder.icon       = 'mods/mobs/borers/icons/hud.dmi'
 			holder.icon_state = "hudbrainworm"
 		var/image/holder2 = hud_list[STATUS_HUD_OOC]
+		holder2.icon       = 'mods/mobs/borers/icons/hud.dmi'
 		holder2.icon_state = "hudbrainworm"
 
 /mob/living/human/say_understands(mob/speaker, decl/language/speaking)

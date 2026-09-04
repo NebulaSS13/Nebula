@@ -2,7 +2,7 @@
 /obj/item/clothing/head/bio_hood
 	name = "bio hood"
 	icon = 'icons/clothing/head/biosuit/_biosuit.dmi'
-	desc = "A hood that protects the head and face from biological comtaminants."
+	desc = "A hood that protects the head and face from biological contaminants."
 	permeability_coefficient = 0
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_SHIELDED,

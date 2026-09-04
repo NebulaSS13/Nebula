@@ -141,7 +141,7 @@
 			return 1
 		var/field_ID = text2num(href_list["ID"])
 		var/datum/report_field/field = selected_report.field_from_ID(field_ID)
-		if(!field || !(field.get_perms(get_access(usr), usr) & OS_WRITE_ACCESS))
+		if(!field || !(field.get_perms(get_access(user), user) & OS_WRITE_ACCESS))
 			return 1
 		field.ask_value(user) //Handles the remaining IO.
 		return 1

@@ -72,20 +72,6 @@
 
 	return verb
 
-/mob/living/human/handle_speech_problems(var/list/message_data)
-	if(HAS_STATUS(src, STAT_SILENCE) || has_genetic_condition(GENE_COND_MUTED))
-		to_chat(src, SPAN_WARNING("You are unable to speak!"))
-		message_data[1] = ""
-		return TRUE
-
-	var/obj/item/clothing/mask/M = get_equipped_item(slot_wear_mask_str)
-	if(istype(M) && M.voicechange)
-		message_data[1] = pick(M.say_messages)
-		message_data[2] = pick(M.say_verbs)
-		return TRUE
-
-	return ..(message_data)
-
 /mob/living/human/handle_message_mode(message_mode, message, verb, speaking, used_radios)
 	if(message_mode == MESSAGE_MODE_WHISPER) //It's going to get sanitized again immediately, so decode.
 		whisper_say(html_decode(message), speaking)

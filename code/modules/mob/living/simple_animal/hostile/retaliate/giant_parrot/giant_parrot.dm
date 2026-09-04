@@ -32,12 +32,12 @@
 
 /mob/living/simple_animal/hostile/parrot/space/Initialize()
 	. = ..()
-	var/decl/parrot_subspecies/ps = get_parrot_species()
-	if(ps)
-		icon_set = ps.icon_set
-		butchery_data = ps.butchery_data
+	var/decl/parrot_subspecies/parrot_species = get_parrot_species()
+	if(parrot_species)
+		icon_set = parrot_species.icon_set
+		butchery_data = parrot_species.butchery_data
 		if(get_subspecies_name)
-			SetName(ps.name)
+			SetName(parrot_species.name)
 	set_scale(2)
 	update_icon()
 
@@ -52,7 +52,7 @@
 
 		else if(H.get_equipped_item(slot_head_str))
 			var/obj/item/clothing/head/HAT = H.get_equipped_item(slot_head_str)
-			if(H.canUnEquip(HAT))
+			if(H.can_unequip_item(HAT))
 				visible_message(SPAN_MFAUNA("\The [src] rips \the [H]'s [HAT] off!"))
 				set_special_ability_cooldown(ability_cooldown)
 				H.try_unequip(HAT, get_turf(src))

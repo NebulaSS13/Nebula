@@ -1,7 +1,5 @@
-// I considered just putting this in the fantasy modpack,
-// but it's probably better in core code, since at the very least
-// the Wizard gamemode might want to use the item or icon for something.
-// Also, I think it could just be a neat prop.
+// I considered just putting this in the fantasy modpack, but
+// it's probably better in core code, since it's a nice prop.
 /obj/item/hourglass
 	name = "hourglass"
 	icon = 'icons/obj/items/hourglass.dmi'
@@ -45,7 +43,7 @@
 /obj/item/hourglass/proc/sand_is_falling()
 	return (world.time - last_flipped) < sand_duration
 
-/obj/item/hourglass/examine(mob/user, distance, infix, suffix)
+/obj/item/hourglass/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 2)
 		var/sand_string = "not falling"
@@ -62,7 +60,7 @@
 				sand_string = "almost halfway done falling"
 			if(0.75 to 1)
 				sand_string = "just starting to fall"
-		to_chat(user, SPAN_NOTICE("The [sand_material.solid_name] in \the [src] is [sand_string]."))
+		. += SPAN_NOTICE("The [sand_material.solid_name] in \the [src] is [sand_string].")
 
 /obj/item/hourglass/proc/get_sand_state(world_inventory_state)
 	/// This is a fraction of the sand_duration.

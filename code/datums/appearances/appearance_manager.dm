@@ -23,7 +23,7 @@
 
 /decl/appearance_manager/proc/remove_appearances(var/mob/viewer)
 	var/datum/priority_queue/pq = appearances_[viewer]
-	for(var/entry in pq.L)
+	for(var/entry in pq.GetQueue())
 		var/datum/appearance_data/ad = entry
 		ad.RemoveViewer(viewer, FALSE)
 	if(viewer in appearances_)
@@ -39,7 +39,7 @@
 	var/datum/priority_queue/pq = appearances_[viewer]
 	if(!pq)
 		return
-	for(var/entry in pq.L)
+	for(var/entry in pq.GetQueue())
 		var/datum/appearance_data/ad = entry
 		viewer.client.images -= ad.images
 
@@ -49,6 +49,6 @@
 	var/datum/priority_queue/pq = appearances_[viewer]
 	if(!pq)
 		return
-	for(var/entry in pq.L)
+	for(var/entry in pq.GetQueue())
 		var/datum/appearance_data/ad = entry
 		viewer.client.images |= ad.images

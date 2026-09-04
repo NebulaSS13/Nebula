@@ -94,12 +94,6 @@ var/global/list/_intolerances_by_flag = list()
 	uid = "trait_allergy_nuts"
 
 /decl/trait/malus/intolerance/stimulant
-	name = "Caffeine Intolerance"
-	description = "You are allergic to or intolerant of caffeine, and can become very ill if you ingest it."
-	allergen_flags = ALLERGEN_CAFFEINE
-	uid = "trait_allergy_caffeine"
-
-/decl/trait/malus/intolerance/stimulant
 	name = "Stimulant Intolerance"
 	description = "You are allergic to or intolerant of stimulants, and can become very ill if you ingest them."
 	allergen_flags = ALLERGEN_STIMULANT | ALLERGEN_CAFFEINE

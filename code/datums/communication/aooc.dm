@@ -30,7 +30,7 @@
 			receive_communication(C, target, SPAN_AOOC("<EM>[get_options_bar(C, 0, 1, 1)]:</EM> <span class='message'>[message]</span>"))
 		else if(target.mob?.mind?.assigned_special_role)
 			var/display_name = C.key
-			var/player_display = holder ? "[display_name]([usr.client.holder.rank])" : display_name
+			var/player_display = holder ? "[display_name]([C.holder.rank])" : display_name
 			receive_communication(C, target, SPAN_AOOC("<EM>[player_display]:</EM> <span class='message'>[message]</span>"))
 
 /decl/communication_channel/aooc/do_broadcast(message)

@@ -15,7 +15,7 @@
 	var/pressuremin = 0
 	var/pressuremax = 10 ATM
 
-	volume = 1000
+	gas_volume = 1000
 
 	power_rating = 7500 //7500 W ~ 10 HP
 	power_losses = 150
@@ -27,7 +27,8 @@
 	. = ..()
 
 	var/list/air_mix = StandardAirMix()
-	src.air_contents.adjust_multi(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen], /decl/material/gas/nitrogen, air_mix[/decl/material/gas/nitrogen])
+	air_contents.adjust_gas(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen], FALSE)
+	air_contents.adjust_gas(/decl/material/gas/nitrogen, air_mix[/decl/material/gas/nitrogen])
 
 /obj/machinery/portable_atmospherics/powered/pump/on_update_icon()
 	overlays.Cut()
@@ -75,11 +76,11 @@
 		var/air_temperature
 		if(direction_out)
 			pressure_delta = target_pressure - environment.return_pressure()
-			output_volume = environment.volume * environment.group_multiplier
+			output_volume = environment.total_volume * environment.group_multiplier
 			air_temperature = environment.temperature? environment.temperature : air_contents.temperature
 		else
 			pressure_delta = environment.return_pressure() - target_pressure
-			output_volume = air_contents.volume * air_contents.group_multiplier
+			output_volume = air_contents.total_volume * air_contents.group_multiplier
 			air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
 
 		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)

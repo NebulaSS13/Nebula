@@ -11,7 +11,7 @@
 	w_class = ITEM_SIZE_LARGE
 	storage = /datum/storage/toolbox
 	origin_tech = @'{"combat":1}'
-	attack_verb = list("robusted")
+	attack_verb = "robusted"
 	material = /decl/material/solid/metal/aluminium
 	_base_attack_force = 20
 

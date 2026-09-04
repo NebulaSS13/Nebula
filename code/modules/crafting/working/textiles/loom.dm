@@ -34,24 +34,24 @@
 	weaving_type = null
 	weaving_progress = 0
 
-/obj/structure/working/loom/try_take_input(obj/item/W, mob/user)
+/obj/structure/working/loom/try_take_input(obj/item/used_item, mob/user)
 
-	if(istype(W, /obj/item/stack/material/thread))
+	if(istype(used_item, /obj/item/stack/material/thread))
 
-		if(!W.material.has_textile_fibers)
-			to_chat(user, SPAN_WARNING("\The [W] isn't suitable for making cloth."))
+		if(!used_item.material.has_textile_fibers)
+			to_chat(user, SPAN_WARNING("\The [used_item] isn't suitable for making cloth."))
 			return TRUE
 
 		var/loaded = FALSE
 		if(loaded_thread)
-			if(!loaded_thread.can_merge_stacks(W))
+			if(!loaded_thread.can_merge_stacks(used_item))
 				to_chat(user, SPAN_WARNING("\The [src] is already wound with \the [loaded_thread]."))
 				return TRUE
-			var/obj/item/stack/feeding = W
+			var/obj/item/stack/feeding = used_item
 			feeding.transfer_to(loaded_thread)
 			loaded = TRUE
-		else if(user.try_unequip(W, src))
-			loaded_thread = W
+		else if(user.try_unequip(used_item, src))
+			loaded_thread = used_item
 			loaded = TRUE
 		if(loaded)
 			weaving_color = loaded_thread.get_color()
@@ -74,7 +74,7 @@
 		add_overlay(I)
 
 /obj/structure/working/loom/try_unload_material(mob/user)
-	if(user.a_intent == I_GRAB)
+	if(user.check_intent(I_FLAG_GRAB))
 		if(loaded_thread)
 			to_chat(user, SPAN_NOTICE("You remove \the [loaded_thread] from \the [src]."))
 			loaded_thread.dropInto(loc)

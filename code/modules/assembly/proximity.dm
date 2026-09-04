@@ -20,7 +20,23 @@
 	var/range = 2
 
 /obj/item/assembly/prox_sensor/proc/toggle_scan()
+	if(!secured)	return 0
+	scanning = !scanning
+	update_icon()
+	return
+
 /obj/item/assembly/prox_sensor/proc/sense()
+	var/turf/mainloc = get_turf(src)
+//		if(scanning && cooldown <= 0)
+//			mainloc.visible_message("[html_icon(src)] *boop* *boop*", "*boop* *boop*")
+	if((!holder && !secured)||(!scanning)||(cooldown > 0))	return 0
+	pulse_device(0)
+	if(!holder)
+		mainloc.visible_message("[html_icon(src)] *beep* *beep*", "*beep* *beep*")
+	cooldown = 2
+	spawn(10)
+		process_cooldown()
+	return
 
 
 /obj/item/assembly/prox_sensor/activate()
@@ -46,19 +62,6 @@
 	if(. && !istype(AM, /obj/effect/ir_beam) && AM.move_speed < 12)
 		sense()
 
-/obj/item/assembly/prox_sensor/sense()
-	var/turf/mainloc = get_turf(src)
-//		if(scanning && cooldown <= 0)
-//			mainloc.visible_message("[html_icon(src)] *boop* *boop*", "*boop* *boop*")
-	if((!holder && !secured)||(!scanning)||(cooldown > 0))	return 0
-	pulse_device(0)
-	if(!holder)
-		mainloc.visible_message("[html_icon(src)] *beep* *beep*", "*beep* *beep*")
-	cooldown = 2
-	spawn(10)
-		process_cooldown()
-	return
-
 
 /obj/item/assembly/prox_sensor/Process()
 	if(scanning)
@@ -80,12 +83,6 @@
 	. = ..()
 	addtimer(CALLBACK(src, PROC_REF(sense)), 0)
 
-/obj/item/assembly/prox_sensor/toggle_scan()
-	if(!secured)	return 0
-	scanning = !scanning
-	update_icon()
-	return
-
 
 /obj/item/assembly/prox_sensor/on_update_icon()
 	. = ..()
@@ -102,7 +99,7 @@
 		holder.update_icon()
 
 /obj/item/assembly/prox_sensor/Move()
-	..()
+	. = ..()
 	sense()
 
 /obj/item/assembly/prox_sensor/interact(mob/user)//TODO: Change this to the wires thingy

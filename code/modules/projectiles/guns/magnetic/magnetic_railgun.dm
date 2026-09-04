@@ -33,12 +33,12 @@
 
 // Not going to check type repeatedly, if you code or varedit
 // load_type and get runtime errors, don't come crying to me.
-/obj/item/gun/magnetic/railgun/show_ammo(var/mob/user)
+/obj/item/gun/magnetic/railgun/get_ammo_string(mob/user, distance)
 	var/obj/item/rcd_ammo/ammo = loaded
 	if (ammo)
-		to_chat(user, "<span class='notice'>There are [ammo.remaining] shot\s remaining in \the [loaded].</span>")
+		return SPAN_NOTICE("There [ammo.remaining == 1 ? "is" : "are"] [ammo.remaining] shot\s remaining in \the [loaded].")
 	else
-		to_chat(user, "<span class='notice'>There is nothing loaded.</span>")
+		return SPAN_NOTICE("There is nothing loaded.")
 
 /obj/item/gun/magnetic/railgun/check_ammo()
 	var/obj/item/rcd_ammo/ammo = loaded

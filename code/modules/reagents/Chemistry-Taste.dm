@@ -48,9 +48,8 @@ calculate text size per text.
 
 /datum/reagents/proc/get_taste_list(datum/reagents/source_holder)
 	var/list/tastes = list() //descriptor = strength
-	for(var/reagent_type in reagent_volumes)
-		var/decl/material/reagent = GET_DECL(reagent_type)
-		var/list/nutriment_data = LAZYACCESS(reagent_data, reagent_type)
+	for(var/decl/material/reagent as anything in reagent_volumes)
+		var/list/nutriment_data = LAZYACCESS(reagent_data, reagent)
 		var/list/taste_data = LAZYACCESS(nutriment_data, DATA_TASTE)
 		if(length(taste_data))
 			for(var/taste in taste_data)

@@ -10,6 +10,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/submaps =                   list()
 	var/list/map_templates_by_category = list()
 	var/list/map_templates_by_type =     list()
+	var/list/spawnable_map_templates =   list()
 	var/list/banned_maps =               list()
 	var/list/banned_template_names =     list()
 
@@ -47,8 +48,6 @@ SUBSYSTEM_DEF(mapping)
 	var/base_floor_area
 	/// A list of connected z-levels to avoid repeatedly rebuilding connections
 	var/list/connected_z_cache = list()
-	/// A list of turbolift holders to initialize.
-	var/list/turbolifts_to_initialize = list()
 	///Associative list of planetoid/exoplanet data currently registered. The key is the planetoid id, the value is the planetoid_data datum.
 	var/list/planetoid_data_by_id
 	///List of all z-levels in the world where the index corresponds to a z-level, and the key at that index is the planetoid_data datum for the associated planet
@@ -109,6 +108,8 @@ SUBSYSTEM_DEF(mapping)
 	// Load any queued map template markers.
 	for(var/obj/abstract/landmark/map_load_mark/queued_mark in queued_markers)
 		queued_mark.load_subtemplate()
+		if(!QDELETED(queued_mark)) // for if the tile that lands on the landmark is a no-op tile
+			qdel(queued_mark)
 	queued_markers.Cut()
 
 	// Populate overmap.
@@ -119,15 +120,9 @@ SUBSYSTEM_DEF(mapping)
 	// This needs to be non-null even if the overmap isn't created for this map.
 	overmap_event_handler = GET_DECL(/decl/overmap_event_handler)
 
-	var/old_maxz
-	for(var/z = 1 to world.maxz)
-		var/datum/level_data/level = levels_by_z[z]
-		if(!istype(level))
-			level = new /datum/level_data/space(z)
-			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
-		level.setup_level_data()
+	setup_data_for_levels()
 
-	old_maxz = world.maxz
+	var/old_maxz = world.maxz
 	// Build away sites.
 	global.using_map.build_away_sites()
 	global.using_map.build_planets()
@@ -150,32 +145,63 @@ SUBSYSTEM_DEF(mapping)
 	test_load_map_templates()
 #endif
 
-	// Check/associated/setup our level data objects.
-	for(var/z = old_maxz + 1 to world.maxz)
+	setup_data_for_levels(min_z = old_maxz + 1)
+
+	// Now that levels are in place, preload any associated persistent data.
+	// This is to avoid dependencies on other atoms or any other weird ordering
+	// problems like we used to get with old DMMS and SSatoms.
+	var/list/preloaded_levels = list()
+	for(var/datum/level_data/level in levels_by_z)
+		if(level.preload_persistent_data())
+			preloaded_levels += level
+
+	// Now actually load the serde data into the map.
+	for(var/datum/level_data/level as anything in preloaded_levels)
+		level.load_persistent_data()
+
+	// Clear our reference data for GC
+	// This might not be needed but it saves refs floating around I guess.
+	for(var/key in level_persistence_ref_map)
+		var/list/stale_data = global.level_persistence_ref_map[key]
+		stale_data.Cut()
+
+	global.level_persistence_ref_map.Cut()
+
+	for(var/modpack_name in SSmodpacks.loaded_modpacks)
+		var/decl/modpack/loaded_modpack = SSmodpacks.loaded_modpacks[modpack_name]
+		loaded_modpack.on_mapping_pre_finalize()
+
+	// With levels set up and serde complete (and levels flagged) we can do any remaining level generation.
+	global.using_map.finalize_map_generation()
+
+	// Do this dead last as all gen has to run before it makes sense.
+	for(var/datum/level_data/level in levels_by_z)
+		level.build_area_ceilings()
+
+	. = ..()
+
+/datum/controller/subsystem/mapping/proc/setup_data_for_levels(min_z = 1, max_z = world.maxz)
+	for(var/z = min_z to max_z)
 		var/datum/level_data/level = levels_by_z[z]
 		if(!istype(level))
 			level = new /datum/level_data/space(z)
 			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
 		level.setup_level_data()
 
-	// Generate turbolifts last, since away sites may have elevators to generate too.
-	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
-		turbolift.build_turbolift()
-
-	global.using_map.finalize_map_generation()
-
-	. = ..()
-
 /datum/controller/subsystem/mapping/Recover()
 	flags |= SS_NO_INIT
 	map_templates =             SSmapping.map_templates
 	map_templates_by_category = SSmapping.map_templates_by_category
 	map_templates_by_type =     SSmapping.map_templates_by_type
+	spawnable_map_templates =   SSmapping.spawnable_map_templates
 
 /datum/controller/subsystem/mapping/proc/register_map_template(var/datum/map_template/map_template)
 	if(!validate_map_template(map_template) || !map_template.preload())
 		return FALSE
-	map_templates[map_template.name] = map_template
+	map_templates[map_template.name]         = map_template
+	map_templates_by_type[map_template.type] = map_template
+	if(map_template.is_spawnable)
+		spawnable_map_templates += map_template
 	for(var/temple_cat in map_template.template_categories) // :3
 		LAZYINITLIST(map_templates_by_category[temple_cat])
 		LAZYSET(map_templates_by_category[temple_cat], map_template.name, map_template)
@@ -198,7 +224,7 @@ SUBSYSTEM_DEF(mapping)
 	. = list()
 	for(var/template_type in subtypesof(/datum/map_template))
 		var/datum/map_template/template = template_type
-		if(!TYPE_IS_ABSTRACT(template) && initial(template.template_parent_type) != template_type && initial(template.name))
+		if(!TYPE_IS_ABSTRACT(template))
 			. += new template_type(type) // send name as a param to catch people doing illegal ad hoc creation
 
 /datum/controller/subsystem/mapping/proc/get_template(var/template_name)
@@ -228,20 +254,34 @@ SUBSYSTEM_DEF(mapping)
 	planetoid_data_by_z.len = world.maxz
 	connected_z_cache.Cut()
 
+	SSzcopy?.calculate_zstack_limits()
+
 	//Update SSWeather's indexed lists, if we can.
 	if(SSweather?.weather_by_z)
 		SSweather.weather_by_z.len = world.maxz
+
+/// This is equivalent to calling `increment_world_z_size()` in a loop, but more efficient.
+/datum/controller/subsystem/mapping/proc/bulk_increment_world_z_size(num_z_levels, new_level_type, defer_setup = FALSE)
+	ASSERT(num_z_levels > 0)
+	var/old_max = world.maxz
+	world.maxz += num_z_levels
+
+	reindex_lists()
+
+	if (!new_level_type)
+		CRASH("Missing z-level data type for z[old_max] through z[old_max + num_z_levels]!")
+
+	for (var/i in 1 to num_z_levels)
+		var/datum/level_data/level = new new_level_type(old_max + i, defer_setup)
+		level.initialize_new_level()
 
 /datum/controller/subsystem/mapping/proc/increment_world_z_size(var/new_level_type, var/defer_setup = FALSE)
 
 	world.maxz++
 	reindex_lists()
 
-	if(SSzcopy.zlev_maximums.len)
-		SSzcopy.calculate_zstack_limits()
 	if(!new_level_type)
-		PRINT_STACK_TRACE("Missing z-level data type for z["[world.maxz]"]!")
-		return
+		CRASH("Missing z-level data type for z[world.maxz]!")
 
 	var/datum/level_data/level = new new_level_type(world.maxz, defer_setup)
 	level.initialize_new_level()
@@ -426,7 +466,3 @@ SUBSYSTEM_DEF(mapping)
 		if(!P)
 			continue
 		P.begin_processing()
-
-/hook/roundstart/proc/start_processing_all_planets()
-	SSmapping.start_processing_all_planets()
-	return TRUE

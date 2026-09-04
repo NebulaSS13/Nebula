@@ -42,7 +42,7 @@
 
 /datum/uplink_item/item/stealth_items/voice
 	name = "Modified Gas Mask"
-	desc = "A fully functioning gas mask that is able to conceal your face and has a built in voice modulator, \
+	desc = "A fully functioning gas mask that is able to conceal your face and has a built-in voice modulator, \
 	so you can become a true shadow operative!"
 	item_cost = 20
 	path = /obj/item/clothing/mask/chameleon/voice

@@ -26,7 +26,7 @@
 		<li>Use a scalpel to make an <span codexlink='make incision (surgery)'>incision</span>.</li>
 		<li>Use a retractor to <span codexlink='widen incision (surgery)'>widen the incision</span>, if necessary.</li>
 		<li>Use a hemostat to <span codexlink='clamp bleeders (surgery)'>clamp any bleeders</span>, if necessary.</li>
-		<li>On bodyparts with bone encasement, like the skull and ribs, use a circular saw to <span codexlink='saw through bone (surgery)'>open the encasing bone</span>.</li>
+		<li>On body parts with bone encasement, like the skull and ribs, use a circular saw to <span codexlink='saw through bone (surgery)'>open the encasing bone</span>.</li>
 		</ol>
 
 		<h2>Closing an incision</h2>

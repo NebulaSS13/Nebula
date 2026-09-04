@@ -9,11 +9,11 @@
 //        Mining Satchel
 // -----------------------------
 
-/obj/item/ore
+/obj/item/ore_satchel
 	name = "mining satchel"
 	desc = "This sturdy bag can be used to store and transport ores."
-	icon = 'icons/obj/mining.dmi'
-	icon_state = "satchel"
+	icon = 'icons/obj/items/mining_satchel.dmi'
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_LARGE
 	storage = /datum/storage/ore
@@ -37,7 +37,7 @@
 //          Plant bag
 // -----------------------------
 
-/obj/item/plants
+/obj/item/plant_satchel
 	name = "botanical satchel"
 	desc = "This bag can be used to store all kinds of plant products and botanical specimen."
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
@@ -57,8 +57,8 @@
 
 /obj/item/sheetsnatcher
 	name = "sheet snatcher"
-	icon = 'icons/obj/mining.dmi'
-	icon_state = "sheetsnatcher"
+	icon = 'icons/obj/items/sheet_snatcher.dmi'
+	icon_state = ICON_STATE_WORLD
 	desc = "A patented storage system designed for any kind of mineral sheet."
 	material = /decl/material/solid/organic/plastic
 	storage = /datum/storage/sheets

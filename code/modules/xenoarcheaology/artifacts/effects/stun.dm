@@ -3,7 +3,7 @@
 
 /datum/artifact_effect/stun/New()
 	..()
-	origin_type = pick(EFFECT_PSIONIC, EFFECT_ORGANIC)
+	origin_type = pick((XA_EFFECT_PSIONIC), (XA_EFFECT_ORGANIC))
 
 /datum/artifact_effect/stun/DoEffectTouch(var/mob/toucher)
 	if(isliving(toucher))

@@ -1,7 +1,7 @@
 /decl/psionic_faculty/energistics
 	id = PSI_ENERGISTICS
 	name = "Energistics"
-	associated_intent = I_HURT
+	associated_intent_flag = I_FLAG_HARM
 	armour_types = list(ARMOR_BOMB, ARMOR_LASER, ARMOR_ENERGY)
 
 /decl/psionic_power/energistics

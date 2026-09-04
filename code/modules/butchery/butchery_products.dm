@@ -3,8 +3,9 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	icon_state          = ICON_STATE_WORLD
 	material            = /decl/material/solid/organic/meat
+	color               = /decl/material/solid/organic/meat::color
 	w_class             = ITEM_SIZE_NORMAL
-	volume              = 20
+	chem_volume         = 20
 	nutriment_type      = /decl/material/solid/organic/meat
 	nutriment_desc      = list("umami" = 10)
 	nutriment_amt       = 20
@@ -62,12 +63,6 @@
 		return new slice_path(loc, material?.type, TRUE, butchery_data, meat_name)
 	else
 		return ..()
-
-/obj/item/food/butchery/get_dried_product()
-	. = ..()
-	if(meat_name && istype(., /obj/item/food/jerky))
-		var/obj/item/food/jerky/jerk = .
-		jerk.set_meat_name(meat_name)
 
 /obj/item/food/butchery/get_drying_state(var/obj/rack)
 	return "meat"
@@ -134,7 +129,7 @@
 
 /obj/item/food/butchery/offal
 	name                = "offal"
-	desc                = "An assortmant of organs and lumps of unidentified gristle. Packed with nutrients and bile."
+	desc                = "An assortment of organs and lumps of unidentified gristle. Packed with nutrients and bile."
 	icon                = 'icons/obj/food/butchery/offal.dmi'
 	material            = /decl/material/solid/organic/meat/gut
 	nutriment_amt       = 15
@@ -143,19 +138,19 @@
 	var/_cleaned        = FALSE
 	var/work_skill      = SKILL_CONSTRUCTION
 
-/obj/item/food/butchery/offal/examine(mob/user, distance)
+/obj/item/food/butchery/offal/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1 && user.skill_check(work_skill, SKILL_BASIC) && !dry)
 		if(_cleaned && drying_wetness)
-			to_chat(user, "\The [src] can be hung on a drying rack to dry it in preparation for being twisted into thread.")
+			. += "\The [src] can be hung on a drying rack to dry it in preparation for being twisted into thread."
 		else if(!_cleaned)
-			to_chat(user, "\The [src] can be scraped clean with a sharp object like a knife.")
+			. += "\The [src] can be scraped clean with a sharp object like a knife."
 		else if(!drying_wetness)
-			to_chat(user, "\The [src] can be soaked in water to prepare it for drying.")
+			. += "\The [src] can be soaked in water to prepare it for drying."
 
-/obj/item/food/butchery/offal/attackby(obj/item/W, mob/user)
-	if(IS_KNIFE(W) && !_cleaned && !dry)
-		if(W.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, "scraping", "scraping", check_skill = work_skill, set_cooldown = TRUE) && !_cleaned)
+/obj/item/food/butchery/offal/attackby(obj/item/used_item, mob/user)
+	if(IS_KNIFE(used_item) && !_cleaned && !dry)
+		if(used_item.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, "scraping", "scraping", check_skill = work_skill, set_cooldown = TRUE) && !_cleaned)
 			_cleaned = TRUE
 			SetName("cleaned [name]")
 		return TRUE
@@ -176,7 +171,7 @@
 
 /obj/item/food/butchery/offal/fluid_act(var/datum/reagents/fluids)
 	. = ..()
-	if(!QDELETED(src) && fluids?.total_volume && material?.tans_to)
+	if(!QDELETED(src) && REAGENT_TOTAL_VOLUME(fluids) && material?.tans_to)
 		if(!dried_type)
 			dried_type = type
 		drying_wetness = get_max_drying_wetness()
@@ -269,8 +264,8 @@
 
 /obj/item/food/butchery/stomach/get_dried_product()
 	var/obj/item/chems/glass/waterskin/result = ..()
-	if(istype(result) && reagents?.total_volume)
-		reagents.trans_to_holder(result.reagents, reagents.total_volume)
+	if(istype(result) && REAGENT_TOTAL_VOLUME(reagents))
+		reagents.trans_to_holder(result.reagents, REAGENT_TOTAL_VOLUME(reagents))
 	return result
 
 /obj/item/food/butchery/stomach/get_max_drying_wetness()

@@ -77,7 +77,7 @@
 		ca = corners[1] || dummy_lighting_corner
 
 	var/max = max(cr.cache_mx, cg.cache_mx, cb.cache_mx, ca.cache_mx)
-	luminosity = max > LIGHTING_SOFT_THRESHOLD
+	luminosity = max > 0
 
 	var/rr = cr.cache_r
 	var/rg = cr.cache_g

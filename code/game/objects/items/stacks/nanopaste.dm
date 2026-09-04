@@ -21,18 +21,18 @@
 		return TRUE
 
 	if (isrobot(target))	//Repairing cyborgs
-		var/mob/living/silicon/robot/R = target
-		if (R.getBruteLoss() || R.getFireLoss() )
+		var/mob/living/silicon/robot/robot = target
+		if (robot.getBruteLoss() || robot.getFireLoss() )
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			R.heal_damage(BRUTE, 15, do_update_health = FALSE)
-			R.heal_damage(BURN, 15)
+			robot.heal_damage(BRUTE, 15, do_update_health = FALSE)
+			robot.heal_damage(BURN, 15)
 			use(1)
 			user.visible_message(
-				SPAN_NOTICE("\The [user] applied some [name] to \the [R]'s damaged areas."),
-				SPAN_NOTICE("You apply some [name] to \the [R]'s damaged areas.")
+				SPAN_NOTICE("\The [user] applied some [name] to \the [robot]'s damaged areas."),
+				SPAN_NOTICE("You apply some [name] to \the [robot]'s damaged areas.")
 			)
 		else
-			to_chat(user, SPAN_NOTICE("\The [R]'s systems are all nominal."))
+			to_chat(user, SPAN_NOTICE("\The [robot]'s systems are all nominal."))
 		return TRUE
 
 	//Repairing robolimbs
@@ -50,7 +50,7 @@
 		to_chat(user, SPAN_WARNING("\The [target]'s [affecting.name] is flesh and blood, and cannot be repaired with \the [src]."))
 		return TRUE
 
-	if(affecting.damage >= 30 && affecting.hatch_state != HATCH_OPENED)
+	if((affecting.brute_dam + affecting.burn_dam) >= 30 && affecting.hatch_state != HATCH_OPENED)
 		to_chat(user, SPAN_WARNING("The damage to \the [affecting] is too severe to repair without an open maintenance hatch."))
 		return TRUE
 

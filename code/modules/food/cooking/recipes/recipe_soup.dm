@@ -58,7 +58,7 @@
 					ingredients[meat.meat_name]++
 
 	if(precursor_type)
-		var/list/precursor_data = LAZYACCESS(container.reagents?.reagent_data, precursor_type)
+		var/list/precursor_data =  REAGENT_DATA(container.reagents, precursor_type)
 		var/list/precursor_taste = LAZYACCESS(precursor_data, DATA_TASTE)
 		if(length(precursor_taste))
 			for(var/taste in precursor_taste)

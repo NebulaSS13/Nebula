@@ -39,7 +39,7 @@
 
 /obj/item/knife/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(user.a_intent != I_HELP && user.get_target_zone() == BP_EYES)
+	if(!user.check_intent(I_FLAG_HELP) && user.get_target_zone() == BP_EYES)
 		if(user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))
 			target = user
 		return eyestab(target, user)
@@ -52,7 +52,7 @@
 	name = "dueling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	icon = 'icons/obj/items/weapon/knives/savage.dmi'
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	material_alteration = MAT_FLAG_ALTERATION_NAME
 	w_class = ITEM_SIZE_NORMAL
 
@@ -101,7 +101,7 @@
 
 //random stuff
 /obj/item/knife/hook
-	name = "meat hook"
+	name = "hook"
 	desc = "A sharp, metal hook what sticks into things."
 	icon = 'icons/obj/items/weapon/knives/hook.dmi'
 	sharp = FALSE
@@ -119,7 +119,7 @@
 //Utility knives
 /obj/item/knife/utility
 	name = "utility knife"
-	desc = "An utility knife with a polymer handle, commonly used through human space."
+	desc = "A utility knife with a polymer handle, commonly used through human space."
 	icon = 'icons/obj/items/weapon/knives/utility.dmi'
 	w_class = ITEM_SIZE_SMALL
 	draw_handle = TRUE

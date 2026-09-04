@@ -7,9 +7,9 @@
 	var/uses = 20
 	var/disabled = 1
 	var/locked = 1
-	var/cooldown_time = 0
-	var/cooldown_timeleft = 0
-	var/cooldown_on = 0
+	var/slip_cooldown_time = 0
+	var/slip_cooldown_timeleft = 0
+	var/slip_cooldown_on = 0
 	initial_access = list(access_ai_upload)
 
 /obj/machinery/ai_slipper/on_update_icon()
@@ -23,7 +23,7 @@
 	src.uses = uses
 	src.power_change()
 
-/obj/machinery/ai_slipper/attackby(obj/item/W, mob/user)
+/obj/machinery/ai_slipper/attackby(obj/item/used_item, mob/user)
 	if(stat & (NOPOWER|BROKEN))
 		return FALSE
 	if (issilicon(user))
@@ -52,13 +52,11 @@
 	if(!area || !isturf(loc))
 		return
 	var/t = "<TT><B>AI Liquid Dispenser</B> ([area.proper_name])<HR>"
-
 	if(src.locked && (!issilicon(user)))
 		t += "<I>(Swipe ID card to unlock control panel.)</I><BR>"
 	else
 		t += text("Dispenser [] - <A href='byond://?src=\ref[];toggleOn=1'>[]?</a><br>\n", src.disabled?"deactivated":"activated", src, src.disabled?"Enable":"Disable")
 		t += text("Uses Left: [uses]. <A href='byond://?src=\ref[src];toggleUse=1'>Activate the dispenser?</A><br>\n")
-
 	show_browser(user, t, "window=computer;size=575x450")
 	onclose(user, "computer")
 
@@ -74,30 +72,26 @@
 		update_icon()
 		. = TOPIC_REFRESH
 	if (href_list["toggleUse"])
-		if(!(cooldown_on || disabled))
+		if(!(slip_cooldown_on || disabled))
 			new /obj/effect/effect/foam(src.loc)
 			src.uses--
-			cooldown_on = 1
-			cooldown_time = world.timeofday + 100
+			slip_cooldown_on = 1
+			slip_cooldown_time = world.timeofday + 100
 			slip_process()
 		. = TOPIC_REFRESH
-
 	if(. == TOPIC_REFRESH)
 		ui_interact(user)
 
 /obj/machinery/ai_slipper/proc/slip_process()
-	while(cooldown_time - world.timeofday > 0)
-		var/ticksleft = cooldown_time - world.timeofday
-
+	while(slip_cooldown_time - world.timeofday > 0)
+		var/ticksleft = slip_cooldown_time - world.timeofday
 		if(ticksleft > 1e5)
-			cooldown_time = world.timeofday + 10	// midnight rollover
-
-
-		cooldown_timeleft = (ticksleft / 10)
+			slip_cooldown_time = world.timeofday + 10	// midnight rollover
+		slip_cooldown_timeleft = (ticksleft / 10)
 		sleep(5)
 	if (uses <= 0)
 		return
 	if (uses >= 0)
-		cooldown_on = 0
+		slip_cooldown_on = 0
 	src.power_change()
 	return

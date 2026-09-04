@@ -1,9 +1,9 @@
 /obj/item/board
 	name = "board"
-	desc = "A standard 16\" checkerboard. Well used." //Goddamn imperial system.
+	desc = "A standard 16\" checkerboard. Well-used." //Goddamn imperial system.
 	icon = 'icons/obj/pieces.dmi'
 	icon_state = "board"
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 
 	var/num = 0
 	var/board_icons = list()
@@ -20,17 +20,17 @@
 /obj/item/board/attack_hand(mob/M)
 	if(M.machine == src)
 		return ..()
-	M.examinate(src)
+	M.examine_verb(src)
 	return TRUE
 
-/obj/item/board/attackby(obj/item/I, mob/user)
-	if(addPiece(I,user))
+/obj/item/board/attackby(obj/item/used_item, mob/user)
+	if(addPiece(used_item,user))
 		return TRUE
 	return ..()
 
-/obj/item/board/proc/addPiece(obj/item/I, mob/user, var/tile = 0)
-	if(I.w_class != ITEM_SIZE_TINY) //only small stuff
-		user.show_message("<span class='warning'>\The [I] is too big to be used as a board piece.</span>")
+/obj/item/board/proc/addPiece(obj/item/used_item, mob/user, var/tile = 0)
+	if(used_item.w_class != ITEM_SIZE_TINY) //only small stuff
+		user.show_message("<span class='warning'>\The [used_item] is too big to be used as a board piece.</span>")
 		return 0
 	if(num == 64)
 		user.show_message("<span class='warning'>\The [src] is already full!</span>")
@@ -40,22 +40,22 @@
 		return 0
 	if(!user.Adjacent(src))
 		return 0
-	if(!user.try_unequip(I, src))
+	if(!user.try_unequip(used_item, src))
 		return 0
 	num++
 
 
-	if(!board_icons["[I.icon] [I.icon_state]"])
-		board_icons["[I.icon] [I.icon_state]"] = new /icon(I.icon,I.icon_state)
+	if(!board_icons["[used_item.icon] [used_item.icon_state]"])
+		board_icons["[used_item.icon] [used_item.icon_state]"] = new /icon(used_item.icon,used_item.icon_state)
 
 	if(tile == 0)
 		var i;
 		for(i=0;i<64;i++)
 			if(!board["[i]"])
-				board["[i]"] = I
+				board["[i]"] = used_item
 				break
 	else
-		board["[tile]"] = I
+		board["[tile]"] = used_item
 
 	src.updateDialog()
 
@@ -87,9 +87,9 @@
 			dat += "<td class='light'"
 
 		if(board["[i]"])
-			var/obj/item/I = board["[i]"]
-			send_rsc(user, board_icons["[I.icon] [I.icon_state]"], "[I.icon_state].png")
-			dat += " style='background-image:url([I.icon_state].png)'>"
+			var/obj/item/thing = board["[i]"]
+			send_rsc(user, board_icons["[thing.icon] [thing.icon_state]"], "[thing.icon_state].png")
+			dat += " style='background-image:url([thing.icon_state].png)'>"
 		else
 			dat+= ">"
 		if(!isobserver(user))
@@ -101,7 +101,7 @@
 	if(selected >= 0 && !isobserver(user))
 		dat += "<br><A href='byond://?src=\ref[src];remove=0'>Remove Selected Piece</A>"
 	show_browser(user, jointext(dat, null), "window=boardgame;size=430x500") // 50px * 8 squares + 30 margin
-	onclose(usr, "boardgame")
+	onclose(user, "boardgame")
 
 /obj/item/board/Topic(href, href_list)
 	if(!usr.Adjacent(src))
@@ -112,25 +112,25 @@
 	if(!usr.incapacitated()) //you can't move pieces if you can't move
 		if(href_list["select"])
 			var/s = href_list["select"]
-			var/obj/item/I = board["[s]"]
+			var/obj/item/thing = board["[s]"]
 			if(selected >= 0)
 				//check to see if clicked on tile is currently selected one
 				if(text2num(s) == selected)
 					selected = -1 //deselect it
 				else
 
-					if(I) //cant put items on other items.
+					if(thing) //cant put items on other items.
 						return
 
 				//put item in new spot.
-					I = board["[selected]"]
+					thing = board["[selected]"]
 					board["[selected]"] = null
 					board -= "[selected]"
 					board -= null
-					board["[s]"] = I
+					board["[s]"] = thing
 					selected = -1
 			else
-				if(I)
+				if(thing)
 					selected = text2num(s)
 				else
 					var/mob/living/human/H = locate(href_list["person"])
@@ -141,25 +141,25 @@
 						return
 					addPiece(O,H,text2num(s))
 		if(href_list["remove"])
-			var/obj/item/I = board["[selected]"]
-			if(!I)
+			var/obj/item/thing = board["[selected]"]
+			if(!thing)
 				return
 			board["[selected]"] = null
 			board -= "[selected]"
 			board -= null
-			I.forceMove(src.loc)
+			thing.forceMove(src.loc)
 			num--
 			selected = -1
 			var j
 			for(j=0;j<64;j++)
 				if(board["[j]"])
 					var/obj/item/K = board["[j]"]
-					if(K.icon == I.icon && cmptext(K.icon_state,I.icon_state))
+					if(K.icon == thing.icon && cmptext(K.icon_state,thing.icon_state))
 						src.updateDialog()
 						return
 			//Didn't find it in use, remove it and allow GC to delete it.
-			board_icons["[I.icon] [I.icon_state]"] = null
-			board_icons -= "[I.icon] [I.icon_state]"
+			board_icons["[thing.icon] [thing.icon_state]"] = null
+			board_icons -= "[thing.icon] [thing.icon_state]"
 			board_icons -= null
 	src.updateDialog()
 
@@ -236,7 +236,7 @@
 
 /obj/item/checker/bishop
 	name = "bishop"
-	desc = "What corruption occured, urging holy men to fight?"
+	desc = "What corruption occurred, urging holy men to fight?"
 
 /obj/item/checker/bishop/red
 	piece_color ="red"

@@ -21,10 +21,10 @@
 	. = ..()
 	machine_id = "[station_name()] Acc. DB #[num_financial_terminals++]"
 
-/obj/machinery/computer/account_database/attackby(obj/O, mob/user)
-	if(istype(O, /obj/item/card/id) && !held_card)
-		if(user.try_unequip(O, src))
-			held_card = O
+/obj/machinery/computer/account_database/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/card/id) && !held_card)
+		if(user.try_unequip(used_item, src))
+			held_card = used_item
 			SSnano.update_uis(src)
 		return TRUE
 	return ..()
@@ -85,13 +85,12 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/computer/account_database/Topic(href, href_list)
-	if(..())
-		return 1
-
-	var/datum/nanoui/ui = SSnano.get_open_ui(usr, src, "main")
+/obj/machinery/computer/account_database/OnTopic(mob/user, href_list)
+	if((. = ..()))
+		return
 
 	if(href_list["choice"])
+		. = TOPIC_REFRESH
 		switch(href_list["choice"])
 			if("create_account")
 				creating_new_account = 1
@@ -117,24 +116,22 @@
 					new_account.deposit(starting_funds, "New account activation", machine_id)
 
 					creating_new_account = 0
-					ui.close()
+					. = TOPIC_CLOSE
 
 				creating_new_account = 0
 			if("insert_card")
 				if(held_card)
 					held_card.dropInto(loc)
 
-					if(ishuman(usr) && !usr.get_active_held_item())
-						usr.put_in_hands(held_card)
+					if(ishuman(user) && !user.get_active_held_item())
+						user.put_in_hands(held_card)
 					held_card = null
-					SSnano.update_uis(src)
 				else
-					var/obj/item/I = usr.get_active_held_item()
+					var/obj/item/I = user.get_active_held_item()
 					if (istype(I, /obj/item/card/id))
-						if(!usr.try_unequip(I, src))
+						if(!user.try_unequip(I, src))
 							return
 						held_card = I
-						SSnano.update_uis(src)
 
 			if("view_account_detail")
 				var/index = text2num(href_list["account_index"])
@@ -227,6 +224,6 @@
 					"}
 
 				P.info = text
-				state("The terminal prints out a report.")
-
-	return 1
+				visible_message(SPAN_NOTICE("[html_icon(src)] \The [src] prints out \the [P]."))
+			else
+				. = TOPIC_NOACTION

@@ -11,3 +11,4 @@
 /decl/observ/density_set
 	name = "Density Set"
 	expected_type = /atom
+	flags = OBSERVATION_NO_GLOBAL_REGISTRATIONS

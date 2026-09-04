@@ -59,6 +59,7 @@
 	safety.pixel_x = safety_offset[base_state][1]
 	safety.pixel_y = safety_offset[base_state][2]
 	return safety
+
 /decl/gun_look/cover
 	icon =  'icons/obj/guns/random_pistol/looks/cover.dmi'
 	ammo_offset = list(

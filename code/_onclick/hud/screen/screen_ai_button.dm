@@ -1,6 +1,10 @@
 /obj/screen/ai_button
-	icon = 'icons/mob/screen/ai.dmi'
-	requires_ui_style = FALSE
+	icon                  = 'icons/mob/screen/ai.dmi'
+	requires_ui_style     = FALSE
+	use_supplied_ui_alpha = FALSE
+	use_supplied_ui_color = FALSE
+	use_supplied_ui_icon  = FALSE
+
 	var/ai_verb
 	var/list/input_procs
 	var/list/input_args
@@ -40,15 +44,17 @@
 	call(A, ai_verb)(arglist(input_arguments))
 	return TRUE
 
-/obj/screen/ai_button/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat, decl/ai_hud/ai_hud_data)
+/obj/screen/ai_button/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat)
 	. = ..()
 
-	name        = ai_hud_data.name
-	icon_state  = ai_hud_data.icon_state
-	screen_loc  = ai_hud_data.screen_loc
-	ai_verb     = ai_hud_data.proc_path
-	input_procs = ai_hud_data.input_procs?.Copy()
-	input_args  = ai_hud_data.input_args?.Copy()
+	var/decl/hud_element/ai/ai_hud_data = GET_DECL(ui_cat)
+	if(istype(ai_hud_data))
+		name        = ai_hud_data.name
+		icon_state  = ai_hud_data.icon_state
+		screen_loc  = ai_hud_data.screen_loc
+		ai_verb     = ai_hud_data.proc_path
+		input_procs = ai_hud_data.input_procs?.Copy()
+		input_args  = ai_hud_data.input_args?.Copy()
 
 	if(!LAZYLEN(template_icon))
 		template_icon = list(icon)

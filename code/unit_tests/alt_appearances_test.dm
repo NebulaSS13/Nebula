@@ -2,9 +2,8 @@
 	name = "ALT APPEARANCE: Cardborg shall have base backpack variant"
 
 /datum/unit_test/alt_appearance_cardborg_shall_have_base_backpack_variant/start_test()
-	for(var/ca_type in decls_repository.get_decl_paths_of_subtype(/decl/cardborg_appearance))
-		var/decl/cardborg_appearance/ca = ca_type
-		var/obj/item/backpack/backpack_type = initial(ca.backpack_type)
+	for(var/decl/cardborg_appearance/disguise in decls_repository.get_decls_of_subtype_unassociated(/decl/cardborg_appearance))
+		var/obj/item/backpack/backpack_type = disguise.backpack_type
 		if(backpack_type == /obj/item/backpack)
 			pass("Found a cardborg appearance using the base /obj/item/backpack backpack.")
 			return 1
@@ -18,11 +17,9 @@
 /datum/unit_test/alt_appearance_cardborg_all_icon_states_shall_exist/start_test()
 	var/failed = FALSE
 
-	for(var/ca_type in decls_repository.get_decl_paths_of_subtype(/decl/cardborg_appearance))
-		var/decl/cardborg_appearance/ca = ca_type
-		var/list/existing_icon_states = icon_states(initial(ca.icon))
-		var/icon_state = initial(ca.icon_state)
-		if(!(icon_state in existing_icon_states))
+	for(var/decl/cardborg_appearance/disguise in decls_repository.get_decls_of_subtype_unassociated(/decl/cardborg_appearance))
+		var/icon_state = disguise.icon_state
+		if(!check_state_in_icon(icon_state, disguise.icon))
 			log_unit_test("Icon state [icon_state] is missing.")
 			failed = TRUE
 	if(failed)
@@ -37,8 +34,8 @@
 /datum/unit_test/alt_appearance_cardborg_shall_have_unique_backpack_types/start_test()
 	var/list/backpack_types = list()
 	for(var/ca_type in decls_repository.get_decl_paths_of_subtype(/decl/cardborg_appearance))
-		var/decl/cardborg_appearance/ca = ca_type
-		group_by(backpack_types, initial(ca.backpack_type), ca)
+		var/decl/cardborg_appearance/disguise = ca_type
+		group_by(backpack_types, initial(disguise.backpack_type), disguise)
 
 	var/number_of_issues = number_of_issues(backpack_types, "Backpack Types")
 	if(number_of_issues)

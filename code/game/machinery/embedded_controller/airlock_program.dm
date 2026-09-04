@@ -145,7 +145,7 @@
 
 /datum/computer/file/embedded_program/airlock/receive_user_command(command)
 	var/shutdown_pump = 0
-	. = TRUE
+	. = TOPIC_REFRESH
 	switch(command)
 		if("cycle_ext")
 			//If airlock is already cycled in this direction, just toggle the doors.
@@ -188,7 +188,7 @@
 			toggleDoor(memory["interior_status"], tag_interior_door, !memory["secure"])
 			memory["secure"] = !memory["secure"]
 		else
-			. = FALSE
+			. = TOPIC_NOACTION
 
 	if(shutdown_pump)
 		signalPump(tag_airpump, 0)		//send a signal to stop pressurizing

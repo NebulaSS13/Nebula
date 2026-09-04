@@ -1,0 +1,9 @@
+#ifndef MODPACK_BIOMODS
+#define MODPACK_BIOMODS
+// BEGIN_INCLUDE
+#include "_biomods.dm"
+#include "ears.dm"
+#include "ears_animal.dm"
+#include "tails.dm"
+// END_INCLUDE
+#endif

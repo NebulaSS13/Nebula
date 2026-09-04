@@ -1,0 +1,11 @@
+// Displayed along with the pin name to show what type of pin it is.
+#define VAR_FORMAT_ANY			"\<ANY\>"
+#define VAR_FORMAT_STRING		"\<TEXT\>"
+#define VAR_FORMAT_CHAR			"\<CHAR\>"
+#define VAR_FORMAT_COLOR		"\<COLOR\>"
+#define VAR_FORMAT_NUMBER		"\<NUM\>"
+#define VAR_FORMAT_DIR			"\<DIR\>"
+#define VAR_FORMAT_BOOLEAN		"\<BOOL\>"
+#define VAR_FORMAT_REF			"\<REF\>"
+#define VAR_FORMAT_LIST			"\<LIST\>"
+#define VAR_FORMAT_INDEX		"\<INDEX\>"
