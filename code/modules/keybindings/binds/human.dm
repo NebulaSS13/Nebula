@@ -7,6 +7,7 @@
 
 /datum/keybinding/human/quick_equip
 	hotkey_keys = list("E")
+	classic_keys = list("Unbound")
 	name = "quick_equip"
 	full_name = "Quick Equip"
 	description = "Quickly puts an item in the best slot available"
@@ -18,6 +19,7 @@
 
 /datum/keybinding/human/holster
 	hotkey_keys = list("H")
+	classic_keys = list("Unbound")
 	name = "holster"
 	full_name = "Holster"
 	description = "Draw or holster weapon"
@@ -57,6 +59,7 @@
 
 /datum/keybinding/human/give
 	hotkey_keys = list("G")
+	classic_keys = list("Unbound")
 	name = "give_item"
 	full_name = "Give Item"
 	description = "Give the item you're currently holding"

@@ -7,6 +7,7 @@
 
 /datum/keybinding/living/rest
 	hotkey_keys = list("ShiftB")
+	classic_keys = list("Unbound")
 	name = "rest"
 	full_name = "Rest"
 	description = "You lay down/get up"
@@ -18,6 +19,7 @@
 
 /datum/keybinding/living/resist
 	hotkey_keys = list("B")
+	classic_keys = list("Unbound")
 	name = "resist"
 	full_name = "Resist"
 	description = "Break free of your current state. Handcuffed? On fire? Resist!"

@@ -1,6 +1,8 @@
 /datum/preferences
 	/// Whether or not this client has standard hotkeys enabled
 	var/hotkeys = TRUE
+	/// Focus Chat masked-out hotkey nag.
+	var/fc_hotkey_nag = TRUE
 	/// Custom Keybindings
 	var/list/key_bindings = list()
 
@@ -50,12 +52,59 @@
 /datum/category_item/player_setup_item/controls
 	abstract_type = /datum/category_item/player_setup_item/controls
 
+/datum/category_group/player_setup_category/controls/content(mob/user)
+	. = ""
+	for(var/datum/category_item/player_setup_item/PI in items)
+		. += "[PI.content(user)]<br>"
+
+/datum/category_item/player_setup_item/controls/hotkey_mode
+	name = "Hotkey Mode"
+	sort_order = 1
+
+/datum/category_item/player_setup_item/controls/hotkey_mode/load_preferences(datum/pref_record_reader/R)
+	pref.hotkeys = R.read("hotkey_mode")
+
+/datum/category_item/player_setup_item/controls/hotkey_mode/save_preferences(datum/pref_record_writer/writer)
+	writer.write("hotkey_mode", pref.hotkeys)
+
+/datum/category_item/player_setup_item/controls/hotkey_mode/sanitize_preferences()
+	pref.hotkeys = sanitize_bool(pref.hotkeys, TRUE)
+
+/datum/category_item/player_setup_item/controls/hotkey_mode/content(mob/user)
+	return "<center><b>Hotkey Mode:</b><a href='byond://?src=\ref[src]'>[pref.hotkeys ? "Hotkey" : "Focus Chat"]</a></center>"
+
+/datum/category_item/player_setup_item/controls/hotkey_mode/OnTopic(href, list/href_list, mob/user)
+	pref.hotkeys = !pref.hotkeys
+	user.client.set_macros()
+	return TOPIC_REFRESH
+
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag
+	name = "Focus Chat Masked Hotkey Nag"
+	sort_order = 2
+
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag/load_preferences(datum/pref_record_reader/R)
+	pref.fc_hotkey_nag = R.read("fc_hotkey_nag")
+
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag/save_preferences(datum/pref_record_writer/writer)
+	writer.write("fc_hotkey_nag", pref.fc_hotkey_nag)
+
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag/sanitize_preferences()
+	pref.fc_hotkey_nag = sanitize_bool(pref.fc_hotkey_nag, TRUE)
+
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag/content(mob/user)
+	return "<center><b>Masked Hotkey Warning:</b><a href='byond://?src=\ref[src]'>[pref.fc_hotkey_nag ? "Enabled" : "Disabled"]</a></center>"
+
+/datum/category_item/player_setup_item/controls/fc_hotkey_nag/OnTopic(href, list/href_list, mob/user)
+	pref.fc_hotkey_nag = !pref.fc_hotkey_nag
+	return TOPIC_REFRESH
+
 /datum/category_item/player_setup_item/controls/keybindings
 	name = "Keybindings"
-	sort_order = 1
+	sort_order = 3
 
 /datum/category_item/player_setup_item/controls/keybindings/load_preferences(datum/pref_record_reader/R)
 	pref.key_bindings = R.read("key_bindings")
+
 
 /datum/category_item/player_setup_item/controls/keybindings/sanitize_preferences()
 	pref.key_bindings = sanitize_keybindings(pref.key_bindings)
@@ -93,7 +142,12 @@
 			var/datum/keybinding/kb = i
 			if(!length(user_binds[kb.name]) || (user_binds[kb.name][1] == "Unbound" && length(user_binds[kb.name]) == 1))
 				. += "<tr><td width='40%'>[kb.full_name]</td><td width='15%'><a class='fluid' href='byond://?src=\ref[src];preference=keybindings_capture;keybinding=[kb.name];old_key=["Unbound"]'>Unbound</a></td>"
-				var/list/default_keys = pref.hotkeys ? kb.hotkey_keys : kb.classic_keys
+				var/list/default_keys
+				if(pref.hotkeys)
+					default_keys = kb.hotkey_keys
+				else
+					default_keys = kb.classic_keys || kb.hotkey_keys
+
 				var/class
 				if(user_binds[kb.name] ~= default_keys)
 					class = "class='linkOff fluid'"
@@ -198,7 +252,20 @@
 
 			if(global._kbMap[new_key])
 				new_key = global._kbMap[new_key]
-
+			if(SSinput.blacklisted_keys[new_key])
+				alert(user, "Warning: \[[new_key]\] can't be rebound:\n[SSinput.blacklisted_keys[new_key]]","Bind Error", "Cancel")
+				show_browser(user, null, "window=capturekeypress")
+				return TOPIC_REFRESH
+			if(SSinput.warn_keys[new_key])
+				var/response = alert(user, "Warning: Binding the key \[[new_key]\] can cause issues:\n[SSinput.warn_keys[new_key]]","Bind Warning", "Cancel", "Bind Anyways")
+				if(response != "Bind Anyways")
+					show_browser(user, null, "window=capturekeypress")
+					return TOPIC_REFRESH
+			if(!pref.hotkeys && !SSinput.unprintables_cache[new_key])
+				var/response = alert(user, "Notice: Binding the key \[[new_key]\] will have no effect, as you are in Focus Chat mode.","Bind Warning", "Cancel", "Bind Anyways")
+				if(response != "Bind Anyways")
+					show_browser(user, null, "window=capturekeypress")
+					return TOPIC_REFRESH
 			var/full_key
 			switch(new_key)
 				if("Alt")
@@ -223,7 +290,10 @@
 			return TOPIC_REFRESH
 
 		if("keybindings_reset")
-			pref.key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key)
+			if(pref.hotkeys)
+				pref.key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key)
+			else
+				pref.key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key_fc)
 			user.client.set_macros()
 			return TOPIC_REFRESH
 
@@ -239,7 +309,12 @@
 					pref.key_bindings -= old_key
 
 			var/datum/keybinding/kb = global.keybindings_by_name[kb_name]
-			for(var/key in kb.hotkey_keys)
+			var/list/default_keys
+			if(pref.hotkeys)
+				default_keys = kb.hotkey_keys
+			else
+				default_keys = kb.classic_keys || kb.hotkey_keys
+			for(var/key in default_keys)
 				pref.key_bindings[key] += list(kb_name)
 				pref.key_bindings[key] = sortTim(pref.key_bindings[key], /proc/cmp_text_asc)
 			user.client.set_macros()

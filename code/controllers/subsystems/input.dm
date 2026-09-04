@@ -6,19 +6,137 @@ SUBSYSTEM_DEF(input)
 	priority = SS_PRIORITY_INPUT
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 
-	var/list/macro_set
+	/// 'Hard-wired' macros that have special behaviour.
+	var/list/core_macro_set
+	/// Macros for capturing modifier keys. These are always applied.
+	var/list/modifier_set
+	/// Typecache of all unprintable keys that are safe for classic to bind
+	var/list/unprintables_cache
+	/// Macro IDs we shouldn't clear during client.clear_macros()
+	var/list/protected_macro_ids
+	/// Keys with global warnings associated with them.
+	var/list/warn_keys
+	/// Fully reserved blacklisted keys
+	var/list/blacklisted_keys
 
 /datum/controller/subsystem/input/Initialize()
 	setup_default_macro_sets()
 	refresh_client_macro_sets()
+
+	warn_keys = list(
+		"C" = "Interferes with the ability to copy text from the chatbox.",
+		"V" = "Interferes with the ability to paste text into the chatbox."
+	)
+	// This should include everything in core_macro_set
+	blacklisted_keys = list(
+		"Back" = "Hardwired to Clear Input",
+		"Tab" = "Hardwired to Focus Chat"
+		//Escape can't be bound as it's the 'unbind' key during setup.
+	)
+
 	return ..()
 
 // This is for when macro sets are eventualy datumized
 /datum/controller/subsystem/input/proc/setup_default_macro_sets()
-	macro_set = list(
-	"Any" = "\"KeyDown \[\[*\]\]\"",
-	"Any+UP" = "\"KeyUp \[\[*\]\]\"",
-	"Back" = "\".winset \\\"outputwindow.input.text=\\\"\\\"\\\"\""
+	core_macro_set = list(
+		// These could probably just be put in the skin. I actually don't understand WHY they aren't just in the skin. Besides the use of defines for Tab.
+		"Back" = "\".winset \\\"input.text=\\\"\\\"\\\"\"",
+		"Tab" = "\".winset \\\"input.focus=true?map.focus=true input.background-color=[COLOR_INPUT_DISABLED]:input.focus=true input.background-color=[COLOR_INPUT_ENABLED]\\\"\"",
+		"Escape" = "Reset-Held-Keys",
+	)
+	modifier_set = list(
+		//We need to force these to capture them for macro modifiers.
+		"Alt" = "\"KeyDown Alt\"",
+		"Alt+UP" = "\"KeyUp Alt\"",
+		"Ctrl" = "\"KeyDown Ctrl\"",
+		"Ctrl+UP" = "\"KeyUp Ctrl\"",
+	)
+	// This list may be out of date, and may include keys not actually legal to bind?
+	// The only full list is from 2008. http://www.byond.com/docs/notes/macro.html
+	unprintables_cache = list(
+		// Modifiers. Not actually ON the list, but still safe as they're. Special.
+		"Shift" = TRUE,
+		"Ctrl" = TRUE,
+		"Alt" = TRUE,
+		// Arrow Keys
+		"North" = TRUE,
+		"West" = TRUE,
+		"East" = TRUE,
+		"South" = TRUE,
+		// Numpad-Lock Disabled
+		"Northwest" = TRUE, // KP_Home
+		"Northeast" = TRUE, // KP_PgUp
+		"Center" = TRUE,
+		"Southwest" = TRUE, // KP_End
+		"Southeast" = TRUE, // KP_PgDn
+		// Keys you really shouldn't touch, but are technically unprintable
+		"Return" = TRUE,
+		"Escape" = TRUE,
+		"Delete" = TRUE,
+		// Things I'm not sure BYOND actually supports anymore.
+		"Select" = TRUE,
+		"Execute" = TRUE,
+		"Snapshot" = TRUE,
+		"Attn" = TRUE,
+		"CrSel" = TRUE,
+		"ExSel" = TRUE,
+		"ErEOF" = TRUE,
+		"Zoom" = TRUE,
+		"PA1" = TRUE,
+		"OEMClear" = TRUE,
+		// Things the modern ref says is okay
+		"Pause" = TRUE,
+		"Play" = TRUE,
+		"Insert" = TRUE,
+		"Help" = TRUE,
+		"LWin" = TRUE,
+		"RWin" = TRUE,
+		"Apps" = TRUE,
+		"Numpad0" = TRUE,
+		"Numpad1" = TRUE,
+		"Numpad2" = TRUE,
+		"Numpad3" = TRUE,
+		"Numpad4" = TRUE,
+		"Numpad5" = TRUE,
+		"Numpad6" = TRUE,
+		"Numpad7" = TRUE,
+		"Numpad8" = TRUE,
+		"Numpad9" = TRUE,
+		"Multiply" = TRUE,
+		"Add" = TRUE,
+		"Separator" = TRUE,
+		"Subtract" = TRUE,
+		"Decimal" = TRUE,
+		"Divide" = TRUE,
+		"F1" = TRUE,
+		"F2" = TRUE,
+		"F3" = TRUE,
+		"F4" = TRUE,
+		"F5" = TRUE,
+		"F6" = TRUE,
+		"F7" = TRUE,
+		"F8" = TRUE,
+		"F9" = TRUE,
+		"F10" = TRUE,
+		"F11" = TRUE,
+		"F12" = TRUE,
+		"F13" = TRUE,
+		"F14" = TRUE,
+		"F15" = TRUE,
+		"F16" = TRUE,
+		"F17" = TRUE,
+		"F18" = TRUE,
+		"F19" = TRUE,
+		"F20" = TRUE,
+		"F21" = TRUE,
+		"F22" = TRUE,
+		"F23" = TRUE,
+		"F24" = TRUE,
+	)
+	// Macro IDs we don't delete on wipe, Usually stuff baked into the skin, or that we have to be more careful with.
+	protected_macro_ids = list(
+		"PROTECTED-Shift",
+		"PROTECTED-ShiftUp"
 	)
 
 // Badmins just wanna have fun ♪

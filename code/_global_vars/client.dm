@@ -13,7 +13,10 @@ var/global/list/_kbMap = list(
 	"SPACEBAR" = "Space",
 	"ALT" = "Alt",
 	"SHIFT" = "Shift",
-	"CONTROL" = "Ctrl"
+	"CONTROL" = "Ctrl",
+	"ENTER" = "Return",
+	"TAB" = "Tab",
+	"BACKSPACE" = "Back"
 )
 
 // Without alt, shift, ctrl and etc because its not necessary
