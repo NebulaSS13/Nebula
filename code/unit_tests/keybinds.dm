@@ -11,7 +11,7 @@
 			/// Strip off default modifiers.
 			var/stripped_key = replacetext(fc_key, regex("(Alt|Shift|Ctrl)", "g"), "")
 
-			if(length(stripped_key))
+			if(!length(stripped_key))
 				continue //Pure Modifier key (Alt, Ctrl, Shift)
 			if(!SSinput.unprintables_cache[stripped_key] && stripped_key != "Unbound")
 				failures.Add(binding.type)
