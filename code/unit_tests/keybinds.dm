@@ -3,13 +3,14 @@
 
 /datum/unit_test/default_fc_keybinds_shall_be_unprintable/start_test()
 	var/list/failures = list()
+	var/regex/rgx_strip_modifiers = regex("(Alt|Shift|Ctrl)", "g")
 	for (var/name in global.keybindings_by_name)
 		var/datum/keybinding/binding = global.keybindings_by_name[name]
 		/// If a classic keylist is provided, test that one instead.
 		var/list/keys_to_check = binding.classic_keys || binding.hotkey_keys
 		for(var/fc_key in keys_to_check)
 			/// Strip off default modifiers.
-			var/stripped_key = replacetext(fc_key, regex("(Alt|Shift|Ctrl)", "g"), "")
+			var/stripped_key = replacetext(fc_key, rgx_strip_modifiers, "")
 
 			if(!length(stripped_key))
 				continue //Pure Modifier key (Alt, Ctrl, Shift)

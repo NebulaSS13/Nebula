@@ -67,8 +67,9 @@
 		winset(src, "modifier-\ref[key]", "parent=default;name=[key];command=[command]")
 	var/list/printables = list()
 
+	var/regex/rgx_strip_modifiers = regex("(Alt|Shift|Ctrl)", "g")
 	for(var/key in personal_macro_set) //We don't care about the bound key, just the key itself
-		var/keycode = replacetext(key, regex("(Alt|Shift|Ctrl)", "g"), "")
+		var/keycode = replacetext(key, rgx_strip_modifiers, "")
 		if(!length(keycode) || keycode == "Unbound" || SSinput.core_macro_set[keycode])
 			continue //Modifier-only, empty, or special keybind entry.
 		if(!prefs.hotkeys && !SSinput.unprintables_cache[keycode]) //Track printable hotkeys and skip them.
