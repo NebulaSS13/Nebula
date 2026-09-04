@@ -13,7 +13,7 @@
 	var/has_special_overlay = FALSE
 
 /obj/structure/bed/sofa/do_simple_ranged_interaction(var/mob/user)
-	if(!buckled_mob && user)
+	if(!has_buckled_mob() && user)
 		rotate(user)
 	return TRUE
 
@@ -34,7 +34,7 @@
 	if(padding_extension?.get_padding_material())
 		overlays_to_add["_padding_over"]    = use_padding_color
 		overlays_to_add["_padding_armrest"] = use_padding_color
-	if(has_special_overlay && buckled_mob)
+	if(has_special_overlay && has_buckled_mob())
 		overlays_to_add["_special"] = use_base_color
 
 	for(var/overlay in overlays_to_add)
@@ -46,7 +46,7 @@
 				I = overlay_image(icon, overlay_state)
 			else
 				I = overlay_image(icon, overlay_state, overlay_color, RESET_COLOR)
-			I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
+			I.layer = has_buckled_mob() ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 			add_overlay(I)
 
 /obj/structure/bed/sofa/rotate(mob/user)

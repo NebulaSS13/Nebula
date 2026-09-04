@@ -150,7 +150,7 @@
 // The mob will periodically sit up or step 1 tile in a random direction.
 /datum/mob_controller/proc/try_wander()
 	//Movement
-	if(stop_wander || body.buckled_mob || !do_wander || body.anchored)
+	if(stop_wander || body.has_buckled_mob() || !do_wander || body.anchored)
 		return
 	if(body.current_posture?.prone)
 		if(!body.incapacitated())
@@ -209,7 +209,7 @@
 	return FALSE
 
 /datum/mob_controller/proc/on_buckled(mob/scary_grabber)
-	if(!scary_grabber || body.buckled_mob != scary_grabber) // the buckle got cancelled somehow?
+	if(!scary_grabber || !(scary_grabber in body.get_buckled_mobs())) // the buckle got cancelled somehow?
 		return
 	if(spooked_by_grab && !is_friend(scary_grabber))
 		retaliate(scary_grabber)

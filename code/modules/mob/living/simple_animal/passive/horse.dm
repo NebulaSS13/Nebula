@@ -10,7 +10,7 @@
 	default_pixel_x       = -6
 	base_animal_type      = /mob/living/simple_animal/passive/horse
 	faction               = null
-	buckle_pixel_shift    = @'{"x":0,"y":0,"z":16}'
+	_buckle_pixel_shift   = @'{"x":0,"y":0,"z":16}'
 	can_have_rider        = TRUE
 	max_rider_size        = MOB_SIZE_MEDIUM
 	ai                    = /datum/mob_controller/passive/horse
@@ -37,7 +37,7 @@
 	update_icon()
 
 /mob/living/simple_animal/passive/horse/add_additional_visible_overlays(list/accumulator)
-	if(buckled_mob)
+	if(has_buckled_mob())
 		var/image/horse_front = overlay_image(icon, "[icon_state]-buckled", draw_visible_overlays["base"], RESET_COLOR)
 		horse_front.layer = ABOVE_HUMAN_LAYER
 		accumulator += horse_front

@@ -47,7 +47,7 @@
 	if(!user.try_unequip(cuffs))
 		return FALSE
 	if(user.buckled && user.buckled.buckle_require_restraints)
-		user.buckled.unbuckle_mob()
+		user.buckled.unbuckle_mob(user)
 	return TRUE
 
 /obj/item/implant/freedom/implanted(mob/living/source)

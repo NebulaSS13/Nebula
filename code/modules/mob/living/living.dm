@@ -311,7 +311,7 @@ default behaviour is:
 /mob/living/proc/revive()
 	rejuvenate()
 	if(buckled)
-		buckled.unbuckle_mob()
+		buckled.unbuckle_mob(src)
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
@@ -585,7 +585,7 @@ default behaviour is:
 		return TRUE
 
 	// Get rid of someone riding around on you.
-	if(buckled_mob)
+	if(has_buckled_mob())
 		unbuckle_mob()
 		return TRUE
 
@@ -1460,7 +1460,7 @@ default behaviour is:
 	return TRUE
 
 /mob/living/proc/can_direct_mount(var/mob/user)
-	if((user.faction == faction || !faction) && can_buckle && istype(user) && !user.incapacitated() && user == buckled_mob)
+	if((user.faction == faction || !faction) && max_buckled_mobs && istype(user) && !user.incapacitated() && (user in get_buckled_mobs()))
 		if(client && !check_intent(I_FLAG_HELP))
 			return FALSE // do not Ratatouille your colleagues
 		// TODO: Piloting skillcheck for hands-free moving? Stupid but amusing
@@ -1490,9 +1490,9 @@ default behaviour is:
 
 /mob/living/buckle_mob(mob/living/M)
 	. = ..()
-	if(buckled_mob)
-		buckled_mob.reset_layer()
-		for(var/obj/item/grab/grab in buckled_mob.get_held_items())
+	for(var/mob/buckle_mob in get_buckled_mobs())
+		buckle_mob.reset_layer()
+		for(var/obj/item/grab/grab in buckle_mob.get_held_items())
 			if(grab.get_affecting_mob() == src && !istype(grab.current_grab, /decl/grab/simple/control))
 				qdel(grab)
 	if(istype(ai))
@@ -1500,7 +1500,7 @@ default behaviour is:
 	reset_layer()
 	update_icon()
 
-/mob/living/unbuckle_mob()
+/mob/living/unbuckle_mob(mob/unbuckling)
 	. = ..()
 	reset_layer()
 	update_icon()

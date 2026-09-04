@@ -89,25 +89,25 @@
 /obj/structure/bed/bedroll/on_update_icon()
 	. = ..()
 	var/image/I = overlay_image(icon, "[icon_state]_over")
-	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
+	I.layer = has_buckled_mob() ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 	add_overlay(I)
 	compile_overlays()
 
 /obj/structure/bed/bedroll/buckle_mob(mob/M)
 	. = ..()
 	if(.)
-		anchored = !!buckled_mob
+		anchored = !!has_buckled_mob()
 		update_icon()
 
-/obj/structure/bed/bedroll/unbuckle_mob()
+/obj/structure/bed/bedroll/unbuckle_mob(mob/unbuckling)
 	. = ..()
 	if(.)
-		anchored = !!buckled_mob
+		anchored = !!has_buckled_mob()
 		update_icon()
 
 /obj/structure/bed/bedroll/attack_hand(mob/user)
 	. = ..()
-	if(!. && !buckled_mob)
+	if(!. && !has_buckled_mob())
 		roll_bed(user)
 		return TRUE
 

@@ -38,9 +38,15 @@
 	for(var/atom/movable/subtype as anything in typesof(/obj))
 		if(TYPE_IS_ABSTRACT(subtype))
 			continue
-		var/check_json = subtype::buckle_pixel_shift
+		var/check_json = subtype::_buckle_pixel_shift
 		if(istext(check_json))
-			LAZYSET(json_to_check, "[subtype].buckle_pixel_shift", check_json)
+			LAZYSET(json_to_check, "[subtype]._buckle_pixel_shift", check_json)
+		else if(islist(check_json))
+			var/i = 0
+			for(var/json_offset in check_json)
+				i++
+				LAZYSET(json_to_check, "[subtype]._buckle_pixel_shift\[[i]\]", check_json)
+
 	for(var/subtype in typesof(/obj))
 		var/obj/test = subtype
 		var/check_json = initial(test.directional_offset)

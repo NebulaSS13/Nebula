@@ -301,7 +301,7 @@
 	return TRUE
 
 /mob/proc/adjust_stamina(var/amt)
-	return
+	return TRUE
 
 /mob/proc/get_stamina()
 	return 100
