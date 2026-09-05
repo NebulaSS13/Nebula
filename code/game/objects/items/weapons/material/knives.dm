@@ -99,6 +99,11 @@
 /obj/item/knife/combat/titanium
 	material = /decl/material/solid/metal/titanium
 
+/obj/item/knife/combat/boot
+	name = "boot knife"
+	desc = "A small knife suitable for hiding down the side of your boot."
+	_base_attack_force = 6
+
 //random stuff
 /obj/item/knife/hook
 	name = "hook"
