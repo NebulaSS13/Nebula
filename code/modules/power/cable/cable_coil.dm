@@ -369,8 +369,8 @@
 	paint_color = COLOR_GREEN
 
 /obj/item/stack/cable_coil/pink
-	color = COLOR_PURPLE
-	paint_color = COLOR_PURPLE
+	color = COLOR_PINK
+	paint_color = COLOR_PINK
 
 /obj/item/stack/cable_coil/orange
 	color = COLOR_ORANGE
