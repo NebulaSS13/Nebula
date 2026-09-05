@@ -1,0 +1,1127 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"bh" = (
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"bi" = (
+/obj/structure/table,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/item/flame/fuelled/lighter/random,
+/obj/item/flame/fuelled/lighter/random,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"bs" = (
+/obj/structure/table,
+/obj/random/smokes,
+/obj/random/smokes,
+/obj/machinery/light/small,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"bv" = (
+/obj/item/cell/high,
+/obj/structure/rack,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"bw" = (
+/obj/random/junk,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"bS" = (
+/obj/structure/door/wood,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"cQ" = (
+/obj/structure/hygiene/toilet,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"dc" = (
+/obj/machinery/door/window/eastleft,
+/obj/structure/rack,
+/obj/random/vendor/drink,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"dR" = (
+/obj/structure/flora/grass/green,
+/turf/template_noop,
+/area/cynosure_submap/reststop)
+"ee" = (
+/obj/machinery/door/airlock/maintenance,
+/turf/floor/tiled/techmaint,
+/area/cynosure_submap/reststop)
+"eu" = (
+/obj/item/stack/medical/ointment,
+/obj/structure/rack,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"fq" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"fO" = (
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"fS" = (
+/obj/machinery/door/airlock/freezer,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"io" = (
+/obj/structure/table,
+/obj/random/tech_supply/nofail,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/item/frame/apc,
+/obj/item/stock_parts/circuitboard/apc,
+/turf/floor/tiled/techmaint,
+/area/cynosure_submap/reststop)
+"iR" = (
+/obj/structure/table,
+/obj/random/smokes,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"iU" = (
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"jx" = (
+/obj/structure/flora/grass/both,
+/turf/template_noop,
+/area/cynosure_submap/reststop)
+"kq" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"kJ" = (
+/turf/wall/concrete,
+/area/cynosure_submap/reststop)
+"kY" = (
+/obj/structure/girder,
+/turf/floor,
+/area/cynosure_submap/reststop)
+"lh" = (
+/turf/template_noop,
+/area/template_noop)
+"lw" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"mS" = (
+/obj/item/clothing/suit/jacket/winter,
+/obj/structure/rack,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"nO" = (
+/obj/structure/loot_pile/maint/junk,
+/turf/floor/dirt,
+/area/cynosure_submap/reststop)
+"nW" = (
+/obj/structure/hygiene/toilet,
+/obj/random/contraband,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"oD" = (
+/obj/random/trash,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"pi" = (
+/turf/template_noop,
+/area/cynosure_submap/reststop)
+"pr" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"pD" = (
+/obj/machinery/door/airlock/glass,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"qa" = (
+/obj/random/junk,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"qj" = (
+/obj/structure/curtain/open/shower,
+/obj/structure/hygiene/shower{
+	dir = 4;
+	pixel_x = 5;
+	pixel_y = -1
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"qq" = (
+/obj/random/junk,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"qv" = (
+/obj/machinery/door/airlock/freezer,
+/turf/floor/tiled/techmaint,
+/area/cynosure_submap/reststop)
+"qz" = (
+/obj/machinery/port_gen/pacman,
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/floor/tiled/techmaint,
+/area/cynosure_submap/reststop)
+"qI" = (
+/obj/effect/floor_decal/rust,
+/obj/structure/rack,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"qR" = (
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"uh" = (
+/obj/machinery/door/window/eastleft,
+/obj/structure/rack,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"vf" = (
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"wj" = (
+/obj/random/vendor/food,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/reststop)
+"yz" = (
+/obj/structure/table,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"zD" = (
+/obj/structure/reagent_dispensers/watertank,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"Ab" = (
+/obj/random/powercell,
+/obj/structure/rack,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"Aw" = (
+/obj/structure/hygiene/sink{
+	dir = 4;
+	icon_state = "sink";
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"Ba" = (
+/turf/floor/grass/sif,
+/area/cynosure_submap/reststop)
+"Co" = (
+/obj/structure/window/basic{
+	dir = 8
+	},
+/obj/structure/window/basic,
+/obj/structure/table,
+/obj/item/toy/plushie/fox/marble,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/reststop)
+"Cy" = (
+/obj/structure/rack,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"Ei" = (
+/obj/structure/table,
+/obj/structure/flora/pottedplant,
+/obj/item/gun/projectile/revolver,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"Ej" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/random/junk,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"Eo" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"ED" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/turf/floor,
+/area/cynosure_submap/reststop)
+"Ff" = (
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"FJ" = (
+/mob/living/simple_animal/passive/rabbit/ice,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"FM" = (
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"FP" = (
+/obj/machinery/door/airlock/maintenance,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"FT" = (
+/obj/effect/floor_decal/rust,
+/obj/structure/girder/displaced,
+/turf/floor/plating,
+/area/cynosure_submap/reststop)
+"Gf" = (
+/obj/structure/table,
+/obj/random/drinkbottle,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"GS" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/cynosure_submap/reststop)
+"Hj" = (
+/obj/structure/table,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/reststop)
+"IF" = (
+/obj/machinery/door/window/eastleft,
+/obj/structure/rack,
+/obj/random/snack,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"IQ" = (
+/obj/structure/table,
+/obj/machinery/door/window/northleft,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"Jd" = (
+/turf/floor/dirt,
+/area/cynosure_submap/reststop)
+"Jp" = (
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/turf/floor/tiled/techmaint,
+/area/cynosure_submap/reststop)
+"KT" = (
+/obj/random/vendor/drink,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/reststop)
+"Lz" = (
+/obj/structure/closet/crate/trashcart,
+/obj/random/trash,
+/obj/random/trash,
+/obj/random/trash,
+/obj/random/junk,
+/obj/random/junk,
+/turf/floor/dirt,
+/area/cynosure_submap/reststop)
+"Mh" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"Na" = (
+/obj/structure/flora/sif/frostbelle,
+/turf/floor/grass/sif,
+/area/cynosure_submap/reststop)
+"Oo" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"OM" = (
+/obj/random/soap,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"Pp" = (
+/obj/structure/curtain/open/shower,
+/obj/structure/hygiene/shower{
+	dir = 8;
+	pixel_x = -5;
+	pixel_y = -1
+	},
+/obj/item/towel/random,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"PE" = (
+/turf/floor/grass/sif,
+/area/cynosure_submap/reststop)
+"Sz" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"SF" = (
+/obj/machinery/space_heater,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"SH" = (
+/obj/random/mre,
+/obj/structure/rack,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"TJ" = (
+/obj/item/shard,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"TK" = (
+/obj/structure/flora/tree/sif,
+/turf/floor/dirt,
+/area/cynosure_submap/reststop)
+"UM" = (
+/obj/structure/window/basic,
+/obj/structure/table,
+/obj/random/plushie,
+/obj/random/plushie,
+/turf/floor/tiled/dark,
+/area/cynosure_submap/reststop)
+"WR" = (
+/obj/random/trash,
+/turf/floor/tiled/techmaint,
+/area/cynosure_submap/reststop)
+"Xm" = (
+/obj/structure/rack,
+/obj/machinery/door/window/eastleft,
+/obj/random/vendor/drink,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"XM" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/item/assembly/mousetrap/armed,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/reststop)
+"Ym" = (
+/obj/machinery/door/window/westright,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"Zd" = (
+/obj/structure/hygiene/sink{
+	dir = 8;
+	icon_state = "sink";
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+"ZE" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/reststop)
+"ZN" = (
+/obj/effect/floor_decal/rust,
+/obj/structure/rack,
+/obj/random/maintenance/clean,
+/turf/floor/tiled,
+/area/cynosure_submap/reststop)
+
+(1,1,1) = {"
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+"}
+(2,1,1) = {"
+lh
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+Jd
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+lh
+"}
+(3,1,1) = {"
+lh
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+Jd
+Jd
+Jd
+ZE
+Jd
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+lh
+"}
+(4,1,1) = {"
+lh
+pi
+GS
+pi
+pi
+pi
+pi
+Jd
+nO
+Lz
+nO
+kJ
+FP
+kJ
+kJ
+kJ
+kJ
+kJ
+kJ
+pi
+pi
+GS
+pi
+pi
+lh
+"}
+(5,1,1) = {"
+lh
+pi
+pi
+pi
+pi
+pi
+pi
+kJ
+kJ
+kJ
+kJ
+kJ
+Mh
+fq
+Oo
+Oo
+Oo
+zD
+kJ
+kJ
+pi
+pi
+GS
+pi
+lh
+"}
+(6,1,1) = {"
+lh
+pi
+pi
+pi
+kJ
+kJ
+kJ
+kJ
+qz
+io
+kJ
+Ff
+bw
+Mh
+Ff
+Ff
+Mh
+Ff
+bw
+kJ
+pi
+pi
+pi
+pi
+lh
+"}
+(7,1,1) = {"
+lh
+pi
+pi
+pi
+kJ
+qj
+Sz
+kJ
+Jp
+WR
+qv
+Mh
+Ff
+Ff
+bw
+Ff
+Ff
+qa
+XM
+kJ
+pi
+pi
+pi
+pi
+lh
+"}
+(8,1,1) = {"
+lh
+pi
+pi
+pi
+kJ
+Pp
+bh
+kJ
+kJ
+ee
+kJ
+kJ
+IF
+uh
+IF
+dc
+Xm
+kJ
+fS
+kJ
+Ba
+pi
+pi
+pi
+lh
+"}
+(9,1,1) = {"
+lh
+pi
+pi
+kJ
+kJ
+kJ
+bh
+kJ
+KT
+iU
+vf
+iU
+qR
+qR
+FJ
+qR
+iU
+vf
+kq
+kY
+Ba
+pi
+pi
+pi
+lh
+"}
+(10,1,1) = {"
+lh
+pi
+pi
+kJ
+cQ
+bS
+bh
+kJ
+wj
+iU
+oD
+qR
+Ba
+PE
+qR
+iU
+qq
+iU
+lw
+FT
+Na
+Ba
+pi
+pi
+lh
+"}
+(11,1,1) = {"
+lh
+pi
+pi
+kJ
+kJ
+kJ
+OM
+bS
+kq
+iU
+iU
+ZN
+TK
+qI
+iU
+fO
+iU
+qR
+SF
+kJ
+Ba
+Ba
+pi
+pi
+lh
+"}
+(12,1,1) = {"
+lh
+pi
+pi
+kJ
+cQ
+bS
+bh
+kJ
+kJ
+Co
+iU
+mS
+qR
+bv
+iU
+kJ
+Eo
+Ym
+Eo
+kJ
+pi
+Ba
+pi
+pi
+lh
+"}
+(13,1,1) = {"
+lh
+pi
+pi
+kJ
+kJ
+kJ
+bh
+Zd
+kJ
+UM
+iU
+Ab
+iU
+SH
+iU
+Ei
+FM
+FM
+iR
+kJ
+pi
+pi
+pi
+pi
+lh
+"}
+(14,1,1) = {"
+lh
+pi
+pi
+kJ
+nW
+bS
+pr
+Aw
+kJ
+Hj
+TJ
+Cy
+iU
+eu
+iU
+IQ
+FM
+FM
+bs
+kJ
+pi
+pi
+pi
+pi
+lh
+"}
+(15,1,1) = {"
+lh
+pi
+pi
+kJ
+kJ
+kJ
+kJ
+kJ
+kJ
+UM
+iU
+qq
+iU
+kq
+iU
+yz
+FM
+FM
+Gf
+kJ
+pi
+pi
+pi
+pi
+lh
+"}
+(16,1,1) = {"
+lh
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+kJ
+kJ
+Ej
+iU
+kq
+iU
+oD
+bi
+FM
+FM
+Gf
+kJ
+pi
+pi
+pi
+pi
+lh
+"}
+(17,1,1) = {"
+lh
+pi
+pi
+pi
+pi
+GS
+pi
+pi
+pi
+kJ
+kJ
+ED
+pD
+pD
+ED
+kJ
+kJ
+kJ
+kJ
+kJ
+pi
+pi
+GS
+pi
+lh
+"}
+(18,1,1) = {"
+lh
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+Jd
+Jd
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+lh
+"}
+(19,1,1) = {"
+lh
+pi
+pi
+pi
+pi
+Jd
+pi
+jx
+pi
+pi
+pi
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+pi
+pi
+Jd
+pi
+pi
+lh
+"}
+(20,1,1) = {"
+lh
+pi
+pi
+pi
+Jd
+pi
+pi
+pi
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+pi
+pi
+pi
+lh
+"}
+(21,1,1) = {"
+lh
+Jd
+Jd
+pi
+pi
+pi
+pi
+Jd
+pi
+pi
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+Jd
+pi
+pi
+Jd
+Jd
+lh
+"}
+(22,1,1) = {"
+lh
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+Jd
+Jd
+Jd
+Jd
+Jd
+pi
+pi
+pi
+pi
+pi
+pi
+lh
+"}
+(23,1,1) = {"
+lh
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+GS
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+dR
+pi
+pi
+pi
+pi
+pi
+lh
+"}
+(24,1,1) = {"
+lh
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+pi
+lh
+"}
+(25,1,1) = {"
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+lh
+"}

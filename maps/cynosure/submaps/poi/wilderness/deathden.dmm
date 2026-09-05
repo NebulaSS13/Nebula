@@ -1,0 +1,1173 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"au" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/DeathDen)
+"aJ" = (
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/DeathDen)
+"aL" = (
+/obj/structure/table/bench/wooden,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"bk" = (
+/obj/random/maintenance/medical,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"by" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/DeathDen)
+"cf" = (
+/turf/template_noop,
+/area/template_noop)
+"dr" = (
+/obj/random/trash,
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"dL" = (
+/obj/random/maintenance/medical,
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"dV" = (
+/obj/item/food/junk/candy_corn{
+	pixel_y = 6
+	},
+/obj/structure/table/wood/reinforced,
+/obj/item/flame/candle/infinite/red,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"ey" = (
+/obj/random/maintenance/engineering,
+/obj/random/junk,
+/obj/item/shard{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/obj/item/shard,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"ez" = (
+/obj/item/shard{
+	pixel_y = 10
+	},
+/turf/template_noop,
+/area/template_noop)
+"eO" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"eS" = (
+/obj/structure/grille,
+/obj/structure/barricade,
+/obj/structure/window/basic/full,
+/turf/floor/tiled,
+/area/cynosure_submap/DeathDen)
+"fg" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"fr" = (
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"fG" = (
+/obj/structure/closet/cabinet,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"fS" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/pizzabox/meat,
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"fV" = (
+/obj/structure/chair/wood{
+	dir = 4
+	},
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"gB" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/template_noop)
+"hq" = (
+/obj/structure/grille,
+/obj/structure/barricade,
+/obj/item/shard{
+	pixel_x = 6
+	},
+/obj/item/shard{
+	pixel_x = -3;
+	pixel_y = -6
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/DeathDen)
+"hr" = (
+/obj/random/trash,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"hK" = (
+/obj/item/food/junk/candy_corn{
+	pixel_y = 6
+	},
+/obj/item/food/junk/candy_corn{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/obj/item/shard,
+/obj/item/shard{
+	pixel_y = 10
+	},
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"ig" = (
+/obj/random/maintenance/cargo,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"is" = (
+/obj/random/soap,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/DeathDen)
+"ix" = (
+/obj/effect/gibspawner/human,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"iR" = (
+/obj/item/shard{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/turf/template_noop,
+/area/template_noop)
+"ji" = (
+/obj/item/food/junk/candy_corn{
+	pixel_x = 6;
+	pixel_y = 4
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"kc" = (
+/obj/item/flame/fuelled/lighter/zippo,
+/obj/random/trash,
+/obj/random/junk,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"kl" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/clothing/suit/cultrobes/alt,
+/obj/item/clothing/suit/cultrobes/alt{
+	pixel_x = 4;
+	pixel_y = 3
+	},
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"kn" = (
+/obj/item/candelabra/infinite{
+	pixel_y = 10
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 5
+	},
+/obj/item/bible,
+/obj/structure/table/sif/reinforced,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"kY" = (
+/obj/structure/table/bench/wooden,
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/mob/living/simple_mob/passive/savik,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"la" = (
+/obj/item/food/junk/candy_corn,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"lw" = (
+/obj/structure/chair/wood{
+	dir = 8
+	},
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"lP" = (
+/obj/random/handgun,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"mc" = (
+/obj/random/maintenance/engineering,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"md" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/mob/living/simple_mob/passive/savik,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"mu" = (
+/obj/structure/hygiene/toilet{
+	dir = 4
+	},
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/DeathDen)
+"nr" = (
+/turf/floor/dirt,
+/area/cynosure_submap/DeathDen)
+"nK" = (
+/obj/structure/table/bench/wooden,
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 9
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"nO" = (
+/obj/item/food/junk/candy_corn{
+	pixel_x = 6;
+	pixel_y = 4
+	},
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"oj" = (
+/obj/random/trash,
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"oG" = (
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/structure/table/sif/reinforced,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"oI" = (
+/obj/effect/gibspawner/human,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"oL" = (
+/obj/structure/gravemarker,
+/obj/random/humanoidremains,
+/obj/item/clothing/suit/cultrobes/alt{
+	pixel_x = 4;
+	pixel_y = 3
+	},
+/obj/item/tool/machete,
+/obj/structure/pit/closed/grave,
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"oS" = (
+/obj/structure/gravemarker,
+/obj/random/humanoidremains,
+/obj/item/clothing/suit/cultrobes/alt{
+	pixel_x = 4;
+	pixel_y = 3
+	},
+/obj/item/knife/hook,
+/obj/structure/pit/closed/grave,
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"oX" = (
+/obj/structure/barricade,
+/obj/structure/grille/broken,
+/obj/item/shard,
+/turf/floor/tiled,
+/area/cynosure_submap/DeathDen)
+"ph" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"pu" = (
+/obj/structure/barricade,
+/obj/structure/grille/broken,
+/obj/item/shard{
+	pixel_x = -3;
+	pixel_y = -6
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/DeathDen)
+"qc" = (
+/obj/structure/loot_pile/maint/boxfort,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"qC" = (
+/obj/structure/table/bench/wooden,
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 10
+	},
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"rQ" = (
+/obj/structure/barricade,
+/obj/item/food/junk/candy_corn{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/obj/item/food/junk/candy_corn,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"sh" = (
+/obj/item/food/junk/candy_corn{
+	pixel_y = 6
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"sX" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/shard{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/obj/item/shard{
+	pixel_x = 6
+	},
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"tr" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/DeathDen)
+"tN" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"tY" = (
+/obj/item/food/junk/candy_corn{
+	pixel_y = 6
+	},
+/obj/item/food/junk/candy_corn{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"uP" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"vd" = (
+/obj/item/food/junk/candy_corn{
+	pixel_x = 6;
+	pixel_y = 4
+	},
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"vj" = (
+/obj/structure/gravemarker,
+/obj/random/humanoidremains,
+/obj/item/clothing/suit/cultrobes/alt{
+	pixel_x = 4;
+	pixel_y = 3
+	},
+/obj/item/knife/ritual,
+/obj/structure/pit/closed/grave,
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"vu" = (
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"vD" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/shreddedp,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"wa" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/mob/living/simple_mob/passive/savik,
+/turf/floor/dirt,
+/area/cynosure_submap/DeathDen)
+"wm" = (
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"wv" = (
+/obj/item/food/junk/candy_corn{
+	pixel_x = 6;
+	pixel_y = 4
+	},
+/obj/item/food/junk/candy_corn{
+	pixel_y = -8
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/tool,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"wG" = (
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 6
+	},
+/obj/structure/table/sif/reinforced,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"wK" = (
+/obj/structure/window/reinforced/tinted/frosted{
+	dir = 1
+	},
+/obj/structure/table/wood/reinforced,
+/obj/random/soap,
+/obj/item/flame/candle/infinite/red,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/DeathDen)
+"xN" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/floor/dirt,
+/area/cynosure_submap/DeathDen)
+"xS" = (
+/mob/living/simple_mob/passive/savik,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"xZ" = (
+/obj/item/box/ammo/shotgunammo/large,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"yn" = (
+/turf/floor/dirt,
+/area/template_noop)
+"yL" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/flame/candle/infinite/red,
+/obj/item/shard{
+	pixel_x = -3;
+	pixel_y = -6
+	},
+/obj/item/shard{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"yS" = (
+/obj/item/food/junk/candy_corn{
+	pixel_x = 6;
+	pixel_y = 4
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/random/maintenance/engineering,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"yZ" = (
+/obj/item/food/junk/candy_corn,
+/obj/item/food/junk/candy_corn{
+	pixel_y = 6
+	},
+/obj/effect/floor_decal/carpet,
+/obj/effect/gibspawner/human,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"zV" = (
+/obj/item/food/junk/candy_corn{
+	pixel_y = 6
+	},
+/mob/living/simple_mob/passive/savik,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"An" = (
+/obj/structure/door/iron,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/plating,
+/area/cynosure_submap/DeathDen)
+"Ap" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/DeathDen)
+"Aw" = (
+/obj/structure/door/sif,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/plating,
+/area/cynosure_submap/DeathDen)
+"Bf" = (
+/obj/item/clothing/head/helmet/space/psi_amp/lesser,
+/obj/random/junk,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"BW" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/clothing/suit/cultrobes/alt,
+/obj/item/clothing/suit/cultrobes/alt{
+	pixel_x = 4;
+	pixel_y = 3
+	},
+/obj/item/flame/candle/infinite/red,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"De" = (
+/obj/structure/hygiene/urinal{
+	pixel_y = 32
+	},
+/obj/structure/window/reinforced/tinted/frosted{
+	dir = 8
+	},
+/obj/random/shotgun,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/DeathDen)
+"DH" = (
+/obj/item/food/junk/candy_corn{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/obj/random/trash,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"EF" = (
+/obj/item/food/junk/candy_corn,
+/obj/item/food/junk/candy_corn{
+	pixel_x = 6;
+	pixel_y = 4
+	},
+/obj/random/handgun,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"EL" = (
+/obj/item/food/junk/candy_corn{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"EN" = (
+/obj/effect/floor_decal/carpet,
+/obj/random/maintenance/engineering,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"ER" = (
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/DeathDen)
+"FR" = (
+/obj/item/food/junk/candy_corn{
+	pixel_x = -6;
+	pixel_y = 6
+	},
+/obj/structure/loot_pile/maint/boxfort,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"GP" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"GT" = (
+/obj/item/food/junk/candy_corn{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/obj/item/food/junk/candy_corn{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"HR" = (
+/obj/item/food/junk/candy_corn{
+	pixel_y = 6
+	},
+/obj/item/food/junk/candy_corn{
+	pixel_y = 6
+	},
+/obj/item/food/junk/candy_corn{
+	pixel_y = 6
+	},
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"HT" = (
+/obj/item/food/junk/candy_corn,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"HZ" = (
+/obj/structure/girder,
+/turf/floor/plating,
+/area/cynosure_submap/DeathDen)
+"Ic" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/mob/living/simple_mob/passive/savik,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"IT" = (
+/obj/item/food/junk/candy_corn{
+	pixel_y = 6
+	},
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"Kj" = (
+/obj/structure/windoor_assembly,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/DeathDen)
+"Kn" = (
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"Ky" = (
+/obj/structure/table/bench/wooden,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"KG" = (
+/obj/effect/gibspawner/human,
+/mob/living/simple_animal/hostile/clown,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/DeathDen)
+"KZ" = (
+/obj/item/food/junk/candy_corn,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"MO" = (
+/turf/wall/natural,
+/area/cynosure_submap/DeathDen)
+"Nu" = (
+/obj/structure/chair/wood{
+	dir = 4
+	},
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"Oh" = (
+/obj/structure/gravemarker,
+/obj/structure/pit/closed/grave,
+/obj/random/humanoidremains,
+/obj/item/clothing/suit/cultrobes/alt{
+	pixel_x = 4;
+	pixel_y = 3
+	},
+/obj/item/gun/projectile/bolt_action,
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"Ph" = (
+/obj/structure/barricade,
+/turf/template_noop,
+/area/cynosure_submap/DeathDen)
+"Qb" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/shreddedp,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"Qe" = (
+/turf/wall/natural,
+/area/template_noop)
+"QK" = (
+/obj/structure/closet/cabinet,
+/obj/item/utensil/fork,
+/obj/item/utensil/fork,
+/obj/item/utensil/spoon{
+	pixel_x = 2
+	},
+/obj/item/utensil/spoon{
+	pixel_x = 2
+	},
+/obj/item/plate,
+/obj/item/plate,
+/obj/item/box/cups,
+/obj/item/box/fancy/donut,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"Ri" = (
+/obj/structure/door/sif,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/plating,
+/area/cynosure_submap/DeathDen)
+"Rs" = (
+/obj/structure/table/bench/wooden,
+/obj/effect/floor_decal/carpet,
+/obj/random/maintenance/engineering,
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/mob/living/simple_mob/passive/savik,
+/turf/floor/carpet/blue2,
+/area/cynosure_submap/DeathDen)
+"Sg" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"Th" = (
+/turf/wall/log/sif,
+/area/cynosure_submap/DeathDen)
+"TA" = (
+/obj/item/food/junk/candy_corn{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"TL" = (
+/obj/item/shard{
+	pixel_x = -3;
+	pixel_y = -6
+	},
+/turf/template_noop,
+/area/template_noop)
+"Uj" = (
+/obj/item/food/junk/candy_corn{
+	pixel_y = 6
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/DeathDen)
+"Up" = (
+/obj/structure/windoor_assembly,
+/obj/random/trash,
+/mob/living/simple_mob/passive/savik,
+/turf/floor/tiled/freezer,
+/area/cynosure_submap/DeathDen)
+"UR" = (
+/obj/item/stool/padded,
+/obj/item/clothing/suit/cultrobes/magusred,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"WH" = (
+/obj/effect/gibspawner/human,
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"Ym" = (
+/obj/structure/door/sif,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/plating,
+/area/cynosure_submap/DeathDen)
+"Zb" = (
+/obj/item/food/junk/candy_corn{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"Zg" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+"Zv" = (
+/obj/structure/table/bench/wooden,
+/turf/floor/wood/sif,
+/area/cynosure_submap/DeathDen)
+
+(1,1,1) = {"
+EL
+wm
+HR
+IT
+wm
+IT
+IT
+Ph
+rQ
+Ph
+cf
+cf
+cf
+cf
+cf
+cf
+cf
+cf
+"}
+(2,1,1) = {"
+wm
+tY
+wm
+wm
+hK
+wm
+wm
+Th
+An
+Th
+TL
+ez
+cf
+cf
+nr
+nr
+MO
+Qe
+"}
+(3,1,1) = {"
+cf
+HZ
+Th
+eS
+pu
+Th
+Th
+HZ
+TA
+Th
+oX
+eS
+HZ
+nr
+tr
+tr
+MO
+Qe
+"}
+(4,1,1) = {"
+cf
+Th
+Nu
+fV
+ey
+QK
+Th
+lP
+Uj
+la
+sX
+dV
+Th
+MO
+xN
+wa
+au
+Qe
+"}
+(5,1,1) = {"
+cf
+eS
+vD
+fS
+md
+fG
+Th
+DH
+mc
+ix
+zV
+uP
+Th
+MO
+MO
+tr
+tr
+gB
+"}
+(6,1,1) = {"
+iR
+hq
+yL
+Qb
+WH
+Sg
+Ym
+Zg
+sh
+GT
+ji
+wv
+Th
+MO
+MO
+nr
+nr
+cf
+"}
+(7,1,1) = {"
+cf
+Th
+lw
+lw
+hr
+bk
+Th
+bk
+dr
+ph
+oj
+Zb
+Th
+MO
+MO
+MO
+nr
+cf
+"}
+(8,1,1) = {"
+cf
+Th
+Th
+Th
+Th
+Th
+HZ
+ph
+Ic
+HZ
+Th
+Ri
+Th
+Th
+Th
+HZ
+MO
+cf
+"}
+(9,1,1) = {"
+cf
+Oh
+Th
+mu
+wK
+aJ
+Th
+ig
+Sg
+Th
+vd
+nO
+eO
+vd
+FR
+Th
+MO
+cf
+"}
+(10,1,1) = {"
+cf
+oS
+Th
+ER
+Up
+KG
+Th
+fg
+dL
+Th
+Ky
+nK
+yS
+qC
+Zv
+Th
+MO
+cf
+"}
+(11,1,1) = {"
+cf
+vj
+Th
+De
+Kj
+is
+Aw
+GP
+ph
+Th
+kc
+fr
+tN
+yZ
+la
+Th
+MO
+cf
+"}
+(12,1,1) = {"
+cf
+oL
+HZ
+Th
+Th
+Th
+Th
+BW
+kl
+Th
+Zv
+kY
+HT
+Rs
+aL
+Th
+MO
+Qe
+"}
+(13,1,1) = {"
+cf
+cf
+nr
+tr
+xN
+MO
+Th
+Th
+Th
+Th
+oI
+Kn
+xS
+EN
+xZ
+Th
+MO
+Qe
+"}
+(14,1,1) = {"
+cf
+nr
+nr
+nr
+wa
+MO
+MO
+MO
+MO
+Th
+vu
+kn
+oG
+wG
+vu
+Th
+MO
+Qe
+"}
+(15,1,1) = {"
+cf
+cf
+Qe
+Qe
+by
+Ap
+Qe
+Qe
+MO
+Th
+EF
+KZ
+UR
+Bf
+qc
+Th
+MO
+Qe
+"}
+(16,1,1) = {"
+cf
+Qe
+Qe
+Qe
+nr
+tr
+Qe
+Qe
+MO
+Th
+Th
+Th
+Th
+Th
+Th
+Th
+MO
+Qe
+"}
+(17,1,1) = {"
+cf
+Qe
+Qe
+Qe
+nr
+nr
+yn
+Qe
+MO
+MO
+MO
+MO
+MO
+MO
+MO
+MO
+MO
+cf
+"}
+(18,1,1) = {"
+cf
+cf
+cf
+cf
+yn
+cf
+cf
+cf
+cf
+cf
+Qe
+Qe
+Qe
+Qe
+Qe
+Qe
+cf
+cf
+"}

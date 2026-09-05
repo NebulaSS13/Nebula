@@ -1,0 +1,1536 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"at" = (
+/obj/structure/bed/sofa/right/black{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"au" = (
+/obj/item/organ/internal/lungs/vox,
+/obj/item/beartrap{
+	anchored = 1;
+	deployed = 1
+	},
+/obj/structure/curtain/black,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"aw" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/cynosure_submap/lonehome)
+"aI" = (
+/obj/structure/window/reinforced{
+	dir = 8;
+	},
+/obj/structure/flora/pottedplant/fern{
+	pixel_y = 12
+	},
+/obj/structure/table/bench/wooden,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"aK" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"bb" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/broken,
+/area/cynosure_submap/lonehome)
+"ck" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"cn" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/item/paper_bin,
+/obj/structure/table/wood/reinforced,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"cE" = (
+/obj/structure/table/marble,
+/obj/item/organ/internal/brain,
+/obj/item/utensil/knife/plastic,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"cS" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"dR" = (
+/obj/item/paper{
+	info = "Seems to be filled with odd runes drawn with blood";
+	name = "Blood stained paper"
+	},
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/lonehome)
+"ew" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"eL" = (
+/obj/machinery/button/windowtint,
+/turf/wall/wood,
+/area/cynosure_submap/lonehome)
+"fl" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/template_noop,
+/area/cynosure_submap/lonehome)
+"gn" = (
+/obj/structure/window/reinforced{
+	dir = 4;
+	},
+/turf/template_noop,
+/area/cynosure_submap/lonehome)
+"gI" = (
+/obj/structure/rack,
+/obj/item/knife/ritual,
+/obj/structure/curtain/open/bed,
+/obj/item/clothing/suit/jacket/black,
+/obj/item/clothing/suit/jacket/navy,
+/obj/item/clothing/head/beret,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"hh" = (
+/obj/item/chems/condiment/small/peppermill,
+/obj/item/pen,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"hq" = (
+/obj/structure/table/bench/marble,
+/obj/structure/window/reinforced/polarized{
+	id = "h_master"
+	},
+/obj/structure/flora/pottedplant/dead{
+	pixel_y = 7
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"hH" = (
+/obj/structure/table/marble,
+/obj/item/whetstone,
+/obj/item/chems/dropper,
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"hK" = (
+/obj/structure/chair/wood{
+	dir = 1
+	},
+/obj/structure/window/reinforced/polarized{
+	dir = 4;
+	id = "h_kitchen"
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"ii" = (
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"ip" = (
+/obj/item/pen,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"iw" = (
+/turf/floor/wood/broken,
+/area/cynosure_submap/lonehome)
+"iQ" = (
+/obj/structure/table/marble,
+/obj/item/knife/kitchen/cleaver,
+/obj/item/rollingpin,
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"jt" = (
+/obj/structure/fence{
+	dir = 8
+	},
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"jy" = (
+/obj/item/shard,
+/obj/item/shard{
+	pixel_x = 5;
+	pixel_y = 10
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"jH" = (
+/obj/item/utensil/spoon{
+	pixel_x = 2
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"jK" = (
+/obj/structure/chair/wood,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"kg" = (
+/obj/structure/table/marble,
+/obj/item/utensil/spoon,
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"kn" = (
+/obj/structure/chair/wood,
+/obj/machinery/button/windowtint,
+/obj/structure/window/reinforced/polarized{
+	dir = 4;
+	id = "h_kitchen"
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"ks" = (
+/obj/item/photo,
+/obj/item/photo{
+	pixel_x = 4
+	},
+/obj/structure/table/bench/wooden,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"kT" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/structure/bed/padded,
+/obj/item/bedsheet/clown,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"kU" = (
+/obj/item/fuelled_tool/welding/chainsaw,
+/obj/item/box/lights/mixed,
+/obj/item/chems/spray/extinguisher,
+/obj/item/toolbox/mechanical,
+/obj/structure/rack,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"ld" = (
+/obj/machinery/port_gen/pacman,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"lz" = (
+/obj/item/chems/rag,
+/obj/item/clothing/gloves/ring/engagement,
+/obj/structure/table/wood/reinforced,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"lB" = (
+/obj/machinery/button/windowtint,
+/obj/item/plate,
+/obj/structure/table/sif/reinforced,
+/obj/structure/window/reinforced/polarized{
+	dir = 4;
+	id = "h_kitchen"
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"lJ" = (
+/obj/item/magnetic_tape,
+/obj/structure/table/wood/reinforced,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"lS" = (
+/obj/item/organ/internal/liver,
+/obj/random/trash,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"ma" = (
+/turf/wall/wood,
+/area/cynosure_submap/lonehome)
+"mn" = (
+/obj/item/clothing/mask/muzzle,
+/obj/random/trash,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"na" = (
+/mob/living/simple_animal/passive/cat/fluff/felix,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"ni" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"nz" = (
+/obj/item/flashlight{
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"nD" = (
+/obj/structure/bed/sofa/middle/black,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"nL" = (
+/obj/machinery/cooker/oven,
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"nT" = (
+/obj/item/stack/cable_coil,
+/turf/floor/wood/broken,
+/area/cynosure_submap/lonehome)
+"ox" = (
+/obj/structure/closet/cabinet,
+/obj/item/wallet/random,
+/obj/item/towel/random,
+/obj/random/umbrella,
+/obj/random/ammo,
+/obj/random/smokes,
+/obj/random/contraband,
+/obj/random/junk,
+/obj/random/maintenance/security,
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/obj/random/maintenance,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"oS" = (
+/obj/structure/closet/cabinet,
+/obj/random/tech_supply/component,
+/obj/random/tech_supply/component,
+/obj/random/tech_supply/component,
+/obj/random/tech_supply/component,
+/obj/random/tech_supply/component,
+/obj/random/toolbox,
+/obj/random/toolbox,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"oZ" = (
+/obj/structure/bed/sofa/left/black,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"pb" = (
+/obj/structure/fence/cut/large{
+	dir = 8
+	},
+/turf/template_noop,
+/area/cynosure_submap/lonehome)
+"po" = (
+/obj/structure/sign/periodic_table,
+/turf/wall/wood,
+/area/cynosure_submap/lonehome)
+"pX" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/broken,
+/area/cynosure_submap/lonehome)
+"qa" = (
+/obj/structure/fence,
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"qi" = (
+/obj/structure/table/marble,
+/obj/machinery/chemical_dispenser/bar_alc/full,
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"qk" = (
+/obj/structure/table/marble,
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/microwave,
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"qo" = (
+/obj/item/radio/phone,
+/obj/structure/table/bench/wooden,
+/obj/item/paper{
+	info = "Seems to be filled with odd runes drawn with blood";
+	name = "Blood stained paper"
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"qE" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"qN" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/lonehome)
+"rg" = (
+/obj/structure/window/reinforced/polarized{
+	dir = 8;
+	id = "h_living"
+	},
+/obj/structure/bed/sofa/middle/black{
+	dir = 4
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"ro" = (
+/obj/item/pack/cardemon,
+/turf/floor/carpet/blue,
+/area/cynosure_submap/lonehome)
+"ru" = (
+/obj/structure/rack,
+/obj/random/lipstick,
+/obj/random/eyeshadow,
+/obj/structure/curtain/open/bed,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"rE" = (
+/obj/item/shard,
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"tp" = (
+/obj/structure/flora/pottedplant/bamboo{
+	pixel_y = 12
+	},
+/obj/structure/table/bench/wooden,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"uc" = (
+/obj/structure/girder,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"uh" = (
+/obj/structure/fence/cut/medium{
+	dir = 4
+	},
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"um" = (
+/obj/structure/window/reinforced/tinted/frosted{
+	dir = 8
+	},
+/obj/structure/table/wood/reinforced,
+/obj/item/book/tome,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"uo" = (
+/obj/item/shard,
+/turf/floor/dirt,
+/area/cynosure_submap/lonehome)
+"ur" = (
+/obj/structure/table/marble,
+/obj/item/knife/hook,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"uw" = (
+/obj/item/seeds/random,
+/obj/item/chems/spray/cleaner,
+/obj/structure/table/wood/reinforced,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"uC" = (
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/machinery/space_heater,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"uI" = (
+/obj/machinery/portable_atmospherics/hydroponics/soil,
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"uK" = (
+/obj/item/tool/hoe/mini,
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"uR" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"ve" = (
+/obj/structure/table/bench/glass,
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/lonehome)
+"wa" = (
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"wj" = (
+/obj/item/bedsheet/rd,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"xr" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/blue,
+/area/cynosure_submap/lonehome)
+"xM" = (
+/obj/structure/fence/cut/large{
+	dir = 8
+	},
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"xO" = (
+/obj/item/clothing/suit/straight_jacket,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"yh" = (
+/turf/floor/dirt,
+/area/cynosure_submap/lonehome)
+"yn" = (
+/obj/structure/window/reinforced/polarized{
+	dir = 8;
+	id = "h_living"
+	},
+/obj/structure/bed/sofa/middle/black{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"yr" = (
+/obj/item/chems/ivbag/blood,
+/obj/item/pack/cardemon,
+/obj/item/pack/cardemon,
+/obj/item/deck/tarot,
+/obj/structure/table/wood/reinforced,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"yt" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/lonehome)
+"yF" = (
+/obj/structure/bed/sofa/middle/black{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"yQ" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"zN" = (
+/obj/item/paper{
+	info = "Seems to be filled with odd runes drawn with blood";
+	name = "Blood stained paper"
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"AQ" = (
+/obj/structure/window/reinforced{
+	dir = 8;
+	},
+/obj/item/shard,
+/turf/floor/dirt,
+/area/cynosure_submap/lonehome)
+"BH" = (
+/obj/item/paper{
+	info = "F%$K this detective, I swear I can see them peeking from behind the window, these tinted glasses help but I swear I can still see them snooping around. His days are counted... I am so close to figuring this out, just need a few more days. Then Shepiffany will be part of the family once again, then our two kids and I can go back on having a normal life... a normal life...";
+	name = "Stained sheet of paper"
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/lonehome)
+"Dd" = (
+/obj/machinery/button/windowtint,
+/obj/item/box/donkpockets,
+/obj/item/box/condimentbottles,
+/obj/item/chems/condiment/sugar,
+/obj/structure/curtain/open/bed,
+/obj/structure/rack,
+/obj/structure/window/reinforced/polarized{
+	dir = 4;
+	id = "h_kitchen"
+	},
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"Dk" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"DE" = (
+/obj/structure/window/reinforced/tinted/frosted{
+	dir = 8
+	},
+/obj/item/box/glasses/square{
+	pixel_y = -2
+	},
+/obj/item/box/glass_extras/sticks{
+	pixel_y = 4
+	},
+/obj/item/box/glass_extras/straws{
+	pixel_y = 7
+	},
+/obj/item/stack/package_wrap,
+/obj/structure/curtain/open/bed,
+/obj/item/utensil/fork,
+/obj/item/utensil/fork,
+/obj/item/utensil/spoon{
+	pixel_x = 2
+	},
+/obj/item/utensil/spoon{
+	pixel_x = 2
+	},
+/obj/structure/rack,
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"DG" = (
+/obj/structure/door/wood,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"DL" = (
+/obj/structure/closet/cabinet,
+/obj/item/wallet/random,
+/obj/item/towel/random,
+/obj/random/umbrella,
+/obj/random/plush/carp,
+/obj/random/psionic,
+/obj/random/junk,
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Ea" = (
+/obj/item/pack/cardemon,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Ek" = (
+/obj/structure/window/reinforced{
+	dir = 4;
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/lonehome)
+"Eo" = (
+/obj/random/junk,
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/lonehome)
+"Ex" = (
+/obj/item/paper{
+	info = "Seems to be filled with odd runes drawn with blood";
+	name = "Blood stained paper"
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/broken,
+/area/cynosure_submap/lonehome)
+"EZ" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/obj/structure/table/marble,
+/obj/item/organ/internal/stomach,
+/obj/item/bonesetter,
+/obj/item/bone/ribs,
+/obj/item/bone/skull{
+	pixel_x = 4;
+	pixel_y = 6
+	},
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"Fh" = (
+/obj/structure/coatrack,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Fu" = (
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/lonehome)
+"Fy" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/hydroponics/soil,
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"Gr" = (
+/obj/structure/table/bench/marble,
+/obj/structure/window/reinforced/polarized{
+	id = "h_master"
+	},
+/obj/structure/flora/pottedplant/bamboo{
+	pixel_y = 7
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"GA" = (
+/obj/structure/table/sif/reinforced,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"GS" = (
+/obj/structure/table/steel,
+/obj/item/stack/material/crystal/mapped/phoron/five,
+/obj/item/stack/material/crystal/mapped/phoron/five,
+/obj/item/stack/material/plank/mapped/wood/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/random/gun/random/ascent,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"Hc" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/obj/structure/meat_hook,
+/obj/effect/rune,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"Hu" = (
+/obj/item/frame/apc,
+/obj/machinery/light_switch{
+	pixel_x = 11;
+	pixel_y = 22
+	},
+/obj/random/junk,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"Im" = (
+/obj/structure/window/reinforced/tinted/frosted{
+	dir = 8
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Ji" = (
+/obj/structure/fence/cut/medium,
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"Jq" = (
+/obj/structure/bed/padded,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"JW" = (
+/obj/structure/door/wood,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Kb" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"Ki" = (
+/obj/structure/closet/cabinet,
+/obj/random,
+/obj/random,
+/obj/random,
+/obj/random,
+/obj/random,
+/obj/random/toy,
+/obj/random/toy,
+/obj/item/mre/random,
+/obj/item/mre/random,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Kr" = (
+/obj/machinery/portable_atmospherics/hydroponics/soil,
+/obj/item/shard,
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"Kw" = (
+/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"Ll" = (
+/obj/machinery/space_heater,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"LS" = (
+/obj/item/plate,
+/obj/item/chems/condiment/small/saltshaker,
+/obj/structure/table/sif/reinforced,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Mb" = (
+/obj/structure/chair/wood{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Mn" = (
+/obj/machinery/button/windowtint,
+/obj/item/chems/condiment/enzyme,
+/obj/structure/window/reinforced/polarized{
+	dir = 4;
+	id = "h_kitchen"
+	},
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"MM" = (
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+"Nx" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"ND" = (
+/obj/structure/table/bench/marble,
+/obj/structure/window/reinforced/polarized{
+	dir = 8;
+	id = "h_living"
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"NK" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/lonehome)
+"NL" = (
+/turf/template_noop,
+/area/cynosure_submap/lonehome)
+"Od" = (
+/obj/item/chems/spray/extinguisher{
+	pixel_x = 8;
+	pixel_y = 1
+	},
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/obj/structure/mopbucket{
+	pixel_x = -8;
+	pixel_y = -4
+	},
+/obj/item/mop,
+/obj/item/multitool,
+/obj/item/flashlight{
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/random/unidentified_medicine,
+/obj/random/unidentified_medicine,
+/obj/random/unidentified_medicine,
+/obj/structure/table/steel,
+/turf/floor/tiled,
+/area/cynosure_submap/lonehome)
+"Oe" = (
+/obj/structure/window/reinforced{
+	dir = 8;
+	},
+/turf/template_noop,
+/area/cynosure_submap/lonehome)
+"Or" = (
+/obj/structure/table/bench/marble,
+/obj/structure/window/reinforced/polarized{
+	id = "h_master"
+	},
+/obj/structure/flora/pottedplant/overgrown{
+	pixel_y = 7
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"OL" = (
+/obj/machinery/button/windowtint,
+/obj/item/utensil/spoon{
+	pixel_x = 2
+	},
+/obj/structure/table/sif/reinforced,
+/obj/structure/window/reinforced/polarized{
+	dir = 4;
+	id = "h_kitchen"
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Pc" = (
+/obj/item/utensil/fork,
+/obj/random/trash,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Qx" = (
+/obj/item/shard{
+	pixel_x = 6
+	},
+/obj/item/shard,
+/turf/floor/dirt,
+/area/cynosure_submap/lonehome)
+"QU" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/obj/item/clothing/gloves/insulated,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"QX" = (
+/obj/random/trash,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"RI" = (
+/obj/structure/window/reinforced{
+	dir = 8;
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/lonehome)
+"Sd" = (
+/obj/structure/fence,
+/turf/template_noop,
+/area/cynosure_submap/lonehome)
+"Sp" = (
+/obj/item/shard,
+/obj/item/shard{
+	pixel_x = 5;
+	pixel_y = 3
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/lonehome)
+"SN" = (
+/obj/structure/chair/wood/wings{
+	dir = 1
+	},
+/obj/effect/gibspawner/human,
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/lonehome)
+"Tg" = (
+/obj/item/utensil/fork,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Tw" = (
+/obj/item/cell/high/empty,
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/lonehome)
+"TX" = (
+/obj/item/clothing/suit/apron/colourable,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"Uj" = (
+/obj/machinery/light/small,
+/obj/item/stack/material/ore/diamond,
+/obj/structure/sign/plaque/golden{
+	desc = "Done No Harm.";
+	name = "Best Doctor 2552";
+	pixel_y = -32
+	},
+/obj/structure/table/wood/reinforced,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"UA" = (
+/obj/structure/fence/door/opened,
+/turf/template_noop,
+/area/cynosure_submap/lonehome)
+"UB" = (
+/obj/random/toy,
+/obj/structure/curtain/open/bed,
+/obj/structure/rack,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"US" = (
+/turf/floor/tiled/white,
+/area/cynosure_submap/lonehome)
+"Vn" = (
+/obj/item/chems/condiment/small/sugar,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/broken,
+/area/cynosure_submap/lonehome)
+"VI" = (
+/obj/structure/fence{
+	dir = 4
+	},
+/turf/template_noop,
+/area/cynosure_submap/lonehome)
+"Wf" = (
+/obj/structure/bed/padded,
+/obj/random/trash,
+/obj/random/trash,
+/obj/random/trash,
+/obj/random/trash,
+/obj/random/trash,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/item/bedsheet/ian,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Wj" = (
+/obj/machinery/gibber{
+	emagged = 1
+	},
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"Wn" = (
+/obj/structure/fence/cut/medium{
+	dir = 4
+	},
+/turf/template_noop,
+/area/cynosure_submap/lonehome)
+"WQ" = (
+/obj/structure/window/reinforced/polarized{
+	dir = 8;
+	id = "h_living"
+	},
+/obj/structure/bed/sofa/middle/black{
+	dir = 4
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Xc" = (
+/obj/item/stock_parts/circuitboard/apc,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"Xz" = (
+/obj/item/shard,
+/turf/template_noop,
+/area/cynosure_submap/lonehome)
+"Ys" = (
+/obj/item/pen,
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"YK" = (
+/obj/structure/table/marble,
+/obj/item/organ/internal/stomach{
+	pixel_x = -1;
+	pixel_y = 8
+	},
+/obj/item/organ/internal/lungs,
+/turf/floor,
+/area/cynosure_submap/lonehome)
+"Zi" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/floor/wood,
+/area/cynosure_submap/lonehome)
+"ZR" = (
+/obj/structure/fence{
+	dir = 4
+	},
+/turf/floor/grass/wild,
+/area/cynosure_submap/lonehome)
+
+(1,1,1) = {"
+NL
+NL
+NL
+NL
+NL
+NL
+yh
+NL
+Xz
+NL
+Xz
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+MM
+NL
+NL
+NL
+NL
+MM
+NL
+"}
+(2,1,1) = {"
+NL
+NL
+NL
+NL
+NL
+ma
+NL
+gn
+Sp
+Ek
+Ek
+uc
+ma
+ma
+ma
+ma
+ma
+fl
+NL
+MM
+MM
+NL
+MM
+MM
+NL
+"}
+(3,1,1) = {"
+NL
+NL
+NL
+yh
+ma
+eL
+ND
+yn
+rg
+rg
+WQ
+ma
+ma
+DL
+cn
+ox
+po
+ma
+ma
+qa
+Ji
+qa
+jt
+NL
+NL
+"}
+(4,1,1) = {"
+NL
+NL
+NL
+ma
+ma
+Fh
+uR
+nD
+ve
+ve
+yF
+ma
+ru
+zN
+Ys
+na
+Ll
+ma
+Kr
+MM
+MM
+MM
+VI
+NL
+NL
+"}
+(5,1,1) = {"
+NL
+yh
+yh
+yh
+JW
+pX
+cS
+oZ
+Fu
+Fu
+at
+ma
+gI
+Tw
+dR
+NK
+iw
+Or
+Fy
+MM
+MM
+MM
+pb
+NL
+NL
+"}
+(6,1,1) = {"
+yh
+yh
+NL
+ma
+ma
+Ll
+iw
+pX
+Fu
+qN
+wa
+ma
+um
+SN
+NK
+Fu
+wa
+Gr
+Kr
+rE
+MM
+MM
+uh
+NL
+NL
+"}
+(7,1,1) = {"
+NL
+yh
+NL
+NL
+ma
+uc
+wa
+iw
+Eo
+qN
+cS
+uc
+uR
+BH
+yt
+qN
+wj
+hq
+uI
+MM
+MM
+MM
+ZR
+NL
+NL
+"}
+(8,1,1) = {"
+yh
+NL
+NL
+NL
+fl
+ma
+lJ
+QX
+wa
+Nx
+Xc
+ma
+Ex
+bb
+ks
+Jq
+qo
+eL
+Fy
+MM
+MM
+MM
+ZR
+NL
+NL
+"}
+(9,1,1) = {"
+NL
+NL
+aw
+NL
+NL
+ma
+ma
+uc
+JW
+ma
+tp
+ma
+JW
+ma
+uc
+ma
+ma
+ma
+ma
+uK
+MM
+MM
+pb
+NL
+NL
+"}
+(10,1,1) = {"
+NL
+NL
+NL
+NL
+fl
+ma
+Od
+JW
+cS
+cS
+jy
+bb
+pX
+ck
+cS
+cS
+uR
+iw
+JW
+MM
+Kb
+MM
+UA
+NL
+NL
+"}
+(11,1,1) = {"
+NL
+NL
+NL
+NL
+ma
+ma
+ma
+ma
+JW
+ma
+aI
+uc
+ma
+ma
+ma
+JW
+ma
+ma
+ma
+DG
+ma
+MM
+VI
+NL
+aw
+"}
+(12,1,1) = {"
+NL
+NL
+NL
+NL
+ma
+Kw
+yQ
+iQ
+wa
+Zi
+uR
+ip
+uC
+ma
+UB
+pX
+Ll
+aK
+ld
+ni
+ma
+MM
+pb
+NL
+NL
+"}
+(13,1,1) = {"
+NL
+NL
+NL
+NL
+uc
+nL
+Dk
+kg
+uR
+nT
+uR
+jH
+uw
+uc
+Im
+xr
+Ea
+ma
+Hu
+ni
+ma
+MM
+VI
+NL
+NL
+"}
+(14,1,1) = {"
+NL
+NL
+NL
+NL
+uc
+qk
+TX
+hH
+ii
+iw
+Vn
+wa
+Uj
+ma
+kT
+ro
+Wf
+ma
+GS
+nz
+uc
+MM
+Wn
+NL
+NL
+"}
+(15,1,1) = {"
+NL
+NL
+NL
+NL
+ma
+qi
+Dk
+yQ
+Tg
+iw
+Pc
+hh
+lz
+ma
+Ki
+yr
+oS
+ma
+kU
+ew
+ma
+MM
+VI
+NL
+NL
+"}
+(16,1,1) = {"
+NL
+NL
+NL
+NL
+ma
+ma
+DE
+US
+jK
+LS
+GA
+Mb
+eL
+ma
+ma
+ma
+ma
+ma
+ma
+uc
+ma
+MM
+VI
+NL
+NL
+"}
+(17,1,1) = {"
+NL
+NL
+NL
+NL
+NL
+ma
+Dd
+Mn
+kn
+OL
+lB
+hK
+ma
+Hc
+xO
+lS
+mn
+QU
+qE
+au
+uc
+MM
+xM
+NL
+NL
+"}
+(18,1,1) = {"
+NL
+aw
+NL
+NL
+NL
+ma
+yh
+AQ
+Qx
+RI
+Xz
+Oe
+ma
+ma
+Wj
+EZ
+cE
+ur
+YK
+ma
+ma
+qa
+Sd
+MM
+NL
+"}
+(19,1,1) = {"
+NL
+NL
+NL
+NL
+NL
+yh
+NL
+NL
+uo
+NL
+NL
+yh
+NL
+ma
+ma
+ma
+ma
+ma
+ma
+ma
+NL
+NL
+NL
+NL
+NL
+"}
+(20,1,1) = {"
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+NL
+"}

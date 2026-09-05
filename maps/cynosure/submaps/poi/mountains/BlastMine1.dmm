@@ -1,0 +1,245 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/natural,
+/area/cynosure_submap/cave/BlastMine1)
+"b" = (
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"c" = (
+/obj/structure/sign/warning/bomb_range,
+/turf/wall/brick/sandstone,
+/area/cynosure_submap/cave/BlastMine1)
+"d" = (
+/obj/structure/rack,
+/obj/item/plastique,
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"e" = (
+/obj/structure/loot_pile/surface/bones,
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"f" = (
+/mob/living/simple_mob/passive/savik,
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"g" = (
+/obj/structure/rack,
+/obj/item/clothing/head/bomb_hood,
+/obj/item/clothing/suit/bomb_suit,
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"h" = (
+/obj/item/gps/internal/poi{
+	gps_tag = "Unidentified Signal"
+	},
+/turf/wall/brick/sandstone,
+/area/cynosure_submap/cave/BlastMine1)
+"i" = (
+/mob/living/simple_animal/hostile/beast/diyaab,
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"j" = (
+/obj/structure/table/reinforced,
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"k" = (
+/obj/structure/rack,
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"l" = (
+/obj/machinery/floodlight,
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"m" = (
+/turf/wall/brick/sandstone,
+/area/cynosure_submap/cave/BlastMine1)
+"n" = (
+/obj/structure/girder/displaced,
+/obj/structure/sign/warning/bomb_range,
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"o" = (
+/obj/structure/table,
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"p" = (
+/obj/item/remains/human,
+/turf/floor/barren,
+/area/cynosure_submap/cave/BlastMine1)
+"q" = (
+/obj/structure/sign/warning/bomb_range,
+/turf/wall/brick/sandstone{
+	damage = 20
+	},
+/area/cynosure_submap/cave/BlastMine1)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+b
+b
+b
+a
+a
+b
+b
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+b
+b
+b
+b
+b
+b
+a
+b
+a
+b
+a
+"}
+(3,1,1) = {"
+a
+b
+c
+d
+d
+d
+h
+d
+k
+k
+n
+b
+o
+b
+a
+"}
+(4,1,1) = {"
+b
+b
+b
+b
+b
+b
+b
+i
+b
+b
+b
+b
+p
+b
+b
+"}
+(5,1,1) = {"
+b
+b
+b
+b
+b
+f
+b
+b
+i
+b
+b
+b
+b
+b
+b
+"}
+(6,1,1) = {"
+b
+b
+b
+b
+e
+b
+b
+b
+l
+b
+b
+b
+b
+b
+b
+"}
+(7,1,1) = {"
+a
+a
+b
+b
+c
+g
+b
+g
+m
+b
+b
+b
+q
+b
+a
+"}
+(8,1,1) = {"
+a
+a
+a
+b
+b
+b
+b
+j
+a
+b
+b
+b
+b
+b
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+b
+b
+b
+b
+a
+a
+b
+b
+b
+b
+b
+a
+"}
+(10,1,1) = {"
+a
+a
+a
+b
+b
+b
+a
+a
+a
+a
+b
+b
+b
+a
+a
+"}

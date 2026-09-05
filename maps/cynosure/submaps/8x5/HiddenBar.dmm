@@ -1,0 +1,160 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementE)
+"c" = (
+/obj/random/obstruction,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementE)
+"e" = (
+/obj/structure/chair/comfy/brown{
+	dir = 1
+	},
+/obj/random/maintenance/clean,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+"f" = (
+/obj/structure/table/reinforced,
+/obj/machinery/reagentgrinder,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+"l" = (
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementE)
+"m" = (
+/obj/item/stool/padded{
+	dir = 8
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+"p" = (
+/obj/structure/table/reinforced,
+/obj/random/drinkbottle,
+/obj/structure/sign/poster{
+	pixel_y = -32;
+	poster_design = /decl/poster_design/bay_37
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+"t" = (
+/obj/structure/table/reinforced,
+/obj/item/chems/drinks/glass2/square{
+	pixel_x = 4;
+	pixel_y = 5
+	},
+/obj/item/chems/drinks/glass2/square,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+"A" = (
+/obj/structure/table,
+/obj/item/stack/material/panel/mapped/plastic,
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32;
+	poster_design = /decl/poster_design/bay_36
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+"D" = (
+/obj/item/frame/light/small{
+	dir = 8
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+"J" = (
+/obj/structure/table/gamblingtable,
+/obj/item/chems/drinks/flask/barflask{
+	pixel_x = -4;
+	pixel_y = 8
+	},
+/obj/item/flashlight/lamp/green{
+	pixel_x = 10
+	},
+/obj/machinery/light/small/fixture{
+	dir = 4
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+"K" = (
+/obj/structure/chair/comfy/brown,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+"L" = (
+/obj/structure/table/reinforced,
+/obj/item/chems/condiment/enzyme{
+	pixel_x = -8;
+	pixel_y = 6
+	},
+/obj/random/drinkbottle,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+"V" = (
+/turf/wall/concrete/reinforced,
+/area/cynosure/maintenance/construction/d1/basementE)
+"W" = (
+/obj/item/stool/padded{
+	dir = 8
+	},
+/obj/random/maintenance/clean,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+"Y" = (
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementE)
+
+(1,1,1) = {"
+a
+a
+a
+l
+a
+"}
+(2,1,1) = {"
+a
+f
+L
+Y
+a
+"}
+(3,1,1) = {"
+a
+D
+Y
+Y
+a
+"}
+(4,1,1) = {"
+a
+A
+t
+p
+a
+"}
+(5,1,1) = {"
+a
+W
+m
+m
+a
+"}
+(6,1,1) = {"
+c
+Y
+Y
+Y
+a
+"}
+(7,1,1) = {"
+a
+K
+J
+e
+a
+"}
+(8,1,1) = {"
+V
+V
+V
+V
+V
+"}

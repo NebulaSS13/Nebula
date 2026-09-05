@@ -1,0 +1,226 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementA)
+"d" = (
+/obj/effect/floor_decal/chapel{
+	dir = 8
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"f" = (
+/obj/structure/table/sif,
+/obj/item/bible,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"g" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"m" = (
+/turf/template_noop,
+/area/template_noop)
+"n" = (
+/obj/item/backpack/cultpack,
+/obj/item/clothing/jumpsuit/chaplain,
+/obj/effect/decal/cleanable/dirt,
+/obj/random/maintenance/clean,
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"q" = (
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"t" = (
+/obj/structure/flora/pottedplant/dead,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"x" = (
+/obj/structure/table/sif,
+/obj/item/flame/candle/black,
+/obj/effect/floor_decal/chapel{
+	dir = 4
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"A" = (
+/obj/structure/table/bench/sif/padded,
+/obj/effect/floor_decal/chapel{
+	dir = 8
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"C" = (
+/obj/structure/table/bench/sif/padded,
+/obj/effect/floor_decal/chapel,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"F" = (
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"H" = (
+/obj/structure/table/sif,
+/obj/item/flame/candle/black,
+/obj/effect/floor_decal/chapel{
+	dir = 1
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"L" = (
+/obj/structure/table/bench/sif/padded,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"M" = (
+/obj/effect/floor_decal/chapel{
+	dir = 1
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"O" = (
+/obj/effect/decal/cleanable/ash,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"P" = (
+/turf/wall/concrete{
+	can_open = 1
+	},
+/area/cynosure/maintenance/construction/d1/basementA)
+"S" = (
+/obj/effect/floor_decal/chapel,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"T" = (
+/obj/effect/floor_decal/chapel{
+	dir = 4
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"V" = (
+/obj/item/stool/padded,
+/obj/effect/decal/cleanable/cobweb2,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"X" = (
+/obj/structure/table/sif,
+/obj/item/box/candles/black{
+	pixel_x = -3;
+	pixel_y = 4
+	},
+/obj/item/flame/fuelled/lighter/random{
+	pixel_x = -6
+	},
+/obj/item/bible/booze{
+	icon_state = "tome";
+	name = "tome";
+	pixel_x = 2
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"Y" = (
+/obj/structure/table/bench/sif/padded,
+/obj/random/maintenance/clean,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+"Z" = (
+/obj/effect/floor_decal/chapel{
+	dir = 8
+	},
+/obj/random/maintenance/clean,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/basementA)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+F
+M
+d
+F
+M
+Z
+F
+a
+"}
+(3,1,1) = {"
+a
+F
+x
+S
+L
+T
+C
+F
+a
+"}
+(4,1,1) = {"
+a
+n
+X
+q
+L
+F
+L
+g
+P
+"}
+(5,1,1) = {"
+a
+g
+H
+d
+L
+M
+A
+O
+a
+"}
+(6,1,1) = {"
+a
+F
+T
+S
+F
+T
+S
+F
+a
+"}
+(7,1,1) = {"
+a
+V
+f
+t
+L
+Y
+t
+a
+a
+"}
+(8,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+m
+"}

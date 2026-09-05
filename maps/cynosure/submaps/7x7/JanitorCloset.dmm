@@ -1,0 +1,383 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/template_noop,
+/area/template_noop)
+"e" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 1
+	},
+/obj/structure/table/steel,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/engineering,
+/obj/effect/spider/stickyweb,
+/obj/machinery/network/requests_console{
+	department = "Janitorial";
+	name = "Janitorial RC";
+	pixel_y = 24
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"j" = (
+/obj/effect/floor_decal/borderfloor/corner,
+/obj/effect/floor_decal/corner/purple/bordercorner,
+/obj/machinery/light/fixture{
+	dir = 4
+	},
+/obj/structure/mopbucket,
+/obj/item/mop,
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"l" = (
+/obj/effect/floor_decal/borderfloor/corner{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/purple/bordercorner{
+	dir = 4
+	},
+/obj/item/chems/glass/bucket,
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = 12;
+	pixel_y = -4
+	},
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/basementD)
+"o" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementD)
+"p" = (
+/obj/effect/floor_decal/borderfloor/corner{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/purple/bordercorner{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"q" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 6
+	},
+/obj/item/frame/camera/kit,
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"r" = (
+/obj/effect/spider/stickyweb,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"t" = (
+/obj/effect/spider/stickyweb,
+/obj/machinery/atmospherics/unary/vent_pump,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"u" = (
+/obj/effect/spider/stickyweb,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers{
+	dir = 4
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"y" = (
+/obj/item/stool{
+	dir = 1
+	},
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"z" = (
+/obj/effect/floor_decal/borderfloor/corner{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/purple/bordercorner{
+	dir = 8
+	},
+/obj/item/remains/mouse,
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"C" = (
+/turf/wall/concrete/reinforced,
+/area/cynosure/maintenance/construction/d1/basementD)
+"D" = (
+/obj/effect/decal/cleanable/cobweb2{
+	icon_state = "spiderling";
+	name = "dead spider"
+	},
+/obj/effect/spider/stickyweb,
+/obj/machinery/atmospherics/unary/vent_scrubber{
+	dir = 1
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"G" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 9
+	},
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 9
+	},
+/obj/item/stool/padded{
+	dir = 8
+	},
+/obj/random/plushie,
+/obj/effect/spider/stickyweb,
+/obj/machinery/firealarm{
+	pixel_y = 24
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"H" = (
+/obj/effect/spider/stickyweb,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"I" = (
+/obj/effect/floor_decal/borderfloor,
+/obj/effect/floor_decal/corner/purple/border,
+/obj/structure/loot_pile/maint/trash,
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"J" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 1
+	},
+/obj/structure/table/steel,
+/obj/item/box/mousetraps,
+/obj/item/box/lights/mixed,
+/obj/item/chems/spray/cleaner{
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/effect/spider/stickyweb,
+/obj/machinery/newscaster{
+	pixel_y = 26
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"K" = (
+/obj/effect/decal/cleanable/cobweb2{
+	icon_state = "spiderling";
+	name = "dead spider"
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals4{
+	dir = 1
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals4{
+	dir = 6
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/effect/spider/stickyweb,
+/obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/cap/hidden/supply{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"L" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 10
+	},
+/obj/structure/closet/jcloset,
+/obj/item/clothing/mask/gas,
+/obj/random/soap,
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"M" = (
+/obj/effect/floor_decal/steeldecal/steel_decals4,
+/obj/effect/floor_decal/steeldecal/steel_decals4{
+	dir = 10
+	},
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"N" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 5
+	},
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 5
+	},
+/obj/machinery/disposal,
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"O" = (
+/obj/effect/floor_decal/borderfloor,
+/obj/effect/floor_decal/corner/purple/border,
+/obj/effect/floor_decal/steeldecal/steel_decals_central7,
+/obj/structure/cable,
+/obj/effect/spider/stickyweb,
+/obj/structure/sign/poster{
+	dir = 8;
+	pixel_x = -32
+	},
+/obj/machinery/apc{
+	name = "south bump";
+	operating = 0;
+	pixel_y = -24
+	},
+/obj/machinery/light_switch{
+	dir = 1;
+	pixel_x = -12;
+	pixel_y = -24
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"P" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 1
+	},
+/obj/structure/table/steel,
+/obj/item/paper_bin,
+/obj/item/pen,
+/obj/effect/decal/cleanable/cobweb2{
+	icon_state = "spiderling";
+	name = "dead spider"
+	},
+/obj/effect/spider/stickyweb,
+/obj/item/radio/intercom{
+	pixel_y = 20
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"Q" = (
+/obj/effect/floor_decal/borderfloor,
+/obj/effect/floor_decal/corner/purple/border,
+/obj/structure/closet/crate/trashcart,
+/obj/random/contraband,
+/obj/random/maintenance,
+/obj/random/maintenance,
+/obj/random/junk,
+/obj/effect/spider/stickyweb,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"T" = (
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/wall/concrete{
+	can_open = 1
+	},
+/area/cynosure/maintenance/construction/d1/basementD)
+"W" = (
+/obj/random/trash,
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+"X" = (
+/obj/effect/decal/cleanable/spiderling_remains,
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_grid,
+/area/cynosure/maintenance/construction/d1/basementD)
+"Z" = (
+/obj/effect/spider/stickyweb,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/basementD)
+
+(1,1,1) = {"
+o
+o
+o
+T
+o
+o
+a
+"}
+(2,1,1) = {"
+C
+G
+p
+K
+O
+o
+o
+"}
+(3,1,1) = {"
+C
+J
+t
+u
+z
+L
+o
+"}
+(4,1,1) = {"
+C
+P
+y
+r
+Z
+I
+o
+"}
+(5,1,1) = {"
+C
+e
+W
+H
+D
+Q
+o
+"}
+(6,1,1) = {"
+C
+N
+l
+M
+j
+q
+o
+"}
+(7,1,1) = {"
+C
+o
+o
+X
+o
+o
+o
+"}

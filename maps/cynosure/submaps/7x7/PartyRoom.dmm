@@ -1,0 +1,229 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32;
+	poster_design = /decl/poster_design/bay_2
+	},
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/structure/table,
+/obj/random/toy,
+/obj/item/toy/balloon{
+	color = "#ff00bb"
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"d" = (
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"e" = (
+/obj/random/obstruction,
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"f" = (
+/obj/structure/table,
+/obj/item/stack/package_wrap/twenty_five,
+/obj/item/toy/balloon{
+	color = "#ffcc00"
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"j" = (
+/obj/machinery/apc{
+	dir = 8;
+	name = "west bump";
+	operating = 0;
+	pixel_x = -24
+	},
+/obj/structure/cable,
+/obj/structure/sign/poster{
+	pixel_y = -32
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"o" = (
+/obj/item/stack/material/cardstock/mapped/cardboard,
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"p" = (
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"v" = (
+/obj/machinery/light/small,
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"C" = (
+/obj/structure/table,
+/obj/item/plate{
+	pixel_x = -9;
+	pixel_y = -6
+	},
+/obj/item/toy/balloon{
+	color = "#00bbff"
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"E" = (
+/obj/item/pizzabox,
+/obj/item/plate{
+	pixel_x = -9;
+	pixel_y = 5
+	},
+/obj/structure/table,
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"F" = (
+/obj/structure/table,
+/obj/item/plate{
+	pixel_y = -6
+	},
+/obj/item/clothing/head/cakehat,
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"I" = (
+/obj/structure/chair/comfy/lime{
+	dir = 4
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"K" = (
+/obj/random/trash,
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"L" = (
+/turf/wall/concrete/reinforced,
+/area/cynosure/maintenance/construction/d1/basementD)
+"M" = (
+/obj/structure/chair/comfy/red{
+	dir = 4
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"N" = (
+/obj/structure/chair/comfy/orange{
+	dir = 8
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"Q" = (
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"R" = (
+/obj/structure/chair/comfy/purple{
+	dir = 1
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"S" = (
+/obj/structure/chair/comfy/green{
+	dir = 8
+	},
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"V" = (
+/obj/structure/chair/comfy/blue{
+	dir = 8
+	},
+/obj/item/plate,
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"X" = (
+/obj/structure/chair/comfy/teal{
+	dir = 4
+	},
+/obj/item/plate{
+	pixel_y = 5
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+"Y" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementD)
+"Z" = (
+/obj/structure/table,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/item/box/candles/white,
+/obj/item/box/matches{
+	pixel_x = -4;
+	pixel_y = -8
+	},
+/turf/floor/carpet/purple,
+/area/cynosure/maintenance/construction/d1/basementD)
+
+(1,1,1) = {"
+Y
+Y
+Y
+e
+Y
+Y
+a
+"}
+(2,1,1) = {"
+L
+b
+p
+Q
+j
+Y
+Y
+"}
+(3,1,1) = {"
+L
+I
+M
+X
+K
+p
+Y
+"}
+(4,1,1) = {"
+L
+Z
+E
+F
+R
+v
+Y
+"}
+(5,1,1) = {"
+L
+S
+V
+N
+p
+o
+Y
+"}
+(6,1,1) = {"
+L
+C
+p
+p
+p
+f
+Y
+"}
+(7,1,1) = {"
+L
+Y
+Y
+d
+Y
+Y
+Y
+"}
