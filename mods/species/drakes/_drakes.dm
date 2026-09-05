@@ -5,6 +5,17 @@
 /decl/modpack/grafadreka
 	name = "Grafadreka Species"
 
-/mob/living/human/grafadreka/Initialize(mapload, species_uid, datum/mob_snapshot/supplied_appearance)
-	species_uid = /decl/species/grafadreka::uid
-	. = ..()
+/obj/random/grafadreka
+	name = "Random Grafadreka"
+	desc = "This is a random grafadreka, either waking or hibernating."
+	icon = 'mods/species/drakes/icons/body.dmi'
+	icon_state = "preview"
+	//mob_returns_home = 1
+	//mob_wander_distance = 10
+
+/obj/random/grafadreka/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/mob/living/human/grafadreka/hatchling = 3,
+		/mob/living/human/grafadreka           = 12
+	)
+	return spawn_choices

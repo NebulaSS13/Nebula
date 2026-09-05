@@ -15,6 +15,7 @@
 #include "drake_spit.dm"
 #include "drake_traits.dm"
 #include "language.dm"
+#include "mobs.dm"
 #include "sifpod.dm"
 #include "sifsap.dm"
 #include "species.dm"
