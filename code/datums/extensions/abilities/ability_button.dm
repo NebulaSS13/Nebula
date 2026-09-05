@@ -89,6 +89,19 @@
 		if(ability.ability_icon && ability.ability_icon_state)
 			add_overlay(overlay_image(ability.ability_icon, ability.ability_icon_state, COLOR_WHITE, (RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM)))
 
+/obj/screen/ability/button/MouseEntered(location, control, params)
+	if(ability?.desc)
+		openToolTip(user = usr, tip_src = src, params = params, title = ability.name, content = ability.desc)
+	..()
+
+/obj/screen/ability/button/MouseDown()
+	closeToolTip(usr)
+	..()
+
+/obj/screen/ability/button/MouseExited()
+	closeToolTip(usr)
+	..()
+
 /obj/screen/ability/category
 	name = "Toggle Ability Category"
 	icon_state = "category"
