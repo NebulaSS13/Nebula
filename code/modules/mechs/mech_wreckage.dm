@@ -62,8 +62,8 @@
 
 	var/cutting
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
-		if(welder.isOn())
+		var/obj/item/fuelled_tool/welding/welder = used_item
+		if(welder.tool_is_running())
 			cutting = TRUE
 		else
 			to_chat(user, SPAN_WARNING("Turn \the [welder] on, first."))

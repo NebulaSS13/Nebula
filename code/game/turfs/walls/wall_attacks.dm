@@ -123,7 +123,7 @@
 			. = TRUE
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		if(IS_WELDER(used_item))
-			var/obj/item/weldingtool/welder = used_item
+			var/obj/item/fuelled_tool/welding/welder = used_item
 			if( welder.weld(0,user) )
 				to_chat(user, "<span class='notice'>You burn away the fungi with \the [welder].</span>")
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
@@ -137,14 +137,14 @@
 				physically_destroyed()
 				return TRUE
 	var/turf/T = user.loc	//get user's location for delay checks
-	if(damage && istype(used_item, /obj/item/weldingtool))
+	if(damage && istype(used_item, /obj/item/fuelled_tool/welding))
 
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 
 		if(welder.weld(0,user))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5), src) && welder && welder.isOn())
+			if(do_after(user, max(5, damage / 5), src) && welder && welder.tool_is_running())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
 				take_damage(-damage)
 		return TRUE
@@ -191,8 +191,8 @@
 					update_icon()
 					to_chat(user, "<span class='notice'>You remove the support lines.</span>")
 					return
-				else if(istype(used_item,/obj/item/weldingtool))
-					var/obj/item/weldingtool/welder = used_item
+				else if(istype(used_item,/obj/item/fuelled_tool/welding))
+					var/obj/item/fuelled_tool/welding/welder = used_item
 					if(welder.weld(0,user))
 						construction_stage = 6
 						update_icon()
@@ -200,8 +200,8 @@
 						return TRUE
 			if(4)
 				var/cut_cover
-				if(istype(used_item,/obj/item/weldingtool))
-					var/obj/item/weldingtool/welder = used_item
+				if(istype(used_item,/obj/item/fuelled_tool/welding))
+					var/obj/item/fuelled_tool/welding/welder = used_item
 					if(welder.weld(0,user))
 						cut_cover=1
 					else
@@ -246,8 +246,8 @@
 					return
 			if(1)
 				var/cut_cover
-				if(istype(used_item, /obj/item/weldingtool))
-					var/obj/item/weldingtool/welder = used_item
+				if(istype(used_item, /obj/item/fuelled_tool/welding))
+					var/obj/item/fuelled_tool/welding/welder = used_item
 					if( welder.weld(0,user) )
 						cut_cover=1
 					else

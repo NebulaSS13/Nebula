@@ -2743,7 +2743,7 @@
 "afY" = (
 /obj/structure/closet,
 /obj/item/clothing/glasses/welding,
-/obj/item/weldingtool,
+/obj/item/fuelled_tool/welding,
 /turf/floor/plating,
 /area/exodus/maintenance/security_starboard)
 "afZ" = (

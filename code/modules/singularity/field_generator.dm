@@ -123,7 +123,7 @@ field_generator power level display
 				to_chat(user, "<span class='warning'> \The [src] needs to be unwelded from the floor.</span>")
 				return TRUE
 	else if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		switch(state)
 			if(0)
 				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
@@ -137,7 +137,7 @@ field_generator power level display
 					"You hear welding.")
 				if (!do_after(user, 2 SECONDS, src))
 					return TRUE
-				if(!src || !welder.isOn()) return TRUE
+				if(!src || !welder.tool_is_running()) return TRUE
 				state = 2
 				to_chat(user, "You weld the field generator to the floor.")
 				return TRUE
@@ -150,7 +150,7 @@ field_generator power level display
 					"You hear welding.")
 				if (!do_after(user, 2 SECONDS, src))
 					return TRUE
-				if(!src || !welder.isOn()) return TRUE
+				if(!src || !welder.tool_is_running()) return TRUE
 				state = 1
 				to_chat(user, "You cut \the [src] free from the floor.")
 				return TRUE
