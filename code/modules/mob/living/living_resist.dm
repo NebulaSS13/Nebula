@@ -10,7 +10,7 @@
 		return
 
 	if(!restrained())
-		if(buckled.can_buckle)
+		if(buckled.max_buckled_mobs)
 			buckled.user_unbuckle_mob(src)
 		else
 			to_chat(src, "<span class='warning'>You can't seem to escape from \the [buckled]!</span>")
@@ -92,4 +92,4 @@
 	try_unequip(restraint)
 	qdel(restraint)
 	if(buckled && buckled.buckle_require_restraints && !get_restraining_equipment())
-		buckled.unbuckle_mob()
+		buckled.unbuckle_mob(src)

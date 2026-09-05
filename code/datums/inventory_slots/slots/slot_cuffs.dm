@@ -17,7 +17,7 @@
 /datum/inventory_slot/handcuffs/unequipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	. = ..()
 	if(. && user.buckled?.buckle_require_restraints)
-		user.buckled.unbuckle_mob()
+		user.buckled.unbuckle_mob(user)
 
 /datum/inventory_slot/handcuffs/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning, var/ignore_equipped)
 	. = ..() && istype(prop, /obj/item/handcuffs)

@@ -60,16 +60,16 @@
 
 	if(is_mature())
 		//Find a victim
-		if(!buckled_mob)
+		if(!has_buckled_mob())
 			var/list/mob/living/targets = targets_in_range()
 			if(LAZYLEN(targets) && prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
 				entangle(pick(targets))
 
 		//Handle the victim
-		if(buckled_mob)
-			seed.do_sting(buckled_mob,src)
+		for(var/mob/buckle_mob in get_buckled_mobs())
+			seed.do_sting(buckle_mob,src)
 			if(seed.get_trait(TRAIT_CARNIVOROUS))
-				seed.do_thorns(buckled_mob,src)
+				seed.do_thorns(buckle_mob,src)
 
 		//Try to spread
 		if(parent && parent.possible_children && prob(spread_chance))
@@ -97,7 +97,7 @@
 	return parent == src && current_health == get_max_health() && !plant && istype(T) && T.simulated && !T.CanZPass(src, DOWN)
 
 /obj/effect/vine/proc/should_sleep()
-	if(buckled_mob) //got a victim to fondle
+	if(has_buckled_mob()) //got a victim to fondle
 		return FALSE
 	if(length(get_neighbors())) //got places to spread to
 		return FALSE

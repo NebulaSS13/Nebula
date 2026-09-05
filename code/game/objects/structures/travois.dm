@@ -7,11 +7,11 @@
 	anchored = FALSE
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/obj/structures/travois.dmi'
-	can_buckle = TRUE
+	max_buckled_mobs = 1
 	buckle_dir = SOUTH
 	buckle_lying = TRUE
 	buckle_sound = 'sound/effects/buckle.ogg'
-	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 6)
+	_buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 6)
 	obj_flags = OBJ_FLAG_SUPPORT_MOB
 	movable_flags = MOVABLE_FLAG_WHEELED
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT

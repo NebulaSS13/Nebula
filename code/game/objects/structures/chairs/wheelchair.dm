@@ -26,37 +26,38 @@
 /obj/structure/chair/wheelchair/attack_hand(mob/user)
 	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
 		return ..()
-	user_unbuckle_mob(user)
+	user_unbuckle_mob(user, ((user in get_buckled_mobs()) ? user : null))
 	return TRUE
 
 /obj/structure/chair/wheelchair/Bump(atom/A)
 	..()
-	if(!buckled_mob)
+	if(!has_buckled_mob())
 		return
 
 	if(!propelled)
 		return
 
-	var/mob/living/occupant = unbuckle_mob()
-	occupant.throw_at(A, 3, 3)
+	while(has_buckled_mob())
+		var/mob/living/occupant = unbuckle_mob()
+		occupant.throw_at(A, 3, 3)
 
-	var/def_zone = ran_zone()
-	var/blocked = 100 * occupant.get_blocked_ratio(def_zone, BRUTE, damage = 10)
-	occupant.throw_at(A, 3, 3)
-	occupant.apply_effect(6, STUN, blocked)
-	occupant.apply_effect(6, WEAKEN, blocked)
-	occupant.apply_effect(6, STUTTER, blocked)
-	occupant.apply_damage(10, BRUTE, def_zone)
-	playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
-	if(isliving(A))
-		var/mob/living/victim = A
-		def_zone = ran_zone()
-		blocked = 100 * victim.get_blocked_ratio(def_zone, BRUTE, damage = 10)
-		victim.apply_effect(6, STUN, blocked)
-		victim.apply_effect(6, WEAKEN, blocked)
-		victim.apply_effect(6, STUTTER, blocked)
-		victim.apply_damage(10, BRUTE, def_zone)
-	occupant.visible_message(SPAN_DANGER("\The [occupant] crashed into \the [A]!"))
+		var/def_zone = ran_zone()
+		var/blocked = 100 * occupant.get_blocked_ratio(def_zone, BRUTE, damage = 10)
+		occupant.throw_at(A, 3, 3)
+		occupant.apply_effect(6, STUN, blocked)
+		occupant.apply_effect(6, WEAKEN, blocked)
+		occupant.apply_effect(6, STUTTER, blocked)
+		occupant.apply_damage(10, BRUTE, def_zone)
+		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
+		if(isliving(A))
+			var/mob/living/victim = A
+			def_zone = ran_zone()
+			blocked = 100 * victim.get_blocked_ratio(def_zone, BRUTE, damage = 10)
+			victim.apply_effect(6, STUN, blocked)
+			victim.apply_effect(6, WEAKEN, blocked)
+			victim.apply_effect(6, STUTTER, blocked)
+			victim.apply_damage(10, BRUTE, def_zone)
+		occupant.visible_message(SPAN_DANGER("\The [occupant] crashed into \the [A]!"))
 
 /obj/structure/chair/wheelchair/proc/create_track()
 	var/obj/effect/decal/cleanable/blood/tracks/B = new(loc)
@@ -94,7 +95,7 @@
 	if(usr.incapacitated())
 		return
 
-	if(buckled_mob)
+	if(has_buckled_mob())
 		to_chat(usr, SPAN_WARNING("You can't collapse \the [src] while it is still in use."))
 		return
 

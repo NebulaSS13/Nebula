@@ -7,7 +7,7 @@
 	throwpass =  TRUE
 	anchored =   TRUE
 	atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CHECKS_BORDER
-	can_buckle = TRUE // TODO: Is it actually... intended that you can buckle stuff to this?
+	max_buckled_mobs = 1 // TODO: Is it actually... intended that you can buckle stuff to this?
 	material =   /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_NAME
 	max_health = 200
