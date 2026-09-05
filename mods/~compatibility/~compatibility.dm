@@ -42,3 +42,7 @@
 #ifdef CONTENT_PACK_EXPLORATION
 #include "patches/exploration.dm"
 #endif
+
+#ifdef MODPACK_POLARIS
+#include "patches/polaris.dm"
+#endif
