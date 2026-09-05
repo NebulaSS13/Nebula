@@ -146,3 +146,7 @@
 
 /obj/item/clothing/suit/jacket/winter/parka/purple
 	paint_color = COLOR_PURPLE
+
+/obj/item/clothing/suit/jacket/winter/parka/blue
+	paint_color = COLOR_BLUE_GRAY
+
