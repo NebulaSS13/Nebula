@@ -1,14 +1,30 @@
 /datum/extension/voxform
+	var/fed_until = 0
 	base_type = /datum/extension/voxform
 
 /datum/extension/voxform/proc/check_held_user(var/mob/living/human/user, var/atom/movable/thing)
 	if(!istype(user))
 		return FALSE
-	if(user.get_bodytype_category() != BODYTYPE_VOX && user.try_unequip(thing))
+	if(world.time <= fed_until && user.get_bodytype_category() != BODYTYPE_VOX && user.try_unequip(thing))
 		to_chat(user, SPAN_WARNING("\The [thing] hisses and wriggles out of your grasp!"))
 		playsound(user, 'sound/voice/BugHiss.ogg', 50, 1)
 		return FALSE
 	return TRUE
+
+/obj/item/gun/attackby(obj/item/used_item, mob/user)
+	if(!istype(used_item, /obj/item/food/butchery))
+		return ..()
+	var/datum/extension/voxform/voxform = get_extension(src, /datum/extension/voxform)
+	if(!voxform)
+		return ..()
+	if(world.time <= voxform.fed_until)
+		to_chat(user, SPAN_WARNING("\The [src] isn't hungry right now."))
+	else if(user.try_unequip(used_item))
+		voxform.fed_until = world.time + 15 MINUTES
+		user.visible_message(SPAN_NOTICE("\The [user] carefully feeds \the [used_item] to \the [src]."))
+		qdel(used_item)
+		return TRUE
+	. = ..()
 
 /obj/item/gun/special_check(var/mob/living/human/user)
 	. = ..()
@@ -32,7 +48,7 @@
 		list(mode_name="stunning", burst=1, fire_delay=null,burst_accuracy=list(30), dispersion=null, projectile_type=/obj/item/projectile/beam/stun/darkmatter, charge_cost = 50),
 		list(mode_name="focused", burst=1, fire_delay=null, burst_accuracy=list(30), dispersion=null, projectile_type=/obj/item/projectile/beam/darkmatter, charge_cost = 75),
 		list(mode_name="scatter burst", burst=8, fire_delay=null, burst_accuracy=list(0, 0, 0, 0, 0, 0, 0, 0), dispersion=list(0, 1, 2, 2, 3, 3, 3, 3, 3), projectile_type=/obj/item/projectile/energy/darkmatter, charge_cost = 10),
-		)
+	)
 
 /obj/item/gun/energy/darkmatter/Initialize()
 	. = ..()
@@ -55,7 +71,7 @@
 	firemodes = list(
 		list(mode_name="normal", projectile_type=/obj/item/projectile/energy/plasmastun/sonic/weak, charge_cost = 50),
 		list(mode_name="overcharge", projectile_type=/obj/item/projectile/energy/plasmastun/sonic/strong, charge_cost = 200),
-		)
+	)
 
 /obj/item/gun/energy/sonic/Initialize()
 	. = ..()
