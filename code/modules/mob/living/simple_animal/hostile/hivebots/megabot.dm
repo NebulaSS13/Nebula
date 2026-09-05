@@ -74,7 +74,7 @@
 			if(ATTACK_MODE_ROCKET)
 				add_overlay("[icon_state]-rocket")
 
-/mob/living/simple_animal/hostile/hivebot/mega/has_ranged_attack()
+/mob/living/simple_animal/hostile/hivebot/mega/has_ranged_attack(atom/target)
 	return attack_mode != ATTACK_MODE_MELEE && num_shots > 0
 
 /mob/living/simple_animal/hostile/hivebot/mega/proc/switch_mode(var/new_mode)

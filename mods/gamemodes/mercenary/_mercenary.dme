@@ -3,6 +3,7 @@
 // BEGIN_INCLUDE
 #include "_merc.dm"
 #include "mercenary_antagonist.dm"
+#include "mercenary_mobs.dm"
 #include "mercenary_mode.dm"
 #include "mercenary_pinpointer.dm"
 #include "mercenary_props.dm"

@@ -94,8 +94,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 	var/oldhealth = current_health
 	. = used_item.use_on_mob(src, user)
-	if(used_item.get_attack_force(user) && istype(ai) && current_health < oldhealth)
-		ai.retaliate(user)
+	if(current_health < oldhealth && used_item.get_attack_force(user))
+		user.remove_cloak()
+		if(istype(ai))
+			ai.retaliate(user)
 
 	if(!. && user == src && user.get_target_zone() == BP_MOUTH && can_devour(used_item, silent = TRUE))
 		var/obj/item/blocked = src.check_mouth_coverage()

@@ -3,7 +3,7 @@
 	if(bodytype_equip_flags & BODY_EQUIP_FLAG_EXCLUDE)
 		bodytype_equip_flags |= BODY_EQUIP_FLAG_VOX
 
-/obj/item/clothing/suit/space/vox
+/obj/item/clothing/suit/space/void/vox
 	name = "alien pressure suit"
 	icon = 'mods/species/vox/icons/clothing/pressure_suit.dmi'
 	desc = "A huge, armoured, pressurized suit, designed for distinctly nonhuman proportions."
@@ -32,42 +32,44 @@
 	bodytype_equip_flags = BODY_EQUIP_FLAG_VOX
 	flags_inv = (HIDEJUMPSUIT|HIDETAIL)
 
-/obj/item/clothing/suit/space/vox/Initialize()
+/obj/item/clothing/suit/space/void/vox/Initialize()
 	. = ..()
 	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 1)
 
-/obj/item/clothing/suit/space/vox/carapace
+/obj/item/clothing/suit/space/void/vox/carapace
 	name = "alien carapace armour"
 	color = "#486e6e"
 	icon = 'mods/species/vox/icons/clothing/carapace_suit.dmi'
 	desc = "An armoured, segmented carapace with glowing purple lights. It looks pretty run-down."
-	var/lights_color = "#00ffff"
+	markings_are_emissive = TRUE
+	markings_flags = RESET_COLOR
+	markings_state_modifier	= "-lights"
+	markings_color = "#00ffff"
 
-/obj/item/clothing/suit/space/vox/carapace/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay && lights_color && check_state_in_icon("[overlay.icon_state]-lights", overlay.icon))
-		var/image/I = emissive_overlay(overlay.icon, "[overlay.icon_state]-lights")
-		I.color = lights_color
-		I.appearance_flags |= RESET_COLOR
-		overlay.overlays += I
-	. = ..()
+/obj/item/clothing/suit/space/void/vox/carapace/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/vox/carapace
+	boots  = /obj/item/clothing/shoes/magboots/vox
+	tank   = /obj/item/tank/nitrogen/vox
 
-/obj/item/clothing/suit/space/vox/carapace/on_update_icon()
-	. = ..()
-	if(lights_color && check_state_in_icon("[icon_state]-lights", icon))
-		var/image/I = emissive_overlay(icon, "[icon_state]-lights")
-		I.color = lights_color
-		I.appearance_flags |= RESET_COLOR
-		add_overlay(I)
-
-/obj/item/clothing/suit/space/vox/stealth
+/obj/item/clothing/suit/space/void/vox/stealth
 	name = "alien stealth suit"
 	icon = 'mods/species/vox/icons/clothing/stealth_suit.dmi'
 	desc = "A sleek black suit. It seems to have a tail, and is very heavy."
 
-/obj/item/clothing/suit/space/vox/medic
+/obj/item/clothing/suit/space/void/vox/stealth/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/vox/stealth
+	boots  = /obj/item/clothing/shoes/magboots/vox
+	tank   = /obj/item/tank/nitrogen/vox
+
+/obj/item/clothing/suit/space/void/vox/medic
 	name = "alien armour"
 	icon = 'mods/species/vox/icons/clothing/medic_suit.dmi'
 	desc = "An almost organic-looking nonhuman pressure suit."
+
+/obj/item/clothing/suit/space/void/vox/medic/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/vox/medic
+	boots  = /obj/item/clothing/shoes/magboots/vox
+	tank   = /obj/item/tank/nitrogen/vox
 
 /obj/item/clothing/suit/armor/vox_scrap
 	name = "rusted metal armor"

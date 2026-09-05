@@ -29,10 +29,6 @@
 		/decl/emote/audible/vox_shriek
 	)
 
-	inherent_verbs = list(
-		/mob/living/human/proc/toggle_vox_pressure_seal
-	)
-
 	rarity_value = 4
 
 	description = {"The Vox are the broken remnants of a once-proud race, now reduced to little more
@@ -132,19 +128,8 @@
 /decl/species/vox/equip_survival_gear(mob/living/wearer, box_type = /obj/item/box/survival)
 	wearer.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(wearer), slot_wear_mask_str)
 	var/obj/item/backpack/backpack = wearer.get_equipped_item(slot_back_str)
-	if(istype(backpack))
-		wearer.equip_to_slot_or_del(new /obj/item/box/vox(backpack), slot_in_backpack_str)
-		var/obj/item/tank/nitrogen/tank = new(wearer)
-		wearer.equip_to_slot_or_del(tank, BP_R_HAND)
-		if(tank)
-			wearer.set_internals(tank)
-	else
-		wearer.equip_to_slot_or_del(new /obj/item/tank/nitrogen(wearer), slot_back_str)
+	if(!istype(backpack) || !backpack.storage || !wearer.equip_to_slot_or_del(new /obj/item/box/vox(backpack), slot_in_backpack_str))
 		wearer.equip_to_slot_or_del(new /obj/item/box/vox(wearer), BP_R_HAND)
-		wearer.set_internals(backpack)
-
-// Ideally this would all be on bodytype, but pressure is handled per-mob currently.
-var/global/list/vox_current_pressure_toggle = list()
 
 /decl/species/vox/disfigure_msg(var/mob/living/human/H)
 	var/decl/pronouns/pronouns = H.get_pronouns()
@@ -165,49 +150,15 @@ var/global/list/vox_current_pressure_toggle = list()
 	emote_sound = 'mods/species/vox/sounds/shriek1.ogg'
 
 /decl/species/vox/get_warning_low_pressure(var/mob/living/human/H)
-	if(H && global.vox_current_pressure_toggle["\ref[H]"])
+	if(H?.has_mob_modifier(/decl/mob_modifier/sealed_carapace, source = H))
 		return 50
 	return ..()
 
 /decl/species/vox/get_hazard_low_pressure(var/mob/living/human/H)
-	if(H && global.vox_current_pressure_toggle["\ref[H]"])
+	if(H?.has_mob_modifier(/decl/mob_modifier/sealed_carapace, source = H))
 		return 0
 	return ..()
 
-/mob/living/human/proc/toggle_vox_pressure_seal()
-	set name = "Toggle Vox Pressure Seal"
-	set category = "Abilities"
-	set src = usr
-
-	if(!istype(species, /decl/species/vox))
-		verbs -= /mob/living/human/proc/toggle_vox_pressure_seal
-		return
-
-	if(incapacitated(INCAPACITATION_KNOCKOUT))
-		to_chat(src, SPAN_WARNING("You are in no state to do that."))
-		return
-
-	var/decl/pronouns/pronouns = get_pronouns()
-	visible_message(SPAN_NOTICE("\The [src] begins flexing and realigning [pronouns.his] scaling..."))
-	if(!do_after(src, 2 SECONDS, src, FALSE))
-		visible_message(
-			SPAN_NOTICE("\The [src] ceases adjusting [pronouns.his] scaling."),
-			self_message = SPAN_WARNING("You must remain still to seal or unseal your scaling."))
-		return
-
-	if(incapacitated(INCAPACITATION_KNOCKOUT))
-		to_chat(src, SPAN_WARNING("You are in no state to do that."))
-		return
-
-	// TODO: maybe add cold and heat thresholds to this.
-	var/my_ref = "\ref[src]"
-	if((global.vox_current_pressure_toggle[my_ref] = !global.vox_current_pressure_toggle[my_ref]))
-		visible_message(
-			SPAN_NOTICE("\The [src]'s scaling flattens and smooths out."),
-			self_message = SPAN_NOTICE("You flatten your scaling and inflate internal bladders, protecting yourself against low pressure at the cost of dexterity.")
-		)
-	else
-		visible_message(
-			SPAN_NOTICE("\The [src]'s scaling bristles roughly."),
-			self_message = SPAN_NOTICE("You bristle your scaling and deflate your internal bladders, restoring mobility but leaving yourself vulnerable to low pressure.")
-		)
+/decl/species/vox/handle_post_spawn(mob/living/human/H)
+	. = ..()
+	H.add_ability(/decl/ability/vox/seal_carapace)
