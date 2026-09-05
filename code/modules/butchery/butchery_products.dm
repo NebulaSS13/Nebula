@@ -3,7 +3,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	icon_state          = ICON_STATE_WORLD
 	material            = /decl/material/solid/organic/meat
-	color               = /decl/material/solid/organic/meat::color
+	//color               = /decl/material/solid/organic/meat::color
 	w_class             = ITEM_SIZE_NORMAL
 	chem_volume         = 20
 	nutriment_type      = /decl/material/solid/organic/meat

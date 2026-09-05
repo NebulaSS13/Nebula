@@ -15,7 +15,6 @@
 
 /obj/machinery/auto_cloner/proc/get_hostile_mob_types()
 	. = list(
-		/mob/living/simple_animal/hostile/giant_spider/nurse,
 		/mob/living/simple_animal/hostile/bear,
 		/mob/living/simple_animal/hostile/creature
 	)

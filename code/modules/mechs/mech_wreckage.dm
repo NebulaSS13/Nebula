@@ -62,7 +62,7 @@
 
 	var/cutting
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(welder.isOn())
 			cutting = TRUE
 		else

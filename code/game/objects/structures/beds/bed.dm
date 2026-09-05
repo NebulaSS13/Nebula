@@ -5,7 +5,7 @@
 	icon = 'icons/obj/structures/furniture/bed.dmi'
 	icon_state = ICON_STATE_WORLD
 	anchored = TRUE
-	can_buckle = TRUE
+	max_buckled_mobs = 1
 	buckle_dir = SOUTH
 	buckle_lying = TRUE
 	buckle_sound = 'sound/effects/buckle.ogg'

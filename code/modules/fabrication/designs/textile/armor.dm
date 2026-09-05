@@ -22,7 +22,16 @@
 	path = /obj/item/clothing/armor_attachment/plate/tactical
 
 /datum/fabricator_recipe/textiles/armor/plate/merc
-	path = /obj/item/clothing/armor_attachment/plate/merc
+	path = /obj/item/clothing/armor_attachment/plate/tactical
+
+/datum/fabricator_recipe/textiles/armor/plate/laserproof
+	path = /obj/item/clothing/armor_attachment/plate/laserproof
+
+/datum/fabricator_recipe/textiles/armor/plate/riot
+	path = /obj/item/clothing/armor_attachment/plate/riot
+
+/datum/fabricator_recipe/textiles/armor/plate/bulletproof
+	path = /obj/item/clothing/armor_attachment/plate/bulletproof
 
 // Limb armor attachments
 

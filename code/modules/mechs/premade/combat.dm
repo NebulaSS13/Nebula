@@ -21,6 +21,9 @@
 	install_system(new /obj/item/mech_equipment/flash(src), HARDPOINT_LEFT_SHOULDER)
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_RIGHT_SHOULDER)
 
+/mob/living/exosuit/premade/combat/autonomous
+	ai = /datum/mob_controller/aggressive
+
 /mob/living/exosuit/premade/combat/military
 	decal = "cammo1"
 

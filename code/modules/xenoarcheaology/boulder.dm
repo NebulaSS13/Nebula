@@ -8,6 +8,7 @@
 	anchored = TRUE
 	material = /decl/material/solid/stone/sandstone
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+
 	var/excavation_level = 0
 	var/datum/artifact_find/artifact_find
 
@@ -93,3 +94,22 @@
 		var/obj/item/equipped_item = user.get_active_held_item()
 		if(istype(equipped_item) && IS_PICK(equipped_item))
 			attackby(equipped_item, user)
+
+/obj/structure/boulder/iron
+	material = /decl/material/solid/hematite
+/obj/structure/boulder/coal
+	material = /decl/material/solid/graphite
+/obj/structure/boulder/silver
+	material = /decl/material/solid/tetrahedrite
+/obj/structure/boulder/gold
+	material = /decl/material/solid/metal/gold
+/obj/structure/boulder/uranium
+	material = /decl/material/solid/pitchblende
+/obj/structure/boulder/phoron
+	material = /decl/material/
+/obj/structure/boulder/platinum
+	material = /decl/material/solid/sperrylite
+/obj/structure/boulder/lead
+	material = /decl/material/solid/galena
+/obj/structure/boulder/diamond
+	material = /decl/material/solid/gemstone/diamond

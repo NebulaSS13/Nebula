@@ -27,6 +27,9 @@
 	after reaching space with Skrell assistance."
 	base_internal_prosthetics_model = /decl/bodytype/prosthetic/avian
 
+	body_temperature = 270
+	breath_pressure = 12	//Smaller, so needs less air
+
 	snow_slowdown_mod = -1
 
 	holder_icon = 'mods/species/neoavians/icons/holder.dmi'

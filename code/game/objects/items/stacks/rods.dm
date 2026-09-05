@@ -50,7 +50,7 @@
 /obj/item/stack/material/rods/attackby(obj/item/used_item, mob/user)
 
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 
 		if(!can_use(2))
 			to_chat(user, SPAN_WARNING("You need at least two rods to do this."))

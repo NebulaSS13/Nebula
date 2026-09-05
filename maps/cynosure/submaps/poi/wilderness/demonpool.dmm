@@ -1,0 +1,1653 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ag" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 10
+	},
+/obj/machinery/light/small,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DemonPool)
+"aj" = (
+/obj/effect/decal/cleanable/blood,
+/obj/random/maintenance/research,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"au" = (
+/obj/item/bone,
+/obj/item/bone/ribs,
+/obj/item/organ/internal/eyes,
+/obj/structure/closet/crate/secure,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"ay" = (
+/obj/structure/girder,
+/obj/effect/floor_decal/rust,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"bb" = (
+/mob/living/simple_animal/hostile/creature/cult{
+	icon_scale_x = 1.2;
+	icon_scale_y = 1.2
+	},
+/obj/item/shard,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"bc" = (
+/obj/machinery/door/airlock,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"bh" = (
+/obj/item/energy_blade/sword/red,
+/obj/machinery/light/small/emergency{
+	dir = 4
+	},
+/obj/structure/loot_pile/surface/bones,
+/obj/random/maintenance/research,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"bo" = (
+/obj/effect/decal/cleanable/ash,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"bw" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"bz" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/vendor/drink,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"bO" = (
+/obj/item/shard,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"cn" = (
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 1
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"de" = (
+/turf/wall/concrete,
+/area/cynosure_submap/DemonPool)
+"dG" = (
+/obj/structure/closet/secure_closet/personal,
+/obj/item/clothing/suit/jacket/winter,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"ee" = (
+/obj/random/obstruction,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"es" = (
+/obj/fire,
+/obj/fire,
+/obj/effect/floor_decal/industrial/warning/corner,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"eM" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 8
+	},
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled,
+/area/cynosure_submap/DemonPool)
+"eR" = (
+/turf/wall/cult,
+/area/cynosure_submap/DemonPool)
+"eV" = (
+/turf/wall/natural,
+/area/template_noop)
+"eW" = (
+/turf/template_noop,
+/area/template_noop)
+"fW" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6
+	},
+/obj/machinery/light/small,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DemonPool)
+"gt" = (
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"gF" = (
+/turf/floor/dirt,
+/area/template_noop)
+"hr" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DemonPool)
+"hF" = (
+/mob/living/simple_animal/hostile/creature/cult,
+/obj/item/shard,
+/obj/item/shard,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"hO" = (
+/obj/structure/grille/cult,
+/obj/structure/window/reinforced/full,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"hP" = (
+/obj/fire,
+/obj/fire,
+/obj/fire,
+/obj/structure/grille/cult,
+/obj/structure/window/reinforced/full,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"hQ" = (
+/obj/structure/salvage/machine_os,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"hV" = (
+/obj/structure/table/steel,
+/obj/item/taperecorder,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"hW" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/item/clothing/neck/stethoscope,
+/obj/item/belt/medical,
+/obj/random/maintenance/medical,
+/obj/random/medical,
+/obj/random/firstaid,
+/obj/random/medical,
+/obj/structure/closet/crate/secure,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"hZ" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 9
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/DemonPool)
+"iq" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/carpet,
+/area/cynosure_submap/DemonPool)
+"it" = (
+/obj/machinery/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24;
+	operating = 0
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"jt" = (
+/obj/structure/cult/pylon,
+/obj/machinery/artifact_scanpad,
+/obj/fire,
+/obj/fire,
+/obj/machinery/light/small/emergency,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"jG" = (
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 8
+	},
+/obj/item/shard,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"jK" = (
+/obj/fire,
+/obj/fire,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"jS" = (
+/obj/effect/floor_decal/industrial/warning/full,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/cult/pylon,
+/obj/machinery/door/window/eastleft,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"jX" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/floor/dirt,
+/area/cynosure_submap/DemonPool)
+"kc" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"lo" = (
+/obj/effect/floor_decal/industrial/warning/full,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/cult/pylon,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/door/window/southleft,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"lr" = (
+/turf/floor/carpet,
+/area/cynosure_submap/DemonPool)
+"lG" = (
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"lV" = (
+/obj/random/obstruction,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"md" = (
+/obj/machinery/space_heater,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"mp" = (
+/obj/random/trash,
+/turf/floor/dirt,
+/area/cynosure_submap/DemonPool)
+"mO" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"mQ" = (
+/obj/effect/gateway,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"mU" = (
+/obj/fire,
+/obj/fire,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"mX" = (
+/obj/structure/chair/office/dark{
+	dir = 4
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"nH" = (
+/obj/machinery/door/window/westright,
+/obj/structure/salvage/data,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"oi" = (
+/obj/structure/table,
+/obj/item/flashlight/lamp,
+/obj/random/medical/lite,
+/obj/item/paper{
+	name = "caretaker log";
+	info = "<I>An excerpt from a much longer and more mundane journal. There's spots for times and dates, but oddly every single one seems to have been smudged or damaged...</I> <BR> Whole team of eggheads keep coming and going to check out the new site. Going to need more medical supplies, they leaving the lab with what look like radiation burns all over their bodies and weird looks in their eyes. One's even in the bathroom now, 'cleaning up'. <BR> Maybe that old surplus crate has some useful stuff, just need to figure out how to pop the lock."
+	},
+/turf/floor/carpet,
+/area/cynosure_submap/DemonPool)
+"on" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"oN" = (
+/obj/fire,
+/obj/structure/grille/cult,
+/obj/structure/window/reinforced/full,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"pb" = (
+/obj/structure/table,
+/obj/item/pen,
+/obj/item/paper_bin,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"pE" = (
+/obj/fire,
+/obj/fire,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"pH" = (
+/obj/effect/floor_decal/rust,
+/obj/fire,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"pX" = (
+/obj/machinery/door/airlock,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"qa" = (
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"qb" = (
+/obj/structure/grille/cult,
+/obj/machinery/door/blast/regular/open,
+/obj/structure/window/reinforced/full,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"qc" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"qQ" = (
+/obj/fire,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"rh" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DemonPool)
+"sb" = (
+/obj/effect/floor_decal/industrial/warning/full,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4;
+	},
+/obj/structure/cult/pylon,
+/obj/machinery/door/window/westleft,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"si" = (
+/obj/fire,
+/obj/fire,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"sC" = (
+/obj/item/remains/mummy2,
+/obj/item/clothing/suit/jacket/winter/purple,
+/obj/item/bedsheet/brown,
+/obj/item/stack/material/ingot/mapped/silver/fifteen,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"sM" = (
+/obj/effect/decal/cleanable/ash,
+/obj/fire,
+/obj/fire,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"sZ" = (
+/obj/random/junk,
+/obj/random/junk,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"tq" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/sign/warning{
+	name = "\improper PROTECTIVE EQUIPMENT MUST BE WORN";
+	pixel_x = 32
+	},
+/obj/machinery/door/airlock/highsecurity,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"tC" = (
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 5
+	},
+/obj/effect/floor_decal/rust,
+/obj/structure/rack,
+/obj/item/clothing/gloves/latex,
+/obj/item/clothing/glasses/science,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"vk" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/effect/gibspawner/human,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"vv" = (
+/obj/fire,
+/obj/machinery/door/airlock/glass/research,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"vw" = (
+/obj/structure/chair/office/dark{
+	dir = 8
+	},
+/obj/fire,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"vA" = (
+/obj/fire,
+/obj/fire,
+/mob/living/simple_animal/hostile/revenant/cult,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"vJ" = (
+/turf/floor/dirt,
+/area/cynosure_submap/DemonPool)
+"vW" = (
+/obj/effect/floor_decal/rust,
+/obj/structure/table/steel,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"xl" = (
+/obj/structure/table,
+/obj/item/book,
+/obj/item/flashlight/lamp/green,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"yv" = (
+/obj/structure/extinguisher_cabinet{
+	dir = 4;
+	pixel_x = -29
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"yS" = (
+/obj/structure/closet/crate,
+/obj/item/stack/material/crystal/mapped/phoron/twentyfive,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"yW" = (
+/obj/item/clothing/suit/toggle/labcoat,
+/obj/item/remains/human,
+/obj/item/clothing/head/culthood,
+/obj/effect/gibspawner/human,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"zi" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"zj" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"zs" = (
+/obj/structure/rack,
+/obj/random/maintenance/research,
+/obj/random/junk,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"zI" = (
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 4
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"zS" = (
+/obj/fire,
+/mob/living/simple_animal/hostile/creature/cult,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"zU" = (
+/obj/structure/sign/warning/cold{
+	pixel_y = -32
+	},
+/turf/wall/concrete/reinforced,
+/area/cynosure_submap/DemonPool)
+"zZ" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"Ag" = (
+/obj/fire,
+/obj/fire,
+/obj/effect/gibspawner/human,
+/mob/living/simple_animal/hostile/revenant/cult,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Ah" = (
+/obj/machinery/door/window/westright,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/item/book/tome,
+/obj/item/bone/skull/unknown,
+/obj/structure/closet/crate/secure,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Ax" = (
+/obj/machinery/door/airlock/maintenance,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"AF" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DemonPool)
+"AH" = (
+/obj/structure/cult/tome,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Bb" = (
+/obj/effect/decal/cleanable/blood/oil,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"Br" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/fire,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"BO" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DemonPool)
+"CS" = (
+/obj/item/shard,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"CV" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/cynosure_submap/DemonPool)
+"CY" = (
+/obj/fire,
+/obj/structure/grille,
+/obj/item/shard,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Dj" = (
+/obj/structure/door/cult,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"DE" = (
+/obj/fire,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"DY" = (
+/obj/random/sif/hostile,
+/turf/floor/dirt,
+/area/cynosure_submap/DemonPool)
+"DZ" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"EQ" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/brown,
+/turf/floor/carpet,
+/area/cynosure_submap/DemonPool)
+"Fe" = (
+/obj/structure/grille/cult,
+/obj/item/shard,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Fq" = (
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 1
+	},
+/obj/structure/rack,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"Fu" = (
+/obj/structure/mirror{
+	icon_state = "mirror_broke"
+	},
+/turf/wall/concrete,
+/area/cynosure_submap/DemonPool)
+"Hb" = (
+/turf/template_noop,
+/area/cynosure_submap/DemonPool)
+"Hg" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Hh" = (
+/obj/effect/floor_decal/corner/purple/border,
+/obj/machinery/light/small,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"Hl" = (
+/obj/effect/floor_decal/corner/purple/border,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"Hq" = (
+/obj/fire,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Iu" = (
+/obj/structure/hygiene/sink{
+	dir = 4;
+	pixel_x = 11
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"IP" = (
+/obj/item/shard,
+/obj/fire,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Jo" = (
+/turf/wall/natural,
+/area/cynosure_submap/DemonPool)
+"JB" = (
+/mob/living/simple_animal/hostile/creature/cult,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"JK" = (
+/obj/item/shard,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"JM" = (
+/obj/effect/floor_decal/corner/purple/border,
+/obj/fire,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"JN" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"JP" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 10
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/DemonPool)
+"JV" = (
+/obj/structure/bookcase{
+	name = "bookcase (Religious)"
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"JX" = (
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 8
+	},
+/obj/effect/floor_decal/rust,
+/obj/structure/salvage/console_broken_os{
+	dir = 4
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"JZ" = (
+/obj/structure/table/steel,
+/obj/machinery/light/small/emergency{
+	dir = 8
+	},
+/obj/fire,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Ko" = (
+/obj/machinery/light/small/emergency{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"KM" = (
+/obj/structure/sign/warning/high_voltage,
+/turf/wall/concrete,
+/area/cynosure_submap/DemonPool)
+"KR" = (
+/obj/effect/gibspawner/human,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Lh" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/door/cult,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Ll" = (
+/obj/machinery/door/window/westright,
+/obj/structure/salvage/data,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Lu" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DemonPool)
+"Lx" = (
+/obj/structure/table,
+/obj/structure/flora/pottedplant/overgrown{
+	pixel_y = 12
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"LD" = (
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"MB" = (
+/obj/machinery/door/airlock/science,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"NI" = (
+/obj/effect/decal/cleanable/blood,
+/obj/structure/hygiene/toilet,
+/mob/living/simple_animal/hostile/revenant/cult,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Oo" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 8
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/DemonPool)
+"OK" = (
+/obj/structure/closet/crate/trashcart,
+/obj/random/contraband,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/turf/floor/dirt,
+/area/cynosure_submap/DemonPool)
+"OZ" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/structure/rack,
+/obj/random/maintenance,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"Pu" = (
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"PC" = (
+/obj/structure/bed/sofa/right/black{
+	dir = 1
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"PG" = (
+/obj/machinery/floodlight,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"Qq" = (
+/obj/structure/salvage/data,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning/full,
+/obj/machinery/door/window/southleft,
+/obj/machinery/door/window/northleft,
+/obj/machinery/light/small/emergency{
+	dir = 4
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"Qr" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5
+	},
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DemonPool)
+"Qv" = (
+/obj/structure/table/steel,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Qz" = (
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Ro" = (
+/obj/structure/rack,
+/obj/item/clothing/gloves/latex,
+/obj/item/clothing/glasses/science,
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 1
+	},
+/obj/effect/floor_decal/rust,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"RL" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 10
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DemonPool)
+"RP" = (
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 4
+	},
+/obj/effect/floor_decal/rust,
+/obj/fire,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"Sx" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/random/vendor/food,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"Tg" = (
+/obj/structure/closet/emcloset,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"Tt" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"Vf" = (
+/obj/structure/loot_pile/surface/bones,
+/obj/random/maintenance/security,
+/obj/random/scrapped_laser,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Vk" = (
+/obj/machinery/door/blast/regular/open,
+/obj/structure/grille/cult,
+/obj/item/shard,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"VK" = (
+/turf/wall/concrete/reinforced,
+/area/cynosure_submap/DemonPool)
+"WV" = (
+/obj/effect/floor_decal/corner/purple/border,
+/obj/item/shard,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"Xe" = (
+/obj/structure/salvage/computer_os,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"XB" = (
+/obj/effect/decal/cleanable/ash,
+/obj/effect/gibspawner/human,
+/obj/item/shard,
+/mob/living/simple_animal/hostile/revenant/cult,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"XJ" = (
+/obj/machinery/port_gen/pacman,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/floor/plating,
+/area/cynosure_submap/DemonPool)
+"XP" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/ash,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Yk" = (
+/obj/structure/chair/office/dark{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/ash,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"Yy" = (
+/obj/structure/loot_pile/surface/bones,
+/obj/item/sword/cultblade,
+/obj/item/clothing/suit/cultrobes,
+/mob/living/simple_animal/hostile/creature/cult,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+"YK" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"Zc" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DemonPool)
+"Zj" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/structure/bed/sofa/left/black{
+	dir = 1
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure_submap/DemonPool)
+"ZU" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/mob/living/simple_animal/hostile/revenant/cult,
+/obj/effect/floor_decal/industrial/warning,
+/turf/floor/cult,
+/area/cynosure_submap/DemonPool)
+
+(1,1,1) = {"
+eW
+eW
+eW
+eW
+eV
+eV
+eW
+eW
+eW
+eW
+eW
+gF
+gF
+eW
+eW
+eV
+eV
+eV
+eV
+eV
+eV
+eW
+eW
+eW
+eW
+"}
+(2,1,1) = {"
+eW
+Hb
+Hb
+Jo
+Jo
+Jo
+Jo
+Hb
+vJ
+hZ
+eM
+Oo
+JP
+vJ
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Hb
+Hb
+eW
+"}
+(3,1,1) = {"
+eW
+Hb
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+zU
+zZ
+AF
+VK
+Jo
+VK
+VK
+eR
+eR
+eR
+eR
+eR
+eR
+Jo
+Hb
+eW
+"}
+(4,1,1) = {"
+eW
+Hb
+Jo
+Jo
+jX
+DY
+Jo
+Jo
+Jo
+VK
+Zc
+RL
+VK
+VK
+eR
+JX
+JZ
+Qz
+CY
+IP
+zS
+eR
+Jo
+Jo
+eW
+"}
+(5,1,1) = {"
+eW
+Jo
+Jo
+vJ
+mp
+vJ
+OK
+Jo
+VK
+VK
+rh
+fW
+VK
+VK
+Xe
+vw
+vW
+qQ
+vv
+JB
+jt
+eR
+Jo
+Jo
+eV
+"}
+(6,1,1) = {"
+eW
+vJ
+mp
+vJ
+vJ
+vJ
+VK
+VK
+VK
+VK
+zZ
+Lu
+VK
+VK
+Ro
+lG
+Qz
+pH
+Hg
+qQ
+bb
+eR
+Jo
+Jo
+eV
+"}
+(7,1,1) = {"
+eW
+Jo
+Jo
+jX
+vJ
+vJ
+VK
+EQ
+lr
+de
+Tg
+YK
+Lx
+de
+Fq
+lG
+pE
+CS
+eR
+eR
+eR
+eR
+VK
+Jo
+eV
+"}
+(8,1,1) = {"
+eW
+Jo
+Jo
+Jo
+jX
+mp
+VK
+oi
+iq
+bc
+lG
+zi
+YK
+MB
+cn
+lG
+Qv
+lG
+LD
+tq
+BO
+ag
+VK
+Jo
+eW
+"}
+(9,1,1) = {"
+eW
+Jo
+Jo
+Jo
+VK
+Ax
+VK
+de
+pX
+de
+Sx
+lG
+lG
+de
+tC
+zI
+Qq
+RP
+au
+VK
+Qr
+hr
+VK
+Jo
+eW
+"}
+(10,1,1) = {"
+eW
+Jo
+Jo
+VK
+VK
+DZ
+VK
+NI
+yW
+de
+bz
+lG
+PG
+VK
+eR
+VK
+eR
+eR
+eR
+eR
+Lh
+eR
+VK
+Hb
+eW
+"}
+(11,1,1) = {"
+eW
+Hb
+Jo
+VK
+OZ
+DZ
+VK
+AH
+Iu
+de
+YK
+lG
+Zj
+VK
+eR
+eR
+KR
+Vf
+Qz
+sM
+jG
+Qz
+eR
+Jo
+eW
+"}
+(12,1,1) = {"
+eW
+Hb
+Jo
+VK
+hW
+DZ
+VK
+de
+Fu
+de
+lG
+lG
+PC
+VK
+eR
+jK
+JK
+sb
+Xe
+Qz
+bo
+JM
+eR
+Jo
+eV
+"}
+(13,1,1) = {"
+eW
+Hb
+Jo
+VK
+VK
+DZ
+VK
+dG
+qc
+yv
+lG
+YK
+JV
+VK
+mO
+XP
+mO
+mO
+Hq
+on
+zi
+Hl
+eR
+Jo
+eV
+"}
+(14,1,1) = {"
+eW
+Hb
+Jo
+Jo
+VK
+gt
+VK
+dG
+YK
+lG
+lG
+lG
+mX
+VK
+Vk
+qb
+hP
+eR
+zj
+Qz
+hV
+WV
+eR
+Jo
+eV
+"}
+(15,1,1) = {"
+eW
+Hb
+Hb
+Jo
+VK
+Pu
+VK
+de
+Ax
+KM
+de
+pb
+xl
+VK
+es
+XB
+Yy
+oN
+si
+Qz
+hQ
+Yk
+eR
+Jo
+eV
+"}
+(16,1,1) = {"
+eW
+Hb
+Jo
+Jo
+VK
+Pu
+VK
+md
+DZ
+qa
+de
+de
+de
+VK
+ZU
+mQ
+Ag
+Dj
+zj
+qQ
+lo
+Hl
+eR
+Jo
+eV
+"}
+(17,1,1) = {"
+eW
+Hb
+Jo
+Jo
+VK
+bw
+Ax
+Pu
+Pu
+yS
+de
+Tt
+Pu
+VK
+vk
+vA
+hF
+hO
+zj
+Qz
+hQ
+Yk
+eR
+Jo
+eV
+"}
+(18,1,1) = {"
+eW
+Jo
+Jo
+Jo
+VK
+DZ
+VK
+it
+Ko
+XJ
+de
+sZ
+sC
+VK
+hO
+hO
+Fe
+eR
+si
+KR
+Qv
+Hl
+eR
+Jo
+eV
+"}
+(19,1,1) = {"
+eW
+Jo
+Jo
+vJ
+ay
+Pu
+VK
+VK
+VK
+VK
+VK
+VK
+VK
+VK
+mU
+Br
+JN
+JN
+kc
+bO
+DE
+Hh
+VK
+Jo
+eV
+"}
+(20,1,1) = {"
+eW
+Hb
+vJ
+vJ
+VK
+Pu
+Pu
+Bb
+Pu
+DZ
+DZ
+DZ
+lV
+VK
+eR
+Qz
+aj
+jS
+Xe
+qQ
+bo
+Hl
+eR
+Jo
+eV
+"}
+(21,1,1) = {"
+eW
+vJ
+Jo
+Jo
+VK
+VK
+VK
+ee
+zs
+DZ
+VK
+ay
+VK
+VK
+eR
+eR
+Qz
+bo
+jK
+bh
+zI
+qQ
+eR
+Jo
+eW
+"}
+(22,1,1) = {"
+eW
+Jo
+Jo
+Jo
+Jo
+Jo
+VK
+VK
+VK
+VK
+VK
+vJ
+Jo
+VK
+VK
+eR
+Ll
+Ah
+nH
+eR
+VK
+VK
+VK
+Jo
+eV
+"}
+(23,1,1) = {"
+eW
+Hb
+Hb
+Hb
+Hb
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+vJ
+Jo
+Jo
+Jo
+eR
+eR
+eR
+eR
+eR
+Jo
+Jo
+Jo
+Jo
+eV
+"}
+(24,1,1) = {"
+eW
+Hb
+Hb
+CV
+Hb
+Hb
+Jo
+Jo
+Jo
+Jo
+Jo
+vJ
+vJ
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+eW
+"}
+(25,1,1) = {"
+eW
+eW
+eW
+eW
+eW
+eW
+eW
+eV
+eV
+eW
+gF
+gF
+eW
+eW
+eW
+eW
+eW
+eV
+eV
+eV
+eV
+eW
+eW
+eW
+eW
+"}

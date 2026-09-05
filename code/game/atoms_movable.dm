@@ -4,18 +4,19 @@
 	glide_size = 8
 	abstract_type = /atom/movable
 
-	var/can_buckle = 0
+	var/max_buckled_mobs = 0 // Maximum amount of mobs that can be buckled to this atom.
 	var/buckle_movable = 0
 	var/buckle_allow_rotation = 0
 	var/buckle_layer_above = FALSE
 	var/buckle_dir = 0
 	var/buckle_lying = -1             // bed-like behavior, forces mob to lie or stand if buckle_lying != -1
 	/// A list or JSON-encoded list of pixel offsets to use on a mob buckled to this atom. TRUE to use this atom's pixel shifts, null for no pixel shift control.
-	var/buckle_pixel_shift            // ex. @'{"x":0,"y":0,"z":0}'
 	var/buckle_require_restraints = 0 // require people to be cuffed before being able to buckle. eg: pipes
 	var/buckle_require_same_tile = FALSE
 	var/buckle_sound
-	var/mob/living/buckled_mob = null
+
+	VAR_PROTECTED/_buckle_pixel_shift            // ex. @'{"x":0,"y":0,"z":0}' - can be a list for atoms with multiple buckled mobs.
+	VAR_PROTECTED/list/mob/living/_buckled_mobs
 
 	var/movable_flags
 	var/last_move = null
@@ -45,6 +46,23 @@
 
 	// Damage type from using or throwing this atom.
 	var/atom_damage_type = BRUTE
+
+/atom/movable/proc/set_buckled_pixel_shift(new_offsets)
+	if(_buckle_pixel_shift == new_offsets)
+		return FALSE
+	_buckle_pixel_shift = new_offsets
+	for(var/mob/buckle_mob in get_buckled_mobs())
+		buckle_mob.reset_offsets()
+
+/atom/movable/proc/get_buckled_pixel_shift(index = 1)
+	if(islist(_buckle_pixel_shift) && length(_buckle_pixel_shift) && !(num2text(NORTH) in _buckle_pixel_shift)) // shit check for whether not this list is assoc
+		if(index < 1 || index > length(_buckle_pixel_shift))
+			index = 1
+		return _buckle_pixel_shift[index]
+	return _buckle_pixel_shift
+
+/atom/movable/proc/get_buckled_position(mob/buckled)
+	return islist(_buckled_mobs) ? clamp(_buckled_mobs.Find(buckled), 1, length(_buckled_mobs)) : 1
 
 // This proc determines if the instance is preserved when the process() despawn of crypods occurs.
 /atom/movable/proc/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
@@ -88,9 +106,9 @@
 
 /atom/movable/attack_hand(mob/user)
 	// Unbuckle anything buckled to us.
-	if(!can_buckle || !buckled_mob || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+	if(!max_buckled_mobs || !has_buckled_mob() || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
 		return ..()
-	user_unbuckle_mob(user)
+	user_unbuckle_mob(user, ((user in get_buckled_mobs()) ? user : null))
 	return TRUE
 
 /atom/movable/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
@@ -222,24 +240,26 @@
 	else if (isturf(loc) && (!origin || !was_below_z_turf) && MOVABLE_SHALL_MIMIC(src))
 		SSzcopy.discover_movable(src)
 
-	if(buckled_mob)
+	var/list/buckled_mobs = get_buckled_mobs()
+	if(length(buckled_mobs))
 		if(isturf(loc))
-			buckled_mob.glide_size = glide_size // Setting loc apparently does animate with glide size.
-			buckled_mob.forceMove(loc)
-			refresh_buckled_mob(0)
+			for(var/mob/buckle_mob in buckled_mobs)
+				buckle_mob.glide_size = glide_size // Setting loc apparently does animate with glide size.
+				buckle_mob.forceMove(loc)
+			refresh_buckled_mobs(0)
 		else
-			unbuckle_mob()
+			unbuckle_mobs()
 
 /atom/movable/set_dir(ndir)
 	. = ..()
 	if(.)
-		refresh_buckled_mob(0)
+		refresh_buckled_mobs(0)
 
-/atom/movable/proc/refresh_buckled_mob(var/delay_offset_anim = 4)
-	if(buckled_mob)
-		buckled_mob.set_dir(buckle_dir || dir)
-		buckled_mob.reset_offsets(delay_offset_anim)
-		buckled_mob.reset_plane_and_layer()
+/atom/movable/proc/refresh_buckled_mobs(var/delay_offset_anim = 4)
+	for(var/mob/buckle_mob in get_buckled_mobs())
+		buckle_mob.set_dir(buckle_dir || dir)
+		buckle_mob.reset_offsets(delay_offset_anim)
+		buckle_mob.reset_plane_and_layer()
 
 /atom/movable/Move(...)
 
@@ -249,13 +269,13 @@
 
 	if(.)
 
-		if(buckled_mob)
-			if(isturf(loc))
-				buckled_mob.glide_size = glide_size // Setting loc apparently does animate with glide size.
-				buckled_mob.forceMove(loc)
-				refresh_buckled_mob(0)
-			else
-				unbuckle_mob()
+		if(isturf(loc))
+			for(var/mob/buckle_mob in get_buckled_mobs())
+				buckle_mob.glide_size = glide_size // Setting loc apparently does animate with glide size.
+				buckle_mob.forceMove(loc)
+			refresh_buckled_mobs(0)
+		else
+			unbuckle_mobs()
 
 		if(!loc && event_listeners?[/decl/observ/moved])
 			raise_event_non_global(/decl/observ/moved, old_loc, null)
@@ -375,10 +395,10 @@
 	return
 
 /atom/movable/proc/get_mob()
-	return buckled_mob
+	return get_buckled_mob()
 
 /atom/movable/proc/can_buckle_mob(var/mob/living/dropping)
-	. = (can_buckle && istype(dropping) && !dropping.buckled && !dropping.anchored && !dropping.buckled_mob && !buckled_mob)
+	. = (max_buckled_mobs && istype(dropping) && !dropping.buckled && !dropping.anchored && !dropping.has_buckled_mob() && length(get_buckled_mobs()) < max_buckled_mobs)
 
 /atom/movable/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
@@ -386,65 +406,74 @@
 		user_buckle_mob(dropping, user)
 		return TRUE
 
-/atom/movable/proc/buckle_mob(mob/living/M)
+/atom/movable/proc/buckle_mob(mob/living/buckling_mob)
 
-	if(buckled_mob) //unless buckled_mob becomes a list this can cause problems
+	var/list/buckle_mobs = get_buckled_mobs()
+	if(length(buckle_mobs) >= max_buckled_mobs || (buckling_mob in buckle_mobs))
 		return FALSE
 
-	if(!istype(M) || (M.loc != loc) || M.buckled || LAZYLEN(M.pinned) || (buckle_require_restraints && !M.restrained()))
+	if(!istype(buckling_mob) || (buckling_mob.loc != loc) || buckling_mob.buckled || LAZYLEN(buckling_mob.pinned) || (buckle_require_restraints && !buckling_mob.restrained()))
 		return FALSE
 
-	M.buckled = src
-	M.facing_dir = null
+	buckling_mob.buckled = src
+	buckling_mob.facing_dir = null
 	if(!buckle_allow_rotation)
-		M.set_dir(buckle_dir ? buckle_dir : dir)
-	M.update_posture()
-	M.update_floating()
-	buckled_mob = M
+		buckling_mob.set_dir(buckle_dir ? buckle_dir : dir)
+	buckling_mob.update_posture()
+	buckling_mob.update_floating()
+	add_buckled_mob(buckling_mob)
 
 	if(buckle_sound)
 		playsound(src, buckle_sound, 20)
 
-	post_buckle_mob(M)
+	post_buckle_mob(buckling_mob)
 	return TRUE
 
-/atom/movable/proc/unbuckle_mob()
-	if(buckled_mob && buckled_mob.buckled == src)
-		. = buckled_mob
-		buckled_mob.buckled = null
-		buckled_mob.anchored = initial(buckled_mob.anchored)
-		buckled_mob.update_posture()
-		buckled_mob.update_floating()
-		buckled_mob = null
-		post_buckle_mob(.)
+/atom/movable/proc/unbuckle_mobs()
+	while(has_buckled_mob())
+		unbuckle_mob()
 
-/atom/movable/proc/post_buckle_mob(mob/living/M)
-	if(M)
-		M.reset_offsets(4)
-		M.reset_plane_and_layer()
-	if(buckled_mob && buckled_mob != M)
-		refresh_buckled_mob()
+/atom/movable/proc/unbuckle_mob(mob/unbuckling)
+	unbuckling ||= pick(get_buckled_mobs())
+	if(!istype(unbuckling) || unbuckling.buckled != src || !(unbuckling in get_buckled_mobs()))
+		return
+	. = unbuckling
+	unbuckling.buckled = null
+	unbuckling.anchored = initial(unbuckling.anchored)
+	unbuckling.update_posture()
+	unbuckling.update_floating()
+	remove_buckled_mob(unbuckling)
+	post_buckle_mob(.)
 
-/atom/movable/proc/user_buckle_mob(mob/living/M, mob/user)
-	if(M != user && user.incapacitated())
+/atom/movable/proc/post_buckle_mob(mob/living/buckling_mob)
+	if(buckling_mob)
+		buckling_mob.reset_offsets(4)
+		buckling_mob.reset_plane_and_layer()
+	if(has_buckled_mob() && !(buckling_mob in get_buckled_mobs()))
+		refresh_buckled_mobs()
+
+/atom/movable/proc/user_buckle_mob(mob/living/buckling_mob, mob/user)
+	if(length(get_buckled_mobs()) >= max_buckled_mobs)
 		return FALSE
-	if(M == buckled_mob)
+	if(buckling_mob != user && user.incapacitated())
 		return FALSE
-	if(!M.can_be_buckled(user))
+	if(buckling_mob in get_buckled_mobs())
+		return FALSE
+	if(!buckling_mob.can_be_buckled(user))
 		return FALSE
 
 	add_fingerprint(user)
-	unbuckle_mob()
+	unbuckle_mob(buckling_mob)
 
-	//can't buckle unless you share locs so try to move M to the obj if buckle_require_same_tile turned off.
-	if(M.loc != src.loc)
+	//can't buckle unless you share locs so try to move buckling_mob to the obj if buckle_require_same_tile turned off.
+	if(buckling_mob.loc != src.loc)
 		if(buckle_require_same_tile)
 			return FALSE
-		M.dropInto(loc)
+		buckling_mob.dropInto(loc)
 
-	. = buckle_mob(M)
+	. = buckle_mob(buckling_mob)
 	if(.)
-		show_buckle_message(M, user)
+		show_buckle_message(buckling_mob, user)
 
 /atom/movable/proc/show_buckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
@@ -461,14 +490,15 @@
 			SPAN_NOTICE("You hear metal clanking.")
 		)
 
-/atom/movable/proc/user_unbuckle_mob(mob/user)
-	var/mob/living/M = unbuckle_mob()
-	if(M)
-		show_unbuckle_message(M, user)
-		for(var/obj/item/grab/grab as anything in (M.grabbed_by|grabbed_by))
+/atom/movable/proc/user_unbuckle_mob(mob/user, mob/living/unbuckling_mob)
+	unbuckling_mob ||= unbuckle_mob()
+	if(unbuckling_mob)
+		show_unbuckle_message(unbuckling_mob, user)
+		for(var/obj/item/grab/grab as anything in (unbuckling_mob.grabbed_by|grabbed_by))
 			qdel(grab)
 		add_fingerprint(user)
-	return M
+		unbuckle_mob(unbuckling_mob)
+	return unbuckling_mob
 
 /atom/movable/proc/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
 	if(buckled == buckling)
@@ -488,6 +518,26 @@
 /atom/movable/proc/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
 	return
 
+/atom/movable/proc/has_buckled_mob()
+	return length(get_buckled_mobs()) > 0
+
+/atom/movable/proc/get_buckled_mob(index = 1, mob/user)
+	// TODO: if user is a client mob, have them select a grabbed mob to remove.
+	// This will need refactoring as this proc is used a lot in attack_hand() etc.
+	var/list/buckle_mobs = get_buckled_mobs()
+	if(!islist(buckle_mobs) || index < 0 || index > length(buckle_mobs))
+		return null
+	return buckle_mobs[index]
+
+/atom/movable/proc/get_buckled_mobs()
+	return _buckled_mobs
+
+/atom/movable/proc/add_buckled_mob(mob/buckling_mob)
+	LAZYDISTINCTADD(_buckled_mobs, buckling_mob)
+
+/atom/movable/proc/remove_buckled_mob(mob/buckling_mob)
+	LAZYREMOVE(_buckled_mobs, buckling_mob)
+
 /atom/movable/singularity_act()
 	if(!simulated)
 		return 0
@@ -503,7 +553,7 @@
 /atom/movable/proc/crossed_mob(var/mob/living/victim)
 	return
 
-/atom/movable/proc/get_object_size()
+/atom/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
 
 /atom/movable/get_manual_heat_source_coefficient()

@@ -23,3 +23,8 @@
 	. = ..()
 	if(_tajaran_onmob_icon)
 		LAZYSET(sprite_sheets, BODYTYPE_TAJARAN, _tajaran_onmob_icon)
+
+/obj/item/remains/tajaran
+	desc = "They look like Tajaran remains. They're surprisingly small."
+	icon_state = "remainstajaran"
+	icon = 'mods/species/tajaran/icons/remains.dmi'

@@ -1,0 +1,263 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"b" = (
+/mob/living/simple_animal/hostile/beast/shantak,
+/turf/template_noop,
+/area/cynosure_submap/WolfDen)
+"c" = (
+/obj/item/bone,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/gibspawner/human,
+/obj/random/maintenance/engineering,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"e" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/junk,
+/obj/random/maintenance/cargo,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"i" = (
+/obj/random/maintenance/security,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"j" = (
+/obj/random/gun/random,
+/obj/random/junk,
+/turf/floor/rock,
+/area/cynosure_submap/WolfDen)
+"m" = (
+/obj/item/bone/ribs,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"o" = (
+/turf/wall/natural,
+/area/cynosure_submap/WolfDen)
+"q" = (
+/obj/structure/loot_pile/surface/bones,
+/obj/random/maintenance/cargo,
+/turf/floor/rock,
+/area/cynosure_submap/WolfDen)
+"r" = (
+/obj/random/humanoidremains,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"u" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"v" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"w" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/junk,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"y" = (
+/obj/random/maintenance/security,
+/turf/floor/rock,
+/area/cynosure_submap/WolfDen)
+"z" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"A" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/maintenance/security,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"C" = (
+/mob/living/simple_animal/hostile/beast/shantak,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"D" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/junk,
+/turf/floor/rock,
+/area/cynosure_submap/WolfDen)
+"G" = (
+/obj/item/bone/arm,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"J" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/junk,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"K" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"M" = (
+/obj/random/maintenance/cargo,
+/turf/floor/rock,
+/area/cynosure_submap/WolfDen)
+"O" = (
+/obj/random/gun/random,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"Q" = (
+/obj/random/maintenance,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"S" = (
+/obj/item/bone,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/rock,
+/area/cynosure_submap/WolfDen)
+"T" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/maintenance/engineering,
+/turf/floor/rock,
+/area/cynosure_submap/WolfDen)
+"U" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/maintenance/engineering,
+/obj/item/clothing/head/fedora,
+/turf/floor/rock,
+/area/cynosure_submap/WolfDen)
+"V" = (
+/obj/random/boulder,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"W" = (
+/obj/structure/loot_pile/surface/bones,
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/maintenance/cargo,
+/turf/floor/dirt,
+/area/cynosure_submap/WolfDen)
+"Y" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/mob/living/simple_animal/hostile/beast/shantak/leader,
+/turf/floor/rock,
+/area/cynosure_submap/WolfDen)
+"Z" = (
+/turf/template_noop,
+/area/cynosure_submap/WolfDen)
+
+(1,1,1) = {"
+b
+V
+o
+o
+o
+o
+o
+o
+o
+C
+"}
+(2,1,1) = {"
+Z
+o
+o
+o
+C
+O
+C
+o
+o
+o
+"}
+(3,1,1) = {"
+Z
+o
+o
+i
+S
+W
+D
+y
+o
+o
+"}
+(4,1,1) = {"
+Z
+o
+v
+A
+w
+e
+J
+z
+r
+o
+"}
+(5,1,1) = {"
+Z
+o
+u
+o
+r
+T
+G
+q
+Y
+o
+"}
+(6,1,1) = {"
+Z
+o
+K
+o
+o
+Q
+M
+c
+U
+o
+"}
+(7,1,1) = {"
+o
+o
+u
+o
+o
+o
+m
+j
+a
+o
+"}
+(8,1,1) = {"
+Z
+z
+v
+z
+o
+o
+o
+C
+o
+o
+"}
+(9,1,1) = {"
+a
+K
+z
+o
+o
+o
+o
+o
+o
+a
+"}
+(10,1,1) = {"
+Z
+o
+o
+o
+o
+C
+o
+o
+V
+Z
+"}

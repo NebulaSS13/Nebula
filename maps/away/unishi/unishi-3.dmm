@@ -526,7 +526,7 @@
 /turf/floor,
 /area/unishi/living)
 "bL" = (
-/obj/structure/janicart,
+/obj/structure/vehicle/janicart,
 /obj/item/key,
 /obj/structure/hygiene/sink/kitchen{
 	dir = 8;

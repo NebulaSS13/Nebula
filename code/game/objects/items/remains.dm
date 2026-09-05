@@ -1,7 +1,7 @@
 /obj/item/remains
 	name = "remains"
 	gender = PLURAL
-	icon = 'icons/effects/blood.dmi'
+	icon = 'icons/effects/remains.dmi'
 	icon_state = "remains"
 	anchored = FALSE
 	material = /decl/material/solid/organic/bone
@@ -9,10 +9,28 @@
 /obj/item/remains/human
 	desc = "They look like human remains. They have a strange aura about them."
 
-/obj/item/remains	// Apparently used by cult somewhere?
-	desc = "They look like human remains. They have a strange aura about them."
-	icon = 'icons/effects/blood.dmi'
-	icon_state = "remains"
+/obj/item/remains/ribcage
+	desc = "They look like animal remains of some sort... You hope."
+	icon_state = "remainsribcage"
+
+/obj/item/remains/deer
+	desc = "They look like the remains of a large herbivore, picked clean."
+	icon_state = "remainsdeer"
+
+/obj/item/remains/posi
+	desc = "This looks like part of an old humanoid synthetic. Hopefully it wasn't sentient."
+	icon_state = "remainsposi"
+
+/obj/item/remains/mummy1
+	name = "mummified remains"
+	desc = "They look like human remains. They've been here a long time."
+	icon_state = "mummified1"
+
+/obj/item/remains/mummy2
+	name = "mummified remains"
+	desc = "They look like human remains. They've been here a long time."
+	icon_state = "mummified2"
+
 
 /obj/item/remains/xeno
 	desc = "They look like the remains of something... alien. They have a strange aura about them."

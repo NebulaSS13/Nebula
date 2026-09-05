@@ -96,12 +96,11 @@
 	opacity = FALSE
 	mouse_opacity = MOUSE_OPACITY_NORMAL
 	anchored = TRUE
-	can_buckle = 0 //no manual buckling or unbuckling
+	max_buckled_mobs = 0 //no manual buckling or unbuckling
 
 	max_health = 25
 	var/countdown = 15
 	var/temporary = TRUE
-	var/mob/living/captured = null
 	var/min_free_time = 50
 	var/max_free_time = 85
 
@@ -123,22 +122,21 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/energy_net/Destroy()
-	if(captured)
-		unbuckle_mob()
+	unbuckle_mobs()
 	STOP_PROCESSING(SSobj, src)
-	captured = null
 	return ..()
 
 /obj/effect/energy_net/Process()
-	if(!captured)
+	if(!has_buckled_mob())
 		qdel(src)
 		return PROCESS_KILL
 	if(temporary)
 		countdown--
-	if(captured.buckled != src)
-		current_health = 0
-	if(get_turf(src) != get_turf(captured))  //just in case they somehow teleport around or
-		countdown = 0
+	for(var/mob/captured in get_buckled_mobs())
+		if(captured.buckled != src)
+			current_health = 0
+		if(get_turf(src) != get_turf(captured))  //just in case they somehow teleport around or
+			countdown = 0
 	if(countdown <= 0)
 		current_health = 0
 	healthcheck()
@@ -146,26 +144,26 @@
 /obj/effect/energy_net/Move()
 	. = ..()
 
-	if(buckled_mob)
-		buckled_mob.forceMove(src.loc)
-	else
+	if(!has_buckled_mob())
 		countdown = 0
+	else
+		for(var/mob/buckle_mob in get_buckled_mobs())
+			buckle_mob.forceMove(src.loc)
 
 
 /obj/effect/energy_net/proc/capture_mob(mob/living/M)
-	captured = M
 	if(M.buckled)
-		M.buckled.unbuckle_mob()
+		M.buckled.unbuckle_mob(M)
 	buckle_mob(M)
 	return 1
 
-/obj/effect/energy_net/post_buckle_mob(mob/living/M)
+/obj/effect/energy_net/post_buckle_mob(mob/living/buckling_mob)
 	..()
-	if(buckled_mob)
+	if(buckling_mob in get_buckled_mobs())
 		layer = ABOVE_HUMAN_LAYER
-		visible_message("\The [M] was caught in [src]!")
+		visible_message("\The [buckling_mob] was caught in [src]!")
 	else
-		to_chat(M,"<span class='warning'>You are free of the net!</span>")
+		to_chat(buckling_mob, SPAN_WARNING("You are free of the net!"))
 		reset_plane_and_layer()
 
 /obj/effect/energy_net/proc/healthcheck()
@@ -205,9 +203,8 @@
 	healthcheck()
 	return TRUE
 
-/obj/effect/energy_net/user_unbuckle_mob(mob/user)
+/obj/effect/energy_net/user_unbuckle_mob(mob/user, mob/living/unbuckling_mob)
 	return escape_net(user)
-
 
 /obj/effect/energy_net/proc/escape_net(mob/user)
 	set waitfor = FALSE

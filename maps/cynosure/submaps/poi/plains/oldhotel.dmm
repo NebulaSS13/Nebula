@@ -1,0 +1,1368 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ai" = (
+/obj/random/trash,
+/turf/floor/carpet/purple,
+/area/cynosure_submap/oldhotel)
+"aJ" = (
+/obj/item/towel/random,
+/obj/item/towel/random,
+/obj/structure/table,
+/obj/item/firstaid/regular,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"bb" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/item/multitool,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"bQ" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"bW" = (
+/obj/item/shard,
+/turf/template_noop,
+/area/cynosure_submap/oldhotel)
+"cA" = (
+/obj/structure/hygiene/sink/kitchen,
+/turf/wall/wood,
+/area/cynosure_submap/oldhotel)
+"cZ" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/junk,
+/turf/floor/carpet/orange,
+/area/cynosure_submap/oldhotel)
+"da" = (
+/obj/structure/bed/sofa/right/teal,
+/turf/floor/carpet/blue,
+/area/cynosure_submap/oldhotel)
+"dc" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/orange,
+/area/cynosure_submap/oldhotel)
+"dn" = (
+/obj/structure/table/wood,
+/obj/item/flame/candle/infinite/red,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"dr" = (
+/obj/item/stack/material/log/mapped/sif,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"dz" = (
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/obj/structure/mirror{
+	dir = 4;
+	pixel_x = -28
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"dL" = (
+/obj/structure/window/reinforced/full,
+/obj/structure/grille,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"eK" = (
+/obj/structure/fire_source/firepit/sif,
+/obj/structure/grille,
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"go" = (
+/obj/structure/door/iron,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"gA" = (
+/turf/template_noop,
+/area/template_noop)
+"gM" = (
+/obj/machinery/cooker/oven,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"hc" = (
+/obj/random/trash,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"hp" = (
+/obj/random/junk,
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/oldhotel)
+"hQ" = (
+/turf/wall/wood,
+/area/cynosure_submap/oldhotel)
+"if" = (
+/obj/structure/bed/sofa/left/teal{
+	dir = 8
+	},
+/turf/floor/carpet/blue,
+/area/cynosure_submap/oldhotel)
+"iU" = (
+/obj/structure/table/wood,
+/obj/item/plate/tray,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"ja" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/junk,
+/turf/floor/carpet/purple,
+/area/cynosure_submap/oldhotel)
+"je" = (
+/obj/structure/closet/cabinet,
+/obj/item/binoculars,
+/obj/random/contraband,
+/obj/random/contraband,
+/obj/random/maintenance/medical,
+/obj/random/cash,
+/obj/random/drinkbottle,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/maintenance,
+/obj/random/maintenance,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"jO" = (
+/obj/structure/bed/sofa/middle/teal,
+/turf/floor/carpet/blue,
+/area/cynosure_submap/oldhotel)
+"jS" = (
+/obj/structure/closet/cabinet,
+/obj/random/maintenance/medical,
+/obj/random/cash,
+/obj/random/smokes,
+/obj/random/firstaid,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/maintenance,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"kh" = (
+/turf/floor/carpet/blue,
+/area/cynosure_submap/oldhotel)
+"kw" = (
+/turf/template_noop,
+/area/cynosure_submap/oldhotel)
+"kI" = (
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/oldhotel)
+"kW" = (
+/obj/structure/table/wood,
+/obj/item/chems/condiment/small/saltshaker,
+/obj/item/chems/condiment/small/peppermill{
+	pixel_x = 3
+	},
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"lj" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/rollingpin,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"ly" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/mime,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"lZ" = (
+/obj/structure/table/wood,
+/obj/item/plate/tray,
+/turf/floor/carpet/blue,
+/area/cynosure_submap/oldhotel)
+"mr" = (
+/obj/structure/table/wood,
+/obj/item/cell/hyper,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"mR" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"nD" = (
+/turf/floor,
+/area/cynosure_submap/oldhotel)
+"nG" = (
+/obj/item/shard,
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"nZ" = (
+/obj/item/stack/material/plank/mapped/wood/fifty,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"op" = (
+/obj/structure/table/wood,
+/obj/random/smokes,
+/turf/floor/carpet/blue,
+/area/cynosure_submap/oldhotel)
+"pi" = (
+/obj/item/shard,
+/obj/item/shard{
+	icon_state = "medium";
+	pixel_x = 12;
+	pixel_y = 7
+	},
+/turf/template_noop,
+/area/cynosure_submap/oldhotel)
+"pn" = (
+/obj/item/shard,
+/obj/item/shard{
+	pixel_x = 7
+	},
+/turf/template_noop,
+/area/cynosure_submap/oldhotel)
+"qg" = (
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"qY" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/junk,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"rb" = (
+/obj/item/stock_parts/circuitboard/apc,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"rK" = (
+/obj/structure/table/wood,
+/obj/item/flame/candle/spent,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"rZ" = (
+/obj/item/shard{
+	icon_state = "medium"
+	},
+/turf/template_noop,
+/area/cynosure_submap/oldhotel)
+"sd" = (
+/obj/structure/hygiene/toilet,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"sV" = (
+/obj/structure/table/wood,
+/obj/random/contraband,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"tn" = (
+/obj/structure/door/wood,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"tz" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/rd,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"tE" = (
+/obj/structure/table/wood,
+/obj/random/coin,
+/obj/item/chems/rag,
+/turf/floor/carpet/blue,
+/area/cynosure_submap/oldhotel)
+"tV" = (
+/obj/structure/chair/wood{
+	dir = 1
+	},
+/obj/item/shard,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"uF" = (
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"uU" = (
+/obj/structure/closet/cabinet,
+/obj/random/maintenance/medical,
+/obj/random/plush/carp,
+/obj/random/smokes,
+/obj/random/drinkbottle,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/maintenance,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"vh" = (
+/obj/structure/bed/sofa/middle/teal,
+/turf/floor/carpet/blue,
+/area/cynosure_submap/oldhotel)
+"vA" = (
+/obj/structure/table/wood,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"vM" = (
+/obj/item/shard,
+/obj/item/shard{
+	pixel_y = -6
+	},
+/obj/item/shard{
+	pixel_x = 9
+	},
+/obj/structure/grille/broken,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"vN" = (
+/obj/random/humanoidremains,
+/obj/random/humanoidremains,
+/turf/floor/wood/broken,
+/area/cynosure_submap/oldhotel)
+"vR" = (
+/obj/structure/table/wood,
+/obj/item/candelabra,
+/turf/floor/carpet/blue,
+/area/cynosure_submap/oldhotel)
+"wm" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"wK" = (
+/obj/item/shard,
+/obj/item/shard,
+/obj/item/shard{
+	icon_state = "medium";
+	pixel_x = 12;
+	pixel_y = 7
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"wV" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/chems/glass/beaker,
+/obj/item/chems/condiment/enzyme,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"wX" = (
+/obj/item/shard,
+/obj/item/shard{
+	icon_state = "medium";
+	pixel_x = 12;
+	pixel_y = 7
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"yj" = (
+/obj/random/sif/peaceful,
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"yM" = (
+/obj/item/stack/cable_coil,
+/turf/floor/carpet/purple,
+/area/cynosure_submap/oldhotel)
+"zs" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/random/junk,
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"zt" = (
+/obj/structure/noticeboard,
+/turf/wall/wood,
+/area/cynosure_submap/oldhotel)
+"zO" = (
+/obj/item/shard,
+/obj/structure/grille/broken,
+/obj/item/shard{
+	icon_state = "medium";
+	pixel_x = 12;
+	pixel_y = 7
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"zP" = (
+/obj/random/plushie,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Ac" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/knife/kitchen/cleaver,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"AO" = (
+/obj/structure/railing/mapped,
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"AU" = (
+/obj/structure/table/wood,
+/obj/item/magnetic_tape,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"AZ" = (
+/obj/structure/table/wood,
+/obj/item/flame/candle/spent,
+/obj/item/paper{
+	info = "This is a stupid tresure hunt task, that thing is not taking us anywhere. Go on and have fun finding a waste of time.";
+	name = "Wrinkled sheet of paper"
+	},
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Bt" = (
+/obj/structure/closet/cabinet,
+/obj/item/clothing/gloves/insulated,
+/obj/random/scrapped_pistol,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/maintenance,
+/obj/random/maintenance,
+/obj/random/maintenance,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Cx" = (
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"CS" = (
+/obj/item/toolbox/mechanical,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Di" = (
+/obj/structure/table/wood/reinforced,
+/obj/machinery/microwave,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"Dx" = (
+/obj/structure/table/wood/reinforced,
+/obj/random/medical,
+/obj/random/medical,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"DN" = (
+/obj/structure/chair/wood,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Es" = (
+/obj/random/junk,
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"ES" = (
+/obj/random/trash,
+/turf/floor/carpet/orange,
+/area/cynosure_submap/oldhotel)
+"Gk" = (
+/obj/structure/chair/wood{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Gr" = (
+/obj/item/frame/apc,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Gz" = (
+/obj/structure/window/reinforced/tinted{
+	dir = 8
+	},
+/obj/structure/hygiene/shower{
+	dir = 1
+	},
+/obj/structure/curtain/open/shower/medical,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"GC" = (
+/obj/random/trash,
+/obj/random/trash,
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"GN" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/cynosure_submap/oldhotel)
+"GV" = (
+/obj/structure/table/wood,
+/obj/item/box/candles/red,
+/obj/item/box/candles/red,
+/obj/item/box/candles/red,
+/obj/item/flame/fuelled/lighter/random,
+/obj/item/flame/fuelled/lighter/random,
+/obj/random/umbrella,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Ik" = (
+/obj/item/shard,
+/obj/item/shard{
+	icon_state = "medium"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"Il" = (
+/obj/structure/closet/secure_closet/freezer/kitchen{
+	locked = 0
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"IQ" = (
+/obj/structure/railing/mapped,
+/obj/structure/closet/crate/bin,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"Jq" = (
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"JT" = (
+/obj/random/junk,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"JV" = (
+/obj/structure/table/bench/sif,
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"Lg" = (
+/obj/item/shard,
+/obj/structure/grille/broken,
+/obj/item/shard{
+	icon_state = "medium"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"Mk" = (
+/obj/structure/closet/crate,
+/obj/random/action_figure,
+/obj/random/action_figure,
+/obj/random/action_figure,
+/obj/random/action_figure,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Mo" = (
+/obj/structure/railing/mapped,
+/turf/template_noop,
+/area/cynosure_submap/oldhotel)
+"Mq" = (
+/obj/structure/closet/crate,
+/obj/random/firstaid,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"MD" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/obj/structure/door/wood,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"MU" = (
+/turf/template_noop,
+/area/cynosure_submap/oldhotel)
+"Nu" = (
+/obj/random/soap,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"OQ" = (
+/obj/structure/closet/crate,
+/obj/random/cash,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Pd" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/carpet/blue3,
+/area/cynosure_submap/oldhotel)
+"PO" = (
+/obj/machinery/space_heater,
+/turf/floor/wood/broken,
+/area/cynosure_submap/oldhotel)
+"Qv" = (
+/obj/structure/table/wood,
+/obj/item/paper_bin,
+/obj/item/pen,
+/obj/item/pen,
+/obj/item/pen,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Qw" = (
+/obj/item/stool,
+/obj/random/cash,
+/obj/machinery/light/small,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"QG" = (
+/obj/structure/bed/sofa/middle/teal{
+	dir = 8
+	},
+/turf/floor/carpet/blue,
+/area/cynosure_submap/oldhotel)
+"RM" = (
+/obj/machinery/space_heater,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"RQ" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood/broken,
+/area/cynosure_submap/oldhotel)
+"Sf" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/yellow,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Sy" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"SG" = (
+/turf/floor/carpet/purple,
+/area/cynosure_submap/oldhotel)
+"SL" = (
+/obj/item/shard,
+/obj/item/shard,
+/obj/item/shard{
+	icon_state = "medium";
+	pixel_x = 12;
+	pixel_y = 7
+	},
+/turf/floor,
+/area/cynosure_submap/oldhotel)
+"SZ" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"TU" = (
+/turf/floor/wood/broken,
+/area/cynosure_submap/oldhotel)
+"Ut" = (
+/obj/structure/meat_hook,
+/turf/floor/dirt,
+/area/cynosure_submap/oldhotel)
+"Uw" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/book/manual/chef_recipes,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"UU" = (
+/obj/structure/table/wood,
+/obj/item/flame/fuelled/lighter/zippo,
+/obj/random/lipstick,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"Vf" = (
+/obj/structure/window/reinforced/tinted{
+	dir = 4
+	},
+/obj/structure/hygiene/shower{
+	dir = 1
+	},
+/obj/structure/curtain/open/shower/medical,
+/obj/random/soap,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"Vj" = (
+/turf/floor/carpet/orange,
+/area/cynosure_submap/oldhotel)
+"Wy" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"WD" = (
+/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/random/meat,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"WH" = (
+/obj/item/flashlight{
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"YI" = (
+/obj/structure/coatrack,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"YQ" = (
+/obj/item/shard,
+/obj/structure/grille/broken,
+/turf/floor/tiled,
+/area/cynosure_submap/oldhotel)
+"Zz" = (
+/obj/structure/chair/wood{
+	dir = 1
+	},
+/obj/random/maintenance,
+/turf/floor/wood,
+/area/cynosure_submap/oldhotel)
+"ZG" = (
+/obj/structure/girder,
+/turf/floor,
+/area/cynosure_submap/oldhotel)
+
+(1,1,1) = {"
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+"}
+(2,1,1) = {"
+gA
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+gA
+"}
+(3,1,1) = {"
+gA
+MU
+kw
+hQ
+hQ
+ZG
+ZG
+hQ
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+bW
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+gA
+"}
+(4,1,1) = {"
+gA
+MU
+hQ
+hQ
+Bt
+YI
+GV
+hQ
+hQ
+rZ
+nG
+hQ
+nD
+hQ
+Cx
+pn
+nD
+hQ
+hQ
+Cx
+Cx
+hQ
+hQ
+MU
+gA
+"}
+(5,1,1) = {"
+gA
+mR
+mR
+go
+TU
+TU
+WH
+hQ
+hQ
+dL
+YQ
+hQ
+ZG
+hQ
+Ik
+Lg
+ZG
+ZG
+hQ
+dL
+dL
+hQ
+hQ
+MU
+gA
+"}
+(6,1,1) = {"
+gA
+MU
+hQ
+zt
+SZ
+Qv
+SZ
+hQ
+DN
+sV
+tV
+Mq
+nD
+DN
+iU
+Gk
+OQ
+hQ
+Mk
+DN
+vA
+Gk
+hQ
+MU
+gA
+"}
+(7,1,1) = {"
+gA
+MU
+wX
+vM
+qg
+rK
+Qw
+hQ
+TU
+ES
+Vj
+SZ
+hQ
+RM
+ai
+ja
+qg
+hQ
+PO
+Pd
+hp
+qg
+ZG
+MU
+gA
+"}
+(8,1,1) = {"
+gA
+MU
+MU
+dL
+qY
+UU
+Gr
+ZG
+RM
+dc
+cZ
+SZ
+hQ
+TU
+SG
+yM
+Wy
+ZG
+vN
+kI
+Pd
+qg
+hQ
+MU
+gA
+"}
+(9,1,1) = {"
+gA
+MU
+pi
+wK
+JT
+AU
+qg
+nD
+rK
+tz
+uU
+qg
+hQ
+rK
+Sf
+jS
+SZ
+hQ
+JT
+je
+ly
+AZ
+hQ
+MU
+gA
+"}
+(10,1,1) = {"
+gA
+MU
+ZG
+hQ
+zP
+TU
+qg
+hQ
+hQ
+hQ
+hQ
+tn
+hQ
+hQ
+ZG
+hQ
+tn
+hQ
+tn
+hQ
+nD
+hQ
+hQ
+MU
+gA
+"}
+(11,1,1) = {"
+gA
+MU
+nD
+hQ
+qg
+qg
+SZ
+qg
+SZ
+JT
+tn
+qg
+hc
+SZ
+qg
+SZ
+RQ
+SZ
+SZ
+SZ
+CS
+dL
+MU
+MU
+gA
+"}
+(12,1,1) = {"
+gA
+MU
+MU
+dL
+qg
+da
+op
+lZ
+kh
+SZ
+tn
+SZ
+DN
+dn
+kW
+Gk
+bb
+DN
+kW
+dn
+Zz
+dL
+MU
+MU
+gA
+"}
+(13,1,1) = {"
+gA
+MU
+wX
+zO
+JT
+jO
+vR
+tE
+kh
+qg
+hQ
+ZG
+hQ
+nD
+ZG
+hQ
+hQ
+hQ
+hQ
+hQ
+hQ
+ZG
+nD
+MU
+gA
+"}
+(14,1,1) = {"
+gA
+MU
+MU
+dL
+qg
+vh
+QG
+QG
+if
+SZ
+go
+Jq
+rb
+lj
+Ac
+Uw
+WD
+wV
+Dx
+Di
+gM
+Il
+IQ
+MU
+gA
+"}
+(15,1,1) = {"
+gA
+MU
+hQ
+hQ
+mr
+TU
+hc
+SZ
+qg
+TU
+go
+Jq
+Cx
+Jq
+Cx
+Jq
+Sy
+Jq
+mR
+Sy
+Cx
+Jq
+Cx
+MU
+gA
+"}
+(16,1,1) = {"
+gA
+MU
+ZG
+hQ
+ZG
+hQ
+MD
+hQ
+hQ
+hQ
+cA
+Sy
+mR
+Es
+mR
+Cx
+wm
+Cx
+mR
+zs
+GC
+Cx
+AO
+MU
+gA
+"}
+(17,1,1) = {"
+gA
+MU
+hQ
+hQ
+aJ
+dz
+Sy
+Vf
+nD
+dr
+uF
+Jq
+Es
+Cx
+yj
+Cx
+Cx
+Cx
+Es
+Cx
+yj
+Cx
+AO
+MU
+gA
+"}
+(18,1,1) = {"
+gA
+MU
+MU
+hQ
+sd
+Sy
+Nu
+Gz
+hQ
+dr
+nZ
+bQ
+Cx
+Cx
+MU
+JV
+eK
+JV
+MU
+Cx
+MU
+MU
+MU
+MU
+gA
+"}
+(19,1,1) = {"
+gA
+MU
+MU
+ZG
+hQ
+ZG
+SL
+hQ
+hQ
+ZG
+hQ
+Ut
+Jq
+Cx
+MU
+MU
+Cx
+MU
+MU
+MU
+MU
+MU
+Mo
+MU
+gA
+"}
+(20,1,1) = {"
+gA
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+Cx
+Cx
+Cx
+MU
+Cx
+MU
+Cx
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+gA
+"}
+(21,1,1) = {"
+gA
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+Cx
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+GN
+MU
+gA
+"}
+(22,1,1) = {"
+gA
+MU
+GN
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+Cx
+Cx
+MU
+MU
+Cx
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+gA
+"}
+(23,1,1) = {"
+gA
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+gA
+"}
+(24,1,1) = {"
+gA
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+GN
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+MU
+gA
+"}
+(25,1,1) = {"
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+gA
+"}

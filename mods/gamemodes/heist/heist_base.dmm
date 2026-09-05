@@ -401,7 +401,7 @@
 /turf/unsimulated/floor/dark,
 /area/map_template/syndicate_mothership/raider_base)
 "bs" = (
-/obj/effect/decal/cleanable/spiderling_remains,
+/obj/effect/decal/cleanable/spider_remains,
 /turf/unsimulated/floor/plating,
 /area/map_template/syndicate_mothership/raider_base)
 "bt" = (
@@ -1162,7 +1162,7 @@
 /obj/structure/rack,
 /obj/item/grenade/empgrenade,
 /obj/item/grenade/flashbang,
-/obj/item/grenade/spawnergrenade/manhacks,
+/obj/item/grenade/spawnergrenade/viscerator,
 /obj/random/energy,
 /turf/floor/shuttle/red,
 /area/map_template/skipjack_station/start)

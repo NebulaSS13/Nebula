@@ -1,0 +1,4312 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/mob/living/simple_animal/hostile/hivebot/ranged/laser,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"ab" = (
+/mob/living/human/frame/malf/melee/sword,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"am" = (
+/turf/floor/greengrid,
+/area/cynosure_submap/DerelictEngine)
+"an" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 10
+	},
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"ap" = (
+/mob/living/simple_animal/hostile/hivebot/swarm,
+/turf/template_noop,
+/area/template_noop)
+"aG" = (
+/obj/effect/decal/cleanable/generic,
+/obj/structure/table/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"aJ" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"aO" = (
+/obj/structure/table/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"aP" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"bk" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"bl" = (
+/obj/item/shard/phoron,
+/turf/floor/rock,
+/area/template_noop)
+"bn" = (
+/obj/structure/girder,
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"bp" = (
+/obj/structure/chair/padded/purple/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"by" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 5
+	},
+/obj/structure/cable/green{
+	icon_state = "2-8"
+	},
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"bG" = (
+/obj/item/shard/phoron{
+	pixel_x = -9;
+	pixel_y = -7
+	},
+/turf/floor/rock,
+/area/template_noop)
+"bH" = (
+/obj/machinery/emitter/gyrotron,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"bN" = (
+/turf/floor/rock,
+/area/template_noop)
+"bX" = (
+/mob/living/simple_animal/hostile/hivebot/melee/armored,
+/turf/template_noop,
+/area/template_noop)
+"cE" = (
+/mob/living/simple_animal/hostile/hivebot/ranged/laser,
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"cH" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/hole{
+	dir = 4
+	},
+/obj/machinery/replicator{
+	anchored = 1
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"cQ" = (
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"cX" = (
+/obj/item/shard/phoron{
+	pixel_x = 7;
+	pixel_y = 10
+	},
+/turf/floor/rock,
+/area/template_noop)
+"db" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/hole{
+	dir = 4
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"dg" = (
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/item/shard/phoron{
+	pixel_x = 7
+	},
+/obj/item/shard/phoron{
+	pixel_x = 7;
+	pixel_y = 10
+	},
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"dh" = (
+/mob/living/simple_animal/hostile/hivebot/melee/armored/anti_laser,
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/hole{
+	dir = 4
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"dy" = (
+/obj/structure/shuttle/engine/propulsion/burst,
+/obj/structure/shuttle/engine/propulsion/burst,
+/turf/floor/rock,
+/area/cynosure_submap/DerelictEngine)
+"dC" = (
+/mob/living/simple_animal/hostile/hivebot/ranged/laser,
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"dG" = (
+/obj/machinery/door/blast,
+/obj/machinery/door/airlock/ascent,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"dL" = (
+/obj/structure/closet/ascent,
+/obj/item/implanter/compressed,
+/obj/item/stack/material/crystal/mapped/phoron/ten,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"dO" = (
+/obj/structure/table/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"dX" = (
+/obj/structure/table/ascent,
+/obj/effect/floor_decal/techfloor,
+/obj/item/clothing/suit/ascent/medical,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"el" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 9
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"eq" = (
+/obj/random/trash,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"eR" = (
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 8
+	},
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"eV" = (
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"fg" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/door/airlock/external/bolted/ascent,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"fn" = (
+/obj/item/clothing/suit/ascent,
+/obj/structure/table/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"fp" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/random/trash,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"fy" = (
+/obj/structure/cable/green{
+	icon_state = "0-4"
+	},
+/obj/item/shard/shrapnel,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"fG" = (
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/item/shard/phoron,
+/obj/item/shard/phoron{
+	pixel_x = 7
+	},
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"fH" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/mob/living/simple_animal/hostile/hivebot/ranged/heat,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"fJ" = (
+/mob/living/simple_animal/hostile/hivebot/melee/armored,
+/turf/floor/dirt,
+/area/template_noop)
+"fO" = (
+/turf/wall/ascent,
+/area/cynosure_submap/DerelictEngine)
+"fY" = (
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 1
+	},
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"gj" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 10
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"gk" = (
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/item/shard/phoron,
+/obj/item/shard/phoron{
+	pixel_x = 7;
+	pixel_y = 10
+	},
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"go" = (
+/obj/effect/decal/cleanable/generic,
+/obj/item/gun/energy/toxgun,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"gy" = (
+/turf/wall/ascent,
+/area/cynosure_submap/DerelictEngine)
+"gz" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/porta_turret/alien/destroyed,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"gZ" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/item/shard/phoron{
+	pixel_x = 7;
+	pixel_y = 10
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"hb" = (
+/mob/living/human/frame/malf/ranged/ionrifle,
+/turf/floor/rock,
+/area/template_noop)
+"ht" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 5
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"hu" = (
+/turf/floor/greengrid,
+/area/cynosure_submap/DerelictEngine)
+"hC" = (
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/ash,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"hU" = (
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 4
+	},
+/obj/item/shard/phoron,
+/obj/item/shard/phoron{
+	pixel_x = -9;
+	pixel_y = -7
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"hW" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/effect/floor_decal/techfloor/hole,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"hY" = (
+/obj/item/shard/phoron{
+	pixel_x = 7
+	},
+/obj/item/shard/phoron{
+	pixel_x = -9;
+	pixel_y = -7
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"hZ" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/hole{
+	dir = 4
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"ib" = (
+/obj/random/trash,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"ig" = (
+/obj/structure/table/ascent,
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 9
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"il" = (
+/obj/item/sutures/ascent,
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/item/cell/mantid,
+/obj/structure/table/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"iz" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"iB" = (
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"iF" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/mob/living/simple_animal/hostile/hivebot/melee/armored/anti_laser,
+/obj/effect/floor_decal/techfloor/hole/right{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"iK" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"iO" = (
+/obj/effect/gibspawner/robot,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"iQ" = (
+/obj/item/shard/shrapnel,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"iW" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"iZ" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"ja" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/mob/living/human/frame/malf/ranged/ionrifle,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"je" = (
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"jl" = (
+/turf/wall/natural,
+/area/template_noop)
+"jD" = (
+/obj/structure/table/ascent,
+/obj/item/gun/energy/particle/small,
+/obj/item/clothing/suit/armor/alien/tank,
+/obj/item/stack/material/gemstone/mapped/diamond/fifteen,
+/turf/floor/greengrid,
+/area/cynosure_submap/DerelictEngine)
+"jE" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/machinery/fusion_fuel_injector/mapped{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"jG" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"jU" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"jY" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"ka" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"kx" = (
+/obj/item/shard/phoron{
+	pixel_x = -9;
+	pixel_y = -7
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"lg" = (
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 8
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"lj" = (
+/obj/structure/artifact,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"lr" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"ls" = (
+/obj/item/circular_saw/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"lD" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/effect/gibspawner/human,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"lV" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 9
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"lX" = (
+/obj/item/shard/phoron{
+	pixel_x = -9;
+	pixel_y = -7
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"lY" = (
+/obj/structure/chair/padded/purple/ascent,
+/obj/item/remains/xeno,
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"ms" = (
+/obj/structure/closet/ascent,
+/obj/item/multitool/mantid,
+/obj/item/stack/material/crystal/mapped/phoron/ten,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"mu" = (
+/mob/living/simple_animal/hostile/hivebot/melee/armored/anti_melee,
+/turf/floor/greengrid,
+/area/cynosure_submap/DerelictEngine)
+"mD" = (
+/obj/item/shard/phoron{
+	pixel_x = 7;
+	pixel_y = 10
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"mM" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/item/remains/xeno,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"mN" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"mR" = (
+/obj/structure/cable/green{
+	icon_state = "1-8"
+	},
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/molten_item,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"nM" = (
+/obj/item/shard/phoron{
+	pixel_x = 7
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"nO" = (
+/obj/machinery/field_generator{
+	anchored = 1;
+	state = 2
+	},
+/turf/floor/greengrid,
+/area/cynosure_submap/DerelictEngine)
+"nQ" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"nW" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"nZ" = (
+/obj/machinery/singularity_generator{
+	anchored = 1;
+	pixel_y = 11
+	},
+/obj/effect/floor_decal/industrial/danger/full,
+/obj/effect/floor_decal/plaque{
+	name = "Anchors"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"od" = (
+/obj/effect/decal/cleanable/blood/gibs/robot,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"or" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/machinery/porta_turret/alien/destroyed,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"oD" = (
+/obj/effect/floor_decal/techfloor/orange/corner{
+	dir = 8
+	},
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"oL" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 5
+	},
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/obj/effect/floor_decal/techfloor/hole/right{
+	dir = 1
+	},
+/obj/machinery/apc/super/critical{
+	dir = 4;
+	name = "Alien Energy Hub";
+	pixel_x = 24
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"oN" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"pg" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"pk" = (
+/obj/structure/cable/green{
+	icon_state = "1-4"
+	},
+/obj/effect/decal/cleanable/blood/gibs/robot,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"pm" = (
+/obj/structure/girder,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"pr" = (
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"ps" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/effect/floor_decal/techfloor/hole/right{
+	dir = 1
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"pt" = (
+/obj/item/remains/xeno,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"pu" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"pB" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/item/remains/xeno,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"pC" = (
+/obj/structure/particle_accelerator/particle_emitter/center{
+	anchored = 1;
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"pF" = (
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"pR" = (
+/mob/living/human/frame/malf/ranged,
+/turf/floor/rock,
+/area/template_noop)
+"ql" = (
+/obj/item/gps/internal/poi,
+/turf/wall/ascent,
+/area/cynosure_submap/DerelictEngine)
+"qn" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/structure/girder,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"qt" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"qA" = (
+/mob/living/simple_animal/hostile/hivebot/ranged/laser,
+/obj/item/remains/xeno,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"qH" = (
+/obj/structure/particle_accelerator/fuel_chamber{
+	anchored = 1;
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"qJ" = (
+/mob/living/simple_animal/hostile/hivebot/ranged/laser,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"qL" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"qT" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/structure/reagent_dispensers/watertank/high,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"ra" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"rd" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/mob/living/simple_animal/hostile/hivebot/ranged/laser,
+/obj/item/shard/phoron{
+	pixel_x = 7;
+	pixel_y = 10
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"rg" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/hole{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"rI" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/item/retractor/ascent,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"sa" = (
+/obj/structure/table/ascent,
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 5
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"sl" = (
+/mob/living/simple_animal/hostile/hivebot/ranged/laser,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"sq" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 9
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/obj/machinery/port_gen/pacman,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"st" = (
+/obj/random/trash,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"sv" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/hole/right{
+	dir = 8
+	},
+/obj/item/chems/glass/bucket,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"sy" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/item/remains/xeno,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"sz" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/singularity_generator,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"sG" = (
+/obj/effect/decal/cleanable/molten_item,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"tl" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/random/hostile/hivebot,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"ts" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 6
+	},
+/obj/structure/closet/ascent,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"tt" = (
+/obj/effect/decal/cleanable/blood/gibs/robot,
+/obj/effect/decal/cleanable/molten_item,
+/obj/structure/cable/green{
+	icon_state = "0-8"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"tx" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 9
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"tB" = (
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/blood/gibs/robot,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"tP" = (
+/obj/structure/cable/green{
+	icon_state = "0-8"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"tW" = (
+/obj/machinery/field_generator{
+	anchored = 1;
+	state = 1
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"ut" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"uB" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 9
+	},
+/obj/structure/cable/green{
+	icon_state = "1-4"
+	},
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/obj/machinery/emitter/gyrotron/anchored{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"uH" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/obj/item/clothing/costume/psysuit,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"uJ" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 6
+	},
+/obj/structure/closet/ascent,
+/obj/item/implanter/adrenalin,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"uP" = (
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"uX" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 10
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/table/ascent,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"vl" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/molten_item,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"vC" = (
+/obj/structure/chair/padded/purple/ascent,
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/item/sutures/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"vE" = (
+/obj/effect/floor_decal/techfloor/orange/corner{
+	dir = 1
+	},
+/obj/item/shard/shrapnel,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"vN" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"vU" = (
+/obj/structure/table/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"wd" = (
+/obj/machinery/porta_turret/alien/destroyed,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"we" = (
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/blood/gibs/robot,
+/obj/effect/decal/cleanable/ash,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"wh" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	icon_state = "1-8"
+	},
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/blood/gibs/robot,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"wp" = (
+/obj/machinery/door/airlock/ascent,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"wq" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/obj/item/remains/xeno,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"wx" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"wC" = (
+/obj/structure/particle_accelerator/particle_emitter/left{
+	anchored = 1;
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange/corner,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"wG" = (
+/obj/structure/chair/padded/purple/ascent,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"wK" = (
+/obj/structure/shuttle/engine/propulsion/burst,
+/turf/floor/dirt,
+/area/cynosure_submap/DerelictEngine)
+"wM" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/hole{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"wV" = (
+/obj/structure/table/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"wY" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/structure/cable/green{
+	icon_state = "1-4"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"xo" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 4
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 1
+	},
+/obj/item/shard/phoron{
+	pixel_x = 7;
+	pixel_y = 10
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"xq" = (
+/turf/wall/ascent{
+	unique_merge_identifier = "derelict_engine"
+	},
+/area/cynosure_submap/DerelictEngine)
+"xv" = (
+/obj/item/remains/xeno,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"xz" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/mob/living/human/frame/malf/ranged,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"xC" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 6
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"xQ" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/hole{
+	dir = 4
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"xR" = (
+/obj/effect/floor_decal/techfloor/orange/corner{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/ash,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"yg" = (
+/mob/living/human/frame/malf/melee/sword,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"yi" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"yj" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/door/airlock/external/bolted/ascent,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"yk" = (
+/mob/living/simple_animal/hostile/hivebot/swarm,
+/turf/floor/rock,
+/area/template_noop)
+"yA" = (
+/obj/structure/table/ascent,
+/obj/effect/floor_decal/techfloor{
+	dir = 10
+	},
+
+/obj/abstract/prefab/hand_teleporter,
+/obj/item/implanter/adrenalin,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"yB" = (
+/obj/structure/closet/ascent,
+/obj/item/rig_module/device/clustertool,
+/obj/item/rig_module/device/clustertool,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"yE" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	icon_state = "1-8"
+	},
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"yQ" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/hivebot/ranged/rapid,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"yZ" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/effect/gibspawner/robot,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"zb" = (
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"zd" = (
+/obj/structure/particle_accelerator/particle_emitter/right{
+	anchored = 1;
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange/corner{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"zf" = (
+/obj/structure/cable/green{
+	icon_state = "0-4"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"zk" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/porta_turret/alien/destroyed,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"zn" = (
+/obj/structure/closet/ascent,
+/obj/random/ascent_tool,
+/obj/item/stack/cable_coil/purple,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"zr" = (
+/obj/structure/closet/ascent,
+/obj/item/rig_module/device/clustertool,
+/obj/item/fuelled_tool/welding/electric/mantid,
+/obj/item/multitool/mantid,
+/obj/item/stack/material/crystal/mapped/phoron/ten,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"zw" = (
+/obj/item/clothing/costume/psysuit,
+/obj/structure/table/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"zH" = (
+/obj/structure/girder,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"zJ" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 4
+	},
+/obj/structure/window/borosilicate_reinforced,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"zP" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 5
+	},
+/obj/effect/floor_decal/techfloor/hole{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"zY" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/item/clothing/suit/ascent,
+/obj/structure/table/ascent,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ao" = (
+/obj/item/shard/phoron,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"Ap" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/structure/chair/padded/purple/ascent,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"AF" = (
+/obj/machinery/porta_turret/alien/destroyed,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"AT" = (
+/mob/living/simple_animal/hostile/hivebot/melee/armored/anti_laser,
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"AX" = (
+/turf/floor/greengrid,
+/area/cynosure_submap/DerelictEngine)
+"Bb" = (
+/obj/structure/cable/green{
+	icon_state = "2-4"
+	},
+/obj/effect/decal/cleanable/blood/gibs/robot,
+/obj/effect/decal/cleanable/ash,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"Bd" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/mob/living/human/frame/malf/ranged,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Bf" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 6
+	},
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/obj/machinery/emitter/gyrotron/anchored{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Bh" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Bo" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/item/gun/energy/sniperrifle,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Bs" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/ash,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"Bz" = (
+/obj/structure/shuttle/engine/propulsion/burst,
+/turf/floor/rock,
+/area/cynosure_submap/DerelictEngine)
+"BG" = (
+/obj/effect/gibspawner/human,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"BR" = (
+/obj/machinery/door/airlock/external/bolted/ascent,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"BX" = (
+/obj/structure/cable/green{
+	icon_state = "0-4"
+	},
+/obj/effect/decal/cleanable/ash,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Cl" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/giga_drill,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Cp" = (
+/obj/structure/particle_accelerator/particle_emitter/center{
+	anchored = 1;
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ct" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 5
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Cz" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"CI" = (
+/obj/machinery/computer/teleporter{
+	dir = 2
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"CL" = (
+/obj/effect/decal/cleanable/generic,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"CV" = (
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Df" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/structure/particle_accelerator/particle_emitter/left{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Dj" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/random/trash,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"DA" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"DQ" = (
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Ec" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/item/cell/mantid,
+/obj/structure/table/ascent,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ee" = (
+/mob/living/simple_animal/hostile/hivebot/ranged/laser,
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Em" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/mob/living/human/frame/malf/ranged/ionrifle,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Et" = (
+/mob/living/simple_animal/hostile/hivebot/melee/armored/guard,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Eu" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/machinery/fusion_fuel_injector/mapped,
+/obj/machinery/fusion_fuel_injector/mapped{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ey" = (
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 8
+	},
+/obj/item/shard/phoron,
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"EC" = (
+/obj/structure/shuttle/engine/heater,
+/turf/wall/ascent,
+/area/cynosure_submap/DerelictEngine)
+"EF" = (
+/obj/machinery/porta_turret/alien,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"EM" = (
+/obj/structure/closet/ascent,
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/item/bone_clamp/ascent,
+/obj/item/hemostat/ascent,
+/obj/item/scalpel/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"EZ" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Fb" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Fd" = (
+/obj/item/bone_clamp/ascent,
+/obj/item/scanner/health,
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/structure/table/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"FE" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 9
+	},
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"FH" = (
+/obj/machinery/teleport/station,
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"FI" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 5
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"FS" = (
+/obj/structure/closet/ascent,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ga" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 5
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Gw" = (
+/obj/machinery/teleport/hub,
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"GM" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/hole/right{
+	dir = 8
+	},
+/obj/random/hostile/hivebot,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"GU" = (
+/obj/machinery/fusion_fuel_injector/mapped{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Hb" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 9
+	},
+/mob/living/simple_animal/hostile/hivebot/melee/armored/meatshield,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Hi" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 10
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"HE" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/techfloor/hole/right{
+	dir = 1
+	},
+/obj/effect/gibspawner/human,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"HH" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/ash,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"HL" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/effect/decal/cleanable/molten_item,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"HS" = (
+/turf/floor/greengrid,
+/area/cynosure_submap/DerelictEngine)
+"HX" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"HY" = (
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 4
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 8
+	},
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"HZ" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 9
+	},
+/obj/structure/cable/green{
+	icon_state = "2-4"
+	},
+/obj/effect/decal/cleanable/molten_item,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ia" = (
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 4
+	},
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"Ij" = (
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Io" = (
+/obj/machinery/particle_accelerator/control_box,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Is" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/hole{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Iv" = (
+/mob/living/simple_animal/hostile/hivebot/melee/armored/anti_melee,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"IM" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/obj/machinery/emitter{
+	anchored = 1;
+	dir = 1
+	},
+/obj/structure/cable/green{
+	icon_state = "0-8"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"IS" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"IV" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 9
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ja" = (
+/obj/machinery/fusion_fuel_injector/mapped{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Je" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/random/hostile/hivebot,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Jg" = (
+/obj/effect/gibspawner/human,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Ji" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 10
+	},
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Jm" = (
+/obj/structure/cable/green{
+	icon_state = "1-8"
+	},
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/ash,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"JG" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/structure/particle_accelerator/particle_emitter/right{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"JT" = (
+/obj/structure/particle_accelerator/power_box{
+	anchored = 1;
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"JX" = (
+/obj/structure/table/ascent,
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ku" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/random/trash,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"KB" = (
+/obj/effect/decal/cleanable/ash,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"KL" = (
+/obj/effect/floor_decal/techfloor/orange/corner{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/ash,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"Lb" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/hole{
+	dir = 4
+	},
+/obj/item/remains/xeno,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ld" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Lo" = (
+/obj/machinery/porta_turret/alien,
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Lv" = (
+/obj/machinery/door/blast{
+	name = "Blast Door";
+	},
+/obj/machinery/door/airlock/ascent,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"LO" = (
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/generic,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"LT" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/blood/gibs/robot,
+/obj/effect/decal/cleanable/molten_item,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"MD" = (
+/mob/living/simple_animal/hostile/hivebot/ranged/rapid,
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"MG" = (
+/obj/item/clothing/costume/psysuit,
+/obj/structure/table/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"MO" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 10
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	icon_state = "2-4"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"MZ" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/door/airlock/ascent,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"Ng" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 10
+	},
+/obj/structure/closet/ascent,
+/obj/item/stack/material/crystal/mapped/phoron/ten,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Nm" = (
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"No" = (
+/obj/structure/closet/ascent,
+
+/obj/item/rig_module/device/clustertool,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Nr" = (
+/mob/living/simple_animal/hostile/hivebot/swarm,
+/turf/floor/dirt,
+/area/template_noop)
+"NZ" = (
+/obj/structure/table/ascent,
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ok" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"OB" = (
+/obj/structure/table/ascent,
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"OV" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/mob/living/simple_animal/hostile/hivebot/ranged/rapid,
+/obj/item/remains/xeno,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"OZ" = (
+/obj/structure/table/ascent,
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/item/gun/energy/laser,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Pe" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/mob/living/simple_animal/hostile/hivebot/ranged/laser,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"Pn" = (
+/obj/random/hostile/hivebot,
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Pq" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	icon_state = "0-2"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Pw" = (
+/obj/structure/mopbucket,
+/obj/item/mop,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"PD" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/effect/floor_decal/techfloor/hole/right,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"PF" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"PK" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"PU" = (
+/obj/effect/decal/cleanable/generic,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Qf" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/structure/cable/green{
+	icon_state = "2-4"
+	},
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/blood/gibs/robot,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Qk" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ql" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 6
+	},
+/obj/item/clothing/costume/psysuit,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"QJ" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 4
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 8
+	},
+/obj/structure/window/borosilicate_reinforced,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"QS" = (
+/obj/random/hostile/hivebot,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"QT" = (
+/obj/machinery/porta_turret/alien,
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"QW" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Rk" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 6
+	},
+/obj/structure/cable{
+	icon_state = "0-8"
+	},
+/obj/machinery/power/smes/buildable,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ro" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/hivebot/melee/armored/anti_bullet,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"RA" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/effect/floor_decal/techfloor/hole/right{
+	dir = 1
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"RB" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"RF" = (
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"RG" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/machinery/fusion_fuel_injector/mapped{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"RU" = (
+/obj/structure/closet/ascent,
+/obj/item/fuelled_tool/welding/electric/mantid,
+/obj/item/clothing/suit/ascent/utility,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"RW" = (
+/obj/machinery/door/airlock/ascent,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"SB" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"SF" = (
+/turf/template_noop,
+/area/template_noop)
+"ST" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/table/ascent,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"SV" = (
+/mob/living/simple_animal/hostile/hivebot/ranged/rapid,
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"SW" = (
+/obj/effect/gibspawner/robot,
+/turf/floor/rock,
+/area/template_noop)
+"Tt" = (
+/turf/floor/dirt,
+/area/template_noop)
+"Tz" = (
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/obj/item/shard/shrapnel,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"TB" = (
+/obj/structure/chair/padded/purple/ascent,
+/obj/item/remains/xeno,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"TC" = (
+/obj/structure/particle_accelerator/power_box{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"TF" = (
+/obj/structure/chair/padded/purple/ascent,
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"TO" = (
+/obj/effect/floor_decal/techfloor/orange/corner,
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/molten_item,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"TP" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"TV" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 5
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"Ua" = (
+/obj/structure/particle_accelerator/end_cap{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Ue" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/item/remains/xeno,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Ui" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/mob/living/simple_animal/hostile/hivebot/ranged/laser,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Um" = (
+/obj/structure/chair/padded/purple/ascent,
+/obj/item/remains/xeno,
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Uv" = (
+/obj/effect/floor_decal/industrial/warning/full,
+/turf/floor/greengrid,
+/area/cynosure_submap/DerelictEngine)
+"Uw" = (
+/obj/structure/particle_accelerator/fuel_chamber{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"UQ" = (
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/blood/gibs/robot,
+/obj/effect/gibspawner/human,
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"UV" = (
+/obj/structure/table/ascent,
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/item/gun/energy/particle/small,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"UW" = (
+/obj/effect/floor_decal/techfloor/orange/corner{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/obj/structure/cable/green{
+	icon_state = "1-8"
+	},
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"UZ" = (
+/obj/structure/table/ascent,
+/turf/floor/greengrid,
+/area/cynosure_submap/DerelictEngine)
+"Vb" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Vg" = (
+/obj/effect/floor_decal/techfloor/orange,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Vk" = (
+/obj/item/oar,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Vn" = (
+/obj/machinery/porta_turret/alien,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Vs" = (
+/mob/living/simple_animal/hostile/hivebot/melee/armored,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Vy" = (
+/obj/effect/gibspawner/robot,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"VA" = (
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"VP" = (
+/obj/machinery/particle_accelerator/control_box{
+	anchored = 1
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"VQ" = (
+/turf/floor/plating,
+/area/cynosure_submap/DerelictEngine)
+"VX" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/mob/living/human/frame/malf/ranged,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Wk" = (
+/mob/living/simple_animal/hostile/hivebot/ranged/laser,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"WA" = (
+/obj/structure/table/ascent,
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"WB" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"WQ" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 5
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"WV" = (
+/mob/living/human/frame/malf/ranged,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"WW" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/field_generator{
+	anchored = 1;
+	state = 1
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Xa" = (
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced,
+/obj/structure/window/borosilicate_reinforced{
+	dir = 4
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 8
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 1
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"Xm" = (
+/obj/structure/table/ascent,
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Xp" = (
+/mob/living/human/frame/malf/ranged,
+/turf/template_noop,
+/area/template_noop)
+"Xq" = (
+/obj/random/trash,
+/turf/template_noop,
+/area/template_noop)
+"XE" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/door/airlock/ascent,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"XI" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"XT" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/generic,
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"XW" = (
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"XX" = (
+/obj/structure/particle_accelerator/particle_emitter/center{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Yl" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 6
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Yn" = (
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Yp" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/item/clothing/suit/armor/alien,
+/obj/structure/table/ascent,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"Yr" = (
+/turf/floor/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Yu" = (
+/obj/structure/particle_accelerator/end_cap{
+	anchored = 1;
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/hole{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"YG" = (
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"YH" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/item/shard/phoron{
+	pixel_x = -9;
+	pixel_y = -7;
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"YI" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+"YJ" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/floor/tiled/ascent,
+/area/cynosure_submap/DerelictEngine)
+"Zh" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/grille/cult{
+	name = "Alien grille"
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 8
+	},
+/obj/structure/window/borosilicate_reinforced{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/obj/structure/window/borosilicate_reinforced/full,
+/turf/floor/shuttle,
+/area/cynosure_submap/DerelictEngine)
+"ZH" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/obj/effect/floor_decal/techfloor/hole/right,
+/obj/item/remains/xeno,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DerelictEngine)
+
+(1,1,1) = {"
+SF
+SF
+SF
+ap
+SF
+SF
+Tt
+Tt
+bN
+bN
+jl
+bN
+jl
+jl
+jl
+jl
+jl
+bN
+jl
+jl
+bN
+bN
+jl
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+"}
+(2,1,1) = {"
+SF
+jl
+SF
+SF
+Tt
+Tt
+bN
+bN
+bN
+jl
+bN
+jl
+jl
+zH
+fO
+fO
+fO
+fO
+fO
+gy
+zH
+gy
+EC
+wK
+SF
+bN
+bN
+SF
+Tt
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+"}
+(3,1,1) = {"
+SF
+SF
+Xp
+Tt
+bN
+jl
+bN
+bN
+jl
+jl
+jl
+jl
+fO
+fO
+WW
+WW
+Cl
+qL
+qL
+fO
+zH
+Ja
+EC
+Bz
+Tt
+Tt
+Tt
+bN
+Nr
+SF
+Tt
+SF
+Tt
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+"}
+(4,1,1) = {"
+ap
+SF
+fJ
+jl
+bN
+bN
+jl
+jl
+jl
+jl
+jl
+fO
+fO
+Fb
+tW
+bH
+lj
+bH
+bH
+FS
+fO
+fO
+EC
+wK
+bN
+bN
+bN
+bN
+Tt
+bN
+fJ
+hb
+Tt
+Tt
+Tt
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+"}
+(5,1,1) = {"
+jl
+SF
+Tt
+bN
+bN
+jl
+jl
+jl
+jl
+jl
+zH
+fO
+WQ
+Is
+Is
+mM
+Ro
+QW
+Je
+QW
+uJ
+fO
+EC
+wK
+SF
+Tt
+bN
+Tt
+bN
+Tt
+bN
+bN
+Tt
+bN
+bN
+bN
+SF
+Tt
+SF
+Tt
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+"}
+(6,1,1) = {"
+SF
+Tt
+bN
+jl
+jl
+jl
+jl
+jl
+jl
+zH
+fO
+fO
+fO
+fO
+zH
+zH
+BR
+fO
+fO
+fO
+fO
+fO
+fO
+gy
+SF
+SF
+SF
+bN
+SF
+bN
+SF
+bN
+ap
+bN
+SF
+Tt
+bN
+Tt
+SF
+Tt
+Tt
+SF
+SF
+SF
+SF
+SF
+SF
+"}
+(7,1,1) = {"
+Tt
+jl
+bN
+jl
+jl
+jl
+fO
+fO
+fO
+fO
+fO
+YJ
+YJ
+MD
+YJ
+YJ
+YJ
+YJ
+YJ
+YJ
+YJ
+YJ
+fO
+gy
+eR
+eR
+eR
+zH
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+yk
+bN
+SF
+Tt
+Tt
+SF
+SF
+SF
+SF
+SF
+"}
+(8,1,1) = {"
+jl
+bN
+bN
+jl
+jl
+fO
+gy
+HS
+HS
+gy
+No
+Vn
+iB
+iB
+je
+IV
+Bs
+gj
+je
+iB
+iB
+wd
+je
+gy
+bp
+TB
+bp
+fO
+fO
+gy
+zH
+BR
+fO
+EC
+wK
+SF
+Tt
+Tt
+bN
+Tt
+bN
+Tt
+bN
+SF
+SF
+SF
+SF
+"}
+(9,1,1) = {"
+Tt
+jl
+jl
+jl
+jl
+fO
+AX
+am
+mu
+dG
+Vb
+Vb
+Ue
+Bo
+Vb
+HH
+sG
+PD
+Vb
+WA
+iW
+db
+Vb
+yj
+Vb
+hZ
+dC
+TF
+gy
+fO
+Vs
+Yr
+Yr
+EC
+dy
+SF
+bN
+SF
+Tt
+Xp
+fJ
+SF
+bN
+bN
+Tt
+SF
+SF
+"}
+(10,1,1) = {"
+bN
+bN
+jl
+jl
+jl
+fO
+AX
+HS
+UZ
+gy
+yB
+FE
+MO
+iz
+pu
+vN
+JT
+YI
+EZ
+NZ
+OV
+jG
+jG
+fO
+zY
+Ec
+jG
+jG
+lY
+gy
+fO
+jE
+Eu
+EC
+wK
+bN
+bN
+bN
+bN
+bN
+Tt
+Nr
+SF
+Tt
+bN
+bN
+SF
+"}
+(11,1,1) = {"
+bN
+jl
+jl
+zH
+fO
+fO
+AX
+HS
+jD
+fO
+gy
+oL
+Rk
+Pq
+uB
+vE
+pC
+zd
+an
+ig
+Ld
+Hi
+gy
+gy
+QT
+YJ
+YJ
+YJ
+YJ
+Um
+fO
+fO
+fO
+EC
+Bz
+SF
+SF
+SF
+SF
+bN
+bN
+bN
+Tt
+Tt
+SF
+bN
+Tt
+"}
+(12,1,1) = {"
+jl
+jl
+fO
+fO
+fO
+fO
+gy
+Lv
+gy
+fO
+gy
+gy
+gy
+zH
+Zh
+Ey
+HY
+lg
+QJ
+zH
+gy
+gy
+gy
+gy
+gy
+gy
+BR
+gy
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+zH
+SF
+SF
+SF
+SF
+SF
+bN
+bN
+SF
+SF
+SF
+"}
+(13,1,1) = {"
+jl
+zH
+fO
+nW
+Cz
+wG
+fO
+je
+wd
+fO
+gy
+Lo
+zw
+aG
+rd
+PF
+mD
+kx
+gZ
+wV
+fn
+aO
+zH
+gy
+gy
+je
+je
+pF
+fO
+fO
+fO
+Fb
+Fb
+Cz
+ra
+AF
+gy
+gy
+rg
+jU
+jU
+EC
+wK
+SF
+bN
+bN
+bN
+"}
+(14,1,1) = {"
+jl
+dg
+iK
+tx
+RB
+QT
+fO
+iB
+VA
+fO
+Cz
+Ee
+HZ
+Qf
+UW
+Bb
+LO
+pk
+oD
+wY
+Ji
+wd
+je
+zH
+wd
+iB
+iB
+iB
+pr
+fO
+gy
+ja
+YJ
+YJ
+Ku
+lD
+YJ
+gy
+zH
+gy
+gy
+EC
+Bz
+SF
+SF
+SW
+bN
+"}
+(15,1,1) = {"
+jl
+fG
+lX
+ps
+qA
+RF
+fO
+Vs
+eV
+fO
+aJ
+bk
+uH
+Tz
+we
+tt
+KB
+tP
+Ij
+YG
+PK
+pt
+je
+BR
+Wk
+iB
+pt
+iB
+Iv
+pr
+zH
+Vn
+zb
+zb
+iB
+Et
+je
+wd
+fO
+fO
+gy
+gy
+zH
+fO
+fO
+SF
+SF
+"}
+(16,1,1) = {"
+bl
+fY
+mN
+wx
+qJ
+je
+gy
+je
+pr
+fO
+RU
+aa
+HE
+XW
+nO
+HS
+iQ
+HS
+CL
+XW
+Qk
+PU
+je
+BR
+je
+je
+je
+je
+je
+je
+wp
+Et
+iB
+iB
+yg
+iO
+WV
+je
+je
+Pw
+gy
+or
+fH
+fp
+fO
+zH
+bN
+"}
+(17,1,1) = {"
+jl
+zH
+fO
+bk
+je
+je
+BR
+je
+Xm
+fO
+SB
+Ga
+TP
+tP
+HS
+iB
+iB
+iB
+HS
+tP
+IS
+hZ
+Vb
+gy
+Vb
+gy
+fO
+gy
+dh
+Vb
+wp
+Vb
+xz
+hZ
+iW
+fO
+XI
+XI
+Dj
+Vb
+MZ
+db
+yZ
+Vb
+Bd
+Tt
+bN
+"}
+(18,1,1) = {"
+jl
+zH
+zH
+ql
+JX
+UV
+gy
+wM
+Yp
+fO
+Uv
+GM
+IM
+CL
+VQ
+iB
+nZ
+iB
+HS
+PF
+HL
+jY
+cH
+Xa
+jU
+Xa
+hu
+Xa
+jU
+jU
+fO
+or
+Bh
+ka
+fO
+fO
+QS
+PF
+Vy
+PF
+RW
+PF
+QS
+ib
+ab
+Xq
+Tt
+"}
+(19,1,1) = {"
+jl
+gy
+gy
+bk
+je
+je
+BR
+je
+vU
+fO
+SB
+lV
+aP
+BX
+HS
+iB
+iB
+iB
+HS
+zf
+IS
+XT
+YJ
+bn
+YJ
+gy
+fO
+gy
+AT
+YJ
+wp
+YJ
+RB
+Em
+RB
+fO
+pg
+pg
+sv
+YJ
+XE
+qT
+Ku
+YJ
+VX
+SF
+Tt
+"}
+(20,1,1) = {"
+bG
+fY
+iK
+wx
+qJ
+xv
+gy
+je
+pF
+fO
+Ok
+Ui
+LT
+XW
+nO
+iQ
+HS
+HS
+go
+XW
+Qk
+od
+cQ
+BR
+je
+je
+je
+je
+je
+je
+wp
+Et
+Jg
+st
+iB
+je
+eq
+je
+eq
+BG
+gy
+or
+fH
+wM
+zH
+zH
+bN
+"}
+(21,1,1) = {"
+cX
+fY
+PF
+wx
+sl
+RF
+fO
+Vs
+eV
+fO
+zr
+bk
+wq
+uP
+PF
+zf
+PF
+fy
+hC
+UQ
+ZH
+iB
+je
+BR
+Wk
+iB
+iB
+iB
+Iv
+pF
+fO
+wd
+eV
+zb
+DQ
+Et
+je
+wd
+fO
+fO
+gy
+gy
+gy
+zH
+fO
+SF
+SF
+"}
+(22,1,1) = {"
+jl
+gk
+nQ
+Ct
+hZ
+zk
+fO
+pt
+CV
+fO
+DA
+Ee
+by
+wh
+xR
+Jm
+tB
+mR
+TO
+yE
+Ql
+Vn
+je
+gy
+Vn
+iB
+iB
+iB
+pF
+zH
+fO
+Vb
+Vb
+yZ
+db
+Vb
+Bd
+gy
+gy
+pm
+gy
+EC
+wK
+SF
+SF
+SF
+SF
+"}
+(23,1,1) = {"
+jl
+fO
+fO
+qt
+ut
+Ap
+fO
+je
+Vn
+fO
+zH
+gz
+MG
+dO
+YH
+Ao
+nM
+hY
+Pe
+fn
+zw
+aO
+gy
+gy
+gy
+xv
+je
+Nm
+fO
+fO
+fO
+HX
+HX
+Cz
+Cz
+EF
+gy
+gy
+wM
+jG
+jG
+EC
+Bz
+Tt
+SW
+bN
+Tt
+"}
+(24,1,1) = {"
+SF
+SF
+zH
+fO
+fO
+fO
+gy
+Lv
+gy
+fO
+gy
+gy
+gy
+gy
+xo
+HY
+hU
+HY
+zJ
+zH
+xq
+zH
+gy
+gy
+gy
+gy
+BR
+gy
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+zH
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+bN
+SF
+"}
+(25,1,1) = {"
+SF
+SF
+SF
+zH
+fO
+fO
+CI
+Hb
+yA
+fO
+gy
+sq
+uX
+ST
+FI
+KL
+Cp
+wC
+Bf
+sa
+oN
+ts
+gy
+gy
+Fd
+il
+Vb
+xQ
+lr
+vC
+fO
+fO
+fO
+EC
+Bz
+SF
+Tt
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+"}
+(26,1,1) = {"
+SF
+SF
+SF
+SF
+SF
+fO
+FH
+RA
+dX
+gy
+ms
+ht
+Yl
+rg
+jU
+vl
+iQ
+Vg
+yQ
+OZ
+Lb
+jG
+jG
+qn
+lY
+wM
+jG
+rI
+lY
+gy
+fO
+RG
+RG
+EC
+wK
+bN
+bN
+bN
+Tt
+SF
+SF
+SF
+ap
+SF
+SF
+SF
+Tt
+"}
+(27,1,1) = {"
+SF
+SF
+SF
+SF
+SF
+fO
+Gw
+zP
+xC
+dG
+YJ
+YJ
+sy
+RB
+lD
+VP
+qH
+hW
+YJ
+OB
+Pn
+YJ
+YJ
+fg
+cE
+RB
+RB
+EM
+gy
+fO
+Vs
+Vk
+Yr
+EC
+Bz
+SF
+bN
+SF
+bN
+Nr
+SF
+Tt
+SF
+SF
+SF
+SF
+bN
+"}
+(28,1,1) = {"
+SF
+SF
+SF
+SF
+SF
+fO
+gy
+yi
+yi
+gy
+zn
+wd
+iB
+iB
+je
+TV
+Yu
+Yl
+je
+iB
+iB
+Vn
+je
+gy
+wd
+ls
+Yn
+fO
+fO
+fO
+fO
+BR
+fO
+EC
+Bz
+SF
+SF
+Tt
+bN
+bN
+pR
+Tt
+Tt
+SF
+SF
+SF
+SF
+"}
+(29,1,1) = {"
+SF
+SF
+SF
+SF
+SF
+SF
+fO
+fO
+fO
+fO
+fO
+je
+db
+SV
+Vb
+Vb
+Vb
+Vb
+Vb
+Vb
+Vb
+Vb
+gy
+gy
+gy
+Ia
+gy
+zH
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+bN
+SF
+bN
+bN
+Tt
+SF
+SF
+SF
+"}
+(30,1,1) = {"
+SF
+SF
+SF
+ap
+SF
+SF
+SF
+SF
+SF
+fO
+fO
+fO
+fO
+fO
+fO
+gy
+BR
+gy
+fO
+zH
+fO
+fO
+gy
+zH
+SF
+bN
+bN
+Tt
+SF
+Tt
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+ap
+SF
+Tt
+bN
+bN
+SF
+bN
+SF
+SF
+"}
+(31,1,1) = {"
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+zH
+fO
+el
+iZ
+iZ
+pB
+iF
+iZ
+tl
+iZ
+Ng
+fO
+EC
+Bz
+bN
+SF
+SF
+bN
+bN
+SF
+SF
+Tt
+SF
+Nr
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+bN
+bN
+SF
+bN
+SF
+"}
+(32,1,1) = {"
+SF
+SF
+bX
+Xp
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+zH
+fO
+DA
+Ua
+Uw
+XX
+Io
+TC
+dL
+fO
+fO
+EC
+wK
+SF
+bN
+bN
+bN
+SF
+ap
+bN
+SF
+SF
+SF
+bN
+bN
+SF
+SF
+SF
+SF
+SF
+SF
+Tt
+Tt
+SF
+SF
+bN
+"}
+(33,1,1) = {"
+SF
+SF
+SF
+SF
+SF
+SF
+ap
+SF
+SF
+SF
+SF
+SF
+fO
+fO
+sz
+Df
+JG
+WB
+WB
+fO
+fO
+GU
+EC
+wK
+bN
+Tt
+Tt
+Tt
+SF
+bN
+SF
+hb
+bX
+bN
+SF
+SF
+SF
+bN
+Tt
+bN
+SF
+SF
+SF
+Tt
+bN
+bN
+SF
+"}
+(34,1,1) = {"
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+zH
+fO
+fO
+fO
+fO
+fO
+gy
+zH
+zH
+EC
+wK
+SF
+SF
+SF
+SF
+Tt
+SF
+SF
+bN
+Tt
+SF
+bN
+bN
+SF
+SF
+SF
+SF
+SF
+bN
+SF
+bN
+SF
+SF
+SF
+"}
+(35,1,1) = {"
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+Tt
+SF
+SF
+SF
+SF
+SF
+bN
+SF
+SF
+SF
+SF
+SF
+SF
+SF
+bN
+bN
+bN
+"}

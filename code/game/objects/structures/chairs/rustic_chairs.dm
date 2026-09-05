@@ -5,7 +5,7 @@
 	material = /decl/material/solid/organic/wood/walnut
 	color = /decl/material/solid/organic/wood/walnut::color
 	user_comfort = -0.5
-	buckle_pixel_shift = TRUE // use chair offset
+	_buckle_pixel_shift = TRUE // use chair offset
 
 /obj/structure/chair/rustic_fancy
 	name_prefix = "fancy"

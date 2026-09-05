@@ -2,6 +2,7 @@
 #define MODPACK_POLARIS
 // BEGIN_INCLUDE
 #include "code\background.dm"
+#include "code\random.dm"
 #include "code\vent_pump.dm"
 #include "datum\loadout.dm"
 #include "datum\materials.dm"
@@ -23,6 +24,9 @@
 #include "items\tiles.dm"
 #include "items\under.dm"
 #include "items\guns\overrides.dm"
+#include "mobs\skathari.dm"
+#include "mobs\wildlife.dm"
+#include "sound\ambience.dm"
 #include "structures\flora.dm"
 #include "structures\furniture.dm"
 #include "turfs\floors.dm"

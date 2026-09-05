@@ -1,0 +1,201 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/template_noop,
+/area/template_noop)
+"i" = (
+/obj/machinery/apc/unlocked{
+	locked = 0;
+	name = "south bump";
+	operating = 0;
+	pixel_y = -24
+	},
+/obj/item/cell/high/empty,
+/obj/structure/cable,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"m" = (
+/obj/structure/railing/mapped,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"u" = (
+/obj/structure/railing/mapped{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"y" = (
+/obj/structure/railing/mapped{
+	dir = 1
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"z" = (
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/obj/structure/railing/mapped,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"C" = (
+/turf/wall/concrete/reinforced,
+/area/cynosure/maintenance/construction/d1/basementD)
+"D" = (
+/obj/structure/railing/mapped{
+	dir = 4
+	},
+/obj/structure/railing/mapped,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"G" = (
+/obj/random/trash,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"I" = (
+/obj/random/crate,
+/obj/random/contraband,
+/obj/random/contraband,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/security,
+/obj/random/maintenance/security,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"J" = (
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"K" = (
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"L" = (
+/obj/random/crate,
+/obj/random/plushie,
+/obj/random/maintenance/clean,
+/obj/random/medical,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"N" = (
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"O" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementD)
+"P" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"Q" = (
+/obj/item/clothing/gloves/boxing/yellow,
+/obj/item/clothing/gloves/boxing/green,
+/obj/item/clothing/gloves/boxing/blue,
+/obj/item/clothing/gloves/boxing,
+/obj/structure/rack,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"W" = (
+/obj/structure/railing/mapped{
+	dir = 4
+	},
+/obj/structure/railing/mapped{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/blood,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"X" = (
+/obj/random/mouseremains,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"Y" = (
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/obj/structure/railing/mapped{
+	dir = 1
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+"Z" = (
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementD)
+
+(1,1,1) = {"
+O
+O
+O
+O
+O
+O
+a
+"}
+(2,1,1) = {"
+C
+G
+N
+N
+N
+O
+O
+"}
+(3,1,1) = {"
+C
+J
+Y
+Z
+z
+L
+O
+"}
+(4,1,1) = {"
+C
+P
+y
+N
+m
+I
+O
+"}
+(5,1,1) = {"
+C
+J
+W
+u
+D
+Q
+O
+"}
+(6,1,1) = {"
+C
+N
+N
+N
+K
+i
+O
+"}
+(7,1,1) = {"
+C
+O
+O
+X
+O
+O
+O
+"}

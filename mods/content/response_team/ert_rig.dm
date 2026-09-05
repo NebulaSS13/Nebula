@@ -30,7 +30,7 @@
 		/obj/item/rcd,
 		/obj/item/crowbar,
 		/obj/item/screwdriver,
-		/obj/item/weldingtool,
+		/obj/item/fuelled_tool/welding,
 		/obj/item/wirecutters,
 		/obj/item/wrench,
 		/obj/item/multitool,
@@ -188,7 +188,7 @@
 		ARMOR_BOMB = ARMOR_BOMB_PADDED,
 		ARMOR_BIO = ARMOR_BIO_SHIELDED,
 		ARMOR_RAD = ARMOR_RAD_SHIELDED
-		)
+	)
 
 	chest =  /obj/item/clothing/suit/space/rig/ert/assetprotection
 	helmet = /obj/item/clothing/head/helmet/space/rig/ert/assetprotection

@@ -57,3 +57,5 @@
 	name = "Coffee"
 	real_name = "Coffee"
 	desc = "It's Coffee, the other pet!"
+
+/mob/living/simple_animal/crab/sif

@@ -16,6 +16,9 @@
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle = FALSE
 
+/obj/item/shard/phoron
+	material = /decl/material/solid/phoron
+
 /obj/item/shard/Initialize(ml, material_key)
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(TOOL_SCALPEL = TOOL_QUALITY_BAD))
@@ -58,7 +61,7 @@
 
 /obj/item/shard/attackby(obj/item/used_item, mob/user)
 	if(IS_WELDER(used_item) && material.shard_can_repair)
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(welder.weld(0, user))
 			material.create_object(get_turf(src))
 			qdel(src)

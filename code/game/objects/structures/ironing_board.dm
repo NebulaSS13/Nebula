@@ -71,8 +71,8 @@
 		if(cloth)
 			to_chat(user, "<span class='notice'>[cloth] is already on the ironing table!</span>")
 			return TRUE
-		if(buckled_mob)
-			to_chat(user, "<span class='notice'>[buckled_mob] is already on the ironing table!</span>")
+		if(has_buckled_mob())
+			to_chat(user, "<span class='notice'>\The [get_buckled_mob()] is already on the ironing table!</span>")
 			return TRUE
 
 		if(user.try_unequip(used_item, src))
@@ -84,18 +84,27 @@
 		var/obj/item/ironingiron/iron = used_item
 
 		// anti-wrinkle "massage"
-		if(buckled_mob && ishuman(buckled_mob))
-			var/mob/living/human/H = buckled_mob
+		var/mob/living/victim = get_buckled_mob(user = user)
+		if(istype(victim))
 			var/zone = user.get_target_zone()
 			var/parsed = parse_zone(zone)
 
-			visible_message("<span class='danger'>[user] begins ironing [src.buckled_mob]'s [parsed]!</span>", "<span class='danger'>You begin ironing [buckled_mob]'s [parsed]!</span>")
-			if(!do_after(user, 40, src))
+			visible_message(
+				SPAN_DANGER("[user] begins ironing [victim]'s [parsed]!"),
+				SPAN_DANGER("You begin ironing [victim]'s [parsed]!")
+			)
+			if(!do_after(user, 4 SECONDS, src))
 				return TRUE
-			visible_message("<span class='danger'>[user] irons [src.buckled_mob]'s [parsed]!</span>", "<span class='danger'>You iron [buckled_mob]'s [parsed]!</span>")
+			visible_message(
+				SPAN_DANGER("[user] irons [victim]'s [parsed]!"),
+				SPAN_DANGER("You iron [victim]'s [parsed]!")
+			)
 
-			var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, zone)
-			affecting.take_damage(15, BURN, inflicter = "Hot metal")
+			var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(victim, zone)
+			if(istype(affecting))
+				affecting.take_damage(15, BURN, inflicter = "Hot metal")
+			else
+				victim.take_damage(15, BURN)
 
 			return TRUE
 
@@ -119,7 +128,7 @@
 	return ..()
 
 /obj/structure/bed/roller/ironingboard/attack_hand(var/mob/user)
-	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE) || buckled_mob)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE) || has_buckled_mob())
 		return ..()	//Takes care of unbuckling.
 	if(density) // check if it's deployed
 		if(holding && user.put_in_hands(holding))
@@ -128,7 +137,7 @@
 		if(cloth && user.put_in_hands(cloth))
 			remove_item(cloth)
 			return TRUE
-		if(!buckled_mob)
+		if(!has_buckled_mob())
 			to_chat(user, "You fold the ironing table down.")
 			set_density(0)
 	else

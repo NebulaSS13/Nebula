@@ -5,7 +5,7 @@
 	projectiletype = /obj/item/projectile/bullet/pellet
 	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 
-/mob/living/simple_animal/hostile/hivebot/ranged/has_ranged_attack()
+/mob/living/simple_animal/hostile/hivebot/ranged/has_ranged_attack(atom/target)
 	return TRUE
 
 /mob/living/simple_animal/hostile/hivebot/ranged/rapid

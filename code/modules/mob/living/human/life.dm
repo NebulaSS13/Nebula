@@ -38,6 +38,7 @@
 	return stamina
 
 /mob/living/human/adjust_stamina(var/amt)
+	. = (stamina + amt) > 0
 	var/last_stamina = stamina
 	if(stat == DEAD)
 		stamina = 0

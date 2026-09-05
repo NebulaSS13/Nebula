@@ -12,3 +12,15 @@
 	name = "deer skull"
 	icon = 'icons/obj/items/bone.dmi'
 	icon_state = "deer_skull"
+
+/obj/item/bone/skull/unknown
+
+/obj/item/bone/skull/tajaran
+
+/obj/item/bone/skull/unathi
+
+/obj/item/bone/ribs
+
+/obj/item/bone/arm
+
+/obj/item/bone/leg

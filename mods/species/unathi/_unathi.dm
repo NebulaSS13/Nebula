@@ -15,3 +15,9 @@
 /mob/living/human/unathi/Initialize(mapload, species_uid, datum/mob_snapshot/supplied_appearance)
 	species_uid = /decl/species/unathi::uid
 	. = ..()
+
+
+/obj/item/remains/unathi
+	desc = "They look like Unathi remains. Pointy."
+	icon_state = "remainsunathi"
+	icon = 'mods/species/unathi/icons/remains.dmi'

@@ -56,3 +56,53 @@
 	desc = "A cabinet designed to hold medicine, it might still have something of use inside."
 	chance_uncommon = 20
 	chance_rare = 5
+
+/obj/structure/loot_pile/surface/bones
+    name = "bone pile"
+    desc = "A pile of various dusty bones. Your graverobbing instincts tell you there might be valuables here."
+    icon = 'icons/obj/bones.dmi'
+    icon_state = "bonepile"
+    delete_on_depletion = TRUE
+
+/obj/structure/loot_pile/surface/bones/get_common_loot()
+	var/static/list/common_loot = list(
+        /obj/item/bone,
+        /obj/item/bone/skull,
+        /obj/item/bone/skull/tajaran,
+        /obj/item/bone/skull/unathi,
+        /obj/item/bone/skull/unknown,
+        /obj/item/bone/leg,
+        /obj/item/bone/arm,
+        /obj/item/bone/ribs,
+    )
+	return common_loot
+
+/obj/structure/loot_pile/surface/bones/get_uncommon_loot()
+	var/static/list/uncommon_loot = list(
+        /obj/item/coin/gold,
+        /obj/item/coin/silver,
+        /obj/item/deck/tarot,
+        /obj/item/flame/fuelled/lighter/zippo/black,
+        /obj/item/flame/fuelled/lighter/zippo/bronze,
+        /obj/item/knife/survival,
+        /obj/item/knife/combat,
+        /obj/item/tool/axe/hatchet,
+        /obj/item/knife/kitchen/cleaver,
+        /obj/item/wallet/random,
+        /obj/random/jewelry,
+		/obj/random/jewelry,
+		/obj/random/jewelry,
+        /obj/item/clothing/suit/poncho/blue,
+        /obj/item/clothing/shoes/jackboots,
+        /obj/item/clothing/suit/jacket/bomber
+    )
+	return uncommon_loot
+
+/obj/structure/loot_pile/surface/bones/get_rare_loot()
+	var/static/list/rare_loot = list(
+        /obj/item/belt/utility/full,
+        /obj/item/gun/projectile/revolver,
+        /obj/item/gun/projectile/pistol,
+        /obj/item/gun/launcher/bow/crossbow/powered
+    )
+	return rare_loot

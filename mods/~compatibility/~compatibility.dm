@@ -3,6 +3,10 @@
 #include "patches/heist_vox.dm"
 #endif
 
+#ifdef GAMEMODE_PACK_CULT
+#include "patches/cult.dm"
+#endif
+
 #ifdef MODPACK_PSIONICS
 #include "patches/psionics.dm"
 #endif
@@ -41,4 +45,8 @@
 
 #ifdef CONTENT_PACK_EXPLORATION
 #include "patches/exploration.dm"
+#endif
+
+#ifdef MODPACK_POLARIS
+#include "patches/polaris.dm"
 #endif

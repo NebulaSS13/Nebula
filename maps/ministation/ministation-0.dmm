@@ -2599,7 +2599,7 @@
 	dir = 1;
 	pixel_y = -23
 	},
-/obj/structure/janicart{
+/obj/structure/vehicle/janicart{
 	dir = 4
 	},
 /turf/floor/tiled,
@@ -5744,7 +5744,7 @@
 	},
 /obj/item/belt/utility,
 /obj/item/wrench,
-/obj/item/weldingtool,
+/obj/item/fuelled_tool/welding,
 /obj/item/clothing/head/welding,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5814,7 +5814,7 @@
 	},
 /obj/item/belt/utility,
 /obj/item/wrench,
-/obj/item/weldingtool,
+/obj/item/fuelled_tool/welding,
 /obj/item/clothing/head/welding/engie,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4

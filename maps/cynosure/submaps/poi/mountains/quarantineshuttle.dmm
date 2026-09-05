@@ -1,0 +1,1378 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/template_noop,
+/area/template_noop)
+"ab" = (
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"ac" = (
+/obj/item/caution/cone,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"ad" = (
+/turf/wall/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"ae" = (
+/obj/structure/inflatable,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"af" = (
+/obj/structure/inflatable/door,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"ag" = (
+/obj/structure/shuttle/engine/heater{
+	dir = 4;
+	icon_state = "heater"
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"ah" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 8;
+	icon_state = "propulsion_l"
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"ai" = (
+/obj/structure/grille,
+/obj/structure/shuttle/window,
+/obj/machinery/door/blast/regular{
+	dir = 8;
+	name = "Emergency Lockdown Shutters"
+	},
+/obj/structure/tape_barricade/medical{
+	dir = 4;
+	icon_state = "tape_door_0"
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"aj" = (
+/turf/wall/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"ak" = (
+/obj/machinery/door/airlock/external{
+	desc = "It opens and closes. It is stamped with the logo of Major Bill's Transportation";
+	icon_state = "door_locked";
+	id_tag = null;
+	locked = 1;
+	name = "MBT-540"
+	},
+/obj/structure/tape_barricade/medical{
+	dir = 4;
+	icon_state = "tape_door_0"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"al" = (
+/obj/structure/sign/warning/biohazard{
+	dir = 1
+	},
+/turf/wall/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"am" = (
+/obj/structure/hygiene/toilet{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/vomit,
+/obj/item/remains/human,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"an" = (
+/obj/machinery/door/airlock{
+	name = "Restroom"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"ao" = (
+/obj/effect/decal/cleanable/vomit,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"ap" = (
+/obj/item/remains/human,
+/obj/item/clothing/suit/space/emergency,
+/obj/item/clothing/head/helmet/space/emergency,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aq" = (
+/obj/structure/chair,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"ar" = (
+/obj/structure/chair,
+/obj/item/remains/human,
+/obj/item/clothing/suit/space/emergency,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"as" = (
+/obj/machinery/vending/snack,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"at" = (
+/obj/machinery/vending/cola,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"au" = (
+/obj/structure/closet/crate/secure,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"av" = (
+/obj/item/tool/drill,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aw" = (
+/obj/item/clothing/mask/breath,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"ax" = (
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"ay" = (
+/obj/item/remains/xeno,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"az" = (
+/obj/item/trash/syndi_cakes,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aA" = (
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aB" = (
+/obj/item/trash/cigbutt,
+/obj/item/tank/emergency/oxygen,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aC" = (
+/obj/item/knife/combat/boot,
+/obj/item/clothing/mask/breath,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aD" = (
+/obj/item/remains/human,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aE" = (
+/obj/item/trash/sosjerky,
+/obj/item/box/fancy/donut/empty,
+/obj/item/chems/drinks/sillycup,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aF" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced{
+	dir = 1;
+	},
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"aG" = (
+/obj/machinery/door/airlock/glass,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aH" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced{
+	dir = 1;
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"aI" = (
+/obj/machinery/button{
+	name = "Cargo Hatch"
+	},
+/turf/wall/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"aJ" = (
+/obj/machinery/computer,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aK" = (
+/obj/structure/chair/comfy/brown{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/vomit,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aL" = (
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aM" = (
+/obj/item/trash/cheesie,
+/obj/item/remains/human,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aN" = (
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aO" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aP" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/obj/item/remains/human,
+/obj/item/clothing/mask/breath,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aQ" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aR" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aS" = (
+/obj/effect/decal/cleanable/vomit,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aT" = (
+/obj/item/clothing/head/helmet/space/emergency,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aU" = (
+/obj/machinery/door/airlock/engineering{
+	icon_state = "door_locked";
+	locked = 1;
+	name = "Cargo Bay"
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"aV" = (
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aW" = (
+/obj/item/shard,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aX" = (
+/obj/item/paicard,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"aY" = (
+/obj/machinery/door/blast/regular{
+	name = "Cargo Door"
+	},
+/obj/structure/tape_barricade/medical{
+	dir = 4;
+	icon_state = "tape_door_0"
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"aZ" = (
+/obj/item/remains/human,
+/obj/item/clothing/jumpsuit/corporate/mbill_flight{
+	desc = "A uniform belonging to Major Bill's Transportation, a shipping megacorporation. This looks at least a few decades out of date.";
+	name = "\improper old Major Bill's uniform"
+	},
+/obj/item/clothing/suit/mbill{
+	desc = "It's a ballcap bearing the colors of Major Bill's Shipping. This one looks at least a few decades out of date.";
+	name = "old shipping cap"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"ba" = (
+/obj/item/trash/cigbutt,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bb" = (
+/obj/machinery/door/airlock/command{
+	icon_state = "door_locked";
+	locked = 1
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bc" = (
+/obj/item/tank/emergency/oxygen/engi,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bd" = (
+/obj/item/remains/human,
+/obj/item/clothing/suit/space/emergency,
+/obj/item/clothing/head/helmet/space/emergency,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"be" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1;
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"bf" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 1;
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"bg" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1;
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"bh" = (
+/obj/item/clothing/suit/space/emergency,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bi" = (
+/obj/item/trash/candy,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bj" = (
+/obj/structure/rack,
+/obj/structure/loot_pile/maint/boxfort,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bk" = (
+/obj/structure/rack,
+/obj/item/tool/shovel,
+/obj/random/contraband,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bl" = (
+/obj/structure/closet/crate/secure{
+	icon_state = "scisecurecrateopen";
+	locked = 0;
+	name = "Virus Samples - FRAGILE";
+	opened = 1
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bm" = (
+/obj/structure/chair/comfy/brown{
+	dir = 8
+	},
+/obj/item/remains/human,
+/obj/item/clothing/jumpsuit/corporate/mbill_flight{
+	desc = "A flight suit belonging to Major Bill's Transportation, a shipping megacorporation. This looks at least a few decades out of date.";
+	name = "\improper old Major Bill's flight suit"
+	},
+/obj/item/clothing/suit/mbill{
+	desc = "It's a ballcap bearing the colors of Major Bill's Shipping. This one looks at least a few decades out of date.";
+	name = "old shipping cap"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bn" = (
+/obj/structure/table,
+/obj/item/taperecorder,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bo" = (
+/obj/item/crowbar/red,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bp" = (
+/obj/item/trash/chips,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bq" = (
+/obj/structure/chair,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"br" = (
+/obj/structure/chair,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bs" = (
+/obj/structure/chair,
+/obj/item/remains/human,
+/obj/item/clothing/mask/breath,
+/obj/item/clothing/suit/mbill{
+	desc = "It's a ballcap bearing the colors of Major Bill's Shipping. This one looks at least a few decades out of date.";
+	name = "old shipping cap"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bt" = (
+/obj/structure/chair,
+/obj/item/remains/human,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bu" = (
+/obj/item/remains/xeno,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bv" = (
+/obj/item/shard{
+	icon_state = "medium"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bw" = (
+/obj/item/remains/mouse,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bx" = (
+/obj/random/maintenance,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"by" = (
+/obj/item/coin/silver,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bz" = (
+/obj/item/remains/human,
+/obj/item/clothing/suit/space/emergency,
+/obj/item/clothing/head/helmet/space/emergency,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bA" = (
+/obj/effect/decal/cleanable/generic,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bB" = (
+/obj/item/tank/emergency/oxygen/engi,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bC" = (
+/obj/item/trash/sosjerky,
+/obj/item/remains/human,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bD" = (
+/obj/item/remains/human,
+/obj/item/clothing/mask/breath,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bE" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"bF" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/floor/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"bG" = (
+/obj/machinery/button{
+	dir = 4;
+	name = "Cargo Access"
+	},
+/turf/wall/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"bH" = (
+/obj/machinery/recharge_station,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bI" = (
+/obj/machinery/door/airlock{
+	name = "Charge Station"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bJ" = (
+/obj/item/trash/tastybread,
+/obj/item/knife/folding/combat/balisong,
+/obj/effect/decal/cleanable/dirt/visible,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bK" = (
+/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/mucus,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bL" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/obj/item/remains/xeno,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bM" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/obj/item/card/id{
+	desc = "An identification card of some sort. Looks like this one was issued by the Vir Independent Mining Corp.";
+	name = "VIMC identification card";
+	assignment = "Miner";
+	registered_name = "Nadia Chu"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bN" = (
+/obj/structure/rack,
+/obj/item/toolbox/emergency,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bO" = (
+/obj/structure/rack,
+/obj/item/clothing/suit/mbill{
+	desc = "It's a ballcap bearing the colors of Major Bill's Shipping. This one looks at least a few decades out of date.";
+	name = "old shipping cap"
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bP" = (
+/obj/structure/ore_box,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bQ" = (
+/obj/item/poster,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bR" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"bS" = (
+/obj/structure/sign/warning/biohazard,
+/turf/wall/shuttle,
+/area/cynosure_submap/cave/qShuttle)
+"bT" = (
+/obj/structure/tape_barricade/medical{
+	icon_state = "tape_v_0"
+	},
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"bU" = (
+/obj/item/stack/tape_roll/barricade_tape/medical,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"bV" = (
+/obj/structure/tape_barricade/medical{
+	dir = 1;
+	icon_state = "tape_dir_0"
+	},
+/obj/structure/tape_barricade/medical{
+	dir = 4;
+	icon_state = "tape_dir_0"
+	},
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"bW" = (
+/obj/structure/tape_barricade/medical{
+	icon_state = "tape_h_0"
+	},
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"bX" = (
+/obj/structure/lattice,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"bY" = (
+/obj/structure/sign/warning/secure_area,
+/turf/wall/iron,
+/area/cynosure_submap/cave/qShuttle)
+"bZ" = (
+/obj/structure/sign/plaque/ai_dev{
+	desc = "By order of the S.D.D.C, this site or craft is to be buried and not disturbed until such time that sterility can be confirmed. Dated: 20/12/2491 ";
+	name = "\improper Sif Department of Disease Control notice"
+	},
+/turf/wall/iron,
+/area/cynosure_submap/cave/qShuttle)
+"ca" = (
+/obj/structure/table/steel,
+/obj/random/tool/power,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"cb" = (
+/obj/item/bodybag,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"cc" = (
+/obj/structure/table/steel,
+/obj/item/box/bodybags,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"cd" = (
+/obj/structure/table/steel,
+/obj/item/clothing/suit/bio_suit,
+/obj/random/medical/lite,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"ce" = (
+/obj/structure/closet/l3closet/virology,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"cf" = (
+/obj/item/chems/syringe/antibiotic,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"cg" = (
+/obj/structure/tank_rack/oxygen,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"ch" = (
+/obj/structure/table/steel,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"ci" = (
+/obj/structure/table/steel,
+/obj/item/chems/syringe/antibiotic,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"cj" = (
+/obj/structure/table/steel,
+/obj/item/chems/spray/cleaner{
+	desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'";
+	name = "Chemistry Cleaner"
+	},
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"ck" = (
+/obj/structure/table/steel,
+/obj/item/tool/hydraulic_cutter,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"cl" = (
+/obj/structure/rack,
+/obj/item/clothing/head/bio_hood,
+/obj/item/clothing/suit/bio_suit,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"cm" = (
+/obj/item/fuelled_tool/welding/largetank,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"cn" = (
+/obj/structure/closet/crate/medical,
+/turf/floor/barren,
+/area/cynosure_submap/cave/qShuttle)
+"co" = (
+/obj/structure/sign/warning/biohazard,
+/turf/wall/iron,
+/area/cynosure_submap/cave/qShuttle)
+"gE" = (
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"qP" = (
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"xR" = (
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"NN" = (
+/obj/machinery/door/airlock/glass,
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+"Zg" = (
+/turf/floor/tiled,
+/area/cynosure_submap/cave/qShuttle)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(2,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ac
+ab
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(3,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ad
+ai
+ai
+ai
+ad
+ab
+ac
+ab
+ab
+ab
+ac
+aa
+aa
+aa
+aa
+aa
+"}
+(4,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ad
+ad
+aJ
+aZ
+aJ
+ad
+ad
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+"}
+(5,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ad
+ad
+ad
+aK
+ba
+bm
+ad
+ad
+ad
+bT
+bV
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+"}
+(6,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ai
+am
+ad
+aL
+ba
+bn
+ad
+bH
+ai
+ab
+bW
+ab
+cg
+cn
+aa
+aa
+aa
+aa
+"}
+(7,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+aj
+an
+ad
+ad
+bb
+ad
+ad
+bI
+aj
+ae
+bW
+ab
+ch
+ca
+aa
+aa
+aa
+aa
+"}
+(8,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+af
+ak
+ao
+aw
+aM
+bc
+bo
+aD
+bJ
+ak
+ae
+bW
+ab
+ci
+ab
+aa
+aa
+aa
+aa
+"}
+(9,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+ak
+ap
+ax
+aN
+bd
+bp
+by
+bK
+ak
+af
+bW
+ab
+cj
+ab
+aa
+aa
+aa
+aa
+"}
+(10,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+al
+ad
+ay
+aO
+ad
+bq
+aA
+ad
+bS
+ae
+bW
+ab
+ck
+ab
+aa
+aa
+aa
+aa
+"}
+(11,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ai
+aq
+az
+aP
+be
+br
+bz
+bL
+ai
+ab
+bW
+bX
+cl
+ab
+aa
+aa
+aa
+aa
+"}
+(12,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+aq
+aA
+aQ
+bf
+bs
+aA
+aQ
+ad
+ab
+bW
+bY
+ab
+ab
+aa
+aa
+aa
+aa
+"}
+(13,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ai
+ar
+aB
+aQ
+bg
+bt
+bA
+bM
+ai
+ab
+bW
+bZ
+ab
+ab
+aa
+aa
+aa
+aa
+"}
+(14,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ad
+ad
+aC
+aR
+ad
+bq
+bB
+ad
+ad
+ab
+bW
+co
+cm
+ab
+aa
+aa
+aa
+aa
+"}
+(15,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ad
+as
+aD
+aS
+bh
+aN
+bC
+bN
+ad
+bU
+bW
+cb
+ab
+ab
+aa
+aa
+aa
+aa
+"}
+(16,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+ac
+ab
+ad
+at
+aE
+aT
+bi
+bu
+bD
+bO
+ad
+ab
+bW
+cb
+cb
+aa
+aa
+aa
+aa
+aa
+"}
+(17,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ad
+ad
+ad
+aU
+ad
+aU
+ad
+ad
+ad
+ab
+bW
+cb
+cb
+aa
+aa
+aa
+aa
+aa
+"}
+(18,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ad
+au
+aF
+aV
+bj
+bv
+bE
+bP
+ad
+ab
+bW
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+"}
+(19,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ad
+av
+aG
+aA
+Zg
+aA
+NN
+bQ
+ad
+ab
+bW
+cc
+ab
+aa
+aa
+aa
+aa
+aa
+"}
+(20,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ad
+au
+aH
+aW
+bk
+bw
+bF
+bR
+ad
+ab
+bW
+cd
+ab
+aa
+aa
+aa
+aa
+aa
+"}
+(21,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+ad
+ad
+ad
+aX
+qP
+gE
+ad
+ad
+ad
+ad
+ad
+ce
+ab
+ab
+aa
+aa
+aa
+aa
+"}
+(22,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+ad
+ag
+ad
+ag
+aI
+xR
+bl
+bx
+ad
+ag
+ad
+ag
+ad
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+"}
+(23,1,1) = {"
+aa
+aa
+aa
+aa
+ab
+ad
+ah
+ad
+ah
+ad
+aY
+aY
+aY
+bG
+ah
+ad
+ah
+ad
+cf
+ab
+ac
+aa
+aa
+aa
+aa
+"}
+(24,1,1) = {"
+aa
+aa
+aa
+aa
+ab
+ac
+ab
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(25,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}

@@ -13,7 +13,7 @@
 	light_range = 3
 	abstract_type = /obj/vehicle
 
-	can_buckle = 1
+	max_buckled_mobs = 1
 	buckle_movable = 1
 	buckle_lying = 0
 
@@ -125,8 +125,8 @@
 		if(!open)
 			to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 			return TRUE
-		var/obj/item/weldingtool/welder = used_item
-		if(!welder.welding)
+		var/obj/item/fuelled_tool/welding/welder = used_item
+		if(!welder.running_state)
 			to_chat(user, "<span class='notice'>Unable to repair while [used_item] is off.</span>")
 			return TRUE
 		if(welder.weld(5, user))
