@@ -1,9 +1,7 @@
 /obj/structure/closet/secure_closet/xenofauna
 	name = "xenofauna technician locker"
 	req_access = list(access_xenofauna)
-
-/obj/structure/closet/secure_closet/xenofauna/WillContain()
-	return list(
+	var/list/closet_will_contain = list(
 		/obj/item/clothing/jumpsuit/xenofauna,
 		/obj/item/clothing/suit/explorer/xenofauna,
 		/obj/item/clothing/mask/gas/explorer,
@@ -18,9 +16,11 @@
 		/obj/item/radio,
 		/obj/item/cataloguer,
 		/obj/item/backpack/satchel/grey,
-		/obj/item/knife/survival,
 		/obj/item/specimen_tagger
 	)
+
+/obj/structure/closet/secure_closet/xenofauna/WillContain()
+	return closet_will_contain
 
 /obj/structure/closet/secure_closet/guncabinet/phase
 	name = "explorer weapon cabinet"

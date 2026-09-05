@@ -111,8 +111,8 @@
 
 /obj/random/natural_debris // Natural crap that you might fish out of a river in unspoiled countryside.
 	name = "random natural detritus"
-	icon = 'icons/effects/blood.dmi'
-	icon_state = "remains"
+	icon = /obj/item/stick::icon
+	icon_state = /obj/item/stick::icon_state
 
 // We really have a limited amount of random crap, don't we...
 /obj/random/natural_debris/spawn_choices()
@@ -645,3 +645,35 @@
 		/obj/item/backpack/dufflebag/syndie  = 1
 	)
 	return spawn_choices
+
+
+/obj/random/fishing_junk
+	name = "random fishing junk"
+	icon = /obj/item/trash/mollusc_shell::icon
+	icon_state = /obj/item/trash/mollusc_shell::icon_state
+
+/obj/random/fishing_junk/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/trash/mollusc_shell/clam     = 2,
+		/obj/item/trash/mollusc_shell/barnacle = 2,
+		/obj/item/remains/mouse                = 2,
+		/obj/item/remains/lizard               = 2,
+		/obj/item/stick                        = 1,
+		/obj/item/trash/mollusc_shell          = 1
+	)
+	return spawnable_choices
+
+/obj/random/humanoidremains
+	name = "Random Humanoid Remains"
+	desc = "This is a random pile of remains."
+	icon = /obj/item/remains/human::icon
+	icon_state = /obj/item/remains/human::icon_state
+	spawn_nothing_percentage = 15
+	var/list/remains = list(
+		/obj/item/remains/human   = 30,
+		/obj/item/remains/ribcage = 25,
+		/obj/item/remains/posi    = 10
+	)
+
+/obj/random/humanoidremains/spawn_choices()
+	return remains
