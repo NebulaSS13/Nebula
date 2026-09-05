@@ -1058,6 +1058,7 @@
 #include "code\game\objects\effects\decals\Cleanable\robots.dm"
 #include "code\game\objects\effects\decals\Cleanable\tracks.dm"
 #include "code\game\objects\effects\map_effect\_map_effect.dm"
+#include "code\game\objects\effects\map_effect\radiation_emitter.dm"
 #include "code\game\objects\effects\map_effect\interval\_interval.dm"
 #include "code\game\objects\effects\map_effect\interval\effect_emitter.dm"
 #include "code\game\objects\effects\map_effect\interval\screen_shaker.dm"
