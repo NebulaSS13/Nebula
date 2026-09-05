@@ -89,6 +89,11 @@
 	draw_handle        = TRUE
 	_base_attack_force = 15
 
+/obj/item/knife/combat/boot
+	name = "boot knife"
+	desc = "A small knife suitable for hiding down the side of your boot."
+	_base_attack_force = 6
+
 /obj/item/knife/combat/get_autopsy_descriptors()
 	. = ..()
 	. += "serrated"

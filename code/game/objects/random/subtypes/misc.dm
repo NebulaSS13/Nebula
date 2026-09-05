@@ -637,14 +637,10 @@
 	)
 	return spawn_choices
 
-<<<<<<< HEAD
-=======
-
->>>>>>> e8059bbd42ae9bdee1e5f85b9c407bf2467c6491
 /obj/random/fishing_junk
 	name = "random fishing junk"
-	icon = /obj/item/pizzabox::icon
-	icon_state = /obj/item/pizzabox::icon_state
+	icon = /obj/item/trash/mollusc_shell::icon
+	icon_state = /obj/item/trash/mollusc_shell::icon_state
 
 /obj/random/fishing_junk/spawn_choices()
 	var/static/list/spawnable_choices = list(

@@ -34022,7 +34022,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/item/gun/energy/captain,
+/obj/item/gun/energy/retro/captain,
 /turf/floor/carpet,
 /area/exodus/crew_quarters/captain)
 "btR" = (

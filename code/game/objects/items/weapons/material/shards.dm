@@ -16,6 +16,9 @@
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle = FALSE
 
+/obj/item/shard/phoron
+	material = /decl/material/solid/phoron
+
 /obj/item/shard/Initialize(ml, material_key)
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(TOOL_SCALPEL = TOOL_QUALITY_BAD))

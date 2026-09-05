@@ -56,6 +56,7 @@
 	icon = 'mods/content/polaris/icons/structures/flora/tree_sif.dmi'
 	material = /decl/material/solid/organic/wood/sif
 	icon_state = "tree_sif_stump"
+	material = /decl/material/solid/organic/wood/sif
 
 /obj/structure/flora/tree/sif/init_appearance()
 	icon_state = "tree_sif[rand(0, 5)]"

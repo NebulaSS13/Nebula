@@ -16,7 +16,7 @@
 /obj/item/gun/energy/sniperrifle/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
 	return ..(/obj/item/cell/gun, /obj/item/cell/gun, /datum/extension/loaded_cell, charge_value)
 
-/obj/item/gun/energy/captain/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+/obj/item/gun/energy/retro/captain/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
 	return ..(/obj/item/cell/gun, /obj/item/cell/gun, /datum/extension/loaded_cell/unremovable, charge_value)
 
 /obj/item/gun/energy/gun/nuclear/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
@@ -87,7 +87,7 @@
 			projectile_type = null
 			firemodes = null
 
-/obj/item/gun/energy/captain
+/obj/item/gun/energy/retro/captain
 	desc = "A rare weapon, produced by the Lunar Arms Company around 2105 - one of humanity's first wholly extra-terrestrial weapon designs. It's certainly aged well."
 	charge_cost = 480 //5
 

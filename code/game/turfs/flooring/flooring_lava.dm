@@ -1,4 +1,3 @@
-
 /decl/flooring/lava
 	name                 = "lava"
 	icon_base            = "lava"

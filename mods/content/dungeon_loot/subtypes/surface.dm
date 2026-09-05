@@ -58,40 +58,44 @@
 	chance_rare = 5
 
 /obj/structure/loot_pile/surface/bones
-	name = "bone pile"
-	desc = "A pile of various dusty bones. Your graverobbing instincts tell you there might be valuables here."
-	icon = 'icons/obj/items/bones.dmi'
-	icon_state = "bonepile"
-	delete_on_depletion = TRUE
-	var/list/common_loot = list(
-		/obj/item/bone/skull,
-		/obj/item/bone/skull/unknown,
-		/obj/item/bone/leg,
-		/obj/item/bone/arm,
-		/obj/item/bone/ribs
-	)
-	var/list/uncommon_loot = list(
-		/obj/item/coin/gold,
-		/obj/item/coin/silver,
-		/obj/item/deck/tarot,
-		/obj/item/flame/fuelled/lighter/zippo/black,
-		/obj/item/flame/fuelled/lighter/zippo/bronze,
-		/obj/item/knife/combat,
-		/obj/item/tool/axe/hatchet,
-		/obj/item/knife/kitchen/cleaver,
-		/obj/item/wallet/random,
-		/obj/random/jewelry,
-		/obj/random/jewelry,
-		/obj/random/jewelry,
-		/obj/item/clothing/suit/poncho/blue,
-		/obj/item/clothing/shoes/jackboots,
-		/obj/item/clothing/suit/jacket/bomber
-	)
+    name = "bone pile"
+    desc = "A pile of various dusty bones. Your graverobbing instincts tell you there might be valuables here."
+    icon = 'icons/obj/bones.dmi'
+    icon_state = "bonepile"
+    delete_on_depletion = TRUE
 
 /obj/structure/loot_pile/surface/bones/get_common_loot()
+	var/static/list/common_loot = list(
+        /obj/item/bone,
+        /obj/item/bone/skull,
+        /obj/item/bone/skull/tajaran,
+        /obj/item/bone/skull/unathi,
+        /obj/item/bone/skull/unknown,
+        /obj/item/bone/leg,
+        /obj/item/bone/arm,
+        /obj/item/bone/ribs,
+    )
 	return common_loot
 
 /obj/structure/loot_pile/surface/bones/get_uncommon_loot()
+	var/static/list/uncommon_loot = list(
+        /obj/item/coin/gold,
+        /obj/item/coin/silver,
+        /obj/item/deck/tarot,
+        /obj/item/flame/fuelled/lighter/zippo/black,
+        /obj/item/flame/fuelled/lighter/zippo/bronze,
+        /obj/item/knife/survival,
+        /obj/item/knife/combat,
+        /obj/item/tool/axe/hatchet,
+        /obj/item/knife/kitchen/cleaver,
+        /obj/item/wallet/random,
+        /obj/random/jewelry,
+		/obj/random/jewelry,
+		/obj/random/jewelry,
+        /obj/item/clothing/suit/poncho/blue,
+        /obj/item/clothing/shoes/jackboots,
+        /obj/item/clothing/suit/jacket/bomber
+    )
 	return uncommon_loot
 
 /obj/structure/loot_pile/surface/bones/get_rare_loot()

@@ -8,6 +8,7 @@
 	anchored = TRUE
 	material = /decl/material/solid/stone/sandstone
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+
 	var/excavation_level = 0
 	var/datum/artifact_find/artifact_find
 

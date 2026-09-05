@@ -2,6 +2,9 @@
 	name = "light exosuit"
 	desc = "A light and agile exosuit."
 
+/mob/living/exosuit/premade/light/autonomous
+	ai = /datum/mob_controller/aggressive
+
 /obj/item/mech_component/manipulators/light/painted
 	color = COLOR_OFF_WHITE
 
