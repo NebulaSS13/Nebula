@@ -23,3 +23,16 @@
 	. = ..()
 	if(_tajaran_onmob_icon)
 		LAZYSET(sprite_sheets, BODYTYPE_TAJARAN, _tajaran_onmob_icon)
+
+/obj/item/remains/tajaran
+	desc = "They look like Tajaran remains. They're surprisingly small."
+	icon_state = "remainstajaran"
+	icon = 'mods/species/tajaran/icons/remains.dmi'
+
+/obj/item/bone/skull/tajaran
+	desc = "A skull. Judging by the shape and size, you'd guess that it might be Tajaran."
+	icon_state = "tajskull"
+
+/obj/random/humanoidremains/Initialize()
+	. = ..()
+	remains[/obj/item/remains/tajaran] = 25

@@ -369,8 +369,8 @@
 	paint_color = COLOR_GREEN
 
 /obj/item/stack/cable_coil/pink
-	color = COLOR_PURPLE
-	paint_color = COLOR_PURPLE
+	color = COLOR_PINK
+	paint_color = COLOR_PINK
 
 /obj/item/stack/cable_coil/orange
 	color = COLOR_ORANGE
@@ -387,6 +387,10 @@
 /obj/item/stack/cable_coil/lime
 	color = COLOR_LIME
 	paint_color = COLOR_LIME
+
+/obj/item/stack/cable_coil/purple
+	color = COLOR_PURPLE
+	paint_color = COLOR_PURPLE
 
 /obj/item/stack/cable_coil/random/Initialize(mapload, c_length, param_color)
 	var/list/possible_cable_colours = get_global_cable_colors()
