@@ -18,3 +18,10 @@
 DEFINE_STACK_SUBTYPES(sif,           "sifwood",           solid/organic/wood/sif,       plank, null)
 DEFINE_STACK_SUBTYPES(sif,           "sifwood",           solid/organic/wood/sif,       log,   null)
 DEFINE_STACK_SUBTYPES(chipboard_sif, "sifwood chipboard", solid/organic/wood/chipboard, sheet, null)
+
+// TODO
+/decl/material/solid/organic/skathari_resin
+	name  = "skathari resin"
+	color = "#413849"
+	uid = "mat_solid_skath_resin"
+	door_icon_base = "resin"
