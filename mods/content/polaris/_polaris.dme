@@ -2,6 +2,7 @@
 #define MODPACK_POLARIS
 // BEGIN_INCLUDE
 #include "code\background.dm"
+#include "code\random.dm"
 #include "code\vent_pump.dm"
 #include "datum\loadout.dm"
 #include "datum\materials.dm"
@@ -24,8 +25,20 @@
 #include "items\tiles.dm"
 #include "items\under.dm"
 #include "items\guns\overrides.dm"
+#include "mobs\karik.dm"
+#include "mobs\penguin.dm"
+#include "mobs\skathari.dm"
+#include "mobs\sivian\crabs.dm"
+#include "mobs\sivian\frostfly.dm"
+#include "mobs\sivian\glitterfly.dm"
+#include "mobs\sivian\kururak.dm"
+#include "mobs\sivian\sakimm.dm"
+#include "mobs\sivian\savik.dm"
+#include "mobs\sivian\siffet.dm"
+#include "mobs\sivian\tymisian.dm"
 #include "structures\flora.dm"
 #include "structures\furniture.dm"
+#include "structures\skathari.dm"
 #include "turfs\floors.dm"
 #include "turfs\walls.dm"
 #endif // MODPACK_POLARIS

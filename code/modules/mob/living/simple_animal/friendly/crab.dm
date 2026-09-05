@@ -1,5 +1,5 @@
 //Look Sir, free crabs!
-/mob/living/simple_animal/crab
+/mob/living/simple_animal/passive/crab
 	name = "crab"
 	desc = "A hard-shelled crustacean. Seems quite content to lounge around all the time."
 	icon = 'icons/mob/simple_animal/crab.dmi'
@@ -35,7 +35,7 @@
 /decl/bodytype/hexapod/get_ignited_icon_state(mob/living/victim)
 	return "Generic_mob_burning"
 
-/mob/living/simple_animal/crab/get_bodytype()
+/mob/living/simple_animal/passive/crab/get_bodytype()
 	return GET_DECL(/decl/bodytype/hexapod/animal/crab)
 
 /decl/bodytype/hexapod/animal/crab
@@ -53,7 +53,7 @@
 	. = ..()
 
 //COFFEE! SQUEEEEEEEEE!
-/mob/living/simple_animal/crab/Coffee
+/mob/living/simple_animal/passive/crab/Coffee
 	name = "Coffee"
 	real_name = "Coffee"
 	desc = "It's Coffee, the other pet!"

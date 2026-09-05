@@ -28,7 +28,7 @@
 		/mob/living/simple_animal/fowl/chicken,
 		/mob/living/simple_animal/cow,
 		/mob/living/simple_animal/hostile/parrot,
-		/mob/living/simple_animal/crab,
+		/mob/living/simple_animal/passive/crab,
 		/mob/living/simple_animal/passive/mouse,
 		/mob/living/simple_animal/passive/mouse/rat,
 		/mob/living/simple_animal/hostile/goat,
