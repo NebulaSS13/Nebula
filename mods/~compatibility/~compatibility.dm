@@ -43,10 +43,6 @@
 #include "patches/exploration.dm"
 #endif
 
-#ifdef MODPACK_DUNGEON_LOOT
-#include "patches/dungeon_loot.dm"
-#endif
-
 #ifdef MODPACK_POLARIS
 #include "patches/polaris.dm"
 #endif
