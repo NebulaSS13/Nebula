@@ -136,6 +136,9 @@
 /decl/stack_recipe/planks/prosthetic/right_foot
 	result_type            = /obj/item/organ/external/foot/right
 
+/decl/stack_recipe/planks/oar
+	result_type            = /obj/item/oar
+
 /decl/stack_recipe/planks/furniture
 	abstract_type          = /decl/stack_recipe/planks/furniture
 	one_per_turf           = TRUE
@@ -256,3 +259,11 @@
 /decl/stack_recipe/planks/furniture/fence_door
 	result_type            = /obj/structure/fence/door/plank
 	difficulty             = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/planks/furniture/boat
+	result_type            = /obj/structure/vehicle/boat
+	difficulty             = MAT_VALUE_HARD_DIY
+
+/decl/stack_recipe/planks/furniture/dragon_boat
+	result_type            = /obj/structure/vehicle/boat/dragon
+	difficulty             = MAT_VALUE_VERY_HARD_DIY

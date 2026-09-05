@@ -52,7 +52,7 @@
 		)
 		qdel(cuffs)
 		if(target.buckled?.buckle_require_restraints)
-			target.buckled.unbuckle_mob()
+			target.buckled.unbuckle_mob(target)
 		return TRUE
 
 	return ..()

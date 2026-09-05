@@ -10,8 +10,12 @@
 		var/turf/my_turf = loc
 		if(my_turf.pixel_z < 0 && !my_turf.get_supporting_platform())
 			new_layer = my_turf.layer + 0.25
-		else if(buckled && buckled.buckle_layer_above)
-			new_layer = buckled.layer + ((buckled.dir == SOUTH) ? -0.01 : 0.01)
+		else if(buckled)
+			if(buckled.buckle_layer_above)
+				new_layer = buckled.layer + ((buckled.dir == SOUTH) ? -0.01 : 0.01)
+			if(length(buckled.max_buckled_mobs > 1))
+				new_layer += (buckled.get_buckled_position(src)-1) * ((buckled.dir == SOUTH) ? -0.001 : 0.001)
+
 		else if(length(grabbed_by))
 			var/draw_under = TRUE
 			var/adjust_layer = FALSE
@@ -57,7 +61,7 @@
 	. = ..()
 
 /mob/living/simple_animal/get_base_layer()
-	if(buckled_mob)
+	if(has_buckled_mob())
 		return UNDER_MOB_LAYER
 	return ..()
 
@@ -101,14 +105,14 @@
 			var/obj/structure/platform = ext.get_supporting_platform()
 			if(platform)
 				new_pixel_z += platform.pixel_z
-			else if(ext.height < 0)
+			else if(ext.height < 0 && can_fall())
 				new_pixel_z += ext.pixel_z
 
 		// Check for catwalks/supporting platforms.
 
 		// Update offsets from our buckled atom.
-		if(buckled && buckled.buckle_pixel_shift)
-			var/list/pixel_shift = buckled.buckle_pixel_shift
+		var/list/pixel_shift = buckled?.get_buckled_pixel_shift(buckled.get_buckled_position(src))
+		if(pixel_shift)
 			if(istext(pixel_shift))
 				pixel_shift = cached_json_decode(pixel_shift)
 			if(islist(pixel_shift))

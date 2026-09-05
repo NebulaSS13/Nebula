@@ -8,6 +8,9 @@
 	result_type                 = /obj/structure/travois
 	difficulty                  = MAT_VALUE_EASY_DIY
 
+/decl/stack_recipe/logs/oar
+	result_type                 = /obj/item/oar
+
 /decl/stack_recipe/turfs/wall/logs
 	name                        = "log wall"
 	result_type                 = /turf/wall/log
@@ -38,3 +41,11 @@
 /decl/stack_recipe/logs/furniture/fence_door
 	result_type            = /obj/structure/fence/door/palisade
 	difficulty             = MAT_VALUE_NORMAL_DIY
+
+/decl/stack_recipe/logs/furniture/boat
+	result_type            = /obj/structure/vehicle/boat
+	difficulty             = MAT_VALUE_HARD_DIY
+
+/decl/stack_recipe/logs/furniture/dragon_boat
+	result_type            = /obj/structure/vehicle/boat/dragon
+	difficulty             = MAT_VALUE_VERY_HARD_DIY

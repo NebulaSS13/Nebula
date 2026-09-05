@@ -103,7 +103,7 @@
 	name = "Poppy the Safety Possum"
 	desc = "It's an opossum, a small scavenging marsupial. It's wearing appropriate personal protective equipment, though."
 	icon = 'icons/mob/simple_animal/poppy_possum.dmi'
-	can_buckle = TRUE
+	max_buckled_mobs = 1
 	var/aaa_words = list("delaminat", "meteor", "fire", "breach")
 
 /mob/living/simple_animal/opossum/poppy/is_tagging_suitable()
