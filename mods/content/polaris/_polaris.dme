@@ -18,6 +18,7 @@
 #include "items\head.dm"
 #include "items\headsets.dm"
 #include "items\materials.dm"
+#include "items\misc.dm"
 #include "items\overrides.dm"
 #include "items\suit.dm"
 #include "items\tiles.dm"
