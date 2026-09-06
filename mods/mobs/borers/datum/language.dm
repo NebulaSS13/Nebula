@@ -5,13 +5,14 @@
 	ask_verb = "sings"
 	exclaim_verb = "sings"
 	colour = "alien"
-	key = "z"
-	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
+	language_key = "borer"
+	language_flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
 
 #define isborer(X) istype(X, /mob/living/simple_animal/borer)
-/decl/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+/decl/language/corticalborer/broadcast(mob/living/speaker, datum/speech/phrases, speaker_mask)
+	var/message = istype(phrases) ? phrases.unformatted_message : phrases
 	var/mob/living/simple_animal/borer/B = isborer(speaker) ? speaker : speaker.has_brain_worms()
 	if(B)
 		if(B.host)

@@ -94,10 +94,10 @@
 		else if(get_dist(wight, src) > 10)
 			shadow_wights.Remove(wight_check_index)
 
-/obj/item/vampiric/hear_talk(mob/M, text)
+/obj/item/vampiric/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	..()
-	if(world.time - last_bloodcall >= bloodcall_interval && (M in view(7, src)))
-		bloodcall(M)
+	if(world.time - last_bloodcall >= bloodcall_interval && (speaker in view(7, src)))
+		bloodcall(speaker)
 
 /obj/item/vampiric/proc/bloodcall(var/mob/living/human/M)
 	last_bloodcall = world.time

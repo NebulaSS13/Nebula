@@ -138,7 +138,7 @@ var/global/list/telecomms_hubs = list()
 		var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 		return network_device?.get_network() == check_network_membership
 
-/obj/machinery/network/telecomms_hub/proc/transmit_message(mob/speaker, message, message_verb, decl/language/speaking, frequency, message_compression, list/checked_hubs, list/encryption = list(), obj/effect/overmap/send_overmap_object, chain_transmit = TRUE)
+/obj/machinery/network/telecomms_hub/proc/transmit_message(mob/speaker, datum/speech/phrases, message_verb, frequency, message_compression, list/checked_hubs, list/encryption = list(), obj/effect/overmap/send_overmap_object, chain_transmit = TRUE)
 	if(src in checked_hubs)
 		return
 	checked_hubs += src
@@ -190,7 +190,7 @@ var/global/list/telecomms_hubs = list()
 			listeners[ghost_listener] = TRUE
 
 	for(var/mob/listener in listeners)
-		listener.hear_radio(message, message_verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, vname = send_name, vsource = (listeners[listener] ? send_overmap_object?.name : null))
+		listener.hear_radio(phrases, message_verb, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, vname = send_name, vsource = (listeners[listener] ? send_overmap_object?.name : null))
 
 	if(!chain_transmit)
 		return
@@ -233,7 +233,7 @@ var/global/list/telecomms_hubs = list()
 		if(QDELETED(other_hub) || !other_hub.can_receive_message(check_network_membership))
 			continue
 		// Don't allow further chaining of the message.
-		other_hub.transmit_message(speaker, message, message_verb, speaking, frequency, message_compression, checked_hubs, encryption.Copy(), send_overmap_object, FALSE)
+		other_hub.transmit_message(speaker, phrases, message_verb, frequency, message_compression, checked_hubs, encryption.Copy(), send_overmap_object, FALSE)
 
 /obj/machinery/network/telecomms_hub/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 

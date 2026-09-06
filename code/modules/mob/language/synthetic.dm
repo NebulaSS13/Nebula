@@ -6,8 +6,8 @@
 	ask_verb = "chirps"
 	exclaim_verb = "whistles loudly"
 	colour = "mutant"
-	key = "6"
-	flags = LANG_FLAG_NO_STUTTER
+	language_key = "eal"
+	language_flags = LANG_FLAG_NO_STUTTER
 	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz")
 	space_chance = 10
 	speech_sounds = list(
@@ -28,16 +28,17 @@
 	speech_verb = "states"
 	ask_verb = "queries"
 	exclaim_verb = "declares"
-	key = "b"
-	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
+	language_key = "bot"
+	language_flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
 	shorthand = "N/A"
 	var/drone_only
 
-/decl/language/binary/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+/decl/language/binary/broadcast(mob/living/speaker, datum/speech/phrases, speaker_mask)
 
 	if(!speaker.binarycheck())
 		return
 
+	var/message = istype(phrases) ? phrases.unformatted_message : phrases
 	if (!message)
 		return
 
@@ -82,7 +83,7 @@
 	ask_verb = "transmits"
 	exclaim_verb = "transmits"
 	colour = "say_quote"
-	key = "d"
-	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
+	language_key = "drone"
+	language_flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
 	drone_only = 1
 	shorthand = "N/A"

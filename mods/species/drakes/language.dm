@@ -27,8 +27,8 @@
 	ask_verb = "chirps"
 	exclaim_verb = "rumbles"
 	colour = "alien"
-	key = "l" // l is for lizard, probably
-	flags = LANG_FLAG_RESTRICTED
+	language_key = "drake"
+	language_flags = LANG_FLAG_RESTRICTED
 	machine_understands = 0
 	space_chance = 30
 	syllables = list("hss", "ssh", "khs", "hrr", "rrr", "rrn")

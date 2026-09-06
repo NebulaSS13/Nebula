@@ -74,20 +74,20 @@ var/global/list/alien_whitelist = list()
 
 	// Forbidden languages do not care about admin rights.
 	if(istype(species,/decl/language))
-		var/decl/language/L = species
-		if(L.flags & LANG_FLAG_FORBIDDEN)
+		var/decl/language/language = species
+		if(language.language_flags & LANG_FLAG_FORBIDDEN)
 			return FALSE
 
 	if(check_rights(R_ADMIN, FALSE, M))
 		return TRUE
 
 	if(istype(species,/decl/language))
-		var/decl/language/L = species
-		if(L.flags & LANG_FLAG_RESTRICTED)
+		var/decl/language/language = species
+		if(language.language_flags & LANG_FLAG_RESTRICTED)
 			return FALSE
-		if(!get_config_value(/decl/config/toggle/use_alien_whitelist) || !(L.flags & LANG_FLAG_WHITELISTED))
+		if(!get_config_value(/decl/config/toggle/use_alien_whitelist) || !(language.language_flags & LANG_FLAG_WHITELISTED))
 			return TRUE
-		return whitelist_lookup(L.name, M.ckey)
+		return whitelist_lookup(language.name, M.ckey)
 
 	if(istype(species,/decl/species))
 		var/decl/species/S = species

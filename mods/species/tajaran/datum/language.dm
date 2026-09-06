@@ -5,8 +5,8 @@
 	ask_verb = "purrs"
 	exclaim_verb = "howls"
 	whisper_verb = "purrs softly"
-	key = "2"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "siik"
+	language_flags = LANG_FLAG_WHITELISTED
 	shorthand = "T"
 	syllables = list("mrr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr",
 	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r",
@@ -22,9 +22,5 @@
 	return new_name
 
 //#803b56 is color
-
-/decl/language/tajaran/format_message(message, verb)
-	return "[verb], <span class='message'><span style='color: #803b56'>\"[capitalize(message)]\"</span></span>"
-
-/decl/language/tajaran/format_message_radio(message, verb)
-	return "[verb], <span style='color: #803b56'>\"[capitalize(message)]\"</span>"
+/decl/language/tajaran/format_message_no_verb(message)
+	return "<span style='color: #803b56'>[message]</span>"

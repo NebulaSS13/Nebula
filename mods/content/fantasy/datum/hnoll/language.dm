@@ -9,8 +9,8 @@
 	ask_verb = "chuffs"
 	exclaim_verb = "howls"
 	colour = "serpentid_lang"
-	key = "j"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "hnoll"
+	language_flags = LANG_FLAG_WHITELISTED
 	space_chance = 40
 
 	// Stolen from Zirc's Nakhayl syllable list, with some added Latin syllables.

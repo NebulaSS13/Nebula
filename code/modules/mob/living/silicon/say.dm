@@ -9,9 +9,9 @@
 		to_chat(src, SPAN_WARNING("Your radio isn't functional at this time."))
 		LAZYREMOVE(., silicon_radio)
 
-/mob/living/silicon/ai/handle_mob_specific_speech(message, message_mode, verb = "says", decl/language/speaking)
-	if(message_mode == MESSAGE_MODE_DEPARTMENT)
-		holopad_talk(message, verb, speaking)
+/mob/living/silicon/ai/handle_mob_specific_speech(datum/speech/phrases, verb = "says")
+	if(phrases.message_mode == MESSAGE_MODE_DEPARTMENT)
+		holopad_talk(phrases, verb)
 		return TRUE
 	return ..()
 
@@ -39,23 +39,16 @@
 	return (!speaking && (ishuman(speaker) || issilicon(speaker) || isbrain(speaker))) || ..()
 
 //For holopads only. Usable by AI.
-/mob/living/silicon/ai/proc/holopad_talk(var/message, verb, decl/language/speaking)
+/mob/living/silicon/ai/proc/holopad_talk(datum/speech/phrases, verb)
 
-	log_say("[key_name(src)] : [message]")
+	log_say("[key_name(src)]: [phrases.unformatted_message]")
 
-	message = trim(message)
-
-	if (!message)
-		return
-
-	var/obj/machinery/hologram/holopad/H = src.holo
+	var/obj/machinery/holopad/H = src.holo
 	if(H && H.masters[src])//If there is a hologram and its master is the user.
 
+		var/list/messages = phrases.compile_for_listener(src, machine_listener = TRUE)
 		// AI can hear their own message, this formats it for them.
-		if(speaking)
-			to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [speaking.format_message(message, verb)]</span></i>")
-		else
-			to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span></i>")
+		to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [phrases.language.format_message(messages[1], verb)]</span></i>")
 
 		//This is so pAI's and people inside lockers/boxes,etc can hear the AI Holopad, the alternative being recursion through contents.
 		//This is much faster.
@@ -79,19 +72,16 @@
 					hearturfs += O.locs[1]
 					listening_obj |= O
 
-
 			for(var/mob/M in global.player_list)
 				if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == PREF_ALL_SPEECH)
-					M.hear_say(message,verb,speaking, null, src)
+					M.hear_say(phrases, verb, null, src)
 					continue
 				if(M.loc && (M.locs[1] in hearturfs))
-					M.hear_say(message,verb,speaking, null, src)
-
-
+					M.hear_say(phrases, verb, null, src)
 	else
 		to_chat(src, "No holopad connected.")
-		return 0
-	return 1
+		return FALSE
+	return TRUE
 
 /mob/living/silicon/ai/proc/holopad_emote(var/message) //This is called when the AI uses the 'me' verb while using a holopad.
 
@@ -102,7 +92,7 @@
 	if (!message)
 		return
 
-	var/obj/machinery/hologram/holopad/T = src.holo
+	var/obj/machinery/holopad/T = src.holo
 	if(T && T.masters[src])
 		var/turf/our_turf = get_turf(T)
 		var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[message]</span></span>"

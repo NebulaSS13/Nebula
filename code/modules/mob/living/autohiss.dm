@@ -1,13 +1,13 @@
 #define AUTOHISS_NUM 3
 
 
-/mob/living/proc/handle_autohiss(message, decl/language/L)
+/mob/living/proc/handle_autohiss(message, decl/language/language)
 	return message // no autohiss at this level
 
-/mob/living/human/handle_autohiss(message, decl/language/L)
+/mob/living/human/handle_autohiss(message, decl/language/language)
 	if(!client || get_preference_value(/datum/client_preference/autohiss) == PREF_OFF) // no need to process if there's no client or they have autohiss off
 		return message
-	return species.handle_autohiss(message, L, get_preference_value(/datum/client_preference/autohiss))
+	return species.handle_autohiss(message, language, get_preference_value(/datum/client_preference/autohiss))
 
 /decl/species
 	var/list/autohiss_basic_map = null
@@ -22,7 +22,7 @@
 /decl/species/proc/handle_autohiss(message, decl/language/lang, mode)
 	if(!autohiss_basic_map)
 		return message
-	if(lang.flags & LANG_FLAG_NO_STUTTER)	// Currently prevents EAL, Sign language, and emotes from autohissing
+	if(lang.language_flags & LANG_FLAG_NO_STUTTER)	// Currently prevents EAL, Sign language, and emotes from autohissing
 		return message
 	if(autohiss_exempt && (lang.name in autohiss_exempt))
 		return message

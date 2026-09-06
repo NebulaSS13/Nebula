@@ -109,13 +109,14 @@
 /mob/living/simple_animal/opossum/poppy/is_tagging_suitable()
 	return FALSE
 
-/mob/living/simple_animal/opossum/poppy/hear_broadcast(decl/language/language, mob/speaker, speaker_name, message)
+// Poppy is omnilingual apparently.
+/mob/living/simple_animal/opossum/poppy/hear_broadcast(mob/speaker, speaker_name, datum/speech/phrases)
 	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(check_keywords), message), rand(1 SECOND, 3 SECONDS))
+	addtimer(CALLBACK(src, PROC_REF(check_keywords), phrases.unformatted_message), rand(1 SECOND, 3 SECONDS))
 
-/mob/living/simple_animal/opossum/poppy/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/simple_animal/opossum/poppy/hear_say(datum/speech/phrases, verb = "says", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, stars = FALSE, atom/relayed_by)
 	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(check_keywords), message), rand(1 SECOND, 3 SECONDS))
+	addtimer(CALLBACK(src, PROC_REF(check_keywords), phrases.unformatted_message), rand(1 SECOND, 3 SECONDS))
 
 /mob/living/simple_animal/opossum/poppy/proc/check_keywords(var/message)
 	if(!client && istype(ai) && stat == CONSCIOUS)

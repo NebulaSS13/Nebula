@@ -34,8 +34,8 @@
 /decl/item_effect/debug/apply_onmob_appearance_to(obj/item/item, mob/user, bodytype, image/overlay, slot, bodypart)
 	log_debug("[type]: [user] updated onmob appearance for [item] in [slot] for [bodytype]/[bodypart] ([json_encode(args)])")
 
-/decl/item_effect/debug/hear_speech(obj/item/item, mob/user, message, decl/language/speaking)
-	log_debug("[type]: [item] heard [user] say [message] in [speaking] ([json_encode(args)])")
+/decl/item_effect/debug/hear_speech(obj/item/item, mob/user, datum/speech/phrases)
+	log_debug("[type]: [item] heard [user] say [istype(phrases) ? phrases.unformatted_message : phrases] in [istype(phrases) ? phrases.language : "NULL"] ([json_encode(args)])")
 
 /decl/item_effect/debug/on_examined(obj/item/item, mob/user)
 	log_debug("[type]: [user] examined [item] ([json_encode(args)])")

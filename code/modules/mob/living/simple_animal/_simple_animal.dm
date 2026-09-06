@@ -407,14 +407,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			damage = 30
 	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
 
-/mob/living/simple_animal/say(var/message)
-	var/verb = "says"
+/mob/living/simple_animal/say(datum/speech/phrases, verb = "says", whispering)
 	if(speak_emote.len)
 		verb = pick(speak_emote)
-
-	message = sanitize(message)
-
-	..(message, null, verb)
+	..()
 
 /mob/living/simple_animal/is_burnable()
 	return heat_damage_per_tick

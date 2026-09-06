@@ -125,7 +125,7 @@
 	carded_ai = null
 	update_icon()
 
-/obj/item/aicard/show_message(msg, type, alt, alt_type)
+/obj/item/aicard/show_message(msg, type, alt, alt_type, atom/source)
 	if(carded_ai && carded_ai.client)
 		var/rendered = "<span class='message'>[msg]</span>"
 		carded_ai.show_message(rendered, type)

@@ -1,5 +1,6 @@
-/mob/living/simple_animal/borer/say(var/message)
+/mob/living/simple_animal/borer/say(datum/speech/phrases, verb = "says", whispering)
 
+	var/message = istype(phrases) ? phrases.unformatted_message : phrases
 	message = sanitize(message)
 	message = capitalize(message)
 
@@ -23,9 +24,9 @@
 	if(findlasttextEx(message, get_prefix_key(/decl/prefix/visible_emote)) == 1)
 		return custom_emote(1, copytext(message,2))
 
-	var/decl/language/L = parse_language(message)
-	if(L && L.flags & LANG_FLAG_HIVEMIND)
-		L.broadcast(src,trim(copytext(message,3)),src.truename)
+	var/decl/language/language = parse_language(message)
+	if(language && language.language_flags & LANG_FLAG_HIVEMIND)
+		language.broadcast(src, trim(copytext(message,3)), truename)
 		return
 
 	if(!host)

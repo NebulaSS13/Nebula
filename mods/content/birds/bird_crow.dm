@@ -27,13 +27,13 @@
 	LAZYADD(., SPAN_SUBTLE("Crows can be given a small item like a piece of paper to hold."))
 	LAZYADD(., SPAN_SUBTLE("While holding a crow, say 'Go to \[target\]' or 'Find \[target\]', then use the crow in hand to release it to travel to the target."))
 
-/mob/living/simple_animal/passive/bird/crow/hear_say(message, verb, decl/language/language, italics, mob/speaker, sound/speech_sound, sound_vol)
+/mob/living/simple_animal/passive/bird/crow/hear_say(datum/speech/phrases, verb = "says", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, stars = FALSE, atom/relayed_by)
 	. = ..()
 
 	if(get_recursive_loc_of_type(/mob) != speaker || !can_be_handled_by(speaker))
 		return
-	message = lowertext(strip_html_properly(message))
 
+	var/message = lowertext(strip_html_properly(phrases.unformatted_message))
 	var/command = trim(copytext(message, 1, 6))
 	if(command != "go to" && command != "find")
 		return
@@ -83,10 +83,10 @@
 	. = ..()
 	global.listening_objects -= src
 
-/obj/item/holder/bird/crow/hear_talk(mob/M, text, verb, decl/language/speaking)
+/obj/item/holder/bird/crow/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	. = ..()
 	for(var/mob/bird in contents)
-		bird.hear_say(text, verb, speaking, null, M)
+		bird.hear_say(phrases, verb, speaker = speaker)
 
 /obj/item/holder/bird/crow/attack_self(mob/user)
 	var/mob/living/simple_animal/passive/bird/crow/crow = locate() in contents

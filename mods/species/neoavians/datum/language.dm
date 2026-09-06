@@ -6,8 +6,8 @@
 	ask_verb = "rattles"
 	exclaim_verb = "calls"
 	colour = "alien"
-	key = "v"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "crow"
+	language_flags = LANG_FLAG_WHITELISTED
 	space_chance = 50
 	syllables = list(
 			"ca", "ra", "ma", "sa", "na", "ta", "la", "sha",
@@ -33,8 +33,8 @@
 	ask_verb = "chirrups"
 	exclaim_verb = "trills"
 	colour = "alien"
-	key = "i"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "avian"
+	language_flags = LANG_FLAG_WHITELISTED
 	space_chance = 50
 	syllables = list(
 			"ca", "ra", "ma", "sa", "na", "ta", "la", "sha", "scha", "a", "a",

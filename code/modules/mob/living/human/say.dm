@@ -1,25 +1,8 @@
-/mob/living/human/say(var/message, var/decl/language/speaking, var/verb = "says", whispering)
-	if(!whispering)
-		var/obj/item/organ/internal/voicebox/voice = locate() in get_internal_organs()
-		// Check if the language they're speaking is vocal and not supplied by a machine, and if they are currently suffocating.
-		whispering = (whispering || has_chemical_effect(CE_VOICELOSS, 1))
-		var/decl/bodytype/root_bodytype = get_bodytype()
-		if((!speaking || !(speaking.flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG))) && (!voice || !voice.is_usable() || !voice.assists_languages[speaking]) && !root_bodytype.is_robotic && need_breathe() && failed_last_breath)
-			var/obj/item/organ/internal/lungs/L = get_organ(root_bodytype.breathing_organ, /obj/item/organ/internal/lungs)
-			if(!L || L.breath_fail_ratio > 0.9)
-				if(L && world.time < L.last_successful_breath + 2 MINUTES) //if we're in grace suffocation period, give it up for last words
-					to_chat(src, SPAN_WARNING("You use your remaining air to say something!"))
-					L.last_successful_breath = world.time - 2 MINUTES
-					whispering = FALSE
-				else
-					to_chat(src, SPAN_WARNING("You don't have enough air[L ? " in [L]" : ""] to make a sound!"))
-					return
-			else if(L.breath_fail_ratio > 0.7 || (L.breath_fail_ratio > 0.4 && length(message) > 10) || (L.breath_fail_ratio > 0.2 && length(message) > 30))
-				whispering = TRUE
+/mob/living/human/say(datum/speech/phrases, verb = "says", whispering)
 	if(name != GetVoice())
 		if(get_id_name("Unknown") == GetVoice())
 			SetName(get_id_name("Unknown"))
-	. = ..(message, speaking, verb, whispering)
+	. = ..()
 
 /mob/living/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
@@ -72,9 +55,9 @@
 
 	return verb
 
-/mob/living/human/handle_message_mode(message_mode, message, verb, speaking, used_radios)
-	if(message_mode == MESSAGE_MODE_WHISPER) //It's going to get sanitized again immediately, so decode.
-		whisper_say(html_decode(message), speaking)
+/mob/living/human/handle_message_mode(datum/speech/phrases, verb, used_radios)
+	if(phrases.message_mode == MESSAGE_MODE_WHISPER) //It's going to get sanitized again immediately, so decode.
+		say(phrases, "whisper", whispering = TRUE)
 		return TRUE
 	return ..()
 
@@ -103,16 +86,3 @@
 		else if(speaking.type in species.unspeakable_langs)
 			return FALSE
 	. = ..()
-
-/mob/living/human/parse_language(var/message)
-	var/prefix = copytext(message,1,2)
-	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
-		return GET_DECL(/decl/language/noise)
-
-	if(length(message) >= 2 && is_language_prefix(prefix))
-		var/language_prefix = lowertext(copytext(message, 2 ,3))
-		var/decl/language/L = SSlore.get_language_by_key(language_prefix)
-		if (can_speak(L))
-			return L
-
-	return null
