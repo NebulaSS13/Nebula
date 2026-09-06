@@ -2,7 +2,7 @@
 	Unit tests for ATMOSPHERICS primitives
 */
 /datum/unit_test/atmos_machinery
-	template = /datum/unit_test/atmos_machinery
+	abstract_type = /datum/unit_test/atmos_machinery
 	var/list/test_cases = list()
 
 /datum/unit_test/atmos_machinery/proc/create_gas_mixes(gas_mix_data)
@@ -14,11 +14,9 @@
 
 		var/list/initial_gas = mix_data["initial_gas"]
 		if(initial_gas.len)
-			var/list/gas_args = list()
 			for(var/gasid in initial_gas)
-				gas_args += gasid
-				gas_args += initial_gas[gasid]
-			gas_mix.adjust_multi(arglist(gas_args))
+				gas_mix.adjust_gas(gasid, initial_gas[gasid], FALSE)
+			gas_mix.update_values()
 
 		gas_mixes[mix_name] = gas_mix
 	return gas_mixes
@@ -41,7 +39,7 @@
 
 /datum/unit_test/atmos_machinery/proc/check_moles_conserved(var/case_name, var/list/before_gas_mixes, var/list/after_gas_mixes)
 	var/failed = FALSE
-	for(var/gasid in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
+	for(var/gasid in get_filterable_material_types())
 		var/before = 0
 		for(var/gasmix in before_gas_mixes)
 			var/datum/gas_mixture/G = before_gas_mixes[gasmix]
@@ -60,11 +58,11 @@
 		pass("[case_name]: conserved moles of each gas ID.")
 
 /datum/unit_test/atmos_machinery/conserve_moles
-	template = /datum/unit_test/atmos_machinery/conserve_moles
+	abstract_type = /datum/unit_test/atmos_machinery/conserve_moles
 	test_cases = list(
 		uphill = list(
 			source = list(
-				initial_gas = list(
+				initial_gas = alist(
 					/decl/material/gas/oxygen         = 5,
 					/decl/material/gas/nitrogen       = 10,
 					/decl/material/gas/carbon_dioxide = 5,
@@ -74,7 +72,7 @@
 				temperature = T20C - 5,
 			),
 			sink = list(
-				initial_gas = list(
+				initial_gas = alist(
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
@@ -86,7 +84,7 @@
 		),
 		downhill = list(
 			source = list(
-				initial_gas = list(
+				initial_gas = alist(
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
@@ -96,7 +94,7 @@
 				temperature = T20C + 5,
 			),
 			sink = list(
-				initial_gas = list(
+				initial_gas = alist(
 					/decl/material/gas/oxygen         = 5,
 					/decl/material/gas/nitrogen       = 10,
 					/decl/material/gas/carbon_dioxide = 5,
@@ -108,7 +106,7 @@
 		),
 		flat = list(
 			source = list(
-				initial_gas = list(
+				initial_gas = alist(
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
@@ -118,7 +116,7 @@
 				temperature = T20C,
 			),
 			sink = list(
-				initial_gas = list(
+				initial_gas = alist(
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
@@ -130,7 +128,7 @@
 		),
 		vacuum_sink = list(
 			source = list(
-				initial_gas = list(
+				initial_gas = alist(
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
@@ -140,17 +138,17 @@
 				temperature = T20C,
 			),
 			sink = list(
-				initial_gas = list(),
+				initial_gas = alist(),
 				temperature = 0,
 			),
 		),
 		vacuum_source = list(
 			source = list(
-				initial_gas = list(),
+				initial_gas = alist(),
 				temperature = 0,
 			),
 			sink = list(
-				initial_gas = list(
+				initial_gas = alist(
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
@@ -197,7 +195,7 @@
 	name = "ATMOS MACHINERY: scrub_gas() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/scrub_gas/start_test()
-	var/list/filtering = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
+	var/list/filtering = get_filterable_material_types(as_list = TRUE)
 	for(var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
@@ -213,7 +211,7 @@
 	name = "ATMOS MACHINERY: filter_gas() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/filter_gas/start_test()
-	var/list/filtering = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
+	var/list/filtering = get_filterable_material_types(as_list = TRUE)
 	for(var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
@@ -233,7 +231,7 @@
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
 
 		var/list/filtering = list()
-		for(var/gasid in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
+		for(var/gasid in get_filterable_material_types())
 			filtering[gasid] = after_gas_mixes["sink"] //just filter everything to sink
 
 		filter_gas_multi(null, filtering, after_gas_mixes["source"], after_gas_mixes["sink"], null, INFINITY)
@@ -252,7 +250,7 @@
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
 
 		var/list/mix_sources = list()
-		var/list/all_gasses = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
+		var/list/all_gasses = get_filterable_material_types(as_list = TRUE)
 		var/gas_count = length(all_gasses)
 		for(var/gasid in all_gasses)
 			var/datum/gas_mixture/mix_source = after_gas_mixes["sink"]

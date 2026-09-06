@@ -12,8 +12,8 @@
 	origin_tech = @'{"magnets":3,"combat":4}'
 	active_attack_verb =   list("attacked", "chopped", "cleaved", "torn", "cut")
 	inactive_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
-	sharp = 1
-	edge =  1
+	sharp = TRUE
+	edge = TRUE
 	base_parry_chance =    30
 	active_parry_chance =  30
 	melee_accuracy_bonus = 15

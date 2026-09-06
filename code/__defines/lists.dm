@@ -4,7 +4,7 @@
 // All of these are null-safe, you can use them without knowing if the list var is initialized yet
 
 //Picks from the list, with some safeties, and returns the "default" arg if it fails
-#define DEFAULTPICK(L, default) ((istype(L, /list) && L:len) ? pick(L) : default)
+#define DEFAULTPICK(L, default) ((islist(L) && length(L)) ? pick(L) : default)
 //Supplies null as the default to DEFAULTPICK
 #define SAFEPICK(L) DEFAULTPICK(L, null)
 // Ensures L is initailized after this point
@@ -31,6 +31,14 @@
 #define LAZYCLEARLIST(L) if(L) { L.Cut(); L = null; }
 // Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
 #define SANITIZE_LIST(L) ( islist(L) ? L : list() )
+
+// The above but for alists. Prefixed with A_ because inserting "A" randomly in the name just made it confusing
+#define A_LAZYINITLIST(AL) if (!AL) { AL = alist(); }
+#define A_UNSETEMPTY(AL) if(!length(AL)) { AL = null; }
+#define A_LAZYREMOVE(AL, I) if(AL) { AL -= I; A_UNSETEMPTY(AL) }
+#define A_LAZYSET(AL, A, I) if(!AL) { AL = alist(); } AL[A] = I;
+#define A_LAZYCLEARLIST(AL) if(AL) { AL.Cut(); AL = null; }
+#define A_LAZYLEN(AL) length(AL)
 
 /// Passed into BINARY_INSERT to compare keys
 #define COMPARE_KEY __BIN_LIST[__BIN_MID]

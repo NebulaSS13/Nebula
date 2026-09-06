@@ -1221,7 +1221,7 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/solarpanel
 	icon_state = "solarpanel"
 
-/obj/effect/floor_decal/snow
+/obj/effect/floor_decal/snow_floor
 	icon = 'icons/turf/overlays.dmi'
 	icon_state = "snowfloor"
 
@@ -1525,3 +1525,143 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/arrows
 	name = "floor arrows"
 	icon_state = "arrows"
+
+//Old tile, taken from Polaris
+//TODO: Change these colors to use color defines?
+/obj/effect/floor_decal/corner_oldtile
+	name = "corner oldtile"
+	icon_state = "corner_oldtile"
+
+/obj/effect/floor_decal/corner_oldtile/white
+	name = "corner oldtile"
+	icon_state = "corner_oldtile"
+	color = "#d9d9d9"
+
+/obj/effect/floor_decal/corner_oldtile/white/diagonal
+	name = "corner oldtile diagonal"
+	icon_state = "corner_oldtile_diagonal"
+
+/obj/effect/floor_decal/corner_oldtile/white/full
+	name = "corner oldtile full"
+	icon_state = "corner_oldtile_full"
+
+/obj/effect/floor_decal/corner_oldtile/blue
+	name = "corner oldtile"
+	icon_state = "corner_oldtile"
+	color = "#8ba7ad"
+
+/obj/effect/floor_decal/corner_oldtile/blue/diagonal
+	name = "corner oldtile diagonal"
+	icon_state = "corner_oldtile_diagonal"
+
+/obj/effect/floor_decal/corner_oldtile/blue/full
+	name = "corner oldtile full"
+	icon_state = "corner_oldtile_full"
+
+/obj/effect/floor_decal/corner_oldtile/yellow
+	name = "corner oldtile"
+	icon_state = "corner_oldtile"
+	color = "#8c6d46"
+
+/obj/effect/floor_decal/corner_oldtile/yellow/diagonal
+	name = "corner oldtile diagonal"
+	icon_state = "corner_oldtile_diagonal"
+
+/obj/effect/floor_decal/corner_oldtile/yellow/full
+	name = "corner oldtile full"
+	icon_state = "corner_oldtile_full"
+
+/obj/effect/floor_decal/corner_oldtile/gray
+	name = "corner oldtile"
+	icon_state = "corner_oldtile"
+	color = "#687172"
+
+/obj/effect/floor_decal/corner_oldtile/gray/diagonal
+	name = "corner oldtile diagonal"
+	icon_state = "corner_oldtile_diagonal"
+
+/obj/effect/floor_decal/corner_oldtile/gray/full
+	name = "corner oldtile full"
+	icon_state = "corner_oldtile_full"
+
+/obj/effect/floor_decal/corner_oldtile/beige
+	name = "corner oldtile"
+	icon_state = "corner_oldtile"
+	color = "#385e60"
+
+/obj/effect/floor_decal/corner_oldtile/beige/diagonal
+	name = "corner oldtile diagonal"
+	icon_state = "corner_oldtile_diagonal"
+
+/obj/effect/floor_decal/corner_oldtile/beige/full
+	name = "corner oldtile full"
+	icon_state = "corner_oldtile_full"
+
+/obj/effect/floor_decal/corner_oldtile/red
+	name = "corner oldtile"
+	icon_state = "corner_oldtile"
+	color = "#964e51"
+
+/obj/effect/floor_decal/corner_oldtile/red/diagonal
+	name = "corner oldtile diagonal"
+	icon_state = "corner_oldtile_diagonal"
+
+/obj/effect/floor_decal/corner_oldtile/red/full
+	name = "corner oldtile full"
+	icon_state = "corner_oldtile_full"
+
+/obj/effect/floor_decal/corner_oldtile/purple
+	name = "corner oldtile"
+	icon_state = "corner_oldtile"
+	color = "#906987"
+
+/obj/effect/floor_decal/corner_oldtile/purple/diagonal
+	name = "corner oldtile diagonal"
+	icon_state = "corner_oldtile_diagonal"
+
+/obj/effect/floor_decal/corner_oldtile/purple/full
+	name = "corner oldtile full"
+	icon_state = "corner_oldtile_full"
+
+/obj/effect/floor_decal/corner_oldtile/green
+	name = "corner oldtile"
+	icon_state = "corner_oldtile"
+	color = "#46725c"
+
+/obj/effect/floor_decal/corner_oldtile/green/diagonal
+	name = "corner oldtile diagonal"
+	icon_state = "corner_oldtile_diagonal"
+
+/obj/effect/floor_decal/corner_oldtile/green/full
+	name = "corner oldtile full"
+	icon_state = "corner_oldtile_full"
+
+// Decorative overlays.
+/obj/effect/floor_decal/vines
+	name       = "vines"
+	desc       = "A tangle of plant growth."
+	icon_state = "vines"
+
+/obj/effect/floor_decal/vines/top
+	icon_state = "vines_top"
+
+/obj/effect/floor_decal/vines/mid
+	icon_state = "vines_mid"
+
+/obj/effect/floor_decal/vines/bottom
+	icon_state = "vines_bottom"
+
+/obj/effect/floor_decal/snow
+	name       = "snow"
+	desc       = "A fine dusting of snow."
+	icon_state = "snowy"
+
+/obj/effect/floor_decal/rust
+	name       = "rust"
+	desc       = "A clumpy area of rust."
+	icon_state = "rusted"
+
+/obj/effect/floor_decal/floornums
+	name       = "floor marker"
+	desc       = "A number corresponding to the position of this floor."
+	icon_state = "floornums"

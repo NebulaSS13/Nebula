@@ -20,7 +20,7 @@
 		SKILL_FORENSICS   = SKILL_EXPERT
 	)
 
-/obj/item/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/robot, var/amount)
 	..()
 	for(var/obj/item/gun/energy/T in equipment)
 		var/obj/item/cell/power_supply = T.get_cell()

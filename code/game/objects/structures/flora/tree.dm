@@ -7,7 +7,7 @@
 	density      = TRUE
 	pixel_x      = -16
 	layer        = ABOVE_HUMAN_LAYER
-	material     = /decl/material/solid/organic/wood
+	material     = /decl/material/solid/organic/wood/oak
 	w_class      = ITEM_SIZE_STRUCTURE
 	hitsound     = 'sound/effects/hit_wood.ogg'
 	snd_cut      = 'sound/effects/plants/tree_fall.ogg'
@@ -20,9 +20,6 @@
 	var/protects_against_weather = TRUE
 	/// What kind of tree stump we leaving behind.
 	var/stump_type
-	/// How much to shake the tree when struck.
-	/// Larger trees should have smaller numbers or it looks weird.
-	var/shake_animation_degrees = 4
 	/// Marker for repeating the cut sound effect and animation.
 	var/someone_is_cutting = FALSE
 
@@ -40,7 +37,7 @@
 
 /obj/structure/flora/tree/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
-	if(!ml && protects_against_weather)
+	if(!ml && protects_against_weather && SSambience.initialized)
 		for(var/turf/T as anything in RANGE_TURFS(src, 1))
 			AMBIENCE_QUEUE_TURF(T)
 
@@ -48,38 +45,27 @@
 /obj/structure/flora/tree/Destroy()
 	var/list/turfs_to_update = RANGE_TURFS(src, 1)
 	. = ..()
-	if(protects_against_weather)
+	if(protects_against_weather && SSambience.initialized)
 		for(var/turf/T in turfs_to_update)
 			AMBIENCE_QUEUE_TURF(T)
 
 /obj/structure/flora/tree/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	. = ..()
 	if(!QDELETED(src) && damage >= 5)
-		shake()
+		shake_animation()
 
 // We chop several times to cut down a tree.
 /obj/structure/flora/tree/play_cut_sound(mob/user)
-	shake()
+	shake_animation()
 	while(someone_is_cutting)
 		sleep(1 SECOND)
 		if(QDELETED(src))
 			return
-		shake()
+		shake_animation()
 		playsound(src, 'sound/items/axe_wood.ogg', 40, TRUE)
 	if(QDELETED(src) || QDELETED(user) || !user.Adjacent(src))
 		return
 	return ..()
-
-// Tree shake animation stolen from Polaris.
-/obj/structure/flora/tree/proc/shake()
-	set waitfor = FALSE
-	var/init_px = pixel_x
-	var/shake_dir = pick(-1, 1)
-	var/matrix/M = matrix()
-	M.Scale(icon_scale_x, icon_scale_y)
-	M.Translate(0, 16*(icon_scale_y-1))
-	animate(src, transform=turn(M, shake_animation_degrees * shake_dir), pixel_x=init_px + 2*shake_dir, time=1)
-	animate(transform=M, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
 
 /obj/structure/flora/tree/create_dismantled_products(turf/T)
 	if(log_type)
@@ -102,12 +88,21 @@
 /obj/structure/flora/tree/pine/init_appearance()
 	icon_state = "pine_[rand(1, 3)]"
 
+var/global/list/christmas_trees = list()
 /obj/structure/flora/tree/pine/xmas
 	name         = "\improper Christmas tree"
 	desc         = "O Christmas tree, O Christmas tree..."
 	icon         = 'icons/obj/flora/pinetrees.dmi'
 	icon_state   = "pine_c"
 	stump_type   = /obj/structure/flora/stump/tree/pine/xmas
+
+/obj/structure/flora/tree/pine/xmas/Initialize(ml, _mat, _reinf_mat)
+	. = ..()
+	global.christmas_trees += src
+
+/obj/structure/flora/tree/pine/xmas/Destroy()
+	global.christmas_trees -= src
+	return ..()
 
 /obj/structure/flora/tree/pine/xmas/init_appearance()
 	return //Only one possible icon
@@ -119,6 +114,11 @@
 	icon_state               = "tree_1"
 	protects_against_weather = FALSE
 	stump_type               = /obj/structure/flora/stump/tree/dead
+	storage                  = /datum/storage/dead_tree
+
+/datum/storage/dead_tree
+	max_w_class = ITEM_SIZE_NORMAL
+	max_storage_space = ITEM_SIZE_SMALL * 5
 
 /obj/structure/flora/tree/dead/random/init_appearance()
 	icon_state = "tree_[rand(1, 6)]"

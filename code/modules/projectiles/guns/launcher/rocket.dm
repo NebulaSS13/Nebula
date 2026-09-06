@@ -17,31 +17,31 @@
 	var/max_rockets = 1
 	var/list/rockets = new/list()
 
-/obj/item/gun/launcher/rocket/examine(mob/user, distance)
+/obj/item/gun/launcher/rocket/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 2)
-		to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
+		. += SPAN_NOTICE("[rockets.len]/[max_rockets] rocket\s.")
 
-/obj/item/gun/launcher/rocket/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/ammo_casing/rocket))
+/obj/item/gun/launcher/rocket/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/ammo_casing/rocket))
 		if(rockets.len < max_rockets)
-			if(!user.try_unequip(I, src))
+			if(!user.try_unequip(used_item, src))
 				return TRUE
-			rockets += I
+			rockets += used_item
 			to_chat(user, "<span class='notice'>You put the rocket in [src].</span>")
 			to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
 			return TRUE
 		else
-			to_chat(usr, "<span class='warning'>\The [src] cannot hold more rockets.</span>")
+			to_chat(user, "<span class='warning'>\The [src] cannot hold more rockets.</span>")
 			return TRUE
 	return ..()
 
 /obj/item/gun/launcher/rocket/consume_next_projectile()
 	if(rockets.len)
-		var/obj/item/ammo_casing/rocket/I = rockets[1]
+		var/obj/item/ammo_casing/rocket/rocket = rockets[1]
 		var/obj/item/missile/M = new (src)
 		M.primed = 1
-		rockets -= I
+		rockets -= rocket
 		return M
 	return null
 

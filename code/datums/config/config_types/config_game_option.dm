@@ -23,7 +23,6 @@
 		/decl/config/num/expected_round_length,
 		/decl/config/toggle/on/allow_diagonal_movement,
 		/decl/config/toggle/expanded_alt_interactions,
-		/decl/config/toggle/ert_admin_call_only,
 		/decl/config/toggle/ghosts_can_possess_animals,
 		/decl/config/toggle/assistant_maint,
 		/decl/config/toggle/ghost_interaction,
@@ -142,10 +141,6 @@
 /decl/config/toggle/expanded_alt_interactions
 	uid = "expanded_alt_interactions"
 	desc = "Determines if objects should provide expanded alt interactions when alt-clicked, such as use or grab."
-
-/decl/config/toggle/ert_admin_call_only
-	uid = "ert_admin_call_only"
-	desc = "Restricted ERT to be only called by admins."
 
 /decl/config/toggle/ghosts_can_possess_animals
 	uid = "ghosts_can_possess_animals"

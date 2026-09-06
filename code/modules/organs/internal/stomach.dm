@@ -12,7 +12,15 @@
 	QDEL_NULL(ingested)
 	. = ..()
 
-/obj/item/organ/internal/stomach/set_species(species_name)
+/obj/item/organ/internal/stomach/Serialize()
+	. = ..()
+	SERIALIZE_REAGENTS(ingested, /obj/item/organ/internal/stomach, "ingested")
+
+/obj/item/organ/internal/stomach/Deserialize(list/instance_map)
+	. = ..()
+	DESERIALIZE_REAGENTS(ingested, "ingested")
+
+/obj/item/organ/internal/stomach/set_species(species_uid)
 	if(species?.gluttonous)
 		verbs -= /obj/item/organ/internal/stomach/proc/throw_up
 	. = ..()
@@ -21,29 +29,30 @@
 	if(species && !stomach_capacity)
 		stomach_capacity = species.stomach_capacity
 
-/obj/item/organ/internal/stomach/initialize_reagents(populate)
+/obj/item/organ/internal/stomach/initialize_reagents()
+	FINALIZE_REAGENTS_SERDE(ingested)
 	if(!ingested)
-		ingested = new/datum/reagents/metabolism(240, (owner || src), CHEM_INGEST)
-	if(!ingested.my_atom)
-		ingested.my_atom = src
+		ingested = new/datum/reagents/metabolism(240, src, CHEM_INGEST)
+	var/owner_atom = owner || src
+	REAGENT_SET_ATOM(ingested, owner_atom)
 	. = ..()
+
+/obj/item/organ/internal/stomach/do_install()
+	. = ..()
+	REAGENT_SET_ATOM(ingested, owner)
+	ingested.parent = owner
 
 /obj/item/organ/internal/stomach/do_uninstall(in_place, detach, ignore_children)
 	. = ..()
 	if(ingested) //Don't bother if we're destroying
-		ingested.my_atom = src
+		REAGENT_SET_ATOM(ingested, src)
 		ingested.parent = null
-
-/obj/item/organ/internal/stomach/do_install()
-	. = ..()
-	ingested.my_atom = owner
-	ingested.parent = owner
 
 /obj/item/organ/internal/stomach/proc/can_eat_atom(var/atom/movable/food)
 	return !isnull(get_devour_time(food))
 
 /obj/item/organ/internal/stomach/proc/is_full(var/atom/movable/food)
-	var/total = floor(ingested.total_volume / 10)
+	var/total = floor(REAGENT_TOTAL_VOLUME(ingested) / 10)
 	for(var/a in contents + food)
 		if(ismob(a))
 			var/mob/M = a
@@ -94,7 +103,7 @@
 
 	if(owner)
 		var/functioning = is_usable()
-		if(damage >= min_bruised_damage && prob((damage / max_damage) * 100))
+		if(_organ_damage >= min_bruised_damage && prob((_organ_damage / max_damage) * 100))
 			functioning = FALSE
 
 		if(functioning)
@@ -123,7 +132,7 @@
 			owner.seizure()
 
 		// Alcohol counts as double volume for the purposes of vomit probability
-		var/effective_volume = ingested.total_volume + alcohol_volume
+		var/effective_volume = REAGENT_TOTAL_VOLUME(ingested) + alcohol_volume
 
 		// Just over the limit, the probability will be low. It rises a lot such that at double ingested it's 64% chance.
 		var/vomit_probability = (effective_volume / STOMACH_VOLUME) ** 6

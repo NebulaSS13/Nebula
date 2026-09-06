@@ -22,6 +22,14 @@
 	butchery_data = /decl/butchery_data/animal/fish/medium
 	mob_size = MOB_SIZE_SMALL
 
+/mob/living/simple_animal/aquatic/fish/large/cave
+	name = "blind cave fish"
+	desc = "A pale, blobby fish that lives its entire life in the cold darkness of cave rivers, and hence has no need for eyes."
+	icon = 'icons/mob/simple_animal/fish_cave.dmi'
+
+/mob/living/simple_animal/aquatic/fish/large/cave/is_blind()
+	return TRUE
+
 /mob/living/simple_animal/aquatic/fish/large/bass
 	name = "largemouth bass"
 	icon = 'icons/mob/simple_animal/fish_bass.dmi'

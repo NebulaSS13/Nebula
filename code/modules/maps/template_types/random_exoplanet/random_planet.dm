@@ -7,7 +7,6 @@
 /datum/map_template/planetoid/random
 	name                 = "random planetoid"
 	abstract_type        = /datum/map_template/planetoid/random
-	template_parent_type = /datum/map_template/planetoid/random
 	modify_tag_vars      = TRUE //Would set it to false, since we're generating everything on the fly, but unit test doesn't like it
 	tallness             = 1 //Amount of vertical z-levels to generate for this planet.
 
@@ -203,9 +202,9 @@
 
 	//Run the finishing touch on all loaded levels
 	for(var/datum/level_data/LD in new_level_data)
-		LD.after_template_load(src)
-		if(SSlighting.initialized)
-			SSlighting.InitializeZlev(LD.level_z)
+		//This is done in parent if we have mappaths, so skip it unless we don't have any
+		if(!length(mappaths))
+			LD.after_template_load(src)
 		log_game("Z-level '[LD.name]'(planetoid:'[name]') loaded at [LD.level_z]")
 	loaded++
 	return WORLD_CENTER_TURF(world.maxz)

@@ -1,6 +1,6 @@
 /obj/machinery/suspension_gen
 	name = "suspension field generator"
-	desc = "Multi-phase mobile suspension field generator MK II \"Steadfast\". It has stubby legs bolted up against it's body for stabilising."
+	desc = "Multi-phase mobile suspension field generator MK II \"Steadfast\". It has stubby legs bolted up against its body for stabilising."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "suspension2"
 	density = TRUE
@@ -105,11 +105,11 @@
 	density = TRUE
 	var/victim_number  //number of mobs it affected, needed for generator powerdraw calc
 
-/obj/effect/suspension_field/examine(mob/user)
+/obj/effect/suspension_field/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(.)
-		to_chat(user, SPAN_NOTICE("You can see something floating inside it:"))
-		to_chat(user, SPAN_NOTICE(english_list(contents)))
+	if(distance <= 1)
+		. += SPAN_NOTICE("You can see something floating inside it:")
+		. += SPAN_NOTICE(english_list(contents))
 
 /obj/effect/suspension_field/Initialize()
 	. = ..()

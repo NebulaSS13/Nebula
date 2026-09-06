@@ -2,6 +2,8 @@
 // POWER MACHINERY BASE CLASS
 // This subtype is for machinery which needs to be directly referenced by its parent powernet during powernet processing.
 // This subtype does not encompass all power generating machinery, or machinery that needs to draw from a powernet in general.
+// If you try using this, make sure you can't just use get_powernet() instead. Ideally either the powernet needs to know about it (APCs)
+// or we need to run logic when we connect or disconnect from a powernet (solar panels/trackers).
 //////////////////////////////
 
 /////////////////////////////
@@ -9,6 +11,7 @@
 /////////////////////////////
 
 /obj/machinery/power
+	abstract_type = /obj/machinery/power
 	name = null
 	icon = 'icons/obj/power.dmi'
 	anchored = TRUE
@@ -82,11 +85,11 @@
 
 // attach a wire to a power machine - leads from the turf you are standing on
 //almost never called, overwritten by all power machines but terminal and generator
-/obj/machinery/power/attackby(obj/item/W, mob/user)
+/obj/machinery/power/attackby(obj/item/used_item, mob/user)
 	if((. = ..()))
 		return
-	if(IS_COIL(W))
-		var/obj/item/stack/cable_coil/coil = W
+	if(IS_COIL(used_item))
+		var/obj/item/stack/cable_coil/coil = used_item
 		var/turf/T = user.loc
 		if(!istype(T) || T.density || T.cannot_build_cable())
 			return
@@ -99,32 +102,26 @@
 // GLOBAL PROCS for powernets handling
 //////////////////////////////////////////
 
-
-// returns a list of all power-related objects (nodes, cable, junctions) in turf,
-// excluding source, that match the direction d
-// if unmarked==1, only return those with no powernet
-/proc/power_list(var/turf/T, var/source, var/d, var/unmarked=0, var/cable_only = 0)
+/// Returns all cables in target_turf matching target_direction, excluding excluded_cable.
+/// If only_no_powernet is TRUE, only cables with no powernet will be returned.
+/// Unused, because get_maching_cable or get_connected_cables is usually preferable, but kept just in case.
+/proc/cable_list(var/turf/target_turf, var/obj/structure/cable/excluded_cable = null, var/target_direction)
 	. = list()
+	var/reverse_direction = target_direction ? global.reverse_dir[target_direction] : 0
+	for(var/obj/structure/cable/other_cable in target_turf)
+		if(other_cable == excluded_cable)
+			continue
+		if(other_cable.d1 == target_direction || other_cable.d2 == target_direction || other_cable.d1 == reverse_direction || other_cable.d2 == reverse_direction)
+			. += other_cable
 
-	var/reverse = d ? global.reverse_dir[d] : 0
-	for(var/AM in T)
-		if(AM == source)	continue			//we don't want to return source
-
-		if(!cable_only && istype(AM,/obj/machinery/power))
-			var/obj/machinery/power/P = AM
-			if(P.powernet == 0)	continue		// exclude APCs which have powernet=0
-
-			if(!unmarked || !P.powernet)		//if unmarked=1 we only return things with no powernet
-				if(d == 0)
-					. += P
-
-		else if(istype(AM,/obj/structure/cable))
-			var/obj/structure/cable/C = AM
-
-			if(!unmarked || !C.powernet)
-				if(C.d1 == d || C.d2 == d || C.d1 == reverse || C.d2 == reverse )
-					. += C
-	return .
+/// Like cable_list, but only returns the first cable, since that's all most uses of it check.
+/proc/get_matching_cable(var/turf/target_turf, var/obj/structure/cable/excluded_cable = null, var/target_direction)
+	var/reverse_direction = target_direction ? global.reverse_dir[target_direction] : 0
+	for(var/obj/structure/cable/other_cable in target_turf)
+		if(other_cable == excluded_cable)
+			continue
+		if(other_cable.d1 == target_direction || other_cable.d2 == target_direction || other_cable.d1 == reverse_direction || other_cable.d2 == reverse_direction)
+			return other_cable
 
 //remove the old powernet and replace it with a new one throughout the network.
 /proc/propagate_network(var/obj/structure/cable/cable, var/datum/powernet/PN)
@@ -202,8 +199,8 @@
 		PN = power_source
 	else if(istype(power_source,/obj/item/cell))
 		cell = power_source
-	else if(istype(power_source,/obj/machinery/power/apc))
-		var/obj/machinery/power/apc/apc = power_source
+	else if(istype(power_source,/obj/machinery/apc))
+		var/obj/machinery/apc/apc = power_source
 		cell = apc.get_cell()
 		var/obj/machinery/power/terminal/term = apc.terminal()
 		if (term)

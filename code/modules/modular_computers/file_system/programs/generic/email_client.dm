@@ -80,7 +80,7 @@
 		var/list/msg = list()
 		msg += "*--*\n"
 		msg += "<span class='notice'>New mail received from [received_message.source]:</span>\n"
-		msg += "<b>Subject:</b> [received_message.title]\n<b>Message:</b>\n[digitalPencode2html(received_message.stored_data)]\n"
+		msg += "<b>Subject:</b> [received_message.title]\n<b>Message:</b>\n[received_message.generate_file_data()]\n"
 		if(received_message.attachment)
 			msg += "<b>Attachment:</b> [received_message.attachment.filename].[received_message.attachment.filetype] ([received_message.attachment.size]GQ)\n"
 		msg += "<a href='byond://?src=\ref[src];open;reply=[received_message.uid]'>Reply</a>\n"
@@ -158,7 +158,7 @@
 				data["msg_attachment_size"] = msg_attachment.size
 		else if (current_message)
 			data["cur_title"] = current_message.title
-			data["cur_body"] = digitalPencode2html(current_message.stored_data)
+			data["cur_body"] = current_message.generate_file_data()
 			data["cur_timestamp"] = current_message.timestamp
 			data["cur_source"] = current_message.source
 			data["cur_uid"] = current_message.uid
@@ -187,7 +187,7 @@
 				for(var/datum/computer_file/data/email_message/message in message_source)
 					all_messages.Add(list(list(
 						"title" = message.title,
-						"body" = digitalPencode2html(message.stored_data),
+						"body" = message.generate_file_data(),
 						"source" = message.source,
 						"timestamp" = message.timestamp,
 						"uid" = message.uid

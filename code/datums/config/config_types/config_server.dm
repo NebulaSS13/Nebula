@@ -16,9 +16,6 @@
 		/decl/config/num/drone_build_time,
 		/decl/config/num/max_character_traits,
 		/decl/config/num/max_alternate_languages,
-		/decl/config/text/irc_bot_host,
-		/decl/config/text/main_irc,
-		/decl/config/text/admin_irc,
 		/decl/config/text/server_name,
 		/decl/config/text/server,
 		/decl/config/text/serverurl,
@@ -54,9 +51,7 @@
 		/decl/config/toggle/disable_webhook_embeds,
 		/decl/config/toggle/delist_when_no_admins,
 		/decl/config/toggle/wait_for_sigusr1_reboot,
-		/decl/config/toggle/use_irc_bot,
 		/decl/config/toggle/show_typing_indicator_for_whispers,
-		/decl/config/toggle/announce_shuttle_dock_to_irc,
 		/decl/config/toggle/guests_allowed,
 		/decl/config/toggle/on/jobs_have_minimal_access,
 		/decl/config/toggle/on/admin_legacy_system,
@@ -169,20 +164,6 @@
 	uid = "max_alternate_languages"
 	default_value = 3
 	desc = "Remove the # to define a different maximum for alternate language selection in chargen."
-
-/decl/config/text/irc_bot_host
-	uid = "irc_bot_host"
-	default_value = "localhost"
-	desc = "Host where the IRC bot is hosted. Port 45678 needs to be open."
-
-/decl/config/text/main_irc
-	uid = "main_irc"
-	default_value = "#main"
-	desc = "IRC channel to send information to. Leave blank to disable."
-
-/decl/config/text/admin_irc
-	uid = "admin_irc"
-	desc = "IRC channel to send adminhelps to. Leave blank to disable adminhelps-to-irc."
 
 // server name (for world name / status)
 /decl/config/text/server_name
@@ -335,17 +316,9 @@
 	uid = "wait_for_sigusr1_reboot"
 	desc = "Determines if Dream Daemon should refuse to reboot for any reason other than SIGUSR1."
 
-/decl/config/toggle/use_irc_bot
-	uid = "use_irc_bot"
-	desc = "Determines if data is sent to the IRC bot. Generally requires MAIN_IRC and associated setup."
-
 /decl/config/toggle/show_typing_indicator_for_whispers
 	uid = "show_typing_indicator_for_whispers"
 	desc = "Determinese if a typing indicator shows overhead for people currently writing whispers."
-
-/decl/config/toggle/announce_shuttle_dock_to_irc
-	uid = "announce_shuttle_dock_to_irc"
-	desc = "Determines if announce shuttle dock announcements are sent to the main IRC channel, if MAIN_IRC has also been setup."
 
 /decl/config/toggle/guests_allowed
 	uid = "guests_allowed"

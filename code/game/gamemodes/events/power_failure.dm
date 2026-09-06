@@ -7,14 +7,14 @@
 		S.energy_fail(rand(15 * severity,30 * severity))
 
 
-	for(var/obj/machinery/power/apc/C in SSmachines.machinery)
+	for(var/obj/machinery/apc/C in SSmachines.machinery)
 		if(!C.is_critical && (!affected_z_levels || (C.z in affected_z_levels)))
 			C.energy_fail(rand(30 * severity,60 * severity))
 
 /proc/power_restore(var/announce = 1)
 	if(announce)
 		global.using_map.grid_restored_announcement()
-	for(var/obj/machinery/power/apc/C in SSmachines.machinery)
+	for(var/obj/machinery/apc/C in SSmachines.machinery)
 		C.failure_timer = 0
 		var/obj/item/cell/cell = C.get_cell()
 		if(cell)

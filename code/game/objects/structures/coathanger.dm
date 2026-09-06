@@ -53,12 +53,12 @@
 	update_icon()
 	return TRUE
 
-/obj/structure/coatrack/examine(mob/user, distance)
+/obj/structure/coatrack/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(length(contents))
-		to_chat(user, SPAN_NOTICE("It has the following [length(contents) == 1 ? "article" : "articles"] hanging on it:"))
+		. += SPAN_NOTICE("It has the following [length(contents) == 1 ? "article" : "articles"] hanging on it:")
 		for(var/obj/item/thing in contents)
-			to_chat(user, "- \icon[thing] \The [thing].")
+			. += "- \icon[thing] \The [thing]."
 
 /obj/structure/coatrack/proc/can_hang(var/obj/item/thing)
 	if(!istype(thing))
@@ -70,16 +70,16 @@
 		if(thing.slot_flags & slots_allowed[slot])
 			return TRUE
 
-/obj/structure/coatrack/attackby(obj/item/W, mob/user)
-	if(!can_hang(W))
+/obj/structure/coatrack/attackby(obj/item/used_item, mob/user)
+	if(!can_hang(used_item))
 		return ..()
 	if(length(contents) >= max_items)
-		to_chat(user, SPAN_NOTICE("There is no room on \the [src] to hang \the [W]."))
+		to_chat(user, SPAN_NOTICE("There is no room on \the [src] to hang \the [used_item]."))
 		return TRUE
-	if(user.try_unequip(W, src))
+	if(user.try_unequip(used_item, src))
 		user.visible_message( \
-			SPAN_NOTICE("\The [user] hangs \the [W] on \the [src]."), \
-			SPAN_NOTICE("You hang \the [W] on \the [src].") \
+			SPAN_NOTICE("\The [user] hangs \the [used_item] on \the [src]."), \
+			SPAN_NOTICE("You hang \the [used_item] on \the [src].") \
 		)
 		update_icon()
 	return TRUE

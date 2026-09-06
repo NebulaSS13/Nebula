@@ -1,5 +1,6 @@
 /decl/species/monkey
-	name = SPECIES_MONKEY
+	uid = "species_monkey"
+	name = "Monkey"
 	name_plural = "Monkeys"
 	description = "Ook."
 	codex_description = "Monkeys and other similar creatures tend to be found on science stations and vessels as \
@@ -15,8 +16,6 @@
 	dusted_anim = "dust-m"
 	death_message = "lets out a faint chimper as it collapses and stops moving..."
 
-	unarmed_attacks = list(/decl/natural_attack/bite, /decl/natural_attack/claws, /decl/natural_attack/punch)
-	inherent_verbs = list(/mob/living/proc/ventcrawl)
 	species_hud = /datum/hud_data/monkey
 	butchery_data = /decl/butchery_data/humanoid/monkey
 
@@ -33,9 +32,10 @@
 	holder_type = /obj/item/holder
 
 	force_background_info = list(
-		/decl/background_category/heritage =   /decl/background_detail/heritage/hidden/monkey,
-		/decl/background_category/homeworld = /decl/background_detail/location/stateless,
-		/decl/background_category/faction =   /decl/background_detail/faction/other
+		/decl/background_category/heritage    = /decl/background_detail/heritage/hidden/monkey,
+		/decl/background_category/homeworld   = /decl/background_detail/location/stateless,
+		/decl/background_category/citizenship = /decl/background_detail/citizenship/stateless,
+		/decl/background_category/faction     = /decl/background_detail/faction/other
 	)
 
 	ai = /datum/mob_controller/monkey

@@ -125,11 +125,11 @@
 
 	show_browser(user, dat, "window=alien_replicator")
 
-/obj/machinery/replicator/attackby(obj/item/W, mob/user)
-	if(!user.try_unequip(W, src))
+/obj/machinery/replicator/attackby(obj/item/used_item, mob/user)
+	if(!user.try_unequip(used_item, src))
 		return FALSE
-	stored_materials.Add(W)
-	user.visible_message(SPAN_NOTICE("\The [user] inserts \the [W] into \the [src]."), SPAN_NOTICE("You insert \the [W] into \the [src]."))
+	stored_materials.Add(used_item)
+	user.visible_message(SPAN_NOTICE("\The [user] inserts \the [used_item] into \the [src]."), SPAN_NOTICE("You insert \the [used_item] into \the [src]."))
 	return TRUE
 
 /obj/machinery/replicator/OnTopic(user, href_list)

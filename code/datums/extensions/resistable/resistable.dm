@@ -58,7 +58,7 @@
 			)
 			QDEL_NULL(restraint)
 			if(user.buckled && user.buckled.buckle_require_restraints)
-				user.buckled.unbuckle_mob()
+				user.buckled.unbuckle_mob(user)
 			user.update_equipment_overlay(slot)
 			return
 	user.visible_message(

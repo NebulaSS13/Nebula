@@ -60,7 +60,7 @@
 
 	if(silicon_camera.in_camera_mode)
 		silicon_camera.camera_mode_off()
-		silicon_camera.captureimage(A, usr)
+		silicon_camera.captureimage(A, src)
 		return
 
 	A.add_hiddenprint(src)
@@ -118,10 +118,10 @@
 	I have no idea why it was in atoms.dm instead of respective files.
 */
 
-/atom/proc/AICtrlAltClick()
+/atom/proc/AICtrlAltClick(mob/living/silicon/user)
 
-/obj/machinery/door/airlock/AICtrlAltClick() // Electrifies doors.
-	if(usr.incapacitated())
+/obj/machinery/door/airlock/AICtrlAltClick(mob/living/silicon/user) // Electrifies doors.
+	if(user.incapacitated())
 		return
 	if(!electrified_until)
 		// permanent shock
@@ -131,14 +131,14 @@
 		Topic(src, list("command"="electrify_permanently", "activate" = "0"))
 	return 1
 
-/atom/proc/AICtrlShiftClick()
+/atom/proc/AICtrlShiftClick(mob/living/silicon/user)
 	return
 
-/atom/proc/AIShiftClick()
+/atom/proc/AIShiftClick(mob/living/silicon/user)
 	return
 
-/obj/machinery/door/airlock/AIShiftClick()  // Opens and closes doors!
-	if(usr.incapacitated())
+/obj/machinery/door/airlock/AIShiftClick(mob/living/silicon/user)  // Opens and closes doors!
+	if(user.incapacitated())
 		return
 	if(density)
 		Topic(src, list("command"="open", "activate" = "1"))
@@ -146,11 +146,11 @@
 		Topic(src, list("command"="open", "activate" = "0"))
 	return 1
 
-/atom/proc/AICtrlClick()
+/atom/proc/AICtrlClick(mob/living/silicon/user)
 	return FALSE
 
-/obj/machinery/door/airlock/AICtrlClick() // Bolts doors
-	if(usr.incapacitated())
+/obj/machinery/door/airlock/AICtrlClick(mob/living/silicon/user) // Bolts doors
+	if(user.incapacitated())
 		return FALSE
 	if(locked)
 		Topic(src, list("command"="bolts", "activate" = "0"))
@@ -158,35 +158,35 @@
 		Topic(src, list("command"="bolts", "activate" = "1"))
 	return TRUE
 
-/obj/machinery/power/apc/AICtrlClick() // turns off/on APCs.
-	if(usr.incapacitated())
+/obj/machinery/apc/AICtrlClick(mob/living/silicon/user) // turns off/on APCs.
+	if(user.incapacitated())
 		return FALSE
 	Topic(src, list("breaker"="1"))
 	return TRUE
 
-/obj/machinery/turretid/AICtrlClick() //turns off/on Turrets
-	if(usr.incapacitated())
+/obj/machinery/turretid/AICtrlClick(mob/living/silicon/user) //turns off/on Turrets
+	if(user.incapacitated())
 		return FALSE
 	Topic(src, list("command"="enable", "value"="[!enabled]"))
 	return TRUE
 
-/atom/proc/AIAltClick(var/atom/A)
-	return AltClick(A)
+/atom/proc/AIAltClick(mob/living/silicon/user)
+	return AltClick(user)
 
-/obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
-	if(usr.incapacitated())
+/obj/machinery/turretid/AIAltClick(mob/living/silicon/user) //toggles lethal on turrets
+	if(user.incapacitated())
 		return
 	Topic(src, list("command"="lethal", "value"="[!lethal]"))
 	return 1
 
-/obj/machinery/atmospherics/binary/pump/AIAltClick()
-	return AltClick()
+/obj/machinery/atmospherics/binary/pump/AIAltClick(mob/living/silicon/user)
+	return AltClick(user)
 
 /atom/proc/AIMiddleClick(var/mob/living/silicon/user)
 	return 0
 
-/obj/machinery/door/airlock/AIMiddleClick() // Toggles door bolt lights.
-	if(usr.incapacitated())
+/obj/machinery/door/airlock/AIMiddleClick(mob/living/silicon/user) // Toggles door bolt lights.
+	if(user.incapacitated())
 		return
 	if(..())
 		return

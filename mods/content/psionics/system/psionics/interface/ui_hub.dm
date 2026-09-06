@@ -6,6 +6,7 @@
 	maptext_x = 6
 	maptext_y = -8
 	requires_ui_style = FALSE
+	can_hide = FALSE
 	var/image/on_cooldown
 	var/list/components
 
@@ -19,6 +20,7 @@
 	START_PROCESSING(SSprocessing, src)
 
 /obj/screen/psi/hub/on_update_icon()
+	..()
 	var/mob/living/owner = owner_ref?.resolve()
 	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics)
 	icon_state = psi?.suppressed ? "psi_suppressed" : "psi_active"

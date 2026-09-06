@@ -49,3 +49,26 @@
 		/mob/living/simple_animal/hostile/scarybat/cave = 4
 	)
 	return spawnable_choices
+
+/obj/random/hostile/hivebot
+	name = "Random Hivebot"
+	icon = /mob/living/simple_animal/hostile/hivebot::icon
+	icon_state = /mob/living/simple_animal/hostile/hivebot::icon_state
+
+/obj/random/hostile/hivebot/spawn_choices()
+	var/static/list/spawnable_choices = typesof(/mob/living/simple_animal/hostile/hivebot)
+	return spawnable_choices
+
+/obj/random/hostile/hivebot/melee
+	name = "Random Melee Hivebot"
+
+/obj/random/hostile/hivebot/melee/spawn_choices()
+	var/static/list/spawnable_choices = typesof(/mob/living/simple_animal/hostile/hivebot/melee)
+	return spawnable_choices
+
+/obj/random/hostile/hivebot/ranged
+	name = "Random Ranged Hivebot"
+
+/obj/random/hostile/hivebot/ranged/spawn_choices()
+	var/static/list/spawnable_choices = typesof(/mob/living/simple_animal/hostile/hivebot/ranged)
+	return spawnable_choices

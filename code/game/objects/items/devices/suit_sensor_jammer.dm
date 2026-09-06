@@ -80,17 +80,16 @@
 	var/new_range = range + (rand(0,6) / severity) - (rand(0,3) / severity)
 	set_range(new_range)
 
-/obj/item/suit_sensor_jammer/examine(mob/user, distance)
+/obj/item/suit_sensor_jammer/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 3)
-		var/list/message = list()
-		message += "This device appears to be [active ? "" : "in"]active and "
+		var/message = "This device appears to be [active ? "" : "in"]active and "
 		var/obj/item/cell/cell = get_cell()
 		if(cell)
 			message += "displays a charge level of [cell.percent()]%."
 		else
 			message += "is lacking a cell."
-		to_chat(user, jointext(message,.))
+		. += message
 
 /obj/item/suit_sensor_jammer/CanUseTopic(user, state)
 	var/obj/item/cell/cell = get_cell()

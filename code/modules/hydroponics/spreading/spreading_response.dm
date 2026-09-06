@@ -38,17 +38,19 @@
 	seed.do_sting(victim,src,pick(BP_R_FOOT,BP_L_FOOT,BP_R_LEG,BP_L_LEG))
 
 /obj/effect/vine/proc/manual_unbuckle(mob/user)
-	if(!buckled_mob)
+	if(!has_buckled_mob())
 		return
-	if(buckled_mob != user)
-		to_chat(user, "<span class='notice'>You try to free \the [buckled_mob] from \the [src].</span>")
+	if(!(user in get_buckled_mobs()))
+		var/mob/buckle_mob = get_buckled_mob(user = user)
+		to_chat(user, SPAN_NOTICE("You try to free \the [buckle_mob] from \the [src]."))
 		var/chance = round(100/(20*seed.get_trait(TRAIT_POTENCY)/100))
 		if(prob(chance))
-			buckled_mob.visible_message(\
-				"<span class='notice'>\The [user] frees \the [buckled_mob] from \the [src].</span>",\
-				"<span class='notice'>\The [user] frees you from \the [src].</span>",\
-				"<span class='warning'>You hear shredding and ripping.</span>")
-			unbuckle_mob()
+			buckle_mob.visible_message(
+				SPAN_NOTICE("\The [user] frees \the [buckle_mob] from \the [src]."),
+				SPAN_NOTICE("\The [user] frees you from \the [src]."),
+				SPAN_WARNING("You hear shredding and ripping.")
+			)
+			unbuckle_mob(buckle_mob)
 	else
 		user.setClickCooldown(100)
 		var/breakouttime = rand(600, 1200) //1 to 2 minutes.
@@ -58,13 +60,13 @@
 			"<span class='warning'>You attempt to get free from [src].</span>")
 
 		if(do_after(user, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
-			if(unbuckle_mob())
+			if(unbuckle_mob(user))
 				user.visible_message(
 					"<span class='danger'>\The [user] manages to escape [src]!</span>",
 					"<span class='warning'>You successfully escape [src]!</span>")
 
 /obj/effect/vine/proc/entangle(mob/living/victim)
-	if(buckled_mob)
+	if(has_buckled_mob())
 		return
 
 	if(victim.anchored)

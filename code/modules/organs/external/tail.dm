@@ -15,16 +15,13 @@
 	skip_body_icon_draw = TRUE
 	force_limb_dir = WEST
 
-	/// Name of tail state in species effects icon file. Used as a prefix for animated states.
-	var/tail_state = BP_TAIL
-	/// Icon file to use for tail states (including animations)
-	var/tail_icon  = 'icons/mob/human_races/species/default_tail.dmi'
+	icon  = 'icons/mob/human_races/species/default_tail.dmi'
+	icon_state = BP_TAIL
+
+	/// Icon to use for tail states; separate to icon above because external organs generated a blended icon for themselves to replace it.
+	var/tail_icon = 'icons/mob/human_races/species/default_tail.dmi'
 	/// Blend mode for overlaying colour on the tail.
 	var/tail_blend = ICON_ADD
-	/// State modifier for hair overlays.
-	var/tail_hair
-	/// Blend mode for hair overlays.
-	var/tail_hair_blend = ICON_ADD
 	/// How many random tail states are available for animations.
 	var/tail_animation_states = 0
 	/// If we have an animation playing, it will be this state.
@@ -111,7 +108,7 @@
 
 /obj/item/organ/external/tail/proc/get_tail_state()
 	var/decl/sprite_accessory/tail/tail_data = get_accessory_data()
-	return tail_data?.draw_accessory ? tail_data.icon_state : tail_state
+	return tail_data?.draw_accessory ? tail_data.icon_state : icon_state
 
 /obj/item/organ/external/tail/proc/get_tail_animation_states()
 	var/decl/sprite_accessory/tail/tail_data = get_accessory_data()
@@ -120,14 +117,6 @@
 /obj/item/organ/external/tail/proc/get_tail_blend()
 	var/decl/sprite_accessory/tail/tail_data = get_accessory_data()
 	return tail_data?.draw_accessory ? tail_data.color_blend : tail_blend
-
-/obj/item/organ/external/tail/proc/get_tail_hair()
-	var/decl/sprite_accessory/tail/tail_data = get_accessory_data()
-	return tail_data?.draw_accessory ? tail_data.hair_state : tail_hair
-
-/obj/item/organ/external/tail/proc/get_tail_hair_blend()
-	var/decl/sprite_accessory/tail/tail_data = get_accessory_data()
-	return tail_data?.draw_accessory ? tail_data.hair_blend : tail_hair_blend
 
 /obj/item/organ/external/tail/proc/get_tail_metadata()
 	var/decl/sprite_accessory/tail/tail_data = get_accessory_data()

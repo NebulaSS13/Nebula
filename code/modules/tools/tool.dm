@@ -6,7 +6,6 @@
 	w_class             = ITEM_SIZE_NORMAL
 	origin_tech         = @'{"materials":1,"engineering":1}'
 	attack_verb         = list("hit", "pierced", "sliced", "attacked")
-	sharp               = 0
 	abstract_type       = /obj/item/tool
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	_base_attack_force  = 10
@@ -18,7 +17,7 @@
 	/// Material used for binding.
 	var/decl/material/binding_material = /decl/material/solid/organic/meat/gut
 
-/obj/item/tool/examine(mob/user)
+/obj/item/tool/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	var/list/descriptor_strings = list()
 	if(material == handle_material)
@@ -28,7 +27,7 @@
 		descriptor_strings += "the handle is made of [handle_material.use_name]"
 	if(binding_material)
 		descriptor_strings += "the binding is made of [binding_material.use_name]"
-	to_chat(user, "[capitalize(english_list(descriptor_strings))].")
+	. += "[capitalize(english_list(descriptor_strings))]."
 
 /obj/item/tool/Initialize(ml, material_key, _handle_material, _binding_material, override_tool_qualities, override_tool_properties)
 

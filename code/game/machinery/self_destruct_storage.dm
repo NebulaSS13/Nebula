@@ -1,6 +1,6 @@
 /obj/machinery/nuclear_cylinder_storage
 	name = "nuclear cylinder storage"
-	desc = "It's a secure, armored storage unit embeded into the floor for storing the nuclear cylinders."
+	desc = "It's a secure, armored storage unit embedded into the floor for storing the nuclear cylinders."
 	icon = 'icons/obj/machines/self_destruct_storage.dmi'
 	icon_state = "base"
 	anchored = TRUE
@@ -51,6 +51,16 @@
 	to_chat(user, SPAN_WARNING("The card fails to do anything. It seems this device has an advanced encryption system."))
 	return NO_EMAG_ACT
 
+// I hate this but can't think of a better way aside from skipping the testing entirely for this type,
+// which is worse. Basically, we just need to ensure we pass the cannot_transition_to check.
+/obj/machinery/nuclear_cylinder_storage/fail_construct_state_unit_test()
+	locked = FALSE
+	open = TRUE
+	var/list/old_cylinders = cylinders // This is evil.
+	cylinders = list()
+	. = ..()
+	cylinders = old_cylinders
+
 /obj/machinery/nuclear_cylinder_storage/components_are_accessible(path)
 	return !locked && open && ..()
 
@@ -86,13 +96,13 @@
 		return TRUE
 	return FALSE
 
-/obj/machinery/nuclear_cylinder_storage/attackby(obj/item/O, mob/user)
-	if(!open && operable() && istype(O, /obj/item/card/id))
+/obj/machinery/nuclear_cylinder_storage/attackby(obj/item/used_item, mob/user)
+	if(!open && operable() && istype(used_item, /obj/item/card/id))
 		if(panel_open)
 			to_chat(user, SPAN_WARNING("\The [src] is currently in maintenance mode!"))
 			return TRUE
 
-		var/obj/item/card/id/id = O
+		var/obj/item/card/id/id = used_item
 		if(check_access(id))
 			locked = !locked
 			user.visible_message(
@@ -102,21 +112,21 @@
 			update_icon()
 		return TRUE
 
-	if(open && istype(O, /obj/item/nuclear_cylinder) && (length(cylinders) < max_cylinders))
+	if(open && istype(used_item, /obj/item/nuclear_cylinder) && (length(cylinders) < max_cylinders))
 		if(panel_open)
 			to_chat(user, SPAN_WARNING("\The [src] is currently in maintenance mode!"))
 			return TRUE
 
 		user.visible_message(
-			"\The [user] begins inserting \the [O] into storage.",
-			"You begin inserting \the [O] into storage."
+			"\The [user] begins inserting \the [used_item] into storage.",
+			"You begin inserting \the [used_item] into storage."
 		)
-		if(do_after(user, interact_time, src) && open && (length(cylinders) < max_cylinders) && user.try_unequip(O, src))
+		if(do_after(user, interact_time, src) && open && (length(cylinders) < max_cylinders) && user.try_unequip(used_item, src))
 			user.visible_message(
-				"\The [user] places \the [O] into storage.",
-				"You place \the [O] into storage."
+				"\The [user] places \the [used_item] into storage.",
+				"You place \the [used_item] into storage."
 			)
-			cylinders.Add(O)
+			cylinders.Add(used_item)
 			update_icon()
 		return TRUE
 

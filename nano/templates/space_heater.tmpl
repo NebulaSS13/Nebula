@@ -1,0 +1,21 @@
+<!-- we assume that if we get here, the panel is open; if it's closed then the UI closes as well -->
+<div class='item'>
+    <div class='itemLabel'>Power</div>
+    <div class='itemContent'>
+        {{if data.has_cell == 0}}
+            <span class='bad'>None</span>
+        {{else}}
+            Battery ({{:data.cell_percent}}%)
+        {{/if}}
+    </div>
+</div>
+<div class='item'>
+    <div class='itemLabel'>Temperature</div>
+    <div class='itemContent'>
+        {{:helper.link('--', '', {'adj_temp' : -5})}}
+        {{:helper.link('-', '', {'adj_temp' : -1})}}
+        <div style="float: left; width: 80px; text-align: center;">{{:data.set_temperature}}K ({{:data.set_temperature - 273.15}}&deg;C)</div>
+        {{:helper.link('+', '', {'adj_temp' : 1})}}
+        {{:helper.link('++', '', {'adj_temp' : 5})}}
+    </div>
+</div>

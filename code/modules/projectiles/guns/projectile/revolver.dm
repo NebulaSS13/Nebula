@@ -57,8 +57,8 @@
 	if(cap)
 		add_overlay("[icon_state]-toy")
 
-/obj/item/gun/projectile/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)
-	if(!istype(W) || !cap)
+/obj/item/gun/projectile/revolver/capgun/attackby(obj/item/used_item, mob/user)
+	if(!IS_WIRECUTTER(used_item) || !cap)
 		return ..()
 	to_chat(user, "<span class='notice'>You snip off the toy markings off \the [src].</span>")
 	name = "revolver"
@@ -74,6 +74,7 @@
 /decl/interaction_handler/revolver_spin_cylinder
 	name = "Spin Cylinder"
 	expected_target_type = /obj/item/gun/projectile/revolver
+	examine_desc = "spin the cylinder"
 
 /decl/interaction_handler/revolver_spin_cylinder/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/gun/projectile/revolver/R = target

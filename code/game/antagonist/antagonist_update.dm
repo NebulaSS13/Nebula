@@ -9,7 +9,6 @@
 		player.current = new mob_path(get_turf(player.current))
 		player.transfer_to(player.current)
 		if(holder) qdel(holder)
-	player.original = player.current
 	if(!preserve_appearance && (flags & ANTAG_SET_APPEARANCE))
 		spawn(3)
 			var/mob/living/human/H = player.current
@@ -28,10 +27,12 @@
 			qdel(I)
 
 /decl/special_role/proc/get_indicator(var/datum/mind/recipient, var/datum/mind/other)
-	if(!antag_indicator || !other.current || !recipient.current)
+	if(!other.current || !recipient.current)
 		return
 	var/indicator = (faction_indicator && (other in faction_members)) ? faction_indicator : antag_indicator
-	var/image/I = image('icons/mob/hud.dmi', loc = other.current, icon_state = indicator, layer = ABOVE_HUMAN_LAYER)
+	if(!indicator)
+		return
+	var/image/I = image(antag_hud_icon, loc = other.current, icon_state = indicator, layer = ABOVE_HUMAN_LAYER)
 	var/decl/bodytype/root_bodytype = other.current.get_bodytype()
 	if(istype(root_bodytype))
 		I.pixel_x = root_bodytype.antaghud_offset_x

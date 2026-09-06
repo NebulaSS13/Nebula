@@ -7,12 +7,12 @@
 	welcome_text = "Click a target while on GRAB intent to crawl into their ear and infiltrate their brain. You can only take control temporarily, and at risk of hurting your host, so be clever and careful; your host is encouraged to help you however they can. Talk to your host with Say, and your fellow borers with ,z."
 	antag_indicator = "hudborer"
 	antaghud_indicator = "hudborer"
+	antag_hud_icon = 'mods/mobs/borers/icons/hud.dmi'
 
 	faction_name = "Borer Host"
 	faction_descriptor = "Unity"
 	faction_welcome = "You are now host to a cortical borer. Please listen to what they have to say; they're in your head."
 	faction = "borer"
-	faction_indicator = "hudalien"
 
 	hard_cap = 5
 	hard_cap_round = 8

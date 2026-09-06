@@ -3,7 +3,6 @@
 /obj/item/clothing/jumpsuit/captain_fly/@SUBTYPES : /obj/item/clothing/costume/captain_fly/@SUBTYPES{@OLD}
 /obj/item/clothing/jumpsuit/head_of_personnel_whimsy/@SUBTYPES : /obj/item/clothing/costume/head_of_personnel_whimsy/@SUBTYPES{@OLD}
 /obj/item/clothing/pants/casual/mustangjeans/monke/@SUBTYPES : /obj/item/clothing/pants/casual/mustangjeans/@SUBTYPES{@OLD}
-/obj/item/clothing/under/caretaker/@SUBTYPES : /obj/item/clothing/jumpsuit/caretaker/@SUBTYPES{@OLD}
 /obj/item/clothing/under/mankini/@SUBTYPES : /obj/item/clothing/pants/mankini/@SUBTYPES{@OLD}
 /obj/item/clothing/under/bartender/@SUBTYPES : /obj/item/clothing/pants/formal/black{@OLD}, /obj/item/clothing/shirt/button{@OLD}
 /obj/item/clothing/under/blazer/@SUBTYPES : /obj/item/clothing/shirt/button{@OLD}, /obj/item/clothing/neck/tie/navy{@OLD}, /obj/item/clothing/suit/jacket/blazer{@OLD}

@@ -6,8 +6,6 @@ SUBSYSTEM_DEF(materials)
 	priority = SS_PRIORITY_MATERIALS
 
 	// Material vars.
-	var/list/materials
-	var/list/strata
 	var/list/fusion_reactions
 	var/list/weighted_minerals_sparse =       list()
 	var/list/weighted_minerals_rich =         list()
@@ -54,9 +52,8 @@ SUBSYSTEM_DEF(materials)
 		sortTim(cocktails_by_primary_ingredient[reagent], /proc/cmp_cocktail_des)
 
 	// Various other material functions.
-	build_material_lists()       // Build core material lists.
+	build_mineral_weight_lists()
 	build_fusion_reaction_list() // Build fusion reaction tree.
-	materials = sortTim(SSmaterials.materials, /proc/cmp_name_asc)
 
 	var/alpha_inc = 256 / DAMAGE_OVERLAY_COUNT
 	for(var/i = 1; i <= DAMAGE_OVERLAY_COUNT; i++)
@@ -65,18 +62,11 @@ SUBSYSTEM_DEF(materials)
 		img.alpha = (i * alpha_inc) - 1
 		LAZYADD(wall_damage_overlays, img)
 
-	strata = decls_repository.get_decls_of_subtype(/decl/strata) // for debug VV purposes
-
 	. = ..()
 
-/datum/controller/subsystem/materials/proc/build_material_lists()
-	if(LAZYLEN(materials))
-		return
-	materials =         list()
-	var/list/material_decls = decls_repository.get_decls_of_subtype(/decl/material)
-	for(var/mtype in material_decls)
-		var/decl/material/new_mineral = material_decls[mtype]
-		materials += new_mineral
+/datum/controller/subsystem/materials/proc/build_mineral_weight_lists()
+	var/list/material_decls = decls_repository.get_decls_of_subtype_unassociated(/decl/material)
+	for(var/decl/material/new_mineral as anything in material_decls)
 		if(new_mineral.sparse_material_weight)
 			weighted_minerals_sparse[new_mineral.type] = new_mineral.sparse_material_weight
 		if(new_mineral.rich_material_weight)

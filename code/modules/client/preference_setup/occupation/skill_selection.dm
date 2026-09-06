@@ -24,7 +24,7 @@
 	if(job && job.min_skill)
 		. = job.min_skill[S.type]
 	if(!.)
-		var/datum/mil_branch/branch = mil_branches.get_branch(branches[job.title])
+		var/datum/mil_branch/branch = global.using_map.get_branch(branches[job.title])
 		if(branch && branch.min_skill)
 			. = branch.min_skill[S.type]
 	if(!.)
@@ -87,7 +87,7 @@
 //Sets up skills_allocated
 /datum/preferences/proc/sanitize_skills(var/list/input)
 	. = list()
-	var/decl/species/S = get_species_by_key(species)
+	var/decl/species/S = get_species_decl()
 	for(var/job_name in SSjobs.titles_to_datums)
 		var/datum/job/job = SSjobs.get_by_title(job_name)
 		var/input_skills = list()

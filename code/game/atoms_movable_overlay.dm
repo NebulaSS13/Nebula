@@ -39,9 +39,9 @@
 	master = null
 	. = ..()
 
-/atom/movable/overlay/attackby(obj/item/I, mob/user)
+/atom/movable/overlay/attackby(obj/item/used_item, mob/user)
 	if (master)
-		return master.attackby(I, user)
+		return master.attackby(used_item, user)
 	return TRUE
 
 /atom/movable/overlay/attack_hand(mob/user)

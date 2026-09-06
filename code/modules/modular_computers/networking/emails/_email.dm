@@ -28,6 +28,7 @@
 	var/datum/computer_file/data/email_message/received_copy = received.Clone()
 	received_copy.set_timestamp()
 	recipient.inbox.Add(received_copy)
+	recipient.receive_mail(received_copy, src)
 
 	for(var/weakref/os_ref in recipient.logged_in_os)
 		var/datum/extension/interactive/os/os = os_ref.resolve()

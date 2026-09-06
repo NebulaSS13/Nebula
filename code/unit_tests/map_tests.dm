@@ -23,6 +23,9 @@
 		var/bad_msg = "--------------- [A.proper_name]([A.type])"
 
 		var/exemptions = get_exemptions(A)
+		if(exemptions & global.using_map.SKIP_ALL_TESTS)
+			continue
+
 		if(!A.apc && !(exemptions & global.using_map.NO_APC))
 			log_bad("[bad_msg] lacks an APC.")
 			area_good = 0
@@ -184,7 +187,7 @@
 /datum/unit_test/wire_dir_and_icon_stat/start_test()
 	var/list/bad_cables = list()
 
-	for(var/obj/structure/cable/C in global.cable_list)
+	for(var/obj/structure/cable/C in global.all_cables)
 		var/expected_icon_state = "[C.d1]-[C.d2]"
 		if(C.icon_state != expected_icon_state)
 			bad_cables |= C
@@ -411,7 +414,7 @@
 	var/safe_landmarks = 0
 	var/space_landmarks = 0
 
-	for(var/lm in global.landmarks_list)
+	for(var/lm in global.all_landmarks)
 		var/obj/abstract/landmark/landmark = lm
 		if(istype(landmark, /obj/abstract/landmark/test/safe_turf))
 			log_debug("Safe landmark found: [log_info_line(landmark)]")
@@ -503,6 +506,28 @@
 
 //=======================================================================================
 
+// These vars are used to avoid in-world loops in the following unit test.
+var/global/_unit_test_disposal_segments = list()
+var/global/_unit_test_sort_junctions = list()
+
+#ifdef UNIT_TEST
+/obj/structure/disposalpipe/segment/Initialize(mapload)
+	. = ..()
+	_unit_test_disposal_segments += src
+
+/obj/structure/disposalpipe/segment/Destroy()
+	_unit_test_disposal_segments -= src
+	return ..()
+
+/obj/structure/disposalpipe/sortjunction/Initialize(mapload)
+	. = ..()
+	_unit_test_sort_junctions += src
+
+/obj/structure/disposalpipe/sortjunction/Destroy()
+	_unit_test_sort_junctions -= src
+	return ..()
+#endif
+
 /datum/unit_test/disposal_segments_shall_connect_with_other_disposal_pipes
 	name = "MAP: Disposal segments shall connect with other disposal pipes"
 
@@ -522,7 +547,7 @@
 		num2text(SOUTH) = list(list(SOUTH, list(NORTH, WEST)), list(EAST,  list(NORTH, EAST))),
 		num2text(WEST)  = list(list(EAST,  list(NORTH, EAST)), list(SOUTH, list(SOUTH, EAST))))
 
-	for(var/obj/structure/disposalpipe/segment/D in world)
+	for(var/obj/structure/disposalpipe/segment/D in _unit_test_disposal_segments)
 		if(!D.loc)
 			continue
 		if(D.icon_state == "pipe-s")
@@ -684,7 +709,7 @@
 		exceptions_by_turf[T] += exception[4]
 	exceptions = exceptions_by_turf
 
-	for(var/obj/structure/cable/C in global.cable_list)
+	for(var/obj/structure/cable/C in global.all_cables)
 		if(!QDELETED(C) && !all_ends_connected(C))
 			failures++
 
@@ -760,7 +785,7 @@
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages/start_test()
 	. = 1
 	var/fail = FALSE
-	for(var/obj/structure/disposalpipe/sortjunction/sort in world)
+	for(var/obj/structure/disposalpipe/sortjunction/sort in _unit_test_sort_junctions)
 		if(!sort.loc)
 			continue
 		if(is_type_in_list(sort, exempt_junctions))
@@ -793,10 +818,19 @@
 	package.test = src
 	packages_awaiting_delivery[package] = start_tag
 
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/fail(message)
+	. = ..()
+	if(length(packages_awaiting_delivery))
+		log_unit_test("[ascii_red]!!! FAILURE !!! [length(packages_awaiting_delivery)] package\s still processing.")
+		for(var/obj/structure/disposalholder/unit_test/package in packages_awaiting_delivery)
+			var/turf/package_turf = get_turf(package)
+			log_unit_test("[ascii_red] - [packages_awaiting_delivery[package]]: [package_turf?.x || "NULL"],[package_turf?.y || "NULL"],[package_turf?.z || "NULL"]")
+		packages_awaiting_delivery.Cut()
+
 /obj/structure/disposalholder/unit_test
 	is_spawnable_type = FALSE // NO
-	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
 	speed = 100
+	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
 
 /obj/structure/disposalholder/unit_test/merge()
 	return FALSE

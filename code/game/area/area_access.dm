@@ -1,6 +1,7 @@
 /area
 	var/list/req_access = list()
 	var/secure = FALSE    // unsecure areas will have doors between them use access diff; secure ones use union.
+	var/override_unlock = FALSE // TRUE will override area and will be always unlocked. This is e.g. for restrooms inside secure areas, surgery observation room etc.
 
 // Given two areas, find the minimal req_access needed such that (return value) + (area access) >= (other area access) and vice versa
 /proc/req_access_diff(area/first, area/second)

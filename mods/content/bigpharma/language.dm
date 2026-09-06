@@ -7,9 +7,9 @@
 	exclaim_verb = "invokes"
 	ask_verb = "wails"
 	space_chance = 0
-	key = "💊"
+	language_key = "💊"
 	allow_repeated_syllables = FALSE
-	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_FORBIDDEN
+	language_flags = LANG_FLAG_RESTRICTED | LANG_FLAG_FORBIDDEN
 	syllables = list(
 		"o", "a","flu","o","me","phyto","doce","tha","facto","bena","zeco","ni",
 		"me","pro","dize","da","le","ta","to","ba","re","mbi","no","ffi",
@@ -21,5 +21,5 @@
 	)
 	var/list/marks = list("™️","©️","®️")
 
-/decl/language/bigpharma/get_random_name()
+/decl/language/bigpharma/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	. = capitalize("[..(FEMALE, 1, rand(2,3), 1)][pick(endings)][pick(marks)]")

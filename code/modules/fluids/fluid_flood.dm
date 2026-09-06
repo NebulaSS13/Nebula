@@ -1,5 +1,7 @@
 // Permaflood overlay.
 var/global/list/flood_type_overlay_cache = list()
+// TODO: does this need to also take contaminant type as an argument? flooding contaminants are totally untested
+// also, do flooded turfs even apply fluid_act and touch effects?
 /proc/get_flood_overlay(fluid_type)
 	if(!ispath(fluid_type, /decl/material))
 		return null

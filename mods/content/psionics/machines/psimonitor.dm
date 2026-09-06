@@ -25,49 +25,48 @@
 		emagged = TRUE
 		remaining_charges--
 		req_access.Cut()
-		to_chat(user, "<span class='notice'>You short out the access protocols.</span>")
+		to_chat(user, SPAN_NOTICE("You short out the access protocols."))
 		return TRUE
 	return FALSE
 
-/obj/machinery/psi_monitor/Topic(href, href_list)
-
+/obj/machinery/psi_monitor/OnTopic(mob/user, href_list)
 	. = ..()
-	if(!.)
+	if(.)
+		return
 
-		if(href_list["login"])
+	if(href_list["login"])
+		var/obj/item/card/id/ID = user.GetIdCard()
+		if(!ID || !allowed(user))
+			to_chat(user, SPAN_WARNING("Access denied."))
+			return TOPIC_HANDLED
+		else
+			authorized = "[ID.registered_name] ([ID.assignment])"
+			return TOPIC_REFRESH
 
-			var/obj/item/card/id/ID = usr.GetIdCard()
-			if(!ID || !allowed(usr))
-				to_chat(usr, "<span class='warning'>Access denied.</span>")
-			else
-				authorized = "[ID.registered_name] ([ID.assignment])"
-			. = 1
+	else if(href_list["logout"])
+		authorized = FALSE
+		return TOPIC_REFRESH
 
-		else if(href_list["logout"])
-			authorized = FALSE
-			. = 1
+	else if(href_list["show_violations"])
+		show_violations = (href_list["show_violations"] == "1")
+		return TOPIC_REFRESH
 
-		else if(href_list["show_violations"])
-			show_violations = (href_list["show_violations"] == "1")
-			. = 1
+	else  if(href_list["remove_violation"])
+		var/remove_ind = text2num(href_list["remove_violation"])
+		if(remove_ind > 0 && remove_ind <= psi_violations.len)
+			psi_violations.Cut(remove_ind, remove_ind++)
+			return TOPIC_REFRESH
 
-		else  if(href_list["remove_violation"])
-			var/remove_ind = text2num(href_list["remove_violation"])
-			if(remove_ind > 0 && remove_ind <= psi_violations.len)
-				psi_violations.Cut(remove_ind, remove_ind++)
-				. = 1
-
-		else if(href_list["change_mode"])
-			var/obj/item/implant/psi_control/implant = locate(href_list["change_mode"])
-			if(implant.imp_in && !implant.malfunction)
-				var/choice = input("Select a new implant mode.", "Psi Dampener") as null|anything in list(PSI_IMPLANT_AUTOMATIC, PSI_IMPLANT_SHOCK, PSI_IMPLANT_WARN, PSI_IMPLANT_LOG, PSI_IMPLANT_DISABLED)
-				if(choice && implant && implant.imp_in && !implant.malfunction)
-					implant.psi_mode = choice
-					implant.update_functionality()
-					. = 1
-
-		if(. && usr)
-			interact(usr)
+	else if(href_list["change_mode"])
+		var/obj/item/implant/psi_control/implant = locate(href_list["change_mode"])
+		if(implant.imp_in && !implant.malfunction)
+			var/choice = input("Select a new implant mode.", "Psi Dampener") as null|anything in list(PSI_IMPLANT_AUTOMATIC, PSI_IMPLANT_SHOCK, PSI_IMPLANT_WARN, PSI_IMPLANT_LOG, PSI_IMPLANT_DISABLED)
+			if(choice && implant && implant.imp_in && !implant.malfunction)
+				implant.psi_mode = choice
+				implant.update_functionality()
+				return TOPIC_REFRESH
+			return TOPIC_HANDLED
+	return TOPIC_NOACTION
 
 /obj/machinery/psi_monitor/interface_interact(var/mob/user)
 	interact(user)

@@ -87,9 +87,10 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 
+// todo: remove 40k reference?
 /obj/item/clothing/suit/imperium_monk
 	name = "Imperium monk"
-	desc = "Have YOU killed a xenos today?"
+	desc = "Have YOU killed a xeno today?"
 	icon = 'icons/clothing/suits/w40k.dmi'
 	body_parts_covered = SLOT_HEAD|SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS
 	flags_inv = HIDESHOES|HIDEJUMPSUIT

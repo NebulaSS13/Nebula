@@ -103,16 +103,17 @@
 
 	return ..()
 
-/obj/item/modular_computer/examine(mob/user)
+/obj/item/modular_computer/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly.enabled)
-		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
-
+		. += "The time [stationtime2text()] is displayed in the corner of the screen."
 	var/obj/item/stock_parts/computer/card_slot/card_slot = assembly.get_component(PART_CARD)
 	if(card_slot && card_slot.stored_card)
-		to_chat(user, "\The [card_slot.stored_card] is inserted into it.")
-	assembly.examine(user)
+		. += "\The [card_slot.stored_card] is inserted into it."
+	var/assembly_string = assembly.examine_assembly(user)
+	if(assembly_string)
+		. += assembly_string
 
 /obj/item/modular_computer/afterattack(atom/target, mob/user, proximity)
 	. = ..()
@@ -135,10 +136,13 @@
 
 /obj/item/modular_computer/get_alt_interactions(var/mob/user)
 	. = ..()
-	LAZYADD(., /decl/interaction_handler/remove_id/modular_computer)
-	LAZYADD(., /decl/interaction_handler/remove_pen/modular_computer)
-	LAZYADD(., /decl/interaction_handler/emergency_shutdown)
-	LAZYADD(., /decl/interaction_handler/remove_chargestick)
+	var/static/list/_modular_computer_interactions = list(
+		/decl/interaction_handler/remove_id/modular_computer,
+		/decl/interaction_handler/remove_pen/modular_computer,
+		/decl/interaction_handler/emergency_shutdown,
+		/decl/interaction_handler/remove_chargestick
+	)
+	LAZYADD(., _modular_computer_interactions)
 
 //
 // Remove ID
@@ -180,6 +184,7 @@
 	icon = 'icons/screen/radial.dmi'
 	icon_state = "radial_power_off"
 	expected_target_type = /obj/item/modular_computer
+	examine_desc = "perform an emergency shutdown"
 
 /decl/interaction_handler/emergency_shutdown/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..()
@@ -200,6 +205,7 @@
 	icon = 'icons/screen/radial.dmi'
 	icon_state = "radial_eject"
 	expected_target_type = /obj/item/modular_computer
+	examine_desc = "remove a chargestick"
 
 /decl/interaction_handler/remove_chargestick/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..()

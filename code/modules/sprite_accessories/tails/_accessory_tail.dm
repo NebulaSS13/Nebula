@@ -13,6 +13,14 @@
 		var/obj/item/organ/external/tail/new_tail = new(null, null, character.get_mob_snapshot())
 		character.add_organ(new_tail, null, TRUE, FALSE, FALSE, TRUE)
 
+/decl/sprite_accessory_category/tail/prepare_mob_snapshot(datum/mob_snapshot/snapshot, list/accessories)
+	if(!length(accessories))
+		return
+	// Give us a tail if we need one.
+	var/decl/sprite_accessory/tail_data = GET_DECL(accessories[1])
+	if(tail_data?.draw_accessory && !snapshot.root_bodytype.has_limbs[BP_TAIL])
+		LAZYSET(snapshot.extra_limbs, BP_TAIL, list("path" = /obj/item/organ/external/tail))
+
 /decl/sprite_accessory/tail
 	abstract_type = /decl/sprite_accessory/tail
 	hidden_by_gear_slot  = list(slot_w_uniform_str, slot_wear_suit_str)
@@ -27,17 +35,14 @@
 	color_blend          = ICON_MULTIPLY
 
 	var/icon_animation_states
-	var/hair_state
-	var/hair_blend = ICON_ADD
 
 /decl/sprite_accessory/tail/none
-	name                        = "Default Tail"
+	name                        = "No Custom Tail"
 	icon_state                  = "none"
 	uid                         = "acc_tail_none"
 	bodytypes_allowed           = null
 	bodytypes_denied            = null
 	species_allowed             = null
-	subspecies_allowed          = null
 	bodytype_categories_allowed = null
 	bodytype_categories_denied  = null
 	body_flags_allowed          = null
@@ -52,17 +57,3 @@
 
 /decl/sprite_accessory/tail/none/hide_tail/accessory_is_available(mob/owner, decl/species/species, decl/bodytype/bodytype, list/traits)
 	. = ..() && (BP_TAIL in bodytype.has_limbs)
-
-/*
-// Leaving these in for future reference.
-/decl/sprite_accessory/tail/debug
-	name                     = "Debug Tail"
-	uid                      = "acc_tail_debug"
-	is_whitelisted           = "DEBUG"
-
-/decl/sprite_accessory/tail/debug_inner
-	name                     = "Debug Two-Tone Tail"
-	uid                      = "acc_tail_debug2"
-	is_whitelisted           = "DEBUG"
-	accessory_metadata_types = list(SAM_COLOR, SAM_COLOR_INNER)
-*/

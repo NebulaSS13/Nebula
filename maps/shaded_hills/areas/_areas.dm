@@ -20,13 +20,6 @@
 	)
 	sound_env = GENERIC
 	ambience = list()
-	var/list/additional_fishing_results
-
-/area/shaded_hills/Initialize()
-	if(additional_fishing_results)
-		for(var/fish in additional_fishing_results)
-			fishing_results[fish] = additional_fishing_results[fish]
-	. = ..()
 
 /area/shaded_hills/outside
 	name = "\improper Grasslands"
@@ -43,5 +36,5 @@
 	)
 	description = "Birds and insects call from the grasses, and a cool wind gusts from across the river."
 	area_blurb_category = /area/shaded_hills/outside
-	interior_ambient_light_modifier = -0.3
+	interior_ambient_light_modifier = -0.4
 	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_BACKGROUND

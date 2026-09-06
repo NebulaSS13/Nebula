@@ -48,7 +48,7 @@
 
 /obj/structure/town_bell/attackby(obj/item/used_item, mob/user)
 	. = ..()
-	if(used_item.get_attack_force())
+	if(used_item.expend_attack_force())
 		ding_dong()
 
 /obj/structure/town_bell/attack_hand(mob/user)

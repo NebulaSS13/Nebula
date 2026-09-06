@@ -58,6 +58,12 @@ var/global/const/access_tox_storage = "ACCESS_TOX_STORAGE" //8
 	desc = "Toxins Lab"
 	region = ACCESS_REGION_RESEARCH
 
+var/global/const/access_warden = "ACCESS_WARDEN" //9
+/datum/access/warden
+	id = access_warden
+	desc = "Warden Office"
+	region = ACCESS_REGION_SECURITY
+
 var/global/const/access_engine = "ACCESS_ENGINEERING" //10
 /datum/access/engine
 	id = access_engine
@@ -458,12 +464,6 @@ var/global/const/access_mercenary = "ACCESS_MERCENARY"
 /datum/access/mercenary
 	id = access_mercenary
 	desc = "Mercenary"
-	access_type = ACCESS_TYPE_ANTAG
-
-var/global/const/access_wizard = "ACCESS_WIZARD"
-/datum/access/wizard
-	id = access_wizard
-	desc = "Wizard"
 	access_type = ACCESS_TYPE_ANTAG
 
 /*******

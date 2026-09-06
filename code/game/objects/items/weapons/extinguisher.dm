@@ -16,7 +16,7 @@
 	possible_transfer_amounts     = @"[30,60,120]" //units of liquid per spray - 120 -> same as splashing them with a bucket per spray
 	possible_particle_amounts     = @"[1,2,3]"     //Amount of chempuff particles to spawn on spray
 	amount_per_transfer_from_this = 120
-	volume                        = 2000
+	chem_volume                   = 2000
 	spray_particles               = 3                    //Amount of liquid particles to spawn on spray
 	particle_move_delay           = 5                    //Spray effect move delay
 	safety                        = TRUE
@@ -36,7 +36,7 @@
 	possible_particle_amounts     = @"[1,2]"
 	amount_per_transfer_from_this = 80
 	spray_particles               = 2
-	volume                        = 1000
+	chem_volume                   = 1000
 	material                      = /decl/material/solid/organic/plastic
 	matter                        = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE,
@@ -45,7 +45,7 @@
 	_base_attack_force            = 3
 
 /obj/item/chems/spray/extinguisher/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/spray/extinguisher/has_safety()
 	return TRUE
@@ -69,7 +69,7 @@
 	if(O.anchored || !(O.movable_flags & MOVABLE_FLAG_WHEELED))
 		return
 
-	var/obj/structure/bed/chair/C = istype(O, /obj/structure/bed/chair)? O : null
+	var/obj/structure/chair/C = istype(O, /obj/structure/chair)? O : null
 	//#TODO: That could definitely be improved. Would suggest to use process_momentum but its only for thrownthing
 	var/list/move_speed = list(1, 1, 1, 2, 2, 3)
 	for(var/i in 1 to 6)

@@ -80,7 +80,7 @@
 
 /decl/hierarchy/supply_pack/medical/wheelchair
 	name = "Equipment - Wheelchair crate"
-	contains = list(/obj/structure/bed/chair/wheelchair)
+	contains = list(/obj/structure/chair/wheelchair)
 	containertype = /obj/structure/closet/crate/large
 	containername = "\improper Wheelchair crate"
 

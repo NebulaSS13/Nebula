@@ -19,12 +19,13 @@
 	. = ..()
 
 /obj/item/mech_component/sensors/show_missing_parts(var/mob/user)
+	. = list()
 	if(!radio)
-		to_chat(user, SPAN_WARNING("It is missing a radio."))
+		. += SPAN_WARNING("It is missing a radio.")
 	if(!camera)
-		to_chat(user, SPAN_WARNING("It is missing a camera."))
+		. += SPAN_WARNING("It is missing a camera.")
 	if(!software)
-		to_chat(user, SPAN_WARNING("It is missing a software control module."))
+		. += SPAN_WARNING("It is missing a software control module.")
 
 /obj/item/mech_component/sensors/prebuild()
 	radio = new(src)
@@ -55,29 +56,29 @@
 /obj/item/mech_component/sensors/ready_to_install()
 	return (radio && camera)
 
-/obj/item/mech_component/sensors/attackby(var/obj/item/thing, var/mob/user)
-	if(istype(thing, /obj/item/mech_component/control_module))
+/obj/item/mech_component/sensors/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/mech_component/control_module))
 		if(software)
 			to_chat(user, SPAN_WARNING("\The [src] already has a control modules installed."))
 			return TRUE
-		if(install_component(thing, user))
-			software = thing
+		if(install_component(used_item, user))
+			software = used_item
 			return TRUE
 		return FALSE
-	else if(istype(thing,/obj/item/robot_parts/robot_component/radio))
+	else if(istype(used_item,/obj/item/robot_parts/robot_component/radio))
 		if(radio)
 			to_chat(user, SPAN_WARNING("\The [src] already has a radio installed."))
 			return TRUE
-		if(install_component(thing, user))
-			radio = thing
+		if(install_component(used_item, user))
+			radio = used_item
 			return TRUE
 		return FALSE
-	else if(istype(thing,/obj/item/robot_parts/robot_component/camera))
+	else if(istype(used_item,/obj/item/robot_parts/robot_component/camera))
 		if(camera)
 			to_chat(user, SPAN_WARNING("\The [src] already has a camera installed."))
 			return TRUE
-		if(install_component(thing, user))
-			camera = thing
+		if(install_component(used_item, user))
+			camera = used_item
 			return TRUE
 		return FALSE
 	else
@@ -111,16 +112,16 @@
 	var/list/installed_software = list()
 	var/max_installed_software = 2
 
-/obj/item/mech_component/control_module/examine(mob/user)
+/obj/item/mech_component/control_module/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, SPAN_NOTICE("It has [max_installed_software - LAZYLEN(installed_software)] empty slot\s remaining out of [max_installed_software]."))
+	. += SPAN_NOTICE("It has [max_installed_software - LAZYLEN(installed_software)] empty slot\s remaining out of [max_installed_software].")
 
-/obj/item/mech_component/control_module/attackby(var/obj/item/thing, var/mob/user)
-	if(istype(thing, /obj/item/stock_parts/circuitboard/exosystem))
-		install_software(thing, user)
+/obj/item/mech_component/control_module/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/stock_parts/circuitboard/exosystem))
+		install_software(used_item, user)
 		return TRUE
 
-	if(IS_SCREWDRIVER(thing))
+	if(IS_SCREWDRIVER(used_item))
 		. = ..()
 		update_software()
 		return

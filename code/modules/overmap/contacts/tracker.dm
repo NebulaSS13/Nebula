@@ -23,6 +23,6 @@
 	. = ..()
 	icon_state = enabled ? "enabled" : "disabled"
 
-/obj/item/ship_tracker/examine(var/mob/user)
+/obj/item/ship_tracker/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It appears to be [enabled ? "enabled" : "disabled"]")
+	. += "It appears to be [enabled ? "enabled" : "disabled"]"

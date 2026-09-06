@@ -124,7 +124,7 @@
 		get_spawned_drop(T)
 
 /datum/random_map/droppod/proc/get_spawned_drop(var/turf/T)
-	var/obj/structure/bed/chair/C = new(T)
+	var/obj/structure/chair/C = new(T)
 	C.set_light(3, 1, l_color = "#cc0000")
 	var/mob/living/drop
 	// This proc expects a list of mobs to be passed to the spawner.
@@ -136,7 +136,6 @@
 			drop = pick(supplied_drop_types)
 			supplied_drop_types -= drop
 			if(istype(drop))
-				drop.tag = null
 				if(drop.buckled)
 					drop.buckled = null
 				drop.forceMove(T)
@@ -168,7 +167,6 @@
 			return
 		for(var/i=0;i<spawn_count;i++)
 			var/mob/living/M = new spawn_path()
-			M.tag = "awaiting drop"
 			spawned_mobs |= M
 	else
 		var/list/candidates = list()
@@ -187,7 +185,6 @@
 
 		// Spawn the mob in nullspace for now.
 		spawned_mob = new spawn_path()
-		spawned_mob.tag = "awaiting drop"
 
 		// Equip them, if they are human and it is desirable.
 		if(ishuman(spawned_mob))
@@ -203,7 +200,6 @@
 		if(spawned_mobs.len)
 			for(var/mob/living/M in spawned_mobs)
 				spawned_mobs -= M
-				M.tag = null
 				qdel(M)
 			spawned_mobs.Cut()
 		return

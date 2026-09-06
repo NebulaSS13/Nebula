@@ -1,51 +1,51 @@
 <!--
-Title: inteliCard interface
+Title: intelliCard interface
 Used In File(s): \code\game\objects\items\devices\aicard.dm
  -->
- 
+
  <style type="text/css">
     table.borders   {
-        width:95%; 
-        margin-left:2.4%; 
+        width:95%;
+        margin-left:2.4%;
         margin-right:2.4%;
     }
 
     table.borders, table.borders tr {
         border: 1px solid White;
     }
-    
+
     td.law_index {
         width: 50px;
     }
-    
+
     td.state {
         width: 63px;
-		text-align:center; 
+		text-align:center;
     }
-    
+
     td.add {
         width: 36px;
     }
-    
+
     td.edit {
         width: 36px;
-		text-align:center; 
+		text-align:center;
     }
-    
+
     td.delete {
         width: 53px;
-		text-align:center; 
+		text-align:center;
     }
-    
+
     td.law_type {
         width: 65px;
     }
-    
+
     td.position {
         width: 37px;
     }
 </style>
- 
+
 {{if data.has_ai}}
     <div class="item">
         <div class="itemLabel">
@@ -61,11 +61,11 @@ Used In File(s): \code\game\objects\items\devices\aicard.dm
             {{:data.backup_capacitor}}%
         </div>
     </div>
-    
-    {{if data.has_laws}}    
+
+    {{if data.has_laws}}
 		<table class='borders'>
 		<tr><td class='law_index'>Index</td><td>Law</td></tr>
-    
+
 		<div class="itemLabelNarrow">
 			Laws:
 		</div>
@@ -76,8 +76,8 @@ Used In File(s): \code\game\objects\items\devices\aicard.dm
     {{else}}
         <span class='notice'>No laws found.</span>
 	{{/if}}
-    
-    {{if data.operational}}    
+
+    {{if data.operational}}
         <table>
             <tr>
                 <td><span class='itemLabelWidest'>Radio Subspace Transceiver</span></td>

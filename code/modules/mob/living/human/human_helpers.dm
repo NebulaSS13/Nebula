@@ -116,9 +116,8 @@
 		ping_image.layer = BEAM_PROJECTILE_LAYER
 		ping_image.pixel_x = (T.x - src.x) * WORLD_ICON_SIZE
 		ping_image.pixel_y = (T.y - src.y) * WORLD_ICON_SIZE
-		show_image(src, ping_image)
-		spawn(8)
-			qdel(ping_image)
+		show_image(src, ping_image) // todo: should this use screen stuff instead?
+		QDEL_IN(ping_image, 0.8 SECONDS) // qdeling an image is gross but oh well
 		var/feedback = list("<span class='notice'>There are noises of movement ")
 		var/direction = get_dir(src, L)
 		if(direction)
@@ -148,105 +147,39 @@
 	var/vision_organ_tag = get_vision_organ_tag()
 	if(!vision_organ_tag)
 		return
-	var/obj/item/organ/internal/eyes/E = get_organ(vision_organ_tag, /obj/item/organ/internal/eyes)
-	if(!E)
+	var/obj/item/organ/internal/eyes/eyes = get_organ(vision_organ_tag, /obj/item/organ/internal/eyes)
+	if(!istype(eyes))
 		return
 	var/safety = eyecheck()
 	switch(safety)
 		if(FLASH_PROTECTION_MODERATE)
 			to_chat(src, "<span class='warning'>Your eyes sting a little.</span>")
-			E.damage += rand(1, 2)
-			if(E.damage > 12)
+			eyes.adjust_organ_damage(rand(1, 2))
+			if(eyes.get_organ_damage() > 12)
 				ADJ_STATUS(src, STAT_BLURRY, rand(3,6))
 		if(FLASH_PROTECTION_MINOR)
 			to_chat(src, "<span class='warning'>Your eyes stings!</span>")
-			E.damage += rand(1, 4)
-			if(E.damage > 10)
+			eyes.adjust_organ_damage(rand(1, 4))
+			if(eyes.get_organ_damage() > 10)
 				ADJ_STATUS(src, STAT_BLURRY, rand(3,6))
-				E.damage += rand(1, 4)
+				eyes.adjust_organ_damage(rand(1, 4))
 		if(FLASH_PROTECTION_NONE)
 			to_chat(src, "<span class='warning'>Your eyes burn!</span>")
-			E.damage += rand(2, 4)
-			if(E.damage > 10)
-				E.damage += rand(4,10)
+			eyes.adjust_organ_damage(rand(2, 4))
+			if(eyes.get_organ_damage() > 10)
+				eyes.adjust_organ_damage(rand(4,10))
 		if(FLASH_PROTECTION_REDUCED)
 			to_chat(src, "<span class='danger'>Your equipment intensifies the welder's glow. Your eyes itch and burn severely.</span>")
 			ADJ_STATUS(src, STAT_BLURRY, rand(12,20))
-			E.damage += rand(12, 16)
+			eyes.adjust_organ_damage(rand(12, 16))
 	if(safety<FLASH_PROTECTION_MAJOR)
-		if(E.damage > 10)
+		if(eyes.get_organ_damage() > 10)
 			to_chat(src, "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>")
-		if (E.damage >= E.min_bruised_damage)
+		if (eyes.get_organ_damage() >= eyes.min_bruised_damage)
 			to_chat(src, "<span class='danger'>You go blind!</span>")
 			SET_STATUS_MAX(src, STAT_BLIND, 5)
 			SET_STATUS_MAX(src, STAT_BLURRY, 5)
 			add_genetic_condition(GENE_COND_NEARSIGHTED, 10 SECONDS)
-
-/mob/living/human
-	var/list/cloaking_sources
-
-// Returns true if, and only if, the human has gone from uncloaked to cloaked
-/mob/living/human/proc/add_cloaking_source(var/datum/cloaking_source)
-	var/has_uncloaked = clean_cloaking_sources()
-	LAZYDISTINCTADD(cloaking_sources, weakref(cloaking_source))
-
-	// We don't present the cloaking message if the human was already cloaked just before cleanup.
-	if(!has_uncloaked && LAZYLEN(cloaking_sources) == 1)
-		update_icon()
-		src.visible_message("<span class='warning'>\The [src] seems to disappear before your eyes!</span>", "<span class='notice'>You feel completely invisible.</span>")
-		return TRUE
-	return FALSE
-
-#define CLOAK_APPEAR_OTHER "<span class='warning'>\The [src] appears from thin air!</span>"
-#define CLOAK_APPEAR_SELF "<span class='notice'>You have re-appeared.</span>"
-
-// Returns true if, and only if, the human has gone from cloaked to uncloaked
-/mob/living/human/proc/remove_cloaking_source(var/datum/cloaking_source)
-	var/was_cloaked = LAZYLEN(cloaking_sources)
-	clean_cloaking_sources()
-	LAZYREMOVE(cloaking_sources, weakref(cloaking_source))
-
-	if(was_cloaked && !LAZYLEN(cloaking_sources))
-		update_icon()
-		visible_message(CLOAK_APPEAR_OTHER, CLOAK_APPEAR_SELF)
-		return TRUE
-	return FALSE
-
-// Returns true if the human is cloaked, otherwise false (technically returns the number of cloaking sources)
-/mob/proc/is_cloaked()
-	return FALSE
-
-/mob/living/human/is_cloaked()
-	if(clean_cloaking_sources())
-		update_icon()
-		visible_message(CLOAK_APPEAR_OTHER, CLOAK_APPEAR_SELF)
-	return LAZYLEN(cloaking_sources)
-
-#undef CLOAK_APPEAR_OTHER
-#undef CLOAK_APPEAR_SELF
-
-// Returns true if the human is cloaked by the given source
-/mob/living/human/proc/is_cloaked_by(var/cloaking_source)
-	return LAZYISIN(cloaking_sources, weakref(cloaking_source))
-
-// Returns true if this operation caused the mob to go from cloaked to uncloaked
-/mob/living/human/proc/clean_cloaking_sources()
-	if(!cloaking_sources)
-		return FALSE
-
-	var/list/rogue_entries = list()
-	for(var/entry in cloaking_sources)
-		var/weakref/W = entry
-		if(!W.resolve())
-			cloaking_sources -= W
-			rogue_entries += W
-
-	if(rogue_entries.len) // These entries did not cleanup after themselves before being destroyed
-		var/rogue_entries_as_string = jointext(map(rogue_entries, /proc/log_info_line), ", ")
-		PRINT_STACK_TRACE("[log_info_line(src)] - Following cloaking entries were removed during cleanup: [rogue_entries_as_string]")
-
-	UNSETEMPTY(cloaking_sources)
-	return !cloaking_sources // If cloaking_sources wasn't initially null but is now, we've uncloaked
 
 /mob/living/human/proc/has_meson_effect()
 	var/datum/global_hud/global_hud = get_global_hud()

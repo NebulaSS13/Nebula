@@ -10,10 +10,10 @@
 /obj/item/clothing/mask/smokable/cigarette/rolled/populate_reagents()
 	return
 
-/obj/item/clothing/mask/smokable/cigarette/rolled/examine(mob/user)
+/obj/item/clothing/mask/smokable/cigarette/rolled/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(filter)
-		to_chat(user, "Capped off one end with a filter.")
+		. += "\The [src] is capped off at one end with a filter."
 
 /////////// //Ported Straight from TG. I am not sorry. - BloodyMan  //YOU SHOULD BE
 //ROLLING//
@@ -22,7 +22,6 @@
 	name = "rolling paper"
 	desc = "A thin piece of paper used to make smokeables."
 	icon = 'icons/obj/items/paperwork/cigarette_paper.dmi'
-
 	icon_state = "cig_paper"
 	w_class = ITEM_SIZE_TINY
 
@@ -58,8 +57,8 @@
 /obj/item/food/grown/dried_tobacco/fine
 	seed = "finetobacco"
 
-/obj/item/clothing/mask/smokable/cigarette/rolled/attackby(obj/item/I, mob/user)
-	if(!istype(I, /obj/item/cigarette_filter))
+/obj/item/clothing/mask/smokable/cigarette/rolled/attackby(obj/item/used_item, mob/user)
+	if(!istype(used_item, /obj/item/cigarette_filter))
 		return ..()
 	if(filter)
 		to_chat(user, "<span class='warning'>[src] already has a filter!</span>")
@@ -67,12 +66,12 @@
 	if(lit)
 		to_chat(user, "<span class='warning'>[src] is lit already!</span>")
 		return TRUE
-	if(!user.try_unequip(I))
+	if(!user.try_unequip(used_item))
 		return TRUE
-	to_chat(user, "<span class='notice'>You stick [I] into \the [src]</span>")
+	to_chat(user, "<span class='notice'>You stick [used_item] into \the [src]</span>")
 	filter = 1
 	SetName("filtered [name]")
 	brand = "[brand] with a filter"
 	update_icon()
-	qdel(I)
+	qdel(used_item)
 	return TRUE

@@ -1,5 +1,5 @@
 /obj/item/food/get_edible_material_amount(mob/eater)
-	return reagents?.total_volume
+	return REAGENT_TOTAL_VOLUME(reagents)
 
 /obj/item/food/get_food_consumption_method(mob/eater)
 	return EATING_METHOD_EAT

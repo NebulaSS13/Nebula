@@ -5,6 +5,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species
 	abstract_type = /decl/species
+	decl_flags = DECL_FLAG_MANDATORY_UID
 
 	// Descriptors and strings.
 	var/name
@@ -79,12 +80,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	// Combat vars.
 	var/total_health = DEFAULT_SPECIES_HEALTH  // Point at which the mob will enter crit.
-	var/list/unarmed_attacks = list(           // Possible unarmed attacks that the mob will use in combat,
-		/decl/natural_attack/stomp,
-		/decl/natural_attack/kick,
-		/decl/natural_attack/punch,
-		/decl/natural_attack/bite
-	)
 
 	var/brute_mod =      1                    // Physical damage multiplier.
 	var/burn_mod =       1                    // Burn damage multiplier.
@@ -123,7 +118,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/breath_type = /decl/material/gas/oxygen                 // Non-oxygen gas breathed, if any.
 	/// Material types considered noticeably poisonous when inhaled (ie. updates the toxins indicator on the HUD).
 	/// This is an associative list for speed.
-	var/poison_types = list(/decl/material/gas/chlorine = TRUE)
+	var/poison_types = list(
+		/decl/material/gas/chlorine = TRUE
+	)
 	var/exhale_type = /decl/material/gas/carbon_dioxide         // Exhaled gas type.
 	var/blood_reagent = /decl/material/liquid/blood
 
@@ -166,7 +163,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	var/decl/pronouns/default_pronouns
 	var/list/available_pronouns = list(
-		/decl/pronouns,
+		/decl/pronouns/pseudoplural,
 		/decl/pronouns/neuter/person,
 		/decl/pronouns/female,
 		/decl/pronouns/male
@@ -180,9 +177,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/pass_flags = 0
 	var/breathing_sound = 'sound/voice/monkey.ogg'
 
-	var/list/base_auras
-
-	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job recieves.
+	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job receives.
 
 	var/standing_jump_range = 2
 	var/list/maneuvers = list(/decl/maneuver/leap)
@@ -310,7 +305,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/decl/sprite_accessory/accessory = GET_DECL(accessory_type)
 		// If this accessory is species restricted, add us to the list.
 		if(accessory.species_allowed)
-			accessory.species_allowed |= name
+			accessory.species_allowed |= uid
 		if(!isnull(accessory.body_flags_allowed))
 			for(var/decl/bodytype/bodytype in available_bodytypes)
 				accessory.body_flags_allowed |= bodytype.body_flags
@@ -327,7 +322,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	for(var/accessory_type in disallow_specific_sprite_accessories)
 		var/decl/sprite_accessory/accessory = GET_DECL(accessory_type)
 		if(accessory.species_allowed)
-			accessory.species_allowed -= name
+			accessory.species_allowed -= uid
 		if(!isnull(accessory.body_flags_allowed))
 			for(var/decl/bodytype/bodytype in available_bodytypes)
 				accessory.body_flags_allowed &= ~bodytype.body_flags
@@ -355,7 +350,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	else if(length(available_pronouns) && !default_pronouns)
 		default_pronouns = available_pronouns[1]
 
-	for(var/cat_type in global.using_map.get_background_categories())
+	for(var/cat_type in decls_repository.get_decls_of_subtype(/decl/background_category))
 
 		var/force_val = force_background_info[cat_type]
 		if(force_val)
@@ -369,7 +364,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 		else if(!LAZYLEN(available_background_info[cat_type]))
 			var/list/map_systems = global.using_map.available_background_info[cat_type]
-			available_background_info[cat_type] = map_systems.Copy()
+			available_background_info[cat_type] = islist(map_systems) ? map_systems.Copy() : list()
 
 		if(LAZYLEN(available_background_info[cat_type]) && !default_background_info[cat_type])
 			var/list/avail_systems = available_background_info[cat_type]
@@ -393,9 +388,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/decl/trait/trait = GET_DECL(trait_type)
 		if(!trait.validate_level(trait_level))
 			. += "invalid levels for species trait [trait_type]"
-		if(name in trait.blocked_species)
+		if(uid in trait.blocked_species)
 			. += "trait [trait.name] prevents this species from taking it"
-		if(trait.permitted_species && !(name in trait.permitted_species))
+		if(trait.permitted_species && !(uid in trait.permitted_species))
 			. += "trait [trait.name] does not permit this species to take it"
 
 	if(!length(blood_types))
@@ -408,30 +403,17 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	if(taste_sensitivity < 0)
 		. += "taste_sensitivity ([taste_sensitivity]) was negative"
 
-/decl/species/proc/equip_survival_gear(var/mob/living/human/H, var/box_type = /obj/item/box/survival)
-	var/obj/item/backpack/backpack = H.get_equipped_item(slot_back_str)
+/decl/species/proc/equip_survival_gear(mob/living/wearer, box_type = /obj/item/box/survival)
+	if(!box_type)
+		return
+	var/obj/item/backpack/backpack = wearer.get_equipped_item(slot_back_str)
 	if(istype(backpack))
-		H.equip_to_slot_or_del(new box_type(backpack), slot_in_backpack_str)
+		wearer.equip_to_slot_or_del(new box_type(backpack), slot_in_backpack_str)
 	else
-		H.put_in_hands_or_del(new box_type(H))
+		wearer.put_in_hands_or_del(new box_type(wearer))
 
 /decl/species/proc/get_manual_dexterity(var/mob/living/human/H)
 	. = manual_dexterity
-
-/decl/species/proc/add_base_auras(var/mob/living/human/H)
-	if(base_auras)
-		for(var/type in base_auras)
-			H.add_aura(new type(H), skip_icon_update = TRUE)
-
-/decl/species/proc/remove_base_auras(var/mob/living/human/H)
-	if(base_auras)
-		var/list/bcopy = base_auras.Copy()
-		for(var/a in H.auras)
-			var/obj/aura/A = a
-			if(is_type_in_list(a, bcopy))
-				bcopy -= A.type
-				H.remove_aura(A)
-				qdel(A)
 
 /decl/species/proc/remove_inherent_verbs(var/mob/living/human/H)
 	if(inherent_verbs)
@@ -447,7 +429,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/proc/handle_post_spawn(var/mob/living/human/H) //Handles anything not already covered by basic species assignment.
 	add_inherent_verbs(H)
-	add_base_auras(H)
 	handle_movement_flags_setup(H)
 
 /decl/species/proc/handle_pre_spawn(var/mob/living/human/H)
@@ -489,27 +470,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	return FALSE
 
 //Used for swimming
-/decl/species/proc/can_float(var/mob/living/human/H)
+/decl/species/proc/can_float_on_liquids(var/mob/living/human/H)
 	if(!H.is_physically_disabled())
 		return TRUE //We could tie it to stamina
 	return FALSE
-
-// Called when using the shredding behavior.
-/decl/species/proc/can_shred(var/mob/living/human/H, var/ignore_intent, var/ignore_antag)
-
-	if((!ignore_intent && H.a_intent != I_HURT) || H.pulling_punches)
-		return 0
-
-	if(!ignore_antag && H.mind && !player_is_antag(H.mind))
-		return 0
-
-	for(var/attack_type in unarmed_attacks)
-		var/decl/natural_attack/attack = GET_DECL(attack_type)
-		if(!istype(attack) || !attack.is_usable(H))
-			continue
-		if(attack.shredding)
-			return 1
-	return 0
 
 /decl/species/proc/handle_vision(var/mob/living/human/H)
 	var/list/vision = H.get_accumulated_vision_handlers()
@@ -622,7 +586,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/skill_mod = 10 * attacker.get_skill_difference(SKILL_COMBAT, target)
 	var/state_mod = attacker.melee_accuracy_mods() - target.melee_accuracy_mods()
 	var/push_mod = min(max(1 + attacker.get_skill_difference(SKILL_COMBAT, target), 1), 3)
-	if(target.a_intent == I_HELP)
+	if(target.check_intent(I_FLAG_HELP))
 		state_mod -= 30
 	//Handle unintended consequences
 	for(var/obj/item/I in holding)
@@ -631,7 +595,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			return
 
 	var/randn = rand(1, 100) - skill_mod + state_mod
-	if(!target.can_slip() && randn <= 25)
+	if(target.can_slip() && randn <= 25)
 		var/armor_check = 100 * target.get_blocked_ratio(affecting, BRUTE, damage = 20)
 		target.apply_effect(push_mod, WEAKEN, armor_check)
 		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
@@ -704,8 +668,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			// This assumes that if a pain-level has been defined it also has a list of emotes to go with it
 			return pick(pain_emotes)
 
-/decl/species/proc/handle_post_move(var/mob/living/human/H)
-	handle_exertion(H)
+/decl/species/proc/handle_post_move(var/mob/living/human/H, exertion = TRUE)
+	if(exertion)
+		handle_exertion(H)
 
 /decl/species/proc/handle_exertion(mob/living/human/H)
 	if (!exertion_effect_chance)
@@ -747,10 +712,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 		// TODO: generate an icon based on all available bodytypes.
 
-		var/mob/living/human/dummy/mannequin/mannequin = get_mannequin("#species_[ckey(name)]")
+		var/mob/living/human/dummy/mannequin/mannequin = get_mannequin("#species_[ckey(uid)]")
 		if(mannequin)
 
-			mannequin.change_species(name) // handles species/bodytype init
+			mannequin.change_species(uid) // handles species/bodytype init
 			default_bodytype.customize_preview_mannequin(mannequin) // handles body colors/styles setup
 			customize_preview_mannequin(mannequin) // handles 'cultural' things like default outfit
 
@@ -764,7 +729,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2)
 			preview_icon_width = preview_icon.Width()
 			preview_icon_height = preview_icon.Height()
-			preview_icon_path = "species_preview_[ckey(name)].png"
+			preview_icon_path = "species_preview_[ckey(uid)].png"
 
 	return preview_icon
 
@@ -782,3 +747,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/decl/background_category/background_cat = GET_DECL(cat_type)
 		if(background_cat.background_flags & background_flag)
 			return GET_DECL(default_background_info[cat_type])
+
+/decl/species/proc/get_safe_pressure()
+	return (warning_high_pressure + warning_low_pressure)/2

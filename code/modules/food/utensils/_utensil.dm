@@ -12,15 +12,14 @@
 
 /obj/item/utensil
 
-	abstract_type                    = /obj/item/utensil
-	icon_state                       = ICON_STATE_WORLD
-	w_class                          = ITEM_SIZE_SMALL
-	origin_tech                      = @'{"materials":1}'
-	attack_verb                      = list("attacked", "stabbed", "poked")
-	sharp                            = FALSE
-	edge                             = FALSE
-	material                         = /decl/material/solid/metal/aluminium
-	material_alteration              = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	abstract_type       = /obj/item/utensil
+	icon_state          = ICON_STATE_WORLD
+	w_class             = ITEM_SIZE_SMALL
+	origin_tech         = @'{"materials":1}'
+	attack_verb         = list("attacked", "stabbed", "poked")
+	material            = /decl/material/solid/metal/aluminium
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	chem_volume         = 5
 
 	var/obj/item/food/loaded_food
 	var/utensil_flags
@@ -34,7 +33,6 @@
 	if (prob(60))
 		default_pixel_y = rand(0, 4)
 		reset_offsets(0)
-	create_reagents(5)
 	set_extension(src, /datum/extension/tool/variable/simple, list(
 		TOOL_RETRACTOR = TOOL_QUALITY_BAD,
 		TOOL_HEMOSTAT =  TOOL_QUALITY_MEDIOCRE
@@ -106,7 +104,7 @@
 	else
 		show_slice_message(user, tool, src)
 
-	var/reagents_per_slice = max(1, round(reagents.total_volume / slice_num))
+	var/reagents_per_slice = max(1, round(REAGENT_TOTAL_VOLUME(reagents) / slice_num))
 	for(var/i = 1 to slice_num)
 		var/atom/movable/slice = create_slice()
 		if(slice)
@@ -121,8 +119,8 @@
 /obj/item/food/proc/do_utensil_interaction(obj/item/tool, mob/user)
 
 	// Non-utensils.
-	if(tool && !istype(tool, /obj/item/utensil))
-		return has_edge(tool) && (utensil_flags & UTENSIL_FLAG_SLICE) && handle_utensil_cutting(tool, user)
+	if(istype(tool) && !istype(tool, /obj/item/utensil))
+		return tool.has_edge() && (utensil_flags & UTENSIL_FLAG_SLICE) && handle_utensil_cutting(tool, user)
 
 	var/obj/item/utensil/utensil = tool
 	if(!istype(utensil) || !utensil.utensil_flags)
@@ -131,9 +129,9 @@
 		if(!handle_utensil_spreading(utensil, user))
 			to_chat(user, SPAN_WARNING("You already have something on \the [utensil]."))
 		return TRUE
-	if((utensil.edge || (utensil.utensil_flags & UTENSIL_FLAG_SLICE)) && (utensil_flags & UTENSIL_FLAG_SLICE) && handle_utensil_cutting(utensil, user))
+	if((utensil.has_edge() || (utensil.utensil_flags & UTENSIL_FLAG_SLICE)) && (utensil_flags & UTENSIL_FLAG_SLICE) && handle_utensil_cutting(utensil, user))
 		return TRUE
-	if((utensil.sharp || (utensil.utensil_flags & UTENSIL_FLAG_COLLECT)) && (utensil_flags & UTENSIL_FLAG_COLLECT) && handle_utensil_collection(utensil, user))
+	if((utensil.is_sharp() || (utensil.utensil_flags & UTENSIL_FLAG_COLLECT)) && (utensil_flags & UTENSIL_FLAG_COLLECT) && handle_utensil_collection(utensil, user))
 		return TRUE
 	if((utensil.utensil_flags & UTENSIL_FLAG_SCOOP) && (utensil_flags & UTENSIL_FLAG_SCOOP) && handle_utensil_scooping(utensil, user))
 		return TRUE

@@ -35,10 +35,10 @@
 	else if(!on && light_applied)
 		set_light(0)
 		light_applied = 0
-	update_icon(user)
+	update_icon()
 	user.update_action_buttons()
 
-/obj/item/clothing/head/on_update_icon(var/mob/user)
+/obj/item/clothing/head/on_update_icon()
 	. = ..()
 	update_clothing_icon()
 	if(on)

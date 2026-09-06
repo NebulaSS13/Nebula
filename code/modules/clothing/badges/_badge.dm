@@ -38,10 +38,10 @@
 	. = ..()
 	. += "  <a href='byond://?src=\ref[src];look_at_me=1'>\[View\]</a>"
 
-/obj/item/clothing/badge/examine(user)
+/obj/item/clothing/badge/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(stored_name)
-		to_chat(user,"It reads: [stored_name], [badge_string].")
+		. += "It reads: [stored_name], [badge_string]."
 
 /obj/item/clothing/badge/attack_self(mob/user)
 
@@ -58,7 +58,7 @@
 			user.visible_message("<span class='notice'>[user] displays their [src.name].\nIt reads: [badge_string].</span>","<span class='notice'>You display your [src.name]. It reads: [badge_string].</span>")
 
 /obj/item/clothing/badge/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
-	if(isliving(user) && user.a_intent == I_HURT)
+	if(isliving(user) && user.check_intent(I_FLAG_HARM))
 		user.visible_message(
 			SPAN_DANGER("\The [user] invades \the [target]'s personal space, thrusting \the [src] into their face insistently."),
 			SPAN_DANGER("You invade \the [target]'s personal space, thrusting \the [src] into their face insistently.")

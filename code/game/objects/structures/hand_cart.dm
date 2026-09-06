@@ -20,7 +20,7 @@
 	underlays += "cart_wheel"
 	var/image/I = image(icon, "handcart_layer_north")
 	I.layer = STRUCTURE_LAYER + 0.02
-	I.color = BlendRGB(color, material.color, 0.5)
+	I.color = BlendHSV(color, material.color, 0.5)
 	add_overlay(I)
 	if(carrying)
 		var/image/CA = image(carrying.icon, carrying.icon_state)

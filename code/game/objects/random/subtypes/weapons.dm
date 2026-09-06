@@ -93,3 +93,19 @@
 		/obj/item/ammo_magazine/smg/rubber = 6
 	)
 	return spawnable_choices
+
+/obj/random/landmine
+	name = "random landmine"
+	icon = /obj/item/mine::icon
+	icon_state = /obj/item/mine::icon_state
+
+/obj/random/landmine/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/mine/emp/mapped,
+		/obj/item/mine/frag/mapped,
+		/obj/item/mine/incendiary/mapped,
+		/obj/item/mine/napalm/mapped,
+		/obj/item/mine/radiation/mapped,
+		/obj/item/mine/stun/mapped
+	)
+	return spawnable_choices

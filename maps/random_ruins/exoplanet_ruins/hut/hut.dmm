@@ -36,7 +36,7 @@
 /turf/floor/tiled/dark,
 /area/template_noop)
 "k" = (
-/obj/structure/bed/chair/wheelchair,
+/obj/structure/chair/wheelchair,
 /turf/floor/tiled/dark,
 /area/template_noop)
 "l" = (

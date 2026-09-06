@@ -18,7 +18,7 @@
 // Bodytype feature flags
 /// Does not create DNA. Replaces SPECIES_FLAG_NO_SCAN.
 #define BODY_FLAG_NO_DNA          BITFLAG(0)
-/// Cannot suffer halloss/recieves deceptive health indicator.
+/// Cannot suffer halloss/receives deceptive health indicator.
 #define BODY_FLAG_NO_PAIN         BITFLAG(1)
 /// Cannot eat food/drink drinks even if a stomach organ is present.
 #define BODY_FLAG_NO_EAT          BITFLAG(2)

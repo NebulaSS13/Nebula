@@ -9,7 +9,7 @@
 
 /obj/item/clothing/armor_attachment/plate/merc
 	name = "heavy armor plate"
-	desc = "A diamond-reinforced titanium armor plate, providing state of the art protection. Attaches to a plate carrier."
+	desc = "A diamond-reinforced titanium armor plate, providing state-of-the-art protection. Attaches to a plate carrier."
 	icon = 'icons/clothing/accessories/armor/armor_merc.dmi'
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,

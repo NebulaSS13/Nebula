@@ -11,7 +11,7 @@
 	return TRUE
 
 /atom/movable/proc/buckled_grab_check(var/mob/grabber)
-	if(grabber.buckled == src && buckled_mob == grabber)
+	if(grabber.buckled == src && (grabber in get_buckled_mobs()))
 		return TRUE
 	if(grabber.anchored)
 		return FALSE
@@ -23,14 +23,14 @@
 
 	// Anchored check so we can operate switches etc on grab intent without getting grab failure msgs.
 	// NOTE: /mob/living overrides this to return FALSE in favour of using default_grab_interaction
-	if(isliving(user) && user.a_intent == I_GRAB && !user.current_posture.prone && !anchored)
+	if(isliving(user) && user.check_intent(I_FLAG_GRAB) && !user.current_posture.prone && !anchored)
 		return try_make_grab(user)
 	return ..()
 
 /atom/movable/proc/try_make_grab(mob/living/user, defer_hand = FALSE)
 	if(istype(user) && CanPhysicallyInteract(user) && !user.current_posture.prone)
-		if(user == buckled_mob)
-			return give_control_grab(buckled_mob)
+		if(user in get_buckled_mobs())
+			return give_control_grab(user)
 		return user.make_grab(src, defer_hand = defer_hand)
 	return null
 

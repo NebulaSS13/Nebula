@@ -1,6 +1,6 @@
 /datum/artifact_effect/badfeeling
 	name = "badfeeling"
-	origin_type = EFFECT_PSIONIC
+	origin_type = XA_EFFECT_PSIONIC
 	var/static/list/messages = list("You feel worried.",
 		"Something doesn't feel right.",
 		"You get a strange feeling in your gut.",

@@ -1,4 +1,5 @@
 /area/icarus
+	abstract_type = /area/icarus
 	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
 
 /area/icarus/vessel

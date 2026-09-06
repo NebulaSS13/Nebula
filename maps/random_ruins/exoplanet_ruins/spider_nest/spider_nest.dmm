@@ -53,7 +53,7 @@
 /turf/floor/lino,
 /area/template_noop)
 "l" = (
-/obj/structure/bed/chair/office/comfy/blue,
+/obj/structure/chair/office/comfy/blue,
 /obj/item/pen,
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/blood/drip,
@@ -83,7 +83,7 @@
 /obj/effect/decal/cleanable/blood,
 /obj/item/shard,
 /obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/vomit/mapped,
 /turf/floor/tiled/techfloor,
 /area/template_noop)
 "q" = (
@@ -174,7 +174,7 @@
 /turf/floor/reinforced,
 /area/template_noop)
 "F" = (
-/obj/structure/bed/chair/office/comfy/purple,
+/obj/structure/chair/office/comfy/purple,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/filth,
 /turf/floor/lino,
@@ -242,7 +242,7 @@
 /obj/effect/spider/stickyweb,
 /obj/random/voidsuit,
 /obj/random/loot,
-/obj/effect/decal/cleanable/vomit,
+/obj/effect/decal/cleanable/vomit/mapped,
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -29;
 	dir = 4

@@ -90,7 +90,7 @@
 	plural_name = "splints"
 	icon_state = "simple-splint"
 	amount = 1
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	matter = list(
 		/decl/material/solid/organic/cloth = MATTER_AMOUNT_REINFORCEMENT
 	)

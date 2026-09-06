@@ -45,6 +45,9 @@
 /obj/unit_test/transparent
 	opacity = FALSE
 
+/area/test_area
+	abstract_type = /area/test_area
+
 /area/test_area/general
 	icon_state = "blue"
 

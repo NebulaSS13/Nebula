@@ -12,8 +12,10 @@
 /datum/skill_verb
 	var/datum/skillset/skillset   //Owner, if any.
 	var/the_verb                  //The verb to keep track of. Should be a mob verb.
-	var/cooldown                  //How long the verb cools down for after use. null = has no cooldown.
-	var/cooling_down = 0          //Whether it's currently cooling down.
+	/// The minimum time between uses of the verb. null = no wait between uses.
+	var/cooldown
+	/// If TRUE, the verb is currently unavailable.
+	var/cooling_down = FALSE
 
 /datum/skill_verb/Destroy()
 	skillset = null
@@ -37,17 +39,17 @@
 
 /datum/skill_verb/proc/should_see_verb()
 	if(cooling_down)
-		return
-	return 1
+		return FALSE
+	return TRUE
 
 /datum/skill_verb/proc/remove_cooldown()
-	cooling_down = 0
+	cooling_down = FALSE
 	update_verb()
 
 /datum/skill_verb/proc/set_cooldown()
 	if(!cooldown)
 		return
-	cooling_down = 1
+	cooling_down = TRUE
 	update_verb()
 	addtimer(CALLBACK(src, PROC_REF(remove_cooldown)), cooldown)
 /*
@@ -59,18 +61,19 @@ Robots and antags can instruct.
 	cooldown = 15 MINUTES
 
 /datum/skill_verb/instruct/should_have_verb(datum/skillset/given_skillset)
-	if(!..())
+	. = FALSE
+	if(!(. = ..()))
 		return
 	if(!isliving(given_skillset.owner))
-		return
-	return 1
+		return FALSE
+	return TRUE
 
 /datum/skill_verb/instruct/should_see_verb()
-	if(!..())
+	if(!(. = ..()))
 		return
 	for(var/decl/skill/S in global.using_map.get_available_skills())
 		if(skillset.owner.skill_check(S.type, SKILL_EXPERT))
-			return 1
+			return TRUE
 
 /mob/proc/can_instruct(mob/living/human/target, var/get_options = FALSE)
 
@@ -88,7 +91,7 @@ Robots and antags can instruct.
 		return
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
 		var/decl/pronouns/pronouns = target.get_pronouns(ignore_coverings = TRUE)
-		to_chat(src, SPAN_WARNING("\The [target] [pronouns.is] exhausted from all the training [pronouns.he] recieved."))
+		to_chat(src, SPAN_WARNING("\The [target] [pronouns.is] exhausted from all the training [pronouns.he] received."))
 		return
 
 	if(!get_options)
@@ -127,10 +130,10 @@ Robots and antags can instruct.
 
 /datum/skill_buff/motivate/can_buff(mob/target)
 	if(!..())
-		return
+		return FALSE
 	if(!ishuman(target))
-		return
-	return 1
+		return FALSE
+	return TRUE
 /*
 The Appraise verb. Used on objects to estimate their value.
 */
@@ -138,18 +141,18 @@ The Appraise verb. Used on objects to estimate their value.
 	the_verb = /mob/proc/appraise
 
 /datum/skill_verb/appraise/should_have_verb(datum/skillset/given_skillset)
-	if(!..())
+	if(!(. = ..()))
 		return
 	if(!isliving(given_skillset.owner))
-		return
-	return 1
+		return FALSE
+	return TRUE
 
 /datum/skill_verb/appraise/should_see_verb()
-	if(!..())
+	if(!(. = ..()))
 		return
 	if(!skillset.owner.skill_check(SKILL_FINANCE, SKILL_BASIC))
-		return
-	return 1
+		return FALSE
+	return TRUE
 
 /mob/proc/appraise(obj/item as obj in get_equipped_items(1))
 	set category = "IC"
@@ -200,11 +203,11 @@ The Appraise verb. Used on objects to estimate their value.
 	return 1
 
 /datum/skill_verb/noirvision/should_see_verb()
-	if(!..())
+	if(!(. = ..()))
 		return
 	if(!skillset.owner.skill_check(SKILL_FORENSICS, SKILL_PROF))
-		return
-	return 1
+		return FALSE
+	return TRUE
 
 /mob/proc/noirvision()
 	set category = "IC"

@@ -71,8 +71,8 @@ Buildable meters
 /obj/item/pipe/attack_self(mob/user)
 	return rotate(user)
 
-/obj/item/pipe/attackby(var/obj/item/W, var/mob/user)
-	if(!IS_WRENCH(W))
+/obj/item/pipe/attackby(var/obj/item/used_item, var/mob/user)
+	if(!IS_WRENCH(used_item))
 		return ..()
 	if (!isturf(loc))
 		return 1
@@ -117,13 +117,8 @@ Buildable meters
 	. = ..()
 	set_extension(src, /datum/extension/parts_stash)
 
-/obj/item/machine_chassis/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 2)
-		to_chat(user, "Use a wrench to secure \the [src] here.")
-
-/obj/item/machine_chassis/attackby(var/obj/item/W, var/mob/user)
-	if(!IS_WRENCH(W))
+/obj/item/machine_chassis/attackby(var/obj/item/used_item, var/mob/user)
+	if(!IS_WRENCH(used_item))
 		return ..()
 	var/obj/machinery/machine = new build_type(get_turf(src), dir, TRUE)
 	var/datum/extension/parts_stash/stash = get_extension(src, /datum/extension/parts_stash)
@@ -173,4 +168,4 @@ Buildable meters
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_beacon" // If anyone wants to make better sprite, feel free to do so without asking me.
 	w_class = ITEM_SIZE_NORMAL
-	build_type = /obj/machinery/power/sensor
+	build_type = /obj/machinery/power_sensor

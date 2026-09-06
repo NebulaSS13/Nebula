@@ -9,8 +9,8 @@
 	if(confirm != "Yes")
 		return
 
-	for(var/obj/item/W in M.get_contained_external_atoms())
-		M.drop_from_inventory(W)
+	for(var/obj/item/thing in M.get_contained_external_atoms())
+		M.drop_from_inventory(thing)
 
 	log_admin("[key_name(usr)] made [key_name(M)] drop everything!")
 	message_admins("[key_name_admin(usr)] made [key_name_admin(M)] drop everything!", 1)
@@ -195,7 +195,7 @@
 	M.visible_message(result[1], result[1], narrate = TRUE)
 	log_and_message_admins(" - VisibleNarrate [result[2]]/[result[3]] on [A]: [result[4]]")
 
-// Visible narrate, it's as if it's a audible message
+// Visible narrate, it's as if it's an audible message
 /client/proc/cmd_admin_audible_narrate(var/atom/A)
 	set category = "Special Verbs"
 	set name = "Audible Narrate"

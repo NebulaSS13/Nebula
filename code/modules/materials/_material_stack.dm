@@ -18,7 +18,6 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	var/can_be_pulverized = FALSE
 	var/can_be_reinforced = FALSE
-	var/decl/material/reinf_material
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
 
@@ -120,47 +119,79 @@
 /obj/item/stack/material/proc/get_stack_conversion_dictionary()
 	return
 
-/obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
+/obj/item/stack/material/proc/reinforce_with(var/mob/user, var/obj/item/stack/material/used_stack, var/use_sheets = 1)
+	if(reinf_material) // already reinforced
+		return FALSE
+	var/decl/material/our_material = get_material()
+	if(!used_stack.can_use(use_sheets))
+		to_chat(user, SPAN_WARNING("You need at least one [used_stack.singular_name] to reinforce [src]."))
+		return FALSE
 
-	if(can_be_reinforced && istype(W, /obj/item/stack/material))
-		if(is_same(W))
+	var/decl/material/reinf_mat = used_stack.get_material()
+	if(reinf_mat.integrity <= our_material.integrity || reinf_mat.is_brittle())
+		to_chat(user, SPAN_WARNING("The [reinf_mat.solid_name] is too structurally weak to reinforce \the [src]."))
+		return FALSE
+
+	if(!can_use(use_sheets))
+		to_chat(user, SPAN_WARNING("You need at least [use_sheets] [use_sheets == 1 ? singular_name : plural_name] for reinforcement with \the [used_stack]."))
+		return FALSE
+
+	to_chat(user, SPAN_NOTICE("You reinforce \the [src] with [reinf_mat.solid_name]."))
+	used_stack.use(use_sheets)
+	var/obj/item/stack/material/new_stack = split(1)
+	new_stack.reinf_material = reinf_mat
+	new_stack.update_strings()
+	new_stack.update_icon()
+	if(!QDELETED(src))
+		new_stack.dropInto(get_turf(src))
+	else if(user)
+		new_stack.dropInto(get_turf(user))
+	else
+		new_stack.dropInto(get_turf(used_stack))
+	new_stack.add_to_stacks(user, TRUE)
+	return TRUE
+
+/obj/item/stack/material/attackby(var/obj/item/used_item, var/mob/user)
+
+	if(can_be_reinforced && istype(used_item, /obj/item/stack/material))
+		if(is_same(used_item))
 			return ..()
 		if(!reinf_material)
-			material.reinforce(user, W, src)
+			reinforce_with(user, used_item)
 		return TRUE
 
 	// TODO: convert to converts_into entry.
-	if(can_be_pulverized && IS_HAMMER(W) && material?.hardness >= MAT_VALUE_RIGID && user.a_intent == I_HURT)
+	if(can_be_pulverized && IS_HAMMER(used_item) && material?.hardness >= MAT_VALUE_RIGID && user.check_intent(I_FLAG_HARM))
 
-		if(W.material?.hardness < material.hardness)
-			to_chat(user, SPAN_WARNING("\The [W] is not hard enough to pulverize [material.solid_name]."))
+		if(used_item.material?.hardness < material.hardness)
+			to_chat(user, SPAN_WARNING("\The [used_item] is not hard enough to pulverize [material.solid_name]."))
 			return TRUE
 
 		var/converting = clamp(get_amount(), 0, 5)
-		if(converting && W.do_tool_interaction(TOOL_HAMMER, user, src, 1 SECOND, "pulverizing", "pulverizing", set_cooldown = TRUE) && !QDELETED(src) && get_amount() >= converting)
+		if(converting && used_item.do_tool_interaction(TOOL_HAMMER, user, src, 1 SECOND, "pulverizing", "pulverizing", set_cooldown = TRUE) && !QDELETED(src) && get_amount() >= converting)
 			// TODO: make a gravel type?
 			// TODO: pass actual stone material to gravel?
 			new /obj/item/stack/material/ore/handful/sand(get_turf(user), converting)
-			user.visible_message("\The [user] pulverizes [converting == 1 ? "a [singular_name]" : "some [plural_name]"] with \the [W].")
+			user.visible_message("\The [user] pulverizes [converting == 1 ? "a [singular_name]" : "some [plural_name]"] with \the [used_item].")
 			use(converting)
 
 		return TRUE
 
-	if(reinf_material?.default_solid_form && IS_WELDER(W))
-		var/obj/item/weldingtool/WT = W
-		if(WT.isOn() && WT.get_fuel() > 2 && use(2))
-			WT.weld(2, user)
+	if(reinf_material?.default_solid_form && IS_WELDER(used_item))
+		var/obj/item/weldingtool/welder = used_item
+		if(welder.isOn() && welder.get_fuel() > 2 && use(2))
+			welder.weld(2, user)
 			to_chat(user, SPAN_NOTICE("You recover some [reinf_material.use_name] from \the [src]."))
 			reinf_material.create_object(get_turf(user), 1)
 			return TRUE
 
 	var/list/can_be_converted_into = get_stack_conversion_dictionary()
-	if(length(can_be_converted_into) && user.a_intent != I_HURT)
+	if(length(can_be_converted_into) && !user.check_intent(I_FLAG_HARM))
 
 		var/convert_tool
 		var/obj/item/stack/convert_type
 		for(var/tool_type in can_be_converted_into)
-			if(IS_TOOL(W, tool_type))
+			if(IS_TOOL(used_item, tool_type))
 				convert_tool = tool_type
 				convert_type = can_be_converted_into[tool_type]
 				break
@@ -172,7 +203,7 @@
 
 			if(get_amount() < minimum_per_one_product)
 				to_chat(user, SPAN_WARNING("You will need [minimum_per_one_product] [minimum_per_one_product == 1 ? singular_name : plural_name] to produce [product_per_sheet] [product_per_sheet == 1 ? initial(convert_type.singular_name) : initial(convert_type.plural_name)]."))
-			else if(W.do_tool_interaction(convert_tool, user, src, 1 SECOND, set_cooldown = TRUE) && !QDELETED(src) && get_amount() >= minimum_per_one_product)
+			else if(used_item.do_tool_interaction(convert_tool, user, src, 1 SECOND, set_cooldown = TRUE) && !QDELETED(src) && get_amount() >= minimum_per_one_product)
 				var/obj/item/stack/product = new convert_type(loc, ceil(product_per_sheet), material?.type, reinf_material?.type)
 				product.dropInto(loc)
 				use(minimum_per_one_product)
@@ -221,6 +252,11 @@
 			return "some [.]"
 		return indefinite_article ? "[indefinite_article] [.]" : ADD_ARTICLE(.)
 	return "[amount] [.] [plural_name]"
+
+/obj/item/stack/material/proc/matter_units_to_sheets(used)
+	if(!material || get_reinforced_material())
+		return 0
+	return ceil(used / matter_per_piece[material.type])
 
 // Horrible solution to heat damage for atoms causing logs and
 // fuel to vanish. Replace this when the atom fire system exists.

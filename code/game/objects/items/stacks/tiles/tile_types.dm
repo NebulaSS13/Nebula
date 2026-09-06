@@ -10,7 +10,7 @@
 /obj/item/stack/tile
 	name = "tile"
 	singular_name = "tile"
-	desc = "A non-descript floor tile."
+	desc = "A nondescript floor tile."
 	randpixel = 7
 	w_class = ITEM_SIZE_NORMAL
 	max_amount = 100
@@ -65,75 +65,6 @@
 	color = COLOR_BEIGE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	replacement_turf_type = /turf/floor/woven
-
-/*
- * Wood
- */
-/obj/item/stack/tile/wood
-	name = "wood floor tile"
-	singular_name = "wood floor tile"
-	desc = "An easy to fit wooden floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_GENERIC
-	material = /decl/material/solid/organic/wood
-
-/obj/item/stack/tile/wood/cyborg
-	name = "wood floor tile synthesizer"
-	desc = "A device that makes wood floor tiles."
-	uses_charge = 1
-	charge_costs = list(250)
-	stack_merge_type = /obj/item/stack/tile/wood
-	build_type = /obj/item/stack/tile/wood
-	max_health = ITEM_HEALTH_NO_DAMAGE
-	is_spawnable_type = FALSE
-
-/obj/item/stack/tile/mahogany
-	name = "mahogany floor tile"
-	singular_name = "mahogany floor tile"
-	desc = "An easy to fit mahogany wood floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/organic/wood
-
-/obj/item/stack/tile/maple
-	name = "maple floor tile"
-	singular_name = "maple floor tile"
-	desc = "An easy to fit maple wood floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_PALE
-	material = /decl/material/solid/organic/wood
-
-/obj/item/stack/tile/ebony
-	name = "ebony floor tile"
-	singular_name = "ebony floor tile"
-	desc = "An easy to fit ebony floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_BLACK
-	material = /decl/material/solid/organic/wood
-
-/obj/item/stack/tile/walnut
-	name = "walnut floor tile"
-	singular_name = "walnut floor tile"
-	desc = "An easy to fit walnut wood floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_CHOCOLATE
-	material = /decl/material/solid/organic/wood
-
-/obj/item/stack/tile/bamboo
-	name = "bamboo floor tile"
-	singular_name = "bamboo floor tile"
-	desc = "An easy to fit bamboo wood floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_PALE2
-	material = /decl/material/solid/organic/wood
-
-/obj/item/stack/tile/yew
-	name = "yew floor tile"
-	singular_name = "yew floor tile"
-	desc = "An easy to fit yew wood floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_YELLOW
-	material = /decl/material/solid/organic/wood
 
 /obj/item/stack/tile/floor
 	name = "steel floor tile"
@@ -397,7 +328,7 @@
 /obj/item/stack/tile/roof
 	name = "roofing tile"
 	singular_name = "roofing tile"
-	desc = "A non-descript roofing tile."
+	desc = "A nondescript roofing tile."
 	matter_multiplier = 0.3
 	icon_state = "tile"
 	material = /decl/material/solid/metal/steel

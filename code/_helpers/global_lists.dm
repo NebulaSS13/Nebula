@@ -1,22 +1,9 @@
-//Since it didn't really belong in any other category, I'm putting this here
-//This is for procs to replace all the goddamn 'in world's that are chilling around the code
-//Nine years later, we can report we've killed most of them!
+// I really don't like having miscellaneous 'collection of definitions' files floating around in the codebase.
+// I've already found a lot of the lists that used to be here a new forever home (or taken them out back and shot them),
+// but hopefully we can do the same for the rest eventually.
+// Either find a better spot for them that's related to their uses/function/etc., or delete them.
 
-var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
-var/global/list/landmarks_list = list()				//list of all landmarks created
-var/global/list/mannequins_
-
-// Uplinks
-var/global/list/obj/item/uplink/world_uplinks = list()
-
-//Preferences stuff
-var/global/datum/category_collection/underwear/underwear = new()
-
-// Visual nets
-var/global/list/datum/visualnet/visual_nets = list()
-var/global/datum/visualnet/camera/cameranet = new()
-
-// Strings which corraspond to bodypart covering flags, useful for outputting what something covers.
+// Strings which correspond to bodypart covering flags, useful for outputting what something covers.
 var/global/list/string_part_flags = list(
 	"head" =       SLOT_HEAD,
 	"face" =       SLOT_FACE,
@@ -31,7 +18,8 @@ var/global/list/string_part_flags = list(
 	"hands" =      SLOT_HANDS
 )
 
-// Strings which corraspond to slot flags, useful for outputting what slot something is.
+// TODO: These should probably be able to be generated automatically from inventory slot subtype definitions, maybe?
+/// Strings which correspond to slot flags, useful for outputting what slot something is.
 var/global/list/string_slot_flags = list(
 	"back"      = SLOT_BACK,
 	"face"      = SLOT_FACE,
@@ -48,63 +36,40 @@ var/global/list/string_slot_flags = list(
 	"holster"   = SLOT_HOLSTER
 )
 
-//////////////////////////
-/////Initial Building/////
-//////////////////////////
+// Used to avoid constantly generating new lists during movement.
+var/global/list/all_maniple_limbs   = list(
+	(ORGAN_CATEGORY_MANIPLE)
+)
+var/global/list/all_stance_limbs   = list(
+	(ORGAN_CATEGORY_STANCE),
+	(ORGAN_CATEGORY_STANCE_ROOT)
+)
+var/global/list/child_stance_limbs = list(
+	(ORGAN_CATEGORY_STANCE)
+)
 
-/proc/get_mannequin(var/ckey)
-	if(SSatoms.atom_init_stage < INITIALIZATION_INNEW_REGULAR)
-		return
-	if(!mannequins_)
-		mannequins_ = new()
-	. = mannequins_[ckey]
-	if(!.)
-		. = new /mob/living/human/dummy/mannequin()
-		mannequins_[ckey] = .
-
-/hook/global_init/proc/makeDatumRefLists()
+// TODO: Replace keybinding datums with keybinding decls to make this unnecessary.
+var/global/list/hotkey_keybinding_list_by_key = list() // Replace this with just looping over all keybinding decls (as below) in a 'reset hotkeys' proc.
+var/global/list/keybindings_by_name = list() // Replace this with just decl lookups.
+/proc/makeDatumRefLists()
 	// Keybindings
 	for(var/KB in subtypesof(/datum/keybinding))
 		var/datum/keybinding/keybinding = KB
-		if(!initial(keybinding.name))
+		if(TYPE_IS_ABSTRACT(keybinding))
 			continue
+		ASSERT(keybinding.name)
 		var/datum/keybinding/instance = new keybinding
 		global.keybindings_by_name[instance.name] = instance
 		if(length(instance.hotkey_keys))
 			for(var/bound_key in instance.hotkey_keys)
 				global.hotkey_keybinding_list_by_key[bound_key] += list(instance.name)
-	return 1
 
-// This is all placeholder procs for an eventual PR to change them to use decls.
-var/global/list/all_species
-var/global/list/playable_species // A list of ALL playable species, whitelisted, latejoin or otherwise.
-var/global/list/bodytype_species_pairs = list() // A list of bodytypes -> species, used for mainly unit testing.
-/proc/build_species_lists()
-	if(global.all_species)
-		return
-	global.all_species      = list()
-	global.playable_species = list()
-	var/list/species_decls = decls_repository.get_decls_of_subtype(/decl/species)
-	for(var/species_type in species_decls)
-		var/decl/species/species = species_decls[species_type]
-		if(species.name)
-			global.all_species[species.name] = species
-			for(var/decl/bodytype/bodytype in species.available_bodytypes)
-				global.bodytype_species_pairs[GET_DECL(bodytype)] = species
-			if(!(species.spawn_flags & SPECIES_IS_RESTRICTED))
-				global.playable_species += species.name
-	if(global.using_map.default_species)
-		global.playable_species |= global.using_map.default_species
-
-/proc/get_species_by_key(var/species_key)
-	build_species_lists()
-	. = global.all_species[species_key]
-/proc/get_all_species()
-	build_species_lists()
-	. = global.all_species
 /proc/get_playable_species()
-	build_species_lists()
-	. = global.playable_species
-/proc/get_bodytype_species_pairs()
-	build_species_lists()
-	. = global.bodytype_species_pairs
+	var/static/list/_playable_species // A list of ALL playable species, whitelisted, latejoin or otherwise. (read: non-restricted)
+	if(!_playable_species)
+		_playable_species = list()
+		for(var/decl/species/species in decls_repository.get_decls_of_subtype_unassociated(/decl/species))
+			if(species.spawn_flags & SPECIES_IS_RESTRICTED)
+				continue
+			_playable_species += species.uid
+	return _playable_species

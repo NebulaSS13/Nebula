@@ -54,10 +54,10 @@
 			if(!other)
 				var/found_connection
 				if(locate(/obj/structure/grille) in T)
-					for(var/obj/structure/window/W in T)
-						if(W.type == win_path && W.dir == get_dir(T,src))
+					for(var/obj/structure/window/window in T)
+						if(window.type == win_path && window.dir == get_dir(T,src))
 							found_connection = 1
-							qdel(W)
+							qdel(window)
 				if(!found_connection)
 					var/obj/structure/window/new_win = new win_path(loc)
 					new_win.set_dir(dir)
@@ -85,7 +85,7 @@
 				D.update_connections()
 				D.update_icon()
 
-/obj/effect/wallframe_spawn/proc/handle_window_spawn(var/obj/structure/window/W)
+/obj/effect/wallframe_spawn/proc/handle_window_spawn(var/obj/structure/window/window)
 	return
 
 /obj/effect/wallframe_spawn/proc/handle_grille_spawn(var/obj/structure/grille/G)

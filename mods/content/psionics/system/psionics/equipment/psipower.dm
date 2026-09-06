@@ -15,7 +15,9 @@
 	. = ..()
 
 /obj/item/ability/psionic/attack_self(var/mob/user)
-	sound_to(owner, 'sound/effects/psi/power_fail.ogg')
+	var/mob/owner = owner_ref?.resolve()
+	if(istype(owner))
+		sound_to(owner, 'sound/effects/psi/power_fail.ogg')
 	. = ..()
 
 /obj/item/ability/psionic/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
@@ -31,6 +33,7 @@
 	. = ..(target, user, proximity)
 
 /obj/item/ability/psionic/Process()
+	var/mob/living/owner = owner_ref?.resolve()
 	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics)
 	psi?.spend_power(maintain_cost, backblast_on_failure = FALSE)
 	if((!owner || owner.do_psionics_check(maintain_cost, owner) || loc != owner || !(src in owner.get_held_items())) && !QDELETED(src))

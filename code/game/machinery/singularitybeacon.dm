@@ -54,8 +54,8 @@ var/global/list/singularity_beacons = list()
 	else
 		to_chat(user, SPAN_DANGER("You need to screw the beacon to the floor first!"))
 
-/obj/machinery/singularity_beacon/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W))
+/obj/machinery/singularity_beacon/attackby(obj/item/used_item, mob/user)
+	if(IS_SCREWDRIVER(used_item))
 		if(use_power)
 			to_chat(user, SPAN_DANGER("You need to deactivate the beacon first!"))
 			return TRUE

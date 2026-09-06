@@ -1,0 +1,68 @@
+#define GYRO_POWER 25000
+
+/obj/machinery/emitter/gyrotron
+	name = "gyrotron"
+	icon = 'icons/obj/machines/power/fusion.dmi'
+	desc = "It is a heavy-duty industrial gyrotron suited for powering fusion reactors."
+	icon_state = "emitter-off"
+	initial_access = list(access_engine)
+	use_power = POWER_USE_IDLE
+	active_power_usage = GYRO_POWER
+
+	var/initial_id_tag
+	/// Time between shots, in SECONDS, NOT DECISECONDS
+	var/rate = 3
+	var/mega_energy = 1
+
+	construct_state = /decl/machine_construction/emitter/unsecured/gyrotron
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/radio/receiver
+	)
+	base_type = /obj/machinery/emitter/gyrotron
+
+/obj/machinery/emitter/gyrotron/anchored
+	anchored = TRUE
+	construct_state = /decl/machine_construction/emitter/welded/gyrotron
+
+/obj/machinery/emitter/gyrotron/Initialize()
+	set_extension(src, /datum/extension/local_network_member)
+	if(initial_id_tag)
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
+		fusion.set_tag(null, initial_id_tag)
+	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
+	. = ..()
+
+/obj/machinery/emitter/gyrotron/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_id_tag, map_hash)
+
+/obj/machinery/emitter/gyrotron/Process()
+	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
+	. = ..()
+
+/obj/machinery/emitter/gyrotron/get_burst_delay()
+	return rate SECONDS
+
+/obj/machinery/emitter/gyrotron/get_shot_delay()
+	return rate SECONDS
+
+/obj/machinery/emitter/gyrotron/get_emitter_beam()
+	var/obj/item/projectile/beam/emitter/beam = ..()
+	if(istype(beam))
+		beam.damage = mega_energy * 50
+	return beam
+
+/obj/machinery/emitter/gyrotron/on_update_icon()
+	if (active && (can_use_power_oneoff(active_power_usage) <= 0))
+		icon_state = "emitter-on"
+	else
+		icon_state = "emitter-off"
+
+/obj/machinery/emitter/gyrotron/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_MULTITOOL(used_item))
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
+		fusion.get_new_tag(user)
+		return TRUE
+	return ..()
+
+#undef GYRO_POWER

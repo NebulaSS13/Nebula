@@ -21,9 +21,9 @@
 		last_regen = world.time
 		update_icon()
 
-/obj/item/gun/launcher/alien/examine(mob/user)
+/obj/item/gun/launcher/alien/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It has [ammo] [ammo_name]\s remaining.")
+	. += "It has [ammo] [ammo_name]\s remaining."
 
 /obj/item/gun/launcher/alien/consume_next_projectile()
 	if(ammo < 1) return null

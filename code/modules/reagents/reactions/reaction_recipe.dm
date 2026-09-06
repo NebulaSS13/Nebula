@@ -37,7 +37,7 @@
 /decl/chemical_reaction/recipe/garlicsauce
 	name = "Garlic Sauce"
 	result = /decl/material/liquid/nutriment/garlicsauce
-	required_reagents = list(/decl/material/liquid/drink/juice/garlic = 1, /decl/material/liquid/nutriment/cornoil = 1)
+	required_reagents = list(/decl/material/liquid/drink/juice/garlic = 1, /decl/material/liquid/oil/plant/corn = 1)
 	result_amount = 2
 	mix_message = "The solution thickens into a creamy white oil."
 
@@ -119,3 +119,10 @@
 	result_amount = 6
 	mix_message = "The broth of the noodles takes on a hellish red gleam."
 	hidden_from_codex = TRUE
+
+/decl/chemical_reaction/recipe/horchata
+	name = "Horchata"
+	result = /decl/material/liquid/drink/horchata
+	required_reagents = list(/decl/material/liquid/nutriment/rice = 2, /decl/material/liquid/drink/milk = 2, /decl/material/liquid/drink/syrup/vanilla = 1, /decl/material/solid/cinnamon = 1)
+	result_amount = 6
+	mix_message = "The ingredients combine to create a refreshing white beverage."

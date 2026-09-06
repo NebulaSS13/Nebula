@@ -184,8 +184,7 @@
 		if(H)
 			expel(H, T, 0)
 
-	spawn(2)	// delete pipe after 2 ticks to ensure expel proc finished
-		qdel(src)
+	QDEL_IN(src, 2) // delete pipe after 2 ticks to ensure expel proc finished
 
 
 // pipe affected by explosion
@@ -202,20 +201,20 @@
 
 //attack by item
 //weldingtool: unfasten and convert to obj/disposalconstruct
-/obj/structure/disposalpipe/attackby(var/obj/item/I, var/mob/user)
-	if(!istype(I, /obj/item/weldingtool))
+/obj/structure/disposalpipe/attackby(var/obj/item/used_item, var/mob/user)
+	if(!istype(used_item, /obj/item/weldingtool))
 		return ..()
 	if(!can_deconstruct())
 		return TRUE
-	src.add_fingerprint(user, 0, I)
-	var/obj/item/weldingtool/W = I
-	if(W.weld(0,user))
+	src.add_fingerprint(user, 0, used_item)
+	var/obj/item/weldingtool/welder = used_item
+	if(welder.weld(0,user))
 		playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 		to_chat(user, "You begin slicing \the [src].")
 		if(!do_after(user, 3 SECONDS, src))
 			to_chat(user, "You must stay still while welding the pipe.")
 			return TRUE
-		if(!W.isOn())
+		if(!welder.isOn())
 			return TRUE
 		welded()
 		return TRUE
@@ -235,13 +234,9 @@
 /obj/structure/disposalpipe/hides_under_flooring()
 	return 1
 
-// *** TEST verb
-//client/verb/dispstop()
-//	for(var/obj/structure/disposalholder/H in world)
-//		H.active = 0
-
 // a straight or bent segment
 /obj/structure/disposalpipe/segment
+	desc = "A linear segment of disposal piping that simply moves things from one end to the other."
 	icon_state = "pipe-s" // Sadly this var stores state. "pipe-c" is corner. Should be changed, but requires huge map diff.
 	turn = DISPOSAL_FLIP_FLIP
 
@@ -370,6 +365,7 @@
 
 //a three-way junction with dir being the dominant direction
 /obj/structure/disposalpipe/junction
+	desc = "A three-way segment of disposal piping that merges two incoming directions into a third outgoing one."
 	icon_state = "pipe-j1"
 	turn = DISPOSAL_FLIP_RIGHT|DISPOSAL_FLIP_FLIP
 	flipped_state = /obj/structure/disposalpipe/junction/mirrored
@@ -419,6 +415,7 @@
 
 /obj/structure/disposalpipe/tagger
 	name = "package tagger"
+	desc = "A pipe that tags things passing through it with a sorting tag."
 	icon_state = "pipe-tagger"
 	var/sort_tag = ""
 	var/partial = 0
@@ -443,10 +440,10 @@
 	updatedesc()
 	update()
 
-/obj/structure/disposalpipe/tagger/attackby(var/obj/item/item, var/mob/user)
-	if(!istype(item, /obj/item/destTagger))
+/obj/structure/disposalpipe/tagger/attackby(var/obj/item/used_item, var/mob/user)
+	if(!istype(used_item, /obj/item/destTagger))
 		return ..()
-	var/obj/item/destTagger/tagger = item
+	var/obj/item/destTagger/tagger = used_item
 	if(tagger.current_tag)// Tag set
 		sort_tag = tagger.current_tag
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
@@ -465,6 +462,7 @@
 
 /obj/structure/disposalpipe/tagger/partial //needs two passes to tag
 	name = "partial package tagger"
+	desc = "A pipe that tags things passing through it with a sorting tag... but only the second time around."
 	icon_state = "pipe-tagger-partial"
 	partial = 1
 	turn = DISPOSAL_FLIP_FLIP
@@ -486,7 +484,7 @@
 /obj/structure/disposalpipe/diversion_junction/proc/updatedesc()
 	desc = initial(desc)
 	if(sort_type)
-		desc += "\nIt's currently [active ? "" : "un"]active!"
+		desc += "\nIt's currently [active ? "" : "in"]active!"
 
 /obj/structure/disposalpipe/diversion_junction/proc/updatedir()
 	inactive_dir = dir
@@ -517,10 +515,10 @@
 	linked = null
 	return ..()
 
-/obj/structure/disposalpipe/diversion_junction/attackby(var/obj/item/item, var/mob/user)
-	if(!istype(item, /obj/item/disposal_switch_construct))
+/obj/structure/disposalpipe/diversion_junction/attackby(var/obj/item/used_item, var/mob/user)
+	if(!istype(used_item, /obj/item/disposal_switch_construct))
 		return ..()
-	var/obj/item/disposal_switch_construct/switchcon = item
+	var/obj/item/disposal_switch_construct/switchcon = used_item
 	if(switchcon.id_tag)
 		id_tag = switchcon.id_tag
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 100, TRUE)
@@ -594,9 +592,21 @@
 
 	dpdir = sortdir | posdir | negdir
 
-/obj/structure/disposalpipe/sortjunction/Initialize()
+/obj/structure/disposalpipe/sortjunction/proc/validate_sort_type()
+	. = istext(sort_type) && sort_type != ""
+	if(!.)
+		if(name == initial(name))
+			sort_type = "Unknown"
+		else
+			sort_type = name || "Unknown"
+		log_debug("Mapped untagged junction had empty sort_type, setting to '[sort_type]'.")
+
+/obj/structure/disposalpipe/sortjunction/Initialize(ml)
 	. = ..()
-	if(sort_type) global.tagger_locations |= sort_type
+	if(sort_type)
+		global.tagger_locations |= sort_type
+	if(ml && !validate_sort_type())
+		log_warning("Mapped sorting junction of type [type] initializing at [x],[y],[z] with invalid sort_type '[sort_type || "EMPTY"]'!")
 
 	updatedir()
 	updatename()
@@ -609,10 +619,10 @@
 	updatedesc()
 	updatename()
 
-/obj/structure/disposalpipe/sortjunction/attackby(var/obj/item/item, var/mob/user)
-	if(!istype(item, /obj/item/destTagger))
+/obj/structure/disposalpipe/sortjunction/attackby(var/obj/item/used_item, var/mob/user)
+	if(!istype(used_item, /obj/item/destTagger))
 		return ..()
-	var/obj/item/destTagger/tagger = item
+	var/obj/item/destTagger/tagger = used_item
 	if(tagger.current_tag)// Tag set
 		sort_type = tagger.current_tag
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 100, TRUE)
@@ -664,6 +674,9 @@
 	desc = "An underfloor disposal pipe which filters all wrapped and tagged items."
 	flipped_state = /obj/structure/disposalpipe/sortjunction/wildcard/flipped
 
+/obj/structure/disposalpipe/sortjunction/wildcard/validate_sort_type()
+	return TRUE // Special case
+
 /obj/structure/disposalpipe/sortjunction/wildcard/divert_check(var/checkTag)
 	return checkTag != ""
 
@@ -672,6 +685,12 @@
 	name = "untagged sorting junction"
 	desc = "An underfloor disposal pipe which filters all untagged items."
 	flipped_state = /obj/structure/disposalpipe/sortjunction/untagged/flipped
+
+/obj/structure/disposalpipe/sortjunction/untagged/validate_sort_type()
+	. = (sort_type == "")
+	if(!.)
+		log_debug("Mapped untagged junction had non-empty sort_type, setting to empty string.")
+		sort_type = ""
 
 /obj/structure/disposalpipe/sortjunction/untagged/divert_check(var/checkTag)
 	return checkTag == ""
@@ -693,6 +712,7 @@
 
 //a trunk joining to a disposal bin or outlet on the same turf
 /obj/structure/disposalpipe/trunk
+	desc = "A section of pneumatic piping made to connect to a bin or outlet."
 	icon_state = "pipe-t"
 	var/obj/linked 	// the linked obj/machinery/disposal or obj/disposaloutlet
 

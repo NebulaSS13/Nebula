@@ -46,9 +46,11 @@
 	if(_antag_text)         antag_text =         _antag_text
 
 	if(store_codex_entry && length(associated_paths))
-		for(var/tpath in associated_paths)
-			var/atom/thing = tpath
-			var/thing_name = codex_sanitize(initial(thing.name))
+		for(var/atom/thing as anything in associated_paths)
+			var/thing_name = initial(thing.name)
+			if(ispath(thing, /atom/movable) && TYPE_IS_SPAWNABLE(thing))
+				thing_name = atom_info_repository.get_name_for(thing)
+			thing_name = codex_sanitize(thing_name)
 			if(disambiguator)
 				thing_name = "[thing_name] ([disambiguator])"
 			LAZYDISTINCTADD(associated_strings, thing_name)

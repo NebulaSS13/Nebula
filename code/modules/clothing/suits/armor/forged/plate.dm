@@ -11,6 +11,7 @@
 	desc = "A form of segmented armor that covers the hands and arms, typically worn as part of plate mail."
 	icon = 'icons/clothing/plate_armour/vambrace.dmi'
 	material = /decl/material/solid/metal/steel
+	color = /decl/material/solid/metal/steel::color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	body_parts_covered = SLOT_HANDS|SLOT_ARMS
 	accessory_slot = ACCESSORY_SLOT_GREAVES
@@ -20,6 +21,7 @@
 	desc = "Segmented armour that protects the feet and legs, typically worn as part of plate mail."
 	icon = 'icons/clothing/plate_armour/sabatons.dmi'
 	material = /decl/material/solid/metal/steel
+	color = /decl/material/solid/metal/steel::color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	body_parts_covered = SLOT_FEET|SLOT_LOWER_BODY|SLOT_LEGS
 	accessory_slot = ACCESSORY_SLOT_GAUNTLETS
@@ -29,6 +31,7 @@
 	desc = "A visored helmet that covers the entire face and skull."
 	icon = 'icons/clothing/plate_armour/helm.dmi'
 	material = /decl/material/solid/metal/steel
+	color = /decl/material/solid/metal/steel::color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	markings_color = COLOR_PURPLE
 	markings_state_modifier = "-plume"

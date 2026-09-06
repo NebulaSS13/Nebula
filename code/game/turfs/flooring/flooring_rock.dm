@@ -6,10 +6,15 @@
 	has_base_range  = null
 	color           = null
 	icon_edge_layer = FLOOR_EDGE_VOLCANIC
+	has_corners     = FALSE
 	gender          = NEUTER
+	uid             = "floor_reinf_shuttle_rock"
 
 /decl/flooring/rock/update_turf_strings(turf/floor/target)
-	var/decl/material/material = target?.get_material()
-	ASSERT(material?.adjective_name)
-	target.SetName("[material.adjective_name] [name]")
-	target.desc = "An expanse of bare [material.solid_name]."
+	var/decl/material/turf_material = RESOLVE_TO_DECL(target?.get_material())
+	ASSERT(turf_material?.adjective_name)
+	target.SetName("[turf_material.adjective_name] [name]")
+	target.desc = "An expanse of bare [turf_material.solid_name]."
+
+/decl/flooring/rock/get_vehicle_transit_delay(obj/vehicle/vehicle)
+	return vehicle.vehicle_transit_type == vehicle::VEHICLE_SNOWMOBILE ? 1.5 : ..()

@@ -73,10 +73,10 @@
 	else
 		set_light(0)
 
-/obj/item/flashlight/examine(mob/user, distance)
+/obj/item/flashlight/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(light_wedge && isturf(loc))
-		to_chat(user, FONT_SMALL(SPAN_NOTICE("\The [src] is facing [dir2text(dir)].")))
+		. += FONT_SMALL(SPAN_NOTICE("\The [src] is facing [dir2text(dir)]."))
 
 /obj/item/flashlight/dropped(mob/user)
 	. = ..()
@@ -135,20 +135,20 @@
 
 	return ..()
 
-/obj/item/flashlight/proc/inspect_vision(obj/item/organ/vision, mob/living/user)
+/obj/item/flashlight/proc/inspect_vision(obj/item/organ/internal/vision, mob/living/user)
 	var/mob/living/human/H = vision.owner
 
 	if(H == user)	//can't look into your own eyes buster
 		return
 
-	if(!BP_IS_PROSTHETIC(vision))
+	if(istype(vision) && !BP_IS_PROSTHETIC(vision))
 
 		if(vision.owner.stat == DEAD || H.is_blind())	//mob is dead or fully blind
 			to_chat(user, SPAN_WARNING("\The [H]'s pupils do not react to the light!"))
 			return
 		if(H.has_genetic_condition(GENE_COND_XRAY))
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils give an eerie glow!"))
-		if(vision.damage)
+		if(vision.get_organ_damage())
 			to_chat(user, SPAN_WARNING("There's visible damage to [H]'s [vision.name]!"))
 		else if(HAS_STATUS(H, STAT_BLURRY))
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils react slower than normally."))

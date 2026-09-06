@@ -37,22 +37,20 @@
 	show_browser(user, dat, "window=syndbeacon")
 	onclose(user, "syndbeacon")
 
-/obj/machinery/syndicate_beacon/Topic(href, href_list)
-	if(..())
+/obj/machinery/syndicate_beacon/OnTopic(mob/user, href_list)
+	if((. = ..()))
 		return
 	if(href_list["betraitor"])
+		. = TOPIC_REFRESH
 		if(charges < 1)
-			src.updateUsrDialog()
 			return
 		var/mob/M = locate(href_list["traitormob"])
 		if(M.mind.assigned_special_role || jobban_isbanned(M, /decl/special_role/traitor))
 			temptext = "<i>We have no need for you at this time. Have a pleasant day.</i><br>"
-			src.updateUsrDialog()
 			return
 		charges -= 1
 		if(prob(50))
 			temptext = "<font color=red><i><b>Double-crosser. You planned to betray us from the start. Allow us to repay the favor in kind.</b></i></font>"
-			src.updateUsrDialog()
 			addtimer(CALLBACK(src, PROC_REF(selfdestruct)), rand(5, 20) SECONDS)
 			return
 		if(ishuman(M))
@@ -61,10 +59,7 @@
 			var/decl/special_role/traitors = GET_DECL(/decl/special_role/traitor)
 			traitors.add_antagonist(N.mind)
 			log_and_message_admins("has accepted a traitor objective from a syndicate beacon.", M)
-
-
-	src.updateUsrDialog()
-	return
+			return
 
 
 /obj/machinery/syndicate_beacon/proc/selfdestruct()

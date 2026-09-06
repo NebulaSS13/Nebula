@@ -41,7 +41,7 @@
 	set_dir(ndir)
 	return 1
 
-/mob/observer/eye/examinate()
+/mob/observer/eye/examine_verb()
 	set popup_menu = 0
 	set src = usr.contents
 	return 0
@@ -51,7 +51,7 @@
 	set src = usr.contents
 	return 0
 
-/mob/observer/eye/examine(mob/user)
+/mob/observer/eye/examined_by(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	return TRUE
 

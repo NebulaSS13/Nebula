@@ -70,9 +70,14 @@
 		LAZYDISTINCTADD(external_organs, O)
 
 	// Update our organ category lists, if neeed.
-	if(O.organ_category)
-		LAZYINITLIST(organs_by_category)
-		LAZYDISTINCTADD(organs_by_category[O.organ_category], O)
+	if(O.organ_categories)
+		for(var/category in cached_json_decode(O.organ_categories))
+			LAZYINITLIST(organs_by_category)
+			LAZYDISTINCTADD(organs_by_category[category], O)
+
+	// Update stat organs as well
+	if(O.has_stat_info)
+		LAZYDISTINCTADD(stat_organs, O)
 
 	. = ..()
 	if(!.)
@@ -108,10 +113,15 @@
 		LAZYREMOVE(external_organs, O)
 
 	// Update our organ category lists, if neeed.
-	if(O.organ_category && islist(organs_by_category))
-		organs_by_category[O.organ_category] -= O
-		if(LAZYLEN(organs_by_category[O.organ_category]) <= 0)
-			LAZYREMOVE(organs_by_category, O.organ_category)
+	if(O.organ_categories && islist(organs_by_category))
+		for(var/category in cached_json_decode(O.organ_categories))
+			organs_by_category[category] -= O
+			if(LAZYLEN(organs_by_category[category]) <= 0)
+				LAZYREMOVE(organs_by_category, category)
+
+	// Update stat organs as well
+	if(O.has_stat_info && stat_organs)
+		LAZYREMOVE(stat_organs, O)
 
 	if(!O.is_internal())
 		refresh_modular_limb_verbs()
@@ -201,27 +211,16 @@
 					SET_STATUS_MAX(src, STAT_STUN, 2)
 
 				//Moving makes open wounds get infected much faster
-				for(var/datum/wound/W in E.wounds)
-					if (W.infection_check())
-						W.germ_level += 1
-
-/mob/living/human/proc/Check_Proppable_Object()
-	for(var/turf/T as anything in RANGE_TURFS(src, 1)) //we only care for non-space turfs
-		if(T.density && T.simulated)	//walls work
-			return 1
-
-	for(var/obj/O in orange(1, src))
-		if(O && O.density && O.anchored)
-			return 1
-
-	return 0
+				for(var/datum/wound/wound in E.wounds)
+					if (wound.infection_check())
+						wound.germ_level += 1
 
 /mob/living/human/on_lost_organ(var/obj/item/organ/O)
 	if(!(. = ..()))
 		return
 	//Move some blood over to the organ
-	if(!BP_IS_PROSTHETIC(O) && O.species && O.reagents?.total_volume < 5)
-		vessel.trans_to(O, 5 - O.reagents.total_volume, 1, 1)
+	if(!BP_IS_PROSTHETIC(O) && O.species && REAGENT_TOTAL_VOLUME(O.reagents) < 5)
+		vessel.trans_to(O, 5 - REAGENT_TOTAL_VOLUME(O.reagents), 1, 1)
 
 
 /mob/living/human/is_asystole()

@@ -10,6 +10,7 @@
 	requires_slot_flags = SLOT_EARS
 	mob_overlay_layer = HO_L_EAR_LAYER
 	quick_equip_priority = 7
+	fluid_height = (FLUID_SHALLOW * 0.25 + FLUID_OVER_MOB_HEAD * 0.75) // 3/4 of the way between waist-level and the top of your head
 
 /datum/inventory_slot/ear/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	for(var/slot in global.airtight_slots)
@@ -21,8 +22,6 @@
 
 /datum/inventory_slot/ear/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDEEARS))
-		if(user == owner)
-			return "You have [_holding.get_examine_line()] on your [lowertext(slot_name)]."
 		return "[pronouns.He] [pronouns.has] [_holding.get_examine_line()] on [pronouns.his] [lowertext(slot_name)]."
 
 /datum/inventory_slot/ear/unequipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)

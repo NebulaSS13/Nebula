@@ -4,6 +4,7 @@
 	icon           = 'mods/mobs/dionaea/icons/turfs.dmi'
 	icon_base      = "floor"
 	flooring_flags = TURF_ACID_IMMUNE | TURF_REMOVE_SHOVEL
+	uid            = "floor_diona"
 
 /turf/floor/diona
 	name           = "biomass"

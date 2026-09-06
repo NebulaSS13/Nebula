@@ -1,4 +1,4 @@
-/datum/ability_handler/psionics/proc/update(var/force)
+/datum/ability_handler/psionics/proc/update(var/force, can_delete = TRUE)
 
 	set waitfor = FALSE
 
@@ -23,7 +23,7 @@
 	var/rank_count = max(1, LAZYLEN(ranks))
 	if(force || last_rating != ceil(combined_rank/rank_count))
 		if(highest_rank <= 1)
-			if(highest_rank == 0)
+			if(highest_rank == 0 && can_delete) // hack to prevent deletion on update(TRUE) in New
 				qdel(src)
 			return
 		else
@@ -183,19 +183,20 @@
 
 			// Heal organ damage.
 			if(heal_internal)
-				for(var/obj/item/organ/I in H.get_internal_organs())
+				for(var/obj/item/organ/internal/organ in H.get_internal_organs())
 
-					if(BP_IS_PROSTHETIC(I) || BP_IS_CRYSTAL(I))
+					if(BP_IS_PROSTHETIC(organ) || BP_IS_CRYSTAL(organ))
 						continue
 
 					// Autoredaction doesn't heal brain damage directly.
-					if(I.organ_tag == BP_BRAIN)
+					if(organ.organ_tag == BP_BRAIN)
 						continue
 
-					if(I.damage > 0 && spend_power(heal_rate))
-						I.damage = max(I.damage - heal_rate, 0)
+					var/organ_damage = organ.get_organ_damage()
+					if(organ_damage > 0 && spend_power(heal_rate))
+						organ.adjust_organ_damage(-(heal_rate))
 						if(prob(25))
-							to_chat(H, SPAN_NOTICE("Your innards itch as your autoredactive faculty mends your [I.name]."))
+							to_chat(H, SPAN_NOTICE("Your innards itch as your autoredactive faculty mends your [organ.name]."))
 						return
 
 			// Heal broken bones.
@@ -216,11 +217,11 @@
 						E.status &= ~ORGAN_TENDON_CUT
 						return TRUE
 
-					for(var/datum/wound/W in E.wounds)
-						if(W.bleeding() && spend_power(heal_rate))
-							to_chat(H, SPAN_NOTICE("Your autoredactive faculty knits together severed veins, stemming the bleeding from \a [W.desc] on your [E.name]."))
-							W.bleed_timer = 0
-							W.clamped = TRUE
+					for(var/datum/wound/wound in E.wounds)
+						if(wound.bleeding() && spend_power(heal_rate))
+							to_chat(H, SPAN_NOTICE("Your autoredactive faculty knits together severed veins, stemming the bleeding from \a [wound.desc] on your [E.name]."))
+							wound.bleed_timer = 0
+							wound.clamped = TRUE
 							E.status &= ~ORGAN_BLEEDING
 							return
 

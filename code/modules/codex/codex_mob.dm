@@ -11,7 +11,11 @@
 	return TRUE
 
 /mob/living/human/can_use_codex()
-	return TRUE //has_implant(/obj/item/implant/codex, functioning = TRUE)
+	if(get_config_value(/decl/config/toggle/codex_requires_implant))
+		for(var/obj/item/implant/codex/codex_implant in contents)
+			if(codex_implant.implanted && !codex_implant.malfunction)
+				return TRUE
+	return TRUE
 
 /mob/living/human/get_codex_value()
 	return "[lowertext(species.name)] (species)"

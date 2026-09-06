@@ -5,7 +5,7 @@
 	icon_state = "urn"
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 
 /obj/item/urn/afterattack(var/obj/A, var/mob/user, var/proximity)
 	if(!istype(A, /obj/effect/decal/cleanable/ash))
@@ -26,7 +26,7 @@
 			A.dropInto(loc)
 			user.visible_message("\The [user] pours \the [A] out from \the [src].", "You pour \the [A] out from \the [src].")
 
-/obj/item/urn/examine(mob/user)
+/obj/item/urn/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(contents.len)
-		to_chat(user, "\The [src] is full.")
+		. += "\The [src] is full."

@@ -169,7 +169,7 @@
 /obj/item/stock_parts/subspace/filter
 	name = "hyperwave filter"
 	icon_state = "hyperwave_filter"
-	desc = "A tiny device capable of filtering and converting super-intense radiowaves."
+	desc = "A tiny device capable of filtering and converting super-intense radio waves."
 	origin_tech = @'{"programming":4,"magnets":2}'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)

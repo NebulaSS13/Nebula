@@ -126,14 +126,14 @@
 	var/turf/T = get_turf(src)
 	var/zlevels = SSmapping.get_connected_levels(T.z)
 	var/cur_dist = world.maxx+world.maxy
-	for(var/obj/item/radio/beacon/R in global.radio_beacons)
-		if(!R.functioning)
+	for(var/obj/item/radio/beacon/radio in global.radio_beacons)
+		if(!radio.functioning)
 			continue
-		if((R.z in zlevels) && R.frequency == tracking_freq)
-			var/check_dist = get_dist(src,R)
+		if((radio.z in zlevels) && radio.frequency == tracking_freq)
+			var/check_dist = get_dist(src, radio)
 			if(check_dist < cur_dist)
 				cur_dist = check_dist
-				. = weakref(R)
+				. = weakref(radio)
 
 /obj/item/pinpointer/radio/attack_self(var/mob/user)
 	interact(user)

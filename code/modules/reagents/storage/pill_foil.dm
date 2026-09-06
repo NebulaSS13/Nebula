@@ -49,8 +49,8 @@
 		add_overlay(I)
 		offset -= 3
 
-/obj/item/pill_bottle/foil_pack/examine(mob/user)
+/obj/item/pill_bottle/foil_pack/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, SPAN_NOTICE("It has the following pills in it:"))
+	. += SPAN_NOTICE("It has the following pills in it:")
 	for(var/obj/item/chems/pill/C in pill_positions)
-		to_chat(user, SPAN_NOTICE("[html_icon(C)] [C.name]"))
+		. += SPAN_NOTICE("[html_icon(C)] [C.name]")

@@ -72,6 +72,12 @@
 	containername = "pizza crate"
 	supply_method = /decl/supply_method/randomized
 
+/decl/hierarchy/supply_pack/galley/nuggets
+	name = "Emergency - Nugget crate"
+	contains = list(/obj/item/box/nuggets = 2)
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "nugget crate"
+
 /decl/hierarchy/supply_pack/galley/rations
 	num_contained = 6
 	name = "Emergency - MREs"
@@ -137,7 +143,7 @@
 /decl/hierarchy/supply_pack/galley/beer_dispenser
 	name = "Equipment - Booze dispenser"
 	contains = list(
-			/obj/machinery/chemical_dispenser/bar_alc{anchored = FALSE}
+			/obj/machinery/chemical_dispenser/bar_alc/unanchored
 		)
 	containertype = /obj/structure/largecrate
 	containername = "booze dispenser crate"
@@ -145,7 +151,7 @@
 /decl/hierarchy/supply_pack/galley/soda_dispenser
 	name = "Equipment - Soda dispenser"
 	contains = list(
-			/obj/machinery/chemical_dispenser/bar_soft{anchored = FALSE}
+			/obj/machinery/chemical_dispenser/bar_soft/unanchored
 		)
 	containertype = /obj/structure/largecrate
 	containername = "soda dispenser crate"

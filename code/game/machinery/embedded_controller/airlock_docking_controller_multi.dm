@@ -46,8 +46,8 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/embedded_controller/radio/docking_port_multi/Topic(href, href_list)
-	return 1 // Apparently we swallow all input (this is corrected legacy code)
+/obj/machinery/embedded_controller/radio/docking_port_multi/OnTopic(user, href_list)
+	return TOPIC_HANDLED // Apparently we swallow all input (this is corrected legacy code)
 
 
 

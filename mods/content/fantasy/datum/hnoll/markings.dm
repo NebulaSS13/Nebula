@@ -2,7 +2,7 @@
 /decl/sprite_accessory/hair/hnoll
 	name = "Hnoll Rattail"
 	icon_state = "hair_rattail"
-	species_allowed = list(SPECIES_HNOLL)
+	species_allowed = list(/decl/species/hnoll::uid)
 	icon = 'mods/content/fantasy/icons/hnoll/hair.dmi'
 	color_blend = ICON_MULTIPLY
 	uid = "acc_hair_hnoll_rattail"
@@ -135,7 +135,7 @@
 /decl/sprite_accessory/facial_hair/hnoll
 	name = "Hnoll Sideburns"
 	icon_state = "facial_sideburns"
-	species_allowed = list(SPECIES_HNOLL)
+	species_allowed = list(/decl/species/hnoll::uid)
 	icon = 'mods/content/fantasy/icons/hnoll/facial.dmi'
 	color_blend = ICON_MULTIPLY
 	uid = "acc_fhair_hnoll_sideburns"
@@ -169,46 +169,10 @@
 	name = "Hnoll Nose"
 	icon_state = "nose"
 	icon = 'mods/content/fantasy/icons/hnoll/markings.dmi'
-	species_allowed = list(SPECIES_HNOLL)
+	species_allowed = list(/decl/species/hnoll::uid)
 	body_parts = list(BP_HEAD)
 	color_blend = ICON_MULTIPLY
 	uid = "acc_marking_hnoll_nose"
-
-/decl/sprite_accessory/marking/hnoll/ears
-	name = "Hnoll Wide Ears"
-	icon_state = "ears_plain"
-	mask_to_bodypart = FALSE
-	uid = "acc_marking_hnoll_wideears"
-
-/decl/sprite_accessory/marking/hnoll/ears/wide_inner
-	name = "Hnoll Wide Ears Interior"
-	icon_state = "ears_plain_inner"
-	uid = "acc_marking_hnoll_wideears_inner"
-
-/decl/sprite_accessory/marking/hnoll/ears/wide_tuft
-	name = "Hnoll Wide Ears Tuft"
-	icon_state = "ears_plain_tuft"
-	uid = "acc_marking_hnoll_wideears_tuft"
-
-/decl/sprite_accessory/marking/hnoll/ears/narrow
-	name = "Hnoll Narrow Ears"
-	icon_state = "ears_narrow"
-	uid = "acc_marking_hnoll_narrowears"
-
-/decl/sprite_accessory/marking/hnoll/ears/narrow_inner
-	name = "Hnoll Narrow Ears Interior"
-	icon_state = "ears_narrow_inner"
-	uid = "acc_marking_hnoll_narrowears_inner"
-
-/decl/sprite_accessory/marking/hnoll/ears/narrow_tuft
-	name = "Hnoll Narrow Ears Tuft"
-	icon_state = "ears_narrow_tuft"
-	uid = "acc_marking_hnoll_narrowears_tuft"
-
-/decl/sprite_accessory/marking/hnoll/ears/earrings
-	name = "Hnoll Earrings"
-	icon_state = "earrings"
-	uid = "acc_marking_hnoll_earrings"
 
 /decl/sprite_accessory/marking/hnoll/patches
 	name = "Patches (Body)"

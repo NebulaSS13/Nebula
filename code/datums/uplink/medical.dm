@@ -18,7 +18,7 @@
 
 /datum/uplink_item/item/medical/stasis
 	name = "Stasis Bag"
-	desc = "Reusable bag designed to slow down life functions of occupant, especially useful if short on time or in a hostile enviroment."
+	desc = "Reusable bag designed to slow down life functions of occupant, especially useful if short on time or in a hostile environment."
 	item_cost = 24
 	path = /obj/item/bodybag/cryobag
 

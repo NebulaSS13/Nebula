@@ -3,7 +3,7 @@
 	description = "The Splinter Kingdoms are a disparate mish-mash of regional powers, feudal warlords, and more organized \
 	settlements within the space once claimed by the Imperial Aegis. When the Aegis collapsed, several hundred years ago, the \
 	resulting wars and squabbling took decades to settle, and in many places the tensions and conflicts still run hot. Most of \
-	the Splinter Kingdoms emulate the peasant-noble social heirarchies of the Aegis, but a variety of other forms of governance \
+	the Splinter Kingdoms emulate the peasant-noble social hierarchies of the Aegis, but a variety of other forms of governance \
 	and society can be found."
 	uid = "heritage_fantasy_splinter"
 

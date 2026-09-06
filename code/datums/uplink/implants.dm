@@ -6,7 +6,7 @@
 
 /datum/uplink_item/item/implants/imp_freedom
 	name = "Freedom Implant"
-	desc = "An implant with an emotive trigger that can break you free of restraints. Show Security who has the real upperhand!"
+	desc = "An implant with an emotive trigger that can break you free of restraints. Show Security who has the real upper hand!"
 	item_cost = 24
 	path = /obj/item/box/syndie_kit/imp_freedom
 

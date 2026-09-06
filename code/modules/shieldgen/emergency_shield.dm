@@ -30,15 +30,6 @@
 	check_failure()
 	return QDELING(src) // return true if deleted, false otherwise
 
-/obj/machinery/shield/malfai
-	name = "emergency forcefield"
-	desc = "A weak forcefield which seems to be projected by the emergency atmosphere containment field."
-	max_health = 100 // Half health, it's not suposed to resist much.
-
-/obj/machinery/shield/malfai/Process()
-	current_health -= 0.5 // Slowly lose integrity over time
-	check_failure()
-
 /obj/machinery/shield/proc/check_failure()
 	if (current_health <= 0)
 		visible_message(SPAN_NOTICE("\The [src] dissipates!"))
@@ -251,8 +242,8 @@
 		update_icon()
 		return 1
 
-/obj/machinery/shieldgen/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W))
+/obj/machinery/shieldgen/attackby(obj/item/used_item, mob/user)
+	if(IS_SCREWDRIVER(used_item))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		if(is_open)
 			to_chat(user, "<span class='notice'>You close the panel.</span>")
@@ -261,8 +252,8 @@
 			to_chat(user, "<span class='notice'>You open the panel and expose the wiring.</span>")
 			is_open = 1
 		return TRUE
-	else if(IS_COIL(W) && malfunction && is_open)
-		var/obj/item/stack/cable_coil/coil = W
+	else if(IS_COIL(used_item) && malfunction && is_open)
+		var/obj/item/stack/cable_coil/coil = used_item
 		to_chat(user, "<span class='notice'>You begin to replace the wires.</span>")
 		if(!do_after(user, 3 SECONDS, src))
 			to_chat(user, SPAN_NOTICE("You stop repairing \the [src]."))
@@ -273,7 +264,7 @@
 			to_chat(user, "<span class='notice'>You repair \the [src]!</span>")
 			update_icon()
 		return TRUE
-	else if(IS_WRENCH(W))
+	else if(IS_WRENCH(used_item))
 		if(locked)
 			to_chat(user, "The bolts are covered, unlocking this would retract the covers.")
 			return TRUE
@@ -289,7 +280,7 @@
 			to_chat(user, "<span class='notice'>You secure \the [src] to the floor!</span>")
 			anchored = TRUE
 		return TRUE
-	else if(istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer/pda))
+	else if(istype(used_item, /obj/item/card/id) || istype(used_item, /obj/item/modular_computer/pda))
 		if(src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")

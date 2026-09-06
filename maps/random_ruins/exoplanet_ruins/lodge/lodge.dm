@@ -7,4 +7,4 @@
 	template_tags = TEMPLATE_TAG_HUMAN|TEMPLATE_TAG_HABITAT
 
 /turf/floor/wood/usedup
-	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
+	initial_gas = alist(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)

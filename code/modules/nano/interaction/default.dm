@@ -45,13 +45,13 @@ var/global/datum/topic_state/default/default_topic_state = new
 	if(src_object in view(client.view, src))
 		return STATUS_INTERACTIVE
 
-	// If we're installed in a chassi, rather than transfered to an inteliCard or other container, then check if we have camera view
+	// If we're installed in a chassi, rather than transfered to an intelliCard or other container, then check if we have camera view
 	if(is_in_chassis())
 		//stop AIs from leaving windows open and using then after they lose vision
 		if(cameranet && !cameranet.is_turf_visible(get_turf(src_object)))
 			return STATUS_CLOSE
 		return STATUS_INTERACTIVE
-	else if(get_dist(src_object, src) <= get_effective_view(client))	// View does not return what one would expect while installed in an inteliCard
+	else if(get_dist(src_object, src) <= get_effective_view(client))	// View does not return what one would expect while installed in an intelliCard
 		return STATUS_INTERACTIVE
 
 	return STATUS_CLOSE

@@ -1,8 +1,8 @@
-/datum/extension/assembly/proc/examine(mob/user)
+/datum/extension/assembly/proc/examine_assembly(mob/user)
 	if(damage > broken_damage)
-		to_chat(user, SPAN_DANGER("It is heavily damaged!"))
+		return SPAN_DANGER("It is heavily damaged!")
 	else if(damage)
-		to_chat(user, "It is damaged.")
+		return "It is damaged."
 
 /datum/extension/assembly/proc/break_apart()
 	var/atom/movable/H = holder

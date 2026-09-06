@@ -3,7 +3,7 @@
 	desc = "This is possibly the least sanitary object around."
 	icon = 'icons/obj/items/plunger.dmi'
 	icon_state = ICON_STATE_WORLD
-	attack_verb = list("plunged")
+	attack_verb = "plunged"
 	_base_attack_force = 1
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_HEAD | SLOT_FACE

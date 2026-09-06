@@ -8,6 +8,7 @@
 /decl/interaction_handler/rotate
 	name = "Rotate"
 	expected_target_type = /obj
+	examine_desc = "rotate $TARGET_THEM$"
 
 /decl/interaction_handler/rotate/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..()

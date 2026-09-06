@@ -1,4 +1,5 @@
 #define MAX_JOBBAN_CELLS 5
+var/global/list/misc_jobban_roles = list("Botany Roles", "Graffiti")
 
 /datum/admins/Topic(href, href_list)
 	..()
@@ -174,7 +175,7 @@
 		else if(task == "permissions")
 			if(!D)	return
 			var/list/permissionlist = list()
-			for(var/i=1, i<=R_MAXPERMISSION, i<<=1)		//that <<= is shorthand for i = i << 1. Which is a left BITSHIFT_LEFT
+			for(var/i=1, i<=R_MAXPERMISSION, i = BITSHIFT_LEFT(i, 1))
 				permissionlist[rights2text(i)] = i
 			var/new_permission = input("Select a permission to turn on/off", "Permission toggle", null, null) as null|anything in permissionlist
 			if(!new_permission)	return
@@ -233,6 +234,8 @@
 				delmob = TRUE
 
 		var/transform_key = replacetext(href_list["simplemake"], "_", " ")
+		// Nothing ever seems to pass species to any simplemake href links...
+		// TODO: Remove subspecies argument if it actually is defunct?
 		if(M.try_rudimentary_transform(transform_key, delmob, href_list["species"]))
 			log_and_message_admins("has used rudimentary transformation on [key_name_admin(M)]. Transforming to [transform_key]; deletemob=[delmob]")
 
@@ -383,11 +386,10 @@
 		jobs += "</tr></table>"
 		#undef ANTAG_COLUMNS
 
-		var/list/misc_roles = list("Botany Roles", "Graffiti")
 		//Other roles  (BLUE, because I have no idea what other color to make this)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(misc_roles)]'>Other Roles</th></tr><tr align='center'>"
-		for(var/entry in misc_roles)
+		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(misc_jobban_roles)]'>Other Roles</th></tr><tr align='center'>"
+		for(var/entry in misc_jobban_roles)
 			if(jobban_isbanned(M, entry))
 				jobs += "<td width='20%'><a href='byond://?src=\ref[src];jobban_category=[entry];jobban_mob_target=\ref[M]'><font color=red>[entry]</font></a></td>"
 			else
@@ -774,14 +776,14 @@
 	else if(href_list["revive"])
 		if(!check_rights(R_REJUVENATE))	return
 
-		var/mob/living/L = locate(href_list["revive"])
-		if(!istype(L))
+		var/mob/living/language = locate(href_list["revive"])
+		if(!istype(language))
 			to_chat(usr, "This can only be used on instances of type /mob/living")
 			return
 
 		if(get_config_value(/decl/config/toggle/on/admin_revive))
-			L.revive()
-			log_and_message_admins("healed/revived [key_name(L)]")
+			language.revive()
+			log_and_message_admins("healed/revived [key_name(language)]")
 		else
 			to_chat(usr, "Admin rejuvenates have been disabled")
 
@@ -908,20 +910,20 @@
 
 		//Job + antagonist
 		if(M.mind)
-			special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>[M.mind.get_special_role_name("unknown role")]</b></font>; Has been rev: [(M.mind.has_been_rev)?"Yes":"No"]"
+			special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>[M.mind.get_special_role_name("unknown role")]</b></font>"
 		else
-			special_role_description = "Role: <i>Mind datum missing</i> Antagonist: <i>Mind datum missing</i>; Has been rev: <i>Mind datum missing</i>;"
+			special_role_description = "Role: <i>Mind datum missing</i> Antagonist: <i>Mind datum missing</i>"
 
 		//Health
 		if(isliving(M))
-			var/mob/living/L = M
+			var/mob/living/subject = M
 			var/status
 			switch (M.stat)
 				if (0) status = "Alive"
 				if (1) status = "<font color='orange'><b>Unconscious</b></font>"
 				if (2) status = "<font color='red'><b>Dead</b></font>"
 			health_description = "Status = [status]"
-			health_description += "<BR>Oxy: [L.get_damage(OXY)] - Tox: [L.get_damage(TOX)] - Fire: [L.get_damage(BURN)] - Brute: [L.get_damage(BRUTE)] - Clone: [L.get_damage(CLONE)] - Brain: [L.get_damage(BRAIN)]"
+			health_description += "<BR>Oxy: [subject.get_damage(OXY)] - Tox: [subject.get_damage(TOX)] - Fire: [subject.get_damage(BURN)] - Brute: [subject.get_damage(BRUTE)] - Clone: [subject.get_damage(CLONE)] - Brain: [subject.get_damage(BRAIN)]"
 		else
 			health_description = "This mob type has no health to speak of."
 
@@ -979,8 +981,7 @@
 		var/obj/effect/stop/S
 		S = new /obj/effect/stop(M.loc)
 		S.victim = M
-		spawn(20)
-			qdel(S)
+		QDEL_IN(S, 2 SECONDS)
 
 		var/turf/floor/T = get_turf(M)
 		if(istype(T))
@@ -993,27 +994,27 @@
 			M.take_damage(min(99, M.current_health - 1))
 			SET_STATUS_MAX(M, STAT_STUN, 20)
 			SET_STATUS_MAX(M, STAT_WEAK, 20)
-			M.set_status(STAT_STUTTER, 20)
+			M.set_status_condition(STAT_STUTTER, 20)
 
 	else if(href_list["CentcommReply"])
-		var/mob/living/L = locate(href_list["CentcommReply"])
-		if(!istype(L))
+		var/mob/living/subject = locate(href_list["CentcommReply"])
+		if(!istype(subject))
 			to_chat(usr, "This can only be used on instances of type /mob/living/")
 			return
 
-		if(L.can_centcom_reply())
-			var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(L)] via their headset.","Outgoing message from Centcomm", ""))
+		if(subject.can_centcom_reply())
+			var/input = sanitize(input(src.owner, "Please enter a message to reply to [key_name(subject)] via their headset.","Outgoing message from Centcomm", ""))
 			if(!input)		return
 
-			to_chat(src.owner, "You sent [input] to [L] via a secure channel.")
-			log_admin("[src.owner] replied to [key_name(L)]'s Centcomm message with the message [input].")
-			message_admins("[src.owner] replied to [key_name(L)]'s Centcom message with: \"[input]\"")
-			if(!isAI(L))
-				to_chat(L, "<span class='info'>You hear something crackle in your headset for a moment before a voice speaks.</span>")
-			to_chat(L, "<span class='info'>Please stand by for a message from Central Command.</span>")
-			to_chat(L, "<span class='info'>Message as follows.</span>")
-			to_chat(L, "<span class='notice'>[input]</span>")
-			to_chat(L, "<span class='info'>Message ends.</span>")
+			to_chat(src.owner, "You sent [input] to [subject] via a secure channel.")
+			log_admin("[src.owner] replied to [key_name(subject)]'s Centcomm message with the message [input].")
+			message_admins("[src.owner] replied to [key_name(subject)]'s Centcom message with: \"[input]\"")
+			if(!isAI(subject))
+				to_chat(subject, "<span class='info'>You hear something crackle in your headset for a moment before a voice speaks.</span>")
+			to_chat(subject, "<span class='info'>Please stand by for a message from Central Command.</span>")
+			to_chat(subject, "<span class='info'>Message as follows.</span>")
+			to_chat(subject, "<span class='notice'>[input]</span>")
+			to_chat(subject, "<span class='info'>Message ends.</span>")
 		else
 			to_chat(src.owner, "The person you are trying to contact does not have functional radio equipment.")
 
@@ -1469,14 +1470,14 @@
 			if(!istype(M))
 				to_chat(usr, "[M] is illegal type, must be /mob!")
 				return
-			var/decl/language/L = locate(href_list["lang"])
-			if(istype(L))
-				if(L in M.languages)
-					if(!M.remove_language(L.type))
-						to_chat(usr, "Failed to remove language '[L.name]' from \the [M]!")
+			var/decl/language/language = locate(href_list["lang"])
+			if(istype(language))
+				if(language in M.languages)
+					if(!M.remove_language(language.type))
+						to_chat(usr, "Failed to remove language '[language.name]' from \the [M]!")
 				else
-					if(!M.add_language(L.type))
-						to_chat(usr, "Failed to add language '[L.name]' to \the [M]!")
+					if(!M.add_language(language.type))
+						to_chat(usr, "Failed to add language '[language.name]' to \the [M]!")
 			else
 				to_chat(usr, "Failed to toggle unknown language on \the [M]!")
 

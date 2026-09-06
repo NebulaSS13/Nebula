@@ -2,11 +2,12 @@
 	. = b.display_priority - a.display_priority
 
 /decl/department
+	// this isn't abstract because it's used as a fallback
 	var/name
 	var/noun = "department"
 	var/noun_adj = "departmental"
 	var/announce_channel = "Common" // The Channel for spawn annoncement. Leave as common if unsure. The channel will be selected based of the first deparment listed in a jobs .department_types
-	var/list/goals = list() 
+	var/list/goals = list()
 	var/min_goals = 1
 	var/max_goals = 2
 	var/colour = "#808080"

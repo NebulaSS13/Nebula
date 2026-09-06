@@ -76,7 +76,6 @@
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/barren
 	template_tags_blacklist    = TEMPLATE_TAG_HABITAT|TEMPLATE_TAG_WATER
 	subtemplate_budget         = 6
-	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/barren
 	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/barren,     //surface level

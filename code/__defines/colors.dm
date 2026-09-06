@@ -236,3 +236,5 @@ var/global/list/telecomms_colours = list(
 #define COLOR_DARKMODE_TEXT "#a4bad6"
 
 #define COLORED_SQUARE(COLOR) "<span style='font-face: fixedsys; font-size: 14px; background-color: [COLOR]; color: [COLOR]'>___</span>"
+
+#define hsv(args...) rgb(args, space = COLORSPACE_HSV)

@@ -1,6 +1,7 @@
 #define plain_key_name(A) key_name(A, highlight_special_characters = 0)
 
 /decl/communication_channel
+	abstract_type = /decl/communication_channel
 	var/name
 	var/config_setting
 	var/expected_communicator_type = /datum

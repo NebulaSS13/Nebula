@@ -11,7 +11,7 @@
 	message_admins(user ? "[key_name_admin(user)] [message]" : "EVENT [message]")
 
 /proc/log_and_message_admins_many(var/list/mob/users, var/message)
-	if(!users || !users.len)
+	if(!LAZYLEN(users))
 		return
 
 	var/list/user_keys = list()
@@ -43,7 +43,7 @@
 	var/intent = "(INTENT: N/A)"
 	var/target_zone = "(ZONE_SEL: N/A)"
 	if(attacker)
-		intent = "(INTENT: [uppertext(attacker.a_intent)])"
+		intent = "(INTENT: [uppertext(attacker.get_intent().name)])"
 		if (attacker.get_target_zone())
 			target_zone = "(ZONE_SEL: [uppertext(attacker.get_target_zone())])"
 		if(victim)
@@ -95,7 +95,7 @@
 	return FALSE
 
 /proc/admin_attacker_log_many_victims(var/mob/attacker, var/list/mob/victims, var/attacker_message, var/victim_message, var/admin_message)
-	if(!victims || !victims.len)
+	if(!LAZYLEN(victims))
 		return
 
 	for(var/mob/victim in victims)

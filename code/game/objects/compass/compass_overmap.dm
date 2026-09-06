@@ -30,10 +30,10 @@
 
 	var/list/seen_waypoint_ids = list()
 	for(var/key in owner.known_sectors)
-		var/datum/computer_file/data/waypoint/R = owner.known_sectors[key]
-		var/wp_id = "\ref[R]"
-		set_waypoint(wp_id, uppertext(R.fields["name"]), R.fields["x"], R.fields["y"], owner_turf.z, R.fields["color"] || COLOR_SILVER)
-		if(!R.fields["tracking"])
+		var/datum/computer_file/data/waypoint/waypoint = owner.known_sectors[key]
+		var/wp_id = "\ref[waypoint]"
+		set_waypoint(wp_id, uppertext(waypoint.fields["name"]), waypoint.fields["x"], waypoint.fields["y"], owner_turf.z, waypoint.fields["color"] || COLOR_SILVER)
+		if(!waypoint.fields["tracking"])
 			hide_waypoint(wp_id)
 		seen_waypoint_ids += wp_id
 	for(var/id in compass_waypoints)

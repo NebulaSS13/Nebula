@@ -45,8 +45,8 @@
 	SSshuttle.docking_beacons -= src
 	permitted_shuttles.Cut()
 
-/obj/machinery/docking_beacon/attackby(obj/item/I, mob/user)
-	if(IS_WRENCH(I))
+/obj/machinery/docking_beacon/attackby(obj/item/used_item, mob/user)
+	if(IS_WRENCH(used_item))
 		if(!allowed(user))
 			to_chat(user, SPAN_WARNING("The bolts on \the [src] are locked!"))
 			return TRUE
@@ -94,7 +94,7 @@
 
 	if(href_list["edit_codes"])
 		var/newcode = sanitize(input("Input new docking codes:", "Docking codes", docking_codes) as text|null)
-		if(!CanInteract(usr,state))
+		if(!CanInteract(user,state))
 			return TOPIC_NOACTION
 		if(newcode)
 			docking_codes = uppertext(newcode)
@@ -103,7 +103,7 @@
 
 	if(href_list["edit_display_name"])
 		var/newname = sanitize(input("Input new display name:", "Display name", display_name) as text|null)
-		if(!CanInteract(usr,state))
+		if(!CanInteract(user,state))
 			return TOPIC_NOACTION
 		if(newname)
 			display_name = newname
@@ -114,7 +114,7 @@
 	if(href_list["edit_size"])
 		var/newwidth = input("Input new docking width for beacon:", "Docking size", docking_width) as num|null
 		var/newheight = input("Input new docking height for beacon:", "Docking size", docking_height) as num|null
-		if(!CanInteract(usr,state))
+		if(!CanInteract(user,state))
 			return TOPIC_NOACTION
 		if(newwidth && newheight)
 			docking_width = clamp(newwidth, 0, MAX_DOCKING_SIZE)
@@ -134,7 +134,7 @@
 		return TOPIC_REFRESH
 
 	if(href_list["edit_permitted_shuttles"])
-		var/shuttle = sanitize(input(usr,"Enter the ID of the shuttle you wish to permit/unpermit for this beacon:", "Enter ID") as text|null)
+		var/shuttle = sanitize(input(user,"Enter the ID of the shuttle you wish to permit/unpermit for this beacon:", "Enter ID") as text|null)
 		if(shuttle)
 			if(shuttle in permitted_shuttles)
 				permitted_shuttles -= shuttle
@@ -166,7 +166,7 @@
 
 	if(href_list["change_color"])
 		var/new_color = input(user, "Choose a color.", "\the [src]", ship_color) as color|null
-		if(!CanInteract(usr,state))
+		if(!CanInteract(user,state))
 			return TOPIC_NOACTION
 		if(new_color && new_color != ship_color)
 			ship_color = new_color
@@ -175,7 +175,7 @@
 
 	if(href_list["change_ship_name"])
 		var/new_ship_name = sanitize(input(user, "Enter a new name for the ship:", "Change ship name.") as null|text)
-		if(!CanInteract(usr,state))
+		if(!CanInteract(user,state))
 			return TOPIC_NOACTION
 		if(!new_ship_name)
 			return TOPIC_HANDLED
@@ -195,7 +195,7 @@
 		if(!construction_mode)
 			return TOPIC_HANDLED
 		var/confirm = alert(user, "This will permanently finalize the ship, are you sure?", "Ship finalization", "No", "Yes")
-		if(!CanInteract(usr,state))
+		if(!CanInteract(user,state))
 			return TOPIC_NOACTION
 		if(confirm == "Yes")
 			if(create_ship())
@@ -203,7 +203,7 @@
 				ship_name = ""
 				LAZYCLEARLIST(errors)
 			else
-				to_chat(usr, SPAN_WARNING("Could not finalize the construction of the ship!"))
+				to_chat(user, SPAN_WARNING("Could not finalize the construction of the ship!"))
 		return TOPIC_REFRESH
 
 /obj/machinery/docking_beacon/proc/allow_projection()

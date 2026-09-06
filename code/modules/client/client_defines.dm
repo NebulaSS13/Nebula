@@ -34,7 +34,6 @@
 
 	//IRC admin that spoke with them last.
 	var/irc_admin
-	var/mute_irc = 0
 
 	// Prevents people from being spammed about multikeying every time their mob changes.
 	var/warned_about_multikeying = 0

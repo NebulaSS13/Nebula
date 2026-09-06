@@ -8,9 +8,9 @@
 	density = TRUE
 	var/static/list/amount_of_underwear_by_id_card
 
-/obj/structure/undies_wardrobe/attackby(var/obj/item/item, var/mob/user)
-	if(istype(item, /obj/item/underwear))
-		var/obj/item/underwear/underwear = item
+/obj/structure/undies_wardrobe/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/underwear))
+		var/obj/item/underwear/underwear = used_item
 		if(!user.try_unequip(underwear))
 			return TRUE
 		qdel(underwear)
@@ -69,49 +69,44 @@
 
 	return ..()
 
-/obj/structure/undies_wardrobe/Topic(href, href_list, state)
-	if(..())
-		return TRUE
+/obj/structure/undies_wardrobe/OnTopic(mob/user, href_list, state)
+	if((. = ..()))
+		return
 
-	var/mob/living/human/H = usr
 	if(href_list["select_underwear"])
 		var/datum/category_group/underwear/UWC = global.underwear.categories_by_name[href_list["select_underwear"]]
 		if(!UWC)
-			return
-		var/datum/category_item/underwear/UWI = input("Select your desired underwear:", "Choose underwear") as null|anything in exclude_none(UWC.items)
+			return TOPIC_HANDLED
+		var/datum/category_item/underwear/UWI = input(user, "Select your desired underwear:", "Choose underwear") as null|anything in exclude_none(UWC.items)
 		if(!UWI)
-			return
+			return TOPIC_HANDLED
 
 		var/list/metadata_list = list()
 		for(var/tweak in UWI.tweaks)
 			var/datum/gear_tweak/gt = tweak
-			var/metadata = gt.get_metadata(H, title = "Adjust underwear")
+			var/metadata = gt.get_metadata(user, title = "Adjust underwear")
 			if(!metadata)
-				return
+				return TOPIC_HANDLED
 			metadata_list["[gt]"] = metadata
 
-		if(!CanInteract(H, state))
-			return
+		if(!CanInteract(user, state))
+			return TOPIC_HANDLED
 
-		var/id = H.GetIdCard()
+		var/id = user.GetIdCard()
 		if(!id)
-			audible_message("No ID card detected. Unable to acquire your underwear quota for this shift.", WARDROBE_BLIND_MESSAGE(H))
-			return
+			audible_message("No ID card detected. Unable to acquire your underwear quota for this shift.", WARDROBE_BLIND_MESSAGE(user))
+			return TOPIC_HANDLED
 
 		var/current_quota = LAZYACCESS(amount_of_underwear_by_id_card, id)
 		if(current_quota >= length(global.underwear.categories))
-			audible_message("You have already used up your underwear quota for this shift. Please return previously acquired items to increase it.", WARDROBE_BLIND_MESSAGE(H))
-			return
+			audible_message("You have already used up your underwear quota for this shift. Please return previously acquired items to increase it.", WARDROBE_BLIND_MESSAGE(user))
+			return TOPIC_HANDLED
 		LAZYSET(amount_of_underwear_by_id_card, id, ++current_quota)
 
-		var/obj/UW = UWI.create_underwear(H, metadata_list)
-		UW.forceMove(loc)
-		H.put_in_hands(UW)
-
-		. = TRUE
-
-	if(.)
-		interact(H)
+		var/obj/UW = UWI.create_underwear(user, metadata_list)
+		UW.dropInto(loc)
+		user.put_in_hands(UW)
+		. = TOPIC_REFRESH
 
 /obj/structure/undies_wardrobe/proc/exclude_none(var/list/L)
 	. = L.Copy()

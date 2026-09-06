@@ -1,8 +1,8 @@
 /obj/structure/boulder
 	name = "boulder"
 	desc = "A large boulder, somewhat bigger than a small boulder."
-	icon = 'icons/obj/mining.dmi'
-	icon_state = "boulder1"
+	icon = 'icons/obj/structures/boulder.dmi'
+	icon_state = ICON_STATE_WORLD
 	density = TRUE
 	opacity = TRUE
 	anchored = TRUE
@@ -30,7 +30,7 @@
 
 /obj/structure/boulder/Initialize(var/ml, var/_mat, var/coloration)
 	. = ..()
-	icon_state = "boulder[rand(1,6)]"
+	icon_state = "[initial(icon_state)][rand(1,6)]"
 	if(coloration)
 		color = coloration
 	excavation_level = rand(5, 50)
@@ -39,15 +39,15 @@
 	QDEL_NULL(artifact_find)
 	return ..()
 
-/obj/structure/boulder/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/boulder/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(istype(I, /obj/item/depth_scanner))
-		var/obj/item/depth_scanner/C = I
+	if(istype(used_item, /obj/item/depth_scanner))
+		var/obj/item/depth_scanner/C = used_item
 		C.scan_atom(user, src)
 		return TRUE
 
-	if(istype(I, /obj/item/measuring_tape))
-		var/obj/item/measuring_tape/P = I
+	if(istype(used_item, /obj/item/measuring_tape))
+		var/obj/item/measuring_tape/P = used_item
 		user.visible_message(
 			SPAN_NOTICE("\The [user] extends \the [P] towards \the [src]."),
 			SPAN_NOTICE("You extend \the [P] towards \the [src].")
@@ -56,8 +56,8 @@
 			to_chat(user, SPAN_NOTICE("\The [src] has been excavated to a depth of [src.excavation_level]cm."))
 		return TRUE
 
-	if(I.do_tool_interaction(TOOL_PICK, user, src, 3 SECONDS, set_cooldown = TRUE))
-		excavation_level += I.get_tool_property(TOOL_PICK, TOOL_PROP_EXCAVATION_DEPTH)
+	if(used_item.do_tool_interaction(TOOL_PICK, user, src, 3 SECONDS, set_cooldown = TRUE))
+		excavation_level += used_item.get_tool_property(TOOL_PICK, TOOL_PROP_EXCAVATION_DEPTH)
 		if(excavation_level > 200)
 			user.visible_message(
 				SPAN_DANGER("\The [src] suddenly crumbles away."),
@@ -88,13 +88,8 @@
 
 /obj/structure/boulder/Bumped(AM)
 	. = ..()
-	if(ishuman(AM))
-		var/mob/living/human/H = AM
-		for(var/obj/item/P in H.get_inactive_held_items())
-			if(IS_PICK(P))
-				attackby(P, H)
-				return
-	else if(isrobot(AM))
-		var/mob/living/silicon/robot/R = AM
-		if(IS_PICK(R.module_active))
-			attackby(R.module_active,R)
+	if(isliving(AM))
+		var/mob/living/user = AM
+		var/obj/item/equipped_item = user.get_active_held_item()
+		if(istype(equipped_item) && IS_PICK(equipped_item))
+			attackby(equipped_item, user)

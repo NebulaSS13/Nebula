@@ -5,6 +5,8 @@
 	. = max(round(.), mob_size)
 
 /mob/living/get_single_monetary_worth()
+	if(worthless)
+		return 0
 	. = ..()
 	for(var/atom/movable/organ in get_organs())
 		. += organ.get_combined_monetary_worth()
@@ -14,5 +16,7 @@
 	. = round(.)
 
 /mob/living/get_value_multiplier()
+	if(worthless)
+		return 0
 	var/decl/species/my_species = get_species()
 	. = my_species ? my_species.rarity_value : 1

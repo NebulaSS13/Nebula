@@ -1,16 +1,20 @@
 var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 
 /datum/preferences
-	var/clientfps = 0
-	var/ooccolor = "#010000" //Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
-	var/icon_size = 64
+	var/clientfps                = 0
+	var/ooccolor                 = "#010000" //Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
+	var/icon_size                = 64
 	var/UI_style
-	var/UI_style_alpha =     255
-	var/UI_style_color =     COLOR_WHITE
-	var/UI_mouseover_alpha = 255
-	var/UI_mouseover_color = COLOR_AMBER
+	var/UI_style_alpha           = 255
+	var/UI_style_color           = "#8a8872"
+	var/UI_style_highlight_color = "#545e78"
+	var/UI_mouseover_alpha       = 255
+	var/UI_mouseover_color       = COLOR_AMBER
 	//Style for popup tooltips
-	var/tooltip_style = "Midnight"
+	var/tooltip_style            = "Midnight"
+
+/datum/category_item/player_setup_item/player_global
+	abstract_type = /datum/category_item/player_setup_item/player_global
 
 /datum/category_item/player_setup_item/player_global/ui
 	name = "UI"
@@ -25,26 +29,28 @@ var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 		if(ui_style)
 			pref.UI_style = ui_style.type
 
-	pref.icon_size =          R.read("icon_size")
-	pref.UI_mouseover_color = R.read("UI_mouseover_color")
-	pref.UI_mouseover_alpha = R.read("UI_mouseover_alpha")
-	pref.UI_style_color =     R.read("UI_style_color")
-	pref.UI_style_alpha =     R.read("UI_style_alpha")
-	pref.ooccolor =           R.read("ooccolor")
-	pref.clientfps =          R.read("clientfps")
+	pref.icon_size                = R.read("icon_size")
+	pref.UI_mouseover_color       = R.read("UI_mouseover_color")
+	pref.UI_mouseover_alpha       = R.read("UI_mouseover_alpha")
+	pref.UI_style_color           = R.read("UI_style_color")
+	pref.UI_style_highlight_color = R.read("UI_style_highlight_color")
+	pref.UI_style_alpha           = R.read("UI_style_alpha")
+	pref.ooccolor                 = R.read("ooccolor")
+	pref.clientfps                = R.read("clientfps")
 
-/datum/category_item/player_setup_item/player_global/ui/save_preferences(datum/pref_record_writer/W)
+/datum/category_item/player_setup_item/player_global/ui/save_preferences(datum/pref_record_writer/writer)
 
 	var/decl/ui_style/ui_style = GET_DECL(pref.UI_style)
-	W.write("UI_style", ui_style.uid)
+	writer.write("UI_style", ui_style.uid)
 
-	W.write("icon_size",          pref.icon_size)
-	W.write("UI_mouseover_color", pref.UI_mouseover_color)
-	W.write("UI_mouseover_alpha", pref.UI_mouseover_alpha)
-	W.write("UI_style_color",     pref.UI_style_color)
-	W.write("UI_style_alpha",     pref.UI_style_alpha)
-	W.write("ooccolor",           pref.ooccolor)
-	W.write("clientfps",          pref.clientfps)
+	writer.write("icon_size",                pref.icon_size)
+	writer.write("UI_mouseover_color",       pref.UI_mouseover_color)
+	writer.write("UI_mouseover_alpha",       pref.UI_mouseover_alpha)
+	writer.write("UI_style_color",           pref.UI_style_color)
+	writer.write("UI_style_highlight_color", pref.UI_style_highlight_color)
+	writer.write("UI_style_alpha",           pref.UI_style_alpha)
+	writer.write("ooccolor",                 pref.ooccolor)
+	writer.write("clientfps",                pref.clientfps)
 
 /datum/category_item/player_setup_item/player_global/ui/sanitize_preferences()
 
@@ -52,13 +58,14 @@ var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 	for(var/decl/ui_style/style in get_ui_styles())
 		all_ui_style_types |= style.type
 
-	pref.UI_style           = sanitize_inlist(pref.UI_style, all_ui_style_types, all_ui_style_types[1])
-	pref.UI_mouseover_color = sanitize_hexcolor(pref.UI_mouseover_color, initial(pref.UI_mouseover_color))
-	pref.UI_mouseover_alpha = sanitize_integer(pref.UI_mouseover_alpha, 0, 255, initial(pref.UI_mouseover_alpha))
-	pref.UI_style_color	    = sanitize_hexcolor(pref.UI_style_color, initial(pref.UI_style_color))
-	pref.UI_style_alpha	    = sanitize_integer(pref.UI_style_alpha, 0, 255, initial(pref.UI_style_alpha))
-	pref.ooccolor           = sanitize_hexcolor(pref.ooccolor, initial(pref.ooccolor))
-	pref.clientfps          = sanitize_integer(pref.clientfps, CLIENT_MIN_FPS, CLIENT_MAX_FPS, initial(pref.clientfps))
+	pref.UI_style                 = sanitize_inlist(pref.UI_style, all_ui_style_types, all_ui_style_types[1])
+	pref.UI_mouseover_color       = sanitize_hexcolor(pref.UI_mouseover_color, initial(pref.UI_mouseover_color))
+	pref.UI_mouseover_alpha       = sanitize_integer(pref.UI_mouseover_alpha, 0, 255, initial(pref.UI_mouseover_alpha))
+	pref.UI_style_color	          = sanitize_hexcolor(pref.UI_style_color, initial(pref.UI_style_color))
+	pref.UI_style_highlight_color = sanitize_hexcolor(pref.UI_style_highlight_color, initial(pref.UI_style_highlight_color))
+	pref.UI_style_alpha	          = sanitize_integer(pref.UI_style_alpha, 0, 255, initial(pref.UI_style_alpha))
+	pref.ooccolor                 = sanitize_hexcolor(pref.ooccolor, initial(pref.ooccolor))
+	pref.clientfps                = sanitize_integer(pref.clientfps, CLIENT_MIN_FPS, CLIENT_MAX_FPS, initial(pref.clientfps))
 
 	if(!isnum(pref.icon_size))
 		pref.icon_size = initial(pref.icon_size)
@@ -70,6 +77,11 @@ var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 	. += "<td><a href='byond://?src=\ref[src];select_color=1'><b>[pref.UI_style_color]</b></a></td>"
 	. += "<td><table style='display:inline;' bgcolor='[pref.UI_style_color]'><tr><td>__</td></tr></table></td>"
 	. += "<td><a href='byond://?src=\ref[src];reset=ui'>reset</a></td>"
+	. += "</tr>"
+	. += "<tr><td>UI Highlight</td>"
+	. += "<td><a href='byond://?src=\ref[src];select_highlight_color=1'><b>[pref.UI_style_highlight_color]</b></a></td>"
+	. += "<td><table style='display:inline;' bgcolor='[pref.UI_style_highlight_color]'><tr><td>__</td></tr></table></td>"
+	. += "<td><a href='byond://?src=\ref[src];reset=highlight'>reset</a></td>"
 	. += "</tr>"
 	. += "<tr><td>UI Opacity</td>"
 	. += "<td colspan = 2><a href='byond://?src=\ref[src];select_alpha=1'><b>[pref.UI_style_alpha]</b></a></td>"
@@ -118,6 +130,12 @@ var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 		pref.UI_style_color = UI_style_color_new
 		. = TOPIC_REFRESH
 
+	else if(href_list["select_highlight_color"])
+		var/UI_style_highlight_color_new = input(user, "Choose UI highlight color, dark colors are not recommended!", "Global Preference", pref.UI_style_highlight_color) as color|null
+		if(isnull(UI_style_highlight_color_new) || !CanUseTopic(user)) return TOPIC_NOACTION
+		pref.UI_style_highlight_color = UI_style_highlight_color_new
+		. = TOPIC_REFRESH
+
 	else if(href_list["select_alpha"])
 		var/UI_style_alpha_new = input(user, "Select UI alpha (transparency) level, between 50 and 255.", "Global Preference", pref.UI_style_alpha) as num|null
 		if(isnull(UI_style_alpha_new) || (UI_style_alpha_new < 50 || UI_style_alpha_new > 255) || !CanUseTopic(user))
@@ -129,6 +147,8 @@ var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 		switch(href_list["reset"])
 			if("ui")
 				pref.UI_style_color = initial(pref.UI_style_color)
+			if("highlight")
+				pref.UI_style_highlight_color = initial(pref.UI_style_highlight_color)
 			if("alpha")
 				pref.UI_style_alpha = initial(pref.UI_style_alpha)
 			if("mouseover_color")

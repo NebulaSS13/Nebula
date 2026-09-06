@@ -23,10 +23,6 @@
 	var/image/transverse_left // Images for displaying the range of the turret's transverse
 	var/image/transverse_right
 
-	// Sounds
-	var/turn_on_sound = null // Played when turret goes from off to on.
-	var/turn_off_sound = null // The above, in reverse.
-
 	// Shooting
 	var/obj/item/gun/installed_gun = /obj/item/gun/energy/laser/practice // Instance of the gun inside the turret.
 	var/gun_looting_prob = 25 // If the turret dies and then is disassembled, this is the odds of getting the gun.
@@ -132,19 +128,19 @@
 			return
 	update_use_power(POWER_USE_IDLE)
 
-/obj/machinery/turret/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/gun) && !installed_gun)
-		if(!user.try_unequip(I, src))
+/obj/machinery/turret/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/gun) && !installed_gun)
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		to_chat(user, SPAN_NOTICE("You install \the [I] into \the [src]!"))
-		installed_gun = I
+		to_chat(user, SPAN_NOTICE("You install \the [used_item] into \the [src]!"))
+		installed_gun = used_item
 		setup_gun()
 		return TRUE
 
-	if(istype(I, /obj/item/ammo_magazine) || istype(I, /obj/item/ammo_casing))
+	if(istype(used_item, /obj/item/ammo_magazine) || istype(used_item, /obj/item/ammo_casing))
 		var/obj/item/stock_parts/ammo_box/ammo_box = get_component_of_type(/obj/item/stock_parts/ammo_box)
 		if(istype(ammo_box))
-			return ammo_box.attackby(I, user)
+			return ammo_box.attackby(used_item, user)
 	. = ..()
 
 // This is called after the gun gets instantiated or slotted in.
@@ -323,12 +319,12 @@
 
 	else if(length(potential_targets))
 		while(length(potential_targets))
-			var/weakref/W = potential_targets[1]
-			potential_targets -= W
-			if(is_valid_target(W.resolve()))
-				target = W
+			var/weakref/target_ref = potential_targets[1]
+			potential_targets -= target_ref
+			if(is_valid_target(target_ref.resolve()))
+				target = target_ref
 				track_target()
-				return W
+				return target_ref
 
 	target = null
 	return null
@@ -368,8 +364,7 @@
 					return TRUE
 				if(!is_valid_target(target?.resolve()) && proj_gun.ammo_magazine.get_stored_ammo_count() != proj_gun.ammo_magazine.max_ammo)
 					return TRUE
-		else
-			return FALSE
+	return FALSE
 
 /obj/machinery/turret/emag_act(remaining_charges, mob/user, emag_source)
 	if(!emagged)
@@ -386,7 +381,7 @@
 	state_machine.evaluate()
 
 /obj/machinery/turret/power_change()
-	..()
+	. = ..()
 	state_machine.evaluate()
 
 /obj/machinery/turret/on_component_failure()

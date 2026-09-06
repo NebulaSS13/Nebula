@@ -3,7 +3,7 @@
 	result_amount       = 2
 	minimum_temperature = 100 CELSIUS
 
-/decl/chemical_reaction/drug/herbal/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
+/decl/chemical_reaction/drug/herbal/on_reaction(datum/reagents/holder, created_volume, list/reaction_data)
 	. = ..()
 	// Add plant matter to represent the herbs that the medicine has been leached out of.
 	holder?.add_reagent(/decl/material/solid/organic/plantmatter, created_volume)

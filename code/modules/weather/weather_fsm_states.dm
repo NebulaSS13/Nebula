@@ -12,8 +12,9 @@
 
 	var/icon = 'icons/effects/weather.dmi'
 	var/icon_state
+	var/particles/weather/particle_system
 
-	var/alpha =        210
+	var/alpha =        170
 	var/minimum_time = 2 MINUTES
 	var/maximum_time = 10 MINUTES
 	var/is_liquid =    FALSE
@@ -21,6 +22,30 @@
 
 	var/list/ambient_sounds
 	var/list/ambient_indoors_sounds
+
+/particles/weather
+	width = 32
+	height = 32
+	bound1 = list(-16, -16, -20)
+	bound2 = list(20, 20, 20)
+	count = 100
+	spawning = 2
+	lifespan = 2 SECONDS // they'll hopefully hit the bounds long before this runs out
+	// basic 3d projection matrix
+	// 16px in the z axis = 1 in the y axis, because perspective memes i guess?
+	transform = list(
+		1,  0,    0,  0,
+		0,  1,    0,  0,
+		0,  1/16, 0,  0,
+		0,  0,    0,  1,
+	)
+	fadein = 1
+	position = generator("box", list(-16, 16, -16), list(20, 20, 20)) // start at the top in the Y axis
+	/// How much does (east/west) wind affect the horizontal component of the particles?
+	var/wind_intensity = 2
+	/// What is the non-wind-affected velocity component of the particles?
+	/// A list of two lists (minimum and maximum velocities) passed to a generator.
+	var/list/base_velocity = list(list(0, -6, 0), list(0, -10, 0))
 
 /decl/state/weather/entered_state(datum/holder)
 	. = ..()
@@ -40,6 +65,15 @@
 		weather.color = mat.color
 	else
 		weather.color = COLOR_WHITE
+
+	if(ispath(particle_system))
+		for(var/obj/abstract/weather_particles/particle_source in weather.particle_sources)
+			particle_source.particles = new particle_system // separate datums so that you could make some turfs have special effects in the future
+		weather.update_particle_system() // sync wind, etc.
+	else
+		for(var/obj/abstract/weather_particles/particle_source in weather.particle_sources)
+			if(particle_source.particles)
+				QDEL_NULL(particle_source.particles)
 
 /decl/state/weather/proc/tick(var/obj/abstract/weather_system/weather)
 	return
@@ -148,7 +182,8 @@
 
 /decl/state/weather/rain
 	name =  "Light Rain"
-	icon_state = "rain"
+	icon_state = null//"rain"
+	particle_system = /particles/weather/rain
 	descriptor = "It is raining gently."
 	cosmetic_span_class = "notice"
 	is_liquid = TRUE
@@ -162,13 +197,19 @@
 	protected_messages =     list("Raindrops patter against $ITEM$.")
 	var/list/roof_messages = list("Rain patters against the roof.")
 
+/particles/weather/rain
+	icon = 'icons/effects/weather.dmi'
+	icon_state = "rain_particle" // animated particles don't seem to work...
+	wind_intensity = 1
+
 /decl/state/weather/rain/handle_roofed_effects(var/mob/living/M, var/obj/abstract/weather_system/weather)
 	if(length(roof_messages) && prob(cosmetic_message_chance))
 		to_chat(M, "<span class='[cosmetic_span_class]'>[pick(roof_messages)]</span>")
 
 /decl/state/weather/rain/storm
 	name =  "Heavy Rain"
-	icon_state = "storm"
+	icon_state = null // "storm"
+	particle_system = /particles/weather/rain/storm
 	descriptor = "It is raining heavily."
 	cosmetic_span_class = "warning"
 	transitions = list(
@@ -180,6 +221,11 @@
 	roof_messages =      list("Torrential rain thunders against the roof.")
 	ambient_sounds =     list('sound/effects/weather/rain_heavy.ogg')
 
+/particles/weather/rain/storm
+	wind_intensity = 3
+	spawning = 5
+	count = 200
+
 /decl/state/weather/rain/storm/tick(var/obj/abstract/weather_system/weather)
 	..()
 	if(prob(0.5))
@@ -188,6 +234,7 @@
 /decl/state/weather/rain/hail
 	name =  "Hail"
 	icon_state = "hail"
+	particle_system = null
 	descriptor = "It is hailing."
 	cosmetic_span_class = "danger"
 	is_liquid = FALSE

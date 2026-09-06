@@ -38,13 +38,13 @@
 
 // Override these for mobs that will respond to instructions from a rider.
 /mob/living/proc/handle_rider_harm_order(mob/user, atom/target, proximity)
-	return FALSE
+	return istype(ai) ? ai.process_handler_target(user, target, I_FLAG_HARM) : FALSE
 
 /mob/living/proc/handle_rider_grab_order(mob/user, atom/target, proximity)
-	return FALSE
+	return istype(ai) ? ai.process_handler_target(user, target, I_FLAG_GRAB) : FALSE
 
 /mob/living/proc/handle_rider_disarm_order(mob/user, atom/target, proximity)
-	return FALSE
+	return istype(ai) ? ai.process_handler_target(user, target, I_FLAG_DISARM) : FALSE
 
 /mob/living/proc/handle_rider_help_order(mob/user, atom/target, proximity)
-	return FALSE
+	return istype(ai) ? ai.process_handler_target(user, target, I_FLAG_HELP) : FALSE

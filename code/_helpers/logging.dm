@@ -26,7 +26,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	to_world_log("## TESTING: [msg][log_end]")
 
 /proc/game_log(category, text)
-	direct_output(diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
+	to_file(diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
 
 /proc/log_admin(text)
 	global.admin_log.Add(text)
@@ -179,7 +179,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	return "[..()] ([isnum(z) ? "[x],[y],[z]" : "0,0,0"])"
 
 /turf/get_log_info_line()
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors[z]
 	if(istype(O))
 		return "[..()] ([x],[y],[z] - [O.name]) ([loc ? loc.type : "NULL"])"
 	else
@@ -188,7 +188,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 /atom/movable/get_log_info_line()
 	var/turf/t = get_turf(src)
 	if(t)
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(t.z)]
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[t.z]
 		if(istype(O))
 			return "[..()] ([t]) ([t.x],[t.y],[t.z] - [O.name]) ([t.type])"
 		return "[..()] ([t]) ([t.x],[t.y],[t.z]) ([t.type])"
@@ -212,6 +212,8 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 		return json_encode(d)
 	return d.get_log_info_line()
 
+var/global/_gag_report_progress = 0
 /proc/report_progress(var/progress_message)
-	admin_notice("<span class='boldannounce'>[progress_message]</span>", R_DEBUG)
-	to_world_log(progress_message)
+	if(global._gag_report_progress <= 0)
+		admin_notice("<span class='boldannounce'>[progress_message]</span>", R_DEBUG)
+		to_world_log(progress_message)

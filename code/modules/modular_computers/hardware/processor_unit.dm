@@ -25,7 +25,7 @@
 
 /obj/item/stock_parts/computer/processor_unit/photonic
 	name = "photonic processor"
-	desc = "An advanced experimental CPU that uses photonic core instead of regular circuitry. It is more power efficient than its elecron analog."
+	desc = "An advanced experimental CPU that uses photonic core instead of regular circuitry. It is more power efficient than its electron analogue."
 	icon_state = "cpu_normal_photonic"
 	hardware_size = 2
 	power_usage = 50
@@ -36,7 +36,7 @@
 
 /obj/item/stock_parts/computer/processor_unit/photonic/small
 	name = "photonic microprocessor"
-	desc = "An advanced miniaturised CPU for use in portable devices. It uses photonic core instead of regular circuitry. It is more power efficient than its elecron analog."
+	desc = "An advanced miniaturised CPU for use in portable devices. It uses photonic core instead of regular circuitry. It is more power efficient than its electron analogue."
 	icon_state = "cpu_small_photonic"
 	hardware_size = 1
 	power_usage = 10

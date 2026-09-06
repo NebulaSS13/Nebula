@@ -6,8 +6,8 @@
 	randpixel = 12
 	throw_speed = 10
 	throw_range = 15
-	sharp = 1
-	edge =  1
+	sharp = TRUE
+	edge = TRUE
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	item_flags = ITEM_FLAG_IS_WEAPON
@@ -25,5 +25,5 @@
 
 /obj/item/star/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		user.mob_throw_item(target, src)

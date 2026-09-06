@@ -13,7 +13,8 @@
 
 	tally += speed
 
-	if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
+	// Gross, todo slowdown for robots
+	if(istype(get_active_held_item(), /obj/item/borg/combat/mobility))
 		tally-=3
 
 	return tally+get_config_value(/decl/config/num/movement_robot)

@@ -31,7 +31,7 @@ var/global/list/server_whitelist
 	to_file(write_file, jointext(global.server_whitelist, "\n"))
 
 var/global/list/alien_whitelist = list()
-/hook/startup/proc/loadAlienWhitelist()
+/proc/try_load_alien_whitelist()
 	if(get_config_value(/decl/config/toggle/use_alien_whitelist))
 		if(get_config_value(/decl/config/toggle/use_alien_whitelist_sql))
 			if(!load_alienwhitelistSQL())
@@ -63,8 +63,8 @@ var/global/list/alien_whitelist = list()
 			alien_whitelist[row["ckey"]] = list(row["race"])
 	return TRUE
 
-/proc/is_species_whitelisted(mob/M, var/species_name)
-	var/decl/species/S = get_species_by_key(species_name)
+/proc/is_species_whitelisted(mob/M, var/species_uid)
+	var/decl/species/S = decls_repository.get_decl_by_id(species_uid)
 	return is_alien_whitelisted(M, S)
 
 /proc/is_alien_whitelisted(mob/M, var/species)
@@ -74,20 +74,20 @@ var/global/list/alien_whitelist = list()
 
 	// Forbidden languages do not care about admin rights.
 	if(istype(species,/decl/language))
-		var/decl/language/L = species
-		if(L.flags & LANG_FLAG_FORBIDDEN)
+		var/decl/language/language = species
+		if(language.language_flags & LANG_FLAG_FORBIDDEN)
 			return FALSE
 
 	if(check_rights(R_ADMIN, FALSE, M))
 		return TRUE
 
 	if(istype(species,/decl/language))
-		var/decl/language/L = species
-		if(L.flags & LANG_FLAG_RESTRICTED)
+		var/decl/language/language = species
+		if(language.language_flags & LANG_FLAG_RESTRICTED)
 			return FALSE
-		if(!get_config_value(/decl/config/toggle/use_alien_whitelist) || !(L.flags & LANG_FLAG_WHITELISTED))
+		if(!get_config_value(/decl/config/toggle/use_alien_whitelist) || !(language.language_flags & LANG_FLAG_WHITELISTED))
 			return TRUE
-		return whitelist_lookup(L.name, M.ckey)
+		return whitelist_lookup(language.name, M.ckey)
 
 	if(istype(species,/decl/species))
 		var/decl/species/S = species
@@ -95,7 +95,7 @@ var/global/list/alien_whitelist = list()
 			return FALSE
 		if(!get_config_value(/decl/config/toggle/use_alien_whitelist) || !(S.spawn_flags & SPECIES_IS_WHITELISTED))
 			return TRUE
-		return whitelist_lookup(S.get_root_species_name(M), M.ckey)
+		return whitelist_lookup(S.uid, M.ckey) || whitelist_lookup(S.name, M.ckey)
 
 	// Check for arbitrary text whitelisting.
 	return istext(species) ? whitelist_lookup(species, M.ckey) : FALSE

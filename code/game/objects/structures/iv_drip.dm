@@ -37,10 +37,9 @@
 	base.icon_state = "[beaker ? "beaker" : "nothing"][attached ? "_hooked" : ""]"
 	add_overlay(base)
 
-	if(beaker)
-		var/datum/reagents/reagents = beaker.reagents
-		var/percent = round((reagents.total_volume / beaker.volume) * 100)
-		if(reagents.total_volume)
+	if(beaker?.reagents)
+		var/percent = round((REAGENT_TOTAL_VOLUME(beaker.reagents) / REAGENT_MAXIMUM_VOLUME(beaker.reagents)) * 100)
+		if(REAGENT_TOTAL_VOLUME(beaker.reagents))
 			var/mutable_appearance/filling = mutable_appearance(icon, "reagent")
 			switch(percent)
 				if(0)
@@ -59,7 +58,7 @@
 					filling.icon_state = "reagent80"
 				if(91 to INFINITY)
 					filling.icon_state = "reagent100"
-			filling.color = reagents.get_color()
+			filling.color = beaker.reagents.get_color()
 			add_overlay(filling)
 
 		if(istype(beaker, /obj/item/chems/ivbag))
@@ -84,15 +83,15 @@
 		return TRUE
 	. = ..()
 
-/obj/structure/iv_drip/attackby(obj/item/W, mob/user)
-	if (istype(W, /obj/item/chems))
+/obj/structure/iv_drip/attackby(obj/item/used_item, mob/user)
+	if (istype(used_item, /obj/item/chems))
 		if(!isnull(src.beaker))
 			to_chat(user, "There is already a reagent container loaded!")
 			return TRUE
-		if(!user.try_unequip(W, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		beaker = W
-		to_chat(user, "You attach \the [W] to \the [src].")
+		beaker = used_item
+		to_chat(user, "You attach \the [used_item] to \the [src].")
 		queue_icon_update()
 		return TRUE
 	else
@@ -120,11 +119,11 @@
 		return
 
 	if(mode) // Give blood
-		if(beaker.volume > 0)
+		if(REAGENT_TOTAL_VOLUME(beaker.reagents) > 0)
 			beaker.reagents.trans_to_mob(attached, transfer_amount, CHEM_INJECT)
 			queue_icon_update()
 	else // Take blood
-		var/amount = beaker.reagents.maximum_volume - beaker.reagents.total_volume
+		var/amount = REAGENT_MAXIMUM_VOLUME(beaker.reagents) - REAGENT_TOTAL_VOLUME(beaker.reagents)
 		amount = min(amount, 4)
 
 		if(amount == 0) // If the beaker is full, ping
@@ -186,24 +185,20 @@
 	mode = !mode
 	to_chat(usr, "The IV drip is now [mode ? "injecting" : "taking blood"].")
 
-/obj/structure/iv_drip/examine(mob/user, distance)
+/obj/structure/iv_drip/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-
 	if (distance >= 2)
 		return
-
-	to_chat(user, "The IV drip is [mode ? "injecting" : "taking blood"].")
-	to_chat(user, "It is set to transfer [transfer_amount]u of chemicals per cycle.")
-
+	. += "The IV drip is [mode ? "injecting" : "taking blood"]."
+	. += "It is set to transfer [transfer_amount]u of chemicals per cycle."
 	if(beaker)
-		if(beaker.reagents && beaker.reagents.total_volume)
-			to_chat(usr, SPAN_NOTICE("Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid."))
+		if(REAGENT_TOTAL_VOLUME(beaker.reagents))
+			. += SPAN_NOTICE("Attached is \a [beaker] with [REAGENT_TOTAL_VOLUME(beaker.reagents)] units of liquid.")
 		else
-			to_chat(usr, SPAN_NOTICE("Attached is an empty [beaker]."))
+			. += SPAN_NOTICE("Attached is an empty [beaker].")
 	else
-		to_chat(usr, SPAN_NOTICE("No chemicals are attached."))
-
-	to_chat(usr, SPAN_NOTICE("[attached ? attached : "No one"] is hooked up to it."))
+		. += SPAN_NOTICE("No chemicals are attached.")
+	. += SPAN_NOTICE("[attached ? attached : "No one"] is hooked up to it.")
 
 /obj/structure/iv_drip/proc/rip_out()
 	visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")

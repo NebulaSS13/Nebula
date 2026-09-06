@@ -1,13 +1,16 @@
 #include "unishi_areas.dm"
 #include "unishi_jobs.dm"
+#include "../../../mods/content/integrated_electronics/_integrated_electronics.dme" // this is used for just one prop, todo: remove?
 #include "../../../mods/content/xenobiology/_xenobiology.dme"
+#include "../../../mods/content/supermatter/_supermatter.dme"
+#include "../../../mods/content/beekeeping/_beekeeping.dme"
 
 /obj/abstract/submap_landmark/joinable_submap/unishi
-	name = "SRV Verne"
+	name      = "SRV Verne"
 	archetype = /decl/submap_archetype/derelict/unishi
 
 /decl/submap_archetype/derelict/unishi
-	descriptor = "derelict research vessel"
+	name      = "derelict research vessel"
 	crew_jobs = list(
 		/datum/job/submap/unishi_crew,
 		/datum/job/submap/unishi_researcher
@@ -29,7 +32,7 @@
 	name = "University Ship"
 	description = "CTI research ship."
 	suffixes = list("unishi/unishi-1.dmm", "unishi/unishi-2.dmm", "unishi/unishi-3.dmm")
-	cost = 2
+	cost = 1
 	area_usage_test_exempted_root_areas = list(/area/unishi)
 
 
@@ -46,12 +49,12 @@
 	landmark_tag = "nav_unishi_3"
 
 
-/obj/machinery/power/supermatter/randomsample
+/obj/structure/supermatter/randomsample
 	name = "experimental supermatter sample"
 	icon = 'icons/obj/supermatter_32.dmi'
 	icon_state = "supermatter_shard"
 
-/obj/machinery/power/supermatter/randomsample/Initialize()
+/obj/structure/supermatter/randomsample/Initialize()
 	. = ..()
 	nitrogen_retardation_factor = rand(0.01, 1)	  //Higher == N2 slows reaction more
 	thermal_release_modifier = rand(100, 1000000) //Higher == more heat released during reaction
@@ -66,7 +69,7 @@
 	charging_factor = rand(0, 1)
 	damage_rate_limit = rand( 1, 10)		//damage rate cap at power = 300, scales linearly with power
 
-/obj/machinery/power/supermatter/inert
+/obj/structure/supermatter/inert
 	name = "experimental supermatter sample"
 	icon = 'icons/obj/supermatter_32.dmi'
 	icon_state = "supermatter_shard"
@@ -84,14 +87,14 @@
 	desc = "Are you sure you want to open this?"
 
 /obj/structure/closet/crate/secure/large/supermatter/experimentalsm/WillContain()
-	return list(/obj/machinery/power/supermatter/randomsample)
+	return list(/obj/structure/supermatter/randomsample)
 /obj/item/paper/prof1
 	name = "error log"
 	info = "<large> COMPUTER ID: 15231 <br> Attempting recovery of document directory. <br> Three files recovered <br> Printing file (1/2) <br> </large> ... about your concerns. I told you that the shielding is strong enough to avoid ANY leaks of radiation or hazardous materials. The entire lab is 100% isolated from the ship in terms of even the air supply. Leave me and my students the fuck alone. Your job is to maintain the fucking reactor an !#@!dqma211.<br> <large> File (2/3) Tested SM </large> This thing has a lot of potential. It doesn't produce any measurable levels of gas, or even significant thermal signature. The potential is nearly limitless. We've had to fine tune our activation procedures as even a short beam of the emitter seems to activate this thing. CTI Engineering dept still won't fucking answer where they got this thing, but it's simply amazing. I've sent an ema #@^%da12k"
 
 /obj/item/paper/prof2
 	name = "error log"
-	info = "<large> COMPUTER ID: 15131 <br> Attempting recovery of document directory. <br> Three files recovered <br> Printing file (1/2) <br> </large> Email to iodc@net <br> To whom it may concern, <br> I recieved your email today in regards to the research I am conducting. You have no legal right to question our research or attempt to block it. Per article 323, scientific research is protected information, that you have absolutely zero claim to. The compound is secret in composition, but I can fully promise you that it contains absolutely no proprietary molecules, and thus you have no claim whatsoever to it or the technologies to it. Your threats are laughable at best, and have been forwarded to CTI legal. Do not contact me aga!#!41asjw. <br> <large> Printing file (2/2) <br> </large> Email from fuckyou@12cmal <br> We have ways of making you comply. "
+	info = "<large> COMPUTER ID: 15131 <br> Attempting recovery of document directory. <br> Three files recovered <br> Printing file (1/2) <br> </large> Email to iodc@net <br> To whom it may concern, <br> I received your email today in regards to the research I am conducting. You have no legal right to question our research or attempt to block it. Per article 323, scientific research is protected information, that you have absolutely zero claim to. The compound is secret in composition, but I can fully promise you that it contains absolutely no proprietary molecules, and thus you have no claim whatsoever to it or the technologies to it. Your threats are laughable at best, and have been forwarded to CTI legal. Do not contact me aga!#!41asjw. <br> <large> Printing file (2/2) <br> </large> Email from fuckyou@12cmal <br> We have ways of making you comply. "
 
 /obj/machinery/computer/log_printer
 	name = "Computer"

@@ -7,6 +7,7 @@
 /decl/interaction_handler/clothing_toggle/untied
 	name = "Tie Or Untie"
 	state_decl_type = /decl/clothing_state_modifier/untied
+	examine_desc = "tie or untie $TARGET_THEM$"
 
 /obj/item/clothing/proc/toggle_untied_verb()
 

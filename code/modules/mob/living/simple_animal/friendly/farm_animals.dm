@@ -59,7 +59,7 @@
 	var/atom/food = find_edible_atom(view(1, body.loc))
 	if(istype(food))
 		body.stop_automove()
-		body.a_intent = I_HELP
+		body.set_intent(I_FLAG_HELP)
 		body.ClickOn(food)
 	else if(!LAZYLEN(body.grabbed_by))
 		food = find_edible_atom(oview(5, body.loc))
@@ -102,7 +102,7 @@
 	see_in_dark = 6
 	max_health = 50
 	butchery_data = /decl/butchery_data/animal/ruminant/cow
-
+	// When cows can accept food items: /obj/item/food/hay
 	var/static/list/responses = list(
 		"looks at you imploringly",
 		"looks at you pleadingly",
@@ -148,21 +148,21 @@
 	var/decl/skill/examine_skill = SKILL_BOTANY // for maps that change the default skills, or for alien eggs that need science/medical/anatomy instead
 	var/examine_difficulty = SKILL_ADEPT
 
-/mob/living/simple_animal/chick/examine(mob/user, distance, infix, suffix)
+/mob/living/simple_animal/chick/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(!user.skill_check(examine_skill, examine_difficulty))
 		var/decl/skill/examine_skill_decl = GET_DECL(examine_skill)
-		to_chat(user, SPAN_SUBTLE("If you knew more about [lowertext(examine_skill_decl.name)], you could learn additional information about this."))
+		. += SPAN_SUBTLE("If you knew more about [lowertext(examine_skill_decl.name)], you could learn additional information about this.")
 		return
 	switch(amount_grown)
 		if(0 to 20)
-			to_chat(user, SPAN_NOTICE("It's still young."))
+			. += SPAN_NOTICE("It's still young.")
 		if(20 to 40)
-			to_chat(user, SPAN_NOTICE("It's starting to grow in its adult feathers."))
+			. += SPAN_NOTICE("It's starting to grow in its adult feathers.")
 		if(40 to 80)
-			to_chat(user, SPAN_NOTICE("It's grown in almost all its adult feathers."))
+			. += SPAN_NOTICE("It's grown in almost all its adult feathers.")
 		if(80 to 100)
-			to_chat(user, SPAN_NOTICE("It's almost fully grown."))
+			. += SPAN_NOTICE("It's almost fully grown.")
 
 /datum/mob_controller/chick
 	emote_speech = list("Cherp.","Cherp?","Chirrup.","Cheep!")
@@ -243,14 +243,14 @@ var/global/chicken_count = 0
 	if(.)
 		global.chicken_count -= 1
 
-/mob/living/simple_animal/fowl/chicken/attackby(var/obj/item/O, var/mob/user)
-	if(!istype(O, /obj/item/food))
+/mob/living/simple_animal/fowl/chicken/attackby(var/obj/item/used_item, var/mob/user)
+	if(!istype(used_item, /obj/item/food))
 		return ..()
-	var/obj/item/food/G = O //feedin' dem chickens
+	var/obj/item/food/G = used_item //feedin' dem chickens
 	if(findtext(G.get_grown_tag(), "wheat")) // includes chopped, crushed, dried etc.
 		if(!stat && eggsleft < 4)
-			user.visible_message(SPAN_NOTICE("[user] feeds \the [O] to \the [src]! It clucks happily."), SPAN_NOTICE("You feed \the [O] to \the [src]! It clucks happily."), SPAN_NOTICE("You hear clucking."))
-			qdel(O)
+			user.visible_message(SPAN_NOTICE("[user] feeds \the [used_item] to \the [src]! It clucks happily."), SPAN_NOTICE("You feed \the [used_item] to \the [src]! It clucks happily."), SPAN_NOTICE("You hear clucking."))
+			qdel(used_item)
 			eggsleft += rand(1, 2)
 		else
 			to_chat(user, SPAN_NOTICE("\The [src] doesn't seem hungry!"))
@@ -303,19 +303,19 @@ var/global/chicken_count = 0
 	var/decl/skill/examine_skill = SKILL_BOTANY // for maps that change the default skills, or for alien eggs that need science/medical/anatomy instead
 	var/examine_difficulty = SKILL_ADEPT
 
-/obj/item/food/egg/examine(mob/user, distance, infix, suffix)
+/obj/item/food/egg/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(isnull(examine_difficulty) || !ispath(examine_skill))
 		return
 	if(!user.skill_check(examine_skill, examine_difficulty))
 		var/decl/skill/examine_skill_decl = GET_DECL(examine_skill)
-		to_chat(user, SPAN_SUBTLE("If you knew more about [lowertext(examine_skill_decl.name)], you could learn additional information about this."))
+		. += SPAN_SUBTLE("If you knew more about [lowertext(examine_skill_decl.name)], you could learn additional information about this.")
 		return
 	if(distance > 1)
-		to_chat(user, SPAN_SUBTLE("You're too far away to learn anything about this."))
+		. += SPAN_SUBTLE("You're too far away to learn anything about this.")
 		return
 	if(!user.get_held_slot_for_item(src))
-		to_chat(user, SPAN_NOTICE("You need to be holding \the [src] to examine it closer."))
+		. += SPAN_NOTICE("You need to be holding \the [src] to examine it closer.")
 		return
 	// need a lit candle or lantern to check
 	var/too_hot = FALSE
@@ -328,18 +328,18 @@ var/global/chicken_count = 0
 			if(!too_hot)
 				break
 	if(too_hot)
-		to_chat(user, SPAN_WARNING("You can't use \the [candle] to examine \the [src], that would fry it!"))
+		. += SPAN_WARNING("You can't use \the [candle] to examine \the [src], that would fry it!")
 		return
 	else if(!candle)
-		to_chat(user, SPAN_NOTICE("You need to be holding a light source to examine this closer."))
+		. += SPAN_NOTICE("You need to be holding a light source to examine this closer.")
 		return
 	switch(amount_grown)
 		if(0)
-			to_chat(user, SPAN_NOTICE("\The [src] is unfertilized."))
+			. += SPAN_NOTICE("\The [src] is unfertilized.")
 		if(10 to 80)
-			to_chat(user, SPAN_NOTICE("There's something growing inside \the [src]."))
+			. += SPAN_NOTICE("There's something growing inside \the [src].")
 		if(80 to 100)
-			to_chat(user, SPAN_NOTICE("\The [src] is about to hatch!"))
+			. += SPAN_NOTICE("\The [src] is about to hatch!")
 
 /obj/item/food/egg/Destroy()
 	if(amount_grown)

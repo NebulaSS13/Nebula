@@ -89,6 +89,7 @@
 
 /decl/interaction_handler/remove_id/wallet
 	expected_target_type = /obj/item/wallet
+	examine_desc = "remove an ID card"
 
 /decl/interaction_handler/remove_id/wallet/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..() && ishuman(user)

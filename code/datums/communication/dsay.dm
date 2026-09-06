@@ -10,8 +10,9 @@
 	mute_setting = MUTE_DEADCHAT
 	show_preference_setting = /datum/client_preference/show_dsay
 
+// Changes the default speech_method kwarg.
 /decl/communication_channel/dsay/communicate(communicator, message, speech_method = /decl/dsay_communication/say)
-	..()
+	return ..()
 
 /decl/communication_channel/dsay/can_communicate(var/client/communicator, var/message, var/speech_method_type)
 	var/decl/dsay_communication/speech_method = GET_DECL(speech_method_type)
@@ -61,12 +62,8 @@
 
 	keyname = C.key
 	if(C.mob) //Most of the time this is the dead/observer mob; we can totally use him if there is no better name
-		var/mindname
+		var/mindname = C.mob.mind?.name // the mind's "original name"
 		var/realname = C.mob.real_name
-		if(C.mob.mind)
-			mindname = C.mob.mind.name
-			if(C.mob.mind.original && C.mob.mind.original.real_name)
-				realname = C.mob.mind.original.real_name
 		if(mindname && mindname != realname)
 			name = "[realname] died as [mindname]"
 		else

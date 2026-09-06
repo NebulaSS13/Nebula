@@ -22,10 +22,10 @@
 	charging = null
 	. = ..()
 
-/obj/machinery/recharger/attackby(obj/item/G, mob/user)
+/obj/machinery/recharger/attackby(obj/item/used_item, mob/user)
 	var/allowed = 0
 	for (var/allowed_type in allowed_devices)
-		if (istype(G, allowed_type)) allowed = 1
+		if (istype(used_item, allowed_type)) allowed = 1
 
 	if(allowed)
 		. = TRUE
@@ -34,24 +34,24 @@
 			return
 		// Checks to make sure the recharger is powered.
 		if(stat & NOPOWER)
-			to_chat(user, "<span class='warning'>\The [src] blinks red as you try to insert \the [G]!</span>")
+			to_chat(user, "<span class='warning'>\The [src] blinks red as you try to insert \the [used_item]!</span>")
 			return
-		if (istype(G, /obj/item/gun/energy/))
-			var/obj/item/gun/energy/E = G
+		if (istype(used_item, /obj/item/gun/energy/))
+			var/obj/item/gun/energy/E = used_item
 			if(E.self_recharge)
 				to_chat(user, "<span class='notice'>You can't find a charging port on \the [E].</span>")
 				return
-		if(!G.get_cell())
+		if(!used_item.get_cell())
 			to_chat(user, "This device does not have a battery installed.")
 			return
 
-		if(user.try_unequip(G))
-			G.forceMove(src)
-			charging = G
+		if(user.try_unequip(used_item))
+			used_item.forceMove(src)
+			charging = used_item
 			update_icon()
 		return
 
-	if(portable && IS_WRENCH(G) && !panel_open)
+	if(portable && IS_WRENCH(used_item) && !panel_open)
 		. = TRUE
 		if(charging)
 			to_chat(user, "<span class='warning'>Remove [charging] first!</span>")
@@ -82,11 +82,11 @@
 		update_use_power(POWER_USE_IDLE)
 		icon_state = icon_state_idle
 	else
-		var/obj/item/cell/C = charging.get_cell()
-		if(istype(C))
-			if(!C.fully_charged())
+		var/obj/item/cell/cell = charging.get_cell()
+		if(istype(cell))
+			if(!cell.fully_charged())
 				icon_state = icon_state_charging
-				C.give(active_power_usage*CELLRATE)
+				cell.give(active_power_usage*CELLRATE)
 				update_use_power(POWER_USE_ACTIVE)
 			else
 				icon_state = icon_state_charged
@@ -97,9 +97,9 @@
 		..(severity)
 		return
 	if(charging)
-		var/obj/item/cell/C = charging.get_cell()
-		if(istype(C))
-			C.emp_act(severity)
+		var/obj/item/cell/cell = charging.get_cell()
+		if(istype(cell))
+			cell.emp_act(severity)
 	..(severity)
 
 /obj/machinery/recharger/on_update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
@@ -108,18 +108,15 @@
 	else
 		icon_state = icon_state_idle
 
-/obj/machinery/recharger/examine(mob/user)
+/obj/machinery/recharger/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(isnull(charging))
-		return
-
-	var/obj/item/cell/C = charging.get_cell()
-	if(!isnull(C))
-		to_chat(user, "Item's charge at [round(C.percent())]%.")
+	var/obj/item/cell/cell = charging?.get_cell()
+	if(cell)
+		. += "\The [charging] is charged to [round(cell.percent())]%."
 
 /obj/machinery/recharger/wallcharger
 	name = "wall recharger"
-	desc = "A heavy duty wall recharger specialized for energy weaponry."
+	desc = "A heavy-duty wall recharger specialized for energy weaponry."
 	icon = 'icons/obj/machines/recharger_wall.dmi'
 	icon_state = "wrecharger0"
 	active_power_usage = 50 KILOWATTS	//It's more specialized than the standalone recharger (guns and batons only) so make it more powerful

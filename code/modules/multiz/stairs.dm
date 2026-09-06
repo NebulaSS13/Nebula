@@ -63,6 +63,7 @@
 /obj/structure/stairs/long
 	icon = 'icons/obj/stairs_64.dmi'
 	bound_height = 64
+	appearance_flags = /obj/structure/stairs::appearance_flags & ~TILE_BOUND
 
 /obj/structure/stairs/long/north
 	dir = NORTH

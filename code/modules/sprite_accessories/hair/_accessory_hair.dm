@@ -43,7 +43,6 @@
 	bodytypes_allowed           = null
 	bodytypes_denied            = null
 	species_allowed             = null
-	subspecies_allowed          = null
 	bodytype_categories_allowed = null
 	bodytype_categories_denied  = null
 	body_flags_allowed          = null

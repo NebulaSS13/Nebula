@@ -53,7 +53,7 @@
 #define      STATUS_HUD 2 // Alive, dead, diseased, etc.
 #define          ID_HUD 3 // The job asigned to your ID.
 #define      WANTED_HUD 4 // Wanted, released, paroled, security status.
-#define    IMPLOYAL_HUD 5 // Loyality implant.
+#define    IMPLOYAL_HUD 5 // Loyalty implant.
 #define     IMPCHEM_HUD 6 // Chemical implant.
 #define    IMPTRACK_HUD 7 // Tracking implant.
 #define SPECIALROLE_HUD 8 // AntagHUD image.
@@ -87,27 +87,29 @@
 #define EVENT_LEVEL_MAJOR    3
 
 //Area flags, possibly more to come
-#define AREA_FLAG_RAD_SHIELDED         BITFLAG(1)  // Shielded from radiation, clearly.
-#define AREA_FLAG_EXTERNAL             BITFLAG(2)  // External as in exposed to space, not outside in a nice, green, forest.
-#define AREA_FLAG_ION_SHIELDED         BITFLAG(3)  // Shielded from ionospheric anomalies.
-#define AREA_FLAG_IS_NOT_PERSISTENT    BITFLAG(4)  // SSpersistence will not track values from this area.
-#define AREA_FLAG_IS_BACKGROUND        BITFLAG(5)  // Blueprints can create areas on top of these areas. Cannot edit the name of or delete these areas.
-#define AREA_FLAG_MAINTENANCE          BITFLAG(6)  // Area is a maintenance area.
-#define AREA_FLAG_SHUTTLE              BITFLAG(7)  // Area is a shuttle area.
-#define AREA_FLAG_HALLWAY              BITFLAG(8)  // Area is a public hallway suitable for event selection
-#define AREA_FLAG_PRISON               BITFLAG(9)  // Area is a prison for the purposes of brigging objectives.
-#define AREA_FLAG_HOLY                 BITFLAG(10) // Area is holy for the purposes of marking turfs as cult-resistant.
-#define AREA_FLAG_SECURITY             BITFLAG(11) // Area is security for the purposes of newscaster init.
-#define AREA_FLAG_HIDE_FROM_HOLOMAP    BITFLAG(12) // if we shouldn't be drawn on station holomaps
+#define AREA_FLAG_RAD_SHIELDED            BITFLAG(1)  // Shielded from radiation, clearly.
+#define AREA_FLAG_EXTERNAL                BITFLAG(2)  // External as in exposed to space, not outside in a nice, green, forest.
+#define AREA_FLAG_ION_SHIELDED            BITFLAG(3)  // Shielded from ionospheric anomalies.
+#define AREA_FLAG_NO_LEGACY_PERSISTENCE   BITFLAG(4)  // SSpersistence will not track values from this area.
+#define AREA_FLAG_IS_BACKGROUND           BITFLAG(5)  // Blueprints can create areas on top of these areas. Cannot edit the name of or delete these areas.
+#define AREA_FLAG_MAINTENANCE             BITFLAG(6)  // Area is a maintenance area.
+#define AREA_FLAG_SHUTTLE                 BITFLAG(7)  // Area is a shuttle area.
+#define AREA_FLAG_HALLWAY                 BITFLAG(8)  // Area is a public hallway suitable for event selection
+#define AREA_FLAG_PRISON                  BITFLAG(9)  // Area is a prison for the purposes of brigging objectives.
+#define AREA_FLAG_HOLY                    BITFLAG(10) // Area is holy for the purposes of marking turfs as cult-resistant.
+#define AREA_FLAG_SECURITY                BITFLAG(11) // Area is security for the purposes of newscaster init.
+#define AREA_FLAG_HIDE_FROM_HOLOMAP       BITFLAG(12) // if we shouldn't be drawn on station holomaps
+#define AREA_FLAG_ALLOW_LEVEL_PERSISTENCE BITFLAG(13) // Whether or not this area should pass changed turfs to SSpersistence.
+#define AREA_FLAG_CONSTRUCTED             BITFLAG(13) // Set base flooring above this area to plating.
 
 //Map template flags
-#define TEMPLATE_FLAG_ALLOW_DUPLICATES   BITFLAG(0)  // Lets multiple copies of the template to be spawned
-#define TEMPLATE_FLAG_SPAWN_GUARANTEED   BITFLAG(1)  // Makes it ignore away site budget and just spawn (only for away sites)
-#define TEMPLATE_FLAG_CLEAR_CONTENTS     BITFLAG(2)  // if it should destroy objects it spawns on top of
-#define TEMPLATE_FLAG_NO_RUINS           BITFLAG(3)  // if it should forbid ruins from spawning on top of it
-#define TEMPLATE_FLAG_NO_RADS            BITFLAG(4)  // Removes all radiation from the template after spawning.
-#define TEMPLATE_FLAG_TEST_DUPLICATES    BITFLAG(5)  // Makes unit testing attempt to spawn mutliple copies of this template. Assumes unit testing is spawning at least one copy.
-#define TEMPLATE_FLAG_GENERIC_REPEATABLE BITFLAG(6) // Template can be picked repeatedly for the same level gen run.
+#define TEMPLATE_FLAG_ALLOW_DUPLICATES    BITFLAG(0)  // Lets multiple copies of the template to be spawned
+#define TEMPLATE_FLAG_SPAWN_GUARANTEED    BITFLAG(1)  // Makes it ignore away site budget and just spawn (only for away sites)
+#define TEMPLATE_FLAG_CLEAR_CONTENTS      BITFLAG(2)  // if it should destroy objects it spawns on top of
+#define TEMPLATE_FLAG_NO_RUINS            BITFLAG(3)  // if it should forbid ruins from spawning on top of it
+#define TEMPLATE_FLAG_NO_RADS             BITFLAG(4)  // Removes all radiation from the template after spawning.
+#define TEMPLATE_FLAG_TEST_DUPLICATES     BITFLAG(5)  // Makes unit testing attempt to spawn mutliple copies of this template. Assumes unit testing is spawning at least one copy.
+#define TEMPLATE_FLAG_GENERIC_REPEATABLE  BITFLAG(6) // Template can be picked repeatedly for the same level gen run.
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
@@ -141,6 +143,11 @@
 #define CONFIG_SERVER_JOBS_WHITELIST    2
 #define CONFIG_SERVER_JOIN_WHITELIST    3
 #define CONFIG_SERVER_CONNECT_WHITELIST 4
+
+// Coating name color config enums
+#define CONFIG_COATING_COLOR_NONE       1
+#define CONFIG_COATING_COLOR_MIXTURE    2
+#define CONFIG_COATING_COLOR_COMPONENTS 3
 
 // Location for server whitelist file to load from.
 #define CONFIG_SERVER_WHITELIST_FILE "config/server_whitelist.txt"
@@ -176,8 +183,6 @@
 #define CELLSIZE (world.icon_size/CELLS)	//Size of a cell in pixels
 
 #define PIXEL_MULTIPLIER WORLD_ICON_SIZE/32
-
-#define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
 
 //Error handler defines
 #define ERROR_USEFUL_LEN 2
@@ -252,6 +257,7 @@
 
 //Inserts 'a' or 'an' before X in ways \a doesn't allow
 #define ADD_ARTICLE(X) "[(lowertext(X[1]) in global.vowels) ? "an" : "a"] [X]"
+#define ADD_ARTICLE_GENDER(X, GENDER) (GENDER == PLURAL ? "some [X]" : ADD_ARTICLE(X))
 
 //Request Console Department Types
 #define RC_ASSIST 1		//Request Assistance
@@ -269,11 +275,6 @@
 #define num2hex(num) num2text(num, 2, 16)
 /// Returns the hex value of a number given a value assumed to be a base-ten value, padded to a supplied minimum length.
 #define num2hex_padded(num, len) num2text(num, len, 16)
-
-//NOTE: INTENT_HOTKEY_* defines are not actual intents!
-//they are here to support hotkeys
-#define INTENT_HOTKEY_LEFT  "left"
-#define INTENT_HOTKEY_RIGHT "right"
 
 //Turf/area values for 'this space is outside' checks
 #define OUTSIDE_AREA null
@@ -386,3 +387,24 @@
 #define SPACE_MOVE_SUPPORTED (-1) //! Mob should run space-slipping checks.
 #define SPACE_MOVE_FORBIDDEN   0  //! Mob should begin spacedrift.
 #define SPACE_MOVE_PERMITTED   1  //! Mob should stop/prevent spacedrift.
+
+// Default UI style applied to client prefs.
+#define DEFAULT_UI_STYLE /decl/ui_style/midnight
+
+// Indicates a modifier will never expire.
+#define MOB_MODIFIER_INDEFINITE (-1)
+
+// Indicators for attack checking proc.
+#define MM_ATTACK_TYPE_WEAPON      0
+#define MM_ATTACK_TYPE_THROWN      1
+#define MM_ATTACK_TYPE_PROJECTILE  2
+
+#define MM_ATTACK_RESULT_NONE      0
+#define MM_ATTACK_RESULT_DEFLECTED BITFLAG(0)
+#define MM_ATTACK_RESULT_BLOCKED   BITFLAG(1)
+
+// Effectively a speed modifier for how fast pollen is produced by flowering plants. Pollen per second.
+// In theory, one pollen every 5 seconds (at time of writing)
+#define POLLEN_PER_SECOND 0.2
+#define POLLEN_PRODUCTION_MULT (POLLEN_PER_SECOND * (SSplants.wait / 10))
+#define MAX_POLLEN_PER_FLOWER 10

@@ -9,6 +9,7 @@
 	prone = TRUE
 	posture_change_message = "lying down"
 	selectable_type = /decl/posture/lying/deliberate
+	blood_volume_multiplier = 1.25
 
 /decl/posture/lying/deliberate
 	name = "resting"
@@ -21,3 +22,4 @@
 	is_user_selectable = TRUE
 	deliberate = TRUE
 	prone = TRUE
+	blood_volume_multiplier = 1.1 // sitting is a little less intense than standing

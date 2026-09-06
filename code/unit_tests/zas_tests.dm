@@ -12,7 +12,7 @@
 
 /datum/unit_test/zas_area_test
 	name = "ZAS: Area Test Template"
-	template = /datum/unit_test/zas_area_test
+	abstract_type = /datum/unit_test/zas_area_test
 	var/area_path = null                    // Put the area you are testing here.
 	var/expectation = UT_NORMAL             // See defines above.
 
@@ -99,7 +99,7 @@
 /// Here we move a shuttle then test it's area once the shuttle has arrived.
 /datum/unit_test/zas_supply_shuttle_moved
 	name  = "ZAS: Supply Shuttle (When Moved)"
-	async = TRUE // We're moving the shuttle using built in procs.
+	async = TRUE // We're moving the shuttle using built-in procs.
 
 	///The shuttle datum of the supply shuttle
 	var/datum/shuttle/autodock/ferry/supply/shuttle = null

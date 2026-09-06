@@ -50,23 +50,23 @@
 	if(.)
 		scatter_contents()
 
-/obj/item/plate/tray/attackby(obj/item/W, mob/user, click_params)
-	if(istype(W, /obj/item/kitchen/rollingpin))
+/obj/item/plate/tray/attackby(obj/item/used_item, mob/user, click_params)
+	if(istype(used_item, /obj/item/rollingpin))
 		if(cooldown < world.time - 25)
-			user.visible_message(SPAN_WARNING("\The [user] bashes \the [src] with \the [W]!"))
+			user.visible_message(SPAN_WARNING("\The [user] bashes \the [src] with \the [used_item]!"))
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
 			cooldown = world.time
 		return TRUE
 	. = ..()
 	if (.)
-		auto_align(W, click_params)
+		auto_align(used_item, click_params)
 
 //This proc handles alignment on trays, a la tables.
-/obj/item/plate/tray/proc/auto_align(obj/item/W, click_params)
-	if (!W.center_of_mass) // Clothing, material stacks, generally items with large sprites where exact placement would be unhandy.
-		W.pixel_x = rand(-W.randpixel, W.randpixel)
-		W.pixel_y = rand(-W.randpixel, W.randpixel)
-		W.pixel_z = 0
+/obj/item/plate/tray/proc/auto_align(obj/item/aligning, click_params)
+	if (!aligning.center_of_mass) // Clothing, material stacks, generally items with large sprites where exact placement would be unhandy.
+		aligning.pixel_x = rand(-aligning.randpixel, aligning.randpixel)
+		aligning.pixel_y = rand(-aligning.randpixel, aligning.randpixel)
+		aligning.pixel_z = 0
 		return
 
 	if (!click_params)
@@ -83,11 +83,11 @@
 	var/cell_x = clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
 	var/cell_y = clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
 
-	var/list/center = cached_json_decode(W.center_of_mass)
+	var/list/center = cached_json_decode(aligning.center_of_mass)
 
-	W.pixel_x = (CELLSIZE * (cell_x + 0.5)) - center["x"]
-	W.pixel_y = (CELLSIZE * (cell_y + 0.5)) - center["y"]
-	W.pixel_z = 0
+	aligning.pixel_x = (CELLSIZE * (cell_x + 0.5)) - center["x"]
+	aligning.pixel_y = (CELLSIZE * (cell_y + 0.5)) - center["y"]
+	aligning.pixel_z = 0
 
 /obj/item/plate/tray/dump_contents(atom/forced_loc = loc, mob/user)
 	if(!isturf(forced_loc)) //to handle hand switching
@@ -122,16 +122,16 @@
 		I.appearance_flags |= RESET_COLOR
 		add_vis_contents(I)
 
-/obj/item/plate/tray/examine(mob/user) // So when you look at the tray you can see whats on it.
+/obj/item/plate/tray/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(.)
 		if(contents.len)
 			var/tray_examine = list()
 			for(var/obj/item/I in contents)
 				tray_examine += "\a [I.name]"
-			to_chat(user, "There is [english_list(tray_examine)] on the tray.")
+			. += "There is [english_list(tray_examine)] on the tray."
 		else
-			to_chat(user, "\The [src] is empty.")
+			. += "\The [src] is empty."
 
 /*
 -----------------------------------------------------------------
@@ -145,7 +145,7 @@ TRAY TYPES GO HERE
 
 /obj/item/plate/tray/wood
 	desc = "A wooden tray to serve food on."
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 
 /obj/item/plate/tray/metal
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -157,10 +157,10 @@ TRAY TYPES GO HERE
 
 /obj/item/plate/tray/metal/silver
 	name = "platter"
-	desc = "You lazy bum."
+	desc = "The new generation is so lazy, they expect everything to be handed to them on this."
 	material = /decl/material/solid/metal/silver
 
 /obj/item/plate/tray/metal/gold
 	name = "platter"
-	desc = "A gold tray to serve food on. But oh sofancy."
+	desc = "A gold tray to serve food on. Heavy, but oh-so-fancy."
 	material = /decl/material/solid/metal/gold

@@ -36,13 +36,13 @@
 		SKILL_ANATOMY             = SKILL_ADEPT
 	)
 
-/obj/item/robot_module/flying/forensics/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/flying/forensics/respawn_consumable(var/mob/living/silicon/robot/robot, var/amount)
 	var/obj/item/chems/spray/luminol/luminol = locate() in equipment
 	if(!luminol)
 		luminol = new(src)
 		equipment += luminol
-	if(luminol.reagents.total_volume < luminol.volume)
-		var/adding = min(luminol.volume-luminol.reagents.total_volume, 2*amount)
+	if(REAGENT_TOTAL_VOLUME(luminol.reagents) < REAGENT_MAXIMUM_VOLUME(luminol.reagents))
+		var/adding = min(REAGENT_MAXIMUM_VOLUME(luminol.reagents)-REAGENT_TOTAL_VOLUME(luminol.reagents), 2*amount)
 		if(adding > 0)
 			luminol.add_to_reagents(/decl/material/liquid/luminol, adding)
 	..()

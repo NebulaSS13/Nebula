@@ -37,10 +37,6 @@
 "Ng" = (
 /turf/wall/natural/basalt/shaded_hills,
 /area/shaded_hills/caves/deep)
-"SH" = (
-/obj/random/hostile/cave,
-/turf/floor/rock/basalt,
-/area/shaded_hills/caves/deep/poi)
 
 (1,1,1) = {"
 mZ
@@ -7759,7 +7755,7 @@ um
 MT
 MT
 MT
-SH
+az
 MT
 MT
 MT
@@ -12142,7 +12138,7 @@ um
 um
 um
 MT
-SH
+az
 um
 um
 um
@@ -14665,7 +14661,7 @@ um
 um
 MT
 MT
-SH
+az
 MT
 MT
 MT

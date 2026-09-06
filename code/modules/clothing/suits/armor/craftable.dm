@@ -33,5 +33,5 @@
 	material = /decl/material/solid/gemstone/diamond
 /obj/item/clothing/suit/armor/crafted/gold
 	material = /decl/material/solid/metal/gold
-/obj/item/clothing/suit/armor/crafted/supermatter
+/obj/item/clothing/suit/armor/crafted/exotic_matter
 	material = /decl/material/solid/exotic_matter

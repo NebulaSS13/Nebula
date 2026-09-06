@@ -5,13 +5,27 @@ PROCESSING_SUBSYSTEM_DEF(psi)
 	priority = SS_PRIORITY_PSYCHICS
 	flags = SS_POST_FIRE_TIMING | SS_BACKGROUND
 
-	var/list/faculties_by_id =        list()
-	var/list/faculties_by_name =      list()
-	var/list/all_aura_images =        list()
-	var/list/psi_dampeners =          list()
-	var/list/psi_monitors =           list()
+	var/list/faculties_by_id        = list()
+	var/list/faculties_by_name      = list()
+	var/list/all_aura_images        = list()
+	var/list/psi_dampeners          = list()
+	var/list/psi_monitors           = list()
 	var/list/armour_faculty_by_type = list()
-	var/list/faculties_by_intent  = list()
+	var/list/faculties_by_intent    = new(I_FLAG_ALL)
+
+/datum/controller/subsystem/processing/psi/proc/get_faculty_by_intent(decl/intent/intent)
+	var/static/list/intent_flags = list(
+		I_FLAG_HELP,
+		I_FLAG_DISARM,
+		I_FLAG_GRAB,
+		I_FLAG_HARM
+	)
+	. = faculties_by_intent[intent.intent_flags]
+	if(!.)
+		for(var/flag in intent_flags)
+			if(flag & intent.intent_flags)
+				. = faculties_by_intent[flag]
+				faculties_by_intent[intent.intent_flags] = .
 
 /datum/controller/subsystem/processing/psi/proc/get_faculty(var/faculty)
 	return faculties_by_name[faculty] || faculties_by_id[faculty]
@@ -24,7 +38,7 @@ PROCESSING_SUBSYSTEM_DEF(psi)
 		var/decl/psionic_faculty/faculty = faculties[ftype]
 		faculties_by_id[faculty.id] = faculty
 		faculties_by_name[faculty.name] = faculty
-		faculties_by_intent[faculty.associated_intent] = faculty.id
+		faculties_by_intent[faculty.associated_intent_flag] = faculty.id
 
 	var/list/powers = decls_repository.get_decls_of_subtype(/decl/psionic_power)
 	for(var/ptype in powers)

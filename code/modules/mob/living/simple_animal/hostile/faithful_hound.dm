@@ -37,7 +37,7 @@
 		var/new_aggress = 1
 		var/dist = get_dist(mailman, body)
 		if(dist < 2) //Attack! Attack!
-			body.a_intent = I_HURT
+			body.set_intent(I_FLAG_HARM)
 			body.ClickOn(mailman)
 			return
 		if(dist == 2)
@@ -65,12 +65,9 @@
 		new /obj/item/ectoplasm(get_turf(src))
 		qdel(src)
 
-/mob/living/simple_animal/faithful_hound/Destroy()
-	return ..()
-
-/mob/living/simple_animal/faithful_hound/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/simple_animal/faithful_hound/hear_say(datum/speech/phrases, verb = "says", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, stars = FALSE, atom/relayed_by)
 	set waitfor = FALSE
-	if(!ai?.check_memory(speaker, message))
+	if(!ai?.check_memory(speaker, phrases.unformatted_message))
 		return
 	ai.add_friend(speaker)
 	sleep(1 SECOND)

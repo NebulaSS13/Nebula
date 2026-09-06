@@ -1,4 +1,5 @@
 /decl/webhook
+	abstract_type = /decl/webhook
 	var/id
 	var/list/urls
 	var/list/mentions

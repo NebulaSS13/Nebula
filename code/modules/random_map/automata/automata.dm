@@ -11,58 +11,68 @@
 	var/cell_threshold = 5           // Cell becomes alive with this many live neighbors.
 
 // Automata-specific procs and processing.
-/datum/random_map/automata/generate_map()
-	for(var/iter = 1 to iterations)
-		var/list/next_map[limit_x*limit_y]
-		var/count
-		var/is_not_border_left
-		var/is_not_border_right
-		var/ilim_u
-		var/ilim_d
-		var/bottom_lim = ((limit_y - 1) * limit_x)
+// we make a map slightly larger than we need in order to avoid needing to check edges
+/datum/random_map/automata/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
+	..(tx, ty, tz, tlx+2, tly+2, do_not_apply, do_not_announce, used_area)
 
-		if (!islist(map))
-			set_map_size()
+/datum/random_map/automata/seed_map()
+	// we skip the edges here because they're just for indexing purposes
+	for(var/x in 2 to limit_x - 1)
+		for(var/y in 2 to limit_y - 1)
+			var/current_cell = TRANSLATE_COORD(x,y)
+			if(prob(initial_wall_cell))
+				map[current_cell] = WALL_CHAR
+			else
+				map[current_cell] = initial_cell_char
 
-		for (var/i in 1 to (limit_x * limit_y))
-			count = 0
+/datum/random_map/automata/apply_to_map()
+	if(!origin_x) origin_x = 1
+	if(!origin_y) origin_y = 1
+	if(!origin_z) origin_z = 1
 
-			is_not_border_left = i != 1 && ((i - 1) % limit_x)
-			is_not_border_right = i % limit_x
-
-			if (CELL_ALIVE(map[i])) // Center row.
-				++count
-			if (is_not_border_left && CELL_ALIVE(map[i - 1]))
-				++count
-			if (is_not_border_right && CELL_ALIVE(map[i + 1]))
-				++count
-
-			if (i > limit_x) // top row
-				ilim_u = i - limit_x
-				if (CELL_ALIVE(map[ilim_u]))
-					++count
-				if (is_not_border_left && CELL_ALIVE(map[ilim_u - 1]))
-					++count
-				if (is_not_border_right && CELL_ALIVE(map[ilim_u + 1]))
-					++count
-
-			if (i <= bottom_lim) // bottom row
-				ilim_d = i + limit_x
-				if (CELL_ALIVE(map[ilim_d]))
-					++count
-				if (is_not_border_left && CELL_ALIVE(map[ilim_d - 1]))
-					++count
-				if (is_not_border_right && CELL_ALIVE(map[ilim_d + 1]))
-					++count
-
-			if(count >= cell_threshold)
-				REVIVE_CELL(i, next_map)
-			else	// Nope. Can't be alive. Kill it.
-				KILL_CELL(i, next_map)
-
+	// adjust for automata map bounds weirdness
+	// this means that x=2 will be origin_x, which is good
+	// and that we only apply 2 to n-1, which is also good
+	origin_x -= 1
+	origin_y -= 1
+	for(var/x in 2 to limit_x-1)
+		for(var/y in 2 to limit_y-1)
 			CHECK_TICK
+			apply_to_turf(x,y)
 
+/datum/random_map/automata/generate_map()
+	var/list/map = src.map
+	// Instead of allocating a new next_map every iteration,
+	// we just flip the next_map and map lists.
+	var/list/next_map = new /list(length(map))
+	var/temp // used to swap the maps
+	// do a running count to save on repeated accesses
+	// this reduces us from 9 checks per tile to just 3
+	var/bottom_count = 0
+	var/middle_count = 0
+	var/top_count = 0
+	for(var/iter = 1 to iterations)
+		// we have a 1 tile buffer on both sides so go from 2 to lim-1
+		for (var/x in 2 to limit_x - 1)
+			bottom_count = 0
+			middle_count = CELL_ALIVE(map[TRANSLATE_COORD(x-1, 1)]) + CELL_ALIVE(map[TRANSLATE_COORD(x, 1)]) + CELL_ALIVE(map[TRANSLATE_COORD(x+1, 1)])
+			top_count = CELL_ALIVE(map[TRANSLATE_COORD(x-1, 2)]) + CELL_ALIVE(map[TRANSLATE_COORD(x, 2)]) + CELL_ALIVE(map[TRANSLATE_COORD(x+1, 2)])
+			for (var/y in 2 to limit_y - 1)
+				var/i = TRANSLATE_COORD(x, y)
+				// shift everything down a row
+				bottom_count = middle_count
+				middle_count = top_count
+				top_count = CELL_ALIVE(map[i + limit_x - 1]) + CELL_ALIVE(map[i + limit_x]) + CELL_ALIVE(map[i + limit_x + 1])
+				if((bottom_count + middle_count + top_count) >= cell_threshold)
+					REVIVE_CELL(i, next_map)
+				else	// Nope. Can't be alive. Kill it.
+					KILL_CELL(i, next_map)
+				CHECK_TICK
+		// end iteration
+		temp = map // save this to use as our next slate
 		map = next_map
+		next_map = temp // restore our next_map slate
+	src.map = map
 
 /datum/random_map/automata/get_additional_spawns(value, turf/T)
 	return

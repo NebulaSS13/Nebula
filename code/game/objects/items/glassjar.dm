@@ -71,15 +71,15 @@
 			update_icon()
 			return
 
-/obj/item/glass_jar/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/cash))
+/obj/item/glass_jar/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/cash))
 		if(contains == 0)
 			contains = 1
 		if(contains != 1)
 			return TRUE
-		if(!user.try_unequip(W, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		var/obj/item/cash/S = W
+		var/obj/item/cash/S = used_item
 		user.visible_message("<span class='notice'>[user] puts \the [S] into \the [src].</span>")
 		update_icon()
 		return TRUE

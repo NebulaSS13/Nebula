@@ -20,7 +20,7 @@
 	amputation_point = "front left knee"
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
-	organ_category = ORGAN_CATEGORY_STANCE_ROOT
+	organ_categories = @"['" + ORGAN_CATEGORY_STANCE_ROOT + "']"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 
 /obj/item/organ/external/arm/right/quadruped
@@ -29,7 +29,7 @@
 	amputation_point = "front right knee"
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
-	organ_category = ORGAN_CATEGORY_STANCE_ROOT
+	organ_categories = @"['" + ORGAN_CATEGORY_STANCE_ROOT + "']"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 
 /obj/item/organ/external/hand/quadruped
@@ -38,7 +38,7 @@
 	amputation_point = "front left ankle"
 	tendon_name = "Achilles tendon"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
-	organ_category = ORGAN_CATEGORY_STANCE
+	organ_categories = @"['" + ORGAN_CATEGORY_STANCE + "']"
 	gripper_type = null
 
 /obj/item/organ/external/hand/right/quadruped
@@ -47,5 +47,5 @@
 	amputation_point = "front right ankle"
 	tendon_name = "Achilles tendon"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
-	organ_category = ORGAN_CATEGORY_STANCE
+	organ_categories = @"['" + ORGAN_CATEGORY_STANCE + "']"
 	gripper_type = null

@@ -29,8 +29,9 @@
 		if(holder.slime.nutrition < holder.slime.get_starve_nutrition())
 			. += list("So... hungry...", "Very... hungry...", "Need... food...", "Must... eat...")
 			tension += 10
-		if(holder.current_target)
-			. += "\The [holder.current_target]... looks tasty..."
+		var/mob/actual_target = holder.current_target?.resolve()
+		if(actual_target)
+			. += "\The [actual_target]... looks tasty..."
 		if(length(.) && prob(tension))
 			return pick(.)
 

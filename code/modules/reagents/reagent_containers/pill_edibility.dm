@@ -2,10 +2,10 @@
 	return EATING_METHOD_EAT
 
 /obj/item/chems/pill/get_edible_material_amount(var/mob/eater)
-	return reagents?.total_volume
+	return REAGENT_TOTAL_VOLUME(reagents)
 
 /obj/item/chems/pill/get_food_default_transfer_amount(mob/eater)
-	return reagents?.total_volume // Always eat it in one bite.
+	return REAGENT_TOTAL_VOLUME(reagents) // Always eat it in one bite.
 
 /obj/item/chems/pill/show_feed_message_start(mob/user, mob/target, consumption_method = EATING_METHOD_EAT)
 	target = target || user

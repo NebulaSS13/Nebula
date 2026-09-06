@@ -93,7 +93,7 @@
 
 /obj/item/chewables/rollable/fine
 	name = "bag of Golden Sol tobacco"
-	desc = "A exclusive brand of overpriced tobacco, allegedly grown at a lagrange point station in Sol system."
+	desc = "An exclusive brand of overpriced tobacco, allegedly grown at a lagrange point station in Sol system."
 	icon_state = "rollfine"
 
 /obj/item/chewables/rollable/fine/WillContain()
@@ -132,7 +132,7 @@
 
 /obj/item/chewables/candy/cookies
 	name = "pack of Getmore Cookies"
-	desc = "A pack of delicious cookies, and possibly the only product in Getmores Chocolate Corp lineup that has any trace of chocolate in it."
+	desc = "A pack of delicious cookies, and possibly the only product in Getmore Chocolate Corp's lineup that has any trace of chocolate in it."
 	icon_state = "cookiebag"
 	storage = /datum/storage/chewables/cookies
 

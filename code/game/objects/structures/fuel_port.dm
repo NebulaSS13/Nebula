@@ -51,9 +51,9 @@
 	else
 		add_overlay("[icon_state]_closed")
 
-/obj/structure/fuel_port/attackby(obj/item/W, mob/user)
+/obj/structure/fuel_port/attackby(obj/item/used_item, mob/user)
 	. = FALSE
-	if(W.do_tool_interaction(TOOL_CROWBAR, user, src, 1 SECOND))
+	if(used_item.do_tool_interaction(TOOL_CROWBAR, user, src, 1 SECOND))
 		if(open)
 			playsound(src, sound_open, 25, 0, -3)
 			open = FALSE
@@ -62,7 +62,7 @@
 			open = TRUE
 		. = TRUE
 
-	else if(istype(W, /obj/item/tank))
+	else if(istype(used_item, /obj/item/tank))
 		if(!open)
 			to_chat(user, SPAN_WARNING("\The [src] door is still closed!"))
 			return TRUE
@@ -71,7 +71,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] already has a tank inside!"))
 			return TRUE
 		else
-			user.try_unequip(W, src)
+			user.try_unequip(used_item, src)
 			. = TRUE
 
 	if(.)

@@ -11,14 +11,14 @@
 	Pre-map initialization stuff should go here.
 */
 
-var/global_init = new /datum/global_init()
+var/global/global_init = new /datum/global_init()
 
 /datum/global_init/New()
 	SSconfiguration.load_all_configuration()
-	callHook("global_init")
-	qdel(src) //we're done
+	generate_game_id()
+	makeDatumRefLists()
+	QDEL_IN(src, 0) //we're done. give it some time to finish setting up though
 
 /datum/global_init/Destroy()
-	global_init = null
-	..()
-	return QDEL_HINT_HARDDEL
+	global.global_init = null
+	return ..()

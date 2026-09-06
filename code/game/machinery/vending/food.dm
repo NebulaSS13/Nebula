@@ -198,7 +198,7 @@
 
 /obj/machinery/vending/cola
 	name = "Robust Softdrinks"
-	desc = "A softdrink vendor provided by Robust Industries, LLC."
+	desc = "A soft drinks vendor provided by Robust Industries, LLC."
 	icon = 'icons/obj/machines/vending/drinks.dmi'
 	vend_delay = 11
 	base_type = /obj/machinery/vending/cola

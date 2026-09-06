@@ -5,6 +5,7 @@
 	available_at_map_tech = MAP_TECH_LEVEL_SPACE
 	category = "Prosthetic Organs"
 	reapply_on_rejuvenation = TRUE
+	is_heritable = FALSE
 	var/synthetic_bodytype_restricted = FALSE
 	var/apply_to_organ
 

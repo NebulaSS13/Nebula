@@ -17,7 +17,7 @@
 
 /obj/item/food/slice/carrotcake
 	name = "carrot cake slice"
-	desc = "Carrotty slice of carrot cake, carrots are good for your eyes! It's true! Probably!"
+	desc = "Carrot-y slice of carrot cake, carrots are good for your eyes! It's true! Probably!"
 	icon = 'icons/obj/food/baked/cakes/slices/carrot.dmi'
 	plate = /obj/item/plate
 	filling_color = "#ffd675"
@@ -77,7 +77,7 @@
 
 /obj/item/food/slice/cheesecake
 	name = "cheese cake slice"
-	desc = "Slice of pure cheestisfaction."
+	desc = "Slice of pure cheesatisfaction."
 	icon = 'icons/obj/food/baked/cakes/slices/cheese.dmi'
 	plate = /obj/item/plate
 	filling_color = "#faf7af"
@@ -266,28 +266,4 @@
 	whole_path = /obj/item/food/sliceable/applecake
 
 /obj/item/food/slice/applecake/filled
-	filled = TRUE
-
-/obj/item/food/sliceable/pumpkinpie
-	name = "pumpkin pie"
-	desc = "A delicious treat for the autumn months."
-	icon = 'icons/obj/food/baked/cakes/pumpkin.dmi'
-	slice_path = /obj/item/food/slice/pumpkinpie
-	slice_num = 5
-	filling_color = "#f5b951"
-	center_of_mass = @'{"x":16,"y":10}'
-	nutriment_desc = list("pie" = 5, "cream" = 5, "pumpkin" = 5)
-	nutriment_amt = 15
-
-/obj/item/food/slice/pumpkinpie
-	name = "pumpkin pie slice"
-	desc = "A slice of pumpkin pie, with whipped cream on top. Perfection."
-	icon = 'icons/obj/food/baked/cakes/slices/pumpkin.dmi'
-	plate = /obj/item/plate
-	filling_color = "#f5b951"
-	bitesize = 2
-	center_of_mass = @'{"x":16,"y":12}'
-	whole_path = /obj/item/food/sliceable/pumpkinpie
-
-/obj/item/food/slice/pumpkinpie/filled
 	filled = TRUE

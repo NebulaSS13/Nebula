@@ -36,7 +36,7 @@
 
 /obj/item/pen/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(user.a_intent == I_HELP && user.get_target_zone() == BP_HEAD)
+	if(user.check_intent(I_FLAG_HELP) && user.get_target_zone() == BP_HEAD)
 		var/obj/item/organ/external/head/head = target.get_organ(BP_HEAD, /obj/item/organ/external/head)
 		if(istype(head))
 			head.write_on(user, "[stroke_color_name] [medium_name]")

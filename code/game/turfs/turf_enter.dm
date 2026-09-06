@@ -33,8 +33,8 @@
 	if(isturf(old_loc) && has_gravity() && A.can_fall() && !isnull(platform) && !(weakref(A) in skip_height_fall_for))
 
 		var/turf/old_turf  = old_loc
-		var/old_height     = old_turf.get_physical_height() + old_turf.reagents?.total_volume
-		var/current_height = get_physical_height() + reagents?.total_volume
+		var/old_height     = old_turf.get_physical_height() + REAGENT_TOTAL_VOLUME(old_turf.reagents)
+		var/current_height = get_physical_height() + REAGENT_TOTAL_VOLUME(reagents)
 		var/height_difference = abs(current_height - old_height)
 
 		if(current_height < old_height && height_difference > FLUID_SHALLOW)
@@ -59,9 +59,9 @@
 			var/datum/gas_mixture/env = return_air(1)
 			if(!env)
 				return
-			for(var/g in env.gas)
-				var/decl/material/mat = GET_DECL(g)
-				if((mat.gas_flags & XGM_GAS_CONTAMINANT) && env.gas[g] > mat.gas_overlay_limit + 1)
+			for(var/gas_type, gas_amount in env.gas)
+				var/decl/material/mat = GET_DECL(gas_type)
+				if((mat.gas_flags & XGM_GAS_CONTAMINANT) && gas_amount > mat.gas_overlay_limit + 1)
 					I.contaminate()
 					break
 

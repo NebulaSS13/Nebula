@@ -47,7 +47,7 @@
 /turf/floor/plating,
 /area/ship/trade/maintenance/solars)
 "ai" = (
-/obj/structure/bed/chair/wood,
+/obj/structure/chair/wood,
 /turf/floor/reinforced/airless,
 /area/space)
 "aj" = (
@@ -495,7 +495,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	pixel_y = -22
 	},
 /obj/structure/cable{
@@ -554,9 +554,7 @@
 /turf/floor/plating,
 /area/ship/trade/bridge_unused)
 "dm" = (
-/obj/abstract/level_data_spawner/main_level{
-	name = "Tradeship Upper Deck"
-	},
+/obj/abstract/level_data_spawner/tradeship_upper,
 /turf/space,
 /area/space)
 "dq" = (
@@ -714,7 +712,7 @@
 /area/ship/trade/command/bridge_upper)
 "oq" = (
 /obj/random/trash,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -22
 	},
@@ -789,7 +787,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	name = "Communications APC";
 	pixel_y = 22
@@ -822,7 +820,7 @@
 /area/space)
 "wc" = (
 /obj/effect/floor_decal/steeldecal/steel_decals6,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 22
 	},
@@ -870,7 +868,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/ship/trade/comms)
 "yM" = (
-/obj/item/stack/material/rods,
+/obj/item/stack/material/rods/mapped/steel,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/floor/plating,
 /area/ship/trade/bridge_unused)

@@ -5,7 +5,7 @@
 	icon = 'icons/obj/drink_glasses/square.dmi'
 	desc = "Your standard drinking glass."
 	filling_states = @"[20,40,60,80,100]"
-	volume = 30
+	chem_volume = 30
 	possible_transfer_amounts = @"[5,10,15,30]"
 	rim_pos = @'{"y":23,"x_left":13,"x_right":20}'
 
@@ -16,7 +16,7 @@
 	icon_state = "rocks"
 	icon = 'icons/obj/drink_glasses/rocks.dmi'
 	filling_states = @"[25,50,75,100]"
-	volume = 20
+	chem_volume = 20
 	possible_transfer_amounts = @"[5,10,20]"
 	rim_pos = @'{"y":21,"x_left":10,"x_right":23}'
 
@@ -27,7 +27,7 @@
 	icon_state = "shake"
 	icon = 'icons/obj/drink_glasses/shake.dmi'
 	filling_states = @"[25,50,75,100]"
-	volume = 30
+	chem_volume = 30
 	possible_transfer_amounts = @"[5,10,15,30]"
 	rim_pos = @'{"y":25,"x_left":13,"x_right":21}'
 
@@ -38,7 +38,7 @@
 	icon_state = "cocktail"
 	icon = 'icons/obj/drink_glasses/cocktail.dmi'
 	filling_states = @"[33,66,100]"
-	volume = 15
+	chem_volume = 15
 	possible_transfer_amounts = @"[5,10,15]"
 	rim_pos = @'{"y":22,"x_left":13,"x_right":21}'
 
@@ -49,8 +49,7 @@
 	icon_state = "shot"
 	icon = 'icons/obj/drink_glasses/shot.dmi'
 	filling_states = @"[33,66,100]"
-	volume = 5
-	material = /decl/material/solid/glass
+	chem_volume = 5
 	possible_transfer_amounts = @"[1,2,5]"
 	rim_pos = @'{"y":17,"x_left":13,"x_right":21}'
 
@@ -60,8 +59,7 @@
 	icon_state = "pint"
 	icon = 'icons/obj/drink_glasses/pint.dmi'
 	filling_states = @"[16,33,50,66,83,100]"
-	volume = 60
-	material = /decl/material/solid/glass
+	chem_volume = 60
 	possible_transfer_amounts = @"[5,10,15,30,60]"
 	rim_pos = @'{"y":25,"x_left":12,"x_right":21}'
 
@@ -72,7 +70,7 @@
 	icon_state = "mug"
 	icon = 'icons/obj/drink_glasses/mug.dmi'
 	filling_states = @"[25,50,75,100]"
-	volume = 40
+	chem_volume = 40
 	possible_transfer_amounts = @"[5,10,20,40]"
 	rim_pos = @'{"y":22,"x_left":12,"x_right":20}'
 
@@ -83,7 +81,7 @@
 	icon_state = "wine"
 	icon = 'icons/obj/drink_glasses/wine.dmi'
 	filling_states = @"[20,40,60,80,100]"
-	volume = 25
+	chem_volume = 25
 	possible_transfer_amounts = @"[5,10,15,25]"
 	rim_pos = @'{"y":25,"x_left":12,"x_right":21}'
 
@@ -93,7 +91,7 @@
 	base_icon = "flute"
 	icon_state = "flute"
 	icon = 'icons/obj/drink_glasses/flute.dmi'
-	volume = 25
+	chem_volume = 25
 	filling_states = @"[20,40,60,80,100]"
 	possible_transfer_amounts = @"[5,10,15,25]"
 	rim_pos = @'{"y":24,"x_left":13,"x_right":19}'
@@ -105,8 +103,7 @@
 	icon_state = "carafe"
 	icon = 'icons/obj/drink_glasses/carafe.dmi'
 	filling_states = @"[10,20,30,40,50,60,70,80,90,100]"
-	volume = 120
-	material = /decl/material/solid/glass
+	chem_volume = 120
 	possible_transfer_amounts = @"[5,10,15,30,60,120]"
 	rim_pos = @'{"y":26,"x_left":12,"x_right":21}'
 	center_of_mass = @'{"x":16,"y":7}'
@@ -117,7 +114,7 @@
 	icon = 'icons/obj/drink_glasses/coffecup.dmi'
 	icon_state = "coffeecup"
 	item_state = "coffee"
-	volume = 30
+	chem_volume = 30
 	center_of_mass = @'{"x":15,"y":13}'
 	filling_states = @"[40,80,100]"
 	base_name = "cup"
@@ -163,7 +160,7 @@
 	base_name = "#1 monkey cup"
 
 /obj/item/chems/drinks/glass2/coffeecup/punitelli/populate_reagents()
-	add_to_reagents(/decl/material/liquid/drink/juice/banana, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/banana, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/chems/drinks/glass2/coffeecup/rainbow
 	name = "rainbow coffee cup"
@@ -178,13 +175,6 @@
 	icon_state = "coffeecup_metal"
 	material = /decl/material/solid/metal/stainlesssteel
 
-/obj/item/chems/drinks/glass2/coffeecup/STC
-	name = "\improper ICCG coffee cup"
-	desc = "A coffee cup adorned with the flag of the Gilgamesh Colonial Confederation, for when you need some espionage charges to go with your morning coffee."
-	base_icon = "coffeecup_STC"
-	icon_state = "coffeecup_STC"
-	base_name = "\improper ICCG cup"
-
 /obj/item/chems/drinks/glass2/coffeecup/pawn
 	name = "pawn coffee cup"
 	desc = "A black coffee cup adorned with the image of a red chess pawn."
@@ -192,19 +182,12 @@
 	icon_state = "coffeecup_pawn"
 	base_name = "pawn cup"
 
-/obj/item/chems/drinks/glass2/coffeecup/britcup
-	name = "british coffee cup"
-	desc = "A coffee cup with the British flag emblazoned on it."
-	base_icon = "coffeecup_brit"
-	icon_state = "coffeecup_brit"
-	base_name = "british cup"
-
 /obj/item/chems/drinks/glass2/coffeecup/tall
 	name = "tall coffee cup"
 	desc = "An unreasonably tall coffee cup, for when you really need to wake up in the morning."
 	icon = 'icons/obj/drink_glasses/coffecup_tall.dmi'
 	icon_state = "coffeecup_tall"
-	volume = 60
+	chem_volume = 60
 	center_of_mass = @'{"x":15,"y":19}'
 	filling_states = @"[50,70,90,100]"
 	base_name = "tall cup"
@@ -217,7 +200,7 @@
 	icon = 'icons/obj/drink_glasses/teacup.dmi'
 	icon_state = "teacup"
 	item_state = "coffee"
-	volume = 20
+	chem_volume = 20
 	filling_states = @"[100]"
 	base_name = "teacup"
 	base_icon = "teacup"

@@ -48,15 +48,20 @@
 /datum/unit_test/machine_construct_states_shall_be_valid
 	name = "MACHINE: All mapped machines with construct states shall meet state requirements."
 
+/// Returns a failure string if the unit test should fail, FALSE if it should succeed.
+/// Mostly just a wrapper to handle things like unlocking prior to testing, or skipping the testing entirely.
+/obj/machinery/proc/fail_construct_state_unit_test()
+	if(!construct_state)
+		return FALSE
+	return construct_state.fail_unit_test(src)
+
 /datum/unit_test/machine_construct_states_shall_be_valid/start_test()
 	var/failed = list()
 	for(var/thing in SSmachines.machinery)
 		var/obj/machinery/machine = thing
 		if(failed[machine.type])
 			continue
-		if(!machine.construct_state)
-			continue
-		var/fail = machine.construct_state.fail_unit_test(machine)
+		var/fail = machine.fail_construct_state_unit_test()
 		if(fail)
 			failed[machine.type] = TRUE
 			log_bad(fail)

@@ -1,6 +1,6 @@
 /obj/item/lock_construct
 	name = "lock"
-	desc = "a simple tumbler lock and bolt, suitable for affixing to a door or closet."
+	desc = "A simple tumbler lock and bolt, suitable for affixing to a door or closet."
 	icon = 'icons/obj/items/doorlock.dmi'
 	icon_state = "lock_construct"
 	w_class = ITEM_SIZE_TINY
@@ -11,25 +11,25 @@
 	. = ..()
 	lock_data = generateRandomString(round(material.integrity/50))
 
-/obj/item/lock_construct/examine(mob/user, distance)
+/obj/item/lock_construct/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(user && distance <= 1)
 		if(lock_data)
-			to_chat(user, SPAN_NOTICE("\The [src] is unlocked with '[lock_data]'."))
+			. += SPAN_NOTICE("\The [src] is unlocked with '[lock_data]'.")
 		else
-			to_chat(user, SPAN_NOTICE("\The [src] is blank. Use a key on the lock to pair the two items."))
+			. += SPAN_NOTICE("\The [src] is blank. Use a key on the lock to pair the two items.")
 
-/obj/item/lock_construct/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/key))
-		var/obj/item/key/K = I
+/obj/item/lock_construct/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/key))
+		var/obj/item/key/K = used_item
 		if(!K.key_data)
-			to_chat(user, SPAN_NOTICE("You fashion \the [I] to unlock \the [src]."))
+			to_chat(user, SPAN_NOTICE("You fashion \the [used_item] to unlock \the [src]."))
 			K.key_data = lock_data
 		else
-			to_chat(user, SPAN_WARNING("\The [I] already unlocks something..."))
+			to_chat(user, SPAN_WARNING("\The [used_item] already unlocks something..."))
 		return TRUE
-	if(istype(I,/obj/item/lock_construct))
-		var/obj/item/lock_construct/L = I
+	if(istype(used_item,/obj/item/lock_construct))
+		var/obj/item/lock_construct/L = used_item
 		src.lock_data = L.lock_data
 		to_chat(user, SPAN_NOTICE("You copy the lock from \the [L] to \the [src], making them identical."))
 		return TRUE

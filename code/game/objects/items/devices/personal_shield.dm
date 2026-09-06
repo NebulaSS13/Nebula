@@ -1,6 +1,6 @@
 /obj/item/personal_shield
 	name = "personal shield"
-	desc = "Truely a life-saver: this device protects its user from being hit by objects moving very, very fast, though only for a few shots."
+	desc = "Truly a lifesaver: this device protects its user from being hit by objects moving very, very fast, though only for a few shots."
 	icon = 'icons/obj/items/weapon/batterer.dmi'
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/organic/plastic
@@ -11,36 +11,45 @@
 		/decl/material/solid/metal/uranium  = MATTER_AMOUNT_TRACE,
 	)
 	var/uses = 5
-	var/obj/aura/personal_shield/device/shield
+	var/shield_effect_type = /decl/mob_modifier/shield/device
 
 /obj/item/personal_shield/attack_self(var/mob/user)
-	if(uses && !shield)
-		shield = new(user,src)
-	else
-		QDEL_NULL(shield)
+	if(loc == user && isliving(user))
+		var/mob/living/holder = user
+		if(holder.has_mob_modifier(shield_effect_type, source = src))
+			holder.remove_mob_modifier(shield_effect_type, source = src)
+		else if(uses && shield_effect_type)
+			holder.add_mob_modifier(shield_effect_type, source = src)
+		else
+			return ..()
+		return TRUE
+	return ..()
 
 /obj/item/personal_shield/Move()
-	QDEL_NULL(shield)
-	return ..()
+	var/mob/living/holder = loc
+	. = ..()
+	if(. && istype(holder) && holder.has_mob_modifier(shield_effect_type, source = src))
+		holder.remove_mob_modifier(shield_effect_type, source = src)
 
 /obj/item/personal_shield/forceMove()
-	QDEL_NULL(shield)
-	return ..()
+	var/mob/living/holder = loc
+	. = ..()
+	if(. && istype(holder) && holder.has_mob_modifier(shield_effect_type, source = src))
+		holder.remove_mob_modifier(shield_effect_type, source = src)
 
-/obj/item/personal_shield/proc/take_charge()
-	if(!--uses)
-		QDEL_NULL(shield)
-		to_chat(loc,"<span class='danger'>\The [src] begins to spark as it breaks!</span>")
+/obj/item/personal_shield/proc/expend_charge()
+	if(uses <= 0)
+		return FALSE
+	uses--
+	if(uses <= 0 && ismob(loc))
+		var/mob/living/holder = loc
+		if(istype(holder) && holder.has_mob_modifier(shield_effect_type, source = src))
+			holder.remove_mob_modifier(shield_effect_type, source = src)
+			to_chat(holder, SPAN_DANGER("\The [src] begins to spark as it breaks!"))
 		update_icon()
-		return
+	return TRUE
 
 /obj/item/personal_shield/on_update_icon()
 	. = ..()
 	if(uses)
-		icon_state = "batterer"
-	else
-		icon_state = "battererburnt"
-
-/obj/item/personal_shield/Destroy()
-	QDEL_NULL(shield)
-	return ..()
+		add_overlay("[icon_state]-on")

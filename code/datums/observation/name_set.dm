@@ -11,6 +11,7 @@
 /decl/observ/name_set
 	name = "Name Set"
 	expected_type = /atom
+	flags = OBSERVATION_NO_GLOBAL_REGISTRATIONS
 
 /*********************
 * Name Set Handling *
@@ -23,5 +24,6 @@
 		if(has_extension(src, /datum/extension/labels))
 			var/datum/extension/labels/L = get_extension(src, /datum/extension/labels)
 			name = L.AppendLabelsToName(name)
-		RAISE_EVENT(/decl/observ/name_set, src, old_name, new_name)
+		if(event_listeners?[/decl/observ/name_set])
+			raise_event_non_global(/decl/observ/name_set, old_name, new_name)
 		update_above()

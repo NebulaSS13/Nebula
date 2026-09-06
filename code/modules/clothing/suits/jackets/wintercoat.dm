@@ -127,3 +127,22 @@
 
 /obj/item/clothing/head/winterhood/mining
 	icon = 'icons/clothing/head/hood_winter_mining.dmi'
+
+/obj/item/clothing/suit/jacket/winter/parka
+	name = "parka"
+	desc = "A heavy fur-lined jacket designed to keep you extra warm in sub-zero conditions."
+	hood = /obj/item/clothing/head/winterhood/parka
+	icon = 'icons/clothing/suits/wintercoat/parka.dmi'
+	markings_color = "#a5975c"
+	markings_state_modifier = "-lining"
+	paint_color = COLOR_SILVER
+
+/obj/item/clothing/head/winterhood/parka
+	name = "parka hood"
+	desc = "A heavy fur-lined jacket hood.."
+	icon = 'icons/clothing/head/hood_parka.dmi'
+	markings_color = "#a5975c"
+	markings_state_modifier = "-lining"
+
+/obj/item/clothing/suit/jacket/winter/parka/purple
+	paint_color = COLOR_PURPLE

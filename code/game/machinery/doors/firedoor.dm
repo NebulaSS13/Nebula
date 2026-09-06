@@ -10,7 +10,7 @@
 
 /obj/machinery/door/firedoor
 	name = "emergency shutter"
-	desc = "Emergency air-tight shutters, capable of sealing off breached areas."
+	desc = "Emergency airtight shutters, capable of sealing off breached areas."
 	icon = 'icons/obj/doors/hazard/door.dmi'
 	var/panel_file = 'icons/obj/doors/hazard/panel.dmi'
 	var/welded_file = 'icons/obj/doors/hazard/welded.dmi'
@@ -95,8 +95,8 @@
 		LAZYADD(areas_added, A)
 
 /obj/machinery/door/firedoor/proc/unregister_area(area/A)
-		LAZYREMOVE(A.all_doors, src)
-		LAZYREMOVE(areas_added, A)
+	LAZYREMOVE(A.all_doors, src)
+	LAZYREMOVE(areas_added, A)
 
 /obj/machinery/door/firedoor/proc/update_area_registrations()
 	var/list/new_areas = list()
@@ -117,42 +117,43 @@
 	RETURN_TYPE(/decl/material)
 	return GET_DECL(/decl/material/solid/metal/steel)
 
-/obj/machinery/door/firedoor/examine(mob/user, distance)
+/obj/machinery/door/firedoor/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance > 1 || !density)
 		return
 
 	if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
-		to_chat(user, "<span class='warning'>WARNING: Current pressure differential is [pdiff]kPa! Opening door may result in injury!</span>")
-	to_chat(user, "<b>Sensor readings:</b>")
+		. += SPAN_DANGER("WARNING: Current pressure differential is [pdiff]kPa! Opening door may result in injury!")
+
+	. += "<b>Sensor readings:</b>"
 	for(var/index = 1; index <= tile_info.len; index++)
-		var/o = "&nbsp;&nbsp;"
+		var/list/direction_strings = list("&nbsp;&nbsp;")
 		switch(index)
 			if(1)
-				o += "NORTH: "
+				direction_strings += "NORTH: "
 			if(2)
-				o += "SOUTH: "
+				direction_strings += "SOUTH: "
 			if(3)
-				o += "EAST: "
+				direction_strings += "EAST: "
 			if(4)
-				o += "WEST: "
+				direction_strings += "WEST: "
 		if(tile_info[index] == null)
-			o += "<span class='warning'>DATA UNAVAILABLE</span>"
-			to_chat(user, o)
+			direction_strings += "<span class='warning'>DATA UNAVAILABLE</span>"
+			. += JOINTEXT(direction_strings)
 			continue
 		var/celsius = convert_k2c(tile_info[index][1])
 		var/pressure = tile_info[index][2]
-		o += "<span class='[(dir_alerts[index] & (FIREDOOR_ALERT_HOT|FIREDOOR_ALERT_COLD)) ? "warning" : "color:blue"]'>"
-		o += "[celsius]&deg;C</span> "
-		o += "<span style='color:blue'>"
-		o += "[pressure]kPa</span></li>"
-		to_chat(user, o)
+		direction_strings += "<span class='[(dir_alerts[index] & (FIREDOOR_ALERT_HOT|FIREDOOR_ALERT_COLD)) ? "warning" : "color:blue"]'>"
+		direction_strings += "[celsius]&deg;C</span> "
+		direction_strings += "<span style='color:blue'>"
+		direction_strings += "[pressure]kPa</span></li>"
+		. += JOINTEXT(direction_strings)
 	if(islist(users_to_open) && users_to_open.len)
 		var/users_to_open_string = users_to_open[1]
 		if(users_to_open.len >= 2)
 			for(var/i = 2 to users_to_open.len)
 				users_to_open_string += ", [users_to_open[i]]"
-		to_chat(user, "These people have opened \the [src] during an alert: [users_to_open_string].")
+		. += "These people have opened \the [src] during an alert: [users_to_open_string]."
 
 /obj/machinery/door/firedoor/Bumped(atom/AM)
 	if(panel_open || operating)
@@ -216,19 +217,19 @@
 				nextstate = FIREDOOR_CLOSED
 				close()
 
-/obj/machinery/door/firedoor/attackby(obj/item/C, mob/user)
-	add_fingerprint(user, 0, C)
+/obj/machinery/door/firedoor/attackby(obj/item/used_item, mob/user)
+	add_fingerprint(user, 0, used_item)
 	if(operating)
 		return TRUE //Already doing something.
-	if(IS_WELDER(C) && !repairing)
-		var/obj/item/weldingtool/W = C
-		if(W.weld(0, user))
+	if(IS_WELDER(used_item) && !repairing)
+		var/obj/item/weldingtool/welder = used_item
+		if(welder.weld(0, user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, 2 SECONDS, src))
-				if(!W.isOn()) return TRUE
+				if(!welder.isOn()) return TRUE
 				blocked = !blocked
-				user.visible_message("<span class='danger'>\The [user] [blocked ? "welds" : "unwelds"] \the [src] with \a [W].</span>",\
-				"You [blocked ? "weld" : "unweld"] \the [src] with \the [W].",\
+				user.visible_message("<span class='danger'>\The [user] [blocked ? "welds" : "unwelds"] \the [src] with \a [welder].</span>",\
+				"You [blocked ? "weld" : "unweld"] \the [src] with \the [welder].",\
 				"You hear something being welded.")
 				playsound(src, 'sound/items/Welder.ogg', 100, 1)
 				update_icon()
@@ -236,33 +237,33 @@
 				to_chat(user, SPAN_WARNING("You must remain still to complete this task."))
 		return TRUE
 
-	if(blocked && IS_CROWBAR(C))
-		user.visible_message("<span class='danger'>\The [user] pries at \the [src] with \a [C], but \the [src] is welded in place!</span>",\
+	if(blocked && IS_CROWBAR(used_item))
+		user.visible_message("<span class='danger'>\The [user] pries at \the [src] with \a [used_item], but \the [src] is welded in place!</span>",\
 		"You try to pry \the [src] [density ? "open" : "closed"], but it is welded in place!",\
 		"You hear someone struggle and metal straining.")
 		return TRUE
 
-	if(!blocked && (IS_CROWBAR(C) || istype(C,/obj/item/bladed/axe/fire)))
+	if(!blocked && (IS_CROWBAR(used_item) || istype(used_item,/obj/item/bladed/axe/fire)))
 		if(operating)
 			return ..()
 
-		if(istype(C,/obj/item/bladed/axe/fire))
-			var/obj/item/bladed/axe/fire/F = C
+		if(istype(used_item,/obj/item/bladed/axe/fire))
+			var/obj/item/bladed/axe/fire/F = used_item
 			if(!F.is_held_twohanded())
 				return ..()
 
-		user.visible_message("<span class='danger'>\The [user] starts to force \the [src] [density ? "open" : "closed"] with \a [C]!</span>",\
-				"You start forcing \the [src] [density ? "open" : "closed"] with \the [C]!",\
+		user.visible_message("<span class='danger'>\The [user] starts to force \the [src] [density ? "open" : "closed"] with \a [used_item]!</span>",\
+				"You start forcing \the [src] [density ? "open" : "closed"] with \the [used_item]!",\
 				"You hear metal strain.")
 		if(do_after(user, 3 SECONDS, src))
-			if(IS_CROWBAR(C))
+			if(IS_CROWBAR(used_item))
 				if(stat & (BROKEN|NOPOWER) || !density)
-					user.visible_message("<span class='danger'>\The [user] forces \the [src] [density ? "open" : "closed"] with \a [C]!</span>",\
-					"You force \the [src] [density ? "open" : "closed"] with \the [C]!",\
+					user.visible_message("<span class='danger'>\The [user] forces \the [src] [density ? "open" : "closed"] with \a [used_item]!</span>",\
+					"You force \the [src] [density ? "open" : "closed"] with \the [used_item]!",\
 					"You hear metal strain, and a door [density ? "open" : "close"].")
 				else
-					user.visible_message("<span class='danger'>\The [user] forces \the [ blocked ? "welded" : "" ] [src] [density ? "open" : "closed"] with \a [C]!</span>",\
-						"You force \the [ blocked ? "welded" : "" ] [src] [density ? "open" : "closed"] with \the [C]!",\
+					user.visible_message("<span class='danger'>\The [user] forces \the [ blocked ? "welded" : "" ] [src] [density ? "open" : "closed"] with \a [used_item]!</span>",\
+						"You force \the [ blocked ? "welded" : "" ] [src] [density ? "open" : "closed"] with \the [used_item]!",\
 						"You hear metal strain and groan, and a door [density ? "opening" : "closing"].")
 			if(density)
 				open(1)
@@ -347,7 +348,7 @@
 		panel_open = FALSE
 		if(istype(construct_state, /decl/machine_construction/default/panel_open))
 			var/decl/machine_construction/default/panel_open/open = construct_state
-			construct_state = open.up_state
+			construct_state = GET_DECL(open.up_state)
 			construct_state.validate_state(src)
 		visible_message("The maintenance hatch of \the [src] closes.")
 		update_icon()
@@ -376,10 +377,10 @@
 		ATMOS_CANPASS_TURF(airblock, neighbour, myturf)
 		if(airblock & AIR_BLOCKED)
 			continue
-		for(var/obj/O in myturf)
-			if(istype(O, /obj/machinery/door))
+		for(var/obj/thing in myturf)
+			if(istype(thing, /obj/machinery/door))
 				continue
-			ATMOS_CANPASS_MOVABLE(airblock, O, neighbour)
+			ATMOS_CANPASS_MOVABLE(airblock, thing, neighbour)
 			. |= airblock
 		if(. & AIR_BLOCKED)
 			continue

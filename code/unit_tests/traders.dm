@@ -45,7 +45,7 @@
 	var/list/all_species = decls_repository.get_decls_of_subtype(/decl/species)
 	for(var/species_type in all_species)
 		var/decl/species/species = all_species[species_type]
-		acceptable_additional_tokens |= "[TRADER_HAIL_START][species.name]"
+		acceptable_additional_tokens |= "[TRADER_HAIL_START][species.uid]"
 
 	var/list/failures = list()
 	for(var/trader_type in subtypesof(/datum/trader))

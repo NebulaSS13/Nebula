@@ -23,6 +23,18 @@ def main():
 		print("Cannot find directory '" + mapdir + "', make sure you are running this script from the root repository directory.")
 		return
 
+	ckey = None
+	if len(sys.argv) > 2:
+		ckey = sys.argv[2]
+		if ckey is not None:
+			ckey = ckey.lower()
+
+	singletargetmap = None
+	if len(sys.argv) > 3:
+		singletargetmap = sys.argv[3]
+		if singletargetmap is not None:
+			singletargetmap = singletargetmap.lower()
+
 	# Work out what maps we actually need to replicate to.
 	# This should be updated as map directories change, or the script will break.
 	targetmaps = []
@@ -40,7 +52,7 @@ def main():
 		if os.path.isdir(dir):
 			targetmap = dir.path
 			targetmap = targetmap.replace(mapdir + os.sep, "")
-			if targetmap not in ignoremaps and targetmap != mapname:
+			if (targetmap not in ignoremaps) and (targetmap != mapname) and ((singletargetmap is None) or (singletargetmap == targetmap)):
 				targetmaps.append(targetmap)
 
 	# Make sure we can actually see the save directory.
@@ -61,6 +73,8 @@ def main():
 			if match is None:
 				continue
 			if match.group(1) != mapname:
+				continue
+			if (ckey is not None) and (ckey != root[root.rfind("/")+1:]):
 				continue
 			savefile = os.path.join(root, file)
 			with open(savefile, "r") as loadedsave:

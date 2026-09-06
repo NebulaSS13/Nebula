@@ -17,15 +17,15 @@
 	var/dispense_amount = 50
 
 	// Since reactions and heating products may overfill the reagent tank, the reagent tank has 1.25x this volume.
-	var/static/max_liquid = 3000
+	var/const/MAX_LIQUID = 3000
 
 /obj/machinery/material_processing/extractor/Initialize()
+	chem_volume = round(MAX_LIQUID * 1.25)
 	. = ..()
 	if(!gas_contents)
 		gas_contents = new(800)
 	set_extension(src, /datum/extension/atmospherics_connection, FALSE, gas_contents)
 
-	create_reagents(round(1.25*max_liquid))
 	queue_temperature_atoms(src)
 
 	return INITIALIZE_HINT_LATELOAD
@@ -56,23 +56,21 @@
 			connection.connect(port)
 
 
-/obj/machinery/material_processing/extractor/examine(mob/user)
+/obj/machinery/material_processing/extractor/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-
 	var/datum/extension/atmospherics_connection/connection = get_extension(src, /datum/extension/atmospherics_connection)
 	if(connection.connected_port)
-		to_chat(user, SPAN_NOTICE("It is connected to \the [connection.connected_port]."))
+		. += SPAN_NOTICE("It is connected to \the [connection.connected_port].")
 	else
-		to_chat(user, SPAN_NOTICE("It may be connected to an atmospherics connector port with a wrench."))
-
+		. += SPAN_NOTICE("It may be connected to an atmospherics connector port with a wrench.")
 	if(output_container)
-		to_chat(user, SPAN_NOTICE("It has \a [output_container] inserted."))
+		. += SPAN_NOTICE("It has \a [output_container] inserted.")
 
 /obj/machinery/material_processing/extractor/Process()
 	if(!use_power || (stat & (BROKEN|NOPOWER)))
 		return
 
-	if(reagents?.total_volume >= max_liquid)
+	if(REAGENT_TOTAL_VOLUME(reagents) >= MAX_LIQUID)
 		return
 
 	if(input_turf)
@@ -85,8 +83,8 @@
 					eating.dropInto(output_turf)
 				continue
 			eaten++
-			if(eating.reagents?.total_volume)
-				eating.reagents.trans_to_obj(src, eating.reagents.total_volume)
+			if(REAGENT_TOTAL_VOLUME(eating.reagents))
+				eating.reagents.trans_to_obj(src, REAGENT_TOTAL_VOLUME(eating.reagents))
 			for(var/mtype in eating.matter)
 				add_to_reagents(mtype, floor(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 			qdel(eating)
@@ -99,8 +97,8 @@
 		return
 
 	var/adjusted_reagents = FALSE
-	for(var/mtype in reagents.reagent_volumes)
-		adjusted_reagents = max(adjusted_reagents, process_non_liquid(mtype))
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
+		adjusted_reagents = max(adjusted_reagents, process_non_liquid(reagent))
 
 	if(adjusted_reagents)
 		if(gas_contents)
@@ -110,7 +108,7 @@
 /obj/machinery/material_processing/extractor/proc/process_non_liquid(var/mtype)
 	var/adjusted_reagents = FALSE
 	var/flashed_warning = FALSE
-	var/decl/material/mat = GET_DECL(mtype)
+	var/decl/material/mat = RESOLVE_TO_DECL(mtype)
 	// TODO: Change this to ambient/tank pressure when phase changes are properly implemented.
 	switch(mat.phase_at_temperature(temperature, ONE_ATMOSPHERE))
 		if(MAT_PHASE_GAS)
@@ -151,8 +149,8 @@
 
 	return adjusted_reagents
 
-/obj/machinery/material_processing/extractor/attackby(obj/item/I, mob/user)
-	if(IS_WRENCH(I) && !panel_open)
+/obj/machinery/material_processing/extractor/attackby(obj/item/used_item, mob/user)
+	if(IS_WRENCH(used_item) && !panel_open)
 		var/datum/extension/atmospherics_connection/connection = get_extension(src, /datum/extension/atmospherics_connection)
 		if(connection.disconnect())
 			to_chat(user, SPAN_NOTICE("You disconnect \the [src] from the port."))
@@ -167,13 +165,13 @@
 					to_chat(user, SPAN_WARNING("\The [src] failed to connect to the port."))
 					return TRUE
 
-	if(istype(I, /obj/item/chems/glass))
+	if(istype(used_item, /obj/item/chems/glass))
 		if(isnull(output_container))
-			if(!user.try_unequip(I, src))
+			if(!user.try_unequip(used_item, src))
 				return TRUE
-			output_container = I
+			output_container = used_item
 			events_repository.register(/decl/observ/destroyed, output_container, src, TYPE_PROC_REF(/obj/machinery/material_processing/extractor, remove_container))
-			user.visible_message(SPAN_NOTICE("\The [user] places \a [I] in \the [src]."), SPAN_NOTICE("You place \a [I] in \the [src]."))
+			user.visible_message(SPAN_NOTICE("\The [user] places \a [used_item] in \the [src]."), SPAN_NOTICE("You place \a [used_item] in \the [src]."))
 			return TRUE
 
 		to_chat(user, SPAN_WARNING("\The [src] already has an output container!"))
@@ -201,10 +199,10 @@
 
 	if(href_list["dispense"])
 		var/reagent_index = text2num(href_list["dispense"])
-		if(!reagent_index || length(reagents.reagent_volumes) < reagent_index)
+		if(!reagent_index || length(REAGENT_VOLUMES(reagents)) < reagent_index)
 			return TOPIC_HANDLED
 
-		var/mtype = reagents.reagent_volumes[reagent_index]
+		var/mtype = REAGENT_VOLUME(reagents, reagent_index)
 
 		// Only liquids are allowed to dispense. Otherwise, try to process the reagent.
 		if(process_non_liquid(mtype))
@@ -234,23 +232,20 @@
 
 	data["dispense_amount"] = dispense_amount
 	if(output_container)
-		var/curr_volume = output_container.reagents?.total_volume || 0
-		var/max_volume  = output_container.reagents?.maximum_volume || 0
+		var/curr_volume = REAGENT_TOTAL_VOLUME(output_container.reagents)
+		var/max_volume  = REAGENT_MAXIMUM_VOLUME(output_container.reagents)
 
 		data["container"] = "[output_container.name] ([curr_volume] / [max_volume] U)"
 
 	data["reagents"] = list()
 	var/index = 0
-	for(var/mtype in reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
 		index += 1
-		var/decl/material/mat = GET_DECL(mtype)
-
 		// TODO: Must be revised once state changes are in. Reagent names might be a litle odd in the meantime.
-		var/is_liquid = mat.phase_at_temperature(temperature, ONE_ATMOSPHERE) == MAT_PHASE_LIQUID
+		var/is_liquid = reagent.phase_at_temperature(temperature, ONE_ATMOSPHERE) == MAT_PHASE_LIQUID
+		data["reagents"] += list(list("label" = "[reagent.liquid_name] ([REAGENT_VOLUME(reagents, reagent)] U)", "index" = index, "liquid" = is_liquid))
 
-		data["reagents"] += list(list("label" = "[mat.liquid_name] ([reagents.reagent_volumes[mtype]] U)", "index" = index, "liquid" = is_liquid))
-
-	data["full"] = reagents.total_volume >= max_liquid
+	data["full"] = REAGENT_TOTAL_VOLUME(reagents) >= MAX_LIQUID
 	data["gas_pressure"] = gas_contents?.return_pressure()
 	return data
 

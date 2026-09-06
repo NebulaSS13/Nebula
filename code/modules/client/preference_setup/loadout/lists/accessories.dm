@@ -51,6 +51,32 @@
 	path = /obj/item/clothing/neck/necklace
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	uid = "gear_accessory_necklace"
+	var/list/available_materials = list(
+		/decl/material/solid/metal/steel,
+		/decl/material/solid/metal/bronze,
+		/decl/material/solid/metal/silver,
+		/decl/material/solid/metal/gold,
+		/decl/material/solid/metal/platinum
+	)
+
+/decl/loadout_option/accessory/necklace/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path])
+	.[/datum/gear_tweak/path] |= list(
+		"necklace"                  = /obj/item/clothing/neck/necklace,
+		"necklace, square pendant"  = /obj/item/clothing/neck/necklace/square,
+		"necklace, frill"           = /obj/item/clothing/neck/necklace/frill,
+		"necklace, cross pendant"   = /obj/item/clothing/neck/necklace/cross,
+		"necklace, diamond pendant" = /obj/item/clothing/neck/necklace/diamond,
+		"necklace, ornate"          = /obj/item/clothing/neck/necklace/ornate
+	)
+	if(length(available_materials))
+		for(var/mat in available_materials)
+			var/decl/material/mat_decl = GET_DECL(mat)
+			available_materials -= mat
+			available_materials[mat_decl.name] = mat
+		LAZYINITLIST(.[/datum/gear_tweak/material])
+		.[/datum/gear_tweak/material] = available_materials
 
 /decl/loadout_option/accessory/bow
 	name = "bowtie, horrible"

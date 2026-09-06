@@ -93,8 +93,7 @@
 		/obj/effect/meteor/irradiated=10,
 		/obj/effect/meteor/golden=10,
 		/obj/effect/meteor/silver=10,
-		/obj/effect/meteor/flaming=10,
-		/obj/effect/meteor/supermatter=1
+		/obj/effect/meteor/flaming=10
 	)
 
 	// As a bonus, more frequent events.

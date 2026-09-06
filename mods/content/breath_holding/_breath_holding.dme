@@ -1,0 +1,9 @@
+#ifndef CONTENT_PACK_BREATH_HOLDING
+#define CONTENT_PACK_BREATH_HOLDING
+// BEGIN_INCLUDE
+#include "breath_holding.dm"
+#include "living_overrides.dm"
+#include "living_verbs.dm"
+#include "lung_overrides.dm"
+// END_INCLUDE
+#endif

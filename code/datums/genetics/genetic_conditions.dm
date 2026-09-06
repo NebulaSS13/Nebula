@@ -1,4 +1,5 @@
 /decl/genetic_condition
+	abstract_type = /decl/genetic_condition
 	/// Descriptive name, used in VV panel.
 	var/name
 	/// Verb to be added or removed on activate/deactivate
@@ -64,11 +65,6 @@
 	name               = "Telepathy"
 	grant_verb         = /mob/living/human/proc/remotesay
 	activation_message = "You expand your mind outwards."
-
-/decl/genetic_condition/superpower/morph
-	name               = "Morph"
-	grant_verb         = /mob/living/human/proc/morph
-	activation_message = "Your skin feels strange."
 
 /decl/genetic_condition/superpower/cold_resist
 	name               = "Cold Resistance"

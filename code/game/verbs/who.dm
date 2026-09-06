@@ -104,7 +104,7 @@
 		else
 			msg += line
 
-	if(get_config_value(/decl/config/text/admin_irc))
-		to_chat(src, "<span class='info'>Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond.</span>")
+	if(SSwebhooks.is_webhook_configured(WEBHOOK_AHELP_SENT))
+		to_chat(src, "<span class='info'>Adminhelps are also sent to Discord. If no admins are available in game try anyway and an admin on Discord may see it and join.</span>")
 	to_chat(src, "<b>Current Staff ([active_staff]/[total_staff]):</b>")
 	to_chat(src, jointext(msg,"\n"))

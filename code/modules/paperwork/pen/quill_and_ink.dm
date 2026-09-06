@@ -1,7 +1,7 @@
 /obj/item/pen/fancy/quill
 	name              = "quill pen"
 	icon              = 'icons/obj/items/pens/pen_quill.dmi'
-	sharp             = 0
+	sharp             = FALSE
 	material          = /decl/material/solid/organic/skin/feathers
 	pen_quality       = TOOL_QUALITY_DEFAULT
 	max_uses          = 5 // gotta re-ink it often!
@@ -56,7 +56,7 @@
 	icon = 'icons/obj/items/inkwell.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "An inkwell used to hold ink. Dip a quill pen into this to re-ink it."
-	volume = 30
+	chem_volume = 30
 	/// The minimum amount of ink in the inkwell when populating reagents.
 	var/starting_volume_low = 20
 	/// The maximum amount of ink in the inkwell when populating reagents.
@@ -88,7 +88,7 @@
 		if(current_uses >= quill.max_uses)
 			to_chat(user, SPAN_WARNING("\The [quill] doesn't need any more ink!"))
 			return TRUE
-		if(reagents?.total_liquid_volume <= 0)
+		if(REAGENT_TOTAL_LIQUID_VOLUME(reagents) <= 0)
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You dip \the [quill] into \the [src]."))

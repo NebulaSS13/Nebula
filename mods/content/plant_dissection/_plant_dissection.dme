@@ -1,0 +1,10 @@
+// BEGIN_INCLUDE
+#ifndef MODPACK_PLANT_DISSECTION
+#define MODPACK_PLANT_DISSECTION
+#include "_plant_dissection.dm"
+#include "grown.dm"
+#include "grown_segment.dm"
+#include "plant_segment.dm"
+#include "seed_dissection.dm"
+#endif
+// END_INCLUDE

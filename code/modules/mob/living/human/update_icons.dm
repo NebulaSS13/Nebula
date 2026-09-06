@@ -139,7 +139,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		return
 
 	var/matrix/M = matrix()
-	if(current_posture?.prone && (root_bodytype.prone_overlay_offset[1] || root_bodytype.prone_overlay_offset[2]))
+	if(current_posture?.prone && !isnull(root_bodytype.prone_overlay_offset) && (root_bodytype.prone_overlay_offset[1] || root_bodytype.prone_overlay_offset[2]))
 		M.Translate(root_bodytype.prone_overlay_offset[1], root_bodytype.prone_overlay_offset[2])
 
 	var/mangle_planes = FALSE
@@ -320,31 +320,27 @@ Please contact me on #coderbus IRC. ~Carn x
 //UNDERWEAR OVERLAY
 
 /mob/living/human/proc/update_underwear(var/update_icons=1)
-	var/list/undies = list()
-	for(var/entry in worn_underwear)
-
-		var/obj/item/underwear/UW = entry
-		if (!UW?.icon) // Avoid runtimes for nude underwear types
-			continue
-
-		var/decl/bodytype/root_bodytype = get_bodytype()
-		if(!root_bodytype)
-			continue // Avoid runtimes for dummy mobs with no bodytype set
-
-		var/image/I
-		if(UW.slot_offset_str && LAZYACCESS(root_bodytype.equip_adjust, UW.slot_offset_str))
-			I = root_bodytype.get_offset_overlay_image(src, UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
-		else
-			I = image(icon = UW.icon, icon_state = UW.icon_state)
-			I.color = UW.color
-		if(I) // get_offset_overlay_image() may potentially return null
-			I.appearance_flags |= RESET_COLOR
-			undies += I
-	set_current_mob_overlay(HO_UNDERWEAR_LAYER, undies, update_icons)
+	var/list/undies_overlays = list()
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(root_bodytype)
+		var/list/adjustments = root_bodytype.get_equip_adjustments(src)
+		for(var/obj/item/underwear/undies as anything in worn_underwear)
+			if (!undies?.icon) // Avoid runtimes for nude underwear types
+				continue
+			var/image/undies_overlay
+			if(undies.slot_offset_str && (undies.slot_offset_str in adjustments))
+				undies_overlay = root_bodytype.get_offset_overlay_image(src, undies.icon, undies.icon_state, undies.color, undies.slot_offset_str)
+			else
+				undies_overlay = image(icon = undies.icon, icon_state = undies.icon_state)
+				undies_overlay.color = undies.color
+			if(undies_overlay) // get_offset_overlay_image() may potentially return null
+				undies_overlay.appearance_flags |= RESET_COLOR
+				undies_overlays += undies_overlay
+	set_current_mob_overlay(HO_UNDERWEAR_LAYER, undies_overlays, update_icons)
 
 /mob/living/human/update_hair(var/update_icons=1)
 	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	var/list/new_accessories = head_organ?.get_mob_overlays()
+	var/list/new_accessories = head_organ?.get_limb_mob_overlays()
 	set_current_mob_overlay(HO_HAIR_LAYER, new_accessories, update_icons)
 
 /mob/living/human/proc/update_skin(var/update_icons=1)
@@ -360,5 +356,5 @@ Please contact me on #coderbus IRC. ~Carn x
 	set_current_mob_overlay(HO_CONDITION_LAYER, condition_overlays, update_icons)
 
 /mob/living/human/hud_reset(full_reset = FALSE)
-	if((. = ..()) && internals && internal)
-		internals.icon_state = "internal1"
+	if((. = ..()))
+		refresh_hud_element(HUD_INTERNALS)

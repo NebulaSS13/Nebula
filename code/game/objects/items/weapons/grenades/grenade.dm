@@ -47,15 +47,13 @@
 		return 0
 	return 1
 
-/obj/item/grenade/examine(mob/user, distance)
+/obj/item/grenade/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(distance <= 0)
+	if(distance <= 0 && !isnull(det_time))
 		if(det_time > 1)
-			to_chat(user, "The timer is set to [det_time/10] seconds.")
-			return
-		if(det_time == null)
-			return
-		to_chat(user, "\The [src] is set for instant detonation.")
+			. += "The timer is set to [det_time/10] seconds."
+		else
+			. += "\The [src] is set for instant detonation."
 
 /obj/item/grenade/attack_self(mob/user)
 	if(active)
@@ -83,8 +81,8 @@
 	if(T)
 		T.hotspot_expose(700,125)
 
-/obj/item/grenade/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W))
+/obj/item/grenade/attackby(obj/item/used_item, mob/user)
+	if(IS_SCREWDRIVER(used_item))
 		switch(det_time)
 			if (1)
 				det_time = 10

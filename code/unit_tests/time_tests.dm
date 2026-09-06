@@ -1,6 +1,6 @@
 /datum/unit_test/time
 	name = "TIME: Template"
-	template = /datum/unit_test/time
+	abstract_type = /datum/unit_test/time
 
 /datum/unit_test/time/shall_validate_sixth_of_june
 	name = "TIME: Shall validate 6th of June"

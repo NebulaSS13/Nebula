@@ -5,7 +5,7 @@
 	drop_sound         = 'sound/foley/tooldrop1.ogg'
 	w_class            = ITEM_SIZE_HUGE
 	slot_flags         = SLOT_BACK
-	hilt_material      = /decl/material/solid/organic/wood
+	hilt_material      = /decl/material/solid/organic/wood/oak
 	guard_material     = /decl/material/solid/organic/leather/gut
 	pommel_material    = null
 	_base_attack_force = 20

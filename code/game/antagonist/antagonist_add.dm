@@ -15,7 +15,7 @@
 			. = TRUE
 		else
 			report_progress("Loading map template '[base]' for [name].")
-			. = base.load_new_z(FALSE) // Don't skip ChangeTurf.
+			. = base.load_new_z()
 		if(.)
 			get_starting_locations()
 

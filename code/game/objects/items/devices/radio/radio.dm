@@ -56,7 +56,6 @@
 	var/broadcasting = FALSE
 	var/listening = TRUE
 	var/list/channels
-	var/default_color = "#6d3f40"
 	var/decrypt_all_messages = FALSE
 	var/can_use_analog = TRUE
 	var/datum/extension/network_device/radio/radio_device_type = /datum/extension/network_device/radio
@@ -77,7 +76,7 @@
 /obj/item/radio/proc/can_decrypt(var/list/secured)
 	if(decrypt_all_messages)
 		return TRUE
-	if(!secured || !length(secured))
+	if(!LAZYLEN(secured))
 		return TRUE
 	if(!islist(secured))
 		secured = list(secured)
@@ -95,6 +94,11 @@
 	frequency = new_frequency
 	if(analog && frequency)
 		analog_radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
+
+/obj/item/radio/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_network_id, map_hash)
+	ADJUST_TAG_VAR(initial_network_key, map_hash)
 
 /obj/item/radio/Initialize()
 	. = ..()
@@ -227,11 +231,11 @@
 		return STATUS_CLOSE
 	return ..()
 
-/obj/item/radio/OnTopic(href, href_list)
+/obj/item/radio/OnTopic(mob/user, href_list)
 	if((. = ..()))
 		return
 
-	usr.set_machine(src)
+	user.set_machine(src)
 	if(href_list["analog"])
 		if(can_use_analog)
 			analog = text2num(href_list["analog"])
@@ -258,8 +262,8 @@
 		var/new_frequency = sanitize_frequency(frequency + text2num(href_list["freq"]))
 		set_frequency(new_frequency)
 		if(hidden_uplink)
-			if(hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
-				close_browser(usr, "window=radio")
+			if(hidden_uplink.check_trigger(user, frequency, traitor_frequency))
+				close_browser(user, "window=radio")
 		. = TOPIC_REFRESH
 	else if (href_list["talk"])
 		toggle_broadcast()
@@ -278,14 +282,14 @@
 		. = TOPIC_REFRESH
 	else if(href_list["spec_freq"])
 		var freq = href_list["spec_freq"]
-		if(has_channel_access(usr, freq))
+		if(has_channel_access(user, freq))
 			set_frequency(text2num(freq))
 		. = TOPIC_REFRESH
 	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
 		return TOPIC_HANDLED
 	if(href_list["network_settings"])
 		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
-		D.ui_interact(usr)
+		D.ui_interact(user)
 		. = TOPIC_HANDLED
 	if(. & TOPIC_REFRESH)
 		SSnano.update_uis(src)
@@ -317,28 +321,35 @@
 				return channel.frequency
 	return frequency
 
-/obj/item/radio/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
+/obj/item/radio/talk_into(mob/living/speaker, datum/speech/phrases, verb = "says")
 	set waitfor = FALSE
 	if(!on) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
-	if(!istype(M) || !message) return 0
+	if(!istype(speaker))
+		return FALSE
 
-	if(speaking && (speaking.flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG))) return 0
+	var/list/audible_phrases = list()
+	for(var/list/phrase in phrases.phrases)
+		var/decl/language/speaking = phrase[2]
+		if(!speaking || !(speaking.language_flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG)))
+			audible_phrases += list(phrase)
+	if(!length(audible_phrases))
+		return FALSE
 
-	if (!broadcasting)
+	if(!broadcasting)
 		// Sedation chemical effect should prevent radio use.
-		if((M.has_chemical_effect(CE_SEDATE, 1) || M.incapacitated(INCAPACITATION_DISRUPTED)))
-			to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
+		if((speaker.has_chemical_effect(CE_SEDATE, 1) || speaker.incapacitated(INCAPACITATION_DISRUPTED)))
+			to_chat(speaker, SPAN_WARNING("You're unable to reach \the [src]."))
 			return 0
 
-		if(M.radio_interrupt_cooldown > world.time)
-			to_chat(M, SPAN_WARNING("You're disrupted as you reach for \the [src]."))
+		if(speaker.radio_interrupt_cooldown > world.time)
+			to_chat(speaker, SPAN_WARNING("You're disrupted as you reach for \the [src]."))
 			return 0
 
-		if(istype(M))
-			M.trigger_aiming(TARGET_CAN_RADIO)
+		if(istype(speaker))
+			speaker.trigger_aiming(TARGET_CAN_RADIO)
 
-	addtimer(CALLBACK(src, PROC_REF(transmit), M, message, message_mode, verb, speaking), 0)
+	addtimer(CALLBACK(src, PROC_REF(transmit), speaker, phrases, verb), 0)
 
 /obj/item/radio/proc/can_transmit_binary()
 	for(var/obj/item/encryptionkey/key in encryption_keys)
@@ -346,7 +357,7 @@
 			return TRUE
 	return FALSE
 
-/obj/item/radio/proc/transmit(var/mob/speaker, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
+/obj/item/radio/proc/transmit(var/mob/living/speaker, datum/speech/phrases, var/verb = "says")
 
 	if(wires.IsIndexCut(WIRE_TRANSMIT))
 		return 0
@@ -364,9 +375,9 @@
 	if(loc && loc == speaker)
 		playsound(loc, 'sound/effects/walkietalkie.ogg', 20, 0, -1)
 
-	if(message_mode == MESSAGE_MODE_SPECIAL && can_transmit_binary())
+	if(phrases.message_mode == MESSAGE_MODE_SPECIAL && can_transmit_binary())
 		var/decl/language/binary/binary = GET_DECL(/decl/language/binary)
-		binary.broadcast(speaker, message)
+		binary.broadcast(speaker, phrases)
 		return TRUE
 
 	var/turf/position = get_turf(src)
@@ -375,10 +386,10 @@
 
 	var/list/current_sector = SSmapping.get_connected_levels(position.z)
 	var/use_frequency = frequency
-	if(message_mode && !analog)
+	if(phrases.message_mode && !analog)
 		var/list/current_channels = get_available_channels()
-		message_mode = lowertext(message_mode)
-		if(message_mode == MESSAGE_MODE_DEFAULT)
+		phrases.message_mode = lowertext(phrases.message_mode)
+		if(phrases.message_mode == MESSAGE_MODE_DEFAULT)
 			for(var/datum/radio_channel/channel in current_channels)
 				if(!channel.secured)
 					use_frequency = channel.frequency
@@ -389,7 +400,7 @@
 						use_frequency = channel.frequency
 						break
 
-		else if(message_mode == MESSAGE_MODE_DEPARTMENT)
+		else if(phrases.message_mode == MESSAGE_MODE_DEPARTMENT)
 			for(var/datum/radio_channel/channel in current_channels)
 				if(channel.secured && can_decrypt(channel.secured))
 					use_frequency = channel.frequency
@@ -401,7 +412,7 @@
 						break
 		else
 			for(var/datum/radio_channel/channel in current_channels)
-				if(channel.key != message_mode || !(LAZYACCESS(channels, channel)))
+				if(channel.key != phrases.message_mode || !(LAZYACCESS(channels, channel)))
 					continue
 				if(can_decrypt(channel.secured))
 					use_frequency = channel.frequency
@@ -412,7 +423,7 @@
 		if(last_frequency != use_frequency)
 			set_frequency(use_frequency)
 
-		broadcast_analog_radio_message(analog_radio_connection, speaker, src, message, intercom, message_compression, current_sector, verb, speaking, analog_secured)
+		broadcast_analog_radio_message(analog_radio_connection, speaker, src, phrases, intercom, message_compression, current_sector, verb, analog_secured)
 		if(frequency != last_frequency)
 			set_frequency(last_frequency)
 	else
@@ -423,7 +434,7 @@
 		for(var/weakref/H as anything in network?.connected_hubs)
 			var/obj/machinery/network/telecomms_hub/hub = H.resolve()
 			if(istype(hub) && !QDELETED(hub) && hub.can_receive_message(network))
-				hub.transmit_message(speaker, message, verb, speaking, use_frequency, message_compression, checked_hubs)
+				hub.transmit_message(speaker, phrases, verb, use_frequency, message_compression, checked_hubs)
 				break // Only one hub per message, since it transmits over the whole network.
 
 /obj/item/radio/proc/can_receive_message(var/check_network_membership)
@@ -432,9 +443,9 @@
 		var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 		return network_device?.get_network() == check_network_membership
 
-/obj/item/radio/hear_talk(mob/M, msg, var/verb = "says", var/decl/language/speaking = null)
-	if(on && broadcasting && get_dist(src, M) <= canhear_range)
-		talk_into(M, msg, null, verb, speaking)
+/obj/item/radio/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
+	if(on && broadcasting && get_dist(src, speaker) <= canhear_range)
+		talk_into(speaker, istype(phrases) ? phrases.unformatted_message : phrases, verb)
 
 /obj/item/radio/proc/get_accessible_channel_descriptions(var/mob/user)
 	var/prefix = user?.get_department_radio_prefix()
@@ -445,33 +456,33 @@
 	if(can_transmit_binary())
 		LAZYADD(., "<b>- Robot talk:</b> [prefix]+")
 
-/obj/item/radio/examine(mob/user, distance)
+/obj/item/radio/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if (distance <= 1 || loc == user)
 		var/list/channel_descriptions = get_accessible_channel_descriptions(user)
 		if(length(channel_descriptions))
-			to_chat(user, "\The [src] has the following channel [length(channel_descriptions) == 1 ? "shortcut" : "shortcuts"] configured:")
+			. += "\The [src] has the following channel [length(channel_descriptions) == 1 ? "shortcut" : "shortcuts"] configured:"
 			for(var/line in channel_descriptions)
-				to_chat(user, line)
+				. += line
 		if(panel_open)
-			to_chat(user, SPAN_WARNING("A panel on the back of \the [src] is hanging open."))
+			. += SPAN_WARNING("A panel on the back of \the [src] is hanging open.")
 
-/obj/item/radio/attackby(obj/item/W, mob/user)
+/obj/item/radio/attackby(obj/item/used_item, mob/user)
 	user.set_machine(src)
 
-	if(istype(W, /obj/item/encryptionkey))
+	if(istype(used_item, /obj/item/encryptionkey))
 		if(!encryption_key_capacity)
 			to_chat(user, SPAN_WARNING("\The [src] cannot accept an encryption key."))
 			return TRUE
 		if(length(encryption_keys) >= encryption_key_capacity)
 			to_chat(user, SPAN_WARNING("\The [src] cannot fit any more encryption keys."))
 			return TRUE
-		if(user.try_unequip(W, src))
-			LAZYADD(encryption_keys, W)
+		if(user.try_unequip(used_item, src))
+			LAZYADD(encryption_keys, used_item)
 			channels = null
 			return TRUE
 
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		if(length(encryption_keys))
 			var/obj/item/encryptionkey/ekey = pick(encryption_keys)
 			ekey.dropInto(loc)

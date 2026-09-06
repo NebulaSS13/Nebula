@@ -27,7 +27,7 @@
 	driver.scan_file_type = target.scan_file_type
 
 	if(target.type == /obj/item/paper/bodyscan)
-		driver.data_buffer = display_medical_data(target.metadata.Copy(),user.get_skill_value(SKILL_MEDICAL), TRUE)
+		driver.data_buffer = display_medical_data(driver.metadata_buffer,user.get_skill_value(SKILL_MEDICAL), TRUE)
 	else
 		driver.data_buffer = data
 

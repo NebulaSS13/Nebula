@@ -9,9 +9,8 @@
 	material = /decl/material/solid/metal/brass
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 
-/obj/item/keyring/examine(mob/user, distance)
+/obj/item/keyring/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-
 	if(length(contents) && distance <= 1)
 		var/key_strings = list()
 		for(var/obj/item/key/key in contents)
@@ -19,11 +18,9 @@
 				key_strings += SPAN_NOTICE("\The [key] unlocks '[key.key_data]'.")
 			else
 				key_strings += SPAN_NOTICE("\The [key] is blank.")
-
 		if(length(key_strings))
-			to_chat(user, "\The [src] holds [length(key_strings)] key\s:")
-			for(var/key_string in key_strings)
-				to_chat(user, key_string)
+			. += "\The [src] holds [length(key_strings)] key\s:"
+			. += key_strings
 
 /obj/item/keyring/on_update_icon()
 	. = ..()

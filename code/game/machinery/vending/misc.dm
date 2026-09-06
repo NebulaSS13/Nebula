@@ -27,7 +27,7 @@
 		/obj/item/chems/glass/beaker/bowl = 2,
 		/obj/item/plate/tray/metal/aluminium = 8,
 		/obj/item/knife/kitchen = 3,
-		/obj/item/kitchen/rollingpin = 2,
+		/obj/item/rollingpin = 2,
 		/obj/item/chems/drinks/pitcher = 2,
 		/obj/item/chems/drinks/glass2/coffeecup = 8,
 		/obj/item/chems/drinks/glass2/coffeecup/teacup = 8,

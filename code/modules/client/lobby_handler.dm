@@ -1,4 +1,6 @@
 /decl/lobby_handler
+	var/browser_width = 560
+	var/browser_height = 280
 	var/list/lobby_options = list(
 		/datum/lobby_option/setup,
 		/datum/lobby_option/view_manifest,

@@ -9,7 +9,7 @@ else
   cd "$HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}"
   echo "Installing DreamMaker to $PWD"
   #curl "http://www.byond.com/download/build/${BYOND_MAJOR}/${BYOND_MAJOR}.${BYOND_MINOR}_byond_linux.zip" -H "User-Agent: NebulaSS13/1.0 Continuous Integration" -o byond.zip
-  curl "https://spacestation13.github.io/byond-builds/${BYOND_MAJOR}/${BYOND_MAJOR}.${BYOND_MINOR}_byond_linux.zip" -H "User-Agent: NebulaSS13/1.0 Continuous Integration" -o byond.zip
+  curl "https://byond-builds.dm-lang.org/${BYOND_MAJOR}/${BYOND_MAJOR}.${BYOND_MINOR}_byond_linux.zip" -H "User-Agent: NebulaSS13/1.0 Continuous Integration" -o byond.zip
   unzip -o byond.zip
   cd byond
   make here

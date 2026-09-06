@@ -54,9 +54,9 @@
 	src.startgibbing(user)
 	return TRUE
 
-/obj/machinery/gibber/examine(mob/user)
+/obj/machinery/gibber/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "The safety guard is [emagged ? SPAN_DANGER("disabled") : "enabled"].")
+	. += "The safety guard is [emagged ? SPAN_DANGER("disabled") : "enabled"]."
 
 /obj/machinery/gibber/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged
@@ -79,11 +79,11 @@
 		to_chat(user, SPAN_DANGER("You need a better grip to do that!"))
 	return TRUE
 
-/obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
-	if(!operating && istype(W, /obj/item/organ))
-		if(user.try_unequip(W))
-			qdel(W)
-			user.visible_message(SPAN_DANGER("\The [user] feeds \the [W] into \the [src], obliterating it."))
+/obj/machinery/gibber/attackby(var/obj/item/used_item, var/mob/user)
+	if(!operating && istype(used_item, /obj/item/organ))
+		if(user.try_unequip(used_item))
+			qdel(used_item)
+			user.visible_message(SPAN_DANGER("\The [user] feeds \the [used_item] into \the [src], obliterating it."))
 		return TRUE
 	return ..()
 

@@ -144,6 +144,8 @@
 	use_external_power = 1
 	max_shots = 4
 	has_safety = FALSE
+	autofire_enabled = TRUE
+	autofire_delay = 0.5 SECONDS
 
 /obj/item/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
 	var/obj/item/cell/power_supply = get_cell()

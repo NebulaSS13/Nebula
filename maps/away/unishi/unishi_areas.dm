@@ -1,5 +1,6 @@
-/area/unishi/
-   icon = 'unishi.dmi'
+/area/unishi
+	abstract_type = /area/unishi
+	icon = 'unishi.dmi'
 
 /area/unishi/bridge
 	name = "\improper Bridge"

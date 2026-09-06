@@ -31,9 +31,9 @@
 
 	update_icon()
 
-/obj/structure/tank_rack/examine(mob/user, distance)
+/obj/structure/tank_rack/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, SPAN_NOTICE("It is holding [LAZYLEN(oxygen_tanks)] air tank\s and [LAZYLEN(hydrogen_tanks)] hydrogen tank\s."))
+	. += SPAN_NOTICE("It is holding [LAZYLEN(oxygen_tanks)] air tank\s and [LAZYLEN(hydrogen_tanks)] hydrogen tank\s.")
 
 /obj/structure/tank_rack/Destroy()
 	QDEL_NULL_LIST(hydrogen_tanks)
@@ -78,14 +78,14 @@
 	popup.open()
 	return TRUE
 
-/obj/structure/tank_rack/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/tank))
+/obj/structure/tank_rack/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/tank))
 
 		var/list/adding_to_list
-		if(istype(I, /obj/item/tank/oxygen) || istype(I, /obj/item/tank/air))
+		if(istype(used_item, /obj/item/tank/oxygen) || istype(used_item, /obj/item/tank/air))
 			LAZYINITLIST(oxygen_tanks)
 			adding_to_list = oxygen_tanks
-		else if(istype(I, /obj/item/tank/hydrogen))
+		else if(istype(used_item, /obj/item/tank/hydrogen))
 			LAZYINITLIST(hydrogen_tanks)
 			adding_to_list = hydrogen_tanks
 		else
@@ -96,11 +96,11 @@
 			UNSETEMPTY(adding_to_list)
 			return TRUE
 
-		if(!user.try_unequip(I, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
 
-		LAZYADD(adding_to_list, weakref(I))
-		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
+		LAZYADD(adding_to_list, weakref(used_item))
+		to_chat(user, SPAN_NOTICE("You put [used_item] in [src]."))
 		update_icon()
 		attack_hand_with_interaction_checks(user)
 		return TRUE

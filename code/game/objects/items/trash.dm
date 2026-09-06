@@ -10,14 +10,11 @@
 	var/age = 0
 
 /obj/item/trash/Initialize(mapload, var/_age)
+	if(!mapload)
+		SSpersistence.track_value(src, /decl/persistence_handler/filth/trash)
 	. = ..(mapload)
 	if(!isnull(_age))
 		age = _age
-
-/obj/item/trash/Initialize(var/ml)
-	if(!ml)
-		SSpersistence.track_value(src, /decl/persistence_handler/filth/trash)
-	. = ..()
 
 /obj/item/trash/Destroy()
 	SSpersistence.forget_value(src, /decl/persistence_handler/filth/trash)
@@ -169,7 +166,7 @@
 
 /obj/item/trash/stick
 	name = "stick"
-	desc = "a stick from some snack food item or a lollipop, not even useful as crafting material."
+	desc = "A stick from some snack food item or a lollipop, not even useful as crafting material."
 	icon_state = "stick"
 
 /obj/item/trash/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)

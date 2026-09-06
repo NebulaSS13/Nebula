@@ -2,7 +2,7 @@
 	name = "Robotic Guardians"
 	var/list/guardian_types = list(
 		/mob/living/simple_animal/hostile/hivebot,
-		/mob/living/simple_animal/hostile/hivebot/range,
+		/mob/living/simple_animal/hostile/hivebot/ranged,
 		/mob/living/simple_animal/hostile/viscerator/hive
 	)
 	var/list/mega_guardian_types = list(

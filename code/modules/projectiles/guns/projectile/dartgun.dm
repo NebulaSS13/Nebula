@@ -22,7 +22,7 @@
 	var/list/starting_chems = null
 
 /obj/item/gun/projectile/dartgun/Initialize()
-	initialize_reagents()
+	chem_volume = length(starting_chems) * 60
 	. = ..()
 	update_icon()
 
@@ -52,24 +52,21 @@
 		fill_dart(dart)
 	return dart
 
-/obj/item/gun/projectile/dartgun/examine(mob/user)
+/obj/item/gun/projectile/dartgun/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if (beakers.len)
-		to_chat(user, "<span class='notice'>\The [src] contains:</span>")
+		. += SPAN_NOTICE("\The [src] contains:")
 		for(var/obj/item/chems/glass/beaker/B in beakers)
-			if(B.reagents && LAZYLEN(B.reagents?.reagent_volumes))
-				for(var/ltype in B.reagents.liquid_volumes)
-					var/decl/material/R = GET_DECL(ltype)
-					to_chat(user, "<span class='notice'>[LIQUID_VOLUME(B.reagents, ltype)] units of [R.get_reagent_name(B.reagents, MAT_PHASE_LIQUID)]</span>")
+			var/reagent_volumes = REAGENT_VOLUMES(B.reagents)
+			if(B.reagents && LAZYLEN(reagent_volumes))
+				for(var/decl/material/reagent as anything in REAGENT_LIQUID_VOLUMES(B.reagents))
+					. += SPAN_NOTICE("[LIQUID_VOLUME(B.reagents, reagent)] units of [reagent.get_reagent_name(B.reagents, MAT_PHASE_LIQUID)]")
+				for(var/decl/material/reagent as anything in REAGENT_SOLID_VOLUMES(B.reagents))
+					. += SPAN_NOTICE("[SOLID_VOLUME(B.reagents, reagent)] units of [reagent.get_reagent_name(B.reagents, MAT_PHASE_SOLID)]")
 
-				for(var/stype in B.reagents.solid_volumes)
-					var/decl/material/R = GET_DECL(stype)
-					to_chat(user, "<span class='notice'>[SOLID_VOLUME(B.reagents, stype)] units of [R.get_reagent_name(B.reagents, MAT_PHASE_SOLID)]</span>")
-
-
-/obj/item/gun/projectile/dartgun/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/chems/glass))
-		add_beaker(I, user)
+/obj/item/gun/projectile/dartgun/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/chems/glass))
+		add_beaker(used_item, user)
 		return TRUE
 	return ..()
 
@@ -93,8 +90,8 @@
 
 //fills the given dart with reagents
 /obj/item/gun/projectile/dartgun/proc/fill_dart(var/obj/item/projectile/bullet/chemdart/dart)
-	if(mixing.len)
-		var/mix_amount = dart.reagent_amount/mixing.len
+	if(length(mixing))
+		var/mix_amount = REAGENT_TOTAL_VOLUME(dart.reagents)/length(mixing)
 		for(var/obj/item/chems/glass/beaker/B in mixing)
 			B.reagents.trans_to_obj(dart, mix_amount)
 
@@ -113,10 +110,10 @@
 			if(!istype(B)) continue
 
 			dat += "Beaker [i] contains: "
-			if(B.reagents && LAZYLEN(B.reagents.reagent_volumes))
-				for(var/rtype in B.reagents.reagent_volumes)
-					var/decl/material/R = GET_DECL(rtype)
-					dat += "<br>    [REAGENT_VOLUME(B.reagents, rtype)] units of [R.get_reagent_name(B.reagents)], "
+			var/reagent_volumes = REAGENT_VOLUMES(B.reagents)
+			if(LAZYLEN(reagent_volumes))
+				for(var/decl/material/reagent as anything in REAGENT_VOLUMES(B.reagents))
+					dat += "<br>    [REAGENT_VOLUME(B.reagents, reagent)] unit\s of [reagent.get_reagent_name(B.reagents)], "
 				if(B in mixing)
 					dat += "<A href='byond://?src=\ref[src];stop_mix=[i]'><font color='green'>Mixing</font></A> "
 				else
@@ -151,13 +148,13 @@
 	else if (href_list["eject"])
 		var/index = text2num(href_list["eject"])
 		if(beakers[index])
-			remove_beaker(beakers[index], usr)
+			remove_beaker(beakers[index], user)
 		. = TOPIC_REFRESH
 	else if (href_list["eject_cart"])
-		unload_ammo(usr)
+		unload_ammo(user)
 		. = TOPIC_REFRESH
 
-	Interact(usr)
+	Interact(user)
 
 /obj/item/gun/projectile/dartgun/medical
 	starting_chems = list(/decl/material/liquid/burn_meds,/decl/material/liquid/brute_meds,/decl/material/liquid/antitoxins)

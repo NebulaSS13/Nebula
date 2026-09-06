@@ -43,8 +43,8 @@
 	deprivation, irradiation, shock, and chemicals inside the occupant, at least until the bag is opened again.<br>\
 	<br>\
 	Stasis bags can only be used once, and are rather costly, so use them well.  They are ideal for situations where someone may die \
-	before being able to bring them back to safety, or if they are in a hostile enviroment, such as in vacuum or in a toxins leak, as \
-	the bag will protect the occupant from most outside enviromental hazards.  If you open a bag by mistake, closing the bag with no \
+	before being able to bring them back to safety, or if they are in a hostile environment, such as in vacuum or in a toxins leak, as \
+	the bag will protect the occupant from most outside environmental hazards.  If you open a bag by mistake, closing the bag with no \
 	occupant will not use up the bag, and you can pick it back up.<br>\
 	<br>\
 	You can use a health analyzer to scan the occupant's vitals without opening the bag by clicking the occupied bag with the analyzer."

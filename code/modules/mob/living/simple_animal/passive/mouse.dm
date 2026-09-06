@@ -52,7 +52,6 @@
 		INVOKE_ASYNC(body, TYPE_PROC_REF(/mob/living/simple_animal, audible_emote), "snuffles.")
 
 /mob/living/simple_animal/passive/mouse/Initialize()
-	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 	if(name == initial(name))
 		name = "[name] ([sequential_id(/mob/living/simple_animal/passive/mouse)])"
@@ -117,6 +116,9 @@
 	// Change my name back, don't want to be named Tom (666)
 	SetName(initial(name))
 	real_name = name
+
+/mob/living/simple_animal/passive/mouse/brown/Tom/is_tagging_suitable()
+	return FALSE
 
 // rats, they're the rats (from Polaris)
 /mob/living/simple_animal/passive/mouse/rat

@@ -20,4 +20,13 @@
 
 /decl/crafting_stage/screwdriver/buckler_finish
 	progress_message = "You secure the buckler's panels in place and finish it off."
-	product = /obj/item/shield/buckler
+	product = /obj/item/shield/crafted/buckler/improvised
+
+/decl/crafting_stage/screwdriver/buckler_finish/get_product(var/obj/item/work)
+	if(!ispath(product))
+		return null
+	var/obj/item/stool/stool                = locate() in work
+	var/obj/item/stack/material/plank/plank = locate() in work
+	if(istype(stool) && istype(plank))
+		return new product(get_turf(work), plank.material?.type, stool.material?.type)
+	return ..()

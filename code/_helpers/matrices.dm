@@ -94,12 +94,12 @@
 /// Changes distance hues have from grey while maintaining the overall lightness. Greys are unaffected.
 /// * 1 is identity, 0 is greyscale, >1 oversaturates colors
 /proc/color_matrix_saturation(value)
-	var/inv = 1 - value
-	var/R = round(LUMA_R * inv, 0.001)
-	var/G = round(LUMA_G * inv, 0.001)
-	var/B = round(LUMA_B * inv, 0.001)
+	var/inv   = 1 - value
+	var/red   = round(LUMA_R * inv, 0.001)
+	var/green = round(LUMA_G * inv, 0.001)
+	var/blue  = round(LUMA_B * inv, 0.001)
 
-	return list(R + value,R,R,0, G,G + value,G,0, B,B,B + value,0, 0,0,0,1, 0,0,0,0)
+	return list(red + value,red,red,0, green,green + value,green,0, blue,blue,blue + value,0, 0,0,0,1, 0,0,0,0)
 
 #define LUMR 0.2126
 #define LUMG 0.7152
@@ -111,11 +111,13 @@
 	if(value > 0)
 		value *= 3
 	var/x = 1 + value / 100
-	var/inv = 1 - x
-	var/R = LUMR * inv
-	var/G = LUMG * inv
-	var/B = LUMB * inv
-	return list(R + x,R,R, G,G + x,G, B,B,B + x)
+
+	var/inv   = 1 - x
+	var/red   = LUMR * inv
+	var/green = LUMG * inv
+	var/blue  = LUMB * inv
+	return list(red + x,red,red, green,green + x,green, blue,blue,blue + x)
+
 #undef LUMR
 #undef LUMG
 #undef LUMB
@@ -189,7 +191,7 @@
 /// Converts RGB shorthands into RGBA matrices complete of constants rows (ergo a 20 keys list in byond).
 /proc/color_to_full_rgba_matrix(color)
 	if(istext(color))
-		var/list/L = ReadRGB(color)
+		var/list/L = rgb2num(color)
 		if(!L)
 			CRASH("Invalid/unsupported color format argument in color_to_full_rgba_matrix()")
 		return list(L[1]/255,0,0,0, 0,L[2]/255,0,0, 0,0,L[3]/255,0, 0,0,0,L.len>3?L[4]/255:1, 0,0,0,0)
@@ -200,7 +202,7 @@
 		if(3 to 5) // row-by-row hexadecimals
 			. = list()
 			for(var/a in 1 to L.len)
-				var/list/rgb = ReadRGB(L[a])
+				var/list/rgb = rgb2num(L[a])
 				for(var/b in rgb)
 					. += b/255
 				if(length(rgb) % 4) // RGB has no alpha instruction

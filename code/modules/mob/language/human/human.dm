@@ -5,7 +5,7 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = "solcom"
-	flags = LANG_FLAG_WHITELISTED | LANG_FLAG_RESTRICTED
+	language_flags = LANG_FLAG_WHITELISTED | LANG_FLAG_RESTRICTED
 	shorthand = "???"
 	space_chance = 40
 	abstract_type = /decl/language/human
@@ -18,14 +18,12 @@
 			return ask_verb
 	return speech_verb
 
-/decl/language/human/get_random_name(var/gender)
+/decl/language/human/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if (prob(80))
 		if(gender==FEMALE)
 			return capitalize(pick(global.using_map.first_names_female)) + " " + capitalize(pick(global.using_map.last_names))
-		else
-			return capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
-	else
-		return ..()
+		return capitalize(pick(global.using_map.first_names_male)) + " " + capitalize(pick(global.using_map.last_names))
+	return ..()
 
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////
 	Syllable list compiled in this file based on work by Stefan Trost, available at the following URLs
@@ -40,8 +38,8 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = ""
-	key = "1"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "common"
+	language_flags = LANG_FLAG_WHITELISTED
 	shorthand = "C"
 	partial_understanding = list()
 	syllables = list(

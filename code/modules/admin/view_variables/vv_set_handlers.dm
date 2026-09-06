@@ -1,4 +1,5 @@
 /decl/vv_set_handler
+	abstract_type = /decl/vv_set_handler
 	var/handled_type
 	var/predicates
 	var/list/handled_vars

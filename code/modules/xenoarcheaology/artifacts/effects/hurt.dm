@@ -1,6 +1,6 @@
 /datum/artifact_effect/hurt
 	name = "hurt"
-	origin_type = EFFECT_ORGANIC
+	origin_type = XA_EFFECT_ORGANIC
 
 /datum/artifact_effect/hurt/DoEffectTouch(var/mob/toucher)
 	if(isliving(toucher))

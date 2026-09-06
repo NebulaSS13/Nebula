@@ -62,18 +62,11 @@ var/global/list/random_chem_interaction_blacklist = list(
 
 	data_initialized = TRUE
 
-/decl/material/liquid/random/proc/stable_at_temperature(temperature)
-	if(temperature > chilling_point && temperature < heating_point)
-		return TRUE
-
 /decl/material/liquid/random/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
 	FOR_ALL_EFFECTS
-		var/data = REAGENT_DATA(holder, type)
+		var/data = REAGENT_DATA(holder, src)
 		effect.affect_blood(M, removed, LAZYACCESS(data, effect.type))
-
-/decl/material/liquid/random/proc/on_chemicals_analyze(mob/user)
-	to_chat(user, get_scan_data(user))
 
 /decl/material/liquid/random/proc/get_scan_data(mob/user)
 	var/list/dat = list()

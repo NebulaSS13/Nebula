@@ -85,15 +85,15 @@
 	data["turrets"] = turrets
 	return data
 
-/obj/machinery/pointdefense_control/attackby(var/obj/item/thing, var/mob/user)
-	if(IS_MULTITOOL(thing))
+/obj/machinery/pointdefense_control/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_MULTITOOL(used_item))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
 		//Check if there is more than 1 controller
 		var/datum/local_network/lan = pointdefense.get_local_network()
 		if(lan)
 			var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
-			if(pointdefense_controllers && pointdefense_controllers.len > 1)
+			if(LAZYLEN(pointdefense_controllers) > 1)
 				lan.remove_device(src)
 		return TRUE
 	return ..()
@@ -137,8 +137,8 @@
 		new_dir = SOUTH
 	. = ..()
 
-/obj/machinery/pointdefense/attackby(var/obj/item/thing, var/mob/user)
-	if(IS_MULTITOOL(thing))
+/obj/machinery/pointdefense/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_MULTITOOL(used_item))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
 		return TRUE

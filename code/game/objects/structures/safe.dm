@@ -23,12 +23,12 @@ FLOOR SAFES
 
 // TODO: make this use a storage datum?
 /obj/structure/safe/Initialize()
-	for(var/obj/item/I in loc)
+	for(var/obj/item/thing in loc)
 		if(space >= maxspace)
 			break
-		if(I.w_class + space <= maxspace) //todo replace with internal storage or something
-			space += I.w_class
-			I.forceMove(src)
+		if(thing.w_class + space <= maxspace) //todo replace with internal storage or something
+			space += thing.w_class
+			thing.forceMove(src)
 	. = ..()
 	tumbler_1_pos = rand(0, 72)
 	tumbler_1_open = rand(0, 72)
@@ -85,22 +85,20 @@ FLOOR SAFES
 	show_browser(user, "<html><head><title>[name]</title></head><body>[dat]</body></html>", "window=safe;size=350x300")
 	return TRUE
 
-/obj/structure/safe/Topic(href, href_list)
-	if(!ishuman(usr))	return
-	var/mob/living/human/user = usr
+/obj/structure/safe/DefaultTopicState()
+	return global.physical_no_access_topic_state
 
+/obj/structure/safe/OnTopic(mob/user, href_list, state)
 	if(href_list["open"])
 		if(check_unlocked())
 			to_chat(user, "<span class='notice'>You [open ? "close" : "open"] [src].</span>")
 			open = !open
-			update_icon()
-			updateUsrDialog()
-			return
+			return TOPIC_REFRESH
 		else
 			to_chat(user, "<span class='notice'>You can't [open ? "close" : "open"] [src], the lock is engaged!</span>")
-			return
+			return TOPIC_HANDLED
 
-	var/canhear = locate(/obj/item/clothing/neck/stethoscope) in usr.get_held_items()
+	var/canhear = locate(/obj/item/clothing/neck/stethoscope) in user.get_held_items()
 	if(href_list["decrement"])
 		dial = decrement(dial)
 		if(dial == tumbler_1_pos + 1 || dial == tumbler_1_pos - 71)
@@ -112,8 +110,7 @@ FLOOR SAFES
 				if(canhear)
 					to_chat(user, "<span class='notice'>You hear a [pick("click", "chink", "clink")] from [src].</span>")
 			check_unlocked(user, canhear)
-		updateUsrDialog()
-		return
+		return TOPIC_REFRESH
 
 	if(href_list["increment"])
 		dial = increment(dial)
@@ -126,34 +123,32 @@ FLOOR SAFES
 				if(canhear)
 					to_chat(user, "<span class='notice'>You hear a [pick("click", "chink", "clink")] from [src].</span>")
 			check_unlocked(user, canhear)
-		updateUsrDialog()
-		return
+		return TOPIC_REFRESH
 
 	if(href_list["retrieve"])
-		close_browser(user, "window=safe") // Close the menu
-
+		if(!open)
+			return TOPIC_CLOSE // Close the menu
 		var/obj/item/P = locate(href_list["retrieve"]) in src
-		if(open)
-			if(P && in_range(src, user))
-				user.put_in_hands(P)
-				updateUsrDialog()
+		if(P && CanPhysicallyInteract(user))
+			user.put_in_hands(P)
+		return TOPIC_REFRESH
 
 
-/obj/structure/safe/attackby(obj/item/I, mob/user)
+/obj/structure/safe/attackby(obj/item/used_item, mob/user)
 	if(open)
-		if(I.w_class + space <= maxspace)
-			if(!user.try_unequip(I, src))
+		if(used_item.w_class + space <= maxspace)
+			if(!user.try_unequip(used_item, src))
 				return TRUE
-			space += I.w_class
-			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+			space += used_item.w_class
+			to_chat(user, "<span class='notice'>You put [used_item] in [src].</span>")
 			updateUsrDialog()
 			return TRUE
 		else
-			to_chat(user, "<span class='notice'>[I] won't fit in [src].</span>")
+			to_chat(user, "<span class='notice'>[used_item] won't fit in [src].</span>")
 			return TRUE
 	else
-		if(istype(I, /obj/item/clothing/neck/stethoscope))
-			to_chat(user, "Hold [I] in one of your hands while you manipulate the dial.")
+		if(istype(used_item, /obj/item/clothing/neck/stethoscope))
+			to_chat(user, "Hold [used_item] in one of your hands while you manipulate the dial.")
 			return TRUE
 		return FALSE
 

@@ -11,7 +11,7 @@
 	set name = "Reset NanoUI"
 	set category = "OOC"
 
-	var/ui_amt = length(mob.open_uis)
+	var/ui_amt = length(mob.opened_uis)
 	SSnano.close_user_uis(mob)
 	to_chat(src, "[ui_amt] UI windows reset.")
 
@@ -67,5 +67,7 @@
 	return list() // Not implemented.
 
 
-// Used by SSnano (/datum/controller/subsystem/processing/nano) to track UIs opened by this mob
-/mob/var/list/open_uis
+/// Lazy associative list of /nanoui UIs opened on this object, according to ui_key. Not to be confused with opened_uis on mob.
+/datum/var/tmp/list/open_uis
+/// Used by SSnano (/datum/controller/subsystem/processing/nano) to track UIs opened by this mob.
+/mob/var/list/opened_uis

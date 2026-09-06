@@ -160,7 +160,7 @@
 			anchored = TRUE
 			if(do_after(src, 50, F))
 				if(F.is_floor_damaged())
-					F.set_flooring(null)
+					F.remove_flooring(F.get_topmost_flooring())
 			anchored = FALSE
 			target = null
 			busy = 0

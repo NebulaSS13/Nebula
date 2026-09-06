@@ -156,13 +156,9 @@
 	)
 
 /decl/state/drill/switching_target/process(obj/machinery/mining_drill/drill)
-	if(!drill.turf_has_ore(drill.current_turf))
-		if(istype(drill.current_turf))
-			drill.turfs_to_mine -= drill.current_turf
-			if(has_extension(drill.current_turf, /datum/extension/buried_resources))
-				remove_extension(drill.current_turf, /datum/extension/buried_resources)
+	drill.deplete_turf(drill.current_turf)
 	if(length(drill.turfs_to_mine))
-		drill.current_turf = drill.turfs_to_mine[1]
+		drill.choose_turf_to_mine()
 	else
 		drill.current_turf = null
 

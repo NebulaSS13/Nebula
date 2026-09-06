@@ -36,7 +36,6 @@
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
-	var/decl/material/implicit_material
 	autoset_access = FALSE // Uses different system with buttons.
 	pry_mod = 1.35
 
@@ -54,13 +53,13 @@
 	base_type = /obj/machinery/door/blast
 
 /obj/machinery/door/blast/Initialize()
-	implicit_material = GET_DECL(/decl/material/solid/metal/plasteel)
+	material = GET_DECL(/decl/material/solid/metal/plasteel)
 	. = ..()
 
-/obj/machinery/door/blast/examine(mob/user)
+/obj/machinery/door/blast/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if((stat & BROKEN))
-		to_chat(user, "It's broken.")
+		. += SPAN_DANGER("It's broken.")
 
 // Proc: Bumped()
 // Parameters: 1 (AM - Atom that tried to walk through this object)
@@ -137,18 +136,14 @@
 	else
 		force_close()
 
-/obj/machinery/door/blast/get_material()
-	RETURN_TYPE(/decl/material)
-	return implicit_material
-
 // Proc: attackby()
-// Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)
+// Parameters: 2 (used_item - Item this object was clicked with, user - Mob which clicked this object)
 // Description: If we are clicked with crowbar or wielded fire axe, try to manually open the door.
 // This only works on broken doors or doors without power. Also allows repair with Plasteel.
-/obj/machinery/door/blast/attackby(obj/item/C, mob/user)
-	add_fingerprint(user, 0, C)
+/obj/machinery/door/blast/attackby(obj/item/used_item, mob/user)
+	add_fingerprint(user, 0, used_item)
 	if(!panel_open) //Do this here so the door won't change state while prying out the circuit
-		if(IS_CROWBAR(C) || (istype(C, /obj/item/bladed/axe/fire) && C.is_held_twohanded()))
+		if(IS_CROWBAR(used_item) || (istype(used_item, /obj/item/bladed/axe/fire) && used_item.is_held_twohanded()))
 			if(((stat & NOPOWER) || (stat & BROKEN)) && !( operating ))
 				to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
 				if(do_after(user, 2 SECONDS, src))
@@ -158,18 +153,18 @@
 			else
 				to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
 			return TRUE
-	if(istype(C, /obj/item/stack/material) && C.get_material_type() == /decl/material/solid/metal/plasteel)
+	if(istype(used_item, /obj/item/stack/material) && used_item.get_material_type() == /decl/material/solid/metal/plasteel)
 		var/amt = ceil((get_max_health() - current_health)/150)
 		if(!amt)
 			to_chat(user, "<span class='notice'>\The [src] is already fully functional.</span>")
 			return TRUE
-		var/obj/item/stack/P = C
-		if(!P.can_use(amt))
+		var/obj/item/stack/stack = used_item
+		if(!stack.can_use(amt))
 			to_chat(user, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
 			return TRUE
 		to_chat(user, "<span class='notice'>You begin repairing \the [src]...</span>")
 		if(do_after(user, 5 SECONDS, src))
-			if(P.use(amt))
+			if(stack.use(amt))
 				to_chat(user, "<span class='notice'>You have repaired \the [src].</span>")
 				repair()
 			else

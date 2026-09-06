@@ -1,7 +1,9 @@
 #ifndef MODPACK_MODERN_EARTH
 #define MODPACK_MODERN_EARTH
 // BEGIN_INCLUDE
-#include "modern_earth.dm"
+#include "_modern_earth.dm"
+#include "glass_types.dm"
+#include "insignia.dm"
 #include "datum\religions.dm"
 // END_INCLUDE
 #endif

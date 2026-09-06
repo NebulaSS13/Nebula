@@ -72,9 +72,34 @@ var/global/next_duration_update = 0
 var/global/last_round_duration = 0
 var/global/round_start_time = 0
 
-/hook/roundstart/proc/start_timer()
-	round_start_time = world.time
-	return 1
+/proc/ticks2shortreadable(tick_time, separator = ":")
+	var/hours = round(tick_time / (1 HOUR))
+	var/minutes = round((tick_time % (1 HOUR)) / (1 MINUTE))
+	var/seconds = round((tick_time % (1 MINUTE)) / (1 SECOND))
+	var/out = list()
+
+	if(hours > 0)
+		out += "[hours]"
+
+	if(minutes > 0)
+		if(minutes < 10 && hours > 0)
+			out += "0[minutes]"
+		else
+			out += "[minutes]"
+	else if(hours > 0)
+		out += "00"
+
+	if(seconds > 0)
+		if(seconds < 10 && (minutes > 0 || hours > 0))
+			out += "0[seconds]"
+		else
+			out += "[seconds]"
+	else if(minutes > 0 || hours > 0)
+		out += "00"
+
+	if(length(out))
+		return jointext(out, separator)
+	return null
 
 /proc/ticks2readable(tick_time)
 	var/hours = round(tick_time / (1 HOUR))
@@ -109,10 +134,6 @@ var/global/round_start_time = 0
 	next_duration_update = world.time + 1 MINUTES
 	return last_round_duration
 
-/hook/startup/proc/set_roundstart_hour()
-	roundstart_hour = rand(0, 23)
-	return TRUE
-
 var/global/midnight_rollovers = 0
 var/global/rollovercheck_last_timeofday = 0
 /proc/update_midnight_rollover()
@@ -135,7 +156,12 @@ var/global/rollovercheck_last_timeofday = 0
 
 	if (!initial_delay)
 		initial_delay = world.tick_lag
-
+// Unit tests are not the normal environemnt. The mc can get absolutely thigh crushed, and sleeping procs running for ages is much more common
+// We don't want spurious hard deletes off this, so let's only sleep for the requested period of time here yeah?
+#ifdef UNIT_TEST
+	sleep(initial_delay)
+	return NONUNIT_CEILING(DS2TICKS(initial_delay), 1)
+#else
 	. = 0
 	var/i = DS2TICKS(initial_delay)
 	do
@@ -143,6 +169,7 @@ var/global/rollovercheck_last_timeofday = 0
 		sleep(i * world.tick_lag * DELTA_CALC)
 		i *= 2
 	while (TICK_USAGE > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
+#endif
 
 #undef DELTA_CALC
 

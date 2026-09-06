@@ -29,28 +29,28 @@ var/global/list/floor_light_cache = list()
 	. = ..()
 	update_icon()
 
-/obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/floor_light/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		anchored = !anchored
 		if(use_power)
 			update_use_power(POWER_USE_OFF)
 		visible_message(SPAN_NOTICE("\The [user] has [anchored ? "attached" : "detached"] \the [src]."))
 		return TRUE
 
-	if(IS_WELDER(W) && (damaged || (stat & BROKEN)))
-		var/obj/item/weldingtool/WT = W
-		if(!WT.weld(0, user))
+	if(IS_WELDER(used_item) && (damaged || (stat & BROKEN)))
+		var/obj/item/weldingtool/welder = used_item
+		if(!welder.weld(0, user))
 			to_chat(user, SPAN_WARNING("\The [src] must be on to complete this task."))
 			return TRUE
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(do_after(user, 20, src) && !QDELETED(src) && WT.isOn())
+		if(do_after(user, 20, src) && !QDELETED(src) && welder.isOn())
 			visible_message(SPAN_NOTICE("\The [user] has repaired \the [src]."))
 			set_broken(FALSE)
 			damaged = null
 		return TRUE
 
-	if(IS_WRENCH(W))
+	if(IS_WRENCH(used_item))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		to_chat(user, SPAN_NOTICE("You dismantle the floor light."))
 		SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 1)
@@ -58,13 +58,13 @@ var/global/list/floor_light_cache = list()
 		qdel(src)
 		return TRUE
 
-	if(W.get_attack_force(user) && user.a_intent == I_HURT)
+	if(used_item.get_attack_force(user) && user.check_intent(I_FLAG_HARM))
 		return physical_attack_hand(user)
 
 	return ..()
 
 /obj/machinery/floor_light/physical_attack_hand(var/mob/user)
-	if(user.a_intent == I_HURT && !issmall(user))
+	if(user.check_intent(I_FLAG_HARM) && !issmall(user))
 		if(!isnull(damaged) && !(stat & BROKEN))
 			visible_message(SPAN_DANGER("\The [user] smashes \the [src]!"))
 			playsound(src, "shatter", 70, 1)

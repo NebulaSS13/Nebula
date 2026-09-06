@@ -83,11 +83,6 @@
 		I.appearance_flags |= RESET_COLOR
 		return I
 
-/obj/machinery/computer/proc/decode(text)
-	// Adds line breaks
-	text = replacetext(text, "\n", "<BR>")
-	return text
-
 /obj/machinery/computer/dismantle(mob/user)
 	if(stat & BROKEN)
 		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")

@@ -1,6 +1,8 @@
 
 /decl/emote/visible/tail
 	abstract_type = /decl/emote/visible/tail
+	key = "tail"
+	emote_message_3p = "$USER$ waves $USER_THEIR$ tail."
 
 /decl/emote/visible/tail/mob_can_use(mob/living/user, assume_available = FALSE)
 	return istype(user) && ..()

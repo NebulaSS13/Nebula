@@ -1,0 +1,9 @@
+#ifndef SPECIES_PACK_RANDOM
+#define SPECIES_PACK_RANDOM
+// BEGIN_INCLUDE
+#include "_random_species.dm"
+#include "aliumizer.dm"
+#include "random_species_bodytype.dm"
+#include "random_species_species.dm"
+// END_INCLUDE
+#endif

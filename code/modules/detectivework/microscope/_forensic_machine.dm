@@ -41,29 +41,29 @@
 	var/list/res = list("Use <b>harm</b> intent when manipulating with machine with tools.")
 	return res + ..()
 
-/obj/machinery/forensic/attackby(obj/item/W, mob/user)
-	if((. = component_attackby(W, user)))
+/obj/machinery/forensic/attackby(obj/item/used_item, mob/user)
+	if((. = component_attackby(used_item, user)))
 		return
 
-	if(user?.a_intent == I_HURT)
+	if(user?.check_intent(I_FLAG_HARM))
 		return ..() // bash, bash!
 
 	if(sample)
 		to_chat(user, SPAN_WARNING("There is already a sample in \the [src]."))
 		return TRUE
 
-	if(istype(W, /obj/item/evidencebag))
-		var/obj/item/evidencebag/B = W
+	if(istype(used_item, /obj/item/evidencebag))
+		var/obj/item/evidencebag/B = used_item
 		if(B.stored_item)
 			to_chat(user, SPAN_NOTICE("You insert \the [B.stored_item] from \the [B]."))
 			B.stored_item.forceMove(src)
 			set_sample(B.stored_item)
 			B.empty()
 			return TRUE
-	if(!user.try_unequip(W, src))
+	if(!user.try_unequip(used_item, src))
 		return TRUE
-	to_chat(user, SPAN_NOTICE("You insert \the [W] into  \the [src]."))
-	set_sample(W)
+	to_chat(user, SPAN_NOTICE("You insert \the [used_item] into  \the [src]."))
+	set_sample(used_item)
 	update_icon()
 	return TRUE
 
@@ -111,7 +111,7 @@
 
 /obj/machinery/forensic/handle_mouse_drop(atom/over, mob/user, params)
 	if(user == over)
-		remove_sample(usr)
+		remove_sample(user)
 		return TRUE
 	. = ..()
 
@@ -122,7 +122,8 @@
 /decl/interaction_handler/forensics_remove_sample
 	name = "Remove Sample"
 	expected_target_type = /obj/machinery/forensic
+	examine_desc = "remove a sample"
 
 /decl/interaction_handler/forensics_remove_sample/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/machinery/forensic/F = target
-	F.remove_sample(usr)
+	F.remove_sample(user)

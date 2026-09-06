@@ -15,8 +15,7 @@ SUBSYSTEM_DEF(fabrication)
 /datum/controller/subsystem/fabrication/Initialize()
 
 	// Fab recipes.
-	for(var/R in subtypesof(/datum/fabricator_recipe))
-		var/datum/fabricator_recipe/recipe = R
+	for(var/datum/fabricator_recipe/recipe as anything in subtypesof(/datum/fabricator_recipe))
 		if(!initial(recipe.path))
 			continue
 		recipe = new recipe

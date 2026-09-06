@@ -1,4 +1,5 @@
 /decl/color_generator
+	abstract_type = /decl/color_generator
 	var/color = COLOR_WHITE
 	var/min_random_span = -25
 	var/max_random_span = 25

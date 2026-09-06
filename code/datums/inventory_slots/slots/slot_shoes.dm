@@ -10,6 +10,7 @@
 	)
 	requires_slot_flags = SLOT_FEET
 	quick_equip_priority = 3
+	fluid_height = 3
 
 /datum/inventory_slot/shoes/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	var/obj/item/suit =    user.get_equipped_item(slot_wear_suit_str)
@@ -22,7 +23,7 @@
 		var/blood_color
 		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(user, foot_tag)
-			if(stomper && stomper.coating?.total_volume)
+			if(REAGENT_TOTAL_VOLUME(stomper?.coating))
 				blood_color = stomper.coating.get_color()
 				break
 		if(blood_color)
@@ -33,12 +34,8 @@
 
 /datum/inventory_slot/shoes/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDESHOES))
-		if(user == owner)
-			return "You are wearing [_holding.get_examine_line()] on your feet."
 		return "[pronouns.He] [pronouns.is] wearing [_holding.get_examine_line()] on [pronouns.his] feet."
 	for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(owner, bp)
-		if(E && E.coating?.total_volume)
-			if(user == owner)
-				return "There's <font color='[E.coating.get_color()]'>something on your feet</font>!"
+		if(REAGENT_TOTAL_VOLUME(E?.coating))
 			return "There's <font color='[E.coating.get_color()]'>something on [pronouns.his] feet</font>!"

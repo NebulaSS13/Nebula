@@ -19,7 +19,7 @@
 	touch_met = 5
 	toxicity = 5
 	scent = "clean linen"
-	scent_descriptor = SCENT_DESC_FRAGRANCE
+	scent_descriptor = "fragrance"
 	value = 0.25
 	dirtiness = DIRTINESS_DECONTAMINATE
 	decontamination_dose = 5
@@ -38,3 +38,4 @@
 	ignition_point   = 353
 	boiling_point    = 373
 	accelerant_value = 0.3
+	opacity          = 1.0 // liquid is opaque by default, but soap is solid (or maybe it should be like, mostly opaque? tbd)

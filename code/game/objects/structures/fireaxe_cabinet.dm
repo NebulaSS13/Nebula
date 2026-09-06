@@ -64,29 +64,29 @@
 		fireaxe = null
 	. = ..()
 
-/obj/structure/fireaxecabinet/attackby(var/obj/item/O, var/mob/user)
+/obj/structure/fireaxecabinet/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(IS_MULTITOOL(O))
+	if(IS_MULTITOOL(used_item))
 		toggle_lock(user)
 		return TRUE
 
-	if(istype(O, /obj/item/bladed/axe/fire))
+	if(istype(used_item, /obj/item/bladed/axe/fire))
 		if(open)
 			if(fireaxe)
 				to_chat(user, "<span class='warning'>There is already \a [fireaxe] inside \the [src].</span>")
-			else if(user.try_unequip(O))
-				O.forceMove(src)
-				fireaxe = O
+			else if(user.try_unequip(used_item))
+				used_item.forceMove(src)
+				fireaxe = used_item
 				to_chat(user, "<span class='notice'>You place \the [fireaxe] into \the [src].</span>")
 				update_icon()
 			return TRUE
 
-	var/force = O.get_attack_force(user)
+	var/force = used_item.expend_attack_force(user)
 	if(force)
 		user.setClickCooldown(10)
 		attack_animation(user)
 		playsound(user, 'sound/effects/Glasshit.ogg', 50, 1)
-		visible_message("<span class='danger'>[user] [pick(O.attack_verb)] \the [src]!</span>")
+		visible_message("<span class='danger'>[user] [used_item.pick_attack_verb()] \the [src]!</span>")
 		if(damage_threshold > force)
 			to_chat(user, "<span class='danger'>Your strike is deflected by the reinforced glass!</span>")
 			return TRUE

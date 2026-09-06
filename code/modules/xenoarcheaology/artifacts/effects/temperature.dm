@@ -7,10 +7,10 @@
 
 /datum/artifact_effect/temperature/New()
 	..()
-	operation_type = pick(EFFECT_TOUCH, EFFECT_AURA)
-	origin_type = pick(EFFECT_ORGANIC, EFFECT_SYNTH)
+	operation_type = pick((XA_EFFECT_TOUCH), (XA_EFFECT_AURA))
+	origin_type = pick((XA_EFFECT_ORGANIC), (XA_EFFECT_SYNTH))
 	if(!direction)
-		direction = pick(ANOM_EFFECT_COOLING, ANOM_EFFECT_HEATING)
+		direction = pick((ANOM_EFFECT_COOLING), (ANOM_EFFECT_HEATING))
 	switch(direction)
 		if(ANOM_EFFECT_COOLING)
 			target_temp = rand(TCMB, T0C - 30)
@@ -38,7 +38,7 @@
 			return air.temperature > target_temp
 		if(ANOM_EFFECT_HEATING)
 			return air.temperature < target_temp
-	
+
 /datum/artifact_effect/temperature/proc/change_air_temp(datum/gas_mixture/air, degrees)
 	var/new_temp = air.temperature + degrees
 	if(direction == ANOM_EFFECT_COOLING)

@@ -10,8 +10,8 @@
 		to_chat(mob, "ZONE: No zone here.")
 		var/datum/gas_mixture/mix = T.return_air()
 		to_chat(mob, "ZONE: [mix.return_pressure()] kPa [mix.temperature] k")
-		for(var/g in mix.gas)
-			to_chat(mob, "ZONE GASES: [g]: [mix.gas[g]]\n")
+		for(var/gas_type, gas_amount in mix.gas)
+			to_chat(mob, "ZONE GASES: [gas_type]: [gas_amount]\n")
 
 /client/proc/Test_ZAS_Connection(var/turf/T)
 	set category = "Debug"

@@ -5,9 +5,9 @@
 	work_sound               = /datum/composite_sound/spinning_wheel_working
 	var/accepts_gut_material = /decl/material/solid/organic/leather/gut
 
-/obj/structure/working/spinning_wheel/twisting_bench/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/food/butchery/offal) && !istype(W, /obj/item/food/butchery/offal/small))
-		to_chat(user, SPAN_WARNING("\The [W] is too large for \the [src], cut it up first."))
+/obj/structure/working/spinning_wheel/twisting_bench/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/food/butchery/offal) && !istype(used_item, /obj/item/food/butchery/offal/small))
+		to_chat(user, SPAN_WARNING("\The [used_item] is too large for \the [src], cut it up first."))
 		return TRUE
 	return ..()
 

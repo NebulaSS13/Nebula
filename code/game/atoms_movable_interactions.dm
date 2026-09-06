@@ -14,14 +14,16 @@
 	name = "Examine"
 	expected_user_type = /mob
 	interaction_flags = 0
+	examine_desc = "examine $TARGET_THEM$"
 
 /decl/interaction_handler/look/invoked(atom/target, mob/user, obj/item/prop)
-	target.examine(user, get_dist(user, target))
+	target.examined_by(user, get_dist(user, target))
 
 /decl/interaction_handler/grab
 	name = "Grab"
 	expected_target_type = /atom/movable
 	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_TURF
+	examine_desc = "grab $TARGET_THEM$"
 
 /decl/interaction_handler/grab/is_possible(atom/movable/target, mob/user, obj/item/prop)
 	return ..() && !target.anchored

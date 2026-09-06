@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  SPACEMAN_DMM_VERSION: suite-1.9
+  SPACEMAN_DMM_VERSION: suite-1.11
 
 jobs:
   generate_documentation:

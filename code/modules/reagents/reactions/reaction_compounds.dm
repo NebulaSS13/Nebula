@@ -151,14 +151,13 @@
 	name = "Condensed Capsaicin"
 	minimum_temperature = 100 CELSIUS
 	maximum_temperature = 200 CELSIUS // To avoid cooking chili creating condensed capsaicin.
-	mix_message = "darkens and thickens as it seperates from its water content"
+	mix_message = "darkens and thickens as it separates from its water content"
 	required_reagents = list(/decl/material/liquid/capsaicin = 2)
 	result = list(/decl/material/liquid/capsaicin/condensed = 1)
 
-/decl/chemical_reaction/compound/condensed_capsaicin/on_reaction(datum/reagents/holder, created_volume, reaction_flags, list/reaction_data)
+/decl/chemical_reaction/compound/condensed_capsaicin/on_reaction(datum/reagents/holder, created_volume, list/reaction_data)
 	. = ..()
 	holder?.add_reagent(/decl/material/liquid/water, created_volume)
-
 
 /decl/chemical_reaction/compound/nanitefluid
 	name = "Nanite Fluid Synthesis"
@@ -169,3 +168,27 @@
 	minimum_temperature = (-25 CELSIUS) - 100
 	maximum_temperature = -25 CELSIUS
 	mix_message = "The solution becomes a metallic slime."
+
+// This is a bit silly, but we need a way to unify oil types until someone rewrites lanterns.
+/decl/chemical_reaction/compound/fuel_oil
+	name = "Plant Fuel Oil"
+	result = /decl/material/liquid/oil
+	result_amount = 3
+	required_reagents = list(
+		/decl/material/liquid/oil/plant = 2,
+		/decl/material/solid/graphite   = 1
+	)
+
+/decl/chemical_reaction/compound/fuel_oil/corn
+	name = "Corn Fuel Oil"
+	required_reagents = list(
+		/decl/material/liquid/oil/plant/corn = 2,
+		/decl/material/solid/graphite        = 1
+	)
+
+/decl/chemical_reaction/compound/fuel_oil/fish
+	name = "Fish Fuel Oil"
+	required_reagents = list(
+		/decl/material/liquid/oil/fish = 2,
+		/decl/material/solid/graphite  = 1
+	)

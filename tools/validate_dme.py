@@ -2,12 +2,14 @@ import fnmatch
 import functools
 import glob
 import sys
+from os.path import normpath
 
 reading = False
 
 FORBID_INCLUDE = [
     r'code/**/*_docs.dm',
-    r'code/**/README.dm',
+    r'code/**/*readme.dm',
+    r'code/**/*README.dm',
 ]
 
 IGNORE_INCLUDE = [
@@ -45,7 +47,7 @@ for code_file in glob.glob("code/**/*.dm", recursive=True):
 
     ignored = False
     for ignore in IGNORE_INCLUDE:
-        if not fnmatch.fnmatch(code_file, ignore):
+        if not fnmatch.fnmatchcase(code_file, normpath(ignore)):
             continue
 
         ignored = True
@@ -55,7 +57,7 @@ for code_file in glob.glob("code/**/*.dm", recursive=True):
         continue
 
     for forbid in FORBID_INCLUDE:
-        if not fnmatch.fnmatch(code_file, forbid):
+        if not fnmatch.fnmatchcase(code_file, normpath(forbid)):
             continue
 
         forbid_include = True

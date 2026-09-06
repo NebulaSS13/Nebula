@@ -10,19 +10,34 @@ var/global/dmm_suite/preloader/_preloader = new
 /datum/map_load_metadata
 	var/bounds
 	var/list/atoms_to_initialise
+	var/list/turfs_to_mark_modified
 
 /dmm_suite
-		// /"([a-zA-Z]+)" = \(((?:.|\n)*?)\)\n(?!\t)|\((\d+),(\d+),(\d+)\) = \{"([a-zA-Z\n]*)"\}/g
-	var/static/regex/dmmRegex = new/regex({""(\[a-zA-Z]+)" = \\(((?:.|\n)*?)\\)\n(?!\t)|\\((\\d+),(\\d+),(\\d+)\\) = \\{"(\[a-zA-Z\n]*)"\\}"}, "g")
+	// /"([a-zA-Z]+)" = \(((?:.|\n)*?)\)\n(?!\t)|\((\d+),(\d+),(\d+)\) = \{"\n*([a-zA-Z\n]*)\n?"\}/g
+	var/static/regex/dmmRegex = new/regex({""(\[a-zA-Z]+)" = \\(((?:.|\n)*?)\\)\n(?!\t)|\\((\\d+),(\\d+),(\\d+)\\) = \\{"\n*(\[a-zA-Z\n]*)\n?"\\}"}, "g")
 		// /^[\s\n]+"?|"?[\s\n]+$|^"|"$/g
 	var/static/regex/trimQuotesRegex = new/regex({"^\[\\s\n]+"?|"?\[\\s\n]+$|^"|"$"}, "g")
 		// /^[\s\n]+|[\s\n]+$/
 	var/static/regex/trimRegex = new/regex("^\[\\s\n]+|\[\\s\n]+$", "g")
 	var/static/list/modelCache = list()
 	var/static/space_key
+	var/static/list/types_to_delete
 	#ifdef TESTING
 	var/static/turfsSkipped
 	#endif
+
+// Set up some basic cached vars, like types_to_delete, that have to check things like subtypes.
+/dmm_suite/New()
+	if(!types_to_delete)
+		types_to_delete = typecacheof(list(
+			/mob/living,
+			/obj/effect,
+			/obj/item,
+			/obj/machinery,
+			/obj/structure,
+			/obj/abstract/landmark/exoplanet_spawn,
+		))
+	..()
 
 /**
  * Construct the model map and control the loading process
@@ -50,12 +65,19 @@ var/global/dmm_suite/preloader/_preloader = new
 	initialized_areas_by_type = initialized_areas_by_type || list()
 	if(!(world.area in initialized_areas_by_type))
 		initialized_areas_by_type[world.area] = locate(world.area)
-	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type, level_data_type)
+
+	var/datum/map_load_metadata/M = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type, level_data_type)
+
+	if(length(M.turfs_to_mark_modified))
+		for(var/turf/turf in M.turfs_to_mark_modified)
+			turf.state_was_modified()
+
 	#ifdef TESTING
 	if(turfsSkipped)
 		testing("Skipped loading [turfsSkipped] default turfs")
 	#endif
 	Master.StopLoadingMap()
+	return M
 
 /dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type, level_data_type = /datum/level_data/space)
 	var/tfile = dmm_file//the map file we're creating
@@ -77,6 +99,7 @@ var/global/dmm_suite/preloader/_preloader = new
 
 	var/list/atoms_to_initialise = list()
 	var/list/atoms_to_delete = list()
+	var/list/turfs_to_mark_modified = list()
 
 	while(dmmRegex.Find(tfile, stored_index))
 		stored_index = dmmRegex.next
@@ -117,27 +140,20 @@ var/global/dmm_suite/preloader/_preloader = new
 			if(zexpansion && !measureOnly) // don't actually expand the world if we're only measuring bounds
 				if(cropMap)
 					continue
-				while(world.maxz < zcrd) //create new z_levels if needed.
-					SSmapping.increment_world_z_size(level_data_type)
+				var/desired_levels = zcrd - world.maxz
+				if (desired_levels > 0)	//create new z_levels if needed.
+					SSmapping.bulk_increment_world_z_size(desired_levels, level_data_type)
+
 			bounds[MAP_MINX] = min(bounds[MAP_MINX], clamp(xcrdStart, x_lower, x_upper))
 			bounds[MAP_MINZ] = min(bounds[MAP_MINZ], zcrd)
 			bounds[MAP_MAXZ] = max(bounds[MAP_MAXZ], zcrd)
 
 			var/list/gridLines = splittext(dmmRegex.group[6], "\n")
-
-			var/leadingBlanks = 0
-			while(leadingBlanks < gridLines.len && gridLines[++leadingBlanks] == "")
-			if(leadingBlanks > 1)
-				gridLines.Cut(1, leadingBlanks) // Remove all leading blank lines.
-
-			if(!gridLines.len) // Skip it if only blank lines exist.
+			if(!length(gridLines)) // Skip it if only blank lines exist.
 				continue
 
-			if(gridLines.len && gridLines[gridLines.len] == "")
-				gridLines.Cut(gridLines.len) // Remove only one blank line at the end.
-
 			bounds[MAP_MINY] = min(bounds[MAP_MINY], clamp(ycrd, y_lower, y_upper))
-			ycrd += gridLines.len - 1 // Start at the top and work down
+			ycrd += length(gridLines) - 1 // Start at the top and work down
 
 			if(!cropMap && ycrd > world.maxy)
 				if(!measureOnly)
@@ -175,7 +191,11 @@ var/global/dmm_suite/preloader/_preloader = new
 										throw EXCEPTION("Undefined model key in DMM.")
 									var/datum/grid_load_metadata/M = parse_grid(grid_models[model_key], model_key, xcrd, ycrd, zcrd, no_changeturf || zexpansion, clear_contents, initialized_areas_by_type)
 									if (M)
-										atoms_to_initialise += M.atoms_to_initialise
+										if(length(M.atoms_to_initialise))
+											atoms_to_initialise += M.atoms_to_initialise
+										if(length(M.turfs_to_mark_modified))
+											turfs_to_mark_modified += M.turfs_to_mark_modified
+
 										atoms_to_delete += M.atoms_to_delete
 								#ifdef TESTING
 								else
@@ -185,8 +205,6 @@ var/global/dmm_suite/preloader/_preloader = new
 							maxx = max(maxx, xcrd)
 							++xcrd
 					--ycrd
-				if (zexpansion && SSlighting.initialized)
-					SSlighting.InitializeZlev(zcrd)
 
 			bounds[MAP_MAXX] = clamp(max(bounds[MAP_MAXX], cropMap ? min(maxx, world.maxx) : maxx), x_lower, x_upper)
 
@@ -202,6 +220,7 @@ var/global/dmm_suite/preloader/_preloader = new
 	var/datum/map_load_metadata/M = new
 	M.bounds = bounds
 	M.atoms_to_initialise = atoms_to_initialise
+	M.turfs_to_mark_modified = turfs_to_mark_modified
 	return M
 
 /**
@@ -225,16 +244,7 @@ var/global/dmm_suite/preloader/_preloader = new
 /datum/grid_load_metadata
 	var/list/atoms_to_initialise
 	var/list/atoms_to_delete
-
-/dmm_suite/proc/types_to_delete()
-	return list(
-		/mob/living,
-		/obj/effect,
-		/obj/item,
-		/obj/machinery,
-		/obj/structure,
-		/obj/abstract/landmark/exoplanet_spawn,
-	)
+	var/list/turfs_to_mark_modified
 
 /dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, clear_contents as num, initialized_areas_by_type)
 	/*Method parse_grid()
@@ -288,8 +298,8 @@ var/global/dmm_suite/preloader/_preloader = new
 			if(variables_start)//if there's any variable
 				full_def = copytext(full_def,variables_start+1,length(full_def))//removing the last '}'
 				fields = readlist(full_def, ";")
-				if(fields.len)
-					if(!trim(fields[fields.len]))
+				if(length(fields))
+					if(!trim(fields[length(fields)]))
 						--fields.len
 					for(var/I in fields)
 						var/value = fields[I]
@@ -312,7 +322,7 @@ var/global/dmm_suite/preloader/_preloader = new
 		// 5. and the members are world.turf and world.area
 		// Basically, if we find an entry like this: "XXX" = (/turf/default, /area/default)
 		// We can skip calling this proc every time we see XXX
-		if(no_changeturf && !space_key && members.len == 2 && members_attributes.len == 2 && length(members_attributes[1]) == 0 && length(members_attributes[2]) == 0 && (world.area in members) && (world.turf in members))
+		if(no_changeturf && !space_key && length(members) == 2 && length(members_attributes) == 2 && length(members_attributes[1]) == 0 && length(members_attributes[2]) == 0 && (world.area in members) && (world.turf in members))
 			space_key = model_key
 			return
 
@@ -329,7 +339,7 @@ var/global/dmm_suite/preloader/_preloader = new
 	var/atoms_to_delete = list()
 
 	//first instance the /area and remove it from the members list
-	index = members.len
+	index = length(members)
 	if(members[index] != /area/template_noop)
 		is_not_noop = TRUE
 		var/list/attr = members_attributes[index]
@@ -340,7 +350,7 @@ var/global/dmm_suite/preloader/_preloader = new
 			instance = new atype(null)
 			initialized_areas_by_type[atype] = instance
 		if(crds)
-			ChangeArea(crds, instance)
+			crds.ChangeArea(instance)
 
 	//then instance the /turf and, if multiple tiles are presents, simulates the DMM underlays piling effect
 
@@ -352,41 +362,51 @@ var/global/dmm_suite/preloader/_preloader = new
 	SSatoms.map_loader_begin()
 	//since we've switched off autoinitialisation, record atoms to initialise later
 	var/list/atoms_to_initialise = list()
+	var/list/turfs_to_mark_modified = list()
 
 	//instanciate the first /turf
 	var/turf/T
 	if(members[first_turf_index] != /turf/template_noop)
 		is_not_noop = TRUE
-		T = instance_atom(members[first_turf_index],members_attributes[first_turf_index],crds,no_changeturf)
+		T = instance_atom(members[first_turf_index], members_attributes[first_turf_index], crds, no_changeturf)
 		atoms_to_initialise += T
+		if(isturf(T))
+			turfs_to_mark_modified += T
 
 	if(T)
 		//if others /turf are presents, simulates the underlays piling effect
 		index = first_turf_index + 1
-		while(index <= members.len - 1) // Last item is an /area
+		while(index < length(members)) // Last item is an /area
 			var/underlay = T.appearance
-			T = instance_atom(members[index],members_attributes[index],crds,no_changeturf)//instance new turf
+			T = instance_atom(members[index], members_attributes[index], crds, no_changeturf)//instance new turf
 			T.underlays += underlay
 			index++
 			atoms_to_initialise += T
+			if(isturf(T))
+				turfs_to_mark_modified += T
 
-	if (clear_contents && is_not_noop)
-		for (var/type_to_delete in types_to_delete())
-			for (var/atom/pre_existing in crds)
-				if(crds != pre_existing.loc) // avoid deleting multitile objects unnecessarily, only check their 'real' loc
-					continue
-				if (istype(pre_existing, type_to_delete))
-					atoms_to_delete |= pre_existing
+	if (clear_contents && is_not_noop && length(crds.contents))
+		for (var/atom/movable/pre_existing as anything in crds)
+			if(!types_to_delete[pre_existing.type])
+				continue
+			if(crds != pre_existing.loc) // avoid deleting multitile objects unnecessarily, only check their 'real' loc
+				continue
+			atoms_to_delete += pre_existing
 
 	//finally instance all remainings objects/mobs
 	for(index in 1 to first_turf_index-1)
-		atoms_to_initialise += instance_atom(members[index],members_attributes[index],crds,no_changeturf)
+		var/atom/thing = instance_atom(members[index], members_attributes[index], crds, no_changeturf)
+		atoms_to_initialise += thing
+		if(isturf(thing))
+			turfs_to_mark_modified += thing
+
 	//Restore initialization to the previous valsue
 	SSatoms.map_loader_stop()
 
 	var/datum/grid_load_metadata/M = new
 	M.atoms_to_initialise = atoms_to_initialise
 	M.atoms_to_delete = atoms_to_delete
+	M.turfs_to_mark_modified = turfs_to_mark_modified
 	return M
 
 ////////////////
@@ -394,12 +414,15 @@ var/global/dmm_suite/preloader/_preloader = new
 ////////////////
 
 //Instance an atom at (x,y,z) and gives it the variables in attributes
-/dmm_suite/proc/instance_atom(path,list/attributes, turf/crds, no_changeturf)
+/dmm_suite/proc/instance_atom(path, list/attributes, turf/crds, no_changeturf)
 	global._preloader.setup(attributes, path)
 
 	if(crds)
-		if(!no_changeturf && ispath(path, /turf))
-			. = crds.ChangeTurf(path, FALSE, TRUE)
+		if(ispath(path, /turf))
+			if(no_changeturf)
+				. = new path(crds)
+			else
+				. = crds.ChangeTurf(path, FALSE, TRUE)
 		else
 			. = new path(crds)// preloader called from atom/New
 

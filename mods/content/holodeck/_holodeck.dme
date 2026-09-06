@@ -1,0 +1,18 @@
+#ifndef CONTENT_PACK_HOLODECK
+#define CONTENT_PACK_HOLODECK
+// BEGIN_INCLUDE
+#include "_holodeck.dm"
+#include "holo_items.dm"
+#include "holo_mobs.dm"
+#include "holo_objects.dm"
+#include "holo_racks.dm"
+#include "holo_tables.dm"
+#include "holo_turfs.dm"
+#include "holodeck_control_circuit.dm"
+#include "holodeck_control_console.dm"
+#include "holodeck_designs.dm"
+#include "holodeck_programs.dm"
+#include "maps_holodeck.dm"
+#include "trader_overrides.dm"
+// END_INCLUDE
+#endif

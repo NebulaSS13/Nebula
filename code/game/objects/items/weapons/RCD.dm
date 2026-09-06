@@ -32,6 +32,7 @@
 		var/decl/hierarchy/h = GET_DECL(/decl/hierarchy/rcd_mode)
 		work_modes = h.children
 	work_mode = work_modes[1]
+	update_icon() //Initializes the ammo counter
 
 /obj/item/rcd/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	return FALSE
@@ -39,29 +40,25 @@
 /obj/item/rcd/proc/can_use(var/mob/user,var/turf/T)
 	return (user.Adjacent(T) && user.get_active_held_item() == src && !user.incapacitated())
 
-/obj/item/rcd/examine(mob/user)
+/obj/item/rcd/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(src.type == /obj/item/rcd && loc == user)
-		to_chat(user, "The current mode is '[work_mode]'.")
-		to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] matter-units.")
+	if(src.type == /obj/item/rcd && loc == user) // why tho
+		. += "The current mode is '[work_mode]'."
+		. += "It currently holds [stored_matter]/[max_stored_matter] matter-units."
 
-/obj/item/rcd/Initialize()
-	. = ..()
-	update_icon()	//Initializes the ammo counter
-
-/obj/item/rcd/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/rcd_ammo))
-		var/obj/item/rcd_ammo/cartridge = W
+/obj/item/rcd/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/rcd_ammo))
+		var/obj/item/rcd_ammo/cartridge = used_item
 		if((stored_matter + cartridge.remaining) > max_stored_matter)
 			to_chat(user, "<span class='notice'>The RCD can't hold that many additional matter-units.</span>")
 			return TRUE
 		stored_matter += cartridge.remaining
-		qdel(W)
+		qdel(used_item)
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
 		update_icon()
 		return TRUE
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		crafting = !crafting
 		if(!crafting)
 			to_chat(user, SPAN_NOTICE("You reassemble the RCD."))
@@ -136,10 +133,10 @@
 		/decl/material/solid/glass       = sheets
 	)
 
-/obj/item/rcd_ammo/examine(mob/user, distance)
+/obj/item/rcd_ammo/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, "<span class='notice'>It has [remaining] unit\s of matter left.</span>")
+		. += SPAN_NOTICE("It has [remaining] unit\s of matter left.")
 
 /obj/item/rcd_ammo/large
 	name = "high-capacity matter cartridge"
@@ -153,11 +150,11 @@
 
 /obj/item/rcd/borg/useResource(var/amount, var/mob/user)
 	if(isrobot(user))
-		var/mob/living/silicon/robot/R = user
-		if(R.cell)
+		var/mob/living/silicon/robot/robot = user
+		if(robot.cell)
 			var/cost = amount*30
-			if(R.cell.charge >= cost)
-				R.cell.use(cost)
+			if(robot.cell.charge >= cost)
+				robot.cell.use(cost)
 				return 1
 	return 0
 

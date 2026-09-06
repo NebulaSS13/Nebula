@@ -49,7 +49,7 @@
 	if(istype(machine))
 		machine.power_change()
 		machine.queue_icon_update()
-	set_status(machine, PART_STAT_CONNECTED)
+	set_component_status(machine, PART_STAT_CONNECTED)
 	update_icon()
 	return cell
 
@@ -112,7 +112,7 @@
 /obj/item/stock_parts/power/battery/can_provide_power(var/obj/machinery/machine)
 	if(is_functional() && cell && cell.check_charge(CELLRATE * machine.get_power_usage()))
 		machine.update_power_channel(LOCAL)
-		set_status(machine, PART_STAT_ACTIVE)
+		set_component_status(machine, PART_STAT_ACTIVE)
 		return TRUE
 	return FALSE
 
@@ -147,24 +147,24 @@
 	icon_state = "battery[!!cell]"
 
 // Cell interaction
-/obj/item/stock_parts/power/battery/attackby(obj/item/I, mob/user)
+/obj/item/stock_parts/power/battery/attackby(obj/item/used_item, mob/user)
 	var/obj/machinery/machine = loc
 
 	// Interactions with/without machine
-	if(istype(I, /obj/item/cell))
+	if(istype(used_item, /obj/item/cell))
 		if(cell)
 			to_chat(user, "There is a power cell already installed.")
 			return TRUE
 		if(istype(machine) && (machine.stat & MAINT))
 			to_chat(user, "<span class='warning'>There is no connector for your power cell.</span>")
 			return TRUE
-		if(I.w_class != ITEM_SIZE_NORMAL)
-			to_chat(user, "\The [I] is too [I.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
+		if(used_item.w_class != ITEM_SIZE_NORMAL)
+			to_chat(user, "\The [used_item] is too [used_item.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
 			return TRUE
 
-		if(!user.try_unequip(I, src))
+		if(!user.try_unequip(used_item, src))
 			return TRUE
-		add_cell(machine, I)
+		add_cell(machine, used_item)
 		user.visible_message(\
 			SPAN_WARNING("\The [user] has inserted the power cell to \the [src]!"),\
 			SPAN_NOTICE("You insert the power cell."))

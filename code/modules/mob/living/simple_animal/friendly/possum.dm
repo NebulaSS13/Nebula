@@ -14,7 +14,7 @@
 	universal_speak = FALSE
 	universal_understand = TRUE
 	mob_size = MOB_SIZE_SMALL
-	possession_candidate = 1
+	possession_candidate = TRUE
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 	holder_type = /obj/item/holder
@@ -97,23 +97,26 @@
 
 /mob/living/simple_animal/opossum/Initialize()
 	. = ..()
-	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
 /mob/living/simple_animal/opossum/poppy
 	name = "Poppy the Safety Possum"
 	desc = "It's an opossum, a small scavenging marsupial. It's wearing appropriate personal protective equipment, though."
 	icon = 'icons/mob/simple_animal/poppy_possum.dmi'
-	can_buckle = TRUE
+	max_buckled_mobs = 1
 	var/aaa_words = list("delaminat", "meteor", "fire", "breach")
 
-/mob/living/simple_animal/opossum/poppy/hear_broadcast(decl/language/language, mob/speaker, speaker_name, message)
-	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(check_keywords), message), rand(1 SECOND, 3 SECONDS))
+/mob/living/simple_animal/opossum/poppy/is_tagging_suitable()
+	return FALSE
 
-/mob/living/simple_animal/opossum/poppy/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+// Poppy is omnilingual apparently.
+/mob/living/simple_animal/opossum/poppy/hear_broadcast(mob/speaker, speaker_name, datum/speech/phrases)
 	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(check_keywords), message), rand(1 SECOND, 3 SECONDS))
+	addtimer(CALLBACK(src, PROC_REF(check_keywords), phrases.unformatted_message), rand(1 SECOND, 3 SECONDS))
+
+/mob/living/simple_animal/opossum/poppy/hear_say(datum/speech/phrases, verb = "says", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, stars = FALSE, atom/relayed_by)
+	. = ..()
+	addtimer(CALLBACK(src, PROC_REF(check_keywords), phrases.unformatted_message), rand(1 SECOND, 3 SECONDS))
 
 /mob/living/simple_animal/opossum/poppy/proc/check_keywords(var/message)
 	if(!client && istype(ai) && stat == CONSCIOUS)

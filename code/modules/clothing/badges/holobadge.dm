@@ -20,10 +20,10 @@
 	badge_number = random_id(type,1000,9999)
 	name = "[name] ([badge_number])"
 
-/obj/item/clothing/badge/holo/examine(user)
+/obj/item/clothing/badge/holo/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(badge_number)
-		to_chat(user,"The badge number is [badge_number].")
+		. += "The badge number is [badge_number]."
 
 /obj/item/clothing/badge/holo/attack_self(mob/user)
 	if(!stored_name)
@@ -40,10 +40,10 @@
 		to_chat(user, "<span class='danger'>You crack the holobadge security checks.</span>")
 		return 1
 
-/obj/item/clothing/badge/holo/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/card/id) || istype(O, /obj/item/modular_computer))
+/obj/item/clothing/badge/holo/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item, /obj/item/card/id) || istype(used_item, /obj/item/modular_computer))
 
-		var/obj/item/card/id/id_card = O.GetIdCard()
+		var/obj/item/card/id/id_card = used_item.GetIdCard()
 
 		if(!id_card)
 			return TRUE

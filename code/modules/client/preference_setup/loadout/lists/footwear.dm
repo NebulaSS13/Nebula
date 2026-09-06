@@ -26,7 +26,8 @@
 		/obj/item/clothing/shoes/workboots,
 		/obj/item/clothing/shoes/jackboots/duty,
 		/obj/item/clothing/shoes/jackboots/jungleboots,
-		/obj/item/clothing/shoes/jackboots/desertboots
+		/obj/item/clothing/shoes/jackboots/desertboots,
+		/obj/item/clothing/shoes/winterboots
 	)
 
 /decl/loadout_option/shoes/color

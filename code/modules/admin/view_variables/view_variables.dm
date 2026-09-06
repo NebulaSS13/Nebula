@@ -175,6 +175,14 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	else if(istype(value, /client))
 		var/client/C = value
 		vtext = "<a href='byond://?_src_=vars;Vars=\ref[C]'>\ref[C]</a> - [C] ([C.type])"
+	else if(istype(value, /alist))
+		var/alist/AL = value
+		vtext = "/alist ([AL.len])"
+		if(!(varname in view_variables_dont_expand) && AL.len > 0 && AL.len < 100)
+			extra += "<ul>"
+			for (var/key, entry in AL)
+				extra += "<li>[make_view_variables_value(key)] -> [make_view_variables_value(entry)]</li>"
+			extra += "</ul>"
 	else if(islist(value))
 		var/list/L = value
 		vtext = "/list ([L.len])"

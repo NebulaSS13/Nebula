@@ -106,9 +106,12 @@
 #define show_image(target, image)                           target << (image)
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
 #define open_link(target, url)                              target << link(url)
+#define ftp_to(target, file_entry, suggested_name)          target << ftp(file_entry, suggested_name)
+#define open_file_for(target, file)                         target << run(file)
 #define to_savefile(target, key, value)                     target[(key)] << (value)
 #define from_savefile(target, key, value)                   target[(key)] >> (value)
 #define to_output(target, output_content, output_args)      target << output((output_content), (output_args))
+// Avoid using this where possible, prefer the other helpers instead.
 #define direct_output(target, value)                        target << (value)
 
 /proc/html_icon(var/thing) // Proc instead of macro to avoid precompiler problems.
@@ -144,9 +147,9 @@
 
 #define JOINTEXT(X) jointext(X, null)
 
-#define SPAN_STYLE(S, X) "<span style='[S]'>[X]</span>"
+#define SPAN_STYLE(S, X) "<span style='" + S + "'>" + X + "</span>"
+#define SPAN_CLASS(C, X) "<span class='" + C + "'>" + X + "</span>"
 
-#define SPAN_CLASS(C, X) "<span class='[C]'>[X]</span>"
 #define SPAN_ITALIC(X)        SPAN_CLASS("italic",        X)
 #define SPAN_BOLD(X)          SPAN_CLASS("bold",          X)
 #define SPAN_NOTICE(X)        SPAN_CLASS("notice",        X)
@@ -171,6 +174,7 @@
 #define SPAN_PALEPINK(X)      SPAN_CLASS("font_palepink", X)
 #define SPAN_SINISTER(X)      SPAN_CLASS("sinister", X)
 #define SPAN_MODERATE(X)      SPAN_CLASS("moderate", X)
+#define SPAN_DEADSAY(X)       SPAN_CLASS("deadsay", X)
 // placeholders
 #define SPAN_GOOD(X)          SPAN_GREEN(X)
 #define SPAN_NEUTRAL(X)       SPAN_BLUE(X)
@@ -196,3 +200,7 @@
 #define FONT_GIANT(X) "<font size='5'>[X]</font>"
 
 #define PRINT_STACK_TRACE(X) get_stack_trace(X, __FILE__, __LINE__)
+
+/// Checks if potential_weakref is a weakref of thing.
+/// NOTE: These argments are the opposite order of TG's, because I think TG's are counterintuitive.
+#define IS_WEAKREF_OF(potential_weakref, thing) (istype(thing, /datum) && !isnull(potential_weakref) && thing.weakref == potential_weakref)

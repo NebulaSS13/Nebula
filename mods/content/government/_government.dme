@@ -2,11 +2,14 @@
 #define MODPACK_GOVERNMENT
 // BEGIN_INCLUDE
 #include "government.dm"
+#include "overrides.dm"
 #include "datum\ai_holo.dm"
 #include "datum\ai_laws.dm"
+#include "items\alcohol.dm"
 #include "items\clutter.dm"
 #include "items\cups.dm"
 #include "items\documents.dm"
+#include "items\masks.dm"
 #include "ruins\ec_old_crash\ec_old_crash.dm"
 // END_INCLUDE
 #endif

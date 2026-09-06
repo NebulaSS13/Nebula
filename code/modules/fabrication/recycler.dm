@@ -83,8 +83,8 @@
 		visible_message("[capitalize(english_list(fell_out))] fall out of \the overflowing [src]!")
 
 	for(var/mat in munched_matter)
-		var/decl/material/material = GET_DECL(mat)
-		switch(material.phase_at_temperature())
+		var/decl/material/munched_material = GET_DECL(mat)
+		switch(munched_material.phase_at_temperature())
 			if(MAT_PHASE_SOLID)
 
 				// Dump the material out as a stack.
@@ -114,29 +114,29 @@
 		if(munched_matter[mat] > 0)
 			trace_matter[mat] += munched_matter[mat] * recycling_efficiency
 
-/obj/machinery/recycler/attackby(obj/item/W, mob/user)
+/obj/machinery/recycler/attackby(obj/item/used_item, mob/user)
 
 	if(use_power == POWER_USE_ACTIVE)
 		to_chat(user, SPAN_WARNING("\The [src] is currently processing, please wait for it to finish."))
 		return TRUE
 
-	if(W.storage && user.a_intent != I_HURT)
+	if(used_item.storage && !user.check_intent(I_FLAG_HARM))
 
 		var/emptied = FALSE
-		for(var/obj/item/O in W.get_stored_inventory())
+		for(var/obj/item/O in used_item.get_stored_inventory())
 			if(storage.can_be_inserted(O))
-				W.storage.remove_from_storage(null, O, loc, skip_update = TRUE)
+				used_item.storage.remove_from_storage(null, O, loc, skip_update = TRUE)
 				storage.handle_item_insertion(null, O, skip_update = TRUE)
 				emptied = TRUE
 
 		if(emptied)
-			W.storage.finish_bulk_removal()
+			used_item.storage.finish_bulk_removal()
 			storage.update_ui_after_item_insertion()
-			if(length(W.get_stored_inventory()))
-				to_chat(user, SPAN_NOTICE("You partially empty \the [W] into \the [src]'s hopper."))
+			if(length(used_item.get_stored_inventory()))
+				to_chat(user, SPAN_NOTICE("You partially empty \the [used_item] into \the [src]'s hopper."))
 			else
-				to_chat(user, SPAN_NOTICE("You empty \the [W] into \the [src]'s hopper."))
-			W.update_icon()
+				to_chat(user, SPAN_NOTICE("You empty \the [used_item] into \the [src]'s hopper."))
+			used_item.update_icon()
 			return TRUE
 
 	// Parent call so we can interact with the machinery aspect

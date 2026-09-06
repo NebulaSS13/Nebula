@@ -1,7 +1,7 @@
 //crime scene kit
 /obj/item/briefcase/crimekit
 	name = "crime scene kit"
-	desc = "A stainless steel-plated carrycase for all your forensic needs. Feels heavy."
+	desc = "A stainless steel-plated carrying case for all your forensic needs. Feels heavy."
 	icon = 'icons/obj/items/storage/crime_kit.dmi'
 	material = /decl/material/solid/organic/leather/synth
 	matter = list(/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_REINFORCEMENT)

@@ -74,9 +74,9 @@
 /decl/hierarchy/supply_pack/nonessent/wizard
 	name = "Costume - Wizard"
 	contains = list(/obj/item/staff/crystal,
-					/obj/item/clothing/suit/wizrobe/fake,
+					/obj/item/clothing/suit/wizrobe,
 					/obj/item/clothing/shoes/sandal,
-					/obj/item/clothing/head/wizard/fake)
+					/obj/item/clothing/head/wizard/beard)
 	containername = "wizard costume crate"
 
 /decl/hierarchy/supply_pack/nonessent/costume
@@ -170,9 +170,9 @@
 
 /decl/hierarchy/supply_pack/nonessent/witch
 	name = "Costume - Witch"
-	contains = list(/obj/item/clothing/suit/wizrobe/marisa/fake,
+	contains = list(/obj/item/clothing/suit/wizrobe/marisa,
 					/obj/item/clothing/shoes/sandal,
-					/obj/item/clothing/head/wizard/marisa/fake,
+					/obj/item/clothing/head/wizard/marisa,
 					/obj/item/staff/broom)
 	containername = "witch costume crate"
 	containertype = /obj/structure/closet

@@ -1,9 +1,12 @@
 //A datum that performs antag-related skill selection functions.
 
 /datum/antag_skill_setter
-	var/nm_type                        //A nano_module with custom ui, if any.
-	var/list/base_skill_list = list()  //Format: list(path = value).
-	var/default_value = SKILL_DEFAULT  //If not in base_skill_list or added in another way, skill value will be this.
+	/// The path of the nano_module to use with any custom UI handling, if any. If null, uses the base skillset's type.
+	var/nm_type
+	/// An associative list of base skill values to provide for free. Keys are skill paths, values are the skill level.
+	var/list/base_skill_list = list()
+	/// If not in base_skill_list or added in another way, skill value will be this.
+	var/default_value = SKILL_DEFAULT
 
 /datum/antag_skill_setter/proc/initialize_skills(datum/skillset/skillset)
 	skillset.skill_list = base_skill_list.Copy()

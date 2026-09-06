@@ -50,7 +50,7 @@
 
 /obj/item/bash(obj/item/weapon, mob/user)
 	. = ..()
-	var/force = weapon.get_attack_force(user)
+	var/force = weapon.expend_attack_force(user)
 	if(force >= 3 && .)
 		user.setClickCooldown(weapon.attack_cooldown + weapon.w_class)
 		take_damage(force, weapon.atom_damage_type)
@@ -77,14 +77,14 @@
 /obj/item/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	. = ..()
 	if(isliving(hit_atom)) //Living mobs handle hit sounds differently.
-		var/volume = get_volume_by_throwforce_and_or_w_class()
+		var/impact_volume = get_volume_by_throwforce_and_or_w_class()
 		if (get_thrown_attack_force() > 0)
 			if(hitsound)
-				playsound(hit_atom, hitsound, volume, TRUE, -1)
+				playsound(hit_atom, hitsound, impact_volume, TRUE, -1)
 			else
-				playsound(hit_atom, 'sound/weapons/genhit.ogg', volume, TRUE, -1)
+				playsound(hit_atom, 'sound/weapons/genhit.ogg', impact_volume, TRUE, -1)
 		else
-			playsound(hit_atom, 'sound/weapons/throwtap.ogg', volume, TRUE, -1)
+			playsound(hit_atom, 'sound/weapons/throwtap.ogg', impact_volume, TRUE, -1)
 
 /obj/item/proc/eyestab(mob/living/M, mob/living/user)
 	var/mob/living/human/H = M
@@ -116,8 +116,8 @@
 				self_message = SPAN_DANGER("You stab yourself in the eyes with \the [src]!"))
 
 		var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(H, BP_EYES)
-		eyes.damage += rand(3,4)
-		if(eyes.damage >= eyes.min_bruised_damage)
+		eyes.adjust_organ_damage(rand(3,4))
+		if(eyes.get_organ_damage() >= eyes.min_bruised_damage)
 			if(M.stat != DEAD)
 				if(!BP_IS_PROSTHETIC(eyes)) //robot eyes bleeding might be a bit silly
 					to_chat(M, SPAN_DANGER("Your eyes start to bleed profusely!"))
@@ -128,12 +128,11 @@
 				SET_STATUS_MAX(M, STAT_BLURRY, 10)
 				SET_STATUS_MAX(M, STAT_PARA, 1)
 				SET_STATUS_MAX(M, STAT_WEAK, 4)
-			if (eyes.damage >= eyes.min_broken_damage)
-				if(M.stat != DEAD)
-					to_chat(M, SPAN_WARNING("You go blind!"))
+			if (eyes.get_organ_damage() >= eyes.min_broken_damage && M.stat != DEAD)
+				to_chat(M, SPAN_WARNING("You go blind!"))
 
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, eyes.parent_organ)
-		affecting.take_external_damage(7)
+		affecting.take_damage(7)
 	else
 		M.take_organ_damage(7)
 	SET_STATUS_MAX(M, STAT_BLURRY, rand(3,4))

@@ -1,6 +1,6 @@
 /datum/unit_test/icon_test
 	name = "ICON STATE template"
-	template = /datum/unit_test/icon_test
+	abstract_type = /datum/unit_test/icon_test
 
 /datum/unit_test/icon_test/food_shall_have_icon_states
 	name = "ICON STATE: Food And Drink Subtypes Shall Have Icon States"
@@ -12,10 +12,13 @@
 	// We skip lumps because they are invisible, they are only ever inside utensils.
 	var/list/skip_types = list(/obj/item/food/lump)
 
-/datum/unit_test/icon_test/food_shall_have_icon_states/start_test()
-
+/datum/unit_test/icon_test/food_shall_have_icon_states/proc/assemble_skipped_types()
 	skip_types |= typesof(/obj/item/food/grown)
 	skip_types |= typesof(/obj/item/food/processed_grown)
+
+/datum/unit_test/icon_test/food_shall_have_icon_states/start_test()
+
+	assemble_skipped_types()
 
 	var/list/failures = list()
 	for(var/check_type in check_types)
@@ -82,42 +85,59 @@
 	return 1
 
 /datum/unit_test/icon_test/signs_shall_have_existing_icon_states
-	name = "ICON STATE: Signs shall have existing icon states"
-	var/list/skip_types = list(
+	name = "ICON STATE: Sign Subtypes Shall Have Existing Icon States"
+
+/datum/unit_test/icon_test/signs_shall_have_existing_icon_states/start_test()
+	var/list/failures = list()
+
+	var/static/list/skip_icon_state_checks = list(
 		// Posters use a decl to set their icon and handle their own validation.
 		/obj/structure/sign/poster
 	)
 
-/datum/unit_test/icon_test/signs_shall_have_existing_icon_states/start_test()
-	var/list/failures = list()
-	for(var/sign_type in typesof(/obj/structure/sign))
-
-		var/obj/structure/sign/sign = sign_type
-		if(TYPE_IS_ABSTRACT(sign))
-			continue
+	var/list/icon_states_to_find = list()
+	for(var/obj/structure/sign/sign as anything in typesof(/obj/structure/sign))
 
 		var/skip = FALSE
-		for(var/skip_type in skip_types)
-			if(ispath(sign_type, skip_type))
+		for(var/skip_type in skip_icon_state_checks)
+			if(ispath(sign, skip_type))
 				skip = TRUE
 				break
 		if(skip)
 			continue
 
-		var/check_state = initial(sign.icon_state)
-		if(!check_state)
-			failures += "[sign] - null icon_state"
+		var/sign_state = sign::icon_state
+		var/sign_icon  = sign::icon
+
+		if(!(sign_icon in icon_states_to_find))
+			icon_states_to_find[sign_icon] = icon_states(sign_icon) || list()
+		icon_states_to_find[sign_icon] -= sign_state
+
+		if(TYPE_IS_ABSTRACT(sign))
 			continue
-		var/check_icon = initial(sign.icon)
-		if(!check_icon)
-			failures += "[sign] - null icon_state"
-			continue
-		if(!check_state_in_icon(check_state, check_icon))
-			failures += "[sign] - missing icon_state '[check_state]' in icon '[check_icon]"
-	if(failures.len)
-		fail("Signs with missing icon states:\n\t-[jointext(failures, "\n\t-")]")
+
+		if(!sign_icon)
+			failures += "[sign] - missing icon"
+		else if(!istext(sign_state))
+			failures += "[sign] - missing or invalid icon_state"
+		else if(!check_state_in_icon(sign_state, sign_icon))
+			failures += "[sign] - missing icon_state '[sign_state]' from icon '[sign_icon]'"
+
+	var/static/list/skip_extraneous_state_checks = list(
+		// Barsign icon_state is set by user, skip testing it here.
+		'icons/obj/barsigns.dmi'
+	)
+
+	for(var/sign_icon in icon_states_to_find)
+		var/list/remaining = icon_states_to_find[sign_icon]
+		if(!(sign_icon in skip_extraneous_state_checks) && length(remaining))
+			failures += "[sign_icon] - unused icon_states: [jointext(remaining, ", ")]"
+
+	if(length(failures))
+		fail("[length(failures)] issue\s with sign icons or icon states:\n[jointext(failures, "\n")]")
 	else
-		pass("All signs have valid icon states.")
+		pass("All signs have valid icon states and no extraneous icon states.")
+
 	return 1
 
 /datum/unit_test/icon_test/random_spawners_shall_have_existing_icon_states
@@ -295,4 +315,65 @@
 		fail("Missing vendor icons or icon states:\n\t-[jointext(failures, "\n\t-")]")
 	else
 		pass("All vendors have all icons and icon states.")
+	return 1
+
+
+/datum/unit_test/HUDS_shall_have_icon_states
+	name = "ICON STATE: HUD overlays shall have appropriate icon_states"
+
+/datum/unit_test/HUDS_shall_have_icon_states/start_test()
+	var/failed_jobs = 0
+	var/failed_sanity_checks = 0
+
+	// Throwing implants and health HUDs in here.
+	// Antag HUDs are tested by special role validation.
+
+	var/static/list/implant_hud_states = list(
+		"hud_imp_blank"    = "Blank",
+		"hud_imp_loyal"    = "Loyalty",
+		"hud_imp_unknown"  = "Unknown",
+		"hud_imp_tracking" = "Tracking",
+		"hud_imp_chem"     = "Chemical",
+	)
+	for(var/implant_hud_state in implant_hud_states)
+		if(!check_state_in_icon(implant_hud_state, global.using_map.implant_hud_icons))
+			log_bad("Sanity Check - Missing map [implant_hud_states[implant_hud_state]] implant HUD icon_state '[implant_hud_state]' from icon [global.using_map.implant_hud_icons]")
+			failed_sanity_checks++
+
+	var/static/list/med_hud_states = list(
+		"blank"    = "Blank",
+		"flatline" = "Flatline",
+		"0"        = "Dead",
+		"1"        = "Healthy",
+		"2"        = "Lightly injured",
+		"3"        = "Moderately injured",
+		"4"        = "Severely injured",
+		"5"        = "Dying",
+	)
+	for(var/med_hud_state in med_hud_states)
+		if(!check_state_in_icon(med_hud_state, global.using_map.med_hud_icons))
+			log_bad("Sanity Check - Missing map [med_hud_states[med_hud_state]] medical HUD icon_state '[med_hud_state]' from icon [global.using_map.med_hud_icons]")
+			failed_sanity_checks++
+	var/static/list/global_states = list(
+		""           = "Default/unnamed",
+		"hudunknown" = "Unknown role",
+		"hudhealthy" = "Healthy mob",
+		"hudill"     = "Diseased mob",
+		"huddead"    = "Dead mob"
+	)
+	for(var/global_state in global_states)
+		if(!check_state_in_icon(global_state, global.using_map.hud_icons))
+			log_bad("Sanity Check - Missing map [global_states[global_state]] HUD icon_state '[global_state]' from icon [global.using_map.hud_icons]")
+			failed_sanity_checks++
+
+	for(var/job_name in SSjobs.titles_to_datums)
+		var/datum/job/job = SSjobs.titles_to_datums[job_name]
+		if(!check_state_in_icon(job.hud_icon_state, job.hud_icon))
+			log_bad("[job.title] - Missing HUD icon: [job.hud_icon_state] in icon [job.hud_icon]")
+			failed_jobs++
+
+	if(failed_sanity_checks || failed_jobs)
+		fail("[global.using_map.type] - [failed_sanity_checks] failed sanity check\s, [failed_jobs] job\s with missing HUD icon.")
+	else
+		pass("All jobs have a HUD icon.")
 	return 1

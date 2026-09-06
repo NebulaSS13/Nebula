@@ -114,6 +114,11 @@
 		else
 			change_color(new_color, user)
 
+	else if(istype(A, /obj/item/card/data)) // TODO: un-hardcode this please. better yet redo how this entire proc is done
+		var/obj/item/card/data/data_card = A
+		data_card.detail_color = spray_color
+		. = TRUE
+
 	else if (istype(A, /turf/wall))
 		. = paint_wall(A, user)
 
@@ -143,46 +148,46 @@
 	return .
 
 
-/obj/item/paint_sprayer/proc/paint_wall(var/turf/wall/W, var/mob/user)
-	if(istype(W) && (!W.material || !W.material.wall_flags))
+/obj/item/paint_sprayer/proc/paint_wall(var/turf/wall/wall, var/mob/user)
+	if(istype(wall) && (!wall.material || !wall.material.wall_flags))
 		to_chat(user, SPAN_WARNING("You can't paint this wall type."))
 		return
 	var/choice
-	if(W.material.wall_flags & PAINT_PAINTABLE && W.material.wall_flags & PAINT_STRIPABLE)
+	if(wall.material.wall_flags & PAINT_PAINTABLE && wall.material.wall_flags & PAINT_STRIPABLE)
 		choice = input(user, "What do you wish to paint?") as null|anything in list(PAINT_REGION_PAINT,PAINT_REGION_STRIPE)
-	else if(W.material.wall_flags & PAINT_PAINTABLE)
+	else if(wall.material.wall_flags & PAINT_PAINTABLE)
 		choice = PAINT_REGION_PAINT
-	else if(W.material.wall_flags & PAINT_STRIPABLE)
+	else if(wall.material.wall_flags & PAINT_STRIPABLE)
 		choice = PAINT_REGION_STRIPE
-	if (user.incapacitated() || !W || !user.Adjacent(W))
+	if (user.incapacitated() || !wall || !user.Adjacent(wall))
 		return FALSE
 	if(choice == PAINT_REGION_PAINT)
-		W.paint_wall(spray_color)
+		wall.paint_wall(spray_color)
 	else if(choice == PAINT_REGION_STRIPE)
-		W.stripe_wall(spray_color)
+		wall.stripe_wall(spray_color)
 
 
-/obj/item/paint_sprayer/proc/pick_color_from_wall(var/turf/wall/W, var/mob/user)
-	if (!W.material || !W.material.wall_flags)
+/obj/item/paint_sprayer/proc/pick_color_from_wall(var/turf/wall/wall, var/mob/user)
+	if (!wall.material || !wall.material.wall_flags)
 		return FALSE
 
-	switch (select_wall_region(W, user, "Where do you wish to select the color from?"))
+	switch (select_wall_region(wall, user, "Where do you wish to select the color from?"))
 		if (PAINT_REGION_PAINT)
-			return W.paint_color
+			return wall.paint_color
 		if (PAINT_REGION_STRIPE)
-			return W.stripe_color
+			return wall.stripe_color
 		else
 			return FALSE
 
 
-/obj/item/paint_sprayer/proc/select_wall_region(var/turf/wall/W, var/mob/user, var/input_text)
+/obj/item/paint_sprayer/proc/select_wall_region(var/turf/wall/wall, var/mob/user, var/input_text)
 	var/list/choices = list()
-	if (W.material.wall_flags & PAINT_PAINTABLE)
+	if (wall.material.wall_flags & PAINT_PAINTABLE)
 		choices |= PAINT_REGION_PAINT
-	if (W.material.wall_flags & PAINT_STRIPABLE)
+	if (wall.material.wall_flags & PAINT_STRIPABLE)
 		choices |= PAINT_REGION_STRIPE
 	var/choice = input(user, input_text) as null|anything in sortTim(choices, /proc/cmp_text_asc)
-	if (user.incapacitated() || !W || !user.Adjacent(W))
+	if (user.incapacitated() || !wall || !user.Adjacent(wall))
 		return FALSE
 	return choice
 
@@ -223,7 +228,7 @@
 		return FALSE
 
 	if(!flooring.can_paint || F.is_floor_damaged())
-		to_chat(user, SPAN_WARNING("\The [src] cannot paint \the [F.name]."))
+		to_chat(user, SPAN_WARNING("\The [src] cannot paint \the [F]."))
 		return FALSE
 
 	var/list/decal_data = decals[decal]
@@ -361,9 +366,9 @@
 		update_icon()
 
 
-/obj/item/paint_sprayer/examine(mob/user)
+/obj/item/paint_sprayer/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..(user)
-	to_chat(user, "It is configured to produce the '[decal]' decal with a direction of '[paint_dir]' using [spray_color] paint.")
+	. += "It is configured to produce the '[decal]' decal with a direction of '[paint_dir]' using [spray_color] paint."
 
 /obj/item/paint_sprayer/CtrlClick()
 	if (!isturf(loc))
@@ -456,6 +461,7 @@
 	name = "Change Color Preset"
 	expected_target_type = /obj/item/paint_sprayer
 	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_INVENTORY
+	examine_desc = "change the color preset"
 
 /decl/interaction_handler/paint_sprayer_colour/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/paint_sprayer/sprayer = target

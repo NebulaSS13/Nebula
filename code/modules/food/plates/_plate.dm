@@ -53,9 +53,9 @@
 	food.update_icon()
 	return TRUE
 
-/obj/item/plate/attackby(obj/item/W, mob/living/user)
+/obj/item/plate/attackby(obj/item/used_item, mob/living/user)
 	// Plating food.
-	if(try_plate_food(W, user))
+	if(try_plate_food(used_item, user))
 		return TRUE
 	return ..()
 

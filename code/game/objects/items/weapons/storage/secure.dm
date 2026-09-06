@@ -31,12 +31,12 @@
 
 /obj/item/secure_storage/Initialize(ml, material_key)
 	var/datum/extension/lockable/mylock = get_or_create_extension(src, lock_type)
-	events_repository.register(/decl/observ/lock_state_changed, mylock, src, /obj/item/secure_storage/proc/on_lock_state_changed)
+	events_repository.register(/decl/observ/lock_state_changed, mylock, src, PROC_REF(on_lock_state_changed))
 	. = ..()
 
 /obj/item/secure_storage/Destroy()
 	var/datum/extension/lockable/mylock = get_extension(src, lock_type)
-	events_repository.unregister(/decl/observ/lock_state_changed, mylock, src, /obj/item/secure_storage/proc/on_lock_state_changed)
+	events_repository.unregister(/decl/observ/lock_state_changed, mylock, src, PROC_REF(on_lock_state_changed))
 	. = ..()
 
 /obj/item/secure_storage/proc/on_lock_state_changed(datum/extension/lockable/L, old_locked, new_locked)
@@ -46,9 +46,9 @@
 	if(new_locked)
 		storage?.close_all()
 
-/obj/item/secure_storage/attackby(obj/item/W, mob/user)
+/obj/item/secure_storage/attackby(obj/item/used_item, mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	if(lock.attackby(W, user))
+	if(lock.attackby(used_item, user))
 		return TRUE
 
 	// -> storage/attackby() what with handle insertion, etc
@@ -67,11 +67,12 @@
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	lock.ui_interact(user)
 
-/obj/item/secure_storage/examine(mob/user, distance, infix, suffix)
+/obj/item/secure_storage/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
 		var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-		to_chat(user, SPAN_INFO("The service panel is [lock.open ? "open" : "closed"]."))
+		if(lock)
+			. += SPAN_INFO("The service panel is [lock.open ? "open" : "closed"].")
 
 /obj/item/secure_storage/emag_act(remaining_charges, mob/user, feedback)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)

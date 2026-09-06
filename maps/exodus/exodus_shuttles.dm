@@ -20,7 +20,7 @@
 } \
 /area/shuttle/escape_pod_##NUMBER { \
 	name = "Escape Pod " + #NUMBER; \
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT; \
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_NO_LEGACY_PERSISTENCE; \
 }
 
 ESCAPE_POD(1)
@@ -38,7 +38,7 @@ ESCAPE_POD(4)
 	current_location = "nav_exodus_research_pod_dock"
 /area/ship/exodus_pod_research
 	name = "Research Pod"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_NO_LEGACY_PERSISTENCE
 /obj/effect/overmap/visitable/ship/landable/pod/research
 	name = "Exodus Research Pod"
 	shuttle = "Research Pod"
@@ -57,7 +57,7 @@ ESCAPE_POD(4)
 	current_location = "nav_exodus_mining_pod_dock"
 /area/ship/exodus_pod_mining
 	name = "Mining Pod"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_NO_LEGACY_PERSISTENCE
 /obj/effect/overmap/visitable/ship/landable/pod/mining
 	name = "Exodus Mining Pod"
 	shuttle = "Mining Pod"
@@ -76,7 +76,7 @@ ESCAPE_POD(4)
 	current_location = "nav_exodus_engineering_pod_dock"
 /area/ship/exodus_pod_engineering
 	name = "Engineering Pod"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_NO_LEGACY_PERSISTENCE
 /obj/effect/overmap/visitable/ship/landable/pod/engineering
 	name = "Exodus Engineering Pod"
 	shuttle = "Engineering Pod"

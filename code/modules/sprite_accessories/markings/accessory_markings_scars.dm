@@ -1,6 +1,8 @@
 /decl/sprite_accessory/marking/scar
 	icon          = 'icons/mob/human_races/species/default_scars.dmi'
 	abstract_type = /decl/sprite_accessory/marking/scar
+	species_allowed = null // Everyone can be scarred.
+	bodytype_categories_allowed = list(BODYTYPE_HUMANOID) // Only fit the humanoid silhouette, though.
 
 /decl/sprite_accessory/marking/scar/abdomen
 	abstract_type = /decl/sprite_accessory/marking/scar/abdomen

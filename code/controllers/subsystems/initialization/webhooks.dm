@@ -46,6 +46,9 @@ SUBSYSTEM_DEF(webhooks)
 			else
 				to_world_log("Failed to set up webhook [wid].")
 
+/datum/controller/subsystem/webhooks/proc/is_webhook_configured(wid)
+	return isnull(webhook_decls[wid])
+
 /datum/controller/subsystem/webhooks/proc/send(var/wid, var/wdata)
 	var/decl/webhook/webhook = webhook_decls[wid]
 	if(webhook)
@@ -88,7 +91,3 @@ SUBSYSTEM_DEF(webhooks)
 		log_and_message_admins("has pinged webhook [choice].", usr)
 		to_world_log("[usr.key] has pinged webhook [choice].")
 		webhook.send()
-
-/hook/roundstart/proc/run_webhook()
-	SSwebhooks.send(WEBHOOK_ROUNDSTART, list("url" = get_world_url()))
-	return 1

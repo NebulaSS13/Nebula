@@ -33,14 +33,14 @@
 	can_be_shackled = TRUE
 
 /decl/bodytype/prosthetic/utility_frame/Initialize()
-	equip_adjust = list(
-		"[slot_l_ear_str]" =  list(
+	_equip_adjust = list(
+		(slot_l_ear_str) =  list(
 			"[NORTH]" = list( 2, 0),
 			"[EAST]"  = list( 0, 0),
 			"[SOUTH]" = list(-2, 0),
 			"[WEST]"  = list( 0, 0)
 		),
-		"[slot_r_ear_str]" =  list(
+		(slot_r_ear_str) =  list(
 			"[NORTH]" = list(-2, 0),
 			"[EAST]"  = list( 0, 0),
 			"[SOUTH]" = list( 2, 0),

@@ -38,10 +38,10 @@
 
 	var/obj/machinery/shipsensors/sensors = get_sensors()
 	if(linked && sensors?.use_power && !(sensors.stat & NOPOWER))
-		var/volume = 10
+		var/ping_volume = 10
 		if(!sound_token)
-			sound_token = play_looping_sound(src, sound_id, working_sound, volume = volume, range = 10)
-		sound_token.SetVolume(volume)
+			sound_token = play_looping_sound(src, sound_id, working_sound, volume = ping_volume, range = 10)
+		sound_token.SetVolume(ping_volume)
 	else if(sound_token)
 		QDEL_NULL(sound_token)
 
@@ -257,4 +257,4 @@
 
 /obj/machinery/shipsensors/weak
 	heat_reduction = 0.2
-	desc = "Miniturized gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
+	desc = "Miniaturized gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."

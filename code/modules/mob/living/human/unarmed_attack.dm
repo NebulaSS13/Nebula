@@ -63,7 +63,7 @@
 /decl/natural_attack/proc/get_sparring_variant()
 	return GET_DECL(sparring_variant_type)
 
-/decl/natural_attack/proc/is_usable(var/mob/living/human/user, var/mob/target, var/zone)
+/decl/natural_attack/proc/attack_is_usable(var/mob/living/human/user, var/mob/target, var/zone)
 	if(!user.restrained() && !user.incapacitated())
 		for(var/etype in usable_with_limbs)
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(user, etype)
@@ -127,9 +127,9 @@
 			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
 		target.apply_effect(3, WEAKEN, armour * 100)
 
-	var/obj/item/clothing/C = target.get_covering_equipped_item_by_zone(zone)
-	if(istype(C) && prob(10))
-		C.leave_evidence(user)
+	var/obj/item/clothing/gear = target.get_covering_equipped_item_by_zone(zone)
+	if(istype(gear) && prob(10))
+		gear.leave_evidence(user)
 
 	return TRUE
 
@@ -148,7 +148,7 @@
 	var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(target, BP_EYES)
 	var/decl/pronouns/pronouns = user.get_pronouns()
 	if(eyes)
-		eyes.take_internal_damage(rand(3,4), 1)
+		eyes.take_damage(rand(3,4), 1)
 		user.visible_message(SPAN_DANGER("\The [user] jams [pronouns.his] [eye_attack_text] into \the [target]'s [eyes.name]!"))
 		if(eyes.can_feel_pain())
 			to_chat(target, SPAN_DANGER("You experience immense pain as [eye_attack_text_victim] are jammed into your [eyes.name]!"))
@@ -159,7 +159,7 @@
 		user.visible_message(SPAN_DANGER("\The [user] attempts to press [pronouns.his] [eye_attack_text] into \the [target]'s eyes, but [target_gender.he] [target_gender.does]n't have any!"))
 
 /decl/natural_attack/proc/damage_flags()
-	return (src.sharp? DAM_SHARP : 0)|(src.edge? DAM_EDGE : 0)
+	return (sharp ? DAM_SHARP : 0) | (edge ? DAM_EDGE : 0)
 
 /decl/natural_attack/bite
 	name                = "bite"
@@ -169,26 +169,25 @@
 	attack_sound        = 'sound/weapons/bite.ogg'
 	shredding           = 0
 	damage              = 5
-	sharp               = 0
-	edge                = 0
+	sharp               = FALSE
+	edge                = FALSE
 	usable_with_limbs   = list(BP_HEAD)
 
 /decl/natural_attack/bite/sharp
 	attack_verb = list("bit", "chomped")
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 
-/decl/natural_attack/bite/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
-
+/decl/natural_attack/bite/attack_is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 	if(user.get_item_blocking_speech())
-		return 0
+		return FALSE
 	for(var/slot in list(slot_wear_mask_str, slot_head_str, slot_wear_suit_str))
-		var/obj/item/clothing/C = user.get_equipped_item(slot)
-		if(istype(C) && (C.body_parts_covered & SLOT_FACE) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
-			return 0 //prevent biting through a space helmet or similar
+		var/obj/item/clothing/gear = user.get_equipped_item(slot)
+		if(istype(gear) && (gear.body_parts_covered & SLOT_FACE) && (gear.item_flags & ITEM_FLAG_THICKMATERIAL))
+			return FALSE //prevent biting through a space helmet or similar
 	if (user == target && (zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH))
-		return 0 //how do you bite yourself in the head?
-	return 1
+		return FALSE //how do you bite yourself in the head?
+	return TRUE
 
 /decl/natural_attack/punch
 	name = "punch"
@@ -210,7 +209,8 @@
 	attack_damage = clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
 
 	if(target == user)
-		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in \the [affecting]!</span>")
+		var/decl/pronouns/pronouns = user.get_pronouns()
+		user.visible_message(SPAN_DANGER("\The [user] [pick(attack_verb)] [pronouns.self] in \the [affecting]!"))
 		return 0
 
 	target.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
@@ -263,7 +263,7 @@
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 	sparring_variant_type = /decl/natural_attack/light_strike/kick
 
-/decl/natural_attack/kick/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
+/decl/natural_attack/kick/attack_is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 	if(zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH)
 		zone = BP_CHEST
 	. = ..()
@@ -272,7 +272,7 @@
 	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	if(!istype(shoes))
 		return damage
-	return damage + (shoes ? shoes.get_attack_force(user) : 0)
+	return damage + (shoes ? shoes.expend_attack_force(user) : 0)
 
 /decl/natural_attack/kick/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 
@@ -295,7 +295,7 @@
 	damage = 0
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 
-/decl/natural_attack/stomp/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
+/decl/natural_attack/stomp/attack_is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 	if(!istype(target))
 		return FALSE
 	if (!user.current_posture.prone && (target.current_posture.prone || (zone in list(BP_L_FOOT, BP_R_FOOT))))
@@ -308,7 +308,7 @@
 
 /decl/natural_attack/stomp/get_unarmed_damage(mob/living/user, mob/living/victim)
 	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
-	return damage + (shoes ? shoes.get_attack_force(user) : 0)
+	return damage + (shoes ? shoes.expend_attack_force(user) : 0)
 
 /decl/natural_attack/stomp/show_attack(var/mob/living/human/user, var/mob/living/human/target, var/zone, var/attack_damage)
 
@@ -342,8 +342,8 @@
 	attack_verb = list("tapped", "lightly struck")
 	shredding = 0
 	damage = 0
-	sharp = 0
-	edge = 0
+	sharp = FALSE
+	edge = FALSE
 	attack_sound = "light_strike"
 
 /decl/natural_attack/light_strike/punch
@@ -358,7 +358,7 @@
 	attack_noun = list("foot")
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 
-/decl/natural_attack/light_strike/kick/is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
+/decl/natural_attack/light_strike/kick/attack_is_usable(var/mob/living/human/user, var/mob/living/human/target, var/zone)
 	if(zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH)
 		zone = BP_CHEST
 	. = ..()
@@ -370,8 +370,8 @@
 	attack_noun = list("forelimb")
 	damage = 8
 	shredding = 1
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	delay = 20
 	eye_attack_text = "a forelimb"
 	eye_attack_text_victim = "a forelimb"

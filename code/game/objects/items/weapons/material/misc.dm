@@ -1,8 +1,8 @@
 /obj/item/harpoon
 	name = "harpoon"
 	desc = "A short throwing spear with a deep barb, specifically designed to embed itself in its target."
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	icon = 'icons/obj/items/weapon/harpoon.dmi'
 	icon_state = "harpoon"
 	item_state = "harpoon"
@@ -37,7 +37,7 @@
 /obj/item/harpoon/bomb/proc/handle_afterbomb()
 	spent = TRUE
 	SetName("broken harpoon")
-	desc = "A short spear with just a barb - if it once had a spearhead, it doesn't any more."
+	desc = "A short spear with just a barb; if it once had a spearhead, it doesn't anymore."
 	icon_state = "harpoon_bomb_spent"
 	sharp = FALSE
 	edge = FALSE
@@ -47,8 +47,8 @@
 	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
 	icon = 'icons/obj/items/tool/scythe.dmi'
 	icon_state = ICON_STATE_WORLD
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	throw_speed = 1
 	throw_range = 3
 	w_class = ITEM_SIZE_HUGE
@@ -67,7 +67,7 @@
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "bashed")
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 
 /obj/item/cross/silver
 	material = /decl/material/solid/metal/silver

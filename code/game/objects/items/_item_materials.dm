@@ -5,8 +5,8 @@
 	if((material_alteration & MAT_FLAG_ALTERATION_COLOR) && material)
 		alpha = 100 + material.opacity * 255
 	color = get_color() // avoiding set_color() here as that will set it on paint_color
-	if(blood_overlay)
-		add_overlay(blood_overlay)
+	if(coating_overlay)
+		add_overlay(coating_overlay)
 	if(global.contamination_overlay && contaminated)
 		add_overlay(global.contamination_overlay)
 
@@ -52,10 +52,6 @@
 	if(!consumed && material && w_class > ITEM_SIZE_SMALL && T)
 		material.place_shards(T)
 	qdel(src)
-
-/obj/item/get_material()
-	RETURN_TYPE(/decl/material)
-	return material
 
 // TODO: Refactor more code to use this where necessary, and then make this use
 // some sort of generalized system for hitting with different parts of an item
@@ -105,10 +101,13 @@
 	queue_icon_update()
 
 /obj/item/proc/update_name()
+	var/list/new_name = list(base_name || initial(name))
 	if(istype(material) && (material_alteration & MAT_FLAG_ALTERATION_NAME))
-		SetName("[material.adjective_name] [base_name || initial(name)]")
-	else
-		SetName(base_name || initial(name))
+		new_name.Insert(1, material.adjective_name)
+	if(name_prefix)
+		new_name.Insert(1, name_prefix)
+	if(length(new_name))
+		SetName(jointext(new_name, " "))
 
 /obj/item/get_matter_amount_modifier()
 	. = ..()

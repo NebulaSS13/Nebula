@@ -15,6 +15,7 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 	stat = DEAD
 	status_flags = GODMODE
 	shift_to_open_context_menu = FALSE
+	skillset = /datum/skillset // moved here from /mob to avoid giving dview a skillset
 	var/ghost_image_flag = GHOST_IMAGE_DARKNESS
 	var/image/ghost_image = null //this mobs ghost image, for deleting and stuff
 

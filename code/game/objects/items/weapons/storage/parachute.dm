@@ -10,13 +10,13 @@
 	if(storage)
 		storage.max_storage_space = max(1, round(storage.max_storage_space * 0.5))
 
-/obj/item/backpack/parachute/examine(mob/user)
+/obj/item/backpack/parachute/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(Adjacent(user))
 		if(packed)
-			to_chat(user, SPAN_NOTICE("The parachute seems to be packed and ready to deploy."))
+			. += SPAN_NOTICE("The parachute seems to be packed and ready to deploy.")
 		else
-			to_chat(user, SPAN_DANGER("The parachute is unpacked."))
+			. += SPAN_DANGER("The parachute is unpacked.")
 
 /obj/item/backpack/parachute/attack_self(mob/user)
 	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))

@@ -41,10 +41,10 @@
 
 	After that, mostly just check your state, check whether you're holding an item,
 	check whether you're adjacent to the target, then pass off the click to whoever
-	is recieving it.
+	is receiving it.
 	The most common are:
 	* mob/UnarmedAttack(atom,adjacent) - used here only when adjacent, with no item in hand; in the case of humans, checks gloves
-	* atom/attackby(item,user) - used only when adjacent
+	* atom/attackby(used_item,user) - used only when adjacent
 	* item/afterattack(atom,user,adjacent,params) - used both ranged and adjacent
 	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
 */
@@ -108,7 +108,7 @@
 	if(holding == A) // Handle attack_self
 		holding.attack_self(src)
 		trigger_aiming(TARGET_CAN_CLICK)
-		usr.update_inhand_overlays(FALSE)
+		update_inhand_overlays(FALSE)
 		return 1
 
 	//Atoms on your person
@@ -275,7 +275,7 @@
 
 /atom/proc/ShiftClick(var/mob/user)
 	if(user.client && user.client.eye == user)
-		user.examinate(src)
+		user.examine_verb(src)
 	return
 
 /*
@@ -306,7 +306,7 @@
 	A.AltClick(src)
 
 /atom/proc/AltClick(var/mob/user)
-	if(try_handle_interactions(user, get_alt_interactions(user), user?.get_active_held_item()))
+	if(try_handle_interactions(user, get_alt_interactions(user), user?.get_active_held_item(), check_alt_interactions = TRUE))
 		return TRUE
 	if(user?.get_preference_value(/datum/client_preference/show_turf_contents) == PREF_ALT_CLICK)
 		. = show_atom_list_for_turf(user, get_turf(src))

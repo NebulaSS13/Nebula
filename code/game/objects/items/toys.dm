@@ -47,48 +47,48 @@
 	throw_range                   = 20
 	possible_transfer_amounts     = null
 	amount_per_transfer_from_this = 10
-	volume                        = 10
+	chem_volume                   = 10
 	material                      = /decl/material/solid/organic/plastic
 	_base_attack_force            = 0
 
 /obj/item/chems/water_balloon/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
-	if(overlay && reagents?.total_volume <= 0)
+	if(overlay && REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		overlay.icon_state = "[overlay.icon_state]_empty"
 	. = ..()
 
-/obj/item/chems/water_balloon/examine(mob/user, distance, infix, suffix)
+/obj/item/chems/water_balloon/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(distance == 1)
-		to_chat(user, "It's [reagents?.total_volume > 0? "filled with liquid sloshing around" : "empty"].")
+	if(distance <= 1)
+		. += "It's [REAGENT_TOTAL_VOLUME(reagents) > 0? "filled with liquid sloshing around" : "empty"]."
 
 /obj/item/chems/water_balloon/on_reagent_change()
 	if(!(. = ..()))
 		return
-	w_class = (reagents?.total_volume > 0)? ITEM_SIZE_SMALL : ITEM_SIZE_TINY
+	w_class = (REAGENT_TOTAL_VOLUME(reagents) > 0)? ITEM_SIZE_SMALL : ITEM_SIZE_TINY
 	//#TODO: Maybe acids should handle eating their own containers themselves?
-	for(var/reagent in reagents?.reagent_volumes)
-		var/decl/material/M = GET_DECL(reagent)
-		if(M.solvent_power >= MAT_SOLVENT_STRONG)
-			visible_message(SPAN_DANGER("\The [M] chews through \the [src]!"))
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
+		if(reagent.solvent_power >= MAT_SOLVENT_STRONG)
+			visible_message(SPAN_DANGER("\The [reagent] chews through \the [src]!"))
 			physically_destroyed()
 
 /obj/item/chems/water_balloon/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	..()
-	if(reagents?.total_volume > 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) > 0)
 		visible_message(SPAN_WARNING("\The [src] bursts!"))
 		physically_destroyed()
 
 /obj/item/chems/water_balloon/physically_destroyed(skip_qdel)
-	if(reagents?.total_volume > 0)
+	var/reagent_volume = REAGENT_TOTAL_VOLUME(reagents)
+	if(reagent_volume > 0)
 		new /obj/effect/temporary(src, 5, icon, "[get_world_inventory_state()]_burst")
-		reagents.splash_turf(get_turf(src), reagents.total_volume)
+		reagents.splash_turf(get_turf(src), reagent_volume)
 		playsound(src, 'sound/effects/balloon-pop.ogg', 75, TRUE, 3)
 	. = ..()
 
 /obj/item/chems/water_balloon/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
-	if(reagents?.total_volume <= 0)
+	if(REAGENT_TOTAL_VOLUME(reagents) <= 0)
 		icon_state = "[icon_state]_empty"
 
 /obj/item/chems/water_balloon/afterattack(obj/target, mob/user, proximity)
@@ -145,12 +145,12 @@
 	name = "toy sword"
 	desc = "A cheap, plastic replica of an energy sword. Realistic sounds! Ages 8 and up."
 	sharp = FALSE
-	edge =  FALSE
-	attack_verb = list("hit")
+	edge = FALSE
+	attack_verb = "hit"
 	material = /decl/material/solid/organic/plastic
 	active_hitsound = 'sound/weapons/genhit.ogg'
 	active_descriptor = "extended"
-	active_attack_verb = list("hit")
+	active_attack_verb = "hit"
 	active_edge = FALSE
 	active_sharp = FALSE
 	_active_base_attack_force = 1
@@ -388,12 +388,12 @@
 
 /obj/item/toy/figure/geneticist
 	name = "Geneticist action figure"
-	desc = "A \"Space Life\" brand Geneticist action figure, which was recently dicontinued."
+	desc = "A \"Space Life\" brand Geneticist action figure, which was recently discontinued."
 	icon_state = "geneticist"
 
 /obj/item/toy/figure/hop
-	name = "Head of Personel action figure"
-	desc = "A \"Space Life\" brand Head of Personel action figure."
+	name = "Head of Personnel action figure"
+	desc = "A \"Space Life\" brand Head of Personnel action figure."
 	icon_state = "hop"
 
 /obj/item/toy/figure/hos
@@ -497,8 +497,8 @@
 	desc = "An arcane weapon (made of foam) wielded by the followers of the hit Saturday morning cartoon \"King Nursee and the Acolytes of Heroism\"."
 	icon = 'icons/obj/items/weapon/swords/cult.dmi'
 	material = /decl/material/solid/organic/plastic/foam
-	edge = 0
-	sharp = 0
+	edge = FALSE
+	sharp = FALSE
 
 /obj/item/inflatable_duck //#TODO: Move under obj/item/toy ?
 	name = "inflatable duck"
@@ -526,13 +526,13 @@
 
 /obj/item/marshalling_wand/attack_self(mob/user)
 	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
-	if (user.a_intent == I_HELP)
+	if (user.check_intent(I_FLAG_HELP))
 		user.visible_message("<span class='notice'>[user] beckons with \the [src], signalling forward motion.</span>",
 							"<span class='notice'>You beckon with \the [src], signalling forward motion.</span>")
-	else if (user.a_intent == I_DISARM)
+	else if (user.check_intent(I_FLAG_DISARM))
 		user.visible_message("<span class='notice'>[user] holds \the [src] above their head, signalling a stop.</span>",
 							"<span class='notice'>You hold \the [src] above your head, signalling a stop.</span>")
-	else if (user.a_intent == I_GRAB)
+	else if (user.check_intent(I_FLAG_GRAB))
 		var/wand_dir
 		if(user.get_equipped_item(BP_L_HAND) == src)
 			wand_dir = "left"
@@ -542,7 +542,7 @@
 			wand_dir = pick("left", "right")
 		user.visible_message("<span class='notice'>[user] waves \the [src] to the [wand_dir], signalling a turn.</span>",
 							"<span class='notice'>You wave \the [src] to the [wand_dir], signalling a turn.</span>")
-	else if (user.a_intent == I_HURT)
+	else if (user.check_intent(I_FLAG_HARM))
 		user.visible_message("<span class='warning'>[user] frantically waves \the [src] above their head!</span>",
 							"<span class='warning'>You frantically wave \the [src] above your head!</span>")
 
@@ -562,13 +562,13 @@
 /obj/item/toy/ringbell/attack_hand(mob/user)
 	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
 		return ..()
-	if (user.a_intent == I_HELP)
+	if (user.check_intent(I_FLAG_HELP))
 		user.visible_message("<span class='notice'>[user] rings \the [src], signalling the beginning of the contest.</span>")
 		playsound(user.loc, 'sound/items/oneding.ogg', 60)
-	else if (user.a_intent == I_DISARM)
+	else if (user.check_intent(I_FLAG_DISARM))
 		user.visible_message("<span class='notice'>[user] rings \the [src] three times, signalling the end of the contest!</span>")
 		playsound(user.loc, 'sound/items/threedings.ogg', 60)
-	else if (user.a_intent == I_HURT)
+	else if (user.check_intent(I_FLAG_HARM))
 		user.visible_message("<span class='warning'>[user] rings \the [src] repeatedly, signalling a disqualification!</span>")
 		playsound(user.loc, 'sound/items/manydings.ogg', 60)
 	return TRUE
@@ -576,9 +576,7 @@
 //Office Desk Toys
 
 /obj/item/toy/desk
-	name = "desk toy master"
-	desc = "A object that does not exist. Parent Item"
-
+	abstract_type = /obj/item/toy/desk
 	var/on = 0
 	var/activation_sound = 'sound/effects/flashlight.ogg'
 
@@ -598,7 +596,7 @@
 
 /obj/item/toy/desk/newtoncradle
 	name = "\improper Newton's cradle"
-	desc = "A ancient 21th century super-weapon model demonstrating that Sir Isaac Newton is the deadliest sonuvabitch in space."
+	desc = "An ancient 21st century super-weapon model demonstrating that Sir Isaac Newton is the deadliest sonuvabitch in space."
 	icon_state = "newtoncradle"
 
 /obj/item/toy/desk/fan
@@ -613,7 +611,7 @@
 
 /obj/item/toy/desk/dippingbird
 	name = "dipping bird toy"
-	desc = "A ancient human bird idol, worshipped by clerks and desk jockeys."
+	desc = "An ancient human bird idol, worshipped by clerks and desk jockeys."
 	icon_state= "dippybird"
 
 // tg station ports
@@ -674,10 +672,10 @@
 	_base_attack_force = 1
 	var/rule_info
 
-/obj/item/toy/chess/examine(mob/user, distance, infix, suffix)
+/obj/item/toy/chess/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(rule_info)
-		to_chat(user, SPAN_NOTICE(rule_info))
+		. += SPAN_NOTICE(rule_info)
 
 /obj/item/toy/chess/pawn
 	name = "oversized white pawn"

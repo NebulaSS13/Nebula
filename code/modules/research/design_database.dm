@@ -17,12 +17,17 @@ var/global/list/default_initial_tech_levels
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	maximum_component_parts = list(
+		/obj/item/stock_parts/item_holder/disk_reader = 1,
+		/obj/item/stock_parts = 15,
+	)
 
+	/// A cached reference to our disk reader part, if present.
+	var/obj/item/stock_parts/item_holder/disk_reader/disk_reader
 	var/initial_network_id
 	var/initial_network_key
 	var/list/tech_levels
 	var/need_disk_operation = FALSE
-	var/obj/item/disk/tech_disk/disk
 	var/sync_policy = SYNC_PULL_NETWORK|SYNC_PUSH_NETWORK|SYNC_PULL_DISK
 
 /obj/machinery/design_database/proc/toggle_sync_policy_flag(var/sync_flag)
@@ -36,13 +41,17 @@ var/global/list/default_initial_tech_levels
 	var/list/data = list()
 	var/datum/extension/network_device/device = get_extension(src, /datum/extension/network_device)
 	data["network_id"] = device.network_tag
+	var/obj/item/disk/tech_disk/disk = try_get_disk()
 	if(disk)
 		data["disk_name"] = disk.name
-		var/list/tech_data = list()
-		for(var/tech in disk.stored_tech)
-			var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
-			tech_data += list(list("field" = field.name, "desc" = field.desc, "level" = "[disk.stored_tech[tech]].0 GQ"))
-		data["disk_tech"] = tech_data
+		if(istype(disk))
+			var/list/tech_data = list()
+			for(var/tech in disk.stored_tech)
+				var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
+				tech_data += list(list("field" = field.name, "desc" = field.desc, "level" = "[disk.stored_tech[tech]].0 GQ"))
+			data["disk_tech"] = tech_data
+		else
+			data["disk_error"] = "invalid data format"
 	else
 		data["disk_name"] = "no disk loaded"
 
@@ -97,6 +106,7 @@ var/global/list/default_initial_tech_levels
 /obj/machinery/design_database/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
+	ADJUST_TAG_VAR(initial_network_key, map_hash)
 
 /obj/machinery/design_database/handle_post_network_connection()
 	..()
@@ -116,26 +126,30 @@ var/global/list/default_initial_tech_levels
 		return
 
 	// Read or write from a loaded disk.
+	var/obj/item/disk/tech_disk/disk = try_get_disk()
 	if(disk && need_disk_operation)
-		if(sync_policy & SYNC_PULL_DISK)
-			var/new_tech = FALSE
-			for(var/tech in disk.stored_tech)
-				if(tech_levels[tech] < disk.stored_tech[tech])
-					tech_levels[tech] = disk.stored_tech[tech]
-					new_tech = TRUE
-			if(new_tech)
-				visible_message(SPAN_NOTICE("\The [src] clicks and chirps as it reads from \the [disk]."))
-				if((sync_policy & SYNC_PUSH_NETWORK) && !sync_design_consoles())
-					visible_message(SPAN_WARNING("\The [src] flashes an error light from its network interface."))
+		if(!istype(disk)) // wrong type of disk!
+			visible_message(SPAN_WARNING("\The [src] whirrs and drones, before emitting an ominous grinding sound."))
+		else
+			if(sync_policy & SYNC_PULL_DISK)
+				var/new_tech = FALSE
+				for(var/tech in disk.stored_tech)
+					if(tech_levels[tech] < disk.stored_tech[tech])
+						tech_levels[tech] = disk.stored_tech[tech]
+						new_tech = TRUE
+				if(new_tech)
+					visible_message(SPAN_NOTICE("\The [src] clicks and chirps as it reads from \the [disk]."))
+					if((sync_policy & SYNC_PUSH_NETWORK) && !sync_design_consoles())
+						visible_message(SPAN_WARNING("\The [src] flashes an error light from its network interface."))
 
-		if(sync_policy & SYNC_PUSH_DISK)
-			var/new_tech
-			for(var/tech in tech_levels)
-				if(tech_levels[tech] > LAZYACCESS(disk.stored_tech, tech))
-					new_tech = TRUE
-					LAZYSET(disk.stored_tech, tech, tech_levels[tech])
-			if(new_tech)
-				visible_message(SPAN_NOTICE("\The [src] whirrs and drones as it writes to \the [disk]."))
+			if(sync_policy & SYNC_PUSH_DISK)
+				var/new_tech
+				for(var/tech in tech_levels)
+					if(tech_levels[tech] > LAZYACCESS(disk.stored_tech, tech))
+						new_tech = TRUE
+						LAZYSET(disk.stored_tech, tech, tech_levels[tech])
+				if(new_tech)
+					visible_message(SPAN_NOTICE("\The [src] whirrs and drones as it writes to \the [disk]."))
 		visible_message("The I/O light on \the [src] stops blinking.")
 		need_disk_operation = FALSE
 
@@ -148,49 +162,35 @@ var/global/list/default_initial_tech_levels
 
 /obj/machinery/design_database/Destroy()
 	design_databases -= src
-	QDEL_NULL(disk)
+	disk_reader = null
 	. = ..()
 
-/obj/machinery/design_database/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/disk/tech_disk))
-		if(disk)
-			to_chat(user, SPAN_WARNING("\The [src] already has a disk inserted."))
-			return TRUE
-		if(user.try_unequip(I, src))
-			visible_message("\The [user] slots \the [I] into \the [src].")
-			visible_message(SPAN_NOTICE("\The [src]'s I/O light begins to blink."))
-			disk = I
-			need_disk_operation = TRUE
-			return TRUE
+/obj/machinery/design_database/proc/on_insert_disk(obj/item/disk/D, mob/user)
+	visible_message(SPAN_NOTICE("\The [src]'s I/O light begins to blink."))
+	need_disk_operation = TRUE
+	update_ui()
 
+/obj/machinery/design_database/proc/on_eject_disk(obj/item/disk/D, mob/user)
+	need_disk_operation = FALSE
+	update_ui()
+
+/obj/machinery/design_database/RefreshParts()
 	. = ..()
+	disk_reader = get_component_of_type(/obj/item/stock_parts/item_holder/disk_reader)
+	if(disk_reader)
+		disk_reader.register_on_insert(CALLBACK(src, PROC_REF(on_insert_disk)))
+		disk_reader.register_on_eject(CALLBACK(src, PROC_REF(on_eject_disk)))
 
+/obj/machinery/design_database/proc/try_get_disk()
+	return disk_reader?.get_inserted()
+
+/obj/machinery/design_database/proc/update_ui()
+	SSnano.update_uis(src)
+
+// used for, specifically, removing a disk via the UI
 /obj/machinery/design_database/proc/eject_disk(var/mob/user)
-	if(disk)
-		disk.dropInto(loc)
-		need_disk_operation = FALSE
-		if(user)
-			if(!issilicon(user))
-				user.put_in_hands(disk)
-			if(Adjacent(user, src))
-				visible_message(SPAN_NOTICE("\The [user] removes \the [disk] from \the [src]."))
-		disk = null
-		return TRUE
-	return FALSE
-
-/obj/machinery/design_database/get_alt_interactions(var/mob/user)
-	. = ..()
-	LAZYADD(., /decl/interaction_handler/remove_disk/designs)
-
-/decl/interaction_handler/remove_disk/designs
-	expected_target_type = /obj/machinery/design_database
-
-/decl/interaction_handler/remove_disk/designs/is_possible(atom/target, mob/user, obj/item/prop)
-	. = ..()
-	if(.)
-		var/obj/machinery/design_database/D = target
-		. = !!D.disk
-
-/decl/interaction_handler/remove_disk/designs/invoked(atom/target, mob/user, obj/item/prop)
-	var/obj/machinery/design_database/D = target
-	D.eject_disk(user)
+	if(!disk_reader)
+		to_chat(user, SPAN_WARNING("\The [src] has no disk drive installed."))
+		return FALSE
+	. = !isnull(disk_reader.eject_item(user))
+	update_ui()

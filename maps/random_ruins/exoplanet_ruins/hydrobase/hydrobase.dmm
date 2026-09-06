@@ -28,9 +28,6 @@
 	},
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growX)
-"ag" = (
-/turf/floor/tiled/dark,
-/area/map_template/hydrobase/station/growX)
 "ah" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /obj/structure/catwalk,
@@ -105,7 +102,7 @@
 /area/map_template/hydrobase/station/growX)
 "as" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -174,9 +171,6 @@
 /mob/living/simple_animal/hostile/malf_drone/hydro,
 /turf/floor/bluegrid,
 /area/map_template/hydrobase/station/growD)
-"aE" = (
-/turf/floor/tiled/white,
-/area/map_template/hydrobase/station/growA)
 "aF" = (
 /obj/machinery/firealarm{
 	dir = 8;
@@ -348,7 +342,7 @@
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growD)
 "bc" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -393,9 +387,6 @@
 /obj/item/seeds/wheatseed,
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
-"bi" = (
-/turf/floor/tiled/white,
-/area/map_template/hydrobase/station/growD)
 "bj" = (
 /obj/machinery/light{
 	dir = 4;
@@ -727,7 +718,7 @@
 /area/map_template/hydrobase/station/growD)
 "cc" = (
 /obj/structure/cable/yellow,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 25
 	},
@@ -988,8 +979,7 @@
 /obj/machinery/power/solar,
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable{
-	dir = 4;
-	icon_state = "0-2"
+	icon_state = "0-4"
 	},
 /turf/floor/fixed/alium/airless,
 /area/map_template/hydrobase/solars)
@@ -1016,7 +1006,7 @@
 /turf/floor/tiled/white,
 /area/map_template/hydrobase/station/growC)
 "cS" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 25
 	},
@@ -1092,7 +1082,7 @@
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
 "dc" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	pixel_y = -25
 	},
 /obj/structure/cable/yellow{
@@ -1136,9 +1126,6 @@
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/grassseed,
 /turf/floor/fixed/alium,
-/area/map_template/hydrobase/station/growC)
-"dj" = (
-/turf/floor/tiled/white,
 /area/map_template/hydrobase/station/growC)
 "dk" = (
 /obj/structure/catwalk,
@@ -1390,7 +1377,7 @@
 /obj/structure/sign/warning/smoking{
 	pixel_y = 32
 	},
-/obj/structure/bed/chair/office/light{
+/obj/structure/chair/office/light{
 	dir = 4
 	},
 /turf/floor/tiled,
@@ -1518,14 +1505,14 @@
 /area/map_template/hydrobase/station/growA)
 "eh" = (
 /obj/structure/catwalk,
-/obj/item/kitchen/rollingpin,
+/obj/item/rollingpin,
 /obj/item/knife/kitchen,
 /obj/structure/table/glass/pglass,
 /obj/item/ashtray,
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "ei" = (
-/obj/structure/bed/chair/office/light{
+/obj/structure/chair/office/light{
 	dir = 1
 	},
 /turf/floor/tiled,
@@ -1573,7 +1560,7 @@
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "eq" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -1719,7 +1706,7 @@
 	tag_interior_door = "solars_inner";
 	dir = 1
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 25
 	},
@@ -1773,8 +1760,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	dir = 4;
-	icon_state = "0-2"
+	icon_state = "1-4"
 	},
 /turf/floor/fixed/alium/airless,
 /area/map_template/hydrobase/solars)
@@ -1797,7 +1783,7 @@
 "eL" = (
 /obj/machinery/power/tracker,
 /obj/structure/cable{
-	dir = 4
+	icon_state = "0-8"
 	},
 /turf/floor/concrete,
 /area/template_noop)
@@ -1836,7 +1822,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 4;
 	pixel_x = 25
 	},
@@ -1845,7 +1831,7 @@
 /turf/floor/bluegrid,
 /area/map_template/hydrobase/station/growB)
 "eS" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	pixel_x = -25
 	},
@@ -2171,8 +2157,7 @@
 /obj/machinery/power/solar,
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable{
-	dir = 4;
-	icon_state = "0-2"
+	icon_state = "0-4"
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -2219,7 +2204,7 @@
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/growA)
 "fM" = (
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -2248,7 +2233,7 @@
 /area/map_template/hydrobase/station/shipaccess)
 "fP" = (
 /obj/machinery/washing_machine,
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 1;
 	pixel_y = 25
 	},
@@ -2280,9 +2265,6 @@
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/towercap,
 /turf/floor/fixed/alium,
-/area/map_template/hydrobase/station/growB)
-"fT" = (
-/turf/floor/tiled/white,
 /area/map_template/hydrobase/station/growB)
 "fU" = (
 /obj/machinery/light{
@@ -2512,7 +2494,7 @@
 	id_tag = "hydrodock_sensor";
 	pixel_y = 25
 	},
-/obj/machinery/power/apc{
+/obj/machinery/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -2608,6 +2590,9 @@
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable{
 	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	icon_state = "0-4"
 	},
 /turf/floor/fixed/alium/airless,
 /area/map_template/hydrobase/solars)
@@ -2874,7 +2859,7 @@ aD
 cm
 cw
 cP
-dj
+cR
 cP
 dX
 cm
@@ -2989,7 +2974,7 @@ au
 aC
 aQ
 aC
-bi
+aQ
 aQ
 aP
 aQ
@@ -3005,7 +2990,7 @@ eQ
 fi
 fj
 fi
-fT
+fi
 fx
 fi
 fj
@@ -3274,26 +3259,26 @@ al
 al
 ap
 aq
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 aq
 bR
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 dt
 cU
-aE
-aE
+av
+av
 cX
 bR
 aq
-aE
-aE
-aE
+av
+av
+av
 aT
 aq
 ef
@@ -3314,12 +3299,12 @@ al
 al
 ap
 aq
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 bt
-aE
+av
 bS
 bG
 bG
@@ -3331,12 +3316,12 @@ bG
 bG
 bG
 fo
-aE
+av
 bt
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 aq
 ef
 al
@@ -3355,7 +3340,7 @@ al
 ao
 aq
 av
-aE
+av
 aS
 aS
 bk
@@ -3377,7 +3362,7 @@ bu
 fV
 ef
 ef
-aE
+av
 av
 aq
 gI
@@ -3396,9 +3381,9 @@ al
 al
 ap
 aq
-aE
-aE
-aE
+av
+av
+av
 bl
 bv
 bG
@@ -3416,9 +3401,9 @@ bT
 bG
 bv
 cW
-aE
-aE
-aE
+av
+av
+av
 aq
 ef
 al
@@ -3439,26 +3424,26 @@ al
 ap
 aq
 aT
-aE
-aE
-aE
+av
+av
+av
 aq
 aq
-aE
-aE
-aE
+av
+av
+av
 cX
 dw
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 aq
 aq
-aE
-aE
-aE
-aE
+av
+av
+av
+av
 aq
 ef
 al
@@ -3493,8 +3478,8 @@ dx
 dI
 eg
 cU
-aE
-aE
+av
+av
 aq
 fL
 ef
@@ -3881,7 +3866,7 @@ ab
 ac
 ad
 ad
-ag
+ad
 ai
 ak
 ak

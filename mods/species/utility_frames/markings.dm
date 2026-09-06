@@ -2,7 +2,7 @@
 	name = "Frame Department Stripe"
 	icon_state = "single_stripe"
 	body_parts = list(BP_CHEST)
-	species_allowed = list(SPECIES_FRAME)
+	species_allowed = list(/decl/species/utility_frame::uid)
 	icon = 'mods/species/utility_frames/icons/markings.dmi'
 	color_blend = ICON_MULTIPLY
 	uid = "acc_marking_frame_stripe"

@@ -4,6 +4,6 @@
 		TRAIT_TELEPORTING
 	)
 
-/decl/plant_gene/special/mutate(datum/seed/seed, turf/location)
+/decl/plant_gene/special/mutate(datum/seed/seed, atom/location)
 	if(prob(65))
 		seed.set_trait(TRAIT_TELEPORTING, !seed.get_trait(TRAIT_TELEPORTING))

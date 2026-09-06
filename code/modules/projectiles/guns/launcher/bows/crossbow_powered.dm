@@ -24,10 +24,10 @@
 	QDEL_NULL(cell)
 	return ..()
 
-/obj/item/gun/launcher/bow/crossbow/powered/attackby(obj/item/W, mob/user)
+/obj/item/gun/launcher/bow/crossbow/powered/attackby(obj/item/used_item, mob/user)
 
-	if(istype(W, /obj/item/rcd))
-		var/obj/item/rcd/rcd = W
+	if(istype(used_item, /obj/item/rcd))
+		var/obj/item/rcd/rcd = used_item
 		if(rcd.crafting && user.try_unequip(rcd) && user.try_unequip(src))
 			new /obj/item/gun/launcher/bow/crossbow/powered/rapidcrossbowdevice(get_turf(src))
 			qdel(rcd)
@@ -36,21 +36,21 @@
 			to_chat(user, SPAN_WARNING("\The [rcd] is not prepared for installation in \the [src]."))
 		return TRUE
 
-	if(istype(W, /obj/item/cell))
+	if(istype(used_item, /obj/item/cell))
 		if(!cell)
-			if(user.try_unequip(W, src))
-				cell = W
+			if(user.try_unequip(used_item, src))
+				cell = used_item
 				to_chat(user, SPAN_NOTICE("You jam [cell] into [src] and wire it to the firing coil."))
 				superheat_rod(user)
 		else
 			to_chat(user, SPAN_NOTICE("[src] already has a cell installed."))
 		return TRUE
 
-	if(IS_SCREWDRIVER(W))
+	if(IS_SCREWDRIVER(used_item))
 		if(cell)
 			var/obj/item/C = cell
 			C.dropInto(user.loc)
-			to_chat(user, SPAN_NOTICE("You jimmy [cell] out of [src] with [W]."))
+			to_chat(user, SPAN_NOTICE("You jimmy [cell] out of [src] with [used_item]."))
 			cell = null
 		else
 			to_chat(user, SPAN_WARNING("[src] doesn't have a cell installed."))
@@ -116,20 +116,20 @@
 		generate_bolt(user)
 	return ..()
 
-/obj/item/gun/launcher/bow/crossbow/powered/rapidcrossbowdevice/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/rcd_ammo))
-		var/obj/item/rcd_ammo/cartridge = W
+/obj/item/gun/launcher/bow/crossbow/powered/rapidcrossbowdevice/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/rcd_ammo))
+		var/obj/item/rcd_ammo/cartridge = used_item
 		if((stored_matter + cartridge.remaining) > max_stored_matter)
 			to_chat(user, SPAN_NOTICE("The RCD can't hold that many additional matter-units."))
 			return TRUE
 		stored_matter += cartridge.remaining
-		qdel(W)
+		qdel(used_item)
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("The RCD now holds [stored_matter]/[max_stored_matter] matter-units."))
 		update_icon()
 		return TRUE
-	if(istype(W, /obj/item/stack/material/bow_ammo/bolt/rcd))
-		var/obj/item/stack/material/bow_ammo/bolt/rcd/A = W
+	if(istype(used_item, /obj/item/stack/material/bow_ammo/bolt/rcd))
+		var/obj/item/stack/material/bow_ammo/bolt/rcd/A = used_item
 		if((stored_matter + 10) > max_stored_matter)
 			to_chat(user, SPAN_NOTICE("Unable to reclaim flashforged bolt. The RCD can't hold that many additional matter-units."))
 			return TRUE
@@ -151,6 +151,6 @@
 		ratio = max(round(ratio, 0.25) * 100, 25)
 	add_overlay("[get_world_inventory_state()][ratio]")
 
-/obj/item/gun/launcher/bow/crossbow/powered/rapidcrossbowdevice/examine(mob/user)
+/obj/item/gun/launcher/bow/crossbow/powered/rapidcrossbowdevice/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] matter-units.")
+	. += "It currently holds [stored_matter]/[max_stored_matter] matter-units."

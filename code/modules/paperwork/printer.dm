@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 /obj/item/stock_parts/printer
 	name       = "printer"
-	desc       = "A full fledged laser printer. This one is meant to be installed inside another machine. Comes with its own paper feeder and toner slot."
+	desc       = "A full-fledged laser printer. This one is meant to be installed inside another machine. Comes with its own paper feeder and toner slot."
 	icon       = 'icons/obj/items/stock_parts/modular_components.dmi'
 	icon_state = "printer"
 	randpixel  = 5
@@ -58,18 +58,18 @@
 	unregister_on_status_changed()
 	return ..()
 
-/obj/item/stock_parts/printer/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/chems/toner_cartridge))
+/obj/item/stock_parts/printer/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/chems/toner_cartridge))
 		if(toner)
-			to_chat(user, SPAN_WARNING("There is already \a [W] in \the [src]!"))
+			to_chat(user, SPAN_WARNING("There is already \a [used_item] in \the [src]!"))
 			return TRUE
-		return insert_toner(W, user)
+		return insert_toner(used_item, user)
 
-	else if(istype(W, /obj/item/paper) || istype(W, /obj/item/paper_bundle))
+	else if(istype(used_item, /obj/item/paper) || istype(used_item, /obj/item/paper_bundle))
 		if(paper_left >= paper_max)
 			to_chat(user, SPAN_WARNING("There is no more room for paper in \the [src]!"))
 			return TRUE
-		return insert_paper(W, user)
+		return insert_paper(used_item, user)
 	. = ..()
 
 /obj/item/stock_parts/printer/attack_hand(mob/user)
@@ -423,6 +423,7 @@
 /decl/interaction_handler/empty/stock_parts_printer
 	name = "Empty Paper Bin"
 	expected_target_type = /obj/item/stock_parts/printer
+	examine_desc         = "empty $TARGET_THEM$"
 
 /decl/interaction_handler/empty/stock_parts_printer/is_possible(obj/item/stock_parts/printer/target, mob/user, obj/item/prop)
 	return (target.get_amount_paper() > 0) && ..()

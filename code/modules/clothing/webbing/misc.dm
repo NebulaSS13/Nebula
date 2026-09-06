@@ -6,7 +6,7 @@
 
 /obj/item/clothing/webbing/bandolier
 	name = "bandolier"
-	desc = "A lightweight synthethic bandolier with straps for holding ammunition or other small objects."
+	desc = "A lightweight synthetic bandolier with straps for holding ammunition or other small objects."
 	icon = 'icons/obj/items/bandolier.dmi'
 	storage = /datum/storage/pockets/bandolier
 

@@ -16,7 +16,7 @@
 
 /obj/item/mech_component/manipulators/show_missing_parts(var/mob/user)
 	if(!motivator)
-		to_chat(user, SPAN_WARNING("It is missing an actuator."))
+		return list(SPAN_WARNING("It is missing an actuator."))
 
 /obj/item/mech_component/manipulators/ready_to_install()
 	return motivator
@@ -24,13 +24,13 @@
 /obj/item/mech_component/manipulators/prebuild()
 	motivator = new(src)
 
-/obj/item/mech_component/manipulators/attackby(var/obj/item/thing, var/mob/user)
-	if(istype(thing,/obj/item/robot_parts/robot_component/actuator))
+/obj/item/mech_component/manipulators/attackby(var/obj/item/used_item, var/mob/user)
+	if(istype(used_item,/obj/item/robot_parts/robot_component/actuator))
 		if(motivator)
 			to_chat(user, SPAN_WARNING("\The [src] already has an actuator installed."))
 			return TRUE
-		if(install_component(thing, user))
-			motivator = thing
+		if(install_component(used_item, user))
+			motivator = used_item
 			return TRUE
 		return FALSE
 	else

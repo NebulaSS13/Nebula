@@ -107,10 +107,10 @@
 	if(issilicon(player)) // this needs to be here because ..() returns false if the mob isn't human
 		add_law_zero(player)
 		if(isrobot(player))
-			var/mob/living/silicon/robot/R = player
-			R.SetLockdown(FALSE)
-			R.emagged = TRUE // Provides a traitor robot with its module's emag item
-			R.verbs |= /mob/living/silicon/robot/proc/ResetSecurityCodes
+			var/mob/living/silicon/robot/robot = player
+			robot.SetLockdown(FALSE)
+			robot.emagged = TRUE // Provides a traitor robot with its module's emag item
+			robot.verbs |= /mob/living/silicon/robot/proc/ResetSecurityCodes
 		. = TRUE
 	else if(.)
 		spawn_uplink(player)

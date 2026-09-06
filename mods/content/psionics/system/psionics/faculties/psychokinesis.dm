@@ -1,7 +1,7 @@
 /decl/psionic_faculty/psychokinesis
 	id = PSI_PSYCHOKINESIS
 	name = "Psychokinesis"
-	associated_intent = I_GRAB
+	associated_intent_flag = I_FLAG_GRAB
 	armour_types = list(ARMOR_MELEE, ARMOR_BULLET)
 
 /decl/psionic_power/psychokinesis
@@ -19,7 +19,7 @@
 	admin_log = FALSE
 
 /decl/psionic_power/psychokinesis/psiblade/invoke(var/mob/living/user, var/mob/living/target)
-	if((target && user != target) || user.a_intent != I_HURT)
+	if((target && user != target) || !user.check_intent(I_FLAG_HARM))
 		return FALSE
 	. = ..()
 	if(.)
@@ -43,7 +43,7 @@
 	admin_log = FALSE
 
 /decl/psionic_power/psychokinesis/tinker/invoke(var/mob/living/user, var/mob/living/target)
-	if((target && user != target) || user.a_intent != I_HELP)
+	if((target && user != target) || !user.check_intent(I_FLAG_HELP))
 		return FALSE
 	. = ..()
 	if(.)
@@ -64,7 +64,7 @@
 	)
 
 /decl/psionic_power/psychokinesis/telekinesis/invoke(var/mob/living/user, var/mob/living/target)
-	if(user.a_intent != I_GRAB)
+	if(!user.check_intent(I_FLAG_GRAB))
 		return FALSE
 	. = ..()
 	if(.)

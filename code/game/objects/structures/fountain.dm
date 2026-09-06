@@ -10,6 +10,8 @@
 	pixel_x     = -16
 	light_range = 5
 	light_power = 0.5
+	chem_volume = 500
+
 	var/used    = FALSE
 	var/increase_age_prob = (100 / 6)
 
@@ -20,7 +22,7 @@
 
 /obj/structure/fountain/attack_hand(var/mob/user)
 
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		return ..()
 
 	if(used)
@@ -85,6 +87,22 @@
 	used = TRUE
 	desc = "The water flows beautifully from the spout, but the water in the pool does not ripple."
 
+/mob/living/human
+	/// Used by the Fountain of Youth point of interest for on-examine messages.
+	var/became_older
+	/// Used by the Fountain of Youth point of interest for on-examine messages.
+	var/became_younger
+
+/decl/human_examination/fountain
+	priority = /decl/human_examination/graffiti::priority + 0.5 // just squeeze it in there
+
+/decl/human_examination/fountain/do_examine(mob/user, distance, mob/living/human/source, hideflags, decl/pronouns/pronouns)
+	. = list()
+	if(source.became_younger)
+		. += "[pronouns.He] look[pronouns.s] a lot younger than you remember."
+	if(source.became_older)
+		. += "[pronouns.He] look[pronouns.s] a lot older than you remember."
+
 /obj/structure/fountain/mundane
 	name                   = "fountain"
 	desc                   = "A beautifully constructed fountain."
@@ -98,19 +116,11 @@
 	light_range            = null
 	light_power            = null
 
-/obj/structure/fountain/mundane/Initialize(ml, _mat, _reinf_mat)
-	. = ..()
-	initialize_reagents(ml)
-
-/obj/structure/fountain/mundane/initialize_reagents(populate = TRUE)
-	create_reagents(500)
-	. = ..()
-
 /obj/structure/fountain/mundane/populate_reagents()
-	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume) //Don't give free water when building one
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents)) //Don't give free water when building one
 
 /obj/structure/fountain/mundane/attack_hand(mob/user)
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		return ..()
 	return TRUE
 

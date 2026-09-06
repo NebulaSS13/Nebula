@@ -19,8 +19,8 @@
 	/// The wrapped device(e.g. radio), only set if external_type isn't null
 	var/obj/item/wrapped
 
-/datum/robot_component/New(mob/living/silicon/robot/R)
-	src.owner = R
+/datum/robot_component/New(mob/living/silicon/robot/robot)
+	src.owner = robot
 
 /datum/robot_component/proc/accepts_component(var/obj/item/thing)
 	. = istype(thing, external_type)
@@ -74,13 +74,13 @@
 	return (installed == 1) && (brute_damage + burn_damage < max_damage) && (!idle_usage || powered)
 
 /datum/robot_component/proc/update_power_state()
-	if(toggled == 0)
-		powered = 0
+	if(!toggled)
+		powered = FALSE
 		return
 	if(owner.cell_use_power(idle_usage))
-		powered = 1
+		powered = TRUE
 	else
-		powered = 0
+		powered = FALSE
 
 // ARMOUR
 // Protects the cyborg from damage. Usually first module to be hit
@@ -224,7 +224,6 @@
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "working"
 	material = /decl/material/solid/metal/steel
-	current_health = 30
 	max_health = 30
 	var/burn_damage = 0
 	var/brute_damage = 0

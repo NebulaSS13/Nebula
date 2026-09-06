@@ -5,7 +5,7 @@
 	icon_state = ICON_STATE_WORLD
 	sound_player = /datum/sound_player/synthesizer
 	path = /datum/instrument/guitar/clean_crisis
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 	slot_flags = SLOT_BACK
 
@@ -16,7 +16,7 @@
 	icon_state = "eguitar"
 	sound_player = /datum/sound_player/synthesizer
 	path = /datum/instrument/guitar
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	matter = list(
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE,

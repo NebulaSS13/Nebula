@@ -45,9 +45,9 @@
 			else
 				H.custom_emote("rubs [pronouns.his] [damaged_organ.name] carefully.")
 
-		for(var/obj/item/organ/I in H.get_internal_organs())
-			if((I.status & ORGAN_DEAD) || BP_IS_PROSTHETIC(I))
+		for(var/obj/item/organ/internal/organ in H.get_internal_organs())
+			if((organ.status & ORGAN_DEAD) || BP_IS_PROSTHETIC(organ))
 				continue
-			if(I.damage > 2 && prob(1))
-				var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, I.parent_organ)
+			if(organ.get_organ_damage() > 2 && prob(1))
+				var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, organ.parent_organ)
 				H.custom_emote("clutches [pronouns.his] [parent.name]!")

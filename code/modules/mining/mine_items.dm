@@ -16,7 +16,7 @@
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/scanner/gas,
-		/obj/item/ore,
+		/obj/item/ore_satchel,
 		/obj/item/flashlight/lantern,
 		/obj/item/tool/shovel,
 		/obj/item/tool/pickaxe,
@@ -29,7 +29,7 @@
 // Flags.
 /obj/item/stack/flag
 	name = "beacon"
-	desc = "Some deployable high-visibilty beacons."
+	desc = "Some deployable high-visibility beacons."
 	singular_name = "beacon"
 	icon_state = "folded"
 	amount = 10
@@ -38,6 +38,9 @@
 	z_flags = ZMM_MANGLE_PLANES
 
 	var/upright = FALSE
+
+/obj/item/stack/flag/ten
+	amount = 10
 
 /obj/item/stack/flag/red
 	light_color = COLOR_RED
@@ -58,7 +61,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/stack/flag/attackby(var/obj/item/W, var/mob/user)
+/obj/item/stack/flag/attackby(var/obj/item/used_item, var/mob/user)
 	if(upright)
 		return attack_hand_with_interaction_checks(user)
 	return ..()

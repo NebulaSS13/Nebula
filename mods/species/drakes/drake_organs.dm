@@ -11,6 +11,7 @@
 	relative_size = 60
 	min_regeneration_cutoff_threshold = 2
 	max_regeneration_cutoff_threshold = 5
+	has_stat_info = TRUE
 	var/datum/reagents/sap_crop
 
 /obj/item/organ/internal/drake_gizzard/Initialize()
@@ -19,23 +20,17 @@
 
 /obj/item/organ/internal/drake_gizzard/Process()
 	. = ..()
-	if(owner && owner.stat != DEAD && !is_broken() && sap_crop && sap_crop.total_volume < 10)
+	if(owner && owner.stat != DEAD && !is_broken() && sap_crop && REAGENT_TOTAL_VOLUME(sap_crop) < 10)
 		sap_crop.add_reagent(/decl/material/liquid/sifsap, 0.5)
 
-/obj/item/organ/internal/drake_gizzard/do_install(var/mob/living/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
-	. = ..()
-	if(owner)
-		LAZYDISTINCTADD(owner.stat_organs, src)
-
 /obj/item/organ/internal/drake_gizzard/do_uninstall(in_place, detach, ignore_children, update_icon)
-	if(owner)
-		LAZYREMOVE(owner.stat_organs, src)
 	. = ..()
-	if(sap_crop?.total_volume)
+	var/sap_vol = REAGENT_TOTAL_VOLUME(sap_crop)
+	if(sap_vol)
 		if(reagents)
-			sap_crop.trans_to_holder(reagents, sap_crop.total_volume)
+			sap_crop.trans_to_holder(reagents, sap_vol)
 		else if(isatom(loc))
-			sap_crop.splash(loc, sap_crop.total_volume)
+			sap_crop.splash(loc, sap_vol)
 		sap_crop.clear_reagents()
 
 /obj/item/organ/internal/drake_gizzard/Destroy()
@@ -43,4 +38,4 @@
 	. = ..()
 
 /obj/item/organ/internal/drake_gizzard/get_stat_info()
-	return list("Sap reserve", num2text(round((sap_crop?.total_volume || 0), 0.1)))
+	return list("Sap reserve", num2text(round((REAGENT_TOTAL_VOLUME(sap_crop) || 0), 0.1)))

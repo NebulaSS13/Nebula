@@ -29,7 +29,7 @@ var/global/list/navbeacons = list()
 	navbeacons += src
 
 /obj/machinery/navbeacon/hide(var/intact)
-	set_invisibility(intact ? 101 : 0)
+	set_invisibility(intact ? INVISIBILITY_ABSTRACT : INVISIBILITY_NONE)
 	update_icon()
 
 /obj/machinery/navbeacon/on_update_icon()
@@ -41,18 +41,18 @@ var/global/list/navbeacons = list()
 	else
 		icon_state = "[state]"
 
-/obj/machinery/navbeacon/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/navbeacon/attackby(var/obj/item/used_item, var/mob/user)
 	var/turf/T = loc
 	if(!T.is_plating())
 		return TRUE // prevent intraction when T-scanner revealed
 
-	if(IS_SCREWDRIVER(I))
+	if(IS_SCREWDRIVER(used_item))
 		open = !open
 		user.visible_message("\The [user] [open ? "opens" : "closes"] cover of \the [src].", "You [open ? "open" : "close"] cover of \the [src].")
 		update_icon()
 		return TRUE
 
-	else if(I.GetIdCard())
+	else if(used_item.GetIdCard())
 		if(open)
 			if (src.allowed(user))
 				src.locked = !src.locked
@@ -73,100 +73,80 @@ var/global/list/navbeacons = list()
 	var/ai = isAI(user)
 	var/turf/T = loc
 	if(!T.is_plating())
-		return		// prevent intraction when T-scanner revealed
+		return // prevent intraction when T-scanner revealed
 
-	if(!open && !ai)	// can't alter controls if not open, unless you're an AI
+	if(!open && !ai) // can't alter controls if not open, unless you're an AI
 		to_chat(user, "The beacon's control cover is closed.")
 		return
 
-	var/t
+	var/restricted = locked && !ai
+	var/list/dat = list({"<TT><B>Navigation Beacon</B><HR><BR>
+<i>(swipe card to [locked ? "unlock" : "lock"] controls)</i><BR><HR>
+Location: [restricted ? "" : "<A href='byond://?src=\ref[src];locedit=1'>"][location ? location : "(none)"][restricted ? "" : "</A>"]<BR>
+Transponder Codes:<UL>"})
 
-	if(locked && !ai)
-		t = {"<TT><B>Navigation Beacon</B><HR><BR>
-<i>(swipe card to unlock controls)</i><BR><HR>
-Location: [location ? location : "(none)"]</A><BR>
-Transponder Codes:<UL>"}
+	for(var/key in codes)
+		dat += "<LI>[key] ... [codes[key]]"
+		if(!restricted)
+			dat += " <small><A href='byond://?src=\ref[src];edit=1;code=[key]'>(edit)</A>"
+			dat += " <A href='byond://?src=\ref[src];delete=1;code=[key]'>(delete)</A></small><BR>"
+	if(!restricted)
+		dat += "<small><A href='byond://?src=\ref[src];add=1;'>(add new)</A></small><BR>"
+	dat += "<UL></TT>"
 
-		for(var/key in codes)
-			t += "<LI>[key] ... [codes[key]]"
-		t+= "<UL></TT>"
-
-	else
-
-		t = {"<TT><B>Navigation Beacon</B><HR><BR>
-<i>(swipe card to lock controls)</i><BR><HR>
-Location: <A href='byond://?src=\ref[src];locedit=1'>[location ? location : "(none)"]</A><BR>
-Transponder Codes:<UL>"}
-
-		for(var/key in codes)
-			t += "<LI>[key] ... [codes[key]]"
-			t += " <small><A href='byond://?src=\ref[src];edit=1;code=[key]'>(edit)</A>"
-			t += " <A href='byond://?src=\ref[src];delete=1;code=[key]'>(delete)</A></small><BR>"
-		t += "<small><A href='byond://?src=\ref[src];add=1;'>(add new)</A></small><BR>"
-		t+= "<UL></TT>"
-
-	show_browser(user, t, "window=navbeacon")
+	show_browser(user, JOINTEXT(dat), "window=navbeacon")
 	onclose(user, "navbeacon")
 	return
 
-/obj/machinery/navbeacon/Topic(href, href_list)
-	..()
-	if (usr.stat)
+/obj/machinery/navbeacon/OnTopic(mob/user, href_list, datum/topic_state/state)
+	if((. = ..()))
 		return
-	if ((in_range(src, usr) && isturf(src.loc)) || (issilicon(usr)))
-		if(open && !locked)
-			usr.set_machine(src)
+	if(!open || locked)
+		return TOPIC_NOACTION
 
-			if(href_list["locedit"])
-				var/newloc = sanitize(input("Enter New Location", "Navigation Beacon", location) as text|null)
-				if(newloc)
-					location = newloc
-					updateDialog()
+	if(href_list["locedit"])
+		var/newloc = sanitize(input(user, "Enter New Location", "Navigation Beacon", location) as text|null)
+		if(newloc)
+			location = newloc
+			return TOPIC_REFRESH
 
-			else if(href_list["edit"])
-				var/codekey = href_list["code"]
+	else if(href_list["edit"])
+		var/codekey = href_list["code"]
 
-				var/newkey = input("Enter Transponder Code Key", "Navigation Beacon", codekey) as text|null
-				if(!newkey)
-					return
+		var/newkey = sanitize(input(user, "Enter Transponder Code Key", "Navigation Beacon", codekey) as text|null)
+		if(!newkey)
+			return TOPIC_HANDLED
 
-				var/codeval = codes[codekey]
-				var/newval = input("Enter Transponder Code Value", "Navigation Beacon", codeval) as text|null
-				if(!newval)
-					newval = codekey
-					return
+		var/codeval = codes[codekey]
+		var/newval = sanitize(input(user, "Enter Transponder Code Value", "Navigation Beacon", codeval || "1") as text|null)
+		if(!newval)
+			return TOPIC_HANDLED
 
-				codes.Remove(codekey)
-				codes[newkey] = newval
+		codes -= codekey
+		codes[newkey] = newval
+		return TOPIC_REFRESH
 
-				updateDialog()
+	else if(href_list["delete"])
+		var/codekey = href_list["code"]
+		codes -= codekey
+		return TOPIC_REFRESH
 
-			else if(href_list["delete"])
-				var/codekey = href_list["code"]
-				codes.Remove(codekey)
-				updateDialog()
+	else if(href_list["add"])
 
-			else if(href_list["add"])
+		var/newkey = sanitize(input(user, "Enter New Transponder Code Key", "Navigation Beacon") as text|null)
+		if(!newkey)
+			return TOPIC_HANDLED
 
-				var/newkey = input("Enter New Transponder Code Key", "Navigation Beacon") as text|null
-				if(!newkey)
-					return
+		var/newval = sanitize(input(user, "Enter New Transponder Code Value", "Navigation Beacon", "1") as text|null)
+		if(!newval)
+			return TOPIC_HANDLED
 
-				var/newval = input("Enter New Transponder Code Value", "Navigation Beacon") as text|null
-				if(!newval)
-					newval = "1"
-					return
-
-				if(!codes)
-					codes = new()
-
-				codes[newkey] = newval
-
-				updateDialog()
+		codes[newkey] = newval
+		return TOPIC_REFRESH
 
 /obj/machinery/navbeacon/Destroy()
-	navbeacons.Remove(src)
-	. = ..()
+	global.navbeacons -= src
+	return ..()
 
 // Patrol beacon types below. So many.
 

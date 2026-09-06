@@ -7,18 +7,9 @@
 	var/turf/spawn_loc = get_safe_turf()
 	var/list/cached_contents = spawn_loc.contents.Copy()
 
-	/// Types to except from GC checking tests.
-	var/list/gc_exceptions = list(
-		// I hate doing this, but until the graph tests are fixed by someone who actually understands them,
-		// this is the best I can do without breaking other stuff.
-		/datum/node/physical,
-		// Randomly fails to GC during CI, cause unclear. Remove this if the root cause is identified.
-		/obj/item/organ/external/chest
-	)
-
 	var/list/ignore = typesof(
 		// will error if the area already has one
-		/obj/machinery/power/apc,
+		/obj/machinery/apc,
 		// throw assert failures around non-null alarm area on spawn
 		/obj/machinery/alarm,
 		// Needs a level above.
@@ -48,57 +39,52 @@
 					continue
 				qdel(to_del, force = TRUE) // I hate borg stacks I hate borg stacks
 		AM = null // this counts as a reference to the last item if we don't explicitly clear it??
+		del_candidates.Cut() // this also??
 
 	// Check for hanging references.
 	SSticker.delay_end = TRUE // Don't end the round while we wait!
-	// No harddels during this test.
-	SSgarbage.collection_timeout[GC_QUEUE_HARDDELETE] = 6 HOURS // github CI timeout length
+	// Drastically lower the amount of time it takes to GC, since we don't have clients that can hold it up.
+	SSgarbage.collection_timeout[GC_QUEUE_CHECK] = 10 SECONDS
 	cached_contents.Cut()
+
+	var/list/queues_we_care_about = list()
+	// All of em, I want hard deletes too, since we rely on the debug info from them
+	for(var/i in 1 to GC_QUEUE_HARDDELETE)
+		queues_we_care_about += i
+
+	//Now that we've qdel'd everything, let's sleep until the gc has processed all the shit we care about
+	// + 2 seconds to ensure that everything gets in the queue.
+	var/time_needed = 2 SECONDS
+	for(var/index in queues_we_care_about)
+		time_needed += SSgarbage.collection_timeout[index]
 
 	// track start time so we know anything deleted after this point isn't ours
 	var/start_time = world.time
-	// spin until the first item in the filter queue is older than start_time
-	var/filter_queue_finished = FALSE
-	var/list/filter_queue = SSgarbage.queues[GC_QUEUE_FILTER]
-	while(!filter_queue_finished)
-		if(!length(filter_queue))
-			filter_queue_finished = TRUE
-			break
-		var/oldest_item = filter_queue[1]
-		var/qdel_time = filter_queue[oldest_item]
-		if(qdel_time > start_time) // Everything is in the check queue now!
-			filter_queue_finished = TRUE
-			break
-		if(world.time > start_time + 2 MINUTES)
-			fail("Something has gone horribly wrong, the filter queue has been processing for well over 2 minutes. What the hell did you do??")
-			break
-		// We want to fire every time.
-		SSgarbage.next_fire = 1
-		sleep(2 SECONDS)
-	// We need to check the check queue now.
-	start_time = world.time
-	// sleep until SSgarbage has run through the queue
-	var/time_needed = SSgarbage.collection_timeout[GC_QUEUE_CHECK]
-	sleep(time_needed)
-	// taken verbatim from TG's Del The World
+	var/real_start_time = REALTIMEOFDAY
 	var/garbage_queue_processed = FALSE
-	var/list/check_queue = SSgarbage.queues[GC_QUEUE_CHECK]
+
+	sleep(time_needed)
 	while(!garbage_queue_processed)
-		//How the hell did you manage to empty this? Good job!
-		if(!length(check_queue))
-			garbage_queue_processed = TRUE
-			break
+		var/oldest_packet_creation = INFINITY
+		for(var/index in queues_we_care_about)
+			var/list/queue_to_check = SSgarbage.queues[index]
+			if(!length(queue_to_check))
+				continue
 
-		var/oldest_packet = check_queue[1]
-		//Pull out the time we deld at
-		var/qdeld_at = check_queue[oldest_packet]
+			var/list/oldest_packet = queue_to_check[1]
+			//Pull out the time we inserted at
+			var/qdeld_at = oldest_packet[GC_QUEUE_ITEM_GCD_DESTROYED]
+
+			oldest_packet_creation = min(qdeld_at, oldest_packet_creation)
+
 		//If we've found a packet that got del'd later then we finished, then all our shit has been processed
-		if(qdeld_at > start_time)
+		//That said, if there are any pending hard deletes you may NOT sleep, we gotta handle that shit
+		if(oldest_packet_creation > start_time && !length(SSgarbage.queues[GC_QUEUE_HARDDELETE]))
 			garbage_queue_processed = TRUE
 			break
 
-		if(world.time > start_time + time_needed + 8 MINUTES)
-			fail("The garbage queue has been processing for well over 10 minutes. Something is likely broken.")
+		if(REALTIMEOFDAY > real_start_time + time_needed + 30 MINUTES) //If this gets us gitbanned I'm going to laugh so hard
+			fail("Something has gone horribly wrong, the garbage queue has been processing for well over 30 minutes. What the hell did you do")
 			break
 
 		//Immediately fire the gc right after
@@ -109,8 +95,6 @@
 	//Alright, time to see if anything messed up
 	var/list/cache_for_sonic_speed = SSgarbage.items
 	for(var/path in cache_for_sonic_speed)
-		if(path in gc_exceptions)
-			continue
 		var/datum/qdel_item/item = cache_for_sonic_speed[path]
 		if(item.failures)
 			failures += "[item.name] hard deleted [item.failures] times out of a total del count of [item.qdels]"

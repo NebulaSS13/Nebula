@@ -20,7 +20,6 @@
 	var/lethal = 0
 	var/locked = 1
 	var/area/control_area //can be area name, path or nothing.
-	var/mob/living/silicon/ai/master_ai
 
 	var/check_arrest = 1	//checks if the perp is set to arrest
 	var/check_records = 1	//checks if a security record exists at all
@@ -49,6 +48,10 @@
 	. = ..()
 
 /obj/machinery/turretid/Initialize()
+	. = ..()
+	return INITIALIZE_HINT_LATELOAD // Because areas initialize AFTER these!
+
+/obj/machinery/turretid/LateInitialize()
 	if(!control_area)
 		control_area = get_area(src)
 	else if(istext(control_area))
@@ -56,6 +59,8 @@
 			if(A.name && A.name==control_area)
 				control_area = A
 				break
+	else if(ispath(control_area))
+		control_area = locate(control_area) in global.areas
 
 	if(control_area)
 		var/area/A = control_area
@@ -84,12 +89,12 @@
 
 	return ..()
 
-/obj/machinery/turretid/attackby(obj/item/W, mob/user)
+/obj/machinery/turretid/attackby(obj/item/used_item, mob/user)
 	if(stat & BROKEN)
 		return FALSE
 
-	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
-		if(src.allowed(usr))
+	if(istype(used_item, /obj/item/card/id)||istype(used_item, /obj/item/modular_computer))
+		if(src.allowed(user))
 			if(emagged)
 				to_chat(user, "<span class='notice'>The turret control is unresponsive.</span>")
 			else
@@ -136,10 +141,9 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/turretid/Topic(href, href_list)
-	if(..())
-		return 1
-
+/obj/machinery/turretid/OnTopic(mob/user, href_list)
+	if((. = ..()))
+		return
 
 	if(href_list["command"] && href_list["value"])
 		var/log_action = null
@@ -167,10 +171,10 @@
 			check_anomalies = value
 
 		if(!isnull(log_action))
-			log_and_message_admins("has [log_action]", usr, loc)
+			log_and_message_admins("has [log_action]", user, loc)
 
 		updateTurrets()
-		return 1
+		return TOPIC_REFRESH
 
 /obj/machinery/turretid/proc/updateTurrets()
 	var/datum/turret_checks/TC = new

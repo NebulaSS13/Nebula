@@ -1,0 +1,14 @@
+/obj/item/mine/stun
+	name = "stun mine"
+	desc = "A small explosive mine with a lightning bolt symbol on the side."
+	payload = /datum/mine_payload/stun
+
+/obj/item/mine/stun/mapped
+	armed = TRUE
+
+/datum/mine_payload/stun/trigger_payload(var/obj/item/mine/owner, var/atom/trigger)
+	..()
+	if(ismob(trigger))
+		var/mob/M = trigger
+		SET_STATUS_MAX(M, STAT_STUN, 30)
+	owner.visible_message("\The [owner] flashes violently before disintegrating!")

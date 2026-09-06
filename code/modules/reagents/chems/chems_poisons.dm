@@ -11,7 +11,7 @@
 
 /decl/material/liquid/paralytics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/threshold = 2
-	var/dose = LAZYACCESS(M.chem_doses, type)
+	var/dose = CHEM_DOSE(M, src)
 	. = ..()
 	if(dose >= metabolism * threshold * 0.5)
 		SET_STATUS_MAX(M, STAT_CONFUSE, 2)

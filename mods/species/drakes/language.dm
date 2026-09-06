@@ -27,14 +27,14 @@
 	ask_verb = "chirps"
 	exclaim_verb = "rumbles"
 	colour = "alien"
-	key = "l" // l is for lizard, probably
-	flags = LANG_FLAG_RESTRICTED
+	language_key = "drake"
+	language_flags = LANG_FLAG_RESTRICTED
 	machine_understands = 0
 	space_chance = 30
 	syllables = list("hss", "ssh", "khs", "hrr", "rrr", "rrn")
 	drake_compatible = TRUE
 
-/decl/language/grafadreka/get_random_name()
+/decl/language/grafadreka/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	var/static/list/drake_names = list(
 		"Almond",     "Pepper",      "Pear",        "Apple",       "Apricot",
 		"Crabapple",  "Berry",       "Quince",      "Hawthorn",    "Rowan",

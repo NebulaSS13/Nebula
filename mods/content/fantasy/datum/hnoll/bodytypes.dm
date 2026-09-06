@@ -16,6 +16,7 @@
 	base_color           = "#ae7d32"
 	base_eye_color       = "#00aa00"
 	uid                  = "bodytype_hnoll"
+	footprints_icon      = 'icons/mob/footprints/footprints_paw.dmi'
 
 	default_sprite_accessories = list(
 		SAC_HAIR     = list(
@@ -24,7 +25,13 @@
 		SAC_MARKINGS = list(
 			/decl/sprite_accessory/marking/hnoll/belly      = list(SAM_COLOR = "#b6b0a8"),
 			/decl/sprite_accessory/marking/hnoll/spots/body = list(SAM_COLOR = "#46331d"),
-			/decl/sprite_accessory/marking/hnoll/ears       = list(SAM_COLOR = "#46331d")
+		),
+		SAC_EARS = list(
+			/decl/sprite_accessory/ears/hnoll               = list(
+				SAM_COLOR =       "#46331d",
+				SAM_COLOR_INNER = "#c0a88d",
+				SAM_COLOR_EXTRA = "#201406"
+			)
 		)
 	)
 
@@ -55,21 +62,21 @@
 	)
 
 /decl/bodytype/hnoll/Initialize()
-	if(!equip_adjust)
-		equip_adjust = list(
-			slot_glasses_str = list(
+	if(!_equip_adjust)
+		_equip_adjust = list(
+			(slot_glasses_str) = list(
 				"[NORTH]" = list( 0, 2),
 				"[EAST]"  = list( 0, 2),
 				"[SOUTH]" = list( 0, 2),
 				"[WEST]"  = list( 0, 2)
 			),
-			slot_wear_mask_str = list(
+			(slot_wear_mask_str) = list(
 				"[NORTH]" = list( 0, 2),
 				"[EAST]"  = list( 2, 2),
 				"[SOUTH]" = list( 0, 2),
 				"[WEST]"  = list(-2, 2)
 			),
-			slot_head_str = list(
+			(slot_head_str) = list(
 				"[NORTH]" = list( 0, 2),
 				"[EAST]"  = list( 0, 2),
 				"[SOUTH]" = list( 0, 2),

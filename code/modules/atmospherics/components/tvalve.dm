@@ -4,7 +4,7 @@
 	var/base_icon_state = "tvalve"
 
 	name = "manual switching valve"
-	desc = "A pipe valve."
+	desc = "A pipe valve that switches gas flow between two branches, and must be operated by hand."
 
 	level = LEVEL_BELOW_PLATING
 	dir = SOUTH
@@ -30,12 +30,12 @@
 /obj/machinery/atmospherics/tvalve/buildable
 	uncreated_component_parts = null
 
-/obj/machinery/atmospherics/tvalve/on_update_icon(animation)
-	if(animation)
-		flick("[base_icon_state][src.state][!src.state]",src)
-	else
-		icon_state = "[base_icon_state][state]"
+/obj/machinery/atmospherics/tvalve/proc/do_turn_animation()
+	update_icon()
+	flick("[base_icon_state][src.state][!src.state]",src)
 
+/obj/machinery/atmospherics/tvalve/on_update_icon()
+	icon_state = "[base_icon_state][state]"
 	build_device_underlays(FALSE)
 
 /obj/machinery/atmospherics/tvalve/hide(var/i)
@@ -105,8 +105,8 @@
 	return TRUE
 
 /obj/machinery/atmospherics/tvalve/proc/user_toggle()
-	update_icon(1)
-	sleep(10)
+	do_turn_animation()
+	sleep(1 SECOND)
 	toggle()
 
 /obj/machinery/atmospherics/tvalve/Process()
@@ -117,11 +117,7 @@
 	return null
 
 /obj/machinery/atmospherics/tvalve/deconstruction_pressure_check()
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
-		return FALSE
-	return TRUE
+	return !check_internal_pressure_difference_over(2 ATM)
 
 /decl/public_access/public_variable/tvalve_state
 	expected_type = /obj/machinery/atmospherics/tvalve
@@ -176,7 +172,7 @@
 
 /obj/machinery/atmospherics/tvalve/digital		// can be controlled by AI
 	name = "digital switching valve"
-	desc = "A digitally controlled valve."
+	desc = "A digitally-controlled pipe valve that switches gas flow between two branches."
 	icon = 'icons/atmos/digital_tvalve.dmi'
 	icon_state = "map_tvalve0"
 

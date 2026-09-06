@@ -5,7 +5,7 @@
         </div>
         <div class="itemContentWide">
             {{for data.species}}
-                {{:helper.link(value.specimen, null, { 'race' : value.specimen}, null, data.specimen == value.specimen ? 'selected' : null)}}
+                {{:helper.link(value.name, null, { 'race' : value.uid}, null, data.current_species_uid == value.uid ? 'selected' : null)}}
             {{/for}}
         </div>
     </div>

@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/rogue_drone
 	name = "maintenance drone"
 	desc = "A small robot. It looks angry."
-	icon = 'icons/mob/simple_animal/drone.dmi'
+	icon = 'icons/mob/simple_animal/drones/drone.dmi'
 	speak_emote  = list("blares","buzzes","beeps")
 	max_health = 50
 	natural_weapon = /obj/item/natural_weapon/drone_slicer

@@ -101,8 +101,8 @@ var/global/list/telecomms_hubs = list()
 
 	var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 	var/datum/computer_network/network = network_device?.get_network()
-	for(var/weakref/R in network?.connected_radios)
-		var/obj/item/radio/radio = R.resolve()
+	for(var/weakref/radio_ref in network?.connected_radios)
+		var/obj/item/radio/radio = radio_ref.resolve()
 		if(istype(radio) && !QDELETED(radio))
 			radio.sync_channels_with_network()
 
@@ -138,7 +138,7 @@ var/global/list/telecomms_hubs = list()
 		var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 		return network_device?.get_network() == check_network_membership
 
-/obj/machinery/network/telecomms_hub/proc/transmit_message(mob/speaker, message, message_verb, decl/language/speaking, frequency, message_compression, list/checked_hubs, list/encryption = list(), obj/effect/overmap/send_overmap_object, chain_transmit = TRUE)
+/obj/machinery/network/telecomms_hub/proc/transmit_message(mob/speaker, datum/speech/phrases, message_verb, frequency, message_compression, list/checked_hubs, list/encryption = list(), obj/effect/overmap/send_overmap_object, chain_transmit = TRUE)
 	if(src in checked_hubs)
 		return
 	checked_hubs += src
@@ -154,7 +154,7 @@ var/global/list/telecomms_hubs = list()
 
 	if(!send_overmap_object)
 		var/turf/T = get_turf(src)
-		send_overmap_object = istype(T) && global.overmap_sectors["[T.z]"]
+		send_overmap_object = istype(T) && global.overmap_sectors[T.z]
 
 	if(channel.secured)
 		encryption |= channel.secured
@@ -163,25 +163,25 @@ var/global/list/telecomms_hubs = list()
 	var/send_name = istype(speaker) ? speaker.GetVoice() : ("[speaker]" || "unknown")
 	var/list/listeners = list() // Dictionary of listener -> boolean (include overmap origin)
 	// Broadcast to all radio devices in our network.
-	for(var/weakref/W as anything in network.connected_radios)
-		var/obj/item/radio/R = W.resolve()
-		if(!istype(R) || QDELETED(R) || !R.can_receive_message(network))
+	for(var/weakref/radio_ref as anything in network.connected_radios)
+		var/obj/item/radio/radio = radio_ref.resolve()
+		if(!istype(radio) || QDELETED(radio) || !radio.can_receive_message(network))
 			continue
-		var/turf/speaking_from = get_turf(R)
+		var/turf/speaking_from = get_turf(radio)
 		if(!speaking_from)
 			continue
-		if(!R.can_decrypt(encryption))
+		if(!radio.can_decrypt(encryption))
 			continue
 		// TODO: This check seems extraneous, given how headsets find their available channels.
-		var/list/check_channels = R.get_available_channels()
+		var/list/check_channels = radio.get_available_channels()
 		if(!LAZYACCESS(check_channels, channel))
 			continue
 
 		// If we're sending from an overmap object AND our overmap object transmits its identity AND it's different than the listener's
 		// then append the overmap object name to it, so they know where we're from
-		var/listener_overmap_object = istype(speaking_from) && global.overmap_sectors[num2text(speaking_from.z)]
+		var/listener_overmap_object = istype(speaking_from) && global.overmap_sectors[speaking_from.z]
 		var/send_overmap = send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != listener_overmap_object
-		for(var/mob/listener as anything in R.get_radio_listeners())
+		for(var/mob/listener as anything in radio.get_radio_listeners())
 			listeners[listener] = send_overmap
 
 	// Ghostship is magic: Ghosts can hear radio chatter from anywhere
@@ -190,7 +190,7 @@ var/global/list/telecomms_hubs = list()
 			listeners[ghost_listener] = TRUE
 
 	for(var/mob/listener in listeners)
-		listener.hear_radio(message, message_verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, vname = send_name, vsource = (listeners[listener] ? send_overmap_object.name : null))
+		listener.hear_radio(phrases, message_verb, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, vname = send_name, vsource = (listeners[listener] ? send_overmap_object?.name : null))
 
 	if(!chain_transmit)
 		return
@@ -203,7 +203,7 @@ var/global/list/telecomms_hubs = list()
 		// Find the z-chunks we can chain the transmission to, which is our local chunk plus any overmap sites in range,
 		// assuming we have a functioning comms maser and the overmap site has a telecomms hub and comms antenna.
 		var/list/levels = SSmapping.get_connected_levels(z)
-		var/obj/effect/overmap/O = global.overmap_sectors["[z]"]
+		var/obj/effect/overmap/O = global.overmap_sectors[z]
 		for(var/obj/machinery/shipcomms/broadcaster/our_maser in O?.comms_masers)
 			levels |= our_maser.get_available_z_levels()
 
@@ -233,7 +233,7 @@ var/global/list/telecomms_hubs = list()
 		if(QDELETED(other_hub) || !other_hub.can_receive_message(check_network_membership))
 			continue
 		// Don't allow further chaining of the message.
-		other_hub.transmit_message(speaker, message, message_verb, speaking, frequency, message_compression, checked_hubs, encryption.Copy(), send_overmap_object, FALSE)
+		other_hub.transmit_message(speaker, phrases, message_verb, frequency, message_compression, checked_hubs, encryption.Copy(), send_overmap_object, FALSE)
 
 /obj/machinery/network/telecomms_hub/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 

@@ -32,4 +32,5 @@
 	return ..()
 
 /obj/item/projectile/test/attack_mob()
+	SHOULD_CALL_PARENT(FALSE)
 	return

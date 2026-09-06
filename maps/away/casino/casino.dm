@@ -101,7 +101,7 @@
 
 /obj/structure/casino/roulette/attack_hand(mob/user)
 
-	if(user.a_intent == I_HURT || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+	if(user.check_intent(I_FLAG_HARM) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
 		return ..()
 
 	if(busy)

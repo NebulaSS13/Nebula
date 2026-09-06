@@ -1,0 +1,1 @@
+/obj/item/chems/glass/rag/@SUBTYPES : /obj/item/chems/rag/@SUBTYPES{@OLD}

@@ -7,13 +7,13 @@
 	colour = "alien"
 	syllables = list("-","=","+","_","|","/")
 	space_chance = 0
-	key = "|"
-	flags = LANG_FLAG_RESTRICTED
+	language_key = "avocal"
+	language_flags = LANG_FLAG_RESTRICTED
 	shorthand = "KV"
 	machine_understands = FALSE
 	var/list/correct_mouthbits = list(
-		SPECIES_MANTID_ALATE,
-		SPECIES_MANTID_GYNE
+		/decl/species/mantid::uid,
+		/decl/species/mantid/gyne::uid
 	)
 
 /decl/language/mantid/can_be_spoken_properly_by(var/mob/speaker)
@@ -24,7 +24,7 @@
 		return SPEECH_RESULT_GOOD
 	if(ishuman(speaker))
 		var/mob/living/human/H = speaker
-		if(H.species.name in correct_mouthbits)
+		if(H.species.uid in correct_mouthbits)
 			return SPEECH_RESULT_GOOD
 	return SPEECH_RESULT_MUDDLED
 
@@ -41,22 +41,23 @@
 	message = replacetext(message, "&#39", "'")
 	return message
 
-/decl/language/mantid/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
-	. = ..(speaker, message, speaker.real_name)
+/decl/language/mantid/broadcast(mob/living/speaker, datum/speech/phrases, speaker_mask)
+	speaker_mask = speaker.real_name
+	. = ..()
 
 /decl/language/mantid/nonvocal
-	key = "]"
+	language_key = "ascent"
 	name = "Ascent-Glow"
-	desc = "A complex visual language of bright bio-luminescent flashes, 'spoken' natively by the Kharmaani of the Ascent."
+	desc = "A complex visual language of bright bioluminescent flashes, 'spoken' natively by the Kharmaani of the Ascent."
 	colour = "alien"
 	speech_verb = "flashes"
 	ask_verb = "gleams"
 	exclaim_verb = "flares"
-	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_NO_STUTTER | LANG_FLAG_NONVERBAL
+	language_flags = LANG_FLAG_RESTRICTED | LANG_FLAG_NO_STUTTER | LANG_FLAG_NONVERBAL
 	shorthand = "KNV"
 
 #define MANTID_SCRAMBLE_CACHE_LEN 20
-/decl/language/mantid/nonvocal/scramble(mob/living/speaker, input, list/known_languages)
+/decl/language/mantid/nonvocal/scramble(mob/living/speaker, input, list/known_languages, capitalize_string)
 	if(input in scramble_cache)
 		var/n = scramble_cache[input]
 		scramble_cache -= input
@@ -74,18 +75,18 @@
 		return TRUE
 	else if(ishuman(speaker))
 		var/mob/living/human/H = speaker
-		return (H.species.name == SPECIES_MANTID_ALATE || H.species.name == SPECIES_MANTID_GYNE)
+		return istype(H.get_species(), /decl/species/mantid)
 	return FALSE
 
 /decl/language/mantid/worldnet
-	key = "\["
+	language_key = "worldnet"
 	name = "Worldnet"
 	desc = "The mantid aliens of the Ascent maintain an extensive self-supporting broadcast network for use in team communications."
 	colour = "alien"
 	speech_verb = "flashes"
 	ask_verb = "gleams"
 	exclaim_verb = "flares"
-	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_NO_STUTTER | LANG_FLAG_NONVERBAL | LANG_FLAG_HIVEMIND
+	language_flags = LANG_FLAG_RESTRICTED | LANG_FLAG_NO_STUTTER | LANG_FLAG_NONVERBAL | LANG_FLAG_HIVEMIND
 	shorthand = "KB"
 
 #define isascentdrone(X) istype(X, /mob/living/silicon/robot/flying/ascent)

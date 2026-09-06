@@ -1,5 +1,6 @@
 /atom/movable/proc/recursive_move(var/atom/movable/am, var/old_loc, var/new_loc)
-	RAISE_EVENT(/decl/observ/moved, src, old_loc, new_loc)
+	if(event_listeners?[/decl/observ/moved])
+		raise_event_non_global(/decl/observ/moved, old_loc, new_loc)
 
 /atom/movable/proc/move_to_turf(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/turf/T = get_turf(new_loc)

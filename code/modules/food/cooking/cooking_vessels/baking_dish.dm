@@ -2,7 +2,7 @@
 	name               = "baking dish"
 	desc               = "A large baking dish for baking things."
 	icon               = 'icons/obj/food/cooking_vessels/baking_dish.dmi'
-	volume             = 100
+	chem_volume        = 100
 	cooking_category   = RECIPE_CATEGORY_BAKING_DISH
 	presentation_flags = PRESENTATION_FLAG_NAME
 	obj_flags          = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE // TODO: dynamically add/remove OBJ_FLAG_INSULATED_HANDLE based on handle material?

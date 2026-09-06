@@ -3,6 +3,7 @@
 	category = "Missing Limbs"
 	abstract_type = /decl/trait/malus/amputation
 	reapply_on_rejuvenation = TRUE
+	is_heritable = FALSE
 	var/list/apply_to_limbs
 	var/list/ban_traits_relating_to_limbs
 
@@ -15,8 +16,6 @@
 			if(trait_type == type)
 				continue
 			var/decl/trait/malus/amputation/trait = check_traits[trait_type]
-			if(!trait.name)
-				continue // remove when abstract decl handling from dev is merged
 			for(var/limb in trait.apply_to_limbs)
 				if(limb in ban_traits_relating_to_limbs)
 					LAZYDISTINCTADD(incompatible_with, trait_type)

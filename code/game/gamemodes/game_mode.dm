@@ -14,7 +14,6 @@ var/global/list/additional_antag_types = list()
 	var/required_players = 0                 // Minimum players for round to start if voted in.
 	var/required_enemies = 0                 // Minimum antagonists for round to start.
 	var/end_on_antag_death = FALSE           // Round will end when all antagonists are dead.
-	var/ert_disabled = FALSE                 // ERT cannot be called.
 	var/deny_respawn = FALSE	             // Disable respawn during this round.
 
 	var/list/disabled_jobs = list()          // Mostly used for Malf.  This check is performed in job_controller so it doesn't spawn a regular AI.
@@ -38,6 +37,7 @@ var/global/list/additional_antag_types = list()
 
 	var/waittime_l = 60 SECONDS				 // Lower bound on time before start of shift report
 	var/waittime_h = 180 SECONDS		     // Upper bounds on time before start of shift report
+	var/tmp/rand_waittime                    // The actual wait time selected.
 
 	//Format: list(start_animation = duration, hit_animation, miss_animation). null means animation is skipped.
 	var/cinematic_icon_states = list(
@@ -54,21 +54,24 @@ var/global/list/additional_antag_types = list()
 		round_autoantag = TRUE
 	. = ..()
 
+/decl/game_mode/proc/toggle_value(key)
+	switch(key)
+		if("respawn")
+			deny_respawn = !deny_respawn
+			return TRUE
+		if("shuttle_recall")
+			auto_recall_shuttle = !auto_recall_shuttle
+			return TRUE
+		if("autotraitor")
+			round_autoantag = !round_autoantag
+			return TRUE
+
 /decl/game_mode/Topic(href, href_list[])
 	if(..())
 		return
 	if(href_list["toggle"])
-		switch(href_list["toggle"])
-			if("respawn")
-				deny_respawn = !deny_respawn
-			if("ert")
-				ert_disabled = !ert_disabled
-				announce_ert_disabled()
-			if("shuttle_recall")
-				auto_recall_shuttle = !auto_recall_shuttle
-			if("autotraitor")
-				round_autoantag = !round_autoantag
-		message_admins("Admin [key_name_admin(usr)] toggled game mode option '[href_list["toggle"]]'.")
+		if(toggle_value(href_list["toggle"]))
+			message_admins("Admin [key_name_admin(usr)] toggled game mode option '[href_list["toggle"]]'.")
 	else if(href_list["set"])
 		var/choice = ""
 		switch(href_list["set"])
@@ -134,7 +137,7 @@ var/global/list/additional_antag_types = list()
 	to_world("<B>The current game mode is [capitalize(name)]!</B>")
 	if(round_description) to_world("[round_description]")
 	if(round_autoantag) to_world("Antagonists will be added to the round automagically as needed.")
-	if(antag_templates && antag_templates.len)
+	if(LAZYLEN(antag_templates))
 		var/antag_summary = "<b>Possible antagonist types:</b> "
 		var/i = 1
 		for(var/decl/special_role/antag in antag_templates)
@@ -170,7 +173,7 @@ var/global/list/additional_antag_types = list()
 			if(!antag)
 				continue
 			var/list/potential = list()
-			if(antag_templates && antag_templates.len)
+			if(LAZYLEN(antag_templates))
 				if(antag.flags & ANTAG_OVERRIDE_JOB)
 					potential = antag.pending_antagonists
 				else
@@ -245,13 +248,10 @@ var/global/list/additional_antag_types = list()
 
 	refresh_event_modifiers()
 
-	spawn (ROUNDSTART_LOGOUT_REPORT_TIME)
-		display_roundstart_logout_report()
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(display_roundstart_logout_report)), ROUNDSTART_LOGOUT_REPORT_TIME)
 
-	spawn (rand(waittime_l, waittime_h))
-		global.using_map.send_welcome()
-		sleep(rand(100,150))
-		announce_ert_disabled()
+	rand_waittime = rand(waittime_l, waittime_h)
+	addtimer(CALLBACK(global.using_map, TYPE_PROC_REF(/datum/map, send_welcome)), rand_waittime)
 
 	//Assign all antag types for this game mode. Any players spawned as antags earlier should have been removed from the pending list, so no need to worry about those.
 	for(var/decl/special_role/antag in antag_templates)
@@ -283,48 +283,10 @@ var/global/list/additional_antag_types = list()
 	for(var/decl/special_role/antag in antag_templates)
 		antag.reset_antag_selection()
 
-/decl/game_mode/proc/announce_ert_disabled()
-	if(!ert_disabled)
-		return
-
-	var/list/reasons = list(
-		"political instability",
-		"quantum fluctuations",
-		"hostile raiders",
-		"derelict station debris",
-		"REDACTED",
-		"ancient alien artillery",
-		"solar magnetic storms",
-		"sentient time-travelling killbots",
-		"gravitational anomalies",
-		"wormholes to another dimension",
-		"a telescience mishap",
-		"radiation flares",
-		"supermatter dust",
-		"leaks into a negative reality",
-		"antiparticle clouds",
-		"residual exotic energy",
-		"suspected criminal operatives",
-		"malfunctioning von Neumann probe swarms",
-		"shadowy interlopers",
-		"a stranded xenoform",
-		"haywire machine constructs",
-		"rogue exiles",
-		"artifacts of eldritch horror",
-		"a brain slug infestation",
-		"killer bugs that lay eggs in the husks of the living",
-		"a deserted transport carrying xenofauna specimens",
-		"an emissary requesting a security detail",
-		"radical transevolutionaries",
-		"classified security operations",
-		"a gargantuan glowing goat"
-		)
-	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
-
 /decl/game_mode/proc/check_finished()
 	if(SSevac.evacuation_controller?.round_over() || station_was_nuked)
 		return 1
-	if(end_on_antag_death && antag_templates && antag_templates.len)
+	if(end_on_antag_death && LAZYLEN(antag_templates))
 		var/has_antags = 0
 		for(var/decl/special_role/antag in antag_templates)
 			if(!antag.antags_are_dead())
@@ -410,7 +372,6 @@ var/global/list/additional_antag_types = list()
 	if(escaped_total > 0)
 		SSstatistics.set_field("escaped_total",escaped_total)
 
-	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
 	SSwebhooks.send(WEBHOOK_ROUNDEND, list("survivors" = surviving_total, "escaped" = escaped_total, "ghosts" = ghosts, "clients" = clients))
 
 	return 0
@@ -551,7 +512,7 @@ var/global/list/additional_antag_types = list()
 
 			continue //Happy connected client
 		for(var/mob/observer/ghost/D in SSmobs.mob_list)
-			if(D.mind && (D.mind.original == L || D.mind.current == L))
+			if(D.mind && D.mind.current == L)
 				if(L.stat == DEAD)
 					msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (Dead)\n"
 					continue //Dead mob, ghost abandoned

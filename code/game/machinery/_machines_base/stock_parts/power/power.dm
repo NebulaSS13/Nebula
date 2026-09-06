@@ -28,7 +28,7 @@
 
 // Doesn't actually do it.
 /obj/item/stock_parts/power/proc/can_use_power_oneoff(var/obj/machinery/machine, var/amount, var/channel)
-	return 0
+	return FALSE
 
 // A request for the amount of power on the given channel. Returns the amount of power which could be provided.
 /obj/item/stock_parts/power/proc/use_power_oneoff(var/obj/machinery/machine, var/amount, var/channel)

@@ -6,7 +6,7 @@
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	storage = /datum/storage/picnic_basket
-	attack_verb = list("picnics")
+	attack_verb = "picnics"
 	material = /decl/material/solid/organic/plastic
 	var/tmp/filled = FALSE
 

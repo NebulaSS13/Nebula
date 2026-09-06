@@ -1,5 +1,5 @@
 /decl/stack_recipe/textiles/jerkin
-	result_type = /obj/item/clothing/shirt/jerkin
+	result_type = /obj/item/clothing/shirt/crafted
 	category    = "clothing"
 
 /decl/stack_recipe/textiles/gown

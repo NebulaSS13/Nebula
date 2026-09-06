@@ -16,7 +16,7 @@
 	. = ..()
 	icon_state = "coin[rand(1,10)]"
 	if(material)
-		desc = "A old-style coin stamped out of [material.solid_name]."
+		desc = "An old-style coin stamped out of [material.solid_name]."
 	set_extension(src, /datum/extension/tool, list(TOOL_SCREWDRIVER = TOOL_QUALITY_BAD))
 
 // "Coin Flipping, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
@@ -85,11 +85,11 @@
 	..()
 	transform = null
 
-/obj/item/coin/examine(mob/user, distance)
+/obj/item/coin/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(denomination && (distance <= 1 || loc == user) && user.skill_check(SKILL_FINANCE, SKILL_ADEPT))
 		var/decl/currency/map_cur = GET_DECL(global.using_map.default_currency)
-		to_chat(user, "It looks like an antiquated minting of \a [denomination.name]. These days it would be worth around [map_cur.format_value(get_combined_monetary_worth())].")
+		. += "It looks like an antiquated minting of \a [denomination.name]. These days it would be worth around [map_cur.format_value(get_combined_monetary_worth())]."
 
 // Subtypes.
 /obj/item/coin/gold

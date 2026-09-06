@@ -98,7 +98,7 @@
 			account_name = "LOCAL"
 	else
 		account_name = "GUEST"
-	content += "<form action='byond://'><input type='hidden' name='src' value='\ref[src]'>>[account_name]:/[current_disk?.get_dir_path(current_directory, TRUE)]<input type='text' size='40' name='input' autofocus><input type='submit' value='Enter'></form>"
+	content += "<form action='byond://'><input type='hidden' name='src' value='\ref[src]'\>\>[account_name]:/[current_disk?.get_dir_path(current_directory, TRUE)]<input type='text' size='40' name='input' autofocus><input type='submit' value='Enter'></form>"
 	content += "<i>type `man` for a list of available commands.</i>"
 	panel.set_content("<tt>[jointext(content, "<br>")]</tt>")
 
@@ -159,7 +159,7 @@
 /datum/terminal/proc/parse_directory(directory_path, create_directories = FALSE)
 	var/datum/file_storage/target_disk = current_disk
 	var/datum/computer_file/directory/root_dir = current_directory
-	
+
 	if(!length(directory_path))
 		return list(target_disk, root_dir)
 
@@ -168,8 +168,8 @@
 
 	// Otherwise, we append the working directory path to the passed path.
 	var/list/directories = splittext(directory_path, "/")
-	
-	// When splitting the text, there could be blank strings at either end, so remove them. If there's any in the body of the path, there was a 
+
+	// When splitting the text, there could be blank strings at either end, so remove them. If there's any in the body of the path, there was a
 	// missed input, so leave them.
 	if(!length(directories[1]))
 		directories.Cut(1, 2)
@@ -194,7 +194,7 @@
 			if(!target_disk) // Invalid disk entered.
 				return OS_DIR_NOT_FOUND
 			directories.Cut(1, 2)
-			
+
 		break // Any further use of ../ is handled by the hard drive.
 
 	// If we were only pathing to the parent of a directory or to a disk, we can return early.
@@ -208,7 +208,7 @@
 	var/datum/computer_file/directory/target_directory = target_disk.parse_directory(final_path, create_directories)
 	if(!istype(target_directory))
 		return OS_DIR_NOT_FOUND
-	
+
 	return list(target_disk, target_directory)
 
 // Returns list(/datum/file_storage, /datum/computer_file/directory, /datum/computer_file) on success. Returns error code on failure.
@@ -221,7 +221,7 @@
 	var/list/dirs_and_file = splittext(file_path, "/")
 	if(!length(dirs_and_file))
 		return OS_DIR_NOT_FOUND
-	
+
 	// Join together everything but the filename into a path.
 	var/list/file_loc = parse_directory(jointext(dirs_and_file, "/", 1, dirs_and_file.len))
 	if(!islist(file_loc)) // Errored!
@@ -231,7 +231,7 @@
 	var/datum/computer_file/directory/target_dir = file_loc[2]
 	if(!istype(target_disk))
 		return OS_DIR_NOT_FOUND
-	
+
 	var/filename = dirs_and_file[dirs_and_file.len]
 	var/datum/computer_file/target_file = target_disk.get_file(filename, target_dir)
 	if(!istype(target_file))
@@ -265,5 +265,5 @@
 			return "I/O error, Harddrive may be non-functional"
 		if(OS_NETWORK_ERROR)
 			return "Unable to connect to the network"
-	
-	return "An unspecified error occured."
+
+	return "An unspecified error occurred."

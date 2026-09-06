@@ -12,6 +12,7 @@
 	flooring_flags = TURF_REMOVE_SCREWDRIVER
 	build_type     = /obj/item/stack/tile/floor_nullglass
 	psi_null       = TRUE
+	uid            = "floor_tiled_nullglass"
 
 /obj/item/stack/tile/floor_nullglass
 	name           = "nullglass floor tile"

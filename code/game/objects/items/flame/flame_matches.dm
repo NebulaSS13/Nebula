@@ -23,7 +23,7 @@
 /obj/item/flame/match/light(mob/user, no_message)
 	. = !burnt && ..()
 
-/obj/item/flame/match/extinguish(var/mob/user, var/no_message)
+/obj/item/flame/match/snuff_out(mob/user, no_message = FALSE)
 	. = ..()
 	if(. && !burnt)
 		_fuel = 0

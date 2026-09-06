@@ -89,7 +89,16 @@ SUBSYSTEM_DEF(ticker)
 			if(job && job.create_record)
 				CreateModularRecord(H)
 
-	callHook("roundstart")
+	// Initialize the roundstart timer
+	global.round_start_time = world.time
+	generate_multi_spawn_items()
+	SSlighting.handle_roundstart()
+	SSmapping.start_processing_all_planets()
+	SSwebhooks.send(WEBHOOK_ROUNDSTART, list("url" = get_world_url()))
+	global.using_map.refresh_lobby_browsers()
+	for(var/modpack_name in SSmodpacks.loaded_modpacks)
+		var/decl/modpack/loaded_modpack = SSmodpacks.loaded_modpacks[modpack_name]
+		loaded_modpack.on_roundstart()
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup() // Drafts antags who don't override jobs.
@@ -102,7 +111,6 @@ SUBSYSTEM_DEF(ticker)
 			global.current_holiday.set_up_holiday()
 
 	if(!length(global.admins))
-		send2adminirc("Round has started with no admins online.")
 		SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Round Started (Game ID: [game_id])", "body" = "Round has started with no admins online."))
 
 /datum/controller/subsystem/ticker/proc/playing_tick()
@@ -128,7 +136,6 @@ SUBSYSTEM_DEF(ticker)
 			return
 		if(END_GAME_READY_TO_END)
 			end_game_state = END_GAME_ENDING
-			callHook("roundend")
 			if (universe_has_ended)
 				if(mode.station_was_nuked)
 					SSstatistics.set_field_details("end_proper","nuke")
@@ -308,7 +315,7 @@ Helpers
 /datum/controller/subsystem/ticker/proc/attempt_late_antag_spawn(var/list/antag_choices)
 	var/decl/special_role/antag = antag_choices[1]
 	while(antag_choices.len && antag)
-		var/needs_ghost = antag.flags & (ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB)
+		var/needs_ghost = antag.is_latejoin_template()
 		if (needs_ghost)
 			looking_for_antags = 1
 			antag_pool.Cut()
@@ -474,3 +481,13 @@ Helpers
 /datum/controller/subsystem/ticker/proc/print_lobby_message()
 	to_world("<B>[SPAN_BLUE("Welcome to the pre-game lobby!")]</B>")
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
+
+
+/datum/controller/subsystem/ticker/proc/get_game_mode_options()
+	. = list()
+	. += "<b>Respawning:</b> <a href='byond://?src=\ref[mode];toggle=respawn'>[mode.deny_respawn ? "disallowed" : "allowed"]</a>"
+	. += "<b>Shuttle delay multiplier:</b> <a href='byond://?src=\ref[mode];set=shuttle_delay'>[mode.shuttle_delay]</a><br/>"
+	. += "<b>Shuttle auto-recall:</b> <a href='byond://?src=\ref[mode];toggle=shuttle_recall'>[mode.auto_recall_shuttle ? "enabled" : "disabled"]</a>"
+	. += "" // we want a blank line here for some design reason idk
+	. += "<b>Moderate event time modifier:</b> <a href='byond://?src=\ref[mode];set=event_modifier_moderate'>[mode.event_delay_mod_moderate || "unset"]</a><br/>"
+	. += "<b>Major event time modifier:</b> <a href='byond://?src=\ref[mode];set=event_modifier_severe'>[mode.event_delay_mod_major || "unset"]</a><br/>"

@@ -44,7 +44,7 @@ var/global/list/station_bookcases = list()
 	var/place_key = GET_BOOK_POS(src, place_x, place_y)
 
 	if(isnull(book_positions[place_key]))
-		book_positions[place_key] = inserted
+		book_positions[place_key] = weakref(inserted)
 
 /datum/storage/bookcase/update_ui_after_item_removal(obj/item/removed)
 	. = ..()
@@ -53,7 +53,8 @@ var/global/list/station_bookcases = list()
 	for(var/bX = 0 to (book_slots_x-1))
 		for(var/bY = 0 to (book_slots_y-1))
 			var/bK = GET_BOOK_POS(src, bX, bY)
-			if(book_positions[bK] == removed)
+			var/weakref/potential_book = book_positions[bK]
+			if(IS_WEAKREF_OF(potential_book, removed))
 				book_positions[bK] = null
 				return
 
@@ -65,8 +66,9 @@ var/global/list/station_bookcases = list()
 	for(var/bX = 0 to (book_slots_x-1))
 		for(var/bY = 0 to (book_slots_y-1))
 			var/bK = GET_BOOK_POS(src, bX, bY)
-			var/obj/item/thing = book_positions[bK]
-			if(!isnull(thing) && (QDELETED(thing) || thing.loc != holder))
+			var/weakref/book_ref = book_positions[bK]
+			var/obj/item/thing = book_ref?.resolve()
+			if(!isnull(thing) && (QDELING(thing) || thing.loc != holder)) // QDELING because it might be deleting but hasn't been moved to nullspace yet
 				book_positions[bK] = null
 
 	for(var/obj/item/thing in holder.get_stored_inventory())
@@ -75,7 +77,8 @@ var/global/list/station_bookcases = list()
 		// Avoid moving us if we're already positioned
 		for(var/bX = 0 to (book_slots_x-1))
 			for(var/bY = 0 to (book_slots_y-1))
-				if(book_positions[GET_BOOK_POS(src, bX, bY)] == thing)
+				var/weakref/potential_book = book_positions[GET_BOOK_POS(src, bX, bY)]
+				if(IS_WEAKREF_OF(potential_book, thing))
 					positioned = TRUE
 					break
 			if(positioned)
@@ -89,7 +92,7 @@ var/global/list/station_bookcases = list()
 			for(var/bY = 0 to (book_slots_y-1))
 				var/bK = GET_BOOK_POS(src, bX, bY)
 				if(isnull(book_positions[bK]))
-					book_positions[bK] = thing
+					book_positions[bK] = weakref(thing)
 					positioned = TRUE
 					break
 			if(positioned)
@@ -106,8 +109,8 @@ var/global/list/station_bookcases = list()
 	density = TRUE
 	opacity = TRUE
 	obj_flags = OBJ_FLAG_ANCHORABLE
-	material = /decl/material/solid/organic/wood
-	color = /decl/material/solid/organic/wood::color
+	material = /decl/material/solid/organic/wood/oak
+	color = /decl/material/solid/organic/wood/oak::color
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	storage = /datum/storage/bookcase
@@ -154,12 +157,13 @@ var/global/list/station_bookcases = list()
 		for(var/bY = 0 to (book_storage.book_slots_y-1))
 			var/bK = (bY * book_storage.book_slots_x) + bX + 1
 
-			var/obj/item/book = book_storage.book_positions[bK]
+			var/weakref/book_ref = book_storage.book_positions[bK]
+			var/obj/item/book = book_ref?.resolve()
 			if(!istype(book) || !check_state_in_icon("bookcase", book.icon))
 				continue
 
 			var/use_lying_state = "bookcase"
-			if(bX < (book_storage.book_slots_x-1) && isnull(book_storage.book_positions[bK+1]) && check_state_in_icon("bookcase_flat", book.icon))
+			if(bX < (book_storage.book_slots_x-1) && !isnull(book_storage.book_positions[bK+1]) && check_state_in_icon("bookcase_flat", book.icon))
 				use_lying_state = "bookcase_flat"
 
 			var/image/book_overlay = overlay_image(book.icon, use_lying_state, book.get_color(), RESET_COLOR)
@@ -168,7 +172,7 @@ var/global/list/station_bookcases = list()
 			add_overlay(book_overlay)
 
 			var/page_state = "[book_overlay.icon_state]-pages"
-			if(check_state_in_icon(book_overlay.icon, page_state))
+			if(check_state_in_icon(page_state, book_overlay.icon))
 				var/image/page_overlay = overlay_image(book_overlay.icon, page_state, COLOR_WHITE, RESET_COLOR)
 				page_overlay.pixel_x = book_overlay.pixel_x
 				page_overlay.pixel_y = book_overlay.pixel_y

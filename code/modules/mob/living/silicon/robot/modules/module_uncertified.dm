@@ -18,7 +18,7 @@
 		CAMERA_CHANNEL_TELEVISION
 	)
 	equipment = list(
-		/obj/item/boombox,
+		/obj/item/music_player/boombox,
 		/obj/item/bikehorn/airhorn,
 		/obj/item/flashlight/party,
 		/obj/item/gun/launcher/money

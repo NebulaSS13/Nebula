@@ -18,9 +18,25 @@
 	if(!backpacks_by_name)
 		backpacks_by_name = list()
 		var/bos = global.using_map.get_available_backpacks()
-		for(var/bo in bos)
-			var/decl/backpack_outfit/backpack_outfit = bos[bo]
+		for(var/backpack_option in bos)
+			var/decl/backpack_outfit/backpack_outfit = bos[backpack_option]
 			backpacks_by_name[backpack_outfit.name] = backpack_outfit
+
+/datum/category_item/player_setup_item/physical/equipment/apply_post_snapshot_preferences(mob/living/human/character, is_preview_copy = FALSE)
+	QDEL_NULL_LIST(character.worn_underwear)
+	character.worn_underwear = list()
+	for(var/underwear_category_name in pref.all_underwear)
+		var/datum/category_group/underwear/underwear_category = global.underwear.categories_by_name[underwear_category_name]
+		if(underwear_category)
+			var/underwear_item_name = pref.all_underwear[underwear_category_name]
+			var/datum/category_item/underwear/UWD = underwear_category.items_by_name[underwear_item_name]
+			var/metadata = pref.all_underwear_metadata[underwear_category_name]
+			var/obj/item/underwear/UW = UWD.create_underwear(character, metadata)
+			if(UW)
+				UW.ForceEquipUnderwear(character, FALSE)
+		else
+			pref.all_underwear -= underwear_category_name
+	character.backpack_setup = new(pref.backpack, pref.backpack_metadata["[pref.backpack]"])
 
 /datum/category_item/player_setup_item/physical/equipment/load_character(datum/pref_record_reader/R)
 	pref.all_underwear =          R.read("all_underwear")
@@ -36,14 +52,14 @@
 	var/load_backbag = R.read("backpack")
 	pref.backpack = backpacks_by_name[load_backbag] || get_default_outfit_backpack()
 
-/datum/category_item/player_setup_item/physical/equipment/save_character(datum/pref_record_writer/W)
-	W.write("all_underwear",          pref.all_underwear)
-	W.write("all_underwear_metadata", pref.all_underwear_metadata)
-	W.write("backpack",               pref.backpack.name)
-	W.write("backpack_metadata",      pref.backpack_metadata)
-	W.write("survival_box",           pref.survival_box_choice?.uid)
-	W.write("starting_cash_choice",   pref.starting_cash_choice?.uid)
-	W.write("passport",               pref.give_passport)
+/datum/category_item/player_setup_item/physical/equipment/save_character(datum/pref_record_writer/writer)
+	writer.write("all_underwear",          pref.all_underwear)
+	writer.write("all_underwear_metadata", pref.all_underwear_metadata)
+	writer.write("backpack",               pref.backpack.name)
+	writer.write("backpack_metadata",      pref.backpack_metadata)
+	writer.write("survival_box",           pref.survival_box_choice?.uid)
+	writer.write("starting_cash_choice",   pref.starting_cash_choice?.uid)
+	writer.write("passport",               pref.give_passport)
 
 /datum/category_item/player_setup_item/physical/equipment/sanitize_character()
 	if(!istype(pref.all_underwear))
@@ -210,13 +226,13 @@
 		var/backpack_name = href_list["backpack"]
 		if(!(backpack_name in backpacks_by_name))
 			return TOPIC_NOACTION
-		var/decl/backpack_outfit/bo = backpacks_by_name[backpack_name]
-		var/datum/backpack_tweak/bt = locate(href_list["tweak"]) in bo.tweaks
+		var/decl/backpack_outfit/backpack_option = backpacks_by_name[backpack_name]
+		var/datum/backpack_tweak/bt = locate(href_list["tweak"]) in backpack_option.tweaks
 		if(!bt)
 			return TOPIC_NOACTION
-		var/new_metadata = bt.get_metadata(user, get_backpack_metadata(bo, bt))
+		var/new_metadata = bt.get_metadata(user, get_backpack_metadata(backpack_option, bt))
 		if(new_metadata)
-			set_backpack_metadata(bo, bt, new_metadata)
+			set_backpack_metadata(backpack_option, bt, new_metadata)
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 	else if(href_list["change_cash_choice"])
 		var/list/display_choices = list()

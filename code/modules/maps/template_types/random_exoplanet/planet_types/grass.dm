@@ -119,7 +119,6 @@
 	name                       = "lush exoplanet"
 	planetoid_data_type        = /datum/planetoid_data/random/grass
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/grass
-	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/grass
 	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/grass,
@@ -158,27 +157,4 @@
 	)
 	forced_ambience = list(
 		'sound/ambience/jungle.ogg'
-	)
-	fishing_failure_prob = 10
-	// TODO: waterweed?
-	// Hardcoding the contents of /obj/random/natural_debris to avoid hacks to get results out of /obj/random.
-	fishing_results = list(
-		/mob/living/simple_animal/aquatic/fish               = 10,
-		/mob/living/simple_animal/aquatic/fish/grump         = 10,
-		/obj/item/mollusc                                    = 5,
-		/obj/item/mollusc/barnacle/fished                    = 5,
-		/mob/living/simple_animal/aquatic/fish/large         = 5,
-		/mob/living/simple_animal/aquatic/fish/large/bass    = 5,
-		/mob/living/simple_animal/aquatic/fish/large/salmon  = 5,
-		/mob/living/simple_animal/aquatic/fish/large/trout   = 5,
-		/mob/living/simple_animal/aquatic/fish/large/pike    = 3,
-		/mob/living/simple_animal/aquatic/fish/large/javelin = 3,
-		/obj/item/mollusc/clam/fished/pearl                  = 3,
-		/obj/item/trash/mollusc_shell/clam                   = 2,
-		/obj/item/trash/mollusc_shell/barnacle               = 2,
-		/obj/item/remains/mouse                              = 2,
-		/obj/item/remains/lizard                             = 2,
-		/obj/item/stick                                      = 1,
-		/obj/item/trash/mollusc_shell                        = 1,
-		/mob/living/simple_animal/aquatic/fish/large/koi     = 1
 	)

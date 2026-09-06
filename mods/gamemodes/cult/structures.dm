@@ -13,10 +13,10 @@
 	desc = "A floating crystal that hums with an unearthly energy."
 	icon = 'icons/obj/structures/pylon.dmi'
 	icon_state = "pylon"
-	var/isbroken = 0
 	light_power = 0.5
 	light_range = 13
 	light_color = "#3e0000"
+	var/isbroken = FALSE
 
 /obj/structure/cult/pylon/attack_hand(mob/M)
 	SHOULD_CALL_PARENT(FALSE)
@@ -27,8 +27,8 @@
 	attackpylon(user, damage)
 	return TRUE
 
-/obj/structure/cult/pylon/attackby(obj/item/W, mob/user)
-	attackpylon(user, W.get_attack_force(user))
+/obj/structure/cult/pylon/attackby(obj/item/used_item, mob/user)
+	attackpylon(user, used_item.expend_attack_force(user))
 	return TRUE
 
 /obj/structure/cult/pylon/proc/attackpylon(mob/user, var/damage)
@@ -42,7 +42,7 @@
 				)
 			user.do_attack_animation(src)
 			playsound(get_turf(src), 'sound/effects/Glassbr3.ogg', 75, 1)
-			isbroken = 1
+			isbroken = TRUE
 			set_density(0)
 			icon_state = "pylon-broken"
 			set_light(0)
@@ -61,10 +61,12 @@
 /obj/structure/cult/pylon/proc/repair(mob/user)
 	if(isbroken)
 		to_chat(user, "You repair the pylon.")
-		isbroken = 0
+		isbroken = FALSE
 		set_density(1)
 		icon_state = "pylon"
 		set_light(13, 0.5)
+		return TRUE
+	return FALSE
 
 /obj/structure/cult/pylon/get_artifact_scan_data()
 	return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."
@@ -110,7 +112,7 @@
 
 /obj/structure/grille/cult
 	name = "cult grille"
-	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it."
+	desc = "A matrix built out of an unknown material, with some sort of force field blocking air around it."
 	material = /decl/material/solid/stone/cult
 
 /obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)

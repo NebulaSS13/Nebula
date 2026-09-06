@@ -487,14 +487,11 @@
 	)
 	var/active = 0 //if the ship is on
 
-/obj/item/orion_ship/examine(mob/user)
+/obj/item/orion_ship/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(!(in_range(user, src)))
-		return
-	if(!active)
-		to_chat(user, "<span class='notice'>There's a little switch on the bottom. It's flipped down.</span>")
-	else
-		to_chat(user, "<span class='notice'>There's a little switch on the bottom. It's flipped up.</span>")
+	if(in_range(user, src))
+		. += SPAN_NOTICE("There's a little switch on the bottom. It's flipped [active ? "up" : "down"].")
+
 /obj/item/orion_ship/attack_self(mob/user)
 	if(active)
 		return

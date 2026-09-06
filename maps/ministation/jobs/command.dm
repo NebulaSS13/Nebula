@@ -1,7 +1,7 @@
-/datum/job/ministation/captain
-	title = "Captain"
+/datum/job/standard/captain/ministation
 	supervisors = "your profit margin, your conscience, and the watchful eye of the Tradehouse Rep"
 	outfit_type = /decl/outfit/job/ministation/captain
+	hud_icon = 'maps/ministation/hud.dmi'
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_WEAPONS  = SKILL_ADEPT,
@@ -13,29 +13,11 @@
 		SKILL_WEAPONS = SKILL_MAX
 	)
 	skill_points = 40
-	head_position = 1
-	department_types = list(/decl/department/command)
-	total_positions = 1
-	spawn_positions = 1
-	selection_color = "#1d1d4f"
-	hud_icon = "hudcaptain"
-	req_admin_notify = 1
-	access = list()
-	minimal_access = list()
-	minimal_player_age = 14
-	economic_power = 20
-	ideal_character_age = 70
-	guestbanned = 1
-	must_fill = 1
-	not_random_selectable = 1
 
-/datum/job/ministation/captain/equip_job(var/mob/living/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+/datum/job/standard/captain/ministation/equip_job(var/mob/living/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	. = ..()
 	if(H)
 		H.verbs |= /mob/proc/freetradeunion_rename_company
-
-/datum/job/ministation/captain/get_access()
-	return get_all_station_access()
 
 /mob/proc/freetradeunion_rename_company()
 	set name = "Defect from Tradehouse"
@@ -52,113 +34,11 @@
 		command_announcement.Announce("Congratulations to all members of [capitalize(global.using_map.company_name)] on the new name. Their rebranding has changed the [global.using_map.company_short] market value by [0.01*rand(-10,10)]%.", "Trade Union Name Change")
 	verbs -= /mob/proc/freetradeunion_rename_company
 
-/datum/job/ministation/hop
+/datum/job/standard/hop/ministation
 	title = "Lieutenant"
-	supervisors = "the Captain"
 	outfit_type = /decl/outfit/job/ministation/hop
-	head_position = 1
-	department_types = list(
-		/decl/department/command,
-		/decl/department/civilian
-	)
-	total_positions = 1
-	spawn_positions = 1
-	selection_color = "#2f2f7f"
-	hud_icon = "hudlieutenant"
-	req_admin_notify = 1
-	minimal_player_age = 14
-	economic_power = 10
-	ideal_character_age = 50
-	guestbanned = 1
-	not_random_selectable = 1
-	access = list(
-		access_security,
-		access_sec_doors,
-		access_brig,
-		access_forensics_lockers,
-		access_armory,
-		access_heads,
-		access_medical,
-		access_engine,
-		access_atmospherics,
-		access_change_ids,
-		access_ai_upload,
-		access_eva,
-		access_bridge,
-		access_all_personal_lockers,
-		access_maint_tunnels,
-		access_bar,
-		access_janitor,
-		access_construction,
-		access_morgue,
-		access_crematorium,
-		access_kitchen,
-		access_mining,
-		access_xenobiology,
-		access_robotics,
-		access_engine_equip,
-		access_cargo,
-		access_cargo_bot,
-		access_mailsorting,
-		access_qm,
-		access_hydroponics,
-		access_lawyer,
-		access_chapel_office,
-		access_library,
-		access_research,
-		access_mining,
-		access_heads_vault,
-		access_mining_station,
-		access_hop,
-		access_RC_announce,
-		access_keycard_auth,
-		access_gateway,
-		access_cameras
-	)
-	minimal_access = list(
-		access_security,
-		access_sec_doors,
-		access_brig,
-		access_forensics_lockers,
-		access_armory,
-		access_heads,
-		access_medical,
-		access_engine,
-		access_atmospherics,
-		access_change_ids,
-		access_ai_upload,
-		access_eva,
-		access_bridge,
-		access_all_personal_lockers,
-		access_maint_tunnels,
-		access_bar,
-		access_janitor,
-		access_construction,
-		access_mining,
-		access_xenobiology,
-		access_robotics,
-		access_engine_equip,
-		access_morgue,
-		access_crematorium,
-		access_kitchen,
-		access_cargo,
-		access_cargo_bot,
-		access_mailsorting,
-		access_qm,
-		access_hydroponics,
-		access_lawyer,
-		access_chapel_office,
-		access_library,
-		access_research,
-		access_mining,
-		access_heads_vault,
-		access_mining_station,
-		access_hop,
-		access_RC_announce,
-		access_keycard_auth,
-		access_gateway,
-		access_cameras
-	)
+	hud_icon = 'maps/ministation/hud.dmi'
+	hud_icon_state = "hudlieutenant"
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_WEAPONS  = SKILL_BASIC,

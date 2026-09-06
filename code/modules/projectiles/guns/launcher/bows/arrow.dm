@@ -5,10 +5,10 @@
 	plural_icon_state = ICON_STATE_WORLD + "-mult"
 	max_icon_state = ICON_STATE_WORLD + "-max"
 	w_class = ITEM_SIZE_NORMAL
-	sharp = 1
-	edge = 0
+	sharp = TRUE
+	edge = FALSE
 	lock_picking_level = 3
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	matter_multiplier = 0.2
 	is_spawnable_type = TRUE

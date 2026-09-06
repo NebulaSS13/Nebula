@@ -192,21 +192,21 @@
 	if(!ATOM_IS_OPEN_CONTAINER(input_item))
 		return 0
 
-	if(!input_item.reagents || !input_item.reagents.total_volume)
+	if(!input_item.reagents || !REAGENT_TOTAL_VOLUME(input_item.reagents))
 		to_chat(user, "\The [input_item] is empty.")
 		return 0
 
 	// Magical chemical filtration system, do not question it.
 	var/total_transferred = 0
-	for(var/rtype in input_item.reagents.reagent_volumes)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(input_item.reagents))
 		for(var/chargetype in charges)
 			var/datum/rig_charge/charge = charges[chargetype]
-			if(charge.product_type == rtype)
-				var/chems_to_transfer = REAGENT_VOLUME(input_item.reagents, rtype)
+			if(charge.product_type == reagent.type)
+				var/chems_to_transfer = REAGENT_VOLUME(input_item.reagents, reagent)
 				if((charge.charges + chems_to_transfer) > max_reagent_volume)
 					chems_to_transfer = max_reagent_volume - charge.charges
 				charge.charges += chems_to_transfer
-				input_item.remove_from_reagents(rtype, chems_to_transfer)
+				input_item.remove_from_reagents(reagent, chems_to_transfer)
 				total_transferred += chems_to_transfer
 				break
 
@@ -265,11 +265,11 @@
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
 
 	charges = list(
-		list("antidepressants", "antidepressants",  /decl/material/liquid/antidepressants,    30),
-		list("stimulants",      "stimulants",       /decl/material/liquid/stimulants,         30),
-		list("amphetamines",    "amphetamines",     /decl/material/liquid/amphetamines,       30),
-		list("painkillers",     "painkillers",      /decl/material/liquid/painkillers/strong, 30),
-		list("glucose",         "glucose",          /decl/material/liquid/nutriment/glucose,  80)
+		list("antidepressants", "antidepressants",  /decl/material/liquid/accumulated/antidepressants,    30),
+		list("stimulants",      "stimulants",       /decl/material/liquid/accumulated/stimulants,         30),
+		list("amphetamines",    "amphetamines",     /decl/material/liquid/amphetamines,                   30),
+		list("painkillers",     "painkillers",      /decl/material/liquid/painkillers/strong,             30),
+		list("glucose",         "glucose",          /decl/material/liquid/nutriment/glucose,              80)
 		)
 
 	interface_name = "combat chem dispenser"
@@ -370,7 +370,7 @@
 	deactivate_string = "Deactivate Thrusters"
 
 	interface_name = "maneuvering jets"
-	interface_desc = "An inbuilt EVA maneuvering system that runs off a seperate gas supply."
+	interface_desc = "An inbuilt EVA maneuvering system that runs off a separate gas supply."
 	origin_tech = @'{"materials":6,"engineering":7}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -379,21 +379,21 @@
 	)
 	var/obj/item/tank/jetpack/rig/jets
 
-/obj/item/rig_module/maneuvering_jets/attackby(obj/item/W, mob/user)
-	if(W.do_tool_interaction(TOOL_WRENCH, user, src, 1, "removing the propellant tank", "removing the propellant tank"))
+/obj/item/rig_module/maneuvering_jets/attackby(obj/item/used_item, mob/user)
+	if(used_item.do_tool_interaction(TOOL_WRENCH, user, src, 1, "removing the propellant tank", "removing the propellant tank"))
 		jets.forceMove(get_turf(user))
 		user.put_in_hands(jets)
 		jets = null
 		return TRUE
 
-	if(istype(W, /obj/item/tank/jetpack/rig))
+	if(istype(used_item, /obj/item/tank/jetpack/rig))
 		if(jets)
 			to_chat(user, SPAN_WARNING("There's already a propellant tank inside of \the [src]!"))
 			return TRUE
-		if(user.try_unequip(W))
-			to_chat(user, SPAN_NOTICE("You insert \the [W] into [src]."))
-			W.forceMove(src)
-			jets = W
+		if(user.try_unequip(used_item))
+			to_chat(user, SPAN_NOTICE("You insert \the [used_item] into [src]."))
+			used_item.forceMove(src)
+			jets = used_item
 			return TRUE
 	. = ..()
 

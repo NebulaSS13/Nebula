@@ -10,7 +10,7 @@
 	matter      = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 	)
-	attack_verb = list("stamped")
+	attack_verb = "stamped"
 
 /obj/item/stamp/Initialize()
 	. = ..()

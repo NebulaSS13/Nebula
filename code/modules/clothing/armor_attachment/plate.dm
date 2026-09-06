@@ -17,6 +17,7 @@
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
 	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
+	draw_on_mob_when_equipped = FALSE
 
 /obj/item/clothing/armor_attachment/plate/get_fibers()
 	return null	//plates do not shed

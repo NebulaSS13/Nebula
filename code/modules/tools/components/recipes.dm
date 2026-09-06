@@ -7,6 +7,7 @@
 		/obj/item/stack/material/lump,
 		/obj/item/stack/material/plank
 	)
+	validation_material         = /decl/material/solid/stone/basalt
 
 /decl/stack_recipe/tool/handle
 	abstract_type               = /decl/stack_recipe/tool/handle
@@ -16,6 +17,7 @@
 		/obj/item/stack/material/rods,
 		/obj/item/stack/material/bone
 	)
+	validation_material         = /decl/material/solid/organic/bone
 
 /decl/stack_recipe/tool/handle/long
 	result_type                 = /obj/item/tool_component/handle/long

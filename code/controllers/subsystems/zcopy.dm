@@ -168,7 +168,7 @@ SUBSYSTEM_DEF(zcopy)
 	// Flush the queue.
 	fire(FALSE, TRUE)
 
-// If you add a new Zlevel or change Z-connections, call this.
+/// (Re)generate Z-group information. You should run this every time world.maxz (or z-connections) change. ZM's behavior is undefined between resizing the world and calling this proc.
 /datum/controller/subsystem/zcopy/proc/calculate_zstack_limits()
 	zlev_maximums = new(world.maxz)
 	var/start_zlev = 1

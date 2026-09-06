@@ -11,15 +11,17 @@
 	var/controlled = TRUE	// if true, report to air alarm, if false, probably in direct contact with something else by radio (e.g. airlocks)
 
 /obj/machinery/atmospherics/unary/get_single_monetary_worth()
+	if(worthless)
+		return 0
 	. = ..()
-	for(var/gas in air_contents?.gas)
-		var/decl/material/gas_data = GET_DECL(gas)
-		. += gas_data.get_value() * air_contents.gas[gas] * GAS_WORTH_MULTIPLIER
+	for(var/gas_type, gas_amount in air_contents?.gas)
+		var/decl/material/gas_data = GET_DECL(gas_type)
+		. += gas_data.get_value() * gas_amount * GAS_WORTH_MULTIPLIER
 	. = max(1, round(.))
 
 /obj/machinery/atmospherics/unary/Initialize()
 	air_contents = new
-	air_contents.volume = 200
+	air_contents.total_volume = 200
 	if(controlled)
 		reset_area(null, get_area(src))
 	. = ..()
@@ -34,7 +36,7 @@
 /obj/machinery/atmospherics/unary/physically_destroyed()
 	if(loc && air_contents)
 		loc.assume_air(air_contents)
-	. = ..()	
+	. = ..()
 
 /obj/machinery/atmospherics/unary/dismantle()
 	if(loc && air_contents)

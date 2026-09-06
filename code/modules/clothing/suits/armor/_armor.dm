@@ -11,7 +11,14 @@
 		/obj/item/baton,
 		/obj/item/handcuffs,
 		/obj/item/gun/magnetic,
-		/obj/item/clothing/head/helmet
+		/obj/item/clothing/head/helmet,
+		/obj/item/shield/crafted/buckler,
+		/obj/item/bladed/knife,
+		/obj/item/bladed/shortsword,
+		/obj/item/bladed/longsword,
+		/obj/item/bladed/axe,
+		/obj/item/flame/torch,
+		/obj/item/flame/fuelled/lantern
 	)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	item_flags = ITEM_FLAG_THICKMATERIAL

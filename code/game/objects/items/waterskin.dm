@@ -6,7 +6,7 @@
 	material = /decl/material/solid/organic/leather/gut
 	color = /decl/material/solid/organic/leather/gut::color
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	volume = 120
+	chem_volume = 120
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/decl/material/stopper_material = /decl/material/solid/organic/cloth/hemp
 
@@ -45,7 +45,7 @@
 		add_overlay(stopper_overlay)
 
 /obj/item/chems/glass/waterskin/crafted
-	desc = "A long and rather unwieldly water-carrying vessel."
+	desc = "A long and rather unwieldy water-carrying vessel."
 	icon = 'icons/obj/items/waterskin_crafted.dmi'
 	material = /decl/material/solid/organic/leather
 	color = /decl/material/solid/organic/leather::color
@@ -65,4 +65,4 @@
 
 /obj/item/chems/glass/waterskin/crafted/wine/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/alcohol/wine, reagents?.maximum_volume)
+	add_to_reagents(/decl/material/liquid/alcohol/wine, REAGENT_MAXIMUM_VOLUME(reagents))

@@ -18,7 +18,7 @@
 		to_chat(src, "<span class='warning'>\The [player.current] cannot be \a [faction.faction_name]!</span>")
 		return
 
-	if(world.time < player.rev_cooldown)
+	if(world.time < player.conversion_cooldown)
 		to_chat(src, "<span class='danger'>You must wait five seconds between attempts.</span>")
 		return
 
@@ -26,7 +26,7 @@
 	log_admin("[src]([src.ckey]) attempted to convert [player.current] to the [faction.faction_name] faction.")
 	message_admins("<span class='danger'>[src]([src.ckey]) attempted to convert [player.current] to the [faction.faction_name] faction.</span>")
 
-	player.rev_cooldown = world.time + 5 SECONDS
+	player.conversion_cooldown = world.time + 5 SECONDS
 	if (!faction.is_antagonist(player))
 		var/choice = alert(player.current,"Asked by [src]: Do you want to join the [faction.faction_descriptor]?","Join the [faction.faction_descriptor]?","No!","Yes!")
 		if(!(player.current in able_mobs_in_oview(src)))

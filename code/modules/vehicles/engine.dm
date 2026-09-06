@@ -4,7 +4,7 @@
 	icon = 'icons/obj/objects.dmi'
 	w_class = ITEM_SIZE_HUGE
 	material = /decl/material/solid/metal/steel
-	var/stat = 0
+	var/broken = FALSE
 	var/trail_type
 	var/cost_per_move = 5
 
@@ -19,10 +19,10 @@
 /obj/item/engine/proc/use_power()
 	return 0
 
-/obj/item/engine/proc/rev_engine(var/atom/movable/M)
+/obj/item/engine/proc/rev_engine(var/obj/vehicle/vehicle)
 	return
 
-/obj/item/engine/proc/putter(var/atom/movable/M)
+/obj/item/engine/proc/putter(var/obj/vehicle/vehicle)
 	return
 
 /obj/item/engine/electric
@@ -33,23 +33,24 @@
 	cost_per_move = 200	// W
 	var/obj/item/cell/cell
 
-/obj/item/engine/electric/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I,/obj/item/cell))
+/obj/item/engine/electric/attackby(var/obj/item/used_item, var/mob/user)
+	// TODO: use cell extension for this?
+	if(istype(used_item, /obj/item/cell))
 		if(cell)
-			to_chat(user, "<span class='warning'>There is already a cell in \the [src].</span>")
+			to_chat(user, SPAN_WARNING("There is already a cell in \the [src]."))
 		else
-			cell = I
-			user.drop_from_inventory(I)
-			I.forceMove(src)
+			cell = used_item
+			user.drop_from_inventory(used_item)
+			used_item.forceMove(src)
 		return TRUE
-	else if(IS_CROWBAR(I))
+	else if(IS_CROWBAR(used_item))
 		if(cell)
-			to_chat(user, "You pry out \the [cell] with \the [I].")
+			to_chat(user, SPAN_NOTICE("You pry out \the [cell] with \the [used_item]."))
 			cell.dropInto(loc)
 			cell = null
 			return TRUE
-		if(user.a_intent != I_HURT)
-			to_chat(user, SPAN_WARNING("There is no cell in \the [src] to remove with \the [I]!"))
+		if(!user.check_intent(I_FLAG_HARM))
+			to_chat(user, SPAN_WARNING("There is no cell in \the [src] to remove with \the [used_item]!"))
 			return TRUE
 	return ..()
 
@@ -58,14 +59,14 @@
 
 /obj/item/engine/electric/use_power()
 	if(!cell)
-		return 0
+		return FALSE
 	return cell.use(cost_per_move * CELLRATE)
 
-/obj/item/engine/electric/rev_engine(var/atom/movable/M)
-	M.audible_message("\The [M] beeps, spinning up.")
+/obj/item/engine/electric/rev_engine(var/obj/vehicle/vehicle)
+	vehicle.audible_message("\The [vehicle] beeps, spinning up.")
 
-/obj/item/engine/electric/putter(var/atom/movable/M)
-	M.audible_message("\The [M] makes one depressed beep before winding down.")
+/obj/item/engine/electric/putter(var/obj/vehicle/vehicle)
+	vehicle.audible_message("\The [vehicle] makes one depressed beep before winding down.")
 
 /obj/item/engine/electric/emp_act(var/severity)
 	if(cell)
@@ -78,7 +79,8 @@
 	icon_state = "engine_fuel"
 	trail_type = /datum/effect/effect/system/trail/thermal
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	var/obj/temp_reagents_holder
+	chem_volume = 500
+	var/datum/reagents/combustion_chamber
 	var/fuel_points = 0
 	//fuel points are determined by differing reagents
 
@@ -87,55 +89,49 @@
 
 /obj/item/engine/thermal/Initialize()
 	. = ..()
-	create_reagents(500)
-	temp_reagents_holder = new()
-	temp_reagents_holder.create_reagents(15)
-	temp_reagents_holder.atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	combustion_chamber = new(15, global.temp_reagents_holder)
 
-/obj/item/engine/thermal/attackby(var/obj/item/I, var/mob/user)
-	if(I.standard_pour_into(user, src))
+/obj/item/engine/thermal/attackby(var/obj/item/used_item, var/mob/user)
+	if(used_item.standard_pour_into(user, src))
 		return TRUE
 	return ..()
 
-/obj/item/engine/thermal/use_power()
-	if(fuel_points >= cost_per_move)
-		fuel_points -= cost_per_move
-		return 1
-	if(!reagents || reagents.total_volume <= 0 || stat)
-		return 0
-
-	reagents.trans_to(temp_reagents_holder,min(reagents.total_volume,15))
-	var/multiplier = 1
-	var/actually_flameable = 0
-	for(var/rtype in temp_reagents_holder.reagents.reagent_volumes)
+/// Attempts to burn a sample of the fuel in our reagent holder. Returns TRUE if enough fuel points are produced to move, otherwise returns FALSE.
+/obj/item/engine/thermal/proc/burn_fuel()
+	if(!reagents || REAGENT_TOTAL_VOLUME(reagents) <= 0 || broken)
+		return FALSE
+	reagents.trans_to_holder(combustion_chamber, min(REAGENT_TOTAL_VOLUME(reagents), 15))
+	var/multiplier = 0
+	var/actually_flammable = FALSE
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(temp_reagents_holder.reagents))
 		var/new_multiplier = 1
-		var/decl/material/R = GET_DECL(rtype)
-		if(istype(R, /decl/material/liquid/alcohol))
-			var/decl/material/liquid/alcohol/E = R
-			new_multiplier = (10/E.strength)
-			actually_flameable = 1
-		else if(istype(R,/decl/material/liquid/fuel/hydrazine))
-			new_multiplier = 1.25
-			actually_flameable = 1
-		else if(istype(R,/decl/material/liquid/fuel))
-			actually_flameable = 1
-		else if(istype(R,/decl/material/liquid/frostoil))
-			new_multiplier = 0.1
-		else if(istype(R,/decl/material/liquid/water))
-			new_multiplier = 0.4
-		else if(istype(R,/decl/material/liquid/nutriment/sugar) && REAGENT_VOLUME(reagents, rtype) > 1)
-			stat = DEAD
+		var/reagent_volume = REAGENT_VOLUME(combustion_chamber, reagent)
+		if(reagent.accelerant_value < FUEL_VALUE_NONE) // suppresses fires rather than starts them
+			// this means that FUEL_VALUE_SUPPRESSANT is on par with water in the old code
+			new_multiplier = -(FUEL_VALUE_SUPPRESSANT + reagent.accelerant_value) / 2 * 0.4
+		if(reagent.accelerant_value > FUEL_VALUE_NONE)
+			// averaging these means that FUEL_VALUE_ACCELERANT is 1x, hydrazine is 1.25x, and exotic matter is 1.5x
+			new_multiplier = (FUEL_VALUE_ACCELERANT + reagent.accelerant_value) / 2
+			actually_flammable = TRUE
+		if(ispath(reagent, /decl/material/liquid/nutriment/sugar) && REAGENT_VOLUME(reagents, reagent) > 1)
+			broken = TRUE
 			explosion(get_turf(src),-1,0,2,3,0)
 			return 0
-		multiplier = (multiplier + new_multiplier)/2
-	if(!actually_flameable)
-		return 0
-	fuel_points += 20 * multiplier * temp_reagents_holder.reagents.total_volume
-	temp_reagents_holder.reagents.clear_reagents()
-	return use_power()
+		multiplier += new_multiplier * reagent_volume
+	if(!actually_flammable)
+		return FALSE
+	fuel_points += 20 * multiplier
+	combustion_chamber.clear_reagents()
+	return fuel_points >= cost_per_move
 
-/obj/item/engine/thermal/rev_engine(var/atom/movable/M)
-	M.audible_message("\The [M] rumbles to life.")
+/obj/item/engine/thermal/use_power()
+	if(fuel_points >= cost_per_move || burn_fuel())
+		fuel_points -= cost_per_move
+		return TRUE
+	return FALSE
 
-/obj/item/engine/thermal/putter(var/atom/movable/M)
-	M.audible_message("\The [M] putters before turning off.")
+/obj/item/engine/thermal/rev_engine(var/obj/vehicle/vehicle)
+	vehicle.audible_message("\The [vehicle] rumbles to life.")
+
+/obj/item/engine/thermal/putter(var/obj/vehicle/vehicle)
+	vehicle.audible_message("\The [vehicle] putters before turning off.")

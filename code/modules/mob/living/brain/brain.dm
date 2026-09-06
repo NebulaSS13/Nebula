@@ -26,11 +26,6 @@
 	)
 	return default_emotes
 
-/mob/living/brain/handle_regular_status_updates()
-	. = ..()
-	if(emp_damage || stat == DEAD || !is_in_interface())
-		SET_STATUS_MAX(src, STAT_SILENCE, 2)
-
 /mob/living/brain/is_deaf()
 	return emp_damage || stat == DEAD || !is_in_interface()
 
@@ -46,18 +41,18 @@
 /mob/living/brain/proc/get_container()
 	return get_recursive_loc_of_type(/obj/item/organ/internal)
 
+/mob/living/brain/proc/on_container_login(obj/item/organ/internal/container)
+	container.update_icon()
+
 /mob/living/brain/Login()
 	. = ..()
 	var/obj/item/organ/internal/container = get_container()
 	if(istype(container))
-		var/obj/item/organ/internal/brain_interface/interface = container
-		if(istype(interface))
-			interface.locked = TRUE
-		container.update_icon()
+		on_container_login(container)
 
 /mob/living/brain/proc/is_in_interface()
 	var/container = get_container()
-	return istype(container, /obj/item/organ/internal/brain_interface) || istype(container, /obj/item/organ/internal/brain/robotic)
+	return istype(container, /obj/item/organ/internal/brain/robotic)
 
 /mob/living/brain/can_emote(emote_type, show_message)
 	return is_in_interface() && ..()
@@ -99,8 +94,10 @@
 			emp_damage += rand(0,10)
 	emp_damage = clamp(emp_damage, 0, max_emp_damage)
 
-/mob/living/brain/handle_regular_status_updates() // Status & health update, are we dead or alive etc.
+/mob/living/brain/handle_regular_status_updates() // Status & health update, are we dead or alive, can we communicate, etc.
 	. = ..()
+	if(emp_damage || stat == DEAD || !is_in_interface())
+		SET_STATUS_MAX(src, STAT_SILENCE, 2)
 	if(stat == DEAD || !isSynthetic())
 		emp_damage = 0
 		return

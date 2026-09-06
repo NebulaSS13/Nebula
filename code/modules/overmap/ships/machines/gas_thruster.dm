@@ -1,6 +1,6 @@
 /obj/machinery/atmospherics/unary/engine
 	name = "rocket nozzle"
-	desc = "Simple rocket nozzle, expelling gas at hypersonic velocities to propell the ship."
+	desc = "Simple rocket nozzle, expelling gas at hypersonic velocities to propel the ship."
 	icon = 'icons/obj/ship_engine.dmi'
 	icon_state = "nozzle"
 	layer = STRUCTURE_LAYER
@@ -32,8 +32,8 @@
 	else
 		z_flags &= ~ZMM_MANGLE_PLANES
 
-/obj/machinery/atmospherics/unary/engine/attackby(obj/item/I, mob/user)
-	if(IS_MULTITOOL(I) && !panel_open)
+/obj/machinery/atmospherics/unary/engine/attackby(obj/item/used_item, mob/user)
+	if(IS_MULTITOOL(used_item) && !panel_open)
 		var/datum/extension/ship_engine/engine = get_extension(src, /datum/extension/ship_engine)
 		if(engine.sync_to_ship())
 			to_chat(user, SPAN_NOTICE("\The [src] emits a ping as it syncs its controls to a nearby ship."))

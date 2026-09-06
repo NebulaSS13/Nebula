@@ -6,6 +6,9 @@
 	atom_damage_type = BURN
 	damage_flags = 0
 	nodamage = 1
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/ion
+	hitsound_non_mob = 'sound/weapons/searwall.ogg'
+	hitsound = 'sound/weapons/ionrifle.ogg'
 	var/heavy_effect_range = 1
 	var/light_effect_range = 2
 
@@ -51,6 +54,7 @@
 	atom_damage_type = BURN
 	damage_flags = 0
 	nodamage = 1
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/monochrome_laser
 	var/firing_temperature = 300
 
 /obj/item/projectile/temp/on_hit(var/atom/target, var/blocked = 0)//These two could likely check temp protection on the mob
@@ -59,28 +63,6 @@
 		M.bodytemperature = firing_temperature
 	return 1
 
-/obj/item/projectile/meteor
-	name = "meteor"
-	icon = 'icons/obj/meteor.dmi'
-	icon_state = "smallf"
-	damage = 0
-	atom_damage_type = BRUTE
-	nodamage = 1
-
-/obj/item/projectile/meteor/Bump(var/atom/A, forced=0)
-	if(!istype(A))
-		return
-	if(A == firer)
-		forceMove(A.loc)
-		return
-	A.explosion_act(2)
-	playsound(src.loc, 'sound/effects/meteorimpact.ogg', 40, 1)
-	for(var/mob/M in range(10, src))
-		if(!M.stat && !isAI(M))
-			shake_camera(M, 3, 1)
-	qdel(src)
-	return TRUE
-
 /obj/item/projectile/energy/floramut
 	name = "alpha somatoray"
 	icon_state = "energy"
@@ -88,6 +70,7 @@
 	damage = 0
 	atom_damage_type = TOX
 	nodamage = 1
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/monochrome_laser
 
 /obj/item/projectile/energy/floramut/on_hit(var/atom/target, var/blocked = 0)
 	if(!isliving(target))
@@ -131,6 +114,7 @@
 	damage = 0
 	atom_damage_type = TOX
 	nodamage = 1
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/monochrome_laser
 
 /obj/item/projectile/energy/florayield/on_hit(var/atom/target, var/blocked = 0)
 	if(!isliving(target))
@@ -141,15 +125,6 @@
 			M.adjust_nutrition(30)
 	else
 		M.show_message(SPAN_NOTICE("The radiation beam dissipates harmlessly through your body."))
-
-
-/obj/item/projectile/beam/mindflayer
-	name = "flayer ray"
-
-/obj/item/projectile/beam/mindflayer/on_hit(var/atom/target, var/blocked = 0)
-	if(ishuman(target))
-		var/mob/living/human/M = target
-		ADJ_STATUS(M, STAT_CONFUSE, rand(5,8))
 
 /obj/item/projectile/chameleon
 	name = "bullet"
@@ -206,5 +181,5 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		to_chat(target, SPAN_WARNING("You feel a wave of heat wash over you!"))
-		L.adjust_fire_stacks(rand(5,8))
-		L.IgniteMob()
+		L.adjust_fire_intensity(rand(5,8))
+		L.ignite_fire()

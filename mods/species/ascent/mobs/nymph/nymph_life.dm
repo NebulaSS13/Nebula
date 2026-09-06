@@ -1,26 +1,3 @@
-
-/mob/living/simple_animal/alien/kharmaan/handle_regular_hud_updates()
-	. = ..()
-	if(!.)
-		return
-	var/datum/hud/ascent_nymph/nymph_hud = hud_used
-	if(!istype(nymph_hud))
-		return
-	if(nymph_hud.food)
-		switch(nutrition)
-			if(450 to INFINITY)				nymph_hud.food.icon_state = "nutrition0"
-			if(350 to 450)					nymph_hud.food.icon_state = "nutrition1"
-			if(250 to 350)					nymph_hud.food.icon_state = "nutrition2"
-			if(150 to 250)					nymph_hud.food.icon_state = "nutrition3"
-			else							nymph_hud.food.icon_state = "nutrition4"
-	if(nymph_hud.drink)
-		switch(hydration)
-			if(450 to INFINITY)				nymph_hud.drink.icon_state = "hydration0"
-			if(350 to 450)					nymph_hud.drink.icon_state = "hydration1"
-			if(250 to 350)					nymph_hud.drink.icon_state = "hydration2"
-			if(150 to 250)					nymph_hud.drink.icon_state = "hydration3"
-			else							nymph_hud.drink.icon_state = "hydration4"
-
 /mob/living/simple_animal/alien/kharmaan/handle_nutrition_and_hydration()
 	. = ..()
 	// Generate some crystals over time.
@@ -61,23 +38,22 @@
 		return
 
 	molt = min(molt + 1, 5)
-	var/mob/living/simple_animal/alien/kharmaan/nymph = usr
-	nymph.visible_message("\icon[nymph] [nymph] begins to shimmy and shake out of its old skin.")
+	visible_message("\icon[src] [src] begins to shimmy and shake out of its old skin.")
 	if(molt == 5)
-		if(do_after(nymph, 10 SECONDS, nymph, FALSE))
-			var/mob/living/human/H = new(get_turf(usr), SPECIES_MANTID_ALATE)
-			H.set_gyne_lineage(nymph.get_gyne_lineage())
-			H.real_name = "[random_id(/decl/species/mantid, 10000, 99999)] [H.get_gyne_name()]"
-			H.nutrition = nymph.nutrition * 0.25 // Homgry after molt.
-			nymph.mind.transfer_to(H)
-			qdel(nymph)
+		if(do_after(src, 10 SECONDS, src, FALSE))
+			var/mob/living/human/H = new(get_turf(src), /decl/species/mantid::uid)
+			set_gyne_lineage(H, get_gyne_lineage(H))
+			H.real_name = "[random_id(/decl/species/mantid, 10000, 99999)] [get_gyne_name(H)]"
+			H.nutrition = nutrition * 0.25 // Homgry after molt.
+			mind.transfer_to(H)
+			qdel(src)
 			H.visible_message("\icon[H] [H] emerges from its molt as a new alate.")
 			new/obj/item/ascent_molt(get_turf(src))
 		else
-			nymph.visible_message("\icon[nymph] [nymph] abruptly stops molting.")
+			visible_message("\icon[src] [src] abruptly stops molting.")
 		return
 
-	if(do_after(nymph, 5 SECONDS, nymph, FALSE))
+	if(do_after(src, 5 SECONDS, src, FALSE))
 		var/matrix/M = matrix()
 		M.Scale(1 + (molt / 10))
 		animate(src, transform = M, time = 2, easing = QUAD_EASING)
@@ -88,4 +64,4 @@
 		new /obj/item/ascent_molt(get_turf(src))
 
 	else
-		nymph.visible_message("\icon[nymph] [nymph] abruptly stops molting.")
+		visible_message("\icon[src] [src] abruptly stops molting.")

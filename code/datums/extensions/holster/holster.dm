@@ -73,16 +73,16 @@
 		to_chat(user, SPAN_WARNING("You need an empty hand to draw \the [holstered]!"))
 		return 1
 	var/using_intent_preference = user.client ? user.client.get_preference_value(/datum/client_preference/holster_on_intent) == PREF_YES : FALSE
-	if(avoid_intent || (using_intent_preference && user.a_intent != I_HELP))
+	if(avoid_intent || (using_intent_preference && !user.check_intent(I_FLAG_HELP)))
 		var/sound_vol = 25
-		if(user.a_intent == I_HURT)
+		if(user.check_intent(I_FLAG_HARM))
 			sound_vol = 50
 			if(istype(holstered, /obj/item/gun))
 				var/obj/item/gun/G = holstered
 				G.check_accidents(user)
 				if(G.safety() && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //Experienced shooter will disable safety before shooting.
 					G.toggle_safety(user)
-			usr.visible_message(
+			user.visible_message(
 				"<span class='danger'>\The [user] draws \the [holstered], ready to go!</span>",
 				"<span class='warning'>You draw \the [holstered], ready to go!</span>"
 				)
@@ -206,7 +206,7 @@
 	for(var/obj/item/thing in accessories)
 		var/datum/extension/holster/holster = get_extension(thing, /datum/extension/holster)
 		if(holster?.holstered)
-			LAZYADD(., GET_DECL(/decl/interaction_handler/unholster_accessory))
+			LAZYADD(., /decl/interaction_handler/unholster_accessory)
 
 /obj/item/clothing/get_quick_interaction_handler(mob/user)
 	if(!(. = ..()))

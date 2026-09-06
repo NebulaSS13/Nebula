@@ -1,6 +1,6 @@
 /datum/unit_test/movement
 	name = "MOVEMENT template"
-	template = /datum/unit_test/movement
+	abstract_type = /datum/unit_test/movement
 	async = 0
 
 /datum/unit_test/movement/force_move_shall_trigger_crossed_when_entering_turf

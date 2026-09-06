@@ -3,12 +3,13 @@
 	desc               = "A stretch of inlaid sections of flexible linoleum."
 	icon               = 'icons/turf/flooring/linoleum.dmi'
 	icon_base          = "lino"
-	can_paint          = 1
+	can_paint          = TRUE
 	build_type         = /obj/item/stack/tile/linoleum
 	flooring_flags     = TURF_REMOVE_SCREWDRIVER
 	footstep_type      = /decl/footsteps/tiles
 	force_material     = /decl/material/solid/organic/plastic
 	constructed        = TRUE
+	uid                = "floor_lino"
 
 /decl/flooring/crystal
 	name               = "crystal flooring"
@@ -20,6 +21,7 @@
 	color              = "#00ffe1"
 	force_material     = /decl/material/solid/gemstone/crystal
 	constructed        = TRUE
+	uid                = "floor_crystal"
 
 /decl/flooring/glass
 	name               = "glass flooring"
@@ -37,6 +39,7 @@
 	z_flags            = ZM_MIMIC_DEFAULTS
 	force_material     = /decl/material/solid/glass
 	constructed        = TRUE
+	uid                = "floor_glass"
 
 /decl/flooring/glass/boro
 	name               = "borosilicate glass flooring"
@@ -44,6 +47,7 @@
 	color              = GLASS_COLOR_SILICATE
 	damage_temperature = T0C + 4000
 	force_material     = /decl/material/solid/glass/borosilicate
+	uid                = "floor_glass_boro"
 
 /decl/flooring/pool
 	name               = "pool floor"
@@ -57,6 +61,7 @@
 	force_material     = /decl/material/solid/stone/ceramic
 	constructed        = TRUE
 	gender             = NEUTER
+	uid                = "floor_pool"
 
 /decl/flooring/woven
 	name               = "woven floor"
@@ -71,12 +76,13 @@
 	force_material     = /decl/material/solid/organic/plantmatter/grass/dry
 	constructed        = TRUE
 	gender             = NEUTER
+	uid                = "floor_woven"
 
 /decl/flooring/straw
 	name               = "straw floor"
 	desc               = "A thick layer of straw, suitable for livestock."
-	icon               = 'icons/turf/flooring/wildgrass.dmi' // temporary, replace with better icon at some point
-	icon_base          = "wildgrass"
+	icon               = 'icons/turf/flooring/straw.dmi'
+	icon_base          = "straw"
 	has_base_range     = null
 	icon_edge_layer    = FLOOR_EDGE_GRASS_WILD
 	damage_temperature = T0C+80
@@ -86,3 +92,4 @@
 	force_material     = /decl/material/solid/organic/plantmatter/grass/dry
 	constructed        = TRUE
 	gender             = NEUTER
+	uid                = "floor_straw"

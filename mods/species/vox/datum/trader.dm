@@ -61,17 +61,17 @@
 
 /datum/trader/ship/vox/New()
 	speech[TRADER_HAIL_SILICON] = "Hello metal thing! You trade metal for things?"
-	speech[TRADER_HAIL_START + SPECIES_HUMAN] = "Hello hueman! Kiikikikiki! " + TRADER_TOKEN_MOB + " trade with us, yes? Good!"
-	visited_vox_speech[TRADER_HAIL_START + SPECIES_HUMAN] = "Friend of it is friend of all Shoal! " + TRADER_TOKEN_MOB + " you trade now!"
-	visited_vox_speech[TRADER_HAIL_START + SPECIES_VOX] = "SKREEEE! May the Shoal make this trade good, " + TRADER_TOKEN_MOB + "!"
+	speech[TRADER_HAIL_START + /decl/species/human::uid] = "Hello hueman! Kiikikikiki! " + TRADER_TOKEN_MOB + " trade with us, yes? Good!"
+	visited_vox_speech[TRADER_HAIL_START + /decl/species/human::uid] = "Friend of it is friend of all Shoal! " + TRADER_TOKEN_MOB + " you trade now!"
+	visited_vox_speech[TRADER_HAIL_START + /decl/species/vox::uid] = "SKREEEE! May the Shoal make this trade good, " + TRADER_TOKEN_MOB + "!"
 	..()
 
 /datum/trader/ship/vox/hail(var/mob/user)
 	if(ishuman(user))
 		var/mob/living/human/H = user
 		if(H.species)
-			switch(H.species.name)
-				if(SPECIES_VOX)
+			switch(H.species.uid)
+				if(/decl/species/vox::uid)
 					disposition = 1000
 					hailed_vox = TRUE
 					speech = visited_vox_speech
@@ -88,5 +88,5 @@
 		. *= 2
 
 /datum/trader/ship/clothingshop/New()
-	speech[TRADER_HAIL_START + SPECIES_VOX] = "Well hello, sir! I don't believe we have any clothes that fit you... but you can still look!"
+	speech[TRADER_HAIL_START + /decl/species/vox::uid] = "Well hello, sir! I don't believe we have any clothes that fit you... but you can still look!"
 	..()

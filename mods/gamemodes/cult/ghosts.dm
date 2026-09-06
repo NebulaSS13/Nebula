@@ -88,7 +88,7 @@
 		return
 
 	var/num_doodles = 0
-	for(var/obj/effect/decal/cleanable/blood/writing/W in T)
+	for(var/obj/effect/decal/cleanable/blood/writing/writing in T)
 		num_doodles++
 	if(num_doodles > 4)
 		to_chat(src, "<span class='warning'>There is no space to write on!</span>")
@@ -124,15 +124,15 @@
 			message += "-"
 			to_chat(src, "<span class='warning'>You ran out of blood to write with!</span>")
 
-		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
-		W.basecolor = doodle_color
-		W.update_icon()
-		W.message = message
-		W.add_hiddenprint(src)
+		var/obj/effect/decal/cleanable/blood/writing/writing = new(T)
+		writing.basecolor = doodle_color
+		writing.update_icon()
+		writing.message = message
+		writing.add_hiddenprint(src)
 		if(!bloodless)
-			W.visible_message("<span class='warning'>Invisible fingers crudely paint something in blood on \the [T].</span>")
+			writing.visible_message("<span class='warning'>Invisible fingers crudely paint something in blood on \the [T].</span>")
 		else
-			W.visible_message("<span class='warning'>Blood appears out of nowhere as invisible fingers crudely paint something on \the [T].</span>")
+			writing.visible_message("<span class='warning'>Blood appears out of nowhere as invisible fingers crudely paint something on \the [T].</span>")
 
 		log_admin("[src] ([src.key]) used ghost magic to write '[message]' - [x]-[y]-[z]")
 

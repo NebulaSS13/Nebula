@@ -33,23 +33,20 @@
 	die()
 	return TRUE
 
-/obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
+/obj/effect/spider/attackby(var/obj/item/used_item, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
-	if(W.attack_verb.len)
-		visible_message("<span class='warning'>\The [src] has been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
-	else
-		visible_message("<span class='warning'>\The [src] has been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
+	visible_message("<span class='warning'>\The [src] has been [used_item.pick_attack_verb()] with \the [used_item][(user ? " by [user]." : ".")]</span>")
 
-	var/damage = W.get_attack_force(user) / 4
+	var/damage = used_item.expend_attack_force(user) / 4
 
-	if(W.edge)
+	if(used_item.has_edge())
 		damage += 5
 
-	if(IS_WELDER(W))
-		var/obj/item/weldingtool/WT = W
+	if(IS_WELDER(used_item))
+		var/obj/item/weldingtool/welder = used_item
 
-		if(WT.weld(0, user))
+		if(welder.weld(0, user))
 			damage = 15
 			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
 
@@ -194,7 +191,7 @@
 	stop_automove()
 	. = ..()
 
-/obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)
+/obj/effect/spider/spiderling/attackby(var/obj/item/used_item, var/mob/user)
 	. = ..()
 	if(current_health > 0)
 		disturbed()

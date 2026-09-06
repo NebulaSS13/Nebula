@@ -51,7 +51,7 @@
 	take_damage(TT.speed * w_class)
 
 /obj/item/paper_plane/attack_self(mob/user)
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		return crumple(user)
 	return unfold(user)
 
@@ -77,6 +77,7 @@
 /decl/interaction_handler/make_paper_plane
 	name = "Fold Into Paper Plane"
 	expected_target_type = /obj/item/paper
+	examine_desc = "make a paper plane"
 
 /decl/interaction_handler/make_paper_plane/is_possible(obj/item/paper/target, mob/user, obj/item/prop)
 	return ..() && !target.is_crumpled
@@ -91,4 +92,4 @@
 
 /obj/item/paper/get_alt_interactions(mob/user)
 	. = ..()
-	LAZYDISTINCTADD(., /decl/interaction_handler/make_paper_plane)
+	LAZYADD(., /decl/interaction_handler/make_paper_plane)

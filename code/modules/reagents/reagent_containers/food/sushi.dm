@@ -26,7 +26,7 @@
 			fish_type = "tofu"
 
 		if(topping.reagents)
-			topping.reagents.trans_to(src, topping.reagents.total_volume)
+			topping.reagents.trans_to(src, REAGENT_TOTAL_VOLUME(topping.reagents))
 
 		var/mob/M = topping.loc
 		if(istype(M)) M.drop_from_inventory(topping)
@@ -35,7 +35,7 @@
 	if(istype(rice))
 		if(rice.reagents)
 			rice.reagents.trans_to(src, 1)
-		if(!rice.reagents || !rice.reagents.total_volume)
+		if(!rice.reagents || !REAGENT_TOTAL_VOLUME(rice.reagents))
 			var/mob/M = rice.loc
 			if(istype(M)) M.drop_from_inventory(rice)
 			qdel(rice)
@@ -82,34 +82,33 @@
 		adding += image(icon = icon, icon_state = "sashimi", pixel_x = offset, pixel_y = offset)
 	add_overlay(adding)
 
-/obj/item/food/sashimi/attackby(var/obj/item/I, var/mob/user)
+/obj/item/food/sashimi/attackby(var/obj/item/used_item, var/mob/user)
 	if(!(locate(/obj/structure/table) in loc))
 		return ..()
 
 	// Add more slices.
-	if(istype(I, /obj/item/food/sashimi))
-		var/obj/item/food/sashimi/other_sashimi = I
+	if(istype(used_item, /obj/item/food/sashimi))
+		var/obj/item/food/sashimi/other_sashimi = used_item
 		if(slices + other_sashimi.slices > 5)
-			to_chat(user, "<span class='warning'>Show some restraint, would you?</span>")
+			to_chat(user, SPAN_WARNING("Show some restraint, would you?"))
 			return TRUE
-		if(!user.try_unequip(I))
+		if(!user.try_unequip(used_item))
 			return TRUE
 		slices += other_sashimi.slices
 		bitesize = slices
 		update_icon()
-		if(I.reagents)
-			I.reagents.trans_to(src, I.reagents.total_volume)
-		qdel(I)
+		if(used_item.reagents)
+			used_item.reagents.trans_to(src, REAGENT_TOTAL_VOLUME(used_item.reagents))
+		qdel(used_item)
 		return TRUE
 
 	// Make sushi.
-	if(istype(I, /obj/item/food/boiledrice))
-		if(slices > 1)
-			to_chat(user, "<span class='warning'>Putting more than one slice of fish on your sushi is just greedy.</span>")
-		else
-			if(!user.try_unequip(I))
-				return TRUE
-			new /obj/item/food/sushi(get_turf(src), null, TRUE, I, src)
+	if(istype(used_item, /obj/item/food/boiledrice))
+		if(!user.try_unequip(used_item))
+			return TRUE
+		var/obj/item/food/boiledrice/used_rice = used_item
+		if(used_rice.try_make_sushi(src, user))
+			return TRUE
 		return TRUE
 	. = ..()
 
@@ -125,47 +124,45 @@
 				meat.set_meat_name(fish_type)
 
  // Used for turning rice into sushi.
-/obj/item/food/boiledrice/attackby(var/obj/item/I, var/mob/user)
-	if((locate(/obj/structure/table) in loc))
-		if(istype(I, /obj/item/food/sashimi))
-			var/obj/item/food/sashimi/sashimi = I
-			if(sashimi.slices > 1)
-				to_chat(user, "<span class='warning'>Putting more than one slice of fish on your sushi is just greedy.</span>")
-			else
-				new /obj/item/food/sushi(get_turf(src), null, TRUE, src, I)
-			return TRUE
-		var/static/list/sushi_types = list(
+/obj/item/food/boiledrice/attackby(var/obj/item/used_item, var/mob/user)
+	if(try_make_sushi(used_item, user, reference_item = src)) // since we're the thing being clicked, we want to be the reference item
+		return TRUE
+	return ..()
+
+// Used for turning other food into sushi.
+/obj/item/food/boiledrice/resolve_attackby(atom/attacked_object, mob/user, click_params)
+	if(try_make_sushi(attacked_object, user))
+		return TRUE
+	return ..()
+
+// reference_item is the item whose loc and pixel offsets we're using
+/obj/item/food/boiledrice/proc/try_make_sushi(obj/item/food/used_item, mob/user, obj/item/reference_item = used_item)
+	var/static/list/non_fish_sushi_typecache
+	if(!non_fish_sushi_typecache)
+		non_fish_sushi_typecache = typecacheof(list(
 			/obj/item/food/friedegg,
 			/obj/item/food/tofu,
 			/obj/item/food/butchery/cutlet,
-			/obj/item/food/butchery/cutlet/raw,
 			/obj/item/food/spider,
 			/obj/item/food/butchery/meat/chicken
-		)
-		if(is_type_in_list(I, sushi_types))
-			new /obj/item/food/sushi(get_turf(src), null, TRUE, src, I)
+		))
+	// before you get confused like i did: yes, raw chicken sushi exists
+	// it's called torisashi and it's... dubiously safe
+	// raw beef could also be used i guess, like tataki or etc, or carpaccio/crudo instead of sashimi
+	// you could just check the cooked_food var for non-fish butchery items but i decided against it
+	if(!used_item || !(locate(/obj/structure/table) in reference_item.loc))
+		return FALSE
+	if(istype(used_item, /obj/item/food/sashimi))
+		var/obj/item/food/sashimi/used_sashimi = used_item
+		if(used_sashimi.slices > 1)
+			to_chat(user, SPAN_WARNING("Putting more than one slice of fish on your sushi is just greedy."))
 			return TRUE
-	. = ..()
-// Used for turning other food into sushi.
-// TODO: maybe make these resolve_attackby overrides on boiledrice instead?
-/obj/item/food/friedegg/attackby(var/obj/item/I, var/mob/user)
-	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), null, TRUE, I, src)
-		return TRUE
-	. = ..()
-/obj/item/food/tofu/attackby(var/obj/item/I, var/mob/user)
-	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), null, TRUE, I, src)
-		return TRUE
-	. = ..()
-/obj/item/food/butchery/cutlet/raw/attackby(var/obj/item/I, var/mob/user)
-	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), null, TRUE, I, src)
-		return TRUE
-	. = ..()
-/obj/item/food/butchery/cutlet/attackby(var/obj/item/I, var/mob/user)
-	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/food/boiledrice))
-		new /obj/item/food/sushi(get_turf(src), null, TRUE, I, src)
-		return TRUE
-	. = ..()
-// End non-fish sushi.
+	else if(!is_type_in_typecache(used_item, non_fish_sushi_typecache))
+		return FALSE
+	var/obj/item/food/sushi/result = new /obj/item/food/sushi(get_turf(reference_item), null, TRUE, src, used_item)
+	// copy offsets from the item on the table, so it doesn't jump around
+	// todo: a helper for this that takes into account center_of_mass?
+	result.pixel_x = reference_item.pixel_x
+	result.pixel_y = reference_item.pixel_y
+	result.pixel_z = reference_item.pixel_z
+	return TRUE

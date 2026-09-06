@@ -38,18 +38,6 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	long_range   = TRUE
 
 ////////////////////////////////////////////////////////////////////////////////////////
-// Fax Machine Quick-Dial file
-////////////////////////////////////////////////////////////////////////////////////////
-/datum/computer_file/data/fax_quick_dial
-	filetype = "FQD"
-
-/datum/computer_file/data/fax_quick_dial/proc/save_quick_dial(var/list/quick_dial_list)
-	stored_data = json_encode(quick_dial_list)
-
-/datum/computer_file/data/fax_quick_dial/proc/load_quick_dial()
-	return json_decode(stored_data)
-
-////////////////////////////////////////////////////////////////////////////////////////
 // Fax Machine
 ////////////////////////////////////////////////////////////////////////////////////////
 /obj/machinery/faxmachine
@@ -135,10 +123,10 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/faxmachine/attackby(obj/item/I, mob/user)
+/obj/machinery/faxmachine/attackby(obj/item/used_item, mob/user)
 	if(istype(construct_state, /decl/machine_construction/default/panel_closed))
-		if(istype(I, /obj/item/paper) || istype(I, /obj/item/photo) || istype(I, /obj/item/paper_bundle))
-			insert_scanner_item(I, user)
+		if(istype(used_item, /obj/item/paper) || istype(used_item, /obj/item/photo) || istype(used_item, /obj/item/paper_bundle))
+			insert_scanner_item(used_item, user)
 			return TRUE
 	. = ..()
 
@@ -184,8 +172,6 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	LAZYSET(., "has_disk_drive",   !isnull(disk_reader))
 	LAZYSET(., "disk",             D)
 	LAZYSET(., "disk_name",        D?.name)
-	LAZYSET(., "disk_has_qd",      D?.contains_file_type("FQD")) //If the disk has a quick dial file
-	LAZYSET(., "disk_has_file",    (D?.free_blocks < D?.block_capacity))
 
 /obj/machinery/faxmachine/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nanoui/master_ui, datum/topic_state/state)
 	var/list/data = ui_data(user, ui_key)
@@ -263,9 +249,9 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 			to_chat(user, SPAN_WARNING("There's already a [scanner_item] in \the [src]!"))
 			return TOPIC_NOACTION
 		else
-			var/obj/item/I = user.get_active_held_item()
-			if(I)
-				insert_scanner_item(I, user)
+			var/obj/item/thing = user.get_active_held_item()
+			if(thing)
+				insert_scanner_item(thing, user)
 			else
 				to_chat(user, SPAN_WARNING("You're not holding anything!"))
 				return TOPIC_NOACTION
@@ -349,19 +335,19 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		return
 	return D
 
-/obj/machinery/faxmachine/proc/insert_scanner_item(var/obj/item/I, var/mob/user)
+/obj/machinery/faxmachine/proc/insert_scanner_item(var/obj/item/thing, var/mob/user)
 	if(!QDELETED(scanner_item))
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] already has something being scanned!"))
 		return FALSE
 
 	if(user)
-		to_chat(user, SPAN_NOTICE("You place \the [I] into \the [src]'s scanner."))
-		if(!user.try_unequip(I, src))
+		to_chat(user, SPAN_NOTICE("You place \the [thing] into \the [src]'s scanner."))
+		if(!user.try_unequip(thing, src))
 			return FALSE
 	else
-		I.dropInto(src)
-	scanner_item = I
+		thing.dropInto(src)
+	scanner_item = thing
 	update_ui()
 	return TRUE
 
@@ -556,30 +542,6 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	SSnano.update_uis(src)
 	update_icon()
 
-/**Check if the card we inserted has enough credentials to print on the target fax machine on the network. */
-/obj/machinery/faxmachine/proc/can_send_fax_to(var/network_tag, var/network_id, var/list/provided_access)
-	var/datum/extension/network_device/fax/sender = get_extension(src, /datum/extension/network_device)
-	var/datum/computer_network/sender_net         = sender?.get_network()
-	if(!sender_net)
-		return FALSE
-	if((network_id != sender_net.network_id) && !sender.has_internet_connection(network_id))
-		return FALSE
-
-	//Handle fake admin network addresses
-	var/target_uri = uppertext("[network_tag].[network_id]")
-	if(target_uri in global.using_map.map_admin_faxes)
-		var/list/admin_faxes    = LAZYACCESS(global.using_map.map_admin_faxes, target_uri)
-		var/list/required_access = LAZYACCESS(admin_faxes, "access")
-		return has_access(required_access, provided_access) //With access we can send faxes to the selected admin address
-
-	var/datum/computer_network/target_net
-	if(network_id != sender_net.network_id)
-		target_net = sender_net?.get_internet_connection(network_id)
-	else
-		target_net = sender_net
-	var/datum/extension/network_device/fax/target = target_net?.get_device_by_tag(network_tag)
-	return istype(target) && target.has_access(provided_access)
-
 /**Plays print animation async. */
 /obj/machinery/faxmachine/proc/on_printed_page()
 	flick("faxreceive", src)
@@ -716,21 +678,3 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	for(var/uri in global.using_map.map_admin_faxes)
 		var/list/contact_info = global.using_map.map_admin_faxes[uri]
 		add_quick_dial_contact(contact_info["name"], uri)
-
-/obj/machinery/faxmachine/get_alt_interactions(mob/user)
-	. = ..()
-	LAZYADD(., /decl/interaction_handler/fax_remove_card)
-
-/decl/interaction_handler/fax_remove_card
-	name = "Remove ID Card"
-	expected_target_type = /obj/machinery/faxmachine
-
-/decl/interaction_handler/fax_remove_card/is_possible(atom/target, mob/user, obj/item/prop)
-	. = ..()
-	if(.)
-		var/obj/machinery/faxmachine/fax = target
-		return !!(fax.card_reader?.get_inserted())
-
-/decl/interaction_handler/fax_remove_card/invoked(atom/target, mob/user, obj/item/prop)
-	var/obj/machinery/faxmachine/fax = target
-	fax.eject_card(user)

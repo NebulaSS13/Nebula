@@ -28,13 +28,13 @@
 			return
 		req_access = A.req_access.Copy()
 
-/obj/structure/displaycase/examine(mob/user, distance)
+/obj/structure/displaycase/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(contents.len)
-		to_chat(user, "Inside you see [english_list(contents)].")
+		. += "Inside you see [english_list(contents)]."
 
 	if(distance <= 1)
-		to_chat(user, "It looks [locked ? "locked. You can open it with your ID card" : "unlocked"].")
+		. += "It looks [locked ? "locked. You can open it with your ID card" : "unlocked"]."
 
 /obj/structure/displaycase/explosion_act(severity)
 	..()
@@ -92,9 +92,9 @@
 	for(var/atom/movable/AM in contents)
 		underlays += AM.appearance
 
-/obj/structure/displaycase/attackby(obj/item/W, mob/user)
+/obj/structure/displaycase/attackby(obj/item/used_item, mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	var/obj/item/card/id/id = W.GetIdCard()
+	var/obj/item/card/id/id = used_item.GetIdCard()
 	if(istype(id))
 		if(allowed(user))
 			locked = !locked
@@ -103,13 +103,13 @@
 			to_chat(user, "\The [src]'s card reader denies you access.")
 		return TRUE
 
-	if(isitem(W) && (!locked || destroyed))
-		if(!W.simulated || W.anchored)
+	if(isitem(used_item) && (!locked || destroyed))
+		if(!used_item.simulated || used_item.anchored)
 			return FALSE
 
-		if(user.try_unequip(W, src))
-			W.pixel_x = 0
-			W.pixel_y = -7
+		if(user.try_unequip(used_item, src))
+			used_item.pixel_x = 0
+			used_item.pixel_y = -7
 			update_icon()
 		return TRUE
 	. = ..()
@@ -133,7 +133,7 @@
 		update_icon()
 		return TRUE
 
-	else if(!destroyed && user.a_intent == I_HURT)
+	else if(!destroyed && user.check_intent(I_FLAG_HARM))
 		visible_message(SPAN_WARNING("[user] kicks \the [src]."), SPAN_WARNING("You kick \the [src]."))
 		take_damage(2)
 		return TRUE

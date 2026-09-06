@@ -108,13 +108,13 @@
 	desc = "This massive patty looks like poison. Beep."
 	icon = 'icons/obj/food/burgers/roburger.dmi'
 	filling_color = COLOR_GRAY80
-	volume = 100
+	chem_volume = 100
 	center_of_mass = @'{"x":16,"y":11}'
 	bitesize = 0.1
 
 /obj/item/food/roburgerbig/populate_reagents()
 	. = ..()
-	add_to_reagents(/decl/material/liquid/nanitefluid, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nanitefluid, REAGENT_MAXIMUM_VOLUME(reagents))
 
 /obj/item/food/xenoburger
 	name = "xenoburger"

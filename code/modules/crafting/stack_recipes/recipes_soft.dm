@@ -9,6 +9,7 @@
 	)
 	required_min_hardness       = 0
 	required_max_hardness       = MAT_VALUE_SOFT
+	validation_material         = /decl/material/solid/clay
 	crafting_extra_cost_factor  = 1 // No wastage for just resculpting materials.
 
 /decl/stack_recipe/soft/teapot
@@ -42,7 +43,11 @@
 	name                        = "brick"
 	name_plural                 = "bricks"
 	result_type                 = /obj/item/stack/material/brick
-	test_result_type            = /obj/item/stack/material/brick/clay
+
+/decl/stack_recipe/soft/bar
+	name                        = "bar"
+	name_plural                 = "bars"
+	result_type                 = /obj/item/stack/material/bar
 
 /decl/stack_recipe/soft/stack/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	var/obj/item/stack/S = ..()
@@ -62,13 +67,11 @@
 	name                        = "large lump"
 	name_plural                 = "large lumps"
 	result_type                 = /obj/item/stack/material/lump/large
-	test_result_type            = /obj/item/stack/material/lump/large/clay
 
 /decl/stack_recipe/soft/stack/small_lump
 	name                        = "small lump"
 	name_plural                 = "small lumps"
 	result_type                 = /obj/item/stack/material/lump
-	test_result_type            = /obj/item/stack/material/lump/clay
 
 /decl/stack_recipe/soft/crucible
 	result_type = /obj/item/chems/crucible
@@ -89,3 +92,20 @@
 /decl/stack_recipe/soft/mould/ingot
 	name = "mould, ingot"
 	result_type = /obj/item/chems/mould/ingot
+
+/decl/stack_recipe/soft/sculpture
+	abstract_type               = /decl/stack_recipe/soft/sculpture
+	one_per_turf                = TRUE
+	on_floor                    = TRUE
+	category                    = "sculptures"
+
+/decl/stack_recipe/soft/sculpture/snowman
+	result_type                 = /obj/structure/snowman
+
+/decl/stack_recipe/soft/sculpture/snowspider
+	result_type                 = /obj/structure/snowman/spider
+	difficulty                  = MAT_VALUE_HARD_DIY
+
+/decl/stack_recipe/soft/sculpture/snowbot
+	result_type                 = /obj/structure/snowman/bot
+	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE

@@ -23,7 +23,6 @@
 	var/minimum_character_age                 // List of species = age, if species is not here, it's auto-pass
 	var/ideal_character_age = 30              // Preferred character age when populate job at roundstart.
 	var/create_record = 1                     // Do we announce/make records for people who spawn on this job?
-	var/is_semi_antagonist = FALSE            // Whether or not this job is given semi-antagonist status.
 	var/account_allowed = 1                   // Does this job type come with a station account?
 	var/economic_power = 2                    // With how much does this job modify the initial account amount?
 	var/is_holy = FALSE                       // Can this role perform blessings?
@@ -34,7 +33,8 @@
 	var/announced = TRUE                      // If their arrival is announced on radio
 	var/latejoin_at_spawnpoints               // If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 	var/forced_spawnpoint                     // If set to a spawnpoint name, will use that spawn point for joining as this job.
-	var/hud_icon                              // icon used for Sec HUD overlay
+	var/hud_icon                             // icon used for secHUD overlay
+	var/hud_icon_state                        // icon state used for secHUD overlay
 
 	// A list of string IDs for keys to grant on join.
 	var/list/lock_keys = list()
@@ -69,7 +69,7 @@
 
 	if(type == /datum/job && global.using_map.default_job_type == type)
 		title = "Debug Job"
-		hud_icon = "hudblank"
+		hud_icon_state = "hudblank"
 		outfit_type = /decl/outfit/job/generic/scientist
 		autoset_department = TRUE
 
@@ -83,7 +83,9 @@
 		spawn_positions = 0
 
 	if(!hud_icon)
-		hud_icon = "hud[ckey(title)]"
+		hud_icon = global.using_map.hud_icons
+	if(!hud_icon_state)
+		hud_icon_state = "hud[ckey(title)]"
 
 	..()
 
@@ -170,8 +172,8 @@
 		remembered_info += "<b>Your account pin is:</b> [account.remote_access_pin]<br>"
 		remembered_info += "<b>Your account funds are:</b> [account.format_value_by_currency(account.money)]<br>"
 		if(account.transaction_log.len)
-			var/datum/transaction/T = account.transaction_log[1]
-			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.get_source_name()]<br>"
+			var/datum/transaction/transaction = account.transaction_log[1]
+			remembered_info += "<b>Your account was created:</b> [transaction.time], [transaction.date] at [transaction.get_source_name()]<br>"
 		if(cash_on_hand > 0)
 			var/decl/currency/cur = GET_DECL(global.using_map.default_currency)
 			remembered_info += "<b>Your cash on hand is:</b> [cur.format_value(cash_on_hand)]<br>"
@@ -232,13 +234,13 @@
 		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])].</span>")
 		return TRUE
 
-	var/decl/species/S = get_species_by_key(prefs.species)
+	var/decl/species/S = prefs.get_species_decl()
 	if(!is_species_allowed(S))
 		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
 		return TRUE
 
-	if(LAZYACCESS(minimum_character_age, S.get_root_species_name()) && (prefs.get_character_age() < minimum_character_age[S.get_root_species_name()]))
-		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_root_species_name()]].</span>")
+	if(LAZYACCESS(minimum_character_age, S.uid) && (prefs.get_character_age() < minimum_character_age[S.uid]))
+		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.uid]].</span>")
 		return TRUE
 
 	if(!S.check_background(src, prefs))
@@ -289,9 +291,9 @@
 	species_branch_rank_cache_[S] = list()
 	. = species_branch_rank_cache_[S]
 
-	var/spawn_branches = mil_branches.spawn_branches(S)
+	var/spawn_branches = global.using_map.spawn_branches(S)
 	for(var/branch_type in allowed_branches)
-		var/datum/mil_branch/branch = mil_branches.get_branch_by_type(branch_type)
+		var/datum/mil_branch/branch = global.using_map.get_branch_by_type(branch_type)
 		if(branch.name in spawn_branches)
 			if(!allowed_ranks || !(global.using_map.flags & MAP_HAS_RANK))
 				LAZYADD(., branch.name)
@@ -315,7 +317,7 @@
 	if(branch_name == "None")
 		return 0
 
-	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
+	var/datum/mil_branch/branch = global.using_map.get_branch(branch_name)
 
 	if(!branch)
 		PRINT_STACK_TRACE("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
@@ -340,7 +342,7 @@
 	if(branch_name == "None" || rank_name == "None")
 		return 0
 
-	var/datum/mil_rank/rank = mil_branches.get_rank(branch_name, rank_name)
+	var/datum/mil_rank/rank = global.using_map.get_rank(branch_name, rank_name)
 
 	if(!rank)
 		PRINT_STACK_TRACE("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
@@ -353,22 +355,21 @@
 
 //Returns human-readable list of branches this job allows.
 /datum/job/proc/get_branches()
-	var/list/res = list()
-	for(var/T in allowed_branches)
-		var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
-		res += B.name
-	return english_list(res)
+	. = list()
+	for(var/branch in allowed_branches)
+		var/datum/mil_branch/branch_datum = global.using_map.get_branch_by_type(branch)
+		. += branch_datum.name
+	return english_list(.)
 
 //Same as above but ranks
 /datum/job/proc/get_ranks(branch)
-	var/list/res = list()
-	var/datum/mil_branch/B = mil_branches.get_branch(branch)
-	for(var/T in allowed_ranks)
-		var/datum/mil_rank/R = T
-		if(B && !(initial(R.name) in B.ranks))
+	. = list()
+	var/datum/mil_branch/branch_datum = global.using_map.get_branch(branch)
+	for(var/datum/mil_rank/rank as anything in allowed_ranks)
+		if(branch_datum && !(initial(rank.name) in branch_datum.ranks))
 			continue
-		res |= initial(R.name)
-	return english_list(res)
+		. |= initial(rank.name)
+	return english_list(.)
 
 /datum/job/proc/get_description_blurb()
 	return description
@@ -377,17 +378,17 @@
 	if(!SSjobs.job_icons[title])
 		var/mob/living/human/dummy/mannequin/mannequin = get_mannequin("#job_icon")
 		if(mannequin)
-			var/decl/species/mannequin_species = get_species_by_key(global.using_map.default_species)
+			var/decl/species/mannequin_species = decls_repository.get_decl_by_id(global.using_map.default_species)
 			if(!is_species_allowed(mannequin_species))
 				// Don't just default to the first species allowed, pick one at random.
 				for(var/other_species in shuffle(get_playable_species()))
-					var/decl/species/other_species_decl = get_species_by_key(other_species)
+					var/decl/species/other_species_decl = decls_repository.get_decl_by_id(other_species)
 					if(is_species_allowed(other_species_decl))
 						mannequin_species = other_species_decl
 						break
 			if(!is_species_allowed(mannequin_species))
 				PRINT_STACK_TRACE("No allowed species allowed for job [title] ([type]), falling back to default!")
-			mannequin.change_species(mannequin_species.name)
+			mannequin.change_species(mannequin_species.uid)
 			dress_mannequin(mannequin)
 			mannequin.set_dir(SOUTH)
 			var/icon/preview_icon = getFlatIcon(mannequin)
@@ -399,8 +400,6 @@
 	var/list/reasons = list()
 	if(jobban_isbanned(calling_client, title))
 		reasons["You are jobbanned."] = TRUE
-	if(is_semi_antagonist && jobban_isbanned(calling_client, /decl/special_role/provocateur))
-		reasons["You are semi-antagonist banned."] = TRUE
 	if(!player_old_enough(calling_client))
 		reasons["Your player age is too low."] = TRUE
 	if(!is_position_available())
@@ -409,7 +408,7 @@
 		reasons["Your branch of service does not allow it."] = TRUE
 	else if(!isnull(allowed_ranks) && (!calling_client.prefs.ranks[title] || !is_rank_allowed(calling_client.prefs.branches[title], calling_client.prefs.ranks[title])))
 		reasons["Your rank choice does not allow it."] = TRUE
-	var/decl/species/S = get_species_by_key(calling_client.prefs.species)
+	var/decl/species/S = calling_client.prefs.get_species_decl()
 	if(S)
 		if(!is_species_allowed(S))
 			reasons["Your species choice does not allow it."] = TRUE
@@ -432,8 +431,6 @@
 		return FALSE
 	if(jobban_isbanned(calling_client, title))
 		return FALSE
-	if(is_semi_antagonist && jobban_isbanned(calling_client, /decl/special_role/provocateur))
-		return FALSE
 	if(!player_old_enough(calling_client))
 		return FALSE
 	return TRUE
@@ -443,7 +440,7 @@
 
 /datum/job/proc/get_roundstart_spawnpoint()
 	var/list/loc_list = list()
-	for(var/obj/abstract/landmark/start/sloc in global.landmarks_list)
+	for(var/obj/abstract/landmark/start/sloc in global.all_landmarks)
 		if(sloc.name != title)	continue
 		if(locate(/mob/living) in sloc.loc)	continue
 		loc_list += sloc
@@ -480,10 +477,9 @@
 				break
 	return spawnpos
 
+/// Used for applying "finishing touches" to characters, like additional role text or applying a /decl/special_role.
 /datum/job/proc/post_equip_job_title(var/mob/person, var/alt_title, var/rank)
-	if(is_semi_antagonist && person.mind)
-		var/decl/special_role/provocateur/provocateurs = GET_DECL(/decl/special_role/provocateur)
-		provocateurs.add_antagonist(person.mind)
+	return
 
 /datum/job/proc/get_alt_title_for(var/client/C)
 	return C.prefs.GetPlayerAltTitle(src)

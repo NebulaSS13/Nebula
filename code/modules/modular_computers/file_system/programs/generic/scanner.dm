@@ -10,7 +10,7 @@
 	category = PROG_UTIL
 	nanomodule_path = /datum/nano_module/program/scanner
 
-	var/using_scanner = 0	//Whether or not the program is synched with the scanner module.
+	var/using_scanner = 0	//Whether or not the program is synced with the scanner module.
 	var/data_buffer = ""	//Buffers scan output for saving/viewing.
 	var/scan_file_type = /datum/computer_file/data/text		//The type of file the data will be saved to.
 	var/list/metadata_buffer = list()
@@ -78,6 +78,7 @@
 
 		var/datum/computer_file/data/scan_file = new scan_file_type()
 		scan_file.stored_data = data_buffer
+		scan_file.metadata = metadata_buffer
 
 		// This saves the file, so no additional handling on the program's end is required.
 		view_file_browser(usr, "saving_file", scan_file_type, OS_WRITE_ACCESS, "Save scan file", scan_file)

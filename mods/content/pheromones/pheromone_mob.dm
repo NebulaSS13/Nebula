@@ -15,13 +15,13 @@
 	if(istype(gland) && !gland.is_broken())
 		return TRUE
 	var/obj/item/implant/pheromone/imp = locate() in get_organ(BP_HEAD)
-	if(imp && imp.implanted && !imp.malfunction)
+	if(imp?.implanted && !imp.malfunction)
 		return TRUE
 	return FALSE
 
 /obj/item/organ/internal/pheromone_gland
 	name = "pheromone gland"
-	desc = "A miscellenaous lump of flesh full of chemicals."
+	desc = "A miscellaneous lump of flesh full of chemicals."
 	icon_state = "stomach"
 	organ_tag = BP_PHEROMONE_GLAND
 	parent_organ = BP_CHEST

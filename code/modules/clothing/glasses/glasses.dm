@@ -87,7 +87,7 @@
 
 /obj/item/clothing/glasses/threedglasses
 	name = "3D glasses"
-	desc = "A long time ago, people used these glasses to makes images from screens threedimensional."
+	desc = "A long time ago, people used these glasses to makes images from screens three-dimensional."
 	icon = 'icons/clothing/eyes/glasses_3d.dmi'
 	body_parts_covered = 0
 

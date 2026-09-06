@@ -23,7 +23,7 @@
 
 /area/shaded_hills/inn/porch
 	name = "\improper Inn Porch"
-	interior_ambient_light_modifier = -0.3 // night is pitch-black on the porch
+	interior_ambient_light_modifier = -0.4 // night is pitch-black on the porch
 	sound_env = FOREST
 
 /area/shaded_hills/stable
@@ -42,7 +42,7 @@
 
 /area/shaded_hills/farmhouse/porch
 	name = "\improper Farmhouse Porch"
-	interior_ambient_light_modifier = -0.3 // night is pitch-black on the porch
+	interior_ambient_light_modifier = -0.4 // night is pitch-black on the porch
 	sound_env = FOREST
 
 /area/shaded_hills/slaughterhouse
@@ -68,7 +68,7 @@
 
 /area/shaded_hills/general_store/porch
 	name = "\improper General Store Porch"
-	interior_ambient_light_modifier = -0.3 // night is pitch-black on the porch
+	interior_ambient_light_modifier = -0.4 // night is pitch-black on the porch
 	sound_env = FOREST
 
 /area/shaded_hills/shrine

@@ -18,5 +18,5 @@
 	material = /decl/material/solid/organic/plastic
 
 /obj/item/utensil/spoon/wood
-	material = /decl/material/solid/organic/wood
-	color = /decl/material/solid/organic/wood::color
+	material = /decl/material/solid/organic/wood/oak
+	color = /decl/material/solid/organic/wood/oak::color

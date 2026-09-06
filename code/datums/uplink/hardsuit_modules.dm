@@ -39,10 +39,3 @@
 	desc = "A module capable of recharging your suit's power reserves, by tapping into an exposed, live wire."
 	item_cost = 48
 	path = /obj/item/rig_module/power_sink
-
-/datum/uplink_item/item/hardsuit_modules/laser_canon
-	name = "\improper Mounted Laser Cannon"
-	desc = "A module capable of draining your suit's power reserves in order to fire a shoulder mounted laser cannon."
-	item_cost = 64
-	path = /obj/item/rig_module/mounted/lcannon
-	antag_roles = list(/decl/special_role/mercenary)

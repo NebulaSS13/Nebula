@@ -5,7 +5,7 @@
 	var/list/existing_webs = list()
 	var/max_webs = 4
 	var/web_weave_time = 20 SECONDS
-	var/cooldown
+	var/organ_cooldown
 
 /obj/item/organ/external/groin/insectoid/mantid/gyne
 	max_webs = 8
@@ -19,13 +19,13 @@
 
 /obj/item/organ/external/groin/insectoid/mantid/refresh_action_button()
 	. = ..()
-	if(.)
-		action.button_icon_state = "weave-web-[cooldown ? "off" : "on"]"
+	if(. && istype(action))
+		action.button_icon_state = "weave-web-[organ_cooldown ? "off" : "on"]"
 		action.button?.update_icon()
 
 /obj/item/organ/external/groin/insectoid/mantid/attack_self(var/mob/user)
 	. = ..()
-	if(. && !cooldown)
+	if(. && !organ_cooldown)
 
 		if(!isturf(owner.loc))
 			to_chat(owner, SPAN_WARNING("You cannot use this ability in this location."))
@@ -41,7 +41,7 @@
 
 		playsound(user, 'mods/species/ascent/sounds/razorweb_hiss.ogg', 70)
 		owner.visible_message(SPAN_WARNING("\The [owner] separates their jaws and begins to weave a web of crystalline filaments..."))
-		cooldown = TRUE
+		organ_cooldown = TRUE
 		refresh_action_button()
 		addtimer(CALLBACK(src, PROC_REF(reset_cooldown)), web_weave_time)
 		if(do_after(owner, web_weave_time) && length(existing_webs) < max_webs)
@@ -52,27 +52,27 @@
 			web.owner = owner
 
 /obj/item/organ/external/groin/insectoid/mantid/proc/reset_cooldown()
-	cooldown = FALSE
+	organ_cooldown = FALSE
 	refresh_action_button()
 
 /obj/item/organ/external/head/insectoid/mantid
 	name = "crested head"
 	action_button_name = "Spit Razorweb"
 	default_action_type = /datum/action/item_action/organ/ascent
-	var/cooldown_time = 2.5 MINUTES
-	var/cooldown
+	var/organ_cooldown_time = 2.5 MINUTES
+	var/organ_cooldown
 
 /obj/item/organ/external/head/insectoid/mantid/refresh_action_button()
 	. = ..()
-	if(.)
-		action.button_icon_state = "shot-web-[cooldown ? "off" : "on"]"
+	if(. && istype(action))
+		action.button_icon_state = "shot-web-[organ_cooldown ? "off" : "on"]"
 		action.button?.update_icon()
 
 /obj/item/organ/external/head/insectoid/mantid/attack_self(var/mob/user)
 	. = ..()
 	if(.)
 
-		if(cooldown)
+		if(organ_cooldown)
 			to_chat(owner, SPAN_WARNING("Your filament channel hasn't refilled yet!"))
 			return
 
@@ -81,12 +81,12 @@
 			playsound(user, 'mods/species/ascent/sounds/razorweb.ogg', 100)
 			to_chat(owner, SPAN_WARNING("You spit up a wad of razorweb, ready to throw!"))
 			owner.toggle_throw_mode(TRUE)
-			cooldown = TRUE
+			organ_cooldown = TRUE
 			refresh_action_button()
-			addtimer(CALLBACK(src, PROC_REF(reset_cooldown)), cooldown_time)
+			addtimer(CALLBACK(src, PROC_REF(reset_cooldown)), organ_cooldown_time)
 		else
 			qdel(web)
 
 /obj/item/organ/external/head/insectoid/mantid/proc/reset_cooldown()
-	cooldown = FALSE
+	organ_cooldown = FALSE
 	refresh_action_button()

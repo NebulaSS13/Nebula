@@ -106,8 +106,8 @@
 		turn_on()
 	to_chat(user, "<span class='notice'>You switch \the [src] [on ? "on" : "off"].</span>")
 
-/obj/item/suit_cooling_unit/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W))
+/obj/item/suit_cooling_unit/attackby(obj/item/used_item, mob/user)
+	if(IS_SCREWDRIVER(used_item))
 		if(cover_open)
 			cover_open = 0
 			to_chat(user, "You screw the panel into place.")
@@ -117,14 +117,14 @@
 		update_icon()
 		return TRUE
 
-	if (istype(W, /obj/item/cell))
+	if (istype(used_item, /obj/item/cell))
 		if(cover_open)
 			if(cell)
 				to_chat(user, "There is a [cell] already installed here.")
 			else
-				if(!user.try_unequip(W, src))
+				if(!user.try_unequip(used_item, src))
 					return TRUE
-				cell = W
+				cell = used_item
 				to_chat(user, "You insert \the [cell].")
 		update_icon()
 		return TRUE
@@ -156,18 +156,15 @@
 		if(-INFINITY to 17)
 			add_overlay("[icon_state]-battery-5")
 
-/obj/item/suit_cooling_unit/examine(mob/user, distance)
+/obj/item/suit_cooling_unit/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(distance >= 1)
+	if(distance > 1)
 		return
-
 	if (on)
-		to_chat(user, "It's switched on and running.")
+		. += "It's switched on and running."
 	else
-		to_chat(user, "It is switched off.")
-
+		. += "It is switched off."
 	if (cover_open)
-		to_chat(user, "The panel is open.")
-
+		. += "The panel is open."
 	if (cell)
-		to_chat(user, "The charge meter reads [round(cell.percent())]%.")
+		. += "The charge meter reads [round(cell.percent())]%."

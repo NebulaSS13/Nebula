@@ -3,7 +3,7 @@
 	// Virtual object
 	// It's the one used to modify shit
 	var/range = 15
-	var/volume = 30
+	var/play_volume = 30
 	var/max_volume = 50
 	var/falloff = 2
 	var/apply_echo = 0
@@ -21,7 +21,7 @@
 	var/list/datum/sound_token/instrument/tokens = list()
 	var/list/seen_turfs
 
-/datum/sound_player/New(datum/real_instrument/where, datum/instrument/what)
+/datum/sound_player/New(obj/where, datum/instrument/what)
 	src.song = new (src, what)
 	src.actual_instrument = where
 	src.echo = global.musical_config.echo_default.Copy()
@@ -64,7 +64,7 @@
 		I.PrivLocateListeners(prior_turfs.Copy(), current_turfs.Copy())
 
 /datum/sound_player/proc/apply_modifications(sound/what, note_num, which_line, which_note) // You don't need to override this
-	what.volume = volume
+	what.volume = play_volume
 	what.falloff = falloff
 	if (global.musical_config.env_settings_available)
 		what.environment = global.musical_config.is_custom_env(src.virtual_environment_selected) ? src.env : src.virtual_environment_selected

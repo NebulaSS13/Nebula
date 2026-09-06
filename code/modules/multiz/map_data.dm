@@ -4,7 +4,6 @@
 	icon_state = "map_data"
 
 	var/height = 1     ///< The number of Z-Levels in the map.
-	var/turf/edge_type ///< What the map edge should be formed with. (null = world.turf)
 
 // If the height is more than 1, we mark all contained levels as connected.
 // This initializes immediately because it is an auxiliary effect specifically needed pre-SSatoms init.
@@ -19,8 +18,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/map_data)
 			z_levels.len = i
 		z_levels[i] = src
 
-	if (length(SSzcopy.zlev_maximums))
-		SSzcopy.calculate_zstack_limits()
+	SSzcopy.calculate_zstack_limits()
+
 	return ..()
 
 /obj/abstract/map_data/Destroy(forced)

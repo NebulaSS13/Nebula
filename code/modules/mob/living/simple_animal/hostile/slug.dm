@@ -23,21 +23,23 @@
 	try_destroy_surroundings = FALSE
 	can_escape_buckles = TRUE
 
-/datum/mob_controller/aggressive/slug/list_targets(var/dist = 7)
+/datum/mob_controller/aggressive/slug/valid_target(atom/A)
 	. = ..()
-	var/mob/living/simple_animal/hostile/slug/slug = body
-	if(istype(slug))
-		for(var/mob/living/M in .)
-			if(slug.check_friendly_species(M))
-				. -= M
+	if(.)
+		if(!ismob(A))
+			return FALSE
+		var/mob/living/simple_animal/hostile/slug/slug = body
+		if(slug.check_friendly_species(A))
+			return FALSE
 
 /mob/living/simple_animal/hostile/slug/proc/check_friendly_species(var/mob/living/M)
 	return istype(M) && M.faction == faction
 
-/mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/target, var/mob/living/initiator)
+/mob/living/simple_animal/hostile/slug/get_scooped(mob/living/target, mob/living/initiator, silent = FALSE)
 	if(target == initiator || check_friendly_species(initiator))
 		return ..()
-	to_chat(initiator, SPAN_WARNING("\The [src] wriggles out of your hands before you can pick it up!"))
+	if(!silent)
+		to_chat(initiator, SPAN_WARNING("\The [src] wriggles out of your hands before you can pick it up!"))
 
 /mob/living/simple_animal/hostile/slug/proc/attach(var/mob/living/human/H)
 	var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)

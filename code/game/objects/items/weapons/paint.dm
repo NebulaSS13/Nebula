@@ -6,11 +6,11 @@
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[10,20,30,60]"
-	volume = 60
+	chem_volume = 60
 	var/pigment
 
 /obj/item/chems/glass/bucket/paint/populate_reagents()
-	var/amt = reagents.maximum_volume
+	var/amt = REAGENT_MAXIMUM_VOLUME(reagents)
 	if(pigment)
 		amt = round(amt/2)
 		add_to_reagents(pigment, amt)

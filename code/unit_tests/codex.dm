@@ -1,5 +1,5 @@
 /datum/unit_test/codex_string_uniqueness
-	name = "CODEX:  All Codex Associated Strings Shall Be Unique"
+	name = "CODEX: All Codex Associated Strings Shall Be Unique"
 
 /datum/unit_test/codex_string_uniqueness/start_test()
 	var/list/failures = list()

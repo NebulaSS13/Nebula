@@ -45,8 +45,8 @@
 		return list()
 	return ..()
 
-/obj/machinery/smartfridge/proc/accept_check(var/obj/item/O)
-	if(istype(O,/obj/item/food/grown/) || istype(O,/obj/item/seeds/))
+/obj/machinery/smartfridge/proc/accept_check(var/obj/item/stocking_item)
+	if(istype(stocking_item,/obj/item/food/grown) || istype(stocking_item,/obj/item/seeds))
 		return 1
 	return 0
 
@@ -104,10 +104,10 @@
 		draw_state = "[icon_state]-top"
 
 	if(check_state_in_icon(draw_state, icon))
-		var/image/I = image(icon, draw_state)
-		I.pixel_z = 32
-		I.layer = ABOVE_WINDOW_LAYER
-		add_overlay(I)
+		var/image/overlay_image = image(icon, draw_state)
+		overlay_image.pixel_z = 32
+		overlay_image.layer = ABOVE_WINDOW_LAYER
+		add_overlay(overlay_image)
 
 	// Append our off state if needed.
 	if(stat & BROKEN)
@@ -116,9 +116,9 @@
 		icon_state = "[icon_state]-off"
 
 /obj/machinery/smartfridge/dismantle()
-	for(var/datum/stored_items/I in item_records)
-		while(I.amount > 0)
-			I.get_product(get_turf(src)) // They'd get dumped anyway, but this makes things GC properly.
+	for(var/datum/stored_items/stored_item in item_records)
+		while(stored_item.amount > 0)
+			stored_item.get_product(get_turf(src)) // They'd get dumped anyway, but this makes things GC properly.
 	..()
 
 /*******************
@@ -129,42 +129,42 @@
 	. = ..()
 	update_icon()
 
-/obj/machinery/smartfridge/attackby(var/obj/item/O, var/mob/user)
-	if(accept_check(O))
-		if(!user.try_unequip(O))
+/obj/machinery/smartfridge/attackby(var/obj/item/used_item, var/mob/user)
+	if(accept_check(used_item))
+		if(!user.try_unequip(used_item))
 			return TRUE
-		stock_item(O)
-		user.visible_message("<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", "<span class='notice'>You add \the [O] to \the [src].</span>")
+		stock_item(used_item)
+		user.visible_message("<span class='notice'>\The [user] has added \the [used_item] to \the [src].</span>", "<span class='notice'>You add \the [used_item] to \the [src].</span>")
 		update_icon()
 		return TRUE
 
-	if(O.storage)
+	if(used_item.storage)
 		var/plants_loaded = 0
-		for(var/obj/G in O.storage.get_contents())
-			if(accept_check(G) && O.storage.remove_from_storage(user, G, src, TRUE))
+		for(var/obj/G in used_item.storage.get_contents())
+			if(accept_check(G) && used_item.storage.remove_from_storage(user, G, src, TRUE))
 				plants_loaded++
 				stock_item(G)
-		O.storage.finish_bulk_removal()
+		used_item.storage.finish_bulk_removal()
 
 		if(plants_loaded)
-			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [O].</span>", "<span class='notice'>You load \the [src] with the contents of \the [O].</span>")
-			if(length(O.storage.get_contents()) > 0)
+			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [used_item].</span>", "<span class='notice'>You load \the [src] with the contents of \the [used_item].</span>")
+			if(length(used_item.storage.get_contents()) > 0)
 				to_chat(user, "<span class='notice'>Some items were refused.</span>")
 		return TRUE
 	return ..()
 
-/obj/machinery/smartfridge/proc/stock_item(var/obj/item/O)
-	for(var/datum/stored_items/I in item_records)
-		if(istype(O, I.item_path) && O.name == I.item_name)
-			stock(I, O)
+/obj/machinery/smartfridge/proc/stock_item(var/obj/item/stocking_item)
+	for(var/datum/stored_items/stored_item in item_records)
+		if(istype(stocking_item, stored_item.item_path) && stocking_item.name == stored_item.item_name)
+			stock(stored_item, stocking_item)
 			return
 
-	var/datum/stored_items/I = new/datum/stored_items(src, O.type, O.name)
-	dd_insertObjectList(item_records, I)
-	stock(I, O)
+	var/datum/stored_items/stored_item = new/datum/stored_items(src, stocking_item.type, stocking_item.name)
+	dd_insertObjectList(item_records, stored_item)
+	stock(stored_item, stocking_item)
 
-/obj/machinery/smartfridge/proc/stock(var/datum/stored_items/I, var/obj/item/O)
-	I.add_product(O)
+/obj/machinery/smartfridge/proc/stock(var/datum/stored_items/stored_item, var/obj/item/stocking_item)
+	stored_item.add_product(stocking_item)
 	SSnano.update_uis(src)
 
 /obj/machinery/smartfridge/interface_interact(mob/user)
@@ -187,10 +187,10 @@
 
 	var/list/items[0]
 	for (var/i=1 to length(item_records))
-		var/datum/stored_items/I = item_records[i]
-		var/count = I.get_amount()
+		var/datum/stored_items/stored_item = item_records[i]
+		var/count = stored_item.get_amount()
 		if(count > 0)
-			items.Add(list(list("display_name" = html_encode(capitalize(I.item_name)), "vend" = i, "quantity" = count)))
+			items.Add(list(list("display_name" = html_encode(capitalize(stored_item.item_name)), "vend" = i, "quantity" = count)))
 
 	if(items.len > 0)
 		data["contents"] = items
@@ -201,35 +201,30 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/smartfridge/Topic(href, href_list)
-	if(..()) return 0
-
-	var/mob/user = usr
-	var/datum/nanoui/ui = SSnano.get_open_ui(user, src, "main")
+/obj/machinery/smartfridge/OnTopic(mob/user, href_list)
+	if((. = ..()))
+		return
 
 	if(href_list["close"])
-		user.unset_machine()
-		ui.close()
-		return 0
+		return TOPIC_CLOSE
 
 	if(href_list["vend"])
 		var/index = text2num(href_list["vend"])
-		var/amount = text2num(href_list["amount"])
-		var/datum/stored_items/I = item_records[index]
-		var/count = I.get_amount()
+		var/datum/stored_items/stored_item = item_records[index]
+		var/count = stored_item.get_amount()
+		var/amount = clamp(text2num(href_list["amount"]), 0, count)
 
 		// Sanity check, there are probably ways to press the button when it shouldn't be possible.
-		if(count > 0)
-			if((count - amount) < 0)
-				amount = count
-			for(var/i = 1 to amount)
-				I.get_product(get_turf(src))
-				update_icon()
-				var/vend_state = "[icon_state]-vend"
-				if (check_state_in_icon(vend_state, icon)) //Show the vending animation if needed
-					flick(vend_state, src)
-		return 1
-	return 0
+		if(amount <= 0)
+			return TOPIC_REFRESH // you must be confused, we have none of that here!
+		for(var/i = 1 to amount)
+			stored_item.get_product(get_turf(src))
+			update_icon()
+			var/vend_state = "[icon_state]-vend"
+			if (check_state_in_icon(vend_state, icon)) //Show the vending animation if needed
+				flick(vend_state, src)
+		return TOPIC_REFRESH
+	return TOPIC_NOACTION
 
 /obj/machinery/smartfridge/proc/throw_item()
 	var/obj/throw_item = null
@@ -237,8 +232,8 @@
 	if(!target)
 		return 0
 
-	for(var/datum/stored_items/I in src.item_records)
-		throw_item = I.get_product(loc)
+	for(var/datum/stored_items/stored_item in src.item_records)
+		throw_item = stored_item.get_product(loc)
 		if(!QDELETED(throw_item))
 			break
 

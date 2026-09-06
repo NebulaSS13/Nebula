@@ -1,0 +1,13 @@
+#ifndef CONTENT_PACK_FISHING
+#define CONTENT_PACK_FISHING
+// BEGIN_INCLUDE
+#include "_fishing.dm"
+#include "area_fishing.dm"
+#include "fishing_bait.dm"
+#include "fishing_designs.dm"
+#include "fishing_line.dm"
+#include "fishing_recipes.dm"
+#include "fishing_rod.dm"
+#include "turf_fishing.dm"
+// END_INCLUDE
+#endif

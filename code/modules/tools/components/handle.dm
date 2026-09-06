@@ -1,7 +1,7 @@
 /obj/item/tool_component/handle
 	name               = "tool handle"
 	icon               = 'icons/obj/items/tool/components/tool_handle.dmi'
-	material           = /decl/material/solid/organic/wood
+	material           = /decl/material/solid/organic/wood/oak
 	abstract_type      = /obj/item/tool_component/handle
 
 /obj/item/tool_component/handle/short

@@ -42,7 +42,7 @@ SUBSYSTEM_DEF(shuttle)
 	while (working_shuttles.len)
 		var/datum/shuttle/shuttle = working_shuttles[working_shuttles.len]
 		working_shuttles.len--
-		if(shuttle.process_state && (shuttle.Process(wait, times_fired, src) == PROCESS_KILL))
+		if((shuttle.always_process || shuttle.process_state) && (shuttle.Process(wait, times_fired, src) == PROCESS_KILL) && !shuttle.always_process)
 			process_shuttles -= shuttle
 
 		if (MC_TICK_CHECK)
@@ -80,7 +80,7 @@ SUBSYSTEM_DEF(shuttle)
 			try_add_landmark_tag(shuttle_landmark_tag, O)
 			landmarks_still_needed -= shuttle_landmark_tag
 		else if(istype(shuttle_landmark, /obj/effect/shuttle_landmark/automatic)) //These find their sector automatically
-			O = global.overmap_sectors[num2text(shuttle_landmark.z)]
+			O = global.overmap_sectors[shuttle_landmark.z]
 			O ? O.add_landmark(shuttle_landmark, shuttle_landmark.shuttle_restricted) : (landmarks_awaiting_sector += shuttle_landmark)
 
 /datum/controller/subsystem/shuttle/proc/unregister_landmark(shuttle_landmark_tag)
@@ -125,13 +125,14 @@ SUBSYSTEM_DEF(shuttle)
 
 /datum/controller/subsystem/shuttle/proc/initialize_shuttle(var/shuttle_type, var/map_hash, var/list/add_args)
 	var/datum/shuttle/shuttle = shuttle_type
-	if(initial(shuttle.category) != shuttle_type)
-		var/list/shuttle_args = list(map_hash)
-		if(length(add_args))
-			shuttle_args += add_args
-		shuttle = new shuttle(arglist(shuttle_args))
-		shuttle_areas |= shuttle.shuttle_area
-		return shuttle
+	if(TYPE_IS_ABSTRACT(shuttle))
+		return null
+	var/list/shuttle_args = list(map_hash)
+	if(length(add_args))
+		shuttle_args += add_args
+	shuttle = new shuttle(arglist(shuttle_args))
+	shuttle_areas |= shuttle.shuttle_area
+	return shuttle
 
 /datum/controller/subsystem/shuttle/proc/hook_up_motherships(shuttles_list)
 	for(var/datum/shuttle/S in shuttles_list)

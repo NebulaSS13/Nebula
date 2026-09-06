@@ -83,7 +83,7 @@
 		var/obj/item/stack/medical/stack = locate(thing) in equipment
 		stack.synths = list(medicine)
 
-/obj/item/robot_module/medical/surgeon/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/medical/surgeon/respawn_consumable(var/mob/living/silicon/robot/robot, var/amount)
 	if(emag)
 		var/obj/item/chems/spray/PS = emag
 		PS.add_to_reagents(/decl/material/liquid/acid/polyacid, 2 * amount)
@@ -157,7 +157,7 @@
 		var/obj/item/stack/medical/stack = locate(thing) in equipment
 		stack.synths = list(medicine)
 
-/obj/item/robot_module/medical/crisis/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/medical/crisis/respawn_consumable(var/mob/living/silicon/robot/robot, var/amount)
 	var/obj/item/chems/syringe/S = locate() in equipment
 	if(S.mode == 2)
 		S.reagents.clear_reagents()

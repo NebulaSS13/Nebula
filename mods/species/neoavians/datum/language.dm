@@ -6,8 +6,8 @@
 	ask_verb = "rattles"
 	exclaim_verb = "calls"
 	colour = "alien"
-	key = "v"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "crow"
+	language_flags = LANG_FLAG_WHITELISTED
 	space_chance = 50
 	syllables = list(
 			"ca", "ra", "ma", "sa", "na", "ta", "la", "sha",
@@ -21,7 +21,7 @@
 		'mods/species/neoavians/sound/crow4.ogg'
 	)
 
-/decl/language/corvid/get_random_name(gender)
+/decl/language/corvid/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	. = capitalize((gender == FEMALE) ? pick(global.using_map.first_names_female) : pick(global.using_map.first_names_male))
 	. += " [pick(list("Albus","Corax","Corone","Meeki","Insularis","Orru","Sinaloae", "Enca", "Edithae", "Kubaryi"))]"
 	. += " [pick(list("Hyperion","Earth","Mars","Venus","Neith","Luna","Halo","Pandora","Neptune","Triton", "Haumea", "Eris", "Makemake"))]"
@@ -33,8 +33,8 @@
 	ask_verb = "chirrups"
 	exclaim_verb = "trills"
 	colour = "alien"
-	key = "i"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "avian"
+	language_flags = LANG_FLAG_WHITELISTED
 	space_chance = 50
 	syllables = list(
 			"ca", "ra", "ma", "sa", "na", "ta", "la", "sha", "scha", "a", "a",
@@ -42,7 +42,7 @@
 			"ci", "ri", "mi", "si", "ni", "ti", "li", "shi", "schi", "i", "i"
 		)
 
-/decl/language/neoavian/get_random_name(gender)
+/decl/language/neoavian/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	return ..(gender, 2, 4, 1.5)
 
 /decl/background_detail/heritage/neoavian

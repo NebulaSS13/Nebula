@@ -1,7 +1,7 @@
 //Lava Lamps: Because we're already stuck in the 70ies with those fax machines.
 /obj/item/flashlight/lamp/lava
 	name = "lava lamp"
-	desc = "A kitchy throwback decorative light. Noir Edition."
+	desc = "A kitschy throwback decorative light. Noir Edition."
 	icon = 'icons/obj/lighting/lavalamp.dmi'
 	icon_state = "lavalamp"
 	on = 0
@@ -22,32 +22,32 @@
 		add_overlay(I)
 
 /obj/item/flashlight/lamp/lava/red
-	desc = "A kitchy red decorative light."
+	desc = "A kitschy red decorative light."
 	light_color = COLOR_RED
 
 /obj/item/flashlight/lamp/lava/blue
-	desc = "A kitchy blue decorative light"
+	desc = "A kitschy blue decorative light"
 	light_color = COLOR_BLUE
 
 /obj/item/flashlight/lamp/lava/cyan
-	desc = "A kitchy cyan decorative light"
+	desc = "A kitschy cyan decorative light"
 	light_color = COLOR_CYAN
 
 /obj/item/flashlight/lamp/lava/green
-	desc = "A kitchy green decorative light"
+	desc = "A kitschy green decorative light"
 	light_color = COLOR_GREEN
 
 /obj/item/flashlight/lamp/lava/orange
-	desc = "A kitchy orange decorative light"
+	desc = "A kitschy orange decorative light"
 	light_color = COLOR_ORANGE
 
 /obj/item/flashlight/lamp/lava/purple
-	desc = "A kitchy purple decorative light"
+	desc = "A kitschy purple decorative light"
 	light_color = COLOR_PURPLE
 /obj/item/flashlight/lamp/lava/pink
-	desc = "A kitchy pink decorative light"
+	desc = "A kitschy pink decorative light"
 	light_color = COLOR_PINK
 
 /obj/item/flashlight/lamp/lava/yellow
-	desc = "A kitchy yellow decorative light"
+	desc = "A kitschy yellow decorative light"
 	light_color = COLOR_YELLOW

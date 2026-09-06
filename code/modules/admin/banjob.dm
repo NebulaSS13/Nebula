@@ -36,10 +36,6 @@ var/global/list/jobban_keylist = list() //to store the keys & ranks
 			return "Reason Unspecified"
 	return 0
 
-/hook/startup/proc/loadJobBans()
-	jobban_loadbanfile()
-	return 1
-
 /proc/jobban_loadbanfile()
 	if(get_config_value(/decl/config/toggle/on/ban_legacy_system))
 		var/savefile/S=new("data/job_full.ban")

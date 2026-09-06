@@ -22,6 +22,9 @@
 		var/list/reactant_values = list()
 		for(var/reactant_id in reaction.required_reagents)
 			var/decl/material/reactant = GET_DECL(reactant_id)
+			if(!istype(reactant))
+				log_error("Could not find /decl for [reactant_id], reaction type [reactiontype].")
+				continue
 			var/reactant_name = "<span codexlink='[reactant.codex_name || reactant.name] (substance)'>[reactant.name]</span>"
 			reactant_values += "[reaction.required_reagents[reactant_id]]u [reactant_name]"
 		mechanics_text += " [jointext(reactant_values, " + ")]"

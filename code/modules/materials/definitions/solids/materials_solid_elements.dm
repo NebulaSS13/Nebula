@@ -43,11 +43,12 @@
 /decl/material/solid/carbon/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
 	var/datum/reagents/ingested = M.get_ingested_reagents()
-	if(ingested && LAZYLEN(ingested.reagent_volumes) > 1)
-		var/effect = 1 / (LAZYLEN(ingested.reagent_volumes) - 1)
-		for(var/R in ingested.reagent_volumes)
-			if(R != type)
-				ingested.remove_reagent(R, removed * effect)
+	var/ingested_volumes = REAGENT_VOLUMES(ingested)
+	if(ingested && LAZYLEN(ingested_volumes) > 1)
+		var/effect = 1 / (LAZYLEN(ingested_volumes) - 1)
+		for(var/decl/material/reagent as anything in ingested_volumes)
+			if(reagent.type != type)
+				ingested.remove_reagent(reagent, removed * effect)
 
 /decl/material/solid/carbon/ashes
 	name = "ashes"
@@ -109,8 +110,8 @@
 
 /decl/material/solid/potassium/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
-	var/volume = REAGENT_VOLUME(holder, type)
-	if(volume > 3)
+	var/affect_volume = REAGENT_VOLUME(holder, src)
+	if(affect_volume > 3)
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume > 10)
+	if(affect_volume > 10)
 		M.add_chemical_effect(CE_PULSE, 1)

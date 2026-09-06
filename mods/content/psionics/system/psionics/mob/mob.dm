@@ -1,5 +1,7 @@
-/datum/ability_handler/psionics/refresh_login()
-	update(TRUE)
+/datum/ability_handler/psionics/refresh_login(being_created)
+	. = ..()
+	// stopgap to prevent us from deleting ourselves during init
+	update(TRUE, can_delete = !being_created)
 	if(!suppressed)
 		show_auras()
 

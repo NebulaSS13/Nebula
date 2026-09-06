@@ -10,10 +10,10 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/bell/attack_hand(mob/user)
-	if(user.a_intent == I_GRAB)
+	if(user.check_intent(I_FLAG_GRAB))
 		return ..()
 
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		user.visible_message("<span class='warning'>\The [user] hammers \the [src]!</span>")
 		playsound(user.loc, 'sound/items/manydings.ogg', 60)
 	else

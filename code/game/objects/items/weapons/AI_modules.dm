@@ -64,9 +64,9 @@ AI MODULES
 	if(!istype(ai))
 		return //We don't have slaves if we are not an AI
 
-	for(var/mob/living/silicon/robot/R in ai.connected_robots)
-		to_chat(R, "These are your laws now:")
-		R.show_laws()
+	for(var/mob/living/silicon/robot/robot in ai.connected_robots)
+		to_chat(robot, "These are your laws now:")
+		robot.show_laws()
 
 /obj/item/aiModule/proc/log_law_changes(mob/living/silicon/target, mob/sender)
 	var/time = time2text(world.realtime,"hh:mm:ss")

@@ -1,0 +1,13 @@
+#ifndef CONTENT_PACK_BLOB
+#define CONTENT_PACK_BLOB
+// BEGIN_INCLUDE
+#include "_blob.dm"
+#include "blob_act.dm"
+#include "blob_effect.dm"
+#include "blob_event.dm"
+#include "blob_follow.dm"
+#include "blob_grenade_damage.dm"
+#include "blob_samples.dm"
+#include "blob_subsystem.dm"
+// END_INCLUDE
+#endif

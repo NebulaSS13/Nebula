@@ -54,7 +54,7 @@
 			gripping = null
 
 		else if(gripping.should_have_organ(BP_HEART))
-			var/blood_volume = round(gripping.vessel.total_volume)
+			var/blood_volume = round(REAGENT_TOTAL_VOLUME(gripping.vessel))
 			if(blood_volume > 5)
 				gripping.vessel.remove_any(blood_per_tick)
 				heal_overall_damage(health_per_tick)

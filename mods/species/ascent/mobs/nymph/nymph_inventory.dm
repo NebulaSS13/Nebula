@@ -1,13 +1,8 @@
-/mob/living/simple_animal/alien/kharmaan/proc/contains_crystals(var/obj/item/W)
-	for(var/mat in W.matter)
-		if(mat == /decl/material/solid/sand)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/gemstone/crystal)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/quartz)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/glass)
-			. += W.matter[mat]
+/mob/living/simple_animal/alien/kharmaan/proc/contains_crystals(var/obj/item/prop)
+	. += prop.matter[/decl/material/solid/sand]
+	. += prop.matter[/decl/material/solid/gemstone/crystal]
+	. += prop.matter[/decl/material/solid/quartz]
+	. += prop.matter[/decl/material/solid/glass]
 
 /datum/inventory_slot/gripper/mouth/nymph/ascent/equipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE, var/delete_old_item = TRUE)
 	var/mob/living/simple_animal/alien/kharmaan/nimp = user

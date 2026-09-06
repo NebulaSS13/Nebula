@@ -20,6 +20,24 @@
 	var/forehead_graffiti
 	var/graffiti_style
 
+/obj/item/organ/external/head/get_natural_attacks()
+	if(!can_intake_reagents)
+		return null
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/bite)
+	return unarmed_attack
+
+/obj/item/organ/external/head/sharp_bite/get_natural_attacks()
+	if(!can_intake_reagents)
+		return null
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/bite/sharp)
+	return unarmed_attack
+
+/obj/item/organ/external/head/strong_bite/get_natural_attacks()
+	if(!can_intake_reagents)
+		return null
+	var/static/unarmed_attack = GET_DECL(/decl/natural_attack/bite/strong)
+	return unarmed_attack
+
 /obj/item/organ/external/head/proc/get_organ_eyes_overlay()
 	if(!glowing_eyes && !owner?.has_chemical_effect(CE_GLOWINGEYES, 1))
 		return
@@ -36,11 +54,10 @@
 /obj/item/organ/external/head/get_manual_dexterity()
 	. = DEXTERITY_SIMPLE_MACHINES | DEXTERITY_HOLD_ITEM | DEXTERITY_EQUIP_ITEM | DEXTERITY_KEYBOARDS | DEXTERITY_TOUCHSCREENS
 
-/obj/item/organ/external/head/examine(mob/user)
+/obj/item/organ/external/head/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-
 	if(forehead_graffiti && graffiti_style)
-		to_chat(user, "<span class='notice'>It has \"[forehead_graffiti]\" written on it in [graffiti_style]!</span>")
+		. += SPAN_NOTICE("It has \"[forehead_graffiti]\" written on it in [graffiti_style]!")
 
 /obj/item/organ/external/head/proc/write_on(var/mob/penman, var/style)
 	var/head_name = name
@@ -81,7 +98,7 @@
 	. = ..()
 	can_intake_reagents = !(bodytype.body_flags & BODY_FLAG_NO_EAT)
 
-/obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)
+/obj/item/organ/external/head/take_damage(damage, damage_type, damage_flags, inflicter, armor_pen, silent, do_update_health, override_droplimb)
 	. = ..()
 	if (!(status & ORGAN_DISFIGURED))
 		if (brute_dam > 40)
@@ -108,7 +125,7 @@
 			ret.Blend(eyes_icon, ICON_OVERLAY)
 	return ret
 
-/obj/item/organ/external/head/get_mob_overlays()
+/obj/item/organ/external/head/get_limb_mob_overlays()
 	. = ..()
 	var/image/eye_glow = get_organ_eyes_overlay()
 	if(eye_glow)

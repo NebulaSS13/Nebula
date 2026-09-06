@@ -6,6 +6,10 @@ INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
 
 	set_invisibility(INVISIBILITY_NONE)
 
+	if(prob(20)) // arbitrary chance to already have some degree of wind when the weather system starts
+		wind_direction = pick(global.alldirs)
+		wind_strength = rand(1,5)
+
 	banned_weather_conditions = banned
 
 	// Bookkeeping/rightclick guards.

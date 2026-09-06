@@ -4,13 +4,13 @@
 
 /datum/artifact_effect/roboheal/New()
 	..()
-	origin_type = pick(EFFECT_ELECTRO, EFFECT_PARTICLE)
+	origin_type = pick((XA_EFFECT_ELECTRO), (XA_EFFECT_PARTICLE))
 
 /datum/artifact_effect/roboheal/DoEffectTouch(var/mob/user)
 	if(isrobot(user))
-		var/mob/living/silicon/robot/R = user
-		to_chat(R, "<span class='notice'>Your systems report damaged components mending by themselves!</span>")
-		R.heal_overall_damage(rand(10,30), rand(10,30))
+		var/mob/living/silicon/robot/robot = user
+		to_chat(robot, "<span class='notice'>Your systems report damaged components mending by themselves!</span>")
+		robot.heal_overall_damage(rand(10,30), rand(10,30))
 		return 1
 
 /datum/artifact_effect/roboheal/DoEffectAura()

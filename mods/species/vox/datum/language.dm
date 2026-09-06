@@ -5,8 +5,8 @@
 	ask_verb = "creels"
 	exclaim_verb = "SHRIEKS"
 	colour = "vox"
-	key = "x"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "vox"
+	language_flags = LANG_FLAG_WHITELISTED
 	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
 	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
 	machine_understands = 0
@@ -22,5 +22,5 @@
 		return FALSE
 	return TRUE
 
-/decl/language/vox/get_random_name()
+/decl/language/vox/get_random_language_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	return ..(FEMALE,1,6)

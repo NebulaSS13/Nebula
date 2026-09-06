@@ -36,70 +36,71 @@ Macros:
 
 /turf/var/tmp/connection_manager/connections
 
-/connection_manager/var/connection/N
-/connection_manager/var/connection/S
-/connection_manager/var/connection/E
-/connection_manager/var/connection/W
+/connection_manager
+	var/connection/north_connection
+	var/connection/south_connection
+	var/connection/east_connection
+	var/connection/west_connection
 
 #ifdef MULTIZAS
-/connection_manager/var/connection/U
-/connection_manager/var/connection/D
+	var/connection/upward_connection
+	var/connection/downward_connection
 #endif
 
 /connection_manager/proc/get(d)
 	switch(d)
 		if(NORTH)
-			if(check(N)) return N
+			if(check(north_connection)) return north_connection
 			else return null
 		if(SOUTH)
-			if(check(S)) return S
+			if(check(south_connection)) return south_connection
 			else return null
 		if(EAST)
-			if(check(E)) return E
+			if(check(east_connection)) return east_connection
 			else return null
 		if(WEST)
-			if(check(W)) return W
+			if(check(west_connection)) return west_connection
 			else return null
 
 		#ifdef MULTIZAS
 		if(UP)
-			if(check(U)) return U
+			if(check(upward_connection)) return upward_connection
 			else return null
 		if(DOWN)
-			if(check(D)) return D
+			if(check(downward_connection)) return downward_connection
 			else return null
 		#endif
 
 /connection_manager/proc/place(connection/c, d)
 	switch(d)
-		if(NORTH) N = c
-		if(SOUTH) S = c
-		if(EAST) E = c
-		if(WEST) W = c
+		if(NORTH) north_connection = c
+		if(SOUTH) south_connection = c
+		if(EAST)  east_connection = c
+		if(WEST)  west_connection = c
 
 		#ifdef MULTIZAS
-		if(UP) U = c
-		if(DOWN) D = c
+		if(UP)    upward_connection = c
+		if(DOWN)  downward_connection = c
 		#endif
 
 /connection_manager/proc/update_all()
-	if(check(N)) N.update()
-	if(check(S)) S.update()
-	if(check(E)) E.update()
-	if(check(W)) W.update()
+	if(check(north_connection))    north_connection.update()
+	if(check(south_connection))    south_connection.update()
+	if(check(east_connection))     east_connection.update()
+	if(check(west_connection))     west_connection.update()
 	#ifdef MULTIZAS
-	if(check(U)) U.update()
-	if(check(D)) D.update()
+	if(check(upward_connection))   upward_connection.update()
+	if(check(downward_connection)) downward_connection.update()
 	#endif
 
 /connection_manager/proc/erase_all()
-	if(check(N)) N.erase()
-	if(check(S)) S.erase()
-	if(check(E)) E.erase()
-	if(check(W)) W.erase()
+	if(check(north_connection))    north_connection.erase()
+	if(check(south_connection))    south_connection.erase()
+	if(check(east_connection))     east_connection.erase()
+	if(check(west_connection))     west_connection.erase()
 	#ifdef MULTIZAS
-	if(check(U)) U.erase()
-	if(check(D)) D.erase()
+	if(check(upward_connection))   upward_connection.erase()
+	if(check(downward_connection)) downward_connection.erase()
 	#endif
 
 #undef check

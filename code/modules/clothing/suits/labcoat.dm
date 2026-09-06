@@ -40,7 +40,7 @@
 
 /obj/item/clothing/suit/toggle/labcoat/mad
 	name = "The Mad's labcoat"
-	desc = "It makes you look capable of konking someone on the noggin and shooting them into space."
+	desc = "It makes you look capable of conking someone on the noggin and shooting them into space."
 	color = COLOR_GREEN
 
 /obj/item/clothing/suit/toggle/labcoat/chemist

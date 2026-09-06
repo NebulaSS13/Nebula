@@ -21,6 +21,6 @@
 	var/obj/item/stack/cable_coil/cable_coil = holder
 	if(href_list["select_color"] && (href_list["select_color"] in get_global_cable_colors()))
 		cable_coil.set_cable_color(href_list["select_color"], user)
-		return MT_REFRESH
+		return TOPIC_REFRESH
 
 	return ..()

@@ -7,6 +7,7 @@
 	//Health and life related vars
 	max_health = 100 //Maximum health that should be possible.
 	current_health = INFINITY // A mob's current health. Set by update_health(). Defaults to INFINITY so mobs don't die on init.
+	skillset = /datum/skillset // moved here from /mob to avoid giving dview a skillset
 
 	var/hud_updateflag = 0
 
@@ -29,15 +30,18 @@
 	var/mob/living/cameraFollow = null
 	var/list/datum/action/actions = list()
 
-	var/on_fire = 0 //The "Are we on fire?" var
-	var/fire_stacks
+	/// The "Are we on fire?" var. Use of is_on_fire() is preferred instead.
+	VAR_PRIVATE/_on_fire = FALSE
+	VAR_PRIVATE/_fire_intensity
 
-	var/ticks_since_last_successful_breath = 0 //if we failed to breathe last tick
-	var/failed_last_breath = 0 //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
-	var/possession_candidate // Can be possessed by ghosts if unplayed.
+	/// A suffocation counter representing the number of ticks we should fail to breathe.
+	var/suffocation_counter = 0
+	/// This is used to determine if the mob failed a breath. If they did fail a breath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
+	var/failed_last_breath = FALSE
+	/// Can be possessed by ghosts if unplayed.
+	var/possession_candidate = FALSE
 
 	var/job = null//Living
-	var/list/obj/aura/auras = null //Basically a catch-all aura/force-field thing.
 
 	var/last_resist = 0
 	var/admin_paralyzed = FALSE
@@ -46,7 +50,7 @@
 	var/jumping = FALSE
 
 	var/list/chem_effects
-	var/list/chem_doses
+	var/list/_chem_doses
 	var/last_pain_message
 	var/next_pain_time = 0
 
@@ -55,8 +59,6 @@
 	var/list/stressors
 
 	var/life_tick
-	var/list/stasis_sources
-	var/stasis_value
 
 	var/nutrition = 400
 	var/hydration = 400
@@ -91,7 +93,7 @@
 	var/weather_sensitive = FALSE
 
 	/// Var used to track current step for footsteps sounds.
-	var/tmp/step_count
+	var/tmp/step_count = 0
 
 	/// Has this mob -ever- had a gripper? Used to skip hand checks in some cases.
 	var/has_had_gripper = FALSE

@@ -1,0 +1,11 @@
+#ifndef MODPACK_BIRDS
+#define MODPACK_BIRDS
+// BEGIN_INCLUDE
+#include "_birds.dm"
+#include "bird.dm"
+#include "bird_crow.dm"
+#include "bird_hawk.dm"
+#include "bird_pigeon.dm"
+#include "hutch.dm"
+// END_INCLUDE
+#endif

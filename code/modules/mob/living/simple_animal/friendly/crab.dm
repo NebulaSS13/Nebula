@@ -6,7 +6,7 @@
 	mob_size = MOB_SIZE_SMALL
 	speak_emote = list("clicks")
 	response_harm = "stamps on"
-	possession_candidate = 1
+	possession_candidate = TRUE
 	pass_flags = PASS_FLAG_TABLE
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES
@@ -42,12 +42,12 @@
 	uid = "bodytype_animal_crab"
 
 /decl/bodytype/hexapod/animal/crab/Initialize()
-	equip_adjust = list(
-		slot_head_str = list(
+	_equip_adjust = list(
+		(slot_head_str) = list(
 			"[NORTH]" = list(-1, -10),
 			"[SOUTH]" = list(-1, -10),
-			"[EAST]" =  list(-1, -10),
-			"[WEST]" =  list(-1, -10)
+			"[EAST]"  = list(-1, -10),
+			"[WEST]"  = list(-1, -10)
 		)
 	)
 	. = ..()

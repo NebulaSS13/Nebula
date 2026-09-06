@@ -6,6 +6,9 @@
 	atom_damage_type = BURN
 	damage_flags = 0
 	distance_falloff = 2.5
+	impact_effect_type = /obj/effect/temp_visual/impact_effect
+	hitsound_non_mob = 'sound/weapons/searwall.ogg'
+	hitsound = 'sound/weapons/zapbang.ogg'
 
 //releases a burst of light on impact or after travelling a distance
 /obj/item/projectile/energy/flash
@@ -16,6 +19,7 @@
 	agony = 20
 	life_span = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
 	muzzle_type = /obj/effect/projectile/muzzle/bullet
+	hitsound_non_mob = null
 	var/flash_range = 1
 	var/brightness = 7
 	var/light_flash_color = COLOR_WHITE
@@ -92,9 +96,6 @@
 	eyeblur = 1//Some feedback that you've been hit
 	step_delay = 0.7
 
-/obj/item/projectile/energy/electrode/green
-	icon_state = "spark_green"
-
 /obj/item/projectile/energy/electrode/stunshot
 	agony = 80
 	damage = 3
@@ -106,6 +107,7 @@
 	damage = 30
 	atom_damage_type = CLONE
 	irradiate = 40
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/monochrome_laser
 
 /obj/item/projectile/energy/dart
 	name = "dart"
@@ -128,13 +130,6 @@
 	damage = 20
 	agony = 60
 
-/obj/item/projectile/energy/neurotoxin
-	name = "neuro"
-	icon_state = "neurotoxin"
-	damage = 5
-	atom_damage_type = TOX
-	weaken = 5
-
 /obj/item/projectile/energy/radiation
 	name = "radiation bolt"
 	icon_state = "energy"
@@ -142,6 +137,7 @@
 	damage = 20
 	atom_damage_type = TOX
 	irradiate = 20
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/monochrome_laser
 
 /obj/item/projectile/energy/plasmastun
 	name = "plasma pulse"

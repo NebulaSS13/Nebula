@@ -54,7 +54,7 @@
 	var/obj/item/attacking_with = get_natural_weapon()
 	if(attacking_with)
 		attacking_with.set_base_attack_force(min((attacking_with.get_initial_base_attack_force() + potency), max_damage))
-	if(!loose && prob(25) && (attacking_with && attacking_with.get_attack_force(src) >= loose_threshold)) //second wind
+	if(!loose && prob(25) && (attacking_with && attacking_with.expend_attack_force(src) >= loose_threshold)) //second wind
 		loose = TRUE
 		set_max_health(initial(max_health) * 1.5)
 		set_damage(BRUTE, 0)

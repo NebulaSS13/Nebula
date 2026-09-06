@@ -25,12 +25,16 @@
 	if(handle_grab_interaction(user))
 		return TRUE
 
+	if(try_handle_interactions(user, get_standard_interactions(user), user?.get_active_held_item(), check_alt_interactions = FALSE))
+		return TRUE
+
 	if(!LAZYLEN(climbers) || (user in climbers) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
 		return FALSE
 
 	user.visible_message(
 		SPAN_DANGER("\The [user] shakes \the [src]!"),
-		SPAN_DANGER("You shake \the [src]!"))
+		SPAN_DANGER("You shake \the [src]!")
+	)
 
 	object_shaken()
 	return TRUE
@@ -63,7 +67,7 @@
 /mob/living/RestrainedClickOn(var/atom/A)
 	if (A != src)
 		return ..()
-	if(world.time < next_restraint_chew || !get_equipped_item(slot_handcuffed_str) || a_intent != I_HURT || get_target_zone() != BP_MOUTH)
+	if(world.time < next_restraint_chew || !get_equipped_item(slot_handcuffed_str) || !check_intent(I_FLAG_HARM) || get_target_zone() != BP_MOUTH)
 		return FALSE
 	// Cannot chew with a mask or a full body restraint.
 	if (get_equipped_item(slot_wear_mask_str) || istype(get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket))
@@ -78,7 +82,7 @@
 		SPAN_DANGER("You chew on your [O.name]!")
 	)
 	admin_attacker_log(src, "chewed on their [O.name]!")
-	O.take_external_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")
+	O.take_damage(3, damage_flags = (DAM_SHARP|DAM_EDGE), inflicter = "teeth marks")
 	next_restraint_chew = world.time + (2.5 SECONDS)
 	return TRUE
 
@@ -95,10 +99,10 @@
 /// Make unarmed attacks use natural weapons on harm intent.
 /mob/living/simple_animal/ResolveUnarmedAttack(atom/A)
 	var/attacking_with = get_natural_weapon()
-	if(a_intent == I_HELP || !attacking_with)
+	if(check_intent(I_FLAG_HELP) || !attacking_with)
 		return A.attack_animal(src)
 
-	a_intent = I_HURT
+	set_intent(I_FLAG_HARM)
 	. = A.attackby(attacking_with, src)
 	// attack effects are handled in natural_weapon's apply_hit_effect() instead of here
 	if(!.)

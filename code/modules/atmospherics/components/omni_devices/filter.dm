@@ -3,6 +3,7 @@
 //--------------------------------------------
 /obj/machinery/atmospherics/omni/filter
 	name = "omni gas filter"
+	desc = "A device that can separate components of a gas mixture and redirect them to different pipes."
 	icon_state = "map_filter"
 	core_icon = "filter"
 
@@ -38,7 +39,7 @@
 
 	rebuild_filtering_list()
 	for(var/datum/omni_port/P in ports)
-		P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
+		P.air.total_volume = ATMOS_DEFAULT_VOLUME_FILTER
 
 /obj/machinery/atmospherics/omni/filter/Destroy()
 	input = null
@@ -56,7 +57,7 @@
 			if(P in gas_filters)
 				gas_filters -= P
 
-			P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
+			P.air.total_volume = ATMOS_DEFAULT_VOLUME_FILTER
 			switch(P.mode)
 				if(ATM_INPUT)
 					input = P
@@ -81,13 +82,13 @@
 	var/datum/gas_mixture/input_air = input.air		// it's completely happy with them if they're in a loop though i.e. "P.air.return_pressure()"... *shrug*
 
 	var/delta = clamp(0, (output_air ? (max_output_pressure - output_air.return_pressure()) : 0), max_output_pressure)
-	var/transfer_moles_max = calculate_transfer_moles(input_air, output_air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0)
+	var/transfer_moles_max = calculate_transfer_moles(input_air, output_air, delta, (output && output.network && output.network.total_volume) ? output.network.total_volume : 0)
 	for(var/datum/omni_port/filter_output in gas_filters)
 		delta = clamp(0, (filter_output.air ? (max_output_pressure - filter_output.air.return_pressure()) : 0), max_output_pressure)
-		transfer_moles_max = min(transfer_moles_max, (calculate_transfer_moles(input_air, filter_output.air, delta, (filter_output && filter_output.network && filter_output.network.volume) ? filter_output.network.volume : 0)))
+		transfer_moles_max = min(transfer_moles_max, (calculate_transfer_moles(input_air, filter_output.air, delta, (filter_output && filter_output.network && filter_output.network.total_volume) ? filter_output.network.total_volume : 0)))
 
 	//Figure out the amount of moles to transfer
-	var/transfer_moles = clamp(0, ((set_flow_rate/input_air.volume)*input_air.total_moles), transfer_moles_max)
+	var/transfer_moles = clamp(0, ((set_flow_rate/input_air.total_volume)*input_air.total_moles), transfer_moles_max)
 
 	var/power_draw = -1
 	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)
@@ -167,15 +168,18 @@
 		var/decl/material/gas/G = GET_DECL(P.filtering)
 		return G.gas_symbol
 
-/obj/machinery/atmospherics/omni/filter/Topic(href, href_list)
-	if(..()) return 1
+/obj/machinery/atmospherics/omni/filter/OnTopic(mob/user, href_list)
+	if((. = ..()))
+		return
 	switch(href_list["command"])
 		if("power")
+			. = TOPIC_REFRESH
 			if(!configuring)
 				update_use_power(!use_power)
 			else
 				update_use_power(POWER_USE_OFF)
 		if("configure")
+			. = TOPIC_REFRESH
 			configuring = !configuring
 			if(configuring)
 				update_use_power(POWER_USE_OFF)
@@ -186,16 +190,16 @@
 			if("set_flow_rate")
 				var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",set_flow_rate) as num
 				set_flow_rate = clamp(0, new_flow_rate, max_flow_rate)
+				. = TOPIC_REFRESH
 			if("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), mode_return_switch(href_list["mode"]))
+				. = TOPIC_REFRESH
 			if("switch_filter")
 				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in gas_decls_by_symbol_cache
+				. = TOPIC_HANDLED
 				if(global.materials_by_gas_symbol[new_filter])
 					switch_filter(dir_flag(href_list["dir"]), ATM_FILTER, global.materials_by_gas_symbol[new_filter])
-
-	update_icon()
-	SSnano.update_uis(src)
-	return
+					. = TOPIC_REFRESH
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(var/mode)
 	switch(mode)

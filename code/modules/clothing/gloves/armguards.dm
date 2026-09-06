@@ -25,3 +25,6 @@
 	material_armor_multiplier = 1
 	matter = null
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+
+/obj/item/clothing/gloves/armguards/blue
+	paint_color = COLOR_NAVY_BLUE

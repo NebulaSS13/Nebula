@@ -36,28 +36,29 @@
 */
 /proc/pick_area_turf_by_flag(var/area_flags, var/list/predicates)
 	var/list/turfs
-	for(var/sub_area_type in subtypesof(/area))
-		var/area/sub_area = sub_area_type
-		if(!(initial(sub_area.area_flags) & area_flags))
+	var/list/valid_areas = list()
+	for(var/area/candidate_area as anything in global.areas)
+		if(!(candidate_area.area_flags & area_flags))
 			continue
-		sub_area = locate(sub_area_type)
-		if(!sub_area)
+		valid_areas[candidate_area] = TRUE
+	if(!length(valid_areas)) // no turfs at all have that flag
+		return null
+	// Each area contents loop is an in-world loop, so we just do one here.
+	for(var/turf/turf_candidate in world)
+		var/area/candidate_area = get_area(turf_candidate)
+		if(!valid_areas[candidate_area])
 			continue
-		for(var/turf/T in sub_area.contents)
-			if(!predicates || all_predicates_true(list(T), predicates))
-				LAZYADD(turfs, T)
-	if(LAZYLEN(turfs))
-		return pick(turfs)
+		if(!predicates || all_predicates_true(list(turf_candidate), predicates))
+			LAZYADD(turfs, turf_candidate)
+	return SAFEPICK(turfs)
 
 /proc/pick_area_turf(var/areatype, var/list/predicates)
 	var/list/turfs = get_area_turfs(areatype, predicates)
-	if(turfs && turfs.len)
-		return pick(turfs)
+	return SAFEPICK(turfs)
 
 /proc/pick_area(var/list/predicates)
 	var/list/areas = get_filtered_areas(predicates)
-	if(LAZYLEN(areas))
-		. = pick(areas)
+	return SAFEPICK(areas)
 
 /proc/pick_area_and_turf(var/list/area_predicates, var/list/turf_predicates)
 	var/list/areas = get_filtered_areas(area_predicates)

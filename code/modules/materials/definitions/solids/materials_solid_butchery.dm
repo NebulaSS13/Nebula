@@ -19,7 +19,6 @@
 	sound_manipulate = 'sound/foley/meat1.ogg'
 	sound_dropped = 'sound/foley/meat2.ogg'
 	hitsound = 'sound/effects/squelch1.ogg'
-	fishing_bait_value = 1
 	reagent_overlay = "soup_chunks"
 	nutriment_factor = 10
 	allergen_flags = ALLERGEN_MEAT
@@ -83,7 +82,6 @@
 	sound_manipulate = 'sound/foley/meat1.ogg'
 	sound_dropped = 'sound/foley/meat2.ogg'
 	hitsound = "punch"
-	fishing_bait_value = 0.75
 	tans_to = /decl/material/solid/organic/leather
 	compost_value = 0.8
 	allergen_flags = ALLERGEN_MEAT
@@ -116,7 +114,6 @@
 	default_solid_form = /obj/item/stack/material/skin/pelt
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
-	fishing_bait_value = 0
 	paint_verb = "dyed"
 
 /decl/material/solid/organic/skin/fur/gray
@@ -178,7 +175,6 @@
 	default_solid_form = /obj/item/stack/material/skin/feathers
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
-	fishing_bait_value = 0
 
 /decl/material/solid/organic/skin/feathers/purple
 	color = COLOR_PALE_PURPLE_GRAY

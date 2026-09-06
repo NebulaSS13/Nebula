@@ -5,20 +5,20 @@
 	var/list/faulty_handlers = list()
 	var/list/vv_set_handlers = decls_repository.get_decls_of_subtype(/decl/vv_set_handler)
 	for(var/vv_handler in vv_set_handlers)
-		var/decl/vv_set_handler/sh = vv_set_handlers[vv_handler]
-		if(!ispath(sh.handled_type))
-			log_bad("[sh] does not have a valid handled type. Expected a path, was [log_info_line(sh.handled_type)]")
-			faulty_handlers |= sh
-		if(!islist(sh.handled_vars))
-			log_bad("[sh] does not have a handled variables list. Expected a list, was [log_info_line(sh.handled_vars)]")
-			faulty_handlers |= sh
-		else if(!sh.handled_vars.len)
-			log_bad("[sh] as an empty handled variables list.")
-			faulty_handlers |= sh
+		var/decl/vv_set_handler/set_handler = vv_set_handlers[vv_handler]
+		if(!ispath(set_handler.handled_type))
+			log_bad("[set_handler] does not have a valid handled type. Expected a path, was [log_info_line(set_handler.handled_type)]")
+			faulty_handlers |= set_handler
+		if(!islist(set_handler.handled_vars))
+			log_bad("[set_handler] does not have a handled variables list. Expected a list, was [log_info_line(set_handler.handled_vars)]")
+			faulty_handlers |= set_handler
+		else if(!set_handler.handled_vars.len)
+			log_bad("[set_handler] as an empty handled variables list.")
+			faulty_handlers |= set_handler
 		else
 			continue
 			// Somehow check for missing vars here without creating instances.
-			// I.e.:  for(var/handled_var in sh.handled_vars) check handled_var in handled_type.vars
+			// I.e.:  for(var/handled_var in set_handler.handled_vars) check handled_var in handled_type.vars
 
 	if(faulty_handlers.len)
 		fail("The following special VV handlers are invalid: [english_list(faulty_handlers)]")

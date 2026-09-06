@@ -75,7 +75,6 @@
 	var/tx = ((origin_x-1)+x)*chunk_size
 	var/ty = ((origin_y-1)+y)*chunk_size
 
-	for(var/T in range(locate(tx, ty, origin_z)))
 	for(var/i=0,i<chunk_size,i++)
 		for(var/j=0,j<chunk_size,j++)
 			var/turf/T = locate(tx+j, ty+i, origin_z)
@@ -153,7 +152,7 @@
 		/decl/material/solid/metal/silver =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/metal/uranium =           list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
 		/decl/material/solid/metal/osmium =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+		/decl/material/solid/rutile =                  list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 	)
 	deep_metals = list(
 		/decl/material/solid/ice/aspium =              list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
@@ -165,5 +164,5 @@
 		/decl/material/solid/gemstone/diamond =        list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
 		/decl/material/solid/metal/osmium =            list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
 		/decl/material/solid/metallic_hydrogen =       list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
-		/decl/material/solid/rutile =          list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+		/decl/material/solid/rutile =                  list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 	)

@@ -1,5 +1,6 @@
 /mob/living/human
 
+	desc = null // Desc is largely generated in examine procs.
 	ai = /datum/mob_controller/human
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY
@@ -14,7 +15,6 @@
 	var/damage_multiplier = 1
 	var/list/worn_underwear = list()
 	var/list/background_info = list()
-	var/obj/screen/default_attack_selector/attack_selector
 	var/icon/stand_icon = null
 	/// Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
 	var/voice = ""
@@ -23,8 +23,6 @@
 	var/mob/remoteview_target = null
 	var/hand_blood_color
 	var/list/flavor_texts = list()
-	/// Are you trying not to hurt your opponent?
-	var/pulling_punches
 	/// We are a robutt.
 	var/full_prosthetic
 	/// Number of robot limbs.
@@ -52,9 +50,6 @@
 	var/obj/machinery/machine_visual
 	var/shock_stage
 	var/rounded_shock_stage
-	/// vars for fountain of youth examine lines
-	var/became_older
-	var/became_younger
 	/// var for caching last pain calc to avoid looping through organs over and over and over again
 	var/last_pain
 	var/vital_organ_missing_time

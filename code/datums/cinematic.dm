@@ -27,7 +27,7 @@ var/global/datum/cinematic/cinematic = new
 		if(M.client)
 			M.client.screen += cinematic_screen //show every client the cinematic
 			viewers[M.client] = GET_STATUS(M, STAT_STUN)
-			M.set_status(STAT_STUN, 8000)
+			M.set_status_condition(STAT_STUN, 8000)
 
 	override.nuke_act(cinematic_screen, station_missed) //cinematic happens here, as does mob death.
 	//If it's actually the end of the round, wait for it to end.
@@ -36,6 +36,6 @@ var/global/datum/cinematic/cinematic = new
 
 	for(var/client/C in viewers)
 		if(C.mob)
-			C.mob.set_status(STAT_STUN, viewers[C])
+			C.mob.set_status_condition(STAT_STUN, viewers[C])
 		C.screen -= cinematic_screen
 	QDEL_NULL(cinematic_screen)

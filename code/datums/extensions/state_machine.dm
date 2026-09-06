@@ -3,16 +3,15 @@ var/global/list/state_machines = list()
 
 /proc/get_state_machine(var/datum/holder, var/base_type)
 	if(istype(holder) && base_type && holder.has_state_machine)
-		var/list/machines = global.state_machines["\ref[holder]"]
+		var/list/machines = global.state_machines[holder]
 		return islist(machines) && machines[base_type]
 
 /proc/add_state_machine(var/datum/holder, var/datum/state_machine/fsm_type)
 	if(istype(holder) && fsm_type)
-		var/holder_ref = "\ref[holder]"
-		var/list/machines = global.state_machines[holder_ref]
+		var/list/machines = global.state_machines[holder]
 		if(!islist(machines))
 			machines = list()
-			global.state_machines[holder_ref] = machines
+			global.state_machines[holder] = machines
 		var/base_type = fsm_type::base_type
 		if(!machines[base_type])
 			var/datum/state_machine/machine = new fsm_type(holder)
@@ -22,12 +21,11 @@ var/global/list/state_machines = list()
 
 /proc/remove_state_machine(var/datum/holder, var/base_type)
 	if(istype(holder) && base_type && holder.has_state_machine)
-		var/holder_ref = "\ref[holder]"
-		var/list/machines = global.state_machines[holder_ref]
+		var/list/machines = global.state_machines[holder]
 		if(length(machines))
 			machines -= base_type
 			if(!length(machines))
-				global.state_machines -= holder_ref
+				global.state_machines -= holder
 				holder.has_state_machine = FALSE
 			return TRUE
 	return FALSE

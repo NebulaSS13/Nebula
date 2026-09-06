@@ -39,7 +39,7 @@
 
 /obj/item/grooming/proc/try_groom(mob/living/user, mob/living/target)
 
-	if(!istype(user) || !istype(target) || user.incapacitated() || user.a_intent == I_HURT)
+	if(!istype(user) || !istype(target) || user.incapacitated() || user.check_intent(I_FLAG_HARM))
 		return FALSE
 
 	if(!length(target.get_external_organs()))

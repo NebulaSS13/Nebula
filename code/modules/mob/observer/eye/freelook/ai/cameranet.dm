@@ -1,7 +1,7 @@
 // CAMERA NET
 //
 // The datum containing all the chunks.
-
+var/global/datum/visualnet/camera/cameranet = new()
 /datum/visualnet/camera
 	// The security cameras on the map, no matter if they work or not. This list only contains cameras of type /obj/machinery/camera.
 	var/list/cameras

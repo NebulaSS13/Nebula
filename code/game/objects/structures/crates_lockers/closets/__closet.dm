@@ -61,7 +61,7 @@ var/global/list/closets = list()
 /obj/structure/closet/can_install_lock()
 	return !(setup & CLOSET_HAS_LOCK) // CLOSET_HAS_LOCK refers to the access lock, not a physical lock.
 
-/obj/structure/closet/examine(mob/user, distance)
+/obj/structure/closet/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1 && !opened)
 		var/content_size = 0
@@ -69,19 +69,19 @@ var/global/list/closets = list()
 			if(!AM.anchored)
 				content_size += content_size(AM)
 		if(!content_size)
-			to_chat(user, "It is empty.")
+			. += "It is empty."
 		else if(storage_capacity > content_size*4)
-			to_chat(user, "It is barely filled.")
+			. += "It is barely filled."
 		else if(storage_capacity > content_size*2)
-			to_chat(user, "It is less than half full.")
+			. += "It is less than half full."
 		else if(storage_capacity > content_size)
-			to_chat(user, "There is still some free space.")
+			. += "There is still some free space."
 		else
-			to_chat(user, "It is full.")
+			. += "It is full."
 
 	var/mob/observer/ghost/G = user
 	if(isghost(G) && (G.client?.holder || G.antagHUD))
-		to_chat(user, "It contains: [counting_english_list(contents)]")
+		. += "It contains: [counting_english_list(contents)]"
 
 /obj/structure/closet/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0 || wall_mounted)) return 1
@@ -250,7 +250,7 @@ var/global/list/closets = list()
 
 /obj/structure/closet/attackby(obj/item/used_item, mob/user)
 
-	if(user.a_intent == I_HURT && used_item.get_attack_force(user))
+	if(user.check_intent(I_FLAG_HARM) && used_item.get_attack_force(user))
 		return ..()
 
 	if(!opened && (istype(used_item, /obj/item/stack/material) || IS_WRENCH(used_item)) )
@@ -265,9 +265,9 @@ var/global/list/closets = list()
 				receive_mouse_drop(grab.affecting, user)      //act like they were dragged onto the closet
 				return TRUE
 			if(IS_WELDER(used_item))
-				var/obj/item/weldingtool/WT = used_item
-				if(WT.weld(0,user))
-					slice_into_parts(WT, user)
+				var/obj/item/weldingtool/welder = used_item
+				if(welder.weld(0,user))
+					slice_into_parts(welder, user)
 					return TRUE
 			if(istype(used_item, /obj/item/gun/energy/plasmacutter))
 				var/obj/item/gun/energy/plasmacutter/cutter = used_item
@@ -315,9 +315,9 @@ var/global/list/closets = list()
 		return FALSE //Return false to get afterattack to be called
 
 	if(IS_WELDER(used_item) && (setup & CLOSET_CAN_BE_WELDED))
-		var/obj/item/weldingtool/WT = used_item
-		if(!WT.weld(0,user))
-			if(WT.isOn())
+		var/obj/item/weldingtool/welder = used_item
+		if(!welder.weld(0,user))
+			if(welder.isOn())
 				to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
 			return TRUE
 		welded = !welded
@@ -330,10 +330,10 @@ var/global/list/closets = list()
 
 	return attack_hand_with_interaction_checks(user)
 
-/obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
+/obj/structure/closet/proc/slice_into_parts(obj/item/used_item, mob/user)
 	user.visible_message(
-		SPAN_NOTICE("\The [src] has been cut apart by [user] with \the [W]."),
-		SPAN_NOTICE("You have cut \the [src] apart with \the [W]."),
+		SPAN_NOTICE("\The [src] has been cut apart by [user] with \the [used_item]."),
+		SPAN_NOTICE("You have cut \the [src] apart with \the [used_item]."),
 		"You hear welding."
 	)
 	physically_destroyed()
@@ -344,7 +344,7 @@ var/global/list/closets = list()
 	if(!. && istype(AM) && opened && !istype(AM, /obj/structure/closet) && AM.simulated && !AM.anchored && (large || !ismob(AM)))
 		step_towards(AM, loc)
 		if(user != AM)
-			user.show_viewers(SPAN_DANGER("\The [user] stuffs \the [AM] into \the [src]!"))
+			user.visible_message(SPAN_DANGER("\The [user] stuffs \the [AM] into \the [src]!"), SPAN_DANGER("You stuff \the [AM] into \the [src]!"))
 		return TRUE
 
 /obj/structure/closet/attack_ai(mob/living/silicon/ai/user)
@@ -367,7 +367,7 @@ var/global/list/closets = list()
 
 /obj/structure/closet/attack_ghost(mob/ghost)
 	if(ghost.client && ghost.client.inquisitive_ghost)
-		ghost.examinate(src)
+		ghost.examine_verb(src)
 		if (!opened)
 			to_chat(ghost, "It contains: [english_list(contents)].")
 
@@ -548,6 +548,7 @@ var/global/list/closets = list()
 /decl/interaction_handler/closet_lock_toggle
 	name = "Toggle Lock"
 	expected_target_type = /obj/structure/closet
+	examine_desc = "toggle the lock"
 
 /decl/interaction_handler/closet_lock_toggle/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..()

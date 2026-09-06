@@ -1,12 +1,19 @@
 /*
  * Holds procs designed to change one type of value, into another.
  * Contains:
- *			text2list & list2text
+ *          alist2list
  *			file2list
  *			angle2dir
  *			angle2text
- *			worldtime2text
  */
+
+// This proc does not support converting numerically indexed alists to assoc lists.
+/proc/alist2list(alist/input)
+	. = list()
+	for(var/k,v in input)
+		if(isnum(k))
+			CRASH("Numeric index passed to alist2list()!")
+		.[k] = v
 
 // Splits the text of a file at seperator and returns them in a list.
 /proc/file2list(filename, seperator = "\n")

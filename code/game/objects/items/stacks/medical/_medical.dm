@@ -51,7 +51,7 @@
 
 /obj/item/stack/medical/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(!user_can_attack_with(user) || user.a_intent == I_HURT)
+	if(!user_can_attack_with(user) || user.check_intent(I_FLAG_HARM))
 		return ..()
 
 	if(get_amount() < 1)

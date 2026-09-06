@@ -8,7 +8,7 @@
 	edge               = TRUE
 	sharp              = TRUE
 	attack_verb        = list("bashed", "bludgeoned", "thrashed", "whacked")
-	handle_material    = /decl/material/solid/organic/wood
+	handle_material    = /decl/material/solid/organic/wood/oak
 	_base_attack_force = 8
 
 /obj/item/tool/shovel/get_initial_tool_qualities()
@@ -19,8 +19,8 @@
 	return tool_qualities
 
 /obj/item/tool/shovel/wood
-	color    = /decl/material/solid/organic/wood::color
-	material = /decl/material/solid/organic/wood
+	color    = /decl/material/solid/organic/wood/oak::color
+	material = /decl/material/solid/organic/wood/oak
 
 /obj/item/tool/shovel/wood/walnut
 	color    = /decl/material/solid/organic/wood/walnut::color

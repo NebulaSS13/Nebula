@@ -158,8 +158,12 @@
 	///This is set to prevent spamming the log when a turf has tried to grab our strata before we've been initialized
 	var/tmp/_has_warned_uninitialized_strata = FALSE
 
-	VAR_PROTECTED/UT_turf_exceptions_by_door_type // An associate list of door types/list of allowed turfs
-	///Determines if edge turfs should be centered on the map dimensions.
+	/// An associate list of door types/list of allowed turfs
+	VAR_PROTECTED/UT_turf_exceptions_by_door_type = list(
+		/obj/machinery/door/firedoor = list(/turf/open),
+		/obj/machinery/door/firedoor/border = list(/turf/open),
+	)
+	/// Determines if edge turfs should be centered on the map dimensions.
 	var/origin_is_world_center = TRUE
 	/// If not null, this level will register with a daycycle id/type on New().
 	var/daycycle_id = "general_solars"
@@ -170,8 +174,16 @@
 	/// Note that this is more or less unnecessary if you are using a mapped area that doesn't stretch to the edge of the level.
 	var/template_edge_padding = 15
 
-	// Whether or not this level permits things like graffiti and filth to persist across rounds.
-	var/permit_persistence = FALSE
+	// Submap loading values, passed back via getters like get_subtemplate_budget().
+	/// A point budget to spend on subtemplates (see template costs)
+	var/subtemplate_budget = 0
+	/// A string identifier for the category of subtemplates to draw from for this level.
+	var/subtemplate_category = null
+	/// A specific area to use when determining where to place subtemplates.
+	var/subtemplate_area = null
+
+	/// Set to TRUE if this level persistence data, FALSE if not. Check is only done if _has_serde_data is null.
+	VAR_PRIVATE/_has_serde_data = null
 
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
@@ -215,14 +227,16 @@
 	if(!change_turf && !change_area)
 		return
 	var/area/A = change_area ? get_base_area_instance() : null
+	// We don't have to worry about the edge turfs because those are handled in build_border().
 	for(var/turf/T as anything in Z_ALL_TURFS(level_z))
 		if(change_turf)
 			T = T.ChangeTurf(picked_turf)
 		if(change_area)
-			ChangeArea(T, A)
+			T.ChangeArea(A)
 
 ///Prepare level for being used. Setup borders, lateral z connections, ambient lighting, atmosphere, etc..
 /datum/level_data/proc/setup_level_data(var/skip_gen = FALSE)
+
 	if(_level_setup_completed)
 		log_debug("level_data for [src], on z [level_z], had setup_level_data called more than once!")
 		return //Since we can defer setup, make sure we only setup once
@@ -340,6 +354,22 @@
 
 	_level_setup_completed = TRUE
 
+/datum/level_data/proc/build_area_ceilings()
+	// Set base flooring on turfs above station areas in order to prevent easily digging down into station areas.
+	if(!HasAbove(level_z))
+		return
+	for(var/turf/below as anything in block(locate(level_inner_min_x, level_inner_min_y, level_z), locate(level_inner_max_x, level_inner_max_y, level_z)))
+		var/turf/floor/above = GetAbove(below)
+		if(!istype(above))
+			continue
+		var/area/area = get_area(below)
+		if(!istype(area) || !(area.area_flags & AREA_FLAG_CONSTRUCTED))
+			continue
+		var/decl/flooring/base_flooring = above.get_base_flooring()
+		if(!base_flooring || base_flooring.constructed)
+			continue
+		above.set_base_flooring(/decl/flooring/plating) // TODO: check if we can skip update here.
+
 ///Calculate the bounds of the level, the border area, and the inner accessible area.
 ///   Basically, by default levels are assumed to be loaded relative to the world center, so if they're smaller than the world
 ///   they get their origin offset so they're in the middle of the world. By default templates are always loaded at origin 1,1.
@@ -380,11 +410,11 @@
 		exterior_atmosphere.update_values() //Might as well update
 		exterior_atmosphere.check_tile_graphic()
 		return
-	var/list/exterior_atmos_composition = exterior_atmosphere
+	var/alist/exterior_atmos_composition = exterior_atmosphere
 	exterior_atmosphere = new
-	if(islist(exterior_atmos_composition))
-		for(var/gas in exterior_atmos_composition)
-			exterior_atmosphere.adjust_gas(gas, exterior_atmos_composition[gas], FALSE)
+	if(istype(exterior_atmos_composition, /alist))
+		for(var/gas, gas_amount in exterior_atmos_composition)
+			exterior_atmosphere.adjust_gas(gas, gas_amount, FALSE)
 		exterior_atmosphere.temperature = exterior_atmos_temp
 		exterior_atmosphere.update_values()
 		exterior_atmosphere.check_tile_graphic()
@@ -418,35 +448,55 @@
 //
 /// Helper proc for subtemplate generation. Returns a point budget to spend on subtemplates.
 /datum/level_data/proc/get_subtemplate_budget()
-	return 0
+	return subtemplate_budget
 /// Helper proc for subtemplate generation. Returns a string identifier for a general category of template.
 /datum/level_data/proc/get_subtemplate_category()
-	return
+	return subtemplate_category
 /// Helper proc for subtemplate generation. Returns a bitflag of template flags that must not be present for a subtemplate to be considered available.
 /datum/level_data/proc/get_subtemplate_blacklist()
 	return
 /// Helper proc for subtemplate generation. Returns a bitflag of template flags that must be present for a subtemplate to be considered available.
 /datum/level_data/proc/get_subtemplate_whitelist()
 	return
+/// Helper proc for getting areas associated with placable submaps on this level.
+/datum/level_data/proc/get_subtemplate_areas(template_category, blacklist, whitelist)
+	if(subtemplate_area)
+		return islist(subtemplate_area) ? subtemplate_area : list(subtemplate_area)
+	if(base_area)
+		return list(base_area)
+
+// If we do serde, that implies we don't want to apply another layer of procgen over what's already saved.
+// Specific levels should override this proc as needed for generation independent of serde.
+/datum/level_data/proc/should_generate_level()
+	if(!is_persistent())
+		return TRUE
+	if(!get_config_value(/decl/config/toggle/roundstart_level_generation) || !(get_subtemplate_budget() || length(level_generators)))
+		return FALSE
+	if(isnull(_has_serde_data))
+		var/decl/serialization_handler/handler = RESOLVE_TO_DECL(persistence_handler)
+		_has_serde_data = fexists(handler.get_data_path(persistent_data_location, global.using_map.path, ckey(level_id)))
+	return !_has_serde_data
 
 ///Called when setting up the level. Apply generators and anything that modifies the turfs of the level.
 /datum/level_data/proc/generate_level()
-
-	if(!get_config_value(/decl/config/toggle/roundstart_level_generation))
+	if(!should_generate_level())
+		report_progress("Skipping [_has_serde_data ? "post-serde " : ""]level generation for [level_id].")
 		return
-
 	var/origx = level_inner_min_x
 	var/origy = level_inner_min_y
 	var/endx  = level_inner_min_x + level_inner_width
 	var/endy  = level_inner_min_y + level_inner_height
-
 	// Run level generators.
 	for(var/gen_type in level_generators)
+		report_progress("Placing [gen_type] on [level_id]...")
 		new gen_type(origx, origy, level_z, endx, endy, FALSE, TRUE, get_base_area_instance())
+	place_subtemplates()
 
+/datum/level_data/proc/place_subtemplates()
 	// Place points of interest.
 	var/budget = get_subtemplate_budget()
 	if(budget)
+		report_progress("Placing subtemplates on [level_id]...")
 		spawn_subtemplates(budget, get_subtemplate_category(), get_subtemplate_blacklist(), get_subtemplate_whitelist())
 
 ///Apply the parent entity's map generators. (Planets generally)
@@ -461,18 +511,37 @@
 	for(var/gen_type in map_gen)
 		new gen_type(origx, origy, level_z, endx, endy, FALSE, TRUE, get_base_area_instance())
 
+/// Helper proc for placing mobs on a level after level creation.
+/datum/level_data/proc/get_mobs_to_populate_level()
+	return
+
 ///Called during level setup. Run anything that should happen only after the map is fully generated.
 /datum/level_data/proc/after_generate_level()
+
 	build_border()
+
 	if(daycycle_id && daycycle_type)
 		SSdaycycle.register_level(level_z, daycycle_id, daycycle_type)
 
-///Changes anything named we may need to rename accordingly to the parent location name. For instance, exoplanets levels.
-/datum/level_data/proc/adapt_location_name(var/location_name)
-	SHOULD_CALL_PARENT(TRUE)
-	if(!base_area || ispath(base_area, /area/space))
-		return FALSE
-	return TRUE
+	var/list/mobs_to_spawn = get_mobs_to_populate_level()
+	if(length(mobs_to_spawn))
+		for(var/list/mob_category in mobs_to_spawn)
+			var/list/mob_types = mob_category[1]
+			var/mob_turf  = mob_category[2]
+			var/mob_count = mob_category[3]
+			var/sanity = 1000
+			while(mob_count && sanity)
+				sanity--
+				var/turf/place_mob_at = locate(rand(level_inner_min_x, level_inner_max_x), rand(level_inner_min_y, level_inner_max_y), level_z)
+				if(istype(place_mob_at, mob_turf) && !(locate(/mob/living) in place_mob_at))
+					var/mob_type = pickweight(mob_types)
+					new mob_type(place_mob_at)
+					mob_count--
+					CHECK_TICK
+
+///Changes anything named we may need to rename based on the parent location name. For instance, exoplanet surface areas.
+/datum/level_data/proc/adapt_to_location_name(var/location_name)
+	return
 
 //#TODO: this could probably be done in a more elegant way. Since most map templates will never call this.
 ///Called before a runtime generated template is generated on our z-level. Only applies to templates generated onto new z-levels.
@@ -571,7 +640,7 @@
 
 /datum/level_data/proc/get_display_name()
 	if(!name)
-		var/obj/effect/overmap/overmap_entity = global.overmap_sectors[num2text(level_z)]
+		var/obj/effect/overmap/overmap_entity = global.overmap_sectors[level_z]
 		if(overmap_entity?.name)
 			name = overmap_entity.name
 		else
@@ -707,14 +776,14 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 
 /datum/level_data/main_level
 	level_flags = (ZLEVEL_STATION|ZLEVEL_CONTACT|ZLEVEL_PLAYER)
-	permit_persistence = TRUE
+	permit_legacy_persistence = TRUE
 
 /datum/level_data/admin_level
 	level_flags = (ZLEVEL_ADMIN|ZLEVEL_SEALED)
 
 /datum/level_data/player_level
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER)
-	permit_persistence = TRUE
+	permit_legacy_persistence = TRUE
 
 /datum/level_data/unit_test
 	level_flags = (ZLEVEL_CONTACT|ZLEVEL_PLAYER|ZLEVEL_SEALED)
@@ -749,9 +818,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 		/datum/random_map/noise/ore
 	)
 
-/datum/level_data/proc/get_subtemplate_areas(template_category, blacklist, whitelist)
-	return list(base_area)
-
 ///Try to allocate the given amount of POIs onto our level. Returns the template types that were spawned
 /datum/level_data/proc/spawn_subtemplates(budget = 0, template_category, blacklist, whitelist)
 
@@ -770,11 +836,8 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 		possible_subtemplates += poi
 
 	if(!length(possible_subtemplates))
-		return //If we don't have any templates, don't bother
-
-	if(!length(possible_subtemplates))
 		log_world("Level [level_id] was given no templates to pick from.")
-		return
+		return //If we don't have any templates, don't bother
 
 	var/list/repeatable_templates = list()
 	var/list/areas_whitelist = get_subtemplate_areas(template_category, blacklist, whitelist)
@@ -843,7 +906,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 	return TRUE
 
 /datum/level_data/proc/update_turf_ambience()
-	if(SSatoms.atom_init_stage >= INITIALIZATION_INNEW_REGULAR)
+	if(SSambience.initialized) // our turfs will update themselves later anyway
 		for(var/turf/level_turf as anything in block(level_inner_min_x, level_inner_min_y, level_z, level_inner_max_x, level_inner_max_y, level_z))
 			level_turf.update_ambient_light_from_z_or_area() // AMBIENCE_QUEUE_TURF(level_turf) - seems to be less consistent
 			CHECK_TICK

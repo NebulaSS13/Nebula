@@ -2,8 +2,6 @@
 
 // Recruiting observers to play as pAIs
 
-var/global/datum/paiController/paiController			// Global handler for pAI candidates
-
 /datum/paiCandidate
 	var/name
 	var/key
@@ -14,11 +12,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 	var/chassis = "Drone"
 	var/say_verb = "Robotic"
 
-
-/hook/startup/proc/paiControllerSetup()
-	paiController = new /datum/paiController()
-	return 1
-
+var/global/datum/paiController/paiController = new /datum/paiController() // Global handler for pAI candidates
 
 /datum/paiController
 	var/inquirer = null
@@ -26,6 +20,10 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 	var/list/asked = list()
 
 	var/askDelay = 10 * 60 * 1	// One minute [ms * sec * min]
+
+/datum/paiController/New()
+	..()
+	populate_pai_software_list()
 
 /datum/paiController/Topic(href, href_list[])
 	if(href_list["download"])

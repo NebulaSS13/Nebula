@@ -62,7 +62,7 @@
 	update_icon()
 
 /obj/machinery/holomap/attack_hand(var/mob/user)
-	if(user.a_intent == I_HURT)
+	if(user.check_intent(I_FLAG_HARM))
 		return ..()
 	if(watching_mob && (watching_mob != user))
 		to_chat(user, SPAN_WARNING("Someone else is currently watching the holomap."))
@@ -232,7 +232,7 @@
 
 	//This is where the fun begins
 	if(length(global.using_map.overmap_ids))
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[z]
 
 		if(isAI)
 			T = get_turf(user.client.eye)

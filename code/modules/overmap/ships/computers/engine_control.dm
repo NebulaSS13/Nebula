@@ -6,6 +6,21 @@
 	icon_screen = "engines"
 	var/display_state = "status"
 
+/// A stub used for modpacks to modify per-ship readout information.
+/// This mutates the UI data list, so it can be used to mask or remove features
+/// as well as to add entirely new ones.
+/// It does not return a value.
+/// While it can access per-engine data, it should be dispreferred for that compared to modify_engine_ui_data().
+/obj/machinery/computer/ship/engines/proc/modify_ship_ui_data(list/ui_data)
+	return
+
+/// A stub used for modpacks to modify per-engine readout information.
+/// This mutates the engine's data list, so it can be used to mask or remove features
+/// as well as to add entirely new ones.
+/// It does not return a value.
+/obj/machinery/computer/ship/engines/proc/modify_engine_ui_data(datum/extension/ship_engine/engine, list/engine_data)
+	return
+
 /obj/machinery/computer/ship/engines/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
 		display_reconnect_dialog(user, "ship control systems")
@@ -29,17 +44,13 @@
 		var/thrust = E.get_exhaust_velocity()
 		total_thrust += thrust
 		rdata["eng_thrust"] = "[thrust] m/s"
+		modify_engine_ui_data(E, rdata)
 		enginfo.Add(list(rdata))
 
 	data["engines_info"] = enginfo
 	data["total_thrust"] = "[total_thrust] m/s"
 
-	var/damping_strength = 0
-	for(var/datum/ship_inertial_damper/I in linked.inertial_dampers)
-		var/obj/machinery/inertial_damper/ID = I.holder
-		damping_strength += ID.get_damping_strength(FALSE)
-	data["damping_strength"] = damping_strength
-	data["needs_dampers"] = linked.needs_dampers
+	modify_ship_ui_data(data)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

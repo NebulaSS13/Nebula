@@ -8,6 +8,7 @@
 /decl/interaction_handler/clothing_toggle/rolled_down
 	name = "Roll Up Or Down"
 	state_decl_type = /decl/clothing_state_modifier/rolled_down
+	examine_desc = "roll $TARGET_THEM$ up or down"
 
 /obj/item/clothing/proc/toggle_rolled_verb()
 

@@ -18,10 +18,10 @@
 		data[DATA_BLOOD_SPECIES] = species_name
 
 	var/list/temp_chem = list()
-	for(var/R in reagents?.reagent_volumes)
-		temp_chem[R] = REAGENT_VOLUME(reagents, R)
+	for(var/decl/material/reagent as anything in REAGENT_VOLUMES(reagents))
+		temp_chem[reagent.type] = REAGENT_VOLUME(reagents, reagent)
 	data[DATA_BLOOD_TRACE_CHEM]  = temp_chem
-	data[DATA_BLOOD_DOSE_CHEM]   = chem_doses?.Copy() || list()
+	data[DATA_BLOOD_DOSE_CHEM]   = _chem_doses?.Copy() || list()
 
 	if(isSynthetic())
 		data[DATA_BLOOD_HAS_OXY] = FALSE

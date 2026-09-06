@@ -59,8 +59,8 @@
 	alarm = round(max(alarm, duration))
 	update_icon()
 
-/obj/machinery/shield_diffuser/examine(mob/user)
+/obj/machinery/shield_diffuser/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It is [enabled ? "enabled" : "disabled"].")
+	. += "It is [enabled ? "enabled" : "disabled"]."
 	if(alarm)
-		to_chat(user, "A red LED labeled \"Proximity Alarm\" is blinking on the control panel.")
+		. += "A red LED labeled \"Proximity Alarm\" is blinking on the control panel."

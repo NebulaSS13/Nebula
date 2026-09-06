@@ -1,6 +1,6 @@
 /obj/item/clothing/glasses/sunglasses
 	name = "sunglasses"
-	desc = "Glasses with treated lenses to prevent glare. They provide some rudamentary protection from dazzling attacks."
+	desc = "Glasses with treated lenses to prevent glare. They provide some rudimentary protection from dazzling attacks."
 	icon = 'icons/clothing/eyes/sunglasses.dmi'
 	darkness_view = -1
 	flash_protection = FLASH_PROTECTION_NONE

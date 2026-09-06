@@ -7,6 +7,7 @@
 /decl/interaction_handler/clothing_toggle/tucked_in
 	name = "Tuck In Or Untuck"
 	state_decl_type = /decl/clothing_state_modifier/tucked_in
+	examine_desc = "tuck $TARGET_THEM$ in or out"
 
 /obj/item/clothing/proc/toggle_tucked_verb()
 

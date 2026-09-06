@@ -11,7 +11,6 @@
 	var/instance_num
 
 /mob/living/simple_animal/alien/Initialize()
-	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
 	instance_num = rand(1, 1000)

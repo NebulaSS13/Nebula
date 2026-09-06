@@ -87,7 +87,6 @@
 	planetoid_data_type        = /datum/planetoid_data/random/chlorine
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/chlorine
 	template_tags_blacklist    = TEMPLATE_TAG_HABITAT|TEMPLATE_TAG_WATER
-	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/chlorine
 	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/chlorine,

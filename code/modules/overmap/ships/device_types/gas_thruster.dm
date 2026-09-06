@@ -29,10 +29,10 @@
 
 /datum/extension/ship_engine/gas/proc/get_propellant(var/sample_only = TRUE, var/partial = 1)
 	var/obj/machinery/atmospherics/unary/engine/E = holder
-	if(istype(E) && E.air_contents?.volume > 0)
-		var/datum/gas_mixture/removed = E.air_contents.remove_ratio((volume_per_burn * thrust_limit * partial) / E.air_contents.volume)
+	if(istype(E) && E.air_contents?.total_volume > 0)
+		var/datum/gas_mixture/removed = E.air_contents.remove_ratio((volume_per_burn * thrust_limit * partial) / E.air_contents.total_volume)
 		if(removed && sample_only)
-			var/datum/gas_mixture/sample = new(removed.volume)
+			var/datum/gas_mixture/sample = new(removed.total_volume)
 			sample.copy_from(removed)
 			E.air_contents.merge(removed)
 			return sample
@@ -74,12 +74,12 @@
 	if(!propellant || !length(propellant.gas) || !propellant.total_moles)
 		return 0.01 // Divide by zero protection.
 
-	for(var/mat in propellant.gas)
+	for(var/mat, amt in propellant.gas)
 		var/decl/material/gas/G = GET_DECL(mat)
 		// 0.08 chosen to get the RATIO of the specific heat, we don't have cV/cP here, so this is a rough approximate.
 		var/ratio = (G.gas_specific_heat / 25) + 0.8// These numbers are meaningless, just magic numbers to calibrate range.
-		ratio_specific_heat += ratio * (propellant.gas[mat] / propellant.total_moles)
-	ratio_specific_heat = ratio_specific_heat / length(propellant.gas)
+		ratio_specific_heat += ratio * (amt / propellant.total_moles)
+	ratio_specific_heat /= length(propellant.gas)
 	if(ratio_specific_heat == 0 || ratio_specific_heat == 1)
 		// rare case of avoiding a divide by zero error.
 		ratio_specific_heat += 0.01

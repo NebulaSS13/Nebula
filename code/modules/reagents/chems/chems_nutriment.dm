@@ -9,11 +9,12 @@
 	fruit_descriptor = "nutritious"
 	uid = "chem_nutriment"
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // Please, no more animal protein or glowsap or corn oil atmosphere.
-	fishing_bait_value = 0.65
 	compost_value = 1
 	nutriment_factor = 10
 	affect_blood_on_ingest = 0
 	affect_blood_on_inhale = 0
+	opacity = 1.0 // liquids are half transparent by default; meat and etc should not be transparent
+	hardness = MAT_VALUE_SOFT // same softness as meat
 
 	// Technically a room-temperature solid, but saves
 	// repathing it to /solid all over the codebase.
@@ -61,19 +62,6 @@
 	uid = "chem_nutriment_plant"
 	allergen_flags = ALLERGEN_VEGETABLE
 
-/decl/material/liquid/nutriment/plant_oil
-	name = "plant oil"
-	lore_text = "A thin yellow oil pressed from vegetables or nuts. Useful as fuel, or in cooking."
-	uid = "chem_nutriment_plant_oil"
-	melting_point = 273
-	boiling_point = 373
-	taste_description = "oily blandness"
-	burn_product = /decl/material/gas/carbon_monoxide
-	ignition_point = T0C+150
-	accelerant_value = FUEL_VALUE_ACCELERANT
-	gas_flags = XGM_GAS_FUEL
-	allergen_flags = ALLERGEN_VEGETABLE
-
 /decl/material/liquid/nutriment/honey
 	name = "honey"
 	lore_text = "A golden yellow syrup, loaded with sugary sweetness."
@@ -84,6 +72,7 @@
 	uid = "chem_nutriment_honey"
 	melting_point = 273
 	boiling_point = 373
+	opacity = 0.5
 
 /decl/material/liquid/nutriment/flour
 	name = "flour"
@@ -231,6 +220,7 @@
 	uid = "chem_nutriment_soysauce"
 	melting_point = 273
 	boiling_point = 373
+	opacity = 0.5
 
 /decl/material/liquid/nutriment/ketchup
 	name = "ketchup"
@@ -269,6 +259,7 @@
 	melting_point = 273
 	boiling_point = 373
 	allergen_flags = ALLERGEN_FRUIT | ALLERGEN_VEGETABLE // Is a tomato a fruit or a vegetable?
+	opacity = 0.9
 
 /decl/material/liquid/nutriment/garlicsauce
 	name = "garlic sauce"
@@ -282,6 +273,7 @@
 	melting_point = 273
 	boiling_point = 373
 	allergen_flags = ALLERGEN_VEGETABLE
+	opacity = 0.9
 
 /decl/material/liquid/nutriment/rice
 	name = "rice"
@@ -307,19 +299,7 @@
 	melting_point = 273
 	boiling_point = 373
 	allergen_flags = ALLERGEN_FRUIT
-
-/decl/material/liquid/nutriment/cornoil
-	name = "corn oil"
-	lore_text = "An oil derived from various types of corn."
-	taste_description = "slime"
-	taste_mult = 0.1
-	nutriment_factor = 20
-	color = "#302000"
-	slipperiness = 8
-	uid = "chem_nutriment_cornoil"
-	melting_point = 273
-	boiling_point = 373
-	allergen_flags = ALLERGEN_VEGETABLE
+	opacity = 0.7
 
 /decl/material/liquid/nutriment/sprinkles
 	name = "sprinkles"
@@ -355,6 +335,7 @@
 	uid = "chem_nutriment_vinegar"
 	melting_point = 273
 	boiling_point = 373
+	opacity = 0.5
 
 /decl/material/liquid/nutriment/mayo
 	name = "mayonnaise"
@@ -368,7 +349,7 @@
 	allergen_flags = ALLERGEN_EGG
 
 /decl/material/liquid/nutriment/yeast
-	name = "Yeast"
+	name = "yeast"
 	lore_text = "A collection of live fungal cultures, cultivated across history for use in fermentation and baking."
 	taste_description = "mustiness"
 	nutriment_factor = 1

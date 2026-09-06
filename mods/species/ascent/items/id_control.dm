@@ -8,7 +8,7 @@
 
 /obj/item/card/id/ascent/GetAccess()
 	var/mob/living/human/H = loc
-	if(istype(H) && !(H.species.name in ALL_ASCENT_SPECIES))
+	if(istype(H) && !istype(H.get_species(), /decl/species/mantid))
 		. = list()
 	else
 		. = ..()
@@ -64,9 +64,9 @@
 /obj/item/organ/internal/controller/GetIdCards(list/exceptions)
 	. = ..()
 	//Not using is_broken() because it should be able to function when CUT_AWAY is set
-	if(id_card && damage < min_broken_damage && !is_type_in_list(id_card, exceptions))
+	if(id_card && _organ_damage < min_broken_damage && !is_type_in_list(id_card, exceptions))
 		LAZYDISTINCTADD(., id_card)
 
 /obj/item/organ/internal/controller/GetAccess()
-	if(damage < min_broken_damage)
+	if(_organ_damage < min_broken_damage)
 		return id_card?.GetAccess()

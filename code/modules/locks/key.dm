@@ -8,13 +8,13 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/key_data
 
-/obj/item/key/examine(mob/user, distance)
+/obj/item/key/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 1)
 		if(key_data)
-			to_chat(user, SPAN_NOTICE("\The [src] unlocks '[key_data]'."))
+			. += SPAN_NOTICE("\The [src] unlocks '[key_data]'.")
 		else
-			to_chat(user, SPAN_NOTICE("\The [src] is blank."))
+			. += SPAN_NOTICE("\The [src] is blank.")
 
 /obj/item/key/proc/get_data(var/mob/user)
 	return key_data

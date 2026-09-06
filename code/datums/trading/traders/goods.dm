@@ -47,7 +47,6 @@
 		/obj/item/deck                   = TRADER_SUBTYPES_ONLY,
 		/obj/item/pack                   = TRADER_SUBTYPES_ONLY,
 		/obj/item/dice                   = TRADER_ALL,
-		/obj/item/dice/d20/cursed        = TRADER_BLACKLIST,
 		/obj/item/gun/launcher/money     = TRADER_THIS_TYPE
 	)
 
@@ -248,7 +247,6 @@ Sells devices, odds and ends, and medical stuff
 		/obj/item/synthesized_instrument/violin   = TRADER_THIS_TYPE,
 		/obj/item/hailer                          = TRADER_THIS_TYPE,
 		/obj/item/uv_light                        = TRADER_THIS_TYPE,
-		/obj/item/organ/internal/brain_interface  = TRADER_SUBTYPES_ONLY,
 		/obj/item/robotanalyzer                   = TRADER_THIS_TYPE,
 		/obj/item/chems/toner_cartridge           = TRADER_THIS_TYPE,
 		/obj/item/camera_film                     = TRADER_THIS_TYPE,

@@ -19,11 +19,11 @@
 
 	. = ..()
 
-	if(!reagents?.total_volume)
+	if(!REAGENT_TOTAL_VOLUME(reagents))
 		return
 
-	var/list/data = LAZYACCESS(reagents?.reagent_data, nutriment_type)
-	var/milk_name =  LAZYACCESS(data, data_name_field)
+	var/list/data = REAGENT_DATA(reagents, nutriment_type)
+	var/milk_name = LAZYACCESS(data, data_name_field)
 	if(milk_name)
 		set_dairy_name(milk_name)
 		set_color(LAZYACCESS(data, data_color_field) || get_default_dairy_color())

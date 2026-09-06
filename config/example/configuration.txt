@@ -345,22 +345,19 @@ ROUNDSTART_LEVEL_GENERATION
 ## If uncommented, votes can be called to add extra antags to the round. Uncomment to enable.
 #ALLOW_EXTRA_ANTAGS
 
-## Remove the # to make rounds which end instantly (Rev, Wizard, Malf) to continue until the shuttle is called or the station is nuked.
+## Remove the # to make rounds which end instantly continue until the shuttle is called or the station is nuked.
 ## Malf and Rev will let the shuttle be called when the antags/protags are dead.
 ##  Uncomment to enable.
 #CONTINUOUS_ROUNDS
 
-## Spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard. Uncomment to enable.
-#FEATURE_OBJECT_SPELL_SYSTEM
-
 ## Allowed modes.
-#MODES ["crossfire","cult","extended","heist","mercenary","ninja","revolution","spyvspy","traitor","wizard"]
+#MODES ["crossfire","cult","extended","heist","mercenary","ninja","revolution","spyvspy","traitor"]
 
 ## Mode names.
-#MODE_NAMES {"calamity":"Calamity","extended":"Extended","mercenary":"Mercenary","wizard":"Wizard","cult":"Cult","heist":"Heist","ninja":"Ninja","revolution":"Revolution","traitor":"Traitor","spyvspy":"Spy v. spy","crossfire":"Crossfire"}
+#MODE_NAMES {"calamity":"Calamity","extended":"Extended","mercenary":"Mercenary","cult":"Cult","heist":"Heist","ninja":"Ninja","revolution":"Revolution","traitor":"Traitor","spyvspy":"Spy v. spy","crossfire":"Crossfire"}
 
 ## Relative probability of each mode.
-#PROBABILITIES {"calamity":0,"extended":1,"mercenary":1,"wizard":1,"cult":1,"heist":0,"ninja":0,"revolution":0,"traitor":0,"spyvspy":0,"crossfire":0}
+#PROBABILITIES {"calamity":0,"extended":1,"mercenary":1,"cult":1,"heist":0,"ninja":0,"revolution":0,"traitor":0,"spyvspy":0,"crossfire":0}
 
 ## If security is prohibited from being most antagonists. Uncomment to enable.
 #PROTECT_ROLES_FROM_ANTAGONIST
@@ -369,7 +366,7 @@ ROUNDSTART_LEVEL_GENERATION
 #TRAITOR_SCALING
 
 ## A list of modes that should be votable.
-#VOTABLE_MODES ["crossfire","cult","extended","heist","mercenary","ninja","revolution","secret","spyvspy","traitor","wizard"]
+#VOTABLE_MODES ["crossfire","cult","extended","heist","mercenary","ninja","revolution","secret","spyvspy","traitor"]
 
 ##
 # PROTECTED
@@ -377,13 +374,13 @@ ROUNDSTART_LEVEL_GENERATION
 ##
 
 ## Password used for authorizing external tools that can apply bans.
-#BAN_COMMS_PASSWORD 
+#BAN_COMMS_PASSWORD
 
 ## Password used for authorizing ircbot and other external tools.
-#COMMS_PASSWORD 
+#COMMS_PASSWORD
 
 ## Export address where external tools that monitor logins are located.
-#LOGIN_EXPORT_ADDR 
+#LOGIN_EXPORT_ADDR
 
 ##
 # RESOURCES
@@ -413,7 +410,7 @@ ROUNDSTART_LEVEL_GENERATION
 #ABANDON_ALLOWED 1
 
 ## IRC channel to send adminhelps to. Leave blank to disable adminhelps-to-irc.
-#ADMIN_IRC 
+#ADMIN_IRC
 
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 #ADMIN_LEGACY_SYSTEM 1
@@ -431,7 +428,7 @@ ROUNDSTART_LEVEL_GENERATION
 #AOOC_ALLOWED 1
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-#BANAPPEALS 
+#BANAPPEALS
 
 ## Add a # infront of this if you want to use the SQL based banning system. The legacy systems use the files in the data folder. You need to set up your database to use the SQL based system.
 #BAN_LEGACY_SYSTEM 1
@@ -452,7 +449,7 @@ ROUNDSTART_LEVEL_GENERATION
 #DISABLE_WEBHOOK_EMBEDS
 
 ## Discord server permanent invite address.
-#DISCORDURL 
+#DISCORDURL
 
 ## Comment to disable the dead OOC channel by default.
 #DOOC_ALLOWED 1
@@ -473,20 +470,20 @@ ROUNDSTART_LEVEL_GENERATION
 #FORBID_SINGULO_POSSESSION
 
 ## Discussion forum address.
-#FORUMURL 
+#FORUMURL
 
 ## Defines world FPS. Defaults to 20.
 ## Can also accept ticklag values (0.9, 0.5, etc) which will automatically be converted to FPS.
 #FPS 20
 
 ## GitHub address.
-#GITHUBURL 
+#GITHUBURL
 
 ## Determines whether or not people without a registered ckey (i.e. guest-*) can connect to your server. Uncomment to enable.
 #GUESTS_ALLOWED
 
 ## Set a hosted by name for UNIX platforms.
-#HOSTEDBY 
+#HOSTEDBY
 
 ## Hub visibility: If you want to be visible on the hub, uncomment the below line and be sure that Dream Daemon is set to visible. This can be changed in-round as well with toggle-hub-visibility if Dream Daemon is set correctly. Uncomment to enable.
 #HUB_VISIBILITY
@@ -495,7 +492,7 @@ ROUNDSTART_LEVEL_GENERATION
 #IRC_BOT_HOST localhost
 
 ## GitHub new issue address.
-#ISSUEREPORTURL 
+#ISSUEREPORTURL
 
 ## Add a # here if you wish to use the setup where jobs have more access. This is intended for servers with low populations - where there are not enough players to fill all roles, so players need to do more than just one job. Also for servers where they don't want people to hide in their own departments.
 #JOBS_HAVE_MINIMAL_ACCESS 1
@@ -554,11 +551,11 @@ ROUNDSTART_LEVEL_GENERATION
 #RESPAWN_DELAY 30
 
 ## Set a server location for world reboot. Don't include the byond://, just give the address and port.
-#SERVER 
+#SERVER
 
 ## Set a server URL for the IRC bot to use; like SERVER, don't include the byond://
 ## Unlike SERVER, this one shouldn't break auto-reconnect.
-#SERVERURL 
+#SERVERURL
 
 ## Server name: This appears at the top of the screen in-game.
 #SERVER_NAME Nebula 13
@@ -591,7 +588,7 @@ USEALIENWHITELIST
 #WAIT_FOR_SIGUSR1_REBOOT
 
 ## Wiki address.
-#WIKIURL 
+#WIKIURL
 
 ##
 # VOTING

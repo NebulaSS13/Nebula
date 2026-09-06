@@ -22,12 +22,12 @@
 	permeability_coefficient = 0.01
 
 /obj/item/clothing/mask/breath/emergency
-	desc = "A close-fitting mask that is used by the wallmounted emergency oxygen pump."
+	desc = "A close-fitting mask that is used by the wall-mounted emergency oxygen pump."
 	name = "emergency mask"
 	permeability_coefficient = 0.50
 
 /obj/item/clothing/mask/breath/scba
-	desc = "A close-fitting self contained breathing apparatus mask. Can be connected to an air supply."
+	desc = "A close-fitting self-contained breathing apparatus mask. Can be connected to an air supply."
 	name = "\improper SCBA mask"
 	icon = 'icons/clothing/mask/breath_scuba.dmi'
 	item_flags = ITEM_FLAG_AIRTIGHT|ITEM_FLAG_FLEXIBLEMATERIAL

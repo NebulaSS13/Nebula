@@ -103,7 +103,7 @@ Quick adjacency (to turf):
 		return TRUE
 	if(istype(loc, /obj/item) || istype(loc, /obj/structure))
 		if(recurse > 0)
-			return loc.Adjacent(neighbor,recurse - 1)
+			return loc.Adjacent(neighbor, recurse - 1)
 		return FALSE
 	return ..()
 
@@ -112,7 +112,7 @@ Quick adjacency (to turf):
 		return TRUE
 	if(istype(loc, /obj/item) || istype(loc, /obj/structure))
 		if(recurse > 0)
-			return loc.Adjacent(neighbor,recurse - 1)
+			return loc.Adjacent(neighbor, recurse - 1)
 		return FALSE
 	return ..()
 
@@ -144,8 +144,8 @@ Quick adjacency (to turf):
 
 		if(O.atom_flags & ATOM_FLAG_CHECKS_BORDER) // windows have throwpass but are on border, check them first
 			if( O.dir & target_dir || O.dir&(O.dir-1) ) // full tile windows are just diagonals mechanically
-				var/obj/structure/window/W = target_atom
-				if(istype(W) && W.is_fulltile()) //exception for breaking full tile windows on top of single pane windows
+				var/obj/structure/window/window = target_atom
+				if(istype(window) && window.is_fulltile()) //exception for breaking full tile windows on top of single pane windows
 					return 1
 				if(target_atom && (target_atom.atom_flags & ATOM_FLAG_ADJACENT_EXCEPTION)) // exception for atoms that should always be reachable
 					return 1

@@ -22,13 +22,13 @@
 			if(prefix_instance)
 				pref.prefix_keys_by_type[prefix_instance.type] = prefix_keys_by_name[prefix_name]
 
-/datum/category_item/player_setup_item/player_global/prefixes/save_preferences(datum/pref_record_writer/W)
+/datum/category_item/player_setup_item/player_global/prefixes/save_preferences(datum/pref_record_writer/writer)
 	var/list/prefix_keys_by_name = list()
 	for(var/prefix_type in pref.prefix_keys_by_type)
 		var/decl/prefix/prefix_instance = GET_DECL(prefix_type)
 		prefix_keys_by_name[prefix_instance.name] = pref.prefix_keys_by_type[prefix_type]
 
-	W.write("prefix_keys", prefix_keys_by_name)
+	writer.write("prefix_keys", prefix_keys_by_name)
 
 /datum/category_item/player_setup_item/player_global/prefixes/sanitize_preferences()
 	if(!istype(pref.prefix_keys_by_type))
@@ -100,8 +100,8 @@
 						continue
 					var/prefix_key = pref.prefix_keys_by_type[prefix_type]
 					if(prefix_key == new_key)
-						var/decl/prefix/pi = GET_DECL(prefix_type)
-						pref.prefix_keys_by_type[pi.type] = pi.default_key
+						var/decl/prefix/prefix = GET_DECL(prefix_type)
+						pref.prefix_keys_by_type[prefix.type] = prefix.default_key
 				// Then we reset any and all duplicates
 				reset_duplicate_keys()
 				// Then, if the new key was reset it means it matched a default key.

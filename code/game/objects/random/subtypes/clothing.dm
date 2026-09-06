@@ -239,18 +239,20 @@
 	)
 	return spawnable_choices
 
-/obj/random/hardsuit
-	name = "Random Hardsuit"
-	desc = "This is a random hardsuit control module."
-	icon = 'icons/obj/rig_modules.dmi'
-	icon_state = "generic"
+/obj/random/poncho
+	name = "random poncho"
+	icon = /obj/item/clothing/suit/poncho/green::icon
+	icon_state = /obj/item/clothing/suit/poncho/green::icon_state
 
-/obj/random/hardsuit/spawn_choices()
-	var/static/list/spawnable_choices = list(
-		/obj/item/rig/industrial,
-		/obj/item/rig/eva,
-		/obj/item/rig/light/hacker,
-		/obj/item/rig/light/stealth,
-		/obj/item/rig/light
+/obj/random/poncho/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/obj/item/clothing/suit/poncho/green,
+		/obj/item/clothing/suit/poncho/red,
+		/obj/item/clothing/suit/poncho/purple,
+		/obj/item/clothing/suit/poncho/blue,
+		/obj/item/clothing/suit/poncho/security,
+		/obj/item/clothing/suit/poncho/medical,
+		/obj/item/clothing/suit/poncho/engineering,
+		/obj/item/clothing/suit/poncho/cargo
 	)
-	return spawnable_choices
+	return spawn_choices

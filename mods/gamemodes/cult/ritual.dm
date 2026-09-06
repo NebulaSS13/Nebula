@@ -17,19 +17,19 @@
 	else
 		to_chat(user, "Hold \the [src] in your hand while drawing a rune to use it.")
 
-/obj/item/book/tome/examine(mob/user)
+/obj/item/book/tome/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	if(!iscultist(user))
-		to_chat(user, "An old, dusty tome with frayed edges and a sinister looking cover.")
+	if(iscultist(user))
+		. += "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
 	else
-		to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
+		. += "An old, dusty tome with frayed edges and a sinister looking cover."
 
 /obj/item/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity || !iscultist(user))
 		return
 	if(A.reagents && A.reagents.has_reagent(/decl/material/liquid/water))
 		to_chat(user, SPAN_NOTICE("You desecrate \the [A]."))
-		LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list("holy" = FALSE))
+		REAGENT_SET_DATA(A.reagents, /decl/material/liquid/water, list(DATA_WATER_HOLINESS = FALSE))
 
 /mob/proc/make_rune(var/rune, var/cost = 5, var/tome_required = 0)
 	var/has_robes = 0
@@ -100,7 +100,7 @@
 	return 0
 
 /mob/living/human/make_rune(var/rune, var/cost, var/tome_required)
-	if(should_have_organ(BP_HEART) && vessel && vessel.total_volume < species.blood_volume * 0.7)
+	if(should_have_organ(BP_HEART) && REAGENT_TOTAL_VOLUME(vessel) < species.blood_volume * 0.7)
 		to_chat(src, "<span class='danger'>You are too weak to draw runes.</span>")
 		return
 	..()

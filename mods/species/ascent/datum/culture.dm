@@ -1,15 +1,15 @@
 var/global/list/gyne_lineage = list()
-/mob/living/proc/get_gyne_name()
-	. = get_gyne_lineage()
+/proc/get_gyne_name(mob/recipient)
+	. = get_gyne_lineage(recipient)
 	if(!.)
 		. = create_gyne_name()
-		set_gyne_lineage(.)
+		set_gyne_lineage(recipient, .)
 
-/mob/living/proc/get_gyne_lineage()
-	return global.gyne_lineage["\ref[src]"]
+/proc/get_gyne_lineage(mob/recipient)
+	return global.gyne_lineage["\ref[recipient]"]
 
-/mob/living/proc/set_gyne_lineage(value)
-	global.gyne_lineage["\ref[src]"] = value
+/proc/set_gyne_lineage(mob/recipient, value)
+	global.gyne_lineage["\ref[recipient]"] = value
 
 /proc/create_gyne_name()
 	. = "[capitalize(pick(global.gyne_architecture))] [capitalize(pick(global.gyne_geoforms))]"
@@ -86,15 +86,11 @@ var/global/list/gyne_architecture = list(
 	queens."
 	uid = "heritage_ascent"
 
-/decl/background_detail/heritage/ascent/get_random_name(var/mob/M, var/gender)
-	var/mob/living/human/H = M
-	var/lineage = create_gyne_name()
-	if(istype(H) && H.get_gyne_lineage())
-		lineage = H.get_gyne_lineage()
+/decl/background_detail/heritage/ascent/get_random_cultural_name(mob/recipient, gender, species)
+	var/lineage = get_gyne_lineage(recipient) || create_gyne_name()
 	if(gender == MALE)
 		return "[random_id(/decl/species/mantid, 10000, 99999)] [lineage]"
-	else
-		return "[random_id(/decl/species/mantid, 1, 99)] [lineage]"
+	return "[random_id(/decl/species/mantid, 1, 99)] [lineage]"
 
 /decl/background_detail/location/kharmaani
 	name = "Ascent Core"

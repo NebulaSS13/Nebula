@@ -13,13 +13,14 @@
 	icon = 'icons/obj/structures/butchery.dmi'
 	icon_state = "spike"
 	material = /decl/material/solid/metal/steel
+	color = /decl/material/solid/metal/steel::color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	matter = list(
 		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY
 	)
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	parts_amount = 2
-	parts_type = /obj/item/stack/material/strut
+	parts_type = /obj/item/stack/material/rods
 
 	var/mob/living/occupant
 	var/occupant_state =   CARCASS_EMPTY
@@ -35,7 +36,7 @@
 	name = "truss"
 	icon_state = "improvised"
 	secures_occupant = FALSE
-	material = /decl/material/solid/organic/wood
+	material = /decl/material/solid/organic/wood/oak
 	parts_type = /obj/item/stack/material/plank
 
 /obj/structure/meat_hook/attack_hand(var/mob/user)
@@ -60,10 +61,10 @@
 		return TRUE
 	return ..()
 
-/obj/structure/meat_hook/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/holder))
-		var/mob/victim = (locate() in W)
-		if(istype(victim) && user.try_unequip(W))
+/obj/structure/meat_hook/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/holder))
+		var/mob/victim = (locate() in used_item)
+		if(istype(victim) && user.try_unequip(used_item))
 			try_spike(victim, user, 1) // Delay to allow the holder to despawn and drop the mob in the loc.
 			return TRUE
 	return ..()
@@ -221,9 +222,9 @@
 
 	return FALSE
 
-/obj/structure/meat_hook/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/meat_hook/attackby(var/obj/item/used_item, var/mob/user)
 
-	if(!IS_KNIFE(thing))
+	if(!IS_KNIFE(used_item))
 		return ..()
 
 	if(!occupant)
@@ -237,22 +238,22 @@
 	busy = TRUE
 	if(occupant_state == CARCASS_FRESH)
 		if(occupant.currently_has_skin())
-			do_butchery_step(user, thing, CARCASS_SKINNED, "skinning")
+			do_butchery_step(user, used_item, CARCASS_SKINNED, "skinning")
 		else
 			set_carcass_state(CARCASS_SKINNED, apply_damage = FALSE)
 	if(occupant_state == CARCASS_SKINNED)
 		if(occupant.currently_has_innards())
-			do_butchery_step(user, thing, CARCASS_GUTTED,  "gutting")
+			do_butchery_step(user, used_item, CARCASS_GUTTED,  "gutting")
 		else
 			set_carcass_state(CARCASS_GUTTED, apply_damage = FALSE)
 	if(occupant_state == CARCASS_GUTTED)
 		if(occupant.currently_has_bones())
-			do_butchery_step(user, thing, CARCASS_JOINTED, "deboning")
+			do_butchery_step(user, used_item, CARCASS_JOINTED, "deboning")
 		else
 			set_carcass_state(CARCASS_JOINTED, apply_damage = FALSE)
 	if(occupant_state == CARCASS_JOINTED)
 		if(occupant.currently_has_meat())
-			do_butchery_step(user, thing, CARCASS_EMPTY,   "butchering")
+			do_butchery_step(user, used_item, CARCASS_EMPTY,   "butchering")
 		else
 			set_carcass_state(CARCASS_EMPTY, apply_damage = FALSE)
 	busy = FALSE

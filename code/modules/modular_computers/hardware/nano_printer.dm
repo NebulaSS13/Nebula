@@ -38,20 +38,20 @@
 	return 1
 
 // TODO: unify with /obj/item/stock_parts/printer somehow?
-/obj/item/stock_parts/computer/nano_printer/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/paper))
+/obj/item/stock_parts/computer/nano_printer/attackby(obj/item/used_item, mob/user)
+	if(istype(used_item, /obj/item/paper))
 		if(stored_paper >= max_paper)
-			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")
+			to_chat(user, "You try to add \the [used_item] into \the [src], but its paper bin is full.")
 			return TRUE
 
-		to_chat(user, "You insert \the [W] into [src].")
-		qdel(W)
+		to_chat(user, "You insert \the [used_item] into [src].")
+		qdel(used_item)
 		stored_paper++
-	else if(istype(W, /obj/item/paper_bundle))
-		var/obj/item/paper_bundle/B = W
+	else if(istype(used_item, /obj/item/paper_bundle))
+		var/obj/item/paper_bundle/B = used_item
 		var/num_of_pages_added = 0
 		if(stored_paper >= max_paper)
-			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")
+			to_chat(user, "You try to add \the [used_item] into \the [src], but its paper bin is full.")
 			return TRUE
 		if(!B.is_blank())
 			if(user)
@@ -74,6 +74,6 @@
 				qdel(B)
 			else //if at least two items remain, just update the bundle icon
 				B.update_icon()
-		to_chat(user, "You add [num_of_pages_added] papers from \the [W] into \the [src].")
+		to_chat(user, "You add [num_of_pages_added] papers from \the [used_item] into \the [src].")
 		return TRUE
 	return ..()

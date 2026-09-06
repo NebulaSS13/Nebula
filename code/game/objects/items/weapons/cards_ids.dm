@@ -1,16 +1,11 @@
 /* Cards
  * Contains:
- *		DATA CARD
- *		ID CARD
- *		FINGERPRINT CARD HOLDER
- *		FINGERPRINT CARD
+ *		UNION CARD
+ *		DATA CARDS
+ *		EMAG & BROKEN EMAG
+ *		ID CARDS
  */
 
-
-
-/*
- * DATA CARDS - Used for the IC data card reader
- */
 /obj/item/card
 	name = "card"
 	desc = "Does card things."
@@ -21,6 +16,10 @@
 	drop_sound = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
+/*
+ * UNION CARD
+ */
+
 /obj/item/card/union
 	name = "union card"
 	desc = "A card showing membership in the local worker's union."
@@ -28,15 +27,15 @@
 	slot_flags = SLOT_ID
 	var/signed_by
 
-/obj/item/card/union/examine(mob/user)
+/obj/item/card/union/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(signed_by)
-		to_chat(user, "It has been signed by [signed_by].")
+		. += "It has been signed by [signed_by]."
 	else
-		to_chat(user, "It has a blank space for a signature.")
+		. += "It has a blank space for a signature."
 
-/obj/item/card/union/attackby(var/obj/item/thing, var/mob/user)
-	if(IS_PEN(thing))
+/obj/item/card/union/attackby(var/obj/item/used_item, var/mob/user)
+	if(IS_PEN(used_item))
 		if(signed_by)
 			to_chat(user, SPAN_WARNING("\The [src] has already been signed."))
 		else
@@ -47,6 +46,10 @@
 		return TRUE
 	return ..()
 
+/*
+ * DATA CARDS - Used for the IC data card reader and, for some reason, faxes and teleporters.
+ */
+// Please modpack this once those last two are made to use data disks instead.
 /obj/item/card/data
 	name = "data card"
 	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one has a stripe running down the middle."
@@ -63,26 +66,19 @@
 	. = ..()
 	add_overlay(overlay_image(icon, "[icon_state]-color", detail_color))
 
-/obj/item/card/data/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/integrated_electronics/detailer))
-		var/obj/item/integrated_electronics/detailer/D = I
-		detail_color = D.detail_color
-		update_icon()
-	return ..()
-
 /obj/item/card/data/full_color
 	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one has the entire card colored."
 	icon_state = "data_2"
 
 /obj/item/card/data/disk
-	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one inexplicibly looks like a floppy disk."
+	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one inexplicably looks like a floppy disk."
 	icon_state = "data_3"
 
 /obj/item/card/data/get_assembly_detail_color()
 	return detail_color
 
 /*
- * ID CARDS
+ * EMAG & BROKEN EMAG
  */
 
 /obj/item/card/emag_broken
@@ -144,10 +140,14 @@ var/global/const/NO_EMAG_ACT = -50
 
 		disguise(card_choices[picked], usr)
 
-/obj/item/card/emag/examine(mob/user)
+/obj/item/card/emag/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(user.skill_check(SKILL_DEVICES,SKILL_ADEPT))
-		to_chat(user, SPAN_WARNING("This ID card has some form of non-standard modifications."))
+		. += SPAN_WARNING("This ID card has some form of non-standard modifications.")
+
+/*
+ * ID CARDS
+ */
 
 /obj/item/card/id
 	name = "identification card"
@@ -203,13 +203,16 @@ var/global/const/NO_EMAG_ACT = -50
 	if(href_list["look_at_id"] && istype(user))
 		var/turf/T = get_turf(src)
 		if(T.CanUseTopic(user, global.view_topic_state) != STATUS_CLOSE)
-			user.examinate(src)
+			user.examine_verb(src)
 			return TOPIC_HANDLED
 	. = ..()
 
-/obj/item/card/id/examine(mob/user, distance)
+/obj/item/card/id/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It says '[get_display_name()]'.")
+	. += "It says '[get_display_name()]'."
+
+/obj/item/card/id/examined_by(mob/user, distance, infix, suffix)
+	. = ..()
 	if(distance <= 1)
 		show(user)
 
@@ -335,7 +338,7 @@ var/global/const/NO_EMAG_ACT = -50
 		return
 
 	if(ispath(var_value, /datum/mil_branch) || istext(var_value))
-		var/datum/mil_branch/new_branch = mil_branches.get_branch(var_value)
+		var/datum/mil_branch/new_branch = global.using_map.get_branch(var_value)
 		if(new_branch)
 			if(new_branch != id.military_branch)
 				id.military_branch = new_branch
@@ -366,7 +369,7 @@ var/global/const/NO_EMAG_ACT = -50
 		var_value = rank.name
 
 	if(istext(var_value))
-		var/new_rank = mil_branches.get_rank(id.military_branch.name, var_value)
+		var/new_rank = global.using_map.get_rank(id.military_branch.name, var_value)
 		if(new_rank)
 			id.military_rank = new_rank
 			return

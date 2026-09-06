@@ -48,10 +48,10 @@
 
 // Checks whether there is an active alarm, if yes, returns 1, otherwise returns 0.
 /datum/nano_module/program/power_monitor/proc/has_alarm()
-	for(var/obj/machinery/power/sensor/S in grid_sensors)
-		if(S.check_grid_warning())
-			return 1
-	return 0
+	for(var/obj/machinery/power_sensor/S in grid_sensors)
+		if(S.has_grid_warning())
+			return TRUE
+	return FALSE
 
 // If PC is not null header template is loaded. Use PC.get_header_data() to get relevant nanoui data from it. All data entries begin with "PC_...."
 // In future it may be expanded to other modular computer devices.
@@ -60,13 +60,13 @@
 
 	var/list/sensors = list()
 	// Focus: If it remains null if no sensor is selected and UI will display sensor list, otherwise it will display sensor reading.
-	var/obj/machinery/power/sensor/focus = null
+	var/obj/machinery/power_sensor/focus = null
 
 	// Build list of data from sensor readings.
-	for(var/obj/machinery/power/sensor/S in grid_sensors)
+	for(var/obj/machinery/power_sensor/S in grid_sensors)
 		sensors.Add(list(list(
 		"name" = html_encode(S.id_tag),
-		"alarm" = S.check_grid_warning()
+		"alarm" = S.has_grid_warning()
 		)))
 		if(S.id_tag == active_sensor)
 			focus = S
@@ -88,7 +88,7 @@
 /datum/nano_module/program/power_monitor/proc/refresh_sensors()
 	grid_sensors = list()
 	var/connected_z_levels = SSmapping.get_connected_levels(get_host_z())
-	for(var/obj/machinery/power/sensor/S in SSmachines.machinery)
+	for(var/obj/machinery/power_sensor/S in SSmachines.machinery)
 		if(get_z(S) in connected_z_levels) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			grid_sensors += S
 			events_repository.register(/decl/observ/destroyed, S, src, TYPE_PROC_REF(/datum/nano_module/program/power_monitor, remove_sensor))
@@ -121,7 +121,7 @@
 		. = 1
 
 	if(href_list["toggle_breaker"])
-		var/obj/machinery/power/apc/A = locate(href_list["toggle_breaker"])
+		var/obj/machinery/apc/A = locate(href_list["toggle_breaker"])
 
 		if(!CanInteract(user, state) || QDELETED(A))
 			return 0
@@ -129,7 +129,7 @@
 		A.toggle_breaker()
 
 	if(href_list["toggle_powerchannel_equip"] || href_list["toggle_powerchannel_light"] || href_list["toggle_powerchannel_enviro"]) //I'm sure there's a better way to do this.
-		var/obj/machinery/power/apc/A
+		var/obj/machinery/apc/A
 		var/powerchannel = 0
 		var/power_setting
 

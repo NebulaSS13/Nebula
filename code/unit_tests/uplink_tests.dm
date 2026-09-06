@@ -2,6 +2,7 @@
 	name = "UPLINK: All uplink items shall be valid."
 
 /datum/unit_test/uplink_setup_test/start_test()
+	var/decl/uplink/uplink = IMPLIED_DECL
 	var/success = TRUE
 
 	for(var/item in uplink.items)

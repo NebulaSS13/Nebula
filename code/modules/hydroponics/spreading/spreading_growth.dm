@@ -29,7 +29,7 @@
 		if(blocked)
 			continue
 		if(floor.density)
-			if(!isnull(seed.chems[/decl/material/liquid/acid/polyacid]))
+			if(seed.get_chemical_amount(/decl/material/liquid/acid/polyacid))
 				spawn(rand(5,25)) floor.explosion_act(3)
 			continue
 		if(!Adjacent(floor) || !floor.Enter(src))
@@ -60,16 +60,16 @@
 
 	if(is_mature())
 		//Find a victim
-		if(!buckled_mob)
+		if(!has_buckled_mob())
 			var/list/mob/living/targets = targets_in_range()
-			if(targets && targets.len && prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
+			if(LAZYLEN(targets) && prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
 				entangle(pick(targets))
 
 		//Handle the victim
-		if(buckled_mob)
-			seed.do_sting(buckled_mob,src)
+		for(var/mob/buckle_mob in get_buckled_mobs())
+			seed.do_sting(buckle_mob,src)
 			if(seed.get_trait(TRAIT_CARNIVOROUS))
-				seed.do_thorns(buckled_mob,src)
+				seed.do_thorns(buckle_mob,src)
 
 		//Try to spread
 		if(parent && parent.possible_children && prob(spread_chance))
@@ -97,7 +97,7 @@
 	return parent == src && current_health == get_max_health() && !plant && istype(T) && T.simulated && !T.CanZPass(src, DOWN)
 
 /obj/effect/vine/proc/should_sleep()
-	if(buckled_mob) //got a victim to fondle
+	if(has_buckled_mob()) //got a victim to fondle
 		return FALSE
 	if(length(get_neighbors())) //got places to spread to
 		return FALSE
@@ -119,7 +119,7 @@
 		child.set_dir(child.calc_dir())
 		child.update_icon()
 		// Some plants eat through plating.
-		if(islist(seed.chems) && !isnull(seed.chems[/decl/material/liquid/acid/polyacid]))
+		if(seed.get_chemical_amount(/decl/material/liquid/acid/polyacid))
 			target_turf.explosion_act(prob(80) ? 3 : 2)
 	else
 		qdel(child)

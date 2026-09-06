@@ -117,6 +117,7 @@ What is the naming convention for planes or layers?
 	#define TABLE_LAYER                 TURF_OVER_EDGE_LAYER + 0.20
 	#define BELOW_OBJ_LAYER             TURF_OVER_EDGE_LAYER + 0.21
 	#define STRUCTURE_LAYER             TURF_OVER_EDGE_LAYER + 0.22
+	#define ABOVE_STRUCTURE_LAYER       TURF_OVER_EDGE_LAYER + 0.23
 	// OBJ_LAYER                        3
 	#define ABOVE_OBJ_LAYER             3.01
 	#define CLOSED_DOOR_LAYER           3.02
@@ -178,7 +179,7 @@ What is the naming convention for planes or layers?
 #define ABOVE_LIGHTING_PLANE     4 // laser beams, etc. that shouldn't be affected by darkness
   #define ABOVE_LIGHTING_LAYER     1
   #define BEAM_PROJECTILE_LAYER    2
-  #define SUPERMATTER_WALL_LAYER   3
+  #define SUBSPACE_WALL_LAYER      3
   #define OBFUSCATION_LAYER        4
 
 #define FULLSCREEN_PLANE         5 // for fullscreen overlays that do not cover the hud.

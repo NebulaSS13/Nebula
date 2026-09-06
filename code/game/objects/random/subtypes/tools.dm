@@ -17,8 +17,8 @@
 	return spawnable_choices
 
 /obj/random/tool/power
-	name = "random powertool"
-	desc = "This is a random rare powertool for maintenance"
+	name = "random power tool"
+	desc = "This is a random rare power tool for maintenance"
 
 /obj/random/tool/power/spawn_choices()
 	var/static/list/spawnable_choices = list(

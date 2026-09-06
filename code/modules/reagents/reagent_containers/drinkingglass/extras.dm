@@ -1,8 +1,8 @@
-/obj/item/chems/drinks/glass2/attackby(obj/item/I, mob/user)
+/obj/item/chems/drinks/glass2/attackby(obj/item/used_item, mob/user)
 	if(extras.len >= 2) return ..() // max 2 extras, one on each side of the drink
 
-	if(istype(I, /obj/item/glass_extra))
-		var/obj/item/glass_extra/GE = I
+	if(istype(used_item, /obj/item/glass_extra))
+		var/obj/item/glass_extra/GE = used_item
 		if(!can_add_extra(GE))
 			to_chat(user, "<span class=warning>There's no space to put \the [GE] on \the [src]!</span>")
 			return TRUE
@@ -12,11 +12,11 @@
 		to_chat(user, "<span class=notice>You add \the [GE] to \the [src].</span>")
 		update_icon()
 		return TRUE
-	else if(istype(I, /obj/item/food/processed_grown/slice))
+	else if(istype(used_item, /obj/item/food/processed_grown/slice))
 		if(!rim_pos)
-			to_chat(user, "<span class=warning>There's no space to put \the [I] on \the [src]!</span>")
+			to_chat(user, "<span class=warning>There's no space to put \the [used_item] on \the [src]!</span>")
 			return TRUE
-		var/obj/item/food/processed_grown/slice/FS = I
+		var/obj/item/food/processed_grown/slice/FS = used_item
 		extras += FS
 		if(!user.try_unequip(FS, src))
 			return TRUE
@@ -46,6 +46,7 @@
 	return TRUE
 
 /obj/item/glass_extra
+	abstract_type = /obj/item/glass_extra
 	name = "generic glass addition"
 	desc = "This goes on a glass."
 	var/glass_addition

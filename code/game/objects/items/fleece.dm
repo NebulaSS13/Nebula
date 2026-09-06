@@ -4,7 +4,7 @@
 	icon        = 'icons/obj/items/fleece.dmi'
 	icon_state  = ICON_STATE_WORLD
 	w_class     = ITEM_SIZE_HUGE // an entire fleece is quite large in terms of volume
-	attack_verb = list("slapped")
+	attack_verb = "slapped"
 	hitsound    = 'sound/weapons/towelwhip.ogg'
 	material    = /decl/material/solid/organic/cloth/wool
 	material_alteration = MAT_FLAG_ALTERATION_COLOR

@@ -1,6 +1,7 @@
 // An individual state, defined as a `/decl` to save memory.
 // On a directed graph, these would be the nodes themselves, connected to each other by unidirectional arrows.
 /decl/state
+	abstract_type = /decl/state
 	// Transition decl types, which get turned into refs to those types.
 	// Note that the order DOES matter, as decls earlier in the list have higher priority
 	// if more than one becomes 'open'.

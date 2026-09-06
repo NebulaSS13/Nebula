@@ -36,12 +36,11 @@
 	show_lobby_menu(TRUE)
 
 	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-	var/decl/security_level/SL = security_state.current_security_level
-	var/alert_desc = ""
-	if(SL.up_description)
-		alert_desc = SL.up_description
-
-	to_chat(src, SPAN_NOTICE("The alert level on the [station_name()] is currently: <span class='[SL.light_color_class]'><B>[SL.name]</B></span>. [alert_desc]"))
+	if(security_state?.show_on_login)
+		var/decl/security_level/sec_level = security_state.current_security_level
+		// todo: allow maps to override this string for things like the fantasy map being on high alert?
+		// eg "The alert level *in* Karzerfeste Keep is currently high alert." or "Karzerfeste Keep is currently on high alert."
+		to_chat(src, SPAN_NOTICE("The alert level on the [station_name()] is currently: <span class='[sec_level.light_color_class]'><B>[sec_level.name]</B></span>. [sec_level?.up_description]"))
 
 	// bolds the changelog button on the interface so we know there are updates.
 	if(client.prefs?.lastchangelog != global.changelog_hash)

@@ -1,0 +1,20 @@
+#ifndef MODPACK_BLACKSMITHY
+#define MODPACK_BLACKSMITHY
+// BEGIN_INCLUDE
+#include "_blacksmithy.dm"
+#include "anvil.dm"
+#include "barrel_rim.dm"
+#include "billet.dm"
+#include "boulder.dm"
+#include "forge_fire.dm"
+#include "forging_step.dm"
+#include "forging_step_armor.dm"
+#include "forging_step_billets.dm"
+#include "forging_step_blades.dm"
+#include "forging_step_components.dm"
+#include "forging_step_ornate.dm"
+#include "forging_step_tools.dm"
+#include "forging_types.dm"
+#include "tongs.dm"
+// END_INCLUDE
+#endif

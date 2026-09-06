@@ -181,7 +181,7 @@ var/global/list/possible_say_verbs = list(
 		return
 	set_special_ability_cooldown(10 SECONDS)
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
-	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai/))
+	if(isitem(card.loc) && !card.loc.storage) // this used to be a more specific check for ai holder parts but this should cover them still
 		to_chat(src, "There is no room to unfold inside \the [card.loc]. You're good and stuck.")
 		return 0
 	else if(ismob(card.loc))
@@ -190,9 +190,9 @@ var/global/list/possible_say_verbs = list(
 			var/mob/living/human/H = holder
 			for(var/obj/item/organ/external/affecting in H.get_external_organs())
 				if(card in affecting.implants)
-					affecting.take_external_damage(rand(30,50))
+					affecting.take_damage(rand(30,50))
 					LAZYREMOVE(affecting.implants, card)
-					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!</span>")
+					H.visible_message(SPAN_DANGER("\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!"))
 					break
 		holder.drop_from_inventory(card)
 
@@ -275,24 +275,24 @@ var/global/list/possible_say_verbs = list(
 		icon_state = "[icon_state]-rest"
 
 //Overriding this will stop a number of headaches down the track.
-/mob/living/silicon/pai/attackby(obj/item/W, mob/user)
-	var/obj/item/card/id/card = W.GetIdCard()
-	if(card && user.a_intent == I_HELP)
+/mob/living/silicon/pai/attackby(obj/item/used_item, mob/user)
+	var/obj/item/card/id/card = used_item.GetIdCard()
+	if(card && user.check_intent(I_FLAG_HELP))
 		var/list/new_access = card.GetAccess()
 		idcard.access = new_access
-		visible_message("<span class='notice'>[user] slides [W] across [src].</span>")
+		visible_message("<span class='notice'>[user] slides [used_item] across [src].</span>")
 		to_chat(src, SPAN_NOTICE("Your access has been updated!"))
 		return FALSE // don't continue processing click callstack.
-	if(try_stock_parts_install(W, user))
+	if(try_stock_parts_install(used_item, user))
 		return TRUE
-	if(try_stock_parts_removal(W, user))
+	if(try_stock_parts_removal(used_item, user))
 		return TRUE
-	var/force = W.get_attack_force(user)
+	var/force = used_item.expend_attack_force(user)
 	if(force)
-		visible_message(SPAN_DANGER("[user] attacks [src] with [W]!"))
+		visible_message(SPAN_DANGER("[user] attacks [src] with [used_item]!"))
 		take_damage(force)
 	else
-		visible_message(SPAN_WARNING("[user] bonks [src] harmlessly with [W]."))
+		visible_message(SPAN_WARNING("[user] bonks [src] harmlessly with [used_item]."))
 
 	spawn(1)
 		if(stat != DEAD) fold()

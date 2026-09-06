@@ -89,7 +89,7 @@
 
 /mob/living/simple_animal/hostile/beast/shantak
 	name = "shantak"
-	desc = "A piglike creature with a bright iridiscent mane that sparkles as though lit by an inner light. Don't be fooled by its beauty though."
+	desc = "A piglike creature with a bright iridescent mane that sparkles as though lit by an inner light. Don't be fooled by its beauty though."
 	faction = "shantak"
 	icon = 'icons/mob/simple_animal/shantak.dmi'
 	move_intents = list(
@@ -178,7 +178,7 @@
 /obj/item/natural_weapon/charbaby
 	name = "scalding hide"
 	atom_damage_type =  BURN
-	attack_verb = list("singed")
+	attack_verb = "singed"
 
 /mob/living/simple_animal/hostile/beast/charbaby/default_hurt_interaction(mob/user)
 	. = ..()
@@ -188,8 +188,8 @@
 /mob/living/simple_animal/hostile/beast/charbaby/apply_attack_effects(mob/living/target)
 	. = ..()
 	if(prob(10))
-		target.adjust_fire_stacks(1)
-		target.IgniteMob()
+		target.adjust_fire_intensity(1)
+		target.ignite_fire()
 
 /mob/living/simple_animal/hostile/beast/shantak/lava
 	desc = "A vaguely canine looking beast. It looks as though its fur is made of stone wool."

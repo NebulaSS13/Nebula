@@ -6,7 +6,6 @@
 	min_force = 4
 	hitsound = 'sound/effects/Glasshit.ogg'
 	max_health = 150 //If you change this, consider changing ../door/window/brigdoor/ health at the bottom of this .dm file
-	current_health = 150
 	visible = 0.0
 	use_power = POWER_USE_OFF
 	stat_immune = NOSCREEN | NOINPUT | NOPOWER
@@ -139,13 +138,11 @@
 		return
 
 /obj/machinery/door/window/physical_attack_hand(mob/user)
-	if(ishuman(user))
-		var/mob/living/human/H = user
-		if(H.species.can_shred(H))
-			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
-			visible_message("<span class='danger'>\The [user] smashes against \the [src].</span>", 1)
-			take_damage(25)
-			return TRUE
+	if(user.can_shred())
+		playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
+		visible_message(SPAN_DANGER("\The [user] smashes against \the [src]."))
+		take_damage(25)
+		return TRUE
 	return ..()
 
 /obj/machinery/door/window/emag_act(var/remaining_charges, var/mob/user)
@@ -173,12 +170,12 @@
 /obj/machinery/door/window/CanFluidPass(var/coming_from)
 	return !density || ((dir in global.cardinal) && coming_from != dir)
 
-/obj/machinery/door/window/attackby(obj/item/I, mob/user)
+/obj/machinery/door/window/attackby(obj/item/used_item, mob/user)
 	//If it's in the process of opening/closing, ignore the click
 	if(operating)
 		return TRUE
 
-	if(bash(I, user))
+	if(bash(used_item, user))
 		return TRUE
 
 	. = ..()
@@ -215,10 +212,8 @@
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
-	max_health = 300
-	current_health = 300.0 //Stronger doors for prison (regular window door health is 150)
+	max_health = 300 //Stronger doors for prison (regular window door health is 150)
 	pry_mod = 0.65
-
 
 /obj/machinery/door/window/northleft
 	dir = NORTH

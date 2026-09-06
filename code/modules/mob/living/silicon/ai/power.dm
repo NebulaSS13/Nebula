@@ -8,7 +8,7 @@
 		return
 
 	to_chat(src, "<span class='danger'>Main power lost. System switched to internal capacitor. Beginning diagnostics.</span>")
-	var/obj/machinery/power/apc/theAPC = null
+	var/obj/machinery/apc/theAPC = null
 	var/connection_failures = 0
 	while(aiRestorePowerRoutine)
 		// If the routine is running, proceed to another step.
@@ -85,7 +85,7 @@
 
 
 
-// Handles all necessary power checks: Area power, inteliCard and Malf AI APU power and manual override.
+// Handles all necessary power checks: Area power, intelliCard and Malf AI APU power and manual override.
 /mob/living/silicon/ai/proc/has_power(var/respect_override = 1)
 	if(psupply && !(psupply.stat & NOPOWER))
 		return 1
@@ -98,7 +98,7 @@
 	return 0
 
 // Resets passed APC so the AI may function again.
-/mob/living/silicon/ai/proc/reset_apc(var/obj/machinery/power/apc/A)
+/mob/living/silicon/ai/proc/reset_apc(var/obj/machinery/apc/A)
 	if(!istype(A))
 		return
 
@@ -214,7 +214,7 @@
 	update_use_power(get_power_state())
 
 /obj/machinery/ai_powersupply/proc/get_power_state()
-	// Dead, powered by APU, admin power, or inside an item (inteliCard/IIS). No power usage.
+	// Dead, powered by APU, admin power, or inside an item (intelliCard/IIS). No power usage.
 	if(!powered_ai.stat == DEAD || powered_ai.admin_powered || istype(powered_ai.loc, /obj/item/))
 		return 0
 	// Normal power usage.

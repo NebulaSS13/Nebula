@@ -5,20 +5,18 @@
 		BP_L_ARM,
 		BP_L_HAND,
 		BP_R_ARM,
-		BP_R_HAND,
-		BP_AUGMENT_R_ARM,
-		BP_AUGMENT_L_ARM,
-		BP_AUGMENT_R_HAND,
-		BP_AUGMENT_L_HAND
+		BP_R_HAND
 	)
 
+/datum/ailment/fault/locking_thumbs/proc/resolve_tag_to_slot(organ_tag)
+	switch(organ_tag)
+		if(BP_L_ARM, BP_L_HAND)
+			return BP_L_HAND
+		if(BP_R_ARM, BP_R_HAND)
+			return BP_R_HAND
+
 /datum/ailment/fault/locking_thumbs/on_ailment_event()
-	var/slot = null
-	switch (organ.organ_tag)
-		if (BP_L_ARM, BP_L_HAND, BP_AUGMENT_L_HAND, BP_AUGMENT_L_ARM)
-			slot = BP_L_HAND
-		if (BP_R_ARM, BP_R_HAND, BP_AUGMENT_R_HAND, BP_AUGMENT_R_ARM)
-			slot = BP_R_HAND
+	var/slot = resolve_tag_to_slot(organ.organ_tag)
 	var/obj/item/thing = organ.owner.get_equipped_item(slot)
 	if(thing && organ.owner.try_unequip(thing))
 		var/decl/pronouns/pronouns = organ.owner.get_pronouns()

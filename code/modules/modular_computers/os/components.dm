@@ -14,10 +14,10 @@
 /datum/extension/interactive/os/proc/has_component(var/part_type)
 	return !!get_component(part_type)
 
-/datum/extension/interactive/os/proc/print_paper(content, title)
+/datum/extension/interactive/os/proc/print_paper(content, title, paper_type, list/metadata)
 	var/obj/item/stock_parts/computer/nano_printer/printer = get_component(PART_PRINTER)
 	if(printer)
-		return printer.print_text(content, title)
+		return printer.print_text(content, title, paper_type, metadata)
 
 /datum/extension/interactive/os/proc/get_network_tag()
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)

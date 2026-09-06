@@ -3,7 +3,7 @@
 */
 /datum/unit_test/foundation
 	name = "FOUNDATION template"
-	template = /datum/unit_test/foundation
+	abstract_type = /datum/unit_test/foundation
 	async = 0
 
 /datum/unit_test/foundation/step_shall_return_true_on_success

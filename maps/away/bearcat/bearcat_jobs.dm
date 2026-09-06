@@ -6,6 +6,10 @@
 	info = "Your ship has suffered a catastrophic amount of damage, leaving it dark and crippled in the depths of \
 	unexplored space. The Captain is dead, leaving you, previously the First Mate in charge. Organize what's left of \
 	your crew, and maybe you'll be able to survive long enough to be rescued."
+	access = list(
+		access_engine,
+		access_atmospherics,
+	)
 
 /datum/job/submap/bearcat_crewman
 	title = "Independant Crewman"
@@ -15,6 +19,10 @@
 	info = "Your ship has suffered a catastrophic amount of damage, leaving it dark and crippled in the depths of \
 	unexplored space. Work together with the Acting Captain and what's left of the crew, and maybe you'll be able \
 	to survive long enough to be rescued."
+	access = list(
+		access_engine,
+		access_atmospherics
+	)
 
 /decl/outfit/job/bearcat
 	abstract_type = /decl/outfit/job/bearcat
