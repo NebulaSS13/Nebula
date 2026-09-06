@@ -39,7 +39,6 @@
 	sacrifice_objects = list(
 		/obj/item/toolbox,
 		/obj/item/cane/fancy,
-		/obj/item/flamethrower,
 		/obj/item/plastique,
 		/obj/item/dice,
 		/obj/item/soap,
