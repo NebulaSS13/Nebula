@@ -75,7 +75,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	z = t1.z
 	t1i = oi
 
-	if (TURF_IS_AMBIENT_LIT_UNSAFE(new_turf))
+	if (new_turf.ambient_light)
 		has_ambience = TRUE
 
 	var/vertical   = diagonal & ~(diagonal - 1) // The horizontal directions (4 and 8) are bigger than the vertical ones (1 and 2), so we can reliably say the lsb is the horizontal direction.
@@ -101,7 +101,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		t2 = T
 		t2i = REVERSE_LIGHTING_CORNER_DIAGONAL[diagonal]
 		T.corners[t2i] = src
-		if (TURF_IS_AMBIENT_LIT_UNSAFE(T))
+		if (T.ambient_light)
 			has_ambience = TRUE
 
 	// Now the horizontal one.
@@ -114,7 +114,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		t3 = T
 		t3i = REVERSE_LIGHTING_CORNER_DIAGONAL[((Tc > x) ? EAST : WEST) | ((t1.y > y) ? NORTH : SOUTH)] // Get the dir based on coordinates.
 		T.corners[t3i] = src
-		if (TURF_IS_AMBIENT_LIT_UNSAFE(T))
+		if (T.ambient_light)
 			has_ambience = TRUE
 
 	// And finally the vertical one.
@@ -127,7 +127,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		t4 = T
 		t4i = REVERSE_LIGHTING_CORNER_DIAGONAL[((t1.x > x) ? EAST : WEST) | ((Tc > y) ? NORTH : SOUTH)] // Get the dir based on coordinates.
 		T.corners[t4i] = src
-		if (TURF_IS_AMBIENT_LIT_UNSAFE(T))
+		if (T.ambient_light)
 			has_ambience = TRUE
 
 	if (has_ambience)
