@@ -35,7 +35,13 @@
 	/// Whether or not this modifier shows a lemniscate when set to indefinite duration.
 	var/show_indefinite_duration = TRUE
 	/// Whether or not this modifier shows remaining time before expiry.
-	var/hide_expiry= FALSE
+	var/hide_expiry = FALSE
+
+	// Various general effects to apply while the modifier is present.
+	/// Movement slowdown.
+	var/movement_slowdown = 0
+	/// Slowdown on attacks/interactions.
+	var/click_cooldown_multiplier = null
 
 /decl/mob_modifier/validate()
 	. = ..()

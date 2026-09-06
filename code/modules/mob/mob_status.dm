@@ -20,5 +20,8 @@
 /mob/proc/add_mob_modifier(decl/mob_modifier/archetype, duration = MOB_MODIFIER_INDEFINITE, datum/source, skip_update = FALSE)
 	return FALSE
 
+/mob/proc/get_mob_modifiers()
+	return FALSE
+
 /mob/proc/mob_modifiers_block_attack(...)
 	return FALSE // see living_defense.dm

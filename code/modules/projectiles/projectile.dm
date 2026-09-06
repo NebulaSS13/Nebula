@@ -105,6 +105,11 @@
 	var/datum/point/beam_index
 	var/turf/hitscan_last	//last turf touched during hitscanning.
 
+	/// If set, will apply a modifier to mobs that are hit by this projectile.
+	var/modifier_type_to_apply
+	/// How long the above modifier should last for. Leave null to be permanent.
+	var/modifier_duration = null
+
 /obj/item/projectile/Initialize()
 	if(!hitscan)
 		animate_movement = SLIDE_STEPS
@@ -125,6 +130,8 @@
 		return FALSE
 
 	var/mob/living/L = target
+	if(modifier_type_to_apply)
+		L.add_mob_modifier(modifier_type_to_apply, modifier_duration, source = src)
 	L.apply_effects(0, weaken, paralyze, stutter, eyeblur, drowsy, 0, blocked)
 	L.stun_effect_act(stun, agony, def_zone, src)
 	//radiation protection is handled separately from other armour types.

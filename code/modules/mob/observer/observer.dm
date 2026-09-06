@@ -46,6 +46,7 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 	return FALSE
 
 /mob/observer/get_movement_delay(travel_dir)
+	SHOULD_CALL_PARENT(FALSE)
 	return 1
 
 /mob/observer/check_airflow_movable()
