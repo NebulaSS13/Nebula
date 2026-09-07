@@ -5,7 +5,7 @@
 
 	var/list/possibilities
 	for(var/interaction_type in interactions)
-		var/decl/interaction_handler/interaction = GET_DECL(interaction_type)
+		var/decl/interaction_handler/interaction = RESOLVE_TO_DECL(interaction_type)
 		if(interaction.is_possible(src, user, prop))
 			var/image/label = image(interaction.icon, interaction.icon_state)
 			label.name = interaction.name
