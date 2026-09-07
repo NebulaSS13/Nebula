@@ -89,7 +89,7 @@ SUBSYSTEM_DEF(ambience)
 			var/turf/above = src
 			var/datum/level_data/above_level_data
 			while ((above = GetAbove(above)))
-				if((above.z_flags & ZM_TERMINATOR) || !HasAbove(above.z))
+				if((above.z_flags & ZM_OVERRIDE) || !HasAbove(above.z))
 					break
 				above_level_data = SSmapping.levels_by_z[above.z]
 				if(above_level_data.daycycle_id)
