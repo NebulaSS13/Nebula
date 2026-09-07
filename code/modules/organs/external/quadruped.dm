@@ -9,10 +9,12 @@
 /obj/item/organ/external/foot/quadruped
 	name = "left hindpaw"
 	joint = "rear left ankle"
+	coating_volume = 5 // twice as many feet, half as much trackable mud
 
 /obj/item/organ/external/foot/right/quadruped
 	name = "right hindpaw"
 	joint = "rear right ankle"
+	coating_volume = 5 // twice as many feet, half as much trackable mud
 
 /obj/item/organ/external/arm/quadruped
 	name = "left foreleg"
@@ -40,6 +42,7 @@
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 	organ_categories = @"['" + ORGAN_CATEGORY_STANCE + "']"
 	gripper_type = null
+	coating_volume = 5 // twice as many feet, half as much trackable mud
 
 /obj/item/organ/external/hand/right/quadruped
 	name = "right forepaw"
@@ -49,3 +52,4 @@
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 	organ_categories = @"['" + ORGAN_CATEGORY_STANCE + "']"
 	gripper_type = null
+	coating_volume = 5 // twice as many feet, half as much trackable mud
