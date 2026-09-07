@@ -53,7 +53,18 @@
 		return TRUE
 
 	if(victim.get_object_size() > max_dismember_size)
-		to_chat(user, SPAN_WARNING("\The [victim] is too big for you to dismember."))
+
+		var/decl/butchery_data/butchery_decl = GET_DECL(victim.butchery_data)
+		if(butchery_decl.meat_amount)
+			if(victim.nibbled_on >= butchery_decl.meat_amount)
+				to_chat(user, SPAN_WARNING("There's no meat left on \the [victim]..."))
+			else
+				victim.nibbled_on++
+				var/products = butchery_decl.place_products(victim, butchery_decl.meat_material, 1, butchery_decl.meat_type)
+				if(products)
+					user.visible_message("\The [user] rips [english_list(products)] out of \the [victim].")
+		else
+			to_chat(user, SPAN_WARNING("\The [victim] is too big for you to dismember."))
 		return TRUE
 
 	var/target_zone = user.get_target_zone()
