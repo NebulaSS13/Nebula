@@ -18,6 +18,7 @@
 // 50% damage bonus on prone, stunned or confused enemies.
 /decl/natural_attack/bite/sharp/drake
 	damage = 12 // chomp
+	can_damage_structures = TRUE
 
 /decl/natural_attack/bite/sharp/drake/get_unarmed_damage(mob/living/user, mob/living/victim)
 	. = ..()
@@ -26,6 +27,7 @@
 
 /decl/natural_attack/claws/strong/drake
 	damage = 8 // chonky for digging
+	can_damage_structures = TRUE
 
 /decl/natural_attack/claws/strong/drake/get_unarmed_damage(mob/living/user, mob/living/victim)
 	. = ..()
