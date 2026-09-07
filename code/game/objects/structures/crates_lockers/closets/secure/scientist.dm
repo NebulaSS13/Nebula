@@ -71,6 +71,7 @@
 	return list(
 		/obj/item/backpack/parachute,
 		/obj/item/knife/utility,
+		/obj/item/clothing/suit/jacket/winter/parka/blue,
 		jumpsuit_type,
 		/obj/item/clothing/suit/jacket/bomber,
 		/obj/item/clothing/mask/gas/half,
