@@ -52,21 +52,6 @@
 		to_chat(user, SPAN_WARNING("\The [victim] appears to be inedible."))
 		return TRUE
 
-	if(victim.get_object_size() > max_dismember_size)
-
-		var/decl/butchery_data/butchery_decl = GET_DECL(victim.butchery_data)
-		if(butchery_decl.meat_amount)
-			if(victim.nibbled_on >= butchery_decl.meat_amount)
-				to_chat(user, SPAN_WARNING("There's no meat left on \the [victim]..."))
-			else
-				victim.nibbled_on++
-				var/products = butchery_decl.place_products(victim, butchery_decl.meat_material, 1, butchery_decl.meat_type)
-				if(products)
-					user.visible_message("\The [user] rips [english_list(products)] out of \the [victim].")
-		else
-			to_chat(user, SPAN_WARNING("\The [victim] is too big for you to dismember."))
-		return TRUE
-
 	var/target_zone = user.get_target_zone()
 	var/list/external_organs = victim.get_external_organs()
 	var/obj/item/organ/external/limb = victim.get_organ(target_zone)
@@ -74,13 +59,37 @@
 		to_chat(user, SPAN_WARNING("\The [victim] is missing that limb!"))
 		return TRUE
 
+	var/only_a_nibble = FALSE
+	var/decl/butchery_data/butchery_decl = GET_DECL(victim.butchery_data)
+
+	// If they are too big for us to dismember, we can try to bite off a chunk.
+	if(victim.get_object_size() > max_dismember_size)
+		if(!butchery_decl.meat_amount)
+			to_chat(user, SPAN_WARNING("\The [victim] is too big for you to dismember."))
+			return TRUE
+		if(victim.nibbled_on >= butchery_decl.meat_amount)
+			to_chat(user, SPAN_WARNING("There's no meat left on \the [victim]..."))
+			return TRUE
+		only_a_nibble = TRUE
+
 	to_chat(user, SPAN_NOTICE("You dig into \the [victim], hunting for something edible."))
-	if(!do_after(user, max(2 SECONDS, victim.get_object_size() * 5), victim) || QDELETED(victim) || !victim.butchery_data || victim.stat != DEAD)
+
+	var/nibble_time = only_a_nibble ? 1 SECOND : max(2 SECONDS, victim.get_object_size() * 5)
+	if(!do_after(user, nibble_time, victim) || QDELETED(victim) || !victim.butchery_data || victim.stat != DEAD)
 		return TRUE
 
 	// Changing zone means we cancel.
 	if(target_zone != user.get_target_zone() || QDELETED(victim))
 		return
+
+	if(only_a_nibble)
+		if(victim.nibbled_on >= butchery_decl.meat_amount || RESOLVE_TO_DECL(victim.butchery_data) != butchery_decl)
+			return TRUE
+		victim.nibbled_on++
+		var/products = butchery_decl.place_products(victim, butchery_decl.meat_material, 1, butchery_decl.meat_type)
+		if(products)
+			user.visible_message(SPAN_DANGER("\The [user] rips [english_list(products)] out of \the [victim]!"))
+		return TRUE
 
 	external_organs = victim.get_external_organs()
 	if(length(external_organs) <= 1)

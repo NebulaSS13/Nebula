@@ -16,3 +16,14 @@
 /decl/mob_modifier/sifsap_salve
 	name = "Drakespittle Salve"
 	desc = "glowing spittle"
+
+/decl/bodytype/quadruped/grafadreka
+	base_color           = "#8f974a"
+	base_eye_color       = "#d95763"
+	default_sprite_accessories = list(
+		SAC_MARKINGS = list(
+			/decl/sprite_accessory/marking/grafadreka                 = list(SAM_COLOR = "#b6b99a"),
+			/decl/sprite_accessory/marking/grafadreka/bioluminescence = list(SAM_COLOR = "#d95763"),
+			/decl/sprite_accessory/marking/grafadreka/claws           = list(SAM_COLOR = "#3a3b2c")
+		)
+	)
