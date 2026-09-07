@@ -38,7 +38,7 @@
 	eye_darksight_range                   = 7
 	eye_flash_mod                         = 2
 	eye_blend                             = ICON_MULTIPLY
-	eye_low_light_vision_effectiveness    = 0.15
+	eye_low_light_vision_effectiveness    = 0.30
 	eye_low_light_vision_adjustment_speed = 0.3
 
 	override_limb_types = list(
