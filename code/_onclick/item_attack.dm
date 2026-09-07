@@ -26,7 +26,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 // If TRUE, prevent afterattack from running.
 /obj/item/proc/resolve_attackby(atom/A, mob/user, var/click_params)
-	if(!user.check_dexterity(get_required_attack_dexterity(user, A, fail_message = "You lack the dexterity to use \the [src].")))
+	if(!user.check_dexterity(get_required_attack_dexterity(user, A), fail_message = "You lack the dexterity to use \the [src]."))
 		return TRUE
 	if(!(item_flags & ITEM_FLAG_NO_PRINT))
 		add_fingerprint(user)
@@ -148,7 +148,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 	if(user == target && user.check_intent(I_FLAG_HARM) && user.get_preference_value(/datum/client_preference/harm_intent_attack_blocking) == PREF_YES)
 		to_chat(user, SPAN_WARNING("You refrain from hitting yourself with \the [src]."))
-		return FALSE
+		return TRUE // Also skip afterattack.
 
 	/////////////////////////
 
