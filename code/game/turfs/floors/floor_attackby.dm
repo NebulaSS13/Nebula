@@ -2,7 +2,7 @@
 
 	// Clicking on a turf during combat and getting stuck in the graffiti menu is annoying.
 	if(user.check_intent(I_FLAG_HARM))
-		return
+		return FALSE
 
 	// Collect snow or mud.
 	var/decl/flooring/flooring = get_topmost_flooring()
