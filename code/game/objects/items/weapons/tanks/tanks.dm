@@ -211,14 +211,6 @@ var/global/list/global/tank_gauge_cache = list()
 		add_fingerprint(user)
 		return TRUE
 
-	if(istype(W, /obj/item/flamethrower))
-		var/obj/item/flamethrower/F = W
-		if(!F.secured || F.tank || !user.try_unequip(src, F))
-			return TRUE
-
-		master = F
-		F.tank = src
-		return TRUE
 	return ..()
 
 /obj/item/tank/attack_self(mob/user)
