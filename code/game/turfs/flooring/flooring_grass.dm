@@ -17,7 +17,7 @@
 	can_conceal_hazards = TRUE
 
 	var/harvestable    = FALSE
-	var/show_contaminants = FALSE
+	var/show_contaminants = TRUE
 
 /decl/flooring/grass/can_show_coating_footprints(turf/target, decl/material/contaminant)
 	return show_contaminants && ..()
@@ -41,6 +41,7 @@
 	icon_edge_layer    = FLOOR_EDGE_GRASS_WILD
 	harvestable        = TRUE
 	uid                = "floor_grass_wild"
+	show_contaminants  = FALSE
 
 /decl/flooring/grass/wild/get_movable_alpha_mask_state(atom/movable/mover)
 	. = ..() || "mask_grass"
@@ -65,7 +66,6 @@
 	build_type        = /obj/item/stack/tile/grass
 	force_material    = /decl/material/solid/organic/plastic
 	uid               = "floor_grass_fake"
-	show_contaminants = TRUE
 
 /decl/flooring/grass/fake/get_vehicle_transit_delay(obj/vehicle/vehicle)
 	return vehicle::base_speed

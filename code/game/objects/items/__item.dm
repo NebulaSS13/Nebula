@@ -102,6 +102,7 @@
 	///Sound uses when dropping the item, or when its thrown.
 	var/drop_sound = 'sound/foley/drop1.ogg'
 
+	var/coating_volume = 10
 	var/datum/reagents/coating // reagent container for coating things like blood/oil, used for overlays and tracks
 
 	var/tmp/has_inventory_icon	// do not set manually
@@ -1043,7 +1044,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/add_coating(reagent_type, amount, data)
 	if(!coating)
-		coating = new /datum/reagents(10, src)
+		coating = new /datum/reagents(coating_volume, src)
 	if(ispath(reagent_type))
 		coating.add_reagent(reagent_type, amount, data)
 	else if(istype(reagent_type, /datum/reagents))
