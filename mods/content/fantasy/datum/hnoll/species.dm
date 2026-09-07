@@ -24,7 +24,6 @@
 	available_bodytypes = list(/decl/bodytype/hnoll)
 	preview_outfit      = /decl/outfit/job/generic/fantasy
 	spawn_flags         = SPECIES_CAN_JOIN
-	flesh_color         = "#ae7d32"
 	hunger_factor       = DEFAULT_HUNGER_FACTOR * 1.2
 	thirst_factor       = DEFAULT_THIRST_FACTOR * 1.2
 	gluttonous          = GLUT_TINY

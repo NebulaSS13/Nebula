@@ -36,7 +36,6 @@
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 	body_temperature = null
-	flesh_color = "#525252"
 	blood_oxy = 0
 
 	available_bodytypes = list(

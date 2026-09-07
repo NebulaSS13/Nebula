@@ -38,7 +38,6 @@
 	amid reports of highly advanced, astonishingly violent mantid-cephlapodean sentients with particle cannons."
 	organs_icon =       'mods/species/ascent/icons/species/body/organs.dmi'
 
-	flesh_color =             "#009999"
 	move_trail =              /obj/effect/decal/cleanable/blood/tracks/snake
 
 	blood_types = list(/decl/blood_type/hemolymph/mantid)

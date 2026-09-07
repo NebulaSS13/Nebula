@@ -45,7 +45,6 @@
 
 	spawn_flags = SPECIES_CAN_JOIN
 
-	flesh_color = "#8cd7a3"
 	organs_icon = 'mods/species/skrell/icons/body/organs.dmi'
 
 	blood_types = list(

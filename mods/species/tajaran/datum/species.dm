@@ -41,8 +41,6 @@
 		/decl/blood_type/tajaran/ominus
 	)
 
-	flesh_color = "#ae7d32"
-
 	organs_icon = 'mods/species/tajaran/icons/organs.dmi'
 
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.2
