@@ -57,8 +57,9 @@
 		return TRUE
 
 	var/target_zone = user.get_target_zone()
+	var/list/external_organs = victim.get_external_organs()
 	var/obj/item/organ/external/limb = victim.get_organ(target_zone)
-	if(!limb)
+	if(length(external_organs) && !limb)
 		to_chat(user, SPAN_WARNING("\The [victim] is missing that limb!"))
 		return TRUE
 
@@ -67,10 +68,10 @@
 		return TRUE
 
 	// Changing zone means we cancel.
-	if(target_zone != user.get_target_zone())
+	if(target_zone != user.get_target_zone() || QDELETED(victim))
 		return
 
-	var/list/external_organs = victim.get_external_organs()
+	external_organs = victim.get_external_organs()
 	if(length(external_organs) <= 1)
 		user.visible_message(SPAN_DANGER("\The [user] tears \the [victim] apart!"))
 		victim.gib()
