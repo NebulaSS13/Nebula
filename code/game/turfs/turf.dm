@@ -159,8 +159,13 @@
 
 /turf/examined_by(mob/user, distance, infix, suffix)
 	. = ..()
-	if(user && weather)
-		weather.examined_by(user, distance, infix, suffix)
+	if(user)
+		weather?.examined_by(user, distance, infix, suffix)
+		if(is_outside())
+			var/datum/level_data/level = SSmapping.levels_by_z[z]
+			var/datum/daycycle/daycycle = level?.daycycle_id && SSdaycycle.get_daycycle(level.daycycle_id)
+			if(daycycle?.current_period?.name)
+				to_chat(user, SPAN_SUBTLE("<small>It is currently [daycycle.current_period.name].</small>"))
 
 /turf/Destroy()
 

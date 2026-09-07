@@ -147,33 +147,42 @@
 		else if(prob(25))
 			body.visible_message(SPAN_WARNING("\The [body] struggles against \the [body.buckled]!"))
 
+
+/datum/mob_controller/proc/get_wander_candidates(turf/centre)
+	. = list()
+	var/turf/wall/natural/ramp = centre
+	var/ramp_dir = (istype(ramp) && ramp.ramp_slope_direction) ? global.reverse_dir[ramp.ramp_slope_direction] : 0
+	for(var/dir in (wander_directions || global.cardinal))
+		var/turf/neighbor = get_step(centre, dir)
+		if(dir == ramp_dir)
+			neighbor = GetAbove(neighbor)
+		if(istype(neighbor) && !turf_contains_dense_objects(neighbor) && body.turf_is_safe(neighbor))
+			. |= dir
+
 // The mob will periodically sit up or step 1 tile in a random direction.
 /datum/mob_controller/proc/try_wander()
+
 	//Movement
 	if(stop_wander || body.has_buckled_mob() || !do_wander || body.anchored)
 		return
-	if(body.current_posture?.prone)
-		if(!body.incapacitated())
-			body.set_posture(/decl/posture/standing)
-	else if(isturf(body.loc))		//This is so it only moves if it's not inside a closet, gentics machine, etc.
-		turns_since_wander++
-		if(turns_since_wander >= turns_per_wander && (!(stop_wander_when_pulled) || !LAZYLEN(body.grabbed_by))) //Some animals don't move when pulled
 
-			// If we have a specific set of wander dirs, use those.
-			// Otherwise, prefer the ramp we're standing on (so mobs don't sit there and block transit forever).
-			// If no ramp, pick randomly.
-			var/direction
-			if(length(wander_directions))
-				direction = pick(wander_directions)
-			else if(istype(body.loc, /turf/wall/natural))
-				var/turf/wall/natural/ramp = body.loc
-				direction = ramp.ramp_slope_direction
-			direction ||= pick(global.cardinal)
+	if(body.current_posture?.prone && !body.incapacitated())
+		body.set_posture(/decl/posture/standing)
+		return
 
-			var/turf/move_to = get_step(body.loc, direction)
-			if(body.turf_is_safe(move_to))
-				body.SelfMove(direction)
-				turns_since_wander = 0
+	//This is so it only moves if it's not inside a closet, gentics machine, etc.
+	if(!isturf(body.loc))
+		return
+
+	turns_since_wander++
+	//Some animals don't move when pulled
+	if(turns_since_wander < turns_per_wander || (stop_wander_when_pulled && LAZYLEN(body.grabbed_by)))
+		return
+
+	turns_since_wander = 0
+	var/alist/wander_candidates = get_wander_candidates(body.loc)
+	if(length(wander_candidates))
+		body.SelfMove(pick(wander_candidates))
 
 // The mob will periodically make a noise or perform an emote.
 /datum/mob_controller/proc/try_bark()
