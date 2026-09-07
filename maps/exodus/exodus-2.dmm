@@ -501,7 +501,7 @@
 	desc = "This is an unusual plant. It's bulbous ends emit a soft blue light. The name Steve is written in black marker on the pot."
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "abs" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
@@ -6775,7 +6775,7 @@
 	icon_state = "0-8"
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "aoj" = (
 /turf/wall/prepainted,
 /area/exodus/crew_quarters/sleep/cryo)
@@ -19317,7 +19317,7 @@
 	icon_state = "0-2"
 	},
 /turf/floor/plating,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "aPc" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/orange,
@@ -21635,7 +21635,7 @@
 	icon_state = "0-4"
 	},
 /turf/floor/plating,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "aUl" = (
 /obj/effect/floor_decal/corner/red/three_quarters{
 	dir = 1
@@ -22815,7 +22815,7 @@
 	},
 /obj/structure/cable/cyan,
 /turf/floor/plating,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "aXd" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -29;
@@ -23255,7 +23255,7 @@
 /obj/machinery/door/firedoor,
 /obj/structure/cable/cyan,
 /turf/floor/plating,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "aYe" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters/open{
@@ -25252,7 +25252,7 @@
 	icon_state = "1-2"
 	},
 /turf/floor/plating/airless,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bcm" = (
 /obj/structure/chair/comfy/black{
 	dir = 8
@@ -26083,13 +26083,13 @@
 /area/exodus/chapel/main)
 "beb" = (
 /turf/wall/r_wall/prepainted,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bec" = (
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
 /turf/wall/r_wall/prepainted,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bed" = (
 /turf/wall/r_wall/prepainted,
 /area/exodus/crew_quarters/captain)
@@ -26704,7 +26704,7 @@
 /area/exodus/bridge/meeting_room)
 "bfv" = (
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bfw" = (
 /obj/effect/floor_decal/corner/brown/diagonal{
 	dir = 8
@@ -26739,7 +26739,7 @@
 	},
 /obj/structure/cable/green,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bfA" = (
 /obj/machinery/light{
 	dir = 8
@@ -27005,7 +27005,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bgf" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/portable_atmospherics/powered/pump/filled,
@@ -27167,10 +27167,10 @@
 	icon_state = "2-4"
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bgy" = (
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bgz" = (
 /obj/machinery/firealarm{
 	dir = 8;
@@ -27340,7 +27340,7 @@
 	pixel_y = 23
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bgV" = (
 /obj/structure/sign/directions/evac{
 	dir = 4;
@@ -27364,15 +27364,15 @@
 	id_tag = "AI";
 	pixel_y = 24
 	},
-/obj/machinery/porta_turret,
+/obj/machinery/turret/network/energy/ai/core,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bgX" = (
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bgY" = (
 /obj/machinery/status_display{
 	pixel_x = 32;
@@ -27490,7 +27490,7 @@
 	pixel_x = -22
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bhl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -27800,7 +27800,7 @@
 	icon_state = "1-2"
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bhR" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/effect/floor_decal/industrial/outline/blue,
@@ -27819,17 +27819,17 @@
 	icon_state = "0-4"
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bhT" = (
 /obj/machinery/light/small{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/porta_turret{
+/obj/machinery/turret/network/energy/ai/core{
 	dir = 8
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bhU" = (
 /obj/structure/table/laminate,
 /obj/item/box/fancy/donut,
@@ -28096,7 +28096,7 @@
 	dir = 1
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bix" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -28111,7 +28111,7 @@
 /area/exodus/hallway/primary/starboard)
 "biy" = (
 /turf/wall/prepainted,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "biz" = (
 /obj/effect/floor_decal/corner/yellow/three_quarters{
 	dir = 1
@@ -28138,7 +28138,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "biE" = (
 /obj/structure/table/laminate,
 /obj/random_multi/single_item/captains_spare_id,
@@ -28406,7 +28406,7 @@
 	},
 /obj/abstract/landmark/start/ai,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bjd" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -28446,7 +28446,7 @@
 	pixel_x = 22
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bjf" = (
 /obj/machinery/door/airlock/research{
 	name = "Research Shuttle Dock"
@@ -28778,12 +28778,12 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/machinery/porta_turret{
+/obj/machinery/turret/network/energy/ai/core{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bjL" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -28828,14 +28828,13 @@
 	pixel_x = 22;
 	pixel_y = 24
 	},
-/obj/machinery/turretid/stun{
-	check_synth = 1;
+/obj/machinery/computer/modular/telescreen/preset/turrets{
 	name = "AI Chamber turret control";
 	pixel_x = 36;
 	pixel_y = 24
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bjP" = (
 /obj/machinery/door/firedoor,
 /turf/floor/tiled/techfloor/grid,
@@ -28909,7 +28908,7 @@
 	name = "lightsout"
 	},
 /turf/wall/prepainted,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bjZ" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -29;
@@ -29066,7 +29065,7 @@
 	icon_state = "1-8"
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bko" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -29317,7 +29316,7 @@
 	icon_state = "4-8"
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bkL" = (
 /obj/structure/closet/secure_closet/captains,
 /obj/item/radio/intercom{
@@ -29338,7 +29337,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bkN" = (
 /obj/structure/table/laminate,
 /obj/machinery/recharger{
@@ -29665,13 +29664,13 @@
 	},
 /obj/structure/window/reinforced,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "blA" = (
 /obj/structure/cable/cyan{
 	icon_state = "1-2"
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "blB" = (
 /obj/effect/floor_decal/industrial/loading{
 	dir = 4
@@ -29698,7 +29697,7 @@
 	dir = 1
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "blE" = (
 /obj/structure/chair{
 	dir = 4
@@ -29817,7 +29816,7 @@
 	icon_state = "1-4"
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "blS" = (
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	id_tag = "specops_dock_airlock";
@@ -29844,7 +29843,7 @@
 	icon_state = "1-8"
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "blU" = (
 /obj/machinery/chemical_dispenser/full,
 /turf/floor/tiled/white,
@@ -30254,16 +30253,16 @@
 	pixel_y = 24
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bmI" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/machinery/porta_turret{
+/obj/machinery/turret/network/energy/ai/core{
 	dir = 4
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bmJ" = (
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
@@ -30276,7 +30275,7 @@
 	icon_state = "4-8"
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bmL" = (
 /obj/machinery/button/access/interior{
 	id_tag = "eng_eva_airlock";
@@ -30819,7 +30818,7 @@
 	icon_state = "2-8"
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bnK" = (
 /obj/structure/chair/office/dark{
 	dir = 8
@@ -30927,7 +30926,7 @@
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "boc" = (
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -31009,13 +31008,13 @@
 /turf/floor/tiled/white,
 /area/exodus/medical/exam_room)
 "bom" = (
-/obj/machinery/porta_turret,
+/obj/machinery/turret/network/energy/ai,
 /obj/item/radio/intercom{
 	pixel_x = -4;
 	pixel_y = 22
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bon" = (
 /obj/structure/cable/green{
 	icon_state = "1-2"
@@ -31066,9 +31065,9 @@
 /obj/machinery/alarm{
 	pixel_y = 23
 	},
-/obj/machinery/porta_turret,
+/obj/machinery/turret/network/energy/ai,
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bou" = (
 /obj/structure/chair/office/dark{
 	dir = 4
@@ -31089,7 +31088,7 @@
 	dir = 4
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "box" = (
 /obj/machinery/holopad,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -31102,13 +31101,13 @@
 	icon_state = "1-2"
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "boy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "boz" = (
 /obj/machinery/light_switch{
 	pixel_x = -6;
@@ -31363,7 +31362,7 @@
 	},
 /obj/machinery/network/relay,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "boY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/floor/tiled/steel_grid,
@@ -31409,7 +31408,7 @@
 /obj/item/aiModule/freeformcore,
 /obj/item/aiModule/asimov,
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bpd" = (
 /obj/machinery/status_display{
 	pixel_y = 32
@@ -31760,7 +31759,7 @@
 /obj/machinery/ai_status_display{
 	pixel_x = -32
 	},
-/obj/machinery/porta_turret{
+/obj/machinery/turret/network/energy/ai{
 	dir = 4
 	},
 /obj/machinery/apc{
@@ -31771,7 +31770,7 @@
 	icon_state = "0-4"
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bpN" = (
 /obj/structure/cable/green{
 	icon_state = "2-8"
@@ -32470,7 +32469,7 @@
 	pixel_x = 32;
 	dir = 4
 	},
-/obj/machinery/porta_turret{
+/obj/machinery/turret/network/energy/ai{
 	dir = 8
 	},
 /obj/machinery/camera/network/command{
@@ -32478,7 +32477,7 @@
 	dir = 8
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "brk" = (
 /obj/structure/disposalpipe/segment,
 /turf/floor/tiled/steel_grid,
@@ -32588,7 +32587,7 @@
 	name = "AI core maintenance hatch"
 	},
 /turf/floor/tiled/techfloor/grid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "brv" = (
 /obj/machinery/door/window{
 	base_state = "right";
@@ -33024,7 +33023,7 @@
 	pixel_y = 24
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bsn" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/machinery/ai_status_display{
@@ -33147,7 +33146,7 @@
 	pixel_y = 32
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bsC" = (
 /turf/floor/tiled/dark,
 /area/exodus/research/lab)
@@ -33454,7 +33453,7 @@
 	icon_state = "4-8"
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "btn" = (
 /obj/machinery/door/window/southright{
 	name = "Virology Isolation Room Two"
@@ -33701,7 +33700,7 @@
 	icon_state = "4-8"
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "btM" = (
 /obj/machinery/button/alternate/door{
 	desc = "A remote control switch for the medbay foyer.";
@@ -33731,7 +33730,7 @@
 	icon_state = "1-8"
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "btO" = (
 /obj/structure/sign/department/cross/star_of_life{
 	name = "Medbay";
@@ -34162,7 +34161,7 @@
 	dir = 4
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "buH" = (
 /obj/structure/cable/green{
 	icon_state = "4-8"
@@ -34251,7 +34250,7 @@
 	dir = 8
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "buO" = (
 /obj/item/paper_bin{
 	pixel_x = -3;
@@ -34465,19 +34464,19 @@
 	dir = 4
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bvf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bvg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bvh" = (
 /obj/structure/hygiene/toilet{
 	dir = 4
@@ -34490,7 +34489,7 @@
 	pixel_y = -30
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bvj" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -34754,7 +34753,7 @@
 	dir = 4
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bvK" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/floor/plating,
@@ -34780,7 +34779,7 @@
 	dir = 4
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bvO" = (
 /obj/effect/paint/red,
 /turf/wall/titanium,
@@ -34997,7 +34996,7 @@
 	dir = 8
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bwo" = (
 /obj/structure/cable/green{
 	icon_state = "1-2"
@@ -35079,7 +35078,7 @@
 	dir = 4
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bwy" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -35247,7 +35246,7 @@
 	icon_state = "1-8"
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bwR" = (
 /obj/structure/chair/comfy/brown{
 	dir = 4
@@ -35468,7 +35467,7 @@
 "bxo" = (
 /obj/machinery/light,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bxp" = (
 /obj/machinery/apc{
 	dir = 1;
@@ -35486,7 +35485,7 @@
 /area/exodus/medical/medbay2)
 "bxr" = (
 /turf/wall/r_wall/prepainted,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "bxs" = (
 /obj/structure/table,
 /obj/item/stack/package_wrap,
@@ -35922,7 +35921,7 @@
 "byl" = (
 /obj/machinery/computer/modular/preset/medical,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bym" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -35949,7 +35948,7 @@
 	name = "AI Upload"
 	},
 /turf/floor/tiled/techfloor/grid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "byp" = (
 /obj/machinery/door/airlock/command{
 	id_tag = "hopdoor";
@@ -35968,8 +35967,7 @@
 /turf/floor/tiled/white,
 /area/exodus/medical/chemistry)
 "bys" = (
-/obj/machinery/turretid/stun{
-	control_area = "\improper AI Upload Chamber";
+/obj/machinery/computer/modular/telescreen/preset/turrets{
 	name = "AI Upload turret control";
 	pixel_x = 6;
 	pixel_y = 24
@@ -35983,7 +35981,7 @@
 	pixel_y = 22
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload_foyer)
+/area/exodus/ai/upload_foyer)
 "byt" = (
 /obj/structure/disposalpipe/segment,
 /turf/floor/tiled/white,
@@ -36406,7 +36404,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/computer/modular/preset/cardslot/command,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bzj" = (
 /obj/machinery/design_database{
 	id_tag = "science"
@@ -36657,7 +36655,7 @@
 	pixel_x = 32
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bzN" = (
 /obj/machinery/apc/critical{
 	dir = 1;
@@ -36692,7 +36690,7 @@
 	dir = 1
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload_foyer)
+/area/exodus/ai/upload_foyer)
 "bzQ" = (
 /obj/item/radio/intercom{
 	pixel_y = 20
@@ -36714,7 +36712,7 @@
 	dir = 1
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload_foyer)
+/area/exodus/ai/upload_foyer)
 "bzS" = (
 /obj/machinery/apc{
 	dir = 1;
@@ -36729,7 +36727,7 @@
 	pixel_x = -32
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bzT" = (
 /obj/structure/closet/secure_closet/psychiatry,
 /turf/floor/carpet/blue,
@@ -36858,7 +36856,7 @@
 /area/exodus/medical/chemistry)
 "bAh" = (
 /turf/wall/r_wall/prepainted,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bAi" = (
 /obj/machinery/computer/shuttle_control/research{
 	dir = 4
@@ -36870,7 +36868,7 @@
 /area/exodus/research/docking)
 "bAj" = (
 /turf/wall/r_wall/prepainted,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bAk" = (
 /obj/structure/cable/green{
 	icon_state = "1-4"
@@ -37635,7 +37633,7 @@
 	icon_state = "4-8"
 	},
 /turf/floor/tiled/techfloor/grid,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bBE" = (
 /obj/structure/cable/cyan{
 	icon_state = "1-4"
@@ -37647,7 +37645,7 @@
 	dir = 8
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bBF" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -37667,7 +37665,7 @@
 	},
 /obj/machinery/light,
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload_foyer)
+/area/exodus/ai/upload_foyer)
 "bBG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -37677,7 +37675,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload_foyer)
+/area/exodus/ai/upload_foyer)
 "bBH" = (
 /obj/machinery/door/airlock/highsecurity{
 	name = "AI Upload Access"
@@ -37692,7 +37690,7 @@
 	dir = 4
 	},
 /turf/floor/tiled/techfloor/grid,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bBI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -37702,7 +37700,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_upload_foyer)
+/area/exodus/ai/upload_foyer)
 "bBJ" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -37730,7 +37728,7 @@
 	icon_state = "1-8"
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bBM" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
@@ -37758,7 +37756,7 @@
 "bBP" = (
 /obj/machinery/network/message_server,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bBQ" = (
 /obj/structure/railing/mapped{
 	dir = 8
@@ -38172,14 +38170,14 @@
 /area/exodus/quartermaster/storage)
 "bCI" = (
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bCJ" = (
 /turf/wall/prepainted,
 /area/exodus/research/docking)
 "bCK" = (
 /obj/machinery/computer/message_monitor,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bCL" = (
 /obj/machinery/navbeacon/Research,
 /obj/structure/flaps{
@@ -38210,7 +38208,7 @@
 	pixel_x = -22
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bCP" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/corner/blue,
@@ -38282,7 +38280,7 @@
 	dir = 4
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bCW" = (
 /obj/abstract/landmark/start{
 	name = "Cyborg"
@@ -38295,7 +38293,7 @@
 	pixel_x = 22
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bCX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/alarm{
@@ -38306,7 +38304,7 @@
 	dir = 4
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bCY" = (
 /obj/abstract/landmark/start{
 	name = "Cyborg"
@@ -38315,7 +38313,7 @@
 	dir = 4
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bCZ" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
@@ -38326,7 +38324,7 @@
 	pixel_x = -22
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bDa" = (
 /obj/machinery/light{
 	dir = 4
@@ -38355,7 +38353,7 @@
 /obj/item/frame/camera,
 /obj/item/frame/camera,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bDc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -39014,7 +39012,7 @@
 /area/exodus/quartermaster/office)
 "bEr" = (
 /turf/wall/r_wall/prepainted,
-/area/exodus/turret_protected/ai_upload_foyer)
+/area/exodus/ai/upload_foyer)
 "bEs" = (
 /obj/structure/noticeboard{
 	default_pixel_y = -27
@@ -39125,7 +39123,7 @@
 	pixel_y = -8
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bED" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -39134,7 +39132,7 @@
 	pixel_y = -8
 	},
 /turf/floor/tiled/dark,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bEE" = (
 /obj/structure/table,
 /obj/abstract/prefab/hand_teleporter,
@@ -39345,7 +39343,7 @@
 "bFc" = (
 /obj/machinery/recharge_station,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bFd" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -39469,7 +39467,7 @@
 	pixel_y = -32
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bFp" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -39875,7 +39873,7 @@
 	dir = 1
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bGg" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "tox_airlock_control";
@@ -40060,7 +40058,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/floor/tiled/techfloor/grid,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bGx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -40068,7 +40066,7 @@
 	name = "Cyborg Station"
 	},
 /turf/floor/tiled/techfloor/grid,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bGy" = (
 /obj/machinery/door/airlock/double/glass/medical{
 	dir = 4
@@ -40105,7 +40103,7 @@
 	},
 /obj/machinery/light/small,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_server_room)
+/area/exodus/ai/server_room)
 "bGD" = (
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment{
@@ -40124,7 +40122,7 @@
 	},
 /obj/machinery/light/small,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bGF" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -40513,7 +40511,7 @@
 	dir = 1
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "bHm" = (
 /turf/wall/prepainted,
 /area/exodus/research)
@@ -42294,7 +42292,7 @@
 "bKC" = (
 /obj/machinery/computer/modular/preset/civilian,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_cyborg_station)
+/area/exodus/ai/cyborg_station)
 "bKD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -63214,7 +63212,7 @@
 /area/exodus/hallway/secondary/entry/starboard)
 "eEn" = (
 /turf/floor/plating/airless,
-/area/exodus/turret_protected/ai)
+/area/exodus/ai)
 "eEV" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
@@ -63513,7 +63511,7 @@
 	pixel_y = 32
 	},
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "hLX" = (
 /turf/floor/laminate/walnut,
 /area/exodus/library)
@@ -64195,7 +64193,7 @@
 	},
 /obj/machinery/light,
 /turf/floor/bluegrid,
-/area/exodus/turret_protected/ai_upload)
+/area/exodus/ai/upload)
 "rAK" = (
 /obj/structure/girder/displaced,
 /turf/floor/plating,

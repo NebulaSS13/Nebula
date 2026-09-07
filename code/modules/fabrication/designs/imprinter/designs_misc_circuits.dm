@@ -484,3 +484,6 @@
 
 /datum/fabricator_recipe/imprinter/circuit/central_atmos
 	path = /obj/item/stock_parts/circuitboard/central_atmos
+
+/datum/fabricator_recipe/imprinter/circuit/sentry_turret
+	path = /obj/item/stock_parts/circuitboard/sentry_turret

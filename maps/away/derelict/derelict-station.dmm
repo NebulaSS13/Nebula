@@ -1954,7 +1954,7 @@
 /turf/space,
 /area/constructionsite/hallway/fore)
 "gM" = (
-/obj/machinery/porta_turret/stationary,
+/obj/machinery/turret/network/energy,
 /turf/floor/tiled/dark/airless,
 /area/constructionsite/ai)
 "gN" = (

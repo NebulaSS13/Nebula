@@ -1809,7 +1809,7 @@
 /area/map_template/rescue_base/base)
 "eT" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/porta_turret/crescent,
+/obj/machinery/turret/network/energy/centcomm,
 /turf/unsimulated/floor/rescue_base,
 /area/map_template/rescue_base/base)
 "eU" = (
