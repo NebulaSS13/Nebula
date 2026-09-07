@@ -1,3 +1,8 @@
+/proc/message_to_phrases_generic(speaker, message, message_mode, use_verb, decl/language/lang = /decl/language/human/common)
+	message = trim(capitalize(message))
+	lang = RESOLVE_TO_DECL(lang)
+	return new /datum/speech(speaker, message, message_mode, list(list(message, lang)), use_verb)
+
 /datum/extension/network_device/radio
 	expected_type = /obj/item/radio
 
@@ -299,9 +304,11 @@
 	is_spawnable_type = FALSE
 	simulated = FALSE
 
-/obj/item/radio/proc/autosay(var/message, var/from, var/channel, var/sayverb = "states") //BS12 EDIT
+/obj/item/radio/proc/autosay(message, from, channel, sayverb = "states")
+
 	if(!channel)
 		channel = frequency
+
 	var/list/current_channels = get_available_channels()
 	for(var/datum/radio_channel/comms in current_channels)
 		if(!current_channels[comms] || !can_decrypt(comms.secured))
@@ -322,11 +329,15 @@
 	return frequency
 
 /obj/item/radio/talk_into(mob/living/speaker, datum/speech/phrases, verb = "says")
+
 	set waitfor = FALSE
 	if(!on) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!istype(speaker))
 		return FALSE
+
+	if(istext(phrases))
+		phrases = speaker.parse_message_into_phrases(phrases)
 
 	var/list/audible_phrases = list()
 	for(var/list/phrase in phrases.phrases)
@@ -349,7 +360,7 @@
 		if(istype(speaker))
 			speaker.trigger_aiming(TARGET_CAN_RADIO)
 
-	addtimer(CALLBACK(src, PROC_REF(transmit), speaker, phrases, verb), 0)
+	addtimer(CALLBACK(src, PROC_REF(transmit), speaker, phrases, frequency, verb), 0)
 
 /obj/item/radio/proc/can_transmit_binary()
 	for(var/obj/item/encryptionkey/key in encryption_keys)
@@ -357,7 +368,13 @@
 			return TRUE
 	return FALSE
 
-/obj/item/radio/proc/transmit(var/mob/living/speaker, datum/speech/phrases, var/verb = "says")
+/obj/item/radio/proc/transmit(mob/living/speaker, datum/speech/phrases, freq, verb = "says")
+
+	if(istext(phrases))
+		if(istype(speaker))
+			phrases = speaker.parse_message_into_phrases(phrases)
+		else
+			phrases = message_to_phrases_generic(speaker, phrases, freq, verb)
 
 	if(wires.IsIndexCut(WIRE_TRANSMIT))
 		return 0
@@ -445,7 +462,7 @@
 
 /obj/item/radio/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	if(on && broadcasting && get_dist(src, speaker) <= canhear_range)
-		talk_into(speaker, istype(phrases) ? phrases.unformatted_message : phrases, verb)
+		talk_into(speaker, phrases, verb)
 
 /obj/item/radio/proc/get_accessible_channel_descriptions(var/mob/user)
 	var/prefix = user?.get_department_radio_prefix()
