@@ -27,16 +27,10 @@
 	target.visible_message(SPAN_NOTICE("\A [src] alights on \the [target] in a flutter of wings."))
 
 	var/obj/structure/hutch/hutch = target
-	if(istype(hutch))
-		var/obj/item/holder/bird_item = new holder_type
-		forceMove(bird_item)
-		bird_item.sync(src)
-		hutch.storage?.handle_item_insertion(null, bird_item)
-		if(bird_item.loc != target)
-			dropInto(target.loc)
-			qdel(bird_item)
+	if(istype(hutch) && istype(hutch.storage))
+		hutch.storage.scoop_inside(src, src)
 	else
-		dropInto(isturf(target) ? target : target.loc)
+		dropInto(target)
 		if(ismob(target))
 			give_held_items_to_handler(target)
 
@@ -56,25 +50,25 @@
 	w_class = MOB_SIZE_SMALL
 
 /obj/item/holder/bird/attack_hand(mob/user)
-	if(loc == user)
-		var/mob/bird = locate() in src
-		if(istype(bird) && length(bird.get_held_item_slots()))
-			var/list/equipped = bird.get_held_items()
-			if(length(equipped))
-				var/obj/item/removing = pick(equipped)
-				if(bird.try_unequip(removing))
-					user.put_in_hands(removing)
-					user.visible_message(SPAN_NOTICE("\The [user] confiscates \the [bird]'s [removing.name]."))
-					return TRUE
-	return ..()
+	if(loc != user)
+		return ..()
+	var/mob/bird = locate() in src
+	var/list/equipped = bird?.get_held_items()
+	if(!length(equipped))
+		return ..()
+	var/obj/item/removing = pick(equipped)
+	if(!bird.try_unequip(removing))
+		return ..()
+	user.put_in_hands(removing)
+	user.visible_message(SPAN_NOTICE("\The [user] confiscates \the [bird]'s [removing.name]."))
+	return TRUE
 
 /obj/item/holder/bird/attackby(obj/item/used_item, mob/user)
 	var/mob/living/simple_animal/passive/bird/bird = locate() in src
 	if(istype(bird) && bird.can_be_handled_by(user) && bird.get_empty_hand_slot() && user.try_unequip(used_item))
-		bird.put_in_hands(used_item)
-		if(used_item.loc != bird)
-			user.put_in_hands(used_item)
-		else
+		if(bird.put_in_hands(used_item))
 			user.visible_message(SPAN_NOTICE("\The [user] gives \the [bird] \a [used_item] to carry."))
+		else
+			user.put_in_hands(used_item)
 		return TRUE
 	return ..()
