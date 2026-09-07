@@ -115,7 +115,7 @@
 		return FALSE
 	if(damage >= 10)
 		visible_message(SPAN_DANGER("\The [user] [attack_verb] into [src]!"))
-		take_damage(damage)
+		take_damage(damage, BRUTE)
 	else
 		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
 	return TRUE

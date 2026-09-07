@@ -23,3 +23,6 @@
 
 // turn(0, angle) returns a random dir. This macro will instead do nothing if dir is already 0.
 #define SAFE_TURN(DIR, ANGLE) (DIR && turn(DIR, ANGLE))
+
+// Linear interpolation between two values
+#define LERP(a, b, amount) ( amount ? ((a) + ((b) - (a)) * (amount)) : a )

@@ -95,8 +95,9 @@
 
 /obj/structure/window/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
 	. = ..()
-	if(. && damage_type == BRUTE)
+	if(damage_type == BRUTE)
 		playsound(loc, "glasscrack", 100, 1)
+	queue_icon_update()
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
@@ -162,6 +163,10 @@
 
 		if(user.can_shred())
 			return attack_generic(user, 25)
+
+		var/decl/natural_attack/attack = user.get_unarmed_attack()
+		if(istype(attack) && attack.can_damage_structures)
+			return attack_generic(user, attack.damage, "slams", environment_smash = TRUE)
 
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
 		user.do_attack_animation(src)
@@ -265,7 +270,23 @@
 	to_chat(user, SPAN_NOTICE("You cut the wiring and remove the polarization from \the [src]."))
 	return TRUE
 
+/obj/structure/window/handle_default_welder_attackby(var/mob/user, var/obj/item/weldingtool/welder)
+
+	if(user.check_intent(I_FLAG_HELP) && current_health < max_health)
+		if(welder.do_tool_interaction(TOOL_WELDER, user, src, 5 SECONDS, \
+			"repairing", \
+			"repairing", \
+			"You fail to repair \the [src].", \
+			fuel_expenditure = 1) \
+		)
+			current_health = max_health
+			update_icon()
+		return TRUE
+
+	return ..()
+
 /obj/structure/window/attackby(obj/item/used_item, mob/user)
+
 	// bespoke interactions not handled by the prior procs
 	if(IS_MULTITOOL(used_item))
 		if (!polarized)
@@ -282,7 +303,8 @@
 			id = sanitize_safe(response, MAX_NAME_LEN)
 			to_chat(user, SPAN_NOTICE("The new ID of \the [src] is [id]."))
 		return TRUE
-	else if(istype(used_item, /obj/item/gun/energy/plasmacutter) && anchored)
+
+	if(istype(used_item, /obj/item/gun/energy/plasmacutter) && anchored)
 		var/obj/item/gun/energy/plasmacutter/cutter = used_item
 		if(!cutter.slice(user))
 			return TRUE // failed to finish or otherwise failed, prevent further interactions
@@ -292,8 +314,10 @@
 			visible_message(SPAN_WARNING("[user] has sliced through the window's frame!"))
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			set_anchored(FALSE)
+
 	if (istype(used_item, /obj/item/paint_sprayer))
 		return FALSE // allow afterattack to run
+
 	return ..() // handle generic interactions, bashing, etc
 
 /obj/structure/window/bash(obj/item/weapon, mob/user)
@@ -448,11 +472,20 @@
 	..()
 
 	color = get_color()
-	layer = FULL_WINDOW_LAYER
+
 	if(!is_fulltile())
 		layer = SIDE_WINDOW_LAYER
 		icon_state = basestate
+
+		// Rotate the sprite somewhat so non-fulltiled windows can be seen as needing repair.
+		var/full_tilt_degrees = 15
+		var/tilt_to_apply = abs((current_health / max_health) - 1)
+		if(tilt_to_apply && prob(50))
+			tilt_to_apply = -tilt_to_apply
+		set_rotation(LERP(0, full_tilt_degrees, tilt_to_apply))
 		return
+
+	layer = FULL_WINDOW_LAYER
 
 	var/image/I
 	icon_state = ""
