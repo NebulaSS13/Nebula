@@ -158,7 +158,18 @@
 	else if(isturf(body.loc))		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 		turns_since_wander++
 		if(turns_since_wander >= turns_per_wander && (!(stop_wander_when_pulled) || !LAZYLEN(body.grabbed_by))) //Some animals don't move when pulled
-			var/direction = pick(wander_directions || global.cardinal)
+
+			// If we have a specific set of wander dirs, use those.
+			// Otherwise, prefer the ramp we're standing on (so mobs don't sit there and block transit forever).
+			// If no ramp, pick randomly.
+			var/direction
+			if(length(wander_directions))
+				direction = pick(wander_directions)
+			else if(istype(body.loc, /turf/wall/natural))
+				var/turf/wall/natural/ramp = body.loc
+				direction = ramp.ramp_slope_direction
+			direction ||= pick(global.cardinal)
+
 			var/turf/move_to = get_step(body.loc, direction)
 			if(body.turf_is_safe(move_to))
 				body.SelfMove(direction)
