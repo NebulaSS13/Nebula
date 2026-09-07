@@ -90,13 +90,16 @@
 		// If this LO is pending an update, avoid this update and just let it update us.
 		return
 	ASSERT(LO.z == z - 1)
+
+	appearance = LO
+	layer = MIMICED_LIGHTING_LAYER
+	set_invisibility(INVISIBILITY_NONE)
+
 	source_z = LO.z
 	var/depth = ZM_COMPUTE_DEPTH(source_z)
-	layer = MIMICED_LIGHTING_LAYER
 	plane = ZM_COMPUTE_PLANE(depth, ZM_SLICE_SLOT_LIGHTING)
 
 	lighting_generation += 1
-	set_invisibility(INVISIBILITY_NONE)
 
 	if (our_overlays || priority_overlays)
 		compile_overlays()
