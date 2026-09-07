@@ -75,7 +75,7 @@
 
 /decl/butchery_data/proc/harvest_meat(mob/living/donor)
 
-	. = place_products(donor, meat_material, max(0, meat_amount - donor.nibbled_on), meat_type)
+	. = place_products(donor, meat_material, max(0, meat_amount - donor?.nibbled_on), meat_type)
 
 	if(!istype(donor))
 		return
