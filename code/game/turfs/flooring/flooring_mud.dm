@@ -29,11 +29,6 @@
 	var/mob/living/walker = crosser
 	walker.add_walking_contaminant(force_material.type, rand(2,3))
 
-/decl/flooring/mud/can_show_coating_footprints(turf/target, decl/material/contaminant)
-	if(force_material == contaminant) // So we don't end up covered in a million footsteps that we provided.
-		return FALSE
-	return ..()
-
 /decl/flooring/mud/get_vehicle_transit_delay(obj/vehicle/vehicle)
 	return vehicle.vehicle_transit_type == vehicle::VEHICLE_SNOWMOBILE ? 1.4 : 1.5
 

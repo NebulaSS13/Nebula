@@ -95,7 +95,7 @@
 	if(busy)
 		to_chat(user, "This device is busy.")
 		return STATUS_CLOSE
-	if(!user.check_dexterity(DEXTERITY_KEYBOARDS))
+	if(!user.check_dexterity(DEXTERITY_KEYBOARDS, fail_message = "You lack the dexterity to use \the [src]."))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 

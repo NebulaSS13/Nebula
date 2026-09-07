@@ -266,6 +266,10 @@
 			T.try_build_turf(user, src)
 			return TRUE
 
+		// Getting stuck with a 10 second cooldown due to clicking with a shovel during combat is irritating.
+		if(user.check_intent(I_FLAG_HARM))
+			return ..()
+
 		if(IS_SHOVEL(used_item))
 
 			// TODO: move these checks into the interaction handlers.

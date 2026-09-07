@@ -92,7 +92,7 @@
 	Process keypresses coming from the nanoUI.
  */
 /datum/extension/lockable/proc/pressed_key(key_char, mob/user)
-	if(!user.check_dexterity(DEXTERITY_KEYBOARDS))
+	if(!user.check_dexterity(DEXTERITY_KEYBOARDS, fail_message = "You lack the dexterity to type on the keypad."))
 		return
 	// Always clear error when pressing a button.
 	clear_error()

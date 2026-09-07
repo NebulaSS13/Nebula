@@ -32,7 +32,7 @@
 /obj/structure/lift/interact(var/mob/user)
 	if(!lift.is_functional())
 		return FALSE
-	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, fail_message = "You lack the dexterity to press \the [src]."))
 		return FALSE
 	return TRUE
 // End base.

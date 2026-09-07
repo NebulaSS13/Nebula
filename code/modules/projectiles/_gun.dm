@@ -148,7 +148,7 @@
 	if(!isliving(user))
 		return FALSE
 
-	if(!user.check_dexterity(get_required_attack_dexterity(user)))
+	if(!user.check_dexterity(get_required_attack_dexterity(user), fail_message = "You lack the dexterity to use \the [src]."))
 		return FALSE
 
 	if(is_secure_gun() && !free_fire() && (!authorized_modes[sel_mode] || !registered_owner))
@@ -196,6 +196,10 @@
 
 /obj/item/gun/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
+	if(user.check_intent(I_FLAG_HARM) && user == target && user.get_preference_value(/datum/client_preference/harm_intent_attack_blocking) == PREF_YES)
+		to_chat(user, SPAN_WARNING("You refrain from shooting yourself with \the [src]."))
+		return TRUE
+
 	if (target == user && user.get_target_zone() == BP_MOUTH && !mouthshoot)
 		handle_suicide(user)
 		return TRUE
@@ -205,7 +209,7 @@
 		if (aiming.aiming_at != target)
 			PreFire(target, user)
 		else
-			Fire(target, user, pointblank=1)
+			Fire(target, user, pointblank = TRUE)
 		return TRUE
 
 	if(user.check_intent(I_FLAG_HARM)) //point blank shooting
@@ -591,7 +595,7 @@
 	last_safety_check = world.time
 
 /obj/item/gun/proc/try_switch_firemodes(mob/user)
-	if(!istype(user) || length(firemodes) <= 1 || !user.check_dexterity(DEXTERITY_WEAPONS))
+	if(!istype(user) || length(firemodes) <= 1 || !user.check_dexterity(DEXTERITY_WEAPONS, fail_message = "You lack the dexterity to change firemodes on \the [src]."))
 		return FALSE
 	var/datum/firemode/new_mode = switch_firemodes()
 	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
@@ -625,11 +629,11 @@
 	return ..()
 
 /obj/item/gun/proc/toggle_safety(var/mob/user)
-	if(user && !user.check_dexterity(DEXTERITY_WEAPONS))
-		return TRUE
 	if(!has_safety)
 		to_chat(user,SPAN_NOTICE("You can't find a safety on \the [src]!"))
 		return
+	if(user && !user.check_dexterity(DEXTERITY_WEAPONS, fail_message = "You lack the dexterity to change the safety on \the [src]."))
+		return TRUE
 	safety_state = !safety_state
 	update_icon()
 	if(user)

@@ -158,7 +158,7 @@
 	return ..()
 
 /obj/item/chems/weldpack/attack_hand(mob/user)
-	if(!is_welder_attached() || !user.check_dexterity(DEXTERITY_HOLD_ITEM))
+	if(!is_welder_attached() || !user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to retrieve the welding gun."))
 		return ..()
 	if(user.is_holding_offhand(src))
 		detach_gun(user)

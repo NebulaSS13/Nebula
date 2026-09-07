@@ -19,6 +19,8 @@
 	var/list/usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
 	var/is_starting_default = FALSE
 	var/apply_cooldown = DEFAULT_ATTACK_COOLDOWN
+	/// Set to TRUE for harm intent empty hand interactions to damage structures.
+	var/can_damage_structures = FALSE
 
 /decl/natural_attack/proc/summarize()
 	var/list/usable_limbs = list()

@@ -168,7 +168,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] does not have a battery installed."))
 
 /obj/item/clothing/mask/smokable/ecig/attack_hand(mob/user)//eject cartridge
-	if(!user.is_holding_offhand(src) || !ec_cartridge || !user.check_dexterity(DEXTERITY_HOLD_ITEM))
+	if(!user.is_holding_offhand(src) || !ec_cartridge || !user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to remove the e-cig cartridge."))
 		return ..()
 	lit = FALSE
 	user.put_in_hands(ec_cartridge)

@@ -17,6 +17,10 @@
 	can_conceal_hazards = TRUE
 
 	var/harvestable    = FALSE
+	var/show_contaminants = TRUE
+
+/decl/flooring/grass/can_show_coating_footprints(turf/target, decl/material/contaminant)
+	return show_contaminants && ..()
 
 /decl/flooring/grass/fire_act(turf/floor/target, datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(target.get_topmost_flooring() == src && (exposed_temperature > T0C + 200 && prob(5)) || exposed_temperature > T0C + 1000)
@@ -37,6 +41,7 @@
 	icon_edge_layer    = FLOOR_EDGE_GRASS_WILD
 	harvestable        = TRUE
 	uid                = "floor_grass_wild"
+	show_contaminants  = FALSE
 
 /decl/flooring/grass/wild/get_movable_alpha_mask_state(atom/movable/mover)
 	. = ..() || "mask_grass"
@@ -60,7 +65,7 @@
 	color           = "#5e7a3b"
 	build_type      = /obj/item/stack/tile/grass
 	force_material  = /decl/material/solid/organic/plastic
-	uid                = "floor_grass_fake"
+	uid             = "floor_grass_fake"
 
 /decl/flooring/grass/fake/get_vehicle_transit_delay(obj/vehicle/vehicle)
 	return vehicle::base_speed

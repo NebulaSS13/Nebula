@@ -394,6 +394,8 @@ var/global/list/flooring_cache = list()
 /// target is the turf that wants to know if it supports footprints
 /// contaminant is, optionally, the material of the coating that wants to be added.
 /decl/flooring/proc/can_show_coating_footprints(turf/target, decl/material/contaminant)
+	if(!constructed && force_material && force_material == contaminant) // So we don't end up covered in a million footsteps that we provided.
+		return FALSE
 	return TRUE
 
 /decl/flooring/proc/get_vehicle_transit_delay(obj/vehicle/vehicle)

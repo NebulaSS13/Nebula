@@ -65,7 +65,7 @@
 
 
 /obj/item/taperecorder/attack_hand(mob/user)
-	if(user.is_holding_offhand(src) && mytape && user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+	if(user.is_holding_offhand(src) && mytape && user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, fail_message = "You lack the dexterity to eject the tape."))
 		eject()
 		return TRUE
 	return ..()

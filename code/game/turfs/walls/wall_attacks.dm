@@ -283,7 +283,7 @@
 
 /turf/wall/attackby(var/obj/item/used_item, var/mob/user, click_params)
 
-	if(istype(used_item, /obj/item/stack/tile/roof) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES) || !used_item.user_can_attack_with(user))
+	if(istype(used_item, /obj/item/stack/tile/roof) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, silent = TRUE) || !used_item.user_can_attack_with(user))
 		return ..()
 
 	if(handle_wall_tool_interactions(used_item, user))

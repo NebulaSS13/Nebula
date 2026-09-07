@@ -43,11 +43,6 @@
 	// of the snow flooring layer, so deep snow gives you more coating
 	walker.add_walking_contaminant(force_material.type, rand(1, 2))
 
-/decl/flooring/snow/can_show_coating_footprints(turf/target, decl/material/contaminant)
-	if(force_material == contaminant) // So we don't end up covered in a million footsteps that we provided.
-		return FALSE
-	return ..()
-
 /decl/flooring/snow/get_vehicle_transit_delay(obj/vehicle/vehicle)
 	return vehicle.vehicle_transit_type == vehicle::VEHICLE_SNOWMOBILE ? 0.8 : 1.7
 

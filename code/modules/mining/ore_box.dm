@@ -86,8 +86,7 @@
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		return FALSE
-	if(user && !user.check_dexterity(DEXTERITY_HOLD_ITEM))
-		to_chat(user, SPAN_WARNING("You lack the dexterity to empty \the [src]!"))
+	if(user && !user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to empty \the [src]!"))
 		return FALSE
 
 	if(user)
@@ -105,8 +104,7 @@
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		return FALSE
-	if(user && !user.check_dexterity(DEXTERITY_HOLD_ITEM))
-		to_chat(user, SPAN_WARNING("You lack the dexterity to empty \the [src]!"))
+	if(user && !user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to empty \the [src]!"))
 		return FALSE
 	if(user)
 		add_fingerprint(user)

@@ -854,3 +854,11 @@ var/global/list/limbs_with_nails = list(
 
 /decl/bodytype/proc/get_footprints_icon()
 	return footprints_icon
+
+/decl/bodytype/proc/get_custom_pain_strings()
+	var/static/list/custom_pain_strings = list(
+		"It hurts so much!",
+		"You really need some painkillers!",
+		"Dear god, the pain!"
+	)
+	return custom_pain_strings

@@ -108,7 +108,7 @@
 		..(P, def_zone)
 
 /obj/structure/curtain/attack_hand(mob/user)
-	if(user.check_dexterity(DEXTERITY_HOLD_ITEM))
+	if(user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to adjust \the [src]."))
 		toggle()
 		return TRUE
 	return ..()

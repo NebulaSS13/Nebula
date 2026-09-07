@@ -7,6 +7,9 @@
 /mob/living/proc/default_interaction(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
 	if(user.check_intent(I_FLAG_HARM))
+		if(user == src && user.get_preference_value(/datum/client_preference/harm_intent_attack_blocking) == PREF_YES)
+			to_chat(user, SPAN_WARNING("You refrain from hitting yourself."))
+			return FALSE
 		. = default_hurt_interaction(user)
 	else if(user.check_intent(I_FLAG_HELP))
 		. = default_help_interaction(user)

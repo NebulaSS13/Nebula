@@ -536,7 +536,9 @@
 		// Please be very careful when calling custom_pain() from within code that relies on pain/trauma values. There's the
 		// possibility of a feedback loop from custom_pain() being called with a positive power, incrementing pain on a limb,
 		// which triggers this proc, which calls custom_pain(), etc. Make sure you call it with nohalloss = TRUE in these cases!
-		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 10, nohalloss = TRUE)
+		var/list/custom_pain_strings = get_bodytype()?.get_custom_pain_strings()
+		if(length(custom_pain_strings))
+			custom_pain(pick(custom_pain_strings), 10, nohalloss = TRUE)
 
 	if(rounded_shock_stage >= 30)
 		if(rounded_shock_stage == 30)

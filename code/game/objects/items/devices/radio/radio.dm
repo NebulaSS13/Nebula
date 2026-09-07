@@ -142,7 +142,7 @@
 	. = ..()
 
 /obj/item/radio/attack_self(mob/user)
-	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, fail_message = "You lack the dexterity to configure \the [src]."))
 		return
 	user.set_machine(src)
 	add_fingerprint(user)

@@ -433,7 +433,7 @@ var/global/const/ACTION_DANGER_ALL = 2
 
 /mob/proc/show_stripping_window(mob/user)
 
-	if(user.incapacitated()  || !user.Adjacent(src) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+	if(user.incapacitated() || !user.Adjacent(src) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, fail_message = "You lack the dexterity to remove \the [src]'s equipment."))
 		return
 
 	user.set_machine(src)
@@ -1133,10 +1133,10 @@ var/global/const/ACTION_DANGER_ALL = 2
 		return (active_hand.get_manual_dexterity() & ~dex_malus)
 	return active_hand.get_manual_dexterity()
 
-/mob/proc/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent = FALSE)
+/mob/proc/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent = FALSE, var/fail_message = "You don't have the dexterity to do this!")
 	. = (get_dexterity(silent) & dex_level) == dex_level
-	if(!. && !silent)
-		to_chat(src, FEEDBACK_YOU_LACK_DEXTERITY)
+	if(!. && !silent && fail_message)
+		to_chat(src, SPAN_WARNING(fail_message))
 
 /mob/proc/lose_hair()
 	return

@@ -178,7 +178,7 @@ var/global/list/materials_by_gas_symbol = list()
 	var/ore_icon_overlay
 	var/ore_type_value
 	var/ore_data_value
-	var/ore_type = /obj/item/stack/material/ore
+	var/ore_type
 
 	var/value = 1
 
@@ -413,6 +413,8 @@ var/global/list/materials_by_gas_symbol = list()
 			if(type in cocktail.ratios)
 				cocktail_ingredient = TRUE
 				break
+
+	ore_type ||= dug_drop_type || /obj/item/stack/material/ore
 
 /decl/material/validate()
 	. = ..()

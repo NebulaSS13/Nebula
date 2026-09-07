@@ -63,9 +63,12 @@ SUBSYSTEM_DEF(persistence)
 	do_save_with_warning()
 
 /datum/controller/subsystem/persistence/proc/do_save_with_warning()
+
 	set waitfor = FALSE
-	if(showing_warning)
+
+	if(showing_warning || !need_persistent_level_save())
 		return // debounce
+
 	showing_warning = TRUE
 	if(save_warning_period > 0)
 		var/remaining_delay = save_warning_period
@@ -151,3 +154,10 @@ SUBSYSTEM_DEF(persistence)
 	var/datum/browser/popup = new(user, "admin_persistence", "Persistence Data")
 	popup.set_content(jointext(dat, null))
 	popup.open()
+
+/datum/controller/subsystem/persistence/proc/need_persistent_level_save()
+	for(var/z = 1 to length(SSmapping.levels_by_z))
+		var/datum/level_data/level = SSmapping.levels_by_z[z]
+		if(level.need_persistent_data_save())
+			return TRUE
+	return FALSE
