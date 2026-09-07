@@ -47,5 +47,5 @@
 					. |= M
 		else if(body.get_nutrition() < body.get_max_nutrition() * 0.75) //time to look for some food
 			for(var/mob/living/L in get_raw_target_list())
-				if(attack_same_faction || L.faction != body.faction)
+				if(!is_in_faction(L))
 					LAZYDISTINCTADD(prey, weakref(L))
