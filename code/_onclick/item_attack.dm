@@ -26,7 +26,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 // If TRUE, prevent afterattack from running.
 /obj/item/proc/resolve_attackby(atom/A, mob/user, var/click_params)
-	if(!user.check_dexterity(get_required_attack_dexterity(user, A)))
+	if(!user.check_dexterity(get_required_attack_dexterity(user, A, fail_message = "You lack the dexterity to use \the [src].")))
 		return TRUE
 	if(!(item_flags & ITEM_FLAG_NO_PRINT))
 		add_fingerprint(user)

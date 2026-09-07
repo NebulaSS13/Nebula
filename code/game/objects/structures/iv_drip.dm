@@ -141,7 +141,7 @@
 			queue_icon_update()
 
 /obj/structure/iv_drip/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, fail_message = "You lack the dexterity to detach the drip."))
 		return ..()
 	if(attached)
 		drip_detach()

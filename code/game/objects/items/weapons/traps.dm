@@ -14,7 +14,7 @@
 	var/deployed     = FALSE
 
 /obj/item/beartrap/proc/can_use(mob/user)
-	. = (user.check_dexterity(DEXTERITY_SIMPLE_MACHINES) && !issilicon(user) && !user.stat && !user.restrained())
+	. = (user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, fail_message = "You lack the dexterity to set \the [src].") && !issilicon(user) && !user.stat && !user.restrained())
 
 /obj/item/beartrap/user_unbuckle_mob(mob/user, mob/living/unbuckling_mob)
 	var/mob/buckle_mob = get_buckled_mob(user = user)

@@ -168,7 +168,7 @@
 /obj/item/gun/projectile/automatic/machine/special_check(mob/user)
 	if(!isliving(user))
 		return FALSE
-	if(!user.check_dexterity(DEXTERITY_WEAPONS))
+	if(!user.check_dexterity(DEXTERITY_WEAPONS, fail_message = "You lack the dexterity to use \the [src]."))
 		return FALSE
 
 	var/mob/living/M = user

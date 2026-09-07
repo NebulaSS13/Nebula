@@ -58,7 +58,7 @@
 /obj/item/grenade/attack_self(mob/user)
 	if(active)
 		return
-	if(!user.check_dexterity(DEXTERITY_WEAPONS))
+	if(!user.check_dexterity(DEXTERITY_WEAPONS, fail_message = "You lack the dexterity to arm \the [src]."))
 		return TRUE // prevent further interactions
 	if(clown_check(user))
 		to_chat(user, "<span class='warning'>You prime \the [name]! [det_time/10] seconds!</span>")

@@ -19,7 +19,7 @@
 	playsound(src, 'sound/effects/fastbeep.ogg', 20)
 
 /proc/breath_scan_action(mob/living/target, mob/living/user, obj/scanner, var/verbose)
-	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS) || !istype(target))
+	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, fail_message = "You lack the dexterity to use \the [scanner].") || !istype(target))
 		return
 
 	. = breath_scan_results(target, verbose, user.get_skill_value(SKILL_MEDICAL))

@@ -49,7 +49,7 @@
 			add_overlay(I)
 
 /obj/item/flashlight/attack_self(mob/user)
-	if(user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+	if(user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, fail_message = "You lack the dexterity to turn the flashlight on or off."))
 		if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
 			to_chat(user, SPAN_WARNING("You cannot toggle \the [src]."))
 			return TRUE

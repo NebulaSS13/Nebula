@@ -598,7 +598,7 @@
 	return FALSE
 
 /obj/item/proc/user_can_attack_with(mob/user, atom/target, silent = FALSE)
-	return user.check_dexterity(get_required_attack_dexterity(user, target), silent = silent)
+	return user.check_dexterity(get_required_attack_dexterity(user, target), silent = silent, fail_message = "You lack the dexterity to attack with \the [src].")
 
 /obj/item/attackby(obj/item/used_item, mob/user)
 	// if can_wield is false we still need to call parent for storage objects to work properly

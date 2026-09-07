@@ -22,7 +22,7 @@
 /obj/item/chems/glass/mortar/proc/try_grind(obj/item/used_item, mob/living/user)
 	if(!istype(used_item))
 		return FALSE
-	if(!CanPhysicallyInteract(user) || !user.check_dexterity(DEXTERITY_HOLD_ITEM))
+	if(!CanPhysicallyInteract(user) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to use \the [src]."))
 		return TRUE
 	if(grinding)
 		to_chat(user, SPAN_WARNING("Something is already being crushed in \the [src]."))

@@ -190,7 +190,7 @@
 /obj/item/pizzabox/attack_hand(mob/user)
 
 	if(open && pizza && !user.check_intent(I_FLAG_GRAB))
-		if(user.check_dexterity(DEXTERITY_HOLD_ITEM))
+		if(user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to take the pizza out of \the [src]."))
 			user.put_in_hands(pizza)
 			to_chat(user, SPAN_NOTICE("You take \the [pizza] out of \the [src]."))
 			pizza = null
@@ -198,7 +198,7 @@
 		return TRUE
 
 	var/box_count = LAZYLEN(stacked_boxes)
-	if(box_count && user.is_holding_offhand(src) && user.check_dexterity(DEXTERITY_HOLD_ITEM))
+	if(box_count && user.is_holding_offhand(src) && user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to take the topmost box."))
 		var/obj/item/pizzabox/box = stacked_boxes[box_count]
 		LAZYREMOVE(stacked_boxes, box)
 		user.put_in_hands(box)

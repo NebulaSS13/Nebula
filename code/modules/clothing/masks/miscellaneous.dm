@@ -25,7 +25,7 @@
 
 // Clumsy folks can't take the mask off themselves.
 /obj/item/clothing/mask/muzzle/attack_hand(mob/user)
-	if(user.get_equipped_item(slot_wear_mask_str) != src || user.check_dexterity(DEXTERITY_HOLD_ITEM))
+	if(user.get_equipped_item(slot_wear_mask_str) != src || user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to remove \the [src]."))
 		return ..()
 	to_chat(user, SPAN_WARNING("You cannot remove \the [src] without help."))
 	return TRUE

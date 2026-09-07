@@ -179,7 +179,7 @@
 	return 0.2
 
 /obj/item/duct_tape/attack_hand(var/mob/user)
-	if(user.check_dexterity(DEXTERITY_HOLD_ITEM))
+	if(user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to dislodge the tape."))
 		anchored = FALSE // Unattach it from whereever it's on, if anything.
 	return ..()
 

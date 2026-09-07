@@ -29,7 +29,7 @@
 	return TRUE
 
 /obj/item/blueprints/attack_self(mob/user)
-	if (!ishuman(user) || !user.check_dexterity(DEXTERITY_COMPLEX_TOOLS)) // Monkeys et al. cannot blueprint.
+	if (!ishuman(user) || !user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, silent = TRUE)) // Monkeys et al. cannot blueprint.
 		to_chat(user, SPAN_WARNING("This stack of blue paper means nothing to you."))
 		return
 
