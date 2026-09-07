@@ -95,6 +95,9 @@
 		return // we should not have gotten this far
 
 	var/list/messages = phrases.compile_for_listener(src, skip_non_verbal = TRUE, scramble = scramble, hard_to_hear = hard_to_hear)
+	if(!length(messages))
+		return
+
 	if(HAS_STATUS(src, STAT_ASLEEP) || stat == UNCONSCIOUS) //If unconscious or sleeping
 		hear_sleep(messages[1])
 		return
