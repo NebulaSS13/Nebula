@@ -202,8 +202,19 @@
 			for(var/gear_type in slot_data)
 				try_equip(wearer, gear_type, slot)
 
-	for(var/hand in hands)
-		wearer.put_in_hands(new hand(wearer))
+	// Check if we have hands to put gear in...
+	var/hand_slots = wearer.get_held_item_slots()
+	var/has_hand = FALSE
+	for(var/hand in global.all_hand_slots)
+		if(hand == BP_MOUTH)
+			continue
+		if(hand in hand_slots)
+			has_hand = TRUE
+			break
+
+	if(has_hand)
+		for(var/hand in hands)
+			wearer.put_in_hands(new hand(wearer))
 
 	if((outfit_flags & OUTFIT_HAS_BACKPACK) && !(OUTFIT_ADJUSTMENT_SKIP_BACKPACK & equip_adjustments))
 		var/decl/backpack_outfit/backpack_option

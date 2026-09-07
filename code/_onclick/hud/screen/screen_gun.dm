@@ -10,16 +10,14 @@
 /obj/screen/gun/on_update_icon()
 	if(toggle_flag && base_icon_state)
 		var/mob/living/owner = owner_ref?.resolve()
-		icon_state = "[base_icon_state][!!(istype(owner) && owner.aiming && (owner.aiming.target_permissions & toggle_flag))]"
+		icon_state = "[base_icon_state][!!(istype(owner) && (owner.get_aiming_overlay()?.target_permissions & toggle_flag))]"
 	..()
 
 /obj/screen/gun/handle_click(mob/user, params)
 	if(isliving(user))
 		var/mob/living/shooter = user
-		if(!shooter.aiming)
-			shooter.aiming = new(user)
 		if(toggle_flag)
-			shooter.aiming.toggle_permission(toggle_flag)
+			shooter.get_aiming_overlay(create_if_missing = TRUE).toggle_permission(toggle_flag)
 		return TRUE
 	return FALSE
 
@@ -52,12 +50,12 @@
 
 /obj/screen/gun/mode/on_update_icon()
 	var/mob/living/owner = owner_ref?.resolve()
-	icon_state = "[base_icon_state][!!(istype(owner) && owner.aiming?.active)]"
+	icon_state = "[base_icon_state][!!(istype(owner) && owner.get_aiming_overlay()?.active)]"
 	..()
 
 /obj/screen/gun/mode/handle_click(mob/user, params)
 	if(..())
 		var/mob/living/shooter = user
-		shooter.aiming.toggle_active()
+		shooter.get_aiming_overlay(create_if_missing = TRUE).toggle_active()
 		return TRUE
 	return FALSE

@@ -207,7 +207,7 @@ var/global/list/diversion_junctions = list()
 
 // human interact with machine
 /obj/machinery/disposal/physical_attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_KEYBOARDS))
+	if(!user.check_dexterity(DEXTERITY_KEYBOARDS, fail_message = "You lack the dexterity to interact with \the [src]."))
 		flush = !flush
 		update_icon()
 		return TRUE

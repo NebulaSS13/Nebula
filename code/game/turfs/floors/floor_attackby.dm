@@ -1,5 +1,9 @@
 /turf/floor/attack_hand(mob/user)
 
+	// Clicking on a turf during combat and getting stuck in the graffiti menu is annoying.
+	if(user.check_intent(I_FLAG_HARM))
+		return FALSE
+
 	// Collect snow or mud.
 	var/decl/flooring/flooring = get_topmost_flooring()
 	if(flooring?.handle_hand_interaction(src, user))

@@ -11,7 +11,10 @@
 	var/incoherent_language_flagging = FALSE
 
 /datum/speech/New(mob/living/_speaker, _msg, _mode, _phrases, _verb)
-	speaker_ref  = weakref(_speaker)
+
+	if(istype(_speaker))
+		speaker_ref = weakref(_speaker)
+
 	raw_message  = _msg
 	message_mode = _mode
 	force_verb   = _verb
@@ -74,7 +77,7 @@
 			phrase[1] = capitalize(phrase[1])
 			first_string = FALSE
 		// Pre-generate scrambled versions for people who don't understand the language.
-		phrase += speaking ? speaking.scramble(_speaker, phrase[1], _speaker.languages) : phrase[1]
+		phrase += (speaking && istype(_speaker)) ? speaking.scramble(_speaker, phrase[1], _speaker.languages) : phrase[1]
 		// Pre-generate obfuscated starred version for people who are hard of hearing, eavesdropping, etc.
 		phrase += stars(phrase[1])
 		all_phrases += phrase[1]
@@ -86,7 +89,7 @@
 // Future TODO: cache as much of this as possible.
 /datum/speech/proc/compile_for_listener(atom/listener, skip_verbal = FALSE, skip_non_verbal = FALSE, scramble = FALSE, stars = FALSE, hard_to_hear = FALSE, machine_listener = FALSE)
 
-	var/mob/speaker            = speaker_ref.resolve()
+	var/mob/speaker            = speaker_ref?.resolve()
 	var/mob/listener_mob       = ismob(listener) ? listener : null
 	var/list/final_strings     = list()
 	var/list/formatted_strings = list()

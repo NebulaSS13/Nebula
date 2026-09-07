@@ -1,14 +1,12 @@
-/obj/aiming_overlay
+/obj/abstract/aiming_overlay
 	name = ""
 	desc = "Stick 'em up!"
 	icon = 'icons/effects/Targeted.dmi'
 	icon_state = "locking"
-	anchored = TRUE
-	density = FALSE
-	opacity = FALSE
 	layer = ABOVE_HUMAN_LAYER
-	simulated = 0
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+	invisibility = 0
+	hide_on_init = FALSE
 
 	var/mob/living/aiming_at   // Who are we currently targeting, if anyone?
 	var/obj/item/aiming_with   // What are we targeting with?
@@ -18,13 +16,13 @@
 	var/active =    0          // Is our owner intending to take hostages?
 	var/target_permissions = TARGET_CAN_MOVE | TARGET_CAN_CLICK | TARGET_CAN_RADIO	// Permission bitflags.
 
-/obj/aiming_overlay/Initialize()
+/obj/abstract/aiming_overlay/Initialize()
 	. = ..()
 	owner = loc
 	forceMove(null)
 	verbs.Cut()
 
-/obj/aiming_overlay/proc/toggle_permission(var/perm)
+/obj/abstract/aiming_overlay/proc/toggle_permission(var/perm)
 
 	if(target_permissions & perm)
 		target_permissions &= ~perm
@@ -56,24 +54,28 @@
 	if(aiming_at)
 		to_chat(aiming_at, "<span class='[use_span]'>You are [message].</span>")
 
-/obj/aiming_overlay/Process()
+/obj/abstract/aiming_overlay/Process()
 	if(!owner)
 		qdel(src)
 		return
 	..()
 	update_aiming()
 
-/obj/aiming_overlay/Destroy()
+/obj/abstract/aiming_overlay/Destroy()
 	cancel_aiming(1)
+	if(UNLINT(owner._aiming == src))
+		UNLINT(owner._aiming = null)
 	owner = null
+	aiming_at = null
+	aiming_with = null
 	return ..()
 
-/obj/aiming_overlay/proc/update_aiming_deferred()
+/obj/abstract/aiming_overlay/proc/update_aiming_deferred()
 	set waitfor = 0
 	sleep(0)
 	update_aiming()
 
-/obj/aiming_overlay/proc/update_aiming()
+/obj/abstract/aiming_overlay/proc/update_aiming()
 
 	if(!owner)
 		qdel(src)
@@ -114,7 +116,7 @@
 		spawn(0)
 			owner.set_dir(get_dir(get_turf(owner), get_turf(src)))
 
-/obj/aiming_overlay/proc/aim_at(var/mob/target, var/obj/thing)
+/obj/abstract/aiming_overlay/proc/aim_at(var/mob/target, var/obj/thing)
 
 	if(!owner || !isliving(target))
 		return
@@ -157,17 +159,17 @@
 
 	update_icon()
 	lock_time = world.time + 35
-	events_repository.register(/decl/observ/moved, owner, src, TYPE_PROC_REF(/obj/aiming_overlay, update_aiming))
-	events_repository.register(/decl/observ/moved, aiming_at, src, TYPE_PROC_REF(/obj/aiming_overlay, target_moved))
-	events_repository.register(/decl/observ/destroyed, aiming_at, src, TYPE_PROC_REF(/obj/aiming_overlay, cancel_aiming))
+	events_repository.register(/decl/observ/moved, owner, src, TYPE_PROC_REF(/obj/abstract/aiming_overlay, update_aiming))
+	events_repository.register(/decl/observ/moved, aiming_at, src, TYPE_PROC_REF(/obj/abstract/aiming_overlay, target_moved))
+	events_repository.register(/decl/observ/destroyed, aiming_at, src, TYPE_PROC_REF(/obj/abstract/aiming_overlay, cancel_aiming))
 
-/obj/aiming_overlay/on_update_icon()
+/obj/abstract/aiming_overlay/on_update_icon()
 	if(locked)
 		icon_state = "locked"
 	else
 		icon_state = "locking"
 
-/obj/aiming_overlay/proc/toggle_active(var/force_state = null, var/no_message = FALSE)
+/obj/abstract/aiming_overlay/proc/toggle_active(var/force_state = null, var/no_message = FALSE)
 	if(!isnull(force_state))
 		if(active == force_state)
 			return
@@ -188,7 +190,7 @@
 				to_chat(owner, "<span class='notice'>You will no longer aim rather than fire.</span>")
 			owner.hud_used.remove_gun_icons()
 
-/obj/aiming_overlay/proc/cancel_aiming(var/no_message = 0)
+/obj/abstract/aiming_overlay/proc/cancel_aiming(var/no_message = 0)
 	if(!aiming_with || !aiming_at)
 		return
 	if(!no_message)
@@ -208,6 +210,6 @@
 	forceMove(null)
 	STOP_PROCESSING(SSobj, src)
 
-/obj/aiming_overlay/proc/target_moved()
+/obj/abstract/aiming_overlay/proc/target_moved()
 	update_aiming()
 	trigger(TARGET_CAN_MOVE)

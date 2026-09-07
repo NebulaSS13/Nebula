@@ -84,10 +84,13 @@
 		var/turf/neighbor = get_step_resolving_mimic(my_turf, check_dir)
 		if(!istype(neighbor))
 			continue
-		for(var/obj/structure/fence/fence in neighbor)
-			if(fence_data == RESOLVE_TO_DECL(fence.fence_data))
-				connected_dirs |= check_dir
-				break
+		if(neighbor.density)
+			connected_dirs |= check_dir
+		else
+			for(var/obj/structure/fence/fence in neighbor)
+				if(fence_data == RESOLVE_TO_DECL(fence.fence_data))
+					connected_dirs |= check_dir
+					break
 
 /obj/structure/fence/proc/update_fence_icon()
 
@@ -137,7 +140,7 @@
 				break
 
 /obj/structure/fence/proc/is_cuttable()
-	return icon_state == fence_data.straight_state && hole_size < MAX_HOLE_SIZE
+	return (connected_dirs == (NORTH | SOUTH) || connected_dirs == (EAST | WEST)) && hole_size < MAX_HOLE_SIZE
 
 /obj/structure/fence/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
@@ -210,24 +213,15 @@
 	return ..()
 
 /obj/structure/fence/proc/update_cut_status()
-	if(!is_cuttable())
-		return
-	density = TRUE
-	switch(hole_size)
-		if(NO_HOLE)
-			icon_state = initial(icon_state)
-		if(MEDIUM_HOLE)
-			icon_state = "[initial(icon_state)]-cut2"
-		if(LARGE_HOLE)
-			icon_state = "[initial(icon_state)]-cut3"
-			density = FALSE
+	set_density(hole_size != LARGE_HOLE)
+	update_icon()
 
 //FENCE DOORS
 /obj/structure/fence/door
 	name = "fence gate"
 	desc = "Much like a regular door, but thinner."
 	icon_state = "door-closed"
-	interaction_priority   = TRUE
+	interaction_priority = TRUE
 
 /obj/structure/fence/door/can_install_lock()
 	return TRUE
@@ -255,7 +249,7 @@
 
 /obj/structure/fence/door/opened
 	icon_state = "door-opened"
-	density = TRUE
+	density = FALSE
 
 /obj/structure/fence/door/locked/Initialize(mapload)
 	lock ||= "fence key #[random_id(type, 10000, 99999)]"
@@ -264,8 +258,8 @@
 /obj/structure/fence/door/attack_hand(mob/user, list/params)
 	SHOULD_CALL_PARENT(FALSE)
 	if(!density || can_open(user))
-		density = !density
-		visible_message(SPAN_NOTICE("\The [user] [density ? "opens" : "closes"] \the [src]."))
+		set_density(!density)
+		visible_message(SPAN_NOTICE("\The [user] [!density ? "opens" : "closes"] \the [src]."))
 		playsound(src, 'sound/machines/click.ogg', 100, 1)
 		update_icon()
 	else

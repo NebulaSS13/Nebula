@@ -1,4 +1,7 @@
-/mob/living/human/proc/get_unarmed_attack(var/mob/target, var/hit_zone = null)
+/mob/proc/get_unarmed_attack(var/mob/target, var/hit_zone = null)
+	return null
+
+/mob/living/human/get_unarmed_attack(var/mob/target, var/hit_zone = null)
 	if(!hit_zone)
 		hit_zone = get_target_zone()
 	var/list/available_attacks = get_mob_natural_attacks()

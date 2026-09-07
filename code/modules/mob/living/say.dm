@@ -113,7 +113,7 @@
 	return FALSE
 
 // Parses a message into a list of list(text = spoken language) entries.
-/mob/living/proc/parse_message_into_phrases(mob/living/_speaker, message)
+/mob/living/proc/parse_message_into_phrases(message)
 
 	message = trim(message)
 	var/full_message = message
@@ -172,7 +172,7 @@
 		parsed_phrases += list(list(phrase, speaking))
 
 	if(length(parsed_phrases))
-		return new /datum/speech(_speaker, full_message, message_mode, parsed_phrases, use_verb)
+		return new /datum/speech(src, full_message, message_mode, parsed_phrases, use_verb)
 
 /mob/living/say(datum/speech/phrases, verb = "says", whispering)
 	set waitfor = FALSE
@@ -182,7 +182,10 @@
 		return FALSE
 
 	if(istext(phrases))
-		phrases = parse_message_into_phrases(src, phrases)
+		phrases = parse_message_into_phrases(phrases)
+
+	if(isnull(phrases))
+		return
 
 	if(phrases.incoherent_language_flagging)
 		to_chat(src, SPAN_WARNING("You cannot mix non-spoken and spoken language at the same time!"))

@@ -83,7 +83,7 @@
 	ambient_light_old_g += lg
 	ambient_light_old_b += lb
 
-	if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src) && (!corners || !lighting_corners_initialised))
+	if (!corners || !lighting_corners_initialised)
 		generate_missing_corners()
 
 	// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.

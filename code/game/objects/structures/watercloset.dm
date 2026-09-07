@@ -542,7 +542,7 @@ var/global/list/hygiene_props = list()
 	var/open = FALSE
 
 /obj/structure/hygiene/faucet/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, fail_message = "You lack the dexterity to turn the faucet."))
 		return ..()
 	open = !open
 	if(open)

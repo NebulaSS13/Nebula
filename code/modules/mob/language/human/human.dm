@@ -50,3 +50,4 @@
 		"ait", "les", "lle", "men", "ais", "ans", "ait", "ave", "con", "com", "des", "tre", "eta", "eur", "est",
 		"ing", "the", "ver", "was", "ith", "hin"
 	)
+	sort_order = 1 // First in the language list.

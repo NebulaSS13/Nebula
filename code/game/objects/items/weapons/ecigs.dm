@@ -9,7 +9,7 @@
 	chem_volume = 0 //ecig has no storage on its own but has reagent container created by parent obj
 	material = /decl/material/solid/organic/plastic
 
-	var/brightness_on = 1
+	var/ecig_light_range = 1
 	var/cartridge_type = /obj/item/chems/ecig_cartridge/med_nicotine
 	var/obj/item/chems/ecig_cartridge/ec_cartridge
 	var/power_usage = 450 //value for simple ecig, enough for about 1 cartridge, in JOULES!
@@ -122,7 +122,7 @@
 /obj/item/clothing/mask/smokable/ecig/on_update_icon()
 	. = ..()
 	if(lit)
-		set_light(brightness_on)
+		set_light(ecig_light_range)
 	else
 		set_light(0)
 	if(ec_cartridge && check_state_in_icon("[icon_state]-loaded", icon))
@@ -168,7 +168,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] does not have a battery installed."))
 
 /obj/item/clothing/mask/smokable/ecig/attack_hand(mob/user)//eject cartridge
-	if(!user.is_holding_offhand(src) || !ec_cartridge || !user.check_dexterity(DEXTERITY_HOLD_ITEM))
+	if(!user.is_holding_offhand(src) || !ec_cartridge || !user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to remove the e-cig cartridge."))
 		return ..()
 	lit = FALSE
 	user.put_in_hands(ec_cartridge)

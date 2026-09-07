@@ -483,7 +483,7 @@ var/global/list/closets = list()
 	if(!id_card)
 		id_card = user.GetIdCard()
 
-	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, fail_message = "You lack the dexterity to toggle the lock."))
 		return FALSE
 
 	if(CanToggleLock(user, id_card))

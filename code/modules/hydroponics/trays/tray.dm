@@ -568,12 +568,21 @@
 	return FALSE // no hands
 
 /obj/machinery/portable_atmospherics/hydroponics/physical_attack_hand(mob/user)
+
+	if(!dead && user.check_intent(I_FLAG_HARM))
+		user.visible_message(SPAN_DANGER("\The [user] rips and tears at \the [src]!"))
+		plant_health -= rand(5,10)
+		check_plant_health()
+		return TRUE
+
 	if(harvest)
 		harvest(user)
 		return TRUE
+
 	if(dead)
 		remove_dead(user)
 		return TRUE
+
 	return FALSE
 
 /obj/machinery/portable_atmospherics/hydroponics/get_examine_strings(mob/user, distance, infix, suffix)

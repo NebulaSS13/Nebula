@@ -66,7 +66,7 @@
 		return 0
 	if(user.incapacitated())
 		return 0
-	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, fail_message = "You lack the dexterity to use \the [src]."))
 		return 0
 	if(!proximity)
 		return 0

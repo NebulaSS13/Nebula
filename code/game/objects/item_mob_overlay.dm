@@ -157,6 +157,16 @@ var/global/list/icon_state_cache = list()
 /obj/item/proc/get_icon_for_bodytype(var/bodytype)
 	. = LAZYACCESS(sprite_sheets, bodytype) || icon
 
+#define OFFSET_MOB_IMAGES(TO_OFFSET, DEST, ORIG, ADJU)                                                                       \
+	for(var/thing in TO_OFFSET) {                                                                                            \
+		ORIG = thing;                                                                                                        \
+		ADJU = root_bodytype.get_offset_overlay_image(user_mob, ORIG.icon, ORIG.icon_state, ORIG.color, (bodypart || slot)); \
+		ADJU.appearance_flags = ORIG.appearance_flags;                                                                       \
+		ADJU.plane = ORIG.plane;                                                                                             \
+		ADJU.layer = ORIG.layer;                                                                                             \
+		DEST += ADJU;                                                                                                        \
+	}
+
 // Ensure ..() is called only at the end of this proc, and that `overlay` is mutated rather than replaced.
 // This is necessary to ensure that all the overlays are generated and tracked prior to being passed to
 // the bodytype offset proc, which can scrub icon/icon_state information as part of the offset process.
@@ -175,16 +185,14 @@ var/global/list/icon_state_cache = list()
 
 		var/decl/bodytype/root_bodytype = user_mob?.get_equipment_bodytype(slot, bodypart)
 		if(root_bodytype && root_bodytype.bodytype_category != bodytype)
-			var/list/overlays_to_offset = overlay.overlays
+			var/list/overlays_to_offset  = overlay.overlays
+			var/list/underlays_to_offset = overlay.underlays
 			overlay = root_bodytype.get_offset_overlay_image(user_mob, overlay.icon, overlay.icon_state, color, (bodypart || slot))
 			if(overlay)
-				for(var/thing in overlays_to_offset)
-					var/image/I = thing // Technically an appearance but don't think we can cast to those
-					var/image/adjusted_overlay = root_bodytype.get_offset_overlay_image(user_mob, I.icon, I.icon_state, I.color, (bodypart || slot))
-					adjusted_overlay.appearance_flags = I.appearance_flags
-					adjusted_overlay.plane =            I.plane
-					adjusted_overlay.layer =            I.layer
-					overlay.overlays += adjusted_overlay
+				var/image/original_image
+				var/image/adjusted_image
+				OFFSET_MOB_IMAGES(overlays_to_offset, overlay.overlays, original_image, adjusted_image)
+				OFFSET_MOB_IMAGES(underlays_to_offset, overlay.underlays, original_image, adjusted_image)
 
 	return overlay
 

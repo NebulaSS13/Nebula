@@ -183,7 +183,7 @@
 	return ..()
 
 /obj/item/stock_parts/power/battery/attack_hand(mob/user)
-	if(cell && istype(loc, /obj/machinery) && user.check_dexterity(DEXTERITY_HOLD_ITEM))
+	if(cell && istype(loc, /obj/machinery) && user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to remove the cell."))
 		user.put_in_hands(cell)
 		extract_cell(user)
 		return TRUE

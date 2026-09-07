@@ -91,7 +91,11 @@
 
 /decl/material/liquid/drink/juice/carrot/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	M.add_to_reagents(/decl/material/liquid/eyedrops, removed * 0.2)
+	var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(M, BP_EYES)
+	if(istype(eyes) && !eyes.is_broken())
+		ADJ_STATUS(M, STAT_BLURRY, -1)
+		ADJ_STATUS(M, STAT_BLIND, -1)
+		eyes.adjust_organ_damage(-removed)
 
 /decl/material/liquid/drink/juice/grape
 	name = "grape juice"

@@ -98,9 +98,9 @@
 	changing_state = FALSE
 
 /obj/structure/door/attack_hand(mob/user)
-	if(user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+	. = ..()
+	if(!. && user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
 		return density ? open(user) : close(user)
-	return ..()
 
 /obj/structure/door/proc/close(mob/user)
 	set waitfor = FALSE

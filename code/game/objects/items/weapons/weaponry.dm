@@ -19,7 +19,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(target)
 
-	if (!user.check_dexterity(DEXTERITY_WEAPONS))
+	if (!user.check_dexterity(DEXTERITY_WEAPONS, fail_message = "You lack the dexterity to attack with \the [src]."))
 		return TRUE
 
 	if (user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))

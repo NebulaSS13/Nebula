@@ -75,7 +75,7 @@
 /mob/living/human/can_speak(decl/language/speaking)
 	if(ispath(speaking, /decl/language))
 		speaking = GET_DECL(speaking)
-	if(!istype(speaking))
+	if(!istype(speaking) || speaking.can_be_spoken_properly_by(src) == SPEECH_RESULT_INCAPABLE)
 		return ..()
 	if(species)
 		if(speaking.type in species.assisted_langs)
