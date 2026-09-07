@@ -3,6 +3,14 @@
 
 /mob/living/proc/set_default_language(var/decl/language/language)
 
+	// Use our first known speakable language if no language is supplied (ie. we are spawning)
+	if(isnull(language))
+		for(var/lang in languages)
+			var/decl/language/check = RESOLVE_TO_DECL(lang)
+			if(check.can_be_spoken_properly_by(src) != SPEECH_RESULT_INCAPABLE)
+				language = check
+				break
+
 	if(ispath(language, /decl/language))
 		language = GET_DECL(language)
 

@@ -184,6 +184,9 @@
 	if(istext(phrases))
 		phrases = parse_message_into_phrases(src, phrases)
 
+	if(isnull(phrases))
+		return
+
 	if(phrases.incoherent_language_flagging)
 		to_chat(src, SPAN_WARNING("You cannot mix non-spoken and spoken language at the same time!"))
 		return

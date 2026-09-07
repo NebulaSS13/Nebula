@@ -234,11 +234,9 @@
 /mob/proc/can_speak(decl/language/speaking)
 	if(!speaking)
 		return 0
-
 	if (only_species_language && speaking != GET_DECL(species_language))
-		return 0
-
-	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.language_flags & LANG_FLAG_INNATE) || (speaking in src.languages)))
+		return FALSE
+	return (speaking.can_speak_special(src) && speaking.can_be_spoken_properly_by(src) != SPEECH_RESULT_INCAPABLE && (universal_speak || (speaking && speaking.language_flags & LANG_FLAG_INNATE) || (speaking in src.languages)))
 
 /mob/proc/get_common_radio_prefix()
 	return get_prefix_key(/decl/prefix/radio_main_channel)
