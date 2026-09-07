@@ -51,6 +51,7 @@
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
 
+	flesh_color = "#34af10"
 	organs_icon = 'mods/species/unathi/icons/organs.dmi'
 
 	preview_outfit = /decl/outfit/job/generic/doctor

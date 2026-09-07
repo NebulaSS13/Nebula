@@ -28,6 +28,8 @@
 
 	blood_types = list(/decl/blood_type/coolant)
 
+	flesh_color = "#137e8f"
+
 	death_message = "becomes completely motionless..."
 	available_pronouns = list(/decl/pronouns/neuter)
 
