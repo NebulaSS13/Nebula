@@ -509,10 +509,7 @@
 			add_overlay(I)
 
 	if(current_health < max_health)
-		var/damage_overlay = clamp(round((1-(current_health / max_health)) * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)
-		var/image/damaged = SSmaterials.wall_damage_overlays[damage_overlay]
-		world << "using damage overlay #[damage_overlay] - [damaged.alpha]"
-		add_overlay(damaged)
+		add_overlay(SSmaterials.wall_damage_overlays[clamp(round((1-(current_health / max_health)) * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	var/damage_point = material.temperature_damage_threshold
