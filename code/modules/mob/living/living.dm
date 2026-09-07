@@ -746,7 +746,7 @@ default behaviour is:
 
 /mob/living/Destroy()
 	clear_mob_modifiers()
-	QDEL_NULL(aiming)
+	QDEL_NULL(_aiming)
 	QDEL_NULL_LIST(_hallucinations)
 	QDEL_NULL_LIST(aimed_at_by)
 	LAZYCLEARLIST(smell_cooldown)

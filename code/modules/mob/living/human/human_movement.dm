@@ -51,7 +51,7 @@
 	if(is_asystole())
 		tally += 10 // Heart attacks are kinda distracting.
 
-	if(aiming && aiming.aiming_at)
+	if(get_aiming_overlay()?.aiming_at)
 		tally += 5 // Iron sights make you slower, it's a well-known fact.
 
 	if(facing_dir && ((travel_dir & facing_dir) != facing_dir))

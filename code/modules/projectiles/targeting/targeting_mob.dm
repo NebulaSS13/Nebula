@@ -1,24 +1,29 @@
 /mob/living
-	var/obj/aiming_overlay/aiming
+	VAR_PRIVATE/obj/abstract/aiming_overlay/_aiming
 	var/list/aimed_at_by
 
-/mob/verb/toggle_gun_mode()
+/mob/living/proc/get_aiming_overlay(create_if_missing = TRUE)
+	RETURN_TYPE(/obj/abstract/aiming_overlay)
+	if(create_if_missing && !_aiming)
+		_aiming = new(src)
+	return _aiming
+
+//Needs to be a mob verb to prevent error messages when using hotkeys
+/mob/verb/toggle_gun_mode_verb()
 	set name = "Toggle Gun Mode"
 	set desc = "Begin or stop aiming."
 	set category = "IC"
+	toggle_gun_mode()
 
-	if(isliving(src)) //Needs to be a mob verb to prevent error messages when using hotkeys
-		var/mob/living/M = src
-		if(!M.aiming)
-			M.aiming = new(src)
-		M.aiming.toggle_active()
-	else
-		to_chat(src, "<span class='warning'>This verb may only be used by living mobs, sorry.</span>")
-	return
+/mob/proc/toggle_gun_mode()
+	to_chat(src, SPAN_WARNING("This verb may only be used by living mobs, sorry."))
+
+/mob/living/toggle_gun_mode()
+	var/obj/abstract/aiming_overlay/aiming = get_aiming_overlay(create_if_missing = TRUE)
+	aiming.toggle_active()
 
 /mob/living/proc/stop_aiming(var/obj/item/thing, var/no_message = 0)
-	if(!aiming)
-		aiming = new(src)
-	if(thing && aiming.aiming_with != thing)
+	var/obj/abstract/aiming_overlay/aiming = get_aiming_overlay()
+	if(!aiming || (thing && aiming.aiming_with != thing))
 		return
 	aiming.cancel_aiming(no_message)
