@@ -55,3 +55,6 @@
 
 /obj/item/gun/launcher/bow/sling/show_working_draw_message(mob/user)
 	return
+
+/obj/item/gun/launcher/bow/sling/get_bow_usage_hints()
+	return SPAN_SUBTLE("Place a stone into the sling, then click and hold on harm intent to start swinging it. Release to fire.")

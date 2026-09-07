@@ -187,10 +187,8 @@
 /obj/item/gun/afterattack(atom/A, mob/living/user, adjacent, params)
 	if(adjacent) return //A is adjacent, is the user, or is on the user's person
 
-	if(!user.aiming)
-		user.aiming = new(user)
-
-	if(user && user.client && user.aiming && user.aiming.active && user.aiming.aiming_at != A)
+	var/obj/abstract/aiming_overlay/aiming = user.get_aiming_overlay()
+	if(user && user.client && aiming && aiming.active && aiming.aiming_at != A)
 		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
 		return
 
@@ -202,8 +200,9 @@
 		handle_suicide(user)
 		return TRUE
 
-	if(!user.check_intent(I_FLAG_HARM) && user.aiming && user.aiming.active) //if aim mode, don't pistol whip
-		if (user.aiming.aiming_at != target)
+	var/obj/abstract/aiming_overlay/aiming = user.get_aiming_overlay(create_if_missing = TRUE)
+	if(!user.check_intent(I_FLAG_HARM) && aiming?.active) //if aim mode, don't pistol whip
+		if (aiming.aiming_at != target)
 			PreFire(target, user)
 		else
 			Fire(target, user, pointblank=1)
@@ -449,7 +448,7 @@
 			disp_mod += 0.5
 
 		//accuracy bonus from aiming
-		if (user.aiming?.aiming_at == target)
+		if (user.get_aiming_overlay()?.aiming_at == target)
 			//If you aim at someone beforehead, it'll hit more often.
 			//Kinda balanced by fact you need like 2 seconds to aim
 			//As opposed to no-delay pew pew
@@ -687,8 +686,7 @@
 			M.setClickCooldown(DEFAULT_QUICK_COOLDOWN) // Spam prevention, essentially.
 			M.visible_message(SPAN_DANGER("\The [M] pulls the trigger reflexively!"))
 			Fire(aiming_at, M)
-			if(M.aiming)
-				M.aiming.toggle_active(FALSE, TRUE)
+			M.get_aiming_overlay()?.toggle_active(FALSE, TRUE)
 
 /obj/item/gun/get_quick_interaction_handler(mob/user)
 	return GET_DECL(/decl/interaction_handler/gun/toggle_safety)
