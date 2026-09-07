@@ -70,6 +70,7 @@
 	while(LAZYLEN(stacked_boxes))
 		var/obj/item/pizzabox/top_box = stacked_boxes[LAZYLEN(stacked_boxes)]
 		LAZYREMOVE(stacked_boxes, top_box)
+		top_box.dropInto(our_turf)
 		top_box.throw_at(get_edge_target_turf(our_turf, pick(global.alldirs)), 1, 1) // just enough to bonk people
 	update_strings()
 	update_icon()

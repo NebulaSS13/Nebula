@@ -3,7 +3,7 @@
 	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight."
 	icon = 'icons/clothing/head/hardhat/yellow.dmi'
 	action_button_name = "Toggle Headlamp"
-	brightness_on = 4 //luminosity when on
+	headlamp_range = 4 //luminosity when on
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
