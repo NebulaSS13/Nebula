@@ -5,6 +5,7 @@
 */
 /decl/language
 	abstract_type = /decl/language    // Used to point at root language types that shouldn't be visible
+	sort_order = 10 // Used to determine ordering of the languages list; common languages have a lower value so sort higher than niche.
 
 	/// Short description for 'Check Languages'.
 	var/desc = "You should not have this language."
@@ -217,6 +218,7 @@
 	if(!istype(new_language) || (new_language in languages))
 		return 0
 	languages.Add(new_language)
+	languages = sortTim(languages, /proc/cmp_decl_sort_value_asc, FALSE)
 	return 1
 
 /mob/proc/remove_language(var/rem_language)
@@ -253,18 +255,16 @@
 	set category = "IC"
 	set src = usr
 
-	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
-
+	var/list/dat = list()
 	for(var/decl/language/language in languages)
 		if(!(language.language_flags & LANG_FLAG_NONGLOBAL))
 			dat += "<b>[language.name]([language.shorthand]) ([get_language_prefix()][language.language_key])</b><br/>[language.desc]<br/><br/>"
-
-	show_browser(src, dat, "window=checklanguage")
-	return
+	var/datum/browser/popup = new(src, "checklanguage", "Known Languages")
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
 
 /mob/living/check_languages()
-	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
-
+	var/list/dat = list()
 	if(default_language)
 		var/decl/language/lang = GET_DECL(default_language)
 		dat += "Current default language: [lang.name] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
@@ -278,7 +278,9 @@
 			else
 				dat += "<b>[language.name]([language.shorthand]) ([get_language_prefix()][language.language_key])</b> - cannot speak!<br/>[language.desc]<br/><br/>"
 
-	show_browser(src, dat, "window=checklanguage")
+	var/datum/browser/popup = new(src, "checklanguage", "Known Languages")
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
 
 /mob/living/OnSelfTopic(href_list)
 	if(href_list["default_lang"])
