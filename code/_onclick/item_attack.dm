@@ -146,6 +146,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 					to_chat(user, SPAN_WARNING("You refrain from hitting yourself with \the [src] as you are on help intent."))
 					return FALSE
 
+	if(user == target && user.check_intent(I_FLAG_HARM) && user.get_preference_value(/datum/client_preference/harm_intent_attack_blocking) == PREF_YES)
+		to_chat(user, SPAN_WARNING("You refrain from hitting yourself with \the [src]."))
+		return FALSE
+
 	/////////////////////////
 
 	if(!no_attack_log)
