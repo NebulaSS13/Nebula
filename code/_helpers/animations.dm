@@ -23,7 +23,7 @@
 	var/pixel_x_diff = rand(-2,2)
 	var/pixel_y_diff = rand(-2,2)
 	animate(A, pixel_x = A.pixel_x + pixel_x_diff, pixel_y = A.pixel_y + pixel_y_diff, time = 2)
-	animate(pixel_x = initial(A.pixel_x), pixel_y = initial(A.pixel_y), time = 2)
+	animate(pixel_x = A.default_pixel_x, pixel_y = A.default_pixel_y, time = 2)
 
 /proc/animate_throw(atom/A)
 	var/ipx = A.pixel_x
