@@ -1980,7 +1980,6 @@
 /area/lar_maria/cells)
 "fv" = (
 /obj/structure/rack,
-/obj/item/flamethrower/full,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/floor/tiled,
 /area/lar_maria/sec_wing)

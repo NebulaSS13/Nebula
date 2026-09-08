@@ -21,7 +21,6 @@
 	var/lit_colour                      = COLOR_PALE_ORANGE
 	var/waterproof                      = FALSE
 	var/welding                         = FALSE 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
-	var/status                          = TRUE 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
 	var/tmp/welding_resource            = "welding fuel"
 	var/obj/item/chems/welder_tank/tank = /obj/item/chems/welder_tank // where the fuel is stored
 	var/tmp/activate_sound              = 'sound/items/welderactivate.ogg'
@@ -123,29 +122,6 @@
 	update_icon()
 	return TRUE
 
-/obj/item/weldingtool/proc/toggle_unscrewed(var/mob/user)
-	if(isrobot(loc))
-		if(user)
-			to_chat(user, SPAN_WARNING("You cannot modify your own welder!"))
-		return
-
-	status = !status
-	if(user)
-		if(status)
-			to_chat(user, SPAN_NOTICE("You secure the welder."))
-		else
-			to_chat(user, SPAN_NOTICE("The welder can now be attached and modified."))
-	return TRUE
-
-/obj/item/weldingtool/proc/attempt_modify(var/obj/item/used_item, var/mob/user)
-	if(!status && istype(used_item, /obj/item/stack/material/rods))
-		var/obj/item/stack/material/rods/R = used_item
-		R.use(1)
-		user.drop_from_inventory(src)
-		user.put_in_hands(new /obj/item/flamethrower(get_turf(src), src))
-		qdel(src)
-		return TRUE
-
 /obj/item/weldingtool/attackby(obj/item/used_item, mob/user)
 	if(welding)
 		to_chat(user, SPAN_WARNING("Stop welding first!"))
@@ -153,12 +129,6 @@
 
 	if (istype(used_item, /obj/item/chems/welder_tank))
 		return insert_tank(used_item, user)
-
-	if(IS_SCREWDRIVER(used_item))
-		return toggle_unscrewed(user)
-
-	if(attempt_modify(used_item, user))
-		return TRUE
 
 	return ..()
 
@@ -300,8 +270,6 @@
 		set_base_attack_force(new_force)
 
 /obj/item/weldingtool/proc/turn_on(var/mob/user)
-	if (!status)
-		return
 	if(!waterproof && submerged())
 		if(user)
 			to_chat(user, SPAN_WARNING("You cannot light \the [src] underwater."))
