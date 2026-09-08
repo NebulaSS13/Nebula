@@ -29,9 +29,6 @@
 	name = "ammunition (SMG rubber) top mounted"
 	path = /obj/item/ammo_magazine/smg/rubber
 
-/datum/fabricator_recipe/arms_ammo/hidden/flamethrower
-	path = /obj/item/flamethrower/full
-
 /datum/fabricator_recipe/arms_ammo/hidden/speedloader_magnum
 	name = "ammunition (speedloader, magnum)"
 	path = /obj/item/ammo_magazine/speedloader
