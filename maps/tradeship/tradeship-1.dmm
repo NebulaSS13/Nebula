@@ -3048,7 +3048,7 @@
 /turf/floor/plating,
 /area/ship/trade/drunk_tank)
 "Py" = (
-/obj/effect/decal/cleanable/spiderling_remains,
+/obj/effect/decal/cleanable/spider_remains,
 /obj/machinery/light{
 	dir = 8
 	},

@@ -47,7 +47,7 @@
 /obj/structure/sign/warning/anomalous_materials{
 	pixel_y = 32
 	},
-/obj/effect/decal/cleanable/spiderling_remains,
+/obj/effect/decal/cleanable/spider_remains,
 /turf/floor/tiled/white,
 /area/template_noop)
 "ak" = (
@@ -169,7 +169,7 @@
 /turf/floor/tiled/white,
 /area/template_noop)
 "aK" = (
-/obj/effect/decal/cleanable/spiderling_remains,
+/obj/effect/decal/cleanable/spider_remains,
 /obj/structure/table{
 	name = "plastic table frame"
 	},
