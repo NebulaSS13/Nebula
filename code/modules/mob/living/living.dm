@@ -1641,6 +1641,17 @@ default behaviour is:
 
 	return TRUE
 
+/mob/living/set_dir()
+	var/lastdir = dir
+	. = ..()
+	if(. && dir != lastdir)
+		var/turn_sound = get_turn_sound()
+		if(turn_sound)
+			playsound(src, turn_sound, 50, 1)
+
+/mob/living/proc/get_turn_sound()
+	return
+
 /mob/living/proc/get_footstep_sound(turf/step_turf)
 	return step_turf?.get_footstep_sound(src)
 
@@ -1805,7 +1816,7 @@ default behaviour is:
 	return !QDELETED(src) && !incapacitated()
 
 // Currently only used by AI behaviors
-/mob/living/proc/has_ranged_attack()
+/mob/living/proc/has_ranged_attack(atom/target)
 	return FALSE
 
 /mob/living/proc/get_ranged_attack_distance()

@@ -221,17 +221,16 @@
 		move_to_target(move_only = TRUE)
 
 /datum/mob_controller/aggressive/move_to_target(var/move_only = FALSE)
-	if(!body.can_act())
+	if(!(. = ..()))
 		return
 	if(HAS_STATUS(body, STAT_CONFUSE))
 		body.start_automove(pick(orange(2, body)))
 		return
-	stop_wandering()
 	var/atom/target = get_target()
 	if(!istype(target) || !attackable(target) || !(target in get_raw_target_list()))
 		lose_target()
 		return
-	if(body.has_ranged_attack() && get_dist(body, target) <= body.get_ranged_attack_distance() && !move_only)
+	if(body.has_ranged_attack(target) && get_dist(body, target) <= body.get_ranged_attack_distance() && !move_only)
 		body.stop_automove()
 		handle_ranged_target(target)
 		return

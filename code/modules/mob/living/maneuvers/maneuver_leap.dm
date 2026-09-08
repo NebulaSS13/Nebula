@@ -33,12 +33,6 @@
 		if(!. && !silent)
 			to_chat(user, SPAN_WARNING("You cannot leap that far!"))
 
-/decl/maneuver/leap/spider
-	stamina_cost = 0
-
-/decl/maneuver/leap/spider/show_initial_message(var/mob/living/user, var/atom/target)
-	user.visible_message(SPAN_WARNING("\The [user] reels back and prepares to launch itself at \the [target]!"))
-
 /decl/maneuver/leap/grab/end_leap(var/mob/living/user, var/atom/target)
 	. = ..()
 	if(!user.current_posture.prone && ismob(target) && user.Adjacent(target) && istype(target, /atom/movable))

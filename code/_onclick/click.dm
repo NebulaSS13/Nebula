@@ -298,6 +298,16 @@
 			var/using_item = user.get_active_held_item()
 			if(handler.is_possible(src, user, using_item))
 				return handler.invoked(src, user, using_item)
+	if(!isturf(loc) || user.Adjacent(src))
+		return FALSE
+	var/list/available_maneuvers = user.get_available_maneuvers()
+	if(!length(available_maneuvers))
+		return FALSE
+	var/turf/target_turf = loc
+	for(var/maneuver_type in available_maneuvers)
+		var/decl/maneuver/maneuver_decl = RESOLVE_TO_DECL(maneuver_type)
+		if(maneuver_decl.perform(user, target_turf, user.get_acrobatics_multiplier(maneuver_decl)))
+			return TRUE
 	return FALSE
 
 /atom/movable/CtrlClick(var/mob/living/user)
