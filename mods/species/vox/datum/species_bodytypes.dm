@@ -124,7 +124,7 @@
 	return ..()
 
 /decl/bodytype/vox/get_movement_slowdown(var/mob/living/human/H)
-	if(H && global.vox_current_pressure_toggle["\ref[H]"])
+	if(H?.has_mob_modifier(/decl/mob_modifier/sealed_carapace, source = H))
 		return 1.5
 	return ..()
 

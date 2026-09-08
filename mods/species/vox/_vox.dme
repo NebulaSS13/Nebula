@@ -4,6 +4,7 @@
 #include "_vox.dm"
 #include "mobs_vox.dm"
 #include "organs_vox.dm"
+#include "datum\abilities.dm"
 #include "datum\accessories.dm"
 #include "datum\cultures_vox.dm"
 #include "datum\descriptors_vox.dm"
