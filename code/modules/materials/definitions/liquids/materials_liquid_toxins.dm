@@ -92,6 +92,15 @@
 		SET_STATUS_MAX(M, STAT_CONFUSE, 3)
 	..()
 
+/decl/material/liquid/expired_medicine
+	name = "expired medicine"
+	uid = "liquid_expired_medicine"
+	lore_text = "Some form of liquid medicine that is well beyond its shelf date. Administering it now would cause illness."
+	taste_description = "bitterness"
+	toxicity = 5
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas   = MAT_RARITY_NOWHERE
+
 /decl/material/liquid/cyanide //Fast and Lethal
 	name = "cyanide"
 	uid = "liquid_cyanide"
