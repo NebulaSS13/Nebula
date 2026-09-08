@@ -8,7 +8,7 @@
 	attack_verb = list("prodded")
 	hitsound = 'sound/weapons/Egloves.ogg'
 
-/mob/living/simple_animal/hostile/hivebot/melee/has_ranged_attack()
+/mob/living/simple_animal/hostile/hivebot/melee/has_ranged_attack(atom/target)
 	return FALSE
 
 // This one is tanky by having a massive amount of health.
