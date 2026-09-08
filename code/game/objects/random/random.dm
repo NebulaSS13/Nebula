@@ -6,6 +6,8 @@
 	abstract_type = /obj/random
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
 	var/spawn_method = /obj/random/proc/spawn_item
+	var/mob_returns_home = FALSE
+	var/mob_wander_distance = 7
 
 // creates a new object and deletes itself
 /obj/random/Initialize()
@@ -32,6 +34,11 @@
 			A.default_pixel_x = pixel_x
 			A.default_pixel_y = pixel_y
 			A.reset_offsets(0)
+
+		if(mob_returns_home && ismob(A))
+			var/mob/mob = A
+			if(istype(mob.ai))
+				mob.ai.set_home(loc, mob_wander_distance)
 
 /obj/random/proc/create_instance(var/build_path, var/spawn_loc)
 	if(ispath(build_path, /turf))
