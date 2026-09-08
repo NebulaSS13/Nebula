@@ -372,6 +372,7 @@
 #include "code\datums\ai\_ai.dm"
 #include "code\datums\ai\_ai_enemies.dm"
 #include "code\datums\ai\_ai_friends.dm"
+#include "code\datums\ai\_ai_home.dm"
 #include "code\datums\ai\_ai_memory.dm"
 #include "code\datums\ai\_ai_pathfinding.dm"
 #include "code\datums\ai\_ai_stance.dm"
