@@ -104,6 +104,8 @@
 	material = /decl/material/solid/metal/gold
 /obj/structure/boulder/uranium
 	material = /decl/material/solid/pitchblende
+/obj/structure/boulder/phoron
+	material = /decl/material/solid/phoron
 /obj/structure/boulder/platinum
 	material = /decl/material/solid/sperrylite
 /obj/structure/boulder/lead
