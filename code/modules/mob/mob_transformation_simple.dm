@@ -11,8 +11,8 @@ var/global/list/href_to_mob_type = list(
 		"Runtime" =  /mob/living/simple_animal/passive/cat/fluff/runtime,
 		"Corgi" =    /mob/living/simple_animal/corgi,
 		"Ian" =      /mob/living/simple_animal/corgi/Ian,
-		"Crab" =     /mob/living/simple_animal/crab,
-		"Coffee" =   /mob/living/simple_animal/crab/Coffee,
+		"Crab" =     /mob/living/simple_animal/passive/crab,
+		"Coffee" =   /mob/living/simple_animal/passive/crab/Coffee,
 		"Parrot" =   /mob/living/simple_animal/hostile/parrot,
 		"Poly" =     /mob/living/simple_animal/hostile/parrot/Poly,
 	)

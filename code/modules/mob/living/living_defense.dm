@@ -315,10 +315,10 @@
 	user.do_attack_animation(src)
 	return 1
 
-/mob/living/proc/get_cold_protection()
+/mob/living/proc/get_cold_protection(temperature)
 	return 0
 
-/mob/living/proc/get_heat_protection()
+/mob/living/proc/get_heat_protection(temperature)
 	return 0
 
 //Finds the effective temperature that the mob is burning at.

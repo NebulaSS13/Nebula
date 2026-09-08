@@ -52,7 +52,7 @@
 	//1 - hostile, attack everything that comes near
 	var/hostile_range = 10
 
-/mob/living/simple_animal/hostile/malf_drone/has_ranged_attack()
+/mob/living/simple_animal/hostile/malf_drone/has_ranged_attack(atom/target)
 	return TRUE
 
 /datum/mob_controller/aggressive/malf_drone/get_raw_target_list()

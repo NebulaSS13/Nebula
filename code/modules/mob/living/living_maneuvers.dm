@@ -1,6 +1,6 @@
 /mob/living
 	var/decl/maneuver/prepared_maneuver
-	var/list/available_maneuvers = list()
+	VAR_PROTECTED/list/_available_maneuvers
 
 /mob/living/begin_falling(var/lastloc, var/below)
 	if(throwing)
@@ -18,6 +18,9 @@
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living, reflexive_maneuver_callback), lastloc, check), 0)
 		return
 	. = ..()
+
+/mob/living/get_available_maneuvers()
+	return _available_maneuvers
 
 /mob/living/proc/reflexive_maneuver_callback(var/turf/origin, var/turf/check)
 	if(prepared_maneuver)
@@ -40,6 +43,7 @@
 	set desc = "Select a maneuver to perform."
 	set category = "IC"
 
+	var/list/available_maneuvers = get_available_maneuvers()
 	if(!length(available_maneuvers))
 		to_chat(src, SPAN_WARNING("You are unable to perform any maneuvers."))
 		return
@@ -72,11 +76,8 @@
 		prepared_maneuver = null
 		refresh_hud_element(HUD_MANEUVER)
 
-/mob/living/proc/get_acrobatics_multiplier(var/decl/maneuver/attempting_maneuver)
-	return 1
-
 /mob/living/proc/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)
-	. = ((istype(maneuver) ? maneuver.type : maneuver) in available_maneuvers)
+	. = ((istype(maneuver) ? maneuver.type : maneuver) in get_available_maneuvers())
 
 /mob/living/proc/get_jump_distance()
 	return 0
