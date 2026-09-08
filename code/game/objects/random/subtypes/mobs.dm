@@ -13,6 +13,46 @@
 	)
 	return spawnable_choices
 
+/obj/random/fish
+	name = "Random Fish"
+	desc = "This is a random fish. Glub glub."
+	icon = 'icons/mob/simple_animal/fish_salmon.dmi'
+	icon_state = ICON_STATE_WORLD
+
+/obj/random/fish/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/mob/living/simple_animal/aquatic/fish               = 10,
+		/mob/living/simple_animal/aquatic/fish/grump         = 10,
+		/obj/item/mollusc                                    = 5,
+		/obj/item/mollusc/barnacle/fished                    = 5,
+		/mob/living/simple_animal/aquatic/fish/large         = 5,
+		/mob/living/simple_animal/aquatic/fish/large/bass    = 5,
+		/mob/living/simple_animal/aquatic/fish/large/salmon  = 5,
+		/mob/living/simple_animal/aquatic/fish/large/trout   = 5,
+		/mob/living/simple_animal/aquatic/fish/large/pike    = 3,
+		/mob/living/simple_animal/aquatic/fish/large/javelin = 3,
+		/obj/item/mollusc/clam/fished/pearl                  = 3,
+		/obj/item/trash/mollusc_shell/clam                   = 2,
+		/obj/item/trash/mollusc_shell/barnacle               = 2,
+		/obj/item/trash/mollusc_shell                        = 1,
+		/mob/living/simple_animal/aquatic/fish/large/koi     = 1
+	)
+	return spawnable_choices
+
+/obj/random/drone
+	name = "Random Drone"
+	desc = "This is a random combat drone. Beep boop."
+	icon = 'icons/mob/simple_animal/drones/combat.dmi'
+	icon_state = ICON_STATE_WORLD
+
+/obj/random/drone/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/mob/living/simple_animal/hostile/malf_drone/lesser = 10,
+		/mob/living/simple_animal/hostile/malf_drone        = 6,
+		/mob/living/simple_animal/hostile/malf_drone/mining = 3
+	)
+	return spawnable_choices
+
 /obj/random/hostile
 	name = "Random Hostile Mob"
 	desc = "This is a random hostile mob."

@@ -179,21 +179,28 @@
 // Returns a list of mobs and/or objects in range of get_range from source. Used in radio and say code. Only considers mobs and "listening" objects.
 /proc/get_listeners_in_range(turf/center, range, list/mobs, list/objs, check_ghosts=FALSE)
 	var/list/hearturfs = list()
-	FOR_DVIEW(var/turf/T, range, center, INVISIBILITY_MAXIMUM)
-		hearturfs[T] = TRUE
-		for(var/mob/M in T)
-			mobs += M
-	END_FOR_DVIEW
 
-	for(var/mob/M in global.player_list)
-		if(check_ghosts && M.stat == DEAD && M.get_preference_value(check_ghosts) != PREF_NEARBY)
-			mobs |= M
-		else if(hearturfs[get_turf(M)])
-			mobs |= M
+	if(islist(mobs))
 
-	for(var/obj/O in global.listening_objects)
-		if(hearturfs[get_turf(O)])
-			objs += O
+		FOR_DVIEW(var/turf/T, range, center, INVISIBILITY_MAXIMUM)
+			hearturfs[T] = TRUE
+			for(var/mob/M in T)
+				mobs += M
+		END_FOR_DVIEW
+
+		for(var/mob/M in global.player_list)
+			if(check_ghosts && M.stat == DEAD && M.get_preference_value(check_ghosts) != PREF_NEARBY)
+				mobs |= M
+
+	else
+		FOR_DVIEW(var/turf/T, range, center, INVISIBILITY_MAXIMUM)
+			hearturfs[T] = TRUE
+		END_FOR_DVIEW
+
+	if(islist(objs))
+		for(var/obj/O in global.listening_objects)
+			if(hearturfs[get_turf(O)])
+				objs += O
 
 
 

@@ -61,7 +61,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
 
-/decl/item_effect/proc/hear_speech(obj/item/item, mob/user, message, decl/language/speaking)
+/decl/item_effect/proc/hear_speech(obj/item/item, mob/user, datum/speech/phrases)
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE
 

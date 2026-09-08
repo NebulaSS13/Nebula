@@ -115,7 +115,7 @@
 		return FALSE
 	if(damage >= 10)
 		visible_message(SPAN_DANGER("\The [user] [attack_verb] into [src]!"))
-		take_damage(damage)
+		take_damage(damage, BRUTE)
 	else
 		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
 	return TRUE
@@ -211,3 +211,18 @@
 	visible_message(SPAN_NOTICE("\The [user] has [anchored ? "secured" : "unsecured"] \the [src] with \the [tool]."))
 	update_icon()
 	return TRUE
+
+// Not using can_shred() on this because vox typically like to interact peacefully
+// with closets and such, while drakes (who get can_damage_structures) do not.
+/obj/structure/attack_hand(mob/user)
+	if((. = ..()))
+		return
+	if(user.check_intent(I_FLAG_HARM))
+		var/decl/natural_attack/attack = user.get_unarmed_attack(src)
+		if(istype(attack) && attack.can_damage_structures)
+			user.do_attack_animation(src)
+			user.setClickCooldown(attack.apply_cooldown)
+			visible_message(SPAN_DANGER("\The [user] [pick(attack.attack_verb)] \the [src]!"))
+			take_damage(attack.damage)
+			return TRUE
+	return FALSE

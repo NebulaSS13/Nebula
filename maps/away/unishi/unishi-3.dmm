@@ -1954,7 +1954,7 @@
 /turf/floor/laminate,
 /area/unishi/living)
 "ur" = (
-/obj/machinery/hologram/holopad/longrange/remoteship,
+/obj/machinery/holopad/longrange/remoteship,
 /turf/floor/tiled,
 /area/unishi/bridge)
 "vn" = (

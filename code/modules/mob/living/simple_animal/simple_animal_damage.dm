@@ -3,6 +3,7 @@
 	var/burn_damage  = 0
 	/// Set to -1 to disable gene damage for the mob.
 	var/gene_damage  = 0
+	var/alist/immune_to_damage_type
 
 /mob/living/simple_animal/getFireLoss()
 	return burn_damage
@@ -73,6 +74,8 @@
 	return 1
 
 /mob/living/simple_animal/take_damage(damage, damage_type = BRUTE, damage_flags, inflicter, armor_pen = 0, silent, do_update_health)
+	if(damage > 0 && immune_to_damage_type && immune_to_damage_type[damage_type])
+		return
 	. = ..()
 	if((damage_type == BRUTE) && (damage_flags & (DAM_EDGE | DAM_SHARP | DAM_BULLET))) // damage flags that should cause bleeding
 		adjustBleedTicks(damage)

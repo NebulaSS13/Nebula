@@ -11,6 +11,7 @@
 		/decl/bodytype/quadruped/grafadreka,
 		/decl/bodytype/quadruped/grafadreka/hatchling
 	)
+	flesh_color = "#608894"
 	base_external_prosthetics_model = null // no robolimbs for dogs
 	preview_outfit = null                  // no pants for dogs
 	snow_slowdown_mod = -0.5

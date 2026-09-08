@@ -28,6 +28,9 @@ var/global/list/level_persistence_ref_map = list()
 /datum/level_data/proc/is_persistent()
 	return !isnull(persistent_data_location) && !isnull(persistence_handler) && !isnull(level_id)
 
+/datum/level_data/proc/need_persistent_data_save()
+	return is_persistent() && length(changed_turfs)
+
 /datum/level_data/proc/get_persistent_data()
 	. = list()
 	var/list/instances_to_save = get_persistent_instances()

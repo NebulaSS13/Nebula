@@ -1081,7 +1081,6 @@
 	set_trait(TRAIT_PLANT_ICON,"carrot")
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 	set_chemical_amount(/decl/material/liquid/nutriment, list(1,20))
-	set_chemical_amount(/decl/material/liquid/eyedrops, list(3,5))
 	set_chemical_amount(/decl/material/liquid/drink/juice/carrot, list(10,20))
 
 /datum/seed/weeds

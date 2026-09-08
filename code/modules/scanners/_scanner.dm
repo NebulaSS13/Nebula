@@ -34,7 +34,7 @@
 /obj/item/scanner/proc/can_use(mob/user)
 	if (user.incapacitated())
 		return
-	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, fail_message = "You lack the dexterity to use \the [src]."))
 		return
 	return TRUE
 

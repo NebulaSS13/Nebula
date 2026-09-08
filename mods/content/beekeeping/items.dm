@@ -9,7 +9,7 @@
 // TODO: consume reagents or charges? Unnecessary complexity?
 /obj/item/smoker/resolve_attackby(atom/A, mob/user, click_params)
 
-	if(!user.check_dexterity(get_required_attack_dexterity(user, A)))
+	if(!user.check_dexterity(get_required_attack_dexterity(user, A), fail_message = "You lack the dexterity to use \the [src]."))
 		return TRUE
 
 	var/smoked = FALSE

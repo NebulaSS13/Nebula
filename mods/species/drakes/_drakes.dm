@@ -5,10 +5,6 @@
 /decl/modpack/grafadreka
 	name = "Grafadreka Species"
 
-/mob/living/human/grafadreka/Initialize(mapload, species_uid, datum/mob_snapshot/supplied_appearance)
-	species_uid = /decl/species/grafadreka::uid
-	. = ..()
-
 // TODO rewrite for Nebula drakes
 /obj/item/book/drake_handling
 	name = "Care And Handling Of The Sivian Snow Drake v0.1.12b"
@@ -51,3 +47,16 @@
 			</body>
 		</html>
 	"}
+
+/obj/random/grafadreka
+	name = "Random Grafadreka"
+	desc = "This is a random grafadreka, either waking or hibernating."
+	icon = 'mods/species/drakes/icons/body.dmi'
+	icon_state = "preview"
+
+/obj/random/grafadreka/spawn_choices()
+	var/static/list/spawn_choices = list(
+		/mob/living/human/grafadreka/hatchling = 3,
+		/mob/living/human/grafadreka           = 12
+	)
+	return spawn_choices

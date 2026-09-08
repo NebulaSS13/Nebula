@@ -7,9 +7,9 @@
 	exclaim_verb = "invokes"
 	ask_verb = "wails"
 	space_chance = 0
-	key = "💊"
+	language_key = "💊"
 	allow_repeated_syllables = FALSE
-	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_FORBIDDEN
+	language_flags = LANG_FLAG_RESTRICTED | LANG_FLAG_FORBIDDEN
 	syllables = list(
 		"o", "a","flu","o","me","phyto","doce","tha","facto","bena","zeco","ni",
 		"me","pro","dize","da","le","ta","to","ba","re","mbi","no","ffi",

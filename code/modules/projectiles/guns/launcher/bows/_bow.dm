@@ -45,10 +45,17 @@
 	var/strung_w_class = ITEM_SIZE_HUGE
 	/// How big is this bow when unstrung? Uses initial w_class if unset.
 	var/unstrung_w_class
+	/// Set to TRUE to skip the default click fire behavior of guns.
+	var/bypass_afterattack = TRUE
 
 /obj/item/gun/launcher/bow/handle_click_empty(atom/movable/firer)
 	if(check_fire_message_spam("click"))
 		to_chat(firer, SPAN_WARNING("\The [src] has nothing loaded."))
+
+/obj/item/gun/launcher/bow/afterattack(atom/A, mob/living/user, adjacent, params)
+	if(bypass_afterattack)
+		return
+	. = ..()
 
 /obj/item/gun/launcher/bow/fancy
 	desc = "A projectile weapon of ancient design that turns elastic tension into long-range death. This one has decorative engraving and flourishes."
@@ -151,3 +158,12 @@
 	if(!length(strings))
 		return
 	. += "It [english_list(strings)]."
+
+/obj/item/gun/launcher/bow/get_examine_hints(mob/user, distance, infix, suffix)
+	. = ..()
+	var/hint = get_bow_usage_hints()
+	if(hint)
+		LAZYADD(., hint)
+
+/obj/item/gun/launcher/bow/proc/get_bow_usage_hints()
+	return SPAN_SUBTLE("Place an arrow into the bow, then click and hold on harm intent to draw it back. Release to fire.")

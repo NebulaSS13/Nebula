@@ -245,7 +245,7 @@ var/global/list/surgery_tool_exception_cache = list()
 		return FALSE // Erroneous mob interaction
 
 	// there IS a rule that says dogs can't do surgery, actually. section 13a, the "No Dr. Air Bud" Rule
-	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, fail_message = "You lack the dexterity to perform surgery."))
 		return TRUE // prevent other interactions because we've shown a message
 
 	var/decl/bodytype/root_bodytype = M.get_bodytype()

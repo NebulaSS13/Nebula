@@ -23,10 +23,6 @@ SUBSYSTEM_DEF(lore)
 	var/list/credits_topics =          list("SACRED GEOMETRY","ABSTRACT MATHEMATICS","LOVE","DRUGS","CRIME","PRODUCTIVITY","LAUNDRY")
 	var/list/credits_nouns =           list("DIGNITY", "SANITY")
 
-	// Probably not the best subsystem for these, but oh well.
-	var/list/languages_by_key
-	var/list/languages_by_name
-
 /datum/controller/subsystem/lore/Initialize()
 
 	var/list/all_backgrounds = decls_repository.get_decls_of_subtype(/decl/background_detail)
@@ -71,23 +67,3 @@ SUBSYSTEM_DEF(lore)
 		possible_titles |= credits_other
 		global.end_credits_title = pick(possible_titles)
 	. = global.end_credits_title
-
-/datum/controller/subsystem/lore/proc/get_language_by_name(var/language_name)
-	if(!languages_by_name)
-		languages_by_name = list()
-		var/list/language_types = decls_repository.get_decls_of_subtype(/decl/language)
-		for(var/thing in language_types)
-			var/decl/language/lang = language_types[thing]
-			if(lang.name)
-				languages_by_name[lang.name] = lang
-	. = languages_by_name[language_name]
-
-/datum/controller/subsystem/lore/proc/get_language_by_key(var/language_key)
-	if(!languages_by_key)
-		languages_by_key = list()
-		var/list/language_types = decls_repository.get_decls_of_subtype(/decl/language)
-		for(var/thing in language_types)
-			var/decl/language/lang = language_types[thing]
-			if(lang.key)
-				languages_by_key[lang.key] = lang
-	. = languages_by_key[language_key]

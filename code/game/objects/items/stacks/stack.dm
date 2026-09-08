@@ -13,6 +13,8 @@
 	gender = PLURAL
 	origin_tech = @'{"materials":1}'
 	max_health = 32 //Stacks should take damage even if no materials
+	needs_attack_dexterity = DEXTERITY_HOLD_ITEM // Combining stacks is not complex.
+
 	/// A copy of initial matter list when this atom initialized. Stack matter should always assume a single tile.
 	var/list/matter_per_piece
 	var/name_modifier

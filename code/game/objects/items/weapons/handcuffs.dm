@@ -43,7 +43,7 @@
 
 /obj/item/handcuffs/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
-	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, fail_message = "You lack the dexterity to apply \the [src]."))
 		return ..()
 
 	if (user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))

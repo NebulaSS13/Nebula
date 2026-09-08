@@ -179,7 +179,7 @@
 	return
 
 /obj/machinery/turbine/CanUseTopic(var/mob/user, href_list)
-	if(!user.check_dexterity(DEXTERITY_KEYBOARDS))
+	if(!user.check_dexterity(DEXTERITY_KEYBOARDS, silent = TRUE))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 

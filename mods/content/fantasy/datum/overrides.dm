@@ -65,3 +65,11 @@
 		/obj/item/remains/robot
 	)
 	return spawnable_choices
+
+// Slightly more generic pain strings compared to 'dear god' and 'you need painkillers'
+/decl/bodytype/get_custom_pain_strings()
+	var/static/list/custom_pain_strings = list(
+		"It hurts so much!",
+		"The pain is overwhelming!"
+	)
+	return custom_pain_strings

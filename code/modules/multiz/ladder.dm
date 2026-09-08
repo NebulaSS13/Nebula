@@ -145,7 +145,7 @@
 		landing.visible_message(SPAN_DANGER("\The [thing] falls from the top of \the [target_down]!"))
 
 /obj/structure/ladder/attack_hand(var/mob/user)
-	if(user.check_intent(I_FLAG_HARM) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+	if(user.check_intent(I_FLAG_HARM) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, fail_message = "You lack the dexterity to climb the ladder."))
 		return ..()
 	climb(user)
 	return TRUE

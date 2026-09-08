@@ -20,8 +20,8 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = ""
-	key = "0"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "galcom"
+	language_flags = LANG_FLAG_WHITELISTED
 	shorthand = "C"
 	partial_understanding = list()
 	syllables = list(
@@ -38,8 +38,8 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = ""
-	key = "1"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "solcom"
+	language_flags = LANG_FLAG_WHITELISTED
 	shorthand = "Sol"
 	partial_understanding = list()
 	// Duplicates are from different root languages, net effect is symbols that are more common across langs are more common in the generated text
@@ -112,7 +112,7 @@
 		"wa", "wa", "wa", "wa", "wa", "wa", "wa", "wai", "wan", "wang", "wei", "wen", "weng", "wo", "wu",
 		"xi", "xia", "xian", "xiang", "xiao", "xie", "xin", "xing", "xiong", "xiu", "xu", "xuan", "xue", "xun",
 		"ya", "yan", "yang", "yao", "ye", "yeg", "yeg", "yeg", "yey", "yey", "yey", "yi", "yin", "ying", "yong", "you", "yu", "yuan", "yue", "yun",
-		"za", "zai", "zan", "zang", "zao", "ze", "zei", "zen", "zeng", "zi", "zong", "zou", "zu", "zuan", "zui", "zun", "zuo", 
+		"za", "zai", "zan", "zang", "zao", "ze", "zei", "zen", "zeng", "zi", "zong", "zou", "zu", "zuan", "zui", "zun", "zuo",
 		"zha", "zhai", "zhan", "zhang", "zhao", "zhe", "zhei", "zhen", "zheng", "zhi",
 		"zhong", "zhou", "zhu", "zhua", "zhuai", "zhuan", "zhuang", "zhui", "zhun", "zhuo"
 	)
@@ -124,8 +124,8 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = ""
-	key = "7"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "sivian"
+	language_flags = LANG_FLAG_WHITELISTED
 	shorthand = "Sif"
 	space_chance = 45
 	partial_understanding = list()

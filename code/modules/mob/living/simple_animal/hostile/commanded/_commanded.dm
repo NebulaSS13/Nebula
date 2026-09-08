@@ -4,10 +4,10 @@
 	density = FALSE
 	ai = /datum/mob_controller/aggressive/commanded
 
-/mob/living/simple_animal/hostile/commanded/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
-	ai?.memorise(speaker, message)
+/mob/living/simple_animal/hostile/commanded/hear_say(datum/speech/phrases, verb = "says", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, stars = FALSE, atom/relayed_by)
+	ai?.memorise(speaker, phrases.unformatted_message)
 	return ..()
 
-/mob/living/simple_animal/hostile/commanded/hear_radio(var/message, var/verb="says", var/decl/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="", var/vsource)
-	ai?.memorise(speaker, message)
+/mob/living/simple_animal/hostile/commanded/hear_radio(datum/speech/phrases, verb = "says", part_a, part_b, part_c, mob/speaker, hard_to_hear = FALSE, vname = "", vsource, scramble = FALSE)
+	ai?.memorise(speaker, phrases.unformatted_message)
 	return ..()

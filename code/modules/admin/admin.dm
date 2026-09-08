@@ -209,16 +209,16 @@ var/global/BSACooldown = 0
 	var/f = 1
 	var/list/language_types = decls_repository.get_decls_of_subtype(/decl/language)
 	for(var/k in language_types)
-		var/decl/language/L = language_types[k]
-		if(!(L.flags & LANG_FLAG_INNATE))
+		var/decl/language/language = language_types[k]
+		if(!(language.language_flags & LANG_FLAG_INNATE))
 			if(!f)
 				body += " | "
 			else
 				f = 0
-			if(L in M.languages)
-				body += "<a href='byond://?src=\ref[src];toglang=\ref[M];lang=\ref[L]' style='color:#006600'>[L.name]</a>"
+			if(language in M.languages)
+				body += "<a href='byond://?src=\ref[src];toglang=\ref[M];lang=\ref[language]' style='color:#006600'>[language.name]</a>"
 			else
-				body += "<a href='byond://?src=\ref[src];toglang=\ref[M];lang=\ref[L]' style='color:#ff0000'>[L.name]</a>"
+				body += "<a href='byond://?src=\ref[src];toglang=\ref[M];lang=\ref[language]' style='color:#ff0000'>[language.name]</a>"
 
 	body += {"<br>
 		</body></html>

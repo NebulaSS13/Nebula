@@ -4,7 +4,7 @@
 	universal_understand = TRUE
 	butchery_data = null
 
-/mob/living/captive_brain/say(var/message)
+/mob/living/captive_brain/say(datum/speech/phrases, verb = "says", whispering)
 
 	if (src.client)
 		if(client.prefs.muted & MUTE_IC)
@@ -13,7 +13,7 @@
 
 	if(isborer(src.loc))
 
-		message = sanitize(message)
+		var/message = sanitize(phrases.unformatted_message)
 		if (!message)
 			return
 		log_say("[key_name(src)] : [message]")

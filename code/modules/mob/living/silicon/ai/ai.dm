@@ -358,7 +358,7 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 
 	//Carn: holopad requests
 	if (href_list["jumptoholopad"])
-		var/obj/machinery/hologram/holopad/H = locate(href_list["jumptoholopad"])
+		var/obj/machinery/holopad/H = locate(href_list["jumptoholopad"])
 		if(stat == CONSCIOUS)
 			if(H)
 				H.attack_ai(src) //may as well recycle

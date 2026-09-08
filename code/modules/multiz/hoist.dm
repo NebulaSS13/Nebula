@@ -38,7 +38,7 @@
 	var/obj/structure/hoist/source_hoist
 
 /obj/effect/hoist_hook/attack_hand(mob/user)
-	if(user.incapacitated() || !user.check_dexterity(DEXTERITY_HOLD_ITEM) || !source_hoist?.hoistee)
+	if(user.incapacitated() || !user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to use the hoist.") || !source_hoist?.hoistee)
 		return ..()
 	source_hoist.check_consistency()
 	source_hoist.hoistee.forceMove(get_turf(src))
@@ -63,7 +63,7 @@
 		if (user.incapacitated())
 			to_chat(user, SPAN_WARNING("You can't do that while incapacitated."))
 			return
-		if (!user.check_dexterity(DEXTERITY_HOLD_ITEM))
+		if (!user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to use the hoist."))
 			return
 		source_hoist.attach_hoistee(dropped_movable)
 		user.visible_message(
@@ -86,7 +86,7 @@
 
 /obj/effect/hoist_hook/handle_mouse_drop(atom/over, mob/user, params)
 	if(source_hoist.hoistee && isturf(over) && over.Adjacent(source_hoist.hoistee))
-		if(!user.check_dexterity(DEXTERITY_HOLD_ITEM))
+		if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to use the hoist."))
 			return TRUE
 
 		source_hoist.check_consistency()
@@ -233,7 +233,7 @@
 
 	if (isobserver(usr) || usr.incapacitated())
 		return
-	if (!usr.check_dexterity(DEXTERITY_HOLD_ITEM))
+	if (!usr.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to collapse the hoist."))
 		return
 
 	if (hoistee)

@@ -654,7 +654,7 @@
 /turf/floor/tiled/dark,
 /area/shuttle/escape_shuttle)
 "aHt" = (
-/obj/machinery/hologram/holopad{
+/obj/machinery/holopad{
 	holopad_id = "Emergency Shuttle Bridge"
 	},
 /obj/effect/floor_decal/corner/blue{
@@ -991,7 +991,7 @@
 /turf/floor/tiled/dark/monotile,
 /area/shuttle/escape_shuttle)
 "aLd" = (
-/obj/machinery/hologram/holopad{
+/obj/machinery/holopad{
 	holopad_id = "Emergency Shuttle Brig"
 	},
 /turf/floor/tiled/dark/monotile,
@@ -1406,7 +1406,7 @@
 /turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aMT" = (
-/obj/machinery/hologram/holopad,
+/obj/machinery/holopad,
 /obj/effect/shuttle_landmark/escape_shuttle/start,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -1666,7 +1666,7 @@
 /turf/floor/tiled,
 /area/shuttle/escape_shuttle)
 "aPa" = (
-/obj/machinery/hologram/holopad,
+/obj/machinery/holopad,
 /turf/unsimulated/floor/laminate,
 /area/centcom/holding)
 "aPH" = (
@@ -1677,7 +1677,7 @@
 /turf/unsimulated/floor/lino,
 /area/centcom/holding)
 "aPJ" = (
-/obj/machinery/hologram/holopad{
+/obj/machinery/holopad{
 	holopad_id = "Holding Facility Bar"
 	},
 /turf/unsimulated/floor/lino,
@@ -1775,7 +1775,7 @@
 /turf/unsimulated/floor/steel,
 /area/centcom/holding)
 "bkb" = (
-/obj/machinery/hologram/holopad{
+/obj/machinery/holopad{
 	holopad_id = "Holding Facility Foyer"
 	},
 /turf/unsimulated/floor/steel,
@@ -2035,7 +2035,7 @@
 /turf/unsimulated/floor/vault,
 /area/tdome)
 "fpV" = (
-/obj/machinery/hologram/holopad{
+/obj/machinery/holopad{
 	holopad_id = "Emergency Shuttle Medbay"
 	},
 /turf/floor/tiled/white,
