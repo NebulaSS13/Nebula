@@ -1,5 +1,5 @@
 /atom
-	var/atom_codex_ref
+	var/datum/codex_entry/atom_codex_ref
 
 /obj
 	atom_codex_ref = TRUE
