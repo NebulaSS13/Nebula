@@ -587,7 +587,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	return ranged_range
 
 /mob/living/simple_animal/handle_ranged_attack(atom/target)
-	if(!has_ranged_attack(target) || !istype(target))
+	if(!istype(target) || !has_ranged_attack(target))
 		return
 	visible_message(SPAN_DANGER("\The [src] [fire_desc] at \the [target]!"))
 	if(burst_projectile)

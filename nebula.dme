@@ -2970,6 +2970,7 @@
 #include "code\modules\mob\living\human\descriptors\descriptors_generic.dm"
 #include "code\modules\mob\living\maneuvers\_maneuver.dm"
 #include "code\modules\mob\living\maneuvers\maneuver_leap.dm"
+#include "code\modules\mob\living\maneuvers\maneuver_teleport.dm"
 #include "code\modules\mob\living\silicon\death.dm"
 #include "code\modules\mob\living\silicon\laws.dm"
 #include "code\modules\mob\living\silicon\login.dm"

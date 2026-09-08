@@ -1636,3 +1636,9 @@ var/global/const/ACTION_DANGER_ALL = 2
 
 /mob/proc/remove_cloak()
 	return
+
+/mob/proc/get_available_maneuvers()
+	return
+
+/mob/proc/get_acrobatics_multiplier(var/decl/maneuver/attempting_maneuver)
+	return 1

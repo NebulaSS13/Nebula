@@ -230,7 +230,7 @@
 		move_to_target(move_only = TRUE)
 
 /datum/mob_controller/aggressive/move_to_target(var/move_only = FALSE)
-	if(!body.can_act())
+	if(!(. = ..()))
 		return
 	if(HAS_STATUS(body, STAT_CONFUSE))
 		body.start_automove(pick(orange(2, body)))
