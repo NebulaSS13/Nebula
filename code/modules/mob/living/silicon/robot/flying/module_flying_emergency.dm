@@ -20,7 +20,7 @@
 		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/stack/tape_roll/barricade_tape/medical,
 		/obj/item/inflatable_dispenser/robot,
-		/obj/item/weldingtool/mini,
+		/obj/item/fuelled_tool/welding/mini,
 		/obj/item/screwdriver,
 		/obj/item/wrench,
 		/obj/item/crowbar,

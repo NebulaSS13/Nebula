@@ -1092,3 +1092,7 @@
 
 /atom/proc/see_signlang(message, verb = "gestures", decl/language/language, mob/speaker, prefix)
 	return
+
+// Helper for when destroyed by a chainsaw (for the purposes of overriding)
+/atom/proc/handle_chainsawed(mob/user, obj/item/chainsaw)
+	physically_destroyed()

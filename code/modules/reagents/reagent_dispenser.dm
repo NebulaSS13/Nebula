@@ -108,7 +108,7 @@
 
 /obj/structure/reagent_dispensers/fueltank
 	name             = "fuel tank"
-	desc             = "A tank containing welding fuel."
+	desc             = "A tank containing fuel."
 	icon_state       = "weldtank"
 	amount_dispensed = 10
 	atom_flags       = ATOM_FLAG_CLIMBABLE
