@@ -136,6 +136,7 @@ TODO: work out how to implement an external search function.
 
 	// Suspend to avoid fluid flows shoving stuff off the testing turf.
 	SSfluids.suspend()
+	SSmob_ai.suspend()
 
 	// Also iterate the object tree for any generated on-examine codex pages.
 	var/list/seen_name_count = list()
@@ -206,5 +207,8 @@ TODO: work out how to implement an external search function.
 
 	// Handle any additional dump requirements (CSS, etc)
 	convert.handle_additional_dump()
+
+	SSfluids.wake()
+	SSmob_ai.wake()
 
 	return TRUE
