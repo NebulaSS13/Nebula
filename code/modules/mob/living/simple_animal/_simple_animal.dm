@@ -110,6 +110,10 @@
 /mob/living/simple_animal/Initialize()
 	. = ..()
 
+	// Disable our automatic codex generation since we have a scannable one.
+	if(scannable_result)
+		atom_codex_ref = FALSE
+
 	// Deserialize any JSON payload for our overlays.
 	if(istext(draw_visible_overlays))
 		draw_visible_overlays = cached_json_decode(draw_visible_overlays)
@@ -613,3 +617,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/proc/get_default_animal_colours()
 	return
+
+/mob/living/simple_animal/get_specific_codex_entry()
+	if(scannable_result && !istype(atom_codex_ref))
+		var/datum/codex_entry/codex = locate(scannable_result) in SScodex.all_entries
+		if(istype(codex))
+			atom_codex_ref = codex
+	. = ..()
