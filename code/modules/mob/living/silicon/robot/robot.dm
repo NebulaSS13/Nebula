@@ -625,6 +625,7 @@
 	if(user.can_shred())
 		attack_generic(user, rand(30,50), "slashed")
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.remove_cloak()
 		return TRUE
 	. = ..()
 

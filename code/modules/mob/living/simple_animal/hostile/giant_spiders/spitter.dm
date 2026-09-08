@@ -14,7 +14,7 @@
 /mob/living/simple_animal/hostile/giant_spider/spitter/get_door_pry_time()
 	return 7 SECONDS
 
-/mob/living/simple_animal/hostile/giant_spider/spitter/has_ranged_attack()
+/mob/living/simple_animal/hostile/giant_spider/spitter/has_ranged_attack(atom/target)
 	return venom_charge > 0
 
 /mob/living/simple_animal/hostile/giant_spider/spitter/handle_regular_status_updates()
