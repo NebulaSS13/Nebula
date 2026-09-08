@@ -10,7 +10,7 @@
 	icon_state = ICON_STATE_WORLD
 	death_message = "expires with a pitiful chirrup..."
 	max_health = 60
-	available_maneuvers = list(/decl/maneuver/leap)
+	_available_maneuvers = list(/decl/maneuver/leap)
 	status_flags = NO_ANTAG
 	glowing_eyes = TRUE
 
