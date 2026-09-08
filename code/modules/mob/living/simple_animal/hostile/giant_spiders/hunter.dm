@@ -3,7 +3,7 @@
 	cooldown = 3 MINUTES
 
 /decl/maneuver/leap/spider/ai_should_use(mob/living/user, atom/target)
-	return istype(target) // Range checking is done in can_be_used_by() above.
+	return istype(target) // Range checking is done in can_be_used_by()
 
 /decl/maneuver/leap/spider/show_initial_message(var/mob/living/user, var/atom/target)
 	user.visible_message(SPAN_WARNING("\The [user] reels back and prepares to launch itself at \the [target]!"))

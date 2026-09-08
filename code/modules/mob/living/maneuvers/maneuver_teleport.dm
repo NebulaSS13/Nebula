@@ -1,6 +1,7 @@
 /decl/maneuver/teleport
 	name = "Teleport"
-	selection_icon_state = "leap" // close enough
+	stamina_cost = 0
+	selection_icon_state = "smoke" // close enough
 	/// How far away to be at most after we teleport.
 	var/teleport_distance = 7
 	/// How far we can teleport. Don't teleport from further than the default view.
