@@ -1,0 +1,3 @@
+/obj/item/clothing/suit/space/vox/@SUBTYPES : /obj/item/clothing/suit/space/void/vox/@SUBTYPES{@OLD}
+/obj/item/clothing/head/helmet/space/vox/@SUBTYPES : /obj/item/clothing/head/helmet/space/void/vox/@SUBTYPES{@OLD}
+/obj/item/gun/launcher/alien/@SUBTYPES : /obj/item/gun/launcher/vox/@SUBTYPES{@OLD}
