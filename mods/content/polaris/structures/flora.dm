@@ -43,7 +43,7 @@
 	name = "glowing tree"
 	desc = "It's a tree, except this one seems quite alien. It glows a deep blue."
 	icon = 'mods/content/polaris/icons/structures/flora/tree_sif.dmi'
-	icon_state = "pine_1"
+	icon_state = "tree_sif0"
 	material = /decl/material/solid/organic/wood/sif
 	stump_type = /obj/structure/flora/stump/tree/sif
 	light_offset_x = 1 // "equivalent to a pixel offset of 1, which due to how the logic works will mean no lighting offset"

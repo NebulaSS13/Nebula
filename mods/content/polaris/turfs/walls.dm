@@ -1,3 +1,7 @@
+/turf/wall/wood/sif
+	material = /decl/material/solid/organic/wood/sif
+	color = /decl/material/solid/organic/wood/sif::color
+
 /turf/wall/log/sif
 	material = /decl/material/solid/organic/wood/sif
 	color = /decl/material/solid/organic/wood/sif::color
