@@ -8,7 +8,7 @@
 	products = list(
 		/obj/item/stack/cable_coil/random = 10,
 		/obj/item/crowbar = 5,
-		/obj/item/weldingtool = 3,
+		/obj/item/fuelled_tool/welding = 3,
 		/obj/item/wirecutters = 5,
 		/obj/item/wrench = 5,
 		/obj/item/scanner/gas = 5,
@@ -20,7 +20,7 @@
 		/obj/item/clothing/gloves/insulated/cheap = 2
 	)
 	contraband = list(
-		/obj/item/weldingtool/hugetank = 2,
+		/obj/item/fuelled_tool/welding/hugetank = 2,
 		/obj/item/clothing/gloves/insulated = 1
 	)
 
@@ -63,7 +63,7 @@
 		/obj/item/wrench = 12,
 		/obj/item/t_scanner = 12,
 		/obj/item/cell = 8,
-		/obj/item/weldingtool = 8,
+		/obj/item/fuelled_tool/welding = 8,
 		/obj/item/clothing/head/welding = 8,
 		/obj/item/light/tube = 10,
 		/obj/item/stock_parts/scanning_module = 5,

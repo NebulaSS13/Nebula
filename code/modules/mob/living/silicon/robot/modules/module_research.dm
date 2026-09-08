@@ -19,7 +19,7 @@
 		/obj/item/card/robot,
 		/obj/item/wrench,
 		/obj/item/screwdriver,
-		/obj/item/weldingtool/mini,
+		/obj/item/fuelled_tool/welding/mini,
 		/obj/item/wirecutters,
 		/obj/item/crowbar,
 		/obj/item/scalpel/laser/advanced,

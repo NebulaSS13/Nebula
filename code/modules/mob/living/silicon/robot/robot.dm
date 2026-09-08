@@ -448,14 +448,14 @@
 		if (!get_damage(BRUTE))
 			to_chat(user, "Nothing to fix here!")
 			return TRUE
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if (welder.weld(0))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			heal_damage(BRUTE, 30)
 			add_fingerprint(user)
 			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the dents on \the [src]!"))
 		else
-			to_chat(user, "Need more welding fuel!")
+			to_chat(user, "Need more fuel!")
 		return TRUE
 
 	else if(istype(used_item, /obj/item/stack/cable_coil) && (wiresexposed || isdrone(src)))

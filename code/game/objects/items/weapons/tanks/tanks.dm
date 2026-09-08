@@ -187,7 +187,7 @@ var/global/list/global/tank_gauge_cache = list()
 		return TRUE
 
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(welder.weld(1,user))
 			if(!valve_welded)
 				to_chat(user, "<span class='notice'>You begin welding \the [src] emergency pressure relief valve.</span>")
@@ -198,7 +198,7 @@ var/global/list/global/tank_gauge_cache = list()
 				else
 					global.bombers += "[key_name(user)] attempted to weld \a [src]. [air_contents.temperature-T0C]"
 					log_and_message_admins("attempted to weld \a [src]. [air_contents.temperature-T0C]", user)
-					if(welder.welding)
+					if(welder.running_state)
 						to_chat(user, "<span class='danger'>You accidentally rake \the [used_item] across \the [src]!</span>")
 						maxintegrity -= rand(2,6)
 						integrity = min(integrity,maxintegrity)
