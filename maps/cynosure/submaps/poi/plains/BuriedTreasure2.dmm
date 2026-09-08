@@ -1,0 +1,54 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/cynosure_submap/BuriedTreasure)
+"b" = (
+/obj/structure/pit/closed/grave,
+/obj/random/contraband,
+/obj/random/contraband,
+/obj/random/cash,
+/obj/random/cash,
+/obj/random/cash,
+/obj/random/cash,
+/obj/random/drinkbottle,
+/obj/random/mre,
+/obj/item/clothing/suit/explorer,
+/obj/random/projectile,
+/turf/template_noop,
+/area/cynosure_submap/BuriedTreasure)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+a
+"}
+(3,1,1) = {"
+a
+a
+b
+a
+a
+"}
+(4,1,1) = {"
+a
+a
+a
+a
+a
+"}
+(5,1,1) = {"
+a
+a
+a
+a
+a
+"}

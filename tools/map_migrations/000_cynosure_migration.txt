@@ -40,7 +40,6 @@
 /turf/wall/shuttle/dark/hard_corner : /turf/wall/shuttle/dark{@OLD}
 /turf/wall/shuttle/hard_corner : /turf/wall/shuttle{@OLD}
 /turf/wall/shuttle/no_join : /turf/wall/shuttle{@OLD; unique_merge_identifier = "CHANGEME"}
-/turf/wall/shuttle/voidcraft/hard_corner : /turf/wall/shuttle/voidcraft{@OLD}
 
 # Misc. cooking
 /obj/item/reagent_containers/food/condiment/small/peppershaker : /obj/item/chems/condiment/small/peppermill{@OLD}
@@ -361,6 +360,7 @@
 /obj/item/gun/launcher/crossbow : /obj/item/gun/launcher/bow/crossbow/powered
 
 /obj/structure/girder/reinforced : /obj/structure/girder{@OLD}
+/obj/structure/railing : /obj/structure/railing/mapped{@OLD}
 
 # SHUTTLE AREAS
 /area/shuttle/arrival/pre_game : /area/shuttle/arrival

@@ -1,0 +1,261 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementC)
+"d" = (
+/obj/random/maintenance,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"g" = (
+/obj/machinery/door/airlock{
+	name = "Construction Area"
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure/maintenance/construction/d1/basementC)
+"h" = (
+/obj/item/frame/camera/kit,
+/obj/structure/sign/poster{
+	pixel_y = -32;
+	poster_design = /decl/poster_design/bay_28
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"i" = (
+/obj/structure/closet/crate,
+/obj/item/pen/crayon/mime,
+/obj/item/clothing/shoes/color/white,
+/obj/item/clothing/head/soft/mime,
+/obj/item/clothing/costume/mime,
+/obj/item/clothing/mask/gas/mime,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"m" = (
+/obj/structure/table/bench,
+/obj/item/stack/tile/carpet,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"p" = (
+/obj/random/junk,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"q" = (
+/obj/item/bikehorn,
+/obj/structure/curtain{
+	color = "#b00000"
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"r" = (
+/obj/structure/closet/crate,
+/obj/item/clothing/shoes/clown_shoes,
+/obj/item/backpack/clown,
+/obj/item/clothing/costume/clown,
+/obj/item/clothing/mask/gas,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"v" = (
+/obj/item/frame/light{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"x" = (
+/obj/random/obstruction,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"y" = (
+/obj/item/synthesized_instrument/violin,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"z" = (
+/obj/item/stack/tile/carpet,
+/obj/structure/sign/poster{
+	pixel_y = -32
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"A" = (
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"B" = (
+/obj/machinery/light,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"F" = (
+/obj/structure/table/bench,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"G" = (
+/obj/item/frame/apc,
+/obj/structure/sign/poster{
+	pixel_y = -32;
+	poster_design = /decl/poster_design/bay_6
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"H" = (
+/obj/structure/girder,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"L" = (
+/obj/machinery/vending/snix{
+	dir = 4
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"O" = (
+/obj/structure/curtain{
+	color = "#b00000"
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"P" = (
+/obj/item/stack/tile/wood{
+	amount = 12
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"Q" = (
+/turf/template_noop,
+/area/template_noop)
+"U" = (
+/obj/effect/decal/cleanable/fruit_smudge{
+	color = "#d10000"
+	},
+/obj/machinery/light/fixture{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"V" = (
+/obj/structure/table/bench,
+/obj/random/junk,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"X" = (
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"Y" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+"Z" = (
+/obj/structure/table/bench,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementC)
+
+(1,1,1) = {"
+a
+H
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+X
+X
+O
+Y
+Z
+X
+Z
+L
+a
+"}
+(3,1,1) = {"
+a
+X
+y
+O
+X
+Z
+p
+Z
+z
+a
+"}
+(4,1,1) = {"
+a
+X
+X
+O
+X
+Z
+X
+Z
+B
+a
+"}
+(5,1,1) = {"
+a
+U
+X
+O
+X
+m
+P
+F
+A
+g
+"}
+(6,1,1) = {"
+a
+X
+X
+O
+d
+F
+A
+V
+h
+a
+"}
+(7,1,1) = {"
+a
+X
+X
+q
+X
+v
+A
+A
+G
+a
+"}
+(8,1,1) = {"
+a
+r
+i
+a
+a
+A
+a
+a
+a
+a
+"}
+(9,1,1) = {"
+a
+a
+x
+a
+Q
+Q
+Q
+Q
+Q
+Q
+"}

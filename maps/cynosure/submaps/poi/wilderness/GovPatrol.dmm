@@ -1,0 +1,261 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"c" = (
+/turf/template_noop,
+/area/cynosure_submap/Cragzone1)
+"d" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"e" = (
+/obj/item/radio/off,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"f" = (
+/obj/item/backpack/parachute,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"g" = (
+/obj/item/box/flares,
+/obj/random/medical/lite,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"h" = (
+/obj/item/ammo_casing,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"i" = (
+/obj/item/clothing/jumpsuit/utility,
+/obj/item/clothing/shoes/jackboots,
+/obj/item/remains,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"j" = (
+/obj/item/stack/material/plank/mapped/sif,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"k" = (
+/obj/item/gun/projectile/bolt_action,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"l" = (
+/obj/structure/fire_source/firepit/sif,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"m" = (
+/obj/item/remains,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"u" = (
+/obj/random/scrapped_shotgun,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"I" = (
+/obj/item/clothing/head/beret,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+"X" = (
+/obj/item/clothing/jumpsuit/utility/grey,
+/turf/template_noop,
+/area/cynosure_submap/GovPatrol)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+d
+b
+b
+b
+a
+"}
+(3,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+a
+"}
+(4,1,1) = {"
+a
+b
+b
+d
+b
+b
+b
+I
+h
+j
+b
+h
+a
+"}
+(5,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+b
+b
+k
+b
+a
+"}
+(6,1,1) = {"
+a
+b
+b
+b
+b
+b
+e
+b
+i
+b
+b
+b
+a
+"}
+(7,1,1) = {"
+a
+b
+b
+b
+b
+b
+d
+b
+b
+b
+b
+b
+a
+"}
+(8,1,1) = {"
+a
+b
+b
+b
+b
+b
+f
+g
+b
+X
+l
+b
+a
+"}
+(9,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+h
+b
+b
+b
+b
+a
+"}
+(10,1,1) = {"
+a
+b
+c
+b
+b
+b
+b
+b
+b
+u
+b
+m
+a
+"}
+(11,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+b
+b
+h
+h
+a
+"}
+(12,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+a
+"}
+(13,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
