@@ -560,7 +560,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(istype(ai))
 		ai.resume()
 
-/mob/living/simple_animal/has_ranged_attack()
+/mob/living/simple_animal/has_ranged_attack(atom/target)
 	return !!projectiletype && get_ranged_attack_distance() > 0
 
 /mob/living/simple_animal/proc/shoot_wrapper(target, location, user)
@@ -570,7 +570,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/proc/shoot_at(var/atom/target, var/atom/start)
 	if(!start)
 		start = get_turf(src)
-	if(!can_act() || !istype(target) || !istype(start) || target == start || !has_ranged_attack())
+	if(!can_act() || !istype(target) || !istype(start) || target == start || !has_ranged_attack(target))
 		return FALSE
 	var/obj/item/projectile/A = new projectiletype(get_turf(start))
 	if(!A)
@@ -583,7 +583,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	return ranged_range
 
 /mob/living/simple_animal/handle_ranged_attack(atom/target)
-	if(!has_ranged_attack() || !istype(target))
+	if(!istype(target) || !has_ranged_attack(target))
 		return
 	visible_message(SPAN_DANGER("\The [src] [fire_desc] at \the [target]!"))
 	if(burst_projectile)

@@ -1,3 +1,17 @@
+/decl/maneuver/leap/spider
+	stamina_cost = 0
+
+/decl/maneuver/leap/spider/ai_should_use(mob/living/user, atom/target)
+	return istype(target) && !user.is_on_special_ability_cooldown() // Range checking is done in can_be_used_by() above.
+
+/decl/maneuver/leap/spider/show_initial_message(var/mob/living/user, var/atom/target)
+	user.visible_message(SPAN_WARNING("\The [user] reels back and prepares to launch itself at \the [target]!"))
+
+/decl/maneuver/leap/spider/perform(mob/living/user, atom/target, strength, reflexively)
+	if((. = ..()) && istype(user, /mob/living/simple_animal))
+		var/mob/living/simple_animal/critter = user
+		critter.set_special_ability_cooldown(critter.ability_cooldown)
+
 /mob/living/simple_animal/hostile/giant_spider/hunter
 	desc = "A monstrously huge black spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider_black.dmi'
@@ -7,7 +21,7 @@
 	base_movement_delay = -1
 	flash_protection = FLASH_PROTECTION_REDUCED
 	does_spin = FALSE
-	available_maneuvers = list(/decl/maneuver/leap/spider)
+	_available_maneuvers = list(/decl/maneuver/leap/spider)
 	ability_cooldown = 3 MINUTES
 	ai = /datum/mob_controller/aggressive/giant_spider/hunter
 	var/leap_range = 5

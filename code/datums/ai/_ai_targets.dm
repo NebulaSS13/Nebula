@@ -60,7 +60,21 @@
 	. = target_scan_distance > 0 && world.time >= next_target_scan_time
 
 /datum/mob_controller/proc/move_to_target(var/move_only = FALSE)
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	if(!istype(body) || !body.can_act())
+		return FALSE
+	stop_wandering()
+	var/list/available_maneuvers = body.get_available_maneuvers()
+	if(!length(available_maneuvers))
+		return FALSE
+	var/atom/target = get_target()
+	if(!target)
+		return FALSE
+	for(var/maneuver_type in available_maneuvers)
+		var/decl/maneuver/maneuver_decl = RESOLVE_TO_DECL(maneuver_type)
+		if(istype(maneuver_decl) && maneuver_decl.ai_should_use(body, target) && body.perform_maneuver(maneuver_type, target))
+			return FALSE // Don't permit further behavior upstream
+	return TRUE
 
 /datum/mob_controller/proc/get_raw_target_list()
 	if(target_scan_distance)

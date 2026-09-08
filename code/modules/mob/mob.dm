@@ -1623,3 +1623,9 @@ var/global/const/ACTION_DANGER_ALL = 2
 // Check if this mob can full-auto fire a gun at a target.
 /mob/proc/mob_can_autofire(obj/item/gun/gun, atom/target)
 	return TRUE // TODO: dexterity check? That will be handled by the item itself probably.
+
+/mob/proc/get_available_maneuvers()
+	return
+
+/mob/proc/get_acrobatics_multiplier(var/decl/maneuver/attempting_maneuver)
+	return 1
