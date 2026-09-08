@@ -1,0 +1,5 @@
+OPTIONAL_SPAWNER(spiderling, /obj/effect/spider/spiderling/mundane)
+OPTIONAL_SPAWNER(spider_nurse, /mob/living/simple_animal/hostile/giant_spider/nurse)
+OPTIONAL_SPAWNER(spider_guard, /mob/living/simple_animal/hostile/giant_spider/guard)
+OPTIONAL_SPAWNER(spider_eggs, /obj/effect/spider/eggcluster)
+OPTIONAL_SPAWNER(spider_web, /obj/effect/spider/stickyweb)
