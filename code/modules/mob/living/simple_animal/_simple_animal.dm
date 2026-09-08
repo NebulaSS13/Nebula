@@ -110,6 +110,10 @@
 /mob/living/simple_animal/Initialize()
 	. = ..()
 
+	// Disable our automatic codex generation since we have a scannable one.
+	if(scannable_result)
+		atom_codex_ref = FALSE
+
 	// Deserialize any JSON payload for our overlays.
 	if(istext(draw_visible_overlays))
 		draw_visible_overlays = cached_json_decode(draw_visible_overlays)
@@ -560,7 +564,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(istype(ai))
 		ai.resume()
 
-/mob/living/simple_animal/has_ranged_attack()
+/mob/living/simple_animal/has_ranged_attack(atom/target)
 	return !!projectiletype && get_ranged_attack_distance() > 0
 
 /mob/living/simple_animal/proc/shoot_wrapper(target, location, user)
@@ -570,7 +574,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/proc/shoot_at(var/atom/target, var/atom/start)
 	if(!start)
 		start = get_turf(src)
-	if(!can_act() || !istype(target) || !istype(start) || target == start || !has_ranged_attack())
+	if(!can_act() || !istype(target) || !istype(start) || target == start || !has_ranged_attack(target))
 		return FALSE
 	var/obj/item/projectile/A = new projectiletype(get_turf(start))
 	if(!A)
@@ -583,7 +587,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	return ranged_range
 
 /mob/living/simple_animal/handle_ranged_attack(atom/target)
-	if(!has_ranged_attack() || !istype(target))
+	if(!istype(target) || !has_ranged_attack(target))
 		return
 	visible_message(SPAN_DANGER("\The [src] [fire_desc] at \the [target]!"))
 	if(burst_projectile)
@@ -613,3 +617,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/proc/get_default_animal_colours()
 	return
+
+/mob/living/simple_animal/get_specific_codex_entry()
+	if(scannable_result && !istype(atom_codex_ref))
+		var/datum/codex_entry/codex = locate(scannable_result) in SScodex.all_entries
+		if(istype(codex))
+			atom_codex_ref = codex
+	. = ..()

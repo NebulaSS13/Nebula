@@ -16,7 +16,7 @@
 	icon_state = ICON_STATE_WORLD
 	death_message = "expires with a pitiful hiss..."
 	max_health = 60
-	available_maneuvers = list(/decl/maneuver/leap)
+	_available_maneuvers = list(/decl/maneuver/leap)
 
 	only_species_language = 1
 	speak_emote = list("hisses", "chitters")
