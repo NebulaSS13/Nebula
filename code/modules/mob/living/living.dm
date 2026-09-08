@@ -2034,3 +2034,8 @@ default behaviour is:
 
 /mob/living/proc/is_playing_dead()
 	return stat || current_posture?.prone || (status_flags & FAKEDEATH)
+
+/mob/living/proc/inflict_cold_damage(amount)
+	amount *= 1 - get_cold_protection(50) // Within spacesuit protection.
+	if(amount > 0)
+		adjustFireLoss(amount)
