@@ -5,8 +5,8 @@
 	ask_verb = "creaks"
 	exclaim_verb = "rustles"
 	colour = "soghun"
-	key = "q"
-	flags = LANG_FLAG_RESTRICTED
+	language_key = "chirp"
+	language_flags = LANG_FLAG_RESTRICTED
 	syllables = list("hs","zt","kr","st","sh")
 	shorthand = "RT"
 	machine_understands = FALSE

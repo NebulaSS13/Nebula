@@ -16,7 +16,7 @@
 	playsound(src, 'sound/effects/fastbeep.ogg', 20)
 
 /proc/medical_scan_action(atom/target, mob/living/user, obj/scanner, var/verbose)
-	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, fail_message = "You lack the dexterity to use \the [scanner]."))
 		return
 
 	if (user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50))

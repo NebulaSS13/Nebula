@@ -101,7 +101,7 @@
 	. = ..()
 	if(.)
 		var/datum/extension/tool/tool_extension = get_extension(target, /datum/extension/tool)
-		return istype(tool_extension, /datum/extension/tool/variable) && user.check_dexterity(DEXTERITY_COMPLEX_TOOLS)
+		return istype(tool_extension, /datum/extension/tool/variable) && user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, fail_message = "You lack the dexterity to fold or unfold \the [src].")
 
 /decl/interaction_handler/folding_knife/proc/get_radial_choices(atom/target)
 	// - toggle open/closed

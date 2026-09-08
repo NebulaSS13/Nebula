@@ -167,13 +167,13 @@
 			wield_effect.do_wielded_effect(user, src, parameters)
 
 // LISTENING effects
-/obj/item/hear_talk(mob/M, text, verb, decl/language/speaking)
+/obj/item/hear_talk(mob/living/speaker, datum/speech/phrases, verb, stars, decl/language/force_language)
 	. = ..()
 	var/list/item_effects = get_item_effects(IE_CAT_LISTENER)
 	if(!length(item_effects))
 		return
 	for(var/decl/item_effect/listening_effect as anything in item_effects)
-		listening_effect.hear_speech(src, M, text, speaking)
+		listening_effect.hear_speech(src, speaker, phrases)
 
 // VISIBLE effects
 /obj/item/examined_by(mob/user, distance, infix, suffix)

@@ -28,4 +28,4 @@
 		return "[pronouns.He] [pronouns.is] holding [_holding.get_examine_line()] in [pronouns.his] [E?.name || lowertext(slot_name)]."
 
 /datum/inventory_slot/gripper/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
-	return ..() && user.check_dexterity(DEXTERITY_EQUIP_ITEM, silent = disable_warning)
+	return ..() && user.check_dexterity(DEXTERITY_EQUIP_ITEM, silent = disable_warning, fail_message = "You lack the dexterity to hold \the [prop].")

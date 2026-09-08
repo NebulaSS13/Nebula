@@ -1,5 +1,6 @@
 /mob/living
 	var/butchery_data = /decl/butchery_data/animal
+	var/nibbled_on = 0 // Counter for how many times a mob has taken a small nibble out of this mob.
 
 /obj/structure
 	var/can_support_butchery = FALSE

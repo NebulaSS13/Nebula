@@ -14,9 +14,9 @@
 			P.desc = "An autographed Spaceball Jones card!!"
 			P.card_icon = "spaceball_jones"
 		else
-			var/decl/language/L = GET_DECL(/decl/language/human/common)
+			var/decl/language/language = GET_DECL(/decl/language/human/common)
 			var/team = pick("Brickburn Galaxy Trekers","Mars Rovers", "Qerrbalak Saints", "Moghes Rockets", "Ahdomai Lightening")
-			P.name = "[L.get_random_language_name(pick(MALE,FEMALE))], [global.using_map.game_year - rand(0,50)] [team]"
+			P.name = "[language.get_random_language_name(pick(MALE,FEMALE))], [global.using_map.game_year - rand(0,50)] [team]"
 			P.card_icon = "spaceball_standard"
 			P.desc = "A Spaceball playing card."
 		P.back_icon = "card_back_spaceball"

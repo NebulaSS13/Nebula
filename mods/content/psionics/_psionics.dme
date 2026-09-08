@@ -27,6 +27,7 @@
 #include "items\literature.dm"
 #include "items\null_ammo.dm"
 #include "items\nullrod.dm"
+#include "items\random.dm"
 #include "machines\psimeter.dm"
 #include "machines\psimonitor.dm"
 #include "system\subsystem_psi.dm"

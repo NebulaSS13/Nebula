@@ -5806,7 +5806,7 @@
 /turf/floor/plating,
 /area/ship/trade/crew/hallway/port)
 "Ba" = (
-/obj/machinery/hologram/holopad/longrange,
+/obj/machinery/holopad/longrange,
 /turf/floor/tiled,
 /area/ship/trade/shuttle/outgoing/general)
 "Bb" = (
@@ -8018,7 +8018,7 @@
 /turf/space,
 /area/space)
 "YE" = (
-/obj/machinery/hologram/holopad/longrange,
+/obj/machinery/holopad/longrange,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},

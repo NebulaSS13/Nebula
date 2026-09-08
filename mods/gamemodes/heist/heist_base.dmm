@@ -1162,7 +1162,7 @@
 /obj/structure/rack,
 /obj/item/grenade/empgrenade,
 /obj/item/grenade/flashbang,
-/obj/item/grenade/spawnergrenade/manhacks,
+/obj/item/grenade/spawnergrenade/viscerator,
 /obj/random/energy,
 /turf/floor/shuttle/red,
 /area/map_template/skipjack_station/start)

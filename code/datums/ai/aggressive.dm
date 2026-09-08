@@ -3,12 +3,14 @@
 	stop_wander_when_pulled = FALSE
 	try_destroy_surroundings = TRUE
 	target_scan_distance = 10
-
+	var/decl/special_role/friendly_to_role = null
 	var/attack_same_faction = FALSE
 	var/only_attack_enemies = FALSE
 	var/break_stuff_probability = 10
 
 /datum/mob_controller/aggressive/New()
+	if(friendly_to_role)
+		friendly_to_role = RESOLVE_TO_DECL(friendly_to_role)
 	..()
 	if(isliving(body) && !QDELETED(body) && !QDELETED(src))
 		body.set_intent(I_FLAG_HARM)
@@ -183,6 +185,15 @@
 				body.pry_door((obstacle.pry_mod * body.get_door_pry_time()), obstacle)
 				return
 
+/datum/mob_controller/aggressive/proc/is_in_faction(mob/friend)
+	// Cannibalistic mobs don't care at all.
+	if(attack_same_faction)
+		return FALSE
+	// Special role check overrides faction check.
+	if(istype(friendly_to_role) && friend.mind && friendly_to_role.is_antagonist(friend.mind))
+		return TRUE
+	return (friend.faction == body.faction)
+
 /datum/mob_controller/aggressive/retaliate(atom/source)
 
 	if(!(. = ..()))
@@ -195,10 +206,11 @@
 			if(A == body || !isliving(A))
 				continue
 			var/mob/living/M = A
-			if(attack_same_faction || M.faction != body.faction)
+			if(is_in_faction(M))
+				if(istype(M.ai))
+					LAZYADD(allies, M.ai)
+			else
 				add_enemy(M)
-			else if(istype(M.ai))
-				LAZYADD(allies, M.ai)
 		var/list/enemies = get_enemies()
 		if(LAZYLEN(enemies) && LAZYLEN(allies))
 			for(var/datum/mob_controller/ally as anything in allies)
@@ -248,7 +260,7 @@
 		return FALSE
 	if(ismob(A))
 		var/mob/M = A
-		if(M.faction == body.faction && !attack_same_faction)
+		if(is_in_faction(M))
 			return FALSE
 		if(M.stat)
 			return FALSE
@@ -267,3 +279,4 @@
 /datum/mob_controller/aggressive/pacify(mob/user)
 	..()
 	attack_same_faction = FALSE
+	friendly_to_role = null

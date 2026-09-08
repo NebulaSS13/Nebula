@@ -109,6 +109,7 @@
 	. = ..()
 
 /obj/structure/flora/plant/attack_hand(mob/user)
+
 	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 
@@ -116,8 +117,12 @@
 		user.visible_message(SPAN_NOTICE("\The [user] uproots the dead [name]!"))
 		physically_destroyed()
 		return TRUE
+
 	if(harvestable <= 0)
-		return ..()
+		. = ..()
+		if(!.)
+			to_chat(user, SPAN_WARNING("\The [src] has nothing ready to harvest."))
+		return
 
 	var/harvested = plant.harvest(user, force_amount = 1)
 	if(harvested)

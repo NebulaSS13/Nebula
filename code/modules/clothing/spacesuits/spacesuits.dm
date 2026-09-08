@@ -23,9 +23,8 @@
 	randpixel = 0
 	flash_protection = FLASH_PROTECTION_MAJOR
 	action_button_name = "Toggle Helmet Light"
-	brightness_on = 4
+	headlamp_range = 4
 	light_wedge = LIGHT_WIDE
-	on = 0
 	replaced_in_loadout = LOADOUT_CONFLICT_KEEP
 
 	var/obj/machinery/camera/camera

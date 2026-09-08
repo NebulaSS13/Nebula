@@ -5,8 +5,8 @@
 	ask_verb = "mrowls"
 	exclaim_verb = "yowls"
 	whisper_verb = "purrs softly"
-	key = "j"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "siik"
+	language_flags = LANG_FLAG_WHITELISTED
 	shorthand = "Sik"
 	syllables = list("mrr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr",
 	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r",
@@ -21,14 +21,6 @@
 		new_name += " [..(gender,1)]"
 	return new_name
 
-//#803b56 is color
-
-/decl/language/tajaran/format_message(message, verb)
-	return "[verb], <span class='message'><span style='color: #803b56'>\"[capitalize(message)]\"</span></span>"
-
-/decl/language/tajaran/format_message_radio(message, verb)
-	return "[verb], <span style='color: #803b56'>\"[capitalize(message)]\"</span>"
-
 /decl/language/tajaranakhani
 	name = LANGUAGE_AKHANI
 	desc = "The language of the sea-faring Njarir'Akhan Tajaran. Borrowing some elements from Siik, the language is distinctly more structured."
@@ -36,9 +28,9 @@
 	ask_verb = "mrowls"
 	exclaim_verb = "wails"
 	colour = "akhani"
-	key = "h"
+	language_key = "akhani"
 	shorthand = "Akh"
-	flags = LANG_FLAG_WHITELISTED
+	language_flags = LANG_FLAG_WHITELISTED
 	syllables = list("mrr","rr","marr","tar","ahk","ket","hal","kah","dra","nal","kra","vah","dar","hrar", "eh",
 	"ara","ka","zar","mah","ner","zir","mur","hai","raz","ni","ri","nar","njar","jir","ri","ahn","kha","sir",
 	"kar","yar","kzar","rha","hrar","err","fer","rir","rar","yarr","arr","ii'r","jar","kur","ran","rii","ii",

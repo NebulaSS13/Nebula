@@ -42,6 +42,7 @@
 	var/static/list/additional_fishing_results = list(
 		/mob/living/simple_animal/aquatic/fish/large        = 5,
 		/mob/living/simple_animal/aquatic/fish/large/salmon = 5,
+		/mob/living/simple_animal/aquatic/fish/large/perch  = 5,
 		/mob/living/simple_animal/aquatic/fish/large/trout  = 5,
 		/mob/living/simple_animal/aquatic/fish/large/pike   = 3
 	)

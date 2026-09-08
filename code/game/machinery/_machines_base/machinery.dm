@@ -314,7 +314,7 @@ Class Procs:
 		return
 	if(!CanPhysicallyInteract(user))
 		return FALSE // The interactions below all assume physical access to the machine. If this is not the case, we let the machine take further action.
-	if(!user.check_dexterity(required_interaction_dexterity))
+	if(!user.check_dexterity(required_interaction_dexterity, fail_message = "You lack the dexterity to interact with \the [src]."))
 		return TRUE
 	if((. = component_attack_hand(user)))
 		return

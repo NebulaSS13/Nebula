@@ -5,8 +5,8 @@
 	ask_verb = "hisses"
 	exclaim_verb = "roars"
 	colour = "soghun"
-	key = "o"
-	flags = LANG_FLAG_WHITELISTED
+	language_key = "sinta"
+	language_flags = LANG_FLAG_WHITELISTED
 	space_chance = 40
 	syllables = list(
 		"za", "az", "ze", "ez", "zi", "iz", "zo", "oz", "zu", "uz", "zs", "sz",

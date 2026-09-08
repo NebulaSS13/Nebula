@@ -379,3 +379,9 @@ var/global/list/_client_preferences_by_type
 	key = "ATTACK_ON_HELP"
 	default_value = PREF_MYSELF
 	options = list(PREF_NEVER, PREF_MYSELF, PREF_ALWAYS)
+
+/datum/client_preference/harm_intent_attack_blocking
+	description = "Prevent attacking yourself on harm intent"
+	key = "ATTACK_ON_HARM"
+	default_value = PREF_NO
+	options = list(PREF_YES, PREF_NO)

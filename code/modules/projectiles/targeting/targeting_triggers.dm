@@ -3,7 +3,7 @@
 	return
 
 /mob/living/trigger_aiming(var/trigger_type)
-	for(var/obj/aiming_overlay/AO as anything in aimed_at_by)
+	for(var/obj/abstract/aiming_overlay/AO as anything in aimed_at_by)
 		if(AO.aiming_at == src)
 			AO.update_aiming()
 			if(AO.aiming_at == src)
@@ -13,13 +13,12 @@
 /mob/living/proc/aim_at(var/atom/target, var/obj/item/with)
 	if(!ismob(target) || !istype(with) || incapacitated())
 		return FALSE
-	if(!aiming)
-		aiming = new(src)
 	face_atom(target)
+	var/obj/abstract/aiming_overlay/aiming = get_aiming_overlay(create_if_missing = TRUE)
 	aiming.aim_at(target, with)
 	return TRUE
 
-/obj/aiming_overlay/proc/trigger(var/perm)
+/obj/abstract/aiming_overlay/proc/trigger(var/perm)
 	if(!owner || !aiming_with || !aiming_at || !locked)
 		return FALSE
 	if(perm && (target_permissions & perm))

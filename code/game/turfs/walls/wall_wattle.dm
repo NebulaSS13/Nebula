@@ -28,7 +28,7 @@
 			/decl/material/solid/clay = TRUE
 		)
 		if(istype(used_item, /obj/item/stack/material) && daub_materials[used_item.material?.type])
-			if(!user.check_dexterity(DEXTERITY_WIELD_ITEM))
+			if(!user.check_dexterity(DEXTERITY_WIELD_ITEM, fail_message = "You lack the dexterity to daub \the [src]."))
 				return TRUE
 			var/obj/item/stack/material/stack = used_item
 			var/sheets_to_use = stack.matter_units_to_sheets(matter_to_daub)

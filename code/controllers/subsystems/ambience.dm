@@ -89,7 +89,7 @@ SUBSYSTEM_DEF(ambience)
 			var/turf/above = src
 			var/datum/level_data/above_level_data
 			while ((above = GetAbove(above)))
-				if((above.z_flags & ZM_TERMINATOR) || !HasAbove(above.z))
+				if((above.z_flags & ZM_OVERRIDE) || !HasAbove(above.z))
 					break
 				above_level_data = SSmapping.levels_by_z[above.z]
 				if(above_level_data.daycycle_id)
@@ -101,13 +101,20 @@ SUBSYSTEM_DEF(ambience)
 			var/datum/daycycle/daycycle = SSdaycycle.get_daycycle(daycycle_id)
 			var/new_power = daycycle?.current_period?.power
 			if(!isnull(new_power))
+				new_power = clamp(new_power + ambient_light_modifier, 0, 1)
 				if(new_power > 0)
-					set_ambient_light(daycycle.current_period.color, clamp(new_power + ambient_light_modifier, 0, 1))
+					set_ambient_light(daycycle.current_period.color, new_power)
+				else
+					clear_ambient_light()
 				return TRUE
 
 		// Apply general level ambience.
-		if(level_data?.ambient_light_level)
-			set_ambient_light(level_data.ambient_light_color, clamp(level_data.ambient_light_level + ambient_light_modifier, 0, 1))
+		var/effective_power = isnull(level_data?.ambient_light_level) ? null : clamp(level_data.ambient_light_level + ambient_light_modifier, 0, 1)
+		if(!isnull(effective_power))
+			if(effective_power > 0)
+				set_ambient_light(level_data.ambient_light_color, effective_power)
+			else
+				clear_ambient_light()
 			return TRUE
 
 	return FALSE

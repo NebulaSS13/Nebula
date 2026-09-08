@@ -97,7 +97,7 @@
 			to_chat(user, SPAN_WARNING("You can't do that right now!"))
 			return
 
-		if(!user.check_dexterity(DEXTERITY_HOLD_ITEM))
+		if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, fail_message = "You lack the dexterity to fold the ladder."))
 			return
 
 		user.visible_message(

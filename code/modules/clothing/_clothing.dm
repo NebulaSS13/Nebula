@@ -34,8 +34,10 @@
 	var/ironed_state = WRINKLES_DEFAULT
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 	var/volume_multiplier = 1
+	var/markings_flags
 	var/markings_state_modifier	// simple colored overlay that would be applied to the icon
 	var/markings_color	// for things like colored parts of labcoats or shoes
+	var/markings_are_emissive = FALSE
 	var/should_display_id = TRUE
 	var/fallback_slot
 
@@ -185,7 +187,10 @@
 		if(markings_state_modifier && markings_color)
 			var/new_state = JOINTEXT(list(overlay.icon_state, markings_state_modifier))
 			if(check_state_in_icon(new_state, overlay.icon))
-				overlay.overlays += mutable_appearance(overlay.icon, new_state, markings_color)
+				if(markings_are_emissive)
+					overlay.overlays += emissive_overlay(overlay.icon, new_state, color = markings_color, flags = markings_flags)
+				else
+					overlay.overlays += mutable_appearance(overlay.icon, new_state, markings_color, markings_flags)
 
 		// Apply a bloodied effect if the mob has been besmirched.
 		// Don't do this for inhands as the overlay is generally not slot based.
@@ -230,7 +235,10 @@
 	set_icon(initial(icon)) // this is not going to work correctly for custom icons
 	set_icon_state(JOINTEXT(list(get_world_inventory_state(), get_clothing_state_modifier())))
 	if(markings_state_modifier && markings_color)
-		add_overlay(mutable_appearance(icon, "[icon_state][markings_state_modifier]", markings_color))
+		if(markings_are_emissive)
+			add_overlay(emissive_overlay(icon, "[icon_state][markings_state_modifier]", color = markings_color, flags = markings_flags))
+		else
+			add_overlay(mutable_appearance(icon, "[icon_state][markings_state_modifier]", markings_color, markings_flags))
 	update_clothing_icon()
 
 // Used by washing machines to temporarily make clothes smell

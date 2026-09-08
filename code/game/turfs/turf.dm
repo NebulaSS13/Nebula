@@ -130,7 +130,7 @@
 	if (!mapload)
 		SSair.mark_for_update(src)
 		update_weather(force_update_below = TRUE)
-	else if (permit_ao)
+	else if (permit_ao && !(z_flags & ZM_MIMIC_BELOW))
 		queue_ao()
 
 	// we're being loaded in a new z-level, we need to build lighting
@@ -140,7 +140,8 @@
 	if(simulated)
 		updateVisibility(src, FALSE)
 
-	if (z_flags & ZM_MIMIC_BELOW)
+	if (mapload && (z_flags & ZM_MIMIC_BELOW))
+		// If CT fired, ZM is done in CT for BOUNDARY ordering reasons.
 		setup_zmimic(mapload)
 
 	if(flooded)
@@ -158,8 +159,13 @@
 
 /turf/examined_by(mob/user, distance, infix, suffix)
 	. = ..()
-	if(user && weather)
-		weather.examined_by(user, distance, infix, suffix)
+	if(user)
+		weather?.examined_by(user, distance, infix, suffix)
+		if(is_outside())
+			var/datum/level_data/level = SSmapping.levels_by_z[z]
+			var/datum/daycycle/daycycle = level?.daycycle_id && SSdaycycle.get_daycycle(level.daycycle_id)
+			if(daycycle?.current_period?.name)
+				to_chat(user, SPAN_SUBTLE("<small>It is currently [daycycle.current_period.name].</small>"))
 
 /turf/Destroy()
 
@@ -265,6 +271,10 @@
 			var/obj/item/stack/tile/T = used_item
 			T.try_build_turf(user, src)
 			return TRUE
+
+		// Getting stuck with a 10 second cooldown due to clicking with a shovel during combat is irritating.
+		if(user.check_intent(I_FLAG_HARM))
+			return ..()
 
 		if(IS_SHOVEL(used_item))
 

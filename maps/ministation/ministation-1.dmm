@@ -829,7 +829,7 @@
 /turf/floor/plating,
 /area/ministation/maint/secmaint)
 "eg" = (
-/obj/machinery/hologram/holopad,
+/obj/machinery/holopad,
 /obj/machinery/light_switch{
 	dir = 4;
 	pixel_x = -23
@@ -2576,7 +2576,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/hologram/holopad{
+/obj/machinery/holopad{
 	holopad_id = "Security Meeting Room"
 	},
 /turf/floor/carpet/red,
@@ -9625,7 +9625,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/hologram/holopad,
+/obj/machinery/holopad,
 /turf/floor/tiled/dark,
 /area/ministation/security)
 "To" = (
@@ -10646,7 +10646,7 @@
 /turf/floor/tiled/dark,
 /area/ministation/cafe)
 "Zz" = (
-/obj/machinery/hologram/holopad,
+/obj/machinery/holopad,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "ZE" = (

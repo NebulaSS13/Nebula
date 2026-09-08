@@ -102,6 +102,7 @@
 	///Sound uses when dropping the item, or when its thrown.
 	var/drop_sound = 'sound/foley/drop1.ogg'
 
+	var/coating_volume = 10
 	var/datum/reagents/coating // reagent container for coating things like blood/oil, used for overlays and tracks
 
 	var/tmp/has_inventory_icon	// do not set manually
@@ -598,7 +599,7 @@
 	return FALSE
 
 /obj/item/proc/user_can_attack_with(mob/user, atom/target, silent = FALSE)
-	return user.check_dexterity(get_required_attack_dexterity(user, target), silent = silent)
+	return user.check_dexterity(get_required_attack_dexterity(user, target), silent = silent, fail_message = "You lack the dexterity to attack with \the [src].")
 
 /obj/item/attackby(obj/item/used_item, mob/user)
 	// if can_wield is false we still need to call parent for storage objects to work properly
@@ -625,7 +626,7 @@
 
 	return ..()
 
-/obj/item/proc/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
+/obj/item/proc/talk_into(mob/living/speaker, datum/speech/phrases, verb = "says")
 	return
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
@@ -1043,7 +1044,7 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/add_coating(reagent_type, amount, data)
 	if(!coating)
-		coating = new /datum/reagents(10, src)
+		coating = new /datum/reagents(coating_volume, src)
 	if(ispath(reagent_type))
 		coating.add_reagent(reagent_type, amount, data)
 	else if(istype(reagent_type, /datum/reagents))

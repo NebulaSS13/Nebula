@@ -344,7 +344,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/hologram/holopad/longrange/remoteship,
+/obj/machinery/holopad/longrange/remoteship,
 /turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aK" = (
