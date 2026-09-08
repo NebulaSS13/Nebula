@@ -1,0 +1,13 @@
+#ifndef MODPACK_SKATHARI
+#define MODPACK_SKATHARI
+// BEGIN_INCLUDE
+#include "_skathari.dm"
+#include "ai.dm"
+#include "codex.dm"
+#include "maneuver.dm"
+#include "material.dm"
+#include "mobs.dm"
+#include "projectile.dm"
+#include "structures.dm"
+// END_INCLUDE
+#endif
