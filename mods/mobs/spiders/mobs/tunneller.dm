@@ -7,4 +7,4 @@
 	poison_chance = 15
 	poison_per_bite = 3
 	ai = /datum/mob_controller/aggressive/giant_spider/tunneller
-	available_maneuvers = list(/decl/maneuver/tunnel)
+	_available_maneuvers = list(/decl/maneuver/tunnel)

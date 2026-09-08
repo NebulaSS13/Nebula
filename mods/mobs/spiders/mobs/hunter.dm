@@ -26,7 +26,7 @@
 	desc = "A large black spider with shimmering eyes."
 	max_health = 70
 	natural_weapon = /obj/item/natural_weapon/bite/weak
-	available_maneuvers = null
+	_available_maneuvers = null
 
 /mob/living/simple_animal/hostile/giant_spider/hunter/small/Initialize(mapload, atom/parent)
 	. = ..()

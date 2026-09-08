@@ -5,6 +5,7 @@
 #include "achievement.dm"
 #include "emotes.dm"
 #include "food.dm"
+#include "items.dm"
 #include "overrides.dm"
 #include "colours\_colour.dm"
 #include "colours\colour_adamantine.dm"

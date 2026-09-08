@@ -134,6 +134,10 @@
 	contaminant_reagent_type = /decl/material/solid/sodiumchloride
 	contaminant_proportion = 0.10 // 1:10 salt:water
 
+/turf/floor/rock/sand/water/contaminated
+	contaminant_reagent_type = /decl/material/gas/chlorine
+	contaminant_proportion = 0.10
+
 /turf/floor/seafloor
 	name              = "sea floor"
 	icon              = 'icons/turf/flooring/seafloor.dmi'

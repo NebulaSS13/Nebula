@@ -1,0 +1,181 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/wall/log/sif,
+/area/cynosure_submap/camp1)
+"c" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/turf/floor/plating,
+/area/cynosure_submap/camp1)
+"d" = (
+/obj/structure/bed/padded,
+/turf/floor/dirt,
+/area/cynosure_submap/camp1)
+"e" = (
+/obj/item/flashlight/lantern,
+/turf/floor/dirt,
+/area/cynosure_submap/camp1)
+"f" = (
+/turf/floor/dirt,
+/area/cynosure_submap/camp1)
+"g" = (
+/obj/machinery/space_heater,
+/turf/floor/dirt,
+/area/cynosure_submap/camp1)
+"h" = (
+/obj/structure/door/sif,
+/turf/floor/dirt,
+/area/cynosure_submap/camp1)
+"i" = (
+/obj/structure/rack,
+/obj/item/gun/launcher/bow/crossbow/powered,
+/obj/item/stack/material/rods/mapped/steel{
+	amount = 17
+	},
+/obj/random/tool,
+/turf/floor/dirt,
+/area/cynosure_submap/camp1)
+"j" = (
+/obj/item/stack/material/log/mapped/sif/twentyfive,
+/turf/template_noop,
+/area/template_noop)
+"k" = (
+/obj/structure/table/bench/wooden,
+/turf/floor/dirt,
+/area/cynosure_submap/camp1)
+"m" = (
+/obj/item/tool/axe/hatchet,
+/turf/template_noop,
+/area/template_noop)
+"n" = (
+/obj/structure/fire_source/firepit/sif,
+/turf/floor/dirt,
+/area/cynosure_submap/camp1)
+"o" = (
+/obj/item/flame/fuelled/lighter,
+/turf/floor/dirt,
+/area/cynosure_submap/camp1)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+b
+b
+c
+b
+b
+a
+a
+a
+a
+a
+"}
+(3,1,1) = {"
+b
+d
+f
+g
+b
+a
+k
+k
+k
+a
+"}
+(4,1,1) = {"
+b
+d
+f
+b
+b
+b
+f
+f
+f
+o
+"}
+(5,1,1) = {"
+c
+e
+f
+h
+f
+h
+f
+n
+f
+f
+"}
+(6,1,1) = {"
+b
+d
+f
+b
+b
+b
+f
+f
+f
+f
+"}
+(7,1,1) = {"
+b
+d
+f
+i
+b
+j
+k
+k
+k
+a
+"}
+(8,1,1) = {"
+b
+b
+c
+b
+b
+a
+m
+a
+a
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(10,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

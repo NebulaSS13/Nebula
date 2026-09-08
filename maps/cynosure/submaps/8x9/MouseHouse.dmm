@@ -1,0 +1,300 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementA)
+"b" = (
+/obj/item/remains/mouse,
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"c" = (
+/turf/wall/concrete{
+	can_open = 1
+	},
+/area/cynosure/maintenance/construction/d1/basementA)
+"e" = (
+/obj/structure/window/basic{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/structure/bedsheetbin,
+/obj/random/plushie,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"f" = (
+/obj/structure/dogbed,
+/obj/item/remains/mouse,
+/obj/item/shreddedp,
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"k" = (
+/obj/structure/window/basic{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/obj/random/powercell,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"l" = (
+/obj/random/plushie/large,
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"m" = (
+/turf/template_noop,
+/area/template_noop)
+"n" = (
+/obj/structure/dogbed,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/item/chems/rag,
+/mob/living/simple_animal/passive/mouse,
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"o" = (
+/obj/structure/window/basic{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/random/maintenance,
+/obj/random/vendor/drink,
+/obj/random/snack,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"p" = (
+/obj/machinery/door/window/westright,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"t" = (
+/obj/item/trash/mochicakewrap,
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"u" = (
+/obj/structure/flora/pottedplant/overgrown,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"v" = (
+/obj/structure/disposalpipe/trunk,
+/obj/structure/disposaloutlet{
+	dir = 4
+	},
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"w" = (
+/obj/machinery/door/window/northleft,
+/obj/structure/window/basic{
+	dir = 8
+	},
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/basementA)
+"y" = (
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/basementA)
+"z" = (
+/obj/machinery/papershredder,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"B" = (
+/obj/structure/dogbed,
+/obj/random/plushie,
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"F" = (
+/obj/item/chems/glass/bowl{
+	pixel_y = -6
+	},
+/obj/structure/hygiene/sink{
+	dir = 4;
+	pixel_x = -12;
+	pixel_y = -4
+	},
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"G" = (
+/obj/item/trash/semki,
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"H" = (
+/obj/structure/sign/poster{
+	dir = 8;
+	pixel_x = -32;
+	poster_design = /decl/poster_design/bay_49
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"I" = (
+/obj/structure/chair/office/dark{
+	dir = 1
+	},
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"J" = (
+/obj/item/ball,
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"K" = (
+/obj/structure/chair/office/dark{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"L" = (
+/obj/item/trash/candy,
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"M" = (
+/obj/structure/window/basic{
+	dir = 1
+	},
+/obj/machinery/disposal,
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"O" = (
+/obj/machinery/light/small,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"R" = (
+/obj/structure/dogbed,
+/mob/living/simple_animal/passive/mouse,
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"S" = (
+/obj/item/shreddedp,
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"T" = (
+/obj/structure/window/basic{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/item/flashlight/lamp/green,
+/obj/item/paper_bin{
+	pixel_x = 1;
+	pixel_y = 9
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"V" = (
+/obj/structure/dogbed,
+/mob/living/simple_animal/passive/mouse,
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"W" = (
+/obj/structure/loot_pile/maint/trash,
+/obj/machinery/apc/unlocked{
+	locked = 0;
+	name = "south bump";
+	operating = 0;
+	pixel_y = -24
+	},
+/obj/structure/cable,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"X" = (
+/turf/floor/carpet/blue,
+/area/cynosure/maintenance/construction/d1/basementA)
+"Z" = (
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+V
+G
+F
+v
+M
+H
+z
+a
+"}
+(3,1,1) = {"
+a
+B
+X
+S
+b
+T
+I
+W
+a
+"}
+(4,1,1) = {"
+a
+n
+X
+X
+L
+k
+y
+Z
+c
+"}
+(5,1,1) = {"
+a
+R
+X
+X
+J
+o
+K
+O
+a
+"}
+(6,1,1) = {"
+a
+f
+X
+l
+S
+e
+Z
+u
+a
+"}
+(7,1,1) = {"
+a
+V
+X
+X
+t
+w
+p
+a
+a
+"}
+(8,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+m
+"}

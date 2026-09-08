@@ -1,0 +1,305 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/cynosure_submap/pondside_den)
+"i" = (
+/obj/random/sif/peaceful,
+/turf/floor/dirt,
+/area/cynosure_submap/pondside_den)
+"u" = (
+/obj/random/fish,
+/turf/floor/rock/sand/water/deep,
+/area/cynosure_submap/pondside_den)
+"v" = (
+/turf/floor/rock/sand/water/deep,
+/area/cynosure_submap/pondside_den)
+"A" = (
+/turf/floor/dirt,
+/area/cynosure_submap/pondside_den)
+"G" = (
+/obj/structure/boulder,
+/turf/floor/dirt,
+/area/cynosure_submap/pondside_den)
+"H" = (
+/obj/structure/flora/bush/stalkybush,
+/turf/floor/rock/sand/water,
+/area/cynosure_submap/pondside_den)
+"I" = (
+/turf/wall/natural,
+/area/cynosure_submap/pondside_den)
+"Q" = (
+/turf/floor/rock/sand/water,
+/area/cynosure_submap/pondside_den)
+"V" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/cynosure_submap/pondside_den)
+"X" = (
+/obj/item/stack/net,
+/obj/structure/table/sif,
+/turf/floor/dirt,
+/area/cynosure_submap/pondside_den)
+"Y" = (
+/obj/structure/flora/bush/sparsegrass,
+/turf/template_noop,
+/area/cynosure_submap/pondside_den)
+"Z" = (
+/obj/structure/boulder,
+/turf/floor/rock/sand/water/deep,
+/area/cynosure_submap/pondside_den)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+V
+a
+a
+a
+a
+I
+I
+I
+a
+V
+a
+a
+a
+a
+"}
+(3,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+I
+I
+a
+a
+a
+a
+I
+a
+"}
+(4,1,1) = {"
+a
+a
+I
+I
+I
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(5,1,1) = {"
+a
+I
+I
+I
+A
+a
+a
+a
+a
+a
+Y
+a
+a
+a
+a
+"}
+(6,1,1) = {"
+I
+I
+i
+A
+a
+a
+a
+a
+A
+A
+A
+A
+A
+a
+a
+"}
+(7,1,1) = {"
+I
+I
+G
+A
+a
+a
+a
+A
+A
+H
+Q
+Q
+A
+A
+Y
+"}
+(8,1,1) = {"
+I
+I
+X
+A
+a
+a
+A
+A
+Q
+Q
+v
+Q
+Q
+A
+A
+"}
+(9,1,1) = {"
+a
+I
+I
+A
+a
+A
+A
+Q
+Q
+v
+v
+v
+Q
+A
+A
+"}
+(10,1,1) = {"
+a
+a
+I
+a
+a
+A
+Q
+Q
+u
+v
+v
+u
+Q
+A
+A
+"}
+(11,1,1) = {"
+a
+a
+a
+a
+V
+A
+Q
+v
+v
+Z
+v
+v
+Q
+A
+a
+"}
+(12,1,1) = {"
+a
+a
+a
+a
+a
+A
+Q
+Q
+v
+v
+v
+Q
+H
+A
+a
+"}
+(13,1,1) = {"
+a
+a
+a
+a
+a
+A
+A
+H
+Q
+Q
+Q
+H
+A
+A
+a
+"}
+(14,1,1) = {"
+a
+V
+a
+a
+a
+Y
+A
+A
+A
+A
+A
+A
+A
+Y
+a
+"}
+(15,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+A
+A
+A
+a
+Y
+a
+a
+V
+"}

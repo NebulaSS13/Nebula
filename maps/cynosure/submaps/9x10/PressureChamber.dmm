@@ -1,0 +1,214 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall,
+/area/cynosure/maintenance/construction/d1/basementC)
+"d" = (
+/obj/random/crate,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/engineering,
+/obj/random/bomb_supply,
+/obj/random/maintenance/engineering,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"e" = (
+/obj/item/briefcase/inflatable{
+	pixel_y = 8
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"l" = (
+/obj/random/obstruction,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"m" = (
+/obj/structure/tape_barricade/atmos,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"s" = (
+/obj/machinery/door/airlock{
+	name = "Construction Area"
+	},
+/obj/structure/tape_barricade/atmos,
+/turf/floor/tiled/steel_grid,
+/area/cynosure/maintenance/construction/d1/basementC)
+"t" = (
+/obj/item/frame/apc,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"y" = (
+/turf/template_noop,
+/area/template_noop)
+"z" = (
+/obj/structure/table,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"D" = (
+/obj/machinery/portable_atmospherics/powered/pump,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"F" = (
+/obj/random/crate,
+/obj/random/maintenance/engineering,
+/obj/random/toolbox,
+/obj/random/tool/power,
+/obj/random/maintenance/engineering,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"G" = (
+/obj/machinery/button/windowtint{
+	pixel_x = 22;
+	pixel_y = 24
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"J" = (
+/obj/structure/window/reinforced/polarized/full{
+	id = "PressureChamber"
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"K" = (
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"L" = (
+/obj/random/crate,
+/obj/random/tank,
+/obj/random/tank,
+/obj/random/tank,
+/obj/random/tank,
+/obj/item/clothing/mask/gas,
+/obj/random/maintenance/clean,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"N" = (
+/obj/item/inflatable/door,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"O" = (
+/obj/item/book/manual/atmospipes,
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"T" = (
+/obj/item/inflatable/door/torn,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+"Y" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementC)
+"Z" = (
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementC)
+
+(1,1,1) = {"
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+"}
+(2,1,1) = {"
+Y
+Z
+Z
+Z
+T
+Z
+N
+Z
+F
+Y
+"}
+(3,1,1) = {"
+Y
+Z
+Z
+Z
+l
+G
+Z
+Z
+Z
+Y
+"}
+(4,1,1) = {"
+Y
+Z
+Z
+Z
+Y
+J
+a
+e
+Z
+Y
+"}
+(5,1,1) = {"
+Y
+Z
+Z
+Z
+Y
+D
+O
+Z
+Z
+s
+"}
+(6,1,1) = {"
+Y
+Z
+Z
+z
+Y
+K
+Z
+Z
+Z
+Y
+"}
+(7,1,1) = {"
+Y
+l
+Y
+Y
+Y
+Z
+Z
+Z
+t
+Y
+"}
+(8,1,1) = {"
+Y
+L
+d
+Y
+Y
+m
+Y
+Y
+Y
+Y
+"}
+(9,1,1) = {"
+Y
+Y
+l
+Y
+y
+y
+y
+y
+y
+y
+"}

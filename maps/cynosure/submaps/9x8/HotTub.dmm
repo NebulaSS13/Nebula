@@ -1,0 +1,328 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementB)
+"c" = (
+/obj/item/bikehorn/rubberducky,
+/obj/abstract/landmark/mapped_fluid{
+	fluid_initial = 300;
+	name = "mapped shallow pool"
+	},
+/turf/floor/pool,
+/area/cynosure/maintenance/construction/d1/basementB)
+"d" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"e" = (
+/obj/structure/closet/crate,
+/obj/item/tank/oxygen,
+/obj/item/clothing/mask/gas,
+/obj/item/chems/glass/bucket,
+/obj/random/medical/lite,
+/obj/random/maintenance/clean,
+/obj/random/maintenance,
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"f" = (
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"g" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"i" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"j" = (
+/obj/abstract/landmark/mapped_fluid{
+	fluid_initial = 300;
+	name = "mapped shallow pool"
+	},
+/turf/floor/pool,
+/area/cynosure/maintenance/construction/d1/basementB)
+"l" = (
+/obj/effect/floor_decal/techfloor/orange,
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"n" = (
+/obj/structure/rack,
+/obj/item/towel/random,
+/obj/item/towel/random,
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"o" = (
+/obj/machinery/door/airlock{
+	name = "Construction Area"
+	},
+/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers{
+	dir = 1
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"q" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"t" = (
+/obj/effect/floor_decal/techfloor/corner{
+	dir = 6
+	},
+/obj/effect/floor_decal/techfloor/orange/corner,
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32;
+	poster_design = /decl/poster_design/bay_11
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"u" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"w" = (
+/obj/effect/floor_decal/techfloor/corner{
+	dir = 10
+	},
+/obj/effect/floor_decal/techfloor/orange/corner{
+	dir = 8
+	},
+/obj/item/clothing/suit/hazardvest,
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"x" = (
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/template_noop,
+/area/template_noop)
+"B" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"D" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber,
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"G" = (
+/obj/machinery/atmospherics/pipe/cap/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"H" = (
+/turf/template_noop,
+/area/template_noop)
+"J" = (
+/obj/effect/floor_decal/techfloor/corner{
+	dir = 5
+	},
+/obj/effect/floor_decal/techfloor/orange/corner{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"L" = (
+/obj/effect/floor_decal/techfloor/corner{
+	dir = 9
+	},
+/obj/effect/floor_decal/techfloor/orange/corner{
+	dir = 1
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 24
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"M" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"N" = (
+/obj/structure/reagent_dispensers/watertank/high,
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"P" = (
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/template_noop,
+/area/template_noop)
+"R" = (
+/obj/structure/closet,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/clean,
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"T" = (
+/obj/machinery/atmospherics/unary/vent_pump{
+	dir = 1
+	},
+/obj/structure/closet/athletic_mixed,
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"U" = (
+/obj/machinery/space_heater,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"V" = (
+/obj/structure/cable,
+/obj/machinery/light_switch{
+	dir = 4;
+	pixel_x = -24;
+	pixel_y = 12
+	},
+/obj/random/trash,
+/obj/machinery/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals_central7{
+	dir = 8
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"Y" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"Z" = (
+/obj/effect/floor_decal/techfloor/orange,
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+
+(1,1,1) = {"
+H
+x
+P
+H
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+M
+a
+a
+U
+U
+a
+"}
+(3,1,1) = {"
+a
+e
+f
+V
+D
+d
+q
+a
+"}
+(4,1,1) = {"
+a
+t
+Y
+Y
+Y
+J
+N
+a
+"}
+(5,1,1) = {"
+a
+l
+j
+j
+j
+u
+G
+o
+"}
+(6,1,1) = {"
+a
+Z
+j
+j
+j
+g
+n
+a
+"}
+(7,1,1) = {"
+a
+l
+c
+j
+j
+g
+R
+a
+"}
+(8,1,1) = {"
+a
+w
+B
+i
+B
+L
+T
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+"}

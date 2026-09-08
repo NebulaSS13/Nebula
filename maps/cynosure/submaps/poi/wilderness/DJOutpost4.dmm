@@ -1,0 +1,585 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/random/humanoidremains{
+	spawn_nothing_percentage = 60
+	},
+/turf/template_noop,
+/area/template_noop)
+"ab" = (
+/turf/template_noop,
+/area/template_noop)
+"ac" = (
+/obj/random/landmine,
+/turf/template_noop,
+/area/template_noop)
+"ad" = (
+/obj/machinery/porta_turret/poi,
+/obj/abstract/exterior_marker/outside,
+/turf/floor,
+/area/cynosure_submap/DJOutpost1)
+"ae" = (
+/obj/random/landmine,
+/obj/abstract/exterior_marker/outside,
+/turf/floor,
+/area/cynosure_submap/DJOutpost1)
+"af" = (
+/turf/wall/r_wall,
+/area/cynosure_submap/DJOutpost1)
+"ag" = (
+/obj/structure/grille/broken,
+/obj/item/shard,
+/obj/item/shard{
+	icon_state = "shardmedium"
+	},
+/obj/item/stack/material/rods/mapped/steel,
+/turf/floor,
+/area/cynosure_submap/DJOutpost1)
+"ah" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/turf/floor,
+/area/cynosure_submap/DJOutpost1)
+"ai" = (
+/obj/abstract/exterior_marker/outside,
+/turf/floor,
+/area/cynosure_submap/DJOutpost1)
+"aj" = (
+/obj/structure/sign/warning/lethal_turrets,
+/turf/wall/r_wall,
+/area/cynosure_submap/DJOutpost1)
+"ak" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"al" = (
+/obj/machinery/media/jukebox,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"an" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"ao" = (
+/obj/structure/bookcase,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"ap" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aq" = (
+/obj/structure/sign/warning/server_room,
+/turf/wall/r_wall,
+/area/cynosure_submap/DJOutpost1)
+"ar" = (
+/obj/structure/sign/plaque/golden{
+	desc = "An award given to Sif Free Radio for media excellency. It looks fake.";
+	name = "Best Radio Station 2558";
+	pixel_y = 30
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"as" = (
+/obj/structure/bookcase,
+/obj/structure/safe/floor,
+/obj/item/bone/skull/unknown,
+/obj/item/bone,
+/obj/item/bone/ribs,
+/obj/random/energy/highend,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"at" = (
+/mob/living/human/frame/malf,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"au" = (
+/obj/item/remains,
+/obj/effect/decal/cleanable/blood,
+/obj/item/clothing/shirt/flannel/red,
+/obj/item/clothing/suit/apron/overalls/denim,
+/obj/random_multi/single_item/sfr_headset,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aw" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/radio/intercom{
+	dir = 8;
+	icon_state = "intercom"
+	},
+/obj/random/firstaid,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"ax" = (
+/obj/machinery/computer/message_monitor,
+/obj/item/paper/monitorkey,
+/obj/structure/cable/yellow{
+	icon_state = "2-4"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"ay" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/obj/structure/cable{
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/floor,
+/area/cynosure_submap/DJOutpost1)
+"az" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-8"
+	},
+/obj/abstract/exterior_marker/outside,
+/turf/floor,
+/area/cynosure_submap/DJOutpost1)
+"aA" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/radio/intercom{
+	dir = 8;
+	icon_state = "intercom"
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aB" = (
+/obj/item/clothing/jumpsuit/corporate/pcrc,
+/obj/random/humanoidremains{
+	spawn_nothing_percentage = 60
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aC" = (
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1";
+	pixel_x = 0
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow,
+/obj/machinery/power/solar_control/autostart,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aD" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/obj/random/landmine,
+/obj/abstract/exterior_marker/outside,
+/turf/floor,
+/area/cynosure_submap/DJOutpost1)
+"aE" = (
+/obj/structure/bookcase,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aF" = (
+/obj/structure/bookcase,
+/obj/item/book/manual/excavation,
+/obj/item/book/manual/engineering_construction,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aG" = (
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aH" = (
+/obj/item/toolbox/mechanical,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aI" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/radio/phone,
+/obj/random_multi/single_item/sfr_headset,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aJ" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/radio/intercom/mercenary{
+	desc = "Talk through this.";
+	name = "station intercom (General)"
+	},
+/obj/item/multitool,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aK" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/radio,
+/obj/machinery/apc/hyper,
+/obj/structure/cable/yellow,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aL" = (
+/obj/structure/cable/yellow,
+/obj/machinery/power/solar,
+/obj/abstract/exterior_marker/outside,
+/turf/floor,
+/area/cynosure_submap/DJOutpost1)
+"aM" = (
+/obj/item/gps/internal/poi,
+/obj/machinery/door/airlock/maintenance,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DJOutpost1)
+"aN" = (
+/obj/structure/table/bench/padded,
+/obj/random/humanoidremains{
+	spawn_nothing_percentage = 60
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aO" = (
+/obj/machinery/biogenerator,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aP" = (
+/obj/item/food/junk/sosjerky,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1"
+	},
+/obj/random_multi/single_item/sfr_headset,
+/obj/structure/table/steel_reinforced,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aQ" = (
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1";
+	pixel_x = 0
+	},
+/obj/machinery/seed_extractor,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aR" = (
+/obj/machinery/door/airlock/maintenance,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure_submap/DJOutpost1)
+"aS" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aT" = (
+/obj/structure/table/wood,
+/obj/item/tool/axe/hatchet,
+/obj/item/chems/glass/bucket,
+/obj/item/tool/hoe/mini,
+/obj/item/scanner/plant,
+/obj/random_multi/single_item/sfr_headset,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aU" = (
+/obj/structure/undies_wardrobe,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aV" = (
+/obj/structure/rack,
+/obj/item/clothing/shoes/winterboots,
+/obj/item/clothing/suit/jacket/winter,
+/obj/random_multi/single_item/sfr_headset,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aW" = (
+/turf/wall/r_wall,
+/area/cynosure_submap/DJOutpost1)
+"aX" = (
+/obj/structure/hygiene/sink{
+	dir = 4;
+	icon_state = "sink";
+	pixel_x = 15
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aY" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/clown,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"aZ" = (
+/obj/structure/rack,
+/obj/random/energy/highend,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"ba" = (
+/obj/random/humanoidremains{
+	spawn_nothing_percentage = 60
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+"SR" = (
+/obj/structure/table/bench/padded,
+/obj/random/humanoidremains{
+	spawn_nothing_percentage = 60
+	},
+/obj/random/contraband,
+/turf/floor/tiled/techfloor,
+/area/cynosure_submap/DJOutpost1)
+
+(1,1,1) = {"
+aa
+ab
+ac
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ac
+ab
+ab
+ab
+ab
+"}
+(2,1,1) = {"
+ab
+ad
+ai
+af
+ah
+af
+af
+af
+af
+af
+ah
+af
+ai
+ad
+ac
+"}
+(3,1,1) = {"
+ab
+ae
+aj
+af
+as
+ap
+aE
+af
+aN
+aP
+SR
+af
+aj
+ai
+ab
+"}
+(4,1,1) = {"
+ab
+af
+af
+ao
+at
+ap
+ao
+af
+ap
+at
+ap
+aU
+af
+af
+ab
+"}
+(5,1,1) = {"
+ab
+ag
+ak
+ap
+au
+ap
+ao
+af
+ap
+ap
+ap
+ap
+aY
+ah
+ab
+"}
+(6,1,1) = {"
+ab
+af
+al
+ak
+ap
+ap
+aF
+af
+ap
+ap
+af
+af
+af
+af
+ab
+"}
+(7,1,1) = {"
+ac
+af
+af
+aq
+aR
+af
+af
+af
+aG
+ap
+af
+aV
+aZ
+af
+ab
+"}
+(8,1,1) = {"
+ab
+af
+ap
+ap
+ap
+ap
+ap
+aM
+ap
+ap
+aR
+ap
+ba
+aR
+ab
+"}
+(9,1,1) = {"
+ab
+af
+an
+ap
+at
+ap
+aG
+aq
+aG
+ap
+af
+aW
+af
+af
+ac
+"}
+(10,1,1) = {"
+ab
+af
+ap
+ap
+ap
+ap
+aH
+af
+ap
+ap
+aS
+aS
+aS
+af
+ab
+"}
+(11,1,1) = {"
+ab
+ah
+an
+ap
+aw
+aA
+aI
+af
+ap
+at
+ap
+ap
+ap
+ah
+ab
+"}
+(12,1,1) = {"
+ab
+af
+af
+ar
+ap
+aB
+aJ
+af
+ap
+ap
+ap
+aX
+af
+af
+ab
+"}
+(13,1,1) = {"
+ab
+ai
+aj
+af
+ax
+aC
+aK
+af
+aO
+aQ
+aT
+af
+aj
+ai
+ab
+"}
+(14,1,1) = {"
+ab
+ad
+ai
+af
+ay
+af
+af
+af
+af
+af
+ah
+af
+ai
+ad
+ab
+"}
+(15,1,1) = {"
+ab
+ab
+ab
+ab
+az
+aD
+aL
+ab
+ab
+ac
+ab
+ab
+ab
+ab
+ab
+"}
+(16,1,1) = {"
+ac
+ab
+ab
+ac
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ac
+"}

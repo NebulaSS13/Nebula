@@ -1,0 +1,273 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementB)
+"b" = (
+/obj/machinery/door/airlock{
+	name = "Construction Area"
+	},
+/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers{
+	dir = 1
+	},
+/turf/floor/tiled/techfloor,
+/area/cynosure/maintenance/construction/d1/basementB)
+"d" = (
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/template_noop,
+/area/template_noop)
+"e" = (
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"k" = (
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/template_noop,
+/area/template_noop)
+"n" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"p" = (
+/turf/template_noop,
+/area/template_noop)
+"r" = (
+/obj/structure/salvage/data,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"s" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"t" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"v" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"x" = (
+/obj/machinery/atmospherics/pipe/cap/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"y" = (
+/obj/structure/chair/office/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"z" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"A" = (
+/obj/random/trash,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"B" = (
+/obj/structure/cable,
+/obj/machinery/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/machinery/light_switch{
+	dir = 4;
+	pixel_x = -24;
+	pixel_y = 12
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"F" = (
+/obj/structure/salvage/computer,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"H" = (
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"J" = (
+/obj/machinery/light/small/fixture,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"K" = (
+/obj/structure/salvage/server,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"N" = (
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/obj/structure/salvage/personal,
+/obj/structure/table/steel,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"O" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"Q" = (
+/obj/random/tech_supply/component/nofail,
+/obj/random/tech_supply/nofail,
+/obj/random/tech_supply/component,
+/obj/random/tech_supply/component,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/random/maintenance,
+/obj/structure/sign/poster{
+	pixel_y = -32;
+	poster_design = /decl/poster_design/bay_38
+	},
+/obj/structure/table/steel,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"R" = (
+/obj/machinery/light/small/fixture{
+	dir = 1
+	},
+/obj/structure/loot_pile/maint/technical,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"V" = (
+/obj/structure/salvage/server,
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"W" = (
+/obj/machinery/atmospherics/unary/vent_pump,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"Z" = (
+/obj/structure/sign/poster{
+	dir = 8;
+	pixel_x = -32;
+	poster_design = /decl/poster_design/bay_3
+	},
+/obj/item/radio/intercom{
+	pixel_y = 20
+	},
+/obj/random/technology_scanner,
+/obj/item/bikehorn/rubberducky,
+/obj/structure/table/steel,
+/turf/floor/tiled/techfloor/grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+
+(1,1,1) = {"
+p
+d
+k
+p
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+t
+a
+a
+Z
+Q
+a
+"}
+(3,1,1) = {"
+a
+K
+e
+B
+n
+y
+N
+a
+"}
+(4,1,1) = {"
+a
+K
+H
+K
+K
+z
+F
+a
+"}
+(5,1,1) = {"
+a
+V
+H
+H
+H
+O
+x
+b
+"}
+(6,1,1) = {"
+a
+K
+H
+K
+K
+A
+r
+a
+"}
+(7,1,1) = {"
+a
+R
+W
+s
+s
+v
+J
+a
+"}
+(8,1,1) = {"
+a
+K
+K
+K
+K
+K
+K
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+"}

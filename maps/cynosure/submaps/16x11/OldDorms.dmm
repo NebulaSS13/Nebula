@@ -1,0 +1,832 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aF" = (
+/obj/structure/reagent_dispensers/fueltank,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"bo" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/item/stack/tile/floor,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"bt" = (
+/obj/machinery/disposal,
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"bx" = (
+/obj/structure/bed/sofa/right/beige{
+	dir = 4
+	},
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/bar)
+"bI" = (
+/obj/machinery/vending/snack{
+	dir = 4
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"cy" = (
+/obj/structure/closet/wardrobe/pjs,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"cD" = (
+/obj/item/frame/camera/kit,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/bar)
+"cL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals4{
+	dir = 10
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals4,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/bar)
+"df" = (
+/obj/structure/hygiene/shower{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/curtain/open/shower,
+/obj/structure/windoor_assembly,
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/bar)
+"dm" = (
+/obj/random/obstruction,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"dr" = (
+/obj/structure/hygiene/shower{
+	pixel_y = 3
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/machinery/door/window/southright{
+	name = "Shower"
+	},
+/obj/structure/curtain/open/shower,
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/bar)
+"el" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/item/stack/tile/floor,
+/obj/item/radio/intercom{
+	pixel_y = 20
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"eH" = (
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/obj/structure/mirror,
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/bar)
+"eO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"eQ" = (
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/bar)
+"fe" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"fI" = (
+/obj/structure/closet/crate,
+/obj/random/contraband,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/engineering,
+/obj/structure/sign/poster{
+	dir = 4;
+	pixel_x = 32;
+	poster_design = /decl/poster_design/bay_29
+	},
+/obj/item/frame/apc,
+/obj/item/frame/light,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/bar)
+"if" = (
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"iM" = (
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -22
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/bar)
+"jy" = (
+/obj/machinery/computer/guestpass{
+	pixel_y = 30
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"jV" = (
+/obj/structure/closet/cabinet,
+/obj/random/contraband,
+/obj/random/drinkbottle,
+/obj/random/umbrella,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"ku" = (
+/obj/structure/table,
+/obj/random/tool,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"lo" = (
+/obj/structure/firedoor_assembly,
+/turf/floor/tiled/steel_grid,
+/area/cynosure/maintenance/construction/d1/bar)
+"lB" = (
+/obj/structure/table,
+/obj/machinery/light/fixture{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump{
+	dir = 8
+	},
+/obj/item/flashlight/lamp/green,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"mk" = (
+/obj/structure/table,
+/obj/machinery/microwave,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"mP" = (
+/obj/structure/door_assembly,
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/bar)
+"mQ" = (
+/obj/machinery/atmospherics/unary/vent_scrubber{
+	dir = 1
+	},
+/obj/item/stack/cable_coil,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"nY" = (
+/obj/machinery/newscaster{
+	pixel_y = -28;
+	dir = 1
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"oR" = (
+/obj/structure/table,
+/obj/item/box/donkpockets{
+	pixel_x = 3;
+	pixel_y = 2
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber,
+/obj/item/poster,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"pj" = (
+/obj/structure/tape_barricade/engineering,
+/obj/structure/disposalpipe/broken,
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/cap/hidden/supply,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"qb" = (
+/obj/structure/closet/wardrobe/suit,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"qG" = (
+/obj/machinery/vending/fitness{
+	dir = 4
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"su" = (
+/obj/structure/closet/wardrobe/mixed,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"sx" = (
+/obj/structure/hygiene/toilet,
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/bar)
+"up" = (
+/obj/machinery/atmospherics/unary/vent_scrubber{
+	dir = 4
+	},
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/bar)
+"vL" = (
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/bar)
+"wm" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"xc" = (
+/obj/structure/closet/wardrobe/xenos,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"xv" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"xI" = (
+/obj/structure/bed,
+/obj/item/radio/intercom{
+	pixel_y = 20
+	},
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/bar)
+"zm" = (
+/obj/item/stool,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"zr" = (
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/bar)
+"zO" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/bar)
+"zX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/item/stack/tape_roll/barricade_tape/engineering,
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/bar)
+"zZ" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"Ag" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"Bj" = (
+/obj/machinery/newscaster{
+	pixel_y = -28;
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"BS" = (
+/obj/structure/cable{
+	icon_state = "0-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/light_switch{
+	pixel_x = 12;
+	pixel_y = 24
+	},
+/obj/machinery/apc{
+	dir = 1;
+	name = "north bump";
+	operating = 0;
+	pixel_y = 24
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"Cb" = (
+/obj/structure/table,
+/obj/random/toolbox,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"CK" = (
+/obj/machinery/door/airlock{
+	name = "Restroom"
+	},
+/obj/machinery/door/firedoor,
+/turf/floor/tiled/steel_grid,
+/area/cynosure/maintenance/construction/d1/bar)
+"CQ" = (
+/obj/structure/table,
+/obj/random/soap,
+/obj/item/towel/random,
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/bar)
+"Di" = (
+/obj/item/stack/tile/floor,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"DA" = (
+/obj/machinery/vending/coffee{
+	dir = 4
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"DV" = (
+/turf/template_noop,
+/area/template_noop)
+"Eo" = (
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"Fn" = (
+/obj/machinery/atmospherics/unary/vent_pump{
+	dir = 8
+	},
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/bar)
+"FE" = (
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/obj/structure/mirror{
+	pixel_x = -28
+	},
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/bar)
+"FP" = (
+/obj/machinery/recharge_station,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"GY" = (
+/obj/effect/floor_decal/steeldecal/steel_decals_central4{
+	dir = 4
+	},
+/obj/item/stool{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/bar)
+"It" = (
+/obj/machinery/newscaster{
+	pixel_y = 26
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"IJ" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 24
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"Jm" = (
+/obj/structure/closet/cabinet,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/obj/item/clothing/skirt/red/blouse,
+/obj/item/clothing/head/kitty,
+/obj/random/maintenance/clean,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"Lz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/floor/tiled,
+/area/cynosure/maintenance/construction/d1/bar)
+"LZ" = (
+/obj/structure/table,
+/obj/item/frame,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"MG" = (
+/obj/machinery/vending/cola{
+	dir = 4
+	},
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"MI" = (
+/obj/structure/table,
+/obj/item/box/donkpockets{
+	pixel_x = 3;
+	pixel_y = 2
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"NW" = (
+/obj/machinery/atmospherics/unary/vent_pump{
+	dir = 1
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"Od" = (
+/obj/structure/bed/sofa/right/beige{
+	dir = 4
+	},
+/obj/item/frame/apc,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"QN" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/bar)
+"QT" = (
+/obj/structure/table,
+/obj/machinery/light/fixture{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump{
+	dir = 8
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"Rm" = (
+/obj/structure/closet/wardrobe/grey,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"Ru" = (
+/obj/item/frame/light{
+	dir = 4
+	},
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/bar)
+"SS" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"Td" = (
+/obj/structure/hygiene/toilet{
+	dir = 1
+	},
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/bar)
+"TQ" = (
+/obj/structure/table,
+/obj/item/coin/silver,
+/obj/item/clothing/head/soft/grey{
+	pixel_x = -2;
+	pixel_y = 3
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"Ul" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/cable{
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"Vt" = (
+/obj/structure/bed/sofa/left/beige{
+	dir = 4
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"Xg" = (
+/obj/structure/reagent_dispensers/watertank,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"Xi" = (
+/obj/structure/table,
+/obj/item/frame,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"Xz" = (
+/obj/structure/extinguisher_cabinet,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"Yu" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"YN" = (
+/obj/structure/bed,
+/obj/item/bedsheet/brown,
+/obj/item/handcuffs/fuzzy{
+	pixel_x = -5
+	},
+/obj/item/radio/intercom{
+	pixel_y = -30;
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/bar)
+"YR" = (
+/obj/item/stool/padded{
+	dir = 1
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"Zv" = (
+/obj/machinery/door/airlock{
+	name = "Dorm 2"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/bar)
+"ZB" = (
+/obj/structure/closet/wardrobe/black,
+/obj/machinery/light,
+/turf/floor/tiled/dark,
+/area/cynosure/maintenance/construction/d1/bar)
+"ZD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+
+(1,1,1) = {"
+QN
+QN
+QN
+QN
+QN
+QN
+QN
+QN
+QN
+QN
+DV
+"}
+(2,1,1) = {"
+QN
+bI
+DA
+MG
+qG
+FP
+Xz
+aF
+Xg
+QN
+QN
+"}
+(3,1,1) = {"
+QN
+if
+Di
+if
+if
+Di
+eQ
+eQ
+up
+qb
+QN
+"}
+(4,1,1) = {"
+QN
+zZ
+NW
+Di
+if
+if
+cD
+GY
+Lz
+ZB
+QN
+"}
+(5,1,1) = {"
+QN
+jy
+zm
+TQ
+ku
+nY
+QN
+dm
+Lz
+Rm
+QN
+"}
+(6,1,1) = {"
+QN
+el
+if
+Xi
+Cb
+YR
+QN
+dm
+Lz
+su
+QN
+"}
+(7,1,1) = {"
+QN
+BS
+mQ
+Di
+ZD
+bo
+iM
+zO
+zX
+cy
+QN
+"}
+(8,1,1) = {"
+pj
+Ul
+SS
+fe
+IJ
+bt
+fI
+cL
+Fn
+xc
+QN
+"}
+(9,1,1) = {"
+QN
+QN
+QN
+mP
+QN
+QN
+QN
+Zv
+QN
+QN
+QN
+"}
+(10,1,1) = {"
+QN
+Vt
+Od
+Ag
+LZ
+QN
+mk
+Ag
+Vt
+bx
+QN
+"}
+(11,1,1) = {"
+QN
+It
+Yu
+wm
+MI
+QN
+oR
+xv
+eO
+Bj
+QN
+"}
+(12,1,1) = {"
+QN
+xI
+QT
+Eo
+jV
+QN
+Jm
+vL
+lB
+YN
+QN
+"}
+(13,1,1) = {"
+QN
+QN
+QN
+CK
+QN
+QN
+QN
+lo
+QN
+QN
+QN
+"}
+(14,1,1) = {"
+QN
+QN
+eH
+zr
+CQ
+QN
+CQ
+zr
+FE
+QN
+QN
+"}
+(15,1,1) = {"
+QN
+QN
+sx
+Ru
+df
+QN
+dr
+zr
+Td
+QN
+QN
+"}
+(16,1,1) = {"
+DV
+QN
+QN
+QN
+QN
+QN
+QN
+QN
+QN
+QN
+DV
+"}
