@@ -233,6 +233,7 @@
 	if(attack.apply_cooldown)
 		H.setClickCooldown(attack.apply_cooldown)
 
+	remove_cloak()
 	if(istype(ai))
 		ai.retaliate(user)
 	return TRUE
@@ -435,4 +436,4 @@
 	// have the ability to be used.
 	if(!(. = ..()) && !get_active_held_item_slot() && check_intent(I_FLAG_HARM) && isliving(A))
 		var/mob/living/victim = A
-		return victim.default_hurt_interaction(src)
+		. = victim.default_hurt_interaction(src)

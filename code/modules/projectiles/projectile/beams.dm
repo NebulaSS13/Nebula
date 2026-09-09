@@ -224,6 +224,9 @@
 	tracer_type = /obj/effect/projectile/tracer/stun
 	impact_type = /obj/effect/projectile/impact/stun
 
+/obj/item/projectile/beam/stun/weak
+	agony = 20
+
 /obj/item/projectile/beam/stun/heavy
 	name = "heavy stun beam"
 	damage = 2

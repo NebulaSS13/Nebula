@@ -1,0 +1,291 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementB)
+"b" = (
+/obj/random/contraband,
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"c" = (
+/obj/structure/chair/comfy/black{
+	dir = 8
+	},
+/obj/random/plushie,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"d" = (
+/obj/machinery/vending/weeb,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"e" = (
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"j" = (
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/template_noop,
+/area/template_noop)
+"k" = (
+/obj/machinery/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable,
+/obj/machinery/light_switch{
+	dir = 4;
+	pixel_x = -24;
+	pixel_y = 12
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"l" = (
+/obj/structure/chair/comfy/black,
+/obj/random/plushie/large,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"m" = (
+/obj/machinery/computer/arcade/orion_trail{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"o" = (
+/obj/machinery/door/airlock{
+	name = "Construction Area"
+	},
+/turf/floor/tiled/steel_grid,
+/area/cynosure/maintenance/construction/d1/basementB)
+"q" = (
+/obj/structure/cable{
+	icon_state = "1-4"
+	},
+/turf/template_noop,
+/area/template_noop)
+"s" = (
+/obj/item/radio/intercom{
+	pixel_y = 20
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"u" = (
+/obj/item/stack/tile/wood,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"v" = (
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"x" = (
+/obj/structure/table/gamblingtable,
+/obj/item/pill_bottle/dice,
+/obj/item/coin/silver{
+	pixel_x = 7;
+	pixel_y = 12
+	},
+/obj/item/coin/silver{
+	pixel_x = 12;
+	pixel_y = 7
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"A" = (
+/obj/structure/sign/poster{
+	pixel_y = -32;
+	poster_design = /decl/poster_design/bay_13
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"B" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"C" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"D" = (
+/obj/item/stack/material/log/mapped/sif{
+	amount = 24
+	},
+/obj/machinery/light/small/fixture{
+	dir = 8
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"E" = (
+/obj/structure/table/gamblingtable,
+/obj/random/cash,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"H" = (
+/turf/template_noop,
+/area/template_noop)
+"I" = (
+/obj/random/plushie,
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"J" = (
+/obj/structure/chair/comfy/black,
+/obj/random/plushie,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"L" = (
+/obj/structure/chair/comfy/black,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"M" = (
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"N" = (
+/obj/item/stool/padded{
+	dir = 8
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"R" = (
+/obj/structure/chair/comfy/black{
+	dir = 4
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"S" = (
+/obj/structure/table/gamblingtable,
+/obj/item/deck/cards,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"T" = (
+/obj/structure/table/laminate,
+/obj/random/toy,
+/obj/random/maintenance/clean,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"U" = (
+/obj/machinery/computer/arcade/battle{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementB)
+"V" = (
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"W" = (
+/obj/structure/table/gamblingtable,
+/obj/random/drinkbottle,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+"Y" = (
+/obj/structure/chair/comfy/black{
+	dir = 4
+	},
+/obj/random/plushie,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementB)
+
+(1,1,1) = {"
+H
+j
+q
+H
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+B
+a
+a
+U
+m
+a
+"}
+(3,1,1) = {"
+a
+d
+e
+k
+D
+N
+N
+a
+"}
+(4,1,1) = {"
+a
+v
+Y
+R
+V
+M
+A
+a
+"}
+(5,1,1) = {"
+a
+l
+W
+x
+I
+u
+M
+o
+"}
+(6,1,1) = {"
+a
+J
+S
+E
+b
+u
+u
+a
+"}
+(7,1,1) = {"
+a
+s
+c
+c
+V
+u
+R
+a
+"}
+(8,1,1) = {"
+a
+V
+V
+V
+C
+L
+T
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+"}

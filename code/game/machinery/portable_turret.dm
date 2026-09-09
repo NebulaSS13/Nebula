@@ -58,6 +58,12 @@
 
 	initial_access = list(list(access_security, access_bridge))
 
+/obj/machinery/porta_turret/lasertag
+	installation = /obj/item/gun/energy/lasertag/blue
+
+/obj/machinery/porta_turret/lasertag/red
+	installation = /obj/item/gun/energy/lasertag/red
+
 /obj/machinery/porta_turret/crescent
 	enabled = 0
 	ailock = 1

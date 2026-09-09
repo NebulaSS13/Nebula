@@ -1,0 +1,2238 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/template_noop,
+/area/template_noop)
+"ab" = (
+/obj/structure/cliff/automatic{
+	dir = 9;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"ac" = (
+/obj/structure/cliff/automatic,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"ad" = (
+/obj/structure/cliff/automatic{
+	dir = 5;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"ae" = (
+/obj/structure/cliff/automatic/corner{
+	dir = 9;
+	icon_state = "cliffbuilder-corner"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"af" = (
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"ag" = (
+/obj/structure/cliff/automatic/corner,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"ah" = (
+/obj/structure/fence{
+	dir = 4;
+	icon_state = "end"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"ai" = (
+/obj/structure/fence{
+	dir = 4;
+	icon_state = "post"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"aj" = (
+/obj/structure/fence/door/opened,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"ak" = (
+/obj/structure/fence{
+	dir = 8;
+	icon_state = "end"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"al" = (
+/obj/structure/cliff/automatic{
+	dir = 8;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"am" = (
+/obj/structure/fence{
+	dir = 1;
+	icon_state = "end"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"an" = (
+/obj/structure/cliff/automatic{
+	dir = 9;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"ao" = (
+/obj/structure/cliff/automatic,
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"ap" = (
+/obj/structure/cliff/automatic{
+	dir = 5;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aq" = (
+/obj/structure/sign/warning/lava,
+/turf/wall,
+/area/cynosure_submap/lava_trench)
+"ar" = (
+/obj/structure/fence,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"as" = (
+/obj/structure/cliff/automatic{
+	dir = 6;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"at" = (
+/obj/structure/cliff/automatic/corner{
+	dir = 9;
+	icon_state = "cliffbuilder-corner"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"au" = (
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"av" = (
+/obj/structure/cliff/automatic/corner,
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aw" = (
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"ax" = (
+/obj/structure/catwalk,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"ay" = (
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"az" = (
+/obj/structure/fence/door/opened{
+	dir = 8;
+	icon_state = "door_opened"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"aA" = (
+/obj/structure/cliff/automatic{
+	dir = 8;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aB" = (
+/turf/floor/barren,
+/area/template_noop)
+"aC" = (
+/turf/floor/rock,
+/area/template_noop)
+"aD" = (
+/obj/structure/cliff/automatic,
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aE" = (
+/obj/structure/cliff/automatic,
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aF" = (
+/obj/structure/cliff/automatic{
+	dir = 10;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aG" = (
+/obj/structure/cliff/automatic/corner{
+	dir = 10;
+	icon_state = "cliffbuilder-corner"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aH" = (
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aI" = (
+/obj/structure/catwalk,
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aJ" = (
+/obj/structure/ore_box,
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"aK" = (
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aL" = (
+/obj/structure/cliff/automatic{
+	dir = 4;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"aM" = (
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"aN" = (
+/obj/random/tank,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"aO" = (
+/turf/floor/plating,
+/area/cynosure_submap/lava_trench/outpost)
+"aP" = (
+/obj/machinery/door/airlock/hatch{
+	normalspeed = 0;
+	safe = 0
+	},
+/obj/abstract/map_effect/interval/effect_emitter/sparks,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"aQ" = (
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"aR" = (
+/obj/effect/floor_decal/corner_oldtile/blue/full{
+	dir = 8;
+	icon_state = "corner_oldtile_full"
+	},
+/obj/machinery/forensic/microscope,
+/obj/structure/table,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"aS" = (
+/obj/effect/floor_decal/corner_oldtile/blue/full{
+	dir = 8;
+	icon_state = "corner_oldtile_full"
+	},
+/obj/structure/table,
+/obj/random/unidentified_medicine/scientific,
+/obj/random/mug,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"aT" = (
+/obj/structure/fence,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"aU" = (
+/obj/structure/cliff/automatic{
+	dir = 2;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aV" = (
+/obj/structure/cliff/automatic{
+	dir = 10;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"aW" = (
+/obj/structure/cliff/automatic/corner{
+	dir = 10;
+	icon_state = "cliffbuilder-corner"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"aX" = (
+/obj/structure/cliff/automatic/corner{
+	dir = 6;
+	icon_state = "cliffbuilder-corner"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aY" = (
+/obj/structure/cliff/automatic{
+	dir = 2;
+	icon_state = "cliffbuilder"
+	},
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"aZ" = (
+/obj/structure/cliff/automatic{
+	dir = 2;
+	icon_state = "cliffbuilder"
+	},
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"ba" = (
+/obj/structure/crystal/lava,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"bb" = (
+/obj/structure/cliff/automatic{
+	dir = 4;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"bc" = (
+/obj/structure/cliff/automatic{
+	dir = 6;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"bd" = (
+/obj/structure/table/steel,
+/obj/item/excavation,
+/obj/item/measuring_tape,
+/obj/effect/floor_decal/corner_oldtile/purple{
+	dir = 4;
+	icon_state = "corner_oldtile"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"be" = (
+/turf/wall/natural,
+/area/template_noop)
+"bf" = (
+/obj/structure/railing/mapped,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"bg" = (
+/obj/structure/cliff/automatic{
+	dir = 10;
+	icon_state = "cliffbuilder"
+	},
+/obj/structure/railing/mapped,
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"bh" = (
+/obj/structure/cliff/automatic/corner{
+	dir = 10;
+	icon_state = "cliffbuilder-corner"
+	},
+/obj/structure/railing/mapped,
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"bi" = (
+/obj/structure/railing/mapped,
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"bj" = (
+/obj/structure/cliff/automatic{
+	dir = 4;
+	icon_state = "cliffbuilder"
+	},
+/obj/structure/railing/mapped,
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"bk" = (
+/obj/structure/catwalk,
+/obj/structure/railing/mapped,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"bl" = (
+/obj/structure/catwalk,
+/obj/structure/railing/mapped,
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"bm" = (
+/obj/structure/fence/door/opened{
+	dir = 4;
+	icon_state = "door_opened"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"bn" = (
+/obj/structure/cliff/automatic{
+	dir = 2;
+	icon_state = "cliffbuilder"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"bo" = (
+/obj/effect/floor_decal/corner_oldtile/purple/full{
+	dir = 1;
+	icon_state = "corner_oldtile_full"
+	},
+/obj/machinery/space_heater,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bp" = (
+/obj/machinery/floodlight,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"bq" = (
+/obj/machinery/newscaster{
+	pixel_y = 32
+	},
+/obj/machinery/light/small{
+	dir = 1;
+	icon_state = "bulb1"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"br" = (
+/obj/effect/floor_decal/corner_oldtile/blue{
+	dir = 1;
+	icon_state = "corner_oldtile"
+	},
+/obj/structure/chair/office/light{
+	dir = 4;
+	icon_state = "officechair_white"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bs" = (
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bt" = (
+/obj/effect/floor_decal/corner_oldtile/purple{
+	dir = 4;
+	icon_state = "corner_oldtile"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bu" = (
+/obj/structure/cliff/automatic/corner{
+	dir = 6;
+	icon_state = "cliffbuilder-corner"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"bv" = (
+/obj/effect/floor_decal/corner_oldtile/blue{
+	dir = 9;
+	icon_state = "corner_oldtile"
+	},
+/obj/structure/table,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bw" = (
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"bx" = (
+/obj/structure/crystal/ice,
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"by" = (
+/obj/machinery/ai_status_display{
+	pixel_y = 32
+	},
+/obj/machinery/light/small{
+	dir = 1;
+	icon_state = "bulb1"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bz" = (
+/obj/effect/floor_decal/corner_oldtile{
+	dir = 1;
+	icon_state = "corner_oldtile"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bA" = (
+/obj/effect/floor_decal/corner_oldtile{
+	dir = 4;
+	icon_state = "corner_oldtile"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bB" = (
+/obj/effect/floor_decal/corner_oldtile/blue{
+	dir = 8;
+	icon_state = "corner_oldtile"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bC" = (
+/obj/structure/rack,
+/obj/item/tool/shovel,
+/obj/effect/floor_decal/corner_oldtile/purple/full{
+	dir = 1;
+	icon_state = "corner_oldtile_full"
+	},
+/obj/item/tool/drill,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bD" = (
+/turf/floor/lava,
+/area/cynosure_submap/lava_trench)
+"bE" = (
+/obj/structure/crystal/lava,
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"bF" = (
+/obj/structure/rack,
+/obj/random/tool/power,
+/obj/random/tool/power,
+/obj/effect/floor_decal/corner_oldtile/purple{
+	dir = 6;
+	icon_state = "corner_oldtile"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bG" = (
+/obj/effect/floor_decal/corner_oldtile/purple,
+/obj/structure/table/steel,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bH" = (
+/obj/effect/floor_decal/corner_oldtile/purple,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bI" = (
+/obj/item/gps/science{
+	gps_tag = "CRYSTALS"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bK" = (
+/obj/effect/floor_decal/corner_oldtile/blue/full,
+/obj/random/drinkbottle,
+/obj/random/maintenance/research,
+/obj/structure/table,
+/obj/machinery/light/small{
+	dir = 8;
+	icon_state = "bulb1"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bL" = (
+/obj/structure/flora/pottedplant/crystal,
+/obj/effect/floor_decal/corner_oldtile/blue{
+	dir = 8;
+	icon_state = "corner_oldtile"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bM" = (
+/obj/structure/cult/pylon,
+/obj/effect/floor_decal/industrial/outline,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bN" = (
+/obj/structure/anomaly_container,
+/obj/structure/artifact,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"bO" = (
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bP" = (
+/obj/effect/floor_decal/corner_oldtile/purple/full{
+	dir = 4;
+	icon_state = "corner_oldtile_full"
+	},
+/obj/structure/table/steel,
+/obj/machinery/recharger,
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bQ" = (
+/obj/machinery/light/small{
+	dir = 8;
+	icon_state = "bulb1"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"bR" = (
+/obj/machinery/light/small{
+	dir = 1;
+	icon_state = "bulb1"
+	},
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"bS" = (
+/obj/effect/floor_decal/corner_oldtile/blue{
+	dir = 1;
+	icon_state = "corner_oldtile"
+	},
+/obj/structure/loot_pile/surface/medicine_cabinet{
+	pixel_y = 28
+	},
+/obj/structure/table,
+/obj/item/scanner/health,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bT" = (
+/obj/machinery/suspension_gen{
+	anchored = 1
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bU" = (
+/obj/machinery/light/small,
+/obj/structure/ore_box,
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"bW" = (
+/obj/structure/anomaly_container,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"bX" = (
+/obj/effect/floor_decal/corner_oldtile/purple/full{
+	dir = 4;
+	icon_state = "corner_oldtile_full"
+	},
+/obj/item/box/evidence,
+/obj/structure/table/steel,
+/obj/item/stack/flag/red,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"bY" = (
+/obj/structure/crystal,
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"bZ" = (
+/obj/structure/table/steel,
+/obj/item/stock_parts/subspace/crystal,
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"ca" = (
+/obj/structure/table/steel,
+/obj/item/stack/material/gemstone/mapped/diamond,
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"cb" = (
+/obj/structure/loot_pile/surface/bones,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"ce" = (
+/obj/effect/floor_decal/corner_oldtile/blue/full,
+/obj/structure/table,
+/obj/random/firstaid,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"ch" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+"cj" = (
+/obj/item/clothing/head/bio_hood/anomaly,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"ck" = (
+/obj/item/clothing/suit/bio_suit/anomaly,
+/turf/floor/tiled/old_tile,
+/area/cynosure_submap/lava_trench/outpost)
+"co" = (
+/obj/machinery/floodlight,
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"cp" = (
+/obj/machinery/light/small,
+/obj/structure/closet/crate/secure,
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"cq" = (
+/obj/item/banner/nanotrasen,
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"cr" = (
+/obj/structure/table/steel,
+/obj/item/shard/phoron,
+/turf/floor/tiled,
+/area/cynosure_submap/lava_trench)
+"cs" = (
+/obj/item/banner/nanotrasen,
+/turf/floor/rock,
+/area/cynosure_submap/lava_trench)
+
+(1,1,1) = {"
+aB
+aB
+aB
+aB
+af
+af
+af
+aB
+aB
+aB
+aB
+aB
+be
+be
+be
+be
+be
+be
+be
+be
+be
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(2,1,1) = {"
+aB
+ab
+al
+am
+ar
+az
+ar
+aT
+al
+aV
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+be
+be
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(3,1,1) = {"
+ab
+ae
+af
+af
+af
+af
+af
+af
+af
+aW
+aV
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+be
+be
+be
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(4,1,1) = {"
+ac
+af
+af
+af
+af
+af
+af
+af
+af
+af
+aW
+al
+al
+al
+al
+al
+aV
+aB
+aB
+be
+be
+be
+be
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(5,1,1) = {"
+ac
+af
+af
+ba
+an
+aA
+aF
+af
+af
+af
+af
+af
+af
+af
+af
+af
+bn
+aB
+aB
+aB
+aB
+be
+be
+be
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(6,1,1) = {"
+ac
+af
+af
+an
+at
+au
+aG
+aF
+af
+aq
+af
+af
+af
+af
+af
+af
+bn
+aB
+aB
+aB
+aB
+aB
+be
+be
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(7,1,1) = {"
+ac
+af
+af
+ao
+au
+au
+au
+aU
+af
+af
+af
+af
+af
+af
+af
+af
+aW
+al
+al
+aV
+aB
+aB
+be
+be
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(8,1,1) = {"
+ac
+af
+af
+ao
+au
+au
+au
+aG
+aF
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+bn
+aB
+aB
+be
+be
+be
+aa
+aa
+aa
+aa
+aa
+"}
+(9,1,1) = {"
+ac
+af
+af
+ao
+au
+au
+au
+au
+aG
+aF
+af
+af
+bw
+bw
+bw
+bw
+af
+af
+af
+bn
+aB
+aB
+be
+be
+be
+be
+aa
+aa
+aa
+aa
+"}
+(10,1,1) = {"
+ac
+af
+af
+ao
+au
+au
+au
+au
+au
+aU
+af
+af
+bw
+bx
+bZ
+bw
+bw
+af
+af
+bn
+aB
+aB
+aB
+aB
+be
+be
+be
+aa
+aa
+aa
+"}
+(11,1,1) = {"
+ac
+af
+af
+ap
+av
+au
+au
+au
+af
+af
+af
+af
+bw
+bE
+ca
+bw
+bw
+af
+af
+bn
+aB
+aB
+aB
+aB
+aB
+be
+be
+be
+aa
+aa
+"}
+(12,1,1) = {"
+ac
+af
+af
+af
+ao
+au
+au
+au
+au
+aU
+af
+af
+bw
+bY
+cr
+bw
+bw
+af
+af
+aW
+al
+al
+aV
+aB
+aB
+be
+be
+be
+be
+aa
+"}
+(13,1,1) = {"
+ac
+af
+af
+af
+ao
+au
+au
+au
+au
+aG
+aF
+af
+bw
+bw
+bw
+bw
+bw
+af
+af
+af
+af
+af
+bn
+aB
+aB
+aB
+aB
+be
+be
+be
+"}
+(14,1,1) = {"
+ad
+ag
+af
+af
+ao
+au
+au
+au
+au
+au
+aU
+af
+af
+bw
+bw
+bw
+bw
+af
+aM
+af
+af
+af
+aW
+al
+al
+aV
+aB
+aB
+be
+be
+"}
+(15,1,1) = {"
+aB
+ac
+af
+af
+ao
+au
+au
+au
+au
+au
+aU
+af
+af
+bw
+bw
+aJ
+aO
+aO
+aO
+aO
+aO
+af
+af
+af
+af
+bn
+aB
+aB
+be
+be
+"}
+(16,1,1) = {"
+aB
+ac
+af
+af
+ao
+au
+au
+af
+au
+au
+aU
+af
+af
+bw
+cq
+aO
+aO
+aR
+bv
+ce
+aO
+aO
+af
+af
+af
+bn
+aB
+aB
+be
+be
+"}
+(17,1,1) = {"
+aB
+ac
+af
+af
+ao
+au
+au
+au
+au
+au
+aU
+af
+af
+bw
+bU
+aO
+aS
+br
+aQ
+bB
+bK
+aO
+ch
+af
+af
+bn
+aB
+aB
+be
+be
+"}
+(18,1,1) = {"
+aB
+ac
+af
+af
+ao
+au
+au
+au
+au
+au
+aU
+af
+af
+bw
+aJ
+aO
+bS
+aQ
+aQ
+aQ
+bL
+aO
+aO
+af
+af
+bn
+aB
+aB
+be
+be
+"}
+(19,1,1) = {"
+aB
+ah
+af
+af
+ap
+av
+au
+au
+au
+aX
+bc
+af
+af
+bw
+aO
+aO
+aO
+bq
+aQ
+aQ
+bz
+bs
+aO
+af
+af
+bn
+aB
+aB
+be
+be
+"}
+(20,1,1) = {"
+aC
+ai
+af
+af
+aw
+aD
+aH
+aH
+aH
+aY
+aw
+af
+af
+bw
+aP
+bO
+aP
+aQ
+aQ
+bT
+bs
+bM
+aO
+bR
+af
+bn
+aB
+aB
+be
+be
+"}
+(21,1,1) = {"
+aC
+aj
+af
+af
+ax
+ax
+ax
+aI
+aI
+aI
+ax
+bw
+bw
+bw
+aO
+aO
+aO
+by
+aQ
+ck
+bA
+bs
+aO
+af
+af
+bn
+aB
+aB
+be
+be
+"}
+(22,1,1) = {"
+aC
+ai
+af
+af
+ay
+aE
+aK
+aK
+aK
+aZ
+ay
+af
+bw
+bw
+co
+aO
+bd
+cj
+cb
+aQ
+bG
+aO
+aO
+af
+af
+bn
+aB
+aB
+be
+be
+"}
+(23,1,1) = {"
+aB
+ak
+af
+af
+af
+ao
+au
+au
+au
+aG
+aF
+af
+bw
+bw
+cp
+aO
+bo
+bt
+bI
+bH
+bP
+aO
+bN
+af
+af
+bn
+aB
+aB
+be
+be
+"}
+(24,1,1) = {"
+aB
+ac
+af
+aq
+af
+ao
+au
+au
+au
+au
+aU
+af
+bw
+af
+cs
+aO
+aO
+bC
+bF
+bX
+aO
+aO
+bW
+af
+af
+bn
+aB
+aB
+aB
+be
+"}
+(25,1,1) = {"
+aB
+ad
+ag
+af
+af
+ao
+au
+au
+af
+au
+aU
+bf
+bk
+af
+af
+af
+aO
+aO
+aO
+aO
+aO
+bN
+af
+af
+af
+bn
+aB
+aB
+aB
+aB
+"}
+(26,1,1) = {"
+aB
+aB
+ac
+af
+af
+ao
+au
+au
+au
+au
+aG
+bg
+bk
+af
+aq
+af
+af
+af
+bQ
+af
+af
+af
+af
+af
+af
+aW
+al
+aV
+aB
+aB
+"}
+(27,1,1) = {"
+aB
+aB
+ac
+af
+af
+ao
+au
+au
+au
+au
+au
+bh
+bl
+aA
+aA
+aF
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+bn
+aB
+aB
+"}
+(28,1,1) = {"
+aB
+aB
+ac
+af
+af
+ao
+au
+au
+af
+au
+au
+bi
+bl
+bD
+au
+aG
+aA
+aA
+aF
+af
+af
+af
+af
+af
+af
+af
+af
+aW
+aV
+aB
+"}
+(29,1,1) = {"
+aB
+aB
+ac
+af
+af
+ao
+au
+au
+af
+af
+au
+bi
+bl
+bD
+au
+au
+au
+au
+aG
+aA
+aA
+af
+aA
+aA
+aF
+af
+af
+af
+aW
+aV
+"}
+(30,1,1) = {"
+aB
+aB
+ac
+af
+af
+ap
+av
+au
+au
+ba
+au
+bi
+bl
+bD
+au
+au
+au
+au
+au
+au
+au
+af
+au
+au
+aG
+aF
+af
+af
+af
+bn
+"}
+(31,1,1) = {"
+aB
+aB
+ac
+af
+af
+af
+ap
+av
+au
+au
+au
+bi
+bl
+bD
+au
+af
+au
+au
+au
+au
+au
+au
+au
+au
+au
+aG
+aF
+af
+af
+bn
+"}
+(32,1,1) = {"
+aB
+aB
+ac
+af
+af
+af
+af
+ap
+av
+au
+au
+bi
+bl
+bD
+au
+au
+au
+au
+au
+af
+af
+af
+au
+au
+au
+au
+aU
+af
+af
+bn
+"}
+(33,1,1) = {"
+aB
+aB
+ad
+ag
+af
+af
+af
+af
+ap
+bb
+bb
+bj
+bl
+av
+au
+au
+au
+au
+au
+au
+ba
+af
+af
+au
+au
+au
+aU
+af
+af
+bn
+"}
+(34,1,1) = {"
+aB
+aB
+aB
+ad
+ag
+af
+af
+af
+af
+af
+af
+bf
+bk
+ap
+bb
+bb
+av
+au
+au
+au
+au
+au
+au
+au
+au
+au
+aU
+af
+af
+ah
+"}
+(35,1,1) = {"
+be
+aB
+aB
+aB
+ad
+ag
+af
+af
+af
+af
+af
+bf
+bk
+af
+af
+af
+ap
+av
+au
+au
+au
+au
+au
+au
+au
+au
+aU
+af
+af
+ai
+"}
+(36,1,1) = {"
+be
+be
+aB
+aB
+aB
+ad
+aL
+aL
+ag
+af
+af
+af
+af
+af
+af
+af
+af
+ap
+bb
+bb
+bb
+bb
+bb
+av
+au
+au
+aU
+af
+af
+aj
+"}
+(37,1,1) = {"
+be
+be
+be
+aB
+aB
+aB
+aB
+aB
+ac
+af
+af
+af
+af
+af
+af
+aq
+af
+af
+af
+af
+af
+af
+af
+ap
+bb
+bb
+bc
+af
+af
+ai
+"}
+(38,1,1) = {"
+aa
+be
+be
+be
+aB
+aB
+aB
+aB
+ac
+af
+af
+ba
+af
+af
+af
+bp
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+ak
+"}
+(39,1,1) = {"
+aa
+aa
+be
+be
+be
+be
+aB
+aB
+ad
+ag
+af
+af
+af
+af
+af
+af
+af
+af
+aN
+af
+ba
+af
+af
+af
+af
+af
+af
+af
+af
+bn
+"}
+(40,1,1) = {"
+aa
+aa
+aa
+be
+be
+be
+aB
+aB
+aB
+ac
+af
+af
+af
+af
+af
+af
+af
+ba
+af
+af
+af
+af
+bu
+aL
+aL
+aL
+aL
+aL
+aL
+as
+"}
+(41,1,1) = {"
+aa
+aa
+aa
+aa
+be
+be
+be
+aB
+aB
+ac
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+bn
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+"}
+(42,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+be
+be
+aB
+aB
+ac
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+bu
+as
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+"}
+(43,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+be
+be
+aB
+aB
+ad
+am
+ar
+bm
+ar
+aT
+aL
+aL
+aL
+aL
+aL
+aL
+as
+aB
+aB
+aB
+be
+be
+be
+be
+be
+"}
+(44,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+be
+be
+aB
+aB
+aB
+aB
+af
+af
+af
+af
+af
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+be
+be
+be
+be
+be
+be
+"}
+(45,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+be
+be
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+be
+be
+be
+aa
+aa
+aa
+aa
+"}
+(46,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+be
+be
+be
+be
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+be
+be
+be
+be
+be
+be
+be
+be
+aa
+aa
+aa
+aa
+aa
+"}
+(47,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+be
+be
+be
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+be
+be
+be
+be
+be
+be
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(48,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+be
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}

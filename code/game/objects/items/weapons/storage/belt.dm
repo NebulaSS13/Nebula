@@ -105,7 +105,7 @@
 	return list(
 		/obj/item/screwdriver,
 		/obj/item/wrench,
-		/obj/item/weldingtool,
+		/obj/item/fuelled_tool/welding,
 		/obj/item/crowbar,
 		/obj/item/wirecutters,
 		/obj/item/stack/cable_coil/random,
@@ -115,7 +115,7 @@
 	return list(
 		/obj/item/screwdriver,
 		/obj/item/wrench,
-		/obj/item/weldingtool,
+		/obj/item/fuelled_tool/welding,
 		/obj/item/crowbar,
 		/obj/item/wirecutters,
 		/obj/item/t_scanner,

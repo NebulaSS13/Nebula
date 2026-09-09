@@ -1,0 +1,477 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"c" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/obj/machinery/deployable/barrier,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"d" = (
+/turf/wall/concrete{
+	can_open = 1
+	},
+/area/cynosure/maintenance/construction/d1/bar)
+"e" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"f" = (
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"g" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/bar)
+"h" = (
+/obj/effect/floor_decal/corner/red/full{
+	dir = 4
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"i" = (
+/obj/item/stack/flag/red,
+/obj/effect/floor_decal/industrial/outline{
+	color = "#bb0000"
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"j" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/red,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"k" = (
+/obj/machinery/deployable/barrier,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"l" = (
+/obj/effect/floor_decal/corner/blue/full,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"n" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 4
+	},
+/obj/machinery/deployable/barrier,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"p" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/obj/item/stack/tile/floor_steel_dirty,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"q" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/machinery/deployable/barrier,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"r" = (
+/obj/random/crate,
+/obj/random/maintenance/security,
+/obj/random/maintenance/security,
+/obj/item/clothing/glasses/sunglasses,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"s" = (
+/obj/effect/floor_decal/corner/blue/full{
+	dir = 8
+	},
+/obj/machinery/deployable/barrier,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"t" = (
+/obj/machinery/deployable/barrier{
+	anchored = 1
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"v" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 4
+	},
+/obj/item/stack/tile/floor_steel_dirty{
+	amount = 15
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"y" = (
+/obj/structure/closet/lasertag/blue,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"z" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/obj/item/stack/tile/floor_steel_dirty,
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"B" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"C" = (
+/obj/random/toolbox,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"D" = (
+/obj/machinery/deployable/barrier{
+	anchored = 1
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 10
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"E" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/random/crate,
+/obj/item/paint_sprayer,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/clean,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"F" = (
+/obj/structure/tape_barricade/engineering,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"G" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 10
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"H" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/obj/structure/closet/lasertag/red,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"I" = (
+/obj/machinery/deployable/barrier{
+	anchored = 1
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"K" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"N" = (
+/obj/machinery/deployable/barrier,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"O" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/obj/machinery/deployable/barrier,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"P" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/machinery/deployable/barrier,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"Q" = (
+/obj/structure/girder,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"R" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/structure/closet/toolcloset,
+/obj/random/tool/power,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"S" = (
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"T" = (
+/obj/effect/floor_decal/corner/red/full{
+	dir = 1
+	},
+/obj/machinery/deployable/barrier,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"U" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 8
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"V" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"W" = (
+/obj/item/stack/tile/floor_steel_dirty,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/bar)
+"X" = (
+/obj/item/stack/flag/blue,
+/obj/effect/floor_decal/industrial/outline{
+	color = "#0000bb"
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"Y" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/structure/sign/poster{
+	pixel_y = -32
+	},
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+"Z" = (
+/obj/item/stack/tile/floor_steel_dirty,
+/turf/floor/tiled/steel_dirty,
+/area/cynosure/maintenance/construction/d1/bar)
+
+(1,1,1) = {"
+g
+g
+g
+d
+g
+g
+g
+g
+g
+g
+a
+"}
+(2,1,1) = {"
+g
+s
+q
+B
+B
+B
+B
+B
+l
+g
+g
+"}
+(3,1,1) = {"
+g
+c
+N
+S
+t
+X
+y
+t
+U
+l
+g
+"}
+(4,1,1) = {"
+g
+c
+C
+W
+t
+t
+t
+t
+S
+D
+g
+"}
+(5,1,1) = {"
+g
+c
+f
+f
+W
+S
+Z
+S
+S
+G
+g
+"}
+(6,1,1) = {"
+g
+e
+W
+f
+f
+W
+t
+t
+t
+D
+g
+"}
+(7,1,1) = {"
+g
+z
+W
+f
+W
+S
+W
+f
+S
+G
+g
+"}
+(8,1,1) = {"
+F
+v
+Z
+I
+I
+I
+I
+I
+W
+j
+g
+"}
+(9,1,1) = {"
+g
+E
+S
+f
+f
+Z
+S
+f
+W
+Y
+g
+"}
+(10,1,1) = {"
+g
+b
+W
+W
+f
+S
+t
+t
+t
+K
+g
+"}
+(11,1,1) = {"
+g
+R
+W
+f
+f
+W
+f
+Z
+t
+K
+g
+"}
+(12,1,1) = {"
+g
+P
+f
+W
+f
+f
+S
+S
+t
+K
+g
+"}
+(13,1,1) = {"
+g
+T
+n
+S
+W
+i
+S
+Z
+t
+K
+g
+"}
+(14,1,1) = {"
+g
+Q
+T
+p
+V
+H
+O
+V
+V
+h
+g
+"}
+(15,1,1) = {"
+g
+g
+k
+k
+r
+k
+k
+k
+k
+g
+g
+"}
+(16,1,1) = {"
+a
+g
+g
+g
+g
+g
+g
+g
+g
+g
+a
+"}

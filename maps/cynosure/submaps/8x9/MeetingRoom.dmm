@@ -1,0 +1,288 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementA)
+"b" = (
+/obj/structure/bed/sofa/right/brown{
+	dir = 4
+	},
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"c" = (
+/turf/wall/concrete{
+	can_open = 1
+	},
+/area/cynosure/maintenance/construction/d1/basementA)
+"d" = (
+/obj/structure/table/laminate,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"g" = (
+/obj/structure/chair/comfy/brown,
+/obj/random/maintenance,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"i" = (
+/obj/machinery/light/flamp,
+/obj/structure/sign/poster{
+	pixel_y = -32
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"k" = (
+/obj/structure/chair/comfy/brown{
+	dir = 1
+	},
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"l" = (
+/obj/structure/chair/comfy/brown{
+	dir = 8
+	},
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"m" = (
+/turf/template_noop,
+/area/template_noop)
+"n" = (
+/obj/structure/chair/comfy/brown,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"o" = (
+/obj/structure/chair/comfy/brown{
+	dir = 1
+	},
+/obj/random/contraband,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"q" = (
+/obj/structure/table/laminate,
+/obj/item/paicard,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"r" = (
+/obj/structure/bed/sofa/left/brown{
+	dir = 8
+	},
+/obj/random/maintenance,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"u" = (
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"w" = (
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"x" = (
+/obj/structure/bed/sofa/left/brown{
+	dir = 4
+	},
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"z" = (
+/obj/structure/table/laminate,
+/obj/random/mre,
+/obj/random/snack,
+/obj/machinery/reagentgrinder,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"A" = (
+/obj/structure/sign/poster{
+	dir = 8;
+	pixel_x = -32
+	},
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/basementA)
+"B" = (
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"D" = (
+/obj/machinery/light/flamp,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"E" = (
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"H" = (
+/obj/structure/table/laminate,
+/obj/random/snack,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"L" = (
+/obj/structure/table/laminate,
+/obj/random/smokes,
+/obj/item/clothing/glasses/threedglasses,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"M" = (
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/basementA)
+"O" = (
+/obj/structure/loot_pile/maint/junk,
+/obj/machinery/apc/unlocked{
+	locked = 0;
+	name = "south bump";
+	operating = 0;
+	pixel_y = -24
+	},
+/obj/structure/cable,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"P" = (
+/obj/structure/cable{
+	icon_state = "0-2"
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"Q" = (
+/obj/structure/bed/sofa/right/brown{
+	dir = 8
+	},
+/obj/item/clothing/mask/gas,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"R" = (
+/obj/machinery/newscaster{
+	pixel_y = 26
+	},
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"S" = (
+/obj/structure/chair/comfy/brown{
+	dir = 4
+	},
+/obj/random/snack,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"T" = (
+/obj/random/maintenance,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"V" = (
+/obj/machinery/light/fixture,
+/turf/floor/wood/broken,
+/area/cynosure/maintenance/construction/d1/basementA)
+"W" = (
+/obj/structure/table/laminate,
+/obj/item/box/cups{
+	pixel_x = 2;
+	pixel_y = 5
+	},
+/obj/random/maintenance,
+/obj/random/powercell,
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+"X" = (
+/obj/structure/table/laminate,
+/obj/random/contraband,
+/obj/random/drinkbottle,
+/turf/floor/carpet,
+/area/cynosure/maintenance/construction/d1/basementA)
+"Z" = (
+/obj/structure/table/laminate,
+/obj/machinery/microwave{
+	pixel_x = -3;
+	pixel_y = 6
+	},
+/obj/item/box/donkpockets{
+	pixel_x = -3;
+	pixel_y = -3
+	},
+/turf/floor/wood,
+/area/cynosure/maintenance/construction/d1/basementA)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+D
+E
+E
+E
+A
+Z
+z
+a
+"}
+(3,1,1) = {"
+a
+w
+x
+S
+b
+T
+E
+W
+a
+"}
+(4,1,1) = {"
+a
+n
+X
+q
+L
+k
+E
+M
+c
+"}
+(5,1,1) = {"
+a
+g
+H
+d
+d
+o
+P
+O
+a
+"}
+(6,1,1) = {"
+a
+R
+Q
+l
+r
+B
+M
+u
+a
+"}
+(7,1,1) = {"
+a
+V
+E
+E
+E
+E
+i
+a
+a
+"}
+(8,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+m
+"}

@@ -1,0 +1,564 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"bH" = (
+/turf/floor/rock,
+/area/cynosure_submap/Shelter1)
+"cu" = (
+/obj/item/shard/shrapnel,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"dO" = (
+/obj/structure/table/sif,
+/obj/item/flashlight/lamp/green,
+/obj/random/smokes,
+/obj/item/flame/fuelled/lighter/random,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"dZ" = (
+/obj/structure/girder,
+/obj/item/stack/material/plank/mapped/sif,
+/turf/floor/plating,
+/area/cynosure_submap/Shelter1)
+"ee" = (
+/obj/item/stack/material/plank/mapped/sif,
+/obj/item/stack/material/rods/mapped/steel,
+/obj/item/shard/shrapnel,
+/turf/floor/plating,
+/area/cynosure_submap/Shelter1)
+"eM" = (
+/turf/wall/log/sif,
+/area/cynosure_submap/Shelter1)
+"eT" = (
+/obj/random/junk,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/Shelter1)
+"gc" = (
+/obj/structure/loot_pile/surface/bones,
+/obj/item/radio,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"hd" = (
+/obj/structure/table/sif,
+/obj/item/binoculars,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"hl" = (
+/obj/structure/flora/grass/both,
+/turf/floor/grass/sif,
+/area/cynosure_submap/Shelter1)
+"iC" = (
+/obj/structure/girder,
+/turf/floor/plating,
+/area/cynosure_submap/Shelter1)
+"jd" = (
+/obj/structure/table/sif,
+/obj/random/mug,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"lg" = (
+/turf/template_noop,
+/area/template_noop)
+"lO" = (
+/obj/structure/closet/secure_closet/freezer/fridge,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"mc" = (
+/obj/structure/hygiene/toilet,
+/turf/floor/tiled,
+/area/cynosure_submap/Shelter1)
+"mw" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"sh" = (
+/obj/item/stack/material/plank/mapped/sif,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/Shelter1)
+"sv" = (
+/obj/structure/fence,
+/turf/floor/dirt,
+/area/cynosure_submap/Shelter1)
+"sI" = (
+/obj/structure/fence{
+	dir = 8;
+	icon_state = "straight"
+	},
+/turf/floor/grass/sif,
+/area/cynosure_submap/Shelter1)
+"uf" = (
+/obj/structure/table/sif,
+/obj/machinery/microwave,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"uZ" = (
+/obj/item/shard/shrapnel,
+/obj/item/stack/material/sheet/mapped/steel,
+/turf/floor/plating,
+/area/cynosure_submap/Shelter1)
+"wc" = (
+/obj/structure/fence/door{
+	dir = 1
+	},
+/turf/floor/dirt,
+/area/cynosure_submap/Shelter1)
+"xq" = (
+/obj/item/stack/material/plank/mapped/sif,
+/obj/random/hostile/hivebot/melee,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/Shelter1)
+"xv" = (
+/turf/floor/tiled,
+/area/cynosure_submap/Shelter1)
+"xQ" = (
+/obj/structure/flora/grass/brown,
+/turf/floor/grass/sif,
+/area/cynosure_submap/Shelter1)
+"ye" = (
+/obj/effect/decal/cleanable/blood/oil,
+/obj/item/stack/material/sheet/mapped/steel,
+/turf/floor/tiled,
+/area/cynosure_submap/Shelter1)
+"yg" = (
+/turf/floor/grass/sif,
+/area/cynosure_submap/Shelter1)
+"yr" = (
+/obj/item/remains/human,
+/turf/floor/dirt,
+/area/cynosure_submap/Shelter1)
+"yD" = (
+/obj/structure/fire_source/fireplace,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"zh" = (
+/obj/effect/decal/cleanable/blood/oil,
+/obj/effect/gibspawner/robot,
+/turf/floor/reinforced,
+/area/cynosure_submap/Shelter1)
+"zv" = (
+/obj/structure/fence/cut/large,
+/turf/floor/dirt,
+/area/cynosure_submap/Shelter1)
+"zz" = (
+/obj/effect/gibspawner/robot,
+/turf/floor/reinforced,
+/area/cynosure_submap/Shelter1)
+"zX" = (
+/obj/item/stack/material/log/mapped/ebony/fifty,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"AT" = (
+/obj/structure/door/sif,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"AU" = (
+/obj/random/hostile/hivebot/ranged,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"BJ" = (
+/obj/structure/window/basic/full,
+/obj/structure/curtain/black,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"Fa" = (
+/turf/wall/titanium,
+/area/cynosure_submap/Shelter1)
+"Fp" = (
+/turf/template_noop,
+/area/cynosure_submap/Shelter1)
+"HH" = (
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/Shelter1)
+"HT" = (
+/obj/structure/table/sif,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/random/coin,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"IT" = (
+/obj/random/scrapped_shotgun,
+/obj/random/toolbox,
+/obj/effect/gibspawner/human,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"Je" = (
+/obj/structure/closet/cabinet,
+/obj/item/mop,
+/obj/random/soap,
+/obj/random/medical,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/Shelter1)
+"Jp" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/dirt,
+/area/cynosure_submap/Shelter1)
+"JD" = (
+/obj/structure/closet/cabinet,
+/obj/item/clothing/permit/gun/planetside,
+/obj/item/clothing/suit/armor/pcarrier/light,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/shoes/winterboots,
+/obj/item/tool/machete,
+/obj/item/wallet/random,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"JR" = (
+/turf/floor/dirt,
+/area/cynosure_submap/Shelter1)
+"Kf" = (
+/obj/structure/fence,
+/turf/floor/rock,
+/area/cynosure_submap/Shelter1)
+"Lp" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/rock,
+/area/cynosure_submap/Shelter1)
+"LB" = (
+/obj/random/trash,
+/obj/random/junk,
+/obj/random/hostile/hivebot/melee,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"Mw" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/floor/dirt,
+/area/cynosure_submap/Shelter1)
+"MR" = (
+/obj/structure/girder/displaced,
+/turf/floor/plating,
+/area/cynosure_submap/Shelter1)
+"Nx" = (
+/obj/structure/fence{
+	dir = 4
+	},
+/turf/floor/grass/sif,
+/area/cynosure_submap/Shelter1)
+"OO" = (
+/obj/structure/loot_pile/maint/junk,
+/turf/floor/dirt,
+/area/cynosure_submap/Shelter1)
+"Pg" = (
+/turf/floor/dirt,
+/area/template_noop)
+"PS" = (
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"Ro" = (
+/obj/structure/hygiene/sink{
+	pixel_y = 17
+	},
+/obj/structure/mirror{
+	pixel_y = 32
+	},
+/turf/floor/tiled,
+/area/cynosure_submap/Shelter1)
+"RV" = (
+/obj/item/shard/shrapnel,
+/turf/floor/reinforced,
+/area/cynosure_submap/Shelter1)
+"Vv" = (
+/obj/item/stack/material/sheet/mapped/steel,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/Shelter1)
+"WG" = (
+/obj/item/stack/material/plank/mapped/sif,
+/obj/item/shard/shrapnel,
+/turf/floor/rock,
+/area/cynosure_submap/Shelter1)
+"WI" = (
+/turf/floor/reinforced,
+/area/cynosure_submap/Shelter1)
+"Xl" = (
+/obj/structure/fence,
+/turf/floor/grass/sif,
+/area/cynosure_submap/Shelter1)
+"YM" = (
+/obj/structure/flora/bush/brflowers,
+/turf/floor/grass/sif,
+/area/cynosure_submap/Shelter1)
+"YV" = (
+/obj/item/stack/material/sheet/mapped/steel,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"Zb" = (
+/obj/structure/chair/comfy/brown,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+"Zj" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/mime,
+/turf/floor/wood/sif,
+/area/cynosure_submap/Shelter1)
+
+(1,1,1) = {"
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+"}
+(2,1,1) = {"
+lg
+eM
+eM
+BJ
+eM
+eM
+yg
+hl
+yg
+Fp
+Fp
+xQ
+yg
+Fp
+lg
+"}
+(3,1,1) = {"
+lg
+eM
+gc
+Zb
+dO
+eM
+eM
+eM
+eM
+BJ
+BJ
+BJ
+eM
+Fp
+lg
+"}
+(4,1,1) = {"
+lg
+BJ
+PS
+cu
+PS
+eM
+hd
+HT
+eM
+uf
+lO
+jd
+eM
+yg
+lg
+"}
+(5,1,1) = {"
+lg
+eM
+JD
+Zj
+AU
+AT
+PS
+sh
+PS
+PS
+cu
+PS
+eM
+Fp
+lg
+"}
+(6,1,1) = {"
+lg
+eM
+eM
+eM
+ee
+eM
+xq
+WI
+iC
+IT
+mw
+LB
+eM
+Fp
+lg
+"}
+(7,1,1) = {"
+lg
+Fp
+eM
+Ro
+xv
+MR
+Fa
+RV
+Fa
+eM
+eM
+PS
+eM
+yg
+lg
+"}
+(8,1,1) = {"
+lg
+OO
+eM
+mc
+ye
+Fa
+Fa
+zz
+Fa
+Fa
+Vv
+cu
+BJ
+YM
+Pg
+"}
+(9,1,1) = {"
+Pg
+Mw
+eM
+Je
+WI
+WI
+zz
+zh
+WI
+WI
+WI
+YV
+AT
+JR
+lg
+"}
+(10,1,1) = {"
+Pg
+JR
+eM
+dZ
+bH
+Fa
+Fa
+zz
+MR
+Fa
+sh
+PS
+BJ
+YM
+lg
+"}
+(11,1,1) = {"
+lg
+JR
+wc
+Jp
+JR
+WG
+iC
+WI
+dZ
+eT
+PS
+PS
+eM
+yg
+lg
+"}
+(12,1,1) = {"
+lg
+hl
+sI
+Fp
+yr
+JR
+Lp
+WI
+uZ
+HH
+yD
+zX
+eM
+yg
+lg
+"}
+(13,1,1) = {"
+lg
+Fp
+Nx
+Xl
+Xl
+sv
+zv
+Kf
+eM
+BJ
+eM
+BJ
+eM
+Fp
+lg
+"}
+(14,1,1) = {"
+lg
+Fp
+Fp
+Fp
+Fp
+Fp
+JR
+JR
+xQ
+yg
+yg
+Fp
+Fp
+Fp
+lg
+"}
+(15,1,1) = {"
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+lg
+"}

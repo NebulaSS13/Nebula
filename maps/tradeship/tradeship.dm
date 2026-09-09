@@ -50,6 +50,8 @@
 
 	#include "../../mods/mobs/borers/_borers.dme"
 	#include "../../mods/mobs/dionaea/_dionaea.dme"
+	#include "../../mods/mobs/spiders/_spiders.dme"
+	#include "../../mods/mobs/skathari/_skathari.dme"
 
 	#include "../../mods/species/tajaran/_tajaran.dme"
 	#include "../../mods/species/unathi/_unathi.dme"

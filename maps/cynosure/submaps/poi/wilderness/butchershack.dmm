@@ -1,0 +1,236 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/wall/log/sif,
+/area/cynosure_submap/ButcherShack)
+"c" = (
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"d" = (
+/obj/structure/closet,
+/obj/effect/decal/cleanable/cobweb,
+/obj/item/beartrap,
+/obj/item/beartrap,
+/obj/item/stack/package_wrap,
+/obj/item/knife/hook,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"e" = (
+/obj/structure/closet/secure_closet/freezer/meat,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"f" = (
+/obj/structure/closet/crate/freezer,
+/obj/effect/decal/cleanable/blood/gibs,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/ButcherShack)
+"g" = (
+/obj/machinery/gibber,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"h" = (
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/ButcherShack)
+"i" = (
+/obj/structure/window/basic,
+/obj/structure/curtain,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/ButcherShack)
+"j" = (
+/turf/template_noop,
+/area/cynosure_submap/ButcherShack)
+"k" = (
+/obj/structure/door/sif,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"l" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/floor/dirt,
+/area/cynosure_submap/ButcherShack)
+"m" = (
+/obj/structure/meat_hook,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"n" = (
+/obj/structure/meat_hook,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"o" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"p" = (
+/obj/structure/table,
+/obj/item/clothing/suit/chef/classic,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"q" = (
+/obj/structure/table,
+/obj/effect/decal/cleanable/blood,
+/obj/item/knife/kitchen/cleaver,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/ButcherShack)
+"r" = (
+/obj/structure/table,
+/obj/item/food/butchery/cutlet,
+/obj/item/food/butchery/cutlet,
+/obj/item/food/butchery/cutlet,
+/obj/item/food/sausage,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"s" = (
+/obj/structure/coatrack,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"t" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/brown,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+"u" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/wood/broken/sif,
+/area/cynosure_submap/ButcherShack)
+"v" = (
+/turf/floor/dirt,
+/area/cynosure_submap/ButcherShack)
+"w" = (
+/obj/structure/window/basic,
+/obj/structure/curtain,
+/turf/floor/wood/sif,
+/area/cynosure_submap/ButcherShack)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+j
+j
+a
+"}
+(3,1,1) = {"
+a
+b
+d
+h
+c
+s
+b
+b
+v
+a
+"}
+(4,1,1) = {"
+a
+b
+m
+c
+p
+o
+u
+k
+v
+a
+"}
+(5,1,1) = {"
+a
+b
+n
+c
+q
+c
+b
+b
+v
+a
+"}
+(6,1,1) = {"
+a
+b
+e
+c
+r
+c
+i
+l
+v
+a
+"}
+(7,1,1) = {"
+a
+b
+f
+o
+c
+h
+w
+l
+v
+a
+"}
+(8,1,1) = {"
+a
+b
+g
+c
+c
+t
+b
+v
+j
+a
+"}
+(9,1,1) = {"
+a
+b
+b
+b
+b
+b
+b
+j
+j
+a
+"}
+(10,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

@@ -15,7 +15,6 @@
 
 /obj/machinery/auto_cloner/proc/get_hostile_mob_types()
 	. = list(
-		/mob/living/simple_animal/hostile/giant_spider/nurse,
 		/mob/living/simple_animal/hostile/bear,
 		/mob/living/simple_animal/hostile/creature
 	)
@@ -28,7 +27,7 @@
 		/mob/living/simple_animal/fowl/chicken,
 		/mob/living/simple_animal/cow,
 		/mob/living/simple_animal/hostile/parrot,
-		/mob/living/simple_animal/crab,
+		/mob/living/simple_animal/passive/crab,
 		/mob/living/simple_animal/passive/mouse,
 		/mob/living/simple_animal/passive/mouse/rat,
 		/mob/living/simple_animal/hostile/goat,

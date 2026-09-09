@@ -318,3 +318,11 @@
 	color = "#484848"
 	value = 0.5
 	narcosis = 5
+
+/decl/material/solid/organic/mold
+	name = "mold"
+	uid = "solid_mold"
+	lore_text = "A mold is a fungus that causes biodegradation of natural materials. This variant contains mycotoxins, and is dangerous to humans."
+	taste_description = "mold"
+	toxicity = 5
+	color = "#635656"

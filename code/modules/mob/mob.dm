@@ -303,6 +303,7 @@ var/global/const/ACTION_DANGER_ALL = 2
 
 #define ENCUMBERANCE_MOVEMENT_MOD 0.35
 /mob/proc/get_movement_delay(var/travel_dir)
+	SHOULD_CALL_PARENT(TRUE)
 	. = 0
 	if(isturf(loc))
 		var/turf/T = loc
@@ -316,6 +317,9 @@ var/global/const/ACTION_DANGER_ALL = 2
 		. += move_intent.move_delay
 	else
 		. += _automove_delay
+	for(var/modifier_type in get_mob_modifiers())
+		var/decl/mob_modifier/modifier = RESOLVE_TO_DECL(modifier_type)
+		. += modifier.movement_slowdown
 	. = max(. + (ENCUMBERANCE_MOVEMENT_MOD * encumbrance()), 1)
 
 #undef ENCUMBERANCE_MOVEMENT_MOD
@@ -1610,6 +1614,9 @@ var/global/const/ACTION_DANGER_ALL = 2
 /mob/proc/is_cloaked()
 	return FALSE
 
+/mob/proc/is_fully_cloaked()
+	return is_cloaked()
+
 /mob/proc/get_background_datum_by_flag(background_flag)
 	var/list/all_categories = global.using_map.get_background_categories()
 	for(var/cat_type in all_categories)
@@ -1623,3 +1630,19 @@ var/global/const/ACTION_DANGER_ALL = 2
 // Check if this mob can full-auto fire a gun at a target.
 /mob/proc/mob_can_autofire(obj/item/gun/gun, atom/target)
 	return TRUE // TODO: dexterity check? That will be handled by the item itself probably.
+
+// Stubs to make some AI logic easier to write.
+/mob/proc/can_cloak(ignore_timing = FALSE)
+	return FALSE
+
+/mob/proc/apply_cloak()
+	return
+
+/mob/proc/remove_cloak()
+	return
+
+/mob/proc/get_available_maneuvers()
+	return
+
+/mob/proc/get_acrobatics_multiplier(var/decl/maneuver/attempting_maneuver)
+	return 1
