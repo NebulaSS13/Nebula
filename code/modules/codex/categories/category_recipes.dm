@@ -125,7 +125,11 @@
 			product_name = initial(recipe_product.name)
 			lore_text ||= initial(recipe_product.desc)
 		product_link ||= "\a [product_name]"
-		mechanics_text += "<br>This recipe takes [ceil(recipe.cooking_time/(1 SECOND))] second\s to cook in [english_list(cooking_methods, and_text = " or ")] and creates [product_link]."
+		var/cook_string = english_list(cooking_methods, and_text = " or ")
+		if(cook_string)
+			mechanics_text += "<br>This recipe takes [ceil(recipe.cooking_time/(1 SECOND))] second\s to cook in [cook_string] and creates [product_link]."
+		else
+			mechanics_text += "<br>This recipe takes [ceil(recipe.cooking_time/(1 SECOND))] second\s to cook in a microwave and creates [product_link]."
 
 		var/recipe_name = recipe.display_name || sanitize(product_name)
 		guide_html += "<h3>[capitalize(recipe_name)]</h3>Cook [english_list(ingredients)] for [ceil(recipe.cooking_time/(1 SECOND))] second\s."
