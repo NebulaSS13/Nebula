@@ -1,6 +1,7 @@
 /mob/living/simple_animal/mob_mimic
 	natural_weapon = null
 	projectiletype = null
+	faction        = null
 
 	var/copy_health = TRUE
 
@@ -65,11 +66,15 @@
 	cut_overlays()
 	try_refresh_visible_overlays()
 
+/mob/living/simple_animal/mob_mimic/proc/prepare_mimic(mob/living/mimic)
+	return
+
 // For some reason mobs like humans do not fully apply their appearance by the time this proc runs without sleep().
 // The sleep is only applied the first time this type is created so should not be a big issue in practice.
 /mob/living/simple_animal/mob_mimic/proc/cache_and_apply_mimic()
 	set waitfor = FALSE
 	var/mob/living/mimic = new mimic_mob
+	prepare_mimic(mimic)
 	sleep(5)
 	_mob_mimic_type_to_appearance[mimic_mob] = mimic.appearance
 	_mob_mimic_type_to_synthetic[mimic_mob]  = mimic.isSynthetic()

@@ -162,3 +162,20 @@
 
 /mob/living/exosuit/premade/random/extra/Initialize(mapload, var/obj/structure/heavy_vehicle_frame/source_frame)
 	. = ..(mapload, source_frame, super_random = TRUE)
+
+/mob/living/simple_animal/mob_mimic/exosuit
+	faction = "killbots"
+	ai = /datum/mob_controller/aggressive
+	abstract_type = /mob/living/simple_animal/mob_mimic/exosuit
+
+/mob/living/simple_animal/mob_mimic/exosuit/update_mob_values()
+	. = ..()
+	SetName("autonomous [name]")
+
+/mob/living/simple_animal/mob_mimic/exosuit/prepare_mimic(mob/living/mimic)
+	if(!istype(mimic, /mob/living/exosuit))
+		return
+	var/mob/living/exosuit/mimech = mimic
+	mimech.hatch_closed = TRUE
+	mimech.power = MECH_POWER_ON
+	mimech.update_icon()

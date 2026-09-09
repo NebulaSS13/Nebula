@@ -2,6 +2,9 @@
 	name = "power loader"
 	desc = "An ancient, but well-liked cargo handling exosuit."
 
+/mob/living/simple_animal/mob_mimic/exosuit/powerloader
+	mimic_mob = /mob/living/exosuit/premade/powerloader
+
 /obj/item/mech_component/manipulators/powerloader/painted
 	color = "#ffbc37"
 
@@ -122,6 +125,9 @@
 /mob/living/exosuit/premade/firefighter
 	name = "firefighting exosuit"
 	desc = "A mix and match of industrial parts designed to withstand fires."
+
+/mob/living/simple_animal/mob_mimic/exosuit/firefighter
+	mimic_mob = /mob/living/exosuit/premade/firefighter
 
 /mob/living/exosuit/premade/firefighter/Initialize()
 	if(!arms)

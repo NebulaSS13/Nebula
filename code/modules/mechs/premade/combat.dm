@@ -2,6 +2,9 @@
 	name = "combat exosuit"
 	desc = "A sleek, modern combat exosuit."
 
+/mob/living/simple_animal/mob_mimic/exosuit/combat
+	mimic_mob = /mob/living/exosuit/premade/combat
+
 /mob/living/exosuit/premade/combat/Initialize()
 	if(!arms)
 		arms = new /obj/item/mech_component/manipulators/combat/painted(src)
@@ -24,8 +27,14 @@
 /mob/living/exosuit/premade/combat/military
 	decal = "cammo1"
 
+/mob/living/simple_animal/mob_mimic/exosuit/military
+	mimic_mob = /mob/living/exosuit/premade/combat/military
+
 /mob/living/exosuit/premade/combat/military/alpine
 	decal = "cammo2"
+
+/mob/living/simple_animal/mob_mimic/exosuit/alpine
+	mimic_mob = /mob/living/exosuit/premade/combat/military/alpine
 
 /mob/living/exosuit/premade/combat/military/Initialize()
 	. = ..()
