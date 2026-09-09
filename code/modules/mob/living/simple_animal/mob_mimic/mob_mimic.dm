@@ -1,23 +1,59 @@
+/mob/proc/get_armor_for_mimic()
+	RETURN_TYPE(/list)
+	return null
+
+/mob/living/human/get_armor_for_mimic()
+	return get_bodytype()?.natural_armour_values
+
+/mob/living/simple_animal/get_armor_for_mimic()
+	return natural_armor
+
+/mob/living/exosuit/get_armor_for_mimic()
+	if(body?.m_armour)
+		var/datum/extension/armor/armor = get_extension(body.m_armour, /datum/extension/armor)
+		return armor?.armor_values
+
+/mob/proc/get_movement_delay_for_mimic()
+	return 0
+
+/mob/living/simple_animal/get_movement_delay_for_mimic()
+	return base_movement_delay
+
+/mob/living/human/get_movement_delay_for_mimic()
+	return get_config_value(/decl/config/num/movement_run)
+
+/mob/living/exosuit/get_movement_delay_for_mimic()
+	return legs?.move_delay || /obj/item/mech_component/propulsion::move_delay
+
 /mob/living/simple_animal/mob_mimic
 	natural_weapon = null
 	projectiletype = null
 	faction        = null
 
 	var/copy_health = TRUE
-
 	var/mob/living/mimic_mob
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_appearance = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_synthetic  = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_overlays   = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_underlays  = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_eyes       = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_eye_color  = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_projectile = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_melee      = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_health     = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_offset_x   = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_offset_y   = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_bodytype   = alist()
+
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_appearance  = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_synthetic   = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_overlays    = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_underlays   = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_eyes        = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_eye_color   = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_projectile  = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_melee       = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_health      = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_offset_x    = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_offset_y    = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_slowdown    = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_turn_sound  = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_step_sound  = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_bodytype    = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_bump_flags  = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_swap_flags  = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_push_flags  = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_always_swap = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_anchored    = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_armor       = alist()
 
 /mob/living/simple_animal/mob_mimic/isSynthetic()
 	return !!_mob_mimic_type_to_synthetic[mimic_mob]
@@ -31,8 +67,8 @@
 /mob/living/simple_animal/mob_mimic/LateInitialize()
 	. = ..()
 	if(_mob_mimic_type_to_appearance[mimic_mob])
-		update_mob_values()
 		update_icon()
+		update_mob_values()
 	else
 		cache_and_apply_mimic()
 
@@ -66,45 +102,79 @@
 	cut_overlays()
 	try_refresh_visible_overlays()
 
+// These procs use get_effective_obj() so they can mimic mechs.
+/mob/living/simple_animal/mob_mimic/proc/get_best_projectile(mob/living/mimic)
+	for(var/obj/item/thing in mimic.get_held_items())
+		var/obj/item/gun/gun = thing.get_effective_obj()
+		var/proj = istype(gun) && gun.consume_next_projectile(mimic)
+		if(proj)
+			return proj
+
+/mob/living/simple_animal/mob_mimic/proc/get_best_melee_weapon(mob/living/mimic)
+	var/obj/item/strongest
+	for(var/obj/item/thing in mimic.get_held_items())
+		thing = thing.get_effective_obj()
+		if(!strongest || thing.get_base_attack_force() > strongest.get_base_attack_force())
+			strongest = thing
+	. = strongest
+	if(.)
+		mimic.drop_from_inventory(strongest)
+
 /mob/living/simple_animal/mob_mimic/proc/prepare_mimic(mob/living/mimic)
+	return
+
+/mob/living/simple_animal/mob_mimic/proc/handle_additional_mimic(mob/living/mimic)
 	return
 
 // For some reason mobs like humans do not fully apply their appearance by the time this proc runs without sleep().
 // The sleep is only applied the first time this type is created so should not be a big issue in practice.
 /mob/living/simple_animal/mob_mimic/proc/cache_and_apply_mimic()
 	set waitfor = FALSE
+
 	var/mob/living/mimic = new mimic_mob
 	prepare_mimic(mimic)
 	sleep(5)
-	_mob_mimic_type_to_appearance[mimic_mob] = mimic.appearance
-	_mob_mimic_type_to_synthetic[mimic_mob]  = mimic.isSynthetic()
-	_mob_mimic_type_to_overlays[mimic_mob]   = mimic.get_all_current_mob_overlays()?.Copy()
-	_mob_mimic_type_to_underlays[mimic_mob]  = mimic.get_all_current_mob_underlays()?.Copy()
-	_mob_mimic_type_to_eyes[mimic_mob]       = mimic.get_eye_overlay()
-	_mob_mimic_type_to_eye_color[mimic_mob]  = mimic.get_eye_colour()
-	_mob_mimic_type_to_health[mimic_mob]     = mimic.get_max_health()
-	_mob_mimic_type_to_offset_x[mimic_mob]   = mimic.default_pixel_x
-	_mob_mimic_type_to_offset_y[mimic_mob]   = mimic.default_pixel_y
+	handle_additional_mimic(mimic)
+
+	_mob_mimic_type_to_appearance[mimic_mob]  = mimic.appearance
+	_mob_mimic_type_to_synthetic[mimic_mob]   = mimic.isSynthetic()
+	_mob_mimic_type_to_overlays[mimic_mob]    = mimic.get_all_current_mob_overlays()?.Copy()
+	_mob_mimic_type_to_underlays[mimic_mob]   = mimic.get_all_current_mob_underlays()?.Copy()
+	_mob_mimic_type_to_eyes[mimic_mob]        = mimic.get_eye_overlay()
+	_mob_mimic_type_to_eye_color[mimic_mob]   = mimic.get_eye_colour()
+	_mob_mimic_type_to_health[mimic_mob]      = mimic.get_max_health()
+	_mob_mimic_type_to_offset_x[mimic_mob]    = mimic.default_pixel_x
+	_mob_mimic_type_to_offset_y[mimic_mob]    = mimic.default_pixel_y
+	_mob_mimic_type_to_slowdown[mimic_mob]    = mimic.get_movement_delay_for_mimic()
+	_mob_mimic_type_to_step_sound[mimic_mob]  = mimic.get_footstep_sound()
+	_mob_mimic_type_to_turn_sound[mimic_mob]  = mimic.get_turn_sound()
+	_mob_mimic_type_to_bump_flags[mimic_mob]  = mimic.mob_bump_flag
+	_mob_mimic_type_to_swap_flags[mimic_mob]  = mimic.mob_swap_flags
+	_mob_mimic_type_to_push_flags[mimic_mob]  = mimic.mob_push_flags
+	_mob_mimic_type_to_always_swap[mimic_mob] = mimic.mob_always_swap
+	_mob_mimic_type_to_anchored[mimic_mob]    = mimic.anchored
+	_mob_mimic_type_to_armor[mimic_mob]       = mimic.get_armor_for_mimic()?.Copy()
 
 	var/decl/bodytype/bodytype = mimic.get_bodytype()
 	_mob_mimic_type_to_bodytype[mimic_mob] = bodytype?.simple_variant
 
 	if(isnull(projectiletype))
-		var/obj/item/gun/gun = locate() in mimic.get_held_items()
-		_mob_mimic_type_to_projectile[mimic_mob] = gun?.consume_next_projectile(mimic)
+		_mob_mimic_type_to_projectile[mimic_mob] = get_best_projectile(mimic)
 
 	if(isnull(natural_weapon))
-		var/obj/item/strongest
-		for(var/obj/item/thing in mimic.get_held_items())
-			if(!strongest || thing.get_base_attack_force() > strongest.get_base_attack_force())
-				strongest = thing
+		var/obj/item/strongest = get_best_melee_weapon(mimic)
 		if(strongest)
 			_mob_mimic_type_to_melee[mimic_mob] = strongest
-			mimic.drop_from_inventory(strongest)
 
 	qdel(mimic)
-	update_mob_values()
 	update_icon()
+	update_mob_values()
+
+/mob/living/simple_animal/mob_mimic/get_turn_sound()
+	return _mob_mimic_type_to_turn_sound[mimic_mob] || ..()
+
+/mob/living/simple_animal/mob_mimic/get_footstep_sound(turf/step_turf)
+	return _mob_mimic_type_to_step_sound[mimic_mob] || ..()
 
 /mob/living/simple_animal/mob_mimic/proc/update_mob_values()
 
@@ -122,6 +192,14 @@
 	default_pixel_x = _mob_mimic_type_to_offset_x[mimic_mob]
 	default_pixel_y = _mob_mimic_type_to_offset_y[mimic_mob]
 	reset_offsets()
+
+	mob_bump_flag       = _mob_mimic_type_to_bump_flags[mimic_mob]
+	mob_swap_flags      = _mob_mimic_type_to_swap_flags[mimic_mob]
+	mob_push_flags      = _mob_mimic_type_to_push_flags[mimic_mob]
+	mob_always_swap     = _mob_mimic_type_to_always_swap[mimic_mob]
+	anchored            = _mob_mimic_type_to_anchored[mimic_mob]
+	base_movement_delay = _mob_mimic_type_to_slowdown[mimic_mob]
+	natural_armor       = _mob_mimic_type_to_armor[mimic_mob]
 
 	var/obj/item/projectile/proj = _mob_mimic_type_to_projectile[mimic_mob]
 	if(istype(proj))

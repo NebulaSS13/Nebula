@@ -1,5 +1,5 @@
 /mob/living/exosuit/premade/heavy
-	name = "Heavy exosuit"
+	name = "heavy exosuit"
 	desc = "A heavily armored combat exosuit."
 
 /mob/living/simple_animal/mob_mimic/exosuit/heavy

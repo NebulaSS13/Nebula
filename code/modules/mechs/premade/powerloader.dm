@@ -111,13 +111,13 @@
 	install_system(new /obj/item/mech_equipment/mounted_system/melee/machete(src), HARDPOINT_RIGHT_HAND)
 
 /mob/living/exosuit/premade/powerloader/flames_red
-	name = "APLU \"Firestarter\""
+	name = "\improper APLU \"Firestarter\""
 	desc = "An ancient, but well-liked cargo handling exosuit. This one has cool red flames."
 	decal = "flames_red"
 	decal_blend = BLEND_OVERLAY
 
 /mob/living/exosuit/premade/powerloader/flames_blue
-	name = "APLU \"Burning Chrome\""
+	name = "\improper APLU \"Burning Chrome\""
 	desc = "An ancient, but well-liked cargo handling exosuit. This one has cool blue flames."
 	decal = "flames_blue"
 	decal_blend = BLEND_OVERLAY

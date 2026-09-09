@@ -1,3 +1,7 @@
+/datum/mob_controller/aggressive/malf_frame
+	emote_speech = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
+	emote_see    = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
+
 /decl/outfit/utility_frame
 	abstract_type = /decl/outfit/utility_frame
 	name          = "Utility Frame"
@@ -108,7 +112,7 @@
 	spawn_stripe_color = COLOR_BROWN
 
 /mob/living/simple_animal/mob_mimic/malf_frame
-	ai = /datum/mob_controller/aggressive
+	ai = /datum/mob_controller/aggressive/malf_frame
 	abstract_type = /mob/living/simple_animal/mob_mimic/malf_frame
 
 /mob/living/simple_animal/mob_mimic/malf_frame/combat
