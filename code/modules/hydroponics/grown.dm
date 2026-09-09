@@ -1,3 +1,7 @@
+/datum/codex_entry/fruit_and_veg
+	name = "fruits and vegetables"
+	mechanics_text = "Fruits and vegetables are grown from seeds in hydroponics or farm plots. Some can have seeds extracted using a sharp knife to grow more.<br>Chopping, slicing or crushing growns with a knife is used to prepare them for other recipes."
+
 //Grown foods.
 /obj/item/food/grown
 	name = "produce"
@@ -16,6 +20,9 @@
 	var/work_skill = SKILL_BOTANY
 	var/seeds_extracted = FALSE
 	var/datum/seed/seed
+
+/obj/item/food/grown/get_codex_value()
+	return /datum/codex_entry/fruit_and_veg::name
 
 // This is sort of pointless while food is a valid input on the ChemMaster but maybe
 // in the future there will be some more interesting ways to process growns/food.

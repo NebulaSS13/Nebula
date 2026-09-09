@@ -54,7 +54,7 @@ var/global/repository/atom_info/atom_info_repository = new()
 		origin_tech_cache[key] = cached_json_decode(item_instance.get_origin_tech())
 	if(cache_codex && !(key in codex_cache))
 		instance = instance || get_instance_of(_path, _mat, _amount)
-		codex_cache[key] = instance.get_atom_codex_entry() || FALSE
+		codex_cache[key] = instance.get_atom_codex_entry(permanent = TRUE) || FALSE
 
 	if(!QDELETED(instance))
 		qdel(instance)

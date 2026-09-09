@@ -94,21 +94,20 @@
 			var/count = recipe.items[thing]
 			var/thing_name = initial(thing.name)
 
-			var/datum/codex_entry/thing_entry = SScodex.get_codex_entry(thing)
+			var/datum/codex_entry/thing_entry
 			if(ispath(thing, /atom/movable) && TYPE_IS_SPAWNABLE(thing))
 				thing_name = atom_info_repository.get_name_for(thing)
-				thing_entry = atom_info_repository.get_codex_page_for(thing)
+				thing_entry ||= atom_info_repository.get_codex_page_for(thing)
 
-			if(SScodex.get_entry_by_string(thing_name))
-				thing_name = "<l>[thing_name]</l>"
-			else
-				thing_entry ||= SScodex.get_codex_entry(thing_name, do_search = TRUE)
-				if(thing_entry)
-					thing_name = "<span codexlink='[thing_entry.name]'>[thing_name]</span>"
+			thing_entry ||= SScodex.get_codex_entry(thing_name, do_search = TRUE)
+			if(thing_entry)
+				thing_name = "<span codexlink='[thing_entry.name]'>[thing_name]</span>"
 
 			ingredients += (count > 1) ? "[count]x [thing_name]" : "\a [thing_name]"
+
 		for(var/thing in recipe.fruit)
-			ingredients += "[recipe.fruit[thing]] [thing]\s"
+			ingredients += "[recipe.fruit[thing]] <span codexlink='[/datum/codex_entry/fruit_and_veg::name]'>[thing]\s</span>"
+
 		mechanics_text += "<ul><li>[jointext(ingredients, "</li><li>")]</li></ul>"
 
 		var/list/cooking_methods = list()
@@ -131,9 +130,8 @@
 			product_name = initial(recipe_product.name)
 			lore_text ||= initial(recipe_product.desc)
 		product_link ||= "\a [product_name]"
-		var/cook_string = english_list(cooking_methods, and_text = " or ")
-		if(cook_string)
-			mechanics_text += "<br>This recipe takes [ceil(recipe.cooking_time/(1 SECOND))] second\s to cook in [cook_string] and creates [product_link]."
+		if(length(cooking_methods))
+			mechanics_text += "<br>This recipe takes [ceil(recipe.cooking_time/(1 SECOND))] second\s to cook in [english_list(cooking_methods, and_text = " or ")] and creates [product_link]."
 		else
 			mechanics_text += "<br>This recipe takes [ceil(recipe.cooking_time/(1 SECOND))] second\s to cook in a microwave and creates [product_link]."
 

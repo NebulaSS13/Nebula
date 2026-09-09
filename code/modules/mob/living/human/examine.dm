@@ -4,12 +4,6 @@
 	var/list/mob_intro = "[user == src ? "You are" : "This is"] <EM>[name]</EM>"
 	if(!(hideflags & HIDEJUMPSUIT) || !(hideflags & HIDEFACE))
 
-		var/show_codex = user.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_ON && user.can_use_codex()
-		if(show_codex)
-			var/datum/codex_entry/mob_codex = get_atom_codex_entry(user)
-			if(mob_codex)
-				mob_intro += "<sup><a href='byond://?src=\ref[SScodex];show_examined_info=\ref[mob_codex];show_to=\ref[user]'>?</a></sup>"
-
 		var/species_name = "\improper "
 		if(isSynthetic() && species.cyborg_noun)
 			species_name += "[species.cyborg_noun] [species.name]"
@@ -17,10 +11,10 @@
 			species_name += "[species.name]"
 		mob_intro += ", <b><font color='[species.get_species_flesh_color(src)]'>\a [species_name]</font></b>"
 
-		if(show_codex)
+		if(user.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_ON && user.can_use_codex())
 			var/datum/codex_entry/species_codex = SScodex.get_codex_entry("[species.name] (species)")
 			if(species_codex)
-				mob_intro += "<sup><a href='byond://?src=\ref[SScodex];show_examined_info=\ref[species_codex];show_to=\ref[user]'>?</a></sup>"
+				mob_intro += "<small><a href='byond://?src=\ref[SScodex];show_examined_info=\ref[species_codex];show_to=\ref[user]'>?</a></sup>"
 
 	. += SPAN_INFO(JOINTEXT(mob_intro))
 	var/extra_species_text = species.get_additional_examine_text(src)

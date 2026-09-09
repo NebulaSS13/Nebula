@@ -18,6 +18,9 @@
 	/// Used in recipes to distinguish between general types.
 	var/processed_grown_tag
 
+/obj/item/food/processed_grown/get_codex_value()
+	return /datum/codex_entry/fruit_and_veg::name
+
 /obj/item/food/processed_grown/Initialize(mapload, material_key, skip_plate = FALSE, _seed)
 
 	if(isnull(seed) && _seed)
