@@ -23,7 +23,7 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also togglable
 
 		global.all_maps[map_instance.path] = map_instance
 		if(map_instance.votable)
-			global.votable_maps[map_instance.path] = map_instance
+			global.votable_maps[map_instance.full_name] = map_instance
 
 	return 1
 
