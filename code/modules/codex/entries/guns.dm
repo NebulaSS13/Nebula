@@ -11,21 +11,21 @@
 	general_codex_key = "magnetic weapons"
 
 /obj/item/gun/get_antag_info()
+	. = ..()
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
 	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
 	if(general_entry && general_entry.antag_text)
-		return general_entry.antag_text
+		LAZYADD(., general_entry.antag_text)
 
 /obj/item/gun/get_lore_info()
+	. = ..()
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
 	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
-	. = "[desc]<br>"
 	if(general_entry && general_entry.lore_text)
-		. += general_entry.lore_text
+		LAZYADD(., general_entry.lore_text)
 
 /obj/item/gun/get_mechanics_info()
 	var/list/traits = list()
-
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
 	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
 	if(general_entry && general_entry.mechanics_text)
@@ -46,7 +46,8 @@
 	if(LAZYLEN(firemodes) > 1)
 		traits += "It has multiple firemodes. Click it in hand to cycle them."
 
-	return jointext(traits, "<br>")
+	. = ..()
+	LAZYADD(., jointext(traits, "<br>"))
 
 /obj/item/gun/projectile/get_mechanics_info()
 	. = ..()
@@ -70,44 +71,40 @@
 	if(jam_chance)
 		traits += "It's prone to jamming."
 
-	. += jointext(traits, "<br>")
+	LAZYADD(., jointext(traits, "<br>"))
 
 /obj/item/gun/energy/get_mechanics_info()
 	. = ..()
 	var/list/traits = list()
-
-	traits += "<br>Its maximum capacity is [max_shots] shots worth of power."
-
+	traits += "Its maximum capacity is [max_shots] shots worth of power."
 	if(self_recharge)
 		traits += "It recharges itself over time."
-
-	. += jointext(traits, "<br>")
+	LAZYADD(., jointext(traits, "<br>"))
 
 /obj/item/gun/projectile/shotgun/pump/get_mechanics_info()
 	. = ..()
-	. += "<br>To pump it, click it in hand.<br>"
+	LAZYADD(., "To pump it, click it in hand.")
 
 /obj/item/gun/energy/crossbow/get_antag_info()
 	. = ..()
-	. += "This is a stealthy weapon which fires poisoned bolts at your target. When it hits someone, they will suffer a stun effect, in \
-	addition to toxins. The energy crossbow recharges itself slowly, and can be concealed in your pocket or bag.<br>"
+	LAZYADD(., "This is a stealthy weapon which fires poisoned bolts at your target. When it hits someone, they will suffer a stun effect, in \
+	addition to toxins. The energy crossbow recharges itself slowly, and can be concealed in your pocket or bag.")
 
 /obj/item/gun/energy/chameleon/get_antag_info()
 	. = ..()
-	. += "This gun is actually a hologram projector that can alter its appearance to mimick other weapons. To change the appearance, use \
+	LAZYADD(., "This gun is actually a hologram projector that can alter its appearance to mimick other weapons. To change the appearance, use \
 	the appropriate verb in the chameleon items tab. Any beams or projectiles fired from this gun are actually holograms and useless for actual combat. \
-	Projecting these holograms over distance uses a little bit of charge.<br>"
+	Projecting these holograms over distance uses a little bit of charge.")
 
 /obj/item/gun/magnetic/get_mechanics_info()
 	. = ..()
 	if (removable_components)
-		. += "<p>Its cell and capacitor can be removed and replaced. You can remove the components by clicking the gun with an empty hand while it's unloaded.</p>"
+		LAZYADD(., "<p>Its cell and capacitor can be removed and replaced. You can remove the components by clicking the gun with an empty hand while it's unloaded.</p>")
 	if (load_type)
 		var/load_item = new load_type()
-		. += "<p>It accepts [load_item] as ammunition, with a maximum capacity of [load_sheet_max].</p>"
+		LAZYADD(., "<p>It accepts [load_item] as ammunition, with a maximum capacity of [load_sheet_max].</p>")
 	if (gun_unreliable)
-		. += "<p>This weapon is unreliable and has a chance of exploding in your hands when you fire it.</p>"
-
+		LAZYADD(., "<p>This weapon is unreliable and has a chance of exploding in your hands when you fire it.</p>")
 
 /datum/codex_entry/energy_weapons
 	name = "energy weapons"

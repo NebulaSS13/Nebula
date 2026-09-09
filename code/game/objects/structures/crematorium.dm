@@ -15,7 +15,8 @@
 	var/id_tag
 
 /obj/structure/crematorium/get_mechanics_info()
-	return "[..()]<BR>Can be labeled once with a hand labeler."
+	. = ..()
+	LAZYADD(., "Can be labeled once with a hand labeler.")
 
 /obj/structure/crematorium/Initialize(ml, _mat, _reinf_mat)
 	. = ..()

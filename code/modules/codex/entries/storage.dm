@@ -1,6 +1,3 @@
-/obj/item/get_lore_info()
-	return desc
-
 /obj/item/get_mechanics_info()
 	. = ..()
 	var/list/storage_info_list = list()
@@ -43,16 +40,15 @@
 		storage_info_list += "* It can be worn on your [english_list(slots)] by holding the item and clicking on the appropriate slot."
 		if (("back" || "waist") in slots)
 			storage_info_list += "* Storage items worn on the back or waist can be accessed with a simple empty handed click. To remove storage items in these slots, drag the storage item to an empty hand."
-	else
-		storage_info_list += "* It cannot be worn on your body. Please don't try."
+	//else // Keeping this in because it's funny, but it's a bit silly to see it on every /obj/item codex page.
+	//	storage_info_list += "* It cannot be worn on your body. Please don't try."
 
-	return jointext(storage_info_list, "<BR>")
-
-
+	LAZYADD(., jointext(storage_info_list, "<BR>"))
 
 /obj/item/plate/tray/get_mechanics_info()
 	. = ..()
-	. += "<BR><BR>Trays, when put down on a tables, drop all their contents onto the table. If you drop the tray in any other way or hit someone with it, all the items it holds will fall off and scatter. You can also examine a tray to see the contents."
+	LAZYADD(., "Trays, when put down on a tables, drop all their contents onto the table. If you drop the tray in any other way or hit someone with it, all the items it holds will fall off and scatter. You can also examine a tray to see the contents.")
+
 /obj/item/plate/tray/get_lore_info()
 	. = ..()
-	. += "<BR><BR>A simple tool allowing for multiple items to be carried at once while keeping the load more accessible than a box or bag. Used primarily by hospitality workers and other service staff."
+	LAZYADD(., "A simple tool allowing for multiple items to be carried at once while keeping the load more accessible than a box or bag. Used primarily by hospitality workers and other service staff.")

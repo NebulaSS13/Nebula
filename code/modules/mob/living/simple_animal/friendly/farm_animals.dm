@@ -304,7 +304,8 @@ var/global/chicken_count = 0
 	var/examine_difficulty = SKILL_ADEPT
 
 /obj/item/food/egg/get_mechanics_info()
-	return "Eggs are usually obtained from birds. Feeding fowl like chickens with wheat can encourage egg-laying, and if you leave an egg alone for long enough it might hatch."
+	. = ..()
+	LAZYADD(., "Eggs are usually obtained from birds. Feeding fowl like chickens with wheat can encourage egg-laying, and if you leave an egg alone for long enough it might hatch.")
 
 /obj/item/food/egg/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()

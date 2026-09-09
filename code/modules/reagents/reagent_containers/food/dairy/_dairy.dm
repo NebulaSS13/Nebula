@@ -7,7 +7,8 @@
 	var/data_color_field = DATA_MILK_COLOR
 
 /obj/item/food/dairy/get_mechanics_info()
-	return "Dairy products are made from milk, either by skimming or from mixing milk with enzymes or rennet and applying heat. Rennet can be obtained from the stomachs of grazing animals."
+	. = ..()
+	LAZYADD(., "Dairy products are made from milk, either by skimming or from mixing milk with enzymes or rennet and applying heat. Rennet can be obtained from the stomachs of grazing animals.")
 
 // Set default strings so it shows as 'a wedge of cheese' in recipes instead of 'a wedge'.
 /obj/item/food/dairy/Initialize(ml, material_key, skip_plate)

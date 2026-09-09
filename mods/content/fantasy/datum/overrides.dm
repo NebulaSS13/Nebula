@@ -81,4 +81,5 @@
 // Removes references to universal enzyme.
 
 /obj/item/food/dairy/get_mechanics_info()
-	return "Dairy products are made from milk, either by skimming or from mixing milk with rennet and applying heat. Rennet can be obtained from the stomachs of grazing animals."
+	. = ..()
+	LAZYADD(., "Dairy products are made from milk, either by skimming or from mixing milk with rennet and applying heat. Rennet can be obtained from the stomachs of grazing animals.")

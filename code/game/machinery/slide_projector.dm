@@ -24,7 +24,7 @@
 
 /obj/item/slide_projector/get_mechanics_info()
 	. = ..()
-	. += "Use in hand to open the interface."
+	LAZYADD(., "Use in hand to open the interface.")
 
 /obj/item/slide_projector/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(!current_slide)

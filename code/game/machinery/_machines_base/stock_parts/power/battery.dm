@@ -208,16 +208,18 @@
 	charge_wait_counter = 15
 
 /obj/item/stock_parts/power/battery/buildable/crap/get_lore_info()
-	return "The BAT84's debut on the battery backup market was greeted by universally negative reviews, \
+	. = ..()
+	LAZYADD(., "The BAT84's debut on the battery backup market was greeted by universally negative reviews, \
 	highlighting its slow recharge rate and exceptional lack of responsiveness to power changes.\
-	Nevertheless, it has been steadily gaining market share due to rock-bottom prices and a predatory marketing campaign."
+	Nevertheless, it has been steadily gaining market share due to rock-bottom prices and a predatory marketing campaign.")
 
 /obj/item/stock_parts/power/battery/buildable/stock
 	name = "battery backup (standard)"
 	desc = "The 3006915, or, as this part is colloquially known, model 15, is the workhorse battery backup solution of populated space."
 
 /obj/item/stock_parts/power/battery/buildable/stock/get_lore_info()
-	return "Combining tolerable recharge rate and high durability into a conveniently shaped package, the model 15 has dominated the market for over three decades."
+	. = ..()
+	LAZYADD(., "Combining tolerable recharge rate and high durability into a conveniently shaped package, the model 15 has dominated the market for over three decades.")
 
 /obj/item/stock_parts/power/battery/buildable/turbo
 	name = "battery backup (rapid)"
@@ -230,8 +232,9 @@
 	)
 
 /obj/item/stock_parts/power/battery/buildable/turbo/get_lore_info()
-	return "The latest in battery charging technology deploys advanced composites and semiorganic interfaces to attain previously unheard-of charge rates. \
-	The relevant marketing divisions, on the other hand, has been engaged in seeminly endless lawsuits over false advertising, having allegedly overstated said rates."
+	. = ..()
+	LAZYADD(., "The latest in battery charging technology deploys advanced composites and semiorganic interfaces to attain previously unheard-of charge rates. \
+	The relevant marketing divisions, on the other hand, has been engaged in seeminly endless lawsuits over false advertising, having allegedly overstated said rates.")
 
 /obj/item/stock_parts/power/battery/buildable/responsive
 	name = "battery backup (responsive)"
@@ -245,5 +248,6 @@
 	)
 
 /obj/item/stock_parts/power/battery/buildable/responsive/get_lore_info()
-	return "Unable to compete on price with the larger conglomerates, Focal Point's FOXUS instead sacrifices a bit of charge rate for drastically better responsiveness. \
-	While an instant cult classic in the high-performance market, the FOXUS's bewildering name, lackluster marketing effort, and steep price have kept it from becoming a household name."
+	. = ..()
+	LAZYADD(., "Unable to compete on price with the larger conglomerates, Focal Point's FOXUS instead sacrifices a bit of charge rate for drastically better responsiveness. \
+	While an instant cult classic in the high-performance market, the FOXUS's bewildering name, lackluster marketing effort, and steep price have kept it from becoming a household name.")
