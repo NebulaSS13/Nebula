@@ -97,7 +97,7 @@
 			if(SScodex.get_entry_by_string(thing_name))
 				thing_name = "<l>[thing_name]</l>"
 			else
-				var/datum/codex_entry/result_entry = SScodex.get_codex_entry(thing)
+				var/datum/codex_entry/result_entry = SScodex.get_codex_entry(thing) || atom_info_repository.get_codex_page_for(thing)
 				if(result_entry)
 					thing_name = "<span codexlink='[result_entry.name]'>[thing_name]</span>"
 			ingredients += (count > 1) ? "[count]x [thing_name]" : "\a [thing_name]"
