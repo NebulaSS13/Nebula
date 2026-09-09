@@ -16,6 +16,7 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/quadruped),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/quadruped)
 	)
+	simple_variant = /decl/bodytype/quadruped/animal
 	var/rideable = TRUE
 	var/riding_offset = @'{"x":0,"y":0,"z":8}'
 

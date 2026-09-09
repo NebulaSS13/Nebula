@@ -44,6 +44,7 @@ var/global/repository/atom_info/atom_info_repository = new()
 		description_cache[key] = instance.desc
 	if(cache_appearance && !appearance_cache[key])
 		instance = instance || get_instance_of(_path, _mat, _amount)
+		instance.compile_overlays()
 		appearance_cache[key] = instance.appearance
 	if(!matter_mult_cache[key] && ispath(_path, /obj))
 		var/obj/obj_instance = instance || get_instance_of(_path, _mat, _amount)
