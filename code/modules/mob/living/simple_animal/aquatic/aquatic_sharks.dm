@@ -34,7 +34,7 @@
 /datum/mob_controller/aggressive/aquatic/shark/huge
 	turns_per_wander = 4
 	break_stuff_probability = 35
-	attack_same_faction = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES | AI_FLAG_AGGRESSIVE | AI_FLAG_DESTROYER | AI_FLAG_ATTACKS_ENEMIES
 
 /obj/item/natural_weapon/bite/giantshark
 	_base_attack_force = 40

@@ -72,15 +72,11 @@
 /mob/living/proc/perform_maneuver(var/maneuver, var/atom/target)
 	var/decl/maneuver/performing_maneuver = ispath(maneuver) ? GET_DECL(maneuver) : maneuver
 	if(istype(performing_maneuver))
-		var/last_stance = ai?.stance
-		if(last_stance)
-			ai.set_stance(STANCE_BUSY)
-			stop_automove()
+		ai.set_activity(AI_ACTIVITY_MANEUVERING)
 		. = performing_maneuver.perform(src, target, get_acrobatics_multiplier(performing_maneuver))
 		prepared_maneuver = null
 		refresh_hud_element(HUD_MANEUVER)
-		if(ai && ai.stance == STANCE_BUSY)
-			ai.set_stance(last_stance)
+		ai.set_activity(AI_ACTIVITY_NORMAL)
 
 /mob/living/proc/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)
 	. = ((istype(maneuver) ? maneuver.type : maneuver) in get_available_maneuvers())

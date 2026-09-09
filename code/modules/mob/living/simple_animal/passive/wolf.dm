@@ -3,7 +3,7 @@
 	desc               = "A predatory canine commonly known to run in packs and howl at the moon."
 	icon               = 'icons/mob/simple_animal/wolf.dmi'
 	natural_weapon     = /obj/item/natural_weapon/bite
-	ai                 = /datum/mob_controller/passive/hunter/wolf
+	ai                 = /datum/mob_controller/hunter/wolf
 	mob_size           = MOB_SIZE_MEDIUM
 	speak_emote        = list("huffs", "growls")
 	pass_flags         = PASS_FLAG_TABLE
@@ -19,7 +19,7 @@
 	)
 	return default_colors
 
-/datum/mob_controller/passive/hunter/wolf
+/datum/mob_controller/hunter/wolf
 	emote_speech   = list("Awoo!","Aroo!","Rrr!")
 	emote_hear     = list("huffs","growls")
 	emote_see      = list("paces back and forth", "flicks its tail")

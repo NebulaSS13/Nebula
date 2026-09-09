@@ -1,41 +1,26 @@
-/datum/mob_controller/passive/hunter/cat
+/datum/mob_controller/hunter/cat
 	emote_speech     = list("Meow!","Esp!","Purr!","HSSSSS")
 	emote_hear       = list("meows","mews")
 	emote_see        = list("shakes their head", "shivers")
 	speak_chance     = 0.25
 	turns_per_wander = 10
 
-/datum/mob_controller/passive/hunter/cat/try_attack_prey(mob/living/prey)
-	var/mob/living/simple_animal/passive/mouse/mouse = prey
+/datum/mob_controller/hunter/cat/melee_attack_target(atom/target)
+	var/mob/living/simple_animal/passive/mouse/mouse = target
 	if(istype(mouse))
 		mouse.splat()
 		return
 	return ..()
 
-/datum/mob_controller/passive/hunter/cat/consume_prey(mob/living/prey)
-	if(prey.stat != DEAD)
-		return
-	next_hunt = world.time + rand(1 SECONDS, 10 SECONDS)
-	set_target(null)
-	resume_wandering()
+/datum/mob_controller/hunter/cat/wants_to_hunt(mob/living/prey)
+	return istype(prey, /mob/living/simple_animal/passive/mouse)
 
-/datum/mob_controller/passive/hunter/cat/can_hunt(mob/living/victim)
-	return istype(victim, /mob/living/simple_animal/passive/mouse) && !victim.stat
-
-/datum/mob_controller/passive/hunter/cat/update_targets()
-	. = ..()
-	if(!flee_target)
-		for(var/mob/living/simple_animal/passive/mouse/snack in oview(body, 5))
-			if(snack.stat != DEAD && prob(15))
-				body.custom_emote(AUDIBLE_MESSAGE, pick("hisses and spits!", "mrowls fiercely!", "eyes [snack] hungrily."))
-			break
-
-/datum/mob_controller/passive/hunter/cat/do_process()
-
+/datum/mob_controller/hunter/cat/do_process()
 	if(!(. = ..()))
 		return
 
-	if(!hunt_target && !flee_target && prob(1)) //spooky
+	var/mob/living/simple_animal/passive/mouse/snack = get_target()
+	if(!snack && !get_flee_target() && prob(1)) //spooky
 		var/mob/observer/ghost/spook = locate() in range(body, 5)
 		if(spook)
 			var/turf/T = spook.loc
@@ -46,6 +31,8 @@
 			if(visible.len)
 				var/atom/A = pick(visible)
 				body.custom_emote(VISIBLE_MESSAGE, "suddenly stops and stares at something unseen[istype(A) ? " near [A]":""].")
+	else if(istype(snack) && snack.stat != DEAD && prob(15))
+		body.custom_emote(AUDIBLE_MESSAGE, pick("hisses and spits!", "mrowls fiercely!", "eyes [snack] hungrily."))
 
 //Cat
 /mob/living/simple_animal/passive/cat
@@ -62,7 +49,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	butchery_data = /decl/butchery_data/animal/cat
 	base_animal_type = /mob/living/simple_animal/passive/cat
-	ai = /datum/mob_controller/passive/hunter/cat
+	ai = /datum/mob_controller/hunter/cat
 
 /mob/living/simple_animal/passive/cat/get_bodytype()
 	return GET_DECL(/decl/bodytype/quadruped/animal/cat)
@@ -83,78 +70,38 @@
 
 //Basic friend AI
 /mob/living/simple_animal/passive/cat/fluff
-	ai = /datum/mob_controller/passive/hunter/cat/friendly
+	ai = /datum/mob_controller/hunter/cat/friendly
 
 /mob/living/simple_animal/passive/cat/fluff/is_tagging_suitable()
 	return FALSE
 
-/datum/mob_controller/passive/hunter/cat/friendly
+/datum/mob_controller/hunter/cat/friendly
 	var/befriend_job = null
-	var/atom/movement_target
 
-/datum/mob_controller/passive/hunter/cat/friendly/add_friend(mob/friend)
+/datum/mob_controller/hunter/cat/friendly/handle_friendly_proximity(mob/living/friend, friend_is_hurt)
+	if (prob(10))
+		body.say("Meow!")
+	if(get_dist(body, friend) <= 1)
+		if (friend.stat >= DEAD || friend.is_asystole())
+			if (prob((friend.stat < DEAD)? 25 : 7.5))
+				var/sad_verb = pick("meows", "mews", "mrowls")
+				body.custom_emote(AUDIBLE_MESSAGE, pick("[sad_verb] in distress.", "[sad_verb] anxiously."))
+		else if (prob(5))
+			body.custom_emote(
+				VISIBLE_MESSAGE,
+				pick("nuzzles [friend].","brushes against [friend].","rubs against [friend].","purrs.")
+			)
+	else if (friend_is_hurt && prob(5))
+		var/sad_verb = pick("meows", "mews", "mrowls")
+		body.custom_emote(AUDIBLE_MESSAGE, "[sad_verb] anxiously.")
+
+/datum/mob_controller/hunter/cat/friendly/add_friend(mob/friend)
 	if(length(get_friends()) > 1 || !ishuman(friend))
 		return FALSE
 	var/mob/living/human/human_friend = friend
 	if(befriend_job && human_friend.job != befriend_job)
 		return FALSE
 	return ..()
-
-/datum/mob_controller/passive/hunter/cat/friendly/do_process()
-
-	if(!(. = ..()))
-		return
-
-	// Get our friend.
-	var/list/friends = get_friends()
-	var/mob/living/human/friend
-	if(LAZYLEN(friends))
-		var/weakref/friend_ref = friends[1]
-		friend = friend_ref.resolve()
-
-	if(body.stat || hunt_target || flee_target || QDELETED(friend))
-		return
-
-	var/follow_dist = 4
-	if (friend.stat >= DEAD || friend.is_asystole()) //danger
-		follow_dist = 1
-	else if (friend.stat || friend.current_health <= 50) //danger or just sleeping
-		follow_dist = 2
-	var/near_dist = max(follow_dist - 2, 1)
-	var/current_dist = get_dist(body, friend)
-
-	if (movement_target != friend)
-		if (current_dist > follow_dist && (friend in oview(body)))
-			//stop existing movement
-			body.stop_automove()
-			turns_since_scan = 0
-
-			//walk to friend
-			stop_wandering()
-			movement_target = friend
-			body.start_automove(movement_target, metadata = new /datum/automove_metadata(_acceptable_distance = near_dist))
-
-	//already following and close enough, stop
-	else if (current_dist <= near_dist)
-		body.stop_automove()
-		movement_target = null
-		resume_wandering()
-		if (prob(10))
-			body.say("Meow!")
-
-	if (get_dist(body, friend) <= 1)
-		if (friend.stat >= DEAD || friend.is_asystole())
-			if (prob((friend.stat < DEAD)? 25 : 7.5))
-				var/verb = pick("meows", "mews", "mrowls")
-				body.custom_emote(AUDIBLE_MESSAGE, pick("[verb] in distress.", "[verb] anxiously."))
-		else if (prob(5))
-			body.custom_emote(
-				VISIBLE_MESSAGE,
-				pick("nuzzles [friend].","brushes against [friend].","rubs against [friend].","purrs.")
-			)
-	else if (friend.current_health <= 50 && prob(5))
-		var/verb = pick("meows", "mews", "mrowls")
-		body.custom_emote(AUDIBLE_MESSAGE, "[verb] anxiously.")
 
 /mob/living/simple_animal/passive/cat/fluff/verb/become_friends()
 	set name = "Become Friends"

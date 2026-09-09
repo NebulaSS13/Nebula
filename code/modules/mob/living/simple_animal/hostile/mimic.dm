@@ -51,11 +51,11 @@ var/global/list/protected_objects = list(
 	if(length(.) && mimic.creator)
 		. -= mimic.creator.resolve()
 
-/datum/mob_controller/aggressive/mimic/destroy_surroundings()
+/datum/mob_controller/aggressive/mimic/destroy_surroundings(atom/target)
 	var/mob/living/simple_animal/hostile/mimic/mimic = body
 	. = istype(mimic) && mimic.awake && ..()
 
-/datum/mob_controller/aggressive/mimic/find_target()
+/datum/mob_controller/aggressive/mimic/find_valid_target()
 	. = ..()
 	if(.)
 		body.custom_emote(AUDIBLE_MESSAGE, "growls at [.]")

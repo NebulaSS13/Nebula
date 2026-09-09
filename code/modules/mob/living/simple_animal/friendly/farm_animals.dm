@@ -18,7 +18,7 @@
 	emote_see    = list("shakes its head", "stamps a foot", "glares around")
 	speak_chance = 0.25
 	turns_per_wander = 10
-	only_attack_enemies = TRUE
+	ai_flags = AI_FLAG_WANDERS | AI_FLAG_NO_PULLED_WANDER | AI_FLAG_AGGRESSIVE | AI_FLAG_ALERTS | AI_FLAG_ATTACKS_ENEMIES
 
 /datum/mob_controller/aggressive/goat/retaliate(atom/source)
 	..()

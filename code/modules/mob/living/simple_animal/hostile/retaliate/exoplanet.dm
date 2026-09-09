@@ -1,5 +1,5 @@
 /mob/living/simple_animal/hostile/beast
-	ai = /datum/mob_controller/aggressive/beast
+	ai = /datum/mob_controller/hunter
 	abstract_type = /mob/living/simple_animal/hostile/beast
 	nutrition = 300
 
@@ -45,13 +45,13 @@
 	max_health = 125
 	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
-	ai = /datum/mob_controller/aggressive/beast/samak
+	ai = /datum/mob_controller/hunter/samak
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES
 	)
 	base_movement_delay = 2
 
-/datum/mob_controller/aggressive/beast/samak
+/datum/mob_controller/hunter/samak
 	speak_chance = 1.25
 	emote_speech = list("Hruuugh!","Hrunnph")
 	emote_see    = list("paws the ground","shakes its mane","stomps")
@@ -74,14 +74,14 @@
 	natural_weapon = /obj/item/natural_weapon/claws/weak
 	cold_damage_per_tick = 0
 	mob_size = MOB_SIZE_SMALL
-	ai = /datum/mob_controller/aggressive/beast/diyaab
+	ai = /datum/mob_controller/hunter/diyaab
 	base_movement_delay = 1
 
 /mob/living/simple_animal/hostile/beast/diyaab/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/shearable, /decl/material/solid/organic/cloth/wool/diyaab)
 
-/datum/mob_controller/aggressive/beast/diyaab
+/datum/mob_controller/hunter/diyaab
 	speak_chance = 1.25
 	emote_speech = list("Awrr?","Aowrl!","Worrl")
 	emote_see    = list("sniffs the air cautiously","looks around")
@@ -99,9 +99,9 @@
 	max_health = 75
 	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
-	ai = /datum/mob_controller/aggressive/beast/shantak
+	ai = /datum/mob_controller/hunter/shantak
 
-/datum/mob_controller/aggressive/beast/shantak
+/datum/mob_controller/hunter/shantak
 	speak_chance = 0.5
 	emote_speech = list("Shuhn","Shrunnph?","Shunpf")
 	emote_see    = list("scratches the ground","shakes out its mane","tinkles gently")
@@ -109,9 +109,9 @@
 /mob/living/simple_animal/hostile/beast/shantak/alt
 	desc = "A piglike creature with a long and graceful mane. Don't be fooled by its beauty."
 	icon = 'icons/mob/simple_animal/shantak_alt.dmi'
-	ai = /datum/mob_controller/aggressive/beast/shantak/alt
+	ai = /datum/mob_controller/hunter/shantak/alt
 
-/datum/mob_controller/aggressive/beast/shantak/alt
+/datum/mob_controller/hunter/shantak/alt
 	emote_see = list("scratches the ground","shakes out its mane","rustles softly")
 
 /mob/living/simple_animal/yithian
@@ -157,7 +157,7 @@
 /datum/mob_controller/aggressive/thinbug
 	speak_chance = 0.25
 	emote_see = list("skitters","oozes liquid from its mouth", "scratches at the ground", "clicks its claws")
-	only_attack_enemies = TRUE
+	ai_flags = AI_FLAG_WANDERS | AI_FLAG_NO_PULLED_WANDER | AI_FLAG_AGGRESSIVE | AI_FLAG_ALERTS | AI_FLAG_ATTACKS_ENEMIES
 
 /mob/living/simple_animal/hostile/beast/charbaby
 	name = "charbaby"
@@ -194,7 +194,7 @@
 /mob/living/simple_animal/hostile/beast/shantak/lava
 	desc = "A vaguely canine looking beast. It looks as though its fur is made of stone wool."
 	icon = 'icons/mob/simple_animal/lavadog.dmi'
-	ai = /datum/mob_controller/aggressive/beast/shantak/lava
+	ai = /datum/mob_controller/hunter/shantak/lava
 
-/datum/mob_controller/aggressive/beast/shantak/lava
+/datum/mob_controller/hunter/shantak/lava
 	emote_speech = list("Karuph","Karump")

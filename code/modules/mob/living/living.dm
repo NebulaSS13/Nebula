@@ -884,19 +884,19 @@ default behaviour is:
 			return FLASH_PROTECTION_MAJOR
 	return total_protection
 
-/mob/living/proc/get_satiated_nutrition()
+/mob/living/get_satiated_nutrition()
 	return 500
 
-/mob/living/proc/get_max_nutrition()
+/mob/living/get_max_nutrition()
 	return 550
 
-/mob/living/proc/set_nutrition(var/amt)
+/mob/living/set_nutrition(var/amt)
 	nutrition = clamp(amt, 0, get_max_nutrition())
 
-/mob/living/proc/get_nutrition()
+/mob/living/get_nutrition()
 	return isSynthetic() ? get_max_nutrition() : nutrition
 
-/mob/living/proc/adjust_nutrition(var/amt)
+/mob/living/adjust_nutrition(var/amt)
 	set_nutrition(get_nutrition() + amt)
 
 /mob/living/proc/get_max_hydration()
@@ -1865,15 +1865,16 @@ default behaviour is:
 	setClickCooldown(attack_delay)
 	face_atom(target)
 
+	ai?.set_activity(AI_ACTIVITY_ATTACKING)
 	stop_automove() // Cancel any baked-in movement.
 	do_windup_animation(target, attack_delay, no_reset = TRUE)
 	if(!do_after(src, attack_delay, target) || !Adjacent(target))
 		visible_message(SPAN_NOTICE("\The [src] misses [pronouns.his] attack on \the [target]!"))
 		reset_offsets(anim_time = 2)
-		ai?.move_to_target(TRUE) // Restart hostile mob tracking.
+		ai?.set_activity(AI_ACTIVITY_NORMAL) // Restart hostile mob tracking.
 		return FALSE
 
-	ai?.move_to_target(TRUE) // Restart hostile mob tracking.
+	ai?.set_activity(AI_ACTIVITY_NORMAL) // Restart hostile mob tracking.
 	if(ismob(target))
 		// Clientless mobs are too dum to move away, so they can be missed.
 		var/mob/mob = target
@@ -1967,6 +1968,9 @@ default behaviour is:
 			. += SPAN_NOTICE("\The [src] can be milked into a bucket or other container.")
 		else
 			. += SPAN_WARNING("\The [src] cannot currently be milked.")
+
+	if(istype(ai) && istype(ai.stance))
+		. += SPAN_SUBTLE("They are currently [ai.stance.name].")
 
 /mob/living/proc/get_age()
 	. = LAZYACCESS(appearance_descriptors, "age") || 30

@@ -26,7 +26,7 @@
 
 /datum/mob_controller/shade
 	emote_hear = list("wails","screeches")
-	do_wander = FALSE
+	ai_flags = AI_FLAGS_NONE
 
 /mob/living/simple_animal/shade/check_has_mouth()
 	return FALSE

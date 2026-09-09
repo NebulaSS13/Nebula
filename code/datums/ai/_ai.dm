@@ -19,74 +19,23 @@
 	var/mob/living/body
 	/// Type of mob this AI applies to.
 	var/expected_type = /mob/living
-
-	// WANDERING
-	/// How many life ticks should pass before we wander?
-	var/turns_per_wander = 2
-	/// How many life ticks have passed since our last wander?
-	var/turns_since_wander = 0
-	/// Use this to temporarely stop random movement or to if you write special movement code for animals.
-	var/stop_wander = FALSE
-	/// Does the mob wander around when idle?
-	var/do_wander = TRUE
-	/// When set to 1 this stops the animal from moving when someone is grabbing it.
-	var/stop_wander_when_pulled = TRUE
-
-	// SPEAKING/EMOTING
-	/// A prob chance of speaking.
-	var/speak_chance = 0
-	/// Strings shown when this mob speaks and is not understood.
-	var/list/emote_speech
-	/// Hearable emotes that this mob can randomly perform.
-	var/list/emote_hear
-	/// Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
-	var/list/emote_see
-	/// What directions can we wander in? Uses global.cardinal if unset.
-	var/list/wander_directions
-
-	/// Should we retaliate/startle when grabbed or buckled?
-	var/spooked_by_grab = TRUE
-	/// Can we automatically escape from buckling?
-	var/can_escape_buckles = FALSE
-
-	/// What is our current general attitude and demeanor?
-	var/stance = STANCE_NONE
-	/// What are we busy with currently?
-	var/current_activity = AI_ACTIVITY_IDLE
-
-	/// Who are we friends with? Lazylist of weakrefs.
-	var/list/_friends
-	/// Who are our sworn enemies? Lazylist of weakrefs.
-	var/list/_enemies
-
-	/// Aggressive AI var; defined here for reference without casting.
-	var/try_destroy_surroundings = FALSE
-
-	/// Reference to the atom we are targetting.
-	var/weakref/target_ref
-
-	/// Current path for A* pathfinding.
-	var/list/executing_path
-	/// A counter for times we have failed to progress along our path.
-	var/path_frustration = 0
-	/// A list of any obstacles we should path around in future.
-	var/list/path_obstacles = null
-
-	/// Radius of target scan area when looking for valid targets. Set to 0 to disable target scanning.
-	var/target_scan_distance = 0
-	/// Time tracker for next target scan.
-	var/next_target_scan_time
-	/// How long minimum between scans.
-	var/target_scan_delay = 1 SECOND
-
-	/// Last mob to attempt to handle this mob.
-	var/weakref/last_handler
+	/// Various behavioral flags.
+	var/ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS
 
 /datum/mob_controller/New(var/mob/living/target_body)
+	stance = RESOLVE_TO_DECL(stance) || GET_DECL(/decl/mob_controller_stance/idle)
 	body = target_body
 	if(expected_type && !istype(body, expected_type))
 		PRINT_STACK_TRACE("AI datum [type] received a body ([body ? body.type : "NULL"]) of unexpected type ([expected_type]).")
 	START_PROCESSING(SSmob_ai, src)
+	if(friendly_to_role)
+		friendly_to_role = RESOLVE_TO_DECL(friendly_to_role)
+	if(length(known_commands))
+		for(var/command in known_commands)
+			known_commands -= command
+			known_commands |= RESOLVE_TO_DECL(command)
+		known_commands = sortTim(known_commands, /proc/cmp_decl_sort_value_asc, FALSE)
+	..()
 
 /datum/mob_controller/Destroy()
 	LAZYCLEARLIST(_friends)
@@ -98,12 +47,14 @@
 		if(body.ai == src)
 			body.ai = null
 		body = null
-	. = ..()
+	return ..()
 
 /datum/mob_controller/proc/can_process()
-	if(!body || !body.loc || ((body.client || body.mind) && !(body.status_flags & ENABLE_AI)))
+	if(!body || !body.loc)
 		return FALSE
-	if(body.stat == DEAD)
+	if((body.client || body.mind) && !(body.status_flags & ENABLE_AI))
+		return FALSE
+	if(body.stat != CONSCIOUS)
 		return FALSE
 	return TRUE
 
@@ -125,140 +76,105 @@
 
 // This is the place to actually do work in the AI.
 /datum/mob_controller/proc/do_process()
+
 	SHOULD_CALL_PARENT(TRUE)
 
-	if(QDELETED(body) || QDELETED(src) || get_stance() == STANCE_BUSY)
+	// Do some sanity checks.
+	if(is_busy() || QDELETED(body) || QDELETED(src) || !istype(stance))
 		return FALSE
 
-	if(!isnull(home) && get_dist(body, home) > home_wander_distance)
-		body.start_automove(home)
+	// If we are contained, don't move.
+	if(!isturf(body.loc))
+		body.stop_automove()
 		return FALSE
 
-	if(get_stance() == STANCE_IDLE && !body.stat)
-		try_unbuckle()
-		try_wander()
-		try_bark()
+	// Handle our commands in general.
+	if(length(known_commands))
+
+		// Process any pending commands.
+		if(length(command_buffer))
+			for(var/list/command_strings as anything in command_buffer)
+				var/mob/speaker   = command_strings[1]
+				var/message       = command_strings[2]
+				var/filtered_name = lowertext(html_decode(body.name))
+				//in case somebody wants to command 8 bears at once.
+				if(!dd_hasprefix(message, filtered_name) && !dd_hasprefix(message, "everyone") && !dd_hasprefix(message, "everybody"))
+					continue
+				var/substring = copytext(message, length(filtered_name)+1) //get rid of the name.
+				for(var/decl/mob_command/command in known_commands)
+					if(command.receive_command(body, speaker, substring, src))
+						if(current_command != command)
+							current_command.end_command(src)
+						command.execute_command(body, speaker, substring, src)
+						if(command.keep_processing)
+							current_command = command
+						else
+							current_command = null
+						break
+			command_buffer = null
+
+		// Handle any commands
+		if(current_command?.do_process(body, src, known_commands[current_command]))
+			return FALSE
+
+	// Handle our general stance behavior.
+	stance.on_body_life(body, src)
 
 	// Recheck in case we walked into lava or something during wandering.
-	return get_stance() != STANCE_BUSY && !QDELETED(body) && !QDELETED(src)
+	return !is_busy() && !QDELETED(body) && !QDELETED(src)
 
-// The mob will try to unbuckle itself from nets, beds, chairs, etc.
-/datum/mob_controller/proc/try_unbuckle()
-	if(body.buckled && can_escape_buckles)
-		if(istype(body.buckled, /obj/effect/energy_net))
-			var/obj/effect/energy_net/Net = body.buckled
-			Net.escape_net(body)
-		else if(prob(25))
-			body.buckled.unbuckle_mob(body)
-		else if(prob(25))
-			body.visible_message(SPAN_WARNING("\The [body] struggles against \the [body.buckled]!"))
+/datum/mob_controller/proc/destroy_surroundings(atom/target)
 
-
-/datum/mob_controller/proc/get_wander_candidates(turf/centre)
-	. = list()
-	var/turf/wall/natural/ramp = centre
-	var/ramp_dir = (istype(ramp) && ramp.ramp_slope_direction) ? global.reverse_dir[ramp.ramp_slope_direction] : 0
-	for(var/dir in (wander_directions || global.cardinal))
-		var/turf/neighbor = get_step(centre, dir)
-		if(dir == ramp_dir)
-			neighbor = GetAbove(neighbor)
-		if(istype(neighbor) && !turf_contains_dense_objects(neighbor) && body.turf_is_safe(neighbor))
-			. |= dir
-
-// The mob will periodically sit up or step 1 tile in a random direction.
-/datum/mob_controller/proc/try_wander()
-
-	//Movement
-	if(stop_wander || body.has_buckled_mob() || !do_wander || body.anchored)
+	// If we're not hunting something, don't destroy stuff.
+	if(!istype(target) || !body.can_act() || !(ai_flags & AI_FLAG_DESTROYER))
 		return
 
-	if(body.current_posture?.prone && !body.incapacitated())
-		body.set_posture(/decl/posture/standing)
+	// Not breaking stuff, or already adjacent to a target.
+	if(!prob(break_stuff_probability) || body.Adjacent(target))
 		return
 
-	//This is so it only moves if it's not inside a closet, gentics machine, etc.
-	if(!isturf(body.loc))
+	// Try to get our next step towards the target.
+	body.face_atom(target)
+	var/turf/targ = get_step_towards(body, target)
+	if(!targ)
 		return
 
-	turns_since_wander++
-	//Some animals don't move when pulled
-	if(turns_since_wander < turns_per_wander || (stop_wander_when_pulled && LAZYLEN(body.grabbed_by)))
+	// Attack anything on the target turf.
+	var/obj/effect/shield/S = locate(/obj/effect/shield) in targ
+	if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
+		body.set_intent(I_FLAG_HARM)
+		body.ClickOn(S)
 		return
 
-	turns_since_wander = 0
-	var/alist/wander_candidates = get_wander_candidates(body.loc)
-	if(length(wander_candidates))
-		body.SelfMove(pick(wander_candidates))
+	// Hostile mobs will bash through these in order with their natural weapon
+	// Note that airlocks and blast doors are handled separately below.
+	// TODO: mobs should destroy powered/unforceable doors before trying to pry them.
+	var/static/list/valid_obstacles_by_priority = list(
+		/obj/structure/window,
+		/obj/structure/closet,
+		/obj/machinery/door/window,
+		/obj/structure/table,
+		/obj/structure/grille,
+		/obj/structure/barricade,
+		/obj/structure/wall_frame,
+		/obj/structure/railing
+	)
 
-// The mob will periodically make a noise or perform an emote.
-/datum/mob_controller/proc/try_bark()
-	//Speaking
-	if(prob(speak_chance))
-		var/action = pick(
-			LAZYLEN(emote_speech); "emote_speech",
-			LAZYLEN(emote_hear);   "emote_hear",
-			LAZYLEN(emote_see);    "emote_see"
-		)
-		var/do_emote
-		var/emote_type = VISIBLE_MESSAGE
-		switch(action)
-			if("emote_speech")
-				if(length(emote_speech))
-					body.say(pick(emote_speech))
-			if("emote_hear")
-				do_emote = SAFEPICK(emote_hear)
-				emote_type = AUDIBLE_MESSAGE
-			if("emote_see")
-				do_emote = SAFEPICK(emote_see)
+	for(var/type in valid_obstacles_by_priority)
+		var/obj/obstacle = locate(type) in targ
+		if(obstacle)
+			body.set_intent(I_FLAG_HARM)
+			body.ClickOn(obstacle)
+			return
 
-		if(istext(do_emote))
-			body.custom_emote(emote_type, "[do_emote].")
-		else if(ispath(do_emote, /decl/emote))
-			body.emote(do_emote)
-
-/datum/mob_controller/proc/destroy_surroundings()
-	return
+	if(body.can_pry_door())
+		for(var/obj/machinery/door/obstacle in targ)
+			if(obstacle.density)
+				if(!obstacle.can_open(1))
+					return
+				body.face_atom(obstacle)
+				body.pry_door((obstacle.pry_mod * body.get_door_pry_time()), obstacle)
+				return
 
 /datum/mob_controller/proc/handle_death(gibbed)
 	return
-
-/// General-purpose scooping reaction proc, used by /passive.
-/// Returns TRUE if the scoop should proceed, FALSE if it should be canceled.
-/datum/mob_controller/proc/scooped_by(mob/initiator)
-	return TRUE
-
-// By default, randomize the target area a bit to make armor/combat
-// a bit more dynamic (and avoid constant organ damage to the chest)
-/datum/mob_controller/proc/update_target_zone()
-	if(body)
-		return body.set_target_zone(ran_zone())
-	return FALSE
-
-/datum/mob_controller/proc/on_buckled(mob/scary_grabber)
-	if(!scary_grabber || !(scary_grabber in body.get_buckled_mobs())) // the buckle got cancelled somehow?
-		return
-	if(spooked_by_grab && !is_friend(scary_grabber))
-		retaliate(scary_grabber)
-
-/datum/mob_controller/proc/on_grabbed(mob/scary_grabber)
-	if(!scary_grabber)
-		return
-	if(spooked_by_grab && !is_friend(scary_grabber))
-		retaliate(scary_grabber)
-
-// General stubs for when another mob has directed this mob to attack.
-/datum/mob_controller/proc/check_handler_can_order(mob/handler, atom/target, intent_flags)
-	return is_friend(handler)
-
-/datum/mob_controller/proc/process_handler_target(mob/handler, atom/target, intent_flags)
-	if(!check_handler_can_order(handler, target, intent_flags))
-		return process_handler_failure(handler, target)
-	last_handler = weakref(handler)
-	return TRUE
-
-/datum/mob_controller/proc/process_handler_failure(mob/handler, atom/target)
-	return FALSE
-
-/datum/mob_controller/proc/process_holder_interaction(mob/handler)
-	last_handler = weakref(handler)
-	return body?.attack_hand_with_interaction_checks(handler)

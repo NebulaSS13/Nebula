@@ -45,4 +45,3 @@
 			ai.resume()
 		visible_message(SPAN_DANGER("\The [src] slams into \the [target], knocking them over!"))
 		SET_STATUS_MAX(target, STAT_WEAK, 1)
-		ai.move_to_target()
