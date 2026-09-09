@@ -50,6 +50,7 @@ var/global/list/child_stance_limbs = list(
 
 // TODO: Replace keybinding datums with keybinding decls to make this unnecessary.
 var/global/list/hotkey_keybinding_list_by_key = list() // Replace this with just looping over all keybinding decls (as below) in a 'reset hotkeys' proc.
+var/global/list/hotkey_keybinding_list_by_key_fc = list()
 var/global/list/keybindings_by_name = list() // Replace this with just decl lookups.
 /proc/makeDatumRefLists()
 	// Keybindings
@@ -60,9 +61,18 @@ var/global/list/keybindings_by_name = list() // Replace this with just decl look
 		ASSERT(keybinding.name)
 		var/datum/keybinding/instance = new keybinding
 		global.keybindings_by_name[instance.name] = instance
+		var/classic_stored = FALSE
+		if(length(instance.classic_keys))
+			classic_stored = TRUE
+			for(var/bound_key in instance.classic_keys)
+				global.hotkey_keybinding_list_by_key_fc[bound_key] += list(instance.name)
 		if(length(instance.hotkey_keys))
 			for(var/bound_key in instance.hotkey_keys)
 				global.hotkey_keybinding_list_by_key[bound_key] += list(instance.name)
+				if(!classic_stored)
+					global.hotkey_keybinding_list_by_key_fc[bound_key] += list(instance.name)
+
+
 
 /proc/get_playable_species()
 	var/static/list/_playable_species // A list of ALL playable species, whitelisted, latejoin or otherwise. (read: non-restricted)
