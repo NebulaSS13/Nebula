@@ -12,7 +12,6 @@
 	color               = "#81492e"
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 
-
 /obj/item/food/butchery/cutlet/raw
 	desc                           = "A thin piece of raw meat."
 	cooked_food                    = FOOD_RAW

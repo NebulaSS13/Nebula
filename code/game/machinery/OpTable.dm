@@ -10,7 +10,7 @@
 	active_power_usage = 5
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
-
+	_atom_codex_value = /datum/codex_entry/optable
 	var/suppressing = FALSE
 	var/mob/living/victim
 	var/obj/machinery/computer/operating/computer = null

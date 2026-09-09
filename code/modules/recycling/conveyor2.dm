@@ -11,6 +11,7 @@ var/global/list/all_conveyor_switches = list()
 	desc = "A conveyor belt."
 	layer = BELOW_OBJ_LAYER	// so they appear under stuff
 	anchored = TRUE
+	_atom_codex_value = /datum/codex_entry/conveyor_construct
 	var/operating = 0  // 1 if running forward, -1 if backwards, 0 if off
 	var/operable = 1   // true if can operate (no broken segments in this belt run)
 	var/forwards       // this is the default (forward) direction, set by the map dir
@@ -130,6 +131,7 @@ var/global/list/all_conveyor_switches = list()
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
 	anchored = TRUE
+	_atom_codex_value = /datum/codex_entry/conveyor_switch
 	var/position = 0			// 0 off, -1 reverse, 1 forward
 	var/last_pos = -1			// last direction setting
 	var/operated = 1			// true if just operated
@@ -236,6 +238,7 @@ var/global/list/all_conveyor_switches = list()
 	w_class = ITEM_SIZE_HUGE
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	_atom_codex_value = /datum/codex_entry/conveyor_construct
 	var/id_tag
 
 /obj/item/conveyor_construct/attackby(obj/item/used_item, mob/user, params)
@@ -272,6 +275,7 @@ var/global/list/all_conveyor_switches = list()
 	icon_state = "switch-off"
 	w_class = ITEM_SIZE_HUGE
 	material = /decl/material/solid/metal/steel
+	_atom_codex_value = /datum/codex_entry/conveyor_switch
 	var/id_tag
 
 /obj/item/conveyor_switch_construct/Initialize()

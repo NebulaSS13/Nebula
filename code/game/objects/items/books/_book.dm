@@ -8,6 +8,7 @@
 	attack_verb = list("bashed", "whacked", "educated")
 	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/organic/paper = MATTER_AMOUNT_REINFORCEMENT)
+	_atom_codex_value = /datum/codex_entry/writing
 
 	/// Actual page content
 	var/dat

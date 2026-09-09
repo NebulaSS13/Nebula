@@ -8,6 +8,8 @@
 	power_channel = ENVIRON
 	idle_power_usage = 15
 
+	_atom_codex_value = /datum/codex_entry/atmos_meter
+
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc
 	)

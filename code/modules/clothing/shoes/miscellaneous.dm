@@ -160,6 +160,7 @@
 	desc = "The height of fashion, and they're pre-polished. Upon further inspection, the soles appear to be on backwards. They look uncomfortable."
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints/reversed
 	item_flags = ITEM_FLAG_SILENT
+	_atom_codex_value = /datum/codex_entry/sneakies
 
 /obj/item/clothing/shoes/heels
 	name = "high heels"

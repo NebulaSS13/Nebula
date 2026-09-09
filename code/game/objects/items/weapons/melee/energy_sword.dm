@@ -4,6 +4,7 @@
 	icon = 'icons/obj/items/weapon/e_sword.dmi'
 	origin_tech = @'{"magnets":3,"esoteric":4}'
 	active_parry_chance = 50
+	_atom_codex_value = /datum/codex_entry/energy_sword
 
 	var/blade_color
 	var/static/list/blade_colors = list(

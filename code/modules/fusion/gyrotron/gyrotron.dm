@@ -8,6 +8,7 @@
 	initial_access = list(access_engine)
 	use_power = POWER_USE_IDLE
 	active_power_usage = GYRO_POWER
+	_atom_codex_value = /datum/codex_entry/gyrotron
 
 	var/initial_id_tag
 	/// Time between shots, in SECONDS, NOT DECISECONDS

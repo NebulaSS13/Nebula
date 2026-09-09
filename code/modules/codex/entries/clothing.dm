@@ -1,7 +1,3 @@
-
-/obj/item/clothing/get_lore_info()
-	return desc
-
 /obj/item/clothing/get_mechanics_info()
 	var/list/armor_strings = list()
 	var/datum/extension/armor/A = get_extension(src, /datum/extension/armor)
@@ -47,8 +43,9 @@
 	if(slots.len)
 		armor_strings += "It can be worn on your [english_list(slots)]."
 
-	return jointext(armor_strings, "<br>")
+	. = ..()
+	LAZYADD(., jointext(armor_strings, "<br>"))
 
 /obj/item/clothing/suit/armor/pcarrier/get_mechanics_info()
 	. = ..()
-	. += "<br>Its protection is provided by the plate inside, examine it for details on armor.<br>"
+	LAZYADD(., "Its protection is provided by the plate inside, examine it for details on armor.")

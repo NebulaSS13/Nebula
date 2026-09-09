@@ -12,6 +12,7 @@
 	material = /decl/material/solid/metal/steel
 	parts_amount = 5
 	parts_type = /obj/item/stack/material/rods
+	_atom_codex_value = /datum/codex_entry/girder
 
 	var/cover = 50
 	var/prepped_for_fakewall

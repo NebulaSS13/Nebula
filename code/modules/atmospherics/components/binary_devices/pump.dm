@@ -17,6 +17,8 @@ Thus, the two variables affect pump operation are set in New():
 	icon_state = "map_off"
 	level = LEVEL_BELOW_PLATING
 
+	_atom_codex_value = /datum/codex_entry/atmos_pump
+
 	name = "gas pump"
 	desc = "A pump that can pressurize gas and restrict flow to one direction."
 

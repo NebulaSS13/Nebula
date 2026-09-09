@@ -15,10 +15,12 @@
 	. = ..()
 
 /obj/structure/vending_refill/get_lore_info()
-	return "Vendor restock containers are notoriously difficult to open, representing the pinnacle of humanity's antitheft technologies."
+	. = ..()
+	LAZYADD(., "Vendor restock containers are notoriously difficult to open, representing the pinnacle of humanity's antitheft technologies.")
 
 /obj/structure/vending_refill/get_mechanics_info()
-	return "Drag to a vendor to restock. Generally can not be opened."
+	. = ..()
+	LAZYADD(., "Drag to a vendor to restock. Generally cannot be opened.")
 
 /obj/structure/vending_refill/handle_mouse_drop(atom/over, mob/user, params)
 	if(istype(over, /obj/machinery/vending))

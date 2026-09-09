@@ -25,9 +25,9 @@
 /obj/item/clothing/badge/get_lore_info()
 	. = ..()
 	if(SScodex.get_codex_entry(badge_string))
-		. += "<br>Denotes affiliation to <l>[badge_string]</l>."
+		LAZYADD(., "Denotes affiliation to <l>[badge_string]</l>.")
 	else
-		. += "<br>Denotes affiliation to [badge_string]."
+		LAZYADD(., "Denotes affiliation to [badge_string].")
 
 /obj/item/clothing/badge/proc/set_name(var/new_name)
 	stored_name = new_name

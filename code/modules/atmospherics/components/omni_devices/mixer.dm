@@ -6,6 +6,7 @@
 	desc = "A device that combines two or more gases to produce a mix with a specific ratio."
 	icon_state = "map_mixer"
 	core_icon = "mixer"
+	_atom_codex_value = /datum/codex_entry/atmos_omni_mixer
 
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 15000			// 15000 W ~ 20 HP

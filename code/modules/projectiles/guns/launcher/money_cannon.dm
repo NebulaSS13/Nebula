@@ -10,6 +10,7 @@
 	fire_sound_text = "a whoosh and a crisp, papery rustle"
 	fire_delay = 1
 	fire_sound = 'sound/weapons/gunshot/money_launcher.ogg'
+	_atom_codex_value = /datum/codex_entry/moneygun
 
 	var/emagged = 0
 	var/receptacle_value = 0

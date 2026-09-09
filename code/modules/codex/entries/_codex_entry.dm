@@ -7,8 +7,6 @@
 	var/store_codex_entry = TRUE
 	/// A list of string search terms associated with this entry.
 	var/list/associated_strings
-	/// A list of typepaths used to populate associated_strings.
-	var/list/associated_paths
 	/// IC text.
 	var/lore_text
 	/// OOC text.
@@ -21,8 +19,6 @@
 	var/list/categories
 	/// If TRUE, don't create this entry in codex init. Where possible, consider using abstract_type or store_codex_entry = FALSE instead.
 	var/skip_hardcoded_generation = FALSE
-	/// If TRUE, associated_paths is set to include each path's subtypes in New().
-	var/include_subtypes = FALSE
 	/// HTML returned when the entry is used to populate a guide manual.
 	var/guide_html
 	/// The map tech level this entry will appear for.
@@ -34,40 +30,15 @@
 /datum/codex_entry/temporary
 	store_codex_entry = FALSE
 
-/datum/codex_entry/New(var/_display_name, var/list/_associated_paths, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
+/datum/codex_entry/New(var/_display_name, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
 	if(global.using_map.map_tech_level < available_to_map_tech_level)
 		unsearchable = TRUE
 
 	if(_display_name)       name =               _display_name
-	if(_associated_paths)   associated_paths =   _associated_paths
 	if(_associated_strings) associated_strings = _associated_strings
 	if(_lore_text)          lore_text =          _lore_text
 	if(_mechanics_text)     mechanics_text =     _mechanics_text
 	if(_antag_text)         antag_text =         _antag_text
-
-	if(store_codex_entry && length(associated_paths))
-		for(var/atom/thing as anything in associated_paths)
-			var/thing_name = initial(thing.name)
-			if(ispath(thing, /atom/movable) && TYPE_IS_SPAWNABLE(thing))
-				thing_name = atom_info_repository.get_name_for(thing)
-			thing_name = codex_sanitize(thing_name)
-			if(disambiguator)
-				thing_name = "[thing_name] ([disambiguator])"
-			LAZYDISTINCTADD(associated_strings, thing_name)
-		// Don't move this any earlier, adding strings for subtypes can cause overlaps.
-		if(include_subtypes)
-			var/new_assoc_paths = list()
-			for(var/path in associated_paths)
-				new_assoc_paths |= typesof(path)
-			associated_paths = new_assoc_paths
-		for(var/associated_path in associated_paths)
-			// This fix assumes more specific codex entries always follow more general ones.
-			// TODO: Refactor to be order-agnostic.
-			var/datum/codex_entry/predecessor = SScodex.entries_by_path[associated_path]
-			if(predecessor)
-				log_debug("Trying to save codex entry for [name] by path [associated_path] but entry [predecessor.name] already uses it, overwriting.")
-				predecessor.associated_paths -= SScodex.entries_by_path[associated_path]
-			SScodex.entries_by_path[associated_path] = src
 
 	if(!name)
 		if(length(associated_strings))
@@ -101,8 +72,6 @@
 		SScodex.all_entries -= src
 		for(var/associated_string in associated_strings)
 			SScodex.entries_by_string -= associated_string
-		for(var/associated_path in associated_paths)
-			SScodex.entries_by_path -= associated_path
 		for(var/thing in SScodex.index_file)
 			if(src == SScodex.index_file[thing])
 				SScodex.index_file -= thing

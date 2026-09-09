@@ -15,6 +15,7 @@
 		/decl/material/solid/metal/steel = 10 * SHEET_MATERIAL_AMOUNT
 	)
 	uncreated_component_parts  = null
+	_atom_codex_value = /datum/codex_entry/atmos_canister
 	var/valve_open             = FALSE
 	var/release_pressure       = ONE_ATMOSPHERE
 	var/release_flow_rate      = ATMOS_DEFAULT_VOLUME_PUMP //in L/s

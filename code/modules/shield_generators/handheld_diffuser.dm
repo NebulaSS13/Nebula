@@ -10,6 +10,7 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
+	_atom_codex_value = /datum/codex_entry/diffuser_item
 	var/enabled = 0
 
 /obj/item/shield_diffuser/on_update_icon()

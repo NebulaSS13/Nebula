@@ -11,6 +11,10 @@
 	backyard_grilling_product = /obj/item/food/bun
 	backyard_grilling_announcement = "is baked into a simple bun."
 
+/obj/item/food/dough/get_mechanics_info()
+	. = ..()
+	LAZYADD(., "Dough is made by <span codexlink='[/decl/chemical_reaction/recipe/food/dough::name]'>mixing water and flour</span>, with yeast added for leavening, then applying heat. It can be flattened with a rolling pin or divided with sharp object like a knife.")
+
 // Dough + rolling pin = flat dough
 /obj/item/food/dough/attackby(obj/item/used_item, mob/user)
 	if(!istype(used_item,/obj/item/rollingpin))

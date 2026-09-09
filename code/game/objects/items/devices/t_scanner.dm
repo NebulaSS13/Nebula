@@ -10,13 +10,12 @@
 	material = /decl/material/solid/metal/aluminium
 	origin_tech = @'{"magnets":1,"engineering":1}'
 	action_button_name = "Toggle T-Ray scanner"
+	_atom_codex_value = /datum/codex_entry/t_scanner
 
 	var/scan_range = 3
-
 	var/on = 0
 	var/list/active_scanned = list() //assoc list of objects being scanned, mapped to their overlay
 	var/client/user_client //since making sure overlays are properly added and removed is pretty important, so we track the current user explicitly
-
 	var/static/list/overlay_cache = list() //cache recent overlays
 
 /obj/item/t_scanner/Destroy()

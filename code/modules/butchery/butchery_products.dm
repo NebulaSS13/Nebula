@@ -20,6 +20,11 @@
 	/// A multiplier for the number of slices, when autosetting from butchery_data.
 	var/slices_multiplier = 1
 
+/obj/item/food/butchery/get_mechanics_info()
+	. = ..()
+	LAZYADD(., "Raw meat can be obtained by butchering dead animals on a table or meathook with a sharp object like a knife.")
+	LAZYADD(., "Most butchery products can be sliced or chopped with a knife for use in other recipes.")
+
 // This contains, specifically, initialisation code that must run before the parent call in Initialize().
 /obj/item/food/butchery/proc/initialize_butchery_data(decl/butchery_data/new_data, new_meat_name)
 	if(new_data)

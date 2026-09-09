@@ -303,6 +303,10 @@ var/global/chicken_count = 0
 	var/decl/skill/examine_skill = SKILL_BOTANY // for maps that change the default skills, or for alien eggs that need science/medical/anatomy instead
 	var/examine_difficulty = SKILL_ADEPT
 
+/obj/item/food/egg/get_mechanics_info()
+	. = ..()
+	LAZYADD(., "Eggs are usually obtained from birds. Feeding fowl like chickens with wheat can encourage egg-laying, and if you leave an egg alone for long enough it might hatch.")
+
 /obj/item/food/egg/get_examine_strings(mob/user, distance, infix, suffix)
 	. = ..()
 	if(isnull(examine_difficulty) || !ispath(examine_skill))

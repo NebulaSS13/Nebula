@@ -17,6 +17,7 @@
 	user_comfort = 1
 	obj_flags = OBJ_FLAG_SUPPORT_MOB
 	monetary_worth_multiplier = 2.5 // Utility structures should be worth more than their matter (wheelchairs, rollers, etc).
+	_atom_codex_value = /datum/codex_entry/bed
 	/// The padding extension type for this bed. If null, no extension is created and this bed cannot be padded.
 	var/padding_extension_type = /datum/extension/padding
 	var/decl/material/initial_padding_material

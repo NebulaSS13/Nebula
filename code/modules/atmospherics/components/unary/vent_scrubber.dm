@@ -2,6 +2,8 @@
 	icon = 'icons/atmos/vent_scrubber.dmi'
 	icon_state = "map_scrubber_off"
 
+	_atom_codex_value = /datum/codex_entry/atmos_vent_scrubber
+
 	name = "air scrubber"
 	desc = "Has a valve and pump attached to it."
 	use_power = POWER_USE_OFF

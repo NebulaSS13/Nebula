@@ -34,6 +34,8 @@
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stack_merge_type = /obj/item/stack/cable_coil
 	matter_multiplier = 0.15
+	_atom_codex_value = /datum/codex_entry/cable
+
 	/// Whether or not this cable coil can even have a color in the first place.
 	var/can_have_color = TRUE
 	/// The type of cable structure produced when laying down this cable.

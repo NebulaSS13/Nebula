@@ -3,7 +3,6 @@
 	desc = "An immense, standalone touchscreen on a swiveling base, equipped with phased array speakers. Embossed on one corner of the ultrathin bezel is the brand name, 'Leitmotif Enterprise Edition'."
 	icon = 'icons/obj/jukebox_new.dmi'
 	icon_state = "jukebox3-nopower"
-	var/state_base = "jukebox3"
 	anchored = TRUE
 	density = TRUE
 	power_channel = EQUIP
@@ -11,17 +10,16 @@
 	active_power_usage = 100
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	pixel_x = -8
-
 	uncreated_component_parts = null
 	stat_immune = 0
 	construct_state = /decl/machine_construction/default/panel_closed
+	_atom_codex_value = /datum/codex_entry/jukebox
 
+	var/state_base = "jukebox3"
 	var/playing = 0
 	var/music_volume = 20
-
 	var/sound_id
 	var/datum/sound_token/sound_token
-
 	var/datum/track/current_track
 	var/list/datum/track/tracks
 

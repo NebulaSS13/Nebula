@@ -1,12 +1,12 @@
 /datum/codex_entry/airlock
-	associated_paths = list(/obj/machinery/door/airlock)
+	name = "airlock"
 	mechanics_text = "An airtight mechanical door. Most airlocks require an ID to open (wearing it on your ID slot is enough), and many have special access requirements to be on your ID. You can open an airlock by clicking on one, or simply walking into it, and clicking on an open airlock will close it. If the lights on the door flash red, you don't have the required access to open the airlock, and if they're consistently red, the door is bolted. Airlocks also require power to operate. In a situation without power, a crowbar can be used to force it open. <BR><BR>Airlocks can also be <span codexlink='hacking'>hacked</span>.<BR>Airlock hacking information:<BR>* Door bolts will lock the door, preventing it from being opened by any means until the bolts are raised again. Pulsing the correct wire will toggle the bolts, but cutting it will only drop them.<BR>* IDscan light indicates the door can scan ID cards. If the wire for this is pulsed it will cause the door to flash red, and cutting it will cause doors with restricted access to be unable to scan ID, essentially locking it.<BR>* The AI control light shows whether or not AI and robots can control the door. Pulsing is only temporary, while cutting is more permanent.<BR>* The test light shows whether the door has power or not. When turned off, the door can be opened with a crowbar.<BR>* If the door sparks, it is electrified. Pulsing the corresponding wire causes this to happen for 30 seconds, and cutting it electrifies the door until mended.<BR>* The check wiring light will turn on if the safety is turned off. This causes the airlock to close even when someone is standing on it, crushing them.<BR>* If the Check Timing Mechanism light is on then the door will close much faster than normal. Dangerous in conjuction with the Check Wiring light.<BR><BR><B>Deconstruction</B><BR>To pull apart an airlock, you must open the maintenance panel, disable the power via hacking (or any other means), weld the door shut, and crowbar the electroncs out, cut the wires with a wirecutter, unsecure the whole assembly with a wrench, and then cut it into metal sheets with a welding tool."
 	antag_text = "Electrifying a door makes for a good trap, hurting and stunning whoever touches it. The same goes for a combination of disabling the safety and timing mechanisms. Bolting a door can also help ensure privacy, or slow down those in search of you. It's also a good idea to disable AI interaction when needed."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/computer
-	associated_paths = list(/obj/machinery/computer, /obj/machinery/constructable_frame/computerframe)
+	name = "computer"
 	mechanics_text = "(This entry refers to the older single-purpose computers, not <span codexlink='modular console (machine)'>modular computers</span>.)<BR><BR> \
 	Computers are used primarily for controlling other machines and systems, or for providing information about said systems. They require power to function and run off the Equipment power channel on an APC. and sometimes requries ID access. \
 	<BR><BR><b>Constructing a computer:</b><BR> \
@@ -25,11 +25,10 @@
 	4.) Use a wrench on to take the frame apart.<BR> \
 	5.) Use a welder to cut the frame into sheets."
 	disambiguator = "machine"
-	include_subtypes = TRUE
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/computer/modular
-	associated_paths = list(/obj/machinery/computer/modular)
+	name = "modular computers"
 	lore_text = "Modular computers allow for customized hardware and downloadable software, enabling users to create their own workplace experience."
 	mechanics_text = "(This entry is for modular computers. Modular computers are not the same as regular computers.)<BR><BR> \
 	Modular computers can have a variety of functions depending on the installed hardware and software. They also come available as tablets, laptops, wallscreens and PDA.<BR>\
@@ -43,38 +42,39 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/conveyor_construct
-	associated_paths = list(/obj/machinery/conveyor, /obj/item/conveyor_construct)
+	name = "conveyor belt"
 	mechanics_text = "This device must be connected to a switch assembly before placement by clicking the switch on the conveyor belt assembly. When active it will move objects on top of it to the adjacent space based on its direction and if it is runnnig in forward or reverse mode. Can be removed with a crowbar."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/conveyor_switch
-	associated_paths = list(/obj/machinery/conveyor_switch, /obj/machinery/conveyor_switch/oneway, /obj/item/conveyor_switch_construct, /obj/item/conveyor_switch_construct/oneway)
+	name = "conveyor switch"
 	mechanics_text = "This device can connect to a number of conveyor belts and control their movement. A two-way switch will allow you to make the conveyors run in forward and reverse mode, the one-way switch will only allow one direction. Can be removed with a crowbar."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/cryopod
-	associated_paths = list(/obj/machinery/cryopod)
+	name = "cryopod"
 	mechanics_text = "To enter a cryopod, or put someone in a cryopod, click+drag. When someone is in a cryopod, and they use the <i>ghost</i> verb, their character will despawn, be removed from the game round along with all their belongings, and freeing their job slot for someone else to take. This also occurs if a character is inside a cryopod for 15 minutes. Any particularly important belongings that the game can't do without will be stored. The item can then be retrieved from the nearby oversight console."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/diffuser_machine
-	associated_paths = list(/obj/machinery/shield_diffuser)
+	name = "shield diffuser"
 	mechanics_text = "This device disrupts shields on directly adjacent tiles (in a + shaped pattern). They are commonly installed around exterior airlocks to prevent shields from blocking EVA access."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/disposal
-	associated_paths = list(/obj/machinery/disposal/buildable)
+	name = "disposal bin"
+	associated_strings = list("disposals")
 	mechanics_text = "A high-tech garbage bin. Inserting an item causes the disposal unit (after a delay) to pneumatically launch the item through a series of pipes leading to either a garbage processing room, or space, depending on the ship/station. Larger objects can be inserted via click+drag. <BR> You can remove a disposal unit by turning it off, using a screwdriver, then a welding tool, and removing the floor tile underneath it."
 	antag_text = "People can be inserted into the disposal unit. If they're capable of moving however, it's easy for them to get out. Be careful though, putting things in disposal units doesn't always mean they're gone forever. <BR>If you turn it off, it can be used to hide in. Just be careful no one turns it back on while you're still in there!"
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/emitter
-	associated_paths = list(/obj/machinery/emitter)
+	name = "emitter"
 	mechanics_text = "You must secure this in place with a wrench and weld it to the floor before using it. Using cables on the emitter will allow you to connect it to the powernet with a terminal, placed over a cable node. Clicking will toggle it on and off, at which point, so long as it remains powered, it will fire in a single direction in bursts of four."
 	lore_text = "Lasers like this one have been in use for ages, in applications such as mining, cutting, and in the startup sequence of many advanced space station and starshipn engines."
 	antag_text = "This baby is capable of slicing through walls, sealed lockers, and people."
@@ -82,14 +82,14 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/fusion_fuel_injector
-	associated_paths = list(/obj/machinery/fusion_fuel_injector, /obj/machinery/computer/fusion/fuel_control)
+	name = "fusion fuel injector"
 	lore_text = "A simple magnetic accelerator used to inject small pellets of fuel into a fusion field."
 	mechanics_text = "Accepts a fuel rod produced by the fuel compressor and regularly fires fuel pellets into the fusion field. Rods can be swapped by hand when the injector is not firing. Power outages will require the injector to be turned on again. If there is no electromagnetic field active to catch the injected fuel, the results can be very unhealthy for anyone standing in the firing path. <BR>Controlled via the fuel injection control computer."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/fusion_core
-	associated_paths = list(/obj/machinery/fusion_core, /obj/machinery/computer/fusion/core_control)
+	name = "fusion core"
 	lore_text = "An old but more or less reliable fusion field generator. Probably sourced from a retired cargo freighter."
 	mechanics_text = "Generates the field used to contain reaction material from fuel injectors, and dumps power into the power network under it based on plasma heat. Needs 500W or more in the network to start the field. Field will become unstable if it intersects with windows or other objects, and from some reactions, and will eventually rupture violently if not stabilized by a gyrotron. Turning the field off without letting it cool below 1000K will cause a violent explosion and EMP depending on the contents of the field. <BR>Controlled via the R-UST Mk. 8 core control. Make careful note of the instability."
 	antag_text = "Be careful when blowing this thing up. The blast is fairly large and can happen instantly depending how you do it."
@@ -97,57 +97,57 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/fuel_compressor
-	associated_paths = list(/obj/machinery/fuel_compressor)
+	name = "fuel compressor"
 	lore_text = "A highly secret design that can compress many varieties of solid and liquid matter into fuel rods for nuclear power production."
 	mechanics_text = "Uses sheets of material or units of reagents to produce fuel rods. Material/units are inserted by hand. Can also have some objects click-dragged onto it for more exotic fuel."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/gyrotron
-	associated_paths = list(/obj/machinery/emitter/gyrotron, /obj/machinery/computer/fusion/gyrotron)
+	name = "gyrotron"
 	lore_text = "A high-power industrial laser used to excite plasma for fusion reactions. Also used to excite careless engineers, usually fatally."
 	mechanics_text = "Fires in pulses and will heat up a plasma toroid that is below 1000K. Mostly used to lower field instability after heating it to ignition point. Very power hungry, uses 20k per point of power. <BR>Controlled via the gyrotron control console."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/pacman
-	associated_paths = list(/obj/machinery/port_gen/pacman)
+	name = "generator"
+	associated_strings = list("pacman")
 	mechanics_text = "Lends itself to being portable thanks to the small size and ease of use. Some versions use radioactive fuel and as such produces radiation, while others may produce dangerous byproducts as gasses. Ideally one should wear protective gear while interacting with an active generator. While active it also produces heat and will eventually overheat and explode. While the power output can be increased, doing this causes it to heat up faster. Must be secured using a wrench before use."
 	antag_text = "Can be used as a makeshift delayed explosive when power output is set to unsafe levels, though it may take some time to go off."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/replicator
-	associated_paths = list(/obj/machinery/fabricator/replicator)
+	name = "replicator"
 	mechanics_text = "The food replicator is operated through voice commands. To inquire available dishes on the menu, say 'menu'. To dispense a dish, say the name of the dish listed in its menu. Dishes can only be produced as long as the replicator has biomass. To check on the biomass level of the replicator, say 'status'. Various food items or plants may be inserted to refill biomass."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/vending
-	associated_paths = list(/obj/machinery/vending)
-	associated_strings = list("vending machine", "vendor")
+	name = "vendor"
+	associated_strings = list("vending machine")
 	mechanics_text = "A machine that dispenses items from a category of items at the user's selection.<BR>Vending machines sometimes require payment via an ID card, cash or charge card. Some dispense items for free, and such vending machines are usually access restricted. Items that have been dispensed can sometimes be returned simply by inserting it back into the vending machine by hand. Vending machines can also be restocked with an appropriate Vendor Restock, usually ordered via supply management, and then click+dragged onto the vending machine.<BR><BR>Vending machines can be <span codexlink='hacking'>hacked</span>.<BR><b>Vending machine hacking</b><BR>* The orange light shows if the vending machine is electrified.<BR>* The red light indicates whether or not the vending machine is firing out its contents randomly. Sometimes this can happen as a random event.<BR>* The green light indicates whether or not the vending machine is dispensing its hidden inventory. Nearly every vending machine has a list of secret goods that are usually considered to be contraband.<BR>* The purple or yellow light shows whether or not the ID scanner for the vending machine is working. When this function is disabled, anyone can access the vending machine, even if it normally has restricted access."
 	antag_text = "Accessing the secret inventory of a vending machine can sometimes be very useful, especially for department-focused machines."
 	disambiguator = "machine"
-	include_subtypes = TRUE
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/internet_uplink
-	associated_paths = list(/obj/machinery/internet_uplink, /obj/machinery/computer/internet_uplink)
+	name = "internet uplink"
 	lore_text = "A complex internet uplink, capable of communicating near instantaneously with other uplinks through wormhole technology. It can also communicate with PLEXUS repeaters within a local range using hyperintense radio waves."
 	mechanics_text = "Allows for PLEXUS receivers in a set range on the overmap to function, permitting internetwork functions in the sector. The PLEXUS uplink can restrict access to certain networks. The uplink requires massive amounts of power and atmospheric cooling, scaling with the desired range. <BR>Maximum range can be inreased by installing SMES coils. <BR>Can be controlled via the PLEXUS uplink computer."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/internet_repeater
-	associated_paths = list(/obj/machinery/internet_repeater)
+	name = "internet repeater"
 	lore_text = "A signal repeater, capable of transmitting and decoding hyperintense radio waves to and from PLEXUS uplinks."
 	mechanics_text = "Allows for network devices in its sector to connect to and communicate with distant networks over PLEXUS.<BR>Networks requires a modem to utilize PLEXUS connections."
 	disambiguator = "machine"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/mining_drill
-	associated_paths = list(/obj/machinery/mining_drill)
+	name = "mining drill"
 	mechanics_text = "When properly supported by two adjacent braces, the mining drill can automatically mine underground mineral deposits.<br>\
 	You can empty the ore storage by click-dragging the drill onto an ore box, or using the <b>Unload Drill</b> verb.<br>\
 	The drill head can be upgraded using a number of different components:<br>\

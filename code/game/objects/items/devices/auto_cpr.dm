@@ -14,6 +14,7 @@
 		/decl/material/solid/metal/uranium   = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/lead      = MATTER_AMOUNT_TRACE,
 	)
+	_atom_codex_value = /datum/codex_entry/autopump
 	var/last_pump
 	var/skilled_setup
 

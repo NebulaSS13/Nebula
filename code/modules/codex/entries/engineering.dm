@@ -1,5 +1,6 @@
 /datum/codex_entry/apc
-	associated_paths = list(/obj/machinery/apc)
+	name = "area power controller"
+	associated_strings = list("apc")
 	mechanics_text = "An APC (Area Power Controller) regulates and supplies backup power for the area they are in. Their power channels are divided \
 	out into 'environmental' (items that manipulate airflow and temperature), 'lighting' (the lights), and 'equipment' (everything else that consumes power).  \
 	Power consumption and backup power cell charge can be seen from the interface, further controls (turning a specific channel on, off or automatic, \
@@ -10,12 +11,13 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/inflatable_item
-	associated_paths = list(/obj/item/inflatable, /obj/structure/inflatable, /obj/structure/inflatable/door)
+	name = "inflatables"
 	mechanics_text = "Inflate by using it in your hand.  The inflatable barrier will inflate on your tile.  To deflate it, use the 'deflate' verb. Hitting this with any object will probably puncture and break it forever.<br>Walls are static, but doors may be clicked to open or close them. They only stop air while closed."
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/welding_pack
-	associated_paths = list(/obj/item/chems/weldpack, /obj/item/chems/weldpack/empty)
+	name = "welding pack"
+	associated_strings = list("welder pack")
 	mechanics_text = "This pack acts as a portable source of welding fuel. Use a welder on it to refill its tank - but make sure it's not lit! You can use this kit on a fuel tank or appropriate reagent dispenser to replenish its reserves."
 	lore_text = "The Shenzhen Chain of 2133 was an industrial accident of noteworthy infamy that occurred at Earth's L3 Lagrange Point. An apprentice welder, working for the Shenzhen Space Fabrication Group, failed to properly seal her fuel port, triggering a chain reaction that spread from laborer to laborer, instantly vaporizing a crew of fourteen. Don't let this happen to you!"
 	antag_text = "In theory, you could hold an open flame to this pack and produce some pretty catastrophic results. The trick is getting out of the blast radius."
@@ -23,21 +25,20 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/gripper
-	associated_paths = list(/obj/item/gripper)
+	name = "gripper"
 	mechanics_text = "Click an item to pick it up with your gripper. Use it as you would normally use anything in your hand. The Drop Item verb will allow you to release the item."
 	disambiguator = "equipment"
-	include_subtypes = TRUE
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/diffuser_item
-	associated_paths = list(/obj/item/shield_diffuser)
+	name = "shield diffuser"
 	mechanics_text = "This device disrupts shields on directly adjacent tiles (in a + shaped pattern), in a similar way the floor mounted variant does. It is, however, portable and run by an internal battery. Can be recharged with a regular recharger."
 	disambiguator = "equipment"
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/solars
-	associated_paths = list(/obj/item/solar_assembly, /obj/machinery/power/solar, /obj/machinery/power/tracker, /obj/machinery/power/solar_control)
-	associated_strings = list("solar array")
+	name = "solars"
+	associated_strings = list("solar array", "solar panel", "solar power")
 	lore_text = "'At Greencorps we love the environment, and space. With this package you are able to help mother nature and produce energy without any usage of fossil fuels! Singularity energy is dangerous while solar energy is safe, which is why it's better. Now here is how you set up your own solar array...''"
 	mechanics_text = "A solar array is a source of power for your ship or station, utalizing a series of panels on the outside of the ship/station. A computer console is used to control the array, with the help of a solar tracker.<BR> \
 	<BR><b>Using the console</b><BR> \
@@ -53,8 +54,8 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /datum/codex_entry/cable
-	associated_paths = list(/obj/structure/cable, /obj/item/stack/cable_coil)
-	associated_strings = list("cables")
+	name = "power cable"
+	associated_strings = list("cable", "cables")
 	mechanics_text = "Cables are used to transfer power and form power networks. Usually power is transfered via cables from a SMES to an APC for the majority of the ship/station. Cables also serve a purpose in constructing machinery, as a component. <BR>Hold a cable coil in one hand, and click it with the other to split the stack. Cables come in a variety of colours and can be painted using a cable painter. Right click on a cable coil to make cable restraints using 15 cables.<BR><BR> \
 	<B>Laying Cables</B><ul> \
 	<li>Cables can only be placed on plating. Tiles must be removed using a crowbar, if any.</li> \
@@ -64,5 +65,4 @@
 	<li>Knots are also used for certain machines to connect directly to a power network, usually by having the machine secured to the same plating as the knot is on, like the SMES. However, knots shouldn't exist within the network otherwise. Try to smooth those out.</li> \
 	<li>To lay a cable between decks (z-levels), use a cable on an open space from the deck above, dropping it down to the level below.</li></ul>"
 	antag_text = "Sometimes a carefully cut cable in the right place can cause power issues over a wide area once APCs start to run out. Just make sure to hide it after."
-	include_subtypes = TRUE
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE

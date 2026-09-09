@@ -6,6 +6,7 @@
 	desc = "A device that can separate components of a gas mixture and redirect them to different pipes."
 	icon_state = "map_filter"
 	core_icon = "filter"
+	_atom_codex_value = /datum/codex_entry/atmos_omni_filter
 
 	var/list/gas_filters = new()
 	var/datum/omni_port/input

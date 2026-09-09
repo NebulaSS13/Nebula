@@ -4,6 +4,10 @@
 	icon = 'icons/obj/items/weapon/swords/cult.dmi'
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
+/obj/item/sword/cultblade/get_antag_info()
+	. = ..()
+	LAZYADD(., "This sword is a powerful weapon, capable of severing limbs easily, if they are targeted. Nonbelievers are unable to use this weapon.")
+
 // separated into a proc so that modpacks can modify it
 /obj/item/sword/cultblade/proc/can_use_safely(mob/living/user)
 	return iscultist(user)

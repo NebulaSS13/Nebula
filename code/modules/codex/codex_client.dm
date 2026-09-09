@@ -1,5 +1,5 @@
 /client
-	var/codex_on_cooldown = FALSE
+	var/next_codex_action = FALSE
 	var/const/max_codex_entries_shown = 10
 
 /client/verb/search_codex(searching as text)
@@ -11,8 +11,8 @@
 	if(!mob || !SScodex)
 		return
 
-	if(codex_on_cooldown || !mob.can_use_codex())
-		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
+	if(world.time < next_codex_action || !mob.can_use_codex())
+		to_chat(src, SPAN_WARNING("You cannot perform codex actions for another [ceil((next_codex_action-world.time)/10)] second\s."))
 		return
 
 	if(!searching)
@@ -20,12 +20,11 @@
 		if(!searching)
 			return
 
-	if(codex_on_cooldown || !mob.can_use_codex())
-		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
+	if(world.time < next_codex_action || !mob.can_use_codex())
+		to_chat(src, SPAN_WARNING("You cannot perform codex actions for another [ceil((next_codex_action-world.time)/10)] second\s."))
 		return
 
-	codex_on_cooldown = TRUE
-	addtimer(CALLBACK(src, PROC_REF(reset_codex_cooldown)), 1 SECOND)
+	next_codex_action = world.time + 1 SECOND
 
 	var/list/all_entries = SScodex.retrieve_entries_for_string(searching)
 	if(mob && mob.mind && !player_is_antag(mob.mind))
@@ -67,11 +66,10 @@
 	if(!mob || !SScodex.initialized)
 		return
 
-	if(codex_on_cooldown || !mob.can_use_codex())
-		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
+	if(world.time < next_codex_action || !mob.can_use_codex())
+		to_chat(src, SPAN_WARNING("You cannot perform codex actions for another [ceil((next_codex_action-world.time)/10)] second\s."))
 		return
-	codex_on_cooldown = TRUE
-	addtimer(CALLBACK(src, PROC_REF(reset_codex_cooldown)), 1 SECOND)
+	next_codex_action = world.time + 1 SECOND
 
 	to_chat(mob, SPAN_NOTICE("The codex forwards you an index file."))
 
@@ -101,9 +99,6 @@
 	popup.set_content(jointext(codex_data, null))
 	popup.open()
 
-/client/proc/reset_codex_cooldown()
-	codex_on_cooldown = FALSE
-
 /client/verb/codex()
 	set name = "Codex"
 	set category = "IC"
@@ -112,12 +107,11 @@
 	if(!mob || !SScodex)
 		return
 
-	if(codex_on_cooldown || !mob.can_use_codex())
-		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
+	if(world.time < next_codex_action || !mob.can_use_codex())
+		to_chat(src, SPAN_WARNING("You cannot perform codex actions for another [ceil((next_codex_action-world.time)/10)] second\s."))
 		return
 
-	codex_on_cooldown = TRUE
-	addtimer(CALLBACK(src, PROC_REF(reset_codex_cooldown)), 1 SECOND)
+	next_codex_action = world.time + 1 SECOND
 
 	var/datum/codex_entry/entry = SScodex.get_codex_entry("nexus")
 	SScodex.present_codex_entry(mob, entry)

@@ -35,6 +35,7 @@ var/global/list/obj/structure/cable/all_cables = list()
 	anchored = TRUE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	level = LEVEL_BELOW_PLATING
+	_atom_codex_value = /datum/codex_entry/cable
 
 	/// The base cable stack that should be produced, not including color.
 	/// cable_type::stack_merge_type should equal cable_type, ideally

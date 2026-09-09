@@ -32,6 +32,7 @@ var/global/list/global/tank_gauge_cache = list()
 	throw_speed = 1
 	throw_range = 4
 	_base_attack_force = 15
+	_atom_codex_value = /datum/codex_entry/gas_tank
 
 	var/gauge_icon = "indicator_tank"
 	var/gauge_cap = 6

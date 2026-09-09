@@ -1,14 +1,15 @@
 var/global/repository/atom_info/atom_info_repository = new()
 
 /repository/atom_info
-	var/list/matter_cache         = list()
-	var/list/combined_worth_cache = list()
-	var/list/single_worth_cache   = list()
-	var/list/name_cache           = list()
-	var/list/description_cache    = list()
-	var/list/matter_mult_cache    = list()
-	var/list/origin_tech_cache    = list()
-	var/list/appearance_cache     = list()
+	var/alist/matter_cache         = alist()
+	var/alist/combined_worth_cache = alist()
+	var/alist/single_worth_cache   = alist()
+	var/alist/name_cache           = alist()
+	var/alist/description_cache    = alist()
+	var/alist/matter_mult_cache    = alist()
+	var/alist/origin_tech_cache    = alist()
+	var/alist/appearance_cache     = alist()
+	var/alist/codex_cache          = alist()
 
 /repository/atom_info/proc/create_key_for(var/_path, var/_mat, var/_amount)
 	. = "[_path]"
@@ -25,7 +26,7 @@ var/global/repository/atom_info/atom_info_repository = new()
 	else
 		. = new _path
 
-/repository/atom_info/proc/update_cached_info_for(var/_path, var/_mat, var/_amount, var/key, var/cache_appearance = FALSE)
+/repository/atom_info/proc/update_cached_info_for(var/_path, var/_mat, var/_amount, var/key, var/cache_appearance = FALSE, var/cache_codex = FALSE)
 	var/atom/instance
 	if(!matter_cache[key])
 		instance = get_instance_of(_path, _mat, _amount)
@@ -51,6 +52,10 @@ var/global/repository/atom_info/atom_info_repository = new()
 	if(!origin_tech_cache[key] && ispath(_path, /obj/item))
 		var/obj/item/item_instance = instance || get_instance_of(_path, _mat, _amount)
 		origin_tech_cache[key] = cached_json_decode(item_instance.get_origin_tech())
+	if(cache_codex && !(key in codex_cache))
+		instance = instance || get_instance_of(_path, _mat, _amount)
+		codex_cache[key] = instance.get_atom_codex_entry(permanent = TRUE) || FALSE
+
 	if(!QDELETED(instance))
 		qdel(instance)
 
@@ -95,3 +100,11 @@ var/global/repository/atom_info/atom_info_repository = new()
 	var/key = create_key_for(_path, _mat, _amount)
 	update_cached_info_for(_path, _mat, _amount, key, cache_appearance = TRUE)
 	. = appearance_cache[key]
+
+// Bespoke proc; only cache codex page if and when this proc is called, not more generally.
+/repository/atom_info/proc/get_codex_page_for(var/_path, var/_mat, var/_amount)
+	var/key = create_key_for(_path, _mat, _amount)
+	update_cached_info_for(_path, _mat, _amount, key, cache_codex = TRUE)
+	. = codex_cache[key]
+	if(!istype(., /datum))
+		. = null

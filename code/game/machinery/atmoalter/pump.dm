@@ -8,6 +8,7 @@
 	base_type = /obj/machinery/portable_atmospherics/powered/pump
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	movable_flags = MOVABLE_FLAG_WHEELED
+	_atom_codex_value = /datum/codex_entry/atmos_power_pump
 
 	var/direction_out = 0 //0 = siphoning, 1 = releasing
 	var/target_pressure = ONE_ATMOSPHERE

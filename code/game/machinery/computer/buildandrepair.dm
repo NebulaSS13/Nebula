@@ -5,6 +5,7 @@
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	icon_state = "unwired"
 	expected_machine_type = "computer"
+	_atom_codex_value = /datum/codex_entry/computer
 
 /obj/machinery/constructable_frame/computerframe/on_update_icon()
 	overlays.Cut()

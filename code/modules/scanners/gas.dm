@@ -9,6 +9,7 @@
 	origin_tech = @'{"magnets":1,"engineering":1}'
 	window_width = 350
 	window_height = 400
+	_atom_codex_value = /datum/codex_entry/gas_analyzer
 	var/mode = DEFAULT_MODE
 
 /obj/item/scanner/gas/get_header()

@@ -10,6 +10,7 @@
 	anchored = FALSE
 	use_power = POWER_USE_OFF
 	color_selectable = TRUE
+	_atom_codex_value = /datum/codex_entry/atmos_pipe_dispenser
 
 /obj/machinery/fabricator/pipe/on_update_icon()
 	return // no icons

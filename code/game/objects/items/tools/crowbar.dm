@@ -14,6 +14,8 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	drop_sound = 'sound/foley/bardrop1.ogg'
 	item_flags = ITEM_FLAG_IS_WEAPON
+	_atom_codex_value = /datum/codex_entry/crowbar
+
 	var/static/valid_colours = list(COLOR_RED_GRAY, COLOR_MAROON, COLOR_DARK_BROWN, COLOR_GRAY20)
 	var/handle_color
 	var/shape_variations = 1

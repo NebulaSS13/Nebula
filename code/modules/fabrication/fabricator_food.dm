@@ -7,6 +7,7 @@
 	base_icon_state = "replicator"
 	base_storage_capacity_mult = 5
 	base_type = /obj/machinery/fabricator/replicator
+	_atom_codex_value = /datum/codex_entry/replicator
 
 /obj/machinery/fabricator/replicator/Initialize()
 	. = ..()

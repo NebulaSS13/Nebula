@@ -83,8 +83,8 @@
 
 /obj/item/parcel/get_mechanics_info()
 	. = ..()
-	. += "<BR/>It can be opened by applying any sharp item, with help intent."
-	. += "<BR/>It can opened by using it while held, if its small enough."
+	LAZYADD(., "It can be opened by applying any sharp item, with help intent.")
+	LAZYADD(., "It can opened by using it while held, if its small enough.")
 
 /obj/item/parcel/proc/make_parcel(var/atom/movable/AM, var/mob/user)
 	if(!is_type_in_list(AM, get_whitelist()))

@@ -3,11 +3,12 @@
 //When it receives the "inject" signal, it will try to pump its entire contents into the environment regardless of pressure, using power.
 
 /obj/machinery/atmospherics/unary/outlet_injector
+	name = "injector outlet"
+	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
 	icon = 'icons/atmos/injector.dmi'
 	icon_state = "off"
 
-	name = "injector outlet"
-	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
+	_atom_codex_value = /datum/codex_entry/atmos_injector
 
 	use_power = POWER_USE_OFF
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff

@@ -7,6 +7,8 @@
 	icon_state = "map_off"
 	level = LEVEL_BELOW_PLATING
 
+	_atom_codex_value = /datum/codex_entry/atmos_gate
+
 	name = "pressure regulator"
 	desc = "A one-way air valve that can be used to regulate input or output pressure, and flow rate. Does not require power."
 

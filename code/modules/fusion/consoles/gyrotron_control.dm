@@ -4,6 +4,7 @@
 	icon_screen = "gyrotron_screen"
 	light_color = COLOR_BLUE
 	ui_template = "fusion_gyrotron_control.tmpl"
+	_atom_codex_value = /datum/codex_entry/gyrotron
 
 /obj/machinery/computer/fusion/gyrotron/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 

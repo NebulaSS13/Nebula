@@ -12,6 +12,7 @@
 	sharp = TRUE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	drop_sound = 'sound/foley/singletooldrop2.ogg'
+	_atom_codex_value = /datum/codex_entry/screwdriver
 
 	var/static/valid_colours = list(COLOR_RED, COLOR_CYAN_BLUE, COLOR_PURPLE, COLOR_CHESTNUT, COLOR_ASSEMBLY_YELLOW, COLOR_BOTTLE_GREEN)
 	var/handle_color

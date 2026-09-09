@@ -10,6 +10,7 @@
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	layer = STRUCTURE_LAYER
+	_atom_codex_value = /datum/codex_entry/atmos_circulator
 
 	var/kinetic_efficiency = 0.04 //combined kinetic and kinetic-to-electric efficiency
 	var/volume_ratio = 0.2

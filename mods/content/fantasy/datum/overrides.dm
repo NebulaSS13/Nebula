@@ -73,3 +73,13 @@
 		"The pain is overwhelming!"
 	)
 	return custom_pain_strings
+
+// Removes references to hydroponics.
+/datum/codex_entry/fruit_and_veg
+	mechanics_text = "Fruits and vegetables are grown from seeds in farm plots, or harvested wild from plants in nature. Some can have seeds extracted using a sharp knife to grow more.<br>Chopping, slicing or crushing growns with a knife is used to prepare them for other recipes."
+
+// Removes references to universal enzyme.
+
+/obj/item/food/dairy/get_mechanics_info()
+	. = ..()
+	LAZYADD(., "Dairy products are made from milk, either by skimming or from mixing milk with rennet and applying heat. Rennet can be obtained from the stomachs of grazing animals.")

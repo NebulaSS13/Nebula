@@ -18,6 +18,7 @@
 	storage = /datum/storage/crucible
 	obj_flags = OBJ_FLAG_NO_STORAGE
 	chem_volume = 300 * REAGENT_UNITS_PER_MATERIAL_SHEET
+	_atom_codex_value = /datum/codex_entry/material_sheet
 
 /obj/item/chems/crucible/attackby(obj/item/used_item, mob/user)
 

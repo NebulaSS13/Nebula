@@ -1,6 +1,6 @@
 /obj/machinery/portable_atmospherics/powered/scrubber
 	name = "portable air scrubber"
-
+	_atom_codex_value = /datum/codex_entry/atmos_power_scrubber
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "pscrubber:0"
 	density = TRUE

@@ -45,6 +45,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	origin_tech = @'{"magnets":3,"materials":2}'
+	_atom_codex_value = /datum/codex_entry/light_replacer
 
 	var/max_uses = 32
 	var/uses = 32

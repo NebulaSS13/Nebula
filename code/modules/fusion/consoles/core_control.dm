@@ -1,6 +1,7 @@
 /obj/machinery/computer/fusion/core_control
 	name = "\improper R-UST Mk. 8 core control"
 	ui_template = "fusion_core_control.tmpl"
+	_atom_codex_value = /datum/codex_entry/fusion_core
 
 /obj/machinery/computer/fusion/core_control/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 

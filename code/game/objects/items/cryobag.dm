@@ -13,6 +13,7 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 	bag_type = /obj/structure/closet/body_bag/cryobag
+	_atom_codex_value = /datum/codex_entry/cryobag
 	var/stasis_power
 
 /obj/item/bodybag/cryobag/get_cryogenic_power()
@@ -32,8 +33,8 @@
 	item_path = /obj/item/bodybag/cryobag
 	material = /decl/material/solid/organic/plastic
 	storage_types = CLOSET_STORAGE_MOBS
+	_atom_codex_value = /datum/codex_entry/cryobag
 	var/datum/gas_mixture/airtank
-
 	var/stasis_power = 20
 	var/degradation_time = 150 //ticks until stasis power degrades, ~5 minutes
 

@@ -8,7 +8,6 @@ SUBSYSTEM_DEF(codex)
 	var/regex/trailingLinebreakRegexEnd
 
 	var/list/datum/codex_entry/all_entries =       list()
-	var/list/datum/codex_entry/entries_by_path =   list()
 	var/list/datum/codex_entry/entries_by_string = list()
 	var/list/index_file =                          list()
 	var/list/search_cache =                        list()
@@ -63,17 +62,27 @@ SUBSYSTEM_DEF(codex)
 		string = replacetextEx(string, linkRegex.match, replacement)
 	return string
 
-/datum/controller/subsystem/codex/proc/get_codex_entry(var/entry)
+/datum/controller/subsystem/codex/proc/get_codex_entry(atom/entry, do_search = FALSE, skip_atom_codex = FALSE)
+
 	if(istype(entry, /atom))
 		var/atom/entity = entry
-		var/specific_codex_entry = entity.get_specific_codex_entry()
-		if(specific_codex_entry)
-			return specific_codex_entry
-		return get_entry_by_string(entity.name) || entries_by_path[entity.type]
-	if(ispath(entry))
-		return entries_by_path[entry]
+		if(!skip_atom_codex) // Avoids infinite loops when we enter here -from- get_atom_codex_entry()
+			var/specific_codex_entry = entity.get_atom_codex_entry()
+			if(specific_codex_entry)
+				return specific_codex_entry
+		return get_codex_entry(entity.name, do_search, skip_atom_codex)
+
+	// As above for the skip_atom_codex check
+	if(ispath(entry, /atom) && TYPE_IS_SPAWNABLE(entry) && !TYPE_IS_ABSTRACT(entry) && !skip_atom_codex)
+		return atom_info_repository.get_codex_page_for(entry)
+
 	if(istext(entry))
-		return entries_by_string[codex_sanitize(entry)]
+		entry = codex_sanitize(entry)
+		. = entries_by_string[entry]
+		if(!. && do_search)
+			var/list/entries = retrieve_entries_for_string(entry)
+			if(length(entries))
+				return entries[1]
 
 /datum/controller/subsystem/codex/proc/get_entry_by_string(var/string)
 	return entries_by_string[codex_sanitize(string)]
@@ -116,6 +125,11 @@ SUBSYSTEM_DEF(codex)
 					continue
 				if(findtext(entry.name, searching) || findtext(entry.lore_text, searching) || findtext(entry.mechanics_text, searching) || findtext(entry.antag_text, searching))
 					results |= entry
+				else
+					for(var/associated_string in entry.associated_strings)
+						if(findtext(associated_string, searching))
+							results |= entry
+							break
 		search_cache[searching] = sortTim(results, /proc/cmp_name_asc)
 	return search_cache[searching]
 

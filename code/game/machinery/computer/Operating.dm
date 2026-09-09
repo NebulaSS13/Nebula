@@ -6,6 +6,7 @@
 	anchored = TRUE
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
+	_atom_codex_value = /datum/codex_entry/operating
 	var/mob/living/human/victim = null
 	var/obj/machinery/optable/table = null
 

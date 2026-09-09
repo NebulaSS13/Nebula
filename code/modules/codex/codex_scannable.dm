@@ -20,7 +20,7 @@ var/global/list/unlocked_codex_scannables = list()
 	var/worth_points = 1
 	var/category
 
-/datum/codex_entry/scannable/New(var/_display_name, var/list/_associated_paths, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
+/datum/codex_entry/scannable/New(var/_display_name, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
 	..()
 	if(category)
 		var/decl/codex_category/cat = GET_DECL(category)

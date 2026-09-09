@@ -1,6 +1,5 @@
 /datum/extension/armor/proc/get_capabilities_description()
 	. = list()
-
 	var/list/descriptors = decls_repository.get_decls_of_type(/decl/protection_type)
 	for(var/T in descriptors)
 		var/decl/protection_type/armortype = descriptors[T]
@@ -14,7 +13,6 @@
 /datum/extension/armor/ablative/get_capabilities_description()
 	. = ..()
 	. += "It degrades as it blocks damage."
-
 
 // Generic non-bomb brute damage
 /decl/protection_type

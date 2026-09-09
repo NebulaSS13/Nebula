@@ -2,6 +2,8 @@
 	icon = 'icons/atmos/valve.dmi'
 	icon_state = "map_valve0"
 
+	_atom_codex_value = /datum/codex_entry/atmos_valve
+
 	name = "manual valve"
 	desc = "A valve that controls flow through a pipe network, and must be operated by hand."
 

@@ -8,3 +8,4 @@
 	attack_verb   = list("attacked", "poked", "jabbed", "torn", "gored")
 	does_spin     = FALSE
 	abstract_type = /obj/item/bladed/polearm/spear
+	_atom_codex_value = /datum/codex_entry/spear

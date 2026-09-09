@@ -1,6 +1,8 @@
 /obj/machinery/atmospherics/tvalve
 	icon = 'icons/atmos/tvalve.dmi'
 	icon_state = "map_tvalve0"
+	_atom_codex_value = /datum/codex_entry/atmos_tvalve
+
 	var/base_icon_state = "tvalve"
 
 	name = "manual switching valve"

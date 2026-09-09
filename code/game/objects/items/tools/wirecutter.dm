@@ -13,6 +13,7 @@
 	edge = TRUE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	drop_sound = 'sound/foley/singletooldrop1.ogg'
+	_atom_codex_value = /datum/codex_entry/wirecutters
 
 	var/handle_color
 	var/static/valid_colours = list(COLOR_RED, COLOR_MAROON, COLOR_SEDONA, PIPE_COLOR_YELLOW, COLOR_BABY_BLUE)
