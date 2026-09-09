@@ -20,7 +20,7 @@
 	speak_chance     = 0
 	turns_per_wander = 10
 
-/datum/mob_controller/aggressive/revenant/find_target()
+/datum/mob_controller/aggressive/revenant/find_valid_target()
 	. = ..()
 	if(.)
 		body.custom_emote(AUDIBLE_MESSAGE, "wails at [.]")

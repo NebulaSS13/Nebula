@@ -35,7 +35,7 @@
 /datum/mob_controller/aggressive/construct
 	emote_speech = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
 	emote_hear = list("wails","screeches")
-	do_wander = FALSE
+	ai_flags = AI_FLAG_AGGRESSIVE | AI_FLAG_ALERTS | AI_FLAG_ATTACKS_ENEMIES
 
 /mob/living/simple_animal/construct/check_has_mouth()
 	return FALSE
@@ -114,7 +114,7 @@
 	ai = /datum/mob_controller/aggressive/construct_armoured
 
 /datum/mob_controller/aggressive/construct_armoured
-	can_escape_buckles = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES | AI_FLAG_AGGRESSIVE | AI_FLAG_DESTROYER
 
 /obj/item/natural_weapon/juggernaut
 	name = "armored gauntlet"

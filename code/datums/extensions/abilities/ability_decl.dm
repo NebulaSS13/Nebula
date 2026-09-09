@@ -1,7 +1,7 @@
 #define SHOW_AUDIENCE(USER, TARGET, FIRST_MSG, THIRD_MSG, STYLE)                                                                        \
 	if(FIRST_MSG && THIRD_MSG) {                                                                                                        \
 		USER.visible_message(                                                                                                           \
-			SPAN_STYLE(STYLE, capitalize_proper_html(emote_replace_target_tokens(emote_replace_user_tokens(THIRD_MSG, USER), TARGET))), \
+			SPAN_STYLE(STYLE, capitalize_proper_html(REPLACE_EMOTE_TOKENS(THIRD_MSG, USER, TARGET))), \
 			SPAN_STYLE(STYLE, capitalize_proper_html(emote_replace_target_tokens(FIRST_MSG, TARGET)))                                   \
 		)                                                                                                                               \
 	} else if(FIRST_MSG) {                                                                                                              \

@@ -20,8 +20,7 @@
 	base_movement_delay = 0
 
 /datum/mob_controller/aggressive/slug
-	try_destroy_surroundings = FALSE
-	can_escape_buckles = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES | AI_FLAG_AGGRESSIVE
 
 /datum/mob_controller/aggressive/slug/valid_target(atom/A)
 	. = ..()

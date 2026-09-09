@@ -108,7 +108,7 @@
 
 /datum/mob_controller/aggressive/antlion/mega
 	break_stuff_probability = 25
-	can_escape_buckles = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES | AI_FLAG_AGGRESSIVE | AI_FLAG_DESTROYER
 
 /obj/item/natural_weapon/bite/megalion
 	name = "mandibles"

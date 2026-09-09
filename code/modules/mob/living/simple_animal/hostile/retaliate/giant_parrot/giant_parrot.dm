@@ -24,7 +24,7 @@
 /datum/mob_controller/aggressive/parrot/space
 	emote_speech = null
 	emote_hear   = list("sings a song to herself", "preens herself")
-	can_escape_buckles = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES | AI_FLAG_AGGRESSIVE | AI_FLAG_DESTROYER | AI_FLAG_ATTACKS_ENEMIES
 
 /mob/living/simple_animal/hostile/parrot/space/proc/get_parrot_species()
 	var/list/parrot_species = decls_repository.get_decls_of_type(/decl/parrot_subspecies)

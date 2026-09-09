@@ -12,7 +12,7 @@
 		return
 	if(!paired_nurse)
 		find_nurse()
-	if(paired_nurse && get_activity() == AI_ACTIVITY_IDLE && get_stance() == STANCE_IDLE)
+	if(paired_nurse && get_activity() == AI_ACTIVITY_NORMAL && get_stance()?.type == /decl/mob_controller_stance/idle)
 		protect(paired_nurse)
 
 /datum/mob_controller/aggressive/giant_spider/guard/handle_death(gibbed)
@@ -42,7 +42,6 @@
 			_acceptable_distance = 2
 		)
 		body.start_automove(paired_nurse_instance.body, metadata = _guard_nurse_metadata)
-		addtimer(CALLBACK(body, TYPE_PROC_REF(/mob/living/simple_animal/hostile/giant_spider, disable_stop_automated_movement)), 5 SECONDS)
 
 /datum/mob_controller/aggressive/giant_spider/guard/proc/go_berserk()
 	body.audible_message(SPAN_DANGER("\The [body] chitters wildly!"))

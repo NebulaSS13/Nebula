@@ -27,7 +27,7 @@
 	turns_per_wander = 6
 	break_stuff_probability = 25
 
-/datum/mob_controller/aggressive/carp/find_target()
+/datum/mob_controller/aggressive/carp/find_valid_target()
 	. = ..()
 	if(.)
 		body.custom_emote(VISIBLE_MESSAGE,"gnashes at [.]")

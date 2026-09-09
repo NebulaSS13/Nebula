@@ -10,9 +10,6 @@
 	if(!(. = ..()))
 		return
 
-	if(body.incapacitated())
-		return
-
 	var/obj/held = body.get_active_held_item()
 	if(held && prob(1))
 		var/turf/T = get_random_turf_in_range(body, 7, 2)

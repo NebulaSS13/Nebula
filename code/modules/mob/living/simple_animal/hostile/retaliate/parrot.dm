@@ -75,14 +75,13 @@
 	var/icon_set = "parrot"
 
 /datum/mob_controller/aggressive/parrot
-	turns_per_wander    = 10
-	emote_speech        = list("Hi","Hello!","Cracker?")
-	emote_hear          = list("squawks","bawks")
-	emote_see           = list("flutters its wings")
-	do_wander           = FALSE
-	speak_chance        = 0.5
-	only_attack_enemies = TRUE
-	expected_type       = /mob/living/simple_animal/hostile/parrot
+	turns_per_wander = 10
+	emote_speech     = list("Hi","Hello!","Cracker?")
+	emote_hear       = list("squawks","bawks")
+	emote_see        = list("flutters its wings")
+	speak_chance     = 0.5
+	expected_type    = /mob/living/simple_animal/hostile/parrot
+	ai_flags         = AI_FLAG_AGGRESSIVE | AI_FLAG_ALERTS | AI_FLAG_ATTACKS_ENEMIES
 
 /*
  * AI - Not really intelligent, but I'm calling it AI anyway.
