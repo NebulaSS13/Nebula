@@ -89,17 +89,23 @@
 		for(var/thing in recipe.reagents)
 			var/decl/material/thing_reagent = GET_DECL(thing)
 			ingredients += "[recipe.reagents[thing]]u <span codexlink='[thing_reagent.codex_name || thing_reagent.name] (substance)'>[thing_reagent.name]</span>"
+
 		for(var/atom/thing as anything in recipe.items)
 			var/count = recipe.items[thing]
 			var/thing_name = initial(thing.name)
+
+			var/datum/codex_entry/thing_entry = SScodex.get_codex_entry(thing)
 			if(ispath(thing, /atom/movable) && TYPE_IS_SPAWNABLE(thing))
 				thing_name = atom_info_repository.get_name_for(thing)
+				thing_entry = atom_info_repository.get_codex_page_for(thing)
+
 			if(SScodex.get_entry_by_string(thing_name))
 				thing_name = "<l>[thing_name]</l>"
 			else
-				var/datum/codex_entry/result_entry = SScodex.get_codex_entry(thing) || atom_info_repository.get_codex_page_for(thing)
-				if(result_entry)
-					thing_name = "<span codexlink='[result_entry.name]'>[thing_name]</span>"
+				thing_entry ||= SScodex.get_codex_entry(thing_name, do_search = TRUE)
+				if(thing_entry)
+					thing_name = "<span codexlink='[thing_entry.name]'>[thing_name]</span>"
+
 			ingredients += (count > 1) ? "[count]x [thing_name]" : "\a [thing_name]"
 		for(var/thing in recipe.fruit)
 			ingredients += "[recipe.fruit[thing]] [thing]\s"

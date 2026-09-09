@@ -13,17 +13,17 @@
 /atom/proc/get_codex_value()
 	return src
 
-/atom/proc/get_specific_codex_entry()
+/atom/proc/get_atom_codex_entry(mob/user)
 	if(!atom_codex_ref)
-		return
+		return SScodex.get_codex_entry(get_codex_value(user))
 	if(!istype(atom_codex_ref, /datum/codex_entry))
 		var/lore = get_lore_info()
 		var/mechanics = get_mechanics_info()
 		var/antag = get_antag_info()
 		if(!lore && !mechanics && !antag)
-			return
+			return SScodex.get_codex_entry(get_codex_value(user))
 		atom_codex_ref = new /datum/codex_entry/temporary(name, list(type), _lore_text = lore, _mechanics_text = mechanics, _antag_text = antag)
-	return atom_codex_ref
+	return atom_codex_ref || SScodex.get_codex_entry(get_codex_value(user))
 
 /atom/proc/get_mechanics_info()
 	return

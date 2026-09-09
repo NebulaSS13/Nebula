@@ -317,7 +317,14 @@
 		if(examine_prefix)
 			examine_prefix += " " // add a space to the end to be polite
 		article_name = ADD_ARTICLE_GENDER("[examine_prefix][name]", gender)
-	return list("[html_icon(src)] That's [article_name][infix][get_examine_punctuation()] [suffix]")
+
+	var/header_string = "[html_icon(src)] That's [article_name][infix][get_examine_punctuation()] [suffix]"
+	if(user?.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_ON && user.can_use_codex())
+		var/datum/codex_entry/codex = get_atom_codex_entry(user)
+		if(codex)
+			header_string = "[header_string]<sup><a href='byond://?src=\ref[SScodex];show_examined_info=\ref[codex];show_to=\ref[user]'>?</a></b> is available.</sup>"
+
+	return list(header_string)
 
 // Main body of examine, displayed after the header and before hints.
 /atom/proc/get_examine_strings(mob/user, distance, infix, suffix)
@@ -343,10 +350,7 @@
 
 	var/decl/interaction_handler/handler = get_quick_interaction_handler(user)
 	if(handler)
-		LAZYADD(., SPAN_NOTICE("<b>Ctrl-click</b> \the [src] while in your inventory to [lowertext(handler.name)]."))
-
-	if(user?.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_ON && user.can_use_codex() && SScodex.get_codex_entry(get_codex_value(user)))
-		LAZYADD(., SPAN_NOTICE("The codex has <b><a href='byond://?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>relevant information</a></b> available."))
+		LAZYADD(., SPAN_INFO("<b>Ctrl-click</b> \the [src] while in your inventory to [lowertext(handler.name)]."))
 
 /**
 	Relay movement to this atom.

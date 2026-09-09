@@ -148,7 +148,7 @@ TODO: work out how to implement an external search function.
 			atom = new atom_type
 			if(!istype(atom)) // Something went wrong, possibly a runtime in the atom info repo.
 				continue
-			var/datum/codex_entry/codex_entry = atom.get_specific_codex_entry()
+			var/datum/codex_entry/codex_entry = atom.get_atom_codex_entry()
 			if(istype(codex_entry))
 				var/link_name = codex_entry.get_dump_link_name()
 				if(ismob(atom))

@@ -63,17 +63,22 @@ SUBSYSTEM_DEF(codex)
 		string = replacetextEx(string, linkRegex.match, replacement)
 	return string
 
-/datum/controller/subsystem/codex/proc/get_codex_entry(var/entry)
+/datum/controller/subsystem/codex/proc/get_codex_entry(entry, do_search = FALSE)
 	if(istype(entry, /atom))
 		var/atom/entity = entry
-		var/specific_codex_entry = entity.get_specific_codex_entry()
+		var/specific_codex_entry = entity.get_atom_codex_entry()
 		if(specific_codex_entry)
 			return specific_codex_entry
 		return get_entry_by_string(entity.name) || entries_by_path[entity.type]
 	if(ispath(entry))
 		return entries_by_path[entry]
 	if(istext(entry))
-		return entries_by_string[codex_sanitize(entry)]
+		entry = codex_sanitize(entry)
+		. = entries_by_string[entry]
+		if(!. && do_search)
+			var/list/entries = retrieve_entries_for_string(entry)
+			if(length(entries))
+				return entries[1]
 
 /datum/controller/subsystem/codex/proc/get_entry_by_string(var/string)
 	return entries_by_string[codex_sanitize(string)]
