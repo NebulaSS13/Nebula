@@ -1,13 +1,5 @@
 /datum/codex_entry/cuchulain_foundation
 	name = "Cuchulain Foundation"
-	associated_paths = list(
-		/obj/item/briefcase/foundation,
-		/obj/item/gun/projectile/revolver/foundation,
-		/obj/item/card/id/foundation,
-		/obj/item/card/id/foundation_civilian,
-		/obj/item/clothing/suit/toggle/labcoat/foundation,
-		/obj/item/chems/drinks/glass2/coffeecup/foundation
-	)
 	lore_text = "The Cuchulain Foundation is a non-profit body based out of Neptune orbit. Their logo is \
 	an upward-facing radio telescope dish, usually printed in green. They perform niche research on behalf \
 	of private parties, the government, and their own interests. They are also the single largest psionic registration \
@@ -22,14 +14,27 @@
 	researching or understanding them, and the depth and nature of their connections to other major \
 	bodies are unclear."
 
+/obj/item/briefcase/foundation
+	_atom_codex_value = /datum/codex_entry/cuchulain_foundation
+
+/obj/item/gun/projectile/revolver/foundation
+	_atom_codex_value = /datum/codex_entry/cuchulain_foundation
+
+/obj/item/card/id/foundation
+	_atom_codex_value = /datum/codex_entry/cuchulain_foundation
+
+/obj/item/card/id/foundation_civilian
+	_atom_codex_value = /datum/codex_entry/cuchulain_foundation
+
+/obj/item/clothing/suit/toggle/labcoat/foundation
+	_atom_codex_value = /datum/codex_entry/cuchulain_foundation
+
+/obj/item/chems/drinks/glass2/coffeecup/foundation
+	_atom_codex_value = /datum/codex_entry/cuchulain_foundation
+
 /datum/codex_entry/psionics
 	name = "Psionics"
 	associated_strings = list("psychic powers")
-	associated_paths = list(
-		/obj/item/book/fluff/psionics,
-		/obj/item/clothing/head/helmet/space/psi_amp,
-		/obj/item/clothing/head/helmet/space/psi_amp/lesser
-	)
 	lore_text = "Psionics are a relatively new phenomenon theorized to be linked to long-term exposure \
 	to deep, uninhabited space. A tiny, tiny subset of people exposed to such conditions can develop the \
 	ability to perform small feats like levitating coins or removing a headache with nothing but their mind. \
@@ -45,3 +50,12 @@
 	made of nullglass will stop the use of powers, and overuse of powers can cause lethal brain damage."
 	antag_text = "Psionic amplifiers are illegal equipment, but can boost your psionics to massive levels at the cost \
 	of occupying your hat slot permanently."
+
+/obj/item/book/fluff/psionics
+	_atom_codex_value = /datum/codex_entry/psionics
+
+/obj/item/clothing/head/helmet/space/psi_amp
+	_atom_codex_value = /datum/codex_entry/psionics
+
+/obj/item/clothing/head/helmet/space/psi_amp/lesser
+	_atom_codex_value = /datum/codex_entry/psionics

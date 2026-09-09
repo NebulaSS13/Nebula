@@ -13,6 +13,7 @@ Skill books that increase your skills while you activate and hold them
 	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/organic/wood/oak = MATTER_AMOUNT_REINFORCEMENT)
 	abstract_type = /obj/item/book/skill
+	_atom_codex_value = /datum/codex_entry/textbook
 
 	var/decl/skill/skill       // e.g. SKILL_LITERACY
 	var/skill_req = SKILL_NONE           // The level the user needs in the skill to benefit from the book, e.g. SKILL_PROF

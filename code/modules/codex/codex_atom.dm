@@ -1,41 +1,35 @@
 /atom
-	var/atom_codex_ref
-
-/obj
-	atom_codex_ref = TRUE
-
-/mob
-	atom_codex_ref = TRUE
-
-/turf
-	atom_codex_ref = TRUE
+	VAR_PROTECTED/datum/codex_entry/_atom_codex_value // /datum for initial()
+	VAR_PROTECTED/datum/codex_entry/_atom_codex_ref
 
 /atom/proc/get_codex_value()
-	return src
+	return ispath(_atom_codex_value, /datum/codex_entry) ? _atom_codex_value::name : src
 
-/atom/proc/get_atom_codex_entry(mob/user, permanent = FALSE)
+/atom/proc/get_atom_codex_entry(mob/user, permanent = FALSE, strict = TRUE)
 
-	if(!atom_codex_ref)
-		return SScodex.get_codex_entry(get_codex_value(user), skip_atom_codex = TRUE)
+	var/existing = SScodex.get_codex_entry(get_codex_value(user), do_search = !strict, skip_atom_codex = TRUE)
+	if(existing)
+		return existing
 
-	if(istype(atom_codex_ref, /datum/codex_entry))
-		return atom_codex_ref
+	if(istype(_atom_codex_ref, /datum/codex_entry))
+		return _atom_codex_ref
 
-	var/lore      = get_lore_info()
-	var/mechanics = get_mechanics_info()
-	var/antag     = get_antag_info()
-	if(!length(lore) && !length(mechanics) && !length(antag))
+	var/lore_text      = get_lore_info()
+	var/mechanics_text = get_mechanics_info()
+	var/antag_text     = get_antag_info()
+
+	if(!length(lore_text) && !length(mechanics_text) && !length(antag_text))
 		return
 
-	lore      = islist(lore)      ? jointext(lore,      "<br><br>") : null
-	mechanics = islist(mechanics) ? jointext(mechanics, "<br><br>") : null
-	antag     = islist(antag)     ? jointext(antag,     "<br><br>") : null
+	lore_text      = islist(lore_text)      ? jointext(lore_text,      "<br><br>") : null
+	mechanics_text = islist(mechanics_text) ? jointext(mechanics_text, "<br><br>") : null
+	antag_text     = islist(antag_text)     ? jointext(antag_text,     "<br><br>") : null
 
 	if(!permanent)
-		atom_codex_ref = new /datum/codex_entry/temporary(name, list(type), _lore_text = lore, _mechanics_text = mechanics, _antag_text = antag)
-		return atom_codex_ref
+		_atom_codex_ref = new /datum/codex_entry/temporary(name, _lore_text = lore_text, _mechanics_text = mechanics_text, _antag_text = antag_text)
+		return _atom_codex_ref
 
-	return SScodex.get_codex_entry(get_codex_value(user), skip_atom_codex = TRUE) || new /datum/codex_entry(name, list(type), _lore_text = lore, _mechanics_text = mechanics, _antag_text = antag)
+	return SScodex.get_codex_entry(get_codex_value(user), do_search = TRUE, skip_atom_codex = TRUE) || new /datum/codex_entry(name, _lore_text = lore_text, _mechanics_text = mechanics_text, _antag_text = antag_text)
 
 /atom/proc/get_mechanics_info()
 	return

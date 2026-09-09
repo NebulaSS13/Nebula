@@ -520,9 +520,5 @@ Class Procs:
 	id_tag = new_id_tag
 	//#TODO: Add handling for components, when we're sure it will work for any kind of machinery. Some machines do not use the same id_tag on receiver and transmitters for example.
 
-// Make sure that mapped subtypes get the right codex entry.
-/obj/machinery/get_codex_value()
-	return base_type || ..()
-
 /obj/machinery/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
 	return FALSE

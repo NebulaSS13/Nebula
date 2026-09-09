@@ -8,7 +8,6 @@ SUBSYSTEM_DEF(codex)
 	var/regex/trailingLinebreakRegexEnd
 
 	var/list/datum/codex_entry/all_entries =       list()
-	var/list/datum/codex_entry/entries_by_path =   list()
 	var/list/datum/codex_entry/entries_by_string = list()
 	var/list/index_file =                          list()
 	var/list/search_cache =                        list()
@@ -63,7 +62,7 @@ SUBSYSTEM_DEF(codex)
 		string = replacetextEx(string, linkRegex.match, replacement)
 	return string
 
-/datum/controller/subsystem/codex/proc/get_codex_entry(entry, do_search = FALSE, skip_atom_codex = FALSE)
+/datum/controller/subsystem/codex/proc/get_codex_entry(atom/entry, do_search = FALSE, skip_atom_codex = FALSE)
 
 	if(istype(entry, /atom))
 		var/atom/entity = entry
@@ -71,10 +70,11 @@ SUBSYSTEM_DEF(codex)
 			var/specific_codex_entry = entity.get_atom_codex_entry()
 			if(specific_codex_entry)
 				return specific_codex_entry
-		return get_codex_entry(entity.type, do_search, skip_atom_codex) || get_codex_entry(entity.name, do_search, skip_atom_codex)
+		return get_codex_entry(entity.name, do_search, skip_atom_codex)
 
-	if(ispath(entry))
-		return entries_by_path[entry]
+	// As above for the skip_atom_codex check
+	if(ispath(entry, /atom) && TYPE_IS_SPAWNABLE(entry) && !TYPE_IS_ABSTRACT(entry) && !skip_atom_codex)
+		return atom_info_repository.get_codex_page_for(entry)
 
 	if(istext(entry))
 		entry = codex_sanitize(entry)
@@ -125,6 +125,11 @@ SUBSYSTEM_DEF(codex)
 					continue
 				if(findtext(entry.name, searching) || findtext(entry.lore_text, searching) || findtext(entry.mechanics_text, searching) || findtext(entry.antag_text, searching))
 					results |= entry
+				else
+					for(var/associated_string in entry.associated_strings)
+						if(findtext(associated_string, searching))
+							results |= entry
+							break
 		search_cache[searching] = sortTim(results, /proc/cmp_name_asc)
 	return search_cache[searching]
 

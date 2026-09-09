@@ -70,6 +70,7 @@
 	w_class     = ITEM_SIZE_HUGE
 	atom_flags  = ATOM_FLAG_OPEN_CONTAINER
 	chem_volume = 350
+	_atom_codex_value = /datum/codex_entry/welding_pack
 	var/obj/item/weldingtool/weldpack/welder = /obj/item/weldingtool/weldpack
 
 // Duplicated from welder tanks.

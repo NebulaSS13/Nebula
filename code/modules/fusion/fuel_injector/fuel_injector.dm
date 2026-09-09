@@ -10,6 +10,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	base_type = /obj/machinery/fusion_fuel_injector
+	_atom_codex_value = /datum/codex_entry/fusion_fuel_injector
 
 	var/fuel_usage = 0.001
 	var/initial_id_tag

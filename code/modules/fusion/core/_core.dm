@@ -17,6 +17,7 @@
 	stat_immune = NOINPUT
 	base_type = /obj/machinery/fusion_core
 	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
+	_atom_codex_value = /datum/codex_entry/fusion_core
 
 	var/obj/effect/fusion_em_field/owned_field
 	var/field_strength = 1//0.01
@@ -103,13 +104,13 @@
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		if(anchored)
-			user.visible_message("\The [user] secures \the [src] to the floor.", 
-				"You secure \the [src] to the floor.", 
+			user.visible_message("\The [user] secures \the [src] to the floor.",
+				"You secure \the [src] to the floor.",
 				"You hear a ratchet."
 			)
 		else
-			user.visible_message("\The [user] unsecures \the [src] from the floor.", 
-				"You unsecure \the [src] from the floor.", 
+			user.visible_message("\The [user] unsecures \the [src] from the floor.",
+				"You unsecure \the [src] from the floor.",
 				"You hear a ratchet."
 			)
 		return TRUE

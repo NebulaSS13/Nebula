@@ -15,14 +15,13 @@
 	drying_wetness = 45
 	dried_type = /obj/item/food/grown/dry
 	allergen_flags = ALLERGEN_VEGETABLE
+	_atom_codex_value = /datum/codex_entry/fruit_and_veg
 
 	var/plant_segment_type = PLANT_SEG_BODY // Used for growns produced via plant dissection.
 	var/work_skill = SKILL_BOTANY
 	var/seeds_extracted = FALSE
 	var/datum/seed/seed
 
-/obj/item/food/grown/get_codex_value()
-	return /datum/codex_entry/fruit_and_veg::name
 
 // This is sort of pointless while food is a valid input on the ChemMaster but maybe
 // in the future there will be some more interesting ways to process growns/food.

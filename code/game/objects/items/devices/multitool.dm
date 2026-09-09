@@ -17,7 +17,7 @@
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
 	)
-
+	_atom_codex_value = /datum/codex_entry/multitool
 	origin_tech = @'{"magnets":1,"engineering":1}'
 
 	var/buffer_name

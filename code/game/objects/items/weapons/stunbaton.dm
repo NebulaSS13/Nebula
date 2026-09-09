@@ -17,6 +17,7 @@
 	)
 	item_flags = ITEM_FLAG_IS_WEAPON
 	_base_attack_force = 15
+	_atom_codex_value = /datum/codex_entry/baton
 	var/stunforce = 0
 	var/agonyforce = 30
 	var/status = 0		//whether the thing is on or not

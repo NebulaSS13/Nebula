@@ -27,6 +27,7 @@ var/global/list/all_apcs = list()
 	clicksound = "switch"
 	layer = ABOVE_WINDOW_LAYER
 	directional_offset = @'{"NORTH":{"y":22}, "SOUTH":{"y":-22}, "EAST":{"x":22}, "WEST":{"x":-22}}'
+	_atom_codex_value = /datum/codex_entry/apc
 
 	var/powered_down = FALSE
 	var/area/area

@@ -8,6 +8,7 @@
 	max_amount = 50
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	origin_tech = @'{"materials":6,"wormholes":4}'
+	_atom_codex_value = /datum/codex_entry/telecrystal
 
 /obj/item/stack/telecrystal/afterattack(var/obj/item/I, mob/user, proximity)
 	if(!proximity)

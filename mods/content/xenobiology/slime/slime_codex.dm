@@ -1,12 +1,17 @@
 
 /datum/codex_entry/slimes
-	associated_paths = list(
-		/mob/living/slime,
-		/obj/machinery/smartfridge/secure/extract,
-		/obj/item/slime_extract
-	)
+	name = "slimes"
 	lore_text = "The strange, hydrophobic, single-celled organisms called 'slimes' are frequently the focus of xenobiological science, due to their fascinating internal chemistry and their incredible hardiness. However, they are frequently underestimated or mishandled, and slime-related genetic decay is a leading cause of death for xenoscientists."
 	mechanics_text = "Slimes will happily feed on any human, humanoid or monkey that wanders into their sight. You can wrestle them off their victim or spray them with a fire extinguisher to neutralize them. If a slime is well-fed, it might grow into an adult, and then split into up to four baby slimes of various colours, depending on the colour of the parent.<br><br>Slime cores can have a variety of effects when injected with either blood or uranium powder. For more information on slime xenobiology, consult the <span codexlink='Guide to Slime Handling'>guide</span>."
+
+/mob/living/slime
+	_atom_codex_value = /datum/codex_entry/slimes
+
+/obj/machinery/smartfridge/secure/extract
+	_atom_codex_value = /datum/codex_entry/slimes
+
+/obj/item/slime_extract
+	_atom_codex_value = /datum/codex_entry/slimes
 
 /datum/codex_entry/slime_handling
 	name = "Guide to Slime Handling"
@@ -21,7 +26,7 @@
 		<p>Slimes are intelligent, social creatures, even if they don't look like it. Physical affection (click a slime on help intent) will start an enduring friendship that will last until you attack the slime, or it gets hungry enough to see you as food. Saying hello to a friendly slime will also make them regard you more fondly. Slimes that regard you well enough may even listen to commands like 'stop', 'stay' or 'follow'.</p>
 	"}
 
-/datum/codex_entry/slime_handling/New(_display_name, list/_associated_paths, list/_associated_strings, _lore_text, _mechanics_text, _antag_text)
+/datum/codex_entry/slime_handling/New(_display_name, list/_associated_strings, _lore_text, _mechanics_text, _antag_text)
 	. = ..()
 	var/list/extra_mechanics_text = list()
 	extra_mechanics_text += "<h2>Slime colours</h2><br><table border = '1px'>"

@@ -4,6 +4,8 @@
 	name = "atmospherics pipe" // mostly for codex purposes, subtypes will override it
 	abstract_type = /obj/machinery/atmospherics/pipe
 
+	_atom_codex_value = /datum/codex_entry/atmos_pipe
+
 	use_power = POWER_USE_OFF
 	stat_immune = NOSCREEN | NOINPUT | NOPOWER
 	interact_offline = TRUE //Needs to be set so that pipes don't say they lack power in their description

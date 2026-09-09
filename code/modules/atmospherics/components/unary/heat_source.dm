@@ -9,6 +9,7 @@
 	base_icon_state = "heater"
 	base_type = /obj/machinery/atmospherics/unary/temperature/heater
 	performance_multiplier = HEATER_PERF_MULT
+	_atom_codex_value = /datum/codex_entry/atmos_heater
 
 /obj/machinery/atmospherics/unary/temperature/heater/should_modify_gas()
 	return air_contents.temperature < set_temperature

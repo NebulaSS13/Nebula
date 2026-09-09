@@ -19,6 +19,7 @@
 	emagged = 0 //Ignores if somebody doesn't have card access to that machine.
 	wires = /datum/wires/vending
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
+	_atom_codex_value = /datum/codex_entry/vending
 
 	// Power
 	var/vend_power_usage = 150 //actuators and stuff

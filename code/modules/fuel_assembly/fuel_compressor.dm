@@ -9,6 +9,7 @@
 	anchored = TRUE
 	layer = 4
 	construct_state = /decl/machine_construction/default/panel_closed
+	_atom_codex_value = /datum/codex_entry/fuel_compressor
 	var/list/stored_material = list()
 	var/list/rod_makeup = list()
 

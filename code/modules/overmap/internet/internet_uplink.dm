@@ -15,6 +15,7 @@ var/global/list/internet_uplinks = list()
 	stock_part_presets = list(
 		/decl/stock_part_preset/terminal_setup,
 	)
+	_atom_codex_value = /datum/codex_entry/internet_uplink
 
 	var/overmap_range = BASE_INTERNET_RANGE
 	var/max_overmap_range = BASE_INTERNET_RANGE
@@ -163,6 +164,7 @@ var/global/list/internet_uplinks = list()
 	light_color = COLOR_GREEN
 	idle_power_usage = 250
 	active_power_usage = 500
+	_atom_codex_value = /datum/codex_entry/internet_uplink
 	var/initial_id_tag = "plexus"
 
 /obj/machinery/computer/internet_uplink/Initialize()

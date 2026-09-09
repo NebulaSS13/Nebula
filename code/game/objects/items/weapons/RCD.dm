@@ -16,6 +16,8 @@
 	origin_tech = @'{"engineering":4,"materials":2}'
 	material = /decl/material/solid/metal/steel
 	_base_attack_force = 10
+	_atom_codex_value = /datum/codex_entry/rcd
+
 	var/stored_matter = 0
 	var/max_stored_matter = 120
 	var/work_id = 0

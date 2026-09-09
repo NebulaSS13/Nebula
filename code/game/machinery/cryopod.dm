@@ -164,6 +164,7 @@
 	density = TRUE
 	anchored = TRUE
 	dir = WEST
+	_atom_codex_value = /datum/codex_entry/cryopod
 
 	var/base_icon_state = "body_scanner_0"
 	var/occupied_icon_state = "body_scanner_1"

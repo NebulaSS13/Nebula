@@ -5,6 +5,7 @@
 	icon_state = "folded_wall"
 	material = /decl/material/solid/organic/plastic
 	w_class = ITEM_SIZE_NORMAL
+	_atom_codex_value = /datum/codex_entry/inflatable_item
 	var/deploy_path = /obj/structure/inflatable/wall
 	var/inflatable_health
 
@@ -45,6 +46,7 @@
 	hitsound = 'sound/effects/Glasshit.ogg'
 	atmos_canpass = CANPASS_DENSITY
 	material = /decl/material/solid/organic/plastic
+	_atom_codex_value = /datum/codex_entry/inflatable_item
 
 	var/undeploy_path = null
 	var/taped

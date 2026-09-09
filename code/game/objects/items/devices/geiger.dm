@@ -19,6 +19,8 @@
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass           = MATTER_AMOUNT_TRACE,
 	)
+	_atom_codex_value = /datum/codex_entry/geiger_counter
+
 	var/scanning = 0
 	var/radiation_count = 0
 	var/datum/sound_token/sound_token

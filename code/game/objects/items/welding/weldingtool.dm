@@ -18,6 +18,8 @@
 	drop_sound                          = 'sound/foley/tooldrop1.ogg'
 	z_flags                             = ZMM_MANGLE_PLANES
 	attack_cooldown                     = DEFAULT_ATTACK_COOLDOWN
+	_atom_codex_value                   = /datum/codex_entry/welder
+
 	var/lit_colour                      = COLOR_PALE_ORANGE
 	var/waterproof                      = FALSE
 	var/welding                         = FALSE 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)

@@ -14,6 +14,7 @@
 	uncreated_component_parts = null
 	base_type = /obj/machinery/mining_drill
 	z_flags = ZMM_WIDE_LOAD
+	_atom_codex_value = /datum/codex_entry/mining_drill
 
 	/// The drill's FSM, keeping track of which state the drill is currently in.
 	var/datum/state_machine/drill/state_machine = null

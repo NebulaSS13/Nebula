@@ -34,6 +34,7 @@
 	desc = "You shouldn't be seeing this!"
 	icon = 'icons/obj/modules/module_cyborg_2.dmi'
 	require_module = 0
+	_atom_codex_value = /datum/codex_entry/uncertified_module
 	var/new_module = null
 
 /obj/item/borg/upgrade/uncertified/action(var/mob/living/silicon/robot/robot)

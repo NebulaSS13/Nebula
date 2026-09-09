@@ -37,6 +37,7 @@
 	stack_merge_type = /obj/item/stack/material/pane
 	crafting_stack_type = /obj/item/stack/material/pane
 	can_be_reinforced = TRUE
+	_atom_codex_value = /datum/codex_entry/glass
 
 /obj/item/stack/material/pane/update_state_from_amount()
 	if(reinf_material)

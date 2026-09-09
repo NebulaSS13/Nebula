@@ -18,6 +18,18 @@ var/global/list/diversion_junctions = list()
 	icon_state = "disposal"
 	anchored = TRUE
 	density = TRUE
+	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
+	idle_power_usage = 100
+	atom_flags = ATOM_FLAG_CLIMBABLE
+	throwpass = TRUE
+	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc/buildable
+	)
+	frame_type = /obj/structure/disposalconstruct/machine
+	base_type = /obj/machinery/disposal/buildable
+	_atom_codex_value = /datum/codex_entry/disposal
+
 	var/datum/gas_mixture/air_contents	// internal reservoir
 	var/mode = 1	// item mode 0=off 1=charging 2=charged
 	var/flush = 0	// true if flush handle is pulled
@@ -27,18 +39,7 @@ var/global/list/diversion_junctions = list()
 	var/flush_count = 0 //this var adds 1 once per tick. When it reaches flush_every_ticks it resets and tries to flush.
 	var/last_sound = 0
 	var/list/allowed_objects = list(/obj/structure/closet)
-	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
-	idle_power_usage = 100
-	atom_flags = ATOM_FLAG_CLIMBABLE
 	var/turn = DISPOSAL_FLIP_NONE
-	throwpass = TRUE
-
-	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
-	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable
-	)
-	frame_type = /obj/structure/disposalconstruct/machine
-	base_type = /obj/machinery/disposal/buildable
 
 /obj/machinery/disposal/buildable
 	uncreated_component_parts = null

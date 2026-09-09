@@ -19,6 +19,7 @@
 	crafting_stack_type  = /obj/item/stack/material/rods
 	pickup_sound         = 'sound/foley/tooldrop3.ogg'
 	drop_sound           = 'sound/foley/tooldrop2.ogg'
+	_atom_codex_value    = /datum/codex_entry/rods
 
 /obj/item/stack/material/rods/get_autopsy_descriptors()
 	. = ..()

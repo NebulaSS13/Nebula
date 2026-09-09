@@ -3,10 +3,12 @@
 	maximum_component_parts   = list(/obj/item/stock_parts = 14)	//There's a lot of stuff that goes in these
 	icon = 'icons/obj/modular_computers/modular_console.dmi'
 	icon_state = "console-off"
+	_atom_codex_value = /datum/codex_entry/computer/modular
 	var/list/interact_sounds  = list("keyboard", "keystroke")
 	var/wired_connection      = FALSE // Whether or not this console will start with a wired connection beneath it.
 	var/tmp/max_hardware_size = 3 //Enum to tell whether computer parts are too big to fit in this machine.
 	var/tmp/os_type           = /datum/extension/interactive/os/console //The type of the OS extension to create for this machine.
+
 
 /obj/machinery/computer/modular/Initialize()
 	set_extension(src, os_type)
@@ -94,7 +96,7 @@
 			to_chat(user, "This component is too large for \the [src].")
 			return 0
 	. = ..()
-	
+
 /obj/machinery/computer/modular/verb/emergency_shutdown()
 	set name = "Forced Shutdown"
 	set category = "Object"

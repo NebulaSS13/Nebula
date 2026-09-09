@@ -7,6 +7,7 @@
 	icon_state = "gripper"
 	max_health = ITEM_HEALTH_NO_DAMAGE
 	item_flags = ITEM_FLAG_NO_BLUDGEON
+	_atom_codex_value = /datum/codex_entry/gripper
 
 	//Has a list of items that it can hold.
 	var/list/can_hold = list(

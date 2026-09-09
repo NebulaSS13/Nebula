@@ -28,6 +28,7 @@
 	name = "cyborg steel synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/metal/steel
+	_atom_codex_value = /datum/codex_entry/steel_borg
 
 /obj/item/stack/material/cyborg/plasteel
 	name = "cyborg plasteel synthesiser"
@@ -43,6 +44,7 @@
 	name = "cyborg glass synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/glass
+	_atom_codex_value = /datum/codex_entry/glass_borg
 
 /obj/item/stack/material/cyborg/fiberglass
 	name = "cyborg fiberglass synthesiser"
@@ -55,6 +57,7 @@
 	material = /decl/material/solid/glass
 	reinf_material = /decl/material/solid/metal/steel
 	charge_costs = list(500, 1000)
+	_atom_codex_value = /datum/codex_entry/glass_reinf_borg
 
 /obj/item/stack/material/cyborg/aluminium
 	name = "cyborg aluminium synthesiser"

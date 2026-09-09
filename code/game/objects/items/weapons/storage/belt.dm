@@ -100,6 +100,7 @@
 	overlay_flags = BELT_OVERLAY_ITEMS
 	storage = /datum/storage/belt/utility
 	material = /decl/material/solid/organic/leather
+	_atom_codex_value = /datum/codex_entry/toolbelt
 
 /obj/item/belt/utility/full/WillContain()
 	return list(

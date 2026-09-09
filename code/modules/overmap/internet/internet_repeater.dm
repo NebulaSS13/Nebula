@@ -17,6 +17,7 @@ var/global/list/internet_repeaters = list()
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/terminal,
 	)
+	_atom_codex_value = /datum/codex_entry/internet_repeater
 
 /obj/machinery/internet_repeater/Initialize()
 	. = ..()

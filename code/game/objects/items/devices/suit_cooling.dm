@@ -5,6 +5,7 @@
 	icon = 'icons/obj/items/suitcooler.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BACK
+	_atom_codex_value = /datum/codex_entry/suitcooler
 
 	//copied from tank.dm
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

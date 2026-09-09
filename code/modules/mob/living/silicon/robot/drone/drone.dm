@@ -17,6 +17,7 @@
 	local_transmit = 1
 	possession_candidate = TRUE
 	speed = -1
+	_atom_codex_value = /datum/codex_entry/maint_drone
 
 	can_pull_size = ITEM_SIZE_NORMAL
 	can_pull_mobs = MOB_PULL_SMALLER

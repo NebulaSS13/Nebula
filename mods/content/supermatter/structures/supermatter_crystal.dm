@@ -117,6 +117,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		/decl/material/solid/metal/steel =   MATTER_AMOUNT_REINFORCEMENT
 	)
 	w_class = ITEM_SIZE_LARGE_STRUCTURE
+	_atom_codex_value = /datum/codex_entry/supermatter
 
 	var/nitrogen_retardation_factor = 0.15 // Higher == N2 slows reaction more
 	var/thermal_release_modifier = 10000   // Higher == more heat released during reaction

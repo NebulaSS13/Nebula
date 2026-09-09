@@ -6,6 +6,7 @@
 	center_of_mass    = @'{"x":16,"y":16}'
 	bitesize          = 2
 	material          = /decl/material/solid/organic/plantmatter
+	_atom_codex_value = /datum/codex_entry/fruit_and_veg
 
 	// We get these from being sliced.
 	nutriment_type = null
@@ -18,8 +19,6 @@
 	/// Used in recipes to distinguish between general types.
 	var/processed_grown_tag
 
-/obj/item/food/processed_grown/get_codex_value()
-	return /datum/codex_entry/fruit_and_veg::name
 
 /obj/item/food/processed_grown/Initialize(mapload, material_key, skip_plate = FALSE, _seed)
 

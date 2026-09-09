@@ -10,6 +10,7 @@
 	icon_state = "tracker"
 	anchored = TRUE
 	density = TRUE
+	_atom_codex_value = /datum/codex_entry/solars
 
 	var/sun_angle = 0		// sun angle as set by sun datum
 	var/obj/machinery/power/solar_control/control = null

@@ -10,6 +10,7 @@
 	base_type = /obj/machinery/atmospherics/unary/temperature/freezer
 	ui_title = "Gas Cooling System"
 	performance_multiplier = FREEZER_PERF_MULT
+	_atom_codex_value = /datum/codex_entry/atmos_freezer
 	var/heatsink_temperature = T20C	// The constant temperature reservoir into which the freezer pumps heat. Probably the hull of the station or something.
 
 /obj/machinery/atmospherics/unary/temperature/freezer/get_temperature_class()

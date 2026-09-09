@@ -9,6 +9,7 @@
 	layer = ABOVE_WINDOW_LAYER
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	max_health = 100
+	_atom_codex_value = /datum/codex_entry/cheval
 
 	var/spike_damage //how badly it smarts when you run into this like a rube
 	var/list/poke_description = list("gored", "spiked", "speared", "stuck", "stabbed")

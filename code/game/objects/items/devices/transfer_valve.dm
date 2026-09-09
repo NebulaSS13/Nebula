@@ -4,13 +4,15 @@
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "valve_1"
 	material = /decl/material/solid/metal/stainlesssteel
+	movable_flags = MOVABLE_FLAG_PROXMOVE
+	_atom_codex_value = /datum/codex_entry/transfer_valve
+
 	var/obj/item/tank/tank_one
 	var/obj/item/tank/tank_two
 	var/obj/item/assembly/attached_device
 	var/weakref/attacher_ref = null
 	var/valve_open = 0
 	var/toggle = 1
-	movable_flags = MOVABLE_FLAG_PROXMOVE
 
 /obj/item/transfer_valve/Destroy()
 	if(!QDELETED(tank_one))

@@ -87,8 +87,8 @@
 	QDEL_NULL(light)
 	if(simulated && opacity)
 		updateVisibility(src)
-	if(atom_codex_ref && atom_codex_ref != TRUE) // may be null, TRUE or a datum instance
-		QDEL_NULL(atom_codex_ref)
+	if(istype(_atom_codex_ref) && !_atom_codex_ref.store_codex_entry) // may be null, TRUE or a datum instance
+		QDEL_NULL(_atom_codex_ref)
 	. = ..()
 	// This might need to be moved onto a Del() override at some point.
 	QDEL_NULL(storage)

@@ -3,6 +3,7 @@
 	icon_keyboard = "rd_key"
 	icon_screen = "fuel_screen"
 	ui_template = "fusion_injector_control.tmpl"
+	_atom_codex_value = /datum/codex_entry/fusion_fuel_injector
 
 /obj/machinery/computer/fusion/fuel_control/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 	var/datum/local_network/lan = get_local_network()

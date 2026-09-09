@@ -31,6 +31,7 @@ var/global/list/wall_fullblend_objects = list(
 	initial_gas = GAS_STANDARD_AIRMIX
 	zone_membership_candidate = TRUE
 	layer = TURF_OVER_EDGE_LAYER
+	_atom_codex_value = /datum/codex_entry/wall
 
 	/// If set, will prevent merges between walls with different IDs.
 	var/unique_merge_identifier

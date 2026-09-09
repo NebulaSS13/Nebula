@@ -12,6 +12,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	_atom_codex_value = /datum/codex_entry/diffuser_machine
 
 	var/alarm = 0
 	var/enabled = 1

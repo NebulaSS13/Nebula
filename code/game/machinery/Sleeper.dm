@@ -14,6 +14,7 @@
 	idle_power_usage = 15
 	active_power_usage = 1 KILOWATTS //builtin health analyzer, dialysis machine, injectors.
 	pixel_z = -8
+	_atom_codex_value = /datum/codex_entry/sleeper
 
 	var/mob/living/human/occupant
 	var/obj/item/chems/glass/beaker = null

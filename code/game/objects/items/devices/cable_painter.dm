@@ -3,9 +3,10 @@
 	desc = "A device for repainting cables."
 	icon = 'icons/obj/items/hand_labeler.dmi'
 	icon_state = ICON_STATE_WORLD
-	var/color_selection
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/organic/plastic
+	_atom_codex_value = /datum/codex_entry/cable_painter
+	var/color_selection
 
 /obj/item/cable_painter/Initialize()
 	. = ..()

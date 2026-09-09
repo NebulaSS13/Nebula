@@ -1,7 +1,5 @@
 // Pretty much everything here is stolen from the dna scanner FYI
 /obj/machinery/bodyscanner
-	var/mob/living/human/occupant
-	var/locked
 	name = "body scanner"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
@@ -11,8 +9,11 @@
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
+	_atom_codex_value = /datum/codex_entry/bodyscanner
 	var/open_sound = 'sound/machines/podopen.ogg'
 	var/close_sound = 'sound/machines/podclose.ogg'
+	var/mob/living/human/occupant
+	var/locked
 
 // Don't dump out the occupant!
 /obj/machinery/bodyscanner/proc/dump_obj_contents()

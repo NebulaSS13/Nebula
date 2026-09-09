@@ -507,8 +507,3 @@
 	if(anchored)
 		return FALSE
 	return ..()
-
-/obj/get_lore_info()
-	. = list()
-	if(desc && simulated && !INSTANCE_IS_ABSTRACT(src))
-		LAZYADD(., desc)

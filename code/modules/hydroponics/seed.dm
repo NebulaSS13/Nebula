@@ -1,4 +1,6 @@
 /datum/codex_entry/scannable/flora
+
+	abstract_type = /datum/codex_entry/scannable/flora
 	category = /decl/codex_category/flora
 
 /datum/seed

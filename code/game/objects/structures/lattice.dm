@@ -11,6 +11,7 @@
 	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_NOFALL | OBJ_FLAG_MOVES_UNSUPPORTED
 	material_alteration = MAT_FLAG_ALTERATION_ALL
+	_atom_codex_value = /datum/codex_entry/lattice
 
 /obj/structure/lattice/Initialize(mapload)
 	. = ..()

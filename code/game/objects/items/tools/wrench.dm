@@ -11,6 +11,7 @@
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	drop_sound = 'sound/foley/bardrop1.ogg'
+	_atom_codex_value = /datum/codex_entry/wrench
 	var/handle_color
 	var/static/list/valid_colours = list(COLOR_RED_GRAY, COLOR_MAROON, COLOR_DARK_BROWN, COLOR_GRAY20)
 

@@ -121,6 +121,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	_atom_codex_value = /datum/codex_entry/pacman
 
 	var/sheet_path                                     // Base object type that it will accept, set in Initialize() if null
 	var/sheet_material = /decl/material/solid/graphite // Material type that the fuel needs to match.

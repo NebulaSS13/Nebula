@@ -13,6 +13,7 @@
 	material = /decl/material/solid/metal/steel
 	parts_type = /obj/item/stack/material/rods
 	parts_amount = 2
+	_atom_codex_value = /datum/codex_entry/grille
 
 	handle_generic_blending = TRUE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME

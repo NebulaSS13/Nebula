@@ -26,6 +26,8 @@ var/global/list/solars_list = list()
 	idle_power_usage = 0
 	active_power_usage = 0
 	max_health = 10
+	_atom_codex_value = /datum/codex_entry/solars
+
 	var/obscured = 0
 	var/sunfrac = 0
 	var/efficiency = 1
@@ -229,6 +231,7 @@ var/global/list/solars_list = list()
 	w_class = ITEM_SIZE_HUGE // Pretty big!
 	anchored = FALSE
 	material = /decl/material/solid/metal/steel
+	_atom_codex_value = /datum/codex_entry/solars
 	var/tracker = 0
 	var/glass_type
 	var/glass_reinforced

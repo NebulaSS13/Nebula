@@ -319,7 +319,7 @@
 		article_name = ADD_ARTICLE_GENDER("[examine_prefix][name]", gender)
 	var/header_string = "[html_icon(src)] That's [article_name]"
 	if(user?.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_ON && user.can_use_codex())
-		var/datum/codex_entry/codex = get_atom_codex_entry(user)
+		var/datum/codex_entry/codex = get_atom_codex_entry(user, strict = TRUE)
 		if(codex)
 			header_string = "[header_string]<small><a href='byond://?src=\ref[SScodex];show_examined_info=\ref[codex];show_to=\ref[user]'>?</a></small>"
 	header_string = "[header_string][infix][get_examine_punctuation()] [suffix]"

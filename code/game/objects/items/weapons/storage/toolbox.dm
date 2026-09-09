@@ -14,6 +14,7 @@
 	attack_verb = "robusted"
 	material = /decl/material/solid/metal/aluminium
 	_base_attack_force = 20
+	_atom_codex_value = /datum/codex_entry/toolbox
 
 /obj/item/toolbox/emergency
 	name = "emergency toolbox"

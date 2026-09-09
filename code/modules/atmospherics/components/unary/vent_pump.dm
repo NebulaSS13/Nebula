@@ -11,6 +11,8 @@
 	icon = 'icons/atmos/vent_pump.dmi'
 	icon_state = "map_vent"
 
+	_atom_codex_value = /datum/codex_entry/atmos_vent_pump
+
 	name = "air vent"
 	desc = "A vent that moves air into or out of the attached pipe system, and uses a valve and pump to prevent backflow."
 	use_power = POWER_USE_OFF
