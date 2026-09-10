@@ -27,5 +27,12 @@
 
 // Subtypes for use in add_mouse_pointer() below.
 /decl/mouse_pointer/examine
-	uid  = "pointer_examine"
+	uid   = "pointer_examine"
 	icons = 'icons/effects/mouse_pointers/examine_pointer.dmi'
+
+/decl/mouse_pointer/attacking
+	uid  = "pointer_attacking"
+	icons = list(
+		'icons/effects/mouse_pointers/charging_attack.dmi',
+		'icons/effects/mouse_pointers/charged_attack.dmi'
+	)

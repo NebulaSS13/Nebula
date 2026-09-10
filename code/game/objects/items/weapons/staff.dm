@@ -11,6 +11,13 @@
 	base_parry_chance   = 30
 	_base_attack_force = 3
 
+/obj/item/staff/get_melee_attack_profiles(mob/user)
+	var/static/list/attack_profiles = list(
+		GET_DECL(/decl/melee_attack_profile/thrust),
+		GET_DECL(/decl/melee_attack_profile/sweep)
+	)
+	return attack_profiles
+
 /obj/item/staff/get_stance_support_value()
 	return LIMB_UNUSABLE
 

@@ -13,3 +13,9 @@
 // Discard pommel material.
 /obj/item/bladed/polearm/Initialize(ml, material_key, _hilt_mat, _guard_mat, _pommel_mat)
 	return ..(ml, material_key, _hilt_mat, _guard_mat, _pommel_mat)
+
+/obj/item/bladed/polearm/get_melee_attack_profiles(mob/user)
+	var/static/list/attack_profiles = list(
+		GET_DECL(/decl/melee_attack_profile/thrust)
+	)
+	return attack_profiles

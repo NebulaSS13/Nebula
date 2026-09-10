@@ -36,7 +36,7 @@
 
 /obj/unit_test
 	is_spawnable_type = FALSE
-	icon = 'icons/effects/landmarks.dmi'
+	icon = 'icons/effects/markers.dmi'
 	icon_state = "x2"
 
 /obj/unit_test/opaque

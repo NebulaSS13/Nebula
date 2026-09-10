@@ -248,7 +248,7 @@
 // Creates a docking port spawner
 /obj/abstract/docking_port_spawner
 	name = "docking port spawner"
-	icon = 'icons/effects/landmarks.dmi'
+	icon = 'icons/effects/markers.dmi'
 	icon_state = "shuttle_landmark"
 	/// Used both to name the landing site and to set the landmark tag.
 	var/port_name = "docking port"
@@ -307,7 +307,7 @@
 /// Cannot actually be landed at. Used for alignment when landing or docking, however.
 /obj/abstract/local_dock
 	name = "docking port" // Rename for subtypes/instances, this is shown to players.
-	icon = 'icons/effects/landmarks.dmi'
+	icon = 'icons/effects/markers.dmi'
 	icon_state = "shuttle_landmark"
 	anchored = TRUE
 	simulated = FALSE

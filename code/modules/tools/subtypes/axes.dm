@@ -12,6 +12,12 @@
 	hitsound                         = "chop"
 	_base_attack_force               = 15
 
+/obj/item/tool/axe/get_melee_attack_profiles(mob/user)
+	var/static/list/attack_profiles = list(
+		GET_DECL(/decl/melee_attack_profile/sweep)
+	)
+	return attack_profiles
+
 /obj/item/tool/axe/get_initial_tool_qualities()
 	var/static/list/tool_qualities = list(
 		TOOL_HATCHET   = TOOL_QUALITY_DEFAULT

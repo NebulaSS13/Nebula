@@ -48,6 +48,14 @@
 	/// Set to TRUE to skip the default click fire behavior of guns.
 	var/bypass_afterattack = TRUE
 
+/obj/item/gun/launcher/bow/is_charging_attack()
+	if(autofire_enabled)
+		if(tension >= max_tension)
+			return ATTACK_CHARGED
+		if(tension > 0 || drawing_bow)
+			return ATTACK_CHARGING
+	return ATTACK_NOT_CHARGING
+
 /obj/item/gun/launcher/bow/handle_click_empty(atom/movable/firer)
 	if(check_fire_message_spam("click"))
 		to_chat(firer, SPAN_WARNING("\The [src] has nothing loaded."))
