@@ -1,0 +1,386 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/wall_sconce{
+	dir = 1;
+	pixel_y = 10
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"b" = (
+/obj/structure/chair/bench/ebony{
+	dir = 8
+	},
+/obj/item/stack/material/bolt/mapped/cloth/five,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"c" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+"f" = (
+/obj/random/hostile/dungeon,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"j" = (
+/obj/structure/table/wood/reinforced/ebony,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"l" = (
+/obj/structure/table/wood/reinforced/ebony,
+/obj/item/flame/candle,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"m" = (
+/obj/item/cash/imperial/crown,
+/turf/floor/path/basalt/water,
+/area/template_noop)
+"n" = (
+/obj/structure/chair/bench/ebony{
+	dir = 8
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"p" = (
+/obj/structure/chair/bench/ebony{
+	dir = 8
+	},
+/obj/random/hostile/dungeon,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"w" = (
+/obj/item/cash/imperial/quin,
+/turf/floor/path/basalt/water,
+/area/template_noop)
+"x" = (
+/obj/item/cash/imperial/crown,
+/obj/item/cash/imperial/crown,
+/turf/floor/path/basalt/water,
+/area/template_noop)
+"A" = (
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"C" = (
+/obj/structure/door/ebony,
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"E" = (
+/obj/structure/chair/bench/ebony{
+	dir = 4
+	},
+/obj/random/hostile/dungeon,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"G" = (
+/obj/structure/wall_sconce,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"J" = (
+/obj/structure/table/wood/reinforced/ebony,
+/obj/item/bladed/folding,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"L" = (
+/obj/item/cash/imperial/crown,
+/obj/item/cash/imperial/crown,
+/obj/item/cash/imperial/crown,
+/turf/floor/path/basalt/water,
+/area/template_noop)
+"P" = (
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"R" = (
+/obj/structure/table/wood/reinforced/ebony,
+/obj/item/food/grown/dried_tobacco/fine,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"S" = (
+/obj/structure/chair/bench/ebony{
+	dir = 4
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"U" = (
+/obj/structure/table/wood/reinforced/ebony,
+/obj/item/food/grown/dried_tobacco/bad,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"Y" = (
+/obj/structure/chair/bench/ebony{
+	dir = 8
+	},
+/obj/item/remains/human,
+/obj/item/clothing/suit/armor/forged/banded,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"Z" = (
+/obj/structure/chair/bench/ebony{
+	dir = 4
+	},
+/obj/item/remains/human,
+/obj/item/clothing/pants/trousers/braies,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+
+(1,1,1) = {"
+c
+c
+c
+c
+c
+C
+C
+c
+c
+c
+c
+c
+c
+C
+C
+c
+c
+c
+c
+c
+"}
+(2,1,1) = {"
+c
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+c
+"}
+(3,1,1) = {"
+c
+A
+c
+a
+A
+A
+f
+G
+c
+A
+A
+c
+a
+A
+A
+A
+G
+c
+A
+c
+"}
+(4,1,1) = {"
+c
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+c
+"}
+(5,1,1) = {"
+c
+A
+A
+A
+S
+Z
+S
+A
+P
+P
+P
+P
+A
+S
+S
+E
+A
+A
+A
+c
+"}
+(6,1,1) = {"
+C
+A
+A
+A
+j
+j
+j
+A
+P
+x
+m
+P
+A
+J
+U
+U
+A
+A
+A
+C
+"}
+(7,1,1) = {"
+C
+A
+A
+A
+j
+j
+R
+A
+P
+L
+w
+P
+A
+j
+l
+j
+A
+A
+A
+C
+"}
+(8,1,1) = {"
+c
+A
+A
+A
+b
+n
+p
+A
+P
+P
+P
+P
+A
+n
+n
+Y
+A
+A
+A
+c
+"}
+(9,1,1) = {"
+c
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+c
+"}
+(10,1,1) = {"
+c
+A
+c
+a
+A
+A
+A
+G
+c
+A
+A
+c
+a
+A
+A
+A
+G
+c
+A
+c
+"}
+(11,1,1) = {"
+c
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+c
+"}
+(12,1,1) = {"
+c
+c
+c
+c
+c
+C
+C
+c
+c
+c
+c
+c
+c
+C
+C
+c
+c
+c
+c
+c
+"}

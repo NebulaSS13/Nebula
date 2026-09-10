@@ -1,0 +1,176 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+"b" = (
+/obj/structure/fire_source/stove,
+/obj/effect/decal/cleanable/ash,
+/turf/floor/path/basalt,
+/area/template_noop)
+"j" = (
+/obj/structure/door/ebony,
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"l" = (
+/turf/floor/path/basalt,
+/area/template_noop)
+"o" = (
+/obj/structure/reagent_dispensers/barrel/ebony/water,
+/turf/floor/path/basalt,
+/area/template_noop)
+"p" = (
+/obj/item/stack/material/plank/mapped/ebony/five,
+/turf/floor/path/basalt,
+/area/template_noop)
+"s" = (
+/obj/structure/table/wood/reinforced/ebony,
+/obj/item/knife/kitchen/cleaver/bronze,
+/turf/floor/path/basalt,
+/area/template_noop)
+"w" = (
+/obj/structure/wall_sconce,
+/turf/floor/path/basalt,
+/area/template_noop)
+"O" = (
+/obj/structure/reagent_dispensers/barrel/ebony/oil,
+/turf/floor/path/basalt,
+/area/template_noop)
+"S" = (
+/obj/structure/table/wood/reinforced/ebony,
+/turf/floor/path/basalt,
+/area/template_noop)
+"U" = (
+/turf/wall/natural/dirt,
+/area/template_noop)
+"X" = (
+/obj/structure/reagent_dispensers/barrel/ebony,
+/turf/floor/path/basalt,
+/area/template_noop)
+"Y" = (
+/obj/structure/wall_sconce{
+	dir = 1;
+	pixel_y = 10
+	},
+/turf/floor/path/basalt,
+/area/template_noop)
+
+(1,1,1) = {"
+U
+U
+U
+U
+U
+U
+U
+U
+"}
+(2,1,1) = {"
+U
+U
+U
+U
+U
+a
+a
+U
+"}
+(3,1,1) = {"
+a
+U
+U
+X
+U
+U
+a
+U
+"}
+(4,1,1) = {"
+a
+O
+U
+l
+U
+U
+a
+U
+"}
+(5,1,1) = {"
+a
+o
+l
+p
+l
+U
+a
+U
+"}
+(6,1,1) = {"
+a
+l
+l
+l
+l
+s
+a
+U
+"}
+(7,1,1) = {"
+a
+l
+l
+l
+l
+S
+a
+U
+"}
+(8,1,1) = {"
+U
+b
+l
+l
+l
+o
+a
+U
+"}
+(9,1,1) = {"
+a
+Y
+l
+l
+l
+w
+a
+U
+"}
+(10,1,1) = {"
+a
+S
+l
+l
+l
+S
+a
+U
+"}
+(11,1,1) = {"
+a
+l
+l
+l
+l
+S
+a
+U
+"}
+(12,1,1) = {"
+a
+j
+j
+a
+a
+a
+a
+U
+"}

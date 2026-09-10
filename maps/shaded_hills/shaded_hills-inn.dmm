@@ -857,6 +857,13 @@
 "wr" = (
 /turf/wall/wattle/daubed/plastered/framed/mahogany,
 /area/shaded_hills/shrine)
+"wA" = (
+/obj/structure/flora/tree/dead/ebony,
+/obj/structure/railing/mapped/wooden/walnut{
+	dir = 4
+	},
+/turf/floor/dirt,
+/area/shaded_hills/outside/shrine)
 "wF" = (
 /obj/structure/banner_frame/sign/store,
 /turf/floor/dirt,
@@ -20590,7 +20597,7 @@ kv
 iK
 iK
 kv
-By
+kv
 px
 ge
 VE
@@ -20741,7 +20748,7 @@ kv
 kv
 iK
 kv
-By
+kv
 kv
 QB
 Dk
@@ -21040,10 +21047,10 @@ EJ
 By
 By
 By
-By
-aP
-Mo
 xk
+Mo
+aP
+kv
 kv
 kv
 By
@@ -21193,8 +21200,8 @@ xU
 xU
 xU
 xU
+wA
 kv
-aP
 kv
 kv
 By

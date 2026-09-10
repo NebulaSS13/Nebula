@@ -1,0 +1,190 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/floor/path/basalt/water,
+/area/template_noop)
+"c" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+"i" = (
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"B" = (
+/turf/floor/path/basalt/water/deep,
+/area/template_noop)
+"O" = (
+/mob/living/simple_animal/aquatic/fish/grump,
+/turf/floor/path/basalt/water/deep,
+/area/template_noop)
+"S" = (
+/obj/item/remains/human,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+
+(1,1,1) = {"
+c
+c
+c
+c
+c
+i
+i
+c
+c
+c
+c
+c
+"}
+(2,1,1) = {"
+c
+i
+i
+i
+i
+i
+S
+i
+i
+i
+i
+c
+"}
+(3,1,1) = {"
+c
+i
+a
+a
+a
+B
+B
+a
+a
+a
+i
+c
+"}
+(4,1,1) = {"
+c
+i
+a
+B
+B
+B
+B
+B
+B
+a
+i
+c
+"}
+(5,1,1) = {"
+c
+i
+a
+B
+B
+B
+B
+O
+B
+a
+i
+c
+"}
+(6,1,1) = {"
+i
+i
+B
+B
+B
+B
+B
+B
+B
+B
+i
+i
+"}
+(7,1,1) = {"
+i
+i
+B
+B
+B
+B
+B
+B
+B
+B
+i
+i
+"}
+(8,1,1) = {"
+c
+i
+a
+B
+O
+B
+B
+B
+B
+a
+i
+c
+"}
+(9,1,1) = {"
+c
+i
+a
+B
+B
+B
+B
+B
+B
+a
+i
+c
+"}
+(10,1,1) = {"
+c
+i
+a
+a
+a
+B
+B
+a
+a
+a
+i
+c
+"}
+(11,1,1) = {"
+c
+i
+i
+i
+i
+i
+i
+i
+i
+i
+i
+c
+"}
+(12,1,1) = {"
+c
+c
+c
+c
+c
+i
+i
+c
+c
+c
+c
+c
+"}
