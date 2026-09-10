@@ -749,6 +749,7 @@ default behaviour is:
 	QDEL_NULL(_aiming)
 	QDEL_NULL_LIST(_hallucinations)
 	QDEL_NULL_LIST(aimed_at_by)
+	QDEL_NULL_LIST(stat_organs)
 	LAZYCLEARLIST(smell_cooldown)
 	if(stressors) // Do not QDEL_NULL, keys are managed instances.
 		stressors = null

@@ -33,6 +33,8 @@
 	var/copy_health = TRUE
 	var/mob/living/mimic_mob
 
+	VAR_PRIVATE/static/alist/_mob_mimic_being_prepared      = alist()
+
 	VAR_PRIVATE/static/alist/_mob_mimic_type_to_appearance  = alist()
 	VAR_PRIVATE/static/alist/_mob_mimic_type_to_synthetic   = alist()
 	VAR_PRIVATE/static/alist/_mob_mimic_type_to_overlays    = alist()
@@ -67,7 +69,6 @@
 /mob/living/simple_animal/mob_mimic/LateInitialize()
 	. = ..()
 	if(_mob_mimic_type_to_appearance[mimic_mob])
-		update_icon()
 		update_mob_values()
 	else
 		cache_and_apply_mimic()
@@ -113,12 +114,13 @@
 /mob/living/simple_animal/mob_mimic/proc/get_best_melee_weapon(mob/living/mimic)
 	var/obj/item/strongest
 	for(var/obj/item/thing in mimic.get_held_items())
-		thing = thing.get_effective_obj()
-		if(!strongest || thing.get_base_attack_force() > strongest.get_base_attack_force())
+		var/obj/item/weapon = thing.get_effective_obj()
+		if(!strongest || weapon.get_base_attack_force() > strongest.get_base_attack_force())
 			strongest = thing
-	. = strongest
-	if(.)
+	if(strongest)
 		mimic.drop_from_inventory(strongest)
+		strongest.forceMove(null)
+		return strongest.get_effective_obj()
 
 /mob/living/simple_animal/mob_mimic/proc/prepare_mimic(mob/living/mimic)
 	return
@@ -126,14 +128,20 @@
 /mob/living/simple_animal/mob_mimic/proc/handle_additional_mimic(mob/living/mimic)
 	return
 
-// For some reason mobs like humans do not fully apply their appearance by the time this proc runs without sleep().
-// The sleep is only applied the first time this type is created so should not be a big issue in practice.
+// For some reason mobs like humans do not fully apply their appearance by the time this proc runs without a delay.
+// The delay is only applied the first time this type is created so should not be a big issue in practice.
+// Atoms initialising in parallel will defer their update until hopefully the first one has completed.
 /mob/living/simple_animal/mob_mimic/proc/cache_and_apply_mimic()
-	set waitfor = FALSE
+	if(_mob_mimic_being_prepared[mimic_mob])
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/simple_animal/mob_mimic, update_mob_values)), 10)
+	else
+		_mob_mimic_being_prepared[mimic_mob] = TRUE
+		var/mob/living/mimic = new mimic_mob
+		prepare_mimic(mimic)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/simple_animal/mob_mimic, process_mimic), mimic), 5)
 
-	var/mob/living/mimic = new mimic_mob
-	prepare_mimic(mimic)
-	sleep(5)
+/mob/living/simple_animal/mob_mimic/proc/process_mimic(mob/living/mimic)
+
 	handle_additional_mimic(mimic)
 
 	_mob_mimic_type_to_appearance[mimic_mob]  = mimic.appearance
@@ -167,7 +175,6 @@
 			_mob_mimic_type_to_melee[mimic_mob] = strongest
 
 	qdel(mimic)
-	update_icon()
 	update_mob_values()
 
 /mob/living/simple_animal/mob_mimic/get_turn_sound()
@@ -214,6 +221,8 @@
 		natural_weapon.set_base_attack_force(melee.get_base_attack_force())
 		natural_weapon.atom_damage_type = melee.atom_damage_type
 		UNLINT(natural_weapon.attack_verb = melee.attack_verb)
+
+	update_icon()
 
 /mob/living/simple_animal/mob_mimic/death(gibbed)
 
