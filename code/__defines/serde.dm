@@ -62,3 +62,5 @@
 
 #define FINALIZE_REAGENTS_SERDE(V)            if(islist(V)) { FINALIZE_REAGENTS_SERDE_BODY(V); }
 #define FINALIZE_REAGENTS_SERDE_AND_RETURN(V) if(islist(V)) { FINALIZE_REAGENTS_SERDE_BODY(V); return; }
+
+#define BACKUP_TIMESTAMP "[time2text(REALTIMEOFDAY, "YY-MM-DD_hh-mm")].backup"
