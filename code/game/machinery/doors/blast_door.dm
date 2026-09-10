@@ -223,9 +223,9 @@
 /obj/machinery/door/blast/dismantle()
 	var/obj/structure/door_assembly/da = ..()
 	. = da
-
+	// circuit is dumped onto the turf by parent call
 	da.anchored = TRUE
-	da.state = 1
+	da.wired = TRUE
 	da.created_name = name
 	da.update_icon()
 

@@ -291,16 +291,10 @@
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
 			return TRUE
 
-		var/obj/item/weldingtool/welder = used_item
-		if(welder.weld(0,user))
-			to_chat(user, "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>")
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, 5 * repairing.amount, src) && welder && welder.isOn())
-				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-				current_health = clamp(current_health + repairing.amount*DOOR_REPAIR_AMOUNT,current_health, get_max_health())
-				update_icon()
-				qdel(repairing)
-				repairing = null
+		if(used_item.do_tool_interaction(TOOL_WELDER, user, src, 0.5 SECONDS * repairing.amount, "fixing dents and welding", "repairing the damage to"))
+			current_health = clamp(current_health + repairing.amount*DOOR_REPAIR_AMOUNT,current_health, get_max_health())
+			update_icon()
+			QDEL_NULL(repairing)
 		return TRUE
 
 	if(repairing && IS_CROWBAR(used_item))

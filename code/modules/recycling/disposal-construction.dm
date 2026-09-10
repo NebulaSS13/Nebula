@@ -17,33 +17,26 @@
 	var/constructed_path = /obj/structure/disposalpipe
 	var/built_icon_state
 
-/obj/structure/disposalconstruct/Initialize(mapload, var/P = null)
+/obj/structure/disposalconstruct/Initialize(mapload, var/obj/pipe = null)
 	. = ..(mapload)
-	if(P)
-		if(istype(P, /obj/structure/disposalpipe))//Unfortunately a necessary evil since some things are machines and other things are structures
-			var/obj/structure/disposalpipe/D = P
-			SetName(D.name)
-			desc = D.desc
-			icon = D.icon
-			built_icon_state = D.icon_state
-			anchored = D.anchored
-			set_density(D.density)
-			turn = D.turn
-			sort_type = D.sort_type
-			dpdir = D.dpdir
-			constructed_path = D.type
-			set_dir(D.dir) // Needs to be set after turn and possibly other state.
-		if(istype(P, /obj/machinery/disposal))
-			var/obj/machinery/disposal/D = P
-			SetName(D.name)
-			desc = D.desc
-			icon = D.icon
-			built_icon_state = D.icon_state
-			anchored = D.anchored
-			set_density(D.density)
-			turn = D.turn
-			constructed_path = D.base_type || D.type
-			set_dir(D.dir)
+	if(pipe)
+		SetName(pipe.name)
+		desc = pipe.desc
+		icon = pipe.icon
+		built_icon_state = pipe.icon_state
+		anchored = pipe.anchored
+		set_density(pipe.density)
+		constructed_path = pipe.type
+		if(istype(pipe, /obj/structure/disposalpipe))//Unfortunately a necessary evil since some things are machines and other things are structures
+			var/obj/structure/disposalpipe/disposalpipe = pipe
+			turn = disposalpipe.turn
+			sort_type = disposalpipe.sort_type
+			dpdir = disposalpipe.dpdir
+		if(istype(pipe, /obj/machinery/disposal))
+			var/obj/machinery/disposal/disposal = pipe
+			turn = disposal.turn
+			constructed_path = disposal.base_type || constructed_path
+		set_dir(pipe.dir) // Needs to be set after turn and possibly other state.
 	if(loc)
 		update_icon()
 	update_verbs()
@@ -128,7 +121,7 @@
 		to_chat(user, "You can only manipulate \the [src] if the plating is exposed.")
 		return TRUE
 
-	var/obj/structure/disposalpipe/CP = locate() in T
+	var/obj/structure/disposalpipe/pipe = locate() in T
 
 	if(IS_WRENCH(used_item))
 		if(anchored)
@@ -136,7 +129,7 @@
 			wrench_down(FALSE)
 			to_chat(user, "You detach \the [src] from the underfloor.")
 		else
-			if(!check_buildability(CP, user))
+			if(!check_buildability(pipe, user))
 				return TRUE
 			wrench_down(TRUE)
 			to_chat(user, "You attach \the [src] to the underfloor.")
@@ -144,36 +137,27 @@
 		update()
 		update_verbs()
 		return TRUE
-	else if(istype(used_item, /obj/item/weldingtool))
+	else if(IS_WELDER(used_item))
 		if(anchored)
-			var/obj/item/weldingtool/welder = used_item
-			if(welder.weld(0,user))
-				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-				to_chat(user, "Welding \the [src] in place.")
-				if(do_after(user, 2 SECONDS, src))
-					if(!src || !welder.isOn()) return TRUE
-					to_chat(user, "\The [src] has been welded in place!")
-					build(CP)
-					qdel(src)
-					return TRUE
-				return TRUE
-			else
-				to_chat(user, "You need more welding fuel to complete this task.")
-				return TRUE
-		else
 			to_chat(user, "You need to attach it to the plating first!")
 			return TRUE
+		if(!used_item.do_tool_interaction(TOOL_WELDER, user, src, 2 SECONDS, suffix_message = ", attaching it to the floor"))
+			return TRUE
+		to_chat(user, "\The [src] has been welded in place!")
+		build(pipe)
+		qdel(src)
+		return TRUE
 	return TRUE
 
 /obj/structure/disposalconstruct/hides_under_flooring()
 	return anchored
 
-/obj/structure/disposalconstruct/proc/check_buildability(obj/structure/disposalpipe/CP, mob/user)
-	if(!CP)
+/obj/structure/disposalconstruct/proc/check_buildability(obj/structure/disposalpipe/pipe, mob/user)
+	if(!pipe)
 		return TRUE
-	var/pdir = CP.dpdir
-	if(istype(CP, /obj/structure/disposalpipe/broken))
-		pdir = CP.dir
+	var/pdir = pipe.dpdir
+	if(istype(pipe, /obj/structure/disposalpipe/broken))
+		pdir = pipe.dir
 	if(pdir & dpdir)
 		to_chat(user, "There is already a disposals pipe at that location.")
 		return FALSE
@@ -189,9 +173,9 @@
 		level = LEVEL_ABOVE_PLATING
 		set_density(1)
 
-/obj/structure/disposalconstruct/machine/check_buildability(obj/structure/disposalpipe/CP, mob/user)
-	if(CP) // There's something there
-		if(!istype(CP,/obj/structure/disposalpipe/trunk))
+/obj/structure/disposalconstruct/machine/check_buildability(obj/structure/disposalpipe/pipe, mob/user)
+	if(pipe) // There's something there
+		if(!istype(pipe,/obj/structure/disposalpipe/trunk))
 			to_chat(user, "\The [src] requires a trunk underneath it in order to work.")
 			return FALSE
 		return TRUE
@@ -200,14 +184,14 @@
 	return FALSE
 
 /obj/structure/disposalconstruct/proc/build()
-	var/obj/structure/disposalpipe/P = new constructed_path(loc)
-	transfer_fingerprints_to(P)
-	P.base_icon_state = built_icon_state
-	P.icon_state = built_icon_state
-	P.dpdir = dpdir
-	P.sort_type = sort_type
-	P.set_dir(dir)
-	P.on_build()
+	var/obj/structure/disposalpipe/pipe = new constructed_path(loc)
+	transfer_fingerprints_to(pipe)
+	pipe.base_icon_state = built_icon_state
+	pipe.icon_state = built_icon_state
+	pipe.dpdir = dpdir
+	pipe.sort_type = sort_type
+	pipe.set_dir(dir)
+	pipe.on_build()
 
 // Subtypes
 
@@ -227,7 +211,7 @@
 	set_density(1) // We don't want disposal bins or outlets to go density 0
 	update_icon()
 
-/obj/structure/disposalconstruct/machine/build(obj/structure/disposalpipe/CP)
+/obj/structure/disposalconstruct/machine/build(obj/structure/disposalpipe/pipe)
 	var/obj/machinery/disposal/machine = new constructed_path(get_turf(src), dir)
 	var/datum/extension/parts_stash/stash = get_extension(src, /datum/extension/parts_stash)
 	if(stash)
@@ -246,12 +230,12 @@
 /obj/structure/disposalconstruct/machine/outlet
 	constructed_path = /obj/structure/disposaloutlet
 
-/obj/structure/disposalconstruct/machine/outlet/build(obj/structure/disposalpipe/CP)
-	var/obj/structure/disposaloutlet/P = new constructed_path(loc)
-	transfer_fingerprints_to(P)
-	P.set_dir(dir)
-	var/obj/structure/disposalpipe/trunk/Trunk = CP
-	Trunk.linked = P
+/obj/structure/disposalconstruct/machine/outlet/build(obj/structure/disposalpipe/pipe)
+	var/obj/structure/disposaloutlet/outlet = new constructed_path(loc)
+	transfer_fingerprints_to(outlet)
+	outlet.set_dir(dir)
+	var/obj/structure/disposalpipe/trunk/trunk = pipe
+	trunk.linked = outlet
 
 /obj/structure/disposalconstruct/machine/chute
 	obj_flags = OBJ_FLAG_ROTATABLE

@@ -582,27 +582,18 @@ var/global/list/diversion_junctions = list()
 				return TRUE
 			else // This should be invalid?
 				return FALSE
-	else if(istype(used_item,/obj/item/weldingtool) && mode==1)
-		var/obj/item/weldingtool/welder = used_item
-		if(welder.weld(0,user))
-			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-			to_chat(user, "You start slicing the floorweld off the disposal outlet.")
-			if(!do_after(user, 2 SECONDS, src))
-				to_chat(user, "You must remain still to deconstruct \the [src].")
-				return TRUE
-			if(QDELETED(src) || !welder.isOn())
-				return TRUE
-			to_chat(user, "You sliced the floorweld off the disposal outlet.")
-			var/obj/structure/disposalconstruct/machine/outlet/C = new (loc, src)
-			src.transfer_fingerprints_to(C)
-			C.anchored = TRUE
-			C.set_density(1)
-			C.update()
-			qdel(src)
+	else if(IS_WELDER(used_item) && mode==1)
+		if(!used_item.do_tool_interaction(TOOL_WELDER, user, src, 2 SECONDS, "slicing the floorweld off of", "slicing the floorweld off of"))
 			return TRUE
-		else
-			to_chat(user, "You need more welding fuel to complete this task.")
+		if(QDELETED(src))
 			return TRUE
+		var/obj/structure/disposalconstruct/machine/outlet/C = new (loc, src)
+		src.transfer_fingerprints_to(C)
+		C.anchored = TRUE
+		C.set_density(1)
+		C.update()
+		qdel(src)
+		return TRUE
 	else
 		return ..()
 

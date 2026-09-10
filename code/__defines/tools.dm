@@ -100,3 +100,8 @@
 
 // Property for xenoarch.
 #define TOOL_PROP_EXCAVATION_DEPTH "excav_depth"
+
+// Tool use return value enums.
+#define TOOL_USE_FAILURE_NOMESSAGE -1
+#define TOOL_USE_FAILURE            0
+#define TOOL_USE_SUCCESS            1

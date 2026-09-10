@@ -123,9 +123,9 @@
 			. = TRUE
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		if(IS_WELDER(used_item))
-			var/obj/item/weldingtool/welder = used_item
-			if( welder.weld(0,user) )
-				to_chat(user, "<span class='notice'>You burn away the fungi with \the [welder].</span>")
+			var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+			if(welder_archetype.can_use_tool(used_item) == TOOL_USE_SUCCESS && welder_archetype.handle_pre_interaction(user, used_item, 0) == TOOL_USE_SUCCESS)
+				to_chat(user, "<span class='notice'>You burn away the fungi with \the [used_item].</span>")
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
 				for(var/obj/effect/overlay/wallrot/WR in src)
 					qdel(WR)
@@ -136,17 +136,9 @@
 				to_chat(user, "<span class='notice'>\The [src] crumbles away under the force of your [used_item.name].</span>")
 				physically_destroyed()
 				return TRUE
-	var/turf/T = user.loc	//get user's location for delay checks
-	if(damage && istype(used_item, /obj/item/weldingtool))
-
-		var/obj/item/weldingtool/welder = used_item
-
-		if(welder.weld(0,user))
-			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5), src) && welder && welder.isOn())
-				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
-				take_damage(-damage)
+	if(damage && IS_WELDER(used_item))
+		if(used_item.do_tool_interaction(TOOL_WELDER, user, src, max(0.5, damage / 50) SECONDS, "repairing the damage to", "repairing the damage to"))
+			take_damage(-damage)
 		return TRUE
 
 	// Basic dismantling.
@@ -166,7 +158,7 @@
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 					. = TRUE
 
-					if(!do_after(user, 60, src))
+					if(!do_after(user, 6 SECONDS, src))
 						return
 
 					to_chat(user, "<span class='notice'>You tear through the wall's support system and plating!</span>")
@@ -182,18 +174,16 @@
 					return TRUE
 			if(5)
 				if(IS_SCREWDRIVER(used_item))
-					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
-					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
-					. = TRUE
-					if(!do_after(user,40,src) || !istype(src, /turf/wall) || construction_stage != 5)
-						return
+					if(!used_item.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 4 SECONDS, "removing the support lines from", "removing the support lines from"))
+						return TRUE // block further interactions
+					if(!istype(src, /turf/wall) || construction_stage != 5)
+						return TRUE // ditto
 					construction_stage = 4
 					update_icon()
-					to_chat(user, "<span class='notice'>You remove the support lines.</span>")
-					return
-				else if(istype(used_item,/obj/item/weldingtool))
-					var/obj/item/weldingtool/welder = used_item
-					if(welder.weld(0,user))
+					return TRUE
+				else if(IS_WELDER(used_item)) // why is this instant when every other repair action is timed
+					var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+					if(welder_archetype.can_use_tool(used_item) == TOOL_USE_SUCCESS && welder_archetype.handle_pre_interaction(user, used_item, 0) == TOOL_USE_SUCCESS)
 						construction_stage = 6
 						update_icon()
 						to_chat(user, SPAN_NOTICE("You repair the outer grille."))
@@ -201,68 +191,66 @@
 			if(4)
 				var/cut_cover
 				if(istype(used_item,/obj/item/weldingtool))
-					var/obj/item/weldingtool/welder = used_item
-					if(welder.weld(0,user))
-						cut_cover=1
-					else
-						return
+					var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+					if(welder_archetype.can_use_tool(used_item) != TOOL_USE_SUCCESS)
+						return TRUE
+					if(welder_archetype.handle_pre_interaction(user, used_item, 0) != TOOL_USE_SUCCESS)
+						return TRUE
+					cut_cover = TRUE
 				else if (used_item.is_special_cutting_tool())
 					if(istype(used_item, /obj/item/gun/energy/plasmacutter))
 						var/obj/item/gun/energy/plasmacutter/cutter = used_item
 						if(!cutter.slice(user))
-							return
-					cut_cover = 1
+							return TRUE
+					cut_cover = TRUE
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the metal cover.</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					. = TRUE
-					if(!do_after(user, 60, src) || !istype(src, /turf/wall) || construction_stage != 4)
-						return
+					if(!do_after(user, 6 SECONDS, src) || !istype(src, /turf/wall) || construction_stage != 4)
+						return TRUE
 					construction_stage = 3
 					update_icon()
 					to_chat(user, "<span class='notice'>You press firmly on the cover, dislodging it.</span>")
-					return
+					return TRUE
 			if(3)
 				if(IS_CROWBAR(used_item))
-					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
-					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					. = TRUE
-					if(!do_after(user,100,src) || !istype(src, /turf/wall) || construction_stage != 3)
-						return
+					if(!used_item.do_tool_interaction(TOOL_CROWBAR, user, src, 10 SECONDS, "struggling to pry the cover off of", "prying the cover off of"))
+						return TRUE
+					if(!istype(src, /turf/wall) || construction_stage != 3)
+						return TRUE
 					construction_stage = 2
 					update_icon()
-					to_chat(user, "<span class='notice'>You pry off the cover.</span>")
-					return
+					return TRUE
 			if(2)
 				if(IS_WRENCH(used_item))
-					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
-					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
-					. = TRUE
-					if(!do_after(user,40,src) || !istype(src, /turf/wall) || construction_stage != 2)
-						return
+					// what a mouthful
+					if(!used_item.do_tool_interaction(TOOL_WRENCH, user, src, 4 SECONDS, "loosening the anchoring bolts securing the support rods of", "removing the anchoring bolts of"))
+						return TRUE
+					if(!istype(src, /turf/wall) || construction_stage != 2)
+						return TRUE
 					construction_stage = 1
 					update_icon()
-					to_chat(user, "<span class='notice'>You remove the bolts anchoring the support rods.</span>")
-					return
+					return TRUE
 			if(1)
 				var/cut_cover
 				if(istype(used_item, /obj/item/weldingtool))
-					var/obj/item/weldingtool/welder = used_item
-					if( welder.weld(0,user) )
-						cut_cover=1
-					else
-						return
+					var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+					if(welder_archetype.can_use_tool(used_item) != TOOL_USE_SUCCESS)
+						return TRUE
+					if(welder_archetype.handle_pre_interaction(user, used_item, 0) != TOOL_USE_SUCCESS)
+						return TRUE
+					cut_cover = TRUE
 				else if(used_item.is_special_cutting_tool())
 					if(istype(used_item, /obj/item/gun/energy/plasmacutter))
 						var/obj/item/gun/energy/plasmacutter/cutter = used_item
 						if(!cutter.slice(user))
-							return
-					cut_cover = 1
+							return TRUE
+					cut_cover = TRUE
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the support rods.</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 					. = TRUE
-					if(!do_after(user,70,src) || !istype(src, /turf/wall) || construction_stage != 1)
+					if(!do_after(user,7 SECONDS,src) || !istype(src, /turf/wall) || construction_stage != 1)
 						return
 					construction_stage = 0
 					update_icon()
@@ -270,14 +258,12 @@
 					return
 			if(0)
 				if(IS_CROWBAR(used_item))
-					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
-					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					. = TRUE
-					if(!do_after(user,100,src) || !istype(src, /turf/wall) || !user || !used_item || !T )	return
-					if(user.loc == T && user.get_active_held_item() == used_item )
-						to_chat(user, "<span class='notice'>You pry off the outer sheath.</span>")
-						dismantle_turf()
-					return
+					if(!used_item.do_tool_interaction(TOOL_CROWBAR, user, src, 10 SECONDS, "struggling to pry the outer sheath off of", "prying the outer sheath off of"))
+						return TRUE
+					if(!istype(src, /turf/wall) || construction_stage != 0)
+						return TRUE
+					dismantle_turf()
+					return TRUE
 
 	return FALSE
 

@@ -44,9 +44,8 @@
 		damage += 5
 
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
-
-		if(welder.weld(0, user))
+		var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+		if(welder_archetype.can_use_tool(used_item) == TOOL_USE_SUCCESS && welder_archetype.handle_pre_interaction(user, used_item, 0) == TOOL_USE_SUCCESS)
 			damage = 15
 			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
 

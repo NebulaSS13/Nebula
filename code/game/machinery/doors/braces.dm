@@ -94,17 +94,14 @@
 		return TRUE
 
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/C = used_item
 		if(!is_damaged())
 			to_chat(user, "\The [src] does not require repairs.")
 			return TRUE
-		if(C.weld(0,user))
+		var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+		if(welder_archetype.can_use_tool(used_item) == TOOL_USE_SUCCESS && welder_archetype.handle_pre_interaction(user, used_item, 0) == TOOL_USE_SUCCESS)
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			current_health = min(current_health + rand(20,30), get_max_health())
-			if(!is_damaged())
-				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")
-			else
-				to_chat(user, "You repair some dents on \the [src].")
+			to_chat(user, "You repair some dents on \the [src].[!is_damaged() ? "It is in perfect condition now." : ""]")
 		return TRUE
 	return ..()
 
