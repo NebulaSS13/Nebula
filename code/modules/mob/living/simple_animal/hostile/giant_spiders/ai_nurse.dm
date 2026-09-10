@@ -12,7 +12,7 @@
 
 /datum/mob_controller/aggressive/giant_spider/nurse/do_process(time_elapsed)
 
-	if(!(. = ..()) || get_activity() != AI_ACTIVITY_IDLE || get_stance() != STANCE_IDLE)
+	if(!(. = ..()) || get_activity() != AI_ACTIVITY_NORMAL || get_stance() != /decl/mob_controller_stance/idle)
 		return // We are doing something else, let it play out.
 
 	var/mob/living/simple_animal/hostile/giant_spider/nurse/spooder = body
@@ -42,7 +42,7 @@
 			spawn(4 SECONDS)
 				if(get_activity() == AI_ACTIVITY_BUILDING)
 					new /obj/effect/spider/stickyweb(body.loc)
-					set_activity(AI_ACTIVITY_IDLE)
+					set_activity(AI_ACTIVITY_NORMAL)
 					resume()
 		else
 			//third, lay an egg cluster there
@@ -58,7 +58,7 @@
 							new /obj/effect/spider/eggcluster(body.loc, body)
 							spooder.max_eggs--
 							spooder.fed--
-						set_activity(AI_ACTIVITY_IDLE)
+						set_activity(AI_ACTIVITY_NORMAL)
 						resume()
 			else
 				//fourthly, cocoon any nearby items so those pesky pinkskins can't use them
@@ -78,7 +78,7 @@
 						//give up if we can't reach them after 10 seconds
 						give_up(O)
 
-	else if(cocoon_target && body.Adjacent(cocoon_target) && get_activity() == AI_ACTIVITY_IDLE)
+	else if(cocoon_target && body.Adjacent(cocoon_target) && get_activity() == AI_ACTIVITY_NORMAL)
 		set_activity(AI_ACTIVITY_BUILDING)
 		body.visible_message(SPAN_NOTICE("\The [body] begins to secrete a sticky substance around \the [cocoon_target]."))
 		stop_wandering()
@@ -114,7 +114,7 @@
 		if(large_cocoon)
 			C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
 		cocoon_target = null
-	set_activity(AI_ACTIVITY_IDLE)
+	set_activity(AI_ACTIVITY_NORMAL)
 	resume_wandering()
 	return TRUE
 
@@ -138,5 +138,5 @@
 		return
 	if(cocoon_target == old_target && !body.Adjacent(cocoon_target))
 		cocoon_target = null
-	set_activity(AI_ACTIVITY_IDLE)
+	set_activity(AI_ACTIVITY_NORMAL)
 	resume_wandering()

@@ -42,9 +42,6 @@
 	turns_per_wander = 6
 	emote_speech = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
 	emote_see    = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
-	stop_wander_when_pulled = FALSE
-	only_attack_enemies = TRUE
-	try_destroy_surroundings = FALSE
 	//the drone randomly switches between these states if it's malfunctioning
 	var/malfunctioning = 1
 	var/hostile_drone = 0
@@ -52,7 +49,7 @@
 	//1 - hostile, attack everything that comes near
 	var/hostile_range = 10
 
-/mob/living/simple_animal/hostile/malf_drone/has_ranged_attack()
+/mob/living/simple_animal/hostile/malf_drone/has_ranged_attack(atom/target)
 	return TRUE
 
 /datum/mob_controller/aggressive/malf_drone/get_raw_target_list()

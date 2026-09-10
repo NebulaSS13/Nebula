@@ -71,7 +71,7 @@
 	if(ispath(new_style))
 		new_style = GET_DECL(new_style)
 
-	var/list/metadata = new_style.update_metadata(get_organ_sprite_accessory_metadata(get_organ_sprite_accessory_by_category(accessory_category, organ_tag), organ_tag))
+	var/list/metadata = new_style.update_accessory_metadata(get_organ_sprite_accessory_metadata(get_organ_sprite_accessory_by_category(accessory_category, organ_tag), organ_tag))
 	set_organ_sprite_accessory_by_category(new_style.type, accessory_category, metadata, TRUE, TRUE, organ_tag, skip_update)
 
 /mob/living/human/proc/reset_hair()

@@ -34,18 +34,6 @@
 		if(ismob(target))
 			give_held_items_to_handler(target)
 
-/mob/living/simple_animal/passive/bird/proc/give_held_items_to_handler(mob/user)
-	for(var/obj/item/thing in get_equipped_items(include_carried = TRUE))
-		drop_from_inventory(thing)
-		if(!QDELETED(thing))
-			user.put_in_hands(thing)
-			var/equipped_to = user.get_equipped_slot_for_item(thing)
-			var/datum/inventory_slot/slot = equipped_to && user.get_inventory_slot_datum(equipped_to)
-			if(istype(slot))
-				to_chat(user, SPAN_NOTICE("\The [src] drops \a [thing] into your [lowertext(slot.slot_name)]."))
-			else
-				to_chat(user, SPAN_NOTICE("\The [src] drops \a [thing]."))
-
 /obj/item/holder/bird
 	w_class = MOB_SIZE_SMALL
 

@@ -32,14 +32,6 @@
 	turns_per_wander = 8
 	break_stuff_probability = 0
 
-/mob/living/simple_animal/hostile/vagrant/bullet_act(var/obj/item/projectile/Proj)
-	var/oldhealth = current_health
-	. = ..()
-	if(istype(ai) && isliving(Proj.firer) && (ai.get_target() != Proj.firer) && current_health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
-		ai.set_target(Proj.firer)
-		ai.turns_per_wander = 6
-		ai.move_to_target()
-
 /mob/living/simple_animal/hostile/vagrant/death(gibbed)
 	. = ..()
 	if(. && !gibbed)
@@ -68,7 +60,7 @@
 		if(istype(ai) && ai.turns_per_wander != initial(ai.turns_per_wander))
 			ai.turns_per_wander = initial(ai.turns_per_wander)
 
-	if(istype(ai) && ai.get_stance() == STANCE_IDLE && !cloaked)
+	if(istype(ai) && ai.get_stance() == /decl/mob_controller_stance/idle && !cloaked)
 		cloaked = 1
 		update_icon()
 

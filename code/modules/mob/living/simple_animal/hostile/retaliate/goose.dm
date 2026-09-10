@@ -21,7 +21,7 @@
 	emote_speech = list("Honk!")
 	emote_hear   = list("honks","flaps its wings","clacks")
 	emote_see    = list("flaps its wings", "scratches the ground")
-	only_attack_enemies = TRUE
+	ai_flags = AI_FLAG_WANDERS | AI_FLAG_NO_PULLED_WANDER | AI_FLAG_AGGRESSIVE | AI_FLAG_ALERTS | AI_FLAG_ATTACKS_ENEMIES
 
 /datum/mob_controller/aggressive/goose/retaliate(atom/source)
 	. = ..()

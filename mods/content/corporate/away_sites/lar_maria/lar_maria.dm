@@ -50,8 +50,7 @@
 	emote_hear   = list("roars", "giggles", "breathes loudly", "mumbles", "yells something unintelligible")
 	emote_see    = list("cries", "grins insanely", "itches fiercly", "scratches his face", "shakes his fists above his head")
 	turns_per_wander = 10
-	stop_wander_when_pulled = 0
-	can_escape_buckles = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES | AI_FLAG_AGGRESSIVE | AI_FLAG_DESTROYER
 
 /mob/living/simple_animal/hostile/lar_maria/death(gibbed)
 	. = ..()
@@ -124,7 +123,7 @@
 	weapon = /obj/item/gun/projectile/shotgun/pump
 	projectiletype = /obj/item/projectile/bullet/shotgun/beanbag
 
-/mob/living/simple_animal/hostile/lar_maria/guard/ranged/has_ranged_attack()
+/mob/living/simple_animal/hostile/lar_maria/guard/ranged/has_ranged_attack(atom/target)
 	return TRUE
 
 /obj/item/clothing/head/soft/zhp_cap

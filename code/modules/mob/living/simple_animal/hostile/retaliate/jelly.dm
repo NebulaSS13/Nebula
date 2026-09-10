@@ -16,7 +16,7 @@
 /datum/mob_controller/aggressive/jelly
 	speak_chance = 0.25
 	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
-	only_attack_enemies = TRUE
+	ai_flags = AI_FLAG_WANDERS | AI_FLAG_NO_PULLED_WANDER | AI_FLAG_AGGRESSIVE | AI_FLAG_ALERTS | AI_FLAG_ATTACKS_ENEMIES
 
 /obj/item/natural_weapon/tentacles
 	name = "tentacles"
@@ -45,7 +45,7 @@
 	var/static/megajelly_color
 
 /datum/mob_controller/aggressive/megajelly
-	can_escape_buckles = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES | AI_FLAG_AGGRESSIVE | AI_FLAG_DESTROYER
 
 /mob/living/simple_animal/hostile/jelly/mega/Initialize()
 	. = ..()

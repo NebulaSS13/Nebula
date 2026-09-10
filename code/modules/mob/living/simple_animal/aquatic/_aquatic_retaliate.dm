@@ -12,4 +12,5 @@
 /datum/mob_controller/aggressive/aquatic
 	turns_per_wander = 10
 	emote_see = list("gnashes")
-	only_attack_enemies = TRUE
+	ai_flags = AI_FLAG_WANDERS | AI_FLAG_NO_PULLED_WANDER | AI_FLAG_AGGRESSIVE | AI_FLAG_ALERTS | AI_FLAG_ATTACKS_ENEMIES
+

@@ -1,25 +1,3 @@
-/proc/emote_replace_target_tokens(var/msg, var/atom/target)
-	. = msg
-	if(istype(target))
-		var/decl/pronouns/target_gender = target.get_pronouns()
-		. = replacetext(., "$TARGET_S$",     target_gender.s)
-		. = replacetext(., "$TARGET_THEY$",  target_gender.he)
-		. = replacetext(., "$TARGET_THEM$",  target_gender.him)
-		. = replacetext(., "$TARGET_THEIR$", target_gender.his)
-		. = replacetext(., "$TARGET_SELF$",  target_gender.self)
-		. = replacetext(., "$TARGET$",       "<b>\the [target]</b>")
-
-/proc/emote_replace_user_tokens(var/msg, var/atom/user)
-	. = msg
-	if(istype(user))
-		var/decl/pronouns/user_gender = user.get_pronouns()
-		. = replacetext(., "$USER_S$",     user_gender.s)
-		. = replacetext(., "$USER_THEY$",  user_gender.he)
-		. = replacetext(., "$USER_THEM$",  user_gender.him)
-		. = replacetext(., "$USER_THEIR$", user_gender.his)
-		. = replacetext(., "$USER_SELF$",  user_gender.self)
-		. = replacetext(., "$USER$",       "<b>\the [user]</b>")
-
 // Note about emote messages:
 // - $USER$ / $TARGET$ will be replaced with the relevant name, in bold.
 // - $USER_THEM$ / $TARGET_THEM$ / $USER_THEIR$ / $TARGET_THEIR$ will be replaced with a
@@ -145,7 +123,7 @@ var/global/list/_emotes_by_key
 		var/emote_string = all_strings[string_key]
 		if(!length(emote_string))
 			continue
-		emote_string = uppertext(emote_replace_target_tokens(emote_replace_user_tokens(emote_string, dummy_emote_user), dummy_emote_target))
+		emote_string = uppertext(REPLACE_EMOTE_TOKENS(emote_string, dummy_emote_user, dummy_emote_target))
 		for(var/token in tokens)
 			if(findtext(emote_string, token))
 				. += "malformed emote token [token] in [string_key]"

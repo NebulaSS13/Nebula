@@ -5,22 +5,13 @@
 	speak_chance = 1.25
 	turns_per_wander = 10
 	break_stuff_probability = 25
+	alert_threatened_str = list(
+		"$USER$ raises its forelegs at $TARGET$.",
+		"$USER$ locks its eyes on $TARGET$."
+	)
 	var/hunt_chance = 1 //percentage chance the mob will run to a random nearby tile
 
-/datum/mob_controller/aggressive/giant_spider/find_target()
+/datum/mob_controller/aggressive/giant_spider/get_wander_candidates(turf/centre)
+	if(prob(hunt_chance))
+		return list(pick(orange(20, body)))
 	. = ..()
-	if(.)
-		if(!body.has_ranged_attack()) //ranged mobs find target after each shot, dont need this spammed quite so much
-			body.custom_emote(VISIBLE_MESSAGE, "raises its forelegs at [.]")
-		else if(prob(15))
-			body.custom_emote(VISIBLE_MESSAGE, "locks its eyes on [.]")
-
-/datum/mob_controller/aggressive/giant_spider/do_process()
-	if(!(. = ..()) || body.stat || !istype(body, /mob/living/simple_animal/hostile/giant_spider))
-		return
-	if(get_stance() == STANCE_IDLE)
-		//chance to skitter madly away
-		if(get_activity() == AI_ACTIVITY_IDLE && prob(hunt_chance))
-			stop_wandering()
-			body.start_automove(pick(orange(20, body)))
-			addtimer(CALLBACK(body, TYPE_PROC_REF(/mob/living/simple_animal/hostile/giant_spider, disable_stop_automated_movement)), 5 SECONDS)

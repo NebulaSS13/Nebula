@@ -1,0 +1,21 @@
+/proc/emote_replace_target_tokens(var/msg, var/atom/target)
+	. = msg
+	if(istype(target))
+		var/decl/pronouns/target_gender = target.get_pronouns()
+		. = replacetext(., "$TARGET_S$",     target_gender.s)
+		. = replacetext(., "$TARGET_THEY$",  target_gender.he)
+		. = replacetext(., "$TARGET_THEM$",  target_gender.him)
+		. = replacetext(., "$TARGET_THEIR$", target_gender.his)
+		. = replacetext(., "$TARGET_SELF$",  target_gender.self)
+		. = replacetext(., "$TARGET$",       "<b>\the [target]</b>")
+
+/proc/emote_replace_user_tokens(var/msg, var/atom/user)
+	. = msg
+	if(istype(user))
+		var/decl/pronouns/user_gender = user.get_pronouns()
+		. = replacetext(., "$USER_S$",     user_gender.s)
+		. = replacetext(., "$USER_THEY$",  user_gender.he)
+		. = replacetext(., "$USER_THEM$",  user_gender.him)
+		. = replacetext(., "$USER_THEIR$", user_gender.his)
+		. = replacetext(., "$USER_SELF$",  user_gender.self)
+		. = replacetext(., "$USER$",       "<b>\the [user]</b>")

@@ -76,13 +76,7 @@
 	if(target.reagents)
 		target.add_to_reagents(poison_type, rand(0.5 * poison_per_bite, poison_per_bite))
 		if(prob(poison_per_bite))
-			to_chat(target, "<span class='warning'>You feel a tiny prick.</span>")
-
-/mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement()
-	stop_automove()
-	if(istype(ai))
-		ai.stop_wandering()
-		ai.set_stance(ai.get_target() ? STANCE_ATTACK : STANCE_IDLE)
+			to_chat(target, SPAN_WARNING("You feel a tiny prick."))
 
 /mob/living/simple_animal/hostile/giant_spider/proc/divorce()
 	return

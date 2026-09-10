@@ -31,7 +31,7 @@
 	speak_chance = 0.25
 	turns_per_wander = 6
 	expected_type = /mob/living/simple_animal/opossum
-	can_escape_buckles = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES
 
 /datum/mob_controller/opossum/proc/is_playing_dead()
 	var/mob/living/simple_animal/opossum/poss = body

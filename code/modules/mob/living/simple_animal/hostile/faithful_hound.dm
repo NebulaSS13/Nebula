@@ -12,7 +12,7 @@
 	ai = /datum/mob_controller/faithful_hound
 
 /datum/mob_controller/faithful_hound
-	do_wander = FALSE
+	ai_flags = AI_FLAGS_NONE
 	var/last_check = 0
 	var/password
 

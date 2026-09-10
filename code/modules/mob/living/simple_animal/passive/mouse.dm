@@ -32,7 +32,7 @@
 	emote_see    = list("runs in a circle", "shakes", "scritches at something")
 	speak_chance = 0.25
 	turns_per_wander = 10
-	can_escape_buckles = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES | AI_FLAG_AGGRESSIVE | AI_FLAG_DESTROYER
 
 /mob/living/simple_animal/passive/mouse/get_remains_type()
 	return /obj/item/remains/mouse

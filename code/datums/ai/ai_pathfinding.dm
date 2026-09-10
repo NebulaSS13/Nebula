@@ -1,3 +1,11 @@
+/datum/mob_controller
+	/// Current path for A* pathfinding.
+	var/list/executing_path
+	/// A counter for times we have failed to progress along our path.
+	var/path_frustration = 0
+	/// A list of any obstacles we should path around in future.
+	var/list/path_obstacles = null
+
 /datum/mob_controller/proc/can_do_automated_move(variant_move_delay)
 	return body && !body.client
 

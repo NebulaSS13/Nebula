@@ -20,7 +20,7 @@
 	speak_chance = 0.25
 	turns_per_wander = 10
 	wander_directions = list(EAST, WEST) // they only go sideways...
-	can_escape_buckles = TRUE //snip snip
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES
 
 // TODO
 /decl/bodytype/hexapod
