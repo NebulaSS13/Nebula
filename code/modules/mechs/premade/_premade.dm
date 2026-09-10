@@ -162,3 +162,32 @@
 
 /mob/living/exosuit/premade/random/extra/Initialize(mapload, var/obj/structure/heavy_vehicle_frame/source_frame)
 	. = ..(mapload, source_frame, super_random = TRUE)
+
+/mob/living/simple_animal/mob_mimic/exosuit
+	faction = "killbots"
+	ai = /datum/mob_controller/aggressive
+	abstract_type = /mob/living/simple_animal/mob_mimic/exosuit
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_mech_overlays = alist()
+
+/mob/living/simple_animal/mob_mimic/exosuit/update_mob_values()
+	. = ..()
+	SetName("autonomous [name]")
+	desc += " This one seems to be running autonomously, with no pilot inside."
+
+/mob/living/simple_animal/mob_mimic/exosuit/prepare_mimic(mob/living/mimic)
+	if(!istype(mimic, /mob/living/exosuit))
+		return
+	var/mob/living/exosuit/mimech = mimic
+	mimech.hatch_closed = TRUE
+	mimech.power = MECH_POWER_ON
+	mimech.update_icon()
+
+/mob/living/simple_animal/mob_mimic/exosuit/handle_additional_mimic(mob/living/mimic)
+	_mob_mimic_type_to_mech_overlays[mimic_mob] = mimic.overlays?.Copy()
+
+/mob/living/simple_animal/mob_mimic/exosuit/on_update_icon()
+	. = ..()
+	cut_overlays()
+	if(length(_mob_mimic_type_to_mech_overlays[mimic_mob]))
+		set_overlays(_mob_mimic_type_to_mech_overlays[mimic_mob])
+	compile_overlays()

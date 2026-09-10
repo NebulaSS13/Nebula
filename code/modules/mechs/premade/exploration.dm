@@ -2,6 +2,9 @@
 	name = "exploration mech"
 	desc = "It looks a bit charred."
 
+/mob/living/simple_animal/mob_mimic/exosuit/exploration
+	mimic_mob = /mob/living/exosuit/premade/light/exploration
+
 /obj/item/mech_component/manipulators/powerloader/exploration
 	color = COLOR_PURPLE
 

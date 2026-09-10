@@ -48,6 +48,7 @@
 	return get_eye_colour() != new_color
 
 /mob/living/get_all_current_mob_overlays()
+	RETURN_TYPE(/list)
 	return mob_overlays
 
 /mob/living/set_current_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
@@ -58,6 +59,7 @@
 	return mob_overlays[overlay_layer]
 
 /mob/living/get_all_current_mob_underlays()
+	RETURN_TYPE(/list)
 	return mob_underlays
 
 /mob/living/set_current_mob_underlay(var/underlay_layer, var/image/underlay, var/redraw_mob = TRUE)

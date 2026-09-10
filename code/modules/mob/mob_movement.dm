@@ -16,7 +16,7 @@
 	return ..() // Parent call should make the mob move.
 
 /mob/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	. = current_posture.prone || ..() || !mover.density
+	. = current_posture?.prone || ..() || !mover.density
 
 /mob/proc/SetMoveCooldown(var/timeout)
 	var/datum/movement_handler/mob/delay/delay = GetMovementHandler(/datum/movement_handler/mob/delay)

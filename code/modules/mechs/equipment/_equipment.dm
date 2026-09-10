@@ -69,9 +69,6 @@
 	owner = null
 	canremove = TRUE
 
-/obj/item/mech_equipment/proc/get_effective_obj()
-	return src
-
 /obj/item/mech_equipment/mob_can_unequip(mob/user, slot, disable_warning = FALSE, dropping = FALSE)
 	. = ..()
 	if(. && owner)
