@@ -211,7 +211,7 @@ SUBSYSTEM_DEF(overlays)
 
 	if (need_compile)
 		if (now)
-			compile_overlays()
+			compile_overlays(TRUE)
 		else if(NOT_QUEUED_ALREADY)
 			QUEUE_FOR_COMPILE
 
@@ -255,7 +255,7 @@ SUBSYSTEM_DEF(overlays)
 
 	if (needs_compile)
 		if (now && !istype(src, /atom/movable))	// If we're a movable, the movable level override of this proc needs to handle this.
-			compile_overlays()
+			compile_overlays(TRUE)
 		else if(NOT_QUEUED_ALREADY)
 			QUEUE_FOR_COMPILE
 
@@ -310,7 +310,7 @@ SUBSYSTEM_DEF(overlays)
 
 	// for ordering reasons (compile_overlays triggers a ZM update), we need to do this up here -- as-is ZM does the update asynchronously, but better to avoid future surprises
 	if (now && .)
-		compile_overlays()
+		compile_overlays(TRUE)
 
 /// Add one or more overlays to simple overlays, or to the specified group.
 /atom/proc/add_overlay(list/overlays, group = null, now = FALSE)
@@ -343,7 +343,7 @@ SUBSYSTEM_DEF(overlays)
 		LAZYADD(simple_overlays, overlays)
 
 	if (now)
-		compile_overlays()
+		compile_overlays(TRUE)
 	else if(NOT_QUEUED_ALREADY)
 		QUEUE_FOR_COMPILE
 
@@ -378,7 +378,7 @@ SUBSYSTEM_DEF(overlays)
 			simple_overlays = null
 
 	if (now)
-		compile_overlays()
+		compile_overlays(TRUE)
 	else if (NOT_QUEUED_ALREADY)
 		QUEUE_FOR_COMPILE
 
@@ -406,7 +406,7 @@ SUBSYSTEM_DEF(overlays)
 				grouped_overlays[k] = v
 
 	if (now)
-		compile_overlays()
+		compile_overlays(TRUE)
 	else if(NOT_QUEUED_ALREADY)
 		QUEUE_FOR_COMPILE
 
@@ -434,7 +434,7 @@ SUBSYSTEM_DEF(overlays)
 	z_flags &= ~remove_flags
 
 	if (now)
-		compile_overlays()
+		compile_overlays(TRUE)
 	else if(NOT_QUEUED_ALREADY)
 		QUEUE_FOR_COMPILE
 
