@@ -1,8 +1,6 @@
 /atom/movable
 	/// The mimic (if any) that's *directly* copying us.
 	var/tmp/atom/movable/openspace/mimic/bound_overlay
-	/// Movable-level Z-Mimic flags. This uses ZMM_* flags, not ZM_* flags.
-	var/z_flags = 0
 
 /atom/movable/set_dir(ndir)
 	. = ..()
@@ -39,6 +37,7 @@
 	anchored = TRUE
 	mouse_opacity = FALSE
 	abstract_type = /atom/movable/openspace // unsure if this is valid, check with Lohi -- Yes, it's valid.
+	z_flags = ZMM_NO_AUTOMANGLE
 	var/target_slot = ZM_SLICE_SLOT_ROOT
 
 /atom/movable/openspace/can_fall()
@@ -101,8 +100,8 @@
 
 	lighting_generation += 1
 
-	if (our_overlays || priority_overlays)
-		compile_overlays()
+	if (HAS_MANAGED_OVERLAYS(src))
+		compile_overlays(TRUE)
 	else if (bound_overlay)
 		// compile_overlays() calls update_above().
 		update_above()
@@ -231,7 +230,7 @@
 /atom/movable/openspace/turf_proxy
 	plane = ZMIMIC_MAXIMUM_PLANE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-	z_flags = ZMM_IGNORE  // Only one of these should ever be visible at a time, the mimic logic will handle that.
+	z_flags = ZMM_IGNORE | ZMM_NO_AUTOMANGLE	// Only one of these should ever be visible at a time, the mimic logic will handle that.
 
 /atom/movable/openspace/turf_proxy/attackby(obj/item/used_item, mob/user)
 	return loc.attackby(used_item, user)

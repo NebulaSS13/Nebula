@@ -3,6 +3,8 @@
 	var/level = LEVEL_ABOVE_PLATING
 	/// (BITFLAG) See flags.dm
 	var/atom_flags = 0
+	/// (BITFLAG) Z-Mimic flags. The legal values for this depend on if this is a movable or a turf. Not meaningful on areas. See zmimic.dm.
+	var/z_flags
 	/// (FLOAT) The world.time that this atom last bumped another. Used mostly by mobs.
 	var/last_bumped = 0
 	/// (BITFLAG) See flags.dm

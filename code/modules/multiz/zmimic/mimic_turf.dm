@@ -17,7 +17,6 @@
 	var/tmp/z_eventually_space = FALSE
 	/// Use this appearance for our appearance instead of `appearance`. If ZM_OVERRIDE is set, *only* this will be visible, no movables will be copied.
 	var/z_appearance
-	var/z_flags = 0
 	/// If this is true, has no atoms below it (recursively) and is above space -- we can just copy space's appearance directly instead of going through ZM.
 	var/tmp/z_allow_fastinit = FALSE
 	/// Were we a MIMIC_REPLACE turf last time we were updated?
