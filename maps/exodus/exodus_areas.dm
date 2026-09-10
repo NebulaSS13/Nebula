@@ -712,31 +712,31 @@
 	icon_state = "eva"
 	req_access = list(access_eva)
 
-/area/exodus/turret_protected
-	req_access = list(access_ai_upload)
 
-/area/exodus/turret_protected/ai
+
+/area/exodus/ai
 	name = "\improper AI Chamber"
 	icon_state = "ai_chamber"
 	ambience = list('sound/ambience/ambimalf.ogg')
+	req_access = list(access_ai_upload)
 
-/area/exodus/turret_protected/ai_cyborg_station
+/area/exodus/ai/cyborg_station
 	name = "\improper Cyborg Station"
 	icon_state = "ai_cyborg"
 	sound_env = SMALL_ENCLOSED
 
-/area/exodus/turret_protected/ai_upload
+/area/exodus/ai/upload
 	name = "\improper AI Upload Chamber"
 	icon_state = "ai_upload"
 	ambience = list('sound/ambience/ambimalf.ogg')
 
-/area/exodus/turret_protected/ai_upload_foyer
+/area/exodus/ai/upload_foyer
 	name = "\improper AI Upload Access"
 	icon_state = "ai_foyer"
 	ambience = list('sound/ambience/ambimalf.ogg')
 	sound_env = SMALL_ENCLOSED
 
-/area/exodus/turret_protected/ai_server_room
+/area/exodus/ai/server_room
 	name = "Messaging Server Room"
 	icon_state = "ai_server"
 	sound_env = SMALL_ENCLOSED

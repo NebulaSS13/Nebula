@@ -981,7 +981,7 @@
 /turf/floor/plating/airless,
 /area/exodus/maintenance/sub/command)
 "dj" = (
-/obj/machinery/porta_turret,
+/obj/machinery/turret/network/energy,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/plating/airless,
 /area/exodus/maintenance/sub/command)
@@ -5398,7 +5398,7 @@
 	c_tag = "Bridge - Sublevel - Turret Control"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/machinery/turretid/stun{
+/obj/machinery/computer/modular/telescreen/preset/turrets{
 	dir = 1;
 	pixel_y = 32
 	},
