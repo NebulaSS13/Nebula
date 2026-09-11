@@ -491,8 +491,6 @@ SUBSYSTEM_DEF(zcopy)
 
 				if (Td.ao_overlays)
 					T.cut_overlay(Td.ao_overlays)
-				if (Td.ao_overlays_mimic)
-					T.cut_overlay(Td.ao_overlays_mimic)
 
 			if (intermediate_ao_overlays)
 				T.add_overlay(intermediate_ao_overlays)
@@ -526,8 +524,6 @@ SUBSYSTEM_DEF(zcopy)
 
 				if (Td.ao_overlays)
 					TO.cut_overlay(Td.ao_overlays)
-				if (Td.ao_overlays_mimic)
-					TO.cut_overlay(Td.ao_overlays_mimic)
 
 			if (intermediate_ao_overlays)
 				TO.add_overlay(intermediate_ao_overlays)
