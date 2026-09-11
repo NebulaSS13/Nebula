@@ -393,17 +393,22 @@ SUBSYSTEM_DEF(overlays)
 		simple_overlays += other.simple_overlays
 
 	if (also_grouped && other.grouped_overlays)
-		LAZYINITALIST(grouped_overlays)
-		for (var/k,v in other.grouped_overlays)
-			var/local_v = grouped_overlays[k]
-			if (islist(local_v))
-				grouped_overlays[k] += v	// valid for both non-list and list entries
-			else if (local_v)
-				grouped_overlays[k] = list(local_v) + v
-			else if (islist(v))
-				grouped_overlays[k] = v:Copy()
-			else
-				grouped_overlays[k] = v
+		if (grouped_overlays)	// If we already have some, merge the incoming list with ours.
+			for (var/k,v in other.grouped_overlays)
+				var/local_v = grouped_overlays[k]
+				if (islist(local_v))
+					grouped_overlays[k] += v	// valid for both non-list and list entries
+				else if (local_v)
+					grouped_overlays[k] = list(local_v) + v
+				else if (islist(v))
+					grouped_overlays[k] = v:Copy()
+				else
+					grouped_overlays[k] = v
+		else	// Or if we don't, just deep-copy the incoming list.
+			grouped_overlays = other.grouped_overlays.Copy()
+			for (var/k,v in grouped_overlays)
+				if (islist(v))
+					grouped_overlays[k] = v:Copy()
 
 	if (now)
 		compile_overlays(TRUE)

@@ -9,7 +9,6 @@
 #define SAFEPICK(L) DEFAULTPICK(L, null)
 // Ensures L is initailized after this point
 #define LAZYINITLIST(L) if (!L) L = list()
-#define LAZYINITALIST(L) if (!L) L = alist()
 // Sets a L back to null iff it is empty
 #define UNSETEMPTY(L) if (L && !L.len) L = null
 // Removes I from list L, and sets I to null if it is now empty
