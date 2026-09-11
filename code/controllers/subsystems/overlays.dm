@@ -306,7 +306,7 @@ SUBSYSTEM_DEF(overlays)
 
 	// None left, just unset the bit.
 	else
-		z_flags &= ~(group ? ~ZMM_AUTOMANGLE_GRP : ~ZMM_AUTOMANGLE_NRML)
+		z_flags &= group ? ~ZMM_AUTOMANGLE_GRP : ~ZMM_AUTOMANGLE_NRML
 
 	// for ordering reasons (compile_overlays triggers a ZM update), we need to do this up here -- as-is ZM does the update asynchronously, but better to avoid future surprises
 	if (now && .)
@@ -359,7 +359,7 @@ SUBSYSTEM_DEF(overlays)
 	if (SSoverlays.context_needs_automangle)	// this will only ever be true on movables
 		src.z_flags |= group ? ZMM_AUTOMANGLE_GRP : ZMM_AUTOMANGLE_NRML
 	else if (istype(src, /atom/movable))
-		src.z_flags &= ~(group ? ZMM_AUTOMANGLE_GRP : ZMM_AUTOMANGLE_NRML)
+		src.z_flags &= group ? ~ZMM_AUTOMANGLE_GRP : ~ZMM_AUTOMANGLE_NRML
 
 	if (group)
 		var/alist/cached_grouped = grouped_overlays
