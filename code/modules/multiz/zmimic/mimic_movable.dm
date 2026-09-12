@@ -1,6 +1,8 @@
 /atom/movable
 	/// The mimic (if any) that's *directly* copying us.
 	var/tmp/atom/movable/openspace/mimic/bound_overlay
+	/// Set ZM behavior for this movable. This uses `ZMM_*` flags. Not compatible with `/turf/z_flags`!
+	var/z_flags = 0
 
 /atom/movable/set_dir(ndir)
 	. = ..()

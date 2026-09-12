@@ -15,13 +15,16 @@
 	var/tmp/z_queued = 0
 	/// If this Z-turf leads to space, uninterrupted.
 	var/tmp/z_eventually_space = FALSE
-	/// Use this appearance for our appearance instead of `appearance`. If ZM_OVERRIDE is set, *only* this will be visible, no movables will be copied.
-	var/z_appearance
 	/// If this is true, has no atoms below it (recursively) and is above space -- we can just copy space's appearance directly instead of going through ZM.
 	var/tmp/z_allow_fastinit = FALSE
 	/// Were we a MIMIC_REPLACE turf last time we were updated?
 	var/tmp/z_was_replaced = FALSE
 	var/tmp/z_was_fastinit = FALSE
+
+	/// Use this appearance for our appearance instead of `appearance`. If ZM_OVERRIDE is set, *only* this will be visible, no movables will be copied.
+	var/z_appearance
+	/// Set ZM behavior for this turf. This uses `ZM_*` flags. Not compatible with `/atom/movable/z_flags`!
+	var/z_flags = 0
 
 	// debug
 	var/tmp/z_depth
@@ -46,7 +49,7 @@
 	z_appearance_resets++
 	appearance = type
 	update_icon()
-	compile_overlays()
+	compile_overlays(TRUE)
 
 /turf/proc/update_mimic()
 	if(z_flags & ZM_FLAGS_CAN_TURF_UPDATE)

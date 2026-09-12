@@ -21,7 +21,7 @@ SUBSYSTEM_DEF(overlays)
 	// If the overlay set currently being considered contains a manglable overlay.
 	// This is only safe because SSoverlays can only ever consider one overlay list at a time with no interior sleeps. Professional on closed course, do not attempt.
 	// Setting this to TRUE on a non-movable will explode.
-	var/context_needs_automangle
+	var/tmp/context_needs_automangle
 
 /// How many items should we process before we check for yield? Increasing this increases efficiency, but also raises risk of overrun.
 #define OVR_PUMP_RATIO 4
@@ -101,7 +101,7 @@ SUBSYSTEM_DEF(overlays)
 		overlays.Cut()
 		SSoverlays.compiles_with_none++
 
-	if (istype(src, /atom/movable) && (z_flags & ZMM_AUTOMANGLE))
+	if (astype(src, /atom/movable)?.z_flags & ZMM_AUTOMANGLE)
 		SSoverlays.automangled++
 
 	SSoverlays.compiles++
@@ -197,17 +197,22 @@ SUBSYSTEM_DEF(overlays)
 /// Remove all simple overlays, or all overlays within the specified group.
 /atom/proc/cut_overlays(group = null, now = FALSE)
 	var/need_compile = FALSE
+	var/atom/movable/AMself = astype(src, /atom/movable)
 
 	if (group)
 		var/alist/cached_grouped = grouped_overlays
 		if (length(cached_grouped))
 			cached_grouped -= group
 			need_compile = TRUE
+		if (!length(cached_grouped) && AMself)
+			AMself.z_flags &= ~ZMM_AUTOMANGLE_GRP
 	else
 		var/list/cached_simple = simple_overlays
 		if (length(cached_simple))
 			cached_simple.Cut()
 			need_compile = TRUE
+			if (AMself)
+				AMself.z_flags &= ~ZMM_AUTOMANGLE_NRML
 
 	if (need_compile)
 		if (now)
@@ -321,7 +326,7 @@ SUBSYSTEM_DEF(overlays)
 	overlays = build_appearance_list(overlays)
 
 	if (SSoverlays.context_needs_automangle)	// this will only ever be true on movables
-		src.z_flags |= group ? ZMM_AUTOMANGLE_GRP : ZMM_AUTOMANGLE_NRML
+		src:z_flags |= group ? ZMM_AUTOMANGLE_GRP : ZMM_AUTOMANGLE_NRML
 
 	if (!overlays || (islist(overlays) && !overlays.len))
 		// No point trying to compile if we don't have any overlays.
@@ -356,10 +361,12 @@ SUBSYSTEM_DEF(overlays)
 	SSoverlays.context_needs_automangle = FALSE
 	overlays = build_appearance_list(overlays)
 
-	if (SSoverlays.context_needs_automangle)	// this will only ever be true on movables
-		src.z_flags |= group ? ZMM_AUTOMANGLE_GRP : ZMM_AUTOMANGLE_NRML
-	else if (istype(src, /atom/movable))
-		src.z_flags &= group ? ~ZMM_AUTOMANGLE_GRP : ~ZMM_AUTOMANGLE_NRML
+	var/atom/movable/AMself = astype(src, /atom/movable)
+	if (AMself)
+		if (SSoverlays.context_needs_automangle)
+			AMself.z_flags |= group ? ZMM_AUTOMANGLE_GRP : ZMM_AUTOMANGLE_NRML
+		else
+			AMself.z_flags &= group ? ~ZMM_AUTOMANGLE_GRP : ~ZMM_AUTOMANGLE_NRML
 
 	if (group)
 		var/alist/cached_grouped = grouped_overlays
@@ -386,7 +393,10 @@ SUBSYSTEM_DEF(overlays)
 /atom/proc/copy_overlays(atom/other, also_grouped = FALSE, now = TRUE)
 	ASSERT(other != null)
 
-	z_flags |= other.z_flags & ZMM_AUTOMANGLE
+	var/atom/movable/AMself = astype(src, /atom/movable)
+	var/atom/movable/AMother = astype(src, /atom/movable)
+	if (AMself && AMother)
+		AMself.z_flags |= AMother.z_flags & ZMM_AUTOMANGLE
 
 	if (other.simple_overlays)
 		LAZYINITLIST(simple_overlays)
@@ -417,7 +427,10 @@ SUBSYSTEM_DEF(overlays)
 
 /// Copy overlays from another atom, overwriting our overlays. This is synchronous by default.
 /atom/proc/replace_overlays(atom/other, also_grouped = FALSE, now = TRUE, exclude_groups = null)
-	z_flags |= other.z_flags & ZMM_AUTOMANGLE
+	var/atom/movable/AMself = astype(src, /atom/movable)
+	var/atom/movable/AMother = astype(src, /atom/movable)
+	if (AMself && AMother)
+		AMself.z_flags |= AMother.z_flags & ZMM_AUTOMANGLE
 	var/remove_flags = 0
 
 	simple_overlays = other.simple_overlays
@@ -436,7 +449,8 @@ SUBSYSTEM_DEF(overlays)
 			grouped_overlays = null
 			remove_flags |= ZMM_AUTOMANGLE_GRP
 
-	z_flags &= ~remove_flags
+	if (AMself)
+		AMself.z_flags &= ~remove_flags
 
 	if (now)
 		compile_overlays(TRUE)
