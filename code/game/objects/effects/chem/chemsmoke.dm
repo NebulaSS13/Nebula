@@ -72,6 +72,9 @@
 	sleep(0.5 SECONDS)
 	..()
 
+/obj/effect/effect/smoke/chem/transparent
+	opacity = FALSE
+
 /////////////////////////////////////////////
 // Chem Smoke Effect System
 /////////////////////////////////////////////
@@ -270,3 +273,7 @@
 	targetTurfs = complete
 
 	return
+
+/datum/effect/effect/system/smoke_spread/chem/transparent
+	show_log = FALSE
+	smoke_type = /obj/effect/effect/smoke/chem/transparent
