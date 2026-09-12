@@ -81,8 +81,12 @@
 		loc.storage.on_item_pre_deletion(src)
 	UNQUEUE_TEMPERATURE_ATOM(src)
 	QDEL_NULL(reagents)
-	LAZYCLEARLIST(our_overlays)
-	LAZYCLEARLIST(priority_overlays)
+
+	if (simple_overlays)
+		simple_overlays = null
+	if (grouped_overlays)
+		grouped_overlays = null
+
 	LAZYCLEARLIST(climbers)
 	QDEL_NULL(light)
 	if(simulated && opacity)

@@ -481,14 +481,17 @@ SUBSYSTEM_DEF(zcopy)
 			if (T.below.mimic_proxy)
 				QDEL_NULL(T.below.mimic_proxy)
 			T.appearance = Td.z_appearance || Td
-			if (length(T.overlays))
-				T.our_overlays = T.overlays.Copy()	// We call into SSoverlays for AO, so make sure we don't lose the mimic overlays.
+
+			if (Td.z_appearance)
+				if (length(T.overlays))
+					T.set_overlays(Td.z_appearance:overlays:Copy())
 			else
-				T.our_overlays = null
-			if (Td.ao_overlays)
-				T.cut_overlay(Td.ao_overlays)
-			if (Td.ao_overlays_mimic)
-				T.cut_overlay(Td.ao_overlays_mimic)
+				if (length(T.overlays))
+					T.replace_overlays(Td, TRUE, FALSE)
+
+				if (Td.ao_overlays)
+					T.cut_overlay(Td.ao_overlays)
+
 			if (intermediate_ao_overlays)
 				T.add_overlay(intermediate_ao_overlays)
 
@@ -511,14 +514,17 @@ SUBSYSTEM_DEF(zcopy)
 			TO.gender = T.gender	// Need to grab this too so PLURAL works properly in examine.
 			TO.opacity = FALSE
 			TO.plane = t_target
-			if (length(TO.overlays))
-				TO.our_overlays = TO.overlays.Copy()
+
+			if (Td.z_appearance)
+				if (length(TO.overlays))
+					TO.set_overlays(Td.z_appearance:overlays:Copy())
 			else
-				TO.our_overlays = null
-			if (Td.ao_overlays)
-				TO.cut_overlay(Td.ao_overlays)
-			if (Td.ao_overlays_mimic)
-				TO.cut_overlay(Td.ao_overlays_mimic)
+				if (length(T.overlays))
+					TO.replace_overlays(Td, TRUE, FALSE)
+
+				if (Td.ao_overlays)
+					TO.cut_overlay(Td.ao_overlays)
+
 			if (intermediate_ao_overlays)
 				TO.add_overlay(intermediate_ao_overlays)
 
@@ -649,7 +655,7 @@ SUBSYSTEM_DEF(zcopy)
 		OO.queued = 0
 
 		// If an atom has explicit plane sets on its overlays/underlays, we need to mangle the appearance's overlays/underlays to align with Z-Mimic's plane usage.
-		if (OO.z_flags & ZMM_MANGLE_PLANES)
+		if (OO.z_flags & (ZMM_MANGLE_PLANES | ZMM_AUTOMANGLE))
 			var/new_appearance = fixup_appearance_planes(OO.appearance)
 			if (new_appearance)
 				OO.appearance = new_appearance
