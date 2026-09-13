@@ -141,3 +141,7 @@
 
 	/// Are you trying not to hurt your opponent?
 	var/pulling_punches
+
+	// Cache vars for mob modifier totals.
+	var/modifier_click_cooldown_mult = null
+	var/modifier_movement_slowdown   = null

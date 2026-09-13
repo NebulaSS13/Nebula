@@ -3172,6 +3172,7 @@
 #include "code\modules\mob_modifiers\definitions\modifiers_restrained.dm"
 #include "code\modules\mob_modifiers\definitions\modifiers_shield.dm"
 #include "code\modules\mob_modifiers\definitions\modifiers_stasis.dm"
+#include "code\modules\mob_modifiers\definitions\modifiers_status.dm"
 #include "code\modules\modular_computers\laptop_vendor.dm"
 #include "code\modules\modular_computers\computers\modular_computer\assembly_computer.dm"
 #include "code\modules\modular_computers\computers\modular_computer\assembly_holo.dm"
