@@ -57,8 +57,8 @@
 	if(. == TOOL_USE_SUCCESS)
 		if(success_message)
 			user.visible_message(
-				SPAN_NOTICE("\The [user] finishes [success_message] \the [target] with \the [src]."),
-				SPAN_NOTICE("You finish [success_message] \the [target] with \the [src].")
+				SPAN_NOTICE("\The [user] finishes [prefix_message][success_message] \the [target] with \the [src][suffix_message]."),
+				SPAN_NOTICE("You finish [prefix_message][success_message] \the [target] with \the [src][suffix_message].")
 			)
 		return TRUE
 

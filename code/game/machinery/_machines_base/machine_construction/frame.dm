@@ -13,28 +13,20 @@
 
 /decl/machine_construction/frame/unwrenched/attackby(obj/item/used_item, mob/user, obj/machinery/machine)
 	if(IS_WRENCH(used_item))
-		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 20, machine))
+		if(used_item.do_tool_interaction(TOOL_WRENCH, user, machine, 2 SECONDS))
 			TRANSFER_STATE(/decl/machine_construction/frame/wrenched)
 			to_chat(user, "<span class='notice'>You wrench \the [machine] into place.</span>")
 			machine.anchored = TRUE
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
-		if(!welder.weld(0, user))
-			to_chat(user, "The welding tool must be on to complete this task.")
-			return TRUE
-		playsound(machine.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(do_after(user, 20, machine))
-			if(!welder.isOn())
-				return TRUE
+		if(used_item.do_tool_interaction(TOOL_WELDER, user, machine, 2 SECONDS))
 			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
-			to_chat(user, "<span class='notice'>You deconstruct \the [machine].</span>")
+			to_chat(user, SPAN_NOTICE("You deconstruct \the [machine]."))
 			machine.dismantle()
 	return FALSE
 
 /decl/machine_construction/frame/unwrenched/mechanics_info()
 	. = list()
-	. += "Use a welder to break apart the frame."
+	. += "Use a welder to dismantle the frame."
 	. += "Use a wrench to secure the frame in place."
 
 /decl/machine_construction/frame/wrenched/state_is_valid(obj/machinery/constructable_frame/machine)
@@ -50,10 +42,8 @@
 
 /decl/machine_construction/frame/wrenched/attackby(obj/item/used_item, mob/user, obj/machinery/machine)
 	if(IS_WRENCH(used_item))
-		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 20, machine))
+		if(used_item.do_tool_interaction(TOOL_WRENCH, user, machine, 2 SECONDS, "unfastening", "unfastening"))
 			TRANSFER_STATE(/decl/machine_construction/frame/unwrenched)
-			to_chat(user, "<span class='notice'>You unfasten \the [machine].</span>")
 			machine.anchored = FALSE
 		return TRUE
 	if(IS_COIL(used_item))
@@ -63,7 +53,7 @@
 			return TRUE
 		playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You start to add cables to the frame.</span>")
-		if(do_after(user, 20, machine) && C.use(5))
+		if(do_after(user, 2 SECONDS, machine) && C.use(5))
 			TRANSFER_STATE(/decl/machine_construction/frame/awaiting_circuit)
 			to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
 		return TRUE

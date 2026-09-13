@@ -84,9 +84,13 @@
 	if(check_result != TOOL_USE_SUCCESS)
 		return check_result
 
+	if(success_message) // jank: if we have a success message we show the prefix there, not here
+		prefix_message = null
+		suffix_message = null
+
 	user.visible_message(
-		SPAN_NOTICE("\The [user] begins [start_message || tool_archetype.tool_message] \the [target] with \the [tool]."),
-		SPAN_NOTICE("You begin [start_message || tool_archetype.tool_message] \the [target] with \the [tool].")
+		SPAN_NOTICE("\The [user] begins [prefix_message][start_message || tool_archetype.tool_message] \the [target] with \the [tool][suffix_message]."),
+		SPAN_NOTICE("You begin [prefix_message][start_message || tool_archetype.tool_message] \the [target] with \the [tool][suffix_message].")
 	)
 
 	var/datum/extension/tool/tool_data = get_extension(tool, /datum/extension/tool)

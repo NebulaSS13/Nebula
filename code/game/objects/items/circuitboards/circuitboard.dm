@@ -29,8 +29,7 @@
 		return 1
 	return 0
 
-//Called when a computer is deconstructed to produce a circuitboard.
-//Only used by computers, as other machines store their circuitboard instance.
+//Called when a machine is deconstructed to produce a circuitboard.
 /obj/item/stock_parts/circuitboard/proc/deconstruct(var/obj/machinery/M)
 	if (istype(M, build_path))
 		return 1

@@ -56,13 +56,17 @@
 			to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
 			return TRUE
 
-		if(welder.weld(0,user))
-			visible_message(SPAN_NOTICE("\The [src] is fused together by \the [user] with \the [welder]."), 3, SPAN_NOTICE("You hear welding."), 2)
-			for(var/obj/item/stack/material/new_item in SSmaterials.create_object((material?.type || /decl/material/solid/metal/steel), usr.loc, 1))
-				new_item.add_to_stacks(usr)
-				if(user.is_holding_offhand(src))
-					user.put_in_hands(new_item)
-			use(2)
+		var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+		if(welder_archetype.can_use_tool(used_item) != TOOL_USE_SUCCESS)
+			return TRUE
+		if(welder_archetype.handle_pre_interaction(user, used_item, 0) != TOOL_USE_SUCCESS)
+			return TRUE
+		visible_message(SPAN_NOTICE("\The [src] is fused together by \the [user] with \the [welder]."), 3, SPAN_NOTICE("You hear welding."), 2)
+		for(var/obj/item/stack/material/new_item in SSmaterials.create_object((material?.type || /decl/material/solid/metal/steel), usr.loc, 1))
+			new_item.add_to_stacks(usr)
+			if(user.is_holding_offhand(src))
+				user.put_in_hands(new_item)
+		use(2)
 		return TRUE
 
 	if (istype(used_item, /obj/item/stack/tape_roll/duct_tape))

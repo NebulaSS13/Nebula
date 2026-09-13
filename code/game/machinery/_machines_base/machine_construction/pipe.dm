@@ -25,22 +25,13 @@
 // Same, but uses different tool.
 /decl/machine_construction/pipe/welder/deconstruct_transition(obj/item/used_item, mob/user, obj/machinery/machine)
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
-		if(!welder.isOn())
-			return FALSE
-		if(!welder.weld(0,user))
-			return FALSE
 		var/fail = machine.cannot_transition_to(/decl/machine_construction/default/deconstructed, user)
 		if(istext(fail))
 			to_chat(user, fail)
 			return TRUE
 		if(fail != MCS_CHANGE)
 			return (fail == MCS_BLOCK)
-		to_chat(user, SPAN_NOTICE("You start welding \the [machine]."))
-		playsound(get_turf(machine), 'sound/items/Welder.ogg', 50, 1)
-		if(!do_after(user, 5 SECONDS, machine))
-			return TRUE
-		if(!welder.isOn())
+		if(!used_item.do_tool_interaction(TOOL_WELDER, user, machine, 5 SECONDS, fuel_expenditure = 0))
 			return TRUE
 		playsound(get_turf(machine), 'sound/items/Welder2.ogg', 50, 1)
 		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
@@ -49,4 +40,4 @@
 
 /decl/machine_construction/pipe/welder/mechanics_info()
 	. = list()
-	. += "Use a welder to deconstruct the machine"
+	. += "Use a welder to deconstruct the machine."

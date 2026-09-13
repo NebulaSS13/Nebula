@@ -448,14 +448,15 @@
 		if (!get_damage(BRUTE))
 			to_chat(user, "Nothing to fix here!")
 			return TRUE
-		var/obj/item/weldingtool/welder = used_item
-		if (welder.weld(0))
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			heal_damage(BRUTE, 30)
-			add_fingerprint(user)
-			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the dents on \the [src]!"))
-		else
-			to_chat(user, "Need more welding fuel!")
+		var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+		if(welder_archetype.can_use_tool(used_item) != TOOL_USE_SUCCESS)
+			return TRUE
+		if(welder_archetype.handle_pre_interaction(user, used_item, 0) != TOOL_USE_SUCCESS)
+			return TRUE
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		heal_damage(BRUTE, 30)
+		add_fingerprint(user)
+		user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the dents on \the [src]!"))
 		return TRUE
 
 	else if(istype(used_item, /obj/item/stack/cable_coil) && (wiresexposed || isdrone(src)))

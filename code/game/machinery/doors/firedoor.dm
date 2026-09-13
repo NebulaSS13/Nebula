@@ -222,19 +222,11 @@
 	if(operating)
 		return TRUE //Already doing something.
 	if(IS_WELDER(used_item) && !repairing)
-		var/obj/item/weldingtool/welder = used_item
-		if(welder.weld(0, user))
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, 2 SECONDS, src))
-				if(!welder.isOn()) return TRUE
-				blocked = !blocked
-				user.visible_message("<span class='danger'>\The [user] [blocked ? "welds" : "unwelds"] \the [src] with \a [welder].</span>",\
-				"You [blocked ? "weld" : "unweld"] \the [src] with \the [welder].",\
-				"You hear something being welded.")
-				playsound(src, 'sound/items/Welder.ogg', 100, 1)
-				update_icon()
-			else
-				to_chat(user, SPAN_WARNING("You must remain still to complete this task."))
+		if(used_item.do_tool_interaction(TOOL_WELDER, user, src, 2 SECONDS))
+			blocked = !blocked
+			update_icon()
+		else
+			to_chat(user, SPAN_WARNING("You must remain still to complete this task."))
 		return TRUE
 
 	if(blocked && IS_CROWBAR(used_item))

@@ -265,9 +265,9 @@ var/global/list/closets = list()
 				receive_mouse_drop(grab.affecting, user)      //act like they were dragged onto the closet
 				return TRUE
 			if(IS_WELDER(used_item))
-				var/obj/item/weldingtool/welder = used_item
-				if(welder.weld(0,user))
-					slice_into_parts(welder, user)
+				var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+				if(welder_archetype.can_use_tool(used_item) == TOOL_USE_SUCCESS && welder_archetype.handle_pre_interaction(user, used_item, 0) == TOOL_USE_SUCCESS)
+					slice_into_parts(used_item, user)
 					return TRUE
 			if(istype(used_item, /obj/item/gun/energy/plasmacutter))
 				var/obj/item/gun/energy/plasmacutter/cutter = used_item
@@ -315,10 +315,10 @@ var/global/list/closets = list()
 		return FALSE //Return false to get afterattack to be called
 
 	if(IS_WELDER(used_item) && (setup & CLOSET_CAN_BE_WELDED))
-		var/obj/item/weldingtool/welder = used_item
-		if(!welder.weld(0,user))
-			if(welder.isOn())
-				to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
+		var/decl/tool_archetype/welder_archetype = GET_DECL(TOOL_WELDER)
+		if(welder_archetype.can_use_tool(used_item) != TOOL_USE_SUCCESS)
+			return TRUE
+		if(welder_archetype.handle_pre_interaction(user, used_item, 0) != TOOL_USE_SUCCESS)
 			return TRUE
 		welded = !welded
 		update_icon()
@@ -420,7 +420,7 @@ var/global/list/closets = list()
 
 	breakout = 1 //can't think of a better way to do this right now.
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
-		if(!do_after(escapee, 50, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED)) //5 seconds
+		if(!do_after(escapee, 5 SECONDS, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED)) //5 seconds
 			breakout = 0
 			return FALSE
 		//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...

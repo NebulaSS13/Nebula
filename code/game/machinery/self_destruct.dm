@@ -13,14 +13,8 @@
 	if(IS_WELDER(used_item))
 		if(!damaged)
 			return FALSE
-		user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
-		if(do_after(user, 100, src))
-			var/obj/item/weldingtool/w = used_item
-			if(w.weld(10))
-				damaged = 0
-				user.visible_message("[user] repairs [src].", "You repair [src].")
-			else
-				to_chat(user, "<span class='warning'>There is not enough fuel to repair [src].</span>")
+		if(used_item.do_tool_interaction(TOOL_WELDER, user, src, 10 SECONDS, "repairing", "repairing", fuel_expenditure = 10))
+			damaged = 0
 		return TRUE
 	if(istype(used_item, /obj/item/nuclear_cylinder))
 		if(damaged)
@@ -30,7 +24,7 @@
 			to_chat(user, "There is already a cylinder here.")
 			return TRUE
 		user.visible_message("[user] begins to carefully place [used_item] onto [src].", "You begin to carefully place [used_item] onto [src].")
-		if(do_after(user, 80, src) && user.try_unequip(used_item, src))
+		if(do_after(user, 8 SECONDS, src) && user.try_unequip(used_item, src))
 			cylinder = used_item
 			density = TRUE
 			user.visible_message("[user] places [used_item] onto [src].", "You place [used_item] onto [src].")
@@ -54,14 +48,14 @@
 				to_chat(user, "<span class='warning'>The self-destruct sequence is in progress, unable to disarm.</span>")
 				return
 			user.visible_message("[user] begins extracting [cylinder].", "You begin extracting [cylinder].")
-			if(do_after(user, 40, src))
+			if(do_after(user, 4 SECONDS, src))
 				user.visible_message("[user] extracts [cylinder].", "You extract [cylinder].")
 				armed = 0
 				density = TRUE
 				flick("unloading", src)
 		else if(!damaged)
 			user.visible_message("[user] begins to arm [cylinder].", "You begin to arm [cylinder].")
-			if(do_after(user, 40, src))
+			if(do_after(user, 4 SECONDS, src))
 				armed = 1
 				density = FALSE
 				user.visible_message("[user] arms [cylinder].", "You arm [cylinder].")
@@ -78,7 +72,7 @@
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] beings to carefully pick up \the [cylinder]."), \
 			SPAN_NOTICE("You begin to carefully pick up \the [cylinder]."))
-		if(!do_after(user, 70, src) || !cylinder)
+		if(!do_after(user, 7 SECONDS, src) || !cylinder)
 			return TRUE
 		user.put_in_hands(cylinder)
 		user.visible_message( \
