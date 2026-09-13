@@ -25,7 +25,7 @@
 		/obj/item/flash,
 		/obj/item/borg/sight/meson,
 		/obj/item/chems/spray/extinguisher,
-		/obj/item/weldingtool/largetank,
+		/obj/item/fuelled_tool/welding/largetank,
 		/obj/item/screwdriver,
 		/obj/item/wrench,
 		/obj/item/crowbar/brace_jack,

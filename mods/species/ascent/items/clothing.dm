@@ -71,7 +71,7 @@
 		/obj/item/gun/energy/particle/small,
 		/obj/item/multitool/mantid,
 		/obj/item/clustertool,
-		/obj/item/weldingtool/electric/mantid,
+		/obj/item/fuelled_tool/welding/electric/mantid,
 		/obj/item/stack/medical/resin,
 		/obj/item/chems/drinks/cans/waterbottle/ascent
 	)
@@ -87,7 +87,7 @@
 		/obj/item/gun/energy/particle/small,
 		/obj/item/multitool/mantid,
 		/obj/item/clustertool = 2,
-		/obj/item/weldingtool/electric/mantid,
+		/obj/item/fuelled_tool/welding/electric/mantid,
 		/obj/item/stack/medical/resin,
 		/obj/item/chems/drinks/cans/waterbottle/ascent
 	)

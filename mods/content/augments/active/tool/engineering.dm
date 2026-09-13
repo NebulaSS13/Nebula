@@ -6,7 +6,7 @@
 	paths = list(
 		/obj/item/screwdriver/finger,
 		/obj/item/wrench/finger,
-		/obj/item/weldingtool/finger,
+		/obj/item/fuelled_tool/welding/finger,
 		/obj/item/crowbar/finger,
 		/obj/item/wirecutters/finger,
 		/obj/item/multitool/finger
@@ -16,7 +16,7 @@
 /obj/item/organ/internal/augment/active/polytool/engineer/reset_matter()
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/weldingtool/finger
+/obj/item/fuelled_tool/welding/finger
 	name = "digital welder"
 	desc = "A precise, high quality welding tool."
 	icon = 'mods/content/augments/icons/welder_finger.dmi'

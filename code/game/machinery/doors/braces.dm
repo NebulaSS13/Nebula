@@ -94,7 +94,7 @@
 		return TRUE
 
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/C = used_item
+		var/obj/item/fuelled_tool/welding/C = used_item
 		if(!is_damaged())
 			to_chat(user, "\The [src] does not require repairs.")
 			return TRUE
