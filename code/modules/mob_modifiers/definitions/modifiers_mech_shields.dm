@@ -108,7 +108,7 @@
 		object.icon_state = "mech_shield_[hardpoint]"
 		var/image/mech_overlay = image(object.icon, "[object.icon_state]_over")
 		mech_overlay.layer = ABOVE_HUMAN_LAYER
-		object.add_overlay(mech_overlay, priority = TRUE)
+		object.add_overlay(mech_overlay, TRUE)
 
 /obj/abstract/follower/mechshield_ballistic
 	icon           = 'icons/mecha/ballistic_shield.dmi'
