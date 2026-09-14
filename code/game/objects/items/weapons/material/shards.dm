@@ -58,7 +58,7 @@
 
 /obj/item/shard/attackby(obj/item/used_item, mob/user)
 	if(IS_WELDER(used_item) && material.shard_can_repair)
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(welder.weld(0, user))
 			material.create_object(get_turf(src))
 			qdel(src)
