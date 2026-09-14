@@ -472,3 +472,32 @@
 		M.take_damage(rand(3,6))
 		if(prob(10))
 			new /obj/item/shard(get_turf(M), result_mat)
+
+/decl/material/liquid/thermite
+	name              = "thermite"
+	uid               = "chem_thermite"
+	lore_text         = "Thermite produces an aluminothermic reaction known as a thermite reaction. Can be used to melt walls."
+	color             = "#673910"
+	touch_met         = 50
+	taste_description = "metallic sweetness"
+	melting_point     = 323
+	ignition_point    = 353
+	accelerant_value  = 0.8
+
+	var/decal_type = /obj/effect/decal/cleanable/thermite
+
+/decl/material/liquid/thermite/touch_mob(var/mob/victim, var/amount)
+	..()
+	if(istype(victim))
+		victim.adjust_fire_intensity(round(amount / 5))
+
+/decl/material/liquid/thermite/affect_blood(mob/living/M, removed, datum/reagents/holder)
+	. = ..()
+	// Do this rather than take_damage() to avoid armour checks.
+	M.adjustFireLoss(3 * removed)
+
+/decl/material/liquid/thermite/touch_turf(var/turf/touching_turf, var/amount, var/datum/reagents/holder)
+	..()
+	if(decal_type && !(locate(decal_type) in touching_turf))
+		touching_turf.visible_message(SPAN_NOTICE("The thermite splashes over \the [touching_turf]."))
+		new decal_type(touching_turf)

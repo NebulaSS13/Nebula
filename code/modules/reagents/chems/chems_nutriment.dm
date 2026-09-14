@@ -21,7 +21,7 @@
 	melting_point    = 323
 	ignition_point   = 353
 	boiling_point    = 373
-	accelerant_value =   0.65
+	accelerant_value = 0.65
 
 /decl/material/liquid/nutriment/Initialize()
 	solid_name = name   // avoid 'frozen sugar'
