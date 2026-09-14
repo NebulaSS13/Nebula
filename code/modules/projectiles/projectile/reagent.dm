@@ -1,4 +1,5 @@
-/obj/item/projectile/energy/blob //Not super strong.
+// Splatters the target with reagents.
+/obj/item/projectile/reagent
 	name = "spore"
 	icon_state = "declone"
 	damage = 3
@@ -9,15 +10,19 @@
 	hitsound_non_mob = 'sound/effects/slime_squish.ogg'
 	hitsound = 'sound/effects/slime_squish.ogg'
 	chem_volume = 5
+	damage_flags = 0
+	distance_falloff = 2.5
+	impact_effect_type = /obj/effect/temp_visual/impact_effect
+	temperature = T0C + 300
 
-/obj/item/projectile/energy/blob/populate_reagents()
+/obj/item/projectile/reagent/populate_reagents()
 	. = ..()
 	add_projectile_reagents()
 
-/obj/item/projectile/energy/blob/proc/add_projectile_reagents()
+/obj/item/projectile/reagent/proc/add_projectile_reagents()
 	add_to_reagents(/decl/material/solid/organic/mold, 5)
 
-/obj/item/projectile/energy/blob/on_impact(var/atom/A)
+/obj/item/projectile/reagent/on_impact(var/atom/A)
 	if(REAGENT_TOTAL_VOLUME(reagents))
 		var/datum/effect/effect/system/smoke_spread/chem/transparent/splatter_effect = new
 		var/location = get_turf(A)
@@ -27,9 +32,9 @@
 		splatter_effect.start()
 	..()
 
-/obj/item/projectile/energy/blob/freezing
+/obj/item/projectile/reagent/freezing
 	modifier_type_to_apply = /decl/mob_modifier/chilled
 	modifier_duration = 1 MINUTE
 
-/obj/item/projectile/energy/blob/freezing/add_projectile_reagents()
+/obj/item/projectile/reagent/freezing/add_projectile_reagents()
 	add_to_reagents(/decl/material/liquid/frostoil, 5)
