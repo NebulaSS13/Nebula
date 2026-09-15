@@ -1,3 +1,28 @@
+/decl/vermin_spawn
+	abstract_type = /decl/vermin_spawn
+	var/list/spawn_types
+	var/max_number
+	var/vermstring
+
+/decl/vermin_spawn/proc/spawn_at(atom/target)
+	var/spawn_type = pick(spawn_types)
+	return new spawn_type(target)
+
+/decl/vermin_spawn/mice
+	spawn_types = list(
+		/mob/living/simple_animal/passive/mouse/brown,
+		/mob/living/simple_animal/passive/mouse/gray,
+		/mob/living/simple_animal/passive/mouse/white,
+		/mob/living/simple_animal/passive/mouse/rat
+	)
+	max_number = 12
+	vermstring = "mice"
+
+/decl/vermin_spawn/lizards
+	spawn_types = list(/mob/living/simple_animal/lizard)
+	max_number = 6
+	vermstring = "lizards"
+
 #define LOC_KITCHEN 0
 #define LOC_ATMOS 1
 #define LOC_INCIN 2
@@ -9,16 +34,17 @@
 #define LOC_TECH 8
 #define LOC_TACTICAL 9
 
-#define VERM_MICE 0
-#define VERM_LIZARDS 1
-#define VERM_SPIDERS 2
-
 /datum/event/infestation
 	announceWhen = 10
 	endWhen = 11
+
+	var/list/vermin_spawn_types = list(
+		/decl/vermin_spawn/mice,
+		/decl/vermin_spawn/lizards
+	)
+
 	var/area/location
-	var/vermin
-	var/vermstring
+	var/decl/vermin_spawn/vermin
 
 /datum/event/infestation/start()
 	var/list/vermin_turfs
@@ -33,44 +59,21 @@
 		log_debug("Vermin infestation failed to find a viable spawn after 3 attempts. Aborting.")
 		kill()
 
-	var/list/spawn_types = list()
-	var/max_number
-	vermin = rand(0,2)
-	switch(vermin)
-		if(VERM_MICE)
-			spawn_types = list(
-				/mob/living/simple_animal/passive/mouse/brown,
-				/mob/living/simple_animal/passive/mouse/gray,
-				/mob/living/simple_animal/passive/mouse/white,
-				/mob/living/simple_animal/passive/mouse/rat
-			)
-			max_number = 12
-			vermstring = "mice"
-		if(VERM_LIZARDS)
-			spawn_types = list(/mob/living/simple_animal/lizard)
-			max_number = 6
-			vermstring = "lizards"
-		if(VERM_SPIDERS)
-			spawn_types = list(/obj/effect/spider/spiderling)
-			max_number = 3
-			vermstring = "spiders"
+	var/vermin_type = pick(vermin_spawn_types)
+	vermin = RESOLVE_TO_DECL(vermin_type)
 
 	spawn(0)
 		var/num = 0
 		for(var/i = 1 to severity)
-			num += rand(2,max_number)
-		log_and_message_admins("Vermin infestation spawned ([vermstring] x[num]) in \the [location.proper_name]", location = pick_area_turf(location))
+			num += rand(2, vermin.max_number)
+		log_and_message_admins("Vermin infestation spawned ([vermin.vermstring] x[num]) in \the [location.proper_name]", location = pick_area_turf(location))
 		while(vermin_turfs.len && num > 0)
 			var/turf/T = pick_n_take(vermin_turfs)
 			num--
-
-			var/spawn_type = pick(spawn_types)
-			var/obj/effect/spider/spiderling/S = new spawn_type(T)
-			if(istype(S))
-				S.amount_grown = -1
+			vermin.spawn_at(T)
 
 /datum/event/infestation/announce()
-	command_announcement.Announce("Bioscans indicate that [vermstring] have been breeding in \the [location.proper_name]. Further infestation is likely if left unchecked.", "[location_name()] Biologic Sensor Network", zlevels = affecting_z)
+	command_announcement.Announce("Bioscans indicate that [vermin.vermstring] have been breeding in \the [location.proper_name]. Further infestation is likely if left unchecked.", "[location_name()] Biologic Sensor Network", zlevels = affecting_z)
 
 /datum/event/infestation/proc/set_location_get_infestation_turfs()
 	location = pick_area(list(/proc/is_not_space_area, /proc/is_station_area))
@@ -94,7 +97,3 @@
 #undef LOC_VAULT
 #undef LOC_TECH
 #undef LOC_TACTICAL
-
-#undef VERM_MICE
-#undef VERM_LIZARDS
-#undef VERM_SPIDERS

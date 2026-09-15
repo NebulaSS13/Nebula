@@ -25,3 +25,10 @@
 OPTIONAL_SPAWNER(aliumizer, null)
 /// This spawner is used to optionally spawn the hand teleporter if the integrated electronics modpack is included.
 OPTIONAL_SPAWNER(hand_tele, null) // todo: add a non-prefab hand tele variant for use without the modpack?
+
+// Spider modpack compat.
+OPTIONAL_SPAWNER(spiderling, null)
+OPTIONAL_SPAWNER(spider_nurse, null)
+OPTIONAL_SPAWNER(spider_guard, null)
+OPTIONAL_SPAWNER(spider_eggs, null)
+OPTIONAL_SPAWNER(spider_web, null)

@@ -36,6 +36,14 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
+// Overridden to spider eggs in _spiders.dme
+/obj/random/evil_manifestation
+	name = "Random Evil Manifestation"
+	var/list/spawn_types = list(/obj/item/ectoplasm)
+
+/obj/random/evil_manifestation/spawn_choices()
+	return spawn_types
+
 /obj/item/vampiric/Process()
 	//see if we've identified anyone nearby
 	if(world.time - last_bloodcall > bloodcall_interval && nearby_mobs.len)
@@ -60,7 +68,7 @@
 	//use up stored charges
 	if(charges >= 10)
 		charges -= 10
-		new /obj/effect/spider/eggcluster(pick(view(1,src)))
+		new /obj/random/evil_manifestation(pick(view(1,src)))
 
 	if(charges >= 3)
 		if(prob(5))
