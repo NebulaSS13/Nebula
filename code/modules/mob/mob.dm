@@ -303,6 +303,7 @@ var/global/const/ACTION_DANGER_ALL = 2
 
 #define ENCUMBERANCE_MOVEMENT_MOD 0.35
 /mob/proc/get_movement_delay(var/travel_dir)
+	SHOULD_CALL_PARENT(TRUE)
 	. = 0
 	if(isturf(loc))
 		var/turf/T = loc
@@ -316,8 +317,13 @@ var/global/const/ACTION_DANGER_ALL = 2
 		. += move_intent.move_delay
 	else
 		. += _automove_delay
-	. = max(. + (ENCUMBERANCE_MOVEMENT_MOD * encumbrance()), 1)
 
+	if(isnull(modifier_movement_slowdown))
+		modifier_movement_slowdown = 0
+		for(var/modifier_type in get_mob_modifiers())
+			var/decl/mob_modifier/modifier = RESOLVE_TO_DECL(modifier_type)
+			modifier_movement_slowdown += modifier.movement_slowdown
+	. = max(. + modifier_movement_slowdown + (ENCUMBERANCE_MOVEMENT_MOD * encumbrance()), 1)
 #undef ENCUMBERANCE_MOVEMENT_MOD
 
 /mob/proc/encumbrance()

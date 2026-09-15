@@ -160,7 +160,14 @@
 	return 1
 
 /mob/proc/setClickCooldown(var/timeout)
-	next_move = max(world.time + timeout, next_move)
+
+	if(isnull(modifier_click_cooldown_mult))
+		modifier_click_cooldown_mult = 1
+		for(var/modifier_type in get_mob_modifiers())
+			var/decl/mob_modifier/modifier = RESOLVE_TO_DECL(modifier_type)
+			if(!isnull(modifier.click_cooldown_multiplier))
+				modifier_click_cooldown_mult *= modifier.click_cooldown_multiplier
+	next_move = max(world.time + (timeout * modifier_click_cooldown_mult), next_move)
 
 /mob/proc/canClick()
 	if(get_config_value(/decl/config/toggle/no_click_cooldown) || next_move <= world.time)
