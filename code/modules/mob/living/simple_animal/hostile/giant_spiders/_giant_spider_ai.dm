@@ -10,10 +10,10 @@
 /datum/mob_controller/aggressive/giant_spider/find_target()
 	. = ..()
 	if(.)
-		if(!body.has_ranged_attack()) //ranged mobs find target after each shot, dont need this spammed quite so much
-			body.custom_emote(VISIBLE_MESSAGE, "raises its forelegs at [.]")
+		if(!body.has_ranged_attack(.)) //ranged mobs find target after each shot, dont need this spammed quite so much
+			body.custom_emote(VISIBLE_MESSAGE, "raises its forelegs at [.].")
 		else if(prob(15))
-			body.custom_emote(VISIBLE_MESSAGE, "locks its eyes on [.]")
+			body.custom_emote(VISIBLE_MESSAGE, "locks its eyes on [.].")
 
 /datum/mob_controller/aggressive/giant_spider/do_process()
 	if(!(. = ..()) || body.stat || !istype(body, /mob/living/simple_animal/hostile/giant_spider))
