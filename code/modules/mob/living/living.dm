@@ -749,6 +749,7 @@ default behaviour is:
 	QDEL_NULL(_aiming)
 	QDEL_NULL_LIST(_hallucinations)
 	QDEL_NULL_LIST(aimed_at_by)
+	QDEL_NULL_LIST(stat_organs)
 	LAZYCLEARLIST(smell_cooldown)
 	if(stressors) // Do not QDEL_NULL, keys are managed instances.
 		stressors = null
@@ -2034,3 +2035,23 @@ default behaviour is:
 
 /mob/living/proc/is_playing_dead()
 	return stat || current_posture?.prone || (status_flags & FAKEDEATH)
+
+/mob/living/proc/clear_sprite_accessories(set_color, skip_update)
+	for(var/obj/item/organ/external/E in get_external_organs())
+		if(set_color)
+			E.skin_colour = set_color
+		E.clear_sprite_accessories(skip_update = TRUE)
+	if(!skip_update)
+		update_body()
+
+/mob/living/proc/set_sprite_accessories(list/setting_accessories, skip_update)
+	for(var/accessory_category in setting_accessories)
+		for(var/accessory in setting_accessories[accessory_category])
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			var/accessory_metadata = setting_accessories[accessory_category][accessory]
+			for(var/bodypart in accessory_decl.body_parts)
+				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, bodypart)
+				if(O)
+					O.set_sprite_accessory(accessory, null, accessory_metadata, skip_update = TRUE)
+	if(!skip_update)
+		update_body()

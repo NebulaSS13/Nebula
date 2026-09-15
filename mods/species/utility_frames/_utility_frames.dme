@@ -4,6 +4,7 @@
 // BEGIN_INCLUDE
 #include "_utility_frames.dm"
 #include "markings.dm"
+#include "mobs.dm"
 #include "species.dm"
 #include "species_bodytypes.dm"
 #include "traits.dm"

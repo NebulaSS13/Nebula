@@ -91,6 +91,8 @@ var/global/list/bodytypes_by_category = list()
 	var/list/prone_overlay_offset
 	/// Set to TRUE to skip unit testing as a primary bodytype in a human. Generally for partial prosthetic models.
 	var/skip_organ_validation = FALSE
+	/// Simplified 'animal' version used by mob mimics.
+	var/simple_variant = /decl/bodytype/animal
 
 	/// Per-bodytype per-zone message strings, see /mob/proc/get_hug_zone_messages
 	var/list/default_hug_message
@@ -724,19 +726,10 @@ var/global/list/bodytypes_by_category = list()
 /decl/bodytype/proc/set_default_sprite_accessories(var/mob/living/setting)
 	if(!istype(setting))
 		return
-	for(var/obj/item/organ/external/E in setting.get_external_organs())
-		E.skin_colour = base_color
-		E.clear_sprite_accessories(skip_update = TRUE)
-	if(!length(default_sprite_accessories))
-		return
-	for(var/accessory_category in default_sprite_accessories)
-		for(var/accessory in default_sprite_accessories[accessory_category])
-			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-			var/accessory_metadata = default_sprite_accessories[accessory_category][accessory]
-			for(var/bodypart in accessory_decl.body_parts)
-				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(setting, bodypart)
-				if(O)
-					O.set_sprite_accessory(accessory, null, accessory_metadata, skip_update = TRUE)
+	setting.clear_sprite_accessories(base_color, skip_update = TRUE)
+	if(length(default_sprite_accessories))
+		setting.set_sprite_accessories(default_sprite_accessories, skip_update = TRUE)
+	setting.update_body(TRUE)
 
 /decl/bodytype/proc/customize_preview_mannequin(mob/living/human/dummy/mannequin/mannequin)
 	set_default_sprite_accessories(mannequin)

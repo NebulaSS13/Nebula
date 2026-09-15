@@ -28,7 +28,6 @@
 	body_temperature =      null
 	passive_temp_gain =     5  // stabilize at ~80 C in a 20 C environment.
 	blood_volume = 0
-
 	preview_outfit = null
 
 	available_pronouns = list(

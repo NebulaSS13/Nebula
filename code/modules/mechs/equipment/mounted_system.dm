@@ -32,7 +32,7 @@
 	. = ..()
 
 /obj/item/mech_equipment/mounted_system/get_effective_obj()
-	return (holding ? holding : src)
+	return (holding ? holding : ..())
 
 /obj/item/mech_equipment/mounted_system/get_hardpoint_status_value()
 	return (holding ? holding.get_hardpoint_status_value() : null)
