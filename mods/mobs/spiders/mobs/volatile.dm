@@ -11,9 +11,6 @@
 	poison_type = /decl/material/liquid/fuel/hydrazine
 	immune_to_damage_type = alist(PAIN = TRUE)
 
-	icon_scale_x = 1.25
-	icon_scale_y = 1.25
-
 	var/exploded = FALSE
 	var/explosion_dev_range		= 1
 	var/explosion_heavy_range	= 2
@@ -22,6 +19,10 @@
 
 	var/explosion_delay_lower	= 1 SECOND	// Lower bound for explosion delay.
 	var/explosion_delay_upper	= 2 SECONDS	// Upper bound.
+
+/mob/living/simple_animal/hostile/giant_spider/volatile/Initialize(mapload, atom/parent)
+	. = ..()
+	set_scale(1.25)
 
 /mob/living/simple_animal/hostile/giant_spider/volatile/death(gibbed)
 	var/turf/death_loc = get_turf(src)
@@ -36,6 +37,8 @@
 
 	// Flash black and red as a warning.
 	var/delay = rand(explosion_delay_lower, explosion_delay_upper)
+	// TODO: fix animate() flagging for mobs so we can use a looping
+	// animation without windup and mob combat interrupting/breaking it.
 	for(var/i = 1 to delay)
 		if(i % 2 == 0)
 			color = "#000000"

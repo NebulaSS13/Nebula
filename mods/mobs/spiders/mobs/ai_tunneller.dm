@@ -14,12 +14,15 @@
 	var/tunnel_warning    = 0.5 SECONDS	// How long the dig telegraphing is.
 	var/tunnel_tile_speed = 2			// How long to wait between each tile. Higher numbers result in an easier to dodge tunnel attack.
 
+
 /decl/maneuver/tunnel/perform(var/mob/living/user, var/atom/target, var/strength, var/reflexively = FALSE)
 	if(!(. = ..()) || !target)
 		return
 
 	user.do_windup_animation(target, windup_time = tunnel_warning)
-	sleep(tunnel_warning)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/decl/maneuver/tunnel, finish_tunnelling), user, target), tunnel_warning)
+
+/decl/maneuver/tunnel/proc/finish_tunnelling(mob/living/user, atom/target)
 
 	user.visible_message(SPAN_DANGER("\The [user] tunnels towards \the [target]!"))
 
