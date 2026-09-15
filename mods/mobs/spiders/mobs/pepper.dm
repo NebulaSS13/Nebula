@@ -6,7 +6,5 @@
 	poison_chance = 20
 	poison_per_bite = 5
 	poison_type = /decl/material/liquid/capsaicin/condensed
-
-/mob/living/simple_animal/hostile/giant_spider/pepper/Initialize(mapload, atom/parent)
-	. = ..()
-	set_scale(1.1)
+	icon_scale_x = 1.1
+	icon_scale_y = 1.1

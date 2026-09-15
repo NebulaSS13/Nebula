@@ -7,6 +7,8 @@
 	poison_type = /decl/material/liquid/sedatives
 	base_movement_delay = 3
 	natural_weapon = /obj/item/natural_weapon/bite/weak
+	icon_scale_x = 1.2
+	icon_scale_y = 1.2
 
 	var/spiderling_count = 0
 	var/spiderling_type = /obj/effect/spider/spiderling
@@ -15,7 +17,6 @@
 
 /mob/living/simple_animal/hostile/giant_spider/carrier/Initialize()
 	spiderling_count = rand(5, 10)
-	set_scale(1.2)
 	. = ..()
 
 /mob/living/simple_animal/hostile/giant_spider/carrier/death(gibbed)
