@@ -2055,3 +2055,8 @@ default behaviour is:
 					O.set_sprite_accessory(accessory, null, accessory_metadata, skip_update = TRUE)
 	if(!skip_update)
 		update_body()
+
+/mob/living/proc/inflict_cold_damage(amount)
+	amount *= 1 - get_cold_protection(50) // Within spacesuit protection.
+	if(amount > 0)
+		adjustFireLoss(amount)
