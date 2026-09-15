@@ -107,6 +107,7 @@
 	var/eye_color
 
 	var/list/ability_handlers
+	var/datum/effect/effect/system/ability_system
 
 /mob/living/simple_animal/Initialize()
 	. = ..()
@@ -245,6 +246,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/Destroy()
 	if(istype(natural_weapon))
 		QDEL_NULL(natural_weapon)
+	if(istype(ability_system))
+		QDEL_NULL(ability_system)
 	. = ..()
 
 /mob/living/simple_animal/handle_regular_status_updates()
