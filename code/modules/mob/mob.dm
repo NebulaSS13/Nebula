@@ -1642,3 +1642,24 @@ var/global/const/ACTION_DANGER_ALL = 2
 
 /mob/proc/remove_cloak()
 	return
+
+/mob/proc/get_available_maneuvers()
+	return
+
+/mob/proc/get_acrobatics_multiplier(var/decl/maneuver/attempting_maneuver)
+	return 1
+
+/mob/proc/get_satiated_nutrition()
+	return
+
+/mob/proc/get_max_nutrition()
+	return
+
+/mob/proc/set_nutrition(var/amt)
+	return
+
+/mob/proc/get_nutrition()
+	return
+
+/mob/proc/adjust_nutrition(var/amt)
+	return

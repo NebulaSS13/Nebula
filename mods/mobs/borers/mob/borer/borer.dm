@@ -61,8 +61,7 @@
 
 /datum/mob_controller/borer
 	emote_hear = list("chirrups")
-	do_wander = FALSE
-	can_escape_buckles = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_ESCAPE_BUCKLES | AI_FLAG_AGGRESSIVE | AI_FLAG_DESTROYER
 
 /obj/item/holder/borer
 	origin_tech = @'{"biotech":6}'

@@ -24,7 +24,7 @@
 	var/deactivated
 
 /datum/mob_controller/aggressive/megahivebot
-	can_escape_buckles = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES | AI_FLAG_AGGRESSIVE | AI_FLAG_DESTROYER
 
 /datum/mob_controller/aggressive/megahivebot/handle_ranged_target(atom/ranged_target)
 	var/mob/living/simple_animal/hostile/hivebot/mega/megabot = body

@@ -14,7 +14,7 @@
 	holder_type = /obj/item/holder
 
 /datum/mob_controller/lizard
-	can_escape_buckles = TRUE
+	ai_flags = AI_FLAG_NO_PULLED_WANDER | AI_FLAG_WANDERS | AI_FLAG_ESCAPE_BUCKLES
 
 /mob/living/simple_animal/lizard/get_remains_type()
 	return /obj/item/remains/lizard

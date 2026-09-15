@@ -217,7 +217,7 @@ var/global/list/organ_icon_cache = list()
 		if(accessory_cat_decl.single_selection)
 			LAZYDISTINCTADD(refresh_accessories, accessories)
 			accessories.Cut()
-		LAZYSET(accessories, accessory_type, accessory_decl.update_metadata(accessory_metadata, existing_metadata))
+		LAZYSET(accessories, accessory_type, accessory_decl.update_accessory_metadata(accessory_metadata, existing_metadata))
 		LAZYDISTINCTADD(refresh_accessories, accessory_decl)
 	else
 		if(!(accessory_type in accessories))

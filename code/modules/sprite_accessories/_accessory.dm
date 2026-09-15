@@ -252,7 +252,7 @@
 
 	return accessory_icon
 
-/decl/sprite_accessory/proc/update_metadata(list/new_metadata, list/old_metadata)
+/decl/sprite_accessory/proc/update_accessory_metadata(list/new_metadata, list/old_metadata)
 	if(!islist(new_metadata) && !islist(old_metadata))
 		return get_default_accessory_metadata()
 	if(!islist(new_metadata))

@@ -42,9 +42,6 @@
 	turns_per_wander = 6
 	emote_speech = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
 	emote_see    = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
-	stop_wander_when_pulled = FALSE
-	only_attack_enemies = TRUE
-	try_destroy_surroundings = FALSE
 	//the drone randomly switches between these states if it's malfunctioning
 	var/malfunctioning = 1
 	var/hostile_drone = 0

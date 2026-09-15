@@ -1,3 +1,6 @@
+/decl/maneuver/leap/spider/ai_should_use(mob/living/user, atom/target)
+	return istype(target)
+
 /mob/living/simple_animal/hostile/giant_spider/hunter
 	desc = "A monstrously huge black spider with shimmering eyes."
 	icon = 'mods/mobs/spiders/icons/spider_black.dmi'
@@ -47,4 +50,3 @@
 			ai.resume()
 		visible_message(SPAN_DANGER("\The [src] slams into \the [target], knocking them over!"))
 		SET_STATUS_MAX(target, STAT_WEAK, 1)
-		ai.move_to_target()

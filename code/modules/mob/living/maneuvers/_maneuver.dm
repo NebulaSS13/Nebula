@@ -55,3 +55,6 @@
 			user.set_special_ability_cooldown(cooldown)
 		if(stamina_cost)
 			user.adjust_stamina(stamina_cost)
+
+/decl/maneuver/proc/ai_should_use(mob/living/user, atom/target)
+	return FALSE

@@ -1,16 +1,13 @@
 /datum/mob_controller/human
 	expected_type = /mob/living/human
-	do_wander = FALSE
+	ai_flags = AI_FLAGS_NONE
 
 /datum/mob_controller/human/do_process(var/time_elapsed)
-
-	var/mob/living/human/H = body
-	if(H.stat != CONSCIOUS)
-		return
 
 	if(!(. = ..()))
 		return
 
+	var/mob/living/human/H = body
 	if(H.get_shock() && H.shock_stage < 40 && prob(1.5))
 		H.emote(pick(/decl/emote/audible/moan, /decl/emote/audible/groan))
 
