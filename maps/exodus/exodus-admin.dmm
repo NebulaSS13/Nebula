@@ -118,7 +118,7 @@
 /turf/space,
 /area/space)
 "aci" = (
-/obj/machinery/porta_turret/crescent,
+/obj/machinery/turret/network/energy/centcomm,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/unsimulated/floor/steel,
 /area/centcom)
@@ -436,7 +436,7 @@
 	pixel_x = -6;
 	pixel_y = -34
 	},
-/obj/machinery/turretid{
+/obj/machinery/computer/modular/telescreen/preset/turrets/centcomm{
 	pixel_x = 28;
 	pixel_y = -28;
 	req_access = list("ACCESS_CENT_GENERAL")
@@ -1199,7 +1199,7 @@
 /turf/unsimulated/floor/steel,
 /area/centcom/holding)
 "aLV" = (
-/obj/machinery/porta_turret/crescent,
+/obj/machinery/turret/network/energy/centcomm,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/unsimulated/floor/steel,
 /area/centcom/holding)
@@ -1369,7 +1369,7 @@
 /turf/unsimulated/floor/steel,
 /area/centcom/holding)
 "aMF" = (
-/obj/machinery/porta_turret/crescent,
+/obj/machinery/turret/network/energy/centcomm,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/unsimulated/floor/grass,
 /area/centcom/holding)

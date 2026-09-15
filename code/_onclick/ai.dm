@@ -164,20 +164,8 @@
 	Topic(src, list("breaker"="1"))
 	return TRUE
 
-/obj/machinery/turretid/AICtrlClick(mob/living/silicon/user) //turns off/on Turrets
-	if(user.incapacitated())
-		return FALSE
-	Topic(src, list("command"="enable", "value"="[!enabled]"))
-	return TRUE
-
 /atom/proc/AIAltClick(mob/living/silicon/user)
 	return AltClick(user)
-
-/obj/machinery/turretid/AIAltClick(mob/living/silicon/user) //toggles lethal on turrets
-	if(user.incapacitated())
-		return
-	Topic(src, list("command"="lethal", "value"="[!lethal]"))
-	return 1
 
 /obj/machinery/atmospherics/binary/pump/AIAltClick(mob/living/silicon/user)
 	return AltClick(user)

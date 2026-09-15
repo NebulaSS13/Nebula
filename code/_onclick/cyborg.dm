@@ -124,9 +124,6 @@
 /obj/machinery/apc/BorgCtrlClick(mob/living/silicon/robot/user) // turns off/on APCs. Forwards to AI code.
 	return AICtrlClick(user)
 
-/obj/machinery/turretid/BorgCtrlClick(mob/living/silicon/robot/user) //turret control on/off. Forwards to AI code.
-	return AICtrlClick(user)
-
 /atom/proc/BorgAltClick(var/mob/living/silicon/robot/user)
 	AltClick(user)
 	return
@@ -136,9 +133,6 @@
 		AICtrlAltClick(user)
 	else
 		..()
-
-/obj/machinery/turretid/BorgAltClick(mob/living/silicon/robot/user) //turret lethal on/off. Forwards to AI code.
-	AIAltClick(user)
 
 /atom/proc/BorgCtrlAltClick(var/mob/living/silicon/robot/user)
 	CtrlAltClick(user)

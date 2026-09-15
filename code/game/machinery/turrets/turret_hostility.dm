@@ -19,4 +19,4 @@
 		return FALSE
 
 	var/mob/living/L = target
-	return L.assess_perp(holder, owner.check_access, owner.check_weapons, owner.check_records, owner.check_arrest, TRUE) >= threat_level_threshold
+	. = L.assess_perp(holder, owner.check_access, owner.check_weapons, owner.check_records, owner.check_arrest, TRUE) >= threat_level_threshold

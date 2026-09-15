@@ -9265,9 +9265,8 @@
 /turf/wall/r_wall,
 /area/ministation/ai_core)
 "JC" = (
-/obj/machinery/porta_turret{
+/obj/machinery/turret/network/energy/ai{
 	dir = 4;
-	id_tag = "upload"
 	},
 /turf/floor/bluegrid,
 /area/ministation/ai_upload)
@@ -9275,9 +9274,8 @@
 /turf/floor/tiled/techmaint,
 /area/ministation/ai_upload)
 "JE" = (
-/obj/machinery/porta_turret{
+/obj/machinery/turret/network/energy/ai{
 	dir = 8;
-	id_tag = "upload"
 	},
 /turf/floor/bluegrid,
 /area/ministation/ai_upload)
@@ -9493,9 +9491,8 @@
 /turf/wall/r_wall,
 /area/ministation/ai_core)
 "Kk" = (
-/obj/machinery/porta_turret{
+/obj/machinery/turret/network/energy/ai/core{
 	dir = 4;
-	id_tag = "aihome"
 	},
 /turf/floor/tiled/techmaint,
 /area/ministation/ai_core)
@@ -9545,9 +9542,8 @@
 /turf/floor/bluegrid,
 /area/ministation/ai_core)
 "Ko" = (
-/obj/machinery/porta_turret{
+/obj/machinery/turret/network/energy/ai/core{
 	dir = 8;
-	id_tag = "aihome"
 	},
 /turf/floor/tiled/techmaint,
 /area/ministation/ai_core)
@@ -10254,9 +10250,7 @@
 /obj/machinery/camera/network/ministation/sat{
 	dir = 1
 	},
-/obj/machinery/turretid/stun{
-	control_area = /area/ministation/ai_core;
-	id_tag = "aihome";
+/obj/machinery/computer/modular/telescreen/preset/turrets{
 	pixel_y = -24;
 	dir = 1
 	},
@@ -13366,9 +13360,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/turretid/stun{
+/obj/machinery/computer/modular/telescreen/preset/turrets{
 	name = "AI Upload turret control";
-	id_tag = "upload";
 	pixel_y = -24;
 	dir = 1
 	},

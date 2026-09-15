@@ -86,3 +86,13 @@
 		/datum/computer_file/program/wordprocessor
 	)
 	autorun_program = /datum/computer_file/program/camera_monitor
+
+/obj/machinery/computer/modular/telescreen/preset/turrets
+	default_software = list(
+		/datum/computer_file/program/camera_monitor,
+		/datum/computer_file/program/turret_control
+	)
+	autorun_program = /datum/computer_file/program/turret_control
+
+/obj/machinery/computer/modular/telescreen/preset/turrets/centcomm
+	req_access = list(access_cent_general)

@@ -18,9 +18,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/porta_turret{
-	req_access = list("ACCESS_MERCENARY")
-	},
+/obj/machinery/turret/network/energy/merc,
 /turf/floor/plating,
 /area/map_template/merc_shuttle)
 "ad" = (
@@ -171,12 +169,8 @@
 	dir = 8;
 	uncreated_component_parts = list(/obj/item/stock_parts/power/battery/buildable/responsive = 1, /obj/item/cell/high = 1)
 	},
-/obj/machinery/turretid/lethal{
-	ailock = 1;
-	check_arrest = 0;
-	check_records = 0;
+/obj/machinery/computer/modular/telescreen/preset/turrets{
 	pixel_y = 32;
-	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -349,9 +343,7 @@
 /area/map_template/merc_shuttle)
 "aK" = (
 /obj/structure/catwalk,
-/obj/machinery/porta_turret{
-	req_access = list("ACCESS_MERCENARY")
-	},
+/obj/machinery/turret/network/energy/merc,
 /obj/machinery/light/spot{
 	dir = 4
 	},
@@ -1974,9 +1966,7 @@
 /area/map_template/merc_spawn)
 "mi" = (
 /obj/structure/catwalk,
-/obj/machinery/porta_turret{
-	req_access = list("ACCESS_MERCENARY")
-	},
+/obj/machinery/turret/network/energy/merc,
 /obj/machinery/light/spot{
 	dir = 8
 	},
@@ -2672,9 +2662,7 @@
 /area/map_template/merc_spawn)
 "UA" = (
 /obj/structure/catwalk,
-/obj/machinery/porta_turret{
-	req_access = list("ACCESS_MERCENARY")
-	},
+/obj/machinery/turret/network/energy/merc,
 /obj/machinery/light/spot{
 	dir = 8
 	},
@@ -2765,9 +2753,7 @@
 /area/map_template/merc_spawn)
 "Zx" = (
 /obj/structure/catwalk,
-/obj/machinery/porta_turret{
-	req_access = list("ACCESS_MERCENARY")
-	},
+/obj/machinery/turret/network/energy/merc,
 /obj/machinery/light/spot{
 	dir = 4
 	},
