@@ -15,4 +15,4 @@
 	name = "warning cone"
 	icon = 'icons/obj/items/warning_cone.dmi'
 	icon_state = ICON_STATE_WORLD
-	slot_flags = SLOT_HEAD
+

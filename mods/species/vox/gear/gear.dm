@@ -22,3 +22,8 @@
 	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
 	icon = 'mods/species/vox/icons/nitrogen_tank.dmi'
 	starting_pressure = list(/decl/material/gas/nitrogen = 10 ATM)
+
+// TODO: voxy icon
+/obj/item/tank/nitrogen/vox
+	name = "vox nitrogen canister"
+	color = COLOR_GUNMETAL
