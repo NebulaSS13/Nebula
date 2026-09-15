@@ -1,3 +1,12 @@
+/decl/maneuver/leap/spider
+	stamina_cost = 0
+
+/decl/maneuver/leap/spider/ai_should_use(mob/living/user, atom/target)
+	return istype(target) // Range checking is done in can_be_used_by().
+
+/decl/maneuver/leap/spider/show_initial_message(var/mob/living/user, var/atom/target)
+	user.visible_message(SPAN_WARNING("\The [user] reels back and prepares to launch itself at \the [target]!"))
+
 /mob/living/simple_animal/hostile/giant_spider/hunter
 	desc = "A monstrously huge black spider with shimmering eyes."
 	icon = 'mods/mobs/spiders/icons/spider_black.dmi'
@@ -7,7 +16,7 @@
 	base_movement_delay = -1
 	flash_protection = FLASH_PROTECTION_REDUCED
 	does_spin = FALSE
-	available_maneuvers = list(/decl/maneuver/leap/spider)
+	_available_maneuvers = list(/decl/maneuver/leap/spider)
 	ability_cooldown = 3 MINUTES
 	ai = /datum/mob_controller/aggressive/giant_spider/hunter
 	var/leap_range = 5
@@ -17,7 +26,7 @@
 	desc = "A large black spider with shimmering eyes."
 	max_health = 70
 	natural_weapon = /obj/item/natural_weapon/bite/weak
-	available_maneuvers = null
+	_available_maneuvers = null
 
 /mob/living/simple_animal/hostile/giant_spider/hunter/small/Initialize(mapload, atom/parent)
 	. = ..()

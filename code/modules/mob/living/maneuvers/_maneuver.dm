@@ -46,12 +46,16 @@
 	return
 
 /decl/maneuver/proc/perform(var/mob/living/user, var/atom/target, var/strength, var/reflexively = FALSE)
-	if(can_be_used_by(user, target))
-		if(!reflexively)
-			show_initial_message(user, target)
-		user.face_atom(target)
-		. = (!delay || reflexively || (do_after(user, delay) && can_be_used_by(user, target)))
-		if(cooldown)
-			user.set_special_ability_cooldown(cooldown)
-		if(stamina_cost)
-			user.adjust_stamina(stamina_cost)
+	if(!can_be_used_by(user, target))
+		return FALSE
+	if(!reflexively)
+		show_initial_message(user, target)
+	user.face_atom(target)
+	. = (!delay || reflexively || (do_after(user, delay) && can_be_used_by(user, target)))
+	if(cooldown)
+		user.set_special_ability_cooldown(cooldown)
+	if(stamina_cost)
+		user.adjust_stamina(stamina_cost)
+
+/decl/maneuver/proc/ai_should_use(mob/living/user, atom/target)
+	return FALSE
