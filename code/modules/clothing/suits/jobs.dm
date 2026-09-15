@@ -140,7 +140,7 @@
 		/obj/item/t_scanner,
 		/obj/item/crowbar,
 		/obj/item/screwdriver,
-		/obj/item/weldingtool,
+		/obj/item/fuelled_tool/welding,
 		/obj/item/wirecutters,
 		/obj/item/wrench,
 		/obj/item/tank/emergency,

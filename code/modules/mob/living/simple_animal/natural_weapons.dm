@@ -9,6 +9,8 @@
 	needs_attack_dexterity = DEXTERITY_NONE
 	weapon_can_knock_prone = FALSE // Very powerful in the hands of simplemobs.
 	var/show_in_message   // whether should we show up in attack message, e.g. 'urist has been bit with teeth by carp' vs 'urist has been bit by carp'
+	var/cloaked_bonus_damage  = 0 // This is added on top of the normal melee damage.
+	var/cloaked_weaken_amount = 0 // How long to stun for.
 
 /obj/item/natural_weapon/expend_attack_force(mob/living/user)
 	return get_base_attack_force()
@@ -18,6 +20,19 @@
 
 /obj/item/natural_weapon/can_embed()
 	return FALSE
+
+/obj/item/natural_weapon/use_on_mob(mob/living/target, mob/living/user, animate)
+	if(user.check_intent(I_FLAG_HARM) && user.is_cloaked() && (cloaked_weaken_amount || cloaked_bonus_damage))
+		if(cloaked_weaken_amount)
+			SET_STATUS_MAX(target, STAT_WEAK, cloaked_weaken_amount)
+		if(cloaked_bonus_damage)
+			set_base_attack_force(initial(_base_attack_force) + cloaked_bonus_damage)
+		to_chat(target, SPAN_DANGER("\The [user] ambushes you!"))
+		playsound(target, 'sound/weapons/spiderlunge.ogg', 75, 1)
+	user.remove_cloak()
+	. = ..()
+	if(cloaked_bonus_damage)
+		set_base_attack_force(initial(_base_attack_force))
 
 /obj/item/natural_weapon/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	if(!(. = ..()))

@@ -124,7 +124,7 @@
 	weapon = /obj/item/gun/projectile/shotgun/pump
 	projectiletype = /obj/item/projectile/bullet/shotgun/beanbag
 
-/mob/living/simple_animal/hostile/lar_maria/guard/ranged/has_ranged_attack()
+/mob/living/simple_animal/hostile/lar_maria/guard/ranged/has_ranged_attack(atom/target)
 	return TRUE
 
 /obj/item/clothing/head/soft/zhp_cap

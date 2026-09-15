@@ -3589,7 +3589,7 @@
 /obj/structure/rack,
 /obj/item/wrench,
 /obj/item/clothing/head/welding,
-/obj/item/weldingtool,
+/obj/item/fuelled_tool/welding,
 /turf/floor/plating,
 /area/casino/casino_crew_atmos)
 "kn" = (

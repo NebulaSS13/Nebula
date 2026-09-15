@@ -6,11 +6,17 @@
 		/datum/movement_handler/mob/exosuit
 	)
 
+/mob/living/exosuit/get_turn_sound()
+	return mech_turn_sound
+
+/mob/living/exosuit/get_footstep_sound(turf/step_turf)
+	if(!isspaceturf(step_turf))
+		return mech_step_sound
+	return ..()
+
 /mob/living/exosuit/Move()
 	. = ..()
 	if(.)
-		if(!isspaceturf(loc))
-			playsound(src.loc, mech_step_sound, 40, 1)
 		for(var/mob/pilot as anything in pilots)
 			pilot.refresh_hud_element(HUD_UP_HINT)
 
@@ -101,7 +107,6 @@
 		exosuit.visible_message(SPAN_NOTICE("\The [exosuit] moves [txt_dir]."))
 
 	if(exosuit.dir != moving_dir && !(direction & (UP|DOWN)))
-		playsound(exosuit.loc, exosuit.mech_turn_sound, 40,1)
 		exosuit.set_dir(moving_dir)
 		exosuit.SetMoveCooldown(exosuit.legs.turn_delay)
 	else

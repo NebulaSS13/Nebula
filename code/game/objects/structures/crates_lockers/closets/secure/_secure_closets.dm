@@ -7,5 +7,5 @@
 	wall_mounted = 0 //never solid (You can always pass over it)
 	max_health = 200
 
-/obj/structure/closet/secure_closet/slice_into_parts(obj/item/weldingtool/welder, mob/user)
+/obj/structure/closet/secure_closet/slice_into_parts(obj/item/fuelled_tool/welding/welder, mob/user)
 	to_chat(user, "<span class='notice'>\The [src] is too strong to be taken apart.</span>")

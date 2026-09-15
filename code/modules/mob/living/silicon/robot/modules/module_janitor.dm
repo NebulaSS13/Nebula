@@ -19,7 +19,7 @@
 		/obj/item/borg/sight/hud/jani,
 		/obj/item/plunger/unbreakable,
 		/obj/item/crowbar,
-		/obj/item/weldingtool
+		/obj/item/fuelled_tool/welding
 	)
 	emag = /obj/item/chems/spray
 	has_nonslip_feet  = TRUE

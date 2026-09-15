@@ -39,7 +39,7 @@
 	// If this was our last modifier, clear the list.
 	if(!length(modifiers))
 		LAZYREMOVE(owner._mob_modifiers, archetype)
-	archetype.on_modifier_datum_removed(owner, src)
+		archetype.on_modifier_datum_removed(owner, src)
 	if(!skip_update)
 		owner.refresh_hud_element(HUD_MODIFIERS)
 		if(archetype.mob_overlay_icon || archetype.mob_overlay_state)

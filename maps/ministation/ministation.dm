@@ -51,6 +51,7 @@ Twice...
 
 	#include "../../mods/mobs/dionaea/_dionaea.dme"
 	#include "../../mods/mobs/borers/_borers.dme"
+	#include "../../mods/mobs/spiders/_spiders.dme"
 
 	#include "../../mods/content/beekeeping/_beekeeping.dme"
 	#include "../../mods/content/tabloids/_tabloids.dme"

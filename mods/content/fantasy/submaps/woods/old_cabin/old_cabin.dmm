@@ -40,7 +40,7 @@
 /turf/floor/wood/rough/walnut,
 /area/fantasy/outside/point_of_interest/old_cabin)
 "z" = (
-/obj/effect/spider/spiderling/mundane,
+/obj/abstract/modpack_compat/spiderling,
 /obj/structure/table/wood/ebony,
 /obj/structure/wall_sconce/torch{
 	dir = 1;
@@ -55,7 +55,7 @@
 /turf/floor/wood/rough/walnut,
 /area/fantasy/outside/point_of_interest/old_cabin)
 "D" = (
-/obj/effect/spider/spiderling/mundane,
+/obj/abstract/modpack_compat/spiderling,
 /obj/structure/table/wood/ebony,
 /obj/item/food/grown/carrot,
 /obj/abstract/exterior_marker/inside,
@@ -79,7 +79,7 @@
 /turf/floor/wood/rough/walnut,
 /area/fantasy/outside/point_of_interest/old_cabin)
 "L" = (
-/obj/effect/spider/spiderling/mundane,
+/obj/abstract/modpack_compat/spiderling,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/wood/rough/walnut,
 /area/fantasy/outside/point_of_interest/old_cabin)

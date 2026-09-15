@@ -270,7 +270,7 @@
 	to_chat(user, SPAN_NOTICE("You cut the wiring and remove the polarization from \the [src]."))
 	return TRUE
 
-/obj/structure/window/handle_default_welder_attackby(var/mob/user, var/obj/item/weldingtool/welder)
+/obj/structure/window/handle_default_welder_attackby(var/mob/user, var/obj/item/welder)
 
 	if(user.check_intent(I_FLAG_HELP) && current_health < max_health)
 		if(welder.do_tool_interaction(TOOL_WELDER, user, src, 5 SECONDS, \
