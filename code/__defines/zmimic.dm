@@ -88,6 +88,7 @@
 // Convenience flags.
 #define ZM_MIMIC_DEFAULTS (ZM_MIMIC_BELOW|ZM_ALLOW_LIGHTING)	//! Common defaults for zturfs.
 #define ZMM_WIDE_LOAD (ZMM_LOOKAHEAD | ZMM_LOOKBESIDE)	//! Atom is big and needs to scan one extra turf in both X and Y. This only extends the range by one turf. Cheap, but not free.
+#define ZMM_AUTOMANGLE (ZMM_AUTOMANGLE_NRML|ZMM_AUTOMANGLE_GRP)	//! SSoverlays has detected that this movable requires mangling.
 
 /// Preset: you're creating a hole in the ground. No icon, nothing to cast shadows on. Just a hole.
 #define ZM_MIMIC_PRESET_HOLE (ZM_MIMIC_DEFAULTS | ZM_MIMIC_REPLACE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS)
@@ -131,7 +132,10 @@ var/global/list/mimic_defines = list(
 )
 
 // Movable flags.
-#define ZMM_IGNORE        BITFLAG(0)	//! Do not copy this movable.
-#define ZMM_MANGLE_PLANES BITFLAG(1)	//! Check this movable's overlays/underlays for explicit plane use and mangle for compatibility with Z-Mimic. If you're using emissive overlays, you probably should be using this flag. Expensive, only use if necessary.
-#define ZMM_LOOKAHEAD     BITFLAG(2)	//! Look one turf ahead and one turf back when considering z-turfs that might be seeing this atom. Cheap, but not free.
-#define ZMM_LOOKBESIDE    BITFLAG(3)	//! Look one turf beside (left/right) when considering z-turfs that might be seeing this atom. Cheap, but not free.
+#define ZMM_IGNORE          BITFLAG(0)	//! Do not copy this movable.
+#define ZMM_LOOKAHEAD       BITFLAG(1)	//! Look one turf ahead and one turf back when considering z-turfs that might be seeing this atom. Cheap, but not free.
+#define ZMM_LOOKBESIDE      BITFLAG(2)	//! Look one turf beside (left/right) when considering z-turfs that might be seeing this atom. Cheap, but not free.
+#define ZMM_MANGLE_PLANES   BITFLAG(3)	//! Check this movable's overlays/underlays for explicit plane use and mangle for compatibility with Z-Mimic. If you're using emissive overlays, you probably should be using this flag. Expensive, only use if necessary. Setting this is slightly cheaper than relying on automangling.
+#define ZMM_NO_AUTOMANGLE   BITFLAG(4)	//! Do not perform automangling. This is necessary for types interacting with ZM internals, plus it's also slightly faster. Adding this flag to an atom that is already automangled is undefined behavior.
+#define ZMM_AUTOMANGLE_NRML BITFLAG(5)	//! Behaves the same as ZMM_MANGLE_PLANES, but is automatically applied by SSoverlays. Do not manually use.
+#define ZMM_AUTOMANGLE_GRP  BITFLAG(6)	//! Behaves the same as ZMM_MANGLE_PLANES, but is automatically applied by SSoverlays. Do not manually use.

@@ -25,6 +25,7 @@
 // TODO
 /decl/bodytype/hexapod
 	abstract_type = /decl/bodytype/hexapod
+	simple_variant = /decl/bodytype/hexapod/animal
 
 /decl/bodytype/hexapod/animal
 	abstract_type = /decl/bodytype/hexapod/animal

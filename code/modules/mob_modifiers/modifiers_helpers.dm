@@ -68,11 +68,16 @@
 			modifier = existing_modifier
 			break
 
-	if(!istype(modifier))
+	var/already_present = istype(modifier)
+	if(!already_present)
 		modifier = new archetype.modifier_type(archetype, src, source)
 	if(duration != MOB_MODIFIER_INDEFINITE)
 		modifier.expire_time = world.time + duration
 	else
 		modifier.expire_time = MOB_MODIFIER_INDEFINITE
-	modifier.on_modifier_added(skip_update)
+	if(!already_present)
+		modifier.on_modifier_added(skip_update)
 	return TRUE
+
+/mob/living/get_mob_modifiers()
+	return _mob_modifiers

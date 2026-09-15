@@ -10,25 +10,24 @@
 	)
 
 /decl/species/utility_frame
-	uid                  = "species_frame"
-	name                 = "Drone"
-	name_plural          = "Drones"
-	description          = "AI-driven synthetics of varying complexity are widely used for many tasks in human space."
-	cyborg_noun          = null
-	blood_types          = list(/decl/blood_type/coolant)
-	available_bodytypes  = list(/decl/bodytype/prosthetic/utility_frame)
-	hidden_from_codex    = FALSE
-	species_flags        = SPECIES_FLAG_NO_POISON
-	spawn_flags          = SPECIES_CAN_JOIN
-	strength             = STR_HIGH
-	warning_low_pressure = 50
-	hazard_low_pressure  = -1
-	flesh_color          = COLOR_GUNMETAL
-	body_temperature     = null
-	passive_temp_gain    = 5  // stabilize at ~80 C in a 20 C environment.
-	blood_volume         = 0
-	base_external_prosthetics_model = null
-
+	uid =                   "species_frame"
+	name =                  "Drone"
+	name_plural =           "Drones"
+	description =           "AI-driven synthetics of varying complexity are widely used for many tasks in human space."
+	cyborg_noun = null
+	base_external_prosthetics_model = /decl/bodytype/prosthetic/basic_human
+	blood_types = list(/decl/blood_type/coolant)
+	available_bodytypes = list(/decl/bodytype/prosthetic/utility_frame)
+	hidden_from_codex =     FALSE
+	species_flags =         SPECIES_FLAG_NO_POISON
+	spawn_flags =           SPECIES_CAN_JOIN
+	strength =              STR_HIGH
+	warning_low_pressure =  50
+	hazard_low_pressure =  -1
+	flesh_color =           COLOR_GUNMETAL
+	body_temperature =      null
+	passive_temp_gain =     5  // stabilize at ~80 C in a 20 C environment.
+	blood_volume = 0
 	preview_outfit = null
 
 	available_pronouns = list(

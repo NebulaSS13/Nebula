@@ -39,6 +39,7 @@
 	return
 
 /mob/proc/get_all_current_mob_overlays()
+	RETURN_TYPE(/list)
 	return
 
 /mob/proc/set_current_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
@@ -51,6 +52,7 @@
 	return
 
 /mob/proc/get_all_current_mob_underlays()
+	RETURN_TYPE(/list)
 	return
 
 /mob/proc/set_current_mob_underlay(var/underlay_layer, var/image/underlay, var/redraw_mob = TRUE)

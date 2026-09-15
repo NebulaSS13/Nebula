@@ -40,6 +40,10 @@
 		return STATUS_INTERACTIVE
 	return ..()
 
+/mob/living/exosuit/get_held_items()
+	for(var/h in hardpoints)
+		LAZYADD(., hardpoints[h])
+
 /mob/living/exosuit/get_dexterity(var/silent)
 	return DEXTERITY_FULL
 

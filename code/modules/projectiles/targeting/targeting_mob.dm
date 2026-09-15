@@ -2,7 +2,7 @@
 	VAR_PRIVATE/obj/abstract/aiming_overlay/_aiming
 	var/list/aimed_at_by
 
-/mob/living/proc/get_aiming_overlay(create_if_missing = TRUE)
+/mob/living/proc/get_aiming_overlay(create_if_missing = FALSE)
 	RETURN_TYPE(/obj/abstract/aiming_overlay)
 	if(create_if_missing && !_aiming)
 		_aiming = new(src)

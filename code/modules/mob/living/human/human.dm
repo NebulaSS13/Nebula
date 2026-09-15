@@ -520,7 +520,7 @@
 		new_bodytype = species.get_bodytype_by_pronouns(new_pronouns)
 	set_bodytype(new_bodytype, snapshot_to_use = snapshot_to_use)
 
-	available_maneuvers = species.maneuvers.Copy()
+	_available_maneuvers = species.maneuvers?.Copy()
 
 	butchery_data = species.butchery_data
 

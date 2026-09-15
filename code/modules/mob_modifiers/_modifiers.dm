@@ -35,7 +35,13 @@
 	/// Whether or not this modifier shows a lemniscate when set to indefinite duration.
 	var/show_indefinite_duration = TRUE
 	/// Whether or not this modifier shows remaining time before expiry.
-	var/hide_expiry= FALSE
+	var/hide_expiry = FALSE
+
+	// Various general effects to apply while the modifier is present.
+	/// Movement slowdown.
+	var/movement_slowdown = 0
+	/// Slowdown on attacks/interactions.
+	var/click_cooldown_multiplier = null
 
 /decl/mob_modifier/validate()
 	. = ..()
@@ -59,17 +65,27 @@
 	return capitalize_proper_html(emote_replace_user_tokens(message, user))
 
 /decl/mob_modifier/proc/on_modifier_datum_added(mob/living/_owner, datum/mob_modifier/modifier)
+	SHOULD_CALL_PARENT(TRUE)
 	if(on_add_message_3p)
 		_owner.visible_message(replace_tokens(on_add_message_3p, _owner), replace_tokens((on_add_message_3p || on_add_message_1p), _owner))
 	else if(on_add_message_1p)
 		to_chat(_owner, replace_tokens(on_add_message_1p, _owner))
+	if(click_cooldown_multiplier)
+		_owner.modifier_click_cooldown_mult = null
+	if(movement_slowdown)
+		_owner.modifier_movement_slowdown = null
 	return TRUE
 
 /decl/mob_modifier/proc/on_modifier_datum_removed(mob/living/_owner, datum/mob_modifier/modifier)
+	SHOULD_CALL_PARENT(TRUE)
 	if(on_end_message_3p)
 		_owner.visible_message(replace_tokens(on_end_message_3p, _owner), replace_tokens((on_end_message_3p || on_end_message_1p), _owner))
 	else if(on_end_message_1p)
 		to_chat(_owner, replace_tokens(on_end_message_1p, _owner))
+	if(click_cooldown_multiplier)
+		_owner.modifier_click_cooldown_mult = null
+	if(movement_slowdown)
+		_owner.modifier_movement_slowdown = null
 	return TRUE
 
 /decl/mob_modifier/proc/on_modifier_datum_expiry(mob/living/_owner, datum/mob_modifier/modifier)
