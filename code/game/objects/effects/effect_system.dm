@@ -333,6 +333,31 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/elemental/mist/affect(mob/living/victim)
 	victim.extinguish_fire()
 
+/obj/effect/effect/smoke/elemental/frost
+	name = "freezing cloud"
+	desc = "A cloud filled with brutally cold mist."
+	color = "#00ccff"
+
+/obj/effect/effect/smoke/elemental/frost/affect(mob/living/victim)
+	victim.inflict_cold_damage(strength)
+
+/obj/effect/effect/smoke/elemental/spore
+	name = "spore cloud"
+	desc = "A dust cloud filled with disorienting spores."
+	color = "#80ab82"
+	strength = 5
+
+/obj/effect/effect/smoke/elemental/spore/affect(mob/living/victim)
+	if(!istype(victim) || victim.stat == DEAD)
+		return
+	if(!victim.should_have_organ(BP_LUNGS))
+		return
+	if(istype(victim.get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask/gas))
+		return
+	SET_STATUS_MAX(victim, STAT_CONFUSE, strength)
+	SET_STATUS_MAX(victim, STAT_BLURRY, strength)
+	victim.take_damage(10 * (strength / 5), PAIN)
+
 /////////////////////////////////////////////
 // Mustard Gas
 /////////////////////////////////////////////
@@ -420,6 +445,11 @@ steam.start() -- spawns the effect
 /datum/effect/effect/system/smoke_spread/mustard
 	smoke_type = /obj/effect/effect/smoke/mustard
 
+/datum/effect/effect/system/smoke_spread/frost
+	smoke_type = /obj/effect/effect/smoke/elemental/frost
+
+/datum/effect/effect/system/smoke_spread/spore
+	smoke_type = /obj/effect/effect/smoke/elemental/spore
 
 /////////////////////////////////////////////
 //////// Attach an Ion trail to any object, that spawns when it moves (like for the jetpack)
