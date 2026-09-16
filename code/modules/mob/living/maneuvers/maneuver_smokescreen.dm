@@ -9,14 +9,10 @@
 /decl/maneuver/smokescreen/perform(mob/living/user, atom/target, strength, reflexively)
 	if(!(. = ..()))
 		return
-	if(!istype(user, /mob/living/simple_animal))
-		return
-	var/mob/living/simple_animal/critter = user
-	if(!istype(critter.ability_system))
-		return
-	critter.set_special_ability_cooldown(critter.ability_cooldown)
-	critter.ability_system.set_up(7, 0, get_turf(user))
-	critter.ability_system.start()
+	var/datum/effect/effect/system/ability_effect = user.get_attached_effect(/mob/living::MOB_EFFECT_SMOKECREEN)
+	if(istype(ability_effect))
+		ability_effect.set_up(7, 0, get_turf(user))
+		ability_effect.start()
 	return TRUE
 
 /decl/maneuver/smokescreen/show_initial_message(var/mob/living/user, var/atom/target)
