@@ -125,7 +125,7 @@
 /turf/wall/shuttle/dark,
 /area/cynosure_submap/crashedcontainmentshuttle)
 "aF" = (
-/obj/machinery/computer,
+/obj/machinery/constructable_frame/computerframe,
 /turf/floor/shuttle/yellow,
 /area/cynosure_submap/crashedcontainmentshuttle)
 "aG" = (

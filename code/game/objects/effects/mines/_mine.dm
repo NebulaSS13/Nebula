@@ -196,7 +196,8 @@
 		trigger_payload(AM)
 
 // This tells AI mobs to not be dumb and step on mines willingly.
-/obj/item/mine/is_safe_to_step(mob/living/stepper)
-	if(!armed)
+/obj/item/mine/is_safe_to_step(atom/movable/mover)
+	if(!armed || !isliving(mover))
 		return TRUE
-	return !armed || stepper.can_overcome_gravity()
+	var/mob/living/stepper = mover
+	return stepper.can_overcome_gravity()

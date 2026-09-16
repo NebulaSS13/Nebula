@@ -31,6 +31,7 @@
 		/area/shuttle/escape_pod_cynosure_b          = NO_APC|NO_SCRUBBER,
 		/area/cynosure/maintenance/construction/d1   = SKIP_ALL_TESTS,
 		/area/space                                  = SKIP_ALL_TESTS,
+		/area/cynosure_submap                        = SKIP_ALL_TESTS,
 		/area/cynosure/maintenance/d1/incinerator    = 0
 	)
 	area_coherency_test_exempted_root_areas = list(

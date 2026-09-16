@@ -140,7 +140,7 @@
 /turf/floor/tiled,
 /area/cynosure_submap/Research1)
 "eu" = (
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 2
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals10{
@@ -172,7 +172,7 @@
 /area/cynosure_submap/Research1)
 "fD" = (
 /obj/structure/rack,
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 8
 	},
 /obj/random/energy,
@@ -193,7 +193,7 @@
 /turf/floor/tiled/steel_grid,
 /area/cynosure_submap/Research1)
 "fZ" = (
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 2
 	},
 /obj/effect/floor_decal/borderfloorwhite/corner,
@@ -397,7 +397,7 @@
 /turf/floor/tiled/dark,
 /area/cynosure_submap/Research1)
 "ns" = (
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 2
 	},
 /obj/effect/floor_decal/borderfloorwhite{
@@ -610,7 +610,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 2
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -669,7 +669,7 @@
 /area/cynosure_submap/Research1)
 "xf" = (
 /obj/structure/salvage/data,
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -716,7 +716,7 @@
 /turf/floor/tiled,
 /area/cynosure_submap/Research1)
 "zt" = (
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 2
 	},
 /turf/floor/tiled/old_tile,
@@ -726,7 +726,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 8
 	},
 /obj/random/handgun,
@@ -777,7 +777,7 @@
 /turf/floor/tiled,
 /area/cynosure_submap/Research1)
 "Ar" = (
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 1
 	},
 /obj/effect/floor_decal/techfloor{
@@ -895,7 +895,7 @@
 /turf/floor/tiled/dark,
 /area/cynosure_submap/Research1)
 "EI" = (
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 2
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals4{
@@ -972,7 +972,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 2
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1131,7 +1131,7 @@
 /turf/floor/tiled,
 /area/cynosure_submap/Research1)
 "Ra" = (
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 2
 	},
 /turf/floor/tiled,
@@ -1251,7 +1251,7 @@
 "Wm" = (
 /obj/structure/salvage/data,
 /obj/structure/window/reinforced,
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1261,7 +1261,7 @@
 /area/cynosure_submap/Research1)
 "Wp" = (
 /obj/structure/rack,
-/obj/machinery/door/window/holowindoor{
+/obj/machinery/door/window{
 	dir = 8
 	},
 /obj/random/smg,

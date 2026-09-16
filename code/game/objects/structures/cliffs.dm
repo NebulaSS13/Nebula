@@ -295,7 +295,7 @@ two tiles on initialization, and which way a cliff is facing may change during m
 	return FALSE
 
 // This tells AI mobs to not be dumb and step off cliffs willingly.
-/obj/structure/cliff/is_safe_to_step(mob/living/stepper)
-	if(should_fall(stepper))
+/obj/structure/cliff/is_safe_to_step(atom/movable/mover)
+	if(should_fall(mover))
 		return FALSE
 	return ..()

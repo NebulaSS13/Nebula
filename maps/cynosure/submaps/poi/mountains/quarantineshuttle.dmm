@@ -192,7 +192,7 @@
 /turf/wall/shuttle,
 /area/cynosure_submap/cave/qShuttle)
 "aJ" = (
-/obj/machinery/computer,
+/obj/machinery/constr,
 /turf/floor/tiled,
 /area/cynosure_submap/cave/qShuttle)
 "aK" = (

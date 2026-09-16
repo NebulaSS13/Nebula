@@ -260,7 +260,7 @@
 /turf/floor/rock,
 /area/cynosure_submap/CrashedMedShuttle)
 "aX" = (
-/obj/machinery/computer,
+/obj/machinery/constructable_frame/computerframe,
 /turf/floor/shuttle/yellow,
 /area/cynosure_submap/CrashedMedShuttle)
 "aY" = (

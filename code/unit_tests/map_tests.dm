@@ -646,9 +646,10 @@ var/global/_unit_test_sort_junctions = list()
 /datum/unit_test/pipes_shall_not_leak/start_test()
 	var/failures = 0
 	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
-		if(P.leaking && !(locate(/obj/abstract/landmark/allowed_leak) in get_turf(P)))
+		var/turf/pipe_turf = get_turf(P)
+		if(P.leaking && !(locate(/obj/abstract/landmark/allowed_leak) in pipe_turf))
 			failures++
-			log_bad("Following pipe is leaking: [log_info_line(P)]")
+			log_bad("Following pipe is leaking: [log_info_line(P)], area is [get_area(pipe_turf)]")
 
 	if(failures)
 		fail("[failures] pipe\s leaking without allowed leak landmark!")
