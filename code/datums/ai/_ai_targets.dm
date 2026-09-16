@@ -64,16 +64,15 @@
 	if(!istype(body) || !body.can_act())
 		return FALSE
 	stop_wandering()
-	var/list/available_maneuvers = body.get_available_maneuvers()
-	if(!length(available_maneuvers))
-		return FALSE
 	var/atom/target = get_target()
 	if(!target)
 		return FALSE
-	for(var/maneuver_type in available_maneuvers)
-		var/decl/maneuver/maneuver_decl = RESOLVE_TO_DECL(maneuver_type)
-		if(istype(maneuver_decl) && maneuver_decl.ai_should_use(body, target) && body.perform_maneuver(maneuver_type, target))
-			return FALSE // Don't permit further behavior upstream
+	var/list/available_maneuvers = body.get_available_maneuvers()
+	if(length(available_maneuvers))
+		for(var/maneuver_type in available_maneuvers)
+			var/decl/maneuver/maneuver_decl = RESOLVE_TO_DECL(maneuver_type)
+			if(istype(maneuver_decl) && maneuver_decl.ai_should_use(body, target) && body.perform_maneuver(maneuver_type, target))
+				return FALSE // Don't permit further behavior upstream
 	return TRUE
 
 /datum/mob_controller/proc/get_raw_target_list()

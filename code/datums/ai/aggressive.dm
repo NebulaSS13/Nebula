@@ -138,31 +138,33 @@
 	body.ClickOn(target)
 
 /datum/mob_controller/aggressive/destroy_surroundings()
-
 	if(!body.can_act())
-		return
-
+		return FALSE
 	// If we're not hunting something, don't destroy stuff.
 	var/atom/target = get_target()
 	if(!istype(target))
-		return
-
+		return FALSE
 	// Not breaking stuff, or already adjacent to a target.
 	if(!prob(break_stuff_probability) || body.Adjacent(target))
-		return
-
-	// Try to get our next step towards the target.
-	body.face_atom(target)
+		return FALSE
 	var/turf/targ = get_step_towards(body, target)
 	if(!targ)
-		return
+		return FALSE
+	// Try to get our next step towards the target.
+	body.face_atom(target)
+	// Try to apply to our target turf first, then our own turf (border windows/walls)
+	if((isturf(body.loc) && apply_on_move_actions(body.loc)) || apply_on_move_actions(targ))
+		return TRUE
+	return FALSE
+
+/datum/mob_controller/aggressive/proc/apply_on_move_actions(turf/targ, atom/target)
 
 	// Attack anything on the target turf.
 	var/obj/effect/shield/S = locate(/obj/effect/shield) in targ
 	if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
 		body.set_intent(I_FLAG_HARM)
 		body.ClickOn(S)
-		return
+		return TRUE
 
 	// Hostile mobs will bash through these in order with their natural weapon
 	// Note that airlocks and blast doors are handled separately below.
@@ -183,7 +185,7 @@
 		if(obstacle)
 			body.set_intent(I_FLAG_HARM)
 			body.ClickOn(obstacle)
-			return
+			return TRUE
 
 	if(body.can_pry_door())
 		for(var/obj/machinery/door/obstacle in targ)
@@ -192,7 +194,9 @@
 					return
 				body.face_atom(obstacle)
 				body.pry_door((obstacle.pry_mod * body.get_door_pry_time()), obstacle)
-				return
+				return TRUE
+
+	return FALSE
 
 /datum/mob_controller/aggressive/proc/is_in_faction(mob/friend)
 	// Cannibalistic mobs don't care at all.
