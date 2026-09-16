@@ -19,7 +19,7 @@
 /turf/floor/rock,
 /area/cynosure_submap/Cavelake)
 "g" = (
-/mob/living/simple_animal/passive/crab/sif/hooligan,
+ /mob/living/simple_animal/crab/sif/hooligan,
 /turf/floor/barren,
 /area/cynosure_submap/Cavelake)
 "h" = (
