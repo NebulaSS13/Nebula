@@ -818,7 +818,7 @@ var/global/const/ACTION_DANGER_ALL = 2
 	else
 		. = FALSE
 
-	anchored = buckled ? (!istype(buckled) || !buckled.buckle_movable) : initial(anchored)
+	set_anchored(buckled ? (!istype(buckled) || !buckled.buckle_movable) : initial(anchored))
 	reset_layer()
 
 	if(. || force_update)

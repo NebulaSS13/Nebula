@@ -115,7 +115,7 @@
 			SPAN_NOTICE("You attempt to [anchored ? "secure" : "unsecure"] [src].")
 		)
 		if (do_after(user,20, src))
-			anchored = !anchored
+			set_anchored(!anchored)
 			user.visible_message(
 				SPAN_NOTICE("\The [user] [anchored ? "secures" : "unsecures"] [src]."),
 				SPAN_NOTICE("You [anchored ? "secure" : "unsecure"] [src].")

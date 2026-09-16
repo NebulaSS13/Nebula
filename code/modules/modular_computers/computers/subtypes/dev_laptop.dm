@@ -39,7 +39,7 @@
 
 /decl/interaction_handler/laptop_open/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/modular_computer/laptop/L = target
-	L.anchored = !L.anchored
+	L.set_anchored(!L.anchored)
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(L, L.computer_type)
 	if(assembly)
 		assembly.screen_on = L.anchored

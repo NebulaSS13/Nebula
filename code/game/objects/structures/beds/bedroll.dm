@@ -96,13 +96,13 @@
 /obj/structure/bed/bedroll/buckle_mob(mob/M)
 	. = ..()
 	if(.)
-		anchored = !!has_buckled_mob()
+		set_anchored(!!has_buckled_mob())
 		update_icon()
 
 /obj/structure/bed/bedroll/unbuckle_mob(mob/unbuckling)
 	. = ..()
 	if(.)
-		anchored = !!has_buckled_mob()
+		set_anchored(!!has_buckled_mob())
 		update_icon()
 
 /obj/structure/bed/bedroll/attack_hand(mob/user)

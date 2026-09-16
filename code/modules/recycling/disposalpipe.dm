@@ -226,7 +226,7 @@
 	var/obj/structure/disposalconstruct/C = new (src.loc, src)
 	src.transfer_fingerprints_to(C)
 	C.set_density(0)
-	C.anchored = TRUE
+	C.set_anchored(TRUE)
 	C.update()
 
 	qdel(src)

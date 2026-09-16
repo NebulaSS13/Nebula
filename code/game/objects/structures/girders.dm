@@ -51,7 +51,7 @@
 
 /obj/structure/girder/displaced/Initialize()
 	. = ..()
-	anchored = prob(50)
+	set_anchored(prob(50))
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
 

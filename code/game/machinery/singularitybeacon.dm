@@ -60,7 +60,7 @@ var/global/list/singularity_beacons = list()
 			to_chat(user, SPAN_DANGER("You need to deactivate the beacon first!"))
 			return TRUE
 
-		anchored = !anchored
+		set_anchored(!anchored)
 		if(anchored)
 			to_chat(user, SPAN_NOTICE("You screw the beacon to the floor."))
 		else

@@ -17,7 +17,7 @@
 	if(L && (ishuman(L) || L.isMonkey() || iscorgi(L)))
 		if(L.buckled)
 			L.buckled = null
-			L.anchored = FALSE
+			L.set_anchored(FALSE)
 		if(L.client)
 			L.client.perspective = EYE_PERSPECTIVE
 			L.client.eye = src

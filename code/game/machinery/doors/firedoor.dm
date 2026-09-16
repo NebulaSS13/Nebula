@@ -278,7 +278,7 @@
 /obj/machinery/door/firedoor/dismantle(var/moved = FALSE)
 	var/obj/structure/firedoor_assembly/FA = ..()
 	. = FA
-	FA.anchored = !moved
+	FA.set_anchored(!moved)
 	FA.set_density(1)
 	FA.wired = 1
 	FA.update_icon()
