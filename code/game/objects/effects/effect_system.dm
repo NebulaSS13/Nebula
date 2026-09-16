@@ -348,11 +348,7 @@ steam.start() -- spawns the effect
 	strength = 5
 
 /obj/effect/effect/smoke/elemental/spore/affect(mob/living/victim)
-	if(!istype(victim) || victim.stat == DEAD)
-		return
-	if(!victim.should_have_organ(BP_LUNGS))
-		return
-	if(istype(victim.get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask/gas))
+	if(!istype(victim) || !victim.suffers_inhaled_effects())
 		return
 	SET_STATUS_MAX(victim, STAT_CONFUSE, strength)
 	SET_STATUS_MAX(victim, STAT_BLURRY, strength)
