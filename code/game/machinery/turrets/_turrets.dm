@@ -123,8 +123,9 @@
 		var/obj/item/gun/energy/energy_gun = installed_gun
 		var/obj/item/cell/power_supply = energy_gun.get_cell()
 		if(power_supply && !power_supply.fully_charged())
-			power_supply.give(active_power_usage*CELLRATE)
-			update_use_power(POWER_USE_ACTIVE)
+			var/recharge = power_supply.maxcharge - power_supply.charge
+			power_supply.give(recharge)
+			update_use_power(recharge/CELLRATE)
 			return
 	update_use_power(POWER_USE_IDLE)
 

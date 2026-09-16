@@ -146,8 +146,25 @@
 	build_path = /obj/machinery/turret/network
 	origin_tech = @'{"programming":5,"combat":5,"engineering":4}'
 	req_components = list(
-							/obj/item/stock_parts/capacitor = 1,
-							/obj/item/stock_parts/scanning_module = 1,
-							/obj/item/stock_parts/manipulator = 2)
+		/obj/item/stock_parts/capacitor       = 1,
+		/obj/item/stock_parts/scanning_module = 1,
+		/obj/item/stock_parts/manipulator     = 2
+	)
 
 #undef MAX_TURRET_LOGS
+
+/obj/machinery/turret/network/energy
+	installed_gun = /obj/item/gun/energy/gun
+
+/obj/machinery/turret/network/energy/centcomm
+	check_weapons = TRUE
+	check_arrest  = TRUE
+
+/obj/machinery/turret/network/energy/ai
+	id_tag        = "upload"
+	req_access    = list(access_ai_upload)
+	check_access  = TRUE
+
+/obj/machinery/turret/network/energy/ai/core
+	id_tag        = "aihome"
+	req_access    = list(access_ai_upload)

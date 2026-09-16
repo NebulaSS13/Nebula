@@ -99,3 +99,8 @@
 /area/map_template/merc_shuttle/rear
 	name = "\improper Desperado Rear Compartment"
 	icon_state = "green"
+
+/obj/machinery/turret/network/energy/merc
+	req_access    = list(access_mercenary)
+	check_access  = TRUE
+	installed_gun = /obj/item/gun/energy/laser

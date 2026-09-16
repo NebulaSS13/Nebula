@@ -26,7 +26,7 @@
 /turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "aj" = (
-/obj/machinery/porta_turret/stationary,
+/obj/machinery/turret/network/energy,
 /turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "ak" = (
@@ -130,7 +130,7 @@
 /area/outpost/abandoned)
 "aF" = (
 /obj/random/technology_scanner,
-/obj/machinery/porta_turret/stationary,
+/obj/machinery/turret/network/energy,
 /turf/floor/tiled/dark,
 /area/outpost/abandoned)
 "aG" = (
