@@ -380,7 +380,10 @@
 					if (Tcorners[i])
 						continue
 
-					Tcorners[i] = new /datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[i], i)
+					Tcorners[i] = new/datum/lighting_corner(T, LIGHTING_CORNER_DIAGONAL[i], i, LIGHTING_CORNER_DO_NOT_SCAN)
+
+				for (C in Tcorners)
+					C.generate_z_connections()
 
 		if (Tcorners && !T.has_opaque_atom)
 			for (var/v in 1 to 4)
