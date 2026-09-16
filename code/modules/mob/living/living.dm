@@ -2061,7 +2061,6 @@ default behaviour is:
 	if(amount > 0)
 		adjustFireLoss(amount)
 
-
 /mob/living/proc/suffers_inhaled_effects(gasmask_filters = TRUE)
 	// We aren't breathing regardless.
 	if(stat == DEAD || is_asystole())
