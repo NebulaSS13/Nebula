@@ -4,7 +4,7 @@
 	icon = /obj/item/clothing/head/helmet/space/psi_amp::icon
 	icon_state = /obj/item/clothing/head/helmet/space/psi_amp::icon_state
 
-/obj/random/psionic/item_to_spawn()
+/obj/random/psionic/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/item/shard/nullglass = 20,
 		/obj/item/ammo_magazine/speedloader/nullglass = 10,

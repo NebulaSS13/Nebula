@@ -1,0 +1,167 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementG)
+"b" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/obj/structure/barricade,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementG)
+"f" = (
+/obj/structure/bed/sofa/right/blue{
+	dir = 8
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"i" = (
+/obj/structure/table/sif,
+/obj/random/mre,
+/obj/random/drinkbottle,
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"k" = (
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"m" = (
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 4
+	},
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"q" = (
+/obj/machinery/light/small/red{
+	dir = 8
+	},
+/obj/structure/table/sif,
+/obj/item/box/cups,
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"u" = (
+/obj/structure/table/sif,
+/obj/item/folder,
+/obj/item/pen{
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/obj/random/maintenance/medical,
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"w" = (
+/obj/random/obstruction,
+/turf/floor/tiled/steel_grid,
+/area/cynosure/maintenance/construction/d1/basementG)
+"z" = (
+/obj/structure/bed/sofa/left/blue{
+	dir = 1
+	},
+/obj/random/contraband,
+/obj/machinery/newscaster{
+	pixel_x = -28;
+	dir = 8
+	},
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"E" = (
+/obj/structure/table/sif,
+/obj/random/snack,
+/obj/random/vendor/drink,
+/obj/structure/sign/poster{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"H" = (
+/obj/structure/bed/sofa/left/blue{
+	dir = 8
+	},
+/obj/random/maintenance/medical,
+/obj/item/radio/intercom{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"J" = (
+/obj/item/radio/intercom{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"K" = (
+/obj/structure/table/sif,
+/obj/random/plushie,
+/obj/random/maintenance/medical,
+/obj/random/maintenance/medical,
+/obj/effect/decal/cleanable/cobweb,
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"O" = (
+/obj/structure/bed/sofa/right/blue{
+	dir = 1
+	},
+/obj/random/maintenance/medical,
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+"P" = (
+/turf/wall/concrete/reinforced,
+/area/cynosure/maintenance/construction/d1/basementG)
+"U" = (
+/obj/machinery/vending/hotfood{
+	dir = 8
+	},
+/turf/floor/carpet/blue2,
+/area/cynosure/maintenance/construction/d1/basementG)
+
+(1,1,1) = {"
+P
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+P
+K
+i
+z
+m
+q
+a
+"}
+(3,1,1) = {"
+P
+E
+u
+O
+k
+k
+w
+"}
+(4,1,1) = {"
+P
+f
+H
+J
+k
+U
+b
+"}
+(5,1,1) = {"
+P
+P
+P
+P
+P
+P
+P
+"}

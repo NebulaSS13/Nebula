@@ -787,7 +787,7 @@ default behaviour is:
 		. -= 3
 
 /mob/living/can_drown()
-	if(get_internals())
+	if(!suffers_inhaled_effects(gasmask_filters = FALSE))
 		return FALSE
 	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
 	if(istype(mask) && mask.filters_water())
@@ -2055,3 +2055,23 @@ default behaviour is:
 					O.set_sprite_accessory(accessory, null, accessory_metadata, skip_update = TRUE)
 	if(!skip_update)
 		update_body()
+
+/mob/living/proc/inflict_cold_damage(amount)
+	amount *= 1 - get_cold_protection(50) // Within spacesuit protection.
+	if(amount > 0)
+		adjustFireLoss(amount)
+
+/mob/living/proc/suffers_inhaled_effects(gasmask_filters = TRUE)
+	// We aren't breathing regardless.
+	if(stat == DEAD || is_asystole())
+		return FALSE
+	// Do we breathe in the first place?
+	if(!should_have_organ(BP_LUNGS) || !get_inhaled_reagents())
+		return FALSE
+	// Gas mask.
+	if(gasmask_filters && istype(get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask/gas))
+		return FALSE
+	// Closed-loop air supply.
+	if(get_internals())
+		return FALSE
+	return TRUE

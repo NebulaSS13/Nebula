@@ -14,6 +14,9 @@
 	material = /decl/material/solid/organic/wood/sif
 	color = /decl/material/solid/organic/wood/sif::color
 
+/obj/structure/table/sif/reinforced
+	reinf_material = /decl/material/solid/organic/wood/sif
+
 /obj/structure/table/bench/sif
 	material = /decl/material/solid/organic/wood/sif
 	color = /decl/material/solid/organic/wood/sif::color

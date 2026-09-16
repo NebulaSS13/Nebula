@@ -1,0 +1,739 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"bB" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"cH" = (
+/mob/living/simple_animal/hostile/viscerator,
+/turf/template_noop,
+/area/cynosure_submap/MilitaryCamp1)
+"do" = (
+/turf/floor/dirt,
+/area/cynosure_submap/MilitaryCamp1)
+"dH" = (
+/obj/machinery/light/small,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"dM" = (
+/obj/item/cell/gun/empty,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"fS" = (
+/obj/structure/closet,
+/obj/random/maintenance/clean,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"gc" = (
+/obj/structure/foamedmetal,
+/turf/floor,
+/area/cynosure_submap/MilitaryCamp1)
+"ge" = (
+/turf/template_noop,
+/area/cynosure_submap/MilitaryCamp1)
+"jr" = (
+/obj/structure/loot_pile/maint/junk,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"ju" = (
+/obj/structure/bed/roller,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"jL" = (
+/obj/structure/inflatable,
+/turf/floor,
+/area/cynosure_submap/MilitaryCamp1)
+"kd" = (
+/mob/living/simple_animal/hostile/viscerator,
+/obj/item/stack/material/rods/mapped/steel,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"kv" = (
+/obj/structure/chair/office/dark,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"ln" = (
+/obj/item/remains,
+/obj/random/maintenance,
+/mob/living/simple_animal/hostile/viscerator,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"lO" = (
+/obj/structure/chair/office/dark{
+	dir = 1
+	},
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"mE" = (
+/obj/machinery/computer/modular/preset,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"nl" = (
+/obj/structure/table,
+/mob/living/simple_animal/hostile/viscerator,
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"nW" = (
+/obj/structure/flora/bush,
+/turf/template_noop,
+/area/cynosure_submap/MilitaryCamp1)
+"or" = (
+/obj/item/stack/material/rods/mapped/steel,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"ow" = (
+/obj/structure/bed/padded,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"pI" = (
+/obj/structure/barricade,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"qi" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/blue,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"qx" = (
+/obj/structure/flora/tree/dead,
+/turf/template_noop,
+/area/cynosure_submap/MilitaryCamp1)
+"qF" = (
+/obj/structure/table,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/item/frame/apc,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"tS" = (
+/obj/item/shard,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"uo" = (
+/obj/structure/closet,
+/obj/random/toolbox,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"vP" = (
+/obj/random/energy,
+/obj/structure/rack,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"vX" = (
+/obj/structure/foamedmetal,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"wc" = (
+/obj/random/landmine,
+/mob/living/simple_animal/hostile/viscerator,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"xo" = (
+/obj/random/landmine,
+/turf/floor/dirt,
+/area/cynosure_submap/MilitaryCamp1)
+"xt" = (
+/obj/structure/filing_cabinet/chestdrawer,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"ye" = (
+/obj/random/junk,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"yr" = (
+/obj/effect/decal/cleanable/blood,
+/turf/template_noop,
+/area/cynosure_submap/MilitaryCamp1)
+"zZ" = (
+/obj/random/helmet,
+/obj/structure/closet,
+/obj/random/maintenance,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"Af" = (
+/obj/item/shard,
+/mob/living/simple_animal/hostile/viscerator,
+/turf/template_noop,
+/area/cynosure_submap/MilitaryCamp1)
+"AH" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"By" = (
+/mob/living/simple_animal/hostile/viscerator,
+/obj/item/shard,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"CF" = (
+/obj/structure/girder,
+/turf/floor,
+/area/cynosure_submap/MilitaryCamp1)
+"DX" = (
+/turf/wall/concrete/reinforced,
+/area/cynosure_submap/MilitaryCamp1)
+"DZ" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/cynosure_submap/MilitaryCamp1)
+"Ep" = (
+/turf/wall/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"Iu" = (
+/mob/living/simple_animal/hostile/viscerator,
+/obj/structure/chair/office/dark{
+	dir = 8
+	},
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"Jh" = (
+/mob/living/simple_animal/hostile/viscerator,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"JM" = (
+/obj/structure/closet,
+/obj/random/maintenance/clean,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"Lb" = (
+/obj/item/remains,
+/obj/structure/bed/padded,
+/obj/item/bedsheet/blue,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"LQ" = (
+/mob/living/simple_animal/hostile/viscerator,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"LX" = (
+/obj/machinery/door/airlock/maintenance,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"LY" = (
+/obj/item/shard,
+/mob/living/simple_animal/hostile/viscerator,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"Nv" = (
+/turf/wall/natural,
+/area/cynosure_submap/MilitaryCamp1)
+"Og" = (
+/obj/structure/loot_pile/surface/medicine_cabinet,
+/turf/wall/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"OI" = (
+/turf/template_noop,
+/area/template_noop)
+"Pu" = (
+/mob/living/simple_animal/hostile/viscerator,
+/obj/structure/bed/padded,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"PF" = (
+/obj/random/firstaid,
+/obj/structure/table,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"Qv" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"Qx" = (
+/obj/random/landmine,
+/turf/template_noop,
+/area/cynosure_submap/MilitaryCamp1)
+"QD" = (
+/obj/structure/rack,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"QX" = (
+/obj/item/remains,
+/obj/random/landmine,
+/turf/template_noop,
+/area/cynosure_submap/MilitaryCamp1)
+"RD" = (
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"Uy" = (
+/obj/random/landmine,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"UC" = (
+/obj/structure/iv_drip,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"WT" = (
+/obj/machinery/door/airlock,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"WY" = (
+/obj/random/dufflebag,
+/obj/structure/rack,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+"YB" = (
+/obj/item/shard,
+/turf/template_noop,
+/area/cynosure_submap/MilitaryCamp1)
+"Zz" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/blue,
+/mob/living/simple_animal/hostile/viscerator,
+/turf/floor/concrete,
+/area/cynosure_submap/MilitaryCamp1)
+
+(1,1,1) = {"
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+"}
+(2,1,1) = {"
+OI
+ge
+Nv
+Nv
+Nv
+Qx
+yr
+qx
+yr
+ge
+QX
+ge
+Nv
+Nv
+Nv
+yr
+ge
+Qx
+ge
+OI
+"}
+(3,1,1) = {"
+OI
+Nv
+Nv
+Nv
+Nv
+Nv
+do
+xo
+cH
+ge
+ge
+Nv
+Nv
+Nv
+Nv
+Nv
+ge
+qx
+ge
+OI
+"}
+(4,1,1) = {"
+OI
+Nv
+Nv
+Nv
+Ep
+Ep
+Ep
+vX
+Ep
+WT
+Ep
+Ep
+Ep
+Nv
+Nv
+Nv
+Nv
+ge
+Qx
+OI
+"}
+(5,1,1) = {"
+OI
+Nv
+Nv
+Ep
+Ep
+bB
+RD
+RD
+RD
+AH
+Jh
+RD
+Ep
+Ep
+Nv
+Nv
+Nv
+Nv
+ge
+OI
+"}
+(6,1,1) = {"
+OI
+Nv
+Nv
+Ep
+jr
+kd
+RD
+Jh
+RD
+Uy
+RD
+RD
+dM
+Ep
+Ep
+Ep
+Ep
+Nv
+Nv
+OI
+"}
+(7,1,1) = {"
+OI
+yr
+Nv
+Ep
+RD
+RD
+RD
+kv
+qF
+lO
+RD
+By
+RD
+Ep
+nl
+mE
+Ep
+Nv
+Nv
+OI
+"}
+(8,1,1) = {"
+OI
+Qx
+nW
+gc
+pI
+RD
+DX
+DX
+DX
+DX
+DX
+pI
+RD
+WT
+By
+Iu
+Ep
+Nv
+Nv
+OI
+"}
+(9,1,1) = {"
+OI
+ge
+Qx
+jL
+Jh
+dH
+DX
+WY
+QD
+vP
+DX
+Qv
+RD
+Ep
+uo
+xt
+Ep
+Nv
+ge
+OI
+"}
+(10,1,1) = {"
+OI
+ge
+Qx
+Ep
+RD
+RD
+DX
+Jh
+wc
+Jh
+LX
+RD
+Jh
+Ep
+Ep
+Ep
+Ep
+Nv
+ge
+OI
+"}
+(11,1,1) = {"
+OI
+ge
+ge
+Ep
+RD
+Jh
+DX
+ln
+LQ
+LY
+DX
+RD
+RD
+Ep
+Nv
+Nv
+Nv
+Nv
+Qx
+OI
+"}
+(12,1,1) = {"
+OI
+Qx
+DZ
+Ep
+WT
+Ep
+DX
+CF
+DX
+DX
+DX
+WT
+Ep
+Ep
+Nv
+Nv
+Nv
+Qx
+ge
+OI
+"}
+(13,1,1) = {"
+OI
+ge
+Nv
+Ep
+Jh
+ju
+PF
+Ep
+zZ
+JM
+fS
+RD
+ye
+Ep
+Nv
+do
+nW
+Af
+ge
+OI
+"}
+(14,1,1) = {"
+OI
+Nv
+Nv
+Og
+UC
+By
+Jh
+WT
+RD
+ye
+Jh
+or
+RD
+gc
+do
+Qx
+ge
+ge
+Qx
+OI
+"}
+(15,1,1) = {"
+OI
+Nv
+Nv
+Ep
+Ep
+ow
+Pu
+Ep
+RD
+Jh
+tS
+Jh
+RD
+gc
+xo
+YB
+ge
+qx
+ge
+OI
+"}
+(16,1,1) = {"
+OI
+Nv
+Nv
+Nv
+Ep
+Ep
+Ep
+Ep
+Zz
+Lb
+qi
+Lb
+qi
+Ep
+ge
+cH
+ge
+ge
+ge
+OI
+"}
+(17,1,1) = {"
+OI
+Nv
+Nv
+Nv
+Nv
+Nv
+Nv
+Ep
+Ep
+Ep
+Ep
+Ep
+Ep
+Ep
+Nv
+ge
+Qx
+ge
+ge
+OI
+"}
+(18,1,1) = {"
+OI
+ge
+Nv
+Nv
+Nv
+Nv
+ge
+ge
+Qx
+ge
+ge
+Qx
+ge
+Nv
+Nv
+DZ
+ge
+yr
+ge
+OI
+"}
+(19,1,1) = {"
+OI
+ge
+ge
+Qx
+ge
+ge
+Qx
+ge
+ge
+qx
+cH
+ge
+ge
+ge
+Qx
+ge
+ge
+ge
+Qx
+OI
+"}
+(20,1,1) = {"
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+"}

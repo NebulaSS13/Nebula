@@ -19,6 +19,8 @@
 	ability_cooldown = 2 MINUTES
 	butchery_data = /decl/butchery_data/animal/bird/parrot/space
 	ai = /datum/mob_controller/aggressive/parrot/space
+	icon_scale_x = 2
+	icon_scale_y = 2
 	var/get_subspecies_name = TRUE
 
 /datum/mob_controller/aggressive/parrot/space
@@ -38,7 +40,6 @@
 		butchery_data = parrot_species.butchery_data
 		if(get_subspecies_name)
 			SetName(parrot_species.name)
-	set_scale(2)
 	update_icon()
 
 /mob/living/simple_animal/hostile/parrot/space/apply_attack_effects(mob/living/target)

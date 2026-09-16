@@ -969,11 +969,11 @@
 		return FALSE
 	LAZYREMOVE(dangerous_objects, weakref(thing))
 
-/turf/proc/is_safe_to_enter(mob/living/stepper)
+/turf/proc/is_safe_to_enter(atom/movable/mover)
 	if(LAZYLEN(dangerous_objects))
 		for(var/weakref/ref in dangerous_objects)
 			var/atom/thing = ref.resolve()
-			if(istype(thing) && !QDELETED(thing) && !thing.is_safe_to_step(stepper))
+			if(istype(thing) && !QDELETED(thing) && !thing.is_safe_to_step(mover))
 				return FALSE
 	return TRUE
 

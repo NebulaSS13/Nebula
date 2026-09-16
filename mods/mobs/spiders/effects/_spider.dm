@@ -34,12 +34,15 @@
 	return TRUE
 
 /obj/effect/spider/attackby(var/obj/item/used_item, var/mob/user)
+
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
+	if(IS_WELDER(used_item) && used_item.do_tool_interaction(TOOL_WELDER, user, src, 1 SECOND, "burning away", "burning away", fuel_expenditure = 1))
+		qdel(src)
+		return TRUE
+
 	visible_message("<span class='warning'>\The [src] has been [used_item.pick_attack_verb()] with \the [used_item][(user ? " by [user]." : ".")]</span>")
-
 	var/damage = used_item.expend_attack_force(user) / 4
-
 	if(used_item.has_edge())
 		damage += 5
 
