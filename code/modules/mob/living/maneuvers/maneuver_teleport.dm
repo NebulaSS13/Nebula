@@ -1,5 +1,6 @@
 /decl/maneuver/teleport
 	name = "Teleport"
+	stamina_cost = 0
 	selection_icon_state = "leap" // close enough
 	/// How far away to be at most after we teleport.
 	var/teleport_distance = 7
