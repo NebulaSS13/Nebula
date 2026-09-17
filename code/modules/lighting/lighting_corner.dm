@@ -132,7 +132,8 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 
 	if (has_ambience)
 		init_ambient()
-	generate_z_connections(direction)
+	if (direction != LIGHTING_CORNER_DO_NOT_SCAN)
+		generate_z_connections(direction)
 	update_active()
 
 #define OVERLAY_PRESENT(T) (T && T.lighting_overlay)
@@ -192,6 +193,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 
 /datum/lighting_corner/proc/generate_z_connections(direction = LIGHTING_CORNER_GENERATE_BOTH)
 	ASSERT(z != null)
+	ASSERT(direction != LIGHTING_CORNER_DO_NOT_SCAN)
 	/*
 		ZM_ALLOW_LIGHTING means that a z-turf is lighting-connected to the turf below it.
 		So:
