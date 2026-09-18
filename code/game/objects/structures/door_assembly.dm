@@ -295,7 +295,7 @@
 	var/image/filling_overlay
 	if(reinf_material)
 		filling_overlay = image(glass_icon, "construction")
-		filling_overlay.color = reinf_material.color
+		filling_overlay.color = reinf_material.solid_color
 		filling_overlay.appearance_flags |= RESET_COLOR
 	else
 		filling_overlay = image(fill_icon, "construction")

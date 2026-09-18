@@ -2,7 +2,7 @@
 	name = "metallic hydrogen"
 	uid = "solid_metallic_hydrogen"
 	lore_text = "When hydrogen is exposed to extremely high pressures and temperatures, such as at the core of gas giants like Jupiter, it can take on metallic properties and - more importantly - acts as a room temperature superconductor. Achieving solid metallic hydrogen at room temperature, though, has proven to be rather tricky."
-	color = "#e6c5de"
+	solid_color = "#e6c5de"
 	stack_origin_tech = @'{"materials":6,"powerstorage":6,"magnets":5}'
 	heating_products = list(
 		/decl/material/gas/hydrogen/tritium =   0.7,
@@ -36,7 +36,7 @@
 	name = "exotic matter"
 	uid = "solid_exotic_matter"
 	lore_text = "Exotic matter is a non-baryonic form of matter, which features heavily in all kinds of fringe physics-defying technology."
-	color = "#ffff00"
+	solid_color = "#ffff00"
 	radioactivity = 20
 	stack_origin_tech = @'{"wormholes":2,"materials":6,"exoticmatter":4}'
 	luminescence = 3

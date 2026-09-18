@@ -110,7 +110,7 @@ var/global/list/station_bookcases = list()
 	opacity = TRUE
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	storage = /datum/storage/bookcase
@@ -227,13 +227,13 @@ var/global/list/station_bookcases = list()
 
 /obj/structure/bookcase/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color =    /decl/material/solid/organic/wood/ebony::color
+	color =    /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/bookcase/fancy
 	icon_state = "fancy"
 
 /obj/structure/bookcase/fancy/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 #undef GET_BOOK_POS

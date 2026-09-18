@@ -49,7 +49,7 @@
 			continue
 
 		if(!mat_colour)
-			mat_colour = ingest_material.color
+			mat_colour = ingest_material.solid_color
 
 		stored_material[mat] += taking_material
 		if(stack_ref)

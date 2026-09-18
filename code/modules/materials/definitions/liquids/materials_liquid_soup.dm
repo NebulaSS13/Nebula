@@ -65,7 +65,7 @@
 	codex_name        = "simple broth"
 	uid               = "liquid_soup_broth"
 	solid_name        = "stock"
-	color             = "#8a7452"
+	liquid_color      = "#8a7452"
 	mask_name_suffix  = "broth"
 	taste_description = "salty, savoury flavours"
 	taste_mult        = 1
@@ -77,7 +77,7 @@
 	uid               = "liquid_soup_stock_bone"
 	liquid_name       = "bone broth"
 	solid_name        = "powdered bone broth"
-	color             = "#c0b067"
+	liquid_color      = "#c0b067"
 	mask_name_suffix  = "broth"
 	taste_description = "salty, savoury flavours"
 
@@ -139,5 +139,5 @@
 	reagent_overlay      = "soup_chunks" // todo: maybe differentiate meat vs veggie noodle soup
 	glass_name           = "noodle soup"
 	nutriment_factor     = 10
-	color                = COLOR_POLISHED_BRASS
+	liquid_color         = COLOR_POLISHED_BRASS
 	opacity              = 0.7

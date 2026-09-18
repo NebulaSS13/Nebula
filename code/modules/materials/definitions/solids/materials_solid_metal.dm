@@ -40,7 +40,7 @@
 	wall_flags = 0
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
-	color = "#007a00"
+	solid_color = "#007a00"
 	weight = MAT_VALUE_VERY_HEAVY
 	stack_origin_tech = @'{"materials":5}'
 	reflectiveness = MAT_VALUE_MATTE
@@ -76,7 +76,7 @@
 	taste_description = "the color blue, and regret"
 	melting_point = 1234
 	boiling_point = 1414
-	color = "#c7c7c7"
+	solid_color = "#c7c7c7"
 	value = 0.5
 	radioactivity = 18
 
@@ -88,7 +88,7 @@
 	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."
 	melting_point = 1337
 	boiling_point = 2974
-	color = COLOR_GOLD
+	solid_color = COLOR_GOLD
 	hardness = MAT_VALUE_FLEXIBLE + 5
 	integrity = 100
 	stack_origin_tech = @'{"materials":4}'
@@ -110,7 +110,7 @@
 	lore_text = "An alloy of copper and tin. Once used in weapons and laboring tools."
 	melting_point = 1184
 	boiling_point = 2574
-	color = "#ccbc63"
+	solid_color = "#ccbc63"
 	brute_armor = 3
 	hardness = MAT_VALUE_RIGID + 10
 	icon_base = 'icons/turf/walls/solid.dmi'
@@ -124,7 +124,7 @@
 	name = "black bronze"
 	uid = "solid_black_bronze"
 	lore_text = "An alloy of copper and silver. Used in ancient ceremonial gear."
-	color = "#3f352a"
+	solid_color = "#3f352a"
 	brute_armor = 4
 	hardness = MAT_VALUE_HARD
 	reflectiveness = MAT_VALUE_MATTE
@@ -140,7 +140,7 @@
 	name = "red gold"
 	uid = "solid_red_gold"
 	lore_text = "An alloy of copper and gold. A soft metal used for its ornamental properties."
-	color = "#ff7a59"
+	solid_color = "#ff7a59"
 	reflectiveness = MAT_VALUE_SHINY
 	value = 1.4
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
@@ -152,7 +152,7 @@
 	lore_text = "An alloy of copper and zinc. Renowned for its golden color."
 	melting_point = 1174
 	boiling_point = 1374
-	color = "#dab900"
+	solid_color = "#dab900"
 	reflectiveness = MAT_VALUE_VERY_SHINY
 	value = 1.2
 	default_solid_form = /obj/item/stack/material/sheet
@@ -165,7 +165,7 @@
 	lore_text = "A metal used in some components and many alloys. Known for its color-shifting properties when oxidized."
 	melting_point = 1357
 	boiling_point = 2774
-	color = COLOR_COPPER
+	solid_color = COLOR_COPPER
 	weight = MAT_VALUE_NORMAL
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	stack_origin_tech = @'{"materials":2}'
@@ -177,7 +177,7 @@
 	lore_text = "A soft, white, lustrous transition metal. Has many and varied industrial uses in electronics, solar panels and mirrors."
 	melting_point = 1234
 	boiling_point = 2444
-	color = "#d1e6e3"
+	solid_color = "#d1e6e3"
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	stack_origin_tech = @'{"materials":3}'
 	ore_result_amount = 1
@@ -207,7 +207,7 @@
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
-	color = COLOR_STEEL
+	solid_color = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	value = 1.1
@@ -234,7 +234,7 @@
 	hardness = MAT_VALUE_HARD + 5
 	integrity = 175
 	burn_armor = 10
-	color = "#a5a5a5"
+	solid_color = "#a5a5a5"
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
@@ -261,7 +261,7 @@
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
-	color = "#cccdcc"
+	solid_color = "#cccdcc"
 	hitsound = 'sound/weapons/smash.ogg'
 	taste_description = "metal"
 	default_solid_form = /obj/item/stack/material/sheet/shiny
@@ -282,7 +282,7 @@
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
-	color = "#a8a9b2"
+	solid_color = "#a8a9b2"
 	explosion_resistance = 25
 	brute_armor = 8
 	burn_armor = 10
@@ -311,7 +311,7 @@
 	icon_base = 'icons/turf/walls/metal.dmi'
 	wall_flags = PAINT_PAINTABLE
 	door_icon_base = "metal"
-	color = "#d1e6e3"
+	solid_color = "#d1e6e3"
 	icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.5
@@ -334,7 +334,7 @@
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
-	color = "#9bc6f2"
+	solid_color = "#9bc6f2"
 	brute_armor = 4
 	burn_armor = 20
 	stack_origin_tech = @'{"materials":3}'
@@ -349,7 +349,7 @@
 	lore_text = "An extremely hard form of platinum."
 	melting_point = 3307
 	boiling_point = 5285
-	color = "#9999ff"
+	solid_color = "#9999ff"
 	stack_origin_tech = @'{"materials":5}'
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.3
@@ -360,7 +360,7 @@
 	lore_text = "A very dense, unreactive, precious metal. Has many industrial uses, particularly as a catalyst."
 	melting_point = 2041
 	boiling_point = 4098
-	color = "#deddff"
+	solid_color = "#deddff"
 	weight = MAT_VALUE_VERY_HEAVY
 	wall_support_value = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_VERY_HARD
@@ -383,7 +383,7 @@
 	lore_text = "A ubiquitous, very common metal. The epitaph of stars and the primary ingredient in Earth's core."
 	melting_point = 1811
 	boiling_point = 3134
-	color = "#5c5454"
+	solid_color = "#5c5454"
 	hitsound = 'sound/weapons/smash.ogg'
 	hardness = MAT_VALUE_HARD
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -404,7 +404,7 @@
 	lore_text = "A soft metal that can be cut without much force. Used in many alloys."
 	melting_point = 505
 	boiling_point = 2875
-	color = "#c5c5a8"
+	solid_color = "#c5c5a8"
 	hardness = MAT_VALUE_FLEXIBLE
 	construction_difficulty = MAT_VALUE_EASY_DIY
 	reflectiveness = MAT_VALUE_MATTE
@@ -415,7 +415,7 @@
 	lore_text = "A very soft, heavy and poisonous metal. You probably shouldn't lick it."
 	melting_point = 600
 	boiling_point = 2022
-	color = "#3f3f4d"
+	solid_color = "#3f3f4d"
 	hardness = MAT_VALUE_FLEXIBLE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_MATTE
@@ -429,7 +429,7 @@
 	lore_text = "A dull-looking metal with some use in alloying."
 	melting_point = 692
 	boiling_point = 1180
-	color = "#92aae4"
+	solid_color = "#92aae4"
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_MATTE
 
@@ -437,7 +437,7 @@
 	name = "chromium"
 	uid = "solid_chromium"
 	lore_text = "A heavy metal with near perfect reflectiveness. Used in stainless alloys."
-	color = "#dadada"
+	solid_color = "#dadada"
 	integrity = 200
 	burn_armor = 15 // Strong against laser weaponry, but not as good as OCP.
 	melting_point = 2180
@@ -456,7 +456,7 @@
 /decl/material/solid/metal/alienalloy
 	name = "dense alloy"
 	uid = "solid_alienalloy"
-	color = "#6c7364"
+	solid_color = "#6c7364"
 	integrity = 1200
 	melting_point = 6000       // Hull plating.
 	explosion_resistance = 200 // Hull plating.
@@ -477,7 +477,7 @@
 /decl/material/solid/metal/alienalloy/elevatorium
 	name = "elevator panelling"
 	uid = "solid_elevator"
-	color = "#666666"
+	solid_color = "#666666"
 	hidden_from_codex = TRUE
 	default_solid_form = /obj/item/stack/material/sheet
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
@@ -489,6 +489,6 @@
 	lore_text = "A chemical element, and a strong oxidising agent."
 	weight = MAT_VALUE_VERY_HEAVY
 	taste_mult = 0 //no taste
-	color = "#dcdcdc"
+	solid_color = "#dcdcdc"
 	value = 0.5
 	melting_point = 3422 CELSIUS

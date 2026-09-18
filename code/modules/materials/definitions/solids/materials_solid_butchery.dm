@@ -3,7 +3,7 @@
 	codex_name = "animal protein"
 	uid = "solid_meat"
 	taste_description = "umami"
-	color = "#c03b2a"
+	solid_color = "#c03b2a"
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
 	conductive = 1
@@ -29,7 +29,7 @@
 	name = "egg yolk"
 	codex_name = "egg yolk"
 	taste_description = "egg"
-	color = "#ffffaa"
+	solid_color = "#ffffaa"
 	uid = "solid_egg"
 	melting_point = 273
 	boiling_point = 373
@@ -40,32 +40,32 @@
 	name  = "fish meat"
 	codex_name = "fish protein"
 	uid = "solid_meat_fish"
-	color = "#ff9b9b"
+	solid_color = "#ff9b9b"
 	allergen_flags = ALLERGEN_FISH
 
 /decl/material/solid/organic/meat/chicken
 	name  = "chicken meat"
 	codex_name = "chicken protein"
 	uid = "solid_meat_chicken"
-	color = "#e98a8a"
+	solid_color = "#e98a8a"
 
 /decl/material/solid/organic/meat/xeno
 	name = "alien meat"
 	codex_name = "xenoprotein"
 	uid = "solid_meat_xeno"
-	color = COLOR_LIME
+	solid_color = COLOR_LIME
 
 /decl/material/solid/organic/meat/gut
 	name = "gut"
 	codex_name = null
 	uid = "solid_gut"
-	color = "#ffd6d6"
+	solid_color = "#ffd6d6"
 	tans_to = /decl/material/solid/organic/leather/gut
 
 /decl/material/solid/organic/skin
 	name = "skin"
 	uid = "solid_skin"
-	color = "#9e8c72"
+	solid_color = "#9e8c72"
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
 	conductive = 0
@@ -89,7 +89,7 @@
 /decl/material/solid/organic/skin/lizard
 	name = "lizardskin"
 	uid = "solid_lizardskin"
-	color = "#626952"
+	solid_color = "#626952"
 	tans_to = /decl/material/solid/organic/leather/lizard
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
@@ -97,7 +97,7 @@
 /decl/material/solid/organic/skin/insect
 	name = "chitin"
 	uid = "solid_chitin"
-	color = "#7a776d"
+	solid_color = "#7a776d"
 	tans_to = /decl/material/solid/organic/leather/chitin
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
@@ -109,7 +109,7 @@
 /decl/material/solid/organic/skin/fur
 	name = "fur"
 	uid = "solid_fur"
-	color = "#7a726d"
+	solid_color = "#7a726d"
 	tans_to = /decl/material/solid/organic/leather/fur
 	default_solid_form = /obj/item/stack/material/skin/pelt
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
@@ -123,87 +123,87 @@
 	uid = "solid_fur_white"
 
 /decl/material/solid/organic/skin/fur/orange
-	color = COLOR_ORANGE
+	solid_color = COLOR_ORANGE
 	uid = "solid_fur_orange"
 
 /decl/material/solid/organic/skin/fur/black
-	color = COLOR_GRAY20
+	solid_color = COLOR_GRAY20
 	uid = "solid_fur_black"
 
 /decl/material/solid/organic/skin/fur/brown
-	color = COLOR_DARK_BROWN
+	solid_color = COLOR_DARK_BROWN
 	uid = "solid_fur_brown"
 
 /decl/material/solid/organic/skin/fur/heavy
-	color = COLOR_GUNMETAL
+	solid_color = COLOR_GUNMETAL
 	uid = "solid_fur_heavy"
 
 /decl/material/solid/organic/skin/sheep
-	color = COLOR_DARK_GRAY
+	solid_color = COLOR_DARK_GRAY
 	uid = "solid_skin_sheep"
 
 /decl/material/solid/organic/skin/goat
-	color = COLOR_SILVER
+	solid_color = COLOR_SILVER
 	uid = "solid_skin_goat"
 
 /decl/material/solid/organic/skin/cow
-	color = COLOR_GRAY40
+	solid_color = COLOR_GRAY40
 	uid = "solid_skin_cow"
 
 /decl/material/solid/organic/skin/deer
-	color = COLOR_BROWN
+	solid_color = COLOR_BROWN
 	uid = "solid_skin_deer"
 
 /decl/material/solid/organic/skin/shark
 	name = "sharkskin"
-	color = COLOR_PURPLE_GRAY
+	solid_color = COLOR_PURPLE_GRAY
 	uid = "solid_skin_shark"
 
 /decl/material/solid/organic/skin/fish
-	color = COLOR_BOTTLE_GREEN
+	solid_color = COLOR_BOTTLE_GREEN
 	name = "fishskin"
 	uid = "solid_skin_fish"
 
 /decl/material/solid/organic/skin/fish/purple
-	color = COLOR_PALE_PURPLE_GRAY
+	solid_color = COLOR_PALE_PURPLE_GRAY
 	uid = "solid_skin_carp"
 
 /decl/material/solid/organic/skin/feathers
 	name = "feathers"
 	uid = "solid_feathers"
-	color = COLOR_SILVER
+	solid_color = COLOR_SILVER
 	default_solid_form = /obj/item/stack/material/skin/feathers
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/organic/skin/feathers/purple
-	color = COLOR_PALE_PURPLE_GRAY
+	solid_color = COLOR_PALE_PURPLE_GRAY
 	uid = "solid_feathers_purple"
 
 /decl/material/solid/organic/skin/feathers/blue
-	color = COLOR_SKY_BLUE
+	solid_color = COLOR_SKY_BLUE
 	uid = "solid_feathers_blue"
 
 /decl/material/solid/organic/skin/feathers/green
-	color = COLOR_BOTTLE_GREEN
+	solid_color = COLOR_BOTTLE_GREEN
 	uid = "solid_feathers_green"
 
 /decl/material/solid/organic/skin/feathers/brown
-	color = COLOR_BEASTY_BROWN
+	solid_color = COLOR_BEASTY_BROWN
 	uid = "solid_feathers_brown"
 
 /decl/material/solid/organic/skin/feathers/red
-	color = COLOR_RED
+	solid_color = COLOR_RED
 	uid = "solid_feathers_red"
 
 /decl/material/solid/organic/skin/feathers/black
-	color = COLOR_GRAY15
+	solid_color = COLOR_GRAY15
 	uid = "solid_feathers_black"
 
 /decl/material/solid/organic/bone
 	name = "bone"
 	uid = "solid_bone"
-	color = "#f0edc7"
+	solid_color = "#f0edc7"
 	ignition_point = T0C+1100
 	conductive = 0
 	hidden_from_codex = TRUE
@@ -225,7 +225,7 @@
 /decl/material/solid/organic/bone/eggshell
 	name                   = "eggshell"
 	uid                    = "solid_eggshell"
-	color                  = "#eae0c8"
+	solid_color            = "#eae0c8"
 	default_solid_form     = /obj/item/stack/material/lump
 	hardness               = MAT_VALUE_FLEXIBLE
 	weight                 = MAT_VALUE_VERY_LIGHT
@@ -234,7 +234,7 @@
 /decl/material/solid/organic/bone/pearl
 	name                   = "pearl"
 	uid                    = "solid_pearl"
-	color                  = "#eae0c8"
+	solid_color            = "#eae0c8"
 	default_solid_form     = /obj/item/stack/material/lump
 	hardness               = MAT_VALUE_FLEXIBLE
 	weight                 = MAT_VALUE_VERY_LIGHT

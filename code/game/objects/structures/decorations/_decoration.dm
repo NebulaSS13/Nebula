@@ -5,5 +5,5 @@
 	anchored            = TRUE
 	material            = /decl/material/solid/stone/marble
 	material_alteration = MAT_FLAG_ALTERATION_ALL
-	color               = /decl/material/solid/stone/marble::color
+	color               = /decl/material/solid/stone/marble::solid_color
 	icon_state          = ICON_STATE_WORLD

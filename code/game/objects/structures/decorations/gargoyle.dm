@@ -3,7 +3,7 @@
 	desc     = "A leering statue of a monstrous gargoyle."
 	icon     = 'icons/obj/structures/decorations/gargoyle.dmi'
 	material = /decl/material/solid/stone/basalt
-	color    = /decl/material/solid/stone/basalt::color
+	color    = /decl/material/solid/stone/basalt::solid_color
 
 /obj/structure/decoration/gargoyle/plinth
 	icon     = 'icons/obj/structures/decorations/gargoyle_plinth.dmi'

@@ -148,7 +148,7 @@
 	pixel_y                        = 8
 	anchored                       = TRUE
 	material                       = /decl/material/solid/organic/wood/oak
-	color                          = /decl/material/solid/organic/wood/oak::color
+	color                          = /decl/material/solid/organic/wood/oak::solid_color
 	w_class                        = ITEM_SIZE_NORMAL
 	material_alteration            = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
 	var/message                    = "Unknown."
@@ -215,7 +215,7 @@
 	destruction_start_message = "smashing"
 	destruction_finish_message = "smashing"
 	material = /decl/material/solid/stone/granite
-	color = /decl/material/solid/stone/granite::color
+	color = /decl/material/solid/stone/granite::solid_color
 
 // Gravemarker items.
 // TODO: unify with signs somehow? some of this behaviour is similar...
@@ -225,7 +225,7 @@
 	icon                = 'icons/obj/structures/gravestone.dmi'
 	icon_state          = "wood"
 	material            = /decl/material/solid/organic/wood/oak
-	color               = /decl/material/solid/organic/wood/oak::color
+	color               = /decl/material/solid/organic/wood/oak::solid_color
 	w_class             = ITEM_SIZE_NORMAL
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
 	var/gravemarker_type = /obj/structure/gravemarker
@@ -235,7 +235,7 @@
 	name = "gravestone"
 	icon_state = "stone"
 	material = /decl/material/solid/stone/granite
-	color = /decl/material/solid/stone/granite::color
+	color = /decl/material/solid/stone/granite::solid_color
 	gravemarker_type = /obj/structure/gravemarker/gravestone
 
 /obj/item/gravemarker/get_examine_strings(mob/user, distance, infix, suffix)

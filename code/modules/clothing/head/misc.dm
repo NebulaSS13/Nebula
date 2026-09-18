@@ -255,7 +255,7 @@
 	desc = "It's a simple headband."
 	icon = 'icons/clothing/head/headband.dmi'
 	material = /decl/material/solid/organic/leather
-	color = /decl/material/solid/organic/leather::color
+	color = /decl/material/solid/organic/leather::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	accessory_slot = null // cannot be equipped on top of helmets
 

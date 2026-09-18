@@ -3,7 +3,7 @@
 	desc       = "A tall lamplit signpost marking the edge of the region. Beyond lies distant kingdoms."
 	icon       = 'mods/content/fantasy/icons/structures/signpost.dmi'
 	icon_state = ICON_STATE_WORLD
-	color      = /decl/material/solid/organic/wood/walnut::color
+	color      = /decl/material/solid/organic/wood/walnut::solid_color
 	density    = TRUE
 	opacity    = FALSE
 	anchored   = TRUE
@@ -21,7 +21,7 @@
 
 /obj/effect/departure_signpost/on_update_icon()
 	. = ..()
-	add_overlay(overlay_image(icon, "[icon_state]-lamp", /decl/material/solid/metal/copper::color, RESET_COLOR))
+	add_overlay(overlay_image(icon, "[icon_state]-lamp", /decl/material/solid/metal/copper::solid_color, RESET_COLOR))
 	var/image/glow = emissive_overlay(icon, "[icon_state]-lamp-glow", color = lit_light_color)
 	glow.appearance_flags |= RESET_COLOR
 	add_overlay(glow)

@@ -3,7 +3,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	icon_state          = ICON_STATE_WORLD
 	material            = /decl/material/solid/organic/meat
-	color               = /decl/material/solid/organic/meat::color
+	color               = /decl/material/solid/organic/meat::solid_color
 	w_class             = ITEM_SIZE_NORMAL
 	chem_volume         = 20
 	nutriment_type      = /decl/material/solid/organic/meat
@@ -75,7 +75,7 @@
 		var/drying_state = "[get_drying_state(rack)]_fat"
 		if(check_state_in_icon(drying_state, 'icons/obj/drying_rack.dmi'))
 			var/decl/material/fat_material_data = GET_DECL(fat_material)
-			overlay.overlays += overlay_image('icons/obj/drying_rack.dmi', drying_state, fat_material_data.color, RESET_COLOR)
+			overlay.overlays += overlay_image('icons/obj/drying_rack.dmi', drying_state, fat_material_data.solid_color, RESET_COLOR)
 	return overlay
 
 /obj/item/food/butchery/on_update_icon()
@@ -84,7 +84,7 @@
 	icon_state = get_world_inventory_state()
 	if(fat_material && check_state_in_icon("[icon_state]-fat", icon))
 		var/decl/material/fat = GET_DECL(fat_material)
-		add_overlay(overlay_image(icon, "[icon_state]-fat", fat.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-fat", fat.solid_color, RESET_COLOR))
 
 /obj/item/food/butchery/proc/set_meat_name(new_meat_name)
 	meat_name = new_meat_name
@@ -222,11 +222,11 @@
 
 	if(bone_material && check_state_in_icon("[icon_state]-bone", icon))
 		var/decl/material/bones = GET_DECL(bone_material)
-		add_overlay(overlay_image(icon, "[icon_state]-bone", bones.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-bone", bones.solid_color, RESET_COLOR))
 
 	if(fat_material && check_state_in_icon("[icon_state]-fat", icon))
 		var/decl/material/fat = GET_DECL(fat_material)
-		add_overlay(overlay_image(icon, "[icon_state]-fat", fat.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-fat", fat.solid_color, RESET_COLOR))
 
 /obj/item/food/butchery/haunch/beef
 	butchery_data = /decl/butchery_data/animal/ruminant/cow

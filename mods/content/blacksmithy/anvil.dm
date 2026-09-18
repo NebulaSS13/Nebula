@@ -36,7 +36,7 @@
 	atom_flags          = ATOM_FLAG_CLIMBABLE
 	w_class             = ITEM_SIZE_STRUCTURE //_LARGE
 	material            = /decl/material/solid/metal/iron
-	color               = /decl/material/solid/metal/iron::color
+	color               = /decl/material/solid/metal/iron::solid_color
 	max_health          = 1000
 	structure_flags     = STRUCTURE_FLAG_SURFACE
 	material_alteration = MAT_FLAG_ALTERATION_ALL

@@ -76,15 +76,15 @@
 	icon_state = get_world_inventory_state()
 	last_sand_state = get_sand_state(icon_state)
 	// Sand goes before glass
-	add_overlay(overlay_image(icon, last_sand_state, sand_material.color, RESET_ALPHA|RESET_COLOR))
+	add_overlay(overlay_image(icon, last_sand_state, sand_material.solid_color, RESET_ALPHA|RESET_COLOR))
 	// Glass goes over the sand
-	add_overlay(overlay_image(icon, "glass-[icon_state]", glass_material.color, RESET_ALPHA|RESET_COLOR))
+	add_overlay(overlay_image(icon, "glass-[icon_state]", glass_material.solid_color, RESET_ALPHA|RESET_COLOR))
 	compile_overlays() // Don't wait for SSoverlays, this is pretty time-sensitive.
 
 /obj/item/hourglass/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing)
 	// TODO: held item falling sand states?
-	overlay.add_overlay(overlay_image(overlay.icon, "sand-[overlay.icon_state]", sand_material.color, RESET_ALPHA | RESET_COLOR))
-	overlay.add_overlay(overlay_image(overlay.icon, "glass-[overlay.icon_state]", glass_material.color, RESET_ALPHA | RESET_COLOR))
+	overlay.add_overlay(overlay_image(overlay.icon, "sand-[overlay.icon_state]", sand_material.solid_color, RESET_ALPHA | RESET_COLOR))
+	overlay.add_overlay(overlay_image(overlay.icon, "glass-[overlay.icon_state]", glass_material.solid_color, RESET_ALPHA | RESET_COLOR))
 	return ..()
 
 /obj/item/hourglass/attack_self(mob/user)

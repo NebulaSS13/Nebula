@@ -32,7 +32,8 @@
 /decl/chemical_reaction/recipe/milkshake
 	name = "Milkshake"
 	result = /decl/material/liquid/drink/milkshake
-	required_reagents = list(/decl/material/liquid/drink/milk/cream = 1, /decl/material/solid/ice = 2, /decl/material/liquid/drink/milk = 2)
+	required_reagents = list(/decl/material/liquid/drink/milk/cream = 1, /decl/material/liquid/water = 2, /decl/material/liquid/drink/milk = 2)
+	required_reagent_phases = alist(/decl/material/liquid/water = MAT_PHASE_SOLID)
 	result_amount = 5
 
 /decl/chemical_reaction/recipe/chocolate_milk

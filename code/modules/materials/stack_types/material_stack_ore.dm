@@ -171,23 +171,23 @@
 /obj/item/stack/material/ore/tetrahedrite/ten
 	amount = 10
 /obj/item/stack/material/ore/hydrogen_hydrate
-	material = /decl/material/solid/ice/hydrogen // todo: set back to hydrate when clathrate is added to hydrogen hydrate dname
+	material = /decl/material/liquid/water/hydrogen // todo: set back to hydrate when clathrate is added to hydrogen hydrate dname
 /obj/item/stack/material/ore/methane
-	material = /decl/material/solid/ice/hydrate/methane
+	material = /decl/material/liquid/water/hydrate/methane
 /obj/item/stack/material/ore/oxygen
-	material = /decl/material/solid/ice/hydrate/oxygen
+	material = /decl/material/liquid/water/hydrate/oxygen
 /obj/item/stack/material/ore/nitrogen
-	material = /decl/material/solid/ice/hydrate/nitrogen
+	material = /decl/material/liquid/water/hydrate/nitrogen
 /obj/item/stack/material/ore/carbon_dioxide
-	material = /decl/material/solid/ice/hydrate/carbon_dioxide
+	material = /decl/material/liquid/water/hydrate/carbon_dioxide
 /obj/item/stack/material/ore/argon
-	material = /decl/material/solid/ice/hydrate/argon
+	material = /decl/material/liquid/water/hydrate/argon
 /obj/item/stack/material/ore/neon
-	material = /decl/material/solid/ice/hydrate/neon
+	material = /decl/material/liquid/water/hydrate/neon
 /obj/item/stack/material/ore/krypton
-	material = /decl/material/solid/ice/hydrate/krypton
+	material = /decl/material/liquid/water/hydrate/krypton
 /obj/item/stack/material/ore/xenon
-	material = /decl/material/solid/ice/hydrate/xenon
+	material = /decl/material/liquid/water/hydrate/xenon
 /obj/item/stack/material/ore/meat
 	material = /decl/material/solid/organic/meat
 

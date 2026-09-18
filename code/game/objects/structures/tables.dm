@@ -310,20 +310,20 @@
 	// Base frame shape.
 	for(var/i = 1 to 4)
 		I = image(icon, dir = BITFLAG(i-1), icon_state = connections ? connections[i] : "0")
-		I.color = material.color
+		I.color = material.solid_color
 		I.alpha = 255 * material.opacity
 		add_overlay(I)
 	// Tabletop
 	if(reinf_material)
 		for(var/i = 1 to 4)
 			I = image(icon, "[reinf_material.table_icon_base]_[connections ? connections[i] : "0"]", dir = BITFLAG(i-1))
-			I.color = reinf_material.color
+			I.color = reinf_material.solid_color
 			I.alpha = 255 * reinf_material.opacity
 			add_overlay(I)
 	if(additional_reinf_material)
 		for(var/i = 1 to 4)
 			I = image(icon, "[additional_reinf_material.table_icon_reinforced]_[connections ? connections[i] : "0"]", dir = BITFLAG(i-1))
-			I.color = additional_reinf_material.color
+			I.color = additional_reinf_material.solid_color
 			I.alpha = 255 * additional_reinf_material.opacity
 			add_overlay(I)
 
@@ -349,13 +349,13 @@
 	var/image/I
 	if(reinf_material)
 		I = image(icon, "[reinf_material.table_icon_base]_flip[flip_type][flip_mod]")
-		I.color = reinf_material.color
+		I.color = reinf_material.solid_color
 		I.alpha = 255 * reinf_material.opacity
 		I.appearance_flags |= RESET_COLOR|RESET_ALPHA
 		add_overlay(I)
 	if(additional_reinf_material)
 		I = image(icon, "[reinf_material.table_icon_reinforced]_flip[flip_type][flip_mod]")
-		I.color = additional_reinf_material.color
+		I.color = additional_reinf_material.solid_color
 		I.alpha = 255 * additional_reinf_material.opacity
 		I.appearance_flags |= RESET_COLOR|RESET_ALPHA
 		add_overlay(I)
@@ -838,7 +838,7 @@
 	icon = 'icons/obj/structures/endtable.dmi'
 	icon_state = "end_table_1"
 	handle_generic_blending = FALSE
-	color = /decl/material/solid/organic/wood/walnut::color
+	color = /decl/material/solid/organic/wood/walnut::solid_color
 	material = /decl/material/solid/organic/wood/walnut
 	reinf_material = /decl/material/solid/organic/wood/walnut
 	material_alteration = MAT_FLAG_ALTERATION_ALL
@@ -851,7 +851,7 @@
 	icon_state = "end_table_2"
 
 /obj/structure/table/end/alt/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 	material = /decl/material/solid/organic/wood/ebony
 	reinf_material = /decl/material/solid/organic/wood/ebony
 
@@ -877,7 +877,7 @@
 	icon_state = "desk_left"
 	icon = 'icons/obj/structures/desk_large.dmi'
 	handle_generic_blending = FALSE
-	color = /decl/material/solid/organic/wood/walnut::color
+	color = /decl/material/solid/organic/wood/walnut::solid_color
 	material = /decl/material/solid/organic/wood/walnut
 	reinf_material = /decl/material/solid/organic/wood/walnut
 	storage = /datum/storage/structure/desk
@@ -901,7 +901,7 @@
 	icon_state = "desk_right"
 
 /obj/structure/table/desk/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 	material = /decl/material/solid/organic/wood/ebony
 	reinf_material = /decl/material/solid/organic/wood/ebony
 
@@ -967,7 +967,7 @@
 	SetName("[reinf_material.adjective_name] dresser")
 
 /obj/structure/table/desk/dresser/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 	material = /decl/material/solid/organic/wood/ebony
 	reinf_material = /decl/material/solid/organic/wood/ebony
 
