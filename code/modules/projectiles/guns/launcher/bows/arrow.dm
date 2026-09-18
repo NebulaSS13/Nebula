@@ -71,7 +71,7 @@
 /obj/item/stack/material/bow_ammo/arrow/on_update_icon()
 	. = ..()
 	if(fletching_material)
-		add_overlay(overlay_image(icon, "[icon_state]-fletching", fletching_material.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-fletching", fletching_material.solid_color, RESET_COLOR))
 
 /obj/item/stack/material/bow_ammo/bolt
 	name = "bolt"

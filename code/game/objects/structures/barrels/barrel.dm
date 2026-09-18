@@ -7,7 +7,7 @@
 	atom_flags                = ATOM_FLAG_CLIMBABLE
 	matter                    = null
 	material                  = /decl/material/solid/organic/wood/oak
-	color                     = /decl/material/solid/organic/wood/oak::color
+	color                     = /decl/material/solid/organic/wood/oak::solid_color
 	material_alteration       = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	wrenchable                = FALSE
 	storage                   = /datum/storage/barrel
@@ -68,7 +68,7 @@
 
 	// Layer below lid/lid metal.
 	if(metal_material)
-		add_overlay(overlay_image(icon, "[icon_state]-metal", metal_material.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-metal", metal_material.solid_color, RESET_COLOR))
 
 	// Add lid/reagents overlay/lid metal.
 	if(show_liquid_contents && ATOM_IS_OPEN_CONTAINER(src))
@@ -76,13 +76,13 @@
 			var/overlay_amount = NONUNIT_CEILING(REAGENT_TOTAL_LIQUID_VOLUME(reagents) / REAGENT_MAXIMUM_VOLUME(reagents) * 100, 10)
 			var/image/filling_overlay = overlay_image(icon, "[icon_state]-[overlay_amount]", reagents.get_color(), RESET_COLOR | RESET_ALPHA)
 			add_overlay(filling_overlay)
-		add_overlay(overlay_image(icon, "[icon_state]-lidopen", material?.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-lidopen", material?.solid_color, RESET_COLOR))
 		if(metal_material)
-			add_overlay(overlay_image(icon, "[icon_state]-lidopen-metal", metal_material.color, RESET_COLOR))
+			add_overlay(overlay_image(icon, "[icon_state]-lidopen-metal", metal_material.solid_color, RESET_COLOR))
 	else
-		add_overlay(overlay_image(icon, "[icon_state]-lidclosed", material?.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-lidclosed", material?.solid_color, RESET_COLOR))
 		if(metal_material)
-			add_overlay(overlay_image(icon, "[icon_state]-lidclosed-metal", metal_material.color, RESET_COLOR))
+			add_overlay(overlay_image(icon, "[icon_state]-lidclosed-metal", metal_material.solid_color, RESET_COLOR))
 
 	if(istype(loc, /obj/structure/cask_rack))
 		loc.update_icon()
@@ -116,7 +116,7 @@
 
 /obj/structure/reagent_dispensers/barrel/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/reagent_dispensers/barrel/ebony/water/populate_reagents()
 	. = ..()

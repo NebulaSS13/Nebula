@@ -10,12 +10,12 @@
 	open_sound = 'sound/effects/doorcreaky.ogg'
 	close_sound = 'sound/effects/doorcreaky.ogg'
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 	closet_appearance = /decl/closet_appearance/cabinet/nocolor
 
 /obj/structure/closet/cabinet/wooden/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/closet/acloset
 	name = "strange closet"

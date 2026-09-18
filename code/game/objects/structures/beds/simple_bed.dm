@@ -5,7 +5,7 @@
 	parts_type = /obj/item/stack/material/plank
 	material = /decl/material/solid/organic/wood/oak
 	initial_padding_material = /decl/material/solid/organic/plantmatter/grass/dry
-	color = /decl/material/solid/organic/plantmatter/grass/dry::color
+	color = /decl/material/solid/organic/plantmatter/grass/dry::solid_color
 	anchored = TRUE
 	user_comfort = 0.8
 	buckle_sound = "rustle"
@@ -44,12 +44,12 @@
 
 /obj/structure/bed/simple/ebony/cloth
 	initial_padding_material = /decl/material/solid/organic/cloth
-	color = /decl/material/solid/organic/cloth::color
+	color = /decl/material/solid/organic/cloth::solid_color
 
 /obj/structure/bed/simple/crafted
 	initial_padding_material = null
 	icon_state = ICON_STATE_WORLD
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 
 /obj/item/bedsheet/furs
 	name = "sleeping furs"
@@ -58,4 +58,4 @@
 	item_state = null
 	material_alteration = MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
 	material = /decl/material/solid/organic/skin/fur
-	color = /decl/material/solid/organic/skin/fur::color
+	color = /decl/material/solid/organic/skin/fur::solid_color

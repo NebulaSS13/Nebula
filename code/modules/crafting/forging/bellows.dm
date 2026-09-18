@@ -12,7 +12,7 @@
 
 /obj/structure/working/bellows/on_update_icon()
 	. = ..()
-	underlays = list(overlay_image(icon, "[icon_state]-bellows", bellows_material.color, RESET_COLOR))
+	underlays = list(overlay_image(icon, "[icon_state]-bellows", bellows_material.solid_color, RESET_COLOR))
 
 /obj/structure/working/bellows/try_start_working(mob/user)
 

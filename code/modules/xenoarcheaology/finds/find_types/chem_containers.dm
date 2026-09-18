@@ -38,7 +38,6 @@
 		/decl/material/liquid/sedatives,
 		/decl/material/liquid/alcohol/ethanol,
 		/decl/material/liquid/water,
-		/decl/material/solid/ice,
 		/decl/material/liquid/fuel,
 		/decl/material/liquid/cleaner
 	))

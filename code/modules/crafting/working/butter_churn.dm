@@ -33,4 +33,4 @@
 
 /obj/structure/working/butter_churn/walnut
 	material = /decl/material/solid/organic/wood/walnut
-	color    = /decl/material/solid/organic/wood/walnut::color
+	color    = /decl/material/solid/organic/wood/walnut::solid_color

@@ -12,7 +12,7 @@
 
 /obj/item/chems/cooking_vessel/pot/iron
 	material = /decl/material/solid/metal/iron
-	color = /decl/material/solid/metal/iron::color
+	color = /decl/material/solid/metal/iron::solid_color
 
 /obj/item/chems/cooking_vessel/pot/get_reagents_overlay(state_prefix)
 	var/image/our_overlay = ..()
@@ -56,7 +56,7 @@
 	name        = "cauldron"
 	desc        = "A large round-bodied vessel for making large quantities of potion or soup."
 	material    = /decl/material/solid/metal/iron
-	color       = /decl/material/solid/metal/iron::color
+	color       = /decl/material/solid/metal/iron::solid_color
 	icon        = 'icons/obj/food/cooking_vessels/cauldron.dmi'
 	chem_volume = 1000
 	w_class     = ITEM_SIZE_STRUCTURE

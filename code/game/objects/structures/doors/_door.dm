@@ -23,7 +23,7 @@
 		icon_base = material.door_icon_base
 	update_icon()
 	if(material?.luminescence)
-		set_light(material.luminescence, 0.5, material.color)
+		set_light(material.luminescence, 0.5, material.solid_color)
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/structure/door/LateInitialize(mapload, dir=0, populate_parts=TRUE)
@@ -246,39 +246,39 @@
 
 /obj/structure/door/sandstone
 	material = /decl/material/solid/stone/sandstone
-	color = /decl/material/solid/stone/sandstone::color
+	color = /decl/material/solid/stone/sandstone::solid_color
 
 /obj/structure/door/basalt
 	desc = "A door hewn of raw basalt, unthinkably heavy and smooth to the touch."
 	material = /decl/material/solid/stone/basalt
-	color = /decl/material/solid/stone/basalt::color
+	color = /decl/material/solid/stone/basalt::solid_color
 
 /obj/structure/door/diamond
 	material = /decl/material/solid/gemstone/diamond
 
 /obj/structure/door/oak
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 
 /obj/structure/door/mahogany
 	material = /decl/material/solid/organic/wood/mahogany
-	color = /decl/material/solid/organic/wood/mahogany::color
+	color = /decl/material/solid/organic/wood/mahogany::solid_color
 
 /obj/structure/door/maple
 	material = /decl/material/solid/organic/wood/maple
-	color = /decl/material/solid/organic/wood/maple::color
+	color = /decl/material/solid/organic/wood/maple::solid_color
 
 /obj/structure/door/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/door/walnut
 	material = /decl/material/solid/organic/wood/walnut
-	color = /decl/material/solid/organic/wood/walnut::color
+	color = /decl/material/solid/organic/wood/walnut::solid_color
 
 /obj/structure/door/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/door/oak/saloon
 	opacity = FALSE

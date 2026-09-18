@@ -23,7 +23,7 @@
 
 #define MAT_COLOR(MAT) \
 	material = MAT;\
-	color = MAT::color
+	color = MAT::solid_color
 
 /obj/item/bowstring/synthetic
 	MAT_COLOR(/decl/material/solid/fiberglass)

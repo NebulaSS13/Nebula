@@ -8,7 +8,7 @@
 	flooring_flags  = TURF_REMOVE_SHOVEL
 	footstep_type   = /decl/footsteps/snow
 	has_base_range  = 13
-	force_material  = /decl/material/solid/ice/snow
+	force_material  = /decl/material/liquid/water/snow
 	can_collect     = TRUE
 	print_type      = /obj/effect/footprints
 	drop_material_on_remove = TRUE
@@ -51,7 +51,7 @@
 	desc            = "A stretch of frozen soil that hasn't seen a thaw for many seasons."
 	icon            = 'icons/turf/flooring/snow.dmi'
 	icon_base       = "permafrost"
-	force_material  = /decl/material/solid/ice
+	force_material  = /decl/material/liquid/water
 	uid             = "floor_permafrost"
 
 /decl/flooring/permafrost/get_vehicle_transit_delay(obj/vehicle/vehicle)

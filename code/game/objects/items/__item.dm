@@ -154,7 +154,7 @@
 	if(paint_color)
 		return paint_color
 	if(istype(material) && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
-		return material.color
+		return material.get_color(temperature)
 	return initial(color)
 
 /obj/item/set_color(new_color, skip_update)
@@ -170,7 +170,7 @@
 	if(paint_color)
 		color = paint_color
 	else if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
-		color = material.color
+		color = material.get_color(temperature)
 	else
 		color = null
 

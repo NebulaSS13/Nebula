@@ -43,7 +43,7 @@
 #define WOOD_RAILING_SUBTYPE(material_name) \
 /obj/structure/railing/mapped/wooden/##material_name { \
 	material = /decl/material/solid/organic/wood/##material_name; \
-	color = /decl/material/solid/organic/wood/##material_name::color; \
+	color = /decl/material/solid/organic/wood/##material_name::solid_color; \
 }
 
 WOOD_RAILING_SUBTYPE(fungal)

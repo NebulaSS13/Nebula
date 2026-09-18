@@ -1,7 +1,7 @@
 /decl/material/solid/slag
 	name = "slag"
 	uid = "solid_slag"
-	color = "#2e3a07"
+	solid_color = "#2e3a07"
 	ore_name = "slag"
 	ore_desc = "Someone messed up..."
 	ore_icon_overlay = "lump"

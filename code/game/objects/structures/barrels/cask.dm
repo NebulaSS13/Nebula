@@ -26,7 +26,7 @@
 
 /obj/structure/reagent_dispensers/barrel/cask/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/reagent_dispensers/barrel/cask/ebony/water/populate_reagents()
 	. = ..()

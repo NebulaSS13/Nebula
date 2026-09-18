@@ -5,7 +5,7 @@
 	icon = 'icons/obj/structures/bookcase.dmi'
 	icon_state = "bookcase-damaged" // preview
 	material = /decl/material/solid/organic/wood/walnut
-	color = /decl/material/solid/organic/wood/walnut::color
+	color = /decl/material/solid/organic/wood/walnut::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	/// 1-indexed, pick a random overlay to add corresponding to "loot[rand(1, loot_states)]".
 	var/loot_states = 3
@@ -18,7 +18,7 @@
 
 /obj/structure/loot_pile/bookcase/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/loot_pile/bookcase/get_icon_states_to_use()
 	var/static/list/icon_states_to_use = list("bookcase-damaged", "fancy-damaged")

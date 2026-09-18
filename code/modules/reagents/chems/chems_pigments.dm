@@ -2,7 +2,7 @@
 	name = "pigment"
 	lore_text = "Intensely coloured powder." // then why is it a liquid?
 	taste_description = "the back of class"
-	color = "#888888"
+	liquid_color = "#888888"
 	overdose = 5
 	hidden_from_codex = TRUE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -11,52 +11,52 @@
 
 /decl/material/liquid/pigment/red
 	name = "red pigment"
-	color = "#fe191a"
+	liquid_color = "#fe191a"
 	uid = "chem_pigment_red"
 
 /decl/material/liquid/pigment/orange
 	name = "orange pigment"
-	color = "#ffbe4f"
+	liquid_color = "#ffbe4f"
 	uid = "chem_pigment_orange"
 
 /decl/material/liquid/pigment/yellow
 	name = "yellow pigment"
-	color = "#fdfe7d"
+	liquid_color = "#fdfe7d"
 	uid = "chem_pigment_yellow"
 
 /decl/material/liquid/pigment/green
 	name = "green pigment"
-	color = "#18a31a"
+	liquid_color = "#18a31a"
 	uid = "chem_pigment_green"
 
 /decl/material/liquid/pigment/blue
 	name = "blue pigment"
-	color = "#247cff"
+	liquid_color = "#247cff"
 	uid = "chem_pigment_blue"
 
 /decl/material/liquid/pigment/purple
 	name = "purple pigment"
-	color = "#cc0099"
+	liquid_color = "#cc0099"
 	uid = "chem_pigment_purple"
 
 /decl/material/liquid/pigment/grey //Mime
 	name = "grey pigment"
-	color = "#808080"
+	liquid_color = "#808080"
 	uid = "chem_pigment_grey"
 
 /decl/material/liquid/pigment/brown //Rainbow
 	name = "brown pigment"
-	color = "#846f35"
+	liquid_color = "#846f35"
 	uid = "chem_pigment_brown"
 
 /decl/material/liquid/pigment/grey //Mime
 	name = "grey pigment"
-	color = "#808080"
+	liquid_color = "#808080"
 	uid = "chem_pigment_grey"
 
 /decl/material/liquid/pigment/black
 	name = "black pigment"
-	color = "#222222"
+	liquid_color = "#222222"
 	uid = "chem_pigment_black"
 
 /decl/material/liquid/pigment/black/ink
@@ -66,7 +66,7 @@
 
 /decl/material/liquid/pigment/white
 	name = "white pigment"
-	color = "#aaaaaa"
+	liquid_color = "#aaaaaa"
 	uid = "chem_pigment_white"
 
 /decl/material/liquid/paint_stripper
@@ -74,7 +74,7 @@
 	uid = "liquid_paint_remover"
 	lore_text = "A highly toxic compound used as an effective paint stripper."
 	taste_description = "bleach and acid"
-	color = "#a0a0a0"
+	liquid_color = "#a0a0a0"
 	metabolism = REM * 0.2
 	value = 0.1
 	solvent_power = MAT_SOLVENT_MODERATE
@@ -102,7 +102,7 @@
 	name = "paint"
 	lore_text = "This paint will stick to almost any object."
 	taste_description = "chalk"
-	color = "#808080"
+	liquid_color = "#808080"
 	overdose = REAGENTS_OVERDOSE * 0.5
 	color_weight = 0
 	uid = "chem_pigment_paint"

@@ -4,7 +4,7 @@
 	icon_state          = ICON_STATE_WORLD
 	desc                = "A happy little $NAME$ smiles back at you!"
 	anchored            = TRUE
-	material            = /decl/material/solid/ice/snow
+	material            = /decl/material/liquid/water/snow
 	material_alteration = MAT_FLAG_ALTERATION_ALL // We override name and desc below.
 
 /obj/structure/snowman/Initialize(ml, _mat, _reinf_mat)

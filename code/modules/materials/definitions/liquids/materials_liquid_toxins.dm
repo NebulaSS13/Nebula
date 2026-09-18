@@ -4,7 +4,7 @@
 	lore_text = "Once toxic, now harmless."
 	taste_description = null
 	taste_mult = null
-	color = "#808080"
+	liquid_color = "#808080"
 	metabolism = REM
 	toxicity_targets_organ = null
 	toxicity = 0
@@ -17,7 +17,7 @@
 	uid = "liquid_plasticide"
 	lore_text = "Liquid plastic, do not eat."
 	taste_description = "plastic"
-	color = "#cf3600"
+	liquid_color = "#cf3600"
 	toxicity = 5
 	taste_mult = 1.2
 	metabolism = REM * 0.25
@@ -29,7 +29,7 @@
 	uid = "liquid_amatoxin"
 	lore_text = "A powerful poison derived from certain species of mushroom."
 	taste_description = "mushroom"
-	color = "#792300"
+	liquid_color = "#792300"
 	toxicity = 10
 	heating_products = list(
 		/decl/material/liquid/denatured_toxin = 1
@@ -47,7 +47,7 @@
 	uid = "liquid_carpotoxin"
 	lore_text = "A deadly neurotoxin produced by the dreaded space carp."
 	taste_description = "fish"
-	color = "#003333"
+	liquid_color = "#003333"
 	toxicity_targets_organ = BP_BRAIN
 	toxicity = 10
 	heating_products = list(
@@ -66,7 +66,7 @@
 	uid = "liquid_spider_venom"
 	lore_text = "A deadly necrotic toxin produced by giant spiders to disable their prey."
 	taste_description = "vile poison"
-	color = "#91d895"
+	liquid_color = "#91d895"
 	toxicity_targets_organ = BP_LIVER
 	toxicity = 5
 	heating_products = list(
@@ -106,7 +106,7 @@
 	uid = "liquid_cyanide"
 	lore_text = "A highly toxic chemical."
 	taste_mult = 0.6
-	color = "#cf3600"
+	liquid_color = "#cf3600"
 	melting_point = 261
 	boiling_point = 299
 	toxicity = 20
@@ -124,7 +124,7 @@
 	uid = "liquid_heartstopper"
 	lore_text = "A potent cardiotoxin that paralyzes the heart."
 	taste_description = "intense bitterness"
-	color = "#6b833b"
+	liquid_color = "#6b833b"
 	toxicity = 16
 	overdose = REAGENTS_OVERDOSE / 3
 	metabolism = REM * 2
@@ -151,7 +151,7 @@
 	uid = "liquid_zombie_powder"
 	lore_text = "A strong neurotoxin that puts the subject into a death-like state."
 	taste_description = "death"
-	color = "#669900"
+	liquid_color = "#669900"
 	metabolism = REM
 	toxicity = 3
 	toxicity_targets_organ = BP_BRAIN
@@ -189,7 +189,7 @@
 	taste_description = "plant food"
 	taste_mult = 0.5
 	toxicity = 0.5 // It's not THAT poisonous.
-	color = "#664330"
+	liquid_color = "#664330"
 	metabolism = REM * 0.25
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
@@ -205,7 +205,7 @@
 	uid = "liquid_weedkiller"
 	lore_text = "A harmful toxic mixture to kill plantlife. Do not ingest!"
 	taste_mult = 1
-	color = "#49002e"
+	liquid_color = "#49002e"
 	toxicity = 4
 	heating_products = list(
 		/decl/material/liquid/bromide = 0.4,
@@ -224,7 +224,7 @@
 	coated_adjective = "tarry"
 	lore_text = "A dark, viscous liquid."
 	taste_description = "petroleum"
-	color = "#140b30"
+	liquid_color = "#140b30"
 	toxicity = 4
 	heating_products = list(
 		/decl/material/liquid/acetone         = 0.4,
@@ -243,7 +243,7 @@
 	uid = "liquid_hair_remover"
 	lore_text = "An extremely effective chemical depilator. Do not ingest."
 	taste_description = "acid"
-	color = "#d9ffb3"
+	liquid_color = "#d9ffb3"
 	toxicity = 1
 	overdose = REAGENTS_OVERDOSE
 	taste_mult = 1.2
@@ -261,7 +261,7 @@
 	uid = "liquid_corruption"
 	lore_text = "A filthy, oily substance which slowly churns of its own accord."
 	taste_description = "decaying blood"
-	color = "#800000"
+	liquid_color = "#800000"
 	taste_mult = 5
 	toxicity = 10
 	metabolism = REM * 5
@@ -293,7 +293,7 @@
 	uid = "liquid_acrylamide"
 	lore_text = "A colourless substance formed when food is burned. Rumoured to cause cancer, but mostly just nasty to eat."
 	taste_description = "bitter char"
-	color = "#a39894"
+	liquid_color = "#a39894"
 	toxicity = 2
 	taste_mult = 2
 
@@ -303,7 +303,7 @@
 	uid = "liquid_bromide"
 	lore_text = "A dark, nearly opaque, red-orange, toxic element."
 	taste_description = "pestkiller"
-	color = "#4c3b34"
+	liquid_color = "#4c3b34"
 	toxicity = 3
 	taste_mult = 1.2
 	metabolism = REM * 0.25
@@ -315,7 +315,7 @@
 	taste_mult = 0 //mercury apparently is tasteless. IDK
 	melting_point = 234
 	boiling_point = 629
-	color = "#484848"
+	liquid_color = "#484848"
 	value = 0.5
 	narcosis = 5
 
@@ -325,4 +325,4 @@
 	lore_text = "A mold is a fungus that causes biodegradation of natural materials. This variant contains mycotoxins, and is dangerous to humans."
 	taste_description = "mold"
 	toxicity = 5
-	color = "#635656"
+	liquid_color = "#635656"

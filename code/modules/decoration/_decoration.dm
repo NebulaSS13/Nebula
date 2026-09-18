@@ -98,7 +98,7 @@
 			return decoration_object.paint_color
 		var/decl/material/decoration_material = decoration_data["material"]
 		if(istype(decoration_material))
-			return decoration_material.color
+			return decoration_material.solid_color
 		if(istype(decoration_object))
 			return decoration_object.color
 	return COLOR_WHITE

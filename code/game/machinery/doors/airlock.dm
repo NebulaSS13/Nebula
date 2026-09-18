@@ -1043,7 +1043,7 @@ About the new airlock wires panel:
 
 	if(reinf_material)
 		paintable |= PAINT_WINDOW_PAINTABLE
-		paint_window(reinf_material.color)
+		paint_window(reinf_material.solid_color)
 
 /obj/machinery/door/airlock/inherit_from_assembly(obj/structure/door_assembly/assembly)
 	//if assembly is given, create the new door from the assembly
@@ -1056,7 +1056,7 @@ About the new airlock wires panel:
 				max_health = 300
 				explosion_resistance = 5
 			else
-				door_color = assembly.reinf_material.color
+				door_color = assembly.reinf_material.solid_color
 		else
 			door_color = assembly.door_color
 
@@ -1138,7 +1138,7 @@ About the new airlock wires panel:
 	if (new_color)
 		window_color = new_color
 	else if (reinf_material)
-		window_color = reinf_material.color
+		window_color = reinf_material.solid_color
 	else
 		window_color = GLASS_COLOR
 	queue_icon_update()

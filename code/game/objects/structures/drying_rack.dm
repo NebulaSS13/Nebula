@@ -4,7 +4,7 @@
 	icon = 'icons/obj/drying_rack.dmi'
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/metal/steel
-	color = /decl/material/solid/metal/steel::color
+	color = /decl/material/solid/metal/steel::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/obj/item/drying
 
@@ -20,7 +20,7 @@
 
 /obj/structure/drying_rack/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/drying_rack/Destroy()
 	QDEL_NULL(drying)

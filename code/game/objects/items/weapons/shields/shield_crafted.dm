@@ -35,4 +35,4 @@
 /obj/item/shield/crafted/on_update_icon()
 	. = ..()
 	if(istype(reinforcement_material))
-		add_overlay(overlay_image(icon, "[icon_state]-reinforcement", reinforcement_material.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-reinforcement", reinforcement_material.solid_color, RESET_COLOR))

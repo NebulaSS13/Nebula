@@ -4,7 +4,7 @@
 	singular_name     = MAT_NAME + " floor tile";                          \
 	plural_name       = MAT_NAME + " floor tiles";                         \
 	desc              = "An easy-to-fit " + MAT_NAME + " floor tile.";     \
-	color             = /decl/material/solid/organic/wood/MAT_TYPE::color; \
+	color             = /decl/material/solid/organic/wood/MAT_TYPE::solid_color; \
 	material          = /decl/material/solid/organic/wood/MAT_TYPE;        \
 }
 
@@ -16,7 +16,7 @@
 	charge_costs      = list(250)
 	stack_merge_type  = /obj/item/stack/tile/wood/laminate
 	build_type        = /obj/item/stack/tile/wood/laminate
-	color             = /decl/material/solid/organic/wood/chipboard::color
+	color             = /decl/material/solid/organic/wood/chipboard::solid_color
 	material          = /decl/material/solid/organic/wood/chipboard
 	max_health        = ITEM_HEALTH_NO_DAMAGE
 	is_spawnable_type = FALSE

@@ -212,7 +212,10 @@ var/global/list/materials_by_gas_symbol = list()
 	var/inhale_met = 0
 	var/overdose = 0
 	var/scannable = 0 // Shows up on health analyzers.
-	var/color = COLOR_BEIGE
+	var/solid_color
+	var/liquid_color
+	var/gas_color
+
 	// How much variance in color do objects of this material have, in fraction of maximum brightness/hue.
 	var/color_variance = 0.04
 	var/color_weight = 1
@@ -352,6 +355,11 @@ var/global/list/materials_by_gas_symbol = list()
 	// Use solid_name for adjective_name so that we get "ice bracelet" instead of "water bracelet" for things made of water below 0C.
 	adjective_name ||= solid_name
 	adjective_name ||= use_name
+
+	// Default colours.
+	solid_color    ||= COLOR_BEIGE
+	liquid_color   ||= solid_color
+	gas_color      ||= solid_color
 
 	// Null/clear a bunch of physical vars as this material is fake.
 	if(visual_only)
@@ -523,8 +531,12 @@ var/global/list/materials_by_gas_symbol = list()
 					if(!check_state_in_icon(num2text(i), sub_icon))
 						. += "'[sub_icon]' - missing directional reinf icon state '[i]'"
 
-	if(length(color) != 7)
-		. += "invalid color (not #RRGGBB)"
+	if(length(solid_color) != 7)
+		. += "invalid solid_color (not #RRGGBB)"
+	if(length(liquid_color) != 7)
+		. += "invalid liquid_color (not #RRGGBB)"
+	if(length(gas_color) != 7)
+		. += "invalid gas_color (not #RRGGBB)"
 
 // Return the matter comprising this material.
 /decl/material/proc/get_matter()

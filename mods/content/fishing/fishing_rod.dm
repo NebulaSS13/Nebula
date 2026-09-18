@@ -6,7 +6,7 @@
 	name = "fishing rod"
 	desc = "A simple fishing rod with eyelets for stringing a line."
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 	matter = null
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	icon = 'mods/content/fishing/icons/fishing_rod.dmi'
@@ -342,7 +342,7 @@
 	name = "advanced fishing rod"
 	desc = "It's a fishing rod, an enhanced fiberglass Telescope Ultralight 47; the latest model."
 	material = /decl/material/solid/fiberglass
-	color = /decl/material/solid/fiberglass::color
+	color = /decl/material/solid/fiberglass::solid_color
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)

@@ -7,9 +7,9 @@
 	return material?.pew_icon || initial(icon)
 
 /obj/structure/chair/bench/pew/mahogany
-	color    = /decl/material/solid/organic/wood/mahogany::color
+	color    = /decl/material/solid/organic/wood/mahogany::solid_color
 	material = /decl/material/solid/organic/wood/mahogany
 
 /obj/structure/chair/bench/pew/ebony
-	color    = /decl/material/solid/organic/wood/ebony::color
+	color    = /decl/material/solid/organic/wood/ebony::solid_color
 	material = /decl/material/solid/organic/wood/ebony

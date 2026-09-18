@@ -46,7 +46,7 @@
 	storage                = /datum/storage/apiary
 	material_alteration    = MAT_FLAG_ALTERATION_ALL
 	material               = /decl/material/solid/organic/wood/oak
-	color                  = /decl/material/solid/organic/wood/oak::color
+	color                  = /decl/material/solid/organic/wood/oak::solid_color
 	obj_flags              = OBJ_FLAG_ANCHORABLE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 

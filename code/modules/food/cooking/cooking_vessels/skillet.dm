@@ -8,4 +8,4 @@
 
 /obj/item/chems/cooking_vessel/skillet/iron
 	material = /decl/material/solid/metal/iron
-	color = /decl/material/solid/metal/iron::color
+	color = /decl/material/solid/metal/iron::solid_color

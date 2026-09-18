@@ -7,11 +7,11 @@
 	presentation_flags = PRESENTATION_FLAG_NAME
 	obj_flags          = OBJ_FLAG_HOLLOW | OBJ_FLAG_INSULATED_HANDLE // TODO: dynamically add/remove OBJ_FLAG_INSULATED_HANDLE based on handle material?
 	material           = /decl/material/solid/stone/ceramic
-	color              = /decl/material/solid/stone/ceramic::color
+	color              = /decl/material/solid/stone/ceramic::solid_color
 
 /obj/item/chems/cooking_vessel/baking_dish/earthenware
 	material = /decl/material/solid/stone/pottery
-	color = /decl/material/solid/stone/pottery::color
+	color = /decl/material/solid/stone/pottery::solid_color
 
 // Baking dishes have to be in a kiln or oven (structure or machine) to cook.
 // Holding it in your hands or having it on a turf doesn't count.

@@ -7,7 +7,7 @@
 	desc        = "A pair of heavy stones connected by an axle, used to grind plants and minerals into powder."
 	icon        = 'icons/obj/structures/quern.dmi'
 	material    = /decl/material/solid/stone/granite
-	color       = /decl/material/solid/stone/granite::color
+	color       = /decl/material/solid/stone/granite::solid_color
 	storage     = /datum/storage/hopper/mortar/quern
 	work_skill  = SKILL_COOKING // Maybe?
 	chem_volume = 1000 // Same as reagent dispensers. Possibly too large?

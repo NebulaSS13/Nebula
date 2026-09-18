@@ -6,7 +6,7 @@
 	w_class = ITEM_SIZE_TINY
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	material = /decl/material/solid/quartz
-	color = /decl/material/solid/quartz::color
+	color = /decl/material/solid/quartz::solid_color
 
 /obj/item/attackby(obj/item/used_item, mob/user)
 	if(istype(used_item, /obj/item/whetstone) && try_sharpen_with(user, used_item))

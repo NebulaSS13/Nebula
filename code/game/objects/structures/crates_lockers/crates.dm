@@ -320,7 +320,7 @@
 	closet_appearance = /decl/closet_appearance/crate/chest
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 	var/icon/overlay_icon = 'icons/obj/closets/bases/chest.dmi'
 	// TODO: Rework chest crafting so that this can use reinf_material instead.
 	/// The material used for the opacity and color of the trim overlay.
@@ -341,13 +341,13 @@
 	. = ..()
 	if(istype(overlay_material))
 		var/overlay_state = opened ? "open-overlay" : "base-overlay"
-		var/image/trim = overlay_image(overlay_icon, overlay_state, overlay_material.color, RESET_COLOR|RESET_ALPHA)
+		var/image/trim = overlay_image(overlay_icon, overlay_state, overlay_material.solid_color, RESET_COLOR|RESET_ALPHA)
 		trim.alpha = clamp((50 + overlay_material.opacity * 255), 0, 255)
 		add_overlay(trim)
 
 /obj/structure/closet/crate/chest/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/closet/crate/engineering
 	name = "engineering crate"
