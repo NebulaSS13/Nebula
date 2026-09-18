@@ -14,10 +14,6 @@
 		else
 			playsound(src, 'sound/effects/ghost2.ogg', 10, 5)
 
-/datum/trader/ship/clothingshop/hatglovesaccessories/New()
-	..()
-	possible_trading_items[/obj/item/clothing/head/culthood] = TRADER_BLACKLIST_ALL
-
 /mob/living/silicon/ai
 	shouldnt_see = list(/obj/effect/rune)
 
