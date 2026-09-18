@@ -35,7 +35,7 @@
 	connected_port.on = 1 //Activate port updates
 
 	if(toggle_anchor)
-		movable_holder.anchored = TRUE //Prevent movement
+		movable_holder.set_anchored(TRUE) //Prevent movement
 
 	//Actually enforce the air sharing
 	var/datum/pipe_network/network = connected_port.return_network(holder)
@@ -57,7 +57,7 @@
 	var/atom/movable/movable_holder = holder
 
 	if(toggle_anchor)
-		movable_holder.anchored = FALSE
+		movable_holder.set_anchored(FALSE)
 
 	connected_port.connected_device = null
 	connected_port = null

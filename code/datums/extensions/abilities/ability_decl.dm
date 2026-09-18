@@ -355,7 +355,7 @@
 	var/obj/effect/overlay/ability_overlay = new(overlay_loc)
 	ability_overlay.icon = overlay_icon
 	ability_overlay.icon_state = overlay_icon_state
-	ability_overlay.anchored = TRUE
+	ability_overlay.set_anchored(TRUE)
 	ability_overlay.set_density(FALSE)
 	QDEL_IN(ability_overlay, overlay_lifespan)
 

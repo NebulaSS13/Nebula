@@ -867,7 +867,7 @@ About the new airlock wires panel:
 	if(moved)
 		spark_at(da, amount=5, cardinal_only = TRUE)
 	else
-		da.anchored = TRUE
+		da.set_anchored(TRUE)
 	da.state = 1
 	da.created_name = name
 	da.update_icon()

@@ -188,5 +188,5 @@
 
 /atom/movable/PopulateClone(atom/movable/clone)
 	clone = ..()
-	clone.anchored = anchored
+	clone.set_anchored(anchored)
 	return clone

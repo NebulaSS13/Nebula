@@ -207,7 +207,7 @@
 	if(!do_after(user, 4 SECONDS, src) || QDELETED(src))
 		return TRUE
 	playsound(src.loc, anchor_sound, 100, 1)
-	anchored = !anchored
+	set_anchored(!anchored)
 	visible_message(SPAN_NOTICE("\The [user] has [anchored ? "secured" : "unsecured"] \the [src] with \the [tool]."))
 	update_icon()
 	return TRUE

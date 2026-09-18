@@ -308,7 +308,7 @@
 
 	loading.forceMove(loc)
 	loading.set_dir(dir)
-	loading.anchored = TRUE
+	loading.set_anchored(TRUE)
 
 	load = loading
 
@@ -357,7 +357,7 @@
 
 	load.forceMove(dest)
 	load.set_dir(get_dir(loc, dest))
-	load.anchored = FALSE		//we can only load non-anchored items, so it makes sense to set this to false
+	load.set_anchored(FALSE)		//we can only load non-anchored items, so it makes sense to set this to false
 	if(ismob(load)) //atoms should probably have their own procs to define how their pixel shifts and layer can be manipulated, someday
 		var/mob/M = load
 		M.pixel_x = M.default_pixel_x

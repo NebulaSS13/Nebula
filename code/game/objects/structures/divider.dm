@@ -40,9 +40,9 @@
 	update_divider()
 
 /obj/structure/divider/proc/update_divider()
-	anchored = extended
-	density  = extended
-	opacity  = extended || (material.opacity < 0.5)
+	set_anchored(extended)
+	set_density(extended)
+	set_opacity(extended || (material.opacity < 0.5))
 	update_icon()
 
 /obj/structure/divider/on_update_icon()

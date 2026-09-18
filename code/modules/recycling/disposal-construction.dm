@@ -223,7 +223,7 @@
 	return // No flipping
 
 /obj/structure/disposalconstruct/machine/wrench_down(anchor)
-	anchored = anchor
+	set_anchored(anchor)
 	set_density(1) // We don't want disposal bins or outlets to go density 0
 	update_icon()
 

@@ -100,16 +100,16 @@
 		return TRUE
 
 	else if(IS_WRENCH(used_item))
-		anchored = !anchored
+		set_anchored(!anchored)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		if(anchored)
-			user.visible_message("\The [user] secures \the [src] to the floor.", 
-				"You secure \the [src] to the floor.", 
+			user.visible_message("\The [user] secures \the [src] to the floor.",
+				"You secure \the [src] to the floor.",
 				"You hear a ratchet."
 			)
 		else
-			user.visible_message("\The [user] unsecures \the [src] from the floor.", 
-				"You unsecure \the [src] from the floor.", 
+			user.visible_message("\The [user] unsecures \the [src] from the floor.",
+				"You unsecure \the [src] from the floor.",
 				"You hear a ratchet."
 			)
 		return TRUE

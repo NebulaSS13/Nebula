@@ -101,7 +101,7 @@
 /obj/machinery/flasher/portable/attackby(obj/item/used_item, mob/user)
 	if(IS_WRENCH(used_item))
 		add_fingerprint(user)
-		src.anchored = !src.anchored
+		set_anchored(!anchored)
 
 		if (!src.anchored)
 			user.show_message(text("<span class='warning'>[src] can now be moved.</span>"))

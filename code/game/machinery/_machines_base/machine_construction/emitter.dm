@@ -115,7 +115,7 @@
 		"\The [user] secures \the [machine] to the floor.",
 		"You secure the external reinforcing bolts to the floor.",
 		"You hear a ratchet.")
-	machine.anchored = TRUE
+	machine.set_anchored(TRUE)
 	return TRUE
 
 /decl/machine_construction/emitter/unsecured/welder_interaction(obj/item/fuelled_tool/welding/welder, mob/user, obj/machinery/emitter/machine)
@@ -138,7 +138,7 @@
 		"\The [user] unsecures \the [machine]'s reinforcing bolts from the floor.",
 		"You undo the external reinforcing bolts.",
 		"You hear a ratchet.")
-	machine.anchored = FALSE
+	machine.set_anchored(FALSE)
 	return TRUE
 
 /decl/machine_construction/emitter/anchored/welder_interaction(obj/item/fuelled_tool/welding/welder, mob/user, obj/machinery/emitter/machine)

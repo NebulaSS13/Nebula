@@ -43,7 +43,7 @@
 
 /obj/structure/supply_beacon/attackby(var/obj/item/used_item, var/mob/user)
 	if(!activated && IS_WRENCH(used_item))
-		anchored = !anchored
+		set_anchored(!anchored)
 		user.visible_message(SPAN_NOTICE("\The [user] [anchored ? "secures" : "unsecures"] \the [src]."))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		return TRUE

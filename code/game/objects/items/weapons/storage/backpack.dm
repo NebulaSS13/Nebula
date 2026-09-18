@@ -345,7 +345,7 @@
 
 /obj/item/backpack/satchel/flat/hide(var/i)
 	set_invisibility(i ? 101 : 0)
-	anchored = i ? TRUE : FALSE
+	set_anchored(i ? TRUE : FALSE)
 	alpha = i ? 128 : initial(alpha)
 
 /obj/item/backpack/satchel/flat/attackby(obj/item/used_item, mob/user)
