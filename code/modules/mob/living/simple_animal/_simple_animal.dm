@@ -227,7 +227,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	..()
 	if(stat == CONSCIOUS && is_cloaked())
 		animate(src, alpha = cloaked_alpha, time = cloak_anim_time)
-	else
+	else if(alpha == cloaked_alpha)
 		animate(src, alpha = initial(alpha), time = cloak_anim_time)
 
 /mob/living/simple_animal/get_eye_colour()
