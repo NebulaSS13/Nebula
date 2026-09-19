@@ -11,12 +11,12 @@
 	var/assign_target = FALSE
 
 /obj/mimic_master/slice/Initialize(mapload, depth)
-	..(mapload)
+	. = ..(mapload)
 	plane = root_plane - ZM_DEPTH_TO_OFFSET_RAW(depth, stack_size) + slot
 	ASSERT(slice_kind != null)
 	ASSERT(slot != null)
 	name = "[slice_prefix] [slice_kind] on [depth] slot [slot] ([plane])"
-	if (assign_target)	// This is used for the basic and blur slices.
+	if (assign_target)	// This is used for the basic slice.
 		render_target = ZM_SLICE(slice_kind, depth)
 
 /obj/mimic_master/slice/virtual
