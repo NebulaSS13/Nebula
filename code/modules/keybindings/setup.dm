@@ -85,7 +85,7 @@
 		winset(src, null, "input.background-color=[COLOR_INPUT_DISABLED]")
 
 	//Do we have bad bindings at all, and if so, do we actually care?
-	if(printables?.len && !prefs.hotkeys && prefs.fc_hotkey_nag)
+	if(printables?.len && !prefs.hotkeys && prefs.focus_chat_hotkey_nag)
 		to_chat(src, "<span class='boldannounce'>Hey, you might have some bad keybinds!</span>\n\
 		<span class='notice'>The following keys are bound despite Focus Chat being enabled. These binds are not applied.\n\
 		The code used to generate this list is imperfect, You can silence this warning in your Control preferences.</span>\n\
