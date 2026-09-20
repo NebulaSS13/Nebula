@@ -23,8 +23,8 @@ SUBSYSTEM_DEF(overlays)
 	// Setting this to TRUE on a non-movable will explode.
 	var/tmp/context_needs_automangle
 
-/// How many items should we process before we check for yield? Increasing this increases efficiency, but also raises risk of overrun.
-#define OVR_PUMP_RATIO 4
+/// How many items should we process before we check for yield? Increasing this increases efficiency, but also raises risk of overrun. This was tuned for world.fps = 100, but it should be fine at lower values.
+#define OVR_PUMP_RATIO 1000
 /// Initialize state required for OVR_MC_TRY_YIELD.
 #define OVR_PUMP_INIT var/__yield
 
@@ -442,9 +442,14 @@ SUBSYSTEM_DEF(overlays)
 			var/alist/new_grouped = other.grouped_overlays.Copy()
 			if (exclude_groups)
 				new_grouped -= exclude_groups
-			for (var/k,v in new_grouped)
-				if (islist(v))
-					new_grouped[k] = v:Copy()
+			if (length(new_grouped))
+				for (var/k,v in new_grouped)
+					if (islist(v))
+						new_grouped[k] = v:Copy()
+				grouped_overlays = new_grouped
+			else
+				grouped_overlays = null
+				remove_flags |= ZMM_AUTOMANGLE_GRP
 		else
 			grouped_overlays = null
 			remove_flags |= ZMM_AUTOMANGLE_GRP
