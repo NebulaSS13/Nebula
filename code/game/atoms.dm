@@ -1083,7 +1083,7 @@
 		T.unregister_dangerous_object(src)
 
 // Test for if stepping on a tile containing this obj is safe to do, used for things like landmines and cliffs.
-/atom/proc/is_safe_to_step(mob/living/stepper)
+/atom/proc/is_safe_to_step(atom/movable/mover)
 	return TRUE
 
 //Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
