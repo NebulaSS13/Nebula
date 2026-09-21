@@ -60,6 +60,8 @@ var/global/list/unit_test_obj_random_weights_by_type = list()
 		if(!weight)
 			var/obj/random/R = new path()
 			var/type = unit_test_select_heaviest(R.spawn_choices())
+			while(islist(type))
+				type = unit_test_select_heaviest(type)
 			weight = unit_test_weight_of_path(type)
 			global.unit_test_obj_random_weights_by_type[path] = weight
 		return weight
