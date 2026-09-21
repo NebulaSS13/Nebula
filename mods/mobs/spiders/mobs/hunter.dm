@@ -27,10 +27,8 @@
 	max_health = 70
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	_available_maneuvers = null
-
-/mob/living/simple_animal/hostile/giant_spider/hunter/small/Initialize(mapload, atom/parent)
-	. = ..()
-	set_scale(0.75)
+	icon_scale_x = 0.75
+	icon_scale_y = 0.75
 
 /mob/living/simple_animal/hostile/giant_spider/hunter/get_door_pry_time()
 	return 5 SECONDS
