@@ -96,12 +96,12 @@ To have the new merchant use the decl, place it inside of the merchant's `supply
 ## Make Merchants buy reagents/gases/material sheets?
 To have merchants correctly **buy** non-standard items, create a subtype of one of the following:
 * `/decl/merchant_potential_commodities/reagents`, for buying reagents (drinks, medicine, liquified metals).
-* `/decl/merchant_potential_commodities/materials`, for buying lots of different kinds of materials, such as material stacks (ores, sheets).
+* `/decl/merchant_potential_commodities/materials`, for buying items made out of lots of different kinds of materials, such as material stacks (ores, sheets).
 * `/decl/merchant_potential_commodities/gases`, for gases (oxygen, air, steam, vaporized blood).
 
 These subtypes automatically include some required information to have merchants correctly identify non-standard things.
 
-Some of these types will need to have additional information added in order to function, such as `/material_stacks` having a `stack_types` list. You can either look at the code for the specific subtype you want to use, or consult the Standard Merchants modpack to see how it uses these types.
+Some of these types will need to have additional information added in order to function, such as `/materials` having a `instance_types` list. You can either look at the code for the specific subtype you want to use, or consult the Standard Merchants modpack to see how it uses these types.
 
 If you want merchants to **sell** these things, no special subtype is required, just have the merchant sell a prefilled type of something, like a gas canister.
 
