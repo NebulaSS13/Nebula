@@ -649,7 +649,7 @@ var/global/_unit_test_sort_junctions = list()
 		var/turf/pipe_turf = get_turf(P)
 		if(P.leaking && !(locate(/obj/abstract/landmark/allowed_leak) in pipe_turf))
 			failures++
-			log_bad("Following pipe is leaking: [log_info_line(pipe_turf)], area is [get_area(pipe_turf)]")
+			log_bad("Following pipe is leaking: [log_info_line(P)], area is [get_area(pipe_turf)]")
 
 	if(failures)
 		fail("[failures] pipe\s leaking without allowed leak landmark!")
