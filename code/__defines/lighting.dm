@@ -29,6 +29,7 @@
 #define LIGHTING_CORNER_GENERATE_UP    1
 #define LIGHTING_CORNER_GENERATE_BOTH  0
 #define LIGHTING_CORNER_GENERATE_DOWN -1
+#define LIGHTING_CORNER_DO_NOT_SCAN "do_not_scan"
 
 // If I were you I'd leave this alone.
 #define LIGHTING_BASE_MATRIX \
