@@ -51,10 +51,8 @@
 /obj/item/natural_weapon/pincers/giant
 	_base_attack_force = 15
 	attack_verb = list("snipped", "pinched", "crushed")
-
-/mob/living/simple_animal/hostile/giant_crab/Initialize() //embiggen
-	. = ..()
-	set_scale(1.5)
+	icon_scale_x = 1.5
+	icon_scale_y = 1.5
 
 /mob/living/simple_animal/hostile/giant_crab/get_door_pry_time()
 	return 2 SECONDS

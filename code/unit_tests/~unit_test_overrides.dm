@@ -75,7 +75,8 @@ var/global/list/unit_test_obj_random_weights_by_type = list()
 	if(istype(path, /datum))
 		var/datum/D = path
 		return D.unit_test_get_weight()
-
+	if(ispath(path, /turf))
+		return ITEM_SIZE_LARGE_STRUCTURE
 	CRASH("Unhandled path: [log_info_line(path)]")
 
 
