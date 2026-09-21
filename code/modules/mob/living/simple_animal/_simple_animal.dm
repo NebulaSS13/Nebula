@@ -226,10 +226,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	else if(current_posture?.prone && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
 		icon_state += "-resting"
 	..()
-	if(stat == CONSCIOUS && is_cloaked())
-		animate(src, alpha = cloaked_alpha, time = cloak_anim_time)
-	else
-		animate(src, alpha = initial(alpha), time = cloak_anim_time)
+	if(can_use_cloak)
+		var/cloak_alpha = (stat == CONSCIOUS && is_cloaked()) ? cloaked_alpha : initial(alpha)
+		if(alpha != cloak_alpha)
+			animate(src, alpha = cloak_alpha, time = cloak_anim_time, flags = ANIMATION_PARALLEL)
 
 /mob/living/simple_animal/get_eye_colour()
 	return eye_color || ..()
