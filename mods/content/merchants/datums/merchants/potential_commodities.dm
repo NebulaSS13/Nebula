@@ -141,36 +141,36 @@
 			. += new /datum/merchant_commodity(requirements, _item_quantity = assign_quantity(), _item_quantity_method = /decl/merchant_quantity_method/reagent_units)
 
 
-/// Easily creates material stacks, which would otherwise run into issues with map-spawn instances conflicting with instances created 'natually' in-round.
+/// Easily creates a lot of demands with distinct material demands, such as material stacks, which would otherwise run into issues with map-spawn instances conflicting with instances created 'natually' in-round.
 /// Only works with demand.
-/decl/merchant_potential_commodities/material_stacks
-	abstract_type = /decl/merchant_potential_commodities/material_stacks
-	var/list/stack_types = list(/obj/item/stack/material)
+/decl/merchant_potential_commodities/materials
+	abstract_type = /decl/merchant_potential_commodities/materials
+	var/list/instance_types = list(/obj/item/stack/material)
 
-/decl/merchant_potential_commodities/material_stacks/create_datums(transaction_direction)
+/decl/merchant_potential_commodities/materials/create_datums(transaction_direction)
 	ASSERT(transaction_direction == /datum/merchant::TRANSACTION_BUYING)
 	. = list()
 
 	var/material_types = filter_type_paths(type_instructions)
 
-	for(var/stack_type in stack_types)
+	for(var/type_path in instance_types)
 		for(var/material_type in material_types)
 			var/list/requirements = list()
-			requirements[/decl/merchant_commodity_requirement/type/type_or_subtype] = stack_type
+			requirements[/decl/merchant_commodity_requirement/type/type_or_subtype] = type_path
 			requirements[/decl/merchant_commodity_requirement/material] = material_type
 
 			. += new /datum/merchant_commodity(requirements, _item_quantity = assign_quantity())
 
 
-/decl/merchant_potential_commodities/material_stacks/all_mineable_ores
+/decl/merchant_potential_commodities/materials/all_mineable_ores
 	var/list/allowed_strata_types = list(
 		/decl/strata/igneous,
 		/decl/strata/sedimentary,
 		/decl/strata/metamorphic
 	)
-	stack_types = list(/obj/item/stack/material/ore)
+	instance_types = list(/obj/item/stack/material/ore)
 
-/decl/merchant_potential_commodities/material_stacks/all_mineable_ores/Initialize()
+/decl/merchant_potential_commodities/materials/all_mineable_ores/Initialize()
 	. = ..()
 	type_instructions = list()
 

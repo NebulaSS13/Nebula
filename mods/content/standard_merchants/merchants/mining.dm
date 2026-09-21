@@ -33,7 +33,7 @@
 	supply_potential = list(/decl/merchant_potential_commodities/mining_store_supply)
 	demand_potential = list(
 		/decl/merchant_potential_commodities/mining_store_demand,
-		/decl/merchant_potential_commodities/material_stacks/all_mineable_ores
+		/decl/merchant_potential_commodities/materials/all_mineable_ores
 	)
 
 /decl/merchant_potential_commodities/mining_store_supply

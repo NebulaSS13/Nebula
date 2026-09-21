@@ -10,8 +10,8 @@
 
 	)
 	demand_potential = list(
-		/decl/merchant_potential_commodities/material_stacks/damaged_ship_basic_supplies,
-		/decl/merchant_potential_commodities/material_stacks/damaged_ship_adv_supplies,
+		/decl/merchant_potential_commodities/materials/damaged_ship_basic_supplies,
+		/decl/merchant_potential_commodities/materials/damaged_ship_adv_supplies,
 		/decl/merchant_potential_commodities/reagents/damaged_ship_medications,
 		/decl/merchant_potential_commodities/gases/damaged_ship_gases
 	)
@@ -21,22 +21,22 @@
 	speech = /decl/merchant_speech/damaged_ship
 
 
-/decl/merchant_potential_commodities/material_stacks/damaged_ship_basic_supplies
+/decl/merchant_potential_commodities/materials/damaged_ship_basic_supplies
 	type_instructions = list(
 		/decl/material/solid/metal/steel		= MERCHANT_INCLUDE_THIS_TYPE,
 		/decl/material/solid/glass				= MERCHANT_INCLUDE_THIS_TYPE,
 		/decl/material/solid/organic/plastic	= MERCHANT_INCLUDE_THIS_TYPE
 	)
-	stack_types = list(/obj/item/stack/material/sheet)
+	instance_types = list(/obj/item/stack/material/sheet)
 	item_quantity_lower_bound = 50
 	item_quantity_upper_bound = 200
 
-/decl/merchant_potential_commodities/material_stacks/damaged_ship_adv_supplies
+/decl/merchant_potential_commodities/materials/damaged_ship_adv_supplies
 	type_instructions = list(
 		/decl/material/solid/metal/plasteel		= MERCHANT_INCLUDE_THIS_TYPE,
 		/decl/material/solid/glass/borosilicate	= MERCHANT_INCLUDE_THIS_TYPE
 	)
-	stack_types = list(/obj/item/stack/material/sheet)
+	instance_types = list(/obj/item/stack/material/sheet)
 	item_quantity_lower_bound = 15
 	item_quantity_upper_bound = 30
 

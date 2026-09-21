@@ -19,7 +19,7 @@
 	supply_potential = list(/decl/merchant_potential_commodities/vox_supply)
 	demand_potential = list(
 		/decl/merchant_potential_commodities/vox_merchant_organs,
-		/decl/merchant_potential_commodities/material_stacks/vox_merchant_shinies
+		/decl/merchant_potential_commodities/materials/vox_merchant_shinies
 	)
 	var/has_met_another_vox = FALSE
 
@@ -64,7 +64,7 @@
 		/obj/item/organ/internal/stomach = MERCHANT_INCLUDE_THIS_TYPE
 	)
 
-/decl/merchant_potential_commodities/material_stacks/vox_merchant_shinies
+/decl/merchant_potential_commodities/materials/vox_merchant_shinies
 	type_instructions = list(
 		/decl/material/solid/metal/steel		= MERCHANT_INCLUDE_THIS_TYPE,
 		/decl/material/solid/metal/uranium		= MERCHANT_INCLUDE_THIS_TYPE,
@@ -77,7 +77,7 @@
 		/decl/material/solid/metal/lead			= MERCHANT_INCLUDE_THIS_TYPE,
 		/decl/material/solid/gemstone/diamond	= MERCHANT_INCLUDE_THIS_TYPE
 	)
-	stack_types = list(/obj/item/stack/material)
+	instance_types = list(/obj/item/stack/material)
 
 
 /decl/merchant_speech/vox

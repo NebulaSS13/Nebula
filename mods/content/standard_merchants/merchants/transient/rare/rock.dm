@@ -9,13 +9,25 @@
 	)
 	will_pay_with_money = FALSE
 	supply_potential = list(/decl/merchant_potential_commodities/bobo_supply)
-	demand_potential = list(/decl/merchant_potential_commodities/material_stacks/all_mineable_ores)
+	demand_potential = list(
+		/decl/merchant_potential_commodities/materials/bobo_gemstone_demand,
+		/decl/merchant_potential_commodities/materials/all_mineable_ores
+	)
 
 
 /decl/merchant_potential_commodities/bobo_supply
 	type_instructions = list(
 		/obj/item/aiModule	= MERCHANT_INCLUDE_SUBTYPES
 	)
+
+/decl/merchant_potential_commodities/materials/bobo_gemstone_demand
+	type_instructions = list(
+		/decl/material/solid/gemstone/diamond	= MERCHANT_INCLUDE_THIS_TYPE,
+		/decl/material/solid/gemstone/ruby		= MERCHANT_INCLUDE_THIS_TYPE,
+		/decl/material/solid/gemstone/sapphire	= MERCHANT_INCLUDE_THIS_TYPE,
+		/decl/material/solid/gemstone/topaz		= MERCHANT_INCLUDE_THIS_TYPE
+	)
+	instance_types = list(/obj/item/gemstone)
 
 
 /decl/merchant_speech/rock
@@ -27,7 +39,7 @@
 	forbidden_offer = "Blub not want that! No!"
 	found_unwanted = "Blub only wants bocks. Give bocks."
 	how_much = "Blub wants bocks. Boo give bocks. Blub gives stuff blub found."
-	what_wanted_beginning = "Blub wants bocks. Big bocks, small bocks. Shiny bocks!"
+	what_wanted_beginning = "Blub wants bocks. Big bocks, small bocks. Shiny bocks! Bocks like"
 	compliment_failure = "Blub is just "+MERCHANT_TOKEN_MERCHANT_NAME+". What do boo mean?"
 	compliment_success = "Boo are a bood berson!"
 	insult_high_opinion = "Blub do not understand. Blub thought we were briends."

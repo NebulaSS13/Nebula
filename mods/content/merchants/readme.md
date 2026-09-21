@@ -96,7 +96,7 @@ To have the new merchant use the decl, place it inside of the merchant's `supply
 ## Make Merchants buy reagents/gases/material sheets?
 To have merchants correctly **buy** non-standard items, create a subtype of one of the following:
 * `/decl/merchant_potential_commodities/reagents`, for buying reagents (drinks, medicine, liquified metals).
-* `/decl/merchant_potential_commodities/material_stacks`, for buying material stacks (ores, sheets).
+* `/decl/merchant_potential_commodities/materials`, for buying lots of different kinds of materials, such as material stacks (ores, sheets).
 * `/decl/merchant_potential_commodities/gases`, for gases (oxygen, air, steam, vaporized blood).
 
 These subtypes automatically include some required information to have merchants correctly identify non-standard things.
