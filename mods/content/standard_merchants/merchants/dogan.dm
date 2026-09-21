@@ -17,7 +17,7 @@
 		/obj/item/gun/projectile/zipgun					= MERCHANT_INCLUDE_THIS_TYPE,
 		/obj/item/gun/projectile/bolt_action/sniper/ant	= MERCHANT_INCLUDE_THIS_TYPE,
 		/obj/item/gun/energy/laser/dogan				= MERCHANT_INCLUDE_THIS_TYPE,
-		/obj/item/gun/projectile/automatic/smg/usi		= MERCHANT_INCLUDE_THIS_TYPE,
+		/obj/item/gun/projectile/automatic/smg/uzi		= MERCHANT_INCLUDE_THIS_TYPE,
 		/obj/item/clothing/webbing/holster				= MERCHANT_INCLUDE_ALL
 	)
 
@@ -57,7 +57,3 @@
 	projectile_type = pick(/obj/item/projectile/beam/midlaser, /obj/item/projectile/beam/lasertag/red, /obj/item/projectile/beam)
 	return ..()
 
-
-/obj/item/gun/projectile/automatic/smg/usi
-	desc = "A cheap mass-produced SMG. This one looks especially run-down. Uses pistol rounds."
-	jam_chance = 20
