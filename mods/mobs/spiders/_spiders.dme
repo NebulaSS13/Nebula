@@ -22,7 +22,6 @@
 #include "mobs\ai_ambush.dm"
 #include "mobs\ai_cautious.dm"
 #include "mobs\ai_guard.dm"
-#include "mobs\ai_hunter.dm"
 #include "mobs\ai_nurse.dm"
 #include "mobs\ai_tunneller.dm"
 #include "mobs\carrier.dm"

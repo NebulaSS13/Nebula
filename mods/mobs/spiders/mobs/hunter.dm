@@ -7,6 +7,11 @@
 /decl/maneuver/leap/spider/show_initial_message(var/mob/living/user, var/atom/target)
 	user.visible_message(SPAN_WARNING("\The [user] reels back and prepares to launch itself at \the [target]!"))
 
+/datum/mob_controller/aggressive/giant_spider/hunter
+	hunt_chance = 12
+	break_stuff_probability = 30
+	can_escape_buckles = TRUE
+
 /mob/living/simple_animal/hostile/giant_spider/hunter
 	desc = "A monstrously huge black spider with shimmering eyes."
 	icon = 'mods/mobs/spiders/icons/spider_black.dmi'

@@ -39,8 +39,9 @@
 	P.on_hit(src, ., def_zone)
 	if(current_health < oldhealth)
 		remove_cloak()
-		if(istype(ai) && isliving(P.firer) && !ai.get_target() && !incapacitated(INCAPACITATION_KNOCKOUT))
-			ai.retaliate(P.firer)
+		var/atom/movable/firer = P.firer_ref?.resolve()
+		if(istype(ai) && isliving(firer) && !ai.get_target() && !incapacitated(INCAPACITATION_KNOCKOUT))
+			ai.retaliate(firer)
 
 // For visuals and blood splatters etc
 /mob/living/proc/bullet_impact_visuals(var/obj/item/projectile/P, var/def_zone, var/damage)
