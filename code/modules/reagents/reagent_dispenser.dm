@@ -170,11 +170,12 @@
 /obj/structure/reagent_dispensers/fueltank/bullet_act(var/obj/item/projectile/Proj)
 	//FIXME: Probably should check if it can actual inflict that structure damage first.
 	if(Proj.get_structure_damage())
-		if(isliving(Proj.firer))
+		var/atom/movable/firer = Proj.firer_ref?.resolve()
+		if(isliving(firer))
 			var/turf/turf = get_turf(src)
 			if(turf)
 				var/area/area = turf.loc || "*unknown area*"
-				log_and_message_admins("[key_name_admin(Proj.firer)] shot a fuel tank in \the [area.proper_name].")
+				log_and_message_admins("[key_name_admin(firer)] shot a fuel tank in \the [area.proper_name].")
 			else
 				log_and_message_admins("shot a fuel tank outside the world.")
 

@@ -111,7 +111,7 @@
 		return
 	//Shooting Code:
 	A.shot_from = assembly.name
-	A.firer = assembly
+	A.firer_ref = weakref(assembly)
 	A.launch(target)
 	return A
 

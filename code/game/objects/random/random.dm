@@ -63,6 +63,7 @@
 	desc = "This item type is used to randomly spawn a given object at round-start."
 	icon_state = "x3"
 	spawn_nothing_percentage = 50
+	abstract_type = /obj/random/single
 	var/spawn_object = null
 
 /obj/random/single/spawn_choices()

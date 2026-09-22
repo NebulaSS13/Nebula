@@ -32,7 +32,7 @@
 
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
-	var/atom/movable/firer = null//Who shot it
+	var/weakref/firer_ref = null//Who shot it
 	var/silenced = 0	//Attack message
 	var/yo = null
 	var/xo = null
@@ -157,7 +157,7 @@
 				if(!M.can_slip(magboots_only = TRUE))
 					return
 			var/old_dir = AM.dir
-			step(AM,get_dir(firer,AM))
+			step(AM,get_dir(firer_ref?.resolve(),AM))
 			AM.set_dir(old_dir)
 
 //Checks if the projectile is eligible for embedding. Not that it necessarily will.
@@ -179,7 +179,7 @@
 /obj/item/projectile/proc/launch(atom/target, target_zone, atom/movable/shooter, params, Angle_override, forced_spread = 0)
 	original = target
 	def_zone = check_zone(target_zone)
-	firer = shooter
+	firer_ref = weakref(shooter)
 	var/direct_target
 	var/turf/actual_target_turf = get_turf(target)
 	actual_target_turf = actual_target_turf?.resolve_to_actual_turf()
@@ -207,17 +207,18 @@
 
 //Used to change the direction of the projectile in flight.
 /obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/atom/movable/new_firer=null, var/is_ricochet = FALSE)
-	var/turf/starting_turf = get_turf(src)
+	var/turf/starting_turf = get_turf(starting_loc)
 	var/turf/new_target = locate(new_x, new_y, src.z)
-
+	if(!istype(starting_turf) || !istype(new_target))
+		qdel(src)
+		return
 	original = new_target
 	if(new_firer)
-		firer = src
-	var/new_Angle = Atan2(starting_turf, new_target)
+		firer_ref = weakref(src)
+	var/new_Angle = Atan2(starting_turf.x - new_target.x, starting_turf.y - new_target.y)
 	if(is_ricochet) // Add some dispersion.
 		new_Angle += (rand(-5,5) * 5)
 	setAngle(new_Angle)
-
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/special_miss_modifier=0)
@@ -231,6 +232,7 @@
 	var/movment_mod = min(5, (world.time - target_mob.l_move_time) - 20)
 	//running in a straight line isnt as helpful tho
 	if(movment_mod < 0)
+		var/atom/movable/firer = firer_ref?.resolve()
 		if(target_mob.last_move == get_dir(firer, target_mob))
 			movment_mod *= 0.25
 		else if(target_mob.last_move == get_dir(target_mob,firer))
@@ -265,6 +267,7 @@
 
 	//admin logs
 	if(!no_attack_log)
+		var/atom/movable/firer = firer_ref?.resolve()
 		if(ismob(firer))
 
 			var/attacker_message = "shot with \a [src.type]"
@@ -285,7 +288,7 @@
 	if(A == src)
 		return 0 //no
 
-	if(A == firer)
+	if(A == firer_ref?.resolve())
 		forceMove(A.loc)
 		return 0 //cannot shoot yourself
 

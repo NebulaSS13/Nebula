@@ -19109,10 +19109,7 @@
 "aOg" = (
 /obj/structure/table/laminate,
 /obj/item/food/junk/chips,
-/obj/random/single{
-	name = "randomly spawned cola";
-	spawn_object = /obj/item/chems/drinks/cans/cola
-	},
+/obj/random/single/cola,
 /turf/floor/carpet,
 /area/exodus/hallway/secondary/entry/starboard)
 "aOh" = (
@@ -20108,10 +20105,7 @@
 /obj/item/box/fancy/cigarettes{
 	pixel_y = 2
 	},
-/obj/random/single{
-	name = "randomly spawned lighter";
-	spawn_object = /obj/item/flame/fuelled/lighter
-	},
+/obj/random/single/lighter,
 /turf/floor/lino,
 /area/exodus/hallway/secondary/entry/starboard)
 "aQk" = (
@@ -20635,10 +20629,7 @@
 /area/exodus/crew_quarters/bar)
 "aRx" = (
 /obj/structure/table/laminate,
-/obj/random/single{
-	name = "randomly spawned deck of cards";
-	spawn_object = /obj/item/deck/cards
-	},
+/obj/random/single/playing_cards,
 /turf/floor/lino,
 /area/exodus/hallway/secondary/entry/starboard)
 "aRy" = (

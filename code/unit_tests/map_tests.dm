@@ -681,7 +681,7 @@ var/global/_unit_test_sort_junctions = list()
 				break
 		if(!found_cable)
 			failures++
-			log_bad("Unwired terminal : [log_info_line(term)]")
+			log_bad("Unwired terminal : [log_info_line(term)], area is [get_area(T)], possible sources are [english_list(T.contents)]")
 
 	if(failures)
 		fail("[failures] unwired power terminal\s.")
@@ -765,7 +765,7 @@ var/global/_unit_test_sort_junctions = list()
 				break
 
 		if(!connected)
-			log_bad("Disconnected wire: [dir2text(dir)] - [log_info_line(C)]")
+			log_bad("Disconnected wire: [dir2text(dir)] - [log_info_line(C)], area is [get_area(target_turf)]")
 			. = FALSE
 
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages

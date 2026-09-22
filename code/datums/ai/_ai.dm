@@ -131,7 +131,7 @@
 		return FALSE
 
 	if(!isnull(home) && get_dist(body, home) > home_wander_distance)
-		body.start_automove(home, new /datum/automove_metadata(_acceptable_distance = home_wander_distance))
+		body.start_automove(home, metadata = new /datum/automove_metadata(_acceptable_distance = home_wander_distance))
 		return FALSE
 
 	if(get_stance() == STANCE_IDLE && !body.stat)

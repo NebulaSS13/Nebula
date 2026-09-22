@@ -387,6 +387,11 @@
 	if (ispath(drill_head))
 		drill_head = new drill_head(src)
 
+/obj/item/mech_equipment/drill/Destroy()
+	. = ..()
+	if(istype(drill_head))
+		QDEL_NULL(drill_head)
+
 /obj/item/mech_equipment/drill/attack_self(var/mob/user)
 	if(!(. = ..()) && drill_head)
 		owner.visible_message(SPAN_WARNING("[owner] revs the [drill_head] menancingly."))
