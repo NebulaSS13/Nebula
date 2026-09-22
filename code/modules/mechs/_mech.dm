@@ -169,9 +169,10 @@
 
 	for(var/hardpoint in hardpoint_hud_elements)
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
-		H.owner_ref = null
-		H.holding = null
-		qdel(H)
+		if(istype(H))
+			H.owner_ref = null
+			H.holding_ref = null
+			qdel(H)
 	hardpoint_hud_elements.Cut()
 
 	. = ..()
@@ -291,3 +292,13 @@
 	if(!relayed_pilot_check(user))
 		return ..()
 	return selected_system.wielder_mouse_drag_up(src, target)
+
+/mob/living/exosuit/drop_from_inventory(obj/item/dropping_item, atom/target, play_dropsound)
+	if(!(. = ..()))
+		return
+	for(var/hardpoint in hardpoints)
+		if(dropping_item == hardpoints[hardpoint])
+			if(istype(dropping_item, /obj/item/mech_equipment))
+				var/obj/item/mech_equipment/gear = dropping_item
+				gear.uninstalled()
+			hardpoints[hardpoint] = null

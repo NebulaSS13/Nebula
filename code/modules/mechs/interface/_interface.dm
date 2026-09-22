@@ -25,9 +25,10 @@
 		var/i = 1
 		for(var/hardpoint in hardpoints)
 			var/obj/screen/exosuit/hardpoint/H = new(null, src, null, null, null, null, hardpoint)
-			H.screen_loc = "LEFT+1:6,TOP-[i]:-16"
-			hud_elements |= H
-			hardpoint_hud_elements[hardpoint] = H
+			if(istype(H))
+				H.screen_loc = "LEFT+1:6,TOP-[i]:-16"
+				hud_elements |= H
+				hardpoint_hud_elements[hardpoint] = H
 			i++
 
 		if(body && body.pilot_coverage >= 100)
@@ -61,7 +62,8 @@
 /mob/living/exosuit/handle_hud_icons()
 	for(var/hardpoint in hardpoint_hud_elements)
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
-		if(H) H.update_system_info()
+		if(istype(H))
+			H.update_system_info()
 	handle_hud_icons_health()
 
 	var/maptext_string = "CHECK<br>POWER"
@@ -112,14 +114,14 @@
 /mob/living/exosuit/proc/reset_hardpoint_color()
 	for(var/hardpoint in hardpoint_hud_elements)
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
-		if(H)
+		if(istype(H))
 			H.color = COLOR_WHITE
 
 /mob/living/exosuit/setClickCooldown(var/timeout)
 	. = ..()
 	for(var/hardpoint in hardpoint_hud_elements)
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
-		if(H)
+		if(istype(H))
 			H.color = "#a03b3b"
 			animate(H, color = COLOR_WHITE, time = timeout, easing = CUBIC_EASING | EASE_IN)
 	addtimer(CALLBACK(src, PROC_REF(reset_hardpoint_color)), timeout)

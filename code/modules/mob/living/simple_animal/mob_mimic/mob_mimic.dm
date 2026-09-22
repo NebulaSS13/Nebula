@@ -33,29 +33,30 @@
 	var/copy_health = TRUE
 	var/mob/living/mimic_mob
 
-	VAR_PRIVATE/static/alist/_mob_mimic_being_prepared      = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_being_prepared           = alist()
 
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_appearance  = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_synthetic   = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_overlays    = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_underlays   = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_eyes        = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_eye_color   = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_projectile  = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_melee       = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_health      = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_offset_x    = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_offset_y    = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_slowdown    = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_turn_sound  = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_step_sound  = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_bodytype    = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_bump_flags  = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_swap_flags  = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_push_flags  = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_always_swap = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_anchored    = alist()
-	VAR_PRIVATE/static/alist/_mob_mimic_type_to_armor       = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_appearance       = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_synthetic        = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_overlays         = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_underlays        = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_eyes             = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_eye_color        = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_projectile_sound = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_projectile_type  = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_melee            = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_health           = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_offset_x         = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_offset_y         = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_slowdown         = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_turn_sound       = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_step_sound       = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_bodytype         = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_bump_flags       = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_swap_flags       = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_push_flags       = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_always_swap      = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_anchored         = alist()
+	VAR_PRIVATE/static/alist/_mob_mimic_type_to_armor            = alist()
 
 /mob/living/simple_animal/mob_mimic/isSynthetic()
 	return !!_mob_mimic_type_to_synthetic[mimic_mob]
@@ -112,11 +113,13 @@
 			return proj
 
 /mob/living/simple_animal/mob_mimic/proc/get_best_melee_weapon(mob/living/mimic)
+
 	var/obj/item/strongest
 	for(var/obj/item/thing in mimic.get_held_items())
 		var/obj/item/weapon = thing.get_effective_obj()
 		if(!strongest || weapon.get_base_attack_force() > strongest.get_base_attack_force())
 			strongest = thing
+
 	if(strongest)
 		mimic.drop_from_inventory(strongest)
 		strongest.forceMove(null)
@@ -169,7 +172,10 @@
 	_mob_mimic_type_to_bodytype[mimic_mob] = bodytype?.simple_variant
 
 	if(isnull(projectiletype))
-		_mob_mimic_type_to_projectile[mimic_mob] = get_best_projectile(mimic)
+		var/obj/item/projectile/proj = get_best_projectile(mimic)
+		if(istype(proj))
+			_mob_mimic_type_to_projectile_type[mimic_mob] = proj.type
+			_mob_mimic_type_to_projectile_sound[mimic_mob] = proj.fire_sound
 
 	if(isnull(natural_weapon))
 		var/obj/item/strongest = get_best_melee_weapon(mimic)
@@ -210,10 +216,8 @@
 	base_movement_delay = _mob_mimic_type_to_slowdown[mimic_mob]
 	natural_armor       = _mob_mimic_type_to_armor[mimic_mob]
 
-	var/obj/item/projectile/proj = _mob_mimic_type_to_projectile[mimic_mob]
-	if(istype(proj))
-		projectilesound = proj.fire_sound
-		projectiletype  = proj.type
+	projectilesound ||= _mob_mimic_type_to_projectile_sound[mimic_mob]
+	projectiletype  ||= _mob_mimic_type_to_projectile_type[mimic_mob]
 
 	var/obj/item/melee = _mob_mimic_type_to_melee[mimic_mob]
 	if(melee && !istype(natural_weapon))
