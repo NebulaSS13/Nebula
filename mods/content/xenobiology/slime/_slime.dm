@@ -167,7 +167,7 @@
 	var/datum/mob_controller/slime/slime_ai = ai
 	if(istype(slime_ai))
 		slime_ai.attacked += 10
-		slime_ai.adjust_friendship(Proj.firer, -5)
+		slime_ai.adjust_friendship(Proj.firer_ref?.resolve(), -5)
 	..(Proj)
 	return 0
 
