@@ -132,7 +132,7 @@
 	switch(Proj.atom_damage_type)
 		if(BRUTE)
 			//bullets
-			if(Proj.original == src || prob(20))
+			if(Proj.original_ref?.resolve() == src || prob(20))
 				Proj.damage *= clamp(Proj.damage/60, 0, 0.5)
 				if(prob(max((damage-10)/25, 0))*100)
 					passthrough = 1
@@ -141,7 +141,7 @@
 				passthrough = 1
 		if(BURN)
 			//beams and other projectiles are either blocked completely by grilles or stop half the damage.
-			if(!(Proj.original == src || prob(20)))
+			if(!(Proj.original_ref?.resolve() == src || prob(20)))
 				Proj.damage *= 0.5
 				passthrough = 1
 

@@ -88,9 +88,9 @@
 
 		if(istype(pew))
 			playsound(pew.loc, pew_sound, 25, 1)
-			pew.original = target
-			pew.current = target
-			pew.starting = get_turf(user)
+			pew.original_ref = weakref(target)
+			pew.current_ref = weakref(target)
+			pew.starting_ref = weakref(get_turf(user))
 			pew.shot_from = user
 			pew.launch(target, user.get_target_zone(), user)
 			return TRUE

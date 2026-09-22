@@ -41,7 +41,7 @@
 
 	var/hits = 0
 	for (var/i in 1 to total_pellets)
-		if(target_mob.current_posture.prone && target_mob != original && prob(prone_chance))
+		if(target_mob.current_posture.prone && target_mob != original_ref?.resolve() && prob(prone_chance))
 			continue
 
 		//pellet hits spread out across different zones, but 'aim at' the targeted zone with higher probability
@@ -59,7 +59,7 @@
 	return 0
 
 /obj/item/projectile/bullet/pellet/get_structure_damage()
-	var/distance = get_dist(loc, starting)
+	var/distance = get_dist(loc, starting_ref?.resolve())
 	return ..() * get_pellets(distance)
 
 /obj/item/projectile/bullet/pellet/Move()

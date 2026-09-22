@@ -61,7 +61,7 @@
 	if(!anchored)
 		effective_cover *= 0.5
 	effective_cover = clamp(floor(effective_cover), 0, 100)
-	if(Proj.original != src && !prob(effective_cover))
+	if(Proj.original_ref?.resolve() != src && !prob(effective_cover))
 		return PROJECTILE_CONTINUE
 	var/damage = Proj.get_structure_damage()
 	if(!damage)

@@ -53,7 +53,7 @@
 		return
 	if(!damage || P.atom_damage_type != BRUTE)
 		return
-	var/hit_dir = get_dir(P.starting, src)
+	var/hit_dir = get_dir(P.starting_ref?.resolve(), src)
 	var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
 	if(!QDELETED(B))
 		B.icon_state = pick("dir_splatter_1","dir_splatter_2")
