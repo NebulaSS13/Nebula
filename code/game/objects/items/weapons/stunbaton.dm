@@ -105,10 +105,8 @@
 
 	var/agony = agonyforce
 	var/stun = stunforce
-	var/obj/item/organ/external/affecting = null
-	if(ishuman(target))
-		var/mob/living/human/H = target
-		affecting = GET_EXTERNAL_ORGAN(H, hit_zone)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(target, hit_zone)
+
 	var/abuser =  user ? "" : "by [user]"
 	if(user && user.check_intent(I_FLAG_HARM))
 		. = ..()
@@ -136,15 +134,16 @@
 
 	//stun effects
 	if(status)
-		target.stun_effect_act(stun, agony, hit_zone, src)
-		msg_admin_attack("[key_name(user)] stunned [key_name(target)] with \the [src].")
-		deductcharge(hitcost)
+		apply_baton_effects(target, user, stun, agony, affecting, hit_zone)
+	return TRUE
 
-		if(ishuman(target))
-			var/mob/living/human/H = target
-			H.forcesay(global.hit_appends)
-
-	return 1
+/obj/item/baton/proc/apply_baton_effects(mob/living/target, mob/living/user, stun, agony, obj/item/organ/external/affecting, hit_zone)
+	target.stun_effect_act(stun, agony, hit_zone, src)
+	msg_admin_attack("[key_name(user)] stunned [key_name(target)] with \the [src].")
+	deductcharge(hitcost)
+	if(ishuman(target))
+		var/mob/living/human/H = target
+		H.forcesay(global.hit_appends)
 
 // Stunbaton module for Security synthetics
 /obj/item/baton/robot
