@@ -171,7 +171,7 @@
 	if(do_after(user, delay, src))
 		if(!src) return
 		to_chat(user, SPAN_NOTICE("You [anchored? "un" : ""]secured \the [src]!"))
-		anchored = !anchored
+		set_anchored(!anchored)
 	return 1
 
 /obj/attack_hand(mob/user)

@@ -65,7 +65,7 @@ var/global/list/solars_list = list()
 	if(!S)
 		S = new /obj/item/solar_assembly(src)
 		S.glass_type = /decl/material/solid/glass
-		S.anchored = TRUE
+		S.set_anchored(TRUE)
 	S.forceMove(src)
 	if(S.glass_reinforced) //if the panel is in reinforced glass
 		current_health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to

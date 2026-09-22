@@ -177,7 +177,7 @@
 		if(((istype(turf) && turf.simulated) || anchored))
 			if(!shock(user, 90))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
-				anchored = !anchored
+				set_anchored(!anchored)
 				user.visible_message(
 					SPAN_NOTICE("[user] [anchored ? "fastens" : "unfastens"] the grille."),
 					SPAN_NOTICE("You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor.")

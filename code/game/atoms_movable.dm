@@ -441,7 +441,7 @@
 		return
 	. = unbuckling
 	unbuckling.buckled = null
-	unbuckling.anchored = initial(unbuckling.anchored)
+	unbuckling.set_anchored(initial(unbuckling.anchored))
 	unbuckling.update_posture()
 	unbuckling.update_floating()
 	remove_buckled_mob(unbuckling)
@@ -667,7 +667,6 @@
 /atom/movable/immune_to_floor_hazards()
 	return ..() || !!throwing
 
-// TODO: make everything use this.
 /atom/movable/proc/set_anchored(new_anchored)
 	SHOULD_CALL_PARENT(TRUE)
 	if(anchored != new_anchored)

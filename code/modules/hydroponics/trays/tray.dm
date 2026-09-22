@@ -492,7 +492,7 @@
 			return ..()
 
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-		anchored = !anchored
+		set_anchored(!anchored)
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
 		return TRUE
 

@@ -237,7 +237,7 @@ var/global/list/holopads = list()
 			hologram.overlays += icon("icons/effects/effects.dmi", "malf-scanline")
 	hologram.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE//So you can't click on it.
 	hologram.layer = ABOVE_HUMAN_LAYER //Above all the other objects/mobs. Or the vast majority of them.
-	hologram.anchored = TRUE//So space wind cannot drag it.
+	hologram.set_anchored(TRUE)//So space wind cannot drag it.
 	if(caller_id)
 		hologram.SetName("[caller_id.name] (Hologram)")
 		hologram.forceMove(get_step(src,1))

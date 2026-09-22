@@ -67,7 +67,7 @@ var/global/list/cargoprices = list()
 	var/decl/supply_method/method = GET_DECL(supply_method)
 	. = method.spawn_contents(src, location)
 	for(var/obj/O in .)
-		O.anchored = FALSE
+		O.set_anchored(FALSE)
 
 /*
 //SUPPLY PACKS

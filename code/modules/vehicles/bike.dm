@@ -65,7 +65,7 @@
 		usr.visible_message("\The [usr] puts down \the [src]'s kickstand.")
 
 	kickstand = !kickstand
-	anchored = (kickstand || on)
+	set_anchored(kickstand || on)
 
 /obj/vehicle/bike/proc/load_engine(var/obj/item/engine/E, var/mob/user)
 	if(engine)
@@ -180,7 +180,7 @@
 	if(trail)
 		trail.stop()
 
-	anchored = kickstand
+	set_anchored(kickstand)
 
 	update_icon()
 

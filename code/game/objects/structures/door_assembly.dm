@@ -192,7 +192,7 @@
 		if(do_after(user, 4 SECONDS, src))
 			if(QDELETED(src)) return TRUE
 			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured the airlock assembly!</span>")
-			anchored = !anchored
+			set_anchored(!anchored)
 			update_icon()
 		return TRUE
 

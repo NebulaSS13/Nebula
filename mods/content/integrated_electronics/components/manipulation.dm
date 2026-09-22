@@ -696,7 +696,7 @@
 		return
 
 	if(ord == 1)
-		assembly.anchored = !assembly.anchored
+		assembly.set_anchored(!assembly.anchored)
 
 		visible_message(
 			assembly.anchored ? \
