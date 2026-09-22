@@ -53,7 +53,7 @@
 
 	if(istype(mover, /obj/item/projectile))
 		var/obj/item/projectile/proj = mover
-		if(Adjacent(proj?.firer))
+		if(Adjacent(proj?.firer_ref?.resolve()))
 			return TRUE
 		if(mover.dir != global.reverse_dir[dir])
 			return TRUE

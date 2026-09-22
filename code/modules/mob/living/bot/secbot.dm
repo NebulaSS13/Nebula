@@ -120,7 +120,7 @@
 
 /mob/living/bot/secbot/bullet_act(var/obj/item/projectile/P)
 	var/curhealth = current_health
-	var/mob/shooter = P.firer
+	var/mob/shooter = P.firer_ref?.resolve()
 	. = ..()
 	//if we already have a target just ignore to avoid lots of checking
 	if(!target && current_health < curhealth && istype(shooter) && (shooter in view(world.view, src)))
