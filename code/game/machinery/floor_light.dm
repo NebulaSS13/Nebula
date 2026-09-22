@@ -32,7 +32,7 @@ var/global/list/floor_light_cache = list()
 /obj/machinery/floor_light/attackby(var/obj/item/used_item, var/mob/user)
 
 	if(IS_SCREWDRIVER(used_item))
-		anchored = !anchored
+		set_anchored(!anchored)
 		if(use_power)
 			update_use_power(POWER_USE_OFF)
 		visible_message(SPAN_NOTICE("\The [user] has [anchored ? "attached" : "detached"] \the [src]."))

@@ -59,7 +59,7 @@
 			to_chat(user, "<span class='warning'>Remove the cell first!</span>")
 			return
 
-		anchored = !anchored
+		set_anchored(!anchored)
 		to_chat(user, "You [anchored ? "attach" : "detach"] \the [src] [anchored ? "to" : "from"] the ground.")
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		return

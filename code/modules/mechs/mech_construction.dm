@@ -48,7 +48,8 @@
 	events_repository.unregister(/decl/observ/destroyed, module_to_forget, src, PROC_REF(forget_module))
 
 	var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[target]
-	H.holding = null
+	if(istype(H))
+		H.holding_ref = null
 
 	hud_elements -= module_to_forget
 	refresh_hud()
@@ -108,8 +109,8 @@
 	ME.installed(src)
 
 	var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
-	if(H)
-		H.holding = system
+	if(istype(H))
+		H.holding_ref = weakref(system)
 		system.screen_loc = H.screen_loc
 
 	system.hud_layerise()
@@ -147,7 +148,8 @@
 	events_repository.unregister(/decl/observ/destroyed, system, src, PROC_REF(forget_module))
 
 	var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
-	H.holding = null
+	if(istype(H))
+		H.holding_ref = null
 
 	for(var/thing in pilots)
 		var/mob/pilot = thing

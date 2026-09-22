@@ -24,7 +24,7 @@
 		if (src.allowed(user))
 			if	(src.emagged < 2.0)
 				src.locked = !src.locked
-				src.anchored = !src.anchored
+				set_anchored(!anchored)
 				src.icon_state = "barrier[src.locked]"
 				if ((src.locked == 1.0) && (src.emagged < 2.0))
 					to_chat(user, "Barrier lock toggled on.")
@@ -75,7 +75,7 @@
 		return
 	if(prob(50/severity))
 		locked = !locked
-		anchored = !anchored
+		set_anchored(!anchored)
 		icon_state = "barrier[src.locked]"
 
 /obj/machinery/deployable/barrier/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.

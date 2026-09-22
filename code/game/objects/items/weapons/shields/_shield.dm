@@ -7,7 +7,7 @@
 	var/attack_dir = 0 //direction from the user to the source of the attack
 	if(istype(damage_source, /obj/item/projectile))
 		var/obj/item/projectile/P = damage_source
-		attack_dir = get_dir(get_turf(user), P.starting)
+		attack_dir = get_dir(get_turf(user), P.starting_ref?.resolve())
 	else if(attacker)
 		attack_dir = get_dir(get_turf(user), get_turf(attacker))
 	else if(damage_source)

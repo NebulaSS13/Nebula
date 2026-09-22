@@ -42,7 +42,7 @@
 /obj/machinery/singularity_generator/attackby(obj/item/used_item, mob/user)
 	if(!IS_WRENCH(used_item))
 		return ..()
-	anchored = !anchored
+	set_anchored(!anchored)
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 	if(anchored)
 		user.visible_message("[user.name] secures \the [src] to the floor.", \

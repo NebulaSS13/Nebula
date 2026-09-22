@@ -224,7 +224,7 @@
 	var/obj/structure/door_assembly/da = ..()
 	. = da
 
-	da.anchored = TRUE
+	da.set_anchored(TRUE)
 	da.state = 1
 	da.created_name = name
 	da.update_icon()

@@ -595,7 +595,7 @@ var/global/list/diversion_junctions = list()
 			to_chat(user, "You sliced the floorweld off the disposal outlet.")
 			var/obj/structure/disposalconstruct/machine/outlet/C = new (loc, src)
 			src.transfer_fingerprints_to(C)
-			C.anchored = TRUE
+			C.set_anchored(TRUE)
 			C.set_density(1)
 			C.update()
 			qdel(src)

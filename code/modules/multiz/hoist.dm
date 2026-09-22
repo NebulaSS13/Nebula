@@ -77,7 +77,7 @@
 	if(ismob(victim))
 		source_hook.buckle_mob(victim)
 	else
-		victim.anchored = TRUE // can't buckle non-mobs at the moment
+		victim.set_anchored(TRUE) // can't buckle non-mobs at the moment
 	source_hook.layer = victim.layer + 0.1
 	if (get_turf(victim) != get_turf(source_hook))
 		victim.forceMove(get_turf(source_hook))
@@ -149,7 +149,7 @@
 	if(ismob(hoistee))
 		source_hook.unbuckle_mob(hoistee)
 	else
-		hoistee.anchored = FALSE
+		hoistee.set_anchored(FALSE)
 		hoistee.fall(get_turf(source_hook || hoistee))
 	events_repository.unregister(/decl/observ/destroyed, hoistee, src)
 	hoistee = null

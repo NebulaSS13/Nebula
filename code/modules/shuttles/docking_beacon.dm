@@ -52,7 +52,7 @@
 			return TRUE
 		playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 		to_chat(user, SPAN_NOTICE("You [anchored ? "unanchor" : "anchor"] \the [src]."))
-		anchored = !anchored
+		set_anchored(!anchored)
 		return TRUE
 
 	. = ..()

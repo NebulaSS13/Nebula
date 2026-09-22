@@ -97,7 +97,7 @@
 
 /obj/machinery/mining_drill/proc/handle_supports()
 	state_machine.evaluate()
-	anchored = length(supports) >= 1 ? TRUE : FALSE
+	set_anchored(length(supports) >= 1)
 	if(can_fall())
 		fall()
 
