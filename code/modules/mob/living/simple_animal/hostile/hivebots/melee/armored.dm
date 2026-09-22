@@ -53,9 +53,10 @@
 				SPAN_DANGER("\The [P] is reflected by \the [src]'s armor!"),
 				SPAN_DANGER("\The [P] gets reflected by \the [src]'s armor!")
 			)
-			if(P.starting)
-				var/new_x = P.starting.x + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
-				var/new_y = P.starting.y + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
+			var/turf/starting = P.starting_ref?.resolve()
+			if(istype(starting))
+				var/new_x = starting.x + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
+				var/new_y = starting.y + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
 				P.redirect(new_x, new_y, get_turf(src), src)
 			return PROJECTILE_CONTINUE
 	return (..(P))

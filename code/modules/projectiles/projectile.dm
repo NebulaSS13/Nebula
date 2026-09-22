@@ -32,14 +32,10 @@
 
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
-	var/weakref/firer_ref = null//Who shot it
 	var/silenced = 0	//Attack message
 	var/yo = null
 	var/xo = null
-	var/current = null
 	var/shot_from = "" // name of the object which shot us
-	var/atom/original = null // the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
-	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
 
 	var/p_x = 16
@@ -95,20 +91,27 @@
 	var/last_projectile_move = 0
 	var/last_process = 0
 	var/time_offset = 0
-	var/datum/point/vector/trajectory
 	var/trajectory_ignore_forcemove = FALSE	//instructs forceMove to NOT reset our trajectory to the new location!
 	var/range = 50 //This will de-increment every step. When 0, it will deletze the projectile.
 
 	//Hitscan
 	var/hitscan = FALSE		//Whether this is hitscan. If it is, speed is basically ignored.
 	var/list/beam_segments	//assoc list of datum/point or datum/point/vector, start = end. Used for hitscan effect generation.
-	var/datum/point/beam_index
-	var/turf/hitscan_last	//last turf touched during hitscanning.
 
 	/// If set, will apply a modifier to mobs that are hit by this projectile.
 	var/modifier_type_to_apply
 	/// How long the above modifier should last for. Leave null to be permanent.
 	var/modifier_duration = null
+
+	var/weakref/original_ref = null // the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
+	var/weakref/starting_ref = null // the projectile's starting turf
+	var/weakref/firer_ref = null    // Who shot it
+	var/weakref/hitscan_last_ref    // last turf touched during hitscanning.
+	var/weakref/current_ref = null
+
+	var/datum/point/vector/trajectory
+	var/datum/point/beam_index
+
 
 /obj/item/projectile/Initialize()
 	if(!hitscan)
@@ -177,7 +180,7 @@
 
 //called to launch a projectile
 /obj/item/projectile/proc/launch(atom/target, target_zone, atom/movable/shooter, params, Angle_override, forced_spread = 0)
-	original = target
+	original_ref = weakref(target)
 	def_zone = check_zone(target_zone)
 	firer_ref = weakref(shooter)
 	var/direct_target
@@ -212,7 +215,7 @@
 	if(!istype(starting_turf) || !istype(new_target))
 		qdel(src)
 		return
-	original = new_target
+	original_ref = weakref(new_target)
 	if(new_firer)
 		firer_ref = weakref(src)
 	var/new_Angle = Atan2(starting_turf.x - new_target.x, starting_turf.y - new_target.y)
@@ -238,7 +241,7 @@
 		else if(target_mob.last_move == get_dir(target_mob,firer))
 			movment_mod *= 0.5
 	miss_modifier -= movment_mod
-	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
+	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original_ref?.resolve() != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
 
 	var/result = PROJECTILE_FORCE_MISS
 	if(hit_zone)
@@ -296,7 +299,7 @@
 		return 0
 
 	var/passthrough = 0 //if the projectile should continue flying
-	var/distance = get_dist(starting,loc)
+	var/distance = get_dist(starting_ref?.resolve(), loc)
 
 	bumped = 1
 	if(ismob(A))
@@ -415,15 +418,15 @@
 	if(isnum(Angle))
 		setAngle(Angle)
 	// trajectory dispersion
-	var/turf/starting = get_turf(src)
-	if(!starting)
+	var/turf/starting_turf = get_turf(src)
+	if(!starting_turf)
 		return
 	if(isnull(Angle))	//Try to resolve through offsets if there's no Angle set.
 		if(isnull(xo) || isnull(yo))
 			PRINT_STACK_TRACE("WARNING: Projectile [type] deleted due to being unable to resolve a target after Angle was null!")
 			qdel(src)
 			return
-		var/turf/target = locate(clamp(starting + xo, 1, world.maxx), clamp(starting + yo, 1, world.maxy), starting.z)
+		var/turf/target = locate(clamp(starting_turf + xo, 1, world.maxx), clamp(starting_turf + yo, 1, world.maxy), starting_turf.z)
 		setAngle(get_projectile_angle(src, target.resolve_to_actual_turf()))
 	if(dispersion)
 		var/DeviationAngle = (dispersion * 15)
@@ -433,8 +436,8 @@
 		var/matrix/M = new
 		M.Turn(Angle)
 		transform = M
-	forceMove(starting)
-	trajectory = new(starting.x, starting.y, starting.z, 0, 0, Angle, pixel_speed)
+	forceMove(starting_turf)
+	trajectory = new(starting_turf.x, starting_turf.y, starting_turf.z, 0, 0, Angle, pixel_speed)
 	last_projectile_move = world.time
 	fired = TRUE
 	if(hitscan)
@@ -443,7 +446,7 @@
 	if(muzzle_type)
 		var/atom/movable/thing = new muzzle_type
 		update_effect(thing)
-		thing.forceMove(starting)
+		thing.forceMove(starting_turf)
 		thing.pixel_x = trajectory.return_px() + (trajectory.mpx * 0.5)
 		thing.pixel_y = trajectory.return_py() + (trajectory.mpy * 0.5)
 		var/matrix/M = new
@@ -460,8 +463,8 @@
 	var/turf/targloc = get_turf(target)
 	targloc = targloc?.resolve_to_actual_turf()
 	forceMove(get_turf(source))
-	starting = get_turf(source)
-	original = target
+	starting_ref = weakref(get_turf(source))
+	original_ref = weakref(target)
 
 	var/list/calculated = list(null,null,null)
 	var/mob/living/S = source
@@ -485,7 +488,7 @@
 
 /obj/item/projectile/Crossed(atom/movable/AM) //A mob moving on a tile with a projectile is hit by it.
 	..()
-	if(isliving(AM) && (AM.density || AM == original) && !(pass_flags & PASS_FLAG_MOB))
+	if(isliving(AM) && (AM.density || AM == original_ref?.resolve()) && !(pass_flags & PASS_FLAG_MOB))
 		Bump(AM)
 
 /obj/item/projectile/proc/pixel_move(moves, trajectory_multiplier = 1, hitscanning = FALSE)
@@ -530,7 +533,8 @@
 	if(!hitscanning)
 		animate(src, pixel_x = trajectory.return_px(), pixel_y = trajectory.return_py(), time = 1, flags = ANIMATION_END_NOW)
 	if(isturf(loc))
-		hitscan_last = loc
+		hitscan_last_ref = weakref(loc)
+	var/turf/original = original_ref?.resolve()
 	if(can_hit_target(original, permutated))
 		Bump(original, TRUE)
 	check_distance_left()
@@ -708,7 +712,7 @@
 			// Effect goes where the projectile 'stopped'.
 			hit_x = A.pixel_x + trajectory.return_px()
 			hit_y = A.pixel_y + trajectory.return_py()
-		else if(A == original)
+		else if(A == original_ref?.resolve())
 			// Otherwise it goes where the person who fired clicked.
 			hit_x = A.pixel_x + p_x - 16
 			hit_y = A.pixel_y + p_y - 16

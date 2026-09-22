@@ -209,15 +209,15 @@
 		ability_projectile.owner            = user
 		ability_projectile.ability_metadata = metadata
 		ability_projectile.carried_ability  = src
-	projectile.original   = target
-	projectile.starting   = get_turf(user)
-	projectile.shot_from  = user
-	projectile.current    = projectile.original
-	projectile.yo         = target.y - user.y
-	projectile.xo         = target.x - user.x
-	projectile.life_span  = projectile_duration
-	projectile.hitscan    = !projectile_step_delay
-	projectile.step_delay = projectile_step_delay
+	projectile.original_ref = weakref(target)
+	projectile.starting_ref = weakref(get_turf(user))
+	projectile.shot_from    = user
+	projectile.current_ref  = projectile.original_ref
+	projectile.yo           = target.y - user.y
+	projectile.xo           = target.x - user.x
+	projectile.life_span    = projectile_duration
+	projectile.hitscan      = !projectile_step_delay
+	projectile.step_delay   = projectile_step_delay
 	projectile.launch(target)
 	return projectile
 

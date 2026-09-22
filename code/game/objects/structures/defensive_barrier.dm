@@ -57,7 +57,7 @@
 			return TRUE
 		if(mover.dir != global.reverse_dir[dir])
 			return TRUE
-		if(get_dist(proj.starting, loc) <= 1)//allows to fire from 1 tile away of barrier
+		if(get_dist(proj.starting_ref?.resolve(), loc) <= 1)//allows to fire from 1 tile away of barrier
 			return TRUE
 		return check_cover(mover, target)
 
