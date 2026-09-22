@@ -57,6 +57,7 @@
 		/obj/item/stack/material/aerogel/mapped/tritium/three,
 		/obj/item/stack/material/brick/mapped/concrete/ten
 	)
+	return spawnable_choices
 
 /obj/random/material/precious
 	name = "random precious metal"
