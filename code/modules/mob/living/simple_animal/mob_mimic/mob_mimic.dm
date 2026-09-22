@@ -132,6 +132,8 @@
 // The delay is only applied the first time this type is created so should not be a big issue in practice.
 // Atoms initialising in parallel will defer their update until hopefully the first one has completed.
 /mob/living/simple_animal/mob_mimic/proc/cache_and_apply_mimic()
+	if(QDELETED(src))
+		return
 	if(_mob_mimic_being_prepared[mimic_mob])
 		addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/simple_animal/mob_mimic, update_mob_values)), 10)
 	else
