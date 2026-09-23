@@ -85,9 +85,6 @@ var/global/list/admin_verbs_admin = list(
 	/client/proc/change_security_level,
 	/client/proc/makePAI,
 	/client/proc/fixatmos,
-	/client/proc/list_traders,
-	/client/proc/add_trader,
-	/client/proc/remove_trader,
 	/datum/admins/proc/sendFax,
 	/datum/admins/proc/show_traits
 )

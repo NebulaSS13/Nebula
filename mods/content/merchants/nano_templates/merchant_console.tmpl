@@ -1,0 +1,129 @@
+{{if data.prompt_message}}
+	<center>
+	<table>
+	<tr><td>{{:data.prompt_message}}</td>
+	<tr><td>{{:helper.link('Continue', 'check', {'continue' : 1})}}</td>
+	</table>
+	</center>
+{{else}}
+	<center>
+	<h3>Balance</h3>
+	{{for data.cash}}
+		{{:value.amount}} {{:value.name}}<br>
+	{{empty}}
+		<font color="red">NO FUNDS</font>
+	{{/for}}
+
+	{{if data.mode}}
+		<div>
+			<div style="float: left">{{:helper.link('', 'triangle-1-w', {'scroll' : -1})}}</div>
+			<div>{{:helper.link('Main Menu', 'home', {'main_menu' : 1})}}</div>
+			<div style="float: right">{{:helper.link('', 'triangle-1-e', {'scroll' : 1})}}</div>
+		</div>
+		<center>
+
+		<h3>{{:data.merchant_name}}</h3><br>
+		<div>Signal Origin: {{:data.merchant_origin}}</div>
+
+		{{if data.merchant_hailed}}
+			{{if data.merchant_cash}}
+				<div>{{:data.merchant_name}} has {{:data.merchant_cash}} {{:data.merchant_currency}}.</div>
+			{{/if}}
+		{{/if}}
+
+		{{if data.last_comms}}
+			<br>
+			<div><i><font color="white">{{:data.last_comms}}</font></i></div>
+		{{/if}}
+
+		</center>
+		<br>
+		{{if data.merchant_hailed}}
+			{{if data.item_data}}
+				{{:helper.link('Go Back', 'arrowreturnthick-1-w', {'show_items_for_sale' : 1})}}
+				<br><br>
+				<h3>Trade Goods</h3>
+				<center>
+				<table style="padding: top 6px; width: 90%;">
+					<tr>
+						<th>Item</th>
+						<th>Qty.</th>
+						<th>Actions</th>
+					</tr>
+				{{for data.item_data}}
+					<tr>
+						<td style="width: 33%; height: 40px; text-align: center;"><b>{{:value.item_name}}</b></td>
+						<td style="width: 10%; text-align: center;">{{if value.item_quantity}} {{:value.item_quantity}} {{/if}}</td>
+						<td style="text-align: right;">
+							{{:helper.link('Ask Price', 'tag', {'ask_price' : index})}}
+							{{:helper.link('Barter', 'transferthick-e-w', {'barter' : index})}}
+							{{:helper.link('Haggle', 'comment', {'haggle_buy' : index})}}
+							{{:helper.link('Purchase', 'arrowreturnthick-1-s', {'purchase' : index})}}
+						</td>
+					</tr>
+				{{/for}}
+				</table>
+				</center>
+			{{else}}
+				{{:helper.link('List Goods', 'cart', {'show_items_for_sale' : 1})}}
+				<br><br>
+				{{:helper.link('Sell Items', 'arrowreturnthick-1-n', {'sell_items' : 1})}}
+				{{:helper.link('Ask For Offer', 'calculator', {'appraisal' : 1})}}
+				{{:helper.link('Make Offer', 'comment', {'haggle_sell' : 1})}}
+				<br><br>
+				{{:helper.link('Ask What They Want', 'help', {'what_do_you_want': 1})}}
+				{{:helper.link('Ask How Long They Will Stay', 'clock', {'how_long_will_you_stay': 1})}}
+				<br><br>
+				{{for data.bribe_amounts}}
+					{{:helper.link('Give '+value+' Bribe', 'suitcase', {'bribe' : index})}}
+				{{/for}}
+				{{:helper.link('Gift Items', 'plusthick', {'gift' : 1})}}
+				<br><br>
+				{{:helper.link('Compliment', 'heart', {'compliment' : 1})}}<br><br>
+				{{:helper.link('Insult', 'trash', {'insult' : 1})}}
+				<br><br>
+
+				{{if data.merchant_supply_price_modifiers || data.merchant_demand_price_modifiers}}
+					<div>Transactions may be subject to additional charges:
+					{{if data.merchant_supply_price_modifiers == data.merchant_demand_price_modifiers}}
+						<div>{{:data.merchant_supply_price_modifiers}}</div>
+					{{else}}
+						{{if data.merchant_supply_price_modifiers}}
+							<div>[Buying From]</div>
+							<div>{{:data.merchant_supply_price_modifiers}}</div>
+						{{/if}}
+						{{if data.merchant_demand_price_modifiers}}
+							<div>[Selling To]</div>
+							<div>{{:data.merchant_demand_price_modifiers}}</div>
+						{{/if}}
+					{{/if}}
+					</div>
+				{{/if}}
+
+			{{/if}}
+		{{else}}
+			{{:helper.link('Hail', 'signal-diag', {'hail': 1})}}
+		{{/if}}
+	{{else}}
+		<center>
+		<h2>Main Menu</h2>
+		<table style="text-align:center">
+		{{for data.hubs}}
+			<tr><td>{{:helper.link('Open communications with ' + value.name, 'signal-diag', {'connect_to_hub' : value.ref})}}</td></tr>
+		{{empty}}
+			<tr><td>No commercial entities detected within communications range.</td></tr>
+		{{/for}}
+		<tr><td>{{:helper.link('Test fire transporter', 'check', {'telepad_test_fire': 1 })}}</td></tr>
+		<tr><td>{{:helper.link('Connect pad', 'link', {'connect_pad' : 1})}}
+		{{if data.pad_connected}}
+			<font color="green">Connected</font>
+		{{else}}
+			<font color="red">DISCONNECTED</font>
+		{{/if}}
+		</td></tr>
+		<tr><td>{{:helper.link('Deposit money', 'plusthick', {'deposit_cash' : 1})}}</td></tr>
+		<tr><td>{{:helper.link('Withdraw money', 'minusthick', {'withdraw_cash' : 1})}}</td></tr>
+		</table>
+		</center>
+	{{/if}}
+{{/if}}

@@ -27,12 +27,6 @@
 /obj/item/fuelled_tool/welding/pack/remove_tank(mob/user)
 	return FALSE
 
-/obj/item/fuelled_tool/welding/pack/toggle_unscrewed(mob/user)
-	return FALSE
-
-/obj/item/fuelled_tool/welding/pack/attempt_modify(obj/item/used_item, mob/user)
-	return FALSE
-
 /obj/item/fuelled_tool/welding/pack/dropped(mob/user)
 	. = ..()
 	if(linked_pack)

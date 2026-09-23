@@ -32,15 +32,6 @@
 	stored_files = list()
 	recalculate_size()
 
-// For idiot merchants who wipe the program from their console.
-/obj/item/stock_parts/computer/hard_drive/portable/merchant
-	name = "merchant_list_1155_CRACKZ_1155_no_keygen_repack"
-	desc = "An obviously pirated copy of well-known trading software."
-
-/obj/item/stock_parts/computer/hard_drive/portable/merchant/Initialize()
-	. = ..()
-	store_file(new/datum/computer_file/program/merchant(src))
-
 // Special disk for antags containing all the evil programs and readme for them
 /obj/item/stock_parts/computer/hard_drive/portable/advanced/warez
 	var/list/warez = list(

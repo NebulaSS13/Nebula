@@ -1,0 +1,4 @@
+author: Gallyus
+changes:
+  - {tweak: Default hotkeys for 'Focus Chat'/'Classic' mode have been audited.}
+delete-after: true
