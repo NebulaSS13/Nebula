@@ -1,0 +1,145 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/concrete,
+/area/cynosure/maintenance/construction/d1/basementE)
+"c" = (
+/obj/structure/door_assembly,
+/turf/floor/tiled/steel_grid,
+/area/cynosure/maintenance/construction/d1/basementE)
+"e" = (
+/obj/structure/mirror,
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/basementE)
+"f" = (
+/obj/structure/hygiene/toilet{
+	dir = 4
+	},
+/obj/machinery/light/small/red{
+	dir = 8
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementE)
+"l" = (
+/obj/structure/tape_barricade/engineering,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementE)
+"m" = (
+/obj/structure/closet/crate,
+/obj/item/stack/tile/floor_freezer{
+	amount = 8
+	},
+/obj/random/tool/power,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/engineering,
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/basementE)
+"A" = (
+/obj/machinery/light/small/fixture{
+	dir = 8
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementE)
+"D" = (
+/obj/machinery/door/airlock{
+	name = "Unit 1"
+	},
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementE)
+"G" = (
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementE)
+"K" = (
+/obj/structure/mirror{
+	pixel_x = 28
+	},
+/obj/structure/hygiene/sink{
+	dir = 4;
+	pixel_x = 12
+	},
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/basementE)
+"L" = (
+/obj/machinery/light/small/fixture{
+	dir = 4
+	},
+/obj/structure/table,
+/obj/random/soap,
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/basementE)
+"O" = (
+/obj/random/obstruction,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementE)
+"Q" = (
+/obj/machinery/constructable_frame/machine_frame,
+/obj/item/stock_parts/circuitboard/recharge_station,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementE)
+"V" = (
+/turf/wall/concrete/reinforced,
+/area/cynosure/maintenance/construction/d1/basementE)
+"W" = (
+/obj/item/frame/apc,
+/turf/floor/plating,
+/area/cynosure/maintenance/construction/d1/basementE)
+"Y" = (
+/turf/floor/tiled/freezer,
+/area/cynosure/maintenance/construction/d1/basementE)
+
+(1,1,1) = {"
+a
+a
+a
+l
+a
+"}
+(2,1,1) = {"
+a
+f
+a
+Q
+a
+"}
+(3,1,1) = {"
+a
+D
+a
+O
+a
+"}
+(4,1,1) = {"
+a
+G
+A
+G
+a
+"}
+(5,1,1) = {"
+a
+W
+Y
+m
+a
+"}
+(6,1,1) = {"
+c
+Y
+Y
+Y
+a
+"}
+(7,1,1) = {"
+a
+K
+L
+e
+a
+"}
+(8,1,1) = {"
+V
+V
+V
+V
+V
+"}
