@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><base href="../../"><link rel="stylesheet" href="dmdoc.css"><title>mods/content/merchants/readme.md - Space Station 13 - Nebula13</title></head><body><header><a href="index.html">Space Station 13 - Nebula13</a> - <a href="index.html#modules">Modules</a> - <a href="index.html#types">Types</a></header><main><h1>Merchant System Modpack <aside>mods/content/merchants/readme.md</aside> <a href="https://github.com/NebulaSS13/Nebula/blob/adf54b76ca46e08f5fcf12ad09a5841f8568570d/mods/content/merchants/readme.md"><img src="git.png" width="16" height="16" title="mods/content/merchants/readme.md"></a></h1><table class="summary" cellspacing="0"><tr><td colspan="2"><p>This modpack contains the systems for Merchants. The modpack does not contain any merchant content, meaning that there are no merchants included. Instead, a merchant content modpack, such as <strong>Standard Merchants</strong>, must also be included in order for players to be able to buy and sell things to merchants.</p>
+<p>This readme is intended to give an overview of how the system works, primarily for those looking to create custom merchant content for downstream servers. Another good resource is to look at the Standard Merchants modpack's code to see how it works.</p>
+<h4 id="note">Note</h4>
+<p>The readme sometimes uses the term <code>item</code>, which in this context should be understood as <code>/atom/movable</code>, and not <code>/obj/item</code>.</p>
+<h1 id="what-is-a">What is a...</h1><h2 id="merchant">Merchant</h2>
+<p>Merchants are off-map NPCs that players can interact with through the merchant program on a computer, alongside a merchant pad, to buy and sell things.</p>
+<h2 id="merchant-program">Merchant Program</h2>
+<p>An in-game computer program which is required in order to interact with the merchant NPCs. Note that access to this program is not automatically given out by default, so custom maps may need to override it, like Tradeship does.</p>
+<h2 id="merchant-pad">Merchant Pad</h2>
+<p>Merchant Pads are special teleporters that computers with the merchant program can use to teleport items to and from merchants. The computer needs to be adjacent to a merchant pad in order to buy or sell things.</p>
+<h2 id="trade-hub">Trade Hub</h2>
+<p>Trade Hubs act as a container for existing merchant instances, as well as an in-game representation for where the merchants might be. They can hold up to a certain number of merchants.</p>
+<p>Singleton Trade Hubs provide access to their merchants from anywhere, unconditionally. They are the simplest means to have players be able to access a set of merchants.</p>
+<p>Trade Hubs can also be represented on the overmap as a physical location, using <code>/obj/effect/overmap/trade_hub</code> instances to determine where on the overmap they are. Players must be on the same overmap tile as the trade hub in order to interact with them.</p>
+<h2 id="commodity">Commodity</h2>
+<p>A commodity represents a specific kind of thing that the merchant could buy or sell. They are held by each merchant instance inside of either <code>active_supply</code>, <code>inactive_supply</code>, <code>active_demand</code>, or <code>inactive_demand</code> lists, and are filled at runtime. The active lists hold commodities that are available to players at the moment, while the inactive hold things that failed to make the cut.</p>
+<p>They are created in bulk by potential commodity subtypes, held inside of a merchant's <code>potential_supply</code> and <code>potential_demand</code>. You should never have to interact with commodities in the code directly, and instead use potential commodities to determine what merchants can buy or sell.</p>
+<h2 id="potential-commodity">Potential Commodity</h2>
+<p>Potential commodities are what ultimately determines what things a merchant wants to buy or sell. They are held inside of a merchant's <code>potential_supply</code>, and <code>potential_demand</code>, with supply being what merchants can sell to players, and demand being what they can buy from players. When merchants are initialized, they create commodity instances and put them in their active or inactive lists automatically.</p>
+<p>Each merchant will generally have one or more potential commodity decls that contains the things they want to buy or sell. Alternatively, they can also re-use potential commoditiy decls from other merchants, or premade decls created for convenience, such as the one which contains all ores that can be mined.</p>
+<h2 id="commodity-requirements">Commodity Requirements</h2>
+<p>Commodities can have a number of requirements attached to them, that must all evaluate to <code>TRUE</code> in order for the merchant to agree to buy (or rarely, to sell) something. The most common requirement are type checks, but those are not strictly required, and it is possible to create a merchant who's willing to buy anything. Other requirements can be things such as requiring that a particular item be made of a specific material, that a gas be of a certain temperature, or that a mob being sold be of a specific species. This allows for merchants to buy a wide range of items that the old typecheck-centric system could not, as well as preventing issues arising from things like mapped in material sheets technically being a different type compared to newly created sheets. The name of a commodity can change based on the requirements it has. For example, a commodity that has the requirements that the item be a wrench, and be made out of gold, will have the name <code>golden wrench</code>.</p>
+<p>Like commodity instances themselves, requirements are added to them automatically by the potential commodity decl that created them.</p>
+<p>You generally don't need to worry about requirements too much, as there are a number of helper types that already have the correct requirements included, for things like reagents or gases.</p>
+<h1 id="how-do-i">How do I...</h1><h2 id="add-a-new-merchant">Add a new Merchant?</h2>
+<p>Create a subtype of <code>/datum/merchant</code>, and fill out the relevant variables.</p>
+<p><code>/datum/merchant/transient</code> is used to signify subtypes which are expected to be temporary most of the time. This is mainly used for default Trade Hubs that accumulate transient merchants as the round goes on. Note that transient merchants can become permanent, and regular merchants can be made to be temporary. The type just automatically makes subtypes start out as temporary merchants.</p>
+<p><code>/datum/merchant/transient/rare</code> works similarly to the preceding type, but the default Trade Hub implementation has a low chance of choosing this type of merchant.</p>
+<p>You do not need to conform to those types if you don't intend to use the default trade hub's implementation.</p>
+<h2 id="make-merchants-buy-or-sell-things">Make Merchants buy or sell things?</h2>
+<p>Create a subtype of <code>/decl/merchant_potential_commodities</code>. This determines what merchants want to buy or sell, as well as other information, like how many of each item they have or want, or if the items need to conform to certain requirements.</p>
+<p>The list <code>type_instructions</code> determines what types merchants want to buy or sell. It is an assocative list, with the keys being type paths, and the values being instructions on what each type should do.</p>
+<p>There are a number of instructions available:</p>
+<ul>
+<li><code>MERCHANT_INCLUDE_THIS_TYPE</code> makes merchants offer this type. Subtypes are not included.</li>
+<li><code>MERCHANT_INCLUDE_SUBTYPES</code> makes merchants offer subtypes of this type. The base type is not included.</li>
+<li><code>MERCHANT_INCLUDE_ALL</code> combines <code>MERCHANT_INCLUDE_THIS_TYPE</code> and <code>MERCHANT_INCLUDE_SUBTYPES</code>, making merchants offer this type and all subtypes derived from it.</li>
+<li><code>MERCHANT_EXCLUDE_THIS_TYPE</code> makes merchants not offer the type specified. Subtypes might still be offered if a preceding instruction included them.</li>
+<li><code>MERCHANT_EXCLUDE_SUBTYPES</code> makes merchants not offer subtypes of the type specified. The base type may still be offered if a preceding instruction included it.</li>
+<li><code>MERCHANT_EXCLUDE_ALL</code> combines <code>MERCHANT_EXCLUDE_THIS_TYPE</code> and <code>MERCHANT_EXCLUDE_SUBTYPES</code>, making merchants not offer either this type, or any subtypes derived from it.</li>
+</ul>
+<p>Instructions are evaluated sequentially, meaning that instructions lower in the list may override instructions above. Excludes should go underneath relevant includes, or they will not work.</p>
+<p><code>item_quantity_lower_bound</code> and <code>item_quantity_upper_bound</code> can be used if you wish to limit how much of a particular item is available to be bought or sold.</p>
+<p>Here is an example of what a subtype could look like:</p>
+<pre><code>/decl/merchant_potential_commodities/example
+	type_instructions = list(
+		/obj/item/foo			= MERCHANT_INCLUDE_ALL,
+		/obj/item/foo/bar		= MERCHANT_EXCLUDE_THIS_TYPE,
+	)
+    item_quantity_lower_bound = 2
+    item_quantity_upper_bound = 5
+</code></pre>
+<p>This will cause a merchant that possesses this decl to either buy or sell the type <code>/obj/item/foo</code>, and all of its subtypes, except for <code>/obj/item/foo/bar</code>. Each distinct type will also have a limited amount, between 2 and 5.</p>
+<p>To have the new merchant use the decl, place it inside of the merchant's <code>supply_potential</code> if you want merchants to sell things using the decl, or <code>demand_potential</code> if you want them to buy things with it. Multiple decls can be placed inside the lists, and they can be reused between different merchants.</p>
+<h2 id="make-merchants-buy-reagents-gases-material-sheets">Make Merchants buy reagents/gases/material sheets?</h2>
+<p>To have merchants correctly <strong>buy</strong> non-standard items, create a subtype of one of the following:</p>
+<ul>
+<li><code>/decl/merchant_potential_commodities/reagents</code>, for buying reagents (drinks, medicine, liquified metals).</li>
+<li><code>/decl/merchant_potential_commodities/materials</code>, for buying items made out of lots of different kinds of materials, such as material stacks (ores, sheets).</li>
+<li><code>/decl/merchant_potential_commodities/gases</code>, for gases (oxygen, air, steam, vaporized blood).</li>
+</ul>
+<p>These subtypes automatically include some required information to have merchants correctly identify non-standard things.</p>
+<p>Some of these types will need to have additional information added in order to function, such as <code>/materials</code> having a <code>instance_types</code> list. You can either look at the code for the specific subtype you want to use, or consult the Standard Merchants modpack to see how it uses these types.</p>
+<p>If you want merchants to <strong>sell</strong> these things, no special subtype is required, just have the merchant sell a prefilled type of something, like a gas canister.</p>
+<h2 id="make-merchants-charge-pay-for-items-differently">Make Merchants charge/pay for items differently?</h2>
+<p>Merchants use <code>/decl/merchant_price_modifier</code>s, alongside an object's base price, to determine how much something should cost to buy or sell. Price Modifiers are held inside of two assocative lists on the merchant type, <code>supply_price_modifiers</code> and <code>demand_price_modifiers</code>. Supply is used for things the merchant could sell to players, and demand is used for things the merchant could buy from players.</p>
+<p>Modifiers are used alongside a value inside of the price modifiers lists. For example, <code>/decl/merchant_price_modifier/percentage = 1.5</code> will cause the price of an object to increased by 50%. Multiple modifiers can be stacked together to create more complex pricing structures for merchants. Disposition discounts and skill system price interactions are handled using specific price modifiers, and not having them will make those mechanics not apply, which may or may not be desirable.</p>
+<p>You shouldn't need to create subtypes, unless you want to implement custom logic for pricing things.</p>
+<h2 id="make-merchants-offer-to-buy-or-sell-more-or-less-distinct-items-at-once">Make Merchants offer to buy or sell more (or less) distinct items at once?</h2>
+<p>A merchant's <code>supply_strategy</code> and <code>demand_strategy</code> contains a <code>/decl/merchant_inventory_strategy</code> type path which determines how merchants divide items between their 'active' and 'inactive' lists. The default implementation tries to avoid having merchants offer to buy or sell lots of items at once. You can change the strategy used in order to have them offer a more predetermined amount of items, or enable behaviors such as rotating items over time.</p>
+<p>If you don't want anything to go into an inactive list, you can use <code>/decl/merchant_inventory_strategy/offer_everything</code> to opt out of this system.</p>
+<h2 id="make-merchants-talk-differently">Make Merchants talk differently?</h2>
+<p>Create a subtype of <code>/decl/merchant_speech</code>, and fill out the variables according to how you want the merchant to sound to players.</p>
+<p>Certain lines can use placeholders that can be replaced at runtime with an appropiate value. For example, <code>leaving_soon</code> can use <code>MERCHANT_TOKEN_TIME</code>, which will place a number for how many minutes the merchant is staying for. E.g. <code>leaving_soon = &quot;I'll be gone in about &quot;+MERCHANT_TOKEN_TIME+&quot; minutes.&quot;</code>.</p>
+<p>When you are done, assign the new speech decl's type path to the merchant's <code>speech</code> variable.</p>
+<h2 id="add-merchants-to-trade-hubs">Add Merchants to Trade Hubs?</h2>
+<p>The default Trade Hub implementation will automatically populate itself with most types of merchants randomly, some at the start and the rest over time. If this is what you want, then you don't need to do anything else.</p>
+<p>If instead you want specific merchants to always show up, or specific merchants to have a chance to show up, you can create a subtype of <code>/datum/trade_hub</code>, and add the desired merchant types to the relevant list on that type. This is what the Tradeship map does to ensure that certain merchants are always present.</p>
+<h2 id="automatically-spawn-in-trade-hubs">Automatically spawn in Trade Hubs?</h2>
+<p>The modpack adds a stub to <code>/datum/map</code> called <code>create_trade_hubs()</code>, which is called during initialization. The default implementation spawns in a singleton trade hub. You can override it to use a custom type, or add custom logic.</p>
+<h2 id="test-merchants-manually">Test Merchants manually?</h2>
+<p>There are a number of admin verbs to make testing your new merchants easier. <code>Debug verbs</code> must be used first to access these verbs.</p>
+<ul>
+<li><code>List Merchants</code> prints a list of every merchant instance currently exists, as well as their trade hubs. Also includes buttons to view the variables of a specific merchant or trade hub.</li>
+<li><code>Add Merchant</code> lets you instantiate a specific merchant subtype in an existing trade hub.</li>
+<li><code>Remove Merchant</code> deletes a specific merchant from existance.</li>
+<li><code>Add Singleton Trade Hub</code> lets you instantiate a specific singleton trade hub subtype. Singleton trade hubs can be accessed from anywhere.</li>
+<li><code>Add Overmap Trade Hub</code> lets you instantiate a specific overmap trade hub subtype. Your mob must be on an overmap tile for this to work, as it determines where the new hub will go. You can jump to the overmap with admin verbs.</li>
+<li><code>Remove Trade Hub</code> deletes a specific trade hub, and all of their merchants, from existance.</li>
+</ul></td></tr></table></main><footer>nebula.dme <a href="https://github.com/NebulaSS13/Nebula/tree/adf54b76ca46e08f5fcf12ad09a5841f8568570d">adf54b7</a> (dev) — <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.11.0</a></footer></body></html>
