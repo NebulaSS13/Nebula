@@ -117,7 +117,9 @@
 
 /obj/structure/mech_wreckage/heavy
 	name = "heavy exosuit wreckage"
-	loot_pool = list(
+
+/obj/structure/mech_wreckage/heavy/get_default_loot()
+	var/static/list/default_loot_pool = list(
 		/obj/item/mech_equipment/mounted_system/taser =       80,
 		/obj/item/mech_equipment/mounted_system/taser/laser = 80,
 		/obj/item/mech_equipment/shields =                    80,
@@ -126,3 +128,4 @@
 		/obj/item/mech_component/sensors/heavy/painted =      40,
 		/obj/item/mech_component/chassis/heavy/painted =      40
 	)
+	return default_loot_pool

@@ -7,47 +7,47 @@
 	icon_state = "wreck"
 	icon = 'icons/mecha/mech_part_items.dmi'
 	var/prepared
-	var/list/loot_pool
+
+/obj/structure/mech_wreckage/proc/get_default_loot()
+	return null
 
 /obj/structure/mech_wreckage/Initialize(mapload, var/mob/living/exosuit/exosuit, var/gibbed)
 	. = ..(mapload)
-	if(QDELETED(exosuit))
-		return INITIALIZE_HINT_QDEL
 
-	name = "wreckage of \the [exosuit]"
-	loot_pool = list()
-	if(!gibbed)
-		for(var/obj/item/thing in list(exosuit.arms, exosuit.legs, exosuit.head, exosuit.body))
-			if(thing && prob(40))
-				loot_pool += thing
-			if(thing == exosuit.arms)
-				exosuit.arms = null
-			else if(thing == exosuit.legs)
-				exosuit.legs = null
-			else if(thing == exosuit.head)
-				exosuit.head = null
-			else if(thing == exosuit.body)
-				exosuit.body = null
-		for(var/hardpoint in exosuit.hardpoints)
-			if(exosuit.hardpoints[hardpoint] && prob(40))
-				var/obj/item/thing = exosuit.hardpoints[hardpoint]
-				if(exosuit.remove_system(hardpoint))
-					loot_pool += thing
+	var/list/loot_pool
+	if(exosuit && !QDELETED(exosuit))
+		name = "wreckage of \the [exosuit]"
+		loot_pool = list()
+		if(!gibbed)
+			for(var/obj/item/thing in list(exosuit.arms, exosuit.legs, exosuit.head, exosuit.body))
+				if(thing && prob(40))
+					loot_pool |= thing
+				if(thing == exosuit.arms)
+					exosuit.arms = null
+				else if(thing == exosuit.legs)
+					exosuit.legs = null
+				else if(thing == exosuit.head)
+					exosuit.head = null
+				else if(thing == exosuit.body)
+					exosuit.body = null
+			for(var/hardpoint in exosuit.hardpoints)
+				if(exosuit.hardpoints[hardpoint] && prob(40))
+					var/obj/item/thing = exosuit.hardpoints[hardpoint]
+					if(exosuit.remove_system(hardpoint))
+						loot_pool |= thing
+		qdel(exosuit)
+	else
+		loot_pool = get_default_loot()
 
-	qdel(exosuit)
-
-	if(length(loot_pool))
-		if(loc)
-			for(var/atom/movable/thing as anything in loot_pool)
-				if(ispath(thing) && prob(loot_pool[thing]))
-					thing = new thing(src)
-					if(istype(thing, /obj/item/mech_component))
-						var/obj/item/mech_component/comp = thing
-						comp.prebuild()
-				if(istype(thing))
-					thing.forceMove(src)
-		loot_pool = null
-
+	if(length(loot_pool) && loc)
+		for(var/atom/movable/thing as anything in loot_pool)
+			if(ispath(thing) && prob(loot_pool[thing]))
+				thing = new thing(src)
+				if(istype(thing, /obj/item/mech_component))
+					var/obj/item/mech_component/comp = thing
+					comp.prebuild()
+			if(istype(thing))
+				thing.forceMove(src)
 
 /obj/structure/mech_wreckage/attack_hand(var/mob/user)
 	var/list/contained_atoms = get_contained_external_atoms()

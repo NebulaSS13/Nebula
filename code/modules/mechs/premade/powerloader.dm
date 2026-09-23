@@ -182,7 +182,9 @@
 
 /obj/structure/mech_wreckage/powerloader
 	name = "powerloader wrecakge"
-	loot_pool = list(
+
+/obj/structure/mech_wreckage/powerloader/get_default_loot()
+	var/static/list/default_loot_pool = list(
 		/obj/item/mech_component/manipulators/powerloader/painted = 40,
 		/obj/item/mech_component/propulsion/powerloader/painted =   40,
 		/obj/item/mech_component/sensors/powerloader/painted =      40,
@@ -190,3 +192,4 @@
 		/obj/item/mech_equipment/drill/steel =                      80,
 		/obj/item/mech_equipment/clamp =                            80
 	)
+	return default_loot_pool
