@@ -187,7 +187,7 @@
 			to_chat(user, "<span class='warning'>Turn \the [src] off first!</span>")
 			return TRUE
 
-		anchored = !anchored
+		set_anchored(!anchored)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
 

@@ -71,3 +71,5 @@
 	var/next_move_dir_sub
 	/// Movement dir of the most recently pressed movement key. Used in cardinal-only movement mode.
 	var/last_move_dir_pressed
+	/// Semaphore for macro updates, so that they all complete and don't stomp over each other.
+	var/updating_macros = 0

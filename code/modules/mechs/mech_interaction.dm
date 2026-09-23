@@ -40,6 +40,10 @@
 		return STATUS_INTERACTIVE
 	return ..()
 
+/mob/living/exosuit/get_held_items()
+	for(var/h in hardpoints)
+		LAZYADD(., hardpoints[h])
+
 /mob/living/exosuit/get_dexterity(var/silent)
 	return DEXTERITY_FULL
 
@@ -125,7 +129,7 @@
 			// Hackery for preventing embedding of melee weapons.
 			if(temp_system)
 				temp_old_anchored = temp_system.anchored
-				temp_system.anchored = TRUE
+				temp_system.set_anchored(TRUE)
 
 			// Slip up and attack yourself maybe.
 			failed = FALSE
@@ -169,7 +173,7 @@
 			if(!QDELETED(temp_system))
 				if(system_moved)
 					temp_system.forceMove(selected_system)
-				temp_system.anchored = temp_old_anchored
+				temp_system.set_anchored(temp_old_anchored)
 
 			current_user = null
 			return

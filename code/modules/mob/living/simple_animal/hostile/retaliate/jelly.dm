@@ -39,8 +39,9 @@
 	max_health = 300
 	gets_random_color = FALSE
 	ai = /datum/mob_controller/aggressive/megajelly
+	icon_scale_x = 3
+	icon_scale_y = 3
 
-	var/jelly_scale = 3
 	var/split_type = /mob/living/simple_animal/hostile/jelly/mega/half
 	var/static/megajelly_color
 
@@ -49,10 +50,9 @@
 
 /mob/living/simple_animal/hostile/jelly/mega/Initialize()
 	. = ..()
-	set_scale(jelly_scale)
 	var/obj/item/attacking_with = get_natural_weapon()
 	if(attacking_with)
-		attacking_with.set_base_attack_force(attacking_with.get_initial_base_attack_force() * jelly_scale)
+		attacking_with.set_base_attack_force(attacking_with.get_initial_base_attack_force() * icon_scale_x)
 	if(!megajelly_color)
 		megajelly_color = color_matrix_rotate_hue(round(rand(0,360),20))
 	color = megajelly_color
@@ -78,14 +78,16 @@
 	name = "zeq duchess"
 	desc = "A huge jellyfish-like creature."
 	max_health = 150
-	jelly_scale = 1.5
+	icon_scale_x = 1.5
+	icon_scale_y = 1.5
 	split_type = /mob/living/simple_animal/hostile/jelly/mega/quarter
 
 /mob/living/simple_animal/hostile/jelly/mega/quarter
 	name = "zeqling"
 	desc = "A jellyfish-like creature."
 	max_health = 75
-	jelly_scale = 0.75
+	icon_scale_x = 0.75
+	icon_scale_y = 0.75
 	split_type = /mob/living/simple_animal/hostile/jelly/mega/fourth
 	ai = /datum/mob_controller/aggressive
 
@@ -93,12 +95,15 @@
 	name = "zeqetta"
 	desc = "A tiny jellyfish-like creature."
 	max_health = 40
-	jelly_scale = 0.375
+	icon_scale_x = 0.375
+	icon_scale_y = 0.375
+
 	split_type = /mob/living/simple_animal/hostile/jelly/mega/eighth
 
 /mob/living/simple_animal/hostile/jelly/mega/eighth
 	name = "zeqttina"
 	desc = "An absolutely tiny jellyfish-like creature."
 	max_health = 20
-	jelly_scale = 0.1875
+	icon_scale_x = 0.1875
+	icon_scale_y = 0.1875
 	split_type = null

@@ -16,6 +16,7 @@
 	var/footstep_type
 	var/mob_offset
 	var/paint_verb
+	var/show_painted = TRUE
 
 /obj/structure/get_color()
 	if(paint_color)
@@ -80,7 +81,7 @@
 	var/damage_desc = get_examined_damage_string()
 	if(length(damage_desc))
 		. += damage_desc
-	if(paint_color)
+	if(show_painted && paint_color)
 		var/decl/pronouns/structure_pronouns = get_pronouns() // so we can do 'have' for plural objects like sheets
 		. += "\The [src] [structure_pronouns.has] been <font color='[paint_color]'>[paint_verb]</font>."
 	if(distance <= 2 && !isnull(get_possible_reagent_transfer_amounts()) && reagents)

@@ -274,7 +274,7 @@ two tiles on initialization, and which way a cliff is facing may change during m
 		// The bigger they are, the harder they fall.
 		// They will take at least 20 damage at the minimum, and tries to scale up to 40% of their max health.
 		// This scaling is capped at 100 total damage, which occurs if the thing that fell has more than 250 health.
-		faller.take_damage(clamp(faller.get_max_health() * 0.4, 20, 100) * harm, BRUTE, ran_zone(), inflicter = src)
+		faller.take_damage(clamp(faller.get_max_health() * 0.4, 20, 100) * harm, BRUTE, inflicter = src)
 		shake_camera(faller, 1, 1)
 
 	// Now fall off more cliffs below this one if they exist.
@@ -295,7 +295,7 @@ two tiles on initialization, and which way a cliff is facing may change during m
 	return FALSE
 
 // This tells AI mobs to not be dumb and step off cliffs willingly.
-/obj/structure/cliff/is_safe_to_step(mob/living/stepper)
-	if(should_fall(stepper))
+/obj/structure/cliff/is_safe_to_step(atom/movable/mover)
+	if(should_fall(mover))
 		return FALSE
 	return ..()

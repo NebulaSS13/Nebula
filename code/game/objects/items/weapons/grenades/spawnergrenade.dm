@@ -20,8 +20,8 @@
 						step(spawned, pick(global.cardinal))
 		qdel(src)
 
-/obj/item/grenade/spawnergrenade/manhacks
-	name = "manhack delivery grenade"
+/obj/item/grenade/spawnergrenade/viscerator
+	name = "viscerator delivery grenade"
 	spawner_type = /mob/living/simple_animal/hostile/viscerator
 	deliveryamt = 5
 	origin_tech = @'{"materials":3,"magnets":4,"esoteric":4}'

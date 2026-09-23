@@ -7,7 +7,7 @@
 		return tool_toggle_anchors(user, wrench)
 	return FALSE
 
-/obj/structure/proc/handle_default_welder_attackby(var/mob/user, var/obj/item/weldingtool/welder)
+/obj/structure/proc/handle_default_welder_attackby(var/mob/user, var/obj/item/welder)
 	if((tool_interaction_flags & TOOL_INTERACTION_DECONSTRUCT) && can_dismantle(user))
 		return welder_dismantle(user, welder)
 	return FALSE
@@ -182,11 +182,11 @@
 	dismantle_structure(user)
 	return TRUE
 
-/obj/structure/proc/welder_dismantle(mob/user, obj/item/weldingtool/welder)
+/obj/structure/proc/welder_dismantle(mob/user, obj/item/fuelled_tool/welding/welder)
 	if(material && !material.removed_by_welder)
 		to_chat(user, SPAN_WARNING("\The [src] is too delicate to be dismantled with \the [welder]; try a crowbar."))
 		return TRUE
-	if(!welder.isOn())
+	if(!welder.tool_is_running())
 		to_chat(user, SPAN_WARNING("Try lighting \the [welder] first."))
 		return TRUE
 	if(welder.get_fuel() < 5)
@@ -207,7 +207,7 @@
 	if(!do_after(user, 4 SECONDS, src) || QDELETED(src))
 		return TRUE
 	playsound(src.loc, anchor_sound, 100, 1)
-	anchored = !anchored
+	set_anchored(!anchored)
 	visible_message(SPAN_NOTICE("\The [user] has [anchored ? "secured" : "unsecured"] \the [src] with \the [tool]."))
 	update_icon()
 	return TRUE

@@ -41,7 +41,7 @@
 		S = new /obj/item/solar_assembly(src)
 		S.glass_type = /decl/material/solid/glass
 		S.tracker = 1
-		S.anchored = TRUE
+		S.set_anchored(TRUE)
 	S.forceMove(src)
 	update_icon()
 

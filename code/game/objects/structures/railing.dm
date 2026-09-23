@@ -276,8 +276,8 @@ WOOD_RAILING_SUBTYPE(yew)
 			return TRUE
 	// Repair
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/F = used_item
-		if(F.isOn())
+		var/obj/item/fuelled_tool/welding/F = used_item
+		if(F.tool_is_running())
 			var/current_max_health = get_max_health()
 			if(current_health >= current_max_health)
 				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")
@@ -299,7 +299,7 @@ WOOD_RAILING_SUBTYPE(yew)
 		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 		if(do_after(user, 10, src) && density)
 			to_chat(user, (anchored ? "<span class='notice'>You have unfastened \the [src] from the floor.</span>" : "<span class='notice'>You have fastened \the [src] to the floor.</span>"))
-			anchored = !anchored
+			set_anchored(!anchored)
 			update_connections(TRUE)
 			update_icon()
 		return TRUE

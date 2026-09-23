@@ -81,13 +81,17 @@
 		loc.storage.on_item_pre_deletion(src)
 	UNQUEUE_TEMPERATURE_ATOM(src)
 	QDEL_NULL(reagents)
-	LAZYCLEARLIST(our_overlays)
-	LAZYCLEARLIST(priority_overlays)
+
+	if (simple_overlays)
+		simple_overlays = null
+	if (grouped_overlays)
+		grouped_overlays = null
+
 	LAZYCLEARLIST(climbers)
 	QDEL_NULL(light)
 	if(simulated && opacity)
 		updateVisibility(src)
-	if(atom_codex_ref && atom_codex_ref != TRUE) // may be null, TRUE or a datum instance
+	if(istype(atom_codex_ref) && !atom_codex_ref.store_codex_entry) // may be null, TRUE or a datum instance
 		QDEL_NULL(atom_codex_ref)
 	. = ..()
 	// This might need to be moved onto a Del() override at some point.
@@ -184,5 +188,5 @@
 
 /atom/movable/PopulateClone(atom/movable/clone)
 	clone = ..()
-	clone.anchored = anchored
+	clone.set_anchored(anchored)
 	return clone

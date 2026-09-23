@@ -26,18 +26,12 @@
 	user.visible_message(SPAN_WARNING("\The [user] crouches, preparing for a leap!"))
 
 /decl/maneuver/leap/can_be_used_by(var/mob/living/user, var/atom/target, var/silent = FALSE)
-	. = ..()
-	if(.)
-		var/can_leap_distance = user.get_jump_distance() * user.get_acrobatics_multiplier()
-		. = (can_leap_distance > 0 && (!target || get_dist(user, target) <= can_leap_distance))
-		if(!. && !silent)
-			to_chat(user, SPAN_WARNING("You cannot leap that far!"))
-
-/decl/maneuver/leap/spider
-	stamina_cost = 0
-
-/decl/maneuver/leap/spider/show_initial_message(var/mob/living/user, var/atom/target)
-	user.visible_message(SPAN_WARNING("\The [user] reels back and prepares to launch itself at \the [target]!"))
+	if(!(. = ..()))
+		return
+	var/can_leap_distance = user.get_jump_distance() * user.get_acrobatics_multiplier()
+	. = (can_leap_distance > 0 && (!target || get_dist(user, target) <= can_leap_distance))
+	if(!. && !silent)
+		to_chat(user, SPAN_WARNING("You cannot leap that far!"))
 
 /decl/maneuver/leap/grab/end_leap(var/mob/living/user, var/atom/target)
 	. = ..()

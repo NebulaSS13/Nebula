@@ -335,7 +335,7 @@
 	if(LAZYLEN(alt_interactions))
 		var/list/interaction_strings = list()
 		for(var/interaction_type as anything in alt_interactions)
-			var/decl/interaction_handler/interaction = GET_DECL(interaction_type)
+			var/decl/interaction_handler/interaction = RESOLVE_TO_DECL(interaction_type)
 			if(interaction.examine_desc && (interaction.always_show_on_examine || interaction.is_possible(src, user, user?.get_active_held_item())))
 				interaction_strings += emote_replace_target_tokens(interaction.examine_desc, src)
 		if(length(interaction_strings))
@@ -1083,7 +1083,7 @@
 		T.unregister_dangerous_object(src)
 
 // Test for if stepping on a tile containing this obj is safe to do, used for things like landmines and cliffs.
-/atom/proc/is_safe_to_step(mob/living/stepper)
+/atom/proc/is_safe_to_step(atom/movable/mover)
 	return TRUE
 
 //Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -1092,3 +1092,7 @@
 
 /atom/proc/see_signlang(message, verb = "gestures", decl/language/language, mob/speaker, prefix)
 	return
+
+// Helper for when destroyed by a chainsaw (for the purposes of overriding)
+/atom/proc/handle_chainsawed(mob/user, obj/item/chainsaw)
+	physically_destroyed()

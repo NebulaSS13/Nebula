@@ -171,7 +171,7 @@
 	if(do_after(user, delay, src))
 		if(!src) return
 		to_chat(user, SPAN_NOTICE("You [anchored? "un" : ""]secured \the [src]!"))
-		anchored = !anchored
+		set_anchored(!anchored)
 	return 1
 
 /obj/attack_hand(mob/user)
@@ -502,8 +502,3 @@
 		animate_heat_glow(temperature, scale_sub = round((my_material.melting_point - T20C) * 0.25) + T20C, scale_div = round(my_material.melting_point * 0.75), scale_max = my_material.melting_point, skip_filter = TRUE, anim_time = anim_time)
 	if(isatom(loc))
 		loc.update_icon()
-
-/obj/is_valid_merchant_pad_target()
-	if(anchored)
-		return FALSE
-	return ..()

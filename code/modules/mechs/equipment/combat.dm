@@ -276,7 +276,7 @@
 	var/attack_dir = 0
 	if (istype(source, /obj/item/projectile))
 		var/obj/item/projectile/P = source
-		attack_dir = get_dir(get_turf(src), P.starting)
+		attack_dir = get_dir(get_turf(src), P.starting_ref?.resolve())
 	else if (attacker)
 		attack_dir = get_dir(get_turf(src), get_turf(attacker))
 	else if (source)

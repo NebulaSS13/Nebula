@@ -1,6 +1,6 @@
 /decl/outfit/vox
 	abstract_type = /decl/outfit/vox
-	mask          = /obj/item/clothing/mask/gas/swat/vox
+	mask          = /obj/item/clothing/mask/gas/vox
 	back          = /obj/item/tank/nitrogen
 	uniform       = /obj/item/clothing/suit/robe/vox
 	shoes         = /obj/item/clothing/shoes/magboots/vox
@@ -18,16 +18,20 @@
 	wearer.set_internals(locate(/obj/item/tank) in wearer.contents)
 
 /decl/outfit/vox/survivor
-	name = "Job - Vox Survivor"
+	name          = "Vox - Survivor"
+	hands         = list(/obj/item/gun/launcher/vox/spikethrower/small)
 
 /decl/outfit/vox/raider
-	name = "Job - Vox Raider"
+	name          = "Vox - Raider"
 	l_ear         = /obj/item/radio/headset/raider
+	mask          = /obj/item/clothing/mask/gas/swat/vox
 	glasses       = /obj/item/clothing/glasses/thermal
 	holster       = /obj/item/clothing/webbing/holster/armpit
+	suit          = /obj/item/clothing/suit/space/void/vox/carapace/prepared
 	suit_store    = /obj/item/flashlight
-	hands         = list(/obj/item/gun/launcher/alien/spikethrower)
 	id_type       = /obj/item/card/id/syndicate
+	back          = null
+	hands         = list(/obj/item/gun/launcher/vox/spikethrower)
 	holster_types = list(
 		/obj/item/clothing/webbing/holster/armpit,
 		/obj/item/clothing/webbing/holster/waist,

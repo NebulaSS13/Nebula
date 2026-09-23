@@ -30,6 +30,8 @@
 	var/is_spawnable = TRUE
 	/// Various tags used for selecting templates for placement on a map.
 	var/template_tags = 0
+	/// If set to a string, will be skipped in unit testing (and print the string)
+	var/unit_test_skip_reason
 
 /datum/map_template/New(var/created_ad_hoc)
 	if(created_ad_hoc != SSmapping.type)

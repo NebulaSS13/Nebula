@@ -73,7 +73,7 @@
 				var/obj/item/projectile/P = new split_type(split_loc)
 				P.color = color
 				P.light_color = color
-				P.firer = firer
+				P.firer_ref = firer_ref
 				P.shot_from = shot_from
 				P.damage = floor(damage/split_count)
 				P.armor_penetration = floor(armor_penetration/split_count)
@@ -223,6 +223,9 @@
 	muzzle_type = /obj/effect/projectile/muzzle/stun
 	tracer_type = /obj/effect/projectile/tracer/stun
 	impact_type = /obj/effect/projectile/impact/stun
+
+/obj/item/projectile/beam/stun/weak
+	agony = 20
 
 /obj/item/projectile/beam/stun/heavy
 	name = "heavy stun beam"

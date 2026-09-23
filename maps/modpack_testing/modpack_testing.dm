@@ -28,6 +28,7 @@
 	#include "../../mods/content/integrated_electronics/_integrated_electronics.dme"
 	#include "../../mods/content/item_sharpening/_item_sharpening.dme"
 	#include "../../mods/content/matchmaking/_matchmaking.dme"
+	#include "../../mods/content/merchants/_merchants.dme"
 	#include "../../mods/content/modern_earth/_modern_earth.dme"
 	#include "../../mods/content/mouse_highlights/_mouse_highlight.dme"
 	#include "../../mods/content/pheromones/_pheromones.dme"
@@ -36,6 +37,7 @@
 	#include "../../mods/content/response_team/_response_team.dme"
 	#include "../../mods/content/sealant_gun/_sealant_gun.dme"
 	#include "../../mods/content/shackles/_shackles.dme"
+	#include "../../mods/content/standard_merchants/_standard_merchants.dme"
 	#include "../../mods/content/standard_jobs/_standard_jobs.dme"
 	#include "../../mods/content/supermatter/_supermatter.dme"
 	#include "../../mods/content/tabloids/_tabloids.dme"
@@ -57,6 +59,8 @@
 
 	#include "../../mods/mobs/borers/_borers.dme"
 	#include "../../mods/mobs/dionaea/_dionaea.dme"
+	#include "../../mods/mobs/spiders/_spiders.dme"
+	#include "../../mods/mobs/skathari/_skathari.dme"
 
 	#include "../../mods/species/adherent/_adherent.dme"
 	#include "../../mods/species/ascent/_ascent.dme"

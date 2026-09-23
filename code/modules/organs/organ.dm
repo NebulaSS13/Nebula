@@ -67,6 +67,10 @@
 		owner = null
 	else
 		do_uninstall(TRUE, FALSE, FALSE, FALSE) //Don't ignore children here since we might own/contain them
+	if(has_stat_info)
+		var/mob/living/holder = loc
+		if(istype(holder))
+			LAZYREMOVE(holder.stat_organs, src)
 	species = null
 	bodytype = null
 	QDEL_NULL(organ_appearance)

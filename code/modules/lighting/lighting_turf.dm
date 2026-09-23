@@ -161,4 +161,7 @@
 		if (corners[i]) // Already have a corner on this direction.
 			continue
 
-		corners[i] = new/datum/lighting_corner(src, LIGHTING_CORNER_DIAGONAL[i], i)
+		corners[i] = new/datum/lighting_corner(src, LIGHTING_CORNER_DIAGONAL[i], i, LIGHTING_CORNER_DO_NOT_SCAN)
+
+	for (var/datum/lighting_corner/C as anything in corners)
+		C.generate_z_connections()

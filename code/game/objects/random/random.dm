@@ -6,6 +6,8 @@
 	abstract_type = /obj/random
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
 	var/spawn_method = /obj/random/proc/spawn_item
+	var/mob_returns_home = FALSE
+	var/mob_wander_distance = 7
 
 // creates a new object and deletes itself
 /obj/random/Initialize()
@@ -33,7 +35,17 @@
 			A.default_pixel_y = pixel_y
 			A.reset_offsets(0)
 
+		if(mob_returns_home && ismob(A))
+			var/mob/mob = A
+			if(istype(mob.ai))
+				mob.ai.set_home(loc, mob_wander_distance)
+
 /obj/random/proc/create_instance(var/build_path, var/spawn_loc)
+	if(ispath(build_path, /turf))
+		var/turf/changing = get_turf(spawn_loc)
+		if(istype(changing))
+			return list(changing.ChangeTurf(build_path))
+		return null
 	if(ispath(build_path))
 		return list(new build_path(spawn_loc))
 	if(islist(build_path))
@@ -51,6 +63,7 @@
 	desc = "This item type is used to randomly spawn a given object at round-start."
 	icon_state = "x3"
 	spawn_nothing_percentage = 50
+	abstract_type = /obj/random/single
 	var/spawn_object = null
 
 /obj/random/single/spawn_choices()

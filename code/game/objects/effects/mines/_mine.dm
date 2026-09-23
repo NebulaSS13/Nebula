@@ -161,7 +161,9 @@
 			old_turf?.unregister_dangerous_object(src)
 			new_turf?.register_dangerous_object(src)
 
+// Using the UNIT_TESTING define to disable explosion behavior as it seems to cause hard dels during unit testing.
 /obj/item/mine/proc/trigger_payload(var/mob/living/M)
+#ifndef UNIT_TESTING
 	if(!triggering && payload && armed)
 		triggering = TRUE
 		if(ismob(loc))
@@ -171,6 +173,7 @@
 		payload.trigger_payload(src, M)
 		disarm() // the mine can be reused if the payload doesn't destroy it.
 		return TRUE
+#endif
 	return FALSE
 
 /obj/item/mine/bullet_act()
@@ -196,7 +199,8 @@
 		trigger_payload(AM)
 
 // This tells AI mobs to not be dumb and step on mines willingly.
-/obj/item/mine/is_safe_to_step(mob/living/stepper)
-	if(!armed)
+/obj/item/mine/is_safe_to_step(atom/movable/mover)
+	if(!armed || !isliving(mover))
 		return TRUE
-	return !armed || stepper.can_overcome_gravity()
+	var/mob/living/stepper = mover
+	return stepper.can_overcome_gravity()

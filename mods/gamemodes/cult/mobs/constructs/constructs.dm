@@ -138,9 +138,10 @@
 							"<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>")
 
 			// Find a turf near or on the original location to bounce to
-			if(P.starting)
-				var/new_x = P.starting.x + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
-				var/new_y = P.starting.y + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
+			var/turf/starting = P.starting_ref?.resolve()
+			if(istype(starting))
+				var/new_x = starting.x + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
+				var/new_y = starting.y + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
 				var/turf/curloc = get_turf(src)
 
 				// redirect the projectile
@@ -148,7 +149,7 @@
 
 			return -1 // complete projectile permutation
 
-	return (..(P))
+	return ..(P)
 
 /mob/living/simple_animal/construct/armoured/mind_initialize()
 	..()

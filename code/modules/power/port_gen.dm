@@ -318,7 +318,7 @@
 			to_chat(user, "<span class='notice'>You unsecure \the [src] from the floor.</span>")
 
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		anchored = !anchored
+		set_anchored(!anchored)
 		return TRUE
 	return component_attackby(used_item, user)
 

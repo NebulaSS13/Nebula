@@ -160,7 +160,14 @@
 	return 1
 
 /mob/proc/setClickCooldown(var/timeout)
-	next_move = max(world.time + timeout, next_move)
+
+	if(isnull(modifier_click_cooldown_mult))
+		modifier_click_cooldown_mult = 1
+		for(var/modifier_type in get_mob_modifiers())
+			var/decl/mob_modifier/modifier = RESOLVE_TO_DECL(modifier_type)
+			if(!isnull(modifier.click_cooldown_multiplier))
+				modifier_click_cooldown_mult *= modifier.click_cooldown_multiplier
+	next_move = max(world.time + (timeout * modifier_click_cooldown_mult), next_move)
 
 /mob/proc/canClick()
 	if(get_config_value(/decl/config/toggle/no_click_cooldown) || next_move <= world.time)
@@ -292,6 +299,16 @@
 			var/using_item = user.get_active_held_item()
 			if(handler.is_possible(src, user, using_item))
 				return handler.invoked(src, user, using_item)
+	if(!isturf(loc) || user.Adjacent(src))
+		return FALSE
+	var/list/available_maneuvers = user.get_available_maneuvers()
+	if(!length(available_maneuvers))
+		return FALSE
+	var/turf/target_turf = loc
+	for(var/maneuver_type in available_maneuvers)
+		var/decl/maneuver/maneuver_decl = RESOLVE_TO_DECL(maneuver_type)
+		if(maneuver_decl.perform(user, target_turf, user.get_acrobatics_multiplier(maneuver_decl)))
+			return TRUE
 	return FALSE
 
 /atom/movable/CtrlClick(var/mob/living/user)

@@ -7,17 +7,21 @@
 	icon_state = "wreck"
 	icon = 'icons/mecha/mech_part_items.dmi'
 	var/prepared
-	var/list/loot_pool
+
+/obj/structure/mech_wreckage/proc/get_default_loot()
+	return null
 
 /obj/structure/mech_wreckage/Initialize(mapload, var/mob/living/exosuit/exosuit, var/gibbed)
 	. = ..(mapload)
-	if(exosuit)
+
+	var/list/loot_pool
+	if(exosuit && !QDELETED(exosuit))
 		name = "wreckage of \the [exosuit]"
 		loot_pool = list()
 		if(!gibbed)
 			for(var/obj/item/thing in list(exosuit.arms, exosuit.legs, exosuit.head, exosuit.body))
 				if(thing && prob(40))
-					loot_pool += thing
+					loot_pool |= thing
 				if(thing == exosuit.arms)
 					exosuit.arms = null
 				else if(thing == exosuit.legs)
@@ -30,23 +34,20 @@
 				if(exosuit.hardpoints[hardpoint] && prob(40))
 					var/obj/item/thing = exosuit.hardpoints[hardpoint]
 					if(exosuit.remove_system(hardpoint))
-						loot_pool += thing
+						loot_pool |= thing
+		qdel(exosuit)
+	else
+		loot_pool = get_default_loot()
 
-		if(!QDELETED(exosuit))
-			qdel(exosuit)
-
-	if(length(loot_pool))
-		if(loc)
-			for(var/atom/movable/thing as anything in loot_pool)
-				if(ispath(thing) && prob(loot_pool[thing]))
-					thing = new thing(src)
-					if(istype(thing, /obj/item/mech_component))
-						var/obj/item/mech_component/comp = thing
-						comp.prebuild()
-				if(istype(thing))
-					thing.forceMove(src)
-		loot_pool = null
-
+	if(length(loot_pool) && loc)
+		for(var/atom/movable/thing as anything in loot_pool)
+			if(ispath(thing) && prob(loot_pool[thing]))
+				thing = new thing(src)
+				if(istype(thing, /obj/item/mech_component))
+					var/obj/item/mech_component/comp = thing
+					comp.prebuild()
+			if(istype(thing))
+				thing.forceMove(src)
 
 /obj/structure/mech_wreckage/attack_hand(var/mob/user)
 	var/list/contained_atoms = get_contained_external_atoms()
@@ -62,8 +63,8 @@
 
 	var/cutting
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
-		if(welder.isOn())
+		var/obj/item/fuelled_tool/welding/welder = used_item
+		if(welder.tool_is_running())
 			cutting = TRUE
 		else
 			to_chat(user, SPAN_WARNING("Turn \the [welder] on, first."))
@@ -72,25 +73,27 @@
 
 	if(cutting)
 		if(!prepared)
-			prepared = 1
+			prepared = TRUE
 			to_chat(user, SPAN_NOTICE("You partially dismantle \the [src]."))
 		else
 			to_chat(user, SPAN_WARNING("\The [src] has already been weakened."))
-		return 1
+		return TRUE
 
-	else if(IS_WRENCH(used_item))
+	if(IS_WRENCH(used_item))
 		if(prepared)
 			to_chat(user, SPAN_NOTICE("You finish dismantling \the [src]."))
 			SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), rand(5, 10))
 			qdel(src)
 		else
 			to_chat(user, SPAN_WARNING("It's too solid to dismantle. Try cutting through some of the bigger bits."))
-		return 1
-	else if(istype(used_item) && used_item.expend_attack_force(user) > 20)
+		return TRUE
+
+	if(istype(used_item) && used_item.expend_attack_force(user) > 20)
 		visible_message(SPAN_DANGER("\The [src] has been smashed with \the [used_item] by \the [user]!"))
 		if(prob(20))
 			physically_destroyed()
-		return 1
+		return TRUE
+
 	return ..()
 
 /obj/structure/mech_wreckage/Destroy()

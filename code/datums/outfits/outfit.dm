@@ -180,16 +180,17 @@
 			try_equip(wearer, r_ear_path, slot_r_ear_str)
 
 	// Ears, backpack and uniforms are handled individually.
+	// Suit goes on last as voidsuits might deploy items into head and shoes slot.
 	var/list/slot_to_gear  = list(
-		(slot_wear_suit_str) = resolve_equip_to_list(suit),
-		(slot_back_str)      = resolve_equip_to_list(back),
-		(slot_belt_str)      = resolve_equip_to_list(belt),
 		(slot_gloves_str)    = resolve_equip_to_list(gloves),
 		(slot_shoes_str)     = resolve_equip_to_list(shoes),
+		(slot_glasses_str)   = resolve_equip_to_list(glasses),
 		(slot_wear_mask_str) = resolve_equip_to_list(mask),
 		(slot_head_str)      = resolve_equip_to_list(head),
-		(slot_glasses_str)   = resolve_equip_to_list(glasses),
+		(slot_wear_suit_str) = resolve_equip_to_list(suit),
 		(slot_wear_id_str)   = resolve_equip_to_list(id),
+		(slot_belt_str)      = resolve_equip_to_list(belt),
+		(slot_back_str)      = resolve_equip_to_list(back),
 		(slot_l_store_str)   = resolve_equip_to_list(l_pocket),
 		(slot_r_store_str)   = resolve_equip_to_list(r_pocket),
 		(slot_s_store_str)   = resolve_equip_to_list(suit_store)

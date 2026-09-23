@@ -58,6 +58,12 @@
 
 	initial_access = list(list(access_security, access_bridge))
 
+/obj/machinery/porta_turret/lasertag
+	installation = /obj/item/gun/energy/lasertag/blue
+
+/obj/machinery/porta_turret/lasertag/red
+	installation = /obj/item/gun/energy/lasertag/red
+
 /obj/machinery/porta_turret/crescent
 	enabled = 0
 	ailock = 1
@@ -271,7 +277,7 @@ var/global/list/turret_icons
 		if(do_after(user, 5 SECONDS, src))
 			//This code handles moving the turret around. After all, it's a portable turret!
 			playsound(loc, 'sound/items/Ratchet.ogg', 100, TRUE)
-			anchored = !anchored
+			set_anchored(!anchored)
 			update_icon()
 			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the exterior bolts on [src].</span>")
 		wrenching = 0

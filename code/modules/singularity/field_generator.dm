@@ -109,7 +109,7 @@ field_generator power level display
 				user.visible_message("[user.name] secures [src.name] to the floor.", \
 					"You secure the external reinforcing bolts to the floor.", \
 					"You hear ratchet.")
-				src.anchored = TRUE
+				set_anchored(TRUE)
 				return TRUE
 			if(1)
 				state = 0
@@ -117,13 +117,13 @@ field_generator power level display
 				user.visible_message("[user.name] unsecures [src.name] reinforcing bolts from the floor.", \
 					"You undo the external reinforcing bolts.", \
 					"You hear ratchet.")
-				src.anchored = FALSE
+				set_anchored(FALSE)
 				return TRUE
 			if(2)
 				to_chat(user, "<span class='warning'> \The [src] needs to be unwelded from the floor.</span>")
 				return TRUE
 	else if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		switch(state)
 			if(0)
 				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
@@ -137,7 +137,7 @@ field_generator power level display
 					"You hear welding.")
 				if (!do_after(user, 2 SECONDS, src))
 					return TRUE
-				if(!src || !welder.isOn()) return TRUE
+				if(!src || !welder.tool_is_running()) return TRUE
 				state = 2
 				to_chat(user, "You weld the field generator to the floor.")
 				return TRUE
@@ -150,7 +150,7 @@ field_generator power level display
 					"You hear welding.")
 				if (!do_after(user, 2 SECONDS, src))
 					return TRUE
-				if(!src || !welder.isOn()) return TRUE
+				if(!src || !welder.tool_is_running()) return TRUE
 				state = 1
 				to_chat(user, "You cut \the [src] free from the floor.")
 				return TRUE

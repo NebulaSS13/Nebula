@@ -441,7 +441,7 @@
 		return
 	. = unbuckling
 	unbuckling.buckled = null
-	unbuckling.anchored = initial(unbuckling.anchored)
+	unbuckling.set_anchored(initial(unbuckling.anchored))
 	unbuckling.update_posture()
 	unbuckling.update_floating()
 	remove_buckled_mob(unbuckling)
@@ -555,7 +555,7 @@
 /atom/movable/proc/crossed_mob(var/mob/living/victim)
 	return
 
-/atom/movable/proc/get_object_size()
+/atom/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
 
 /atom/movable/get_manual_heat_source_coefficient()
@@ -667,7 +667,6 @@
 /atom/movable/immune_to_floor_hazards()
 	return ..() || !!throwing
 
-// TODO: make everything use this.
 /atom/movable/proc/set_anchored(new_anchored)
 	SHOULD_CALL_PARENT(TRUE)
 	if(anchored != new_anchored)
@@ -684,9 +683,6 @@
 
 /atom/movable/proc/get_cryogenic_power()
 	return 0
-
-/atom/movable/proc/is_valid_merchant_pad_target()
-	return simulated
 
 // TODO reimplement this properly.
 /atom/movable/proc/is_incorporeal()

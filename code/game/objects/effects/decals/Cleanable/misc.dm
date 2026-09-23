@@ -149,3 +149,11 @@
 	icon_state         = "fchampagne1"
 	color              = COLOR_BRASS
 	random_icon_states = list("fchampagne1", "fchampagne2", "fchampagne3", "fchampagne4")
+
+/obj/effect/decal/cleanable/spider_remains
+	name = "spider remains"
+	desc = "A green squishy mess."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "greenshatter"
+	anchored = TRUE
+	layer = BLOOD_LAYER

@@ -84,8 +84,8 @@ var/global/bomb_set
 		switch(removal_stage)
 			if(0)
 				if(IS_WELDER(used_item))
-					var/obj/item/weldingtool/welder = used_item
-					if(!welder.isOn()) return TRUE
+					var/obj/item/fuelled_tool/welding/welder = used_item
+					if(!welder.tool_is_running()) return TRUE
 					if(welder.get_fuel() < 5) // uses up 5 fuel.
 						to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
 						return TRUE
@@ -110,8 +110,8 @@ var/global/bomb_set
 
 			if(2)
 				if(IS_WELDER(used_item))
-					var/obj/item/weldingtool/welder = used_item
-					if(!welder.isOn()) return TRUE
+					var/obj/item/fuelled_tool/welding/welder = used_item
+					if(!welder.tool_is_running()) return TRUE
 					if (welder.get_fuel() < 5) // uses up 5 fuel.
 						to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
 						return TRUE
@@ -149,7 +149,7 @@ var/global/bomb_set
 	if(!extended && deployable)
 		. = TRUE
 		if(removal_stage < 5)
-			src.anchored = TRUE
+			set_anchored(TRUE)
 			visible_message("<span class='warning'>With a steely snap, bolts slide out of [src] and anchor it to the flooring!</span>")
 		else
 			visible_message("<span class='warning'>\The [src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut.</span>")
@@ -301,7 +301,7 @@ var/global/bomb_set
 					return TOPIC_HANDLED
 
 				if(!isspaceturf(get_turf(src)))
-					anchored = !anchored
+					set_anchored(!anchored)
 					if(anchored)
 						visible_message(SPAN_WARNING("With a steely snap, bolts slide out of \the [src] and anchor it to the flooring."), blind_message = SPAN_NOTICE("You hear a steely snap."))
 					else

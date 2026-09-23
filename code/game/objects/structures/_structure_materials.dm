@@ -61,30 +61,33 @@
 /obj/structure/proc/create_dismantled_part(var/turf/T)
 	return new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
 
+/obj/structure/proc/drop_dismantled_matter(decl/material/drop_material)
+	var/placing
+	if(isnull(parts_amount))
+		placing = (matter[drop_material.type] / SHEET_MATERIAL_AMOUNT) * 0.75
+		if(material == drop_material && parts_type)
+			placing *= atom_info_repository.get_matter_multiplier_for(parts_type, drop_material.type, placing)
+		placing = floor(placing)
+	else
+		placing = parts_amount
+
+	if(placing <= 0)
+		return
+
+	if(material == drop_material) // Primary material uses parts_type (in case it is a stack) otherwise we use default raw form.
+		LAZYADD(., drop_material.place_dismantled_product(loc, FALSE, placing, parts_type))
+	else
+		LAZYADD(., drop_material.place_dismantled_product(loc, FALSE, placing))
+
 /obj/structure/proc/create_dismantled_products(var/turf/T)
 	SHOULD_CALL_PARENT(TRUE)
 	if(parts_type && !ispath(parts_type, /obj/item/stack))
 		for(var/i = 1 to max(parts_amount, 1))
 			LAZYADD(., create_dismantled_part(T))
 		return
-
 	for(var/mat in matter)
-
-		var/decl/material/M = GET_DECL(mat)
-		var/placing
-		if(isnull(parts_amount))
-			placing = (matter[mat] / SHEET_MATERIAL_AMOUNT) * 0.75
-			if(material == M && parts_type)
-				placing *= atom_info_repository.get_matter_multiplier_for(parts_type, mat, placing)
-			placing = floor(placing)
-		else
-			placing = parts_amount
-
-		if(placing > 0)
-			if(material == M)
-				LAZYADD(., M.place_dismantled_product(T, FALSE, placing, parts_type))
-			else
-				LAZYADD(., M.place_dismantled_product(T, FALSE, placing))
+		for(var/thing in drop_dismantled_matter(GET_DECL(mat)))
+			LAZYADD(., thing)
 
 /obj/structure/proc/clear_materials()
 	matter = null

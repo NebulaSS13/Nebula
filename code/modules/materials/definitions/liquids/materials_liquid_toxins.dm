@@ -92,6 +92,15 @@
 		SET_STATUS_MAX(M, STAT_CONFUSE, 3)
 	..()
 
+/decl/material/liquid/expired_medicine
+	name = "expired medicine"
+	uid = "liquid_expired_medicine"
+	lore_text = "Some form of liquid medicine that is well beyond its shelf date. Administering it now would cause illness."
+	taste_description = "bitterness"
+	toxicity = 5
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas   = MAT_RARITY_NOWHERE
+
 /decl/material/liquid/cyanide //Fast and Lethal
 	name = "cyanide"
 	uid = "liquid_cyanide"
@@ -309,3 +318,11 @@
 	color = "#484848"
 	value = 0.5
 	narcosis = 5
+
+/decl/material/solid/organic/mold
+	name = "mold"
+	uid = "solid_mold"
+	lore_text = "A mold is a fungus that causes biodegradation of natural materials. This variant contains mycotoxins, and is dangerous to humans."
+	taste_description = "mold"
+	toxicity = 5
+	color = "#635656"

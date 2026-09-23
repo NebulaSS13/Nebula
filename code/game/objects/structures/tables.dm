@@ -456,12 +456,13 @@
 		cover = get_step(loc, get_dir(from, loc))
 	if(!cover)
 		return 1
-	if (get_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
+	if (get_dist(P.starting_ref?.resolve(), loc) <= 1) //Tables won't help you if people are THIS close
 		return 1
 
 	var/chance = 20
-	if(ismob(P.original) && get_turf(P.original) == cover)
-		var/mob/M = P.original
+	var/atom/original = P.original_ref?.resolve()
+	if(ismob(original) && get_turf(original) == cover)
+		var/mob/M = original
 		if (M.current_posture.prone)
 			chance += 20				//Lying down lets you catch less bullets
 	if(is_flipped)
@@ -650,7 +651,7 @@
 /obj/structure/table/handle_default_wrench_attackby(var/mob/user, var/obj/item/wrench)
 	return !reinf_material && ..()
 
-/obj/structure/table/handle_default_welder_attackby(var/mob/user, var/obj/item/weldingtool/welder)
+/obj/structure/table/handle_default_welder_attackby(var/mob/user, var/obj/item/welder)
 	return !reinf_material && ..()
 
 /obj/structure/table/handle_default_crowbar_attackby(var/mob/user, var/obj/item/crowbar)

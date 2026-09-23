@@ -1365,3 +1365,6 @@ modules/mob/living/human/life.dm if you die, you will be zoomed out.
 // Called on mouse up event from wielding mob.
 /obj/item/proc/wielder_mouse_drag_up(mob/user, atom/target)
 	return FALSE
+
+/obj/item/proc/get_effective_obj()
+	return src

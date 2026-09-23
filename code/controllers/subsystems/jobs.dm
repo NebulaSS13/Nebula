@@ -489,14 +489,14 @@ SUBSYSTEM_DEF(jobs)
 		spawn_in_storage = equip_custom_loadout(H, job)
 	else
 		to_chat(H, "Your job is [job_title] and the game just can't handle it! Please report this bug to an administrator.")
+		return
 
 	H.job = job_title
 
 	if(!joined_late || job.latejoin_at_spawnpoints)
-		var/obj/S = job.get_roundstart_spawnpoint()
-
-		if(istype(S, /obj/abstract/landmark/start) && isturf(S.loc))
-			H.forceMove(S.loc)
+		var/turf/spawn_point = job.get_roundstart_spawn_turf(job.get_alt_title_for(H.client))
+		if(istype(spawn_point))
+			H.forceMove(spawn_point)
 		else
 			var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)
 			H.forceMove(DEFAULTPICK(spawnpoint.get_spawn_turfs(H), get_random_spawn_turf(SPAWN_FLAG_JOBS_CAN_SPAWN)))
@@ -573,12 +573,12 @@ SUBSYSTEM_DEF(jobs)
 	return positions_by_department[dept] || list()
 
 /datum/controller/subsystem/jobs/proc/spawn_empty_ai()
-	for(var/obj/abstract/landmark/start/S in global.all_landmarks)
-		if(S.name != "AI")
+	for(var/obj/abstract/landmark/start/start_point in global.all_landmarks)
+		if(start_point.name != "AI")
 			continue
-		if(locate(/mob/living) in S.loc)
+		if(locate(/mob/living) in start_point.loc)
 			continue
-		empty_playable_ai_cores += new /obj/structure/aicore/deactivated(get_turf(S))
+		empty_playable_ai_cores += new /obj/structure/aicore/deactivated(get_turf(start_point))
 	return 1
 
 /client/proc/show_location_blurb(duration)

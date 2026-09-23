@@ -69,6 +69,9 @@ SUBSYSTEM_DEF(mapping)
 		if(map_template.is_runtime_generated())
 			report_progress("Skipping template '[map_template]' ([map_template.type]): Is generated at runtime.")
 			continue
+		if(map_template.unit_test_skip_reason)
+			report_progress("Skipping template '[map_template]' ([map_template.type]): [map_template.unit_test_skip_reason]")
+			continue
 		load_template(map_template)
 		if(map_template.template_flags & TEMPLATE_FLAG_TEST_DUPLICATES)
 			load_template(map_template)

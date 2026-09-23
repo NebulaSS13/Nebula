@@ -53,7 +53,7 @@
 	var/static/list/spawnable_choices = list(
 		/obj/item/remains/lizard,
 		/obj/effect/decal/cleanable/blood/gibs/robot,
-		/obj/effect/decal/cleanable/spiderling_remains,
+		/obj/effect/decal/cleanable/spider_remains,
 		/obj/item/remains/mouse,
 		/obj/effect/decal/cleanable/vomit,
 		/obj/effect/decal/cleanable/blood/splatter,

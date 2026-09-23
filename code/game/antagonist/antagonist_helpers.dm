@@ -48,8 +48,7 @@
 	return active_antags
 
 /decl/special_role/proc/is_antagonist(var/datum/mind/player)
-	if(player in current_antagonists)
-		return 1
+	return (player in current_antagonists)
 
 /decl/special_role/proc/is_votable()
 	return (flags & ANTAG_VOTABLE)

@@ -1,6 +1,9 @@
 /mob/living/exosuit/premade/heavy
-	name = "Heavy exosuit"
+	name = "heavy exosuit"
 	desc = "A heavily armored combat exosuit."
+
+/mob/living/simple_animal/mob_mimic/exosuit/heavy
+	mimic_mob = /mob/living/exosuit/premade/heavy
 
 /obj/item/mech_component/manipulators/heavy/painted
 	color = COLOR_TITANIUM
@@ -104,6 +107,9 @@
 	if(body)
 		body.color = COLOR_DARK_GUNMETAL
 
+/mob/living/simple_animal/mob_mimic/exosuit/merc
+	mimic_mob = /mob/living/exosuit/premade/heavy/merc
+
 /mob/living/exosuit/premade/heavy/merc/spawn_mech_equipment()
 	install_system(new /obj/item/mech_equipment/mounted_system/taser(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_RIGHT_HAND)
@@ -111,7 +117,9 @@
 
 /obj/structure/mech_wreckage/heavy
 	name = "heavy exosuit wreckage"
-	loot_pool = list(
+
+/obj/structure/mech_wreckage/heavy/get_default_loot()
+	var/static/list/default_loot_pool = list(
 		/obj/item/mech_equipment/mounted_system/taser =       80,
 		/obj/item/mech_equipment/mounted_system/taser/laser = 80,
 		/obj/item/mech_equipment/shields =                    80,
@@ -120,3 +128,4 @@
 		/obj/item/mech_component/sensors/heavy/painted =      40,
 		/obj/item/mech_component/chassis/heavy/painted =      40
 	)
+	return default_loot_pool

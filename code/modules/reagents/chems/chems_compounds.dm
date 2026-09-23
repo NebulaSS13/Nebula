@@ -92,6 +92,12 @@
 		M.emote(/decl/emote/visible/shiver)
 	holder.remove_reagent(/decl/material/liquid/capsaicin, 5)
 
+/decl/material/liquid/frostoil/cryotoxin
+	name = "cryotoxin"
+	lore_text = "An exotic venom that depresses metabolism and lowers body temperature."
+	uid = "chem_cryotoxin"
+	metabolism = REM * 0.5
+
 /decl/material/liquid/nettle_histamine
 	name = "nettle histamine"
 	lore_text = "A combination of substances injected by contact with the stinging hairs of the common nettle. Itchy and painful, but not dangerous."
@@ -472,3 +478,49 @@
 		M.take_damage(rand(3,6))
 		if(prob(10))
 			new /obj/item/shard(get_turf(M), result_mat)
+
+/decl/material/liquid/thermite
+	name              = "thermite"
+	uid               = "chem_thermite"
+	lore_text         = "Thermite produces an aluminothermic reaction known as a thermite reaction. Can be used to melt walls."
+	color             = "#673910"
+	touch_met         = 50
+	taste_description = "metallic sweetness"
+	melting_point     = 323
+	ignition_point    = 353
+	accelerant_value  = 0.8
+
+	var/decal_type = /obj/effect/decal/cleanable/thermite
+
+/decl/material/liquid/thermite/touch_mob(var/mob/victim, var/amount)
+	..()
+	if(istype(victim))
+		victim.adjust_fire_intensity(round(amount / 5))
+
+/decl/material/liquid/thermite/affect_blood(mob/living/M, removed, datum/reagents/holder)
+	. = ..()
+	// Do this rather than take_damage() to avoid armour checks.
+	M.adjustFireLoss(3 * removed)
+
+/decl/material/liquid/thermite/touch_turf(var/turf/touching_turf, var/amount, var/datum/reagents/holder)
+	..()
+	if(decal_type && !(locate(decal_type) in touching_turf))
+		touching_turf.visible_message(SPAN_NOTICE("The thermite splashes over \the [touching_turf]."))
+		new decal_type(touching_turf)
+
+/decl/material/liquid/thermite/venom
+	name = "pyrotoxin"
+	uid = "chem_pyrotoxin"
+	lore_text = "A biologically-produced compound capable of melting steel. Do not ingest."
+	decal_type = /obj/effect/decal/cleanable/thermite/self_igniting
+
+/decl/material/liquid/thermite/venom/affect_blood(mob/living/M, removed, datum/reagents/holder)
+	. = ..()
+	if(M.get_fire_intensity() <= 1.5)
+		M.adjust_fire_intensity(0.15)
+	else if(prob(10))
+		to_chat(M, SPAN_DANGER("An awful burning sensation eats away inside..."))
+		M.adjust_fire_intensity(0.1)
+	else if(prob(5))
+		M.ignite_fire()
+		to_chat(M, SPAN_DANGER("Your body begins to rupture and ignite!"))

@@ -422,10 +422,9 @@ SUBSYSTEM_DEF(zcopy)
 					var/depth = ZM_COMPUTE_DEPTH(Tvbr.z)
 					fatass.plane = ZM_COMPUTE_PLANE(depth, ZM_SLICE_SLOT_ROOT)
 					// can't just nuke overlays since they're used for smoothing, but we don't want AO overlays
-					if (Tvbr.ao_overlays)
-						fatass.overlays -= Tvbr.ao_overlays
-					if (Tvbr.ao_overlays_mimic)
-						fatass.overlays -= Tvbr.ao_overlays_mimic
+					var/overlay_blob = GET_OVERLAY_GROUP(Tvbr, OVRGR_AO_REG)
+					if (overlay_blob)
+						fatass.overlays -= overlay_blob
 
 					LAZYADD(extra_underlays, fatass)
 					total_large_boundary_proxy_creations++
@@ -481,16 +480,21 @@ SUBSYSTEM_DEF(zcopy)
 			if (T.below.mimic_proxy)
 				QDEL_NULL(T.below.mimic_proxy)
 			T.appearance = Td.z_appearance || Td
-			if (length(T.overlays))
-				T.our_overlays = T.overlays.Copy()	// We call into SSoverlays for AO, so make sure we don't lose the mimic overlays.
+
+			if (Td.z_appearance)
+				if (length(T.overlays))
+					T.set_overlays(Td.z_appearance:overlays:Copy())
 			else
-				T.our_overlays = null
-			if (Td.ao_overlays)
-				T.cut_overlay(Td.ao_overlays)
-			if (Td.ao_overlays_mimic)
-				T.cut_overlay(Td.ao_overlays_mimic)
-			if (intermediate_ao_overlays)
-				T.add_overlay(intermediate_ao_overlays)
+				if (length(T.overlays))
+					T.replace_overlays(Td, TRUE, FALSE)
+
+				if (intermediate_ao_overlays)
+					T.set_overlays(intermediate_ao_overlays, OVRGR_AO_MID)
+				else if (HAS_OVERLAY_GROUP(T, OVRGR_AO_MID))
+					T.cut_overlays(OVRGR_AO_MID)
+
+				if (HAS_OVERLAY_GROUP(T, OVRGR_AO_REG))
+					T.cut_overlays(OVRGR_AO_REG)
 
 			if (extra_underlays)
 				T.underlays += extra_underlays
@@ -511,16 +515,21 @@ SUBSYSTEM_DEF(zcopy)
 			TO.gender = T.gender	// Need to grab this too so PLURAL works properly in examine.
 			TO.opacity = FALSE
 			TO.plane = t_target
-			if (length(TO.overlays))
-				TO.our_overlays = TO.overlays.Copy()
+
+			if (Td.z_appearance)
+				if (length(TO.overlays))
+					TO.set_overlays(Td.z_appearance:overlays)
 			else
-				TO.our_overlays = null
-			if (Td.ao_overlays)
-				TO.cut_overlay(Td.ao_overlays)
-			if (Td.ao_overlays_mimic)
-				TO.cut_overlay(Td.ao_overlays_mimic)
-			if (intermediate_ao_overlays)
-				TO.add_overlay(intermediate_ao_overlays)
+				if (length(TO.overlays))
+					TO.replace_overlays(Td, TRUE, FALSE)
+
+					if (intermediate_ao_overlays)
+						TO.set_overlays(intermediate_ao_overlays, OVRGR_AO_MID)
+					else if (HAS_OVERLAY_GROUP(TO, OVRGR_AO_MID))
+						TO.cut_overlays(OVRGR_AO_MID)
+
+					if (HAS_OVERLAY_GROUP(TO, OVRGR_AO_REG))
+						TO.cut_overlays(OVRGR_AO_REG)
 
 			if (TO.overlay_queued)
 				TO.compile_overlays()
@@ -649,7 +658,7 @@ SUBSYSTEM_DEF(zcopy)
 		OO.queued = 0
 
 		// If an atom has explicit plane sets on its overlays/underlays, we need to mangle the appearance's overlays/underlays to align with Z-Mimic's plane usage.
-		if (OO.z_flags & ZMM_MANGLE_PLANES)
+		if (OO.z_flags & (ZMM_MANGLE_PLANES | ZMM_AUTOMANGLE))
 			var/new_appearance = fixup_appearance_planes(OO.appearance)
 			if (new_appearance)
 				OO.appearance = new_appearance
@@ -1059,25 +1068,14 @@ SUBSYSTEM_DEF(zcopy)
 	if (LAZYLEN(T.z_ao_intermediates))
 		for (var/turf/ao_turf in (T.z_ao_intermediates + T))
 			var/depth = ZM_COMPUTE_DEPTH(ao_turf.z)
-			if (ao_turf.ao_neighbors != AO_ALL_NEIGHBORS && ao_turf.ao_neighbors != null && length(ao_turf.ao_overlays))
+			if (ao_turf.ao_neighbors != AO_ALL_NEIGHBORS && ao_turf.ao_neighbors != null && HAS_OVERLAY_GROUP(ao_turf, OVRGR_AO_REG))
 				var/atom/movable/openspace/debug/ao/aod = new
 				aod.neighbors = ao_turf.ao_neighbors
 				aod.associated_turf = ao_turf
 
 				aod.plane = ZM_COMPUTE_PLANE(depth, ZM_SLICE_SLOT_ROOT)
-				aod.pixel_x = ao_turf.ao_overlays[1]:pixel_x
-				aod.pixel_y = ao_turf.ao_overlays[1]:pixel_y
-				found_oo += aod
-
-			if (ao_turf.ao_neighbors_mimic != AO_ALL_NEIGHBORS && ao_turf.ao_neighbors_mimic != null && length(ao_turf.ao_overlays_mimic))
-				var/atom/movable/openspace/debug/ao/aod = new
-				aod.neighbors = ao_turf.ao_neighbors_mimic
-				aod.associated_turf = ao_turf
-				aod.is_z = TRUE
-
-				aod.plane = ZM_COMPUTE_PLANE(depth + 1, ZM_SLICE_SLOT_CAP)
-				aod.pixel_x = ao_turf.ao_overlays_mimic[1]:pixel_x
-				aod.pixel_y = ao_turf.ao_overlays_mimic[1]:pixel_y
+				aod.pixel_x = GET_OVERLAY_GROUP(ao_turf, OVRGR_AO_REG)[1]:pixel_x
+				aod.pixel_y = GET_OVERLAY_GROUP(ao_turf, OVRGR_AO_REG)[1]:pixel_y
 				found_oo += aod
 
 #endif
@@ -1086,6 +1084,19 @@ SUBSYSTEM_DEF(zcopy)
 
 	var/turf/Tbelow = T
 	while (Tbelow.below && ZM_TURF_DOES_NOT_TERMINATE_Z_STACK(Tbelow))
+		// This goes up here because it needs to apply to `T` as well, and I don't want to duplicate the logic (or loop again).
+		if (Tbelow.shadower && Tbelow.ao_neighbors_mimic != AO_ALL_NEIGHBORS && Tbelow.ao_neighbors_mimic != null && HAS_OVERLAY_GROUP(Tbelow.shadower, OVRGR_AO_Z))
+			var/atom/movable/openspace/debug/ao/aod = new
+			aod.neighbors = Tbelow.ao_neighbors_mimic
+			aod.associated_turf = Tbelow
+			aod.is_z = TRUE
+
+			var/depth = ZM_COMPUTE_DEPTH(Tbelow.z)
+			aod.plane = ZM_COMPUTE_PLANE(depth + 1, ZM_SLICE_SLOT_CAP)
+			aod.pixel_x = GET_OVERLAY_GROUP(Tbelow.shadower, OVRGR_AO_Z)[1]:pixel_x
+			aod.pixel_y = GET_OVERLAY_GROUP(Tbelow.shadower, OVRGR_AO_Z)[1]:pixel_y
+			found_oo += aod
+
 		Tbelow = Tbelow.below
 
 		var/atom/movable/openspace/debug/turf/VTO = new

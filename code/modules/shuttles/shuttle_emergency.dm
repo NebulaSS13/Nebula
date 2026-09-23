@@ -9,7 +9,7 @@
 	. = ..()
 	emergency_controller = SSevac.evacuation_controller
 	if(!istype(emergency_controller))
-		CRASH("Escape shuttle created without the appropriate controller type.")
+		CRASH("Escape shuttle created without the appropriate controller type: '[emergency_controller]'.")
 	if(emergency_controller.shuttle)
 		CRASH("An emergency shuttle has already been created.")
 	emergency_controller.shuttle = src

@@ -149,16 +149,24 @@
 	hud_power_control = null
 	hud_camera = null
 
+	for(var/hardpoint in hardpoints)
+		var/obj/item/equipment = hardpoints[hardpoint]
+		if(istype(equipment))
+			remove_system(hardpoint, force = TRUE)
+		QDEL_NULL(equipment)
+	hardpoints.Cut()
+
 	for(var/thing in hud_elements)
 		qdel(thing)
 	hud_elements.Cut()
 
-	for(var/hardpoint in hardpoints)
-		var/obj/item/mech_equipment/equipment = hardpoints[hardpoint]
-		if(istype(equipment))
-			equipment.uninstalled()
-		QDEL_NULL(equipment)
-	hardpoints.Cut()
+	for(var/hardpoint in hardpoint_hud_elements)
+		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
+		if(istype(H))
+			H.owner_ref = null
+			H.holding_ref = null
+			qdel(H)
+	hardpoint_hud_elements.Cut()
 
 	QDEL_NULL(access_card)
 	QDEL_NULL(radio)
@@ -166,13 +174,6 @@
 	QDEL_NULL(legs)
 	QDEL_NULL(head)
 	QDEL_NULL(body)
-
-	for(var/hardpoint in hardpoint_hud_elements)
-		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
-		H.owner_ref = null
-		H.holding = null
-		qdel(H)
-	hardpoint_hud_elements.Cut()
 
 	. = ..()
 
@@ -256,11 +257,6 @@
 	stance_damage = 0
 	return
 
-/mob/living/exosuit/is_valid_merchant_pad_target()
-	if(current_user)
-		return FALSE
-	return ..()
-
 // Handling for auto-fire mechanic
 /mob/living/exosuit/mob_can_autofire(obj/item/gun/autofiring, atom/autofiring_at)
 	if(!(autofiring in selected_system)) // Make sure the gun is still selected.
@@ -291,3 +287,19 @@
 	if(!relayed_pilot_check(user))
 		return ..()
 	return selected_system.wielder_mouse_drag_up(src, target)
+
+/mob/living/exosuit/drop_from_inventory(obj/item/dropping_item, atom/target, play_dropsound)
+	if(!(. = ..()))
+		return
+	if(dropping_item == arms)
+		arms = null
+	else if(dropping_item == legs)
+		legs = null
+	else if(dropping_item == body)
+		body = null
+	else if(dropping_item == head)
+		head = null
+	else
+		for(var/hardpoint in hardpoints)
+			if(dropping_item == hardpoints[hardpoint])
+				remove_system(hardpoint, null, TRUE)

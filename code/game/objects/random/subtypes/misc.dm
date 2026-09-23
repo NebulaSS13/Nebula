@@ -111,8 +111,8 @@
 
 /obj/random/natural_debris // Natural crap that you might fish out of a river in unspoiled countryside.
 	name = "random natural detritus"
-	icon = 'icons/effects/blood.dmi'
-	icon_state = "remains"
+	icon = /obj/item/stick::icon
+	icon_state = /obj/item/stick::icon_state
 
 // We really have a limited amount of random crap, don't we...
 /obj/random/natural_debris/spawn_choices()
@@ -137,7 +137,7 @@
 	if(!spawnable_choices)
 		spawnable_choices = list(
 			/obj/effect/decal/cleanable/generic            = 20,
-			/obj/effect/decal/cleanable/spiderling_remains = 95,
+			/obj/effect/decal/cleanable/spider_remains     = 95,
 			/obj/item/remains/mouse                        = 95,
 			/obj/item/remains/robot                        = 95,
 			/obj/item/paper/crumpled                       = 95,
@@ -170,7 +170,7 @@
 		/obj/effect/decal/cleanable/blood/gibs/robot,
 		/obj/effect/decal/cleanable/blood/oil,
 		/obj/effect/decal/cleanable/blood/oil/streak,
-		/obj/effect/decal/cleanable/spiderling_remains,
+		/obj/effect/decal/cleanable/spider_remains,
 		/obj/item/remains/mouse,
 		/obj/effect/decal/cleanable/vomit,
 		/obj/effect/decal/cleanable/blood/splatter,
@@ -197,35 +197,6 @@
 		/obj/item/coin/iron     = 4,
 		/obj/item/coin/uranium  = 3,
 		/obj/item/coin/platinum = 1
-	)
-	return spawnable_choices
-
-/obj/random/material //Random materials for building stuff
-	name = "random material"
-	desc = "This is a random material."
-	icon = 'icons/obj/items/stacks/materials.dmi'
-	icon_state = "sheet"
-
-/obj/random/material/spawn_choices()
-	var/static/list/spawnable_choices = list(
-		/obj/item/stack/material/sheet/mapped/steel/ten,
-		/obj/item/stack/material/pane/mapped/glass/ten,
-		/obj/item/stack/material/pane/mapped/rglass/ten,
-		/obj/item/stack/material/panel/mapped/plastic/ten,
-		/obj/item/stack/material/plank/mapped/wood/ten,
-		/obj/item/stack/material/cardstock/mapped/cardboard/ten,
-		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/ten,
-		/obj/item/stack/material/sheet/mapped/steel/fifty,
-		/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
-		/obj/item/stack/material/ingot/mapped/copper/fifty,
-		/obj/item/stack/material/pane/mapped/glass/fifty,
-		/obj/item/stack/material/pane/mapped/rglass/fifty,
-		/obj/item/stack/material/panel/mapped/plastic/fifty,
-		/obj/item/stack/material/plank/mapped/wood/fifty,
-		/obj/item/stack/material/cardstock/mapped/cardboard/fifty,
-		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
-		/obj/item/stack/material/rods/mapped/steel/ten,
-		/obj/item/stack/material/rods/mapped/steel/fifty
 	)
 	return spawnable_choices
 
@@ -426,6 +397,24 @@
 	)
 	return spawnable_choices
 
+/obj/random/vendor/all
+	name = "random civilian vending machine"
+
+/obj/random/vendor/all/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/machinery/vending/coffee,
+		/obj/machinery/vending/snack,
+		/obj/machinery/vending/cola,
+		/obj/machinery/vending/fitness,
+		/obj/machinery/vending/cigarette,
+		/obj/machinery/vending/hotfood,
+		/obj/machinery/vending/weeb,
+		/obj/machinery/vending/sol,
+		/obj/machinery/vending/snix,
+		/obj/machinery/vending/sovietsoda,
+	)
+	return spawnable_choices
+
 /obj/random/lipstick
 	name = "random lipstick"
 	desc = "This is a tube of lipstick."
@@ -608,7 +597,7 @@
 	var/static/list/spawn_choices = list(
 		/obj/item/assembly/mousetrap,
 		/obj/item/assembly/mousetrap/armed,
-		/obj/effect/decal/cleanable/spiderling_remains,
+		/obj/effect/decal/cleanable/spider_remains,
 		/obj/effect/decal/cleanable/ash,
 		/obj/item/trash/cigbutt,
 		/obj/item/trash/cigbutt/cigarbutt,
@@ -645,3 +634,34 @@
 		/obj/item/backpack/dufflebag/syndie  = 1
 	)
 	return spawn_choices
+
+/obj/random/fishing_junk
+	name = "random fishing junk"
+	icon = /obj/item/trash/mollusc_shell::icon
+	icon_state = /obj/item/trash/mollusc_shell::icon_state
+
+/obj/random/fishing_junk/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/trash/mollusc_shell/clam     = 2,
+		/obj/item/trash/mollusc_shell/barnacle = 2,
+		/obj/item/remains/mouse                = 2,
+		/obj/item/remains/lizard               = 2,
+		/obj/item/stick                        = 1,
+		/obj/item/trash/mollusc_shell          = 1
+	)
+	return spawnable_choices
+
+/obj/random/humanoidremains
+	name = "Random Humanoid Remains"
+	desc = "This is a random pile of remains."
+	icon = /obj/item/remains/human::icon
+	icon_state = /obj/item/remains/human::icon_state
+	spawn_nothing_percentage = 15
+	var/list/remains = list(
+		/obj/item/remains/human   = 30,
+		/obj/item/remains/ribcage = 25,
+		/obj/item/remains/posi    = 10
+	)
+
+/obj/random/humanoidremains/spawn_choices()
+	return remains

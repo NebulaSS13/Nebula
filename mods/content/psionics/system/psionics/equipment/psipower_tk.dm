@@ -99,7 +99,7 @@
 	if(focus)
 		var/obj/effect/overlay/O = new /obj/effect/overlay(get_turf(focus))
 		O.name = "sparkles"
-		O.anchored = TRUE
+		O.set_anchored(TRUE)
 		O.density = FALSE
 		O.layer = FLY_LAYER
 		O.set_dir(pick(global.cardinal))

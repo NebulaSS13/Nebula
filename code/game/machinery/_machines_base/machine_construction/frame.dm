@@ -17,15 +17,15 @@
 		if(do_after(user, 20, machine))
 			TRANSFER_STATE(/decl/machine_construction/frame/wrenched)
 			to_chat(user, "<span class='notice'>You wrench \the [machine] into place.</span>")
-			machine.anchored = TRUE
+			machine.set_anchored(TRUE)
 	if(IS_WELDER(used_item))
-		var/obj/item/weldingtool/welder = used_item
+		var/obj/item/fuelled_tool/welding/welder = used_item
 		if(!welder.weld(0, user))
-			to_chat(user, "The welding tool must be on to complete this task.")
+			to_chat(user, "\The [welder] must be on to complete this task.")
 			return TRUE
 		playsound(machine.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(do_after(user, 20, machine))
-			if(!welder.isOn())
+			if(!welder.tool_is_running())
 				return TRUE
 			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
 			to_chat(user, "<span class='notice'>You deconstruct \the [machine].</span>")
@@ -54,7 +54,7 @@
 		if(do_after(user, 20, machine))
 			TRANSFER_STATE(/decl/machine_construction/frame/unwrenched)
 			to_chat(user, "<span class='notice'>You unfasten \the [machine].</span>")
-			machine.anchored = FALSE
+			machine.set_anchored(FALSE)
 		return TRUE
 	if(IS_COIL(used_item))
 		var/obj/item/stack/cable_coil/C = used_item

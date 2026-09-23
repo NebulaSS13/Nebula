@@ -17,7 +17,7 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/crafting_stage/welding/crossbow_rods
-	completion_trigger_type = /obj/item/weldingtool
+	completion_trigger_type = /obj/item/fuelled_tool/welding
 	item_icon_state = "crossbowframe2"
 	progress_message = "You weld the rods into place."
 	next_stages = list(/decl/crafting_stage/wiring/crossbow_battery)

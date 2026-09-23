@@ -111,7 +111,7 @@
 		return
 	//Shooting Code:
 	A.shot_from = assembly.name
-	A.firer = assembly
+	A.firer_ref = weakref(assembly)
 	A.launch(target)
 	return A
 
@@ -696,7 +696,7 @@
 		return
 
 	if(ord == 1)
-		assembly.anchored = !assembly.anchored
+		assembly.set_anchored(!assembly.anchored)
 
 		visible_message(
 			assembly.anchored ? \

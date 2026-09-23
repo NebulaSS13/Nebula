@@ -2,6 +2,9 @@
 	name = "combat exosuit"
 	desc = "A sleek, modern combat exosuit."
 
+/mob/living/simple_animal/mob_mimic/exosuit/combat
+	mimic_mob = /mob/living/exosuit/premade/combat
+
 /mob/living/exosuit/premade/combat/Initialize()
 	if(!arms)
 		arms = new /obj/item/mech_component/manipulators/combat/painted(src)
@@ -24,8 +27,14 @@
 /mob/living/exosuit/premade/combat/military
 	decal = "cammo1"
 
+/mob/living/simple_animal/mob_mimic/exosuit/military
+	mimic_mob = /mob/living/exosuit/premade/combat/military
+
 /mob/living/exosuit/premade/combat/military/alpine
 	decal = "cammo2"
+
+/mob/living/simple_animal/mob_mimic/exosuit/alpine
+	mimic_mob = /mob/living/exosuit/premade/combat/military/alpine
 
 /mob/living/exosuit/premade/combat/military/Initialize()
 	. = ..()
@@ -102,7 +111,9 @@
 
 /obj/structure/mech_wreckage/military
 	name = "military exosuit wreckage"
-	loot_pool = list(
+
+/obj/structure/mech_wreckage/military/get_default_loot()
+	var/static/list/default_loot_pool = list(
 		/obj/item/mech_equipment/mounted_system/taser =        80,
 		/obj/item/mech_equipment/mounted_system/taser/ion =    80,
 		/obj/item/mech_equipment/flash =                       50,
@@ -112,3 +123,4 @@
 		/obj/item/mech_component/sensors/combat/painted =      40,
 		/obj/item/mech_component/chassis/combat/painted =      40
 	)
+	return default_loot_pool

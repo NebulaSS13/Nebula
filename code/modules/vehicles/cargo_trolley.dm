@@ -81,7 +81,7 @@
 
 /obj/vehicle/train/trolley/update_car(var/train_length, var/active_engines)
 	..()
-	anchored = lead || tow
+	set_anchored(lead || tow)
 
 /obj/vehicle/train/trolley/Bump(atom/Obstacle)
 	if(!lead)

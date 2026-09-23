@@ -6,7 +6,6 @@
 #include "ert_rig.dm"
 #include "game_mode_overrides.dm"
 #include "response_team.dm"
-#include "trader_overrides.dm"
 #include "datum\ert_call_keycard_event.dm"
 #include "datum\ert_camera_monitor.dm"
 #include "datum\ert_config.dm"

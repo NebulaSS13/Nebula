@@ -749,6 +749,7 @@ default behaviour is:
 	QDEL_NULL(_aiming)
 	QDEL_NULL_LIST(_hallucinations)
 	QDEL_NULL_LIST(aimed_at_by)
+	QDEL_NULL_LIST(stat_organs)
 	LAZYCLEARLIST(smell_cooldown)
 	if(stressors) // Do not QDEL_NULL, keys are managed instances.
 		stressors = null
@@ -786,7 +787,7 @@ default behaviour is:
 		. -= 3
 
 /mob/living/can_drown()
-	if(get_internals())
+	if(!suffers_inhaled_effects(gasmask_filters = FALSE))
 		return FALSE
 	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
 	if(istype(mask) && mask.filters_water())
@@ -1641,6 +1642,17 @@ default behaviour is:
 
 	return TRUE
 
+/mob/living/set_dir()
+	var/lastdir = dir
+	. = ..()
+	if(. && dir != lastdir)
+		var/turn_sound = get_turn_sound()
+		if(turn_sound)
+			playsound(src, turn_sound, 50, 1)
+
+/mob/living/proc/get_turn_sound()
+	return
+
 /mob/living/proc/get_footstep_sound(turf/step_turf)
 	return step_turf?.get_footstep_sound(src)
 
@@ -1805,7 +1817,7 @@ default behaviour is:
 	return !QDELETED(src) && !incapacitated()
 
 // Currently only used by AI behaviors
-/mob/living/proc/has_ranged_attack()
+/mob/living/proc/has_ranged_attack(atom/target)
 	return FALSE
 
 /mob/living/proc/get_ranged_attack_distance()
@@ -2023,3 +2035,43 @@ default behaviour is:
 
 /mob/living/proc/is_playing_dead()
 	return stat || current_posture?.prone || (status_flags & FAKEDEATH)
+
+/mob/living/proc/clear_sprite_accessories(set_color, skip_update)
+	for(var/obj/item/organ/external/E in get_external_organs())
+		if(set_color)
+			E.skin_colour = set_color
+		E.clear_sprite_accessories(skip_update = TRUE)
+	if(!skip_update)
+		update_body()
+
+/mob/living/proc/set_sprite_accessories(list/setting_accessories, skip_update)
+	for(var/accessory_category in setting_accessories)
+		for(var/accessory in setting_accessories[accessory_category])
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			var/accessory_metadata = setting_accessories[accessory_category][accessory]
+			for(var/bodypart in accessory_decl.body_parts)
+				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, bodypart)
+				if(O)
+					O.set_sprite_accessory(accessory, null, accessory_metadata, skip_update = TRUE)
+	if(!skip_update)
+		update_body()
+
+/mob/living/proc/inflict_cold_damage(amount)
+	amount *= 1 - get_cold_protection(50) // Within spacesuit protection.
+	if(amount > 0)
+		adjustFireLoss(amount)
+
+/mob/living/proc/suffers_inhaled_effects(gasmask_filters = TRUE)
+	// We aren't breathing regardless.
+	if(stat == DEAD || is_asystole())
+		return FALSE
+	// Do we breathe in the first place?
+	if(!should_have_organ(BP_LUNGS) || !get_inhaled_reagents())
+		return FALSE
+	// Gas mask.
+	if(gasmask_filters && istype(get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask/gas))
+		return FALSE
+	// Closed-loop air supply.
+	if(get_internals())
+		return FALSE
+	return TRUE
