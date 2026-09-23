@@ -40,7 +40,9 @@
 
 /obj/structure/mech_wreckage/exploration
 	name = "exploration exosuit wreckage"
-	loot_pool = list(
+
+/obj/structure/mech_wreckage/exploration/get_default_loot()
+	var/static/list/default_loot_pool = list(
 		/obj/item/mech_component/manipulators/powerloader/exploration = 40,
 		/obj/item/mech_component/chassis/pod/exploration =              40,
 		/obj/item/mech_component/propulsion/tracks/exploration =        40,
@@ -49,3 +51,4 @@
 		/obj/item/mech_equipment/clamp =                                80,
 		/obj/item/mech_equipment/mounted_system/taser/plasma =          80
 	)
+	return default_loot_pool
