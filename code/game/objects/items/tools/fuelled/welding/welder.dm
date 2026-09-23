@@ -9,8 +9,6 @@
 	center_of_mass  = @'{"x":14,"y":15}'
 	z_flags         = ZMM_MANGLE_PLANES
 	var/lit_colour  = COLOR_PALE_ORANGE
-	/// Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
-	var/status      = TRUE
 
 /obj/item/fuelled_tool/welding/Initialize()
 	set_extension(src, /datum/extension/tool, list(TOOL_WELDER = TOOL_QUALITY_DEFAULT))
@@ -27,37 +25,6 @@
 
 /obj/item/fuelled_tool/welding/isflamesource()
 	. = tool_is_running()
-
-/obj/item/fuelled_tool/welding/proc/toggle_unscrewed(var/mob/user)
-	if(isrobot(loc))
-		if(user)
-			to_chat(user, SPAN_WARNING("You cannot modify your own welder!"))
-		return
-
-	status = !status
-	if(user)
-		if(status)
-			to_chat(user, SPAN_NOTICE("You secure the welder."))
-		else
-			to_chat(user, SPAN_NOTICE("The welder can now be attached and modified."))
-	return TRUE
-
-/obj/item/fuelled_tool/welding/proc/attempt_modify(var/obj/item/used_item, var/mob/user)
-	if(!status && istype(used_item, /obj/item/stack/material/rods))
-		var/obj/item/stack/material/rods/R = used_item
-		R.use(1)
-		user.drop_from_inventory(src)
-		user.put_in_hands(new /obj/item/flamethrower(get_turf(src), src))
-		qdel(src)
-		return TRUE
-	return FALSE
-
-/obj/item/fuelled_tool/welding/attackby(obj/item/used_item, mob/user)
-	if(IS_SCREWDRIVER(used_item))
-		return toggle_unscrewed(user)
-	if(attempt_modify(used_item, user))
-		return TRUE
-	return ..()
 
 /obj/item/fuelled_tool/welding/fluid_act(var/datum/reagents/fluids)
 	..()
@@ -158,9 +125,6 @@
 	if(tool_is_running())
 		return list("jet of flame")
 	return ..()
-
-/obj/item/fuelled_tool/welding/can_turn_on()
-	return status && ..()
 
 //////////////////////////////////////////////////////////////////
 // Welding Tool Variants
