@@ -438,7 +438,7 @@
 /datum/job/proc/make_position_available()
 	total_positions++
 
-/datum/job/proc/get_roundstart_spawnpoint()
+/datum/job/proc/get_roundstart_spawn_turf(job_title)
 	var/list/loc_list = list()
 	for(var/obj/abstract/landmark/start/sloc in global.all_landmarks)
 		if(sloc.name != title)	continue
@@ -446,8 +446,7 @@
 		loc_list += sloc
 	if(loc_list.len)
 		return pick(loc_list)
-	else
-		return locate("start*[title]") // use old stype
+	return get_turf(locate("start*[title]"))
 
 /**
  *  Return appropriate /decl/spawnpoint for given client

@@ -51,6 +51,10 @@
 #include "patches/dungeon_loot.dm"
 #endif
 
+#ifdef MODPACK_STANDARD_MERCHANTS
+#include "patches/standard_merchants.dm"
+#endif
+
 #ifdef MODPACK_POLARIS
 #include "patches/polaris.dm"
 #endif

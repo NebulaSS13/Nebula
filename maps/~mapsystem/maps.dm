@@ -23,7 +23,7 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 
 		global.all_maps[map_instance.path] = map_instance
 		if(map_instance.votable)
-			global.votable_maps[map_instance.path] = map_instance
+			global.votable_maps[map_instance.full_name] = map_instance
 
 	return 1
 
@@ -503,9 +503,6 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 	for(var/mob/new_player/player in global.player_list)
 		show_titlescreen(player.client)
 		player.show_lobby_menu()
-
-/datum/map/proc/create_trade_hubs()
-	new /datum/trade_hub/singleton
 
 /datum/map/proc/get_radio_chatter_types()
 	return

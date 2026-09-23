@@ -16,7 +16,6 @@
 #include "datum\robolimbs.dm"
 #include "datum\species.dm"
 #include "datum\species_bodytypes.dm"
-#include "datum\trader.dm"
 #include "datum\traits.dm"
 #include "datum\unit_testing.dm"
 #include "gear\gear.dm"

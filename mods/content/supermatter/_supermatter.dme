@@ -23,7 +23,6 @@
 #include "overrides\sm_meteor.dm"
 #include "overrides\sm_singularity.dm"
 #include "overrides\sm_strings.dm"
-#include "overrides\sm_trader.dm"
 #include "overrides\sm_unit_tests.dm"
 #include "overrides\sm_xenoarchaeology.dm"
 #include "structures\sm_closets.dm"
