@@ -81,7 +81,6 @@ var/global/list/unit_test_obj_random_weights_by_type = list()
 		return ITEM_SIZE_LARGE_STRUCTURE
 	CRASH("Unhandled path: [log_info_line(path)]")
 
-
 /proc/return_true()
 	return TRUE
 

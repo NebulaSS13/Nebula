@@ -149,23 +149,16 @@
 	hud_power_control = null
 	hud_camera = null
 
-	for(var/thing in hud_elements)
-		qdel(thing)
-	hud_elements.Cut()
-
 	for(var/hardpoint in hardpoints)
-		var/obj/item/mech_equipment/equipment = hardpoints[hardpoint]
+		var/obj/item/equipment = hardpoints[hardpoint]
 		if(istype(equipment))
-			equipment.uninstalled()
+			remove_system(hardpoint, force = TRUE)
 		QDEL_NULL(equipment)
 	hardpoints.Cut()
 
-	QDEL_NULL(access_card)
-	QDEL_NULL(radio)
-	QDEL_NULL(arms)
-	QDEL_NULL(legs)
-	QDEL_NULL(head)
-	QDEL_NULL(body)
+	for(var/thing in hud_elements)
+		qdel(thing)
+	hud_elements.Cut()
 
 	for(var/hardpoint in hardpoint_hud_elements)
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
@@ -174,6 +167,13 @@
 			H.holding_ref = null
 			qdel(H)
 	hardpoint_hud_elements.Cut()
+
+	QDEL_NULL(access_card)
+	QDEL_NULL(radio)
+	QDEL_NULL(arms)
+	QDEL_NULL(legs)
+	QDEL_NULL(head)
+	QDEL_NULL(body)
 
 	. = ..()
 
@@ -296,9 +296,15 @@
 /mob/living/exosuit/drop_from_inventory(obj/item/dropping_item, atom/target, play_dropsound)
 	if(!(. = ..()))
 		return
-	for(var/hardpoint in hardpoints)
-		if(dropping_item == hardpoints[hardpoint])
-			if(istype(dropping_item, /obj/item/mech_equipment))
-				var/obj/item/mech_equipment/gear = dropping_item
-				gear.uninstalled()
-			hardpoints[hardpoint] = null
+	if(dropping_item == arms)
+		arms = null
+	else if(dropping_item == legs)
+		legs = null
+	else if(dropping_item == body)
+		body = null
+	else if(dropping_item == head)
+		head = null
+	else
+		for(var/hardpoint in hardpoints)
+			if(dropping_item == hardpoints[hardpoint])
+				remove_system(hardpoint, null, TRUE)
