@@ -1,7 +1,3 @@
-/datum/trader/devices/New()
-	LAZYSET(possible_trading_items, /obj/item/organ/internal/brain_interface, TRADER_SUBTYPES_ONLY)
-	. = ..()
-
 /datum/controller/subsystem/robots/PreInit()
 	. = ..()
 	LAZYSET(mob_types_by_title, "cyborg, flying", /mob/living/silicon/robot/flying)

@@ -504,9 +504,6 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 		show_titlescreen(player.client)
 		player.show_lobby_menu()
 
-/datum/map/proc/create_trade_hubs()
-	new /datum/trade_hub/singleton
-
 /datum/map/proc/get_radio_chatter_types()
 	return
 

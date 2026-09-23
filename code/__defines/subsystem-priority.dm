@@ -35,7 +35,6 @@
 #define SS_PRIORITY_VOTE          10  // Vote management.
 #define SS_PRIORITY_INACTIVITY    10  // Idle kicking.
 #define SS_PRIORITY_SUPPLY        10  // Supply point accumulation.
-#define SS_PRIORITY_TRADE         10  // Adds/removes traders.
 #define SS_PRIORITY_GHOST_IMAGES  10  // Updates ghost client images.
 #define SS_PRIORITY_ZCOPY         10  // Builds appearances for Z-Mimic.
 #define SS_PRIORITY_PROJECTILES   10  // Projectile processing!

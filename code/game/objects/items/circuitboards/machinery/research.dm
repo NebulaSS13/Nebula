@@ -224,23 +224,6 @@
 /obj/item/stock_parts/circuitboard/cryopod/get_buildable_types()
 	return typesof(/obj/machinery/cryopod)
 
-/obj/item/stock_parts/circuitboard/merchant_pad
-	name = "circuitboard (merchant pad)"
-	build_path = /obj/machinery/merchant_pad
-	board_type = "machine"
-	origin_tech = @'{"programming":6,"wormholes":6,"esoteric":1}'
-	req_components = list(
-		/obj/item/stack/cable_coil = 15,
-		/obj/item/stock_parts/subspace/amplifier = 1,
-		/obj/item/stock_parts/subspace/ansible = 1,
-		/obj/item/stock_parts/subspace/crystal = 1,
-		/obj/item/stock_parts/subspace/transmitter = 1
-	)
-	additional_spawn_components = list(
-		/obj/item/stock_parts/console_screen = 1,
-		/obj/item/stock_parts/keyboard = 1,
-	)
-
 /obj/item/stock_parts/circuitboard/radiocarbon_spectrometer
 	name           = "circuitboard (radiocarbon spectrometer)"
 	build_path     = /obj/machinery/radiocarbon_spectrometer

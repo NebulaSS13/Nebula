@@ -257,11 +257,6 @@
 	stance_damage = 0
 	return
 
-/mob/living/exosuit/is_valid_merchant_pad_target()
-	if(current_user)
-		return FALSE
-	return ..()
-
 // Handling for auto-fire mechanic
 /mob/living/exosuit/mob_can_autofire(obj/item/gun/autofiring, atom/autofiring_at)
 	if(!(autofiring in selected_system)) // Make sure the gun is still selected.
