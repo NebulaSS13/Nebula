@@ -32,6 +32,9 @@
 // Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
 #define SANITIZE_LIST(L) ( islist(L) ? L : list() )
 
+/// Inserts `I` at the end of the list (NOT LAZYLIST) L. If I is a list, it will insert the list itself as an entry, rather than adding each item in I.
+#define ADD_LIST_AS_ENTRY(L, I) (L[++L.len] = I) // NOTE: THIS MUST ONLY EVER REFERENCE `I` ONCE; THIS IS A MACRO AND EACH VARIABLE USAGE IS A LITERAL EXPANSION
+
 // The above but for alists. Prefixed with A_ because inserting "A" randomly in the name just made it confusing
 #define A_LAZYINITLIST(AL) if (!AL) { AL = alist(); }
 #define A_UNSETEMPTY(AL) if(!length(AL)) { AL = null; }

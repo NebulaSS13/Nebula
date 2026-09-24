@@ -80,18 +80,19 @@
 	var/list/data = list()
 	var/list/regions = list()
 	if(!autoset)
-		for(var/i in ACCESS_REGION_MIN to ACCESS_REGION_MAX) //code/game/jobs/_access_defs.dm
-			var/list/region = list()
+		for(var/region_name, access_data in get_all_access_datums_by_region_name())
 			var/list/accesses = list()
-			for(var/j in get_region_accesses(i))
-				var/list/access = list()
-				access["name"] = get_access_desc(j)
-				access["id"] = j
-				access["req"] = conf_access && (j in conf_access)
-				accesses[++accesses.len] = access
-			region["name"] = get_region_accesses_name(i)
-			region["accesses"] = accesses
-			regions[++regions.len] = region
+			for(var/datum/access/access_datum in access_data)
+				// += or Add would add each individual entry
+				ADD_LIST_AS_ENTRY(accesses, list(
+					"name" = access_datum.desc,
+					"id" = access_datum.id,
+					"req" = LAZYISIN(conf_access, access_datum.id)
+				))
+			ADD_LIST_AS_ENTRY(regions, list(
+				"name" = region_name,
+				"accesses" = accesses
+			))
 		data["regions"] = regions
 		data["oneAccess"] = one_access
 	data["locked"] = locked
