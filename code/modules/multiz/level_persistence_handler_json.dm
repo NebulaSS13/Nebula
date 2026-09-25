@@ -15,7 +15,7 @@
 		// Do a backup (at the end to avoid overwriting then throwing an exception)
 		if(fexists(filepath))
 			var/backup_contents = file2text(filepath)
-			var/backup_file = file("[filepath].[time2text(REALTIMEOFDAY, "YY-MM-DD_hh-mm")].backup")
+			var/backup_file = file("[filepath].[BACKUP_TIMESTAMP]")
 			to_file(backup_file, backup_contents)
 			// Clear old file to avoid appending data.
 			// TODO: remove old backups? Leave as an exercise for the admin?

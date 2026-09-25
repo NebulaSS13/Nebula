@@ -58,7 +58,7 @@
 	if(length(entries) && !istext(entries[1]))
 		try
 		// Save a backup of the old file just in case we cook it.
-			fcopy(filename, "[filename]-legacy.[time2text(REALTIMEOFDAY, "YY-MM-DD_hh-mm")].backup")
+			fcopy(filename, "[filename]-legacy.[BACKUP_TIMESTAMP]")
 		catch(var/exception/e)
 			log_error("Exception during saving backup of legacy file [filename]: [EXCEPTION_TEXT(e)]")
 
