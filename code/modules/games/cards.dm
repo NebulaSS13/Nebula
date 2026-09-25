@@ -66,13 +66,16 @@ var/global/list/card_decks = list()
 	icon_state = "card_holder"
 	material = /decl/material/solid/organic/leather
 
+/obj/item/deck/proc/generate_cards()
+	return
+
 /obj/item/deck/cards
 	name = "deck of cards"
 	desc = "A simple deck of playing cards."
 	icon_state = "deck"
-
-/obj/item/deck/proc/generate_cards()
-	return
+	var/list/ranks = list("ace","two","three","four","five","six","seven","eight","nine","ten")
+	var/list/faces = list("jack","queen","king")
+	var/joker_count = 2
 
 /obj/item/deck/cards/generate_cards()
 	var/datum/playingcard/P
@@ -84,54 +87,33 @@ var/global/list/card_decks = list()
 		else
 			colour = "red_"
 
-		for(var/number in list("ace","two","three","four","five","six","seven","eight","nine","ten"))
+		for(var/number in ranks)
 			P = new()
 			P.name = "[number] of [suit]"
 			P.card_icon = "[colour]num"
 			P.back_icon = "card_back"
 			cards += P
 
-		for(var/number in list("jack","queen","king"))
+		for(var/number in faces)
 			P = new()
 			P.name = "[number] of [suit]"
 			P.card_icon = "[colour]col"
 			P.back_icon = "card_back"
 			cards += P
 
-	for(var/i = 0,i<2,i++)
-		P = new()
-		P.name = "joker"
-		P.card_icon = "joker"
-		cards += P
+	if(joker_count)
+		for(var/i in 1 to joker_count)
+			P = new()
+			P.name = "joker"
+			P.card_icon = "joker"
+			cards += P
 
-/obj/item/deck/compact
+/obj/item/deck/cards/compact
 	name = "compact deck of cards"
 	desc = "A deck of playing cards. Looks like this one is missing numbers from two to five, and both jokers."
 	icon_state = "deck"
-
-/obj/item/deck/compact/generate_cards()
-	var/datum/playingcard/P
-	for(var/suit in list("spades", "clubs", "diamonds", "hearts"))
-
-		var/colour
-		if(suit == "spades" || suit == "clubs")
-			colour = "black_"
-		else
-			colour = "red_"
-
-		for(var/number in list("ace", "six", "seven", "eight", "nine", "ten"))
-			P = new()
-			P.name = "[number] of [suit]"
-			P.card_icon = "[colour]num"
-			P.back_icon = "card_back"
-			cards += P
-
-		for(var/number in list("jack", "queen", "king"))
-			P = new()
-			P.name = "[number] of [suit]"
-			P.card_icon = "[colour]col"
-			P.back_icon = "card_back"
-			cards += P
+	ranks = list("ace", "six", "seven", "eight", "nine", "ten")
+	joker_count = 0
 
 /obj/item/deck/attack_hand(mob/user)
 	if(user.check_intent(I_FLAG_GRAB) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
