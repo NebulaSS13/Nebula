@@ -163,10 +163,16 @@
 	. = ..()
 	if(holder)
 		holder.visor = src
+		holder.verbs |= /obj/item/rig/proc/toggle_vision
+		if(length(vision_modes) > 1) // don't add it if we have no modes to switch between
+			holder.verbs |= /obj/item/rig/proc/switch_vision_mode
 
 /obj/item/rig_module/vision/removed()
 	if(holder)
 		holder.visor = null
+		holder.verbs -= /obj/item/rig/proc/toggle_vision
+		// let's always remove it, just in case.
+		holder.verbs -= /obj/item/rig/proc/switch_vision_mode
 	. = ..()
 
 /obj/item/rig_module/vision/engage()
