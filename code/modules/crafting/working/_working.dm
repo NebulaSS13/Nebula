@@ -4,7 +4,7 @@
 	icon_state          = ICON_STATE_WORLD
 	anchored            = TRUE
 	density             = TRUE
-	color               = /decl/material/solid/organic/wood/oak::color
+	color               = /decl/material/solid/organic/wood/oak::solid_color
 	material            = /decl/material/solid/organic/wood/oak
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	atom_flags          = ATOM_FLAG_CLIMBABLE

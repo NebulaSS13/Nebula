@@ -25,7 +25,7 @@
 /obj/structure/working/grindstone/on_update_icon()
 	. = ..()
 	underlays = list(
-		overlay_image(icon, "[icon_state]-grindstone", stone_material.color, RESET_COLOR),
+		overlay_image(icon, "[icon_state]-grindstone", stone_material.solid_color, RESET_COLOR),
 		overlay_image(icon, "[initial(icon_state)]-backdrop")
 	)
 

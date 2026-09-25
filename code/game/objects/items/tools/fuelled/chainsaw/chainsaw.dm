@@ -77,20 +77,20 @@
 					overlay.overlays += overlay_image(overlay.icon, smoke_state, COLOR_WHITE, RESET_COLOR)
 		run_state = "[run_state]-blade"
 		if(check_state_in_icon(run_state, overlay.icon))
-			overlay.overlays += overlay_image(overlay.icon, run_state, material.color, RESET_COLOR)
+			overlay.overlays += overlay_image(overlay.icon, run_state, material.solid_color, RESET_COLOR)
 	. = ..()
 
 /obj/item/fuelled_tool/chainsaw/on_update_icon()
 	. = ..()
 	cut_overlays()
 	if(running_state)
-		add_overlay(overlay_image(icon, "[icon_state]-running-blade", material.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-running-blade", material.solid_color, RESET_COLOR))
 		if(tank)
 			var/smoke_state = "[icon_state]-smoke"
 			if(check_state_in_icon(smoke_state, icon))
 				add_overlay(overlay_image(icon, smoke_state, COLOR_WHITE, RESET_COLOR))
 	else
-		add_overlay(overlay_image(icon, "[icon_state]-blade", material.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-blade", material.solid_color, RESET_COLOR))
 	compile_overlays()
 
 /obj/item/fuelled_tool/chainsaw/get_running_force()

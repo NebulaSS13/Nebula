@@ -3,7 +3,7 @@
 	uid = "chem_luminol"
 	lore_text = "A compound that interacts with blood on the molecular level."
 	taste_description = "metal"
-	color = "#f2f3f4"
+	liquid_color = "#f2f3f4"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
@@ -17,7 +17,7 @@
 	name = "glowsap"
 	lore_text = "A popular party drug for adventurous types who want to BE the glowstick. Rumoured to be hallucinogenic in high doses."
 	overdose = 15
-	color = "#9eefff"
+	liquid_color = "#9eefff"
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // No sap air.
 	uid = "chem_glowsap"
 	affect_blood_on_ingest = 1
@@ -46,7 +46,7 @@
 	name = "black pepper"
 	lore_text = "A powder ground from peppercorns. *AAAACHOOO*"
 	taste_description = "pepper"
-	color = "#000000"
+	liquid_color = "#000000"
 	value = 0.1
 	uid = "chem_blackpepper"
 
@@ -54,7 +54,7 @@
 	name = "cinnamon"
 	lore_text = "A powder used to flavor food and drinks. Unpleasant to eat a full spoonful of."
 	taste_description = "cinnamon"
-	color = "#a34b0d"
+	liquid_color = "#a34b0d"
 	value = 0.2
 	uid = "chem_cinnamon"
 
@@ -64,7 +64,7 @@
 	lore_text = "A universal enzyme used in the preperation of certain chemicals and foods."
 	taste_description = "sweetness"
 	taste_mult = 0.7
-	color = "#365e30"
+	liquid_color = "#365e30"
 	overdose = REAGENTS_OVERDOSE
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
@@ -79,7 +79,7 @@
 	lore_text = "An oil harvested from a mutant form of chili peppers, it has a chilling effect on the body."
 	taste_description = "arctic mint"
 	taste_mult = 1.5
-	color = "#07aab2"
+	liquid_color = "#07aab2"
 	value = 2
 	fruit_descriptor = "numbing"
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
@@ -104,7 +104,7 @@
 	heating_products = null
 	uid = "chem_nettle_histamine"
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
-	color = "#9bbe90"
+	liquid_color = "#9bbe90"
 	heating_point = 60 CELSIUS
 	heating_message = "thins as it separates."
 	heating_products = list(
@@ -126,7 +126,7 @@
 	lore_text = "This is what makes chilis hot."
 	taste_description = "hot peppers"
 	taste_mult = 1.5
-	color = "#b31008"
+	liquid_color = "#b31008"
 	fruit_descriptor = "spicy"
 	uid = "chem_capsaicin"
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
@@ -163,7 +163,7 @@
 	taste_description = "scorching agony"
 	taste_mult = 10
 	touch_met = 5 // Get rid of it quickly
-	color = "#b31008"
+	liquid_color = "#b31008"
 	agony_dose = 0.5
 	agony_amount = 4
 	discomfort_message = "<span class='danger'>You feel like your insides are burning!</span>"
@@ -247,7 +247,7 @@
 	lore_text = "Might cause unpredictable mutations. Keep away from children."
 	taste_description = "slime"
 	taste_mult = 0.9
-	color = "#13bc5e"
+	liquid_color = "#13bc5e"
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_mutagenics"
@@ -275,7 +275,7 @@
 	name = "lactate"
 	lore_text = "Lactate is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."
 	taste_description = "sourness"
-	color = "#eeddcc"
+	liquid_color = "#eeddcc"
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM*2
@@ -298,7 +298,7 @@
 	name = "nanoblood"
 	lore_text = "A stable hemoglobin-based nanoparticle oxygen carrier, used to rapidly replace lost blood. Toxic unless injected in small doses. Does not contain white blood cells."
 	taste_description = "blood with bubbles"
-	color = "#c10158"
+	liquid_color = "#c10158"
 	scannable = 1
 	overdose = 5
 	metabolism = 1
@@ -322,7 +322,7 @@
 	name = "tobacco"
 	lore_text = "Cut and processed tobacco leaves."
 	taste_description = "tobacco"
-	color = "#684b3c"
+	liquid_color = "#684b3c"
 	scannable = 1
 	scent = "cigarette smoke"
 	scent_descriptor = "odour"
@@ -357,7 +357,7 @@
 	name = "nicotine solution"
 	lore_text = "A diluted nicotine solution."
 	taste_mult = 0
-	color = "#fcfcfc"
+	liquid_color = "#fcfcfc"
 	nicotine = REM * 0.1
 	scent = null
 	scent_intensity = null
@@ -371,7 +371,7 @@
 	name = "menthol"
 	lore_text = "Tastes naturally minty, and imparts a very mild numbing sensation."
 	taste_description = "mint"
-	color = "#80af9c"
+	liquid_color = "#80af9c"
 	metabolism = REM * 0.002
 	overdose = REAGENTS_OVERDOSE * 0.25
 	scannable = 1
@@ -391,7 +391,7 @@
 	name = "nanite fluid"
 	lore_text = "A solution of repair nanites used to repair robotic organs. Due to the nature of the small magnetic fields used to guide the nanites, it must be used in temperatures below 170K."
 	taste_description = "metallic sludge"
-	color = "#c2c2d6"
+	liquid_color = "#c2c2d6"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
@@ -413,7 +413,7 @@
 	name = "antiseptic"
 	lore_text = "Sterilizes surfaces (or wounds) in preparation for surgery, and thoroughly removes blood."
 	taste_description = "bitterness"
-	color = "#c8a5dc"
+	liquid_color = "#c8a5dc"
 	touch_met = 5
 	dirtiness = DIRTINESS_STERILE
 	turf_touch_threshold = 0.1
@@ -423,7 +423,7 @@
 /decl/material/liquid/crystal_agent
 	name = "crystallizing agent"
 	taste_description = "sharpness"
-	color = "#13bc5e"
+	liquid_color = "#13bc5e"
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_crystalizing_agent"
 
@@ -483,7 +483,7 @@
 	name              = "thermite"
 	uid               = "chem_thermite"
 	lore_text         = "Thermite produces an aluminothermic reaction known as a thermite reaction. Can be used to melt walls."
-	color             = "#673910"
+	liquid_color             = "#673910"
 	touch_met         = 50
 	taste_description = "metallic sweetness"
 	melting_point     = 323

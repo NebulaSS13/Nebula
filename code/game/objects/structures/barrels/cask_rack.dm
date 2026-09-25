@@ -8,7 +8,7 @@
 	density             = FALSE // Recalculated when barrels added or removed
 	w_class             = ITEM_SIZE_STRUCTURE
 	material            = /decl/material/solid/organic/wood/oak
-	color               = /decl/material/solid/organic/wood/oak::color
+	color               = /decl/material/solid/organic/wood/oak::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/max_stack = 1
 
@@ -161,7 +161,7 @@
 
 /obj/structure/cask_rack/large/mapped
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/cask_rack/large/mapped/Initialize(ml, _mat, _reinf_mat)
 	. = ..()

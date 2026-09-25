@@ -160,7 +160,7 @@ var/global/_wall_chisel_skill = SKILL_CONSTRUCTION
 		if(prob(75))
 			M = M || matrix()
 			M.Turn(pick(90, 180, 270))
-		ore_overlay.color = reinf_material.color
+		ore_overlay.color = reinf_material.solid_color
 		ore_overlay.layer = DECAL_LAYER
 		if(M)
 			ore_overlay.transform = M

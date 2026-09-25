@@ -9,7 +9,7 @@
 	atom_flags                = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
 	matter                    = null
 	material                  = /decl/material/solid/stone/granite
-	color                     = /decl/material/solid/stone/granite::color
+	color                     = /decl/material/solid/stone/granite::solid_color
 	material_alteration       = MAT_FLAG_ALTERATION_ALL
 	wrenchable                = FALSE
 	amount_dispensed          = 10
@@ -37,7 +37,7 @@
 	if(REAGENT_TOTAL_VOLUME(reagents))
 		add_overlay(overlay_image(icon, "[icon_state]-fluid", reagents.get_color(), (RESET_COLOR | RESET_ALPHA)))
 	if(istype(reinf_material)) // reinf_material -> roof and posts, at this point in time
-		var/image/roof_image = overlay_image(icon, "[icon_state]-roof", reinf_material.color, RESET_COLOR | RESET_ALPHA | KEEP_APART)
+		var/image/roof_image = overlay_image(icon, "[icon_state]-roof", reinf_material.solid_color, RESET_COLOR | RESET_ALPHA | KEEP_APART)
 		roof_image.pixel_y = 16 // we have to use 32x32 sprites but want this to be, effectively, 48x32
 		add_overlay(roof_image)
 

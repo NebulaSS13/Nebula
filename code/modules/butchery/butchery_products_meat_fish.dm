@@ -8,7 +8,7 @@
 	nutriment_amt                  = 6
 	nutriment_type                 = /decl/material/solid/organic/meat/fish
 	material                       = /decl/material/solid/organic/meat/fish
-	color                          = /decl/material/solid/organic/meat/fish::color
+	color                          = /decl/material/solid/organic/meat/fish::solid_color
 	drying_wetness                 = 60
 	dried_type                     = /obj/item/food/jerky/fish
 	backyard_grilling_product      = /obj/item/food/butchery/meat/fish/grilled

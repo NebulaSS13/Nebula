@@ -23,7 +23,7 @@
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	wall_flags = 0
 	use_reinf_state = null
-	color = COLOR_EGGSHELL
+	solid_color = COLOR_EGGSHELL
 	door_icon_base = "plastic"
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	weight = MAT_VALUE_LIGHT
@@ -47,7 +47,7 @@
 	lore_text = "A plastic polymer in a sponge-like form, filled with air bubbles that make it springy and compressible."
 	hardness = MAT_VALUE_SOFT + 5
 	taste_description = "foam"
-	color = COLOR_BLUE_GRAY // dunno why foam is this gray-teal color in my mind, but it is. maybe gray would also work
+	solid_color = COLOR_BLUE_GRAY // dunno why foam is this gray-teal color in my mind, but it is. maybe gray would also work
 	uid = "solid_foam"
 
 /decl/material/solid/organic/wax
@@ -62,7 +62,7 @@
 	default_solid_form = /obj/item/stack/material/bar
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
-	color = "#fffccc"
+	solid_color = "#fffccc"
 	door_icon_base = "plastic"
 	hardness = MAT_VALUE_FLEXIBLE - 10
 	weight = MAT_VALUE_LIGHT
@@ -88,7 +88,7 @@
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
-	color = "#aaaaaa"
+	solid_color = "#aaaaaa"
 	hardness = MAT_VALUE_SOFT+5
 	brute_armor = 1
 	weight = MAT_VALUE_EXTREMELY_LIGHT - 5
@@ -111,7 +111,7 @@
 	name                    = "paper"
 	uid                     = "solid_paper"
 	lore_text               = "Low tech writing medium made from cellulose fibers. Also used in wrappings and packaging."
-	color                   = "#cfcece"
+	solid_color             = "#cfcece"
 	stack_origin_tech       = @'{"materials":1}'
 	door_icon_base          = "wood"
 	destruction_desc        = "tears"
@@ -143,7 +143,7 @@
 /decl/material/solid/organic/cloth
 	name = "cotton"
 	uid = "solid_cotton"
-	color = "#ffffff"
+	solid_color = "#ffffff"
 	stack_origin_tech = @'{"materials":2}'
 	door_icon_base = "wood"
 	ignition_point = T0C+232
@@ -169,27 +169,27 @@
 	adjective_name = "hempen"
 	lore_text      = "Sturdy fibers from the hemp plant, woven into strong cloth."
 	uid            = "solid_hemp"
-	color          = "#b4a374"
+	solid_color    = "#b4a374"
 
 /decl/material/solid/organic/cloth/linen
-	name      = "linen"
-	lore_text = "Fibers from the flax plant, woven into sturdy, absorbent cloth."
-	uid       = "solid_linen"
-	color     = "#eee4c7"
+	name        = "linen"
+	lore_text   = "Fibers from the flax plant, woven into sturdy, absorbent cloth."
+	uid         = "solid_linen"
+	solid_color = "#eee4c7"
 
 /decl/material/solid/organic/cloth/wool
 	name           = "wool"
 	adjective_name = "woolen"
 	lore_text      = "Fibers from the wooly fleece of a sheep or similar animal."
 	uid            = "solid_wool"
-	color          = "#fbfcdb"
+	solid_color    = "#fbfcdb"
 
 /decl/material/solid/organic/cloth/wool/diyaab
 	name           = "diyaab wool"
 	adjective_name = null // override base wool
 	lore_text      = "Fibers from the wooly fleece of a diyaab."
 	uid            = "solid_wool_diyaab"
-	color          = "#c9eeff"
+	solid_color    = "#c9eeff"
 
 /decl/material/solid/organic/cloth/synthetic
 	name = "nylon"
@@ -200,7 +200,7 @@
 /decl/material/solid/organic/plantmatter
 	name = "plant matter"
 	uid = "solid_plantmatter"
-	color = COLOR_GREEN_GRAY
+	solid_color = COLOR_GREEN_GRAY
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
 	conductive = 1
@@ -245,7 +245,7 @@
 /decl/material/solid/organic/plantmatter/grass/dry
 	name = "dried grass"
 	uid = "solid_dry_grass"
-	color = COLOR_BEIGE
+	solid_color = COLOR_BEIGE
 	ignition_point = T0C+50
 	tensile_strength = 0.5
 	compost_value = 0.5
@@ -254,7 +254,7 @@
 /decl/material/solid/organic/leather
 	name = "leather"
 	uid = "solid_leather"
-	color = "#5c4831"
+	solid_color = "#5c4831"
 	stack_origin_tech = @'{"materials":2}'
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
@@ -275,12 +275,12 @@
 /decl/material/solid/organic/leather/gut
 	name = "dried gut"
 	uid = "solid_dried_gut"
-	color = "#736754"
+	solid_color = "#736754"
 
 /decl/material/solid/organic/leather/synth
 	name = "synthleather"
 	uid = "solid_synthleather"
-	color = "#1f1f20"
+	solid_color = "#1f1f20"
 	ignition_point = T0C+150
 	melting_point = T0C+100 // Assuming synthetic leather.
 	compost_value = 0
@@ -289,7 +289,7 @@
 /decl/material/solid/organic/leather/lizard
 	name = "scaled hide"
 	uid = "solid_scaled_hide"
-	color = "#434b31"
+	solid_color = "#434b31"
 	integrity = 75
 	hardness = MAT_VALUE_FLEXIBLE + 5
 	weight = MAT_VALUE_LIGHT
@@ -304,7 +304,7 @@
 	name = "treated chitin"
 	uid = "solid_treated_chitin"
 	integrity = 100
-	color = "#5c5a54"
+	solid_color = "#5c5a54"
 	hardness = MAT_VALUE_HARD
 	weight = MAT_VALUE_NORMAL
 	brute_armor = 2

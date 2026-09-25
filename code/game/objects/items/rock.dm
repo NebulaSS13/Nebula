@@ -35,15 +35,15 @@
 
 /obj/item/rock/basalt
 	material = /decl/material/solid/stone/basalt
-	color = /decl/material/solid/stone/basalt::color
+	color = /decl/material/solid/stone/basalt::solid_color
 
 /obj/item/rock/hematite
 	material = /decl/material/solid/hematite
-	color = /decl/material/solid/hematite::color
+	color = /decl/material/solid/hematite::solid_color
 
 /obj/item/rock/flint
 	material = /decl/material/solid/stone/flint
-	color = /decl/material/solid/stone/flint::color
+	color = /decl/material/solid/stone/flint::solid_color
 
 /obj/item/rock/flint/striker
 	name    = "striker"

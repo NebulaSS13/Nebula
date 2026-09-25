@@ -6,7 +6,7 @@
 
 /decl/material/nullglass
 	name = "nullglass"
-	color = COLOR_NULLGLASS
+	solid_color = COLOR_NULLGLASS
 	conductive = 1
 	flags = MAT_FLAG_BRITTLE
 	opacity = 0.5

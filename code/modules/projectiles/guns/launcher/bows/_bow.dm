@@ -11,7 +11,7 @@
 	w_class = ITEM_SIZE_LARGE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material = /decl/material/solid/organic/wood/yew
-	color = /decl/material/solid/organic/wood/yew::color
+	color = /decl/material/solid/organic/wood/yew::solid_color
 	fire_verb = "loose"
 	autofire_enabled = TRUE
 

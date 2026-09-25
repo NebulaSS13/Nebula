@@ -45,7 +45,7 @@
 /obj/structure/hutch/on_update_icon()
 	. = ..()
 	if(door_material)
-		add_overlay(overlay_image(icon, "[icon_state]-doors-[storage?.opened ? "open" : "closed"]", door_material.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-doors-[storage?.opened ? "open" : "closed"]", door_material.solid_color, RESET_COLOR))
 
 // Bird subtypes.
 /obj/structure/hutch/aviary

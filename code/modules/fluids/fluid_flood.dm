@@ -8,7 +8,7 @@ var/global/list/flood_type_overlay_cache = list()
 	if(!global.flood_type_overlay_cache[fluid_type])
 		var/decl/material/fluid_decl = GET_DECL(fluid_type)
 		var/obj/effect/flood/new_flood = new
-		new_flood.color = fluid_decl.color
+		new_flood.color = fluid_decl.liquid_color
 		new_flood.alpha = round(fluid_decl.min_fluid_opacity + ((fluid_decl.max_fluid_opacity - fluid_decl.min_fluid_opacity) * 0.5))
 		global.flood_type_overlay_cache[fluid_type] = new_flood
 		return new_flood

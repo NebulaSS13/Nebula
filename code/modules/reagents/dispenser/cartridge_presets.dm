@@ -52,7 +52,7 @@ DEFINE_CARTRIDGE_FOR_CHEM(ale,      /decl/material/liquid/alcohol/ale)
 DEFINE_CARTRIDGE_FOR_CHEM(mead,     /decl/material/liquid/alcohol/mead)
 
 // Bar, soft
-DEFINE_CARTRIDGE_FOR_CHEM(ice,        /decl/material/solid/ice)
+DEFINE_CARTRIDGE_FOR_CHEM(ice,        /decl/material/liquid/water)
 DEFINE_CARTRIDGE_FOR_CHEM(black_tea,  /decl/material/liquid/drink/tea/black)
 DEFINE_CARTRIDGE_FOR_CHEM(green_tea,  /decl/material/liquid/drink/tea/green)
 DEFINE_CARTRIDGE_FOR_CHEM(chai_tea,   /decl/material/liquid/drink/tea/chai)

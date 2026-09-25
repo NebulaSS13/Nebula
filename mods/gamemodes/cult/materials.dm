@@ -3,7 +3,7 @@
 	uid = "solid_stone_cult"
 	icon_base = 'icons/turf/walls/cult.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced_cult.dmi'
-	color = "#402821"
+	solid_color = "#402821"
 	shard_name = SHARD_STONE_PIECE
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY

@@ -45,7 +45,7 @@
 	else
 		material = GET_DECL(highest_mat)
 		name     = "[english_list(mat_names)] [initial(name)]"
-		color    = material.color
+		color    = material.solid_color
 
 /obj/item/debris/scraps/proc/get_total_matter()
 	. = 0

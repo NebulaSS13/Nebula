@@ -5,7 +5,7 @@
 	material          = /decl/material/solid/organic/skin/feathers
 	pen_quality       = TOOL_QUALITY_DEFAULT
 	max_uses          = 5 // gotta re-ink it often!
-	stroke_color      = /decl/material/liquid/pigment/black/ink::color
+	stroke_color      = /decl/material/liquid/pigment/black/ink::liquid_color
 	stroke_color_name = "inky black"
 
 /obj/item/pen/fancy/quill/Initialize(ml, material_key)

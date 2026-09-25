@@ -5,7 +5,7 @@
 	icon                 = 'icons/obj/items/banners/banner.dmi'
 	icon_state           = ICON_STATE_WORLD
 	material             = /decl/material/solid/organic/cloth
-	color                = /decl/material/solid/organic/cloth::color
+	color                = /decl/material/solid/organic/cloth::solid_color
 	max_health           = 20
 	material_alteration  = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	w_class              = ITEM_SIZE_NORMAL
@@ -116,7 +116,7 @@ var/global/list/banner_type_to_symbols = list()
 	name_prefix         = "woven"
 	icon                = 'icons/obj/items/banners/banner_woven.dmi'
 	material            = /decl/material/solid/organic/plantmatter/grass/dry
-	color               = /decl/material/solid/organic/plantmatter/grass/dry::color
+	color               = /decl/material/solid/organic/plantmatter/grass/dry::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	hung_desc           = "The woven banner is rustic and uneven."
 

@@ -44,7 +44,7 @@
 	wall_flags = 0 //Since we're using an unpaintable icon_base and icon_reinf
 	melting_point = 910
 	boiling_point = 4300
-	color = "#404c53"
+	solid_color = "#404c53"
 	value = 0.5
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -70,7 +70,7 @@
 	wall_flags = 0 //Since we're using an unpaintable icon_base and icon_reinf
 	melting_point = 912
 	boiling_point = 3503
-	color = "#b5c5a2"
+	solid_color = "#b5c5a2"
 	value = 3
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -98,7 +98,7 @@
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
 	wall_flags = 0 //Since we're using an unpaintable icon_base and icon_reinf
-	color = "#98be30"
+	solid_color = "#98be30"
 	value = 0.5
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // Don't spawn this in plants.

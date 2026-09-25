@@ -1,10 +1,10 @@
 /obj/structure/gravemarker
 	material = /decl/material/solid/organic/wood/walnut
-	color =    /decl/material/solid/organic/wood/walnut::color
+	color =    /decl/material/solid/organic/wood/walnut::solid_color
 
 /obj/item/gravemarker
 	material = /decl/material/solid/organic/wood/walnut
-	color =    /decl/material/solid/organic/wood/walnut::color
+	color =    /decl/material/solid/organic/wood/walnut::solid_color
 
 // FRANCE ISN'T REAL
 /obj/item/chems/drinks/bottle/champagne

@@ -2,7 +2,7 @@
 	abstract_type = /obj/item/ancient_surgery
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/metal/bronze
-	color = /decl/material/solid/metal/bronze::color
+	color = /decl/material/solid/metal/bronze::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	matter = null
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

@@ -13,7 +13,7 @@
 
 /obj/structure/banner_frame/wall/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color    = /decl/material/solid/organic/wood/ebony::color
+	color    = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/banner_frame/wall/ebony/red
 	banner   = /obj/item/banner/red

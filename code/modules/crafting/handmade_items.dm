@@ -2,7 +2,7 @@
 	abstract_type = /obj/item/chems/glass/handmade
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/stone/pottery
-	color = /decl/material/solid/stone/pottery::color
+	color = /decl/material/solid/stone/pottery::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	presentation_flags = PRESENTATION_FLAG_NAME
 

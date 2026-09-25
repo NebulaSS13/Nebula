@@ -16,11 +16,11 @@
 
 /obj/structure/boulder/basalt
 	material = /decl/material/solid/stone/basalt
-	color = /decl/material/solid/stone/basalt::color
+	color = /decl/material/solid/stone/basalt::solid_color
 
 /obj/structure/boulder/sandstone
 	material = /decl/material/solid/stone/sandstone
-	color = /decl/material/solid/stone/sandstone::color
+	color = /decl/material/solid/stone/sandstone::solid_color
 
 /obj/structure/boulder/create_dismantled_products(turf/T)
 	new /obj/item/stack/material/ore(T, rand(3,5), material?.type)

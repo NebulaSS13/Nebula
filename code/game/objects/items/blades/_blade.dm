@@ -75,7 +75,7 @@
 				initial_tool_qualities[TOOL_HATCHET] = TOOL_QUALITY_MEDIOCRE
 		set_extension(src, /datum/extension/tool/variable/simple, initial_tool_qualities)
 
-	shine = istype(material) ? clamp((material.reflectiveness * 0.01) * 255, 10, (0.6 * rgb2num(material.color, COLORSPACE_HSV)[3])) : null
+	shine = istype(material) ? clamp((material.reflectiveness * 0.01) * 255, 10, (0.6 * rgb2num(material.solid_color, COLORSPACE_HSV)[3])) : null
 	icon_state = ICON_STATE_WORLD
 	on_update_icon()
 
@@ -83,13 +83,13 @@
 	icon_state = get_world_inventory_state()
 
 /obj/item/bladed/proc/get_hilt_color()
-	return istype(hilt_material) ? hilt_material.color : COLOR_WHITE
+	return istype(hilt_material) ? hilt_material.solid_color : COLOR_WHITE
 
 /obj/item/bladed/proc/get_guard_color()
-	return istype(guard_material) ? guard_material.color : COLOR_WHITE
+	return istype(guard_material) ? guard_material.solid_color : COLOR_WHITE
 
 /obj/item/bladed/proc/get_pommel_color()
-	return istype(pommel_material) ? pommel_material.color : COLOR_WHITE
+	return istype(pommel_material) ? pommel_material.solid_color : COLOR_WHITE
 
 /obj/item/bladed/on_update_icon()
 	. = ..()

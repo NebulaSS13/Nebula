@@ -5,7 +5,7 @@
 	icon_state = ICON_STATE_WORLD
 	anchored = TRUE
 	density = TRUE
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 	material = /decl/material/solid/organic/wood/oak
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	storage = /datum/storage/produce_bin
@@ -58,8 +58,8 @@
 
 /obj/structure/produce_bin/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/produce_bin/walnut
 	material = /decl/material/solid/organic/wood/walnut
-	color = /decl/material/solid/organic/wood/walnut::color
+	color = /decl/material/solid/organic/wood/walnut::solid_color

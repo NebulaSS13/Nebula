@@ -24,7 +24,7 @@
 	boiling_point = 1615
 	flags = MAT_FLAG_FUSION_FUEL
 	taste_description = "metal"
-	color = "#808080"
+	solid_color = "#808080"
 	value = 0.5
 	narcosis = 5
 
@@ -36,7 +36,7 @@
 	boiling_point = 4300
 	taste_description = "sour chalk"
 	taste_mult = 1.5
-	color = "#1c1300"
+	solid_color = "#1c1300"
 	value = 0.5
 	dirtiness = 30
 
@@ -54,7 +54,7 @@
 	name = "ashes"
 	uid = "solid_ashes"
 	lore_text = "The powdery remains of burned organic material."
-	color = "#5c5c5c"
+	solid_color = "#5c5c5c"
 	dissolves_in = MAT_SOLVENT_MODERATE
 	// Todo: calcium
 	dissolves_into = list(
@@ -68,14 +68,14 @@
 	melting_point = 317
 	boiling_point = 550
 	taste_description = "vinegar"
-	color = "#832828"
+	solid_color = "#832828"
 	value = 0.5
 
 /decl/material/solid/silicon
 	name = "silicon"
 	uid = "solid_silicon"
 	lore_text = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."
-	color = "#a8a8a8"
+	solid_color = "#a8a8a8"
 	value = 0.5
 
 /decl/material/solid/sodium
@@ -85,7 +85,7 @@
 	melting_point = 1687
 	boiling_point = 3173
 	taste_description = "salty metal"
-	color = "#808080"
+	solid_color = "#808080"
 	value = 0.5
 
 /decl/material/solid/sulfur
@@ -95,7 +95,7 @@
 	melting_point = 388
 	boiling_point = 717
 	taste_description = "old eggs"
-	color = "#bf8c00"
+	solid_color = "#bf8c00"
 	value = 0.5
 
 /decl/material/solid/potassium
@@ -105,7 +105,7 @@
 	melting_point = 336
 	boiling_point = 1032
 	taste_description = "sweetness" //potassium is bitter in higher doses but sweet in lower ones.
-	color = "#a0a0a0"
+	solid_color = "#a0a0a0"
 	value = 0.5
 
 /decl/material/solid/potassium/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)

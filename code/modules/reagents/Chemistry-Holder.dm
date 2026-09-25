@@ -143,7 +143,18 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 /datum/reagents/proc/get_primary_reagent_type()
 	return primary_reagent
 
+/datum/reagents/proc/get_primary_reagent_phase()
+	var/decl/material/mat = RESOLVE_TO_DECL(primary_reagent)
+	if(!istype(mat))
+		return
+	// TODO: update this if we ever have gas and plasma in reagent mixes.
+	if(mat in liquid_volumes)
+		return MAT_PHASE_LIQUID
+	return MAT_PHASE_SOLID
+
+
 /datum/reagents/proc/get_primary_reagent_decl()
+	RETURN_TYPE(/decl/material)
 	return RESOLVE_TO_DECL(primary_reagent)
 
 /datum/reagents/proc/update_total() // Updates volume.
@@ -445,10 +456,10 @@ var/global/datum/reagents/sink/infinite_reagent_sink = new
 			return TRUE
 	return FALSE
 
-/datum/reagents/proc/has_all_reagents(var/list/check_reagents, var/phases)
+/datum/reagents/proc/has_all_reagents(var/list/check_reagents, var/alist/phases)
 	. = TRUE
 	for(var/check in check_reagents)
-		. = min(., has_reagent(RESOLVE_TO_DECL(check), check_reagents[check], phases))
+		. = min(., has_reagent(RESOLVE_TO_DECL(check), check_reagents[check], istype(phases, /alist) ? phases[check] : phases))
 		if(!.)
 			return
 

@@ -45,15 +45,16 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	if(obj_flags & OBJ_FLAG_HOLLOW)
 		. /= HOLLOW_OBJECT_MATTER_MULTIPLIER
 
+ // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
 /obj/item/chems/drinks/glass2/proc/has_ice()
+	if("ice" in reagents.get_primary_reagent_decl()?.glass_special)
+		return TRUE
 	var/reagent_volumes = REAGENT_VOLUMES(reagents)
-	if(LAZYLEN(reagent_volumes))
-		var/decl/material/R = reagents.get_primary_reagent_decl()
-		if(!((R.type == /decl/material/solid/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
-			if(reagents.has_reagent(/decl/material/solid/ice, REAGENT_TOTAL_VOLUME(reagents) / 10)) // 10% ice by volume
-				return 1
-
-	return 0
+	if(!LAZYLEN(reagent_volumes))
+		return FALSE
+	if(reagents.get_primary_reagent_phase() != MAT_PHASE_LIQUID) // cup of ice, probably
+		return FALSE
+	return reagents.has_reagent(/decl/material/liquid/water, REAGENT_TOTAL_VOLUME(reagents) / 10, phases = MAT_PHASE_SOLID) // 10% ice by volume
 
 /obj/item/chems/drinks/glass2/proc/has_fizz()
 	var/reagent_volumes = REAGENT_VOLUMES(reagents)
