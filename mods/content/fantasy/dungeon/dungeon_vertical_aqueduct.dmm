@@ -1,0 +1,55 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/mob/living/simple_animal/aquatic/fish/grump,
+/turf/floor/path/basalt/water/deep,
+/area/template_noop)
+"l" = (
+/turf/floor/path/basalt/water/deep,
+/area/template_noop)
+"t" = (
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"u" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+
+(1,1,1) = {"
+u
+u
+u
+u
+u
+u
+u
+u
+"}
+(2,1,1) = {"
+t
+t
+t
+t
+t
+t
+t
+t
+"}
+(3,1,1) = {"
+l
+l
+l
+a
+l
+l
+l
+l
+"}
+(4,1,1) = {"
+u
+u
+u
+u
+u
+u
+u
+u
+"}

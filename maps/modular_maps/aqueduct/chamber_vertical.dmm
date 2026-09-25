@@ -1,0 +1,216 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"c" = (
+/obj/structure/decoration/gargoyle/plinth{
+	dir = 4
+	},
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"d" = (
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"e" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+"w" = (
+/obj/structure/door/ebony,
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"y" = (
+/obj/structure/decoration/gargoyle/plinth{
+	dir = 8
+	},
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"J" = (
+/turf/template_noop,
+/area/template_noop)
+"L" = (
+/turf/floor/path/basalt/water/deep,
+/area/template_noop)
+"R" = (
+/turf/floor/path/basalt/water,
+/area/template_noop)
+
+(1,1,1) = {"
+J
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+J
+"}
+(2,1,1) = {"
+e
+e
+c
+e
+c
+e
+d
+d
+d
+d
+d
+d
+e
+c
+e
+c
+e
+e
+"}
+(3,1,1) = {"
+e
+d
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+d
+e
+"}
+(4,1,1) = {"
+e
+d
+a
+d
+d
+d
+a
+R
+R
+R
+R
+a
+d
+d
+d
+a
+d
+e
+"}
+(5,1,1) = {"
+w
+a
+a
+d
+e
+d
+a
+R
+L
+L
+R
+a
+d
+e
+d
+a
+a
+w
+"}
+(6,1,1) = {"
+e
+d
+a
+d
+d
+d
+a
+R
+R
+R
+R
+a
+d
+d
+d
+a
+d
+e
+"}
+(7,1,1) = {"
+e
+d
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+d
+e
+"}
+(8,1,1) = {"
+e
+e
+y
+e
+y
+e
+d
+d
+d
+d
+d
+d
+e
+y
+e
+y
+e
+e
+"}
+(9,1,1) = {"
+J
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+J
+"}

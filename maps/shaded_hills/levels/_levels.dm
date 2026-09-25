@@ -178,6 +178,12 @@
 	subtemplate_area = /area/shaded_hills/caves/dungeon/poi
 	base_turf = /turf/floor/rock/basalt
 
+/datum/level_data/main_level/shaded_hills/dungeon/generate_level()
+	. = ..()
+	to_world_log("Applying Shaded Hills mapgen.")
+	var/decl/modular_map_generator/generator = GET_DECL(/decl/modular_map_generator/aqueduct/shaded_hills)
+	generator.generate(level_z)
+
 /obj/abstract/level_data_spawner/shaded_hills_grassland
 	level_data_type = /datum/level_data/main_level/shaded_hills/grassland
 

@@ -39,7 +39,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 	var/turf/spawn_loc = get_turf(src)
 
 	if(istype(spawn_loc))
-		if(istext(template))
+		if(istext(template) || ispath(template))
 			template = SSmapping.get_template(template)
 		if(istype(template))
 			template.load(spawn_loc, centered = centered)
