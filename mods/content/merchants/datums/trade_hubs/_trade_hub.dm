@@ -74,10 +74,11 @@
 	var/extra_space = max_merchants - length(merchants)
 	// The more extra space there is, the faster new merchants will show up to fill it.
 	if(extra_space > 0 && prob(extra_space * merchant_attraction_multiplier))
-		var/list/possible_incoming_merchants = post_roundstart_merchant_types.Copy()
-		var/list/rare_merchant_types = post_roundstart_rare_merchant_types.Copy()
-		if(prob(rare_merchant_chance) && length(rare_merchant_types))
-			possible_incoming_merchants = rare_merchant_types
+		var/list/possible_incoming_merchants = list()
+		if(length(post_roundstart_merchant_types))
+			possible_incoming_merchants = post_roundstart_merchant_types.Copy()
+		if(length(post_roundstart_rare_merchant_types) && prob(rare_merchant_chance))
+			possible_incoming_merchants = post_roundstart_rare_merchant_types.Copy()
 
 		var/new_merchant_type = null
 		possible_incoming_merchants = shuffle(possible_incoming_merchants)

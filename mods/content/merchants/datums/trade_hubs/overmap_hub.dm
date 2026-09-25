@@ -24,7 +24,7 @@ var/global/list/trading_hub_names = list()
 
 /datum/trade_hub/overmap/is_accessible_from(turf/checked_turf)
 	if(istype(checked_turf))
-		var/obj/effect/overmap/customer = global.overmap_sectors[num2text(checked_turf.z)]
+		var/obj/effect/overmap/customer = global.overmap_sectors[checked_turf.z]
 		// Must be on the same overmap tile in order to trade.
 		return customer && overmap_object && get_turf(customer) == get_turf(overmap_object)
 
