@@ -68,7 +68,7 @@ var/global/dmm_suite/preloader/_preloader = new
 
 	var/datum/map_load_metadata/M = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type, level_data_type)
 
-	if(length(M.turfs_to_mark_modified))
+	if(length(M?.turfs_to_mark_modified))
 		for(var/turf/turf in M.turfs_to_mark_modified)
 			turf.state_was_modified()
 
