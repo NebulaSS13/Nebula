@@ -5,7 +5,7 @@
 	var/ranged_charge_regen_prob = 20
 
 /mob/living/simple_animal/hostile/giant_spider/ranged/has_ranged_attack(atom/target)
-	. = ranged_charges > 0 && !Adjacent(target)
+	. = ranged_charges > 0 && istype(target) && !Adjacent(target)
 	if(. && isliving(target))
 		var/mob/living/victim = target
 		if(victim.incapacitated(INCAPACITATION_DISABLED) || victim.stat != CONSCIOUS)
