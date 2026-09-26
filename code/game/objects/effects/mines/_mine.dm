@@ -190,6 +190,10 @@
 
 /obj/item/mine/Crossed(atom/movable/AM)
 	. = ..()
+	if(ismob(AM))
+		var/mob/walker = AM
+		if(walker.can_overcome_gravity())
+			return
 	if(istype(AM) && !AM.is_incorporeal())
 		Bumped(AM)
 
