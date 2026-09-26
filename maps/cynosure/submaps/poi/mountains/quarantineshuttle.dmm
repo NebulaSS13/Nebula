@@ -4,36 +4,36 @@
 /area/template_noop)
 "ab" = (
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ac" = (
 /obj/item/caution/cone,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ad" = (
 /turf/wall/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ae" = (
 /obj/structure/inflatable,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "af" = (
 /obj/structure/inflatable/door,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ag" = (
 /obj/structure/shuttle/engine/heater{
 	dir = 4;
 	icon_state = "heater"
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ah" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 8;
 	icon_state = "propulsion_l"
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ai" = (
 /obj/structure/grille,
 /obj/structure/shuttle/window,
@@ -46,10 +46,10 @@
 	icon_state = "tape_door_0"
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aj" = (
 /turf/wall/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ak" = (
 /obj/machinery/door/airlock/external{
 	desc = "It opens and closes. It is stamped with the logo of Major Bill's Transportation";
@@ -63,13 +63,13 @@
 	icon_state = "tape_door_0"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "al" = (
 /obj/structure/sign/warning/biohazard{
 	dir = 1
 	},
 /turf/wall/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "am" = (
 /obj/structure/hygiene/toilet{
 	dir = 4
@@ -77,89 +77,89 @@
 /obj/effect/decal/cleanable/vomit,
 /obj/item/remains/human,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "an" = (
 /obj/machinery/door/airlock{
 	name = "Restroom"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ao" = (
 /obj/effect/decal/cleanable/vomit,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ap" = (
 /obj/item/remains/human,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aq" = (
 /obj/structure/chair,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ar" = (
 /obj/structure/chair,
 /obj/item/remains/human,
 /obj/item/clothing/suit/space/emergency,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "as" = (
 /obj/machinery/vending/snack,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "at" = (
 /obj/machinery/vending/cola,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "au" = (
 /obj/structure/closet/crate/secure,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "av" = (
 /obj/item/tool/drill,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aw" = (
 /obj/item/clothing/mask/breath,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ax" = (
 /obj/effect/decal/cleanable/generic,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ay" = (
 /obj/item/remains/xeno,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "az" = (
 /obj/item/trash/syndi_cakes,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aA" = (
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aB" = (
 /obj/item/trash/cigbutt,
 /obj/item/tank/emergency/oxygen,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aC" = (
 /obj/item/knife/combat/boot,
 /obj/item/clothing/mask/breath,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aD" = (
 /obj/item/remains/human,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aE" = (
 /obj/item/trash/sosjerky,
 /obj/item/box/fancy/donut/empty,
 /obj/item/chems/drinks/sillycup,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aF" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced{
@@ -170,11 +170,11 @@
 	dir = 8
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aG" = (
 /obj/machinery/door/airlock/glass,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aH" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced{
@@ -184,43 +184,43 @@
 	dir = 4
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aI" = (
 /obj/machinery/button{
 	name = "Cargo Hatch"
 	},
 /turf/wall/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aJ" = (
 /obj/machinery/constructable_frame/machine_frame,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aK" = (
 /obj/structure/chair/comfy/brown{
 	dir = 8
 	},
 /obj/effect/decal/cleanable/vomit,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aL" = (
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aM" = (
 /obj/item/trash/cheesie,
 /obj/item/remains/human,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aN" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aO" = (
 /obj/structure/chair{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aP" = (
 /obj/structure/chair{
 	dir = 1
@@ -228,27 +228,27 @@
 /obj/item/remains/human,
 /obj/item/clothing/mask/breath,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aQ" = (
 /obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aR" = (
 /obj/structure/chair{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aS" = (
 /obj/effect/decal/cleanable/vomit,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aT" = (
 /obj/item/clothing/head/helmet/space/emergency,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aU" = (
 /obj/machinery/door/airlock/engineering{
 	icon_state = "door_locked";
@@ -256,18 +256,18 @@
 	name = "Cargo Bay"
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aV" = (
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aW" = (
 /obj/item/shard,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aX" = (
 /obj/item/paicard,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aY" = (
 /obj/machinery/door/blast/regular{
 	name = "Cargo Door"
@@ -277,7 +277,7 @@
 	icon_state = "tape_door_0"
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "aZ" = (
 /obj/item/remains/human,
 /obj/item/clothing/jumpsuit/corporate/mbill_flight{
@@ -289,30 +289,30 @@
 	name = "old shipping cap"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ba" = (
 /obj/item/trash/cigbutt,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bb" = (
 /obj/machinery/door/airlock/command{
 	icon_state = "door_locked";
 	locked = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bc" = (
 /obj/item/tank/emergency/oxygen/engi,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bd" = (
 /obj/item/remains/human,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "be" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced,
@@ -323,7 +323,7 @@
 	dir = 1;
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bf" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced,
@@ -331,7 +331,7 @@
 	dir = 1;
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bg" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced,
@@ -342,27 +342,27 @@
 	dir = 1;
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bh" = (
 /obj/item/clothing/suit/space/emergency,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bi" = (
 /obj/item/trash/candy,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bj" = (
 /obj/structure/rack,
 /obj/structure/loot_pile/maint/boxfort,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bk" = (
 /obj/structure/rack,
 /obj/item/tool/shovel,
 /obj/random/contraband,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bl" = (
 /obj/structure/closet/crate/secure{
 	icon_state = "scisecurecrateopen";
@@ -371,7 +371,7 @@
 	opened = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bm" = (
 /obj/structure/chair/comfy/brown{
 	dir = 8
@@ -386,30 +386,30 @@
 	name = "old shipping cap"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bn" = (
 /obj/structure/table,
 /obj/item/taperecorder,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bo" = (
 /obj/item/crowbar/red,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bp" = (
 /obj/item/trash/chips,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bq" = (
 /obj/structure/chair,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "br" = (
 /obj/structure/chair,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bs" = (
 /obj/structure/chair,
 /obj/item/remains/human,
@@ -419,59 +419,59 @@
 	name = "old shipping cap"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bt" = (
 /obj/structure/chair,
 /obj/item/remains/human,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bu" = (
 /obj/item/remains/xeno,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bv" = (
 /obj/item/shard{
 	icon_state = "medium"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bw" = (
 /obj/item/remains/mouse,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bx" = (
 /obj/random/maintenance,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "by" = (
 /obj/item/coin/silver,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bz" = (
 /obj/item/remains/human,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bA" = (
 /obj/effect/decal/cleanable/generic,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bB" = (
 /obj/item/tank/emergency/oxygen/engi,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bC" = (
 /obj/item/trash/sosjerky,
 /obj/item/remains/human,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bD" = (
 /obj/item/remains/human,
 /obj/item/clothing/mask/breath,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bE" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced,
@@ -482,7 +482,7 @@
 	dir = 1
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bF" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced,
@@ -493,42 +493,42 @@
 	dir = 1
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bG" = (
 /obj/machinery/button{
 	dir = 4;
 	name = "Cargo Access"
 	},
 /turf/wall/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bH" = (
 /obj/machinery/recharge_station,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bI" = (
 /obj/machinery/door/airlock{
 	name = "Charge Station"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bJ" = (
 /obj/item/trash/tastybread,
 /obj/item/knife/folding/combat/balisong,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bK" = (
 /obj/effect/decal/cleanable/vomit,
 /obj/effect/decal/cleanable/mucus,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bL" = (
 /obj/structure/chair{
 	dir = 1
 	},
 /obj/item/remains/xeno,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bM" = (
 /obj/structure/chair{
 	dir = 1
@@ -540,12 +540,12 @@
 	registered_name = "Nadia Chu"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bN" = (
 /obj/structure/rack,
 /obj/item/toolbox/emergency,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bO" = (
 /obj/structure/rack,
 /obj/item/clothing/suit/mbill{
@@ -553,33 +553,33 @@
 	name = "old shipping cap"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bP" = (
 /obj/structure/ore_box,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bQ" = (
 /obj/item/poster,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bR" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bS" = (
 /obj/structure/sign/warning/biohazard,
 /turf/wall/shuttle,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bT" = (
 /obj/structure/tape_barricade/medical{
 	icon_state = "tape_v_0"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bU" = (
 /obj/item/stack/tape_roll/barricade_tape/medical,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bV" = (
 /obj/structure/tape_barricade/medical{
 	dir = 1;
@@ -590,69 +590,69 @@
 	icon_state = "tape_dir_0"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bW" = (
 /obj/structure/tape_barricade/medical{
 	icon_state = "tape_h_0"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bX" = (
 /obj/structure/lattice,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bY" = (
 /obj/structure/sign/warning/secure_area,
 /turf/wall/iron,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "bZ" = (
 /obj/structure/sign/plaque/ai_dev{
 	desc = "By order of the S.D.D.C, this site or craft is to be buried and not disturbed until such time that sterility can be confirmed. Dated: 20/12/2491 ";
 	name = "\improper Sif Department of Disease Control notice"
 	},
 /turf/wall/iron,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ca" = (
 /obj/structure/table/steel,
 /obj/random/tool/power,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "cb" = (
 /obj/item/bodybag,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "cc" = (
 /obj/structure/table/steel,
 /obj/item/box/bodybags,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "cd" = (
 /obj/structure/table/steel,
 /obj/item/clothing/suit/bio_suit,
 /obj/random/medical/lite,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ce" = (
 /obj/structure/closet/l3closet/virology,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "cf" = (
 /obj/item/chems/syringe/antibiotic,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "cg" = (
 /obj/structure/tank_rack/oxygen,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ch" = (
 /obj/structure/table/steel,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ci" = (
 /obj/structure/table/steel,
 /obj/item/chems/syringe/antibiotic,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "cj" = (
 /obj/structure/table/steel,
 /obj/item/chems/spray/cleaner{
@@ -660,46 +660,46 @@
 	name = "Chemistry Cleaner"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "ck" = (
 /obj/structure/table/steel,
 /obj/item/tool/hydraulic_cutter,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "cl" = (
 /obj/structure/rack,
 /obj/item/clothing/head/bio_hood,
 /obj/item/clothing/suit/bio_suit,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "cm" = (
 /obj/item/fuelled_tool/welding/largetank,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "cn" = (
 /obj/structure/closet/crate/medical,
 /turf/floor/barren,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "co" = (
 /obj/structure/sign/warning/biohazard,
 /turf/wall/iron,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "gE" = (
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "qP" = (
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "xR" = (
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "NN" = (
 /obj/machinery/door/airlock/glass,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 "Zg" = (
 /turf/floor/tiled,
-/area/cynosure_submap/cave/qShuttle)
+/area/cynosure_submap/cave/quarantine_shuttle)
 
 (1,1,1) = {"
 aa

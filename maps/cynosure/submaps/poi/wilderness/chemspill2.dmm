@@ -22,7 +22,7 @@
 /area/cynosure_submap/ChemSpill2)
 "h" = (
 /turf/floor/rock,
-/area/cynosure_submap/ChemSpill1)
+/area/cynosure_submap/chemical_spill)
 "i" = (
 /turf/floor/rock/sand/water/contaminated,
 /area/cynosure_submap/ChemSpill2)

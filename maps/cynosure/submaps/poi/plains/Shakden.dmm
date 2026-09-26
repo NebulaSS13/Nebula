@@ -4,17 +4,17 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 "c" = (
 /turf/wall/natural,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 "d" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 "e" = (
 /obj/item/remains/mouse,
 /turf/floor/dirt,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 "f" = (
 /obj/item/food/butchery/meat,
 /obj/item/food/butchery/meat,
@@ -22,21 +22,21 @@
 /obj/item/food/butchery/meat,
 /obj/item/food/butchery/meat,
 /turf/floor/dirt,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 "g" = (
 /mob/living/simple_animal/hostile/beast/shantak,
 /turf/floor/dirt,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 "h" = (
 /obj/item/food/butchery/meat,
 /obj/item/food/butchery/meat,
 /obj/item/food/butchery/meat,
 /turf/floor/dirt,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 "j" = (
 /obj/item/food/butchery/meat,
 /turf/floor/dirt,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 "k" = (
 /obj/item/food/butchery/meat,
 /obj/item/food/butchery/meat,
@@ -44,19 +44,19 @@
 /obj/item/food/butchery/meat,
 /obj/item/knife/hook,
 /turf/floor/dirt,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 "l" = (
 /obj/random/grenade/lethal,
 /turf/floor/dirt,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 "G" = (
 /obj/random/boulder,
 /turf/floor/dirt,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 "N" = (
 /obj/random/ammo,
 /turf/floor/dirt,
-/area/cynosure_submap/Shakden)
+/area/cynosure_submap/shantak_den)
 
 (1,1,1) = {"
 a

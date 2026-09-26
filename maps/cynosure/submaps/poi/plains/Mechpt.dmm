@@ -4,81 +4,81 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "c" = (
 /obj/item/trash/chips,
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "d" = (
 /obj/structure/railing/mapped,
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "e" = (
 /obj/structure/railing/mapped,
 /obj/structure/table/wood,
 /obj/item/food/junk/chips,
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "f" = (
 /obj/structure/railing/mapped,
 /obj/structure/table/wood,
 /obj/item/cell/high,
 /obj/item/cell/high,
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "g" = (
 /obj/structure/railing/mapped,
 /obj/structure/table/wood,
 /obj/random/helmet,
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "h" = (
 /obj/structure/railing/mapped,
 /obj/structure/table/wood,
 /obj/item/cash/c10,
 /obj/item/cash/c10,
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "i" = (
 /obj/structure/railing/mapped{
 	dir = 4;
 	icon_state = "railing0"
 	},
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "j" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "k" = (
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0"
 	},
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "l" = (
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/dirt,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "m" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/floor/dirt,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "n" = (
 /obj/effect/decal/cleanable/blood/oil/streak,
 /turf/floor/dirt,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "q" = (
 /obj/item/stack/cable_coil,
 /turf/floor/dirt,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "r" = (
 /obj/structure/railing/mapped{
 	dir = 1;
 	icon_state = "railing0"
 	},
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "s" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -87,7 +87,7 @@
 /obj/structure/table/wood,
 /obj/structure/reagent_dispensers/beerkeg,
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "t" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -96,7 +96,7 @@
 /obj/structure/table/wood,
 /obj/item/cash/c50,
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "u" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -106,7 +106,7 @@
 /obj/item/cell/high,
 /obj/item/cell/gun,
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "v" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -115,36 +115,36 @@
 /obj/structure/table/wood,
 /obj/item/chems/drinks/bottle/small/beer,
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "x" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/floor/dirt,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "D" = (
 /obj/random/tank,
 /turf/floor/dirt,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "H" = (
 /obj/structure/railing/mapped,
 /obj/structure/table/wood,
 /obj/random/tool,
 /turf/template_noop,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "Q" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "R" = (
 /obj/random/tool,
 /turf/floor/dirt,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "T" = (
 /obj/effect/decal/cleanable/blood/oil/streak,
 /turf/floor/dirt,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 "Z" = (
 /obj/random/tool,
 /turf/floor/dirt,
-/area/cynosure_submap/Mechpt)
+/area/cynosure_submap/mech_pit)
 
 (1,1,1) = {"
 a

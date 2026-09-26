@@ -3,67 +3,67 @@
 /obj/structure/rack,
 /obj/item/glass_jar,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "ba" = (
 /obj/structure/bookcase,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "bP" = (
 /obj/structure/window/reinforced{
 	dir = 4
 	},
 /turf/template_noop,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "cI" = (
 /obj/structure/window/reinforced{
 	dir = 1
 	},
 /turf/template_noop,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "dv" = (
 /obj/structure/window/reinforced{
 	dir = 1
 	},
 /obj/structure/flora/grass/brown,
 /turf/floor/grass/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "dV" = (
 /obj/structure/coatrack,
 /turf/floor/carpet/blue,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "ej" = (
 /obj/structure/chair/wood{
 	dir = 4
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "eq" = (
 /obj/structure/window/reinforced{
 	dir = 1
 	},
 /obj/structure/table/bench/sif,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "eB" = (
 /obj/effect/floor_decal/spline/plain,
 /turf/floor/wood/broken/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "eV" = (
 /turf/template_noop,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "fU" = (
 /obj/effect/floor_decal/spline/plain{
 	dir = 8
 	},
 /obj/abstract/exterior_marker/inside,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "gb" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/spline/plain,
 /obj/item/flame/candle/spent,
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "gz" = (
 /obj/effect/decal/cleanable/filth,
 /obj/item/taperecorder,
@@ -72,30 +72,30 @@
 /obj/item/flashlight,
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "gP" = (
 /obj/structure/bed/sofa/middle/black{
 	dir = 4
 	},
 /obj/effect/floor_decal/carpet,
 /turf/floor/carpet,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "gR" = (
 /obj/machinery/light/flamp,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "hE" = (
 /obj/machinery/light/small{
 	dir = 4
 	},
 /turf/floor/carpet/blue,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "jC" = (
 /obj/structure/bed/sofa/middle/black{
 	dir = 4
 	},
 /turf/floor/carpet,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "jI" = (
 /obj/effect/floor_decal/carpet{
 	dir = 8
@@ -107,40 +107,40 @@
 	dir = 9
 	},
 /turf/floor/carpet,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "jM" = (
 /obj/structure/table/wood,
 /obj/item/flame/candle/spent,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "kt" = (
 /obj/machinery/light_switch,
 /turf/wall/log/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "kz" = (
 /obj/item/stool/padded{
 	dir = 1
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "kJ" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/bush/sunnybush,
 /turf/floor/grass/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "lk" = (
 /obj/effect/floor_decal/corner/white/diagonal,
 /obj/structure/hygiene/toilet{
 	dir = 1
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "lt" = (
 /obj/structure/rack,
 /obj/item/chems/condiment/flour,
 /obj/item/whetstone,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "mZ" = (
 /obj/structure/bed/sofa/middle/black{
 	dir = 1
@@ -149,7 +149,7 @@
 	dir = 1
 	},
 /turf/floor/carpet,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "nk" = (
 /obj/effect/floor_decal/carpet{
 	dir = 4
@@ -160,13 +160,13 @@
 	desc = "Despite this photo album's apparent use, half of the pictures seem to have been pulled from their pockets, while those that remain are blurry and faded."
 	},
 /turf/floor/carpet,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "ov" = (
 /obj/structure/rack,
 /obj/item/box/condimentbottles,
 /obj/item/chems/spray/extinguisher,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "pT" = (
 /obj/structure/hygiene/shower{
 	dir = 1
@@ -184,33 +184,33 @@
 /obj/structure/curtain/open/shower,
 /obj/item/clothing/suit/robe,
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "qs" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "ru" = (
 /obj/structure/door/sif,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "sp" = (
 /obj/structure/window/reinforced{
 	dir = 1
 	},
 /obj/structure/flora/bush/grassybush,
 /turf/floor/grass/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "sv" = (
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/floor/tiled/white,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "sw" = (
 /obj/structure/window/reinforced,
 /obj/structure/table/wood/reinforced,
 /obj/item/pen,
 /obj/item/paper_bin,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "sx" = (
 /obj/effect/floor_decal/spline/plain{
 	dir = 1
@@ -229,23 +229,23 @@
 	},
 /obj/item/chems/rag,
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "sF" = (
 /turf/floor/dirt,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "sS" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/medal/silver,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "sV" = (
 /turf/floor/carpet/blue,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "tI" = (
 /obj/structure/window/reinforced,
 /obj/structure/table/wood/reinforced,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "uX" = (
 /obj/structure/window/reinforced{
 	dir = 1
@@ -254,7 +254,7 @@
 /obj/item/flame/candle,
 /obj/item/camera,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "vh" = (
 /obj/effect/floor_decal/corner/white/diagonal,
 /obj/structure/mirror{
@@ -267,23 +267,23 @@
 /obj/item/towel/random,
 /obj/random/medical/lite,
 /turf/floor/tiled/white,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "vD" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/spline/plain,
 /obj/random/junk,
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "vI" = (
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "vM" = (
 /obj/structure/rack,
 /obj/item/toy/plushie/fox/marble,
 /obj/item/ammo_casing/shotgun/pellet,
 /obj/structure/curtain/black,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "wz" = (
 /obj/effect/floor_decal/spline/plain{
 	dir = 8
@@ -291,40 +291,40 @@
 /obj/structure/flora/pottedplant/unusual,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "wJ" = (
 /obj/item/clothing/dress/redswept,
 /obj/structure/rack,
 /obj/random/maintenance/security,
 /obj/structure/curtain/black,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "xd" = (
 /obj/effect/floor_decal/carpet{
 	dir = 8
 	},
 /turf/floor/carpet,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "xp" = (
 /obj/structure/chair/wood,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "xq" = (
 /obj/structure/loot_pile/maint/trash,
 /obj/effect/decal/cleanable/filth,
 /turf/floor/dirt,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "xs" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/effect/floor_decal/spline/plain{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "xG" = (
 /obj/abstract/map_effect/interval/sound_emitter/footsteps_wood,
 /turf/wall/log/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "yH" = (
 /obj/effect/floor_decal/carpet{
 	dir = 4
@@ -336,7 +336,7 @@
 	dir = 5
 	},
 /turf/floor/carpet,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "zf" = (
 /obj/structure/table/reinforced,
 /obj/machinery/microwave,
@@ -347,21 +347,21 @@
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "zD" = (
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /obj/structure/flora/grass/both,
 /turf/floor/grass/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Ae" = (
 /obj/structure/window/reinforced,
 /turf/template_noop,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Cq" = (
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Cy" = (
 /obj/effect/floor_decal/corner/white/diagonal,
 /obj/item/soap,
@@ -369,7 +369,7 @@
 	dir = 1
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Cz" = (
 /obj/structure/window/reinforced{
 	dir = 1
@@ -378,7 +378,7 @@
 	dir = 4
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "CA" = (
 /obj/structure/rack,
 /obj/item/clothing/suit/jacket/charcoal,
@@ -388,12 +388,12 @@
 /obj/random/maintenance/cargo,
 /obj/structure/curtain/black,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "CJ" = (
 /obj/structure/rack,
 /obj/item/chems/condiment/yeast,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "DF" = (
 /obj/structure/closet,
 /obj/item/clothing/suit/jacket/winter,
@@ -403,42 +403,42 @@
 /obj/random/contraband,
 /obj/item/ammo_casing/shotgun/pellet,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "DJ" = (
 /obj/structure/flora/pottedplant/dead,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "DL" = (
 /obj/machinery/media/jukebox,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "EE" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/hos,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Hc" = (
 /obj/machinery/cooker/oven,
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "HM" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced/full,
 /obj/structure/curtain/black,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "IE" = (
 /obj/structure/rack,
 /obj/item/mop,
 /obj/item/flashlight/lantern,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "IW" = (
 /obj/structure/rack,
 /obj/item/chems/condiment/sugar,
 /obj/item/glass_jar,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "JE" = (
 /obj/effect/floor_decal/carpet,
 /obj/effect/floor_decal/carpet{
@@ -448,47 +448,47 @@
 	dir = 6
 	},
 /turf/floor/carpet,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "JU" = (
 /obj/machinery/light/small{
 	dir = 4
 	},
 /obj/machinery/space_heater,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Ky" = (
 /obj/structure/window/reinforced{
 	dir = 4
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Mr" = (
 /obj/effect/floor_decal/spline/plain,
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "My" = (
 /turf/wall/log/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "MU" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/bush/leafybush,
 /turf/floor/grass/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Nv" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/bush/grassybush,
 /turf/floor/grass/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "On" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/harpoon,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "OQ" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/spline/plain,
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "PA" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/chems/glass/bowl,
@@ -497,13 +497,13 @@
 	dir = 8
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "PV" = (
 /obj/machinery/light/small{
 	dir = 4
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Rm" = (
 /obj/structure/window/reinforced{
 	dir = 8
@@ -512,25 +512,25 @@
 	dir = 1
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "RK" = (
 /obj/effect/floor_decal/spline/plain{
 	dir = 4
 	},
 /obj/structure/chair/wood/wings,
 /turf/floor/wood/broken/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Sh" = (
 /obj/structure/window/reinforced,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Sp" = (
 /obj/effect/floor_decal/spline/plain{
 	dir = 4
 	},
 /obj/abstract/exterior_marker/inside,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "TD" = (
 /obj/structure/table/wood/reinforced,
 /obj/structure/window/reinforced{
@@ -538,31 +538,31 @@
 	},
 /obj/item/flame/candle/spent,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "TQ" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced/full,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "TR" = (
 /obj/structure/table/wood/reinforced,
 /obj/random/smokes,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "TY" = (
 /obj/structure/chair/wood,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Ur" = (
 /obj/structure/hygiene/sink/kitchen{
 	dir = 4;
 	pixel_x = -12
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "UL" = (
 /obj/structure/window/reinforced{
 	dir = 1
@@ -572,41 +572,41 @@
 	icon_state = "wooden_chair"
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "UM" = (
 /obj/effect/floor_decal/spline/plain{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Vg" = (
 /obj/machinery/computer/modular/telescreen/preset/entertainment{
 	icon_state = "frame";
 	pixel_x = 32
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "VU" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Wo" = (
 /obj/structure/rack,
 /turf/floor/carpet/blue,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Wy" = (
 /obj/structure/window/reinforced{
 	dir = 1
 	},
 /obj/structure/flora/pottedplant/dead,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "WR" = (
 /obj/abstract/exterior_marker/inside,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "Xr" = (
 /obj/effect/floor_decal/carpet,
 /obj/effect/floor_decal/carpet{
@@ -616,7 +616,7 @@
 	dir = 10
 	},
 /turf/floor/carpet,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 "XW" = (
 /obj/item/clothing/jumpsuit/utility/grey,
 /obj/item/clothing/shoes/color/black,
@@ -625,7 +625,7 @@
 /obj/structure/rack,
 /obj/structure/curtain/black,
 /turf/floor/wood/sif,
-/area/cynosure_submap/TapeHouse)
+/area/cynosure_submap/tape_house)
 
 (1,1,1) = {"
 eV

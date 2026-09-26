@@ -4,14 +4,14 @@
 /area/template_noop)
 "b" = (
 /turf/floor/barren,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "c" = (
 /obj/structure/loot_pile/maint/junk,
 /turf/floor/barren,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "d" = (
 /turf/wall/r_wall,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "e" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced{
@@ -22,66 +22,66 @@
 	},
 /obj/structure/window/reinforced,
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "f" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced,
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "g" = (
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "h" = (
 /turf/floor/plating/airless{
 	icon_state = "asteroidplating2"
 	},
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "i" = (
 /obj/structure/grille/broken,
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "j" = (
 /obj/structure/table/steel,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "k" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "l" = (
 /obj/item/shard,
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "m" = (
 /obj/structure/table/steel,
 /obj/item/stock_parts/circuitboard/comms,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "n" = (
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "o" = (
 /obj/item/paper/crumpled{
 	info = "Sampatti Relay Sif-833 <BR> Decryption Key for 12-04-2488: <BR> 849B0022FBA920C244 <BR> Eyes Only.  <BR> The insider who knows all the secrets can bring down Lanka.";
 	name = "Dusty Note"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "p" = (
 /obj/structure/door_assembly/door_assembly_ext,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "q" = (
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "r" = (
 /obj/structure/cable{
 	icon_state = "0-2";
 	pixel_y = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "t" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced{
@@ -91,19 +91,19 @@
 	dir = 4
 	},
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "u" = (
 /obj/structure/cable,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "v" = (
 /obj/item/stock_parts/circuitboard/broken,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "w" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "x" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced{
@@ -113,47 +113,47 @@
 	dir = 8
 	},
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "y" = (
 /obj/item/remains/robot,
 /obj/effect/decal/cleanable/blood/oil,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "z" = (
 /obj/item/stack/cable_coil{
 	amount = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "A" = (
 /obj/item/stock_parts/circuitboard/broken,
 /turf/floor/barren,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "B" = (
 /obj/structure/grille/broken,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "C" = (
 /obj/structure/loot_pile/maint/junk,
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "D" = (
 /obj/item/trash/cigbutt,
 /obj/item/wrench,
 /obj/machinery/light,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "E" = (
 /obj/item/shard,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "F" = (
 /obj/machinery/recharge_station,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "G" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced{
@@ -164,38 +164,38 @@
 	},
 /obj/structure/window/reinforced,
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "H" = (
 /obj/machinery/door/airlock/external,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "I" = (
 /obj/machinery/button/access/interior{
 	dir = 4
 	},
 /turf/wall/r_wall,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "J" = (
 /obj/structure/grille/broken,
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "K" = (
 /obj/structure/girder,
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "L" = (
 /obj/structure/sign/warning/secure_area,
 /turf/wall/r_wall,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "M" = (
 /obj/structure/sign/warning/high_voltage,
 /turf/wall/r_wall,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 "W" = (
 /obj/random/maintenance,
 /turf/floor/plating,
-/area/cynosure_submap/cave/deadBeacon)
+/area/cynosure_submap/cave/dead_beacon)
 
 (1,1,1) = {"
 a

@@ -4,31 +4,31 @@
 /area/template_noop)
 "ab" = (
 /turf/template_noop,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ac" = (
 /turf/floor/rock,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ad" = (
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ae" = (
 /turf/floor/rock/sand/water/deep,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "af" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ag" = (
 /obj/structure/table/bench/wooden,
 /turf/template_noop,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ah" = (
 /obj/structure/table/wood,
 /turf/template_noop,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ai" = (
 /turf/wall/log/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aj" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/suit/jacket,
@@ -36,97 +36,97 @@
 /obj/item/clothing/head/beanie,
 /obj/random/medical/lite,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ak" = (
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "al" = (
 /obj/structure/closet/cabinet,
 /obj/item/box/ammo/beanbags,
 /obj/random/shotgun,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "am" = (
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "an" = (
 /obj/structure/table/wood,
 /obj/item/toolbox/mechanical,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ao" = (
 /obj/structure/railing/mapped{
 	dir = 8
 	},
 /obj/structure/railing/mapped,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ap" = (
 /obj/structure/railing/mapped,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aq" = (
 /obj/item/stool/padded,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ar" = (
 /obj/structure/table/wood,
 /obj/item/deck/cards,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "as" = (
 /obj/structure/table/wood,
 /obj/item/food/junk/chips,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "at" = (
 /obj/structure/table/wood,
 /obj/item/flame/candle/spent,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "au" = (
 /obj/item/stool,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "av" = (
 /turf/floor/wood{
 	icon_state = "wood_broken6"
 	},
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aw" = (
 /obj/structure/railing/mapped{
 	dir = 8
 	},
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ax" = (
 /obj/structure/table/wood,
 /obj/random/drinkbottle,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ay" = (
 /obj/structure/table/wood,
 /obj/item/chems/drinks/glass2/shot,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "az" = (
 /obj/structure/table/wood,
 /obj/item/stack/tape_roll,
 /obj/random/firstaid,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aA" = (
 /obj/structure/table/wood,
 /obj/item/chems/drinks/glass2/shot,
 /obj/item/chems/drinks/glass2/shot,
 /obj/item/chems/drinks/glass2/shot,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aB" = (
 /turf/floor/wood{
 	icon_state = "wood_broken2"
 	},
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aC" = (
 /obj/structure/railing/mapped{
 	dir = 8
@@ -136,45 +136,45 @@
 	icon_state = "railing0"
 	},
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aD" = (
 /obj/structure/railing/mapped{
 	dir = 1;
 	icon_state = "railing0"
 	},
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aE" = (
 /obj/structure/boat/sif,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aF" = (
 /obj/structure/window/reinforced/full,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aG" = (
 /obj/structure/table/wood,
 /obj/item/oar,
 /obj/item/oar,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aH" = (
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0"
 	},
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aI" = (
 /obj/structure/table/wood,
 /obj/random/powercell,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aJ" = (
 /turf/floor/wood{
 	icon_state = "wood_broken4"
 	},
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aK" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -185,11 +185,11 @@
 	icon_state = "railing0"
 	},
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aL" = (
 /obj/structure/door/sif,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aM" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/item/food/butchery/meat,
@@ -198,88 +198,88 @@
 /obj/item/food/butchery/meat,
 /obj/item/food/butchery/meat,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aN" = (
 /obj/structure/table/wood,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aO" = (
 /turf/floor/carpet/blue,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aP" = (
 /obj/structure/table/wood,
 /obj/item/knife,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aQ" = (
 /obj/structure/bookcase,
 /turf/floor/carpet/blue,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aR" = (
 /obj/structure/table/wood,
 /obj/item/bag/trash,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aS" = (
 /obj/structure/table/wood,
 /obj/item/flame/fuelled/lighter,
 /obj/item/box/candles/red,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aT" = (
 /obj/structure/chair/wood,
 /turf/floor/carpet/blue,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aU" = (
 /obj/structure/rack,
 /obj/item/clothing/suit/poncho/blue,
 /obj/item/clothing/suit/poncho/blue,
 /obj/random/poncho,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aV" = (
 /obj/structure/coatrack,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aW" = (
 /obj/structure/rack,
 /obj/item/clothing/suit/jacket/winter,
 /obj/item/clothing/suit/jacket/winter,
 /obj/item/clothing/shoes/winterboots,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aX" = (
 /obj/structure/rack,
 /obj/item/clothing/webbing,
 /obj/item/clothing/webbing,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aY" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp,
 /turf/floor/carpet/blue,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "aZ" = (
 /obj/structure/table/wood,
 /obj/random/snack,
 /turf/floor/carpet/blue,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "ba" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "lN" = (
 /turf/floor/wood/sif,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "DG" = (
 /obj/structure/table/wood,
 /obj/random/mug,
 /turf/template_noop,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 "NW" = (
 /obj/structure/table/wood,
 /obj/random/mug,
 /turf/template_noop,
-/area/cynosure_submap/Boathouse)
+/area/cynosure_submap/boathouse)
 
 (1,1,1) = {"
 aa

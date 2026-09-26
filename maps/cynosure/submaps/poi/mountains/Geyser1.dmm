@@ -4,20 +4,20 @@
 /area/template_noop)
 "b" = (
 /turf/floor/rock,
-/area/cynosure_submap/geyser_1)
+/area/cynosure_submap/cave/geyser_1)
 "c" = (
 /obj/random/turf_lava,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_1)
+/area/cynosure_submap/cave/geyser_1)
 "d" = (
 /obj/random/boulder,
 /obj/random/turf_lava,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_1)
+/area/cynosure_submap/cave/geyser_1)
 "e" = (
 /obj/random/boulder,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_1)
+/area/cynosure_submap/cave/geyser_1)
 "f" = (
 /obj/abstract/map_effect/interval/effect_emitter/steam,
 /obj/abstract/map_effect/interval/effect_emitter/smoke/mist{
@@ -32,12 +32,12 @@
 	},
 /obj/abstract/exterior_marker/inside,
 /turf/floor/rock/sand/water/deep,
-/area/cynosure_submap/geyser_1)
+/area/cynosure_submap/cave/geyser_1)
 "g" = (
 /obj/random/turf_lava,
 /obj/random/boulder,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_1)
+/area/cynosure_submap/cave/geyser_1)
 
 (1,1,1) = {"
 a

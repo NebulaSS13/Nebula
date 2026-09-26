@@ -4,35 +4,35 @@
 /area/template_noop)
 "ab" = (
 /turf/template_noop,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ac" = (
 /obj/item/remains/human,
 /turf/template_noop,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ad" = (
 /turf/wall/natural,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ae" = (
 /obj/effect/decal/cleanable/blood,
 /turf/template_noop,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "af" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ag" = (
 /obj/structure/table/steel,
 /turf/template_noop,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ah" = (
 /obj/random/drone,
 /turf/template_noop,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aj" = (
 /turf/wall/shuttle/dark{
 	name = "Unknown Shuttle"
 	},
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "al" = (
 /obj/structure/shuttle/engine/heater{
 	dir = 4;
@@ -41,14 +41,14 @@
 /turf/wall/shuttle/dark{
 	name = "Unknown Shuttle"
 	},
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "am" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 4;
 	icon_state = "propulsion_l"
 	},
 /turf/template_noop,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "an" = (
 /obj/machinery/light{
 	dir = 1
@@ -66,14 +66,14 @@
 	dir = 9
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ao" = (
 /obj/structure/tank_rack/oxygen,
 /obj/effect/floor_decal/borderfloor{
 	dir = 5
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ap" = (
 /obj/machinery/door/airlock/external{
 	density = 1;
@@ -81,14 +81,14 @@
 	name = "Ship External Access"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aq" = (
 /obj/effect/floor_decal/corner/green/border{
 	dir = 9;
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ar" = (
 /obj/machinery/gibber,
 /obj/effect/floor_decal/corner/green/border{
@@ -96,7 +96,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "as" = (
 /obj/machinery/light{
 	dir = 1
@@ -106,7 +106,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "at" = (
 /obj/machinery/bodyscanner{
 	dir = 8
@@ -116,7 +116,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "au" = (
 /obj/machinery/body_scanconsole,
 /obj/effect/floor_decal/corner/green/border{
@@ -124,56 +124,56 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "av" = (
 /turf/floor/tiled,
 /turf/wall/shuttle/dark{
 	name = "Unknown Shuttle"
 	},
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aw" = (
 /turf/floor/tiled/steel_grid,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ax" = (
 /obj/structure/rack/steel,
 /obj/random/smg,
 /obj/random/smg,
 /turf/floor/tiled/steel_grid,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ay" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "az" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aA" = (
 /obj/machinery/door/airlock/external,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aB" = (
 /obj/effect/floor_decal/corner/green/border{
 	dir = 8;
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aC" = (
 /obj/machinery/optable,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aD" = (
 /obj/effect/decal/cleanable/blood,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aE" = (
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aF" = (
 /obj/machinery/fabricator/bioprinter,
 /obj/effect/floor_decal/corner/green/border{
@@ -181,13 +181,13 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aI" = (
 /mob/living/simple_animal/hostile/viscerator,
 /mob/living/simple_animal/hostile/viscerator,
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/tiled/steel_grid,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aJ" = (
 /obj/structure/rack/steel,
 /obj/machinery/light/small{
@@ -195,33 +195,33 @@
 	pixel_y = 0
 	},
 /turf/floor/tiled/steel_grid,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aK" = (
 /obj/effect/floor_decal/borderfloor/corner{
 	dir = 4
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aL" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aM" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 5
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aN" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aO" = (
 /mob/living/simple_animal/mob_mimic/malf_frame/melee_sword,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aP" = (
 /obj/machinery/light{
 	dir = 4;
@@ -233,24 +233,24 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aQ" = (
 /obj/effect/floor_decal/borderfloor/full,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aR" = (
 /obj/structure/rack/steel,
 /obj/random/grenade/box,
 /turf/floor/tiled/steel_grid,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aS" = (
 /obj/effect/floor_decal/borderfloor/corner,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aT" = (
 /obj/effect/floor_decal/borderfloor,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aU" = (
 /obj/machinery/light{
 	dir = 4;
@@ -261,7 +261,7 @@
 	dir = 6
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aV" = (
 /obj/structure/table,
 /obj/item/firstaid/surgery,
@@ -270,32 +270,32 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aW" = (
 /obj/structure/table,
 /obj/item/tank/anesthetic,
 /obj/effect/floor_decal/corner/green/border,
 /obj/random/medical,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aX" = (
 /obj/effect/floor_decal/corner/green/border,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aY" = (
 /obj/structure/table,
 /obj/item/clothing/gloves/latex,
 /obj/item/clothing/gloves/latex,
 /obj/effect/floor_decal/corner/green/border,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "aZ" = (
 /obj/structure/table,
 /obj/item/chems/spray/antiseptic,
 /obj/item/chems/spray/antiseptic,
 /obj/effect/floor_decal/corner/green/border,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ba" = (
 /obj/structure/table,
 /obj/item/box/masks,
@@ -304,7 +304,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bb" = (
 /obj/machinery/light{
 	dir = 8;
@@ -314,7 +314,7 @@
 	dir = 9
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bc" = (
 /obj/structure/chair/office/dark{
 	dir = 1
@@ -323,60 +323,60 @@
 	dir = 5
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bd" = (
 /obj/machinery/door/airlock/security{
 	locked = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "be" = (
 /obj/machinery/door/airlock/glass,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bh" = (
 /obj/effect/floor_decal/borderfloor/corner{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bi" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 9
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bj" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/item/mre/random,
 /obj/item/mre/random,
 /obj/item/mre/random,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bk" = (
 /obj/structure/table/steel,
 /obj/item/knife,
 /obj/random/drinkbottle,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bl" = (
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bm" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bn" = (
 /obj/random/drone,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bo" = (
 /obj/structure/rack/steel,
 /obj/random/toolbox,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bp" = (
 /obj/structure/table/steel,
 /obj/machinery/light/small{
@@ -386,7 +386,7 @@
 /obj/random/scrapped_gun,
 /obj/random/scrapped_gun,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bq" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced{
@@ -399,14 +399,14 @@
 	dir = 4
 	},
 /turf/floor/plating,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "br" = (
 /obj/structure/table/steel,
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bs" = (
 /obj/machinery/light{
 	dir = 8;
@@ -416,7 +416,7 @@
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bt" = (
 /obj/machinery/light{
 	dir = 4;
@@ -427,21 +427,21 @@
 	dir = 4
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bu" = (
 /obj/item/stool,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bv" = (
 /obj/structure/rack,
 /obj/random/smg,
 /obj/random,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bw" = (
 /obj/machinery/fuel_compressor,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bx" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced{
@@ -451,42 +451,42 @@
 	dir = 8
 	},
 /turf/floor/plating,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "by" = (
 /obj/machinery/door/airlock/glass,
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bz" = (
 /obj/effect/floor_decal/corner/grey,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bA" = (
 /obj/machinery/door/airlock/glass,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bB" = (
 /obj/structure/table/steel,
 /obj/item/pizzabox,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bC" = (
 /obj/structure/table/steel,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bE" = (
 /obj/machinery/door/airlock/glass,
 /obj/effect/floor_decal/borderfloor,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bF" = (
 /obj/effect/floor_decal/borderfloor/corner{
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bG" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced,
@@ -497,11 +497,11 @@
 	dir = 4
 	},
 /turf/floor/plating,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bI" = (
 /mob/living/simple_animal/mob_mimic/malf_frame/melee_sword,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bJ" = (
 /obj/machinery/computer/area_atmos{
 	dir = 4
@@ -510,20 +510,20 @@
 	dir = 10
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bK" = (
 /obj/machinery/fusion_fuel_injector/mapped{
 	dir = 4;
 	icon_state = "injector0"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bL" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 10
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bM" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
@@ -532,7 +532,7 @@
 	dir = 4
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bN" = (
 /obj/structure/table/steel,
 /obj/item/paper{
@@ -540,24 +540,24 @@
 	name = "Operation Progress/M-53"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bO" = (
 /obj/structure/table/steel,
 /obj/item/paper_bin,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bP" = (
 /obj/machinery/light,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bQ" = (
 /obj/structure/closet/toolcloset,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bR" = (
 /obj/machinery/portable_atmospherics/canister/empty/oxygen,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bS" = (
 /obj/machinery/atmospherics/unary/tank/oxygen,
 /obj/machinery/light/small{
@@ -565,7 +565,7 @@
 	pixel_y = 0
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bT" = (
 /obj/machinery/light{
 	dir = 8;
@@ -575,14 +575,14 @@
 	dir = 10
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bU" = (
 /obj/structure/chair/office/dark,
 /obj/effect/floor_decal/borderfloor{
 	dir = 6
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bV" = (
 /obj/structure/rack/steel,
 /obj/item/clothing/armor_attachment/plate/tactical,
@@ -591,7 +591,7 @@
 /obj/item/clothing/suit/armor/pcarrier/merc,
 /obj/item/clothing/head/helmet/space/void,
 /turf/floor/tiled/steel_grid,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bW" = (
 /obj/effect/floor_decal/borderfloor/corner{
 	dir = 4
@@ -600,7 +600,7 @@
 	dir = 4
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bX" = (
 /obj/machinery/light{
 	dir = 4;
@@ -611,20 +611,20 @@
 	dir = 5
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bY" = (
 /obj/structure/bed,
 /obj/item/bedsheet/brown,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "bZ" = (
 /obj/machinery/door/airlock,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cb" = (
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/tiled/steel_grid,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cc" = (
 /obj/structure/rack/steel,
 /obj/machinery/light/small{
@@ -633,43 +633,43 @@
 	},
 /obj/random/handgun,
 /turf/floor/tiled/steel_grid,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cd" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 6
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ce" = (
 /obj/structure/bed,
 /obj/item/bedsheet/brown,
 /obj/structure/bed,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cf" = (
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_y = 0
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cg" = (
 /mob/living/simple_animal/hostile/viscerator,
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/tiled/steel_grid,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ch" = (
 /obj/structure/rack/steel,
 /obj/random/energy/highend,
 /obj/random/helmet/highend,
 /turf/floor/tiled/steel_grid,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ci" = (
 /obj/structure/hygiene/toilet{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cj" = (
 /obj/machinery/light,
 /obj/structure/rack,
@@ -685,77 +685,77 @@
 	dir = 10
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ck" = (
 /obj/structure/tank_rack/oxygen,
 /obj/effect/floor_decal/borderfloor{
 	dir = 6
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cl" = (
 /obj/structure/table/wood,
 /obj/random/projectile,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cm" = (
 /obj/structure/bed,
 /obj/item/bedsheet/brown,
 /obj/machinery/light,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cn" = (
 /obj/structure/table/wood,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "co" = (
 /obj/structure/bed,
 /obj/item/bedsheet/brown,
 /obj/item/toy/plushie/spider,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cq" = (
 /turf/template_noop,
 /turf/wall/shuttle/dark{
 	name = "Unknown Shuttle"
 	},
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cr" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
 	},
 /mob/living/simple_animal/mob_mimic/malf_frame/melee_sword,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "cs" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
 	},
 /mob/living/simple_animal/mob_mimic/malf_frame/ranged,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "kV" = (
 /obj/item/stool{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "Bi" = (
 /obj/structure/table/steel,
 /obj/item/chems/drinks/glass2/coffeecup/black,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "CZ" = (
 /obj/structure/table/steel,
 /obj/random/smokes,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "Fm" = (
 /obj/structure/bed,
 /obj/item/bedsheet/brown,
 /obj/item/clothing/suit/toggle/track/blue,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "Qz" = (
 /obj/machinery/computer/modular/preset/cardslot/command{
 	dir = 4
@@ -764,12 +764,12 @@
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 "ZE" = (
 /obj/structure/table/steel,
 /obj/item/chems/drinks/glass2/coffeecup/metal,
 /turf/floor/tiled,
-/area/cynosure_submap/Blackshuttledown)
+/area/cynosure_submap/blackshuttledown)
 
 (1,1,1) = {"
 aa

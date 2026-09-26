@@ -4,10 +4,10 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Rocky5)
+/area/cynosure_submap/rocky5)
 "c" = (
 /turf/wall/natural,
-/area/cynosure_submap/Rocky5)
+/area/cynosure_submap/rocky5)
 
 (1,1,1) = {"
 a

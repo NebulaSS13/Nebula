@@ -1,36 +1,36 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/floor/barren,
-/area/cynosure_submap/CorgiRitual)
+/area/cynosure_submap/cave/corgi_ritual)
 "b" = (
 /obj/structure/plushie/ian,
 /turf/floor/barren,
-/area/cynosure_submap/CorgiRitual)
+/area/cynosure_submap/cave/corgi_ritual)
 "c" = (
 /obj/item/flame/candle/infinite/red,
 /turf/floor/barren,
-/area/cynosure_submap/CorgiRitual)
+/area/cynosure_submap/cave/corgi_ritual)
 "d" = (
 /obj/structure/plushie/ian{
 	dir = 8
 	},
 /turf/floor/barren,
-/area/cynosure_submap/CorgiRitual)
+/area/cynosure_submap/cave/corgi_ritual)
 "e" = (
 /obj/structure/plushie/ian{
 	dir = 4
 	},
 /turf/floor/barren,
-/area/cynosure_submap/CorgiRitual)
+/area/cynosure_submap/cave/corgi_ritual)
 "f" = (
 /turf/floor/barren,
-/area/cynosure_submap/CorgiRitual)
+/area/cynosure_submap/cave/corgi_ritual)
 "g" = (
 /obj/structure/plushie/ian{
 	dir = 1
 	},
 /turf/floor/barren,
-/area/cynosure_submap/CorgiRitual)
+/area/cynosure_submap/cave/corgi_ritual)
 
 (1,1,1) = {"
 a

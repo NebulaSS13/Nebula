@@ -4,50 +4,50 @@
 /area/template_noop)
 "b" = (
 /turf/wall/natural,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 "c" = (
 /obj/random/trash,
 /turf/floor/barren,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 "d" = (
 /obj/random/firstaid,
 /turf/floor/barren,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 "e" = (
 /turf/floor/barren,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 "f" = (
 /obj/random/shotgun,
 /turf/floor/barren,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 "g" = (
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /turf/floor/barren,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 "h" = (
 /mob/living/simple_animal/passive/kururak,
 /turf/floor/barren,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 "i" = (
 /obj/random/boulder,
 /turf/floor/barren,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 "j" = (
 /obj/random/contraband,
 /turf/floor/barren,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 "k" = (
 /mob/living/simple_animal/hostile/beast/diyaab,
 /turf/floor/barren,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 "l" = (
 /obj/random/trash,
 /turf/template_noop,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 "m" = (
 /turf/template_noop,
-/area/cynosure_submap/PlainsKururak)
+/area/cynosure_submap/kururak_den)
 
 (1,1,1) = {"
 a

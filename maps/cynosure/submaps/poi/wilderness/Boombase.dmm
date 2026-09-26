@@ -4,247 +4,247 @@
 /area/template_noop)
 "ab" = (
 /turf/template_noop,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ac" = (
 /obj/item/remains/human,
 /turf/template_noop,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ad" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ae" = (
 /turf/wall/concrete/reinforced,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "af" = (
 /obj/structure/girder,
 /turf/floor/plating,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ag" = (
 /obj/structure/girder,
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/plating,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ah" = (
 /obj/item/stack/material/rods/mapped/steel,
 /turf/wall/concrete/reinforced,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ai" = (
 /obj/structure/closet/crate/secure,
 /obj/item/stack/material/aerogel/mapped/tritium/fifty,
 /turf/floor/plating,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aj" = (
 /obj/structure/closet/crate/secure,
 /obj/item/stack/material/aerogel/mapped/tritium/fifty,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ak" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled{
 	icon_state = "burned1"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "al" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/ash,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "am" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "an" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/spider,
 /obj/item/shard,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ao" = (
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ap" = (
 /mob/living/simple_animal/hostile/giant_spider/volatile,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aq" = (
 /obj/machinery/portable_atmospherics/canister/empty/phoron,
 /turf/floor/tiled{
 	icon_state = "steel_dirty"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ar" = (
 /obj/machinery/portable_atmospherics/canister/empty/phoron,
 /obj/item/shard,
 /turf/floor/tiled{
 	icon_state = "steel_dirty"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "as" = (
 /obj/item/shard,
 /turf/floor/concrete,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "at" = (
 /obj/effect/spider/stickyweb,
 /turf/floor/concrete,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "au" = (
 /turf/floor/dirt,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "av" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/plating,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aw" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/random/spider_mutant,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ax" = (
 /turf/floor/tiled{
 	icon_state = "burned1"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "ay" = (
 /obj/item/remains/human,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "az" = (
 /turf/floor/tiled{
 	icon_state = "steel_dirty"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aA" = (
 /turf/floor/tiled{
 	icon_state = "broken0"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aB" = (
 /turf/floor/plating,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aC" = (
 /obj/structure/flora/tree/dead,
 /turf/floor/dirt,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aD" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/dirt,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aE" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/spider/stickyweb,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aF" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled{
 	icon_state = "broken1"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aG" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled{
 	icon_state = "burned2"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aH" = (
 /obj/effect/decal/cleanable/ash,
 /turf/floor/dirt,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aI" = (
 /obj/random/spider_mutant,
 /turf/floor/dirt,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aJ" = (
 /obj/structure/table,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aK" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /mob/living/simple_animal/hostile/giant_spider/volatile,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aL" = (
 /turf/floor/tiled{
 	icon_state = "burned2"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aM" = (
 /turf/floor/rock,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aN" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/table,
 /obj/item/tank/phoron,
 /obj/item/fuel_assembly/phoron,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aO" = (
 /obj/item/remains/human,
 /obj/effect/decal/cleanable/ash,
 /turf/floor/tiled{
 	icon_state = "steel_dirty"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aP" = (
 /obj/item/shard,
 /turf/floor/tiled{
 	icon_state = "steel_dirty"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aQ" = (
 /obj/item/transfer_valve,
 /turf/floor/rock,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aR" = (
 /obj/item/shard,
 /turf/template_noop,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aS" = (
 /obj/effect/decal/cleanable/ash,
 /turf/floor/plating,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aT" = (
 /obj/effect/decal/cleanable/ash,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aU" = (
 /obj/effect/spider/stickyweb,
 /obj/item/shard,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aV" = (
 /obj/effect/spider/stickyweb,
 /obj/random/spider_mutant,
 /turf/floor/tiled,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aW" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/ash,
 /turf/floor/tiled{
 	icon_state = "burned1"
 	},
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aX" = (
 /obj/item/remains/human,
 /obj/effect/decal/cleanable/ash,
 /turf/template_noop,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "aY" = (
 /obj/structure/flora/tree/dead,
 /turf/template_noop,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "yy" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/concrete,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "AR" = (
 /turf/floor/concrete,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 "Zg" = (
 /obj/structure/girder,
 /turf/floor/concrete,
-/area/cynosure_submap/BoomBase)
+/area/cynosure_submap/lab_crater)
 
 (1,1,1) = {"
 aa

@@ -4,31 +4,31 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "c" = (
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /turf/template_noop,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "d" = (
 /obj/structure/door_assembly/door_assembly_ext,
 /turf/template_noop,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "e" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "f" = (
 /obj/structure/shuttle/engine/propulsion/burst{
 	dir = 1
 	},
 /turf/wall/shuttle,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "g" = (
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "h" = (
 /turf/wall/shuttle,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "i" = (
 /obj/structure/chair,
 /obj/item/radio/intercom{
@@ -41,10 +41,10 @@
 	},
 /obj/item/fuelled_tool/welding,
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "j" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "k" = (
 /obj/structure/chair,
 /obj/machinery/vending/wallmed1{
@@ -59,7 +59,7 @@
 	},
 /obj/abstract/landmark/crashed_pod,
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "l" = (
 /obj/structure/chair,
 /obj/machinery/status_display{
@@ -72,16 +72,16 @@
 /obj/random/cash,
 /obj/random/contraband,
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "m" = (
 /obj/structure/shuttle/window,
 /obj/structure/grille,
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 "n" = (
 /obj/structure/flora/tree/dead,
 /turf/floor/dirt,
-/area/cynosure_submap/Epod1)
+/area/cynosure_submap/escape_pod1)
 
 (1,1,1) = {"
 a

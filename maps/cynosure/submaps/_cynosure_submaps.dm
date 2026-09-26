@@ -6,6 +6,7 @@
 	var/const/MAP_TEMPLATE_CATEGORY_CYNOSURE_MOUNTAINS_DEEP  = "template_category_cynosuyre_deepcaves"
 
 /area/cynosure_submap
+	is_outside = OUTSIDE_YES
 
 /datum/map_template/sif
 	unit_test_skip_reason = "skipped to reduce mass Z-level generation - TODO implement separate test."

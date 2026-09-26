@@ -4,37 +4,37 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "c" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "d" = (
 /obj/structure/flora/tree/pine,
 /turf/floor/dirt,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "e" = (
 /obj/structure/flora/grass/green,
 /turf/floor/dirt,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "f" = (
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "g" = (
 /obj/structure/flora/tree/dead,
 /turf/floor/dirt,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "h" = (
 /turf/wall/shuttle,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "i" = (
 /obj/structure/shuttle/window,
 /obj/structure/grille,
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "j" = (
 /obj/structure/flora/grass/both,
 /turf/floor/dirt,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "k" = (
 /obj/structure/chair{
 	dir = 1;
@@ -47,10 +47,10 @@
 	},
 /obj/structure/loot_pile/maint/junk,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "l" = (
 /turf/floor/rock/sand/water/deep,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "m" = (
 /obj/structure/chair{
 	dir = 1;
@@ -72,7 +72,7 @@
 /obj/item/clothing/suit/mbill,
 /obj/abstract/landmark/crashed_pod,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "n" = (
 /obj/structure/chair{
 	dir = 1;
@@ -86,21 +86,21 @@
 	},
 /obj/structure/closet/crate/hydroponics/exotic,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "o" = (
 /obj/structure/shuttle/engine/propulsion/burst,
 /turf/wall/shuttle,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "p" = (
 /obj/structure/door_assembly/door_assembly_ext{
 	anchored = 1
 	},
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 "q" = (
 /obj/structure/flora/grass/brown,
 /turf/floor/dirt,
-/area/cynosure_submap/Epod4)
+/area/cynosure_submap/escape_pod4)
 
 (1,1,1) = {"
 a

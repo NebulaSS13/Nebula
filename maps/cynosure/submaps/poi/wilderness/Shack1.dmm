@@ -4,103 +4,103 @@
 /area/template_noop)
 "b" = (
 /turf/wall/log/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "c" = (
 /turf/template_noop,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "d" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "e" = (
 /obj/effect/decal/cleanable/cobweb,
 /turf/floor/holofloor/wood{
 	icon_state = "wood_broken1"
 	},
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "f" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/box/candles/red,
 /obj/item/box/matches,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "g" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/suit/apron/overalls,
 /obj/item/clothing/suit/apron/overalls/laborer,
 /obj/random/mre,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "h" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "i" = (
 /turf/floor/wood/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "j" = (
 /turf/floor/holofloor/wood{
 	icon_state = "wood_broken0"
 	},
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "k" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/holofloor/wood{
 	icon_state = "wood_broken5"
 	},
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "l" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "m" = (
 /obj/structure/door/sif,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "n" = (
 /turf/floor/holofloor/wood{
 	icon_state = "wood_broken3"
 	},
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "o" = (
 /obj/structure/table/bench/wooden,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "p" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/table/wood/reinforced,
 /obj/random/toolbox,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "q" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/table/wood/reinforced,
 /obj/item/scythe,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "r" = (
 /obj/effect/decal/cleanable/spider_remains,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "s" = (
 /turf/floor/holofloor/wood{
 	icon_state = "wood_broken6"
 	},
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "t" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/table/wood/reinforced,
 /obj/item/flashlight/lamp,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "u" = (
 /obj/structure/flora/tree/dead,
 /turf/template_noop,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 "O" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/random/maintenance,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Shack1)
+/area/cynosure_submap/shack)
 
 (1,1,1) = {"
 a

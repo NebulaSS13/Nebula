@@ -4,55 +4,55 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "c" = (
 /turf/wall/natural,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "d" = (
 /turf/floor/barren,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "e" = (
 /obj/effect/decal/cleanable/cobweb2,
 /turf/floor/barren,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "f" = (
 /turf/floor/rock,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "g" = (
  /mob/living/simple_animal/crab/sif/hooligan,
 /turf/floor/barren,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "h" = (
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "i" = (
 /mob/living/simple_animal/aquatic/fish/large/perch,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "j" = (
 /obj/structure/crystal,
 /turf/floor/barren,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "k" = (
 /mob/living/simple_animal/aquatic/fish/large/trout,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "l" = (
 /obj/effect/decal/cleanable/cobweb,
 /turf/floor/barren,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "m" = (
 /obj/random/sif,
 /turf/floor/barren,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "n" = (
 /obj/item/clothing/mask/snorkel,
 /turf/floor/barren,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 "o" = (
 /obj/item/remains/mouse,
 /turf/floor/barren,
-/area/cynosure_submap/Cavelake)
+/area/cynosure_submap/cave/lake)
 
 (1,1,1) = {"
 a

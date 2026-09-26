@@ -4,38 +4,38 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Field1)
+/area/cynosure_submap/field1)
 "c" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Field1)
+/area/cynosure_submap/field1)
 "d" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Field1)
+/area/cynosure_submap/field1)
 "e" = (
 /obj/structure/ore_box,
 /turf/floor/dirt,
-/area/cynosure_submap/Field1)
+/area/cynosure_submap/field1)
 "f" = (
 /obj/item/radio,
 /turf/floor/dirt,
-/area/cynosure_submap/Field1)
+/area/cynosure_submap/field1)
 "g" = (
 /obj/vehicle/train/trolley,
 /turf/floor/dirt,
-/area/cynosure_submap/Field1)
+/area/cynosure_submap/field1)
 "h" = (
 /obj/vehicle/train/engine,
 /turf/floor/dirt,
-/area/cynosure_submap/Field1)
+/area/cynosure_submap/field1)
 "i" = (
 /obj/item/flashlight,
 /turf/floor/dirt,
-/area/cynosure_submap/Field1)
+/area/cynosure_submap/field1)
 "B" = (
 /obj/random/tech_supply,
 /turf/floor/dirt,
-/area/cynosure_submap/Field1)
+/area/cynosure_submap/field1)
 
 (1,1,1) = {"
 a

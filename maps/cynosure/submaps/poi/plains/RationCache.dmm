@@ -4,18 +4,18 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/RationCache)
+/area/cynosure_submap/ration_cache)
 "c" = (
 /mob/living/simple_animal/hostile/beast/diyaab,
 /turf/template_noop,
-/area/cynosure_submap/RationCache)
+/area/cynosure_submap/ration_cache)
 "d" = (
 /mob/living/simple_animal/hostile/beast/diyaab,
 /turf/floor/dirt,
-/area/cynosure_submap/RationCache)
+/area/cynosure_submap/ration_cache)
 "e" = (
 /turf/floor/dirt,
-/area/cynosure_submap/RationCache)
+/area/cynosure_submap/ration_cache)
 "f" = (
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
@@ -24,23 +24,23 @@
 /obj/item/trash/liquidfood,
 /obj/random/mre/dessert/vegan,
 /turf/floor/barren,
-/area/cynosure_submap/RationCache)
+/area/cynosure_submap/ration_cache)
 "g" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /turf/floor/dirt,
-/area/cynosure_submap/RationCache)
+/area/cynosure_submap/ration_cache)
 "j" = (
 /obj/random/mre/drink,
 /turf/floor/dirt,
-/area/cynosure_submap/RationCache)
+/area/cynosure_submap/ration_cache)
 "I" = (
 /obj/item/trash/liquidfood,
 /turf/template_noop,
-/area/cynosure_submap/RationCache)
+/area/cynosure_submap/ration_cache)
 "S" = (
 /obj/random/mre/spread/vegan,
 /turf/template_noop,
-/area/cynosure_submap/RationCache)
+/area/cynosure_submap/ration_cache)
 
 (1,1,1) = {"
 a

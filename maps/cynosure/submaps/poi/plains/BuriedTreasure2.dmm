@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/template_noop,
-/area/cynosure_submap/BuriedTreasure)
+/area/cynosure_submap/buried_treasure)
 "b" = (
 /obj/structure/pit/closed/grave,
 /obj/random/contraband,
@@ -15,7 +15,7 @@
 /obj/item/clothing/suit/explorer,
 /obj/random/projectile,
 /turf/template_noop,
-/area/cynosure_submap/BuriedTreasure)
+/area/cynosure_submap/buried_treasure)
 
 (1,1,1) = {"
 a

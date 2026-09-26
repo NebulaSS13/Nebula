@@ -4,10 +4,10 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "c" = (
 /turf/wall/natural,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "d" = (
 /obj/structure/ore_box,
 /obj/item/stack/material/ore/coal,
@@ -16,18 +16,18 @@
 /obj/item/stack/material/ore/coal,
 /obj/item/stack/material/ore/coal,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "e" = (
 /obj/structure/closet/crate,
 /obj/item/chems/spray/extinguisher,
 /obj/item/chems/spray/extinguisher,
 /obj/item/chems/spray/extinguisher,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "f" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "g" = (
 /obj/item/stack/material/ore/coal,
 /obj/item/stack/material/ore/coal,
@@ -38,27 +38,27 @@
 /obj/item/stack/material/ore/coal,
 /obj/item/stack/material/ore/coal,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "h" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "i" = (
 /obj/structure/closet/crate,
 /obj/item/cosmetics/lipstick,
 /obj/item/cosmetics/lipstick/black,
 /obj/random/lipstick,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "j" = (
 /obj/structure/table/steel,
 /obj/item/beartrap,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "k" = (
 /obj/vehicle/train/trolley,
 /obj/random/firstaid,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "l" = (
 /obj/structure/closet/crate,
 /obj/item/folder/blue,
@@ -66,7 +66,7 @@
 /obj/item/folder,
 /obj/item/folder/yellow,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "m" = (
 /obj/structure/table/steel,
 /obj/item/paper{
@@ -74,11 +74,11 @@
 	name = "Note"
 	},
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "n" = (
 /obj/vehicle/train/trolley,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "o" = (
 /obj/structure/closet/crate,
 /obj/item/cell/gun,
@@ -86,21 +86,21 @@
 /obj/random/ammo,
 /obj/random/ammo,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "p" = (
 /obj/structure/closet/crate,
 /obj/item/box/ammo/shotgunammo,
 /obj/item/box/ammo/practiceshells,
 /obj/random/scrapped_gun,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "D" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 "U" = (
 /obj/random/contraband,
 /turf/floor/dirt,
-/area/cynosure_submap/Thiefc)
+/area/cynosure_submap/thief_cave)
 
 (1,1,1) = {"
 a

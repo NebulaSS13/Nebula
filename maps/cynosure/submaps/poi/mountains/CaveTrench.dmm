@@ -4,72 +4,72 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "c" = (
 /turf/wall/natural,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "d" = (
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "e" = (
 /turf/floor/rock,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "f" = (
 /obj/abstract/exterior_marker/inside,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "g" = (
 /obj/random/drone,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "h" = (
 /mob/living/simple_animal/aquatic/fish/large/trout,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "i" = (
 /obj/item/remains/human,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "j" = (
 /turf/wall,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "k" = (
 /turf/floor/holofloor/wood,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "l" = (
 /mob/living/simple_animal/aquatic/fish/large/trout,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "m" = (
 /turf/wall/log/sif,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "n" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lantern,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "o" = (
 /obj/structure/table/wood,
 /obj/random/shotgun,
 /turf/floor/holofloor/wood,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "p" = (
 /obj/structure/table/wood,
 /obj/item/chems/drinks/bottle/whiskey,
 /obj/item/chems/drinks/glass2/rocks,
 /obj/item/chems/drinks/glass2/rocks,
 /turf/floor/holofloor/wood,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "q" = (
 /obj/item/stool/padded,
 /turf/floor/holofloor/wood,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "r" = (
 /obj/structure/table/steel,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "s" = (
 /obj/structure/table/steel,
 /obj/item/paper{
@@ -77,89 +77,89 @@
 	name = "Note"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "t" = (
 /obj/structure/table/steel,
 /obj/item/robot_parts/robot_component/actuator,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "u" = (
 /obj/effect/decal/cleanable/blood,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "v" = (
 /obj/structure/door/sif,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "w" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp,
 /turf/floor/holofloor/wood,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "x" = (
 /obj/structure/table/steel,
 /obj/item/robotanalyzer,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "y" = (
 /obj/structure/table/steel,
 /obj/item/toolbox,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "z" = (
 /obj/structure/table/bench/steel,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "A" = (
 /obj/item/remains,
 /obj/item/clothing/jumpsuit/miner,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "B" = (
 /turf/floor/shuttle,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "C" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/suit/jacket/winter/miner,
 /obj/item/clothing/suit/jacket/winter/miner,
 /turf/floor/holofloor/wood,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "D" = (
 /obj/structure/coatrack,
 /turf/floor/holofloor/wood,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "E" = (
 /obj/structure/closet/secure_closet/miner,
 /turf/floor/holofloor/wood,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "F" = (
 /obj/item/box/ammo/shotgunammo,
 /turf/floor/holofloor/wood,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "G" = (
 /obj/structure/table/steel,
 /obj/item/robot_parts/l_leg,
 /obj/item/robot_parts/head,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "H" = (
 /obj/effect/decal/cleanable/blood/gibs/robot,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "I" = (
 /obj/machinery/port_gen/pacman,
 /turf/floor/shuttle,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "J" = (
 /obj/machinery/drone_fabricator{
 	fabricator_tag = "Unknown"
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 "O" = (
 /obj/random/humanoidremains,
 /turf/floor/barren,
-/area/cynosure_submap/CaveTrench)
+/area/cynosure_submap/cave/trench)
 
 (1,1,1) = {"
 a

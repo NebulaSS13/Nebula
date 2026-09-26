@@ -4,61 +4,61 @@
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/suit/fire,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "b" = (
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "c" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/effect/decal/cleanable/molten_item,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "d" = (
 /obj/item/flamethrower,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "e" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "f" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "g" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/effect/decal/cleanable/ash,
 /obj/random/landmine,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "h" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/random/landmine,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "i" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/effect/decal/cleanable/molten_item,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "j" = (
 /obj/item/knife/folding/combat/balisong,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "k" = (
 /obj/item/remains/human,
 /obj/item/wrench,
 /obj/item/clothing/head/hardhat,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "l" = (
 /obj/item/flame/fuelled/lighter/zippo,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "m" = (
 /obj/item/remains/human,
 /obj/item/clothing/mask/balaclava,
@@ -67,13 +67,13 @@
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/effect/decal/cleanable/ash,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "n" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/effect/decal/cleanable/ash,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "o" = (
 /obj/machinery/porta_turret/poi{
 	desc = "Looking at this heavy caliber, tripod-mounted, little ol' number makes you want to square-dance.";
@@ -81,39 +81,39 @@
 	name = "sentry turret"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "p" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "q" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/random/landmine,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "r" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/item/box/fancy/cigarettes/professionals,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "s" = (
 /obj/item/card/emag_broken,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "t" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/random/landmine,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "u" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/effect/decal/cleanable/ash,
 /turf/floor/barren,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 "v" = (
 /turf/wall/natural,
-/area/cynosure_submap/deadspy)
+/area/cynosure_submap/cave/deadspy)
 
 (1,1,1) = {"
 a

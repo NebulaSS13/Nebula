@@ -14,7 +14,7 @@
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
 	exterior_atmos_temp = T20C - 25 // roughly -5C, not certain how cold it was on original map
-	strata = /decl/strata/sedimentary
+	strata = /decl/strata/sedimentary/cynosure
 	daycycle_id = "cynosure"
 	daycycle_type = /datum/daycycle/cynosure
 	base_area = null

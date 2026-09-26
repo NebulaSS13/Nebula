@@ -4,17 +4,17 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "c" = (
 /turf/wall/concrete,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "d" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 29
 	},
 /mob/living/simple_animal/hostile/hivebot/melee/armored,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "e" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable/green{
@@ -22,7 +22,7 @@
 	},
 /obj/machinery/apc/hyper,
 /turf/floor,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "f" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/machinery/light{
@@ -30,35 +30,35 @@
 	icon_state = "tube1"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "g" = (
 /obj/machinery/port_gen/pacman{
 	anchored = 1
 	},
 /turf/floor,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "h" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/stack/material/aerogel/mapped/tritium/fifty,
 /turf/floor/concrete,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "i" = (
 /obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/integrated_circuit/memory,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "j" = (
 /turf/floor/concrete,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "k" = (
 /obj/effect/decal/cleanable/blood/oil,
 /obj/structure/cable/green{
 	icon_state = "1-4"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "l" = (
 /obj/structure/cable/green{
 	icon_state = "0-8"
@@ -70,7 +70,7 @@
 	icon_state = "4-8"
 	},
 /turf/floor/tiled/steel_dirty,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "m" = (
 /obj/structure/table{
 	name = "plastic table frame"
@@ -80,18 +80,18 @@
 	name = "messy note"
 	},
 /turf/floor/tiled/steel_dirty,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "n" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/floor/greengrid,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "o" = (
 /turf/floor/greengrid,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "p" = (
 /obj/structure/cryofeed,
 /turf/floor/greengrid,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "q" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/chair{
@@ -99,7 +99,7 @@
 	},
 /obj/machinery/light/small,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "r" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/sign/poster,
@@ -108,22 +108,22 @@
 	name = "note"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "s" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/integrated_circuit/logic/binary,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "t" = (
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "u" = (
 /turf/floor/tiled/steel_dirty,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "v" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "w" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/machinery/light{
@@ -131,101 +131,101 @@
 	icon_state = "tube1"
 	},
 /turf/floor/greengrid,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "x" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled/steel_dirty,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "y" = (
 /obj/structure/table{
 	name = "plastic table frame"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "z" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "A" = (
 /turf/floor/greengrid,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "B" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/greengrid,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "C" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/concrete,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "D" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/frame,
 /obj/item/integrated_circuit/logic/unary/not,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "E" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/gps/internal/poi,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "F" = (
 /obj/item/integrated_circuit/logic/binary,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "G" = (
 /obj/machinery/light/small,
 /turf/floor/tiled/steel_dirty,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "I" = (
 /obj/effect/decal/cleanable/blood/oil/streak,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "J" = (
 /obj/machinery/door/airlock/glass,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "K" = (
 /obj/structure/cable/green{
 	icon_state = "0-8"
 	},
 /obj/machinery/power/smes/buildable/preset/hidden,
 /turf/floor/tiled/steel_dirty,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "L" = (
 /obj/structure/closet/toolcloset,
 /turf/floor/concrete,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "M" = (
 /obj/item/integrated_circuit/smart/basic_pathfinder,
 /turf/floor/tiled/steel_dirty,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "N" = (
 /obj/structure/girder/displaced,
 /turf/floor/tiled/steel_dirty,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "O" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/concrete,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "P" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "Q" = (
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_y = 0
 	},
 /turf/floor/tiled/steel_dirty,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "R" = (
 /obj/structure/loot_pile/maint/junk,
 /turf/template_noop,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "S" = (
 /obj/machinery/door/airlock,
 /turf/floor/concrete,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "T" = (
 /obj/structure/hygiene/toilet{
 	dir = 8
@@ -236,36 +236,36 @@
 	icon_state = "tube1"
 	},
 /turf/floor/concrete,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "U" = (
 /obj/machinery/door/airlock,
 /turf/floor/tiled/steel_dirty,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "V" = (
 /obj/item/remains/robot,
 /turf/template_noop,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "W" = (
 /obj/machinery/light{
 	dir = 1;
 	icon_state = "tube1"
 	},
 /turf/template_noop,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "X" = (
 /obj/item/remains/posi,
 /obj/machinery/light/small,
 /turf/floor,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "Y" = (
 /obj/random/tech_supply,
 /turf/floor/tiled,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 "Z" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/sign/poster,
 /turf/floor/concrete,
-/area/cynosure_submap/VRDen)
+/area/cynosure_submap/vr_den)
 
 (1,1,1) = {"
 a

@@ -1,141 +1,141 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
 /turf/template_noop,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ab" = (
 /turf/wall/shuttle/dark,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ac" = (
 /turf/wall/shuttle/dark,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ad" = (
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ae" = (
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "af" = (
 /turf/floor/shuttle/red,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ag" = (
 /turf/floor/shuttle/white,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ah" = (
 /obj/structure/grille,
 /obj/item/shard{
 	icon_state = "medium"
 	},
 /turf/floor/plating,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ai" = (
 /obj/structure/grille,
 /obj/item/shard{
 	icon_state = "medium"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aj" = (
 /obj/random/landmine,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ak" = (
 /obj/structure/door_assembly/door_assembly_ext{
 	anchored = 1
 	},
 /turf/floor/plating,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "al" = (
 /obj/item/shard{
 	icon_state = "medium"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "am" = (
 /obj/item/shard,
 /turf/template_noop,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "an" = (
 /obj/structure/girder,
 /turf/floor/plating,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ao" = (
 /turf/floor/plating,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ap" = (
 /obj/structure/lattice,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aq" = (
 /obj/item/shard,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ar" = (
 /obj/structure/grille,
 /obj/item/shard,
 /turf/floor/plating,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "as" = (
 /obj/item/shard,
 /turf/floor/plating,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "at" = (
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "au" = (
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "av" = (
 /obj/structure/emergency_dispenser/east,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aw" = (
 /obj/machinery/constructable_frame/machine_frame,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ax" = (
 /obj/structure/mirror,
 /obj/item/shard{
 	icon_state = "medium"
 	},
 /turf/wall/shuttle/dark,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "az" = (
 /obj/effect/gibspawner/generic,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aA" = (
 /obj/structure/closet/medical_wall,
 /turf/wall/shuttle/dark,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aB" = (
 /obj/structure/largecrate,
 /turf/floor/shuttle/red,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aC" = (
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aD" = (
 /obj/structure/door_assembly/door_assembly_ext,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aE" = (
 /obj/structure/extinguisher_cabinet,
 /turf/wall/shuttle/dark,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aF" = (
 /obj/machinery/constructable_frame/computerframe,
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aG" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aH" = (
 /obj/machinery/constructable_frame/computerframe,
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aI" = (
 /obj/structure/grille{
 	density = 0;
@@ -143,11 +143,11 @@
 	},
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/plating,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aJ" = (
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/plating,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aK" = (
 /obj/structure/grille{
 	density = 0;
@@ -158,29 +158,29 @@
 	},
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/plating,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aL" = (
 /obj/item/stock_parts/circuitboard/broken,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aM" = (
 /obj/machinery/constructable_frame/machine_frame,
 /obj/item/stock_parts/circuitboard/broken,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aN" = (
 /obj/structure/table/steel_reinforced,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aO" = (
 /obj/structure/emergency_dispenser/north,
 /obj/machinery/constructable_frame/machine_frame,
 /obj/item/stock_parts/circuitboard/broken,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aP" = (
 /turf/floor/rock,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aQ" = (
 /obj/structure/grille{
 	density = 0;
@@ -188,139 +188,139 @@
 	},
 /obj/structure/lattice,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aR" = (
 /obj/structure/shuttle/engine/heater{
 	dir = 8
 	},
 /obj/structure/window/reinforced,
 /turf/template_noop,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aS" = (
 /obj/structure/door_assembly/door_assembly_highsecurity{
 	anchored = 1
 	},
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aT" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aU" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aV" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 8
 	},
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aW" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aX" = (
 /obj/item/stock_parts/circuitboard/broken,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aY" = (
 /obj/item/clothing/suit/space/cult,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "aZ" = (
 /obj/item/remains/robot,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ba" = (
 /obj/item/remains/human,
 /obj/effect/gibspawner/human,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bb" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bc" = (
 /obj/structure/door_assembly,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bd" = (
 /obj/item/clothing/head/helmet/space/cult,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "be" = (
 /obj/item/knife/ritual,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bf" = (
 /obj/structure/chair/office/dark{
 	dir = 8
 	},
 /obj/item/remains/human,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bg" = (
 /obj/effect/gibspawner/generic,
 /turf/template_noop,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bh" = (
 /obj/item/remains/human,
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bi" = (
 /obj/item/stock_parts/circuitboard/broken,
 /obj/item/remains/human,
 /obj/random/energy/highend,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bj" = (
 /obj/item/gps/internal/poi,
 /turf/floor/shuttle/red,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bk" = (
 /obj/effect/decal/cleanable/vomit,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bl" = (
 /obj/item/remains/robot,
 /turf/floor/shuttle/red,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bm" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/template_noop,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bn" = (
 /obj/effect/decal/cleanable/vomit,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bo" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/template_noop,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bp" = (
 /obj/structure/chair/office/dark{
 	dir = 4
 	},
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bq" = (
 /obj/item/stock_parts/circuitboard/broken,
 /obj/structure/chair/office/dark{
 	dir = 4
 	},
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "br" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bs" = (
 /obj/structure/table/steel_reinforced,
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bt" = (
 /obj/structure/shuttle/engine/heater{
 	dir = 8
@@ -329,43 +329,43 @@
 	dir = 4;
 	},
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bu" = (
 /obj/structure/door_assembly/door_assembly_ext{
 	anchored = 1
 	},
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bv" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/floor/shuttle/red,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bw" = (
 /obj/item/knife/ritual,
 /obj/effect/decal/cleanable/blood,
 /turf/floor/shuttle/red,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bx" = (
 /turf/wall/shuttle/dark{
 	unique_merge_identifier = "containment_shuttle"
 	},
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "by" = (
 /obj/random/landmine,
 /obj/random/landmine,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bz" = (
 /obj/item/remains/human,
 /obj/item/clothing/head/helmet/space/cult,
 /obj/effect/decal/cleanable/blood,
 /turf/floor/shuttle/red,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bA" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bB" = (
 /obj/structure/hygiene/sink{
 	dir = 8;
@@ -376,59 +376,59 @@
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bC" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bD" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "burst_r"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bE" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bF" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bG" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/random/landmine,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bH" = (
 /obj/structure/closet/crate{
 	name = "landmines crate";
 	opened = 1
 	},
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bI" = (
 /obj/random/landmine,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bJ" = (
 /obj/random/landmine,
 /turf/floor/plating,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bK" = (
 /obj/random/landmine,
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bL" = (
 /obj/effect/decal/cleanable/blood,
 /obj/random/landmine,
 /turf/floor/shuttle/red,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bM" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bN" = (
 /obj/structure/hygiene/toilet{
 	dir = 8
@@ -445,18 +445,18 @@
 	registered_name = "Aaron Presley";
 	},
 /turf/floor/shuttle/white,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "bO" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/item/remains/human,
 /obj/item/flame/fuelled/lighter/random,
 /turf/floor/barren,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 "ML" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/maintenance,
 /turf/floor/shuttle/black,
-/area/cynosure_submap/crashedcontainmentshuttle)
+/area/cynosure_submap/cave/crashedcontainmentshuttle)
 
 (1,1,1) = {"
 aa

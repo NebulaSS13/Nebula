@@ -4,27 +4,27 @@
 /area/template_noop)
 "b" = (
 /turf/wall/natural,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "c" = (
 /obj/effect/spider/stickyweb,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "d" = (
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "e" = (
 /obj/effect/spider/spiderling/frost,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "f" = (
 /obj/item/cash/c100,
 /obj/item/cash/c100,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "g" = (
 /obj/random/spider_mutant,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "h" = (
 /obj/item/cash/c100,
 /obj/item/cash/c100,
@@ -32,86 +32,86 @@
 /obj/item/remains,
 /obj/random/poncho,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "i" = (
 /obj/random/spider,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "j" = (
 /obj/item/grenade/spawnergrenade/spider,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "k" = (
 /obj/random/toolbox,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "m" = (
 /obj/item/mech_equipment/drill/diamond,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "n" = (
 /obj/item/flashlight,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "o" = (
 /mob/living/simple_animal/hostile/giant_spider/frost,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "p" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "q" = (
 /obj/item/remains/deer,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "r" = (
 /obj/random/ascent_gun,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "s" = (
 /obj/item/remains/ribcage,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "x" = (
 /obj/random/contraband,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "B" = (
 /obj/random/boulder,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "E" = (
 /obj/random/powercell,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "F" = (
 /obj/item/cash/c100,
 /obj/item/cash/c100,
 /obj/random/ammo,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "H" = (
 /obj/item/tool/xeno/hand,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "M" = (
 /obj/random/tool,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "W" = (
 /obj/item/remains/tajaran,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "X" = (
 /obj/item/remains/mouse,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 "Y" = (
 /obj/random/tool/power,
 /turf/floor/barren,
-/area/cynosure_submap/cave/Scave1)
+/area/cynosure_submap/cave/spider_cave)
 
 (1,1,1) = {"
 a

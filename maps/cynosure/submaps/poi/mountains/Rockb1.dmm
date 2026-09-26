@@ -4,122 +4,122 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "c" = (
 /turf/floor/barren,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "d" = (
 /turf/wall/natural,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "e" = (
 /turf/wall/concrete/reinforced,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "f" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp,
 /turf/floor/lino,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "g" = (
 /obj/structure/closet/cabinet,
 /obj/random/handgun,
 /turf/floor/lino,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "h" = (
 /obj/structure/bookcase,
 /turf/floor/lino,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "i" = (
 /obj/random/vendor/food,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "j" = (
 /obj/machinery/vending/coffee,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "k" = (
 /obj/random/vendor/drink,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "l" = (
 /obj/random/maintenance,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "m" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "n" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/shard,
 /turf/floor/plating,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "o" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /turf/floor/plating,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "p" = (
 /obj/structure/bed,
 /obj/item/bedsheet/mime,
 /turf/floor/lino,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "q" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/lino,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "r" = (
 /turf/floor/lino,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "s" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "t" = (
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "u" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/shard{
 	icon_state = "medium"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "v" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/plating,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "w" = (
 /obj/machinery/door/airlock,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "x" = (
 /obj/machinery/light/small/red,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "y" = (
 /obj/machinery/door/airlock/external,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "z" = (
 /obj/machinery/light/small/red,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/floor_decal/industrial/hatch,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "A" = (
 /obj/structure/cable/green{
 	icon_state = "2-4"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "B" = (
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "C" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -128,7 +128,7 @@
 	icon_state = "4-8"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "D" = (
 /obj/structure/cable/green{
 	icon_state = "0-8"
@@ -140,32 +140,32 @@
 	pixel_x = 24
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "E" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "F" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "G" = (
 /obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "H" = (
 /obj/machinery/power/smes/buildable/preset/hidden,
 /obj/structure/cable/green,
 /turf/floor/plating,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "I" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/machinery/power/terminal{
@@ -173,47 +173,47 @@
 	},
 /obj/machinery/port_gen/pacman,
 /turf/floor/plating,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "J" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/closet/excavation,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "K" = (
 /obj/structure/table,
 /obj/item/tool/drill,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "L" = (
 /obj/structure/table,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "M" = (
 /obj/structure/table,
 /obj/random/toolbox,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "O" = (
 /obj/machinery/door/airlock/hatch,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "P" = (
 /turf/floor/plating,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "Q" = (
 /obj/machinery/light/small/red,
 /turf/floor/plating,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "R" = (
 /obj/item/poster,
 /turf/floor/plating,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 "S" = (
 /obj/structure/loot_pile/maint/trash,
 /turf/floor/plating,
-/area/cynosure_submap/Rockb1)
+/area/cynosure_submap/cave/rockb1)
 
 (1,1,1) = {"
 a

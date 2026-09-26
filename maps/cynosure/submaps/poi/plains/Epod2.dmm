@@ -4,45 +4,45 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "c" = (
 /turf/floor/rock,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "d" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "e" = (
 /obj/structure/boulder{
 	icon_state = "boulder3"
 	},
 /turf/floor/dirt,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "f" = (
 /obj/structure/boulder{
 	icon_state = "boulder2"
 	},
 /turf/floor/dirt,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "g" = (
 /obj/structure/boulder{
 	icon_state = "boulder3"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "h" = (
 /turf/wall/shuttle,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "i" = (
 /obj/structure/shuttle/engine/propulsion/burst{
 	dir = 4;
 	icon_state = "propulsion"
 	},
 /turf/wall/shuttle,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "j" = (
 /obj/structure/boulder,
 /turf/floor/rock,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "k" = (
 /obj/structure/grille{
 	density = 0;
@@ -58,7 +58,7 @@
 	icon_state = "medium"
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "l" = (
 /obj/structure/chair{
 	dir = 8;
@@ -76,7 +76,7 @@
 	pixel_y = 20
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "m" = (
 /obj/structure/chair{
 	dir = 8;
@@ -93,7 +93,7 @@
 /obj/item/chems/hypospray/autoinjector/empty,
 /obj/abstract/landmark/crashed_pod,
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "n" = (
 /obj/structure/chair{
 	dir = 8;
@@ -106,7 +106,7 @@
 /obj/effect/decal/cleanable/blood/drip,
 /obj/random/sec,
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "o" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/machinery/door/airlock/external{
@@ -115,19 +115,19 @@
 	name = "Escape Pod Hatch"
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "p" = (
 /obj/structure/boulder{
 	icon_state = "boulder4"
 	},
 /turf/floor/dirt,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 "q" = (
 /obj/structure/boulder{
 	icon_state = "boulder2"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/Epod2)
+/area/cynosure_submap/escape_pod2)
 
 (1,1,1) = {"
 a

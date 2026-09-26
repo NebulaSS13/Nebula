@@ -4,29 +4,29 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 "c" = (
 /turf/floor/plating,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 "d" = (
 /obj/structure/girder/displaced,
 /turf/template_noop,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 "e" = (
 /turf/wall/titanium,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 "f" = (
 /turf/floor/reinforced,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 "g" = (
 /obj/structure/loot_pile/maint/junk,
 /obj/random/maintenance,
 /turf/floor/reinforced,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 "h" = (
 /obj/item/flashlight,
 /turf/floor/reinforced,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 "i" = (
 /obj/structure/loot_pile/maint/technical,
 /obj/item/gps/internal/poi,
@@ -34,25 +34,25 @@
 /obj/item/cell/gun/empty,
 /obj/random/ammo,
 /turf/floor/plating,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 "j" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/reinforced,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 "k" = (
 /obj/structure/girder,
 /turf/template_noop,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 "l" = (
 /obj/structure/loot_pile/maint/trash,
 /obj/random/energy/sec,
 /turf/floor/reinforced,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 "m" = (
 /obj/structure/loot_pile/maint/trash,
 /obj/random/grenade/less_lethal,
 /turf/floor/plating,
-/area/cynosure_submap/SupplyDrop2)
+/area/cynosure_submap/supply_drop)
 
 (1,1,1) = {"
 a

@@ -1,68 +1,68 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/wall/natural,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "c" = (
 /obj/abstract/exterior_marker/inside,
 /turf/floor/ice,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "d" = (
 /obj/structure/crystal/ice,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/ice,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "e" = (
 /obj/item/remains/mummy2,
 /obj/item/clothing/suit/armor/pcarrier/blue,
 /obj/item/clothing/head/helmet,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "f" = (
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "g" = (
 /obj/structure/crystal/ice,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "h" = (
 /mob/living/simple_animal/passive/mouse/rat,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "i" = (
 /obj/random/ascent_gun,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "A" = (
 /obj/item/remains/human,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "C" = (
 /obj/random/medical/lite,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "D" = (
 /obj/item/remains/mummy2,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "J" = (
 /obj/item/clothing/head/helmet,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "O" = (
 /obj/item/remains/mouse,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "Q" = (
 /obj/random/contraband,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 "X" = (
 /obj/structure/loot_pile/surface/bones,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1B)
+/area/cynosure_submap/cave/ice_cave_1b)
 
 (1,1,1) = {"
 b

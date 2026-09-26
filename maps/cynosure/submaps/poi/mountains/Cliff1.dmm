@@ -8,65 +8,65 @@
 "c" = (
 /obj/item/stack/material/ore/handful/sand,
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "d" = (
 /obj/random/boulder,
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "e" = (
 /obj/structure/cliff/automatic/corner,
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "f" = (
 /obj/structure/cliff/automatic{
 	dir = 5;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "g" = (
 /obj/structure/cliff/automatic{
 	dir = 9;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "h" = (
 /obj/structure/cliff/automatic,
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "i" = (
 /obj/structure/cliff/automatic/corner{
 	dir = 9;
 	icon_state = "cliffbuilder-corner"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "j" = (
 /obj/random/humanoidremains{
 	spawn_nothing_percentage = 70
 	},
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "k" = (
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "p" = (
 /obj/item/remains/ribcage,
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "x" = (
 /obj/item/remains/deer,
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "D" = (
 /obj/structure/boulder,
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 "U" = (
 /obj/structure/boulder,
 /turf/floor/barren,
-/area/cynosure_submap/ore_cliff)
+/area/cynosure_submap/cave/ore_cliff)
 
 (1,1,1) = {"
 a

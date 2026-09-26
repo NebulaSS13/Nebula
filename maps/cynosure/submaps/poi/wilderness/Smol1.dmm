@@ -4,22 +4,22 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Small1)
+/area/cynosure_submap/snowy_thicket)
 "c" = (
 /turf/template_noop,
 /area/cynosure_submap)
 "d" = (
 /obj/structure/flora/tree/pine,
 /turf/template_noop,
-/area/cynosure_submap/Small1)
+/area/cynosure_submap/snowy_thicket)
 "e" = (
 /obj/structure/flora/tree/dead,
 /turf/template_noop,
-/area/cynosure_submap/Small1)
+/area/cynosure_submap/snowy_thicket)
 "f" = (
 /obj/item/seeds/random,
 /turf/template_noop,
-/area/cynosure_submap/Small1)
+/area/cynosure_submap/snowy_thicket)
 
 (1,1,1) = {"
 a

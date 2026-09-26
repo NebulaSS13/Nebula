@@ -4,245 +4,245 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "c" = (
 /turf/wall/log/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "d" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "e" = (
 /obj/structure/window/reinforced/full,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "f" = (
 /obj/structure/table/wood,
 /obj/effect/decal/cleanable/cobweb2,
 /obj/random/maintenance/clean,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "g" = (
 /obj/item/stack/material/plank/mapped/wood,
 /obj/effect/decal/cleanable/cobweb,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "h" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "i" = (
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "j" = (
 /turf/floor/wood{
 	icon_state = "wood_broken6"
 	},
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "k" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/spider_remains,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "l" = (
 /obj/structure/table/wood,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "m" = (
 /obj/structure/closet/cabinet,
 /obj/random/sec,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "n" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "o" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/wood{
 	icon_state = "wood_broken4"
 	},
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "p" = (
 /turf/floor/wood{
 	icon_state = "wood_broken2"
 	},
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "q" = (
 /obj/item/stack/material/plank/mapped/wood,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "r" = (
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "s" = (
 /turf/floor/wood{
 	icon_state = "wood_broken4"
 	},
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "t" = (
 /obj/structure/table/wood,
 /obj/item/paper,
 /obj/effect/decal/cleanable/cobweb2,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "u" = (
 /obj/structure/door/sif,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "v" = (
 /obj/structure/chair/wood{
 	dir = 1;
 	icon_state = "wooden_chair"
 	},
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "w" = (
 /obj/item/stack/material/plank/mapped/wood,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "x" = (
 /obj/effect/decal/cleanable/cobweb,
 /turf/floor/wood{
 	icon_state = "wood_broken6"
 	},
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "y" = (
 /obj/item/remains/mouse,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "z" = (
 /obj/structure/table/wood,
 /obj/item/stack/material/plank/mapped/wood,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "A" = (
 /obj/structure/bed,
 /obj/item/bedsheet,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "B" = (
 /obj/structure/chair/comfy/teal,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "C" = (
 /obj/structure/bookcase,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "D" = (
 /obj/structure/table,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "E" = (
 /obj/structure/table/wood,
 /obj/item/flame/candle/spent,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "F" = (
 /obj/structure/table/wood,
 /obj/item/pen/blue,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "G" = (
 /obj/item/food/junk/chips,
 /obj/item/food/junk/chips,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "H" = (
 /obj/structure/table/wood,
 /obj/item/flame/candle,
 /obj/random/medical/lite,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "I" = (
 /obj/structure/chair/wood{
 	dir = 8;
 	icon_state = "wooden_chair"
 	},
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "J" = (
 /obj/item/remains/mouse,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "K" = (
 /obj/structure/table/wood,
 /obj/item/paper,
 /obj/item/paper,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "L" = (
 /obj/structure/table/wood,
 /obj/item/paper/crumpled,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "M" = (
 /obj/machinery/constructable_frame/machine_frame,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "N" = (
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "O" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "P" = (
 /obj/item/stock_parts/circuitboard/paper_shredder,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "Q" = (
 /obj/item/food/junk/cheesiehonkers,
 /obj/item/food/junk/cheesiehonkers,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "R" = (
 /obj/effect/decal/cleanable/spider_remains,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "S" = (
 /obj/item/paper/crumpled,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "T" = (
 /obj/structure/table/wood,
 /obj/item/backpack/satchel,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "U" = (
 /obj/structure/rack,
 /obj/item/clothing/suit/jacket/winter,
 /obj/item/clothing/suit/jacket/winter,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "V" = (
 /obj/item/flashlight,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "W" = (
 /obj/structure/rack,
 /obj/item/clothing/shoes/winterboots,
 /obj/item/clothing/shoes/winterboots,
 /obj/item/clothing/shoes/winterboots,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "X" = (
 /obj/structure/coatrack,
 /turf/floor/wood/sif,
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "Y" = (
 /obj/structure/table/wood,
 /turf/floor/wood{
 	icon_state = "wood_broken6"
 	},
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 "Z" = (
 /obj/structure/table/wood,
 /turf/floor/wood{
 	icon_state = "wood_broken2"
 	},
-/area/cynosure_submap/Oldhouse)
+/area/cynosure_submap/old_house)
 
 (1,1,1) = {"
 a

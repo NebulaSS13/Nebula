@@ -4,18 +4,18 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Rocky3)
+/area/cynosure_submap/rocky3)
 "c" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Rocky3)
+/area/cynosure_submap/rocky3)
 "d" = (
 /turf/wall/natural,
-/area/cynosure_submap/Rocky3)
+/area/cynosure_submap/rocky3)
 "e" = (
 /obj/structure/flora/tree/pine,
 /turf/template_noop,
-/area/cynosure_submap/Rocky3)
+/area/cynosure_submap/rocky3)
 
 (1,1,1) = {"
 a
