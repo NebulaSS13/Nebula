@@ -22,6 +22,8 @@
 	var/stump_type
 	/// Marker for repeating the cut sound effect and animation.
 	var/someone_is_cutting = FALSE
+	/// Force-sync our icon state with our stump on spawn
+	var/set_stump_icon_state = TRUE
 
 /obj/structure/flora/tree/get_material_health_modifier()
 	return 2.5 //Prefer removing via tools than bashing
@@ -72,7 +74,8 @@
 		LAZYADD(., new log_type(T, rand(max(1,round(log_amount*0.5)), log_amount), material?.type, reinf_material?.type))
 	if(stump_type)
 		var/obj/structure/flora/stump/stump = new stump_type(T, material, reinf_material)
-		stump.icon_state = icon_state //A bit dirty maybe, but its probably not worth writing a whole system for this when we have 3 kinds of trees...
+		if(set_stump_icon_state)
+			stump.icon_state = icon_state //A bit dirty maybe, but its probably not worth writing a whole system for this when we have 3 kinds of trees...
 		if(paint_color)
 			stump.set_color()
 	. = ..()
