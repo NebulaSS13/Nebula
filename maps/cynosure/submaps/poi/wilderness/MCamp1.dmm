@@ -2,109 +2,109 @@
 "bB" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "cH" = (
 /mob/living/simple_animal/hostile/viscerator,
 /turf/template_noop,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "do" = (
 /turf/floor/dirt,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "dH" = (
 /obj/machinery/light/small,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "dM" = (
 /obj/item/cell/gun/empty,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "fS" = (
 /obj/structure/closet,
 /obj/random/maintenance/clean,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "gc" = (
 /obj/structure/foamedmetal,
 /turf/floor,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "ge" = (
 /turf/template_noop,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "jr" = (
 /obj/structure/loot_pile/maint/junk,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "ju" = (
 /obj/structure/bed/roller,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "jL" = (
 /obj/structure/inflatable,
 /turf/floor,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "kd" = (
 /mob/living/simple_animal/hostile/viscerator,
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "kv" = (
 /obj/structure/chair/office/dark,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "ln" = (
 /obj/item/remains,
 /obj/random/maintenance,
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "lO" = (
 /obj/structure/chair/office/dark{
 	dir = 1
 	},
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "mE" = (
 /obj/machinery/computer/modular/preset,
 /obj/machinery/light/small{
 	dir = 8
 	},
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "nl" = (
 /obj/structure/table,
 /mob/living/simple_animal/hostile/viscerator,
 /obj/item/paper_bin,
 /obj/item/pen,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "nW" = (
 /obj/structure/flora/bush,
 /turf/template_noop,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "or" = (
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "ow" = (
 /obj/structure/bed/padded,
 /obj/machinery/light/small{
 	dir = 4
 	},
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "pI" = (
 /obj/structure/barricade,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "qi" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/blue,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "qx" = (
 /obj/structure/flora/tree/dead,
 /turf/template_noop,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "qF" = (
 /obj/structure/table,
 /obj/machinery/light/small{
@@ -112,91 +112,91 @@
 	},
 /obj/item/frame/apc,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "tS" = (
 /obj/item/shard,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "uo" = (
 /obj/structure/closet,
 /obj/random/toolbox,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "vP" = (
 /obj/random/energy,
 /obj/structure/rack,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "vX" = (
 /obj/structure/foamedmetal,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "wc" = (
 /obj/random/landmine,
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "xo" = (
 /obj/random/landmine,
 /turf/floor/dirt,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "xt" = (
 /obj/structure/filing_cabinet/chestdrawer,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "ye" = (
 /obj/random/junk,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "yr" = (
 /obj/effect/decal/cleanable/blood,
 /turf/template_noop,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "zZ" = (
 /obj/random/helmet,
 /obj/structure/closet,
 /obj/random/maintenance,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "Af" = (
 /obj/item/shard,
 /mob/living/simple_animal/hostile/viscerator,
 /turf/template_noop,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "AH" = (
 /obj/effect/decal/cleanable/blood,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "By" = (
 /mob/living/simple_animal/hostile/viscerator,
 /obj/item/shard,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "CF" = (
 /obj/structure/girder,
 /turf/floor,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "DX" = (
 /turf/wall/concrete/reinforced,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "DZ" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "Ep" = (
 /turf/wall/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "Iu" = (
 /mob/living/simple_animal/hostile/viscerator,
 /obj/structure/chair/office/dark{
 	dir = 8
 	},
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "Jh" = (
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "JM" = (
 /obj/structure/closet,
 /obj/random/maintenance/clean,
@@ -204,36 +204,36 @@
 	dir = 8
 	},
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "Lb" = (
 /obj/item/remains,
 /obj/structure/bed/padded,
 /obj/item/bedsheet/blue,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "LQ" = (
 /mob/living/simple_animal/hostile/viscerator,
 /obj/machinery/light/small{
 	dir = 4
 	},
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "LX" = (
 /obj/machinery/door/airlock/maintenance,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "LY" = (
 /obj/item/shard,
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "Nv" = (
 /turf/wall/natural,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "Og" = (
 /obj/structure/loot_pile/surface/medicine_cabinet,
 /turf/wall/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "OI" = (
 /turf/template_noop,
 /area/template_noop)
@@ -241,61 +241,61 @@
 /mob/living/simple_animal/hostile/viscerator,
 /obj/structure/bed/padded,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "PF" = (
 /obj/random/firstaid,
 /obj/structure/table,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "Qv" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "Qx" = (
 /obj/random/landmine,
 /turf/template_noop,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "QD" = (
 /obj/structure/rack,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "QX" = (
 /obj/item/remains,
 /obj/random/landmine,
 /turf/template_noop,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "RD" = (
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "Uy" = (
 /obj/random/landmine,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "UC" = (
 /obj/structure/iv_drip,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "WT" = (
 /obj/machinery/door/airlock,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "WY" = (
 /obj/random/dufflebag,
 /obj/structure/rack,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "YB" = (
 /obj/item/shard,
 /turf/template_noop,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 "Zz" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/blue,
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/concrete,
-/area/cynosure_submap/MilitaryCamp1)
+/area/cynosure_submap/military_camp)
 
 (1,1,1) = {"
 OI

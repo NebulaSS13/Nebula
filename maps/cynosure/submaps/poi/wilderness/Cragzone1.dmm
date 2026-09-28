@@ -4,25 +4,25 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Cragzone1)
+/area/cynosure_submap/craggy_area)
 "c" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Cragzone1)
+/area/cynosure_submap/craggy_area)
 "d" = (
 /turf/wall/natural,
-/area/cynosure_submap/Cragzone1)
+/area/cynosure_submap/craggy_area)
 "e" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Cragzone1)
+/area/cynosure_submap/craggy_area)
 "n" = (
 /obj/random/maintenance/clean,
 /turf/floor/dirt,
-/area/cynosure_submap/Cragzone1)
+/area/cynosure_submap/craggy_area)
 "t" = (
 /obj/random/sif/hostile,
 /turf/floor/dirt,
-/area/cynosure_submap/Cragzone1)
+/area/cynosure_submap/craggy_area)
 
 (1,1,1) = {"
 a

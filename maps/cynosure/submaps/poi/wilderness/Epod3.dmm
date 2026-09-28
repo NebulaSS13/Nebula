@@ -4,25 +4,25 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "c" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "d" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "e" = (
 /turf/wall/shuttle,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "f" = (
 /obj/structure/flora/tree/sif,
 /turf/floor/dirt,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "g" = (
 /obj/effect/spider/stickyweb,
 /turf/template_noop,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "h" = (
 /obj/structure/chair{
 	dir = 4
@@ -35,7 +35,7 @@
 	dir = 1
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "i" = (
 /obj/structure/chair{
 	dir = 4
@@ -47,7 +47,7 @@
 /obj/machinery/light,
 /obj/item/fuelled_tool/welding/largetank,
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "j" = (
 /obj/machinery/status_display{
 	density = 0;
@@ -66,47 +66,47 @@
 /obj/item/clothing/glasses/sunglasses,
 /obj/random/handgun,
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "k" = (
 /obj/structure/shuttle/engine/propulsion/burst{
 	dir = 8;
 	icon_state = "propulsion"
 	},
 /turf/wall/shuttle,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "l" = (
 /obj/effect/spider/stickyweb,
 /turf/floor/dirt,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "m" = (
 /obj/machinery/door/airlock/external{
 	name = "Escape Pod Hatch";
 	welded = 1
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "n" = (
 /obj/effect/spider/eggcluster/frost,
 /turf/floor/dirt,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "o" = (
 /mob/living/simple_animal/hostile/giant_spider/carrier,
 /turf/template_noop,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "p" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb,
 /turf/template_noop,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "q" = (
 /mob/living/simple_animal/hostile/giant_spider/frost,
 /turf/floor/dirt,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 "r" = (
 /obj/structure/shuttle/window,
 /obj/structure/grille,
 /turf/floor/shuttle,
-/area/cynosure_submap/Epod3)
+/area/cynosure_submap/escape_pod3)
 
 (1,1,1) = {"
 a

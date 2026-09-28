@@ -8,53 +8,53 @@
 	dir = 9
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "c" = (
 /obj/structure/cliff/automatic,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "d" = (
 /obj/random/turf_lava,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "e" = (
 /obj/structure/cliff/automatic{
 	icon_state = "cliffbuilder";
 	dir = 5
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "f" = (
 /obj/structure/cliff/automatic/corner{
 	icon_state = "cliffbuilder-corner";
 	dir = 9
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "g" = (
 /turf/floor/lava,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "h" = (
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "i" = (
 /obj/structure/cliff/automatic/corner,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "j" = (
 /obj/structure/cliff/automatic{
 	icon_state = "cliffbuilder";
 	dir = 8
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "k" = (
 /obj/structure/cliff/automatic{
 	icon_state = "cliffbuilder";
 	dir = 4
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "l" = (
 /obj/abstract/map_effect/interval/effect_emitter/steam,
 /obj/abstract/map_effect/interval/effect_emitter/smoke/bad{
@@ -68,46 +68,46 @@
 	interval_upper_bound = 1200
 	},
 /turf/floor/lava,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "m" = (
 /obj/structure/cliff/automatic{
 	icon_state = "cliffbuilder";
 	dir = 10
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "n" = (
 /obj/structure/cliff/automatic/corner{
 	icon_state = "cliffbuilder-corner";
 	dir = 10
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "o" = (
 /obj/structure/cliff/automatic/corner{
 	icon_state = "cliffbuilder-corner";
 	dir = 6
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "p" = (
 /obj/structure/cliff/automatic{
 	icon_state = "cliffbuilder";
 	dir = 6
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "q" = (
 /obj/structure/cliff/automatic{
 	icon_state = "cliffbuilder";
 	dir = 2
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 "r" = (
 /obj/random/minevault,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_3)
+/area/cynosure_submap/cave/geyser_3)
 
 (1,1,1) = {"
 a

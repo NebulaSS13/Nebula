@@ -4,36 +4,36 @@
 /area/template_noop)
 "ab" = (
 /turf/template_noop,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ac" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ad" = (
 /turf/wall/concrete,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ae" = (
 /obj/structure/window/reinforced/full,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "af" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ag" = (
 /obj/structure/table,
 /obj/machinery/microwave,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ah" = (
 /obj/structure/table,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ai" = (
 /obj/structure/table,
 /obj/item/chems/condiment/enzyme,
 /obj/item/chems/glass/beaker,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aj" = (
 /obj/structure/table,
 /obj/machinery/light{
@@ -41,47 +41,47 @@
 	},
 /obj/item/knife/kitchen/cleaver,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ak" = (
 /obj/machinery/vending/hotfood,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "al" = (
 /obj/machinery/vending/dinnerware,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "am" = (
 /obj/structure/hygiene/sink/kitchen,
 /turf/wall/concrete,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "an" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ao" = (
 /obj/structure/chair/wood{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ap" = (
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aq" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ar" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/table,
 /obj/item/chems/condiment/small/saltshaker,
 /obj/item/utensil/fork,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "as" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/table,
@@ -91,7 +91,7 @@
 	icon_state = "tube1"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "at" = (
 /obj/machinery/light{
 	dir = 8;
@@ -99,29 +99,29 @@
 	pixel_y = 0
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "au" = (
 /obj/structure/table,
 /obj/item/book/manual/chef_recipes,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "av" = (
 /obj/structure/table,
 /obj/item/rollingpin,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aw" = (
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ax" = (
 /obj/structure/chair/wood,
 /obj/effect/floor_decal/corner/red/diagonal,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ay" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/item/box/fancy/egg_box,
@@ -135,48 +135,48 @@
 /obj/item/chems/drinks/bottle/cream,
 /obj/item/chems/condiment/sugar,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "az" = (
 /obj/structure/door/sif,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aA" = (
 /obj/structure/door/sif,
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aB" = (
 /obj/structure/door/sif,
 /turf/floor/tiled/freezer,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aC" = (
 /obj/structure/table,
 /obj/item/chems/condiment/small/saltshaker,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/utensil/fork,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aD" = (
 /obj/structure/table,
 /obj/item/chems/condiment/small/peppermill,
 /obj/effect/floor_decal/corner/red/diagonal,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aE" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/stool/padded,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aF" = (
 /obj/structure/table,
 /obj/effect/floor_decal/corner/red/diagonal,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aG" = (
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aH" = (
 /turf/floor/tiled/freezer,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aI" = (
 /obj/structure/closet/crate/freezer,
 /obj/random/meat,
@@ -187,13 +187,13 @@
 /obj/random/meat,
 /obj/random/meat,
 /turf/floor/tiled/freezer,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aJ" = (
 /obj/structure/table,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/chems/condiment/small/saltshaker,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aK" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/machinery/light{
@@ -201,15 +201,15 @@
 	icon_state = "tube1"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aL" = (
 /obj/machinery/light/small,
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aM" = (
 /obj/machinery/light/small,
 /turf/floor/tiled/freezer,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aN" = (
 /obj/structure/closet/crate/freezer,
 /obj/machinery/light/small{
@@ -224,19 +224,19 @@
 /obj/item/food/butchery/meat,
 /obj/item/food/butchery/meat,
 /turf/floor/tiled/freezer,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aO" = (
 /obj/structure/table,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/chems/condiment/small/peppermill,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aP" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/table,
 /obj/machinery/microwave,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aQ" = (
 /obj/structure/closet/crate/freezer,
 /obj/item/chems/condiment/flour,
@@ -247,39 +247,39 @@
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/flour,
 /turf/floor/tiled/freezer,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aR" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/coatrack,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aS" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/table,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aT" = (
 /obj/structure/closet/crate/freezer,
 /turf/floor/tiled/freezer,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aU" = (
 /obj/machinery/gibber,
 /turf/floor/tiled/freezer,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aV" = (
 /obj/machinery/light/small,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aW" = (
 /obj/machinery/cooker/fryer,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aX" = (
 /obj/machinery/light/small{
 	dir = 4
 	},
 /turf/floor/dirt,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aY" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/machinery/light{
@@ -288,29 +288,29 @@
 	pixel_y = 0
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "aZ" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/machinery/cooker/grill,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "ba" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bb" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bc" = (
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bd" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/closet/secure_closet/freezer/fridge,
@@ -328,59 +328,59 @@
 /obj/item/chems/drinks/bottle/cream,
 /obj/item/chems/drinks/bottle/cream,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "be" = (
 /obj/structure/table,
 /obj/machinery/chemical_dispenser/bar_coffee,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bf" = (
 /obj/item/frame/apc,
 /turf/floor/lino,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bg" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp,
 /turf/floor/lino,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bh" = (
 /obj/structure/chair/office/light,
 /turf/floor/lino,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bi" = (
 /turf/floor/lino,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bj" = (
 /obj/structure/table,
 /obj/random/mug,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bk" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
 /turf/floor/lino,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bl" = (
 /obj/structure/table/wood,
 /obj/item/cell/high,
 /turf/floor/lino,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bm" = (
 /obj/structure/table/wood,
 /obj/random/mug,
 /turf/floor/lino,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bn" = (
 /obj/machinery/light/small{
 	dir = 4
 	},
 /turf/floor/lino,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bo" = (
 /obj/structure/door/sif,
 /turf/floor/lino,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bp" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/windoor_assembly{
@@ -388,17 +388,17 @@
 	icon_state = "l_windoor_assembly01"
 	},
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bq" = (
 /obj/structure/bookcase,
 /turf/floor/lino,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "br" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/machinery/space_heater,
 /obj/machinery/light,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bs" = (
 /obj/structure/hygiene/sink{
 	dir = 8;
@@ -407,32 +407,32 @@
 	pixel_y = 2
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bt" = (
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bu" = (
 /obj/structure/hygiene/toilet,
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bv" = (
 /obj/structure/chair/wood{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bw" = (
 /obj/structure/chair/wood{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
 /turf/floor/tiled/white,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bx" = (
 /obj/structure/door/sif,
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "by" = (
 /obj/structure/mirror{
 	dir = 4;
@@ -440,16 +440,16 @@
 	pixel_y = 0
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bz" = (
 /obj/machinery/light/small,
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 "bA" = (
 /obj/structure/table,
 /obj/random/soap,
 /turf/floor/tiled,
-/area/cynosure_submap/Diner)
+/area/cynosure_submap/diner)
 
 (1,1,1) = {"
 aa

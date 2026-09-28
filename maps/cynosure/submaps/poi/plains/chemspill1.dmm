@@ -7,38 +7,38 @@
 /area/template_noop)
 "e" = (
 /turf/template_noop,
-/area/cynosure_submap/ChemSpill1)
+/area/cynosure_submap/chemical_spill)
 "f" = (
 /obj/item/remains/deer,
 /turf/floor/dirt,
-/area/cynosure_submap/ChemSpill1)
+/area/cynosure_submap/chemical_spill)
 "g" = (
 /turf/floor/dirt,
-/area/cynosure_submap/ChemSpill1)
+/area/cynosure_submap/chemical_spill)
 "h" = (
 /turf/floor/mud,
-/area/cynosure_submap/ChemSpill1)
+/area/cynosure_submap/chemical_spill)
 "i" = (
 /turf/floor/rock/sand/water/contaminated,
-/area/cynosure_submap/ChemSpill1)
+/area/cynosure_submap/chemical_spill)
 "j" = (
 /turf/floor/rock/sand/water/contaminated,
-/area/cynosure_submap/ChemSpill1)
+/area/cynosure_submap/chemical_spill)
 "k" = (
 /obj/item/remains/mouse,
 /turf/floor/rock/sand/water/contaminated,
-/area/cynosure_submap/ChemSpill1)
+/area/cynosure_submap/chemical_spill)
 "l" = (
 /turf/floor/rock,
-/area/cynosure_submap/ChemSpill1)
+/area/cynosure_submap/chemical_spill)
 "m" = (
 /obj/item/remains/ribcage,
 /turf/floor/dirt,
-/area/cynosure_submap/ChemSpill1)
+/area/cynosure_submap/chemical_spill)
 "n" = (
 /obj/item/remains/lizard,
 /turf/floor/dirt,
-/area/cynosure_submap/ChemSpill1)
+/area/cynosure_submap/chemical_spill)
 
 (1,1,1) = {"
 a

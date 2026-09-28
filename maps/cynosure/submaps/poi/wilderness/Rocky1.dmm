@@ -4,31 +4,31 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Rocky1)
+/area/cynosure_submap/rocky1)
 "c" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Rocky1)
+/area/cynosure_submap/rocky1)
 "d" = (
 /obj/structure/boulder,
 /turf/floor/dirt,
-/area/cynosure_submap/Rocky1)
+/area/cynosure_submap/rocky1)
 "e" = (
 /turf/wall/natural,
-/area/cynosure_submap/Rocky1)
+/area/cynosure_submap/rocky1)
 "f" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Rocky1)
+/area/cynosure_submap/rocky1)
 "g" = (
 /obj/random/sec,
 /obj/item/remains/human,
 /obj/item/cash/c200,
 /turf/floor/dirt,
-/area/cynosure_submap/Rocky1)
+/area/cynosure_submap/rocky1)
 "V" = (
 /obj/random/material,
 /turf/floor/dirt,
-/area/cynosure_submap/Rocky1)
+/area/cynosure_submap/rocky1)
 
 (1,1,1) = {"
 a

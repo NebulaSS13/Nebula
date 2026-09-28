@@ -1,72 +1,72 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/wall/natural,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "c" = (
 /obj/abstract/exterior_marker/inside,
 /turf/floor/ice,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "d" = (
 /obj/structure/crystal/ice,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/ice,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "e" = (
 /obj/structure/loot_pile/surface/bones,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "f" = (
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "g" = (
 /obj/structure/crystal/ice,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "h" = (
 /obj/random/tool/power,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "i" = (
 /obj/random/ammo,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "l" = (
 /obj/random/scrapped_ionrifle,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/ice,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "n" = (
 /obj/random/powercell,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "u" = (
 /obj/random/trash,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "E" = (
 /obj/structure/loot_pile/surface/bones,
 /obj/random/voidsuit/mining,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "G" = (
 /obj/random/boulder,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "M" = (
 /obj/structure/loot_pile/maint/junk,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "O" = (
 /obj/structure/loot_pile/exosuit/powerloader,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 "Y" = (
 /obj/random/unidentified_medicine/viral,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1C)
+/area/cynosure_submap/cave/ice_cave_1c)
 
 (1,1,1) = {"
 b

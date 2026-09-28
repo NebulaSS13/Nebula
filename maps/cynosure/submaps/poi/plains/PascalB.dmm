@@ -4,17 +4,17 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/PascalB)
+/area/cynosure_submap/pascal_b)
 "c" = (
 /turf/floor/dirt,
-/area/cynosure_submap/PascalB)
+/area/cynosure_submap/pascal_b)
 "d" = (
 /turf/floor/rock,
-/area/cynosure_submap/PascalB)
+/area/cynosure_submap/pascal_b)
 "e" = (
 /obj/item/cynosure_prop/pascalb,
 /turf/floor/rock,
-/area/cynosure_submap/PascalB)
+/area/cynosure_submap/pascal_b)
 
 (1,1,1) = {"
 a

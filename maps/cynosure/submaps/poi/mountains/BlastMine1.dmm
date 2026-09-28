@@ -1,77 +1,77 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/wall/natural,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "b" = (
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "c" = (
 /obj/structure/sign/warning/bomb_range,
 /turf/wall/brick/sandstone,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "d" = (
 /obj/structure/rack,
 /obj/item/plastique,
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "e" = (
 /obj/structure/loot_pile/surface/bones,
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "f" = (
 /mob/living/simple_animal/hostile/savik,
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "g" = (
 /obj/structure/rack,
 /obj/item/clothing/head/bomb_hood,
 /obj/item/clothing/suit/bomb_suit,
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "h" = (
 /obj/item/gps/internal/poi{
 	gps_tag = "Unidentified Signal"
 	},
 /turf/wall/brick/sandstone,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "i" = (
 /mob/living/simple_animal/hostile/beast/diyaab,
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "j" = (
 /obj/structure/table/reinforced,
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "k" = (
 /obj/structure/rack,
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "l" = (
 /obj/machinery/floodlight,
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "m" = (
 /turf/wall/brick/sandstone,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "n" = (
 /obj/structure/girder/displaced,
 /obj/structure/sign/warning/bomb_range,
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "o" = (
 /obj/structure/table,
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "p" = (
 /obj/item/remains/human,
 /turf/floor/barren,
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 "q" = (
 /obj/structure/sign/warning/bomb_range,
 /turf/wall/brick/sandstone{
 	damage = 20
 	},
-/area/cynosure_submap/cave/BlastMine1)
+/area/cynosure_submap/cave/blast_mine_1)
 
 (1,1,1) = {"
 a

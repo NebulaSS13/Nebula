@@ -8,150 +8,150 @@
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ac" = (
 /obj/structure/cliff/automatic,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ad" = (
 /obj/structure/cliff/automatic{
 	dir = 5;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ae" = (
 /obj/structure/cliff/automatic/corner{
 	dir = 9;
 	icon_state = "cliffbuilder-corner"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "af" = (
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ag" = (
 /obj/structure/cliff/automatic/corner,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ah" = (
 /obj/structure/fence{
 	dir = 4;
 	icon_state = "end"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ai" = (
 /obj/structure/fence{
 	dir = 4;
 	icon_state = "post"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aj" = (
 /obj/structure/fence/door/opened,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ak" = (
 /obj/structure/fence{
 	dir = 8;
 	icon_state = "end"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "al" = (
 /obj/structure/cliff/automatic{
 	dir = 8;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "am" = (
 /obj/structure/fence{
 	dir = 1;
 	icon_state = "end"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "an" = (
 /obj/structure/cliff/automatic{
 	dir = 9;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ao" = (
 /obj/structure/cliff/automatic,
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ap" = (
 /obj/structure/cliff/automatic{
 	dir = 5;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aq" = (
 /obj/structure/sign/warning/lava,
 /turf/wall,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ar" = (
 /obj/structure/fence,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "as" = (
 /obj/structure/cliff/automatic{
 	dir = 6;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "at" = (
 /obj/structure/cliff/automatic/corner{
 	dir = 9;
 	icon_state = "cliffbuilder-corner"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "au" = (
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "av" = (
 /obj/structure/cliff/automatic/corner,
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aw" = (
 /obj/structure/railing/mapped{
 	dir = 4;
 	icon_state = "railing0"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ax" = (
 /obj/structure/catwalk,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ay" = (
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "az" = (
 /obj/structure/fence/door/opened{
 	dir = 8;
 	icon_state = "door_opened"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aA" = (
 /obj/structure/cliff/automatic{
 	dir = 8;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aB" = (
 /turf/floor/barren,
 /area/template_noop)
@@ -165,7 +165,7 @@
 	icon_state = "railing0"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aE" = (
 /obj/structure/cliff/automatic,
 /obj/structure/railing/mapped{
@@ -173,64 +173,64 @@
 	icon_state = "railing0"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aF" = (
 /obj/structure/cliff/automatic{
 	dir = 10;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aG" = (
 /obj/structure/cliff/automatic/corner{
 	dir = 10;
 	icon_state = "cliffbuilder-corner"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aH" = (
 /obj/structure/railing/mapped{
 	dir = 4;
 	icon_state = "railing0"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aI" = (
 /obj/structure/catwalk,
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aJ" = (
 /obj/structure/ore_box,
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aK" = (
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aL" = (
 /obj/structure/cliff/automatic{
 	dir = 4;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aM" = (
 /obj/machinery/light/small{
 	dir = 4;
 	icon_state = "bulb1"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aN" = (
 /obj/random/tank,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aO" = (
 /turf/floor/plating,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "aP" = (
 /obj/machinery/door/airlock/hatch{
 	normalspeed = 0;
@@ -238,10 +238,10 @@
 	},
 /obj/abstract/map_effect/interval/effect_emitter/sparks,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "aQ" = (
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "aR" = (
 /obj/effect/floor_decal/corner_oldtile/blue/full{
 	dir = 8;
@@ -250,7 +250,7 @@
 /obj/machinery/forensic/microscope,
 /obj/structure/table,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "aS" = (
 /obj/effect/floor_decal/corner_oldtile/blue/full{
 	dir = 8;
@@ -260,39 +260,39 @@
 /obj/random/unidentified_medicine/scientific,
 /obj/random/mug,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "aT" = (
 /obj/structure/fence,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aU" = (
 /obj/structure/cliff/automatic{
 	dir = 2;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aV" = (
 /obj/structure/cliff/automatic{
 	dir = 10;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aW" = (
 /obj/structure/cliff/automatic/corner{
 	dir = 10;
 	icon_state = "cliffbuilder-corner"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aX" = (
 /obj/structure/cliff/automatic/corner{
 	dir = 6;
 	icon_state = "cliffbuilder-corner"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aY" = (
 /obj/structure/cliff/automatic{
 	dir = 2;
@@ -303,7 +303,7 @@
 	icon_state = "railing0"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "aZ" = (
 /obj/structure/cliff/automatic{
 	dir = 2;
@@ -314,25 +314,25 @@
 	icon_state = "railing0"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ba" = (
 /obj/structure/crystal/lava,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bb" = (
 /obj/structure/cliff/automatic{
 	dir = 4;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bc" = (
 /obj/structure/cliff/automatic{
 	dir = 6;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bd" = (
 /obj/structure/table/steel,
 /obj/item/excavation,
@@ -342,14 +342,14 @@
 	icon_state = "corner_oldtile"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "be" = (
 /turf/wall/natural,
 /area/template_noop)
 "bf" = (
 /obj/structure/railing/mapped,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bg" = (
 /obj/structure/cliff/automatic{
 	dir = 10;
@@ -357,7 +357,7 @@
 	},
 /obj/structure/railing/mapped,
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bh" = (
 /obj/structure/cliff/automatic/corner{
 	dir = 10;
@@ -365,11 +365,11 @@
 	},
 /obj/structure/railing/mapped,
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bi" = (
 /obj/structure/railing/mapped,
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bj" = (
 /obj/structure/cliff/automatic{
 	dir = 4;
@@ -377,31 +377,31 @@
 	},
 /obj/structure/railing/mapped,
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bk" = (
 /obj/structure/catwalk,
 /obj/structure/railing/mapped,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bl" = (
 /obj/structure/catwalk,
 /obj/structure/railing/mapped,
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bm" = (
 /obj/structure/fence/door/opened{
 	dir = 4;
 	icon_state = "door_opened"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bn" = (
 /obj/structure/cliff/automatic{
 	dir = 2;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bo" = (
 /obj/effect/floor_decal/corner_oldtile/purple/full{
 	dir = 1;
@@ -409,11 +409,11 @@
 	},
 /obj/machinery/space_heater,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bp" = (
 /obj/machinery/floodlight,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bq" = (
 /obj/machinery/newscaster{
 	pixel_y = 32
@@ -423,7 +423,7 @@
 	icon_state = "bulb1"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "br" = (
 /obj/effect/floor_decal/corner_oldtile/blue{
 	dir = 1;
@@ -434,24 +434,24 @@
 	icon_state = "officechair_white"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bs" = (
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bt" = (
 /obj/effect/floor_decal/corner_oldtile/purple{
 	dir = 4;
 	icon_state = "corner_oldtile"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bu" = (
 /obj/structure/cliff/automatic/corner{
 	dir = 6;
 	icon_state = "cliffbuilder-corner"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bv" = (
 /obj/effect/floor_decal/corner_oldtile/blue{
 	dir = 9;
@@ -459,14 +459,14 @@
 	},
 /obj/structure/table,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bw" = (
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bx" = (
 /obj/structure/crystal/ice,
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "by" = (
 /obj/machinery/ai_status_display{
 	pixel_y = 32
@@ -476,28 +476,28 @@
 	icon_state = "bulb1"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bz" = (
 /obj/effect/floor_decal/corner_oldtile{
 	dir = 1;
 	icon_state = "corner_oldtile"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bA" = (
 /obj/effect/floor_decal/corner_oldtile{
 	dir = 4;
 	icon_state = "corner_oldtile"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bB" = (
 /obj/effect/floor_decal/corner_oldtile/blue{
 	dir = 8;
 	icon_state = "corner_oldtile"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bC" = (
 /obj/structure/rack,
 /obj/item/tool/shovel,
@@ -507,14 +507,14 @@
 	},
 /obj/item/tool/drill,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bD" = (
 /turf/floor/lava,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bE" = (
 /obj/structure/crystal/lava,
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bF" = (
 /obj/structure/rack,
 /obj/random/tool/power,
@@ -524,22 +524,22 @@
 	icon_state = "corner_oldtile"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bG" = (
 /obj/effect/floor_decal/corner_oldtile/purple,
 /obj/structure/table/steel,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bH" = (
 /obj/effect/floor_decal/corner_oldtile/purple,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bI" = (
 /obj/item/gps/science{
 	gps_tag = "CRYSTALS"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bK" = (
 /obj/effect/floor_decal/corner_oldtile/blue/full,
 /obj/random/drinkbottle,
@@ -550,7 +550,7 @@
 	icon_state = "bulb1"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bL" = (
 /obj/structure/flora/pottedplant/crystal,
 /obj/effect/floor_decal/corner_oldtile/blue{
@@ -558,24 +558,24 @@
 	icon_state = "corner_oldtile"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bM" = (
 /obj/structure/cult/pylon,
 /obj/effect/floor_decal/industrial/outline,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bN" = (
 /obj/structure/anomaly_container,
 /obj/structure/artifact,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bO" = (
 /obj/machinery/light/small{
 	dir = 4;
 	icon_state = "bulb1"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bP" = (
 /obj/effect/floor_decal/corner_oldtile/purple/full{
 	dir = 4;
@@ -588,21 +588,21 @@
 	icon_state = "bulb1"
 	},
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bQ" = (
 /obj/machinery/light/small{
 	dir = 8;
 	icon_state = "bulb1"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bR" = (
 /obj/machinery/light/small{
 	dir = 1;
 	icon_state = "bulb1"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bS" = (
 /obj/effect/floor_decal/corner_oldtile/blue{
 	dir = 1;
@@ -614,23 +614,23 @@
 /obj/structure/table,
 /obj/item/scanner/health,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bT" = (
 /obj/machinery/suspension_gen{
 	anchored = 1
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bU" = (
 /obj/machinery/light/small,
 /obj/structure/ore_box,
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bW" = (
 /obj/structure/anomaly_container,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bX" = (
 /obj/effect/floor_decal/corner_oldtile/purple/full{
 	dir = 4;
@@ -640,65 +640,65 @@
 /obj/structure/table/steel,
 /obj/item/stack/flag/red,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "bY" = (
 /obj/structure/crystal,
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "bZ" = (
 /obj/structure/table/steel,
 /obj/item/stock_parts/subspace/crystal,
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "ca" = (
 /obj/structure/table/steel,
 /obj/item/stack/material/gemstone/mapped/diamond,
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "cb" = (
 /obj/structure/loot_pile/surface/bones,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "ce" = (
 /obj/effect/floor_decal/corner_oldtile/blue/full,
 /obj/structure/table,
 /obj/random/firstaid,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "ch" = (
 /obj/structure/loot_pile/maint/trash,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "cj" = (
 /obj/item/clothing/head/bio_hood/anomaly,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "ck" = (
 /obj/item/clothing/suit/bio_suit/anomaly,
 /turf/floor/tiled/old_tile,
-/area/cynosure_submap/lava_trench/outpost)
+/area/cynosure_submap/cave/lava_trench/outpost)
 "co" = (
 /obj/machinery/floodlight,
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "cp" = (
 /obj/machinery/light/small,
 /obj/structure/closet/crate/secure,
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "cq" = (
 /obj/item/banner/nanotrasen,
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "cr" = (
 /obj/structure/table/steel,
 /obj/item/shard/phoron,
 /turf/floor/tiled,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 "cs" = (
 /obj/item/banner/nanotrasen,
 /turf/floor/rock,
-/area/cynosure_submap/lava_trench)
+/area/cynosure_submap/cave/lava_trench)
 
 (1,1,1) = {"
 aB

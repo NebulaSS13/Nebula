@@ -17,21 +17,21 @@
 "ae" = (
 /obj/item/remains,
 /turf/template_noop,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "af" = (
 /turf/template_noop,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ag" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ah" = (
 /obj/effect/gibspawner/robot,
 /turf/template_noop,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ai" = (
 /turf/wall/natural,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aj" = (
 /obj/item/remains/robot,
 /turf/template_noop,
@@ -39,22 +39,22 @@
 "ak" = (
 /mob/living/simple_animal/hostile/malf_drone/lesser,
 /turf/template_noop,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "al" = (
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "am" = (
 /obj/item/remains/posi,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "an" = (
 /obj/machinery/porta_turret/poi,
 /turf/floor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ao" = (
 /obj/effect/decal/cleanable/blood,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ap" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
@@ -62,28 +62,28 @@
 "aq" = (
 /obj/effect/floor_decal/industrial/danger,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ar" = (
 /obj/machinery/light,
 /obj/effect/floor_decal/industrial/danger,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "as" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/industrial/danger,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "at" = (
 /turf/wall/concrete/reinforced,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "au" = (
 /obj/structure/sign/warning,
 /turf/wall/concrete/reinforced,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "av" = (
 /obj/machinery/door/airlock/external,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aw" = (
 /obj/item/remains/deer,
 /turf/template_noop,
@@ -100,10 +100,10 @@
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ay" = (
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "az" = (
 /obj/structure/hygiene/shower{
 	dir = 8;
@@ -114,73 +114,73 @@
 /obj/structure/curtain/open/shower,
 /obj/item/soap,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aA" = (
 /obj/structure/table/wood,
 /obj/effect/decal/cleanable/cobweb,
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aB" = (
 /obj/structure/table/wood,
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aC" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp,
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aD" = (
 /obj/structure/closet/cabinet,
 /obj/item/gun/energy/plasmacutter,
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aE" = (
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aF" = (
 /obj/structure/bed,
 /obj/item/bedsheet,
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aG" = (
 /obj/structure/table/wood,
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aH" = (
 /obj/structure/bed,
 /obj/item/bedsheet,
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aI" = (
 /obj/structure/bed,
 /obj/item/bedsheet,
 /obj/item/toy/plushie/spider,
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aJ" = (
 /obj/structure/closet/l3closet/janitor,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aK" = (
 /mob/living/bot/cleanbot,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aL" = (
 /obj/item/stool,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aM" = (
 /obj/item/belt/janitor,
 /obj/structure/table,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aN" = (
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aO" = (
 /obj/structure/table,
 /obj/item/modular_computer/laptop/preset/custom_loadout/cheap,
@@ -189,7 +189,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aP" = (
 /obj/structure/table,
 /obj/effect/floor_decal/corner/red/border{
@@ -197,7 +197,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aQ" = (
 /obj/structure/rack,
 /obj/effect/floor_decal/corner/red/border{
@@ -206,7 +206,7 @@
 	},
 /obj/random/handgun,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aR" = (
 /obj/structure/rack,
 /obj/effect/floor_decal/corner/red/border{
@@ -215,7 +215,7 @@
 	},
 /obj/random/energy,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aS" = (
 /obj/machinery/light{
 	dir = 1
@@ -225,7 +225,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aT" = (
 /obj/machinery/vending/coffee,
 /obj/effect/floor_decal/corner/red/border{
@@ -233,16 +233,16 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aU" = (
 /turf/floor/tiled/techfloor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aV" = (
 /obj/structure/rack,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/random/shotgun,
 /turf/floor/tiled/techfloor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aW" = (
 /obj/machinery/vending/hydronutrients,
 /obj/effect/floor_decal/corner/lime/border{
@@ -250,7 +250,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aX" = (
 /obj/structure/closet/crate/hydroponics,
 /obj/effect/floor_decal/corner/lime/border{
@@ -258,7 +258,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aY" = (
 /obj/structure/hygiene/shower{
 	dir = 4;
@@ -268,7 +268,7 @@
 	},
 /obj/structure/curtain/open/shower,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "aZ" = (
 /obj/structure/hygiene/shower{
 	dir = 8;
@@ -278,11 +278,11 @@
 	},
 /obj/structure/curtain/open/shower,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ba" = (
 /obj/structure/janitorialcart,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bb" = (
 /obj/structure/table,
 /obj/item/grenade/chem_grenade/cleaner,
@@ -293,13 +293,13 @@
 	icon_state = "tube1"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bc" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bd" = (
 /obj/structure/table,
 /obj/item/paper{
@@ -311,17 +311,17 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "be" = (
 /obj/structure/chair{
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bf" = (
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bg" = (
 /obj/machinery/vending/security,
 /obj/effect/floor_decal/corner/red/border{
@@ -329,21 +329,21 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bh" = (
 /obj/structure/rack,
 /obj/item/box/ammo/shotgunshells,
 /obj/item/box/ammo/shotgunshells,
 /obj/item/cell/gun,
 /turf/floor/tiled/techfloor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bi" = (
 /obj/effect/floor_decal/corner/lime/border{
 	dir = 8;
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bj" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -356,7 +356,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bk" = (
 /obj/structure/hygiene/shower{
 	dir = 8;
@@ -370,36 +370,36 @@
 	pixel_y = 0
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bl" = (
 /obj/item/mech_component/propulsion/combat/painted,
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bm" = (
 /obj/machinery/light,
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bn" = (
 /obj/structure/bed,
 /obj/item/bedsheet,
 /obj/item/gun/projectile/pistol,
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bo" = (
 /obj/structure/closet/crate/trashcart,
 /obj/random/soap,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bp" = (
 /obj/structure/loot_pile/maint/trash,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bq" = (
 /obj/structure/table,
 /obj/item/bag/trash,
 /obj/item/bag/trash,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "br" = (
 /obj/structure/table,
 /obj/item/paper_bin,
@@ -408,39 +408,39 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bs" = (
 /obj/machinery/light,
 /obj/structure/table,
 /obj/item/pen,
 /obj/effect/floor_decal/corner/red/border,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bt" = (
 /obj/effect/floor_decal/corner/red/border,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bu" = (
 /obj/effect/floor_decal/corner/red/border,
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bv" = (
 /obj/machinery/door/airlock/security{
 	icon_state = "door_locked";
 	locked = 1
 	},
 /turf/floor/tiled/techfloor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bw" = (
 /obj/machinery/light,
 /turf/floor/tiled/techfloor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bx" = (
 /obj/structure/rack,
 /obj/item/gun/energy/ionrifle,
 /turf/floor/tiled/techfloor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "by" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/floor_decal/corner/lime/border{
@@ -448,11 +448,11 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bz" = (
 /obj/machinery/door/airlock,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bA" = (
 /obj/effect/floor_decal/corner/lime/border{
 	dir = 8;
@@ -460,7 +460,7 @@
 	},
 /mob/living/bot/farmbot,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bB" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/light{
@@ -472,7 +472,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bC" = (
 /obj/item/remains/posi,
 /turf/template_noop,
@@ -483,13 +483,13 @@
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bE" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bF" = (
 /obj/machinery/light{
 	dir = 1
@@ -498,21 +498,21 @@
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bG" = (
 /obj/structure/door_assembly,
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bH" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bI" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/cobweb2,
@@ -520,91 +520,91 @@
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bK" = (
 /mob/living/simple_animal/hostile/malf_drone/lesser,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bL" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bM" = (
 /obj/effect/decal/cleanable/blood,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bN" = (
 /obj/item/remains,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bO" = (
 /obj/machinery/door/airlock,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bP" = (
 /obj/random/vendor/food,
 /obj/effect/floor_decal/borderfloor,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bQ" = (
 /obj/effect/floor_decal/borderfloor,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bR" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/floor_decal/borderfloor,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bS" = (
 /obj/item/stack/material/rods/mapped/steel,
 /obj/structure/girder,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bT" = (
 /obj/item/remains,
 /obj/effect/floor_decal/borderfloor,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bU" = (
 /obj/machinery/light,
 /obj/effect/floor_decal/borderfloor,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bV" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/borderfloor,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bW" = (
 /obj/item/mech_component/manipulators/combat/painted,
 /obj/effect/floor_decal/borderfloor,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bX" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bY" = (
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "bZ" = (
 /obj/machinery/door/airlock/engineering,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ca" = (
 /obj/effect/floor_decal/rust,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cb" = (
 /turf/wall/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cc" = (
 /obj/structure/table,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cd" = (
 /obj/structure/table,
 /obj/item/paper{
@@ -612,7 +612,7 @@
 	name = "V-Grenade Notice 2"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ce" = (
 /obj/structure/table,
 /obj/random/toolbox,
@@ -620,12 +620,12 @@
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cf" = (
 /obj/structure/table,
 /obj/random/toolbox,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cg" = (
 /obj/structure/table,
 /obj/item/paper{
@@ -633,7 +633,7 @@
 	name = "V-Grenade Notice 1"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ch" = (
 /obj/structure/table,
 /obj/item/stack/material/gemstone/mapped/diamond,
@@ -645,85 +645,85 @@
 /obj/item/stack/material/gemstone/mapped/diamond,
 /obj/item/stack/material/gemstone/mapped/diamond,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ci" = (
 /obj/structure/table,
 /obj/item/grenade/spawnergrenade/viscerator,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cj" = (
 /obj/structure/table,
 /obj/item/stack/material/sheet/mapped/steel,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ck" = (
 /obj/structure/table,
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cl" = (
 /obj/structure/door_assembly,
 /obj/effect/floor_decal/rust,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cm" = (
 /obj/item/shard,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cn" = (
 /obj/structure/table,
 /obj/item/stack/material/aerogel/mapped/tritium/fifty,
 /obj/random/tech_supply/component,
 /obj/random/tech_supply,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "co" = (
 /obj/machinery/vending/engivend,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cp" = (
 /obj/machinery/vending/tool,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cq" = (
 /obj/structure/table,
 /obj/item/toolbox,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cr" = (
 /obj/structure/table,
 /obj/item/toolbox/mechanical,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cs" = (
 /obj/item/mech_component/chassis/combat/painted,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "ct" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /obj/structure/closet/crate/medical,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cu" = (
 /obj/structure/table,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/chems/hypospray/autoinjector/large/burn,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cv" = (
 /obj/structure/table,
 /obj/item/clothing/mask/breath/medical,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cw" = (
 /obj/structure/closet/secure_closet/anesthetics,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cx" = (
 /obj/structure/hygiene/toilet{
 	dir = 4
@@ -732,7 +732,7 @@
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cy" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -741,100 +741,100 @@
 	pixel_y = 0
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cz" = (
 /obj/structure/table,
 /obj/item/organ/internal/brain/robotic,
 /obj/item/stock_parts/capacitor/adv,
 /obj/item/stock_parts/scanning_module/adv,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cA" = (
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cB" = (
 /obj/structure/cable{
 	icon_state = "4-8";
 	pixel_x = 0
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cC" = (
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
 /obj/machinery/port_gen/pacman,
 /turf/floor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cD" = (
 /obj/structure/door_assembly,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cE" = (
 /obj/item/stack/material/rods/mapped/steel,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cF" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/girder,
 /turf/floor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cG" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cH" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/table,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cI" = (
 /obj/structure/girder,
 /turf/floor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cJ" = (
 /obj/structure/closet/secure_closet/medical1,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cK" = (
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_y = 0
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cL" = (
 /mob/living/simple_animal/mob_mimic/exosuit/combat,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cM" = (
 /obj/machinery/drone_fabricator{
 	fabricator_tag = "Unknown"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cN" = (
 /obj/machinery/fabricator/industrial,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cO" = (
 /obj/machinery/fabricator/robotics,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cP" = (
 /obj/structure/table,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cQ" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cR" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable{
@@ -846,7 +846,7 @@
 	},
 /mob/living/simple_animal/hostile/malf_drone/lesser,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cS" = (
 /obj/machinery/power/terminal{
 	dir = 4
@@ -855,47 +855,47 @@
 	icon_state = "0-8"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cT" = (
 /obj/machinery/power/smes/buildable/preset/hidden,
 /obj/structure/cable/green{
 	icon_state = "0-2"
 	},
 /turf/floor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cU" = (
 /obj/machinery/vending/medical,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cV" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cW" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cX" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/item/shard,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cY" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "cZ" = (
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "da" = (
 /obj/structure/heavy_vehicle_frame,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dc" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dd" = (
 /obj/machinery/vending/robotics,
 /obj/machinery/light{
@@ -903,20 +903,20 @@
 	icon_state = "tube1"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "de" = (
 /obj/machinery/apc/hyper,
 /obj/structure/cable/green{
 	icon_state = "0-4"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "df" = (
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dg" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/cable{
@@ -927,7 +927,7 @@
 	icon_state = "4-8"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dh" = (
 /obj/machinery/light{
 	dir = 4;
@@ -940,20 +940,20 @@
 	icon_state = "2-8"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "di" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/blood,
 /turf/floor/concrete,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dj" = (
 /obj/effect/floor_decal/corner/lime/border{
 	dir = 4;
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dk" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -962,34 +962,34 @@
 	pixel_y = 0
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dl" = (
 /obj/machinery/vending,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dm" = (
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dn" = (
 /obj/machinery/power/smes/buildable/preset/hidden,
 /obj/structure/cable/green,
 /turf/floor,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "do" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/medical3,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dp" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /mob/living/simple_animal/hostile/malf_drone/lesser,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dq" = (
 /obj/structure/closet/secure_closet/hydroponics,
 /obj/effect/floor_decal/corner/lime/border{
@@ -997,7 +997,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dr" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/template_noop,
@@ -1005,51 +1005,51 @@
 "ds" = (
 /obj/machinery/light,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dt" = (
 /obj/machinery/mech_recharger,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "du" = (
 /obj/structure/table,
 /obj/item/stack/material/sheet/reinforced/mapped/plasteel,
 /obj/item/stack/material/pane/mapped/rglass,
 /obj/item/stack/material/crystal/mapped/phoron/twentyfive,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dv" = (
 /obj/structure/table,
 /obj/item/stack/material/pane/mapped/glass,
 /obj/item/stack/material/sheet/mapped/steel,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dw" = (
 /obj/structure/table,
 /obj/item/mech_component/sensors/combat/painted,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dx" = (
 /obj/structure/closet/toolcloset,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dy" = (
 /obj/structure/closet/secure_closet/medical3,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dz" = (
 /obj/item/surgicaldrill,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dA" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dB" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /mob/living/bot/medbot,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dC" = (
 /obj/machinery/vending/hydroseeds,
 /obj/effect/floor_decal/corner/lime/border{
@@ -1057,7 +1057,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dD" = (
 /obj/structure/closet/crate/secure/hydrosec,
 /obj/effect/floor_decal/corner/lime/border{
@@ -1065,7 +1065,7 @@
 	icon_state = "bordercolor"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "dE" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/structure/gravemarker{
@@ -1084,33 +1084,33 @@
 "fp" = (
 /obj/random/tech_supply/component,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "kv" = (
 /obj/random/maintenance,
 /turf/floor/tiled,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "mD" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/plating,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "yB" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "AA" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /turf/floor/plating,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "LQ" = (
 /obj/effect/decal/cleanable/dirt/visible,
 /obj/structure/table,
 /turf/floor/plating,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 "QX" = (
 /obj/structure/table/wood,
 /obj/random/maintenance,
 /turf/floor/holofloor/lino,
-/area/cynosure_submap/Rockybase)
+/area/cynosure_submap/rockybase)
 
 (1,1,1) = {"
 aa

@@ -7,168 +7,168 @@
 /area/template_noop)
 "c" = (
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "d" = (
 /obj/structure/cliff/automatic{
 	dir = 9;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "e" = (
 /obj/structure/cliff/automatic,
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "f" = (
 /obj/structure/cliff/automatic{
 	dir = 5;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "g" = (
 /obj/structure/cliff/automatic/corner{
 	dir = 9;
 	icon_state = "cliffbuilder-corner"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "h" = (
 /obj/random/boulder,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "i" = (
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "j" = (
 /obj/structure/cliff/automatic/corner,
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "k" = (
 /mob/living/exosuit/premade/powerloader,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "l" = (
 /obj/structure/cliff/automatic{
 	dir = 8;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "m" = (
 /obj/structure/table/sif,
 /obj/item/mech_equipment/drill/steel,
 /obj/item/stack/material/lump/large/marble,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "n" = (
 /obj/item/stack/material/ore/handful/sand,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "o" = (
 /obj/structure/table/sif,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "p" = (
 /obj/structure/cliff/automatic{
 	dir = 4;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "q" = (
 /obj/structure/table/sif,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "r" = (
 /obj/structure/table/sif,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "s" = (
 /obj/item/stack/material/lump/large/marble,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "t" = (
 /obj/item/stack/material/ore/gold,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "u" = (
 /obj/item/stack/material/ore/diamond,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "v" = (
 /mob/living/simple_animal/hostile/malf_drone/mining,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "w" = (
 /obj/structure/table/sif,
 /obj/item/tool/hammer/jack,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "x" = (
 /obj/structure/table/sif,
 /obj/random/scrapped_grenadelauncher,
 /obj/random/helmet,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "y" = (
 /obj/structure/table/sif,
 /obj/random/medical/pillbottle,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "z" = (
 /obj/structure/table/sif,
 /obj/item/grenade/chem_grenade/metalfoam,
 /obj/item/grenade/chem_grenade/metalfoam,
 /obj/item/grenade/chem_grenade/metalfoam,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "A" = (
 /obj/structure/table/sif,
 /obj/item/scanner/mining,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "B" = (
 /obj/structure/table/sif,
 /obj/random/smokes,
 /obj/random/tool/power,
 /turf/floor/rock,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "C" = (
 /obj/structure/cliff/automatic{
 	dir = 10;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "D" = (
 /obj/structure/cliff/automatic{
 	dir = 2;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "E" = (
 /obj/structure/cliff/automatic/corner{
 	dir = 10;
 	icon_state = "cliffbuilder-corner"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "F" = (
 /obj/structure/cliff/automatic/corner{
 	dir = 6;
 	icon_state = "cliffbuilder-corner"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 "G" = (
 /obj/structure/cliff/automatic{
 	dir = 6;
 	icon_state = "cliffbuilder"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/Excavation)
+/area/cynosure_submap/cave/excavation)
 
 (1,1,1) = {"
 a

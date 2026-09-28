@@ -1,5 +1,8 @@
 var/global/list/_wounds_being_tended_by_drakes = list()
 
+/datum/ability_handler/predator/grafadreka/proc/should_poison_friend(mob/living/friend)
+	return TRUE
+
 /datum/ability_handler/predator/grafadreka/proc/handle_wound_cleaning(mob/user, mob/living/friend)
 	// Can't heal ghosts or rocks.
 	if(!isliving(friend))
@@ -49,7 +52,7 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 		return TRUE
 
 	// Are we already regenerating?
-	if(friend.has_mob_modifier(/decl/mob_modifier/sifsap_salve))
+	if(friend.has_mob_modifier(/decl/mob_modifier/drake_salve))
 		if(friend == user)
 			to_chat(user, SPAN_WARNING("Your wounds have already been cleaned."))
 		else
@@ -57,7 +60,7 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 		return TRUE
 
 	// Do we have enough sap?
-	if(!drake_has_sap(user, 10))
+	if(!drake_has_spit(user, 10))
 		if(friend == user)
 			to_chat(user, SPAN_WARNING("You don't have enough sap to clean your wounds."))
 		else
@@ -72,7 +75,7 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 	var/friend_ref = "\ref[friend]"
 	global._wounds_being_tended_by_drakes[friend_ref] = world.time + (8 SECONDS)
 
-	if(!do_after(user, 8 SECONDS, friend) || QDELETED(friend) || friend.has_mob_modifier(/decl/mob_modifier/sifsap_salve) || user.incapacitated() || !drake_spend_sap(user, 10))
+	if(!do_after(user, 8 SECONDS, friend) || QDELETED(friend) || friend.has_mob_modifier(/decl/mob_modifier/drake_salve) || user.incapacitated() || !drake_spend_spit(user, 10))
 		global._wounds_being_tended_by_drakes -= friend_ref
 		return TRUE
 
@@ -86,20 +89,27 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 	// Sivian animals get a heal buff from the modifier, others just
 	// get it to stop friendly drakes constantly licking their wounds.
 	// Organ wounds are closed, but the owners get sifsap injected via open wounds.
-	friend.add_mob_modifier(/decl/mob_modifier/sifsap_salve, 60 SECONDS, source = user)
+	friend.add_mob_modifier(/decl/mob_modifier/drake_salve, 60 SECONDS, source = user)
+	var/decl/species/grafadreka/drakes = IMPLIED_DECL
 	var/list/friend_organs = friend.get_external_organs()
 	if(length(friend_organs))
 		for (var/obj/item/organ/external/E in friend_organs)
-			if(E.status & ORGAN_BLEEDING)
-				E.clamp_organ()
-				var/datum/reagents/bloodstream = friend.get_injected_reagents()
-				if(bloodstream)
-					bloodstream.add_reagent(/decl/material/liquid/sifsap, rand(1,2))
-			for (var/datum/wound/wound in E.wounds)
-				wound.clamped = TRUE // use this rather than bandaged to avoid message weirdness
-				wound.salve()
-				wound.disinfect()
+			drakes.treat_organ(E)
 	// Everyone else is just poisoned.
-	else if(!friend.has_trait(/decl/trait/sivian_biochemistry))
+	else if(drakes.should_poison_creature(friend))
 		friend.take_damage(rand(1,2), TOX)
 	return TRUE
+
+/decl/species/grafadreka/proc/treat_organ(obj/item/organ/external/limb)
+	. = FALSE
+	if(limb.status & ORGAN_BLEEDING)
+		limb.clamp_organ()
+		. = TRUE
+	for (var/datum/wound/wound in limb.wounds)
+		wound.clamped = TRUE // use this rather than bandaged to avoid message weirdness
+		wound.salve()
+		wound.disinfect()
+		. = TRUE
+	if(.)
+		var/datum/reagents/bloodstream = limb.owner?.get_injected_reagents()
+		bloodstream?.add_reagent(/decl/material/liquid/drake_spit, rand(1,2))

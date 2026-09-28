@@ -1,36 +1,36 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/template_noop,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "b" = (
 /turf/floor/barren,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "c" = (
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "d" = (
 /turf/wall/brick/sandstone,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "e" = (
 /obj/effect/decal/cleanable/cobweb,
 /obj/random/maintenance,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "f" = (
 /obj/item/remains/mummy1,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "g" = (
 /turf/wall/brick/sandstonediamond,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "h" = (
 /obj/item/flame/candle/infinite/red,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "i" = (
 /obj/item/ectoplasm,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "j" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/coin/iron,
@@ -45,7 +45,7 @@
 /obj/effect/decal/cleanable/cobweb,
 /obj/random/coin,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "k" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/coin/gold,
@@ -61,79 +61,79 @@
 /obj/item/coin/silver,
 /obj/item/coin/silver,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "l" = (
 /obj/item/remains/xeno,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "m" = (
 /obj/effect/decal/cleanable/cobweb2,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "n" = (
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "o" = (
 /obj/structure/loot_pile/maint/technical,
 /obj/effect/decal/cleanable/cobweb2,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "p" = (
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "q" = (
 /obj/structure/table/wood,
 /obj/item/flame/fuelled/lighter/zippo,
 /obj/item/clothing/mask/smokable/pipe,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "r" = (
 /obj/effect/rune,
 /obj/item/remains/human,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "s" = (
 /obj/effect/decal/cleanable/blood,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "t" = (
 /obj/structure/artifact,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "u" = (
 /obj/structure/chair/comfy/brown{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/blood,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "v" = (
 /obj/structure/table/wood,
 /obj/item/paper,
 /obj/item/pen,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "w" = (
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "x" = (
 /obj/item/remains/posi,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "y" = (
 /obj/structure/table/wood,
 /obj/item/candelabra/infinite,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "z" = (
 /obj/structure/door/gold,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "A" = (
 /obj/item/remains/posi,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "B" = (
 /obj/structure/crystal{
 	icon_state = "crystal3";
@@ -146,7 +146,7 @@
 "C" = (
 /obj/structure/flora/pottedplant/dead,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "D" = (
 /obj/structure/crystal{
 	icon_state = "crystal3";
@@ -154,59 +154,59 @@
 	light_power = 3
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "E" = (
 /obj/item/remains/human,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "F" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/remains/human,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "G" = (
 /obj/structure/table/wood,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "H" = (
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "I" = (
 /obj/structure/table/bench/wooden,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "J" = (
 /obj/effect/decal/cleanable/cobweb,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "K" = (
 /obj/structure/table/bench/wooden,
 /obj/item/remains/xeno,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "L" = (
 /obj/structure/door/sandstone,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "M" = (
 /obj/effect/decal/cleanable/cobweb,
 /obj/item/candelabra/infinite,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "N" = (
 /obj/effect/decal/cleanable/cobweb2,
 /obj/item/candelabra/infinite,
 /turf/floor/tiled,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "O" = (
 /obj/effect/decal/cleanable/blood,
 /turf/floor/barren,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 "U" = (
 /obj/structure/table/wood,
 /obj/item/candelabra/infinite,
 /turf/floor/carpet/blue2,
-/area/cynosure_submap/AbandonedTemple)
+/area/cynosure_submap/cave/abandoned_temple)
 
 (1,1,1) = {"
 a

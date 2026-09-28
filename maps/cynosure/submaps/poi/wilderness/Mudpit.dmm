@@ -5,59 +5,59 @@
 "b" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/dirt,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 "c" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 "d" = (
 /turf/floor/mud,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 "e" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/dirt,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 "f" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/dirt,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 "g" = (
 /obj/item/remains/mouse,
 /turf/floor/dirt,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 "h" = (
 /obj/item/remains/mouse,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/dirt,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 "i" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/template_noop,
 /area/template_noop)
 "j" = (
 /turf/wall/natural,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 "k" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/floor/dirt,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 "l" = (
 /obj/machinery/portable_atmospherics/canister/empty/phoron,
 /turf/floor/dirt,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 "m" = (
 /obj/item/remains,
 /obj/item/clothing/suit/space/void/merc,
 /obj/item/clothing/head/helmet/space/void/merc,
 /turf/floor/dirt,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 "n" = (
 /mob/living/simple_animal/hostile/giant_spider/thermic,
 /turf/floor/dirt,
-/area/cynosure_submap/Mudpit)
+/area/cynosure_submap/mudpit)
 
 (1,1,1) = {"
 a

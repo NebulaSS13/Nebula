@@ -4,53 +4,53 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "c" = (
 /turf/wall/natural,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "d" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "e" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "f" = (
 /obj/structure/flora/tree/pine,
 /turf/template_noop,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "g" = (
 /obj/structure/flora/bush/grassybush,
 /turf/template_noop,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "h" = (
 /obj/structure/flora/bush/fullgrass,
 /turf/template_noop,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "i" = (
 /obj/structure/flora/bush/sparsegrass,
 /turf/template_noop,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "j" = (
 /obj/structure/flora/bush/sunnybush,
 /turf/template_noop,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "k" = (
 /obj/structure/flora/bush/stalkybush,
 /turf/template_noop,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "l" = (
 /obj/structure/flora/tree/dead,
 /turf/template_noop,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "o" = (
 /obj/random/mre/spread/vegan,
 /turf/template_noop,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 "Z" = (
 /obj/random/contraband,
 /turf/template_noop,
-/area/cynosure_submap/Rocky2)
+/area/cynosure_submap/rocky2)
 
 (1,1,1) = {"
 a

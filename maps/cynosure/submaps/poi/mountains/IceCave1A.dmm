@@ -1,79 +1,79 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/wall/natural,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "c" = (
 /obj/abstract/exterior_marker/inside,
 /turf/floor/ice,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "d" = (
 /obj/structure/crystal/ice,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/ice,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "e" = (
 /obj/structure/loot_pile/surface/bones,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "f" = (
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "g" = (
 /obj/structure/crystal/ice,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "h" = (
 /obj/random/firstaid,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "i" = (
 /obj/random/ammo,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "j" = (
 /obj/random/boulder,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "r" = (
 /obj/random/medical,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "x" = (
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "B" = (
 /obj/structure/fire_source/firepit/sif,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "C" = (
 /obj/structure/loot_pile/surface/bones,
 /obj/item/clothing/suit/jacket/winter/science,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "E" = (
 /obj/random/material/precious,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "I" = (
 /obj/random/maintenance,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "K" = (
 /obj/item/clothing/shoes/winterboots,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "P" = (
 /obj/item/clothing/shoes/jackboots,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 "U" = (
 /obj/structure/loot_pile/surface/bones,
 /obj/item/clothing/suit/jacket/winter,
 /turf/floor/barren,
-/area/cynosure_submap/cave/IceCave1A)
+/area/cynosure_submap/cave/ice_cave_1a)
 
 (1,1,1) = {"
 b

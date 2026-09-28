@@ -1,18 +1,18 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
 /turf/floor/barren,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ab" = (
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ac" = (
 /obj/structure/lattice,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ad" = (
 /obj/effect/spider/stickyweb,
 /turf/floor/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ae" = (
 /obj/structure/sign/department/cross/green{
 	desc = "White cross in a green field, you can get medical aid here.";
@@ -21,21 +21,21 @@
 /turf/wall/shuttle{
 	unique_merge_identifier = "crashed_med_shuttle"
 	},
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "af" = (
 /obj/structure/grille,
 /obj/structure/shuttle/window,
 /turf/floor/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ag" = (
 /turf/wall/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ah" = (
 /obj/item/shard{
 	icon_state = "medium"
 	},
 /turf/floor/barren,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ai" = (
 /obj/item/shard{
 	icon_state = "medium"
@@ -43,7 +43,7 @@
 /obj/effect/decal/cleanable/blood/oil,
 /obj/structure/lattice,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aj" = (
 /obj/machinery/light/small{
 	dir = 4;
@@ -54,10 +54,10 @@
 	},
 /obj/effect/spider/stickyweb,
 /turf/floor/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ak" = (
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "al" = (
 /obj/item/toolbox/mechanical,
 /obj/machinery/light{
@@ -65,127 +65,127 @@
 	},
 /obj/structure/table,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "am" = (
 /obj/structure/table,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "an" = (
 /obj/structure/window/reinforced,
 /obj/effect/decal/cleanable/blood/oil,
 /obj/structure/loot_pile/surface/bones,
 /obj/structure/lattice,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ao" = (
 /obj/item/stock_parts/circuitboard/broken,
 /obj/structure/door_assembly/door_assembly_ext,
 /turf/floor/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ap" = (
 /obj/structure/door_assembly/door_assembly_ext,
 /turf/floor/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aq" = (
 /obj/abstract/landmark/mapped_fluid/fuel,
 /mob/living/simple_animal/hostile/giant_spider/ranged/webslinger,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ar" = (
 /obj/structure/closet/crate/medical,
 /obj/random/medical,
 /obj/random/medical,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "as" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "at" = (
 /obj/item/shard,
 /obj/structure/lattice,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "au" = (
 /obj/structure/closet/secure_closet/personal/patient,
 /obj/effect/spider/stickyweb,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "av" = (
 /obj/random/spider_mutant,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aw" = (
 /obj/machinery/door/airlock/glass,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ax" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ay" = (
 /obj/effect/decal/cleanable/blood,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "az" = (
 /obj/effect/decal/cleanable/blood/gibs/robot,
 /obj/item/firstaid/empty,
 /obj/item/robot_parts/l_arm,
 /mob/living/simple_animal/hostile/giant_spider/frost,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aA" = (
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/barren,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aB" = (
 /obj/structure/lattice,
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aC" = (
 /obj/effect/decal/cleanable/blood/oil,
 /obj/item/firstaid/empty,
 /obj/item/robot_parts/l_arm,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aD" = (
 /obj/structure/closet/secure_closet/personal/patient,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aE" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aF" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aG" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aH" = (
 /obj/machinery/recharge_station,
 /obj/abstract/landmark/mapped_fluid/fuel,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aI" = (
 /obj/structure/table,
 /obj/effect/spider/stickyweb,
 /obj/machinery/light,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aJ" = (
 /obj/structure/table,
 /obj/effect/spider/stickyweb,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aK" = (
 /obj/structure/table,
 /obj/item/shard{
@@ -193,7 +193,7 @@
 	},
 /obj/effect/spider/stickyweb,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aL" = (
 /obj/structure/grille/broken,
 /obj/item/shard{
@@ -201,15 +201,15 @@
 	},
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aM" = (
 /obj/item/shard,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aN" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aO" = (
 /obj/item/shard{
 	icon_state = "medium"
@@ -217,32 +217,32 @@
 /obj/effect/spider/stickyweb,
 /mob/living/simple_animal/hostile/giant_spider/carrier,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aP" = (
 /obj/effect/decal/cleanable/blood/gibs/robot,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aQ" = (
 /obj/effect/spider/stickyweb,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aR" = (
 /turf/wall/shuttle{
 	unique_merge_identifier = "crashed_med_shuttle"
 	},
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aS" = (
 /obj/effect/decal/cleanable/blood/oil,
 /obj/structure/loot_pile/surface/bones,
 /obj/structure/lattice,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aT" = (
 /obj/machinery/light,
 /obj/structure/table,
 /obj/effect/spider/stickyweb,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aU" = (
 /obj/structure/table,
 /obj/item/shard{
@@ -250,50 +250,50 @@
 	},
 /obj/random/medical,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aV" = (
 /obj/effect/spider/stickyweb,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aW" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aX" = (
 /obj/machinery/constructable_frame/computerframe,
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aY" = (
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "aZ" = (
 /obj/effect/spider/stickyweb,
 /turf/floor/barren,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ba" = (
 /obj/random/spider_mutant,
 /turf/floor/barren,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bb" = (
 /obj/effect/spider/cocoon,
 /turf/floor/barren,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bc" = (
 /obj/item/shard{
 	icon_state = "medium"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bd" = (
 /obj/item/stack/material/rods/mapped/steel,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "be" = (
 /obj/effect/spider/stickyweb,
 /obj/structure/girder/displaced,
 /obj/structure/lattice,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bf" = (
 /obj/machinery/light{
 	dir = 8;
@@ -308,25 +308,25 @@
 /obj/item/gps/internal/poi,
 /obj/structure/flora/tree/sif,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bg" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/structure/loot_pile/surface/bones,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/structure/lattice,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bh" = (
 /obj/structure/grille/broken,
 /obj/item/shard{
 	icon_state = "medium"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bi" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/floor/barren,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bj" = (
 /obj/item/shard,
 /obj/effect/spider/stickyweb,
@@ -337,93 +337,93 @@
 	},
 /obj/random/trash,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bk" = (
 /obj/effect/decal/cleanable/blood/oil,
 /obj/structure/lattice,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bl" = (
 /obj/effect/spider/stickyweb,
 /obj/item/shard,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bm" = (
 /obj/random/medical,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bn" = (
 /mob/living/simple_animal/hostile/giant_spider/ranged/webslinger,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bo" = (
 /obj/effect/spider/cocoon,
 /obj/structure/lattice,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bp" = (
 /turf/floor/shuttle/yellow,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bq" = (
 /obj/structure/flora/tree/sif,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "br" = (
 /obj/structure/grille/broken,
 /obj/item/shard,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bs" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/spider/stickyweb,
 /mob/living/simple_animal/hostile/giant_spider/ranged/webslinger,
 /turf/floor/barren,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bt" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/floor/barren,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bu" = (
 /obj/item/remains/tajaran,
 /obj/item/circular_saw,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bv" = (
 /obj/effect/decal/cleanable/blood/oil,
 /obj/effect/spider/stickyweb,
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bw" = (
 /obj/item/shard,
 /obj/structure/loot_pile/maint/technical,
 /obj/structure/lattice,
 /turf/floor/barren,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bx" = (
 /obj/structure/chair/office/light{
 	dir = 8
 	},
 /turf/floor/shuttle/purple,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "by" = (
 /obj/item/stock_parts/circuitboard/broken,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bz" = (
 /obj/structure/girder,
 /turf/template_noop,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bA" = (
 /obj/structure/girder/displaced,
 /turf/template_noop,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bB" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 8;
 	icon_state = "propulsion_r"
 	},
 /turf/floor/rock,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bC" = (
 /obj/structure/shuttle/engine/heater{
 	dir = 8;
@@ -433,52 +433,52 @@
 	dir = 4
 	},
 /turf/floor/barren,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bD" = (
 /obj/structure/table,
 /obj/item/firstaid/adv,
 /turf/floor/shuttle/purple,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bE" = (
 /obj/structure/table,
 /turf/floor/shuttle/purple,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bF" = (
 /obj/random/medical/pillbottle,
 /mob/living/simple_animal/hostile/giant_spider/ranged/webslinger,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bG" = (
 /obj/structure/table,
 /obj/item/defibrillator/loaded,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bH" = (
 /obj/structure/table,
 /obj/item/bodybag/cryobag,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bI" = (
 /obj/structure/table,
 /obj/item/box/bodybags,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bJ" = (
 /obj/machinery/light{
 	dir = 1
 	},
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bK" = (
 /obj/structure/table,
 /obj/item/retractor,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bL" = (
 /obj/item/shard,
 /obj/structure/grille,
 /turf/floor/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bM" = (
 /obj/machinery/light{
 	dir = 8
@@ -486,12 +486,12 @@
 /obj/structure/table,
 /obj/structure/loot_pile/maint/technical,
 /turf/floor/shuttle/purple,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bN" = (
 /obj/effect/decal/cleanable/blood/gibs/robot,
 /obj/effect/spider/cocoon,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bO" = (
 /obj/machinery/light{
 	dir = 4;
@@ -505,7 +505,7 @@
 	icon_state = "medium"
 	},
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bP" = (
 /obj/machinery/light{
 	dir = 8;
@@ -513,68 +513,68 @@
 	pixel_y = 0
 	},
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bQ" = (
 /obj/effect/spider/cocoon,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bR" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/structure/loot_pile/surface/bones,
 /obj/item/surgicaldrill,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bS" = (
 /obj/item/shard{
 	icon_state = "medium"
 	},
 /obj/structure/grille,
 /turf/floor/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bT" = (
 /obj/structure/table,
 /obj/item/scanner/reagent/adv,
 /turf/floor/shuttle/purple,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bU" = (
 /obj/structure/iv_drip,
 /obj/item/chems/ivbag,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bV" = (
 /mob/living/simple_animal/hostile/giant_spider/carrier,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bW" = (
 /obj/structure/table,
 /obj/item/box/masks,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bX" = (
 /obj/structure/table,
 /obj/random/firstaid,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bY" = (
 /obj/structure/table,
 /obj/item/backpack/medic,
 /obj/random/medical/lite,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "bZ" = (
 /obj/structure/table,
 /obj/effect/spider/stickyweb,
 /obj/random/medical,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ca" = (
 /obj/structure/girder,
 /turf/floor/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "cb" = (
 /obj/machinery/constructable_frame/machine_frame,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "cc" = (
 /obj/structure/table,
 /obj/structure/sign/periodic_table{
@@ -583,19 +583,19 @@
 /obj/item/bonesetter,
 /obj/item/scalpel,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "cd" = (
 /obj/machinery/optable,
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/structure/loot_pile/surface/bones,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ce" = (
 /obj/structure/table,
 /obj/item/bonegel,
 /obj/item/sutures,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "cf" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
 	id_tag = "crashed_med_shuttle";
@@ -605,19 +605,19 @@
 	},
 /obj/random/spider_mutant,
 /turf/floor/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "cg" = (
 /obj/structure/table,
 /obj/item/belt/medical/emt,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ch" = (
 /obj/structure/table,
 /obj/item/box/syringes,
 /obj/effect/spider/stickyweb,
 /obj/machinery/light,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "ci" = (
 /obj/machinery/door/airlock/external{
 	icon_state = "door_locked";
@@ -626,12 +626,12 @@
 	name = "Shuttle Hatch"
 	},
 /turf/floor/shuttle,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 "Vd" = (
 /obj/structure/table,
 /obj/item/chems/drinks/glass2/coffeecup/dais,
 /turf/floor/shuttle/white,
-/area/cynosure_submap/CrashedMedShuttle)
+/area/cynosure_submap/cave/crashed_med_shuttle)
 
 (1,1,1) = {"
 aa

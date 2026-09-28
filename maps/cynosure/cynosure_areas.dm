@@ -129,7 +129,7 @@
 
 
 // SECURITY AREAS
-/area/cynosure/security/
+/area/cynosure/security
 	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 	area_flags = AREA_FLAG_SECURITY | AREA_FLAG_CONSTRUCTED
 	req_access = list(access_security)

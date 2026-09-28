@@ -4,65 +4,65 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "c" = (
 /turf/wall/natural,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "d" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "e" = (
 /obj/structure/table/wood,
 /turf/template_noop,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "f" = (
 /obj/structure/table/wood,
 /obj/item/knife,
 /turf/template_noop,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "g" = (
 /obj/structure/flora/bush/palebush,
 /turf/template_noop,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "h" = (
 /obj/structure/table/wood,
 /obj/item/gun/energy/retro/empty,
 /turf/template_noop,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "i" = (
 /obj/structure/flora/bush/reedbush,
 /turf/template_noop,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "j" = (
 /turf/floor/rock,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "k" = (
 /obj/structure/flora/bush,
 /turf/template_noop,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "l" = (
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "m" = (
 /obj/structure/flora/bush/grassybush,
 /turf/template_noop,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "n" = (
 /mob/living/simple_animal/aquatic/fish/large/trout,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "o" = (
 /mob/living/simple_animal/aquatic/fish/large/salmon,
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "p" = (
 /turf/floor/rock/sand/water/deep,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 "q" = (
 /mob/living/simple_animal/aquatic/fish/large/bass,
 /turf/floor/rock/sand/water/deep,
-/area/cynosure_submap/PooledR)
+/area/cynosure_submap/pooled_rocks)
 
 (1,1,1) = {"
 a

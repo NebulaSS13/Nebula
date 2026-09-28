@@ -12,56 +12,52 @@
 	name = "POI - Spider Nest"
 	ambience = AMBIENCE_FOREBODING
 
-/area/cynosure_submap/Field1
-	name = "POI - Field"
-	ambience = AMBIENCE_SIF
-
-/area/cynosure_submap/Lake1
+/area/cynosure_submap/lake
 	name = "POI - Lake"
 	ambience = AMBIENCE_SIF
 
-/area/cynosure_submap/MilitaryCamp1
+/area/cynosure_submap/military_camp
 	name = "POI - Military Camp"
 	ambience = AMBIENCE_HIGHSEC
 
-/area/cynosure_submap/Mudpit
+/area/cynosure_submap/mudpit
 	name = "POI - Mudpit"
 	ambience = AMBIENCE_SIF
 
-/area/cynosure_submap/Rocky1
+/area/cynosure_submap/rocky1
 	name = "POI - Rocky Demise"
 	ambience = AMBIENCE_SIF
 
-/area/cynosure_submap/Rocky2
+/area/cynosure_submap/rocky2
 	name = "Rocky Crevice"
 	ambience = AMBIENCE_SIF
 
-/area/cynosure_submap/Rocky3
+/area/cynosure_submap/rocky3
 	name = "Rocky Valley"
 	ambience = AMBIENCE_SIF
 
-/area/cynosure_submap/Shack1
+/area/cynosure_submap/shack
 	name = "POI - Shack"
 	ambience = AMBIENCE_RUINS
 
-/area/cynosure_submap/Small1
+/area/cynosure_submap/snowy_thicket
 	name = "Snowy Thicket"
 	ambience = AMBIENCE_SIF
 
-/area/cynosure_submap/SnowR1
+/area/cynosure_submap/rocky_overhang
 	name = "POI - Rocky Overhang"
 	ambience = AMBIENCE_SIF
 
-/area/cynosure_submap/BoomBase
+/area/cynosure_submap/lab_crater
 	name = "POI - Lab Crater"
 	ambience = AMBIENCE_FOREBODING
 
-/area/cynosure_submap/Blackshuttledown
+/area/cynosure_submap/blackshuttledown
 	name = "POI - Black-Operative Shuttle"
 	requires_power = FALSE
 	ambience = AMBIENCE_HIGHSEC
 
-/area/cynosure_submap/Cragzone1
+/area/cynosure_submap/craggy_area
 	name = "Craggy Area"
 	ambience = AMBIENCE_SIF
 
@@ -69,7 +65,7 @@
 	name = "POI - Remote Lab"
 	ambience = AMBIENCE_RUINS
 
-/area/cynosure_submap/Rocky4
+/area/cynosure_submap/rocky4
 	name = "Rocky Pond"
 	ambience = AMBIENCE_SIF
 
@@ -85,7 +81,7 @@
 	name = "POI - Manhack Rock"
 	ambience = AMBIENCE_FOREBODING
 
-/area/cynosure_submap/Rockybase
+/area/cynosure_submap/rockybase
 	name = "POI - Rocky Base"
 	ambience = AMBIENCE_HIGHSEC
 
@@ -121,11 +117,11 @@
 	name = "POI - Manor House"
 	ambience = AMBIENCE_FOREBODING
 
-/area/cynosure_submap/Epod3
+/area/cynosure_submap/escape_pod3
 	name = "POI - Infested Escape Pod"
 	ambience = AMBIENCE_FOREBODING
 
-/area/cynosure_submap/Epod4
+/area/cynosure_submap/escape_pod4
 	name = "POI - Flooded Escape Pod"
 	ambience = AMBIENCE_FOREBODING
 

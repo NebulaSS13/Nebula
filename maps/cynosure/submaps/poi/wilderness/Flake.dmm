@@ -4,39 +4,39 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Lake1)
+/area/cynosure_submap/lake)
 "c" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Lake1)
+/area/cynosure_submap/lake)
 "d" = (
 /obj/structure/flora/bush/grassybush,
 /turf/template_noop,
-/area/cynosure_submap/Lake1)
+/area/cynosure_submap/lake)
 "e" = (
 /obj/structure/flora/tree/dead,
 /turf/template_noop,
-/area/cynosure_submap/Lake1)
+/area/cynosure_submap/lake)
 "f" = (
 /turf/floor/rock,
-/area/cynosure_submap/Lake1)
+/area/cynosure_submap/lake)
 "g" = (
 /obj/structure/flora/bush/palebush,
 /turf/template_noop,
-/area/cynosure_submap/Lake1)
+/area/cynosure_submap/lake)
 "h" = (
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Lake1)
+/area/cynosure_submap/lake)
 "i" = (
 /turf/floor/dirt,
-/area/cynosure_submap/Lake1)
+/area/cynosure_submap/lake)
 "j" = (
 /turf/wall/natural,
-/area/cynosure_submap/Lake1)
+/area/cynosure_submap/lake)
 "k" = (
 /obj/structure/flora/bush/stalkybush,
 /turf/template_noop,
-/area/cynosure_submap/Lake1)
+/area/cynosure_submap/lake)
 
 (1,1,1) = {"
 a

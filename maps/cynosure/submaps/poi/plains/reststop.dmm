@@ -354,7 +354,7 @@
 /turf/floor/tiled/freezer,
 /area/cynosure_submap/reststop)
 "Na" = (
-/obj/structure/flora/sif/frostbelle,
+/obj/structure/flora/plant/sif/frostbelle,
 /turf/floor/grass/sif,
 /area/cynosure_submap/reststop)
 "Oo" = (

@@ -7,3 +7,8 @@
 #ifdef MODPACK_FANTASY
 #include "drakes/fantasy_drakes.dm"
 #endif
+
+// Add Sivian biochemistry to drakes from Polaris modpack
+#ifdef MODPACK_POLARIS
+#include "drakes/polaris_drakes.dm"
+#endif

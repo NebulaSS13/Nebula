@@ -5,61 +5,61 @@
 "b" = (
 /obj/random/turf_lava,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 "c" = (
 /turf/floor/rock,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 "d" = (
 /obj/structure/fence{
 	icon_state = "corner";
 	dir = 9
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 "e" = (
 /obj/structure/fence{
 	icon_state = "straight";
 	dir = 8
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 "f" = (
 /obj/structure/fence{
 	icon_state = "corner";
 	dir = 5
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 "g" = (
 /obj/structure/fence/cut/large,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 "h" = (
 /mob/living/simple_animal/hostile/viscerator,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 "i" = (
 /obj/structure/fence,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 "j" = (
 /obj/structure/fence{
 	icon_state = "corner";
 	dir = 10
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 "k" = (
 /obj/structure/fence/door/locked,
 /turf/floor/rock,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 "l" = (
 /obj/structure/fence{
 	icon_state = "corner";
 	dir = 6
 	},
 /turf/floor/rock,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 "m" = (
 /obj/abstract/map_effect/interval/effect_emitter/steam,
 /obj/abstract/map_effect/interval/effect_emitter/smoke/mist{
@@ -76,7 +76,7 @@
 /obj/random/medical/lite,
 /obj/abstract/exterior_marker/inside,
 /turf/floor/rock/sand/water/deep,
-/area/cynosure_submap/geyser_2)
+/area/cynosure_submap/cave/geyser_2)
 
 (1,1,1) = {"
 a

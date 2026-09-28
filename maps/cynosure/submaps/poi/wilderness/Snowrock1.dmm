@@ -4,33 +4,33 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/SnowR1)
+/area/cynosure_submap/rocky_overhang)
 "c" = (
 /turf/wall/natural,
-/area/cynosure_submap/SnowR1)
+/area/cynosure_submap/rocky_overhang)
 "d" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/SnowR1)
+/area/cynosure_submap/rocky_overhang)
 "e" = (
 /obj/structure/loot_pile/maint/trash,
 /turf/floor/barren,
-/area/cynosure_submap/SnowR1)
+/area/cynosure_submap/rocky_overhang)
 "f" = (
 /obj/structure/closet/crate/trashcart,
 /turf/floor/barren,
-/area/cynosure_submap/SnowR1)
+/area/cynosure_submap/rocky_overhang)
 "g" = (
 /turf/floor/barren,
-/area/cynosure_submap/SnowR1)
+/area/cynosure_submap/rocky_overhang)
 "h" = (
 /obj/random/trash,
 /turf/floor/barren,
-/area/cynosure_submap/SnowR1)
+/area/cynosure_submap/rocky_overhang)
 "W" = (
 /obj/random/maintenance,
 /turf/floor/barren,
-/area/cynosure_submap/SnowR1)
+/area/cynosure_submap/rocky_overhang)
 
 (1,1,1) = {"
 a

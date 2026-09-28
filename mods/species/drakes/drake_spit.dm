@@ -1,3 +1,18 @@
+// Might be fun to make this useful for something down the track.
+/decl/material/liquid/drake_spit
+	name = "drake spittle"
+	uid = "chem_liquid_drake_spit"
+	lore_text = "A noxious bacterial slurry churned up in a drake's gullet. Poisonous to almost anything that isn't a drake."
+	taste_description = "noxious foulness"
+	color = "#455c4a"
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
+
+/decl/material/liquid/drake_spit/affect_blood(mob/living/M, removed, datum/reagents/holder)
+	. = ..()
+	var/decl/species/grafadreka/drakes = IMPLIED_DECL
+	if(drakes.should_poison_creature(M))
+		M.take_damage(TOX, 1)
+
 /obj/item/projectile/drake_spit
 	name = "drake spittle"
 	icon_state = "ice_1"
@@ -10,7 +25,7 @@
 	weaken = 3
 	eyeblur = 5
 	fire_sound = 'mods/species/drakes/sounds/drake_spit.ogg'
-	material = /decl/material/liquid/sifsap
+	material = /decl/material/liquid/drake_spit
 
 /obj/item/projectile/drake_spit/on_hit(atom/target, blocked, def_zone)
 	// Stun is needed to effectively hunt simplemobs, but it's OP against humans.

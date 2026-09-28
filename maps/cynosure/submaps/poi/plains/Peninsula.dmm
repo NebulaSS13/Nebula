@@ -4,36 +4,36 @@
 /area/template_noop)
 "b" = (
 /turf/template_noop,
-/area/cynosure_submap/Peninsula)
+/area/cynosure_submap/peninsula)
 "c" = (
 /turf/floor/rock,
-/area/cynosure_submap/Peninsula)
+/area/cynosure_submap/peninsula)
 "d" = (
 /turf/floor/rock/sand/water,
-/area/cynosure_submap/Peninsula)
+/area/cynosure_submap/peninsula)
 "e" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,
-/area/cynosure_submap/Peninsula)
+/area/cynosure_submap/peninsula)
 "f" = (
 /turf/wall/natural,
-/area/cynosure_submap/Peninsula)
+/area/cynosure_submap/peninsula)
 "g" = (
 /obj/structure/table/wood,
 /obj/item/flashlight,
 /turf/template_noop,
-/area/cynosure_submap/Peninsula)
+/area/cynosure_submap/peninsula)
 "h" = (
 /obj/structure/table/wood,
 /obj/item/cell/device,
 /obj/item/cell/device,
 /obj/random/tech_supply,
 /turf/template_noop,
-/area/cynosure_submap/Peninsula)
+/area/cynosure_submap/peninsula)
 "i" = (
 /obj/structure/fire_source/firepit/fuelled,
 /turf/template_noop,
-/area/cynosure_submap/Peninsula)
+/area/cynosure_submap/peninsula)
 "j" = (
 /obj/structure/flora/tree/sif,
 /turf/template_noop,

@@ -10,14 +10,6 @@
 /decl/language/grafadreka
 	desc = "Hiss hiss, feed me rabbits."
 
-/decl/material/liquid/sifsap
-	name = "drake spittle"
-	lore_text = "A complex chemical slurry brewed up in the gullet of meredrakes."
-
-/decl/mob_modifier/sifsap_salve
-	name = "Drakespittle Salve"
-	desc = "glowing spittle"
-
 /decl/bodytype/quadruped/grafadreka
 	base_color           = "#8f974a"
 	base_eye_color       = "#d95763"

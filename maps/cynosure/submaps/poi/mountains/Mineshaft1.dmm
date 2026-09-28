@@ -5,125 +5,125 @@
 "aS" = (
 /obj/structure/window/reinforced/full,
 /turf/floor,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "bd" = (
 /obj/structure/table,
 /obj/item/cell/high,
 /obj/item/cell/high,
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "cv" = (
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "dg" = (
 /obj/machinery/apc{
 	operating = 0;
 	pixel_x = 31
 	},
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "dk" = (
 /obj/machinery/door/airlock,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "dl" = (
 /obj/structure/sign/poster,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "fe" = (
 /obj/structure/bed,
 /obj/item/bedsheet/yellow,
 /obj/machinery/light,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "ga" = (
 /obj/machinery/light/small,
 /turf/floor/barren,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "gg" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "gO" = (
 /obj/structure/closet/crate/trashcart,
 /obj/random/tool/power,
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "hi" = (
 /obj/effect/floor_decal/industrial/danger{
 	dir = 4
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "iF" = (
 /obj/structure/table,
 /obj/item/chems/drinks/glass2/coffeecup/one{
 	name = "#1 miner coffee mug"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "iQ" = (
 /obj/effect/floor_decal/industrial/danger{
 	dir = 1
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "iS" = (
 /turf/floor/barren,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "jp" = (
 /obj/random/vendor/drink,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "jK" = (
 /obj/structure/closet/crate,
 /obj/random/tool,
 /obj/random/tool,
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "jN" = (
 /obj/effect/floor_decal/industrial/danger/corner{
 	dir = 4
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "kf" = (
 /obj/structure/bed,
 /obj/item/bedsheet/brown,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "ki" = (
 /turf/wall/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "kj" = (
 /obj/effect/floor_decal/rust/part_rusted2,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "lQ" = (
 /obj/machinery/door/airlock,
 /turf/floor,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "lW" = (
 /obj/random/boulder,
 /turf/floor/barren,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "mk" = (
 /obj/structure/table,
 /obj/structure/bedsheetbin,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "mw" = (
 /obj/structure/loot_pile/exosuit/powerloader,
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "nx" = (
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "oo" = (
 /obj/item/stack/material/ore/gold,
 /obj/item/stack/material/ore/gold,
@@ -131,39 +131,39 @@
 /obj/item/stack/material/ore/gold,
 /obj/item/stack/material/ore/gold,
 /turf/floor/barren,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "oR" = (
 /obj/machinery/light/small/red,
 /turf/floor/barren,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "oT" = (
 /obj/structure/ore_box,
 /turf/floor/barren,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "pr" = (
 /obj/effect/floor_decal/industrial/danger/corner,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "ri" = (
 /obj/item/stack/material/ore/gold,
 /turf/floor/barren,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "rN" = (
 /obj/structure/bed,
 /obj/item/bedsheet/brown,
 /obj/random/plushie,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "sT" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "vA" = (
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "vO" = (
 /obj/structure/bed,
 /obj/item/bedsheet/yellow,
@@ -172,70 +172,70 @@
 	icon_state = "tube1"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "wv" = (
 /obj/random/vendor/food,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "xS" = (
 /obj/structure/table,
 /obj/item/toy/figure/miner,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "zq" = (
 /obj/structure/loot_pile/maint/trash,
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "Ak" = (
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "AG" = (
 /obj/structure/table,
 /obj/item/pizzabox,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "AN" = (
 /turf/wall/natural,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "BD" = (
 /obj/machinery/light/small,
 /obj/effect/floor_decal/industrial/danger,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "BO" = (
 /obj/machinery/light,
 /obj/machinery/space_heater,
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "Cm" = (
 /obj/machinery/light{
 	dir = 1;
 	icon_state = "tube1"
 	},
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "Eb" = (
 /obj/structure/bed,
 /obj/item/bedsheet/yellow,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "Fd" = (
 /obj/effect/floor_decal/rust/part_rusted2{
 	dir = 8
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "Fo" = (
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "FU" = (
 /obj/machinery/space_heater,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "Ih" = (
 /obj/machinery/light/small{
 	dir = 4;
@@ -245,54 +245,54 @@
 	dir = 4
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "Iw" = (
 /obj/structure/table,
 /obj/item/clothing/jumpsuit/miner,
 /obj/item/clothing/head/helmet/space/void,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "IS" = (
 /obj/item/stool,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "IT" = (
 /obj/structure/table,
 /obj/item/chems/drinks/glass2/coffeecup/metal,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "KP" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
 /turf/floor/barren,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "KW" = (
 /obj/effect/floor_decal/industrial/danger{
 	dir = 6
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "LH" = (
 /obj/machinery/door/airlock,
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "MP" = (
 /obj/effect/floor_decal/industrial/danger,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "NC" = (
 /obj/machinery/space_heater,
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "Ox" = (
 /obj/structure/closet/secure_closet/engineering_welding,
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "PA" = (
 /obj/item/remains/lizard,
 /turf/floor/concrete,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "QL" = (
 /obj/item/stack/material/ore/gold,
 /obj/item/stack/material/ore/gold,
@@ -307,36 +307,36 @@
 /obj/item/stack/material/ore/gold,
 /obj/item/stack/material/ore/gold,
 /turf/floor/barren,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "RQ" = (
 /obj/structure/rack,
 /obj/item/tool/drill,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "Sg" = (
 /obj/structure/ore_box,
 /obj/effect/floor_decal/industrial/danger{
 	dir = 4
 	},
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "VF" = (
 /obj/item/trash/candy/proteinbar,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "Yw" = (
 /obj/effect/floor_decal/rust/part_rusted1,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "YR" = (
 /obj/machinery/washing_machine,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 "ZR" = (
 /obj/structure/table,
 /obj/item/flashlight/lamp,
 /turf/floor/tiled,
-/area/cynosure_submap/cave/AMine1)
+/area/cynosure_submap/cave/abandoned_mine)
 
 (1,1,1) = {"
 ax
