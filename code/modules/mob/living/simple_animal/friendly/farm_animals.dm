@@ -60,7 +60,7 @@
 	if(istype(food))
 		body.stop_automove()
 		body.set_intent(I_FLAG_HELP)
-		body.ClickOn(food)
+		body.try_click_on(food)
 	else if(!LAZYLEN(body.grabbed_by))
 		food = find_edible_atom(oview(5, body.loc))
 		if(istype(food))
