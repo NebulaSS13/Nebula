@@ -42,14 +42,14 @@
 // Raises germ level of wounds on attack.
 /decl/natural_attack/bite/sharp/drake/apply_attack_effects(mob/living/user, mob/living/target, attack_damage, zone)
 	. = ..()
-	if(. && drake_spend_sap(user, 5))
+	if(. && drake_spend_spit(user, 5))
 		var/obj/item/organ/external/bit = target.get_organ(zone)
 		if(bit)
 			drake_infect_wounds(bit)
 
 /decl/natural_attack/claws/strong/drake/apply_attack_effects(mob/living/user, mob/living/target, attack_damage, zone)
 	. = ..()
-	if(. && drake_spend_sap(user, 5))
+	if(. && drake_spend_spit(user, 5))
 		var/obj/item/organ/external/bit = target.get_organ(zone)
 		if(bit)
 			drake_infect_wounds(bit)

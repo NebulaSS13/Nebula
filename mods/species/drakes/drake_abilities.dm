@@ -14,7 +14,7 @@
 	if(world.time < next_spit)
 		to_chat(user, SPAN_WARNING("You cannot spit again so soon!"))
 		return TRUE
-	if(!drake_spend_sap(user, 1))
+	if(!drake_spend_spit(user, 1))
 		to_chat(user, SPAN_WARNING("You do not have enough sap stored to spit!"))
 		return TRUE
 	next_spit = world.time + 3 SECONDS

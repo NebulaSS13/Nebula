@@ -60,7 +60,7 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 		return TRUE
 
 	// Do we have enough sap?
-	if(!drake_has_sap(user, 10))
+	if(!drake_has_spit(user, 10))
 		if(friend == user)
 			to_chat(user, SPAN_WARNING("You don't have enough sap to clean your wounds."))
 		else
@@ -75,7 +75,7 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 	var/friend_ref = "\ref[friend]"
 	global._wounds_being_tended_by_drakes[friend_ref] = world.time + (8 SECONDS)
 
-	if(!do_after(user, 8 SECONDS, friend) || QDELETED(friend) || friend.has_mob_modifier(/decl/mob_modifier/drake_salve) || user.incapacitated() || !drake_spend_sap(user, 10))
+	if(!do_after(user, 8 SECONDS, friend) || QDELETED(friend) || friend.has_mob_modifier(/decl/mob_modifier/drake_salve) || user.incapacitated() || !drake_spend_spit(user, 10))
 		global._wounds_being_tended_by_drakes -= friend_ref
 		return TRUE
 
@@ -110,3 +110,6 @@ var/global/list/_wounds_being_tended_by_drakes = list()
 		wound.salve()
 		wound.disinfect()
 		. = TRUE
+	if(.)
+		var/datum/reagents/bloodstream = limb.owner?.get_injected_reagents()
+		bloodstream?.add_reagent(/decl/material/liquid/drake_spit, rand(1,2))
