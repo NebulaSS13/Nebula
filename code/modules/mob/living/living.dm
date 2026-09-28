@@ -1782,8 +1782,8 @@ default behaviour is:
 /mob/living/proc/handle_ranged_attack(atom/target)
 	if(istype(target))
 		for(var/obj/item/gun/gun in get_held_items())
-			gun.afterattack(target, src, target.Adjacent(src))
-		return TRUE
+			addtimer(CALLBACK(gun, TYPE_PROC_REF(/obj/item, afterattack), target, src, target.Adjacent(src)), 0)
+			return TRUE
 	return FALSE
 
 /mob/living/proc/can_pry_door()

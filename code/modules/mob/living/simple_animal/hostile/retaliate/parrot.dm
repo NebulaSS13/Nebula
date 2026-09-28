@@ -258,9 +258,8 @@
 				return
 
 			//Time for the hurt to begin!
-			parrot.UnarmedAttack(L, parrot.Adjacent(L))
+			parrot.try_unarmed_attack(L, parrot.Adjacent(L))
 			return
-
 		//Otherwise, fly towards the mob!
 		else
 			parrot.set_moving_quickly()

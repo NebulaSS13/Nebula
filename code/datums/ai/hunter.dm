@@ -18,7 +18,7 @@
 
 /datum/mob_controller/passive/hunter/proc/try_attack_prey(mob/living/prey)
 	body.a_intent = I_HURT
-	body.ClickOn(prey)
+	body.try_click_on(prey)
 
 /datum/mob_controller/passive/hunter/proc/consume_prey(mob/living/prey)
 	body.visible_message(SPAN_DANGER("\The [body] consumes the body of \the [prey]!"))

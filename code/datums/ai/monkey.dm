@@ -19,9 +19,9 @@
 		if(T)
 			if(istype(held, /obj/item/gun) && prob(40))
 				var/obj/item/gun/G = held
-				G.Fire(T, body)
-			else
-				body.mob_throw_item(T)
+				addtimer(CALLBACK(G, TYPE_PROC_REF(/obj/item/gun, Fire), T, body), 0)
+				return
+			body.mob_throw_item(T)
 		else
 			body.try_unequip(held)
 
