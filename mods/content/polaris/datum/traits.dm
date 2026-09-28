@@ -1,3 +1,7 @@
+/decl/trait/sivian_biochemistry
+	name = "Sivian Biochemistry"
+	description = "This lifeform is adapted to the complex bacteria of the garden world of Sif."
+
 /mob/living/simple_animal/crab/sif/Initialize()
 	. = ..()
 	set_trait(/decl/trait/sivian_biochemistry, TRAIT_LEVEL_EXISTS)

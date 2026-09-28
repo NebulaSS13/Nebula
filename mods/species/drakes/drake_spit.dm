@@ -10,7 +10,6 @@
 	weaken = 3
 	eyeblur = 5
 	fire_sound = 'mods/species/drakes/sounds/drake_spit.ogg'
-	material = /decl/material/liquid/sifsap
 
 /obj/item/projectile/drake_spit/on_hit(atom/target, blocked, def_zone)
 	// Stun is needed to effectively hunt simplemobs, but it's OP against humans.

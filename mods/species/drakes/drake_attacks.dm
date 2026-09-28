@@ -1,5 +1,7 @@
-/proc/drake_infect_wounds(var/obj/item/organ/external/bitten)
-	if(bitten.owner?.has_trait(/decl/trait/sivian_biochemistry))
+/proc/drake_infect_wounds(obj/item/organ/external/bitten)
+
+	var/decl/species/grafadreka/drakes = IMPLIED_DECL
+	if(!drakes.should_poison_creature(bitten?.owner))
 		return
 	var/list/open_wounds = list()
 	for(var/datum/wound/wound in bitten?.wounds)
@@ -14,6 +16,9 @@
 	for(var/datum/wound/wound in open_wounds)
 		wound.germ_level += germs_per_wound
 		wound.disinfected = FALSE
+
+/decl/species/grafadreka/proc/check_can_infect_wounds(obj/item/organ/external/bitten)
+	return TRUE
 
 // 50% damage bonus on prone, stunned or confused enemies.
 /decl/natural_attack/bite/sharp/drake

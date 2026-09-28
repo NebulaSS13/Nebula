@@ -13,11 +13,8 @@
 #include "drake_modifiers.dm"
 #include "drake_organs.dm"
 #include "drake_spit.dm"
-#include "drake_traits.dm"
 #include "language.dm"
 #include "mobs.dm"
-#include "sifpod.dm"
-#include "sifsap.dm"
 #include "species.dm"
 #include "species_bodytypes.dm"
 // END_INCLUDE

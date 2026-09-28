@@ -51,9 +51,7 @@
 	inherent_verbs = list(
 		/mob/living/human/proc/drake_sit
 	)
-	traits = list(
-		/decl/trait/sivian_biochemistry = TRAIT_LEVEL_EXISTS
-	)
+
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 
 	// Drakes must be whitelisted for jobs to be able to join as them, see maps.dm.
@@ -78,6 +76,9 @@
 /decl/species/grafadreka/handle_post_spawn(var/mob/living/human/H)
 	. = ..()
 	H.default_attack = GET_DECL(/decl/natural_attack/claws/strong/drake)
+
+/decl/species/grafadreka/proc/should_poison_creature(mob/living/other)
+	return other.get_species() == src
 
 // Stub for muscle memory of the Sit verb on Polaris.
 /mob/living/human/proc/drake_sit()

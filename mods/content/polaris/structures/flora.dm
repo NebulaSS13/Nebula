@@ -71,15 +71,12 @@
 	material = /decl/material/solid/organic/wood/sif
 	stump_type = /obj/structure/flora/stump/tree/sif
 	light_offset_x = 1 // "equivalent to a pixel offset of 1, which due to how the logic works will mean no lighting offset"
+	var/fruits
 
 /obj/structure/flora/tree/sif/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
 	set_light(3-rand(0,3), 1, "#33ccff")
-
-/obj/structure/flora/stump/tree/sif
-	icon = 'mods/content/polaris/icons/structures/flora/tree_sif.dmi'
-	material = /decl/material/solid/organic/wood/sif
-	icon_state = "tree_sif_stump"
+	fruits = rand(1, 3)
 
 /obj/structure/flora/tree/sif/init_appearance()
 	icon_state = "tree_sif[rand(0, 5)]"
@@ -87,4 +84,21 @@
 
 /obj/structure/flora/tree/sif/on_update_icon()
 	. = ..()
-	set_overlays(emissive_overlay(icon, "[icon_state]_glow"))
+	if(fruits > 0)
+		set_overlays(emissive_overlay(icon, "[icon_state]_glow"))
+
+/obj/structure/flora/tree/sif/attack_hand(mob/user)
+	if(!user.check_intent(I_FLAG_HARM) && fruits)
+		var/datum/seed/sifpod = SSplants.seeds[/datum/seed/sifpod::name]
+		if(istype(sifpod))
+			sifpod.harvest(user, force_amount = 1)
+			fruits--
+			if(fruits <= 0)
+				update_icon()
+			return TRUE
+	. = ..()
+
+/obj/structure/flora/stump/tree/sif
+	icon = 'mods/content/polaris/icons/structures/flora/tree_sif.dmi'
+	material = /decl/material/solid/organic/wood/sif
+	icon_state = "tree_sif_stump"
