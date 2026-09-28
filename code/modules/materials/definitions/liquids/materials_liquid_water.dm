@@ -59,7 +59,7 @@
 	..()
 	if(ishuman(M))
 		var/list/data = REAGENT_DATA(holder, src)
-		if(data?[DATA_WATER_HOLINESS])
+		if(LAZYACCESS(data, DATA_WATER_HOLINESS))
 			affect_holy(M, removed, holder)
 
 /decl/material/liquid/water/proc/affect_holy(mob/living/M, removed, datum/reagents/holder)
