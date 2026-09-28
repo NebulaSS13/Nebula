@@ -47,6 +47,9 @@
 	src.flush()
 
 /obj/machinery/disposal/deliveryChute/flush()
+
+	set waitfor = FALSE
+
 	flushing = 1
 	flick("[icon_state]-closing", src)
 	var/obj/structure/disposalholder/H = new()	// virtual holder object which actually

@@ -180,6 +180,7 @@
 	return candidates
 
 /decl/special_role/proc/attempt_random_spawn()
+	set waitfor = FALSE
 	update_current_antag_max(SSticker.mode)
 	build_candidate_list(SSticker.mode, flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
 	attempt_spawn()

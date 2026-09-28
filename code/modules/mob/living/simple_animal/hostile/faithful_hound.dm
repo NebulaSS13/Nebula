@@ -38,7 +38,7 @@
 		var/dist = get_dist(mailman, body)
 		if(dist < 2) //Attack! Attack!
 			body.a_intent = I_HURT
-			body.ClickOn(mailman)
+			body.try_click_on(mailman)
 			return
 		if(dist == 2)
 			new_aggress = 3

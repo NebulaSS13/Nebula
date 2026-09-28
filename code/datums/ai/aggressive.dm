@@ -123,7 +123,7 @@
 		return target
 
 	body.a_intent = I_HURT
-	body.ClickOn(target)
+	body.try_click_on(target)
 	return target
 
 /datum/mob_controller/aggressive/destroy_surroundings()
@@ -150,7 +150,7 @@
 	var/obj/effect/shield/S = locate(/obj/effect/shield) in targ
 	if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
 		body.a_intent = I_HURT
-		body.ClickOn(S)
+		body.try_click_on(S)
 		return
 
 	// Hostile mobs will bash through these in order with their natural weapon
@@ -171,7 +171,7 @@
 		var/obj/obstacle = locate(type) in targ
 		if(obstacle)
 			body.a_intent = I_HURT
-			body.ClickOn(obstacle)
+			body.try_click_on(obstacle)
 			return
 
 	if(body.can_pry_door())
@@ -209,6 +209,7 @@
 		move_to_target(move_only = TRUE)
 
 /datum/mob_controller/aggressive/move_to_target(var/move_only = FALSE)
+	set waitfor = FALSE
 	if(!body.can_act())
 		return
 	if(HAS_STATUS(body, STAT_CONFUSE))

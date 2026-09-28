@@ -147,7 +147,7 @@
 				for(var/mob/living/slime/frenemy in range(1, body))
 					if(frenemy != body && body.Adjacent(frenemy))
 						body.a_intent_change((frenemy.slime_type == slime.slime_type) ? I_HELP : I_HURT)
-						body.UnarmedAttack(frenemy, TRUE)
+						body.try_unarmed_attack(frenemy, TRUE)
 						added_delay = 10
 		else if(slime.Adjacent(current_target))
 			var/do_attack = FALSE
@@ -161,7 +161,7 @@
 				body.a_intent_change(I_GRAB)
 				do_attack = TRUE
 			if(do_attack)
-				body.UnarmedAttack(current_target, TRUE)
+				body.try_unarmed_attack(current_target, TRUE)
 				added_delay = 10
 			else
 				current_target = null

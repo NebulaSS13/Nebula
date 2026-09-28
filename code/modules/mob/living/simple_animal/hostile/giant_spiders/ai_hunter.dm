@@ -4,6 +4,7 @@
 	can_escape_buckles = TRUE
 
 /datum/mob_controller/aggressive/giant_spider/hunter/move_to_target(var/move_only = FALSE)
+	set waitfor = FALSE
 	if(!body.can_act() || body.perform_maneuver(/decl/maneuver/leap/spider, get_target()))
 		return
 	..()

@@ -198,6 +198,7 @@
 	return
 
 /datum/mob_controller/proc/move_to_target(var/move_only = FALSE)
+	set waitfor = FALSE // Moving can involve maneuvers, which can sleep, which confuses the linter (due to do_process() being in Process())
 	return
 
 /datum/mob_controller/proc/stop_wandering()
