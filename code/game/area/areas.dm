@@ -455,6 +455,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 				M.throw_at(T, maxrange, speed)
 
 /area/proc/prison_break()
+	set waitfor = FALSE
 	var/obj/machinery/apc/theAPC = get_apc()
 	if(theAPC && theAPC.operating)
 		for(var/obj/machinery/apc/temp_apc in src)

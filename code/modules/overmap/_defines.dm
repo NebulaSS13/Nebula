@@ -79,6 +79,7 @@ var/global/list/moving_levels = list()
 //yes it looks ugly, but it should only fire when state actually change.
 //null direction stops movement
 /proc/toggle_move_stars(zlevel, direction)
+	set waitfor = FALSE
 	if(!zlevel)
 		return
 
