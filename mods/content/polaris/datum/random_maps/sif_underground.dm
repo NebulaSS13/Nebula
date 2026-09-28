@@ -11,7 +11,7 @@
 
 /datum/random_map/noise/sif/underground/get_additional_spawns(var/value, var/turf/T)
 	if(value <= 1 && prob(30)) // Mud is very fun-gy.
-		new /obj/structure/flora/mushroom(T)
+		new /obj/structure/flora/plant/mushroom(T)
 	else if(!prob(30))
 		var/mushroom_prob = 0
 		switch(value)
@@ -24,6 +24,6 @@
 			if(7)
 				mushroom_prob = 1
 		if(mushroom_prob && prob(mushroom_prob))
-			new /obj/structure/flora/mushroom(T)
+			new /obj/structure/flora/plant/mushroom(T)
 		else if(prob(0.1))
-			new /obj/structure/flora/sif/subterranean(T)
+			new /obj/structure/flora/plant/sif/subterranean(T)

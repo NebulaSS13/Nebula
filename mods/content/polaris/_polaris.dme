@@ -6,6 +6,7 @@
 #include "code\vent_pump.dm"
 #include "datum\loadout.dm"
 #include "datum\materials.dm"
+#include "datum\seeds.dm"
 #include "datum\backgrounds\citizenship.dm"
 #include "datum\backgrounds\cultures.dm"
 #include "datum\backgrounds\factions.dm"
