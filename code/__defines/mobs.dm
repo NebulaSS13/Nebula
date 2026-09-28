@@ -252,6 +252,10 @@
 #define DATA_BLOOD_DOSE_CHEM  /decl/reagent_data_field/blood_dose_chem
 #define DATA_BLOOD_HAS_OXY    /decl/reagent_data_field/blood_has_oxy
 
+// Misc data flags
+#define DATA_DOSE_TIME        /decl/reagent_data_field/dose_time
+#define DATA_BLESSED          /decl/reagent_data_field/blessed
+
 //Used by show_message() and emotes
 #define VISIBLE_MESSAGE 1
 #define AUDIBLE_MESSAGE 2

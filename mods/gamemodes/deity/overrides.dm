@@ -6,7 +6,7 @@
 	. = ..()
 	if(!. && href_list["deconvert"])
 		var/list/data = REAGENT_DATA(src, /decl/material/liquid/water)
-		if(LAZYACCESS(data, "holy"))
+		if(LAZYACCESS(data, DATA_BLESSED))
 			var/mob/living/target = locate(href_list["deconvert"])
 			if(istype(target) && !QDELETED(target) && target.mind)
 				var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
