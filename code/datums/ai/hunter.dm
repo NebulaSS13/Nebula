@@ -18,7 +18,7 @@
 
 /datum/mob_controller/passive/hunter/proc/try_attack_prey(mob/living/prey)
 	body.set_intent(I_FLAG_HARM)
-	body.ClickOn(prey)
+	body.try_click_on(prey)
 
 /datum/mob_controller/passive/hunter/proc/consume_prey(mob/living/prey)
 	if(prey.stat != DEAD)

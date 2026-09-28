@@ -163,7 +163,7 @@
 	var/obj/effect/shield/S = locate(/obj/effect/shield) in targ
 	if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
 		body.set_intent(I_FLAG_HARM)
-		body.ClickOn(S)
+		body.try_click_on(S)
 		return TRUE
 
 	// Hostile mobs will bash through these in order with their natural weapon
@@ -184,7 +184,7 @@
 		var/obj/obstacle = locate(type) in targ
 		if(obstacle)
 			body.set_intent(I_FLAG_HARM)
-			body.ClickOn(obstacle)
+			body.try_click_on(obstacle)
 			return TRUE
 
 	if(body.can_pry_door())
@@ -235,6 +235,7 @@
 
 /datum/mob_controller/aggressive/move_to_target(var/move_only = FALSE)
 
+	set waitfor = FALSE
 	if(!(. = ..()))
 		return
 

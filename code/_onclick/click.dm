@@ -48,6 +48,11 @@
 	* item/afterattack(atom,user,adjacent,params) - used both ranged and adjacent
 	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
 */
+// Non-blocking variant for AI interactions.
+/mob/proc/try_click_on(atom/A, params)
+	set waitfor = FALSE
+	ClickOn(A, params)
+
 /mob/proc/ClickOn(var/atom/A, var/params)
 
 	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
@@ -191,6 +196,12 @@
 
 	Returns TRUE if no further processing is desired, FALSE otherwise.
 */
+
+// Non-blocking variant for use in AI do_process()
+/mob/proc/try_unarmed_attack(atom/A, proximity_flag)
+	set waitfor = FALSE
+	UnarmedAttack(A, proximity_flag)
+
 /mob/proc/UnarmedAttack(var/atom/A, var/proximity_flag)
 	return
 
