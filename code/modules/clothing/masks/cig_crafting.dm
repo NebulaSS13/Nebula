@@ -22,7 +22,7 @@
 	name = "rolling paper"
 	desc = "A thin piece of paper used to make smokeables."
 	icon = 'icons/obj/items/paperwork/cigarette_paper.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_TINY
 
 /obj/item/paper/cig/on_update_icon()
