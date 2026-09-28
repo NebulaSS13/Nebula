@@ -62,3 +62,9 @@
 
 /decl/reagent_data_field/blood_has_oxy
 	uid = "rdf_blood_has_oxy"
+
+/decl/reagent_data_field/dose_time
+	uid = "rdf_dose_time"
+
+/decl/reagent_data_field/blessed
+	uid = "rdf_blessed"

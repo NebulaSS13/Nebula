@@ -36,7 +36,7 @@
 	..()
 	if(ishuman(M))
 		var/list/data = REAGENT_DATA(holder, type)
-		if(data?["holy"])
+		if(LAZYACCESS(data, DATA_BLESSED))
 			affect_holy(M, removed, holder)
 
 /decl/material/liquid/water/proc/affect_holy(mob/living/M, removed, datum/reagents/holder)
@@ -75,7 +75,7 @@
 			touching_turf.visible_message(SPAN_NOTICE("The water sizzles as it lands on \the [touching_turf]!"))
 
 	var/list/data = REAGENT_DATA(holder, type)
-	if(LAZYACCESS(data, "holy"))
+	if(LAZYACCESS(data, DATA_BLESSED))
 		touching_turf.turf_flags |= TURF_FLAG_HOLY
 
 /decl/material/liquid/water/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)

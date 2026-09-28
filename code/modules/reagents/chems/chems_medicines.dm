@@ -187,17 +187,22 @@
 /decl/material/liquid/stimulants/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	. = ..()
-	if(volume <= 0.1 && LAZYACCESS(M.chem_doses, type) >= 0.5 && world.time > REAGENT_DATA(holder, type) + 5 MINUTES)
-		LAZYSET(holder.reagent_data, type, world.time)
-		to_chat(M, "<span class='warning'>You lose focus...</span>")
+
+	var/list/data = REAGENT_DATA(holder, type)
+	var/dose_time = (LAZYACCESS(data, DATA_DOSE_TIME) || 0)
+	if(volume <= 0.1 && LAZYACCESS(M.chem_doses, type) >= 0.5 && world.time > dose_time)
+		LAZYSET(data, DATA_DOSE_TIME, world.time)
+		LAZYSET(holder.reagent_data, type, data)
+		to_chat(M, SPAN_WARNING("You lose focus..."))
 	else
 		ADJ_STATUS(M, STAT_DROWSY, -5)
 		ADJ_STATUS(M, STAT_PARA, -1)
 		ADJ_STATUS(M, STAT_STUN, -1)
 		ADJ_STATUS(M, STAT_WEAK, -1)
-		if(world.time > REAGENT_DATA(holder, type) + 5 MINUTES)
-			LAZYSET(holder.reagent_data, type, world.time)
-			to_chat(M, "<span class='notice'>Your mind feels focused and undivided.</span>")
+		if(world.time > dose_time)
+			LAZYSET(data, DATA_DOSE_TIME, (world.time + 5 MINUTES))
+			LAZYSET(holder.reagent_data, type, data)
+			to_chat(M, SPAN_NOTICE("Your mind feels focused and undivided."))
 
 /decl/material/liquid/antidepressants
 	name = "antidepressants"
@@ -213,15 +218,19 @@
 /decl/material/liquid/antidepressants/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	. = ..()
-	if(volume <= 0.1 && LAZYACCESS(M.chem_doses, type) >= 0.5 && world.time > REAGENT_DATA(holder, type) + 5 MINUTES)
-		LAZYSET(holder.reagent_data, type, world.time)
-		to_chat(M, "<span class='warning'>Your mind feels a little less stable...</span>")
+	var/list/data = REAGENT_DATA(holder, type)
+	var/dose_time = (LAZYACCESS(data, DATA_DOSE_TIME) || 0)
+	if(volume <= 0.1 && LAZYACCESS(M.chem_doses, type) >= 0.5 && world.time > dose_time)
+		LAZYSET(data, DATA_DOSE_TIME, world.time)
+		LAZYSET(holder.reagent_data, type, data)
+		to_chat(M, SPAN_WARNING("Your mind feels a little less stable..."))
 	else
 		M.add_chemical_effect(CE_MIND, 1)
 		M.adjust_hallucination(-10)
-		if(world.time > REAGENT_DATA(holder, type) + 5 MINUTES)
-			LAZYSET(holder.reagent_data, type, world.time)
-			to_chat(M, "<span class='notice'>Your mind feels stable... a little stable.</span>")
+		if(world.time > dose_time)
+			LAZYSET(data, DATA_DOSE_TIME, (world.time + 5 MINUTES))
+			LAZYSET(holder.reagent_data, type, data)
+			to_chat(M, SPAN_NOTICE("Your mind feels stable... a little stable."))
 
 /decl/material/liquid/antibiotics
 	name = "antibiotics"

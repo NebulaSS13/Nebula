@@ -34,8 +34,23 @@
 		/mob/living/human
 	)
 
+	// Things they will never sell.
+	var/list/blacklisted_sold_items = list(
+		/obj/item/clothing/glasses/sunglasses/quantum,
+		/obj/item/clothing/jumpsuit/quantum,
+		/obj/item/clothing/shoes/color/black/quantum,
+		/obj/item/radio/headset/ert/quantum,
+		/obj/item/backpack/holding/quantum,
+		/obj/item/belt/utility/full/quantum,
+		/obj/item/backpack/santabag
+	)
+
 /datum/trader/New()
 	..()
+
+	for(var/blacklisted_type in blacklisted_sold_items)
+		possible_trading_items[blacklisted_type] = blacklisted_sold_items[blacklisted_type] || TRADER_BLACKLIST_ALL
+
 	if(!ispath(trader_currency, /decl/currency))
 		trader_currency = global.using_map.default_currency
 	if(ispath(name_language, /decl/language))
