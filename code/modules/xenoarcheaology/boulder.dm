@@ -6,10 +6,18 @@
 	density = TRUE
 	opacity = TRUE
 	anchored = TRUE
-	material = /decl/material/solid/stone/sandstone
+	material = null
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/excavation_level = 0
 	var/datum/artifact_find/artifact_find
+
+/obj/structure/boulder/Initialize(ml, _mat, coloration)
+	if(isnull(material) && isnull(_mat))
+		var/turf/our_turf = loc
+		if(istype(our_turf))
+			material = our_turf.get_strata_material_type()
+		material ||= /decl/material/solid/stone/sandstone
+	. = ..()
 
 /obj/structure/boulder/excavated
 	desc = "Leftover rock from an excavation, it's been partially dug out already but there's still a lot to go."
