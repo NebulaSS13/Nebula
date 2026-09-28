@@ -5,6 +5,7 @@
 	name = "General - Kitchen supplies"
 	contains = list(/obj/item/chems/condiment/flour = 6,
 					/obj/item/chems/condiment/yeast = 1,
+					/obj/item/chems/condiment/spices = 1,
 					/obj/item/chems/drinks/milk = 4,
 					/obj/item/chems/drinks/soymilk = 2,
 					/obj/item/food/dairy/butter/stick = 2,
@@ -170,3 +171,10 @@
 		/obj/item/chems/condiment/yeast = 3
 	)
 	containername = "yeast crate"
+
+/decl/hierarchy/supply_pack/galley/spices
+	name = "Non-perishables - Spices"
+	contains = list(
+		/obj/item/chems/condiment/spices = 3
+	)
+	containername = "spice crate"

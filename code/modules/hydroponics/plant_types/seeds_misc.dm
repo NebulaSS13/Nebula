@@ -843,6 +843,28 @@
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 	set_chemical_amount(/decl/material/solid/blackpepper, list(10,10))
 
+/datum/seed/pimento
+	name = "pimento"
+	product_name = "pimento"
+	display_name = "pimento plant"
+	slice_product = /obj/item/food/processed_grown/crushed
+	slice_amount = 3
+
+/datum/seed/pimento/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,4)
+	set_trait(TRAIT_PRODUCTION,4)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,5)
+	set_trait(TRAIT_PRODUCT_ICON,"nuts")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#395c35")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_chemical_amount(/decl/material/liquid/nutriment, list(5,5))
+	set_chemical_amount(/decl/material/solid/spices, list(1,1))
+	set_chemical_amount(/decl/material/solid/spices, list(10,10), _state = PLANT_STATE_DRIED)
+
 /datum/seed/cabbage
 	name = "cabbage"
 	product_name = "cabbage"

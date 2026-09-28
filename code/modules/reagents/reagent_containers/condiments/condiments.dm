@@ -17,6 +17,7 @@ MAPPED_CONDIMENT_TYPE(mayo,      /decl/condiment_appearance/mayonnaise)
 MAPPED_CONDIMENT_TYPE(frostoil,  /decl/condiment_appearance/coldsauce)
 MAPPED_CONDIMENT_TYPE(capsaicin, /decl/condiment_appearance/capsaicin)
 MAPPED_CONDIMENT_TYPE(yeast,     /decl/condiment_appearance/yeast)
+MAPPED_CONDIMENT_TYPE(spices,    /decl/condiment_appearance/spices)
 MAPPED_CONDIMENT_TYPE(flour,     /decl/condiment_appearance/flour)
 MAPPED_CONDIMENT_TYPE(cinnamon,  /decl/condiment_appearance/cinnamon)
 

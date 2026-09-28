@@ -2,11 +2,9 @@
 	abstract_type      = /decl/recipe/soup/curry
 	result             = /decl/material/liquid/nutriment/soup/curry
 	completion_message = "The sauce thickens as the curry cooks down."
-	// It's silly to distinguish this from other recipes only via rice, but
-	// we don't have curry powder or other spices to include here. TODO.
 	reagents           = list(
-		/decl/material/liquid/water          = 5,
-		/decl/material/liquid/nutriment/rice = 5
+		/decl/material/liquid/water = 5,
+		/decl/material/solid/spices = 5
 	)
 
 /decl/recipe/soup/curry/meat

@@ -45,6 +45,7 @@
 		/obj/item/seeds/tomatoseed = 3,
 		/obj/item/seeds/towercap = 3,
 		/obj/item/seeds/peppercornseed = 3,
+		/obj/item/seeds/pimentoseed = 3,
 		/obj/item/seeds/onionseed = 3,
 		/obj/item/seeds/garlicseed = 3,
 		/obj/item/seeds/wheatseed = 3,

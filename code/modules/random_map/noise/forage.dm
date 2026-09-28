@@ -74,6 +74,7 @@
 			"lavender",
 			"garlic",
 			"peppercorn",
+			"pimento",
 			"bamboo",
 			"coffee",
 			"tea"
