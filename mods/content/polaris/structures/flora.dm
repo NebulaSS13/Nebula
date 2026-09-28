@@ -6,7 +6,10 @@
 	abstract_type = /obj/structure/flora/plant/sif
 	color = COLOR_WHITE
 
+// Some wonkiness with how plants expect to initialize their seed datum...
 /obj/structure/flora/plant/sif/Initialize(ml, _mat, _reinf_mat, datum/seed/_plant)
+	_plant ||= plant
+	plant = null
 	. = ..()
 	if(plant)
 		growth_stage = plant.growth_stages
@@ -75,9 +78,9 @@
 	var/fruits
 
 /obj/structure/flora/tree/sif/Initialize(ml, _mat, _reinf_mat)
+	fruits = rand(1, 3)
 	. = ..()
 	set_light(3-rand(0,3), 1, "#33ccff")
-	fruits = rand(1, 3)
 
 /obj/structure/flora/tree/sif/init_appearance()
 	icon_state = "tree_sif[rand(0, 5)]"
