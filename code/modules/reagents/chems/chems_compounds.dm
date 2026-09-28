@@ -74,6 +74,14 @@
 	lore_text = "A complex mix of enzymes extracted from a ruminant's stomach. Important to cheesemaking, and as a chemical precursor."
 	taste_description = "sweet bile"
 
+/decl/material/solid/spices
+	name = "mixed spices"
+	uid = "chem_spices"
+	taste_description = "complex flavours"
+	taste_mult = 1.5
+	lore_text = "A blend of different spices useful in a variety of different cuisines. Probably doesn't include any worms."
+	color = "#e08702"
+
 /decl/material/liquid/frostoil
 	name = "chilly oil"
 	lore_text = "An oil harvested from a mutant form of chili peppers, it has a chilling effect on the body."

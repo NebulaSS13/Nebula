@@ -154,16 +154,6 @@
 /obj/item/backpack/holding/quantum
 	storage = /datum/storage/bag/quantum
 
-/obj/item/backpack/holding/quantum/attack_hand(mob/user)
-	if(!user)
-		return TRUE
-
-	if(!isquantum(user))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
-		return TRUE
-
-	return ..()
-
 // Headset
 /obj/item/radio/headset/quantum
 	name = "quantum mechanic's headset"
@@ -174,16 +164,6 @@
 		/obj/item/encryptionkey/specops
 	)
 
-/obj/item/radio/headset/quantum/attack_hand(mob/user)
-	if(!user)
-		return TRUE
-
-	if(!isquantum(user))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
-		return TRUE
-
-	return ..()
-
 // Clothes
 /obj/item/clothing/jumpsuit/quantum
 	name = "quantum mechanic's uniform"
@@ -193,32 +173,12 @@
 	heat_protection = SLOT_FULL_BODY
 	siemens_coefficient = 0
 
-/obj/item/clothing/jumpsuit/quantum/attack_hand(mob/user)
-	if(!user)
-		return TRUE
-
-	if(!isquantum(user))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
-		return TRUE
-
-	return ..()
-
 // Gloves
 /obj/item/clothing/gloves/quantum
 	name = "quantum mechanic's gloves"
 	desc = "A pair of modified gloves. The letter 'Ω' is stamped on the side."
 	siemens_coefficient = 0
 	permeability_coefficient = 0
-
-/obj/item/clothing/gloves/quantum/attack_hand(mob/user)
-	if(!user)
-		return TRUE
-
-	if(!isquantum(user))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
-		return TRUE
-
-	return ..()
 
 // Sunglasses
 /obj/item/clothing/glasses/sunglasses/quantum
@@ -247,31 +207,11 @@
 
 	to_chat(usr, SPAN_NOTICE("\The [src]'s vision mode is now <b>[mode]</b>."))
 
-/obj/item/clothing/glasses/sunglasses/quantum/attack_hand(mob/user)
-	if(!user)
-		return TRUE
-
-	if(!isquantum(user))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
-		return TRUE
-
-	return ..()
-
 // Shoes
 /obj/item/clothing/shoes/color/black/quantum
 	name = "quantum mechanic's shoes"
 	desc = "A pair of black shoes with extra grip. The letter 'Ω' is stamped on the side."
 	item_flags = ITEM_FLAG_NOSLIP
-
-/obj/item/clothing/shoes/color/black/quantum/attack_hand(mob/user)
-	if(!user)
-		return TRUE
-
-	if(!isquantum(user))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
-		return TRUE
-
-	return ..()
 
 // ID
 /obj/item/card/id/quantum
@@ -280,16 +220,6 @@
 /obj/item/card/id/quantum/Initialize()
 	. = ..()
 	access = get_all_accesses() | get_all_centcom_access() | get_all_antagonist_access()
-
-/obj/item/card/id/quantum/attack_hand(mob/user)
-	if(!user)
-		return TRUE
-
-	if(!isquantum(user))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
-		return TRUE
-
-	return ..()
 
 // Belt
 /obj/item/belt/utility/full/quantum/Initialize()
@@ -302,3 +232,40 @@
 
 /mob/living/human/quantum/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return fall_override ? FALSE : ..()
+
+#define QUANTUM_UNINTERACTIBLE_STRING SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist.")
+#define MAKE_TYPE_UNINTERACTABLE(TYPE)                  \
+##TYPE/equipped(mob/user, slot) {                       \
+	if(user && !isquantum(user)) {                      \
+		to_chat(user, QUANTUM_UNINTERACTIBLE_STRING);   \
+		if(loc == user) {                               \
+			user.drop_from_inventory(src);              \
+		}                                               \
+		return FALSE;                                   \
+	}                                                   \
+	return ..();                                        \
+}                                                       \
+##TYPE/attack_hand(mob/user) {                          \
+	if(user && !isquantum(user)) {                      \
+		to_chat(user, QUANTUM_UNINTERACTIBLE_STRING);   \
+		return TRUE;                                    \
+	}                                                   \
+	return ..();                                        \
+}                                                       \
+##TYPE/handle_mouse_drop(atom/over, mob/user, params) { \
+	if(user && !isquantum(user)) {                      \
+		to_chat(user, QUANTUM_UNINTERACTIBLE_STRING);   \
+		return TRUE;                                    \
+	}                                                   \
+	return ..();                                        \
+}
+MAKE_TYPE_UNINTERACTABLE(/obj/item/card/id/quantum)
+MAKE_TYPE_UNINTERACTABLE(/obj/item/clothing/shoes/color/black/quantum)
+MAKE_TYPE_UNINTERACTABLE(/obj/item/clothing/glasses/sunglasses/quantum)
+MAKE_TYPE_UNINTERACTABLE(/obj/item/backpack/holding/quantum)
+MAKE_TYPE_UNINTERACTABLE(/obj/item/radio/headset/ert/quantum)
+MAKE_TYPE_UNINTERACTABLE(/obj/item/clothing/jumpsuit/quantum)
+MAKE_TYPE_UNINTERACTABLE(/obj/item/clothing/gloves/quantum)
+
+#undef MAKE_TYPE_UNINTERACTABLE
+#undef QUANTUM_UNINTERACTIBLE_STRING

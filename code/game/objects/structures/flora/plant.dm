@@ -9,6 +9,8 @@
 	var/datum/seed/plant
 	var/harvestable = 0 // Note that this is a counter, not a bool.
 	var/pollen = 0
+	var/use_seed_appearance = TRUE
+	var/generate_plant_description = TRUE
 
 /obj/structure/flora/plant/large
 	opacity = TRUE
@@ -57,11 +59,13 @@
 		PRINT_STACK_TRACE("Flora given invalid seed value: [plant || "NULL"]")
 		return INITIALIZE_HINT_QDEL
 
-	name = plant.display_name
-	desc = "A wild [name]."
-	growth_stage = rand(round(plant.growth_stages * 0.65), plant.growth_stages)
+	if(generate_plant_description)
+		name = plant.display_name
+		desc = "A wild [name]."
+
+	growth_stage ||= rand(round(plant.growth_stages * 0.65), plant.growth_stages)
 	if(!dead)
-		if(prob(25) && growth_stage >= plant.growth_stages)
+		if(!harvestable && growth_stage >= plant.growth_stages)
 			harvestable = rand(1, 3)
 		if(plant.get_trait(TRAIT_BIOLUM))
 			var/potency = plant.get_trait(TRAIT_POTENCY)
@@ -79,9 +83,10 @@
 
 /obj/structure/flora/plant/on_update_icon()
 	. = ..()
-	icon_state = "blank"
-	reset_color()
-	set_overlays(plant.get_appearance(dead = dead, growth_stage = growth_stage, can_harvest = !!harvestable))
+	if(use_seed_appearance)
+		icon_state = "blank"
+		reset_color()
+		set_overlays(plant.get_appearance(dead = dead, growth_stage = growth_stage, can_harvest = !!harvestable))
 
 /obj/structure/flora/plant/attackby(obj/item/used_item, mob/user)
 
@@ -183,3 +188,31 @@
 /obj/structure/flora/plant/random_flower/Initialize()
 	plant = pick(get_flower_variants())
 	return ..()
+
+/obj/structure/flora/plant/mushroom
+	name = "mushroom"
+	desc = "Hey, this one seems like a fun guy."
+	icon = 'icons/obj/flora/mushrooms.dmi'
+	icon_state = "mush1"
+	use_seed_appearance = FALSE
+	generate_plant_description = FALSE
+	color = COLOR_WHITE
+	var/mush_type
+
+/obj/structure/flora/plant/mushroom/Initialize(ml, _mat, _reinf_mat, datum/seed/_plant)
+	mush_type = rand(1, 4)
+	switch(mush_type)
+		if(1 to 2)
+			plant = pick(/datum/seed/mushroom::name, /datum/seed/mushroom/poison/death::name)
+		if(3)
+			plant = /datum/seed/mushroom::name
+		if(4)
+			plant = /datum/seed/mushroom/poison::name
+	. = ..()
+
+/obj/structure/flora/plant/mushroom/init_appearance()
+	icon_state = "mush[mush_type]"
+	if(prob(50))
+		set_scale(-1, 1)
+	default_pixel_x += rand(-4, 4)
+	reset_offsets()

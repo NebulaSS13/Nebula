@@ -313,6 +313,9 @@
 /obj/item/seeds/peppercornseed
 	seed = "peppercorn"
 
+/obj/item/seeds/pimentoseed
+	seed = "pimento"
+
 /obj/item/seeds/garlicseed
 	seed = "garlic"
 
