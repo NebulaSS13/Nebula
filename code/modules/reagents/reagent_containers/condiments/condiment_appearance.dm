@@ -112,6 +112,12 @@
 	condiment_desc = "A dried form of mold used to ferment food or assist in making bread rise during baking."
 	condiment_icon = 'icons/obj/food/condiments/yeast.dmi'
 
+/decl/condiment_appearance/spices
+	condiment_type = /decl/material/solid/spices
+	condiment_name = "spices"
+	condiment_desc = "Dried and crushed spices from a variety of sources. Used to flavour food since times immemorial."
+	condiment_icon = 'icons/obj/food/condiments/spices.dmi'
+
 /decl/condiment_appearance/flour
 	condiment_type = /decl/material/liquid/nutriment/flour
 	condiment_name = "flour sack"

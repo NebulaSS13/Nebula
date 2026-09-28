@@ -7,6 +7,7 @@
 		/obj/item/chems/condiment/large/salt = 1,
 		/obj/item/chems/condiment/flour = 7,
 		/obj/item/chems/condiment/yeast = 1,
+		/obj/item/chems/condiment/spices = 1,
 		/obj/item/chems/condiment/sugar = 2
 	)
 

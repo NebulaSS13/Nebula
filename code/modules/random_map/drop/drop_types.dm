@@ -74,6 +74,7 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/food/New()
 	..()
 	contents = list(
+		/obj/item/chems/condiment/spices,
 		/obj/item/chems/condiment/yeast,
 		/obj/item/chems/condiment/flour,
 		/obj/item/chems/condiment/flour,

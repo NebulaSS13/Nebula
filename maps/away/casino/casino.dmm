@@ -2820,6 +2820,7 @@
 /obj/item/box/fancy/egg_box,
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/yeast,
+/obj/item/chems/condiment/spices,
 /obj/item/chems/condiment/sugar,
 /turf/floor/tiled,
 /area/casino/casino_kitchen)
