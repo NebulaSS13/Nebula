@@ -780,7 +780,7 @@ SUBSYSTEM_DEF(zcopy)
 	target_mimic.plane = override_plane || ZM_COMPUTE_PLANE(target_mimic.depth, target_mimic.target_slot)
 
 /// Update if a mimic should be hidden from right-click, usually by it being underneath a non-mimic turf.
-/datum/controller/subsystem/zcopy/proc/update_mimic_occlusion(atom/movable/openspace/mimic/target_mimic)
+/datum/controller/subsystem/zcopy/proc/update_mimic_occlusion(atom/movable/openspace/mimic/target_mimic, reason)
 #ifdef ZM_ENH_DEBUG
 	var/old_state = target_mimic.hidden
 #endif
@@ -812,7 +812,7 @@ SUBSYSTEM_DEF(zcopy)
 	if (old_state != target_mimic.hidden)
 		var/old_f = jointext(bitfield2list(old_state, mimic_hide_defines), " | ")
 		var/new_f = jointext(bitfield2list(target_mimic.hidden, mimic_hide_defines), " | ")
-		ZM_DEBUG_LOG("Occlusion: mimic transitioning from state ([old_f]) to ([new_f])")
+		ZM_DEBUG_LOG("Occlusion: mimic [target_mimic.name || "(no name)"] (copying MT [target_mimic.mimicked_type]) transitioning from state ([old_f]) to ([new_f]) from [reason || "(unknown)"]")
 #endif
 
 	if (target_mimic.hidden)
