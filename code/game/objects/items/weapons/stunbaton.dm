@@ -33,9 +33,13 @@
 /obj/item/baton/loaded/Initialize(var/ml, var/material_key, var/loaded_cell_type)
 	return ..(ml, material_key, loaded_cell_type = /obj/item/cell/device/high)
 
+/obj/item/baton/loaded/active/Initialize(var/ml, var/material_key, var/loaded_cell_type)
+	. = ..()
+	set_cell_status(TRUE)
+
 /obj/item/baton/infinite/Initialize(var/ml, var/material_key, var/loaded_cell_type)
 	. = ..(ml, material_key, loaded_cell_type = /obj/item/cell/device/infinite)
-	set_cell_status(1, null)
+	set_cell_status(TRUE)
 
 /obj/item/baton/proc/update_status()
 	var/obj/item/cell/cell = get_cell()
