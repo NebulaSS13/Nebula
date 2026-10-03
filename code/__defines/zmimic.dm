@@ -28,7 +28,7 @@
 #define TURF_IS_MIMIC(T) (isturf(T) && (T:z_flags & ZM_MIMIC_BELOW))	//! Is this a full Z-turf?
 #define TURF_IS_MIMIC_BOUNDARY(T) (isturf(T) && (T:z_flags & ZM_BOUNDARY))
 #define TURF_IS_MIMICKING(T) (isturf(T) && (T:z_flags & (ZM_MIMIC_BELOW | ZM_BOUNDARY)))	//! Is this turf participating in Z-mimic?
-#define CHECK_OO_EXISTENCE(OO) if (OO && !MOVABLE_IS_ON_ZTURF(OO) && !OO.destruction_timer) { OO.destruction_timer = ZM_DESTRUCTION_TIMER(OO, "COE"); }
+#define CHECK_OO_EXISTENCE(OO) if (OO && !MOVABLE_IS_ON_ZTURF(OO) && !OO.destruction_timer) { OO.orphan("COE"); }
 #define UPDATE_OO_IF_PRESENT CHECK_OO_EXISTENCE(bound_overlay); if (bound_overlay) { update_above(); }
 #define ZM_DIFF_HIDE_STATE(CALC, FLAG, TARGET) (CALC) ? (TARGET.hidden | FLAG) : (TARGET.hidden & ~FLAG)
 

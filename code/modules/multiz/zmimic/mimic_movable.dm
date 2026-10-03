@@ -20,8 +20,8 @@
 
 		SSzcopy.queued_overlays += bound_overlay
 		bound_overlay.queued += 1
-	else if (bound_overlay)	// qdel is null-safe, but might as well save a proc call
-		qdel(bound_overlay)
+	else if (bound_overlay && !bound_overlay.destruction_timer)
+		bound_overlay.orphan("update_above")
 
 // Grabs a list of every openspace object that's directly or indirectly mimicking this object. Returns an empty list if none found.
 /atom/movable/proc/get_above_oo()
@@ -152,6 +152,12 @@
 
 	return ..()
 
+/// Generally, use this instead of qdel()ing a mimic -- e.g., if a mimic is moved somewhere it shouldn't be visible. Please set reason to something descriptive and unique.
+/atom/movable/openspace/mimic/proc/orphan(reason = "cruelty")
+	ASSERT(!destruction_timer)
+	destruction_timer = ZM_DESTRUCTION_TIMER(src, reason)
+	SSzcopy.update_mimic_occlusion(src, reason)
+
 /atom/movable/openspace/mimic/proc/timeout(filename, line, reason)
 	ZM_DEBUG_LOG("Mimic timeout from origin [filename]:[line], caused by [reason]; was mimicking [associated_atom || "NULL"] ([associated_atom?.type || "NULL"]) at [x],[y],[z]")
 	qdel(src)
@@ -182,11 +188,6 @@
 	if (QDELING(src))	// Everything in this block is nonsense if we're being destroyed.
 		return ..()
 
-	if (!dest)
-		ZM_DEBUG_LOG("Mimic moved to nullspace; deleting self.")
-		qdel(src)
-		return
-
 	var/turf/old_loc = loc
 	var/force_layering_update = FALSE
 
@@ -201,7 +202,7 @@
 
 	. = ..()
 
-	if (MOVABLE_IS_ON_ZTURF(src))
+	if (MOVABLE_IS_ON_ZTURF(src) && dest)
 		if (destruction_timer)
 			deltimer(destruction_timer)
 			destruction_timer = null
@@ -213,18 +214,18 @@
 				SSzcopy.update_mimic_layering(src)
 
 			if (flag_difference & ZM_FLAGS_AFFECTS_VIS)
-				SSzcopy.update_mimic_occlusion(src)
+				SSzcopy.update_mimic_occlusion(src, "AFFECTS_VIS hit")
 		else	// If we're moving from null to a z-turf, just rebuild both.
 			SSzcopy.update_mimic_layering(src)
-			SSzcopy.update_mimic_occlusion(src)
+			SSzcopy.update_mimic_occlusion(src, "forceMove null->nonnull")
 
 	else if (!destruction_timer)
-		destruction_timer = ZM_DESTRUCTION_TIMER(src, "forceMove")
+		orphan("forceMove invalid")
 
 // Called when the turf we're on is deleted/changed.
 /atom/movable/openspace/mimic/proc/owning_turf_changed()
 	if (!destruction_timer)
-		destruction_timer = ZM_DESTRUCTION_TIMER(src, "OTC")
+		orphan("OTC")
 
 // -- TURF PROXY --
 
