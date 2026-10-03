@@ -244,34 +244,37 @@
 	if(!O.can_embed())
 		return FALSE
 
+	var/obj/item/I = O
+	var/sharp = I.is_sharp() || I.has_edge()
+	embed_damage *= (1 - get_blocked_ratio(def_zone, BRUTE, O.damage_flags(), O.armor_penetration, I.get_attack_force(user)))
+
+	//blunt objects should really not be embedding in things unless a huge amount of force is involved
+	var/embed_chance = embed_damage / (sharp ? I.w_class : (I.w_class*3))
+	var/embed_threshold = (sharp ? 5 : 10) * I.w_class
+	var/sharp_embed_chance = embed_damage/(10*I.w_class)*100
+
+	//Sharp objects will always embed if they do enough damage.
+	//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
+	if(!(sharp && prob(sharp_embed_chance)) && !(embed_damage > embed_threshold && prob(embed_chance)))
+		return FALSE
+
 	if(affecting && istype(supplied_wound) && supplied_wound.is_open() && dtype == BRUTE) // Can't embed in a small bruise.
-		var/obj/item/I = O
-		var/sharp = I.is_sharp() || I.has_edge()
-		embed_damage *= (1 - get_blocked_ratio(def_zone, BRUTE, O.damage_flags(), O.armor_penetration, I.get_attack_force(user)))
-
-		//blunt objects should really not be embedding in things unless a huge amount of force is involved
-		var/embed_chance = embed_damage / (sharp ? I.w_class : (I.w_class*3))
-		var/embed_threshold = (sharp ? 5 : 10) * I.w_class
-		var/sharp_embed_chance = embed_damage/(10*I.w_class)*100
-
-		//Sharp objects will always embed if they do enough damage.
-		//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
-		if((sharp && prob(sharp_embed_chance)) || (embed_damage > embed_threshold && prob(embed_chance)))
-			affecting.embed_in_organ(I, supplied_wound = (istype(supplied_wound) ? supplied_wound : null))
-			I.has_embedded(src)
-			. = TRUE
-
-	// Simple embed for mobs with no limbs.
-	if(!. && !length(get_external_organs()))
-		O.forceMove(src)
-		if(isitem(O))
-			var/obj/item/I = O
-			I.has_embedded(src)
-		. = TRUE
+		affecting.embed_in_organ(I, supplied_wound = (istype(supplied_wound) ? supplied_wound : null))
+	else
+		// TODO: generalize embedding logic on dev
+		verbs += /mob/proc/yank_out_object
+		I.add_blood(src)
+		if(ismob(I.loc))
+			var/mob/living/holder = I.loc
+			holder.drop_from_inventory(I)
+		I.forceMove(src)
+	I.has_embedded(src)
 
 	// Allow a tick for throwing/striking to resolve.
-	if(. && direction)
+	if(direction)
 		addtimer(CALLBACK(src, PROC_REF(check_embed_pinning), O, direction), 1)
+
+	return TRUE
 
 /mob/living/proc/check_embed_pinning(obj/O, direction)
 	if(QDELETED(src) || QDELETED(O) || !isturf(loc) || !(O in embedded) || !direction)
