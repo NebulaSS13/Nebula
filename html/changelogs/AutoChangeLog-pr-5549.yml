@@ -1,0 +1,5 @@
+author: Lohikar
+changes:
+  - {bugfix: Going down stairs no longer causes you to vanish for one tile to 
+      observers above.}
+delete-after: true
