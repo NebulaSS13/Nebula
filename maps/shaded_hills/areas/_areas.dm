@@ -20,6 +20,7 @@
 	)
 	sound_env = GENERIC
 	ambience = list()
+	is_planetary_surface = TRUE
 
 /area/shaded_hills/outside
 	name = "\improper Grasslands"

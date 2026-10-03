@@ -17,7 +17,7 @@
 
 /decl/outfit/utility_frame/melee
 	name  = "Utility Frame - Melee Baton"
-	hands = list(/obj/item/baton)
+	hands = list(/obj/item/baton/loaded/active)
 
 /decl/outfit/utility_frame/melee/sword
 	name  = "Utility Frame - Melee Sword"

@@ -9,12 +9,12 @@
 
 /datum/event/gravity/start()
 	for(var/area/A in global.areas)
-		if(A.z in affecting_z)
+		if((A.z in affecting_z) && !A.is_planetary_surface)
 			A.gravitychange(FALSE)
 
 /datum/event/gravity/end()
 	for(var/area/A in global.areas)
-		if((A.z in affecting_z) && initial(A.has_gravity))
+		if((A.z in affecting_z) && initial(A.has_gravity) && !A.is_planetary_surface)
 			A.gravitychange(TRUE)
 
 	command_announcement.Announce("Gravity generators are again functioning within normal parameters. Sorry for any inconvenience.", "[location_name()] Gravity Subsystem", zlevels = affecting_z)
