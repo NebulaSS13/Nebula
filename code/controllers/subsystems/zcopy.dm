@@ -629,9 +629,19 @@ SUBSYSTEM_DEF(zcopy)
 		if (OO.dir != OO.associated_atom.dir)
 			OO.dir = OO.associated_atom.dir	// updates are propagated up another way, don't use set_dir
 		OO.appearance = OO.associated_atom
-		OO.cached_name = OO.name
+
+		var/atom/movable/openspace/mimic/parent = astype(OO.associated_atom)
+		if (parent)
+			// If we're a mimic of a mimic, the mimic may be hidden and have an invalid name. It should have a valid cached_name that we can use, though.
+			OO.cached_name = parent.cached_name
+		else
+			OO.cached_name = OO.name
+
 		if (OO.hidden)
 			OO.name = ""
+		else if (!OO.name)
+			OO.name = OO.cached_name
+
 		OO.z_flags = OO.associated_atom.z_flags | initial(OO.z_flags)
 
 		if (OO.particles != OO.associated_atom.particles)
