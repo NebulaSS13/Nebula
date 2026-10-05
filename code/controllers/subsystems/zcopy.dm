@@ -705,7 +705,7 @@ SUBSYSTEM_DEF(zcopy)
 		deltimer(OO.destruction_timer)
 		OO.destruction_timer = null
 
-	update_mimic_layering(OO)
+	update_mimic_layering(OO, OO.loc)
 
 	if (!OO.queued)
 		OO.queued = TRUE
@@ -722,13 +722,16 @@ SUBSYSTEM_DEF(zcopy)
 
 	return FALSE
 
-/// Regenerate a mimic's layering and render slice membership information. This does not recursively update. It's valid to call this on a mimic that is located on a non-mimic turf, but it must be on a turf.
-/datum/controller/subsystem/zcopy/proc/update_mimic_layering(atom/movable/openspace/mimic/target_mimic)
+/**
+	Regenerate a mimic's layering and render slice membership information. This does not recursively update.
+	It's valid to call this on a mimic that is located on a non-mimic turf, but it must be on a turf.
+	`T` must be the mimic's (eventual) location, where rendering slot information will be derived from.
+*/
+/datum/controller/subsystem/zcopy/proc/update_mimic_layering(atom/movable/openspace/mimic/target_mimic, turf/T)
 	var/override_plane
 	var/original_type = target_mimic.associated_atom.type
 	var/original_z = target_mimic.associated_atom.z
 
-	var/turf/T = target_mimic.loc
 	if (!isturf(T))
 		CRASH("Attempt to generate mimic layering for orphaned mimic.")
 
@@ -772,12 +775,12 @@ SUBSYSTEM_DEF(zcopy)
 	target_mimic.plane = override_plane || ZM_COMPUTE_PLANE(target_mimic.depth, target_mimic.target_slot)
 
 /// Update if a mimic should be hidden from right-click, usually by it being underneath a non-mimic turf.
-/datum/controller/subsystem/zcopy/proc/update_mimic_occlusion(atom/movable/openspace/mimic/target_mimic, reason)
+/datum/controller/subsystem/zcopy/proc/update_mimic_occlusion(atom/movable/openspace/mimic/target_mimic, reason, turf/pending_loc)
 #ifdef ZM_ENH_DEBUG
 	var/old_state = target_mimic.hidden
 #endif
 
-	var/turf/T = target_mimic.loc
+	var/turf/T = pending_loc || target_mimic.loc
 	if (!isturf(T))
 		ZM_DEBUG_LOG("Mimic of [target_mimic.associated_atom] ([target_mimic.associated_atom.type]) is being hidden because of a non-turf loc")
 		target_mimic.hidden = ZM_HIDE_NONMIMIC
