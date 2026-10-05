@@ -18,8 +18,9 @@
 			SSzcopy.discover_movable(src)
 			return
 
-		SSzcopy.queued_overlays += bound_overlay
-		bound_overlay.queued += 1
+		if (!bound_overlay.queued)
+			SSzcopy.queued_overlays += bound_overlay
+			bound_overlay.queued = TRUE
 	else if (bound_overlay && !bound_overlay.destruction_timer)
 		bound_overlay.orphan("update_above")
 
@@ -141,7 +142,7 @@
 
 /atom/movable/openspace/mimic/Destroy()
 	SSzcopy.openspace_overlays -= 1
-	queued = 0
+	queued = FALSE
 
 	if (associated_atom)
 		associated_atom.bound_overlay = null

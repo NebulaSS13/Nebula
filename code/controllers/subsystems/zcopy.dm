@@ -79,9 +79,6 @@ SUBSYSTEM_DEF(zcopy)
 	var/openspace_boundaries = 0
 	var/openspace_multipliers = 0
 
-	var/multiqueue_skips_turf = 0	//! How many times did we skip a redundant turf update due to not being the most recent update?
-	var/multiqueue_skips_object = 0	//! How many times did we skip a redundant object update due to not being the most recent update?
-
 	var/total_updates_turf = 0
 	var/total_updates_discovery = 0
 	var/total_updates_object = 0
@@ -167,7 +164,7 @@ SUBSYSTEM_DEF(zcopy)
 
 	for (var/turf/T in world)
 		if (T.z_queued)
-			T.z_queued = 0
+			T.z_queued = FALSE
 
 		CHECK_TICK
 
@@ -205,7 +202,7 @@ SUBSYSTEM_DEF(zcopy)
 		"T(U): { Tb: [total_boundary_reocclusion] | T: [total_updates_turf] | L: [lighting_updates] | O: [total_updates_object] }",
 		"T(St): { BPr: [total_boundary_promotions] | BDe: [total_boundary_demotions] | BRm: [total_boundary_removals] | D: [total_updates_discovery] | DDef: [deferred_discoveries] }",
 		"T(VB): { Scan: [total_large_boundary_scans] | New: [total_large_boundary_proxy_creations] }",
-		"Sk: { T: [multiqueue_skips_turf] | O: [multiqueue_skips_object] | DInv: [discovery_invalid] | SZero: [total_space_zeroinit] | SFast: [total_space_fastinit] }",
+		"Sk: { DInv: [discovery_invalid] | SZero: [total_space_zeroinit] | SFast: [total_space_fastinit] }",
 		"F(St): { H: [fixup_hit] / [fixup_hit_root] | M: [fixup_miss] / [fixup_miss_root] | N: [fixup_noop] / [fixup_noop_root] } F(C): { Mangle: [fixup_cache.len] | No-op: [fixup_known_good.len] }"
 	)
 	..(entries.Join("\n\t"))
@@ -356,12 +353,6 @@ SUBSYSTEM_DEF(zcopy)
 		if (!isturf(T) || !T.z_queued)
 			continue
 
-		// If we're not at our most recent queue position, don't bother -- we're updating again later anyways.
-		if (T.z_queued > 1)
-			T.z_queued -= 1
-			multiqueue_skips_turf += 1
-			continue
-
 		if (!(T.z_flags & ZM_FLAGS_CAN_TURF_UPDATE))
 			continue
 
@@ -380,7 +371,7 @@ SUBSYSTEM_DEF(zcopy)
 				T.z_eventually_space = TRUE
 
 			T.z_generation += 1
-			T.z_queued -= 1
+			T.z_queued = FALSE
 			total_updates_turf += 1
 
 			if (T.above)
@@ -445,7 +436,7 @@ SUBSYSTEM_DEF(zcopy)
 				T.above.update_mimic()
 
 			total_updates_turf += 1
-			T.z_queued -= 1
+			T.z_queued = FALSE
 
 			ZM_RECORD_STOP
 			ZM_RECORD_WRITE(turf_stats, "Simple: [T.type] on [T.z]")
@@ -580,7 +571,7 @@ SUBSYSTEM_DEF(zcopy)
 		if (!T.lighting_overlay?.needs_update)
 			update_lighting(T)
 
-		T.z_queued -= 1
+		T.z_queued = FALSE
 		if (T.above && !T.above.z_queued)
 			T.above.update_mimic()
 
@@ -632,13 +623,6 @@ SUBSYSTEM_DEF(zcopy)
 			ZM_MC_TRY_YIELD
 			continue
 
-		// Don't update unless we're at the most recent queue occurrence.
-		if (OO.queued > 1)
-			OO.queued -= 1
-			multiqueue_skips_object += 1
-			// We're decrementing a number, presumably this does not happen enough to risk overrun.
-			continue
-
 		ZM_RECORD_START
 
 		// Actually update the overlay.
@@ -655,7 +639,7 @@ SUBSYSTEM_DEF(zcopy)
 
 		OO.plane = OO.override_plane || ZM_COMPUTE_PLANE(OO.depth, OO.target_slot)
 		OO.opacity = FALSE
-		OO.queued = 0
+		OO.queued = FALSE
 
 		// If an atom has explicit plane sets on its overlays/underlays, we need to mangle the appearance's overlays/underlays to align with Z-Mimic's plane usage.
 		if (OO.z_flags & (ZMM_MANGLE_PLANES | ZMM_AUTOMANGLE))
@@ -713,11 +697,9 @@ SUBSYSTEM_DEF(zcopy)
 
 	update_mimic_layering(OO)
 
-	// Multi-queue to maintain ordering of updates to these
-	//   queueing it multiple times will result in only the most recent
-	//   actually processing.
-	OO.queued += 1
-	queued_overlays += OO
+	if (!OO.queued)
+		OO.queued = TRUE
+		queued_overlays += OO
 
 	total_updates_discovery += 1
 
@@ -995,15 +977,6 @@ SUBSYSTEM_DEF(zcopy)
 	if (!check_rights(R_DEBUG))
 		return
 
-	var/real_update_count = 0
-	var/claimed_update_count = T.z_queued
-	var/list/tq = SSzcopy.queued_turfs.Copy()
-	for (var/turf/Tu in tq)
-		if (Tu == T)
-			real_update_count += 1
-
-		CHECK_TICK
-
 	var/list/temp_objects = list()
 	var/alist/lighting_overlays = alist()
 
@@ -1043,7 +1016,7 @@ SUBSYSTEM_DEF(zcopy)
 		"<head><meta charset='utf-8'/></head><body>",
 		"<h1>Analysis of [T] at [T.x],[T.y],[T.z] (<a href='?_src_=vars;zm_analyze=\ref[T]'>refresh</a>)</h1>",
 		"<b>Connections:</b> [above_label] / [below_label]",
-		"<b>Queue occurrences:</b> [T.z_queued]",
+		"<b>Queued:</b> [T.z_queued ? "Yes" : "No"]",
 		// boundaries don't compute eventually_space, nor do non-z turfs
 		"<b>Above space:</b> Apparent: [FMT_YESNO(T.z_eventually_space)], Actual: [FMT_YESNO(is_above_space)] - [FMT_MAYBE(T.z_eventually_space == is_above_space, !TURF_IS_MIMIC(T))]",
 		"<b>Root:</b> [FMT_MAYBE(T.z_discovered_root == true_root, T.z_was_fastinit || !TURF_IS_MIMIC(T))]",	// fast init doesn't set this, nor do boundaries, nor do non-z turfs
@@ -1057,8 +1030,7 @@ SUBSYSTEM_DEF(zcopy)
 		"<b>Fast init:</b> Allowed: [FMT_YESNO(T.z_allow_fastinit)] / Used: [FMT_YESNO(T.z_was_fastinit)]",
 		"<b>Was replaced:</b> [T.z_was_replaced ? "Yes" : "No"]",
 		"<b>Depth:</b> [FMT_DEPTH(T.z_depth)] [T.z_depth == OPENTURF_MAX_DEPTH ? "(max)" : ""]",
-		"<b>Generation:</b> [T.z_generation] general, [T.z_generation_lighting] lighting",
-		"<b>Update count:</b> Claimed [claimed_update_count], Actual [real_update_count] - [FMT_OK(claimed_update_count == real_update_count)]"
+		"<b>Generation:</b> [T.z_generation] general, [T.z_generation_lighting] lighting"
 	)
 
 	var/list/found_oo = list(T)
