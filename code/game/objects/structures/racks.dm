@@ -49,12 +49,12 @@
 
 /obj/structure/rack/walnut
 	material = /decl/material/solid/organic/wood/walnut
-	color = /decl/material/solid/organic/wood/walnut::color
+	color = /decl/material/solid/organic/wood/walnut::solid_color
 
 /obj/structure/rack/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/rack/mahogany
 	material = /decl/material/solid/organic/wood/mahogany
-	color = /decl/material/solid/organic/wood/mahogany::color
+	color = /decl/material/solid/organic/wood/mahogany::solid_color

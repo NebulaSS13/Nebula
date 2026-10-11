@@ -30,7 +30,7 @@
 // Subtypes.
 #define MATERIAL_BRICK_WALL(material_name) \
 /turf/wall/brick/##material_name { \
-	color = /decl/material/solid/stone/##material_name::color; \
+	color = /decl/material/solid/stone/##material_name::solid_color; \
 	material = /decl/material/solid/stone/##material_name; \
 }; \
 /turf/wall/brick/##material_name/shutter { \

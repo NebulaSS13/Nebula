@@ -2,7 +2,7 @@
 	name = "ANFO"
 	lore_text = "Ammonia Nitrate Fuel Oil mix, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
 	taste_description = "fertilizer and fuel"
-	color = "#dbc3c3"
+	liquid_color = "#dbc3c3"
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_anfo"
@@ -37,7 +37,7 @@
 /decl/material/liquid/anfo/plus
 	name = "ANFO+"
 	lore_text = "Ammonia Nitrate Fuel Oil, with aluminium powder, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
-	color = "#ffe8e8"
+	liquid_color = "#ffe8e8"
 	boompower = 2
 	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC

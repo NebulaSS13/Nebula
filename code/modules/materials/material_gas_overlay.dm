@@ -22,4 +22,4 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return INITIALIZE_HINT_QDEL
 	if(material.gas_tile_overlay)
 		icon_state = material.gas_tile_overlay
-	color = material.color
+	color = material.gas_color

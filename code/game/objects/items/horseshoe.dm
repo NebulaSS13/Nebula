@@ -5,7 +5,7 @@
 	icon_state          = ICON_STATE_WORLD
 	icon                = 'icons/obj/items/horseshoe.dmi'
 	material            = /decl/material/solid/metal/iron
-	color               = /decl/material/solid/metal/iron::color
+	color               = /decl/material/solid/metal/iron::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 /// A horseshoe hung above a door.

@@ -193,8 +193,8 @@ var/global/const/COMPOST_WORM_HUNGER_FACTOR = MINIMUM_CHEMICAL_VOLUME
 
 /obj/structure/reagent_dispensers/compost_bin/ebony
 	material = /decl/material/solid/organic/wood/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/reagent_dispensers/compost_bin/walnut
 	material = /decl/material/solid/organic/wood/walnut
-	color = /decl/material/solid/organic/wood/walnut::color
+	color = /decl/material/solid/organic/wood/walnut::solid_color

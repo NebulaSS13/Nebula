@@ -3,6 +3,7 @@
 	var/name = null
 	var/result = null
 	var/list/required_reagents = list()
+	var/alist/required_reagent_phases
 	var/list/catalysts = list()
 	var/list/inhibitors = list()
 	var/result_amount = 0
@@ -20,15 +21,15 @@
 
 /decl/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
 	//check that all the required reagents are present
-	if(!holder.has_all_reagents(required_reagents))
+	if(!holder.has_all_reagents(required_reagents, required_reagent_phases))
 		return 0
 
 	//check that all the required catalysts are present in the required amount
-	if(!holder.has_all_reagents(catalysts))
+	if(!holder.has_all_reagents(catalysts, required_reagent_phases))
 		return 0
 
 	//check that none of the inhibitors are present in the required amount
-	if(holder.has_any_reagent(inhibitors))
+	if(holder.has_any_reagent(inhibitors, required_reagent_phases))
 		return 0
 
 	var/atom/location = holder.get_reaction_loc(chemical_reaction_flags)

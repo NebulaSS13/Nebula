@@ -41,7 +41,7 @@
 	name = "stimulants"
 	lore_text = "Improves the ability to concentrate."
 	taste_description = "sourness"
-	color = "#bf80bf"
+	liquid_color = "#bf80bf"
 	scannable = 1
 	metabolism = 0.01
 	value = 1.5
@@ -69,7 +69,7 @@
 	name = "antidepressants"
 	lore_text = "Stabilizes the mind a little."
 	taste_description = "bitterness"
-	color = "#ff80ff"
+	liquid_color = "#ff80ff"
 	scannable = 1
 	metabolism = 0.01
 	value = 1.5

@@ -156,7 +156,6 @@
 		/decl/material/liquid/alcohol/mead,
 		/decl/material/liquid/water,
 		/decl/material/liquid/nutriment/sugar,
-		/decl/material/solid/ice,
 		/decl/material/liquid/drink/tea/black,
 		/decl/material/liquid/drink/cola,
 		/decl/material/liquid/drink/citrussoda,

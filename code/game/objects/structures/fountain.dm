@@ -126,4 +126,4 @@
 
 /obj/structure/fountain/mundane/sandstone
 	material = /decl/material/solid/stone/sandstone
-	color = /decl/material/solid/stone/sandstone::color
+	color = /decl/material/solid/stone/sandstone::solid_color

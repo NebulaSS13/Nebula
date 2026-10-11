@@ -5,7 +5,7 @@
 	desc = "A slender tool used for picking locks."
 	lock_picking_level = 25 // 20 * (25 / length of lock string) - 50% base success for 'sunken keep'
 	material = /decl/material/solid/metal/steel
-	color = /decl/material/solid/metal/steel::color
+	color = /decl/material/solid/metal/steel::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	w_class = ITEM_SIZE_TINY
 	max_health = 60
@@ -39,7 +39,7 @@
 	icon                = 'icons/obj/items/lockpick_roll.dmi'
 	icon_state          = ICON_STATE_WORLD
 	material            = /decl/material/solid/organic/leather
-	color               = /decl/material/solid/organic/leather::color
+	color               = /decl/material/solid/organic/leather::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	storage             = /datum/storage/lockpick_roll
 

@@ -35,7 +35,6 @@
 	var/list/banned_weather_conditions
 
 	var/water_material = /decl/material/liquid/water     // Material to use for the properties of rain.
-	var/ice_material =   /decl/material/solid/ice        // Material to use for the properties of snow and hail.
 
 	var/list/affecting_zs                                // What z-levels are we affecting?
 	var/datum/state_machine/weather/weather_system       // What is our internal state and how do we decide what state to use?
@@ -95,9 +94,7 @@
 	// - TODO: compare to a list of 'acceptable' states
 	if(!istype(next_state))
 		return FALSE
-	if(next_state.is_liquid && isnull(water_material))
-		return FALSE
-	if(next_state.is_ice && isnull(ice_material))
+	if((next_state.is_ice || next_state.is_liquid) && isnull(water_material))
 		return FALSE
 	if(length(banned_weather_conditions) && (next_state.type in banned_weather_conditions))
 		return FALSE

@@ -8,7 +8,7 @@
 	name              = "dirt"
 	icon              = 'icons/turf/flooring/dirt.dmi'
 	icon_state        = "dirt"
-	color             = /decl/material/solid/soil::color // preview color
+	color             = /decl/material/solid/soil::solid_color // preview color
 	_base_flooring    = /decl/flooring/dirt
 
 /turf/floor/chlorine_sand
@@ -77,7 +77,7 @@
 	name              = "mud"
 	icon              = 'icons/turf/flooring/mud.dmi'
 	icon_state        = "mud"
-	color             = /decl/material/solid/soil::color // preview color
+	color             = /decl/material/solid/soil::solid_color // preview color
 	_base_flooring    = /decl/flooring/mud
 
 /turf/floor/mud/water

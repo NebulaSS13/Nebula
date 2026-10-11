@@ -60,9 +60,9 @@
 		if(head_material)
 			var/decl/material/head_mat = GET_DECL(head_material)
 			if(burnt)
-				overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-burnt", head_mat.color, flags = RESET_COLOR)
+				overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-burnt", head_mat.solid_color, flags = RESET_COLOR)
 			else
-				overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-head", head_mat.color, flags = RESET_COLOR)
+				overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-head", head_mat.solid_color, flags = RESET_COLOR)
 		if(lit)
 			overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-lit", flags = RESET_COLOR)
 	return ..()
@@ -73,9 +73,9 @@
 	if(head_material)
 		var/decl/material/head_mat = GET_DECL(head_material)
 		if(burnt)
-			add_overlay(overlay_image(icon, "[icon_state]-burnt", head_mat.color, flags = RESET_COLOR|KEEP_APART))
+			add_overlay(overlay_image(icon, "[icon_state]-burnt", head_mat.solid_color, flags = RESET_COLOR|KEEP_APART))
 		else
-			add_overlay(overlay_image(icon, "[icon_state]-head", head_mat.color, flags = RESET_COLOR|KEEP_APART))
+			add_overlay(overlay_image(icon, "[icon_state]-head", head_mat.solid_color, flags = RESET_COLOR|KEEP_APART))
 	if(lit)
 		add_overlay(overlay_image(icon, "[icon_state]-lit", flags = RESET_COLOR|KEEP_APART))
 
@@ -84,8 +84,8 @@
 	if(head_material)
 		var/decl/material/head_mat = GET_DECL(head_material)
 		if(burnt)
-			. += overlay_image(icon, "[icon_state]-sconce-burnt", head_mat.color, flags = RESET_COLOR)
+			. += overlay_image(icon, "[icon_state]-sconce-burnt", head_mat.solid_color, flags = RESET_COLOR)
 		else
-			. += overlay_image(icon, "[icon_state]-sconce-head", head_mat.color, flags = RESET_COLOR)
+			. += overlay_image(icon, "[icon_state]-sconce-head", head_mat.solid_color, flags = RESET_COLOR)
 	if(lit)
 		. += overlay_image(icon, "[icon_state]-sconce-lit", color = lit_light_color, flags = RESET_COLOR)

@@ -19,11 +19,11 @@
 	return tool_qualities
 
 /obj/item/tool/shovel/wood
-	color    = /decl/material/solid/organic/wood/oak::color
+	color    = /decl/material/solid/organic/wood/oak::solid_color
 	material = /decl/material/solid/organic/wood/oak
 
 /obj/item/tool/shovel/wood/walnut
-	color    = /decl/material/solid/organic/wood/walnut::color
+	color    = /decl/material/solid/organic/wood/walnut::solid_color
 	handle_material = /decl/material/solid/organic/wood/walnut
 	material = /decl/material/solid/organic/wood/walnut
 

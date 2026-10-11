@@ -228,7 +228,7 @@
 	slot_flags = SLOT_NONE
 	additional_description = "used to wipe your feet when entering a building"
 	material = /decl/material/solid/organic/skin/fur
-	color = /decl/material/solid/organic/skin/fur::color
+	color = /decl/material/solid/organic/skin/fur::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 /obj/item/towel/doormat/Crossed(atom/movable/crosser)

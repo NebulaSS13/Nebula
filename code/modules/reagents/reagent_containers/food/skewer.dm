@@ -15,7 +15,7 @@
 	. = ..()
 	var/decl/material/meat = reagents?.get_primary_reagent_decl()
 	if(meat)
-		add_overlay(overlay_image(icon, "[icon_state]_meat", meat.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]_meat", meat.solid_color, RESET_COLOR))
 
 /obj/item/food/skewer/meat
 	name = "meat skewer"

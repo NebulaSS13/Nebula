@@ -97,7 +97,7 @@
 /obj/structure/wall_frame/on_update_icon()
 	..()
 	var/image/I
-	var/new_color = stripe_color ? stripe_color : material.color
+	var/new_color = stripe_color ? stripe_color : material.solid_color
 
 	for(var/i = 1 to 4)
 		var/conn = connections ? connections[i] : "0"
@@ -172,7 +172,7 @@
 #define LOW_LOG_WALL_SUBTYPE(material_name) \
 /obj/structure/wall_frame/log/##material_name { \
 	material = /decl/material/solid/organic/wood/##material_name; \
-	color = /decl/material/solid/organic/wood/##material_name::color; \
+	color = /decl/material/solid/organic/wood/##material_name::solid_color; \
 }
 
 LOW_LOG_WALL_SUBTYPE(fungal)

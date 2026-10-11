@@ -37,11 +37,9 @@
 
 /turf/floor/fixed/alium/Initialize()
 	. = ..()
-	var/decl/material/A = GET_DECL(/decl/material/solid/metal/aliumium)
-	if(!A)
-		return
-	color = A.color
-	var/style = A.hardness % 2 ? "curvy" : "jaggy"
+	var/decl/material/aliumium = GET_DECL(/decl/material/solid/metal/aliumium)
+	color = aliumium.solid_color
+	var/style = (aliumium.hardness % 2) ? "curvy" : "jaggy"
 	icon_state = "[style][(x*y) % 7]"
 
 /turf/floor/fixed/alium/airless

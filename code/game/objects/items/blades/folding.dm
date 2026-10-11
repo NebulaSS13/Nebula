@@ -115,8 +115,8 @@
 	var/image/open_close_image = new /image
 	open_close_image.name = folding_knife.open ? "Close blade" : "Open blade"
 	open_close_image.underlays = list(
-		overlay_image(folding_knife.icon, "[open_close_state]-hilt", folding_knife.hilt_material.color, RESET_COLOR),
-		overlay_image(folding_knife.icon, open_close_state, folding_knife.material.color, RESET_COLOR)
+		overlay_image(folding_knife.icon, "[open_close_state]-hilt", folding_knife.hilt_material.solid_color, RESET_COLOR),
+		overlay_image(folding_knife.icon, open_close_state, folding_knife.material.solid_color, RESET_COLOR)
 	)
 	.["Toggle"] = open_close_image
 /* 	if(!folding_knife.open) // Can only switch mode with the knife open, because we assume all tool interactions use the blade currently

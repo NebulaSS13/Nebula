@@ -6,7 +6,7 @@
 							matter kept stable and malleable through unknown means."
 	radioactivity          = 3
 	luminescence           = 0
-	color                  = "#413849"
+	solid_color            = "#413849"
 	door_icon_base         = "resin"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	gas_symbol_html        = "Ex<sub>(s)*</sub>"

@@ -12,8 +12,8 @@
 	sound_dropped    = 'sound/foley/rockscrape.ogg'
 
 /decl/material/liquid/Initialize()
-	if(!gas_name)
-		gas_name = "vaporized [name]"
-	if(!solid_name)
-		solid_name = "frozen [name]"
+	gas_name    ||= "vaporized [name]"
+	solid_name  ||= "frozen [name]"
+	solid_color ||= liquid_color
+	gas_color   ||= liquid_color
 	. = ..()

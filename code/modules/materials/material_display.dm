@@ -12,7 +12,7 @@
 		for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(type))
 			if(cocktail.matches(prop))
 				return cocktail.get_presentation_name(prop)
-	if(prop.reagents.has_reagent(/decl/material/solid/ice))
+	if(prop.reagents.has_reagent(/decl/material/liquid/water, phases = MAT_PHASE_SOLID))
 		. = "iced [.]"
 
 /decl/material/proc/get_presentation_desc(var/obj/item/prop)
@@ -63,7 +63,12 @@
 			var/data_color = rdata[DATA_MASK_COLOR]
 			if(data_color)
 				return data_color
-	return color
+	switch(phase_at_temperature())
+		if(MAT_PHASE_GAS)
+			return gas_color
+		if(MAT_PHASE_LIQUID)
+			return liquid_color
+	return solid_color
 
 /decl/material/proc/get_reagent_overlay_color(datum/reagents/holder)
 	var/list/rdata = REAGENT_DATA(holder, src)

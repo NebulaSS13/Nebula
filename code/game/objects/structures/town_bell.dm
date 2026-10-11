@@ -7,7 +7,7 @@
 	opacity             = FALSE
 	density             = TRUE
 	material            = /decl/material/solid/organic/wood/walnut
-	color               = /decl/material/solid/organic/wood/walnut::color
+	color               = /decl/material/solid/organic/wood/walnut::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 
 	var/near_sound      = 'sound/effects/bell_near.ogg'
@@ -35,7 +35,7 @@
 		if(world.time < next_ring)
 			bell_state = "[bell_state]-ringing"
 		if(check_state_in_icon(bell_state, icon))
-			add_overlay(overlay_image(icon, bell_state, bell_material::color, RESET_COLOR))
+			add_overlay(overlay_image(icon, bell_state, bell_material::solid_color, RESET_COLOR))
 
 /obj/structure/town_bell/proc/can_be_rung(mob/user)
 	if(!isturf(loc) || !z)

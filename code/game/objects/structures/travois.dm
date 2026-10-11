@@ -20,8 +20,8 @@
 	parts_type = /obj/item/stack/material/log
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 
 /obj/structure/travois/walnut
 	material = /decl/material/solid/organic/wood/walnut
-	color = /decl/material/solid/organic/wood/walnut::color
+	color = /decl/material/solid/organic/wood/walnut::solid_color

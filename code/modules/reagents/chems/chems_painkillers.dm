@@ -3,7 +3,7 @@
 	uid = "chem_painkillers"
 	lore_text = "A mild painkiller, used to treat headaches and other low-grade pain."
 	taste_description = "bitterness"
-	color = "#c8a5dc"
+	liquid_color = "#c8a5dc"
 	overdose = 60
 	scannable = 1
 	metabolism = 0.05
@@ -38,7 +38,7 @@
 	taste_description = "sourness"
 	uid = "chem_painkillers_strong"
 	pain_power = 80
-	color = "#cb68fc"
+	liquid_color = "#cb68fc"
 	overdose = 30
 	narcotic = TRUE
 

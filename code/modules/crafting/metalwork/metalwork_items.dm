@@ -63,7 +63,7 @@
 	var/decl/material/primary_reagent = reagents?.get_primary_reagent_decl()
 	if(primary_reagent)
 		var/image/I = image(icon, "[icon_state]-filled")
-		I.color = primary_reagent.color
+		I.color = primary_reagent.liquid_color
 		I.alpha = 255 * primary_reagent.opacity
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)

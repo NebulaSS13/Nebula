@@ -29,7 +29,7 @@
 	desc                = "Some loose hay from a haybale."
 	icon                = 'icons/effects/hay.dmi'
 	icon_state          = ICON_STATE_WORLD
-	color               = /decl/material/solid/organic/plantmatter/grass/dry::color
+	color               = /decl/material/solid/organic/plantmatter/grass/dry::solid_color
 	sweepable           = TRUE
 
 /obj/effect/decal/cleanable/hay/Initialize(ml, _age)
@@ -44,7 +44,7 @@
 	icon                = 'icons/obj/structures/haystack.dmi'
 	icon_state          = ICON_STATE_WORLD
 	material            = /decl/material/solid/organic/plantmatter/grass/dry
-	color               = /decl/material/solid/organic/plantmatter/grass/dry::color
+	color               = /decl/material/solid/organic/plantmatter/grass/dry::solid_color
 	storage             = /datum/storage/haystack
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	atom_flags          = ATOM_FLAG_CLIMBABLE

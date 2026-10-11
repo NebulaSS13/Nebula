@@ -2,7 +2,7 @@
 	name = "paralytics"
 	lore_text = "A powerful paralytic agent."
 	taste_description = "metallic"
-	color = "#ff337d"
+	liquid_color = "#ff337d"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 1.5
@@ -32,7 +32,7 @@
 	name = "presyncopics"
 	lore_text = "A compound that causess presyncopic effects in the taker, including confusion and dizzyness."
 	taste_description = "sourness"
-	color = "#000055"
+	liquid_color = "#000055"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	heating_point = 61 CELSIUS

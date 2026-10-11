@@ -30,7 +30,7 @@
 		key_count++
 		var/image/I = image(icon, "[icon_state]-[key_count]")
 		I.appearance_flags |= RESET_COLOR | RESET_ALPHA
-		I.color = key.material?.color
+		I.color = key.material?.solid_color
 		I.alpha = key.alpha
 		add_overlay(I)
 		if(key_count >= 3)

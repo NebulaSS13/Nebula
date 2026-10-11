@@ -74,8 +74,7 @@
 
 /obj/machinery/door/airlock/alien/Initialize()
 	. = ..()
-	var/decl/material/A = GET_DECL(/decl/material/solid/metal/aliumium)
-	if(A)
-		door_color = A.color
+	var/decl/material/aliumium = GET_DECL(/decl/material/solid/metal/aliumium)
+	door_color = aliumium.solid_color
 	stripe_color = get_random_colour(FALSE, 0, 255)
 	update_icon()

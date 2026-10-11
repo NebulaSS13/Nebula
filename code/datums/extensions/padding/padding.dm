@@ -36,7 +36,7 @@
 /// Returns the color of the padding, either the painted/dyed color or (optionally) the underlying material color.
 /datum/extension/padding/proc/get_padding_color(use_material_color = TRUE)
 	var/decl/material/padding_material = get_padding_material()
-	return padding_color || (use_material_color ? padding_material?.color : null)
+	return padding_color || (use_material_color ? padding_material?.solid_color : null)
 
 /// Used to change just the paint color on padding.
 /datum/extension/padding/proc/set_padding_color(new_color)

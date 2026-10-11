@@ -17,7 +17,7 @@
 	icon_state          = ICON_STATE_WORLD
 	storage             = /datum/storage/candelabra
 	material            = /decl/material/solid/metal/brass
-	color               = /decl/material/solid/metal/brass::color
+	color               = /decl/material/solid/metal/brass::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 /obj/item/candelabra/attackby(obj/item/used_item, mob/user)

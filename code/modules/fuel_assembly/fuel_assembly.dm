@@ -48,7 +48,7 @@
 		if(material.luminescence)
 			luminescence = material.luminescence
 	if(luminescence)
-		set_light(material.luminescence, material.luminescence, material.color)
+		set_light(material.luminescence, material.luminescence, material.solid_color)
 	if(radioactivity)
 		desc += " It is warm to the touch."
 		START_PROCESSING(SSobj, src)
@@ -58,12 +58,12 @@
 	. = ..()
 	icon_state = "fuel_assembly"
 	if(material)
-		color = material.color
+		color = material.solid_color
 	else if(length(matter))
 		var/list/colors = list()
 		for(var/mat_p in matter)
 			var/decl/material/mat = GET_DECL(mat_p)
-			colors += mat.color
+			colors += mat.solid_color
 		color = MixColors(colors)
 	var/image/I = image(icon, "fuel_assembly_bracket")
 	I.appearance_flags |= RESET_COLOR

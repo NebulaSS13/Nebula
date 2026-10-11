@@ -37,7 +37,7 @@
 			var/fleece_state = "[critter.icon_state]-fleece"
 			if(check_state_in_icon(fleece_state, critter.icon))
 				var/mob/living/simple_animal/animal = critter
-				LAZYSET(animal.draw_visible_overlays, "fleece", fleece_material.color)
+				LAZYSET(animal.draw_visible_overlays, "fleece", fleece_material.solid_color)
 
 		critter.try_refresh_visible_overlays()
 		return PROCESS_KILL

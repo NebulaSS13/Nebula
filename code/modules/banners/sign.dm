@@ -4,7 +4,7 @@
 	embroiderable       = FALSE
 	icon                = 'icons/obj/items/banners/sign.dmi'
 	material            = /decl/material/solid/organic/wood/oak
-	color               = /decl/material/solid/organic/wood/oak::color
+	color               = /decl/material/solid/organic/wood/oak::solid_color
 	hung_desc           = "The sign is unadorned."
 	colourise_decal     = FALSE
 

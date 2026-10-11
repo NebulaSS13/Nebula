@@ -58,7 +58,9 @@ var/global/list/random_chem_interaction_blacklist = list(
 	for(var/i in 1 to heat_num)
 		heating_products[pick_n_take(whitelist)] = 1 / heat_num
 
-	color = rgb(rand(255), rand(255), rand(255))
+	liquid_color = rgb(rand(255), rand(255), rand(255))
+	solid_color  = liquid_color
+	gas_color    = liquid_color
 
 	data_initialized = TRUE
 

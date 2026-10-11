@@ -22,7 +22,7 @@
 	anchored = TRUE
 	density = FALSE
 	material = /decl/material/solid/stone/basalt
-	color = /decl/material/solid/stone/basalt::color
+	color = /decl/material/solid/stone/basalt::solid_color
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	abstract_type = /obj/structure/fire_source
@@ -545,7 +545,7 @@
 	icon_state = "stove"
 	density = TRUE
 	material = /decl/material/solid/metal/iron
-	color = /decl/material/solid/metal/iron::color
+	color = /decl/material/solid/metal/iron::solid_color
 	obj_flags = OBJ_FLAG_HOLLOW
 
 /obj/structure/fire_source/stove/grab_attack(obj/item/grab/grab, mob/user)
@@ -570,7 +570,7 @@
 
 #define MATERIAL_FIREPLACE(material_name) \
 /obj/structure/fire_source/fireplace/##material_name { \
-	color = /decl/material/solid/stone/##material_name::color; \
+	color = /decl/material/solid/stone/##material_name::solid_color; \
 	material = /decl/material/solid/stone/##material_name; \
 }
 MATERIAL_FIREPLACE(basalt)
@@ -581,7 +581,7 @@ MATERIAL_FIREPLACE(pottery)
 
 #define MATERIAL_FIREPIT(material_name) \
 /obj/structure/fire_source/firepit/##material_name { \
-	color = /decl/material/solid/stone/##material_name::color; \
+	color = /decl/material/solid/stone/##material_name::solid_color; \
 	material = /decl/material/solid/stone/##material_name; \
 }
 MATERIAL_FIREPIT(basalt)

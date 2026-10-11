@@ -28,7 +28,7 @@
 // Takes material colour. TODO: Crafting recipe for cloth, fur, leather, etc. cloaks.
 /obj/item/clothing/suit/cloak/crafted
 	material = /decl/material/solid/organic/cloth
-	color = /decl/material/solid/organic/cloth::color
+	color = /decl/material/solid/organic/cloth::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 // Cloaks should layer over and under everything, so set the layer directly rather
@@ -123,7 +123,7 @@
 	desc = "A ragged cloak made of some sort of thick hide."
 	icon = 'icons/clothing/suits/cloaks/cloak_hide.dmi'
 	material = /decl/material/solid/organic/leather
-	color = /decl/material/solid/organic/leather::color
+	color = /decl/material/solid/organic/leather::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	armor_type = /datum/extension/armor/ablative
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY

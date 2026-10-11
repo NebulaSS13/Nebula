@@ -1,7 +1,7 @@
 /decl/material/solid/pitchblende
 	name = "pitchblende"
 	uid = "solid_pitchblende"
-	color = "#917d1a"
+	solid_color = "#917d1a"
 	ore_result_amount = 1
 	ore_spread_chance = 10
 	ore_name = "pitchblende"
@@ -25,7 +25,7 @@
 	name = "graphite"
 	codex_name = "loose graphite"
 	uid = "solid_graphite"
-	color = "#444444"
+	solid_color = "#444444"
 	ore_name = "graphite"
 	ore_result_amount = 2
 	ore_spread_chance = 25
@@ -67,7 +67,7 @@
 	ore_icon_overlay = "lump"
 	melting_point = 1744
 	boiling_point = 2504
-	color = "#effffe"
+	solid_color = "#effffe"
 	reflectiveness = MAT_VALUE_SHINY
 	hardness = MAT_VALUE_VERY_HARD - 5 // Hard enough to whet steel.
 	sparse_material_weight = 3
@@ -84,7 +84,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	color = "#ccc9a3"
+	solid_color = "#ccc9a3"
 	reflectiveness = MAT_VALUE_SHINY
 	value = 0.8
 	sparse_material_weight = 9
@@ -102,7 +102,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	color = "#e5becb"
+	solid_color = "#e5becb"
 	value = 0.8
 	sparse_material_weight = 9
 	rich_material_weight = 3
@@ -118,7 +118,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	color = "#e54e4e"
+	solid_color = "#e54e4e"
 	value = 0.8
 	sparse_material_weight = 9
 	rich_material_weight = 3
@@ -137,7 +137,7 @@
 	dissolves_into = list(
 		/decl/material/solid/phosphorus = 1
 	)
-	color = "#832828"
+	solid_color = "#832828"
 	value = 0.8
 	sparse_material_weight = 9
 	rich_material_weight = 3
@@ -153,7 +153,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	color = "#d1c0bc"
+	solid_color = "#d1c0bc"
 	value = 0.8
 	sparse_material_weight = 12
 	rich_material_weight = 4
@@ -174,7 +174,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	color = "#b77464"
+	solid_color = "#b77464"
 	value = 0.8
 	sparse_material_weight = 3
 	rich_material_weight = 1
@@ -199,7 +199,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	color = "#d8ad97"
+	solid_color = "#d8ad97"
 	heating_products = list(
 		/decl/material/solid/metal/aluminium = 0.8,
 		/decl/material/solid/slag = 0.2
@@ -217,7 +217,7 @@
 /decl/material/solid/sand
 	name = "sand"
 	uid = "solid_sand"
-	color = "#e2dbb5"
+	solid_color = "#e2dbb5"
 	heating_products = list(/decl/material/solid/glass = 1)
 	heating_point = 2000 CELSIUS
 	heating_sound = null
@@ -244,7 +244,7 @@
 	name = "clay"
 	codex_name = "raw clay"
 	uid = "solid_clay"
-	color = "#807f7a"
+	solid_color = "#807f7a"
 	ore_name = "clay"
 	ore_compresses_to = null
 	ore_icon_overlay = "lump_large"
@@ -271,7 +271,7 @@
 	name = "soil"
 	codex_name = "soil"
 	uid = "solid_soil"
-	color = "#41311b"
+	solid_color = "#41311b"
 	value = 0
 	default_solid_form = /obj/item/stack/material/lump/large
 	melting_point = null
@@ -301,7 +301,7 @@
 /decl/material/solid/hematite
 	name = "hematite"
 	uid = "solid_hematite"
-	color = "#aa6666"
+	solid_color = "#aa6666"
 	heating_products = list(
 		/decl/material/solid/metal/iron = 0.8,
 		/decl/material/solid/slag = 0.2
@@ -324,7 +324,7 @@
 /decl/material/solid/rutile
 	name = "rutile"
 	uid = "solid_rutile"
-	color = "#d8ad97"
+	solid_color = "#d8ad97"
 	heating_products = list(
 		/decl/material/solid/metal/titanium = 0.8,
 		/decl/material/solid/slag = 0.2
@@ -367,7 +367,7 @@
 /decl/material/solid/magnetite
 	name = "magnetite"
 	uid = "solid_magnetite"
-	color = "#aa6666"
+	solid_color = "#aa6666"
 	heating_products = list(
 		/decl/material/solid/metal/iron = 0.8,
 		/decl/material/solid/metal/copper = 0.1,
@@ -395,7 +395,7 @@
 /decl/material/solid/chalcopyrite
 	name = "chalcopyrite"
 	uid = "solid_chalcopyrite"
-	color = "#9e9357"
+	solid_color = "#9e9357"
 	heating_products = list(
 		/decl/material/solid/metal/copper = 0.6,
 		/decl/material/solid/slag = 0.4
@@ -422,7 +422,7 @@
 /decl/material/solid/densegraphite
 	name = "dense graphite"
 	uid = "solid_dense_graphite"
-	color = "#2c2c2c"
+	solid_color = "#2c2c2c"
 	heating_products = list(
 		/decl/material/solid/gemstone/diamond = 0.02,
 		/decl/material/solid/carbon = 0.98
@@ -454,7 +454,7 @@
 /decl/material/solid/cassiterite
 	name = "cassiterite"
 	uid = "solid_cassiterite"
-	color = "#a1a4cf"
+	solid_color = "#a1a4cf"
 	heating_products = list(
 		/decl/material/solid/metal/tin = 0.7,
 		/decl/material/solid/metal/tungsten = 0.2,
@@ -481,7 +481,7 @@
 /decl/material/solid/wolframite
 	name = "wolframite"
 	uid = "solid_wolframite"
-	color = "#8184ac"
+	solid_color = "#8184ac"
 	heating_products = list(
 		/decl/material/solid/metal/tin = 0.1,
 		/decl/material/solid/metal/tungsten = 0.2,
@@ -510,7 +510,7 @@
 /decl/material/solid/sperrylite
 	name = "sperrylite"
 	uid = "solid_sperrylite"
-	color = "#cfd0d8"
+	solid_color = "#cfd0d8"
 	heating_products = list(
 		/decl/material/solid/metal/platinum = 0.5,
 		/decl/material/solid/metal/iron = 0.1,
@@ -540,7 +540,7 @@
 /decl/material/solid/sphalerite
 	name = "sphalerite"
 	uid = "solid_sphalerite"
-	color = "#aaaa9c"
+	solid_color = "#aaaa9c"
 	heating_products = list(
 		/decl/material/solid/metal/zinc = 0.7,
 		/decl/material/solid/metal/iron = 0.1,
@@ -568,7 +568,7 @@
 /decl/material/solid/galena
 	name = "galena"
 	uid = "solid_galena"
-	color = "#aaaa9c"
+	solid_color = "#aaaa9c"
 	heating_products = list(
 		/decl/material/solid/metal/lead = 0.6,
 		/decl/material/solid/metal/iron = 0.2,
@@ -597,7 +597,7 @@
 /decl/material/solid/calaverite
 	name = "calaverite"
 	uid = "solid_calaverite"
-	color = "#aaaa9c"
+	solid_color = "#aaaa9c"
 	heating_products = list(
 		/decl/material/solid/metal/gold = 0.6,
 		/decl/material/solid/metal/silver = 0.3,
@@ -624,7 +624,7 @@
 /decl/material/solid/crocoite
 	name = "crocoite"
 	uid = "solid_crocoite"
-	color = "#fa672c"
+	solid_color = "#fa672c"
 	heating_products = list(
 		/decl/material/solid/metal/chromium = 0.3,
 		/decl/material/solid/metal/lead = 0.4,
@@ -651,7 +651,7 @@
 /decl/material/solid/borax
 	name = "borax"
 	uid = "solid_borax"
-	color = "#a9aa81"
+	solid_color = "#a9aa81"
 	heating_products = list(
 		/decl/material/solid/boron = 0.8,
 		/decl/material/solid/slag = 0.2

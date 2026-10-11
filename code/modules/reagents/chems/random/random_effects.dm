@@ -52,7 +52,9 @@
 	return color_matrix_rotate_hue(round(rand(0,360),20))
 
 /decl/random_chem_effect/general_properties/color/on_property_recompute(var/decl/material/liquid/random/reagent, var/value)
-	reagent.color = value
+	reagent.liquid_color = value
+	reagent.gas_color = value
+	reagent.solid_color = value
 
 /decl/random_chem_effect/general_properties/overdose
 	minimum = REAGENTS_OVERDOSE * 0.2

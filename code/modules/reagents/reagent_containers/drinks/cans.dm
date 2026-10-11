@@ -96,7 +96,7 @@
 
 /obj/item/chems/drinks/cans/iced_tea/populate_reagents()
 	add_to_reagents(/decl/material/liquid/drink/tea/black, REAGENT_MAXIMUM_VOLUME(reagents) - 5)
-	add_to_reagents(/decl/material/solid/ice,              5)
+	add_to_reagents(/decl/material/liquid/water, 5, phase = MAT_PHASE_SOLID)
 
 /obj/item/chems/drinks/cans/grape_juice
 	name = "\improper Grapel Juice"

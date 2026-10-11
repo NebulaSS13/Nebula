@@ -29,7 +29,7 @@
 	overdose = 20
 	ingest_met = REM
 	toxicity = 2
-	color = "#c6e2ff"
+	liquid_color = "#c6e2ff"
 	affect_blood_on_ingest = 0.7
 
 /decl/material/liquid/sifsap/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)

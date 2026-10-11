@@ -70,7 +70,7 @@
 	icon            = 'icons/turf/flooring/ice.dmi'
 	icon_base       = "ice"
 	color           = COLOR_LIQUID_WATER
-	force_material  = /decl/material/solid/ice
+	force_material  = /decl/material/liquid/water
 	uid             = "floor_ice"
 
 /decl/flooring/ice/get_vehicle_transit_delay(obj/vehicle/vehicle)

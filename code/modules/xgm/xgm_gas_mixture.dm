@@ -511,7 +511,7 @@ var/global/alist/cached_mat_color_weight = alist()
 		if(length(gas) == 1)
 			for(var/gas_type in gas)
 				var/decl/material/G = GET_DECL(gas_type)
-				cached_mix_color = G.color + num2hex(G.opacity * 255)
+				cached_mix_color = G.gas_color + num2hex(G.opacity * 255)
 			return cached_mix_color
 
 		//If we really have to, add up all colors
@@ -520,7 +520,7 @@ var/global/alist/cached_mat_color_weight = alist()
 			var/decl/material/G = GET_DECL(mat_path)
 			if(G.color_weight <= 0)
 				continue
-			var/hex = uppertext(G.color) + num2hex(G.opacity * 255)
+			var/hex = uppertext(G.gas_color) + num2hex(G.opacity * 255)
 			cached_mix_color = BlendHSV(cached_mix_color, hex, (mat_moles * G.color_weight) / total_moles)
 
 	return cached_mix_color

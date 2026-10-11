@@ -5,7 +5,8 @@
 	solid_name = "ice"
 	gas_name = "water vapour"
 	lore_text = "A ubiquitous chemical substance composed of hydrogen and oxygen."
-	color = COLOR_LIQUID_WATER
+	liquid_color = COLOR_LIQUID_WATER
+	solid_color = "#a5f2f3"
 	gas_tile_overlay = "generic"
 	gas_overlay_limit = 0.5
 	gas_specific_heat = 30
@@ -26,9 +27,6 @@
 	dirtiness = DIRTINESS_CLEAN
 	turf_touch_threshold = 0.1
 	chilling_point = T0C
-	chilling_products = list(
-		/decl/material/solid/ice = 1
-	)
 	temperature_burn_milestone_material = /decl/material/liquid/water
 	can_boil_to_gas = TRUE
 	coated_adjective = "wet"

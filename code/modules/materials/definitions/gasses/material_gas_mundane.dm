@@ -148,7 +148,7 @@
 /decl/material/gas/nitrodioxide
 	name = "nitrogen dioxide"
 	uid = "gas_nitrogen_dioxide"
-	color = "#ca6409"
+	gas_color = "#ca6409"
 	gas_specific_heat = 37
 	molar_mass = 0.054
 	latent_heat = 272
@@ -227,7 +227,7 @@
 	taste_description = "mordant"
 	taste_mult = 2
 	lore_text = "A caustic substance commonly used in fertilizer or household cleaners."
-	color = "#404030"
+	gas_color = "#404030"
 	metabolism = REM * 0.5
 	overdose = 5
 
@@ -258,7 +258,7 @@
 /decl/material/gas/chlorine
 	name = "chlorine"
 	uid = "gas_chlorine"
-	color = "#c5f72d"
+	gas_color = "#c5f72d"
 	gas_overlay_limit = 0.5
 	gas_specific_heat = 5
 	molar_mass = 0.071 //Cl2 gas
@@ -313,7 +313,7 @@
 	uid = "gas_tritium"
 	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
 	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by using a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
-	color = "#777777"
+	gas_color = "#777777"
 	stack_origin_tech = @'{"materials":5}'
 	value = 0.45
 	melting_point = -252 CELSIUS
@@ -330,7 +330,7 @@
 	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
 	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by using a fuel compressor. It is the most 'basic' fusion fuel."
 	flags = MAT_FLAG_FUSION_FUEL | MAT_FLAG_FISSIBLE
-	color = "#999999"
+	gas_color = "#999999"
 	stack_origin_tech = @'{"materials":3}'
 	gas_symbol_html = "D"
 	gas_symbol = "D"

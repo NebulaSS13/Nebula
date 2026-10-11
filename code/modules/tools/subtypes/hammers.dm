@@ -87,7 +87,7 @@
 
 /obj/item/tool/hammer/forge/iron
 	material         = /decl/material/solid/metal/iron
-	color            = /decl/material/solid/metal/iron::color
+	color            = /decl/material/solid/metal/iron::solid_color
 	handle_material  = /decl/material/solid/organic/wood/mahogany
 	binding_material = /decl/material/solid/organic/leather/gut
 

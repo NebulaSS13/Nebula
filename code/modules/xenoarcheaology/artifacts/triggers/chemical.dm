@@ -22,8 +22,7 @@
 /datum/artifact_trigger/chemical/water
 	name = "presence of water"
 	required_chemicals = list(
-		/decl/material/liquid/water,
-		/decl/material/solid/ice
+		/decl/material/liquid/water
 	)
 
 /datum/artifact_trigger/chemical/on_fluid_act(datum/reagents/fluids)

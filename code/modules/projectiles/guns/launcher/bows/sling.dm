@@ -5,7 +5,7 @@
 	draw_time       = 0.5 SECONDS
 	icon            = 'icons/obj/guns/launcher/sling.dmi'
 	material        = /decl/material/solid/organic/leather
-	color           = /decl/material/solid/organic/leather::color
+	color           = /decl/material/solid/organic/leather::solid_color
 	string          = null
 	requires_string = FALSE
 	max_tension     = 1

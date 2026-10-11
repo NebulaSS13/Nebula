@@ -2,12 +2,12 @@
 	name          = "wooden floor"
 	icon          = 'icons/turf/flooring/wood.dmi'
 	icon_state    = "wood0"
-	color         = /decl/material/solid/organic/wood/oak::color
+	color         = /decl/material/solid/organic/wood/oak::solid_color
 	_flooring     = /decl/flooring/wood
 
 #define WOOD_FLOOR_SUBTYPE(BASE, WOOD) \
 /turf/floor/##BASE/##WOOD { \
-	color         = /decl/material/solid/organic/wood/##WOOD::color; \
+	color         = /decl/material/solid/organic/wood/##WOOD::solid_color; \
 	_flooring     = /decl/flooring/##BASE/##WOOD; \
 }
 
@@ -49,7 +49,7 @@ WOOD_FLOOR_SUBTYPE(wood, yew)
 	name          = "rough-hewn wooden floor"
 	icon          = 'icons/turf/flooring/wood_alt.dmi'
 	icon_state    = "wood_peasant0"
-	color         = /decl/material/solid/organic/wood/oak::color
+	color         = /decl/material/solid/organic/wood/oak::solid_color
 	_flooring     = /decl/flooring/wood
 
 WOOD_FLOOR_SUBTYPE(wood/rough, mahogany)
@@ -64,7 +64,7 @@ WOOD_FLOOR_SUBTYPE(wood/rough, yew)
 	name          = "wooden laminate floor"
 	icon          = 'icons/turf/flooring/laminate.dmi'
 	icon_state    = "wood"
-	color         = /decl/material/solid/organic/wood/chipboard::color
+	color         = /decl/material/solid/organic/wood/chipboard::solid_color
 	_flooring     = /decl/flooring/laminate
 
 /turf/floor/laminate/broken
@@ -94,21 +94,21 @@ WOOD_FLOOR_SUBTYPE(wood/rough, yew)
 	_floor_broken = "broken4"
 
 /turf/floor/laminate/mahogany
-	color         = /decl/material/solid/organic/wood/chipboard/mahogany::color
+	color         = /decl/material/solid/organic/wood/chipboard/mahogany::solid_color
 	_flooring     = /decl/flooring/laminate/mahogany
 
 /turf/floor/laminate/maple
-	color         = /decl/material/solid/organic/wood/chipboard/maple::color
+	color         = /decl/material/solid/organic/wood/chipboard/maple::solid_color
 	_flooring     = /decl/flooring/laminate/maple
 
 /turf/floor/laminate/ebony
-	color         = /decl/material/solid/organic/wood/chipboard/ebony::color
+	color         = /decl/material/solid/organic/wood/chipboard/ebony::solid_color
 	_flooring     = /decl/flooring/laminate/ebony
 
 /turf/floor/laminate/walnut
-	color         = /decl/material/solid/organic/wood/chipboard/walnut::color
+	color         = /decl/material/solid/organic/wood/chipboard/walnut::solid_color
 	_flooring     = /decl/flooring/laminate/walnut
 
 /turf/floor/laminate/yew
-	color         = /decl/material/solid/organic/wood/chipboard/yew::color
+	color         = /decl/material/solid/organic/wood/chipboard/yew::solid_color
 	_flooring     = /decl/flooring/laminate/yew

@@ -164,7 +164,7 @@
 	center_of_mass = @'{"x":15,"y":10}'
 
 /obj/item/chems/drinks/ice/populate_reagents()
-	add_to_reagents(/decl/material/solid/ice, REAGENT_MAXIMUM_VOLUME(reagents))
+	add_to_reagents(/decl/material/liquid/water, REAGENT_MAXIMUM_VOLUME(reagents), phase = MAT_PHASE_SOLID)
 
 /obj/item/chems/drinks/h_chocolate
 	name = "cup of hot cocoa"

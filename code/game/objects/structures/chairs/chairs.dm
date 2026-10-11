@@ -370,7 +370,7 @@
 	icon = 'icons/obj/structures/furniture/chair_backed.dmi'
 	reinf_material = null
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 
 /obj/structure/chair/backed/get_material_icon()
 	return material?.backed_chair_icon || initial(icon)
@@ -381,7 +381,7 @@
 	icon = 'icons/obj/structures/furniture/chair_slatted.dmi'
 	reinf_material = null
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 
 /obj/structure/chair/slatted/get_material_icon()
 	return material?.slatted_seat_icon || initial(icon)

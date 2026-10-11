@@ -57,7 +57,7 @@
 
 /decl/cocktail/proc/get_presentation_name(var/obj/item/prop)
 	. = name
-	if(prop?.reagents?.has_reagent(/decl/material/solid/ice) && !(/decl/material/solid/ice in ratios))
+	if(prop?.reagents?.has_reagent(/decl/material/liquid/water, phases = MAT_PHASE_SOLID) && !(/decl/material/liquid/water in ratios))
 		. = "[name], on the rocks"
 
 /decl/cocktail/proc/get_presentation_desc(var/obj/item/prop)
@@ -79,8 +79,8 @@
 		if(isnum(ratios[rtype]))
 			LAZYSET(check_ratios, rtype, ratios[rtype])
 	var/effective_volume = REAGENT_TOTAL_VOLUME(prop.reagents)
-	if(!(/decl/material/solid/ice in ratios))
-		effective_volume -= REAGENT_VOLUME(prop.reagents, /decl/material/solid/ice)
+	if(!(/decl/material/liquid/water in ratios))
+		effective_volume -= SOLID_VOLUME(prop.reagents, /decl/material/liquid/water)
 	for(var/rtype in check_ratios)
 		if((REAGENT_VOLUME(prop.reagents, rtype) / effective_volume) < check_ratios[rtype])
 			return FALSE
@@ -398,9 +398,9 @@
 	name = "Booger"
 	description = "A thick and creamy cocktail."
 	ratios = list(
-		/decl/material/liquid/drink/milk/cream =       2,
-		/decl/material/liquid/alcohol/rum =            2,
-		/decl/material/liquid/drink/juice/banana =     1,
+		/decl/material/liquid/drink/milk/cream       = 2,
+		/decl/material/liquid/alcohol/rum            = 2,
+		/decl/material/liquid/drink/juice/banana     = 1,
 		/decl/material/liquid/drink/juice/watermelon = 1
 	)
 
@@ -408,9 +408,9 @@
 	name = "Anti-freeze"
 	description = "A chilled cocktail invented and popularized by corona miners."
 	ratios = list(
-		/decl/material/liquid/alcohol/vodka =    3,
+		/decl/material/liquid/alcohol/vodka    = 3,
 		/decl/material/liquid/drink/milk/cream = 2,
-		/decl/material/solid/ice =               2
+		/decl/material/liquid/water            = 2
 	)
 
 /decl/cocktail/barefoot
@@ -587,7 +587,7 @@
 	name = "Snowball"
 	description = "A cold pick-me-up frequently drunk in scientific outposts and academic offices."
 	ratios = list(
-		/decl/material/solid/ice =                     3,
+		/decl/material/liquid/water =                  3,
 		/decl/material/liquid/drink/coffee =           2,
 		/decl/material/liquid/drink/juice/watermelon = 1
 	)

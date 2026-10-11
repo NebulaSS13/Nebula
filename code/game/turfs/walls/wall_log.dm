@@ -1,7 +1,7 @@
 /turf/wall/log
 	icon_state = "log"
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 	girder_material = null
 	floor_type = /turf/floor/dirt
 	min_dismantle_amount = 3
@@ -32,7 +32,7 @@
 #define LOG_WALL_SUBTYPE(material_name) \
 /turf/wall/log/##material_name { \
 	material = /decl/material/solid/organic/wood/##material_name; \
-	color = /decl/material/solid/organic/wood/##material_name::color; \
+	color = /decl/material/solid/organic/wood/##material_name::solid_color; \
 }; \
 /turf/wall/log/##material_name/shutter { \
 	shutter_state = FALSE; \

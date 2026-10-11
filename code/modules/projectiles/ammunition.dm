@@ -7,7 +7,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_HOLLOW
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
-	color = /decl/material/solid/metal/brass::color // mapping preview color
+	color = /decl/material/solid/metal/brass::solid_color // mapping preview color
 	material = /decl/material/solid/metal/brass
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	drop_sound = list(

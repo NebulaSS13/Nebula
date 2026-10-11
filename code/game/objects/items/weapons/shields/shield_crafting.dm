@@ -5,7 +5,7 @@
 	icon_state          = ICON_STATE_WORLD
 	icon                = 'icons/obj/items/shield_fasteners.dmi'
 	material            = /decl/material/solid/metal/iron
-	color               = /decl/material/solid/metal/iron::color
+	color               = /decl/material/solid/metal/iron::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 // TODO: single-step slapcrafting
@@ -15,7 +15,7 @@
 	icon_state = ICON_STATE_WORLD
 	abstract_type = /obj/item/shield_base
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	var/wooden_icon
 	var/fittings_type = /obj/item/shield_fasteners

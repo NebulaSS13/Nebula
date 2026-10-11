@@ -4,12 +4,12 @@
 	icon                = 'mods/content/fantasy/icons/clothing/trousers.dmi'
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	material            = /decl/material/solid/organic/leather
-	color               = /decl/material/solid/organic/leather::color
+	color               = /decl/material/solid/organic/leather::solid_color
 	_hnoll_onmob_icon   = 'mods/content/fantasy/icons/clothing/trousers_hnoll.dmi'
 
 /obj/item/clothing/pants/trousers/linen
 	material            = /decl/material/solid/organic/cloth/linen
-	color               = /decl/material/solid/organic/cloth/linen::color
+	color               = /decl/material/solid/organic/cloth/linen::solid_color
 
 /obj/item/clothing/pants/trousers/braies
 	name                = "braies"

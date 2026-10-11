@@ -1,7 +1,7 @@
 /decl/material/solid/organic/wood
 	name = "wood"
 	abstract_type = /decl/material/solid/organic/wood
-	color = WOOD_COLOR_GENERIC
+	solid_color = WOOD_COLOR_GENERIC
 	integrity = 75
 	icon_base = 'icons/turf/walls/wood.dmi'
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
@@ -74,13 +74,13 @@
 	name = "towercap"
 	adjective_name = "towercap"
 	uid = "solid_wood_fungal"
-	color = "#e6d8dd"
+	solid_color = "#e6d8dd"
 	hardness = MAT_VALUE_FLEXIBLE + 10
 
 /decl/material/solid/organic/wood/holographic
 	name = "holographic wood"
 	uid = "solid_holographic_wood"
-	color = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
+	solid_color = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
 	adjective_name = "holowood"
 	visual_only = TRUE
 
@@ -89,7 +89,7 @@
 	uid = "solid_mahogany"
 	adjective_name = "mahogany"
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
-	color = WOOD_COLOR_RICH
+	solid_color = WOOD_COLOR_RICH
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	value = 1.6
 
@@ -98,7 +98,7 @@
 	uid = "solid_maple"
 	adjective_name = "maple"
 	lore_text = "Owing to its fast growth and ease of working, silver maple is a popular wood for flooring and furniture."
-	color = WOOD_COLOR_PALE
+	solid_color = WOOD_COLOR_PALE
 	value = 1.8
 
 /decl/material/solid/organic/wood/ebony
@@ -109,7 +109,7 @@
 				Despite gene modification to produce larger source trees and ample land to plant them on, \
 				genuine ebony remains a luxury for the very wealthy thanks to the price fixing efforts of intergalactic luxuries cartels. \
 				Most people will only ever touch ebony in small items, such as chess pieces, or the accent pieces of a fine musical instrument."
-	color = WOOD_COLOR_BLACK
+	solid_color = WOOD_COLOR_BLACK
 	weight = MAT_VALUE_HEAVY
 	integrity = 100
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
@@ -122,7 +122,7 @@
 	lore_text = "Walnut is a dense hardwood that polishes to a very fine finish. \
 				Walnut is especially favoured for construction of figurines (where it contrasts with lighter coloured woods) and tables. \
 				The ultimate aspiration of many professionals is an office with a vintage walnut desk, the bigger and heavier the better."
-	color = WOOD_COLOR_CHOCOLATE
+	solid_color = WOOD_COLOR_CHOCOLATE
 	weight = MAT_VALUE_NORMAL
 	construction_difficulty = MAT_VALUE_HARD_DIY
 
@@ -133,7 +133,7 @@
 	adjective_name = "bamboo"
 	lore_text = "Bamboo is a fast-growing grass which can be used similar to wood after processing. Due to its swift growth \
 				and high strength, various species of bamboo area common building materials in developing societies."
-	color = WOOD_COLOR_PALE2
+	solid_color = WOOD_COLOR_PALE2
 	weight = MAT_VALUE_VERY_LIGHT
 	hardness = MAT_VALUE_RIGID
 
@@ -143,7 +143,7 @@
 	adjective_name = "yew"
 	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
 				tree can live for nearly a thousand years thanks to its natural disease resistance."
-	color = WOOD_COLOR_YELLOW
+	solid_color = WOOD_COLOR_YELLOW
 	dissolves_into = list(
 		/decl/material/solid/carbon = 0.6,
 		/decl/material/liquid/water = 0.3,
@@ -164,7 +164,7 @@
 	backed_chair_icon  = 'icons/obj/structures/furniture/chair_backed.dmi'
 	door_icon_base     = "metal"
 	table_icon_base    = "metal"
-	color              = WOOD_COLOR_GENERIC
+	solid_color        = WOOD_COLOR_GENERIC
 	value              = 1.1
 	default_solid_form = /obj/item/stack/material/sheet
 
@@ -173,32 +173,32 @@
 	lore_text          = "Also known as particle board, this material is made from various kinds of maple wood chips and resin, with a plastic laminate."
 	adjective_name     = "maple laminate"
 	uid                = "solid_wood_chipboard_maple"
-	color              = WOOD_COLOR_PALE
+	solid_color        = WOOD_COLOR_PALE
 
 /decl/material/solid/organic/wood/chipboard/mahogany
 	name               = "mahogany chipboard"
 	lore_text          = "Also known as particle board, this material is made from various kinds of mahogany wood chips and resin, with a plastic laminate."
 	adjective_name     = "mahogany laminate"
 	uid                = "solid_wood_chipboard_mahogany"
-	color              = WOOD_COLOR_RICH
+	solid_color        = WOOD_COLOR_RICH
 
 /decl/material/solid/organic/wood/chipboard/ebony
 	name               = "ebony chipboard"
 	lore_text          = "Also known as particle board, this material is made from various kinds of ebony wood chips and resin, with a plastic laminate."
 	adjective_name     = "ebony laminate"
 	uid                = "solid_wood_chipboard_ebony"
-	color              = WOOD_COLOR_BLACK
+	solid_color        = WOOD_COLOR_BLACK
 
 /decl/material/solid/organic/wood/chipboard/walnut
 	name               = "walnut chipboard"
 	lore_text          = "Also known as particle board, this material is made from various kinds of walnut wood chips and resin, with a plastic laminate."
 	adjective_name     = "walnut laminate"
 	uid                = "solid_wood_chipboard_walnut"
-	color              = WOOD_COLOR_CHOCOLATE
+	solid_color        = WOOD_COLOR_CHOCOLATE
 
 /decl/material/solid/organic/wood/chipboard/yew
 	name               = "yew chipboard"
 	lore_text          = "Also known as particle board, this material is made from various kinds of yew wood chips and resin, with a plastic laminate."
 	adjective_name     = "yew laminate"
 	uid                = "solid_wood_chipboard_yew"
-	color              = WOOD_COLOR_YELLOW
+	solid_color        = WOOD_COLOR_YELLOW

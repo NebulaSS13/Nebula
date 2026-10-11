@@ -1,7 +1,7 @@
 /turf/wall/wattle
 	icon_state = "wattle"
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 	girder_material = null
 	floor_type = /turf/floor/dirt
 	min_dismantle_amount = 3
@@ -49,12 +49,12 @@
 // daubed walls have the color of their daubing
 /turf/wall/wattle/get_base_color()
 	if(daubing_material)
-		return "#795946" // daubing_material.color // sorry, but using the daubing material color looks bad
+		return "#795946" // daubing_material.solid_color // sorry, but using the daubing material color looks bad
 	return ..()
 
 // don't plaster over our damn reinforcements
 /turf/wall/wattle/get_reinf_color()
-	return reinf_material?.color
+	return reinf_material?.solid_color
 
 /turf/wall/wattle/get_wall_icon()
 	if(isnull(daubing_material))
@@ -102,13 +102,13 @@
 /turf/wall/wattle/daubed/plastered/framed
 	icon_state = "framed"
 	reinf_material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color // preview, still painted
+	color = /decl/material/solid/organic/wood/oak::solid_color // preview, still painted
 
 // Subtypes.
 #define WATTLE_WALL_SUBTYPE(material_name) \
 /turf/wall/wattle/##material_name { \
 	material = /decl/material/solid/organic/wood/##material_name; \
-	color = /decl/material/solid/organic/wood/##material_name::color; \
+	color = /decl/material/solid/organic/wood/##material_name::solid_color; \
 }; \
 /turf/wall/wattle/##material_name/shutter { \
 	shutter_state = FALSE; \
@@ -140,7 +140,7 @@
 /turf/wall/wattle/daubed/plastered/framed/##material_name { \
 	material = /decl/material/solid/organic/wood/##material_name; \
 	reinf_material = /decl/material/solid/organic/wood/##material_name; \
-	color = /decl/material/solid/organic/wood/##material_name::color; \
+	color = /decl/material/solid/organic/wood/##material_name::solid_color; \
 }; \
 /turf/wall/wattle/daubed/plastered/framed/##material_name/shutter { \
 	shutter_state = FALSE; \

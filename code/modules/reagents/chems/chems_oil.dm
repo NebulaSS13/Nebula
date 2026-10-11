@@ -8,7 +8,7 @@
 	melting_point          = 273
 	boiling_point          = 373
 	uid                    = "chem_oil_lamp"
-	color                  = "#664330"
+	liquid_color           = "#664330"
 	value                  = 1.5
 	taste_mult             = 4
 	metabolism             = REM * 4
@@ -32,7 +32,7 @@
 	lore_text              = "An oil derived from various types of corn."
 	taste_description      = "slime"
 	nutriment_factor       = 20
-	color                  = "#302000"
+	liquid_color           = "#302000"
 	uid                    = "chem_oil_corn"
 	taste_mult             = 0.1
 

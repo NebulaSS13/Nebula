@@ -1,7 +1,7 @@
 /decl/material/solid/gemstone
 	flags                   = MAT_FLAG_UNMELTABLE
 	cut_delay               = 60
-	color                   = COLOR_DIAMOND
+	solid_color             = COLOR_DIAMOND
 	opacity                 = 0.4
 	shard_name              = SHARD_SHARD
 	tableslam_noise         = 'sound/effects/Glasshit.ogg'
@@ -49,22 +49,22 @@
 	hidden_from_codex = TRUE
 
 /decl/material/solid/gemstone/ruby
-	name      = "ruby"
-	lore_text = "A rich red stone sometimes found in marble."
-	uid       = "solid_ruby"
-	value     = 1.6
-	color     = "#d00000"
+	name        = "ruby"
+	lore_text   = "A rich red stone sometimes found in marble."
+	uid         = "solid_ruby"
+	value       = 1.6
+	solid_color = "#d00000"
 
 /decl/material/solid/gemstone/sapphire
-	name      = "sapphire"
-	lore_text = "A deep blue gemstone sometimes found in clay or other sediment."
-	uid       = "solid_sapphite"
-	value     = 1.6
-	color     = "#2983de"
+	name        = "sapphire"
+	lore_text   = "A deep blue gemstone sometimes found in clay or other sediment."
+	uid         = "solid_sapphite"
+	value       = 1.6
+	solid_color = "#2983de"
 
 /decl/material/solid/gemstone/topaz
-	name      = "topaz"
-	lore_text = "A golden gemstone sometimes found in granite."
-	uid       = "solid_topaz"
-	value     = 1.6
-	color     = "#f7b92d"
+	name        = "topaz"
+	lore_text   = "A golden gemstone sometimes found in granite."
+	uid         = "solid_topaz"
+	value       = 1.6
+	solid_color = "#f7b92d"

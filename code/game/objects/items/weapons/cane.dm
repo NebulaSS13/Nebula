@@ -28,7 +28,7 @@
 		var/decl/material/tip = GET_DECL(tip_material)
 		var/tip_state = "[icon_state]-tip"
 		if(check_state_in_icon(tip_state, icon))
-			add_overlay(overlay_image(icon, tip_state, tip.color, (RESET_COLOR | RESET_ALPHA)))
+			add_overlay(overlay_image(icon, tip_state, tip.solid_color, (RESET_COLOR | RESET_ALPHA)))
 
 /obj/item/cane/aluminium
 	material = /decl/material/solid/metal/aluminium

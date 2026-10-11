@@ -26,7 +26,7 @@
 	desc = "A pistol bullet casing fitted with a single-use ion pulse generator."
 	projectile_type = /obj/item/projectile/ion/small
 	material = /decl/material/solid/metal/steel
-	color = /decl/material/solid/metal/steel::color
+	color = /decl/material/solid/metal/steel::solid_color
 	matter = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT)
 	bullet_color = COLOR_ACID_CYAN
 	marking_color = COLOR_LUMINOL

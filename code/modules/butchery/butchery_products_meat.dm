@@ -53,7 +53,7 @@
 	name = "piece"
 	desc = "It tastes like you'd expect."
 	material = /decl/material/solid/organic/meat/chicken
-	color = /decl/material/solid/organic/meat/chicken::color
+	color = /decl/material/solid/organic/meat/chicken::solid_color
 	butchery_data = /decl/butchery_data/animal/small/fowl/chicken
 
 /obj/item/food/butchery/meat/chicken/game

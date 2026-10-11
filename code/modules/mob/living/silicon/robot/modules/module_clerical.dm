@@ -66,7 +66,7 @@
 		reagent.add_reagent(/decl/material/liquid/paralytics, 10)
 		reagent.add_reagent(/decl/material/liquid/sedatives, 15)
 		reagent.add_reagent(/decl/material/liquid/alcohol/beer, 20)
-		reagent.add_reagent(/decl/material/solid/ice, 5)
+		reagent.add_reagent(/decl/material/liquid/water, 5, phase = MAT_PHASE_SOLID)
 		emag.SetName("Mickey Finn's Special Brew")
 
 /obj/item/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/robot, var/amount)
@@ -76,7 +76,7 @@
 	if(emag)
 		var/obj/item/chems/drinks/bottle/small/beer/B = emag
 		B.add_to_reagents(/decl/material/liquid/alcohol/beer, amount * 0.4)
-		B.add_to_reagents(/decl/material/solid/ice,         amount * 0.1)
+		B.add_to_reagents(/decl/material/liquid/water,        amount * 0.1, phase = MAT_PHASE_SOLID)
 		B.add_to_reagents(/decl/material/liquid/paralytics,   amount * 0.2)
 		B.add_to_reagents(/decl/material/liquid/sedatives,    amount * 0.3)
 

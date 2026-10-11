@@ -3,7 +3,7 @@
 	desc = "A simple, rustic-looking chair. Looks like it'd hurt to sit on for too long..."
 	icon = 'icons/obj/structures/furniture/chair_rustic.dmi'
 	material = /decl/material/solid/organic/wood/walnut
-	color = /decl/material/solid/organic/wood/walnut::color
+	color = /decl/material/solid/organic/wood/walnut::solid_color
 	user_comfort = -0.5
 	_buckle_pixel_shift = TRUE // use chair offset
 

@@ -68,7 +68,7 @@
 
 #define MATERIAL_NATURAL_TURFS(ID, MAT)                          \
 /turf/floor/rock/##ID {                                          \
-	color    = /decl/material/##MAT::color;                      \
+	color    = /decl/material/##MAT::solid_color;                \
 	material = /decl/material/##MAT                              \
 }                                                                \
 /turf/floor/rock/##ID/sand {                                     \
@@ -79,12 +79,12 @@
 }                                                                \
 /turf/wall/natural/##ID {                                        \
 	material = /decl/material/##MAT;                             \
-	color = /decl/material/##MAT::color;                         \
+	color = /decl/material/##MAT::solid_color;                   \
 	floor_type = /turf/floor/rock/##ID;                          \
 }                                                                \
 /turf/wall/natural/random/##ID {                                 \
 	material = /decl/material/##MAT;                             \
-	color = /decl/material/##MAT::color;                         \
+	color = /decl/material/##MAT::solid_color;                   \
 	floor_type = /turf/floor/rock/##ID;                          \
 }                                                                \
 /turf/wall/natural/random/##ID/GetSerializedType() {             \
@@ -92,7 +92,7 @@
 }                                                                \
 /turf/wall/natural/random/high_chance/##ID {                     \
 	material = /decl/material/##MAT;                             \
-	color = /decl/material/##MAT::color;                         \
+	color = /decl/material/##MAT::solid_color;                   \
 	floor_type = /turf/floor/rock/##ID                           \
 }                                                                \
 /turf/wall/natural/random/high_chance/##ID/GetSerializedType() { \

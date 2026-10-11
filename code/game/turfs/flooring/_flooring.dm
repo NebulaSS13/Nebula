@@ -91,7 +91,7 @@ var/global/list/flooring_cache = list()
 	var/floor_layer = TURF_LAYER
 	/// If TRUE, this turf cannot be damaged, painted, pried off, etc.
 	var/visual_only = FALSE
-	var/dirt_color = /decl/material/solid/soil::color
+	var/dirt_color = /decl/material/solid/soil::solid_color
 
 	var/list/burned_states
 	var/list/broken_states

@@ -852,8 +852,19 @@
 /turf/proc/get_soil_color()
 	return null
 
+/decl/material/proc/get_color(temperature = T20C)
+	switch(phase_at_temperature(temperature))
+		if(MAT_PHASE_SOLID)
+			return solid_color
+		if(MAT_PHASE_LIQUID)
+			return liquid_color
+		if(MAT_PHASE_GAS)
+			return gas_color
+		if(MAT_PHASE_PLASMA)
+			return gas_color
+
 /turf/get_color()
-	return paint_color || get_material()?.color || color
+	return paint_color || get_material()?.get_color(temperature) || color
 
 /turf/get_affecting_weather()
 	return weather

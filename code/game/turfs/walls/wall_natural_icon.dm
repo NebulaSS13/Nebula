@@ -31,15 +31,15 @@
 /turf/wall/natural/update_wall_icon()
 
 	var/material_icon_base = get_wall_icon()
-	var/base_color = material.color
+	var/base_color = material.solid_color
 	var/shine = 0
 
 	if(material.reflectiveness > 0)
-		var/shine_cache_key = "[material.reflectiveness]-[material.color]"
+		var/shine_cache_key = "[material.reflectiveness]-[material.solid_color]"
 		shine = exterior_wall_shine_cache[shine_cache_key]
 		if(isnull(shine))
 			// patented formula based on color's value (in HSV)
-			shine = clamp((material.reflectiveness * 0.01) * 255, 10, (0.6 * rgb2num(material.color, COLORSPACE_HSV)[3]))
+			shine = clamp((material.reflectiveness * 0.01) * 255, 10, (0.6 * rgb2num(material.solid_color, COLORSPACE_HSV)[3]))
 			exterior_wall_shine_cache[shine_cache_key] = shine
 
 	var/new_icon

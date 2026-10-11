@@ -2,7 +2,7 @@
 	name = "fuel"
 	lore_text = "A stable hydrazine-based compound whose exact manufacturing specifications are a closely-guarded secret. One of the most common fuels in human space. Extremely flammable."
 	taste_description = "gross metal"
-	color = "#660000"
+	liquid_color = "#660000"
 	touch_met = 5
 	ignition_point = T0C+150
 	accelerant_value = FUEL_VALUE_ACCELERANT + 0.2
@@ -43,7 +43,7 @@
 	name = "hydrazine"
 	lore_text = "A toxic, colorless, flammable liquid with a strong ammonia-like odour, in hydrate form."
 	taste_description = "sweet tasting metal"
-	color = "#808080"
+	liquid_color = "#808080"
 	metabolism = REM * 0.2
 	touch_met = 5
 	value = 1.2

@@ -32,7 +32,7 @@
 	icon                = 'mods/content/blacksmithy/icons/billet.dmi'
 	icon_state          = ICON_STATE_WORLD
 	material            = /decl/material/solid/metal/iron
-	color               = /decl/material/solid/metal/iron::color
+	color               = /decl/material/solid/metal/iron::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	var/decl/forging_step/current_forging_step = /decl/forging_step/billet
 

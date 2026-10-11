@@ -29,7 +29,7 @@
 	uid = "liquid_corruption_isolated"
 	lore_text = "An incredibly dark, oily substance. Moves very slightly."
 	taste_description = "decayed blood"
-	color = "#800000"
+	liquid_color = "#800000"
 	amount_to_zombify = 3
 
 /obj/item/chems/glass/beaker/vial/random_podchem

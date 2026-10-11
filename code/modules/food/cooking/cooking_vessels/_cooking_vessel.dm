@@ -8,7 +8,7 @@
 	material_alteration           = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	storage                       = /datum/storage/hopper/industrial
 	material                      = /decl/material/solid/metal/stainlesssteel
-	color                         = /decl/material/solid/metal/stainlesssteel::color
+	color                         = /decl/material/solid/metal/stainlesssteel::solid_color
 	amount_per_transfer_from_this = 15
 
 	// Used for work sounds.

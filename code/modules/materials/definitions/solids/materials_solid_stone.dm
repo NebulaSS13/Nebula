@@ -1,7 +1,7 @@
 /decl/material/solid/stone
 	name = null
 	abstract_type = /decl/material/solid/stone
-	color = "#d9c179"
+	solid_color = "#d9c179"
 	shard_name = SHARD_STONE_PIECE
 	weight = MAT_VALUE_HEAVY
 	hardness = MAT_VALUE_HARD - 5
@@ -49,23 +49,23 @@
 	name          = "limestone"
 	uid           = "solid_limestone"
 	lore_text     = "A pale sedimentary rock, often containing fossils. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
-	color         = COLOR_BEIGE
+	solid_color   = COLOR_BEIGE
 	value         = 1.5
 	melting_point = T0C + 600
 	hardness      = MAT_VALUE_RIGID + 5
 
 /decl/material/solid/stone/flint
-	name      = "flint"
-	uid       = "solid_flint"
-	lore_text = "A hard, smooth stone traditionally used for making fire."
-	value     = 3
-	color     = "#615f5f"
+	name        = "flint"
+	uid         = "solid_flint"
+	lore_text   = "A hard, smooth stone traditionally used for making fire."
+	value       = 3
+	solid_color = "#615f5f"
 
 /decl/material/solid/stone/granite
 	name                   = "granite"
 	uid                    = "solid_granite"
 	lore_text              = "A coarse-grained igneous rock formed by magma containing sillicon and alkali metal oxides."
-	color                  = "#615f5f"
+	solid_color            = "#615f5f"
 	exoplanet_rarity_plant = MAT_RARITY_MUNDANE
 	exoplanet_rarity_gas   = MAT_RARITY_MUNDANE
 	hardness               = MAT_VALUE_HARD
@@ -84,7 +84,7 @@
 	name = "fired clay"
 	uid = "solid_pottery"
 	lore_text = "A hard but brittle substance produced by firing clay in a kiln."
-	color = "#cd8f75"
+	solid_color = "#cd8f75"
 	adjective_name = "earthenware"
 	melting_point = 2000 // Arbitrary, hotter than the kiln currently reaches.
 
@@ -92,7 +92,7 @@
 	name = "ceramic"
 	uid = "solid_ceramic"
 	lore_text = "A very hard, heat-resistant substance produced by firing glazed clay in a kiln."
-	color = COLOR_OFF_WHITE
+	solid_color = COLOR_OFF_WHITE
 	melting_point = 6000 // Arbitrary, very heat-resistant.
 
 	dissolves_in = MAT_SOLVENT_IMMUNE
@@ -102,7 +102,7 @@
 	name = "marble"
 	uid = "solid_marble"
 	lore_text = "A metamorphic rock largely sourced from Earth. Prized for use in extremely expensive decorative surfaces."
-	color = "#aaaaaa"
+	solid_color = "#aaaaaa"
 	weight = MAT_VALUE_VERY_HEAVY
 	wall_support_value = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_HARD
@@ -117,7 +117,7 @@
 	name = "basalt"
 	uid = "solid_basalt"
 	lore_text = "A ubiquitous volcanic stone."
-	color = COLOR_DARK_GRAY
+	solid_color = COLOR_DARK_GRAY
 	weight = MAT_VALUE_VERY_HEAVY
 	wall_support_value = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_HARD
@@ -129,7 +129,7 @@
 	name = "concrete"
 	uid = "solid_concrete"
 	lore_text = "The most ubiquitous building material of old Earth, now in space. Consists of mineral aggregate bound with some sort of cementing solution."
-	color = COLOR_GRAY
+	solid_color = COLOR_GRAY
 	value = 0.9
 	melting_point  = T0C + 1200
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE

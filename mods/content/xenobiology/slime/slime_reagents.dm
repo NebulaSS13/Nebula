@@ -10,7 +10,7 @@
 	)
 	heating_point = 100 CELSIUS
 	heating_message = "becomes clear."
-	color = "#cf3600"
+	liquid_color = "#cf3600"
 	metabolism = REM * 0.25
 	opacity = 0.7 // copied from cherry jelly
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC

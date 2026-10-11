@@ -4,7 +4,7 @@
 	icon                = 'icons/obj/structures/divider.dmi'
 	icon_state          = ICON_STATE_WORLD + "-closed"
 	material            = /decl/material/solid/organic/wood/bamboo
-	color               = /decl/material/solid/organic/wood/bamboo::color
+	color               = /decl/material/solid/organic/wood/bamboo::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
 	var/extended        = FALSE
 
@@ -14,16 +14,16 @@
 
 /obj/structure/divider/wood
 	material            = /decl/material/solid/organic/wood/oak
-	color               = /decl/material/solid/organic/wood/oak::color
+	color               = /decl/material/solid/organic/wood/oak::solid_color
 
 /obj/structure/divider/extended/wood
 	material            = /decl/material/solid/organic/wood/oak
-	color               = /decl/material/solid/organic/wood/oak::color
+	color               = /decl/material/solid/organic/wood/oak::solid_color
 
 
 /obj/structure/divider/extended/wood/ebony
 	material            = /decl/material/solid/organic/wood/ebony
-	color               = /decl/material/solid/organic/wood/ebony::color
+	color               = /decl/material/solid/organic/wood/ebony::solid_color
 
 /obj/structure/divider/attack_hand(mob/user)
 	if(user.check_intent(I_FLAG_HELP) && user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, silent = TRUE))

@@ -3,7 +3,7 @@
 	uid = "liquid_sulfuric_acid"
 	lore_text = "A very corrosive mineral acid with the molecular formula H2SO4."
 	taste_description = "acid"
-	color = "#db5008"
+	liquid_color = "#db5008"
 	metabolism = REM * 2
 	touch_met = 50 // It's acid!
 	value = 1.2
@@ -19,7 +19,7 @@
 	uid = "liquid_hydrochloric_acid"
 	lore_text = "A very corrosive mineral acid with the molecular formula HCl."
 	taste_description = "stomach acid"
-	color = "#808080"
+	liquid_color = "#808080"
 	solvent_power = MAT_SOLVENT_STRONG
 	solvent_melt_dose = 8
 	solvent_max_damage = 30
@@ -33,7 +33,7 @@
 	uid = "liquid_polytrinic_acid"
 	lore_text = "Polytrinic acid is an extremely corrosive chemical substance."
 	taste_description = "acid"
-	color = "#8e18a9"
+	liquid_color = "#8e18a9"
 	solvent_power = MAT_SOLVENT_STRONGEST
 	solvent_melt_dose = 4
 	solvent_max_damage = 60
@@ -46,7 +46,7 @@
 	uid = "liquid_stomach_acid"
 	taste_description = "coppery foulness"
 	solvent_power = MAT_SOLVENT_MODERATE
-	color = "#d8ff00"
+	liquid_color = "#d8ff00"
 	hidden_from_codex = TRUE
 	value = 0
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
@@ -57,7 +57,7 @@
 	uid = "liquid_acetone"
 	lore_text = "A colorless liquid solvent used in chemical synthesis."
 	taste_description = "acid"
-	color = "#808080"
+	liquid_color = "#808080"
 	metabolism = REM * 0.2
 	value = 0.1
 	solvent_power = MAT_SOLVENT_MODERATE

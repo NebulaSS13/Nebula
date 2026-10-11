@@ -108,7 +108,7 @@
 	name        = "stool"
 	icon        = 'icons/obj/stool_rustic.dmi'
 	material    = /decl/material/solid/organic/wood/walnut
-	color       = /decl/material/solid/organic/wood/walnut::color
+	color       = /decl/material/solid/organic/wood/walnut::solid_color
 	// Cannot be padded.
 	padding_extension_type = null
 

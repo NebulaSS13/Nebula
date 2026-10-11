@@ -10,7 +10,7 @@
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
 	material = /decl/material/solid/organic/wood/oak
 	material_alteration = MAT_FLAG_ALTERATION_ALL
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color
 
 /obj/item/rollingpin/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 	if (user.has_genetic_condition(GENE_COND_CLUMSY) && prob(50) && user.try_unequip(src))
@@ -22,4 +22,4 @@
 
 /obj/item/kitchen/rollingpin/walnut
 	material = /decl/material/solid/organic/wood/walnut
-	color = /decl/material/solid/organic/wood/walnut::color
+	color = /decl/material/solid/organic/wood/walnut::solid_color

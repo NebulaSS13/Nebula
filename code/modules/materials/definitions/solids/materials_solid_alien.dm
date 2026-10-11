@@ -17,7 +17,7 @@
 /decl/material/solid/metal/aliumium/Initialize()
 	icon_base = 'icons/turf/walls/metal.dmi'
 	wall_flags = PAINT_PAINTABLE
-	color = rgb(rand(10,150),rand(10,150),rand(10,150))
+	solid_color = rgb(rand(10,150),rand(10,150),rand(10,150))
 	explosion_resistance = rand(25,40)
 	brute_armor = rand(10,20)
 	burn_armor = rand(10,20)

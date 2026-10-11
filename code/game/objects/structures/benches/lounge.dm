@@ -8,7 +8,7 @@
 	return icon || initial(icon)
 
 /obj/structure/chair/bench/lounge/mapped
-	color          = /decl/material/solid/organic/wood/mahogany::color
+	color          = /decl/material/solid/organic/wood/mahogany::solid_color
 	material       = /decl/material/solid/organic/wood/mahogany
 	initial_padding_material = /decl/material/solid/organic/cloth
 	initial_padding_color  = COLOR_RED_GRAY

@@ -13,7 +13,7 @@
 	icon = 'icons/obj/structures/butchery.dmi'
 	icon_state = "spike"
 	material = /decl/material/solid/metal/steel
-	color = /decl/material/solid/metal/steel::color
+	color = /decl/material/solid/metal/steel::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	matter = list(
 		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY

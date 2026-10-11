@@ -4,7 +4,7 @@
 	lore_text = "All the vitamins, minerals, and carbohydrates the body needs in pure form."
 	taste_mult = 4
 	metabolism = REM * 4
-	color = "#664330"
+	liquid_color = "#664330"
 	value = 1.2
 	fruit_descriptor = "nutritious"
 	uid = "chem_nutriment"
@@ -39,7 +39,7 @@
 
 /decl/material/liquid/nutriment/glucose
 	name = "glucose"
-	color = "#ffffff"
+	liquid_color = "#ffffff"
 	scannable = 1
 	injectable_nutrition = TRUE
 	uid = "chem_nutriment_glucose"
@@ -58,7 +58,7 @@
 	name = "plant protein"
 	lore_text = "A gooey pale paste."
 	taste_description = "healthy sadness"
-	color = "#ffffff"
+	liquid_color = "#ffffff"
 	uid = "chem_nutriment_plant"
 	allergen_flags = ALLERGEN_VEGETABLE
 
@@ -67,7 +67,7 @@
 	lore_text = "A golden yellow syrup, loaded with sugary sweetness."
 	taste_description = "sweetness"
 	nutriment_factor = 10
-	color = "#ffff00"
+	liquid_color = "#ffff00"
 	fruit_descriptor = "rich"
 	uid = "chem_nutriment_honey"
 	melting_point = 273
@@ -79,7 +79,7 @@
 	lore_text = "This is what you rub all over yourself to pretend to be a ghost."
 	taste_description = "chalky wheat"
 	nutriment_factor = 1
-	color = "#ffffff"
+	liquid_color = "#ffffff"
 	slipperiness = -1
 	uid = "chem_nutriment_flour"
 	allergen_flags = ALLERGEN_GLUTEN
@@ -94,7 +94,7 @@
 	lore_text = "A gooey mixture of eggs and flour, a base for turning wheat into food."
 	taste_description = "blandness"
 	nutriment_factor = 3
-	color = "#ffd592"
+	liquid_color = "#ffd592"
 	slipperiness = -1
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -112,7 +112,7 @@
 	codex_name = null
 	lore_text = "A gooey mixture of eggs, flour and sugar, a important precursor to cake!"
 	taste_description = "sweetness"
-	color = "#ffe992"
+	liquid_color = "#ffe992"
 	uid = "chem_nutriment_cakebatter"
 	allergen_flags = ALLERGEN_EGG | ALLERGEN_GLUTEN
 
@@ -122,7 +122,7 @@
 	taste_description = "bitterness"
 	taste_mult = 1.3
 	nutriment_factor = 1
-	color = "#482000"
+	liquid_color = "#482000"
 	fruit_descriptor = "bitter"
 	uid = "chem_nutriment_coffeepowder"
 	allergen_flags = ALLERGEN_CAFFEINE | ALLERGEN_STIMULANT
@@ -144,7 +144,7 @@
 	taste_description = "tartness"
 	taste_mult = 1.3
 	nutriment_factor = 1
-	color = "#101000"
+	liquid_color = "#101000"
 	uid = "chem_nutriment_teapowder"
 	allergen_flags = ALLERGEN_CAFFEINE | ALLERGEN_STIMULANT
 
@@ -158,7 +158,7 @@
 	taste_description = "bitterness"
 	taste_mult = 1.3
 	nutriment_factor = 5
-	color = "#302000"
+	liquid_color = "#302000"
 	fruit_descriptor = "bitter"
 	uid = "chem_nutriment_cocoa"
 
@@ -176,7 +176,7 @@
 	name = "grape concentrate"
 	lore_text = "Dehydrated, powdered grape juice."
 	taste_description = "dry grapes"
-	color = "#863333"
+	liquid_color = "#863333"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_juice_grape"
@@ -185,7 +185,7 @@
 	name = "orange concentrate"
 	lore_text = "Dehydrated, powdered orange juice."
 	taste_description = "dry oranges"
-	color = "#e78108"
+	liquid_color = "#e78108"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_juice_orange"
@@ -194,7 +194,7 @@
 	name = "watermelon concentrate"
 	lore_text = "Dehydrated, powdered watermelon juice."
 	taste_description = "dry sweet watermelon"
-	color = "#b83333"
+	liquid_color = "#b83333"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_juice_watermelon"
@@ -203,7 +203,7 @@
 	name = "apple concentrate"
 	lore_text = "Dehydrated, powdered apple juice."
 	taste_description = "dry sweet apples"
-	color = "#c07c40"
+	liquid_color = "#c07c40"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_juice_apple"
@@ -214,7 +214,7 @@
 	taste_description = "umami"
 	taste_mult = 1.1
 	nutriment_factor = 2
-	color = "#792300"
+	liquid_color = "#792300"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_soysauce"
@@ -227,7 +227,7 @@
 	lore_text = "Ketchup, catsup, whatever. It's tomato paste."
 	taste_description = "ketchup"
 	nutriment_factor = 5
-	color = "#731008"
+	liquid_color = "#731008"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_ketchup"
@@ -239,7 +239,7 @@
 	name = "banana cream"
 	lore_text = "A creamy confection that tastes of banana."
 	taste_description = "banana"
-	color = "#f6dfaa"
+	liquid_color = "#f6dfaa"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_bananacream"
@@ -252,7 +252,7 @@
 	lore_text = "Barbecue sauce for barbecues and long shifts."
 	taste_description = "barbecue"
 	nutriment_factor = 5
-	color = "#4f330f"
+	liquid_color = "#4f330f"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_bbqsauce"
@@ -266,7 +266,7 @@
 	lore_text = "Garlic sauce, perfect for spicing up a plate of garlic."
 	taste_description = "garlic"
 	nutriment_factor = 4
-	color = "#d8c045"
+	liquid_color = "#d8c045"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_garlicsauce"
@@ -281,7 +281,7 @@
 	taste_description = "rice"
 	taste_mult = 0.4
 	nutriment_factor = 1
-	color = "#ffffff"
+	liquid_color = "#ffffff"
 	uid = "chem_nutriment_rice"
 	reagent_overlay_base = "rice_base"
 	reagent_overlay = "soup_meatballs"
@@ -293,7 +293,7 @@
 	taste_description = "cherry"
 	taste_mult = 1.3
 	nutriment_factor = 1
-	color = "#801e28"
+	liquid_color = "#801e28"
 	fruit_descriptor = "sweet"
 	uid = "chem_nutriment_cherryjelly"
 	melting_point = 273
@@ -306,7 +306,7 @@
 	lore_text = "Multi-colored little bits of sugar, commonly found on donuts. Loved by cops."
 	taste_description = "childhood whimsy"
 	nutriment_factor = 1
-	color = "#ff00ff"
+	liquid_color = "#ff00ff"
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nutriment_sprinkles"
@@ -316,7 +316,7 @@
 	lore_text = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 	taste_description = "sugar"
 	taste_mult = 3
-	color = "#ffffff"
+	liquid_color = "#ffffff"
 	scannable = 1
 	nutriment_factor = 3
 	glass_name = "sugar"
@@ -330,7 +330,7 @@
 	name = "vinegar"
 	lore_text = "A weak solution of acetic acid. Usually used for seasoning food."
 	taste_description = "vinegar"
-	color = "#e8dfd0"
+	liquid_color = "#e8dfd0"
 	taste_mult = 3
 	uid = "chem_nutriment_vinegar"
 	melting_point = 273
@@ -341,7 +341,7 @@
 	name = "mayonnaise"
 	lore_text = "A mixture of egg yolk with lemon juice or vinegar. Usually put on bland food to make it more edible."
 	taste_description = "mayo"
-	color = "#efede8"
+	liquid_color = "#efede8"
 	taste_mult = 2
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -353,20 +353,20 @@
 	lore_text = "A collection of live fungal cultures, cultivated across history for use in fermentation and baking."
 	taste_description = "mustiness"
 	nutriment_factor = 1
-	color = "#d3af70"
+	liquid_color = "#d3af70"
 	uid = "chem_nutriment_yeast"
 
 /decl/material/liquid/nutriment/cheese
 	name = "cheese"
 	lore_text = "Aged, fermented, curdled milk."
 	uid = "chem_nutriment_cheese"
-	color = "#ffd000"
+	liquid_color = "#ffd000"
 	allergen_flags = ALLERGEN_DAIRY | ALLERGEN_CHEESE
 
 /decl/material/liquid/nutriment/butter
 	name = "butter"
 	lore_text = "The product of churning cream. Great for baking and on sandwiches."
-	color = "#ffe864"
+	liquid_color = "#ffe864"
 	taste_description = "butter"
 	uid = "chem_nutriment_butter"
 	allergen_flags = ALLERGEN_DAIRY
@@ -374,7 +374,7 @@
 /decl/material/liquid/nutriment/margarine
 	name = "margarine"
 	lore_text = "Emulsified plant oil solids. A popular non-dairy alternative to butter."
-	color = "#fff2ab"
+	liquid_color = "#fff2ab"
 	taste_description = "bland oiliness"
 	uid = "chem_nutriment_margarine"
 	allergen_flags = ALLERGEN_VEGETABLE

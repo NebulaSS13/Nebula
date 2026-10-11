@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/waterskin.dmi'
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/organic/leather/gut
-	color = /decl/material/solid/organic/leather/gut::color
+	color = /decl/material/solid/organic/leather/gut::solid_color
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	chem_volume = 120
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
@@ -25,7 +25,7 @@
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		return null
 	var/decl/material/stopper_material_instance = GET_DECL(stopper_material)
-	return overlay_image(icon, "[icon_state]-stopper", stopper_material_instance.color, RESET_COLOR | RESET_ALPHA)
+	return overlay_image(icon, "[icon_state]-stopper", stopper_material_instance.solid_color, RESET_COLOR | RESET_ALPHA)
 
 /obj/item/chems/glass/waterskin/attack_self()
 	if(ATOM_IS_OPEN_CONTAINER(src))
@@ -48,7 +48,7 @@
 	desc = "A long and rather unwieldy water-carrying vessel."
 	icon = 'icons/obj/items/waterskin_crafted.dmi'
 	material = /decl/material/solid/organic/leather
-	color = /decl/material/solid/organic/leather::color
+	color = /decl/material/solid/organic/leather::solid_color
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	stopper_material = /decl/material/solid/organic/wood/maple
 

@@ -40,15 +40,15 @@
 // Material subtypes.
 #define PATH_MATERIAL_SUBTYPES(material_name) \
 /turf/floor/path/##material_name { \
-	color             = /decl/material/solid/stone/##material_name::color; \
+	color             = /decl/material/solid/stone/##material_name::solid_color; \
 	material          = /decl/material/solid/stone/##material_name; \
 } \
 /turf/floor/path/herringbone/##material_name { \
-	color             = /decl/material/solid/stone/##material_name::color; \
+	color             = /decl/material/solid/stone/##material_name::solid_color; \
 	material          = /decl/material/solid/stone/##material_name; \
 } \
 /turf/floor/path/running_bond/##material_name { \
-	color             = /decl/material/solid/stone/##material_name::color; \
+	color             = /decl/material/solid/stone/##material_name::solid_color; \
 	material          = /decl/material/solid/stone/##material_name; \
 } \
 /turf/floor/path/##material_name/water { \

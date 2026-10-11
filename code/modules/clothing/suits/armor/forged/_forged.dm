@@ -2,7 +2,7 @@
 	abstract_type             = /obj/item/clothing/suit/armor/forged
 	icon_state                = ICON_STATE_WORLD
 	material                  = /decl/material/solid/metal/steel
-	color                     = /decl/material/solid/metal/steel::color
+	color                     = /decl/material/solid/metal/steel::solid_color
 	material_alteration       = MAT_FLAG_ALTERATION_ALL
 	armor_degradation_speed   = 1
 	armor_type                = /datum/extension/armor/ablative
@@ -46,14 +46,14 @@
 /obj/item/clothing/suit/armor/forged/on_update_icon()
 	. = ..()
 	if(strap_material)
-		add_overlay(overlay_image(icon, "[icon_state]-straps", strap_material.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-straps", strap_material.solid_color, RESET_COLOR))
 	if(detail_material)
-		add_overlay(overlay_image(icon, "[icon_state]-detail", detail_material.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-detail", detail_material.solid_color, RESET_COLOR))
 
 /obj/item/clothing/suit/armor/forged/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(strap_material)
-			overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-straps", strap_material.color, RESET_COLOR)
+			overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-straps", strap_material.solid_color, RESET_COLOR)
 		if(detail_material)
-			overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-detail", detail_material.color, RESET_COLOR)
+			overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-detail", detail_material.solid_color, RESET_COLOR)
 	return ..()

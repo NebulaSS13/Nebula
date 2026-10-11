@@ -4,7 +4,7 @@
 	uid = "chem_blood"
 	lore_text = "A red (or blue) liquid commonly found inside animals, most of whom are pretty insistent about it being left where you found it."
 	metabolism = REM * 5
-	color = "#c80000"
+	liquid_color = "#c80000"
 	scannable = 1
 	taste_description = "iron"
 	taste_mult = 1.3
@@ -77,7 +77,7 @@
 
 /decl/material/liquid/coagulated_blood
 	name = "coagulated blood"
-	color = "#aa0000"
+	liquid_color = "#aa0000"
 	uid = "chem_blood_coagulated"
 	taste_description = "chewy iron"
 	taste_mult = 1.5

@@ -93,7 +93,7 @@
 
 /obj/item/tool/proc/get_handle_color()
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-		return handle_material?.color || material?.color || COLOR_WHITE
+		return handle_material?.solid_color || material?.get_color() || COLOR_WHITE
 	return initial(color)
 
 /obj/item/tool/on_update_icon()
@@ -110,7 +110,7 @@
 		if(binding_material)
 			var/binding_state = "[icon_state]-binding"
 			if(check_state_in_icon(binding_state, icon))
-				add_overlay(overlay_image(icon, binding_state, binding_material.color, (RESET_COLOR|RESET_ALPHA)))
+				add_overlay(overlay_image(icon, binding_state, binding_material.solid_color, (RESET_COLOR|RESET_ALPHA)))
 
 /obj/item/tool/apply_additional_mob_overlays(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)

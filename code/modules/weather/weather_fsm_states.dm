@@ -57,12 +57,14 @@
 	weather.icon_state = icon_state
 	weather.alpha = alpha
 
-	if(is_liquid && weather.water_material)
+	if(weather.water_material)
 		var/decl/material/mat = GET_DECL(weather.water_material)
-		weather.color = mat.color
-	else if(is_ice && weather.ice_material)
-		var/decl/material/mat = GET_DECL(weather.ice_material)
-		weather.color = mat.color
+		if(is_liquid)
+			weather.color = mat.liquid_color
+		else if(is_ice)
+			weather.color = mat.solid_color
+		else
+			weather.color = COLOR_WHITE
 	else
 		weather.color = COLOR_WHITE
 

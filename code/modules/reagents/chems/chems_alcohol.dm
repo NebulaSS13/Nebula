@@ -1,6 +1,6 @@
 /decl/material/liquid/alcohol
 	abstract_type = /decl/material/liquid/alcohol
-	color = "#404030"
+	liquid_color = "#404030"
 	touch_met = 5
 	ignition_point = T0C+150
 	accelerant_value = FUEL_VALUE_ACCELERANT
@@ -19,7 +19,7 @@
 	chilling_point = T0C
 	chilling_products = list(
 		/decl/material/liquid/alcohol/ethanol = 0.75,
-		/decl/material/solid/ice              = 0.25
+		/decl/material/liquid/water           = 0.25
 	)
 	affect_blood_on_ingest = FALSE // prevents automatic toxins/inebriation as though injected
 	affect_blood_on_inhale = FALSE
@@ -110,7 +110,7 @@
 	lore_text = "Watch out that the Green Fairy doesn't come for you!"
 	taste_description = "death and licorice"
 	taste_mult = 1.5
-	color = "#33ee00"
+	liquid_color = "#33ee00"
 	strength = 12
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -123,7 +123,7 @@
 	name = "ale"
 	lore_text = "A dark alcoholic beverage made by malted barley and yeast."
 	taste_description = "hearty barley ale"
-	color = "#4c3100"
+	liquid_color = "#4c3100"
 	strength = 50
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -137,7 +137,7 @@
 	codex_name = "plain beer"
 	lore_text = "An alcoholic beverage made from malted grains, hops, yeast, and water."
 	taste_description = "piss water"
-	color = "#ffd300"
+	liquid_color = "#ffd300"
 	strength = 50
 	nutriment_factor = 1
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
@@ -163,7 +163,7 @@
 	lore_text = "Exotically blue, fruity drink, distilled from oranges."
 	taste_description = "oranges"
 	taste_mult = 1.1
-	color = "#0000cd"
+	liquid_color = "#0000cd"
 	strength = 15
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -177,7 +177,7 @@
 	lore_text = "A sweet and strongly alcoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
 	taste_description = "rich and smooth alcohol"
 	taste_mult = 1.1
-	color = "#ab3c05"
+	liquid_color = "#ab3c05"
 	strength = 15
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -190,7 +190,7 @@
 	name = "gin"
 	lore_text = "It's gin. In space. I say, good sir."
 	taste_description = "an alcoholic christmas tree"
-	color = "#0064c6"
+	liquid_color = "#0064c6"
 	strength = 15
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -205,7 +205,7 @@
 	lore_text = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
 	taste_description = "spiked coffee"
 	taste_mult = 1.1
-	color = "#4c3100"
+	liquid_color = "#4c3100"
 	strength = 15
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -233,7 +233,7 @@
 	name = "melon liqueur"
 	lore_text = "A relatively sweet and fruity 46 proof liqueur."
 	taste_description = "fruity alcohol"
-	color = "#138808" // rgb: 19, 136, 8
+	liquid_color = "#138808" // rgb: 19, 136, 8
 	strength = 50
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -247,7 +247,7 @@
 	lore_text = "Yohoho and all that."
 	taste_description = "spiked butterscotch"
 	taste_mult = 1.1
-	color = "#ecb633"
+	liquid_color = "#ecb633"
 	strength = 15
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -260,7 +260,7 @@
 	name = "sake"
 	lore_text = "Anime's favorite drink."
 	taste_description = "dry alcohol"
-	color = "#dddddd"
+	liquid_color = "#dddddd"
 	strength = 25
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -273,7 +273,7 @@
 	name = "tequila"
 	lore_text = "A strong and mildly flavoured, mexican produced spirit. Feeling thirsty hombre?"
 	taste_description = "paint stripper"
-	color = "#ffff91"
+	liquid_color = "#ffff91"
 	strength = 25
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -286,7 +286,7 @@
 	name = "Thirteen Loko"
 	lore_text = "A potent mixture of caffeine and alcohol."
 	taste_description = "jitters and death"
-	color = "#102000"
+	liquid_color = "#102000"
 	strength = 25
 	nutriment_factor = 1
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
@@ -313,7 +313,7 @@
 	lore_text = "You suddenly feel a craving for a martini..."
 	taste_description = "dry alcohol"
 	taste_mult = 1.3
-	color = "#91ff91" // rgb: 145, 255, 145
+	liquid_color = "#91ff91" // rgb: 145, 255, 145
 	strength = 15
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -327,7 +327,7 @@
 	codex_name = "plain vodka"
 	lore_text = "High-proof grain alcohol, useful for cocktails... and as bootleg rocket fuel, for those prone to amateur rocketry or trade sanctions."
 	taste_description = "grain alcohol"
-	color = "#0064c8" // rgb: 0, 100, 200
+	liquid_color = "#0064c8" // rgb: 0, 100, 200
 	strength = 15
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -341,7 +341,7 @@
 	codex_name = null
 	lore_text = "Premium distilled vodka made from real, planet-grown potatoes."
 	taste_description = "clear kvass"
-	color = "#aaddff" // rgb: 170, 221, 255 - very light blue.
+	liquid_color = "#aaddff" // rgb: 170, 221, 255 - very light blue.
 	strength = 10
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -351,7 +351,7 @@
 	name = "malt whiskey"
 	lore_text = "A superb and well-aged single-malt whiskey. Damn."
 	taste_description = "molasses"
-	color = "#4c3100"
+	liquid_color = "#4c3100"
 	strength = 25
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -364,7 +364,7 @@
 	name = "red wine"
 	lore_text = "An premium alcoholic beverage made from distilled grape juice."
 	taste_description = "bitter sweetness"
-	color = "#7e4043" // rgb: 126, 64, 67
+	liquid_color = "#7e4043" // rgb: 126, 64, 67
 	strength = 15
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -377,7 +377,7 @@
 	name = "white wine"
 	lore_text = "An exceptionally expensive alcoholic beverage made from distilled white grapes."
 	taste_description = "white velvet"
-	color = "#ffddaa" // rgb: 255, 221, 170 - a light cream
+	liquid_color = "#ffddaa" // rgb: 255, 221, 170 - a light cream
 	strength = 20
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -387,7 +387,7 @@
 	name = "herbal liquor"
 	lore_text = "A complex blend of herbs, spices and roots mingle in this old Earth classic."
 	taste_description = "a sweet summer garden"
-	color = "#dfff00"
+	liquid_color = "#dfff00"
 	strength = 13
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -400,7 +400,7 @@
 	name = "hooch"
 	lore_text = "Either someone's failure at cocktail making or attempt in alchohol production. In any case, do you really want to drink that?"
 	taste_description = "pure resignation"
-	color = "#4c3100"
+	liquid_color = "#4c3100"
 	strength = 25
 	alcohol_toxicity = 2
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
@@ -414,7 +414,7 @@
 	name = "Irish cream"
 	lore_text = "Whiskey-imbued cream."
 	taste_description = "creamy alcohol"
-	color = "#dddd9a"
+	liquid_color = "#dddd9a"
 	strength = 25
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -427,7 +427,7 @@
 	name = "mead"
 	lore_text = "A Viking's drink, though a cheap one."
 	taste_description = "sweet, sweet alcohol"
-	color = "#ffbb00"
+	liquid_color = "#ffbb00"
 	strength = 30
 	nutriment_factor = 1
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
@@ -442,7 +442,7 @@
 	lore_text = "You've really hit rock bottom now... your liver packed its bags and left last night."
 	taste_description = "bitterness"
 	taste_mult = 2.5
-	color = "#0064c8"
+	liquid_color = "#0064c8"
 	strength = 12
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -455,7 +455,7 @@
 	name = "poison wine"
 	lore_text = "Is this even wine? Toxic! Hallucinogenic! Probably consumed in boatloads by your superiors!"
 	taste_description = "purified alcoholic death"
-	color = "#000000"
+	liquid_color = "#000000"
 	strength = 10
 	halluci = 10
 	glass_name = "???"
@@ -486,7 +486,7 @@
 /decl/material/liquid/alcohol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now
 	name = "aged whiskey"
 	lore_text = "A well-aged whiskey of high quality. Probably imported. Just a sip'll do it, but that burn will leave you wanting more."
-	color = "#523600"
+	liquid_color = "#523600"
 	strength = 25
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -499,7 +499,7 @@
 	name = "apple cider"
 	lore_text = "A refreshing glass of apple cider."
 	taste_description = "cool apple cider"
-	color = "#cac089"
+	liquid_color = "#cac089"
 	strength = 50
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -512,7 +512,7 @@
 	name = "pear cider"
 	lore_text = "A refreshing glass of pear cider."
 	taste_description = "cool pear cider"
-	color = "#cac089"
+	liquid_color = "#cac089"
 	strength = 50
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -525,7 +525,7 @@
 	name = "champagne"
 	lore_text = "Smooth sparkling wine, produced in the same region of France as it has been for centuries."
 	taste_description = "bitterness and fizz"
-	color = "#a89410"
+	liquid_color = "#a89410"
 	strength = 18
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -539,7 +539,7 @@
 	name = "Jagermeister"
 	lore_text = "A special blend of alcohol, herbs, and spices. It has remained a popular Earther drink."
 	taste_description = "herbs, spices, and alcohol"
-	color = "#596e3e"
+	liquid_color = "#596e3e"
 	strength = 20
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
@@ -552,7 +552,7 @@
 	name = "kvass"
 	lore_text = "An alcoholic drink commonly made from bread."
 	taste_description = "vkusnyy kvas, ypa!"
-	color = "#362f22"
+	liquid_color = "#362f22"
 	strength = 30
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE

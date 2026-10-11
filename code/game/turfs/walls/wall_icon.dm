@@ -60,11 +60,11 @@
 /// Gets the base wall colour for icon rendering. Can be overridden on wall subtypes. Not equivalent to get_color().
 /// Should only be used in places where material is known to be set, e.g. update_wall_icon().
 /turf/wall/proc/get_base_color()
-	return material.color
+	return material.solid_color
 
 /// Gets the reinforcement colour. Can be overridden so that some wall types don't apply paint colour to their reinforcements.
 /turf/wall/proc/get_reinf_color()
-	return paint_color || reinf_material?.color
+	return paint_color || reinf_material?.solid_color
 
 /turf/wall/proc/refresh_connections()
 	if(wall_connections && other_connections)
@@ -209,7 +209,7 @@
 		if(length(shutters))
 			var/image/shutter_image = new /image
 			shutter_image.overlays = shutters
-			shutter_image.color = shutter_mat.color
+			shutter_image.color = shutter_mat.solid_color
 			shutter_image.appearance_flags |= RESET_COLOR|RESET_ALPHA
 			add_overlay(shutter_image)
 

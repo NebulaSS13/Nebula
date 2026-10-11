@@ -14,4 +14,4 @@
 
 /obj/item/utensil/chopsticks/bamboo
 	material = /decl/material/solid/organic/wood/bamboo
-	color = /decl/material/solid/organic/wood/bamboo::color
+	color = /decl/material/solid/organic/wood/bamboo::solid_color

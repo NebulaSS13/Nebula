@@ -156,7 +156,7 @@
 		return flooring.color
 	var/decl/material/my_material = get_material()
 	if(istype(my_material))
-		return my_material.color
+		return my_material.solid_color
 	return color
 
 /turf/floor/Process()

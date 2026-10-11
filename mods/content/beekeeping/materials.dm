@@ -3,7 +3,7 @@
 	uid = "liquid_venom_bee"
 	lore_text = "An irritant used by bees to drive off predators."
 	taste_description = "noxious bitterness"
-	color = "#d7d891"
+	liquid_color = "#d7d891"
 	heating_products = list(
 		/decl/material/liquid/denatured_toxin = 1
 	)

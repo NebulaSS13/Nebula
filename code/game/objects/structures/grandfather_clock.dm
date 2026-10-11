@@ -8,7 +8,7 @@
 	density             = TRUE
 	material            = /decl/material/solid/organic/wood/mahogany
 	material_alteration = MAT_FLAG_ALTERATION_ALL
-	color               = /decl/material/solid/organic/wood/mahogany::color
+	color               = /decl/material/solid/organic/wood/mahogany::solid_color
 	var/face_color      = "#f0edc7"
 	var/last_time
 	var/decl/material/clockwork_mat = /decl/material/solid/metal/brass
@@ -57,9 +57,9 @@
 	if(!clockwork_mat)
 		return
 	if(is_processing)
-		add_overlay(overlay_image(icon, "[icon_state]-pendulum-swing", clockwork_mat.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-pendulum-swing", clockwork_mat.solid_color, RESET_COLOR))
 	else
-		add_overlay(overlay_image(icon, "[icon_state]-pendulum", clockwork_mat.color, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-pendulum", clockwork_mat.solid_color, RESET_COLOR))
 	var/list/time_stats = splittext(last_time, ":")
-	add_overlay(overlay_image(icon, "[icon_state]-hour[round(((text2num(time_stats[1]) / 24) * 360) / 45) * 45]"), clockwork_mat.color, RESET_COLOR)
-	add_overlay(overlay_image(icon, "[icon_state]-minute[round(((text2num(time_stats[2]) / 60) * 360) / 45) * 45]"), clockwork_mat.color, RESET_COLOR)
+	add_overlay(overlay_image(icon, "[icon_state]-hour[round(((text2num(time_stats[1]) / 24) * 360) / 45) * 45]"), clockwork_mat.solid_color, RESET_COLOR)
+	add_overlay(overlay_image(icon, "[icon_state]-minute[round(((text2num(time_stats[2]) / 60) * 360) / 45) * 45]"), clockwork_mat.solid_color, RESET_COLOR)

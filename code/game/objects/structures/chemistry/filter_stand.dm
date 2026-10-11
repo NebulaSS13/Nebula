@@ -140,4 +140,4 @@
 			reagents.trans_to_turf(dump_turf, dumping, transferred_phases = MAT_PHASE_LIQUID)
 
 /obj/item/chems/filter/proc/get_stand_overlay()
-	return list(overlay_image(icon, "[icon_state]-inserted", material?.color, RESET_COLOR))
+	return list(overlay_image(icon, "[icon_state]-inserted", material?.solid_color, RESET_COLOR))

@@ -25,11 +25,11 @@
 	close_sound = 'sound/foley/drawer-close.ogg'
 
 /obj/structure/wall_cabinet/walnut
-	color = /decl/material/solid/organic/wood/walnut::color
+	color = /decl/material/solid/organic/wood/walnut::solid_color
 	material = /decl/material/solid/organic/wood/walnut
 	reinf_material = /decl/material/solid/organic/wood/walnut
 
 /obj/structure/wall_cabinet/ebony
-	color = /decl/material/solid/organic/wood/ebony::color
+	color = /decl/material/solid/organic/wood/ebony::solid_color
 	material = /decl/material/solid/organic/wood/ebony
 	reinf_material = /decl/material/solid/organic/wood/ebony

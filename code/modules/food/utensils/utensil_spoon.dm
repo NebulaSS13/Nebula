@@ -19,4 +19,4 @@
 
 /obj/item/utensil/spoon/wood
 	material = /decl/material/solid/organic/wood/oak
-	color = /decl/material/solid/organic/wood/oak::color
+	color = /decl/material/solid/organic/wood/oak::solid_color

@@ -2,7 +2,7 @@
 	name = null
 	melting_point = 70
 	boiling_point = 180 // -90 C - cryogenic liquid threshold
-	color = COLOR_GRAY80
+	gas_color = COLOR_GRAY80
 	shard_name = SHARD_NONE
 	conductive = 0
 	value = 0.15
@@ -17,10 +17,9 @@
 	abstract_type = /decl/material/gas
 
 /decl/material/gas/Initialize()
-	if(!liquid_name)
-		liquid_name = "liquid [name]"
-	if(!solid_name)
-		solid_name = "frozen [name]"
-	if(!solution_name)
-		solution_name = "[name] solution"
+	liquid_name   ||= "liquid [name]"
+	solid_name    ||= "frozen [name]"
+	solution_name ||= "[name] solution"
+	liquid_color  ||= gas_color
+	solid_color   ||= gas_color
 	. = ..()

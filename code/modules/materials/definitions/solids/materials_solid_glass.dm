@@ -4,7 +4,7 @@
 	uid = "solid_glass"
 	lore_text = "A brittle, transparent material made from molten silicates. It is generally not a liquid."
 	flags = MAT_FLAG_BRITTLE
-	color = GLASS_COLOR
+	solid_color = GLASS_COLOR
 	opacity = 0.3
 	integrity = 50
 	shard_name = SHARD_SHARD
@@ -46,7 +46,7 @@
 	brute_armor = 2
 	burn_armor = 5
 	melting_point = 4274
-	color = GLASS_COLOR_SILICATE
+	solid_color = GLASS_COLOR_SILICATE
 	stack_origin_tech = @'{"materials":4}'
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	value = 1.8
@@ -59,7 +59,7 @@
 		/decl/material/solid/glass = 0.7,
 		/decl/material/solid/organic/plastic = 0.3
 	)
-	color = COLOR_OFF_WHITE
+	solid_color = COLOR_OFF_WHITE
 	opacity = 0.6
 	melting_point = 1674
 	hardness = MAT_VALUE_HARD

@@ -14,12 +14,9 @@
 	bakes_into_material = null
 
 /decl/material/solid/Initialize()
-	if(!liquid_name)
-		liquid_name = "molten [name]"
-	if(!gas_name)
-		gas_name = "vaporized [name]"
-	if(!solution_name)
-		solution_name = "[name] solution"
-	if(!ore_compresses_to)
-		ore_compresses_to = type
+	liquid_name       ||= "molten [name]"
+	gas_name          ||= "vaporized [name]"
+	solution_name     ||= "[name] solution"
+	ore_compresses_to ||= type
+
 	. = ..()

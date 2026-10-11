@@ -16,7 +16,7 @@ var/global/list/_available_gemstone_cuts
 	w_class                   = ITEM_SIZE_TINY
 	material                  = /decl/material/solid/gemstone/diamond
 	material_alteration       = MAT_FLAG_ALTERATION_COLOR // Name and desc are handled manually.
-	color                     = /decl/material/solid/gemstone/diamond::color
+	color                     = /decl/material/solid/gemstone/diamond::solid_color
 	var/decl/gemstone_cut/cut = /decl/gemstone_cut/uncut
 	var/work_skill            = SKILL_CONSTRUCTION
 
@@ -97,19 +97,19 @@ var/global/list/_available_gemstone_cuts
 #define MATERIAL_CUT_GEMSTONES(MAT)\
 /obj/item/gemstone/baguette/##MAT{\
 	material = /decl/material/solid/gemstone/##MAT;\
-	color    = /decl/material/solid/gemstone/##MAT::color;\
+	color    = /decl/material/solid/gemstone/##MAT::solid_color;\
 }\
 /obj/item/gemstone/hexagon/##MAT{\
 	material = /decl/material/solid/gemstone/##MAT;\
-	color    = /decl/material/solid/gemstone/##MAT::color;\
+	color    = /decl/material/solid/gemstone/##MAT::solid_color;\
 }\
 /obj/item/gemstone/octagon/##MAT{\
 	material = /decl/material/solid/gemstone/##MAT;\
-	color    = /decl/material/solid/gemstone/##MAT::color;\
+	color    = /decl/material/solid/gemstone/##MAT::solid_color;\
 }\
 /obj/item/gemstone/round/##MAT{\
 	material = /decl/material/solid/gemstone/##MAT;\
-	color    = /decl/material/solid/gemstone/##MAT::color;\
+	color    = /decl/material/solid/gemstone/##MAT::solid_color;\
 }
 
 MATERIAL_CUT_GEMSTONES(topaz)
