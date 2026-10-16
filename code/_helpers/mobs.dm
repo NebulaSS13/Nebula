@@ -252,35 +252,32 @@ var/global/list/bodypart_coverage_cache = list()
 	var/key = "[checking_flags]"
 	if(isnull(global.bodypart_coverage_cache[key]))
 		var/coverage = 0
-		if(checking_flags & SLOT_FULL_BODY)
-			coverage = 1
-		else
-			if(checking_flags & SLOT_HEAD)
-				coverage += 0.1
-			if(checking_flags & SLOT_FACE)
-				coverage += 0.05
-			if(checking_flags & SLOT_EYES)
-				coverage += 0.05
-			if(checking_flags & SLOT_UPPER_BODY)
-				coverage += 0.15
-			if(checking_flags & SLOT_LOWER_BODY)
-				coverage += 0.15
-			if(checking_flags & SLOT_LEG_LEFT)
-				coverage += 0.075
-			if(checking_flags & SLOT_LEG_RIGHT)
-				coverage += 0.075
-			if(checking_flags & SLOT_FOOT_LEFT)
-				coverage += 0.05
-			if(checking_flags & SLOT_FOOT_RIGHT)
-				coverage += 0.05
-			if(checking_flags & SLOT_ARM_LEFT)
-				coverage += 0.075
-			if(checking_flags & SLOT_ARM_RIGHT)
-				coverage += 0.075
-			if(checking_flags & SLOT_HAND_LEFT)
-				coverage += 0.05
-			if(checking_flags & SLOT_HAND_RIGHT)
-				coverage += 0.05
+		if(checking_flags & SLOT_HEAD)
+			coverage += 0.1
+		if(checking_flags & SLOT_FACE)
+			coverage += 0.05
+		if(checking_flags & SLOT_EYES)
+			coverage += 0.05
+		if(checking_flags & SLOT_UPPER_BODY)
+			coverage += 0.15
+		if(checking_flags & SLOT_LOWER_BODY)
+			coverage += 0.15
+		if(checking_flags & SLOT_LEG_LEFT)
+			coverage += 0.075
+		if(checking_flags & SLOT_LEG_RIGHT)
+			coverage += 0.075
+		if(checking_flags & SLOT_FOOT_LEFT)
+			coverage += 0.05
+		if(checking_flags & SLOT_FOOT_RIGHT)
+			coverage += 0.05
+		if(checking_flags & SLOT_ARM_LEFT)
+			coverage += 0.075
+		if(checking_flags & SLOT_ARM_RIGHT)
+			coverage += 0.075
+		if(checking_flags & SLOT_HAND_LEFT)
+			coverage += 0.05
+		if(checking_flags & SLOT_HAND_RIGHT)
+			coverage += 0.05
 		global.bodypart_coverage_cache[key] = coverage
 	. = global.bodypart_coverage_cache[key]
 
