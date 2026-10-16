@@ -180,7 +180,7 @@
 	what_wanted_beginning = "I'm looking to score"
 	what_wanted_ending = ". Tax free, of course, and a premium for discretion."
 	no_more_wanted = "It's too risky to put another "+MERCHANT_TOKEN_ITEM+" on my ship."
-	too_many_items = "I can only hide "+MERCHANT_TOKEN_QUANTITY+" more "+MERCHANT_TOKEN_TIME+" on my ship."
+	too_many_items = "I can only hide "+MERCHANT_TOKEN_QUANTITY+" more "+MERCHANT_TOKEN_ITEM+" on my ship."
 	forbidden_offer = "That's not the kind of business I'm in."
 	found_unwanted = "Nope. Don't want that."
 	not_enough_value = "High risk means I want a high reward. That ain't it."
