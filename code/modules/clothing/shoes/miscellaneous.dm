@@ -190,3 +190,16 @@
 /obj/item/clothing/shoes/flats/black
 	name = "black flats"
 	color = COLOR_GRAY15
+
+/obj/item/clothing/shoes/fire
+	name = "fire boots"
+	desc = "A pair of boots to keep your feet from getting charred."
+	icon = 'icons/clothing/feet/firefighter.dmi'
+	gas_transfer_coefficient = 0.90
+	permeability_coefficient = 0.50
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	material = /decl/material/solid/organic/cloth
+	matter = list(
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT
+	)
