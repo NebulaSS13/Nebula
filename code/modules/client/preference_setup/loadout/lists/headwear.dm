@@ -181,3 +181,7 @@
 	path = /obj/item/clothing/head/nursehat
 	uid = "gear_head_nursehat"
 
+/decl/loadout_option/head/kitty
+	name = "kitty ears"
+	path = /obj/item/clothing/head/kitty
+	uid = "gear_head_kitty"
