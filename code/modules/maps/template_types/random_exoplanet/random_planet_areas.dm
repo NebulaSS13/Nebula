@@ -13,6 +13,7 @@
 	always_unpowered = TRUE
 	area_flags = AREA_FLAG_IS_BACKGROUND | AREA_FLAG_EXTERNAL | AREA_FLAG_HIDE_FROM_HOLOMAP
 	is_outside = OUTSIDE_YES
+	is_planetary_surface = TRUE
 
 ///Spoopy undergrounds
 /area/exoplanet/underground

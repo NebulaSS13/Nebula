@@ -1142,3 +1142,7 @@
 // Don't tag your crewmates please.
 /mob/living/human/is_tagging_suitable()
 	return FALSE
+
+/mob/living/human/try_embed_in_mob(mob/living/user, obj/O, def_zone, embed_damage = 0, dtype = BRUTE, datum/wound/supplied_wound, obj/item/organ/external/affecting, direction)
+	if((. = ..()))
+		embedded_flag = 1

@@ -13,6 +13,9 @@ var/global/list/areas = list()
 	luminosity =    0
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
+	// If true, some events will not apply (like gravity change)
+	var/is_planetary_surface = FALSE
+
 	// If true, this area will force light switches on during init.
 	var/area_start_lit = null
 
