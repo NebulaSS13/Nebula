@@ -13,5 +13,5 @@
 /obj/screen/look_upward/on_update_icon()
 	var/mob/owner = owner_ref?.resolve()
 	var/turf/above = istype(owner) ? GetAbove(get_turf(owner)) : null
-	icon_state = "uphint[!!(istype(above) && TURF_IS_MIMICKING(above))]"
+	icon_state = "uphint[!!(istype(above) && TURF_IS_MIMIC(above))]"
 	..()

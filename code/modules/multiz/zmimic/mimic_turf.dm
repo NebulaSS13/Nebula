@@ -11,8 +11,8 @@
 	var/tmp/atom/movable/openspace/turf_mimic/mimic_above_copy
 	/// If we're at the bottom of the stack, a proxy used to fake a below space turf.
 	var/tmp/atom/movable/openspace/turf_proxy/mimic_underlay
-	/// How many times this turf is currently queued - multiple queue occurrences are allowed to ensure update consistency.
-	var/tmp/z_queued = 0
+	/// Are we queued for Z-Copy update?
+	var/tmp/z_queued = FALSE
 	/// If this Z-turf leads to space, uninterrupted.
 	var/tmp/z_eventually_space = FALSE
 	/// If this is true, has no atoms below it (recursively) and is above space -- we can just copy space's appearance directly instead of going through ZM.
@@ -52,9 +52,8 @@
 	compile_overlays(TRUE)
 
 /turf/proc/update_mimic()
-	if(z_flags & ZM_FLAGS_CAN_TURF_UPDATE)
-		z_queued += 1
-		// This adds duplicates for a reason. Do not change this unless you understand how ZM queues work.
+	if((z_flags & ZM_FLAGS_CAN_TURF_UPDATE) && !z_queued)
+		z_queued = TRUE
 		SSzcopy.queued_turfs += src
 
 /// Enables Z-mimic for a turf that didn't already have it enabled.
@@ -142,7 +141,7 @@
 	var/demotion = z_flags & ZM_BOUNDARY
 	SSzcopy.openspace_turfs -= 1
 	// Don't remove ourselves from the queue, the subsystem will explode. We'll naturally fall out of the queue.
-	z_queued = 0
+	z_queued = FALSE
 
 	// can't use QDEL_NULL as we need to supply force to qdel
 	if(shadower)

@@ -295,7 +295,7 @@
 		forceMove(A.loc)
 		return 0 //cannot shoot yourself
 
-	if((bumped && !forced) || (A in permutated))
+	if((bumped && !forced) || (weakref(A) in permutated))
 		return 0
 
 	var/passthrough = 0 //if the projectile should continue flying
@@ -335,7 +335,7 @@
 		var/turf/T = get_turf(A)
 		if(T)
 			forceMove(T)
-		permutated.Add(A)
+		permutated.Add(weakref(A))
 		bumped = 0 //reset bumped variable!
 		return 0
 
@@ -541,7 +541,7 @@
 
 //Returns true if the target atom is on our current turf and above the right layer
 /obj/item/projectile/proc/can_hit_target(atom/target, var/list/passthrough)
-	return (target && ((target.layer >= STRUCTURE_LAYER) || ismob(target)) && (loc == get_turf(target)) && (!(target in passthrough)))
+	return (target && ((target.layer >= STRUCTURE_LAYER) || ismob(target)) && (loc == get_turf(target)) && (!(weakref(target) in passthrough)))
 
 /proc/calculate_projectile_Angle_and_pixel_offsets(mob/user, params)
 	var/list/mouse_control = params2list(params)

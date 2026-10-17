@@ -1,0 +1,4 @@
+author: Neerti
+changes:
+  - {tweak: Jackboots and workboots no longer offer thermal protection.}
+delete-after: true

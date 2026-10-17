@@ -18,10 +18,11 @@
 			SSzcopy.discover_movable(src)
 			return
 
-		SSzcopy.queued_overlays += bound_overlay
-		bound_overlay.queued += 1
-	else if (bound_overlay)	// qdel is null-safe, but might as well save a proc call
-		qdel(bound_overlay)
+		if (!bound_overlay.queued)
+			SSzcopy.queued_overlays += bound_overlay
+			bound_overlay.queued = TRUE
+	else if (bound_overlay && !bound_overlay.destruction_timer)
+		bound_overlay.orphan("update_above")
 
 // Grabs a list of every openspace object that's directly or indirectly mimicking this object. Returns an empty list if none found.
 /atom/movable/proc/get_above_oo()
@@ -141,7 +142,7 @@
 
 /atom/movable/openspace/mimic/Destroy()
 	SSzcopy.openspace_overlays -= 1
-	queued = 0
+	queued = FALSE
 
 	if (associated_atom)
 		associated_atom.bound_overlay = null
@@ -151,6 +152,12 @@
 		deltimer(destruction_timer)
 
 	return ..()
+
+/// Generally, use this instead of qdel()ing a mimic -- e.g., if a mimic is moved somewhere it shouldn't be visible. Please set reason to something descriptive and unique.
+/atom/movable/openspace/mimic/proc/orphan(reason = "cruelty")
+	ASSERT(!destruction_timer)
+	destruction_timer = ZM_DESTRUCTION_TIMER(src, reason)
+	SSzcopy.update_mimic_occlusion(src, reason)
 
 /atom/movable/openspace/mimic/proc/timeout(filename, line, reason)
 	ZM_DEBUG_LOG("Mimic timeout from origin [filename]:[line], caused by [reason]; was mimicking [associated_atom || "NULL"] ([associated_atom?.type || "NULL"]) at [x],[y],[z]")
@@ -182,26 +189,19 @@
 	if (QDELING(src))	// Everything in this block is nonsense if we're being destroyed.
 		return ..()
 
-	if (!dest)
-		ZM_DEBUG_LOG("Mimic moved to nullspace; deleting self.")
-		qdel(src)
-		return
-
 	var/turf/old_loc = loc
 	var/force_layering_update = FALSE
 
-	if (isnull(override_plane) && isturf(old_loc) && isturf(dest) && old_loc.z != dest.z)
+	if (isnull(override_plane) && isturf(dest) && old_loc?.z != dest.z)
 		var/atom/movable/openspace/mimic/parent_mimic = astype(associated_atom)
-		// If we're the top-most mimic, we can directly compute depth. Otherwise, pull it off our parent mimic since it should already have either computed it itself, or stolen it from _its_ parent.
+		// If we're the root mimic, we can directly compute depth. Otherwise, pull it off our parent mimic since it should already have either computed it itself, or stolen it from _its_ parent.
 		depth = parent_mimic?.depth
 		if (depth == null)	// depth of 0 is valid
 			depth = ZM_COMPUTE_DEPTH(associated_atom.z)
-			ZM_DEBUG_LOG("Recomputing depth, no parent: result is [depth]")
+			ZM_DEBUG_LOG("Recomputing depth for [src] (of [associated_atom.type] eventually [mimicked_type]), no parent: result is [depth]")
 			force_layering_update = TRUE
 
-	. = ..()
-
-	if (MOVABLE_IS_ON_ZTURF(src))
+	if (isturf(dest) && MOVABLE_WOULD_BE_ON_ZTURF(src, dest))
 		if (destruction_timer)
 			deltimer(destruction_timer)
 			destruction_timer = null
@@ -210,21 +210,23 @@
 			var/flag_difference = old_loc.z_flags ^ dest.z_flags
 
 			if (force_layering_update || (flag_difference & ZM_FLAGS_AFFECTS_LAYERING))
-				SSzcopy.update_mimic_layering(src)
+				SSzcopy.update_mimic_layering(src, dest)
 
 			if (flag_difference & ZM_FLAGS_AFFECTS_VIS)
-				SSzcopy.update_mimic_occlusion(src)
+				SSzcopy.update_mimic_occlusion(src, "AFFECTS_VIS hit", dest)
 		else	// If we're moving from null to a z-turf, just rebuild both.
-			SSzcopy.update_mimic_layering(src)
-			SSzcopy.update_mimic_occlusion(src)
+			SSzcopy.update_mimic_layering(src, dest)
+			SSzcopy.update_mimic_occlusion(src, "forceMove null->nonnull", dest)
 
 	else if (!destruction_timer)
-		destruction_timer = ZM_DESTRUCTION_TIMER(src, "forceMove")
+		orphan("forceMove invalid")
+
+	return ..()
 
 // Called when the turf we're on is deleted/changed.
 /atom/movable/openspace/mimic/proc/owning_turf_changed()
 	if (!destruction_timer)
-		destruction_timer = ZM_DESTRUCTION_TIMER(src, "OTC")
+		orphan("OTC")
 
 // -- TURF PROXY --
 

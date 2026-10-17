@@ -227,12 +227,12 @@
 			L = thing
 			L.source_atom.update_light()
 
-		// Z-Mimic.
-		if (bound_overlay)
-			move_mimic(origin)
+	// Z-Mimic.
+	if (bound_overlay)
+		move_mimic(origin)
 
-		else if (isturf(loc) && (!origin || !TURF_IS_MIMICKING(origin)) && MOVABLE_SHALL_MIMIC(src) && MOVABLE_IS_BELOW_ZTURF(src))
-			SSzcopy.discover_movable(src)
+	else if (isturf(loc) && (!origin || !TURF_IS_MIMICKING(origin) || origin.z != loc.z) && MOVABLE_SHALL_MIMIC(src) && MOVABLE_IS_BELOW_ZTURF(src))
+		SSzcopy.discover_movable(src)
 
 	var/list/buckled_mobs = get_buckled_mobs()
 	if(length(buckled_mobs))
@@ -257,7 +257,7 @@
 
 /atom/movable/Move(...)
 
-	var/old_loc = loc
+	var/atom/old_loc = loc
 	. = ..()
 
 	if(.)
@@ -291,7 +291,7 @@
 		if (bound_overlay)
 			move_mimic(old_loc)
 
-		else if (isturf(loc) && (!old_loc || !TURF_IS_MIMICKING(old_loc)) && MOVABLE_SHALL_MIMIC(src) && MOVABLE_IS_BELOW_ZTURF(src))
+		else if (isturf(loc) && (!old_loc || !TURF_IS_MIMICKING(old_loc) || old_loc.z != loc.z) && MOVABLE_SHALL_MIMIC(src) && MOVABLE_IS_BELOW_ZTURF(src))
 			SSzcopy.discover_movable(src)
 
 		if(isturf(loc))
@@ -312,7 +312,7 @@
 		bound_overlay.set_dir(dir)
 
 	// The overlay will handle cleaning itself up on non-openspace turfs. Moving to `get_step(UP)` is invalid here, since that might place us in an unrelated Z-group.
-	bound_overlay.forceMove(astype(loc, /turf)?.above)
+	bound_overlay.forceMove(astype(loc, /turf)?.above || GetAbove(src))
 
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
