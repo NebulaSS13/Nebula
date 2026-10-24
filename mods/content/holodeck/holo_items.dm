@@ -1,6 +1,5 @@
 /obj/machinery/destructive_analyzer/can_deconstruct(var/obj/item/used_item)
-	if(used_item.holographic)
-		return FALSE
+	return !used_item.holographic && ..()
 
 /obj/item/grenade/spawnergrenade/fake_carp
 	origin_tech = @'{"materials":2,"magnets":2,"wormholes":5}'
