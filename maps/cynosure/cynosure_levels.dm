@@ -18,6 +18,7 @@
 	daycycle_id = "cynosure"
 	daycycle_type = /datum/daycycle/cynosure
 	base_area = null
+	default_network_id = "cynosure_intranet"
 
 /datum/level_data/main_level/cynosure/get_subtemplate_areas(template_category, blacklist, whitelist)
 	switch(template_category)

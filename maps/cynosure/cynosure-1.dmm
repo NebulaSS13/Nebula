@@ -11,9 +11,7 @@
 	dir = 8
 	},
 /obj/machinery/door/firedoor,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/steel_grid,
 /area/cynosure/cargo/d1/mining_hallway)
 "ac" = (
@@ -356,9 +354,7 @@
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 4
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled,
 /area/cynosure/outpost/xenoarch/expedition_prep)
 "aQ" = (
@@ -1665,9 +1661,7 @@
 	dir = 1;
 	pixel_y = -26
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/white,
 /area/cynosure/science/d1/hallway)
 "dR" = (
@@ -1846,9 +1840,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled,
 /area/cynosure/maintenance/d1/incinerator)
 "ep" = (
@@ -4449,9 +4441,7 @@
 "km" = (
 /obj/effect/decal/cleanable/cobweb2,
 /obj/machinery/space_heater,
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled/dark,
 /area/cynosure/hallway/d1/center)
 "kn" = (
@@ -4485,9 +4475,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/rust,
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/steel_dirty,
 /area/cynosure/hallway/d1/center)
 "kx" = (
@@ -6018,9 +6006,7 @@
 	},
 /obj/item/stack/material/ore/slag,
 /obj/random/ore_pile,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/dark,
 /area/cynosure/hallway/d1/west)
 "nR" = (
@@ -6254,9 +6240,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled,
 /area/cynosure/cargo/d1/mining_locker_room)
 "oy" = (
@@ -6384,9 +6368,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals7{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/hallway/d1/west_elevator)
 "oK" = (
@@ -8415,9 +8397,7 @@
 /turf/floor/tiled/white,
 /area/cynosure/outpost/xenoarch/analysis)
 "tf" = (
-/obj/machinery/network/relay{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/cynosure/maintenance/d1/research_south)
 "tg" = (
@@ -8755,9 +8735,7 @@
 /turf/floor/plating,
 /area/cynosure/outpost/xenoarch/substation)
 "tX" = (
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled/dark,
 /area/cynosure/engineering/d1/hallway)
 "tY" = (
@@ -8814,7 +8792,7 @@
 "uc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow,
 /obj/structure/table/reinforced,
-/obj/item/stack/tape_roll,
+/obj/item/stack/tape_roll/barricade_tape/research,
 /obj/item/geiger,
 /turf/floor/tiled/white,
 /area/cynosure/outpost/xenoarch/anomalous_lab)
@@ -9378,9 +9356,7 @@
 	icon_state = "2-8"
 	},
 /obj/structure/network_cable/terminal,
-/obj/machinery/network/relay{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/cynosure/science/d1/hallway)
 "vx" = (
@@ -11364,9 +11340,7 @@
 /area/cynosure/hallway/d1/west_elevator)
 "zV" = (
 /obj/item/stack/tile/floor,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/plating,
 /area/cynosure/hallway/d1/east)
 "zW" = (
@@ -14509,9 +14483,7 @@
 /area/cynosure/science/d1/toxins_storage)
 "Hz" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/white,
 /area/cynosure/science/d1/toxins_mixing)
 "HA" = (
@@ -14939,9 +14911,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/techfloor,
 /area/cynosure/command/d1/vault)
 "IE" = (
@@ -15436,9 +15406,7 @@
 /obj/effect/floor_decal/corner/purple/bordercorner{
 	dir = 8
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/science/d1/toxins_launch)
 "JP" = (
@@ -16058,9 +16026,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled,
 /area/cynosure/outpost/xenoarch/anomalous_lab)
 "Lk" = (
@@ -16741,7 +16707,7 @@
 /obj/machinery/recharger,
 /obj/item/camera_film,
 /obj/item/camera,
-/obj/item/stack/tape_roll,
+/obj/item/stack/tape_roll/barricade_tape/research,
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 1
 	},
@@ -16902,9 +16868,7 @@
 /area/cynosure/maintenance/d1/security)
 "Nh" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/network/relay{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay,
 /obj/structure/network_cable/terminal,
 /turf/floor/plating,
 /area/cynosure/outpost/xenoarch/substation)
@@ -16924,10 +16888,7 @@
 /turf/floor/tiled/dark,
 /area/cynosure/outpost/xenoarch/anomalous_storage)
 "Nl" = (
-/obj/structure/sign/department/cross{
-	desc = "The Star of Life, a symbol of Medical Aid.";
-	icon_state = "lifestar"
-	},
+/obj/structure/sign/department/cross,
 /turf/wall/r_wall,
 /area/cynosure/medical/d1/hallway)
 "Nn" = (
@@ -19189,9 +19150,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 10
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled,
 /area/cynosure/hallway/d1/center)
 "RW" = (
@@ -20304,9 +20263,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled/white,
 /area/cynosure/science/d1/hallway)
 "UI" = (
@@ -21650,9 +21607,7 @@
 "XI" = (
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/purple/border,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/white,
 /area/cynosure/outpost/xenoarch/hallway)
 "XJ" = (
@@ -22493,9 +22448,7 @@
 /obj/machinery/camera/network/engineering{
 	c_tag = "ENG - Technical Storage"
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/plating,
 /area/cynosure/engineering/d1/tech_storage)
 "ZG" = (

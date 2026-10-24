@@ -102,7 +102,7 @@
 /area/cynosure/hallway/d3/east)
 "aeT" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "afs" = (
 /obj/structure/table,
@@ -311,7 +311,7 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "akZ" = (
 /obj/structure/table/laminate/reinforced,
@@ -743,9 +743,7 @@
 	dir = 1;
 	pixel_y = 7
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled,
 /area/cynosure/hallway/d3/skybridge)
 "ayR" = (
@@ -1410,9 +1408,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/techfloor/grid,
 /area/cynosure/command/d3/ai_core)
 "bfL" = (
@@ -1697,7 +1693,7 @@
 /obj/item/toy/desk/fan{
 	pixel_x = 13
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "bpb" = (
 /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers{
@@ -2059,9 +2055,7 @@
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 6
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/white,
 /area/cynosure/science/d3/generic_lab)
 "bzL" = (
@@ -2344,9 +2338,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/machinery/network/relay{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay,
 /obj/structure/network_cable/terminal,
 /turf/floor/tiled,
 /area/cynosure/command/d3/network)
@@ -2870,9 +2862,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals3,
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/techmaint,
 /area/cynosure/security/d3/armory_tactical)
 "bYj" = (
@@ -3201,7 +3191,7 @@
 /area/cynosure/maintenance/d3/engineering)
 "ciK" = (
 /obj/structure/closet/lawcloset,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "ciU" = (
 /obj/structure/lattice,
@@ -3509,7 +3499,7 @@
 	pixel_x = 8;
 	pixel_y = -1
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "cwu" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3596,7 +3586,7 @@
 /area/cynosure/command/d3/ai_core)
 "cyU" = (
 /obj/structure/table/laminate/reinforced,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "czC" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -3805,9 +3795,7 @@
 /obj/effect/floor_decal/corner/blue/border{
 	dir = 8
 	},
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled,
 /area/cynosure/hallway/d3/east)
 "cKD" = (
@@ -4244,7 +4232,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "cXS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -4901,7 +4889,7 @@
 	department = "Station Manager's Desk";
 	announcementConsole = 1
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "dvC" = (
 /obj/machinery/door/firedoor,
@@ -4918,7 +4906,7 @@
 /obj/machinery/computer/modular/preset/civilian{
 	dir = 1
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "dvZ" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -5393,7 +5381,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "dQB" = (
 /obj/effect/floor_decal/borderfloor/corner{
@@ -5808,7 +5796,7 @@
 /area/cynosure/command/d2/ai_entrance)
 "ees" = (
 /obj/structure/closet/secure_closet/captains,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "eeA" = (
 /obj/structure/cable/green{
@@ -5967,9 +5955,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 5
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/white,
 /area/cynosure/medical/d3/hallway)
 "epM" = (
@@ -6104,7 +6090,7 @@
 	pixel_x = 16;
 	pixel_y = -1
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "esP" = (
 /obj/effect/floor_decal/steeldecal/steel_decals4{
@@ -6710,7 +6696,7 @@
 /obj/structure/sign/clock{
 	pixel_x = -32
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "eQB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -6826,7 +6812,7 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "eTe" = (
 /obj/structure/railing/mapped{
@@ -6874,7 +6860,7 @@
 /area/cynosure/engineering/d3/hallway)
 "eUJ" = (
 /obj/item/banner/nanotrasen,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "eVk" = (
 /obj/effect/floor_decal/borderfloor{
@@ -7305,9 +7291,7 @@
 /area/cynosure/command/d3/meeting)
 "fkm" = (
 /obj/effect/floor_decal/industrial/warning/full,
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled/techfloor,
 /area/cynosure/engineering/d3/reactor)
 "fkz" = (
@@ -7657,9 +7641,7 @@
 	},
 /obj/effect/floor_decal/borderfloor/corner,
 /obj/effect/floor_decal/corner/green/bordercorner,
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled,
 /area/cynosure/hallway/d3/west_bridge)
 "fzI" = (
@@ -7699,7 +7681,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "fAz" = (
 /obj/effect/floor_decal/borderfloorblack/corner{
@@ -8892,7 +8874,7 @@
 	},
 /obj/item/secure_storage/briefcase,
 /obj/item/sticky_pad,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "gpz" = (
 /obj/structure/disposalpipe/segment{
@@ -8916,7 +8898,7 @@
 	dir = 4
 	},
 /obj/machinery/faxmachine,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "gqJ" = (
 /obj/structure/closet/emcloset,
@@ -9189,9 +9171,7 @@
 	name = "Command Lockdown";
 	id_tag = "commandlockdown"
 	},
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/techfloor,
 /area/cynosure/hallway/d3/command)
 "gyp" = (
@@ -9249,7 +9229,7 @@
 	dir = 4;
 	pixel_x = 28
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "gzF" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -9469,7 +9449,7 @@
 /obj/structure/sign/clock{
 	pixel_x = -32
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "gGy" = (
 /obj/effect/floor_decal/borderfloor{
@@ -9712,7 +9692,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "gNo" = (
 /turf/wall/r_wall,
@@ -10118,9 +10098,7 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 4
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled,
 /area/cynosure/hallway/d3/west_bridge)
 "gXY" = (
@@ -10136,8 +10114,8 @@
 /obj/item/stack/package_wrap{
 	pixel_y = -2
 	},
-/obj/item/stack/tape_roll,
-/obj/item/stack/tape_roll{
+/obj/item/stack/tape_roll/duct_tape,
+/obj/item/stack/tape_roll/duct_tape{
 	pixel_x = 2
 	},
 /obj/effect/floor_decal/borderfloor{
@@ -10612,7 +10590,7 @@
 /obj/machinery/computer/modular/preset/cardslot/command{
 	dir = 1
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "hlV" = (
 /obj/structure/cable/green{
@@ -10815,7 +10793,7 @@
 /obj/structure/chair/comfy/brown{
 	dir = 8
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "hxj" = (
 /obj/machinery/door/firedoor,
@@ -10858,7 +10836,7 @@
 /obj/abstract/landmark/start{
 	name = "Command Secretary"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "hzb" = (
 /obj/structure/table/reinforced,
@@ -11085,9 +11063,7 @@
 /area/cynosure/security/d3/armory)
 "hFC" = (
 /obj/effect/floor_decal/industrial/warning/full,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/techfloor,
 /area/cynosure/engineering/d3/reactor)
 "hFF" = (
@@ -11253,7 +11229,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "hOa" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -11601,7 +11577,7 @@
 /obj/item/toy/desk/officetoy{
 	pixel_x = -16
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "hXU" = (
 /obj/effect/floor_decal/borderfloor{
@@ -11721,7 +11697,7 @@
 /turf/open,
 /area/cynosure/command/d3/ai_core)
 "iaD" = (
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "iaS" = (
 /obj/structure/table/bench/padded,
@@ -11848,7 +11824,7 @@
 	dir = 8;
 	c_tag = "COM - Station Manager's Office"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "ifT" = (
 /obj/machinery/light,
@@ -11862,7 +11838,7 @@
 /obj/structure/noticeboard{
 	pixel_y = -30
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "igY" = (
 /turf/wall,
@@ -12579,9 +12555,7 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment,
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled,
 /area/cynosure/hallway/d3/dormitory)
 "iHM" = (
@@ -12671,9 +12645,7 @@
 "iIR" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/brown/border,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/hallway/d3/west)
 "iJf" = (
@@ -13039,7 +13011,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "iRy" = (
 /obj/structure/cable/green{
@@ -13546,9 +13518,7 @@
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled/dark,
 /area/cynosure/hallway/d3/east)
 "jen" = (
@@ -13847,7 +13817,7 @@
 /obj/machinery/keycard_auth{
 	pixel_y = -24
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "jms" = (
 /obj/effect/floor_decal/borderfloor/corner{
@@ -14135,7 +14105,7 @@
 /area/cynosure/hallway/d3/civilian)
 "juo" = (
 /obj/structure/safe/floor,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "jux" = (
 /obj/structure/cable{
@@ -14263,9 +14233,7 @@
 	},
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/green/border,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/hallway/d3/civilian)
 "jxd" = (
@@ -14606,7 +14574,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "jID" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -14720,7 +14688,7 @@
 	pixel_y = -2;
 	id_tag = "commandlockdown"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "jKS" = (
 /obj/structure/table/laminate/reinforced,
@@ -15066,7 +15034,7 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "jVB" = (
 /obj/machinery/door/firedoor,
@@ -15365,7 +15333,7 @@
 /area/cynosure/command/d3/cmo_office)
 "khp" = (
 /obj/structure/reagent_dispensers/water_cooler,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "khS" = (
 /obj/structure/cable/green{
@@ -15889,7 +15857,7 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "kBZ" = (
 /obj/effect/floor_decal/borderfloor,
@@ -15914,9 +15882,7 @@
 	dir = 4;
 	c_tag = "Second Floor -East Hallway 4"
 	},
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled,
 /area/cynosure/hallway/d3/east)
 "kFf" = (
@@ -16047,7 +16013,7 @@
 "kNE" = (
 /obj/structure/table/laminate,
 /obj/item/box/fancy/donut,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "kOm" = (
 /turf/floor/tiled/freezer,
@@ -16464,7 +16430,7 @@
 	dir = 1
 	},
 /obj/machinery/disposal,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "ljE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -16510,7 +16476,7 @@
 /obj/item/secure_storage/safe{
 	pixel_x = -23
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "lkP" = (
 /obj/structure/bed/padded,
@@ -17196,7 +17162,7 @@
 	dir = 6;
 	c_tag = "COM - Union Office"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "lPP" = (
 /obj/effect/floor_decal/borderfloor,
@@ -17399,9 +17365,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 4
 	},
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/freezer,
 /area/cynosure/engineering/d3/restroom)
 "lWT" = (
@@ -17463,10 +17427,7 @@
 /turf/floor/tiled,
 /area/cynosure/crew/d3/eva_storage)
 "lYY" = (
-/obj/structure/sign/department/cross{
-	desc = "The Star of Life, a symbol of Medical Aid.";
-	icon_state = "lifestar"
-	},
+/obj/structure/sign/department/cross,
 /turf/wall/r_wall,
 /area/cynosure/medical/d3/office)
 "lZz" = (
@@ -17870,9 +17831,7 @@
 /obj/effect/floor_decal/corner/red/border{
 	dir = 8
 	},
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled,
 /area/cynosure/security/d3/hallway)
 "mrM" = (
@@ -18425,15 +18384,13 @@
 	dir = 4
 	},
 /obj/machinery/shieldwallgen,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/dark,
 /area/cynosure/command/d3/teleporter)
 "mJs" = (
 /obj/structure/table/laminate,
 /obj/item/box/cups,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "mJt" = (
 /obj/structure/sign/warning/secure_area,
@@ -18586,7 +18543,7 @@
 /obj/abstract/landmark/start{
 	name = "Internal Affairs Agent"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "mNe" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -18600,7 +18557,7 @@
 /obj/machinery/door/window/northleft{
 	name = "Site Manager's Desk Door"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "mNA" = (
 /obj/effect/floor_decal/borderfloor,
@@ -19128,7 +19085,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "nmd" = (
 /obj/structure/railing/mapped{
@@ -20395,7 +20352,7 @@
 	desc = "Damn, that's uncomfortable...";
 	color = "#3a6ecf"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "olA" = (
 /obj/effect/floor_decal/borderfloorblack{
@@ -20494,7 +20451,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "opg" = (
 /obj/structure/cable/green,
@@ -21396,7 +21353,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "oVt" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -21950,7 +21907,7 @@
 /obj/machinery/camera/network/command{
 	c_tag = "COM - Internal Affairs"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "ppi" = (
 /obj/structure/sign/directions/roomnum{
@@ -22016,7 +21973,7 @@
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "prL" = (
 /obj/machinery/door/firedoor,
@@ -22233,7 +22190,7 @@
 /obj/machinery/computer/modular/preset/civilian{
 	dir = 8
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "pEO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
@@ -22413,7 +22370,7 @@
 	pixel_x = 8;
 	pixel_y = -1
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "pJa" = (
 /obj/structure/grille,
@@ -22608,9 +22565,7 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 5
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled/techmaint,
 /area/cynosure/crew/d3/vacant)
 "pOw" = (
@@ -22888,7 +22843,7 @@
 /area/cynosure/medical/d3/patient_wing)
 "pYh" = (
 /obj/structure/filing_cabinet,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "pYl" = (
 /turf/wall/r_wall,
@@ -23018,7 +22973,7 @@
 	dir = 1
 	},
 /obj/machinery/disposal,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "qbj" = (
 /obj/machinery/alarm{
@@ -23222,7 +23177,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals3{
 	dir = 6
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "qhE" = (
 /obj/effect/floor_decal/techfloor{
@@ -23478,9 +23433,7 @@
 /turf/floor/tiled/techfloor,
 /area/cynosure/cargo/d3/foyer)
 "qsp" = (
-/obj/machinery/network/telecomms_hub{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/telecomms_hub,
 /obj/structure/network_cable/terminal,
 /turf/floor/tiled,
 /area/cynosure/command/d3/network)
@@ -23633,9 +23586,7 @@
 	dir = 4
 	},
 /obj/structure/network_cable/terminal,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/techfloor/grid,
 /area/cynosure/crew/d3/eva_storage)
 "qyD" = (
@@ -23703,9 +23654,6 @@
 /turf/floor/tiled,
 /area/cynosure/engineering/d3/locker_room)
 "qAW" = (
-/obj/abstract/landmark/start{
-	name = "AI"
-	},
 /obj/item/radio/intercom{
 	pixel_y = 20
 	},
@@ -23724,6 +23672,7 @@
 /obj/structure/cable/cyan{
 	icon_state = "0-2"
 	},
+/obj/abstract/landmark/start/ai,
 /turf/floor/tiled/dark,
 /area/cynosure/command/d3/ai_core)
 "qAY" = (
@@ -24779,7 +24728,7 @@
 	pixel_x = -13;
 	pixel_y = 3
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "rvL" = (
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -24808,7 +24757,7 @@
 /obj/structure/sign/calendar{
 	pixel_x = -32
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "rwZ" = (
 /obj/structure/disposalpipe/segment,
@@ -24917,9 +24866,7 @@
 /obj/structure/sign/clock{
 	pixel_y = 32
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/carpet,
 /area/cynosure/command/d3/sa_office)
 "rCU" = (
@@ -25031,7 +24978,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/random_multi/single_item/captains_spare_id,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "rIO" = (
 /obj/structure/cable/green{
@@ -25379,7 +25326,7 @@
 /area/cynosure/hallway/d3/east)
 "rUW" = (
 /obj/machinery/light,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "rWd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -25412,7 +25359,7 @@
 /turf/floor/plating,
 /area/cynosure/maintenance/d3/research)
 "rXY" = (
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "rYR" = (
 /obj/machinery/door/firedoor,
@@ -25756,7 +25703,7 @@
 /turf/wall,
 /area/cynosure/command/d3/iaa)
 "siw" = (
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "siU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -25787,7 +25734,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "sjE" = (
 /obj/structure/cable/green{
@@ -25805,7 +25752,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "sjJ" = (
 /obj/machinery/atmospherics/valve/shutoff{
@@ -25917,9 +25864,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/techfloor/grid,
 /area/cynosure/command/d3/ai_core)
 "sny" = (
@@ -25952,7 +25897,7 @@
 /obj/structure/sign/calendar{
 	pixel_y = -32
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "spA" = (
 /obj/structure/ladder,
@@ -26191,7 +26136,7 @@
 /area/cynosure/hallway/d3/dormitory)
 "sxG" = (
 /obj/structure/filing_cabinet,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "syk" = (
 /obj/structure/table/glass,
@@ -26217,7 +26162,7 @@
 /area/cynosure/medical/d3/virology)
 "syP" = (
 /obj/structure/displaycase,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "syQ" = (
 /turf/wall/concrete/reinforced,
@@ -26344,7 +26289,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "sDD" = (
 /obj/structure/disposalpipe/segment{
@@ -26475,7 +26420,7 @@
 "sGK" = (
 /obj/structure/table/laminate/reinforced,
 /obj/item/flashlight/lamp/green,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "sGX" = (
 /obj/machinery/atmospherics/pipe/zpipe/down/supply{
@@ -26509,7 +26454,7 @@
 "sHz" = (
 /obj/structure/table/laminate/reinforced,
 /obj/machinery/computer/modular/preset/civilian,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "sIO" = (
 /obj/structure/window/reinforced{
@@ -26693,7 +26638,7 @@
 /obj/abstract/landmark/start{
 	name = "Internal Affairs Agent"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "sNs" = (
 /obj/effect/floor_decal/borderfloor/corner{
@@ -27143,7 +27088,7 @@
 /obj/structure/noticeboard{
 	pixel_x = -32
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "tdB" = (
 /obj/machinery/door/firedoor,
@@ -27356,7 +27301,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "tiP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -27403,7 +27348,7 @@
 /area/cynosure/security/d3/prison)
 "tlr" = (
 /obj/structure/filing_cabinet,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "tlG" = (
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -27905,9 +27850,7 @@
 /obj/structure/sign/clock{
 	pixel_y = 32
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/wood/sif,
 /area/cynosure/science/d3/hallway)
 "txz" = (
@@ -27954,9 +27897,7 @@
 	pixel_y = 24;
 	id_tag = "virology_airlock_control"
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/steel_grid,
 /area/cynosure/medical/d3/virology)
 "tzj" = (
@@ -29115,7 +29056,7 @@
 	pixel_y = -4
 	},
 /obj/item/pen/blue,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "usA" = (
 /obj/structure/railing/mapped{
@@ -29216,9 +29157,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/engineering/d3/hallway)
 "uxX" = (
@@ -29325,10 +29264,8 @@
 /obj/structure/sign/clock{
 	pixel_y = -32
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
-/turf/floor/laminate,
+/obj/machinery/network/relay/wall_mounted/south,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "uzg" = (
 /obj/structure/cable/green{
@@ -29492,9 +29429,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/obj/machinery/network/relay{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay,
 /obj/structure/network_cable/terminal,
 /turf/floor/tiled/techfloor/grid,
 /area/cynosure/command/d3/ai_core)
@@ -29560,6 +29495,10 @@
 /obj/item/book/manual/supermatter_engine,
 /turf/floor/tiled,
 /area/cynosure/engineering/d3/reactor_monitor)
+"uHj" = (
+/obj/machinery/design_database,
+/turf/floor/tiled,
+/area/cynosure/science/d3/generic_lab)
 "uHy" = (
 /obj/machinery/door/firedoor,
 /obj/structure/grille,
@@ -29969,7 +29908,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 29
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "uWM" = (
 /obj/structure/cable{
@@ -30051,9 +29990,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled,
 /area/cynosure/engineering/d3/hallway)
 "uZC" = (
@@ -30385,7 +30322,7 @@
 	dir = 5
 	},
 /obj/structure/chair,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "vne" = (
 /obj/structure/undies_wardrobe,
@@ -30509,7 +30446,7 @@
 	dir = 1
 	},
 /obj/machinery/light,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "vtY" = (
 /obj/structure/cable/green{
@@ -30601,9 +30538,7 @@
 "vyf" = (
 /obj/machinery/vending/medical,
 /obj/machinery/light,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/techmaint,
 /area/cynosure/medical/d3/patient_wing)
 "vyZ" = (
@@ -30649,7 +30584,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals3{
 	dir = 6
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "vAR" = (
 /obj/structure/cable/green{
@@ -31048,7 +30983,7 @@
 	dir = 1;
 	c_tag = "COM - Conference Room"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "vLv" = (
 /obj/structure/cable{
@@ -31172,7 +31107,7 @@
 /area/cynosure/hallway/d3/west_bridge)
 "vPF" = (
 /obj/machinery/computer/modular/preset/civilian,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "vPY" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -31203,9 +31138,7 @@
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled/white,
 /area/cynosure/science/d3/robotics)
 "vSt" = (
@@ -31383,7 +31316,7 @@
 	dir = 4;
 	pixel_x = -29
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "wbL" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -31491,7 +31424,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "wiC" = (
 /obj/structure/disposalpipe/segment{
@@ -31607,11 +31540,9 @@
 /area/cynosure/hallway/d3/east)
 "wlU" = (
 /obj/item/banner/virgov,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /obj/structure/network_cable/terminal,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "wmX" = (
 /obj/structure/cable/green{
@@ -31798,7 +31729,7 @@
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "wsg" = (
 /obj/structure/disposalpipe/segment{
@@ -31884,7 +31815,7 @@
 /obj/structure/sign/calendar{
 	pixel_x = 32
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/union)
 "wvW" = (
 /obj/structure/cable/cyan{
@@ -32106,7 +32037,7 @@
 /obj/machinery/keycard_auth{
 	pixel_y = 36
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "wDZ" = (
 /obj/structure/railing/mapped{
@@ -32253,9 +32184,7 @@
 /obj/structure/sign/deck/level_two{
 	pixel_y = 32
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled,
 /area/cynosure/engineering/d3/access)
 "wGP" = (
@@ -32458,9 +32387,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/light,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/security/d3/cell_hallway)
 "wNI" = (
@@ -33002,7 +32929,7 @@
 	icon_state = "pipe-c";
 	dir = 8
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "xcF" = (
 /obj/structure/cable/green{
@@ -33682,7 +33609,7 @@
 /obj/machinery/newscaster{
 	pixel_y = 28
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "xvn" = (
 /obj/structure/bed/padded,
@@ -33730,7 +33657,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "xxb" = (
 /obj/machinery/fabricator,
@@ -34307,7 +34234,7 @@
 /area/cynosure/medical/d3/patient_wing)
 "xRE" = (
 /obj/structure/filing_cabinet,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/sa_office)
 "xSp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -34315,7 +34242,7 @@
 /obj/structure/cable/green{
 	icon_state = "1-8"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "xTr" = (
 /obj/effect/floor_decal/steeldecal/steel_decals_central5{
@@ -34454,9 +34381,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals7{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/engineering/d2/reactor_hallway)
 "xVv" = (
@@ -34663,7 +34588,7 @@
 /turf/wall/concrete/reinforced,
 /area/cynosure/medical/d3/patient_wing)
 "ycO" = (
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/command/d3/iaa)
 "ycV" = (
 /obj/machinery/mech_recharger,
@@ -67679,9 +67604,9 @@ nFG
 jhW
 dvr
 hQe
+uHj
 cvn
 xFM
-qvT
 azH
 lpi
 lUb

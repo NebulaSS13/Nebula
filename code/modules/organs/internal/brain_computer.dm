@@ -3,6 +3,7 @@
 	name = "drone intelligence circuit"
 	desc = "The pinnacle of artifical intelligence, achieved with classical computer science."
 	icon = 'icons/obj/items/brain_interface_drone.dmi'
+	icon_state = ICON_STATE_WORLD
 	origin_tech = @'{"engineering":4,"materials":4,"programming":4}'
 	material = /decl/material/solid/metal/steel
 	matter = list(

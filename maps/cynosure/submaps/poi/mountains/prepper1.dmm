@@ -44,7 +44,7 @@
 /area/cynosure_submap/cave/prepper1)
 "j" = (
 /obj/structure/table/steel,
-/obj/item/stack/tape_roll,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/random/maintenance/engineering,
 /turf/floor/plating,
 /area/cynosure_submap/cave/prepper1)
