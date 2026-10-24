@@ -155,9 +155,7 @@
 	dir = 4;
 	id_tag = "biohazard"
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/dark,
 /area/cynosure/maintenance/substation/d2/research)
 "adA" = (
@@ -362,9 +360,7 @@
 /area/cynosure/crew/d2/janitor)
 "akg" = (
 /obj/structure/closet/emcloset,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/laminate/walnut,
 /area/cynosure/crew/d2/cafeteria)
 "aln" = (
@@ -391,9 +387,7 @@
 	dir = 8
 	},
 /obj/structure/closet/emcloset,
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/dark,
 /area/cynosure/engineering/d2/reactor_hallway)
 "amb" = (
@@ -1439,9 +1433,7 @@
 /obj/effect/floor_decal/corner/green/bordercorner{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled,
 /area/cynosure/hallway/d2/north)
 "aLU" = (
@@ -3855,9 +3847,7 @@
 /obj/effect/floor_decal/corner/blue/border{
 	dir = 10
 	},
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled,
 /area/cynosure/command/d2/hop_office)
 "bRW" = (
@@ -4031,9 +4021,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/techmaint,
 /area/cynosure/science/d2/exploration_garage)
 "bWC" = (
@@ -4921,9 +4909,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled,
 /area/cynosure/engineering/d2/atmospherics)
 "czl" = (
@@ -5693,9 +5679,7 @@
 /turf/floor/greengrid,
 /area/cynosure/command/d2/upload)
 "cRn" = (
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/dark,
 /area/cynosure/security/d2/hallway)
 "cRp" = (
@@ -6262,9 +6246,7 @@
 /area/surface/outside/plains/station)
 "dbP" = (
 /obj/structure/flora/bush/sparsegrass,
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/fake_grass,
 /area/cynosure/crew/d2/park)
 "dbY" = (
@@ -6815,9 +6797,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/freezer,
 /area/cynosure/crew/d2/pool)
 "dqB" = (
@@ -6865,9 +6845,7 @@
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/red/border,
 /obj/machinery/light,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/security/d2/briefing)
 "drL" = (
@@ -9084,9 +9062,7 @@
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 6
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/techmaint,
 /area/cynosure/crew/d2/primary_storage)
 "ewo" = (
@@ -9743,9 +9719,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled/techmaint,
 /area/cynosure/science/d2/xenoflora_isolation)
 "eLh" = (
@@ -11380,9 +11354,7 @@
 	dir = 4
 	},
 /obj/structure/network_cable/terminal,
-/obj/machinery/network/relay{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/cynosure/maintenance/d2/kitchen)
 "fAE" = (
@@ -12703,9 +12675,7 @@
 /area/cynosure/outpost/xenofauna)
 "giV" = (
 /obj/machinery/vending/cigarette,
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/laminate/walnut,
 /area/cynosure/crew/d2/cafeteria)
 "gjp" = (
@@ -12744,9 +12714,7 @@
 /obj/effect/floor_decal/corner/brown/border{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled,
 /area/cynosure/cargo/d2/cargo_bay)
 "glD" = (
@@ -12977,9 +12945,7 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/techfloor/grid,
 /area/cynosure/command/d2/upload)
 "gqX" = (
@@ -14094,9 +14060,7 @@
 /obj/structure/bookcase{
 	name = "bookcase (Fiction)"
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/laminate,
 /area/cynosure/crew/d2/library)
 "gPJ" = (
@@ -14682,9 +14646,7 @@
 "hiw" = (
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/purple/border,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/medical/d2/cloning)
 "hiG" = (
@@ -14965,9 +14927,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled,
 /area/cynosure/engineering/d2/atmospherics)
 "hqG" = (
@@ -14993,9 +14953,7 @@
 /turf/floor/tiled,
 /area/cynosure/science/d2/xenoflora_isolation)
 "hqO" = (
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled/techmaint,
 /area/cynosure/medical/d2/treatment)
 "hqR" = (
@@ -15521,9 +15479,7 @@
 	dir = 4
 	},
 /obj/structure/closet/wardrobe/medic_white,
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled/white,
 /area/cynosure/medical/d2/recovery)
 "hET" = (
@@ -16214,9 +16170,7 @@
 	},
 /obj/random/umbrella,
 /obj/random/umbrella,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/techmaint,
 /area/cynosure/outpost/xenofauna)
 "hXB" = (
@@ -16400,9 +16354,7 @@
 "idd" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/brown/border,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/cargo/d2/cargo_bay)
 "idf" = (
@@ -17418,9 +17370,7 @@
 	},
 /obj/structure/table/reinforced,
 /obj/item/chems/spray/extinguisher,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/dark,
 /area/cynosure/science/d2/xenobiology)
 "iJn" = (
@@ -17882,9 +17832,7 @@
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled,
 /area/cynosure/science/d2/exploration_prep)
 "iUK" = (
@@ -18343,9 +18291,7 @@
 /turf/floor/tiled,
 /area/cynosure/crew/d2/hydroponics)
 "jhl" = (
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled,
 /area/cynosure/crew/d2/hydroponics)
 "jhm" = (
@@ -19307,9 +19253,7 @@
 	dir = 6;
 	c_tag = "AI - Messaging Server"
 	},
-/obj/machinery/network/relay{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay,
 /obj/structure/network_cable/terminal,
 /turf/floor/bluegrid,
 /area/cynosure/command/d2/ai_network)
@@ -22251,9 +22195,7 @@
 /area/cynosure/science/d2/xenoflora_isolation)
 "kZZ" = (
 /obj/structure/flora/bush/sparsegrass,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/fake_grass,
 /area/cynosure/crew/d2/park)
 "lag" = (
@@ -23324,9 +23266,7 @@
 /area/cynosure/crew/d2/pool)
 "lCv" = (
 /obj/structure/flora/pottedplant/minitree,
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/laminate/walnut,
 /area/cynosure/crew/d2/chapel)
 "lCL" = (
@@ -23491,9 +23431,7 @@
 	},
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/structure/flora/bush/fullgrass,
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/fake_grass,
 /area/cynosure/crew/d2/hydroponics_garden)
 "lHj" = (
@@ -24902,9 +24840,7 @@
 /turf/floor/tiled,
 /area/cynosure/cargo/d2/cargo_bay)
 "mma" = (
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/dark,
 /area/cynosure/security/d2/hallway)
 "mmg" = (
@@ -24920,9 +24856,7 @@
 /area/cynosure/crew/d2/bar)
 "mmr" = (
 /obj/structure/flora/bush/sparsegrass,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/fake_grass,
 /area/cynosure/crew/d2/park)
 "mmZ" = (
@@ -27435,9 +27369,7 @@
 /area/cynosure/cargo/d2/delivery)
 "nvK" = (
 /obj/machinery/cooker/cereal,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/freezer,
 /area/cynosure/crew/d2/kitchen)
 "nwe" = (
@@ -28928,9 +28860,7 @@
 /obj/machinery/cell_charger,
 /obj/item/paint_sprayer,
 /obj/item/fuelled_tool/welding,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/techmaint,
 /area/cynosure/cargo/d2/locker)
 "oeG" = (
@@ -29638,9 +29568,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled,
 /area/cynosure/engineering/d2/workshop)
 "otw" = (
@@ -30301,9 +30229,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	dir = 6
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/plating,
 /area/cynosure/engineering/d2/reactor)
 "oKg" = (
@@ -31349,9 +31275,7 @@
 	},
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/yellow/border,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/engineering/d2/reactor_hallway)
 "pfO" = (
@@ -32834,9 +32758,7 @@
 	},
 /obj/structure/closet/jcloset,
 /obj/item/soap,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/techmaint,
 /area/cynosure/crew/d2/janitor)
 "pRi" = (
@@ -33537,9 +33459,7 @@
 /obj/machinery/camera/network/engineering{
 	c_tag = "ENG - Atmospherics Northeast"
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled,
 /area/cynosure/engineering/d2/atmospherics)
 "qiR" = (
@@ -35317,9 +35237,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	dir = 5
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/plating,
 /area/cynosure/engineering/d2/reactor)
 "qXg" = (
@@ -36374,9 +36292,7 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 8
 	},
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled,
 /area/cynosure/hallway/d2/arrivals)
 "rze" = (
@@ -36402,9 +36318,7 @@
 	},
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/green/border,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled,
 /area/cynosure/hallway/d2/south)
 "rzu" = (
@@ -36555,9 +36469,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/white,
 /area/cynosure/science/d2/hallway)
 "rEh" = (
@@ -36689,9 +36601,7 @@
 "rHf" = (
 /obj/effect/floor_decal/corner/white/diagonal,
 /obj/structure/flora/pottedplant/largebush,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/freezer,
 /area/cynosure/crew/d2/pool)
 "rHJ" = (
@@ -36801,9 +36711,7 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/white,
 /area/cynosure/science/d2/hallway)
 "rKh" = (
@@ -37178,9 +37086,7 @@
 /obj/structure/grille,
 /obj/structure/window/reinforced/full,
 /obj/machinery/ai_status_display,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/plating,
 /area/cynosure/medical/d2/treatment)
 "rTT" = (
@@ -37459,9 +37365,7 @@
 /area/surface/outpost/checkpoint)
 "sca" = (
 /obj/structure/closet/emcloset,
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/dark,
 /area/cynosure/security/d2/hallway)
 "scm" = (
@@ -37867,9 +37771,7 @@
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/paleblue/border,
 /obj/structure/curtain/open/privacy,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/white,
 /area/cynosure/medical/d2/recovery)
 "spM" = (
@@ -40642,9 +40544,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/steel_grid,
 /area/cynosure/hallway/d2/civilian)
 "tJR" = (
@@ -41273,9 +41173,7 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/dark,
 /area/cynosure/hallway/d2/west)
 "uaS" = (
@@ -42328,9 +42226,7 @@
 /obj/effect/floor_decal/corner/paleblue/bordercorner{
 	dir = 4
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/tiled,
 /area/cynosure/hallway/d2/north)
 "uCE" = (
@@ -42868,9 +42764,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled,
 /area/cynosure/security/d2/hallway)
 "uSF" = (
@@ -43067,9 +42961,7 @@
 /area/cynosure/maintenance/d2/medbay_south)
 "uWO" = (
 /obj/effect/floor_decal/industrial/warning/corner,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled/techfloor/grid,
 /area/cynosure/command/d2/upload)
 "uWY" = (
@@ -43355,9 +43247,7 @@
 	icon_state = "pipe-c";
 	dir = 1
 	},
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled,
 /area/cynosure/security/d2/hallway)
 "ves" = (
@@ -45701,9 +45591,7 @@
 "wlT" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/machinery/meter,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled,
 /area/cynosure/engineering/d2/atmospherics)
 "wmh" = (
@@ -46292,9 +46180,7 @@
 	name = "Powernet Sensor - Arrivals";
 	id_tag = "Arrivals Subgrid"
 	},
-/obj/machinery/network/relay/wall_mounted/north{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/north,
 /turf/floor/plating,
 /area/cynosure/maintenance/substation/d2/arrivals)
 "wCW" = (
@@ -46435,9 +46321,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
-/obj/machinery/network/relay/wall_mounted/west{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/west,
 /turf/floor/tiled,
 /area/cynosure/engineering/d2/hallway)
 "wHD" = (
@@ -46694,9 +46578,7 @@
 /area/cynosure/hallway/d2/civilian)
 "wNW" = (
 /obj/effect/floor_decal/industrial/warning/corner,
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/dark,
 /area/cynosure/hallway/d2/north)
 "wOb" = (
@@ -48640,9 +48522,7 @@
 /obj/effect/floor_decal/corner/purple/bordercorner{
 	dir = 4
 	},
-/obj/machinery/network/relay/wall_mounted/east{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/east,
 /turf/floor/tiled/white,
 /area/cynosure/science/d2/hallway)
 "xKP" = (
@@ -49810,9 +49690,7 @@
 /obj/structure/sign/deck/level_ground{
 	pixel_y = -32
 	},
-/obj/machinery/network/relay/wall_mounted/south{
-	initial_network_id = "cynosure_intranet"
-	},
+/obj/machinery/network/relay/wall_mounted/south,
 /turf/floor/tiled/monotile,
 /area/cynosure/engineering/d2/hallway)
 "yjU" = (
