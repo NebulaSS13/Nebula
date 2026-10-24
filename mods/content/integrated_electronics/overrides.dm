@@ -8,5 +8,7 @@
 	return ..()
 
 // Gives the research borg a hand tele.
-/obj/item/robot_module/research
-	emag = /obj/abstract/prefab/hand_teleporter
+/obj/item/robot_module/research/build_emag()
+	var/obj/abstract/prefab/hand_teleporter/tele = new
+	emag = tele.created_atom?.resolve()
+	emag?.forceMove(src)

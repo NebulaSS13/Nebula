@@ -31,10 +31,13 @@
 	color = COLOR_PURPLE
 	abstract_type = /obj/abstract/prefab
 	var/prefab_type
+	var/weakref/created_atom
 
 /obj/abstract/prefab/Initialize()
 	..()
 	if(loc)
 		var/decl/prefab/prefab = GET_DECL(prefab_type)
-		prefab?.create(loc)
+		var/created = prefab?.create(loc)
+		if(isatom(created))
+			created_atom = weakref(created)
 	return INITIALIZE_HINT_QDEL
