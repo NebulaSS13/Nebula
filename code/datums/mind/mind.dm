@@ -393,8 +393,9 @@
 				var/mob/living/silicon/robot/robot = current
 				if (istype(robot))
 					if(robot.module?.emag)
-						robot.drop_from_inventory(robot.module.emag)
-						robot.module.emag.forceMove(null)
+						robot.drop_from_inventory(robot.module.emag, robot.module)
+						robot.module.emag.forceMove(robot.module)
+						LAZYREMOVE(robot.module.equipment, robot.module.emag)
 					robot.emagged = FALSE
 					log_admin("[key_name_admin(usr)] has unemag'ed [robot].")
 
@@ -404,8 +405,9 @@
 					for (var/mob/living/silicon/robot/robot in ai.connected_robots)
 						robot.emagged = FALSE
 						if(robot.module?.emag)
-							robot.drop_from_inventory(robot.module.emag)
-							robot.module.emag.forceMove(null)
+							robot.drop_from_inventory(robot.module.emag, robot.module)
+							robot.module.emag.forceMove(robot.module)
+							LAZYREMOVE(robot.module.equipment, robot.module.emag)
 
 					log_admin("[key_name_admin(usr)] has unemag'ed [ai]'s Cyborgs.")
 

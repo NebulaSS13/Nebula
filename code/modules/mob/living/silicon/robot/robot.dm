@@ -479,7 +479,7 @@
 
 				if(do_after(user, 50, src))
 					to_chat(user, SPAN_NOTICE("You close \the [src]'s maintenance hatch."))
-					opened = 0
+					opened = FALSE
 					update_icon()
 
 			else if(wiresexposed && wires.IsAllCut())
@@ -529,9 +529,9 @@
 				to_chat(user, "The cover is locked and cannot be opened.")
 			else
 				user.visible_message("<span class='notice'>\The [user] begins prying open \the [src]'s maintenance hatch.</span>", "<span class='notice'>You start opening \the [src]'s maintenance hatch.</span>")
-				if(do_after(user, 50, src))
+				if(do_after(user, 5 SECONDS, src))
 					to_chat(user, "<span class='notice'>You open \the [src]'s maintenance hatch.</span>")
-					opened = 1
+					opened = TRUE
 					update_icon()
 		return TRUE
 	else if (istype(used_item, /obj/item/cell) && opened)	// trying to put a cell inside
