@@ -40,6 +40,7 @@
 	)
 
 /obj/item/robot_module/miner/handle_emagged()
+	..()
 	var/obj/item/tool/drill/advanced/D = locate() in equipment
 	if(D)
 		equipment -= D

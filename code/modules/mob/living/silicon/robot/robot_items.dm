@@ -38,7 +38,8 @@
 		QDEL_NULL(loaded_item)
 
 /obj/item/portable_destructive_analyzer/afterattack(var/atom/target, var/mob/living/user, proximity)
-	if(!istype(target,/obj/item) || !proximity || !isturf(target.loc))
+
+	if(!proximity || !isturf(target.loc))
 		return
 
 	if(istype(target, /obj/machinery/design_database))
@@ -49,14 +50,17 @@
 				db.tech_levels[tech] = saved_tech_levels[tech]
 				transferred = TRUE
 		if(transferred)
-			to_chat(user, SPAN_NOTICE("You transfer your saved data into the storage volume of \the [src]."))
+			to_chat(user, SPAN_NOTICE("You transfer your saved data into the storage volume of \the [target]."))
 		else
-			to_chat(user, SPAN_NOTICE("You have no saved data that \the [src] doesn't already have!"))
+			to_chat(user, SPAN_NOTICE("You have no saved data that \the [target] doesn't already have!"))
 		return TRUE
+	else if(!istype(target, /obj/item))
+		return
 
 	if(loaded_item)
 		to_chat(user, SPAN_WARNING("\The [src] already has something inside.  Analyze or eject it first."))
 		return
+
 	var/obj/item/I = target
 	var/tech = I.get_origin_tech()
 	if(!tech)

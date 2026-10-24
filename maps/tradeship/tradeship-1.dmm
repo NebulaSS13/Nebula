@@ -3312,9 +3312,7 @@
 /turf/floor/tiled,
 /area/ship/trade/maintenance/lower)
 "Wm" = (
-/obj/machinery/network/relay{
-	initial_network_id = "tradenet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/bluegrid,
 /area/ship/trade/maintenance/techstorage)
 "WZ" = (

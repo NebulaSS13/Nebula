@@ -4,33 +4,38 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 	category          = "structures"
 
-/decl/stack_recipe/steel/apc
+/decl/stack_recipe/steel/machine
+	abstract_type     = /decl/stack_recipe/steel/machine
+	category          = "machines"
+	difficulty        = MAT_VALUE_HARD_DIY
+
+/decl/stack_recipe/steel/machine/apc
 	result_type       = /obj/item/frame/apc
-	difficulty        = MAT_VALUE_HARD_DIY
 
-/decl/stack_recipe/steel/air_alarm
+/decl/stack_recipe/steel/machine/air_alarm
 	result_type       = /obj/item/frame/air_alarm
-	difficulty        = MAT_VALUE_HARD_DIY
 
-/decl/stack_recipe/steel/fire_alarm
+/decl/stack_recipe/steel/machine/fire_alarm
 	result_type       = /obj/item/frame/fire_alarm
-	difficulty        = MAT_VALUE_HARD_DIY
 
-/decl/stack_recipe/steel/light
+/decl/stack_recipe/steel/machine/light
 	result_type       = /obj/item/frame/light
-	difficulty        = MAT_VALUE_HARD_DIY
 
-/decl/stack_recipe/steel/light_small
+/decl/stack_recipe/steel/machine/light_small
 	result_type       = /obj/item/frame/light/small
-	difficulty        = MAT_VALUE_HARD_DIY
 
-/decl/stack_recipe/steel/light_switch
+/decl/stack_recipe/steel/machine/light_switch
 	result_type       = /obj/item/frame/button/light_switch
-	difficulty        = MAT_VALUE_HARD_DIY
 
-/decl/stack_recipe/steel/light_switch/windowtint
+/decl/stack_recipe/steel/machine/light_switch/windowtint
 	result_type       = /obj/item/frame/button/light_switch/windowtint
-	difficulty        = MAT_VALUE_HARD_DIY
+
+/decl/stack_recipe/steel/machine/frame
+	result_type       = /obj/machinery/constructable_frame/machine_frame
+	req_amount        = 5 * SHEET_MATERIAL_AMOUNT // Arbitrary value since machines don't handle matter properly yet.
+
+/decl/stack_recipe/steel/machine/frame/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
+	return ..(user, location, amount, null, null, paint_color, spent_type, spent_amount)
 
 /decl/stack_recipe/grenade/steel
 	required_material = /decl/material/solid/metal/steel
@@ -50,6 +55,7 @@
 /decl/stack_recipe/steel/furniture/computerframe
 	result_type       = /obj/machinery/constructable_frame/computerframe
 	req_amount        = 5 * SHEET_MATERIAL_AMOUNT // Arbitrary value since machines don't handle matter properly yet.
+	category          = "machines"
 
 /decl/stack_recipe/steel/furniture/computerframe/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
 	return ..(user, location, amount, null, null)

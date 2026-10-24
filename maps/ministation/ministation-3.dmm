@@ -361,9 +361,7 @@
 /turf/floor/plating,
 /area/space)
 "HM" = (
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/ministation/maint/l4central)
 "IZ" = (
@@ -420,7 +418,7 @@
 /turf/floor/plating,
 /area/ministation/maint/l4central)
 "NO" = (
-/obj/abstract/level_data_spawner/main_level,
+/obj/abstract/level_data_spawner/ministation_three,
 /turf/space,
 /area/space)
 "SJ" = (

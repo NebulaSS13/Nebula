@@ -6266,9 +6266,7 @@
 /turf/floor/tiled/monotile,
 /area/ship/trade/command/hallway)
 "ER" = (
-/obj/machinery/network/acl{
-	initial_network_id = "tradenet"
-	},
+/obj/machinery/network/acl,
 /turf/floor/tiled/techfloor,
 /area/ship/trade/command/captain)
 "Fc" = (
@@ -7136,9 +7134,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/cobweb2,
-/obj/machinery/network/relay{
-	initial_network_id = "tradenet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/laminate/yew,
 /area/ship/trade/unused)
 "Og" = (
@@ -7763,9 +7759,7 @@
 /turf/floor/tiled,
 /area/ship/trade/shuttle/outgoing/general)
 "VK" = (
-/obj/machinery/network/relay{
-	initial_network_id = "tradenet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/bluegrid,
 /area/ship/trade/command/fmate)
 "VL" = (
