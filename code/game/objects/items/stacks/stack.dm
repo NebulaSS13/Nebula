@@ -185,10 +185,10 @@
 		return
 	var/used_skill = recipe.get_skill(mat, reinf_mat)
 	var/used_difficulty = recipe.get_skill_difficulty(mat, reinf_mat)
-	var/used_time = recipe.get_adjusted_time(mat, reinf_mat)
+	var/used_time = recipe.get_adjusted_time(mat, reinf_mat, user)
 	if (used_time)
 		to_chat(user, SPAN_NOTICE("You set about [recipe.get_craft_verbing(src)] [recipe.get_display_name(producing, mat, reinf_mat)]..."))
-		if (!user.do_skilled(used_time, used_skill))
+		if (!do_after(user, used_time, src))
 			return
 
 	if(!use(expending))
