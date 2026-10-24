@@ -83,7 +83,9 @@
 		access_bar,
 		access_kitchen
 	)
-	minimal_access = list(access_kitchen)
+	minimal_access = list(
+		access_kitchen
+	)
 	alt_titles = list("Cook")
 	outfit_type = /decl/outfit/job/service/chef
 	min_skill = list(

@@ -1509,7 +1509,7 @@
 /turf/floor/tiled,
 /area/cynosure/hallway/d2/civilian)
 "aOr" = (
-/obj/machinery/button/alternate/door{
+/obj/machinery/button/alternate/door/bolts{
 	name = "Door Bolt Control";
 	dir = 8;
 	pixel_x = 24;
@@ -32743,9 +32743,10 @@
 /obj/machinery/door/airlock/external{
 	name = "Rear Hatch";
 	locked = 1;
-	id_tag = "expshuttle_door_cargo"
+	id_tag = "expshuttle_door_cargo";
+	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/airlock = 1, /decl/stock_part_preset/radio/event_transmitter/airlock = 1)
 	},
-/obj/machinery/button/alternate/door{
+/obj/machinery/button/alternate/door/bolts{
 	name = "Rear Hatch Release";
 	dir = 4;
 	pixel_x = -24;
@@ -34133,7 +34134,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/atmospherics/pipe/zpipe/up/supply,
-/obj/machinery/button/alternate/door{
+/obj/machinery/button/alternate/door/bolts{
 	name = "Door Bolt Control";
 	pixel_x = 6;
 	pixel_y = 24;
@@ -47213,7 +47214,7 @@
 /obj/structure/cable/cyan{
 	icon_state = "0-8"
 	},
-/obj/machinery/button/alternate/door{
+/obj/machinery/button/alternate/door/bolts{
 	name = "Door Bolt Control";
 	dir = 8;
 	pixel_x = 24;
