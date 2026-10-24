@@ -17427,10 +17427,7 @@
 /turf/floor/tiled,
 /area/cynosure/crew/d3/eva_storage)
 "lYY" = (
-/obj/structure/sign/department/cross{
-	desc = "The Star of Life, a symbol of Medical Aid.";
-	icon_state = "lifestar"
-	},
+/obj/structure/sign/department/cross,
 /turf/wall/r_wall,
 /area/cynosure/medical/d3/office)
 "lZz" = (

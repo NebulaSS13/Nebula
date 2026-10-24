@@ -24728,10 +24728,7 @@
 /turf/floor/tiled,
 /area/cynosure/engineering/d2/lobby)
 "miX" = (
-/obj/structure/sign/department/cross{
-	desc = "The Star of Life, a symbol of Medical Aid.";
-	icon_state = "lifestar"
-	},
+/obj/structure/sign/department/cross,
 /turf/wall/r_wall,
 /area/cynosure/medical/d2/chemistry)
 "mje" = (
@@ -30149,10 +30146,7 @@
 /turf/floor/plating,
 /area/cynosure/engineering/d2/hallway)
 "oHA" = (
-/obj/structure/sign/department/cross{
-	desc = "The Star of Life, a symbol of Medical Aid.";
-	icon_state = "lifestar"
-	},
+/obj/structure/sign/department/cross,
 /turf/wall/r_wall,
 /area/cynosure/medical/d2/emt_bay)
 "oHR" = (

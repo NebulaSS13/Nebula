@@ -16888,10 +16888,7 @@
 /turf/floor/tiled/dark,
 /area/cynosure/outpost/xenoarch/anomalous_storage)
 "Nl" = (
-/obj/structure/sign/department/cross{
-	desc = "The Star of Life, a symbol of Medical Aid.";
-	icon_state = "lifestar"
-	},
+/obj/structure/sign/department/cross,
 /turf/wall/r_wall,
 /area/cynosure/medical/d1/hallway)
 "Nn" = (
