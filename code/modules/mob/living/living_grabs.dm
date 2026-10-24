@@ -62,7 +62,7 @@
 
 /mob/living/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
 
-	if(has_had_gripper)
+	if(use_gripper_for_grabs_if_available && has_had_gripper)
 		if(defer_hand)
 			. = put_in_hands(grab)
 		else

@@ -16,6 +16,7 @@
 	silicon_camera = /obj/item/camera/siliconcam/robot_camera
 	silicon_radio = /obj/item/radio/borg
 	light_wedge = LIGHT_WIDE
+	use_gripper_for_grabs_if_available = FALSE // TODO: empty module for grabs
 
 	var/panel_icon = 'icons/mob/robots/_panels.dmi'
 	 /// Is our integrated light on?
