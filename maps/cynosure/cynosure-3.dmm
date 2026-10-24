@@ -23654,9 +23654,6 @@
 /turf/floor/tiled,
 /area/cynosure/engineering/d3/locker_room)
 "qAW" = (
-/obj/abstract/landmark/start{
-	name = "AI"
-	},
 /obj/item/radio/intercom{
 	pixel_y = 20
 	},
@@ -23675,6 +23672,7 @@
 /obj/structure/cable/cyan{
 	icon_state = "0-2"
 	},
+/obj/abstract/landmark/start/ai,
 /turf/floor/tiled/dark,
 /area/cynosure/command/d3/ai_core)
 "qAY" = (
