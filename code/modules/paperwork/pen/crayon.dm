@@ -11,8 +11,9 @@
 	max_uses             = 30
 	pen_font             = PEN_FONT_CRAYON
 	material             = /decl/material/solid/organic/wax
+	abstract_type        = /obj/item/pen/crayon
 	var/shade_color      = "#220000" //RGB
-	var/pigment_type     = /decl/material/liquid/pigment
+	var/pigment_type
 	var/use_stroke_color = TRUE
 
 /obj/item/pen/crayon/Initialize()

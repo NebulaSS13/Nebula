@@ -1,66 +1,66 @@
 /decl/material/liquid/pigment
 	name = "pigment"
-	lore_text = "Intensely coloured powder." // then why is it a liquid?
-	taste_description = "the back of class"
-	color = "#888888"
 	overdose = 5
-	hidden_from_codex = TRUE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	opacity = 1.0
-	uid = "chem_pigment"
+	abstract_type = /decl/material/liquid/pigment
 
 /decl/material/liquid/pigment/red
 	name = "red pigment"
 	color = "#fe191a"
 	uid = "chem_pigment_red"
+	lore_text = "Red pigment can be produced from acid treatment of cinnabar."
 
 /decl/material/liquid/pigment/orange
 	name = "orange pigment"
 	color = "#ffbe4f"
 	uid = "chem_pigment_orange"
+	lore_text = "Orange pigment can be produced by heat treatment of lead and chromium."
 
 /decl/material/liquid/pigment/yellow
 	name = "yellow pigment"
 	color = "#fdfe7d"
 	uid = "chem_pigment_yellow"
+	lore_text = "Yellow pigment can be produced by grinding dried sunflowers."
 
 /decl/material/liquid/pigment/green
 	name = "green pigment"
 	color = "#18a31a"
 	uid = "chem_pigment_green"
+	lore_text = "Green pigment can be produced by grinding dried berries."
 
 /decl/material/liquid/pigment/blue
 	name = "blue pigment"
 	color = "#247cff"
 	uid = "chem_pigment_blue"
+	lore_text = "Blue pigment can be produced by cooking powdered copper, quartz and ashes together at 800C or higher."
 
 /decl/material/liquid/pigment/purple
 	name = "purple pigment"
 	color = "#cc0099"
 	uid = "chem_pigment_purple"
+	lore_text = "Historically rare and expensive. Purple pigment can be produced by grinding up mollusc shells and treating with acid."
 
 /decl/material/liquid/pigment/grey //Mime
 	name = "grey pigment"
 	color = "#808080"
 	uid = "chem_pigment_grey"
+	lore_text = "Grey pigment can be made by mixing ashes and purified spirits."
 
-/decl/material/liquid/pigment/brown //Rainbow
+/decl/material/liquid/pigment/brown
 	name = "brown pigment"
 	color = "#846f35"
 	uid = "chem_pigment_brown"
-
-/decl/material/liquid/pigment/grey //Mime
-	name = "grey pigment"
-	color = "#808080"
-	uid = "chem_pigment_grey"
+	lore_text = "Brown pigment can be produced from acid treatment of clay."
 
 /decl/material/liquid/pigment/black
 	name = "black pigment"
 	color = "#222222"
 	uid = "chem_pigment_black"
+	lore_text = "Black pigment can be produced by mixing purified carbon and spirits."
 
 /decl/material/liquid/pigment/black/ink
-	name = "ink"
+	name = "black ink"
 	lore_text = "Ink used for writing or dyeing materials, often made from soot or charcoal and some sort of binder."
 	uid = "chem_ink"
 
@@ -68,6 +68,7 @@
 	name = "white pigment"
 	color = "#aaaaaa"
 	uid = "chem_pigment_white"
+	lore_text = "White pigment can be produced by acid treatment of powdered zinc."
 
 /decl/material/liquid/paint_stripper
 	name = "paint stripper"

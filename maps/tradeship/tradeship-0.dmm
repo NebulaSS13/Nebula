@@ -1313,9 +1313,7 @@
 /turf/wall,
 /area/ship/trade/loading_bay)
 "qQ" = (
-/obj/machinery/network/relay{
-	initial_network_id = "tradenet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/bluegrid,
 /area/ship/trade/undercomms)
 "rp" = (

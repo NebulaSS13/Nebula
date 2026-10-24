@@ -564,9 +564,7 @@
 /turf/floor/reinforced/airless,
 /area/space)
 "ds" = (
-/obj/machinery/network/router{
-	initial_network_id = "tradenet"
-	},
+/obj/machinery/network/router,
 /turf/floor/bluegrid,
 /area/ship/trade/comms)
 "fi" = (
@@ -905,9 +903,7 @@
 /turf/floor/plating,
 /area/ship/trade/maintenance/solars)
 "AK" = (
-/obj/machinery/network/mainframe{
-	initial_network_id = "tradenet"
-	},
+/obj/machinery/network/mainframe,
 /turf/floor/bluegrid,
 /area/ship/trade/comms)
 "Db" = (
@@ -1278,9 +1274,7 @@
 /turf/open,
 /area/ship/trade/command/bridge_upper)
 "ZU" = (
-/obj/machinery/network/telecomms_hub{
-	initial_network_id = "tradenet"
-	},
+/obj/machinery/network/telecomms_hub,
 /turf/floor/bluegrid,
 /area/ship/trade/comms)
 

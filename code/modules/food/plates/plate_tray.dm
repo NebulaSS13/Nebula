@@ -104,15 +104,18 @@
 	. = ..()
 	if(!no_drop)
 		dump_contents(user = user)
+	update_icon()
 
 /obj/item/plate/tray/throw_at(atom/target, range, speed, mob/thrower, spin, datum/callback/callback)
 	no_drop = TRUE
 	. = ..()
+	update_icon()
 
 /obj/item/plate/tray/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	. = ..()
 	no_drop = FALSE
 	scatter_contents(FALSE, get_turf(hit_atom))
+	update_icon()
 
 /obj/item/plate/tray/on_update_icon()
 	. = ..()

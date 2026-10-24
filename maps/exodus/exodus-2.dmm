@@ -63062,9 +63062,7 @@
 /turf/floor/tiled/steel_grid,
 /area/ship/exodus_pod_mining)
 "doN" = (
-/obj/abstract/level_data_spawner/main_level{
-	name = "Exodus Operations Deck"
-	},
+/obj/abstract/level_data_spawner/exodus_two,
 /turf/space,
 /area/space)
 "drB" = (

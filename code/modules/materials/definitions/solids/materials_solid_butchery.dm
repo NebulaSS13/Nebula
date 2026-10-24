@@ -220,6 +220,21 @@
 	compost_value = 0.5
 	allergen_flags = ALLERGEN_MEAT
 	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
+	// Todo: calcium
+	dissolves_into = list(
+		/decl/material/solid/carbon = 1
+	)
+
+/decl/material/solid/organic/bone/shell
+	name = "shell"
+	uid = "solid_shell"
+	color = "#668585"
+	hardness = MAT_VALUE_FLEXIBLE // Not really, but should be crushable in mortar/pestle.
+	// TODO: calcium
+	dissolves_into = list(
+		/decl/material/solid/carbon          = 0.8,
+		/decl/material/liquid/pigment/purple = 0.2
+	)
 
 // Stub to stop eggs melting while being boiled.
 /decl/material/solid/organic/bone/eggshell

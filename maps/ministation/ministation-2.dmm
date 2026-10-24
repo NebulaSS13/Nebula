@@ -806,9 +806,7 @@
 /turf/wall,
 /area/ministation/science)
 "cP" = (
-/obj/machinery/network/acl{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/acl,
 /turf/floor/bluegrid/mainframe,
 /area/ministation/telecomms)
 "cQ" = (
@@ -1469,9 +1467,7 @@
 /turf/floor/tiled,
 /area/ministation/hall/s3)
 "gd" = (
-/obj/machinery/destructive_analyzer{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/destructive_analyzer,
 /obj/machinery/camera/network/research{
 	req_access = list("ACCESS_CAMERAS")
 	},
@@ -1671,9 +1667,7 @@
 /turf/floor/plating,
 /area/ministation/maint/l3ne)
 "hf" = (
-/obj/machinery/fabricator/protolathe{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/fabricator/protolathe,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -1690,9 +1684,7 @@
 /turf/floor/tiled/steel_grid,
 /area/ministation/science)
 "hh" = (
-/obj/machinery/fabricator/bioprinter{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/fabricator/bioprinter,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/tiled/techfloor,
 /area/ministation/science)
@@ -1722,9 +1714,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/design_database{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/design_database,
 /turf/floor/tiled/dark,
 /area/ministation/science)
 "hv" = (
@@ -1989,9 +1979,7 @@
 /turf/floor/plating,
 /area/ministation/maint/l3se)
 "iI" = (
-/obj/machinery/fabricator{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/fabricator,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/tiled/techfloor,
 /area/ministation/science)
@@ -2003,9 +1991,7 @@
 /turf/floor/tiled/white,
 /area/ministation/science)
 "iK" = (
-/obj/machinery/fabricator/imprinter{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/fabricator/imprinter,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/tiled/techfloor,
 /area/ministation/science)
@@ -3063,9 +3049,7 @@
 /area/ministation/hall/s3)
 "nL" = (
 /obj/effect/decal/cleanable/dirt/visible,
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/ministation/maint/l3sw)
 "nN" = (
@@ -3105,9 +3089,7 @@
 /turf/floor/tiled,
 /area/ministation/court)
 "nZ" = (
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/ministation/maint/l3ne)
 "ob" = (
@@ -3772,9 +3754,7 @@
 /turf/floor/tiled/dark/monotile/telecomms,
 /area/ministation/telecomms)
 "tV" = (
-/obj/machinery/network/router{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/router,
 /turf/floor/bluegrid/mainframe,
 /area/ministation/telecomms)
 "tY" = (
@@ -3813,9 +3793,7 @@
 /turf/floor/reinforced/airless,
 /area/ministation/science)
 "uA" = (
-/obj/machinery/network/mainframe{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/mainframe,
 /turf/floor/bluegrid/mainframe,
 /area/ministation/telecomms)
 "uB" = (
@@ -4318,9 +4296,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/ministation/maint/l3ne)
 "yR" = (
@@ -4336,9 +4312,7 @@
 /turf/space,
 /area/space)
 "zd" = (
-/obj/machinery/fabricator/industrial{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/fabricator/industrial,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/tiled/techfloor,
 /area/ministation/science)
@@ -4461,9 +4435,7 @@
 /turf/floor/bluegrid/mainframe,
 /area/ministation/telecomms)
 "Ab" = (
-/obj/machinery/network/message_server{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/message_server,
 /turf/floor/bluegrid/mainframe,
 /area/ministation/telecomms)
 "Af" = (
@@ -4552,9 +4524,7 @@
 /turf/floor/reinforced,
 /area/ministation/science)
 "AL" = (
-/obj/machinery/network/telecomms_hub{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/telecomms_hub,
 /turf/floor/bluegrid/mainframe,
 /area/ministation/telecomms)
 "AQ" = (
@@ -4629,9 +4599,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/ministation/maint/l3central)
 "Bf" = (
@@ -4950,9 +4918,7 @@
 /turf/floor/tiled,
 /area/ministation/hall/s3)
 "CL" = (
-/obj/machinery/fabricator/robotics{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/fabricator/robotics,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/floor/tiled/techfloor,
 /area/ministation/science)
@@ -5316,9 +5282,7 @@
 /turf/floor/tiled/steel_grid,
 /area/ministation/science)
 "DX" = (
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/ministation/maint/l3se)
 "DZ" = (
@@ -6523,7 +6487,7 @@
 /turf/floor/tiled,
 /area/ministation/shuttle/outgoing)
 "NO" = (
-/obj/abstract/level_data_spawner/main_level,
+/obj/abstract/level_data_spawner/ministation_two,
 /turf/space,
 /area/space)
 "NR" = (
@@ -7015,7 +6979,6 @@
 "QT" = (
 /obj/machinery/computer/design_console{
 	dir = 8;
-	initial_network_id = "molluscnet"
 	},
 /obj/machinery/light{
 	dir = 1
