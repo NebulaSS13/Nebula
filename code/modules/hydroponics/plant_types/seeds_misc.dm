@@ -97,6 +97,7 @@
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 	set_chemical_amount(/decl/material/liquid/nutriment, list(1,10))
 	set_chemical_amount(/decl/material/liquid/drink/juice/berry, list(10,10))
+	set_chemical_amount(/decl/material/liquid/pigment/green, list(1,5), _state = PLANT_STATE_DRIED)
 
 /datum/seed/berry/blue
 	name = "blueberries"
@@ -739,6 +740,7 @@
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 	set_chemical_amount(/decl/material/liquid/oil/plant, list(10,10))
+	set_chemical_amount(/decl/material/liquid/pigment/yellow, list(1,5), _state = PLANT_STATE_DRIED)
 
 /datum/seed/flower/lavender
 	name = "lavender"

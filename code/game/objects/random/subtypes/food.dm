@@ -154,7 +154,6 @@
 
 /obj/random/mre/sauce/crayon/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/chems/packet/crayon,
 		/obj/item/chems/packet/crayon/red,
 		/obj/item/chems/packet/crayon/orange,
 		/obj/item/chems/packet/crayon/yellow,

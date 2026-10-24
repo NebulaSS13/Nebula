@@ -432,6 +432,12 @@
 	color = "#92aae4"
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_MATTE
+	// Strictly speaking this should be via calcination, but it's used in alloys, so setting
+	// heating_product would just cause it to turn into white pigment in the crucible.
+	dissolves_into = list(
+		/decl/material/liquid/pigment/white = 0.8,
+		/decl/material/solid/slag           = 0.2
+	)
 
 /decl/material/solid/metal/chromium
 	name = "chromium"

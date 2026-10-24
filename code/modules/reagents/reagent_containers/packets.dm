@@ -163,9 +163,7 @@
 /obj/item/chems/packet/crayon
 	name = "crayon powder packet"
 	desc = "Contains 10u of powdered crayon. Mix with 30u of water."
-
-/obj/item/chems/packet/crayon/populate_reagents()
-	add_to_reagents(/decl/material/liquid/pigment, REAGENT_MAXIMUM_VOLUME(reagents))
+	abstract_type = /obj/item/chems/packet/crayon
 
 /obj/item/chems/packet/crayon/red/populate_reagents()
 	add_to_reagents(/decl/material/liquid/pigment/red, REAGENT_MAXIMUM_VOLUME(reagents))
