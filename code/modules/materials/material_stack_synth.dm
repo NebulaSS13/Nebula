@@ -23,31 +23,37 @@
 	name = "cyborg plastic synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/organic/plastic
+	crafting_stack_type = /obj/item/stack/material/panel
 
 /obj/item/stack/material/cyborg/steel
 	name = "cyborg steel synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/metal/steel
+	crafting_stack_type = /obj/item/stack/material/sheet
 
 /obj/item/stack/material/cyborg/plasteel
 	name = "cyborg plasteel synthesiser"
 	icon_state = "sheet-reinf"
 	material = /decl/material/solid/metal/plasteel
+	crafting_stack_type = /obj/item/stack/material/sheet/reinforced
 
 /obj/item/stack/material/cyborg/wood
 	name = "cyborg wood synthesiser"
 	icon_state = "sheet-wood"
 	material = /decl/material/solid/organic/wood/oak
+	crafting_stack_type = /obj/item/stack/material/plank
 
 /obj/item/stack/material/cyborg/glass
 	name = "cyborg glass synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/glass
+	crafting_stack_type = /obj/item/stack/material/pane
 
 /obj/item/stack/material/cyborg/fiberglass
 	name = "cyborg fiberglass synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/fiberglass
+	crafting_stack_type = /obj/item/stack/material/sheet/reinforced
 
 /obj/item/stack/material/cyborg/glass/reinforced
 	name = "cyborg reinforced glass synthesiser"
@@ -55,8 +61,10 @@
 	material = /decl/material/solid/glass
 	reinf_material = /decl/material/solid/metal/steel
 	charge_costs = list(500, 1000)
+	crafting_stack_type = /obj/item/stack/material/pane
 
 /obj/item/stack/material/cyborg/aluminium
 	name = "cyborg aluminium synthesiser"
 	icon_state = "sheet"
 	material = /decl/material/solid/metal/aluminium
+	crafting_stack_type = /obj/item/stack/material/sheet/shiny
