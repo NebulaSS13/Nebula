@@ -55,7 +55,7 @@
 
 /decl/flooring/tiling/dark
 	desc               = "A layer of ominously dark tiles."
-	color              = COLOR_DARK_GRAY
+	color              = COLOR_GRAY
 	build_type         = /obj/item/stack/tile/floor_dark
 	uid                = "floor_tiled_dark"
 

@@ -59,3 +59,7 @@
 	name = "thick growth"
 	color = "#446471"
 	_flooring = /decl/flooring/grass/wild/sif
+
+/turf/floor/laminate/sif
+	color         = /decl/material/solid/organic/wood/chipboard/sif::color
+	_flooring     = /decl/flooring/laminate/sif

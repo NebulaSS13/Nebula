@@ -31,12 +31,15 @@
 /turf/floor/tiled/white
 	name          = "white floor"
 	icon_state    = "white"
+	color         = COLOR_WHITE
 	_flooring     = /decl/flooring/tiling/white
+	color         = /decl/flooring/tiling/white::color
 
 /turf/floor/tiled/white/monotile
 	name          = "floor"
 	icon_state    = "monotile"
 	_flooring     = /decl/flooring/tiling/mono/white
+	color         = /decl/flooring/tiling/mono/white::color
 
 /turf/floor/tiled/monofloor
 	name          = "floor"
@@ -64,17 +67,20 @@
 	icon          = 'icons/turf/flooring/tiles.dmi'
 	icon_state    = "techmaint"
 	_flooring     = /decl/flooring/tiling/new_tile/techmaint
+	color         = /decl/flooring/tiling/new_tile/techmaint::color
 
 /turf/floor/tiled/monofloor
 	name          = "floor"
 	icon_state    = "steel_monofloor"
 	_flooring     = /decl/flooring/tiling/new_tile/monofloor
+	color         = /decl/flooring/tiling/new_tile/monofloor::color
 
 /turf/floor/tiled/techfloor
 	name          = "floor"
 	icon          = 'icons/turf/flooring/techfloor.dmi'
 	icon_state    = "techfloor_gray"
 	_flooring     = /decl/flooring/tiling/tech
+	color         = /decl/flooring/tiling/tech::color
 
 /turf/floor/tiled/techfloor/cryo
 	initial_gas = list(/decl/material/gas/nitrogen = MOLES_CELLSTANDARD)
@@ -84,31 +90,37 @@
 	name          = "floor"
 	icon_state    = "steel_monotile"
 	_flooring     = /decl/flooring/tiling/mono
+	color         = /decl/flooring/tiling/mono::color
 
 /turf/floor/tiled/steel_grid
 	name          = "floor"
 	icon_state    = "steel_grid"
 	_flooring     = /decl/flooring/tiling/new_tile/steel_grid
+	color         = /decl/flooring/tiling/new_tile/steel_grid::color
 
 /turf/floor/tiled/steel_ridged
 	name          = "floor"
 	icon_state    = "steel_ridged"
 	_flooring     = /decl/flooring/tiling/new_tile/steel_ridged
+	color         = /decl/flooring/tiling/new_tile/steel_ridged::color
 
 /turf/floor/tiled/old_tile
 	name          = "floor"
 	icon_state    = "tile_full"
 	_flooring     = /decl/flooring/tiling/new_tile
+	color         = /decl/flooring/tiling/new_tile::color
 
 /turf/floor/tiled/old_cargo
 	name          = "floor"
 	icon_state    = "cargo_one_full"
 	_flooring     = /decl/flooring/tiling/new_tile/cargo_one
+	color         = /decl/flooring/tiling/new_tile/cargo_one::color
 
 /turf/floor/tiled/kafel_full
 	name          = "floor"
 	icon_state    = "kafel_full"
 	_flooring     = /decl/flooring/tiling/new_tile/kafel
+	color         = /decl/flooring/tiling/new_tile/kafel::color
 
 /turf/floor/tiled/stone
 	name          = "stone slab floor"
@@ -120,6 +132,7 @@
 	name          = "floor"
 	icon_state    = "techfloor_grid"
 	_flooring     = /decl/flooring/tiling/tech/grid
+	color         = /decl/flooring/tiling/tech/grid::color
 
 /turf/floor/tiled/techfloor/grid/cryo
 	initial_gas = list(/decl/material/gas/nitrogen = MOLES_CELLSTANDARD)

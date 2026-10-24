@@ -90,7 +90,7 @@
 	dir = 1;
 	c_tag = "CIV - Bar Backroom"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "ack" = (
 /obj/structure/noticeboard{
@@ -133,7 +133,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "acH" = (
 /obj/machinery/door/firedoor,
@@ -361,7 +361,7 @@
 "akg" = (
 /obj/structure/closet/emcloset,
 /obj/machinery/network/relay/wall_mounted/west,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "aln" = (
 /obj/machinery/smartfridge/secure/extract,
@@ -859,7 +859,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "ayH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -986,7 +986,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "aDA" = (
 /obj/machinery/door/firedoor,
@@ -1918,7 +1918,7 @@
 	dir = 1;
 	pixel_y = -28
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "aWO" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -2956,7 +2956,7 @@
 /area/cynosure/maintenance/d2/engineering)
 "btt" = (
 /obj/structure/disposalpipe/segment,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "btA" = (
 /obj/effect/floor_decal/corner/white/diagonal,
@@ -3578,7 +3578,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/segment,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "bLu" = (
 /obj/structure/cable/green{
@@ -3862,7 +3862,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "bRZ" = (
 /obj/structure/cable/yellow{
@@ -4116,7 +4116,7 @@
 /obj/machinery/door/window/northright{
 	name = "Coffin Storage"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "bZn" = (
 /turf/wall/concrete/reinforced,
@@ -4269,7 +4269,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "ccZ" = (
 /obj/effect/floor_decal/borderfloor/corner{
@@ -4313,7 +4313,7 @@
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/gym)
 "cfy" = (
 /obj/structure/cable/green{
@@ -4758,7 +4758,7 @@
 /area/cynosure/engineering/d2/hard_storage)
 "cua" = (
 /obj/structure/table/bench/wooden,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "cub" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -4999,7 +4999,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "cBX" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -5061,7 +5061,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "cEE" = (
 /obj/structure/cable{
@@ -5816,7 +5816,7 @@
 	dir = 4;
 	c_tag = "CIV - Cafeteria West"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "cUE" = (
 /obj/structure/disposalpipe/segment{
@@ -6671,14 +6671,14 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "dnQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/chair/wood/walnut{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "doc" = (
 /turf/wall/r_wall,
@@ -8137,7 +8137,7 @@
 	dir = 2;
 	sort_type = "Hydroponics"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "ecm" = (
 /obj/effect/floor_decal/borderfloorwhite{
@@ -8719,7 +8719,7 @@
 	name = "bookcase (Reference)"
 	},
 /obj/item/book/fluff/nt_regs,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "epo" = (
 /obj/structure/table/marble,
@@ -8782,7 +8782,7 @@
 	dir = 4;
 	c_tag = "CIV - Library West"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "eqn" = (
 /obj/structure/cable/green{
@@ -8842,7 +8842,7 @@
 	dir = 1;
 	pixel_y = -32
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/gym)
 "eqI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -8946,7 +8946,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "eup" = (
 /obj/structure/cable{
@@ -9212,7 +9212,7 @@
 /obj/machinery/ai_status_display{
 	pixel_y = -32
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/gym)
 "eAR" = (
 /obj/structure/cable/green{
@@ -9243,7 +9243,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "eBp" = (
 /obj/structure/railing/mapped{
@@ -9395,7 +9395,7 @@
 	dir = 1
 	},
 /obj/machinery/light,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "eDw" = (
 /obj/effect/floor_decal/borderfloorwhite,
@@ -9665,7 +9665,7 @@
 	pixel_x = 2
 	},
 /obj/structure/table/laminate/walnut,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "eKt" = (
 /obj/structure/stairs/long,
@@ -9682,7 +9682,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "eKF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -10072,7 +10072,7 @@
 	dir = 1;
 	pixel_y = -29
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/gym)
 "eSX" = (
 /obj/structure/disposalpipe/segment{
@@ -10327,7 +10327,7 @@
 	dir = 1;
 	c_tag = "CIV - Cafeteria South"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "eYF" = (
 /obj/machinery/door/airlock/glass/research{
@@ -10423,7 +10423,7 @@
 	dir = 1;
 	pixel_y = -30
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "fbh" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -10588,7 +10588,7 @@
 "fgw" = (
 /obj/structure/table/laminate,
 /obj/machinery/recharger,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "fgG" = (
 /obj/effect/floor_decal/corner/white/diagonal,
@@ -10760,7 +10760,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "fku" = (
 /obj/structure/cable/green{
@@ -10910,7 +10910,7 @@
 "fnc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "fny" = (
 /obj/effect/floor_decal/borderfloorblack/corner{
@@ -11144,7 +11144,7 @@
 /area/cynosure/science/d2/xenobiology)
 "ftH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "fum" = (
 /obj/structure/disposalpipe/segment{
@@ -11451,7 +11451,7 @@
 	dir = 8;
 	c_tag = "CIV - Cafeteria East"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "fCD" = (
 /turf/wall,
@@ -11626,7 +11626,7 @@
 "fFD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/table/laminate/walnut,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "fGe" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -11683,7 +11683,7 @@
 /obj/structure/bookcase{
 	name = "bookcase (Non-fiction)"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "fId" = (
 /obj/effect/floor_decal/corner_steel_grid{
@@ -12676,7 +12676,7 @@
 "giV" = (
 /obj/machinery/vending/cigarette,
 /obj/machinery/network/relay/wall_mounted/north,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "gjp" = (
 /obj/machinery/atmospherics/binary/pump{
@@ -12810,7 +12810,7 @@
 /area/cynosure/science/d2/xenobiology)
 "gnG" = (
 /obj/machinery/light,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "gom" = (
 /obj/abstract/turbolift_spawner/cynosure/cargo,
@@ -13595,7 +13595,7 @@
 /obj/item/taperecorder,
 /obj/item/newspaper,
 /obj/item/magnetic_tape/random,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "gFo" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -13608,7 +13608,7 @@
 /obj/machinery/atm{
 	pixel_x = -28
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "gFs" = (
 /obj/effect/floor_decal/borderfloorwhite{
@@ -13763,7 +13763,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "gIP" = (
 /obj/effect/floor_decal/borderfloorblack/corner{
@@ -13928,7 +13928,7 @@
 /obj/structure/chair/wood/walnut{
 	dir = 8
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "gNx" = (
 /obj/structure/ladder,
@@ -14061,7 +14061,7 @@
 	name = "bookcase (Fiction)"
 	},
 /obj/machinery/network/relay/wall_mounted/south,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "gPJ" = (
 /obj/structure/sign/directions/cryo,
@@ -14570,7 +14570,7 @@
 /turf/floor/tiled,
 /area/cynosure/hallway/d2/west)
 "heM" = (
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "heZ" = (
 /obj/effect/floor_decal/borderfloorblack{
@@ -14908,7 +14908,7 @@
 	pixel_x = 24;
 	pixel_y = -12
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "hpH" = (
 /obj/effect/floor_decal/borderfloor{
@@ -14984,7 +14984,7 @@
 	dir = 4
 	},
 /obj/item/stool/padded,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "hrC" = (
 /obj/structure/disposalpipe/junction{
@@ -15099,7 +15099,7 @@
 	dir = 6
 	},
 /obj/structure/disposalpipe/segment,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "huN" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -15875,7 +15875,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "hOX" = (
 /obj/machinery/door/airlock{
@@ -15938,7 +15938,7 @@
 /area/cynosure/crew/d2/chapel)
 "hQF" = (
 /obj/structure/closet/secure_closet/bar,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "hQW" = (
 /obj/machinery/door/firedoor,
@@ -16199,7 +16199,7 @@
 /area/cynosure/engineering/d2/atmospherics)
 "hYJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "hYR" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -16452,7 +16452,7 @@
 /obj/structure/table,
 /obj/machinery/recharger,
 /obj/item/wrench,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/gym)
 "ifG" = (
 /obj/structure/cable/yellow{
@@ -16556,7 +16556,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "ikr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -16967,7 +16967,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "ivt" = (
 /obj/machinery/firealarm{
@@ -17137,7 +17137,7 @@
 "iBd" = (
 /obj/structure/table/bench/wooden,
 /obj/machinery/light,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "iBe" = (
 /obj/structure/chair{
@@ -17342,7 +17342,7 @@
 	},
 /obj/item/flame/candle,
 /obj/structure/table/laminate/walnut,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "iIv" = (
 /obj/effect/floor_decal/borderfloor{
@@ -17377,7 +17377,7 @@
 /obj/structure/table/laminate,
 /obj/machinery/faxmachine,
 /obj/machinery/light,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "iJs" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -17400,7 +17400,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "iJJ" = (
 /obj/effect/floor_decal/steeldecal/steel_decals4{
@@ -17453,7 +17453,7 @@
 	icon_state = "pipe-j2";
 	dir = 8
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "iKl" = (
 /obj/machinery/door/firedoor,
@@ -17817,7 +17817,7 @@
 /area/cynosure/science/d2/hallway)
 "iTW" = (
 /obj/machinery/papershredder,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "iUi" = (
 /obj/structure/table/laminate,
@@ -17929,10 +17929,6 @@
 	dir = 4
 	},
 /area/cynosure/hallway/d2/south)
-"iVY" = (
-/obj/structure/fence,
-/turf/unsimulated/mask,
-/area/surface/outside/plains/station)
 "iWb" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 10
@@ -18584,7 +18580,7 @@
 /obj/machinery/ai_status_display{
 	pixel_y = 32
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "jpl" = (
 /obj/structure/cable/green{
@@ -19041,7 +19037,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "jCi" = (
 /obj/structure/handrail{
@@ -19161,7 +19157,7 @@
 	dir = 8;
 	sort_type = "Bar"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "jFo" = (
 /obj/structure/sign/warning/moving_parts,
@@ -19229,7 +19225,7 @@
 	},
 /obj/item/magnetic_tape/random,
 /obj/item/camera,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "jGI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -19246,7 +19242,7 @@
 	dir = 1;
 	pixel_y = -29
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "jHl" = (
 /obj/machinery/camera/network/command{
@@ -19279,10 +19275,6 @@
 	},
 /turf/floor/tiled/dark,
 /area/cynosure/command/d2/hos_office)
-"jIh" = (
-/obj/structure/fence,
-/turf/unsimulated/mask,
-/area/surface/outside/plains/station)
 "jIj" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -19499,7 +19491,7 @@
 	dir = 1;
 	c_tag = "CIV - Gym"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/gym)
 "jOf" = (
 /obj/effect/floor_decal/borderfloorwhite{
@@ -19567,7 +19559,7 @@
 	dir = 1
 	},
 /obj/item/banner/nanotrasen,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "jPo" = (
 /obj/effect/floor_decal/corner/purple,
@@ -19724,10 +19716,6 @@
 /obj/structure/table/bench/padded,
 /turf/floor/tiled,
 /area/cynosure/medical/d2/operating_observation)
-"jRb" = (
-/obj/structure/fence,
-/turf/unsimulated/mask,
-/area/surface/outside/plains/station)
 "jRo" = (
 /obj/structure/disposalpipe/segment,
 /turf/floor/tiled,
@@ -19840,7 +19828,7 @@
 /obj/abstract/landmark/start{
 	name = "Librarian"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "jSN" = (
 /obj/structure/disposalpipe/segment{
@@ -20075,7 +20063,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "jXQ" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -20319,7 +20307,7 @@
 	icon_state = "monkey_painting";
 	pixel_y = 24
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "kdg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -20943,7 +20931,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "ksL" = (
 /obj/effect/floor_decal/steeldecal/steel_decals_central5{
@@ -20968,7 +20956,7 @@
 /obj/abstract/landmark{
 	name = "lightsout"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "ktI" = (
 /turf/unsimulated/mask,
@@ -21098,7 +21086,7 @@
 	icon_state = "frame";
 	pixel_y = 32
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "kxd" = (
 /obj/item/radio/intercom{
@@ -21285,7 +21273,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "kCC" = (
 /obj/structure/disposalpipe/segment{
@@ -21416,7 +21404,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "kFF" = (
 /obj/machinery/atmospherics/binary/pump{
@@ -21630,7 +21618,7 @@
 "kKR" = (
 /obj/item/deck/cards,
 /obj/structure/table/laminate/walnut,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "kKX" = (
 /obj/structure/cable/green{
@@ -22155,7 +22143,7 @@
 	},
 /obj/item/briefcase,
 /obj/item/clothing/suit/jacket/burgundy,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "kYA" = (
 /obj/machinery/door/blast/regular/open{
@@ -22335,7 +22323,7 @@
 	dir = 4;
 	pixel_x = -29
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "lex" = (
 /obj/effect/floor_decal/borderfloor{
@@ -22405,7 +22393,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "lfO" = (
 /obj/effect/floor_decal/corner/white/diagonal,
@@ -22508,7 +22496,7 @@
 	dir = 6;
 	c_tag = "CIV - Chapel"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "lip" = (
 /obj/effect/floor_decal/borderfloorwhite,
@@ -22623,7 +22611,7 @@
 /area/surface/outside/station/reactorpond)
 "lmq" = (
 /obj/structure/bookcase,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "lmE" = (
 /obj/machinery/door/firedoor,
@@ -22790,7 +22778,7 @@
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "lrq" = (
 /obj/machinery/door/firedoor,
@@ -22926,7 +22914,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "ltA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -23211,7 +23199,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "lBC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -23267,7 +23255,7 @@
 "lCv" = (
 /obj/structure/flora/pottedplant/minitree,
 /obj/machinery/network/relay/wall_mounted/north,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "lCL" = (
 /obj/machinery/door/firedoor,
@@ -24193,7 +24181,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "lYs" = (
 /obj/effect/floor_decal/borderfloorblack/corner{
@@ -24462,7 +24450,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "mcL" = (
 /obj/machinery/recharge_station,
@@ -24603,7 +24591,7 @@
 /obj/abstract/landmark/start{
 	name = "Librarian"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "mgA" = (
 /obj/structure/cable/green{
@@ -24649,7 +24637,7 @@
 	dir = 4
 	},
 /obj/item/stool/padded,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "mhz" = (
 /obj/machinery/power/tracker,
@@ -24795,7 +24783,7 @@
 /turf/wall/r_wall,
 /area/cynosure/science/d2/restroom)
 "mjW" = (
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "mka" = (
 /obj/structure/cable/yellow{
@@ -24884,7 +24872,7 @@
 /obj/structure/chair/wood/walnut{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "mnD" = (
 /obj/machinery/apc{
@@ -25786,7 +25774,7 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "mGB" = (
 /obj/machinery/conveyor{
@@ -25937,7 +25925,7 @@
 /area/cynosure/maintenance/d2/engineering)
 "mLm" = (
 /obj/machinery/media/jukebox,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "mLF" = (
 /obj/machinery/door/firedoor,
@@ -26566,14 +26554,14 @@
 /obj/item/stool/bar/padded{
 	dir = 8
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "mXY" = (
 /turf/wall/r_wall,
 /area/cynosure/command/d2/ai_entrance)
 "mXZ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "mYb" = (
 /turf/wall/concrete/reinforced,
@@ -27849,7 +27837,7 @@
 /obj/machinery/alarm{
 	pixel_y = 22
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "nIv" = (
 /obj/structure/table/laminate,
@@ -27862,7 +27850,7 @@
 /obj/item/box/ammo/beanbags,
 /obj/item/gun/projectile/shotgun/doublebarrel,
 /obj/item/screwdriver,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "nIE" = (
 /obj/effect/floor_decal/borderfloor{
@@ -28036,7 +28024,7 @@
 	dir = 2;
 	sort_type = "Kitchen"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "nLV" = (
 /obj/structure/table/laminate,
@@ -28190,7 +28178,7 @@
 /obj/structure/bookcase{
 	name = "bookcase (Fiction)"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "nPp" = (
 /obj/structure/flora/bush/sparsegrass,
@@ -28636,7 +28624,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals3{
 	dir = 6
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "nZP" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -28702,7 +28690,7 @@
 /area/cynosure/crew/d2/park)
 "oaV" = (
 /obj/structure/table/laminate,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "obk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -29639,7 +29627,7 @@
 /turf/floor/tiled,
 /area/cynosure/engineering/d2/hallway)
 "ouU" = (
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "ovl" = (
 /obj/structure/cable/yellow{
@@ -29696,7 +29684,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "own" = (
 /obj/effect/floor_decal/industrial/warning/dust,
@@ -29872,7 +29860,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "ozO" = (
 /obj/effect/floor_decal/borderfloor/corner{
@@ -30171,7 +30159,7 @@
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "oIb" = (
 /obj/machinery/cryopod/robot,
@@ -30447,7 +30435,7 @@
 /area/cynosure/hallway/d2/west)
 "oPN" = (
 /obj/structure/closet/coffin,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "oPV" = (
 /obj/effect/floor_decal/borderfloor{
@@ -30911,7 +30899,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "oYl" = (
 /obj/structure/cliff/automatic{
@@ -31089,7 +31077,7 @@
 	dir = 1;
 	pixel_y = -30
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "pcb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -31539,7 +31527,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "pmZ" = (
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -32580,7 +32568,7 @@
 /area/cynosure/cargo/d2/locker)
 "pKF" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "pKH" = (
 /obj/effect/floor_decal/borderfloorwhite{
@@ -33056,7 +33044,7 @@
 /obj/structure/bookcase{
 	name = "bookcase (Religious)"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "qaq" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -33316,7 +33304,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "qhu" = (
 /obj/structure/disposalpipe/segment,
@@ -33426,7 +33414,7 @@
 	dir = 8;
 	pixel_x = 29
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "qiC" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -33951,7 +33939,7 @@
 /obj/structure/bookcase{
 	name = "bookcase (Reference)"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "qsF" = (
 /obj/effect/floor_decal/techfloor/corner{
@@ -34232,7 +34220,7 @@
 	pixel_x = -4;
 	pixel_y = 6
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "qzj" = (
 /obj/structure/extinguisher_cabinet{
@@ -34314,7 +34302,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "qAD" = (
 /obj/machinery/disposal,
@@ -35184,7 +35172,7 @@
 	},
 /obj/item/eftpos/departmental/service,
 /obj/item/clothing/head/that,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "qWv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -35726,7 +35714,7 @@
 /obj/structure/chair/wood/walnut{
 	dir = 8
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "rjQ" = (
 /obj/machinery/conveyor{
@@ -35798,7 +35786,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "rmG" = (
 /obj/effect/floor_decal/borderfloor{
@@ -36429,7 +36417,7 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "rCU" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
@@ -36720,7 +36708,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "rKD" = (
 /obj/structure/cable/green{
@@ -37124,7 +37112,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "rVf" = (
 /obj/effect/floor_decal/borderfloor{
@@ -37168,7 +37156,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "rWG" = (
 /obj/structure/table/reinforced,
@@ -37494,7 +37482,7 @@
 	pixel_x = 2
 	},
 /obj/structure/table/laminate/walnut,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "sgm" = (
 /obj/structure/chair/comfy/black{
@@ -37568,7 +37556,7 @@
 	icon_state = "pipe-c";
 	dir = 8
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "skd" = (
 /obj/item/stack/cable_coil/yellow,
@@ -38599,7 +38587,7 @@
 /area/surface/outside/plains/station)
 "sJl" = (
 /obj/structure/disposalpipe/segment,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "sJI" = (
 /turf/floor/tiled/monotile,
@@ -38971,7 +38959,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "sUL" = (
 /obj/effect/floor_decal/corner/purple/bordercorner,
@@ -39040,7 +39028,7 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "sWF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -39418,7 +39406,7 @@
 /obj/structure/cable/green{
 	icon_state = "2-4"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "tij" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -39637,7 +39625,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "tnQ" = (
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -39723,7 +39711,7 @@
 /turf/floor/tiled,
 /area/cynosure/security/d2/firing_range)
 "toQ" = (
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "toT" = (
 /obj/effect/floor_decal/borderfloorblack{
@@ -40030,7 +40018,7 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "txS" = (
 /obj/structure/cable/green,
@@ -40299,7 +40287,7 @@
 	icon_state = "pipe-c";
 	dir = 8
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "tDp" = (
 /obj/effect/floor_decal/borderfloor{
@@ -40566,7 +40554,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "tKb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
@@ -41019,7 +41007,7 @@
 /obj/structure/table/laminate,
 /obj/item/flashlight/lamp/green,
 /obj/item/sticky_pad/random,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "tWX" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -41053,7 +41041,7 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "tYs" = (
 /obj/effect/floor_decal/industrial/danger{
@@ -41071,14 +41059,14 @@
 /area/cynosure/engineering/d2/reactor_airlock)
 "tYF" = (
 /obj/machinery/fabricator/book,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "tYR" = (
 /obj/effect/shuttle_landmark/cynosure/pads/perimeter,
 /turf/floor/dirt,
 /area/surface/outside/plains/station)
 "tZJ" = (
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/gym)
 "ual" = (
 /obj/structure/sign/department/science_2,
@@ -41307,7 +41295,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "uel" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
@@ -41486,7 +41474,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "ukj" = (
 /obj/structure/cable{
@@ -43067,7 +43055,7 @@
 /area/cynosure/engineering/d2/atmospherics)
 "vag" = (
 /obj/machinery/photocopier,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "vai" = (
 /obj/effect/floor_decal/techfloor,
@@ -43402,7 +43390,7 @@
 	dir = 1
 	},
 /obj/item/stool/padded,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "vgs" = (
 /obj/structure/cable/green{
@@ -43496,7 +43484,7 @@
 	icon_state = "pipe-c";
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "vim" = (
 /obj/structure/disposalpipe/trunk{
@@ -43843,7 +43831,7 @@
 /obj/item/stool/bar/padded{
 	dir = 8
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "vpF" = (
 /obj/machinery/door/firedoor,
@@ -44561,7 +44549,7 @@
 /area/cynosure/medical/d2/operatingB)
 "vHV" = (
 /obj/structure/window/reinforced,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "vHY" = (
 /obj/structure/disposalpipe/segment{
@@ -44570,7 +44558,7 @@
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "vHZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -44912,7 +44900,7 @@
 	dir = 8
 	},
 /obj/structure/flora/pottedplant/stoutbush,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "vQT" = (
 /obj/effect/floor_decal/borderfloor{
@@ -44964,7 +44952,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "vSu" = (
 /obj/machinery/door/blast/regular/open{
@@ -44987,7 +44975,7 @@
 	pixel_y = -24
 	},
 /obj/structure/cable/green,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "vSU" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -45247,7 +45235,7 @@
 /obj/structure/sign/directions/cryo{
 	pixel_y = 26
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "waK" = (
 /obj/structure/cable/green{
@@ -45274,7 +45262,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "wbH" = (
 /obj/structure/window/reinforced{
@@ -46244,7 +46232,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "wFS" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -46697,7 +46685,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "wPT" = (
 /obj/structure/cable/green,
@@ -46830,7 +46818,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "wRs" = (
 /obj/structure/railing/mapped{
@@ -47170,14 +47158,14 @@
 /area/cynosure/security/d2/briefing)
 "wXK" = (
 /obj/structure/fitness/punchingbag,
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/gym)
 "wYb" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "wYw" = (
 /obj/structure/ladder,
@@ -47666,7 +47654,7 @@
 	dir = 4
 	},
 /obj/item/stool/padded,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "xof" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -47703,7 +47691,7 @@
 	dir = 8;
 	c_tag = "CIV - Library East"
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "xpW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue,
@@ -47898,7 +47886,7 @@
 /area/cynosure/science/d2/hallway)
 "xuZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "xvb" = (
 /mob/living/simple_animal/slime,
@@ -48077,7 +48065,7 @@
 /area/cynosure/maintenance/d2/engineering)
 "xzM" = (
 /obj/item/banner/nanotrasen,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "xzZ" = (
 /obj/structure/cable{
@@ -48134,12 +48122,6 @@
 	},
 /turf/floor/tiled/white,
 /area/cynosure/medical/d2/recovery)
-"xBq" = (
-/obj/structure/fence{
-	dir = 4
-	},
-/turf/unsimulated/mask,
-/area/surface/outside/plains/station)
 "xBS" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
@@ -48317,7 +48299,7 @@
 /obj/item/pill_bottle/antibiotics,
 /obj/item/chems/hypospray/autoinjector/detox,
 /obj/item/chems/hypospray/autoinjector/detox,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "xFI" = (
 /obj/structure/bed,
@@ -48542,7 +48524,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/floor/laminate,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/library)
 "xLg" = (
 /obj/machinery/door/firedoor,
@@ -48686,7 +48668,7 @@
 /area/cynosure/engineering/d2/hallway)
 "xOr" = (
 /obj/machinery/light,
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "xOD" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -49183,12 +49165,6 @@
 	},
 /turf/floor/tiled/techfloor,
 /area/cynosure/command/d2/ai_robot)
-"xXe" = (
-/obj/structure/fence{
-	dir = 4
-	},
-/turf/unsimulated/mask,
-/area/surface/outside/plains/station)
 "xXg" = (
 /obj/structure/railing/mapped/grey{
 	dir = 1
@@ -49608,7 +49584,7 @@
 /obj/structure/chair/wood/walnut{
 	dir = 4
 	},
-/turf/floor/laminate/walnut,
+/turf/floor/laminate/sif,
 /area/cynosure/crew/d2/cafeteria)
 "ygj" = (
 /obj/machinery/door/firedoor,
@@ -66022,37 +65998,37 @@ nCe
 nCe
 nCe
 dJU
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
 iXd
 nCe
 nCe
@@ -66324,7 +66300,7 @@ nCe
 nCe
 nCe
 nCe
-xBq
+sLu
 iXd
 nCe
 nCe
@@ -66562,7 +66538,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -66596,7 +66572,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -66833,7 +66809,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -66867,7 +66843,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -67104,7 +67080,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -67138,7 +67114,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -67375,7 +67351,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -67409,7 +67385,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -67646,7 +67622,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -67680,7 +67656,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -67917,7 +67893,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -67951,7 +67927,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -68222,7 +68198,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -68459,7 +68435,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -68730,7 +68706,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -68764,7 +68740,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -69001,7 +68977,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -69035,7 +69011,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -69272,7 +69248,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -69306,7 +69282,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -69543,7 +69519,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -69577,7 +69553,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -69814,7 +69790,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -69848,7 +69824,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -70085,7 +70061,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -70119,7 +70095,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -70356,7 +70332,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -70390,7 +70366,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -70627,7 +70603,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -70661,7 +70637,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -70932,7 +70908,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -71169,7 +71145,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -71440,7 +71416,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -71474,35 +71450,35 @@ nCe
 nCe
 nCe
 nCe
-xBq
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
+sLu
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
 xnL
 pNa
 pNa
@@ -71711,7 +71687,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -71778,7 +71754,7 @@ pNa
 pNa
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -71982,7 +71958,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -72049,7 +72025,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -72253,7 +72229,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -72320,7 +72296,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -72524,7 +72500,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 psJ
 psJ
@@ -72795,7 +72771,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 hbo
 tcV
 lOW
@@ -72862,7 +72838,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -73066,7 +73042,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 vLL
 xXg
 bmB
@@ -73133,7 +73109,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -73404,33 +73380,33 @@ nCe
 pNa
 nCe
 nCe
-xBq
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
+sLu
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
 xnL
 nCe
 nCe
@@ -73608,7 +73584,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 vLL
 gQc
 rsl
@@ -73879,7 +73855,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nYj
 jvk
 jvk
@@ -74150,7 +74126,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -74421,7 +74397,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -74945,23 +74921,23 @@ nCe
 nCe
 nCe
 dJU
-iVY
+nME
 pNa
 vUj
 nCe
 gBJ
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
 nME
 nCe
 nCe
@@ -75215,7 +75191,7 @@ nCe
 nCe
 nCe
 dJU
-xBq
+sLu
 nCe
 nCe
 vUj
@@ -75485,7 +75461,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -75756,7 +75732,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -76016,17 +75992,17 @@ nCe
 nCe
 nCe
 dJU
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
 nME
 nCe
 nCe
@@ -76286,7 +76262,7 @@ nCe
 nCe
 nCe
 dJU
-xBq
+sLu
 nCe
 nCe
 nCe
@@ -76556,7 +76532,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -76827,7 +76803,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -77098,7 +77074,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -77369,7 +77345,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -77640,7 +77616,7 @@ nCe
 cac
 nwG
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -77655,11 +77631,11 @@ nCe
 nCe
 nCe
 dJU
-jRb
+nME
 iPz
 jSN
-jRb
-jRb
+nME
+nME
 sne
 nCe
 nCe
@@ -77925,7 +77901,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 psJ
 psJ
 klM
@@ -78182,7 +78158,7 @@ vKC
 rbT
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -78196,7 +78172,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 psJ
 bmW
 bmW
@@ -78453,7 +78429,7 @@ vKC
 rbT
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -78467,7 +78443,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 psJ
 bmW
 bmW
@@ -78724,7 +78700,7 @@ vKC
 rbT
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -78738,7 +78714,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 psJ
 bmW
 bmW
@@ -78995,7 +78971,7 @@ vKC
 rbT
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -79009,7 +78985,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 psJ
 psJ
 psJ
@@ -79266,7 +79242,7 @@ vKC
 rbT
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -79280,12 +79256,12 @@ nCe
 nCe
 nCe
 nCe
-xBq
-jRb
-jRb
-jRb
-jRb
-jRb
+sLu
+nME
+nME
+nME
+nME
+nME
 kzM
 lsP
 lsP
@@ -79537,7 +79513,7 @@ vKC
 tlH
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -79808,7 +79784,7 @@ vKC
 xSr
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -80079,7 +80055,7 @@ vKC
 xSr
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -80350,7 +80326,7 @@ vKC
 xSr
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -80621,7 +80597,7 @@ vKC
 xSr
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -80892,7 +80868,7 @@ vKC
 xSr
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -81163,7 +81139,7 @@ vKC
 xSr
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -81434,7 +81410,7 @@ vKC
 xSr
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -81705,7 +81681,7 @@ vKC
 xSr
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -81976,7 +81952,7 @@ vKC
 xSr
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -82247,7 +82223,7 @@ vKC
 xSr
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -82518,7 +82494,7 @@ vKC
 xSr
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -82789,7 +82765,7 @@ fhn
 mTs
 jlu
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -83060,7 +83036,7 @@ nCe
 fhL
 nwG
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -84957,7 +84933,7 @@ nCe
 fhL
 nwG
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -85228,7 +85204,7 @@ kYX
 ojP
 cJq
 nCe
-xXe
+sLu
 nCe
 nCe
 lJF
@@ -85499,7 +85475,7 @@ nbV
 vJA
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 lJF
@@ -85770,7 +85746,7 @@ vsL
 vJA
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 lJF
@@ -86041,7 +86017,7 @@ duZ
 vJA
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 lJF
@@ -86312,7 +86288,7 @@ duZ
 vJA
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 wNJ
@@ -86583,7 +86559,7 @@ vsL
 vJA
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 wNJ
@@ -87125,7 +87101,7 @@ vsL
 fps
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 lJF
@@ -87667,7 +87643,7 @@ duZ
 fps
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 lJF
@@ -87938,7 +87914,7 @@ vsL
 fps
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 lJF
@@ -88209,7 +88185,7 @@ nbV
 fps
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 lJF
@@ -88480,7 +88456,7 @@ nbV
 fps
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 wNJ
@@ -88751,7 +88727,7 @@ nbV
 fps
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 wNJ
@@ -89022,7 +88998,7 @@ nbV
 fps
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 wNJ
@@ -89293,7 +89269,7 @@ nbV
 fps
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 lJF
@@ -89564,7 +89540,7 @@ nbV
 fps
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 lJF
@@ -89835,7 +89811,7 @@ nbV
 fps
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 lJF
@@ -90377,7 +90353,7 @@ nCe
 cac
 nwG
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -90648,7 +90624,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -90919,7 +90895,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -91190,7 +91166,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -91461,7 +91437,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -91732,7 +91708,7 @@ nCe
 nCe
 nCe
 nCe
-xBq
+sLu
 sne
 nCe
 nCe
@@ -92004,10 +91980,10 @@ nCe
 nCe
 nCe
 nCe
-xBq
-jRb
-jIh
-jRb
+sLu
+nME
+nME
+nME
 sne
 nCe
 nCe
@@ -92279,7 +92255,7 @@ nCe
 nCe
 nCe
 nCe
-xBq
+sLu
 sne
 nCe
 nCe
@@ -92551,7 +92527,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -92822,7 +92798,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -93093,7 +93069,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -93180,40 +93156,40 @@ nCe
 nCe
 nCe
 dJU
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
 xnL
 nCe
 pNa
@@ -93364,7 +93340,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -93635,7 +93611,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -93720,7 +93696,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -93991,7 +93967,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -94177,7 +94153,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -94262,7 +94238,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -94448,7 +94424,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -94533,7 +94509,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -94719,7 +94695,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -94804,7 +94780,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -94990,7 +94966,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -95075,7 +95051,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -95261,7 +95237,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -95532,7 +95508,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -95617,7 +95593,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -95803,7 +95779,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -95888,7 +95864,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -96074,7 +96050,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -96159,7 +96135,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -96345,7 +96321,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -96430,7 +96406,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -96701,7 +96677,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -96887,7 +96863,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -96972,7 +96948,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -97158,7 +97134,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -97243,7 +97219,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -97429,7 +97405,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -97514,7 +97490,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -97700,7 +97676,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -97785,7 +97761,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -97971,7 +97947,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -98242,7 +98218,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -98327,7 +98303,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -98513,7 +98489,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -98598,7 +98574,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -98784,7 +98760,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -98869,7 +98845,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -99055,7 +99031,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -99404,12 +99380,12 @@ nCe
 nCe
 nCe
 dJU
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
+nME
+nME
+nME
+nME
+nME
+nME
 nME
 nCe
 nCe
@@ -99597,7 +99573,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -99868,7 +99844,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -99944,7 +99920,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -100139,7 +100115,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -100215,7 +100191,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -100410,7 +100386,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -100486,7 +100462,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -100681,7 +100657,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -100757,7 +100733,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -100952,7 +100928,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -101223,7 +101199,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -101294,10 +101270,10 @@ nCe
 nCe
 nCe
 dJU
-jRb
-jIh
-jRb
-jRb
+nME
+nME
+nME
+nME
 nME
 nCe
 nCe
@@ -101494,7 +101470,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -101765,7 +101741,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -101834,7 +101810,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -102105,7 +102081,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -102307,7 +102283,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -102376,7 +102352,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -102578,7 +102554,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -102647,7 +102623,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -102849,7 +102825,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -102918,7 +102894,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -103120,7 +103096,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -103189,7 +103165,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -103391,7 +103367,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -103460,7 +103436,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -103662,7 +103638,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -103731,7 +103707,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -103933,7 +103909,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -103969,15 +103945,15 @@ nCe
 nCe
 nCe
 dJU
-jRb
-jRb
-jRb
+nME
+nME
+nME
 cXT
-iVY
+nME
 pNa
 gBJ
-jRb
-jRb
+nME
+nME
 fEB
 fEB
 fEB
@@ -103997,9 +103973,9 @@ bkB
 bkB
 bkB
 bkB
-jRb
-jRb
-iVY
+nME
+nME
+nME
 pNa
 gBJ
 cXT
@@ -104204,7 +104180,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -104239,7 +104215,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 ied
 jWj
 jWj
@@ -104273,7 +104249,7 @@ nCe
 nCe
 pNa
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -104475,7 +104451,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -104510,7 +104486,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 izZ
 wPJ
 vfq
@@ -104544,7 +104520,7 @@ nCe
 nCe
 pNa
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -104781,7 +104757,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 izZ
 lnP
 nsB
@@ -104815,7 +104791,7 @@ nCe
 nCe
 pNa
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -105017,7 +104993,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -105288,7 +105264,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -105323,7 +105299,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 izZ
 mPv
 swi
@@ -105357,7 +105333,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -105559,7 +105535,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -105594,7 +105570,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 iEL
 kjF
 kjF
@@ -105628,7 +105604,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -105830,7 +105806,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -105865,10 +105841,10 @@ nCe
 nCe
 nCe
 nCe
-xBq
-jRb
-jRb
-jRb
+sLu
+nME
+nME
+nME
 eZL
 oje
 mix
@@ -106101,7 +106077,7 @@ nCe
 nCe
 nCe
 nCe
-xBq
+sLu
 sne
 nCe
 nCe
@@ -106140,7 +106116,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 oje
 mix
 oje
@@ -106170,7 +106146,7 @@ nCe
 nCe
 pNa
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -106373,37 +106349,37 @@ nCe
 nCe
 nCe
 nCe
-xBq
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-iVY
+sLu
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
 nCe
 nCe
 nCe
@@ -106411,7 +106387,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 oje
 mix
 oje
@@ -106441,7 +106417,7 @@ nCe
 nCe
 pNa
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -106682,7 +106658,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 oje
 oje
 oje
@@ -106712,7 +106688,7 @@ nCe
 nCe
 pNa
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -106953,7 +106929,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 oje
 oje
 oje
@@ -106983,7 +106959,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -107224,7 +107200,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 oje
 oje
 mix
@@ -107254,7 +107230,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -107495,7 +107471,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 oje
 oje
 mix
@@ -107525,7 +107501,7 @@ nCe
 pNa
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -107766,7 +107742,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 oje
 oje
 mix
@@ -107796,7 +107772,7 @@ nCe
 pNa
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -108037,7 +108013,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 oje
 oje
 oje
@@ -108067,7 +108043,7 @@ nCe
 pNa
 nCe
 nCe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -108308,7 +108284,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 ied
 jWj
 jWj
@@ -108338,7 +108314,7 @@ jWj
 jWj
 jWj
 kHe
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -108850,7 +108826,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 izZ
 lnP
 nsB
@@ -108880,7 +108856,7 @@ nsB
 tWp
 mHP
 lzL
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -109121,7 +109097,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 izZ
 lnP
 iWV
@@ -109151,7 +109127,7 @@ iWV
 eEW
 mHP
 lzL
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -109392,7 +109368,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 izZ
 bmd
 tWp
@@ -109422,7 +109398,7 @@ tWp
 nsB
 viG
 lzL
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -109663,7 +109639,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 izZ
 mVp
 eEW
@@ -109693,7 +109669,7 @@ eEW
 iWV
 uCE
 lzL
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -109934,7 +109910,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 izZ
 lnP
 nsB
@@ -109964,7 +109940,7 @@ nsB
 tWp
 mHP
 lzL
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -110205,7 +110181,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 izZ
 lnP
 iWV
@@ -110235,7 +110211,7 @@ iWV
 eEW
 mHP
 lzL
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -110476,7 +110452,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 izZ
 vBN
 swi
@@ -110506,7 +110482,7 @@ swi
 vEZ
 xks
 lzL
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -110747,7 +110723,7 @@ nCe
 nCe
 nCe
 nCe
-xXe
+sLu
 iEL
 kjF
 kjF
@@ -110777,7 +110753,7 @@ kjF
 kjF
 kjF
 lUS
-xXe
+sLu
 nCe
 nCe
 nCe
@@ -111019,35 +110995,35 @@ nCe
 nCe
 nCe
 cXT
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jIh
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
-jRb
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
+nME
 cXT
 nCe
 nCe
