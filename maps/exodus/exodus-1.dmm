@@ -5677,9 +5677,7 @@
 /turf/floor/tiled/monotile,
 /area/exodus/maintenance/telecomms)
 "AE" = (
-/obj/abstract/level_data_spawner/main_level{
-	name = "Exodus Underlevel"
-	},
+/obj/abstract/level_data_spawner/exodus_one,
 /turf/space,
 /area/space)
 "AG" = (

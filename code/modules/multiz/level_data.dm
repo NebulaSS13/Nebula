@@ -185,6 +185,9 @@
 	/// Set to TRUE if this level persistence data, FALSE if not. Check is only done if _has_serde_data is null.
 	VAR_PRIVATE/_has_serde_data = null
 
+	/// Specifies initial network config for robots and network devices created on this level.
+	var/default_network_id
+
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
 	level_z = _z_level

@@ -73,6 +73,7 @@
 	#include "exodus_areas.dm"
 	#include "exodus_elevator.dm"
 	#include "exodus_jobs.dm"
+	#include "exodus_levels.dm"
 	#include "exodus_loadout.dm"
 	#include "exodus_overmap.dm"
 	#include "exodus_overrides.dm"

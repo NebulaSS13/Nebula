@@ -47,8 +47,10 @@
 		silicon_radio = new silicon_radio(src)
 	if(ispath(silicon_camera))
 		silicon_camera = new silicon_camera(src)
+
 	for(var/T in starting_stock_parts)
 		stock_parts += new T(src)
+
 	if(os_type)
 		set_extension(src, os_type)
 		verbs |= /mob/living/silicon/proc/access_computer

@@ -2170,9 +2170,7 @@
 /turf/floor/plating,
 /area/ministation/ai_upload)
 "iz" = (
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/ministation/maint/westatmos)
 "iB" = (
@@ -3523,9 +3521,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/ministation/maint/l1ne)
 "pe" = (
@@ -3798,9 +3794,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/tiled,
 /area/ministation/ai_sat)
 "qG" = (
@@ -10699,7 +10693,7 @@
 /turf/floor/reinforced/hydrogen,
 /area/ministation/atmospherics)
 "NO" = (
-/obj/abstract/level_data_spawner/main_level,
+/obj/abstract/level_data_spawner/ministation_zero,
 /turf/space,
 /area/space)
 "NQ" = (
@@ -11957,9 +11951,7 @@
 /turf/floor/plating,
 /area/ministation/ai_sat)
 "RX" = (
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/tiled,
 /area/ministation/engine)
 "RY" = (
@@ -12254,9 +12246,7 @@
 /turf/floor,
 /area/ministation/maint/eastatmos)
 "Tb" = (
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/ministation/maint/l1central)
 "Td" = (

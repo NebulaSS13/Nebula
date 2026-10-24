@@ -2560,7 +2560,6 @@
 /obj/machinery/network/requests_console{
 	department = "Detective's office";
 	pixel_x = -32;
-	initial_network_id = "molluscnet";
 	dir = 8
 	},
 /turf/floor/carpet/red,
@@ -2969,9 +2968,7 @@
 /turf/floor/carpet/blue,
 /area/ministation/medical)
 "oW" = (
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/tiled/dark,
 /area/ministation/security)
 "oX" = (
@@ -8016,9 +8013,7 @@
 /turf/floor/tiled/dark,
 /area/ministation/security)
 "JX" = (
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/ministation/maint/l2centrals)
 "JZ" = (
@@ -8232,9 +8227,7 @@
 /turf/floor/tiled/white,
 /area/ministation/hall/e2)
 "Lt" = (
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/plating,
 /area/ministation/maint/l2centraln)
 "LE" = (
@@ -8671,7 +8664,7 @@
 /turf/floor/tiled/dark,
 /area/ministation/security)
 "NO" = (
-/obj/abstract/level_data_spawner/main_level,
+/obj/abstract/level_data_spawner/ministation_one,
 /turf/space,
 /area/space)
 "NR" = (
@@ -9490,9 +9483,7 @@
 /turf/open,
 /area/ministation/hall/w2)
 "SA" = (
-/obj/machinery/network/relay{
-	initial_network_id = "molluscnet"
-	},
+/obj/machinery/network/relay,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "SB" = (

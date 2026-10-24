@@ -98,6 +98,9 @@
 	/// Has this mob -ever- had a gripper? Used to skip hand checks in some cases.
 	var/has_had_gripper = FALSE
 
+	/// Should grabs be placed in the hand rather than the general mob contents?
+	var/use_gripper_for_grabs_if_available = TRUE
+
 	/// Timer for chewing off your hand when cuffed.
 	var/next_restraint_chew = 0
 

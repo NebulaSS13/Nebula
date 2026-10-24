@@ -123,8 +123,16 @@
 	sparse_material_weight = 9
 	rich_material_weight = 3
 	dissolves_into = list(
-		/decl/material/liquid/mercury = 1
+		/decl/material/liquid/mercury = 0.5,
+		/decl/material/liquid/pigment/red = 0.5
 	)
+	heating_products = list(
+		/decl/material/liquid/mercury = 0.8,
+		/decl/material/solid/slag = 0.2
+	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 
 /decl/material/solid/phosphorite
 	name = "phosphorite"
@@ -266,6 +274,11 @@
 	gemstone_types  = list(/decl/material/solid/gemstone/sapphire = 1)
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	dissolves_in = MAT_SOLVENT_MODERATE
+	dissolves_into = list(
+		/decl/material/solid/soil           = 0.5,
+		/decl/material/liquid/pigment/brown = 0.5
+	)
 
 /decl/material/solid/soil
 	name = "soil"

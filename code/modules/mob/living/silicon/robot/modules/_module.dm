@@ -138,9 +138,7 @@
 		emag = new emag(src)
 
 /obj/item/robot_module/proc/finalize_emag()
-	if(istype(emag))
-		emag.canremove = FALSE
-	else if(emag)
+	if(emag && !istype(emag))
 		log_debug("Invalid var type in [type] emag creation - [emag]")
 		emag = null
 
@@ -251,7 +249,8 @@
 		robot.status_flags |= CANPUSH
 
 /obj/item/robot_module/proc/handle_emagged()
-	return
+	if(emag)
+		LAZYDISTINCTADD(equipment, emag)
 
 /obj/item/robot_module/proc/grant_skills(var/mob/living/silicon/robot/robot)
 	reset_skills(robot) // for safety

@@ -69,6 +69,7 @@ Twice...
 	#include "ministation_departments.dm"
 	#include "ministation_documents.dm"
 	#include "ministation_jobs.dm"
+	#include "ministation_levels.dm"
 	#include "ministation_shuttles.dm"
 	#include "ministation_objects.dm"
 	#include "ministation_unit_testing.dm"

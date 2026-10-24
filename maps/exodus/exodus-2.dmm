@@ -63433,9 +63433,7 @@
 /turf/floor/tiled/monotile,
 /area/ship/exodus_pod_research)
 "doN" = (
-/obj/abstract/level_data_spawner/main_level{
-	name = "Exodus Operations Deck"
-	},
+/obj/abstract/level_data_spawner/exodus_two,
 /turf/space,
 /area/space)
 "drB" = (

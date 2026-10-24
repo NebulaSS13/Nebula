@@ -10,8 +10,10 @@
 	base_type = /obj/machinery/network/router
 
 /obj/machinery/network/router/Initialize()
-	if(!initial_network_id)
-		initial_network_id = "network[random_id(type, 100, 999)]"
+	if(isnull(initial_network_id) && z)
+		var/datum/level_data/level = SSmapping.levels_by_z[z]
+		initial_network_id ||= level.default_network_id
+	initial_network_id ||= "network[random_id(type, 100, 999)]"
 	. = ..()
 
 /obj/machinery/network/router/RefreshParts()

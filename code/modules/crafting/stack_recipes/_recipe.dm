@@ -212,7 +212,7 @@
 	. += "</td>"
 
 	. += "<td width = '75px'>"
-	. += "[round(get_adjusted_time(mat, reinf_mat) / 10, 0.5)] second\s"
+	. += "[round(get_adjusted_time(mat, reinf_mat, user) / 10, 0.5)] second\s"
 	. += "</td>"
 
 	. += "<td width = '200px'>"
@@ -436,8 +436,9 @@
 /decl/stack_recipe/proc/get_skill_difficulty(decl/material/mat, decl/material/reinf_mat)
 	return (isnull(difficulty) ? max(mat.construction_difficulty, reinf_mat?.construction_difficulty) : difficulty) || MAT_VALUE_NORMAL_DIY
 
-/decl/stack_recipe/proc/get_adjusted_time(decl/material/mat, decl/material/reinf_mat)
+/decl/stack_recipe/proc/get_adjusted_time(decl/material/mat, decl/material/reinf_mat, mob/user)
 	. = time
 	if(isnull(time))
 		var/obj/result = result_type
-		. = max(0.5 SECONDS, round(BASE_CRAFTING_TIME + CRAFT_TIME_SIZE(result::w_class) + CRAFT_TIME_DIFFICULTY(get_skill_difficulty(mat, reinf_mat)), 0.5 SECONDS))
+		. = (BASE_CRAFTING_TIME + CRAFT_TIME_SIZE(result::w_class) + CRAFT_TIME_DIFFICULTY(get_skill_difficulty(mat, reinf_mat))) * (user ? user.skill_delay_mult(mat.crafting_skill, 0.3) : 1)
+		. = max(0.5, round(., 0.1))

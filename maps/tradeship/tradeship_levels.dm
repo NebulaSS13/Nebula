@@ -12,6 +12,7 @@
 
 /datum/level_data/main_level/tradeship
 	abstract_type = /datum/level_data/main_level/tradeship
+	default_network_id = "tradenet"
 
 /datum/level_data/main_level/tradeship/basement
 	name = "Tradeship Basement Deck"
