@@ -1,0 +1,113 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"m" = (
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"K" = (
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"M" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+M
+a
+"}
+(3,1,1) = {"
+a
+a
+a
+a
+a
+a
+K
+M
+M
+"}
+(4,1,1) = {"
+a
+a
+a
+a
+a
+a
+K
+m
+m
+"}
+(5,1,1) = {"
+a
+a
+a
+a
+a
+a
+K
+K
+K
+"}
+(6,1,1) = {"
+a
+a
+a
+a
+a
+a
+K
+m
+m
+"}
+(7,1,1) = {"
+a
+a
+a
+a
+a
+a
+K
+M
+M
+"}
+(8,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+M
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

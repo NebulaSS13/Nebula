@@ -1,0 +1,174 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/door/ebony,
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"d" = (
+/obj/structure/table/wood/ebony,
+/obj/item/tool/hammer,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"f" = (
+/obj/structure/table/wood/ebony,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"h" = (
+/obj/structure/closet/crate/chest/ebony,
+/obj/item/stack/material/ingot/mapped/tin/twenty,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"i" = (
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"k" = (
+/obj/structure/closet/crate/chest/ebony,
+/obj/item/stack/material/ingot/mapped/copper/twenty,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"l" = (
+/obj/structure/chair/bench/ebony{
+	dir = 4
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"n" = (
+/obj/random/hostile/dungeon,
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"p" = (
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"s" = (
+/turf/floor/path/basalt,
+/area/template_noop)
+"v" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+"z" = (
+/obj/structure/closet/crate/chest/ebony,
+/obj/item/stack/material/ingot/mapped/silver/ten,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"F" = (
+/obj/structure/wall_sconce{
+	dir = 8
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"G" = (
+/obj/structure/closet/crate/chest/ebony,
+/obj/item/stack/material/ingot/mapped/iron/twentyfive,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"H" = (
+/obj/structure/wall_sconce{
+	dir = 4
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"K" = (
+/obj/structure/table/wood/ebony,
+/obj/item/bladed/knife,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"R" = (
+/obj/structure/chair/bench/ebony{
+	dir = 8
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"T" = (
+/obj/random/hostile/dungeon,
+/turf/floor/path/basalt,
+/area/template_noop)
+"U" = (
+/obj/structure/closet/crate/chest/ebony,
+/obj/item/stack/material/ingot/mapped/gold/ten,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"X" = (
+/obj/structure/closet/crate/chest/ebony,
+/obj/item/stack/material/ingot/mapped/bronze/twenty,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+
+(1,1,1) = {"
+v
+v
+a
+v
+v
+v
+v
+v
+"}
+(2,1,1) = {"
+v
+G
+p
+p
+F
+p
+d
+v
+"}
+(3,1,1) = {"
+v
+z
+i
+i
+n
+i
+f
+v
+"}
+(4,1,1) = {"
+v
+U
+i
+s
+s
+i
+R
+v
+"}
+(5,1,1) = {"
+v
+k
+i
+T
+s
+i
+l
+v
+"}
+(6,1,1) = {"
+v
+X
+i
+i
+i
+i
+d
+v
+"}
+(7,1,1) = {"
+v
+h
+p
+H
+p
+p
+K
+v
+"}
+(8,1,1) = {"
+v
+v
+v
+v
+v
+a
+v
+v
+"}

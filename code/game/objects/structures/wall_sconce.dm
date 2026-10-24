@@ -33,14 +33,14 @@
 	anchored            = TRUE
 	/// Reference to the currently attached item.
 	var/obj/item/flame/light_source
-	/// Whether or not the light source, if present, is automatically lit on Initialize.
+	/// Whether or not the light source, if present, is automatically lit on Initialize. If a number above 1, is a random prob.
 	var/start_lit = FALSE
 
 /obj/structure/wall_sconce/Initialize(var/ml, var/_mat, var/_reinf_mat, var/supplied_dir)
 
 	if(ispath(light_source))
 		light_source = new light_source(src)
-	if(start_lit && istype(light_source))
+	if(istype(light_source) && (start_lit == TRUE || prob(start_lit)))
 		light_source.light(null, no_message = TRUE)
 
 	. = ..()
@@ -131,6 +131,9 @@
 // Subtypes below.
 /obj/structure/wall_sconce/lantern
 	light_source        = /obj/item/flame/fuelled/lantern/filled
+
+/obj/structure/wall_sconce/lantern/lit
+	start_lit = 30
 
 /obj/structure/wall_sconce/candle
 	light_source        = /obj/item/flame/candle
