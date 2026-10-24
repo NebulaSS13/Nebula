@@ -63,15 +63,6 @@
 	required_min_hardness       = MAT_VALUE_FLEXIBLE + 10
 	category                    = "furniture"
 
-/decl/stack_recipe/rods/machine
-	result_type                 = /obj/machinery/constructable_frame/machine_frame
-	req_amount                  = 5 * SHEET_MATERIAL_AMOUNT // Arbitrary value since machines don't handle matter properly yet.
-	required_material           = /decl/material/solid/metal/steel
-	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
-
-/decl/stack_recipe/rods/machine/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat, paint_color, spent_type, spent_amount = 1)
-	return ..(user, location, amount, null, null, paint_color, spent_type, spent_amount)
-
 /decl/stack_recipe/rods/grille
 	result_type                 = /obj/structure/grille
 	one_per_turf                = TRUE
@@ -91,4 +82,3 @@
 /decl/stack_recipe/rods/furniture/fence_door
 	result_type            = /obj/structure/fence/door/stick
 	difficulty             = MAT_VALUE_NORMAL_DIY
-
