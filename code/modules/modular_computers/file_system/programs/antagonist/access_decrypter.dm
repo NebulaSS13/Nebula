@@ -137,19 +137,21 @@
 	else if(RFID && RFID.stored_card)
 		var/obj/item/card/id/id_card = RFID.stored_card
 		var/list/regions = list()
-		for(var/i = ACCESS_REGION_MIN; i <= ACCESS_REGION_MAX; i++)
+		for(var/region_name, access_data in get_all_access_datums_by_region_name())
 			var/list/accesses = list()
-			for(var/access in get_region_accesses(i))
-				if (get_access_desc(access))
-					accesses.Add(list(list(
-						"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
-						"ref" = access,
-						"allowed" = (access in id_card.access) ? 1 : 0,
-						"blocked" = ((access in PRG.restricted_access_codes) || ((access in PRG.skill_restricted_access_codes_master) && PRG.operator_skill < SKILL_PROF)) ? 1 : 0)))
+			for(var/datum/access/access_datum in access_data)
+				if (!access_datum.desc)
+					continue
+				// += or Add would add each individual entry
+				ADD_LIST_AS_ENTRY(accesses, list(
+					"desc" = replacetext(access_datum.desc, " ", "&nbsp"),
+					"ref" = access_datum.id,
+					"allowed" = (access_datum.id in id_card.access),
+					"blocked" = ((access_datum.id in PRG.restricted_access_codes) || ((access_datum.id in PRG.skill_restricted_access_codes_master) && PRG.operator_skill < SKILL_PROF)) ? 1 : 0))
 
-			regions.Add(list(list(
-				"name" = get_region_accesses_name(i),
-				"accesses" = accesses)))
+			ADD_LIST_AS_ENTRY(regions, list(
+				"name" = region_name,
+				"accesses" = accesses))
 		data["regions"] = regions
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

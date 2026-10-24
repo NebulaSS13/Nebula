@@ -75,18 +75,20 @@
 			data["all_centcom_access"] = all_centcom_access
 		else
 			var/list/regions = list()
-			for(var/i = 1; i <= 8; i++)
+			for(var/region_name, access_data in get_all_access_datums_by_region_name())
 				var/list/accesses = list()
-				for(var/access in get_region_accesses(i))
-					if (get_access_desc(access))
-						accesses.Add(list(list(
-							"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
-							"ref" = access,
-							"allowed" = (access in id_card.access) ? 1 : 0)))
+				for(var/datum/access/access_datum in access_data)
+					if (!access_datum.desc)
+						continue
+					// += or Add would add each individual entry
+					ADD_LIST_AS_ENTRY(accesses, list(
+						"desc" = replacetext(access_datum.desc, " ", "&nbsp"),
+						"ref" = access_datum.id,
+						"allowed" = LAZYISIN(id_card.access, access_datum.id)))
 
-				regions.Add(list(list(
-					"name" = get_region_accesses_name(i),
-					"accesses" = accesses)))
+				ADD_LIST_AS_ENTRY(regions, list(
+					"name" = region_name,
+					"accesses" = accesses))
 			data["regions"] = regions
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

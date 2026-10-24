@@ -116,31 +116,45 @@
 
 var/global/list/datum/access/priv_all_access_datums
 /proc/get_all_access_datums()
-	if(!priv_all_access_datums)
-		priv_all_access_datums = init_subtypes(/datum/access)
-		priv_all_access_datums = dd_sortedObjectList(priv_all_access_datums)
+	if(!global.priv_all_access_datums)
+		global.priv_all_access_datums = init_subtypes(/datum/access)
+		global.priv_all_access_datums = dd_sortedObjectList(global.priv_all_access_datums)
 
-	return priv_all_access_datums.Copy()
+	return global.priv_all_access_datums.Copy()
 
 var/global/list/datum/access/priv_all_access_datums_id
 /proc/get_all_access_datums_by_id()
-	if(!priv_all_access_datums_id)
-		priv_all_access_datums_id = list()
+	if(!global.priv_all_access_datums_id)
+		global.priv_all_access_datums_id = list()
 		for(var/datum/access/A in get_all_access_datums())
-			priv_all_access_datums_id["[A.id]"] = A
+			global.priv_all_access_datums_id["[A.id]"] = A
 
-	return priv_all_access_datums_id.Copy()
+	return global.priv_all_access_datums_id.Copy()
 
-var/global/list/datum/access/priv_all_access_datums_region
+var/global/alist/priv_all_access_datums_region
+/// Returns an alist of all region indices -> their associated access datums.
 /proc/get_all_access_datums_by_region()
-	if(!priv_all_access_datums_region)
-		priv_all_access_datums_region = list()
+	RETURN_TYPE(/alist)
+	if(!global.priv_all_access_datums_region)
+		global.priv_all_access_datums_region = alist()
 		for(var/datum/access/A in get_all_access_datums())
-			if(!priv_all_access_datums_region[A.region])
-				priv_all_access_datums_region[A.region] = list()
-			priv_all_access_datums_region[A.region] += A
+			if(!global.priv_all_access_datums_region[A.region])
+				global.priv_all_access_datums_region[A.region] = alist()
+			global.priv_all_access_datums_region[A.region] += A
 
-	return priv_all_access_datums_region.Copy()
+	return global.priv_all_access_datums_region.Copy()
+
+var/global/alist/priv_all_access_datums_region_names
+/// Returns an alist of all region names -> their associated access datums.
+/proc/get_all_access_datums_by_region_name()
+	RETURN_TYPE(/alist)
+	if(!global.priv_all_access_datums_region_names)
+		global.priv_all_access_datums_region_names = alist()
+		for(var/region_index, region_data in get_all_access_datums_by_region())
+			var/region_name = get_access_region_name(region_index)
+			global.priv_all_access_datums_region_names[region_name] = region_data
+
+	return global.priv_all_access_datums_region_names.Copy()
 
 /proc/get_access_ids(var/access_types = ACCESS_TYPE_ALL)
 	. = list()
@@ -191,7 +205,7 @@ var/global/list/priv_region_access
 	var/list/region = priv_region_access["[code]"]
 	return islist(region) ? region.Copy() : list()
 
-/proc/get_region_accesses_name(var/code)
+/proc/get_access_region_name(var/code)
 	switch(code)
 		if(ACCESS_REGION_ALL)
 			return "All"
