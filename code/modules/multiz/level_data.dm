@@ -493,11 +493,14 @@
 	var/origy = level_inner_min_y
 	var/endx  = level_inner_min_x + level_inner_width
 	var/endy  = level_inner_min_y + level_inner_height
+
+	// Place subtemplates.
+	place_subtemplates()
+
 	// Run level generators.
 	for(var/gen_type in level_generators)
 		report_progress("Placing [gen_type] on [level_id]...")
 		new gen_type(origx, origy, level_z, endx, endy, FALSE, TRUE, get_base_area_instance())
-	place_subtemplates()
 
 /datum/level_data/proc/place_subtemplates()
 	// Place points of interest.
