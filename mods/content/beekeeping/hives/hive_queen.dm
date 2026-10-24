@@ -2,6 +2,7 @@
 	name = "bee pack"
 	desc = "Contains a queen bee and some worker bees. Everything you'll need to start a hive!"
 	icon = 'mods/content/beekeeping/icons/bee_pack.dmi'
+	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/organic/plastic
 	var/contains_insects = /decl/insect_species/honeybees
 

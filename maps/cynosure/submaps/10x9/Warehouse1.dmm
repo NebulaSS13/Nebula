@@ -57,7 +57,7 @@
 /obj/item/folder/red,
 /obj/item/folder/yellow,
 /obj/item/hand_labeler,
-/obj/item/stack/tape_roll,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/paper_bin,
 /obj/item/sticky_pad/random,
 /turf/floor/tiled/monotile,

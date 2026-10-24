@@ -8792,7 +8792,7 @@
 "uc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow,
 /obj/structure/table/reinforced,
-/obj/item/stack/tape_roll,
+/obj/item/stack/tape_roll/barricade_tape/research,
 /obj/item/geiger,
 /turf/floor/tiled/white,
 /area/cynosure/outpost/xenoarch/anomalous_lab)
@@ -16707,7 +16707,7 @@
 /obj/machinery/recharger,
 /obj/item/camera_film,
 /obj/item/camera,
-/obj/item/stack/tape_roll,
+/obj/item/stack/tape_roll/barricade_tape/research,
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 1
 	},

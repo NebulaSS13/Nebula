@@ -21,14 +21,11 @@
 /area/cynosure/hallway/d2/north)
 "aab" = (
 /obj/structure/table/laminate,
-/obj/item/deck/cag{
-	pixel_x = -3;
-	pixel_y = 3
-	},
 /obj/item/deck/cag/black{
 	pixel_x = -4;
 	pixel_y = 6
 	},
+/obj/item/deck/cag/white,
 /turf/floor/carpet,
 /area/cynosure/crew/d2/library)
 "aac" = (
@@ -52,7 +49,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/item/clothing/suit,
 /turf/floor/carpet,
 /area/cynosure/crew/d2/library)
 "aae" = (
@@ -5453,7 +5449,7 @@
 "cNb" = (
 /obj/structure/table/steel,
 /obj/item/firstaid/regular,
-/obj/item/stack/tape_roll,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/effect/floor_decal/borderfloor{
 	dir = 6
 	},
@@ -18691,13 +18687,6 @@
 	},
 /turf/floor/carpet,
 /area/cynosure/command/d2/hos_office)
-"jtv" = (
-/obj/structure/sign/warning{
-	icon_state = "wilderness2";
-	pixel_y = -6
-	},
-/turf/wall,
-/area/surface/outside/plains/station)
 "jty" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 9
@@ -20301,12 +20290,6 @@
 /obj/machinery/reagentgrinder,
 /obj/item/stack/package_wrap,
 /obj/item/chems/drinks/shaker,
-/obj/structure/sign/warning{
-	name = "Pun Pun portrait";
-	desc = "Under the painting a plaque reads: 'Pun Pun I'";
-	icon_state = "monkey_painting";
-	pixel_y = 24
-	},
 /turf/floor/laminate/sif,
 /area/cynosure/crew/d2/bar)
 "kdg" = (
@@ -20790,7 +20773,7 @@
 	dir = 4
 	},
 /obj/item/stack/package_wrap,
-/obj/item/stack/tape_roll,
+/obj/item/stack/tape_roll/barricade_tape/engineering,
 /obj/item/hand_labeler,
 /turf/floor/tiled,
 /area/cynosure/engineering/d2/monitoring)
@@ -27140,7 +27123,6 @@
 	},
 /obj/machinery/door/blast/shutters/open{
 	name = "Pharmacy Counter Shutter";
-	icon_state = "shutter2_0";
 	dir = 8;
 	id_tag = "chemcounter"
 	},
@@ -27291,7 +27273,7 @@
 /area/surface/outside/station/reactorpond)
 "nsO" = (
 /obj/structure/table/laminate,
-/obj/item/stack/tape_roll,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/stack/package_wrap{
 	pixel_x = -2;
 	pixel_y = -4
@@ -35426,7 +35408,6 @@
 /obj/structure/window/reinforced/full,
 /obj/machinery/door/blast/shutters/open{
 	name = "Pharmacy Shutter";
-	icon_state = "shutter2_0";
 	dir = 8;
 	id_tag = "chemcounter"
 	},
@@ -39117,7 +39098,7 @@
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/stack/tape_roll,
+/obj/item/stack/tape_roll/barricade_tape/research,
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 4
 	},
@@ -47053,7 +47034,6 @@
 /obj/machinery/status_display,
 /obj/machinery/door/blast/shutters/open{
 	name = "Pharmacy Shutter";
-	icon_state = "shutter2_0";
 	dir = 8;
 	id_tag = "chemcounter"
 	},
@@ -84610,7 +84590,7 @@ vwy
 vwy
 vwy
 vwy
-jtv
+sSy
 nCe
 nCe
 nCe

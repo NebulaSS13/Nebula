@@ -111,7 +111,7 @@
 /area/cynosure_submap/boathouse)
 "az" = (
 /obj/structure/table/wood,
-/obj/item/stack/tape_roll,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/random/firstaid,
 /turf/floor/wood/sif,
 /area/cynosure_submap/boathouse)

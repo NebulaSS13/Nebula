@@ -65,7 +65,7 @@
 		/decl/material/solid/metal/steel
 	)
 	selection_types = list(
-		/obj/item/stack/tape_roll,
+		/obj/item/stack/tape_roll/barricade_tape/engineering,
 		/obj/item/stack/material/rods,
 		/obj/item/handcuffs/cable
 	)

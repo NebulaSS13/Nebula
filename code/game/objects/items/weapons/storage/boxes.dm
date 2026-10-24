@@ -167,7 +167,6 @@
 	return list(/obj/item/ammo_casing/shotgun/blank = 8)
 
 /obj/item/box/ammo/blanks/large
-	icon_state = "largebox"
 	w_class = ITEM_SIZE_LARGE
 	storage = /datum/storage/box/large/metal
 

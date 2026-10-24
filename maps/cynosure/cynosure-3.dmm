@@ -10114,8 +10114,8 @@
 /obj/item/stack/package_wrap{
 	pixel_y = -2
 	},
-/obj/item/stack/tape_roll,
-/obj/item/stack/tape_roll{
+/obj/item/stack/tape_roll/duct_tape,
+/obj/item/stack/tape_roll/duct_tape{
 	pixel_x = 2
 	},
 /obj/effect/floor_decal/borderfloor{
