@@ -117,6 +117,9 @@
 /datum/seed/flower/frostbelle/New()
 	. = ..()
 
+	set_trait(TRAIT_PRODUCT_COLOUR,"#2590be")
+	set_trait(TRAIT_PLANT_COLOUR,"#57724c")
+
 	clear_chemical_composition()
 	set_chemical_amount(/decl/material/liquid/painkillers/strong, list(1, 0))
 	set_chemical_amount(/decl/material/liquid/sifsap, list(5, 5))
