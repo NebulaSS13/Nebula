@@ -120,4 +120,4 @@
 	clear_chemical_composition()
 	set_chemical_amount(/decl/material/liquid/painkillers/strong, list(1, 0))
 	set_chemical_amount(/decl/material/liquid/sifsap, list(5, 5))
-	set_chemical_amount(/decl/material/liquid/hallucinogenics, list(5, 5))
+	set_chemical_amount(/decl/material/liquid/psychotropics, list(5, 5))
