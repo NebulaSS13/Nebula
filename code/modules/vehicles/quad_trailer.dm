@@ -12,7 +12,7 @@
 	load_item_visible = 1
 	load_offset_x = 0
 	load_offset_y = 13
-	_buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 16)
+	_buckle_pixel_shift = @'{"x":0,"y":0,"z":16}'
 	pixel_x = -16
 	paint_color = "#ffffff"
 	var/mob_offset_y = 16
@@ -79,9 +79,9 @@
 		var/mob/living/M = A
 		visible_message(SPAN_DANGER("\The [src] knocks over \the [M]!"))
 		M.apply_effects(1, 1)
-		M.apply_damages(8 / move_delay)
+		M.apply_damages(8 / vehicle_move_delay)
 		if(load)
-			M.apply_damages(4/move_delay)
+			M.apply_damages(4 / vehicle_move_delay)
 		var/list/throw_dirs = all_throw_dirs.Copy()
 		if(!emagged)
 			throw_dirs -= dir

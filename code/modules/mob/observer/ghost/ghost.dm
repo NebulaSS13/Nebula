@@ -640,4 +640,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	addtimer(CALLBACK(src, PROC_REF(check_existence_failure)), 0)
 
 /mob/observer/ghost/say(datum/speech/phrases, verb = "says", whispering)
-	sanitize_and_communicate(/decl/communication_channel/dsay, client, phrases.unformatted_message)
+	if(istext(phrases))
+		phrases = parse_message_into_phrases(phrases)
+	if(istype(phrases))
+		sanitize_and_communicate(/decl/communication_channel/dsay, client, phrases.unformatted_message)

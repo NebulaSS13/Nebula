@@ -1,7 +1,7 @@
 #define AUTOHISS_NUM 3
 
 
-/mob/living/proc/handle_autohiss(message, decl/language/language)
+/mob/proc/handle_autohiss(message, decl/language/language)
 	return message // no autohiss at this level
 
 /mob/living/human/handle_autohiss(message, decl/language/language)
