@@ -8,7 +8,7 @@
 	locked = 0
 	load_item_visible = 1
 	load_offset_x = 0
-	_buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
+	_buckle_pixel_shift =  @'{"x":0,"y":0,"z":5}'
 	pixel_x = -16
 	base_speed = 0.45
 	car_limit = 1	//It gets a trailer. That's about it.
@@ -64,7 +64,7 @@
 		handle_vehicle_icon()
 
 /obj/vehicle/train/engine/quadbike/update_vehicle_move_delay(atom/prev_loc)
-	..()
+	. = ..()
 	update_car(train_length, active_engines)
 
 /obj/vehicle/train/engine/quadbike/proc/handle_vehicle_icon()
@@ -133,7 +133,7 @@
 		var/mob/living/M = A
 		visible_message(SPAN_DANGER("\The [src] knocks over \the [M]!"))
 		M.apply_effects(2, 2)				// Knock people down for a short moment
-		M.apply_damages(8 / move_delay)		// Smaller amount of damage than a tug, since this will always be possible because Quads don't have safeties.
+		M.apply_damages(8 / vehicle_move_delay)		// Smaller amount of damage than a tug, since this will always be possible because Quads don't have safeties.
 		var/list/throw_dirs = all_throw_dirs.Copy()
 		if(!emagged)						// By the power of Bumpers TM, it won't throw them ahead of the quad's path unless it's emagged or the person turns.
 			take_damage(round(M.mob_size / 2))
@@ -173,21 +173,22 @@
 /obj/vehicle/train/engine/quadbike/snowmobile
 	name = "snowmobile"
 	desc = "An electric snowmobile for traversing snow and ice with ease! Other terrain, not so much."
-	icon = 'icons/obj/vehicles.dmi'
+	icon = 'icons/obj/snowmobile.dmi'
 	icon_state = "snowmobile"
+	frame_state = "snowmobile"
+	paint_base = 'icons/obj/snowmobile.dmi'
 	load_item_visible = 1
 	base_speed = 0.6
 	car_limit = 0
 	key_type = /obj/item/key/snowmobile
-	frame_state = "snowmobile"
-	paint_base = 'icons/obj/vehicles.dmi'
 	pixel_x = 0
 	water_delay = 6
+	vehicle_transit_type = VEHICLE_SNOWMOBILE
 
 /obj/item/key/snowmobile
 	name = "key"
 	desc = "A keyring with an ice-blue fob reading \"CHILL\"."
-	icon = 'icons/obj/vehicles.dmi'
+	icon = 'icons/obj/snowmobile.dmi'
 	icon_state = "sno_keys"
 
 /obj/vehicle/train/engine/quadbike/snowmobile/random/Initialize()

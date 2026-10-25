@@ -33,7 +33,7 @@
 	var/powered = 0		//set if vehicle is powered and should use fuel when moving
 
 	/// How long a single move takes with this vehicle.
-	var/move_delay = 1
+	var/vehicle_move_delay = 1
 	/// The base delay of a move with this vehicle, assuming no terrain modifiers. If null, uses default running
 	var/base_speed
 	/// Speed when a location is flooded.
@@ -50,30 +50,25 @@
 // Standard procs
 //-------------------------------------------
 /obj/vehicle/Initialize(mapload)
-	update_vehicle_move_delay(null)
 	base_speed ||= get_config_value(/decl/config/num/movement_run)
+	update_vehicle_move_delay(null)
 	. = ..()
 
 /obj/vehicle/proc/update_vehicle_move_delay(atom/prev_loc)
-
 	var/turf/floor/prev_turf = prev_loc
 	var/turf/floor/this_turf = loc
 	if(istype(prev_turf) && istype(this_turf) && this_turf.get_topmost_flooring() == prev_turf.get_topmost_flooring() && this_turf.check_fluid_depth(FLUID_SHALLOW) == prev_turf.check_fluid_depth(FLUID_SHALLOW))
-		return // Same speed if terrain type doesn't change
-
-	var/terrain_mod
+		return FALSE // Same speed if terrain type doesn't change
 	if(loc?.check_fluid_depth(FLUID_SHALLOW))
-		terrain_mod = water_delay
+		vehicle_move_delay = water_delay
 	else if(istype(this_turf))
-		terrain_mod = this_turf.get_vehicle_transit_delay(src)
-
-	if(isnull(terrain_mod))
-		move_delay = base_speed
+		vehicle_move_delay = this_turf.get_vehicle_transit_delay(src) || base_speed
 	else
-		move_delay = base_speed * terrain_mod
+		vehicle_move_delay = base_speed
+	return TRUE
 
 /obj/vehicle/Move()
-	if(world.time > l_move_time + move_delay)
+	if(world.time > l_move_time + vehicle_move_delay)
 		var/old_loc = get_turf(src)
 		if(on && powered && cell.charge < (charge_use * CELLRATE))
 			turn_off()
