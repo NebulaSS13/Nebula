@@ -4,7 +4,9 @@
 	display_priority = 2 // Same as cargo in importance.
 
 /datum/map/cynosure
+	default_job_type = /datum/job/standard/assistant
 	allowed_jobs = list(
+		/datum/job/standard/assistant,
 		/datum/job/standard/captain,
 		/datum/job/standard/hop,
 		/datum/job/standard/chaplain,
