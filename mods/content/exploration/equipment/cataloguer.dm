@@ -55,8 +55,8 @@
 	return ..()
 
 /obj/item/cataloguer/mapped/Initialize(ml, material_key)
-	. = ..()
 	loaded_disk = new(src)
+	return ..()
 
 /obj/item/cataloguer/proc/set_scan_radius(var/new_range, var/forced)
 	if(!forced && new_range == scan_range)

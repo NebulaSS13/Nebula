@@ -109,7 +109,7 @@
 /mob/living/slime/Bump(atom/movable/AM, yes)
 	if ((!(yes) || now_pushing))
 		return
-	now_pushing = 1
+	now_pushing = TRUE
 
 	if(isobj(AM) && !client && powerlevel > 0)
 		var/probab = 10
@@ -132,14 +132,14 @@
 		if(is_adult)
 			if(ishuman(tmob))
 				if(prob(90))
-					now_pushing = 0
+					now_pushing = FALSE
 					return
 		else
 			if(ishuman(tmob))
-				now_pushing = 0
+				now_pushing = FALSE
 				return
 
-	now_pushing = 0
+	now_pushing = FALSE
 
 	..()
 

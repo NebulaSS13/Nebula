@@ -1,5 +1,4 @@
 // TODO: FSM/decl based stances
-#define STANCE_NONE              /decl/mob_controller_stance/none
 #define STANCE_IDLE              /decl/mob_controller_stance/idle
 #define STANCE_ALERT             /decl/mob_controller_stance/alert
 #define STANCE_ATTACK            /decl/mob_controller_stance/attack
