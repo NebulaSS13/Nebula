@@ -1,5 +1,5 @@
 /obj/item/clothing/gloves/black
-	color = COLOR_BLACK
+	color = COLOR_GRAY40
 
 /obj/item/clothing/gloves/rainbow
 	name = "rainbow gloves"

@@ -59,7 +59,7 @@
 		/obj/item/clothing/suit/explorer,
 		/obj/item/clothing/mask/gas/explorer,
 		/obj/item/clothing/shoes/winterboots/explorer,
-		/obj/item/clothing/gloves/black,
+		/obj/item/clothing/gloves/grey,
 		/obj/item/radio/headset/headset_exp,
 		/obj/item/flashlight,
 		/obj/item/gps/explorer,
