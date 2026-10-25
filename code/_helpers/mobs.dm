@@ -87,7 +87,7 @@
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target = null, check_holding = TRUE, progress = TRUE, incapacitation_flags = INCAPACITATION_DEFAULT, same_direction = FALSE, can_move = FALSE, max_distance, check_in_view = FALSE, set_cooldown = FALSE)
+/proc/do_after(mob/user, delay, atom/target = null, check_holding = TRUE, progress = TRUE, incapacitation_flags = INCAPACITATION_DEFAULT, same_direction = FALSE, can_move = FALSE, max_distance, check_in_view = FALSE, set_cooldown = FALSE, allow_target_movement = FALSE, require_target_adjacent = FALSE)
 	if(!user)
 		return 0
 	var/atom/target_loc = null
@@ -134,7 +134,7 @@
 			. = 0
 			break
 
-		if(target_loc && (QDELETED(target) || target_loc != target.loc || target_type != target.type))
+		if(target_loc && (QDELETED(target) || (!allow_target_movement && target_loc != target.loc) || target_type != target.type))
 			. = 0
 			break
 
@@ -142,6 +142,10 @@
 			if(user.get_active_held_item() != holding)
 				. = 0
 				break
+
+		if(require_target_adjacent && !target.Adjacent(user))
+			. = 0
+			break
 
 	if (progbar)
 		qdel(progbar)

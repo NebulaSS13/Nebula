@@ -86,10 +86,10 @@
 
 	// By default, simple mobs should attack slightly slower than players, allowing a suitably attentive
 	// player to dodge/kite if they're paying attention, and not letting themselves get cornered/incapacitated.
-	var/attack_delay = DEFAULT_ATTACK_COOLDOWN * 1.3
+	var/attack_delay = DEFAULT_ATTACK_COOLDOWN * 1.1
 
 	// Base percentage chance to hit in melee against another mob, if controlled by an AI.
-	var/telegraphed_melee_accuracy = 85
+	var/telegraphed_melee_accuracy = 95
 
 	// Visible message shown when the mob dies.
 	var/death_message = "dies!"

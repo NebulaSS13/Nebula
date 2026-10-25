@@ -14,7 +14,7 @@
 		/obj/item/geiger,
 		/obj/item/cell/device,
 		/obj/item/radio,
-		/obj/item/cataloguer,
+		/obj/item/cataloguer/mapped,
 		/obj/item/backpack/satchel/grey,
 		/obj/item/specimen_tagger
 	)
@@ -68,7 +68,8 @@
 		/obj/item/cell/device,
 		/obj/item/radio,
 		/obj/item/stack/flag = 3, // 30, since each is a full stack of 10
-		/obj/item/cataloguer)
+		/obj/item/cataloguer/mapped
+	)
 	if(prob(50))
 		. += /obj/item/backpack/rucksack
 	else
@@ -97,7 +98,7 @@
 		/obj/item/geiger,
 		/obj/item/cell/device,
 		/obj/item/radio,
-		/obj/item/cataloguer,
+		/obj/item/cataloguer/mapped,
 		/obj/item/backpack/satchel,
 		/obj/item/knife/utility,
 		/obj/item/specimen_tagger
