@@ -39,7 +39,7 @@
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the Research Director"
-	selection_color = "#633D63"
+	selection_color = "#633d63"
 	economic_power = 6
 	access = list(
 		access_robotics,
