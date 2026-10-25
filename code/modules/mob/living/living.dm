@@ -119,12 +119,11 @@ default behaviour is:
 				now_pushing = 0
 				return
 			tmob.last_handled_by_mob = weakref(src)
-		if(isobj(AM) && !AM.anchored)
-			var/obj/I = AM
-			if(!can_pull_size || can_pull_size < I.w_class)
-				to_chat(src, "<span class='warning'>It won't budge!</span>")
-				now_pushing = 0
-				return
+
+		if(ismovable(AM) && !AM.anchored && (!can_pull_size || can_pull_size < AM.get_object_size()))
+			to_chat(src, SPAN_WARNING("\The [AM] won't budge!"))
+			now_pushing = 0
+			return
 
 		now_pushing = 0
 		spawn(0)
@@ -1868,7 +1867,7 @@ default behaviour is:
 
 	stop_automove() // Cancel any baked-in movement.
 	do_windup_animation(target, attack_delay, no_reset = TRUE)
-	if(!do_after(src, attack_delay, target) || !Adjacent(target))
+	if(!do_after(src, attack_delay, target, allow_target_movement = TRUE, require_target_adjacent = TRUE))
 		visible_message(SPAN_NOTICE("\The [src] misses [pronouns.his] attack on \the [target]!"))
 		reset_offsets(anim_time = 2)
 		ai?.move_to_target(TRUE) // Restart hostile mob tracking.
