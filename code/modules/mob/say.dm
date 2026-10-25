@@ -154,3 +154,68 @@ var/global/list/special_channel_keys = list(
 
 /mob/proc/get_any_good_language(set_default=FALSE)
 	return
+
+/mob/proc/handle_speech_problems(var/list/message_data, var/decl/language/spoken)
+	return message_data
+
+// Parses a message into a list of list(text = spoken language) entries.
+/mob/proc/parse_message_into_phrases(message)
+
+	message = trim(message)
+	var/full_message = message
+
+	//parse the radio code and consume it
+	var/message_mode = parse_message_mode(full_message, standard_mode = MESSAGE_MODE_DEFAULT)
+	if(message_mode)
+		if(message_mode == MESSAGE_MODE_DEFAULT)
+			message = copytext_char(message, 2)
+		else
+			message = copytext_char(message, 3)
+
+	var/static/regex/split_msg_regex = regex("(.*)(,\\w.*)")
+	var/list/phrases = list()
+	while(split_msg_regex.Find(message))
+		message = split_msg_regex.group[1]
+		phrases.Insert(1, split_msg_regex.group[2])
+	if(message)
+		phrases.Insert(1, message)
+
+	var/use_verb
+	var/list/parsed_phrases = list()
+	for(var/phrase in phrases)
+
+		var/decl/language/speaking = parse_language(phrase)
+		if(speaking)
+			if(speaking.type == /decl/language/noise)
+				phrase = copytext_char(phrase, 1) // trim the single-char noise prefix
+			else
+				phrase = copytext_char(phrase, findtext_char(phrase, " ")+1) // trim the entire key
+		else
+			speaking = get_any_good_language(set_default=TRUE)
+
+		// Format and present nicely.
+		phrase = trim(html_encode(phrase))
+		phrase = handle_autohiss(phrase, speaking)
+
+		// The LANG_FLAG_NO_STUTTER check means nonvocal or unusually-produced
+		// languages (e.g. sign language, noise emotes, computer beeps)
+		// will not be affected by stuttering, slurring, silence, etc. effects.
+		if(speaking && !(speaking.language_flags & LANG_FLAG_NO_STUTTER))
+			var/list/message_data = list(phrase, speaking.speech_verb, 0)
+			if(handle_speech_problems(message_data))
+				phrase = message_data[1]
+				use_verb ||= message_data[2]
+
+		if(speaking)
+			var/speech_ability_result = speaking.can_be_spoken_properly_by(src)
+			if(speech_ability_result == SPEECH_RESULT_MUDDLED)
+				phrase = speaking.muddle(phrase)
+			else if(speech_ability_result == SPEECH_RESULT_INCAPABLE)
+				// weird phrasing, but needs to cover speaking and signing
+				to_chat(src, SPAN_WARNING("You don't have the right equipment to communicate in that way!"))
+				return
+
+		parsed_phrases += list(list(phrase, speaking))
+
+	if(length(parsed_phrases))
+		return new /datum/speech(src, full_message, message_mode, parsed_phrases, use_verb)

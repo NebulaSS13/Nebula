@@ -5,7 +5,7 @@
 	icon_state = "bike_off"
 	dir = SOUTH
 	load_item_visible = 1
-	_buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
+	_buckle_pixel_shift = @'{"x":0,"y":0,"z":5}'
 	max_health = 100
 	locked = 0
 	fire_dam_coeff = 0.6
@@ -146,16 +146,16 @@
 	return Move(get_step(src, direction))
 
 /obj/vehicle/bike/Move(var/turf/destination)
-	if(kickstand || (world.time <= l_move_time + move_delay)) return FALSE
+	if(kickstand || (world.time <= l_move_time + vehicle_move_delay)) return FALSE
 	//these things like space, not turf. Dragging shouldn't weigh you down.
 	if(isspaceturf(destination))
 		if(!space_speed)
 			return FALSE
-		move_delay = space_speed
+		vehicle_move_delay = space_speed
 	else
 		if(!land_speed)
 			return FALSE
-		move_delay = land_speed
+		vehicle_move_delay = land_speed
 	if(!engine || !engine.use_power())
 		turn_off()
 		return FALSE

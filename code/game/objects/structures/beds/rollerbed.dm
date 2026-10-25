@@ -6,7 +6,7 @@
 	icon = 'icons/obj/structures/rollerbed.dmi'
 	icon_state = "down"
 	anchored = FALSE
-	_buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 6)
+	_buckle_pixel_shift = @'{"x":0,"y":0,"z":6}'
 	movable_flags = MOVABLE_FLAG_WHEELED
 	tool_interaction_flags = 0
 	padding_extension_type = null // Cannot be padded.
