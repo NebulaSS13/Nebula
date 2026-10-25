@@ -68,7 +68,7 @@ var/global/list/all_gps_units = list()
 /obj/item/gps/proc/check_visible_to_holder()
 	. = holder && (src in holder.get_held_items())
 
-/obj/item/gps/proc/update_holder(var/force_clear = FALSE)
+/obj/item/gps/proc/update_holder(event_source, event_to, event_from, force_clear = FALSE)
 
 	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
 	var/decl/observ/dir_set/dir_set_event = GET_DECL(/decl/observ/dir_set)
