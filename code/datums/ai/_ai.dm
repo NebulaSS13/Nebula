@@ -50,7 +50,7 @@
 	var/can_escape_buckles = FALSE
 
 	/// What is our current general attitude and demeanor?
-	var/stance = STANCE_NONE
+	var/stance = STANCE_IDLE
 	/// What are we busy with currently?
 	var/current_activity = AI_ACTIVITY_IDLE
 
