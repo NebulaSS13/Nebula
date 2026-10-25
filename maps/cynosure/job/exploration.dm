@@ -58,8 +58,9 @@
 		access_tox_storage
 	)
 	outfit_type = /decl/outfit/job/cynosure_field_researcher
-	alt_titles = list(/decl/alt_title/xenovet)
+	alt_titles = list(/decl/alt_title/xenofauna_tech)
 
-/decl/alt_title/xenovet
+/decl/alt_title/xenofauna_tech
 	name = "Xenofauna Technician"
 	desc = "A Xenofauna Technician works with the alien fauna living in the territory around the station, heading out in the field to tag and assess the local animal populations. They are also responsible for training and tending to the station's small drake population."
+	outfit = /decl/outfit/job/cynosure_field_researcher/xenofauna_tech

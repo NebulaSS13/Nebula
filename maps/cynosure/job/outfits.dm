@@ -36,6 +36,11 @@
 	suit    = /obj/item/clothing/suit/toggle/labcoat/science
 	shoes   = /obj/item/clothing/shoes/winterboots
 
+/decl/outfit/job/cynosure_field_researcher/xenofauna_tech
+	name    = "Cynosure - Xenofauna Technician"
+	gloves  = /obj/item/clothing/gloves/thick
+	suit    = /obj/item/clothing/suit/jacket/winter/parka/blue
+
 /decl/outfit/job/pilot
 	name              = "Cynosure - Pilot"
 	shoes             = /obj/item/clothing/shoes/color/black
