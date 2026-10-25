@@ -12,7 +12,6 @@
 	description = "There are a few small groups of people living in the wilderness of Sif, and they occasionally venture to the Cynosure to trade, ask for help, or just have someone to talk to."
 	latejoin_at_spawnpoints = TRUE
 	create_record = FALSE
-	available_by_default = FALSE
 	allowed_ranks = null
 	allowed_branches = null
 	account_allowed = FALSE

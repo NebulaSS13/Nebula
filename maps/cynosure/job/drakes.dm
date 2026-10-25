@@ -12,7 +12,6 @@
 	description      = "A number of the bolder folks in Sif's anomalous region have partially domesticated some of the local wildlife as working animals."
 	latejoin_at_spawnpoints = TRUE
 	create_record = FALSE
-	available_by_default = FALSE
 	allowed_ranks = null
 	allowed_branches = null
 	account_allowed = FALSE
