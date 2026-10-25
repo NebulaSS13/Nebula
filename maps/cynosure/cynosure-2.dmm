@@ -14399,10 +14399,7 @@
 /turf/floor/tiled,
 /area/cynosure/crew/d2/hydroponics)
 "gZn" = (
-/obj/abstract/landmark/mapped_fluid{
-	name = "mapped shallow pool";
-	fluid_initial = 300
-	},
+/obj/abstract/landmark/mapped_fluid/fill,
 /turf/floor/pool,
 /area/cynosure/crew/d2/pool)
 "gZq" = (
@@ -17295,6 +17292,7 @@
 /turf/floor/dirt,
 /area/surface/outside/plains/normal)
 "iGO" = (
+/obj/abstract/landmark/mapped_fluid/fill,
 /turf/floor/pool/deep,
 /area/cynosure/crew/d2/pool)
 "iHa" = (
