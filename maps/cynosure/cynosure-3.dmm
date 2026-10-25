@@ -31539,7 +31539,7 @@
 /turf/floor/tiled,
 /area/cynosure/hallway/d3/east)
 "wlU" = (
-/obj/item/banner/virgov,
+/obj/structure/banner_frame/virgov,
 /obj/machinery/network/relay/wall_mounted/south,
 /obj/structure/network_cable/terminal,
 /turf/floor/laminate/sif,

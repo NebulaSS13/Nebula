@@ -18654,7 +18654,7 @@
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 1
 	},
-/obj/item/banner/virgov,
+/obj/structure/banner_frame/virgov,
 /turf/floor/tiled,
 /area/cynosure/crew/d2/gym)
 "jtd" = (
