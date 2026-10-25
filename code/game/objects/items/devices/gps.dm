@@ -35,7 +35,6 @@ var/global/list/all_gps_units = list()
 	VAR_PRIVATE/obj/compass_holder/_compass
 	var/list/decals
 
-
 /obj/item/gps/Initialize()
 	global.all_gps_units += src
 	. = ..()

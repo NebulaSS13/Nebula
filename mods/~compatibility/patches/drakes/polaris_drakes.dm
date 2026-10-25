@@ -15,3 +15,11 @@
 
 /decl/material/liquid/sifsap/sap_ingested(mob/living/subject, removed)
 	return drake_add_spit(subject, removed)
+
+/obj/item/backpack/drake_harness/explorer
+	name = "\improper Exploration harness"
+	paint_color = null
+	desc = "A tough hard-wearing harness of synthetic material, emblazoned with Xenobiology colours. It's designed for some kind of quadrupedal animal."
+	icon = 'mods/content/polaris/icons/clothing/drake_harness_explo.dmi'
+	material = /decl/material/solid/organic/leather/synth
+	material_alteration = MAT_FLAG_ALTERATION_NONE

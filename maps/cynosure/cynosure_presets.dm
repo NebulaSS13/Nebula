@@ -199,4 +199,19 @@
 	ailock = TRUE
 
 /obj/item/gps/internal
+	simulated    = FALSE
+	invisibility = INVISIBILITY_MAXIMUM
+	max_health   = ITEM_HEALTH_NO_DAMAGE
+	anchored     = TRUE
+
+/obj/item/gps/internal/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	return
+
 /obj/item/gps/internal/poi
+	gps_tag = "POI"
+
+/obj/item/gps/internal/poi/Initialize()
+	. = ..()
+	if(!tracking)
+		toggle_tracking(null, TRUE)

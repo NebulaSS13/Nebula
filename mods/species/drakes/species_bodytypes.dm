@@ -31,6 +31,7 @@
 	damage_overlays      = 'mods/species/drakes/icons/damage.dmi'
 	surgery_overlay_icon = null // todo: 'mods/species/drakes/icons/surgery.dmi'
 	bodytype_category    = BODYTYPE_GRAFADREKA
+	bodytype_flag        = BODY_EQUIP_FLAG_QUADRUPED | BODY_EQUIP_FLAG_DRAKE
 	eye_blend            = ICON_MULTIPLY
 	limb_blend           = ICON_MULTIPLY
 	appearance_flags     = HAS_SKIN_COLOR | HAS_EYE_COLOR

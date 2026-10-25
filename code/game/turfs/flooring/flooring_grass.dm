@@ -62,7 +62,7 @@
 	desc            = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
 	icon            = 'icons/turf/flooring/fakegrass.dmi'
 	has_base_range  = 3
-	color           = "#5e7a3b"
+	color           = null
 	build_type      = /obj/item/stack/tile/grass
 	force_material  = /decl/material/solid/organic/plastic
 	uid             = "floor_grass_fake"

@@ -88,9 +88,13 @@
 	#include "items/suit.dm"
 
 	#include "job/_jobs.dm"
+	#include "job/drakes.dm"
+	#include "job/exploration.dm"
 	#include "job/job_overrides.dm"
 	#include "job/outfits.dm"
 	#include "job/paramedic.dm"
+	#include "job/rd.dm"
+	#include "job/survivalist.dm"
 
 	#include "structures/signs/signs.dm"
 	#include "structures/closets/misc.dm"
