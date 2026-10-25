@@ -29,6 +29,13 @@
 	pda_slot          = slot_l_store_str
 	id_pda_assignment = "Explorer Medic"
 
+/decl/outfit/job/cynosure_field_researcher
+	name    = "Cynosure - Field Researcher"
+	uniform = /obj/item/clothing/jumpsuit/xenofauna
+	id_type = /obj/item/card/id/science
+	suit    = /obj/item/clothing/suit/toggle/labcoat/science
+	shoes   = /obj/item/clothing/shoes/winterboots
+
 /decl/outfit/job/pilot
 	name              = "Cynosure - Pilot"
 	shoes             = /obj/item/clothing/shoes/color/black
@@ -102,3 +109,11 @@
 /decl/outfit/job/medical/cynosure_paramedic/emt
 	name = "Cynosure  - Emergency Medical Technician"
 	suit = /obj/item/clothing/suit/toggle/labcoat
+
+/decl/outfit/trained_drake
+	name = "Cynosure - Trained Drake"
+	back = /obj/item/backpack/drake_harness
+
+/decl/outfit/trained_drake/explorer
+	name = "Cynosure - Explorer Drake"
+	back = /obj/item/backpack/drake_harness/explorer

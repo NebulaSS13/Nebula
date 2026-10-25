@@ -1,6 +1,7 @@
 #define BODYTYPE_GRAFADREKA           "drake body"
 #define BODYTYPE_GRAFADREKA_HATCHLING "hatchling drake body"
 #define BP_DRAKE_GIZZARD              "drake gizzard"
+#define BODY_EQUIP_FLAG_DRAKE         BITFLAG(7)
 
 /decl/modpack/grafadreka
 	name = "Grafadreka Species"
