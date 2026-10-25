@@ -1433,6 +1433,7 @@ var/global/list/floor_decals = list()
 
 /obj/effect/floor_decal/rust
 	name = "rust"
+	desc = "A clumpy area of rust."
 	icon_state = "rust"
 
 /obj/effect/floor_decal/rust/part_rusted1
@@ -1655,11 +1656,6 @@ var/global/list/floor_decals = list()
 	name       = "snow"
 	desc       = "A fine dusting of snow."
 	icon_state = "snowy"
-
-/obj/effect/floor_decal/rust
-	name       = "rust"
-	desc       = "A clumpy area of rust."
-	icon_state = "rusted"
 
 /obj/effect/floor_decal/floornums
 	name       = "floor marker"

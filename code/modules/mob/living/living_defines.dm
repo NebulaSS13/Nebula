@@ -21,7 +21,7 @@
 	/// Used by the resist verb and some mob abilities.
 	var/next_special_ability = 0
 
-	var/now_pushing = null
+	var/now_pushing = FALSE
 	var/mob_bump_flag = 0
 	var/mob_swap_flags = 0
 	var/mob_push_flags = 0
