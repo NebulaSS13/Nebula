@@ -1,7 +1,6 @@
 // Stub type for future expansion/logic encapsulation.
 /decl/mob_controller_stance
 	abstract_type = /decl/mob_controller_stance
-/decl/mob_controller_stance/none
 /decl/mob_controller_stance/idle
 /decl/mob_controller_stance/alert
 /decl/mob_controller_stance/attack
