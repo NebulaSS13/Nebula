@@ -72,6 +72,21 @@ default behaviour is:
 		return 0
 	return ..()
 
+/mob/living/proc/try_to_push(atom/movable/thing)
+	// Until we have a separate attack cooldown, we use click cooldown.
+	if(!canClick())
+		return FALSE
+	if(ismob(thing))
+		if(!check_intent(I_FLAG_HARM))
+			return FALSE
+		var/mob/mob = thing
+		if(mob.check_intent(I_FLAG_HELP))
+			return TRUE
+	if(can_pull_size && can_pull_size >= thing.get_object_size())
+		return TRUE
+	to_chat(src, SPAN_WARNING("\The [thing] won't budge!"))
+	return FALSE
+
 /mob/living/Bump(atom/movable/AM, yes)
 
 	// This is boilerplate from /atom/movable/Bump() but in all honest
@@ -86,7 +101,7 @@ default behaviour is:
 		if (!yes || now_pushing || QDELETED(src) || QDELETED(AM) || !loc || !AM.loc)
 			return
 
-		now_pushing = 1
+		now_pushing = TRUE
 		if (isliving(AM))
 			var/mob/living/tmob = AM
 
@@ -94,38 +109,38 @@ default behaviour is:
 				if(LAZYLEN(tmob.pinned) || (locate(/obj/item/grab, LAZYLEN(tmob.grabbed_by))))
 					if ( !(world.time % 5) )
 						to_chat(src, SPAN_WARNING("[tmob] is restrained, you cannot push past."))
-					now_pushing = 0
+					now_pushing = FALSE
 					return
 
 			if(can_swap_with(tmob)) // mutual brohugs all around!
 				var/turf/oldloc = loc
 				forceMove(tmob.loc)
 				tmob.forceMove(oldloc)
-				now_pushing = 0
+				now_pushing = FALSE
 				return
 
 			if(!can_move_mob(tmob, 0, 0))
-				now_pushing = 0
+				now_pushing = FALSE
 				return
 			if(src.restrained())
-				now_pushing = 0
+				now_pushing = FALSE
 				return
 			if(!tmob.check_intent(I_FLAG_HELP))
 				for(var/obj/item/shield/riot/shield in tmob.get_held_items())
 					if(prob(99))
-						now_pushing = 0
+						now_pushing = FALSE
 						return
 			if(!(tmob.status_flags & CANPUSH))
-				now_pushing = 0
+				now_pushing = FALSE
 				return
 			tmob.last_handled_by_mob = weakref(src)
 
 		if(ismovable(AM) && !AM.anchored && (!can_pull_size || can_pull_size < AM.get_object_size()))
 			to_chat(src, SPAN_WARNING("\The [AM] won't budge!"))
-			now_pushing = 0
+			now_pushing = FALSE
 			return
 
-		now_pushing = 0
+		now_pushing = FALSE
 		spawn(0)
 			if (QDELETED(src) || QDELETED(AM) || !loc || !AM.loc)
 				return
@@ -138,14 +153,17 @@ default behaviour is:
 					visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
 					src.apply_damage(5, BRUTE)
 				return
-			if (!now_pushing)
-				now_pushing = 1
 
+			if (!now_pushing && try_to_push(AM))
+				now_pushing = TRUE
 				var/t = get_dir(src, AM)
 				if (istype(AM, /obj/structure/window))
 					for(var/obj/structure/window/win in get_step(AM,t))
-						now_pushing = 0
+						now_pushing = FALSE
 						return
+
+				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
 				AM.glide_size = glide_size
 				step(AM, t)
 				if (isliving(AM))
@@ -160,7 +178,7 @@ default behaviour is:
 						grab.adjust_position()
 				if(saved_dir)
 					AM.set_dir(saved_dir)
-				now_pushing = 0
+				now_pushing = FALSE
 
 /proc/swap_density_check(var/mob/swapper, var/mob/swapee)
 	var/turf/T = get_turf(swapper)
