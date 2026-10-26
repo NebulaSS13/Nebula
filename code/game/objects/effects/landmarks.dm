@@ -162,3 +162,16 @@ var/global/list/obj/abstract/landmark/all_landmarks = list()
 /obj/abstract/landmark/costume/savagehuntress/make_costumes()
 	new /obj/item/clothing/mask/spirit(loc)
 	new /obj/item/clothing/costume/savage_hunter/female(loc)
+
+INITIALIZE_IMMEDIATE(/obj/abstract/landmark/station_network)
+/obj/abstract/landmark/station_network
+	name = "Turf Station Network"
+	icon = 'icons/effects/markers.dmi'
+	icon_state = "x"
+	anchored = TRUE
+	invisibility = INVISIBILITY_ABSTRACT
+	delete_me = FALSE
+
+/obj/abstract/landmark/station_network/Initialize()
+	global.using_map.station_network_loc = src
+	. = ..()
