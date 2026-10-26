@@ -160,11 +160,11 @@ var/global/arrest_security_status =  "Arrest"
 
 // Global methods
 // Used by character creation to create a record for new arrivals.
-/proc/CreateModularRecord(var/mob/living/crewmember, record_type = /datum/computer_file/report/crew_record)
+/proc/CreateModularRecord(mob/living/crewmember, record_type = /datum/computer_file/report/crew_record, atom/network_loc)
 	var/datum/computer_file/report/crew_record/crew_record = new record_type()
 	global.all_crew_records.Add(crew_record)
 	crew_record.load_from_mob(crewmember)
-	var/datum/computer_network/network = get_local_network_at(get_turf(crewmember))
+	var/datum/computer_network/network = get_local_network_at(get_turf(network_loc) || get_turf(crewmember))
 	if(network)
 		network.store_file(crew_record, OS_RECORDS_DIR, TRUE, mainframe_role = MF_ROLE_CREW_RECORDS)
 	return crew_record

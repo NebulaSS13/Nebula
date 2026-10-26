@@ -242,7 +242,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	spawnpoint.after_join(character)
 	if(job.create_record)
 		if(!(ASSIGNMENT_ROBOT in job.event_categories))
-			CreateModularRecord(character)
+			CreateModularRecord(character, network_loc = global.using_map.station_network_loc)
 			SSticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 			if(spawnpoint.spawn_announcement)
 				AnnounceArrival(character, job, spawnpoint.spawn_announcement)
@@ -259,7 +259,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		if(character.mind.role_alt_title)
 			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
-		do_telecomms_announcement(character, "A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
+		do_telecomms_announcement(global.using_map.station_network_loc || character, "A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
 
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
