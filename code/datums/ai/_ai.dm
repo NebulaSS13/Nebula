@@ -195,14 +195,19 @@
 /datum/mob_controller/proc/try_bark()
 	//Speaking
 	if(prob(speak_chance))
-		var/action = pick(
-			LAZYLEN(emote_speech); "emote_speech",
-			LAZYLEN(emote_hear);   "emote_hear",
-			LAZYLEN(emote_see);    "emote_see"
-		)
+		var/action = list()
+		if(LAZYLEN(emote_speech))
+			action["emote_speech"] = LAZYLEN(emote_speech)
+		if(LAZYLEN(emote_hear))
+			action["emote_hear"] = LAZYLEN(emote_hear)
+		if(LAZYLEN(emote_see))
+			action["emote_see"] = LAZYLEN(emote_see)
+		if(!length(action))
+			return
+
 		var/do_emote
 		var/emote_type = VISIBLE_MESSAGE
-		switch(action)
+		switch(pickweight(action))
 			if("emote_speech")
 				if(length(emote_speech))
 					body.say(pick(emote_speech))
