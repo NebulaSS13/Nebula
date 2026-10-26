@@ -30618,6 +30618,7 @@
 	},
 /obj/machinery/network/router,
 /obj/structure/network_cable/terminal,
+/obj/abstract/landmark/station_network,
 /turf/floor/tiled,
 /area/cynosure/command/d3/network)
 "vBg" = (
