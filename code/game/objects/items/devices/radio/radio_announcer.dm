@@ -6,11 +6,11 @@ var/global/list/announcers = list()
 		z = T?.z
 	if(!z)
 		return null
-	if(!global.announcers["[z]"])
+	if(!global.announcers[num2text(z)])
 		var/list/connected = SSmapping.get_connected_levels(z)
 		var/obj/item/radio/announcer/announcer = new(null, z)
 		for(var/oz in connected)
-			global.announcers["[oz]"] = announcer
+			global.announcers[num2text(oz)] = announcer
 		SSnetworking.try_connect(get_extension(announcer, /datum/extension/network_device)) // Force an immediate check instead of waiting.
 		announcer.sync_channels_with_network()
 	return global.announcers["[z]"]

@@ -204,6 +204,9 @@ var/global/const/MAP_HAS_RANK   = 2		//Rank system, also toggleable
 	/// Is maint currently all-access?
 	var/maint_all_access = FALSE
 
+	/// A turf where the main station network can be accessed. Marked with
+	var/obj/abstract/landmark/station_network/station_network_loc
+
 /datum/map/New()
 	..()
 	default_ui_style ||= DEFAULT_UI_STYLE
