@@ -19545,7 +19545,7 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
-/obj/item/banner/nanotrasen,
+/obj/structure/banner_frame/nanotrasen,
 /turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "jPo" = (
@@ -26619,7 +26619,7 @@
 /obj/effect/floor_decal/corner/blue/bordercorner2{
 	dir = 10
 	},
-/obj/item/banner/nanotrasen,
+/obj/structure/banner_frame/nanotrasen,
 /turf/floor/tiled/techmaint,
 /area/cynosure/hallway/d2/south)
 "naO" = (
@@ -48037,7 +48037,7 @@
 /turf/floor/plating,
 /area/cynosure/maintenance/d2/engineering)
 "xzM" = (
-/obj/item/banner/nanotrasen,
+/obj/structure/banner_frame/nanotrasen,
 /turf/floor/laminate/sif,
 /area/cynosure/crew/d2/chapel)
 "xzZ" = (
