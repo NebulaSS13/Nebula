@@ -168,7 +168,7 @@ var/global/list/ai_verbs_default = list(
 	job = "AI"
 	setup_icon()
 	eyeobj.possess(src)
-	CreateModularRecord(src, /datum/computer_file/report/crew_record/synth)
+	CreateModularRecord(src, /datum/computer_file/report/crew_record/synth, network_loc = global.using_map.station_network_loc)
 	show_join_message()
 
 // Give our radio a bit of time to connect to the network and get its channels.

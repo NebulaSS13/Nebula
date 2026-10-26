@@ -87,7 +87,7 @@ SUBSYSTEM_DEF(ticker)
 		if(H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
 			var/datum/job/job = SSjobs.get_by_title(H.mind.assigned_role)
 			if(job && job.create_record)
-				CreateModularRecord(H)
+				CreateModularRecord(H, network_loc = global.using_map.station_network_loc)
 
 	// Initialize the roundstart timer
 	global.round_start_time = world.time
