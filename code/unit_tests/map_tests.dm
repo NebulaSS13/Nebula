@@ -321,7 +321,7 @@
 	for(var/spawn_type in all_spawnpoints)
 		var/decl/spawnpoint/spawnpoint = all_spawnpoints[spawn_type]
 		// No turfs probably means it isn't mapped; if it's in the allowed list this will be picked up below.
-		if(!length(spawnpoint.get_spawn_turfs()))
+		if(!length(spawnpoint.get_spawn_locs()))
 			continue
 		if(spawnpoint.spawn_flags)
 			for(var/spawn_flag in check_spawn_flags)
@@ -332,7 +332,7 @@
 
 	// Check if spawn points have any turfs at all associated.
 	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_latejoin_spawns)
-		if(!length(spawnpoint.get_spawn_turfs()))
+		if(!length(spawnpoint.get_spawn_locs()))
 			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
 			failed += spawnpoint.type
 
@@ -345,13 +345,13 @@
 		if(!spawnpoint.check_job_spawning(job))
 			log_unit_test("Forced spawnpoint for [job_title], [spawnpoint.name], does not permit the job to spawn there.")
 			failed += spawnpoint.type
-		if(!length(spawnpoint.get_spawn_turfs()))
+		if(!length(spawnpoint.get_spawn_locs()))
 			log_unit_test("Job [job_title] forces spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
 			failed += spawnpoint.type
 
 	// Observer spawn is special and isn't in the using_map list.
 	var/decl/spawnpoint/observer_spawn = GET_DECL(/decl/spawnpoint/observer)
-	if(!length(observer_spawn.get_spawn_turfs()))
+	if(!length(observer_spawn.get_spawn_locs()))
 		log_unit_test("Map has no [observer_spawn.name] spawn turfs.")
 		failed += observer_spawn.type
 	if(!(observer_spawn.spawn_flags & SPAWN_FLAG_GHOSTS_CAN_SPAWN))
