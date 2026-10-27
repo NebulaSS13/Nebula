@@ -209,7 +209,7 @@
 	var/datum/computer_network/net = get_local_network_at(get_turf(user))
 	if(net && length(net.get_crew_records()))
 		random_record = pick(net.get_crew_records())
-	var/datum/computer_file/report/crew_record/new_record = CreateModularRecord(user)
+	var/datum/computer_file/report/crew_record/new_record = CreateModularRecord(user, network_loc = global.using_map.station_network_loc)
 	if(I)
 		new_record.set_name(I.registered_name)
 		new_record.set_formal_name("[I.formal_name_prefix][I.registered_name][I.formal_name_suffix]")
