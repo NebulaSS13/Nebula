@@ -123,7 +123,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			observer.started_as_observer = 1
 			close_spawn_windows()
 			var/decl/spawnpoint/spawnpoint = GET_DECL(/decl/spawnpoint/observer)
-			var/turf/T = SAFEPICK(spawnpoint.get_spawn_turfs(src))
+			var/turf/T = get_turf(SAFEPICK(spawnpoint.get_spawn_locs(src)))
 			if(istype(T))
 				to_chat(src, SPAN_NOTICE("Now teleporting."))
 				observer.forceMove(T)
@@ -211,7 +211,8 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	if(job.latejoin_at_spawnpoints)
 		spawn_turf = job.get_roundstart_spawn_turf(job.get_alt_title_for(client))
 	else
-		spawn_turf = SAFEPICK(spawnpoint.get_spawn_turfs(src))
+		spawn_turf = SAFEPICK(spawnpoint.get_spawn_locs(src))
+	spawn_turf = get_turf(spawn_turf)
 
 	if(!spawn_turf || !job.no_warn_unsafe && !SSjobs.check_unsafe_spawn(src, spawn_turf))
 		return
@@ -371,7 +372,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		if(!job)
 			job = SSjobs.get_by_title(global.using_map.default_job_title)
 		var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(client, client.prefs.ranks[job.title])
-		spawn_turf = DEFAULTPICK(spawnpoint.get_spawn_turfs(src), get_random_spawn_turf(SPAWN_FLAG_JOBS_CAN_SPAWN))
+		spawn_turf = get_turf(DEFAULTPICK(spawnpoint.get_spawn_locs(src), get_random_spawn_turf(SPAWN_FLAG_JOBS_CAN_SPAWN)))
 
 	if(chosen_species)
 		if(!check_species_allowed(chosen_species))
