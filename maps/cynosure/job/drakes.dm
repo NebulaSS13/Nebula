@@ -22,6 +22,9 @@
 		/decl/alt_title/wild_drake
 	)
 
+/datum/job/cynosure/trained_animal/is_species_allowed(var/decl/species/S)
+	return S.uid != /decl/species/grafadreka::uid && ..()
+
 /decl/alt_title/explorer_drake
 	name = "Expedition Drake"
 	desc = "The Cynosure Xenobiology department has spearheaded an effort to train some of the intelligent local wildlife to assist with Exploration field operations."
