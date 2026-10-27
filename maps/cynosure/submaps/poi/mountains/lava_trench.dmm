@@ -687,7 +687,7 @@
 /turf/floor/tiled,
 /area/cynosure_submap/cave/lava_trench)
 "cq" = (
-/obj/item/banner/nanotrasen,
+/obj/structure/banner_frame/nanotrasen,
 /turf/floor/tiled,
 /area/cynosure_submap/cave/lava_trench)
 "cr" = (
@@ -696,7 +696,7 @@
 /turf/floor/tiled,
 /area/cynosure_submap/cave/lava_trench)
 "cs" = (
-/obj/item/banner/nanotrasen,
+/obj/structure/banner_frame/nanotrasen,
 /turf/floor/rock,
 /area/cynosure_submap/cave/lava_trench)
 

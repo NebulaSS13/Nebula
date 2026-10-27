@@ -1758,7 +1758,7 @@
 /turf/floor/tiled,
 /area/cynosure/security/d3/armory_tactical)
 "bpV" = (
-/obj/item/banner/nanotrasen,
+/obj/structure/banner_frame/nanotrasen,
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
@@ -6859,7 +6859,7 @@
 /turf/wall,
 /area/cynosure/engineering/d3/hallway)
 "eUJ" = (
-/obj/item/banner/nanotrasen,
+/obj/structure/banner_frame/nanotrasen,
 /turf/floor/laminate/sif,
 /area/cynosure/command/d3/meeting)
 "eVk" = (
@@ -27530,7 +27530,7 @@
 /turf/floor/tiled/monotile,
 /area/cynosure/engineering/d3/hallway)
 "tsE" = (
-/obj/item/banner/blue,
+/obj/structure/banner_frame/blue,
 /turf/floor/tiled/techmaint,
 /area/cynosure/hallway/d3/command)
 "tsY" = (
@@ -30618,6 +30618,7 @@
 	},
 /obj/machinery/network/router,
 /obj/structure/network_cable/terminal,
+/obj/abstract/landmark/station_network,
 /turf/floor/tiled,
 /area/cynosure/command/d3/network)
 "vBg" = (
@@ -31955,7 +31956,7 @@
 /turf/floor/carpet,
 /area/cynosure/command/d3/sa_office)
 "wAE" = (
-/obj/item/banner/red,
+/obj/structure/banner_frame/red,
 /turf/wall,
 /area/cynosure/crew/d3/vacant)
 "wAT" = (
@@ -32299,7 +32300,7 @@
 /turf/floor/tiled/techfloor,
 /area/cynosure/engineering/d3/reactor)
 "wJL" = (
-/obj/item/banner/nanotrasen,
+/obj/structure/banner_frame/nanotrasen,
 /turf/floor/tiled/dark,
 /area/cynosure/hallway/d3/east)
 "wKI" = (
@@ -34207,7 +34208,7 @@
 /turf/floor/tiled,
 /area/cynosure/security/d3/hallway)
 "xQF" = (
-/obj/item/banner/nanotrasen,
+/obj/structure/banner_frame/nanotrasen,
 /turf/floor/tiled/dark,
 /area/cynosure/command/d3/sa_office)
 "xRp" = (
