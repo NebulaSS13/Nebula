@@ -233,7 +233,7 @@
 	if(module)
 		notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
 		if(!get_crewmember_record(name) && !module.hide_on_manifest)
-			CreateModularRecord(src, /datum/computer_file/report/crew_record/synth)
+			CreateModularRecord(src, /datum/computer_file/report/crew_record/synth, network_loc = global.using_map.station_network_loc)
 
 /mob/living/silicon/robot/get_cell()
 	return cell
