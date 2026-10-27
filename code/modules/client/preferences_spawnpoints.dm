@@ -7,14 +7,14 @@
 	for(var/spawn_type in all_spawns)
 		var/decl/spawnpoint/spawn_data = all_spawns[spawn_type]
 		if((!check_flags || (spawn_data.spawn_flags & check_flags)))
-			var/add_spawn_turfs = spawn_data.get_spawn_turfs(spawning)
-			if(length(add_spawn_turfs))
-				spawn_locs |= add_spawn_turfs
-	. = SAFEPICK(spawn_locs)
+			var/add_spawn_locs = spawn_data.get_spawn_locs(spawning)
+			if(length(add_spawn_locs))
+				spawn_locs |= add_spawn_locs
+	. = get_turf(SAFEPICK(spawn_locs))
 	if(!.)
 		// Observer spawn is guaranteed by CI to be populated.
 		var/decl/spawnpoint/observer_spawn = GET_DECL(/decl/spawnpoint/observer)
-		return pick(observer_spawn.get_spawn_turfs())
+		return get_turf(pick(observer_spawn.get_spawn_locs()))
 
 /decl/spawnpoint
 	abstract_type = /decl/spawnpoint
@@ -25,8 +25,8 @@
 	var/spawn_announcement
 	/// Determines validity for get_random_spawn_turf()
 	var/spawn_flags = (SPAWN_FLAG_GHOSTS_CAN_SPAWN | SPAWN_FLAG_JOBS_CAN_SPAWN | SPAWN_FLAG_PRISONERS_CAN_SPAWN | SPAWN_FLAG_PERSISTENCE_CAN_SPAWN)
-	/// List of turfs to spawn on. Retrieved via get_spawn_turfs().
-	VAR_PRIVATE/list/_spawn_turfs
+	/// List of turfs to spawn on. Retrieved via get_spawn_locs().
+	VAR_PRIVATE/list/_spawn_locs
 	/// A list of job types that are allowed to use this spawnpoint.
 	var/list/restrict_job
 	/// A list of event categories that are allowed to use this spawnpoint (ex. ASSIGNMENT_JANITOR)
@@ -37,12 +37,12 @@
 	var/list/disallow_job_event_categories
 
 // Returns the spawn list. Mob is supplied in case overrides want to check prefs.
-/decl/spawnpoint/proc/get_spawn_turfs(var/mob/spawning)
-	return _spawn_turfs
+/decl/spawnpoint/proc/get_spawn_locs(var/mob/spawning)
+	return _spawn_locs
 
 // Adds to the spawn list. Uses a proc for subtype overrides.
-/decl/spawnpoint/proc/add_spawn_turf(var/turf/adding)
-	LAZYDISTINCTADD(_spawn_turfs, adding)
+/decl/spawnpoint/proc/add_spawn_loc(var/atom/adding)
+	LAZYDISTINCTADD(_spawn_locs, adding)
 
 // Validates that a job is allowed to use this spawn point.
 /decl/spawnpoint/proc/check_job_spawning(var/datum/job/job)
