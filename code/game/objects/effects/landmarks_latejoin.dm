@@ -1,5 +1,6 @@
 /obj/abstract/landmark/latejoin
 	delete_me = FALSE
+	movable_flags = MOVABLE_FLAG_ALWAYS_SHUTTLEMOVE
 	var/spawn_decl = /decl/spawnpoint/arrivals
 
 /obj/abstract/landmark/latejoin/Initialize()
