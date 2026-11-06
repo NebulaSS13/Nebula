@@ -1,0 +1,32 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+"Z" = (
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+Z
+Z
+Z
+"}
+(3,1,1) = {"
+a
+Z
+Z
+Z
+"}
+(4,1,1) = {"
+a
+a
+a
+a
+"}

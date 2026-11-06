@@ -1,0 +1,197 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/closet/crate/chest/ebony,
+/obj/item/stack/material/bolt/mapped/cloth/fifty,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"c" = (
+/obj/random/hostile/dungeon,
+/turf/floor/path/basalt,
+/area/template_noop)
+"l" = (
+/obj/structure/table/wood/ebony,
+/obj/item/stack/material/thread/mapped/dried_gut/thirty,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"m" = (
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"n" = (
+/obj/structure/chair/bench/ebony{
+	dir = 4
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"p" = (
+/obj/structure/table/wood/ebony,
+/obj/item/stack/material/thread/mapped/cotton/thirty,
+/obj/item/bladed/knife,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"r" = (
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"t" = (
+/obj/structure/door/ebony,
+/turf/floor/path/herringbone/basalt,
+/area/template_noop)
+"y" = (
+/obj/item/stack/material/bolt/mapped/cloth/fifty,
+/obj/structure/closet/crate/chest/ebony,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"E" = (
+/turf/floor/path/basalt,
+/area/template_noop)
+"F" = (
+/obj/structure/chair/bench/ebony{
+	dir = 8
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"J" = (
+/obj/structure/wall_sconce{
+	dir = 4
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"K" = (
+/obj/item/stack/material/bone/mapped/bone/twentyfive,
+/obj/structure/closet/crate/chest/ebony,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"R" = (
+/obj/item/stack/material/skin/mapped/leather/twentyfive,
+/obj/structure/closet/crate/chest/ebony,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"T" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+"W" = (
+/obj/structure/wall_sconce{
+	dir = 8
+	},
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"Y" = (
+/obj/structure/working/spinning_wheel/ebony,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+"Z" = (
+/obj/structure/working/loom/ebony,
+/turf/floor/path/running_bond/basalt,
+/area/template_noop)
+
+(1,1,1) = {"
+T
+T
+T
+T
+T
+t
+t
+T
+T
+T
+T
+T
+"}
+(2,1,1) = {"
+T
+a
+r
+r
+r
+r
+r
+r
+W
+r
+p
+T
+"}
+(3,1,1) = {"
+T
+y
+m
+m
+m
+m
+m
+m
+m
+m
+Z
+T
+"}
+(4,1,1) = {"
+T
+K
+m
+E
+E
+E
+c
+E
+E
+m
+F
+T
+"}
+(5,1,1) = {"
+T
+K
+m
+E
+E
+E
+E
+E
+E
+m
+n
+T
+"}
+(6,1,1) = {"
+T
+R
+m
+m
+m
+m
+m
+m
+m
+m
+Y
+T
+"}
+(7,1,1) = {"
+T
+R
+r
+r
+J
+r
+r
+r
+r
+J
+l
+T
+"}
+(8,1,1) = {"
+T
+T
+T
+T
+T
+t
+t
+T
+T
+T
+T
+T
+"}

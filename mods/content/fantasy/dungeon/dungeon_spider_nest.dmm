@@ -1,0 +1,196 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/wall/natural/dirt,
+/area/template_noop)
+"d" = (
+/turf/floor/mud/water,
+/area/template_noop)
+"r" = (
+/turf/wall/brick/basalt,
+/area/template_noop)
+"y" = (
+/turf/floor/mud/water/deep,
+/area/template_noop)
+"A" = (
+/obj/item/remains/human,
+/turf/floor/mud,
+/area/template_noop)
+"E" = (
+/obj/random/hostile/cave,
+/turf/floor/mud,
+/area/template_noop)
+"W" = (
+/turf/floor/mud,
+/area/template_noop)
+"Y" = (
+/turf/floor/dirt,
+/area/template_noop)
+
+(1,1,1) = {"
+r
+r
+r
+a
+a
+a
+Y
+a
+a
+r
+r
+a
+"}
+(2,1,1) = {"
+r
+a
+a
+Y
+a
+a
+a
+a
+a
+W
+a
+a
+"}
+(3,1,1) = {"
+a
+a
+Y
+Y
+Y
+W
+a
+W
+a
+a
+a
+a
+"}
+(4,1,1) = {"
+a
+a
+a
+Y
+E
+W
+A
+W
+W
+a
+a
+a
+"}
+(5,1,1) = {"
+a
+a
+Y
+Y
+W
+d
+d
+W
+W
+a
+a
+a
+"}
+(6,1,1) = {"
+a
+a
+Y
+W
+d
+d
+d
+d
+W
+Y
+a
+a
+"}
+(7,1,1) = {"
+a
+a
+Y
+W
+d
+y
+d
+d
+E
+Y
+a
+a
+"}
+(8,1,1) = {"
+a
+a
+Y
+W
+d
+d
+d
+d
+d
+W
+a
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+W
+E
+d
+d
+d
+d
+W
+a
+a
+"}
+(10,1,1) = {"
+r
+a
+a
+a
+Y
+Y
+W
+d
+W
+W
+a
+a
+"}
+(11,1,1) = {"
+r
+a
+a
+a
+a
+a
+Y
+W
+W
+a
+a
+r
+"}
+(12,1,1) = {"
+r
+r
+r
+a
+a
+a
+a
+r
+r
+r
+r
+r
+"}

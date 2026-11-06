@@ -128,3 +128,42 @@
 		if(spawn_type)
 			new spawn_type(loc)
 	return INITIALIZE_HINT_QDEL
+
+/datum/map_template/modular/shaded_hills_cellar
+	name = "Shaded Hills Cellar"
+	cell_height = 3
+	cell_width = 7
+	mappaths = list("maps/shaded_hills/dungeon_gen/cellar.dmm")
+	connection_flag = MCF_ROOM
+	is_spawnable = TRUE
+
+/datum/map_template/modular/shaded_hills_cellar/New()
+	cell_connections = list(
+		new /datum/mm_connection("EAST", 6, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
+		new /datum/mm_connection("SOUTH", 6, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM)),
+	)
+	..()
+
+/datum/map_template/modular/shaded_hills_gravesite
+	name = "Shaded Hills Gravesite"
+	cell_height = 2
+	cell_width = 2
+	mappaths = list("maps/shaded_hills/dungeon_gen/gravesite.dmm")
+	connection_flag = MCF_ROOM
+	is_spawnable = TRUE
+
+/datum/map_template/modular/shaded_hills_gravesite/New()
+	cell_connections = list(
+		new /datum/mm_connection("WEST", 0, 0, (MCF_HALL | MCF_BRIDGE | MCF_ROOM))
+	)
+	..()
+
+/decl/modular_map_generator/aqueduct/shaded_hills
+	name = "Shaded Hills Culvert"
+	level_data_type = /datum/level_data/masked
+	mandatory_templates = list(
+		// 8, 71
+		/datum/map_template/modular/shaded_hills_cellar    = list(0,7),
+		// 116, 116
+		/datum/map_template/modular/shaded_hills_gravesite = list(12, 12)
+	)
