@@ -1,7 +1,27 @@
+/// If enabled, attmept to fold single-group overlay groups into the parent atom. This avoids the alist, but makes overlay operations take a bit more CPU time. These are very common, so this should be a net win.
+#define OVR_ENABLE_MONAD_COMPRESSION
+
+#define CUT_OVERLAY_IN(ovr, time) addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, cut_overlay), ovr), time, TIMER_STOPPABLE | TIMER_CLIENT_TIME)
+
+#ifdef OVR_ENABLE_MONAD_COMPRESSION
+
+/// Does this atom currently have managed overlays?
+#define HAS_MANAGED_OVERLAYS(atom) (atom.simple_overlays || atom.grouped_overlays || atom.grouped_overlays_monad_id)
+/// Does this atom have an overlay group of this name?
+#define HAS_OVERLAY_GROUP(TGT, NAME) ( ((TGT)?:grouped_overlays_monad_id == (NAME)) || ((NAME) in (TGT):grouped_overlays) )
+/// Get the overlay group value of this name, if it exists. May be a single value or a list. Does not copy!
+#define GET_OVERLAY_GROUP(TGT, NAME) ( ((TGT)?:grouped_overlays_monad_id == (NAME)) ? ((TGT).grouped_overlays_monad_list) : ((TGT):grouped_overlays?[NAME]) )
+
+#else
+
 /// Does this atom currently have managed overlays?
 #define HAS_MANAGED_OVERLAYS(atom) (atom.simple_overlays || atom.grouped_overlays)
+/// Does this atom have an overlay group of this name?
 #define HAS_OVERLAY_GROUP(TGT, NAME) ((NAME) in (TGT):grouped_overlays)
+/// Get the overlay group value of this name, if it exists. May be a single value or a list. Does not copy!
 #define GET_OVERLAY_GROUP(TGT, NAME) ((TGT):grouped_overlays?[NAME])
+
+#endif
 
 // Overlay group IDs.
 
