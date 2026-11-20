@@ -23,13 +23,13 @@
 	return show_contaminants && ..()
 
 /decl/flooring/grass/fire_act(turf/floor/target, datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(target.get_topmost_flooring() == src && (exposed_temperature > T0C + 200 && prob(5)) || exposed_temperature > T0C + 1000)
-		target.remove_flooring(target.get_topmost_flooring())
+	if(GET_TOPMOST_OR_BASE_FLOORING(target) == src && (exposed_temperature > T0C + 200 && prob(5)) || exposed_temperature > T0C + 1000)
+		target.remove_flooring(GET_TOPMOST_OR_BASE_FLOORING(target))
 		return TRUE
 	return ..()
 
 /decl/flooring/grass/handle_turf_digging(turf/floor/target)
-	target.remove_flooring(target.get_topmost_flooring())
+	target.remove_flooring(GET_TOPMOST_OR_BASE_FLOORING(target))
 	return FALSE
 
 /decl/flooring/grass/wild
@@ -49,7 +49,7 @@
 /decl/flooring/grass/wild/handle_item_interaction(turf/floor/floor, mob/user, obj/item/item)
 	var/decl/material/floor_material = floor.get_material()
 	if(IS_KNIFE(item) && harvestable && istype(floor_material) && floor_material.dug_drop_type)
-		if(item.do_tool_interaction(TOOL_KNIFE, user, floor, 3 SECONDS, start_message = "harvesting", success_message = "harvesting") && !QDELETED(floor) && floor.get_topmost_flooring() == src)
+		if(item.do_tool_interaction(TOOL_KNIFE, user, floor, 3 SECONDS, start_message = "harvesting", success_message = "harvesting") && !QDELETED(floor) && GET_TOPMOST_OR_BASE_FLOORING(floor) == src)
 			new floor_material.dug_drop_type(floor, rand(2,5))
 			floor.remove_flooring(src)
 		return TRUE

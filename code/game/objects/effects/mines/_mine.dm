@@ -134,7 +134,7 @@
 
 	if(istype(loc, /turf/floor) && prob(65))
 		var/turf/floor/floor = loc
-		var/decl/flooring/flooring = floor.get_topmost_flooring()
+		var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(floor)
 		if(flooring.can_conceal_hazards)
 			hidden_alpha = pick(50, 90, 120)
 

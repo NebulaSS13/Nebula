@@ -50,7 +50,7 @@
 	return 1
 
 /decl/flooring/dry_mud/fluid_act(turf/floor/target, datum/reagents/fluids)
-	if(target.get_topmost_flooring() == src)
+	if(GET_TOPMOST_OR_BASE_FLOORING(target) == src)
 		target.set_flooring(/decl/flooring/mud)
 		. = TRUE
 	if(target.get_base_flooring() == src)
@@ -74,7 +74,7 @@
 	can_conceal_hazards = TRUE
 
 /decl/flooring/dirt/fluid_act(turf/floor/target, datum/reagents/fluids)
-	if(target.get_topmost_flooring() == src)
+	if(GET_TOPMOST_OR_BASE_FLOORING(target) == src)
 		target.set_flooring(/decl/flooring/mud)
 		. = TRUE
 	if(target.get_base_flooring() == src)

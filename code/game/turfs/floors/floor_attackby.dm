@@ -5,7 +5,7 @@
 		return FALSE
 
 	// Collect snow or mud.
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(flooring?.handle_hand_interaction(src, user))
 		return TRUE
 
@@ -20,7 +20,7 @@
 		return FALSE
 	if(istype(used_item, /obj/item/stack/tile/roof) || IS_COIL(used_item) || (has_flooring() && istype(used_item, /obj/item/stack/material/rods)))
 		return ..()
-	var/decl/flooring/top_flooring = get_topmost_flooring()
+	var/decl/flooring/top_flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(istype(top_flooring) && top_flooring.handle_item_interaction(src, user, used_item))
 		return TRUE
 	if(try_backfill(used_item, user))
@@ -82,11 +82,11 @@
 
 /turf/floor/proc/try_backfill(obj/item/stack/material/used_item, mob/user)
 
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if((istype(flooring) && flooring.constructed) || !istype(used_item) || !istype(user))
 		return FALSE
 
-	var/decl/flooring/base_flooring = get_base_flooring()
+	var/decl/flooring/base_flooring = _base_flooring
 	if(istype(base_flooring) && base_flooring.constructed)
 		return FALSE
 
@@ -125,7 +125,7 @@
 	return TRUE
 
 /turf/floor/proc/is_constructed_floor()
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	return flooring?.constructed
 
 /turf/floor/proc/try_turf_repair_or_deconstruct(var/obj/item/used_item, var/mob/user)

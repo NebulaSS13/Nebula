@@ -122,7 +122,7 @@
 	if(!istype(T, /turf/floor))
 		return
 	var/turf/floor/floor = T
-	var/decl/flooring/flooring = floor.get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(floor)
 	var/parse_value = noise2value(value)
 	var/place_prob
 	var/place_type

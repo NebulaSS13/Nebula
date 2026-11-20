@@ -8,7 +8,8 @@
 #define TURF_HAS_RANDOM_BORDER  BITFLAG(7)
 
 //Used for floor/wall smoothing
-#define SMOOTH_NONE 0	//Smooth only with itself
+#define SMOOTH_SELF 0	//Smooth only with itself (for floor_smooth)
+#define SMOOTH_NONE 0	//Smooth with none of this type (for wall_smooth and space_smooth)
 #define SMOOTH_ALL 1	//Smooth with all of type
 #define SMOOTH_WHITELIST 2	//Smooth with a whitelist of subtypes
 #define SMOOTH_BLACKLIST 3 //Smooth with all but a blacklist of subtypes
@@ -45,3 +46,5 @@
 #define FLOOR_EDGE_GRASS_WILD    (65 * FLOOR_LAYER_CONSTANT)
 #define FLOOR_EDGE_SNOW          (70 * FLOOR_LAYER_CONSTANT)
 #define FLOOR_EDGE_CARPET        (75 * FLOOR_LAYER_CONSTANT)
+
+#define GET_TOPMOST_OR_BASE_FLOORING(FLOOR) UNLINT((FLOOR._topmost_flooring || FLOOR._base_flooring))

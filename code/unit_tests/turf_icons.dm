@@ -194,7 +194,7 @@
 	if(_flooring && !islist(_flooring) && !istype(_flooring, /decl/flooring))
 		. += "invalid post-init type for _flooring ([_flooring || "NULL"])"
 
-	var/decl/flooring/check_flooring = get_topmost_flooring()
+	var/decl/flooring/check_flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 
 	var/initial_floor_broken = initial(_floor_broken)
 	if(initial_floor_broken)

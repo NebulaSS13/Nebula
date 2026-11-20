@@ -2,7 +2,7 @@
 	var/gemstone_dropped = FALSE
 
 /turf/floor/proc/flooring_is_diggable()
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(!flooring || flooring.constructed)
 		return FALSE
 	return TRUE
@@ -11,7 +11,7 @@
 	// This should be removed before digging trenches.
 	if(!flooring_is_diggable())
 		return FALSE
-	var/decl/flooring/flooring = get_base_flooring()
+	var/decl/flooring/flooring = _base_flooring
 	if(istype(flooring) && flooring.constructed)
 		return FALSE
 	var/decl/material/my_material = get_material()
@@ -29,7 +29,7 @@
 	if(!flooring_is_diggable())
 		return
 
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(!flooring.handle_turf_digging(src))
 		return
 
