@@ -44,7 +44,7 @@ for feature in $dme_features $dm_features; do
     # Include the feature
     sed -i "/#include \"mods\\\\_modpack.dm\"/a#include \"$feature\"" "$dmepath.m.dme"
     # Run the linter, only doing parsing to catch undefined vars and keywords
-    ~/dreamchecker -e "$dmepath.m.dme" --parse-only 2>&1 | tee -a "${GITHUB_WORKSPACE}/output-annotations.txt"
+    ~/dreamchecker -e "./$dmepath.m.dme" --parse-only 2>&1 | tee -a "${GITHUB_WORKSPACE}/output-annotations.txt"
     # Check the return value
     if [[ $? -ne 0 ]]; then
         failed=1
