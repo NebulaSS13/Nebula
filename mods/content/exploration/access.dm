@@ -1,7 +1,7 @@
 var/global/const/access_xenofauna = "ACCESS_XENOFAUNA"
 /datum/access/xenofauna
 	id = access_xenofauna
-	desc = "Xenfauna Lab"
+	desc = "Xenofauna Lab"
 	region = ACCESS_REGION_RESEARCH
 
 var/global/const/access_explorer = "ACCESS_EXPLORER"
