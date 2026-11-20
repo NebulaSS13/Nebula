@@ -1,4 +1,4 @@
-/// If enabled, attmept to fold single-group overlay groups into the parent atom. This avoids the alist, but makes overlay operations take a bit more CPU time. These are very common, so this should be a net win.
+/// If enabled, attempt to fold lone overlay groups into the parent atom. This avoids the alist, but makes overlay operations take a bit more CPU time. These are very common, so this should be a net win.
 #define OVR_ENABLE_MONAD_COMPRESSION
 
 #ifdef OVR_ENABLE_MONAD_COMPRESSION
