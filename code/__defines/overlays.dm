@@ -1,8 +1,6 @@
 /// If enabled, attmept to fold single-group overlay groups into the parent atom. This avoids the alist, but makes overlay operations take a bit more CPU time. These are very common, so this should be a net win.
 #define OVR_ENABLE_MONAD_COMPRESSION
 
-#define CUT_OVERLAY_IN(ovr, time) addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, cut_overlay), ovr), time, TIMER_STOPPABLE | TIMER_CLIENT_TIME)
-
 #ifdef OVR_ENABLE_MONAD_COMPRESSION
 
 /// Does this atom currently have managed overlays?
