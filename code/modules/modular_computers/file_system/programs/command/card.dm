@@ -85,7 +85,8 @@
 						"desc" = replacetext(access_datum.desc, " ", "&nbsp"),
 						"ref" = access_datum.id,
 						"allowed" = LAZYISIN(id_card.access, access_datum.id)))
-
+				if(!length(accesses)) // don't add accessless regions
+					continue
 				ADD_LIST_AS_ENTRY(regions, list(
 					"name" = region_name,
 					"accesses" = accesses))

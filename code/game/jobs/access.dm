@@ -132,14 +132,17 @@ var/global/list/datum/access/priv_all_access_datums_id
 	return global.priv_all_access_datums_id.Copy()
 
 var/global/alist/priv_all_access_datums_region
-/// Returns an alist of all region indices -> their associated access datums.
+/// Returns an alist of all region indices -> a list of their associated access datums.
+/// Skips regionless access datums.
 /proc/get_all_access_datums_by_region()
 	RETURN_TYPE(/alist)
 	if(!global.priv_all_access_datums_region)
 		global.priv_all_access_datums_region = alist()
 		for(var/datum/access/A in get_all_access_datums())
+			if(A.region == ACCESS_REGION_NONE)
+				continue
 			if(!global.priv_all_access_datums_region[A.region])
-				global.priv_all_access_datums_region[A.region] = alist()
+				global.priv_all_access_datums_region[A.region] = list()
 			global.priv_all_access_datums_region[A.region] += A
 
 	return global.priv_all_access_datums_region.Copy()

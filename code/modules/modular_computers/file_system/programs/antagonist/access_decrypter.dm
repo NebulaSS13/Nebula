@@ -148,7 +148,8 @@
 					"ref" = access_datum.id,
 					"allowed" = (access_datum.id in id_card.access),
 					"blocked" = ((access_datum.id in PRG.restricted_access_codes) || ((access_datum.id in PRG.skill_restricted_access_codes_master) && PRG.operator_skill < SKILL_PROF)) ? 1 : 0))
-
+			if(!length(accesses)) // don't add accessless regions
+				continue
 			ADD_LIST_AS_ENTRY(regions, list(
 				"name" = region_name,
 				"accesses" = accesses))

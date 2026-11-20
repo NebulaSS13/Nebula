@@ -89,6 +89,8 @@
 					"id" = access_datum.id,
 					"req" = LAZYISIN(conf_access, access_datum.id)
 				))
+			if(!length(accesses)) // don't add accessless regions
+				continue
 			ADD_LIST_AS_ENTRY(regions, list(
 				"name" = region_name,
 				"accesses" = accesses
