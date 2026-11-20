@@ -42,13 +42,13 @@
 	if(!is_floor_burned() && prob(5))
 		burn_tile(exposed_temperature)
 	else if(temp_destroy && exposed_temperature >= (temp_destroy + 100) && prob(1) && has_flooring())
-		remove_flooring(get_topmost_flooring()) //destroy the tile, exposing plating
+		remove_flooring(GET_TOPMOST_OR_BASE_FLOORING(src)) //destroy the tile, exposing plating
 		burn_tile(exposed_temperature)
 	return ..()
 
 //should be a little bit lower than the temperature required to destroy the material
 /turf/floor/proc/get_damage_temperature()
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	return flooring?.damage_temperature
 
 /turf/floor/adjacent_fire_act(turf/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)

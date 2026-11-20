@@ -17,7 +17,7 @@
 			queue_icon_update()
 
 /turf/floor/get_material()
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(istype(flooring) && istype(flooring.force_material))
 		return flooring.force_material
 	return material

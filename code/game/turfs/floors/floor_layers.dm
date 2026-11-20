@@ -12,7 +12,7 @@
 		else if(!isnull(_flooring))
 			. += RESOLVE_TO_DECL(_flooring)
 	if(_base_flooring)
-		. += get_base_flooring()
+		. += _base_flooring
 
 /turf/floor/proc/has_flooring()
 	return !isnull(_flooring)
@@ -27,11 +27,10 @@
 
 /turf/floor/proc/get_base_flooring()
 	RETURN_TYPE(/decl/flooring)
-	if(ispath(_base_flooring))
-		_base_flooring = GET_DECL(_base_flooring)
 	return _base_flooring
 
-/turf/floor/proc/get_topmost_flooring()
+// currently unused, should validate topmost flooring if _topmost_flooring is null
+/turf/floor/proc/update_topmost_flooring()
 	RETURN_TYPE(/decl/flooring)
 
 	if(isnull(_topmost_flooring))
@@ -43,7 +42,11 @@
 				_topmost_flooring = RESOLVE_TO_DECL(_flooring[flooring_length])
 			else
 				_topmost_flooring = RESOLVE_TO_DECL(_flooring)
-	return _topmost_flooring || get_base_flooring()
+	return _topmost_flooring
+
+/turf/floor/proc/get_topmost_flooring()
+	RETURN_TYPE(/decl/flooring)
+	return _topmost_flooring
 
 /turf/floor/proc/clear_flooring(skip_update = FALSE, place_product)
 	if(isnull(_flooring))
@@ -61,8 +64,6 @@
 /turf/floor/proc/remove_flooring(var/decl/flooring/flooring, skip_update, place_product)
 
 	// Remove floor layers one by one.
-	_topmost_flooring  = null
-
 	if(islist(flooring))
 		for(var/floor in UNLINT(flooring))
 			if(remove_flooring(floor, TRUE, place_product))
@@ -73,21 +74,33 @@
 				set_floor_broken(skip_update = TRUE)
 				set_floor_burned(skip_update = TRUE)
 				update_from_flooring()
-			return
+		return
 
 	// Validate our input.
 	flooring = RESOLVE_TO_DECL(flooring)
 	if(!istype(flooring))
-		return
+		return FALSE
 
+	var/was_topmost = _flooring == flooring
 	// Remove this turf from the layer stack.
-	var/was_topmost = (flooring == get_topmost_flooring())
-	if(islist(_flooring))
-		LAZYREMOVE(_flooring, flooring)
-		if(LAZYLEN(_flooring) == 1)
-			_flooring = _flooring[1]
-	else if(_flooring == flooring)
+	if(was_topmost) // only one, no need for a typecheck as flooring can never be a list here
 		_flooring = null
+		_topmost_flooring = FALSE // no case where this was NOT topmost
+		was_topmost = TRUE // do on-change stuff since we changed the topmost
+		. = TRUE
+	else if(islist(_flooring))
+		var/floor_len = LAZYLEN(_flooring)
+		// avoiding lazyremove here to set . properly
+		if(floor_len && _flooring.Remove(flooring))
+			. = TRUE
+			floor_len--
+
+		if(flooring == _topmost_flooring)
+			was_topmost = TRUE
+			_topmost_flooring = _flooring[floor_len]
+		if(floor_len == 1)
+			_flooring = _flooring[1]
+			_topmost_flooring = _flooring
 
 	state_was_modified()
 
@@ -127,8 +140,6 @@
 
 /turf/floor/proc/set_flooring(var/decl/flooring/newflooring, skip_update, place_product)
 
-	_topmost_flooring = null
-
 	// Clear this here to get it out of the way.
 	floor_icon_state_override = null
 
@@ -142,8 +153,10 @@
 			_flooring = list()
 			for(var/floor in UNLINT(newflooring))
 				_flooring += RESOLVE_TO_DECL(floor)
+			_topmost_flooring = _flooring[length(_flooring)]
 		else if(newflooring)
 			_flooring = RESOLVE_TO_DECL(newflooring)
+			_topmost_flooring = _flooring
 		else
 			return FALSE
 		state_was_modified()
@@ -155,13 +168,11 @@
 	// If we already have a flooring state, we need to do some cleanup and housekeeping.
 	clear_flooring(skip_update = TRUE, place_product = place_product)
 	if(!isnull(newflooring))
-		add_flooring(newflooring, skip_update, place_product)
+		add_flooring(newflooring, skip_update, place_product) // should handle topmost for us
 	if(!skip_update)
 		update_from_flooring(skip_update)
 
 /turf/floor/proc/add_flooring(decl/flooring/newflooring, skip_update)
-
-	_topmost_flooring = null
 
 	// Add floor layers one by one.
 	if(islist(newflooring))
@@ -189,6 +200,7 @@
 			return FALSE
 
 	// Add our layer to the top of layers.
+	_topmost_flooring = newflooring // shortcut to avoid expensive recalculations elsewhere
 	if(isnull(_flooring))
 		_flooring = newflooring
 	else
@@ -208,9 +220,7 @@
 
 /turf/floor/proc/update_from_flooring(skip_update)
 
-	_topmost_flooring = null
-
-	var/decl/flooring/copy_from = get_topmost_flooring()
+	var/decl/flooring/copy_from = _topmost_flooring
 	if(!istype(copy_from))
 		return // this should never be the case
 

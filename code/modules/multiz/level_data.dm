@@ -371,9 +371,9 @@
 		var/decl/flooring/base_flooring = above.get_base_flooring()
 		if(!base_flooring || base_flooring.constructed)
 			continue
-		// If we only have the one layer, bump it up so we're not entirely replacing it with plating.
+		// If we only have the one layer (no _topmost_flooring, only _base_flooring), bump it up so we're not entirely replacing it with plating.
 		var/top_flooring = above.get_topmost_flooring()
-		if(top_flooring == base_flooring)
+		if(!top_flooring)
 			above.add_flooring(top_flooring, skip_update = TRUE)
 		above.set_base_flooring(/decl/flooring/plating) // TODO: check if we can skip update here.
 

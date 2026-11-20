@@ -21,24 +21,24 @@
 /turf/floor/proc/can_layer_over(turf/floor/turf_to_check)
 	if(!istype(turf_to_check))
 		return FALSE
-	var/decl/flooring/my_flooring = get_topmost_flooring()
+	var/decl/flooring/my_flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(!istype(my_flooring) || my_flooring.icon_edge_layer == FLOOR_EDGE_NONE)
 		return FALSE
-	var/decl/flooring/their_flooring = turf_to_check.get_topmost_flooring()
+	var/decl/flooring/their_flooring = GET_TOPMOST_OR_BASE_FLOORING(turf_to_check)
 	if(!istype(their_flooring))
-		return TRUE
-	if(their_flooring?.type == my_flooring.neighbour_type)
-		return FALSE
+		return TRUE // can always layer over nothing
+	if(my_flooring.neighbour_typecache?[their_flooring?.type])
+		return FALSE // can never layer over yourself
 	return my_flooring.icon_edge_layer > their_flooring.icon_edge_layer
 
 /turf/floor/proc/get_trench_icon()
-	var/decl/flooring/flooring = get_base_flooring() || get_topmost_flooring()
-	if(istype(flooring) && flooring.icon && check_state_in_icon("trench", flooring.icon))
+	var/decl/flooring/flooring = _base_flooring || _topmost_flooring
+	if(istype(flooring) && flooring.has_trench)
 		return flooring.icon
 
 /turf/floor/proc/update_height_appearance()
 
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(istype(flooring))
 		layer = flooring.floor_layer
 	else
@@ -121,7 +121,7 @@
 	compile_overlays()
 
 /turf/floor/proc/update_floor_strings()
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(istype(flooring))
 		flooring.update_turf_strings(src)
 	else
@@ -132,16 +132,16 @@
 		SetName(get_fluid_name()) // just entirely overwrite name, but keep desc
 
 /turf/floor/proc/update_floor_icon()
-	var/decl/flooring/use_flooring = get_topmost_flooring()
+	var/decl/flooring/use_flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(istype(use_flooring))
 		use_flooring.update_turf_icon(src)
 
 /turf/floor/proc/is_floor_broken()
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	return !isnull(_floor_broken) && (!istype(flooring) || length(flooring.broken_states))
 
 /turf/floor/proc/is_floor_burned()
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	return !isnull(_floor_burned) && (!istype(flooring) || length(flooring.burned_states))
 
 /turf/floor/proc/is_floor_damaged()
@@ -149,7 +149,7 @@
 
 /turf/floor/proc/set_floor_broken(new_broken, skip_update)
 
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(!istype(flooring) || !length(flooring.broken_states))
 		return FALSE
 	if(new_broken && (!istext(new_broken) || !(new_broken in flooring.broken_states)))
@@ -164,7 +164,7 @@
 
 /turf/floor/proc/set_floor_burned(new_burned, skip_update)
 
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(!istype(flooring) || !length(flooring.burned_states))
 		return FALSE
 	if(new_burned && (!istext(new_burned) || !(new_burned in flooring.burned_states)))
@@ -178,16 +178,16 @@
 	return FALSE
 
 /decl/flooring/proc/test_link(var/turf/opponent)
-	if(omni_smooth) // override EVERYTHING
+	if(omni_smooth)
 		return TRUE
 	// Just a normal floor
 	if (istype(opponent, /turf/floor))
 		if (floor_smooth == SMOOTH_ALL)
 			return TRUE
 		var/turf/floor/floor_opponent = opponent
-		var/decl/flooring/opponent_flooring = floor_opponent.get_topmost_flooring()
+		var/decl/flooring/opponent_flooring = GET_TOPMOST_OR_BASE_FLOORING(floor_opponent)
 		//If the floor is the same as us,then we're linked,
-		if (istype(opponent_flooring, neighbour_type))
+		if (neighbour_typecache?[opponent_flooring?.type])
 			return TRUE
 		//If we get here it must be using a whitelist or blacklist
 		if (floor_smooth == SMOOTH_WHITELIST)
@@ -202,11 +202,10 @@
 		if (wall_smooth == SMOOTH_ALL && locate(/obj/structure/wall_frame) in opponent)
 			return TRUE
 	// Wall turf
-	else if(opponent.is_wall()) // don't combine these so that we don't check if a wall is space just because we don't smooth with walls
-		if(wall_smooth == SMOOTH_ALL)
-			return TRUE
+	// var check before proc call for speed
+	else if(wall_smooth == SMOOTH_ALL && opponent.is_wall())
+		return TRUE
 	//If is_open is true, then it's space or openspace
-	else if(opponent.is_open())
-		if(space_smooth == SMOOTH_ALL)
-			return TRUE
+	else if(space_smooth == SMOOTH_ALL && opponent.is_open())
+		return TRUE
 	return FALSE

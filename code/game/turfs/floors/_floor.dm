@@ -36,7 +36,7 @@
 
 	if(istext(_flooring))
 		_flooring = resolve_decl_uid_list(cached_json_decode(_flooring))
-		if(!length(_flooring))
+		if(!LAZYLEN(_flooring))
 			_flooring = null
 
 	if(!floortype && (ispath(_flooring) || islist(_flooring)))
@@ -49,7 +49,7 @@
 
 	fill_to_zero_height() // try to refill turfs that act as fluid sources
 
-	if(material || get_topmost_flooring())
+	if(material || GET_TOPMOST_OR_BASE_FLOORING(src))
 		update_from_flooring(skip_update = ml)
 		if(ml) // We skipped the update above to avoid updating our neighbors, but we need to update ourselves.
 			lazy_update_icon()
@@ -84,14 +84,14 @@
 /turf/floor/can_climb_from_below(var/mob/climber)
 	return TRUE
 
-/turf/floor/is_plating()
+/turf/floor/is_plating() // this should probably be renamed to is_base_flooring?
 	if(density)
 		return FALSE
-	var/decl/flooring/flooring = get_topmost_flooring()
-	return (!istype(flooring) || flooring == get_base_flooring())
+	var/decl/flooring/flooring = _topmost_flooring
+	return (!istype(flooring) || flooring == _base_flooring)
 
 /turf/floor/get_base_movement_delay(var/travel_dir, var/mob/mover)
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	return istype(flooring) ? flooring.get_movement_delay(travel_dir, mover) : ..()
 
 /turf/floor/protects_atom(var/atom/A)
@@ -104,7 +104,7 @@
 		update_floor_strings()
 
 /turf/floor/can_engrave()
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	return flooring ? flooring.can_engrave : can_engrave
 
 /turf/floor/shuttle_ceiling
@@ -128,7 +128,7 @@
 		physically_destroyed()
 
 /turf/floor/get_footstep_sound(var/mob/stepper)
-	var/decl/flooring/use_flooring = get_topmost_flooring()
+	var/decl/flooring/use_flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(istype(use_flooring))
 		return get_footstep_for_mob(use_flooring.footstep_type, stepper)
 	return ..()
@@ -136,7 +136,7 @@
 /turf/floor/get_movable_alpha_mask_state(atom/movable/mover)
 	. = ..()
 	if(!.)
-		var/decl/flooring/flooring = get_topmost_flooring()
+		var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 		return flooring?.get_movable_alpha_mask_state(mover)
 
 /turf/floor/dismantle_turf(devastated, explode, no_product)
@@ -145,13 +145,13 @@
 	return !!switch_to_base_turf()
 
 /turf/floor/get_soil_color()
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	return flooring ? flooring.dirt_color : "#7c5e42"
 
 /turf/floor/get_color()
 	if(paint_color)
 		return paint_color
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(istype(flooring) && !isnull(flooring.color))
 		return flooring.color
 	var/decl/material/my_material = get_material()
@@ -168,40 +168,49 @@
 // In case a catwalk or other blocking item is destroyed.
 /turf/floor/Exited(atom/movable/AM, atom/new_loc)
 	. = ..()
+	if(!AM.simulated) // probably safe?
+		return
 	if(!is_processing)
+		// todo: make this a /turf/floor var updated on flooring add/remove/set? maybe count of floorings with env procs?
 		for(var/decl/flooring/flooring in get_all_flooring())
 			if(flooring.has_environment_proc)
 				START_PROCESSING(SSobj, src)
 				break
-	var/decl/flooring/print_flooring = get_topmost_flooring()
+	var/decl/flooring/print_flooring = _topmost_flooring
 	print_flooring?.turf_exited(src, AM, new_loc)
 
 // In case something of interest enters our turf.
 /turf/floor/Entered(atom/movable/AM, atom/old_loc)
 	. = ..()
+	if(!AM.simulated) // probably safe?
+		return
 	for(var/decl/flooring/flooring in get_all_flooring())
 		if(flooring.has_environment_proc)
 			if(!is_processing)
 				START_PROCESSING(SSobj, src)
 			flooring.handle_environment_proc(src)
 			break
-	var/decl/flooring/print_flooring = get_topmost_flooring()
+	var/decl/flooring/print_flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	print_flooring?.turf_entered(src, AM, old_loc)
 
 /turf/floor/get_plant_growth_rate()
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	return flooring ? flooring.growth_value : ..()
 
 /turf/floor/Crossed(atom/movable/AM)
-	var/decl/flooring/flooring = get_topmost_flooring()
+	if(!AM.simulated) // probably safe?
+		return
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	flooring?.turf_crossed(AM)
 	return ..()
 
 /turf/floor/can_show_coating_footprints(decl/material/contaminant = null)
-	return ..() && get_topmost_flooring()?.can_show_coating_footprints(src, contaminant)
+	if((. = ..()))
+		var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
+		return flooring?.can_show_coating_footprints(src, contaminant)
 
 /turf/floor/proc/get_vehicle_transit_delay(obj/vehicle/vehicle)
-	var/decl/flooring/terrain = get_topmost_flooring()
+	var/decl/flooring/terrain = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(!istype(vehicle) || QDELETED(vehicle) || !istype(terrain) || vehicle.vehicle_transit_type == vehicle::VEHICLE_GENERIC)
 		return vehicle::base_speed
 	return terrain.get_vehicle_transit_delay(vehicle)

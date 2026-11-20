@@ -6,12 +6,12 @@
 	return (locate(/obj/effect/narsie_footstep) in src)
 
 /turf/floor/on_defilement()
-	if(!has_flooring() || get_topmost_flooring()?.type != /decl/flooring/reinforced/cult)
+	if(!has_flooring() || GET_TOPMOST_OR_BASE_FLOORING(src)?.type != /decl/flooring/reinforced/cult)
 		..()
 		set_flooring(GET_DECL(/decl/flooring/reinforced/cult))
 
 /turf/floor/is_defiled()
-	var/decl/flooring/flooring = get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(src)
 	if(flooring)
 		return flooring.type == /decl/flooring/reinforced/cult
 	return ..()
