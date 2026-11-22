@@ -43,6 +43,8 @@ SUBSYSTEM_DEF(ambience)
 /turf
 	/// Whether this turf has been queued for an ambient lighting update.
 	var/ambience_queued = FALSE
+	var/foreign_ambience_color	//! The last SSambience-applied ambience color.
+	var/foreign_ambience_mult	//! The last SSambience-applied ambience multiplier.
 
 /turf/proc/shows_outdoor_ambience()
 	return is_outside()
@@ -51,10 +53,6 @@ SUBSYSTEM_DEF(ambience)
 // TODO: decide if open sky deserves the same treatment
 /turf/space/shows_outdoor_ambience()
 	return TRUE
-
-/turf
-	var/foreign_ambience_color
-	var/foreign_ambience_mult
 
 /turf/proc/update_ambient_light_from_z_or_area()
 	var/ambient_light_modifier
