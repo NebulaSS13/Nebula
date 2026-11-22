@@ -112,6 +112,21 @@
 	if (light_range && light_power)
 		update_light()
 
+	if (ambient_light && ambient_light_multiplier)
+		if (!corners || !lighting_corners_initialised)
+			ASSERT(ambient_light_applied_r == 0)
+			ASSERT(!ambient_active)
+			ambient_active = TRUE
+			SSlighting.total_ambient_turfs++
+
+			var/list/raw_ambience = rgb2num(ambient_light)
+			ambient_light_applied_r = round((raw_ambience[1] / 255) * ambient_light_multiplier, LIGHTING_ROUND_VALUE)
+			ambient_light_applied_g = round((raw_ambience[2] / 255) * ambient_light_multiplier, LIGHTING_ROUND_VALUE)
+			ambient_light_applied_b = round((raw_ambience[3] / 255) * ambient_light_multiplier, LIGHTING_ROUND_VALUE)
+			generate_missing_corners()
+		else
+			update_ambient_light()
+
 	if(dynamic_lighting)
 		luminosity = 0
 	else

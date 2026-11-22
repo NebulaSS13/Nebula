@@ -77,11 +77,6 @@
 	var/old_event_listeners =  event_listeners
 	var/old_listening_to =     _listening_to
 
-	var/old_ambience =         ambient_light
-	var/old_ambience_mult =    ambient_light_multiplier
-	var/old_ambient_light_old_r = ambient_light_old_r
-	var/old_ambient_light_old_g = ambient_light_old_g
-	var/old_ambient_light_old_b = ambient_light_old_b
 	var/old_dangerous_objects   = dangerous_objects
 
 	var/old_zone_membership_candidate = zone_membership_candidate
@@ -162,13 +157,6 @@
 	lighting_overlay = old_lighting_overlay
 
 	recalc_atom_opacity()
-
-	ambient_light_old_r = old_ambient_light_old_r
-	ambient_light_old_g = old_ambient_light_old_g
-	ambient_light_old_b = old_ambient_light_old_b
-
-	if (old_ambience != ambient_light || old_ambience_mult != ambient_light_multiplier)
-		update_ambient_light(FALSE)
 
 	var/new_z_opacity = z_flags & ZM_ALLOW_LIGHTING
 	if (new_z_opacity != old_z_opacity)
