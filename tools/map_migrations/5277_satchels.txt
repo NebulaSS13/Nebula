@@ -1,0 +1,2 @@
+/obj/item/plants/@SUBTYPES : /obj/item/plant_satchel{@OLD}
+/obj/item/ore/@SUBTYPES : /obj/item/ore_satchel{@OLD}
