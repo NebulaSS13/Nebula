@@ -20,6 +20,6 @@
 		return TRUE
 	return ..()
 
-/obj/item/kitchen/rollingpin/walnut
+/obj/item/rollingpin/walnut
 	material = /decl/material/solid/organic/wood/walnut
 	color = /decl/material/solid/organic/wood/walnut::color
