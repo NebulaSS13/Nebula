@@ -121,9 +121,16 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 	..()
 
-/obj/effect/overmap/visitable/ship/proc/burn()
+/obj/effect/overmap/visitable/ship/proc/burn(partial_power)
+	partial_power = clamp(partial_power, 0, 1)
+	. = 0
 	for(var/datum/extension/ship_engine/E in engines)
-		. += E.burn()
+		. += E.burn(partial_power)
+
+/obj/effect/overmap/visitable/ship/proc/get_exhaust_velocity()
+	. = 0
+	for(var/datum/extension/ship_engine/E in engines)
+		. += E.get_exhaust_velocity()
 
 /obj/effect/overmap/visitable/ship/can_burn()
 	if(halted)
