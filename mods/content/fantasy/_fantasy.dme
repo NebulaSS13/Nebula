@@ -29,6 +29,7 @@
 #include "datum\kobaloi\markings.dm"
 #include "datum\kobaloi\organs.dm"
 #include "datum\kobaloi\species.dm"
+#include "dungeon\_dungeon.dm"
 #include "items\material_overrides.dm"
 #include "items\clothing\_loadout.dm"
 #include "items\clothing\_overrides.dm"
