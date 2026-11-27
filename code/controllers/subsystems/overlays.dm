@@ -11,12 +11,23 @@ SUBSYSTEM_DEF(overlays)
 	var/list/overlay_icon_state_caches = list()
 	var/list/overlay_icon_cache = list()
 
-	var/compiles = 0
-	var/compiles_with_simple = 0
-	var/compiles_with_groups = 0
-	var/compiles_with_none = 0
-	var/compiles_async = 0
-	var/automangled = 0
+	var/compiles = 0	//! Count of calls to `compile_overlays()` that actually caused a compile.
+	var/compiles_with_simple = 0	//! Count of overlay compiles that had simple overlays.
+	var/compiles_with_groups = 0	//! Count of overlay compiles that had grouped overlays.
+	var/compiles_with_none = 0	//! Count of overlay compiles that resulted in no overlays.
+	var/compiles_async = 0	//! Count of overlay compiles issued by SSoverlays.
+	var/automangled = 0	//! Count of overlays compiles that were marked for Z-Mimic automangling.
+	var/loners = 0	//! Count of overlay compiles that resulted in a single overlay and were compressed into the parent atom.
+
+#ifdef OVR_ENABLE_MONAD_COMPRESSION
+
+	var/monad_expansion = 0	//! Times an overlay group was expanded out of its parent atom.
+	var/monad_compression = 0	//! Times a single overlay group was compressed into its parent atom.
+
+#endif
+
+	var/alist/group_histogram = alist()	//! [count of overlay groups] = times compiled
+	var/alist/simple_histogram = alist()	//! [count of simple overlays] = times compiled
 
 	// If the overlay set currently being considered contains a manglable overlay.
 	// This is only safe because SSoverlays can only ever consider one overlay list at a time with no interior sleeps. Professional on closed course, do not attempt.
@@ -31,6 +42,19 @@ SUBSYSTEM_DEF(overlays)
 /// Check if we need to yield to the MC. This macro will sleep or break.
 #define OVR_MC_TRY_YIELD if ((++__yield) >= OVR_PUMP_RATIO) { __yield = 0; if (no_mc_tick) { CHECK_TICK; } else if (MC_TICK_CHECK) { break; } }
 
+#ifdef OVR_ENABLE_MONAD_COMPRESSION
+
+// src must be /atom
+#define OVR_EXPAND_MONAD if (grouped_overlays_monad_id) { grouped_overlays = alist((grouped_overlays_monad_id) = grouped_overlays_monad_list); grouped_overlays_monad_id = null; grouped_overlays_monad_list = null; SSoverlays.monad_expansion++; }
+#define OVR_COMPRESS_MONAD if (length(grouped_overlays) == 1) { grouped_overlays_monad_id = max(grouped_overlays); grouped_overlays_monad_list = grouped_overlays[grouped_overlays_monad_id]; grouped_overlays = null; SSoverlays.monad_compression++; }
+
+#else
+
+#define OVR_EXPAND_MONAD
+#define OVR_COMPRESS_MONAD
+
+#endif
+
 /datum/controller/subsystem/overlays/stat_entry()
 	var/sync = compiles - compiles_async
 	var/ratio = compiles ? (sync / compiles) : 1
@@ -38,7 +62,12 @@ SUBSYSTEM_DEF(overlays)
 		"Q: [processing.len - (idex - 1)]",
 		"Type: { Any: [compiles] | Simple: [compiles_with_simple] | Grouped: [compiles_with_groups] | Empty: [compiles_with_none] | Mangled: [automangled] }",
 		"Chrony: { Sync: [sync] | Async: [compiles_async] | SR: [round(ratio*100, 0.1)]% }",
-		"Caches: { Icon: [overlay_icon_cache.len] | Text: [overlay_icon_state_caches.len] }"
+		"Caches: { Icon: [overlay_icon_cache.len] | Text: [overlay_icon_state_caches.len] }",
+#ifdef OVR_ENABLE_MONAD_COMPRESSION
+		"Monad: { Expand: [monad_expansion] | Compress: [monad_compression] } Loner: { Compress: [loners] }"
+#else
+		"Loner: { Compress: [loners] }",
+#endif
 	)
 	..(entries.Join("\n\t"))
 
@@ -70,30 +99,52 @@ SUBSYSTEM_DEF(overlays)
 
 /datum/controller/subsystem/overlays/proc/Flush()
 	if(processing.len)
-		log_ss("overlays", "Flushing [processing.len] overlays.")
+		var/previous_async = compiles_async
+		var/total = processing.len
+		log_ss("overlays", "Flushing [total] overlays.")
 		fire(FALSE, TRUE)
+		log_ss("overlays", "Processed [compiles_async - previous_async] of [total] overlays ([total - (compiles_async - previous_async)] already compiled or deleted).")
 
 /// Render the current set of overlays to the atom. If you're done adding overlays, you should probably call this to reduce visual pop-in. By default this will not recompile if the atom hasn't been marked as needing update.
 /atom/proc/compile_overlays(force = FALSE)
 	if (!overlay_queued && !force)
 		return
 
-	var/list/normals = simple_overlays
+	OVR_COMPRESS_MONAD
+
+	var/list/normals = islist(simple_overlays) ? simple_overlays : list(simple_overlays)
 	var/alist/groups = grouped_overlays
 
 	var/list/flattened_groups
-	if (LAZYLEN(groups))
+
+#ifdef OVR_ENABLE_MONAD_COMPRESSION
+	if (grouped_overlays_monad_id)
+		SSoverlays.group_histogram[1]++
+		flattened_groups = grouped_overlays_monad_list
+		if (!islist(flattened_groups))
+			flattened_groups = list(flattened_groups)
+	else if (LAZYLEN(groups))
+		SSoverlays.group_histogram[groups.len]++
 		flattened_groups = list()
 		for (var/k,v in groups)
 			flattened_groups += v
+#else
+	if (groups)
+		SSoverlays.group_histogram[groups.len]++
+		flattened_groups = list()
+		for (var/k,v in groups)
+			flattened_groups += v
+#endif
 
 	if(flattened_groups && LAZYLEN(normals))
 		overlays = normals + flattened_groups
 		SSoverlays.compiles_with_simple++
 		SSoverlays.compiles_with_groups++
+		SSoverlays.simple_histogram[normals.len]++
 	else if(LAZYLEN(normals))
 		overlays = normals
 		SSoverlays.compiles_with_simple++
+		SSoverlays.simple_histogram[normals.len]++
 	else if(flattened_groups)
 		overlays = flattened_groups
 		SSoverlays.compiles_with_groups++
@@ -169,6 +220,9 @@ SUBSYSTEM_DEF(overlays)
 		for (var/i in 1 to length(overlays_list))
 			var/image/cached_overlay = overlays_list[i]
 			APPEARANCEIFY(cached_overlay, overlays_list[i])
+		if (length(overlays_list) == 1)
+			SSoverlays.loners++
+			return overlays_list[1]
 		return overlays_list
 	else
 		APPEARANCEIFY(new_overlays, .)
@@ -185,6 +239,9 @@ SUBSYSTEM_DEF(overlays)
 			var/image/cached_overlay = overlays_list[i]
 			APPEARANCEIFY(cached_overlay, overlays_list[i])
 			ZM_AUTOMANGLE(overlays_list[i])
+		if (length(overlays_list) == 1)
+			SSoverlays.loners++
+			return overlays_list[1]
 		return overlays_list
 	else
 		APPEARANCEIFY(new_overlays, .)
@@ -200,6 +257,7 @@ SUBSYSTEM_DEF(overlays)
 	var/atom/movable/AMself = astype(src, /atom/movable)
 
 	if (group)
+		OVR_EXPAND_MONAD
 		var/alist/cached_grouped = grouped_overlays
 		if (length(cached_grouped))
 			cached_grouped -= group
@@ -229,10 +287,16 @@ SUBSYSTEM_DEF(overlays)
 	overlays = build_appearance_list(overlays)
 
 	var/list/cached_simple = simple_overlays
-	var/alist/cached_grouped = grouped_overlays
 	var/init_s_len = length(cached_simple)
 	var/group_dirty = FALSE
 	if (group)
+		OVR_EXPAND_MONAD
+
+		var/alist/cached_grouped = grouped_overlays
+
+		if (isnull(cached_grouped))
+			return FALSE	// removing something from nothing is a no-op
+
 		var/list/overlay_group = cached_grouped[group]
 		if (islist(overlay_group))
 			var/init_g_len = length(overlay_group)
@@ -274,6 +338,8 @@ SUBSYSTEM_DEF(overlays)
 	if (!SSoverlays.context_needs_automangle || !(z_flags & ZMM_AUTOMANGLE))
 		return
 
+	OVR_EXPAND_MONAD
+
 	var/list/cached_simple = simple_overlays
 	var/list/cached_grouped = grouped_overlays
 
@@ -293,7 +359,7 @@ SUBSYSTEM_DEF(overlays)
 	else if (group && LAZYLEN(cached_grouped))
 		var/found = FALSE
 		top:	// Did you know that according to BYOND this colon is optional (and technically invalid), but the lang server requires it?
-			for (var/k,v in grouped_overlays)
+			for (var/k,v in cached_grouped)
 				if (islist(v))
 					for (var/kk in v)
 						var/image/I = kk
@@ -333,6 +399,7 @@ SUBSYSTEM_DEF(overlays)
 		return
 
 	if (group)
+		OVR_EXPAND_MONAD
 		var/alist/cached_grouped = grouped_overlays
 		if (cached_grouped)
 			var/subgroup = cached_grouped[group]
@@ -369,6 +436,7 @@ SUBSYSTEM_DEF(overlays)
 			AMself.z_flags &= group ? ~ZMM_AUTOMANGLE_GRP : ~ZMM_AUTOMANGLE_NRML
 
 	if (group)
+		OVR_EXPAND_MONAD
 		var/alist/cached_grouped = grouped_overlays
 		if (cached_grouped)
 			cached_grouped[group] = overlays
@@ -403,6 +471,7 @@ SUBSYSTEM_DEF(overlays)
 		simple_overlays += other.simple_overlays
 
 	if (also_grouped && other.grouped_overlays)
+		OVR_EXPAND_MONAD
 		if (grouped_overlays)	// If we already have some, merge the incoming list with ours.
 			for (var/k,v in other.grouped_overlays)
 				var/local_v = grouped_overlays[k]
@@ -433,11 +502,12 @@ SUBSYSTEM_DEF(overlays)
 		AMself.z_flags |= AMother.z_flags & ZMM_AUTOMANGLE
 	var/remove_flags = 0
 
-	simple_overlays = other.simple_overlays
+	simple_overlays = islist(other.simple_overlays) ? other.simple_overlays.Copy() : other.simple_overlays
 	if (!length(simple_overlays))
 		remove_flags |= ZMM_AUTOMANGLE_NRML
 
 	if (also_grouped)
+		OVR_EXPAND_MONAD
 		if (other.grouped_overlays)
 			var/alist/new_grouped = other.grouped_overlays.Copy()
 			if (exclude_groups)
@@ -479,3 +549,8 @@ SUBSYSTEM_DEF(overlays)
 	var/tmp/list/simple_overlays	//! Our traditional grab-bag of overlays, comparable to normal `overlays` operations. Use SSoverlay functions to manipulate.
 	var/tmp/alist/grouped_overlays	//! Named groups of overlays, comparable to the old priority overlays. Values can be a single entry or a flat list. Lists of lists are forbidden.
 	var/tmp/overlay_queued
+
+#ifdef OVR_ENABLE_MONAD_COMPRESSION
+	var/tmp/list/grouped_overlays_monad_list	//! If we only have one overlay group, this is its contents. May be a list or a single appearance.
+	var/tmp/grouped_overlays_monad_id	//! If we only have one overlay group, this contains its ID.
+#endif
