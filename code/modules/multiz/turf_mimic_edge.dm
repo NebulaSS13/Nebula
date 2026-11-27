@@ -99,8 +99,17 @@
 //Prevent ambient completely, we're not a real turf
 /turf/mimic_edge/set_ambient_light(color, multiplier)
 	return
-/turf/mimic_edge/update_ambient_light(no_corner_update)
+/turf/mimic_edge/replace_ambient_light(old_color, new_color, old_multiplier, new_multiplier)
 	return
+/turf/mimic_edge/add_ambient_light(color, multiplier, update)
+	return
+/turf/mimic_edge/add_ambient_light_raw(lr, lg, lb, update, meta_only)
+	return
+/turf/mimic_edge/clear_ambient_light()
+	return
+/turf/mimic_edge/update_ambient_light(no_corner_update, meta_only)
+	return
+
 /turf/mimic_edge/update_ambient_light_from_z_or_area()
 	return
 /turf/mimic_edge/lighting_build_overlay(now)

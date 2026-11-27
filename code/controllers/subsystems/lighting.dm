@@ -27,6 +27,9 @@ SUBSYSTEM_DEF(lighting)
 	var/total_ss_updates = 0
 	var/total_instant_updates = 0
 
+	var/redundant_below_prop = 0
+	var/redundant_above_prop = 0
+
 #ifdef USE_INTELLIGENT_LIGHTING_UPDATES
 	var/instant_ctr = 0
 	var/force_queued = TRUE
@@ -37,13 +40,14 @@ SUBSYSTEM_DEF(lighting)
 /datum/controller/subsystem/lighting/stat_entry()
 	var/list/out = list(
 #ifdef USE_INTELLIGENT_LIGHTING_UPDATES
-		"IUR: [total_ss_updates ? round(total_instant_updates/(total_instant_updates+total_ss_updates)*100, 0.1) : "NaN"]% Instant: [force_queued ? "Disabled" : "Allowed"]\n",
+		"IUR: [total_ss_updates ? round(total_instant_updates/(total_instant_updates+total_ss_updates)*100, 0.1) : "NaN"]%",
 #endif
-		"\tT: { L: [total_lighting_sources] C: [total_lighting_corners] O:[total_lighting_overlays] A: [total_ambient_turfs] }\n",
-		"\tP: { L: [light_queue.len - (lq_idex - 1)] C: [corner_queue.len - (cq_idex - 1)] O: [overlay_queue.len - (oq_idex - 1)] }\n",
-		"\tL: { L: [processed_lights] C: [processed_corners] O: [processed_overlays]}\n"
+		"T: { L: [total_lighting_sources] | C: [total_lighting_corners] | O: [total_lighting_overlays] | A: [total_ambient_turfs] }",
+		"P: { L: [light_queue.len - (lq_idex - 1)] | C: [corner_queue.len - (cq_idex - 1)] | O: [overlay_queue.len - (oq_idex - 1)] }",
+		"L: { L: [processed_lights] | C: [processed_corners] | O:[processed_overlays] }",
+		"Rd: { Up: [redundant_above_prop] | Down: [redundant_below_prop] }"
 	)
-	..(out.Join())
+	..(out.Join("\n\t"))
 
 // If intelligent updates are off, this is just an empty stub.
 /datum/controller/subsystem/lighting/proc/handle_roundstart()
@@ -125,7 +129,9 @@ SUBSYSTEM_DEF(lighting)
 	var/list/curr_overlays = overlay_queue
 
 	while (lq_idex <= curr_lights.len)
-		var/datum/light_source/L = curr_lights[lq_idex++]
+		var/datum/light_source/L = curr_lights[lq_idex]
+		curr_lights[lq_idex] = null
+		lq_idex += 1
 
 		if (L.needs_update != LIGHTING_NO_UPDATE)
 			total_ss_updates += 1
@@ -148,7 +154,9 @@ SUBSYSTEM_DEF(lighting)
 		MC_SPLIT_TICK
 
 	while (cq_idex <= curr_corners.len)
-		var/datum/lighting_corner/C = curr_corners[cq_idex++]
+		var/datum/lighting_corner/C = curr_corners[cq_idex]
+		curr_corners[cq_idex] = null
+		cq_idex += 1
 
 		if (C.needs_update)
 			C.update_overlays()
@@ -170,7 +178,9 @@ SUBSYSTEM_DEF(lighting)
 		MC_SPLIT_TICK
 
 	while (oq_idex <= curr_overlays.len)
-		var/atom/movable/lighting_overlay/O = curr_overlays[oq_idex++]
+		var/atom/movable/lighting_overlay/O = curr_overlays[oq_idex]
+		curr_overlays[oq_idex] = null
+		oq_idex += 1
 
 		if (!QDELETED(O) && O.needs_update)
 			O.update_overlay()

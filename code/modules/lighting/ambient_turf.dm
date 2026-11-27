@@ -6,9 +6,9 @@
 
 	// Record-keeping, do not touch -- that means you, admins.
 	var/tmp/ambient_active = FALSE	//! Do we have non-zero ambient light? Use [TURF_IS_AMBIENT_LIT] instead of reading this directly.
-	var/tmp/ambient_light_old_r = 0
-	var/tmp/ambient_light_old_g = 0
-	var/tmp/ambient_light_old_b = 0
+	var/tmp/ambient_light_applied_r = 0
+	var/tmp/ambient_light_applied_g = 0
+	var/tmp/ambient_light_applied_b = 0
 
 /// Set the turf's self-ambience channel. This can only contain one value at a time, so it should generally only be used by the turf itself.
 /turf/proc/set_ambient_light(color, multiplier)
@@ -20,6 +20,7 @@
 
 	// If we haven't initialized our corners yet, do that instead to avoid ambience double-init.
 	if (!corners || !lighting_corners_initialised)
+		update_ambient_light(meta_only = TRUE)
 		generate_missing_corners()
 	else
 		update_ambient_light()
@@ -62,37 +63,36 @@
 
 	add_ambient_light_raw(ambient_r, ambient_g, ambient_b, update)
 
-/// Directly manipulate the state of the self-ambience channel. Don't use unless you know what you're doing and how ambience works internally.
-/turf/proc/add_ambient_light_raw(lr, lg, lb, update = TRUE)
+/// Directly manipulate the state of the self-ambience channel. Don't use unless you know what you're doing and how ambience works internally. Misuse of the `meta_only` parameter *will* corrupt ambient lights for this turf and its neighbors.
+/turf/proc/add_ambient_light_raw(lr, lg, lb, update = TRUE, meta_only = FALSE)
 	if (!lr && !lg && !lb)
-		if (!ambient_light_old_r || !ambient_light_old_g || !ambient_light_old_b)
-			ambient_active = FALSE
-			SSlighting.total_ambient_turfs -= 1
 		return
-
-	// There are four corners per (lit) turf, we don't want to apply our light 4 times -- compensate by dividing by 4.
-	lr /= 4
-	lg /= 4
-	lb /= 4
 
 	lr = round(lr, LIGHTING_ROUND_VALUE)
 	lg = round(lg, LIGHTING_ROUND_VALUE)
 	lb = round(lb, LIGHTING_ROUND_VALUE)
 
-	ambient_light_old_r += lr
-	ambient_light_old_g += lg
-	ambient_light_old_b += lb
+	ambient_light_applied_r += lr
+	ambient_light_applied_g += lg
+	ambient_light_applied_b += lb
 
-	if (!corners || !lighting_corners_initialised)
-		generate_missing_corners()
+	if (!ambient_light_applied_r && !ambient_light_applied_g && !ambient_light_applied_b)
+		if (ambient_active)
+			SSlighting.total_ambient_turfs--
+		ambient_active = FALSE
+	else
+		if (!ambient_active)
+			SSlighting.total_ambient_turfs += 1
+			ambient_active = TRUE
 
-	// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.
-	for (var/datum/lighting_corner/C in corners)
-		C.update_ambient_lumcount(lr, lg, lb, !update)
+		if (!meta_only && (!corners || !lighting_corners_initialised))
+			// This checks ambient_active.
+			generate_missing_corners()
 
-	if (!ambient_active)
-		SSlighting.total_ambient_turfs += 1
-		ambient_active = TRUE
+	if (!meta_only)
+		// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.
+		for (var/datum/lighting_corner/C in corners)
+			C.update_ambient_lumcount(lr, lg, lb, !update)
 
 /// Wipe the entire self-ambience channel. This will preserve ambience from ambience groups.
 /turf/proc/clear_ambient_light()
@@ -103,7 +103,7 @@
 	ambient_light = null
 	ambient_light_multiplier = initial(ambient_light_multiplier)
 
-/turf/proc/update_ambient_light(no_corner_update = FALSE)
+/turf/proc/update_ambient_light(no_corner_update = FALSE, meta_only = FALSE)
 	// These are deltas.
 	var/ambient_r = 0
 	var/ambient_g = 0
@@ -111,12 +111,12 @@
 
 	if (ambient_light)
 		var/list/parts = rgb2num(ambient_light)
-		ambient_r = ((parts[1] / 255) * ambient_light_multiplier) - ambient_light_old_r
-		ambient_g = ((parts[2] / 255) * ambient_light_multiplier) - ambient_light_old_g
-		ambient_b = ((parts[3] / 255) * ambient_light_multiplier) - ambient_light_old_b
+		ambient_r = ((parts[1] / 255) * ambient_light_multiplier) - ambient_light_applied_r
+		ambient_g = ((parts[2] / 255) * ambient_light_multiplier) - ambient_light_applied_g
+		ambient_b = ((parts[3] / 255) * ambient_light_multiplier) - ambient_light_applied_b
 	else
-		ambient_r = -ambient_light_old_r
-		ambient_g = -ambient_light_old_g
-		ambient_b = -ambient_light_old_b
+		ambient_r = -ambient_light_applied_r
+		ambient_g = -ambient_light_applied_g
+		ambient_b = -ambient_light_applied_b
 
-	add_ambient_light_raw(ambient_r, ambient_g, ambient_b, !no_corner_update)
+	add_ambient_light_raw(ambient_r, ambient_g, ambient_b, !no_corner_update, meta_only)

@@ -43,6 +43,8 @@ SUBSYSTEM_DEF(ambience)
 /turf
 	/// Whether this turf has been queued for an ambient lighting update.
 	var/ambience_queued = FALSE
+	var/foreign_ambience_color	//! The last SSambience-applied ambience color.
+	var/foreign_ambience_mult	//! The last SSambience-applied ambience multiplier.
 
 /turf/proc/shows_outdoor_ambience()
 	return is_outside()
@@ -53,10 +55,6 @@ SUBSYSTEM_DEF(ambience)
 	return TRUE
 
 /turf/proc/update_ambient_light_from_z_or_area()
-
-	// If we're not outside, we don't show ambient light.
-	clear_ambient_light() // TODO: fix the delta issues resulting in burn-in so this can be run only when needed
-
 	var/ambient_light_modifier
 	// If we're indoors because of our area, OR we're outdoors and not exposed to the weather, get interior ambience.
 	var/outsideness = shows_outdoor_ambience()
@@ -79,6 +77,8 @@ SUBSYSTEM_DEF(ambience)
 				break
 
 	if(lit)
+		var/target_color = null
+		var/target_mult = 0
 
 		// Grab what we need to set ambient light from our level handler.
 		var/datum/level_data/level_data = SSmapping.levels_by_z[z]
@@ -103,18 +103,25 @@ SUBSYSTEM_DEF(ambience)
 			if(!isnull(new_power))
 				new_power = clamp(new_power + ambient_light_modifier, 0, 1)
 				if(new_power > 0)
-					set_ambient_light(daycycle.current_period.color, new_power)
-				else
-					clear_ambient_light()
-				return TRUE
+					target_color = daycycle.current_period.color
+					target_mult = new_power
 
-		// Apply general level ambience.
-		var/effective_power = isnull(level_data?.ambient_light_level) ? null : clamp(level_data.ambient_light_level + ambient_light_modifier, 0, 1)
-		if(!isnull(effective_power))
-			if(effective_power > 0)
-				set_ambient_light(level_data.ambient_light_color, effective_power)
+		if (!target_color)
+			// Apply general level ambience.
+			var/effective_power = isnull(level_data?.ambient_light_level) ? null : clamp(level_data.ambient_light_level + ambient_light_modifier, 0, 1)
+			if(!isnull(effective_power))
+				if(effective_power > 0)
+					target_color = level_data.ambient_light_color
+					target_mult = effective_power
+
+		if (target_color)
+			if (!foreign_ambience_mult)
+				add_ambient_light(target_color, target_mult)
 			else
-				clear_ambient_light()
+				replace_ambient_light(foreign_ambience_color, target_color, foreign_ambience_mult, target_mult)
+
+			foreign_ambience_color = target_color
+			foreign_ambience_mult = target_mult
 			return TRUE
 
 	return FALSE

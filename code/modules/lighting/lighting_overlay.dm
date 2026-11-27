@@ -53,7 +53,7 @@
 // This is a macro PURELY so that the if below is actually readable.
 #define ALL_EQUAL ((rr == gr && gr == br && br == ar) && (rg == gg && gg == bg && bg == ag) && (rb == gb && gb == bb && bb == ab))
 
-/atom/movable/lighting_overlay/proc/update_overlay()
+/atom/movable/lighting_overlay/proc/update_overlay(suppress_z_update = FALSE)
 	var/turf/T = loc
 	if (!isturf(T)) // Erm...
 		if (loc)
@@ -133,7 +133,7 @@
 			)
 
 	// If there's a Z-turf above us, update its shadower.
-	if (T.above)
+	if (T.above && !suppress_z_update)
 		// This used to directly call the relevant update procs (currently `SSzcopy.update_lighting(turf)`), but doing that tends to explode elevators.
 		// This is somewhat less efficient, but works reliably.
 		T.above.update_mimic()
