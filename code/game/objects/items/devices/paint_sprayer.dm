@@ -222,7 +222,7 @@
 
 /obj/item/paint_sprayer/proc/paint_floor(var/turf/floor/F, var/mob/user, var/params)
 
-	var/decl/flooring/flooring = F.get_topmost_flooring()
+	var/decl/flooring/flooring = GET_TOPMOST_OR_BASE_FLOORING(F)
 	if(!istype(flooring))
 		to_chat(user, SPAN_WARNING("You need flooring to paint on."))
 		return FALSE

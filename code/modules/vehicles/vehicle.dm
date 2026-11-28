@@ -57,7 +57,7 @@
 /obj/vehicle/proc/update_vehicle_move_delay(atom/prev_loc)
 	var/turf/floor/prev_turf = prev_loc
 	var/turf/floor/this_turf = loc
-	if(istype(prev_turf) && istype(this_turf) && this_turf.get_topmost_flooring() == prev_turf.get_topmost_flooring() && this_turf.check_fluid_depth(FLUID_SHALLOW) == prev_turf.check_fluid_depth(FLUID_SHALLOW))
+	if(istype(prev_turf) && istype(this_turf) && GET_TOPMOST_OR_BASE_FLOORING(this_turf) == GET_TOPMOST_OR_BASE_FLOORING(prev_turf) && this_turf.check_fluid_depth(FLUID_SHALLOW) == prev_turf.check_fluid_depth(FLUID_SHALLOW))
 		return FALSE // Same speed if terrain type doesn't change
 	if(loc?.check_fluid_depth(FLUID_SHALLOW))
 		vehicle_move_delay = water_delay

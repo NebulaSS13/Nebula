@@ -22,6 +22,8 @@ var/global/list/flooring_cache = list()
 	var/deconstruct_sound
 
 	var/neighbour_type
+	/// A backing typecache used to make neighbour_type checks faster.
+	var/neighbour_typecache
 
 	var/has_base_range
 	var/damage_temperature
@@ -86,6 +88,7 @@ var/global/list/flooring_cache = list()
 	var/corner_state
 	var/outer_edge_state
 	var/outer_corner_state
+	var/has_trench
 
 	var/render_trenches = TRUE
 	var/floor_layer = TURF_LAYER
@@ -100,6 +103,8 @@ var/global/list/flooring_cache = list()
 	. = ..()
 
 	neighbour_type ||= type
+	if(neighbour_type)
+		neighbour_typecache = typecacheof(neighbour_type)
 
 	if(ispath(force_material))
 		force_material = GET_DECL(force_material)
@@ -125,16 +130,17 @@ var/global/list/flooring_cache = list()
 	flooring_blacklist = typecacheof(flooring_blacklist)
 	has_internal_edges = check_state_in_icon(edge_state, icon)       || check_state_in_icon(corner_state, icon)
 	has_external_edges = check_state_in_icon(outer_edge_state, icon) || check_state_in_icon(outer_corner_state, icon)
+	has_trench         = check_state_in_icon("trench", icon)
 
-	var/default_smooth = (has_internal_edges || has_external_edges) ? SMOOTH_NONE : SMOOTH_ALL
+	var/default_smooth = (has_internal_edges || has_external_edges) ? SMOOTH_SELF : SMOOTH_ALL
 	if(isnull(wall_smooth))
 		wall_smooth =  default_smooth
 	if(isnull(space_smooth))
 		space_smooth = default_smooth
 	if(isnull(floor_smooth))
 		floor_smooth = default_smooth
-	if(isnull(omni_smooth) && floor_smooth == wall_smooth && wall_smooth == space_smooth)
-		omni_smooth = (floor_smooth == SMOOTH_ALL) // bool, not enum
+	if(isnull(omni_smooth) && floor_smooth == SMOOTH_ALL && wall_smooth == SMOOTH_ALL && space_smooth == SMOOTH_ALL)
+		omni_smooth = TRUE // bool, not enum
 
 /decl/flooring/validate()
 	. = ..()
@@ -278,7 +284,7 @@ var/global/list/flooring_cache = list()
 	if(!force_material || !can_collect)
 		return FALSE
 	user.visible_message(SPAN_NOTICE("\The [user] begins scraping together some of \the [name]..."))
-	if(do_after(user, 3 SECONDS, floor) && !QDELETED(floor) && !QDELETED(user) && floor.get_topmost_flooring() == src && isnull(user.get_active_held_item()))
+	if(do_after(user, 3 SECONDS, floor) && !QDELETED(floor) && !QDELETED(user) && GET_TOPMOST_OR_BASE_FLOORING(floor) == src && isnull(user.get_active_held_item()))
 		var/list/created = force_material.create_object(floor, 1)
 		user.visible_message(SPAN_NOTICE("\The [user] scrapes together [english_list(created)]."))
 		for(var/obj/item/stack/stack in created)
@@ -294,10 +300,10 @@ var/global/list/flooring_cache = list()
 		return TRUE
 
 	if(IS_SHOVEL(item) && (flooring_flags & TURF_REMOVE_SHOVEL))
-		if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.get_topmost_flooring() != src)
+		if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || GET_TOPMOST_OR_BASE_FLOORING(floor) != src)
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You remove the [get_surface_descriptor()] with \the [item]."))
-		floor.remove_flooring(floor.get_topmost_flooring(), place_product = TRUE)
+		floor.remove_flooring(GET_TOPMOST_OR_BASE_FLOORING(floor), place_product = TRUE)
 		if(deconstruct_sound)
 			playsound(floor, deconstruct_sound, 80, 1)
 		return TRUE
@@ -308,24 +314,24 @@ var/global/list/flooring_cache = list()
 			if(floor.is_floor_damaged())
 				if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor, 0.15))
 					return TRUE
-				if(floor.get_topmost_flooring() != src)
+				if(GET_TOPMOST_OR_BASE_FLOORING(floor) != src)
 					return
 				to_chat(user, SPAN_NOTICE("You remove the broken [get_surface_descriptor()]."))
-				floor.remove_flooring(floor.get_topmost_flooring())
+				floor.remove_flooring(GET_TOPMOST_OR_BASE_FLOORING(floor))
 			else if(flooring_flags & TURF_IS_FRAGILE)
 				if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor, 0.15))
 					return TRUE
-				if(floor.get_topmost_flooring() != src)
+				if(GET_TOPMOST_OR_BASE_FLOORING(floor) != src)
 					return
 				to_chat(user, SPAN_DANGER("You forcefully pry off the [get_surface_descriptor()], destroying them in the process."))
-				floor.remove_flooring(floor.get_topmost_flooring())
+				floor.remove_flooring(GET_TOPMOST_OR_BASE_FLOORING(floor))
 			else if(flooring_flags & TURF_REMOVE_CROWBAR)
 				if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor))
 					return TRUE
-				if(floor.get_topmost_flooring() != src)
+				if(GET_TOPMOST_OR_BASE_FLOORING(floor) != src)
 					return
 				to_chat(user, SPAN_NOTICE("You lever off the [get_surface_descriptor()]."))
-				floor.remove_flooring(floor.get_topmost_flooring(), place_product = TRUE)
+				floor.remove_flooring(GET_TOPMOST_OR_BASE_FLOORING(floor), place_product = TRUE)
 			else
 				return
 			playsound(floor, 'sound/items/Crowbar.ogg', 80, 1)
@@ -334,18 +340,18 @@ var/global/list/flooring_cache = list()
 		if(IS_SCREWDRIVER(item) && (flooring_flags & TURF_REMOVE_SCREWDRIVER))
 			if(floor.is_floor_damaged())
 				return FALSE
-			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.get_topmost_flooring() != src)
+			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || GET_TOPMOST_OR_BASE_FLOORING(floor) != src)
 				return TRUE
 			to_chat(user, SPAN_NOTICE("You unscrew and remove the [get_surface_descriptor()]."))
-			floor.remove_flooring(floor.get_topmost_flooring(), place_product = TRUE)
+			floor.remove_flooring(GET_TOPMOST_OR_BASE_FLOORING(floor), place_product = TRUE)
 			playsound(floor, 'sound/items/Screwdriver.ogg', 80, 1)
 			return TRUE
 
 		if(IS_WRENCH(item) && (flooring_flags & TURF_REMOVE_WRENCH))
-			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || floor.get_topmost_flooring() != src)
+			if(!user.do_skilled(remove_timer, SKILL_CONSTRUCTION, floor) || GET_TOPMOST_OR_BASE_FLOORING(floor) != src)
 				return TRUE
 			to_chat(user, SPAN_NOTICE("You unwrench and remove the [get_surface_descriptor()]."))
-			floor.remove_flooring(floor.get_topmost_flooring(), place_product = TRUE)
+			floor.remove_flooring(GET_TOPMOST_OR_BASE_FLOORING(floor), place_product = TRUE)
 			playsound(floor, 'sound/items/Ratchet.ogg', 80, 1)
 			return TRUE
 

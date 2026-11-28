@@ -5,5 +5,5 @@
 	return FALSE
 
 /turf/floor/handle_ramp_dug_below(turf/wall/natural/ramp)
-	var/decl/flooring/floor = get_topmost_flooring()
+	var/decl/flooring/floor = GET_TOPMOST_OR_BASE_FLOORING(src)
 	return !floor.constructed && ..()
